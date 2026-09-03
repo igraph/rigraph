@@ -7,7 +7,8 @@
 all_simple_paths(
   graph,
   from,
-  to = V(graph),
+  to = NULL,
+  ...,
   mode = c("out", "in", "all", "total"),
   cutoff = -1
 )
@@ -17,7 +18,10 @@ all_simple_paths(
 
 \item{from}{The source vertex.}
 
-\item{to}{The target vertex of vertices. Defaults to all vertices.}
+\item{to}{The target vertex of vertices. The default \code{NULL} selects all
+vertices.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character constant, gives whether the shortest paths to or
 from the given vertices should be calculated for directed graphs. If

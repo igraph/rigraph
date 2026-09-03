@@ -7,7 +7,8 @@
 \usage{
 closeness(
   graph,
-  vids = V(graph),
+  vids = NULL,
+  ...,
   mode = c("out", "in", "all", "total"),
   weights = NULL,
   normalized = FALSE,
@@ -17,7 +18,10 @@ closeness(
 \arguments{
 \item{graph}{The graph to analyze.}
 
-\item{vids}{The vertices for which closeness will be calculated.}
+\item{vids}{The vertices for which closeness will be calculated.
+The default \code{NULL} selects all vertices.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character string, defined the types of the paths used for
 measuring the distance in directed graphs. \dQuote{in} measures the paths
@@ -30,7 +34,7 @@ closeness. If the graph has a \code{weight} edge attribute, then this is
 used by default. Weights are used for calculating weighted shortest
 paths, so they are interpreted as distances.}
 
-\item{normalized}{Logical scalar, whether to calculate the normalized
+\item{normalized}{Logical, whether to calculate the normalized
 closeness, i.e. the inverse average distance to all reachable vertices.
 The non-normalized closeness is the inverse of the sum of distances to
 all reachable vertices.}

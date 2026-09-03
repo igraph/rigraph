@@ -51,10 +51,12 @@ get.stochastic <- function(
 #' matrices are defined in a symmetric way.
 #'
 #' @param graph The input graph. Must be of class `igraph`.
+#' @inheritParams rlang::args_dots_empty
 #' @param column.wise If `FALSE`, then the rows of the stochastic matrix
 #'   sum up to one; otherwise it is the columns.
-#' @param sparse Logical scalar, whether to return a sparse matrix. The
-#'   `Matrix` package is needed for sparse matrices.
+#' @param sparse Logical, whether to return a sparse matrix. The
+#'   `Matrix` package is needed for sparse matrices. The default `NULL` uses
+#'   the `sparsematrices` igraph option.
 #' @return A regular matrix or a matrix of class `Matrix` if a
 #'   `sparse` argument was `TRUE`.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -76,22 +78,64 @@ get.stochastic <- function(
 #'
 stochastic_matrix <- function(
   graph,
+  ...,
   column.wise = FALSE,
-  sparse = igraph_opt("sparsematrices")
+  sparse = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: stochastic_matrix, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: stochastic_matrix(graph, column.wise, sparse)
+    .old_signature <- function(column.wise, sparse, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn stochastic_matrix}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn stochastic_matrix}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(column.wise)) base::list(column.wise = column.wise),
+        if (!base::missing(sparse)) base::list(sparse = sparse)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(column.wise)) "column.wise",
+        if (!base::missing(sparse)) "sparse"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn stochastic_matrix} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `stochastic_matrix()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  stochastic_matrix(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    stochastic_matrix(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
+
+  if (is.null(sparse)) {
+    sparse <- igraph_opt("sparsematrices")
+  }
 
   column.wise <- as.logical(column.wise)
   if (length(column.wise) != 1) {
     cli::cli_abort(
-      "{.arg column.wise} must be a logical scalar, not {.obj_type_friendly {column.wise}}."
+      "{.arg column.wise} must be a Logical, not {.obj_type_friendly {column.wise}}."
     )
   }
 
   sparse <- as.logical(sparse)
   if (length(sparse) != 1) {
     cli::cli_abort(
-      "{.arg sparse} must be a logical scalar, not {.obj_type_friendly {sparse}}."
+      "{.arg sparse} must be a Logical, not {.obj_type_friendly {sparse}}."
     )
   }
 

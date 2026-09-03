@@ -8,6 +8,7 @@ min_cut(
   graph,
   source = NULL,
   target = NULL,
+  ...,
   capacity = NULL,
   value.only = TRUE
 )
@@ -19,10 +20,12 @@ min_cut(
 
 \item{target}{The ID of the target vertex (sometimes also called sink).}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{capacity}{Vector giving the capacity of the edges. If this is
 \code{NULL} (the default) then the \code{capacity} edge attribute is used.}
 
-\item{value.only}{Logical scalar, if \code{TRUE} only the minimum cut value
+\item{value.only}{Logical, if \code{TRUE} only the minimum cut value
 is returned, if \code{FALSE} the edges in the cut and a the two (or more)
 partitions are also returned.}
 }

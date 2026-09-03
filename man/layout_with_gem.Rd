@@ -7,11 +7,12 @@
 \usage{
 layout_with_gem(
   graph,
+  ...,
   coords = NULL,
-  maxiter = 40 * vcount(graph)^2,
-  temp.max = max(vcount(graph), 1),
-  temp.min = 1/10,
-  temp.init = sqrt(max(vcount(graph), 1))
+  maxiter = NULL,
+  temp.max = NULL,
+  temp.min = 0.1,
+  temp.init = NULL
 )
 
 with_gem(...)
@@ -19,26 +20,26 @@ with_gem(...)
 \arguments{
 \item{graph}{The input graph. Edge directions are ignored.}
 
-\item{coords}{If not \code{NULL}, then the starting coordinates should be
-given here, in a two or three column matrix, depending on the \code{dim}
-argument.}
+\item{...}{Passed to \code{layout_with_gem()}.}
+
+\item{coords}{Starting coordinates in a two or three column matrix,
+depending on the \code{dim} argument.
+Default: \code{NULL}.}
 
 \item{maxiter}{The maximum number of iterations to perform. Updating a
-single vertex counts as an iteration.  A reasonable default is 40 * n * n,
+single vertex counts as an iteration. The default \code{NULL} uses 40 * n * n,
 where n is the number of vertices. The original paper suggests 4 * n * n,
 but this usually only works if the other parameters are set up carefully.}
 
-\item{temp.max}{The maximum allowed local temperature. A reasonable default
-is the number of vertices.}
+\item{temp.max}{The maximum allowed local temperature. The default \code{NULL}
+uses the number of vertices.}
 
 \item{temp.min}{The global temperature at which the algorithm terminates
 (even before reaching \code{maxiter} iterations). A reasonable default is
 1/10.}
 
-\item{temp.init}{Initial local temperature of all vertices. A reasonable
-default is the square root of the number of vertices.}
-
-\item{...}{Passed to \code{layout_with_gem()}.}
+\item{temp.init}{Initial local temperature of all vertices. The default
+\code{NULL} uses the square root of the number of vertices.}
 }
 \value{
 A numeric matrix with two columns, and as many rows as the number of

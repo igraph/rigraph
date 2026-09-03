@@ -10,9 +10,10 @@
 sample_pref(
   nodes,
   types,
-  type.dist = rep(1, types),
+  ...,
+  type.dist = NULL,
   fixed.sizes = FALSE,
-  pref.matrix = matrix(1, types, types),
+  pref.matrix = NULL,
   directed = FALSE,
   loops = FALSE
 )
@@ -20,9 +21,10 @@ sample_pref(
 pref(
   nodes,
   types,
-  type.dist = rep(1, types),
+  ...,
+  type.dist = NULL,
   fixed.sizes = FALSE,
-  pref.matrix = matrix(1, types, types),
+  pref.matrix = NULL,
   directed = FALSE,
   loops = FALSE
 )
@@ -30,16 +32,18 @@ pref(
 sample_asym_pref(
   nodes,
   types,
-  type.dist.matrix = matrix(1, types, types),
-  pref.matrix = matrix(1, types, types),
+  ...,
+  type.dist.matrix = NULL,
+  pref.matrix = NULL,
   loops = FALSE
 )
 
 asym_pref(
   nodes,
   types,
-  type.dist.matrix = matrix(1, types, types),
-  pref.matrix = matrix(1, types, types),
+  ...,
+  type.dist.matrix = NULL,
+  pref.matrix = NULL,
   loops = FALSE
 )
 }
@@ -48,9 +52,12 @@ asym_pref(
 
 \item{types}{The number of different vertex types.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{type.dist}{The distribution of the vertex types, a numeric vector of
 length \sQuote{types} containing non-negative numbers. The vector will be
-normed to obtain probabilities.}
+normed to obtain probabilities. The default \code{NULL} gives a uniform
+distribution.}
 
 \item{fixed.sizes}{Fix the number of vertices with a given vertex type
 label. The \code{type.dist} argument gives the group sizes (i.e. number of
@@ -58,14 +65,15 @@ vertices with the different labels) in this case.}
 
 \item{pref.matrix}{A square matrix giving the preferences of the vertex
 types. The matrix has \sQuote{types} rows and columns. When generating
-an undirected graph, it must be symmetric.}
+an undirected graph, it must be symmetric. The default \code{NULL} sets all
+preferences to one.}
 
-\item{directed}{Logical scalar, whether to create a directed graph.}
+\item{directed}{Logical, whether to create a directed graph.}
 
-\item{loops}{Logical scalar, whether self-loops are allowed in the graph.}
+\item{loops}{Logical, whether self-loops are allowed in the graph.}
 
 \item{type.dist.matrix}{The joint distribution of the in- and out-vertex
-types.}
+types. The default \code{NULL} gives a uniform distribution.}
 }
 \value{
 An igraph graph.

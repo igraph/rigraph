@@ -6,9 +6,12 @@ on:
 
 name: revdep
 
+permissions:
+  contents: read
+
 jobs:
   matrix:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-26.04
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
 
@@ -16,17 +19,17 @@ jobs:
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      RSPM: https://packagemanager.rstudio.com/cran/__linux__/bionic/latest
+      RSPM: https://packagemanager.posit.co/cran/__linux__/resolute/latest
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       # prevent rgl issues because no X11 display is available
       RGL_USE_NULL: true
-      # Begin custom: env vars
-      # End custom: env vars
 
     steps:
       - name: Check rate limits
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          curl -s --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/rate_limit
+          curl -s --header "authorization: Bearer ${GH_TOKEN}" https://api.github.com/rate_limit
         shell: bash
 
       - uses: actions/checkout@v6
@@ -34,21 +37,33 @@ jobs:
       # FIXME: Avoid reissuing successful jobs
       # https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#list-jobs-for-a-workflow-run
       # https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#workflow-runs
-      - id: set-matrix
+      - name: Collect the reverse dependencies
+        id: set-matrix
         run: |
           package <- read.dcf("DESCRIPTION")[, "Package"][[1]]
           deps <- tools:::package_dependencies(package, reverse = TRUE, which = c("Depends", "Imports", "LinkingTo", "Suggests"))[[1]]
-          json <- paste0(
-            '{"package":[',
-            paste0('"', deps, '"', collapse = ","),
-            ']}'
-          )
+          # Build the matrix JSON explicitly for the empty case: for a package with
+          # no (rev)dependencies, paste0('"', character(0), '"') collapses to the
+          # two-character string '""', so the naive construction emits
+          # {"package":[""]} (one empty-string entry) instead of an empty array.
+          # That spawns a spurious matrix job that runs install_runiverse("") and
+          # fails. Emit an empty array so the dependent matrix job is skipped when
+          # there are none.
+          if (length(deps) == 0) {
+            json <- '{"package":[]}'
+          } else {
+            json <- paste0(
+              '{"package":[',
+              paste0('"', deps, '"', collapse = ","),
+              ']}'
+            )
+          }
           writeLines(json)
           writeLines(paste0("matrix=", json), Sys.getenv("GITHUB_OUTPUT"))
         shell: Rscript {0}
 
   check-matrix:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-26.04
     needs: matrix
     steps:
       - name: Install json2yaml
@@ -56,21 +71,21 @@ jobs:
           sudo npm install -g json2yaml
 
       - name: Check matrix definition
+        # Passed through the environment rather than spliced into the script:
+        # the matrix is generated from DESCRIPTION in the checkout.
+        env:
+          MATRIX: ${{ needs.matrix.outputs.matrix }}
         run: |
-          matrix='${{ needs.matrix.outputs.matrix }}'
-          echo $matrix
-          echo $matrix | jq .
-          echo $matrix | json2yaml
+          printf '%s\n' "${MATRIX}"
+          printf '%s' "${MATRIX}" | jq .
+          printf '%s' "${MATRIX}" | json2yaml
 
   R-CMD-check:
     needs: matrix
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-26.04
 
     name: 'revdep: ${{ matrix.package }}'
-
-    # Begin custom: services
-    # End custom: services
 
     strategy:
       fail-fast: false
@@ -78,28 +93,25 @@ jobs:
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      RSPM: https://packagemanager.rstudio.com/cran/__linux__/bionic/latest
+      RSPM: https://packagemanager.posit.co/cran/__linux__/resolute/latest
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       # prevent rgl issues because no X11 display is available
       RGL_USE_NULL: true
-      # Begin custom: env vars
-      # End custom: env vars
 
     steps:
-      - name: Check rate limits
+      - name: Check rate limits before checking
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          curl -s --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/rate_limit
+          curl -s --header "authorization: Bearer ${GH_TOKEN}" https://api.github.com/rate_limit
         shell: bash
 
       - uses: actions/checkout@v6
 
-      # Begin custom: before install
-      # End custom: before install
-
       - name: Use RSPM
         run: |
           mkdir -p /home/runner/work/_temp/Library
-          echo 'local({release <- system2("lsb_release", "-sc", stdout = TRUE); options(repos=c(CRAN = paste0("https://packagemanager.rstudio.com/all/__linux__/", release, "/latest")), HTTPUserAgent = sprintf("R/%s R (%s)", getRversion(), paste(getRversion(), R.version$platform, R.version$arch, R.version$os)))}); .libPaths("/home/runner/work/_temp/Library")' | sudo tee /etc/R/Rprofile.site
+          echo 'local({release <- system2("lsb_release", "-sc", stdout = TRUE); options(repos=c(CRAN = paste0("https://packagemanager.posit.co/all/__linux__/", release, "/latest")), HTTPUserAgent = sprintf("R/%s R (%s)", getRversion(), paste(getRversion(), R.version$platform, R.version$arch, R.version$os)))}); .libPaths("/home/runner/work/_temp/Library")' | sudo tee /etc/R/Rprofile.site
 
       - name: Install remotes
         run: |
@@ -109,11 +121,24 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@v2
 
-      - name: Install system dependencies
+      - name: Close the log group that setup-pandoc leaves open
+        # See `.github/workflows/install/action.yml` for why this is needed.
+        # Fixed upstream by https://github.com/r-lib/actions/pull/1103.
         if: runner.os == 'Linux'
         run: |
+          echo "::endgroup::"
+        shell: bash
+
+      - name: Install system dependencies
+        if: runner.os == 'Linux'
+        # The runner is ubuntu-26.04, but remotes::system_requirements() hardcodes
+        # its supported list up to ubuntu-24.04 (r-lib/remotes, R/system_requirements.R;
+        # no tracking issue yet -- one should be filed). The rstudio/r-system-requirements
+        # catalog itself already covers 26.04, and apt package names are stable across
+        # LTS releases, so the 24.04 mappings install correctly on 26.04.
+        run: |
           sudo apt-get update -y
-          Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "22.04")); package <- "${{ matrix.package }}"; deps <- tools::package_dependencies(package, which = "Suggests")[[1]]; lapply(c(package, deps), function(x) { writeLines(remotes::system_requirements("ubuntu", "22.04", package = x)) })' | sort | uniq > .github/deps.sh
+          Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "24.04")); package <- "${{ matrix.package }}"; deps <- tools::package_dependencies(package, which = "Suggests")[[1]]; lapply(c(package, deps), function(x) { writeLines(remotes::system_requirements("ubuntu", "24.04", package = x)) })' | sort | uniq > .github/deps.sh
           cat .github/deps.sh
           sudo sh < .github/deps.sh
 
@@ -131,9 +156,6 @@ jobs:
           pkgs <- installed.packages()[, "Package"]
           sessioninfo::session_info(pkgs, include_base = TRUE)
         shell: Rscript {0}
-
-      # Begin custom: after install
-      # End custom: after install
 
       - name: Check old
         env:
@@ -201,13 +223,15 @@ jobs:
 
       - name: Upload check results
         if: failure()
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: ${{ matrix.package }}-results
           path: revdep/${{ matrix.package }}
 
-      - name: Check rate limits
+      - name: Check rate limits after checking
         if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          curl -s --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/rate_limit
+          curl -s --header "authorization: Bearer ${GH_TOKEN}" https://api.github.com/rate_limit
         shell: bash

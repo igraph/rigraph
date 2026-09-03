@@ -7,11 +7,12 @@
 \usage{
 layout_with_kk(
   graph,
+  ...,
   coords = NULL,
   dim = c(2, 3),
-  maxiter = 50 * vcount(graph),
+  maxiter = NULL,
   epsilon = 0,
-  kkconst = max(vcount(graph), 1),
+  kkconst = NULL,
   weights = NULL,
   minx = NULL,
   maxx = NULL,
@@ -31,16 +32,19 @@ with_kk(...)
 \arguments{
 \item{graph}{The input graph. Edge directions are ignored.}
 
-\item{coords}{If not \code{NULL}, then the starting coordinates should be
-given here, in a two or three column matrix, depending on the \code{dim}
-argument.}
+\item{...}{Passed to \code{layout_with_kk()}.}
+
+\item{coords}{Starting coordinates in a two or three column matrix,
+depending on the \code{dim} argument.
+Default: \code{NULL}.}
 
 \item{dim}{Integer scalar, 2 or 3, the dimension of the layout.  Two
 dimensional layouts are places on a plane, three dimensional ones in the 3d
 space.}
 
 \item{maxiter}{The maximum number of iterations to perform. The algorithm
-might terminate earlier, see the \code{epsilon} argument.}
+might terminate earlier, see the \code{epsilon} argument. The default \code{NULL}
+uses \code{50 * vcount(graph)}.}
 
 \item{epsilon}{Numeric scalar, the algorithm terminates, if the maximal
 delta is less than this. (See the reference below for what delta means.) If
@@ -48,15 +52,16 @@ you set this to zero, then the function always performs \code{maxiter}
 iterations.}
 
 \item{kkconst}{Numeric scalar, the Kamada-Kawai vertex attraction constant.
-Typical (and default) value is the number of vertices.}
+The default \code{NULL} uses the number of vertices.}
 
 \item{weights}{Edge weights, larger values will result in longer edges.
 Note that this is the opposite of \code{\link[=layout_with_fr]{layout_with_fr()}}, which produces
 shorter edges for larger weights. Weights must be positive.}
 
-\item{minx}{If not \code{NULL}, then it must be a numeric vector that gives
-lower boundaries for the \sQuote{x} coordinates of the vertices. The length
-of the vector must match the number of vertices in the graph.}
+\item{minx}{Numeric vector that gives lower boundaries
+for the \sQuote{x} coordinates of the vertices.
+The length of the vector must match the number of vertices in the graph.
+Default: \code{NULL}.}
 
 \item{maxx}{Similar to \code{minx}, but gives the upper boundaries.}
 
@@ -76,8 +81,6 @@ of the vector must match the number of vertices in the graph.}
 arguments are not supported from igraph version 0.8.0 and are ignored (with a warning).}
 
 \item{start}{Deprecated synonym for \code{coords}, for compatibility.}
-
-\item{...}{Passed to \code{layout_with_kk()}.}
 }
 \value{
 A numeric matrix with two (dim=2) or three (dim=3) columns, and as

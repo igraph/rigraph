@@ -4,7 +4,7 @@
 \alias{get_edge_ids}
 \title{Find the edge IDs based on the incident vertices of the edges}
 \usage{
-get_edge_ids(graph, vp, directed = TRUE, error = FALSE)
+get_edge_ids(graph, vp, ..., directed = TRUE, error = FALSE)
 }
 \arguments{
 \item{graph}{The input graph.}
@@ -14,10 +14,12 @@ or vector of vertex IDs or symbolic vertex names.
 For a vector, the values are interpreted pairwise, i.e. the first and second are used for
 the first edge, the third and fourth for the second, etc.}
 
-\item{directed}{Logical scalar, whether to consider edge directions in
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{directed}{Logical, whether to consider edge directions in
 directed graphs. This argument is ignored for undirected graphs.}
 
-\item{error}{Logical scalar, whether to report an error if an edge is not
+\item{error}{Logical, whether to report an error if an edge is not
 found in the graph. If \code{FALSE}, then no error is reported, and zero is
 returned for the non-existant edge(s).}
 }

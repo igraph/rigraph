@@ -136,6 +136,7 @@ graph.adjacency <- function(
 #'
 #' @param adjmatrix A square adjacency matrix. From igraph version 0.5.1 this
 #'   can be a sparse matrix created with the `Matrix` package.
+#' @inheritParams rlang::args_dots_empty
 #' @param mode Character scalar, specifies how igraph should interpret the
 #'   supplied matrix. See also the `weighted` argument, the interpretation
 #'   depends on that too. Possible values are: `directed`,
@@ -149,7 +150,7 @@ graph.adjacency <- function(
 #'   edge attribute named by the `weighted` argument. If it is `TRUE`
 #'   then a weighted graph is created and the name of the edge attribute will be
 #'   `weight`. See also details below.
-#' @param diag Logical scalar, whether to include the diagonal of the matrix in
+#' @param diag Logical, whether to include the diagonal of the matrix in
 #'   the calculation. If this is `FALSE` then the diagonal is zerod out
 #'   first.
 #' @param add.colnames Character scalar, whether to add the column names as
@@ -275,6 +276,7 @@ graph.adjacency <- function(
 #' @export
 graph_from_adjacency_matrix <- function(
   adjmatrix,
+  ...,
   mode = c(
     "directed",
     "undirected",
@@ -289,6 +291,53 @@ graph_from_adjacency_matrix <- function(
   add.colnames = NULL,
   add.rownames = NA
 ) {
+  # BEGIN GENERATED ARG_HANDLE: graph_from_adjacency_matrix, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("a", "ad"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn graph_from_adjacency_matrix}.", i = "Spell out the full argument name."))
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "ad", "add", "add."))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn graph_from_adjacency_matrix}.")
+    # Pre-3.0.0 signature: graph_from_adjacency_matrix(adjmatrix, mode, weighted, diag, add.colnames, add.rownames)
+    .old_signature <- function(mode, weighted, diag, add.colnames, add.rownames, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn graph_from_adjacency_matrix}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn graph_from_adjacency_matrix}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(mode)) base::list(mode = mode),
+        if (!base::missing(weighted)) base::list(weighted = weighted),
+        if (!base::missing(diag)) base::list(diag = diag),
+        if (!base::missing(add.colnames)) base::list(add.colnames = add.colnames),
+        if (!base::missing(add.rownames)) base::list(add.rownames = add.rownames)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(mode)) "mode",
+        if (!base::missing(weighted)) "weighted",
+        if (!base::missing(diag)) "diag",
+        if (!base::missing(add.colnames)) "add.colnames",
+        if (!base::missing(add.rownames)) "add.rownames"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn graph_from_adjacency_matrix} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `graph_from_adjacency_matrix()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  graph_from_adjacency_matrix(", base::paste(base::c("adjmatrix", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    graph_from_adjacency_matrix(", base::paste(base::c("adjmatrix", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   mode <- igraph_match_arg(mode)
   ensure_no_na(adjmatrix, "adjacency matrix", mode)
 
@@ -388,16 +437,65 @@ is_symmetric <- function(x) {
 }
 
 #' @rdname graph_from_adjacency_matrix
+#' @inheritParams rlang::args_dots_empty
 #' @family adjacency
 #' @export
 from_adjacency <- function(
   adjmatrix,
+  ...,
   mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"),
   weighted = NULL,
   diag = TRUE,
   add.colnames = NULL,
   add.rownames = NA
 ) {
+  # BEGIN GENERATED ARG_HANDLE: from_adjacency, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("a", "ad"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn from_adjacency}.", i = "Spell out the full argument name."))
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "ad", "add", "add."))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn from_adjacency}.")
+    # Pre-3.0.0 signature: from_adjacency(adjmatrix, mode, weighted, diag, add.colnames, add.rownames)
+    .old_signature <- function(mode, weighted, diag, add.colnames, add.rownames, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn from_adjacency}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn from_adjacency}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(mode)) base::list(mode = mode),
+        if (!base::missing(weighted)) base::list(weighted = weighted),
+        if (!base::missing(diag)) base::list(diag = diag),
+        if (!base::missing(add.colnames)) base::list(add.colnames = add.colnames),
+        if (!base::missing(add.rownames)) base::list(add.rownames = add.rownames)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(mode)) "mode",
+        if (!base::missing(weighted)) "weighted",
+        if (!base::missing(diag)) "diag",
+        if (!base::missing(add.colnames)) "add.colnames",
+        if (!base::missing(add.rownames)) "add.rownames"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn from_adjacency} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `from_adjacency()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  from_adjacency(", base::paste(base::c("adjmatrix", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    from_adjacency(", base::paste(base::c("adjmatrix", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   constructor_spec(
     graph_from_adjacency_matrix,
     adjmatrix = adjmatrix,

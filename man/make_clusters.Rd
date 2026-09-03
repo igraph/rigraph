@@ -7,6 +7,7 @@
 make_clusters(
   graph,
   membership = NULL,
+  ...,
   algorithm = NULL,
   merges = NULL,
   modularity = TRUE
@@ -18,6 +19,8 @@ make_clusters(
 \item{membership}{The membership vector of the community structure, a
 numeric vector denoting the ID of the community for each vertex. It
 might be \code{NULL} for hierarchical community structures.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{algorithm}{Character string, the algorithm that generated
 the community structure, it can be arbitrary.}

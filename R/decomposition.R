@@ -67,6 +67,7 @@ is.chordal <- function(
 #'
 #' @param graph The input graph. It may be directed, but edge directions are
 #'   ignored, as the algorithm is defined for undirected graphs.
+#' @inheritParams rlang::args_dots_empty
 #' @param alpha Numeric vector, the maximal chardinality ordering of the
 #'   vertices. If it is `NULL`, then it is automatically calculated by
 #'   calling [max_cardinality()], or from `alpham1` if
@@ -74,12 +75,12 @@ is.chordal <- function(
 #' @param alpham1 Numeric vector, the inverse of `alpha`. If it is
 #'   `NULL`, then it is automatically calculated by calling
 #'   [max_cardinality()], or from `alpha`.
-#' @param fillin Logical scalar, whether to calculate the fill-in edges.
-#' @param newgraph Logical scalar, whether to calculate the triangulated graph.
+#' @param fillin Logical, whether to calculate the fill-in edges.
+#' @param newgraph Logical, whether to calculate the triangulated graph.
 #' @return A list with three members:
 #'   \describe{
 #'     \item{chordal}{
-#'       Logical scalar, it is `TRUE` iff the input graph is chordal.
+#'       Logical, it is `TRUE` iff the input graph is chordal.
 #'     }
 #'     \item{fillin}{
 #'       If requested, then a numeric vector giving the fill-in edges. `NULL` otherwise.
@@ -118,11 +119,55 @@ is.chordal <- function(
 #'
 is_chordal <- function(
   graph,
+  ...,
   alpha = NULL,
   alpham1 = NULL,
   fillin = FALSE,
   newgraph = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: is_chordal, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "al", "alp", "alph"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn is_chordal}.")
+    # Pre-3.0.0 signature: is_chordal(graph, alpha, alpham1, fillin, newgraph)
+    .old_signature <- function(alpha, alpham1, fillin, newgraph, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn is_chordal}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn is_chordal}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(alpha)) base::list(alpha = alpha),
+        if (!base::missing(alpham1)) base::list(alpham1 = alpham1),
+        if (!base::missing(fillin)) base::list(fillin = fillin),
+        if (!base::missing(newgraph)) base::list(newgraph = newgraph)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(alpha)) "alpha",
+        if (!base::missing(alpham1)) "alpham1",
+        if (!base::missing(fillin)) "fillin",
+        if (!base::missing(newgraph)) "newgraph"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn is_chordal} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `is_chordal()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  is_chordal(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    is_chordal(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
   if (!is.null(alpha)) {
     alpha <- as.numeric(alpha) - 1

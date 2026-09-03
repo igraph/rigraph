@@ -183,16 +183,63 @@ graph.isoclass.subgraph <- function(graph, vids) {
   res
 }
 
+#' @inheritParams rlang::args_dots_empty
 #' @export
 graph.subisomorphic.lad <- function(
   pattern,
   target,
+  ...,
   domains = NULL,
   induced = FALSE,
   map = TRUE,
   all.maps = FALSE,
   time.limit = Inf
 ) {
+  # BEGIN GENERATED ARG_HANDLE: graph.subisomorphic.lad, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("t"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn graph.subisomorphic.lad}.", i = "Spell out the full argument name."))
+    # Pre-3.0.0 signature: graph.subisomorphic.lad(pattern, target, domains, induced, map, all.maps, time.limit)
+    .old_signature <- function(domains, induced, map, all.maps, time.limit, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn graph.subisomorphic.lad}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn graph.subisomorphic.lad}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(domains)) base::list(domains = domains),
+        if (!base::missing(induced)) base::list(induced = induced),
+        if (!base::missing(map)) base::list(map = map),
+        if (!base::missing(all.maps)) base::list(all.maps = all.maps),
+        if (!base::missing(time.limit)) base::list(time.limit = time.limit)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(domains)) "domains",
+        if (!base::missing(induced)) "induced",
+        if (!base::missing(map)) "map",
+        if (!base::missing(all.maps)) "all.maps",
+        if (!base::missing(time.limit)) "time.limit"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn graph.subisomorphic.lad} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `graph.subisomorphic.lad()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  graph.subisomorphic.lad(", base::paste(base::c("pattern", "target", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    graph.subisomorphic.lad(", base::paste(base::c("pattern", "target", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   ensure_igraph(pattern)
   ensure_igraph(target)
@@ -382,14 +429,57 @@ isomorphic <- function(
   }
 }
 
+#' @inheritParams rlang::args_dots_empty
 #' @export
 graph.isomorphic.bliss <- function(
   graph1,
   graph2,
+  ...,
   colors1 = NULL,
   colors2 = NULL,
   sh = c("fm", "f", "fs", "fl", "flm", "fsm")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: graph.isomorphic.bliss, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("c", "co", "col", "colo", "color", "colors"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn graph.isomorphic.bliss}.")
+    # Pre-3.0.0 signature: graph.isomorphic.bliss(graph1, graph2, colors1, colors2, sh)
+    .old_signature <- function(colors1, colors2, sh, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn graph.isomorphic.bliss}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn graph.isomorphic.bliss}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(colors1)) base::list(colors1 = colors1),
+        if (!base::missing(colors2)) base::list(colors2 = colors2),
+        if (!base::missing(sh)) base::list(sh = sh)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(colors1)) "colors1",
+        if (!base::missing(colors2)) "colors2",
+        if (!base::missing(sh)) "sh"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn graph.isomorphic.bliss} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `graph.isomorphic.bliss()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  graph.isomorphic.bliss(", base::paste(base::c("graph1", "graph2", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    graph.isomorphic.bliss(", base::paste(base::c("graph1", "graph2", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   isomorphic_bliss_impl(
     graph1 = graph1,
     graph2 = graph2,
@@ -398,15 +488,60 @@ graph.isomorphic.bliss <- function(
     sh = sh
   )
 }
+#' @inheritParams rlang::args_dots_empty
 #' @export
 graph.isomorphic.vf2 <- function(
   graph1,
   graph2,
+  ...,
   vertex.color1 = NULL,
   vertex.color2 = NULL,
   edge.color1 = NULL,
   edge.color2 = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: graph.isomorphic.vf2, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("v", "ve", "ver", "vert", "verte", "vertex", "vertex.", "vertex.c", "vertex.co", "vertex.col", "vertex.colo", "vertex.color", "e", "ed", "edg", "edge", "edge.", "edge.c", "edge.co", "edge.col", "edge.colo", "edge.color"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn graph.isomorphic.vf2}.")
+    # Pre-3.0.0 signature: graph.isomorphic.vf2(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2)
+    .old_signature <- function(vertex.color1, vertex.color2, edge.color1, edge.color2, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn graph.isomorphic.vf2}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn graph.isomorphic.vf2}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(vertex.color1)) base::list(vertex.color1 = vertex.color1),
+        if (!base::missing(vertex.color2)) base::list(vertex.color2 = vertex.color2),
+        if (!base::missing(edge.color1)) base::list(edge.color1 = edge.color1),
+        if (!base::missing(edge.color2)) base::list(edge.color2 = edge.color2)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(vertex.color1)) "vertex.color1",
+        if (!base::missing(vertex.color2)) "vertex.color2",
+        if (!base::missing(edge.color1)) "edge.color1",
+        if (!base::missing(edge.color2)) "edge.color2"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn graph.isomorphic.vf2} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `graph.isomorphic.vf2()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  graph.isomorphic.vf2(", base::paste(base::c("graph1", "graph2", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    graph.isomorphic.vf2(", base::paste(base::c("graph1", "graph2", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   isomorphic_vf2_impl(
     graph1 = graph1,
     graph2 = graph2,
@@ -424,15 +559,60 @@ graph.isomorphic.vf2 <- function(
     edge_color2 = if (missing(edge.color2)) missing_arg() else edge.color2
   )
 }
+#' @inheritParams rlang::args_dots_empty
 #' @export
 graph.subisomorphic.vf2 <- function(
   graph1,
   graph2,
+  ...,
   vertex.color1 = NULL,
   vertex.color2 = NULL,
   edge.color1 = NULL,
   edge.color2 = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: graph.subisomorphic.vf2, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("v", "ve", "ver", "vert", "verte", "vertex", "vertex.", "vertex.c", "vertex.co", "vertex.col", "vertex.colo", "vertex.color", "e", "ed", "edg", "edge", "edge.", "edge.c", "edge.co", "edge.col", "edge.colo", "edge.color"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn graph.subisomorphic.vf2}.")
+    # Pre-3.0.0 signature: graph.subisomorphic.vf2(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2)
+    .old_signature <- function(vertex.color1, vertex.color2, edge.color1, edge.color2, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn graph.subisomorphic.vf2}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn graph.subisomorphic.vf2}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(vertex.color1)) base::list(vertex.color1 = vertex.color1),
+        if (!base::missing(vertex.color2)) base::list(vertex.color2 = vertex.color2),
+        if (!base::missing(edge.color1)) base::list(edge.color1 = edge.color1),
+        if (!base::missing(edge.color2)) base::list(edge.color2 = edge.color2)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(vertex.color1)) "vertex.color1",
+        if (!base::missing(vertex.color2)) "vertex.color2",
+        if (!base::missing(edge.color1)) "edge.color1",
+        if (!base::missing(edge.color2)) "edge.color2"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn graph.subisomorphic.vf2} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `graph.subisomorphic.vf2()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  graph.subisomorphic.vf2(", base::paste(base::c("graph1", "graph2", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    graph.subisomorphic.vf2(", base::paste(base::c("graph1", "graph2", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   subisomorphic_vf2_impl(
     graph1 = graph1,
     graph2 = graph2,
@@ -467,7 +647,7 @@ is_isomorphic_to <- isomorphic
 #' the following extra arguments:
 #' \describe{
 #'     \item{domains}{
-#'       If not `NULL`, then it specifies matching restrictions.
+#'       Matching restrictions.
 #'       It must be a list of `target` vertex sets, given as numeric vertex IDs or symbolic vertex names.
 #'       The length of the list must be `vcount(pattern)` and for each vertex in `pattern`
 #'       it gives the allowed matching vertices in `target`.
@@ -621,15 +801,60 @@ count_isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
   }
 }
 
+#' @inheritParams rlang::args_dots_empty
 #' @export
 graph.count.isomorphisms.vf2 <- function(
   graph1,
   graph2,
+  ...,
   vertex.color1 = NULL,
   vertex.color2 = NULL,
   edge.color1 = NULL,
   edge.color2 = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: graph.count.isomorphisms.vf2, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("v", "ve", "ver", "vert", "verte", "vertex", "vertex.", "vertex.c", "vertex.co", "vertex.col", "vertex.colo", "vertex.color", "e", "ed", "edg", "edge", "edge.", "edge.c", "edge.co", "edge.col", "edge.colo", "edge.color"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn graph.count.isomorphisms.vf2}.")
+    # Pre-3.0.0 signature: graph.count.isomorphisms.vf2(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2)
+    .old_signature <- function(vertex.color1, vertex.color2, edge.color1, edge.color2, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn graph.count.isomorphisms.vf2}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn graph.count.isomorphisms.vf2}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(vertex.color1)) base::list(vertex.color1 = vertex.color1),
+        if (!base::missing(vertex.color2)) base::list(vertex.color2 = vertex.color2),
+        if (!base::missing(edge.color1)) base::list(edge.color1 = edge.color1),
+        if (!base::missing(edge.color2)) base::list(edge.color2 = edge.color2)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(vertex.color1)) "vertex.color1",
+        if (!base::missing(vertex.color2)) "vertex.color2",
+        if (!base::missing(edge.color1)) "edge.color1",
+        if (!base::missing(edge.color2)) "edge.color2"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn graph.count.isomorphisms.vf2} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `graph.count.isomorphisms.vf2()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  graph.count.isomorphisms.vf2(", base::paste(base::c("graph1", "graph2", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    graph.count.isomorphisms.vf2(", base::paste(base::c("graph1", "graph2", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   count_isomorphisms_vf2_impl(
     graph1 = graph1,
     graph2 = graph2,
@@ -656,7 +881,7 @@ graph.count.isomorphisms.vf2 <- function(
 #' the following extra arguments:
 #' \describe{
 #'     \item{domains}{
-#'       If not `NULL`, then it specifies matching restrictions.
+#'       Matching restrictions.
 #'       It must be a list of `target` vertex sets, given as numeric vertex IDs or symbolic vertex names.
 #'       The length of the list must be `vcount(pattern)` and for each vertex in `pattern`
 #'       it gives the allowed matching vertices in `target`.
@@ -727,15 +952,60 @@ count_subgraph_isomorphisms <- function(
   }
 }
 
+#' @inheritParams rlang::args_dots_empty
 #' @export
 graph.count.subisomorphisms.vf2 <- function(
   graph1,
   graph2,
+  ...,
   vertex.color1 = NULL,
   vertex.color2 = NULL,
   edge.color1 = NULL,
   edge.color2 = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: graph.count.subisomorphisms.vf2, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("v", "ve", "ver", "vert", "verte", "vertex", "vertex.", "vertex.c", "vertex.co", "vertex.col", "vertex.colo", "vertex.color", "e", "ed", "edg", "edge", "edge.", "edge.c", "edge.co", "edge.col", "edge.colo", "edge.color"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn graph.count.subisomorphisms.vf2}.")
+    # Pre-3.0.0 signature: graph.count.subisomorphisms.vf2(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2)
+    .old_signature <- function(vertex.color1, vertex.color2, edge.color1, edge.color2, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn graph.count.subisomorphisms.vf2}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn graph.count.subisomorphisms.vf2}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(vertex.color1)) base::list(vertex.color1 = vertex.color1),
+        if (!base::missing(vertex.color2)) base::list(vertex.color2 = vertex.color2),
+        if (!base::missing(edge.color1)) base::list(edge.color1 = edge.color1),
+        if (!base::missing(edge.color2)) base::list(edge.color2 = edge.color2)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(vertex.color1)) "vertex.color1",
+        if (!base::missing(vertex.color2)) "vertex.color2",
+        if (!base::missing(edge.color1)) "edge.color1",
+        if (!base::missing(edge.color2)) "edge.color2"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn graph.count.subisomorphisms.vf2} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `graph.count.subisomorphisms.vf2()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  graph.count.subisomorphisms.vf2(", base::paste(base::c("graph1", "graph2", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    graph.count.subisomorphisms.vf2(", base::paste(base::c("graph1", "graph2", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   count_subisomorphisms_vf2_impl(
     graph1 = graph1,
     graph2 = graph2,
@@ -843,7 +1113,7 @@ isomorphisms <- function(graph1, graph2, method = "vf2", ..., callback = NULL) {
 #' the following extra arguments:
 #' \describe{
 #'     \item{domains}{
-#'       If not `NULL`, then it specifies matching restrictions.
+#'       Matching restrictions.
 #'       It must be a list of `target` vertex sets, given as numeric vertex IDs or symbolic vertex names.
 #'       The length of the list must be `vcount(pattern)` and for each vertex in `pattern`
 #'       it gives the allowed matching vertices in `target`.
@@ -1021,13 +1291,54 @@ graph.isoclass <- function(graph) {
 #'
 #' @param size The number of vertices in the graph.
 #' @param number The isomorphism class.
+#' @inheritParams rlang::args_dots_empty
 #' @param directed Whether to create a directed graph (the default).
 #' @return An igraph object, the graph of the given size, directedness
 #'   and isomorphism class.
 #'
 #' @family graph isomorphism
 #' @export
-graph_from_isomorphism_class <- function(size, number, directed = TRUE) {
+graph_from_isomorphism_class <- function(
+  size,
+  number,
+  ...,
+  directed = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: graph_from_isomorphism_class, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: graph_from_isomorphism_class(size, number, directed)
+    .old_signature <- function(directed, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn graph_from_isomorphism_class}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn graph_from_isomorphism_class}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(directed)) base::list(directed = directed)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(directed)) "directed"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn graph_from_isomorphism_class} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `graph_from_isomorphism_class()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  graph_from_isomorphism_class(", base::paste(base::c("size", "number", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    graph_from_isomorphism_class(", base::paste(base::c("size", "number", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   isoclass_create_impl(
     size = size,
     number = number,
@@ -1079,6 +1390,7 @@ graph_from_isomorphism_class <- function(size, number, directed = TRUE) {
 #'   vertices, or, if there is no such vertex attribute, it simply assumes that
 #'   all vertices have the same color. Pass NULL explicitly if the graph has a
 #'   `color` vertex attribute but you do not want to use it.
+#' @inheritParams rlang::args_dots_empty
 #' @param sh Type of the heuristics to use for the BLISS algorithm. See details
 #'   for possible values.
 #' @return A list with the following members:
@@ -1146,8 +1458,44 @@ graph_from_isomorphism_class <- function(size, number, directed = TRUE) {
 canonical_permutation <- function(
   graph,
   colors = NULL,
+  ...,
   sh = c("fm", "f", "fs", "fl", "flm", "fsm")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: canonical_permutation, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: canonical_permutation(graph, colors, sh)
+    .old_signature <- function(sh, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn canonical_permutation}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn canonical_permutation}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(sh)) base::list(sh = sh)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(sh)) "sh"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn canonical_permutation} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `canonical_permutation()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  canonical_permutation(", base::paste(base::c("graph", "colors", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    canonical_permutation(", base::paste(base::c("graph", "colors", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   canonical_permutation_impl(
     graph = graph,
     colors = if (missing(colors)) missing_arg() else colors,
@@ -1230,6 +1578,7 @@ graph.isomorphic <- function(graph1, graph2) {
 #'   vertices, or, if there is no such vertex attribute, it simply assumes that
 #'   all vertices have the same color. Pass NULL explicitly if the graph has a
 #'   `color` vertex attribute but you do not want to use it.
+#' @inheritParams rlang::args_dots_empty
 #' @param sh The splitting heuristics for the BLISS algorithm. Possible values
 #'   are:
 #'   \sQuote{`f`}:
@@ -1295,8 +1644,44 @@ graph.isomorphic <- function(graph1, graph2) {
 count_automorphisms <- function(
   graph,
   colors = NULL,
+  ...,
   sh = c("fm", "f", "fs", "fl", "flm", "fsm")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: count_automorphisms, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: count_automorphisms(graph, colors, sh)
+    .old_signature <- function(sh, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn count_automorphisms}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn count_automorphisms}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(sh)) base::list(sh = sh)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(sh)) "sh"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn count_automorphisms} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `count_automorphisms()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  count_automorphisms(", base::paste(base::c("graph", "colors", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    count_automorphisms(", base::paste(base::c("graph", "colors", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   count_automorphisms_impl(
     graph = graph,
     colors = if (missing(colors)) missing_arg() else colors,
@@ -1328,6 +1713,7 @@ count_automorphisms <- function(
 #'   vertices, or, if there is no such vertex attribute, it simply assumes that
 #'   all vertices have the same color. Pass NULL explicitly if the graph has a
 #'   `color` vertex attribute but you do not want to use it.
+#' @inheritParams rlang::args_dots_empty
 #' @param sh The splitting heuristics for the BLISS algorithm. Possible values
 #'   are:
 #'   \sQuote{`f`}:
@@ -1379,9 +1765,47 @@ count_automorphisms <- function(
 automorphism_group <- function(
   graph,
   colors = NULL,
+  ...,
   sh = c("fm", "f", "fs", "fl", "flm", "fsm"),
   details = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: automorphism_group, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: automorphism_group(graph, colors, sh, details)
+    .old_signature <- function(sh, details, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn automorphism_group}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn automorphism_group}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(sh)) base::list(sh = sh),
+        if (!base::missing(details)) base::list(details = details)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(sh)) "sh",
+        if (!base::missing(details)) "details"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn automorphism_group} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `automorphism_group()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  automorphism_group(", base::paste(base::c("graph", "colors", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    automorphism_group(", base::paste(base::c("graph", "colors", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   automorphism_group_impl(
     graph = graph,
     colors = if (missing(colors)) missing_arg() else colors,

@@ -5,9 +5,9 @@
 \alias{sbm}
 \title{Sample stochastic block model}
 \usage{
-sample_sbm(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE)
+sample_sbm(n, pref.matrix, block.sizes, ..., directed = FALSE, loops = FALSE)
 
-sbm(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE)
+sbm(n, pref.matrix, block.sizes, ..., directed = FALSE, loops = FALSE)
 }
 \arguments{
 \item{n}{Number of vertices in the graph.}
@@ -21,9 +21,11 @@ must be symmetric.}
 \item{block.sizes}{Numeric vector giving the number of vertices in each
 group. The sum of the vector must match the number of vertices.}
 
-\item{directed}{Logical scalar, whether to create a directed graph.}
+\item{...}{These dots are for future extensions and must be empty.}
 
-\item{loops}{Logical scalar, whether self-loops are allowed in the graph.}
+\item{directed}{Logical, whether to create a directed graph.}
+
+\item{loops}{Logical, whether self-loops are allowed in the graph.}
 }
 \value{
 An igraph graph.

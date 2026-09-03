@@ -7,11 +7,12 @@
 embed_adjacency_matrix(
   graph,
   no,
+  ...,
   weights = NULL,
   which = c("lm", "la", "sa"),
   scaled = TRUE,
-  cvec = strength(graph, weights = weights)/(vcount(graph) - 1),
-  options = arpack_defaults()
+  cvec = NULL,
+  options = NULL
 )
 }
 \arguments{
@@ -21,6 +22,8 @@ embed_adjacency_matrix(
 spectral embedding. Should be smaller than the number of vertices. The
 largest \code{no}-dimensional non-zero singular values are used for the
 spectral embedding.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{Optional positive weight vector for calculating a weighted
 embedding. If the graph has a \code{weight} edge attribute, then this is
@@ -34,15 +37,17 @@ eigenvalues. The default is \sQuote{lm}. Note that for directed graphs
 \sQuote{la} and \sQuote{lm} are the equivalent, because the singular values
 are used for the ordering.}
 
-\item{scaled}{Logical scalar, if \code{FALSE}, then \eqn{U} and \eqn{V} are
+\item{scaled}{Logical, if \code{FALSE}, then \eqn{U} and \eqn{V} are
 returned instead of \eqn{X} and \eqn{Y}.}
 
 \item{cvec}{A numeric vector, its length is the number vertices in the
-graph. This vector is added to the diagonal of the adjacency matrix.}
+graph. This vector is added to the diagonal of the adjacency matrix. The
+default \code{NULL} uses
+\code{strength(graph, weights = weights) / (vcount(graph) - 1)}.}
 
 \item{options}{A named list containing the parameters for the SVD
-computation algorithm in ARPACK. By default, the list of values is assigned
-the values given by \code{\link[=arpack_defaults]{arpack_defaults()}}.}
+computation algorithm in ARPACK. The default \code{NULL} uses the values given
+by \code{\link[=arpack_defaults]{arpack_defaults()}}.}
 }
 \value{
 A list containing with entries:

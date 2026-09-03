@@ -16,14 +16,15 @@ layout.drl(
 \arguments{
 \item{graph}{The input graph, in can be directed or undirected.}
 
-\item{use.seed}{Logical scalar, whether to use the coordinates given in the
+\item{use.seed}{Logical, whether to use the coordinates given in the
 \code{seed} argument as a starting point.}
 
 \item{seed}{A matrix with two columns, the starting coordinates for the
-vertices is \code{use.seed} is \code{TRUE}. It is ignored otherwise.}
+vertices is \code{use.seed} is \code{TRUE}. It is ignored otherwise. The default
+\code{NULL} draws uniformly random starting coordinates.}
 
 \item{options}{Options for the layout generator, a named list. See details
-below.}
+below. The default \code{NULL} uses \code{drl_defaults$default}.}
 
 \item{weights}{The weights of the edges. It must be a positive numeric vector,
 \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a

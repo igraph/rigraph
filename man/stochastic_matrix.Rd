@@ -4,20 +4,19 @@
 \alias{stochastic_matrix}
 \title{Stochastic matrix of a graph}
 \usage{
-stochastic_matrix(
-  graph,
-  column.wise = FALSE,
-  sparse = igraph_opt("sparsematrices")
-)
+stochastic_matrix(graph, ..., column.wise = FALSE, sparse = NULL)
 }
 \arguments{
 \item{graph}{The input graph. Must be of class \code{igraph}.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{column.wise}{If \code{FALSE}, then the rows of the stochastic matrix
 sum up to one; otherwise it is the columns.}
 
-\item{sparse}{Logical scalar, whether to return a sparse matrix. The
-\code{Matrix} package is needed for sparse matrices.}
+\item{sparse}{Logical, whether to return a sparse matrix. The
+\code{Matrix} package is needed for sparse matrices. The default \code{NULL} uses
+the \code{sparsematrices} igraph option.}
 }
 \value{
 A regular matrix or a matrix of class \code{Matrix} if a

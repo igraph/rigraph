@@ -39,7 +39,7 @@ limit for the number of communities. It is not a problem to supply a
 (reasonably) big number here, in which case some spin states will be
 unpopulated.}
 
-\item{parupdate}{Logical constant, whether to update the spins of the
+\item{parupdate}{Logical, whether to update the spins of the
 vertices in parallel (synchronously) or not. This argument is ignored if the
 second form of the function is used (i.e. the \sQuote{\code{vertex}} argument
 is present). It is also not implemented in the \dQuote{neg} implementation.}

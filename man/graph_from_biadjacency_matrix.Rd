@@ -6,6 +6,7 @@
 \usage{
 graph_from_biadjacency_matrix(
   incidence,
+  ...,
   directed = FALSE,
   mode = c("all", "out", "in", "total"),
   multiple = FALSE,
@@ -17,7 +18,9 @@ graph_from_biadjacency_matrix(
 \item{incidence}{The input bipartite adjacency matrix. It can also be a sparse matrix
 from the \code{Matrix} package.}
 
-\item{directed}{Logical scalar, whether to create a directed graph.}
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{directed}{Logical, whether to create a directed graph.}
 
 \item{mode}{A character constant, defines the direction of the edges in
 directed graphs, ignored for undirected graphs. If \sQuote{\code{out}}, then
@@ -26,7 +29,7 @@ bipartite adjacency matrix) to vertices of the second kind (columns in the incid
 matrix). If \sQuote{\verb{in}}, then the opposite direction is used. If
 \sQuote{\code{all}} or \sQuote{\code{total}}, then mutual edges are created.}
 
-\item{multiple}{Logical scalar, specifies how to interpret the matrix
+\item{multiple}{Logical, specifies how to interpret the matrix
 elements. See details below.}
 
 \item{weighted}{This argument specifies whether to create a weighted graph
@@ -72,7 +75,7 @@ Some authors refer to the bipartite adjacency matrix as the
 this naming to avoid confusion with the edge-vertex incidence matrix.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_biadjacency}{\code{biadjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create}{\code{create()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty}{\code{empty()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous}{\code{famous()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple}{\code{is_simple()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_biadjacency}{\code{biadjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create}{\code{create()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty}{\code{empty()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous}{\code{famous()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple}{\code{is_simple()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
 }
 
 \examples{

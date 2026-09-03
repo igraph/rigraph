@@ -42,9 +42,9 @@
 #'
 #' @param graph.us,graph An igraph object, the graph for which the scan
 #'   statistics will be computed
-#' @param graph.them An igraph object or `NULL`, if not `NULL`,
-#'   then the \sQuote{them} statistics is computed, i.e. the neighborhoods
-#'   calculated from `graph.us` are evaluated on `graph.them`.
+#' @param graph.them An igraph object on which the \sQuote{them} statistics is computed,
+#'   i.e. the neighborhoods calculated from `graph.us` are evaluated on `graph.them`.
+#'   Default: `NULL`.
 #' @param k An integer scalar, the size of the local neighborhood for each
 #'   vertex. Should be non-negative.
 #' @param FUN Character, a function name, or a function object itself, for
@@ -53,7 +53,7 @@
 #'   `weighted=FALSE`) and a function that computes the sum of edge
 #'   weights is used for weighted graphs (if `weighted=TRUE`). This
 #'   argument is ignored if `k` is zero.
-#' @param weighted Logical scalar, TRUE if the edge weights should be used
+#' @param weighted Logical, TRUE if the edge weights should be used
 #'   for computation of the scan statistic. If TRUE, the graph should be
 #'   weighted.  Note that this argument is ignored if `FUN` is not
 #'   `NULL`, `"ecount"` and `"sumweights"`.
@@ -131,7 +131,7 @@ local_scan <- function(
     is.null(FUN) || is.function(FUN) || (is.character(FUN) && length(FUN) == 1)
   )
 
-  ## Logical scalar
+  ## Logical
   stopifnot(is.logical(weighted), length(weighted) == 1)
 
   ## If weighted, then the graph(s) must be weighted
@@ -164,7 +164,6 @@ local_scan <- function(
 
   ## Check mode argument
   mode <- igraph_match_arg(mode)
-  cmode <- switch(mode, out = 1, `in` = 2, all = 3, total = 3)
 
   sumweights <- function(g) sum(E(g)$weight)
 

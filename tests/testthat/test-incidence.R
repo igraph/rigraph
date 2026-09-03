@@ -1,5 +1,5 @@
 test_that("graph_from_biadjacency_matrix() works -- dense", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   inc <- matrix(sample(0:1, 15, repl = TRUE), 3, 5)
   colnames(inc) <- letters[1:5]
@@ -16,7 +16,7 @@ test_that("graph_from_biadjacency_matrix() works -- dense", {
 
 
 test_that("graph_from_biadjacency_matrix() works -- dense + multiple", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   inc <- matrix(sample(0:2, 15, repl = TRUE), 3, 5)
   colnames(inc) <- letters[1:5]
@@ -28,7 +28,7 @@ test_that("graph_from_biadjacency_matrix() works -- dense + multiple", {
 
 
 test_that("graph_from_biadjacency_matrix() works - dense, modes", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   inc <- matrix(sample(0:1, 15, repl = TRUE), 3, 5)
   colnames(inc) <- letters[1:5]
@@ -54,7 +54,7 @@ test_that("graph_from_biadjacency_matrix() works - dense, modes", {
 })
 
 test_that("graph_from_biadjacency_matrix() works - dense, modes, weighted", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   inc <- matrix(sample(0:2, 15, repl = TRUE), 3, 5)
   colnames(inc) <- letters[1:5]
@@ -106,7 +106,7 @@ test_that("graph_from_biadjacency_matrix() works - dense, modes, weighted", {
 })
 
 test_that("graph_from_biadjacency_matrix() works -- sparse", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   inc <- matrix(sample(0:1, 15, repl = TRUE), 3, 5)
   inc <- Matrix::Matrix(inc, sparse = TRUE)
@@ -123,7 +123,7 @@ test_that("graph_from_biadjacency_matrix() works -- sparse", {
 })
 
 test_that("graph_from_biadjacency_matrix() works -- sparse + multiple", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   inc <- matrix(sample(0:2, 15, repl = TRUE), 3, 5)
   inc <- Matrix::Matrix(inc, sparse = TRUE)
@@ -135,7 +135,7 @@ test_that("graph_from_biadjacency_matrix() works -- sparse + multiple", {
 })
 
 test_that("graph_from_biadjacency_matrix() works - sparse, modes", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   inc <- matrix(sample(0:1, 15, repl = TRUE), 3, 5)
   inc <- Matrix::Matrix(inc, sparse = TRUE)
@@ -162,7 +162,7 @@ test_that("graph_from_biadjacency_matrix() works - sparse, modes", {
 })
 
 test_that("graph_from_biadjacency_matrix() works - sparse, modes, weighted", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   inc <- matrix(sample(0:2, 15, repl = TRUE), 3, 5)
   inc <- Matrix::Matrix(inc, sparse = TRUE)
@@ -204,22 +204,50 @@ test_that("graph_from_biadjacency_matrix() works - sparse, modes, weighted", {
 })
 
 test_that("graph_from_biadjacency_matrix() errors well", {
+  igraph_local_seed(42)
   inc <- matrix(sample(0:1, 15, repl = TRUE), 3, 5)
   colnames(inc) <- letters[1:5]
   rownames(inc) <- LETTERS[1:3]
 
   expect_snapshot_igraph_error({
-    (g <- graph_from_biadjacency_matrix(inc, weight = FALSE))
+    (graph_from_biadjacency_matrix(inc, weighted = FALSE))
   })
   expect_snapshot_igraph_error({
-    (g <- graph_from_biadjacency_matrix(inc, weight = 42))
+    (graph_from_biadjacency_matrix(inc, weighted = 42))
   })
   expect_snapshot_igraph_error({
-    (g <- graph_from_biadjacency_matrix(inc, multiple = TRUE, weighted = TRUE))
+    (graph_from_biadjacency_matrix(inc, multiple = TRUE, weighted = TRUE))
   })
 })
 
 test_that("graph_from_biadjacency_matrix errors for NAs", {
   A <- matrix(c(1, 1, NA, 1), 2, 2)
   expect_snapshot_igraph_error(graph_from_biadjacency_matrix(A))
+})
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+test_that("graph_from_biadjacency_matrix() covers add.names by name and recovers positional calls", {
+  # The other tail arguments are already exercised by name elsewhere
+  # in this file, so only add.names and the legacy positional path
+  # are covered here.
+  inc <- matrix(c(1, 0, 0, 1, 1, 1), nrow = 2)
+  rownames(inc) <- c("r1", "r2")
+  colnames(inc) <- c("c1", "c2", "c3")
+
+  g_label <- graph_from_biadjacency_matrix(inc, add.names = "label")
+  expect_identical(V(g_label)$label, c("r1", "r2", "c1", "c2", "c3"))
+  expect_false("name" %in% vertex_attr_names(g_label))
+
+  g_anon <- graph_from_biadjacency_matrix(inc, add.names = NA)
+  expect_identical(vertex_attr_names(g_anon), "type")
+
+  lifecycle::expect_deprecated(
+    res <- graph_from_biadjacency_matrix(inc, TRUE)
+  )
+  expect_identical_graphs(
+    res,
+    graph_from_biadjacency_matrix(inc, directed = TRUE)
+  )
+  expect_true(is_directed(res))
 })

@@ -343,9 +343,10 @@ dominator.tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
 #' @param graph The input graph.
 #' @param source The ID of the source vertex.
 #' @param target The ID of the target vertex (sometimes also called sink).
+#' @inheritParams rlang::args_dots_empty
 #' @param capacity Vector giving the capacity of the edges. If this is
 #'   `NULL` (the default) then the `capacity` edge attribute is used.
-#' @param value.only Logical scalar, if `TRUE` only the minimum cut value
+#' @param value.only Logical, if `TRUE` only the minimum cut value
 #'   is returned, if `FALSE` the edges in the cut and a the two (or more)
 #'   partitions are also returned.
 #' @return For `min_cut()` a nuieric constant, the value of the minimum
@@ -387,9 +388,47 @@ min_cut <- function(
   graph,
   source = NULL,
   target = NULL,
+  ...,
   capacity = NULL,
   value.only = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: min_cut, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: min_cut(graph, source, target, capacity, value.only)
+    .old_signature <- function(capacity, value.only, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn min_cut}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn min_cut}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(capacity)) base::list(capacity = capacity),
+        if (!base::missing(value.only)) base::list(value.only = value.only)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(capacity)) "capacity",
+        if (!base::missing(value.only)) "value.only"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn min_cut} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `min_cut()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  min_cut(", base::paste(base::c("graph", "source", "target", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    min_cut(", base::paste(base::c("graph", "source", "target", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
   if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
     capacity <- E(graph)$capacity
@@ -482,7 +521,8 @@ min_cut <- function(
 #'   can be `NULL`, see details below.
 #' @param target The ID of the target vertex, for `vertex_connectivity()` it
 #'   can be `NULL`, see details below.
-#' @param checks Logical constant. Whether to check that the graph is connected
+#' @inheritParams rlang::args_dots_empty
+#' @param checks Logical. Whether to check that the graph is connected
 #'   and also the degree of the vertices. If the graph is not (strongly)
 #'   connected then the connectivity is obviously zero. Otherwise if the minimum
 #'   degree is one then the vertex connectivity is also one. It is a good idea to
@@ -518,8 +558,44 @@ vertex_connectivity <- function(
   graph,
   source = NULL,
   target = NULL,
+  ...,
   checks = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: vertex_connectivity, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: vertex_connectivity(graph, source, target, checks)
+    .old_signature <- function(checks, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn vertex_connectivity}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn vertex_connectivity}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(checks)) base::list(checks = checks)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(checks)) "checks"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn vertex_connectivity} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `vertex_connectivity()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  vertex_connectivity(", base::paste(base::c("graph", "source", "target", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    vertex_connectivity(", base::paste(base::c("graph", "source", "target", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   if (is.null(source) && is.null(target)) {
@@ -589,7 +665,8 @@ vertex_connectivity <- function(
 #'   can be `NULL`, see details below.
 #' @param target The ID of the target vertex, for `edge_connectivity()` it
 #'   can be `NULL`, see details below.
-#' @param checks Logical constant. Whether to check that the graph is connected
+#' @inheritParams rlang::args_dots_empty
+#' @param checks Logical. Whether to check that the graph is connected
 #'   and also the degree of the vertices. If the graph is not (strongly)
 #'   connected then the connectivity is obviously zero. Otherwise if the minimum
 #'   degree is one then the edge connectivity is also one. It is a good idea to
@@ -621,8 +698,44 @@ edge_connectivity <- function(
   graph,
   source = NULL,
   target = NULL,
+  ...,
   checks = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: edge_connectivity, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: edge_connectivity(graph, source, target, checks)
+    .old_signature <- function(checks, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn edge_connectivity}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn edge_connectivity}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(checks)) base::list(checks = checks)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(checks)) "checks"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn edge_connectivity} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `edge_connectivity()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  edge_connectivity(", base::paste(base::c("graph", "source", "target", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    edge_connectivity(", base::paste(base::c("graph", "source", "target", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   if (is.null(source) && is.null(target)) {
@@ -671,8 +784,48 @@ vertex_disjoint_paths <- function(graph, source = NULL, target = NULL) {
 }
 
 #' @rdname edge_connectivity
+#' @inheritParams rlang::args_dots_empty
 #' @export
-adhesion <- function(graph, checks = TRUE) {
+adhesion <- function(
+  graph,
+  ...,
+  checks = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: adhesion, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: adhesion(graph, checks)
+    .old_signature <- function(checks, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn adhesion}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn adhesion}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(checks)) base::list(checks = checks)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(checks)) "checks"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn adhesion} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `adhesion()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  adhesion(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    adhesion(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   adhesion_impl(
     graph = graph,
     checks = checks
@@ -760,6 +913,7 @@ st_cuts <- function(graph, source, target) {
 #' @param graph The input graph. It must be directed.
 #' @param source The ID of the source vertex.
 #' @param target The ID of the target vertex.
+#' @inheritParams rlang::args_dots_empty
 #' @param capacity Numeric vector giving the edge capacities. If this is
 #'   `NULL` and the graph has a `weight` edge attribute, then this
 #'   attribute defines the edge capacities. For forcing unit edge capacities,
@@ -795,7 +949,48 @@ st_cuts <- function(graph, source, target) {
 #' st_min_cuts(g, source = "s", target = "t")
 #' @family flow
 #' @export
-st_min_cuts <- function(graph, source, target, capacity = NULL) {
+st_min_cuts <- function(
+  graph,
+  source,
+  target,
+  ...,
+  capacity = NULL
+) {
+  # BEGIN GENERATED ARG_HANDLE: st_min_cuts, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: st_min_cuts(graph, source, target, capacity)
+    .old_signature <- function(capacity, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn st_min_cuts}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn st_min_cuts}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(capacity)) base::list(capacity = capacity)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(capacity)) "capacity"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn st_min_cuts} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `st_min_cuts()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  st_min_cuts(", base::paste(base::c("graph", "source", "target", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    st_min_cuts(", base::paste(base::c("graph", "source", "target", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   all_st_mincuts_impl(
     graph = graph,
     source = source,
@@ -829,6 +1024,7 @@ st_min_cuts <- function(graph, source, target, capacity = NULL) {
 #'   be collected and returned as part of the result.
 #' @param root The ID of the root (or source) vertex, this will be the root of
 #'   the tree.
+#' @inheritParams rlang::args_dots_empty
 #' @param mode Constant, must be \sQuote{`in`} or \sQuote{`out`}. If
 #'   it is \sQuote{`in`}, then all directions are considered as opposite to
 #'   the original one in the input graph.
@@ -867,7 +1063,47 @@ st_min_cuts <- function(graph, source, target, capacity = NULL) {
 #' plot(dtree$domtree, layout = layout, vertex.label = V(dtree$domtree)$name)
 #' @family flow
 #' @export
-dominator_tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
+dominator_tree <- function(
+  graph,
+  root,
+  ...,
+  mode = c("out", "in", "all", "total")
+) {
+  # BEGIN GENERATED ARG_HANDLE: dominator_tree, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: dominator_tree(graph, root, mode)
+    .old_signature <- function(mode, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn dominator_tree}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn dominator_tree}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(mode)) base::list(mode = mode)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(mode)) "mode"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn dominator_tree} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `dominator_tree()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  dominator_tree(", base::paste(base::c("graph", "root", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    dominator_tree(", base::paste(base::c("graph", "root", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   ensure_igraph(graph)
 
@@ -968,6 +1204,7 @@ min_st_separators <- function(graph) {
 #' @param graph The input graph.
 #' @param source The ID of the source vertex.
 #' @param target The ID of the target vertex (sometimes also called sink).
+#' @inheritParams rlang::args_dots_empty
 #' @param capacity Vector giving the capacity of the edges. If this is
 #'   `NULL` (the default) then the `capacity` edge attribute is used.
 #'   Note that the `weight` edge attribute is not used by this function.
@@ -1014,7 +1251,48 @@ min_st_separators <- function(graph) {
 #' max_flow(g1, source = V(g1)["1"], target = V(g1)["2"])
 #' @family flow
 #' @export
-max_flow <- function(graph, source, target, capacity = NULL) {
+max_flow <- function(
+  graph,
+  source,
+  target,
+  ...,
+  capacity = NULL
+) {
+  # BEGIN GENERATED ARG_HANDLE: max_flow, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: max_flow(graph, source, target, capacity)
+    .old_signature <- function(capacity, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn max_flow}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn max_flow}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(capacity)) base::list(capacity = capacity)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(capacity)) "capacity"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn max_flow} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `max_flow()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  max_flow(", base::paste(base::c("graph", "source", "target", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    max_flow(", base::paste(base::c("graph", "source", "target", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   maxflow_impl(
     graph = graph,
     source = source,
@@ -1036,7 +1314,7 @@ max_flow <- function(graph, source, target, capacity = NULL) {
 #'   ignored.
 #' @param candidate A numeric vector giving the vertex IDs of the candidate
 #'   separator.
-#' @return A logical scalar, whether the supplied vertex set is a (minimal)
+#' @return A Logical, whether the supplied vertex set is a (minimal)
 #'   vertex separator or not.
 #'   lists all vertex separator of minimum size.
 #' @family flow
@@ -1069,7 +1347,7 @@ is_separator <- function(graph, candidate) {
 #'   ignored.
 #' @param candidate A numeric vector giving the vertex IDs of the candidate
 #'   separator.
-#' @return A logical scalar, whether the supplied vertex set is a (minimal)
+#' @return A Logical, whether the supplied vertex set is a (minimal)
 #'   vertex separator or not.
 #' @examples
 #' # The graph from the Moody-White paper

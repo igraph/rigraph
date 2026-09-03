@@ -4,13 +4,14 @@
 \alias{plot_dendrogram.igraphHRG}
 \title{HRG dendrogram plot}
 \usage{
-\method{plot_dendrogram}{igraphHRG}(x, mode = igraph_opt("dend.plot.type"), ...)
+\method{plot_dendrogram}{igraphHRG}(x, mode = NULL, ...)
 }
 \arguments{
 \item{x}{An \code{igraphHRG}, a hierarchical random graph, as returned by
 the \code{\link[=fit_hrg]{fit_hrg()}} function.}
 
-\item{mode}{Which dendrogram plotting function to use. See details below.}
+\item{mode}{Which dendrogram plotting function to use. See details below.
+The default \code{NULL} uses the \code{dend.plot.type} igraph option.}
 
 \item{\dots}{Additional arguments to supply to the dendrogram plotting
 function.}

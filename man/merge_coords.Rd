@@ -5,24 +5,25 @@
 \alias{layout_components}
 \title{Merging graph layouts}
 \usage{
-merge_coords(graphs, layouts, method = "dla")
+merge_coords(graphs, layouts, ..., method = "dla")
 
-layout_components(graph, layout = layout_with_kk, ...)
+layout_components(graph, layout = NULL, ...)
 }
 \arguments{
 \item{graphs}{A list of graph objects.}
 
 \item{layouts}{A list of two-column matrices.}
 
+\item{\dots}{Additional arguments to pass to the \code{layout} layout
+function.}
+
 \item{method}{Character constant giving the method to use. Right now only
 \code{dla} is implemented.}
 
 \item{graph}{The input graph.}
 
-\item{layout}{A function object, the layout function to use.}
-
-\item{\dots}{Additional arguments to pass to the \code{layout} layout
-function.}
+\item{layout}{A function object, the layout function to use. The default
+\code{NULL} uses \code{layout_with_kk}.}
 }
 \value{
 A matrix with two columns and as many lines as the total number of

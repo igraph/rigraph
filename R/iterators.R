@@ -47,10 +47,6 @@ get_es_graph <- get_vs_graph <- function(seq) {
   }
 }
 
-has_es_graph <- has_vs_graph <- function(seq) {
-  !is.null(weak_ref_key(attr(seq, "env")))
-}
-
 get_es_graph_id <- get_vs_graph_id <- function(seq) {
   new_g <- attr(seq, "graph")
   if (!is.null(new_g)) {
@@ -79,10 +75,51 @@ get_es_graph_id <- get_vs_graph_id <- function(seq) {
 #' the attributes of the two graphs are allowed to be different.
 #'
 #' @param g1,g2 The two graphs
+#' @inheritParams rlang::args_dots_empty
 #' @param attrs Whether to compare the attributes of the graphs
 #' @return Logical scalar
 #' @export
-identical_graphs <- function(g1, g2, attrs = TRUE) {
+identical_graphs <- function(
+  g1,
+  g2,
+  ...,
+  attrs = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: identical_graphs, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: identical_graphs(g1, g2, attrs)
+    .old_signature <- function(attrs, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn identical_graphs}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn identical_graphs}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(attrs)) base::list(attrs = attrs)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(attrs)) "attrs"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn identical_graphs} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `identical_graphs()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  identical_graphs(", base::paste(base::c("g1", "g2", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    identical_graphs(", base::paste(base::c("g1", "g2", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   stopifnot(is_igraph(g1), is_igraph(g2))
   .Call(Rx_igraph_identical_graphs, g1, g2, as.logical(attrs))
 }
@@ -325,6 +362,7 @@ unsafe_create_es <- function(graph, idx, es = NULL) {
 #' edges in the sequence. See [$.igraph.es()] for details.
 #'
 #' @param graph The graph.
+#' @inheritParams rlang::args_dots_empty
 #' @param P A list of vertices to select edges via pairs of vertices.
 #'   The first and second vertices select the first edge, the third
 #'   and fourth the second, etc. Alternatively, a two-column matrix or
@@ -349,7 +387,52 @@ unsafe_create_es <- function(graph, idx, es = NULL) {
 #' g2 <- make_ring(10) %>%
 #'   set_vertex_attr("name", value = letters[1:10])
 #' E(g2)
-E <- function(graph, P = NULL, path = NULL, directed = TRUE) {
+E <- function(
+  graph,
+  ...,
+  P = NULL,
+  path = NULL,
+  directed = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: E, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: E(graph, P, path, directed)
+    .old_signature <- function(P, path, directed, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn E}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn E}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(P)) base::list(P = P),
+        if (!base::missing(path)) base::list(path = path),
+        if (!base::missing(directed)) base::list(directed = directed)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(P)) "P",
+        if (!base::missing(path)) "path",
+        if (!base::missing(directed)) "directed"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn E} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `E()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  E(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    E(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   update_es_ref(graph)

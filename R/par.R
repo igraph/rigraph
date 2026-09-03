@@ -61,6 +61,7 @@ getIgraphOpt <- function(x, default = NULL) {
   "print.edge.attributes" = FALSE,
   "print.graph.attributes" = FALSE,
   "verbose" = FALSE,
+  "graph.attr.comb" = "rename",
   "vertex.attr.comb" = list(name = "concat", "ignore"),
   "edge.attr.comb" = list(weight = "sum", name = "concat", "ignore"),
   "sparsematrices" = TRUE,
@@ -141,6 +142,13 @@ igraph.pars.callbacks <- list("verbose" = igraph.pars.set.verbose)
 #'     \item{edge.attr.comb}{
 #'       Specifies what to do with the edge attributes if the graph is modified.
 #'       The default value is `list(weight="sum", name="concat", "ignore")`.
+#'       See [attribute.combination()] for details on this.
+#'     }
+#'     \item{graph.attr.comb}{
+#'       Specifies what to do with the graph attributes when graphs are
+#'       combined, e.g. via [union()], [intersection()], [disjoint_union()]
+#'       or [compose()]. The default value is `"rename"`, which resolves any
+#'       name clash by appending `_1`, `_2`, ... suffixes.
 #'       See [attribute.combination()] for details on this.
 #'     }
 #'     \item{print.edge.attributes}{
@@ -225,7 +233,7 @@ igraph_options <- function(...) {
 }
 
 igraph_i_options <- function(..., .in = parent.frame()) {
-  if (nargs() == 0) {
+  if (...length() == 0) {
     return(get_all_options())
   }
 
@@ -287,8 +295,48 @@ get_all_options <- function() {
 }
 
 #' @rdname igraph_options
+#' @inheritParams rlang::args_dots_empty
 #' @export
-igraph_opt <- function(x, default = NULL) {
+igraph_opt <- function(
+  x,
+  ...,
+  default = NULL
+) {
+  # BEGIN GENERATED ARG_HANDLE: igraph_opt, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: igraph_opt(x, default)
+    .old_signature <- function(default, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn igraph_opt}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn igraph_opt}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(default)) base::list(default = default)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(default)) "default"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn igraph_opt} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `igraph_opt()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  igraph_opt(", base::paste(base::c("x", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    igraph_opt(", base::paste(base::c("x", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   if (missing(default)) {
     get_config(paste0("igraph::", x), .igraph.pars[[x]])
   } else {

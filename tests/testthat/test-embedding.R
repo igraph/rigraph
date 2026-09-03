@@ -1,24 +1,7 @@
-standardize_eigen_signs <- function(x) {
-  x <- zapsmall(x)
-  apply(x, 2, function(col) {
-    if (any(col < 0) && col[which(col != 0)[1]] < 0) {
-      -col
-    } else {
-      col
-    }
-  })
-}
-
-order_by_magnitude <- function(x) {
-  order(abs(x), sign(x), decreasing = TRUE)
-}
-
-sort_by_magnitude <- function(x) {
-  x[order_by_magnitude(x)]
-}
+# Helper functions used here live in helper-test-functions.R.
 
 test_that("embed_adjacency_matrix -- Undirected, unweighted case works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g <- sample_gnm(10, 15, directed = FALSE)
 
   no <- 7
@@ -104,7 +87,7 @@ test_that("embed_adjacency_matrix -- Undirected, unweighted case works", {
 })
 
 test_that("embed_adjacency_matrix -- Undirected, weighted case works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g <- sample_gnm(10, 20, directed = FALSE)
   E(g)$weight <- sample(1:5, ecount(g), replace = TRUE)
 
@@ -189,7 +172,7 @@ test_that("embed_adjacency_matrix -- Undirected, weighted case works", {
 })
 
 test_that("embed_adjacency_matrix -- Directed, unweighted case works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g <- sample_gnm(10, 20, directed = TRUE)
 
   no <- 3
@@ -289,7 +272,7 @@ test_that("embed_adjacency_matrix -- Directed, unweighted case works", {
 })
 
 test_that("embed_adjacency_matrix -- Directed, weighted case works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g <- sample_gnm(10, 20, directed = TRUE)
   E(g)$weight <- sample(1:5, ecount(g), replace = TRUE)
 
@@ -384,7 +367,7 @@ test_that("embed_adjacency_matrix -- Directed, weighted case works", {
 })
 
 test_that("embed_adjacency_matrix -- Issue #50 is resolved", {
-  withr::local_seed(12345)
+  igraph_local_seed(12345)
 
   g <- sample_gnp(15, 0.4)
   w <- -log(runif(ecount(g)))
@@ -397,7 +380,7 @@ test_that("embed_adjacency_matrix -- Issue #50 is resolved", {
 })
 
 test_that("embed_adjacency_matrix -- Issue #51 is resolved", {
-  withr::local_seed(12345)
+  igraph_local_seed(12345)
 
   pref.matrix <- diag(0.2, 2) + 0.2
   block.sizes <- c(800, 800)
@@ -411,7 +394,7 @@ test_that("embed_adjacency_matrix -- Issue #51 is resolved", {
 })
 
 test_that("embed_laplacian_matrix -- Undirected, unweighted, D-A case works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g <- sample_gnm(10, 20, directed = FALSE)
 
   no <- 3
@@ -510,7 +493,7 @@ test_that("embed_laplacian_matrix -- Undirected, unweighted, D-A case works", {
 })
 
 test_that("embed_laplacian_matrix -- Undirected, unweighted, DAD case works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g <- sample_gnm(10, 20, directed = FALSE)
 
   no <- 3
@@ -609,7 +592,7 @@ test_that("embed_laplacian_matrix -- Undirected, unweighted, DAD case works", {
 })
 
 test_that("embed_laplacian_matrix -- Undirected, unweighted, I-DAD case works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g <- sample_gnm(10, 20, directed = FALSE)
 
   no <- 3
@@ -708,7 +691,7 @@ test_that("embed_laplacian_matrix -- Undirected, unweighted, I-DAD case works", 
 })
 
 test_that("embed_laplacian_matrix -- Undirected, weighted, D-A case works", {
-  withr::local_seed(42 * 42)
+  igraph_local_seed(42 * 42)
   g <- sample_gnm(10, 20, directed = FALSE)
   E(g)$weight <- sample(1:5, ecount(g), replace = TRUE)
 
@@ -805,7 +788,7 @@ test_that("embed_laplacian_matrix -- Undirected, weighted, D-A case works", {
 })
 
 test_that("embed_laplacian_matrix -- Undirected, unweighted, DAD case works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   g <- sample_gnm(10, 20, directed = FALSE)
 
@@ -905,7 +888,7 @@ test_that("embed_laplacian_matrix -- Undirected, unweighted, DAD case works", {
 })
 
 test_that("embed_laplacian_matrix -- Undirected, unweighted, I-DAD case works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   g <- sample_gnm(10, 20, directed = FALSE)
 
@@ -1005,7 +988,7 @@ test_that("embed_laplacian_matrix -- Undirected, unweighted, I-DAD case works", 
 })
 
 test_that("embed_laplacian_matrix -- Directed, unweighted, OAP case works", {
-  withr::local_seed(42 * 42)
+  igraph_local_seed(42 * 42)
 
   g <- sample_gnm(10, 30, directed = TRUE)
 
@@ -1126,7 +1109,7 @@ test_that("embed_laplacian_matrix -- Directed, unweighted, OAP case works", {
 })
 
 test_that("embed_laplacian_matrix -- Directed, weighted case works", {
-  withr::local_seed(42 * 42)
+  igraph_local_seed(42 * 42)
 
   g <- sample_gnm(10, 30, directed = TRUE)
   E(g)$weight <- sample(1:5, ecount(g), replace = TRUE)
@@ -1247,7 +1230,7 @@ test_that("embed_laplacian_matrix -- Directed, weighted case works", {
 })
 
 test_that("Sampling from a Dirichlet distribution works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   samp <- sample_dirichlet(10000, alpha = c(1, 1, 1))
   expect_equal(dim(samp), c(3, 10000))
   expect_equal(colSums(samp), rep(1, 10000))
@@ -1274,7 +1257,7 @@ test_that("Sampling from a Dirichlet distribution works", {
 })
 
 test_that("Sampling sphere surface works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   s1 <- sample_sphere_surface(4, 100, positive = FALSE)
   expect_equal(colSums(s1^2), rep(1, 100))
 
@@ -1287,7 +1270,7 @@ test_that("Sampling sphere surface works", {
 })
 
 test_that("Sampling sphere volume works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   s1 <- sample_sphere_volume(4, 10000, positive = FALSE)
   expect_true(all(colSums(s1^2) < 1))
 
@@ -1300,7 +1283,7 @@ test_that("Sampling sphere volume works", {
 })
 
 test_that("dimensionality selection works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   karate <- make_graph("zachary")
   ev <- eigen(as_adjacency_matrix(karate), only.values = TRUE)$values
@@ -1327,4 +1310,106 @@ test_that("dimensionality selection works", {
 
   x <- c(rnorm(99, mean = 0, sd = 1), 10)
   expect_equal(dim_select(x), 99)
+})
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+test_that("embed_adjacency_matrix() covers keyword-only tail arguments", {
+  igraph_local_seed(42)
+  g <- sample_gnm(10, 20, directed = FALSE)
+  w <- runif(ecount(g), 1, 2)
+  opts <- arpack_defaults()
+  opts$maxiter <- 5000L
+
+  emb <- embed_adjacency_matrix(
+    g,
+    no = 3,
+    weights = w,
+    which = "lm",
+    scaled = FALSE,
+    cvec = rep(0, vcount(g)),
+    options = opts
+  )
+  expect_equal(dim(emb$X), c(vcount(g), 3))
+  expect_length(emb$D, 3)
+  # `options` is threaded through to ARPACK and echoed back in the result.
+  expect_equal(as.numeric(emb$options$maxiter), 5000)
+})
+
+test_that("embed_adjacency_matrix() recovers a legacy positional argument", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  igraph_local_seed(42)
+  g <- sample_gnm(10, 20, directed = FALSE)
+  w <- runif(ecount(g), 1, 2)
+  # Pin `cvec` so its `weights`-dependent default cannot diverge between the
+  # positional and named forms; `weights` is the recovered positional argument.
+  cvec <- rep(0, vcount(g))
+
+  igraph_local_seed(1)
+  lifecycle::expect_deprecated(
+    res <- embed_adjacency_matrix(g, 3, w, cvec = cvec)
+  )
+  igraph_local_seed(1)
+  expect_identical(res, embed_adjacency_matrix(g, 3, weights = w, cvec = cvec))
+})
+
+test_that("embed_laplacian_matrix() covers keyword-only tail arguments", {
+  igraph_local_seed(42)
+  g <- sample_gnm(10, 20, directed = FALSE)
+  w <- runif(ecount(g), 1, 2)
+  opts <- arpack_defaults()
+  opts$maxiter <- 5000L
+
+  emb <- embed_laplacian_matrix(
+    g,
+    no = 3,
+    weights = w,
+    which = "lm",
+    type = "DAD",
+    scaled = FALSE,
+    options = opts
+  )
+  expect_equal(dim(emb$X), c(vcount(g), 3))
+  expect_length(emb$D, 3)
+  expect_equal(as.numeric(emb$options$maxiter), 5000)
+})
+
+test_that("embed_laplacian_matrix() recovers a legacy positional argument", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  igraph_local_seed(42)
+  g <- sample_gnm(10, 20, directed = FALSE)
+  w <- runif(ecount(g), 1, 2)
+
+  igraph_local_seed(1)
+  lifecycle::expect_deprecated(
+    res <- embed_laplacian_matrix(g, 3, w)
+  )
+  igraph_local_seed(1)
+  expect_identical(res, embed_laplacian_matrix(g, 3, weights = w))
+})
+
+test_that("sample_sphere_surface() recovers a legacy positional argument", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+
+  igraph_local_seed(1)
+  lifecycle::expect_deprecated(
+    res <- sample_sphere_surface(3, 20, 2)
+  )
+  igraph_local_seed(1)
+  expect_identical(res, sample_sphere_surface(3, 20, radius = 2))
+  # The recovered `radius` takes visible effect: every column has norm 2.
+  expect_equal(sqrt(colSums(res^2)), rep(2, 20))
+})
+
+test_that("sample_sphere_volume() recovers a legacy positional argument", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+
+  igraph_local_seed(1)
+  lifecycle::expect_deprecated(
+    res <- sample_sphere_volume(3, 20, 2)
+  )
+  igraph_local_seed(1)
+  expect_identical(res, sample_sphere_volume(3, 20, radius = 2))
+  # The recovered `radius` bounds the sampled vectors inside the sphere.
+  expect_true(all(sqrt(colSums(res^2)) <= 2))
 })

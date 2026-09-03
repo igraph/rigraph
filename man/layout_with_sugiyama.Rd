@@ -7,6 +7,7 @@
 \usage{
 layout_with_sugiyama(
   graph,
+  ...,
   layers = NULL,
   hgap = 1,
   vgap = 1,
@@ -20,9 +21,11 @@ with_sugiyama(...)
 \arguments{
 \item{graph}{The input graph.}
 
-\item{layers}{A numeric vector or \code{NULL}. If not \code{NULL}, then it
-should specify the layer index of the vertices. Layers are numbered from
-one. If \code{NULL}, then igraph calculates the layers automatically.}
+\item{...}{Passed to \code{layout_with_sugiyama()}.}
+
+\item{layers}{A numeric vector of the layer indices of the vertices.
+Layers are numbered from one.
+Default: \code{NULL}, igraph calculates the layers automatically.}
 
 \item{hgap}{Real scalar, the minimum horizontal gap between vertices in the
 same layer.}
@@ -45,8 +48,6 @@ graph. \sQuote{default} keeps the \sQuote{size}, \sQuote{size2},
 \sQuote{arrow.mode} and \sQuote{arrow.size} edge attributes. \sQuote{all}
 keep all graph, vertex and edge attributes, \sQuote{none} keeps none of
 them.}
-
-\item{...}{Passed to \code{layout_with_sugiyama()}.}
 }
 \value{
 A list with the components:

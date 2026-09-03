@@ -20,8 +20,13 @@
 ###################################################################
 
 #' @rdname sir
+#' @inheritParams rlang::args_dots_empty
 #' @export
-time_bins <- function(x, middle = TRUE) {
+time_bins <- function(
+  x,
+  ...,
+  middle = TRUE
+) {
   UseMethod("time_bins")
 }
 
@@ -29,7 +34,42 @@ time_bins <- function(x, middle = TRUE) {
 #' @rdname sir
 #' @export
 #' @importFrom stats IQR
-time_bins.sir <- function(x, middle = TRUE) {
+time_bins.sir <- function(x, ..., middle = TRUE) {
+  # BEGIN GENERATED ARG_HANDLE: time_bins, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: time_bins(x, middle)
+    .old_signature <- function(middle, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn time_bins}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn time_bins}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(middle)) base::list(middle = middle)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(middle)) "middle"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn time_bins} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `time_bins()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  time_bins(", base::paste(base::c("x", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    time_bins(", base::paste(base::c("x", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   sir <- x
 
   big.time <- unlist(sapply(sir, "[[", "times"))
@@ -105,7 +145,7 @@ quantile.sir <- function(x, comp = c("NI", "NS", "NR"), prob, ...) {
 #'   function.
 #' @param comp Character scalar, which component to plot. Either \sQuote{NI}
 #'   (infected, default), \sQuote{NS} (susceptible) or \sQuote{NR} (recovered).
-#' @param median Logical scalar, whether to plot the (binned) median.
+#' @param median Logical, whether to plot the (binned) median.
 #' @param quantiles A vector of (binned) quantiles to plot.
 #' @param color Color of the individual simulation curves.
 #' @param median_color Color of the median curve.
@@ -175,7 +215,6 @@ plot.sir <- function(
   }
   quantile_color <- rep(quantile_color, length.out = length(quantiles))
 
-  ns <- length(sir)
   xlim <- xlim %||% c(0, max(sapply(sir, function(x) max(x$times))))
   ylim <- ylim %||% c(0, max(sapply(sir, function(x) max(x[[comp]]))))
 

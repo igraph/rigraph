@@ -6,21 +6,17 @@
 \alias{graphlets}
 \title{Graphlet decomposition of a graph}
 \usage{
-graphlet_basis(graph, weights = NULL)
+graphlet_basis(graph, ..., weights = NULL)
 
-graphlet_proj(
-  graph,
-  weights = NULL,
-  cliques,
-  niter = 1000,
-  Mu = rep(1, length(cliques))
-)
+graphlet_proj(graph, ..., weights = NULL, cliques, niter = 1000, Mu = NULL)
 
-graphlets(graph, weights = NULL, niter = 1000)
+graphlets(graph, ..., weights = NULL, niter = 1000)
 }
 \arguments{
 \item{graph}{The input graph, edge directions are ignored. Only simple graph
 (i.e. graphs without self-loops and multiple edges) are supported.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{Edge weights. If the graph has a \code{weight} edge attribute
 and this argument is \code{NULL} (the default), then the \code{weight} edge
@@ -31,7 +27,8 @@ projection.}
 
 \item{niter}{Integer scalar, the number of iterations to perform.}
 
-\item{Mu}{Starting weights for the projection.}
+\item{Mu}{Starting weights for the projection. The default \code{NULL} uses a
+weight of one for each clique.}
 }
 \value{
 \code{graphlets()} returns a list with two members:

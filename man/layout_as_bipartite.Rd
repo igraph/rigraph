@@ -5,7 +5,14 @@
 \alias{as_bipartite}
 \title{Simple two-row layout for bipartite graphs}
 \usage{
-layout_as_bipartite(graph, types = NULL, hgap = 1, vgap = 1, maxiter = 100)
+layout_as_bipartite(
+  graph,
+  types = NULL,
+  ...,
+  hgap = 1,
+  vgap = 1,
+  maxiter = 100
+)
 
 as_bipartite(...)
 }
@@ -18,6 +25,8 @@ given.}
 \code{NULL} (the default), then the \sQuote{\code{type}} vertex attribute is
 used.}
 
+\item{...}{Arguments to pass to \code{layout_as_bipartite()}.}
+
 \item{hgap}{Real scalar, the minimum horizontal gap between vertices in the
 same layer.}
 
@@ -26,8 +35,6 @@ same layer.}
 \item{maxiter}{Integer scalar, the maximum number of iterations in the
 crossing minimization stage. 100 is a reasonable default; if you feel that
 you have too many edge crossings, increase this.}
-
-\item{...}{Arguments to pass to \code{layout_as_bipartite()}.}
 }
 \value{
 A matrix with two columns and as many rows as the number of vertices

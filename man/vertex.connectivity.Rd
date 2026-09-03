@@ -13,7 +13,7 @@ can be \code{NULL}, see details below.}
 \item{target}{The ID of the target vertex, for \code{vertex_connectivity()} it
 can be \code{NULL}, see details below.}
 
-\item{checks}{Logical constant. Whether to check that the graph is connected
+\item{checks}{Logical. Whether to check that the graph is connected
 and also the degree of the vertices. If the graph is not (strongly)
 connected then the connectivity is obviously zero. Otherwise if the minimum
 degree is one then the vertex connectivity is also one. It is a good idea to

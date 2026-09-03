@@ -8,6 +8,7 @@
 bipartite_projection(
   graph,
   types = NULL,
+  ...,
   multiplicity = TRUE,
   probe1 = NULL,
   which = c("both", "true", "false"),
@@ -24,6 +25,8 @@ ignored during the computation.}
 \sQuote{\code{type}} vertex attribute. You must supply this argument if the
 graph has no \sQuote{\code{type}} vertex attribute.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{multiplicity}{If \code{TRUE}, then igraph keeps the multiplicity of
 the edges as an edge attribute called \sQuote{weight}.
 E.g. if there is an A-C-B and also an A-D-B
@@ -39,7 +42,7 @@ one projection is requested in argument \code{which}.}
 \item{which}{A character scalar to specify which projection(s) to calculate.
 The default is to calculate both.}
 
-\item{remove.type}{Logical scalar, whether to remove the \code{type} vertex
+\item{remove.type}{Logical, whether to remove the \code{type} vertex
 attribute from the projections. This makes sense because these graphs are
 not bipartite any more. However if you want to combine them with each other
 (or other bipartite graphs), then it is worth keeping this attribute. By

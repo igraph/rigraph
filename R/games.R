@@ -820,6 +820,7 @@ aging.prefatt.game <- function(
 #'   defaults to 1.
 #'   This argument is only used if both `out.dist` and `out.seq` are omitted
 #'   or NULL.
+#' @inheritParams rlang::args_dots_empty
 #' @param out.dist Numeric vector, the distribution of the number of edges to
 #'   add in each time step. This argument is only used if the `out.seq`
 #'   argument is omitted or NULL.
@@ -869,6 +870,7 @@ sample_pa <- function(
   n,
   power = 1,
   m = NULL,
+  ...,
   out.dist = NULL,
   out.seq = NULL,
   out.pref = FALSE,
@@ -881,6 +883,55 @@ sample_pa <- function(
   ),
   start.graph = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_pa, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("o", "ou", "out", "out."))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn sample_pa}.")
+    # Pre-3.0.0 signature: sample_pa(n, power, m, out.dist, out.seq, out.pref, zero.appeal, directed, algorithm, start.graph)
+    .old_signature <- function(out.dist, out.seq, out.pref, zero.appeal, directed, algorithm, start.graph, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn sample_pa}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_pa}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(out.dist)) base::list(out.dist = out.dist),
+        if (!base::missing(out.seq)) base::list(out.seq = out.seq),
+        if (!base::missing(out.pref)) base::list(out.pref = out.pref),
+        if (!base::missing(zero.appeal)) base::list(zero.appeal = zero.appeal),
+        if (!base::missing(directed)) base::list(directed = directed),
+        if (!base::missing(algorithm)) base::list(algorithm = algorithm),
+        if (!base::missing(start.graph)) base::list(start.graph = start.graph)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(out.dist)) "out.dist",
+        if (!base::missing(out.seq)) "out.seq",
+        if (!base::missing(out.pref)) "out.pref",
+        if (!base::missing(zero.appeal)) "zero.appeal",
+        if (!base::missing(directed)) "directed",
+        if (!base::missing(algorithm)) "algorithm",
+        if (!base::missing(start.graph)) "start.graph"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_pa} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `sample_pa()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  sample_pa(", base::paste(base::c("n", "power", "m", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_pa(", base::paste(base::c("n", "power", "m", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   if (!is.null(start.graph) && !is_igraph(start.graph)) {
     cli::cli_abort(
       "{.arg start.graph} must be an {.cls igraph} object, not {.obj_type_friendly {start.graph}}."
@@ -963,11 +1014,13 @@ sample_pa <- function(
 }
 
 #' @rdname sample_pa
+#' @inheritParams rlang::args_dots_empty
 #' @export
 pa <- function(
   n,
   power = 1,
   m = NULL,
+  ...,
   out.dist = NULL,
   out.seq = NULL,
   out.pref = FALSE,
@@ -976,6 +1029,55 @@ pa <- function(
   algorithm = c("psumtree", "psumtree-multiple", "bag"),
   start.graph = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: pa, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("o", "ou", "out", "out."))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn pa}.")
+    # Pre-3.0.0 signature: pa(n, power, m, out.dist, out.seq, out.pref, zero.appeal, directed, algorithm, start.graph)
+    .old_signature <- function(out.dist, out.seq, out.pref, zero.appeal, directed, algorithm, start.graph, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn pa}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn pa}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(out.dist)) base::list(out.dist = out.dist),
+        if (!base::missing(out.seq)) base::list(out.seq = out.seq),
+        if (!base::missing(out.pref)) base::list(out.pref = out.pref),
+        if (!base::missing(zero.appeal)) base::list(zero.appeal = zero.appeal),
+        if (!base::missing(directed)) base::list(directed = directed),
+        if (!base::missing(algorithm)) base::list(algorithm = algorithm),
+        if (!base::missing(start.graph)) base::list(start.graph = start.graph)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(out.dist)) "out.dist",
+        if (!base::missing(out.seq)) "out.seq",
+        if (!base::missing(out.pref)) "out.pref",
+        if (!base::missing(zero.appeal)) "zero.appeal",
+        if (!base::missing(directed)) "directed",
+        if (!base::missing(algorithm)) "algorithm",
+        if (!base::missing(start.graph)) "start.graph"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn pa} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `pa()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  pa(", base::paste(base::c("n", "power", "m", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    pa(", base::paste(base::c("n", "power", "m", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   constructor_spec(
     sample_pa,
     n,
@@ -1010,6 +1112,7 @@ pa <- function(
 #' @param n The number of vertices in the graph.
 #' @param p The probability for drawing an edge between two
 #'   arbitrary vertices (\eqn{G(n,p)} graph).
+#' @inheritParams rlang::args_dots_empty
 #' @param directed Logical, whether the graph will be directed, defaults to
 #'   `FALSE`.
 #' @param loops Logical, whether to add loop edges, defaults to `FALSE`.
@@ -1029,7 +1132,50 @@ pa <- function(
 #'
 #' # Pick a simple graph on 6 vertices uniformly at random
 #' plot(sample_gnp(6, 0.5))
-sample_gnp <- function(n, p, directed = FALSE, loops = FALSE) {
+sample_gnp <- function(
+  n,
+  p,
+  ...,
+  directed = FALSE,
+  loops = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: sample_gnp, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: sample_gnp(n, p, directed, loops)
+    .old_signature <- function(directed, loops, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn sample_gnp}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_gnp}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(directed)) base::list(directed = directed),
+        if (!base::missing(loops)) base::list(loops = loops)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(directed)) "directed",
+        if (!base::missing(loops)) "loops"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_gnp} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `sample_gnp()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  sample_gnp(", base::paste(base::c("n", "p", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_gnp(", base::paste(base::c("n", "p", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   type <- "gnp"
 
   res <- erdos_renyi_game_gnp_impl(
@@ -1049,8 +1195,52 @@ sample_gnp <- function(n, p, directed = FALSE, loops = FALSE) {
 }
 
 #' @rdname sample_gnp
+#' @inheritParams rlang::args_dots_empty
 #' @export
-gnp <- function(n, p, directed = FALSE, loops = FALSE) {
+gnp <- function(
+  n,
+  p,
+  ...,
+  directed = FALSE,
+  loops = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: gnp, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: gnp(n, p, directed, loops)
+    .old_signature <- function(directed, loops, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn gnp}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn gnp}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(directed)) base::list(directed = directed),
+        if (!base::missing(loops)) base::list(loops = loops)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(directed)) "directed",
+        if (!base::missing(loops)) "loops"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn gnp} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `gnp()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  gnp(", base::paste(base::c("n", "p", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    gnp(", base::paste(base::c("n", "p", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   constructor_spec(sample_gnp, n = n, p = p, directed = directed, loops = loops)
 }
 
@@ -1067,6 +1257,7 @@ gnp <- function(n, p, directed = FALSE, loops = FALSE) {
 #' @param n The number of vertices in the graph.
 #' @param m The number of edges in the graph.
 #' @inheritParams sample_gnp
+#' @inheritParams rlang::args_dots_empty
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Erdős, P. and Rényi, A., On random graphs, *Publicationes
@@ -1078,7 +1269,50 @@ gnp <- function(n, p, directed = FALSE, loops = FALSE) {
 #'
 #' g <- sample_gnm(1000, 1000)
 #' degree_distribution(g)
-sample_gnm <- function(n, m, directed = FALSE, loops = FALSE) {
+sample_gnm <- function(
+  n,
+  m,
+  ...,
+  directed = FALSE,
+  loops = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: sample_gnm, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: sample_gnm(n, m, directed, loops)
+    .old_signature <- function(directed, loops, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn sample_gnm}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_gnm}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(directed)) base::list(directed = directed),
+        if (!base::missing(loops)) base::list(loops = loops)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(directed)) "directed",
+        if (!base::missing(loops)) "loops"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_gnm} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `sample_gnm()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  sample_gnm(", base::paste(base::c("n", "m", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_gnm(", base::paste(base::c("n", "m", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   type <- "gnm"
 
   res <- erdos_renyi_game_gnm_impl(
@@ -1098,8 +1332,52 @@ sample_gnm <- function(n, m, directed = FALSE, loops = FALSE) {
 }
 
 #' @rdname sample_gnm
+#' @inheritParams rlang::args_dots_empty
 #' @export
-gnm <- function(n, m, directed = FALSE, loops = FALSE) {
+gnm <- function(
+  n,
+  m,
+  ...,
+  directed = FALSE,
+  loops = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: gnm, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: gnm(n, m, directed, loops)
+    .old_signature <- function(directed, loops, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn gnm}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn gnm}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(directed)) base::list(directed = directed),
+        if (!base::missing(loops)) base::list(loops = loops)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(directed)) "directed",
+        if (!base::missing(loops)) "loops"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn gnm} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `gnm()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  gnm(", base::paste(base::c("n", "m", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    gnm(", base::paste(base::c("n", "m", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   constructor_spec(sample_gnm, n = n, m = m, directed = directed, loops = loops)
 }
 
@@ -1231,6 +1509,7 @@ random.graph.game <- function(
 #'   `in.deg`.
 #' @param in.deg For directed graph, the in-degree sequence. By default this is
 #'   `NULL` and an undirected graph is created.
+#' @inheritParams rlang::args_dots_empty
 #' @param method Character, the method for generating the graph. See Details.
 #' @return The new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -1352,6 +1631,7 @@ random.graph.game <- function(
 sample_degseq <- function(
   out.deg,
   in.deg = NULL,
+  ...,
   method = c(
     "configuration",
     "vl",
@@ -1360,6 +1640,41 @@ sample_degseq <- function(
     "edge.switching.simple"
   )
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_degseq, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: sample_degseq(out.deg, in.deg, method)
+    .old_signature <- function(method, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn sample_degseq}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_degseq}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(method)) base::list(method = method)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(method)) "method"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_degseq} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `sample_degseq()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  sample_degseq(", base::paste(base::c("out.deg", "in.deg", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_degseq(", base::paste(base::c("out.deg", "in.deg", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   if (missing(method)) {
     method <- method[1]
   }
@@ -1546,15 +1861,16 @@ growing <- function(n, m = 1, ..., directed = TRUE, citation = FALSE) {
 #' @param m The number of edges each new vertex creates (except the very first
 #'   vertex). This argument is used only if both the `out.dist` and
 #'   `out.seq` arguments are NULL.
+#' @inheritParams rlang::args_dots_empty
 #' @param aging.bin The number of bins to use for measuring the age of
 #'   vertices, see details below.
 #' @param out.dist The discrete distribution to generate the number of edges to
 #'   add in each time step if `out.seq` is NULL. See details below.
 #' @param out.seq The number of edges to add in each time step, a vector
 #'   containing as many elements as the number of vertices. See details below.
-#' @param out.pref Logical constant, whether to include edges not initiated by
+#' @param out.pref Logical, whether to include edges not initiated by
 #'   the vertex as a basis of preferential attachment. See details below.
-#' @param directed Logical constant, whether to generate a directed graph. See
+#' @param directed Logical, whether to generate a directed graph. See
 #'   details below.
 #' @param zero.deg.appeal The degree-dependent part of the
 #'   \sQuote{attractiveness} of the vertices with no adjacent edges. See also
@@ -1587,6 +1903,7 @@ sample_pa_age <- function(
   pa.exp,
   aging.exp,
   m = NULL,
+  ...,
   aging.bin = 300,
   out.dist = NULL,
   out.seq = NULL,
@@ -1598,6 +1915,63 @@ sample_pa_age <- function(
   age.coef = 1,
   time.window = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_pa_age, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("a", "ag", "agi", "agin", "aging", "aging."))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn sample_pa_age}.", i = "Spell out the full argument name."))
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "ag", "o", "ou", "out", "out.", "d", "z", "ze", "zer", "zero", "zero."))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn sample_pa_age}.")
+    # Pre-3.0.0 signature: sample_pa_age(n, pa.exp, aging.exp, m, aging.bin, out.dist, out.seq, out.pref, directed, zero.deg.appeal, zero.age.appeal, deg.coef, age.coef, time.window)
+    .old_signature <- function(aging.bin, out.dist, out.seq, out.pref, directed, zero.deg.appeal, zero.age.appeal, deg.coef, age.coef, time.window, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn sample_pa_age}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_pa_age}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(aging.bin)) base::list(aging.bin = aging.bin),
+        if (!base::missing(out.dist)) base::list(out.dist = out.dist),
+        if (!base::missing(out.seq)) base::list(out.seq = out.seq),
+        if (!base::missing(out.pref)) base::list(out.pref = out.pref),
+        if (!base::missing(directed)) base::list(directed = directed),
+        if (!base::missing(zero.deg.appeal)) base::list(zero.deg.appeal = zero.deg.appeal),
+        if (!base::missing(zero.age.appeal)) base::list(zero.age.appeal = zero.age.appeal),
+        if (!base::missing(deg.coef)) base::list(deg.coef = deg.coef),
+        if (!base::missing(age.coef)) base::list(age.coef = age.coef),
+        if (!base::missing(time.window)) base::list(time.window = time.window)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(aging.bin)) "aging.bin",
+        if (!base::missing(out.dist)) "out.dist",
+        if (!base::missing(out.seq)) "out.seq",
+        if (!base::missing(out.pref)) "out.pref",
+        if (!base::missing(directed)) "directed",
+        if (!base::missing(zero.deg.appeal)) "zero.deg.appeal",
+        if (!base::missing(zero.age.appeal)) "zero.age.appeal",
+        if (!base::missing(deg.coef)) "deg.coef",
+        if (!base::missing(age.coef)) "age.coef",
+        if (!base::missing(time.window)) "time.window"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_pa_age} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `sample_pa_age()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  sample_pa_age(", base::paste(base::c("n", "pa.exp", "aging.exp", "m", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_pa_age(", base::paste(base::c("n", "pa.exp", "aging.exp", "m", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   # Checks
   if (!is.null(out.seq) && (!is.null(m) || !is.null(out.dist))) {
     cli::cli_warn(
@@ -1710,12 +2084,14 @@ sample_pa_age <- function(
 }
 
 #' @rdname sample_pa_age
+#' @inheritParams rlang::args_dots_empty
 #' @export
 pa_age <- function(
   n,
   pa.exp,
   aging.exp,
   m = NULL,
+  ...,
   aging.bin = 300,
   out.dist = NULL,
   out.seq = NULL,
@@ -1727,6 +2103,63 @@ pa_age <- function(
   age.coef = 1,
   time.window = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: pa_age, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("a", "ag", "agi", "agin", "aging", "aging."))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn pa_age}.", i = "Spell out the full argument name."))
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "ag", "o", "ou", "out", "out.", "d", "z", "ze", "zer", "zero", "zero."))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn pa_age}.")
+    # Pre-3.0.0 signature: pa_age(n, pa.exp, aging.exp, m, aging.bin, out.dist, out.seq, out.pref, directed, zero.deg.appeal, zero.age.appeal, deg.coef, age.coef, time.window)
+    .old_signature <- function(aging.bin, out.dist, out.seq, out.pref, directed, zero.deg.appeal, zero.age.appeal, deg.coef, age.coef, time.window, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn pa_age}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn pa_age}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(aging.bin)) base::list(aging.bin = aging.bin),
+        if (!base::missing(out.dist)) base::list(out.dist = out.dist),
+        if (!base::missing(out.seq)) base::list(out.seq = out.seq),
+        if (!base::missing(out.pref)) base::list(out.pref = out.pref),
+        if (!base::missing(directed)) base::list(directed = directed),
+        if (!base::missing(zero.deg.appeal)) base::list(zero.deg.appeal = zero.deg.appeal),
+        if (!base::missing(zero.age.appeal)) base::list(zero.age.appeal = zero.age.appeal),
+        if (!base::missing(deg.coef)) base::list(deg.coef = deg.coef),
+        if (!base::missing(age.coef)) base::list(age.coef = age.coef),
+        if (!base::missing(time.window)) base::list(time.window = time.window)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(aging.bin)) "aging.bin",
+        if (!base::missing(out.dist)) "out.dist",
+        if (!base::missing(out.seq)) "out.seq",
+        if (!base::missing(out.pref)) "out.pref",
+        if (!base::missing(directed)) "directed",
+        if (!base::missing(zero.deg.appeal)) "zero.deg.appeal",
+        if (!base::missing(zero.age.appeal)) "zero.age.appeal",
+        if (!base::missing(deg.coef)) "deg.coef",
+        if (!base::missing(age.coef)) "age.coef",
+        if (!base::missing(time.window)) "time.window"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn pa_age} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `pa_age()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  pa_age(", base::paste(base::c("n", "pa.exp", "aging.exp", "m", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    pa_age(", base::paste(base::c("n", "pa.exp", "aging.exp", "m", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   constructor_spec(
     sample_pa_age,
     n,
@@ -1769,12 +2202,14 @@ pa_age <- function(
 #'
 #' @param nodes The number of vertices in the graph.
 #' @param types The number of different vertex types.
+#' @inheritParams rlang::args_dots_empty
 #' @param edge.per.step The number of edges to add to the graph per time step.
 #' @param type.dist The distribution of the vertex types. This is assumed to be
-#'   stationary in time.
+#'   stationary in time. The default `NULL` gives a uniform distribution.
 #' @param pref.matrix A matrix giving the preferences of the given vertex
 #'   types. These should be probabilities, i.e. numbers between zero and one.
-#' @param directed Logical constant, whether to generate directed graphs.
+#'   The default `NULL` sets all preferences to one.
+#' @param directed Logical, whether to generate directed graphs.
 #' @param k The number of trials per time step, see details below.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -1789,11 +2224,62 @@ pa_age <- function(
 sample_traits_callaway <- function(
   nodes,
   types,
+  ...,
   edge.per.step = 1,
-  type.dist = rep(1, types),
-  pref.matrix = matrix(1, types, types),
+  type.dist = NULL,
+  pref.matrix = NULL,
   directed = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_traits_callaway, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("t", "ty", "typ", "type"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn sample_traits_callaway}.", i = "Spell out the full argument name."))
+    # Pre-3.0.0 signature: sample_traits_callaway(nodes, types, edge.per.step, type.dist, pref.matrix, directed)
+    .old_signature <- function(edge.per.step, type.dist, pref.matrix, directed, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn sample_traits_callaway}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_traits_callaway}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(edge.per.step)) base::list(edge.per.step = edge.per.step),
+        if (!base::missing(type.dist)) base::list(type.dist = type.dist),
+        if (!base::missing(pref.matrix)) base::list(pref.matrix = pref.matrix),
+        if (!base::missing(directed)) base::list(directed = directed)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(edge.per.step)) "edge.per.step",
+        if (!base::missing(type.dist)) "type.dist",
+        if (!base::missing(pref.matrix)) "pref.matrix",
+        if (!base::missing(directed)) "directed"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_traits_callaway} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `sample_traits_callaway()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  sample_traits_callaway(", base::paste(base::c("nodes", "types", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_traits_callaway(", base::paste(base::c("nodes", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
+  if (is.null(type.dist)) {
+    type.dist <- rep(1, types)
+  }
+  if (is.null(pref.matrix)) {
+    pref.matrix <- matrix(1, types, types)
+  }
+
   res <- callaway_traits_game_impl(
     nodes = nodes,
     types = types,
@@ -1817,15 +2303,67 @@ sample_traits_callaway <- function(
 }
 
 #' @rdname sample_traits_callaway
+#' @inheritParams rlang::args_dots_empty
 #' @export
 traits_callaway <- function(
   nodes,
   types,
+  ...,
   edge.per.step = 1,
-  type.dist = rep(1, types),
-  pref.matrix = matrix(1, types, types),
+  type.dist = NULL,
+  pref.matrix = NULL,
   directed = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: traits_callaway, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("t", "ty", "typ", "type"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn traits_callaway}.", i = "Spell out the full argument name."))
+    # Pre-3.0.0 signature: traits_callaway(nodes, types, edge.per.step, type.dist, pref.matrix, directed)
+    .old_signature <- function(edge.per.step, type.dist, pref.matrix, directed, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn traits_callaway}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn traits_callaway}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(edge.per.step)) base::list(edge.per.step = edge.per.step),
+        if (!base::missing(type.dist)) base::list(type.dist = type.dist),
+        if (!base::missing(pref.matrix)) base::list(pref.matrix = pref.matrix),
+        if (!base::missing(directed)) base::list(directed = directed)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(edge.per.step)) "edge.per.step",
+        if (!base::missing(type.dist)) "type.dist",
+        if (!base::missing(pref.matrix)) "pref.matrix",
+        if (!base::missing(directed)) "directed"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn traits_callaway} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `traits_callaway()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  traits_callaway(", base::paste(base::c("nodes", "types", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    traits_callaway(", base::paste(base::c("nodes", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
+  if (is.null(type.dist)) {
+    type.dist <- rep(1, types)
+  }
+  if (is.null(pref.matrix)) {
+    pref.matrix <- matrix(1, types, types)
+  }
+
   constructor_spec(
     sample_traits_callaway,
     nodes,
@@ -1838,15 +2376,65 @@ traits_callaway <- function(
 }
 
 #' @rdname sample_traits_callaway
+#' @inheritParams rlang::args_dots_empty
 #' @export
 sample_traits <- function(
   nodes,
   types,
   k = 1,
-  type.dist = rep(1, types),
-  pref.matrix = matrix(1, types, types),
+  ...,
+  type.dist = NULL,
+  pref.matrix = NULL,
   directed = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_traits, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("t", "ty", "typ", "type"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn sample_traits}.", i = "Spell out the full argument name."))
+    # Pre-3.0.0 signature: sample_traits(nodes, types, k, type.dist, pref.matrix, directed)
+    .old_signature <- function(type.dist, pref.matrix, directed, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn sample_traits}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_traits}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(type.dist)) base::list(type.dist = type.dist),
+        if (!base::missing(pref.matrix)) base::list(pref.matrix = pref.matrix),
+        if (!base::missing(directed)) base::list(directed = directed)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(type.dist)) "type.dist",
+        if (!base::missing(pref.matrix)) "pref.matrix",
+        if (!base::missing(directed)) "directed"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_traits} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `sample_traits()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  sample_traits(", base::paste(base::c("nodes", "types", "k", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_traits(", base::paste(base::c("nodes", "types", "k", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
+  if (is.null(type.dist)) {
+    type.dist <- rep(1, types)
+  }
+  if (is.null(pref.matrix)) {
+    pref.matrix <- matrix(1, types, types)
+  }
+
   res <- establishment_game_impl(
     nodes = nodes,
     types = types,
@@ -1866,15 +2454,65 @@ sample_traits <- function(
 }
 
 #' @rdname sample_traits_callaway
+#' @inheritParams rlang::args_dots_empty
 #' @export
 traits <- function(
   nodes,
   types,
   k = 1,
-  type.dist = rep(1, types),
-  pref.matrix = matrix(1, types, types),
+  ...,
+  type.dist = NULL,
+  pref.matrix = NULL,
   directed = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: traits, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("t", "ty", "typ", "type"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn traits}.", i = "Spell out the full argument name."))
+    # Pre-3.0.0 signature: traits(nodes, types, k, type.dist, pref.matrix, directed)
+    .old_signature <- function(type.dist, pref.matrix, directed, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn traits}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn traits}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(type.dist)) base::list(type.dist = type.dist),
+        if (!base::missing(pref.matrix)) base::list(pref.matrix = pref.matrix),
+        if (!base::missing(directed)) base::list(directed = directed)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(type.dist)) "type.dist",
+        if (!base::missing(pref.matrix)) "pref.matrix",
+        if (!base::missing(directed)) "directed"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn traits} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `traits()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  traits(", base::paste(base::c("nodes", "types", "k", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    traits(", base::paste(base::c("nodes", "types", "k", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
+  if (is.null(type.dist)) {
+    type.dist <- rep(1, types)
+  }
+  if (is.null(pref.matrix)) {
+    pref.matrix <- matrix(1, types, types)
+  }
+
   constructor_spec(
     sample_traits,
     nodes,
@@ -1902,8 +2540,9 @@ traits <- function(
 #' @param nodes The number of vertices in the graph.
 #' @param radius The radius within which the vertices will be connected by an
 #'   edge.
-#' @param torus Logical constant, whether to use a torus instead of a square.
-#' @param coords Logical scalar, whether to add the positions of the vertices
+#' @inheritParams rlang::args_dots_empty
+#' @param torus Logical, whether to use a torus instead of a square.
+#' @param coords Logical, whether to add the positions of the vertices
 #'   as vertex attributes called \sQuote{`x`} and \sQuote{`y`}.
 #' @return A graph object. If `coords` is `TRUE` then with vertex
 #'   attributes \sQuote{`x`} and \sQuote{`y`}.
@@ -1917,7 +2556,50 @@ traits <- function(
 #' g <- sample_grg(1000, 0.05, torus = FALSE)
 #' g2 <- sample_grg(1000, 0.05, torus = TRUE)
 #'
-sample_grg <- function(nodes, radius, torus = FALSE, coords = FALSE) {
+sample_grg <- function(
+  nodes,
+  radius,
+  ...,
+  torus = FALSE,
+  coords = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: sample_grg, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: sample_grg(nodes, radius, torus, coords)
+    .old_signature <- function(torus, coords, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn sample_grg}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_grg}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(torus)) base::list(torus = torus),
+        if (!base::missing(coords)) base::list(coords = coords)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(torus)) "torus",
+        if (!base::missing(coords)) "coords"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_grg} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `sample_grg()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  sample_grg(", base::paste(base::c("nodes", "radius", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_grg(", base::paste(base::c("nodes", "radius", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
     Rx_igraph_grg_game,
@@ -1939,8 +2621,52 @@ sample_grg <- function(nodes, radius, torus = FALSE, coords = FALSE) {
 }
 
 #' @rdname sample_grg
+#' @inheritParams rlang::args_dots_empty
 #' @export
-grg <- function(nodes, radius, torus = FALSE, coords = FALSE) {
+grg <- function(
+  nodes,
+  radius,
+  ...,
+  torus = FALSE,
+  coords = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: grg, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: grg(nodes, radius, torus, coords)
+    .old_signature <- function(torus, coords, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn grg}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn grg}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(torus)) base::list(torus = torus),
+        if (!base::missing(coords)) base::list(coords = coords)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(torus)) "torus",
+        if (!base::missing(coords)) "coords"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn grg} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `grg()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  grg(", base::paste(base::c("nodes", "radius", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    grg(", base::paste(base::c("nodes", "radius", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   constructor_spec(
     sample_grg,
     nodes = nodes,
@@ -1976,19 +2702,22 @@ grg <- function(nodes, radius, torus = FALSE, coords = FALSE) {
 #'
 #' @param nodes The number of vertices in the graphs.
 #' @param types The number of different vertex types.
+#' @inheritParams rlang::args_dots_empty
 #' @param type.dist The distribution of the vertex types, a numeric vector of
 #'   length \sQuote{types} containing non-negative numbers. The vector will be
-#'   normed to obtain probabilities.
+#'   normed to obtain probabilities. The default `NULL` gives a uniform
+#'   distribution.
 #' @param fixed.sizes Fix the number of vertices with a given vertex type
 #'   label. The `type.dist` argument gives the group sizes (i.e. number of
 #'   vertices with the different labels) in this case.
 #' @param type.dist.matrix The joint distribution of the in- and out-vertex
-#'   types.
+#'   types. The default `NULL` gives a uniform distribution.
 #' @param pref.matrix A square matrix giving the preferences of the vertex
 #'   types. The matrix has \sQuote{types} rows and columns. When generating
-#'   an undirected graph, it must be symmetric.
-#' @param directed Logical scalar, whether to create a directed graph.
-#' @param loops Logical scalar, whether self-loops are allowed in the graph.
+#'   an undirected graph, it must be symmetric. The default `NULL` sets all
+#'   preferences to one.
+#' @param directed Logical, whether to create a directed graph.
+#' @param loops Logical, whether self-loops are allowed in the graph.
 #' @return An igraph graph.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the R interface
@@ -2013,12 +2742,65 @@ grg <- function(nodes, radius, torus = FALSE, coords = FALSE) {
 sample_pref <- function(
   nodes,
   types,
-  type.dist = rep(1, types),
+  ...,
+  type.dist = NULL,
   fixed.sizes = FALSE,
-  pref.matrix = matrix(1, types, types),
+  pref.matrix = NULL,
   directed = FALSE,
   loops = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_pref, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("t", "ty", "typ", "type"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn sample_pref}.", i = "Spell out the full argument name."))
+    # Pre-3.0.0 signature: sample_pref(nodes, types, type.dist, fixed.sizes, pref.matrix, directed, loops)
+    .old_signature <- function(type.dist, fixed.sizes, pref.matrix, directed, loops, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn sample_pref}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_pref}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(type.dist)) base::list(type.dist = type.dist),
+        if (!base::missing(fixed.sizes)) base::list(fixed.sizes = fixed.sizes),
+        if (!base::missing(pref.matrix)) base::list(pref.matrix = pref.matrix),
+        if (!base::missing(directed)) base::list(directed = directed),
+        if (!base::missing(loops)) base::list(loops = loops)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(type.dist)) "type.dist",
+        if (!base::missing(fixed.sizes)) "fixed.sizes",
+        if (!base::missing(pref.matrix)) "pref.matrix",
+        if (!base::missing(directed)) "directed",
+        if (!base::missing(loops)) "loops"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_pref} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `sample_pref()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  sample_pref(", base::paste(base::c("nodes", "types", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_pref(", base::paste(base::c("nodes", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
+  if (is.null(type.dist)) {
+    type.dist <- rep(1, types)
+  }
+  if (is.null(pref.matrix)) {
+    pref.matrix <- matrix(1, types, types)
+  }
+
   if (nrow(pref.matrix) != types || ncol(pref.matrix) != types) {
     cli::cli_abort(c(
       "{.arg pref.matrix} must have {.arg types} rows and columns.",
@@ -2048,16 +2830,70 @@ sample_pref <- function(
 }
 
 #' @rdname sample_pref
+#' @inheritParams rlang::args_dots_empty
 #' @export
 pref <- function(
   nodes,
   types,
-  type.dist = rep(1, types),
+  ...,
+  type.dist = NULL,
   fixed.sizes = FALSE,
-  pref.matrix = matrix(1, types, types),
+  pref.matrix = NULL,
   directed = FALSE,
   loops = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: pref, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("t", "ty", "typ", "type"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn pref}.", i = "Spell out the full argument name."))
+    # Pre-3.0.0 signature: pref(nodes, types, type.dist, fixed.sizes, pref.matrix, directed, loops)
+    .old_signature <- function(type.dist, fixed.sizes, pref.matrix, directed, loops, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn pref}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn pref}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(type.dist)) base::list(type.dist = type.dist),
+        if (!base::missing(fixed.sizes)) base::list(fixed.sizes = fixed.sizes),
+        if (!base::missing(pref.matrix)) base::list(pref.matrix = pref.matrix),
+        if (!base::missing(directed)) base::list(directed = directed),
+        if (!base::missing(loops)) base::list(loops = loops)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(type.dist)) "type.dist",
+        if (!base::missing(fixed.sizes)) "fixed.sizes",
+        if (!base::missing(pref.matrix)) "pref.matrix",
+        if (!base::missing(directed)) "directed",
+        if (!base::missing(loops)) "loops"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn pref} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `pref()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  pref(", base::paste(base::c("nodes", "types", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    pref(", base::paste(base::c("nodes", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
+  if (is.null(type.dist)) {
+    type.dist <- rep(1, types)
+  }
+  if (is.null(pref.matrix)) {
+    pref.matrix <- matrix(1, types, types)
+  }
+
   constructor_spec(
     sample_pref,
     nodes,
@@ -2071,14 +2907,64 @@ pref <- function(
 }
 
 #' @rdname sample_pref
+#' @inheritParams rlang::args_dots_empty
 #' @export
 sample_asym_pref <- function(
   nodes,
   types,
-  type.dist.matrix = matrix(1, types, types),
-  pref.matrix = matrix(1, types, types),
+  ...,
+  type.dist.matrix = NULL,
+  pref.matrix = NULL,
   loops = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_asym_pref, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("t", "ty", "typ", "type"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn sample_asym_pref}.", i = "Spell out the full argument name."))
+    # Pre-3.0.0 signature: sample_asym_pref(nodes, types, type.dist.matrix, pref.matrix, loops)
+    .old_signature <- function(type.dist.matrix, pref.matrix, loops, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn sample_asym_pref}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_asym_pref}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(type.dist.matrix)) base::list(type.dist.matrix = type.dist.matrix),
+        if (!base::missing(pref.matrix)) base::list(pref.matrix = pref.matrix),
+        if (!base::missing(loops)) base::list(loops = loops)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(type.dist.matrix)) "type.dist.matrix",
+        if (!base::missing(pref.matrix)) "pref.matrix",
+        if (!base::missing(loops)) "loops"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_asym_pref} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `sample_asym_pref()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  sample_asym_pref(", base::paste(base::c("nodes", "types", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_asym_pref(", base::paste(base::c("nodes", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
+  if (is.null(type.dist.matrix)) {
+    type.dist.matrix <- matrix(1, types, types)
+  }
+  if (is.null(pref.matrix)) {
+    pref.matrix <- matrix(1, types, types)
+  }
+
   if (nrow(pref.matrix) != types || ncol(pref.matrix) != types) {
     cli::cli_abort(c(
       "{.arg pref.matrix} must have {.arg types} rows and columns.",
@@ -2114,14 +3000,64 @@ sample_asym_pref <- function(
 }
 
 #' @rdname sample_pref
+#' @inheritParams rlang::args_dots_empty
 #' @export
 asym_pref <- function(
   nodes,
   types,
-  type.dist.matrix = matrix(1, types, types),
-  pref.matrix = matrix(1, types, types),
+  ...,
+  type.dist.matrix = NULL,
+  pref.matrix = NULL,
   loops = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: asym_pref, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("t", "ty", "typ", "type"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn asym_pref}.", i = "Spell out the full argument name."))
+    # Pre-3.0.0 signature: asym_pref(nodes, types, type.dist.matrix, pref.matrix, loops)
+    .old_signature <- function(type.dist.matrix, pref.matrix, loops, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn asym_pref}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn asym_pref}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(type.dist.matrix)) base::list(type.dist.matrix = type.dist.matrix),
+        if (!base::missing(pref.matrix)) base::list(pref.matrix = pref.matrix),
+        if (!base::missing(loops)) base::list(loops = loops)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(type.dist.matrix)) "type.dist.matrix",
+        if (!base::missing(pref.matrix)) "pref.matrix",
+        if (!base::missing(loops)) "loops"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn asym_pref} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `asym_pref()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  asym_pref(", base::paste(base::c("nodes", "types", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    asym_pref(", base::paste(base::c("nodes", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
+  if (is.null(type.dist.matrix)) {
+    type.dist.matrix <- matrix(1, types, types)
+  }
+  if (is.null(pref.matrix)) {
+    pref.matrix <- matrix(1, types, types)
+  }
+
   constructor_spec(
     sample_asym_pref,
     nodes,
@@ -2135,9 +3071,50 @@ asym_pref <- function(
 ## -----------------------------------------------------------------
 
 #' @rdname ego
+#' @inheritParams rlang::args_dots_empty
 #' @export
 #' @family functions for manipulating graph structure
-connect <- function(graph, order, mode = c("all", "out", "in", "total")) {
+connect <- function(
+  graph,
+  order,
+  ...,
+  mode = c("all", "out", "in", "total")
+) {
+  # BEGIN GENERATED ARG_HANDLE: connect, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: connect(graph, order, mode)
+    .old_signature <- function(mode, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn connect}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn connect}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(mode)) base::list(mode = mode)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(mode)) "mode"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn connect} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `connect()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  connect(", base::paste(base::c("graph", "order", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    connect(", base::paste(base::c("graph", "order", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
   mode <- igraph_match_arg(mode)
 
@@ -2176,9 +3153,10 @@ connect <- function(graph, order, mode = c("all", "out", "in", "total")) {
 #' @param nei Integer constant, the neighborhood within which the vertices of
 #'   the lattice will be connected.
 #' @param p Real constant between zero and one, the rewiring probability.
-#' @param loops Logical scalar, whether loops edges are allowed in the
+#' @inheritParams rlang::args_dots_empty
+#' @param loops Logical, whether loops edges are allowed in the
 #'   generated graph.
-#' @param multiple Logical scalar, whether multiple edges are allowed int the
+#' @param multiple Logical, whether multiple edges are allowed int the
 #'   generated graph.
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -2199,9 +3177,47 @@ sample_smallworld <- function(
   size,
   nei,
   p,
+  ...,
   loops = FALSE,
   multiple = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_smallworld, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: sample_smallworld(dim, size, nei, p, loops, multiple)
+    .old_signature <- function(loops, multiple, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn sample_smallworld}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_smallworld}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(loops)) base::list(loops = loops),
+        if (!base::missing(multiple)) base::list(multiple = multiple)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(loops)) "loops",
+        if (!base::missing(multiple)) "multiple"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_smallworld} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `sample_smallworld()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  sample_smallworld(", base::paste(base::c("dim", "size", "nei", "p", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_smallworld(", base::paste(base::c("dim", "size", "nei", "p", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   res <- watts_strogatz_game_impl(
     dim = dim,
     size = size,
@@ -2223,8 +3239,54 @@ sample_smallworld <- function(
 }
 
 #' @rdname sample_smallworld
+#' @inheritParams rlang::args_dots_empty
 #' @export
-smallworld <- function(dim, size, nei, p, loops = FALSE, multiple = FALSE) {
+smallworld <- function(
+  dim,
+  size,
+  nei,
+  p,
+  ...,
+  loops = FALSE,
+  multiple = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: smallworld, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: smallworld(dim, size, nei, p, loops, multiple)
+    .old_signature <- function(loops, multiple, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn smallworld}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn smallworld}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(loops)) base::list(loops = loops),
+        if (!base::missing(multiple)) base::list(multiple = multiple)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(loops)) "loops",
+        if (!base::missing(multiple)) "multiple"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn smallworld} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `smallworld()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  smallworld(", base::paste(base::c("dim", "size", "nei", "p", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    smallworld(", base::paste(base::c("dim", "size", "nei", "p", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   constructor_spec(
     sample_smallworld,
     dim = dim,
@@ -2253,14 +3315,18 @@ smallworld <- function(dim, size, nei, p, loops = FALSE, multiple = FALSE) {
 #'
 #' @param n Number of vertices.
 #' @param edges Number of edges per step.
-#' @param agebins Number of aging bins.
+#' @inheritParams rlang::args_dots_empty
+#' @param agebins Number of aging bins. The default `NULL` uses `n / 7100`.
 #' @param pref Vector (`sample_last_cit()` and `sample_cit_types()` or
 #'   matrix (`sample_cit_cit_types()`) giving the (unnormalized) citation
-#'   probabilities for the different vertex types.
-#' @param directed Logical scalar, whether to generate directed networks.
+#'   probabilities for the different vertex types. The default `NULL` uses
+#'   `(1:(agebins + 1))^-3` for `sample_last_cit()` and all-one probabilities
+#'   for the other two.
+#' @param directed Logical, whether to generate directed networks.
 #' @param types Vector of length \sQuote{`n`}, the types of the vertices.
-#'   Types are numbered from zero.
-#' @param attr Logical scalar, whether to add the vertex types to the generated
+#'   Types are numbered from zero. The default `NULL` gives all vertices
+#'   type zero.
+#' @param attr Logical, whether to add the vertex types to the generated
 #'   graph as a vertex attribute called \sQuote{`type`}.
 #' @return A new graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -2270,10 +3336,57 @@ smallworld <- function(dim, size, nei, p, loops = FALSE, multiple = FALSE) {
 sample_last_cit <- function(
   n,
   edges = 1,
-  agebins = n / 7100,
-  pref = (1:(agebins + 1))^-3,
+  ...,
+  agebins = NULL,
+  pref = NULL,
   directed = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_last_cit, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: sample_last_cit(n, edges, agebins, pref, directed)
+    .old_signature <- function(agebins, pref, directed, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn sample_last_cit}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_last_cit}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(agebins)) base::list(agebins = agebins),
+        if (!base::missing(pref)) base::list(pref = pref),
+        if (!base::missing(directed)) base::list(directed = directed)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(agebins)) "agebins",
+        if (!base::missing(pref)) "pref",
+        if (!base::missing(directed)) "directed"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_last_cit} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `sample_last_cit()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  sample_last_cit(", base::paste(base::c("n", "edges", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_last_cit(", base::paste(base::c("n", "edges", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
+  if (is.null(agebins)) {
+    agebins <- n / 7100
+  }
+  if (is.null(pref)) {
+    pref <- (1:(agebins + 1))^-3
+  }
+
   res <- lastcit_game_impl(
     nodes = n,
     edges_per_node = edges,
@@ -2290,14 +3403,62 @@ sample_last_cit <- function(
 }
 
 #' @rdname sample_last_cit
+#' @inheritParams rlang::args_dots_empty
 #' @export
 last_cit <- function(
   n,
   edges = 1,
-  agebins = n / 7100,
-  pref = (1:(agebins + 1))^-3,
+  ...,
+  agebins = NULL,
+  pref = NULL,
   directed = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: last_cit, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: last_cit(n, edges, agebins, pref, directed)
+    .old_signature <- function(agebins, pref, directed, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn last_cit}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn last_cit}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(agebins)) base::list(agebins = agebins),
+        if (!base::missing(pref)) base::list(pref = pref),
+        if (!base::missing(directed)) base::list(directed = directed)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(agebins)) "agebins",
+        if (!base::missing(pref)) "pref",
+        if (!base::missing(directed)) "directed"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn last_cit} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `last_cit()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  last_cit(", base::paste(base::c("n", "edges", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    last_cit(", base::paste(base::c("n", "edges", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
+  if (is.null(agebins)) {
+    agebins <- n / 7100
+  }
+  if (is.null(pref)) {
+    pref <- (1:(agebins + 1))^-3
+  }
+
   constructor_spec(
     sample_last_cit,
     n = n,
@@ -2309,15 +3470,63 @@ last_cit <- function(
 }
 
 #' @rdname sample_last_cit
+#' @inheritParams rlang::args_dots_empty
 #' @export
 sample_cit_types <- function(
   n,
   edges = 1,
-  types = rep(0, n),
-  pref = rep(1, length(types)),
+  types = NULL,
+  ...,
+  pref = NULL,
   directed = TRUE,
   attr = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_cit_types, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: sample_cit_types(n, edges, types, pref, directed, attr)
+    .old_signature <- function(pref, directed, attr, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn sample_cit_types}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_cit_types}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(pref)) base::list(pref = pref),
+        if (!base::missing(directed)) base::list(directed = directed),
+        if (!base::missing(attr)) base::list(attr = attr)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(pref)) "pref",
+        if (!base::missing(directed)) "directed",
+        if (!base::missing(attr)) "attr"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_cit_types} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `sample_cit_types()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  sample_cit_types(", base::paste(base::c("n", "edges", "types", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_cit_types(", base::paste(base::c("n", "edges", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
+  if (is.null(types)) {
+    types <- rep(0, n)
+  }
+  if (is.null(pref)) {
+    pref <- rep(1, length(types))
+  }
+
   res <- cited_type_game_impl(
     nodes = n,
     types = types,
@@ -2336,15 +3545,63 @@ sample_cit_types <- function(
 }
 
 #' @rdname sample_last_cit
+#' @inheritParams rlang::args_dots_empty
 #' @export
 cit_types <- function(
   n,
   edges = 1,
-  types = rep(0, n),
-  pref = rep(1, length(types)),
+  types = NULL,
+  ...,
+  pref = NULL,
   directed = TRUE,
   attr = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: cit_types, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: cit_types(n, edges, types, pref, directed, attr)
+    .old_signature <- function(pref, directed, attr, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn cit_types}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn cit_types}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(pref)) base::list(pref = pref),
+        if (!base::missing(directed)) base::list(directed = directed),
+        if (!base::missing(attr)) base::list(attr = attr)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(pref)) "pref",
+        if (!base::missing(directed)) "directed",
+        if (!base::missing(attr)) "attr"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn cit_types} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `cit_types()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  cit_types(", base::paste(base::c("n", "edges", "types", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    cit_types(", base::paste(base::c("n", "edges", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
+  if (is.null(types)) {
+    types <- rep(0, n)
+  }
+  if (is.null(pref)) {
+    pref <- rep(1, length(types))
+  }
+
   constructor_spec(
     sample_cit_types,
     n = n,
@@ -2357,15 +3614,63 @@ cit_types <- function(
 }
 
 #' @rdname sample_last_cit
+#' @inheritParams rlang::args_dots_empty
 #' @export
 sample_cit_cit_types <- function(
   n,
   edges = 1,
-  types = rep(0, n),
-  pref = matrix(1, nrow = length(types), ncol = length(types)),
+  types = NULL,
+  ...,
+  pref = NULL,
   directed = TRUE,
   attr = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_cit_cit_types, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: sample_cit_cit_types(n, edges, types, pref, directed, attr)
+    .old_signature <- function(pref, directed, attr, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn sample_cit_cit_types}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_cit_cit_types}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(pref)) base::list(pref = pref),
+        if (!base::missing(directed)) base::list(directed = directed),
+        if (!base::missing(attr)) base::list(attr = attr)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(pref)) "pref",
+        if (!base::missing(directed)) "directed",
+        if (!base::missing(attr)) "attr"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_cit_cit_types} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `sample_cit_cit_types()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  sample_cit_cit_types(", base::paste(base::c("n", "edges", "types", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_cit_cit_types(", base::paste(base::c("n", "edges", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
+  if (is.null(types)) {
+    types <- rep(0, n)
+  }
+  if (is.null(pref)) {
+    pref <- matrix(1, nrow = length(types), ncol = length(types))
+  }
+
   pref[] <- as.numeric(pref)
   res <- citing_cited_type_game_impl(
     nodes = n,
@@ -2385,15 +3690,63 @@ sample_cit_cit_types <- function(
 }
 
 #' @rdname sample_last_cit
+#' @inheritParams rlang::args_dots_empty
 #' @export
 cit_cit_types <- function(
   n,
   edges = 1,
-  types = rep(0, n),
-  pref = matrix(1, nrow = length(types), ncol = length(types)),
+  types = NULL,
+  ...,
+  pref = NULL,
   directed = TRUE,
   attr = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: cit_cit_types, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: cit_cit_types(n, edges, types, pref, directed, attr)
+    .old_signature <- function(pref, directed, attr, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn cit_cit_types}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn cit_cit_types}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(pref)) base::list(pref = pref),
+        if (!base::missing(directed)) base::list(directed = directed),
+        if (!base::missing(attr)) base::list(attr = attr)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(pref)) "pref",
+        if (!base::missing(directed)) "directed",
+        if (!base::missing(attr)) "attr"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn cit_cit_types} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `cit_cit_types()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  cit_cit_types(", base::paste(base::c("n", "edges", "types", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    cit_cit_types(", base::paste(base::c("n", "edges", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
+  if (is.null(types)) {
+    types <- rep(0, n)
+  }
+  if (is.null(pref)) {
+    pref <- matrix(1, nrow = length(types), ncol = length(types))
+  }
+
   constructor_spec(
     sample_cit_cit_types,
     n = n,
@@ -2420,7 +3773,7 @@ cit_cit_types <- function(
 #'   be given for \eqn{G(n,m)} graphs.
 #' @param m Integer scalar, the number of edges for \eqn{G(n,m)} graphs. Should not
 #'   be given for \eqn{G(n,p)} graphs.
-#' @param directed Logical scalar, whether to create a directed graph. See also
+#' @param directed Logical, whether to create a directed graph. See also
 #'   the `mode` argument.
 #' @param mode Character scalar, specifies how to direct the edges in directed
 #'   graphs. If it is \sQuote{out}, then directed edges point from bottom
@@ -2563,7 +3916,7 @@ bipartite_gnp <- function(
 #' @param p Real scalar, connection probability for \eqn{G(n,p)} graphs.
 #' @param m Integer scalar, the number of edges for \eqn{G(n,m)} graphs.
 #' @inheritParams rlang::args_dots_empty
-#' @param directed Logical scalar, whether to create a directed graph. See also
+#' @param directed Logical, whether to create a directed graph. See also
 #'   the `mode` argument.
 #' @param mode Character scalar, specifies how to direct the edges in directed
 #'   graphs. If it is \sQuote{out}, then directed edges point from bottom
@@ -2665,6 +4018,7 @@ sample_bipartite_gnp <- function(
 #' @param block.sizes Numeric vector giving the number of vertices in each
 #'   group. The sum of the vector must match the number of vertices.
 #' @inheritParams sample_pref
+#' @inheritParams rlang::args_dots_empty
 #' @return An igraph graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Faust, K., & Wasserman, S. (1992a). Blockmodels: Interpretation
@@ -2682,9 +4036,47 @@ sample_sbm <- function(
   n,
   pref.matrix,
   block.sizes,
+  ...,
   directed = FALSE,
   loops = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_sbm, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: sample_sbm(n, pref.matrix, block.sizes, directed, loops)
+    .old_signature <- function(directed, loops, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn sample_sbm}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_sbm}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(directed)) base::list(directed = directed),
+        if (!base::missing(loops)) base::list(loops = loops)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(directed)) "directed",
+        if (!base::missing(loops)) "loops"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_sbm} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `sample_sbm()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  sample_sbm(", base::paste(base::c("n", "pref.matrix", "block.sizes", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_sbm(", base::paste(base::c("n", "pref.matrix", "block.sizes", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   sbm_game_impl(
     n = n,
     pref_matrix = pref.matrix,
@@ -2695,8 +4087,53 @@ sample_sbm <- function(
 }
 
 #' @rdname sample_sbm
+#' @inheritParams rlang::args_dots_empty
 #' @export
-sbm <- function(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE) {
+sbm <- function(
+  n,
+  pref.matrix,
+  block.sizes,
+  ...,
+  directed = FALSE,
+  loops = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: sbm, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: sbm(n, pref.matrix, block.sizes, directed, loops)
+    .old_signature <- function(directed, loops, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn sbm}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn sbm}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(directed)) base::list(directed = directed),
+        if (!base::missing(loops)) base::list(loops = loops)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(directed)) "directed",
+        if (!base::missing(loops)) "loops"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sbm} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `sbm()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  sbm(", base::paste(base::c("n", "pref.matrix", "block.sizes", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sbm(", base::paste(base::c("n", "pref.matrix", "block.sizes", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   constructor_spec(
     sample_sbm,
     n,
@@ -2817,7 +4254,8 @@ hierarchical_sbm <- function(n, m, rho, C, p) {
 #'
 #' @param vecs A numeric matrix in which each latent position vector is a
 #'   column.
-#' @param directed A logical scalar, TRUE if the generated graph should be
+#' @inheritParams rlang::args_dots_empty
+#' @param directed A Logical, TRUE if the generated graph should be
 #'   directed.
 #' @return An igraph graph object which is the generated random dot product
 #'   graph.
@@ -2844,7 +4282,46 @@ hierarchical_sbm <- function(n, m, rho, C, p) {
 #' g2
 #' @family games
 #' @export
-sample_dot_product <- function(vecs, directed = FALSE) {
+sample_dot_product <- function(
+  vecs,
+  ...,
+  directed = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: sample_dot_product, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: sample_dot_product(vecs, directed)
+    .old_signature <- function(directed, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn sample_dot_product}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_dot_product}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(directed)) base::list(directed = directed)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(directed)) "directed"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_dot_product} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `sample_dot_product()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  sample_dot_product(", base::paste(base::c("vecs", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_dot_product(", base::paste(base::c("vecs", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   dot_product_game_impl(
     vecs = vecs,
     directed = directed
@@ -2852,8 +4329,48 @@ sample_dot_product <- function(vecs, directed = FALSE) {
 }
 
 #' @rdname sample_dot_product
+#' @inheritParams rlang::args_dots_empty
 #' @export
-dot_product <- function(vecs, directed = FALSE) {
+dot_product <- function(
+  vecs,
+  ...,
+  directed = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: dot_product, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: dot_product(vecs, directed)
+    .old_signature <- function(directed, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn dot_product}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn dot_product}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(directed)) base::list(directed = directed)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(directed)) "directed"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn dot_product} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `dot_product()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  dot_product(", base::paste(base::c("vecs", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    dot_product(", base::paste(base::c("vecs", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   constructor_spec(sample_dot_product, vecs = vecs, directed = directed)
 }
 
@@ -2916,8 +4433,9 @@ sample_islands <- function(islands.n, islands.size, islands.pin, n.inter) {
 #'   graph.
 #' @param k Integer scalar, the degree of each vertex in the graph, or the
 #'   out-degree and in-degree in a directed graph.
-#' @param directed Logical scalar, whether to create a directed graph.
-#' @param multiple Logical scalar, whether multiple edges are allowed.
+#' @inheritParams rlang::args_dots_empty
+#' @param directed Logical, whether to create a directed graph.
+#' @param multiple Logical, whether multiple edges are allowed.
 #' @return An igraph graph.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
 #' @seealso [sample_degseq()] for a generator with prescribed degree
@@ -2939,9 +4457,47 @@ sample_islands <- function(islands.n, islands.size, islands.pin, n.inter) {
 sample_k_regular <- function(
   no.of.nodes,
   k,
+  ...,
   directed = FALSE,
   multiple = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_k_regular, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: sample_k_regular(no.of.nodes, k, directed, multiple)
+    .old_signature <- function(directed, multiple, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn sample_k_regular}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_k_regular}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(directed)) base::list(directed = directed),
+        if (!base::missing(multiple)) base::list(multiple = multiple)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(directed)) "directed",
+        if (!base::missing(multiple)) "multiple"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_k_regular} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `sample_k_regular()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  sample_k_regular(", base::paste(base::c("no.of.nodes", "k", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_k_regular(", base::paste(base::c("no.of.nodes", "k", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   k_regular_game_impl(
     no_of_nodes = no.of.nodes,
     k = k,
@@ -3167,14 +4723,12 @@ chung_lu <- function(
 #' @param no.of.edges The number of edges in the generated graph.
 #' @param fitness.out A numeric vector containing the fitness of each vertex.
 #'   For directed graphs, this specifies the out-fitness of each vertex.
-#' @param fitness.in If `NULL` (the default), the generated graph will be
-#'   undirected. If not `NULL`, then it should be a numeric vector and it
-#'   specifies the in-fitness of each vertex.
-#'
-#'   If this argument is not `NULL`, then a directed graph is generated,
-#'   otherwise an undirected one.
-#' @param loops Logical scalar, whether to allow loop edges in the graph.
-#' @param multiple Logical scalar, whether to allow multiple edges in the
+#' @param fitness.in Numeric vector that specifies the in-fitness of each vertex.
+#'   The generated graph will be directed.
+#'   Default: `NULL`, the generated graph will be undirected.
+#' @inheritParams rlang::args_dots_empty
+#' @param loops Logical, whether to allow loop edges in the graph.
+#' @param multiple Logical, whether to allow multiple edges in the
 #'   graph.
 #' @return An igraph graph, directed or undirected.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
@@ -3194,9 +4748,47 @@ sample_fitness <- function(
   no.of.edges,
   fitness.out,
   fitness.in = NULL,
+  ...,
   loops = FALSE,
   multiple = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_fitness, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: sample_fitness(no.of.edges, fitness.out, fitness.in, loops, multiple)
+    .old_signature <- function(loops, multiple, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn sample_fitness}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_fitness}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(loops)) base::list(loops = loops),
+        if (!base::missing(multiple)) base::list(multiple = multiple)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(loops)) "loops",
+        if (!base::missing(multiple)) "multiple"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_fitness} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `sample_fitness()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  sample_fitness(", base::paste(base::c("no.of.edges", "fitness.out", "fitness.in", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_fitness(", base::paste(base::c("no.of.edges", "fitness.out", "fitness.in", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   static_fitness_game_impl(
     no_of_edges = no.of.edges,
     fitness_out = fitness.out,
@@ -3246,8 +4838,9 @@ sample_fitness <- function(
 #'   exponent of the in-degree distribution. If non-negative but less than 2, an
 #'   error will be generated.
 #' @inheritParams sample_fitness
-#' @param finite.size.correction Logical scalar, whether to use the proposed
+#' @param finite.size.correction Logical, whether to use the proposed
 #'   finite size correction of Cho et al., see references below.
+#' @inheritParams rlang::args_dots_empty
 #' @return An igraph graph, directed or undirected.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
 #' @references Goh K-I, Kahng B, Kim D: Universal behaviour of load
@@ -3272,10 +4865,50 @@ sample_fitness_pl <- function(
   no.of.edges,
   exponent.out,
   exponent.in = -1,
+  ...,
   loops = FALSE,
   multiple = FALSE,
   finite.size.correction = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_fitness_pl, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: sample_fitness_pl(no.of.nodes, no.of.edges, exponent.out, exponent.in, loops, multiple, finite.size.correction)
+    .old_signature <- function(loops, multiple, finite.size.correction, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn sample_fitness_pl}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_fitness_pl}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(loops)) base::list(loops = loops),
+        if (!base::missing(multiple)) base::list(multiple = multiple),
+        if (!base::missing(finite.size.correction)) base::list(finite.size.correction = finite.size.correction)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(loops)) "loops",
+        if (!base::missing(multiple)) "multiple",
+        if (!base::missing(finite.size.correction)) "finite.size.correction"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_fitness_pl} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `sample_fitness_pl()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  sample_fitness_pl(", base::paste(base::c("no.of.nodes", "no.of.edges", "exponent.out", "exponent.in", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_fitness_pl(", base::paste(base::c("no.of.nodes", "no.of.edges", "exponent.out", "exponent.in", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   res <- static_power_law_game_impl(
     no_of_nodes = no.of.nodes,
     no_of_edges = no.of.edges,
@@ -3323,6 +4956,7 @@ sample_fitness_pl <- function(
 #'
 #' @param nodes The number of vertices in the graph.
 #' @param fw.prob The forward burning probability, see details below.
+#' @inheritParams rlang::args_dots_empty
 #' @param bw.factor The backward burning ratio. The backward burning
 #'   probability is calculated as `bw.factor*fw.prob`.
 #' @param ambs The number of ambassador vertices.
@@ -3359,10 +4993,50 @@ sample_fitness_pl <- function(
 sample_forestfire <- function(
   nodes,
   fw.prob,
+  ...,
   bw.factor = 1,
   ambs = 1,
   directed = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_forestfire, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: sample_forestfire(nodes, fw.prob, bw.factor, ambs, directed)
+    .old_signature <- function(bw.factor, ambs, directed, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn sample_forestfire}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_forestfire}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(bw.factor)) base::list(bw.factor = bw.factor),
+        if (!base::missing(ambs)) base::list(ambs = ambs),
+        if (!base::missing(directed)) base::list(directed = directed)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(bw.factor)) "bw.factor",
+        if (!base::missing(ambs)) "ambs",
+        if (!base::missing(directed)) "directed"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_forestfire} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `sample_forestfire()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  sample_forestfire(", base::paste(base::c("nodes", "fw.prob", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_forestfire(", base::paste(base::c("nodes", "fw.prob", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   res <- forest_fire_game_impl(
     nodes = nodes,
     fw_prob = fw.prob,
@@ -3393,9 +5067,10 @@ sample_forestfire <- function(
 #' @param corr A scalar in the unit interval, the target Pearson
 #'   correlation between the adjacency matrices of the original and the generated
 #'   graph (the adjacency matrix being used as a vector).
+#' @inheritParams rlang::args_dots_empty
 #' @param p A numeric scalar, the probability of an edge between two
-#'   vertices, it must in the open (0,1) interval. The default is the empirical
-#'   edge density of the graph. If you are resampling an Erdős-Rényi graph and
+#'   vertices, it must in the open (0,1) interval. The default `NULL` uses the
+#'   empirical edge density of the graph. If you are resampling an Erdős-Rényi graph and
 #'   you know the original edge probability of the Erdős-Rényi model, you should
 #'   supply that explicitly.
 #' @param permutation A numeric vector, a permutation vector that is
@@ -3420,9 +5095,51 @@ sample_forestfire <- function(
 sample_correlated_gnp <- function(
   old.graph,
   corr,
-  p = edge_density(old.graph),
+  ...,
+  p = NULL,
   permutation = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_correlated_gnp, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: sample_correlated_gnp(old.graph, corr, p, permutation)
+    .old_signature <- function(p, permutation, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn sample_correlated_gnp}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_correlated_gnp}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(p)) base::list(p = p),
+        if (!base::missing(permutation)) base::list(permutation = permutation)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(p)) "p",
+        if (!base::missing(permutation)) "permutation"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_correlated_gnp} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `sample_correlated_gnp()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  sample_correlated_gnp(", base::paste(base::c("old.graph", "corr", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_correlated_gnp(", base::paste(base::c("old.graph", "corr", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
+  if (is.null(p)) {
+    p <- edge_density(old.graph)
+  }
+
   correlated_game_impl(
     old_graph = old.graph,
     corr = corr,
@@ -3445,7 +5162,7 @@ sample_correlated_gnp <- function(
 #'   adjacency matrix being used as a vector).
 #' @param p A numeric scalar, the probability of an edge between two vertices,
 #'   it must in the open (0,1) interval.
-#' @param directed Logical scalar, whether to generate directed graphs.
+#' @param directed Logical, whether to generate directed graphs.
 #' @param permutation A numeric vector, a permutation vector that is applied on
 #'   the vertices of the first graph, to get the second graph.  If `NULL`,
 #'   the vertices are not permuted.

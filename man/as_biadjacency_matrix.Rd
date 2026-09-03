@@ -37,17 +37,18 @@ used as weights. The attribute must be numeric or logical.
 If multiple edges share endpoints, the value of an arbitrarily chosen edge
 is included in the matrix.}
 
-\item{names}{Logical scalar, if \code{TRUE} and the vertices in the graph
+\item{names}{Logical, if \code{TRUE} and the vertices in the graph
 are named (i.e. the graph has a vertex attribute called \code{name}), then
 vertex names will be added to the result as row and column names. Otherwise
 the IDs of the vertices are used as row and column names.}
 
-\item{sparse}{Logical scalar, if it is \code{TRUE} then a sparse matrix is
+\item{sparse}{Logical, if it is \code{TRUE} then a sparse matrix is
 created, you will need the \code{Matrix} package for this.}
 
-\item{attr}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{weights} instead. If
-supplied, the value is forwarded to \code{weights} as a character edge
-attribute name.}
+\item{attr}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{weights} instead. A
+character edge attribute name is forwarded to \code{weights} unchanged; \code{NULL}
+becomes \code{weights = NA}, since \code{attr = NULL} asked for a traditional
+unweighted matrix while \code{weights = NULL} picks the \code{weight} attribute up.}
 }
 \value{
 A sparse or dense matrix.

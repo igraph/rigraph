@@ -7,7 +7,7 @@
 \usage{
 igraph_options(...)
 
-igraph_opt(x, default = NULL)
+igraph_opt(x, ..., default = NULL)
 }
 \arguments{
 \item{\dots}{A list may be given as the only argument, or any number of
@@ -68,6 +68,13 @@ See \code{\link[=plot_dendrogram]{plot_dendrogram()}} for details.
 \item{edge.attr.comb}{
 Specifies what to do with the edge attributes if the graph is modified.
 The default value is \code{list(weight="sum", name="concat", "ignore")}.
+See \code{\link[=attribute.combination]{attribute.combination()}} for details on this.
+}
+\item{graph.attr.comb}{
+Specifies what to do with the graph attributes when graphs are
+combined, e.g. via \code{\link[=union]{union()}}, \code{\link[=intersection]{intersection()}}, \code{\link[=disjoint_union]{disjoint_union()}}
+or \code{\link[=compose]{compose()}}. The default value is \code{"rename"}, which resolves any
+name clash by appending \verb{_1}, \verb{_2}, ... suffixes.
 See \code{\link[=attribute.combination]{attribute.combination()}} for details on this.
 }
 \item{print.edge.attributes}{

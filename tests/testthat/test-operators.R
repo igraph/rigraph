@@ -1,6 +1,4 @@
 test_that("union() works", {
-  order_by_two_first_columns <- function(x) x[order(x[, 1], x[, 2]), ]
-
   g1 <- make_ring(10)
   g2 <- make_star(11, center = 11, mode = "undirected")
   gu <- union(g1, g2)
@@ -16,8 +14,6 @@ test_that("union() works", {
 })
 
 test_that("disjoint_union() works", {
-  order_by_two_first_columns <- function(x) x[order(x[, 1], x[, 2]), ]
-
   g1 <- make_ring(10)
   g2 <- make_star(11, center = 11, mode = "undirected")
   gdu <- disjoint_union(g1, g2)
@@ -75,6 +71,7 @@ test_that("intersection() works", {
 })
 
 test_that("complementer() works", {
+  igraph_local_seed(42)
   g2 <- make_star(11, center = 11, mode = "undirected")
 
   x <- complementer(complementer(g2))
@@ -88,6 +85,7 @@ test_that("complementer() works", {
 
 
 test_that("compose() works", {
+  igraph_local_seed(42)
   g1 <- make_ring(10)
   g2 <- make_star(11, center = 11, mode = "undirected")
   gu <- union(g1, g2)
@@ -249,33 +247,35 @@ test_that("vertices() works", {
   expect_s3_class(V(g_none), "igraph.vs")
   expect_null(V(g_none)$name)
 
-  expect_snapshot_error(make_empty_graph(1) + vertices("a", "b", foo = 5:7))
+  expect_snapshot(error = TRUE, {
+    make_empty_graph(1) + vertices("a", "b", foo = 5:7)
+  })
 })
 
 test_that("vertices() errors on duplicate attribute names", {
   # Test case from issue: vertices("a", name = "c")
-  expect_snapshot_error(
+  expect_snapshot(error = TRUE, {
     # jarl-ignore duplicated_arguments: this is the test's point
     vertices("a", name = "c", name = "d")
-  )
+  })
 
   # Test case from issue: vertices("a", blop = "c", blop = 1)
-  expect_snapshot_error(
+  expect_snapshot(error = TRUE, {
     # jarl-ignore duplicated_arguments: this is the test's point
     vertices("a", blop = "c", blop = 1)
-  )
+  })
 
   # Test with graph addition
-  expect_snapshot_error(
+  expect_snapshot(error = TRUE, {
     # jarl-ignore duplicated_arguments: this is the test's point
     make_empty_graph(1) + vertices("a", "b", name = "c", name = "d")
-  )
+  })
 
   # Test multiple duplicates
-  expect_snapshot_error(
+  expect_snapshot(error = TRUE, {
     # jarl-ignore duplicated_arguments: this is the test's point
     vertices(foo = 1, foo = 2, bar = 3, bar = 4)
-  )
+  })
 })
 
 test_that("edge()/edges() accept a two-column matrix or data frame (#1827)", {
@@ -669,7 +669,7 @@ test_that("difference of named graphs works", {
 
 
 test_that("intersection of non-named graphs keeps attributes properly", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   g <- sample_gnp(10, 1 / 2)
   g2 <- sample_gnp(10, 1 / 2)
@@ -677,11 +677,6 @@ test_that("intersection of non-named graphs keeps attributes properly", {
   E(g2)$weight <- sample(ecount(g2))
 
   gi <- intersection(g, g2)
-
-  rn <- function(D) {
-    rownames(D) <- paste(D[, 1], D[, 2], sep = "-")
-    D
-  }
 
   df <- rn(as_data_frame(g))
   df2 <- rn(as_data_frame(g2))
@@ -692,7 +687,7 @@ test_that("intersection of non-named graphs keeps attributes properly", {
 })
 
 test_that("union of non-named graphs keeps attributes properly", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   g <- sample_gnp(10, 1 / 2)
   g2 <- sample_gnp(10, 1 / 2)
@@ -700,11 +695,6 @@ test_that("union of non-named graphs keeps attributes properly", {
   E(g2)$weight <- sample(ecount(g2))
 
   gu <- union.igraph(g, g2)
-
-  rn <- function(D) {
-    rownames(D) <- paste(D[, 1], D[, 2], sep = "-")
-    D
-  }
 
   df <- rn(as_data_frame(g))
   df2 <- rn(as_data_frame(g2))
@@ -1272,15 +1262,8 @@ test_that("rev on detached vs, names", {
   }
 })
 
-unique_tests <- list(
-  list(1:5, 1:5),
-  list(c(1, 1, 2:5), 1:5),
-  list(c(1, 1, 1, 1), 1),
-  list(c(1, 2, 2, 2), 1:2),
-  list(c(2, 2, 1, 1), 2:1),
-  list(c(1, 2, 1, 2), 1:2),
-  list(c(), c())
-)
+# `unique_tests` (the input/expected pairs used below) lives in
+# helper-test-functions.R.
 
 test_that("unique on attached vs", {
   sapply(unique_tests, function(d) {
@@ -1324,4 +1307,259 @@ test_that("unique on detached vs, names", {
     vg <- unique(vg)
     expect_equal(ignore_attr = TRUE, vg, vr)
   })
+})
+
+# attribute combination on graph operators -------------------------------------
+
+test_that("union() defaults to rename behaviour", {
+  gs <- make_named_pair()
+  u <- union(gs$g1, gs$g2)
+  expect_setequal(vertex_attr_names(u), c("name", "weight_1", "weight_2"))
+  expect_setequal(edge_attr_names(u), c("weight_1", "weight_2"))
+})
+
+test_that("union() combines vertex attributes with sum", {
+  gs <- make_named_pair()
+  u <- union(gs$g1, gs$g2, vertex.attr.comb = "sum")
+  expect_setequal(vertex_attr_names(u), c("name", "weight"))
+  expect_equal(sort(V(u)$weight), sort(c(11, 22, 33)))
+})
+
+test_that("union() combines edge attributes with sum", {
+  gs <- make_named_pair()
+  u <- union(gs$g1, gs$g2, edge.attr.comb = "sum")
+  expect_setequal(edge_attr_names(u), c("weight"))
+  expect_equal(sort(E(u)$weight), sort(c(11, 22, 33)))
+})
+
+test_that("union() honours per-attribute list spec with rename fallback", {
+  gs <- make_named_pair()
+  V(gs$g1)$color <- letters[1:3]
+  V(gs$g2)$color <- LETTERS[1:3]
+  u <- union(
+    gs$g1,
+    gs$g2,
+    vertex.attr.comb = list(weight = "sum", "rename")
+  )
+  expect_setequal(
+    vertex_attr_names(u),
+    c("name", "weight", "color_1", "color_2")
+  )
+})
+
+test_that("union() can drop clashing attributes with ignore", {
+  gs <- make_named_pair()
+  u <- union(gs$g1, gs$g2, edge.attr.comb = "ignore")
+  expect_length(edge_attr_names(u), 0)
+})
+
+test_that("union() supports custom function combiner", {
+  gs <- make_named_pair()
+  u <- union(
+    gs$g1,
+    gs$g2,
+    vertex.attr.comb = list(weight = function(x) mean(x))
+  )
+  expect_equal(sort(V(u)$weight), sort(c(5.5, 11, 16.5)))
+})
+
+test_that("union() picks first non-NA when only one input has the attr", {
+  gs <- make_named_pair()
+  u <- union(gs$g1, gs$g2, vertex.attr.comb = "first", byname = TRUE)
+  expect_setequal(vertex_attr_names(u), c("name", "weight"))
+  expect_equal(
+    V(u)$weight[match(c("A", "B", "C"), V(u)$name)],
+    c(1, 2, 3)
+  )
+})
+
+test_that("intersection() takes attr.comb args", {
+  gs <- make_named_pair()
+  i <- intersection(gs$g1, gs$g2, edge.attr.comb = "sum")
+  expect_setequal(edge_attr_names(i), c("weight"))
+  expect_equal(sort(E(i)$weight), sort(c(11, 22, 33)))
+})
+
+test_that("compose() takes attr.comb args", {
+  g1 <- graph_from_literal(A - B:D:E, B - C:D, C - D, D - E)
+  g2 <- graph_from_literal(A - B - E - A)
+  V(g1)$foo <- seq_len(vcount(g1))
+  V(g2)$foo <- 10 * seq_len(vcount(g2))
+  g <- compose(g1, g2, vertex.attr.comb = "sum")
+  expect_true("foo" %in% vertex_attr_names(g))
+  expect_false("foo_1" %in% vertex_attr_names(g))
+})
+
+test_that("disjoint_union() combines graph attrs via comb", {
+  g1 <- make_ring(3)
+  g2 <- make_ring(3)
+  g1$label <- "first"
+  g2$label <- "second"
+  u <- disjoint_union(g1, g2, graph.attr.comb = "concat")
+  expect_equal(u$label, c("first", "second"))
+})
+
+test_that("graph.attr.comb defaults to the graph.attr.comb igraph option", {
+  expect_equal(igraph_opt("graph.attr.comb"), "rename")
+
+  g1 <- make_ring(3)
+  g2 <- make_ring(3)
+  g1$label <- "first"
+  g2$label <- "second"
+
+  # Default option ("rename") preserves the historical suffixing behaviour.
+  u <- union(g1, g2)
+  expect_all_true(c("label_1", "label_2") %in% graph_attr_names(u))
+
+  # Setting the option changes the default for the graph operators.
+  local_igraph_options(graph.attr.comb = "ignore")
+  expect_length(graph_attr_names(union(g1, g2)), 0)
+  expect_length(graph_attr_names(intersection(g1, g2)), 0)
+  expect_length(graph_attr_names(disjoint_union(g1, g2)), 0)
+  expect_length(graph_attr_names(compose(g1, g2)), 0)
+})
+
+# A fresh already-simple graph with two edge attributes, one of which the
+# default combination list keeps and one of which it drops. Each caller needs
+# its own: the C core's property cache lives in the graph object, and merely
+# asking whether the graph is simple changes what simplifying it does -- see
+# the second test below.
+simple_graph_with_attrs <- function() {
+  g <- make_graph(c(1, 2, 2, 3), directed = FALSE)
+  E(g)$weight <- c(1, 2)
+  E(g)$foo <- c("a", "b")
+  g
+}
+
+test_that("simplify() applies edge.attr.comb to an already-simple graph", {
+  # `edge.attr.comb` does not only combine attributes across merged edges, it
+  # decides which survive at all: an attribute the list does not name is
+  # dropped even when every group has one member. So a graph that is already
+  # simple still has to go through the combination.
+
+  # The default list ends in "ignore", so `weight` survives and `foo` does not.
+  expect_equal(edge_attr_names(simplify(simple_graph_with_attrs())), "weight")
+  expect_length(
+    edge_attr_names(simplify(
+      simple_graph_with_attrs(),
+      edge.attr.comb = "ignore"
+    )),
+    0
+  )
+  expect_setequal(
+    edge_attr_names(simplify(
+      simple_graph_with_attrs(),
+      edge.attr.comb = list(weight = "sum", foo = "first")
+    )),
+    c("weight", "foo")
+  )
+
+  # Values are untouched -- each edge is its own group.
+  expect_equal(E(simplify(simple_graph_with_attrs()))$weight, c(1, 2))
+})
+
+test_that("simplify() is still cache-sensitive, which is a C-core issue", {
+  # This pins behaviour that is wrong, so that fixing it is noticed here.
+  #
+  # `is_simple()` populates the C core's property cache, and `simplify.c` has
+  # a cache fast path that returns early -- without applying `edge_comb` --
+  # once the cache says there is nothing to remove. So asking whether a graph
+  # is simple changes what simplifying it does. 2.3.3 behaves this way too.
+  # The R side no longer *causes* it: `simplify()` used to open with
+  # `is_simple(graph)`, which warmed the cache on every call and made the
+  # cache-warm answer the only answer. It cannot cure it either --
+  # that fix belongs in src/vendor/cigraph/src/operators/simplify.c.
+  cold <- simple_graph_with_attrs()
+  warm <- simple_graph_with_attrs()
+  invisible(is_simple(warm))
+
+  expect_length(edge_attr_names(simplify(cold, edge.attr.comb = "ignore")), 0)
+  expect_setequal(
+    edge_attr_names(simplify(warm, edge.attr.comb = "ignore")),
+    c("weight", "foo")
+  )
+})
+
+test_that("graph_from_literal() keeps the formula's edge order", {
+  # #824 / #1981: a formula that declares no loops and no multiple edges has no
+  # reason to be rebuilt, so the edges come back in the order they were
+  # written. `graph_from_literal_i()` skips `simplify()` outright to get that,
+  # rather than `simplify()` skipping itself -- which would also suppress
+  # `edge.attr.comb` for every other caller.
+  expect_equal(
+    as_edgelist(graph_from_literal(X - +Z - +Y, Y - +X, X - +Y)),
+    rbind(c("X", "Z"), c("Z", "Y"), c("Y", "X"), c("X", "Y"))
+  )
+
+  # A formula that does need simplifying still gets the canonical order.
+  expect_equal(
+    as_edgelist(graph_from_literal(X - +Z - +Y, Y - +X, X - +Y, X - +Z)),
+    rbind(c("X", "Z"), c("X", "Y"), c("Z", "Y"), c("Y", "X"))
+  )
+})
+
+test_that("simplify() rejects 'rename' combiner", {
+  g <- make_graph(c(1, 2, 1, 2, 1, 2, 2, 3, 3, 4))
+  E(g)$weight <- 1:5
+  expect_error(
+    simplify(g, edge.attr.comb = "rename"),
+    "rename"
+  )
+})
+
+# ---- ellipsis migration: argument coverage ----------------------------------
+
+test_that("complementer() takes `loops` by name and recovers it positionally", {
+  g <- make_ring(4)
+
+  # The complement of C4 has the two missing cross edges plus one loop per vertex.
+  gc <- complementer(g, loops = TRUE)
+  expect_ecount(gc, 6)
+  expect_equal(sum(which_loop(gc)), 4)
+
+  rlang::local_options(lifecycle_verbosity = "warning")
+  lifecycle::expect_deprecated(
+    res <- complementer(g, TRUE)
+  )
+  expect_identical_graphs(res, complementer(g, loops = TRUE))
+})
+
+test_that("compose() takes all tail arguments by name", {
+  g1 <- graph_from_literal(A -+ B, B -+ C)
+  g2 <- graph_from_literal(D -+ E, E -+ F)
+  g1$kind <- "one"
+  g2$kind <- "two"
+  V(g1)$score <- 1:3
+  V(g2)$score <- c(10, 20, 30)
+  E(g1)$w <- c(1, 2)
+  E(g2)$w <- c(10, 20)
+
+  res <- compose(
+    g1,
+    g2,
+    byname = FALSE,
+    graph.attr.comb = "first",
+    vertex.attr.comb = "first",
+    edge.attr.comb = "concat"
+  )
+
+  # By vertex ID the graphs overlap; by name they are disjoint (6 vertices, no edge).
+  expect_vcount(res, 3)
+  expect_ecount(res, 1)
+  expect_equal(as_edgelist(res), cbind("A", "C"))
+  # "first" keeps the first graph's attribute, "concat" concatenates both edges'.
+  expect_equal(res$kind, "one")
+  expect_equal(V(res)$score, 1:3)
+  expect_equal(E(res)$w, list(c(1, 20)))
+})
+
+test_that("compose() recovers legacy positional arguments", {
+  g1 <- graph_from_literal(A -+ B, B -+ C)
+  g2 <- graph_from_literal(D -+ E, E -+ F)
+
+  rlang::local_options(lifecycle_verbosity = "warning")
+  lifecycle::expect_deprecated(
+    res <- compose(g1, g2, FALSE)
+  )
+  expect_identical_graphs(res, compose(g1, g2, byname = FALSE))
 })

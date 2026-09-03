@@ -17,7 +17,7 @@
 \alias{max_cohesion}
 \title{Calculate Cohesive Blocks}
 \usage{
-cohesive_blocks(graph, labels = TRUE)
+cohesive_blocks(graph, ..., labels = TRUE)
 
 \method{length}{cohesiveBlocks}(x)
 
@@ -44,13 +44,9 @@ parent(blocks)
   ...
 )
 
-plot_hierarchy(
-  blocks,
-  layout = layout_as_tree(hierarchy(blocks), root = 1),
-  ...
-)
+plot_hierarchy(blocks, layout = NULL, ...)
 
-export_pajek(blocks, graph, file, project.file = TRUE)
+export_pajek(blocks, graph, file, ..., project.file = TRUE)
 
 max_cohesion(blocks)
 }
@@ -63,15 +59,15 @@ For \code{graphs_from_cohesive_blocks()} and \code{export_pajek()} the same grap
 supplied whose cohesive block structure is given in the \code{blocks()}
 argument.}
 
-\item{labels}{Logical scalar, whether to add the vertex labels to the result
+\item{\dots}{Additional arguments. \code{plot_hierarchy()} and \code{\link[=plot]{plot()}} pass
+them to \code{plot.igraph()}.  \code{\link[=print]{print()}} and \code{\link[=summary]{summary()}} ignore them.}
+
+\item{labels}{Logical, whether to add the vertex labels to the result
 object. These labels can be then used when reporting and plotting the
 cohesive blocks.}
 
 \item{blocks, x, object}{A \code{cohesiveBlocks} object, created with the
 \code{cohesive_blocks()} function.}
-
-\item{\dots}{Additional arguments. \code{plot_hierarchy()} and \code{\link[=plot]{plot()}} pass
-them to \code{plot.igraph()}.  \code{\link[=print]{print()}} and \code{\link[=summary]{summary()}} ignore them.}
 
 \item{y}{The graph whose cohesive blocks are supplied in the \code{x}
 argument.}
@@ -92,8 +88,8 @@ them. By default all cohesive blocks are marked, except the one
 corresponding to the all vertices.}
 
 \item{layout}{The layout of a plot, it is simply passed on to
-\code{plot.igraph()}, see the possible formats there. By default the
-Reingold-Tilford layout generator is used.}
+\code{plot.igraph()}, see the possible formats there. The default \code{NULL} uses
+the Reingold-Tilford layout generator.}
 
 \item{file}{Defines the file (or connection) the Pajek file is written to.
 
@@ -107,7 +103,7 @@ of the files, without extension. (But it can contain the path to the files.)
 
 See also details below.}
 
-\item{project.file}{Logical scalar, whether to create a single Pajek project
+\item{project.file}{Logical, whether to create a single Pajek project
 file containing all the data, or to create separated files for each item.
 See details below.}
 }

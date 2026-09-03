@@ -5,7 +5,7 @@ test_that("iterators work", {
   expect_equal(sort(E(ring)[weight < 4]$weight), 1:3)
   expect_equal(V(ring)[c("A", "C")]$name, c("A", "C"))
 
-  withr::with_seed(42, {
+  igraph_with_seed(42, {
     g_pa <- sample_pa(100, power = 0.3)
   })
 
@@ -196,6 +196,7 @@ test_that("identical_graphs works", {
 })
 
 test_that("identical_graphs considers attributes", {
+  igraph_local_seed(42)
   g <- sample_pa(10)
   g2 <- g
 
@@ -252,6 +253,7 @@ test_that("vs/es refers to the original graph", {
   vs <- V(ring1)
   es <- E(ring1)
 
+  # jarl-ignore unused_object: test design
   ring1 <- ring1 + 4
 
   expect_identical(get_vs_graph(vs), ring2)
@@ -449,4 +451,37 @@ test_that("logical indices are not recycled", {
   g <- make_ring(5)
   expect_snapshot_igraph_error(V(g)[c(TRUE, FALSE)])
   expect_snapshot_igraph_error(E(g)[c(TRUE, FALSE)])
+})
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+test_that("E() tail arguments and legacy positional recovery", {
+  g <- make_ring(10, directed = TRUE)
+
+  # The reversed pair is only matched when direction is ignored.
+  expect_equal(as.numeric(E(g, P = c(1, 2))), 1)
+  expect_equal(as.numeric(E(g, P = c(2, 1), directed = FALSE)), 1)
+  # Path mode selects the consecutive edges along the given vertex path.
+  expect_equal(as.numeric(E(g, path = c(1, 2, 3))), c(1, 2))
+  expect_equal(as.numeric(E(g, path = c(3, 2, 1), directed = FALSE)), c(2, 1))
+
+  lifecycle::expect_deprecated(
+    res <- E(g, c(1, 2))
+  )
+  expect_equal(res, E(g, P = c(1, 2)))
+})
+
+test_that("identical_graphs() tail arguments and legacy positional recovery", {
+  g1 <- make_ring(5)
+  g2 <- make_ring(5)
+  g2$foo <- 1
+
+  # The graph attribute only breaks identity when attributes are compared.
+  expect_false(identical_graphs(g1, g2))
+  expect_true(identical_graphs(g1, g2, attrs = FALSE))
+
+  lifecycle::expect_deprecated(
+    res <- identical_graphs(g1, g2, FALSE)
+  )
+  expect_identical(res, identical_graphs(g1, g2, attrs = FALSE))
 })

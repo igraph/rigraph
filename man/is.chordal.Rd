@@ -25,9 +25,9 @@ that is given..}
 \code{NULL}, then it is automatically calculated by calling
 \code{\link[=max_cardinality]{max_cardinality()}}, or from \code{alpha}.}
 
-\item{fillin}{Logical scalar, whether to calculate the fill-in edges.}
+\item{fillin}{Logical, whether to calculate the fill-in edges.}
 
-\item{newgraph}{Logical scalar, whether to calculate the triangulated graph.}
+\item{newgraph}{Logical, whether to calculate the triangulated graph.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

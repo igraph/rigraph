@@ -527,8 +527,48 @@ tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
 ###################################################################
 
 #' @rdname tkplot
+#' @inheritParams rlang::args_dots_empty
 #' @export
-tk_close <- function(tkp.id, window.close = TRUE) {
+tk_close <- function(
+  tkp.id,
+  ...,
+  window.close = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: tk_close, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: tk_close(tkp.id, window.close)
+    .old_signature <- function(window.close, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn tk_close}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn tk_close}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(window.close)) base::list(window.close = window.close)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(window.close)) "window.close"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn tk_close} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `tk_close()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  tk_close(", base::paste(base::c("tkp.id", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    tk_close(", base::paste(base::c("tkp.id", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   # nocov start
   if (window.close) {
     cmd <- paste(sep = "", "tkp.", tkp.id, "$top")
@@ -555,8 +595,51 @@ tk_off <- function() {
 }
 
 #' @rdname tkplot
+#' @inheritParams rlang::args_dots_empty
 #' @export
-tk_fit <- function(tkp.id, width = NULL, height = NULL) {
+tk_fit <- function(
+  tkp.id,
+  ...,
+  width = NULL,
+  height = NULL
+) {
+  # BEGIN GENERATED ARG_HANDLE: tk_fit, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: tk_fit(tkp.id, width, height)
+    .old_signature <- function(width, height, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn tk_fit}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn tk_fit}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(width)) base::list(width = width),
+        if (!base::missing(height)) base::list(height = height)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(width)) "width",
+        if (!base::missing(height)) "height"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn tk_fit} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `tk_fit()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  tk_fit(", base::paste(base::c("tkp.id", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    tk_fit(", base::paste(base::c("tkp.id", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   # nocov start
   tkp <- .tkplot.get(tkp.id)
   if (is.null(width)) {
@@ -594,7 +677,6 @@ tk_center <- function(tkp.id) {
   tkp <- .tkplot.get(tkp.id)
   width <- as.numeric(tcltk::tkwinfo("width", tkp$canvas))
   height <- as.numeric(tcltk::tkwinfo("height", tkp$canvas))
-  coords <- .tkplot.get(tkp.id, "coords")
   canvas.center.x <- width / 2
   canvas.center.y <- height / 2
   coords <- .tkplot.get(tkp.id, "coords")
@@ -647,8 +729,48 @@ tk_postscript <- function(tkp.id) {
 }
 
 #' @rdname tkplot
+#' @inheritParams rlang::args_dots_empty
 #' @export
-tk_coords <- function(tkp.id, norm = FALSE) {
+tk_coords <- function(
+  tkp.id,
+  ...,
+  norm = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: tk_coords, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: tk_coords(tkp.id, norm)
+    .old_signature <- function(norm, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn tk_coords}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn tk_coords}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(norm)) base::list(norm = norm)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(norm)) "norm"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn tk_coords} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `tk_coords()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  tk_coords(", base::paste(base::c("tkp.id", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    tk_coords(", base::paste(base::c("tkp.id", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   # nocov start
   coords <- .tkplot.get(tkp.id, "coords")
   coords[, 2] <- max(coords[, 2]) - coords[, 2]
@@ -676,8 +798,51 @@ tk_set_coords <- function(tkp.id, coords) {
 }
 
 #' @rdname tkplot
+#' @inheritParams rlang::args_dots_empty
 #' @export
-tk_rotate <- function(tkp.id, degree = NULL, rad = NULL) {
+tk_rotate <- function(
+  tkp.id,
+  ...,
+  degree = NULL,
+  rad = NULL
+) {
+  # BEGIN GENERATED ARG_HANDLE: tk_rotate, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: tk_rotate(tkp.id, degree, rad)
+    .old_signature <- function(degree, rad, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn tk_rotate}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn tk_rotate}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(degree)) base::list(degree = degree),
+        if (!base::missing(rad)) base::list(rad = rad)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(degree)) "degree",
+        if (!base::missing(rad)) "rad"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn tk_rotate} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `tk_rotate()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  tk_rotate(", base::paste(base::c("tkp.id", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    tk_rotate(", base::paste(base::c("tkp.id", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   # nocov start
   coords <- .tkplot.get(tkp.id, "coords")
 
@@ -1091,7 +1256,6 @@ tk_canvas <- function(tkp.id) {
 # Creates all edges
 .tkplot.create.edges <- function(tkp.id) {
   tkp <- .tkplot.get(tkp.id)
-  n <- ecount(tkp$graph)
   edgematrix <- as_edgelist(tkp$graph, names = FALSE)
   mapply(
     function(from, to, id) .tkplot.create.edge(tkp.id, from, to, id),

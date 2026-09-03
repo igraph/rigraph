@@ -5,16 +5,18 @@
 \alias{as_undirected}
 \title{Convert between directed and undirected graphs}
 \usage{
-as_directed(graph, mode = c("mutual", "arbitrary", "random", "acyclic"))
+as_directed(graph, ..., mode = c("mutual", "arbitrary", "random", "acyclic"))
 
 as_undirected(
   graph,
   mode = c("collapse", "each", "mutual"),
-  edge.attr.comb = igraph_opt("edge.attr.comb")
+  edge.attr.comb = NULL
 )
 }
 \arguments{
 \item{graph}{The graph to convert.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character constant, defines the conversion algorithm. For
 \code{as_directed()} it can be \code{mutual} or \code{arbitrary}. For
@@ -25,7 +27,7 @@ as_undirected(
 \code{mode="collapse"} or \code{mode="mutual"}.  In these cases many edges
 might be mapped to a single one in the new graph, and their attributes are
 combined. Please see \code{\link[=attribute.combination]{attribute.combination()}} for details on
-this.}
+this. The default \code{NULL} uses the \code{edge.attr.comb} igraph option.}
 }
 \value{
 A new graph object.

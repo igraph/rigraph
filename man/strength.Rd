@@ -6,7 +6,8 @@
 \usage{
 strength(
   graph,
-  vids = V(graph),
+  vids = NULL,
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = TRUE,
   weights = NULL
@@ -15,7 +16,10 @@ strength(
 \arguments{
 \item{graph}{The input graph.}
 
-\item{vids}{The vertices for which the strength will be calculated.}
+\item{vids}{The vertices for which the strength will be calculated.
+The default \code{NULL} selects all vertices.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character string, \dQuote{out} for out-degree, \dQuote{in} for
 in-degree or \dQuote{all} for the sum of the two. For undirected graphs this

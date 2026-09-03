@@ -117,6 +117,7 @@ bipartite.mapping <- function(graph) {
 #' @param types An optional vertex type vector to use instead of the
 #'   \sQuote{`type`} vertex attribute. You must supply this argument if the
 #'   graph has no \sQuote{`type`} vertex attribute.
+#' @inheritParams rlang::args_dots_empty
 #' @param multiplicity If `TRUE`, then igraph keeps the multiplicity of
 #'   the edges as an edge attribute called \sQuote{weight}.
 #'   E.g. if there is an A-C-B and also an A-D-B
@@ -129,7 +130,7 @@ bipartite.mapping <- function(graph) {
 #'   one projection is requested in argument `which`.
 #' @param which A character scalar to specify which projection(s) to calculate.
 #'   The default is to calculate both.
-#' @param remove.type Logical scalar, whether to remove the `type` vertex
+#' @param remove.type Logical, whether to remove the `type` vertex
 #'   attribute from the projections. This makes sense because these graphs are
 #'   not bipartite any more. However if you want to combine them with each other
 #'   (or other bipartite graphs), then it is worth keeping this attribute. By
@@ -162,11 +163,53 @@ bipartite.mapping <- function(graph) {
 bipartite_projection <- function(
   graph,
   types = NULL,
+  ...,
   multiplicity = TRUE,
   probe1 = NULL,
   which = c("both", "true", "false"),
   remove.type = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: bipartite_projection, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: bipartite_projection(graph, types, multiplicity, probe1, which, remove.type)
+    .old_signature <- function(multiplicity, probe1, which, remove.type, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn bipartite_projection}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn bipartite_projection}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(multiplicity)) base::list(multiplicity = multiplicity),
+        if (!base::missing(probe1)) base::list(probe1 = probe1),
+        if (!base::missing(which)) base::list(which = which),
+        if (!base::missing(remove.type)) base::list(remove.type = remove.type)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(multiplicity)) "multiplicity",
+        if (!base::missing(probe1)) "probe1",
+        if (!base::missing(which)) "which",
+        if (!base::missing(remove.type)) "remove.type"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn bipartite_projection} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `bipartite_projection()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  bipartite_projection(", base::paste(base::c("graph", "types", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    bipartite_projection(", base::paste(base::c("graph", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   ensure_igraph(graph)
   types <- handle_vertex_type_arg(types, graph)

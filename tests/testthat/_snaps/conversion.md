@@ -89,6 +89,25 @@
       The `attr` argument of `as_adjacency_matrix()` is deprecated as of igraph 3.0.0.
       i Please use the `weights` argument instead.
 
+# the `attr` deprecation warning spells out the NULL translation
+
+    Code
+      A <- as_adjacency_matrix(g, attr = NULL, sparse = FALSE)
+    Condition
+      Warning:
+      The `attr` argument of `as_adjacency_matrix()` is deprecated as of igraph 3.0.0.
+      i Please use the `weights` argument instead.
+      i `attr = NULL` becomes `weights = NA`, not `weights = NULL`.
+
+---
+
+    Code
+      B <- as_adjacency_matrix(g, attr = "weight", sparse = FALSE)
+    Condition
+      Warning:
+      The `attr` argument of `as_adjacency_matrix()` is deprecated as of igraph 3.0.0.
+      i Please use the `weights` argument instead.
+
 # as_biadjacency_matrix(attr =) is deprecated but still works
 
     Code

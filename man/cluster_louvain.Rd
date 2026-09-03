@@ -4,10 +4,12 @@
 \alias{cluster_louvain}
 \title{Finding community structure by multi-level optimization of modularity}
 \usage{
-cluster_louvain(graph, weights = NULL, resolution = 1)
+cluster_louvain(graph, ..., weights = NULL, resolution = 1)
 }
 \arguments{
 \item{graph}{The input graph. It must be undirected.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{The weights of the edges. It must be a positive numeric vector,
 \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a

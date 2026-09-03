@@ -381,8 +381,50 @@ max_cliques <- function(
 }
 
 #' @rdname cliques
+#' @inheritParams rlang::args_dots_empty
 #' @export
-count_max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL) {
+count_max_cliques <- function(
+  graph,
+  min = NULL,
+  max = NULL,
+  ...,
+  subset = NULL
+) {
+  # BEGIN GENERATED ARG_HANDLE: count_max_cliques, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: count_max_cliques(graph, min, max, subset)
+    .old_signature <- function(subset, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn count_max_cliques}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn count_max_cliques}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(subset)) base::list(subset = subset)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(subset)) "subset"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn count_max_cliques} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `count_max_cliques()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  count_max_cliques(", base::paste(base::c("graph", "min", "max", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    count_max_cliques(", base::paste(base::c("graph", "min", "max", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   ensure_igraph(graph)
 
@@ -437,6 +479,7 @@ clique_num <- function(graph) {
 #'   `NULL` means no limit, i.e. it is the same as 0.
 #' @param max.weight Numeric constant, upper limit on the weight of the cliques to find.
 #'   `NULL` means no limit.
+#' @inheritParams rlang::args_dots_empty
 #' @param vertex.weights Vertex weight vector. If the graph has a `weight`
 #'   vertex attribute, then this is used by default. If the graph does not have a
 #'   `weight` vertex attribute and this argument is `NULL`, then every
@@ -466,11 +509,55 @@ clique_num <- function(graph) {
 #' weighted_clique_num(g)
 weighted_cliques <- function(
   graph,
+  ...,
   vertex.weights = NULL,
   min.weight = 0,
   max.weight = 0,
   maximal = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: weighted_cliques, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m", "ma", "max"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn weighted_cliques}.")
+    # Pre-3.0.0 signature: weighted_cliques(graph, vertex.weights, min.weight, max.weight, maximal)
+    .old_signature <- function(vertex.weights, min.weight, max.weight, maximal, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn weighted_cliques}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn weighted_cliques}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(vertex.weights)) base::list(vertex.weights = vertex.weights),
+        if (!base::missing(min.weight)) base::list(min.weight = min.weight),
+        if (!base::missing(max.weight)) base::list(max.weight = max.weight),
+        if (!base::missing(maximal)) base::list(maximal = maximal)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(vertex.weights)) "vertex.weights",
+        if (!base::missing(min.weight)) "min.weight",
+        if (!base::missing(max.weight)) "max.weight",
+        if (!base::missing(maximal)) "maximal"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn weighted_cliques} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `weighted_cliques()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  weighted_cliques(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    weighted_cliques(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   weighted_cliques_impl(
     graph = graph,
     vertex_weights = vertex.weights,
@@ -479,17 +566,97 @@ weighted_cliques <- function(
     maximal = maximal
   )
 }
+#' @inheritParams rlang::args_dots_empty
 #' @export
 #' @rdname cliques
-largest_weighted_cliques <- function(graph, vertex.weights = NULL) {
+largest_weighted_cliques <- function(
+  graph,
+  ...,
+  vertex.weights = NULL
+) {
+  # BEGIN GENERATED ARG_HANDLE: largest_weighted_cliques, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: largest_weighted_cliques(graph, vertex.weights)
+    .old_signature <- function(vertex.weights, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn largest_weighted_cliques}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn largest_weighted_cliques}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(vertex.weights)) base::list(vertex.weights = vertex.weights)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(vertex.weights)) "vertex.weights"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn largest_weighted_cliques} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `largest_weighted_cliques()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  largest_weighted_cliques(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    largest_weighted_cliques(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   largest_weighted_cliques_impl(
     graph = graph,
     vertex_weights = vertex.weights
   )
 }
+#' @inheritParams rlang::args_dots_empty
 #' @export
 #' @rdname cliques
-weighted_clique_num <- function(graph, vertex.weights = NULL) {
+weighted_clique_num <- function(
+  graph,
+  ...,
+  vertex.weights = NULL
+) {
+  # BEGIN GENERATED ARG_HANDLE: weighted_clique_num, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: weighted_clique_num(graph, vertex.weights)
+    .old_signature <- function(vertex.weights, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn weighted_clique_num}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn weighted_clique_num}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(vertex.weights)) base::list(vertex.weights = vertex.weights)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(vertex.weights)) "vertex.weights"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn weighted_clique_num} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `weighted_clique_num()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  weighted_clique_num(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    weighted_clique_num(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   weighted_clique_number_impl(
     graph = graph,
     vertex_weights = vertex.weights
@@ -632,8 +799,56 @@ ivs_size <- function(graph) {
 independence_number <- ivs_size
 
 #' @rdname cliques
+#' @inheritParams rlang::args_dots_empty
 #' @export
-clique_size_counts <- function(graph, min = 0, max = 0, maximal = FALSE) {
+clique_size_counts <- function(
+  graph,
+  ...,
+  min = 0,
+  max = 0,
+  maximal = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: clique_size_counts, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m", "ma"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn clique_size_counts}.")
+    # Pre-3.0.0 signature: clique_size_counts(graph, min, max, maximal)
+    .old_signature <- function(min, max, maximal, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn clique_size_counts}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn clique_size_counts}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(min)) base::list(min = min),
+        if (!base::missing(max)) base::list(max = max),
+        if (!base::missing(maximal)) base::list(maximal = maximal)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(min)) "min",
+        if (!base::missing(max)) "max",
+        if (!base::missing(maximal)) "maximal"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn clique_size_counts} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `clique_size_counts()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  clique_size_counts(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    clique_size_counts(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   if (maximal) {
     maximal_cliques_hist_impl(
       graph = graph,
@@ -683,12 +898,53 @@ is_complete <- function(graph) {
 #'
 #' @param graph The input graph.
 #' @param candidate The vertex set to test for being a clique.
+#' @inheritParams rlang::args_dots_empty
 #' @param directed Whether to consider edge directions.
 #' @return `is_clique()` returns `TRUE` if the candidate vertex set forms
 #'   a clique.
 #' @keywords graphs
 #' @export
-is_clique <- function(graph, candidate, directed = FALSE) {
+is_clique <- function(
+  graph,
+  candidate,
+  ...,
+  directed = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: is_clique, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: is_clique(graph, candidate, directed)
+    .old_signature <- function(directed, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn is_clique}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn is_clique}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(directed)) base::list(directed = directed)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(directed)) "directed"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn is_clique} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `is_clique()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  is_clique(", base::paste(base::c("graph", "candidate", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    is_clique(", base::paste(base::c("graph", "candidate", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   is_clique_impl(
     graph = graph,
     candidate = candidate,

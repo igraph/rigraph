@@ -21,7 +21,7 @@ test_that("subgraph_centrality() works", {
 })
 
 test_that("subgraph_centrality() ignored edge directions", {
-  withr::local_seed(137)
+  igraph_local_seed(137)
   g <- sample_gnm(10, 20, directed = TRUE)
   expect_equal(
     subgraph_centrality((g)),
@@ -30,6 +30,7 @@ test_that("subgraph_centrality() ignored edge directions", {
 })
 
 test_that("`authority_score()` works", {
+  igraph_local_seed(42)
   rlang::local_options(lifecycle_verbosity = "quiet")
   mscale <- function(x) {
     if (sd(x) != 0) {
@@ -86,6 +87,7 @@ test_that("`authority_score()` works", {
 })
 
 test_that("`hub_score()` works", {
+  igraph_local_seed(42)
   rlang::local_options(lifecycle_verbosity = "quiet")
   mscale <- function(x) {
     if (sd(x) != 0) {
@@ -144,7 +146,7 @@ test_that("`hub_score()` works", {
 test_that("authority_score survives stress test", {
   skip_on_cran()
 
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   expect_principal <- function(M, lambda) {
     expect_equal(eigen(M)$values[1], lambda)
@@ -172,6 +174,7 @@ test_that("authority_score survives stress test", {
 })
 
 test_that("`hits_score()` works -- authority", {
+  igraph_local_seed(42)
   mscale <- function(x) {
     if (sd(x) != 0) {
       x <- scale(x)
@@ -220,6 +223,7 @@ test_that("`hits_score()` works -- authority", {
 })
 
 test_that("`hits_scores()` works -- hub", {
+  igraph_local_seed(42)
   mscale <- function(x) {
     if (sd(x) != 0) {
       x <- scale(x)
@@ -366,6 +370,7 @@ test_that("betweenness() -- shortest paths are compared with tolerance when calc
 })
 
 test_that("edge_betweenness() works", {
+  igraph_local_seed(42)
   kite <- graph_from_literal(
     Andre - Beverly:Carol:Diane:Fernando,
     Beverly - Andre:Diane:Ed:Garth,
@@ -550,6 +555,7 @@ test_that("power_centrality() works", {
 })
 
 test_that("eigen_centrality() works", {
+  igraph_local_seed(42)
   kite <- graph_from_literal(
     Andre - Beverly:Carol:Diane:Fernando,
     Beverly - Andre:Diane:Ed:Garth,
@@ -567,7 +573,7 @@ test_that("eigen_centrality() works", {
     evc,
     structure(
       c(0.732, 0.732, 0.594, 1, 0.827, 0.594, 0.827, 0.407, 0.1, 0.023),
-      .Names = c("Andre", "Beverly", "Carol", "Diane", "Fernando", "Ed", "Garth", "Heather", "Ike", "Jane")
+      names = c("Andre", "Beverly", "Carol", "Diane", "Fernando", "Ed", "Garth", "Heather", "Ike", "Jane")
     )
   )
 
@@ -631,6 +637,7 @@ test_that("sparse alpha_centrality() works", {
 ## weighted version
 
 test_that("weighted dense alpha_centrality() works", {
+  igraph_local_seed(42)
   star <- make_star(10)
   E(star)$weight <- sample(ecount(star))
 
@@ -645,6 +652,7 @@ test_that("weighted dense alpha_centrality() works", {
 })
 
 test_that("weighted sparse alpha_centrality() works", {
+  igraph_local_seed(42)
   star <- make_star(10)
   E(star)$weight <- sample(ecount(star))
 
@@ -659,6 +667,7 @@ test_that("weighted sparse alpha_centrality() works", {
 })
 
 test_that("alpha_centrality() works with custom weight attribute names", {
+  igraph_local_seed(42)
   star <- make_star(10)
   E(star)$myweight <- sample(ecount(star))
 
@@ -675,6 +684,7 @@ test_that("alpha_centrality() works with custom weight attribute names", {
 })
 
 test_that("alpha_centrality() accepts a numeric weights vector", {
+  igraph_local_seed(42)
   star <- make_star(10)
   w <- sample(ecount(star))
   E(star)$weight <- w
@@ -689,6 +699,7 @@ test_that("alpha_centrality() accepts a numeric weights vector", {
 })
 
 test_that("alpha_centrality() does not mutate the input graph", {
+  igraph_local_seed(42)
   star <- make_star(10)
   w <- sample(ecount(star))
   alpha_centrality(star, weights = w, sparse = FALSE)
@@ -745,12 +756,12 @@ test_that("undirected alpha_centrality() works, #653", {
   expect_equal(ac1, ac2)
 
   g2 <- as_directed(g, mode = "mutual")
-  ac3 <- alpha_centrality(g, sparse = FALSE)
+  ac3 <- alpha_centrality(g2, sparse = FALSE)
   expect_equal(ac1, ac3)
 })
 
 test_that("spectrum() works for symmetric matrices", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   std <- function(x) {
     x <- zapsmall(x)
@@ -776,15 +787,17 @@ test_that("spectrum() works for symmetric matrices", {
 
   rlang::local_options(lifecycle_verbosity = "warning")
   expect_warning(
-    e3 <- spectrum(
+    spectrum(
       g,
       which = list(howmany = 4, pos = "SA"),
       options = arpack_defaults
-    )
+    ),
+    "must be a list"
   )
 })
 
 test_that("arpack lifecycle warning", {
+  igraph_local_seed(42)
   rlang::local_options(lifecycle_verbosity = "warning")
 
   f <- function(x, extra = NULL) x
@@ -799,12 +812,14 @@ test_that("arpack lifecycle warning", {
 })
 
 test_that("arpack works for identity matrix", {
+  igraph_local_seed(42)
   f <- function(x, extra = NULL) x
   res <- arpack(f, options = list(n = 10, nev = 2, ncv = 4), sym = TRUE)
   expect_equal(res$values, c(1, 1))
 })
 
 test_that("arpack works on the Laplacian of a star", {
+  igraph_local_seed(42)
   f <- function(x, extra = NULL) {
     y <- x
     y[1] <- (length(x) - 1) * x[1] - sum(x[-1])
@@ -832,6 +847,7 @@ test_that("arpack works on the Laplacian of a star", {
 # Complex case
 
 test_that("arpack works for non-symmetric matrices", {
+  igraph_local_seed(42)
   A <- structure(
     c(
       -6, -6, 7, 6, 1, -9, -3, 2, -9, -7, 0, 1, -7, 8,
@@ -841,7 +857,7 @@ test_that("arpack works for non-symmetric matrices", {
       1, -4, 9, -2, 10, 1, -7, 7, 6, 7, -3, 0, 9, -5, -8, 1, -3,
       -3, -8, -7, -8, 10, 8, 7, 0, 6, -7, -8, 10, 10, 1, 0, -2, 6
     ),
-    .Dim = c(10L, 10L)
+    dim = c(10L, 10L)
   )
 
   f <- function(x, extra = NULL) A %*% x
@@ -896,6 +912,8 @@ test_that("arpack works for non-symmetric matrices", {
 # TODO: further tests for typically hard cases
 
 test_that("eigen_centrality() deprecated scale argument", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  igraph_local_seed(42)
   g <- make_ring(10, directed = FALSE)
   expect_snapshot({
     invisible(eigen_centrality(g, scale = TRUE))
@@ -918,4 +936,325 @@ test_that("arpack() errors well", {
       sym = TRUE
     )
   })
+})
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+test_that("betweenness() covers migrated tail args and positional recovery", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  ring <- make_ring(5)
+  # The weight attribute is a decoy that the explicit `weights` must override.
+  E(ring)$weight <- c(100, 1, 1, 1, 1)
+
+  res <- betweenness(
+    ring,
+    v = V(ring)[1:3],
+    directed = FALSE,
+    weights = rep(1, 5),
+    normalized = TRUE,
+    cutoff = 2
+  )
+  # In C5 with unit weights each vertex lies on exactly one geodesic,
+  # and normalization divides by (n - 1) * (n - 2) / 2 = 6.
+  expect_equal(res, rep(1 / 6, 3))
+  # A cutoff of 1 removes all paths that have intermediate vertices.
+  expect_equal(
+    betweenness(ring, weights = rep(1, 5), cutoff = 1),
+    rep(0, 5)
+  )
+
+  lifecycle::expect_deprecated(
+    res_legacy <- betweenness(ring, V(ring), FALSE)
+  )
+  expect_identical(res_legacy, betweenness(ring, V(ring), directed = FALSE))
+})
+
+test_that("closeness() covers migrated tail args and positional recovery", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  path <- make_graph(c(1, 2, 2, 3), directed = TRUE)
+  # The weight attribute is a decoy that the explicit `weights` must override.
+  E(path)$weight <- c(5, 5)
+
+  res <- closeness(
+    path,
+    vids = V(path)[3],
+    mode = "in",
+    weights = c(1, 1),
+    normalized = TRUE,
+    cutoff = -1
+  )
+  # Vertex 3 is reached with distances 1 and 2, so 2 / (1 + 2).
+  expect_equal(res, 2 / 3)
+  # With a cutoff of 1 only the direct predecessor remains.
+  expect_equal(
+    closeness(
+      path,
+      vids = V(path)[3],
+      mode = "in",
+      weights = c(1, 1),
+      cutoff = 1
+    ),
+    1
+  )
+
+  lifecycle::expect_deprecated(
+    res_legacy <- closeness(path, V(path), "in")
+  )
+  expect_identical(res_legacy, closeness(path, V(path), mode = "in"))
+})
+
+test_that("edge_betweenness() covers migrated tail args and positional recovery", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  ring <- make_ring(5)
+  # The weight attribute is a decoy that the explicit `weights` must override.
+  E(ring)$weight <- c(100, 1, 1, 1, 1)
+
+  res <- edge_betweenness(
+    ring,
+    e = E(ring)[1:3],
+    directed = FALSE,
+    weights = rep(1, 5),
+    cutoff = -1
+  )
+  # In C5 with unit weights each edge carries three geodesics.
+  expect_equal(res, rep(3, 3))
+  # With a cutoff of 1 each edge only carries the path of its endpoints.
+  expect_equal(
+    edge_betweenness(ring, e = E(ring)[1:3], weights = rep(1, 5), cutoff = 1),
+    rep(1, 3)
+  )
+
+  lifecycle::expect_deprecated(
+    res_legacy <- edge_betweenness(ring, E(ring), FALSE)
+  )
+  expect_identical(
+    res_legacy,
+    edge_betweenness(ring, E(ring), directed = FALSE)
+  )
+})
+
+test_that("harmonic_centrality() covers migrated tail args and positional recovery", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  path <- make_graph(c(1, 2, 2, 3), directed = TRUE)
+  # The weight attribute is a decoy that the explicit `weights` must override.
+  E(path)$weight <- c(5, 5)
+
+  res <- harmonic_centrality(
+    path,
+    vids = V(path)[3],
+    mode = "in",
+    weights = c(1, 1),
+    normalized = TRUE,
+    cutoff = -1
+  )
+  # Vertex 3 collects inverse distances 1 + 1/2, normalized by n - 1 = 2.
+  expect_equal(res, 0.75)
+  # The cutoff drops the two-step path from vertex 1.
+  expect_equal(
+    harmonic_centrality(
+      path,
+      vids = V(path)[3],
+      mode = "in",
+      weights = c(1, 1),
+      normalized = TRUE,
+      cutoff = 1
+    ),
+    0.5
+  )
+
+  lifecycle::expect_deprecated(
+    res_legacy <- harmonic_centrality(path, V(path), "in")
+  )
+  expect_identical(res_legacy, harmonic_centrality(path, V(path), mode = "in"))
+})
+
+test_that("page_rank() covers migrated tail args and positional recovery", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  star <- make_star(10, mode = "undirected")
+  # The weight attribute is a decoy that the explicit `weights` must override.
+  E(star)$weight <- c(10, rep(1, 8))
+
+  # `algo` keeps its default value:
+  # non-default values select the legacy ARPACK implementation,
+  # and `options` is only consumed by that implementation.
+  res <- page_rank(
+    star,
+    algo = "prpack",
+    vids = V(star)[1:5],
+    directed = FALSE,
+    damping = 0.9,
+    personalized = c(1, rep(0, 9)),
+    weights = rep(1, 9),
+    options = arpack_defaults()
+  )
+  expect_length(res$vector, 5)
+  # All personalization mass sits on the hub, so it dominates the leaves,
+  # and the unit weights keep the leaves interchangeable.
+  expect_true(res$vector[1] > max(res$vector[-1]))
+  expect_equal(sd(res$vector[-1]), 0)
+  # PRPACK ignores the ARPACK options, and `vids` merely subsets the result.
+  res_full <- page_rank(
+    star,
+    directed = FALSE,
+    damping = 0.9,
+    personalized = c(1, rep(0, 9)),
+    weights = rep(1, 9)
+  )
+  expect_equal(res$vector, res_full$vector[1:5])
+  expect_equal(sum(res_full$vector), 1)
+
+  lifecycle::expect_deprecated(
+    res_legacy <- page_rank(star, "prpack")
+  )
+  expect_identical(res_legacy, page_rank(star, algo = "prpack"))
+})
+
+test_that("strength() covers migrated tail args and positional recovery", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  star <- make_star(6, mode = "out")
+  star <- add_edges(star, c(2, 2))
+  E(star)$weight <- 1:6
+
+  res <- strength(
+    star,
+    vids = V(star)[1:3],
+    mode = "out",
+    loops = FALSE,
+    weights = 1:6
+  )
+  # Only the hub has non-loop out-edges, with weights 1 to 5.
+  expect_equal(res, c(15, 0, 0))
+  # Counting loops adds the loop weight 6 to vertex 2.
+  expect_equal(
+    strength(
+      star,
+      vids = V(star)[1:3],
+      mode = "out",
+      loops = TRUE,
+      weights = 1:6
+    ),
+    c(15, 6, 0)
+  )
+
+  lifecycle::expect_deprecated(
+    res_legacy <- strength(star, V(star), "in")
+  )
+  expect_identical(res_legacy, strength(star, V(star), mode = "in"))
+})
+
+test_that("diversity() covers migrated tail args and positional recovery", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  ring <- make_ring(10)
+
+  res <- diversity(ring, weights = 1:10, vids = V(ring)[1:4])
+  # Scaled entropy of the two incident edge weights, e.g. {10, 1} for vertex 1.
+  expect_equal(
+    res,
+    c(0.4394970, 0.9182958, 0.9709506, 0.9852281),
+    tolerance = 1e-6
+  )
+
+  lifecycle::expect_deprecated(
+    res_legacy <- diversity(ring, 1:10)
+  )
+  expect_identical(res_legacy, diversity(ring, weights = 1:10))
+})
+
+test_that("subgraph_centrality() covers migrated tail args and positional recovery", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  # A square with a loop on vertex 1, so that `diag` has a visible effect.
+  looped <- make_graph(c(1, 2, 2, 3, 3, 4, 4, 1, 1, 1), directed = FALSE)
+
+  res <- subgraph_centrality(looped, diag = TRUE)
+  expect_equal(
+    res,
+    Matrix::diag(Matrix::expm(as_adjacency_matrix(looped, sparse = FALSE))),
+    tolerance = 1e-10
+  )
+  expect_false(isTRUE(all.equal(res, subgraph_centrality(looped))))
+
+  lifecycle::expect_deprecated(
+    res_legacy <- subgraph_centrality(looped, TRUE)
+  )
+  expect_identical(res_legacy, subgraph_centrality(looped, diag = TRUE))
+})
+
+test_that("power_centrality() covers migrated tail args and positional recovery", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  ring <- make_ring(5)
+  # The weight attribute is a decoy that the explicit `weights` must override.
+  E(ring)$weight <- c(1.5, 2.5, 3.5, 4.5, 5.5)
+
+  res <- power_centrality(
+    ring,
+    nodes = V(ring)[1:3],
+    loops = FALSE,
+    exponent = 0.2,
+    rescale = TRUE,
+    tol = 1e-10,
+    sparse = FALSE,
+    weights = rep(1, 5)
+  )
+  # With unit weights the ring is symmetric and rescaled scores sum to one.
+  expect_equal(res, rep(1 / 5, 3))
+
+  # `loops` toggles the adjacency diagonal of a path with a loop on vertex 2.
+  looped <- make_graph(c(1, 2, 2, 3, 2, 2), directed = FALSE)
+  expect_false(isTRUE(all.equal(
+    power_centrality(looped, loops = TRUE, sparse = FALSE),
+    power_centrality(looped, loops = FALSE, sparse = FALSE)
+  )))
+
+  lifecycle::expect_deprecated(
+    res_legacy <- power_centrality(looped, V(looped), TRUE)
+  )
+  expect_identical(
+    res_legacy,
+    power_centrality(looped, V(looped), loops = TRUE)
+  )
+})
+
+test_that("alpha_centrality() covers migrated tail args and positional recovery", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  # A small DAG with a loop on vertex 3 and a decoy weight attribute.
+  dag <- make_graph(c(1, 3, 2, 3, 3, 4, 4, 5, 3, 3))
+  E(dag)$weight <- rep(7, 5)
+
+  base <- alpha_centrality(
+    dag,
+    alpha = 0.5,
+    loops = TRUE,
+    weights = NA,
+    tol = 1e-8,
+    sparse = FALSE
+  )
+  expect_equal(base, c(1, 1, 4, 3, 2.5))
+  # The scores are linear in the exogenous input.
+  res <- alpha_centrality(
+    dag,
+    nodes = V(dag)[1:3],
+    alpha = 0.5,
+    loops = TRUE,
+    exo = 2,
+    weights = NA,
+    tol = 1e-8,
+    sparse = FALSE
+  )
+  expect_equal(res, 2 * base[1:3])
+  # Ignoring the loop changes the scores.
+  expect_false(isTRUE(all.equal(
+    base,
+    alpha_centrality(
+      dag,
+      alpha = 0.5,
+      loops = FALSE,
+      weights = NA,
+      sparse = FALSE
+    )
+  )))
+
+  lifecycle::expect_deprecated(
+    res_legacy <- alpha_centrality(dag, V(dag), 0.75)
+  )
+  expect_identical(res_legacy, alpha_centrality(dag, V(dag), alpha = 0.75))
 })

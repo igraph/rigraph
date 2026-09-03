@@ -19,15 +19,18 @@ citing.cited.type.game(
 \item{edges}{Number of edges per step.}
 
 \item{types}{Vector of length \sQuote{\code{n}}, the types of the vertices.
-Types are numbered from zero.}
+Types are numbered from zero. The default \code{NULL} gives all vertices
+type zero.}
 
 \item{pref}{Vector (\code{sample_last_cit()} and \code{sample_cit_types()} or
 matrix (\code{sample_cit_cit_types()}) giving the (unnormalized) citation
-probabilities for the different vertex types.}
+probabilities for the different vertex types. The default \code{NULL} uses
+\code{(1:(agebins + 1))^-3} for \code{sample_last_cit()} and all-one probabilities
+for the other two.}
 
-\item{directed}{Logical scalar, whether to generate directed networks.}
+\item{directed}{Logical, whether to generate directed networks.}
 
-\item{attr}{Logical scalar, whether to add the vertex types to the generated
+\item{attr}{Logical, whether to add the vertex types to the generated
 graph as a vertex attribute called \sQuote{\code{type}}.}
 }
 \description{

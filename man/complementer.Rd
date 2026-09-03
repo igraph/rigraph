@@ -4,12 +4,14 @@
 \alias{complementer}
 \title{Complementer of a graph}
 \usage{
-complementer(graph, loops = FALSE)
+complementer(graph, ..., loops = FALSE)
 }
 \arguments{
 \item{graph}{The input graph, can be directed or undirected.}
 
-\item{loops}{Logical constant, whether to generate loop edges.}
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{loops}{Logical, whether to generate loop edges.}
 }
 \value{
 A new graph object.

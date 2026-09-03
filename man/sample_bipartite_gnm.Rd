@@ -38,7 +38,7 @@ sample_bipartite_gnp(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{directed}{Logical scalar, whether to create a directed graph. See also
+\item{directed}{Logical, whether to create a directed graph. See also
 the \code{mode} argument.}
 
 \item{mode}{Character scalar, specifies how to direct the edges in directed

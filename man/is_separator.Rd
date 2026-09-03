@@ -14,7 +14,7 @@ ignored.}
 separator.}
 }
 \value{
-A logical scalar, whether the supplied vertex set is a (minimal)
+A Logical, whether the supplied vertex set is a (minimal)
 vertex separator or not.
 lists all vertex separator of minimum size.
 }

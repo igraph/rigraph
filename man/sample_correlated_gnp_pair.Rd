@@ -16,7 +16,7 @@ adjacency matrix being used as a vector).}
 \item{p}{A numeric scalar, the probability of an edge between two vertices,
 it must in the open (0,1) interval.}
 
-\item{directed}{Logical scalar, whether to generate directed graphs.}
+\item{directed}{Logical, whether to generate directed graphs.}
 
 \item{permutation}{A numeric vector, a permutation vector that is applied on
 the vertices of the first graph, to get the second graph.  If \code{NULL},

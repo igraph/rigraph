@@ -11,16 +11,19 @@ subgraph(graph, vids)
 induced_subgraph(
   graph,
   vids,
+  ...,
   impl = c("auto", "copy_and_delete", "create_from_scratch")
 )
 
-subgraph_from_edges(graph, eids, delete.vertices = TRUE)
+subgraph_from_edges(graph, eids, ..., delete.vertices = TRUE)
 }
 \arguments{
 \item{graph}{The original graph.}
 
 \item{vids}{Numeric vector, the vertices of the original graph which will
 form the subgraph.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{impl}{Character scalar, to choose between two implementation of the
 subgraph calculation. \sQuote{\code{copy_and_delete}} copies the graph
@@ -33,7 +36,7 @@ result graph.}
 
 \item{eids}{The edge IDs of the edges that will be kept in the result graph.}
 
-\item{delete.vertices}{Logical scalar, whether to remove vertices that do
+\item{delete.vertices}{Logical, whether to remove vertices that do
 not have any adjacent edges in \code{eids}.}
 }
 \value{

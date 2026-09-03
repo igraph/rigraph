@@ -6,11 +6,11 @@
 \alias{adhesion}
 \title{Edge connectivity}
 \usage{
-edge_connectivity(graph, source = NULL, target = NULL, checks = TRUE)
+edge_connectivity(graph, source = NULL, target = NULL, ..., checks = TRUE)
 
 edge_disjoint_paths(graph, source = NULL, target = NULL)
 
-adhesion(graph, checks = TRUE)
+adhesion(graph, ..., checks = TRUE)
 }
 \arguments{
 \item{graph}{The input graph.}
@@ -21,7 +21,9 @@ can be \code{NULL}, see details below.}
 \item{target}{The ID of the target vertex, for \code{edge_connectivity()} it
 can be \code{NULL}, see details below.}
 
-\item{checks}{Logical constant. Whether to check that the graph is connected
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{checks}{Logical. Whether to check that the graph is connected
 and also the degree of the vertices. If the graph is not (strongly)
 connected then the connectivity is obviously zero. Otherwise if the minimum
 degree is one then the edge connectivity is also one. It is a good idea to

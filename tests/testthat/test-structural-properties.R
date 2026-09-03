@@ -32,6 +32,7 @@ test_that("dfs() deprecated arguments", {
 })
 
 test_that("degree() works", {
+  igraph_local_seed(42)
   gnp1 <- sample_gnp(100, 1 / 100)
   gnp1_deg <- degree(gnp1)
   el <- as_edgelist(gnp1)
@@ -68,11 +69,13 @@ test_that("max_degree() works", {
   expect_equal(max_degree(g, loops = FALSE), 2)
   expect_equal(max_degree(g, mode = "out", loops = FALSE), 1)
   expect_equal(max_degree(g, mode = "in", loops = FALSE), 1)
-  expect_equal(max_degree(g, v = c()), 0)
+  expect_equal(max_degree(g, v = integer()), 0)
+  expect_equal(max_degree(g, v = NULL), max_degree(g))
   expect_equal(max_degree(make_empty_graph()), 0)
 })
 
 test_that("mean_degree() works", {
+  igraph_local_seed(42)
   # Undirected graph: formula is 2 * edges / vertices
   g_undirected <- make_ring(10)
   expect_equal(mean_degree(g_undirected), 2)
@@ -267,6 +270,7 @@ test_that("bfs() does not pad order", {
 })
 
 test_that("diameter() works -- undirected", {
+  igraph_local_seed(42)
   g <- largest_component(sample_gnp(30, 3 / 30))
   sp <- distances(g)
   expect_equal(max(sp), diameter(g))
@@ -278,6 +282,7 @@ test_that("diameter() works -- undirected", {
 })
 
 test_that("diameter() works -- directed", {
+  igraph_local_seed(42)
   g <- sample_gnp(30, 3 / 30, directed = TRUE)
   sp <- distances(g, mode = "out")
   sp[sp == Inf] <- NA
@@ -285,6 +290,7 @@ test_that("diameter() works -- directed", {
 })
 
 test_that("diameter() works -- weighted", {
+  igraph_local_seed(42)
   g <- sample_gnp(30, 3 / 30, directed = TRUE)
   E(g)$weight <- sample(1:10, ecount(g), replace = TRUE)
   sp <- distances(g, mode = "out")
@@ -308,6 +314,7 @@ test_that("diameter() correctly handles disconnected graphs", {
 })
 
 test_that("get_diameter() works", {
+  igraph_local_seed(42)
   g <- make_ring(10)
   E(g)$weight <- sample(seq_len(ecount(g)))
   d <- diameter(g)
@@ -494,7 +501,7 @@ test_that("k_shortest_paths() works with weights", {
 })
 
 test_that("transitivity() works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g <- sample_gnp(100, p = 10 / 100)
 
   t1 <- transitivity(g, type = "global")
@@ -507,7 +514,7 @@ test_that("transitivity() works", {
   t33 <- transitivity(g, type = "local")
   est3 <- structure(
     c(0, 0.06667, 0.1028, 0.1016, 0.1333, 0.2222),
-    .Names = c(
+    names = c(
       "Min.",
       "1st Qu.",
       "Median",
@@ -522,7 +529,7 @@ test_that("transitivity() works", {
 })
 
 test_that("no integer overflow", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g <- make_star(80000, mode = "undirected") + edges(sample(2:1000), 100)
   mtr <- min(transitivity(g, type = "local"), na.rm = TRUE)
   expect_true(mtr > 0)
@@ -579,7 +586,7 @@ test_that("constraint() works", {
   c2 <- constraint.orig(karate)
   expect_equal(c1, c2)
 
-  withr::local_seed(42)
+  igraph_local_seed(42)
   E(karate)$weight <- sample(1:10, replace = TRUE, ecount(karate))
   wc1 <- constraint(karate)
   wc2 <- constraint.orig(karate, weights = "weight")
@@ -587,10 +594,11 @@ test_that("constraint() works", {
 })
 
 test_that("ego() works", {
+  igraph_local_seed(42)
   neig <- function(graph, order, vertices) {
     sp <- distances(graph)
     v <- unique(unlist(lapply(vertices, function(x) {
-      w <- which(sp[x, ] <= order)
+      which(sp[x, ] <= order)
     })))
     induced_subgraph(graph, c(v, vertices))
   }
@@ -607,7 +615,7 @@ test_that("ego() works", {
   nei <- function(graph, order, vertices) {
     sp <- distances(graph)
     v <- unique(unlist(lapply(vertices, function(x) {
-      w <- which(sp[x, ] <= order)
+      which(sp[x, ] <= order)
     })))
     v
   }
@@ -751,7 +759,7 @@ test_that("unfold_tree() works", {
 })
 
 test_that("count_components() counts correctly", {
-  g <- make_star(20, "undirected")
+  g <- make_star(20, mode = "undirected")
   h <- make_ring(10)
 
   G <- disjoint_union(g, h)
@@ -848,6 +856,7 @@ test_that("laplacian_matrix() works", {
 })
 
 test_that("mean_distance works", {
+  igraph_local_seed(42)
   avg_path_length <- function(graph) {
     sp <- distances(graph, mode = "out")
     if (is_directed(graph)) {
@@ -889,6 +898,7 @@ test_that("mean_distance works correctly for disconnected graphs", {
 })
 
 test_that("mean_distance can provide details", {
+  igraph_local_seed(42)
   avg_path_length <- function(graph) {
     sp <- distances(graph, mode = "out")
     if (is_directed(graph)) {
@@ -996,6 +1006,7 @@ test_that("any_loop(), which_loop(), count_loops() works", {
 })
 
 test_that("edge_density works", {
+  igraph_local_seed(42)
   g <- sample_gnp(50, 4 / 50)
   gd <- edge_density(g)
   gd2 <- ecount(g) / vcount(g) / (vcount(g) - 1) * 2
@@ -1010,7 +1021,7 @@ test_that("edge_density works", {
 })
 
 test_that("knn works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   ## Some trivial ones
   g <- make_ring(10)
@@ -1048,7 +1059,7 @@ test_that("knn works", {
         knn = c(1, rep(9, 9)),
         knnk = c(9, NaN, NaN, NaN, NaN, NaN, NaN, NaN, 1)
       ),
-      .Names = c("knn", "knnk")
+      names = c("knn", "knnk")
     )
   )
 })
@@ -1099,4 +1110,426 @@ test_that("feedback_vertex_set works with weights", {
   V(g)$weight <- 5:1
   fvs <- feedback_vertex_set(g)
   expect_equal(as.vector(fvs), c(5))
+})
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+test_that("diameter() tail arguments and legacy positional recovery", {
+  g <- make_ring(4, directed = TRUE)
+  E(g)$weight <- c(1, 2, 3, 4)
+
+  # Ignoring both direction and weights turns the graph into a plain 4-ring.
+  expect_equal(
+    diameter(g, directed = FALSE, unconnected = FALSE, weights = NA),
+    2
+  )
+
+  lifecycle::expect_deprecated(res <- diameter(g, FALSE))
+  expect_identical(res, diameter(g, directed = FALSE))
+})
+
+test_that("get_diameter() tail arguments and legacy positional recovery", {
+  g <- make_ring(4, directed = TRUE)
+  E(g)$weight <- c(1, 2, 3, 4)
+
+  path <- get_diameter(g, directed = FALSE, unconnected = FALSE, weights = NA)
+  expect_equal(as.numeric(path), c(1, 2, 3))
+
+  lifecycle::expect_deprecated(res <- get_diameter(g, FALSE))
+  expect_equal(res, get_diameter(g, directed = FALSE))
+})
+
+test_that("farthest_vertices() tail arguments and legacy positional recovery", {
+  g <- make_ring(4, directed = TRUE)
+  E(g)$weight <- c(1, 2, 3, 4)
+
+  fv <- farthest_vertices(
+    g,
+    directed = FALSE,
+    unconnected = FALSE,
+    weights = NA
+  )
+  expect_equal(as.numeric(fv$vertices), c(1, 3))
+  expect_equal(fv$distance, 2)
+
+  lifecycle::expect_deprecated(res <- farthest_vertices(g, FALSE))
+  expect_equal(res, farthest_vertices(g, directed = FALSE))
+})
+
+test_that("mean_distance() tail arguments and legacy positional recovery", {
+  g <- make_ring(4, directed = TRUE)
+  E(g)$weight <- c(1, 2, 3, 4)
+
+  # On the unweighted undirected 4-ring the mean pairwise distance is 8/6.
+  expect_equal(
+    mean_distance(g, weights = NA, directed = FALSE, unconnected = TRUE),
+    4 / 3
+  )
+
+  lifecycle::expect_deprecated(res <- mean_distance(g, NA))
+  expect_identical(res, mean_distance(g, weights = NA))
+})
+
+test_that("degree() tail arguments and legacy positional recovery", {
+  g <- make_graph(c(1, 2, 2, 2, 2, 3), directed = TRUE)
+
+  # loops = FALSE drops the self-loop at vertex 2 before normalizing.
+  expect_equal(
+    degree(g, mode = "all", loops = FALSE, normalized = TRUE),
+    c(0.5, 1, 0.5)
+  )
+
+  lifecycle::expect_deprecated(res <- degree(g, V(g), "out"))
+  expect_identical(res, degree(g, V(g), mode = "out"))
+})
+
+test_that("mean_degree() legacy positional recovery", {
+  g <- make_graph(c(1, 2, 2, 2, 2, 3), directed = TRUE)
+
+  lifecycle::expect_deprecated(res <- mean_degree(g, FALSE))
+  expect_identical(res, mean_degree(g, loops = FALSE))
+})
+
+test_that("distances() legacy positional recovery", {
+  g <- make_ring(5, directed = TRUE)
+
+  lifecycle::expect_deprecated(res <- distances(g, V(g), V(g), "out"))
+  expect_identical(res, distances(g, v = V(g), to = V(g), mode = "out"))
+})
+
+test_that("shortest_paths() tail arguments and legacy positional recovery", {
+  g <- make_ring(5, directed = TRUE)
+
+  # Plain indices: the es wrapper cannot represent 'no inbound edge' entries.
+  local_igraph_options(return.vs.es = FALSE)
+  res <- shortest_paths(
+    g,
+    1,
+    3,
+    mode = "out",
+    weights = NA,
+    output = "both",
+    predecessors = TRUE,
+    inbound.edges = TRUE,
+    algorithm = "bellman-ford"
+  )
+  expect_equal(res$vpath, list(c(1, 2, 3)))
+  expect_equal(res$epath, list(c(1, 2)))
+  expect_equal(res$predecessors, c(0, 1, 2, -1, -1))
+  expect_equal(res$inbound_edges, c(0, 1, 2, 0, 0))
+
+  lifecycle::expect_deprecated(res2 <- shortest_paths(g, 1, 3, "out"))
+  expect_equal(res2, shortest_paths(g, 1, 3, mode = "out"))
+})
+
+test_that("all_shortest_paths() tail arguments and legacy positional recovery", {
+  g <- make_ring(5, directed = TRUE)
+
+  res <- all_shortest_paths(g, 1, 3, mode = "all", weights = NA)
+  expect_equal(lapply(res$vpaths, as.numeric), list(c(1, 2, 3)))
+  expect_equal(res$nrgeo, rep(1, 5))
+
+  lifecycle::expect_deprecated(res2 <- all_shortest_paths(g, 1, 3, "all"))
+  expect_equal(res2, all_shortest_paths(g, 1, 3, mode = "all"))
+})
+
+test_that("subcomponent() tail arguments and legacy positional recovery", {
+  g <- make_graph(c(1, 2, 2, 3), directed = TRUE)
+
+  expect_equal(as.numeric(sort(subcomponent(g, 2, mode = "out"))), c(2, 3))
+  expect_equal(as.numeric(sort(subcomponent(g, 2, mode = "in"))), c(1, 2))
+
+  lifecycle::expect_deprecated(res <- subcomponent(g, 2, "out"))
+  expect_equal(res, subcomponent(g, 2, mode = "out"))
+})
+
+test_that("induced_subgraph() tail arguments and legacy positional recovery", {
+  g <- make_ring(10)
+
+  sub <- induced_subgraph(g, 1:3, impl = "create_from_scratch")
+  expect_equal(vcount(sub), 3)
+  expect_equal(ecount(sub), 2)
+  expect_isomorphic(sub, induced_subgraph(g, 1:3, impl = "copy_and_delete"))
+
+  lifecycle::expect_deprecated(
+    res <- induced_subgraph(g, 1:3, "create_from_scratch")
+  )
+  expect_identical_graphs(
+    res,
+    induced_subgraph(g, 1:3, impl = "create_from_scratch")
+  )
+})
+
+test_that("subgraph_from_edges() tail arguments and legacy positional recovery", {
+  g <- make_ring(10)
+
+  sub <- subgraph_from_edges(g, 1:2, delete.vertices = FALSE)
+  expect_equal(vcount(sub), 10)
+  expect_equal(ecount(sub), 2)
+
+  lifecycle::expect_deprecated(res <- subgraph_from_edges(g, 1:2, FALSE))
+  expect_identical_graphs(
+    res,
+    subgraph_from_edges(g, 1:2, delete.vertices = FALSE)
+  )
+})
+
+test_that("transitivity() tail arguments and legacy positional recovery", {
+  g <- make_graph(~ a - b - c - a - d)
+  E(g)$weight <- 1:4
+
+  # Unit weights reduce "barrat" to the local coefficient,
+  # and isolates = "zero" maps the degree-one vertex d to 0 instead of NaN.
+  expect_equal(
+    transitivity(
+      g,
+      type = "barrat",
+      vids = V(g),
+      weights = rep(1, 4),
+      isolates = "zero"
+    ),
+    c(a = 1 / 3, b = 1, c = 1, d = 0)
+  )
+
+  lifecycle::expect_deprecated(res <- transitivity(g, "local", V(g)))
+  expect_identical(res, transitivity(g, type = "local", vids = V(g)))
+})
+
+test_that("constraint() tail arguments and legacy positional recovery", {
+  g <- make_graph(~ a - b - c - a)
+  E(g)$weight <- c(1, 2, 3)
+
+  # Explicit unit weights override the weight attribute:
+  # every vertex of an unweighted triangle has constraint 1.125.
+  expect_equal(
+    constraint(g, nodes = V(g), weights = rep(1, 3)),
+    c(a = 1.125, b = 1.125, c = 1.125)
+  )
+
+  lifecycle::expect_deprecated(res <- constraint(g, V(g), rep(1, 3)))
+  expect_identical(res, constraint(g, V(g), weights = rep(1, 3)))
+})
+
+test_that("reciprocity() tail arguments and legacy positional recovery", {
+  g <- make_graph(c(1, 2, 2, 1, 2, 3), directed = TRUE)
+
+  # One of the two connected dyads is reciprocated.
+  expect_equal(reciprocity(g, ignore.loops = TRUE, mode = "ratio"), 0.5)
+
+  lifecycle::expect_deprecated(res <- reciprocity(g, FALSE))
+  expect_identical(res, reciprocity(g, ignore.loops = FALSE))
+})
+
+test_that("edge_density() tail arguments and legacy positional recovery", {
+  g <- make_graph(c(1, 1, 1, 2), directed = FALSE)
+
+  # With loops allowed, 2 vertices give 3 possible edges.
+  expect_equal(edge_density(g, loops = TRUE), 2 / 3)
+
+  lifecycle::expect_deprecated(res <- edge_density(g, TRUE))
+  expect_identical(res, edge_density(g, loops = TRUE))
+})
+
+test_that("ego_size() tail arguments and legacy positional recovery", {
+  g <- make_ring(5, directed = TRUE)
+
+  expect_equal(ego_size(g, order = 1, nodes = 1, mode = "out", mindist = 1), 1)
+
+  lifecycle::expect_deprecated(res <- ego_size(g, 1, 1, "out"))
+  expect_identical(res, ego_size(g, 1, 1, mode = "out"))
+})
+
+test_that("ego() tail arguments and legacy positional recovery", {
+  g <- make_ring(5, directed = TRUE)
+
+  e <- ego(g, order = 1, nodes = 1, mode = "out", mindist = 1)
+  expect_equal(as.numeric(e[[1]]), 2)
+
+  lifecycle::expect_deprecated(res <- ego(g, 1, 1, "out"))
+  expect_equal(res, ego(g, 1, 1, mode = "out"))
+})
+
+test_that("make_ego_graph() tail arguments and legacy positional recovery", {
+  g <- make_ring(5, directed = TRUE)
+
+  mg <- make_ego_graph(g, order = 1, nodes = 1, mode = "out", mindist = 1)
+  expect_length(mg, 1)
+  expect_equal(vcount(mg[[1]]), 1)
+  expect_equal(ecount(mg[[1]]), 0)
+
+  lifecycle::expect_deprecated(res <- make_ego_graph(g, 1, 1, "out"))
+  ref <- make_ego_graph(g, 1, 1, mode = "out")
+  expect_length(res, length(ref))
+  expect_identical_graphs(res[[1]], ref[[1]])
+})
+
+test_that("connect() tail arguments and legacy positional recovery", {
+  g <- make_ring(5, directed = TRUE)
+
+  gc <- connect(g, 2, mode = "out")
+  expect_equal(ecount(gc), 10)
+  expect_equal(sort(as.numeric(neighbors(gc, 1, mode = "out"))), c(2, 3))
+
+  lifecycle::expect_deprecated(res <- connect(g, 2, "out"))
+  expect_identical_graphs(res, connect(g, 2, mode = "out"))
+})
+
+test_that("coreness() tail arguments and legacy positional recovery", {
+  g <- make_ring(5, directed = TRUE)
+
+  expect_equal(coreness(g, mode = "out"), rep(1, 5))
+
+  lifecycle::expect_deprecated(res <- coreness(g, "out"))
+  expect_identical(res, coreness(g, mode = "out"))
+})
+
+test_that("topo_sort() tail arguments and legacy positional recovery", {
+  g <- make_graph(c(1, 2, 2, 3), directed = TRUE)
+
+  expect_equal(as.numeric(topo_sort(g, mode = "in")), c(3, 2, 1))
+
+  lifecycle::expect_deprecated(res <- topo_sort(g, "in"))
+  expect_equal(res, topo_sort(g, mode = "in"))
+})
+
+test_that("feedback_arc_set() tail arguments and legacy positional recovery", {
+  skip_if_no_glpk()
+
+  g <- make_ring(4, directed = TRUE)
+
+  # The exact algorithm removes the cheapest edge of the single cycle.
+  fas <- feedback_arc_set(g, weights = c(4, 3, 2, 1), algo = "exact_ip")
+  expect_equal(as.numeric(fas), 4)
+
+  lifecycle::expect_deprecated(res <- feedback_arc_set(g, c(4, 3, 2, 1)))
+  expect_equal(res, feedback_arc_set(g, weights = c(4, 3, 2, 1)))
+})
+
+test_that("feedback_vertex_set() tail arguments and legacy positional recovery", {
+  skip_if_no_glpk()
+
+  g <- make_ring(4, directed = TRUE)
+
+  # The cheapest vertex of the single cycle is removed.
+  fvs <- feedback_vertex_set(g, weights = c(4, 3, 2, 1), algo = "exact_ip")
+  expect_equal(as.numeric(fvs), 4)
+
+  lifecycle::expect_deprecated(res <- feedback_vertex_set(g, c(4, 3, 2, 1)))
+  expect_equal(res, feedback_vertex_set(g, weights = c(4, 3, 2, 1)))
+})
+
+test_that("girth() tail arguments and legacy positional recovery", {
+  g <- make_ring(5)
+
+  gi <- girth(g, circle = FALSE)
+  expect_equal(gi$girth, 5)
+  expect_length(gi$circle, 0)
+
+  lifecycle::expect_deprecated(res <- girth(g, FALSE))
+  expect_equal(res, girth(g, circle = FALSE))
+})
+
+test_that("components() legacy positional recovery", {
+  g <- make_graph(c(1, 2, 2, 3), directed = TRUE)
+
+  lifecycle::expect_deprecated(res <- components(g, "strong"))
+  expect_equal(res$no, 3)
+  expect_identical(res, components(g, mode = "strong"))
+})
+
+test_that("is_connected() tail arguments and legacy positional recovery", {
+  g <- make_graph(c(1, 2, 2, 3), directed = TRUE)
+
+  expect_false(is_connected(g, mode = "strong"))
+  expect_true(is_connected(g, mode = "weak"))
+
+  lifecycle::expect_deprecated(res <- is_connected(g, "strong"))
+  expect_identical(res, is_connected(g, mode = "strong"))
+})
+
+test_that("count_components() tail arguments and legacy positional recovery", {
+  g <- make_graph(c(1, 2, 2, 3), directed = TRUE)
+
+  expect_equal(count_components(g, mode = "strong"), 3)
+  expect_equal(count_components(g, mode = "weak"), 1)
+
+  lifecycle::expect_deprecated(res <- count_components(g, "strong"))
+  expect_identical(res, count_components(g, mode = "strong"))
+})
+
+test_that("count_reachable() legacy positional recovery", {
+  g <- make_graph(c(1, 2, 2, 3), directed = TRUE)
+
+  lifecycle::expect_deprecated(res <- count_reachable(g, "in"))
+  expect_identical(res, count_reachable(g, mode = "in"))
+})
+
+test_that("unfold_tree() tail arguments and legacy positional recovery", {
+  g <- make_tree(7, 2)
+  g <- add_edges(g, c(2, 7, 1, 4))
+
+  res <- unfold_tree(g, mode = "out", roots = 1)
+  expect_equal(res$vertex_index, c(1, 2, 3, 4, 5, 6, 7, 4, 7))
+  expect_equal(vcount(res$tree), 9)
+
+  lifecycle::expect_deprecated(res2 <- unfold_tree(g, "out", 1))
+  ref <- unfold_tree(g, mode = "out", roots = 1)
+  expect_identical(res2$vertex_index, ref$vertex_index)
+  expect_identical_graphs(res2$tree, ref$tree)
+})
+
+test_that("max_bipartite_match() tail arguments and legacy positional recovery", {
+  g <- make_bipartite_graph(c(FALSE, FALSE, TRUE, TRUE), c(1, 3, 1, 4, 2, 4))
+
+  # The heavy 1-4 edge beats the two unit edges combined.
+  m <- max_bipartite_match(
+    g,
+    types = V(g)$type,
+    weights = c(1, 3, 1),
+    eps = 1e-4
+  )
+  expect_equal(m$matching_size, 1)
+  expect_equal(m$matching_weight, 3)
+  expect_equal(m$matching, c(4, NA, NA, 1))
+
+  lifecycle::expect_deprecated(
+    res <- max_bipartite_match(g, V(g)$type, c(1, 3, 1))
+  )
+  expect_identical(
+    res,
+    max_bipartite_match(g, V(g)$type, weights = c(1, 3, 1))
+  )
+})
+
+test_that("which_mutual() tail arguments and legacy positional recovery", {
+  g <- make_graph(c(1, 2, 2, 1, 3, 3), directed = TRUE)
+
+  # loops = FALSE stops counting the self-loop as mutual.
+  expect_equal(
+    which_mutual(g, eids = E(g), loops = FALSE),
+    c(TRUE, TRUE, FALSE)
+  )
+
+  lifecycle::expect_deprecated(res <- which_mutual(g, E(g), FALSE))
+  expect_identical(res, which_mutual(g, E(g), loops = FALSE))
+})
+
+test_that("knn() tail arguments and legacy positional recovery", {
+  g <- make_star(4, mode = "out")
+  E(g)$weight <- 1:3
+
+  # weights = NA ignores the weight attribute;
+  # only the centre has out-neighbours, each with in-degree 1.
+  r <- knn(
+    g,
+    vids = V(g),
+    mode = "out",
+    neighbor.degree.mode = "in",
+    weights = NA
+  )
+  expect_equal(r$knn, c(1, NaN, NaN, NaN))
+  expect_equal(r$knnk, c(NaN, NaN, 1))
+
+  lifecycle::expect_deprecated(res <- knn(g, V(g), "out"))
+  expect_identical(res, knn(g, V(g), mode = "out"))
 })

@@ -5,12 +5,7 @@
 \title{Generate a new random graph from a given graph by randomly
 adding/removing edges}
 \usage{
-sample_correlated_gnp(
-  old.graph,
-  corr,
-  p = edge_density(old.graph),
-  permutation = NULL
-)
+sample_correlated_gnp(old.graph, corr, ..., p = NULL, permutation = NULL)
 }
 \arguments{
 \item{old.graph}{The original graph.}
@@ -19,9 +14,11 @@ sample_correlated_gnp(
 correlation between the adjacency matrices of the original and the generated
 graph (the adjacency matrix being used as a vector).}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{p}{A numeric scalar, the probability of an edge between two
-vertices, it must in the open (0,1) interval. The default is the empirical
-edge density of the graph. If you are resampling an Erdős-Rényi graph and
+vertices, it must in the open (0,1) interval. The default \code{NULL} uses the
+empirical edge density of the graph. If you are resampling an Erdős-Rényi graph and
 you know the original edge probability of the Erdős-Rényi model, you should
 supply that explicitly.}
 

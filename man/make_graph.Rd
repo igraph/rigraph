@@ -12,16 +12,16 @@
 make_graph(
   edges,
   ...,
-  n = max(edges),
+  n = NULL,
   isolates = NULL,
   directed = TRUE,
-  dir = directed,
+  dir = NULL,
   simplify = TRUE
 )
 
-make_directed_graph(edges, n = max(edges))
+make_directed_graph(edges, n = NULL)
 
-make_undirected_graph(edges, n = max(edges))
+make_undirected_graph(edges, n = NULL)
 
 directed_graph(...)
 
@@ -54,7 +54,8 @@ Passed to \code{make_directed_graph()} or \code{make_undirected_graph()}.}
 ignored (with a warning) if \code{edges} are symbolic vertex names. It
 is also ignored if there is a bigger vertex ID in \code{edges}. This
 means that for this function it is safe to supply zero here if the
-vertex with the largest ID is not an isolate.}
+vertex with the largest ID is not an isolate. The default \code{NULL} uses
+the largest vertex ID in \code{edges}.}
 
 \item{isolates}{Character vector, names of isolate vertices,
 for symbolic edge lists. It is ignored for numeric edge lists.}
@@ -218,7 +219,7 @@ Journal of Anthropological Research 33, 452-473 (1977).
 }
 
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create}{\code{create()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous}{\code{famous()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty}{\code{empty()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple}{\code{is_simple()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create}{\code{create()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous}{\code{famous()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty}{\code{empty()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple}{\code{is_simple()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
 }
 
 \examples{

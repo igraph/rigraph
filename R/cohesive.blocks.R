@@ -224,7 +224,8 @@ blockGraphs <- function(blocks, graph) {
 #'   For `graphs_from_cohesive_blocks()` and `export_pajek()` the same graph must be
 #'   supplied whose cohesive block structure is given in the `blocks()`
 #'   argument.
-#' @param labels Logical scalar, whether to add the vertex labels to the result
+#' @inheritParams rlang::args_dots_empty
+#' @param labels Logical, whether to add the vertex labels to the result
 #'   object. These labels can be then used when reporting and plotting the
 #'   cohesive blocks.
 #' @param blocks,x,object A `cohesiveBlocks` object, created with the
@@ -240,7 +241,7 @@ blockGraphs <- function(blocks, graph) {
 #'   of the files, without extension. (But it can contain the path to the files.)
 #'
 #'   See also details below.
-#' @param project.file Logical scalar, whether to create a single Pajek project
+#' @param project.file Logical, whether to create a single Pajek project
 #'   file containing all the data, or to create separated files for each item.
 #'   See details below.
 #' @param y The graph whose cohesive blocks are supplied in the `x`
@@ -258,8 +259,8 @@ blockGraphs <- function(blocks, graph) {
 #'   them. By default all cohesive blocks are marked, except the one
 #'   corresponding to the all vertices.
 #' @param layout The layout of a plot, it is simply passed on to
-#'   `plot.igraph()`, see the possible formats there. By default the
-#'   Reingold-Tilford layout generator is used.
+#'   `plot.igraph()`, see the possible formats there. The default `NULL` uses
+#'   the Reingold-Tilford layout generator.
 #' @param \dots Additional arguments. `plot_hierarchy()` and [plot()] pass
 #'   them to `plot.igraph()`.  [print()] and [summary()] ignore them.
 #' @return `cohesive_blocks()` returns a `cohesiveBlocks` object.
@@ -350,7 +351,46 @@ blockGraphs <- function(blocks, graph) {
 #'   mark.border = 1, colbar = c(NA, NA, "cyan", "orange")
 #' )
 #'
-cohesive_blocks <- function(graph, labels = TRUE) {
+cohesive_blocks <- function(
+  graph,
+  ...,
+  labels = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: cohesive_blocks, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: cohesive_blocks(graph, labels)
+    .old_signature <- function(labels, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn cohesive_blocks}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn cohesive_blocks}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(labels)) base::list(labels = labels)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(labels)) "labels"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn cohesive_blocks} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `cohesive_blocks()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  cohesive_blocks(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    cohesive_blocks(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   ensure_igraph(graph)
 
@@ -511,9 +551,13 @@ plot.cohesiveBlocks <- function(
 #' @importFrom graphics plot
 plot_hierarchy <- function(
   blocks,
-  layout = layout_as_tree(hierarchy(blocks), root = 1),
+  layout = NULL,
   ...
 ) {
+  if (is.null(layout)) {
+    layout <- layout_as_tree(hierarchy(blocks), root = 1)
+  }
+
   plot(hierarchy(blocks), layout = layout, ...)
 }
 
@@ -588,8 +632,50 @@ exportPajek.cohesiveblocks.nopf <- function(blocks, graph, file) {
 }
 
 #' @rdname cohesive_blocks
+#' @inheritParams rlang::args_dots_empty
 #' @export
-export_pajek <- function(blocks, graph, file, project.file = TRUE) {
+export_pajek <- function(
+  blocks,
+  graph,
+  file,
+  ...,
+  project.file = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: export_pajek, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: export_pajek(blocks, graph, file, project.file)
+    .old_signature <- function(project.file, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn export_pajek}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn export_pajek}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(project.file)) base::list(project.file = project.file)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(project.file)) "project.file"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn export_pajek} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `export_pajek()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  export_pajek(", base::paste(base::c("blocks", "graph", "file", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    export_pajek(", base::paste(base::c("blocks", "graph", "file", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   if (!project.file && (!is.character(file) || !nzchar(file))) {
     cli::cli_abort(
       "{.arg file} must be a filename (without extension) when writing

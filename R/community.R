@@ -584,7 +584,7 @@ code.length <- function(communities) {
 #'   communities are colored green and other edges are red.
 #' @param hang Numeric scalar indicating how the height of leaves should be
 #'   computed from the heights of their parents; see [plot.hclust()].
-#' @param use.modularity Logical scalar, whether to use the modularity values
+#' @param use.modularity Logical, whether to use the modularity values
 #'   to define the height of the branches.
 #' @param \dots Additional arguments. `plot.communities` passes these to
 #'   [plot.igraph()]. The other functions silently ignore
@@ -592,12 +592,11 @@ code.length <- function(communities) {
 #' @param membership Numeric vector, one value for each vertex, the membership
 #'   vector of the community structure. Might also be `NULL` if the
 #'   community structure is given in another way, e.g. by a merge matrix.
-#' @param algorithm If not `NULL` (meaning an unknown algorithm), then a
-#'   character scalar, the name of the algorithm that produced the community
-#'   structure.
-#' @param merges If not `NULL`, then the merge matrix of the hierarchical
+#' @param algorithm Name of the algorithm that produced the community
+#'   structure (character scalar). Default: `NULL`, meaning an unknown algorithm.
+#' @param merges Merge matrix of the hierarchical
 #'   community structure. See `merges()` below for more information on its
-#'   format.
+#'   format. Default: `NULL`.
 #' @param modularity Numeric scalar or vector, the modularity value of the
 #'   community structure. It can also be `NULL`, if the modularity of the
 #'   (best) split is not available.
@@ -617,7 +616,7 @@ code.length <- function(communities) {
 #'
 #'   `crossing()` returns a logical vector.
 #'
-#'   `is_hierarchical()` returns a logical scalar.
+#'   `is_hierarchical()` returns a Logical.
 #'
 #'   `merges()` returns a two-column numeric matrix.
 #'
@@ -726,7 +725,7 @@ print.communities <- function(x, ...) {
       head_print(
         o,
         max_lines = igraph_opt("auto.print.lines"),
-        omitted_footer = "+ ... omitted several groups/vertices\n",
+        omitted_footer = "+ ... omitted several groups/vertices\n"
       )
     }
     indent_print(grp, .printer = hp, .indent = "  ")
@@ -746,6 +745,7 @@ print.communities <- function(x, ...) {
 #' @param membership The membership vector of the community structure, a
 #'   numeric vector denoting the ID of the community for each vertex. It
 #'   might be `NULL` for hierarchical community structures.
+#' @inheritParams rlang::args_dots_empty
 #' @param algorithm Character string, the algorithm that generated
 #'   the community structure, it can be arbitrary.
 #' @param merges A merge matrix, for hierarchical community structures (or
@@ -773,10 +773,54 @@ print.communities <- function(x, ...) {
 make_clusters <- function(
   graph,
   membership = NULL,
+  ...,
   algorithm = NULL,
   merges = NULL,
   modularity = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: make_clusters, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("m", "me"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn make_clusters}.", i = "Spell out the full argument name."))
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn make_clusters}.")
+    # Pre-3.0.0 signature: make_clusters(graph, membership, algorithm, merges, modularity)
+    .old_signature <- function(algorithm, merges, modularity, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn make_clusters}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn make_clusters}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(algorithm)) base::list(algorithm = algorithm),
+        if (!base::missing(merges)) base::list(merges = merges),
+        if (!base::missing(modularity)) base::list(modularity = modularity)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(algorithm)) "algorithm",
+        if (!base::missing(merges)) "merges",
+        if (!base::missing(modularity)) "modularity"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn make_clusters} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `make_clusters()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  make_clusters(", base::paste(base::c("graph", "membership", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    make_clusters(", base::paste(base::c("graph", "membership", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   stopifnot(is.null(membership) || is.numeric(membership))
   stopifnot(
     is.null(algorithm) ||
@@ -872,7 +916,7 @@ modularity <- function(x, ...) {
 #' @param x,graph The input graph.
 #' @param membership Numeric vector, one value for each vertex, the membership
 #'   vector of the community structure.
-#' @param weights If not `NULL` then a numeric vector giving edge weights.
+#' @param weights Numeric vector giving edge weights. Default: `NULL`.
 #' @param resolution The resolution parameter. Must be greater than or equal to
 #'   0. Set it to 1 to use the classical definition of modularity.
 #' @param directed Whether to use the directed or undirected version of
@@ -939,14 +983,55 @@ modularity.communities <- function(x, ...) {
 }
 
 #' @rdname modularity.igraph
+#' @inheritParams rlang::args_dots_empty
 #' @export
 modularity_matrix <- function(
   graph,
   membership = lifecycle::deprecated(),
+  ...,
   weights = NULL,
   resolution = 1,
   directed = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: modularity_matrix, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: modularity_matrix(graph, membership, weights, resolution, directed)
+    .old_signature <- function(weights, resolution, directed, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn modularity_matrix}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn modularity_matrix}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(resolution)) base::list(resolution = resolution),
+        if (!base::missing(directed)) base::list(directed = directed)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(resolution)) "resolution",
+        if (!base::missing(directed)) "directed"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn modularity_matrix} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `modularity_matrix()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  modularity_matrix(", base::paste(base::c("graph", "membership", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    modularity_matrix(", base::paste(base::c("graph", "membership", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   ensure_igraph(graph)
 
@@ -1377,6 +1462,7 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #' community of the the given vertex. See also the examples below.
 #'
 #' @param graph The input graph. Edge directions are ignored in directed graphs.
+#' @inheritParams rlang::args_dots_empty
 #' @param weights The weights of the edges. It must be a positive numeric vector,
 #'   `NULL` or `NA`. If it is `NULL` and the input graph has a
 #'   \sQuote{weight} edge attribute, then that attribute will be used. If
@@ -1391,7 +1477,7 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #'   limit for the number of communities. It is not a problem to supply a
 #'   (reasonably) big number here, in which case some spin states will be
 #'   unpopulated.
-#' @param parupdate Logical constant, whether to update the spins of the
+#' @param parupdate Logical, whether to update the spins of the
 #'   vertices in parallel (synchronously) or not. This argument is ignored if the
 #'   second form of the function is used (i.e. the \sQuote{`vertex`} argument
 #'   is present). It is also not implemented in the \dQuote{neg} implementation.
@@ -1479,6 +1565,7 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #'
 cluster_spinglass <- function(
   graph,
+  ...,
   weights = NULL,
   vertex = NULL,
   spins = 25,
@@ -1491,6 +1578,65 @@ cluster_spinglass <- function(
   implementation = c("orig", "neg"),
   gamma.minus = 1.0
 ) {
+  # BEGIN GENERATED ARG_HANDLE: cluster_spinglass, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("g"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn cluster_spinglass}.", i = "Spell out the full argument name."))
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("s", "st", "g", "ga", "gam", "gamm"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn cluster_spinglass}.")
+    # Pre-3.0.0 signature: cluster_spinglass(graph, weights, vertex, spins, parupdate, start.temp, stop.temp, cool.fact, update.rule, gamma, implementation, gamma.minus)
+    .old_signature <- function(weights, vertex, spins, parupdate, start.temp, stop.temp, cool.fact, update.rule, gamma, implementation, gamma.minus, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn cluster_spinglass}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn cluster_spinglass}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(vertex)) base::list(vertex = vertex),
+        if (!base::missing(spins)) base::list(spins = spins),
+        if (!base::missing(parupdate)) base::list(parupdate = parupdate),
+        if (!base::missing(start.temp)) base::list(start.temp = start.temp),
+        if (!base::missing(stop.temp)) base::list(stop.temp = stop.temp),
+        if (!base::missing(cool.fact)) base::list(cool.fact = cool.fact),
+        if (!base::missing(update.rule)) base::list(update.rule = update.rule),
+        if (!base::missing(gamma)) base::list(gamma = gamma),
+        if (!base::missing(implementation)) base::list(implementation = implementation),
+        if (!base::missing(gamma.minus)) base::list(gamma.minus = gamma.minus)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(vertex)) "vertex",
+        if (!base::missing(spins)) "spins",
+        if (!base::missing(parupdate)) "parupdate",
+        if (!base::missing(start.temp)) "start.temp",
+        if (!base::missing(stop.temp)) "stop.temp",
+        if (!base::missing(cool.fact)) "cool.fact",
+        if (!base::missing(update.rule)) "update.rule",
+        if (!base::missing(gamma)) "gamma",
+        if (!base::missing(implementation)) "implementation",
+        if (!base::missing(gamma.minus)) "gamma.minus"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn cluster_spinglass} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `cluster_spinglass()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  cluster_spinglass(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    cluster_spinglass(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -1826,6 +1972,7 @@ cluster_fluid_communities <- function(graph, no.of.communities) {
 #'
 #' @param graph The input graph. Edge directions are ignored in directed
 #'   graphs.
+#' @inheritParams rlang::args_dots_empty
 #' @param weights The weights of the edges. It must be a positive numeric vector,
 #'   `NULL` or `NA`. If it is `NULL` and the input graph has a
 #'   \sQuote{weight} edge attribute, then that attribute will be used. If
@@ -1835,12 +1982,12 @@ cluster_fluid_communities <- function(graph, no.of.communities) {
 #'   weights increase the probability that an edge is selected by the random
 #'   walker. In other words, larger edge weights correspond to stronger connections.
 #' @param steps The length of the random walks to perform.
-#' @param merges Logical scalar, whether to include the merge matrix in the
+#' @param merges Logical, whether to include the merge matrix in the
 #'   result.
-#' @param modularity Logical scalar, whether to include the vector of the
+#' @param modularity Logical, whether to include the vector of the
 #'   modularity scores in the result. If the `membership` argument is true,
 #'   then it will always be calculated.
-#' @param membership Logical scalar, whether to calculate the membership vector
+#' @param membership Logical, whether to calculate the membership vector
 #'   for the split corresponding to the highest modularity value.
 #' @return `cluster_walktrap()` returns a [communities()]
 #'   object, please see the [communities()] manual page for details.
@@ -1868,12 +2015,58 @@ cluster_fluid_communities <- function(graph, no.of.communities) {
 #'
 cluster_walktrap <- function(
   graph,
+  ...,
   weights = NULL,
   steps = 4,
   merges = TRUE,
   modularity = TRUE,
   membership = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: cluster_walktrap, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m", "me"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn cluster_walktrap}.")
+    # Pre-3.0.0 signature: cluster_walktrap(graph, weights, steps, merges, modularity, membership)
+    .old_signature <- function(weights, steps, merges, modularity, membership, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn cluster_walktrap}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn cluster_walktrap}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(steps)) base::list(steps = steps),
+        if (!base::missing(merges)) base::list(merges = merges),
+        if (!base::missing(modularity)) base::list(modularity = modularity),
+        if (!base::missing(membership)) base::list(membership = membership)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(steps)) "steps",
+        if (!base::missing(merges)) "merges",
+        if (!base::missing(modularity)) "modularity",
+        if (!base::missing(membership)) "membership"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn cluster_walktrap} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `cluster_walktrap()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  cluster_walktrap(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    cluster_walktrap(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   if (membership && !modularity) {
@@ -1938,6 +2131,7 @@ cluster_walktrap <- function(
 #' `bridges` contains the IDs of edges whose removal caused a split.
 #'
 #' @param graph The graph to analyze.
+#' @inheritParams rlang::args_dots_empty
 #' @param weights The weights of the edges. It must be a positive numeric vector,
 #'   `NULL` or `NA`. If it is `NULL` and the input graph has a
 #'   \sQuote{weight} edge attribute, then that attribute will be used. If
@@ -1946,11 +2140,11 @@ cluster_walktrap <- function(
 #'   attribute, but you don't want to use it for community detection. Edge weights
 #'   are used to calculate weighted edge betweenness. This means that edges are
 #'   interpreted as distances, not as connection strengths.
-#' @param directed Logical constant, whether to calculate directed edge
+#' @param directed Logical, whether to calculate directed edge
 #'   betweenness for directed graphs. It is ignored for undirected graphs.
-#' @param edge.betweenness Logical constant, whether to return the edge
+#' @param edge.betweenness Logical, whether to return the edge
 #'   betweenness of the edges at the time of their removal.
-#' @param merges Logical constant, whether to return the merge matrix
+#' @param merges Logical, whether to return the merge matrix
 #'   representing the hierarchical community structure of the network.  This
 #'   argument is called `merges`, even if the community structure algorithm
 #'   itself is divisive and not agglomerative: it builds the tree from top to
@@ -1962,12 +2156,12 @@ cluster_walktrap <- function(
 #'   communities numbered from one to \eqn{N}. The first merge, the first line of
 #'   the matrix creates community \eqn{N+1}, the second merge creates community
 #'   \eqn{N+2}, etc.
-#' @param bridges Logical constant, whether to return a list the edge removals
+#' @param bridges Logical, whether to return a list the edge removals
 #'   which actually splitted a component of the graph.
-#' @param modularity Logical constant, whether to calculate the maximum
+#' @param modularity Logical, whether to calculate the maximum
 #'   modularity score, considering all possibly community structures along the
 #'   edge-betweenness based edge removals.
-#' @param membership Logical constant, whether to calculate the membership
+#' @param membership Logical, whether to calculate the membership
 #'   vector corresponding to the highest possible modularity score.
 #' @return `cluster_edge_betweenness()` returns a
 #'   [communities()] object, please see the [communities()]
@@ -1998,6 +2192,7 @@ cluster_walktrap <- function(
 #'
 cluster_edge_betweenness <- function(
   graph,
+  ...,
   weights = NULL,
   directed = TRUE,
   edge.betweenness = TRUE,
@@ -2006,6 +2201,55 @@ cluster_edge_betweenness <- function(
   modularity = TRUE,
   membership = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: cluster_edge_betweenness, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m", "me"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn cluster_edge_betweenness}.")
+    # Pre-3.0.0 signature: cluster_edge_betweenness(graph, weights, directed, edge.betweenness, merges, bridges, modularity, membership)
+    .old_signature <- function(weights, directed, edge.betweenness, merges, bridges, modularity, membership, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn cluster_edge_betweenness}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn cluster_edge_betweenness}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(directed)) base::list(directed = directed),
+        if (!base::missing(edge.betweenness)) base::list(edge.betweenness = edge.betweenness),
+        if (!base::missing(merges)) base::list(merges = merges),
+        if (!base::missing(bridges)) base::list(bridges = bridges),
+        if (!base::missing(modularity)) base::list(modularity = modularity),
+        if (!base::missing(membership)) base::list(membership = membership)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(directed)) "directed",
+        if (!base::missing(edge.betweenness)) "edge.betweenness",
+        if (!base::missing(merges)) "merges",
+        if (!base::missing(bridges)) "bridges",
+        if (!base::missing(modularity)) "modularity",
+        if (!base::missing(membership)) "membership"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn cluster_edge_betweenness} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `cluster_edge_betweenness()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  cluster_edge_betweenness(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    cluster_edge_betweenness(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -2054,10 +2298,11 @@ cluster_edge_betweenness <- function(
 #'
 #' @param graph The input graph. It must be undirected and must not have
 #'   multi-edges.
-#' @param merges Logical scalar, whether to return the merge matrix.
-#' @param modularity Logical scalar, whether to return a vector containing the
+#' @inheritParams rlang::args_dots_empty
+#' @param merges Logical, whether to return the merge matrix.
+#' @param modularity Logical, whether to return a vector containing the
 #'   modularity after each merge.
-#' @param membership Logical scalar, whether to calculate the membership vector
+#' @param membership Logical, whether to calculate the membership vector
 #'   corresponding to the maximum modularity score, considering all possible
 #'   community structures along the merges.
 #' @param weights The weights of the edges. It must be a positive numeric vector,
@@ -2093,11 +2338,55 @@ cluster_edge_betweenness <- function(
 #'
 cluster_fast_greedy <- function(
   graph,
+  ...,
   merges = TRUE,
   modularity = TRUE,
   membership = TRUE,
   weights = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: cluster_fast_greedy, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m", "me"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn cluster_fast_greedy}.")
+    # Pre-3.0.0 signature: cluster_fast_greedy(graph, merges, modularity, membership, weights)
+    .old_signature <- function(merges, modularity, membership, weights, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn cluster_fast_greedy}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn cluster_fast_greedy}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(merges)) base::list(merges = merges),
+        if (!base::missing(modularity)) base::list(modularity = modularity),
+        if (!base::missing(membership)) base::list(membership = membership),
+        if (!base::missing(weights)) base::list(weights = weights)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(merges)) "merges",
+        if (!base::missing(modularity)) "modularity",
+        if (!base::missing(membership)) "membership",
+        if (!base::missing(weights)) "weights"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn cluster_fast_greedy} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `cluster_fast_greedy()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  cluster_fast_greedy(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    cluster_fast_greedy(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -2178,9 +2467,9 @@ igraph.i.levc.arp <- function(externalP, externalE) {
 #' @param start `NULL`, or a numeric membership vector, giving the start
 #'   configuration of the algorithm.
 #' @param options A named list to override some ARPACK options.
-#' @param callback If not `NULL`, then it must be callback function. This
+#' @param callback Callback function. This
 #'   is called after each iteration, after calculating the leading eigenvector of
-#'   the modularity matrix. See details below.
+#'   the modularity matrix. See details below. Default: `NULL`.
 #' @param extra Additional argument to supply to the callback function.
 #' @param env The environment in which the callback function is evaluated.
 #' @return `cluster_leading_eigen()` returns a named list with the
@@ -2478,6 +2767,7 @@ cluster_label_prop0 <- function(
 #' This function was contributed by Tom Gregorovic.
 #'
 #' @param graph The input graph. It must be undirected.
+#' @inheritParams rlang::args_dots_empty
 #' @param weights The weights of the edges. It must be a positive numeric vector,
 #'   `NULL` or `NA`. If it is `NULL` and the input graph has a
 #'   \sQuote{weight} edge attribute, then that attribute will be used. If
@@ -2516,7 +2806,49 @@ cluster_label_prop0 <- function(
 #' g <- add_edges(g, c(1, 6, 1, 11, 6, 11))
 #' cluster_louvain(g)
 #'
-cluster_louvain <- function(graph, weights = NULL, resolution = 1) {
+cluster_louvain <- function(
+  graph,
+  ...,
+  weights = NULL,
+  resolution = 1
+) {
+  # BEGIN GENERATED ARG_HANDLE: cluster_louvain, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: cluster_louvain(graph, weights, resolution)
+    .old_signature <- function(weights, resolution, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn cluster_louvain}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn cluster_louvain}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(resolution)) base::list(resolution = resolution)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(resolution)) "resolution"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn cluster_louvain} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `cluster_louvain()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  cluster_louvain(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    cluster_louvain(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   ensure_igraph(graph)
 
@@ -2588,6 +2920,7 @@ cluster_louvain <- function(graph, weights = NULL, resolution = 1) {
 #' }
 #'
 #' @param graph The input graph. It may be undirected or directed.
+#' @inheritParams rlang::args_dots_empty
 #' @param weights The weights of the edges. It must be a positive numeric
 #'   vector, `NULL` or `NA`. If it is `NULL` and the input graph has a
 #'   \sQuote{weight} edge attribute, then that attribute will be used. If
@@ -2608,7 +2941,46 @@ cluster_louvain <- function(graph, weights = NULL, resolution = 1) {
 #' @family community
 #' @export
 #' @keywords graphs
-cluster_optimal <- function(graph, weights = NULL) {
+cluster_optimal <- function(
+  graph,
+  ...,
+  weights = NULL
+) {
+  # BEGIN GENERATED ARG_HANDLE: cluster_optimal, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: cluster_optimal(graph, weights)
+    .old_signature <- function(weights, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn cluster_optimal}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn cluster_optimal}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(weights)) base::list(weights = weights)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(weights)) "weights"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn cluster_optimal} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `cluster_optimal()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  cluster_optimal(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    cluster_optimal(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   ensure_igraph(graph)
 
@@ -2647,20 +3019,21 @@ cluster_optimal <- function(graph, weights = NULL) {
 #' Please see the details of this method in the references given below.
 #'
 #' @param graph The input graph. Edge directions will be taken into account.
-#' @param e.weights If not `NULL`, then a numeric vector of edge weights.
-#'   The length must match the number of edges in the graph.  By default the
+#' @inheritParams rlang::args_dots_empty
+#' @param e.weights Numeric vector of edge weights.
+#'   The length must match the number of edges in the graph.  By default (`NULL`) the
 #'   \sQuote{`weight`} edge attribute is used as weights. If it is not
 #'   present, then all edges are considered to have the same weight.
 #'   Larger edge weights correspond to stronger connections.
-#' @param v.weights If not `NULL`, then a numeric vector of vertex
+#' @param v.weights Numeric vector of vertex
 #'   weights. The length must match the number of vertices in the graph.  By
-#'   default the \sQuote{`weight`} vertex attribute is used as weights. If
+#'   default (`NULL`) the \sQuote{`weight`} vertex attribute is used as weights. If
 #'   it is not present, then all vertices are considered to have the same weight.
 #'   A larger vertex weight means a larger probability that the random surfer
 #'   jumps to that vertex.
 #' @param nb.trials The number of attempts to partition the network (can be any
 #'   integer value equal or larger than 1).
-#' @param modularity Logical scalar, whether to calculate the modularity score
+#' @param modularity Logical, whether to calculate the modularity score
 #'   of the detected community structure.
 #' @return `cluster_infomap()` returns a [communities()] object,
 #'   please see the [communities()] manual page for details.
@@ -2689,11 +3062,53 @@ cluster_optimal <- function(graph, weights = NULL) {
 #'
 cluster_infomap <- function(
   graph,
+  ...,
   e.weights = NULL,
   v.weights = NULL,
   nb.trials = 10,
   modularity = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: cluster_infomap, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: cluster_infomap(graph, e.weights, v.weights, nb.trials, modularity)
+    .old_signature <- function(e.weights, v.weights, nb.trials, modularity, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn cluster_infomap}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn cluster_infomap}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(e.weights)) base::list(e.weights = e.weights),
+        if (!base::missing(v.weights)) base::list(v.weights = v.weights),
+        if (!base::missing(nb.trials)) base::list(nb.trials = nb.trials),
+        if (!base::missing(modularity)) base::list(modularity = modularity)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(e.weights)) "e.weights",
+        if (!base::missing(v.weights)) "v.weights",
+        if (!base::missing(nb.trials)) "nb.trials",
+        if (!base::missing(modularity)) "modularity"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn cluster_infomap} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `cluster_infomap()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  cluster_infomap(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    cluster_infomap(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   res <- community_infomap_impl(
     graph = graph,
     e_weights = e.weights,
@@ -2738,7 +3153,7 @@ plot.communities <- function(
 
 #' @rdname plot_dendrogram.communities
 #' @export
-plot_dendrogram <- function(x, mode = igraph_opt("dend.plot.type"), ...) {
+plot_dendrogram <- function(x, mode = NULL, ...) {
   UseMethod("plot_dendrogram")
 }
 
@@ -2805,9 +3220,10 @@ plot_dendrogram <- function(x, mode = igraph_opt("dend.plot.type"), ...) {
 #' @param x An object containing the community structure of a graph. See
 #'   [communities()] for details.
 #' @param mode Which dendrogram plotting function to use. See details below.
+#'   The default `NULL` uses the `dend.plot.type` igraph option.
 #' @param \dots Additional arguments to supply to the dendrogram plotting
 #'   function.
-#' @param use.modularity Logical scalar, whether to use the modularity values
+#' @param use.modularity Logical, whether to use the modularity values
 #'   to define the height of the branches.
 #' @param palette The color palette to use for colored plots.
 #' @return Returns whatever the return value was from the plotting function,
@@ -2825,11 +3241,14 @@ plot_dendrogram <- function(x, mode = igraph_opt("dend.plot.type"), ...) {
 #'
 plot_dendrogram.communities <- function(
   x,
-  mode = igraph_opt("dend.plot.type"),
+  mode = NULL,
   ...,
   use.modularity = FALSE,
   palette = categorical_pal(8)
 ) {
+  if (is.null(mode)) {
+    mode <- igraph_opt("dend.plot.type")
+  }
   mode <- igraph_match_arg(mode, c("auto", "phylo", "hclust", "dendrogram"))
 
   old_palette <- palette(palette)
@@ -3208,7 +3627,8 @@ communities <- groups.communities
 #'   correspond to the vertices, and for each element the ID in the new graph is
 #'   given.
 #' @param vertex.attr.comb Specifies how to combine the vertex attributes in
-#'   the new graph. Please see [attribute.combination()] for details.
+#'   the new graph. Please see [attribute.combination()] for details. The
+#'   default `NULL` uses the `vertex.attr.comb` igraph option.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
@@ -3232,8 +3652,12 @@ communities <- groups.communities
 contract <- function(
   graph,
   mapping,
-  vertex.attr.comb = igraph_opt("vertex.attr.comb")
+  vertex.attr.comb = NULL
 ) {
+  if (is.null(vertex.attr.comb)) {
+    vertex.attr.comb <- igraph_opt("vertex.attr.comb")
+  }
+
   contract_vertices_impl(
     graph = graph,
     mapping = mapping,

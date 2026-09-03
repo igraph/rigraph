@@ -130,14 +130,14 @@ assortativity.degree <- function(graph, directed = TRUE) {
 #'   This
 #'   argument is ignored (with a warning) if it is not `NULL` and undirected
 #'   assortativity coefficient is being calculated.
-#' @param directed Logical scalar, whether to consider edge directions for
+#' @param directed Logical, whether to consider edge directions for
 #'   directed graphs.
 #'   This argument is ignored for undirected graphs.
 #'   Supply
 #'   `TRUE` here to do the natural thing, i.e. use directed version of the
 #'   measure for directed graphs and the undirected version for undirected
 #'   graphs.
-#' @param normalized Boolean, whether to compute the normalized assortativity.
+#' @param normalized Logical, whether to compute the normalized assortativity.
 #' The non-normalized nominal assortativity is identical to modularity.
 #' The non-normalized value-based assortativity is simply the covariance of the
 #' values at the two ends of edges.
@@ -239,13 +239,52 @@ assortativity_legacy <- function(
 #'   with [as.integer()]. Character vectors are converted to integers using
 #'   [as.factor()].
 #' @rdname assortativity
+#' @inheritParams rlang::args_dots_empty
 #' @export
 assortativity_nominal <- function(
   graph,
   types,
+  ...,
   directed = TRUE,
   normalized = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: assortativity_nominal, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: assortativity_nominal(graph, types, directed, normalized)
+    .old_signature <- function(directed, normalized, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn assortativity_nominal}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn assortativity_nominal}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(directed)) base::list(directed = directed),
+        if (!base::missing(normalized)) base::list(normalized = normalized)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(directed)) "directed",
+        if (!base::missing(normalized)) "normalized"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn assortativity_nominal} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `assortativity_nominal()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  assortativity_nominal(", base::paste(base::c("graph", "types", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    assortativity_nominal(", base::paste(base::c("graph", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   # Convert character types to factor then to integer for categorical data
   if (is.character(types)) {
     types <- as.integer(as.factor(types))
@@ -260,8 +299,48 @@ assortativity_nominal <- function(
 }
 
 #' @rdname assortativity
+#' @inheritParams rlang::args_dots_empty
 #' @export
-assortativity_degree <- function(graph, directed = TRUE) {
+assortativity_degree <- function(
+  graph,
+  ...,
+  directed = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: assortativity_degree, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: assortativity_degree(graph, directed)
+    .old_signature <- function(directed, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn assortativity_degree}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn assortativity_degree}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(directed)) base::list(directed = directed)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(directed)) "directed"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn assortativity_degree} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `assortativity_degree()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  assortativity_degree(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    assortativity_degree(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   assortativity_degree_impl(
     graph = graph,
     directed = directed

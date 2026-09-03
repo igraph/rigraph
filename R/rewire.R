@@ -102,9 +102,10 @@ rewire_keeping_degseq <- function(graph, loops, niter) {
 #' Note that this method might create graphs with multiple and/or loop edges.
 #'
 #' @param prob The rewiring probability, a real number between zero and one.
-#' @param loops Logical scalar, whether loop edges are allowed in the rewired
+#' @inheritParams rlang::args_dots_empty
+#' @param loops Logical, whether loop edges are allowed in the rewired
 #'   graph.
-#' @param multiple Logical scalar, whether multiple edges are allowed in the
+#' @param multiple Logical, whether multiple edges are allowed in the
 #'   generated graph.
 #' @param mode Character string, specifies which endpoint of the edges to rewire
 #'   in directed graphs. \sQuote{all} rewires both endpoints, \sQuote{in} rewires
@@ -130,10 +131,52 @@ rewire_keeping_degseq <- function(graph, loops, niter) {
 #' degree(g, mode = "in") == degree(g2, mode = "in")
 each_edge <- function(
   prob,
+  ...,
   loops = FALSE,
   multiple = FALSE,
   mode = c("all", "out", "in", "total")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: each_edge, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn each_edge}.")
+    # Pre-3.0.0 signature: each_edge(prob, loops, multiple, mode)
+    .old_signature <- function(loops, multiple, mode, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn each_edge}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn each_edge}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(loops)) base::list(loops = loops),
+        if (!base::missing(multiple)) base::list(multiple = multiple),
+        if (!base::missing(mode)) base::list(mode = mode)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(loops)) "loops",
+        if (!base::missing(multiple)) "multiple",
+        if (!base::missing(mode)) "mode"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn each_edge} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `each_edge()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  each_edge(", base::paste(base::c("prob", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    each_edge(", base::paste(base::c("prob", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   mode <- igraph_match_arg(mode)
   multiple <- as.logical(multiple)
   if (mode != "all" && mode != "total") {

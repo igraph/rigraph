@@ -6,8 +6,9 @@
 \usage{
 page_rank(
   graph,
+  ...,
   algo = c("prpack", "arpack"),
-  vids = V(graph),
+  vids = NULL,
   directed = TRUE,
   damping = 0.85,
   personalized = NULL,
@@ -18,6 +19,8 @@ page_rank(
 \arguments{
 \item{graph}{The graph object.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{algo}{Character scalar, which implementation to use to carry out the
 calculation. The default is \code{"prpack"}, which uses the PRPACK library
 (\url{https://github.com/dgleich/prpack}) to calculate PageRank scores
@@ -27,7 +30,8 @@ for all but small graphs.  \code{"arpack"} uses the ARPACK library, the
 default implementation from igraph version 0.5 until version 0.7. It computes
 PageRank scores by solving an eingevalue problem.}
 
-\item{vids}{The vertices of interest.}
+\item{vids}{The vertices of interest.
+The default \code{NULL} selects all vertices.}
 
 \item{directed}{Logical, if true directed paths will be considered for
 directed graphs. It is ignored for undirected graphs.}

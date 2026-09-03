@@ -39,7 +39,7 @@
 #' @param graph The graph object to analyze
 #' @param v Vertex sequence or numeric vector, the vertex IDs for which the
 #'   cocitation or bibliographic coupling values we want to calculate. The
-#'   default is all vertices.
+#'   default `NULL` selects all vertices.
 #' @return A numeric matrix with `length(v)` lines and
 #'   `vcount(graph)` columns. Element `(i,j)` contains the cocitation
 #'   or bibliographic coupling for vertices `v[i]` and `j`.
@@ -53,7 +53,11 @@
 #' cocitation(g)
 #' bibcoupling(g)
 #'
-cocitation <- function(graph, v = V(graph)) {
+cocitation <- function(graph, v = NULL) {
+  if (is.null(v)) {
+    v <- V(graph)
+  }
+
   res <- cocitation_impl(
     graph = graph,
     vids = v
@@ -68,7 +72,11 @@ cocitation <- function(graph, v = V(graph)) {
 
 #' @rdname cocitation
 #' @export
-bibcoupling <- function(graph, v = V(graph)) {
+bibcoupling <- function(graph, v = NULL) {
+  if (is.null(v)) {
+    v <- V(graph)
+  }
+
   res <- bibcoupling_impl(
     graph = graph,
     vids = v

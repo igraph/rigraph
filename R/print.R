@@ -373,6 +373,7 @@ print_edge_detail <- function(graph, edges) {
   if (!is.null(x)) {
     arrow <- c("--", "->")[is_directed(x) + 1]
 
+    # jarl-ignore unused_object: then assigned to with <<-
     can_max <- NA
     el <- NA
 
@@ -564,17 +565,22 @@ print_all <- function(object, ...) {
 #'
 #' @aliases print.igraph print_all summary.igraph str.igraph
 #' @param x The graph to print.
-#' @param full Logical scalar, whether to print the graph structure itself as
-#'   well.
-#' @param graph.attributes Logical constant, whether to print graph attributes.
-#' @param vertex.attributes Logical constant, whether to print vertex
-#'   attributes.
-#' @param edge.attributes Logical constant, whether to print edge attributes.
-#' @param names Logical constant, whether to print symbolic vertex names (i.e.
+#' @param full Logical, whether to print the graph structure itself as
+#'   well. The default `NULL` uses the `print.full` igraph option.
+#' @param graph.attributes Logical, whether to print graph attributes. The
+#'   default `NULL` uses the `print.graph.attributes` igraph option.
+#' @param vertex.attributes Logical, whether to print vertex
+#'   attributes. The default `NULL` uses the `print.vertex.attributes` igraph
+#'   option.
+#' @param edge.attributes Logical, whether to print edge attributes. The
+#'   default `NULL` uses the `print.edge.attributes` igraph option.
+#' @param names Logical, whether to print symbolic vertex names (i.e.
 #'   the `name` vertex attribute) or vertex IDs.
 #' @param max.lines The maximum number of lines to use. The rest of the
-#'   output will be truncated.
-#' @param id Whether to print the graph ID.
+#'   output will be truncated. If not given, the `auto.print.lines` igraph
+#'   option applies; `NULL` prints all lines.
+#' @param id Whether to print the graph ID. The default `NULL` uses the
+#'   `print.id` igraph option.
 #' @param object The graph of which the summary will be printed.
 #' @param \dots Additional agruments.
 #' @return All these functions return the graph invisibly.
@@ -592,16 +598,37 @@ print_all <- function(object, ...) {
 #'
 print.igraph <- function(
   x,
-  full = igraph_opt("print.full"),
-  graph.attributes = igraph_opt("print.graph.attributes"),
-  vertex.attributes = igraph_opt("print.vertex.attributes"),
-  edge.attributes = igraph_opt("print.edge.attributes"),
+  full = NULL,
+  graph.attributes = NULL,
+  vertex.attributes = NULL,
+  edge.attributes = NULL,
   names = TRUE,
-  max.lines = igraph_opt("auto.print.lines"),
-  id = igraph_opt("print.id"),
+  max.lines = NULL,
+  id = NULL,
   ...
 ) {
   ensure_igraph(x)
+
+  if (is.null(full)) {
+    full <- igraph_opt("print.full")
+  }
+  if (is.null(graph.attributes)) {
+    graph.attributes <- igraph_opt("print.graph.attributes")
+  }
+  if (is.null(vertex.attributes)) {
+    vertex.attributes <- igraph_opt("print.vertex.attributes")
+  }
+  if (is.null(edge.attributes)) {
+    edge.attributes <- igraph_opt("print.edge.attributes")
+  }
+  if (missing(max.lines)) {
+    # NULL is a legal value here (print all lines), so the option fallback
+    # applies only when the argument is not supplied at all.
+    max.lines <- igraph_opt("auto.print.lines")
+  }
+  if (is.null(id)) {
+    id <- igraph_opt("print.id")
+  }
 
   if (!is_cli_style()) {
     return(print_igraph_legacy(
@@ -644,10 +671,10 @@ print_igraph_legacy <- function(
   head_lines <- .print.header(x, id)
   if (is.logical(full) && full) {
     if (graph.attributes) {
-      head_lines <- head_lines + .print.graph.attributes(x, full, max.lines)
+      .print.graph.attributes(x, full, max.lines)
     }
     if (vertex.attributes) {
-      head_lines <- head_lines + .print.vertex.attributes(x, full, max.lines)
+      .print.vertex.attributes(x, full, max.lines)
     }
     if (ecount(x) == 0) {
       ## Do nothing

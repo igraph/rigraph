@@ -29,7 +29,7 @@ function.}
 \item{comp}{Character scalar, which component to plot. Either \sQuote{NI}
 (infected, default), \sQuote{NS} (susceptible) or \sQuote{NR} (recovered).}
 
-\item{median}{Logical scalar, whether to plot the (binned) median.}
+\item{median}{Logical, whether to plot the (binned) median.}
 
 \item{quantiles}{A vector of (binned) quantiles to plot.}
 

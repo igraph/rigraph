@@ -6,7 +6,8 @@
 \usage{
 similarity(
   graph,
-  vids = V(graph),
+  vids = NULL,
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = FALSE,
   method = c("jaccard", "dice", "invlogweighted")
@@ -15,7 +16,10 @@ similarity(
 \arguments{
 \item{graph}{The input graph.}
 
-\item{vids}{The vertex IDs for which the similarity is calculated.}
+\item{vids}{The vertex IDs for which the similarity is calculated. The
+default \code{NULL} selects all vertices.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{The type of neighboring vertices to use for the calculation,
 possible values: \sQuote{\code{out}}, \sQuote{\verb{in}},

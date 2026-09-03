@@ -22,7 +22,7 @@ runs:
         }
       shell: Rscript {0}
 
-    - uses: codecov/codecov-action@v5
+    - uses: codecov/codecov-action@0fb7174895f61a3b6b78fc075e0cd60383518dac # v5.5.5
       with:
         # Fail if token is given
         fail_ci_if_error: ${{ inputs.token != '' }}
@@ -40,7 +40,7 @@ runs:
 
     - name: Upload test results
       if: failure()
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v6
       with:
         name: coverage-test-failures
         path: ${{ runner.temp }}/package

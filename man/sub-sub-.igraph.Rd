@@ -29,10 +29,10 @@ well.}
 
 \item{...}{Additional arguments are not used currently.}
 
-\item{directed}{Logical scalar, whether to consider edge directions
+\item{directed}{Logical, whether to consider edge directions
 in directed graphs. It is ignored for undirected graphs.}
 
-\item{edges}{Logical scalar, whether to return edge IDs.}
+\item{edges}{Logical, whether to return edge IDs.}
 
 \item{exact}{Ignored.}
 }

@@ -14,7 +14,7 @@ shape_noclip(coords, el, params, end = c("both", "from", "to"))
 
 shape_noplot(coords, v = NULL, params)
 
-add_shape(shape, clip = shape_noclip, plot = shape_noplot, parameters = list())
+add_shape(shape, ..., clip = NULL, plot = NULL, parameters = list())
 }
 \arguments{
 \item{shape}{Character scalar, name of a vertex shape. If it is
@@ -24,9 +24,13 @@ vertex shapes are returned.}
 \item{coords, el, params, end, v}{See parameters of the clipping/plotting
 functions below.}
 
-\item{clip}{An R function object, the clipping function.}
+\item{...}{These dots are for future extensions and must be empty.}
 
-\item{plot}{An R function object, the plotting function.}
+\item{clip}{An R function object, the clipping function. The default
+\code{NULL} uses \code{shape_noclip}.}
+
+\item{plot}{An R function object, the plotting function. The default
+\code{NULL} uses \code{shape_noplot}.}
 
 \item{parameters}{Named list, additional plot/vertex/edge
 parameters. The element named define the new parameters, and the

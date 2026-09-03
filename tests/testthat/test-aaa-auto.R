@@ -12,7 +12,7 @@ skip_on_cran()
 
 # 1. empty_impl
 test_that("empty_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
 
   expect_snapshot(empty_impl())
   expect_snapshot(empty_impl(
@@ -38,7 +38,7 @@ test_that("empty_impl basic", {
 })
 
 test_that("empty_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(empty_impl(
     n = -1
   ))
@@ -47,7 +47,7 @@ test_that("empty_impl errors", {
 # 2. add_edges_impl
 
 test_that("add_edges_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- empty_impl(
     n = 3
   )
@@ -68,7 +68,7 @@ test_that("add_edges_impl basic", {
 })
 
 test_that("add_edges_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(add_edges_impl(
     graph = NULL,
     edges = c(1, 2)
@@ -78,7 +78,7 @@ test_that("add_edges_impl errors", {
 # 3. copy_impl
 
 test_that("copy_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- empty_impl(
     n = 2
   )
@@ -98,7 +98,7 @@ test_that("copy_impl basic", {
 })
 
 test_that("copy_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(copy_impl(
     from = NULL
   ))
@@ -107,7 +107,7 @@ test_that("copy_impl errors", {
 # 4. delete_vertices_idx_impl
 
 test_that("delete_vertices_idx_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- empty_impl(
     n = 3
   )
@@ -129,7 +129,7 @@ test_that("delete_vertices_idx_impl basic", {
 })
 
 test_that("delete_vertices_idx_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(delete_vertices_idx_impl(
     graph = NULL,
     vertices = 1
@@ -139,7 +139,7 @@ test_that("delete_vertices_idx_impl errors", {
 # 5. vcount_impl
 
 test_that("vcount_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- empty_impl(
     n = 4
   )
@@ -158,7 +158,7 @@ test_that("vcount_impl basic", {
 })
 
 test_that("vcount_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(vcount_impl(
     graph = NULL
   ))
@@ -167,7 +167,7 @@ test_that("vcount_impl errors", {
 # 6. degree_impl
 
 test_that("degree_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- empty_impl(
     n = 3
   )
@@ -190,7 +190,7 @@ test_that("degree_impl basic", {
 })
 
 test_that("degree_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(degree_impl(
     graph = NULL
   ))
@@ -199,7 +199,7 @@ test_that("degree_impl errors", {
 # 7. get_all_eids_between_impl
 
 test_that("get_all_eids_between_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- empty_impl(
     n = 2
   )
@@ -220,7 +220,7 @@ test_that("get_all_eids_between_impl basic", {
 })
 
 test_that("get_all_eids_between_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(get_all_eids_between_impl(
     graph = NULL,
     from = 1,
@@ -231,7 +231,7 @@ test_that("get_all_eids_between_impl errors", {
 # 8. wheel_impl
 
 test_that("wheel_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(wheel_impl(
     n = 5
   ))
@@ -249,7 +249,7 @@ test_that("wheel_impl basic", {
 })
 
 test_that("wheel_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(wheel_impl(
     n = -1
   ))
@@ -258,7 +258,7 @@ test_that("wheel_impl errors", {
 # 9. hypercube_impl
 
 test_that("hypercube_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(hypercube_impl(
     n = 3
   ))
@@ -275,7 +275,7 @@ test_that("hypercube_impl basic", {
 })
 
 test_that("hypercube_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(hypercube_impl(
     n = 10000
   ))
@@ -284,7 +284,7 @@ test_that("hypercube_impl errors", {
 # 10. square_lattice_impl
 
 test_that("square_lattice_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(square_lattice_impl(
     dimvector = c(2, 2)
   ))
@@ -304,7 +304,7 @@ test_that("square_lattice_impl basic", {
 })
 
 test_that("square_lattice_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(square_lattice_impl(
     dimvector = -1
   ))
@@ -313,7 +313,7 @@ test_that("square_lattice_impl errors", {
 # 11. triangular_lattice_impl
 
 test_that("triangular_lattice_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(triangular_lattice_impl(
     dimvector = c(2, 2)
   ))
@@ -331,7 +331,7 @@ test_that("triangular_lattice_impl basic", {
 })
 
 test_that("triangular_lattice_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(triangular_lattice_impl(
     dimvector = -1
   ))
@@ -340,7 +340,7 @@ test_that("triangular_lattice_impl errors", {
 # 12. path_graph_impl
 
 test_that("path_graph_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(path_graph_impl(
     n = 5
   ))
@@ -358,7 +358,7 @@ test_that("path_graph_impl basic", {
 })
 
 test_that("path_graph_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(path_graph_impl(
     n = -1
   ))
@@ -367,7 +367,7 @@ test_that("path_graph_impl errors", {
 # 13. cycle_graph_impl
 
 test_that("cycle_graph_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(cycle_graph_impl(
     n = 5
   ))
@@ -385,7 +385,7 @@ test_that("cycle_graph_impl basic", {
 })
 
 test_that("cycle_graph_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(cycle_graph_impl(
     n = -1
   ))
@@ -394,7 +394,7 @@ test_that("cycle_graph_impl errors", {
 # 14. symmetric_tree_impl
 
 test_that("symmetric_tree_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(symmetric_tree_impl(
     branches = 3
   ))
@@ -411,7 +411,7 @@ test_that("symmetric_tree_impl basic", {
 })
 
 test_that("symmetric_tree_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(symmetric_tree_impl(
     branches = -1
   ))
@@ -420,7 +420,7 @@ test_that("symmetric_tree_impl errors", {
 # 15. regular_tree_impl
 
 test_that("regular_tree_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(regular_tree_impl(
     h = 2
   ))
@@ -438,7 +438,7 @@ test_that("regular_tree_impl basic", {
 })
 
 test_that("regular_tree_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(regular_tree_impl(
     h = -1
   ))
@@ -447,7 +447,7 @@ test_that("regular_tree_impl errors", {
 # 16. full_citation_impl
 
 test_that("full_citation_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(full_citation_impl(
     n = 5
   ))
@@ -464,7 +464,7 @@ test_that("full_citation_impl basic", {
 })
 
 test_that("full_citation_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(full_citation_impl(
     n = -1
   ))
@@ -473,7 +473,7 @@ test_that("full_citation_impl errors", {
 # 17. atlas_impl
 
 test_that("atlas_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(atlas_impl(
     number = 0
   ))
@@ -489,7 +489,7 @@ test_that("atlas_impl basic", {
 })
 
 test_that("atlas_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(atlas_impl(
     number = -1
   ))
@@ -498,7 +498,7 @@ test_that("atlas_impl errors", {
 # 18. extended_chordal_ring_impl
 
 test_that("extended_chordal_ring_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(extended_chordal_ring_impl(
     nodes = 5,
     W = matrix(c(1, 2))
@@ -518,7 +518,7 @@ test_that("extended_chordal_ring_impl basic", {
 })
 
 test_that("extended_chordal_ring_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(extended_chordal_ring_impl(
     nodes = -1,
     W = matrix(c(1, 2))
@@ -528,7 +528,7 @@ test_that("extended_chordal_ring_impl errors", {
 # 19. graph_power_impl
 
 test_that("graph_power_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 5
   )
@@ -552,7 +552,7 @@ test_that("graph_power_impl basic", {
 })
 
 test_that("graph_power_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(graph_power_impl(
     graph = NULL,
     order = 2
@@ -562,7 +562,7 @@ test_that("graph_power_impl errors", {
 # 20. linegraph_impl
 
 test_that("linegraph_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 5
   )
@@ -579,7 +579,7 @@ test_that("linegraph_impl basic", {
 })
 
 test_that("linegraph_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(linegraph_impl(
     graph = NULL
   ))
@@ -587,7 +587,7 @@ test_that("linegraph_impl errors", {
 
 # 21. de_bruijn_impl
 test_that("de_bruijn_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(de_bruijn_impl(
     m = 2,
     n = 3
@@ -601,7 +601,7 @@ test_that("de_bruijn_impl basic", {
   expect_s3_class(result, "igraph")
 })
 test_that("de_bruijn_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(de_bruijn_impl(
     m = -1,
     n = 3
@@ -610,7 +610,7 @@ test_that("de_bruijn_impl errors", {
 
 # 22. kautz_impl
 test_that("kautz_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(kautz_impl(
     m = 2,
     n = 3
@@ -624,7 +624,7 @@ test_that("kautz_impl basic", {
   expect_s3_class(result, "igraph")
 })
 test_that("kautz_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(kautz_impl(
     m = -1,
     n = 3
@@ -633,7 +633,7 @@ test_that("kautz_impl errors", {
 
 # 23. lcf_vector_impl
 test_that("lcf_vector_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(lcf_vector_impl(
     n = 10,
     shifts = c(3, -3, 4),
@@ -649,7 +649,7 @@ test_that("lcf_vector_impl basic", {
   expect_s3_class(result, "igraph")
 })
 test_that("lcf_vector_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(lcf_vector_impl(
     n = -1,
     shifts = c(3, -3, 4),
@@ -659,7 +659,7 @@ test_that("lcf_vector_impl errors", {
 
 # 24. mycielski_graph_impl
 test_that("mycielski_graph_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(mycielski_graph_impl(
     k = 3
   ))
@@ -671,7 +671,7 @@ test_that("mycielski_graph_impl basic", {
   expect_s3_class(result, "igraph")
 })
 test_that("mycielski_graph_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(mycielski_graph_impl(
     k = -1
   ))
@@ -680,7 +680,7 @@ test_that("mycielski_graph_impl errors", {
 # 25. adjlist_impl
 test_that("adjlist_impl basic", {
   skip_if(Sys.getenv("R_SANITIZER") == "true")
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(adjlist_impl(
     adjlist = list(c(2, 3), c(1), c(1)),
     mode = "out"
@@ -695,7 +695,7 @@ test_that("adjlist_impl basic", {
 })
 test_that("adjlist_impl errors", {
   skip_if(Sys.getenv("R_SANITIZER") == "true")
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(adjlist_impl(
     adjlist = -1,
     mode = "out"
@@ -704,7 +704,7 @@ test_that("adjlist_impl errors", {
 
 # 26. full_bipartite_impl
 test_that("full_bipartite_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(full_bipartite_impl(
     n1 = 2,
     n2 = 3
@@ -724,7 +724,7 @@ test_that("full_bipartite_impl basic", {
   expect_type(result, "list")
 })
 test_that("full_bipartite_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(full_bipartite_impl(
     n1 = -1,
     n2 = 3
@@ -733,7 +733,7 @@ test_that("full_bipartite_impl errors", {
 
 # 27. full_multipartite_impl
 test_that("full_multipartite_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(full_multipartite_impl(
     n = c(2, 3, 4)
   ))
@@ -750,7 +750,7 @@ test_that("full_multipartite_impl basic", {
   expect_type(result, "list")
 })
 test_that("full_multipartite_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(full_multipartite_impl(
     n = -1
   ))
@@ -758,7 +758,7 @@ test_that("full_multipartite_impl errors", {
 
 # 28. realize_degree_sequence_impl
 test_that("realize_degree_sequence_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(realize_degree_sequence_impl(
     out_deg = c(2, 2, 2)
   ))
@@ -776,7 +776,7 @@ test_that("realize_degree_sequence_impl basic", {
   expect_s3_class(result, "igraph")
 })
 test_that("realize_degree_sequence_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(realize_degree_sequence_impl(
     out_deg = -1
   ))
@@ -784,7 +784,7 @@ test_that("realize_degree_sequence_impl errors", {
 
 # 29. realize_bipartite_degree_sequence_impl
 test_that("realize_bipartite_degree_sequence_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(realize_bipartite_degree_sequence_impl(
     degrees1 = c(2, 2),
     degrees2 = c(2, 2)
@@ -804,7 +804,7 @@ test_that("realize_bipartite_degree_sequence_impl basic", {
   expect_s3_class(result, "igraph")
 })
 test_that("realize_bipartite_degree_sequence_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     realize_bipartite_degree_sequence_impl(
       degrees1 = -1,
@@ -815,7 +815,7 @@ test_that("realize_bipartite_degree_sequence_impl errors", {
 
 # 30. circulant_impl
 test_that("circulant_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(circulant_impl(
     n = 5,
     shifts = c(1, 2)
@@ -834,7 +834,7 @@ test_that("circulant_impl basic", {
   expect_s3_class(result, "igraph")
 })
 test_that("circulant_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(circulant_impl(
     n = -1,
     shifts = c(1, 2)
@@ -843,7 +843,7 @@ test_that("circulant_impl errors", {
 
 # 31. generalized_petersen_impl
 test_that("generalized_petersen_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(generalized_petersen_impl(
     n = 5,
     k = 2
@@ -857,7 +857,7 @@ test_that("generalized_petersen_impl basic", {
   expect_s3_class(result, "igraph")
 })
 test_that("generalized_petersen_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(generalized_petersen_impl(
     n = -1,
     k = 2
@@ -866,7 +866,7 @@ test_that("generalized_petersen_impl errors", {
 
 # 32. turan_impl
 test_that("turan_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(turan_impl(
     n = 5,
     r = 2
@@ -880,7 +880,7 @@ test_that("turan_impl basic", {
   expect_type(result, "list")
 })
 test_that("turan_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(turan_impl(
     n = -1,
     r = 2
@@ -889,7 +889,7 @@ test_that("turan_impl errors", {
 
 # 33. erdos_renyi_game_gnp_impl
 test_that("erdos_renyi_game_gnp_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(erdos_renyi_game_gnp_impl(
     n = 5,
     p = 0.5
@@ -909,7 +909,7 @@ test_that("erdos_renyi_game_gnp_impl basic", {
   expect_s3_class(result, "igraph")
 })
 test_that("erdos_renyi_game_gnp_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(erdos_renyi_game_gnp_impl(
     n = -1,
     p = 0.5
@@ -918,7 +918,7 @@ test_that("erdos_renyi_game_gnp_impl errors", {
 
 # 34. erdos_renyi_game_gnm_impl
 test_that("erdos_renyi_game_gnm_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(erdos_renyi_game_gnm_impl(
     n = 5,
     m = 3
@@ -938,7 +938,7 @@ test_that("erdos_renyi_game_gnm_impl basic", {
   expect_s3_class(result, "igraph")
 })
 test_that("erdos_renyi_game_gnm_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(erdos_renyi_game_gnm_impl(
     n = -1,
     m = 3
@@ -947,7 +947,7 @@ test_that("erdos_renyi_game_gnm_impl errors", {
 
 # 35. growing_random_game_impl
 test_that("growing_random_game_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(growing_random_game_impl(
     n = 5,
     m = 2
@@ -967,7 +967,7 @@ test_that("growing_random_game_impl basic", {
   expect_s3_class(result, "igraph")
 })
 test_that("growing_random_game_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(growing_random_game_impl(
     n = -1,
     m = 2
@@ -976,7 +976,7 @@ test_that("growing_random_game_impl errors", {
 
 # 36. preference_game_impl
 test_that("preference_game_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(preference_game_impl(
     nodes = 5,
     types = 2,
@@ -996,7 +996,7 @@ test_that("preference_game_impl basic", {
   expect_type(result, "list")
 })
 test_that("preference_game_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     preference_game_impl(
       nodes = -1,
@@ -1010,7 +1010,7 @@ test_that("preference_game_impl errors", {
 
 # 37. asymmetric_preference_game_impl
 test_that("asymmetric_preference_game_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(asymmetric_preference_game_impl(
     nodes = 5,
     out_types = 2,
@@ -1030,7 +1030,7 @@ test_that("asymmetric_preference_game_impl basic", {
   expect_type(result, "list")
 })
 test_that("asymmetric_preference_game_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     asymmetric_preference_game_impl(
       nodes = -1,
@@ -1044,7 +1044,7 @@ test_that("asymmetric_preference_game_impl errors", {
 
 # 38. rewire_edges_impl
 test_that("rewire_edges_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 5
   )
@@ -1062,7 +1062,7 @@ test_that("rewire_edges_impl basic", {
   expect_s3_class(result, "igraph")
 })
 test_that("rewire_edges_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(rewire_edges_impl(
     graph = NULL,
     prob = 0.5
@@ -1071,7 +1071,7 @@ test_that("rewire_edges_impl errors", {
 
 # 39. rewire_directed_edges_impl
 test_that("rewire_directed_edges_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 5,
     directed = TRUE
@@ -1090,7 +1090,7 @@ test_that("rewire_directed_edges_impl basic", {
   expect_s3_class(result, "igraph")
 })
 test_that("rewire_directed_edges_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(rewire_directed_edges_impl(
     graph = NULL,
     prob = 0.5
@@ -1099,7 +1099,7 @@ test_that("rewire_directed_edges_impl errors", {
 
 # 40. forest_fire_game_impl
 test_that("forest_fire_game_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(forest_fire_game_impl(
     nodes = 5,
     fw_prob = 0.5
@@ -1120,7 +1120,7 @@ test_that("forest_fire_game_impl basic", {
   expect_s3_class(result, "igraph")
 })
 test_that("forest_fire_game_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(forest_fire_game_impl(
     nodes = -1,
     fw_prob = 0.5
@@ -1129,7 +1129,7 @@ test_that("forest_fire_game_impl errors", {
 
 # 41. simple_interconnected_islands_game_impl
 test_that("simple_interconnected_islands_game_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(simple_interconnected_islands_game_impl(
     islands_n = 2,
     islands_size = 3,
@@ -1147,7 +1147,7 @@ test_that("simple_interconnected_islands_game_impl basic", {
   expect_s3_class(result, "igraph")
 })
 test_that("simple_interconnected_islands_game_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     simple_interconnected_islands_game_impl(
       islands_n = -1,
@@ -1160,7 +1160,7 @@ test_that("simple_interconnected_islands_game_impl errors", {
 
 # 42. chung_lu_game_impl
 test_that("chung_lu_game_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(chung_lu_game_impl(
     out_weights = c(2, 2, 2)
   ))
@@ -1178,7 +1178,7 @@ test_that("chung_lu_game_impl basic", {
   expect_s3_class(result, "igraph")
 })
 test_that("chung_lu_game_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(chung_lu_game_impl(
     out_weights = -1
   ))
@@ -1186,7 +1186,7 @@ test_that("chung_lu_game_impl errors", {
 
 # 43. static_fitness_game_impl
 test_that("static_fitness_game_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(static_fitness_game_impl(
     no_of_edges = 3,
     fitness_out = c(1, 2, 3)
@@ -1207,7 +1207,7 @@ test_that("static_fitness_game_impl basic", {
   expect_s3_class(result, "igraph")
 })
 test_that("static_fitness_game_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(static_fitness_game_impl(
     no_of_edges = -1,
     fitness_out = c(1, 2, 3)
@@ -1216,7 +1216,7 @@ test_that("static_fitness_game_impl errors", {
 
 # 44. static_power_law_game_impl
 test_that("static_power_law_game_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(static_power_law_game_impl(
     no_of_nodes = 5,
     no_of_edges = 4,
@@ -1241,7 +1241,7 @@ test_that("static_power_law_game_impl basic", {
   expect_s3_class(result, "igraph")
 })
 test_that("static_power_law_game_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(static_power_law_game_impl(
     no_of_nodes = -1,
     no_of_edges = 4,
@@ -1252,7 +1252,7 @@ test_that("static_power_law_game_impl errors", {
 # 45. k_regular_game_impl
 
 test_that("k_regular_game_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(k_regular_game_impl(
     no_of_nodes = 5,
     k = 2
@@ -1273,7 +1273,7 @@ test_that("k_regular_game_impl basic", {
 })
 
 test_that("k_regular_game_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(k_regular_game_impl(
     no_of_nodes = -1,
     k = 2
@@ -1283,7 +1283,7 @@ test_that("k_regular_game_impl errors", {
 # 46. sbm_game_impl
 
 test_that("sbm_game_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(sbm_game_impl(
     n = 5,
     pref_matrix = matrix(0.5, 2, 2),
@@ -1307,7 +1307,7 @@ test_that("sbm_game_impl basic", {
 })
 
 test_that("sbm_game_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(sbm_game_impl(
     n = -1,
     pref_matrix = matrix(0.5, 2, 2),
@@ -1318,7 +1318,7 @@ test_that("sbm_game_impl errors", {
 # 47. hsbm_game_impl
 
 test_that("hsbm_game_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(hsbm_game_impl(
     n = 6,
     m = 2,
@@ -1339,7 +1339,7 @@ test_that("hsbm_game_impl basic", {
 })
 
 test_that("hsbm_game_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     hsbm_game_impl(
       n = -1,
@@ -1354,7 +1354,7 @@ test_that("hsbm_game_impl errors", {
 # 48. hsbm_list_game_impl
 
 test_that("hsbm_list_game_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   C <- matrix(
     c(
       1,
@@ -1389,7 +1389,7 @@ test_that("hsbm_list_game_impl basic", {
 })
 
 test_that("hsbm_list_game_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     hsbm_list_game_impl(
       n = -1,
@@ -1404,7 +1404,7 @@ test_that("hsbm_list_game_impl errors", {
 # 49. correlated_game_impl
 
 test_that("correlated_game_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 5
   )
@@ -1423,7 +1423,7 @@ test_that("correlated_game_impl basic", {
 })
 
 test_that("correlated_game_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(correlated_game_impl(
     old_graph = NULL,
     corr = 0.5
@@ -1433,7 +1433,7 @@ test_that("correlated_game_impl errors", {
 # 50. correlated_pair_game_impl
 
 test_that("correlated_pair_game_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(correlated_pair_game_impl(
     n = 5,
     corr = 0.5,
@@ -1456,7 +1456,7 @@ test_that("correlated_pair_game_impl basic", {
 })
 
 test_that("correlated_pair_game_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(correlated_pair_game_impl(
     n = -1,
     corr = 0.5,
@@ -1467,7 +1467,7 @@ test_that("correlated_pair_game_impl errors", {
 # 51. dot_product_game_impl
 
 test_that("dot_product_game_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(dot_product_game_impl(
     vecs = matrix(0.5, 5, 2)
   ))
@@ -1484,7 +1484,7 @@ test_that("dot_product_game_impl basic", {
 })
 
 test_that("dot_product_game_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(dot_product_game_impl(
     vecs = NULL
   ))
@@ -1493,7 +1493,7 @@ test_that("dot_product_game_impl errors", {
 # 52. sample_sphere_surface_impl
 
 test_that("sample_sphere_surface_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(sample_sphere_surface_impl(
     dim = 3,
     n = 5
@@ -1514,7 +1514,7 @@ test_that("sample_sphere_surface_impl basic", {
 })
 
 test_that("sample_sphere_surface_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(sample_sphere_surface_impl(
     dim = -1,
     n = 5
@@ -1524,7 +1524,7 @@ test_that("sample_sphere_surface_impl errors", {
 # 53. sample_sphere_volume_impl
 
 test_that("sample_sphere_volume_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(sample_sphere_volume_impl(
     dim = 3,
     n = 5
@@ -1545,7 +1545,7 @@ test_that("sample_sphere_volume_impl basic", {
 })
 
 test_that("sample_sphere_volume_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(sample_sphere_volume_impl(
     dim = -1,
     n = 5
@@ -1555,7 +1555,7 @@ test_that("sample_sphere_volume_impl errors", {
 # 54. sample_dirichlet_impl
 
 test_that("sample_dirichlet_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(sample_dirichlet_impl(
     n = 5,
     alpha = c(1, 1, 1)
@@ -1570,7 +1570,7 @@ test_that("sample_dirichlet_impl basic", {
 })
 
 test_that("sample_dirichlet_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(sample_dirichlet_impl(
     n = -1,
     alpha = c(1, 1, 1)
@@ -1580,7 +1580,7 @@ test_that("sample_dirichlet_impl errors", {
 # 55. are_adjacent_impl
 
 test_that("are_adjacent_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -1601,7 +1601,7 @@ test_that("are_adjacent_impl basic", {
 })
 
 test_that("are_adjacent_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(are_adjacent_impl(
     graph = NULL,
     v1 = 1,
@@ -1612,7 +1612,7 @@ test_that("are_adjacent_impl errors", {
 # 56. closeness_impl
 
 test_that("closeness_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -1634,7 +1634,7 @@ test_that("closeness_impl basic", {
 })
 
 test_that("closeness_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(closeness_impl(
     graph = NULL
   ))
@@ -1643,7 +1643,7 @@ test_that("closeness_impl errors", {
 # 57. closeness_cutoff_impl
 
 test_that("closeness_cutoff_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -1668,7 +1668,7 @@ test_that("closeness_cutoff_impl basic", {
 })
 
 test_that("closeness_cutoff_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(closeness_cutoff_impl(
     graph = NULL
   ))
@@ -1677,7 +1677,7 @@ test_that("closeness_cutoff_impl errors", {
 # 58. get_shortest_path_impl
 
 test_that("get_shortest_path_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -1698,7 +1698,7 @@ test_that("get_shortest_path_impl basic", {
 })
 
 test_that("get_shortest_path_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(get_shortest_path_impl(
     graph = NULL,
     from = 1,
@@ -1709,7 +1709,7 @@ test_that("get_shortest_path_impl errors", {
 # 59. get_shortest_path_bellman_ford_impl
 
 test_that("get_shortest_path_bellman_ford_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -1730,7 +1730,7 @@ test_that("get_shortest_path_bellman_ford_impl basic", {
 })
 
 test_that("get_shortest_path_bellman_ford_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(get_shortest_path_bellman_ford_impl(
     graph = NULL,
     from = 1,
@@ -1741,7 +1741,7 @@ test_that("get_shortest_path_bellman_ford_impl errors", {
 # 60. get_shortest_path_dijkstra_impl
 
 test_that("get_shortest_path_dijkstra_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -1762,7 +1762,7 @@ test_that("get_shortest_path_dijkstra_impl basic", {
 })
 
 test_that("get_shortest_path_dijkstra_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(get_shortest_path_dijkstra_impl(
     graph = NULL,
     from = 1,
@@ -1773,7 +1773,7 @@ test_that("get_shortest_path_dijkstra_impl errors", {
 # 61. get_all_shortest_paths_impl
 
 test_that("get_all_shortest_paths_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -1794,7 +1794,7 @@ test_that("get_all_shortest_paths_impl basic", {
 })
 
 test_that("get_all_shortest_paths_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(get_all_shortest_paths_impl(
     graph = NULL,
     from = 1,
@@ -1805,7 +1805,7 @@ test_that("get_all_shortest_paths_impl errors", {
 # 62. get_all_shortest_paths_dijkstra_impl
 
 test_that("get_all_shortest_paths_dijkstra_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -1826,7 +1826,7 @@ test_that("get_all_shortest_paths_dijkstra_impl basic", {
 })
 
 test_that("get_all_shortest_paths_dijkstra_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     get_all_shortest_paths_dijkstra_impl(
       graph = NULL,
@@ -1839,7 +1839,7 @@ test_that("get_all_shortest_paths_dijkstra_impl errors", {
 # 63. voronoi_impl
 
 test_that("voronoi_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -1864,7 +1864,7 @@ test_that("voronoi_impl basic", {
 })
 
 test_that("voronoi_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(voronoi_impl(
     graph = NULL,
     generators = 1
@@ -1874,7 +1874,7 @@ test_that("voronoi_impl errors", {
 # 64. get_all_simple_paths_impl
 
 test_that("get_all_simple_paths_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -1895,7 +1895,7 @@ test_that("get_all_simple_paths_impl basic", {
 })
 
 test_that("get_all_simple_paths_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(get_all_simple_paths_impl(
     graph = NULL,
     from = 1,
@@ -1906,7 +1906,7 @@ test_that("get_all_simple_paths_impl errors", {
 # 65. get_k_shortest_paths_impl
 
 test_that("get_k_shortest_paths_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -1929,7 +1929,7 @@ test_that("get_k_shortest_paths_impl basic", {
 })
 
 test_that("get_k_shortest_paths_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(get_k_shortest_paths_impl(
     graph = NULL,
     from = 1,
@@ -1941,7 +1941,7 @@ test_that("get_k_shortest_paths_impl errors", {
 # 66. get_widest_path_impl
 
 test_that("get_widest_path_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -1964,7 +1964,7 @@ test_that("get_widest_path_impl basic", {
 })
 
 test_that("get_widest_path_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(get_widest_path_impl(
     graph = NULL,
     from = 1,
@@ -1975,7 +1975,7 @@ test_that("get_widest_path_impl errors", {
 # 67. get_widest_paths_impl
 
 test_that("get_widest_paths_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -1998,7 +1998,7 @@ test_that("get_widest_paths_impl basic", {
 })
 
 test_that("get_widest_paths_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(get_widest_paths_impl(
     graph = NULL,
     from = 1,
@@ -2009,7 +2009,7 @@ test_that("get_widest_paths_impl errors", {
 # 70. spanner_impl
 
 test_that("spanner_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2028,7 +2028,7 @@ test_that("spanner_impl basic", {
 })
 
 test_that("spanner_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(spanner_impl(
     graph = NULL,
     stretch = 2
@@ -2038,7 +2038,7 @@ test_that("spanner_impl errors", {
 # 71. betweenness_cutoff_impl
 
 test_that("betweenness_cutoff_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2057,7 +2057,7 @@ test_that("betweenness_cutoff_impl basic", {
 })
 
 test_that("betweenness_cutoff_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(betweenness_cutoff_impl(
     graph = NULL,
     cutoff = 2
@@ -2067,7 +2067,7 @@ test_that("betweenness_cutoff_impl errors", {
 # 72. betweenness_subset_impl
 
 test_that("betweenness_subset_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2084,7 +2084,7 @@ test_that("betweenness_subset_impl basic", {
 })
 
 test_that("betweenness_subset_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(betweenness_subset_impl(
     graph = NULL
   ))
@@ -2093,7 +2093,7 @@ test_that("betweenness_subset_impl errors", {
 # 73. edge_betweenness_impl
 
 test_that("edge_betweenness_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2110,7 +2110,7 @@ test_that("edge_betweenness_impl basic", {
 })
 
 test_that("edge_betweenness_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(edge_betweenness_impl(
     graph = NULL
   ))
@@ -2119,7 +2119,7 @@ test_that("edge_betweenness_impl errors", {
 # 74. edge_betweenness_cutoff_impl
 
 test_that("edge_betweenness_cutoff_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2138,7 +2138,7 @@ test_that("edge_betweenness_cutoff_impl basic", {
 })
 
 test_that("edge_betweenness_cutoff_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(edge_betweenness_cutoff_impl(
     graph = NULL,
     cutoff = 2
@@ -2148,7 +2148,7 @@ test_that("edge_betweenness_cutoff_impl errors", {
 # 75. edge_betweenness_subset_impl
 
 test_that("edge_betweenness_subset_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2165,7 +2165,7 @@ test_that("edge_betweenness_subset_impl basic", {
 })
 
 test_that("edge_betweenness_subset_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(edge_betweenness_subset_impl(
     graph = NULL
   ))
@@ -2174,7 +2174,7 @@ test_that("edge_betweenness_subset_impl errors", {
 # 76. harmonic_centrality_cutoff_impl
 
 test_that("harmonic_centrality_cutoff_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2193,7 +2193,7 @@ test_that("harmonic_centrality_cutoff_impl basic", {
 })
 
 test_that("harmonic_centrality_cutoff_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     harmonic_centrality_cutoff_impl(
       graph = NULL,
@@ -2205,7 +2205,7 @@ test_that("harmonic_centrality_cutoff_impl errors", {
 # 77. personalized_pagerank_impl
 
 test_that("personalized_pagerank_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2227,7 +2227,7 @@ test_that("personalized_pagerank_impl basic", {
 })
 
 test_that("personalized_pagerank_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(personalized_pagerank_impl(
     graph = NULL
   ))
@@ -2236,7 +2236,7 @@ test_that("personalized_pagerank_impl errors", {
 # 78. personalized_pagerank_vs_impl
 
 test_that("personalized_pagerank_vs_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2261,7 +2261,7 @@ test_that("personalized_pagerank_vs_impl basic", {
 })
 
 test_that("personalized_pagerank_vs_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     personalized_pagerank_vs_impl(
       graph = NULL,
@@ -2273,7 +2273,7 @@ test_that("personalized_pagerank_vs_impl errors", {
 # 79. induced_subgraph_impl
 
 test_that("induced_subgraph_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2292,7 +2292,7 @@ test_that("induced_subgraph_impl basic", {
 })
 
 test_that("induced_subgraph_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(induced_subgraph_impl(
     graph = NULL,
     vids = 1:2
@@ -2302,7 +2302,7 @@ test_that("induced_subgraph_impl errors", {
 # 80. subgraph_from_edges_impl
 
 test_that("subgraph_from_edges_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2321,7 +2321,7 @@ test_that("subgraph_from_edges_impl basic", {
 })
 
 test_that("subgraph_from_edges_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(subgraph_from_edges_impl(
     graph = NULL,
     eids = 1
@@ -2331,7 +2331,7 @@ test_that("subgraph_from_edges_impl errors", {
 # 81. reverse_edges_impl
 
 test_that("reverse_edges_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2348,7 +2348,7 @@ test_that("reverse_edges_impl basic", {
 })
 
 test_that("reverse_edges_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(reverse_edges_impl(
     graph = NULL
   ))
@@ -2361,7 +2361,7 @@ test_that("reverse_edges_impl errors", {
 # 101. path_length_hist_impl
 
 test_that("path_length_hist_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2382,7 +2382,7 @@ test_that("path_length_hist_impl basic", {
 })
 
 test_that("path_length_hist_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(path_length_hist_impl(
     graph = NULL
   ))
@@ -2391,7 +2391,7 @@ test_that("path_length_hist_impl errors", {
 # 102. simplify_impl
 
 test_that("simplify_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2413,7 +2413,7 @@ test_that("simplify_impl basic", {
 })
 
 test_that("simplify_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(simplify_impl(
     graph = NULL
   ))
@@ -2422,7 +2422,7 @@ test_that("simplify_impl errors", {
 # 103. transitivity_undirected_impl
 
 test_that("transitivity_undirected_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2443,7 +2443,7 @@ test_that("transitivity_undirected_impl basic", {
 })
 
 test_that("transitivity_undirected_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(transitivity_undirected_impl(
     graph = NULL
   ))
@@ -2452,7 +2452,7 @@ test_that("transitivity_undirected_impl errors", {
 # 104. transitivity_local_undirected_impl
 
 test_that("transitivity_local_undirected_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2473,7 +2473,7 @@ test_that("transitivity_local_undirected_impl basic", {
 })
 
 test_that("transitivity_local_undirected_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(transitivity_local_undirected_impl(
     graph = NULL
   ))
@@ -2482,7 +2482,7 @@ test_that("transitivity_local_undirected_impl errors", {
 # 105. transitivity_avglocal_undirected_impl
 
 test_that("transitivity_avglocal_undirected_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2503,7 +2503,7 @@ test_that("transitivity_avglocal_undirected_impl basic", {
 })
 
 test_that("transitivity_avglocal_undirected_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(transitivity_avglocal_undirected_impl(
     graph = NULL
   ))
@@ -2512,7 +2512,7 @@ test_that("transitivity_avglocal_undirected_impl errors", {
 # 106. transitivity_barrat_impl
 
 test_that("transitivity_barrat_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2535,7 +2535,7 @@ test_that("transitivity_barrat_impl basic", {
 })
 
 test_that("transitivity_barrat_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(transitivity_barrat_impl(
     graph = NULL
   ))
@@ -2544,7 +2544,7 @@ test_that("transitivity_barrat_impl errors", {
 # 107. ecc_impl
 
 test_that("ecc_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 4
   )
@@ -2567,7 +2567,7 @@ test_that("ecc_impl basic", {
 })
 
 test_that("ecc_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(ecc_impl(
     graph = NULL
   ))
@@ -2576,7 +2576,7 @@ test_that("ecc_impl errors", {
 # 108. reciprocity_impl
 
 test_that("reciprocity_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2598,7 +2598,7 @@ test_that("reciprocity_impl basic", {
 })
 
 test_that("reciprocity_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(reciprocity_impl(
     graph = NULL
   ))
@@ -2607,7 +2607,7 @@ test_that("reciprocity_impl errors", {
 # 109. maxdegree_impl
 
 test_that("maxdegree_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2629,7 +2629,7 @@ test_that("maxdegree_impl basic", {
 })
 
 test_that("maxdegree_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(maxdegree_impl(
     graph = NULL
   ))
@@ -2638,7 +2638,7 @@ test_that("maxdegree_impl errors", {
 # 110. density_impl
 
 test_that("density_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2659,7 +2659,7 @@ test_that("density_impl basic", {
 })
 
 test_that("density_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(density_impl(
     graph = NULL
   ))
@@ -2668,7 +2668,7 @@ test_that("density_impl errors", {
 # 111. mean_degree_impl
 
 test_that("mean_degree_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2689,7 +2689,7 @@ test_that("mean_degree_impl basic", {
 })
 
 test_that("mean_degree_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(mean_degree_impl(
     graph = NULL
   ))
@@ -2698,7 +2698,7 @@ test_that("mean_degree_impl errors", {
 # 112. feedback_arc_set_impl
 
 test_that("feedback_arc_set_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2719,7 +2719,7 @@ test_that("feedback_arc_set_impl basic", {
 })
 
 test_that("feedback_arc_set_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(feedback_arc_set_impl(
     graph = NULL
   ))
@@ -2728,7 +2728,7 @@ test_that("feedback_arc_set_impl errors", {
 # 113. feedback_vertex_set_impl
 
 test_that("feedback_vertex_set_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2745,7 +2745,7 @@ test_that("feedback_vertex_set_impl basic", {
 })
 
 test_that("feedback_vertex_set_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(feedback_vertex_set_impl(
     graph = NULL
   ))
@@ -2754,7 +2754,7 @@ test_that("feedback_vertex_set_impl errors", {
 # 114. is_loop_impl
 
 test_that("is_loop_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2771,7 +2771,7 @@ test_that("is_loop_impl basic", {
 })
 
 test_that("is_loop_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(is_loop_impl(
     graph = NULL
   ))
@@ -2780,7 +2780,7 @@ test_that("is_loop_impl errors", {
 # 115. is_dag_impl
 
 test_that("is_dag_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2797,7 +2797,7 @@ test_that("is_dag_impl basic", {
 })
 
 test_that("is_dag_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(is_dag_impl(
     graph = NULL
   ))
@@ -2806,7 +2806,7 @@ test_that("is_dag_impl errors", {
 # 116. is_acyclic_impl
 
 test_that("is_acyclic_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2823,7 +2823,7 @@ test_that("is_acyclic_impl basic", {
 })
 
 test_that("is_acyclic_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(is_acyclic_impl(
     graph = NULL
   ))
@@ -2832,7 +2832,7 @@ test_that("is_acyclic_impl errors", {
 # 117. is_simple_impl
 
 test_that("is_simple_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2849,7 +2849,7 @@ test_that("is_simple_impl basic", {
 })
 
 test_that("is_simple_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(is_simple_impl(
     graph = NULL
   ))
@@ -2858,7 +2858,7 @@ test_that("is_simple_impl errors", {
 # 118. is_multiple_impl
 
 test_that("is_multiple_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2875,7 +2875,7 @@ test_that("is_multiple_impl basic", {
 })
 
 test_that("is_multiple_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(is_multiple_impl(
     graph = NULL
   ))
@@ -2884,7 +2884,7 @@ test_that("is_multiple_impl errors", {
 # 119. has_loop_impl
 
 test_that("has_loop_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2901,7 +2901,7 @@ test_that("has_loop_impl basic", {
 })
 
 test_that("has_loop_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(has_loop_impl(
     graph = NULL
   ))
@@ -2910,7 +2910,7 @@ test_that("has_loop_impl errors", {
 # 120. has_multiple_impl
 
 test_that("has_multiple_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2927,7 +2927,7 @@ test_that("has_multiple_impl basic", {
 })
 
 test_that("has_multiple_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(has_multiple_impl(
     graph = NULL
   ))
@@ -2936,7 +2936,7 @@ test_that("has_multiple_impl errors", {
 # 121. count_loops_impl
 
 test_that("count_loops_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2953,7 +2953,7 @@ test_that("count_loops_impl basic", {
 })
 
 test_that("count_loops_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(count_loops_impl(
     graph = NULL
   ))
@@ -2962,7 +2962,7 @@ test_that("count_loops_impl errors", {
 # 122. count_multiple_impl
 
 test_that("count_multiple_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -2979,7 +2979,7 @@ test_that("count_multiple_impl basic", {
 })
 
 test_that("count_multiple_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(count_multiple_impl(
     graph = NULL
   ))
@@ -2988,7 +2988,7 @@ test_that("count_multiple_impl errors", {
 # 123. is_perfect_impl
 
 test_that("is_perfect_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -3005,7 +3005,7 @@ test_that("is_perfect_impl basic", {
 })
 
 test_that("is_perfect_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(is_perfect_impl(
     graph = NULL
   ))
@@ -3014,7 +3014,7 @@ test_that("is_perfect_impl errors", {
 # 124. eigenvector_centrality_impl
 
 test_that("eigenvector_centrality_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -3036,7 +3036,7 @@ test_that("eigenvector_centrality_impl basic", {
 })
 
 test_that("eigenvector_centrality_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(eigenvector_centrality_impl(
     graph = NULL
   ))
@@ -3045,7 +3045,7 @@ test_that("eigenvector_centrality_impl errors", {
 # 125. hub_and_authority_scores_impl
 
 test_that("hub_and_authority_scores_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_full_graph(5)
   expect_snapshot(hub_and_authority_scores_impl(
     graph = g
@@ -3063,7 +3063,7 @@ test_that("hub_and_authority_scores_impl basic", {
 })
 
 test_that("hub_and_authority_scores_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(hub_and_authority_scores_impl(
     graph = NULL
   ))
@@ -3072,7 +3072,7 @@ test_that("hub_and_authority_scores_impl errors", {
 # 126. unfold_tree_impl
 
 test_that("unfold_tree_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -3096,7 +3096,7 @@ test_that("unfold_tree_impl basic", {
 })
 
 test_that("unfold_tree_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(unfold_tree_impl(
     graph = NULL,
     roots = 1
@@ -3106,7 +3106,7 @@ test_that("unfold_tree_impl errors", {
 # 127. is_mutual_impl
 
 test_that("is_mutual_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -3127,7 +3127,7 @@ test_that("is_mutual_impl basic", {
 })
 
 test_that("is_mutual_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(is_mutual_impl(
     graph = NULL
   ))
@@ -3136,7 +3136,7 @@ test_that("is_mutual_impl errors", {
 # 128. has_mutual_impl
 
 test_that("has_mutual_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -3157,7 +3157,7 @@ test_that("has_mutual_impl basic", {
 })
 
 test_that("has_mutual_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(has_mutual_impl(
     graph = NULL
   ))
@@ -3166,7 +3166,7 @@ test_that("has_mutual_impl errors", {
 # 129. maximum_cardinality_search_impl
 
 test_that("maximum_cardinality_search_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -3183,7 +3183,7 @@ test_that("maximum_cardinality_search_impl basic", {
 })
 
 test_that("maximum_cardinality_search_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(maximum_cardinality_search_impl(
     graph = NULL
   ))
@@ -3192,7 +3192,7 @@ test_that("maximum_cardinality_search_impl errors", {
 # 130. avg_nearest_neighbor_degree_impl
 
 test_that("avg_nearest_neighbor_degree_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -3214,7 +3214,7 @@ test_that("avg_nearest_neighbor_degree_impl basic", {
 })
 
 test_that("avg_nearest_neighbor_degree_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(avg_nearest_neighbor_degree_impl(
     graph = NULL
   ))
@@ -3223,7 +3223,7 @@ test_that("avg_nearest_neighbor_degree_impl errors", {
 # 131. degree_correlation_vector_impl
 
 test_that("degree_correlation_vector_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -3246,7 +3246,7 @@ test_that("degree_correlation_vector_impl basic", {
 })
 
 test_that("degree_correlation_vector_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(degree_correlation_vector_impl(
     graph = NULL
   ))
@@ -3255,7 +3255,7 @@ test_that("degree_correlation_vector_impl errors", {
 # 132. rich_club_sequence_impl
 
 test_that("rich_club_sequence_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -3281,7 +3281,7 @@ test_that("rich_club_sequence_impl basic", {
 })
 
 test_that("rich_club_sequence_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     rich_club_sequence_impl(
       graph = NULL,
@@ -3293,7 +3293,7 @@ test_that("rich_club_sequence_impl errors", {
 # 133. strength_impl
 
 test_that("strength_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -3315,7 +3315,7 @@ test_that("strength_impl basic", {
 })
 
 test_that("strength_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(strength_impl(
     graph = NULL
   ))
@@ -3324,7 +3324,7 @@ test_that("strength_impl errors", {
 # 134. centralization_impl
 
 test_that("centralization_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(centralization_impl(
     scores = c(1, 2, 3)
   ))
@@ -3342,7 +3342,7 @@ test_that("centralization_impl basic", {
 })
 
 test_that("centralization_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(centralization_impl(
     scores = package_version("1.2.3")
   ))
@@ -3351,7 +3351,7 @@ test_that("centralization_impl errors", {
 # 135. centralization_degree_impl
 
 test_that("centralization_degree_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -3374,7 +3374,7 @@ test_that("centralization_degree_impl basic", {
 })
 
 test_that("centralization_degree_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(centralization_degree_impl(
     graph = NULL
   ))
@@ -3383,7 +3383,7 @@ test_that("centralization_degree_impl errors", {
 # 136. centralization_degree_tmax_impl
 
 test_that("centralization_degree_tmax_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(centralization_degree_tmax_impl(
     nodes = 3,
     loops = TRUE
@@ -3403,7 +3403,7 @@ test_that("centralization_degree_tmax_impl basic", {
 })
 
 test_that("centralization_degree_tmax_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     centralization_degree_tmax_impl(
       nodes = -1,
@@ -3415,7 +3415,7 @@ test_that("centralization_degree_tmax_impl errors", {
 # 137. centralization_betweenness_impl
 
 test_that("centralization_betweenness_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -3437,7 +3437,7 @@ test_that("centralization_betweenness_impl basic", {
 })
 
 test_that("centralization_betweenness_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(centralization_betweenness_impl(
     graph = NULL
   ))
@@ -3446,7 +3446,7 @@ test_that("centralization_betweenness_impl errors", {
 # 138. centralization_betweenness_tmax_impl
 
 test_that("centralization_betweenness_tmax_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(centralization_betweenness_tmax_impl(
     nodes = 3,
     directed = TRUE
@@ -3465,7 +3465,7 @@ test_that("centralization_betweenness_tmax_impl basic", {
 })
 
 test_that("centralization_betweenness_tmax_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     centralization_betweenness_tmax_impl(
       nodes = -1,
@@ -3477,7 +3477,7 @@ test_that("centralization_betweenness_tmax_impl errors", {
 # 139. centralization_closeness_impl
 
 test_that("centralization_closeness_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -3499,7 +3499,7 @@ test_that("centralization_closeness_impl basic", {
 })
 
 test_that("centralization_closeness_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(centralization_closeness_impl(
     graph = NULL
   ))
@@ -3508,7 +3508,7 @@ test_that("centralization_closeness_impl errors", {
 # 140. centralization_closeness_tmax_impl
 
 test_that("centralization_closeness_tmax_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(centralization_closeness_tmax_impl(
     nodes = 3
   ))
@@ -3525,7 +3525,7 @@ test_that("centralization_closeness_tmax_impl basic", {
 })
 
 test_that("centralization_closeness_tmax_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(centralization_closeness_tmax_impl(
     nodes = -1
   ))
@@ -3534,7 +3534,7 @@ test_that("centralization_closeness_tmax_impl errors", {
 # 141. centralization_eigenvector_centrality_impl
 
 test_that("centralization_eigenvector_centrality_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -3556,7 +3556,7 @@ test_that("centralization_eigenvector_centrality_impl basic", {
 })
 
 test_that("centralization_eigenvector_centrality_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     centralization_eigenvector_centrality_impl(
       graph = NULL
@@ -3567,7 +3567,7 @@ test_that("centralization_eigenvector_centrality_impl errors", {
 # 142. centralization_eigenvector_centrality_tmax_impl
 
 test_that("centralization_eigenvector_centrality_tmax_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(centralization_eigenvector_centrality_tmax_impl(
     nodes = 3
   ))
@@ -3584,7 +3584,7 @@ test_that("centralization_eigenvector_centrality_tmax_impl basic", {
 })
 
 test_that("centralization_eigenvector_centrality_tmax_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     centralization_eigenvector_centrality_tmax_impl(
       nodes = -1
@@ -3595,7 +3595,7 @@ test_that("centralization_eigenvector_centrality_tmax_impl errors", {
 # 143. assortativity_nominal_impl
 
 test_that("assortativity_nominal_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -3620,7 +3620,7 @@ test_that("assortativity_nominal_impl basic", {
 })
 
 test_that("assortativity_nominal_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(assortativity_nominal_impl(
     graph = NULL,
     types = c(1, 2, 1)
@@ -3630,7 +3630,7 @@ test_that("assortativity_nominal_impl errors", {
 # 144. assortativity_impl
 
 test_that("assortativity_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -3655,7 +3655,7 @@ test_that("assortativity_impl basic", {
 })
 
 test_that("assortativity_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(assortativity_impl(
     graph = NULL,
     values = c(1, 2, 1)
@@ -3665,7 +3665,7 @@ test_that("assortativity_impl errors", {
 # 145. assortativity_degree_impl
 
 test_that("assortativity_degree_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -3686,7 +3686,7 @@ test_that("assortativity_degree_impl basic", {
 })
 
 test_that("assortativity_degree_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(assortativity_degree_impl(
     graph = NULL
   ))
@@ -3695,7 +3695,7 @@ test_that("assortativity_degree_impl errors", {
 # 146. joint_degree_matrix_impl
 
 test_that("joint_degree_matrix_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -3717,7 +3717,7 @@ test_that("joint_degree_matrix_impl basic", {
 })
 
 test_that("joint_degree_matrix_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(joint_degree_matrix_impl(
     graph = NULL
   ))
@@ -3726,7 +3726,7 @@ test_that("joint_degree_matrix_impl errors", {
 # 147. joint_degree_distribution_impl
 
 test_that("joint_degree_distribution_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -3752,7 +3752,7 @@ test_that("joint_degree_distribution_impl basic", {
 })
 
 test_that("joint_degree_distribution_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(joint_degree_distribution_impl(
     graph = NULL
   ))
@@ -3761,7 +3761,7 @@ test_that("joint_degree_distribution_impl errors", {
 # 148. joint_type_distribution_impl
 
 test_that("joint_type_distribution_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -3787,7 +3787,7 @@ test_that("joint_type_distribution_impl basic", {
 })
 
 test_that("joint_type_distribution_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     joint_type_distribution_impl(
       graph = NULL,
@@ -3799,7 +3799,7 @@ test_that("joint_type_distribution_impl errors", {
 # 149. contract_vertices_impl
 
 test_that("contract_vertices_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -3818,7 +3818,7 @@ test_that("contract_vertices_impl basic", {
 })
 
 test_that("contract_vertices_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(contract_vertices_impl(
     graph = NULL,
     mapping = c(1, 1, 2)
@@ -3828,7 +3828,7 @@ test_that("contract_vertices_impl errors", {
 # 150. eccentricity_dijkstra_impl
 
 test_that("eccentricity_dijkstra_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -3849,7 +3849,7 @@ test_that("eccentricity_dijkstra_impl basic", {
 })
 
 test_that("eccentricity_dijkstra_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(eccentricity_dijkstra_impl(
     graph = NULL
   ))
@@ -3858,7 +3858,7 @@ test_that("eccentricity_dijkstra_impl errors", {
 # 151. graph_center_dijkstra_impl
 
 test_that("graph_center_dijkstra_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -3879,7 +3879,7 @@ test_that("graph_center_dijkstra_impl basic", {
 })
 
 test_that("graph_center_dijkstra_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(graph_center_dijkstra_impl(
     graph = NULL
   ))
@@ -3888,7 +3888,7 @@ test_that("graph_center_dijkstra_impl errors", {
 # 152. radius_dijkstra_impl
 
 test_that("radius_dijkstra_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -3909,7 +3909,7 @@ test_that("radius_dijkstra_impl basic", {
 })
 
 test_that("radius_dijkstra_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(radius_dijkstra_impl(
     graph = NULL
   ))
@@ -3918,7 +3918,7 @@ test_that("radius_dijkstra_impl errors", {
 # 153. pseudo_diameter_impl
 
 test_that("pseudo_diameter_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -3943,7 +3943,7 @@ test_that("pseudo_diameter_impl basic", {
 })
 
 test_that("pseudo_diameter_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(pseudo_diameter_impl(
     graph = NULL,
     start_vid = 1
@@ -3953,7 +3953,7 @@ test_that("pseudo_diameter_impl errors", {
 # 154. pseudo_diameter_dijkstra_impl
 
 test_that("pseudo_diameter_dijkstra_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -3978,7 +3978,7 @@ test_that("pseudo_diameter_dijkstra_impl basic", {
 })
 
 test_that("pseudo_diameter_dijkstra_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     pseudo_diameter_dijkstra_impl(
       graph = NULL,
@@ -3990,7 +3990,7 @@ test_that("pseudo_diameter_dijkstra_impl errors", {
 # 155. diversity_impl
 
 test_that("diversity_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -4008,7 +4008,7 @@ test_that("diversity_impl basic", {
 })
 
 test_that("diversity_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(diversity_impl(
     graph = NULL
   ))
@@ -4017,7 +4017,7 @@ test_that("diversity_impl errors", {
 # 156. random_walk_impl
 
 test_that("random_walk_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -4045,7 +4045,7 @@ test_that("random_walk_impl basic", {
 })
 
 test_that("random_walk_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(random_walk_impl(
     graph = NULL,
     start = 1,
@@ -4056,7 +4056,7 @@ test_that("random_walk_impl errors", {
 # 157. global_efficiency_impl
 
 test_that("global_efficiency_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -4077,7 +4077,7 @@ test_that("global_efficiency_impl basic", {
 })
 
 test_that("global_efficiency_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(global_efficiency_impl(
     graph = NULL
   ))
@@ -4086,7 +4086,7 @@ test_that("global_efficiency_impl errors", {
 # 158. local_efficiency_impl
 
 test_that("local_efficiency_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -4108,7 +4108,7 @@ test_that("local_efficiency_impl basic", {
 })
 
 test_that("local_efficiency_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(local_efficiency_impl(
     graph = NULL
   ))
@@ -4117,7 +4117,7 @@ test_that("local_efficiency_impl errors", {
 # 159. average_local_efficiency_impl
 
 test_that("average_local_efficiency_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -4139,7 +4139,7 @@ test_that("average_local_efficiency_impl basic", {
 })
 
 test_that("average_local_efficiency_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(average_local_efficiency_impl(
     graph = NULL
   ))
@@ -4148,7 +4148,7 @@ test_that("average_local_efficiency_impl errors", {
 # 160. transitive_closure_dag_impl
 
 test_that("transitive_closure_dag_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3,
     directed = TRUE
@@ -4166,7 +4166,7 @@ test_that("transitive_closure_dag_impl basic", {
 })
 
 test_that("transitive_closure_dag_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(transitive_closure_dag_impl(
     graph = NULL
   ))
@@ -4175,7 +4175,7 @@ test_that("transitive_closure_dag_impl errors", {
 # 161. transitive_closure_impl
 
 test_that("transitive_closure_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -4192,7 +4192,7 @@ test_that("transitive_closure_impl basic", {
 })
 
 test_that("transitive_closure_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(transitive_closure_impl(
     graph = NULL
   ))
@@ -4201,7 +4201,7 @@ test_that("transitive_closure_impl errors", {
 # 162. trussness_impl
 
 test_that("trussness_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -4218,7 +4218,7 @@ test_that("trussness_impl basic", {
 })
 
 test_that("trussness_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(trussness_impl(
     graph = NULL
   ))
@@ -4227,7 +4227,7 @@ test_that("trussness_impl errors", {
 # 163. is_graphical_impl
 
 test_that("is_graphical_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(is_graphical_impl(
     out_deg = c(2, 2, 2)
   ))
@@ -4245,7 +4245,7 @@ test_that("is_graphical_impl basic", {
 })
 
 test_that("is_graphical_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(is_graphical_impl(
     out_deg = "a"
   ))
@@ -4254,7 +4254,7 @@ test_that("is_graphical_impl errors", {
 # 164. bfs_simple_impl
 
 test_that("bfs_simple_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -4278,7 +4278,7 @@ test_that("bfs_simple_impl basic", {
 })
 
 test_that("bfs_simple_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(bfs_simple_impl(
     graph = NULL,
     root = 1
@@ -4288,7 +4288,7 @@ test_that("bfs_simple_impl errors", {
 # 165. bipartite_projection_size_impl
 
 test_that("bipartite_projection_size_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 4
   )
@@ -4306,7 +4306,7 @@ test_that("bipartite_projection_size_impl basic", {
 })
 
 test_that("bipartite_projection_size_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(bipartite_projection_size_impl(
     graph = NULL
   ))
@@ -4315,7 +4315,7 @@ test_that("bipartite_projection_size_impl errors", {
 # 166. biadjacency_impl
 
 test_that("biadjacency_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   m <- matrix(c(1, 0, 1, 0, 1, 1), nrow = 2)
   expect_snapshot(biadjacency_impl(
     incidence = m
@@ -4335,7 +4335,7 @@ test_that("biadjacency_impl basic", {
 })
 
 test_that("biadjacency_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(biadjacency_impl(
     incidence = "a"
   ))
@@ -4344,7 +4344,7 @@ test_that("biadjacency_impl errors", {
 # 167. get_biadjacency_impl
 
 test_that("get_biadjacency_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -4363,7 +4363,7 @@ test_that("get_biadjacency_impl basic", {
 })
 
 test_that("get_biadjacency_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     get_biadjacency_impl(
       graph = NULL,
@@ -4375,7 +4375,7 @@ test_that("get_biadjacency_impl errors", {
 # 168. is_bipartite_impl
 
 test_that("is_bipartite_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -4392,7 +4392,7 @@ test_that("is_bipartite_impl basic", {
 })
 
 test_that("is_bipartite_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(is_bipartite_impl(
     graph = NULL
   ))
@@ -4401,7 +4401,7 @@ test_that("is_bipartite_impl errors", {
 # 169. bipartite_game_gnp_impl
 
 test_that("bipartite_game_gnp_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(bipartite_game_gnp_impl(
     n1 = 2,
     n2 = 2,
@@ -4425,7 +4425,7 @@ test_that("bipartite_game_gnp_impl basic", {
 })
 
 test_that("bipartite_game_gnp_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(bipartite_game_gnp_impl(
     n1 = -1,
     n2 = 2,
@@ -4436,7 +4436,7 @@ test_that("bipartite_game_gnp_impl errors", {
 # 170. bipartite_game_gnm_impl
 
 test_that("bipartite_game_gnm_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(bipartite_game_gnm_impl(
     n1 = 2,
     n2 = 2,
@@ -4460,7 +4460,7 @@ test_that("bipartite_game_gnm_impl basic", {
 })
 
 test_that("bipartite_game_gnm_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(bipartite_game_gnm_impl(
     n1 = -1,
     n2 = 2,
@@ -4471,7 +4471,7 @@ test_that("bipartite_game_gnm_impl errors", {
 # 171. get_laplacian_impl
 
 test_that("get_laplacian_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -4494,7 +4494,7 @@ test_that("get_laplacian_impl basic", {
 })
 
 test_that("get_laplacian_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(get_laplacian_impl(
     graph = NULL
   ))
@@ -4503,7 +4503,7 @@ test_that("get_laplacian_impl errors", {
 # 172. get_laplacian_sparse_impl
 
 test_that("get_laplacian_sparse_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -4526,7 +4526,7 @@ test_that("get_laplacian_sparse_impl basic", {
 })
 
 test_that("get_laplacian_sparse_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(get_laplacian_sparse_impl(
     graph = NULL
   ))
@@ -4535,7 +4535,7 @@ test_that("get_laplacian_sparse_impl errors", {
 # 173. connected_components_impl
 
 test_that("connected_components_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -4557,7 +4557,7 @@ test_that("connected_components_impl basic", {
 })
 
 test_that("connected_components_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(connected_components_impl(
     graph = NULL
   ))
@@ -4566,7 +4566,7 @@ test_that("connected_components_impl errors", {
 # 174. is_connected_impl
 
 test_that("is_connected_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -4587,7 +4587,7 @@ test_that("is_connected_impl basic", {
 })
 
 test_that("is_connected_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(is_connected_impl(
     graph = NULL
   ))
@@ -4596,7 +4596,7 @@ test_that("is_connected_impl errors", {
 # 175. articulation_points_impl
 
 test_that("articulation_points_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -4613,7 +4613,7 @@ test_that("articulation_points_impl basic", {
 })
 
 test_that("articulation_points_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(articulation_points_impl(
     graph = NULL
   ))
@@ -4622,7 +4622,7 @@ test_that("articulation_points_impl errors", {
 # 176. biconnected_components_impl
 
 test_that("biconnected_components_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -4639,7 +4639,7 @@ test_that("biconnected_components_impl basic", {
 })
 
 test_that("biconnected_components_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(biconnected_components_impl(
     graph = NULL
   ))
@@ -4648,7 +4648,7 @@ test_that("biconnected_components_impl errors", {
 # 177. bridges_impl
 
 test_that("bridges_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -4665,7 +4665,7 @@ test_that("bridges_impl basic", {
 })
 
 test_that("bridges_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(bridges_impl(
     graph = NULL
   ))
@@ -4674,7 +4674,7 @@ test_that("bridges_impl errors", {
 # 178. is_biconnected_impl
 
 test_that("is_biconnected_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -4691,7 +4691,7 @@ test_that("is_biconnected_impl basic", {
 })
 
 test_that("is_biconnected_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(is_biconnected_impl(
     graph = NULL
   ))
@@ -4700,7 +4700,7 @@ test_that("is_biconnected_impl errors", {
 # 179. count_reachable_impl
 
 test_that("count_reachable_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 5
   )
@@ -4723,7 +4723,7 @@ test_that("count_reachable_impl basic", {
 })
 
 test_that("count_reachable_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(count_reachable_impl(
     graph = NULL,
     mode = "out"
@@ -4733,7 +4733,7 @@ test_that("count_reachable_impl errors", {
 # 180. bond_percolation_impl
 
 test_that("bond_percolation_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -4750,7 +4750,7 @@ test_that("bond_percolation_impl basic", {
 })
 
 test_that("bond_percolation_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(bond_percolation_impl(
     graph = NULL
   ))
@@ -4759,7 +4759,7 @@ test_that("bond_percolation_impl errors", {
 # 181. site_percolation_impl
 
 test_that("site_percolation_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -4776,7 +4776,7 @@ test_that("site_percolation_impl basic", {
 })
 
 test_that("site_percolation_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(site_percolation_impl(
     graph = NULL
   ))
@@ -4785,7 +4785,7 @@ test_that("site_percolation_impl errors", {
 # 182. edgelist_percolation_impl
 
 test_that("edgelist_percolation_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(edgelist_percolation_impl(
     edges = matrix(c(1, 2, 2, 3), ncol = 2)
   ))
@@ -4798,7 +4798,7 @@ test_that("edgelist_percolation_impl basic", {
 })
 
 test_that("edgelist_percolation_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(edgelist_percolation_impl(
     edges = "a"
   ))
@@ -4807,7 +4807,7 @@ test_that("edgelist_percolation_impl errors", {
 # 183. is_clique_impl
 
 test_that("is_clique_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -4831,7 +4831,7 @@ test_that("is_clique_impl basic", {
 })
 
 test_that("is_clique_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(is_clique_impl(
     graph = NULL,
     candidate = 1:2
@@ -4841,7 +4841,7 @@ test_that("is_clique_impl errors", {
 # 184. cliques_impl
 
 test_that("cliques_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -4863,7 +4863,7 @@ test_that("cliques_impl basic", {
 })
 
 test_that("cliques_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(cliques_impl(
     graph = NULL
   ))
@@ -4872,7 +4872,7 @@ test_that("cliques_impl errors", {
 # 185. clique_size_hist_impl
 
 test_that("clique_size_hist_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -4894,7 +4894,7 @@ test_that("clique_size_hist_impl basic", {
 })
 
 test_that("clique_size_hist_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(clique_size_hist_impl(
     graph = NULL
   ))
@@ -4903,7 +4903,7 @@ test_that("clique_size_hist_impl errors", {
 # 186. largest_cliques_impl
 
 test_that("largest_cliques_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -4920,7 +4920,7 @@ test_that("largest_cliques_impl basic", {
 })
 
 test_that("largest_cliques_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(largest_cliques_impl(
     graph = NULL
   ))
@@ -4929,7 +4929,7 @@ test_that("largest_cliques_impl errors", {
 # 187. maximal_cliques_hist_impl
 
 test_that("maximal_cliques_hist_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -4951,7 +4951,7 @@ test_that("maximal_cliques_hist_impl basic", {
 })
 
 test_that("maximal_cliques_hist_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(maximal_cliques_hist_impl(
     graph = NULL
   ))
@@ -4960,7 +4960,7 @@ test_that("maximal_cliques_hist_impl errors", {
 # 188. clique_number_impl
 
 test_that("clique_number_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -4977,7 +4977,7 @@ test_that("clique_number_impl basic", {
 })
 
 test_that("clique_number_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(clique_number_impl(
     graph = NULL
   ))
@@ -4986,7 +4986,7 @@ test_that("clique_number_impl errors", {
 # 189. weighted_cliques_impl
 
 test_that("weighted_cliques_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -5010,7 +5010,7 @@ test_that("weighted_cliques_impl basic", {
 })
 
 test_that("weighted_cliques_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(weighted_cliques_impl(
     graph = NULL
   ))
@@ -5019,7 +5019,7 @@ test_that("weighted_cliques_impl errors", {
 # 190. largest_weighted_cliques_impl
 
 test_that("largest_weighted_cliques_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -5040,7 +5040,7 @@ test_that("largest_weighted_cliques_impl basic", {
 })
 
 test_that("largest_weighted_cliques_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(largest_weighted_cliques_impl(
     graph = NULL
   ))
@@ -5049,7 +5049,7 @@ test_that("largest_weighted_cliques_impl errors", {
 # 191. weighted_clique_number_impl
 
 test_that("weighted_clique_number_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -5070,7 +5070,7 @@ test_that("weighted_clique_number_impl basic", {
 })
 
 test_that("weighted_clique_number_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(weighted_clique_number_impl(
     graph = NULL
   ))
@@ -5079,7 +5079,7 @@ test_that("weighted_clique_number_impl errors", {
 # 192. is_independent_vertex_set_impl
 
 test_that("is_independent_vertex_set_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -5098,7 +5098,7 @@ test_that("is_independent_vertex_set_impl basic", {
 })
 
 test_that("is_independent_vertex_set_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(is_independent_vertex_set_impl(
     graph = NULL,
     candidate = 1:2
@@ -5108,7 +5108,7 @@ test_that("is_independent_vertex_set_impl errors", {
 # 193. layout_random_impl
 
 test_that("layout_random_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -5125,7 +5125,7 @@ test_that("layout_random_impl basic", {
 })
 
 test_that("layout_random_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(layout_random_impl(
     graph = NULL
   ))
@@ -5134,7 +5134,7 @@ test_that("layout_random_impl errors", {
 # 194. layout_circle_impl
 
 test_that("layout_circle_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -5155,7 +5155,7 @@ test_that("layout_circle_impl basic", {
 })
 
 test_that("layout_circle_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(layout_circle_impl(
     graph = NULL
   ))
@@ -5164,7 +5164,7 @@ test_that("layout_circle_impl errors", {
 # 195. layout_star_impl
 
 test_that("layout_star_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -5195,7 +5195,7 @@ test_that("layout_star_impl basic", {
 })
 
 test_that("layout_star_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(layout_star_impl(
     graph = NULL
   ))
@@ -5204,7 +5204,7 @@ test_that("layout_star_impl errors", {
 # 196. layout_grid_impl
 
 test_that("layout_grid_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -5225,7 +5225,7 @@ test_that("layout_grid_impl basic", {
 })
 
 test_that("layout_grid_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(layout_grid_impl(
     graph = NULL
   ))
@@ -5234,7 +5234,7 @@ test_that("layout_grid_impl errors", {
 # 197. layout_grid_3d_impl
 
 test_that("layout_grid_3d_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -5256,7 +5256,7 @@ test_that("layout_grid_3d_impl basic", {
 })
 
 test_that("layout_grid_3d_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(layout_grid_3d_impl(
     graph = NULL
   ))
@@ -5265,7 +5265,7 @@ test_that("layout_grid_3d_impl errors", {
 # 198. roots_for_tree_layout_impl
 
 test_that("roots_for_tree_layout_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -5286,7 +5286,7 @@ test_that("roots_for_tree_layout_impl basic", {
 })
 
 test_that("roots_for_tree_layout_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     roots_for_tree_layout_impl(
       graph = NULL,
@@ -5299,7 +5299,7 @@ test_that("roots_for_tree_layout_impl errors", {
 # 199. layout_random_3d_impl
 
 test_that("layout_random_3d_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -5316,7 +5316,7 @@ test_that("layout_random_3d_impl basic", {
 })
 
 test_that("layout_random_3d_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(layout_random_3d_impl(
     graph = NULL
   ))
@@ -5325,7 +5325,7 @@ test_that("layout_random_3d_impl errors", {
 # 200. layout_sphere_impl
 
 test_that("layout_sphere_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -5342,7 +5342,7 @@ test_that("layout_sphere_impl basic", {
 })
 
 test_that("layout_sphere_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(layout_sphere_impl(
     graph = NULL
   ))
@@ -5351,7 +5351,7 @@ test_that("layout_sphere_impl errors", {
 # 201. layout_sugiyama_impl
 
 test_that("layout_sugiyama_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -5376,7 +5376,7 @@ test_that("layout_sugiyama_impl basic", {
 })
 
 test_that("layout_sugiyama_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(layout_sugiyama_impl(
     graph = NULL
   ))
@@ -5385,7 +5385,7 @@ test_that("layout_sugiyama_impl errors", {
 # 202. layout_mds_impl
 
 test_that("layout_mds_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -5407,7 +5407,7 @@ test_that("layout_mds_impl basic", {
 })
 
 test_that("layout_mds_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(layout_mds_impl(
     graph = NULL
   ))
@@ -5416,7 +5416,7 @@ test_that("layout_mds_impl errors", {
 # 203. layout_bipartite_impl
 
 test_that("layout_bipartite_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -5442,7 +5442,7 @@ test_that("layout_bipartite_impl basic", {
 })
 
 test_that("layout_bipartite_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     layout_bipartite_impl(
       graph = NULL,
@@ -5454,7 +5454,7 @@ test_that("layout_bipartite_impl errors", {
 # 204. layout_gem_impl
 
 test_that("layout_gem_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -5482,7 +5482,7 @@ test_that("layout_gem_impl basic", {
 })
 
 test_that("layout_gem_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     layout_gem_impl(
       graph = NULL,
@@ -5494,7 +5494,7 @@ test_that("layout_gem_impl errors", {
 # 205. layout_davidson_harel_impl
 
 test_that("layout_davidson_harel_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -5526,7 +5526,7 @@ test_that("layout_davidson_harel_impl basic", {
 })
 
 test_that("layout_davidson_harel_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     layout_davidson_harel_impl(
       graph = NULL,
@@ -5538,7 +5538,7 @@ test_that("layout_davidson_harel_impl errors", {
 # 206. layout_umap_impl
 
 test_that("layout_umap_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -5568,7 +5568,7 @@ test_that("layout_umap_impl basic", {
 })
 
 test_that("layout_umap_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     layout_umap_impl(
       graph = NULL,
@@ -5580,7 +5580,7 @@ test_that("layout_umap_impl errors", {
 # 207. layout_umap_3d_impl
 
 test_that("layout_umap_3d_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -5610,7 +5610,7 @@ test_that("layout_umap_3d_impl basic", {
 })
 
 test_that("layout_umap_3d_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     layout_umap_3d_impl(
       graph = NULL,
@@ -5622,7 +5622,7 @@ test_that("layout_umap_3d_impl errors", {
 # 208. layout_umap_compute_weights_impl
 
 test_that("layout_umap_compute_weights_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -5643,7 +5643,7 @@ test_that("layout_umap_compute_weights_impl basic", {
 })
 
 test_that("layout_umap_compute_weights_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     layout_umap_compute_weights_impl(
       graph = NULL,
@@ -5656,7 +5656,7 @@ test_that("layout_umap_compute_weights_impl errors", {
 # 209. layout_align_impl
 
 test_that("layout_align_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -5675,7 +5675,7 @@ test_that("layout_align_impl basic", {
 })
 
 test_that("layout_align_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     layout_align_impl(
       graph = NULL,
@@ -5687,7 +5687,7 @@ test_that("layout_align_impl errors", {
 # 210. similarity_dice_impl
 
 test_that("similarity_dice_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -5710,7 +5710,7 @@ test_that("similarity_dice_impl basic", {
 })
 
 test_that("similarity_dice_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(similarity_dice_impl(
     graph = NULL
   ))
@@ -5719,7 +5719,7 @@ test_that("similarity_dice_impl errors", {
 # 211. similarity_dice_es_impl
 
 test_that("similarity_dice_es_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -5742,7 +5742,7 @@ test_that("similarity_dice_es_impl basic", {
 })
 
 test_that("similarity_dice_es_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(similarity_dice_es_impl(
     graph = NULL
   ))
@@ -5751,7 +5751,7 @@ test_that("similarity_dice_es_impl errors", {
 # 212. similarity_dice_pairs_impl
 
 test_that("similarity_dice_pairs_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 4
   )
@@ -5776,7 +5776,7 @@ test_that("similarity_dice_pairs_impl basic", {
 })
 
 test_that("similarity_dice_pairs_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     similarity_dice_pairs_impl(
       graph = NULL,
@@ -5788,7 +5788,7 @@ test_that("similarity_dice_pairs_impl errors", {
 # 213. similarity_inverse_log_weighted_impl
 
 test_that("similarity_inverse_log_weighted_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -5810,7 +5810,7 @@ test_that("similarity_inverse_log_weighted_impl basic", {
 })
 
 test_that("similarity_inverse_log_weighted_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(similarity_inverse_log_weighted_impl(
     graph = NULL
   ))
@@ -5819,7 +5819,7 @@ test_that("similarity_inverse_log_weighted_impl errors", {
 # 214. similarity_jaccard_impl
 
 test_that("similarity_jaccard_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -5842,7 +5842,7 @@ test_that("similarity_jaccard_impl basic", {
 })
 
 test_that("similarity_jaccard_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(similarity_jaccard_impl(
     graph = NULL
   ))
@@ -5851,7 +5851,7 @@ test_that("similarity_jaccard_impl errors", {
 # 215. similarity_jaccard_es_impl
 
 test_that("similarity_jaccard_es_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -5874,7 +5874,7 @@ test_that("similarity_jaccard_es_impl basic", {
 })
 
 test_that("similarity_jaccard_es_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(similarity_jaccard_es_impl(
     graph = NULL
   ))
@@ -5883,7 +5883,7 @@ test_that("similarity_jaccard_es_impl errors", {
 # 216. similarity_jaccard_pairs_impl
 
 test_that("similarity_jaccard_pairs_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 4
   )
@@ -5908,7 +5908,7 @@ test_that("similarity_jaccard_pairs_impl basic", {
 })
 
 test_that("similarity_jaccard_pairs_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     similarity_jaccard_pairs_impl(
       graph = NULL,
@@ -5920,7 +5920,7 @@ test_that("similarity_jaccard_pairs_impl errors", {
 # 217. compare_communities_impl
 
 test_that("compare_communities_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(compare_communities_impl(
     comm1 = c(1, 2, 1),
     comm2 = c(2, 1, 2)
@@ -5940,7 +5940,7 @@ test_that("compare_communities_impl basic", {
 })
 
 test_that("compare_communities_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(compare_communities_impl(
     comm1 = "a",
     comm2 = c(2, 1, 2)
@@ -5950,7 +5950,7 @@ test_that("compare_communities_impl errors", {
 # 218. modularity_impl
 
 test_that("modularity_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -5976,7 +5976,7 @@ test_that("modularity_impl basic", {
 })
 
 test_that("modularity_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(modularity_impl(
     graph = NULL,
     membership = c(1, 2, 1)
@@ -5986,7 +5986,7 @@ test_that("modularity_impl errors", {
 # 219. modularity_matrix_impl
 
 test_that("modularity_matrix_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -6009,7 +6009,7 @@ test_that("modularity_matrix_impl basic", {
 })
 
 test_that("modularity_matrix_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(modularity_matrix_impl(
     graph = NULL
   ))
@@ -6018,7 +6018,7 @@ test_that("modularity_matrix_impl errors", {
 # 220. community_fluid_communities_impl
 
 test_that("community_fluid_communities_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -6037,7 +6037,7 @@ test_that("community_fluid_communities_impl basic", {
 })
 
 test_that("community_fluid_communities_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     community_fluid_communities_impl(
       graph = NULL,
@@ -6049,7 +6049,7 @@ test_that("community_fluid_communities_impl errors", {
 # 221. community_label_propagation_impl
 
 test_that("community_label_propagation_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -6073,7 +6073,7 @@ test_that("community_label_propagation_impl basic", {
 })
 
 test_that("community_label_propagation_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(community_label_propagation_impl(
     graph = NULL
   ))
@@ -6082,7 +6082,7 @@ test_that("community_label_propagation_impl errors", {
 # 222. community_multilevel_impl
 
 test_that("community_multilevel_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -6104,7 +6104,7 @@ test_that("community_multilevel_impl basic", {
 })
 
 test_that("community_multilevel_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(community_multilevel_impl(
     graph = NULL
   ))
@@ -6113,7 +6113,7 @@ test_that("community_multilevel_impl errors", {
 # 223. community_optimal_modularity_impl
 
 test_that("community_optimal_modularity_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -6134,7 +6134,7 @@ test_that("community_optimal_modularity_impl basic", {
 })
 
 test_that("community_optimal_modularity_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(community_optimal_modularity_impl(
     graph = NULL
   ))
@@ -6143,7 +6143,7 @@ test_that("community_optimal_modularity_impl errors", {
 # 224. community_leiden_impl
 
 test_that("community_leiden_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -6174,7 +6174,7 @@ test_that("community_leiden_impl basic", {
 })
 
 test_that("community_leiden_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(community_leiden_impl(
     graph = NULL,
     resolution = 1
@@ -6184,7 +6184,7 @@ test_that("community_leiden_impl errors", {
 # 225. split_join_distance_impl
 
 test_that("split_join_distance_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(split_join_distance_impl(
     comm1 = c(1, 2, 1),
     comm2 = c(2, 1, 2)
@@ -6199,7 +6199,7 @@ test_that("split_join_distance_impl basic", {
 })
 
 test_that("split_join_distance_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(split_join_distance_impl(
     comm1 = "a",
     comm2 = c(2, 1, 2)
@@ -6209,7 +6209,7 @@ test_that("split_join_distance_impl errors", {
 # 226. community_infomap_impl
 
 test_that("community_infomap_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -6232,7 +6232,7 @@ test_that("community_infomap_impl basic", {
 })
 
 test_that("community_infomap_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(community_infomap_impl(
     graph = NULL
   ))
@@ -6241,7 +6241,7 @@ test_that("community_infomap_impl errors", {
 # 227. graphlets_impl
 
 test_that("graphlets_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -6264,7 +6264,7 @@ test_that("graphlets_impl basic", {
 })
 
 test_that("graphlets_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(graphlets_impl(
     graph = NULL
   ))
@@ -6273,7 +6273,7 @@ test_that("graphlets_impl errors", {
 # 228. hrg_fit_impl
 
 test_that("hrg_fit_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g1 <- path_graph_impl(
     n = 3
   )
@@ -6290,7 +6290,7 @@ test_that("hrg_fit_impl basic", {
 })
 
 test_that("hrg_fit_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(hrg_fit_impl(
     graph = NULL
   ))
@@ -6300,7 +6300,7 @@ test_that("hrg_fit_impl errors", {
 
 test_that("hrg_sample_impl basic", {
   skip_if(Sys.getenv("R_SANITIZER") == "true")
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_full_graph(10)
   hrg_model <- fit_hrg(g, hrg = NULL, start = FALSE, steps = 0)
   expect_snapshot(hrg_sample_impl(
@@ -6316,7 +6316,7 @@ test_that("hrg_sample_impl basic", {
 
 test_that("hrg_sample_impl errors", {
   skip_if(Sys.getenv("R_SANITIZER") == "true")
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   # FIXME: This test triggers an assertion failure in the C code when passing
   # NULL/empty HRG. The C code should validate input and return a proper error
   # message instead of an assertion failure.
@@ -6329,7 +6329,7 @@ test_that("hrg_sample_impl errors", {
 
 test_that("hrg_sample_many_impl basic", {
   skip_if(Sys.getenv("R_SANITIZER") == "true")
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_full_graph(10)
   hrg_model <- fit_hrg(g, hrg = NULL, start = FALSE, steps = 0)
   expect_snapshot(hrg_sample_many_impl(
@@ -6347,7 +6347,7 @@ test_that("hrg_sample_many_impl basic", {
 
 test_that("hrg_sample_many_impl errors", {
   skip_if(Sys.getenv("R_SANITIZER") == "true")
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   # FIXME: This test triggers an assertion failure in the C code when passing
   # NULL/empty HRG. The C code should validate input and return a proper error
   # message instead of an assertion failure.
@@ -6361,7 +6361,7 @@ test_that("hrg_sample_many_impl errors", {
 
 test_that("hrg_game_impl basic", {
   skip_if(Sys.getenv("R_SANITIZER") == "true")
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_full_graph(10)
   hrg_model <- fit_hrg(g, hrg = NULL, start = FALSE, steps = 0)
   expect_snapshot(hrg_game_impl(
@@ -6377,7 +6377,7 @@ test_that("hrg_game_impl basic", {
 
 test_that("hrg_game_impl errors", {
   skip_if(Sys.getenv("R_SANITIZER") == "true")
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   # FIXME: This test triggers an assertion failure in the C code when passing
   # NULL/empty HRG. The C code should validate input and return a proper error
   # message instead of an assertion failure.
@@ -6389,7 +6389,7 @@ test_that("hrg_game_impl errors", {
 # 232. hrg_consensus_impl
 
 # test_that("hrg_consensus_impl basic", {
-# withr::local_seed(20250909)
+# igraph_local_seed(20250909)
 # oldval <- igraph_opt("print.id")
 # igraph_options(print.id = FALSE)
 #   g <- path_graph_impl(3)
@@ -6398,7 +6398,7 @@ test_that("hrg_game_impl errors", {
 # })
 
 test_that("hrg_consensus_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(hrg_consensus_impl(
     graph = NULL
   ))
@@ -6407,7 +6407,7 @@ test_that("hrg_consensus_impl errors", {
 # 233. hrg_predict_impl
 
 # test_that("hrg_predict_impl basic", {
-# withr::local_seed(20250909)
+# igraph_local_seed(20250909)
 # oldval <- igraph_opt("print.id")
 # igraph_options(print.id = FALSE)
 #   g <- path_graph_impl(3)
@@ -6416,7 +6416,7 @@ test_that("hrg_consensus_impl errors", {
 # })
 
 test_that("hrg_predict_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(hrg_predict_impl(
     graph = NULL
   ))
@@ -6425,7 +6425,7 @@ test_that("hrg_predict_impl errors", {
 # 234. hrg_create_impl
 
 test_that("hrg_create_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_tree(5)
   expect_snapshot(hrg_create_impl(
     graph = g,
@@ -6441,7 +6441,7 @@ test_that("hrg_create_impl basic", {
 })
 
 test_that("hrg_create_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_full_graph(4, directed = TRUE)
   expect_snapshot_igraph_error(hrg_create_impl(
     graph = g,
@@ -6453,7 +6453,7 @@ test_that("hrg_create_impl errors", {
 
 test_that("hrg_resize_impl basic", {
   skip_if(Sys.getenv("R_SANITIZER") == "true")
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_full_graph(10)
   hrg_model <- fit_hrg(g, hrg = NULL, start = FALSE, steps = 0)
   expect_snapshot(hrg_resize_impl(
@@ -6471,7 +6471,7 @@ test_that("hrg_resize_impl basic", {
 
 test_that("hrg_resize_impl errors", {
   skip_if(Sys.getenv("R_SANITIZER") == "true")
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(hrg_resize_impl(
     hrg = -1,
     newsize = 2
@@ -6482,7 +6482,7 @@ test_that("hrg_resize_impl errors", {
 
 test_that("hrg_size_impl basic", {
   skip_if(Sys.getenv("R_SANITIZER") == "true")
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_full_graph(10)
   hrg_model <- fit_hrg(g, hrg = NULL, start = FALSE, steps = 0)
   expect_snapshot(hrg_size_impl(
@@ -6498,7 +6498,7 @@ test_that("hrg_size_impl basic", {
 
 test_that("hrg_size_impl errors", {
   skip_if(Sys.getenv("R_SANITIZER") == "true")
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(hrg_size_impl(
     hrg = -1
   ))
@@ -6507,7 +6507,7 @@ test_that("hrg_size_impl errors", {
 # 237. from_hrg_dendrogram_impl
 
 test_that("from_hrg_dendrogram_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_full_graph(10)
   hrg_model <- fit_hrg(g, hrg = NULL, start = FALSE, steps = 0)
   expect_snapshot(from_hrg_dendrogram_impl(
@@ -6522,7 +6522,7 @@ test_that("from_hrg_dendrogram_impl basic", {
 })
 
 test_that("from_hrg_dendrogram_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(from_hrg_dendrogram_impl(
     hrg = -1
   ))
@@ -6531,7 +6531,7 @@ test_that("from_hrg_dendrogram_impl errors", {
 # 238. get_adjacency_sparse_impl
 
 test_that("get_adjacency_sparse_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -6554,7 +6554,7 @@ test_that("get_adjacency_sparse_impl basic", {
 })
 
 test_that("get_adjacency_sparse_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(get_adjacency_sparse_impl(
     graph = NULL
   ))
@@ -6563,7 +6563,7 @@ test_that("get_adjacency_sparse_impl errors", {
 # 239. get_stochastic_impl
 
 test_that("get_stochastic_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -6585,7 +6585,7 @@ test_that("get_stochastic_impl basic", {
 })
 
 test_that("get_stochastic_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(get_stochastic_impl(
     graph = NULL
   ))
@@ -6594,7 +6594,7 @@ test_that("get_stochastic_impl errors", {
 # 240. get_stochastic_sparse_impl
 
 test_that("get_stochastic_sparse_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -6616,7 +6616,7 @@ test_that("get_stochastic_sparse_impl basic", {
 })
 
 test_that("get_stochastic_sparse_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(get_stochastic_sparse_impl(
     graph = NULL
   ))
@@ -6625,7 +6625,7 @@ test_that("get_stochastic_sparse_impl errors", {
 # 241. to_directed_impl
 
 test_that("to_directed_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -6646,7 +6646,7 @@ test_that("to_directed_impl basic", {
 })
 
 test_that("to_directed_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(to_directed_impl(
     graph = NULL
   ))
@@ -6655,7 +6655,7 @@ test_that("to_directed_impl errors", {
 # 242. to_undirected_impl
 
 test_that("to_undirected_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -6677,7 +6677,7 @@ test_that("to_undirected_impl basic", {
 })
 
 test_that("to_undirected_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(to_undirected_impl(
     graph = NULL
   ))
@@ -6686,7 +6686,7 @@ test_that("to_undirected_impl errors", {
 # 243. motifs_randesu_impl
 
 test_that("motifs_randesu_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -6708,7 +6708,7 @@ test_that("motifs_randesu_impl basic", {
 })
 
 test_that("motifs_randesu_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(motifs_randesu_impl(
     graph = NULL
   ))
@@ -6717,7 +6717,7 @@ test_that("motifs_randesu_impl errors", {
 # 244. motifs_randesu_estimate_impl
 
 test_that("motifs_randesu_estimate_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 6
   )
@@ -6745,7 +6745,7 @@ test_that("motifs_randesu_estimate_impl basic", {
 })
 
 test_that("motifs_randesu_estimate_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     motifs_randesu_estimate_impl(
       graph = NULL,
@@ -6758,7 +6758,7 @@ test_that("motifs_randesu_estimate_impl errors", {
 # 245. motifs_randesu_no_impl
 
 test_that("motifs_randesu_no_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -6780,7 +6780,7 @@ test_that("motifs_randesu_no_impl basic", {
 })
 
 test_that("motifs_randesu_no_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -6797,7 +6797,7 @@ test_that("motifs_randesu_no_impl errors", {
 # 246. dyad_census_impl
 
 test_that("dyad_census_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -6814,7 +6814,7 @@ test_that("dyad_census_impl basic", {
 })
 
 test_that("dyad_census_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(dyad_census_impl(
     graph = NULL
   ))
@@ -6823,7 +6823,7 @@ test_that("dyad_census_impl errors", {
 # 247. triad_census_impl
 
 test_that("triad_census_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -6842,7 +6842,7 @@ test_that("triad_census_impl basic", {
 })
 
 test_that("triad_census_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(triad_census_impl(
     graph = NULL
   ))
@@ -6851,7 +6851,7 @@ test_that("triad_census_impl errors", {
 # 248. count_adjacent_triangles_impl
 
 test_that("count_adjacent_triangles_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -6872,7 +6872,7 @@ test_that("count_adjacent_triangles_impl basic", {
 })
 
 test_that("count_adjacent_triangles_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(count_adjacent_triangles_impl(
     graph = NULL
   ))
@@ -6881,7 +6881,7 @@ test_that("count_adjacent_triangles_impl errors", {
 # 249. count_triangles_impl
 
 test_that("count_triangles_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -6898,7 +6898,7 @@ test_that("count_triangles_impl basic", {
 })
 
 test_that("count_triangles_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(count_triangles_impl(
     graph = NULL
   ))
@@ -6907,7 +6907,7 @@ test_that("count_triangles_impl errors", {
 # 250. local_scan_0_impl
 
 test_that("local_scan_0_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -6929,7 +6929,7 @@ test_that("local_scan_0_impl basic", {
 })
 
 test_that("local_scan_0_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(local_scan_0_impl(
     graph = NULL
   ))
@@ -6938,7 +6938,7 @@ test_that("local_scan_0_impl errors", {
 # 251. local_scan_0_them_impl
 
 test_that("local_scan_0_them_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g1 <- path_graph_impl(
     n = 3
   )
@@ -6967,7 +6967,7 @@ test_that("local_scan_0_them_impl basic", {
 })
 
 test_that("local_scan_0_them_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   them <- path_graph_impl(
     n = 3
   )
@@ -6982,7 +6982,7 @@ test_that("local_scan_0_them_impl errors", {
 # 252. local_scan_1_ecount_impl
 
 test_that("local_scan_1_ecount_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -7004,7 +7004,7 @@ test_that("local_scan_1_ecount_impl basic", {
 })
 
 test_that("local_scan_1_ecount_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(local_scan_1_ecount_impl(
     graph = NULL
   ))
@@ -7013,7 +7013,7 @@ test_that("local_scan_1_ecount_impl errors", {
 # 253. local_scan_1_ecount_them_impl
 
 test_that("local_scan_1_ecount_them_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g1 <- path_graph_impl(
     n = 3
   )
@@ -7042,7 +7042,7 @@ test_that("local_scan_1_ecount_them_impl basic", {
 })
 
 test_that("local_scan_1_ecount_them_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   them <- path_graph_impl(
     n = 3
   )
@@ -7057,7 +7057,7 @@ test_that("local_scan_1_ecount_them_impl errors", {
 # 254. local_scan_k_ecount_impl
 
 test_that("local_scan_k_ecount_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -7082,7 +7082,7 @@ test_that("local_scan_k_ecount_impl basic", {
 })
 
 test_that("local_scan_k_ecount_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(local_scan_k_ecount_impl(
     graph = NULL,
     k = 1
@@ -7092,7 +7092,7 @@ test_that("local_scan_k_ecount_impl errors", {
 # 255. local_scan_k_ecount_them_impl
 
 test_that("local_scan_k_ecount_them_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g1 <- path_graph_impl(
     n = 3
   )
@@ -7124,7 +7124,7 @@ test_that("local_scan_k_ecount_them_impl basic", {
 })
 
 test_that("local_scan_k_ecount_them_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   them <- path_graph_impl(
     n = 3
   )
@@ -7140,7 +7140,7 @@ test_that("local_scan_k_ecount_them_impl errors", {
 # 256. local_scan_neighborhood_ecount_impl
 
 test_that("local_scan_neighborhood_ecount_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 4
   )
@@ -7164,7 +7164,7 @@ test_that("local_scan_neighborhood_ecount_impl basic", {
 })
 
 test_that("local_scan_neighborhood_ecount_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     local_scan_neighborhood_ecount_impl(
       graph = NULL,
@@ -7176,7 +7176,7 @@ test_that("local_scan_neighborhood_ecount_impl errors", {
 # 257. local_scan_subset_ecount_impl
 
 test_that("local_scan_subset_ecount_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 4
   )
@@ -7200,7 +7200,7 @@ test_that("local_scan_subset_ecount_impl basic", {
 })
 
 test_that("local_scan_subset_ecount_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 4
   )
@@ -7216,7 +7216,7 @@ test_that("local_scan_subset_ecount_impl errors", {
 # 258. list_triangles_impl
 
 test_that("list_triangles_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -7233,7 +7233,7 @@ test_that("list_triangles_impl basic", {
 })
 
 test_that("list_triangles_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(list_triangles_impl(
     graph = NULL
   ))
@@ -7242,7 +7242,7 @@ test_that("list_triangles_impl errors", {
 # 259. join_impl
 
 test_that("join_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g1 <- path_graph_impl(
     n = 3
   )
@@ -7265,7 +7265,7 @@ test_that("join_impl basic", {
 })
 
 test_that("join_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   right <- path_graph_impl(
     n = 3
   )
@@ -7278,7 +7278,7 @@ test_that("join_impl errors", {
 # 260. induced_subgraph_map_impl
 
 test_that("induced_subgraph_map_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -7304,7 +7304,7 @@ test_that("induced_subgraph_map_impl basic", {
 })
 
 test_that("induced_subgraph_map_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     induced_subgraph_map_impl(
       graph = NULL,
@@ -7317,7 +7317,7 @@ test_that("induced_subgraph_map_impl errors", {
 # 261. mycielskian_impl
 
 test_that("mycielskian_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -7338,7 +7338,7 @@ test_that("mycielskian_impl basic", {
 })
 
 test_that("mycielskian_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(mycielskian_impl(
     graph = NULL
   ))
@@ -7347,7 +7347,7 @@ test_that("mycielskian_impl errors", {
 # 262. product_impl
 
 test_that("product_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g1 <- path_graph_impl(
     n = 3
   )
@@ -7375,7 +7375,7 @@ test_that("product_impl basic", {
 })
 
 test_that("product_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g2 <- path_graph_impl(
     n = 3
   )
@@ -7388,7 +7388,7 @@ test_that("product_impl errors", {
 # 263. rooted_product_impl
 
 test_that("rooted_product_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g1 <- path_graph_impl(
     n = 3
   )
@@ -7413,7 +7413,7 @@ test_that("rooted_product_impl basic", {
 })
 
 test_that("rooted_product_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g2 <- path_graph_impl(
     n = 3
   )
@@ -7429,7 +7429,7 @@ test_that("rooted_product_impl errors", {
 # 264. gomory_hu_tree_impl
 
 test_that("gomory_hu_tree_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -7450,7 +7450,7 @@ test_that("gomory_hu_tree_impl basic", {
 })
 
 test_that("gomory_hu_tree_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(gomory_hu_tree_impl(
     graph = NULL
   ))
@@ -7459,7 +7459,7 @@ test_that("gomory_hu_tree_impl errors", {
 # 265. maxflow_impl
 
 test_that("maxflow_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -7486,7 +7486,7 @@ test_that("maxflow_impl basic", {
 })
 
 test_that("maxflow_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(maxflow_impl(
     graph = NULL,
     source = 1,
@@ -7497,7 +7497,7 @@ test_that("maxflow_impl errors", {
 # 266. residual_graph_impl
 
 test_that("residual_graph_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -7518,7 +7518,7 @@ test_that("residual_graph_impl basic", {
 })
 
 test_that("residual_graph_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     residual_graph_impl(
       graph = NULL,
@@ -7531,7 +7531,7 @@ test_that("residual_graph_impl errors", {
 # 267. reverse_residual_graph_impl
 
 test_that("reverse_residual_graph_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -7552,7 +7552,7 @@ test_that("reverse_residual_graph_impl basic", {
 })
 
 test_that("reverse_residual_graph_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     reverse_residual_graph_impl(
       graph = NULL,
@@ -7565,7 +7565,7 @@ test_that("reverse_residual_graph_impl errors", {
 # 268. st_mincut_impl
 
 test_that("st_mincut_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -7592,7 +7592,7 @@ test_that("st_mincut_impl basic", {
 })
 
 test_that("st_mincut_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(st_mincut_impl(
     graph = NULL,
     source = 1,
@@ -7603,7 +7603,7 @@ test_that("st_mincut_impl errors", {
 # 269. dominator_tree_impl
 
 test_that("dominator_tree_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3,
     directed = TRUE
@@ -7628,7 +7628,7 @@ test_that("dominator_tree_impl basic", {
 })
 
 test_that("dominator_tree_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(dominator_tree_impl(
     graph = NULL,
     root = 1
@@ -7638,7 +7638,7 @@ test_that("dominator_tree_impl errors", {
 # 270. all_st_cuts_impl
 
 test_that("all_st_cuts_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3,
     directed = TRUE
@@ -7660,7 +7660,7 @@ test_that("all_st_cuts_impl basic", {
 })
 
 test_that("all_st_cuts_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(all_st_cuts_impl(
     graph = NULL,
     source = 1,
@@ -7671,7 +7671,7 @@ test_that("all_st_cuts_impl errors", {
 # 271. all_st_mincuts_impl
 
 test_that("all_st_mincuts_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3,
     directed = TRUE
@@ -7699,7 +7699,7 @@ test_that("all_st_mincuts_impl basic", {
 })
 
 test_that("all_st_mincuts_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     all_st_mincuts_impl(
       graph = NULL,
@@ -7712,7 +7712,7 @@ test_that("all_st_mincuts_impl errors", {
 # 272. even_tarjan_reduction_impl
 
 test_that("even_tarjan_reduction_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -7729,7 +7729,7 @@ test_that("even_tarjan_reduction_impl basic", {
 })
 
 test_that("even_tarjan_reduction_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(even_tarjan_reduction_impl(
     graph = NULL
   ))
@@ -7738,7 +7738,7 @@ test_that("even_tarjan_reduction_impl errors", {
 # 273. is_separator_impl
 
 test_that("is_separator_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -7757,7 +7757,7 @@ test_that("is_separator_impl basic", {
 })
 
 test_that("is_separator_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(is_separator_impl(
     graph = NULL,
     candidate = 1:2
@@ -7767,7 +7767,7 @@ test_that("is_separator_impl errors", {
 # 274. is_minimal_separator_impl
 
 test_that("is_minimal_separator_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -7786,7 +7786,7 @@ test_that("is_minimal_separator_impl basic", {
 })
 
 test_that("is_minimal_separator_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(is_minimal_separator_impl(
     graph = NULL,
     candidate = 1:2
@@ -7796,7 +7796,7 @@ test_that("is_minimal_separator_impl errors", {
 # 275. all_minimal_st_separators_impl
 
 test_that("all_minimal_st_separators_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -7813,7 +7813,7 @@ test_that("all_minimal_st_separators_impl basic", {
 })
 
 test_that("all_minimal_st_separators_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(all_minimal_st_separators_impl(
     graph = NULL
   ))
@@ -7822,7 +7822,7 @@ test_that("all_minimal_st_separators_impl errors", {
 # 276. minimum_size_separators_impl
 
 test_that("minimum_size_separators_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -7839,7 +7839,7 @@ test_that("minimum_size_separators_impl basic", {
 })
 
 test_that("minimum_size_separators_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(minimum_size_separators_impl(
     graph = NULL
   ))
@@ -7848,7 +7848,7 @@ test_that("minimum_size_separators_impl errors", {
 # 277. isoclass_impl
 
 test_that("isoclass_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -7865,7 +7865,7 @@ test_that("isoclass_impl basic", {
 })
 
 test_that("isoclass_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(isoclass_impl(
     graph = NULL
   ))
@@ -7874,7 +7874,7 @@ test_that("isoclass_impl errors", {
 # 278. isomorphic_impl
 
 test_that("isomorphic_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g1 <- path_graph_impl(
     n = 3
   )
@@ -7897,7 +7897,7 @@ test_that("isomorphic_impl basic", {
 })
 
 test_that("isomorphic_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   graph2 <- path_graph_impl(
     n = 3
   )
@@ -7910,7 +7910,7 @@ test_that("isomorphic_impl errors", {
 # 279. isoclass_subgraph_impl
 
 test_that("isoclass_subgraph_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 5
   )
@@ -7929,7 +7929,7 @@ test_that("isoclass_subgraph_impl basic", {
 })
 
 test_that("isoclass_subgraph_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(isoclass_subgraph_impl(
     graph = NULL,
     vids = 1:2
@@ -7939,7 +7939,7 @@ test_that("isoclass_subgraph_impl errors", {
 # 280. isoclass_create_impl
 
 test_that("isoclass_create_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(isoclass_create_impl(
     size = 3,
     number = 1
@@ -7959,7 +7959,7 @@ test_that("isoclass_create_impl basic", {
 })
 
 test_that("isoclass_create_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(isoclass_create_impl(
     size = "a",
     number = 1
@@ -7969,7 +7969,7 @@ test_that("isoclass_create_impl errors", {
 # 281. isomorphic_vf2_impl
 
 test_that("isomorphic_vf2_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g1 <- path_graph_impl(
     n = 3
   )
@@ -8000,7 +8000,7 @@ test_that("isomorphic_vf2_impl basic", {
 })
 
 test_that("isomorphic_vf2_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   graph2 <- path_graph_impl(
     n = 3
   )
@@ -8016,7 +8016,7 @@ test_that("isomorphic_vf2_impl errors", {
 # 283. count_isomorphisms_vf2_impl
 
 test_that("count_isomorphisms_vf2_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g1 <- path_graph_impl(
     n = 3
   )
@@ -8047,7 +8047,7 @@ test_that("count_isomorphisms_vf2_impl basic", {
 })
 
 test_that("count_isomorphisms_vf2_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   graph2 <- path_graph_impl(
     n = 3
   )
@@ -8062,7 +8062,7 @@ test_that("count_isomorphisms_vf2_impl errors", {
 # 284. get_isomorphisms_vf2_impl
 
 test_that("get_isomorphisms_vf2_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g1 <- path_graph_impl(
     n = 3
   )
@@ -8093,7 +8093,7 @@ test_that("get_isomorphisms_vf2_impl basic", {
 })
 
 test_that("get_isomorphisms_vf2_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   graph2 <- path_graph_impl(
     n = 3
   )
@@ -8108,7 +8108,7 @@ test_that("get_isomorphisms_vf2_impl errors", {
 # 285. subisomorphic_impl
 
 test_that("subisomorphic_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g1 <- path_graph_impl(
     n = 3
   )
@@ -8131,7 +8131,7 @@ test_that("subisomorphic_impl basic", {
 })
 
 test_that("subisomorphic_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   graph2 <- path_graph_impl(
     n = 3
   )
@@ -8144,7 +8144,7 @@ test_that("subisomorphic_impl errors", {
 # 286. subisomorphic_vf2_impl
 
 test_that("subisomorphic_vf2_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g1 <- path_graph_impl(
     n = 3
   )
@@ -8175,7 +8175,7 @@ test_that("subisomorphic_vf2_impl basic", {
 })
 
 test_that("subisomorphic_vf2_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   graph2 <- path_graph_impl(
     n = 3
   )
@@ -8190,7 +8190,7 @@ test_that("subisomorphic_vf2_impl errors", {
 # 287. count_subisomorphisms_vf2_impl
 
 test_that("count_subisomorphisms_vf2_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g1 <- path_graph_impl(
     n = 3
   )
@@ -8221,7 +8221,7 @@ test_that("count_subisomorphisms_vf2_impl basic", {
 })
 
 test_that("count_subisomorphisms_vf2_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   graph2 <- path_graph_impl(
     n = 3
   )
@@ -8236,7 +8236,7 @@ test_that("count_subisomorphisms_vf2_impl errors", {
 # 288. get_subisomorphisms_vf2_impl
 
 test_that("get_subisomorphisms_vf2_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g1 <- path_graph_impl(
     n = 3
   )
@@ -8267,7 +8267,7 @@ test_that("get_subisomorphisms_vf2_impl basic", {
 })
 
 test_that("get_subisomorphisms_vf2_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   graph2 <- path_graph_impl(
     n = 3
   )
@@ -8282,7 +8282,7 @@ test_that("get_subisomorphisms_vf2_impl errors", {
 # 289. canonical_permutation_impl
 
 test_that("canonical_permutation_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -8304,7 +8304,7 @@ test_that("canonical_permutation_impl basic", {
 })
 
 test_that("canonical_permutation_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(canonical_permutation_impl(
     graph = NULL
   ))
@@ -8313,7 +8313,7 @@ test_that("canonical_permutation_impl errors", {
 # 290. permute_vertices_impl
 
 test_that("permute_vertices_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -8332,7 +8332,7 @@ test_that("permute_vertices_impl basic", {
 })
 
 test_that("permute_vertices_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(permute_vertices_impl(
     graph = NULL,
     permutation = 3:1
@@ -8342,7 +8342,7 @@ test_that("permute_vertices_impl errors", {
 # 291. isomorphic_bliss_impl
 
 test_that("isomorphic_bliss_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g1 <- path_graph_impl(
     n = 3
   )
@@ -8372,7 +8372,7 @@ test_that("isomorphic_bliss_impl basic", {
 })
 
 test_that("isomorphic_bliss_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   graph2 <- path_graph_impl(
     n = 3
   )
@@ -8385,7 +8385,7 @@ test_that("isomorphic_bliss_impl errors", {
 # 292. count_automorphisms_impl
 
 test_that("count_automorphisms_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -8407,7 +8407,7 @@ test_that("count_automorphisms_impl basic", {
 })
 
 test_that("count_automorphisms_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(count_automorphisms_impl(
     graph = NULL
   ))
@@ -8416,7 +8416,7 @@ test_that("count_automorphisms_impl errors", {
 # 293. automorphism_group_impl
 
 test_that("automorphism_group_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -8439,7 +8439,7 @@ test_that("automorphism_group_impl basic", {
 })
 
 test_that("automorphism_group_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(automorphism_group_impl(
     graph = NULL
   ))
@@ -8448,7 +8448,7 @@ test_that("automorphism_group_impl errors", {
 # 294. simplify_and_colorize_impl
 
 test_that("simplify_and_colorize_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -8465,7 +8465,7 @@ test_that("simplify_and_colorize_impl basic", {
 })
 
 test_that("simplify_and_colorize_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(simplify_and_colorize_impl(
     graph = NULL
   ))
@@ -8474,7 +8474,7 @@ test_that("simplify_and_colorize_impl errors", {
 # 295. graph_count_impl
 
 test_that("graph_count_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(graph_count_impl(
     n = 3
   ))
@@ -8491,7 +8491,7 @@ test_that("graph_count_impl basic", {
 })
 
 test_that("graph_count_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(graph_count_impl(
     n = "a"
   ))
@@ -8500,7 +8500,7 @@ test_that("graph_count_impl errors", {
 # 296. is_matching_impl
 
 test_that("is_matching_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -8524,7 +8524,7 @@ test_that("is_matching_impl basic", {
 })
 
 test_that("is_matching_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(is_matching_impl(
     graph = NULL,
     matching = 1:2
@@ -8534,7 +8534,7 @@ test_that("is_matching_impl errors", {
 # 297. is_maximal_matching_impl
 
 test_that("is_maximal_matching_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -8558,7 +8558,7 @@ test_that("is_maximal_matching_impl basic", {
 })
 
 test_that("is_maximal_matching_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(is_maximal_matching_impl(
     graph = NULL,
     matching = 1:2
@@ -8568,7 +8568,7 @@ test_that("is_maximal_matching_impl errors", {
 # 298. maximum_bipartite_matching_impl
 
 test_that("maximum_bipartite_matching_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -8593,7 +8593,7 @@ test_that("maximum_bipartite_matching_impl basic", {
 })
 
 test_that("maximum_bipartite_matching_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     maximum_bipartite_matching_impl(
       graph = NULL,
@@ -8605,7 +8605,7 @@ test_that("maximum_bipartite_matching_impl errors", {
 # 299. adjacency_spectral_embedding_impl
 
 test_that("adjacency_spectral_embedding_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -8633,7 +8633,7 @@ test_that("adjacency_spectral_embedding_impl basic", {
 })
 
 test_that("adjacency_spectral_embedding_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(adjacency_spectral_embedding_impl(
     graph = NULL,
     no = 2
@@ -8643,7 +8643,7 @@ test_that("adjacency_spectral_embedding_impl errors", {
 # 300. laplacian_spectral_embedding_impl
 
 test_that("laplacian_spectral_embedding_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -8662,7 +8662,7 @@ test_that("laplacian_spectral_embedding_impl basic", {
 })
 
 test_that("laplacian_spectral_embedding_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(laplacian_spectral_embedding_impl(
     graph = NULL,
     no = 2
@@ -8672,7 +8672,7 @@ test_that("laplacian_spectral_embedding_impl errors", {
 # 301. eigen_adjacency_impl
 
 test_that("eigen_adjacency_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -8697,7 +8697,7 @@ test_that("eigen_adjacency_impl basic", {
 })
 
 test_that("eigen_adjacency_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(eigen_adjacency_impl(
     graph = NULL
   ))
@@ -8706,7 +8706,7 @@ test_that("eigen_adjacency_impl errors", {
 # 302. power_law_fit_impl
 
 test_that("power_law_fit_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(power_law_fit_impl(
     data = c(1, 2, 3)
   ))
@@ -8724,7 +8724,7 @@ test_that("power_law_fit_impl basic", {
 })
 
 test_that("power_law_fit_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(power_law_fit_impl(
     data = "a"
   ))
@@ -8733,7 +8733,7 @@ test_that("power_law_fit_impl errors", {
 # 303. sir_impl
 
 test_that("sir_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -8760,7 +8760,7 @@ test_that("sir_impl basic", {
 })
 
 test_that("sir_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(sir_impl(
     graph = NULL,
     beta = 0.1,
@@ -8771,7 +8771,7 @@ test_that("sir_impl errors", {
 # 304. convex_hull_2d_impl
 
 test_that("convex_hull_2d_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(convex_hull_2d_impl(
     data = matrix(1:6, ncol = 2)
   ))
@@ -8784,7 +8784,7 @@ test_that("convex_hull_2d_impl basic", {
 })
 
 test_that("convex_hull_2d_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(convex_hull_2d_impl(
     data = "a"
   ))
@@ -8793,7 +8793,7 @@ test_that("convex_hull_2d_impl errors", {
 # 305. dim_select_impl
 
 test_that("dim_select_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(dim_select_impl(
     sv = c(1, 2, 3)
   ))
@@ -8806,7 +8806,7 @@ test_that("dim_select_impl basic", {
 })
 
 test_that("dim_select_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(dim_select_impl(
     sv = NULL
   ))
@@ -8815,7 +8815,7 @@ test_that("dim_select_impl errors", {
 # 306. solve_lsap_impl
 
 test_that("solve_lsap_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(solve_lsap_impl(
     c = matrix(1:4, ncol = 2),
     n = 2
@@ -8830,7 +8830,7 @@ test_that("solve_lsap_impl basic", {
 })
 
 test_that("solve_lsap_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(solve_lsap_impl(
     c = "a",
     n = 2
@@ -8840,7 +8840,7 @@ test_that("solve_lsap_impl errors", {
 # 307. find_cycle_impl
 
 test_that("find_cycle_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -8861,7 +8861,7 @@ test_that("find_cycle_impl basic", {
 })
 
 test_that("find_cycle_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(find_cycle_impl(
     graph = NULL
   ))
@@ -8870,7 +8870,7 @@ test_that("find_cycle_impl errors", {
 # 308. simple_cycles_impl
 
 test_that("simple_cycles_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -8893,7 +8893,7 @@ test_that("simple_cycles_impl basic", {
 })
 
 test_that("simple_cycles_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(simple_cycles_impl(
     graph = NULL
   ))
@@ -8902,7 +8902,7 @@ test_that("simple_cycles_impl errors", {
 # 309. is_eulerian_impl
 
 test_that("is_eulerian_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -8919,7 +8919,7 @@ test_that("is_eulerian_impl basic", {
 })
 
 test_that("is_eulerian_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(is_eulerian_impl(
     graph = NULL
   ))
@@ -8928,7 +8928,7 @@ test_that("is_eulerian_impl errors", {
 # 310. eulerian_path_impl
 
 test_that("eulerian_path_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -8945,7 +8945,7 @@ test_that("eulerian_path_impl basic", {
 })
 
 test_that("eulerian_path_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(eulerian_path_impl(
     graph = NULL
   ))
@@ -8954,7 +8954,7 @@ test_that("eulerian_path_impl errors", {
 # 311. eulerian_cycle_impl
 
 test_that("eulerian_cycle_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g1 <- path_graph_impl(
     n = 3
   )
@@ -8978,7 +8978,7 @@ test_that("eulerian_cycle_impl basic", {
 })
 
 test_that("eulerian_cycle_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(eulerian_cycle_impl(
     graph = NULL
   ))
@@ -8987,7 +8987,7 @@ test_that("eulerian_cycle_impl errors", {
 # 312. fundamental_cycles_impl
 
 test_that("fundamental_cycles_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -9012,7 +9012,7 @@ test_that("fundamental_cycles_impl basic", {
 })
 
 test_that("fundamental_cycles_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(fundamental_cycles_impl(
     graph = NULL,
     start = 1
@@ -9022,7 +9022,7 @@ test_that("fundamental_cycles_impl errors", {
 # 313. minimum_cycle_basis_impl
 
 test_that("minimum_cycle_basis_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -9046,7 +9046,7 @@ test_that("minimum_cycle_basis_impl basic", {
 })
 
 test_that("minimum_cycle_basis_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(minimum_cycle_basis_impl(
     graph = NULL
   ))
@@ -9055,7 +9055,7 @@ test_that("minimum_cycle_basis_impl errors", {
 # 314. is_tree_impl
 
 test_that("is_tree_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -9077,7 +9077,7 @@ test_that("is_tree_impl basic", {
 })
 
 test_that("is_tree_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(is_tree_impl(
     graph = NULL
   ))
@@ -9086,7 +9086,7 @@ test_that("is_tree_impl errors", {
 # 315. is_forest_impl
 
 test_that("is_forest_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -9108,7 +9108,7 @@ test_that("is_forest_impl basic", {
 })
 
 test_that("is_forest_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(is_forest_impl(
     graph = NULL
   ))
@@ -9117,7 +9117,7 @@ test_that("is_forest_impl errors", {
 # 316. from_prufer_impl
 
 test_that("from_prufer_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(from_prufer_impl(
     prufer = 1:2
   ))
@@ -9130,7 +9130,7 @@ test_that("from_prufer_impl basic", {
 })
 
 test_that("from_prufer_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(from_prufer_impl(
     prufer = "a"
   ))
@@ -9139,7 +9139,7 @@ test_that("from_prufer_impl errors", {
 # 317. to_prufer_impl
 
 test_that("to_prufer_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -9156,7 +9156,7 @@ test_that("to_prufer_impl basic", {
 })
 
 test_that("to_prufer_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(to_prufer_impl(
     graph = NULL
   ))
@@ -9165,7 +9165,7 @@ test_that("to_prufer_impl errors", {
 # 318. tree_from_parent_vector_impl
 
 test_that("tree_from_parent_vector_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(tree_from_parent_vector_impl(
     parents = c(-1, 1, 2, 3)
   ))
@@ -9182,7 +9182,7 @@ test_that("tree_from_parent_vector_impl basic", {
 })
 
 test_that("tree_from_parent_vector_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(tree_from_parent_vector_impl(
     parents = "a"
   ))
@@ -9191,7 +9191,7 @@ test_that("tree_from_parent_vector_impl errors", {
 # 319. is_complete_impl
 
 test_that("is_complete_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -9208,7 +9208,7 @@ test_that("is_complete_impl basic", {
 })
 
 test_that("is_complete_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(is_complete_impl(
     graph = NULL
   ))
@@ -9217,7 +9217,7 @@ test_that("is_complete_impl errors", {
 # 320. random_spanning_tree_impl
 
 test_that("random_spanning_tree_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -9236,7 +9236,7 @@ test_that("random_spanning_tree_impl basic", {
 })
 
 test_that("random_spanning_tree_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(random_spanning_tree_impl(
     graph = NULL,
     vid = 1
@@ -9246,7 +9246,7 @@ test_that("random_spanning_tree_impl errors", {
 # 321. tree_game_impl
 
 test_that("tree_game_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(tree_game_impl(
     n = 3
   ))
@@ -9264,7 +9264,7 @@ test_that("tree_game_impl basic", {
 })
 
 test_that("tree_game_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(tree_game_impl(
     n = "a"
   ))
@@ -9273,7 +9273,7 @@ test_that("tree_game_impl errors", {
 # 322. vertex_coloring_greedy_impl
 
 test_that("vertex_coloring_greedy_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -9294,7 +9294,7 @@ test_that("vertex_coloring_greedy_impl basic", {
 })
 
 test_that("vertex_coloring_greedy_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(vertex_coloring_greedy_impl(
     graph = NULL
   ))
@@ -9303,7 +9303,7 @@ test_that("vertex_coloring_greedy_impl errors", {
 # 323. is_vertex_coloring_impl
 
 test_that("is_vertex_coloring_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
@@ -9322,7 +9322,7 @@ test_that("is_vertex_coloring_impl basic", {
 })
 
 test_that("is_vertex_coloring_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(
     is_vertex_coloring_impl(
       graph = NULL,
@@ -9334,7 +9334,7 @@ test_that("is_vertex_coloring_impl errors", {
 # 324. is_bipartite_coloring_impl
 
 # test_that("is_bipartite_coloring_impl basic", {
-#   withr::local_seed(20250909)
+#   igraph_local_seed(20250909)
 #   oldval <- igraph_opt("print.id")
 # igraph_options(print.id = FALSE)
 #   g <- path_graph_impl(3)
@@ -9344,7 +9344,7 @@ test_that("is_vertex_coloring_impl errors", {
 # 325. is_bipartite_coloring_impl
 
 test_that("is_bipartite_coloring_impl basic", {
-  withr::local_seed(12345)
+  igraph_local_seed(12345)
   g <- path_graph_impl(
     n = 3
   )
@@ -9363,7 +9363,7 @@ test_that("is_bipartite_coloring_impl basic", {
 })
 
 test_that("is_bipartite_coloring_impl errors", {
-  withr::local_seed(12345)
+  igraph_local_seed(12345)
   expect_snapshot_igraph_error(
     is_bipartite_coloring_impl(
       graph = NULL,
@@ -9375,7 +9375,7 @@ test_that("is_bipartite_coloring_impl errors", {
 # 326. is_edge_coloring_impl
 
 test_that("is_edge_coloring_impl basic", {
-  withr::local_seed(12345)
+  igraph_local_seed(12345)
   g <- path_graph_impl(
     n = 3
   )
@@ -9398,7 +9398,7 @@ test_that("is_edge_coloring_impl basic", {
 })
 
 test_that("is_edge_coloring_impl errors", {
-  withr::local_seed(12345)
+  igraph_local_seed(12345)
   expect_snapshot_igraph_error(is_edge_coloring_impl(
     graph = NULL,
     types = c(1, 2)
@@ -9408,7 +9408,7 @@ test_that("is_edge_coloring_impl errors", {
 # 327. deterministic_optimal_imitation_impl
 
 test_that("deterministic_optimal_imitation_impl basic", {
-  withr::local_seed(12345)
+  igraph_local_seed(12345)
   g <- path_graph_impl(
     n = 3
   )
@@ -9439,7 +9439,7 @@ test_that("deterministic_optimal_imitation_impl basic", {
 })
 
 test_that("deterministic_optimal_imitation_impl errors", {
-  withr::local_seed(12345)
+  igraph_local_seed(12345)
   expect_snapshot_igraph_error(
     deterministic_optimal_imitation_impl(
       graph = NULL,
@@ -9453,7 +9453,7 @@ test_that("deterministic_optimal_imitation_impl errors", {
 # 328. moran_process_impl
 
 test_that("moran_process_impl basic", {
-  withr::local_seed(12345)
+  igraph_local_seed(12345)
   g <- path_graph_impl(
     n = 3
   )
@@ -9478,7 +9478,7 @@ test_that("moran_process_impl basic", {
 })
 
 test_that("moran_process_impl errors", {
-  withr::local_seed(12345)
+  igraph_local_seed(12345)
   expect_snapshot_igraph_error(
     moran_process_impl(
       graph = NULL,
@@ -9491,7 +9491,7 @@ test_that("moran_process_impl errors", {
 # 329. roulette_wheel_imitation_impl
 
 test_that("roulette_wheel_imitation_impl basic", {
-  withr::local_seed(12345)
+  igraph_local_seed(12345)
   g <- path_graph_impl(
     n = 3
   )
@@ -9524,7 +9524,7 @@ test_that("roulette_wheel_imitation_impl basic", {
 })
 
 test_that("roulette_wheel_imitation_impl errors", {
-  withr::local_seed(12345)
+  igraph_local_seed(12345)
   expect_snapshot_igraph_error(
     roulette_wheel_imitation_impl(
       graph = NULL,
@@ -9539,7 +9539,7 @@ test_that("roulette_wheel_imitation_impl errors", {
 # 330. stochastic_imitation_impl
 
 test_that("stochastic_imitation_impl basic", {
-  withr::local_seed(12345)
+  igraph_local_seed(12345)
   g <- path_graph_impl(
     n = 3
   )
@@ -9572,7 +9572,7 @@ test_that("stochastic_imitation_impl basic", {
 })
 
 test_that("stochastic_imitation_impl errors", {
-  withr::local_seed(12345)
+  igraph_local_seed(12345)
   expect_snapshot_igraph_error(
     stochastic_imitation_impl(
       graph = NULL,
@@ -9587,7 +9587,7 @@ test_that("stochastic_imitation_impl errors", {
 # 331. invalidate_cache_impl
 
 test_that("invalidate_cache_impl basic", {
-  withr::local_seed(12345)
+  igraph_local_seed(12345)
   g <- path_graph_impl(
     n = 3
   )
@@ -9604,7 +9604,7 @@ test_that("invalidate_cache_impl basic", {
 })
 
 test_that("invalidate_cache_impl errors", {
-  withr::local_seed(12345)
+  igraph_local_seed(12345)
   expect_snapshot_igraph_error(invalidate_cache_impl(
     graph = NULL
   ))
@@ -9613,7 +9613,7 @@ test_that("invalidate_cache_impl errors", {
 # 332. vertex_path_from_edge_path_impl
 
 test_that("vertex_path_from_edge_path_impl basic", {
-  withr::local_seed(12345)
+  igraph_local_seed(12345)
   g <- path_graph_impl(
     n = 3
   )
@@ -9640,7 +9640,7 @@ test_that("vertex_path_from_edge_path_impl basic", {
 })
 
 test_that("vertex_path_from_edge_path_impl errors", {
-  withr::local_seed(12345)
+  igraph_local_seed(12345)
   expect_snapshot_igraph_error(
     vertex_path_from_edge_path_impl(
       graph = NULL,
@@ -9653,7 +9653,7 @@ test_that("vertex_path_from_edge_path_impl errors", {
 # 333. version_impl
 
 test_that("version_impl basic", {
-  withr::local_seed(12345)
+  igraph_local_seed(12345)
   version_impl_clean <- function() {
     v <- version_impl()
 
@@ -9667,7 +9667,7 @@ test_that("version_impl basic", {
 })
 
 test_that("version_impl errors", {
-  withr::local_seed(12345)
+  igraph_local_seed(12345)
   # version_impl() has no parameters, so testing with invalid arguments
   expect_snapshot_igraph_error(version_impl(
     "invalid"
@@ -9677,7 +9677,7 @@ test_that("version_impl errors", {
 # 334. ecount_impl
 
 test_that("ecount_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_empty_graph(5)
   expect_snapshot(ecount_impl(
     graph = g
@@ -9690,7 +9690,7 @@ test_that("ecount_impl basic", {
 })
 
 test_that("ecount_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(ecount_impl(
     graph = NULL
   ))
@@ -9699,7 +9699,7 @@ test_that("ecount_impl errors", {
 # 335. is_directed_impl
 
 test_that("is_directed_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_empty_graph(5, directed = TRUE)
   expect_snapshot(is_directed_impl(
     graph = g
@@ -9712,7 +9712,7 @@ test_that("is_directed_impl basic", {
 })
 
 test_that("is_directed_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(is_directed_impl(
     graph = NULL
   ))
@@ -9721,7 +9721,7 @@ test_that("is_directed_impl errors", {
 # 336. edges_impl
 
 test_that("edges_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_graph(c(1, 2, 2, 3, 3, 4), n = 4, directed = TRUE)
 
   # Get all edges
@@ -9738,7 +9738,7 @@ test_that("edges_impl basic", {
 })
 
 test_that("edges_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(edges_impl(
     graph = NULL,
     eids = 1
@@ -9748,7 +9748,7 @@ test_that("edges_impl errors", {
 # 337. add_vertices_impl
 
 test_that("add_vertices_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_empty_graph(3)
 
   g_new <- add_vertices_impl(
@@ -9759,7 +9759,7 @@ test_that("add_vertices_impl basic", {
 })
 
 test_that("add_vertices_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(add_vertices_impl(
     graph = NULL,
     nv = 1
@@ -9769,7 +9769,7 @@ test_that("add_vertices_impl errors", {
 # 338. delete_edges_impl
 
 test_that("delete_edges_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_graph(c(1, 2, 2, 3, 3, 4), n = 4, directed = TRUE)
 
   g_new <- delete_edges_impl(
@@ -9780,7 +9780,7 @@ test_that("delete_edges_impl basic", {
 })
 
 test_that("delete_edges_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(delete_edges_impl(
     graph = NULL,
     edges = 1
@@ -9790,7 +9790,7 @@ test_that("delete_edges_impl errors", {
 # 339. delete_vertices_impl
 
 test_that("delete_vertices_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_graph(c(1, 2, 2, 3, 3, 4), n = 4, directed = TRUE)
 
   g_new <- delete_vertices_impl(
@@ -9801,7 +9801,7 @@ test_that("delete_vertices_impl basic", {
 })
 
 test_that("delete_vertices_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(delete_vertices_impl(
     graph = NULL,
     vertices = 1
@@ -9811,7 +9811,7 @@ test_that("delete_vertices_impl errors", {
 # 340. incident_impl
 
 test_that("incident_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   local_igraph_options(return.vs_es = FALSE)
   g <- make_graph(c(1, 2, 2, 3, 3, 1), n = 3, directed = TRUE)
 
@@ -9833,7 +9833,7 @@ test_that("incident_impl basic", {
 })
 
 test_that("incident_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(incident_impl(
     graph = NULL,
     vid = 1
@@ -9841,14 +9841,14 @@ test_that("incident_impl errors", {
 })
 
 test_that("famous_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(famous_impl(
     name = "Zachary"
   ))
 })
 
 test_that("famous_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(famous_impl(
     name = "NonexistentGraph"
   ))
@@ -9857,7 +9857,7 @@ test_that("famous_impl errors", {
 # 342. constraint_impl
 
 test_that("constraint_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_graph(c(1, 2, 2, 3, 3, 1), n = 3, directed = FALSE)
   result <- constraint_impl(
     graph = g
@@ -9866,7 +9866,7 @@ test_that("constraint_impl basic", {
 })
 
 test_that("constraint_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(constraint_impl(
     graph = NULL
   ))
@@ -9875,7 +9875,7 @@ test_that("constraint_impl errors", {
 # 343. cocitation_impl
 
 test_that("cocitation_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_graph(c(1, 2, 1, 3, 2, 4, 3, 4), n = 4, directed = TRUE)
   result <- cocitation_impl(
     graph = g
@@ -9884,7 +9884,7 @@ test_that("cocitation_impl basic", {
 })
 
 test_that("cocitation_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(cocitation_impl(
     graph = NULL
   ))
@@ -9893,7 +9893,7 @@ test_that("cocitation_impl errors", {
 # 344. bibcoupling_impl
 
 test_that("bibcoupling_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_graph(c(1, 2, 1, 3, 2, 4, 3, 4), n = 4, directed = TRUE)
   result <- bibcoupling_impl(
     graph = g
@@ -9902,7 +9902,7 @@ test_that("bibcoupling_impl basic", {
 })
 
 test_that("bibcoupling_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(bibcoupling_impl(
     graph = NULL
   ))
@@ -9911,7 +9911,7 @@ test_that("bibcoupling_impl errors", {
 # 345. girth_impl
 
 test_that("girth_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_ring(5)
   result <- girth_impl(
     graph = g
@@ -9920,7 +9920,7 @@ test_that("girth_impl basic", {
 })
 
 test_that("girth_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(girth_impl(
     graph = NULL
   ))
@@ -9929,7 +9929,7 @@ test_that("girth_impl errors", {
 # 346. coreness_impl
 
 test_that("coreness_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_graph(c(1, 2, 2, 3, 3, 1, 3, 4), n = 4, directed = FALSE)
   expect_snapshot(coreness_impl(
     graph = g
@@ -9937,7 +9937,7 @@ test_that("coreness_impl basic", {
 })
 
 test_that("coreness_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(coreness_impl(
     graph = NULL
   ))
@@ -9946,7 +9946,7 @@ test_that("coreness_impl errors", {
 # 347. union_impl
 
 test_that("union_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g1 <- make_graph(c(1, 2, 2, 3), n = 3)
   g2 <- make_graph(c(1, 3, 3, 4), n = 4)
   expect_snapshot(union_impl(
@@ -9956,7 +9956,7 @@ test_that("union_impl basic", {
 })
 
 test_that("union_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(union_impl(
     left = NULL,
     right = NULL
@@ -9966,7 +9966,7 @@ test_that("union_impl errors", {
 # 348. intersection_impl
 
 test_that("intersection_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g1 <- make_graph(c(1, 2, 2, 3, 1, 3), n = 3)
   g2 <- make_graph(c(1, 2, 2, 3), n = 3)
   expect_snapshot(intersection_impl(
@@ -9976,7 +9976,7 @@ test_that("intersection_impl basic", {
 })
 
 test_that("intersection_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot_igraph_error(intersection_impl(
     left = NULL,
     right = NULL
@@ -9989,14 +9989,14 @@ test_that("intersection_impl errors", {
 # Graph constructors
 
 test_that("star_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(star_impl(n = 5, mode = "out", center = 0))
   expect_snapshot(star_impl(n = 6, mode = "in", center = 1))
   expect_snapshot(star_impl(n = 4, mode = "undirected", center = 0))
 })
 
 test_that("ring_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(ring_impl(
     n = 5,
     directed = FALSE,
@@ -10012,13 +10012,13 @@ test_that("ring_impl basic", {
 })
 
 test_that("full_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(full_impl(n = 4, directed = FALSE, loops = FALSE))
   expect_snapshot(full_impl(n = 3, directed = TRUE, loops = FALSE))
 })
 
 test_that("kary_tree_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(kary_tree_impl(
     n = 7,
     children = 2,
@@ -10034,7 +10034,7 @@ test_that("kary_tree_impl basic", {
 # Random graph generators
 
 test_that("barabasi_game_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(barabasi_game_impl(
     n = 10,
     power = 1,
@@ -10052,7 +10052,7 @@ test_that("barabasi_game_impl basic", {
 })
 
 test_that("growing_random_game_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(growing_random_game_impl(
     n = 10,
     m = 1,
@@ -10062,12 +10062,12 @@ test_that("growing_random_game_impl basic", {
 })
 
 test_that("grg_game_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(grg_game_impl(nodes = 10, radius = 0.3, torus = FALSE))
 })
 
 test_that("watts_strogatz_game_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(watts_strogatz_game_impl(
     dim = 1,
     size = 10,
@@ -10079,7 +10079,7 @@ test_that("watts_strogatz_game_impl basic", {
 # Distance and path functions
 
 test_that("distances_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_ring(5)
   expect_snapshot(distances_impl(
     graph = g,
@@ -10090,7 +10090,7 @@ test_that("distances_impl basic", {
 })
 
 test_that("diameter_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_ring(10)
   expect_snapshot(diameter_impl(
     graph = g,
@@ -10100,7 +10100,7 @@ test_that("diameter_impl basic", {
 })
 
 test_that("get_shortest_paths_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_ring(5)
   expect_snapshot(get_shortest_paths_impl(
     graph = g,
@@ -10111,7 +10111,7 @@ test_that("get_shortest_paths_impl basic", {
 })
 
 test_that("subcomponent_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_graph(~ A-B-C, D-E-F)
   expect_snapshot(subcomponent_impl(
     graph = g,
@@ -10123,13 +10123,13 @@ test_that("subcomponent_impl basic", {
 # Centrality measures
 
 test_that("betweenness_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_star(5, mode = "undirected")
   expect_snapshot(betweenness_impl(graph = g, vids = V(g), directed = FALSE))
 })
 
 test_that("closeness_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_ring(5)
   expect_snapshot(closeness_impl(
     graph = g,
@@ -10139,7 +10139,7 @@ test_that("closeness_impl basic", {
 })
 
 test_that("harmonic_centrality_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_star(5, mode = "undirected")
   expect_snapshot(harmonic_centrality_impl(
     graph = g,
@@ -10149,7 +10149,7 @@ test_that("harmonic_centrality_impl basic", {
 })
 
 test_that("pagerank_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_ring(5, directed = TRUE)
   expect_snapshot(pagerank_impl(
     graph = g,
@@ -10160,7 +10160,7 @@ test_that("pagerank_impl basic", {
 })
 
 test_that("hub_score_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_star(5, mode = "undirected")
   out <- hub_score_impl(graph = g, scale = TRUE, weights = NULL)
   # FIXME: out$vector unstable despite random seed
@@ -10171,7 +10171,7 @@ test_that("hub_score_impl basic", {
 })
 
 test_that("authority_score_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_star(5, mode = "undirected")
   out <- authority_score_impl(graph = g, scale = TRUE, weights = NULL)
   # FIXME: out$vector unstable despite random seed
@@ -10184,25 +10184,25 @@ test_that("authority_score_impl basic", {
 # Community detection
 
 test_that("community_walktrap_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_graph(~ A-B-C-A, D-E-F-D, A-D)
   expect_snapshot(community_walktrap_impl(graph = g, steps = 4))
 })
 
 test_that("community_fastgreedy_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_graph(~ A-B-C-A, D-E-F-D, A-D)
   expect_snapshot(community_fastgreedy_impl(graph = g))
 })
 
 test_that("community_edge_betweenness_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_graph(~ A-B-C-A, D-E-F-D, A-D)
   expect_snapshot(community_edge_betweenness_impl(graph = g, directed = FALSE))
 })
 
 test_that("community_leading_eigenvector_callback_closure_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
 
   # Test with a simple graph
   g <- make_graph("Zachary")
@@ -10232,7 +10232,7 @@ test_that("community_leading_eigenvector_callback_closure_impl basic", {
 })
 
 test_that("community_leading_eigenvector_callback_closure_impl with start", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
 
   g <- make_graph("Zachary")
   # Create initial membership (0-based for the impl function)
@@ -10257,7 +10257,7 @@ test_that("community_leading_eigenvector_callback_closure_impl with start", {
 })
 
 test_that("community_leading_eigenvector_callback_closure_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
 
   g <- make_graph("Zachary")
 
@@ -10273,13 +10273,13 @@ test_that("community_leading_eigenvector_callback_closure_impl errors", {
 # Connectivity
 
 test_that("edge_connectivity_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_ring(5)
   expect_snapshot(edge_connectivity_impl(graph = g))
 })
 
 test_that("vertex_connectivity_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_ring(5)
   expect_snapshot(vertex_connectivity_impl(graph = g))
 })
@@ -10287,7 +10287,7 @@ test_that("vertex_connectivity_impl basic", {
 # Layout functions
 
 test_that("layout_sphere_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_ring(5)
   expect_snapshot(layout_sphere_impl(graph = g))
 })
@@ -10295,7 +10295,7 @@ test_that("layout_sphere_impl basic", {
 # Bipartite functions
 
 test_that("create_bipartite_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(create_bipartite_impl(
     types = c(FALSE, FALSE, TRUE, TRUE),
     edges = c(0, 2, 0, 3, 1, 2, 1, 3),
@@ -10304,7 +10304,7 @@ test_that("create_bipartite_impl basic", {
 })
 
 test_that("bipartite_game_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(bipartite_game_impl(
     type = "gnp",
     n1 = 5,
@@ -10324,13 +10324,13 @@ test_that("bipartite_game_impl basic", {
 # Other structural functions
 
 test_that("decompose_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_graph(~ A-B-C, D-E)
   expect_snapshot(decompose_impl(graph = g, mode = c("weak", "strong")))
 })
 
 test_that("neighborhood_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_ring(5)
   expect_snapshot(neighborhood_impl(
     graph = g,
@@ -10341,7 +10341,7 @@ test_that("neighborhood_impl basic", {
 })
 
 test_that("neighborhood_size_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_ring(5)
   expect_snapshot(neighborhood_size_impl(
     graph = g,
@@ -10354,7 +10354,7 @@ test_that("neighborhood_size_impl basic", {
 # Graph properties
 
 test_that("is_chordal_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   # Test with a chordal graph (complete graph is chordal)
   g <- make_full_graph(4)
   # alpha and alpham1 parameters must be provided as vectors matching vertex count
@@ -10379,7 +10379,7 @@ test_that("is_chordal_impl basic", {
 })
 
 test_that("get_adjacency_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_ring(3)
   expect_snapshot(get_adjacency_impl(
     graph = g,
@@ -10390,7 +10390,7 @@ test_that("get_adjacency_impl basic", {
 # IO functions
 
 test_that("write_graph_edgelist_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_ring(3)
   tmp <- tempfile()
   write_graph_edgelist_impl(graph = g, outstream = tmp)
@@ -10400,7 +10400,7 @@ test_that("write_graph_edgelist_impl basic", {
 })
 
 test_that("read_graph_edgelist_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   tmp <- tempfile()
   writeLines(c("0 1", "1 2", "2 0"), tmp)
   expect_snapshot(read_graph_edgelist_impl(
@@ -10414,7 +10414,7 @@ test_that("read_graph_edgelist_impl basic", {
 # Utility functions
 
 test_that("compare_communities_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   comm1 <- c(1, 1, 2, 2, 3, 3)
   comm2 <- c(1, 1, 2, 2, 2, 3)
   expect_snapshot(compare_communities_impl(
@@ -10427,7 +10427,7 @@ test_that("compare_communities_impl basic", {
 # Additional game functions
 
 test_that("degree_sequence_game_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   expect_snapshot(degree_sequence_game_impl(
     out_deg = c(2, 2, 2, 2),
     method = "configuration"
@@ -10439,7 +10439,7 @@ test_that("degree_sequence_game_impl basic", {
 })
 
 test_that("connect_neighborhood_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_ring(5)
   expect_snapshot_igraph(connect_neighborhood_impl(
     graph = g,
@@ -10451,7 +10451,7 @@ test_that("connect_neighborhood_impl basic", {
 # Additional distance functions
 
 test_that("eccentricity_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_ring(5)
   expect_snapshot(eccentricity_impl(
     graph = g,
@@ -10461,19 +10461,19 @@ test_that("eccentricity_impl basic", {
 })
 
 test_that("radius_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_ring(5)
   expect_snapshot(radius_impl(graph = g, mode = c("out", "in", "all")))
 })
 
 test_that("graph_center_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_star(5, mode = "undirected")
   expect_snapshot(graph_center_impl(graph = g, mode = c("out", "in", "all")))
 })
 
 test_that("voronoi_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_ring(10)
   expect_snapshot(voronoi_impl(
     graph = g,
@@ -10485,7 +10485,7 @@ test_that("voronoi_impl basic", {
 # Spanner
 
 test_that("spanner_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_ring(5)
   expect_snapshot(spanner_impl(graph = g, stretch = 2))
 })
@@ -10493,7 +10493,7 @@ test_that("spanner_impl basic", {
 # Additional centrality
 
 test_that("edge_betweenness_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_star(5, mode = "undirected")
   expect_snapshot(edge_betweenness_impl(graph = g, directed = FALSE))
 })
@@ -10501,13 +10501,13 @@ test_that("edge_betweenness_impl basic", {
 # Maximal cliques
 
 test_that("maximal_cliques_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_full_graph(4)
   expect_snapshot(maximal_cliques_impl(graph = g, min_size = 1, max_size = 0))
 })
 
 test_that("independent_vertex_sets_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- make_ring(5)
   expect_snapshot(independent_vertex_sets_impl(
     graph = g,
@@ -10521,7 +10521,7 @@ test_that("independent_vertex_sets_impl basic", {
 # bfs_closure_impl
 
 test_that("bfs_closure_impl works", {
-  withr::local_seed(20250125)
+  igraph_local_seed(20250125)
 
   g <- make_ring(10)
 
@@ -10594,7 +10594,7 @@ test_that("bfs_closure_impl works", {
 # dfs_closure_impl
 
 test_that("dfs_closure_impl works", {
-  withr::local_seed(20250125)
+  igraph_local_seed(20250125)
 
   g <- make_ring(10)
 
@@ -10635,7 +10635,7 @@ test_that("dfs_closure_impl works", {
 # motifs_randesu_callback_closure_impl
 
 test_that("motifs_randesu_callback_closure_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
 
   g <- make_graph(~ A - B - C - A)
 
@@ -10672,7 +10672,7 @@ test_that("motifs_randesu_callback_closure_impl basic", {
 })
 
 test_that("motifs_randesu_callback_closure_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
 
   g <- make_graph(~ A - B - C)
 
@@ -10690,7 +10690,7 @@ test_that("motifs_randesu_callback_closure_impl errors", {
 # cliques_callback_closure_impl
 
 test_that("cliques_callback_closure_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
 
   g <- make_full_graph(4)
 
@@ -10723,7 +10723,7 @@ test_that("cliques_callback_closure_impl basic", {
 })
 
 test_that("cliques_callback_closure_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
 
   g <- make_full_graph(4)
 
@@ -10741,7 +10741,7 @@ test_that("cliques_callback_closure_impl errors", {
 # maximal_cliques_callback_closure_impl
 
 test_that("maximal_cliques_callback_closure_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
 
   g <- sample_gnp(10, 0.3)
 
@@ -10777,7 +10777,7 @@ test_that("maximal_cliques_callback_closure_impl basic", {
 })
 
 test_that("maximal_cliques_callback_closure_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
 
   g <- make_full_graph(4)
 
@@ -10795,7 +10795,7 @@ test_that("maximal_cliques_callback_closure_impl errors", {
 # simple_cycles_callback_closure_impl
 
 test_that("simple_cycles_callback_closure_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
 
   g <- make_ring(4, directed = TRUE)
 
@@ -10832,7 +10832,7 @@ test_that("simple_cycles_callback_closure_impl basic", {
 })
 
 test_that("simple_cycles_callback_closure_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
 
   g <- make_ring(4, directed = TRUE)
 
@@ -10851,7 +10851,7 @@ test_that("simple_cycles_callback_closure_impl errors", {
 # get_isomorphisms_vf2_callback_closure_impl
 
 test_that("get_isomorphisms_vf2_callback_closure_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
 
   g1 <- make_ring(5)
   g2 <- make_ring(5)
@@ -10895,7 +10895,7 @@ test_that("get_isomorphisms_vf2_callback_closure_impl basic", {
 })
 
 test_that("get_isomorphisms_vf2_callback_closure_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
 
   g1 <- make_ring(5)
   g2 <- make_ring(5)
@@ -10917,7 +10917,7 @@ test_that("get_isomorphisms_vf2_callback_closure_impl errors", {
 # get_subisomorphisms_vf2_callback_closure_impl
 
 test_that("get_subisomorphisms_vf2_callback_closure_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
 
   g1 <- make_full_graph(5)
   g2 <- make_ring(3) # triangle
@@ -10961,7 +10961,7 @@ test_that("get_subisomorphisms_vf2_callback_closure_impl basic", {
 })
 
 test_that("get_subisomorphisms_vf2_callback_closure_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
 
   g1 <- make_ring(3)
   g2 <- make_full_graph(5)
@@ -10984,7 +10984,7 @@ test_that("get_subisomorphisms_vf2_callback_closure_impl errors", {
 
 test_that("sparse_adjacency_impl basic", {
   skip_if_not_installed("Matrix")
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
 
   # Create a simple sparse matrix
   M <- Matrix::sparseMatrix(
@@ -11028,7 +11028,7 @@ test_that("sparse_adjacency_impl basic", {
 test_that("sparse_adjacency_impl errors", {
   skip_if_not_installed("Matrix")
   skip_if_not(getRversion() >= "4.2")
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
 
   # Regular matrices are converted to sparse matrices automatically
   # This should work, not error
@@ -11040,7 +11040,7 @@ test_that("sparse_adjacency_impl errors", {
 
 test_that("sparse_weighted_adjacency_impl basic", {
   skip_if_not_installed("Matrix")
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
 
   # Create a weighted sparse matrix
   M <- Matrix::sparseMatrix(
@@ -11080,7 +11080,7 @@ test_that("sparse_weighted_adjacency_impl basic", {
 test_that("sparse_weighted_adjacency_impl errors", {
   skip_if_not_installed("Matrix")
   skip_if_not(getRversion() >= "4.2")
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
 
   # Regular matrices are converted to sparse matrices automatically
   # This should work, not error
@@ -11093,7 +11093,7 @@ test_that("sparse_weighted_adjacency_impl errors", {
 
 test_that("weighted_sparsemat_impl basic", {
   skip_if_not_installed("Matrix")
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
 
   # Create a weighted sparse matrix
   M <- Matrix::sparseMatrix(
@@ -11127,7 +11127,7 @@ test_that("weighted_sparsemat_impl basic", {
 test_that("weighted_sparsemat_impl errors", {
   skip_if_not_installed("Matrix")
   skip_if_not(getRversion() >= "4.2")
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
 
   # Regular matrices are converted to sparse matrices automatically
   # This should work, not error
@@ -11143,7 +11143,7 @@ test_that("weighted_sparsemat_impl errors", {
 # Tests for newly autogenerated *_many functions
 
 test_that("disjoint_union_many_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g1 <- empty_impl(n = 2)
   g2 <- empty_impl(n = 3)
   g3 <- empty_impl(n = 1)
@@ -11161,7 +11161,7 @@ test_that("disjoint_union_many_impl basic", {
 })
 
 test_that("union_many_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g1 <- empty_impl(n = 3)
   g2 <- add_edges_impl(g1, c(0, 1, 1, 2) + 1)
   g3 <- add_edges_impl(g1, c(0, 2) + 1)
@@ -11179,7 +11179,7 @@ test_that("union_many_impl basic", {
 })
 
 test_that("intersection_many_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g1 <- add_edges_impl(empty_impl(n = 3), c(0, 1, 1, 2, 0, 2) + 1)
   g2 <- add_edges_impl(empty_impl(n = 3), c(0, 1, 1, 2) + 1)
   g3 <- add_edges_impl(empty_impl(n = 3), c(0, 1) + 1)
@@ -11197,7 +11197,7 @@ test_that("intersection_many_impl basic", {
 })
 
 test_that("layout_merge_dla_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g1 <- path_graph_impl(n = 3)
   g2 <- path_graph_impl(n = 3)
   coords1 <- matrix(c(0, 0, 1, 0, 2, 0), ncol = 2, byrow = TRUE)
@@ -11220,7 +11220,7 @@ test_that("layout_merge_dla_impl basic", {
 
 # get_eid_impl
 test_that("get_eid_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- add_edges_impl(empty_impl(n = 5), c(0, 1, 1, 2, 2, 3, 3, 4) + 1)
 
   expect_snapshot(get_eid_impl(
@@ -11255,7 +11255,7 @@ test_that("get_eid_impl basic", {
 })
 
 test_that("get_eid_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- add_edges_impl(empty_impl(n = 3), c(0, 1, 1, 2) + 1)
 
   expect_snapshot_igraph_error(get_eid_impl(
@@ -11280,7 +11280,7 @@ test_that("get_eid_impl errors", {
 
 # community_voronoi_impl
 test_that("community_voronoi_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- add_edges_impl(
     empty_impl(n = 10),
     c(0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9) + 1
@@ -11302,7 +11302,7 @@ test_that("community_voronoi_impl basic", {
 })
 
 test_that("community_voronoi_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
 
   expect_snapshot_igraph_error(community_voronoi_impl(
     graph = NULL
@@ -11311,7 +11311,7 @@ test_that("community_voronoi_impl errors", {
 
 # subisomorphic_lad_impl
 test_that("subisomorphic_lad_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
 
   # FIXME: Add functionality tests once we understand the expected behavior
   # The function requires complex setup with pattern/target graphs and domains
@@ -11324,7 +11324,7 @@ test_that("subisomorphic_lad_impl basic", {
 })
 
 test_that("subisomorphic_lad_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   g <- add_edges_impl(empty_impl(n = 3), c(0, 1, 1, 2) + 1)
 
   expect_snapshot_igraph_error(subisomorphic_lad_impl(
@@ -11347,7 +11347,7 @@ test_that("subisomorphic_lad_impl errors", {
 
 # eigen_matrix_impl
 test_that("eigen_matrix_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
 
   # FIXME: Add functionality tests once we understand the expected behavior
   # The function requires complex matrix setup and understanding of eigenvalue computation
@@ -11360,7 +11360,7 @@ test_that("eigen_matrix_impl basic", {
 })
 
 test_that("eigen_matrix_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
 
   # Test with invalid matrix dimensions
   expect_error(eigen_matrix_impl(
@@ -11375,7 +11375,7 @@ test_that("eigen_matrix_impl errors", {
 
 # eigen_matrix_symmetric_impl
 test_that("eigen_matrix_symmetric_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
 
   # FIXME: Add functionality tests once we understand the expected behavior
   # The function requires complex matrix setup and understanding of eigenvalue computation
@@ -11388,7 +11388,7 @@ test_that("eigen_matrix_symmetric_impl basic", {
 })
 
 test_that("eigen_matrix_symmetric_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
 
   # Test with invalid matrix dimensions
   expect_error(eigen_matrix_symmetric_impl(

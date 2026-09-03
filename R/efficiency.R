@@ -37,12 +37,14 @@
 #' efficiency above.
 #'
 #' @param graph The graph to analyze.
+#' @inheritParams rlang::args_dots_empty
 #' @param weights The edge weights. All edge weights must be non-negative;
 #'   additionally, no edge weight may be NaN. If it is `NULL` (the default)
 #'   and the graph has a `weight` edge attribute, then it is used automatically.
 #' @param vids The vertex IDs of the vertices for which the calculation will be done.
-#'   Applies to the local efficiency calculation only.
-#' @param directed Logical scalar, whether to consider directed paths. Ignored
+#'   Applies to the local efficiency calculation only. The default `NULL`
+#'   selects all vertices.
+#' @param directed Logical, whether to consider directed paths. Ignored
 #'   for undirected graphs.
 #' @param mode Specifies how to define the local neighborhood of a vertex in
 #'   directed graphs. \dQuote{out} considers out-neighbors only, \dQuote{in}
@@ -66,7 +68,49 @@
 #' g <- make_graph("zachary")
 #' global_efficiency(g)
 #' average_local_efficiency(g)
-global_efficiency <- function(graph, weights = NULL, directed = TRUE) {
+global_efficiency <- function(
+  graph,
+  ...,
+  weights = NULL,
+  directed = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: global_efficiency, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: global_efficiency(graph, weights, directed)
+    .old_signature <- function(weights, directed, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn global_efficiency}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn global_efficiency}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(directed)) base::list(directed = directed)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(directed)) "directed"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn global_efficiency} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `global_efficiency()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  global_efficiency(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    global_efficiency(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   global_efficiency_impl(
     graph = graph,
     weights = weights,
@@ -75,14 +119,59 @@ global_efficiency <- function(graph, weights = NULL, directed = TRUE) {
 }
 
 #' @rdname global_efficiency
+#' @inheritParams rlang::args_dots_empty
 #' @export
 local_efficiency <- function(
   graph,
-  vids = V(graph),
+  vids = NULL,
+  ...,
   weights = NULL,
   directed = TRUE,
   mode = c("all", "out", "in", "total")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: local_efficiency, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: local_efficiency(graph, vids, weights, directed, mode)
+    .old_signature <- function(weights, directed, mode, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn local_efficiency}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn local_efficiency}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(directed)) base::list(directed = directed),
+        if (!base::missing(mode)) base::list(mode = mode)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(directed)) "directed",
+        if (!base::missing(mode)) "mode"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn local_efficiency} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `local_efficiency()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  local_efficiency(", base::paste(base::c("graph", "vids", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    local_efficiency(", base::paste(base::c("graph", "vids", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
+  if (is.null(vids)) {
+    vids <- V(graph)
+  }
+
   local_efficiency_impl(
     graph = graph,
     vids = vids,
@@ -93,13 +182,54 @@ local_efficiency <- function(
 }
 
 #' @rdname global_efficiency
+#' @inheritParams rlang::args_dots_empty
 #' @export
 average_local_efficiency <- function(
   graph,
+  ...,
   weights = NULL,
   directed = TRUE,
   mode = c("all", "out", "in", "total")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: average_local_efficiency, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: average_local_efficiency(graph, weights, directed, mode)
+    .old_signature <- function(weights, directed, mode, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn average_local_efficiency}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn average_local_efficiency}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(directed)) base::list(directed = directed),
+        if (!base::missing(mode)) base::list(mode = mode)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(directed)) "directed",
+        if (!base::missing(mode)) "mode"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn average_local_efficiency} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `average_local_efficiency()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  average_local_efficiency(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    average_local_efficiency(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   average_local_efficiency_impl(
     graph = graph,
     weights = weights,

@@ -99,6 +99,7 @@ test_that("delete_vertices works", {
 })
 
 test_that("neighbors works", {
+  igraph_local_seed(42)
   g <- sample_gnp(100, 20 / 100)
   al <- as_adj_list(g, mode = "all")
   expect_s3_class(neighbors(g, v = 1, mode = "out"), "igraph.vs")
@@ -127,6 +128,7 @@ test_that("neighbors prints an error for an empty input vector", {
 
 
 test_that("adjacent_vertices works", {
+  igraph_local_seed(42)
   g <- sample_gnp(100, 20 / 100)
   al <- as_adj_list(g, mode = "all")
   test_vertices <- c(1, 7, 38, 75, 99)
@@ -151,6 +153,7 @@ test_that("adjacent_vertices works", {
 
 
 test_that("incident_edges works", {
+  igraph_local_seed(42)
   g <- sample_gnp(100, 20 / 100)
   el <- as_adj_edge_list(g, mode = "all")
   test_vertices <- c(1, 7, 38, 75, 99)
@@ -220,6 +223,7 @@ test_that("delete_edges errors on a vertex pair with no edge (#1827)", {
 })
 
 test_that("ends works", {
+  igraph_local_seed(42)
   g <- sample_gnp(100, 3 / 100)
   edges <- unlist(lapply(seq_len(ecount(g)), ends, graph = g))
   g2 <- make_graph(edges, dir = FALSE, n = vcount(g))
@@ -227,6 +231,7 @@ test_that("ends works", {
 })
 
 test_that("get.edge.ids() deprecation", {
+  rlang::local_options(lifecycle_verbosity = "warning")
   g <- make_empty_graph(10)
   expect_snapshot(get.edge.ids(g, 1:2))
   expect_snapshot_igraph_error(get.edge.ids(g, 1:2, multi = TRUE))
@@ -311,4 +316,99 @@ test_that("get_edge_ids() returns 0 for missing edges when error=FALSE", {
   result <- get_edge_ids(g, c(1, 2), error = FALSE)
   expect_equal(result, 0)
   expect_true(is.numeric(result))
+})
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+test_that("neighbors() tail arguments and legacy positional recovery", {
+  g <- make_ring(10, directed = TRUE)
+
+  # In a directed ring the in- and out-neighborhoods of a vertex differ.
+  expect_equal(as.numeric(neighbors(g, 1, mode = "in")), 10)
+  expect_equal(as.numeric(neighbors(g, 1, mode = "out")), 2)
+
+  lifecycle::expect_deprecated(
+    res <- neighbors(g, 1, "in")
+  )
+  expect_equal(res, neighbors(g, 1, mode = "in"))
+})
+
+test_that("incident() tail arguments and legacy positional recovery", {
+  g <- make_ring(10, directed = TRUE)
+
+  # Vertex 1 of a directed ring has one incoming and one outgoing edge.
+  res_in <- incident(g, 1, mode = "in")
+  expect_s3_class(res_in, "igraph.es")
+  expect_equal(as.numeric(res_in), 10)
+  expect_equal(as.numeric(incident(g, 1, mode = "out")), 1)
+
+  lifecycle::expect_deprecated(
+    res <- incident(g, 1, "in")
+  )
+  expect_equal(res, incident(g, 1, mode = "in"))
+})
+
+test_that("adjacent_vertices() tail arguments and legacy positional recovery", {
+  g <- make_ring(10, directed = TRUE)
+
+  # The in-neighbor of each ring vertex is its predecessor.
+  res_in <- adjacent_vertices(g, c(1, 2), mode = "in")
+  expect_length(res_in, 2)
+  expect_equal(lapply(res_in, as.numeric), list(10, 1))
+
+  lifecycle::expect_deprecated(
+    res <- adjacent_vertices(g, c(1, 2), "in")
+  )
+  expect_equal(res, adjacent_vertices(g, c(1, 2), mode = "in"))
+})
+
+test_that("incident_edges() tail arguments and legacy positional recovery", {
+  g <- make_ring(10, directed = TRUE)
+
+  # Edge i points from vertex i to vertex i + 1,
+  # so the incoming edge of vertex 1 is edge 10.
+  res_in <- incident_edges(g, c(1, 2), mode = "in")
+  expect_length(res_in, 2)
+  expect_equal(lapply(res_in, as.numeric), list(10, 1))
+
+  lifecycle::expect_deprecated(
+    res <- incident_edges(g, c(1, 2), "in")
+  )
+  expect_equal(res, incident_edges(g, c(1, 2), mode = "in"))
+})
+
+test_that("ends() tail arguments and legacy positional recovery", {
+  g <- make_ring(10, directed = TRUE)
+  V(g)$name <- letters[1:10]
+
+  # The endpoint matrix contains vertex names with names = TRUE
+  # and vertex IDs with names = FALSE.
+  expect_equal(
+    ends(g, es = 1:2),
+    matrix(c("a", "b", "b", "c"), nrow = 2)
+  )
+  expect_equal(
+    ends(g, es = 1:2, names = FALSE),
+    matrix(c(1, 2, 2, 3), nrow = 2)
+  )
+
+  lifecycle::expect_deprecated(
+    res <- ends(g, 1:2, FALSE)
+  )
+  expect_identical(res, ends(g, 1:2, names = FALSE))
+})
+
+test_that("get_edge_ids() tail arguments and legacy positional recovery", {
+  g <- make_ring(10, directed = TRUE)
+
+  # The reversed pair is only found when direction is ignored.
+  expect_equal(get_edge_ids(g, c(2, 1)), 0)
+  expect_equal(get_edge_ids(g, c(2, 1), directed = FALSE, error = TRUE), 1)
+  # With error = TRUE a missing edge is an error instead of a zero ID.
+  expect_error(get_edge_ids(g, c(1, 3), error = TRUE), "no such edge")
+
+  lifecycle::expect_deprecated(
+    res <- get_edge_ids(g, c(2, 1), FALSE)
+  )
+  expect_identical(res, get_edge_ids(g, c(2, 1), directed = FALSE))
 })

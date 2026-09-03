@@ -53,11 +53,12 @@
 #' @param gamma Positive scalar. The rate of recovery of an infected
 #'   individual. Formally, this is the rate parameter of an exponential
 #'   distribution.
+#' @inheritParams rlang::args_dots_empty
 #' @param no.sim Integer scalar, the number simulation runs to perform.
 #' @param x A `sir` object, returned by the `sir()` function.
-#' @param middle Logical scalar, whether to return the middle of the time bins,
+#' @param middle Logical, whether to return the middle of the time bins,
 #'   or the boundaries.
-#' @param na.rm Logical scalar, whether to ignore `NA` values.  `sir`
+#' @param na.rm Logical, whether to ignore `NA` values.  `sir`
 #'   objects do not contain any `NA` values currently, so this argument is
 #'   effectively ignored.
 #' @param comp Character scalar. The component to calculate the quantile of.
@@ -108,7 +109,48 @@
 #' plot(sm)
 #' @family processes
 #' @export
-sir <- function(graph, beta, gamma, no.sim = 100) {
+sir <- function(
+  graph,
+  beta,
+  gamma,
+  ...,
+  no.sim = 100
+) {
+  # BEGIN GENERATED ARG_HANDLE: sir, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: sir(graph, beta, gamma, no.sim)
+    .old_signature <- function(no.sim, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn sir}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn sir}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(no.sim)) base::list(no.sim = no.sim)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(no.sim)) "no.sim"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sir} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `sir()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  sir(", base::paste(base::c("graph", "beta", "gamma", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sir(", base::paste(base::c("graph", "beta", "gamma", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   sir_impl(
     graph = graph,
     beta = beta,
