@@ -58,12 +58,25 @@ dir.create(timings_out, recursive = TRUE, showWarnings = FALSE)
 
 # Shard artifacts are named revdep2-results-<shard>-<attempt>; walking them in
 # attempt order makes the later attempt win when a shard was re-run.
+#
+# `download-artifact` only creates the per-artifact subdirectory when it
+# downloads more than one: a run planned into a single shard has its
+# manifest.ndjson land directly in `results_dir`, not in
+# `results_dir/revdep2-results-1-1/`. Run 31930350338 was that run, and the
+# collector found one directory (`results/pkgs`), no manifest in it, and
+# collected nothing -- then carried all 1011 results over from the run it was
+# retrying and committed them as if they were fresh. So the layout is
+# discovered rather than assumed: a shard directory is one that has a manifest.
 attempt_of <- function(path) {
   n <- suppressWarnings(as.integer(sub("^.*-", "", basename(path))))
   if (is.na(n)) 0L else n
 }
-shard_dirs <- list.dirs(results_dir, recursive = FALSE)
+has_manifest <- function(paths) {
+  paths[file.exists(file.path(paths, "manifest.ndjson"))]
+}
+shard_dirs <- has_manifest(list.dirs(results_dir, recursive = FALSE))
 shard_dirs <- shard_dirs[order(vapply(shard_dirs, attempt_of, integer(1)))]
+shard_dirs <- c(has_manifest(results_dir), shard_dirs)
 
 entries <- list()
 take <- function(entry, from) {
@@ -145,7 +158,9 @@ for (shard in plan$shards %||% list()) {
       t_total = p$t_total %||% 0,
       dep_fingerprint = p$dep_fingerprint,
       baseline_planned = isTRUE(p$baseline),
-      baseline_reused = FALSE,
+      # Matches the shard's own entry shape; `baseline_reused` was dropped when
+      # both halves became mandatory, and nothing sets it any more.
+      baseline_agrees = NA,
       result = "missing",
       status = "",
       status_old = "",
@@ -329,6 +344,20 @@ comparison_of <- function(entry) {
       new = list(stdout = message, stderr = "")
     )
     res$version <- entry$version
+    # `pkg_links()` reads the maintainer and the URL out of
+    # `result$new$description`, and `desc::desc(text = NULL)` falls back to the
+    # DESCRIPTION of the working directory -- which here is igraph's own. Left
+    # alone, a package that never got far enough to have a DESCRIPTION was
+    # reported with igraph's repository and igraph's maintainer address next to
+    # its name. A synthetic one carries no maintainer and no URL, so only the
+    # CRAN mirror link is emitted, and `[UNKNOWN]` is avoided as well.
+    res$new$version <- entry$version
+    res$new$description <- sprintf(
+      "Package: %s\nVersion: %s\n",
+      entry$package,
+      entry$version %||% "0"
+    )
+    res$new$cran <- TRUE
     res
   }
   if (!file.exists(old_path) || !file.exists(new_path)) {
@@ -384,22 +413,137 @@ if (has_revdepcheck) {
     ),
     file.path(out_dir, "README.md")
   )
-  writeLines(
-    capture_report(
-      revdepcheck::cloud_report_problems,
-      pkg = ".",
-      results = results
-    ),
-    file.path(out_dir, "problems.md")
+  # `problems.md` and `failures.md` are assembled from one file per package
+  # rather than written whole.
+  #
+  # Two things fall out of that, and the second is why it was done. A diff
+  # names the package that changed instead of a line range in a file thousands
+  # of lines long. And a run only has to touch the packages it actually
+  # checked: a retry of 27 rewrites 27 files and leaves the other 984 exactly
+  # as the repository has them. Writing the file whole made every run restate
+  # the entire record, so a run that learnt nothing about a package could still
+  # rewrite that package's section -- from a shim, if its check output had not
+  # survived the trip.
+  #
+  # Empty is revdepcheck's own wording, so an assembled file with no sections
+  # reads the way the single-call version did.
+  no_problems <- "*Wow, no problems at all. :)*"
+  sections <- list(
+    problems = revdepcheck::cloud_report_problems,
+    failures = revdepcheck::cloud_report_failures
   )
-  writeLines(
-    capture_report(
-      revdepcheck::cloud_report_failures,
-      pkg = ".",
-      results = results
-    ),
-    file.path(out_dir, "failures.md")
-  )
+  for (dir in names(sections)) {
+    dir.create(file.path(out_dir, dir), showWarnings = FALSE)
+  }
+
+  # revdepcheck emits one `# <package> (<version>)` block per package that its
+  # predicate selects, and the sentence above when it selects none. Asking it
+  # about a single package therefore yields exactly that package's section, or
+  # nothing.
+  section_of <- function(fun, package) {
+    lines <- capture_report(fun, pkg = ".", results = results[package])
+    if (identical(trimws(paste(lines, collapse = "")), no_problems)) {
+      NULL
+    } else {
+      lines
+    }
+  }
+
+  # A package whose check errors under *both* versions. `ok` is the verdict --
+  # there is no new problem, which is what this workflow is for -- but the
+  # package is broken, and a section someone put in the report for it is not
+  # made stale by a run that reproduces the breakage on both sides. 79 of run
+  # 31930350338's 984 `ok` results are of this shape; 55 of them never got as
+  # far as a check at all (their dependencies would not install, so both
+  # halves stopped at `checking package dependencies` in a couple of seconds
+  # and agreed), and 24 are real checks of genuinely broken packages.
+  #
+  # This only declines to *delete*; nothing is added. revdepcheck's
+  # `problems.md` is the newly-broken list by design, and widening it to
+  # "still broken" is `all = TRUE` and a different report.
+  # `ok` specifically: a `newly_broken` package can error on both sides too --
+  # archeofrag went 1E to 2E in run 31930350338 -- and that one was checked
+  # here, so its section is this run's to rewrite.
+  still_broken <- function(entry) {
+    e <- function(status) {
+      n <- regmatches(
+        status %||% "",
+        regexpr("^[0-9]+(?=E)", status %||% "", perl = TRUE)
+      )
+      length(n) > 0 && as.integer(n) > 0
+    }
+    identical(entry$result, "ok") && e(entry$status_old) && e(entry$status_new)
+  }
+
+  # What this run is entitled to overwrite. A carried result is one this run
+  # never checked, and `missing` and `deferred` mean the shard did not get to
+  # it -- in all three cases the committed section is better evidence than
+  # anything reconstructible here. The `file.exists` clause makes that a
+  # preference rather than a rule: with no section on disk there is nothing to
+  # protect, so it is written from the comparison like any other.
+  keeps_committed <- function(entry, dir) {
+    (isTRUE(entry$carried) ||
+      entry$result %in% c("missing", "deferred", "depmissing") ||
+      still_broken(entry)) &&
+      file.exists(file.path(out_dir, dir, paste0(entry$package, ".md")))
+  }
+
+  written <- setNames(integer(length(sections)), names(sections))
+  for (entry in entries) {
+    for (dir in names(sections)) {
+      if (keeps_committed(entry, dir)) {
+        next
+      }
+      path <- file.path(out_dir, dir, paste0(entry$package, ".md"))
+      lines <- section_of(sections[[dir]], entry$package)
+      if (is.null(lines)) {
+        unlink(path)
+      } else {
+        writeLines(lines, path)
+        written[[dir]] <- written[[dir]] + 1L
+      }
+    }
+  }
+
+  # Sorted by file name, so the assembled order is the package order rather
+  # than however the shards happened to be cut -- case-insensitively, which is
+  # the order revdepcheck's own single-call version produced and therefore the
+  # order the committed report is already in. Sorting the raw names instead
+  # moves `ECoL`, `GoodFitSBM`, `MetaNet` and `R6causal` to the front of
+  # `problems.md` and rewrites the whole file for nothing.
+  #
+  # `method = "radix"` on a lowercased key rather than plain `sort()`: the
+  # latter collates in the runner's locale, so the committed order would
+  # depend on where the collector happened to run. Radix is C collation, and
+  # C collation of the lowercased name is exactly the case-insensitive order.
+  # The file name is the tie-break, so the sort is total.
+  for (dir in names(sections)) {
+    files <- list.files(
+      file.path(out_dir, dir),
+      pattern = "[.]md$",
+      full.names = TRUE
+    )
+    files <- files[
+      order(tolower(basename(files)), basename(files), method = "radix")
+    ]
+    writeLines(
+      if (length(files) == 0) {
+        no_problems
+      } else {
+        unlist(lapply(files, readLines, warn = FALSE), use.names = FALSE)
+      },
+      file.path(out_dir, paste0(dir, ".md"))
+    )
+    inform(
+      dir,
+      ".md: ",
+      length(files),
+      " package(s), ",
+      written[[dir]],
+      " written by this run"
+    )
+  }
+
   writeLines(
     capture_report(
       revdepcheck::revdep_report_cran,
@@ -431,6 +575,25 @@ if (has_revdepcheck) {
 tally <- function(what) sum(results_tbl == what)
 not_ok <- sum(results_tbl != "ok")
 
+# Whether this report is worth writing over the committed one.
+#
+# The report in `revdep/` is the repository's record, and `packages: broken`
+# reads it back to decide what to re-check. A run in which nothing produced a
+# comparison -- every shard dead, every package `missing`, a bad plan, a driver
+# bug that turned the whole set into `depfail` -- would replace that record with
+# a list of things it never learnt anything about, and there is no way back to
+# it. So the run says out loud whether it compared anything at all, and the
+# workflow gates the commit on that; the artifact is uploaded either way, so
+# nothing is hidden, only the destructive step is skipped.
+compared <- tally("ok") + tally("newly_broken")
+set_output("compared", compared)
+if (compared == 0) {
+  inform(
+    "No package produced a comparison; the report is written and uploaded, ",
+    "but the committed one is left alone"
+  )
+}
+
 # The one sentence a reader needs, before any table.
 headline <- if (tally("newly_broken") > 0) {
   sprintf(
@@ -451,12 +614,22 @@ headline <- if (tally("newly_broken") > 0) {
 counts_df <- data.frame(
   Result = c(
     "ok", "newly broken", "failed to check",
-    "dependencies not installable", "shard error", "deferred",
+    # Its own row, and deliberately not counted as a failure: a check killed
+    # by the clock says nothing about the package, and in the old half it says
+    # nothing about our change either.
+    "timed out, not checked",
+    "dependencies not installable",
+    # `R CMD check` refused to start, in both halves, because something the
+    # package needs is not installed. Its own row rather than a failure: the
+    # package is not broken, it is unknown.
+    "dependencies unavailable to R CMD check",
+    "shard error", "deferred",
     "no result from its shard"
   ),
   Packages = c(
     tally("ok"), tally("newly_broken"), tally("failed"),
-    tally("depfail"), tally("error"), tally("deferred"),
+    tally("timeout"),
+    tally("depfail"), tally("depmissing"), tally("error"), tally("deferred"),
     tally("missing")
   )
 )
@@ -484,6 +657,7 @@ reason_of <- function(e) {
     e$result,
     deferred = "the shard hit its deadline before this package was checked",
     depfail = "dependencies could not be installed",
+    depmissing = "R CMD check stopped at `checking package dependencies` under both versions",
     missing = "its shard uploaded no results; the job did not finish",
     sprintf("no reason recorded (result `%s`)", e$result)
   )
@@ -516,8 +690,11 @@ readme <- drop_section(readme, "^## Failed to check")
 # own URL, where `problems.md#pkg` resolves to /actions/runs/problems.md and
 # 404s. The package's CRAN page is the reachable equivalent; where the details
 # actually live is said once, below.
+# Only where the link text is a package name -- the anchor form revdepcheck
+# emits for a package. A bare `[failures.md](failures.md)` is a link to the
+# report's own file, and rewriting it to `package=failures.md` was nonsense.
 readme <- gsub(
-  "\\[([^][]+)\\]\\([^)]*[.]md(#[^)]*)?\\)",
+  "\\[([a-zA-Z][a-zA-Z0-9.]*)\\]\\([^)]*[.]md(#[^)]*)?\\)",
   "[\\1](https://cran.r-project.org/package=\\1)",
   readme
 )
@@ -576,9 +753,11 @@ append_summary(c(
     # From the package rows, not the shard rows: a shard whose job died leaves
     # no timing of its own, but the checks it did finish are still in the
     # manifest the collector just merged.
+    # `seconds` is the pair's wall clock, not one half's, so it is not
+    # multiplied by `checks` -- the two ran at the same time.
     check_minutes <- sum(vapply(
       package_rows,
-      function(p) p$seconds * p$checks / 60,
+      function(p) p$seconds / 60,
       numeric(1)
     ))
     job <- vapply(

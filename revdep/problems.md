@@ -1,118 +1,9 @@
-# archeofrag (1.2.4)
-
-* GitHub: <https://github.com/sebastien-plutniak/archeofrag>
-* Email: <mailto:sebastien.plutniak@posteo.net>
-* GitHub mirror: <https://github.com/cran/archeofrag>
-
-Run `revdepcheck::cloud_details(, "archeofrag")` for more info
-
-## Newly broken
-
-*   checking tests ... ERROR
-     ```
-     ...
-                                    H1 != H2? p.value Obs. value/H1 Obs. value/H2
-       edges                            FALSE     0.4         lower         lower
-       balance                          FALSE    0.38        within        within
-       components.balance               FALSE    0.39        within        within
-       disturbance                      FALSE    0.36        within        within
-       admixture                        FALSE    0.08        within        within
-       cohesion1                         TRUE    0.01        within        higher
-       cohesion2                         TRUE       0        within         lower
-       edge.weights.sum                 FALSE    0.57         lower         lower
-       edge.weights.median              FALSE    0.25         lower         lower
-       edge.weights.median.abs.dev.     FALSE    0.24         lower         lower
-       [ FAIL 1 | WARN 0 | SKIP 0 | PASS 84 ]
-       
-       ══ Failed tests ════════════════════════════════════════════════════════════════
-       ── Failure ('test-frag.edges.weighting.R:43:3'): weighting with morphometric and spatial parameters ──
-       Expected `sum(igraph::E(g)$weight)` to equal 64.95129.
-       Differences:
-         `actual`: 65.014
-       `expected`: 64.951
-       
-       
-       [ FAIL 1 | WARN 0 | SKIP 0 | PASS 84 ]
-       Error:
-       ! Test failures.
-       Execution halted
-     ```
-
-# bnstruct (1.0.15)
-
-* Email: <mailto:afranzin@ulb.ac.be>
-* GitHub mirror: <https://github.com/cran/bnstruct>
-
-Run `revdepcheck::cloud_details(, "bnstruct")` for more info
-
-## Newly broken
-
-*   checking tests ... ERROR
-     ```
-     ...
-       
-       The following object is masked from 'package:base':
-       
-           union
-       
-       Saving _problems/test_em-8.R
-       [ FAIL 1 | WARN 5 | SKIP 1 | PASS 1 ]
-       
-       ══ Skipped tests (1) ═══════════════════════════════════════════════════════════
-       • On CRAN (1): 'test_em_contdata.R:3:1'
-       
-       ══ Failed tests ════════════════════════════════════════════════════════════════
-       ── Error ('test_em.R:8:1'): (code run outside of `test_that()`) ────────────────
-       Error in `if (!is.na(clique) && !is.na(parents.list[clique])) {     out <- compute.message(potentials[[process.order[clique]]], dimensions.contained[[process.order[clique]]], cliques[[process.order[clique]]], cliques[[parents.list[clique]]], node.sizes)     msg.pots[[process.order[clique]]] <- out$potential     msg.vars[[process.order[clique]]] <- out$vars     bk <- potentials[[parents.list[clique]]]     bkd <- dimensions.contained[[parents.list[clique]]]     out <- mult(potentials[[parents.list[clique]]], dimensions.contained[[parents.list[clique]]], msg.pots[[process.order[clique]]], msg.vars[[process.order[clique]]], node.sizes)     potentials[[parents.list[clique]]] <- out$potential     dimensions.contained[[parents.list[clique]]] <- out$vars }`: missing value where TRUE/FALSE needed
-       Backtrace:
-           ▆
-        1. ├─bnstruct::em(inf.engine, dataset) at test_em.R:8:1
-        2. └─bnstruct::em(inf.engine, dataset)
-        3.   ├─bnstruct::belief.propagation(eng)
-        4.   └─bnstruct::belief.propagation(eng)
-       
-       [ FAIL 1 | WARN 5 | SKIP 1 | PASS 1 ]
-       Error:
-       ! Test failures.
-       Execution halted
-     ```
-
-## In both
-
-*   checking re-building of vignette outputs ... WARNING
-     ```
-     Error(s) in re-building vignettes:
-       ...
-     --- re-building ‘bnstruct.Rnw’ using Sweave
-     Error: processing vignette 'bnstruct.Rnw' failed with diagnostics:
-     Running 'texi2dvi' on 'bnstruct.tex' failed.
-     LaTeX errors:
-     ! LaTeX Error: File `pdfpages.sty' not found.
-     
-     Type X to quit or <RETURN> to proceed,
-     or enter new name. (Default extension: sty)
-     
-     ! Emergency stop.
-     <read *> 
-              
-     l.6 ^^M
-            
-     !  ==> Fatal error occurred, no output PDF file produced!
-     --- failed re-building ‘bnstruct.Rnw’
-     
-     SUMMARY: processing the following file failed:
-       ‘bnstruct.Rnw’
-     
-     Error: Vignette re-building failed.
-     Execution halted
-     ```
-
 # Boptbd (1.0.7)
 
 * Email: <mailto:diboobayu@gmail.com>
 * GitHub mirror: <https://github.com/cran/Boptbd>
 
-Run `revdepcheck::cloud_details(, "Boptbd")` for more info
+Run `revdepcheck::revdep_details(, "Boptbd")` for more info
 
 ## Newly broken
 
@@ -151,7 +42,7 @@ Run `revdepcheck::cloud_details(, "Boptbd")` for more info
 * Email: <mailto:altayscience@gmail.com>
 * GitHub mirror: <https://github.com/cran/c3net>
 
-Run `revdepcheck::cloud_details(, "c3net")` for more info
+Run `revdepcheck::revdep_details(, "c3net")` for more info
 
 ## Newly broken
 
@@ -191,7 +82,7 @@ Run `revdepcheck::cloud_details(, "c3net")` for more info
 * Email: <mailto:santtuth@gmail.com>
 * GitHub mirror: <https://github.com/cran/cfid>
 
-Run `revdepcheck::cloud_details(, "cfid")` for more info
+Run `revdepcheck::revdep_details(, "cfid")` for more info
 
 ## Newly broken
 
@@ -230,7 +121,7 @@ Run `revdepcheck::cloud_details(, "cfid")` for more info
 * Email: <mailto:andreas.muehling@tum.de>
 * GitHub mirror: <https://github.com/cran/comato>
 
-Run `revdepcheck::cloud_details(, "comato")` for more info
+Run `revdepcheck::revdep_details(, "comato")` for more info
 
 ## Newly broken
 
@@ -264,13 +155,33 @@ Run `revdepcheck::cloud_details(, "comato")` for more info
      Execution halted
      ```
 
+## In both
+
+*   checking S3 generic/method consistency ... NOTE
+     ```
+     Mismatches for apparent methods not registered:
+     min:
+       function(..., na.rm)
+     min.distance:
+       function(centers, com, layouts)
+     See section ‘Registering S3 methods’ in the ‘Writing R Extensions’
+     manual.
+     ```
+
+*   checking R code for possible problems ... NOTE
+     ```
+     Found if() conditions comparing class() to string:
+     File ‘comato/R/concept_maps.r’: if (class(m) != "conceptmap") ...
+     Use inherits() (or maybe is()) instead.
+     ```
+
 # cranly (0.6.0)
 
 * GitHub: <https://github.com/ikosmidis/cranly>
 * Email: <mailto:ioannis.kosmidis@warwick.ac.uk>
 * GitHub mirror: <https://github.com/cran/cranly>
 
-Run `revdepcheck::cloud_details(, "cranly")` for more info
+Run `revdepcheck::revdep_details(, "cranly")` for more info
 
 ## Newly broken
 
@@ -310,7 +221,7 @@ Run `revdepcheck::cloud_details(, "cranly")` for more info
 * Email: <mailto:a.arkilanian@gmail.com>
 * GitHub mirror: <https://github.com/cran/dci>
 
-Run `revdepcheck::cloud_details(, "dci")` for more info
+Run `revdepcheck::revdep_details(, "dci")` for more info
 
 ## Newly broken
 
@@ -409,7 +320,7 @@ Run `revdepcheck::cloud_details(, "dci")` for more info
 * Email: <mailto:handcock@stat.ucla.edu>
 * GitHub mirror: <https://github.com/cran/degreenet>
 
-Run `revdepcheck::cloud_details(, "degreenet")` for more info
+Run `revdepcheck::revdep_details(, "degreenet")` for more info
 
 ## Newly broken
 
@@ -418,6 +329,7 @@ Run `revdepcheck::cloud_details(, "degreenet")` for more info
      Running examples in ‘degreenet-Ex.R’ failed
      The error most likely occurred in:
      
+     > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
      > ### Name: reedmolloy
      > ### Title: Generate a undirected network with a given sequence of degrees
      > ### Aliases: reedmolloy
@@ -441,13 +353,21 @@ Run `revdepcheck::cloud_details(, "degreenet")` for more info
      Execution halted
      ```
 
+## In both
+
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
+     ```
+
 # ECoL (0.4.4)
 
 * GitHub: <https://github.com/lpfgarcia/ECoL>
 * Email: <mailto:luis.garcia@unb.br>
 * GitHub mirror: <https://github.com/cran/ECoL>
 
-Run `revdepcheck::cloud_details(, "ECoL")` for more info
+Run `revdepcheck::revdep_details(, "ECoL")` for more info
 
 ## Newly broken
 
@@ -511,52 +431,12 @@ Run `revdepcheck::cloud_details(, "ECoL")` for more info
        Execution halted
      ```
 
-# gemtc (1.1-1)
-
-* GitHub: <https://github.com/gertvv/gemtc>
-* Email: <mailto:gert@gertvv.nl>
-* GitHub mirror: <https://github.com/cran/gemtc>
-
-Run `revdepcheck::cloud_details(, "gemtc")` for more info
-
-## Newly broken
-
-*   checking tests ... ERROR
-     ```
-     ...
-     Complete output:
-       > library(testthat)
-       > test_check('gemtc', filter="unit")
-       Loading required package: gemtc
-       Loading required package: coda
-       Saving _problems/test-unit-relative.effect-65.R
-       [ FAIL 1 | WARN 11 | SKIP 0 | PASS 377 ]
-       
-       ══ Failed tests ════════════════════════════════════════════════════════════════
-       ── Failure ('test-unit-relative.effect.R:65:3'): tree.relative.effect handles a more complex tree ──
-       Expected `x` to be equivalent to `expected`.
-       3/7 mismatches (average diff: 1.33)
-       [3]  0 - -1 ==  1
-       [5]  1 -  0 ==  1
-       [6] -1 -  1 == -2
-       Backtrace:
-           ▆
-        1. └─testthat::expect_that(...) at test-unit-relative.effect.R:65:3
-        2.   └─testthat (local) condition(object)
-        3.     └─testthat::expect_equivalent(x, expected, expected.label = label)
-       
-       [ FAIL 1 | WARN 11 | SKIP 0 | PASS 377 ]
-       Error:
-       ! Test failures.
-       Execution halted
-     ```
-
-# ggm (2.5.2)
+# ggm (2.5.4)
 
 * Email: <mailto:giovanni.marchetti@unifi.it>
 * GitHub mirror: <https://github.com/cran/ggm>
 
-Run `revdepcheck::cloud_details(, "ggm")` for more info
+Run `revdepcheck::revdep_details(, "ggm")` for more info
 
 ## Newly broken
 
@@ -596,7 +476,7 @@ Run `revdepcheck::cloud_details(, "ggm")` for more info
 * Email: <mailto:thomasp85@gmail.com>
 * GitHub mirror: <https://github.com/cran/ggraph>
 
-Run `revdepcheck::cloud_details(, "ggraph")` for more info
+Run `revdepcheck::revdep_details(, "ggraph")` for more info
 
 ## Newly broken
 
@@ -660,41 +540,49 @@ Run `revdepcheck::cloud_details(, "ggraph")` for more info
      Execution halted
      ```
 
-# glyrepr (0.14.0)
+## In both
+
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
+     ```
+
+# glyrepr (1.0.0)
 
 * GitHub: <https://github.com/glycoverse/glyrepr>
 * Email: <mailto:23110220018@m.fudan.edu.cn>
 * GitHub mirror: <https://github.com/cran/glyrepr>
 
-Run `revdepcheck::cloud_details(, "glyrepr")` for more info
+Run `revdepcheck::revdep_details(, "glyrepr")` for more info
 
 ## Newly broken
 
 *   checking tests ... ERROR
      ```
      ...
-       [ FAIL 1 | WARN 0 | SKIP 21 | PASS 1300 ]
-       
-       ══ Skipped tests (21) ══════════════════════════════════════════════════════════
-       • On CRAN (21): 'test-composition.R:298:1', 'test-composition.R:325:1',
-         'test-example-glycans.R:1:1', 'test-example-glycans.R:9:1',
-         'test-example-glycans.R:16:1', 'test-example-glycans.R:23:1',
-         'test-example-glycans.R:30:1', 'test-low-level-structure.R:40:1',
-         'test-low-level-structure.R:67:1', 'test-low-level-structure.R:81:1',
-         'test-low-level-structure.R:95:1', 'test-structure-level.R:71:1',
-         'test-structure-level.R:152:1', 'test-structure.R:495:1',
-         'test-structure.R:514:1', 'test-structure.R:563:1', 'test-structure.R:573:1',
-         'test-structure.R:582:1', 'test-structure.R:642:1', 'test-structure.R:649:1',
-         'test-structure.R:657:1'
+         'test-floating-parts.R:480:1', 'test-floating-substituents.R:94:1',
+         'test-floating-substituents.R:133:1', 'test-floating-substituents.R:173:1',
+         'test-floating-validation.R:37:1', 'test-floating-validation.R:51:1',
+         'test-floating-validation.R:65:1', 'test-floating-validation.R:79:1',
+         'test-floating-validation.R:109:1', 'test-floating-validation.R:139:1',
+         'test-floating-validation.R:159:1', 'test-floating-validation.R:203:1',
+         'test-low-level-structure.R:46:1', 'test-low-level-structure.R:82:1',
+         'test-low-level-structure.R:159:1', 'test-low-level-structure.R:222:1',
+         'test-low-level-structure.R:236:1', 'test-smap.R:1041:1',
+         'test-structure-tables.R:497:1', 'test-structure.R:520:1',
+         'test-structure.R:539:1', 'test-structure.R:588:1', 'test-structure.R:608:1',
+         'test-structure.R:668:1', 'test-structure.R:675:1', 'test-structure.R:683:1',
+         'test-structure.R:724:1', 'test-structure.R:779:1'
        
        ══ Failed tests ════════════════════════════════════════════════════════════════
-       ── Error ('test-structure-to-iupac.R:95:3'): structure_to_iupac handles complex branched structures ──
+       ── Error ('test-structure-to-iupac.R:124:3'): structure_to_iupac handles complex branched structures ──
        <purrr_error_indexed/rlang_error/error/condition>
        Error in `purrr::map(valid_graphs, function(graph) {     checkmate::assert_class(graph, "igraph")     graph %>% validate_glycan_graph() %>% canonicalize_glycan_graph() })`: i In index: 1.
        Caused by error in `validate_glycan_graph()`:
        ! Duplicated linkage positions.
        
-       [ FAIL 1 | WARN 0 | SKIP 21 | PASS 1300 ]
+       [ FAIL 1 | WARN 0 | SKIP 46 | PASS 1885 ]
        Error:
        ! Test failures.
        Execution halted
@@ -706,7 +594,7 @@ Run `revdepcheck::cloud_details(, "glyrepr")` for more info
 * Email: <mailto:sohamghosh@tamu.edu>
 * GitHub mirror: <https://github.com/cran/GoodFitSBM>
 
-Run `revdepcheck::cloud_details(, "GoodFitSBM")` for more info
+Run `revdepcheck::revdep_details(, "GoodFitSBM")` for more info
 
 ## Newly broken
 
@@ -740,81 +628,13 @@ Run `revdepcheck::cloud_details(, "GoodFitSBM")` for more info
      Execution halted
      ```
 
-# lagdynamics (0.32)
-
-* GitHub: <https://github.com/mohsaqr/lagdynamics>
-* Email: <mailto:saqr@saqr.me>
-* GitHub mirror: <https://github.com/cran/lagdynamics>
-
-Run `revdepcheck::cloud_details(, "lagdynamics")` for more info
-
-## Newly broken
-
-*   checking examples ... ERROR
-     ```
-     Running examples in ‘lagdynamics-Ex.R’ failed
-     The error most likely occurred in:
-     
-     > ### Name: lsa_to_tna
-     > ### Title: Convert an lsa Fit to a tna Network
-     > ### Aliases: lsa_to_tna lsa_to_tna.lsa lsa_to_tna.lsa_group
-     > 
-     > ### ** Examples
-     > 
-     > ## Don't show: 
-     > if (requireNamespace("tna", quietly = TRUE)) withAutoprint({ # examplesIf
-     + ## End(Don't show)
-     + fit <- lsa(engagement)
-     + net <- lsa_to_tna(fit, weights = "prob")
-     + tna::centralities(net)
-     + ## Don't show: 
-     + }) # examplesIf
-     > fit <- lsa(engagement)
-     > net <- lsa_to_tna(fit, weights = "prob")
-     > tna::centralities(net)
-     Error in igraph::graph_from_adjacency_matrix(adjmatrix = x, mode = mode,  : 
-       argument is missing, with no default
-     Calls: withAutoprint ... as.igraph.matrix -> <Anonymous> -> migrate_recover_args
-     Execution halted
-     ```
-
-*   checking re-building of vignette outputs ... ERROR
-     ```
-     ...
-     
-     Error: processing vignette 'interop.Rmd' failed with diagnostics:
-     argument is missing, with no default
-     --- failed re-building ‘interop.Rmd’
-     
-     --- re-building ‘intro.Rmd’ using rmarkdown
-     --- finished re-building ‘intro.Rmd’
-     
-     --- re-building ‘lag-transition-networks.Rmd’ using rmarkdown
-     --- finished re-building ‘lag-transition-networks.Rmd’
-     
-     --- re-building ‘lagdynamics.Rmd’ using rmarkdown
-     --- finished re-building ‘lagdynamics.Rmd’
-     
-     --- re-building ‘plotting.Rmd’ using rmarkdown
-     --- finished re-building ‘plotting.Rmd’
-     
-     --- re-building ‘workflow.Rmd’ using rmarkdown
-     --- finished re-building ‘workflow.Rmd’
-     
-     SUMMARY: processing the following file failed:
-       ‘interop.Rmd’
-     
-     Error: Vignette re-building failed.
-     Execution halted
-     ```
-
 # manynet (2.2.3)
 
 * GitHub: <https://github.com/stocnet/manynet>
 * Email: <mailto:james.hollway@graduateinstitute.ch>
 * GitHub mirror: <https://github.com/cran/manynet>
 
-Run `revdepcheck::cloud_details(, "manynet")` for more info
+Run `revdepcheck::revdep_details(, "manynet")` for more info
 
 ## Newly broken
 
@@ -842,7 +662,7 @@ Run `revdepcheck::cloud_details(, "manynet")` for more info
         4. └─manynet:::check_tute_functions(tute)
         5.   └─testthat::expect_null(...) at ./helper-manynet.R:225:5
        
-       [ FAIL 2 | WARN 644 | SKIP 78 | PASS 3303 ]
+       [ FAIL 2 | WARN 728 | SKIP 78 | PASS 3303 ]
        Error:
        ! Test failures.
        Execution halted
@@ -854,7 +674,7 @@ Run `revdepcheck::cloud_details(, "manynet")` for more info
 * Email: <mailto:bfzede@gmail.com>
 * GitHub mirror: <https://github.com/cran/MetaNet>
 
-Run `revdepcheck::cloud_details(, "MetaNet")` for more info
+Run `revdepcheck::revdep_details(, "MetaNet")` for more info
 
 ## Newly broken
 
@@ -863,6 +683,7 @@ Run `revdepcheck::cloud_details(, "MetaNet")` for more info
      Running examples in ‘MetaNet-Ex.R’ failed
      The error most likely occurred in:
      
+     > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
      > ### Name: zp_analyse
      > ### Title: Zi-Pi calculate
      > ### Aliases: zp_analyse zp_plot
@@ -883,7 +704,7 @@ Run `revdepcheck::cloud_details(, "MetaNet")` for more info
 * Email: <mailto:james.hollway@graduateinstitute.ch>
 * GitHub mirror: <https://github.com/cran/migraph>
 
-Run `revdepcheck::cloud_details(, "migraph")` for more info
+Run `revdepcheck::revdep_details(, "migraph")` for more info
 
 ## Newly broken
 
@@ -917,53 +738,13 @@ Run `revdepcheck::cloud_details(, "migraph")` for more info
        Execution halted
      ```
 
-# modelbpp (0.4.0)
-
-* GitHub: <https://github.com/sfcheung/modelbpp>
-* Email: <mailto:shufai.cheung@gmail.com>
-* GitHub mirror: <https://github.com/cran/modelbpp>
-
-Run `revdepcheck::cloud_details(, "modelbpp")` for more info
-
-## Newly broken
-
-*   checking tests ... ERROR
-     ```
-     ...
-       test_cross_add.R..............    7 tests OK 
-       test_cross_add.R..............    8 tests OK 
-       test_cross_add.R..............    8 tests OK 
-       test_cross_add.R..............    9 tests OK 
-       test_cross_add.R..............   10 tests OK 
-       test_cross_add.R..............   10 tests OK 
-       test_cross_add.R..............   11 tests OK 6.6s
-       
-       test_cross_drop.R.............    0 tests    
-       test_cross_drop.R.............    0 tests    
-       test_cross_drop.R.............    0 tests    
-       test_cross_drop.R.............    0 tests    
-       test_cross_drop.R.............    1 tests OK 
-       test_cross_drop.R.............    1 tests OK 
-       test_cross_drop.R.............    2 tests OK 
-       test_cross_drop.R.............    3 tests OK 
-       test_cross_drop.R.............    3 tests OK 
-       test_cross_drop.R.............    4 tests OK 2.0s
-       
-       test_exclude_xy_indicators.R..    0 tests    
-       test_exclude_xy_indicators.R..    0 tests    
-       test_exclude_xy_indicators.R..    0 tests    
-       test_exclude_xy_indicators.R..    0 tests    Error in FUN(X[[i]], ...) : argument is missing, with no default
-       Calls: <Anonymous> ... <Anonymous> -> lapply -> FUN -> migrate_recover_args
-       Execution halted
-     ```
-
-# nat (1.8.25)
+# nat (1.8.26)
 
 * GitHub: <https://github.com/natverse/nat>
 * Email: <mailto:jefferis@gmail.com>
 * GitHub mirror: <https://github.com/cran/nat>
 
-Run `revdepcheck::cloud_details(, "nat")` for more info
+Run `revdepcheck::revdep_details(, "nat")` for more info
 
 ## Newly broken
 
@@ -1057,13 +838,21 @@ Run `revdepcheck::cloud_details(, "nat")` for more info
      Execution halted
      ```
 
+## Newly fixed
+
+*   checking for detritus in the temp directory ... NOTE
+     ```
+     Found the following files/directories:
+       ‘org.chromium.Chromium.x9JSet’
+     ```
+
 # netrics (0.4.0)
 
 * GitHub: <https://github.com/stocnet/netrics>
 * Email: <mailto:james.hollway@graduateinstitute.ch>
 * GitHub mirror: <https://github.com/cran/netrics>
 
-Run `revdepcheck::cloud_details(, "netrics")` for more info
+Run `revdepcheck::revdep_details(, "netrics")` for more info
 
 ## Newly broken
 
@@ -1097,43 +886,12 @@ Run `revdepcheck::cloud_details(, "netrics")` for more info
        Execution halted
      ```
 
-# NetSci (1.0.1)
-
-* Email: <mailto:deisy.gysi@ufpr.br>
-* GitHub mirror: <https://github.com/cran/NetSci>
-
-Run `revdepcheck::cloud_details(, "NetSci")` for more info
-
-## Newly broken
-
-*   checking examples ... ERROR
-     ```
-     Running examples in ‘NetSci-Ex.R’ failed
-     The error most likely occurred in:
-     
-     > ### Name: Jaccard
-     > ### Title: Jaccard
-     > ### Aliases: Jaccard
-     > 
-     > ### ** Examples
-     > 
-     > set.seed(123)
-     > Data = data.frame(Class = sample(c("X", "Y", "Z"), replace = TRUE, size = 50),
-     +                   Element = sample(LETTERS[1:15], replace = TRUE, size = 50))
-     > Data = unique(Data)
-     > Jaccard(Data)
-     Error in igraph::graph_from_data_frame(., , directed = F) : 
-       argument is missing, with no default
-     Calls: Jaccard -> %>% -> <Anonymous> -> migrate_recover_args
-     Execution halted
-     ```
-
 # optbdmaeAT (1.0.2)
 
 * Email: <mailto:diboobayu@gmail.com>
 * GitHub mirror: <https://github.com/cran/optbdmaeAT>
 
-Run `revdepcheck::cloud_details(, "optbdmaeAT")` for more info
+Run `revdepcheck::revdep_details(, "optbdmaeAT")` for more info
 
 ## Newly broken
 
@@ -1172,7 +930,7 @@ Run `revdepcheck::cloud_details(, "optbdmaeAT")` for more info
 * Email: <mailto:diboobayu@gmail.com>
 * GitHub mirror: <https://github.com/cran/optrcdmaeAT>
 
-Run `revdepcheck::cloud_details(, "optrcdmaeAT")` for more info
+Run `revdepcheck::revdep_details(, "optrcdmaeAT")` for more info
 
 ## Newly broken
 
@@ -1211,7 +969,7 @@ Run `revdepcheck::cloud_details(, "optrcdmaeAT")` for more info
 * Email: <mailto:juha.karvanen@iki.fi>
 * GitHub mirror: <https://github.com/cran/R6causal>
 
-Run `revdepcheck::cloud_details(, "R6causal")` for more info
+Run `revdepcheck::revdep_details(, "R6causal")` for more info
 
 ## Newly broken
 
@@ -1221,7 +979,30 @@ Run `revdepcheck::cloud_details(, "R6causal")` for more info
        Warning: `set.edge.attribute()` was deprecated in igraph 2.0.0.
        Warning: `induced.subgraph()` was deprecated in igraph 2.0.0.
        Warning: `get.vertex.attribute()` was deprecated in igraph 2.0.0.
-     See ‘/tmp/workdir/R6causal/new/R6causal.Rcheck/00install.out’ for details.
+     See ‘<lib>/R6causal.Rcheck/00install.out’ for details.
+     ```
+
+## In both
+
+*   checking re-building of vignette outputs ... WARNING
+     ```
+     Error(s) in re-building vignettes:
+       ...
+     --- re-building ‘using_R6causal.Rmd’ using rmarkdown
+     ! LaTeX Error: File `lmodern.sty' not found.
+     
+     ! Emergency stop.
+     <read *> 
+     
+     Error: processing vignette 'using_R6causal.Rmd' failed with diagnostics:
+     LaTeX failed to compile <lib>/R6causal.Rcheck/vign_test/R6causal/vignettes/using_R6causal.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips. See using_R6causal.log for more info.
+     --- failed re-building ‘using_R6causal.Rmd’
+     
+     SUMMARY: processing the following file failed:
+       ‘using_R6causal.Rmd’
+     
+     Error: Vignette re-building failed.
+     Execution halted
      ```
 
 # scistreer (1.2.1)
@@ -1230,7 +1011,7 @@ Run `revdepcheck::cloud_details(, "R6causal")` for more info
 * Email: <mailto:tgaoteng@gmail.com>
 * GitHub mirror: <https://github.com/cran/scistreer>
 
-Run `revdepcheck::cloud_details(, "scistreer")` for more info
+Run `revdepcheck::revdep_details(, "scistreer")` for more info
 
 ## Newly broken
 
@@ -1266,10 +1047,24 @@ Run `revdepcheck::cloud_details(, "scistreer")` for more info
 
 ## In both
 
+*   checking whether package ‘scistreer’ can be installed ... WARNING
+     ```
+     Found the following significant warnings:
+       'Rcpp:::LdFlags' has not been needed since 2013 (!!) and may get removed in 2027. Please update your 'Makevars'.
+       'RcppLdFlags' has not been needed since 2013 (!!) and may get removed in 2027. Please update your 'Makevars'.
+     See ‘<lib>/scistreer.Rcheck/00install.out’ for details.
+     ```
+
 *   checking dependencies in R code ... NOTE
      ```
      Namespace in Imports field not imported from: ‘Rcpp’
        All declared Imports should be used.
+     ```
+
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
      ```
 
 # SEMgraph (1.2.4)
@@ -1278,7 +1073,7 @@ Run `revdepcheck::cloud_details(, "scistreer")` for more info
 * Email: <mailto:barbara.tarantino01@universitadipavia.it>
 * GitHub mirror: <https://github.com/cran/SEMgraph>
 
-Run `revdepcheck::cloud_details(, "SEMgraph")` for more info
+Run `revdepcheck::revdep_details(, "SEMgraph")` for more info
 
 ## Newly broken
 
@@ -1318,7 +1113,7 @@ Run `revdepcheck::cloud_details(, "SEMgraph")` for more info
 * Email: <mailto:erick.chaconmontalvan@wur.nl>
 * GitHub mirror: <https://github.com/cran/sfclust>
 
-Run `revdepcheck::cloud_details(, "sfclust")` for more info
+Run `revdepcheck::revdep_details(, "sfclust")` for more info
 
 ## Newly broken
 
@@ -1346,7 +1141,7 @@ Run `revdepcheck::cloud_details(, "sfclust")` for more info
        `expected@x`: 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00            ...
        
        
-       [ FAIL 11 | WARN 0 | SKIP 0 | PASS 222 ]
+       [ FAIL 11 | WARN 0 | SKIP 8 | PASS 119 ]
        Error:
        ! Test failures.
        Execution halted
@@ -1358,7 +1153,7 @@ Run `revdepcheck::cloud_details(, "sfclust")` for more info
 * Email: <mailto:thomasp85@gmail.com>
 * GitHub mirror: <https://github.com/cran/tidygraph>
 
-Run `revdepcheck::cloud_details(, "tidygraph")` for more info
+Run `revdepcheck::revdep_details(, "tidygraph")` for more info
 
 ## Newly broken
 
@@ -1432,94 +1227,10 @@ Run `revdepcheck::cloud_details(, "tidygraph")` for more info
          ‘iterate.Rd’ ‘random_walk_rank.Rd’
      ```
 
-# tna (1.2.3)
-
-* GitHub: <https://github.com/sonsoleslp/tna>
-* Email: <mailto:sonsoles.lopez@uef.fi>
-* GitHub mirror: <https://github.com/cran/tna>
-
-Run `revdepcheck::cloud_details(, "tna")` for more info
-
-## Newly broken
-
-*   checking examples ... ERROR
+*   checking compilation flags used ... NOTE
      ```
-     Running examples in ‘tna-Ex.R’ failed
-     The error most likely occurred in:
-     
-     > ### Name: bootstrap_cliques
-     > ### Title: Bootstrap Cliques of Transition Networks from Sequence Data
-     > ### Aliases: bootstrap_cliques bootstrap_cliques.tna
-     > 
-     > ### ** Examples
-     > 
-     > model <- tna(group_regulation)
-     > # Small number of iterations for CRAN
-     > boot_cliq <- bootstrap_cliques(model, size = 2, iter = 10)
-     Error in igraph::graph_from_adjacency_matrix(adjmatrix = x, mode = mode,  : 
-       argument is missing, with no default
-     Calls: bootstrap_cliques ... as.igraph.matrix -> <Anonymous> -> migrate_recover_args
-     Execution halted
-     ```
-
-*   checking tests ... ERROR
-     ```
-     ...
-         8.           ├─igraph::as.igraph(x)
-         9.           └─tna:::as.igraph.matrix(x)
-        10.             └─igraph::graph_from_adjacency_matrix(...)
-        11.               └─igraph:::migrate_recover_args(...)
-       ── Error ('test-print.R:196:3'): comparison results with centralities can be printed ──
-       <evalError/missingArgError/error/condition>
-       Error in `igraph::graph_from_adjacency_matrix(adjmatrix = x, mode = mode, weighted = TRUE, )`: argument is missing, with no default
-       Backtrace:
-            ▆
-         1. ├─tna::compare(model_x, model_y, measures = c("InStrength", "OutStrength")) at test-print.R:196:3
-         2. └─tna:::compare.tna(...)
-         3.   └─tna:::compare_(...)
-         4.     ├─tidyr::pivot_longer(...)
-         5.     ├─tna::centralities(x, measures = measures)
-         6.     └─tna:::centralities.matrix(x, measures = measures)
-         7.       └─tna:::centralities_(x, loops, normalize, invert, measures)
-         8.         ├─igraph::as.igraph(x)
-         9.         └─tna:::as.igraph.matrix(x)
-        10.           └─igraph::graph_from_adjacency_matrix(...)
-        11.             └─igraph:::migrate_recover_args(...)
-       
-       [ FAIL 31 | WARN 0 | SKIP 0 | PASS 521 ]
-       Error:
-       ! Test failures.
-       Execution halted
-     ```
-
-*   checking re-building of vignette outputs ... ERROR
-     ```
-     ...
-     <error/rlang_error>
-     Error in `igraph::graph_from_adjacency_matrix()`:
-     ! argument is missing, with no default
-     ---
-     Backtrace:
-         ▆
-      1. ├─tna::centralities(...)
-      2. └─tna:::centralities.tna(...)
-      3.   └─tna:::centralities_(...)
-      4.     ├─igraph::as.igraph(x)
-      5.     └─tna:::as.igraph.matrix(x)
-      6.       └─igraph::graph_from_adjacency_matrix(...)
-      7.         └─igraph:::migrate_recover_args(...)
-     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     
-     Error: processing vignette 'tna.Rmd' failed with diagnostics:
-     argument is missing, with no default
-     --- failed re-building ‘tna.Rmd’
-     
-     SUMMARY: processing the following files failed:
-       ‘communities_and_cliques.Rmd’ ‘complete_tutorial.Rmd’
-       ‘grouped_sequences.Rmd’ ‘tna.Rmd’
-     
-     Error: Vignette re-building failed.
-     Execution halted
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
      ```
 
 # vkR (0.2)
@@ -1528,7 +1239,7 @@ Run `revdepcheck::cloud_details(, "tna")` for more info
 * Email: <mailto:dementiy@yandex.ru>
 * GitHub mirror: <https://github.com/cran/vkR>
 
-Run `revdepcheck::cloud_details(, "vkR")` for more info
+Run `revdepcheck::revdep_details(, "vkR")` for more info
 
 ## Newly broken
 

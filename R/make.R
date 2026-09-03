@@ -1914,7 +1914,14 @@ graph_from_literal_i <- function(mf) {
   ids <- seq(along.with = v)
   names(ids) <- v
   res <- make_graph(unname(ids[edges]), n = length(v), directed = directed)
-  if (simplify) {
+  # `!is_simple()` is what keeps the formula's edge order when there is nothing
+  # to simplify (#824, #1981): `simplify()` rebuilds the graph sorted by
+  # endpoint, and a formula that declares no loops and no multiple edges has no
+  # reason to be rebuilt. The check belongs here rather than inside
+  # `simplify()`, where it also suppressed `edge.attr.comb` -- see the note
+  # there. `res` has no attributes yet, so skipping is unobservable beyond the
+  # order.
+  if (simplify && !is_simple(res)) {
     res <- simplify(res)
   }
   res <- set_vertex_attr(res, "name", value = v)

@@ -243,9 +243,24 @@ resolve_edge_weights <- function(
       "3.0.0",
       sprintf("%s(attr = )", fn),
       sprintf("%s(weights = )", fn),
+      details = if (is.null(attr)) {
+        "`attr = NULL` becomes `weights = NA`, not `weights = NULL`."
+      },
       user_env = user_env
     )
-    weights <- attr
+    # `attr` and `weights` spell "unweighted" differently, so the two cannot
+    # simply be assigned across. `attr = NULL` was the documented way to ask
+    # for a plain 0/1 matrix -- "If `NULL` a traditional adjacency matrix is
+    # returned" -- while `weights = NULL` means the opposite: use the `weight`
+    # edge attribute if the graph has one. Passing it straight through
+    # therefore inverts what the caller asked for, silently and without a
+    # warning, for every call that spelled it out. `NA` is how the new
+    # vocabulary says "unweighted".
+    #
+    # `lifecycle::is_present()` is true for an explicit `NULL` -- only the
+    # `deprecated()` sentinel counts as absent -- so this branch really does
+    # see `attr = NULL` and has to translate it.
+    weights <- if (is.null(attr)) NA else attr
   }
 
   if (is.null(weights)) {
@@ -412,9 +427,10 @@ get.adjacency.sparse <- function(
 #'   }
 #'   If multiple edges share endpoints, the value of an arbitrarily chosen edge
 #'   is included in the matrix.
-#' @param attr `r lifecycle::badge("deprecated")` Use `weights` instead. If
-#'   supplied, the value is forwarded to `weights` as a character edge
-#'   attribute name.
+#' @param attr `r lifecycle::badge("deprecated")` Use `weights` instead. A
+#'   character edge attribute name is forwarded to `weights` unchanged; `NULL`
+#'   becomes `weights = NA`, since `attr = NULL` asked for a traditional
+#'   unweighted matrix while `weights = NULL` picks the `weight` attribute up.
 #' @param edges `r lifecycle::badge("deprecated")` Logical, whether to return the edge IDs in the matrix.
 #'   For non-existant edges zero is returned.
 #' @param names Logical, whether to assign row and column names

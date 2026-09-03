@@ -36,6 +36,22 @@ now_utc <- function() {
   format(Sys.time(), "%Y-%m-%dT%H:%M:%SZ", tz = "UTC")
 }
 
+# A block of output under a heading the reader can fold away.
+#
+# Actions renders `::group::` as a collapsed section in the job log, so a
+# hundred shard packages can each contribute their diff without any of them
+# getting in the way of the summary lines between them. Outside Actions the
+# markers are just two extra lines. NULL arguments are dropped, so a caller can
+# pass a trailing note conditionally.
+print_group <- function(title, ...) {
+  body <- unlist(list(...), use.names = FALSE)
+  message("::group::", title)
+  if (length(body) > 0) {
+    message(paste(body, collapse = "\n"))
+  }
+  message("::endgroup::")
+}
+
 # ---------------------------------------------------------------- run ids ----
 
 # GitHub run ids passed `.Machine$integer.max` in 2026, so they are carried as
@@ -229,14 +245,22 @@ gh_lines <- function(...) {
 }
 
 # The unexpired artifacts of one run, as a named character vector of ids;
-# empty when the run has none or when gh cannot say. One API call per run, so
-# a walk over the run history calls this once per run and asks it everything.
+# empty when the run has none or when gh cannot say.
+#
+# Paginated, because a single page is not enough and the ones that fall off it
+# are exactly the ones that matter. A run publishes one
+# `revdep2-results-<shard>-<attempt>` per shard -- up to 250 -- and uploads
+# `revdep2-baseline`, `revdep2-timings` and `revdep2-report` last of all. Ask
+# for one page of 100 and a run with a hundred shards hides its baseline behind
+# its results: reuse would silently stop and `retry-run` would fail outright,
+# both for a reason no log would name.
 run_artifacts <- function(run_id) {
   if (!gh_ok() || !nzchar(gh_repo())) {
     return(character())
   }
   out <- gh_lines(
     "api",
+    "--paginate",
     sprintf(
       "repos/%s/actions/runs/%s/artifacts?per_page=100",
       gh_repo(),
@@ -916,10 +940,20 @@ install_closure <- function(packages, db) {
 # on disk and is skipped on the next attempt, so a chunk that dies costs a
 # chunk; and the log says which one, which a single opaque call never could.
 #
+# The size is a trade, and 100 was too far towards small. A chunk pays one
+# resolution whether or not it installs anything: run 31930350338's preflight
+# logged `80 pkgs + 214 deps: kept 294 [44s]` for a chunk that built nothing at
+# all. At 100, the 4406-package universe is 45 chunks and something like half
+# an hour of resolution before a single build starts -- on the critical path,
+# since every shard waits for the preflight. At 400 it is 12 chunks. A chunk
+# that dies costs four times as much to redo, which is the price; the counter
+# is that the resolution which killed run 31270092803 was a few thousand refs,
+# and 400 is an order of magnitude below that.
+#
 # Ordering is on strong dependencies only. Suggests are in the set because a
 # revdep's *check* needs them, not its installation, and they are what makes
 # the graph cyclic -- ordering on them would order on nothing.
-install_chunks <- function(pkgs, db, size = 100) {
+install_chunks <- function(pkgs, db, size = 400) {
   pkgs <- unique(pkgs)
   if (length(pkgs) == 0) {
     return(list())
@@ -974,14 +1008,20 @@ install_chunks <- function(pkgs, db, size = 100) {
 run_with_timeout <- function(fun, args = list(), timeout_seconds, label = "") {
   if (!requireNamespace("callr", quietly = TRUE)) {
     inform(label, ": callr is not installed, running without a time limit")
+    value <- NULL
     message <- tryCatch(
       {
-        do.call(fun, args)
+        value <- do.call(fun, args)
         ""
       },
       error = function(e) conditionMessage(e)
     )
-    return(list(ok = !nzchar(message), timed_out = FALSE, message = message))
+    return(list(
+      ok = !nzchar(message),
+      timed_out = FALSE,
+      message = message,
+      value = value
+    ))
   }
   process <- callr::r_bg(
     fun,
@@ -1003,9 +1043,10 @@ run_with_timeout <- function(fun, args = list(), timeout_seconds, label = "") {
       )
     ))
   }
+  value <- NULL
   message <- tryCatch(
     {
-      process$get_result()
+      value <- process$get_result()
       ""
     },
     # callr reports a child's failure wrapped in its own condition, and the
@@ -1013,15 +1054,400 @@ run_with_timeout <- function(fun, args = list(), timeout_seconds, label = "") {
     # broke -- which is the line that ends up in depfail.json.
     error = function(e) conditionMessage(e$parent %||% e)
   )
-  list(ok = !nzchar(message), timed_out = FALSE, message = message)
+  list(
+    ok = !nzchar(message),
+    timed_out = FALSE,
+    message = message,
+    value = value
+  )
 }
 
 format_duration <- function(seconds) {
   if (seconds < 90) {
     sprintf("%.0f s", seconds)
-  } else {
+  } else if (seconds < 90 * 60) {
     sprintf("%.0f min", seconds / 60)
+  } else {
+    # A shard runs for hours, and "217 min left" is a number the reader has to
+    # divide before it means anything.
+    sprintf("%.1f h", seconds / 3600)
   }
+}
+
+# ---------------------------------------------------- pak's repositories ----
+
+# The repository set, resolved once and pinned.
+#
+# pak reads `getOption("repos")` and adds the Bioconductor repositories to it
+# the moment something needs them -- and its metadata database is keyed on the
+# set. In run 31282820357 the first Bioconductor package landed in chunk 11 of
+# 45; the set went from 1 repository to 6 and the database from 7 files to 9,
+# the rebuilt database came back empty ("0 B in 9 files", parsed in 20 ms
+# rather than 9 s), and from chunk 12 on pak could not find a single package
+# on CRAN. Not vctrs -- all 4406 of them.
+#
+# Installing in chunks is what made that reachable: 45 short-lived pak
+# processes each re-read the database from disk, so the set changing under one
+# of them poisons all the rest. Resolving the set here, before the first
+# install, is what stops it from changing at all.
+pinned_repos <- local({
+  repos <- NULL
+  function() {
+    if (is.null(repos)) {
+      repos <<- tryCatch(
+        {
+          got <- pak::repo_get(bioc = TRUE)
+          stats::setNames(got$url, got$name)
+        },
+        error = function(e) {
+          inform("Could not resolve the repository set: ", conditionMessage(e))
+          getOption("repos")
+        }
+      )
+      inform(
+        "Repositories pinned: ",
+        length(repos),
+        " (",
+        paste(names(repos), collapse = ", "),
+        ")"
+      )
+    }
+    repos
+  }
+})
+
+# ------------------------------------------------------ pak's metadata db ----
+
+# Packages that must be in any CRAN snapshot. If pak cannot see these, it
+# cannot see anything, and what follows is not a dependency problem.
+metadata_probe <- function() {
+  strsplit(env_chr("REVDEP2_METADATA_PROBE", "vctrs,cli,R6"), ",")[[1]]
+}
+
+metadata_timeout_seconds <- function() {
+  env_num("REVDEP2_METADATA_TIMEOUT_MINUTES", 10) * 60
+}
+
+# How many of those packages pak can actually see, or -1 when it could not be
+# asked. `meta_list()` is the low-level view of the database itself, so a
+# broken one answers immediately instead of being reported as a dependency
+# that cannot be solved.
+#
+# It has to run in a fresh process. pak keeps the parsed database in the
+# memory of its own subprocess, so a session that already loaded a good one
+# goes on reporting health that is no longer on disk -- which is why the break
+# in that run only surfaced at the *next* chunk.
+metadata_found <- function() {
+  run <- run_with_timeout(
+    function(repos, probe) {
+      options(repos = repos)
+      nrow(pak::meta_list(pkg = probe))
+    },
+    args = list(repos = pinned_repos(), probe = metadata_probe()),
+    timeout_seconds = metadata_timeout_seconds(),
+    label = "pak metadata probe"
+  )
+  if (!isTRUE(run$ok)) {
+    # Not the same thing as an empty database, and saying so matters: in run
+    # 31303054725 `/tmp` filled, callr could no longer start R, and every
+    # probe from then on failed to run at all -- reported as "pak sees 0 of
+    # 3", which reads like the database being empty and is a completely
+    # different problem.
+    inform("Could not ask pak what it can see: ", run$message)
+    return(-1L)
+  }
+  as.integer(run$value %||% 0L)
+}
+
+# Delete the metadata database and fetch it again.
+#
+# `meta_clean(force = TRUE)` is the part that matters. pak's own repair --
+# `meta_update()` alone -- is what produced "0 B in 9 files": it re-validated
+# the broken files, found them unchanged, and left the empty database in
+# place. Only deleting it first gets a good one back.
+metadata_repair <- function() {
+  run_with_timeout(
+    function(repos) {
+      options(repos = repos)
+      pak::meta_clean(force = TRUE)
+      pak::meta_update()
+      invisible(NULL)
+    },
+    args = list(repos = pinned_repos()),
+    timeout_seconds = metadata_timeout_seconds(),
+    label = "pak metadata rebuild"
+  )
+}
+
+# Assess pak's metadata database, and rebuild it at most once per job.
+#
+# Returns "ok", "repaired" or "broken". Once per job is deliberate: a database
+# that is still empty after a clean rebuild is not a stale cache, and clearing
+# it in a loop would spend the job's minutes hiding that.
+ensure_metadata <- local({
+  repaired <- FALSE
+  function(where = "") {
+    prefix <- if (nzchar(where)) paste0(where, ": ") else ""
+    wanted <- length(metadata_probe())
+    found <- metadata_found()
+    if (found >= wanted) {
+      return("ok")
+    }
+    # A probe that could not be run says nothing about the database, and
+    # clearing it on that evidence would spend the one rebuild on a machine
+    # problem -- which is exactly what would have happened when R could no
+    # longer start.
+    if (found < 0) {
+      inform(prefix, "the state of the metadata database is unknown")
+      return("unknown")
+    }
+    if (repaired) {
+      inform(sprintf(
+        "%spak still sees %d of %d probe packages after a rebuild; not clearing again",
+        prefix,
+        max(found, 0L),
+        wanted
+      ))
+      return("broken")
+    }
+    repaired <<- TRUE
+    inform(sprintf(
+      "%spak sees %d of %d packages that must exist -- its metadata database is unusable; clearing and rebuilding it once",
+      prefix,
+      max(found, 0L),
+      wanted
+    ))
+    rebuild <- metadata_repair()
+    if (!isTRUE(rebuild$ok)) {
+      inform(prefix, "the rebuild failed: ", rebuild$message)
+      return("broken")
+    }
+    found <- metadata_found()
+    if (found >= wanted) {
+      inform(prefix, "the metadata database is usable again")
+      return("repaired")
+    }
+    inform(sprintf(
+      "%sstill %d of %d after the rebuild; the repositories themselves are not answering",
+      prefix,
+      max(found, 0L),
+      wanted
+    ))
+    "broken"
+  }
+})
+
+# -------------------------------------------------- system requirements ----
+
+sysreqs_timeout_seconds <- function() {
+  env_num("REVDEP2_SYSREQS_TIMEOUT_MINUTES", 20) * 60
+}
+
+# The system requirements of packages that were unpacked rather than installed.
+#
+# pak installs system requirements for the packages *it* installs. Everything
+# restored from a library tarball -- this run's preflight library, an earlier
+# run's donor -- it never sees, so their apt packages are never resolved: 170
+# of a shard's 436 dependencies arrived that way in run 31282820357. It
+# usually survives, because something else pulls the same apt package in or
+# the runner image already carries it; when it does not, a restored binary
+# cannot load its shared library, and a shard has no load test to catch that.
+#
+# So the library is asked directly rather than the install list, which is what
+# makes this cover donor libraries from earlier runs too -- their apt state was
+# never recorded anywhere, and pak can still read what they left behind.
+#
+# `sysreqs_check_installed()` says what is missing and which packages want it,
+# which is worth printing either way; `sysreqs_fix_installed()` installs it.
+ensure_sysreqs <- function(lib = NULL, label = "") {
+  prefix <- if (nzchar(label)) paste0(label, ": ") else ""
+
+  survey <- function(what) {
+    run <- run_with_timeout(
+      function(repos, lib) {
+        options(repos = repos)
+        got <- pak::sysreqs_check_installed(library = lib)
+        absent <- !got$installed
+        list(
+          total = nrow(got),
+          missing = as.character(got$system_package[absent]),
+          wanted_by = vapply(
+            got$packages[absent],
+            function(p) paste(p, collapse = ", "),
+            character(1)
+          )
+        )
+      },
+      args = list(repos = pinned_repos(), lib = lib),
+      timeout_seconds = sysreqs_timeout_seconds(),
+      label = paste0(prefix, what)
+    )
+    if (!isTRUE(run$ok)) {
+      inform(prefix, "could not check system requirements: ", run$message)
+      return(NULL)
+    }
+    run$value
+  }
+
+  before <- survey("system requirements survey")
+  if (is.null(before)) {
+    return(invisible(NULL))
+  }
+  if (length(before$missing) == 0) {
+    inform(sprintf(
+      "%sall %d system requirement(s) of the installed library are present",
+      prefix,
+      before$total
+    ))
+    return(invisible(character()))
+  }
+  inform(sprintf(
+    "%s%d of %d system requirement(s) are missing: %s",
+    prefix,
+    length(before$missing),
+    before$total,
+    paste(
+      sprintf("%s (%s)", before$missing, before$wanted_by),
+      collapse = "; "
+    )
+  ))
+
+  fixed <- run_with_timeout(
+    function(repos, lib) {
+      options(repos = repos)
+      pak::sysreqs_fix_installed(library = lib)
+      invisible(NULL)
+    },
+    args = list(repos = pinned_repos(), lib = lib),
+    timeout_seconds = sysreqs_timeout_seconds(),
+    label = paste0(prefix, "system requirements install")
+  )
+  if (!isTRUE(fixed$ok)) {
+    inform(prefix, "installing them failed: ", fixed$message)
+    return(invisible(before$missing))
+  }
+
+  after <- survey("system requirements re-survey")
+  still <- if (is.null(after)) before$missing else after$missing
+  if (length(still) == 0) {
+    inform(sprintf(
+      "%sinstalled %d missing system package(s)",
+      prefix,
+      length(before$missing)
+    ))
+  } else {
+    inform(sprintf(
+      "%s%d system package(s) are still missing: %s",
+      prefix,
+      length(still),
+      paste(still, collapse = ", ")
+    ))
+  }
+  invisible(still)
+}
+
+# The system requirements of the packages the shard is about to *check*.
+#
+# `ensure_sysreqs()` above reads the installed library, which is the right
+# question for dependencies and the wrong one for the revdeps themselves: a
+# shard installs each package's dependency closure and never the package, so
+# the revdep under test is never in that library. `R CMD check` builds it from
+# its tarball, and nothing has resolved its `SystemRequirements` -- not
+# `PKG_SYSREQS`, which covers what pak installs, and not
+# `sysreqs_fix_installed()`, which covers what is on disk.
+#
+# Libra is the case that found this. It declares `SystemRequirements: gsl`,
+# `pak::pkg_sysreqs("Libra")` resolves it to `libgsl0-dev` without difficulty,
+# and nobody asked: the check failed to compile `LBLasso.c` under both versions
+# with `fatal error: gsl/gsl_vector.h: No such file or directory`, which the
+# report then recorded as a package that fails to install rather than as a
+# runner that could not build it.
+#
+# Only the missing ones are installed. `sysreqs_list_system_packages()` says
+# what is already there, including what other packages *provide* -- a virtual
+# package satisfies a dependency just as a real one does -- so a shard whose
+# requirements the image already carries runs no apt at all.
+ensure_check_sysreqs <- function(packages, label = "") {
+  prefix <- if (nzchar(label)) paste0(label, ": ") else ""
+  if (length(packages) == 0) {
+    return(invisible(character()))
+  }
+
+  run <- run_with_timeout(
+    function(repos, packages) {
+      options(repos = repos)
+      wanted <- unique(unlist(
+        pak::pkg_sysreqs(packages)$packages$system_packages,
+        use.names = FALSE
+      ))
+      have <- pak::sysreqs_list_system_packages()
+      present <- unique(c(
+        have$package,
+        unlist(have$provides, use.names = FALSE)
+      ))
+      list(wanted = wanted, missing = setdiff(wanted, present))
+    },
+    args = list(repos = pinned_repos(), packages = packages),
+    timeout_seconds = sysreqs_timeout_seconds(),
+    label = paste0(prefix, "check system requirements survey")
+  )
+  if (!isTRUE(run$ok)) {
+    inform(
+      prefix,
+      "could not resolve the checked packages' system requirements: ",
+      run$message
+    )
+    return(invisible(NULL))
+  }
+
+  if (length(run$value$missing) == 0) {
+    inform(sprintf(
+      "%sall %d system requirement(s) of the %d package(s) to check are present",
+      prefix,
+      length(run$value$wanted),
+      length(packages)
+    ))
+    return(invisible(character()))
+  }
+  inform(sprintf(
+    "%s%d of %d system requirement(s) of the packages to check are missing: %s",
+    prefix,
+    length(run$value$missing),
+    length(run$value$wanted),
+    paste(run$value$missing, collapse = ", ")
+  ))
+
+  # apt directly rather than through pak: `sysreqs_fix_installed()` reads the
+  # library, and these packages are not in it. Failure is reported and not
+  # fatal -- the check will fail either way, and it will say why more clearly
+  # than this can.
+  sudo <- if (identical(Sys.info()[["effective_user"]], "root")) {
+    character()
+  } else {
+    "sudo"
+  }
+  status <- suppressWarnings(system2(
+    if (length(sudo)) "sudo" else "apt-get",
+    c(
+      if (length(sudo)) "apt-get",
+      "-o",
+      "DPkg::Lock::Timeout=300",
+      "install",
+      "-y",
+      "--no-install-recommends",
+      run$value$missing
+    )
+  ))
+  if (!identical(status, 0L)) {
+    inform(prefix, "apt-get exited ", status, "; the checks run anyway")
+    return(invisible(run$value$missing))
+  }
+  inform(sprintf(
+    "%sinstalled %d system package(s) for the packages to check",
+    prefix,
+    length(run$value$missing)
+  ))
+  invisible(character())
 }
 
 # One pak install, bounded. Separate from install_in_chunks() because the
@@ -1036,7 +1462,11 @@ pak_install <- function(
   label = ""
 ) {
   run_with_timeout(
-    function(pkgs, lib, upgrade) {
+    function(pkgs, lib, upgrade, repos) {
+      # The pin travels into every child: an option set in the parent is not
+      # inherited, and a child that resolves its own repository set is a child
+      # that can change it.
+      options(repos = repos)
       if (is.null(lib)) {
         pak::pkg_install(pkgs, ask = FALSE, upgrade = upgrade)
       } else {
@@ -1044,7 +1474,12 @@ pak_install <- function(
       }
       invisible(NULL)
     },
-    args = list(pkgs = pkgs, lib = lib, upgrade = upgrade),
+    args = list(
+      pkgs = pkgs,
+      lib = lib,
+      upgrade = upgrade,
+      repos = pinned_repos()
+    ),
     timeout_seconds = timeout_seconds,
     label = label
   )
@@ -1076,13 +1511,31 @@ install_in_chunks <- function(
       return(FALSE)
     }
     started <- Sys.time()
+    label <- sprintf("%schunk %d/%d", prefix, i, length(chunks))
     run <- pak_install(
       chunks[[i]],
       lib = lib,
       upgrade = upgrade,
       timeout_seconds = timeout_seconds,
-      label = sprintf("%schunk %d/%d", prefix, i, length(chunks))
+      label = label
     )
+    # A chunk that fails may have failed because pak could not see the
+    # repositories at all, which is a different thing from a package that will
+    # not install -- and it is the state that, left alone, fails every chunk
+    # after it too. Only a rebuild that actually changed something earns the
+    # retry; a healthy database means the failure was real.
+    if (
+      !run$ok && identical(ensure_metadata(sub(": $", "", prefix)), "repaired")
+    ) {
+      inform(prefix, "retrying chunk ", i, " against the rebuilt metadata")
+      run <- pak_install(
+        chunks[[i]],
+        lib = lib,
+        upgrade = upgrade,
+        timeout_seconds = timeout_seconds,
+        label = label
+      )
+    }
     if (!run$ok) {
       inform(prefix, "chunk ", i, " failed: ", run$message)
     }
@@ -1143,6 +1596,62 @@ classify_status <- function(status, new_issues) {
   } else {
     "failed"
   }
+}
+
+# Did `R CMD check` refuse to start because a package this one needs is not
+# installed?
+#
+# That stage is fatal: check reports the one error and stops, in two or three
+# seconds, having looked at nothing. When it happens to *both* halves -- and it
+# always does, since the two libraries differ only in igraph -- the pair
+# compares clean, `compare_checks()` returns `+`, and the verdict is `ok`.
+#
+# 55 of run 31930350338's 984 `ok` results were that: every one of them a
+# package whose Bioconductor dependencies are not on CRAN and so were never
+# installed. `SEMgraph` is the clearest -- `1E 0W 0N` on both sides in three
+# seconds, reported `ok`, while being genuinely broken by a dev change nobody
+# saw because the check never ran.
+#
+# The check log is the only place this is visible; the status is `+` like any
+# other agreeing pair.
+aborted_on_dependencies <- function(check) {
+  errors <- check$errors %||% character()
+  length(errors) > 0 &&
+    any(grepl("^checking package dependencies [.]{3} ERROR", errors))
+}
+
+# The packages the aborted check named, for the manifest message: the whole
+# point of the class is that a reader can see *what* was missing without
+# opening the artifact.
+missing_dependencies <- function(check) {
+  errors <- check$errors %||% character()
+  hit <- grep(
+    "^checking package dependencies [.]{3} ERROR",
+    errors,
+    value = TRUE
+  )
+  if (length(hit) == 0) {
+    return(character())
+  }
+  lines <- strsplit(hit[[1]], "\n", fixed = TRUE)[[1]]
+  # `Packages required but not available:` puts them on the next line, quoted;
+  # `Package required but not available: 'x'` puts one on the same line.
+  named <- grep("required but not available", lines)
+  if (length(named) == 0) {
+    return(character())
+  }
+  block <- paste(
+    lines[seq(named[[1]], min(named[[1]] + 1L, length(lines)))],
+    collapse = " "
+  )
+  unique(gsub(
+    "[‘’']",
+    "",
+    regmatches(
+      block,
+      gregexpr("[‘'][^’']+[’']", block)
+    )[[1]]
+  ))
 }
 
 # What a status that `classify_status()` can only call "failed" actually means,
