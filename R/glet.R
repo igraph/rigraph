@@ -264,7 +264,7 @@ graphlet_proj <- function(
 #################
 ## Example code
 
-function() {
+\() {
   library(igraph)
 
   fitandplot <- function(g, gl) {

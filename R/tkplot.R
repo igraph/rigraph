@@ -586,7 +586,7 @@ tk_close <- function(
 #' @export
 tk_off <- function() {
   # nocov start
-  eapply(.tkplot.env, function(tkp) {
+  eapply(.tkplot.env, \(tkp) {
     tcltk::tkdestroy(tkp$top)
   })
   rm(list = ls(.tkplot.env), envir = .tkplot.env)
@@ -1043,7 +1043,7 @@ tk_canvas <- function(tkp.id) {
   labels <- i.get.labels(tkp$graph, tkp$labels)
 
   mapply(
-    function(v, l, x, y) .tkplot.create.vertex(tkp.id, v, l, x, y),
+    \(v, l, x, y) .tkplot.create.vertex(tkp.id, v, l, x, y),
     1:n,
     labels,
     tkp$coords[, 1],
@@ -1114,7 +1114,7 @@ tk_canvas <- function(tkp.id) {
   tkp <- .tkplot.get(tkp.id)
   n <- vcount(tkp$graph)
   mapply(
-    function(v, x, y) .tkplot.update.vertex(tkp.id, v, x, y),
+    \(v, x, y) .tkplot.update.vertex(tkp.id, v, x, y),
     1:n,
     tkp$coords[, 1],
     tkp$coords[, 2]
@@ -1255,7 +1255,7 @@ tk_canvas <- function(tkp.id) {
   tkp <- .tkplot.get(tkp.id)
   edgematrix <- as_edgelist(tkp$graph, names = FALSE)
   mapply(
-    function(from, to, id) .tkplot.create.edge(tkp.id, from, to, id),
+    \(from, to, id) .tkplot.create.edge(tkp.id, from, to, id),
     edgematrix[, 1],
     edgematrix[, 2],
     seq_len(nrow(edgematrix))
@@ -1459,7 +1459,7 @@ tk_canvas <- function(tkp.id) {
   vparams <- tkp$params$vertex.params
   vparams[vids, "vertex.size"] <- newsize
   .tkplot.set(tkp.id, "params$vertex.params", vparams)
-  sapply(vids, function(id) {
+  sapply(vids, \(id) {
     .tkplot.update.vertex(tkp.id, id, tkp$coords[id, 1], tkp$coords[id, 2])
   })
 }
@@ -1491,7 +1491,7 @@ tk_canvas <- function(tkp.id) {
   tcltk::tkgrid(OK.but)
   tcltk::tkwait.window(dialog)
 
-  retval <- lapply(retval, function(v) {
+  retval <- lapply(retval, \(v) {
     eval(parse(text = paste("c(", v, ")")))
   })
   return(retval)
@@ -1575,10 +1575,10 @@ tk_canvas <- function(tkp.id) {
 
 .tkplot.select.some.edges <- function(tkp.id, from, to) {
   canvas <- .tkplot.get(tkp.id, "canvas")
-  fromtags <- sapply(from, function(i) {
+  fromtags <- sapply(from, \(i) {
     paste(sep = "", "from-", i)
   })
-  totags <- sapply(from, function(i) {
+  totags <- sapply(from, \(i) {
     paste(sep = "", "to-", i)
   })
   edges <- as.numeric(tcltk::tkfind(canvas, "withtag", "edge"))
@@ -1718,7 +1718,7 @@ tk_canvas <- function(tkp.id) {
   canvas <- .tkplot.get(tkp.id, "canvas")
   tkids <- as.numeric(tcltk::tkfind(canvas, "withtag", "vertex&&selected"))
 
-  ids <- sapply(tkids, function(tkid) {
+  ids <- sapply(tkids, \(tkid) {
     tags <- as.character(tcltk::tkgettags(canvas, tkid))
     id <- as.numeric(substring(tags[pmatch("v-", tags)], 3))
     id
@@ -1731,7 +1731,7 @@ tk_canvas <- function(tkp.id) {
   canvas <- .tkplot.get(tkp.id, "canvas")
   tkids <- as.numeric(tcltk::tkfind(canvas, "withtag", "edge&&selected"))
 
-  ids <- sapply(tkids, function(tkid) {
+  ids <- sapply(tkids, \(tkid) {
     tags <- as.character(tcltk::tkgettags(canvas, tkid))
     id <- as.numeric(substring(tags[pmatch("edge-", tags)], 6))
     id
@@ -1751,7 +1751,7 @@ tk_canvas <- function(tkp.id) {
     select.menu,
     "command",
     label = "Select all vertices",
-    command = function() {
+    command = \() {
       .tkplot.deselect.all(tkp.id)
       .tkplot.select.all.vertices(tkp.id)
     }
@@ -1760,7 +1760,7 @@ tk_canvas <- function(tkp.id) {
     select.menu,
     "command",
     label = "Select all edges",
-    command = function() {
+    command = \() {
       .tkplot.deselect.all(tkp.id)
       .tkplot.select.all.edges(tkp.id)
     }
@@ -1769,7 +1769,7 @@ tk_canvas <- function(tkp.id) {
     select.menu,
     "command",
     label = "Select some vertices...",
-    command = function() {
+    command = \() {
       vids <- .tkplot.get.numeric.vector("Select vertices")
       .tkplot.select.some.vertices(tkp.id, vids[[1]])
     }
@@ -1778,7 +1778,7 @@ tk_canvas <- function(tkp.id) {
     select.menu,
     "command",
     label = "Select some edges...",
-    command = function() {
+    command = \() {
       fromto <- .tkplot.get.numeric.vector(
         "Select edges from vertices",
         "to vertices"
@@ -1791,7 +1791,7 @@ tk_canvas <- function(tkp.id) {
     select.menu,
     "command",
     label = "Deselect everything",
-    command = function() {
+    command = \() {
       .tkplot.deselect.all(tkp.id)
     }
   )
@@ -1802,12 +1802,12 @@ tk_canvas <- function(tkp.id) {
 .tkplot.layout.menu <- function(tkp.id, main.menu) {
   layout.menu <- tcltk::tkmenu(main.menu)
 
-  sapply(.tkplot.getlayoutlist(), function(n) {
+  sapply(.tkplot.getlayoutlist(), \(n) {
     tcltk::tkadd(
       layout.menu,
       "command",
       label = .tkplot.getlayoutname(n),
-      command = function() {
+      command = \() {
         .tkplot.layout.dialog(tkp.id, n)
       }
     )
@@ -2003,7 +2003,7 @@ tk_canvas <- function(tkp.id) {
     column = 0
   )
   tcltk::tkgrid(
-    tcltk::tkbutton(dialog, text = "Cancel", command = function() {
+    tcltk::tkbutton(dialog, text = "Cancel", command = \() {
       tcltk::tkdestroy(dialog)
       invisible(TRUE)
     }),

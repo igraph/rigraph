@@ -1694,10 +1694,10 @@ shortest_paths <- function(
   )
 
   if (!is.null(res$vpath)) {
-    res$vpath <- lapply(res$vpath, function(x) x + 1)
+    res$vpath <- lapply(res$vpath, \(x) x + 1)
   }
   if (!is.null(res$epath)) {
-    res$epath <- lapply(res$epath, function(x) x + 1)
+    res$epath <- lapply(res$epath, \(x) x + 1)
   }
   if (!is.null(res$predecessors)) {
     res$predecessors <- res$predecessors + 1
@@ -2945,7 +2945,7 @@ ego <- function(
     as.numeric(mode),
     mindist
   )
-  res <- lapply(res, function(x) x + 1)
+  res <- lapply(res, \(x) x + 1)
 
   if (igraph_opt("return.vs.es")) {
     res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))

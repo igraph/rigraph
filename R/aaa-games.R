@@ -484,7 +484,7 @@ hsbm_list_game_impl <- function(
   if (!is.list(Clist)) {
     cli::cli_abort("{.arg Clist} must be a list of matrices")
   }
-  Clist <- lapply(Clist, function(m) {
+  Clist <- lapply(Clist, \(m) {
     if (!is.matrix(m)) {
       cli::cli_abort("{.arg Clist} must be a list of matrices")
     }

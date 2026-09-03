@@ -993,7 +993,7 @@ as_adj_edge_list <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(Rx_igraph_get_adjedgelist, graph, mode, loops)
-  res <- lapply(res, function(.x) E(graph)[.x + 1])
+  res <- lapply(res, \(.x) E(graph)[.x + 1])
   if (is_named(graph)) {
     names(res) <- V(graph)$name
   }
@@ -1100,7 +1100,7 @@ graph_from_graphnel <- function(
 
   al <- lapply(graph::edgeL(graphNEL), "[[", "edges")
   if (graph::edgemode(graphNEL) == "undirected") {
-    al <- mapply(SIMPLIFY = FALSE, seq_along(al), al, FUN = function(n, l) {
+    al <- mapply(SIMPLIFY = FALSE, seq_along(al), al, FUN = \(n, l) {
       c(l, rep(n, sum(l == n)))
     })
   }
@@ -1210,7 +1210,7 @@ as_graphnel <- function(graph) {
     }
   } else {
     al <- as_adj_list(graph, mode = "out", loops = "once")
-    al <- lapply(al, function(x) list(edges = as.vector(x)))
+    al <- lapply(al, \(x) list(edges = as.vector(x)))
   }
 
   names(al) <- name
@@ -1248,7 +1248,7 @@ as_graphnel <- function(graph) {
     for (n in e.n) {
       graph::edgeDataDefaults(res, attr = n) <- NA
       res@edgeData@data[el] <- mapply(
-        function(x, y) {
+        \(x, y) {
           xx <- c(x, y)
           names(xx)[length(xx)] <- n
           xx
