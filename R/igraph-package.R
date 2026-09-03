@@ -2,16 +2,19 @@
 #' @import methods
 ## usethis namespace: start
 #' @importFrom lifecycle deprecated
-#' @importFrom magrittr %>%
 #' @import rlang
 ## usethis namespace: end
 NULL
 
-#' Magrittr's pipes
+#' Magrittr's pipe
 #'
-#' igraph re-exports the `%>%` operator of magrittr, because
-#' we find it very useful. Please see the documentation in the
-#' `magrittr` package.
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' igraph used to re-export the `%>%` operator of magrittr. Now that R has its
+#' own base pipe, `|>`, available since R 4.1.0, please use that instead. If
+#' you still need `%>%` and its extra features (such as the `.` placeholder),
+#' import it from the `magrittr` package yourself.
 #'
 #' @param lhs Left hand side of the pipe.
 #' @param rhs Right hand side of the pipe.
@@ -21,11 +24,17 @@ NULL
 #' @export
 #' @name %>%
 #' @rdname pipe
+#' @keywords internal
 #' @examples
-#' make_ring(10) %>%
-#'   add_edges(c(1, 6)) %>%
+#' make_ring(10) |>
+#'   add_edges(c(1, 6)) |>
 #'   plot()
-NULL
+`%>%` <- function(lhs, rhs) {
+  lifecycle::deprecate_soft("2.4.0", "`%>%`()", "`|>`()")
+  lhs <- substitute(lhs)
+  rhs <- substitute(rhs)
+  eval.parent(as.call(list(quote(magrittr::`%>%`), lhs, rhs)))
+}
 
 #' The igraph package
 #'

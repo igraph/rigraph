@@ -37,8 +37,8 @@
 #' \preformatted{
 #' library(igraphdata)
 #' data(karate)
-#' karate <- karate %>%
-#'   add_layout_(with_fr()) %>%
+#' karate <- karate |>
+#'   add_layout_(with_fr()) |>
 #'   set_vertex_attr("size", value = 10)
 #'
 #' cl_k <- cluster_optimal(karate)
@@ -92,11 +92,11 @@ categorical_pal <- function(n) {
 #' @examplesIf rlang::is_installed(c("igraphdata", "scales"))
 #' library(igraphdata)
 #' data(karate)
-#' karate <- karate %>%
-#'   add_layout_(with_kk()) %>%
+#' karate <- karate |>
+#'   add_layout_(with_kk()) |>
 #'   set_vertex_attr("size", value = 10)
 #'
-#' V(karate)$color <- scales::dscale(degree(karate) %>% cut(5), sequential_pal)
+#' V(karate)$color <- scales::dscale(degree(karate) |> cut(5), sequential_pal)
 #' plot(karate)
 sequential_pal <- function(n) {
   stopifnot(n >= 0)
@@ -169,22 +169,23 @@ sequential_pal <- function(n) {
 #' @examplesIf rlang::is_installed(c("igraphdata", "scales"))
 #' library(igraphdata)
 #' data(foodwebs)
-#' fw <- foodwebs[[1]] %>%
-#'   induced_subgraph(V(.)[ECO == 1]) %>%
-#'   add_layout_(with_fr()) %>%
-#'   set_vertex_attr("label", value = seq_len(gorder(.))) %>%
-#'   set_vertex_attr("size", value = 10) %>%
+#' fw <- foodwebs[[1]]
+#' fw <- induced_subgraph(fw, V(fw)[ECO == 1])
+#' fw <- fw |>
+#'   add_layout_(with_fr()) |>
+#'   set_vertex_attr("label", value = seq_len(gorder(fw))) |>
+#'   set_vertex_attr("size", value = 10) |>
 #'   set_edge_attr("arrow.size", value = 0.3)
 #'
-#' V(fw)$color <- scales::dscale(V(fw)$Biomass %>% cut(10), diverging_pal)
+#' V(fw)$color <- scales::dscale(V(fw)$Biomass |> cut(10), diverging_pal)
 #' plot(fw)
 #'
 #' data(karate)
-#' karate <- karate %>%
-#'   add_layout_(with_kk()) %>%
+#' karate <- karate |>
+#'   add_layout_(with_kk()) |>
 #'   set_vertex_attr("size", value = 10)
 #'
-#' V(karate)$color <- scales::dscale(degree(karate) %>% cut(5), diverging_pal)
+#' V(karate)$color <- scales::dscale(degree(karate) |> cut(5), diverging_pal)
 #' plot(karate)
 diverging_pal <- function(n) {
   stopifnot(n > 0)

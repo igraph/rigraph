@@ -11,6 +11,6 @@ oldsample_0_1_1 <- function() {
     list(1, character(0), numeric(0)),
     list(3, character(0), numeric(0)),
     list(6, character(0), numeric(0))
-  ) %>%
+  ) |>
     structure(class = "igraph")
 }

@@ -280,7 +280,7 @@ inside_square_error <- function(fn_name, call = rlang::caller_env()) {
 #' V(g)
 #'
 #' # Vertex ids of a named graph
-#' g2 <- make_ring(10) %>%
+#' g2 <- make_ring(10) |>
 #'   set_vertex_attr("name", value = letters[1:10])
 #' V(g2)
 V <- function(graph) {
@@ -382,7 +382,7 @@ unsafe_create_es <- function(graph, idx, es = NULL) {
 #' E(g)
 #'
 #' # Edges of a named graph
-#' g2 <- make_ring(10) %>%
+#' g2 <- make_ring(10) |>
 #'   set_vertex_attr("name", value = letters[1:10])
 #' E(g2)
 E <- function(
@@ -865,8 +865,8 @@ set_single_index <- function(x, value = TRUE) {
 #' @family vertex and edge sequence operations
 #' @export
 #' @examples
-#' g <- make_ring(10) %>%
-#'   set_vertex_attr("color", value = "red") %>%
+#' g <- make_ring(10) |>
+#'   set_vertex_attr("color", value = "red") |>
 #'   set_vertex_attr("name", value = LETTERS[1:10])
 #' V(g)
 #' V(g)[[]]
@@ -1038,8 +1038,8 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #'
 #' # -----------------------------------------------------------------
 #' # Select edges based on attributes
-#' g <- sample_gnp(20, 3 / 20) %>%
-#'   set_edge_attr("weight", value = rnorm(gsize(.)))
+#' g <- sample_gnp(20, 3 / 20)
+#' g <- set_edge_attr(g, "weight", value = rnorm(gsize(g)))
 #' E(g)[[weight < 0]]
 #'
 #' # Indexing with a variable whose name matches the name of an attribute
@@ -1484,7 +1484,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' V(g)
 #'
 #' # Named graphs
-#' g2 <- make_ring(10) %>%
+#' g2 <- make_ring(10) |>
 #'   set_vertex_attr("name", value = LETTERS[1:10])
 #' V(g2)
 #'
@@ -1494,8 +1494,8 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' print(V(g3), full = TRUE)
 #'
 #' # Metadata
-#' g4 <- make_ring(10) %>%
-#'   set_vertex_attr("name", value = LETTERS[1:10]) %>%
+#' g4 <- make_ring(10) |>
+#'   set_vertex_attr("name", value = LETTERS[1:10]) |>
 #'   set_vertex_attr("color", value = "red")
 #' V(g4)[[]]
 #' V(g4)[[2:5, 7:8]]
@@ -1612,19 +1612,19 @@ print_igraph_vs_legacy <- function(
 #' E(g)
 #'
 #' # Named graphs
-#' g2 <- make_ring(10) %>%
+#' g2 <- make_ring(10) |>
 #'   set_vertex_attr("name", value = LETTERS[1:10])
 #' E(g2)
 #'
 #' # All edges in a long sequence
 #' g3 <- make_ring(200)
 #' E(g3)
-#' E(g3) %>% print(full = TRUE)
+#' E(g3) |> print(full = TRUE)
 #'
 #' # Metadata
-#' g4 <- make_ring(10) %>%
-#'   set_vertex_attr("name", value = LETTERS[1:10]) %>%
-#'   set_edge_attr("weight", value = 1:10) %>%
+#' g4 <- make_ring(10) |>
+#'   set_vertex_attr("name", value = LETTERS[1:10]) |>
+#'   set_edge_attr("weight", value = 1:10) |>
 #'   set_edge_attr("color", value = "green")
 #' E(g4)
 #' E(g4)[[]]
@@ -1906,7 +1906,7 @@ parse_op_args <- function(..., what, is_fun, as_fun, check_graph = TRUE) {
   }
 
   ## get the ids of all graphs
-  graph_id <- sapply(args, get_vs_graph_id) %>%
+  graph_id <- sapply(args, get_vs_graph_id) |>
     unique()
 
   if (length(graph_id) != 1) {
@@ -1916,12 +1916,12 @@ parse_op_args <- function(..., what, is_fun, as_fun, check_graph = TRUE) {
     ))
   }
 
-  graphs <- args %>%
-    lapply(get_vs_graph) %>%
+  graphs <- args |>
+    lapply(get_vs_graph) |>
     drop_null()
 
-  addresses <- graphs %>%
-    sapply(function(x) x %&&% address(x)) %>%
+  addresses <- graphs |>
+    sapply(function(x) x %&&% address(x)) |>
     unique()
 
   if (check_graph && length(addresses) >= 2) {
@@ -1987,7 +1987,7 @@ create_op_result <- function(parsed, result, class, args) {
 #' @examples
 #' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
 #' V(g)[1, 1:5, 1:10, 5:10]
-#' V(g)[1, 1:5, 1:10, 5:10] %>% unique()
+#' V(g)[1, 1:5, 1:10, 5:10] |> unique()
 unique.igraph.vs <- function(x, incomparables = FALSE, ...) {
   x[!duplicated(x, incomparables = incomparables, ...)]
 }
@@ -2007,7 +2007,7 @@ unique.igraph.vs <- function(x, incomparables = FALSE, ...) {
 #' @examples
 #' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
 #' E(g)[1, 1:5, 1:10, 5:10]
-#' E(g)[1, 1:5, 1:10, 5:10] %>% unique()
+#' E(g)[1, 1:5, 1:10, 5:10] |> unique()
 unique.igraph.es <- function(x, incomparables = FALSE, ...) {
   x[!duplicated(x, incomparables = incomparables, ...)]
 }
@@ -2206,7 +2206,7 @@ difference.igraph.es <- difference.igraph.vs
 #' @export
 #' @examples
 #' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
-#' V(g) %>% rev()
+#' V(g) |> rev()
 rev.igraph.vs <- function(x) {
   x[rev(seq_along(x))]
 }
@@ -2223,7 +2223,7 @@ rev.igraph.vs <- function(x) {
 #' @examples
 #' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
 #' E(g)
-#' E(g) %>% rev()
+#' E(g) |> rev()
 rev.igraph.es <- rev.igraph.vs
 
 #' Convert a vertex or edge sequence to an ordinary vector

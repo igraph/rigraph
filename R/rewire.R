@@ -34,8 +34,8 @@
 #' @export rewire
 #' @examples
 #' g <- make_ring(10)
-#' g %>%
-#'   rewire(each_edge(p = 0.1, loops = FALSE)) %>%
+#' g |>
+#'   rewire(each_edge(p = 0.1, loops = FALSE)) |>
 #'   plot(layout = layout_in_circle)
 #' print_all(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
 rewire <- function(graph, with) {
@@ -70,8 +70,8 @@ rewire <- function(graph, with) {
 #' @keywords graphs
 #' @examples
 #' g <- make_ring(10)
-#' g %>%
-#'   rewire(keeping_degseq(niter = 20)) %>%
+#' g |>
+#'   rewire(keeping_degseq(niter = 20)) |>
 #'   degree()
 #' print_all(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
 keeping_degseq <- function(loops = FALSE, niter = 100) {
@@ -127,7 +127,7 @@ rewire_keeping_degseq <- function(graph, loops, niter) {
 #' # Rewiring the start of each directed edge preserves the in-degree distribution
 #' # but not the out-degree distribution
 #' g <- sample_pa(1000)
-#' g2 <- g %>% rewire(each_edge(mode = "in", multiple = TRUE, prob = 0.2))
+#' g2 <- g |> rewire(each_edge(mode = "in", multiple = TRUE, prob = 0.2))
 #' degree(g, mode = "in") == degree(g2, mode = "in")
 each_edge <- function(
   prob,

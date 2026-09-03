@@ -358,10 +358,10 @@ test_that("handle_vertex_type_arg validates and converts the type attribute", {
 
 test_that("without_attr", {
   igraph_local_seed(42)
-  g_stripped <- sample_gnp(10, 2 / 10) %>%
-    delete_graph_attr("name") %>%
-    delete_graph_attr("type") %>%
-    delete_graph_attr("loops") %>%
+  g_stripped <- sample_gnp(10, 2 / 10) |>
+    delete_graph_attr("name") |>
+    delete_graph_attr("type") |>
+    delete_graph_attr("loops") |>
     delete_graph_attr("p")
 
   igraph_local_seed(42)
@@ -375,7 +375,7 @@ test_that("without_attr", {
 
 
 test_that("without_loops", {
-  g1 <- make_graph(~ A - A:B:C, B - A:B:C, simplify = FALSE) %>%
+  g1 <- make_graph(~ A - A:B:C, B - A:B:C, simplify = FALSE) |>
     simplify(remove.multiple = FALSE)
 
   g2 <- make_(
@@ -389,7 +389,7 @@ test_that("without_loops", {
 
 
 test_that("without_multiple", {
-  g1 <- make_graph(~ A - A:B:C, B - A:B:C, simplify = FALSE) %>%
+  g1 <- make_graph(~ A - A:B:C, B - A:B:C, simplify = FALSE) |>
     simplify(remove.loops = FALSE)
 
   g2 <- make_(
@@ -417,8 +417,8 @@ test_that("simplified", {
 
 
 test_that("with_vertex_", {
-  g1 <- make_graph(~ A - A:B:C, B - A:B:C) %>%
-    set_vertex_attr("color", value = "red") %>%
+  g1 <- make_graph(~ A - A:B:C, B - A:B:C) |>
+    set_vertex_attr("color", value = "red") |>
     set_vertex_attr("foo", value = paste0("xx", 1:3))
 
   g2 <- make_(
@@ -441,8 +441,8 @@ test_that("with_vertex_", {
 
 
 test_that("with_edge_", {
-  g1 <- make_graph(~ A - A:B:C, B - A:B:C) %>%
-    set_edge_attr("color", value = "red") %>%
+  g1 <- make_graph(~ A - A:B:C, B - A:B:C) |>
+    set_edge_attr("color", value = "red") |>
     set_edge_attr("foo", value = seq_len(3))
 
   g2 <- make_(
@@ -490,8 +490,8 @@ test_that("with_vertex_() / with_edge_() coerce igraph.vs / igraph.es to numeric
 
 
 test_that("with_graph_", {
-  g1 <- make_graph(~ A - A:B:C, B - A:B:C) %>%
-    set_graph_attr("color", value = "red") %>%
+  g1 <- make_graph(~ A - A:B:C, B - A:B:C) |>
+    set_graph_attr("color", value = "red") |>
     set_graph_attr("foo", value = 1:5)
 
   g2 <- make_(

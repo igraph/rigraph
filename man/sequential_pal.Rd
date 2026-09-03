@@ -26,11 +26,11 @@ people, or their seniority level.
 \dontshow{if (rlang::is_installed(c("igraphdata", "scales"))) withAutoprint(\{ # examplesIf}
 library(igraphdata)
 data(karate)
-karate <- karate \%>\%
-  add_layout_(with_kk()) \%>\%
+karate <- karate |>
+  add_layout_(with_kk()) |>
   set_vertex_attr("size", value = 10)
 
-V(karate)$color <- scales::dscale(degree(karate) \%>\% cut(5), sequential_pal)
+V(karate)$color <- scales::dscale(degree(karate) |> cut(5), sequential_pal)
 plot(karate)
 \dontshow{\}) # examplesIf}
 }

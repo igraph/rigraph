@@ -24,8 +24,8 @@ edges.
 }
 \examples{
 g <- make_ring(10)
-g \%>\%
-  rewire(keeping_degseq(niter = 20)) \%>\%
+g |>
+  rewire(keeping_degseq(niter = 20)) |>
   degree()
 print_all(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
 }

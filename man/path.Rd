@@ -32,7 +32,7 @@ to \code{\link[=delete_edges]{delete_edges()}}.
 g <- make_star(11, center = 1) + path(2:11, 2)
 plot(g)
 
-g <- make_empty_graph(directed = FALSE, n = 10) \%>\%
+g <- make_empty_graph(directed = FALSE, n = 10) |>
   set_vertex_attr("name", value = letters[1:10])
 
 g2 <- g + path("a", "b", "c", "d")
