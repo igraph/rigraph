@@ -570,7 +570,7 @@ add_shape <- function(
       vertex.frame.color,
       vertex.size,
       vertex.frame.width,
-      FUN = function(x, y, bg, fg, size, lwd) {
+      FUN = \(x, y, bg, fg, size, lwd) {
         symbols(
           x = x,
           y = y,
@@ -639,7 +639,7 @@ add_shape <- function(
       (l[, 7] - x0)^2 + (l[, 8] - y0)^2
     )
 
-    t(sapply(seq(length.out = nrow(l)), function(x) {
+    t(sapply(seq(length.out = nrow(l)), \(x) {
       d[x, ][!v[x, ]] <- Inf
       m <- which.min(d[x, ])
       l[x, c(m * 2 - 1, m * 2)]
@@ -725,7 +725,7 @@ add_shape <- function(
       vertex.frame.color,
       vertex.size,
       vertex.frame.width,
-      FUN = function(x, y, bg, fg, size, lwd) {
+      FUN = \(x, y, bg, fg, size, lwd) {
         symbols(
           x = x,
           y = y,
@@ -774,7 +774,7 @@ add_shape <- function(
       (l[, 7] - x0)^2 + (l[, 8] - y0)^2
     )
 
-    t(sapply(seq(length.out = nrow(l)), function(x) {
+    t(sapply(seq(length.out = nrow(l)), \(x) {
       m <- which.min(d[x, ])
       l[x, c(m * 2 - 1, m * 2)]
     }))
@@ -871,7 +871,7 @@ add_shape <- function(
       (l[, 7] - x0)^2 + (l[, 8] - y0)^2
     )
 
-    t(sapply(seq(length.out = nrow(l)), function(x) {
+    t(sapply(seq(length.out = nrow(l)), \(x) {
       d[x, ][!v[x, ]] <- Inf
       m <- which.min(d[x, ])
       l[x, c(m * 2 - 1, m * 2)]
@@ -975,7 +975,7 @@ add_shape <- function(
       vertex.size[, 1],
       vertex.size[, 2],
       vertex.frame.width,
-      FUN = function(x, y, bg, fg, size, size2, lwd) {
+      FUN = \(x, y, bg, fg, size, size2, lwd) {
         symbols(
           x = x,
           y = y,
@@ -1025,7 +1025,7 @@ add_shape <- function(
       (l[, 7] - x0)^2 + (l[, 8] - y0)^2
     )
 
-    t(sapply(seq(length.out = nrow(l)), function(x) {
+    t(sapply(seq(length.out = nrow(l)), \(x) {
       m <- which.min(d[x, ])
       l[x, c(m * 2 - 1, m * 2)]
     }))
@@ -1103,7 +1103,7 @@ add_shape <- function(
       (l[, 3] - x0)^2 + (l[, 4] - y0)^2
     )
 
-    t(sapply(seq(length.out = nrow(l)), function(x) {
+    t(sapply(seq(length.out = nrow(l)), \(x) {
       m <- which.min(d[x, ])
       l[x, c(m * 2 - 1, m * 2)]
     }))
@@ -1349,7 +1349,7 @@ mypie <- function(
 
   ## Need to create a separate image for every different vertex color
   allcols <- unique(vertex.color)
-  images <- lapply(allcols, function(col) {
+  images <- lapply(allcols, \(col) {
     img <- getsphere(
       spos = c(0.0, 0.0, 10.0),
       sradius = 7.0,

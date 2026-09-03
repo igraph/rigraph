@@ -407,7 +407,7 @@ disjoint_union_many_impl <- function(
   if (!is.list(graphs)) {
     cli::cli_abort("{.arg graphs} must be a list of igraph objects")
   }
-  graphs <- lapply(graphs, function(g) {
+  graphs <- lapply(graphs, \(g) {
     if (!inherits(g, "igraph")) {
       cli::cli_abort("{.arg graphs} must be a list of igraph objects")
     }
@@ -450,7 +450,7 @@ intersection_many_impl <- function(
   if (!is.list(graphs)) {
     cli::cli_abort("{.arg graphs} must be a list of igraph objects")
   }
-  graphs <- lapply(graphs, function(g) {
+  graphs <- lapply(graphs, \(g) {
     if (!inherits(g, "igraph")) {
       cli::cli_abort("{.arg graphs} must be a list of igraph objects")
     }
@@ -512,7 +512,7 @@ union_many_impl <- function(
   if (!is.list(graphs)) {
     cli::cli_abort("{.arg graphs} must be a list of igraph objects")
   }
-  graphs <- lapply(graphs, function(g) {
+  graphs <- lapply(graphs, \(g) {
     if (!inherits(g, "igraph")) {
       cli::cli_abort("{.arg graphs} must be a list of igraph objects")
     }

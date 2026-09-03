@@ -1860,14 +1860,14 @@ graph_from_literal_i <- function(mf) {
     }
   }
 
-  ret <- lapply(mf, function(x) unlist(f(x)))
+  ret <- lapply(mf, \(x) unlist(f(x)))
 
-  v <- unique(unlist(lapply(ret, function(x) {
+  v <- unique(unlist(lapply(ret, \(x) {
     x[names(x) == "sym"]
   })))
 
   ## Merge symbols for ":"
-  ret <- lapply(ret, function(x) {
+  ret <- lapply(ret, \(x) {
     res <- list()
     for (i in seq(along.with = x)) {
       if (x[i] == ":" && names(x)[i] == "op") {

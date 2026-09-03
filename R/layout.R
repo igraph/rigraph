@@ -440,7 +440,7 @@ layout_ <- function(graph, layout, ...) {
   names(modifiers) <- ids
 
   # Separate modifiers by type
-  is_pre <- vapply(modifiers, function(m) isTRUE(m$type == "pre"), logical(1))
+  is_pre <- vapply(modifiers, \(m) isTRUE(m$type == "pre"), logical(1))
   pre_modifiers <- modifiers[is_pre]
   post_modifiers <- modifiers[!is_pre]
 
@@ -597,10 +597,10 @@ component_wise <- function(merge_method = "dla") {
     id = "component_wise",
     type = "pre",
     args = args,
-    apply = function(graph, layout, modifier_args) {
+    apply = \(graph, layout, modifier_args) {
       graph$id <- seq(vcount(graph))
       comps <- decompose(graph)
-      coords <- lapply(comps, function(comp) {
+      coords <- lapply(comps, \(comp) {
         do_call(layout$fun, list(graph = comp), layout$args)
       })
       all_coords <- merge_coords(
@@ -662,7 +662,7 @@ normalize <- function(
     id = "normalize",
     type = "post",
     args = args,
-    apply = function(graph, layout, modifier_args) {
+    apply = \(graph, layout, modifier_args) {
       do_call(
         norm_coords,
         list(layout),

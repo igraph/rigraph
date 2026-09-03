@@ -286,7 +286,7 @@ local_scan <- function(
 
         ## General
       } else {
-        sapply(V(graph.us), function(x) {
+        sapply(V(graph.us), \(x) {
           vei <- neighborhood(graph.us, order = k, nodes = x, mode = mode)[[1]]
           if (!is.function(FUN)) {
             FUN <- getFunction(FUN, where = environment())

@@ -355,7 +355,7 @@ max_cliques <- function(
       as.numeric(min %||% 0),
       as.numeric(max %||% 0)
     )
-    res <- lapply(res, function(x) x + 1)
+    res <- lapply(res, \(x) x + 1)
 
     if (igraph_opt("return.vs.es")) {
       res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))

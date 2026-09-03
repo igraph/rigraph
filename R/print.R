@@ -105,7 +105,7 @@
   if (length(list) != 0) {
     cat("+ graph attributes:\n")
     out <- capture.output({
-      lapply(list, function(n) {
+      lapply(list, \(n) {
         cat(sep = "", "+ ", n, ":\n")
         indent_print(graph_attr(x, n), .indent = "  ")
       })
@@ -166,7 +166,7 @@
     }
     if (
       vc == 0 ||
-        all(sapply(list, function(v) {
+        all(sapply(list, \(v) {
           is.numeric(vertex_attr(x, v)) ||
             is.character(vertex_attr(x, v)) ||
             is.logical(vertex_attr(x, v))
@@ -181,7 +181,7 @@
     } else {
       for (i in ind) {
         cat(sep = "", "[[", i, "]]\n")
-        lapply(list, function(n) {
+        lapply(list, \(n) {
           cat(sep = "", "[[", i, "]][[", n, "]]\n")
           print(vertex_attr(x, n, i))
         })
@@ -242,7 +242,7 @@
   }
   if (
     ec == 0 ||
-      all(sapply(list, function(v) {
+      all(sapply(list, \(v) {
         is.numeric(edge_attr(x, v)) |
           is.character(edge_attr(x, v)) |
           is.logical(edge_attr(x, v))
@@ -267,9 +267,9 @@
     print(tab)
   } else {
     i <- 1
-    apply(el, 1, function(v) {
+    apply(el, 1, \(v) {
       cat(sep = "", "[", ename[i], "] ", v[1], " ", arrow, " ", v[2])
-      lapply(list, function(n) {
+      lapply(list, \(n) {
         cat(sep = "", "\n[[", i, "]][[", n, "]]\n")
         print(edge_attr(x, n, i))
       })
@@ -446,7 +446,7 @@ print_edge_detail <- function(graph, edges) {
     ## Wrapping needed
     mw <- max.ind.width
     sm <- paste(collapse = "", rep(" ", mw + 4))
-    alstr <- lapply(seq_along(al), function(x) {
+    alstr <- lapply(seq_along(al), \(x) {
       len <- length(al[[x]])
       fac <- rep(1:(len / mpl + 1), each = mpl, length.out = len)
       nei <- tapply(format(al[[x]], width = mw), fac, paste, collapse = " ")
@@ -456,7 +456,7 @@ print_edge_detail <- function(graph, edges) {
     })
     cat(unlist(alstr), sep = "\n")
   } else {
-    alstr <- sapply(al, function(x) {
+    alstr <- sapply(al, \(x) {
       paste(format(x, width = w), collapse = " ")
     })
     mark <- paste(sep = "", format(ind), arrow)
@@ -488,7 +488,7 @@ print_edge_detail <- function(graph, edges) {
   ind <- tr$ind
 
   al <- as_adj_list(x, mode = "out")[ind]
-  alstr <- sapply(al, function(x) {
+  alstr <- sapply(al, \(x) {
     paste(collapse = ", ", vn[x])
   })
   alstr <- paste(sep = "", format(vn[ind]), arrow, alstr)
@@ -861,7 +861,7 @@ print_igraph_attr_summary_cli <- function(x) {
     labels <- vapply(codes, attr_label_cli, character(1))
     parts <- vapply(
       seq_along(names),
-      function(i) {
+      \(i) {
         nm <- names[i]
         lbl <- labels[i]
         cli::format_inline("{.field {nm}} {.cls {lbl}}")

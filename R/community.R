@@ -3583,7 +3583,7 @@ groups.default <- function(x) {
   if (is.null(vids)) {
     vids <- seq_along(x$membership)
   }
-  tapply(vids, x$membership, simplify = FALSE, function(x) x)
+  tapply(vids, x$membership, simplify = FALSE, \(x) x)
 }
 
 #' @method groups communities
