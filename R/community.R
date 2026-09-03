@@ -1758,7 +1758,6 @@ cluster_spinglass <- function(
 #' @param resolution The resolution parameter to use. Higher
 #'   resolutions lead to more smaller communities, while lower resolutions lead
 #'   to fewer larger communities.
-#' @param resolution_parameter  `r lifecycle::badge("superseded")` Use `resolution` instead.
 #' @param beta Parameter affecting the randomness in the Leiden algorithm.
 #'   This affects only the refinement step of the algorithm.
 #' @param initial_membership If provided, the Leiden algorithm
@@ -1809,22 +1808,57 @@ cluster_leiden <- function(
   ...,
   weights = NULL,
   resolution = 1,
-  resolution_parameter = deprecated(),
   beta = 0.01,
   initial_membership = NULL,
   n_iterations = 2,
   vertex_weights = NULL
 ) {
-  check_dots_empty()
-
-  if (lifecycle::is_present(resolution_parameter)) {
-    lifecycle::deprecate_warn(
-      "2.1.0",
-      "cluster_leiden(resolution_parameter)",
-      "cluster_leiden(resolution)"
-    )
-    resolution <- resolution_parameter
+  # BEGIN GENERATED ARG_HANDLE: cluster_leiden, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("r", "re", "res", "reso", "resol", "resolu", "resolut", "resoluti", "resolutio"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn cluster_leiden}.")
+    # Pre-3.0.0 signature: cluster_leiden(graph, objective_function, weights, resolution_parameter, beta, initial_membership, n_iterations, vertex_weights)
+    .old_signature <- function(weights, resolution_parameter, beta, initial_membership, n_iterations, vertex_weights, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn cluster_leiden}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn cluster_leiden}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(resolution_parameter)) base::list(resolution = resolution_parameter),
+        if (!base::missing(beta)) base::list(beta = beta),
+        if (!base::missing(initial_membership)) base::list(initial_membership = initial_membership),
+        if (!base::missing(n_iterations)) base::list(n_iterations = n_iterations),
+        if (!base::missing(vertex_weights)) base::list(vertex_weights = vertex_weights)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(resolution)) "resolution",
+        if (!base::missing(beta)) "beta",
+        if (!base::missing(initial_membership)) "initial_membership",
+        if (!base::missing(n_iterations)) "n_iterations",
+        if (!base::missing(vertex_weights)) "vertex_weights"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn cluster_leiden} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `cluster_leiden()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  cluster_leiden(", base::paste(base::c("graph", "objective_function", base::c(weights = "weights", resolution = "resolution_parameter", beta = "beta", initial_membership = "initial_membership", n_iterations = "n_iterations", vertex_weights = "vertex_weights")[.arg_names]), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    cluster_leiden(", base::paste(base::c("graph", "objective_function", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
+  # END GENERATED ARG_HANDLE
 
   ensure_igraph(graph)
 
