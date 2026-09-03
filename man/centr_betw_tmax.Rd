@@ -34,7 +34,7 @@ See \code{\link[=centralize]{centralize()}} for a summary of graph centralizatio
 \examples{
 # A BA graph is quite centralized
 g <- sample_pa(1000, m = 4)
-centr_betw(g, normalized = FALSE)$centralization \%>\%
+centr_betw(g, normalized = FALSE)$centralization |>
   `/`(centr_betw_tmax(g))
 centr_betw(g, normalized = TRUE)$centralization
 }

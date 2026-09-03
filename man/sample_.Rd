@@ -41,7 +41,7 @@ blocky <- sample_(sbm(
   block.sizes = c(10, 10)
 ))
 
-blocky2 <- pref_matrix \%>\%
+blocky2 <- pref_matrix |>
   sample_sbm(n = 20, block.sizes = c(10, 10))
 }
 \seealso{

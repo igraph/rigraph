@@ -20,7 +20,7 @@ make_(
     frame.color = "#7fcdbb",
     name = LETTERS[1:10]
   )
-) \%>\%
+) |>
   plot()
 }
 \seealso{
