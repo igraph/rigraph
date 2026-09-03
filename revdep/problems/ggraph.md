@@ -41,19 +41,19 @@ Run `revdepcheck::revdep_details(, "ggraph")` for more info
 *   checking re-building of vignette outputs ... ERROR
      ```
      ...
-      16.           └─lifecycle:::deprecate_stop0(msg)
+       9.           ├─... %gr_attr% .data
+      10.           └─igraph::add_edges(.data, rbind(new_edges$from, new_edges$to))
+      11.             └─igraph:::el_to_vec(edges, arg = "edges", fn = "add_edges")
+      12.               └─lifecycle::deprecate_stop(...)
+      13.                 └─lifecycle:::deprecate_stop0(msg)
      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      
-     Error: processing vignette 'Edges.Rmd' failed with diagnostics:
-     ℹ In argument: `Class = map_bfs_back_chr(...)`.
-     Caused by error:
-     ! The `father` argument of `bfs()` was deprecated in igraph 2.2.0 and is
-       now defunct.
-     ℹ Please use the `parent` argument instead.
-     --- failed re-building ‘Edges.Rmd’
-     
-     --- re-building ‘Layouts.Rmd’ using rmarkdown
-     --- finished re-building ‘Layouts.Rmd’
+     Error: processing vignette 'Layouts.Rmd' failed with diagnostics:
+     The `edges` argument of `add_edges()` supplied as a matrix should be a n
+     times 2 matrix, not 2 times n as of igraph 2.1.5.
+     ℹ either transpose the matrix with t() or convert it to a data.frame with two
+       columns.
+     --- failed re-building ‘Layouts.Rmd’
      
      --- re-building ‘Nodes.Rmd’ using rmarkdown
      --- finished re-building ‘Nodes.Rmd’
@@ -61,8 +61,8 @@ Run `revdepcheck::revdep_details(, "ggraph")` for more info
      --- re-building ‘tidygraph.Rmd’ using rmarkdown
      --- finished re-building ‘tidygraph.Rmd’
      
-     SUMMARY: processing the following file failed:
-       ‘Edges.Rmd’
+     SUMMARY: processing the following files failed:
+       ‘Edges.Rmd’ ‘Layouts.Rmd’
      
      Error: Vignette re-building failed.
      Execution halted
