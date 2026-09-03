@@ -110,11 +110,11 @@ E(g)$weight <- sample(seq_len(ecount(g)))
 diameter(g)
 #> [1] 27
 get_diameter(g)
-#> ── <vertex sequence> 5/10 · from a8abf8a ───────────────────────────────────────
+#> ── <vertex sequence> 5/10 · from 7955d60 ───────────────────────────────────────
 #> [1]  1 10  9  8  7
 diameter(g, weights = NA)
 #> [1] 5
 get_diameter(g, weights = NA)
-#> ── <vertex sequence> 6/10 · from a8abf8a ───────────────────────────────────────
+#> ── <vertex sequence> 6/10 · from 7955d60 ───────────────────────────────────────
 #> [1] 1 2 3 4 5 6
 ```
