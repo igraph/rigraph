@@ -216,9 +216,13 @@ env:
   # layers and stale system packages forever.
   REVDEPX_IMAGE_MAX_AGE_DAYS: ${{ vars.REVDEPX_IMAGE_MAX_AGE_DAYS || '14' }}
   # Per-check timeout: factor times the package's CRAN check time, but never
-  # below the floor -- CRAN's machines are not these runners.
+  # below the floor -- CRAN's machines are not these runners. The floor is
+  # 30 min because a saturated shard runs each check at roughly half speed
+  # (measured queue-vs-pair inflation: median 1.5x, p90 1.8x, and up to
+  # ~3x in the hottest windows): run 32574134229 killed four packages at
+  # the old 20-min floor that finish in 7-12 min uncontended.
   REVDEPX_TIMEOUT_FACTOR: ${{ vars.REVDEPX_TIMEOUT_FACTOR || '1.5' }}
-  REVDEPX_TIMEOUT_MIN_MINUTES: ${{ vars.REVDEPX_TIMEOUT_MIN_MINUTES || '20' }}
+  REVDEPX_TIMEOUT_MIN_MINUTES: ${{ vars.REVDEPX_TIMEOUT_MIN_MINUTES || '30' }}
   REVDEPX_DEADLINE_MINUTES: ${{ vars.REVDEPX_DEADLINE_MINUTES || '300' }}
 
 jobs:
@@ -949,7 +953,7 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       SHARD: ${{ matrix.shard }}
       TIMEOUT_FACTOR: ${{ vars.REVDEPX_TIMEOUT_FACTOR || '1.5' }}
-      TIMEOUT_MIN_MINUTES: ${{ vars.REVDEPX_TIMEOUT_MIN_MINUTES || '20' }}
+      TIMEOUT_MIN_MINUTES: ${{ vars.REVDEPX_TIMEOUT_MIN_MINUTES || '30' }}
       DEADLINE_MINUTES: ${{ vars.REVDEPX_DEADLINE_MINUTES || '300' }}
 
     steps:
