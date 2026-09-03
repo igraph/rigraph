@@ -16,8 +16,7 @@ estimate_closeness(
 \arguments{
 \item{graph}{The graph to analyze.}
 
-\item{vids}{The vertices for which closeness will be calculated.
-The default \code{NULL} selects all vertices.}
+\item{vids}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 
 \item{mode}{Character string, defined the types of the paths used for
 measuring the distance in directed graphs. \dQuote{in} measures the paths

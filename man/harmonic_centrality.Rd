@@ -6,19 +6,20 @@
 \usage{
 harmonic_centrality(
   graph,
-  vids = NULL,
+  vertices = NULL,
   ...,
   mode = c("out", "in", "all", "total"),
   weights = NULL,
   normalized = FALSE,
-  cutoff = -1
+  cutoff = -1,
+  vids = deprecated()
 )
 }
 \arguments{
 \item{graph}{The graph to analyze.}
 
-\item{vids}{The vertices for which harmonic centrality will be calculated.
-The default \code{NULL} selects all vertices.}
+\item{vertices}{The vertices for which harmonic centrality will be
+calculated. The default \code{NULL} selects all vertices.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
@@ -41,10 +42,12 @@ If false, the result is the sum of inverse path lengths to other vertices.}
 \item{cutoff}{The maximum path length to consider when calculating the
 harmonic centrality. There is no such limit when the cutoff is negative. Note that
 zero cutoff means that only paths of at most length 0 are considered.}
+
+\item{vids}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 }
 \value{
 Numeric vector with the harmonic centrality scores of all the vertices in
-\code{v}.
+\code{vertices}.
 }
 \description{
 The harmonic centrality of a vertex is the mean inverse distance to all other

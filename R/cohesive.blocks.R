@@ -472,7 +472,7 @@ print.cohesiveBlocks <- function(x, ...) {
   cs <- 3 +
     2 +
     nchar(length(x)) +
-    max(distances(hierarchy(x), mode = "out", v = 1)) * 3
+    max(distances(hierarchy(x), mode = "out", vertices = 1)) * 3
 
   .plot <- function(b, ind = "") {
     if (b != 1) {

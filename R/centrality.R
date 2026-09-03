@@ -28,6 +28,8 @@ subgraph.centrality <- function(graph, diag = FALSE) {
 #' @inheritParams page_rank
 #' @param algo `r lifecycle::badge("deprecated")` Use `algorithm` in
 #'   [page_rank()] instead.
+#' @param vids `r lifecycle::badge("deprecated")` Use `vertices` in
+#'   [page_rank()] instead.
 #' @keywords internal
 #' @export
 page.rank <- function(
@@ -45,7 +47,7 @@ page.rank <- function(
   page_rank(
     graph = graph,
     algorithm = algo,
-    vids = vids,
+    vertices = vids,
     directed = directed,
     damping = damping,
     personalized = personalized,
@@ -113,7 +115,7 @@ graph.strength <- function(
   lifecycle::deprecate_warn("2.0.0", "graph.strength()", "strength()")
   strength(
     graph = graph,
-    vids = vids,
+    vertices = vids,
     mode = mode,
     loops = loops,
     weights = weights
@@ -161,12 +163,14 @@ graph.eigen <- function(
 #' `graph.diversity()` was renamed to [diversity()] to create a more
 #' consistent API.
 #' @inheritParams diversity
+#' @param vids `r lifecycle::badge("deprecated")` Use `vertices` in
+#'   [diversity()] instead.
 #' @keywords internal
 #' @export
 graph.diversity <- function(graph, weights = NULL, vids = V(graph)) {
   # nocov start
   lifecycle::deprecate_warn("2.0.0", "graph.diversity()", "diversity()")
-  diversity(graph = graph, weights = weights, vids = vids)
+  diversity(graph = graph, weights = weights, vertices = vids)
 } # nocov end
 
 #' Find Eigenvector Centrality Scores of Network Positions
@@ -250,7 +254,7 @@ bonpow <- function(
   lifecycle::deprecate_warn("2.0.0", "bonpow()", "power_centrality()")
   power_centrality(
     graph = graph,
-    nodes = nodes,
+    vertices = nodes,
     loops = loops,
     exponent = exponent,
     normalized = rescale,
@@ -283,7 +287,7 @@ alpha.centrality <- function(
   lifecycle::deprecate_warn("2.0.0", "alpha.centrality()", "alpha_centrality()")
   alpha_centrality(
     graph = graph,
-    nodes = nodes,
+    vertices = nodes,
     alpha = alpha,
     loops = loops,
     exo = exo,
@@ -340,7 +344,7 @@ estimate_betweenness <- function(
 
   betweenness(
     graph,
-    v = vids,
+    vertices = vids,
     directed = directed,
     cutoff = cutoff,
     weights = weights
@@ -385,8 +389,9 @@ betweenness.estimate <- estimate_betweenness
 #' @aliases betweenness.estimate
 #' @aliases edge.betweenness.estimate
 #' @param graph The graph to analyze.
-#' @param v The vertices for which the vertex betweenness will be calculated.
-#'   The default `NULL` selects all vertices.
+#' @param vertices The vertices for which the vertex betweenness will be
+#'   calculated. The default `NULL` selects all vertices.
+#' @param v `r lifecycle::badge("deprecated")` Use `vertices` instead.
 #' @inheritParams rlang::args_dots_empty
 #' @param directed Logical, whether directed paths should be considered while
 #'   determining the shortest paths.
@@ -408,7 +413,7 @@ betweenness.estimate <- estimate_betweenness
 #' @param cutoff The maximum shortest path length to consider when calculating
 #'   betweenness. If negative, then there is no such limit.
 #' @return A numeric vector with the betweenness score for each vertex in
-#'   `v` for `betweenness()`.
+#'   `vertices` for `betweenness()`.
 #'
 #'   A numeric vector with the edge betweenness score for each edge in `e`
 #'   for `edge_betweenness()`.
@@ -435,12 +440,13 @@ betweenness.estimate <- estimate_betweenness
 #'
 betweenness <- function(
   graph,
-  v = NULL,
+  vertices = NULL,
   ...,
   directed = TRUE,
   weights = NULL,
   normalized = FALSE,
-  cutoff = -1
+  cutoff = -1,
+  v = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: betweenness, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -475,21 +481,36 @@ betweenness <- function(
         "3.0.0",
         what = base::I("Calling `betweenness()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  betweenness(", base::paste(base::c("graph", "v", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    betweenness(", base::paste(base::c("graph", "v", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  betweenness(", base::paste(base::c("graph", "vertices", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    betweenness(", base::paste(base::c("graph", "vertices", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
-  if (is.null(v)) {
-    v <- V(graph)
+  if (lifecycle::is_present(v)) {
+    if (!missing(vertices)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertices} of {.fn betweenness} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg v}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "betweenness(v = )",
+      "betweenness(vertices = )"
+    )
+    vertices <- v
+  }
+
+  if (is.null(vertices)) {
+    vertices <- V(graph)
   }
 
   res <- betweenness_cutoff_impl(
     graph = graph,
-    vids = v,
+    vids = vertices,
     directed = directed,
     weights = weights,
     cutoff = cutoff
@@ -632,8 +653,9 @@ edge.betweenness.estimate <- estimate_edge_betweenness
 #'
 #' @aliases closeness.estimate
 #' @param graph The graph to analyze.
-#' @param vids The vertices for which closeness will be calculated.
+#' @param vertices The vertices for which closeness will be calculated.
 #'   The default `NULL` selects all vertices.
+#' @param vids `r lifecycle::badge("deprecated")` Use `vertices` instead.
 #' @inheritParams rlang::args_dots_empty
 #' @param mode Character string, defined the types of the paths used for
 #'   measuring the distance in directed graphs. \dQuote{in} measures the paths
@@ -651,7 +673,7 @@ edge.betweenness.estimate <- estimate_edge_betweenness
 #' @param cutoff The maximum path length to consider when calculating the
 #'   closeness. If zero or negative then there is no such limit.
 #' @return Numeric vector with the closeness values of all the vertices in
-#'   `v`.
+#'   `vertices`.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Freeman, L.C. (1979). Centrality in Social Networks I:
 #' Conceptual Clarification. *Social Networks*, 1, 215-239.
@@ -669,16 +691,19 @@ edge.betweenness.estimate <- estimate_edge_betweenness
 #'
 closeness <- function(
   graph,
-  vids = NULL,
+  vertices = NULL,
   ...,
   mode = c("out", "in", "all", "total"),
   weights = NULL,
   normalized = FALSE,
-  cutoff = -1
+  cutoff = -1,
+  vids = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: closeness, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("v"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn closeness}.", i = "Spell out the full argument name."))
     # Pre-3.0.0 signature: closeness(graph, vids, mode, weights, normalized, cutoff)
     .old_signature <- function(mode, weights, normalized, cutoff, ...) {
       if (...length() > 0L) {
@@ -709,21 +734,36 @@ closeness <- function(
         "3.0.0",
         what = base::I("Calling `closeness()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  closeness(", base::paste(base::c("graph", "vids", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    closeness(", base::paste(base::c("graph", "vids", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  closeness(", base::paste(base::c("graph", "vertices", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    closeness(", base::paste(base::c("graph", "vertices", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
-  if (is.null(vids)) {
-    vids <- V(graph)
+  if (lifecycle::is_present(vids)) {
+    if (!missing(vertices)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertices} of {.fn closeness} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg vids}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "closeness(vids = )",
+      "closeness(vertices = )"
+    )
+    vertices <- vids
+  }
+
+  if (is.null(vertices)) {
+    vertices <- V(graph)
   }
 
   closeness_cutoff_impl(
     graph = graph,
-    vids = vids,
+    vids = vertices,
     mode = mode,
     weights = weights,
     normalized = normalized,
@@ -1517,8 +1557,9 @@ eigen_centrality <- function(
 #'
 #'
 #' @param graph The input graph.
-#' @param vids The vertices for which the strength will be calculated.
+#' @param vertices The vertices for which the strength will be calculated.
 #'   The default `NULL` selects all vertices.
+#' @param vids `r lifecycle::badge("deprecated")` Use `vertices` instead.
 #' @inheritParams rlang::args_dots_empty
 #' @param mode Character string, \dQuote{out} for out-degree, \dQuote{in} for
 #'   in-degree or \dQuote{all} for the sum of the two. For undirected graphs this
@@ -1551,15 +1592,18 @@ eigen_centrality <- function(
 #' @export
 strength <- function(
   graph,
-  vids = NULL,
+  vertices = NULL,
   ...,
   mode = c("all", "out", "in", "total"),
   loops = TRUE,
-  weights = NULL
+  weights = NULL,
+  vids = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: strength, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("v"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn strength}.", i = "Spell out the full argument name."))
     # Pre-3.0.0 signature: strength(graph, vids, mode, loops, weights)
     .old_signature <- function(mode, loops, weights, ...) {
       if (...length() > 0L) {
@@ -1588,21 +1632,36 @@ strength <- function(
         "3.0.0",
         what = base::I("Calling `strength()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  strength(", base::paste(base::c("graph", "vids", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    strength(", base::paste(base::c("graph", "vids", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  strength(", base::paste(base::c("graph", "vertices", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    strength(", base::paste(base::c("graph", "vertices", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
-  if (is.null(vids)) {
-    vids <- V(graph)
+  if (lifecycle::is_present(vids)) {
+    if (!missing(vertices)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertices} of {.fn strength} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg vids}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "strength(vids = )",
+      "strength(vertices = )"
+    )
+    vertices <- vids
+  }
+
+  if (is.null(vertices)) {
+    vertices <- V(graph)
   }
 
   strength_impl(
     graph = graph,
-    vids = vids,
+    vids = vertices,
     mode = mode,
     loops = loops,
     weights = weights
@@ -1632,7 +1691,7 @@ strength <- function(
 #' @param weights `NULL`, or the vector of edge weights to use for the
 #'   computation. If `NULL`, then the \sQuote{weight} attibute is used. Note
 #'   that this measure is not defined for unweighted graphs.
-#' @param vids The vertex IDs for which to calculate the measure.
+#' @param vertices The vertex IDs for which to calculate the measure.
 #'   The default `NULL` selects all vertices.
 #' @return A numeric vector, its length is the number of vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -1656,11 +1715,13 @@ diversity <- function(
   graph,
   ...,
   weights = NULL,
-  vids = NULL
+  vertices = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: diversity, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("v"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn diversity}.")
     # Pre-3.0.0 signature: diversity(graph, weights, vids)
     .old_signature <- function(weights, vids, ...) {
       if (...length() > 0L) {
@@ -1671,7 +1732,7 @@ diversity <- function(
       }
       base::c(
         if (!base::missing(weights)) base::list(weights = weights),
-        if (!base::missing(vids)) base::list(vids = vids)
+        if (!base::missing(vids)) base::list(vertices = vids)
       )
     }
     .arg_handle <- .old_signature(...)
@@ -1679,7 +1740,7 @@ diversity <- function(
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
         if (!base::missing(weights)) "weights",
-        if (!base::missing(vids)) "vids"
+        if (!base::missing(vertices)) "vertices"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn diversity} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -1687,7 +1748,7 @@ diversity <- function(
         "3.0.0",
         what = base::I("Calling `diversity()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  diversity(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  diversity(", base::paste(base::c("graph", base::c(weights = "weights", vertices = "vids")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    diversity(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -1695,14 +1756,14 @@ diversity <- function(
   }
   # END GENERATED ARG_HANDLE
 
-  if (is.null(vids)) {
-    vids <- V(graph)
+  if (is.null(vertices)) {
+    vertices <- V(graph)
   }
 
   diversity_impl(
     graph = graph,
     weights = weights,
-    vids = vids
+    vids = vertices
   )
 }
 
@@ -1913,7 +1974,7 @@ hub_score <- function(
 #'   for all but small graphs.  `"arpack"` uses the ARPACK library, the
 #'   default implementation from igraph version 0.5 until version 0.7. It computes
 #'   PageRank scores by solving an eingevalue problem.
-#' @param vids The vertices of interest.
+#' @param vertices The vertices of interest.
 #'   The default `NULL` selects all vertices.
 #' @param directed Logical, if true directed paths will be considered for
 #'   directed graphs. It is ignored for undirected graphs.
@@ -1975,7 +2036,7 @@ page_rank <- function(
   graph,
   ...,
   algorithm = c("prpack", "arpack"),
-  vids = NULL,
+  vertices = NULL,
   directed = TRUE,
   damping = 0.85,
   personalized = NULL,
@@ -1985,7 +2046,7 @@ page_rank <- function(
   # BEGIN GENERATED ARG_HANDLE: page_rank, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "al", "alg", "d"))
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "al", "alg", "v", "d"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn page_rank}.")
     # Pre-3.0.0 signature: page_rank(graph, algo, vids, directed, damping, personalized, weights, options)
     .old_signature <- function(algo, vids, directed, damping, personalized, weights, options, ...) {
@@ -1997,7 +2058,7 @@ page_rank <- function(
       }
       base::c(
         if (!base::missing(algo)) base::list(algorithm = algo),
-        if (!base::missing(vids)) base::list(vids = vids),
+        if (!base::missing(vids)) base::list(vertices = vids),
         if (!base::missing(directed)) base::list(directed = directed),
         if (!base::missing(damping)) base::list(damping = damping),
         if (!base::missing(personalized)) base::list(personalized = personalized),
@@ -2010,7 +2071,7 @@ page_rank <- function(
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
         if (!base::missing(algorithm)) "algorithm",
-        if (!base::missing(vids)) "vids",
+        if (!base::missing(vertices)) "vertices",
         if (!base::missing(directed)) "directed",
         if (!base::missing(damping)) "damping",
         if (!base::missing(personalized)) "personalized",
@@ -2023,7 +2084,7 @@ page_rank <- function(
         "3.0.0",
         what = base::I("Calling `page_rank()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  page_rank(", base::paste(base::c("graph", base::c(algorithm = "algo", vids = "vids", directed = "directed", damping = "damping", personalized = "personalized", weights = "weights", options = "options")[.arg_names]), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  page_rank(", base::paste(base::c("graph", base::c(algorithm = "algo", vertices = "vids", directed = "directed", damping = "damping", personalized = "personalized", weights = "weights", options = "options")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    page_rank(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -2031,14 +2092,14 @@ page_rank <- function(
   }
   # END GENERATED ARG_HANDLE
 
-  if (is.null(vids)) {
-    vids <- V(graph)
+  if (is.null(vertices)) {
+    vertices <- V(graph)
   }
 
   personalized_pagerank_impl(
     graph = graph,
     algo = algorithm,
-    vids = vids,
+    vids = vertices,
     directed = directed,
     damping = damping,
     personalized = personalized,
@@ -2058,8 +2119,9 @@ page_rank <- function(
 #' default), then the function calculates the exact harmonic centrality scores.
 #'
 #' @param graph The graph to analyze.
-#' @param vids The vertices for which harmonic centrality will be calculated.
-#'   The default `NULL` selects all vertices.
+#' @param vertices The vertices for which harmonic centrality will be
+#'   calculated. The default `NULL` selects all vertices.
+#' @param vids `r lifecycle::badge("deprecated")` Use `vertices` instead.
 #' @inheritParams rlang::args_dots_empty
 #' @param mode Character string, defining the types of the paths used for
 #'   measuring the distance in directed graphs. \dQuote{out} follows paths along
@@ -2078,7 +2140,7 @@ page_rank <- function(
 #'   harmonic centrality. There is no such limit when the cutoff is negative. Note that
 #'   zero cutoff means that only paths of at most length 0 are considered.
 #' @return Numeric vector with the harmonic centrality scores of all the vertices in
-#'   `v`.
+#'   `vertices`.
 #' @seealso [betweenness()], [closeness()]
 #' @references M. Marchiori and V. Latora, Harmony in the small-world,
 #' *Physica A* 285, pp. 539-546 (2000).
@@ -2096,16 +2158,19 @@ page_rank <- function(
 #'
 harmonic_centrality <- function(
   graph,
-  vids = NULL,
+  vertices = NULL,
   ...,
   mode = c("out", "in", "all", "total"),
   weights = NULL,
   normalized = FALSE,
-  cutoff = -1
+  cutoff = -1,
+  vids = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: harmonic_centrality, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("v"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn harmonic_centrality}.", i = "Spell out the full argument name."))
     # Pre-3.0.0 signature: harmonic_centrality(graph, vids, mode, weights, normalized, cutoff)
     .old_signature <- function(mode, weights, normalized, cutoff, ...) {
       if (...length() > 0L) {
@@ -2136,21 +2201,36 @@ harmonic_centrality <- function(
         "3.0.0",
         what = base::I("Calling `harmonic_centrality()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  harmonic_centrality(", base::paste(base::c("graph", "vids", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    harmonic_centrality(", base::paste(base::c("graph", "vids", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  harmonic_centrality(", base::paste(base::c("graph", "vertices", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    harmonic_centrality(", base::paste(base::c("graph", "vertices", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
-  if (is.null(vids)) {
-    vids <- V(graph)
+  if (lifecycle::is_present(vids)) {
+    if (!missing(vertices)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertices} of {.fn harmonic_centrality} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg vids}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "harmonic_centrality(vids = )",
+      "harmonic_centrality(vertices = )"
+    )
+    vertices <- vids
+  }
+
+  if (is.null(vertices)) {
+    vertices <- V(graph)
   }
 
   harmonic_centrality_cutoff_impl(
     graph = graph,
-    vids = vids,
+    vids = vertices,
     mode = mode,
     weights = weights,
     normalized = normalized,
@@ -2226,7 +2306,7 @@ bonpow.sparse <- function(
 #' Find Bonacich Power Centrality Scores of Network Positions
 #'
 #' `power_centrality()` takes a graph (`dat`) and returns the Boncich power
-#' centralities of positions (selected by `nodes`).  The decay rate for
+#' centralities of positions (selected by `vertices`).  The decay rate for
 #' power contributions is specified by `exponent` (1 by default).
 #'
 #' Bonacich's power centrality measure is defined by
@@ -2277,8 +2357,9 @@ bonpow.sparse <- function(
 #' is important to think about the edge direction and what it represents.
 #'
 #' @param graph the input graph.
-#' @param nodes vertex sequence indicating which vertices are to be included in
-#'   the calculation. The default `NULL` selects all vertices.
+#' @param vertices vertex sequence indicating which vertices are to be included
+#'   in the calculation. The default `NULL` selects all vertices.
+#' @param nodes `r lifecycle::badge("deprecated")` Use `vertices` instead.
 #' @inheritParams rlang::args_dots_empty
 #' @param loops Logical indicating whether or not the diagonal should be
 #'   treated as valid data.  Set this true if and only if the data can contain
@@ -2340,20 +2421,21 @@ bonpow.sparse <- function(
 #'
 power_centrality <- function(
   graph,
-  nodes = NULL,
+  vertices = NULL,
   ...,
   loops = FALSE,
   exponent = 1,
   normalized = FALSE,
   tol = 1e-7,
   sparse = TRUE,
-  weights = NULL
+  weights = NULL,
+  nodes = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: power_centrality, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("n", "no"))
-    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn power_centrality}.", i = "Spell out the full argument name."))
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("n", "no"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn power_centrality}.")
     # Pre-3.0.0 signature: power_centrality(graph, nodes, loops, exponent, rescale, tol, sparse, weights)
     .old_signature <- function(loops, exponent, rescale, tol, sparse, weights, ...) {
       if (...length() > 0L) {
@@ -2388,23 +2470,38 @@ power_centrality <- function(
         "3.0.0",
         what = base::I("Calling `power_centrality()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  power_centrality(", base::paste(base::c("graph", "nodes", base::c(loops = "loops", exponent = "exponent", normalized = "rescale", tol = "tol", sparse = "sparse", weights = "weights")[.arg_names]), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    power_centrality(", base::paste(base::c("graph", "nodes", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  power_centrality(", base::paste(base::c("graph", "vertices", base::c(loops = "loops", exponent = "exponent", normalized = "rescale", tol = "tol", sparse = "sparse", weights = "weights")[.arg_names]), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    power_centrality(", base::paste(base::c("graph", "vertices", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
-  if (is.null(nodes)) {
-    nodes <- V(graph)
+  if (lifecycle::is_present(nodes)) {
+    if (!missing(vertices)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertices} of {.fn power_centrality} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg nodes}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "power_centrality(nodes = )",
+      "power_centrality(vertices = )"
+    )
+    vertices <- nodes
   }
 
-  nodes <- as_igraph_vs(graph, nodes)
+  if (is.null(vertices)) {
+    vertices <- V(graph)
+  }
+
+  vertices <- as_igraph_vs(graph, vertices)
   if (sparse) {
     res <- bonpow.sparse(
       graph,
-      nodes,
+      vertices,
       loops,
       exponent,
       normalized,
@@ -2414,7 +2511,7 @@ power_centrality <- function(
   } else {
     res <- bonpow.dense(
       graph,
-      nodes,
+      vertices,
       loops,
       exponent,
       normalized,
@@ -2424,7 +2521,7 @@ power_centrality <- function(
   }
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res) <- vertex_attr(graph, "name", nodes)
+    names(res) <- vertex_attr(graph, "name", vertices)
   }
 
   res
@@ -2512,9 +2609,10 @@ alpha.centrality.sparse <- function(
 #'
 #' @param graph The input graph, can be directed or undirected. In undirected
 #'   graphs, edges are treated as if they were reciprocal directed ones.
-#' @param nodes Vertex sequence, the vertices for which the alpha centrality
+#' @param vertices Vertex sequence, the vertices for which the alpha centrality
 #'   values are returned. The default `NULL` selects all vertices.
 #'   (For technical reasons they will be calculated for all vertices, anyway.)
+#' @param nodes `r lifecycle::badge("deprecated")` Use `vertices` instead.
 #' @inheritParams rlang::args_dots_empty
 #' @param alpha Parameter specifying the relative importance of endogenous
 #'   versus exogenous factors in the determination of centrality. See details
@@ -2555,14 +2653,15 @@ alpha.centrality.sparse <- function(
 #'
 alpha_centrality <- function(
   graph,
-  nodes = NULL,
+  vertices = NULL,
   ...,
   alpha = 1,
   loops = FALSE,
   exo = 1,
   weights = NULL,
   tol = 1e-7,
-  sparse = TRUE
+  sparse = TRUE,
+  nodes = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: alpha_centrality, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -2601,23 +2700,38 @@ alpha_centrality <- function(
         "3.0.0",
         what = base::I("Calling `alpha_centrality()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  alpha_centrality(", base::paste(base::c("graph", "nodes", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    alpha_centrality(", base::paste(base::c("graph", "nodes", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  alpha_centrality(", base::paste(base::c("graph", "vertices", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    alpha_centrality(", base::paste(base::c("graph", "vertices", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
-  if (is.null(nodes)) {
-    nodes <- V(graph)
+  if (lifecycle::is_present(nodes)) {
+    if (!missing(vertices)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertices} of {.fn alpha_centrality} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg nodes}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "alpha_centrality(nodes = )",
+      "alpha_centrality(vertices = )"
+    )
+    vertices <- nodes
   }
 
-  nodes <- as_igraph_vs(graph, nodes)
+  if (is.null(vertices)) {
+    vertices <- V(graph)
+  }
+
+  vertices <- as_igraph_vs(graph, vertices)
   if (sparse) {
     res <- alpha.centrality.sparse(
       graph,
-      nodes,
+      vertices,
       alpha,
       loops,
       exo,
@@ -2627,7 +2741,7 @@ alpha_centrality <- function(
   } else {
     res <- alpha.centrality.dense(
       graph,
-      nodes,
+      vertices,
       alpha,
       loops,
       exo,
@@ -2636,7 +2750,7 @@ alpha_centrality <- function(
     )
   }
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res) <- vertex_attr(graph, "name", nodes)
+    names(res) <- vertex_attr(graph, "name", vertices)
   }
   res
 }

@@ -340,13 +340,13 @@ degree(g, 7)
 ```
 
 ```{r echo = TRUE}
-degree(g, v = c(3,4,5))
+degree(g, vertices = c(3,4,5))
 ```
 
 La mayoría de las funciones que aceptan los IDs de los vértices también aceptan los "nombres" de los vértices (es decir, los valores del atributo `name` del vértice) siempre que los nombres sean únicos:
 
 ```{r echo = TRUE}
-degree(g, v = c("Carmina", "Moshe", "Nang"))
+degree(g, vertices = c("Carmina", "Moshe", "Nang"))
 ```
 
 También funciona para vértices individuales:

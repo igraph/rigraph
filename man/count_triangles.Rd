@@ -7,15 +7,17 @@
 \usage{
 triangles(graph)
 
-count_triangles(graph, vids = NULL)
+count_triangles(graph, vertices = NULL, vids = deprecated())
 }
 \arguments{
 \item{graph}{The input graph. It might be directed, but edge directions are
 ignored.}
 
-\item{vids}{The vertices to query. This might be a vector of numeric IDs,
-or a character vector of symbolic vertex names for named graphs. The
+\item{vertices}{The vertices to query. This might be a vector of numeric
+IDs, or a character vector of symbolic vertex names for named graphs. The
 default \code{NULL} selects all vertices.}
+
+\item{vids}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 }
 \value{
 For \code{triangles()} a numeric vector of vertex IDs, the first three

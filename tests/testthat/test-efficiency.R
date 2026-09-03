@@ -57,7 +57,7 @@ test_that("local_efficiency() covers vids, weights and directed", {
   # the neighbors of vertex 2 reconnect at distance 7
   # and those of vertex 4 at distance 3.
   expect_equal(
-    local_efficiency(g, vids = c(2, 4), weights = 1:4, directed = FALSE),
+    local_efficiency(g, vertices = c(2, 4), weights = 1:4, directed = FALSE),
     c(1 / 7, 1 / 3)
   )
 })
