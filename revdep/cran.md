@@ -1,9 +1,9 @@
 ## revdepcheck results
 
-We checked 3435 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 3441 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 28 new problems
- * We failed to check 13 packages
+ * We saw 25 new problems
+ * We failed to check 11 packages
 
 Issues with CRAN packages are summarised below.
 
@@ -17,9 +17,6 @@ Issues with CRAN packages are summarised below.
   checking examples ... ERROR
 
 * cfid
-  checking tests ... ERROR
-
-* cloneRate
   checking tests ... ERROR
 
 * comato
@@ -79,9 +76,6 @@ Issues with CRAN packages are summarised below.
 * R6causal
   checking whether package ‘R6causal’ can be installed ... WARNING
 
-* remverse
-  checking re-building of vignette outputs ... ERROR
-
 * scistreer
   checking examples ... ERROR
 
@@ -90,9 +84,6 @@ Issues with CRAN packages are summarised below.
 
 * sfclust
   checking tests ... ERROR
-
-* spacemodR
-  checking re-building of vignette outputs ... ERROR
 
 * tidygraph
   checking examples ... ERROR
@@ -103,16 +94,14 @@ Issues with CRAN packages are summarised below.
 
 ### Failed to check
 
-* a5R        (NA)
-* bipartite  (NA)
-* blavaan    (NA)
-* caugi      (NA)
-* ctmm       (NA)
-* E2E        (NA)
-* gllvm      (NA)
-* hespdiv    (NA)
-* multinma   (NA)
-* osmnxr     (NA)
-* RPesto     (NA)
-* spopt      (NA)
-* zoomerjoin (NA)
+* ctmm            (NA)
+* E2E             (NA)
+* hespdiv         (NA)
+* intSDM          (NA)
+* orbital         (NA)
+* PointedSDMs     (NA)
+* PortfolioTesteR (NA)
+* scITD           (NA)
+* SMMAL           (NA)
+* VIM             (NA)
+* xpect           (NA)

@@ -32,7 +32,7 @@ Run `revdepcheck::revdep_details(, "netrics")` for more info
         4. └─netrics:::check_tute_functions(tute)
         5.   └─testthat::expect_null(...) at ./helper-netrics.R:190:5
        
-       [ FAIL 1 | WARN 0 | SKIP 40 | PASS 1805 ]
+       [ FAIL 1 | WARN 0 | SKIP 41 | PASS 1803 ]
        Error:
        ! Test failures.
        Execution halted

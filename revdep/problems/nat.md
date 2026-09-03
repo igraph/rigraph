@@ -103,6 +103,6 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
 *   checking for detritus in the temp directory ... NOTE
      ```
      Found the following files/directories:
-       ‘org.chromium.Chromium.PbULL2’
+       ‘org.chromium.Chromium.x9JSet’
      ```
 

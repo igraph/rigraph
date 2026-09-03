@@ -116,54 +116,6 @@ Run `revdepcheck::revdep_details(, "cfid")` for more info
        Execution halted
      ```
 
-# cloneRate (0.2.3)
-
-* GitHub: <https://github.com/bdj34/cloneRate>
-* Email: <mailto:brian.d.johnson97@gmail.com>
-* GitHub mirror: <https://github.com/cran/cloneRate>
-
-Run `revdepcheck::revdep_details(, "cloneRate")` for more info
-
-## Newly broken
-
-*   checking tests ... ERROR
-     ```
-     ...
-       Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-       Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
-       Chain 4: 
-       Chain 4:  Elapsed Time: 1.181 seconds (Warm-up)
-       Chain 4:                1.102 seconds (Sampling)
-       Chain 4:                2.283 seconds (Total)
-       Chain 4: 
-       You have set includeStem = TRUE. Note that we do not include the stem
-                   as part of the site frequency calculation in our work (Johnson et
-                   al. 2022), due to the fact that we don't know when clone initiation
-                   actually occurs.
-       [ FAIL 1 | WARN 6 | SKIP 0 | PASS 81 ]
-       
-       ══ Failed tests ════════════════════════════════════════════════════════════════
-       ── Failure ('test-growthRateMethods.R:94:3'): MCMC gices expected output ───────
-       Expected `mcmcOut$estimate < 2` to be TRUE.
-       Differences:
-       `actual`:   FALSE
-       `expected`: TRUE 
-       
-       
-       [ FAIL 1 | WARN 6 | SKIP 0 | PASS 81 ]
-       Error:
-       ! Test failures.
-       Execution halted
-     ```
-
-## In both
-
-*   checking compilation flags used ... NOTE
-     ```
-     Compilation used the following non-portable flag(s):
-       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
-     ```
-
 # comato (1.1)
 
 * Email: <mailto:andreas.muehling@tum.de>
@@ -596,7 +548,7 @@ Run `revdepcheck::revdep_details(, "ggraph")` for more info
        ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
      ```
 
-# glyrepr (0.14.0)
+# glyrepr (1.0.0)
 
 * GitHub: <https://github.com/glycoverse/glyrepr>
 * Email: <mailto:23110220018@m.fudan.edu.cn>
@@ -609,28 +561,28 @@ Run `revdepcheck::revdep_details(, "glyrepr")` for more info
 *   checking tests ... ERROR
      ```
      ...
-       [ FAIL 1 | WARN 0 | SKIP 21 | PASS 1300 ]
-       
-       ══ Skipped tests (21) ══════════════════════════════════════════════════════════
-       • On CRAN (21): 'test-composition.R:298:1', 'test-composition.R:325:1',
-         'test-example-glycans.R:1:1', 'test-example-glycans.R:9:1',
-         'test-example-glycans.R:16:1', 'test-example-glycans.R:23:1',
-         'test-example-glycans.R:30:1', 'test-low-level-structure.R:40:1',
-         'test-low-level-structure.R:67:1', 'test-low-level-structure.R:81:1',
-         'test-low-level-structure.R:95:1', 'test-structure-level.R:71:1',
-         'test-structure-level.R:152:1', 'test-structure.R:495:1',
-         'test-structure.R:514:1', 'test-structure.R:563:1', 'test-structure.R:573:1',
-         'test-structure.R:582:1', 'test-structure.R:642:1', 'test-structure.R:649:1',
-         'test-structure.R:657:1'
+         'test-floating-parts.R:480:1', 'test-floating-substituents.R:94:1',
+         'test-floating-substituents.R:133:1', 'test-floating-substituents.R:173:1',
+         'test-floating-validation.R:37:1', 'test-floating-validation.R:51:1',
+         'test-floating-validation.R:65:1', 'test-floating-validation.R:79:1',
+         'test-floating-validation.R:109:1', 'test-floating-validation.R:139:1',
+         'test-floating-validation.R:159:1', 'test-floating-validation.R:203:1',
+         'test-low-level-structure.R:46:1', 'test-low-level-structure.R:82:1',
+         'test-low-level-structure.R:159:1', 'test-low-level-structure.R:222:1',
+         'test-low-level-structure.R:236:1', 'test-smap.R:1041:1',
+         'test-structure-tables.R:497:1', 'test-structure.R:520:1',
+         'test-structure.R:539:1', 'test-structure.R:588:1', 'test-structure.R:608:1',
+         'test-structure.R:668:1', 'test-structure.R:675:1', 'test-structure.R:683:1',
+         'test-structure.R:724:1', 'test-structure.R:779:1'
        
        ══ Failed tests ════════════════════════════════════════════════════════════════
-       ── Error ('test-structure-to-iupac.R:95:3'): structure_to_iupac handles complex branched structures ──
+       ── Error ('test-structure-to-iupac.R:124:3'): structure_to_iupac handles complex branched structures ──
        <purrr_error_indexed/rlang_error/error/condition>
        Error in `purrr::map(valid_graphs, function(graph) {     checkmate::assert_class(graph, "igraph")     graph %>% validate_glycan_graph() %>% canonicalize_glycan_graph() })`: i In index: 1.
        Caused by error in `validate_glycan_graph()`:
        ! Duplicated linkage positions.
        
-       [ FAIL 1 | WARN 0 | SKIP 21 | PASS 1300 ]
+       [ FAIL 1 | WARN 0 | SKIP 46 | PASS 1885 ]
        Error:
        ! Test failures.
        Execution halted
@@ -710,7 +662,7 @@ Run `revdepcheck::revdep_details(, "manynet")` for more info
         4. └─manynet:::check_tute_functions(tute)
         5.   └─testthat::expect_null(...) at ./helper-manynet.R:225:5
        
-       [ FAIL 2 | WARN 644 | SKIP 77 | PASS 3304 ]
+       [ FAIL 2 | WARN 728 | SKIP 78 | PASS 3303 ]
        Error:
        ! Test failures.
        Execution halted
@@ -891,7 +843,7 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
 *   checking for detritus in the temp directory ... NOTE
      ```
      Found the following files/directories:
-       ‘org.chromium.Chromium.PbULL2’
+       ‘org.chromium.Chromium.x9JSet’
      ```
 
 # netrics (0.4.0)
@@ -928,7 +880,7 @@ Run `revdepcheck::revdep_details(, "netrics")` for more info
         4. └─netrics:::check_tute_functions(tute)
         5.   └─testthat::expect_null(...) at ./helper-netrics.R:190:5
        
-       [ FAIL 1 | WARN 0 | SKIP 40 | PASS 1805 ]
+       [ FAIL 1 | WARN 0 | SKIP 41 | PASS 1803 ]
        Error:
        ! Test failures.
        Execution halted
@@ -1048,46 +1000,6 @@ Run `revdepcheck::revdep_details(, "R6causal")` for more info
      
      SUMMARY: processing the following file failed:
        ‘using_R6causal.Rmd’
-     
-     Error: Vignette re-building failed.
-     Execution halted
-     ```
-
-# remverse (0.2.0)
-
-* GitHub: <https://github.com/TilburgNetworkGroup/remverse>
-* Email: <mailto:j.mulder3@tilburguniversity.edu>
-* GitHub mirror: <https://github.com/cran/remverse>
-
-Run `revdepcheck::revdep_details(, "remverse")` for more info
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... ERROR
-     ```
-     ...
-      1. └─remstimate::remixture(...)
-      2.   └─remstimate::remstimate(...)
-      3.     ├─base::do.call(...)
-      4.     └─remstimate (local) `<fn>`(...)
-      5.       └─base::lapply(...)
-      6.         └─remstimate (local) FUN(X[[i]], ...)
-      7.           └─remstimate:::.mixrem_fit_one(...)
-      8.             └─base::`colnames<-`(`*tmp*`, value = paste0("Component.", seq_len(k)))
-     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     
-     Error: processing vignette 'rem-mixrem.Rmd' failed with diagnostics:
-     length of 'dimnames' [2] not equal to array extent
-     --- failed re-building ‘rem-mixrem.Rmd’
-     
-     --- re-building ‘rem-pipeline.Rmd’ using rmarkdown
-     --- finished re-building ‘rem-pipeline.Rmd’
-     
-     --- re-building ‘rem-window.Rmd’ using rmarkdown
-     --- finished re-building ‘rem-window.Rmd’
-     
-     SUMMARY: processing the following file failed:
-       ‘rem-mixrem.Rmd’
      
      Error: Vignette re-building failed.
      Execution halted
@@ -1233,45 +1145,6 @@ Run `revdepcheck::revdep_details(, "sfclust")` for more info
        Error:
        ! Test failures.
        Execution halted
-     ```
-
-# spacemodR (0.1.3)
-
-* Email: <mailto:virgile.baudrot@qonfluens.com>
-* GitHub mirror: <https://github.com/cran/spacemodR>
-
-Run `revdepcheck::revdep_details(, "spacemodR")` for more info
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... ERROR
-     ```
-     ...
-     17: withRestartList(expr, restarts)
-     18: withRestarts(with_handlers({    for (expr in tle$exprs) {        ev <- withVisible(eval(expr, envir))        watcher$capture_plot_and_output()        watcher$print_value(ev$value, ev$visible, envir)    }    TRUE}, handlers), eval_continue = function() TRUE, eval_stop = function() FALSE)
-     19: evaluate::evaluate(...)
-     20: evaluate(code, envir = env, new_device = FALSE, keep_warning = if (is.numeric(options$warning)) TRUE else options$warning,     keep_message = if (is.numeric(options$message)) TRUE else options$message,     stop_on_error = if (is.numeric(options$error)) options$error else {        if (options$error && options$include)             0L        else 2L    }, output_handler = knit_handlers(options$render, options))
-     21: in_dir(input_dir(), expr)
-     22: in_input_dir(evaluate(code, envir = env, new_device = FALSE,     keep_warning = if (is.numeric(options$warning)) TRUE else options$warning,     keep_message = if (is.numeric(options$message)) TRUE else options$message,     stop_on_error = if (is.numeric(options$error)) options$error else {        if (options$error && options$include)             0L        else 2L    }, output_handler = knit_handlers(options$render, options)))
-     23: eng_r(options)
-     24: block_exec(params)
-     25: call_block(x)
-     26: process_group(group)
-     27: withCallingHandlers(if (tangle) process_tangle(group) else process_group(group),     error = function(e) {        if (progress && is.function(pb$interrupt))             pb$interrupt()        if (is_R_CMD_build() || is_R_CMD_check())             error <<- format(e)    })
-     28: with_options(withCallingHandlers(if (tangle) process_tangle(group) else process_group(group),     error = function(e) {        if (progress && is.function(pb$interrupt))             pb$interrupt()        if (is_R_CMD_build() || is_R_CMD_check())             error <<- format(e)    }), list(rlang_trace_top_env = knit_global()))
-     29: xfun:::handle_error(with_options(withCallingHandlers(if (tangle) process_tangle(group) else process_group(group),     error = function(e) {        if (progress && is.function(pb$interrupt))             pb$interrupt()        if (is_R_CMD_build() || is_R_CMD_check())             error <<- format(e)    }), list(rlang_trace_top_env = knit_global())), function(loc) {    setwd(wd)    write_utf8(res, output %n% stdout())    paste0("\nQuitting from ", loc, if (!is.null(error))         paste0("\n", rule(), error, "\n", rule()))}, if (labels[i] != "") sprintf(" [%s]", labels[i]), get_loc)
-     30: process_file(text, output)
-     31: knitr::knit(knit_input, knit_output, envir = envir, quiet = quiet)
-     32: rmarkdown::render(file, encoding = encoding, quiet = quiet, envir = globalenv(),     output_dir = getwd(), ...)
-     33: vweave_rmarkdown(...)
-     34: engine$weave(file, quiet = quiet, encoding = enc)
-     35: doTryCatch(return(expr), name, parentenv, handler)
-     36: tryCatchOne(expr, names, parentenv, handlers[[1L]])
-     37: tryCatchList(expr, classes, parentenv, handlers)
-     38: tryCatch({    engine$weave(file, quiet = quiet, encoding = enc)    setwd(startdir)    output <- find_vignette_product(name, by = "weave", engine = engine)    if (!have.makefile && vignette_is_tex(output)) {        texi2pdf(file = output, clean = FALSE, quiet = quiet)        output <- find_vignette_product(name, by = "texi2pdf",             engine = engine)    }    outputs <- c(outputs, output)}, error = function(e) {    thisOK <<- FALSE    fails <<- c(fails, file)    message(gettextf("Error: processing vignette '%s' failed with diagnostics:\n%s",         file, conditionMessage(e)))})
-     39: tools::buildVignettes(dir = "<lib>/spacemodR.Rcheck/vign_test/spacemodR",     skip = TRUE, ser_elibs = "/tmp/RtmpwcJdfw/filee3b3058d6.rds")
-     An irrecoverable exception occurred. R is aborting now ...
-     Segmentation fault (core dumped)
      ```
 
 # tidygraph (1.3.1)
