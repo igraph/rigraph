@@ -10,9 +10,9 @@ compose(
   g2,
   ...,
   byname = "auto",
-  graph_attr_combine = igraph_opt("graph_attr_combine"),
-  vertex_attr_combine = "rename",
-  edge_attr_combine = "rename"
+  graph.attr.comb = NULL,
+  vertex.attr.comb = "rename",
+  edge.attr.comb = "rename"
 )
 }
 \arguments{
@@ -28,10 +28,10 @@ to perform the operation based on symbolic vertex names. If it is
 \code{FALSE} otherwise. A warning is generated if \code{auto} and one graph,
 but not both graphs are named.}
 
-\item{graph_attr_combine, vertex_attr_combine, edge_attr_combine}{Specification for
-combining clashing graph, vertex and edge attributes. \code{vertex_attr_combine}
-and \code{edge_attr_combine} default to \code{"rename"}; \code{graph_attr_combine} defaults to
-the \code{graph_attr_combine} igraph option (\code{"rename"} unless changed via
+\item{graph.attr.comb, vertex.attr.comb, edge.attr.comb}{Specification for
+combining clashing graph, vertex and edge attributes. \code{vertex.attr.comb}
+and \code{edge.attr.comb} default to \code{"rename"}; \code{graph.attr.comb} defaults to
+the \code{graph.attr.comb} igraph option (\code{"rename"} unless changed via
 \code{\link[=igraph_options]{igraph_options()}}). See \link{igraph-attribute-combination} for the available
 combiners.}
 }
@@ -57,8 +57,8 @@ names. Otherwise numeric vertex IDs are used.
 \code{compose()} keeps the attributes of both graphs. All graph, vertex
 and edge attributes are copied to the result. By default, if an attribute
 is present in both graphs and would result in a name clash, that attribute
-is renamed by adding suffixes: \verb{_1}, \verb{_2}. Pass \code{graph_attr_combine},
-\code{vertex_attr_combine} or \code{edge_attr_combine} to combine clashing attributes
+is renamed by adding suffixes: \verb{_1}, \verb{_2}. Pass \code{graph.attr.comb},
+\code{vertex.attr.comb} or \code{edge.attr.comb} to combine clashing attributes
 instead; see \link{igraph-attribute-combination} for the available combiners.
 
 The \code{name} vertex attribute is treated specially if the operation is
@@ -81,7 +81,7 @@ g1 and g2, respectively, then (a,a) is included in the result. See
 \code{\link[=simplify]{simplify()}} if you want to get rid of the self-loops.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_permute_vertices}{\code{permute_vertices()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_permute_vertices}{\code{permute_vertices()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
 }
 
 \examples{

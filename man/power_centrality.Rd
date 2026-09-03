@@ -6,7 +6,7 @@
 \usage{
 power_centrality(
   graph,
-  nodes = V(graph),
+  nodes = NULL,
   ...,
   loops = FALSE,
   exponent = 1,
@@ -20,7 +20,7 @@ power_centrality(
 \item{graph}{the input graph.}
 
 \item{nodes}{vertex sequence indicating which vertices are to be included in
-the calculation.  By default, all vertices are included.}
+the calculation. The default \code{NULL} selects all vertices.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
@@ -35,7 +35,7 @@ score; can be negative}
 1.}
 
 \item{tol}{tolerance for near-singularities during matrix inversion (see
-\code{\link[=solve]{solve()}})}
+\code{\link[Matrix:solve]{Matrix::solve()}})}
 
 \item{sparse}{Logical, whether to use sparse matrices for the
 calculation. The \sQuote{Matrix} package is required for sparse matrix
@@ -120,7 +120,7 @@ fixed when we get a better algorithm.
 }
 
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency}{\code{get_adjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency_sparse}{\code{get_adjacency_sparse()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple}{\code{is_simple()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency}{\code{get_adjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency_sparse}{\code{get_adjacency_sparse()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
 }
 
 \examples{

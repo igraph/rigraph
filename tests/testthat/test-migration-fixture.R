@@ -72,6 +72,12 @@ test_that("head args go through base R partial matching, not our recovery", {
   # recovery. With `warnPartialMatchArgs` on, R emits its own partial-match
   # warning and our deprecation does not fire; when a tail arg is abbreviated
   # too, both warnings appear -- R's for the head, ours for the tail.
+  #
+  # Pin the option to FALSE before flipping it on: on R < 4.3, restoring
+  # `warnPartialMatchArgs` to NULL (unset) does not switch the warning off
+  # again, so it would leak into every later test and (on R 4.2) add a
+  # partial-match warning to the `migration_fixture_prefix()` snapshots below.
+  options(warnPartialMatchArgs = FALSE)
   rlang::local_options(
     lifecycle_verbosity = "warning",
     warnPartialMatchArgs = TRUE
@@ -91,6 +97,84 @@ test_that("recovery emits a single deprecation warning, not one per slot", {
     }
   )
   expect_length(warnings, 1L)
+})
+
+# ---- empty argument slots (#2646) -------------------------------------------
+
+# A call may leave a slot empty: a trailing comma, or a skipped positional,
+# which is what magrittr writes for `x %>% f(., , directed = TRUE)`. Those used
+# to match a formal by position and leave it missing; now they land in `...`.
+
+test_that("a trailing comma is not an argument to recover", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  expect_no_warning(res <- migration_fixture("g", 5, ))
+  expect_equal(
+    res,
+    list(graph = "g", n = 5, weights = NULL, type = "out", directed = FALSE)
+  )
+})
+
+test_that("a trailing comma after new-API arguments is ignored", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  expect_no_warning(res <- migration_fixture("g", 5, type = "in", ))
+  expect_equal(res$type, "in")
+})
+
+test_that("an empty slot still consumes its position during recovery", {
+  # Old signature f(graph, n, weight, kind, directed): the empty slot took
+  # `weight`, so "in"/TRUE must land on `type`/`directed`, not `weights`/`type`.
+  rlang::local_options(lifecycle_verbosity = "warning")
+  lifecycle::expect_deprecated(
+    res <- migration_fixture("g", 5, , "in", TRUE)
+  )
+  expect_equal(
+    res,
+    list(graph = "g", n = 5, weights = NULL, type = "in", directed = TRUE)
+  )
+})
+
+test_that("several empty slots each consume a position", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  lifecycle::expect_deprecated(
+    res <- migration_fixture("g", 5, , , TRUE)
+  )
+  expect_equal(res$directed, TRUE)
+  expect_equal(res$weights, NULL)
+  expect_equal(res$type, "out")
+})
+
+test_that("a `...` of nothing but empty slots does not engage recovery", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  expect_no_warning(res <- migration_fixture("g", 5, , ))
+  expect_equal(
+    res,
+    list(graph = "g", n = 5, weights = NULL, type = "out", directed = FALSE)
+  )
+})
+
+test_that("a named slot left empty is not an argument either", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  lifecycle::expect_deprecated(res <- migration_fixture("g", 5, kind = , 1:3))
+  expect_equal(res$weights, 1:3)
+  expect_equal(res$type, "out")
+})
+
+test_that("empty argument slot messages", {
+  # The "Detected call" line is the readable form of the position bookkeeping:
+  # a skipped slot leaves its own old argument out and shifts the rest along,
+  # so these read as the old-signature calls they are equivalent to.
+  rlang::local_options(lifecycle_verbosity = "warning")
+  expect_snapshot(migration_fixture("g", 5, ))
+  expect_snapshot(migration_fixture("g", 5, , "in", TRUE))
+  expect_snapshot(migration_fixture("g", 5, , , TRUE))
+  expect_snapshot(migration_fixture("g", 5, kind = , 1:3))
+})
+
+test_that("a slot past the last recoverable one is surplus, empty or not", {
+  # The old signature f(graph, n, weight, kind, directed) had nothing left to
+  # match a sixth argument against either, so the trailing comma is an error
+  # here rather than the no-op it is while a recoverable slot is still free.
+  expect_snapshot(migration_fixture("g", 5, 1, 2, 3, ), error = TRUE)
 })
 
 # ---- prefix-overlap fixture -------------------------------------------------
@@ -133,6 +217,11 @@ test_that("abbreviations longer than the head arg are recovered", {
 })
 
 test_that("forbidden prefixes error only when legacy arguments engage recovery", {
+  ## The snapshot differs on R 4.2: `warnPartialMatchArgs` enabled earlier in
+  ## this file leaks through its scoped restore there (see above), adding a
+  ## partial-match warning to the recorded condition. Skip on older R.
+  skip_if(getRversion() < "4.3")
+
   # `di =` steals the head slot `dimvector`, `c(2, 2)` shifts into `p`,
   # and `0.5` lands in `...`:
   # recovery would rescue this never-valid call behind a deprecation
@@ -190,43 +279,15 @@ test_that("recovery deprecation messages", {
 })
 
 test_that("error message snapshots", {
+  # `weig` prefixes both the old `weight` and the new `weights`, so it is
+  # rejected before `.old_signature()` -- which only knows the old names -- gets
+  # a chance to resolve it to `weight`. The rest overflow into
+  # `.old_signature()`'s own `...`, which reports them rather than letting base
+  # R's "unused argument" out.
   expect_snapshot(migration_fixture("g", 5, weig = 1), error = TRUE)
   expect_snapshot(migration_fixture("g", 5, foo = 1), error = TRUE)
   expect_snapshot(migration_fixture("g", 5, 1:3, weights = 9), error = TRUE)
   expect_snapshot(migration_fixture("g", 5, 1, 2, 3, 4), error = TRUE)
-})
-
-# ---- migrate_recover_args() helper (the engine behind the blocks) ----------
-
-# `fixture_args()` (the config-equivalent wrapper) lives in
-# helper-test-functions.R.
-
-test_that("migrate_recover_args() returns NULL when there is nothing to recover", {
-  expect_null(fixture_args(list()))
-})
-
-test_that("migrate_recover_args() returns recovered values and message parts", {
-  res <- fixture_args(list(1:3, "in", TRUE))
-  expect_equal(res$values, list(weights = 1:3, type = "in", directed = TRUE))
-  expect_match(res$what, "positional or abbreviated")
-  expect_match(
-    res$details[[1]],
-    "migration_fixture\\(graph, n, weight, kind, directed\\)"
-  )
-  expect_match(res$details[[2]], "weights = , type = , directed = ")
-})
-
-test_that("migrate_recover_args() errors on unknown, ambiguous, conflict, overflow", {
-  expect_error(fixture_args(list(foo = 5)), "Unexpected argument")
-  expect_error(fixture_args(list(weig = 1)), "matches multiple")
-  expect_error(
-    fixture_args(
-      list(1:3),
-      current = list(weights = 9, type = "out", directed = FALSE)
-    ),
-    "supplied more than once"
-  )
-  expect_error(fixture_args(list(1, 2, 3, 4)), "Too many arguments")
 })
 
 # ---- generator-level tests (source checkout only) --------------------------
@@ -355,54 +416,100 @@ test_that("the BEGIN marker may carry a trailing note", {
   expect_identical(m[[3]], "foo")
 })
 
-test_that("render_call_arg() wraps long arguments the way air formats them", {
-  # The fixture's args stay under the 80-col width, but a real migration with
-  # more arguments overflows; the renderer must wrap exactly as `air` would so
-  # the after-install drift check (generator output vs air-formatted source)
-  # stays clean. `splice_blocks()` prepends 2 spaces to every block line, which
-  # the fit test accounts for.
-  generator <- testthat::test_path("..", "..", "tools", "generate-migrations.R")
-  skip_if_not(file.exists(generator))
-  gen_env <- new.env()
-  sys.source(generator, envir = gen_env)
-
-  # Short -> single line.
-  short <- gen_env$render_call_arg(
-    "head_args",
-    "c",
-    c('"graph"', '"n"'),
-    "character(0)"
+test_that("an argument passed at its own default still counts as supplied", {
+  # The block asks `missing()` rather than comparing against the default, so
+  # `weights = NULL` is a conflict with a positional recovering into `weights`
+  # even though NULL is what `weights` defaults to.
+  expect_error(
+    migration_fixture("g", 5, weights = NULL, 1:3),
+    "supplied more than once"
   )
-  expect_identical(short, '    head_args = c("graph", "n"),')
-
-  # Empty -> the supplied literal, on a single line (never `c()`/`list()`).
-  empty <- gen_env$render_call_arg(
-    "recover_old",
-    "c",
-    character(0),
-    "character(0)"
+  expect_snapshot(
+    migration_fixture("g", 5, weights = NULL, 1:3),
+    error = TRUE
   )
-  expect_identical(empty, "    recover_old = character(0),")
-
-  # Long -> one item per line, opening/closing on their own lines, and every
-  # emitted line (plus the 2-space splice indent) stays within 80 cols.
-  items <- c(
-    "weights = weights",
-    "attr = attr",
-    "edges = edges",
-    "names = names",
-    "sparse = sparse"
-  )
-  wrapped <- gen_env$render_call_arg("current", "list", items, "list()")
-  expect_gt(length(wrapped), 1L)
-  expect_identical(wrapped[[1]], "    current = list(")
-  expect_identical(wrapped[[length(wrapped)]], "    ),")
-  expect_identical(
-    wrapped[2:6],
-    paste0("      ", items, c(",", ",", ",", ",", ""))
-  )
-  expect_true(all(nchar(wrapped) + 2L <= 80L))
 })
+
+# ---- shadowing and renamed-away names (migration_fixture_shadow) ------------
+
+# migration_fixture_shadow(graph, ..., weights, names, c, attr): `names` and `c`
+# are argument names that the generated block would otherwise call as functions,
+# and `attr` was renamed to `weights` while a deprecated `attr` formal stayed.
+
+test_that("formals shadowing the block's own calls do not break it", {
+  # `names` and `c` are missing here, which is the dangerous case: R forces a
+  # missing formal while looking for a function of that name, so an unqualified
+  # `names(substitute(...()))` in the block would die with "argument \"names\"
+  # is missing" rather than recover anything.
+  rlang::local_options(lifecycle_verbosity = "warning")
+  lifecycle::expect_deprecated(res <- migration_fixture_shadow("g", 1:3))
+  expect_equal(res$weights, 1:3)
+  expect_true(res$names)
+  expect_null(res$c)
+})
+
+test_that("shadowing formals survive the error paths too", {
+  # Same hazard, reached before anything is recovered.
+  expect_error(
+    migration_fixture_shadow("g", foo = 1),
+    "Unexpected argument"
+  )
+  expect_error(
+    migration_fixture_shadow("g", 1, 2, 3, 4),
+    "Too many arguments"
+  )
+})
+
+test_that("a shadowing formal can still be recovered", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  # `names = FALSE` is an exact match for the formal past `...`, so it binds
+  # there and nothing is recovered. The abbreviation reaches `...` instead, and
+  # partial-matches the old `names` -- while `names` is *also* the function the
+  # block calls to read its own dot tags.
+  expect_no_warning(res <- migration_fixture_shadow("g", names = FALSE))
+  expect_false(res$names)
+  lifecycle::expect_deprecated(
+    res <- migration_fixture_shadow("g", nam = FALSE)
+  )
+  expect_false(res$names)
+  # `c` has no abbreviation of its own, so it is reachable only by position.
+  lifecycle::expect_deprecated(res <- migration_fixture_shadow("g", 1, 2, 3))
+  expect_equal(res$c, 3)
+  expect_equal(res$weights, 1)
+})
+
+test_that("a name renamed away binds the formal that kept it", {
+  # `attr =` is an exact match for the retained (deprecated) formal, so it never
+  # reaches `...` and nothing is recovered; only the abbreviations are ambiguous.
+  expect_no_condition(res <- migration_fixture_shadow("g", attr = "w"))
+  expect_equal(res$attr, "w")
+  expect_null(res$weights)
+})
+
+test_that("abbreviations of a renamed-away name are rejected", {
+  # `at` could be the old `attr` (now `weights`) or the formal still called
+  # `attr`. Base R sees only the old names in `.old_signature()` and would
+  # resolve it to `weights`, so the block rejects it before that happens.
+  expect_error(
+    migration_fixture_shadow("g", at = "w"),
+    "matches multiple arguments"
+  )
+})
+
+test_that("shadow fixture messages", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  expect_snapshot(migration_fixture_shadow("g", 1:3))
+  expect_snapshot(migration_fixture_shadow("g", nam = FALSE))
+  expect_snapshot(migration_fixture_shadow("g", 1, 2, 3))
+  expect_snapshot(migration_fixture_shadow("g", at = "w"), error = TRUE)
+  expect_snapshot(migration_fixture_shadow("g", foo = 1), error = TRUE)
+  expect_snapshot(migration_fixture_shadow("g", 1, 2, 3, 4), error = TRUE)
+  expect_snapshot(
+    migration_fixture_shadow("g", 1:3, names = FALSE, 9),
+    error = TRUE
+  )
+})
+
 
 test_that("unasserted lifecycle deprecations are errors in tests when opted in", {
   # With IGRAPH_LIFECYCLE_ERRORS=true, setup-lifecycle.R bumps the per-test
@@ -412,7 +519,7 @@ test_that("unasserted lifecycle deprecations are errors in tests when opted in",
   # This is the baseline that keeps internal callers of migrated signatures
   # honest; one job in the full rcc matrix runs the suite in this mode.
   indirect <- function() {
-    migration_fixture(make_ring(3), 1, weights = NULL, type = "out", 2)
+    migration_fixture(make_ring(3), 1, type = "out", 2)
   }
 
   if (Sys.getenv("IGRAPH_LIFECYCLE_ERRORS") == "true") {

@@ -7,7 +7,7 @@ migrations <- list(
     old = function(graph, nodes, alpha, loops, exo, weights, tol, sparse) {},
     new = function(
       graph,
-      nodes = V(graph),
+      nodes = NULL,
       ...,
       alpha = 1,
       loops = FALSE,
@@ -23,7 +23,7 @@ migrations <- list(
     old = function(graph, v, directed, weights, normalized, cutoff) {},
     new = function(
       graph,
-      v = V(graph),
+      v = NULL,
       ...,
       directed = TRUE,
       weights = NULL,
@@ -37,7 +37,7 @@ migrations <- list(
     old = function(graph, vids, mode, weights, normalized, cutoff) {},
     new = function(
       graph,
-      vids = V(graph),
+      vids = NULL,
       ...,
       mode = c("out", "in", "all", "total"),
       weights = NULL,
@@ -53,7 +53,7 @@ migrations <- list(
       graph,
       ...,
       weights = NULL,
-      vids = V(graph)
+      vids = NULL
     ) {},
     when = "3.0.0"
   ),
@@ -62,7 +62,7 @@ migrations <- list(
     old = function(graph, e, directed, weights, cutoff) {},
     new = function(
       graph,
-      e = E(graph),
+      e = NULL,
       ...,
       directed = TRUE,
       weights = NULL,
@@ -75,7 +75,7 @@ migrations <- list(
     old = function(graph, vids, mode, weights, normalized, cutoff) {},
     new = function(
       graph,
-      vids = V(graph),
+      vids = NULL,
       ...,
       mode = c("out", "in", "all", "total"),
       weights = NULL,
@@ -100,7 +100,7 @@ migrations <- list(
       graph,
       ...,
       algo = c("prpack", "arpack"),
-      vids = V(graph),
+      vids = NULL,
       directed = TRUE,
       damping = 0.85,
       personalized = NULL,
@@ -123,7 +123,7 @@ migrations <- list(
     ) {},
     new = function(
       graph,
-      nodes = V(graph),
+      nodes = NULL,
       ...,
       loops = FALSE,
       exponent = 1,
@@ -139,7 +139,7 @@ migrations <- list(
     old = function(graph, vids, mode, loops, weights) {},
     new = function(
       graph,
-      vids = V(graph),
+      vids = NULL,
       ...,
       mode = c("all", "out", "in", "total"),
       loops = TRUE,

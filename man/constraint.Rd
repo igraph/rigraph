@@ -4,13 +4,13 @@
 \alias{constraint}
 \title{Burt's constraint}
 \usage{
-constraint(graph, nodes = V(graph), ..., weights = NULL)
+constraint(graph, nodes = NULL, ..., weights = NULL)
 }
 \arguments{
 \item{graph}{A graph object, the input graph.}
 
 \item{nodes}{The vertices for which the constraint will be calculated.
-Defaults to all vertices.}
+The default \code{NULL} selects all vertices.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 

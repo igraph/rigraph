@@ -17,13 +17,6 @@
       Warning:
       `as.undirected()` was deprecated in igraph 2.1.0.
       i Please use `as_undirected()` instead.
-      Warning:
-      The igraph option `edge.attr.comb` was deprecated in igraph 3.0.0.
-      i Please use the `edge_attr_combine` option instead.
-      Warning:
-      Calling `as_undirected()` with positional or abbreviated arguments was deprecated in igraph 3.0.0.
-      i Detected call: as_undirected(graph, mode, edge.attr.comb)
-      i Use instead: as_undirected(graph, mode, edge_attr_combine = )
     Output
       [1] FALSE
 
@@ -91,6 +84,25 @@
 
     Code
       A <- as_adjacency_matrix(g, attr = "weight", sparse = FALSE)
+    Condition
+      Warning:
+      The `attr` argument of `as_adjacency_matrix()` is deprecated as of igraph 3.0.0.
+      i Please use the `weights` argument instead.
+
+# the `attr` deprecation warning spells out the NULL translation
+
+    Code
+      A <- as_adjacency_matrix(g, attr = NULL, sparse = FALSE)
+    Condition
+      Warning:
+      The `attr` argument of `as_adjacency_matrix()` is deprecated as of igraph 3.0.0.
+      i Please use the `weights` argument instead.
+      i `attr = NULL` becomes `weights = NA`, not `weights = NULL`.
+
+---
+
+    Code
+      B <- as_adjacency_matrix(g, attr = "weight", sparse = FALSE)
     Condition
       Warning:
       The `attr` argument of `as_adjacency_matrix()` is deprecated as of igraph 3.0.0.

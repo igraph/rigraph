@@ -80,20 +80,28 @@ getIgraphOpt <- function(x, default = NULL) {
 # its old dotted name still works, but maps to the canonical key and emits a
 # soft-deprecation.
 .igraph.pars.aliases <- c(
+  "graph.attr.comb" = "graph_attr_combine",
   "vertex.attr.comb" = "vertex_attr_combine",
   "edge.attr.comb" = "edge_attr_combine"
 )
 
 # Map any deprecated option names in `x` to their canonical keys, warning once
 # per deprecated name encountered.
-igraph_normalize_par_name <- function(x) {
+#
+# `user_env` must be the environment of whoever spelled the option name -- it
+# is what `deprecate_soft()` consults to decide whether the deprecation is
+# worth reporting. Its default would resolve to a frame inside igraph, which
+# marks every alias use as indirect and emits nothing, so the public entry
+# points pass their own caller down.
+igraph_normalize_par_name <- function(x, user_env = rlang::caller_env(2)) {
   for (i in seq_along(x)) {
     new <- unname(.igraph.pars.aliases[x[i]])
     if (!is.na(new)) {
       lifecycle::deprecate_soft(
         "3.0.0",
         I(paste0("The igraph option `", x[i], "`")),
-        I(paste0("the `", new, "` option"))
+        I(paste0("the `", new, "` option")),
+        user_env = user_env
       )
       x[i] <- new
     }
@@ -256,10 +264,14 @@ igraph.pars.callbacks <- list("verbose" = igraph.pars.set.verbose)
 #' @family igraph options
 #' @importFrom pkgconfig set_config_in get_config
 igraph_options <- function(...) {
-  igraph_i_options(...)
+  igraph_i_options(..., .user_env = parent.frame())
 }
 
-igraph_i_options <- function(..., .in = parent.frame()) {
+igraph_i_options <- function(
+  ...,
+  .in = parent.frame(),
+  .user_env = parent.frame()
+) {
   if (...length() == 0) {
     return(get_all_options())
   }
@@ -270,7 +282,7 @@ igraph_i_options <- function(..., .in = parent.frame()) {
     arg <- temp[[1]]
 
     if (mode(arg) == "character") {
-      return(.igraph.pars[igraph_normalize_par_name(arg)])
+      return(.igraph.pars[igraph_normalize_par_name(arg, .user_env)])
     }
 
     if (mode(arg) != "list") {
@@ -289,7 +301,7 @@ igraph_i_options <- function(..., .in = parent.frame()) {
   if (is.null(n)) {
     cli::cli_abort("options must be given by name.")
   }
-  names(temp) <- igraph_normalize_par_name(n)
+  names(temp) <- igraph_normalize_par_name(n, .user_env)
   n <- names(temp)
   cb <- intersect(names(igraph.pars.callbacks), n)
   for (cn in cb) {
@@ -332,28 +344,41 @@ igraph_opt <- function(
   default = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: igraph_opt, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(default = default),
-      recover_new = c("default"),
-      recover_old = c("default"),
-      match_names = c("default"),
-      match_to = c("default"),
-      defaults = list(default = NULL),
-      head_args = c("x"),
-      fn_name = "igraph_opt"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: igraph_opt(x, default)
+    .old_signature <- function(default, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn igraph_opt}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn igraph_opt}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(default)) base::list(default = default)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(default)) "default"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn igraph_opt} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `igraph_opt()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  igraph_opt(", base::paste(base::c("x", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    igraph_opt(", base::paste(base::c("x", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
-  x <- igraph_normalize_par_name(x)
+  x <- igraph_normalize_par_name(x, parent.frame())
   if (missing(default)) {
     get_config(paste0("igraph::", x), .igraph.pars[[x]])
   } else {

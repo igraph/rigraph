@@ -13,26 +13,19 @@ sample_last_cit(
   n,
   edges = 1,
   ...,
-  agebins = n/7100,
-  pref = (1:(agebins + 1))^-3,
+  agebins = NULL,
+  pref = NULL,
   directed = TRUE
 )
 
-last_cit(
-  n,
-  edges = 1,
-  ...,
-  agebins = n/7100,
-  pref = (1:(agebins + 1))^-3,
-  directed = TRUE
-)
+last_cit(n, edges = 1, ..., agebins = NULL, pref = NULL, directed = TRUE)
 
 sample_cit_types(
   n,
   edges = 1,
-  types = rep(0, n),
+  types = NULL,
   ...,
-  pref = rep(1, length(types)),
+  pref = NULL,
   directed = TRUE,
   attr = TRUE
 )
@@ -40,9 +33,9 @@ sample_cit_types(
 cit_types(
   n,
   edges = 1,
-  types = rep(0, n),
+  types = NULL,
   ...,
-  pref = rep(1, length(types)),
+  pref = NULL,
   directed = TRUE,
   attr = TRUE
 )
@@ -50,9 +43,9 @@ cit_types(
 sample_cit_cit_types(
   n,
   edges = 1,
-  types = rep(0, n),
+  types = NULL,
   ...,
-  pref = matrix(1, nrow = length(types), ncol = length(types)),
+  pref = NULL,
   directed = TRUE,
   attr = TRUE
 )
@@ -60,9 +53,9 @@ sample_cit_cit_types(
 cit_cit_types(
   n,
   edges = 1,
-  types = rep(0, n),
+  types = NULL,
   ...,
-  pref = matrix(1, nrow = length(types), ncol = length(types)),
+  pref = NULL,
   directed = TRUE,
   attr = TRUE
 )
@@ -74,16 +67,19 @@ cit_cit_types(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{agebins}{Number of aging bins.}
+\item{agebins}{Number of aging bins. The default \code{NULL} uses \code{n / 7100}.}
 
 \item{pref}{Vector (\code{sample_last_cit()} and \code{sample_cit_types()} or
 matrix (\code{sample_cit_cit_types()}) giving the (unnormalized) citation
-probabilities for the different vertex types.}
+probabilities for the different vertex types. The default \code{NULL} uses
+\code{(1:(agebins + 1))^-3} for \code{sample_last_cit()} and all-one probabilities
+for the other two.}
 
 \item{directed}{Logical, whether to generate directed networks.}
 
 \item{types}{Vector of length \sQuote{\code{n}}, the types of the vertices.
-Types are numbered from zero.}
+Types are numbered from zero. The default \code{NULL} gives all vertices
+type zero.}
 
 \item{attr}{Logical, whether to add the vertex types to the generated
 graph as a vertex attribute called \sQuote{\code{type}}.}

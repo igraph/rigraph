@@ -17,7 +17,7 @@ migrations <- list(
       remove.multiple = TRUE,
       remove.loops = TRUE,
       ...,
-      edge_attr_combine = igraph_opt("edge_attr_combine")
+      edge_attr_combine = NULL
     ) {},
     when = "3.0.0"
   ),
@@ -28,7 +28,7 @@ migrations <- list(
       graph,
       mode = c("collapse", "each", "mutual"),
       ...,
-      edge_attr_combine = igraph_opt("edge_attr_combine")
+      edge_attr_combine = NULL
     ) {},
     when = "3.0.0"
   ),
@@ -39,7 +39,7 @@ migrations <- list(
       graph,
       mapping,
       ...,
-      vertex_attr_combine = igraph_opt("vertex_attr_combine")
+      vertex_attr_combine = NULL
     ) {},
     when = "3.0.0"
   )

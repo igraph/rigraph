@@ -49,10 +49,11 @@
 #'   used for the different vertex groups.
 #' @param mark.col A scalar or vector giving the colors of marking the
 #'   polygons, in any format accepted by [graphics::xspline()]; e.g.
-#'   numeric color IDs, symbolic color names, or colors in RGB.
+#'   numeric color IDs, symbolic color names, or colors in RGB. The default
+#'   `NULL` uses semi-transparent rainbow colors.
 #' @param mark.border A scalar or vector giving the colors of the borders of
 #'   the vertex group marking polygons. If it is `NA`, then no border is
-#'   drawn.
+#'   drawn. The default `NULL` uses rainbow colors.
 #' @param mark.expand A numeric scalar or vector, the size of the border around
 #'   the marked vertex groups. It is in the same units as the vertex sizes. If a
 #'   vector is given, then different values are used for the different vertex
@@ -92,9 +93,9 @@ plot.igraph <- function(
   xlim = NULL,
   ylim = NULL,
   mark.groups = list(),
-  mark.shape = 1 / 2,
-  mark.col = rainbow(length(mark.groups), alpha = 0.3),
-  mark.border = rainbow(length(mark.groups), alpha = 1),
+  mark.shape = 0.5,
+  mark.col = NULL,
+  mark.border = NULL,
   mark.expand = 15,
   mark.lwd = 1,
   loop.size = 1,
@@ -176,7 +177,7 @@ plot.igraph <- function(
     if (is.null(ylim)) {
       ylim <- c(-1, 1)
     }
-    layout <- norm_coords(layout, -1, 1, -1, 1)
+    layout <- norm_coords(layout, xmin = -1, xmax = 1, ymin = -1, ymax = 1)
     fact <- (1 - vertex.size.scaling)
     maxv <- 1 / 200 * max(vertex.size)
 
@@ -271,6 +272,12 @@ plot.igraph <- function(
   }
   if (inherits(mark.groups, "communities")) {
     mark.groups <- communities(mark.groups)
+  }
+  if (is.null(mark.col)) {
+    mark.col <- rainbow(length(mark.groups), alpha = 0.3)
+  }
+  if (is.null(mark.border)) {
+    mark.border <- rainbow(length(mark.groups), alpha = 1)
   }
 
   mark.shape <- rep(mark.shape, length.out = length(mark.groups))
@@ -1623,7 +1630,15 @@ rglplot.igraph <- function(x, ...) {
     layout <- cbind(layout, 0)
   }
   if (rescale) {
-    layout <- norm_coords(layout, -1, 1, -1, 1, -1, 1)
+    layout <- norm_coords(
+      layout,
+      xmin = -1,
+      xmax = 1,
+      ymin = -1,
+      ymax = 1,
+      zmin = -1,
+      zmax = 1
+    )
   }
 
   # add the edges, the loops are handled separately

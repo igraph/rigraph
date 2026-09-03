@@ -9,8 +9,8 @@ layout.star(graph, center = V(graph)[1], order = NULL)
 \arguments{
 \item{graph}{The graph to layout.}
 
-\item{center}{The ID of the vertex to put in the center. By default it is
-the first vertex.}
+\item{center}{The ID of the vertex to put in the center. The default
+\code{NULL} uses the first vertex.}
 
 \item{order}{Numeric vector, the order of the vertices along the perimeter.
 The default ordering is given by the vertex IDs.}

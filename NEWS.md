@@ -1,5 +1,256 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.3.9033
+
+## Bug fixes
+
+### ci
+
+- Upload a shard's results three times, not once (#2854).
+
+### ci
+
+- Stop reporting a check that never ran as `ok` (#2849).
+
+### ci
+
+- Install the system requirements of the packages being checked (#2853).
+
+## Performance
+
+### ci
+
+- Bigger install chunks, a shard resource sampler, and lower-priority checks (#2852).
+
+
+# igraph 2.3.3.9032
+
+## Bug fixes
+
+- `simplify()` honours `edge.attr.comb` on an already-simple graph again (#2843).
+
+- `as_adjacency_matrix(attr = NULL)` is unweighted again (#2842).
+
+## Features
+
+### ci
+
+- Make `revdep2` runs comparable, resilient, and honest about what they checked (#2834).
+
+
+# igraph 2.3.3.9031
+
+## Continuous integration
+
+### revdep2
+
+- Put a clock on every call that can hang (#2832).
+
+### revdep2
+
+- Install in chunks, and diagnose a preflight that is killed rather than failed (#2830).
+
+
+# igraph 2.3.3.9030
+
+## Bug fixes
+
+### ci
+
+- Check `windows-11-arm` with `error_on = "error"` (#2821).
+
+## Features
+
+### ci
+
+- Commit the `revdep2` report, and re-check what it lists (#2827).
+
+## Continuous integration
+
+- Wrap the commit status update into an action.
+
+- Route ccache through one-word compiler wrappers on Unix.
+
+- Name every step and restore the log entry `setup-pandoc` swallows.
+
+
+# igraph 2.3.3.9029
+
+## Bug fixes
+
+### ci
+
+- Let a `revdep2` run survive its preflight, and finish the shard-count follow-ups (#2820).
+
+### migrations
+
+- Recover legacy arguments against the old signature (#2812).
+
+## Features
+
+### ci
+
+- Size `revdep2` shards by the parallel capacity, calibrated from measured timings (#2819).
+
+
+# igraph 2.3.3.9028
+
+## Bug fixes
+
+### ci
+
+- Carry `revdep2` run ids as strings, and make its summary self-contained (#2816).
+
+## Continuous integration
+
+- Move the `revdep2` library artifact steps to their Node 24 releases (#2817).
+
+
+# igraph 2.3.3.9027
+
+## Bug fixes
+
+### ci
+
+- Quote `gh` arguments in the `revdep2` plan job (#2811).
+
+## Features
+
+### ci
+
+- Reuse prebuilt packages in `revdep2` instead of rebuilding them (#2814).
+
+## Continuous integration
+
+- Move remaining Node 20 actions to their Node 24 releases (#2813).
+
+- Add sharded `revdep2` workflow.
+
+## Uncategorized
+
+- Ci: Harden `workflow_run` workflows against untrusted pull requests (#106).
+
+- Ci: Pin third-party actions to commits and let Renovate keep them pinned (#105).
+
+
+# igraph 2.3.3.9026
+
+## Features
+
+### migrations
+
+- Require constant defaults, resolve complex ones in the body (#2784).
+
+## Chore
+
+- Auto-update from GitHub Actions (#2807).
+
+- Auto-update from GitHub Actions (#2806).
+
+## Continuous integration
+
+- Remove unused pr-commands workflow.
+
+## Documentation
+
+- Zoning rules for arguments around the ellipsis (#2757).
+
+- Revdep results before PR.
+
+- Revdep problems for PR.
+
+## Uncategorized
+
+- Ci: Give every workflow and job an explicit `permissions` block (#103).
+
+- Ci: Pass workflow context through the environment, not into script text (#102).
+
+- Ci: Add a Windows arm64 (`windows-11-arm`) check on R-release (#99).
+
+
+# igraph 2.3.3.9025
+
+## Continuous integration
+
+- Use the daily-rebuilt `r-debug` sanitizer image, and fix the leak it uncovered (#2802).
+
+
+# igraph 2.3.3.9024
+
+## Bug fixes
+
+- Name `norm_coords()` arguments at the `rglplot.igraph()` call site (#2801).
+
+
+# igraph 2.3.3.9023
+
+## Bug fixes
+
+- Heal `main` — unleak `warnPartialMatchArgs` on R 4.2 and name args at `norm_coords()`/`make_star()` call sites for the lifecycle-errors leg (#2799).
+
+- Initialize `c_options` in the Stimulus type definition (#2792).
+
+## Features
+
+### migrations
+
+- Allow head/recoverable prefix overlaps, guarded at run time (#2787).
+
+## Continuous integration
+
+- Sync R-CMD-check workflow; drop matrix-env plumbing from custom action (#2798).
+
+## Refactoring
+
+- Move optional arguments of games functions behind the ellipsis (#2760).
+
+- Move optional arguments of layout functions behind the ellipsis (#2762).
+
+- Move optional arguments of make functions behind the ellipsis (#2761).
+
+- Move optional arguments of topology functions behind the ellipsis (#2768).
+
+- Move optional arguments of conversion functions behind the ellipsis (#2766).
+
+- Move optional arguments of hrg-embedding functions behind the ellipsis (#2771).
+
+- Move optional arguments of flow functions behind the ellipsis (#2767).
+
+- Move optional arguments of plotting functions behind the ellipsis (#2777).
+
+- Move optional arguments of interface functions behind the ellipsis (#2770).
+
+- Move optional arguments of similarity-efficiency functions behind the ellipsis (#2776).
+
+- Move optional arguments of cliques functions behind the ellipsis (#2769).
+
+- Move optional arguments of motifs-graphlets functions behind the ellipsis (#2772).
+
+- Move optional arguments of misc functions behind the ellipsis (#2778).
+
+- Move optional arguments of bipartite-degseq functions behind the ellipsis (#2774).
+
+- Move optional arguments of walks-cycles functions behind the ellipsis (#2775).
+
+- Move optional arguments of trees functions behind the ellipsis (#2758).
+
+- Move optional arguments of operators functions behind the ellipsis (#2773).
+
+## Testing
+
+- Cover migrated centrality, community, and centralization signatures (#2786).
+
+- Make unasserted lifecycle deprecations fail the test suite (opt-in) (#2782).
+
+- Cover migrated structural-properties signatures (#2785).
+
+## Uncategorized
+
+- Ci: Run all smoke-test checks even when one fails (#97).
+
+- Ci: Link the responsible workflow run in snapshot update PRs (#96).
+
+
 # igraph 2.3.3.9022
 
 ## Bug fixes

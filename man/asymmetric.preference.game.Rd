@@ -18,11 +18,12 @@ asymmetric.preference.game(
 \item{types}{The number of different vertex types.}
 
 \item{type.dist.matrix}{The joint distribution of the in- and out-vertex
-types.}
+types. The default \code{NULL} gives a uniform distribution.}
 
 \item{pref.matrix}{A square matrix giving the preferences of the vertex
 types. The matrix has \sQuote{types} rows and columns. When generating
-an undirected graph, it must be symmetric.}
+an undirected graph, it must be symmetric. The default \code{NULL} sets all
+preferences to one.}
 
 \item{loops}{Logical, whether self-loops are allowed in the graph.}
 }

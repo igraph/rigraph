@@ -10,7 +10,7 @@ global_efficiency(graph, ..., weights = NULL, directed = TRUE)
 
 local_efficiency(
   graph,
-  vids = V(graph),
+  vids = NULL,
   ...,
   weights = NULL,
   directed = TRUE,
@@ -38,7 +38,8 @@ and the graph has a \code{weight} edge attribute, then it is used automatically.
 for undirected graphs.}
 
 \item{vids}{The vertex IDs of the vertices for which the calculation will be done.
-Applies to the local efficiency calculation only.}
+Applies to the local efficiency calculation only. The default \code{NULL}
+selects all vertices.}
 
 \item{mode}{Specifies how to define the local neighborhood of a vertex in
 directed graphs. \dQuote{out} considers out-neighbors only, \dQuote{in}

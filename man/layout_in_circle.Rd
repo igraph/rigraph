@@ -5,7 +5,7 @@
 \alias{in_circle}
 \title{Graph layout with vertices on a circle.}
 \usage{
-layout_in_circle(graph, order = V(graph))
+layout_in_circle(graph, order = NULL)
 
 in_circle(...)
 }
@@ -14,7 +14,8 @@ in_circle(...)
 
 \item{order}{The vertices to place on the circle, in the order of their
 desired placement. Vertices that are not included here will be placed at
-(0,0).}
+(0,0). The default \code{NULL} selects all vertices, in the order of their
+IDs.}
 
 \item{...}{Passed to \code{layout_in_circle()}.}
 }

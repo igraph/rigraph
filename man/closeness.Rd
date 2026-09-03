@@ -7,7 +7,7 @@
 \usage{
 closeness(
   graph,
-  vids = V(graph),
+  vids = NULL,
   ...,
   mode = c("out", "in", "all", "total"),
   weights = NULL,
@@ -18,7 +18,8 @@ closeness(
 \arguments{
 \item{graph}{The graph to analyze.}
 
-\item{vids}{The vertices for which closeness will be calculated.}
+\item{vids}{The vertices for which closeness will be calculated.
+The default \code{NULL} selects all vertices.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 

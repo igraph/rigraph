@@ -86,24 +86,37 @@ identical_graphs <- function(
   attrs = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: identical_graphs, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(attrs = attrs),
-      recover_new = c("attrs"),
-      recover_old = c("attrs"),
-      match_names = c("attrs"),
-      match_to = c("attrs"),
-      defaults = list(attrs = TRUE),
-      head_args = c("g1", "g2"),
-      fn_name = "identical_graphs"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: identical_graphs(g1, g2, attrs)
+    .old_signature <- function(attrs, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn identical_graphs}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn identical_graphs}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(attrs)) base::list(attrs = attrs)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(attrs)) "attrs"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn identical_graphs} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `identical_graphs()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  identical_graphs(", base::paste(base::c("g1", "g2", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    identical_graphs(", base::paste(base::c("g1", "g2", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -380,24 +393,41 @@ E <- function(
   directed = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: E, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(P = P, path = path, directed = directed),
-      recover_new = c("P", "path", "directed"),
-      recover_old = c("P", "path", "directed"),
-      match_names = c("P", "path", "directed"),
-      match_to = c("P", "path", "directed"),
-      defaults = list(P = NULL, path = NULL, directed = TRUE),
-      head_args = c("graph"),
-      fn_name = "E"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: E(graph, P, path, directed)
+    .old_signature <- function(P, path, directed, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn E}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn E}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(P)) base::list(P = P),
+        if (!base::missing(path)) base::list(path = path),
+        if (!base::missing(directed)) base::list(directed = directed)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(P)) "P",
+        if (!base::missing(path)) "path",
+        if (!base::missing(directed)) "directed"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn E} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `E()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  E(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    E(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

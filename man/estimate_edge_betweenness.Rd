@@ -15,7 +15,8 @@ estimate_edge_betweenness(
 \arguments{
 \item{graph}{The graph to analyze.}
 
-\item{e}{The edges for which the edge betweenness will be calculated.}
+\item{e}{The edges for which the edge betweenness will be calculated.
+The default \code{NULL} selects all edges.}
 
 \item{directed}{Logical, whether directed paths should be considered while
 determining the shortest paths.}

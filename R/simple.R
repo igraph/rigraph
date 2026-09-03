@@ -72,7 +72,8 @@ is.simple <- function(graph) {
 #' @param edge_attr_combine Specifies what to do with edge attributes, if
 #'   `remove.multiple=TRUE`. In this case many edges might be mapped to a
 #'   single one in the new graph, and their attributes are combined. Please see
-#'   [attribute.combination()] for details on this.
+#'   [attribute.combination()] for details on this. The default `NULL` uses
+#'   the `edge_attr_combine` igraph option.
 #' @return a graph object with the loop and/or multiple edges removed; the
 #'   input graph is returned unchanged if it is already simple.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -96,37 +97,72 @@ simplify <- function(
   remove.multiple = TRUE,
   remove.loops = TRUE,
   ...,
-  edge_attr_combine = igraph_opt("edge_attr_combine")
+  edge_attr_combine = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: simplify, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(edge_attr_combine = edge_attr_combine),
-      recover_new = c("edge_attr_combine"),
-      recover_old = c("edge.attr.comb"),
-      match_names = c("edge.attr.comb", "edge_attr_combine"),
-      match_to = c("edge_attr_combine", "edge_attr_combine"),
-      defaults = list(edge_attr_combine = igraph_opt("edge_attr_combine")),
-      head_args = c("graph", "remove.multiple", "remove.loops"),
-      fn_name = "simplify"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("e", "ed", "edg", "edge"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn simplify}.")
+    # Pre-3.0.0 signature: simplify(graph, remove.multiple, remove.loops, edge.attr.comb)
+    .old_signature <- function(edge.attr.comb, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn simplify}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn simplify}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(edge.attr.comb)) base::list(edge_attr_combine = edge.attr.comb)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(edge_attr_combine)) "edge_attr_combine"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn simplify} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `simplify()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  simplify(", base::paste(base::c("graph", "remove.multiple", "remove.loops", base::c(edge_attr_combine = "edge.attr.comb")[.arg_names]), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    simplify(", base::paste(base::c("graph", "remove.multiple", "remove.loops", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
-  # A graph that is already simple has no loops and no multiple edges, so
-  # simplify_impl() would not change its structure regardless of the
-  # remove.* / edge_attr_combine arguments. Short-circuiting here avoids the
-  # cost of rebuilding the graph in the (common) already-simple case;
-  # is_simple() is orders of magnitude cheaper than simplify().
-  if (is_simple(graph)) {
-    return(graph)
+  # There was a short-circuit here -- `if (is_simple(graph)) return(graph)` --
+  # on the grounds that a graph with no loops and no multiple edges has
+  # nothing for simplify_impl() to remove. That is true of its *structure* and
+  # false of its attributes: `edge_attr_combine` does not only combine attributes
+  # across merged edges, it decides which survive at all, and an attribute the
+  # combination list does not name is dropped even when every group has one
+  # member. The default list ends in `"ignore"`, so `simplify(g)` on a simple
+  # graph is meant to keep `weight` and drop everything else, and
+  # `edge_attr_combine = "ignore"` is meant to leave no edge attributes at all.
+  # Returning `graph` untouched silently kept them both.
+  #
+  # Guarding the short-circuit on the graph having no edge attributes does not
+  # fix it, which is the part worth remembering: `is_simple()` populates the
+  # C core's property cache, and `simplify.c` has a cache fast path of its own
+  # that returns early without applying `edge_comb` once the cache says there
+  # is nothing to remove. So merely *asking* whether the graph is simple
+  # changes what simplifying it does. On 2.3.3 that made the result depend on
+  # whether anything had happened to touch the cache first; the short-circuit
+  # made the cache-warm answer the only answer.
+  #
+  # The check therefore lives at the call site that wants it --
+  # `graph_from_literal_i()`, which is what #824 and #1981 were about, and
+  # which simplifies a graph it has only just built from the formula, before
+  # any attribute is set on it. Everywhere else `simplify()` goes through
+  # `simplify_impl()` as it always did.
+  if (is.null(edge_attr_combine)) {
+    edge_attr_combine <- igraph_opt("edge_attr_combine")
   }
   simplify_impl(
     graph = graph,

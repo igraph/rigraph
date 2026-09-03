@@ -6,7 +6,7 @@
 \usage{
 harmonic_centrality(
   graph,
-  vids = V(graph),
+  vids = NULL,
   ...,
   mode = c("out", "in", "all", "total"),
   weights = NULL,
@@ -17,7 +17,8 @@ harmonic_centrality(
 \arguments{
 \item{graph}{The graph to analyze.}
 
-\item{vids}{The vertices for which harmonic centrality will be calculated.}
+\item{vids}{The vertices for which harmonic centrality will be calculated.
+The default \code{NULL} selects all vertices.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 

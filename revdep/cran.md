@@ -1,9 +1,9 @@
 ## revdepcheck results
 
-We checked 2289 reverse dependencies (2287 from CRAN + 2 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
+We checked 3441 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 22 new problems
- * We failed to check 7 packages
+ * We saw 25 new problems
+ * We failed to check 11 packages
 
 Issues with CRAN packages are summarised below.
 
@@ -53,6 +53,9 @@ Issues with CRAN packages are summarised below.
 * manynet
   checking tests ... ERROR
 
+* MetaNet
+  checking examples ... ERROR
+
 * migraph
   checking tests ... ERROR
 
@@ -61,13 +64,13 @@ Issues with CRAN packages are summarised below.
   checking tests ... ERROR
   checking re-building of vignette outputs ... ERROR
 
+* netrics
+  checking tests ... ERROR
+
 * optbdmaeAT
   checking examples ... ERROR
 
 * optrcdmaeAT
-  checking examples ... ERROR
-
-* qgraph
   checking examples ... ERROR
 
 * R6causal
@@ -75,6 +78,12 @@ Issues with CRAN packages are summarised below.
 
 * scistreer
   checking examples ... ERROR
+
+* SEMgraph
+  checking examples ... ERROR
+
+* sfclust
+  checking tests ... ERROR
 
 * tidygraph
   checking examples ... ERROR
@@ -85,10 +94,14 @@ Issues with CRAN packages are summarised below.
 
 ### Failed to check
 
-* blavaan    (NA)
-* caugi      (NA)
-* deepSTRAPP (NA)
-* ggpicrust2 (NA)
-* scAnnotate (NA)
-* spopt      (NA)
-* streamDAG  (NA)
+* ctmm            (NA)
+* E2E             (NA)
+* hespdiv         (NA)
+* intSDM          (NA)
+* orbital         (NA)
+* PointedSDMs     (NA)
+* PortfolioTesteR (NA)
+* scITD           (NA)
+* SMMAL           (NA)
+* VIM             (NA)
+* xpect           (NA)

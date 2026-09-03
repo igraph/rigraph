@@ -5,18 +5,18 @@
 \alias{\%du\%}
 \title{Disjoint union of graphs}
 \usage{
-disjoint_union(..., graph_attr_combine = igraph_opt("graph_attr_combine"))
+disjoint_union(..., graph.attr.comb = NULL)
 
 x \%du\% y
 }
 \arguments{
 \item{\dots}{Graph objects or lists of graph objects.}
 
-\item{graph_attr_combine}{Specification for combining shared graph attributes.
-Defaults to the \code{graph_attr_combine} igraph option (\code{"rename"} unless changed
-via \code{\link[=igraph_options]{igraph_options()}}), which preserves the historical behaviour of
-appending \verb{_1}, \verb{_2}, ... suffixes to clashing attribute names. See
-\link{igraph-attribute-combination} for the available combiners.}
+\item{graph.attr.comb}{Specification for combining shared graph attributes.
+The default \code{NULL} uses the \code{graph.attr.comb} igraph option (\code{"rename"}
+unless changed via \code{\link[=igraph_options]{igraph_options()}}), which preserves the historical
+behaviour of appending \verb{_1}, \verb{_2}, ... suffixes to clashing attribute
+names. See \link{igraph-attribute-combination} for the available combiners.}
 
 \item{x, y}{Graph objects.}
 }
@@ -38,7 +38,7 @@ particular, it merges vertex and edge attributes using the \code{\link[vctrs:vec
 function. For graphs that lack some vertex/edge attribute, the corresponding
 values in the new graph are set to a missing value (\code{NA} for scalar attributes,
 \code{NULL} for list attributes). Graph attributes are combined according to
-\code{graph_attr_combine}; by default any name clash is resolved by adding
+\code{graph.attr.comb}; by default any name clash is resolved by adding
 suffixes (\verb{_1}, \verb{_2}, ...). See \link{igraph-attribute-combination} for the
 available combiners.
 
@@ -50,7 +50,7 @@ An error is generated if some input graphs are directed and others are
 undirected.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
 }
 
 \examples{

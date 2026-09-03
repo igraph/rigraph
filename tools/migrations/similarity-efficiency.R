@@ -52,7 +52,7 @@ migrations <- list(
     old = function(graph, vids, weights, directed, mode) {},
     new = function(
       graph,
-      vids = V(graph),
+      vids = NULL,
       ...,
       weights = NULL,
       directed = TRUE,
@@ -65,7 +65,7 @@ migrations <- list(
     old = function(graph, vids, mode, loops, method) {},
     new = function(
       graph,
-      vids = V(graph),
+      vids = NULL,
       ...,
       mode = c(
         "all",

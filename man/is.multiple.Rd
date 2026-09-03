@@ -9,8 +9,8 @@ is.multiple(graph, eids = E(graph))
 \arguments{
 \item{graph}{The input graph.}
 
-\item{eids}{The edges to which the query is restricted. By default this is
-all edges in the graph.}
+\item{eids}{The edges to which the query is restricted. The default
+\code{NULL} selects all edges.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
