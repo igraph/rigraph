@@ -9,7 +9,7 @@ Run `revdepcheck::revdep_details(, "ctmm")` for more info
 ### Devel
 
 ```
-new check timed out after 1201s, at: * checking re-building of vignette outputs ...
+new check timed out after 1800s, at: * checking re-building of vignette outputs ...
 
 
 
@@ -19,7 +19,7 @@ new check timed out after 1201s, at: * checking re-building of vignette outputs 
 ### CRAN
 
 ```
-new check timed out after 1201s, at: * checking re-building of vignette outputs ...
+new check timed out after 1800s, at: * checking re-building of vignette outputs ...
 
 
 
