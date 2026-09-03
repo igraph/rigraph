@@ -1116,6 +1116,15 @@ test_that("page_rank(algo = ) is deprecated but still works", {
     res_legacy <- page_rank(star, algo = "prpack")
   )
   expect_identical(res_legacy, page_rank(star, algorithm = "prpack"))
+  # `alg` prefixes both `algo` and `algorithm`, but they are the same argument,
+  # so it is recovered rather than rejected as ambiguous.
+  lifecycle::expect_deprecated(res_abbrev <- page_rank(star, alg = "prpack"))
+  expect_identical(res_abbrev, page_rank(star, algorithm = "prpack"))
+  # `d` really is ambiguous (`damping` vs `directed`) and stays an error.
+  expect_error(
+    page_rank(star, d = 0.5),
+    "matches multiple arguments"
+  )
 })
 
 test_that("strength() covers migrated tail args and positional recovery", {
