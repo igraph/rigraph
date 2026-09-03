@@ -3246,8 +3246,6 @@ feedback_arc_set <- function(
   # BEGIN GENERATED ARG_HANDLE: feedback_arc_set, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "al", "alg"))
-    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn feedback_arc_set}.")
     # Pre-3.0.0 signature: feedback_arc_set(graph, weights, algo)
     .old_signature <- function(weights, algo, ...) {
       if (...length() > 0L) {
@@ -3327,8 +3325,6 @@ feedback_vertex_set <- function(
   # BEGIN GENERATED ARG_HANDLE: feedback_vertex_set, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "al", "alg"))
-    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn feedback_vertex_set}.")
     # Pre-3.0.0 signature: feedback_vertex_set(graph, weights, algo)
     .old_signature <- function(weights, algo, ...) {
       if (...length() > 0L) {

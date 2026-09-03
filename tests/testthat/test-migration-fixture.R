@@ -274,17 +274,16 @@ test_that("recovery deprecation messages", {
   expect_snapshot(migration_fixture("g", 5, kind = "in"))
   expect_snapshot(migration_fixture("g", 5, kin = "in"))
   expect_snapshot(migration_fixture("g", 5, dir = TRUE))
+  # `weig` prefixes both the old `weight` and the new `weights`, but they are
+  # the same argument, so it recovers instead of being rejected.
+  expect_snapshot(migration_fixture("g", 5, weig = 1))
   # mixed: a positional value and a named abbreviation in the same call
   expect_snapshot(migration_fixture("g", 5, 1:3, dir = TRUE))
 })
 
 test_that("error message snapshots", {
-  # `weig` prefixes both the old `weight` and the new `weights`, so it is
-  # rejected before `.old_signature()` -- which only knows the old names -- gets
-  # a chance to resolve it to `weight`. The rest overflow into
-  # `.old_signature()`'s own `...`, which reports them rather than letting base
-  # R's "unused argument" out.
-  expect_snapshot(migration_fixture("g", 5, weig = 1), error = TRUE)
+  # These overflow into `.old_signature()`'s own `...`, which reports them
+  # rather than letting base R's "unused argument" out.
   expect_snapshot(migration_fixture("g", 5, foo = 1), error = TRUE)
   expect_snapshot(migration_fixture("g", 5, 1:3, weights = 9), error = TRUE)
   expect_snapshot(migration_fixture("g", 5, 1, 2, 3, 4), error = TRUE)
@@ -314,6 +313,37 @@ test_that("the generated block is in sync with the registry", {
   lines <- readLines(fixture, warn = FALSE)
   spliced <- gen_env$splice_blocks(lines, by_fn)
   expect_identical(spliced$lines, lines)
+})
+
+test_that("ambiguous_tags() only flags prefixes with distinct targets", {
+  generator <- testthat::test_path("..", "..", "tools", "generate-migrations.R")
+  skip_if_not(file.exists(generator))
+  gen_env <- new.env()
+  sys.source(generator, envir = gen_env)
+
+  # The old name is a prefix of the new one, so `alg` matches both -- but both
+  # resolve to `algorithm`, and the call is recoverable.
+  norm <- gen_env$normalise_migration(
+    "prefix_rename",
+    list(
+      old = function(graph, algo = algorithm) {},
+      new = function(graph, ..., algorithm = "prpack") {},
+      when = "3.0.0"
+    )
+  )
+  expect_identical(gen_env$ambiguous_tags(norm), character(0))
+
+  # Two recoverable names with distinct targets: the shared prefix stays
+  # ambiguous.
+  norm <- gen_env$normalise_migration(
+    "distinct_targets",
+    list(
+      old = function(graph, damping, directed) {},
+      new = function(graph, ..., damping = 0.85, directed = TRUE) {},
+      when = "3.0.0"
+    )
+  )
+  expect_identical(gen_env$ambiguous_tags(norm), "d")
 })
 
 test_that("normalise_migration() handles head/recoverable prefix overlaps", {
