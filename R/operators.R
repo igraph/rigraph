@@ -1192,7 +1192,7 @@ compose <- function(
 #'
 #' @export
 #' @examples
-#' g <- make_ring(10) %>%
+#' g <- make_ring(10) |>
 #'   set_edge_attr("color", value = "red")
 #'
 #' g <- g + edge(1, 5, color = "green") +
@@ -1201,8 +1201,8 @@ compose <- function(
 #'
 #' E(g)[[]]
 #'
-#' g %>%
-#'   add_layout_(in_circle()) %>%
+#' g |>
+#'   add_layout_(in_circle()) |>
 #'   plot()
 #'
 #' g <- make_ring(10) + edges(1:10)
@@ -1292,7 +1292,7 @@ vertices <- vertex
 #' g <- make_star(11, center = 1) + path(2:11, 2)
 #' plot(g)
 #'
-#' g <- make_empty_graph(directed = FALSE, n = 10) %>%
+#' g <- make_empty_graph(directed = FALSE, n = 10) |>
 #'   set_vertex_attr("name", value = letters[1:10])
 #'
 #' g2 <- g + path("a", "b", "c", "d")

@@ -18,7 +18,7 @@ The graph, with the specified edge attribute removed.
 Delete an edge attribute
 }
 \examples{
-g <- make_ring(10) \%>\%
+g <- make_ring(10) |>
   set_edge_attr("name", value = LETTERS[1:10])
 edge_attr_names(g)
 g2 <- delete_edge_attr(g, "name")

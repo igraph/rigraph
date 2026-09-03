@@ -16,7 +16,7 @@ Character vector, the names of the edge attributes.
 List names of edge attributes
 }
 \examples{
-g <- make_ring(10) \%>\%
+g <- make_ring(10) |>
   set_edge_attr("label", value = letters[1:10])
 edge_attr_names(g)
 plot(g)

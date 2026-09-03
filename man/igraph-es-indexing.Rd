@@ -118,8 +118,8 @@ E(g, path = d)
 
 # -----------------------------------------------------------------
 # Select edges based on attributes
-g <- sample_gnp(20, 3 / 20) \%>\%
-  set_edge_attr("weight", value = rnorm(gsize(.)))
+g <- sample_gnp(20, 3 / 20)
+g <- set_edge_attr(g, "weight", value = rnorm(gsize(g)))
 E(g)[[weight < 0]]
 
 # Indexing with a variable whose name matches the name of an attribute

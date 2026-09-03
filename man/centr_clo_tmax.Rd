@@ -38,7 +38,7 @@ See \code{\link[=centralize]{centralize()}} for a summary of graph centralizatio
 \examples{
 # A BA graph is quite centralized
 g <- sample_pa(1000, m = 4)
-centr_clo(g, normalized = FALSE)$centralization \%>\%
+centr_clo(g, normalized = FALSE)$centralization |>
   `/`(centr_clo_tmax(g))
 centr_clo(g, normalized = TRUE)$centralization
 }

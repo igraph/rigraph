@@ -950,7 +950,6 @@ importFrom(graphics,
   xyinch
 )
 importFrom(lifecycle,deprecated)
-importFrom(magrittr,"%>%")
 importFrom(pkgconfig,
   get_config,
   set_config,

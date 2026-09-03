@@ -19,7 +19,7 @@ make_(
     color = "red",
     weight = rep(1:2, 5)
   )
-) \%>\%
+) |>
   plot()
 }
 \seealso{
