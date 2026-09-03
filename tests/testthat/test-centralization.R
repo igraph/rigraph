@@ -50,7 +50,7 @@ test_that("centr_degree() covers migrated tail args and positional recovery", {
 
 test_that("centr_betw() covers migrated tail args and positional recovery", {
   rlang::local_options(lifecycle_verbosity = "warning")
-  g <- make_star(5, "undirected")
+  g <- make_star(5, mode = "undirected")
 
   res <- centr_betw(g, directed = FALSE, normalized = FALSE)
   # The centre lies on the geodesics of all 6 leaf pairs.
@@ -66,7 +66,7 @@ test_that("centr_betw() covers migrated tail args and positional recovery", {
 
 test_that("centr_betw_tmax() covers migrated tail args and positional recovery", {
   rlang::local_options(lifecycle_verbosity = "warning")
-  g <- make_star(5, "undirected")
+  g <- make_star(5, mode = "undirected")
 
   # The graph form and the vertex-count form must agree.
   expect_equal(centr_betw_tmax(g, directed = FALSE), 24)
@@ -125,7 +125,7 @@ test_that("centr_clo_tmax() covers migrated tail args and positional recovery", 
 
 test_that("centralize() covers migrated tail args and positional recovery", {
   rlang::local_options(lifecycle_verbosity = "warning")
-  scores <- degree(make_star(5, "undirected"))
+  scores <- degree(make_star(5, mode = "undirected"))
 
   # The star's degree sequence gives sum(max - x) = 12.
   expect_equal(centralize(scores, theoretical.max = 12, normalized = TRUE), 1)

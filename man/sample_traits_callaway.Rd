@@ -12,8 +12,8 @@ sample_traits_callaway(
   types,
   ...,
   edge.per.step = 1,
-  type.dist = rep(1, types),
-  pref.matrix = matrix(1, types, types),
+  type.dist = NULL,
+  pref.matrix = NULL,
   directed = FALSE
 )
 
@@ -22,8 +22,8 @@ traits_callaway(
   types,
   ...,
   edge.per.step = 1,
-  type.dist = rep(1, types),
-  pref.matrix = matrix(1, types, types),
+  type.dist = NULL,
+  pref.matrix = NULL,
   directed = FALSE
 )
 
@@ -32,8 +32,8 @@ sample_traits(
   types,
   k = 1,
   ...,
-  type.dist = rep(1, types),
-  pref.matrix = matrix(1, types, types),
+  type.dist = NULL,
+  pref.matrix = NULL,
   directed = FALSE
 )
 
@@ -42,8 +42,8 @@ traits(
   types,
   k = 1,
   ...,
-  type.dist = rep(1, types),
-  pref.matrix = matrix(1, types, types),
+  type.dist = NULL,
+  pref.matrix = NULL,
   directed = FALSE
 )
 }
@@ -57,10 +57,11 @@ traits(
 \item{edge.per.step}{The number of edges to add to the graph per time step.}
 
 \item{type.dist}{The distribution of the vertex types. This is assumed to be
-stationary in time.}
+stationary in time. The default \code{NULL} gives a uniform distribution.}
 
 \item{pref.matrix}{A matrix giving the preferences of the given vertex
-types. These should be probabilities, i.e. numbers between zero and one.}
+types. These should be probabilities, i.e. numbers between zero and one.
+The default \code{NULL} sets all preferences to one.}
 
 \item{directed}{Logical, whether to generate directed graphs.}
 

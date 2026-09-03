@@ -12,7 +12,8 @@
 \item{full}{Whether to show the full sequence, or truncate the output
 to the screen size.}
 
-\item{id}{Whether to print the graph ID.}
+\item{id}{Whether to print the graph ID. The default \code{NULL} uses the
+\code{print.id} igraph option.}
 
 \item{...}{Currently ignored.}
 }

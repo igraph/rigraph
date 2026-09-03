@@ -21,10 +21,11 @@ establishment.game(
 \item{k}{The number of trials per time step, see details below.}
 
 \item{type.dist}{The distribution of the vertex types. This is assumed to be
-stationary in time.}
+stationary in time. The default \code{NULL} gives a uniform distribution.}
 
 \item{pref.matrix}{A matrix giving the preferences of the given vertex
-types. These should be probabilities, i.e. numbers between zero and one.}
+types. These should be probabilities, i.e. numbers between zero and one.
+The default \code{NULL} sets all preferences to one.}
 
 \item{directed}{Logical, whether to generate directed graphs.}
 }

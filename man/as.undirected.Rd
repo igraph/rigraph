@@ -22,7 +22,7 @@ as.undirected(
 \code{mode="collapse"} or \code{mode="mutual"}.  In these cases many edges
 might be mapped to a single one in the new graph, and their attributes are
 combined. Please see \code{\link[=attribute.combination]{attribute.combination()}} for details on
-this.}
+this. The default \code{NULL} uses the \code{edge.attr.comb} igraph option.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

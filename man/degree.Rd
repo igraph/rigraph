@@ -9,7 +9,7 @@
 \usage{
 degree(
   graph,
-  v = V(graph),
+  v = NULL,
   ...,
   mode = c("all", "out", "in", "total"),
   loops = TRUE,
@@ -19,7 +19,7 @@ degree(
 max_degree(
   graph,
   ...,
-  v = V(graph),
+  v = NULL,
   mode = c("all", "out", "in", "total"),
   loops = TRUE
 )
@@ -31,7 +31,8 @@ degree_distribution(graph, cumulative = FALSE, ...)
 \arguments{
 \item{graph}{The graph to analyze.}
 
-\item{v}{The IDs of vertices of which the degree will be calculated.}
+\item{v}{The IDs of vertices of which the degree will be calculated.
+The default \code{NULL} selects all vertices.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 

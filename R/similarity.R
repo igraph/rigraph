@@ -26,7 +26,8 @@
 #' 25(3):211-230, 2003.
 #'
 #' @param graph The input graph.
-#' @param vids The vertex IDs for which the similarity is calculated.
+#' @param vids The vertex IDs for which the similarity is calculated. The
+#'   default `NULL` selects all vertices.
 #' @inheritParams rlang::args_dots_empty
 #' @param mode The type of neighboring vertices to use for the calculation,
 #'   possible values: \sQuote{`out`}, \sQuote{`in`},
@@ -52,7 +53,7 @@
 #' similarity(g, method = "jaccard")
 similarity <- function(
   graph,
-  vids = V(graph),
+  vids = NULL,
   ...,
   mode = c(
     "all",
@@ -68,30 +69,49 @@ similarity <- function(
   )
 ) {
   # BEGIN GENERATED ARG_HANDLE: similarity, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(mode = mode, loops = loops, method = method),
-      recover_new = c("mode", "loops", "method"),
-      recover_old = c("mode", "loops", "method"),
-      match_names = c("mode", "loops", "method"),
-      match_to = c("mode", "loops", "method"),
-      defaults = list(
-        mode = c("all", "out", "in", "total"),
-        loops = FALSE,
-        method = c("jaccard", "dice", "invlogweighted")
-      ),
-      head_args = c("graph", "vids"),
-      fn_name = "similarity"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn similarity}.")
+    # Pre-3.0.0 signature: similarity(graph, vids, mode, loops, method)
+    .old_signature <- function(mode, loops, method, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn similarity}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn similarity}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(mode)) base::list(mode = mode),
+        if (!base::missing(loops)) base::list(loops = loops),
+        if (!base::missing(method)) base::list(method = method)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(mode)) "mode",
+        if (!base::missing(loops)) "loops",
+        if (!base::missing(method)) "method"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn similarity} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `similarity()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  similarity(", base::paste(base::c("graph", "vids", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    similarity(", base::paste(base::c("graph", "vids", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(vids)) {
+    vids <- V(graph)
+  }
 
   method <- igraph_match_arg(method)
   if (method == "jaccard") {

@@ -21,7 +21,7 @@ migrations <- list(
       weights = NULL,
       cliques,
       niter = 1000,
-      Mu = rep(1, length(cliques))
+      Mu = NULL
     ) {},
     when = "3.0.0"
   ),
@@ -66,7 +66,7 @@ migrations <- list(
       graph,
       size = 3,
       ...,
-      cut.prob = rep(0, size),
+      cut.prob = NULL,
       sample.size = NULL,
       sample = NULL
     ) {},

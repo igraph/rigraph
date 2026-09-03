@@ -9,13 +9,13 @@
 \alias{count_loops}
 \title{Find the multiple or loop edges in a graph}
 \usage{
-which_multiple(graph, eids = E(graph))
+which_multiple(graph, eids = NULL)
 
 any_multiple(graph)
 
-count_multiple(graph, eids = E(graph))
+count_multiple(graph, eids = NULL)
 
-which_loop(graph, eids = E(graph))
+which_loop(graph, eids = NULL)
 
 any_loop(graph)
 
@@ -24,8 +24,8 @@ count_loops(graph)
 \arguments{
 \item{graph}{The input graph.}
 
-\item{eids}{The edges to which the query is restricted. By default this is
-all edges in the graph.}
+\item{eids}{The edges to which the query is restricted. The default
+\code{NULL} selects all edges.}
 }
 \value{
 \code{any_loop()} and \code{any_multiple()} return a Logical.

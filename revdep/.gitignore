@@ -2,3 +2,8 @@
 /cloud
 /review/
 /notifications/
+# Written by the revdep2 collector into this directory; the reports next to
+# them are committed, these are not: `pkgs/` is the raw check output (the
+# `revdep2-report` artifact has it), `run.json` is per-run metadata.
+/pkgs/
+/run.json

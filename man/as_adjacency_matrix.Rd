@@ -10,7 +10,7 @@ as_adjacency_matrix(
   ...,
   weights = NULL,
   names = TRUE,
-  sparse = igraph_opt("sparsematrices"),
+  sparse = NULL,
   edges = deprecated(),
   attr = deprecated()
 )
@@ -45,14 +45,15 @@ is present in the graph.}
 
 \item{sparse}{Logical, whether to create a sparse matrix. The
 \sQuote{\code{Matrix}} package must be installed for creating sparse
-matrices.}
+matrices. The default \code{NULL} uses the \code{sparsematrices} igraph option.}
 
 \item{edges}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Logical, whether to return the edge IDs in the matrix.
 For non-existant edges zero is returned.}
 
-\item{attr}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{weights} instead. If
-supplied, the value is forwarded to \code{weights} as a character edge
-attribute name.}
+\item{attr}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{weights} instead. A
+character edge attribute name is forwarded to \code{weights} unchanged; \code{NULL}
+becomes \code{weights = NA}, since \code{attr = NULL} asked for a traditional
+unweighted matrix while \code{weights = NULL} picks the \code{weight} attribute up.}
 }
 \value{
 A \code{vcount(graph)} by \code{vcount(graph)} (usually) numeric

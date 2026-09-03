@@ -4,13 +4,7 @@
 \alias{hits_scores}
 \title{Kleinberg's hub and authority centrality scores.}
 \usage{
-hits_scores(
-  graph,
-  ...,
-  scale = TRUE,
-  weights = NULL,
-  options = arpack_defaults()
-)
+hits_scores(graph, ..., scale = TRUE, weights = NULL, options = NULL)
 }
 \arguments{
 \item{graph}{The input graph.}
@@ -28,7 +22,7 @@ interprets edge weights as connection strengths. The weights of parallel
 edges are effectively added up.}
 
 \item{options}{A named list, to override some ARPACK options. See
-\code{\link[=arpack]{arpack()}} for details.}
+\code{\link[=arpack]{arpack()}} for details. The default \code{NULL} uses \code{\link[=arpack_defaults]{arpack_defaults()}}.}
 }
 \value{
 A named list with members:

@@ -48,24 +48,39 @@ is_tree <- function(
   details = FALSE
 ) {
   # BEGIN GENERATED ARG_HANDLE: is_tree, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(mode = mode, details = details),
-      recover_new = c("mode", "details"),
-      recover_old = c("mode", "details"),
-      match_names = c("mode", "details"),
-      match_to = c("mode", "details"),
-      defaults = list(mode = c("out", "in", "all", "total"), details = FALSE),
-      head_args = c("graph"),
-      fn_name = "is_tree"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: is_tree(graph, mode, details)
+    .old_signature <- function(mode, details, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn is_tree}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn is_tree}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(mode)) base::list(mode = mode),
+        if (!base::missing(details)) base::list(details = details)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(mode)) "mode",
+        if (!base::missing(details)) "details"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn is_tree} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `is_tree()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  is_tree(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    is_tree(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -131,24 +146,39 @@ is_forest <- function(
   details = FALSE
 ) {
   # BEGIN GENERATED ARG_HANDLE: is_forest, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(mode = mode, details = details),
-      recover_new = c("mode", "details"),
-      recover_old = c("mode", "details"),
-      match_names = c("mode", "details"),
-      match_to = c("mode", "details"),
-      defaults = list(mode = c("out", "in", "all", "total"), details = FALSE),
-      head_args = c("graph"),
-      fn_name = "is_forest"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: is_forest(graph, mode, details)
+    .old_signature <- function(mode, details, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn is_forest}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn is_forest}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(mode)) base::list(mode = mode),
+        if (!base::missing(details)) base::list(details = details)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(mode)) "mode",
+        if (!base::missing(details)) "details"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn is_forest} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `is_forest()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  is_forest(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    is_forest(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -222,24 +252,37 @@ sample_spanning_tree <- function(
   vid = 0
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_spanning_tree, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(vid = vid),
-      recover_new = c("vid"),
-      recover_old = c("vid"),
-      match_names = c("vid"),
-      match_to = c("vid"),
-      defaults = list(vid = 0),
-      head_args = c("graph"),
-      fn_name = "sample_spanning_tree"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: sample_spanning_tree(graph, vid)
+    .old_signature <- function(vid, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn sample_spanning_tree}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_spanning_tree}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(vid)) base::list(vid = vid)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(vid)) "vid"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_spanning_tree} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `sample_spanning_tree()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  sample_spanning_tree(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_spanning_tree(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

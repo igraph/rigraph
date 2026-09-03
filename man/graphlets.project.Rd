@@ -25,7 +25,8 @@ projection.}
 
 \item{niter}{Integer scalar, the number of iterations to perform.}
 
-\item{Mu}{Starting weights for the projection.}
+\item{Mu}{Starting weights for the projection. The default \code{NULL} uses a
+weight of one for each clique.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

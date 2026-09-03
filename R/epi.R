@@ -36,24 +36,37 @@ time_bins <- function(
 #' @importFrom stats IQR
 time_bins.sir <- function(x, ..., middle = TRUE) {
   # BEGIN GENERATED ARG_HANDLE: time_bins, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(middle = middle),
-      recover_new = c("middle"),
-      recover_old = c("middle"),
-      match_names = c("middle"),
-      match_to = c("middle"),
-      defaults = list(middle = TRUE),
-      head_args = c("x"),
-      fn_name = "time_bins"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: time_bins(x, middle)
+    .old_signature <- function(middle, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn time_bins}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn time_bins}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(middle)) base::list(middle = middle)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(middle)) "middle"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn time_bins} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `time_bins()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  time_bins(", base::paste(base::c("x", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    time_bins(", base::paste(base::c("x", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

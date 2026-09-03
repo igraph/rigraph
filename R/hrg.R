@@ -241,24 +241,41 @@ fit_hrg <- function(
   steps = 0
 ) {
   # BEGIN GENERATED ARG_HANDLE: fit_hrg, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(start = start, steps = steps),
-      recover_new = c("start", "steps"),
-      recover_old = c("start", "steps"),
-      match_names = c("start", "steps"),
-      match_to = c("start", "steps"),
-      defaults = list(start = FALSE, steps = 0),
-      head_args = c("graph", "hrg"),
-      fn_name = "fit_hrg"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("s", "st"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn fit_hrg}.")
+    # Pre-3.0.0 signature: fit_hrg(graph, hrg, start, steps)
+    .old_signature <- function(start, steps, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn fit_hrg}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn fit_hrg}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(start)) base::list(start = start),
+        if (!base::missing(steps)) base::list(steps = steps)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(start)) "start",
+        if (!base::missing(steps)) "steps"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn fit_hrg} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `fit_hrg()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  fit_hrg(", base::paste(base::c("graph", "hrg", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    fit_hrg(", base::paste(base::c("graph", "hrg", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -266,11 +283,11 @@ fit_hrg <- function(
   ensure_igraph(graph)
   if (is.null(hrg)) {
     hrg <- list(
-      left = c(),
-      right = c(),
-      prob = c(),
-      edges = c(),
-      vertices = c()
+      left = numeric(),
+      right = numeric(),
+      prob = numeric(),
+      edges = numeric(),
+      vertices = numeric()
     )
   }
   hrg <- lapply(
@@ -342,24 +359,39 @@ consensus_tree <- function(
   num.samples = 10000
 ) {
   # BEGIN GENERATED ARG_HANDLE: consensus_tree, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(start = start, num.samples = num.samples),
-      recover_new = c("start", "num.samples"),
-      recover_old = c("start", "num.samples"),
-      match_names = c("start", "num.samples"),
-      match_to = c("start", "num.samples"),
-      defaults = list(start = FALSE, num.samples = 10000),
-      head_args = c("graph", "hrg"),
-      fn_name = "consensus_tree"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: consensus_tree(graph, hrg, start, num.samples)
+    .old_signature <- function(start, num.samples, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn consensus_tree}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn consensus_tree}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(start)) base::list(start = start),
+        if (!base::missing(num.samples)) base::list(num.samples = num.samples)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(start)) "start",
+        if (!base::missing(num.samples)) "num.samples"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn consensus_tree} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `consensus_tree()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  consensus_tree(", base::paste(base::c("graph", "hrg", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    consensus_tree(", base::paste(base::c("graph", "hrg", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -508,28 +540,43 @@ predict_edges <- function(
   num.bins = 25
 ) {
   # BEGIN GENERATED ARG_HANDLE: predict_edges, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        start = start,
-        num.samples = num.samples,
-        num.bins = num.bins
-      ),
-      recover_new = c("start", "num.samples", "num.bins"),
-      recover_old = c("start", "num.samples", "num.bins"),
-      match_names = c("start", "num.samples", "num.bins"),
-      match_to = c("start", "num.samples", "num.bins"),
-      defaults = list(start = FALSE, num.samples = 10000, num.bins = 25),
-      head_args = c("graph", "hrg"),
-      fn_name = "predict_edges"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("n", "nu", "num", "num."))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn predict_edges}.")
+    # Pre-3.0.0 signature: predict_edges(graph, hrg, start, num.samples, num.bins)
+    .old_signature <- function(start, num.samples, num.bins, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn predict_edges}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn predict_edges}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(start)) base::list(start = start),
+        if (!base::missing(num.samples)) base::list(num.samples = num.samples),
+        if (!base::missing(num.bins)) base::list(num.bins = num.bins)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(start)) "start",
+        if (!base::missing(num.samples)) "num.samples",
+        if (!base::missing(num.bins)) "num.bins"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn predict_edges} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `predict_edges()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  predict_edges(", base::paste(base::c("graph", "hrg", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    predict_edges(", base::paste(base::c("graph", "hrg", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -830,6 +877,7 @@ rlang::on_load(s3_register("ape::as.phylo", "igraphHRG"))
 #' @param x An `igraphHRG`, a hierarchical random graph, as returned by
 #'   the [fit_hrg()] function.
 #' @param mode Which dendrogram plotting function to use. See details below.
+#'   The default `NULL` uses the `dend.plot.type` igraph option.
 #' @param \dots Additional arguments to supply to the dendrogram plotting
 #'   function.
 #' @return Returns whatever the return value was from the plotting function,
@@ -846,9 +894,12 @@ rlang::on_load(s3_register("ape::as.phylo", "igraphHRG"))
 #'
 plot_dendrogram.igraphHRG <- function(
   x,
-  mode = igraph_opt("dend.plot.type"),
+  mode = NULL,
   ...
 ) {
+  if (is.null(mode)) {
+    mode <- igraph_opt("dend.plot.type")
+  }
   if (mode == "auto") {
     have_ape <- requireNamespace("ape", quietly = TRUE)
     mode <- if (have_ape) "phylo" else "hclust"

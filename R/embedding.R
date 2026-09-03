@@ -62,10 +62,12 @@
 #' @param scaled Logical, if `FALSE`, then \eqn{U} and \eqn{V} are
 #'   returned instead of \eqn{X} and \eqn{Y}.
 #' @param cvec A numeric vector, its length is the number vertices in the
-#'   graph. This vector is added to the diagonal of the adjacency matrix.
+#'   graph. This vector is added to the diagonal of the adjacency matrix. The
+#'   default `NULL` uses
+#'   `strength(graph, weights = weights) / (vcount(graph) - 1)`.
 #' @param options A named list containing the parameters for the SVD
-#'   computation algorithm in ARPACK. By default, the list of values is assigned
-#'   the values given by [arpack_defaults()].
+#'   computation algorithm in ARPACK. The default `NULL` uses the values given
+#'   by [arpack_defaults()].
 #' @return A list containing with entries:
 #'   \describe{
 #'     \item{X}{
@@ -109,42 +111,60 @@ embed_adjacency_matrix <- function(
   weights = NULL,
   which = c("lm", "la", "sa"),
   scaled = TRUE,
-  cvec = strength(graph, weights = weights) / (vcount(graph) - 1),
-  options = arpack_defaults()
+  cvec = NULL,
+  options = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: embed_adjacency_matrix, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        weights = weights,
-        which = which,
-        scaled = scaled,
-        cvec = cvec,
-        options = options
-      ),
-      recover_new = c("weights", "which", "scaled", "cvec", "options"),
-      recover_old = c("weights", "which", "scaled", "cvec", "options"),
-      match_names = c("weights", "which", "scaled", "cvec", "options"),
-      match_to = c("weights", "which", "scaled", "cvec", "options"),
-      defaults = list(
-        weights = NULL,
-        which = c("lm", "la", "sa"),
-        scaled = TRUE,
-        cvec = strength(graph, weights = weights) / (vcount(graph) - 1),
-        options = arpack_defaults()
-      ),
-      head_args = c("graph", "no"),
-      fn_name = "embed_adjacency_matrix"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("w"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn embed_adjacency_matrix}.")
+    # Pre-3.0.0 signature: embed_adjacency_matrix(graph, no, weights, which, scaled, cvec, options)
+    .old_signature <- function(weights, which, scaled, cvec, options, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn embed_adjacency_matrix}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn embed_adjacency_matrix}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(which)) base::list(which = which),
+        if (!base::missing(scaled)) base::list(scaled = scaled),
+        if (!base::missing(cvec)) base::list(cvec = cvec),
+        if (!base::missing(options)) base::list(options = options)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(which)) "which",
+        if (!base::missing(scaled)) "scaled",
+        if (!base::missing(cvec)) "cvec",
+        if (!base::missing(options)) "options"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn embed_adjacency_matrix} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `embed_adjacency_matrix()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  embed_adjacency_matrix(", base::paste(base::c("graph", "no", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    embed_adjacency_matrix(", base::paste(base::c("graph", "no", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(cvec)) {
+    cvec <- strength(graph, weights = weights) / (vcount(graph) - 1)
+  }
+  if (is.null(options)) {
+    options <- arpack_defaults()
+  }
 
   adjacency_spectral_embedding_impl(
     graph = graph,
@@ -272,8 +292,8 @@ dim_select <- function(sv) {
 #' @param scaled Logical, if `FALSE`, then \eqn{U} and \eqn{V} are
 #'   returned instead of \eqn{X} and \eqn{Y}.
 #' @param options A named list containing the parameters for the SVD
-#'   computation algorithm in ARPACK. By default, the list of values is assigned
-#'   the values given by [arpack_defaults()].
+#'   computation algorithm in ARPACK. The default `NULL` uses the values given
+#'   by [arpack_defaults()].
 #' @return A list containing with entries:
 #'   \describe{
 #'     \item{X}{
@@ -320,41 +340,56 @@ embed_laplacian_matrix <- function(
   which = c("lm", "la", "sa"),
   type = c("default", "D-A", "DAD", "I-DAD", "OAP"),
   scaled = TRUE,
-  options = arpack_defaults()
+  options = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: embed_laplacian_matrix, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        weights = weights,
-        which = which,
-        type = type,
-        scaled = scaled,
-        options = options
-      ),
-      recover_new = c("weights", "which", "type", "scaled", "options"),
-      recover_old = c("weights", "which", "type", "scaled", "options"),
-      match_names = c("weights", "which", "type", "scaled", "options"),
-      match_to = c("weights", "which", "type", "scaled", "options"),
-      defaults = list(
-        weights = NULL,
-        which = c("lm", "la", "sa"),
-        type = c("default", "D-A", "DAD", "I-DAD", "OAP"),
-        scaled = TRUE,
-        options = arpack_defaults()
-      ),
-      head_args = c("graph", "no"),
-      fn_name = "embed_laplacian_matrix"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("w"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn embed_laplacian_matrix}.")
+    # Pre-3.0.0 signature: embed_laplacian_matrix(graph, no, weights, which, type, scaled, options)
+    .old_signature <- function(weights, which, type, scaled, options, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn embed_laplacian_matrix}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn embed_laplacian_matrix}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(which)) base::list(which = which),
+        if (!base::missing(type)) base::list(type = type),
+        if (!base::missing(scaled)) base::list(scaled = scaled),
+        if (!base::missing(options)) base::list(options = options)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(which)) "which",
+        if (!base::missing(type)) "type",
+        if (!base::missing(scaled)) "scaled",
+        if (!base::missing(options)) "options"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn embed_laplacian_matrix} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `embed_laplacian_matrix()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  embed_laplacian_matrix(", base::paste(base::c("graph", "no", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    embed_laplacian_matrix(", base::paste(base::c("graph", "no", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(options)) {
+    options <- arpack_defaults()
+  }
 
   laplacian_spectral_embedding_impl(
     graph = graph,
@@ -405,24 +440,39 @@ sample_sphere_surface <- function(
   positive = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_sphere_surface, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(radius = radius, positive = positive),
-      recover_new = c("radius", "positive"),
-      recover_old = c("radius", "positive"),
-      match_names = c("radius", "positive"),
-      match_to = c("radius", "positive"),
-      defaults = list(radius = 1, positive = TRUE),
-      head_args = c("dim", "n"),
-      fn_name = "sample_sphere_surface"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: sample_sphere_surface(dim, n, radius, positive)
+    .old_signature <- function(radius, positive, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn sample_sphere_surface}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_sphere_surface}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(radius)) base::list(radius = radius),
+        if (!base::missing(positive)) base::list(positive = positive)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(radius)) "radius",
+        if (!base::missing(positive)) "positive"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_sphere_surface} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `sample_sphere_surface()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  sample_sphere_surface(", base::paste(base::c("dim", "n", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_sphere_surface(", base::paste(base::c("dim", "n", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -472,24 +522,39 @@ sample_sphere_volume <- function(
   positive = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_sphere_volume, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(radius = radius, positive = positive),
-      recover_new = c("radius", "positive"),
-      recover_old = c("radius", "positive"),
-      match_names = c("radius", "positive"),
-      match_to = c("radius", "positive"),
-      defaults = list(radius = 1, positive = TRUE),
-      head_args = c("dim", "n"),
-      fn_name = "sample_sphere_volume"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: sample_sphere_volume(dim, n, radius, positive)
+    .old_signature <- function(radius, positive, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn sample_sphere_volume}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_sphere_volume}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(radius)) base::list(radius = radius),
+        if (!base::missing(positive)) base::list(positive = positive)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(radius)) "radius",
+        if (!base::missing(positive)) "positive"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_sphere_volume} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `sample_sphere_volume()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  sample_sphere_volume(", base::paste(base::c("dim", "n", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_sphere_volume(", base::paste(base::c("dim", "n", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

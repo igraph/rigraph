@@ -779,33 +779,45 @@ make_clusters <- function(
   modularity = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: make_clusters, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    migrate_check_call_tags(
-      sys.call(),
-      c("m", "me"),
-      "make_clusters"
-    )
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        algorithm = algorithm,
-        merges = merges,
-        modularity = modularity
-      ),
-      recover_new = c("algorithm", "merges", "modularity"),
-      recover_old = c("algorithm", "merges", "modularity"),
-      match_names = c("algorithm", "merges", "modularity"),
-      match_to = c("algorithm", "merges", "modularity"),
-      defaults = list(algorithm = NULL, merges = NULL, modularity = TRUE),
-      head_args = c("graph", "membership"),
-      fn_name = "make_clusters"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("m", "me"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn make_clusters}.", i = "Spell out the full argument name."))
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn make_clusters}.")
+    # Pre-3.0.0 signature: make_clusters(graph, membership, algorithm, merges, modularity)
+    .old_signature <- function(algorithm, merges, modularity, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn make_clusters}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn make_clusters}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(algorithm)) base::list(algorithm = algorithm),
+        if (!base::missing(merges)) base::list(merges = merges),
+        if (!base::missing(modularity)) base::list(modularity = modularity)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(algorithm)) "algorithm",
+        if (!base::missing(merges)) "merges",
+        if (!base::missing(modularity)) "modularity"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn make_clusters} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `make_clusters()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  make_clusters(", base::paste(base::c("graph", "membership", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    make_clusters(", base::paste(base::c("graph", "membership", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -982,28 +994,41 @@ modularity_matrix <- function(
   directed = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: modularity_matrix, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        weights = weights,
-        resolution = resolution,
-        directed = directed
-      ),
-      recover_new = c("weights", "resolution", "directed"),
-      recover_old = c("weights", "resolution", "directed"),
-      match_names = c("weights", "resolution", "directed"),
-      match_to = c("weights", "resolution", "directed"),
-      defaults = list(weights = NULL, resolution = 1, directed = TRUE),
-      head_args = c("graph", "membership"),
-      fn_name = "modularity_matrix"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: modularity_matrix(graph, membership, weights, resolution, directed)
+    .old_signature <- function(weights, resolution, directed, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn modularity_matrix}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn modularity_matrix}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(resolution)) base::list(resolution = resolution),
+        if (!base::missing(directed)) base::list(directed = directed)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(resolution)) "resolution",
+        if (!base::missing(directed)) "directed"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn modularity_matrix} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `modularity_matrix()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  modularity_matrix(", base::paste(base::c("graph", "membership", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    modularity_matrix(", base::paste(base::c("graph", "membership", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -1554,101 +1579,61 @@ cluster_spinglass <- function(
   gamma.minus = 1.0
 ) {
   # BEGIN GENERATED ARG_HANDLE: cluster_spinglass, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    migrate_check_call_tags(
-      sys.call(),
-      c("g"),
-      "cluster_spinglass"
-    )
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        weights = weights,
-        vertex = vertex,
-        spins = spins,
-        parupdate = parupdate,
-        start.temp = start.temp,
-        stop.temp = stop.temp,
-        cool.fact = cool.fact,
-        update.rule = update.rule,
-        gamma = gamma,
-        implementation = implementation,
-        gamma.minus = gamma.minus
-      ),
-      recover_new = c(
-        "weights",
-        "vertex",
-        "spins",
-        "parupdate",
-        "start.temp",
-        "stop.temp",
-        "cool.fact",
-        "update.rule",
-        "gamma",
-        "implementation",
-        "gamma.minus"
-      ),
-      recover_old = c(
-        "weights",
-        "vertex",
-        "spins",
-        "parupdate",
-        "start.temp",
-        "stop.temp",
-        "cool.fact",
-        "update.rule",
-        "gamma",
-        "implementation",
-        "gamma.minus"
-      ),
-      match_names = c(
-        "weights",
-        "vertex",
-        "spins",
-        "parupdate",
-        "start.temp",
-        "stop.temp",
-        "cool.fact",
-        "update.rule",
-        "gamma",
-        "implementation",
-        "gamma.minus"
-      ),
-      match_to = c(
-        "weights",
-        "vertex",
-        "spins",
-        "parupdate",
-        "start.temp",
-        "stop.temp",
-        "cool.fact",
-        "update.rule",
-        "gamma",
-        "implementation",
-        "gamma.minus"
-      ),
-      defaults = list(
-        weights = NULL,
-        vertex = NULL,
-        spins = 25,
-        parupdate = FALSE,
-        start.temp = 1,
-        stop.temp = 0.01,
-        cool.fact = 0.99,
-        update.rule = c("config", "random", "simple"),
-        gamma = 1,
-        implementation = c("orig", "neg"),
-        gamma.minus = 1
-      ),
-      head_args = c("graph"),
-      fn_name = "cluster_spinglass"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("g"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn cluster_spinglass}.", i = "Spell out the full argument name."))
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("s", "st", "g", "ga", "gam", "gamm"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn cluster_spinglass}.")
+    # Pre-3.0.0 signature: cluster_spinglass(graph, weights, vertex, spins, parupdate, start.temp, stop.temp, cool.fact, update.rule, gamma, implementation, gamma.minus)
+    .old_signature <- function(weights, vertex, spins, parupdate, start.temp, stop.temp, cool.fact, update.rule, gamma, implementation, gamma.minus, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn cluster_spinglass}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn cluster_spinglass}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(vertex)) base::list(vertex = vertex),
+        if (!base::missing(spins)) base::list(spins = spins),
+        if (!base::missing(parupdate)) base::list(parupdate = parupdate),
+        if (!base::missing(start.temp)) base::list(start.temp = start.temp),
+        if (!base::missing(stop.temp)) base::list(stop.temp = stop.temp),
+        if (!base::missing(cool.fact)) base::list(cool.fact = cool.fact),
+        if (!base::missing(update.rule)) base::list(update.rule = update.rule),
+        if (!base::missing(gamma)) base::list(gamma = gamma),
+        if (!base::missing(implementation)) base::list(implementation = implementation),
+        if (!base::missing(gamma.minus)) base::list(gamma.minus = gamma.minus)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(vertex)) "vertex",
+        if (!base::missing(spins)) "spins",
+        if (!base::missing(parupdate)) "parupdate",
+        if (!base::missing(start.temp)) "start.temp",
+        if (!base::missing(stop.temp)) "stop.temp",
+        if (!base::missing(cool.fact)) "cool.fact",
+        if (!base::missing(update.rule)) "update.rule",
+        if (!base::missing(gamma)) "gamma",
+        if (!base::missing(implementation)) "implementation",
+        if (!base::missing(gamma.minus)) "gamma.minus"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn cluster_spinglass} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `cluster_spinglass()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  cluster_spinglass(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    cluster_spinglass(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -2038,36 +2023,47 @@ cluster_walktrap <- function(
   membership = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: cluster_walktrap, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        weights = weights,
-        steps = steps,
-        merges = merges,
-        modularity = modularity,
-        membership = membership
-      ),
-      recover_new = c("weights", "steps", "merges", "modularity", "membership"),
-      recover_old = c("weights", "steps", "merges", "modularity", "membership"),
-      match_names = c("weights", "steps", "merges", "modularity", "membership"),
-      match_to = c("weights", "steps", "merges", "modularity", "membership"),
-      defaults = list(
-        weights = NULL,
-        steps = 4,
-        merges = TRUE,
-        modularity = TRUE,
-        membership = TRUE
-      ),
-      head_args = c("graph"),
-      fn_name = "cluster_walktrap"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m", "me"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn cluster_walktrap}.")
+    # Pre-3.0.0 signature: cluster_walktrap(graph, weights, steps, merges, modularity, membership)
+    .old_signature <- function(weights, steps, merges, modularity, membership, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn cluster_walktrap}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn cluster_walktrap}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(steps)) base::list(steps = steps),
+        if (!base::missing(merges)) base::list(merges = merges),
+        if (!base::missing(modularity)) base::list(modularity = modularity),
+        if (!base::missing(membership)) base::list(membership = membership)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(steps)) "steps",
+        if (!base::missing(merges)) "merges",
+        if (!base::missing(modularity)) "modularity",
+        if (!base::missing(membership)) "membership"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn cluster_walktrap} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `cluster_walktrap()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  cluster_walktrap(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    cluster_walktrap(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -2206,72 +2202,51 @@ cluster_edge_betweenness <- function(
   membership = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: cluster_edge_betweenness, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        weights = weights,
-        directed = directed,
-        edge.betweenness = edge.betweenness,
-        merges = merges,
-        bridges = bridges,
-        modularity = modularity,
-        membership = membership
-      ),
-      recover_new = c(
-        "weights",
-        "directed",
-        "edge.betweenness",
-        "merges",
-        "bridges",
-        "modularity",
-        "membership"
-      ),
-      recover_old = c(
-        "weights",
-        "directed",
-        "edge.betweenness",
-        "merges",
-        "bridges",
-        "modularity",
-        "membership"
-      ),
-      match_names = c(
-        "weights",
-        "directed",
-        "edge.betweenness",
-        "merges",
-        "bridges",
-        "modularity",
-        "membership"
-      ),
-      match_to = c(
-        "weights",
-        "directed",
-        "edge.betweenness",
-        "merges",
-        "bridges",
-        "modularity",
-        "membership"
-      ),
-      defaults = list(
-        weights = NULL,
-        directed = TRUE,
-        edge.betweenness = TRUE,
-        merges = TRUE,
-        bridges = TRUE,
-        modularity = TRUE,
-        membership = TRUE
-      ),
-      head_args = c("graph"),
-      fn_name = "cluster_edge_betweenness"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m", "me"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn cluster_edge_betweenness}.")
+    # Pre-3.0.0 signature: cluster_edge_betweenness(graph, weights, directed, edge.betweenness, merges, bridges, modularity, membership)
+    .old_signature <- function(weights, directed, edge.betweenness, merges, bridges, modularity, membership, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn cluster_edge_betweenness}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn cluster_edge_betweenness}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(directed)) base::list(directed = directed),
+        if (!base::missing(edge.betweenness)) base::list(edge.betweenness = edge.betweenness),
+        if (!base::missing(merges)) base::list(merges = merges),
+        if (!base::missing(bridges)) base::list(bridges = bridges),
+        if (!base::missing(modularity)) base::list(modularity = modularity),
+        if (!base::missing(membership)) base::list(membership = membership)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(directed)) "directed",
+        if (!base::missing(edge.betweenness)) "edge.betweenness",
+        if (!base::missing(merges)) "merges",
+        if (!base::missing(bridges)) "bridges",
+        if (!base::missing(modularity)) "modularity",
+        if (!base::missing(membership)) "membership"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn cluster_edge_betweenness} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `cluster_edge_betweenness()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  cluster_edge_betweenness(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    cluster_edge_betweenness(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -2370,34 +2345,45 @@ cluster_fast_greedy <- function(
   weights = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: cluster_fast_greedy, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        merges = merges,
-        modularity = modularity,
-        membership = membership,
-        weights = weights
-      ),
-      recover_new = c("merges", "modularity", "membership", "weights"),
-      recover_old = c("merges", "modularity", "membership", "weights"),
-      match_names = c("merges", "modularity", "membership", "weights"),
-      match_to = c("merges", "modularity", "membership", "weights"),
-      defaults = list(
-        merges = TRUE,
-        modularity = TRUE,
-        membership = TRUE,
-        weights = NULL
-      ),
-      head_args = c("graph"),
-      fn_name = "cluster_fast_greedy"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m", "me"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn cluster_fast_greedy}.")
+    # Pre-3.0.0 signature: cluster_fast_greedy(graph, merges, modularity, membership, weights)
+    .old_signature <- function(merges, modularity, membership, weights, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn cluster_fast_greedy}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn cluster_fast_greedy}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(merges)) base::list(merges = merges),
+        if (!base::missing(modularity)) base::list(modularity = modularity),
+        if (!base::missing(membership)) base::list(membership = membership),
+        if (!base::missing(weights)) base::list(weights = weights)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(merges)) "merges",
+        if (!base::missing(modularity)) "modularity",
+        if (!base::missing(membership)) "membership",
+        if (!base::missing(weights)) "weights"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn cluster_fast_greedy} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `cluster_fast_greedy()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  cluster_fast_greedy(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    cluster_fast_greedy(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -2827,24 +2813,39 @@ cluster_louvain <- function(
   resolution = 1
 ) {
   # BEGIN GENERATED ARG_HANDLE: cluster_louvain, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(weights = weights, resolution = resolution),
-      recover_new = c("weights", "resolution"),
-      recover_old = c("weights", "resolution"),
-      match_names = c("weights", "resolution"),
-      match_to = c("weights", "resolution"),
-      defaults = list(weights = NULL, resolution = 1),
-      head_args = c("graph"),
-      fn_name = "cluster_louvain"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: cluster_louvain(graph, weights, resolution)
+    .old_signature <- function(weights, resolution, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn cluster_louvain}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn cluster_louvain}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(resolution)) base::list(resolution = resolution)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(resolution)) "resolution"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn cluster_louvain} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `cluster_louvain()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  cluster_louvain(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    cluster_louvain(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -2946,24 +2947,37 @@ cluster_optimal <- function(
   weights = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: cluster_optimal, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(weights = weights),
-      recover_new = c("weights"),
-      recover_old = c("weights"),
-      match_names = c("weights"),
-      match_to = c("weights"),
-      defaults = list(weights = NULL),
-      head_args = c("graph"),
-      fn_name = "cluster_optimal"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: cluster_optimal(graph, weights)
+    .old_signature <- function(weights, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn cluster_optimal}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn cluster_optimal}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(weights)) base::list(weights = weights)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(weights)) "weights"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn cluster_optimal} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `cluster_optimal()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  cluster_optimal(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    cluster_optimal(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -3055,34 +3069,43 @@ cluster_infomap <- function(
   modularity = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: cluster_infomap, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        e.weights = e.weights,
-        v.weights = v.weights,
-        nb.trials = nb.trials,
-        modularity = modularity
-      ),
-      recover_new = c("e.weights", "v.weights", "nb.trials", "modularity"),
-      recover_old = c("e.weights", "v.weights", "nb.trials", "modularity"),
-      match_names = c("e.weights", "v.weights", "nb.trials", "modularity"),
-      match_to = c("e.weights", "v.weights", "nb.trials", "modularity"),
-      defaults = list(
-        e.weights = NULL,
-        v.weights = NULL,
-        nb.trials = 10,
-        modularity = TRUE
-      ),
-      head_args = c("graph"),
-      fn_name = "cluster_infomap"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: cluster_infomap(graph, e.weights, v.weights, nb.trials, modularity)
+    .old_signature <- function(e.weights, v.weights, nb.trials, modularity, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn cluster_infomap}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn cluster_infomap}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(e.weights)) base::list(e.weights = e.weights),
+        if (!base::missing(v.weights)) base::list(v.weights = v.weights),
+        if (!base::missing(nb.trials)) base::list(nb.trials = nb.trials),
+        if (!base::missing(modularity)) base::list(modularity = modularity)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(e.weights)) "e.weights",
+        if (!base::missing(v.weights)) "v.weights",
+        if (!base::missing(nb.trials)) "nb.trials",
+        if (!base::missing(modularity)) "modularity"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn cluster_infomap} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `cluster_infomap()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  cluster_infomap(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    cluster_infomap(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -3130,7 +3153,7 @@ plot.communities <- function(
 
 #' @rdname plot_dendrogram.communities
 #' @export
-plot_dendrogram <- function(x, mode = igraph_opt("dend.plot.type"), ...) {
+plot_dendrogram <- function(x, mode = NULL, ...) {
   UseMethod("plot_dendrogram")
 }
 
@@ -3197,6 +3220,7 @@ plot_dendrogram <- function(x, mode = igraph_opt("dend.plot.type"), ...) {
 #' @param x An object containing the community structure of a graph. See
 #'   [communities()] for details.
 #' @param mode Which dendrogram plotting function to use. See details below.
+#'   The default `NULL` uses the `dend.plot.type` igraph option.
 #' @param \dots Additional arguments to supply to the dendrogram plotting
 #'   function.
 #' @param use.modularity Logical, whether to use the modularity values
@@ -3217,11 +3241,14 @@ plot_dendrogram <- function(x, mode = igraph_opt("dend.plot.type"), ...) {
 #'
 plot_dendrogram.communities <- function(
   x,
-  mode = igraph_opt("dend.plot.type"),
+  mode = NULL,
   ...,
   use.modularity = FALSE,
   palette = categorical_pal(8)
 ) {
+  if (is.null(mode)) {
+    mode <- igraph_opt("dend.plot.type")
+  }
   mode <- igraph_match_arg(mode, c("auto", "phylo", "hclust", "dendrogram"))
 
   old_palette <- palette(palette)
@@ -3600,7 +3627,8 @@ communities <- groups.communities
 #'   correspond to the vertices, and for each element the ID in the new graph is
 #'   given.
 #' @param vertex.attr.comb Specifies how to combine the vertex attributes in
-#'   the new graph. Please see [attribute.combination()] for details.
+#'   the new graph. Please see [attribute.combination()] for details. The
+#'   default `NULL` uses the `vertex.attr.comb` igraph option.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
@@ -3624,8 +3652,12 @@ communities <- groups.communities
 contract <- function(
   graph,
   mapping,
-  vertex.attr.comb = igraph_opt("vertex.attr.comb")
+  vertex.attr.comb = NULL
 ) {
+  if (is.null(vertex.attr.comb)) {
+    vertex.attr.comb <- igraph_opt("vertex.attr.comb")
+  }
+
   contract_vertices_impl(
     graph = graph,
     mapping = mapping,

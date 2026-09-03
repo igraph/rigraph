@@ -9,13 +9,13 @@
 \usage{
 \method{print}{igraph}(
   x,
-  full = igraph_opt("print.full"),
-  graph.attributes = igraph_opt("print.graph.attributes"),
-  vertex.attributes = igraph_opt("print.vertex.attributes"),
-  edge.attributes = igraph_opt("print.edge.attributes"),
+  full = NULL,
+  graph.attributes = NULL,
+  vertex.attributes = NULL,
+  edge.attributes = NULL,
   names = TRUE,
-  max.lines = igraph_opt("auto.print.lines"),
-  id = igraph_opt("print.id"),
+  max.lines = NULL,
+  id = NULL,
   ...
 )
 
@@ -25,22 +25,27 @@
 \item{x}{The graph to print.}
 
 \item{full}{Logical, whether to print the graph structure itself as
-well.}
+well. The default \code{NULL} uses the \code{print.full} igraph option.}
 
-\item{graph.attributes}{Logical, whether to print graph attributes.}
+\item{graph.attributes}{Logical, whether to print graph attributes. The
+default \code{NULL} uses the \code{print.graph.attributes} igraph option.}
 
 \item{vertex.attributes}{Logical, whether to print vertex
-attributes.}
+attributes. The default \code{NULL} uses the \code{print.vertex.attributes} igraph
+option.}
 
-\item{edge.attributes}{Logical, whether to print edge attributes.}
+\item{edge.attributes}{Logical, whether to print edge attributes. The
+default \code{NULL} uses the \code{print.edge.attributes} igraph option.}
 
 \item{names}{Logical, whether to print symbolic vertex names (i.e.
 the \code{name} vertex attribute) or vertex IDs.}
 
 \item{max.lines}{The maximum number of lines to use. The rest of the
-output will be truncated.}
+output will be truncated. If not given, the \code{auto.print.lines} igraph
+option applies; \code{NULL} prints all lines.}
 
-\item{id}{Whether to print the graph ID.}
+\item{id}{Whether to print the graph ID. The default \code{NULL} uses the
+\code{print.id} igraph option.}
 
 \item{\dots}{Additional agruments.}
 

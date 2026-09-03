@@ -41,7 +41,7 @@ migrations <- list(
     new = function(
       graph,
       from,
-      to = V(graph),
+      to = NULL,
       ...,
       mode = c("out", "in", "all", "total"),
       cutoff = -1
@@ -64,7 +64,7 @@ migrations <- list(
     new = function(
       graph,
       from,
-      to = V(graph),
+      to = NULL,
       ...,
       mode = c("out", "all", "in"),
       weights = NULL
@@ -86,7 +86,7 @@ migrations <- list(
     old = function(graph, nodes, weights) {},
     new = function(
       graph,
-      nodes = V(graph),
+      nodes = NULL,
       ...,
       weights = NULL
     ) {},
@@ -127,7 +127,7 @@ migrations <- list(
     old = function(graph, v, mode, loops, normalized) {},
     new = function(
       graph,
-      v = V(graph),
+      v = NULL,
       ...,
       mode = c("all", "out", "in", "total"),
       loops = TRUE,
@@ -152,8 +152,8 @@ migrations <- list(
     old = function(graph, v, to, mode, weights, algorithm) {},
     new = function(
       graph,
-      v = V(graph),
-      to = V(graph),
+      v = NULL,
+      to = NULL,
       ...,
       mode = c("all", "out", "in"),
       weights = NULL,
@@ -184,7 +184,7 @@ migrations <- list(
     new = function(
       graph,
       order = 1,
-      nodes = V(graph),
+      nodes = NULL,
       ...,
       mode = c("all", "out", "in"),
       mindist = 0
@@ -197,7 +197,7 @@ migrations <- list(
     new = function(
       graph,
       order = 1,
-      nodes = V(graph),
+      nodes = NULL,
       ...,
       mode = c("all", "out", "in"),
       mindist = 0
@@ -286,7 +286,7 @@ migrations <- list(
     old = function(graph, vids, mode, neighbor.degree.mode, weights) {},
     new = function(
       graph,
-      vids = V(graph),
+      vids = NULL,
       ...,
       mode = c("all", "out", "in", "total"),
       neighbor.degree.mode = c("all", "out", "in", "total"),
@@ -300,7 +300,7 @@ migrations <- list(
     new = function(
       graph,
       order = 1,
-      nodes = V(graph),
+      nodes = NULL,
       ...,
       mode = c("all", "out", "in"),
       mindist = 0
@@ -315,7 +315,7 @@ migrations <- list(
       types = NULL,
       ...,
       weights = NULL,
-      eps = .Machine$double.eps
+      eps = NULL
     ) {},
     when = "3.0.0"
   ),
@@ -369,7 +369,7 @@ migrations <- list(
     new = function(
       graph,
       from,
-      to = V(graph),
+      to = NULL,
       ...,
       mode = c("out", "all", "in"),
       weights = NULL,
@@ -452,7 +452,7 @@ migrations <- list(
     old = function(graph, eids, loops) {},
     new = function(
       graph,
-      eids = E(graph),
+      eids = NULL,
       ...,
       loops = TRUE
     ) {},

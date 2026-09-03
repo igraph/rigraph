@@ -243,9 +243,24 @@ resolve_edge_weights <- function(
       "3.0.0",
       sprintf("%s(attr = )", fn),
       sprintf("%s(weights = )", fn),
+      details = if (is.null(attr)) {
+        "`attr = NULL` becomes `weights = NA`, not `weights = NULL`."
+      },
       user_env = user_env
     )
-    weights <- attr
+    # `attr` and `weights` spell "unweighted" differently, so the two cannot
+    # simply be assigned across. `attr = NULL` was the documented way to ask
+    # for a plain 0/1 matrix -- "If `NULL` a traditional adjacency matrix is
+    # returned" -- while `weights = NULL` means the opposite: use the `weight`
+    # edge attribute if the graph has one. Passing it straight through
+    # therefore inverts what the caller asked for, silently and without a
+    # warning, for every call that spelled it out. `NA` is how the new
+    # vocabulary says "unweighted".
+    #
+    # `lifecycle::is_present()` is true for an explicit `NULL` -- only the
+    # `deprecated()` sentinel counts as absent -- so this branch really does
+    # see `attr = NULL` and has to translate it.
+    weights <- if (is.null(attr)) NA else attr
   }
 
   if (is.null(weights)) {
@@ -412,9 +427,10 @@ get.adjacency.sparse <- function(
 #'   }
 #'   If multiple edges share endpoints, the value of an arbitrarily chosen edge
 #'   is included in the matrix.
-#' @param attr `r lifecycle::badge("deprecated")` Use `weights` instead. If
-#'   supplied, the value is forwarded to `weights` as a character edge
-#'   attribute name.
+#' @param attr `r lifecycle::badge("deprecated")` Use `weights` instead. A
+#'   character edge attribute name is forwarded to `weights` unchanged; `NULL`
+#'   becomes `weights = NA`, since `attr = NULL` asked for a traditional
+#'   unweighted matrix while `weights = NULL` picks the `weight` attribute up.
 #' @param edges `r lifecycle::badge("deprecated")` Logical, whether to return the edge IDs in the matrix.
 #'   For non-existant edges zero is returned.
 #' @param names Logical, whether to assign row and column names
@@ -422,7 +438,7 @@ get.adjacency.sparse <- function(
 #'   is present in the graph.
 #' @param sparse Logical, whether to create a sparse matrix. The
 #'   \sQuote{`Matrix`} package must be installed for creating sparse
-#'   matrices.
+#'   matrices. The default `NULL` uses the `sparsematrices` igraph option.
 #' @return A `vcount(graph)` by `vcount(graph)` (usually) numeric
 #'   matrix.
 #'
@@ -444,45 +460,58 @@ as_adjacency_matrix <- function(
   ...,
   weights = NULL,
   names = TRUE,
-  sparse = igraph_opt("sparsematrices"),
+  sparse = NULL,
   edges = deprecated(),
   attr = deprecated()
 ) {
   ensure_igraph(graph)
 
   # BEGIN GENERATED ARG_HANDLE: as_adjacency_matrix, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        weights = weights,
-        names = names,
-        sparse = sparse,
-        edges = edges,
-        attr = attr
-      ),
-      recover_new = c("weights", "edges", "names", "sparse"),
-      recover_old = c("attr", "edges", "names", "sparse"),
-      match_names = c("attr", "weights", "names", "sparse", "edges", "attr"),
-      match_to = c("weights", "weights", "names", "sparse", "edges", "attr"),
-      defaults = list(
-        weights = NULL,
-        names = TRUE,
-        sparse = igraph_opt("sparsematrices"),
-        edges = deprecated(),
-        attr = deprecated()
-      ),
-      head_args = c("graph", "type"),
-      fn_name = "as_adjacency_matrix"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "at", "att"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn as_adjacency_matrix}.")
+    # Pre-3.0.0 signature: as_adjacency_matrix(graph, type, attr, edges, names, sparse)
+    .old_signature <- function(attr, edges, names, sparse, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn as_adjacency_matrix}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn as_adjacency_matrix}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(attr)) base::list(weights = attr),
+        if (!base::missing(edges)) base::list(edges = edges),
+        if (!base::missing(names)) base::list(names = names),
+        if (!base::missing(sparse)) base::list(sparse = sparse)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(edges)) "edges",
+        if (!base::missing(names)) "names",
+        if (!base::missing(sparse)) "sparse"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn as_adjacency_matrix} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `as_adjacency_matrix()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  as_adjacency_matrix(", base::paste(base::c("graph", "type", base::c(weights = "attr", edges = "edges", names = "names", sparse = "sparse")[.arg_names]), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    as_adjacency_matrix(", base::paste(base::c("graph", "type", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(sparse)) {
+    sparse <- igraph_opt("sparsematrices")
+  }
 
   if (lifecycle::is_present(edges) && isTRUE(edges)) {
     lifecycle::deprecate_stop("2.0.0", "as_adjacency_matrix(edges = )")
@@ -569,24 +598,37 @@ as_edgelist <- function(
   names = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: as_edgelist, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(names = names),
-      recover_new = c("names"),
-      recover_old = c("names"),
-      match_names = c("names"),
-      match_to = c("names"),
-      defaults = list(names = TRUE),
-      head_args = c("graph"),
-      fn_name = "as_edgelist"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: as_edgelist(graph, names)
+    .old_signature <- function(names, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn as_edgelist}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn as_edgelist}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(names)) base::list(names = names)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(names)) "names"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn as_edgelist} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `as_edgelist()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  as_edgelist(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    as_edgelist(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -708,24 +750,37 @@ as_directed <- function(
   mode = c("mutual", "arbitrary", "random", "acyclic")
 ) {
   # BEGIN GENERATED ARG_HANDLE: as_directed, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(mode = mode),
-      recover_new = c("mode"),
-      recover_old = c("mode"),
-      match_names = c("mode"),
-      match_to = c("mode"),
-      defaults = list(mode = c("mutual", "arbitrary", "random", "acyclic")),
-      head_args = c("graph"),
-      fn_name = "as_directed"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: as_directed(graph, mode)
+    .old_signature <- function(mode, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn as_directed}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn as_directed}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(mode)) base::list(mode = mode)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(mode)) "mode"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn as_directed} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `as_directed()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  as_directed(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    as_directed(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -740,15 +795,19 @@ as_directed <- function(
 #'   `mode="collapse"` or `mode="mutual"`.  In these cases many edges
 #'   might be mapped to a single one in the new graph, and their attributes are
 #'   combined. Please see [attribute.combination()] for details on
-#'   this.
+#'   this. The default `NULL` uses the `edge.attr.comb` igraph option.
 #' @export
 as_undirected <- function(
   graph,
   mode = c("collapse", "each", "mutual"),
-  edge.attr.comb = igraph_opt("edge.attr.comb")
+  edge.attr.comb = NULL
 ) {
   # Argument checks
   ensure_igraph(graph)
+  if (is.null(edge.attr.comb)) {
+    edge.attr.comb <- igraph_opt("edge.attr.comb")
+  }
+
   mode <- igraph_match_arg(mode)
 
   # Function call
@@ -811,28 +870,43 @@ as_adj_list <- function(
   multiple = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: as_adj_list, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(mode = mode, loops = loops, multiple = multiple),
-      recover_new = c("mode", "loops", "multiple"),
-      recover_old = c("mode", "loops", "multiple"),
-      match_names = c("mode", "loops", "multiple"),
-      match_to = c("mode", "loops", "multiple"),
-      defaults = list(
-        mode = c("all", "out", "in", "total"),
-        loops = c("twice", "once", "ignore"),
-        multiple = TRUE
-      ),
-      head_args = c("graph"),
-      fn_name = "as_adj_list"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn as_adj_list}.")
+    # Pre-3.0.0 signature: as_adj_list(graph, mode, loops, multiple)
+    .old_signature <- function(mode, loops, multiple, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn as_adj_list}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn as_adj_list}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(mode)) base::list(mode = mode),
+        if (!base::missing(loops)) base::list(loops = loops),
+        if (!base::missing(multiple)) base::list(multiple = multiple)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(mode)) "mode",
+        if (!base::missing(loops)) "loops",
+        if (!base::missing(multiple)) "multiple"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn as_adj_list} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `as_adj_list()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  as_adj_list(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    as_adj_list(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -870,27 +944,39 @@ as_adj_edge_list <- function(
   loops = c("twice", "once", "ignore")
 ) {
   # BEGIN GENERATED ARG_HANDLE: as_adj_edge_list, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(mode = mode, loops = loops),
-      recover_new = c("mode", "loops"),
-      recover_old = c("mode", "loops"),
-      match_names = c("mode", "loops"),
-      match_to = c("mode", "loops"),
-      defaults = list(
-        mode = c("all", "out", "in", "total"),
-        loops = c("twice", "once", "ignore")
-      ),
-      head_args = c("graph"),
-      fn_name = "as_adj_edge_list"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: as_adj_edge_list(graph, mode, loops)
+    .old_signature <- function(mode, loops, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn as_adj_edge_list}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn as_adj_edge_list}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(mode)) base::list(mode = mode),
+        if (!base::missing(loops)) base::list(loops = loops)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(mode)) "mode",
+        if (!base::missing(loops)) "loops"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn as_adj_edge_list} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `as_adj_edge_list()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  as_adj_edge_list(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    as_adj_edge_list(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -968,24 +1054,41 @@ graph_from_graphnel <- function(
   unlist.attrs = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph_from_graphnel, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(name = name, weight = weight, unlist.attrs = unlist.attrs),
-      recover_new = c("name", "weight", "unlist.attrs"),
-      recover_old = c("name", "weight", "unlist.attrs"),
-      match_names = c("name", "weight", "unlist.attrs"),
-      match_to = c("name", "weight", "unlist.attrs"),
-      defaults = list(name = TRUE, weight = TRUE, unlist.attrs = TRUE),
-      head_args = c("graphNEL"),
-      fn_name = "graph_from_graphnel"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: graph_from_graphnel(graphNEL, name, weight, unlist.attrs)
+    .old_signature <- function(name, weight, unlist.attrs, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn graph_from_graphnel}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn graph_from_graphnel}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(name)) base::list(name = name),
+        if (!base::missing(weight)) base::list(weight = weight),
+        if (!base::missing(unlist.attrs)) base::list(unlist.attrs = unlist.attrs)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(name)) "name",
+        if (!base::missing(weight)) "weight",
+        if (!base::missing(unlist.attrs)) "unlist.attrs"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn graph_from_graphnel} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `graph_from_graphnel()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  graph_from_graphnel(", base::paste(base::c("graphNEL", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    graph_from_graphnel(", base::paste(base::c("graphNEL", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -1317,34 +1420,43 @@ as_biadjacency_matrix <- function(
   ensure_igraph(graph)
 
   # BEGIN GENERATED ARG_HANDLE: as_biadjacency_matrix, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        weights = weights,
-        names = names,
-        sparse = sparse,
-        attr = attr
-      ),
-      recover_new = c("weights", "names", "sparse"),
-      recover_old = c("attr", "names", "sparse"),
-      match_names = c("attr", "weights", "names", "sparse", "attr"),
-      match_to = c("weights", "weights", "names", "sparse", "attr"),
-      defaults = list(
-        weights = NULL,
-        names = TRUE,
-        sparse = FALSE,
-        attr = deprecated()
-      ),
-      head_args = c("graph", "types"),
-      fn_name = "as_biadjacency_matrix"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "at", "att"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn as_biadjacency_matrix}.")
+    # Pre-3.0.0 signature: as_biadjacency_matrix(graph, types, attr, names, sparse)
+    .old_signature <- function(attr, names, sparse, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn as_biadjacency_matrix}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn as_biadjacency_matrix}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(attr)) base::list(weights = attr),
+        if (!base::missing(names)) base::list(names = names),
+        if (!base::missing(sparse)) base::list(sparse = sparse)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(names)) "names",
+        if (!base::missing(sparse)) "sparse"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn as_biadjacency_matrix} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `as_biadjacency_matrix()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  as_biadjacency_matrix(", base::paste(base::c("graph", "types", base::c(weights = "attr", names = "names", sparse = "sparse")[.arg_names]), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    as_biadjacency_matrix(", base::paste(base::c("graph", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -1498,24 +1610,39 @@ graph_from_adj_list <- function(
   duplicate = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph_from_adj_list, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(mode = mode, duplicate = duplicate),
-      recover_new = c("mode", "duplicate"),
-      recover_old = c("mode", "duplicate"),
-      match_names = c("mode", "duplicate"),
-      match_to = c("mode", "duplicate"),
-      defaults = list(mode = c("out", "in", "all", "total"), duplicate = TRUE),
-      head_args = c("adjlist"),
-      fn_name = "graph_from_adj_list"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: graph_from_adj_list(adjlist, mode, duplicate)
+    .old_signature <- function(mode, duplicate, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn graph_from_adj_list}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn graph_from_adj_list}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(mode)) base::list(mode = mode),
+        if (!base::missing(duplicate)) base::list(duplicate = duplicate)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(mode)) "mode",
+        if (!base::missing(duplicate)) "duplicate"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn graph_from_adj_list} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `graph_from_adj_list()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  graph_from_adj_list(", base::paste(base::c("adjlist", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    graph_from_adj_list(", base::paste(base::c("adjlist", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -1843,24 +1970,37 @@ graph_from_data_frame <- function(
   vertices = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph_from_data_frame, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(vertices = vertices),
-      recover_new = c("vertices"),
-      recover_old = c("vertices"),
-      match_names = c("vertices"),
-      match_to = c("vertices"),
-      defaults = list(vertices = NULL),
-      head_args = c("d", "directed"),
-      fn_name = "graph_from_data_frame"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: graph_from_data_frame(d, directed, vertices)
+    .old_signature <- function(vertices, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn graph_from_data_frame}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn graph_from_data_frame}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(vertices)) base::list(vertices = vertices)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(vertices)) "vertices"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn graph_from_data_frame} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `graph_from_data_frame()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  graph_from_data_frame(", base::paste(base::c("d", "directed", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    graph_from_data_frame(", base::paste(base::c("d", "directed", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -1973,24 +2113,37 @@ graph_from_edgelist <- function(
   directed = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph_from_edgelist, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(directed = directed),
-      recover_new = c("directed"),
-      recover_old = c("directed"),
-      match_names = c("directed"),
-      match_to = c("directed"),
-      defaults = list(directed = TRUE),
-      head_args = c("el"),
-      fn_name = "graph_from_edgelist"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: graph_from_edgelist(el, directed)
+    .old_signature <- function(directed, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn graph_from_edgelist}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn graph_from_edgelist}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(directed)) base::list(directed = directed)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(directed)) "directed"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn graph_from_edgelist} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `graph_from_edgelist()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  graph_from_edgelist(", base::paste(base::c("el", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    graph_from_edgelist(", base::paste(base::c("el", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

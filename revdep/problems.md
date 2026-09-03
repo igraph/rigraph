@@ -3,7 +3,7 @@
 * Email: <mailto:diboobayu@gmail.com>
 * GitHub mirror: <https://github.com/cran/Boptbd>
 
-Run `revdepcheck::cloud_details(, "Boptbd")` for more info
+Run `revdepcheck::revdep_details(, "Boptbd")` for more info
 
 ## Newly broken
 
@@ -42,7 +42,7 @@ Run `revdepcheck::cloud_details(, "Boptbd")` for more info
 * Email: <mailto:altayscience@gmail.com>
 * GitHub mirror: <https://github.com/cran/c3net>
 
-Run `revdepcheck::cloud_details(, "c3net")` for more info
+Run `revdepcheck::revdep_details(, "c3net")` for more info
 
 ## Newly broken
 
@@ -82,7 +82,7 @@ Run `revdepcheck::cloud_details(, "c3net")` for more info
 * Email: <mailto:santtuth@gmail.com>
 * GitHub mirror: <https://github.com/cran/cfid>
 
-Run `revdepcheck::cloud_details(, "cfid")` for more info
+Run `revdepcheck::revdep_details(, "cfid")` for more info
 
 ## Newly broken
 
@@ -121,7 +121,7 @@ Run `revdepcheck::cloud_details(, "cfid")` for more info
 * Email: <mailto:andreas.muehling@tum.de>
 * GitHub mirror: <https://github.com/cran/comato>
 
-Run `revdepcheck::cloud_details(, "comato")` for more info
+Run `revdepcheck::revdep_details(, "comato")` for more info
 
 ## Newly broken
 
@@ -155,13 +155,33 @@ Run `revdepcheck::cloud_details(, "comato")` for more info
      Execution halted
      ```
 
+## In both
+
+*   checking S3 generic/method consistency ... NOTE
+     ```
+     Mismatches for apparent methods not registered:
+     min:
+       function(..., na.rm)
+     min.distance:
+       function(centers, com, layouts)
+     See section ‘Registering S3 methods’ in the ‘Writing R Extensions’
+     manual.
+     ```
+
+*   checking R code for possible problems ... NOTE
+     ```
+     Found if() conditions comparing class() to string:
+     File ‘comato/R/concept_maps.r’: if (class(m) != "conceptmap") ...
+     Use inherits() (or maybe is()) instead.
+     ```
+
 # cranly (0.6.0)
 
 * GitHub: <https://github.com/ikosmidis/cranly>
 * Email: <mailto:ioannis.kosmidis@warwick.ac.uk>
 * GitHub mirror: <https://github.com/cran/cranly>
 
-Run `revdepcheck::cloud_details(, "cranly")` for more info
+Run `revdepcheck::revdep_details(, "cranly")` for more info
 
 ## Newly broken
 
@@ -201,7 +221,7 @@ Run `revdepcheck::cloud_details(, "cranly")` for more info
 * Email: <mailto:a.arkilanian@gmail.com>
 * GitHub mirror: <https://github.com/cran/dci>
 
-Run `revdepcheck::cloud_details(, "dci")` for more info
+Run `revdepcheck::revdep_details(, "dci")` for more info
 
 ## Newly broken
 
@@ -300,7 +320,7 @@ Run `revdepcheck::cloud_details(, "dci")` for more info
 * Email: <mailto:handcock@stat.ucla.edu>
 * GitHub mirror: <https://github.com/cran/degreenet>
 
-Run `revdepcheck::cloud_details(, "degreenet")` for more info
+Run `revdepcheck::revdep_details(, "degreenet")` for more info
 
 ## Newly broken
 
@@ -309,6 +329,7 @@ Run `revdepcheck::cloud_details(, "degreenet")` for more info
      Running examples in ‘degreenet-Ex.R’ failed
      The error most likely occurred in:
      
+     > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
      > ### Name: reedmolloy
      > ### Title: Generate a undirected network with a given sequence of degrees
      > ### Aliases: reedmolloy
@@ -332,13 +353,21 @@ Run `revdepcheck::cloud_details(, "degreenet")` for more info
      Execution halted
      ```
 
+## In both
+
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
+     ```
+
 # ECoL (0.4.4)
 
 * GitHub: <https://github.com/lpfgarcia/ECoL>
 * Email: <mailto:luis.garcia@unb.br>
 * GitHub mirror: <https://github.com/cran/ECoL>
 
-Run `revdepcheck::cloud_details(, "ECoL")` for more info
+Run `revdepcheck::revdep_details(, "ECoL")` for more info
 
 ## Newly broken
 
@@ -402,12 +431,12 @@ Run `revdepcheck::cloud_details(, "ECoL")` for more info
        Execution halted
      ```
 
-# ggm (2.5.2)
+# ggm (2.5.4)
 
 * Email: <mailto:giovanni.marchetti@unifi.it>
 * GitHub mirror: <https://github.com/cran/ggm>
 
-Run `revdepcheck::cloud_details(, "ggm")` for more info
+Run `revdepcheck::revdep_details(, "ggm")` for more info
 
 ## Newly broken
 
@@ -447,7 +476,7 @@ Run `revdepcheck::cloud_details(, "ggm")` for more info
 * Email: <mailto:thomasp85@gmail.com>
 * GitHub mirror: <https://github.com/cran/ggraph>
 
-Run `revdepcheck::cloud_details(, "ggraph")` for more info
+Run `revdepcheck::revdep_details(, "ggraph")` for more info
 
 ## Newly broken
 
@@ -511,41 +540,49 @@ Run `revdepcheck::cloud_details(, "ggraph")` for more info
      Execution halted
      ```
 
-# glyrepr (0.12.0)
+## In both
+
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
+     ```
+
+# glyrepr (1.0.0)
 
 * GitHub: <https://github.com/glycoverse/glyrepr>
 * Email: <mailto:23110220018@m.fudan.edu.cn>
 * GitHub mirror: <https://github.com/cran/glyrepr>
 
-Run `revdepcheck::cloud_details(, "glyrepr")` for more info
+Run `revdepcheck::revdep_details(, "glyrepr")` for more info
 
 ## Newly broken
 
 *   checking tests ... ERROR
      ```
      ...
-       > library(glyrepr)
-       > 
-       > test_check("glyrepr")
-       Saving _problems/test-structure-to-iupac-95.R
-       [ FAIL 1 | WARN 0 | SKIP 12 | PASS 1180 ]
-       
-       ══ Skipped tests (12) ══════════════════════════════════════════════════════════
-       • On CRAN (12): 'test-composition.R:270:1', 'test-composition.R:297:1',
-         'test-example-glycans.R:1:1', 'test-example-glycans.R:9:1',
-         'test-example-glycans.R:16:1', 'test-example-glycans.R:23:1',
-         'test-example-glycans.R:30:1', 'test-structure-level.R:66:1',
-         'test-structure-level.R:147:1', 'test-structure.R:530:1',
-         'test-structure.R:537:1', 'test-structure.R:545:1'
+         'test-floating-parts.R:480:1', 'test-floating-substituents.R:94:1',
+         'test-floating-substituents.R:133:1', 'test-floating-substituents.R:173:1',
+         'test-floating-validation.R:37:1', 'test-floating-validation.R:51:1',
+         'test-floating-validation.R:65:1', 'test-floating-validation.R:79:1',
+         'test-floating-validation.R:109:1', 'test-floating-validation.R:139:1',
+         'test-floating-validation.R:159:1', 'test-floating-validation.R:203:1',
+         'test-low-level-structure.R:46:1', 'test-low-level-structure.R:82:1',
+         'test-low-level-structure.R:159:1', 'test-low-level-structure.R:222:1',
+         'test-low-level-structure.R:236:1', 'test-smap.R:1041:1',
+         'test-structure-tables.R:497:1', 'test-structure.R:520:1',
+         'test-structure.R:539:1', 'test-structure.R:588:1', 'test-structure.R:608:1',
+         'test-structure.R:668:1', 'test-structure.R:675:1', 'test-structure.R:683:1',
+         'test-structure.R:724:1', 'test-structure.R:779:1'
        
        ══ Failed tests ════════════════════════════════════════════════════════════════
-       ── Error ('test-structure-to-iupac.R:95:3'): structure_to_iupac handles complex branched structures ──
+       ── Error ('test-structure-to-iupac.R:124:3'): structure_to_iupac handles complex branched structures ──
        <purrr_error_indexed/rlang_error/error/condition>
-       Error in `purrr::map(valid_graphs, function(graph) {     checkmate::assert_class(graph, "igraph")     graph %>% validate_single_glycan_structure() %>% ensure_name_vertex_attr() })`: i In index: 1.
-       Caused by error in `validate_single_glycan_structure()`:
+       Error in `purrr::map(valid_graphs, function(graph) {     checkmate::assert_class(graph, "igraph")     graph %>% validate_glycan_graph() %>% canonicalize_glycan_graph() })`: i In index: 1.
+       Caused by error in `validate_glycan_graph()`:
        ! Duplicated linkage positions.
        
-       [ FAIL 1 | WARN 0 | SKIP 12 | PASS 1180 ]
+       [ FAIL 1 | WARN 0 | SKIP 46 | PASS 1885 ]
        Error:
        ! Test failures.
        Execution halted
@@ -557,7 +594,7 @@ Run `revdepcheck::cloud_details(, "glyrepr")` for more info
 * Email: <mailto:sohamghosh@tamu.edu>
 * GitHub mirror: <https://github.com/cran/GoodFitSBM>
 
-Run `revdepcheck::cloud_details(, "GoodFitSBM")` for more info
+Run `revdepcheck::revdep_details(, "GoodFitSBM")` for more info
 
 ## Newly broken
 
@@ -591,60 +628,90 @@ Run `revdepcheck::cloud_details(, "GoodFitSBM")` for more info
      Execution halted
      ```
 
-# manynet (2.0.1)
+# manynet (2.2.3)
 
 * GitHub: <https://github.com/stocnet/manynet>
 * Email: <mailto:james.hollway@graduateinstitute.ch>
 * GitHub mirror: <https://github.com/cran/manynet>
 
-Run `revdepcheck::cloud_details(, "manynet")` for more info
+Run `revdepcheck::revdep_details(, "manynet")` for more info
 
 ## Newly broken
 
 *   checking tests ... ERROR
      ```
      ...
-         'test-manip_transform.R:10:5', 'test-manip_transform.R:10:5'
-       • Some functions need more input (4): 'test-manip_transform.R:8:5',
-         'test-manip_transform.R:8:5', 'test-manip_transform.R:8:5',
-         'test-manip_transform.R:8:5'
-       • nodelist and pajek read/write not tested yet (2): 'test-make_read.R:12:5',
-         'test-make_read.R:12:5'
-       
-       ══ Failed tests ════════════════════════════════════════════════════════════════
-       ── Failure ('test-manip_format.R:129:3'): to_twomode works ─────────────────────
-       Expected `is_twomode(to_twomode(ison_algebra, "type"))` to be TRUE.
+           ▆
+        1. ├─testthat::expect_null(...) at test-tutorials_manynet.R:4:5
+        2. │ └─testthat::quasi_label(enquo(object), label)
+        3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
+        4. └─manynet:::check_tute_functions(tute)
+        5.   └─testthat::expect_null(...) at ./helper-manynet.R:225:5
+       ── Failure ('test-tutorials_manynet.R:4:5'): manynet tutorial code runs without warnings or errors ──
+       Expected `w` to be NULL.
        Differences:
-       `actual`:   FALSE
-       `expected`: TRUE 
+       `actual` is an S3 object of class <lifecycle_warning_deprecated/rlang_warning/warning/condition>, a list
+       `expected` is NULL
        
-       ── Failure ('test-manip_format.R:130:3'): to_twomode works ─────────────────────
-       Expected `is_twomode(to_twomode(as_igraph(ison_algebra), "type"))` to be TRUE.
-       Differences:
-       `actual`:   FALSE
-       `expected`: TRUE 
+       Warning in expression 46 : mean(as_matrix(s_women))
+       Backtrace:
+           ▆
+        1. ├─testthat::expect_null(...) at test-tutorials_manynet.R:4:5
+        2. │ └─testthat::quasi_label(enquo(object), label)
+        3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
+        4. └─manynet:::check_tute_functions(tute)
+        5.   └─testthat::expect_null(...) at ./helper-manynet.R:225:5
        
-       
-       [ FAIL 2 | WARN 0 | SKIP 18 | PASS 399 ]
+       [ FAIL 2 | WARN 728 | SKIP 78 | PASS 3303 ]
        Error:
        ! Test failures.
        Execution halted
      ```
 
-# migraph (1.6.2)
+# MetaNet (0.3.2)
+
+* GitHub: <https://github.com/Asa12138/MetaNet>
+* Email: <mailto:bfzede@gmail.com>
+* GitHub mirror: <https://github.com/cran/MetaNet>
+
+Run `revdepcheck::revdep_details(, "MetaNet")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     Running examples in ‘MetaNet-Ex.R’ failed
+     The error most likely occurred in:
+     
+     > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+     > ### Name: zp_analyse
+     > ### Title: Zi-Pi calculate
+     > ### Aliases: zp_analyse zp_plot
+     > 
+     > ### ** Examples
+     > 
+     > data("c_net")
+     > module_detect(co_net) -> co_net_modu
+     > zp_analyse(co_net_modu) -> co_net_modu
+     Error in deter_role(x["Pi"], x["Zi"], backs) : object 'role' not found
+     Calls: zp_analyse -> apply -> FUN -> deter_role
+     Execution halted
+     ```
+
+# migraph (1.6.8)
 
 * GitHub: <https://github.com/stocnet/migraph>
 * Email: <mailto:james.hollway@graduateinstitute.ch>
 * GitHub mirror: <https://github.com/cran/migraph>
 
-Run `revdepcheck::cloud_details(, "migraph")` for more info
+Run `revdepcheck::revdep_details(, "migraph")` for more info
 
 ## Newly broken
 
 *   checking tests ... ERROR
      ```
      ...
-         'test-tutorials_netrics.R:8:3'
+       ══ Skipped tests (3) ═══════════════════════════════════════════════════════════
        • On Linux (1): 'test-model_tests.R:58:3'
        • Skipping slow functions in diffusion.Rmd (1): 'test-tutorials_migraph.R:12:5'
        • empty test (1): 'test-measure_over.R:1:1'
@@ -665,19 +732,19 @@ Run `revdepcheck::cloud_details(, "migraph")` for more info
         4. └─migraph:::check_tute_functions(tute, skip = "ergm\\(|play_diffusions\\(")
         5.   └─testthat::expect_null(...) at ./helper-functions.R:126:5
        
-       [ FAIL 1 | WARN 0 | SKIP 5 | PASS 347 ]
+       [ FAIL 1 | WARN 0 | SKIP 3 | PASS 260 ]
        Error:
        ! Test failures.
        Execution halted
      ```
 
-# nat (1.8.25)
+# nat (1.8.26)
 
 * GitHub: <https://github.com/natverse/nat>
 * Email: <mailto:jefferis@gmail.com>
 * GitHub mirror: <https://github.com/cran/nat>
 
-Run `revdepcheck::cloud_details(, "nat")` for more info
+Run `revdepcheck::revdep_details(, "nat")` for more info
 
 ## Newly broken
 
@@ -771,12 +838,60 @@ Run `revdepcheck::cloud_details(, "nat")` for more info
      Execution halted
      ```
 
+## Newly fixed
+
+*   checking for detritus in the temp directory ... NOTE
+     ```
+     Found the following files/directories:
+       ‘org.chromium.Chromium.x9JSet’
+     ```
+
+# netrics (0.4.0)
+
+* GitHub: <https://github.com/stocnet/netrics>
+* Email: <mailto:james.hollway@graduateinstitute.ch>
+* GitHub mirror: <https://github.com/cran/netrics>
+
+Run `revdepcheck::revdep_details(, "netrics")` for more info
+
+## Newly broken
+
+*   checking tests ... ERROR
+     ```
+     ...
+         'test-motif_net.R:6:7'
+       • grepl("triad|dyad", fn) && is_twomode(data_objs[[ob]]) is TRUE (2):
+         'test-motif_nodes.R:5:7', 'test-motif_nodes.R:5:7'
+       
+       ══ Failed tests ════════════════════════════════════════════════════════════════
+       ── Failure ('test-tutorials_netrics.R:4:5'): netrics tutorial code runs without warnings or errors ──
+       Expected `w` to be NULL.
+       Differences:
+       `actual` is an S3 object of class <lifecycle_warning_deprecated/rlang_warning/warning/condition>, a list
+       `expected` is NULL
+       
+       Warning in expression 18 : (graphr(create_ring(50, width = 2), "circle") + ggtitle("The Ring Two", 
+       Warning in expression 18 :     subtitle = "No different?"))
+       Backtrace:
+           ▆
+        1. ├─testthat::expect_null(...) at test-tutorials_netrics.R:4:5
+        2. │ └─testthat::quasi_label(enquo(object), label)
+        3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
+        4. └─netrics:::check_tute_functions(tute)
+        5.   └─testthat::expect_null(...) at ./helper-netrics.R:190:5
+       
+       [ FAIL 1 | WARN 0 | SKIP 41 | PASS 1803 ]
+       Error:
+       ! Test failures.
+       Execution halted
+     ```
+
 # optbdmaeAT (1.0.2)
 
 * Email: <mailto:diboobayu@gmail.com>
 * GitHub mirror: <https://github.com/cran/optbdmaeAT>
 
-Run `revdepcheck::cloud_details(, "optbdmaeAT")` for more info
+Run `revdepcheck::revdep_details(, "optbdmaeAT")` for more info
 
 ## Newly broken
 
@@ -815,7 +930,7 @@ Run `revdepcheck::cloud_details(, "optbdmaeAT")` for more info
 * Email: <mailto:diboobayu@gmail.com>
 * GitHub mirror: <https://github.com/cran/optrcdmaeAT>
 
-Run `revdepcheck::cloud_details(, "optrcdmaeAT")` for more info
+Run `revdepcheck::revdep_details(, "optrcdmaeAT")` for more info
 
 ## Newly broken
 
@@ -849,52 +964,12 @@ Run `revdepcheck::cloud_details(, "optrcdmaeAT")` for more info
      Execution halted
      ```
 
-# qgraph (1.9.8)
-
-* GitHub: <https://github.com/SachaEpskamp/qgraph>
-* Email: <mailto:mail@sachaepskamp.com>
-* GitHub mirror: <https://github.com/cran/qgraph>
-
-Run `revdepcheck::cloud_details(, "qgraph")` for more info
-
-## Newly broken
-
-*   checking examples ... ERROR
-     ```
-     ...
-     Warning: `watts.strogatz.game()` was deprecated in igraph 2.0.0.
-     ℹ Please use `sample_smallworld()` instead.
-     > smallworldness(regnet, B=10)
-     Warning: `average.path.length()` was deprecated in igraph 2.0.0.
-     ℹ Please use `mean_distance()` instead.
-     ℹ The deprecated feature was likely used in the qgraph package.
-       Please report the issue at <https://github.com/SachaEpskamp/qgraph>.
-     Warning: `degree.sequence.game()` was deprecated in igraph 2.0.0.
-     ℹ Please use `sample_degseq()` instead.
-     ℹ The deprecated feature was likely used in the qgraph package.
-       Please report the issue at <https://github.com/SachaEpskamp/qgraph>.
-     Error:
-     ! The `method` argument of `sample_degseq()` must be fast.heur.simple
-       instead of simple.no.multiple as of igraph 2.1.0.
-     Backtrace:
-         ▆
-      1. └─qgraph::smallworldness(regnet, B = 10)
-      2.   └─base::lapply(...)
-      3.     └─qgraph (local) FUN(X[[i]], ...)
-      4.       └─igraph::degree.sequence.game(deg.dist, method = "simple.no.multiple")
-      5.         └─igraph::sample_degseq(out.deg = out.deg, in.deg = in.deg, method = method)
-      6.           └─lifecycle::deprecate_stop("2.1.0", "sample_degseq(method = 'must be fast.heur.simple instead of simple.no.multiple')")
-      7.             └─lifecycle:::deprecate_stop0(msg)
-      8.               └─rlang::cnd_signal(...)
-     Execution halted
-     ```
-
 # R6causal (0.8.3)
 
 * Email: <mailto:juha.karvanen@iki.fi>
 * GitHub mirror: <https://github.com/cran/R6causal>
 
-Run `revdepcheck::cloud_details(, "R6causal")` for more info
+Run `revdepcheck::revdep_details(, "R6causal")` for more info
 
 ## Newly broken
 
@@ -904,7 +979,30 @@ Run `revdepcheck::cloud_details(, "R6causal")` for more info
        Warning: `set.edge.attribute()` was deprecated in igraph 2.0.0.
        Warning: `induced.subgraph()` was deprecated in igraph 2.0.0.
        Warning: `get.vertex.attribute()` was deprecated in igraph 2.0.0.
-     See ‘/tmp/workdir/R6causal/new/R6causal.Rcheck/00install.out’ for details.
+     See ‘<lib>/R6causal.Rcheck/00install.out’ for details.
+     ```
+
+## In both
+
+*   checking re-building of vignette outputs ... WARNING
+     ```
+     Error(s) in re-building vignettes:
+       ...
+     --- re-building ‘using_R6causal.Rmd’ using rmarkdown
+     ! LaTeX Error: File `lmodern.sty' not found.
+     
+     ! Emergency stop.
+     <read *> 
+     
+     Error: processing vignette 'using_R6causal.Rmd' failed with diagnostics:
+     LaTeX failed to compile <lib>/R6causal.Rcheck/vign_test/R6causal/vignettes/using_R6causal.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips. See using_R6causal.log for more info.
+     --- failed re-building ‘using_R6causal.Rmd’
+     
+     SUMMARY: processing the following file failed:
+       ‘using_R6causal.Rmd’
+     
+     Error: Vignette re-building failed.
+     Execution halted
      ```
 
 # scistreer (1.2.1)
@@ -913,7 +1011,7 @@ Run `revdepcheck::cloud_details(, "R6causal")` for more info
 * Email: <mailto:tgaoteng@gmail.com>
 * GitHub mirror: <https://github.com/cran/scistreer>
 
-Run `revdepcheck::cloud_details(, "scistreer")` for more info
+Run `revdepcheck::revdep_details(, "scistreer")` for more info
 
 ## Newly broken
 
@@ -949,10 +1047,104 @@ Run `revdepcheck::cloud_details(, "scistreer")` for more info
 
 ## In both
 
+*   checking whether package ‘scistreer’ can be installed ... WARNING
+     ```
+     Found the following significant warnings:
+       'Rcpp:::LdFlags' has not been needed since 2013 (!!) and may get removed in 2027. Please update your 'Makevars'.
+       'RcppLdFlags' has not been needed since 2013 (!!) and may get removed in 2027. Please update your 'Makevars'.
+     See ‘<lib>/scistreer.Rcheck/00install.out’ for details.
+     ```
+
 *   checking dependencies in R code ... NOTE
      ```
      Namespace in Imports field not imported from: ‘Rcpp’
        All declared Imports should be used.
+     ```
+
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
+     ```
+
+# SEMgraph (1.2.4)
+
+* GitHub: <https://github.com/fernandoPalluzzi/SEMgraph>
+* Email: <mailto:barbara.tarantino01@universitadipavia.it>
+* GitHub mirror: <https://github.com/cran/SEMgraph>
+
+Run `revdepcheck::revdep_details(, "SEMgraph")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+       Please report the issue at <https://github.com/igraph/rigraph/issues>.
+     > plot(dag0$dag, layout=layout.circle, main = "Output DAG")
+     Warning: vertex attribute color contains NAs. Replacing with default value 1
+     > plot(dag0$dag.old, layout=layout.circle, main = "Inferred old edges")
+     Warning: vertex attribute color contains NAs. Replacing with default value 1
+     > plot(dag0$dag.new, layout=layout.circle, main = "Inferred new edges")
+     Warning: vertex attribute color contains NAs. Replacing with default value 1
+     > par(old.par)
+     > 
+     > # Four DAG estimation
+     > dag1 <- SEMdag(ig, X, LO="TO")
+     WARNING: input graph is not acyclic !
+      Applying graph -> DAG conversion...
+     DAG conversion : TRUE
+     Node Linear Ordering with TO setting
+     
+     > dag2 <- SEMdag(ig, X, LO="TL")
+     WARNING: input graph is not acyclic !
+      Applying graph -> DAG conversion...
+     DAG conversion : TRUE
+     Node Linear Ordering with TL setting
+     
+     Error in l2[[L]] : subscript out of bounds
+     Calls: SEMdag -> getParents -> buildLevels
+     Execution halted
+     ```
+
+# sfclust (1.1.0)
+
+* GitHub: <https://github.com/ErickChacon/sfclust>
+* Email: <mailto:erick.chaconmontalvan@wur.nl>
+* GitHub mirror: <https://github.com/cran/sfclust>
+
+Run `revdepcheck::revdep_details(, "sfclust")` for more info
+
+## Newly broken
+
+*   checking tests ... ERROR
+     ```
+     ...
+       `expected@x`: 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00            ...
+       
+       ── Failure ('test-generate-clusters.R:158:3'): genclust: stars with raster ─────
+       Expected `as_adjacency_matrix(clust$mst)` to equal `as(A, "generalMatrix")`.
+       Differences:
+         `actual@x`: 0.77 0.77 0.07 0.07 0.13 0.76 0.54 0.40 0.54 0.44 and 12 more...
+       `expected@x`: 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00            ...
+       
+       ── Failure ('test-generate-clusters.R:180:3'): genclust: stars with raster and NA cells ──
+       Expected `as_adjacency_matrix(clust$graph)` to equal `as(A, "generalMatrix")`.
+       Differences:
+         `actual@x`: 0.46 0.17 0.31 0.46 0.17 0.15 0.35 0.31 0.35 0.19 and 20 more...
+       `expected@x`: 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00            ...
+       
+       ── Failure ('test-generate-clusters.R:186:3'): genclust: stars with raster and NA cells ──
+       Expected `as_adjacency_matrix(clust$mst)` to equal `as(A, "generalMatrix")`.
+       Differences:
+         `actual@x`: 0.46 0.17 0.46 0.17 0.15 0.35 0.35 0.19 0.00 0.15 and 12 more...
+       `expected@x`: 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00            ...
+       
+       
+       [ FAIL 11 | WARN 0 | SKIP 8 | PASS 119 ]
+       Error:
+       ! Test failures.
+       Execution halted
      ```
 
 # tidygraph (1.3.1)
@@ -961,7 +1153,7 @@ Run `revdepcheck::cloud_details(, "scistreer")` for more info
 * Email: <mailto:thomasp85@gmail.com>
 * GitHub mirror: <https://github.com/cran/tidygraph>
 
-Run `revdepcheck::cloud_details(, "tidygraph")` for more info
+Run `revdepcheck::revdep_details(, "tidygraph")` for more info
 
 ## Newly broken
 
@@ -1019,7 +1211,7 @@ Run `revdepcheck::cloud_details(, "tidygraph")` for more info
        ! The `father` argument of `bfs()` was deprecated in igraph 2.2.0 and is now defunct.
        i Please use the `parent` argument instead.
        
-       [ FAIL 6 | WARN 13 | SKIP 1 | PASS 423 ]
+       [ FAIL 6 | WARN 55 | SKIP 1 | PASS 423 ]
        Error:
        ! Test failures.
        Execution halted
@@ -1035,13 +1227,19 @@ Run `revdepcheck::cloud_details(, "tidygraph")` for more info
          ‘iterate.Rd’ ‘random_walk_rank.Rd’
      ```
 
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
+     ```
+
 # vkR (0.2)
 
 * GitHub: <https://github.com/Dementiy/vkR>
 * Email: <mailto:dementiy@yandex.ru>
 * GitHub mirror: <https://github.com/cran/vkR>
 
-Run `revdepcheck::cloud_details(, "vkR")` for more info
+Run `revdepcheck::revdep_details(, "vkR")` for more info
 
 ## Newly broken
 

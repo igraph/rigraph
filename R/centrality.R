@@ -382,6 +382,7 @@ betweenness.estimate <- estimate_betweenness
 #' @aliases edge.betweenness.estimate
 #' @param graph The graph to analyze.
 #' @param v The vertices for which the vertex betweenness will be calculated.
+#'   The default `NULL` selects all vertices.
 #' @inheritParams rlang::args_dots_empty
 #' @param directed Logical, whether directed paths should be considered while
 #'   determining the shortest paths.
@@ -430,7 +431,7 @@ betweenness.estimate <- estimate_betweenness
 #'
 betweenness <- function(
   graph,
-  v = V(graph),
+  v = NULL,
   ...,
   directed = TRUE,
   weights = NULL,
@@ -438,36 +439,49 @@ betweenness <- function(
   cutoff = -1
 ) {
   # BEGIN GENERATED ARG_HANDLE: betweenness, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        directed = directed,
-        weights = weights,
-        normalized = normalized,
-        cutoff = cutoff
-      ),
-      recover_new = c("directed", "weights", "normalized", "cutoff"),
-      recover_old = c("directed", "weights", "normalized", "cutoff"),
-      match_names = c("directed", "weights", "normalized", "cutoff"),
-      match_to = c("directed", "weights", "normalized", "cutoff"),
-      defaults = list(
-        directed = TRUE,
-        weights = NULL,
-        normalized = FALSE,
-        cutoff = -1
-      ),
-      head_args = c("graph", "v"),
-      fn_name = "betweenness"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: betweenness(graph, v, directed, weights, normalized, cutoff)
+    .old_signature <- function(directed, weights, normalized, cutoff, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn betweenness}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn betweenness}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(directed)) base::list(directed = directed),
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(normalized)) base::list(normalized = normalized),
+        if (!base::missing(cutoff)) base::list(cutoff = cutoff)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(directed)) "directed",
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(normalized)) "normalized",
+        if (!base::missing(cutoff)) "cutoff"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn betweenness} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `betweenness()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  betweenness(", base::paste(base::c("graph", "v", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    betweenness(", base::paste(base::c("graph", "v", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(v)) {
+    v <- V(graph)
+  }
 
   res <- betweenness_cutoff_impl(
     graph = graph,
@@ -489,37 +503,59 @@ betweenness <- function(
 
 #' @rdname betweenness
 #' @param e The edges for which the edge betweenness will be calculated.
+#'   The default `NULL` selects all edges.
 #' @inheritParams rlang::args_dots_empty
 #' @export
 edge_betweenness <- function(
   graph,
-  e = E(graph),
+  e = NULL,
   ...,
   directed = TRUE,
   weights = NULL,
   cutoff = -1
 ) {
   # BEGIN GENERATED ARG_HANDLE: edge_betweenness, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(directed = directed, weights = weights, cutoff = cutoff),
-      recover_new = c("directed", "weights", "cutoff"),
-      recover_old = c("directed", "weights", "cutoff"),
-      match_names = c("directed", "weights", "cutoff"),
-      match_to = c("directed", "weights", "cutoff"),
-      defaults = list(directed = TRUE, weights = NULL, cutoff = -1),
-      head_args = c("graph", "e"),
-      fn_name = "edge_betweenness"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: edge_betweenness(graph, e, directed, weights, cutoff)
+    .old_signature <- function(directed, weights, cutoff, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn edge_betweenness}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn edge_betweenness}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(directed)) base::list(directed = directed),
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(cutoff)) base::list(cutoff = cutoff)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(directed)) "directed",
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(cutoff)) "cutoff"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn edge_betweenness} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `edge_betweenness()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  edge_betweenness(", base::paste(base::c("graph", "e", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    edge_betweenness(", base::paste(base::c("graph", "e", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(e)) {
+    e <- E(graph)
+  }
 
   e <- as_igraph_es(graph, e)
   res <- edge_betweenness_cutoff_impl(
@@ -593,6 +629,7 @@ edge.betweenness.estimate <- estimate_edge_betweenness
 #' @aliases closeness.estimate
 #' @param graph The graph to analyze.
 #' @param vids The vertices for which closeness will be calculated.
+#'   The default `NULL` selects all vertices.
 #' @inheritParams rlang::args_dots_empty
 #' @param mode Character string, defined the types of the paths used for
 #'   measuring the distance in directed graphs. \dQuote{in} measures the paths
@@ -628,7 +665,7 @@ edge.betweenness.estimate <- estimate_edge_betweenness
 #'
 closeness <- function(
   graph,
-  vids = V(graph),
+  vids = NULL,
   ...,
   mode = c("out", "in", "all", "total"),
   weights = NULL,
@@ -636,36 +673,49 @@ closeness <- function(
   cutoff = -1
 ) {
   # BEGIN GENERATED ARG_HANDLE: closeness, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        mode = mode,
-        weights = weights,
-        normalized = normalized,
-        cutoff = cutoff
-      ),
-      recover_new = c("mode", "weights", "normalized", "cutoff"),
-      recover_old = c("mode", "weights", "normalized", "cutoff"),
-      match_names = c("mode", "weights", "normalized", "cutoff"),
-      match_to = c("mode", "weights", "normalized", "cutoff"),
-      defaults = list(
-        mode = c("out", "in", "all", "total"),
-        weights = NULL,
-        normalized = FALSE,
-        cutoff = -1
-      ),
-      head_args = c("graph", "vids"),
-      fn_name = "closeness"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: closeness(graph, vids, mode, weights, normalized, cutoff)
+    .old_signature <- function(mode, weights, normalized, cutoff, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn closeness}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn closeness}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(mode)) base::list(mode = mode),
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(normalized)) base::list(normalized = normalized),
+        if (!base::missing(cutoff)) base::list(cutoff = cutoff)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(mode)) "mode",
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(normalized)) "normalized",
+        if (!base::missing(cutoff)) "cutoff"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn closeness} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `closeness()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  closeness(", base::paste(base::c("graph", "vids", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    closeness(", base::paste(base::c("graph", "vids", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(vids)) {
+    vids <- V(graph)
+  }
 
   closeness_cutoff_impl(
     graph = graph,
@@ -1158,24 +1208,37 @@ subgraph_centrality <- function(
   diag = FALSE
 ) {
   # BEGIN GENERATED ARG_HANDLE: subgraph_centrality, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(diag = diag),
-      recover_new = c("diag"),
-      recover_old = c("diag"),
-      match_names = c("diag"),
-      match_to = c("diag"),
-      defaults = list(diag = FALSE),
-      head_args = c("graph"),
-      fn_name = "subgraph_centrality"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: subgraph_centrality(graph, diag)
+    .old_signature <- function(diag, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn subgraph_centrality}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn subgraph_centrality}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(diag)) base::list(diag = diag)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(diag)) "diag"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn subgraph_centrality} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `subgraph_centrality()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  subgraph_centrality(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    subgraph_centrality(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -1451,6 +1514,7 @@ eigen_centrality <- function(
 #'
 #' @param graph The input graph.
 #' @param vids The vertices for which the strength will be calculated.
+#'   The default `NULL` selects all vertices.
 #' @inheritParams rlang::args_dots_empty
 #' @param mode Character string, \dQuote{out} for out-degree, \dQuote{in} for
 #'   in-degree or \dQuote{all} for the sum of the two. For undirected graphs this
@@ -1483,37 +1547,54 @@ eigen_centrality <- function(
 #' @export
 strength <- function(
   graph,
-  vids = V(graph),
+  vids = NULL,
   ...,
   mode = c("all", "out", "in", "total"),
   loops = TRUE,
   weights = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: strength, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(mode = mode, loops = loops, weights = weights),
-      recover_new = c("mode", "loops", "weights"),
-      recover_old = c("mode", "loops", "weights"),
-      match_names = c("mode", "loops", "weights"),
-      match_to = c("mode", "loops", "weights"),
-      defaults = list(
-        mode = c("all", "out", "in", "total"),
-        loops = TRUE,
-        weights = NULL
-      ),
-      head_args = c("graph", "vids"),
-      fn_name = "strength"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: strength(graph, vids, mode, loops, weights)
+    .old_signature <- function(mode, loops, weights, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn strength}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn strength}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(mode)) base::list(mode = mode),
+        if (!base::missing(loops)) base::list(loops = loops),
+        if (!base::missing(weights)) base::list(weights = weights)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(mode)) "mode",
+        if (!base::missing(loops)) "loops",
+        if (!base::missing(weights)) "weights"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn strength} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `strength()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  strength(", base::paste(base::c("graph", "vids", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    strength(", base::paste(base::c("graph", "vids", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(vids)) {
+    vids <- V(graph)
+  }
 
   strength_impl(
     graph = graph,
@@ -1548,6 +1629,7 @@ strength <- function(
 #'   computation. If `NULL`, then the \sQuote{weight} attibute is used. Note
 #'   that this measure is not defined for unweighted graphs.
 #' @param vids The vertex IDs for which to calculate the measure.
+#'   The default `NULL` selects all vertices.
 #' @return A numeric vector, its length is the number of vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Nathan Eagle, Michael Macy and Rob Claxton: Network Diversity
@@ -1570,29 +1652,48 @@ diversity <- function(
   graph,
   ...,
   weights = NULL,
-  vids = V(graph)
+  vids = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: diversity, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(weights = weights, vids = vids),
-      recover_new = c("weights", "vids"),
-      recover_old = c("weights", "vids"),
-      match_names = c("weights", "vids"),
-      match_to = c("weights", "vids"),
-      defaults = list(weights = NULL, vids = V(graph)),
-      head_args = c("graph"),
-      fn_name = "diversity"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: diversity(graph, weights, vids)
+    .old_signature <- function(weights, vids, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn diversity}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn diversity}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(vids)) base::list(vids = vids)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(vids)) "vids"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn diversity} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `diversity()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  diversity(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    diversity(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(vids)) {
+    vids <- V(graph)
+  }
 
   diversity_impl(
     graph = graph,
@@ -1625,7 +1726,7 @@ diversity <- function(
 #'   interprets edge weights as connection strengths. The weights of parallel
 #'   edges are effectively added up.
 #' @param options A named list, to override some ARPACK options. See
-#'   [arpack()] for details.
+#'   [arpack()] for details. The default `NULL` uses [arpack_defaults()].
 #' @inheritParams rlang::args_dots_empty
 #' @return A named list with members:
 #'   \describe{
@@ -1665,9 +1766,13 @@ hits_scores <- function(
   ...,
   scale = TRUE,
   weights = NULL,
-  options = arpack_defaults()
+  options = NULL
 ) {
   rlang::check_dots_empty()
+
+  if (is.null(options)) {
+    options <- arpack_defaults()
+  }
 
   hub_and_authority_scores_impl(
     graph = graph,
@@ -1788,6 +1893,7 @@ hub_score <- function(
 #'   default implementation from igraph version 0.5 until version 0.7. It computes
 #'   PageRank scores by solving an eingevalue problem.
 #' @param vids The vertices of interest.
+#'   The default `NULL` selects all vertices.
 #' @param directed Logical, if true directed paths will be considered for
 #'   directed graphs. It is ignored for undirected graphs.
 #' @param damping The damping factor (\sQuote{d} in the original paper).
@@ -1848,7 +1954,7 @@ page_rank <- function(
   graph,
   ...,
   algo = c("prpack", "arpack"),
-  vids = V(graph),
+  vids = NULL,
   directed = TRUE,
   damping = 0.85,
   personalized = NULL,
@@ -1856,74 +1962,57 @@ page_rank <- function(
   options = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: page_rank, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        algo = algo,
-        vids = vids,
-        directed = directed,
-        damping = damping,
-        personalized = personalized,
-        weights = weights,
-        options = options
-      ),
-      recover_new = c(
-        "algo",
-        "vids",
-        "directed",
-        "damping",
-        "personalized",
-        "weights",
-        "options"
-      ),
-      recover_old = c(
-        "algo",
-        "vids",
-        "directed",
-        "damping",
-        "personalized",
-        "weights",
-        "options"
-      ),
-      match_names = c(
-        "algo",
-        "vids",
-        "directed",
-        "damping",
-        "personalized",
-        "weights",
-        "options"
-      ),
-      match_to = c(
-        "algo",
-        "vids",
-        "directed",
-        "damping",
-        "personalized",
-        "weights",
-        "options"
-      ),
-      defaults = list(
-        algo = c("prpack", "arpack"),
-        vids = V(graph),
-        directed = TRUE,
-        damping = 0.85,
-        personalized = NULL,
-        weights = NULL,
-        options = NULL
-      ),
-      head_args = c("graph"),
-      fn_name = "page_rank"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("d"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn page_rank}.")
+    # Pre-3.0.0 signature: page_rank(graph, algo, vids, directed, damping, personalized, weights, options)
+    .old_signature <- function(algo, vids, directed, damping, personalized, weights, options, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn page_rank}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn page_rank}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(algo)) base::list(algo = algo),
+        if (!base::missing(vids)) base::list(vids = vids),
+        if (!base::missing(directed)) base::list(directed = directed),
+        if (!base::missing(damping)) base::list(damping = damping),
+        if (!base::missing(personalized)) base::list(personalized = personalized),
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(options)) base::list(options = options)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(algo)) "algo",
+        if (!base::missing(vids)) "vids",
+        if (!base::missing(directed)) "directed",
+        if (!base::missing(damping)) "damping",
+        if (!base::missing(personalized)) "personalized",
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(options)) "options"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn page_rank} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `page_rank()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  page_rank(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    page_rank(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(vids)) {
+    vids <- V(graph)
+  }
 
   personalized_pagerank_impl(
     graph = graph,
@@ -1949,6 +2038,7 @@ page_rank <- function(
 #'
 #' @param graph The graph to analyze.
 #' @param vids The vertices for which harmonic centrality will be calculated.
+#'   The default `NULL` selects all vertices.
 #' @inheritParams rlang::args_dots_empty
 #' @param mode Character string, defining the types of the paths used for
 #'   measuring the distance in directed graphs. \dQuote{out} follows paths along
@@ -1985,7 +2075,7 @@ page_rank <- function(
 #'
 harmonic_centrality <- function(
   graph,
-  vids = V(graph),
+  vids = NULL,
   ...,
   mode = c("out", "in", "all", "total"),
   weights = NULL,
@@ -1993,36 +2083,49 @@ harmonic_centrality <- function(
   cutoff = -1
 ) {
   # BEGIN GENERATED ARG_HANDLE: harmonic_centrality, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        mode = mode,
-        weights = weights,
-        normalized = normalized,
-        cutoff = cutoff
-      ),
-      recover_new = c("mode", "weights", "normalized", "cutoff"),
-      recover_old = c("mode", "weights", "normalized", "cutoff"),
-      match_names = c("mode", "weights", "normalized", "cutoff"),
-      match_to = c("mode", "weights", "normalized", "cutoff"),
-      defaults = list(
-        mode = c("out", "in", "all", "total"),
-        weights = NULL,
-        normalized = FALSE,
-        cutoff = -1
-      ),
-      head_args = c("graph", "vids"),
-      fn_name = "harmonic_centrality"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: harmonic_centrality(graph, vids, mode, weights, normalized, cutoff)
+    .old_signature <- function(mode, weights, normalized, cutoff, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn harmonic_centrality}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn harmonic_centrality}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(mode)) base::list(mode = mode),
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(normalized)) base::list(normalized = normalized),
+        if (!base::missing(cutoff)) base::list(cutoff = cutoff)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(mode)) "mode",
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(normalized)) "normalized",
+        if (!base::missing(cutoff)) "cutoff"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn harmonic_centrality} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `harmonic_centrality()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  harmonic_centrality(", base::paste(base::c("graph", "vids", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    harmonic_centrality(", base::paste(base::c("graph", "vids", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(vids)) {
+    vids <- V(graph)
+  }
 
   harmonic_centrality_cutoff_impl(
     graph = graph,
@@ -2154,7 +2257,7 @@ bonpow.sparse <- function(
 #'
 #' @param graph the input graph.
 #' @param nodes vertex sequence indicating which vertices are to be included in
-#'   the calculation.  By default, all vertices are included.
+#'   the calculation. The default `NULL` selects all vertices.
 #' @inheritParams rlang::args_dots_empty
 #' @param loops Logical indicating whether or not the diagonal should be
 #'   treated as valid data.  Set this true if and only if the data can contain
@@ -2164,7 +2267,7 @@ bonpow.sparse <- function(
 #' @param rescale if true, centrality scores are rescaled such that they sum to
 #'   1.
 #' @param tol tolerance for near-singularities during matrix inversion (see
-#'   [solve()])
+#'   [Matrix::solve()])
 #' @param sparse Logical, whether to use sparse matrices for the
 #'   calculation. The \sQuote{Matrix} package is required for sparse matrix
 #'   support
@@ -2216,7 +2319,7 @@ bonpow.sparse <- function(
 #'
 power_centrality <- function(
   graph,
-  nodes = V(graph),
+  nodes = NULL,
   ...,
   loops = FALSE,
   exponent = 1,
@@ -2226,61 +2329,53 @@ power_centrality <- function(
   weights = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: power_centrality, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        loops = loops,
-        exponent = exponent,
-        rescale = rescale,
-        tol = tol,
-        sparse = sparse,
-        weights = weights
-      ),
-      recover_new = c(
-        "loops",
-        "exponent",
-        "rescale",
-        "tol",
-        "sparse",
-        "weights"
-      ),
-      recover_old = c(
-        "loops",
-        "exponent",
-        "rescale",
-        "tol",
-        "sparse",
-        "weights"
-      ),
-      match_names = c(
-        "loops",
-        "exponent",
-        "rescale",
-        "tol",
-        "sparse",
-        "weights"
-      ),
-      match_to = c("loops", "exponent", "rescale", "tol", "sparse", "weights"),
-      defaults = list(
-        loops = FALSE,
-        exponent = 1,
-        rescale = FALSE,
-        tol = 1e-07,
-        sparse = TRUE,
-        weights = NULL
-      ),
-      head_args = c("graph", "nodes"),
-      fn_name = "power_centrality"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: power_centrality(graph, nodes, loops, exponent, rescale, tol, sparse, weights)
+    .old_signature <- function(loops, exponent, rescale, tol, sparse, weights, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn power_centrality}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn power_centrality}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(loops)) base::list(loops = loops),
+        if (!base::missing(exponent)) base::list(exponent = exponent),
+        if (!base::missing(rescale)) base::list(rescale = rescale),
+        if (!base::missing(tol)) base::list(tol = tol),
+        if (!base::missing(sparse)) base::list(sparse = sparse),
+        if (!base::missing(weights)) base::list(weights = weights)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(loops)) "loops",
+        if (!base::missing(exponent)) "exponent",
+        if (!base::missing(rescale)) "rescale",
+        if (!base::missing(tol)) "tol",
+        if (!base::missing(sparse)) "sparse",
+        if (!base::missing(weights)) "weights"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn power_centrality} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `power_centrality()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  power_centrality(", base::paste(base::c("graph", "nodes", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    power_centrality(", base::paste(base::c("graph", "nodes", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(nodes)) {
+    nodes <- V(graph)
+  }
 
   nodes <- as_igraph_vs(graph, nodes)
   if (sparse) {
@@ -2395,8 +2490,8 @@ alpha.centrality.sparse <- function(
 #' @param graph The input graph, can be directed or undirected. In undirected
 #'   graphs, edges are treated as if they were reciprocal directed ones.
 #' @param nodes Vertex sequence, the vertices for which the alpha centrality
-#'   values are returned. (For technical reasons they will be calculated for all
-#'   vertices, anyway.)
+#'   values are returned. The default `NULL` selects all vertices.
+#'   (For technical reasons they will be calculated for all vertices, anyway.)
 #' @inheritParams rlang::args_dots_empty
 #' @param alpha Parameter specifying the relative importance of endogenous
 #'   versus exogenous factors in the determination of centrality. See details
@@ -2409,7 +2504,7 @@ alpha.centrality.sparse <- function(
 #'   will be replicated to match the number of vertices.
 #' @inheritParams as_adjacency_matrix
 #' @param tol Tolerance for near-singularities during matrix inversion, see
-#'   [solve()].
+#'   [Matrix::solve()].
 #' @param sparse Logical, whether to use sparse matrices for the
 #'   calculation. The \sQuote{Matrix} package is required for sparse matrix
 #'   support
@@ -2437,7 +2532,7 @@ alpha.centrality.sparse <- function(
 #'
 alpha_centrality <- function(
   graph,
-  nodes = V(graph),
+  nodes = NULL,
   ...,
   alpha = 1,
   loops = FALSE,
@@ -2447,40 +2542,53 @@ alpha_centrality <- function(
   sparse = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: alpha_centrality, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        alpha = alpha,
-        loops = loops,
-        exo = exo,
-        weights = weights,
-        tol = tol,
-        sparse = sparse
-      ),
-      recover_new = c("alpha", "loops", "exo", "weights", "tol", "sparse"),
-      recover_old = c("alpha", "loops", "exo", "weights", "tol", "sparse"),
-      match_names = c("alpha", "loops", "exo", "weights", "tol", "sparse"),
-      match_to = c("alpha", "loops", "exo", "weights", "tol", "sparse"),
-      defaults = list(
-        alpha = 1,
-        loops = FALSE,
-        exo = 1,
-        weights = NULL,
-        tol = 1e-07,
-        sparse = TRUE
-      ),
-      head_args = c("graph", "nodes"),
-      fn_name = "alpha_centrality"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: alpha_centrality(graph, nodes, alpha, loops, exo, weights, tol, sparse)
+    .old_signature <- function(alpha, loops, exo, weights, tol, sparse, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn alpha_centrality}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn alpha_centrality}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(alpha)) base::list(alpha = alpha),
+        if (!base::missing(loops)) base::list(loops = loops),
+        if (!base::missing(exo)) base::list(exo = exo),
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(tol)) base::list(tol = tol),
+        if (!base::missing(sparse)) base::list(sparse = sparse)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(alpha)) "alpha",
+        if (!base::missing(loops)) "loops",
+        if (!base::missing(exo)) "exo",
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(tol)) "tol",
+        if (!base::missing(sparse)) "sparse"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn alpha_centrality} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `alpha_centrality()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  alpha_centrality(", base::paste(base::c("graph", "nodes", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    alpha_centrality(", base::paste(base::c("graph", "nodes", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(nodes)) {
+    nodes <- V(graph)
+  }
 
   nodes <- as_igraph_vs(graph, nodes)
   if (sparse) {

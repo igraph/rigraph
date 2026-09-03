@@ -69,7 +69,8 @@ test_that("max_degree() works", {
   expect_equal(max_degree(g, loops = FALSE), 2)
   expect_equal(max_degree(g, mode = "out", loops = FALSE), 1)
   expect_equal(max_degree(g, mode = "in", loops = FALSE), 1)
-  expect_equal(max_degree(g, v = c()), 0)
+  expect_equal(max_degree(g, v = integer()), 0)
+  expect_equal(max_degree(g, v = NULL), max_degree(g))
   expect_equal(max_degree(make_empty_graph()), 0)
 })
 
