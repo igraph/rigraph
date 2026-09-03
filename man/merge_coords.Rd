@@ -14,8 +14,9 @@ layout_components(graph, layout = NULL, ...)
 
 \item{layouts}{A list of two-column matrices.}
 
-\item{\dots}{Additional arguments to pass to the \code{layout} layout
-function.}
+\item{\dots}{For \code{layout_components()}, additional arguments to pass to
+the \code{layout} layout function. For \code{merge_coords()}, these dots must be
+empty.}
 
 \item{method}{Character constant giving the method to use. Right now only
 \code{dla} is implemented.}
@@ -73,7 +74,6 @@ plot(g, layout = lay, vertex.size = 3, labels = NA, edge.color = "black")
 
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},
-\code{\link[=as_bipartite]{as_bipartite()}},
 \code{\link[=component_wise]{component_wise()}},
 \code{\link[=layout_]{layout_()}},
 \code{\link[=layout_as_bipartite]{layout_as_bipartite()}},

@@ -40,7 +40,6 @@ graph_from_edgelist(cbind(1:10, c(2:10, 1)))
 \code{\link[=make_]{make_()}} or \code{\link[=sample_]{sample_()}}.
 
 Other deterministic constructors:
-\code{\link[=from_data_frame]{from_data_frame()}},
 \code{\link[=graph_from_atlas]{graph_from_atlas()}},
 \code{\link[=graph_from_literal]{graph_from_literal()}},
 \code{\link[=make_]{make_()}},

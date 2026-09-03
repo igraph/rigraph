@@ -89,7 +89,6 @@ Reingold, E and Tilford, J (1981). Tidier drawing of trees.
 
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},
-\code{\link[=as_bipartite]{as_bipartite()}},
 \code{\link[=component_wise]{component_wise()}},
 \code{\link[=layout_]{layout_()}},
 \code{\link[=layout_as_bipartite]{layout_as_bipartite()}},

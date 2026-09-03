@@ -42,7 +42,6 @@ graph_from_atlas(sample(0:1252, 1))
 }
 \seealso{
 Other deterministic constructors:
-\code{\link[=from_data_frame]{from_data_frame()}},
 \code{\link[=graph_from_edgelist]{graph_from_edgelist()}},
 \code{\link[=graph_from_literal]{graph_from_literal()}},
 \code{\link[=make_]{make_()}},

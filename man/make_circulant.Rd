@@ -45,7 +45,6 @@ plot(g2, layout = layout_in_circle)
 }
 \seealso{
 Other deterministic constructors:
-\code{\link[=from_data_frame]{from_data_frame()}},
 \code{\link[=graph_from_atlas]{graph_from_atlas()}},
 \code{\link[=graph_from_edgelist]{graph_from_edgelist()}},
 \code{\link[=graph_from_literal]{graph_from_literal()}},

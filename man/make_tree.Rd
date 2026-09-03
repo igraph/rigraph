@@ -40,7 +40,6 @@ make_tree(10, 3, mode = "undirected")
 \code{\link[=make_]{make_()}} or \code{\link[=sample_]{sample_()}}.
 
 Other deterministic constructors:
-\code{\link[=from_data_frame]{from_data_frame()}},
 \code{\link[=graph_from_atlas]{graph_from_atlas()}},
 \code{\link[=graph_from_edgelist]{graph_from_edgelist()}},
 \code{\link[=graph_from_literal]{graph_from_literal()}},
