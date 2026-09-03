@@ -2267,7 +2267,7 @@ bonpow.sparse <- function(
 #' @param rescale if true, centrality scores are rescaled such that they sum to
 #'   1.
 #' @param tol tolerance for near-singularities during matrix inversion (see
-#'   [solve()])
+#'   [Matrix::solve()])
 #' @param sparse Logical, whether to use sparse matrices for the
 #'   calculation. The \sQuote{Matrix} package is required for sparse matrix
 #'   support
@@ -2504,7 +2504,7 @@ alpha.centrality.sparse <- function(
 #'   will be replicated to match the number of vertices.
 #' @inheritParams as_adjacency_matrix
 #' @param tol Tolerance for near-singularities during matrix inversion, see
-#'   [solve()].
+#'   [Matrix::solve()].
 #' @param sparse Logical, whether to use sparse matrices for the
 #'   calculation. The \sQuote{Matrix} package is required for sparse matrix
 #'   support

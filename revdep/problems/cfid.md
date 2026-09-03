@@ -28,8 +28,8 @@ Run `revdepcheck::revdep_details(, "cfid")` for more info
        `attr(actual, 'text')`:   "X; Z; Y; X -> Z; Y -> X; X <-> Y; Z <-> Y"
        `attr(expected, 'text')`: "X; Z; Y; X -> Z; Z -> Y; X <-> Y"         
        
-               `actual`: 0 0 1 1 0 1 0 0 0 1 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0
-       `expected[2:16]`: 0 0 1 1 0 0 0 0 1 0 1 0 0 0                     0
+               `actual`: 0 0 1 1 0 1 0 0 0 1 and 15 more...
+       `expected[2:16]`: 0 0 1 1 0 0 0 0 1 0            ...
        
        
        [ FAIL 1 | WARN 0 | SKIP 0 | PASS 204 ]
