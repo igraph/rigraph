@@ -780,13 +780,14 @@ layout_as_bipartite <- function(
 }
 
 
-#' Layout specifications for `add_layout_()`
+#' Layout specifications for `layout_()` and `add_layout_()`
 #'
 #' @description
 #' Each of these functions builds a lazy layout specification for the given
-#' layout function, to be used with [add_layout_()]. The specification is
-#' only evaluated when the layout is actually computed, so it can be combined
-#' with layout modifiers such as [component_wise()] or [normalize()].
+#' layout function, to be used with [layout_()] or [add_layout_()]. The
+#' specification is only evaluated when the layout is actually computed, so it
+#' can be combined with layout modifiers such as [component_wise()] or
+#' [normalize()].
 #'
 #' `as_bipartite()`, `as_star()` and `as_tree()` wrap [layout_as_bipartite()],
 #' [layout_as_star()] and [layout_as_tree()] respectively. `in_circle()`,
@@ -801,10 +802,26 @@ layout_as_bipartite <- function(
 #'
 #' @param ... Forwarded to the corresponding `layout_*()` function.
 #' @return An object of class `igraph_layout_spec`.
-#' @seealso [add_layout_()] to apply a layout specification to a graph.
-#' @family graph layouts
+#' @seealso [layout_()] and [add_layout_()] to apply a layout specification
+#'   to a graph.
+#' @family layout specifications
 #' @keywords graphs
 #' @rdname layout_spec
+#' @examples
+#' g <- make_ring(10)
+#'
+#' # Pass a layout specification to layout_() ...
+#' layout_(g, in_circle())
+#'
+#' # ... or store the layout in the graph with add_layout_()
+#' g <- add_layout_(g, with_fr())
+#' g$layout
+#'
+#' # Specifications take the arguments of the layout function they wrap
+#' layout_(make_star(10), as_star(center = 5))
+#'
+#' # and can be combined with layout modifiers
+#' layout_(make_ring(10) + make_ring(5), with_fr(), component_wise())
 #' @export
 as_bipartite <- function(...) layout_spec(layout_as_bipartite, ...)
 
@@ -3232,8 +3249,9 @@ with_sugiyama <- function(...) layout_spec(layout_with_sugiyama, ...)
 #'   `dla` is implemented.
 #' @param layout A function object, the layout function to use. The default
 #'   `NULL` uses `layout_with_kk`.
-#' @param \dots Additional arguments to pass to the `layout` layout
-#'   function.
+#' @param \dots For `layout_components()`, additional arguments to pass to
+#'   the `layout` layout function. For `merge_coords()`, these dots must be
+#'   empty.
 #' @return A matrix with two columns and as many lines as the total number of
 #'   vertices in the graphs.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}

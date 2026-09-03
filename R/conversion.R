@@ -2078,26 +2078,40 @@ graph_from_data_frame <- function(
   g
 }
 
-#' Constructor specifications for `make_()` and `sample_()`
+#' Constructor specifications for `graph_()`, `make_()` and `sample_()`
 #'
 #' @description
 #' Each of these functions builds a lazy constructor specification for the
-#' given graph constructor, to be used with [make_()] or [sample_()]. The
-#' specification is only evaluated when the graph is actually constructed,
-#' so it can be combined with constructor modifiers such as
+#' given graph constructor, to be used with [graph_()], [make_()] or
+#' [sample_()]. The specification is only evaluated when the graph is actually
+#' constructed, so it can be combined with constructor modifiers such as
 #' [with_vertex_()] or [with_edge_()].
 #'
 #' `from_data_frame()`, `from_edgelist()`, `tree()` and `degseq()` wrap
 #' [graph_from_data_frame()], [graph_from_edgelist()], [make_tree()] (or
-#' `sample_tree()`) and [sample_degseq()] (or `realize_degseq()`),
+#' [sample_tree()]) and [sample_degseq()] (or [realize_degseq()]),
 #' respectively.
+#'
+#' The other constructors have specification functions as well; they are
+#' documented together with the constructor they wrap, e.g. `ring()` on the
+#' [make_ring()] page.
 #'
 #' @param ... Forwarded to the corresponding constructor function.
 #' @return An object of class `igraph_constructor_spec`.
-#' @seealso [make_()] and [sample_()] to apply a constructor specification.
-#' @family deterministic constructors
+#' @seealso [graph_()], [make_()] and [sample_()] to apply a constructor
+#'   specification.
+#' @family constructor specifications
 #' @keywords graphs
 #' @rdname constructor_spec
+#' @examples
+#' # Pass a constructor specification to graph_(), make_() or sample_()
+#' el <- cbind(1:5, c(2:5, 1))
+#' graph_(el, from_edgelist(directed = FALSE))
+#'
+#' make_(tree(7))
+#'
+#' # Specifications can be combined with constructor modifiers
+#' make_(tree(7), with_vertex_(color = "red"))
 #' @export
 from_data_frame <- function(...) constructor_spec(graph_from_data_frame, ...)
 
