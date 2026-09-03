@@ -32,7 +32,7 @@ Run `revdepcheck::revdep_details(, "dci")` for more info
       18. └─tidygraph::map_bfs(...)
       19.   └─tidygraph:::bfs_df(graph, root, mode, unreachable)
       20.     └─igraph::bfs(...)
-      21.       └─lifecycle::deprecate_stop("2.2.0", "bfs(father = )", "bfs(parent = )") at igraph/R/structural-properties.R:3771:5
+      21.       └─lifecycle::deprecate_stop("2.2.0", "bfs(father = )", "bfs(parent = )")
       22.         └─lifecycle:::deprecate_stop0(msg)
       23.           └─rlang::cnd_signal(...)
      Execution halted
@@ -62,7 +62,7 @@ Run `revdepcheck::revdep_details(, "dci")` for more info
        ! The `father` argument of `bfs()` was deprecated in igraph 2.2.0 and is now defunct.
        i Please use the `parent` argument instead.
        
-       [ FAIL 3 | WARN 0 | SKIP 2 | PASS 45 ]
+       [ FAIL 3 | WARN 0 | SKIP 1 | PASS 46 ]
        Error:
        ! Test failures.
        Execution halted
@@ -79,7 +79,7 @@ Run `revdepcheck::revdep_details(, "dci")` for more info
       20. └─tidygraph::map_bfs(...)
       21.   └─tidygraph:::bfs_df(graph, root, mode, unreachable)
       22.     └─igraph::bfs(...)
-      23.       └─lifecycle::deprecate_stop("2.2.0", "bfs(father = )", "bfs(parent = )") at igraph/R/structural-properties.R:3771:5
+      23.       └─lifecycle::deprecate_stop("2.2.0", "bfs(father = )", "bfs(parent = )")
       24.         └─lifecycle:::deprecate_stop0(msg)
      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      

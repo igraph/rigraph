@@ -31,7 +31,7 @@ score; can be negative}
 1.}
 
 \item{tol}{tolerance for near-singularities during matrix inversion (see
-\code{\link[=solve]{solve()}})}
+\code{\link[Matrix:solve]{Matrix::solve()}})}
 
 \item{sparse}{Logical, whether to use sparse matrices for the
 calculation. The \sQuote{Matrix} package is required for sparse matrix
