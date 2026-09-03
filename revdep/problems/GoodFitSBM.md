@@ -30,9 +30,9 @@ Run `revdepcheck::revdep_details(, "GoodFitSBM")` for more info
        4.       └─GoodFitSBM:::Get.Move.beta.SBM(b, blocks = SBM.blocks, coin = beta.SBM.coin)
        5.         └─GoodFitSBM:::Get.Induced.Subgraph(g, v.block[[i]])
        6.           └─igraph::get.edge.ids(g, pairs)
-       7.             └─igraph::get_edge_ids(...) at igraph/R/interface.R:756:3
-       8.               └─igraph:::el_to_vec(vp, call = rlang::caller_env()) at igraph/R/interface.R:716:3
-       9.                 └─lifecycle::deprecate_stop(...) at igraph/R/interface.R:600:7
+       7.             └─igraph::get_edge_ids(...)
+       8.               └─igraph:::el_to_vec(vp, call = rlang::caller_env())
+       9.                 └─lifecycle::deprecate_stop(...)
       10.                   └─lifecycle:::deprecate_stop0(msg)
       11.                     └─rlang::cnd_signal(...)
      Execution halted
