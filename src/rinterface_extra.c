@@ -2611,6 +2611,70 @@ static void *Rx_igraph_altrep_to(SEXP vec, Rboolean writeable) {
 static R_altrep_class_t Rx_igraph_altrep_from_class;
 static R_altrep_class_t Rx_igraph_altrep_to_class;
 
+/* Batch constructor for a list of vertex sequences.
+ *
+ * Builds the whole `lapply(idx_list, unsafe_create_vs, ...)` result in one C
+ * pass: for each vertex-ID vector it produces a fresh integer payload, attaches
+ * the corresponding vertex names (when the graph is named), and sets the shared
+ * `env` weak reference, the `graph` id and the `igraph.vs` class. This keeps the
+ * per-object R overhead (closure call, `as.integer`, name subset,
+ * `attributes<-`) out of the loop entirely.
+ *
+ *   idx_list  : VECSXP of vertex-ID vectors (integer or double)
+ *   names_src : graph's full vertex-name STRSXP, or NULL for unnamed graphs
+ *   env       : the shared weak reference (or env) to set as the "env" attr
+ *   graph_id  : graph id (character scalar), or NULL to skip the "graph" attr
+ */
+SEXP Rx_igraph_vs_list(SEXP idx_list, SEXP names_src, SEXP env, SEXP graph_id) {
+  R_xlen_t n=XLENGTH(idx_list);
+  int named=(TYPEOF(names_src) == STRSXP);
+  R_xlen_t nsource=named ? XLENGTH(names_src) : 0;
+  SEXP env_sym=Rf_install("env");
+  SEXP graph_sym=Rf_install("graph");
+  SEXP out=PROTECT(Rf_allocVector(VECSXP, n));
+  SEXP cls=PROTECT(Rf_mkString("igraph.vs"));
+
+  for (R_xlen_t i=0; i < n; i++) {
+    SEXP elt=VECTOR_ELT(idx_list, i);
+    /* Fresh, unshared integer payload: coerceVector returns its argument
+     * unchanged when the type already matches, so duplicate in that case to
+     * avoid mutating a caller-owned vector. */
+    SEXP payload=PROTECT(Rf_coerceVector(elt, INTSXP));
+    if (payload == elt) {
+      UNPROTECT(1);
+      payload=PROTECT(Rf_duplicate(elt));
+    }
+
+    if (named) {
+      R_xlen_t len=XLENGTH(payload);
+      const int *pidx=INTEGER(payload);
+      SEXP nm=PROTECT(Rf_allocVector(STRSXP, len));
+      for (R_xlen_t k=0; k < len; k++) {
+        int j=pidx[k];
+        if (j == NA_INTEGER || j < 1 || j > nsource) {
+          SET_STRING_ELT(nm, k, NA_STRING);
+        } else {
+          SET_STRING_ELT(nm, k, STRING_ELT(names_src, j - 1));
+        }
+      }
+      Rf_setAttrib(payload, R_NamesSymbol, nm);
+      UNPROTECT(1);
+    }
+
+    Rf_setAttrib(payload, env_sym, env);
+    if (graph_id != R_NilValue) {
+      Rf_setAttrib(payload, graph_sym, graph_id);
+    }
+    Rf_setAttrib(payload, R_ClassSymbol, cls);
+
+    SET_VECTOR_ELT(out, i, payload);
+    UNPROTECT(1);
+  }
+
+  UNPROTECT(2);
+  return out;
+}
+
 /* HELPER: internal C; must use IGRAPH_CHECK */
 void Rx_igraph_init_vector_class(DllInfo *dll) {
   Rx_igraph_altrep_from_class=R_make_altreal_class("igraph_from", "base", dll);

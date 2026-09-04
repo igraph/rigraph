@@ -334,41 +334,23 @@ unsafe_create_vs <- function(graph, idx, verts = NULL) {
 #
 # This is the batch form of `unsafe_create_vs()` and replaces the
 # `lapply(idx_list, unsafe_create_vs, graph = graph, verts = V(graph))`
-# pattern. All the per-graph work -- `V(graph)`, the shared weak reference,
-# the graph id and the vertex-name source -- is hoisted out of the loop, so
-# each sequence costs one `as.integer()`, one name subset and one
-# `attributes<-` instead of a closure call that re-reads all of it.
-#
-# Having a single named entry point for "turn this list of ID vectors into a
-# list of vertex sequences" also means the construction loop can be moved
-# wholesale (e.g. into C) without touching any of the ~37 call sites.
+# pattern. The whole per-element loop runs in C, so building many sequences
+# costs no per-object R overhead (no closure call, no `as.integer()`, no
+# `attributes<-`). This is what brings construction of many sequences
+# (e.g. `max_cliques()`) down close to the cost of returning bare indices.
 create_vs_list <- function(graph, idx_list) {
+  # `verts <- V(graph)` is what mints the single shared weak reference and
+  # graph id; build it once and hand the pieces to C, which runs the
+  # per-element construction loop (payload coercion, name subsetting,
+  # attribute setting).
   verts <- V(graph)
-  vs_env <- attr(verts, "env")
-  vs_graph <- attr(verts, "graph")
-  vertex_names <- attr(verts, "names")
-  if (is.null(vertex_names)) {
-    lapply(idx_list, function(idx) {
-      res <- as.integer(idx)
-      attributes(res) <- list(
-        class = "igraph.vs",
-        env = vs_env,
-        graph = vs_graph
-      )
-      res
-    })
-  } else {
-    lapply(idx_list, function(idx) {
-      res <- as.integer(idx)
-      attributes(res) <- list(
-        names = vertex_names[res],
-        class = "igraph.vs",
-        env = vs_env,
-        graph = vs_graph
-      )
-      res
-    })
-  }
+  .Call(
+    Rx_igraph_vs_list,
+    idx_list,
+    if (is_named(graph)) vertex_attr(graph)$name else NULL,
+    attr(verts, "env"),
+    attr(verts, "graph")
+  )
 }
 
 # Internal function to quickly convert integer vectors to igraph.es
