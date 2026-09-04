@@ -689,9 +689,16 @@ cran_db <- local({
   function() {
     if (is.null(db)) {
       inform("Fetching CRAN package metadata from ", cran_repo())
+      # No R_version filter on purpose (the containers may run a newer R
+      # than this script), but OS_type must apply: run 33777134786 planned
+      # hespdiv, an `OS_type: windows` package, three runs in a row -- the
+      # shard's download.packages(), which does filter by OS, then refused
+      # it each time ("no package 'hespdiv' at the repositories"), and the
+      # report carried a permanent phantom error for a package Linux can
+      # never check.
       db <<- utils::available.packages(
         repos = cran_repo(),
-        filters = c("CRAN", "duplicates")
+        filters = c("CRAN", "duplicates", "OS_type")
       )
     }
     db
