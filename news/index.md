@@ -1,5 +1,33 @@
 # Changelog
 
+## igraph 2.3.3.9034
+
+### Bug fixes
+
+#### ci
+
+- Cap check-container cores and raise the timeout floor
+  ([\#2875](https://github.com/igraph/rigraph/issues/2875)).
+
+### Features
+
+#### ci
+
+- Add revdep4, sequential halves driven by a two-ended bash work queue
+  ([\#2857](https://github.com/igraph/rigraph/issues/2857)).
+
+### Documentation
+
+- Other roxygen2 warning
+  ([\#2870](https://github.com/igraph/rigraph/issues/2870)).
+
+### Performance
+
+#### touchstone
+
+- Measure warm, repeated calls instead of one cold call
+  ([\#2882](https://github.com/igraph/rigraph/issues/2882)).
+
 ## igraph 2.3.3.9033
 
 ### Bug fixes

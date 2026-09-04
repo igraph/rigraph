@@ -122,7 +122,7 @@ plot(g, layout = co)
 gl <- graphlets(g, niter = 1000)
 
 ## Plot graphlets
-for (i in 1:length(gl$cliques)) {
+for (i in seq_along(gl$cliques)) {
   sel <- gl$cliques[[i]]
   V(g)$color <- "white"
   V(g)[sel]$color <- "#E495A5"

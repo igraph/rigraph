@@ -23,7 +23,7 @@ coefficient for each clique in the candidate basis."><meta property="og:image" c
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9033</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9034</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -172,7 +172,7 @@ individually: <code>graphlet_basis()</code> and <code>graphlet_proj()</code>.</p
 <span class="r-in"><span><span class="va">gl</span> <span class="op">&lt;-</span> <span class="fu">graphlets</span><span class="op">(</span><span class="va">g</span>, niter <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Plot graphlets</span></span></span>
-<span class="r-in"><span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">gl</span><span class="op">$</span><span class="va">cliques</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along</a></span><span class="op">(</span><span class="va">gl</span><span class="op">$</span><span class="va">cliques</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="va">sel</span> <span class="op">&lt;-</span> <span class="va">gl</span><span class="op">$</span><span class="va">cliques</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">color</span> <span class="op">&lt;-</span> <span class="st">"white"</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="va">sel</span><span class="op">]</span><span class="op">$</span><span class="va">color</span> <span class="op">&lt;-</span> <span class="st">"#E495A5"</span></span></span>
