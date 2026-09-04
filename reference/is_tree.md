@@ -80,7 +80,7 @@ is_tree(g, details = TRUE)
 #> [1] TRUE
 #> 
 #> $root
-#> ── <vertex sequence> 1/7 · from f0bb55e ────────────────────────────────────────
+#> ── <vertex sequence> 1/7 · from e89dee7 ────────────────────────────────────────
 #> [1] 1
 #> 
 ```

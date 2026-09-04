@@ -98,7 +98,7 @@ lpvs <- apply(lpvs, 2, function(x) {
 })
 g <- sample_dot_product(lpvs)
 g
-#> ── <igraph> ───────────────────────────────────────────────────────── 8db01ae ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 097f521 ──
 #> ℹ undirected
 #> ℹ 10 vertices · 20 edges
 #> 
@@ -111,7 +111,7 @@ g
 lpvs2 <- sample_sphere_surface(dim = 5, n = 20)
 g2 <- sample_dot_product(lpvs2)
 g2
-#> ── <igraph> ───────────────────────────────────────────────────────── f029e09 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 9ef1e21 ──
 #> ℹ undirected
 #> ℹ 20 vertices · 141 edges
 #> 
