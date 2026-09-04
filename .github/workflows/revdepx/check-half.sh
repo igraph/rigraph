@@ -267,4 +267,15 @@ if [ -s "${cidfile}" ]; then
   fi
 fi
 
+# A failed half's timing record, into the job log while it is cheap to read:
+# every driver.log line carries the elapsed stamp, so its stage lines are a
+# complete where-did-the-time-go trace up to the kill, and GitHub adds
+# wall-clock timestamps on top. Successful halves stay quiet; the salvage
+# keeps every failed half's full driver.log in the results artifact besides.
+if [ "${status}" -ne 0 ] && [ -f "${out}/driver.log" ]; then
+  echo "::group::${half} half of ${src_name%_*} exited ${status}: stage timeline"
+  grep -E '^\[ *[0-9]+s\] \* ' "${out}/driver.log" | tail -n 60
+  echo "::endgroup::"
+fi
+
 exit 0

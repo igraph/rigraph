@@ -137,6 +137,15 @@ and the `status` file land in the same relative layout
 revdep2 produced,
 so parsing, comparison, salvage and reporting
 carry over unchanged (`compare.R`).
+The driver log doubles as the per-stage timing record
+(`_R_CHECK_TIMINGS_` stays off
+to keep the compared check logs free of timing noise):
+the salvage copies it into the results artifact
+for every half that failed —
+including a killed half's partial `.Rcheck`,
+whose check log lists every stage it completed —
+and `check-half.sh` prints a failed half's stage timeline
+into the job log.
 
 The queue runs two such containers back to back per package,
 several packages at once (`../revdep4/queue.sh`).
