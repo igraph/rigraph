@@ -1,5 +1,30 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.3.9034
+
+## Bug fixes
+
+### ci
+
+- Cap check-container cores and raise the timeout floor (#2875).
+
+## Features
+
+### ci
+
+- Add revdep4, sequential halves driven by a two-ended bash work queue (#2857).
+
+## Documentation
+
+- Other roxygen2 warning (#2870).
+
+## Performance
+
+### touchstone
+
+- Measure warm, repeated calls instead of one cold call (#2882).
+
+
 # igraph 2.3.3.9033
 
 ## Bug fixes
