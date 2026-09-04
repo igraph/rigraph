@@ -2061,7 +2061,7 @@ graph_from_data_frame <- function(
   # create edge list
   from <- as.character(d[, 1])
   to <- as.character(d[, 2])
-  edges <- rbind(match(from, names), match(to, names))
+  edges <- to_vertex_pairs(match(from, names), match(to, names))
 
   # edge attributes
   attrs <- list()
@@ -2165,7 +2165,7 @@ graph_from_edgelist <- function(
       V(res)$name <- names
     } else {
       ## normal edge list
-      res <- make_graph(t(el), directed = directed)
+      res <- make_graph(edgelist_to_vertex_pairs(el), directed = directed)
     }
   }
 

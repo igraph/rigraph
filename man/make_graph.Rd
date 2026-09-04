@@ -32,7 +32,8 @@ undirected_graph(...)
 from the first element to the second, the second edge from the third
 to the fourth, etc. For a numeric vector, these are interpreted
 as internal vertex IDs. For character vectors, they are interpreted
-as vertex names.
+as vertex names. Alternatively, a two-column matrix or data frame
+can be given, each row defining the two endpoints of an edge.
 
 Alternatively, this can be a character scalar, the name of a
 notable graph. See Notable graphs below. The name is case

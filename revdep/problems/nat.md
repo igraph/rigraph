@@ -62,7 +62,7 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
         8.       └─lifecycle:::deprecate_stop0(msg)
         9.         └─rlang::cnd_signal(...)
        
-       [ FAIL 38 | WARN 2 | SKIP 6 | PASS 585 ]
+       [ FAIL 39 | WARN 2 | SKIP 6 | PASS 583 ]
        Error:
        ! Test failures.
        Execution halted
@@ -103,6 +103,6 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
 *   checking for detritus in the temp directory ... NOTE
      ```
      Found the following files/directories:
-       ‘org.chromium.Chromium.x9JSet’
+       ‘org.chromium.Chromium.rsKzLt’
      ```
 

@@ -1,3 +1,90 @@
+# bitriad (0.4)
+
+* Email: <mailto:cornelioid@gmail.com>
+* GitHub mirror: <https://github.com/cran/bitriad>
+
+Run `revdepcheck::revdep_details(, "bitriad")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     The error most likely occurred in:
+     
+     > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+     > ### Name: triad
+     > ### Title: Affiliation network triads
+     > ### Aliases: triad make_triad is_triad triad_class layout_triad plot_triad
+     > ###   an_triad is.triad triad.class an.triad layout.triad plotTriad
+     > 
+     > ### ** Examples
+     > 
+     > tr <- make_triad(lambda = c(3,1,1), w = 2)
+     Error:
+     ! The `edges` argument of `add_edges()` supplied as a matrix should be a
+       n times 2 matrix, not 2 times n as of igraph 2.1.5.
+     ℹ either transpose the matrix with t() or convert it to a data.frame with two
+       columns.
+     Backtrace:
+         ▆
+      1. └─bitriad::make_triad(lambda = c(3, 1, 1), w = 2)
+      2.   └─igraph::add_edges(tr, t(el))
+      3.     └─igraph:::el_to_vec(edges, arg = "edges", fn = "add_edges")
+      4.       └─lifecycle::deprecate_stop(...)
+      5.         └─lifecycle:::deprecate_stop0(msg)
+      6.           └─rlang::cnd_signal(...)
+     Execution halted
+     ```
+
+## In both
+
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
+     ```
+
+# bnmonitor (0.2.2)
+
+* GitHub: <https://github.com/manueleleonelli/bnmonitor>
+* Email: <mailto:manuele.leonelli@ie.edu>
+* GitHub mirror: <https://github.com/cran/bnmonitor>
+
+Run `revdepcheck::revdep_details(, "bnmonitor")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     ! The `edges` argument of `make_graph()` supplied as a matrix should be
+       a n times 2 matrix, not 2 times n as of igraph 2.1.5.
+     ℹ either transpose the matrix with t() or convert it to a data.frame with two
+       columns.
+     Backtrace:
+          ▆
+       1. ├─bnmonitor::KL(synthetic_bn, "y2", "1", "2", "all", "all")
+       2. └─bnmonitor:::KL.bn.fit(synthetic_bn, "y2", "1", "2", "all", "all")
+       3.   ├─gRbase::compile(as.grain(bnfit))
+       4.   ├─bnlearn::as.grain(bnfit)
+       5.   └─bnlearn:::as.grain.bn.fit(bnfit)
+       6.     └─bnlearn:::from.bn.fit.to.grain(x)
+       7.       ├─base::suppressWarnings(gRain::compileCPT(cpt))
+       8.       │ └─base::withCallingHandlers(...)
+       9.       └─gRain::compileCPT(cpt)
+      10.         └─gRain:::compile_cpt_worker(args, forceCheck = forceCheck)
+      11.           └─gRbase::dagList(vp, forceCheck = forceCheck, result = "igraph")
+      12.             └─gRbase::g_dagl2ig_(x, vn)
+      13.               └─gRbase:::dag_list2igraph(zz)
+      14.                 └─igraph::make_graph(em, isolates = iso, directed = TRUE)
+      15.                   └─igraph:::el_to_vec(edges, arg = "edges", fn = "make_graph")
+      16.                     └─lifecycle::deprecate_stop(...)
+      17.                       └─lifecycle:::deprecate_stop0(msg)
+      18.                         └─rlang::cnd_signal(...)
+     Execution halted
+     ```
+
 # Boptbd (1.0.7)
 
 * Email: <mailto:diboobayu@gmail.com>
@@ -111,6 +198,76 @@ Run `revdepcheck::revdep_details(, "cfid")` for more info
        
        
        [ FAIL 1 | WARN 0 | SKIP 0 | PASS 204 ]
+       Error:
+       ! Test failures.
+       Execution halted
+     ```
+
+# cia (1.0.0)
+
+* GitHub: <https://github.com/SpaceOdyssey/cia>
+* Email: <mailto:mathew.varidel@sydney.edu.au>
+* GitHub mirror: <https://github.com/cran/cia>
+
+Run `revdepcheck::revdep_details(, "cia")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     > ### ** Examples
+     > 
+     > data <- bnlearn::learning.test
+     > 
+     > dag <- UniformlySampleDAG(colnames(data))
+     Loading required namespace: igraph
+     Error:
+     ! The `edges` argument of `add_edges()` supplied as a matrix should be a
+       n times 2 matrix, not 2 times n as of igraph 2.1.5.
+     ℹ either transpose the matrix with t() or convert it to a data.frame with two
+       columns.
+     Backtrace:
+          ▆
+       1. └─cia::UniformlySampleDAG(colnames(data))
+       2.   ├─cia::toMatrix(bnlearn::random.graph(nodes, method = "melancon"))
+       3.   └─cia:::toMatrix.bn(bnlearn::random.graph(nodes, method = "melancon"))
+       4.     ├─cia::toMatrix(bnlearn::as.igraph(network))
+       5.     ├─bnlearn::as.igraph(network)
+       6.     └─bnlearn:::as.igraph.bn(network)
+       7.       └─igraph::add_edges(res, t(arcs))
+       8.         └─igraph:::el_to_vec(edges, arg = "edges", fn = "add_edges")
+       9.           └─lifecycle::deprecate_stop(...)
+      10.             └─lifecycle:::deprecate_stop0(msg)
+      11.               └─rlang::cnd_signal(...)
+     Execution halted
+     ```
+
+*   checking tests ... ERROR
+     ```
+     ...
+         9.           └─lifecycle::deprecate_stop(...)
+        10.             └─lifecycle:::deprecate_stop0(msg)
+        11.               └─rlang::cnd_signal(...)
+       ── Error ('test_swap_adjacent_proposal.R:2:1'): (code run outside of `test_that()`) ──
+       <lifecycle_error_deprecated/defunctError/rlang_error/error/condition>
+       Error: The `edges` argument of `add_edges()` supplied as a matrix should be a n times 2 matrix, not 2 times n as of igraph 2.1.5.
+       i either transpose the matrix with t() or convert it to a data.frame with two columns.
+       Backtrace:
+            ▆
+         1. └─cia::UniformlySampleDAG(c("A", "B", "C", "D", "E", "F")) at test_swap_adjacent_proposal.R:2:1
+         2.   ├─cia::toMatrix(bnlearn::random.graph(nodes, method = "melancon"))
+         3.   └─cia:::toMatrix.bn(bnlearn::random.graph(nodes, method = "melancon"))
+         4.     ├─cia::toMatrix(bnlearn::as.igraph(network))
+         5.     ├─bnlearn::as.igraph(network)
+         6.     └─bnlearn:::as.igraph.bn(network)
+         7.       └─igraph::add_edges(res, t(arcs))
+         8.         └─igraph:::el_to_vec(edges, arg = "edges", fn = "add_edges")
+         9.           └─lifecycle::deprecate_stop(...)
+        10.             └─lifecycle:::deprecate_stop0(msg)
+        11.               └─rlang::cnd_signal(...)
+       
+       [ FAIL 10 | WARN 0 | SKIP 0 | PASS 17 ]
        Error:
        ! Test failures.
        Execution halted
@@ -361,6 +518,54 @@ Run `revdepcheck::revdep_details(, "degreenet")` for more info
        ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
      ```
 
+# ecodist (2.1.3)
+
+* GitHub: <https://github.com/phiala/ecodist>
+* Email: <mailto:Sarah.Goslee@usda.gov>
+* GitHub mirror: <https://github.com/cran/ecodist>
+
+Run `revdepcheck::revdep_details(, "ecodist")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     + 			1, 1, 1, 0,
+     + 			1, 0, 1, 1,
+     + 			0, 0, 1, 1), ncol = 4, byrow = TRUE)
+     > 
+     > 	# the maximum Jaccard distance is 1
+     > 	# regardless of how different the samples are
+     > 	x.jd <- dist(x, "binary")
+     > 
+     > 	# estimate the true distance between those pairs
+     > 	# by following the shorted path along connected sites
+     > 	pathdist(x.jd)
+     Error:
+     ! The `edges` argument of `add_edges()` supplied as a matrix should be a
+       n times 2 matrix, not 2 times n as of igraph 2.1.5.
+     ℹ either transpose the matrix with t() or convert it to a data.frame with two
+       columns.
+     Backtrace:
+         ▆
+      1. └─ecodist::pathdist(x.jd)
+      2.   └─igraph::add_edges(...)
+      3.     └─igraph:::el_to_vec(edges, arg = "edges", fn = "add_edges")
+      4.       └─lifecycle::deprecate_stop(...)
+      5.         └─lifecycle:::deprecate_stop0(msg)
+      6.           └─rlang::cnd_signal(...)
+     Execution halted
+     ```
+
+## In both
+
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
+     ```
+
 # ECoL (0.4.4)
 
 * GitHub: <https://github.com/lpfgarcia/ECoL>
@@ -429,6 +634,123 @@ Run `revdepcheck::revdep_details(, "ECoL")` for more info
        Error:
        ! Test failures.
        Execution halted
+     ```
+
+# FrF2 (2.3-5)
+
+* Email: <mailto:ulrike.groemping@bht-berlin.de>
+* GitHub mirror: <https://github.com/cran/FrF2>
+
+Run `revdepcheck::revdep_details(, "FrF2")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     > ### ** Examples
+     > 
+     > ## Not run: 
+     > ##D ex.CIG <- CIG("9-4.2", vertex.color="white", vertex.label.color="darkred")
+     > ##D ## play around with the dynamic graph until it looks right
+     > ##D ## look up its id number in the title bar of the graph window and use it for id
+     > ##D par(xpd=TRUE)
+     > ##D CIGstatic(ex.CIG, id=1)
+     > ## End(Not run)
+     > 
+     > graph1 <- CIG("9-4.2", plot=FALSE)   ### create graph object from design name
+     Error:
+     ! The `edges` argument of `add_edges()` supplied as a matrix should be a
+       n times 2 matrix, not 2 times n as of igraph 2.1.5.
+     ℹ either transpose the matrix with t() or convert it to a data.frame with two
+       columns.
+     Backtrace:
+         ▆
+      1. └─FrF2::CIG("9-4.2", plot = FALSE)
+      2.   └─igraph::add_edges(go2, design$clear.2fis)
+      3.     └─igraph:::el_to_vec(edges, arg = "edges", fn = "add_edges")
+      4.       └─lifecycle::deprecate_stop(...)
+      5.         └─lifecycle:::deprecate_stop0(msg)
+      6.           └─rlang::cnd_signal(...)
+     Execution halted
+     ```
+
+*   checking tests ... ERROR
+     ```
+     ...
+       [1,]    0    1    1    0    1    1
+       [2,]    1    0    1    1    0    1
+       
+       $clear2fis
+        [1] "AB" "AC" "AE" "AF" "BC" "BD" "BF" "CD" "CE" "DE" "DF" "EF"
+       
+       > ## character estimability requirement
+       > colpick(6, 3, estimable=compromise(6, 4)$requirement)
+       a clear design requires at least 16 runs
+       checking up to 720 matrices
+       Error:
+       ! The `edges` argument of `add_edges()` supplied as a matrix should be a
+         n times 2 matrix, not 2 times n as of igraph 2.1.5.
+       ℹ either transpose the matrix with t() or convert it to a data.frame with two
+         columns.
+       Backtrace:
+           ▆
+        1. └─FrF2::colpick(6, 3, estimable = compromise(6, 4)$requirement)
+        2.   └─FrF2:::mapcalc.block(...)
+        3.     └─igraph::add_edges(go2, estimable)
+        4.       └─igraph:::el_to_vec(edges, arg = "edges", fn = "add_edges")
+        5.         └─lifecycle::deprecate_stop(...)
+        6.           └─lifecycle:::deprecate_stop0(msg)
+        7.             └─rlang::cnd_signal(...)
+       Execution halted
+     ```
+
+# gemtc (1.1-2)
+
+* GitHub: <https://github.com/gertvv/gemtc>
+* Email: <mailto:gert@gertvv.nl>
+* GitHub mirror: <https://github.com/cran/gemtc>
+
+Run `revdepcheck::revdep_details(, "gemtc")` for more info
+
+## Newly broken
+
+*   checking tests ... ERROR
+     ```
+     ...
+       ══ Failed tests ════════════════════════════════════════════════════════════════
+       ── Error ('test-unit-nodesplit.R:196:3'): non-lexicographical treatment order works correctly ──
+       <lifecycle_error_deprecated/defunctError/rlang_error/error/condition>
+       Error: The `edges` argument of `add_edges()` supplied as a matrix should be a n
+       times 2 matrix, not 2 times n as of igraph 2.1.5.
+       ℹ either transpose the matrix with t() or convert it to a data.frame with two
+         columns.
+       Backtrace:
+            ▆
+         1. └─gemtc::mtc.model(network, type = "nodesplit", t1 = 10, t2 = 11) at test-unit-nodesplit.R:196:3
+         2.   └─gemtc:::mtc.model.call("mtc.model", model, ...)
+         3.     ├─base::do.call(fn, c(list(model), list(...)))
+         4.     └─gemtc:::mtc.model.nodesplit(`<named list>`, t1 = 10, t2 = 11)
+         5.       └─gemtc:::connect.mds.forest(mtc.network.graph(network.indirect))
+         6.         └─igraph:::`+.igraph`(h, edges(t(tree$edges)))
+         7.           └─igraph::add_edges(e1, unnamed[[1]], attr = attr)
+         8.             └─igraph:::el_to_vec(edges, arg = "edges", fn = "add_edges")
+         9.               └─lifecycle::deprecate_stop(...)
+        10.                 └─lifecycle:::deprecate_stop0(msg)
+        11.                   └─rlang::cnd_signal(...)
+       
+       [ FAIL 1 | WARN 11 | SKIP 0 | PASS 377 ]
+       Error:
+       ! Test failures.
+       Execution halted
+     ```
+
+## In both
+
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
      ```
 
 # ggm (2.5.4)
@@ -513,19 +835,19 @@ Run `revdepcheck::revdep_details(, "ggraph")` for more info
 *   checking re-building of vignette outputs ... ERROR
      ```
      ...
-      16.           └─lifecycle:::deprecate_stop0(msg)
+       9.           ├─... %gr_attr% .data
+      10.           └─igraph::add_edges(.data, rbind(new_edges$from, new_edges$to))
+      11.             └─igraph:::el_to_vec(edges, arg = "edges", fn = "add_edges")
+      12.               └─lifecycle::deprecate_stop(...)
+      13.                 └─lifecycle:::deprecate_stop0(msg)
      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      
-     Error: processing vignette 'Edges.Rmd' failed with diagnostics:
-     ℹ In argument: `Class = map_bfs_back_chr(...)`.
-     Caused by error:
-     ! The `father` argument of `bfs()` was deprecated in igraph 2.2.0 and is
-       now defunct.
-     ℹ Please use the `parent` argument instead.
-     --- failed re-building ‘Edges.Rmd’
-     
-     --- re-building ‘Layouts.Rmd’ using rmarkdown
-     --- finished re-building ‘Layouts.Rmd’
+     Error: processing vignette 'Layouts.Rmd' failed with diagnostics:
+     The `edges` argument of `add_edges()` supplied as a matrix should be a n
+     times 2 matrix, not 2 times n as of igraph 2.1.5.
+     ℹ either transpose the matrix with t() or convert it to a data.frame with two
+       columns.
+     --- failed re-building ‘Layouts.Rmd’
      
      --- re-building ‘Nodes.Rmd’ using rmarkdown
      --- finished re-building ‘Nodes.Rmd’
@@ -533,8 +855,8 @@ Run `revdepcheck::revdep_details(, "ggraph")` for more info
      --- re-building ‘tidygraph.Rmd’ using rmarkdown
      --- finished re-building ‘tidygraph.Rmd’
      
-     SUMMARY: processing the following file failed:
-       ‘Edges.Rmd’
+     SUMMARY: processing the following files failed:
+       ‘Edges.Rmd’ ‘Layouts.Rmd’
      
      Error: Vignette re-building failed.
      Execution halted
@@ -628,7 +950,586 @@ Run `revdepcheck::revdep_details(, "GoodFitSBM")` for more info
      Execution halted
      ```
 
-# manynet (2.2.3)
+# gor (2.0)
+
+* Email: <mailto:casencha@unizar.es>
+* GitHub mirror: <https://github.com/cran/gor>
+
+Run `revdepcheck::revdep_details(, "gor")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     The following object is masked from ‘package:base’:
+     
+         union
+     
+     > g <- make_graph("Dodecahedron")
+     > eG <- as_edgelist(g)
+     > set.seed(1)
+     > v <- sample(0:1, gsize(g), replace = TRUE) # Random edge vector
+     > apply_incidence_map(eG, v) # 1 1 0 1 2 0 1 1 3 2 0 1 1 1 1 1 0 0 1 2
+      [1] 1 1 0 1 2 0 1 1 3 2 0 1 1 1 1 1 0 0 1 2
+     > ## Plotting the associated subgraph
+     > h <- make_graph(t(eG[v==1,]))
+     Error:
+     ! The `edges` argument of `make_graph()` supplied as a matrix should be
+       a n times 2 matrix, not 2 times n as of igraph 2.1.5.
+     ℹ either transpose the matrix with t() or convert it to a data.frame with two
+       columns.
+     Backtrace:
+         ▆
+      1. └─igraph::make_graph(t(eG[v == 1, ]))
+      2.   └─igraph:::el_to_vec(edges, arg = "edges", fn = "make_graph")
+      3.     └─lifecycle::deprecate_stop(...)
+      4.       └─lifecycle:::deprecate_stop0(msg)
+      5.         └─rlang::cnd_signal(...)
+     Execution halted
+     ```
+
+# GRAB (0.2.5)
+
+* Email: <mailto:miaolin@pku.edu.cn>
+* GitHub mirror: <https://github.com/cran/GRAB>
+
+Run `revdepcheck::revdep_details(, "GRAB")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+      1 f2_2     -28.8 TRUE   
+      2 Subj-212 -28.5 TRUE   
+      3 f49_7    -28.0 TRUE   
+      4 Subj-312 -26.5 TRUE   
+      5 f39_5    -26.3 TRUE   
+      6 f34_2    -21.9 TRUE   
+      7 Subj-131 -21.3 TRUE   
+      8 f5_3     -20.1 TRUE   
+      9 f25_1    -19.5 TRUE   
+     10 f12_10   -18.8 TRUE   
+     # ℹ 40 more rows
+     Error:
+     ! The `edges` argument of `make_graph()` supplied as a matrix should be
+       a n times 2 matrix, not 2 times n as of igraph 2.1.5.
+     ℹ either transpose the matrix with t() or convert it to a data.frame with two
+       columns.
+     Backtrace:
+         ▆
+      1. └─GRAB::SAGELD.NullModel(...)
+      2.   └─igraph::make_graph(edges, directed = FALSE)
+      3.     └─igraph:::el_to_vec(edges, arg = "edges", fn = "make_graph")
+      4.       └─lifecycle::deprecate_stop(...)
+      5.         └─lifecycle:::deprecate_stop0(msg)
+      6.           └─rlang::cnd_signal(...)
+     Execution halted
+     ```
+
+## In both
+
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
+     ```
+
+# gRain (1.4.6)
+
+* Email: <mailto:sorenh@math.aau.dk>
+* GitHub mirror: <https://github.com/cran/gRain>
+
+Run `revdepcheck::revdep_details(, "gRain")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     > ### ** Examples
+     > 
+     > 
+     > ## Extract cpts / clique potentials from data and graph
+     > # specification and create network. There are different ways:
+     > 
+     > data(lizard, package="gRbase")
+     > 
+     > # DAG: height <- species -> diam
+     > daG <- dag(~species + height:species + diam:species, result="igraph")
+     Error:
+     ! The `edges` argument of `make_graph()` is not allowed to be a 2 times
+       2 matrix as of igraph 2.1.5.
+     Backtrace:
+         ▆
+      1. └─gRbase::dag(~species + height:species + diam:species, result = "igraph")
+      2.   └─gRbase::dagList(list(...), result = result, forceCheck = forceCheck)
+      3.     └─gRbase::g_dagl2ig_(x, vn)
+      4.       └─gRbase:::dag_list2igraph(zz)
+      5.         └─igraph::make_graph(em, isolates = iso, directed = TRUE)
+      6.           └─igraph:::el_to_vec(edges, arg = "edges", fn = "make_graph")
+      7.             └─lifecycle::deprecate_stop("2.1.5", paste0(fn, "(", arg, " = 'is not allowed to be a 2 times 2 matrix')"))
+      8.               └─lifecycle:::deprecate_stop0(msg)
+      9.                 └─rlang::cnd_signal(...)
+     Execution halted
+     ```
+
+*   checking tests ... ERROR
+     ```
+     ...
+       
+       ══ Failed tests ════════════════════════════════════════════════════════════════
+       ── Error ('test-misc.R:14:1'): (code run outside of `test_that()`) ─────────────
+       <lifecycle_error_deprecated/defunctError/rlang_error/error/condition>
+       Error: The `edges` argument of `make_graph()` supplied as a matrix should be a
+       n times 2 matrix, not 2 times n as of igraph 2.1.5.
+       ℹ either transpose the matrix with t() or convert it to a data.frame with two
+         columns.
+       Backtrace:
+            ▆
+         1. └─gRain::compile_cpt(cpt_list) at test-misc.R:14:1
+         2.   └─gRain:::compile_cpt_worker(args, forceCheck = forceCheck)
+         3.     └─gRbase::dagList(vp, forceCheck = forceCheck, result = "igraph")
+         4.       └─gRbase::g_dagl2ig_(x, vn)
+         5.         └─gRbase:::dag_list2igraph(zz)
+         6.           └─igraph::make_graph(em, isolates = iso, directed = TRUE)
+         7.             └─igraph:::el_to_vec(edges, arg = "edges", fn = "make_graph")
+         8.               └─lifecycle::deprecate_stop(...)
+         9.                 └─lifecycle:::deprecate_stop0(msg)
+        10.                   └─rlang::cnd_signal(...)
+       
+       [ FAIL 1 | WARN 0 | SKIP 0 | PASS 0 ]
+       Error:
+       ! Test failures.
+       Execution halted
+     ```
+
+*   checking re-building of vignette outputs ... ERROR
+     ```
+     ...
+     Backtrace:
+         ▆
+      1. └─gRain::compile_cpt(cpt_list)
+      2.   └─gRain:::compile_cpt_worker(args, forceCheck = forceCheck)
+      3.     └─gRbase::dagList(vp, forceCheck = forceCheck, result = "igraph")
+      4.       └─gRbase::g_dagl2ig_(x, vn)
+      5.         └─gRbase:::dag_list2igraph(zz)
+      6.           └─igraph::make_graph(em, isolates = iso, directed = TRUE)
+      7.             └─igraph:::el_to_vec(edges, arg = "edges", fn = "make_graph")
+      8.               └─lifecycle::deprecate_stop(...)
+      9.                 └─lifecycle:::deprecate_stop0(msg)
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     
+     Error: processing vignette 'grain.rmd' failed with diagnostics:
+     The `edges` argument of `make_graph()` supplied as a matrix should be a n
+     times 2 matrix, not 2 times n as of igraph 2.1.5.
+     ℹ either transpose the matrix with t() or convert it to a data.frame with two
+       columns.
+     --- failed re-building ‘grain.rmd’
+     
+     SUMMARY: processing the following file failed:
+       ‘grain.rmd’
+     
+     Error: Vignette re-building failed.
+     Execution halted
+     ```
+
+## In both
+
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
+     ```
+
+# gRbase (2.0.3)
+
+* Email: <mailto:sorenh@math.aau.dk>
+* GitHub mirror: <https://github.com/cran/gRbase>
+
+Run `revdepcheck::revdep_details(, "gRbase")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+     > ### Name: edge_matrix
+     > ### Title: Coerce dag to edge matrix
+     > ### Aliases: edge_matrix dag2edge_matrix edge_matrix2dag
+     > 
+     > ### ** Examples
+     > 
+     > g <- dag(~x2|x1 + x3|x1:x2 + x4|x3)
+     Error:
+     ! The `edges` argument of `make_graph()` supplied as a matrix should be
+       a n times 2 matrix, not 2 times n as of igraph 2.1.5.
+     ℹ either transpose the matrix with t() or convert it to a data.frame with two
+       columns.
+     Backtrace:
+         ▆
+      1. └─gRbase::dag(~x2 | x1 + x3 | x1:x2 + x4 | x3)
+      2.   └─gRbase::dagList(list(...), result = result, forceCheck = forceCheck)
+      3.     └─gRbase::g_dagl2ig_(x, vn)
+      4.       └─gRbase:::dag_list2igraph(zz)
+      5.         └─igraph::make_graph(em, isolates = iso, directed = TRUE)
+      6.           └─igraph:::el_to_vec(edges, arg = "edges", fn = "make_graph")
+      7.             └─lifecycle::deprecate_stop(...)
+      8.               └─lifecycle:::deprecate_stop0(msg)
+      9.                 └─rlang::cnd_signal(...)
+     Execution halted
+     ```
+
+*   checking re-building of vignette outputs ... ERROR
+     ```
+     ...
+     ---
+     Backtrace:
+         ▆
+      1. └─gRbase::ug(~a:b, ~b:c:d, ~e)
+      2.   └─gRbase::ugList(list(...), result = result)
+      3.     └─gRbase::g_ugl2ig_(x, vn)
+      4.       └─gRbase:::ug_list2igraph(zz)
+      5.         └─igraph::make_graph(em, isolates = iso, directed = FALSE)
+      6.           └─igraph:::el_to_vec(edges, arg = "edges", fn = "make_graph")
+      7.             └─lifecycle::deprecate_stop(...)
+      8.               └─lifecycle:::deprecate_stop0(msg)
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     
+     Error: processing vignette 'graphs.rmd' failed with diagnostics:
+     The `edges` argument of `make_graph()` supplied as a matrix should be a
+     n times 2 matrix, not 2 times n as of igraph 2.1.5.
+     ℹ either transpose the matrix with t() or convert it to a data.frame with two
+       columns.
+     --- failed re-building ‘graphs.rmd’
+     
+     SUMMARY: processing the following file failed:
+       ‘graphs.rmd’
+     
+     Error: Vignette re-building failed.
+     Execution halted
+     ```
+
+## In both
+
+*   checking whether package ‘gRbase’ can be installed ... WARNING
+     ```
+     Found the following significant warnings:
+       'Rcpp:::LdFlags' has not been needed since 2013 (!!) and may get removed in 2027. Please update your 'Makevars'.
+       'RcppLdFlags' has not been needed since 2013 (!!) and may get removed in 2027. Please update your 'Makevars'.
+     See ‘<lib>/gRbase.Rcheck/00install.out’ for details.
+     ```
+
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
+     ```
+
+# gRc (0.5.1)
+
+* Email: <mailto:sorenh@math.aau.dk>
+* GitHub mirror: <https://github.com/cran/gRc>
+
+Run `revdepcheck::revdep_details(, "gRc")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     > gm  = ~al:an:st
+     > vcc = list(~me+st, ~ve+an, ~al)
+     > ecc = list(~me:ve+me:al, ~ve:al+al:st)
+     > m1 <- rcox(gm=gm, vcc=vcc, ecc=ecc, data=math, method='matching')
+     > plot(m1)
+     Error:
+     ! The `edges` argument of `make_graph()` supplied as a matrix should be
+       a n times 2 matrix, not 2 times n as of igraph 2.1.5.
+     ℹ either transpose the matrix with t() or convert it to a data.frame with two
+       columns.
+     Backtrace:
+          ▆
+       1. ├─base::plot(m1)
+       2. ├─base::plot(m1)
+       3. └─gRc:::plot.rcox(m1)
+       4.   └─gRbase::ug(gen)
+       5.     └─gRbase::ugList(list(...), result = result)
+       6.       └─gRbase::g_ugl2ig_(x, vn)
+       7.         └─gRbase:::ug_list2igraph(zz)
+       8.           └─igraph::make_graph(em, isolates = iso, directed = FALSE)
+       9.             └─igraph:::el_to_vec(edges, arg = "edges", fn = "make_graph")
+      10.               └─lifecycle::deprecate_stop(...)
+      11.                 └─lifecycle:::deprecate_stop0(msg)
+      12.                   └─rlang::cnd_signal(...)
+     Execution halted
+     ```
+
+## In both
+
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
+     ```
+
+# gRim (0.3.4)
+
+* Email: <mailto:sorenh@math.aau.dk>
+* GitHub mirror: <https://github.com/cran/gRim>
+
+Run `revdepcheck::revdep_details(, "gRim")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     > data(milkcomp1)
+     > ciTest(milkcomp1, set=~tre + fat + pro)
+     Error:
+     ! The `edges` argument of `make_graph()` supplied as a matrix should be
+       a n times 2 matrix, not 2 times n as of igraph 2.1.5.
+     ℹ either transpose the matrix with t() or convert it to a data.frame with two
+       columns.
+     Backtrace:
+          ▆
+       1. ├─gRim::ciTest(milkcomp1, set = ~tre + fat + pro)
+       2. └─gRim:::ciTest.data.frame(milkcomp1, set = ~tre + fat + pro)
+       3.   └─gRim::ciTest_df(x, set, ...)
+       4.     └─gRim:::.ciTest_df_internal(wdata, set, ...)
+       5.       └─gRim::mmod(list(set), data = x)
+       6.         └─gRim:::.mModel_finalize(flist$glist, varNames, datainfo)
+       7.           └─gRbase::ug(glist)
+       8.             └─gRbase::ugList(list(...), result = result)
+       9.               └─gRbase::g_ugl2ig_(x, vn)
+      10.                 └─gRbase:::ug_list2igraph(zz)
+      11.                   └─igraph::make_graph(em, isolates = iso, directed = FALSE)
+      12.                     └─igraph:::el_to_vec(edges, arg = "edges", fn = "make_graph")
+      13.                       └─lifecycle::deprecate_stop(...)
+      14.                         └─lifecycle:::deprecate_stop0(msg)
+      15.                           └─rlang::cnd_signal(...)
+     Execution halted
+     ```
+
+*   checking tests ... ERROR
+     ```
+     ...
+       ══ Failed tests ════════════════════════════════════════════════════════════════
+       ── Error ('test-misc.R:21:5'): dmod() ──────────────────────────────────────────
+       <lifecycle_error_deprecated/defunctError/rlang_error/error/condition>
+       Error: The `edges` argument of `make_graph()` supplied as a matrix should be a
+       n times 2 matrix, not 2 times n as of igraph 2.1.5.
+       ℹ either transpose the matrix with t() or convert it to a data.frame with two
+         columns.
+       Backtrace:
+            ▆
+         1. └─gRim::dmod(~.^., data = df) at test-misc.R:21:5
+         2.   └─gRim:::.dModel_finalize(mod_form$glist, varNames)
+         3.     └─gRbase::ug(glist)
+         4.       └─gRbase::ugList(list(...), result = result)
+         5.         └─gRbase::g_ugl2ig_(x, vn)
+         6.           └─gRbase:::ug_list2igraph(zz)
+         7.             └─igraph::make_graph(em, isolates = iso, directed = FALSE)
+         8.               └─igraph:::el_to_vec(edges, arg = "edges", fn = "make_graph")
+         9.                 └─lifecycle::deprecate_stop(...)
+        10.                   └─lifecycle:::deprecate_stop0(msg)
+        11.                     └─rlang::cnd_signal(...)
+       
+       [ FAIL 1 | WARN 1 | SKIP 0 | PASS 0 ]
+       Error:
+       ! Test failures.
+       Execution halted
+     ```
+
+*   checking re-building of vignette outputs ... ERROR
+     ```
+     ...
+          ▆
+       1. └─gRim::dmod(...)
+       2.   └─gRim:::.dModel_finalize(mod_form$glist, varNames)
+       3.     └─gRbase::ug(glist)
+       4.       └─gRbase::ugList(list(...), result = result)
+       5.         └─gRbase::g_ugl2ig_(x, vn)
+       6.           └─gRbase:::ug_list2igraph(zz)
+       7.             └─igraph::make_graph(em, isolates = iso, directed = FALSE)
+       8.               └─igraph:::el_to_vec(edges, arg = "edges", fn = "make_graph")
+       9.                 └─lifecycle::deprecate_stop(...)
+      10.                   └─lifecycle:::deprecate_stop0(msg)
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     
+     Error: processing vignette 'grim.rmd' failed with diagnostics:
+     The `edges` argument of `make_graph()` supplied as a matrix should be a n
+     times 2 matrix, not 2 times n as of igraph 2.1.5.
+     ℹ either transpose the matrix with t() or convert it to a data.frame with two
+       columns.
+     --- failed re-building ‘grim.rmd’
+     
+     SUMMARY: processing the following file failed:
+       ‘grim.rmd’
+     
+     Error: Vignette re-building failed.
+     Execution halted
+     ```
+
+## In both
+
+*   checking whether package ‘gRim’ can be installed ... WARNING
+     ```
+     Found the following significant warnings:
+       'Rcpp:::LdFlags' has not been needed since 2013 (!!) and may get removed in 2027. Please update your 'Makevars'.
+       'RcppLdFlags' has not been needed since 2013 (!!) and may get removed in 2027. Please update your 'Makevars'.
+     See ‘<lib>/gRim.Rcheck/00install.out’ for details.
+     ```
+
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
+     ```
+
+# joinery (1.0.1)
+
+* GitHub: <https://github.com/edubruell/joinery>
+* Email: <mailto:eduard.bruell@zew.de>
+* GitHub mirror: <https://github.com/cran/joinery>
+
+Run `revdepcheck::revdep_details(, "joinery")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     Running examples in ‘joinery-Ex.R’ failed
+     The error most likely occurred in:
+     
+     > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+     > ### Name: fuzzy_tokens
+     > ### Title: Collapse near-duplicate tokens to a canonical form
+     > ### Aliases: fuzzy_tokens
+     > 
+     > ### ** Examples
+     > 
+     > fuzzy_tokens(c("Neumann", "Neumaxn", "Neuman"), max_dist = 2)
+     Error:
+     ! The `edges` argument of `add_edges()` supplied as a matrix should be a
+       n times 2 matrix, not 2 times n as of igraph 2.1.5.
+     ℹ either transpose the matrix with t() or convert it to a data.frame with two
+       columns.
+     Backtrace:
+         ▆
+      1. └─joinery::fuzzy_tokens(c("Neumann", "Neumaxn", "Neuman"), max_dist = 2)
+      2.   └─igraph::add_edges(g, t(edges))
+      3.     └─igraph:::el_to_vec(edges, arg = "edges", fn = "add_edges")
+      4.       └─lifecycle::deprecate_stop(...)
+      5.         └─lifecycle:::deprecate_stop0(msg)
+      6.           └─rlang::cnd_signal(...)
+     Execution halted
+     ```
+
+*   checking tests ... ERROR
+     ```
+     ...
+       ══ Skipped tests (5) ═══════════════════════════════════════════════════════════
+       • On CRAN (4): 'test_audit_strategy.R:391:1', 'test_sample_matches.R:353:1',
+         'test_summarise_matches.R:290:1', 'test_summarise_matches.R:296:1'
+       • recipes installed (1): 'test_tidymodels_shim.R:51:3'
+       
+       ══ Failed tests ════════════════════════════════════════════════════════════════
+       ── Error ('test_preparers_datatable.R:1364:3'): fuzzy_tokens() performs fuzzy clustering correctly ──
+       <lifecycle_error_deprecated/defunctError/rlang_error/error/condition>
+       Error: The `edges` argument of `add_edges()` supplied as a matrix should be a n
+       times 2 matrix, not 2 times n as of igraph 2.1.5.
+       ℹ either transpose the matrix with t() or convert it to a data.frame with two
+         columns.
+       Backtrace:
+           ▆
+        1. └─joinery::fuzzy_tokens(x, max_dist = 2, method = "osa") at test_preparers_datatable.R:1364:3
+        2.   └─igraph::add_edges(g, t(edges))
+        3.     └─igraph:::el_to_vec(edges, arg = "edges", fn = "add_edges")
+        4.       └─lifecycle::deprecate_stop(...)
+        5.         └─lifecycle:::deprecate_stop0(msg)
+        6.           └─rlang::cnd_signal(...)
+       
+       [ FAIL 1 | WARN 0 | SKIP 5 | PASS 2252 ]
+       Error:
+       ! Test failures.
+       Execution halted
+     ```
+
+# lpanda (0.2.1)
+
+* GitHub: <https://github.com/localpolitics/lpanda>
+* Email: <mailto:bubenicek@pef.czu.cz>
+* GitHub mirror: <https://github.com/cran/lpanda>
+
+Run `revdepcheck::revdep_details(, "lpanda")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     +   show_legend = FALSE,
+     +   do_not_print_to_console = TRUE
+     + )
+     > 
+     > # candidate network snapshots coloured by groups and bordered by lists
+     > plot_continuity(
+     +   netdata,
+     +   mark = "parties",
+     +   show_candidate_networks = TRUE,
+     +   do_not_print_to_console = TRUE
+     + )
+     Error:
+     ! The `edges` argument of `add_edges()` supplied as a matrix should be a
+       n times 2 matrix, not 2 times n as of igraph 2.1.5.
+     ℹ either transpose the matrix with t() or convert it to a data.frame with two
+       columns.
+     Backtrace:
+         ▆
+      1. └─lpanda::plot_continuity(...)
+      2.   └─igraph::add_edges(sub.sit.roku, t(edgelist.roku))
+      3.     └─igraph:::el_to_vec(edges, arg = "edges", fn = "add_edges")
+      4.       └─lifecycle::deprecate_stop(...)
+      5.         └─lifecycle:::deprecate_stop0(msg)
+      6.           └─rlang::cnd_signal(...)
+     Execution halted
+     ```
+
+*   checking tests ... ERROR
+     ```
+     ...
+       ── Failure ('test-plot_continuity.R:160:3'): show_candidate_networks works also with only single election ──
+       Expected `quiet_plot(...)` not to throw any errors.
+       Actually got a <lifecycle_error_deprecated> with message:
+         The `edges` argument of `add_edges()` supplied as a matrix should be a n times 2 matrix, not 2 times n as of igraph 2.1.5.
+         i either transpose the matrix with t() or convert it to a data.frame with two columns.
+       ── Failure ('test-plot_continuity.R:169:3'): show_candidate_networks works also with only single election ──
+       Expected `quiet_plot(...)` not to throw any errors.
+       Actually got a <lifecycle_error_deprecated> with message:
+         The `edges` argument of `add_edges()` supplied as a matrix should be a n times 2 matrix, not 2 times n as of igraph 2.1.5.
+         i either transpose the matrix with t() or convert it to a data.frame with two columns.
+       ── Failure ('test-plot_continuity.R:176:3'): show_candidate_networks works with party and candidate highlighting ──
+       Expected `quiet_plot(...)` not to throw any errors.
+       Actually got a <lifecycle_error_deprecated> with message:
+         The `edges` argument of `add_edges()` supplied as a matrix should be a n times 2 matrix, not 2 times n as of igraph 2.1.5.
+         i either transpose the matrix with t() or convert it to a data.frame with two columns.
+       ── Failure ('test-plot_continuity.R:181:3'): show_candidate_networks works with party and candidate highlighting ──
+       Expected `quiet_plot(...)` not to throw any errors.
+       Actually got a <lifecycle_error_deprecated> with message:
+         The `edges` argument of `add_edges()` supplied as a matrix should be a n times 2 matrix, not 2 times n as of igraph 2.1.5.
+         i either transpose the matrix with t() or convert it to a data.frame with two columns.
+       
+       [ FAIL 9 | WARN 0 | SKIP 0 | PASS 409 ]
+       Error:
+       ! Test failures.
+       Execution halted
+     ```
+
+# manynet (2.3.1)
 
 * GitHub: <https://github.com/stocnet/manynet>
 * Email: <mailto:james.hollway@graduateinstitute.ch>
@@ -653,7 +1554,7 @@ Run `revdepcheck::revdep_details(, "manynet")` for more info
        `actual` is an S3 object of class <lifecycle_warning_deprecated/rlang_warning/warning/condition>, a list
        `expected` is NULL
        
-       Warning in expression 46 : mean(as_matrix(s_women))
+       Warning in expression 54 : mean(as_matrix(s_women))
        Backtrace:
            ▆
         1. ├─testthat::expect_null(...) at test-tutorials_manynet.R:4:5
@@ -662,9 +1563,48 @@ Run `revdepcheck::revdep_details(, "manynet")` for more info
         4. └─manynet:::check_tute_functions(tute)
         5.   └─testthat::expect_null(...) at ./helper-manynet.R:225:5
        
-       [ FAIL 2 | WARN 728 | SKIP 78 | PASS 3303 ]
+       [ FAIL 6 | WARN 1317 | SKIP 96 | PASS 4747 ]
        Error:
        ! Test failures.
+       Execution halted
+     ```
+
+# metainsight (7.1.0)
+
+* Email: <mailto:ajs22@leicester.ac.uk>
+* GitHub mirror: <https://github.com/cran/metainsight>
+
+Run `revdepcheck::revdep_details(, "metainsight")` for more info
+
+## Newly broken
+
+*   checking tests ... ERROR
+     ```
+     ...
+       [ FAIL 1 | WARN 3 | SKIP 61 | PASS 1137 ]
+       Error:
+       ! Test failures.
+       Warning messages:
+       1: `graph.empty()` was deprecated in igraph 2.1.0.
+       ℹ Please use `make_empty_graph()` instead.
+       ℹ The deprecated feature was likely used in the gemtc package.
+         Please report the issue to the authors. 
+       2: `set.edge.attribute()` was deprecated in igraph 2.0.0.
+       ℹ Please use `set_edge_attr()` instead.
+       ℹ The deprecated feature was likely used in the gemtc package.
+         Please report the issue to the authors. 
+       3: `shortest.paths()` was deprecated in igraph 2.0.0.
+       ℹ Please use `distances()` instead.
+       ℹ The deprecated feature was likely used in the gemtc package.
+         Please report the issue to the authors. 
+       4: `get.edge.attribute()` was deprecated in igraph 2.0.0.
+       ℹ Please use `edge_attr()` instead.
+       ℹ The deprecated feature was likely used in the gemtc package.
+         Please report the issue to the authors. 
+       5: `get.shortest.paths()` was deprecated in igraph 2.0.0.
+       ℹ Please use `shortest_paths()` instead.
+       ℹ The deprecated feature was likely used in the gemtc package.
+         Please report the issue to the authors. 
        Execution halted
      ```
 
@@ -738,6 +1678,182 @@ Run `revdepcheck::revdep_details(, "migraph")` for more info
        Execution halted
      ```
 
+# movecost (3.0.0)
+
+* Email: <mailto:gianmarcoalberti@gmail.com>
+* GitHub mirror: <https://github.com/cran/movecost>
+
+Run `revdepcheck::revdep_details(, "movecost")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+     > ### Name: mc_accum
+     > ### Title: Accumulated cost surface and isolines around one or more origins
+     > ### Aliases: mc_accum
+     > 
+     > ### ** Examples
+     > 
+     > dtm <- mc_volc()
+     > start <- mc_volc_loc()
+     > 
+     > surf <- mc_surface(dtm, funct = "t", move = 8)
+     Error:
+     ! The `edges` argument of `add_edges()` supplied as a matrix should be a
+       n times 2 matrix, not 2 times n as of igraph 2.1.5.
+     ℹ either transpose the matrix with t() or convert it to a data.frame with two
+       columns.
+     Backtrace:
+         ▆
+      1. └─movecost::mc_surface(dtm, funct = "t", move = 8)
+      2.   └─igraph::add_edges(g, rbind(from[pos], to[pos]), weight = w)
+      3.     └─igraph:::el_to_vec(edges, arg = "edges", fn = "add_edges")
+      4.       └─lifecycle::deprecate_stop(...)
+      5.         └─lifecycle:::deprecate_stop0(msg)
+      6.           └─rlang::cnd_signal(...)
+     Execution halted
+     ```
+
+*   checking tests ... ERROR
+     ```
+     ...
+       Backtrace:
+           ▆
+        1. └─movecost::mc_surface(dtm, funct = "t", move = 8) at test-interface.R:117:3
+        2.   └─igraph::add_edges(g, rbind(from[pos], to[pos]), weight = w)
+        3.     └─igraph:::el_to_vec(edges, arg = "edges", fn = "add_edges")
+        4.       └─lifecycle::deprecate_stop(...)
+        5.         └─lifecycle:::deprecate_stop0(msg)
+        6.           └─rlang::cnd_signal(...)
+       ── Error ('test-interface.R:125:3'): boundary polygons carry exact area and perimeter ──
+       <lifecycle_error_deprecated/defunctError/rlang_error/error/condition>
+       Error: The `edges` argument of `add_edges()` supplied as a matrix should be a n times 2 matrix, not 2 times n as of igraph 2.1.5.
+       i either transpose the matrix with t() or convert it to a data.frame with two columns.
+       Backtrace:
+           ▆
+        1. └─movecost::mc_surface(dtm, funct = "t", move = 8) at test-interface.R:125:3
+        2.   └─igraph::add_edges(g, rbind(from[pos], to[pos]), weight = w)
+        3.     └─igraph:::el_to_vec(edges, arg = "edges", fn = "add_edges")
+        4.       └─lifecycle::deprecate_stop(...)
+        5.         └─lifecycle:::deprecate_stop0(msg)
+        6.           └─rlang::cnd_signal(...)
+       
+       [ FAIL 24 | WARN 0 | SKIP 0 | PASS 80 ]
+       Error:
+       ! Test failures.
+       Execution halted
+     ```
+
+*   checking re-building of vignette outputs ... ERROR
+     ```
+     ...
+       n times 2 matrix, not 2 times n as of igraph 2.1.5.
+     ℹ either transpose the matrix with t() or convert it to a data.frame with two
+       columns.
+     ---
+     Backtrace:
+         ▆
+      1. └─movecost::mc_surface(dtm, funct = "t", move = 16)
+      2.   └─igraph::add_edges(g, rbind(from[pos], to[pos]), weight = w)
+      3.     └─igraph:::el_to_vec(edges, arg = "edges", fn = "add_edges")
+      4.       └─lifecycle::deprecate_stop(...)
+      5.         └─lifecycle:::deprecate_stop0(msg)
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     
+     Error: processing vignette 'movecost.Rmd' failed with diagnostics:
+     The `edges` argument of `add_edges()` supplied as a matrix should be a n
+     times 2 matrix, not 2 times n as of igraph 2.1.5.
+     ℹ either transpose the matrix with t() or convert it to a data.frame with two
+       columns.
+     --- failed re-building ‘movecost.Rmd’
+     
+     SUMMARY: processing the following file failed:
+       ‘movecost.Rmd’
+     
+     Error: Vignette re-building failed.
+     Execution halted
+     ```
+
+# MSCquartets (3.3)
+
+* Email: <mailto:j.rhodes@alaska.edu>
+* GitHub mirror: <https://github.com/cran/MSCquartets>
+
+Run `revdepcheck::revdep_details(, "MSCquartets")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     > ### ** Examples
+     > 
+     > data(pTableYeastRokas)
+     > out=NANUQ(pTableYeastRokas, alpha=.05, beta=.80, outfile = NULL)
+     > # Specifying an outfile would write the distance table to it for opening in SplitsTree.
+     > # Alternately, to use the phangorn implementation of NeighborNet
+     > # within R, enter the following additional lines:
+     > nn=neighborNet(out$dist)
+     Error:
+     ! The `edges` argument of `make_graph()` supplied as a matrix should be
+       a n times 2 matrix, not 2 times n as of igraph 2.1.5.
+     ℹ either transpose the matrix with t() or convert it to a data.frame with two
+       columns.
+     Backtrace:
+         ▆
+      1. └─phangorn::neighborNet(out$dist)
+      2.   ├─phangorn::as.networx(spl)
+      3.   └─phangorn:::as.networx.splits(spl)
+      4.     └─phangorn:::circNetwork(x, c.ord)
+      5.       └─igraph::make_graph(t(res$edge), directed = FALSE)
+      6.         └─igraph:::el_to_vec(edges, arg = "edges", fn = "make_graph")
+      7.           └─lifecycle::deprecate_stop(...)
+      8.             └─lifecycle:::deprecate_stop0(msg)
+      9.               └─rlang::cnd_signal(...)
+     Execution halted
+     ```
+
+*   checking re-building of vignette outputs ... ERROR
+     ```
+     ...
+      1. └─phangorn::neighborNet(D$dist)
+      2.   ├─phangorn::as.networx(spl)
+      3.   └─phangorn:::as.networx.splits(spl)
+      4.     └─phangorn:::circNetwork(x, c.ord)
+      5.       └─igraph::make_graph(t(res$edge), directed = FALSE)
+      6.         └─igraph:::el_to_vec(edges, arg = "edges", fn = "make_graph")
+      7.           └─lifecycle::deprecate_stop(...)
+      8.             └─lifecycle:::deprecate_stop0(msg)
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     
+     Error: processing vignette 'NANUQplus.Rmd' failed with diagnostics:
+     The `edges` argument of `make_graph()` supplied as a matrix should be a
+     n times 2 matrix, not 2 times n as of igraph 2.1.5.
+     ℹ either transpose the matrix with t() or convert it to a data.frame with two
+       columns.
+     --- failed re-building ‘NANUQplus.Rmd’
+     
+     --- re-building ‘TINNIK.Rmd’ using rmarkdown
+     --- finished re-building ‘TINNIK.Rmd’
+     
+     SUMMARY: processing the following file failed:
+       ‘NANUQplus.Rmd’
+     
+     Error: Vignette re-building failed.
+     Execution halted
+     ```
+
+## In both
+
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
+     ```
+
 # nat (1.8.26)
 
 * GitHub: <https://github.com/natverse/nat>
@@ -802,7 +1918,7 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
         8.       └─lifecycle:::deprecate_stop0(msg)
         9.         └─rlang::cnd_signal(...)
        
-       [ FAIL 38 | WARN 2 | SKIP 6 | PASS 585 ]
+       [ FAIL 39 | WARN 2 | SKIP 6 | PASS 583 ]
        Error:
        ! Test failures.
        Execution halted
@@ -843,47 +1959,124 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
 *   checking for detritus in the temp directory ... NOTE
      ```
      Found the following files/directories:
-       ‘org.chromium.Chromium.x9JSet’
+       ‘org.chromium.Chromium.rsKzLt’
      ```
 
-# netrics (0.4.0)
+# nethist (1.0.0)
 
-* GitHub: <https://github.com/stocnet/netrics>
-* Email: <mailto:james.hollway@graduateinstitute.ch>
-* GitHub mirror: <https://github.com/cran/netrics>
+* GitHub: <https://github.com/EnigmaSong/nethist>
+* Email: <mailto:youngseok.song@mail.wvu.edu>
+* GitHub mirror: <https://github.com/cran/nethist>
 
-Run `revdepcheck::revdep_details(, "netrics")` for more info
+Run `revdepcheck::revdep_details(, "nethist")` for more info
 
 ## Newly broken
 
 *   checking tests ... ERROR
      ```
      ...
-         'test-motif_net.R:6:7'
-       • grepl("triad|dyad", fn) && is_twomode(data_objs[[ob]]) is TRUE (2):
-         'test-motif_nodes.R:5:7', 'test-motif_nodes.R:5:7'
-       
-       ══ Failed tests ════════════════════════════════════════════════════════════════
-       ── Failure ('test-tutorials_netrics.R:4:5'): netrics tutorial code runs without warnings or errors ──
-       Expected `w` to be NULL.
-       Differences:
-       `actual` is an S3 object of class <lifecycle_warning_deprecated/rlang_warning/warning/condition>, a list
-       `expected` is NULL
-       
-       Warning in expression 18 : (graphr(create_ring(50, width = 2), "circle") + ggtitle("The Ring Two", 
-       Warning in expression 18 :     subtitle = "No different?"))
+           ▆
+        1. ├─base::suppressMessages(...) at test_netsummary_plot.R:18:12
+        2. │ └─base::withCallingHandlers(...)
+        3. └─testthat::expect_no_error(...)
+       ── Failure ('test_netsummary_plot.R:23:12'): netsummary_plot with sparse matrix object ──
+       Expected `{ ... }` not to throw any errors.
+       Actually got a <simpleError> with message:
+         A is not a simple graph. All non-zero entries must be 1 (binary adjacency matrix).
        Backtrace:
            ▆
-        1. ├─testthat::expect_null(...) at test-tutorials_netrics.R:4:5
-        2. │ └─testthat::quasi_label(enquo(object), label)
-        3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
-        4. └─netrics:::check_tute_functions(tute)
-        5.   └─testthat::expect_null(...) at ./helper-netrics.R:190:5
+        1. ├─base::suppressMessages(...) at test_netsummary_plot.R:23:12
+        2. │ └─base::withCallingHandlers(...)
+        3. └─testthat::expect_no_error(...)
+       ── Error ('test_summary.R:3:1'): (code run outside of `test_that()`) ───────────
+       Error in `multinethist.array(array(A, dim = c(nrow(A), ncol(A), 1)), h, common_f, method, control, ...)`: Layer 1: A is not a simple graph. All non-zero entries must be 1 (binary adjacency matrix).
+       Backtrace:
+           ▆
+        1. ├─nethist::multinethist(...) at test_summary.R:3:1
+        2. └─nethist:::multinethist.matrix(...)
+        3.   └─nethist:::multinethist.array(...)
        
-       [ FAIL 1 | WARN 0 | SKIP 41 | PASS 1803 ]
+       [ FAIL 5 | WARN 5 | SKIP 1 | PASS 210 ]
        Error:
        ! Test failures.
        Execution halted
+     ```
+
+## In both
+
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
+     ```
+
+# netseer (0.1.3)
+
+* Email: <mailto:sevvandik@gmail.com>
+* GitHub mirror: <https://github.com/cran/netseer>
+
+Run `revdepcheck::revdep_details(, "netseer")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     
+     > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+     > ### Name: generate_graph_linear
+     > ### Title: Generates a bigger graph by linear growth.
+     > ### Aliases: generate_graph_linear
+     > 
+     > ### ** Examples
+     > 
+     > set.seed(1)
+     > gr <- generate_graph_linear()
+     Error:
+     ! The `edges` argument of `add_edges()` supplied as a matrix should be a
+       n times 2 matrix, not 2 times n as of igraph 2.1.5.
+     ℹ either transpose the matrix with t() or convert it to a data.frame with two
+       columns.
+     Backtrace:
+         ▆
+      1. └─netseer::generate_graph_linear()
+      2.   └─igraph:::`+.igraph`(gr3, igraph::edge(rbind(e1, e2)))
+      3.     └─igraph::add_edges(e1, unnamed[[1]], attr = attr)
+      4.       └─igraph:::el_to_vec(edges, arg = "edges", fn = "add_edges")
+      5.         └─lifecycle::deprecate_stop(...)
+      6.           └─lifecycle:::deprecate_stop0(msg)
+      7.             └─rlang::cnd_signal(...)
+     Execution halted
+     ```
+
+*   checking re-building of vignette outputs ... ERROR
+     ```
+     ...
+       columns.
+     ---
+     Backtrace:
+         ▆
+      1. └─netseer::predict_graph(graphlist[1:15], h = 1)
+      2.   └─netseer:::predict_graph_internal(...)
+      3.     └─netseer:::construct_union_graph(...)
+      4.       └─igraph::add_edges(biggr, non_edges, weight = new_weights)
+      5.         └─igraph:::el_to_vec(edges, arg = "edges", fn = "add_edges")
+      6.           └─lifecycle::deprecate_stop(...)
+      7.             └─lifecycle:::deprecate_stop0(msg)
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     
+     Error: processing vignette 'netseer.Rmd' failed with diagnostics:
+     The `edges` argument of `add_edges()` supplied as a matrix should be a n
+     times 2 matrix, not 2 times n as of igraph 2.1.5.
+     ℹ either transpose the matrix with t() or convert it to a data.frame with two
+       columns.
+     --- failed re-building ‘netseer.Rmd’
+     
+     SUMMARY: processing the following file failed:
+       ‘netseer.Rmd’
+     
+     Error: Vignette re-building failed.
+     Execution halted
      ```
 
 # optbdmaeAT (1.0.2)
@@ -964,6 +2157,214 @@ Run `revdepcheck::revdep_details(, "optrcdmaeAT")` for more info
      Execution halted
      ```
 
+# PCBN (0.1.1)
+
+* GitHub: <https://github.com/AlexisDerumigny/PCBN>
+* Email: <mailto:a.f.f.derumigny@tudelft.nl>
+* GitHub mirror: <https://github.com/cran/PCBN>
+
+Run `revdepcheck::revdep_details(, "PCBN")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     > 
+     > my_PCBN = new_PCBN(
+     +   DAG, order_hash,
+     +   copula_mat = list(tau = tau, fam = fam))
+     > 
+     > mydata = PCBN_sim(my_PCBN, N = 5)
+     Error:
+     ! The `edges` argument of `add_edges()` is not allowed to be a 2 times 2
+       matrix as of igraph 2.1.5.
+     Backtrace:
+          ▆
+       1. └─PCBN::PCBN_sim(my_PCBN, N = 5)
+       2.   └─PCBN:::.checkPCBNobject_for_simulation(object, verbose = verbose)
+       3.     └─PCBN::is_restrictedDAG(PCBN$DAG, verbose = verbose, check_both = FALSE)
+       4.       └─PCBN::active_cycles(DAG = DAG, early.stopping = TRUE)
+       5.         ├─igraph::as_undirected(bnlearn::as.igraph(DAG))
+       6.         │ └─igraph:::ensure_igraph(graph)
+       7.         ├─bnlearn::as.igraph(DAG)
+       8.         └─bnlearn:::as.igraph.bn(DAG)
+       9.           └─igraph::add_edges(res, t(arcs))
+      10.             └─igraph:::el_to_vec(edges, arg = "edges", fn = "add_edges")
+      11.               └─lifecycle::deprecate_stop("2.1.5", paste0(fn, "(", arg, " = 'is not allowed to be a 2 times 2 matrix')"))
+      12.                 └─lifecycle:::deprecate_stop0(msg)
+      13.                   └─rlang::cnd_signal(...)
+     Execution halted
+     ```
+
+*   checking tests ... ERROR
+     ```
+     ...
+        13.                   └─rlang::cnd_signal(...)
+       ── Error ('test-PCBN-simulation.R:184:3'): PCBN_sim applies proper recursion of h-functions on an example with 5 nodes ──
+       <lifecycle_error_deprecated/defunctError/rlang_error/error/condition>
+       Error: The `edges` argument of `add_edges()` supplied as a matrix should be a n times 2 matrix, not 2 times n as of igraph 2.1.5.
+       i either transpose the matrix with t() or convert it to a data.frame with two columns.
+       Backtrace:
+            ▆
+         1. └─PCBN::PCBN_sim(object = my_PCBN, N = N, verbose = 0) at test-PCBN-simulation.R:184:3
+         2.   └─PCBN:::.checkPCBNobject_for_simulation(object, verbose = verbose)
+         3.     └─PCBN::is_restrictedDAG(PCBN$DAG, verbose = verbose, check_both = FALSE)
+         4.       └─PCBN::active_cycles(DAG = DAG, early.stopping = TRUE)
+         5.         ├─igraph::as_undirected(bnlearn::as.igraph(DAG))
+         6.         │ └─igraph:::ensure_igraph(graph)
+         7.         ├─bnlearn::as.igraph(DAG)
+         8.         └─bnlearn:::as.igraph.bn(DAG)
+         9.           └─igraph::add_edges(res, t(arcs))
+        10.             └─igraph:::el_to_vec(edges, arg = "edges", fn = "add_edges")
+        11.               └─lifecycle::deprecate_stop(...)
+        12.                 └─lifecycle:::deprecate_stop0(msg)
+        13.                   └─rlang::cnd_signal(...)
+       
+       [ FAIL 10 | WARN 1 | SKIP 0 | PASS 98 ]
+       Error:
+       ! Test failures.
+       Execution halted
+     ```
+
+*   checking re-building of vignette outputs ... ERROR
+     ```
+     ...
+       columns.
+     ---
+     Backtrace:
+         ▆
+      1. ├─igraph::plot.igraph(bnlearn::as.igraph(DAG), size = 20, label.cex = 2)
+      2. ├─bnlearn::as.igraph(DAG)
+      3. └─bnlearn:::as.igraph.bn(DAG)
+      4.   └─igraph::add_edges(res, t(arcs))
+      5.     └─igraph:::el_to_vec(edges, arg = "edges", fn = "add_edges")
+      6.       └─lifecycle::deprecate_stop(...)
+      7.         └─lifecycle:::deprecate_stop0(msg)
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     
+     Error: processing vignette 'internals-estimation.Rmd' failed with diagnostics:
+     The `edges` argument of `add_edges()` supplied as a matrix should be a n
+     times 2 matrix, not 2 times n as of igraph 2.1.5.
+     ℹ either transpose the matrix with t() or convert it to a data.frame with two
+       columns.
+     --- failed re-building ‘internals-estimation.Rmd’
+     
+     SUMMARY: processing the following files failed:
+       ‘Bsets-v-structs.Rmd’ ‘internals-estimation.Rmd’
+     
+     Error: Vignette re-building failed.
+     Execution halted
+     ```
+
+# phangorn (2.12.1)
+
+* GitHub: <https://github.com/KlausVigo/phangorn>
+* Email: <mailto:klaus.schliep@gmail.com>
+* GitHub mirror: <https://github.com/cran/phangorn>
+
+Run `revdepcheck::revdep_details(, "phangorn")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     > woodmouse <- phyDat(woodmouse)
+     > tmpfile <- normalizePath(system.file(
+     +              "extdata/trees/RAxML_bootstrap.woodmouse", package="phangorn"))
+     > boot_trees <- read.tree(tmpfile)
+     > 
+     > dm <- dist.ml(woodmouse)
+     > tree <- upgma(dm)
+     > nnet <- neighborNet(dm)
+     Error:
+     ! The `edges` argument of `make_graph()` supplied as a matrix should be
+       a n times 2 matrix, not 2 times n as of igraph 2.1.5.
+     ℹ either transpose the matrix with t() or convert it to a data.frame with two
+       columns.
+     Backtrace:
+         ▆
+      1. └─phangorn::neighborNet(dm)
+      2.   ├─phangorn::as.networx(spl)
+      3.   └─phangorn:::as.networx.splits(spl)
+      4.     └─phangorn:::circNetwork(x, c.ord)
+      5.       └─igraph::make_graph(t(res$edge), directed = FALSE)
+      6.         └─igraph:::el_to_vec(edges, arg = "edges", fn = "make_graph")
+      7.           └─lifecycle::deprecate_stop(...)
+      8.             └─lifecycle:::deprecate_stop0(msg)
+      9.               └─rlang::cnd_signal(...)
+     Execution halted
+     ```
+
+*   checking tests ... ERROR
+     ```
+     ...
+       ══ Skipped tests (4) ═══════════════════════════════════════════════════════════
+       • On CRAN (4): 'test_plot_ancestral.R:13:1', 'test_plot_ancestral.R:19:1',
+         'test_plot_pml.R:11:1', 'test_plot_pml.R:19:1'
+       
+       ══ Failed tests ════════════════════════════════════════════════════════════════
+       ── Error ('test_plot_networx.R:1:1'): (code run outside of `test_that()`) ──────
+       <lifecycle_error_deprecated/defunctError/rlang_error/error/condition>
+       Error: The `edges` argument of `make_graph()` supplied as a matrix should be a n times 2 matrix, not 2 times n as of igraph 2.1.5.
+       i either transpose the matrix with t() or convert it to a data.frame with two columns.
+       Backtrace:
+           ▆
+        1. ├─phangorn::as.networx(allCircularSplits(5)) at test_plot_networx.R:1:1
+        2. └─phangorn:::as.networx.splits(allCircularSplits(5))
+        3.   └─phangorn:::circNetwork(x, c.ord)
+        4.     └─igraph::make_graph(t(res$edge), directed = FALSE)
+        5.       └─igraph:::el_to_vec(edges, arg = "edges", fn = "make_graph")
+        6.         └─lifecycle::deprecate_stop(...)
+        7.           └─lifecycle:::deprecate_stop0(msg)
+        8.             └─rlang::cnd_signal(...)
+       
+       [ FAIL 1 | WARN 1 | SKIP 4 | PASS 0 ]
+       Deleting unused snapshots: 'plot_networx/plot-networx.svg'
+       Error:
+       ! Test failures.
+       Execution halted
+     ```
+
+*   checking re-building of vignette outputs ... ERROR
+     ```
+     ...
+     Backtrace:
+         ▆
+      1. └─phangorn::consensusNet(bs, p = 0.2)
+      2.   ├─phangorn::as.networx(spl)
+      3.   └─phangorn:::as.networx.splits(spl)
+      4.     └─phangorn:::circNetwork(x, c.ord)
+      5.       └─igraph::make_graph(t(res$edge), directed = FALSE)
+      6.         └─igraph:::el_to_vec(edges, arg = "edges", fn = "make_graph")
+      7.           └─lifecycle::deprecate_stop(...)
+      8.             └─lifecycle:::deprecate_stop0(msg)
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     
+     Error: processing vignette 'Trees.Rmd' failed with diagnostics:
+     The `edges` argument of `make_graph()` supplied as a matrix should be a
+     n times 2 matrix, not 2 times n as of igraph 2.1.5.
+     ℹ either transpose the matrix with t() or convert it to a data.frame with two
+       columns.
+     --- failed re-building ‘Trees.Rmd’
+     
+     SUMMARY: processing the following files failed:
+       ‘IntertwiningTreesAndNetworks.Rmd’ ‘MLbyHand.Rmd’ ‘Networx.Rmd’
+       ‘Trees.Rmd’
+     
+     Error: Vignette re-building failed.
+     Execution halted
+     ```
+
+## In both
+
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
+     ```
+
 # R6causal (0.8.3)
 
 * Email: <mailto:juha.karvanen@iki.fi>
@@ -995,7 +2396,7 @@ Run `revdepcheck::revdep_details(, "R6causal")` for more info
      <read *> 
      
      Error: processing vignette 'using_R6causal.Rmd' failed with diagnostics:
-     LaTeX failed to compile <lib>/R6causal.Rcheck/vign_test/R6causal/vignettes/using_R6causal.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips. See using_R6causal.log for more info.
+     LaTeX failed to compile using_R6causal.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips. See using_R6causal.log for more info.
      --- failed re-building ‘using_R6causal.Rmd’
      
      SUMMARY: processing the following file failed:
@@ -1003,6 +2404,46 @@ Run `revdepcheck::revdep_details(, "R6causal")` for more info
      
      Error: Vignette re-building failed.
      Execution halted
+     ```
+
+# rnmamod (0.5.1)
+
+* GitHub: <https://github.com/LoukiaSpin/rnmamod>
+* Email: <mailto:Spineli.Loukia@mh-hannover.de>
+* GitHub mirror: <https://github.com/cran/rnmamod>
+
+Run `revdepcheck::revdep_details(, "rnmamod")` for more info
+
+## Newly broken
+
+*   checking tests ... ERROR
+     ```
+     ...
+       <lifecycle_error_deprecated/defunctError/rlang_error/error/condition>
+       Error: The `edges` argument of `add_edges()` is not allowed to be a 2 times 2 matrix as of igraph 2.1.5.
+       Backtrace:
+            ▆
+         1. └─gemtc::mtc.nodesplit(...) at test-run.nodesplit.no.MOD.R:24:3
+         2.   └─base::apply(...)
+         3.     └─gemtc (local) FUN(newX[, i], ...)
+         4.       └─gemtc:::mtc.model.run(...)
+         5.         ├─base::do.call(mtc.model, modelArgs)
+         6.         └─gemtc (local) `<fn>`(...)
+         7.           └─gemtc:::mtc.model.call("mtc.model", model, ...)
+         8.             ├─base::do.call(fn, c(list(model), list(...)))
+         9.             └─gemtc:::mtc.model.nodesplit(`<named list>`, t1 = `<chr>`, t2 = `<chr>`)
+        10.               └─gemtc:::connect.mds.forest(mtc.network.graph(network.indirect))
+        11.                 └─igraph:::`+.igraph`(h, edges(t(tree$edges)))
+        12.                   └─igraph::add_edges(e1, unnamed[[1]], attr = attr)
+        13.                     └─igraph:::el_to_vec(edges, arg = "edges", fn = "add_edges")
+        14.                       └─lifecycle::deprecate_stop("2.1.5", paste0(fn, "(", arg, " = 'is not allowed to be a 2 times 2 matrix')"))
+        15.                         └─lifecycle:::deprecate_stop0(msg)
+        16.                           └─rlang::cnd_signal(...)
+       
+       [ FAIL 1 | WARN 8 | SKIP 1 | PASS 24 ]
+       Error:
+       ! Test failures.
+       Execution halted
      ```
 
 # scistreer (1.2.1)
@@ -1147,6 +2588,146 @@ Run `revdepcheck::revdep_details(, "sfclust")` for more info
        Execution halted
      ```
 
+# simcausal (0.5.7)
+
+* GitHub: <https://github.com/osofr/simcausal>
+* Email: <mailto:fgruber@gmail.com>
+* GitHub mirror: <https://github.com/cran/simcausal>
+
+Run `revdepcheck::revdep_details(, "simcausal")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     ℹ The deprecated feature was likely used in the simcausal package.
+       Please report the issue at <https://github.com/osofr/simcausal/issues>.
+     Warning: `add.vertices()` was deprecated in igraph 2.0.0.
+     ℹ Please use `add_vertices()` instead.
+     ℹ The deprecated feature was likely used in the simcausal package.
+       Please report the issue at <https://github.com/osofr/simcausal/issues>.
+     Warning: `add.edges()` was deprecated in igraph 2.0.0.
+     ℹ Please use `add_edges()` instead.
+     ℹ The deprecated feature was likely used in the simcausal package.
+       Please report the issue at <https://github.com/osofr/simcausal/issues>.
+     Error:
+     ! The `edges` argument of `add_edges()` supplied as a matrix should be a
+       n times 2 matrix, not 2 times n as of igraph 2.1.5.
+     ℹ either transpose the matrix with t() or convert it to a data.frame with two
+       columns.
+     Backtrace:
+         ▆
+      1. └─simcausal::plotDAG(Dset)
+      2.   └─igraph::add.edges(...)
+      3.     └─igraph::add_edges(...)
+      4.       └─igraph:::el_to_vec(edges, arg = "edges", fn = "add_edges")
+      5.         └─lifecycle::deprecate_stop(...)
+      6.           └─lifecycle:::deprecate_stop0(msg)
+      7.             └─rlang::cnd_signal(...)
+     Execution halted
+     ```
+
+*   checking tests ... ERROR
+     ```
+     ...
+        
+       1 Test Suite : 
+       simcausal unit testing - 28 test functions, 3 errors, 0 failures
+       ERROR in test.latent: Error : The `edges` argument of `add_edges()` supplied as a matrix should be a n
+       times 2 matrix, not 2 times n as of igraph 2.1.5.
+       ℹ either transpose the matrix with t() or convert it to a data.frame with two
+         columns.
+       ERROR in test.set.DAG_DAG2b_newactions: Error : The `edges` argument of `add_edges()` supplied as a matrix should be a n
+       times 2 matrix, not 2 times n as of igraph 2.1.5.
+       ℹ either transpose the matrix with t() or convert it to a data.frame with two
+         columns.
+       ERROR in test.MV: Error : The `edges` argument of `add_edges()` supplied as a matrix should be a n
+       times 2 matrix, not 2 times n as of igraph 2.1.5.
+       ℹ either transpose the matrix with t() or convert it to a data.frame with two
+         columns.
+       Error: 
+       
+       unit testing failed (#test failures: 0, #R errors: 3)
+       
+       In addition: Warning messages:
+       1: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+         RNGkind: Marsaglia-Multicarry has poor statistical properties
+       2: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+         RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
+       Execution halted
+     ```
+
+*   checking re-building of vignette outputs ... ERROR
+     ```
+     ...
+     ! The `edges` argument of `add_edges()` supplied as a matrix should be a n times 2
+       matrix, not 2 times n as of igraph 2.1.5.
+     i either transpose the matrix with t() or convert it to a data.frame with two columns.
+     ---
+     Backtrace:
+         x
+      1. \-simcausal::plotDAG(...)
+      2.   \-igraph::add.edges(...)
+      3.     \-igraph::add_edges(...)
+      4.       \-igraph:::el_to_vec(edges, arg = "edges", fn = "add_edges")
+      5.         \-lifecycle::deprecate_stop(...)
+      6.           \-lifecycle:::deprecate_stop0(msg)
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     
+     Error: processing vignette 'simcausalVignette.Rnw' failed with diagnostics:
+     The `edges` argument of `add_edges()` supplied as a matrix should be a n times 2
+     matrix, not 2 times n as of igraph 2.1.5.
+     ℹ either transpose the matrix with t() or convert it to a data.frame with two columns.
+     --- failed re-building ‘simcausalVignette.Rnw’
+     
+     SUMMARY: processing the following file failed:
+       ‘simcausalVignette.Rnw’
+     
+     Error: Vignette re-building failed.
+     Execution halted
+     ```
+
+# SpaDES.core (3.2.1)
+
+* GitHub: <https://github.com/PredictiveEcology/SpaDES.core>
+* Email: <mailto:eliot.mcintire@canada.ca>
+* GitHub mirror: <https://github.com/cran/SpaDES.core>
+
+Run `revdepcheck::revdep_details(, "SpaDES.core")` for more info
+
+## Newly broken
+
+*   checking tests ... ERROR
+     ```
+     ...
+       Error in `if (grepl("In .+:", w$message)) {     warningSplitOnColon(w)     invokeRestart("muffleWarning") }`: the condition has length > 1
+       Backtrace:
+            ▆
+         1. ├─SpaDES.core::simInit() at test-Copy.R:4:3
+         2. ├─SpaDES.core::simInit()
+         3. │ ├─SpaDES.core::simInit(...)
+         4. │ └─SpaDES.core::simInit(...)
+         5. │   ├─base::withCallingHandlers(...)
+         6. │   └─SpaDES.core:::resolveDepsRunInitIfPoss(...)
+         7. │     ├─SpaDES.core::.depsLoadOrder(sim, depsGr)
+         8. │     └─SpaDES.core::.depsLoadOrder(sim, depsGr)
+         9. │       └─igraph::topo_sort(simGraph, "out")
+        10. │         └─lifecycle::deprecate_soft(...)
+        11. │           └─lifecycle:::deprecate_warn0(...)
+        12. │             ├─base::withRestarts(...)
+        13. │             │ └─base (local) withOneRestart(expr, restarts[[1L]])
+        14. │             │   └─base (local) doWithOneRestart(return(expr), restart)
+        15. │             └─base::signalCondition(wrn)
+        16. └─SpaDES.core (local) `<fn>`(`<lfcycl__>`)
+       
+       [ FAIL 1 | WARN 0 | SKIP 180 | PASS 1443 ]
+       Error:
+       ! Test failures.
+       Execution halted
+       Ran 1/1 deferred expressions
+     ```
+
 # tidygraph (1.3.1)
 
 * GitHub: <https://github.com/thomasp85/tidygraph>
@@ -1160,38 +2741,38 @@ Run `revdepcheck::revdep_details(, "tidygraph")` for more info
 *   checking examples ... ERROR
      ```
      ...
-     Caused by error:
-     ! The `father` argument of `bfs()` was deprecated in igraph 2.2.0 and is
-       now defunct.
-     ℹ Please use the `parent` argument instead.
+     #
+     # Edge Data: 5 × 2
+        from    to
+       <int> <int>
+     1     1     2
+     2     1     3
+     3     2     3
+     # ℹ 2 more rows
+     > 
+     > # Add edges
+     > graph %>% bind_edges(data.frame(from = 1, to = 4:5))
+     Error:
+     ! The `edges` argument of `add_edges()` is not allowed to be a 2 times 2
+       matrix as of igraph 2.1.5.
      Backtrace:
-          ▆
-       1. ├─... %>% ...
-       2. ├─dplyr::mutate(...)
-       3. ├─tidygraph:::mutate.tbl_graph(...)
-       4. │ └─tidygraph::mutate_as_tbl(.data, !!!dot)
-       5. │   ├─dplyr::mutate(d_tmp, ...)
-       6. │   └─dplyr:::mutate.data.frame(d_tmp, ...)
-       7. │     └─dplyr:::mutate_cols(.data, dplyr_quosures(...), by)
-       8. │       ├─base::withCallingHandlers(...)
-       9. │       └─dplyr:::mutate_col(dots[[i]], data, mask, new_columns)
-      10. │         └─mask$eval_all_mutate(quo)
-      11. │           └─dplyr (local) eval()
-      12. └─tidygraph::map_bfs_dbl(...)
-      13.   └─tidygraph::map_bfs(...)
-      14.     └─tidygraph:::bfs_df(graph, root, mode, unreachable)
-      15.       └─igraph::bfs(...)
-      16.         └─lifecycle::deprecate_stop("2.2.0", "bfs(father = )", "bfs(parent = )")
-      17.           └─lifecycle:::deprecate_stop0(msg)
-      18.             └─rlang::cnd_signal(...)
+         ▆
+      1. ├─graph %>% bind_edges(data.frame(from = 1, to = 4:5))
+      2. └─tidygraph::bind_edges(., data.frame(from = 1, to = 4:5))
+      3.   ├─... %gr_attr% .data
+      4.   └─igraph::add_edges(.data, rbind(new_edges$from, new_edges$to))
+      5.     └─igraph:::el_to_vec(edges, arg = "edges", fn = "add_edges")
+      6.       └─lifecycle::deprecate_stop("2.1.5", paste0(fn, "(", arg, " = 'is not allowed to be a 2 times 2 matrix')"))
+      7.         └─lifecycle:::deprecate_stop0(msg)
+      8.           └─rlang::cnd_signal(...)
      Execution halted
      ```
 
 *   checking tests ... ERROR
      ```
      ...
-        8.         └─lifecycle:::deprecate_stop0(msg)
-        9.           └─rlang::cnd_signal(...)
+         9.         └─lifecycle:::deprecate_stop0(msg)
+        10.           └─rlang::cnd_signal(...)
        ── Error ('test-search.R:9:3'): search returns correct type ────────────────────
        <dplyr:::mutate_error/rlang_error/error/condition>
        Error in `mutate(d_tmp, ...)`: i In argument: `val = fn`.
@@ -1211,7 +2792,7 @@ Run `revdepcheck::revdep_details(, "tidygraph")` for more info
        ! The `father` argument of `bfs()` was deprecated in igraph 2.2.0 and is now defunct.
        i Please use the `parent` argument instead.
        
-       [ FAIL 6 | WARN 55 | SKIP 1 | PASS 423 ]
+       [ FAIL 13 | WARN 52 | SKIP 1 | PASS 387 ]
        Error:
        ! Test failures.
        Execution halted
