@@ -16,6 +16,14 @@
       Error:
       ! The `niter` argument of `layout_with_kk()` was deprecated in igraph 0.8.0 and is now defunct.
 
+# layout_with_mds() deprecated argument
+
+    Code
+      l <- layout_with_mds(g, options = arpack_defaults())
+    Condition
+      Error:
+      ! The `options` argument of `layout_with_mds()` was deprecated in igraph 1.6.0 and is now defunct.
+
 # layout_randomly() errors well
 
     Code
