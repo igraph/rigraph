@@ -130,7 +130,7 @@ RUN Rscript -e 'lines <- readLines("/etc/os-release"); \\
     options(repos = c(CRAN = sprintf("https://p3m.dev/cran/__linux__/%s/latest", codename))); \\
     install.packages(c("pak", "jsonlite", "callr")); \\
     stopifnot(requireNamespace("pak"), requireNamespace("jsonlite"), requireNamespace("callr"))'
-LABEL org.opencontainers.image.source=https://github.com/igraph/rigraph
+LABEL org.opencontainers.image.source=https://github.com/${GITHUB_REPOSITORY}
 EOF
 
 if [ "${REVDEPX_PUSH:-0}" = "1" ]; then
