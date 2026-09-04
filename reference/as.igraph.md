@@ -52,7 +52,7 @@ Gabor Csardi <csardi.gabor@gmail.com>.
 g <- make_full_graph(5) + make_full_graph(5)
 hrg <- fit_hrg(g)
 as.igraph(hrg)
-#> ── <igraph> Fitted HRG ────────────────────────────────────────────── dec60c8 ──
+#> ── <igraph> Fitted HRG ────────────────────────────────────────────── e94db91 ──
 #> ℹ directed · named
 #> ℹ 19 vertices · 18 edges
 #> 

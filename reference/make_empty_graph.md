@@ -56,11 +56,11 @@ Other deterministic constructors:
 
 ``` r
 make_empty_graph(n = 10)
-#> ── <igraph> ───────────────────────────────────────────────────────── 44f6e50 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 6239113 ──
 #> ℹ directed
 #> ℹ 10 vertices · 0 edges
 make_empty_graph(n = 5, directed = FALSE)
-#> ── <igraph> ───────────────────────────────────────────────────────── f28966c ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 0f89f8a ──
 #> ℹ undirected
 #> ℹ 5 vertices · 0 edges
 ```
