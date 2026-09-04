@@ -2,17 +2,12 @@
 % Please edit documentation in R/layout.R
 \name{layout_on_sphere}
 \alias{layout_on_sphere}
-\alias{on_sphere}
 \title{Graph layout with vertices on the surface of a sphere}
 \usage{
 layout_on_sphere(graph)
-
-on_sphere(...)
 }
 \arguments{
 \item{graph}{The input graph.}
-
-\item{...}{Passed to \code{layout_on_sphere()}.}
 }
 \value{
 A numeric matrix with three columns, and one row for each vertex.
@@ -34,6 +29,9 @@ If you want to order the vertices differently, then permute them using the
 }
 
 \seealso{
+\code{\link[=on_sphere]{on_sphere()}} to build a lazy layout specification for
+\code{\link[=add_layout_]{add_layout_()}}.
+
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},
 \code{\link[=component_wise]{component_wise()}},

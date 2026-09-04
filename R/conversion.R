@@ -1932,7 +1932,8 @@ graph.data.frame <- function(d, directed = TRUE, vertices = NULL) {
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [graph_from_literal()]
 #' for another way to create graphs, [read.table()] to read in tables
-#' from files.
+#' from files. See [from_data_frame()] to build a lazy constructor
+#' specification for [make_()] or [sample_()].
 #' @keywords graphs
 #' @examples
 #'
@@ -2077,8 +2078,40 @@ graph_from_data_frame <- function(
   g
 }
 
-#' @rdname graph_from_data_frame
-#' @param ... Passed to `graph_from_data_frame()`.
+#' Constructor specifications for `graph_()`, `make_()` and `sample_()`
+#'
+#' @description
+#' Each of these functions builds a lazy constructor specification for the
+#' given graph constructor, to be used with [graph_()], [make_()] or
+#' [sample_()]. The specification is only evaluated when the graph is actually
+#' constructed, so it can be combined with constructor modifiers such as
+#' [with_vertex_()] or [with_edge_()].
+#'
+#' `from_data_frame()`, `from_edgelist()`, `tree()` and `degseq()` wrap
+#' [graph_from_data_frame()], [graph_from_edgelist()], [make_tree()] (or
+#' [sample_tree()]) and [sample_degseq()] (or [realize_degseq()]),
+#' respectively.
+#'
+#' The other constructors have specification functions as well; they are
+#' documented together with the constructor they wrap, e.g. `ring()` on the
+#' [make_ring()] page.
+#'
+#' @param ... Forwarded to the corresponding constructor function.
+#' @return An object of class `igraph_constructor_spec`.
+#' @seealso [graph_()], [make_()] and [sample_()] to apply a constructor
+#'   specification.
+#' @family constructor specifications
+#' @keywords graphs
+#' @rdname constructor_spec
+#' @examples
+#' # Pass a constructor specification to graph_(), make_() or sample_()
+#' el <- cbind(1:5, c(2:5, 1))
+#' graph_(el, from_edgelist(directed = FALSE))
+#'
+#' make_(tree(7))
+#'
+#' # Specifications can be combined with constructor modifiers
+#' make_(tree(7), with_vertex_(color = "red"))
 #' @export
 from_data_frame <- function(...) constructor_spec(graph_from_data_frame, ...)
 
@@ -2098,6 +2131,8 @@ from_data_frame <- function(...) constructor_spec(graph_from_data_frame, ...)
 #' @inheritParams rlang::args_dots_empty
 #' @param directed Whether to create a directed graph.
 #' @return An igraph graph.
+#' @seealso [from_edgelist()] to build a lazy constructor specification for
+#'   [make_()] or [sample_()].
 #'
 #' @family deterministic constructors
 #' @export
@@ -2172,7 +2207,6 @@ graph_from_edgelist <- function(
   res
 }
 
-#' @rdname graph_from_edgelist
-#' @param ... Passed to `graph_from_edgelist()`.
+#' @rdname constructor_spec
 #' @export
 from_edgelist <- function(...) constructor_spec(graph_from_edgelist, ...)

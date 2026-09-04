@@ -921,7 +921,9 @@ modularity <- function(x, ...) {
 #'   0. Set it to 1 to use the classical definition of modularity.
 #' @param directed Whether to use the directed or undirected version of
 #'   modularity. Ignored for undirected graphs.
-#' @param \dots Additional arguments, none currently.
+#' @param \dots For `modularity_matrix()`, these dots must be empty. For
+#'   `modularity()`, unused, present for S3 method consistency but may be
+#'   used by other methods that implement it.
 #' @return For `modularity()` a numeric scalar, the modularity score of the
 #'   given configuration.
 #'
@@ -983,7 +985,6 @@ modularity.communities <- function(x, ...) {
 }
 
 #' @rdname modularity.igraph
-#' @inheritParams rlang::args_dots_empty
 #' @export
 modularity_matrix <- function(
   graph,
