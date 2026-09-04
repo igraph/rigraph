@@ -58,7 +58,7 @@ a graph.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">layout_with_mds</span><span class="op">(</span><span class="va">graph</span>, dist <span class="op">=</span> <span class="cn">NULL</span>, dim <span class="op">=</span> <span class="fl">2</span>, options <span class="op">=</span> <span class="fu"><a href="arpack.html">arpack_defaults</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">layout_with_mds</span><span class="op">(</span><span class="va">graph</span>, dist <span class="op">=</span> <span class="cn">NULL</span>, dim <span class="op">=</span> <span class="fl">2</span>, options <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">with_mds</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -84,8 +84,9 @@ only possible value is 2. This is because <code><a href="merge_coords.html">merg
 
 
 <dt id="arg-options">options<a class="anchor" aria-label="anchor" href="#arg-options"></a></dt>
-<dd><p>This is currently ignored, as ARPACK is not used any more for
-solving the eigenproblem</p></dd>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> This argument is not
+supported from igraph version 1.6.0, as ARPACK is not used any more for
+solving the eigenproblem. Supplying it raises an error.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>

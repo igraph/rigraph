@@ -101,7 +101,7 @@ C <- matrix(c(
 ), nrow = 3)
 g <- sample_hierarchical_sbm(100, 10, rho = c(3, 3, 4) / 10, C = C, p = 1 / 20)
 g
-#> ── <igraph> Hierarchical stochastic block model ───────────────────── 7bc61c9 ──
+#> ── <igraph> Hierarchical stochastic block model ───────────────────── 9311a3d ──
 #> ℹ undirected
 #> ℹ 100 vertices · 447 edges
 #> 

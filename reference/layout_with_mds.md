@@ -6,7 +6,7 @@ of a graph.
 ## Usage
 
 ``` r
-layout_with_mds(graph, dist = NULL, dim = 2, options = arpack_defaults())
+layout_with_mds(graph, dist = NULL, dim = 2, options = deprecated())
 
 with_mds(...)
 ```
@@ -32,8 +32,9 @@ with_mds(...)
 
 - options:
 
-  This is currently ignored, as ARPACK is not used any more for solving
-  the eigenproblem
+  **\[deprecated\]** This argument is not supported from igraph version
+  1.6.0, as ARPACK is not used any more for solving the eigenproblem.
+  Supplying it raises an error.
 
 - ...:
 
