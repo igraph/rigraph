@@ -315,8 +315,7 @@ process_claim() {
   # The halves, one after the other: this engine's whole point. Timed here,
   # around each call, because the halves are separate processes now and their
   # true per-half seconds are what the manifest and the next plan's cost
-  # model get -- the pair engine can only ever record the pair's shared wall
-  # clock. check-half.sh always exits 0 by contract; a nonzero exit means
+  # model get. check-half.sh always exits 0 by contract; a nonzero exit means
   # the harness around the container broke, and compare-one.R reading the
   # half's absent status file turns that into this one package's error line.
   local t_old='' t_new='' started status
