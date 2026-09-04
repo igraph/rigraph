@@ -937,8 +937,10 @@ jobs:
       # No timings in the check output. The two halves run at different
       # times next to different queue neighbours, so per-stage
       # `[user/elapsed]` stamps differ by construction and would be pure
-      # diff noise; what a stage cost is still recorded by the elapsed
-      # stamping on the driver log.
+      # diff noise. What a stage cost is recorded by the elapsed stamping
+      # on the driver log instead -- which the salvage now carries into the
+      # results artifact for every failed half, and check-half.sh prints as
+      # a stage timeline in the job log when a half dies.
       _R_CHECK_TIMINGS_: ""
       _R_CHECK_EXAMPLE_TIMING_THRESHOLD_: 99999
       # 300 lines of a failed test transcript in the check log, not R's

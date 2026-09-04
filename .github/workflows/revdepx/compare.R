@@ -240,7 +240,13 @@ pkg_out <- function(pkgs_dir, name) {
 }
 
 # The files worth carrying out of a check directory: what broke, and the
-# complete transcripts of the two stages that explain why.
+# complete transcripts of the two stages that explain why. The half's
+# `driver.log` and `status` ride along from next to the .Rcheck directory:
+# the driver log is the per-stage timing record -- check-half.sh stamps
+# every line with elapsed seconds, precisely because `_R_CHECK_TIMINGS_`
+# stays off to keep the compared check logs stable -- and before this it
+# died with the runner's work directory, which made the yaml's "nothing is
+# lost" claim quietly false.
 copy_check_output <- function(rcheck, keep) {
   dir.create(keep, recursive = TRUE, showWarnings = FALSE)
   for (f in c(
@@ -260,6 +266,31 @@ copy_check_output <- function(rcheck, keep) {
       )
     }
   }
+  for (f in c("driver.log", "status")) {
+    if (file.exists(file.path(dirname(rcheck), f))) {
+      file.copy(
+        file.path(dirname(rcheck), f),
+        file.path(keep, f),
+        overwrite = TRUE
+      )
+    }
+  }
+}
+
+# Salvage a half that produced no readable result -- a timeout, an OOM kill,
+# a container that never started. What survives varies: a killed check
+# leaves a partial .Rcheck whose 00check.log lists every stage it finished,
+# a container that never ran leaves only the driver log -- and
+# copy_check_output() copies whatever of that exists, including the stamped
+# driver log, so the post-mortem of exactly these packages stops depending
+# on a work directory that dies with the runner. Run 33777134786's
+# both-halves timeouts (ctmm, E2E, PortfolioTesteR) salvaged nothing at
+# all; "where did the 1800 seconds go" had no answer in any artifact.
+salvage_side <- function(work_dir, pkgs_dir, name, phase) {
+  copy_check_output(
+    file.path(work_dir, phase, paste0(name, ".Rcheck")),
+    file.path(pkg_out(pkgs_dir, name), paste0(phase, "-check"))
+  )
 }
 
 # Record the half that did produce a result, when its partner did not.

@@ -196,16 +196,20 @@ old <- read_side(work_dir, "old", name, timeout_sec, t_old)
 # A half that produced a result is kept even when its partner did not --
 # the same dance as the pair engine, through the same functions.
 if (inherits(new, "error")) {
+  salvage_side(work_dir, pkgs_dir, name, "new")
   if (!inherits(old, "error")) {
     entry <- apply_updates(
       entry,
       keep_side(work_dir, pkgs_dir, name, "old", old)
     )
+  } else {
+    salvage_side(work_dir, pkgs_dir, name, "old")
   }
   entry <- apply_updates(entry, check_failure(name, "new", new))
   finish(entry)
 }
 if (inherits(old, "error")) {
+  salvage_side(work_dir, pkgs_dir, name, "old")
   entry <- apply_updates(
     entry,
     keep_side(work_dir, pkgs_dir, name, "new", new)
