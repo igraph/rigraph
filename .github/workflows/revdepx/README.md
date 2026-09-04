@@ -1,17 +1,12 @@
-# revdepx: the shared core of revdep3 and revdep4
+# revdepx: the core of the revdep4 workflow
 
-This directory is the engine-agnostic core
-of two sibling reverse-dependency-check workflows:
+This directory is the core of the reverse-dependency-check workflow
+`revdep4.yaml` (the *queue* engine):
+a package's CRAN half and dev half run **sequentially**,
+each in its own Docker container,
+and a bash work queue checks several packages at once.
 
-- **revdep3** (`revdep3.yaml`, the *pair* engine):
-  a package's CRAN half and dev half run **concurrently**,
-  each in its own Docker container.
-- **revdep4** (`revdep4.yaml`, the *queue* engine):
-  the two halves run **sequentially**,
-  and a bash work queue checks several packages at once,
-  one container per package.
-
-Both exist because of the same diagnosis:
+It exists because of a diagnosis:
 revdep2 ran the two halves as two simultaneous `R CMD check` processes
 on one host,
 and simultaneously checking the same package against two libraries
@@ -20,8 +15,13 @@ The PSOCK port collision that needed the `R_PARALLEL_PORT` split
 was one member of an open-ended class —
 shared TMPDIR, shared caches, shared locks,
 any singleton a check believes it owns.
-revdep3 dissolves the class by isolation;
-revdep4 dissolves it by never being simultaneous.
+revdep4 dissolves the class by never being simultaneous,
+and by containers.
+(A sibling *pair* engine, revdep3,
+dissolved it by isolation alone —
+both halves concurrently, one container each;
+it was validated live and retired with its unmerged PR,
+and its runs remain valid history.)
 Everything that was *not* about that flaw —
 the planner, the cost model, the baseline lineage,
 the manifest and report machinery,
@@ -45,10 +45,10 @@ from "an earlier run of this one":
   `revdepx-timings`, `revdepx-report`,
   `revdepx-results-<shard>-<attempt>`,
   `revdepx-universe-report`.
-  `plan.R` walks the completed runs of *both* workflow files
-  (`REVDEPX_WORKFLOWS`), youngest first across the union.
-- **Baselines** (old-version check results) are valid for either engine
-  because both check inside the *same* container platform:
+  `plan.R` walks the completed runs of the files in `REVDEPX_WORKFLOWS`,
+  youngest first across the union.
+- **Baselines** (old-version check results) are valid across runs
+  because every run checks inside the *same* container platform:
   a baseline row records the revdep's version,
   our CRAN version, the container R series,
   the base-image tag, the dependency fingerprint,
@@ -62,19 +62,16 @@ from "an earlier run of this one":
   which were measured on the runner's own toolchain
   and carry no tag.
 - **Timings** record one canonical per-package number:
-  `seconds` = the mean of the per-half durations that exist.
-  For the pair engine that *is* the pair's wall clock
-  (both halves record the same number, the slower one);
-  for the queue engine it is the mean of two real halves.
-  Either plan converts it to its own bill:
-  the pair plan uses it as-is,
-  the queue plan doubles it.
-  Shard-level rows (setup, install minutes) are engine-shaped,
-  so `calibration()` takes them only from same-engine runs;
+  `seconds` = the mean of the per-half durations that exist —
+  what one half costs, which the plan doubles into a package's bill.
+  (Retired pair-engine rows carry the pair's shared wall clock
+  in both fields; the unit still holds.)
+  Shard-level rows (setup, install minutes) are engine-tagged,
+  so `calibration()` takes them only from queue runs;
   the per-package pool is shared.
 - **Reports and `retry-run`**: `manifest.json` and the report files
   have one schema and one result vocabulary,
-  so `retry-run: <id>` accepts a run of either workflow
+  so `retry-run: <id>` accepts any earlier revdepx run
   and carries its good results into the new report.
 - **The universe image** on GHCR is one lineage (`revdepx-universe`),
   updated by whichever workflow ran last
@@ -129,7 +126,7 @@ One half = one container (`check-half.sh`):
 the tarball, the half's library and the work directory bind-mounted,
 `R_LIBS=<half lib>:<universe lib>`,
 `timeout` inside the container,
-the same `_R_CHECK_*` environment both engines forward,
+the same `_R_CHECK_*` environment the workflow forwards,
 a per-container `/tmp` on the big disk,
 a memory cap so a hungry check kills its container
 and not the runner,
@@ -141,11 +138,9 @@ revdep2 produced,
 so parsing, comparison, salvage and reporting
 carry over unchanged (`compare.R`).
 
-The pair engine runs two such containers side by side
-(`../revdep3/check-pair.sh`);
-the queue engine runs them back to back per package,
+The queue runs two such containers back to back per package,
 several packages at once (`../revdep4/queue.sh`).
-Both halves are always fresh checks, in both engines.
+Both halves are always fresh checks.
 
 ## Dropped from revdep2, deliberately
 
@@ -178,8 +173,7 @@ so a floor sized for uncontended times kills healthy checks),
 `REVDEPX_DEADLINE_MINUTES`,
 `REVDEPX_COMMIT_REPORT`,
 `REVDEPX_MEMORY_PER_CHECK` (per-check container memory cap, default 6g;
-both engines honor it, and each derives a machine-sized cap when it is
-cleared),
+a machine-sized cap is derived when it is cleared),
 `REVDEPX_CHECK_FLAGS` (compiler flags appended for the check's own compile
 of the package under test, default `-g0` — template-heavy Stan/TMB
 translation units spend most of their compiler memory on debug info;

@@ -12,11 +12,8 @@
 # can time them separately; `PHASE=all` runs both in one go, which is what a
 # local invocation wants.
 #
-# The check phase is dispatched on REVDEPX_ENGINE:
+# The check phase:
 #
-#   pair  -- one package's two halves at once: revdep3/check-pair.sh runs two
-#            check containers side by side, and this process compares them
-#            and appends the manifest line. Exactly revdep2's flow.
 #   queue -- one line per runnable package into a queue file, heaviest first;
 #            revdep4/queue.sh drains it with a pool of workers, each running
 #            a package's two halves in turn and then a per-package
@@ -50,8 +47,6 @@
 #                            may be missing or empty, then everything is fresh
 #   OUT_DIR                - results directory, uploaded as the shard artifact
 #                            (default: results)
-#   REVDEPX_ENGINE         - "pair" or "queue": who drives the checks
-#                            (default: pair)
 #   REVDEPX_IMAGE_FILE     - file holding the universe image reference,
 #                            written by shard-prep.sh
 #                            (default: $RUNNER_TEMP/revdepx-image-ref)
@@ -92,17 +87,10 @@ timeout_factor <- env_num("TIMEOUT_FACTOR", 1.5)
 timeout_min_sec <- env_num("TIMEOUT_MIN_MINUTES", 10) * 60
 deadline <- Sys.time() + env_num("DEADLINE_MINUTES", 300) * 60
 
-# Which engine will execute the checks. Validated here, before any work is
-# spent, so a typo in the workflow fails the prepare phase and not the first
-# check three quarters of an hour later.
-engine <- env_chr("REVDEPX_ENGINE", "pair")
-if (!engine %in% c("pair", "queue")) {
-  stop(
-    "REVDEPX_ENGINE must be \"pair\" or \"queue\", not ",
-    engine,
-    call. = FALSE
-  )
-}
+# The queue engine is the only one: the pair engine (revdep3) was retired
+# with its unmerged PR. The constant keeps the manifest, plan and timings
+# schema -- whose rows are engine-tagged -- unchanged.
+engine <- "queue"
 
 mine <- Filter(function(s) s$index == shard_index, plan$shards)
 if (length(mine) == 0) {
@@ -655,9 +643,8 @@ runnable <- names(sources)
 # The check containers must run the exact image the half libraries were
 # prepared against, so the ref recorded by the prepare phase wins; the ref
 # file is the fallback for a hand-driven PHASE=check over an existing work
-# directory. Exported because both engines hand it down the same way:
-# check-pair.sh and queue.sh pass it to check-half.sh, which passes it to
-# `docker run`.
+# directory. Exported because queue.sh passes it to check-half.sh, which
+# passes it to `docker run`.
 image_ref <- installed_state$image %||% read_image_ref()
 Sys.setenv(REVDEPX_IMAGE = image_ref)
 inform(sprintf(
@@ -670,10 +657,8 @@ inform(sprintf(
 
 # The timeout scales with what the check costs CRAN, floored because these
 # runners are slower than CRAN's machines and a tiny package must not be
-# killed over the difference. It is a *per-half* clock under both engines:
-# the pair engine hands the full budget to each of its two concurrent
-# containers, as it always did, and the queue engine hands it to the old and
-# the new half in turn.
+# killed over the difference. It is a *per-half* clock: the queue hands it
+# to the old and the new half in turn.
 package_timeout_sec <- function(name) {
   max(
     timeout_min_sec,
@@ -694,383 +679,88 @@ checks_started <- 0L
 check_seconds <- 0
 reported <- character()
 
-if (engine == "pair") {
-  # One package, both versions, at once.
-  #
-  # revdep3/check-pair.sh runs the two check containers concurrently -- each
-  # one a check-half.sh invocation against the universe image, with the right
-  # half library bind-mounted in front of the baked dependency library -- and
-  # writes each half's log and exit status; `read_side()` (compare.R) reads
-  # them back.
-  check_pair_sh <- file.path(dirname(script_dir), "revdep3", "check-pair.sh")
-  if (!file.exists(check_pair_sh)) {
-    stop(
-      "REVDEPX_ENGINE=pair needs ",
-      check_pair_sh,
-      ", which does not exist; is the revdep3 directory checked out?",
-      call. = FALSE
-    )
-  }
+# The queue engine: this driver writes the work list and hands it to
+# revdep4/queue.sh, whose workers run the two halves of a package one after
+# the other and then a per-package compare-one.R -- sourcing the same
+# compare.R as this script -- which appends the manifest line itself, under
+# flock, as each package finishes. Write-as-you-go, so a killed shard still
+# accounts for what it finished. This process only writes the deferred tail afterwards.
+queue_sh <- file.path(dirname(script_dir), "revdep4", "queue.sh")
+if (!file.exists(queue_sh)) {
+  stop(
+    "REVDEPX_ENGINE=queue needs ",
+    queue_sh,
+    ", which does not exist; is the revdep4 directory checked out?",
+    call. = FALSE
+  )
+}
 
-  # Stop before a check the trailing estimate says will not finish -- but
-  # always attempt the first check of a phase, or a mis-budgeted shard would
-  # make no progress at all and a retry would repeat the mistake. (The queue
-  # engine's workers apply the same rule per claim, inside queue.sh.)
-  out_of_time <- function(entry) {
-    if (checks_started == 0L) {
-      return(FALSE)
-    }
-    budget_sec <- max(entry$weight_minutes, 1) * 60 * 1.3
-    Sys.time() + budget_sec > deadline
-  }
-
-  check_pair <- function(name) {
-    checks_started <<- checks_started + 1L
-    work_dir <- file.path(work, "check", name)
-    unlink(work_dir, recursive = TRUE)
-    dir.create(work_dir, recursive = TRUE, showWarnings = FALSE)
-    timeout_sec <- package_timeout_sec(name)
-    started <- Sys.time()
-    system2(
-      check_pair_sh,
-      shQuote(c(
-        sources[[name]],
-        work_dir,
-        lib_old,
-        lib_new,
-        format(round(timeout_sec), scientific = FALSE)
-      ))
-    )
-    duration <- round(as.numeric(Sys.time() - started, units = "secs"))
-    # Both checks ran side by side, so the pair cost what the slower one
-    # cost, and that -- not the sum of the two -- is what the shard's
-    # deadline spends and what the cost model is fitted against. It is also
-    # the only per-half duration there is: simultaneous halves are
-    # inseparable, so `read_side()` records it for both.
-    check_seconds <<- check_seconds + duration
-    list(
-      old = read_side(work_dir, "old", name, timeout_sec, duration),
-      new = read_side(work_dir, "new", name, timeout_sec, duration)
-    )
-  }
-
-  # The checks: one pass, both versions of every package at once.
-  #
-  # There used to be two passes -- every old check, then the dev binary
-  # installed over the CRAN one, then every new check -- because the library
-  # could only hold one version at a time. With the two cascading libraries it
-  # can hold both, so a package's pair runs together and the shard makes one
-  # pass. That halves a package's wall clock, and it means a package whose old
-  # check hangs still gets its new answer instead of the run learning nothing
-  # about it.
-  inform(sprintf(
-    "Checking %d package(s), old and new side by side",
-    length(runnable)
-  ))
-  # How far along the shard is, on every line that reports a package.
-  #
-  # A shard runs for hours and its log is read while it runs, so "3/51" answers
-  # "is this nearly done?" without counting lines. The estimate answers the
-  # question actually being asked, which is when.
-  #
-  # The plan already priced every package; what it could not know is how this
-  # runner would compare. So the remaining packages are priced in the plan's
-  # own units and then rescaled by how its estimates have held up here so far
-  # -- which absorbs both a slow runner and a systematically optimistic model,
-  # without either having to be known in advance. Before the first pair
-  # finishes there is nothing to rescale by and the plan's number stands.
-  planned_done <- 0
-  actual_done <- 0
-  planned_minutes <- function(name) {
-    max(get(name, envir = state)$weight_minutes %||% 0, 0)
-  }
-  progress_note <- function(position) {
-    left <- sum(vapply(
-      utils::tail(runnable, length(runnable) - position),
-      planned_minutes,
-      numeric(1)
-    ))
-    scale <- if (planned_done > 0 && actual_done > 0) {
-      actual_done / planned_done
-    } else {
-      1
-    }
-    sprintf(
-      "%d/%d, %s",
-      position,
-      length(runnable),
-      if (left > 0) {
-        paste0("~", format_duration(left * scale * 60), " left")
-      } else {
-        "last one"
-      }
-    )
-  }
-
-  # One package: both halves, compared, recorded. Returns nothing; everything
-  # it learns goes into `state`, and the caller writes that out however this
-  # ends.
-  check_package <- function(name, position) {
-    entry <- get(name, envir = state)
-
-    if (out_of_time(entry)) {
-      inform(name, ": deferred (deadline), ", progress_note(position))
-      return(invisible(NULL))
-    }
-
-    # Both halves, always. A baseline used to stand in for the old check and
-    # save it; with the pair running concurrently the old check costs no wall
-    # clock at all, and reusing a result from another run meant comparing
-    # against a machine, a CRAN snapshot and a dependency tree that were not
-    # this run's. The baseline is still read, but as a second opinion: if it
-    # disagrees with what the old check just produced, that is drift worth
-    # printing rather than a comparison worth trusting. (The queue engine,
-    # whose halves cost real wall clock, reuses it under the far stricter
-    # image-era conditions -- see compare.R.)
-    pair <- check_pair(name)
-    old <- pair$old
-    new <- pair$new
-
-    # What this one was priced at against what it cost, which is what prices
-    # the rest. A timed-out check counts too: the clock really did spend it.
-    planned_done <<- planned_done + planned_minutes(name)
-    actual_done <<- actual_done + (attr(new, "duration") %||% 0) / 60
-    progress <- progress_note(position)
-
-    work_dir <- file.path(work, "check", name)
-    pkgs_dir <- file.path(out_dir, "pkgs")
-
-    # A half that produced a result is kept even when its partner did not.
-    #
-    # Running the pair concurrently was supposed to mean that "a package whose
-    # old check hangs still gets its new answer" -- but the old half's error
-    # used to `next` straight past the code that saves the new one, so the
-    # answer was produced and then thrown away, and the artifact held nothing
-    # at all for that package. 19 packages in run 31879790285 lost a half this
-    # way.
-    if (inherits(new, "error")) {
-      if (!inherits(old, "error")) {
-        do.call(
-          update,
-          c(list(name), keep_side(work_dir, pkgs_dir, name, "old", old))
-        )
-      }
-      do.call(update, c(list(name), check_failure(name, "new", new, progress)))
-      return(invisible(NULL))
-    }
-    if (inherits(old, "error")) {
-      do.call(
-        update,
-        c(list(name), keep_side(work_dir, pkgs_dir, name, "new", new))
-      )
-      do.call(update, c(list(name), check_failure(name, "old", old, progress)))
-      return(invisible(NULL))
-    }
-
-    # Compared in-process; the queue engine runs the same function from
-    # compare-one.R. Everything learnt comes back as manifest-field updates.
-    entry <- do.call(
-      update,
-      c(
-        list(name),
-        compare_halves(
-          name,
-          old,
-          new,
-          pkgs_dir,
-          baseline_dir,
-          baseline_planned = entry$baseline_planned
-        )
-      )
-    )
-    inform(
-      name,
-      ": ",
-      entry$result,
-      " (old ",
-      entry$status_old,
-      ", new ",
-      entry$status_new,
-      ", ",
-      attr(new, "duration"),
-      "s for the pair, ",
-      progress,
-      ")"
-    )
-
-    # The parsed results carry everything the reports need; raw check output
-    # is kept only where a human will want to dig, and then as the
-    # *difference* between the two logs rather than the whole of the new one.
-    # The whole log is thousands of lines that are identical in both, and what
-    # a reader wants is the handful that are not.
-    if (entry$result == "ok") {
-      unlink(work_dir, recursive = TRUE)
-    } else {
-      keep <- file.path(out_dir, "pkgs", name, "new-check")
-      rcheck <- function(phase) {
-        file.path(work_dir, phase, paste0(name, ".Rcheck"))
-      }
-      copy_check_output(rcheck("new"), keep)
-      old_log <- file.path(rcheck("old"), "00check.log")
-      new_log <- file.path(rcheck("new"), "00check.log")
-      if (file.exists(old_log) && file.exists(new_log)) {
-        diff <- check_diff(name, old_log, new_log, work_dir)
-        writeLines(diff, file.path(keep, "00check.diff"))
-        # And into the job log, where it is the one thing a reader of the run
-        # actually wants: what the dev version changed about this package, in
-        # the package's own words. Downloading an artifact to find out that a
-        # NOTE gained a line is a poor trade. It is bounded because a package
-        # that fails to install differs in thousands of lines and would bury
-        # the rest of the shard; the whole diff is in the artifact either way.
-        print_group(
-          sprintf(
-            "%s: old vs new check log (%d line diff)",
-            name,
-            length(diff)
-          ),
-          if (length(diff) == 0) {
-            # Worth saying rather than leaving as an empty block. A package
-            # called `newly_broken` whose two logs are identical once the
-            # paths and the stage timings are out of them is not newly broken;
-            # it is this harness getting it wrong, and this line is how a
-            # reader of the run finds that out without downloading anything.
-            "The two logs are identical apart from paths and stage timings."
-          },
-          head(diff, diff_max_lines),
-          if (length(diff) > diff_max_lines) {
-            sprintf(
-              "[%d more lines; the whole diff is 00check.diff in the shard artifact]",
-              length(diff) - diff_max_lines
-            )
-          }
-        )
-      }
-      unlink(work_dir, recursive = TRUE)
-    }
-    invisible(NULL)
-  }
-
-  for (position in seq_along(runnable)) {
-    name <- runnable[[position]]
-    # A driver error is this package's problem, not the shard's. Before, an
-    # unguarded `readLines(.../status)[[1]]` on a check-pair that never wrote
-    # its status file -- a full disk, an unwritable work directory -- threw
-    # out of the loop and took every remaining package with it.
-    tryCatch(
-      check_package(name, position),
-      error = function(e) {
-        update(
-          name,
-          result = "error",
-          message = paste("driver error:", conditionMessage(e))
-        )
-        inform(name, ": driver error: ", conditionMessage(e))
-      }
-    )
-
-    # This package's line, now rather than at the end of the shard.
-    #
-    # The file is newline-delimited JSON precisely so that it can be appended
-    # to, but it used to be written in one pass after the loop -- so a shard
-    # killed by the job timeout, or thrown out of the loop by an unhandled
-    # error, left an *empty* manifest next to a full set of results, and
-    # `collect.R` skips a directory whose manifest has no lines. Hours of
-    # finished checks were one kill away from being reported as `missing`.
-    # Deferred and unreached packages are appended at the end, and the
-    # collector reconciles the rest against the plan.
-    write_manifest_line(
-      get(name, envir = state),
-      manifest_path,
-      our_cran_version,
-      our_dev_version
-    )
-    reported <- c(reported, name)
-  }
-} else {
-  # The queue engine: this driver writes the work list and hands it to
-  # revdep4/queue.sh, whose workers run the two halves of a package one after
-  # the other and then a per-package compare-one.R -- sourcing the same
-  # compare.R as this script -- which appends the manifest line itself, under
-  # flock, as each package finishes. Write-as-you-go for the same reason the
-  # pair loop appends per package: a killed shard still accounts for what it
-  # finished. This process only writes the deferred tail afterwards.
-  queue_sh <- file.path(dirname(script_dir), "revdep4", "queue.sh")
-  if (!file.exists(queue_sh)) {
-    stop(
-      "REVDEPX_ENGINE=queue needs ",
-      queue_sh,
-      ", which does not exist; is the revdep4 directory checked out?",
-      call. = FALSE
-    )
-  }
-
-  # One line per runnable package: name, tarball, per-half timeout seconds,
-  # and the plan's weight in minutes (queue.sh defers on it near the
-  # deadline). `runnable` is already heaviest first -- the plan deals shard
-  # members that way and nothing above reorders them -- which is what
-  # queue.sh's two cursors rely on: one worker eats from the heavy end, the
-  # rest from the light end, so a giant cannot strand a tail of cheap
-  # packages behind it.
-  #
-  # Both halves always run fresh, in this engine as in the pair engine. A
-  # stored old result the plan certified as comparable is read back by
-  # compare-one.R purely as a second opinion (`baseline_agrees`) -- never as
-  # a substitute for the old check, however tempting the saved wall clock: a
-  # fresh old is the only result whose provenance this run controls, and the
-  # second opinion is exactly how a discrepancy in the stored one gets
-  # noticed rather than trusted.
-  second_opinions <- sum(vapply(
+# One line per runnable package: name, tarball, per-half timeout seconds,
+# and the plan's weight in minutes (queue.sh defers on it near the
+# deadline). `runnable` is already heaviest first -- the plan deals shard
+# members that way and nothing above reorders them -- which is what
+# queue.sh's two cursors rely on: one worker eats from the heavy end, the
+# rest from the light end, so a giant cannot strand a tail of cheap
+# packages behind it.
+#
+# Both halves always run fresh. A
+# stored old result the plan certified as comparable is read back by
+# compare-one.R purely as a second opinion (`baseline_agrees`) -- never as
+# a substitute for the old check, however tempting the saved wall clock: a
+# fresh old is the only result whose provenance this run controls, and the
+# second opinion is exactly how a discrepancy in the stored one gets
+# noticed rather than trusted.
+second_opinions <- sum(vapply(
+  runnable,
+  function(name) {
+    isTRUE(get(name, envir = state)$baseline_planned) &&
+      file.exists(file.path(baseline_dir, "old-rds", paste0(name, ".rds")))
+  },
+  logical(1)
+))
+queue_file <- file.path(
+  work,
+  sprintf("queue-slice-%d.tsv", check_slice$index)
+)
+writeLines(
+  vapply(
     runnable,
     function(name) {
-      isTRUE(get(name, envir = state)$baseline_planned) &&
-        file.exists(file.path(baseline_dir, "old-rds", paste0(name, ".rds")))
+      entry <- get(name, envir = state)
+      paste(
+        name,
+        sources[[name]],
+        format(round(package_timeout_sec(name)), scientific = FALSE),
+        format(
+          max(entry$weight_minutes %||% 0, 0),
+          scientific = FALSE,
+          trim = TRUE
+        ),
+        sep = "\t"
+      )
     },
-    logical(1)
-  ))
-  queue_file <- file.path(
-    work,
-    sprintf("queue-slice-%d.tsv", check_slice$index)
-  )
-  writeLines(
-    vapply(
-      runnable,
-      function(name) {
-        entry <- get(name, envir = state)
-        paste(
-          name,
-          sources[[name]],
-          format(round(package_timeout_sec(name)), scientific = FALSE),
-          format(
-            max(entry$weight_minutes %||% 0, 0),
-            scientific = FALSE,
-            trim = TRUE
-          ),
-          sep = "\t"
-        )
-      },
-      character(1)
-    ),
-    queue_file
-  )
-  inform(sprintf(
-    "Queue: %d package(s), %d with a stored old result as a second opinion",
-    length(runnable),
-    second_opinions
-  ))
+    character(1)
+  ),
+  queue_file
+)
+inform(sprintf(
+  "Queue: %d package(s), %d with a stored old result as a second opinion",
+  length(runnable),
+  second_opinions
+))
 
-  queue_work <- file.path(work, "check")
-  dir.create(queue_work, recursive = TRUE, showWarnings = FALSE)
-  # What the prepare phase installed into the two half libraries; queue.sh
-  # forwards these to compare-one.R (and stamps its last-resort fallback
-  # lines with them), so every queue-engine manifest line carries the same
-  # versions the pair engine writes.
-  Sys.setenv(
-    REVDEPX_OUR_CRAN_VERSION = our_cran_version,
-    REVDEPX_OUR_DEV_VERSION = our_dev_version
-  )
-  status <- system2(
-    queue_sh,
-    shQuote(c(
+queue_work <- file.path(work, "check")
+dir.create(queue_work, recursive = TRUE, showWarnings = FALSE)
+# What the prepare phase installed into the two half libraries; queue.sh
+# forwards these to compare-one.R (and stamps its last-resort fallback
+# lines with them), so every manifest line carries the versions.
+Sys.setenv(
+  REVDEPX_OUR_CRAN_VERSION = our_cran_version,
+  REVDEPX_OUR_DEV_VERSION = our_dev_version
+)
+status <- system2(
+  queue_sh,
+  shQuote(c(
       queue_file,
       queue_work,
       lib_old,
@@ -1078,34 +768,33 @@ if (engine == "pair") {
       manifest_path,
       format(round(as.numeric(deadline)), scientific = FALSE)
     ))
+)
+if (!identical(status, 0L)) {
+  # queue.sh promises to always exit 0, so anything else means it never
+  # reached its own last line. Whatever the workers did write is on disk
+  # and is read back below; the packages without lines become deferred.
+  inform(
+    "queue.sh exited with status ",
+    status,
+    "; reading back what it left"
   )
-  if (!identical(status, 0L)) {
-    # queue.sh promises to always exit 0, so anything else means it never
-    # reached its own last line. Whatever the workers did write is on disk
-    # and is read back below; the packages without lines become deferred.
-    inform(
-      "queue.sh exited with status ",
-      status,
-      "; reading back what it left"
-    )
-  }
+}
 
-  # The queue's forensics -- who claimed what, and the closing tallies -- go
-  # into the results artifact, named per slice so later slices do not
-  # overwrite them. Left in the work directory alone they die with the
-  # runner, which is exactly when they are wanted.
-  for (record in c("claimed.log", "queue-state.json")) {
-    from <- file.path(queue_work, record)
-    if (file.exists(from)) {
-      file.copy(
-        from,
-        file.path(
-          out_dir,
-          sprintf("queue-slice-%d-%s", check_slice$index, record)
-        ),
-        overwrite = TRUE
-      )
-    }
+# The queue's forensics -- who claimed what, and the closing tallies -- go
+# into the results artifact, named per slice so later slices do not
+# overwrite them. Left in the work directory alone they die with the
+# runner, which is exactly when they are wanted.
+for (record in c("claimed.log", "queue-state.json")) {
+  from <- file.path(queue_work, record)
+  if (file.exists(from)) {
+    file.copy(
+      from,
+      file.path(
+        out_dir,
+        sprintf("queue-slice-%d-%s", check_slice$index, record)
+      ),
+      overwrite = TRUE
+    )
   }
 }
 
@@ -1142,44 +831,36 @@ for (name in setdiff(members, c(reported, already))) {
 # The summary below is this slice's, not the shard's: the other slices'
 # packages are still at their initial `deferred` in this process and would pad
 # every table with rows that say nothing.
-if (engine == "pair") {
-  entries <- lapply(
-    if (check_slice$of > 1L) reported else members,
-    function(name) get(name, envir = state)
-  )
-} else {
-  # The queue's results were written by compare-one.R in other processes, so
-  # this driver's `state` never saw them; the manifest on disk is the source
-  # of truth. Later lines win per package, matching the collector.
-  by_package <- list()
-  for (e in read_manifest()) {
-    by_package[[e$package]] <- e
-  }
-  slice_names <- if (check_slice$of > 1L) runnable else members
-  entries <- lapply(
-    intersect(slice_names, names(by_package)),
-    function(name) by_package[[name]]
-  )
-  # What this slice's checks cost, read back the same way rather than
-  # accumulated in-process. `check_seconds` sums true per-half seconds
-  # (t_old + t_new) over the lines this slice produced, and `checks_started`
-  # counts halves run -- one for each positive t -- where the pair engine
-  # counts pairs and pair wall clocks.
-  ran <- lapply(
-    intersect(runnable, names(by_package)),
-    function(name) by_package[[name]]
-  )
-  check_seconds <- sum(vapply(
-    ran,
-    function(e) (e$t_old %||% 0) + (e$t_new %||% 0),
-    numeric(1)
-  ))
-  checks_started <- as.integer(sum(vapply(
-    ran,
-    function(e) ((e$t_old %||% 0) > 0) + ((e$t_new %||% 0) > 0),
-    numeric(1)
-  )))
+# The queue's results were written by compare-one.R in other processes, so
+# this driver's `state` never saw them; the manifest on disk is the source
+# of truth. Later lines win per package, matching the collector.
+by_package <- list()
+for (e in read_manifest()) {
+  by_package[[e$package]] <- e
 }
+slice_names <- if (check_slice$of > 1L) runnable else members
+entries <- lapply(
+  intersect(slice_names, names(by_package)),
+  function(name) by_package[[name]]
+)
+# What this slice's checks cost, read back the same way rather than
+# accumulated in-process. `check_seconds` sums true per-half seconds
+# (t_old + t_new) over the lines this slice produced, and `checks_started`
+# counts halves run -- one for each positive t.
+ran <- lapply(
+  intersect(runnable, names(by_package)),
+  function(name) by_package[[name]]
+)
+check_seconds <- sum(vapply(
+  ran,
+  function(e) (e$t_old %||% 0) + (e$t_new %||% 0),
+  numeric(1)
+))
+checks_started <- as.integer(sum(vapply(
+  ran,
+  function(e) ((e$t_old %||% 0) > 0) + ((e$t_new %||% 0) > 0),
+  numeric(1)
+)))
 
 # ----------------------------------------------------------------- timings ---
 
@@ -1188,9 +869,9 @@ if (engine == "pair") {
 # cost model from them. The job's own minutes -- the runner image, the image
 # pull, the artifact downloads before this script even starts -- are not
 # visible from here; the collector reads those off the API and adds them.
-# `checks` and `check_seconds` mean what the engine measured: pairs and pair
-# wall clocks under the pair engine, halves and summed per-half seconds under
-# the queue engine.
+# `checks` and `check_seconds` mean halves run and summed per-half seconds.
+# Historical rows from the retired pair engine tallied pairs and pair wall
+# clocks instead; calibration() keys on the engine tag, so they never mix.
 # Across slices, not per slice: the collector fits the cost model from these,
 # and a `check_seconds` covering a third of the shard next to a `script_seconds`
 # covering the job would make every shard look three times cheaper than it is.

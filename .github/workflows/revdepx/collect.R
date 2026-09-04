@@ -1,4 +1,4 @@
-# Fan-in for the revdepx workflows (revdep3 and revdep4): merge every shard's results into one report, one
+# Fan-in for the revdepx workflow: merge every shard's results into one report, one
 # manifest, and one baseline for future runs to reuse.
 #
 # Reads all revdepx-results-* artifacts (every attempt; on a re-run the later
@@ -303,13 +303,12 @@ inform("Baseline carries ", length(baseline), " old-version result(s)")
 # the shard count honest: a model that overestimates the work cuts it into more
 # shards than the parallel capacity can run, and each extra shard is another
 # setup paid for nothing.
-# The canonical per-package number both engines share: the mean of the
-# per-half durations that exist. The pair engine records the pair's wall
-# clock for both halves, so the mean IS that wall clock (the slower half);
-# the queue engine records two real durations, and the mean is their honest
-# middle. Either way "seconds" answers "what does one half cost here", which
-# is the unit the cost model prices engines from (the queue plan doubles it,
-# the pair plan does not).
+# The canonical per-package number: the mean of the per-half durations that
+# exist -- two real measurements, their honest middle. "seconds" answers
+# "what does one half cost here", the unit the cost model doubles into a
+# package's bill. (Rows from the retired pair engine carried the pair's
+# shared wall clock in both fields, so their mean is that wall clock, and
+# the unit still holds.)
 seconds_of <- function(entry) {
   both <- suppressWarnings(as.numeric(c(entry$t_old, entry$t_new)))
   both <- both[!is.na(both) & both > 0]
@@ -885,11 +884,9 @@ append_summary(c(
     # no timing of its own, but the checks it did finish are still in the
     # manifest the collector just merged.
     # `seconds` is the canonical per-half number; `checks` says how many
-    # halves it stands for. Under the pair engine the halves overlapped, so
-    # summing seconds alone (never seconds x checks) is the wall clock; under
-    # the queue engine the same sum is half the check wall clock, which the
-    # planned-vs-actual shard table already reports exactly. Close enough for
-    # a cost headline either way.
+    # halves it stands for. Summing seconds is half the check wall clock,
+    # which the planned-vs-actual shard table already reports exactly. Close
+    # enough for a cost headline.
     check_minutes <- sum(vapply(
       package_rows,
       function(p) p$seconds / 60,
@@ -960,7 +957,7 @@ append_summary(c(
     local({
       ref <- env_chr("GITHUB_WORKFLOW_REF")
       file <- basename(sub("@.*$", "", ref))
-      if (nzchar(file) && grepl("[.]ya?ml$", file)) file else "revdep3.yaml"
+      if (nzchar(file) && grepl("[.]ya?ml$", file)) file else "revdep4.yaml"
     }),
     run_id
   ),

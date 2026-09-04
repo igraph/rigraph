@@ -1,17 +1,17 @@
 # `revdep4` — the sequential-halves queue engine
 
-`.github/workflows/revdep4.yaml` is one of two sibling workflows
-built on the shared core in [`../revdepx/`](../revdepx/README.md);
-the other is `revdep3.yaml`.
-Both check every reverse dependency of igraph twice —
+`.github/workflows/revdep4.yaml` is built on the core in
+[`../revdepx/`](../revdepx/README.md).
+It checks every reverse dependency of igraph twice —
 once against the CRAN release, once against the dev version —
-inside the same prebuilt universe image,
-and publish the same artifact family under the same schemas,
-so either workflow's runs feed the other's baselines, timings and retries.
-They differ in exactly one thing, the check engine:
-`revdep3` runs a package's two halves simultaneously, one container each;
-`revdep4` runs them one after the other,
-and wins the lost parallelism back *across* packages with a bash work queue.
+inside a prebuilt universe image,
+running a package's two halves one after the other
+and winning the lost parallelism back *across* packages
+with a bash work queue.
+(A sibling *pair* engine, `revdep3`,
+ran the halves simultaneously, one container each;
+it was retired with its unmerged PR,
+and its runs remain valid baseline and timing history.)
 The shared core is documented in `../revdepx/README.md`;
 this file covers only what `REVDEPX_ENGINE=queue` changes.
 
@@ -35,7 +35,7 @@ is simply not a mode anything in the R toolchain promises to support.
 This engine removes the class instead of its members:
 at no moment do two checks of the same package coexist.
 The old half runs, finishes, and then the new half runs.
-What the pair bought — parallel hardware use — is bought back one level up:
+What simultaneity bought — parallel hardware use — is bought back one level up:
 with `W` workers, `W` *different* packages are in flight at once,
 which no shared assumption anywhere touches.
 
@@ -100,7 +100,7 @@ that reconciles `claimed.log` against the manifest.
 
 The queue's order key is **expected check seconds** —
 measured on this infrastructure in prior `revdepx` runs
-(either workflow's, youngest first),
+(youngest first),
 else CRAN's reported `T_total` scaled by the self-calibrating factor
 the collector fits from measured runs,
 else the cohort median.
@@ -117,10 +117,9 @@ at both halves' seconds — twice the per-half estimate.
 
 ## The stored old result: always a second opinion, never a substitute
 
-Both halves always run fresh, in this engine as in `revdep3`.
+Both halves always run fresh.
 Sequential halves would make skipping the old check tempting —
-unlike the pair engine's free concurrent old half,
-it costs real wall clock here —
+it costs real wall clock —
 and the pinned container platform would even make the substitution
 far safer than when `revdep2` tried and abandoned it
 (76 of one run's 78 `newly_broken` verdicts were false,
@@ -155,7 +154,7 @@ since their checks ran on a different platform entirely.
   exported to `check-half.sh` as `REVDEPX_MEMORY`.
   A hungry check OOM-kills its own container, not the runner,
   and the 2 GiB headroom keeps docker and the runner agent responsive —
-  the sequential engine has no need for the pair engine's `nice`.
+  the sequential engine has no need for revdep2's `nice`.
 - Before claiming, a worker prices the candidate
   at `weight_minutes × 60 × 1.3`
   (the plan's estimate plus the shard driver's usual trailing margin)
@@ -183,20 +182,19 @@ since their checks ran on a different platform entirely.
   and appends the manifest line under the manifest lock.
   All shared logic comes from `../revdepx/util.R` and `../revdepx/compare.R`.
 
-## Shared with `revdep3`
+## Continuity with the retired `revdep3`
 
-Everything but the engine:
+The retired pair engine shared everything but the engine:
 the `revdepx-*` artifact family and names,
 `plan.json`, manifest and `timings.json` schemas
 (the queue's `t_old`/`t_new` are true per-half seconds,
-where the pair engine records the pair's shared wall clock —
+where the pair engine recorded the pair's shared wall clock —
 `timings.json` carries an `engine` field
 so calibration never mixes the two setups' overheads),
 the baseline artifact,
 the universe image on GHCR and the base image under it,
 the comparison code,
 and the report committed to the `revdep` directory.
-Both workflows scan both workflows' histories
-(`REVDEPX_WORKFLOWS`),
-so a `revdep3` run's measured timings price a `revdep4` plan and vice versa,
-and either can be retried from the other's report.
+`REVDEPX_WORKFLOWS` says whose histories the plan scans,
+so old `revdep3` runs still feed baselines and timings
+while they remain within the age bounds.

@@ -1,4 +1,4 @@
-# Shared helpers for the revdepx workflow scripts (the revdep3 and revdep4
+# Shared helpers for the revdepx workflow scripts (the revdep4
 # engines).
 # Sourced by plan.R, build.R, shard.R and collect.R; base R plus jsonlite only,
 # so every job can use it before any heavyweight dependency is installed.
