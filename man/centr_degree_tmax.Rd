@@ -6,21 +6,27 @@
 \usage{
 centr_degree_tmax(
   graph = NULL,
-  nodes = 0,
+  n = 0,
+  ...,
   mode = c("all", "out", "in", "total"),
-  loops
+  loops,
+  nodes = deprecated()
 )
 }
 \arguments{
-\item{graph}{The input graph. It can also be \code{NULL} if \code{nodes} is given.}
+\item{graph}{The input graph. It can also be \code{NULL} if \code{n} is given.}
 
-\item{nodes}{The number of vertices. This is ignored if the graph is given.}
+\item{n}{The number of vertices. This is ignored if the graph is given.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{This is the same as the \code{mode} argument of \code{degree()}. Ignored
 if \code{graph} is given and the graph is undirected.}
 
 \item{loops}{Logical, whether to consider loops edges when
 calculating the degree.}
+
+\item{nodes}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{n} instead.}
 }
 \value{
 Real scalar, the theoretical maximum (unnormalized) graph degree
