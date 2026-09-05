@@ -34,7 +34,7 @@ When deleting edges via \code{-}, all arguments of \code{edge()} (or
 \code{\link[=delete_edges]{delete_edges()}}.
 }
 \examples{
-g <- make_ring(10) \%>\%
+g <- make_ring(10) |>
   set_edge_attr("color", value = "red")
 
 g <- g + edge(1, 5, color = "green") +
@@ -43,8 +43,8 @@ g <- g + edge(1, 5, color = "green") +
 
 E(g)[[]]
 
-g \%>\%
-  add_layout_(in_circle()) \%>\%
+g |>
+  add_layout_(in_circle()) |>
   plot()
 
 g <- make_ring(10) + edges(1:10)

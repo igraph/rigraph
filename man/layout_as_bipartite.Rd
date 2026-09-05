@@ -64,8 +64,8 @@ plot(g,
 )
 
 # Two columns
-g \%>\%
-  add_layout_(as_bipartite()) \%>\%
+g |>
+  add_layout_(as_bipartite()) |>
   plot()
 }
 \seealso{

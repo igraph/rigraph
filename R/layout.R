@@ -478,8 +478,8 @@ layout_ <- function(graph, layout, ...) {
 #' @export
 #' @family graph layouts
 #' @examples
-#' (make_star(11) + make_star(11)) %>%
-#'   add_layout_(as_star(), component_wise()) %>%
+#' (make_star(11) + make_star(11)) |>
+#'   add_layout_(as_star(), component_wise()) |>
 #'   plot()
 add_layout_ <- function(graph, ..., overwrite = TRUE) {
   if (overwrite && "layout" %in% graph_attr_names(graph)) {
@@ -587,8 +587,8 @@ print.igraph_layout_modifier <- function(x, ...) {
 #' @export
 #' @examples
 #' g <- make_ring(10) + make_ring(10)
-#' g %>%
-#'   add_layout_(in_circle(), component_wise()) %>%
+#' g |>
+#'   add_layout_(in_circle(), component_wise()) |>
 #'   plot()
 component_wise <- function(merge_method = "dla") {
   args <- grab_args()
@@ -716,8 +716,8 @@ normalize <- function(
 #' )
 #'
 #' # Two columns
-#' g %>%
-#'   add_layout_(as_bipartite()) %>%
+#' g |>
+#'   add_layout_(as_bipartite()) |>
 #'   plot()
 layout_as_bipartite <- function(
   graph,
