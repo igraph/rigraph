@@ -86,6 +86,7 @@ Other structural.properties:
 \code{\link[=is_dag]{is_dag()}},
 \code{\link[=is_matching]{is_matching()}},
 \code{\link[=knn]{knn()}},
+\code{\link[=knnk]{knnk()}},
 \code{\link[=reciprocity]{reciprocity()}},
 \code{\link[=subcomponent]{subcomponent()}},
 \code{\link[=subgraph]{subgraph()}},
