@@ -39,6 +39,12 @@ igraph_sparse_weighted_adjacency:
   # Turning INOUT SPARSEMAT adjmatrix to IN SPARSEMAT adjmatrix
   PARAMS: OUT GRAPH graph, IN SPARSEMAT adjmatrix, ADJACENCY_MODE mode=DIRECTED, OUT EDGEWEIGHTS weights, LOOPS loops=ONCE
 
+igraph_triangular_lattice:
+    R:
+      GATTR:
+        name: Triangular lattice
+      GATTR-PARAM: dimvector, mutual
+
 igraph_circulant:
     R:
       GATTR:
