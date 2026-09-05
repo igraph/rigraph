@@ -50,6 +50,23 @@
       [1] FALSE
       
 
+# a named empty slot is not an ambiguous abbreviation
+
+    Code
+      migration_fixture_shadow("g", a = 1)
+    Condition
+      Error in `migration_fixture_shadow()`:
+      ! Argument `a` matches multiple arguments of `migration_fixture_shadow()`.
+
+# a named empty slot is not a forbidden prefix
+
+    Code
+      migration_fixture_prefix(1:2, 0.5, d = 3)
+    Condition
+      Error in `migration_fixture_prefix()`:
+      ! Argument `d` matches multiple formal arguments of `migration_fixture_prefix()`.
+      i Spell out the full argument name.
+
 # empty argument slot messages
 
     Code

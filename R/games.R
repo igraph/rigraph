@@ -886,7 +886,7 @@ sample_pa <- function(
   # BEGIN GENERATED ARG_HANDLE: sample_pa, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("o", "ou", "out", "out."))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("o", "ou", "out", "out."))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn sample_pa}.")
     # Pre-3.0.0 signature: sample_pa(n, power, m, out.dist, out.seq, out.pref, zero.appeal, directed, algorithm, start.graph)
     .old_signature <- function(out.dist, out.seq, out.pref, zero.appeal, directed, algorithm, start.graph, ...) {
@@ -1032,7 +1032,7 @@ pa <- function(
   # BEGIN GENERATED ARG_HANDLE: pa, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("o", "ou", "out", "out."))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("o", "ou", "out", "out."))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn pa}.")
     # Pre-3.0.0 signature: pa(n, power, m, out.dist, out.seq, out.pref, zero.appeal, directed, algorithm, start.graph)
     .old_signature <- function(out.dist, out.seq, out.pref, zero.appeal, directed, algorithm, start.graph, ...) {
@@ -1918,9 +1918,9 @@ sample_pa_age <- function(
   # BEGIN GENERATED ARG_HANDLE: sample_pa_age, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("a", "ag", "agi", "agin", "aging", "aging."))
+    .arg_forbidden <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::sys.call())[-1L])), base::c("a", "ag", "agi", "agin", "aging", "aging."))
     if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn sample_pa_age}.", i = "Spell out the full argument name."))
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "ag", "o", "ou", "out", "out.", "d", "z", "ze", "zer", "zero", "zero."))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("a", "ag", "o", "ou", "out", "out.", "d", "z", "ze", "zer", "zero", "zero."))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn sample_pa_age}.")
     # Pre-3.0.0 signature: sample_pa_age(n, pa.exp, aging.exp, m, aging.bin, out.dist, out.seq, out.pref, directed, zero.deg.appeal, zero.age.appeal, deg.coef, age.coef, time.window)
     .old_signature <- function(aging.bin, out.dist, out.seq, out.pref, directed, zero.deg.appeal, zero.age.appeal, deg.coef, age.coef, time.window, ...) {
@@ -2106,9 +2106,9 @@ pa_age <- function(
   # BEGIN GENERATED ARG_HANDLE: pa_age, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("a", "ag", "agi", "agin", "aging", "aging."))
+    .arg_forbidden <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::sys.call())[-1L])), base::c("a", "ag", "agi", "agin", "aging", "aging."))
     if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn pa_age}.", i = "Spell out the full argument name."))
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "ag", "o", "ou", "out", "out.", "d", "z", "ze", "zer", "zero", "zero."))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("a", "ag", "o", "ou", "out", "out.", "d", "z", "ze", "zer", "zero", "zero."))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn pa_age}.")
     # Pre-3.0.0 signature: pa_age(n, pa.exp, aging.exp, m, aging.bin, out.dist, out.seq, out.pref, directed, zero.deg.appeal, zero.age.appeal, deg.coef, age.coef, time.window)
     .old_signature <- function(aging.bin, out.dist, out.seq, out.pref, directed, zero.deg.appeal, zero.age.appeal, deg.coef, age.coef, time.window, ...) {
@@ -2233,7 +2233,7 @@ sample_traits_callaway <- function(
   # BEGIN GENERATED ARG_HANDLE: sample_traits_callaway, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("t", "ty", "typ", "type"))
+    .arg_forbidden <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::sys.call())[-1L])), base::c("t", "ty", "typ", "type"))
     if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn sample_traits_callaway}.", i = "Spell out the full argument name."))
     # Pre-3.0.0 signature: sample_traits_callaway(nodes, types, edge.per.step, type.dist, pref.matrix, directed)
     .old_signature <- function(edge.per.step, type.dist, pref.matrix, directed, ...) {
@@ -2317,7 +2317,7 @@ traits_callaway <- function(
   # BEGIN GENERATED ARG_HANDLE: traits_callaway, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("t", "ty", "typ", "type"))
+    .arg_forbidden <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::sys.call())[-1L])), base::c("t", "ty", "typ", "type"))
     if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn traits_callaway}.", i = "Spell out the full argument name."))
     # Pre-3.0.0 signature: traits_callaway(nodes, types, edge.per.step, type.dist, pref.matrix, directed)
     .old_signature <- function(edge.per.step, type.dist, pref.matrix, directed, ...) {
@@ -2390,7 +2390,7 @@ sample_traits <- function(
   # BEGIN GENERATED ARG_HANDLE: sample_traits, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("t", "ty", "typ", "type"))
+    .arg_forbidden <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::sys.call())[-1L])), base::c("t", "ty", "typ", "type"))
     if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn sample_traits}.", i = "Spell out the full argument name."))
     # Pre-3.0.0 signature: sample_traits(nodes, types, k, type.dist, pref.matrix, directed)
     .old_signature <- function(type.dist, pref.matrix, directed, ...) {
@@ -2468,7 +2468,7 @@ traits <- function(
   # BEGIN GENERATED ARG_HANDLE: traits, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("t", "ty", "typ", "type"))
+    .arg_forbidden <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::sys.call())[-1L])), base::c("t", "ty", "typ", "type"))
     if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn traits}.", i = "Spell out the full argument name."))
     # Pre-3.0.0 signature: traits(nodes, types, k, type.dist, pref.matrix, directed)
     .old_signature <- function(type.dist, pref.matrix, directed, ...) {
@@ -2752,7 +2752,7 @@ sample_pref <- function(
   # BEGIN GENERATED ARG_HANDLE: sample_pref, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("t", "ty", "typ", "type"))
+    .arg_forbidden <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::sys.call())[-1L])), base::c("t", "ty", "typ", "type"))
     if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn sample_pref}.", i = "Spell out the full argument name."))
     # Pre-3.0.0 signature: sample_pref(nodes, types, type.dist, fixed.sizes, pref.matrix, directed, loops)
     .old_signature <- function(type.dist, fixed.sizes, pref.matrix, directed, loops, ...) {
@@ -2845,7 +2845,7 @@ pref <- function(
   # BEGIN GENERATED ARG_HANDLE: pref, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("t", "ty", "typ", "type"))
+    .arg_forbidden <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::sys.call())[-1L])), base::c("t", "ty", "typ", "type"))
     if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn pref}.", i = "Spell out the full argument name."))
     # Pre-3.0.0 signature: pref(nodes, types, type.dist, fixed.sizes, pref.matrix, directed, loops)
     .old_signature <- function(type.dist, fixed.sizes, pref.matrix, directed, loops, ...) {
@@ -2920,7 +2920,7 @@ sample_asym_pref <- function(
   # BEGIN GENERATED ARG_HANDLE: sample_asym_pref, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("t", "ty", "typ", "type"))
+    .arg_forbidden <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::sys.call())[-1L])), base::c("t", "ty", "typ", "type"))
     if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn sample_asym_pref}.", i = "Spell out the full argument name."))
     # Pre-3.0.0 signature: sample_asym_pref(nodes, types, type.dist.matrix, pref.matrix, loops)
     .old_signature <- function(type.dist.matrix, pref.matrix, loops, ...) {
@@ -3013,7 +3013,7 @@ asym_pref <- function(
   # BEGIN GENERATED ARG_HANDLE: asym_pref, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("t", "ty", "typ", "type"))
+    .arg_forbidden <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::sys.call())[-1L])), base::c("t", "ty", "typ", "type"))
     if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn asym_pref}.", i = "Spell out the full argument name."))
     # Pre-3.0.0 signature: asym_pref(nodes, types, type.dist.matrix, pref.matrix, loops)
     .old_signature <- function(type.dist.matrix, pref.matrix, loops, ...) {

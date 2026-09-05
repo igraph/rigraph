@@ -781,9 +781,9 @@ make_clusters <- function(
   # BEGIN GENERATED ARG_HANDLE: make_clusters, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("m", "me"))
+    .arg_forbidden <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::sys.call())[-1L])), base::c("m", "me"))
     if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn make_clusters}.", i = "Spell out the full argument name."))
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("m"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn make_clusters}.")
     # Pre-3.0.0 signature: make_clusters(graph, membership, algorithm, merges, modularity)
     .old_signature <- function(algorithm, merges, modularity, ...) {
@@ -1581,9 +1581,9 @@ cluster_spinglass <- function(
   # BEGIN GENERATED ARG_HANDLE: cluster_spinglass, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("g"))
+    .arg_forbidden <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::sys.call())[-1L])), base::c("g"))
     if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn cluster_spinglass}.", i = "Spell out the full argument name."))
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("s", "st", "g", "ga", "gam", "gamm"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("s", "st", "g", "ga", "gam", "gamm"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn cluster_spinglass}.")
     # Pre-3.0.0 signature: cluster_spinglass(graph, weights, vertex, spins, parupdate, start.temp, stop.temp, cool.fact, update.rule, gamma, implementation, gamma.minus)
     .old_signature <- function(weights, vertex, spins, parupdate, start.temp, stop.temp, cool.fact, update.rule, gamma, implementation, gamma.minus, ...) {
@@ -2025,7 +2025,7 @@ cluster_walktrap <- function(
   # BEGIN GENERATED ARG_HANDLE: cluster_walktrap, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m", "me"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("m", "me"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn cluster_walktrap}.")
     # Pre-3.0.0 signature: cluster_walktrap(graph, weights, steps, merges, modularity, membership)
     .old_signature <- function(weights, steps, merges, modularity, membership, ...) {
@@ -2204,7 +2204,7 @@ cluster_edge_betweenness <- function(
   # BEGIN GENERATED ARG_HANDLE: cluster_edge_betweenness, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m", "me"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("m", "me"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn cluster_edge_betweenness}.")
     # Pre-3.0.0 signature: cluster_edge_betweenness(graph, weights, directed, edge.betweenness, merges, bridges, modularity, membership)
     .old_signature <- function(weights, directed, edge.betweenness, merges, bridges, modularity, membership, ...) {
@@ -2347,7 +2347,7 @@ cluster_fast_greedy <- function(
   # BEGIN GENERATED ARG_HANDLE: cluster_fast_greedy, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m", "me"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("m", "me"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn cluster_fast_greedy}.")
     # Pre-3.0.0 signature: cluster_fast_greedy(graph, merges, modularity, membership, weights)
     .old_signature <- function(merges, modularity, membership, weights, ...) {
