@@ -18,8 +18,7 @@ graph.bfs(
   dist = FALSE,
   callback = NULL,
   extra = NULL,
-  rho = parent.frame(),
-  neimode
+  rho = parent.frame()
 )
 }
 \arguments{
@@ -69,9 +68,6 @@ Default: \code{NULL}.}
 
 \item{rho}{The environment in which the callback function is evaluated.
 The default \code{NULL} uses the caller's environment.}
-
-\item{neimode}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This argument is deprecated
-from igraph 1.3.0; use \code{mode} instead.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
