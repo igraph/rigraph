@@ -285,7 +285,7 @@ local_igraph_options <- function(..., .in = parent.frame()) {
 
 #' @importFrom pkgconfig set_config get_config
 get_all_options <- function() {
-  res <- lapply(names(.igraph.pars), function(n) {
+  res <- lapply(names(.igraph.pars), \(n) {
     nn <- paste0("igraph::", n)
     get_config(nn, fallback = .igraph.pars[[n]])
   })

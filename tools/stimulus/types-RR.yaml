@@ -431,8 +431,8 @@ CLOSURE:
                   rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
                 }
               },
-              error = function(e) e,
-              interrupt = function(e) e
+              error = \(e) e,
+              interrupt = \(e) e
             )
           }
         } else {
@@ -460,7 +460,7 @@ ISOMORPHISM_FUNC:
     HEADER: ~
 
 VERTEXSET_LIST:
-    CALL: if (!is.null(%I%)) lapply(%I%, function(.x) .x - 1)
+    CALL: if (!is.null(%I%)) lapply(%I%, \(.x) .x - 1)
     INCONV:
         IN: |-
             if (!is.null(%I%) && !is.list(%I%)) {
@@ -476,7 +476,7 @@ VERTEXSET_LIST:
             }
 
 EDGESET_LIST:
-    CALL: lapply(%I%, function(.x) .x - 1)
+    CALL: lapply(%I%, \(.x) .x - 1)
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {
@@ -516,7 +516,7 @@ BLISSSH:
 BLISSINFO: {}
 
 ADJLIST:
-    INCONV: '%I% <- lapply(%I%, function(x) as.numeric(x) - 1)'
+    INCONV: '%I% <- lapply(%I%, \(x) as.numeric(x) - 1)'
 
 COMMCMP:
     DEFAULT:
@@ -743,7 +743,7 @@ GRAPH_PTR_LIST:
         if (!is.list(%I%)) {
           cli::cli_abort("{.arg %I%} must be a list of igraph objects")
         }
-        %I% <- lapply(%I%, function(g) {
+        %I% <- lapply(%I%, \(g) {
           if (!inherits(g, "igraph")) {
             cli::cli_abort("{.arg %I%} must be a list of igraph objects")
           }
@@ -755,7 +755,7 @@ MATRIX_LIST:
         if (!is.list(%I%)) {
           cli::cli_abort("{.arg %I%} must be a list of matrices")
         }
-        %I% <- lapply(%I%, function(m) {
+        %I% <- lapply(%I%, \(m) {
           if (!is.matrix(m)) {
             cli::cli_abort("{.arg %I%} must be a list of matrices")
           }

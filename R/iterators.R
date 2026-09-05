@@ -806,7 +806,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 
     res <- lapply(args, rlang::eval_tidy, data = data_mask)
 
-    res <- lapply(res, function(ii) {
+    res <- lapply(res, \(ii) {
       if (is.null(ii)) {
         return(NULL)
       }
@@ -1156,7 +1156,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 
     res <- lapply(args, rlang::eval_tidy, data = data_mask)
 
-    res <- lapply(res, function(ii) {
+    res <- lapply(res, \(ii) {
       if (is.null(ii)) {
         return(NULL)
       }
@@ -1921,7 +1921,7 @@ parse_op_args <- function(..., what, is_fun, as_fun, check_graph = TRUE) {
     drop_null()
 
   addresses <- graphs |>
-    sapply(function(x) x %&&% address(x)) |>
+    sapply(\(x) x %&&% address(x)) |>
     unique()
 
   if (check_graph && length(addresses) >= 2) {
@@ -1965,7 +1965,7 @@ create_op_result <- function(parsed, result, class, args) {
   ## c() drops names for zero length vectors. Why???
   if (
     !length(result) &&
-      any(sapply(args, function(x) !is.null(names(x))))
+      any(sapply(args, \(x) !is.null(names(x))))
   ) {
     names(result) <- character()
   }

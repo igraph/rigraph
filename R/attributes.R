@@ -1319,7 +1319,7 @@ igraph.i.attribute.combination <- function(comb, allow_rename = FALSE) {
   }
   comb <- as.list(comb)
   if (
-    !all(sapply(comb, function(x) {
+    !all(sapply(comb, \(x) {
       is.function(x) || (is.character(x) && length(x) == 1)
     }))
   ) {
@@ -1356,7 +1356,7 @@ igraph.i.attribute.combination <- function(comb, allow_rename = FALSE) {
     known_names <- c(known_names, "rename")
     known_codes <- c(known_codes, NA_integer_)
   }
-  comb <- lapply(comb, function(x) {
+  comb <- lapply(comb, \(x) {
     if (!is.character(x)) {
       x
     } else {

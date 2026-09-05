@@ -182,7 +182,7 @@ combine.attrs <- function(
 
   attr <- list()
   for (name in an) {
-    w <- which(sapply(alist, function(x) name %in% x))
+    w <- which(sapply(alist, \(x) name %in% x))
     this_comb <- resolve_comb(name)
 
     if (identical(this_comb, "rename")) {
@@ -196,7 +196,7 @@ combine.attrs <- function(
     } else if (identical(this_comb, 0) || identical(this_comb, 0L)) {
       # ignore: drop the attribute
     } else {
-      vals <- lapply(w, function(w2) getval(w2, name))
+      vals <- lapply(w, \(w2) getval(w2, name))
       attr[[name]] <- apply_attr_combiner(this_comb, vals, type)
     }
   }
@@ -212,7 +212,7 @@ rename_attr_if_needed <- function(name, w, getval) {
   if (length(w) == 1) {
     stats::setNames(list(getval(w, name)), name)
   } else {
-    out <- lapply(w, function(w2) getval(w2, name))
+    out <- lapply(w, \(w2) getval(w2, name))
     names(out) <- paste(name, w, sep = "_")
     out
   }
@@ -224,7 +224,7 @@ apply_attr_combiner <- function(comb, vals, type) {
     return(apply_one_combiner(comb, x))
   }
   m <- do.call(cbind, vals)
-  out <- lapply(seq_len(nrow(m)), function(i) {
+  out <- lapply(seq_len(nrow(m)), \(i) {
     x <- m[i, ]
     x <- x[!is.na(x)]
     apply_one_combiner(comb, x)
@@ -317,7 +317,7 @@ disjoint_union <- function(
 
   graphs <- unlist(
     recursive = FALSE,
-    lapply(list(...), function(l) {
+    lapply(list(...), \(l) {
       if (is_igraph(l)) list(l) else l
     })
   )
@@ -412,7 +412,7 @@ disjoint_union <- function(
 ) {
   graphs <- unlist(
     recursive = FALSE,
-    lapply(list(...), function(l) {
+    lapply(list(...), \(l) {
       if (is_igraph(l)) list(l) else l
     })
   )
@@ -451,13 +451,13 @@ disjoint_union <- function(
     allnames <- lapply(graphs, vertex_attr, "name")
     if (keep.all.vertices) {
       uninames <- unique(unlist(allnames))
-      newgraphs <- lapply(graphs, function(g) {
+      newgraphs <- lapply(graphs, \(g) {
         g <- g + setdiff(uninames, V(g)$name)
         permute(g, match(V(g)$name, uninames))
       })
     } else {
       uninames <- Reduce(intersect, allnames)
-      newgraphs <- lapply(graphs, function(g) {
+      newgraphs <- lapply(graphs, \(g) {
         g <- g - setdiff(V(g)$name, uninames)
         permute(g, match(V(g)$name, uninames))
       })
@@ -499,7 +499,7 @@ disjoint_union <- function(
   } else {
     if (!keep.all.vertices) {
       minsize <- min(sapply(graphs, vcount))
-      graphs <- lapply(graphs, function(g) {
+      graphs <- lapply(graphs, \(g) {
         vc <- vcount(g)
         if (vc > minsize) {
           g <- g - (minsize + 1):vc

@@ -421,7 +421,7 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
         i <- as_igraph_vs(x, i)
         j <- as_igraph_vs(x, j)
         ee <- incident_edges(x, i, mode = if (directed) "out" else "all")
-        lapply(seq_along(i), function(yy) {
+        lapply(seq_along(i), \(yy) {
           from <- i[yy]
           el <- ends(x, ee[[yy]], names = FALSE)
           other <- ifelse(el[, 1] == from, el[, 2], el[, 1])

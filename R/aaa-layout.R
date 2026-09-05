@@ -304,7 +304,7 @@ layout_merge_dla_impl <- function(
   if (!is.list(graphs)) {
     cli::cli_abort("{.arg graphs} must be a list of igraph objects")
   }
-  graphs <- lapply(graphs, function(g) {
+  graphs <- lapply(graphs, \(g) {
     if (!inherits(g, "igraph")) {
       cli::cli_abort("{.arg graphs} must be a list of igraph objects")
     }
@@ -313,7 +313,7 @@ layout_merge_dla_impl <- function(
   if (!is.list(coords)) {
     cli::cli_abort("{.arg coords} must be a list of matrices")
   }
-  coords <- lapply(coords, function(m) {
+  coords <- lapply(coords, \(m) {
     if (!is.matrix(m)) {
       cli::cli_abort("{.arg coords} must be a list of matrices")
     }

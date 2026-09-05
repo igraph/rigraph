@@ -110,12 +110,12 @@ quantile.sir <- function(x, comp = c("NI", "NS", "NR"), prob, ...) {
   sir <- x
   comp <- toupper(igraph_match_arg(comp))
   times <- unlist(sapply(sir, "[[", "times"))
-  big.N <- unlist(sapply(sir, function(x) {
+  big.N <- unlist(sapply(sir, \(x) {
     x[[comp]]
   }))
   time.bin <- cut(times, time_bins(sir, middle = FALSE), include.lowest = TRUE)
-  res <- lapply(prob, function(pp) {
-    tapply(big.N, time.bin, function(x) {
+  res <- lapply(prob, \(pp) {
+    tapply(big.N, time.bin, \(x) {
       quantile(x, prob = pp)
     })
   })
@@ -215,8 +215,8 @@ plot.sir <- function(
   }
   quantile_color <- rep(quantile_color, length.out = length(quantiles))
 
-  xlim <- xlim %||% c(0, max(sapply(sir, function(x) max(x$times))))
-  ylim <- ylim %||% c(0, max(sapply(sir, function(x) max(x[[comp]]))))
+  xlim <- xlim %||% c(0, max(sapply(sir, \(x) max(x$times))))
+  ylim <- ylim %||% c(0, max(sapply(sir, \(x) max(x[[comp]]))))
 
   ## Generate the plot, first with individual curves, and then
   ## adding median and quantile curves.
@@ -244,7 +244,7 @@ plot.sir <- function(
     ylab = ylab,
     ...
   )
-  lapply(seq_along(sir), function(i) {
+  lapply(seq_along(sir), \(i) {
     lines(sir[[i]]$times, sir[[i]][[comp]], col = color[1])
   })
 

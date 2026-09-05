@@ -96,7 +96,7 @@ graphlets_project_impl <- function(
     R_igraph_graphlets_project,
     graph,
     weights,
-    if (!is.null(cliques)) lapply(cliques, function(.x) .x - 1),
+    if (!is.null(cliques)) lapply(cliques, \(.x) .x - 1),
     Muc,
     startMu,
     niter

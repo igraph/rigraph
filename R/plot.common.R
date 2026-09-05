@@ -640,7 +640,7 @@ i.get.arrow.mode <- function(graph, arrow.mode = NULL) {
   if (is.character(arrow.mode)) {
     arrow.mode <- map_dbl(
       arrow.mode,
-      function(x) {
+      \(x) {
         switch(x, "<" = 1, "<-" = 1, ">" = 2, "->" = 2, "<>" = 3, "<->" = 3, 0)
       }
     )
@@ -772,7 +772,7 @@ curve_multiple <- function(
   # END GENERATED ARG_HANDLE
 
   el <- apply(as_edgelist(graph, names = FALSE), 1, paste, collapse = ":")
-  ave(rep(NA, length(el)), el, FUN = function(x) {
+  ave(rep(NA, length(el)), el, FUN = \(x) {
     if (length(x) == 1) {
       return(0)
     } else {

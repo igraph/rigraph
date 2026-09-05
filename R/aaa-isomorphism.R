@@ -362,7 +362,7 @@ subisomorphic_lad_impl <- function(
     R_igraph_subisomorphic_lad,
     pattern,
     target,
-    if (!is.null(domains)) lapply(domains, function(.x) .x - 1),
+    if (!is.null(domains)) lapply(domains, \(.x) .x - 1),
     induced,
     time_limit
   )
@@ -572,8 +572,8 @@ get_isomorphisms_vf2_callback_closure_impl <- function(
             rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
           }
         },
-        error = function(e) e,
-        interrupt = function(e) e
+        error = \(e) e,
+        interrupt = \(e) e
       )
     }
   } else {
@@ -730,8 +730,8 @@ get_subisomorphisms_vf2_callback_closure_impl <- function(
             rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
           }
         },
-        error = function(e) e,
-        interrupt = function(e) e
+        error = \(e) e,
+        interrupt = \(e) e
       )
     }
   } else {

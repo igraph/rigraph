@@ -1543,7 +1543,7 @@ local_scan_neighborhood_ecount_impl <- function(
     R_igraph_local_scan_neighborhood_ecount,
     graph,
     weights,
-    if (!is.null(neighborhoods)) lapply(neighborhoods, function(.x) .x - 1)
+    if (!is.null(neighborhoods)) lapply(neighborhoods, \(.x) .x - 1)
   )
 
   res
@@ -1577,7 +1577,7 @@ local_scan_subset_ecount_impl <- function(
     R_igraph_local_scan_subset_ecount,
     graph,
     weights,
-    if (!is.null(subsets)) lapply(subsets, function(.x) .x - 1)
+    if (!is.null(subsets)) lapply(subsets, \(.x) .x - 1)
   )
 
   res
