@@ -61,9 +61,9 @@ getIgraphOpt <- function(x, default = NULL) {
   "print.edge.attributes" = FALSE,
   "print.graph.attributes" = FALSE,
   "verbose" = FALSE,
-  "graph.attr.comb" = "rename",
-  "vertex.attr.comb" = list(name = "concat", "ignore"),
-  "edge.attr.comb" = list(weight = "sum", name = "concat", "ignore"),
+  "graph_attr_combine" = "rename",
+  "vertex_attr_combine" = list(name = "concat", "ignore"),
+  "edge_attr_combine" = list(weight = "sum", name = "concat", "ignore"),
   "sparsematrices" = TRUE,
   "add.params" = TRUE,
   "add.vertex.names" = TRUE,
@@ -75,6 +75,39 @@ getIgraphOpt <- function(x, default = NULL) {
   "print.id" = TRUE,
   "print.style" = "cli"
 )
+
+# Option keys that were renamed to snake_case. Reading or setting an option by
+# its old dotted name still works, but maps to the canonical key and emits a
+# soft-deprecation.
+.igraph.pars.aliases <- c(
+  "graph.attr.comb" = "graph_attr_combine",
+  "vertex.attr.comb" = "vertex_attr_combine",
+  "edge.attr.comb" = "edge_attr_combine"
+)
+
+# Map any deprecated option names in `x` to their canonical keys, warning once
+# per deprecated name encountered.
+#
+# `user_env` must be the environment of whoever spelled the option name -- it
+# is what `deprecate_soft()` consults to decide whether the deprecation is
+# worth reporting. Its default would resolve to a frame inside igraph, which
+# marks every alias use as indirect and emits nothing, so the public entry
+# points pass their own caller down.
+igraph_normalize_par_name <- function(x, user_env = rlang::caller_env(2)) {
+  for (i in seq_along(x)) {
+    new <- unname(.igraph.pars.aliases[x[i]])
+    if (!is.na(new)) {
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        I(paste0("The igraph option `", x[i], "`")),
+        I(paste0("the `", new, "` option")),
+        user_env = user_env
+      )
+      x[i] <- new
+    }
+  }
+  x
+}
 
 igraph.pars.set.verbose <- function(verbose) {
   if (is.logical(verbose)) {
@@ -139,12 +172,13 @@ igraph.pars.callbacks <- list("verbose" = igraph.pars.set.verbose)
 #'       Possible values are \sQuote{auto} (the default), \sQuote{phylo}, \sQuote{hclust} and \sQuote{dendrogram}.
 #'       See [plot_dendrogram()] for details.
 #'     }
-#'     \item{edge.attr.comb}{
+#'     \item{edge_attr_combine}{
 #'       Specifies what to do with the edge attributes if the graph is modified.
 #'       The default value is `list(weight="sum", name="concat", "ignore")`.
-#'       See [attribute.combination()] for details on this.
+#'       See [attribute.combination()] for details on this. The former dotted
+#'       name `edge.attr.comb` still works but is soft-deprecated.
 #'     }
-#'     \item{graph.attr.comb}{
+#'     \item{graph_attr_combine}{
 #'       Specifies what to do with the graph attributes when graphs are
 #'       combined, e.g. via [union()], [intersection()], [disjoint_union()]
 #'       or [compose()]. The default value is `"rename"`, which resolves any
@@ -188,10 +222,11 @@ igraph.pars.callbacks <- list("verbose" = igraph.pars.set.verbose)
 #'       Logical constant, whether igraph functions should talk more than minimal.
 #'       E.g. if `TRUE` then some functions will use progress bars while computing. Defaults to `FALSE`.
 #'     }
-#'     \item{vertex.attr.comb}{
+#'     \item{vertex_attr_combine}{
 #'       Specifies what to do with the vertex attributes if the graph is modified.
 #'       The default value is `list(name="concat", "ignore")`.
-#'       See [attribute.combination()] for details on this.
+#'       See [attribute.combination()] for details on this. The former dotted
+#'       name `vertex.attr.comb` still works but is soft-deprecated.
 #'     }
 #'   }
 #'
@@ -229,10 +264,14 @@ igraph.pars.callbacks <- list("verbose" = igraph.pars.set.verbose)
 #' @family igraph options
 #' @importFrom pkgconfig set_config_in get_config
 igraph_options <- function(...) {
-  igraph_i_options(...)
+  igraph_i_options(..., .user_env = parent.frame())
 }
 
-igraph_i_options <- function(..., .in = parent.frame()) {
+igraph_i_options <- function(
+  ...,
+  .in = parent.frame(),
+  .user_env = parent.frame()
+) {
   if (...length() == 0) {
     return(get_all_options())
   }
@@ -243,7 +282,7 @@ igraph_i_options <- function(..., .in = parent.frame()) {
     arg <- temp[[1]]
 
     if (mode(arg) == "character") {
-      return(.igraph.pars[arg])
+      return(.igraph.pars[igraph_normalize_par_name(arg, .user_env)])
     }
 
     if (mode(arg) != "list") {
@@ -262,6 +301,8 @@ igraph_i_options <- function(..., .in = parent.frame()) {
   if (is.null(n)) {
     cli::cli_abort("options must be given by name.")
   }
+  names(temp) <- igraph_normalize_par_name(n, .user_env)
+  n <- names(temp)
   cb <- intersect(names(igraph.pars.callbacks), n)
   for (cn in cb) {
     temp[[cn]] <- igraph.pars.callbacks[[cn]](temp[[cn]])
@@ -337,6 +378,7 @@ igraph_opt <- function(
   }
   # END GENERATED ARG_HANDLE
 
+  x <- igraph_normalize_par_name(x, parent.frame())
   if (missing(default)) {
     get_config(paste0("igraph::", x), .igraph.pars[[x]])
   } else {

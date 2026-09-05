@@ -417,14 +417,14 @@ cutat <- function(communities, no, steps) {
 contract.vertices <- function(
   graph,
   mapping,
-  vertex.attr.comb = igraph_opt("vertex.attr.comb")
+  vertex.attr.comb = igraph_opt("vertex_attr_combine")
 ) {
   # nocov start
   lifecycle::deprecate_warn("2.0.0", "contract.vertices()", "contract()")
   contract(
     graph = graph,
     mapping = mapping,
-    vertex.attr.comb = vertex.attr.comb
+    vertex_attr_combine = vertex.attr.comb
   )
 } # nocov end
 
@@ -3620,15 +3620,16 @@ communities <- groups.communities
 #'
 #' The attributes of the graph are kept. Graph and edge attributes are
 #' unchanged, vertex attributes are combined, according to the
-#' `vertex.attr.comb` parameter.
+#' `vertex_attr_combine` parameter.
 #'
 #' @param graph The input graph, it can be directed or undirected.
 #' @param mapping A numeric vector that specifies the mapping. Its elements
 #'   correspond to the vertices, and for each element the ID in the new graph is
 #'   given.
-#' @param vertex.attr.comb Specifies how to combine the vertex attributes in
+#' @inheritParams rlang::args_dots_empty
+#' @param vertex_attr_combine Specifies how to combine the vertex attributes in
 #'   the new graph. Please see [attribute.combination()] for details. The
-#'   default `NULL` uses the `vertex.attr.comb` igraph option.
+#'   default `NULL` uses the `vertex_attr_combine` igraph option.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
@@ -3640,7 +3641,7 @@ communities <- groups.communities
 #' E(g)$weight <- runif(ecount(g))
 #'
 #' g2 <- contract(g, rep(1:5, each = 2),
-#'   vertex.attr.comb = toString
+#'   vertex_attr_combine = toString
 #' )
 #'
 #' ## graph and edge attributes are kept, vertex attributes are
@@ -3652,16 +3653,54 @@ communities <- groups.communities
 contract <- function(
   graph,
   mapping,
-  vertex.attr.comb = NULL
+  ...,
+  vertex_attr_combine = NULL
 ) {
-  if (is.null(vertex.attr.comb)) {
-    vertex.attr.comb <- igraph_opt("vertex.attr.comb")
+  # BEGIN GENERATED ARG_HANDLE: contract, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("v", "ve", "ver", "vert", "verte", "vertex"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn contract}.")
+    # Pre-3.0.0 signature: contract(graph, mapping, vertex.attr.comb)
+    .old_signature <- function(vertex.attr.comb, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn contract}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn contract}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(vertex.attr.comb)) base::list(vertex_attr_combine = vertex.attr.comb)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(vertex_attr_combine)) "vertex_attr_combine"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn contract} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `contract()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  contract(", base::paste(base::c("graph", "mapping", base::c(vertex_attr_combine = "vertex.attr.comb")[.arg_names]), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    contract(", base::paste(base::c("graph", "mapping", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
+  if (is.null(vertex_attr_combine)) {
+    vertex_attr_combine <- igraph_opt("vertex_attr_combine")
   }
 
   contract_vertices_impl(
     graph = graph,
     mapping = mapping,
-    vertex_attr_comb = vertex.attr.comb
+    vertex_attr_comb = vertex_attr_combine
   )
 }
 
