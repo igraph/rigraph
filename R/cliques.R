@@ -475,12 +475,12 @@ clique_num <- function(graph) {
 #'
 #' @param graph The input graph, directed graphs will be considered as
 #'   undirected ones, multiple edges and loops are ignored.
-#' @param min.weight Numeric constant, lower limit on the weight of the cliques to find.
+#' @param min_weight Numeric constant, lower limit on the weight of the cliques to find.
 #'   `NULL` means no limit, i.e. it is the same as 0.
-#' @param max.weight Numeric constant, upper limit on the weight of the cliques to find.
+#' @param max_weight Numeric constant, upper limit on the weight of the cliques to find.
 #'   `NULL` means no limit.
 #' @inheritParams rlang::args_dots_empty
-#' @param vertex.weights Vertex weight vector. If the graph has a `weight`
+#' @param vertex_weights Vertex weight vector. If the graph has a `weight`
 #'   vertex attribute, then this is used by default. If the graph does not have a
 #'   `weight` vertex attribute and this argument is `NULL`, then every
 #'   vertex is assumed to have a weight of 1. Note that the current implementation
@@ -510,15 +510,15 @@ clique_num <- function(graph) {
 weighted_cliques <- function(
   graph,
   ...,
-  vertex.weights = NULL,
-  min.weight = 0,
-  max.weight = 0,
+  vertex_weights = NULL,
+  min_weight = 0,
+  max_weight = 0,
   maximal = FALSE
 ) {
   # BEGIN GENERATED ARG_HANDLE: weighted_cliques, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m", "ma", "max"))
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("v", "ve", "ver", "vert", "verte", "vertex", "m", "mi", "min", "ma", "max"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn weighted_cliques}.")
     # Pre-3.0.0 signature: weighted_cliques(graph, vertex.weights, min.weight, max.weight, maximal)
     .old_signature <- function(vertex.weights, min.weight, max.weight, maximal, ...) {
@@ -529,9 +529,9 @@ weighted_cliques <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn weighted_cliques}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(vertex.weights)) base::list(vertex.weights = vertex.weights),
-        if (!base::missing(min.weight)) base::list(min.weight = min.weight),
-        if (!base::missing(max.weight)) base::list(max.weight = max.weight),
+        if (!base::missing(vertex.weights)) base::list(vertex_weights = vertex.weights),
+        if (!base::missing(min.weight)) base::list(min_weight = min.weight),
+        if (!base::missing(max.weight)) base::list(max_weight = max.weight),
         if (!base::missing(maximal)) base::list(maximal = maximal)
       )
     }
@@ -539,9 +539,9 @@ weighted_cliques <- function(
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(vertex.weights)) "vertex.weights",
-        if (!base::missing(min.weight)) "min.weight",
-        if (!base::missing(max.weight)) "max.weight",
+        if (!base::missing(vertex_weights)) "vertex_weights",
+        if (!base::missing(min_weight)) "min_weight",
+        if (!base::missing(max_weight)) "max_weight",
         if (!base::missing(maximal)) "maximal"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn weighted_cliques} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
@@ -550,7 +550,7 @@ weighted_cliques <- function(
         "3.0.0",
         what = base::I("Calling `weighted_cliques()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  weighted_cliques(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  weighted_cliques(", base::paste(base::c("graph", base::c(vertex_weights = "vertex.weights", min_weight = "min.weight", max_weight = "max.weight", maximal = "maximal")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    weighted_cliques(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -560,9 +560,9 @@ weighted_cliques <- function(
 
   weighted_cliques_impl(
     graph = graph,
-    vertex_weights = vertex.weights,
-    min_weight = min.weight,
-    max_weight = max.weight,
+    vertex_weights = vertex_weights,
+    min_weight = min_weight,
+    max_weight = max_weight,
     maximal = maximal
   )
 }
@@ -572,11 +572,13 @@ weighted_cliques <- function(
 largest_weighted_cliques <- function(
   graph,
   ...,
-  vertex.weights = NULL
+  vertex_weights = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: largest_weighted_cliques, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("v", "ve", "ver", "vert", "verte", "vertex"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn largest_weighted_cliques}.")
     # Pre-3.0.0 signature: largest_weighted_cliques(graph, vertex.weights)
     .old_signature <- function(vertex.weights, ...) {
       if (...length() > 0L) {
@@ -586,14 +588,14 @@ largest_weighted_cliques <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn largest_weighted_cliques}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(vertex.weights)) base::list(vertex.weights = vertex.weights)
+        if (!base::missing(vertex.weights)) base::list(vertex_weights = vertex.weights)
       )
     }
     .arg_handle <- .old_signature(...)
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(vertex.weights)) "vertex.weights"
+        if (!base::missing(vertex_weights)) "vertex_weights"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn largest_weighted_cliques} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -601,7 +603,7 @@ largest_weighted_cliques <- function(
         "3.0.0",
         what = base::I("Calling `largest_weighted_cliques()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  largest_weighted_cliques(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  largest_weighted_cliques(", base::paste(base::c("graph", base::c(vertex_weights = "vertex.weights")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    largest_weighted_cliques(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -611,7 +613,7 @@ largest_weighted_cliques <- function(
 
   largest_weighted_cliques_impl(
     graph = graph,
-    vertex_weights = vertex.weights
+    vertex_weights = vertex_weights
   )
 }
 #' @inheritParams rlang::args_dots_empty
@@ -620,11 +622,13 @@ largest_weighted_cliques <- function(
 weighted_clique_num <- function(
   graph,
   ...,
-  vertex.weights = NULL
+  vertex_weights = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: weighted_clique_num, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("v", "ve", "ver", "vert", "verte", "vertex"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn weighted_clique_num}.")
     # Pre-3.0.0 signature: weighted_clique_num(graph, vertex.weights)
     .old_signature <- function(vertex.weights, ...) {
       if (...length() > 0L) {
@@ -634,14 +638,14 @@ weighted_clique_num <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn weighted_clique_num}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(vertex.weights)) base::list(vertex.weights = vertex.weights)
+        if (!base::missing(vertex.weights)) base::list(vertex_weights = vertex.weights)
       )
     }
     .arg_handle <- .old_signature(...)
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(vertex.weights)) "vertex.weights"
+        if (!base::missing(vertex_weights)) "vertex_weights"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn weighted_clique_num} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -649,7 +653,7 @@ weighted_clique_num <- function(
         "3.0.0",
         what = base::I("Calling `weighted_clique_num()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  weighted_clique_num(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  weighted_clique_num(", base::paste(base::c("graph", base::c(vertex_weights = "vertex.weights")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    weighted_clique_num(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -659,7 +663,7 @@ weighted_clique_num <- function(
 
   weighted_clique_number_impl(
     graph = graph,
-    vertex_weights = vertex.weights
+    vertex_weights = vertex_weights
   )
 }
 
