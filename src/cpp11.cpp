@@ -564,6 +564,7 @@ extern SEXP Rx_igraph_layout_kamada_kawai_3d(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP,
 extern SEXP Rx_igraph_layout_lgl(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_layout_merge_dla(SEXP, SEXP);
 extern SEXP Rx_igraph_layout_reingold_tilford(SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP Rx_igraph_lazy_names(SEXP, SEXP);
 extern SEXP Rx_igraph_make_weak_ref(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_maximal_cliques(SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_maximal_cliques_count(SEXP, SEXP, SEXP, SEXP);
@@ -1145,6 +1146,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rx_igraph_layout_lgl",                                    (DL_FUNC) &Rx_igraph_layout_lgl,                                     8},
     {"Rx_igraph_layout_merge_dla",                              (DL_FUNC) &Rx_igraph_layout_merge_dla,                               2},
     {"Rx_igraph_layout_reingold_tilford",                       (DL_FUNC) &Rx_igraph_layout_reingold_tilford,                        5},
+    {"Rx_igraph_lazy_names",                                    (DL_FUNC) &Rx_igraph_lazy_names,                                     2},
     {"Rx_igraph_make_weak_ref",                                 (DL_FUNC) &Rx_igraph_make_weak_ref,                                  3},
     {"Rx_igraph_maximal_cliques",                               (DL_FUNC) &Rx_igraph_maximal_cliques,                                4},
     {"Rx_igraph_maximal_cliques_count",                         (DL_FUNC) &Rx_igraph_maximal_cliques_count,                          4},
