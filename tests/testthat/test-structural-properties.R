@@ -211,8 +211,6 @@ test_that("BFS callback does not blow up when an error is raised within the call
 })
 
 test_that("BFS callback does not blow up when another igraph function is raised within the callback", {
-  skip("nested igraph call handling not implemented yet")
-
   callback <- function(graph, data, extra) {
     neighbors(graph, 1)
     FALSE
