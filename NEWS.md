@@ -1,5 +1,48 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.3.9035
+
+## Bug fixes
+
+### ci
+
+- Align the workflow kit with `cynkratemplate` (#2892).
+
+### ci
+
+- Filter OS-restricted packages out of the revdep plan (#2889).
+
+### ci
+
+- Backport kit fixes from `rigraph`, `duckdb-r` and `dm`.
+
+## Features
+
+### ci
+
+- Make the revdep driver log's timing record durable and visible (#2891).
+
+## Chore
+
+### ci
+
+- Retire the pair engine from the revdepx core (#2885).
+
+- Re-run the reverse-dependency check (most, depth 2) (#2883).
+
+- Breaking change: rm unused argument in `layout_with_mds()` (#2730, #2869).
+
+- Some Jarl fixes (#2874).
+
+## Documentation
+
+- Rm deprecations vignette as it is not useful (#2848, #2873).
+
+## Breaking changes
+
+- Breaking change: rm unused argument in `layout_with_mds()` (#2730, #2869).
+
+
 # igraph 2.3.3.9034
 
 ## Bug fixes
