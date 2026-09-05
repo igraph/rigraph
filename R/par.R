@@ -24,11 +24,11 @@ igraph.options <- function(...) {
 #' @inheritParams igraph_opt
 #' @keywords internal
 #' @export
-getIgraphOpt <- function(x, default = NULL) {
+getIgraphOpt <- function(x, default) {
   # nocov start
   lifecycle::deprecate_warn("2.0.0", "getIgraphOpt()", "igraph_opt()")
 
-  if (missing(default)) {
+  if (is_missing(default)) {
     get_config(paste0("igraph::", x), .igraph.pars[[x]])
   } else {
     get_config(paste0("igraph::", x), default)
@@ -300,7 +300,7 @@ get_all_options <- function() {
 igraph_opt <- function(
   x,
   ...,
-  default = NULL
+  default
 ) {
   # BEGIN GENERATED ARG_HANDLE: igraph_opt, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -337,7 +337,7 @@ igraph_opt <- function(
   }
   # END GENERATED ARG_HANDLE
 
-  if (missing(default)) {
+  if (is_missing(default)) {
     get_config(paste0("igraph::", x), .igraph.pars[[x]])
   } else {
     get_config(paste0("igraph::", x), default)

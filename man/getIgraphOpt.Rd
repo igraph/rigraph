@@ -4,7 +4,7 @@
 \alias{getIgraphOpt}
 \title{Parameters for the igraph package}
 \usage{
-getIgraphOpt(x, default = NULL)
+getIgraphOpt(x, default)
 }
 \arguments{
 \item{x}{A character string holding an option name.}

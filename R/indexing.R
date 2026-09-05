@@ -56,14 +56,14 @@
 get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
   # If i or j is NULL, assume all nodes
   # if not NULL make sure to handle duplicates correctly
-  if (missing(i)) {
+  if (is_missing(i)) {
     i_seq <- seq_len(vcount(x))
     has_i <- FALSE
   } else {
     i_seq <- i
     has_i <- TRUE
   }
-  if (missing(j)) {
+  if (is_missing(j)) {
     j_seq <- seq_len(vcount(x))
     has_j <- FALSE
   } else {
@@ -220,20 +220,20 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
   ################################################################
   ## Argument checks
   if (
-    (!missing(from) || !missing(to)) &&
-      (!missing(i) || !missing(j))
+    (!is_missing(from) || !is_missing(to)) &&
+      (!is_missing(i) || !is_missing(j))
   ) {
     cli::cli_abort(
       "Cannot use {.arg from}/{.arg to} together with regular indices"
     )
   }
   if (
-    (!missing(from) && missing(to)) ||
-      (missing(from) && !missing(to))
+    (!is_missing(from) && is_missing(to)) ||
+      (is_missing(from) && !is_missing(to))
   ) {
     cli::cli_abort("Cannot use {.arg from}/{.arg to} without the other")
   }
-  if (!missing(from)) {
+  if (!is_missing(from)) {
     if ((!is.numeric(from) && !is.character(from)) || anyNA(from)) {
       cli::cli_abort(
         "{.arg from} must be a numeric or character vector without NAs"
@@ -251,7 +251,7 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
 
   ##################################################################
 
-  if (!missing(from)) {
+  if (!is_missing(from)) {
     res <- get_edge_ids(x, data.frame(from, to), error = FALSE)
     if (edges) {
       ## nop
@@ -265,7 +265,7 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
     return(res)
   }
 
-  if (missing(i) && missing(j)) {
+  if (is_missing(i) && is_missing(j)) {
     return(as_adjacency_matrix(
       x,
       sparse = sparse,
@@ -278,7 +278,7 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
   i_has_dupes <- FALSE
   j_has_dupes <- FALSE
 
-  if (!missing(i)) {
+  if (!is_missing(i)) {
     i <- as_igraph_vs(x, i)
     if (anyDuplicated(i)) {
       i_has_dupes <- TRUE
@@ -287,7 +287,7 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
       i_map <- match(i_dupl, i)
     }
   }
-  if (!missing(j)) {
+  if (!is_missing(j)) {
     j <- as_igraph_vs(x, j)
     if (anyDuplicated(j)) {
       j_has_dupes <- TRUE
@@ -382,29 +382,29 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
 ) {
   getfun <- if (edges) as_adj_edge_list else as_adj_list
 
-  if (!missing(i) && !missing(from)) {
+  if (!is_missing(i) && !is_missing(from)) {
     cli::cli_abort("Cannot use both {.arg i} and {.arg from}")
   }
-  if (!missing(j) && !missing(to)) {
+  if (!is_missing(j) && !is_missing(to)) {
     cli::cli_abort("Cannot use both {.arg j} and {.arg to}")
   }
-  if (missing(i) && !missing(from)) {
+  if (is_missing(i) && !is_missing(from)) {
     i <- from
   }
-  if (missing(j) && !missing(to)) {
+  if (is_missing(j) && !is_missing(to)) {
     j <- to
   }
 
   directed_mode_in <-
-    if (missing(i) && missing(j)) {
+    if (is_missing(i) && is_missing(j)) {
       getfun(x, mode = if (directed) "out" else "all")
-    } else if (missing(j)) {
+    } else if (is_missing(j)) {
       if (!edges) {
         adjacent_vertices(x, i, mode = if (directed) "out" else "all")
       } else {
         incident_edges(x, i, mode = if (directed) "out" else "all")
       }
-    } else if (missing(i)) {
+    } else if (is_missing(i)) {
       if (!edges) {
         adjacent_vertices(x, j, mode = if (directed) "in" else "all")
       } else {
@@ -469,16 +469,16 @@ expand.grid.unordered <- function(i, j, loops = FALSE, directed = FALSE) {
   ################################################################
   ## Argument checks
   if (
-    (!missing(from) || !missing(to)) &&
-      (!missing(i) || !missing(j))
+    (!is_missing(from) || !is_missing(to)) &&
+      (!is_missing(i) || !is_missing(j))
   ) {
     cli::cli_abort(
       "Cannot use {.arg from}/{.arg to} together with regular indices"
     )
   }
   if (
-    (!missing(from) && missing(to)) ||
-      (missing(from) && !missing(to))
+    (!is_missing(from) && is_missing(to)) ||
+      (is_missing(from) && !is_missing(to))
   ) {
     cli::cli_abort("Cannot use {.arg from}/{.arg to} without the other")
   }
@@ -491,7 +491,7 @@ expand.grid.unordered <- function(i, j, loops = FALSE, directed = FALSE) {
   if (is.null(attr) && !is.null(value) && length(value) != 1) {
     cli::cli_abort("Logical or numeric value must be of length 1")
   }
-  if (!missing(from)) {
+  if (!is_missing(from)) {
     if ((!is.numeric(from) && !is.character(from)) || anyNA(from)) {
       cli::cli_abort(
         "{.arg from} must be a numeric or character vector without NAs"
@@ -509,7 +509,7 @@ expand.grid.unordered <- function(i, j, loops = FALSE, directed = FALSE) {
 
   ##################################################################
 
-  if (!missing(from)) {
+  if (!is_missing(from)) {
     if (
       is.null(value) ||
         (is.logical(value) && !value) ||
@@ -535,11 +535,11 @@ expand.grid.unordered <- function(i, j, loops = FALSE, directed = FALSE) {
       (is.null(attr) && is.numeric(value) && value == 0)
   ) {
     ## Delete edges
-    if (missing(i) && missing(j)) {
+    if (is_missing(i) && is_missing(j)) {
       todel <- seq_len(ecount(x))
-    } else if (missing(j)) {
+    } else if (is_missing(j)) {
       todel <- unlist(incident_edges(x, v = i, mode = "out"))
-    } else if (missing(i)) {
+    } else if (is_missing(i)) {
       todel <- unlist(incident_edges(x, v = j, mode = "in"))
     } else {
       edge_pairs <- expand.grid(i, j)
@@ -549,8 +549,8 @@ expand.grid.unordered <- function(i, j, loops = FALSE, directed = FALSE) {
     x <- delete_edges(x, todel)
   } else {
     ## Addition or update of an attribute (or both)
-    i <- if (missing(i)) as.numeric(V(x)) else as_igraph_vs(x, i)
-    j <- if (missing(j)) as.numeric(V(x)) else as_igraph_vs(x, j)
+    i <- if (is_missing(i)) as.numeric(V(x)) else as_igraph_vs(x, i)
+    j <- if (is_missing(j)) as.numeric(V(x)) else as_igraph_vs(x, j)
     if (length(i) != 0 && length(j) != 0) {
       edge_pairs <- expand.grid.unordered(
         i,

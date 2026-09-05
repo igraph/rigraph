@@ -184,7 +184,7 @@ assortativity <- function(
     if (!missing(directed)) {
       dots[["directed"]] <- directed
     }
-    if (missing(values)) {
+    if (is_missing(values)) {
       dots[["types1"]] <- types1
     } else {
       dots[["types1"]] <- values
@@ -192,7 +192,7 @@ assortativity <- function(
     return(inject(assortativity_legacy(!!!dots)))
   }
 
-  if (missing(values)) {
+  if (is_missing(values)) {
     lifecycle::deprecate_warn(
       "1.6.0",
       "assortativity(types1 =)",

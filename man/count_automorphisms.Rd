@@ -6,7 +6,7 @@
 \usage{
 count_automorphisms(
   graph,
-  colors = NULL,
+  colors,
   ...,
   sh = c("fm", "f", "fs", "fl", "flm", "fsm")
 )

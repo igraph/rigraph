@@ -602,7 +602,7 @@ print.igraph <- function(
   vertex.attributes = NULL,
   edge.attributes = NULL,
   names = TRUE,
-  max.lines = NULL,
+  max.lines,
   id = NULL,
   ...
 ) {
@@ -620,7 +620,7 @@ print.igraph <- function(
   if (is.null(edge.attributes)) {
     edge.attributes <- igraph_opt("print.edge.attributes")
   }
-  if (missing(max.lines)) {
+  if (is_missing(max.lines)) {
     # NULL is a legal value here (print all lines), so the option fallback
     # applies only when the argument is not supplied at all.
     max.lines <- igraph_opt("auto.print.lines")

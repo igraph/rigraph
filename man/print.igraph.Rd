@@ -14,7 +14,7 @@
   vertex.attributes = NULL,
   edge.attributes = NULL,
   names = TRUE,
-  max.lines = NULL,
+  max.lines,
   id = NULL,
   ...
 )

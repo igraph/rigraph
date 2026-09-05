@@ -6,7 +6,7 @@
 \usage{
 automorphism_group(
   graph,
-  colors = NULL,
+  colors,
   ...,
   sh = c("fm", "f", "fs", "fl", "flm", "fsm"),
   details = FALSE

@@ -1107,7 +1107,7 @@ dominator_tree <- function(
   # Argument checks
   ensure_igraph(graph)
 
-  if (missing(root) || is.null(root)) {
+  if (is_missing(root) || is.null(root)) {
     cli::cli_abort("{.arg root} must be specified.")
   }
   root <- as_igraph_vs(graph, root)

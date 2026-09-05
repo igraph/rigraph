@@ -322,7 +322,7 @@ get.edge.attribute <- function(graph, name, index = E(graph)) {
 graph_attr <- function(graph, name) {
   ensure_igraph(graph)
 
-  if (missing(name)) {
+  if (is_missing(name)) {
     return(graph.attributes(graph))
   }
 
@@ -358,7 +358,7 @@ graph_attr <- function(graph, name) {
 #' )
 #' plot(g)
 `graph_attr<-` <- function(graph, name, value) {
-  if (missing(name)) {
+  if (is_missing(name)) {
     `graph.attributes<-`(graph, value)
   } else {
     check_string(name)
@@ -450,7 +450,7 @@ graph.attributes <- function(graph) {
 #' plot(g)
 vertex_attr <- function(graph, name, index = NULL) {
   ensure_igraph(graph)
-  if (missing(name)) {
+  if (is_missing(name)) {
     if (is.null(index)) {
       return(vertex.attributes(graph))
     }
@@ -504,7 +504,7 @@ vertex_attr <- function(graph, name, index = NULL) {
   if (is.null(index)) {
     index <- V(graph)
   }
-  if (missing(name)) {
+  if (is_missing(name)) {
     `vertex.attributes<-`(graph, index = index, value = value)
   } else {
     check_string(name)
@@ -774,7 +774,7 @@ set_value_at <- function(value, idx, length_out) {
 edge_attr <- function(graph, name, index = NULL) {
   ensure_igraph(graph)
 
-  if (missing(name)) {
+  if (is_missing(name)) {
     if (is.null(index)) {
       edge.attributes(graph)
     } else {
@@ -829,7 +829,7 @@ edge_attr <- function(graph, name, index = NULL) {
   if (is.null(index)) {
     index <- E(graph)
   }
-  if (missing(name)) {
+  if (is_missing(name)) {
     `edge.attributes<-`(graph, index = index, value = value)
   } else {
     check_string(name)

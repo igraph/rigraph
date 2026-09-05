@@ -1323,8 +1323,8 @@ cut_at <- function(communities, no, steps) {
   }
 
   if (
-    (!missing(no) && !missing(steps)) ||
-      (missing(no) && missing(steps))
+    (!is_missing(no) && !is_missing(steps)) ||
+      (is_missing(no) && is_missing(steps))
   ) {
     cli::cli_abort("Please use either {.arg no} or {.arg steps} (but not both)")
   }
@@ -1336,7 +1336,7 @@ cut_at <- function(communities, no, steps) {
   # dedicated igraph_le_community_to_membership function.
   if (isTRUE(communities$algorithm == "leading eigenvector")) {
     n_initial <- max(communities$membership)
-    if (!missing(steps)) {
+    if (!is_missing(steps)) {
       if (steps > nrow(mm)) {
         cli::cli_warn("Cannot make that many steps.")
         steps <- nrow(mm)
@@ -1360,7 +1360,7 @@ cut_at <- function(communities, no, steps) {
     return(res$membership + 1L)
   }
 
-  if (!missing(steps)) {
+  if (!is_missing(steps)) {
     if (steps > nrow(mm)) {
       cli::cli_warn("Cannot make that many steps.")
       steps <- nrow(mm)

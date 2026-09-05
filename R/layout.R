@@ -635,24 +635,24 @@ component_wise <- function(merge_method = "dla") {
 normalize <- function(
   xmin = -1,
   xmax = 1,
-  ymin = NULL,
-  ymax = NULL,
-  zmin = NULL,
-  zmax = NULL
+  ymin,
+  ymax,
+  zmin,
+  zmax
 ) {
   # NULL is a legal value here (norm_coords() skips normalization along an
   # axis with a NULL limit), so the fallback to the x limits applies only
   # when an argument is not supplied at all.
-  if (missing(ymin)) {
+  if (is_missing(ymin)) {
     ymin <- xmin
   }
-  if (missing(ymax)) {
+  if (is_missing(ymax)) {
     ymax <- xmax
   }
-  if (missing(zmin)) {
+  if (is_missing(zmin)) {
     zmin <- xmin
   }
-  if (missing(zmax)) {
+  if (is_missing(zmax)) {
     zmax <- xmax
   }
 

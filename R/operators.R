@@ -1522,7 +1522,7 @@ path <- function(...) {
 #' @method - igraph
 #' @export
 `-.igraph` <- function(e1, e2) {
-  if (missing(e2)) {
+  if (is_missing(e2)) {
     cli::cli_abort("Non-numeric argument to negation operator")
   }
   if (is_igraph(e2)) {
