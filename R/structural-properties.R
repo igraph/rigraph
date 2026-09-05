@@ -3216,7 +3216,7 @@ topo_sort <- function(
 #'   `NULL`, then the edge attribute is used automatically. The goal of
 #'   the feedback arc set problem is to find a feedback arc set with the smallest
 #'   total weight.
-#' @param algo Specifies the algorithm to use. \dQuote{`exact_ip`} solves
+#' @param algorithm Specifies the algorithm to use. \dQuote{`exact_ip`} solves
 #'   the feedback arc set problem with an exact integer programming algorithm that
 #'   guarantees that the total weight of the removed edges is as small as possible.
 #'   \dQuote{`approx_eades`} uses a fast (linear-time) approximation
@@ -3236,12 +3236,12 @@ topo_sort <- function(
 #'
 #' g <- sample_gnm(20, 40, directed = TRUE)
 #' feedback_arc_set(g)
-#' feedback_arc_set(g, algo = "approx_eades")
+#' feedback_arc_set(g, algorithm = "approx_eades")
 feedback_arc_set <- function(
   graph,
   ...,
   weights = NULL,
-  algo = c("approx_eades", "exact_ip")
+  algorithm = c("approx_eades", "exact_ip")
 ) {
   # BEGIN GENERATED ARG_HANDLE: feedback_arc_set, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -3256,7 +3256,7 @@ feedback_arc_set <- function(
       }
       base::c(
         if (!base::missing(weights)) base::list(weights = weights),
-        if (!base::missing(algo)) base::list(algo = algo)
+        if (!base::missing(algo)) base::list(algorithm = algo)
       )
     }
     .arg_handle <- .old_signature(...)
@@ -3264,7 +3264,7 @@ feedback_arc_set <- function(
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
         if (!base::missing(weights)) "weights",
-        if (!base::missing(algo)) "algo"
+        if (!base::missing(algorithm)) "algorithm"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn feedback_arc_set} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -3272,7 +3272,7 @@ feedback_arc_set <- function(
         "3.0.0",
         what = base::I("Calling `feedback_arc_set()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  feedback_arc_set(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  feedback_arc_set(", base::paste(base::c("graph", base::c(weights = "weights", algorithm = "algo")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    feedback_arc_set(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -3283,7 +3283,7 @@ feedback_arc_set <- function(
   feedback_arc_set_impl(
     graph = graph,
     weights = weights,
-    algo = algo
+    algo = algorithm
   )
 }
 
@@ -3303,7 +3303,7 @@ feedback_arc_set <- function(
 #'   `NULL`, then the vertex attribute is used automatically. The goal of
 #'   the feedback vertex set problem is to find a feedback vertex set with
 #'   the smallest total weight.
-#' @param algo Specifies the algorithm to use. Currently, \dQuote{`exact_ip`},
+#' @param algorithm Specifies the algorithm to use. Currently, \dQuote{`exact_ip`},
 #'   which solves the feedback vertex set problem with an exact integer
 #'   programming approach, is the only option.
 #' @return A vertex sequence (by default, but see the `return.vs.es` option
@@ -3320,7 +3320,7 @@ feedback_vertex_set <- function(
   graph,
   ...,
   weights = NULL,
-  algo = c("exact_ip")
+  algorithm = c("exact_ip")
 ) {
   # BEGIN GENERATED ARG_HANDLE: feedback_vertex_set, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -3335,7 +3335,7 @@ feedback_vertex_set <- function(
       }
       base::c(
         if (!base::missing(weights)) base::list(weights = weights),
-        if (!base::missing(algo)) base::list(algo = algo)
+        if (!base::missing(algo)) base::list(algorithm = algo)
       )
     }
     .arg_handle <- .old_signature(...)
@@ -3343,7 +3343,7 @@ feedback_vertex_set <- function(
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
         if (!base::missing(weights)) "weights",
-        if (!base::missing(algo)) "algo"
+        if (!base::missing(algorithm)) "algorithm"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn feedback_vertex_set} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -3351,7 +3351,7 @@ feedback_vertex_set <- function(
         "3.0.0",
         what = base::I("Calling `feedback_vertex_set()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  feedback_vertex_set(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  feedback_vertex_set(", base::paste(base::c("graph", base::c(weights = "weights", algorithm = "algo")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    feedback_vertex_set(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -3362,7 +3362,7 @@ feedback_vertex_set <- function(
   feedback_vertex_set_impl(
     graph = graph,
     weights = weights,
-    algo = algo
+    algo = algorithm
   )
 }
 

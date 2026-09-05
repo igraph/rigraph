@@ -218,23 +218,23 @@ migrations <- list(
   ),
 
   feedback_arc_set = list(
-    old = function(graph, weights, algo) {},
+    old = function(graph, weights, algo = algorithm) {},
     new = function(
       graph,
       ...,
       weights = NULL,
-      algo = c("approx_eades", "exact_ip")
+      algorithm = c("approx_eades", "exact_ip")
     ) {},
     when = "3.0.0"
   ),
 
   feedback_vertex_set = list(
-    old = function(graph, weights, algo) {},
+    old = function(graph, weights, algo = algorithm) {},
     new = function(
       graph,
       ...,
       weights = NULL,
-      algo = c("exact_ip")
+      algorithm = c("exact_ip")
     ) {},
     when = "3.0.0"
   ),
