@@ -700,6 +700,7 @@ tk_center <- function(tkp.id) {
 #' @export
 tk_reshape <- function(tkp.id, newlayout, ..., params) {
   # nocov start
+  newlayout <- as_user_callback(newlayout)
   tkp <- .tkplot.get(tkp.id)
   new_coords <- do_call(
     newlayout,
