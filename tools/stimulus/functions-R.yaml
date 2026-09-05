@@ -550,6 +550,11 @@ igraph_read_graph_lgl:
     PARAMS: |-
         OUT GRAPH graph, INFILE instream, BOOLEAN names=TRUE, ADD_WEIGHTS weights=TRUE, BOOLEAN directed=TRUE
 
+igraph_write_graph_gml:
+    PARAMS: |-
+        GRAPH graph, OUTFILE outstream, WRITE_GML_SW options=DEFAULT,
+        OPTIONAL VECTOR id, OPTIONAL CSTRING creator
+
 # TODO: temporarily disabled
 igraph_write_graph_dimacs_flow:
     DEPS: source ON graph, target ON graph
