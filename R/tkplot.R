@@ -71,12 +71,14 @@ tkplot.off <- function() {
 #' `tkplot.getcoords()` was renamed to [tk_coords()] to create a more
 #' consistent API.
 #' @inheritParams tk_coords
+#' @param norm `r lifecycle::badge("deprecated")` Use `normalized` in
+#'   [tk_coords()] instead.
 #' @keywords internal
 #' @export
 tkplot.getcoords <- function(tkp.id, norm = FALSE) {
   # nocov start
   lifecycle::deprecate_warn("2.0.0", "tkplot.getcoords()", "tk_coords()")
-  tk_coords(tkp.id = tkp.id, norm = norm)
+  tk_coords(tkp.id = tkp.id, normalized = norm)
 } # nocov end
 
 #' Interactive plotting of graphs
@@ -271,7 +273,7 @@ assign(".next", 1, .tkplot.env)
 #' @param width The width of the rectangle for generating new coordinates.
 #' @param height The height of the rectangle for generating new coordinates.
 #' @param newlayout The new layout, see the `layout` parameter of tkplot.
-#' @param norm Logical, should we norm the coordinates.
+#' @param normalized Logical, should we norm the coordinates.
 #' @param coords Two-column numeric matrix, the new coordinates of the
 #'   vertices, in absolute coordinates.
 #' @param degree The degree to rotate the plot.
@@ -734,11 +736,13 @@ tk_postscript <- function(tkp.id) {
 tk_coords <- function(
   tkp.id,
   ...,
-  norm = FALSE
+  normalized = FALSE
 ) {
   # BEGIN GENERATED ARG_HANDLE: tk_coords, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("n", "no", "nor"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn tk_coords}.")
     # Pre-3.0.0 signature: tk_coords(tkp.id, norm)
     .old_signature <- function(norm, ...) {
       if (...length() > 0L) {
@@ -748,14 +752,14 @@ tk_coords <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn tk_coords}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(norm)) base::list(norm = norm)
+        if (!base::missing(norm)) base::list(normalized = norm)
       )
     }
     .arg_handle <- .old_signature(...)
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(norm)) "norm"
+        if (!base::missing(normalized)) "normalized"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn tk_coords} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -763,7 +767,7 @@ tk_coords <- function(
         "3.0.0",
         what = base::I("Calling `tk_coords()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  tk_coords(", base::paste(base::c("tkp.id", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  tk_coords(", base::paste(base::c("tkp.id", base::c(normalized = "norm")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    tk_coords(", base::paste(base::c("tkp.id", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -774,7 +778,7 @@ tk_coords <- function(
   # nocov start
   coords <- .tkplot.get(tkp.id, "coords")
   coords[, 2] <- max(coords[, 2]) - coords[, 2]
-  if (norm) {
+  if (normalized) {
     # Shift
     coords[, 1] <- coords[, 1] - min(coords[, 1])
     coords[, 2] <- coords[, 2] - min(coords[, 2])
@@ -1845,7 +1849,7 @@ tk_canvas <- function(tkp.id) {
         layout$params[[i]]$type == "initial" &&
           params[[i]]
       ) {
-        realparams[[i]] <- tk_coords(tkp.id, norm = TRUE)
+        realparams[[i]] <- tk_coords(tkp.id, normalized = TRUE)
       }
     }
     if (as.logical(tcltk::tclvalue(save.default))) {
