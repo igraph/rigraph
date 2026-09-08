@@ -182,7 +182,7 @@ graph_id.igraph.es <- function(x, ...) {
 }
 
 is_complete_iterator <- function(x) {
-  identical(attr(x, "is_all"), TRUE)
+  isTRUE(attr(x, "is_all"))
 }
 
 set_complete_iterator <- function(x, value = TRUE) {
