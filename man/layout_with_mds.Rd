@@ -5,8 +5,6 @@
 \title{Graph layout by multidimensional scaling}
 \usage{
 layout_with_mds(graph, dist = NULL, dim = 2, options = deprecated())
-
-with_mds(...)
 }
 \arguments{
 \item{graph}{The input graph.}
@@ -22,8 +20,6 @@ only possible value is 2. This is because \code{merge_coords()} only works in
 \item{options}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This argument is not
 supported from igraph version 1.6.0, as ARPACK is not used any more for
 solving the eigenproblem. Supplying it raises an error.}
-
-\item{...}{Passed to \code{layout_with_mds()}.}
 }
 \value{
 A numeric matrix with \code{dim} columns.
