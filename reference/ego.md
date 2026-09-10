@@ -222,82 +222,82 @@ neighborhood_size(g, order = 2, 1:3)
 
 ego(g, order = 0, 1:3)
 #> [[1]]
-#> ── <vertex sequence> 1/10 · from eeaa04d ───────────────────────────────────────
+#> ── <vertex sequence> 1/10 · from 390ffdd ───────────────────────────────────────
 #> [1] 1
 #> 
 #> [[2]]
-#> ── <vertex sequence> 1/10 · from eeaa04d ───────────────────────────────────────
+#> ── <vertex sequence> 1/10 · from 390ffdd ───────────────────────────────────────
 #> [1] 2
 #> 
 #> [[3]]
-#> ── <vertex sequence> 1/10 · from eeaa04d ───────────────────────────────────────
+#> ── <vertex sequence> 1/10 · from 390ffdd ───────────────────────────────────────
 #> [1] 3
 #> 
 ego(g, order = 1, 1:3)
 #> [[1]]
-#> ── <vertex sequence> 3/10 · from eeaa04d ───────────────────────────────────────
+#> ── <vertex sequence> 3/10 · from 390ffdd ───────────────────────────────────────
 #> [1]  1  2 10
 #> 
 #> [[2]]
-#> ── <vertex sequence> 3/10 · from eeaa04d ───────────────────────────────────────
+#> ── <vertex sequence> 3/10 · from 390ffdd ───────────────────────────────────────
 #> [1] 2 1 3
 #> 
 #> [[3]]
-#> ── <vertex sequence> 3/10 · from eeaa04d ───────────────────────────────────────
+#> ── <vertex sequence> 3/10 · from 390ffdd ───────────────────────────────────────
 #> [1] 3 2 4
 #> 
 ego(g, order = 2, 1:3)
 #> [[1]]
-#> ── <vertex sequence> 5/10 · from eeaa04d ───────────────────────────────────────
+#> ── <vertex sequence> 5/10 · from 390ffdd ───────────────────────────────────────
 #> [1]  1  2 10  3  9
 #> 
 #> [[2]]
-#> ── <vertex sequence> 5/10 · from eeaa04d ───────────────────────────────────────
+#> ── <vertex sequence> 5/10 · from 390ffdd ───────────────────────────────────────
 #> [1]  2  1  3 10  4
 #> 
 #> [[3]]
-#> ── <vertex sequence> 5/10 · from eeaa04d ───────────────────────────────────────
+#> ── <vertex sequence> 5/10 · from 390ffdd ───────────────────────────────────────
 #> [1] 3 2 4 1 5
 #> 
 
 # neighborhood() is an alias of ego()
 neighborhood(g, order = 0, 1:3)
 #> [[1]]
-#> ── <vertex sequence> 1/10 · from eeaa04d ───────────────────────────────────────
+#> ── <vertex sequence> 1/10 · from 390ffdd ───────────────────────────────────────
 #> [1] 1
 #> 
 #> [[2]]
-#> ── <vertex sequence> 1/10 · from eeaa04d ───────────────────────────────────────
+#> ── <vertex sequence> 1/10 · from 390ffdd ───────────────────────────────────────
 #> [1] 2
 #> 
 #> [[3]]
-#> ── <vertex sequence> 1/10 · from eeaa04d ───────────────────────────────────────
+#> ── <vertex sequence> 1/10 · from 390ffdd ───────────────────────────────────────
 #> [1] 3
 #> 
 neighborhood(g, order = 1, 1:3)
 #> [[1]]
-#> ── <vertex sequence> 3/10 · from eeaa04d ───────────────────────────────────────
+#> ── <vertex sequence> 3/10 · from 390ffdd ───────────────────────────────────────
 #> [1]  1  2 10
 #> 
 #> [[2]]
-#> ── <vertex sequence> 3/10 · from eeaa04d ───────────────────────────────────────
+#> ── <vertex sequence> 3/10 · from 390ffdd ───────────────────────────────────────
 #> [1] 2 1 3
 #> 
 #> [[3]]
-#> ── <vertex sequence> 3/10 · from eeaa04d ───────────────────────────────────────
+#> ── <vertex sequence> 3/10 · from 390ffdd ───────────────────────────────────────
 #> [1] 3 2 4
 #> 
 neighborhood(g, order = 2, 1:3)
 #> [[1]]
-#> ── <vertex sequence> 5/10 · from eeaa04d ───────────────────────────────────────
+#> ── <vertex sequence> 5/10 · from 390ffdd ───────────────────────────────────────
 #> [1]  1  2 10  3  9
 #> 
 #> [[2]]
-#> ── <vertex sequence> 5/10 · from eeaa04d ───────────────────────────────────────
+#> ── <vertex sequence> 5/10 · from 390ffdd ───────────────────────────────────────
 #> [1]  2  1  3 10  4
 #> 
 #> [[3]]
-#> ── <vertex sequence> 5/10 · from eeaa04d ───────────────────────────────────────
+#> ── <vertex sequence> 5/10 · from 390ffdd ───────────────────────────────────────
 #> [1] 3 2 4 1 5
 #> 
 
@@ -305,7 +305,7 @@ neighborhood(g, order = 2, 1:3)
 V(g)$name <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j")
 make_ego_graph(g, order = 2, 1:3)
 #> [[1]]
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 361a01b ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 17c9d55 ──
 #> ℹ undirected · named
 #> ℹ 5 vertices · 4 edges
 #> 
@@ -317,7 +317,7 @@ make_ego_graph(g, order = 2, 1:3)
 #> [1] a ─ b  b ─ c  a ─ j  i ─ j 
 #> 
 #> [[2]]
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 3592ea7 ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 1f1ce3f ──
 #> ℹ undirected · named
 #> ℹ 5 vertices · 4 edges
 #> 
@@ -329,7 +329,7 @@ make_ego_graph(g, order = 2, 1:3)
 #> [1] a ─ b  b ─ c  c ─ d  a ─ j 
 #> 
 #> [[3]]
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 530b437 ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 39b7000 ──
 #> ℹ undirected · named
 #> ℹ 5 vertices · 4 edges
 #> 
@@ -343,7 +343,7 @@ make_ego_graph(g, order = 2, 1:3)
 # make_neighborhood_graph() is an alias of make_ego_graph()
 make_neighborhood_graph(g, order = 2, 1:3)
 #> [[1]]
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 26ea924 ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 8269cde ──
 #> ℹ undirected · named
 #> ℹ 5 vertices · 4 edges
 #> 
@@ -355,7 +355,7 @@ make_neighborhood_graph(g, order = 2, 1:3)
 #> [1] a ─ b  b ─ c  a ─ j  i ─ j 
 #> 
 #> [[2]]
-#> ── <igraph> Ring graph ────────────────────────────────────────────── b2afc7f ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── e51e984 ──
 #> ℹ undirected · named
 #> ℹ 5 vertices · 4 edges
 #> 
@@ -367,7 +367,7 @@ make_neighborhood_graph(g, order = 2, 1:3)
 #> [1] a ─ b  b ─ c  c ─ d  a ─ j 
 #> 
 #> [[3]]
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 1354106 ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 8bf9f41 ──
 #> ℹ undirected · named
 #> ℹ 5 vertices · 4 edges
 #> 
