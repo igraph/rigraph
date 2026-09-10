@@ -15,8 +15,6 @@ layout_with_gem(
   temp.min = 0.1,
   temp.init = NULL
 )
-
-with_gem(...)
 ```
 
 ## Arguments
@@ -27,7 +25,7 @@ with_gem(...)
 
 - ...:
 
-  Passed to `layout_with_gem()`.
+  These dots are for future extensions and must be empty.
 
 - coords:
 
@@ -81,7 +79,10 @@ pp. 388-403, 1995.
 
 [`layout_with_fr()`](https://r.igraph.org/reference/layout_with_fr.md),
 [`plot.igraph()`](https://r.igraph.org/reference/plot.igraph.md),
-[`tkplot()`](https://r.igraph.org/reference/tkplot.md)
+[`tkplot()`](https://r.igraph.org/reference/tkplot.md). See
+[`with_gem()`](https://r.igraph.org/reference/layout_spec.md) to build a
+lazy layout specification for
+[`add_layout_()`](https://r.igraph.org/reference/add_layout_.md).
 
 Other graph layouts:
 [`add_layout_()`](https://r.igraph.org/reference/add_layout_.md),

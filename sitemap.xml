@@ -132,6 +132,7 @@
 <url><loc>https://r.igraph.org/reference/consensus_tree.html</loc></url>
 <url><loc>https://r.igraph.org/reference/console.html</loc></url>
 <url><loc>https://r.igraph.org/reference/constraint.html</loc></url>
+<url><loc>https://r.igraph.org/reference/constructor_spec.html</loc></url>
 <url><loc>https://r.igraph.org/reference/contract.html</loc></url>
 <url><loc>https://r.igraph.org/reference/contract.vertices.html</loc></url>
 <url><loc>https://r.igraph.org/reference/convex.hull.html</loc></url>
@@ -343,6 +344,7 @@
 <url><loc>https://r.igraph.org/reference/igraph.shape.noplot.html</loc></url>
 <url><loc>https://r.igraph.org/reference/igraph.to.graphNEL.html</loc></url>
 <url><loc>https://r.igraph.org/reference/igraph.version.html</loc></url>
+<url><loc>https://r.igraph.org/reference/igraph_opt.html</loc></url>
 <url><loc>https://r.igraph.org/reference/igraph_options.html</loc></url>
 <url><loc>https://r.igraph.org/reference/igraph_version.html</loc></url>
 <url><loc>https://r.igraph.org/reference/incident.html</loc></url>
@@ -441,6 +443,7 @@
 <url><loc>https://r.igraph.org/reference/layout_on_grid.html</loc></url>
 <url><loc>https://r.igraph.org/reference/layout_on_sphere.html</loc></url>
 <url><loc>https://r.igraph.org/reference/layout_randomly.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout_spec.html</loc></url>
 <url><loc>https://r.igraph.org/reference/layout_with_dh.html</loc></url>
 <url><loc>https://r.igraph.org/reference/layout_with_drl.html</loc></url>
 <url><loc>https://r.igraph.org/reference/layout_with_fr.html</loc></url>

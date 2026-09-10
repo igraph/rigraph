@@ -43,9 +43,10 @@ tk_canvas(tkp.id)
 
 - ...:
 
-  Additional plotting parameters. See
+  For `tkplot()`, additional plotting parameters, see
   [igraph.plotting](https://r.igraph.org/reference/plot.common.md) for
-  the complete list.
+  the complete list. For `tk_close()`, `tk_fit()`, `tk_coords()` and
+  `tk_rotate()`, these dots must be empty.
 
 - tkp.id:
 

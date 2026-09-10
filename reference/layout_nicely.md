@@ -8,8 +8,6 @@ below.
 
 ``` r
 layout_nicely(graph, dim = 2, ...)
-
-nicely(...)
 ```
 
 ## Arguments
@@ -24,9 +22,8 @@ nicely(...)
 
 - ...:
 
-  For `layout_nicely()` the extra arguments are passed to the real
-  layout function. For `nicely()` all argument are passed to
-  `layout_nicely()`.
+  Extra arguments are passed to the real layout function that
+  `layout_nicely()` ends up calling.
 
 ## Value
 
@@ -86,7 +83,10 @@ about this. You can use `weights = NA` to silence the warning.
 
 ## See also
 
-[`plot.igraph()`](https://r.igraph.org/reference/plot.igraph.md)
+[`plot.igraph()`](https://r.igraph.org/reference/plot.igraph.md). See
+[`nicely()`](https://r.igraph.org/reference/layout_spec.md) to build a
+lazy layout specification for
+[`add_layout_()`](https://r.igraph.org/reference/add_layout_.md).
 
 Other graph layouts:
 [`add_layout_()`](https://r.igraph.org/reference/add_layout_.md),

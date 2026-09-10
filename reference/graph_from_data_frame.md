@@ -9,8 +9,6 @@ containing the (symbolic) edge list and edge/vertex attributes.
 as_data_frame(x, what = c("edges", "vertices", "both"))
 
 graph_from_data_frame(d, directed = TRUE, ..., vertices = NULL)
-
-from_data_frame(...)
 ```
 
 ## Arguments
@@ -36,7 +34,7 @@ from_data_frame(...)
 
 - ...:
 
-  Passed to `graph_from_data_frame()`.
+  These dots are for future extensions and must be empty.
 
 - vertices:
 
@@ -121,7 +119,11 @@ attributes can.
 [`graph_from_literal()`](https://r.igraph.org/reference/graph_from_literal.md)
 for another way to create graphs,
 [`read.table()`](https://rdrr.io/r/utils/read.table.html) to read in
-tables from files.
+tables from files. See
+[`from_data_frame()`](https://r.igraph.org/reference/constructor_spec.md)
+to build a lazy constructor specification for
+[`make_()`](https://r.igraph.org/reference/make_.md) or
+[`sample_()`](https://r.igraph.org/reference/sample_.md).
 
 Other conversion:
 [`as.matrix.igraph()`](https://r.igraph.org/reference/as.matrix.igraph.md),
@@ -167,7 +169,7 @@ relations <- data.frame(
 )
 g <- graph_from_data_frame(relations, directed = TRUE, vertices = actors)
 print(g, e = TRUE, v = TRUE)
-#> ── <igraph> ───────────────────────────────────────────────────────── 5270403 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── f6f8367 ──
 #> ℹ directed · named
 #> ℹ 5 vertices · 6 edges
 #> 

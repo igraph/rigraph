@@ -28,7 +28,9 @@ sir(graph, beta, gamma, ..., no.sim = 100)
 
 - ...:
 
-  Additional arguments, ignored currently.
+  For `sir()` and `time_bins()`, these dots must be empty. For
+  `median.sir()` and `quantile.sir()`, unused, present for S3 method
+  consistency.
 
 - middle:
 

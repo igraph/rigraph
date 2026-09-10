@@ -15,8 +15,6 @@ layout_as_tree(
   mode = c("out", "in", "all"),
   flip.y = TRUE
 )
-
-as_tree(...)
 ```
 
 ## Arguments
@@ -27,7 +25,7 @@ as_tree(...)
 
 - ...:
 
-  Passed to `layout_as_tree()`.
+  These dots are for future extensions and must be empty.
 
 - root:
 
@@ -89,6 +87,10 @@ Reingold, E and Tilford, J (1981). Tidier drawing of trees. *IEEE Trans.
 on Softw. Eng.*, SE-7(2):223–228.
 
 ## See also
+
+[`as_tree()`](https://r.igraph.org/reference/layout_spec.md) to build a
+lazy layout specification for
+[`add_layout_()`](https://r.igraph.org/reference/add_layout_.md).
 
 Other graph layouts:
 [`add_layout_()`](https://r.igraph.org/reference/add_layout_.md),

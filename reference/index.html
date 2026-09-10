@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9035</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9036</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,7 +59,14 @@
 
       <dl><dt>
 
-          <code><a href="igraph_options.html">igraph_options()</a></code> <code><a href="igraph_options.html">igraph_opt()</a></code>
+          <code><a href="igraph_opt.html">igraph_opt()</a></code>
+
+        </dt>
+        <dd>Query a single igraph parameter</dd>
+
+        <dt>
+
+          <code><a href="igraph_options.html">igraph_options()</a></code>
 
         </dt>
         <dd>Parameters for the igraph package</dd>
@@ -213,7 +220,7 @@
 
         <dt>
 
-          <code><a href="make_tree.html">make_tree()</a></code> <code><a href="make_tree.html">tree()</a></code>
+          <code><a href="make_tree.html">make_tree()</a></code>
 
         </dt>
         <dd>Create tree graphs</dd>
@@ -255,7 +262,7 @@
 
         <dt>
 
-          <code><a href="graph_from_edgelist.html">graph_from_edgelist()</a></code> <code><a href="graph_from_edgelist.html">from_edgelist()</a></code>
+          <code><a href="graph_from_edgelist.html">graph_from_edgelist()</a></code>
 
         </dt>
         <dd>Create a graph from an edge list matrix</dd>
@@ -283,7 +290,7 @@
 
         <dt>
 
-          <code><a href="graph_from_data_frame.html">as_data_frame()</a></code> <code><a href="graph_from_data_frame.html">graph_from_data_frame()</a></code> <code><a href="graph_from_data_frame.html">from_data_frame()</a></code>
+          <code><a href="graph_from_data_frame.html">as_data_frame()</a></code> <code><a href="graph_from_data_frame.html">graph_from_data_frame()</a></code>
 
         </dt>
         <dd>Creating igraph graphs from data frames or vice-versa</dd>
@@ -341,7 +348,7 @@
 
         <dt>
 
-          <code><a href="sample_degseq.html">sample_degseq()</a></code> <code><a href="sample_degseq.html">degseq()</a></code>
+          <code><a href="sample_degseq.html">sample_degseq()</a></code>
 
         </dt>
         <dd>Generate random graphs with a given degree sequence</dd>
@@ -480,6 +487,22 @@
         <dd>Sample trees randomly and uniformly</dd>
       </dl></div><div class="section level2">
 
+      <h3 id="constructor-specifications">Constructor specifications<a class="anchor" aria-label="anchor" href="#constructor-specifications"></a></h3>
+
+
+      <dl></dl></div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="constructor_spec.html">from_data_frame()</a></code> <code><a href="constructor_spec.html">from_edgelist()</a></code> <code><a href="constructor_spec.html">degseq()</a></code> <code><a href="constructor_spec.html">tree()</a></code>
+
+        </dt>
+        <dd>Constructor specifications for <code><a href="../reference/graph_.html">graph_()</a></code>, <code><a href="../reference/make_.html">make_()</a></code> and <code><a href="../reference/sample_.html">sample_()</a></code></dd>
+      </dl></div><div class="section level2">
+
       <h3 id="constructor-modifiers">Constructor modifiers<a class="anchor" aria-label="anchor" href="#constructor-modifiers"></a></h3>
 
 
@@ -615,112 +638,112 @@
 
         <dt>
 
-          <code><a href="layout_as_bipartite.html">layout_as_bipartite()</a></code> <code><a href="layout_as_bipartite.html">as_bipartite()</a></code>
+          <code><a href="layout_as_bipartite.html">layout_as_bipartite()</a></code>
 
         </dt>
         <dd>Simple two-row layout for bipartite graphs</dd>
 
         <dt>
 
-          <code><a href="layout_as_star.html">layout_as_star()</a></code> <code><a href="layout_as_star.html">as_star()</a></code>
+          <code><a href="layout_as_star.html">layout_as_star()</a></code>
 
         </dt>
         <dd>Generate coordinates to place the vertices of a graph in a star-shape</dd>
 
         <dt>
 
-          <code><a href="layout_as_tree.html">layout_as_tree()</a></code> <code><a href="layout_as_tree.html">as_tree()</a></code>
+          <code><a href="layout_as_tree.html">layout_as_tree()</a></code>
 
         </dt>
         <dd>The Reingold-Tilford graph layout algorithm</dd>
 
         <dt>
 
-          <code><a href="layout_in_circle.html">layout_in_circle()</a></code> <code><a href="layout_in_circle.html">in_circle()</a></code>
+          <code><a href="layout_in_circle.html">layout_in_circle()</a></code>
 
         </dt>
         <dd>Graph layout with vertices on a circle.</dd>
 
         <dt>
 
-          <code><a href="layout_nicely.html">layout_nicely()</a></code> <code><a href="layout_nicely.html">nicely()</a></code>
+          <code><a href="layout_nicely.html">layout_nicely()</a></code>
 
         </dt>
         <dd>Choose an appropriate graph layout algorithm automatically</dd>
 
         <dt>
 
-          <code><a href="layout_on_grid.html">layout_on_grid()</a></code> <code><a href="layout_on_grid.html">on_grid()</a></code>
+          <code><a href="layout_on_grid.html">layout_on_grid()</a></code>
 
         </dt>
         <dd>Simple grid layout</dd>
 
         <dt>
 
-          <code><a href="layout_on_sphere.html">layout_on_sphere()</a></code> <code><a href="layout_on_sphere.html">on_sphere()</a></code>
+          <code><a href="layout_on_sphere.html">layout_on_sphere()</a></code>
 
         </dt>
         <dd>Graph layout with vertices on the surface of a sphere</dd>
 
         <dt>
 
-          <code><a href="layout_randomly.html">layout_randomly()</a></code> <code><a href="layout_randomly.html">randomly()</a></code>
+          <code><a href="layout_randomly.html">layout_randomly()</a></code>
 
         </dt>
         <dd>Randomly place vertices on a plane or in 3d space</dd>
 
         <dt>
 
-          <code><a href="layout_with_dh.html">layout_with_dh()</a></code> <code><a href="layout_with_dh.html">with_dh()</a></code>
+          <code><a href="layout_with_dh.html">layout_with_dh()</a></code>
 
         </dt>
         <dd>The Davidson-Harel layout algorithm</dd>
 
         <dt>
 
-          <code><a href="layout_with_fr.html">layout_with_fr()</a></code> <code><a href="layout_with_fr.html">with_fr()</a></code>
+          <code><a href="layout_with_fr.html">layout_with_fr()</a></code>
 
         </dt>
         <dd>The Fruchterman-Reingold layout algorithm</dd>
 
         <dt>
 
-          <code><a href="layout_with_gem.html">layout_with_gem()</a></code> <code><a href="layout_with_gem.html">with_gem()</a></code>
+          <code><a href="layout_with_gem.html">layout_with_gem()</a></code>
 
         </dt>
         <dd>The GEM layout algorithm</dd>
 
         <dt>
 
-          <code><a href="layout_with_graphopt.html">layout_with_graphopt()</a></code> <code><a href="layout_with_graphopt.html">with_graphopt()</a></code>
+          <code><a href="layout_with_graphopt.html">layout_with_graphopt()</a></code>
 
         </dt>
         <dd>The graphopt layout algorithm</dd>
 
         <dt>
 
-          <code><a href="layout_with_kk.html">layout_with_kk()</a></code> <code><a href="layout_with_kk.html">with_kk()</a></code>
+          <code><a href="layout_with_kk.html">layout_with_kk()</a></code>
 
         </dt>
         <dd>The Kamada-Kawai layout algorithm</dd>
 
         <dt>
 
-          <code><a href="layout_with_lgl.html">layout_with_lgl()</a></code> <code><a href="layout_with_lgl.html">with_lgl()</a></code>
+          <code><a href="layout_with_lgl.html">layout_with_lgl()</a></code>
 
         </dt>
         <dd>Large Graph Layout</dd>
 
         <dt>
 
-          <code><a href="layout_with_mds.html">layout_with_mds()</a></code> <code><a href="layout_with_mds.html">with_mds()</a></code>
+          <code><a href="layout_with_mds.html">layout_with_mds()</a></code>
 
         </dt>
         <dd>Graph layout by multidimensional scaling</dd>
 
         <dt>
 
-          <code><a href="layout_with_sugiyama.html">layout_with_sugiyama()</a></code> <code><a href="layout_with_sugiyama.html">with_sugiyama()</a></code>
+          <code><a href="layout_with_sugiyama.html">layout_with_sugiyama()</a></code>
 
         </dt>
         <dd>The Sugiyama graph layout generator</dd>
@@ -748,6 +771,13 @@
 
         <dt>
 
+          <code><a href="layout_spec.html">as_bipartite()</a></code> <code><a href="layout_spec.html">as_star()</a></code> <code><a href="layout_spec.html">as_tree()</a></code> <code><a href="layout_spec.html">in_circle()</a></code> <code><a href="layout_spec.html">nicely()</a></code> <code><a href="layout_spec.html">on_grid()</a></code> <code><a href="layout_spec.html">on_sphere()</a></code> <code><a href="layout_spec.html">randomly()</a></code> <code><a href="layout_spec.html">with_dh()</a></code> <code><a href="layout_spec.html">with_fr()</a></code> <code><a href="layout_spec.html">with_gem()</a></code> <code><a href="layout_spec.html">with_graphopt()</a></code> <code><a href="layout_spec.html">with_kk()</a></code> <code><a href="layout_spec.html">with_lgl()</a></code> <code><a href="layout_spec.html">with_mds()</a></code> <code><a href="layout_spec.html">with_sugiyama()</a></code> <code><a href="layout_spec.html">with_drl()</a></code>
+
+        </dt>
+        <dd>Layout specifications for <code><a href="../reference/layout_.html">layout_()</a></code> and <code><a href="../reference/add_layout_.html">add_layout_()</a></code></dd>
+
+        <dt>
+
           <code><a href="layout_modifier.html">layout_modifier()</a></code>
 
         </dt>
@@ -755,7 +785,7 @@
 
         <dt>
 
-          <code><a href="layout_with_drl.html">layout_with_drl()</a></code> <code><a href="layout_with_drl.html">with_drl()</a></code>
+          <code><a href="layout_with_drl.html">layout_with_drl()</a></code>
 
         </dt>
         <dd>The DrL graph layout generator</dd>
@@ -1523,7 +1553,7 @@
 
         <dt>
 
-          <code><a href="graph_from_data_frame.html">as_data_frame()</a></code> <code><a href="graph_from_data_frame.html">graph_from_data_frame()</a></code> <code><a href="graph_from_data_frame.html">from_data_frame()</a></code>
+          <code><a href="graph_from_data_frame.html">as_data_frame()</a></code> <code><a href="graph_from_data_frame.html">graph_from_data_frame()</a></code>
 
         </dt>
         <dd>Creating igraph graphs from data frames or vice-versa</dd>
@@ -2077,7 +2107,7 @@
 
         <dt>
 
-          <code><a href="graph_from_data_frame.html">as_data_frame()</a></code> <code><a href="graph_from_data_frame.html">graph_from_data_frame()</a></code> <code><a href="graph_from_data_frame.html">from_data_frame()</a></code>
+          <code><a href="graph_from_data_frame.html">as_data_frame()</a></code> <code><a href="graph_from_data_frame.html">graph_from_data_frame()</a></code>
 
         </dt>
         <dd>Creating igraph graphs from data frames or vice-versa</dd>

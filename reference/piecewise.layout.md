@@ -25,7 +25,11 @@ piecewise.layout(graph, layout = layout_with_kk, ...)
 
 - ...:
 
-  Additional arguments to pass to the `layout` layout function.
+  For
+  [`layout_components()`](https://r.igraph.org/reference/merge_coords.md),
+  additional arguments to pass to the `layout` layout function. For
+  [`merge_coords()`](https://r.igraph.org/reference/merge_coords.md),
+  these dots must be empty.
 
 ## Related documentation in the C library
 

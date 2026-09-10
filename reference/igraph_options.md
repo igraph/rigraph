@@ -8,8 +8,6 @@ functions. These can be set for the whole session via
 
 ``` r
 igraph_options(...)
-
-igraph_opt(x, ..., default = NULL)
 ```
 
 ## Arguments
@@ -20,24 +18,10 @@ igraph_opt(x, ..., default = NULL)
   may be in the `name=value` form, or no argument at all may be given.
   See the Value and Details sections for explanation.
 
-- x:
-
-  A character string holding an option name.
-
-- default:
-
-  If the specified option is not set in the options list, this value is
-  returned. This facilitates retrieving an option and checking whether
-  it is set and setting it separately if not.
-
 ## Value
 
-`igraph_options()` returns a list with the old values of the updated
-parameters, invisibly. Without any arguments, it returns the values of
-all options.
-
-For `igraph_opt()`, the current value set for option `x`, or `NULL` if
-the option is unset.
+A list with the old values of the updated parameters, invisibly. Without
+any arguments, it returns the values of all options.
 
 ## Details
 
@@ -162,11 +146,12 @@ The currently used parameters in alphabetical order:
 
 ## See also
 
-`igraph_options()` is similar to
-[`options()`](https://rdrr.io/r/base/options.html) and `igraph_opt()` is
-similar to [`getOption()`](https://rdrr.io/r/base/options.html).
+Similar to [`options()`](https://rdrr.io/r/base/options.html). See
+[`igraph_opt()`](https://r.igraph.org/reference/igraph_opt.md) to
+retrieve the value of a single option.
 
 Other igraph options:
+[`igraph_opt()`](https://r.igraph.org/reference/igraph_opt.md),
 [`with_igraph_opt()`](https://r.igraph.org/reference/with_igraph_opt.md)
 
 ## Author

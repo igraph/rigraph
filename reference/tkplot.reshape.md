@@ -24,9 +24,15 @@ tkplot.reshape(tkp.id, newlayout, ..., params)
 
 - ...:
 
-  Additional plotting parameters. See
+  For [`tkplot()`](https://r.igraph.org/reference/tkplot.md), additional
+  plotting parameters, see
   [igraph.plotting](https://r.igraph.org/reference/plot.common.md) for
-  the complete list.
+  the complete list. For
+  [`tk_close()`](https://r.igraph.org/reference/tkplot.md),
+  [`tk_fit()`](https://r.igraph.org/reference/tkplot.md),
+  [`tk_coords()`](https://r.igraph.org/reference/tkplot.md) and
+  [`tk_rotate()`](https://r.igraph.org/reference/tkplot.md), these dots
+  must be empty.
 
 - params:
 

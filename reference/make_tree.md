@@ -7,8 +7,6 @@ leaves have the same number of children.
 
 ``` r
 make_tree(n, children = 2, ..., mode = c("out", "in", "undirected"))
-
-tree(...)
 ```
 
 ## Arguments
@@ -23,8 +21,7 @@ tree(...)
 
 - ...:
 
-  Passed to `make_tree()` or
-  [`sample_tree()`](https://r.igraph.org/reference/sample_tree.md).
+  These dots are for future extensions and must be empty.
 
 - mode:
 
@@ -42,6 +39,11 @@ An igraph graph
 [`kary_tree()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_kary_tree)
 
 ## See also
+
+[`tree()`](https://r.igraph.org/reference/constructor_spec.md) to build
+a lazy constructor specification for
+[`make_()`](https://r.igraph.org/reference/make_.md) or
+[`sample_()`](https://r.igraph.org/reference/sample_.md).
 
 Other deterministic constructors:
 [`graph_from_atlas()`](https://r.igraph.org/reference/graph_from_atlas.md),
@@ -65,7 +67,7 @@ Other deterministic constructors:
 
 ``` r
 make_tree(10, 2)
-#> ── <igraph> Tree ──────────────────────────────────────────────────── 3ef8a9f ──
+#> ── <igraph> Tree ──────────────────────────────────────────────────── bf28cea ──
 #> ℹ directed
 #> ℹ 10 vertices · 9 edges
 #> 
@@ -75,7 +77,7 @@ make_tree(10, 2)
 #> ── Edges ───────────────────────────────────────────────────────────────────────
 #> [1] 1 → 2   1 → 3   2 → 4   2 → 5   3 → 6   3 → 7   4 → 8   4 → 9   5 → 10 
 make_tree(10, 3, mode = "undirected")
-#> ── <igraph> Tree ──────────────────────────────────────────────────── b1d3c72 ──
+#> ── <igraph> Tree ──────────────────────────────────────────────────── 9a9b82c ──
 #> ℹ undirected
 #> ℹ 10 vertices · 9 edges
 #> 

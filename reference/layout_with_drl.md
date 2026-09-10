@@ -16,8 +16,6 @@ layout_with_drl(
   weights = NULL,
   dim = c(2, 3)
 )
-
-with_drl(...)
 ```
 
 ## Arguments
@@ -28,7 +26,7 @@ with_drl(...)
 
 - ...:
 
-  Passed to `layout_with_drl()`.
+  These dots are for future extensions and must be empty.
 
 - use.seed:
 
@@ -197,7 +195,10 @@ Reports, 2008. 2936: p. 1-10.
 ## See also
 
 [`layout()`](https://r.igraph.org/reference/layout_.md) for other layout
-generators.
+generators. See
+[`with_drl()`](https://r.igraph.org/reference/layout_spec.md) to build a
+lazy layout specification for
+[`add_layout_()`](https://r.igraph.org/reference/add_layout_.md).
 
 ## Author
 

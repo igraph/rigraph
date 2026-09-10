@@ -7,8 +7,6 @@ dimensions.
 
 ``` r
 layout_on_grid(graph, ..., width = 0, height = 0, dim = 2)
-
-on_grid(...)
 ```
 
 ## Arguments
@@ -19,7 +17,7 @@ on_grid(...)
 
 - ...:
 
-  Passed to `layout_on_grid()`.
+  These dots are for future extensions and must be empty.
 
 - width:
 
@@ -56,7 +54,10 @@ the other. If you want to change the order of the vertices, then see the
 ## See also
 
 [`layout()`](https://r.igraph.org/reference/layout_.md) for other layout
-generators
+generators. See
+[`on_grid()`](https://r.igraph.org/reference/layout_spec.md) to build a
+lazy layout specification for
+[`add_layout_()`](https://r.igraph.org/reference/add_layout_.md).
 
 Other graph layouts:
 [`add_layout_()`](https://r.igraph.org/reference/add_layout_.md),

@@ -15,7 +15,7 @@ a graph."><meta property="og:image" content="https://r.igraph.org/logo.png"></he
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9035</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9036</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,9 +58,7 @@ a graph.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">layout_with_mds</span><span class="op">(</span><span class="va">graph</span>, dist <span class="op">=</span> <span class="cn">NULL</span>, dim <span class="op">=</span> <span class="fl">2</span>, options <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">with_mds</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">layout_with_mds</span><span class="op">(</span><span class="va">graph</span>, dist <span class="op">=</span> <span class="cn">NULL</span>, dim <span class="op">=</span> <span class="fl">2</span>, options <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -87,10 +85,6 @@ only possible value is 2. This is because <code><a href="merge_coords.html">merg
 <dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> This argument is not
 supported from igraph version 1.6.0, as ARPACK is not used any more for
 solving the eigenproblem. Supplying it raises an error.</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Passed to <code>layout_with_mds()</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -122,7 +116,8 @@ Scaling</em>.  Second edition. Chapman and Hall.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="layout_.html">layout()</a></code>, <code><a href="plot.igraph.html">plot.igraph()</a></code></p>
+    <div class="dont-index"><p><code><a href="layout_.html">layout()</a></code>, <code><a href="plot.igraph.html">plot.igraph()</a></code>. See <code><a href="layout_spec.html">with_mds()</a></code> to build a lazy
+layout specification for <code><a href="add_layout_.html">add_layout_()</a></code>.</p>
 <p>Other graph layouts:
 <code><a href="add_layout_.html">add_layout_()</a></code>,
 <code><a href="component_wise.html">component_wise()</a></code>,

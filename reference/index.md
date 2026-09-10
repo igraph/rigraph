@@ -2,9 +2,10 @@
 
 ## igraph options
 
+- [`igraph_opt()`](https://r.igraph.org/reference/igraph_opt.md) : Query
+  a single igraph parameter
 - [`igraph_options()`](https://r.igraph.org/reference/igraph_options.md)
-  [`igraph_opt()`](https://r.igraph.org/reference/igraph_options.md) :
-  Parameters for the igraph package
+  : Parameters for the igraph package
 - [`with_igraph_opt()`](https://r.igraph.org/reference/with_igraph_opt.md)
   : Run code with a temporary igraph options setting
 
@@ -73,9 +74,8 @@
 - [`make_star()`](https://r.igraph.org/reference/make_star.md)
   [`star()`](https://r.igraph.org/reference/make_star.md) : Create a
   star graph, a tree with n vertices and n - 1 leaves
-- [`make_tree()`](https://r.igraph.org/reference/make_tree.md)
-  [`tree()`](https://r.igraph.org/reference/make_tree.md) : Create tree
-  graphs
+- [`make_tree()`](https://r.igraph.org/reference/make_tree.md) : Create
+  tree graphs
 - [`make_turan()`](https://r.igraph.org/reference/make_turan.md)
   [`turan()`](https://r.igraph.org/reference/make_turan.md) : Create a
   Turán graph
@@ -91,7 +91,6 @@
   [`atlas()`](https://r.igraph.org/reference/graph_from_atlas.md) :
   Create a graph from the Graph Atlas
 - [`graph_from_edgelist()`](https://r.igraph.org/reference/graph_from_edgelist.md)
-  [`from_edgelist()`](https://r.igraph.org/reference/graph_from_edgelist.md)
   : Create a graph from an edge list matrix
 - [`graph_from_literal()`](https://r.igraph.org/reference/graph_from_literal.md)
   [`from_literal()`](https://r.igraph.org/reference/graph_from_literal.md)
@@ -102,7 +101,6 @@
   : Creating a graph from LCF notation
 - [`as_data_frame()`](https://r.igraph.org/reference/graph_from_data_frame.md)
   [`graph_from_data_frame()`](https://r.igraph.org/reference/graph_from_data_frame.md)
-  [`from_data_frame()`](https://r.igraph.org/reference/graph_from_data_frame.md)
   : Creating igraph graphs from data frames or vice-versa
 
 ### Stochastic constructors (random graph models)
@@ -125,8 +123,7 @@
   adding/removing edges
 - [`sample_correlated_gnp_pair()`](https://r.igraph.org/reference/sample_correlated_gnp_pair.md)
   : Sample a pair of correlated \\G(n,p)\\ random graphs
-- [`sample_degseq()`](https://r.igraph.org/reference/sample_degseq.md)
-  [`degseq()`](https://r.igraph.org/reference/sample_degseq.md) :
+- [`sample_degseq()`](https://r.igraph.org/reference/sample_degseq.md) :
   Generate random graphs with a given degree sequence
 - [`sample_dot_product()`](https://r.igraph.org/reference/sample_dot_product.md)
   [`dot_product()`](https://r.igraph.org/reference/sample_dot_product.md)
@@ -190,6 +187,18 @@
 - [`sample_tree()`](https://r.igraph.org/reference/sample_tree.md) :
   Sample trees randomly and uniformly
 
+### Constructor specifications
+
+- [`from_data_frame()`](https://r.igraph.org/reference/constructor_spec.md)
+  [`from_edgelist()`](https://r.igraph.org/reference/constructor_spec.md)
+  [`degseq()`](https://r.igraph.org/reference/constructor_spec.md)
+  [`tree()`](https://r.igraph.org/reference/constructor_spec.md) :
+
+  Constructor specifications for
+  [`graph_()`](https://r.igraph.org/reference/graph_.md),
+  [`make_()`](https://r.igraph.org/reference/make_.md) and
+  [`sample_()`](https://r.igraph.org/reference/sample_.md)
+
 ### Constructor modifiers
 
 - [`make_()`](https://r.igraph.org/reference/make_.md) : Make a new
@@ -236,67 +245,52 @@
   : Graph layouts
 
 - [`layout_as_bipartite()`](https://r.igraph.org/reference/layout_as_bipartite.md)
-  [`as_bipartite()`](https://r.igraph.org/reference/layout_as_bipartite.md)
   : Simple two-row layout for bipartite graphs
 
 - [`layout_as_star()`](https://r.igraph.org/reference/layout_as_star.md)
-  [`as_star()`](https://r.igraph.org/reference/layout_as_star.md) :
-  Generate coordinates to place the vertices of a graph in a star-shape
+  : Generate coordinates to place the vertices of a graph in a
+  star-shape
 
 - [`layout_as_tree()`](https://r.igraph.org/reference/layout_as_tree.md)
-  [`as_tree()`](https://r.igraph.org/reference/layout_as_tree.md) : The
-  Reingold-Tilford graph layout algorithm
+  : The Reingold-Tilford graph layout algorithm
 
 - [`layout_in_circle()`](https://r.igraph.org/reference/layout_in_circle.md)
-  [`in_circle()`](https://r.igraph.org/reference/layout_in_circle.md) :
-  Graph layout with vertices on a circle.
+  : Graph layout with vertices on a circle.
 
-- [`layout_nicely()`](https://r.igraph.org/reference/layout_nicely.md)
-  [`nicely()`](https://r.igraph.org/reference/layout_nicely.md) : Choose
-  an appropriate graph layout algorithm automatically
+- [`layout_nicely()`](https://r.igraph.org/reference/layout_nicely.md) :
+  Choose an appropriate graph layout algorithm automatically
 
 - [`layout_on_grid()`](https://r.igraph.org/reference/layout_on_grid.md)
-  [`on_grid()`](https://r.igraph.org/reference/layout_on_grid.md) :
-  Simple grid layout
+  : Simple grid layout
 
 - [`layout_on_sphere()`](https://r.igraph.org/reference/layout_on_sphere.md)
-  [`on_sphere()`](https://r.igraph.org/reference/layout_on_sphere.md) :
-  Graph layout with vertices on the surface of a sphere
+  : Graph layout with vertices on the surface of a sphere
 
 - [`layout_randomly()`](https://r.igraph.org/reference/layout_randomly.md)
-  [`randomly()`](https://r.igraph.org/reference/layout_randomly.md) :
-  Randomly place vertices on a plane or in 3d space
+  : Randomly place vertices on a plane or in 3d space
 
 - [`layout_with_dh()`](https://r.igraph.org/reference/layout_with_dh.md)
-  [`with_dh()`](https://r.igraph.org/reference/layout_with_dh.md) : The
-  Davidson-Harel layout algorithm
+  : The Davidson-Harel layout algorithm
 
 - [`layout_with_fr()`](https://r.igraph.org/reference/layout_with_fr.md)
-  [`with_fr()`](https://r.igraph.org/reference/layout_with_fr.md) : The
-  Fruchterman-Reingold layout algorithm
+  : The Fruchterman-Reingold layout algorithm
 
 - [`layout_with_gem()`](https://r.igraph.org/reference/layout_with_gem.md)
-  [`with_gem()`](https://r.igraph.org/reference/layout_with_gem.md) :
-  The GEM layout algorithm
+  : The GEM layout algorithm
 
 - [`layout_with_graphopt()`](https://r.igraph.org/reference/layout_with_graphopt.md)
-  [`with_graphopt()`](https://r.igraph.org/reference/layout_with_graphopt.md)
   : The graphopt layout algorithm
 
 - [`layout_with_kk()`](https://r.igraph.org/reference/layout_with_kk.md)
-  [`with_kk()`](https://r.igraph.org/reference/layout_with_kk.md) : The
-  Kamada-Kawai layout algorithm
+  : The Kamada-Kawai layout algorithm
 
 - [`layout_with_lgl()`](https://r.igraph.org/reference/layout_with_lgl.md)
-  [`with_lgl()`](https://r.igraph.org/reference/layout_with_lgl.md) :
-  Large Graph Layout
+  : Large Graph Layout
 
 - [`layout_with_mds()`](https://r.igraph.org/reference/layout_with_mds.md)
-  [`with_mds()`](https://r.igraph.org/reference/layout_with_mds.md) :
-  Graph layout by multidimensional scaling
+  : Graph layout by multidimensional scaling
 
 - [`layout_with_sugiyama()`](https://r.igraph.org/reference/layout_with_sugiyama.md)
-  [`with_sugiyama()`](https://r.igraph.org/reference/layout_with_sugiyama.md)
   : The Sugiyama graph layout generator
 
 - [`merge_coords()`](https://r.igraph.org/reference/merge_coords.md)
@@ -309,12 +303,33 @@
 - [`normalize()`](https://r.igraph.org/reference/normalize.md) :
   Normalize layout
 
+- [`as_bipartite()`](https://r.igraph.org/reference/layout_spec.md)
+  [`as_star()`](https://r.igraph.org/reference/layout_spec.md)
+  [`as_tree()`](https://r.igraph.org/reference/layout_spec.md)
+  [`in_circle()`](https://r.igraph.org/reference/layout_spec.md)
+  [`nicely()`](https://r.igraph.org/reference/layout_spec.md)
+  [`on_grid()`](https://r.igraph.org/reference/layout_spec.md)
+  [`on_sphere()`](https://r.igraph.org/reference/layout_spec.md)
+  [`randomly()`](https://r.igraph.org/reference/layout_spec.md)
+  [`with_dh()`](https://r.igraph.org/reference/layout_spec.md)
+  [`with_fr()`](https://r.igraph.org/reference/layout_spec.md)
+  [`with_gem()`](https://r.igraph.org/reference/layout_spec.md)
+  [`with_graphopt()`](https://r.igraph.org/reference/layout_spec.md)
+  [`with_kk()`](https://r.igraph.org/reference/layout_spec.md)
+  [`with_lgl()`](https://r.igraph.org/reference/layout_spec.md)
+  [`with_mds()`](https://r.igraph.org/reference/layout_spec.md)
+  [`with_sugiyama()`](https://r.igraph.org/reference/layout_spec.md)
+  [`with_drl()`](https://r.igraph.org/reference/layout_spec.md) :
+
+  Layout specifications for
+  [`layout_()`](https://r.igraph.org/reference/layout_.md) and
+  [`add_layout_()`](https://r.igraph.org/reference/add_layout_.md)
+
 - [`layout_modifier()`](https://r.igraph.org/reference/layout_modifier.md)
   : Create a layout modifier
 
 - [`layout_with_drl()`](https://r.igraph.org/reference/layout_with_drl.md)
-  [`with_drl()`](https://r.igraph.org/reference/layout_with_drl.md) :
-  The DrL graph layout generator
+  : The DrL graph layout generator
 
 - [`categorical_pal()`](https://r.igraph.org/reference/categorical_pal.md)
   : Palette for categories
@@ -587,7 +602,6 @@
   : Create graphs from adjacency lists
 - [`as_data_frame()`](https://r.igraph.org/reference/graph_from_data_frame.md)
   [`graph_from_data_frame()`](https://r.igraph.org/reference/graph_from_data_frame.md)
-  [`from_data_frame()`](https://r.igraph.org/reference/graph_from_data_frame.md)
   : Creating igraph graphs from data frames or vice-versa
 - [`graph_from_graphnel()`](https://r.igraph.org/reference/graph_from_graphnel.md)
   : Convert graphNEL objects from the graph package to igraph
@@ -813,7 +827,6 @@
 
 - [`as_data_frame()`](https://r.igraph.org/reference/graph_from_data_frame.md)
   [`graph_from_data_frame()`](https://r.igraph.org/reference/graph_from_data_frame.md)
-  [`from_data_frame()`](https://r.igraph.org/reference/graph_from_data_frame.md)
   : Creating igraph graphs from data frames or vice-versa
 
 ### Efficiency

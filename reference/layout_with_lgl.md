@@ -16,8 +16,6 @@ layout_with_lgl(
   cellsize = NULL,
   root = NULL
 )
-
-with_lgl(...)
 ```
 
 ## Arguments
@@ -28,7 +26,7 @@ with_lgl(...)
 
 - ...:
 
-  Passed to `layout_with_lgl()`.
+  These dots are for future extensions and must be empty.
 
 - maxiter:
 
@@ -80,6 +78,10 @@ layout generator of the Large Graph Layout software
 [`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
+
+[`with_lgl()`](https://r.igraph.org/reference/layout_spec.md) to build a
+lazy layout specification for
+[`add_layout_()`](https://r.igraph.org/reference/add_layout_.md).
 
 Other graph layouts:
 [`add_layout_()`](https://r.igraph.org/reference/add_layout_.md),

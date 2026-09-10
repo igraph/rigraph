@@ -7,8 +7,6 @@ circle and the rest of the vertices equidistantly on the perimeter.
 
 ``` r
 layout_as_star(graph, ..., center = NULL, order = NULL)
-
-as_star(...)
 ```
 
 ## Arguments
@@ -19,7 +17,7 @@ as_star(...)
 
 - ...:
 
-  Arguments to pass to `layout_as_star()`.
+  These dots are for future extensions and must be empty.
 
 - center:
 
@@ -55,7 +53,10 @@ for other layout algorithms,
 [`plot.igraph()`](https://r.igraph.org/reference/plot.igraph.md) and
 [`tkplot()`](https://r.igraph.org/reference/tkplot.md) on how to plot
 graphs and [`star()`](https://r.igraph.org/reference/make_star.md) on
-how to create ring graphs.
+how to create ring graphs. See
+[`as_star()`](https://r.igraph.org/reference/layout_spec.md) to build a
+lazy layout specification for
+[`add_layout_()`](https://r.igraph.org/reference/add_layout_.md).
 
 Other graph layouts:
 [`add_layout_()`](https://r.igraph.org/reference/add_layout_.md),

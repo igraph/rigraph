@@ -13,8 +13,6 @@ sample_degseq(
   method = c("configuration", "vl", "fast.heur.simple", "configuration.simple",
     "edge.switching.simple")
 )
-
-degseq(..., deterministic = FALSE)
 ```
 
 ## Arguments
@@ -33,17 +31,11 @@ degseq(..., deterministic = FALSE)
 
 - ...:
 
-  Passed to
-  [`realize_degseq()`](https://r.igraph.org/reference/realize_degseq.md)
-  if ‘deterministic’ is true, or to `sample_degseq()` otherwise.
+  These dots are for future extensions and must be empty.
 
 - method:
 
   Character, the method for generating the graph. See Details.
-
-- deterministic:
-
-  Whether the construction should be deterministic
 
 ## Value
 
@@ -102,7 +94,11 @@ directed graphs.
 [`simplify()`](https://r.igraph.org/reference/simplify.md) to get rid of
 the multiple and/or loops edges,
 [`realize_degseq()`](https://r.igraph.org/reference/realize_degseq.md)
-for a deterministic variant.
+for a deterministic variant. See
+[`degseq()`](https://r.igraph.org/reference/constructor_spec.md) to
+build a lazy constructor specification for
+[`make_()`](https://r.igraph.org/reference/make_.md) or
+[`sample_()`](https://r.igraph.org/reference/sample_.md).
 
 Random graph models (games):
 [`bipartite_gnm()`](https://r.igraph.org/reference/sample_bipartite_gnm.md),

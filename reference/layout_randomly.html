@@ -15,7 +15,7 @@ three dimensions."><meta property="og:image" content="https://r.igraph.org/logo.
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9035</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9036</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,9 +58,7 @@ three dimensions.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">layout_randomly</span><span class="op">(</span><span class="va">graph</span>, <span class="va">...</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">randomly</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">layout_randomly</span><span class="op">(</span><span class="va">graph</span>, <span class="va">...</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -72,7 +70,7 @@ three dimensions.</p>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Parameters to pass to <code>layout_randomly()</code>.</p></dd>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-dim">dim<a class="anchor" aria-label="anchor" href="#arg-dim"></a></dt>
@@ -96,7 +94,9 @@ layout generators.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>Other graph layouts:
+    <div class="dont-index"><p><code><a href="layout_spec.html">randomly()</a></code> to build a lazy layout specification for
+<code><a href="add_layout_.html">add_layout_()</a></code>.</p>
+<p>Other graph layouts:
 <code><a href="add_layout_.html">add_layout_()</a></code>,
 <code><a href="component_wise.html">component_wise()</a></code>,
 <code><a href="layout_.html">layout_()</a></code>,

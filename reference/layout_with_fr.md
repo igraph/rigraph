@@ -27,8 +27,6 @@ layout_with_fr(
   repulserad = deprecated(),
   maxiter = deprecated()
 )
-
-with_fr(...)
 ```
 
 ## Arguments
@@ -39,7 +37,7 @@ with_fr(...)
 
 - ...:
 
-  Passed to `layout_with_fr()`.
+  These dots are for future extensions and must be empty.
 
 - coords:
 
@@ -145,7 +143,10 @@ Force-directed Placement. *Software - Practice and Experience*,
 
 [`layout_with_drl()`](https://r.igraph.org/reference/layout_with_drl.md),
 [`layout_with_kk()`](https://r.igraph.org/reference/layout_with_kk.md)
-for other layout algorithms.
+for other layout algorithms. See
+[`with_fr()`](https://r.igraph.org/reference/layout_spec.md) to build a
+lazy layout specification for
+[`add_layout_()`](https://r.igraph.org/reference/add_layout_.md).
 
 Other graph layouts:
 [`add_layout_()`](https://r.igraph.org/reference/add_layout_.md),

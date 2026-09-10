@@ -88,7 +88,7 @@ optionally graph, vertex and/or edge attributes.
 `print.igraph()` behaves either as `summary.igraph` or `print_all()`
 depending on the `full` argument. See also the ‘print.full’ igraph
 option and
-[`igraph_opt()`](https://r.igraph.org/reference/igraph_options.md).
+[`igraph_opt()`](https://r.igraph.org/reference/igraph_opt.md).
 
 The graph summary printed by `summary.igraph` (and `print.igraph()` and
 `print_all()`) consists of one or more lines. The first line contains
@@ -155,7 +155,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 g <- make_ring(10)
 g
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 9600b85 ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 81c392a ──
 #> ℹ undirected
 #> ℹ 10 vertices · 10 edges
 #> 
@@ -166,7 +166,7 @@ g
 #>  [1] 1 ─ 2   2 ─ 3   3 ─ 4   4 ─ 5   5 ─ 6   6 ─ 7   7 ─ 8   8 ─ 9   9 ─ 10 
 #> [10] 1 ─ 10 
 summary(g)
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 9600b85 ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 81c392a ──
 #> ℹ undirected
 #> ℹ 10 vertices · 10 edges
 #> 

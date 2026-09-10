@@ -27,8 +27,6 @@ layout_with_kk(
   coolexp = deprecated(),
   start = deprecated()
 )
-
-with_kk(...)
 ```
 
 ## Arguments
@@ -39,7 +37,7 @@ with_kk(...)
 
 - ...:
 
-  Passed to `layout_with_kk()`.
+  These dots are for future extensions and must be empty.
 
 - coords:
 
@@ -144,7 +142,10 @@ Graphs. *Information Processing Letters*, 31/1, 7–15, 1989.
 
 [`layout_with_drl()`](https://r.igraph.org/reference/layout_with_drl.md),
 [`plot.igraph()`](https://r.igraph.org/reference/plot.igraph.md),
-[`tkplot()`](https://r.igraph.org/reference/tkplot.md)
+[`tkplot()`](https://r.igraph.org/reference/tkplot.md). See
+[`with_kk()`](https://r.igraph.org/reference/layout_spec.md) to build a
+lazy layout specification for
+[`add_layout_()`](https://r.igraph.org/reference/add_layout_.md).
 
 Other graph layouts:
 [`add_layout_()`](https://r.igraph.org/reference/add_layout_.md),

@@ -25,6 +25,7 @@ The result of the `code`.
 ## See also
 
 Other igraph options:
+[`igraph_opt()`](https://r.igraph.org/reference/igraph_opt.md),
 [`igraph_options()`](https://r.igraph.org/reference/igraph_options.md)
 
 ## Examples

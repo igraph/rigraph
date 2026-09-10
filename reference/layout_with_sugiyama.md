@@ -16,8 +16,6 @@ layout_with_sugiyama(
   weights = NULL,
   attributes = c("default", "all", "none")
 )
-
-with_sugiyama(...)
 ```
 
 ## Arguments
@@ -28,7 +26,7 @@ with_sugiyama(...)
 
 - ...:
 
-  Passed to `layout_with_sugiyama()`.
+  These dots are for future extensions and must be empty.
 
 - layers:
 
@@ -126,6 +124,10 @@ Hierarchical Systems". IEEE Transactions on Systems, Man and Cybernetics
 11(2):109-125, 1981.
 
 ## See also
+
+[`with_sugiyama()`](https://r.igraph.org/reference/layout_spec.md) to
+build a lazy layout specification for
+[`add_layout_()`](https://r.igraph.org/reference/add_layout_.md).
 
 Other graph layouts:
 [`add_layout_()`](https://r.igraph.org/reference/add_layout_.md),

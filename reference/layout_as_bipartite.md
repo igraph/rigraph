@@ -14,8 +14,6 @@ layout_as_bipartite(
   vgap = 1,
   maxiter = 100
 )
-
-as_bipartite(...)
 ```
 
 ## Arguments
@@ -32,7 +30,7 @@ as_bipartite(...)
 
 - ...:
 
-  Arguments to pass to `layout_as_bipartite()`.
+  These dots are for future extensions and must be empty.
 
 - hgap:
 
@@ -68,7 +66,10 @@ optimized to minimize edge crossings, using the Sugiyama algorithm (see
 
 ## See also
 
-[`layout_with_sugiyama()`](https://r.igraph.org/reference/layout_with_sugiyama.md)
+[`layout_with_sugiyama()`](https://r.igraph.org/reference/layout_with_sugiyama.md).
+See [`as_bipartite()`](https://r.igraph.org/reference/layout_spec.md) to
+build a lazy layout specification for
+[`add_layout_()`](https://r.igraph.org/reference/add_layout_.md).
 
 Other graph layouts:
 [`add_layout_()`](https://r.igraph.org/reference/add_layout_.md),

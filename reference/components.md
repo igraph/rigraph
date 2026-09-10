@@ -35,8 +35,9 @@ count_components(graph, ..., mode = c("weak", "strong"))
 
 - ...:
 
-  Additional attributes to pass to `cluster`, right now only `mode`
-  makes sense.
+  For `component_distribution()`, forwarded to `components()`. For
+  `components()`, `is_connected()`, `count_components()` and
+  `largest_component()`, these dots must be empty.
 
 - mode:
 
@@ -179,7 +180,7 @@ groups(clu)
 #> [1] 17
 #> 
 largest_component(g)
-#> ── <igraph> Erdos-Renyi (gnp) graph ───────────────────────────────── 1d5fbb3 ──
+#> ── <igraph> Erdos-Renyi (gnp) graph ───────────────────────────────── 7c5a9a4 ──
 #> ℹ undirected
 #> ℹ 8 vertices · 7 edges
 #> 

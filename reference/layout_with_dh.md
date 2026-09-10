@@ -19,8 +19,6 @@ layout_with_dh(
   weight.edge.crossings = NULL,
   weight.node.edge.dist = NULL
 )
-
-with_dh(...)
 ```
 
 ## Arguments
@@ -31,7 +29,7 @@ with_dh(...)
 
 - ...:
 
-  Passed to `layout_with_dh()`.
+  These dots are for future extensions and must be empty.
 
 - coords:
 
@@ -123,7 +121,10 @@ Annealing. *ACM Transactions on Graphics* 15(4), pp. 301-331, 1996.
 
 [`layout_with_fr()`](https://r.igraph.org/reference/layout_with_fr.md),
 [`layout_with_kk()`](https://r.igraph.org/reference/layout_with_kk.md)
-for other layout algorithms.
+for other layout algorithms. See
+[`with_dh()`](https://r.igraph.org/reference/layout_spec.md) to build a
+lazy layout specification for
+[`add_layout_()`](https://r.igraph.org/reference/add_layout_.md).
 
 Other graph layouts:
 [`add_layout_()`](https://r.igraph.org/reference/add_layout_.md),

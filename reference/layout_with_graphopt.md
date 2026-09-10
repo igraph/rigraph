@@ -17,8 +17,6 @@ layout_with_graphopt(
   spring.constant = 1,
   max.sa.movement = 5
 )
-
-with_graphopt(...)
 ```
 
 ## Arguments
@@ -29,7 +27,7 @@ with_graphopt(...)
 
 - ...:
 
-  Passed to `layout_with_graphopt()`.
+  These dots are for future extensions and must be empty.
 
 - start:
 
@@ -87,6 +85,10 @@ until it reaches an equilibrium. (There is no simulated annealing or
 anything like that, so a stable fixed point is not guaranteed.)
 
 ## See also
+
+[`with_graphopt()`](https://r.igraph.org/reference/layout_spec.md) to
+build a lazy layout specification for
+[`add_layout_()`](https://r.igraph.org/reference/add_layout_.md).
 
 Other graph layouts:
 [`add_layout_()`](https://r.igraph.org/reference/add_layout_.md),

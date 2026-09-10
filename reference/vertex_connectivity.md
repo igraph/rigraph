@@ -32,9 +32,9 @@ cohesion(x, checks = TRUE, ...)
 
 - ...:
 
-  Additional arguments passed to methods. Not used by
-  `vertex_connectivity()` directly but may be used by other methods that
-  implement `cohesion()`.
+  For `vertex_connectivity()`, these dots must be empty. For
+  `cohesion()`, unused, present for S3 method consistency but may be
+  used by other methods that implement it.
 
 - checks:
 

@@ -22,7 +22,9 @@ layout_components(graph, layout = NULL, ...)
 
 - ...:
 
-  Additional arguments to pass to the `layout` layout function.
+  For `layout_components()`, additional arguments to pass to the
+  `layout` layout function. For `merge_coords()`, these dots must be
+  empty.
 
 - method:
 

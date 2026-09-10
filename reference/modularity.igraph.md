@@ -46,7 +46,9 @@ modularity_matrix(
 
 - ...:
 
-  Additional arguments, none currently.
+  For `modularity_matrix()`, these dots must be empty. For
+  `modularity()`, unused, present for S3 method consistency but may be
+  used by other methods that implement it.
 
 ## Value
 

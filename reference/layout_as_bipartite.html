@@ -15,7 +15,7 @@ graphs."><meta property="og:image" content="https://r.igraph.org/logo.png"></hea
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9035</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9036</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,9 +65,7 @@ graphs.</p>
 <span>  hgap <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  vgap <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  maxiter <span class="op">=</span> <span class="fl">100</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">as_bipartite</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -87,7 +85,7 @@ used.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Arguments to pass to <code>layout_as_bipartite()</code>.</p></dd>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-hgap">hgap<a class="anchor" aria-label="anchor" href="#arg-hgap"></a></dt>
@@ -123,7 +121,8 @@ edge crossings, using the Sugiyama algorithm (see
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="layout_with_sugiyama.html">layout_with_sugiyama()</a></code></p>
+    <div class="dont-index"><p><code><a href="layout_with_sugiyama.html">layout_with_sugiyama()</a></code>. See <code><a href="layout_spec.html">as_bipartite()</a></code> to build a lazy
+layout specification for <code><a href="add_layout_.html">add_layout_()</a></code>.</p>
 <p>Other graph layouts:
 <code><a href="add_layout_.html">add_layout_()</a></code>,
 <code><a href="component_wise.html">component_wise()</a></code>,
@@ -165,7 +164,7 @@ edge crossings, using the Sugiyama algorithm (see
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Two columns</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="add_layout_.html">add_layout_</a></span><span class="op">(</span><span class="fu">as_bipartite</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="add_layout_.html">add_layout_</a></span><span class="op">(</span><span class="fu"><a href="layout_spec.html">as_bipartite</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="layout_as_bipartite-2.png" alt="" width="700" height="433"></span>
 </code></pre></div>

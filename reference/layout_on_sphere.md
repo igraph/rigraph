@@ -7,8 +7,6 @@ their vertex IDs.
 
 ``` r
 layout_on_sphere(graph)
-
-on_sphere(...)
 ```
 
 ## Arguments
@@ -16,10 +14,6 @@ on_sphere(...)
 - graph:
 
   The input graph.
-
-- ...:
-
-  Passed to `layout_on_sphere()`.
 
 ## Value
 
@@ -39,6 +33,10 @@ the [`permute()`](https://r.igraph.org/reference/permute.md) function.
 [`layout_sphere()`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_sphere)
 
 ## See also
+
+[`on_sphere()`](https://r.igraph.org/reference/layout_spec.md) to build
+a lazy layout specification for
+[`add_layout_()`](https://r.igraph.org/reference/add_layout_.md).
 
 Other graph layouts:
 [`add_layout_()`](https://r.igraph.org/reference/add_layout_.md),
