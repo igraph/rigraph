@@ -29,7 +29,7 @@ Run `revdepcheck::revdep_details(, "R6causal")` for more info
      <read *> 
      
      Error: processing vignette 'using_R6causal.Rmd' failed with diagnostics:
-     LaTeX failed to compile <lib>/R6causal.Rcheck/vign_test/R6causal/vignettes/using_R6causal.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips. See using_R6causal.log for more info.
+     LaTeX failed to compile using_R6causal.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips. See using_R6causal.log for more info.
      --- failed re-building ‘using_R6causal.Rmd’
      
      SUMMARY: processing the following file failed:

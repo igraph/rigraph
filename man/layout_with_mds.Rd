@@ -4,7 +4,9 @@
 \alias{layout_with_mds}
 \title{Graph layout by multidimensional scaling}
 \usage{
-layout_with_mds(graph, dist = NULL, dim = 2, options = arpack_defaults())
+layout_with_mds(graph, dist = NULL, dim = 2, options = deprecated())
+
+with_mds(...)
 }
 \arguments{
 \item{graph}{The input graph.}
@@ -17,8 +19,11 @@ minus one, but only if the graph is connected; for unconnected graphs, the
 only possible value is 2. This is because \code{merge_coords()} only works in
 2D.}
 
-\item{options}{This is currently ignored, as ARPACK is not used any more for
-solving the eigenproblem}
+\item{options}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This argument is not
+supported from igraph version 1.6.0, as ARPACK is not used any more for
+solving the eigenproblem. Supplying it raises an error.}
+
+\item{...}{Passed to \code{layout_with_mds()}.}
 }
 \value{
 A numeric matrix with \code{dim} columns.

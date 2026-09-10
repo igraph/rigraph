@@ -48,6 +48,17 @@
 #                          -j1): one compiler process per check, so the
 #                          memory cap is sized for one cc1plus, not for a
 #                          package Makefile's idea of parallelism.
+#   _R_CHECK_LIMIT_CORES_ - passed into the container, default TRUE, the
+#                          value CRAN's own check machines use: a cluster or
+#                          fork call asking for more than 2 workers errors
+#                          instead of spawning them. Without it a test suite
+#                          that sizes itself from parallel::detectCores()
+#                          sees the runner's 4 cores and fans out 4 workers
+#                          per check -- with 4 concurrent checks, run
+#                          32574134229's 4-core shards ran at load 5-13,
+#                          and every floor timeout sat in exactly those
+#                          windows. Identical for both halves, so the
+#                          comparison is unaffected either way.
 #
 # Leaves <workdir>/<half>/ holding the .Rcheck directory, `driver.log` (what
 # R CMD check said, each line stamped with elapsed seconds), `status` (the
@@ -178,6 +189,8 @@ run_args=(
   # and a package Makefile that would fan out -j$(nproc) compilers under a
   # 6g cap trades one OOM-killed compiler for several.
   -e MAKEFLAGS="${REVDEPX_CHECK_MAKEFLAGS:--j1}"
+  # CRAN parity, and the shard's own tranquillity: see the header note.
+  -e _R_CHECK_LIMIT_CORES_="${_R_CHECK_LIMIT_CORES_:-TRUE}"
   -v "${tarball}:/revdepx/src/${src_name}:ro"
   -v "${out}:/revdepx/out"
   -v "${out}/tmp:/tmp"
@@ -252,6 +265,17 @@ if [ -s "${cidfile}" ]; then
     echo "the kernel OOM killer ended this check (memory cap ${REVDEPX_MEMORY:-none})" \
       >> "${out}/driver.log"
   fi
+fi
+
+# A failed half's timing record, into the job log while it is cheap to read:
+# every driver.log line carries the elapsed stamp, so its stage lines are a
+# complete where-did-the-time-go trace up to the kill, and GitHub adds
+# wall-clock timestamps on top. Successful halves stay quiet; the salvage
+# keeps every failed half's full driver.log in the results artifact besides.
+if [ "${status}" -ne 0 ] && [ -f "${out}/driver.log" ]; then
+  echo "::group::${half} half of ${src_name%_*} exited ${status}: stage timeline"
+  grep -E '^\[ *[0-9]+s\] \* ' "${out}/driver.log" | tail -n 60
+  echo "::endgroup::"
 fi
 
 exit 0

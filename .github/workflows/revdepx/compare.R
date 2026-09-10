@@ -1,9 +1,7 @@
 # The comparison layer: from two `R CMD check` halves to one manifest line.
 #
-# Extracted from revdep2's shard.R so that both engines share it. The pair
-# engine (revdep3) sources it into the shard driver and compares in-process,
-# one package after another; the queue engine (revdep4) sources it into
-# compare-one.R, one short-lived process per package, run by a worker the
+# Extracted from revdep2's shard.R. The queue engine (revdep4) sources it
+# into compare-one.R, one short-lived process per package, run by a worker the
 # moment that package's halves are done. Everything here is a plain function
 # of its arguments -- no shard state, no globals -- and what a function learns
 # comes back as a named list of manifest-field updates for the caller to apply
@@ -92,10 +90,9 @@ check_diff <- function(name, old_log, new_log, work_dir) {
 # inside the container, which is what makes the distinction reliable: exit 124
 # is the deadline, anything else is the check saying something.
 #
-# `duration` is this half's cost in seconds as the engine measured it: the
-# pair engine cannot separate its two concurrent halves and passes the pair's
-# wall clock for both, while the queue engine runs them one after the other
-# and passes each half's own clock.
+# `duration` is this half's own clock in seconds: the queue runs the two
+# halves one after the other, so each is a real measurement. (Rows written by
+# the retired pair engine carried the pair's shared wall clock instead.)
 read_side <- function(work_dir, phase, name, timeout_sec, duration) {
   dir <- file.path(work_dir, phase)
   # A half that never wrote its status -- an unwritable work directory, a
@@ -243,7 +240,13 @@ pkg_out <- function(pkgs_dir, name) {
 }
 
 # The files worth carrying out of a check directory: what broke, and the
-# complete transcripts of the two stages that explain why.
+# complete transcripts of the two stages that explain why. The half's
+# `driver.log` and `status` ride along from next to the .Rcheck directory:
+# the driver log is the per-stage timing record -- check-half.sh stamps
+# every line with elapsed seconds, precisely because `_R_CHECK_TIMINGS_`
+# stays off to keep the compared check logs stable -- and before this it
+# died with the runner's work directory, which made the yaml's "nothing is
+# lost" claim quietly false.
 copy_check_output <- function(rcheck, keep) {
   dir.create(keep, recursive = TRUE, showWarnings = FALSE)
   for (f in c(
@@ -263,6 +266,31 @@ copy_check_output <- function(rcheck, keep) {
       )
     }
   }
+  for (f in c("driver.log", "status")) {
+    if (file.exists(file.path(dirname(rcheck), f))) {
+      file.copy(
+        file.path(dirname(rcheck), f),
+        file.path(keep, f),
+        overwrite = TRUE
+      )
+    }
+  }
+}
+
+# Salvage a half that produced no readable result -- a timeout, an OOM kill,
+# a container that never started. What survives varies: a killed check
+# leaves a partial .Rcheck whose 00check.log lists every stage it finished,
+# a container that never ran leaves only the driver log -- and
+# copy_check_output() copies whatever of that exists, including the stamped
+# driver log, so the post-mortem of exactly these packages stops depending
+# on a work directory that dies with the runner. Run 33777134786's
+# both-halves timeouts (ctmm, E2E, PortfolioTesteR) salvaged nothing at
+# all; "where did the 1800 seconds go" had no answer in any artifact.
+salvage_side <- function(work_dir, pkgs_dir, name, phase) {
+  copy_check_output(
+    file.path(work_dir, phase, paste0(name, ".Rcheck")),
+    file.path(pkg_out(pkgs_dir, name), paste0(phase, "-check"))
+  )
 }
 
 # Record the half that did produce a result, when its partner did not.
@@ -293,9 +321,8 @@ keep_side <- function(work_dir, pkgs_dir, name, phase, result) {
 }
 
 # A half that errored or timed out, turned into this package's verdict.
-# Returns the manifest-field updates; the log line is printed here so both
-# engines say it the same way (`progress` is the pair engine's position note,
-# empty elsewhere).
+# Returns the manifest-field updates; the log line is printed here so every
+# caller says it the same way (`progress` is an optional position note).
 check_failure <- function(name, phase, result, progress = "") {
   note <- if (nzchar(progress)) paste0(", ", progress) else ""
   if (isTRUE(attr(result, "timed_out"))) {
@@ -426,12 +453,10 @@ compare_halves <- function(
     updates$result <- classify_status(cmp$status, new_issues)
     updates$status <- cmp$status
     updates$status_new <- counts(new)
-    # This half's measured seconds, whatever the engine means by that: the
-    # pair engine charges the pair's wall clock to both halves -- they ran
-    # side by side, so neither one's own time is separable from the other's
-    # -- and the queue engine records each half's true clock. It used to be
-    # recorded only where the comparison failed, which left `t_new` null for
-    # every package that compared -- that is, for all of them.
+    # This half's measured seconds -- each half's true clock under the
+    # queue. It used to be recorded only where the comparison failed, which
+    # left `t_new` null for every package that compared -- that is, for all
+    # of them.
     updates$t_new <- attr(new, "duration")
     updates$new_issues <- new_issues
     # An install failure or a timeout leaves nothing to compare, so the
@@ -490,10 +515,9 @@ manifest_entry_defaults <- function(name, plan_pkg, shard_index) {
 #
 # The versions are stamped at write time, so even a line written on an error
 # path names the versions it would have compared. Appended under `flock` when
-# there is one: the pair engine has a single writer -- the shard driver, one
-# line per package as it finishes -- but the queue engine has many, every
-# worker's compare-one.R appending its package's line the moment it is done
-# and the driver appending the deferred tail after the queue drains. One
+# there is one: the queue has many writers, every worker's compare-one.R
+# appending its package's line the moment it is done and the driver
+# appending the deferred tail after the queue drains. One
 # short O_APPEND write per line would probably never tear; the lock costs
 # nothing and turns probably into does not. Where flock does not exist (it is
 # util-linux, so everywhere this runs in CI, but a local macOS invocation

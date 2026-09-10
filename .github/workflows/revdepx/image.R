@@ -94,7 +94,12 @@ options(
 plan <- read_json(env_chr("PLAN", "plan.json"))
 out_dir <- env_chr("OUT_DIR", "universe")
 dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
-package <- plan$package %||% "igraph"
+# `plan$package` normally names it. The fallback reads this repository's own
+# DESCRIPTION rather than a hardcoded name, so the kit is correct in every
+# repository it is broadcast to; the repository name is not a safe source,
+# since igraph/rigraph ships the `igraph` package.
+package <- plan$package %||%
+  unname(read.dcf("DESCRIPTION", fields = "Package")[1, 1])
 
 # The install set is the whole universe: everything any shard's checks need
 # installed anywhere. plan$universe is the sorted union plan.R writes; a

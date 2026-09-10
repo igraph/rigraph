@@ -4,9 +4,7 @@
 # Usage:
 #   .github/workflows/revdepx/fetch.sh [<run-id>] [<dir>]
 #
-# Without a run id, the newest completed run of either engine -- revdep3.yaml
-# or revdep4.yaml, which publish interchangeable revdepx-* artifacts -- is
-# used. Needs the `gh` CLI, authenticated for the repository.
+# Without a run id, the newest completed revdep4.yaml run is used. Needs the `gh` CLI, authenticated for the repository.
 
 set -eu
 
@@ -18,7 +16,7 @@ if [ -z "${run}" ]; then
   # two workflows is the normal case while the other PR is unmerged, so a
   # workflow that gh cannot list is skipped, not fatal.
   run="$(
-    for wf in revdep3.yaml revdep4.yaml; do
+    for wf in revdep4.yaml; do
       gh run list --workflow "${wf}" --limit 20 \
         --json databaseId,status,createdAt --jq \
         '.[] | select(.status == "completed") | [.createdAt, .databaseId] | @tsv' \
@@ -26,7 +24,7 @@ if [ -z "${run}" ]; then
     done | sort -r | head -n 1 | cut -f 2
   )"
   if [ -z "${run}" ] || [ "${run}" = "null" ]; then
-    echo "No completed revdep3/revdep4 run found; pass a run id." >&2
+    echo "No completed revdep4 run found; pass a run id." >&2
     exit 1
   fi
   echo "Using newest completed run: ${run}"
@@ -49,6 +47,6 @@ if [ -f "${dir}/README.md" ]; then
   cat "${dir}/README.md"
 fi
 echo
-echo "To re-check everything that is not ok (either engine can retry the other's run):"
-echo "  gh workflow run revdep3.yaml -f retry-run=${run}"
+echo "To re-check everything that is not ok:"
+
 echo "  gh workflow run revdep4.yaml -f retry-run=${run}"

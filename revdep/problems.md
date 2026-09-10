@@ -628,7 +628,7 @@ Run `revdepcheck::revdep_details(, "GoodFitSBM")` for more info
      Execution halted
      ```
 
-# manynet (2.2.3)
+# manynet (2.3.1)
 
 * GitHub: <https://github.com/stocnet/manynet>
 * Email: <mailto:james.hollway@graduateinstitute.ch>
@@ -653,7 +653,7 @@ Run `revdepcheck::revdep_details(, "manynet")` for more info
        `actual` is an S3 object of class <lifecycle_warning_deprecated/rlang_warning/warning/condition>, a list
        `expected` is NULL
        
-       Warning in expression 46 : mean(as_matrix(s_women))
+       Warning in expression 54 : mean(as_matrix(s_women))
        Backtrace:
            ▆
         1. ├─testthat::expect_null(...) at test-tutorials_manynet.R:4:5
@@ -662,7 +662,7 @@ Run `revdepcheck::revdep_details(, "manynet")` for more info
         4. └─manynet:::check_tute_functions(tute)
         5.   └─testthat::expect_null(...) at ./helper-manynet.R:225:5
        
-       [ FAIL 2 | WARN 728 | SKIP 78 | PASS 3303 ]
+       [ FAIL 6 | WARN 1317 | SKIP 96 | PASS 4747 ]
        Error:
        ! Test failures.
        Execution halted
@@ -698,7 +698,7 @@ Run `revdepcheck::revdep_details(, "MetaNet")` for more info
      Execution halted
      ```
 
-# migraph (1.6.8)
+# migraph (1.7.0)
 
 * GitHub: <https://github.com/stocnet/migraph>
 * Email: <mailto:james.hollway@graduateinstitute.ch>
@@ -732,7 +732,7 @@ Run `revdepcheck::revdep_details(, "migraph")` for more info
         4. └─migraph:::check_tute_functions(tute, skip = "ergm\\(|play_diffusions\\(")
         5.   └─testthat::expect_null(...) at ./helper-functions.R:126:5
        
-       [ FAIL 1 | WARN 0 | SKIP 3 | PASS 260 ]
+       [ FAIL 1 | WARN 0 | SKIP 3 | PASS 276 ]
        Error:
        ! Test failures.
        Execution halted
@@ -843,47 +843,55 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
 *   checking for detritus in the temp directory ... NOTE
      ```
      Found the following files/directories:
-       ‘org.chromium.Chromium.x9JSet’
+       ‘org.chromium.Chromium.lbepW8’
      ```
 
-# netrics (0.4.0)
+# nethist (1.0.0)
 
-* GitHub: <https://github.com/stocnet/netrics>
-* Email: <mailto:james.hollway@graduateinstitute.ch>
-* GitHub mirror: <https://github.com/cran/netrics>
+* GitHub: <https://github.com/EnigmaSong/nethist>
+* Email: <mailto:youngseok.song@mail.wvu.edu>
+* GitHub mirror: <https://github.com/cran/nethist>
 
-Run `revdepcheck::revdep_details(, "netrics")` for more info
+Run `revdepcheck::revdep_details(, "nethist")` for more info
 
 ## Newly broken
 
 *   checking tests ... ERROR
      ```
      ...
-         'test-motif_net.R:6:7'
-       • grepl("triad|dyad", fn) && is_twomode(data_objs[[ob]]) is TRUE (2):
-         'test-motif_nodes.R:5:7', 'test-motif_nodes.R:5:7'
-       
-       ══ Failed tests ════════════════════════════════════════════════════════════════
-       ── Failure ('test-tutorials_netrics.R:4:5'): netrics tutorial code runs without warnings or errors ──
-       Expected `w` to be NULL.
-       Differences:
-       `actual` is an S3 object of class <lifecycle_warning_deprecated/rlang_warning/warning/condition>, a list
-       `expected` is NULL
-       
-       Warning in expression 18 : (graphr(create_ring(50, width = 2), "circle") + ggtitle("The Ring Two", 
-       Warning in expression 18 :     subtitle = "No different?"))
+           ▆
+        1. ├─base::suppressMessages(...) at test_netsummary_plot.R:18:12
+        2. │ └─base::withCallingHandlers(...)
+        3. └─testthat::expect_no_error(...)
+       ── Failure ('test_netsummary_plot.R:23:12'): netsummary_plot with sparse matrix object ──
+       Expected `{ ... }` not to throw any errors.
+       Actually got a <simpleError> with message:
+         A is not a simple graph. All non-zero entries must be 1 (binary adjacency matrix).
        Backtrace:
            ▆
-        1. ├─testthat::expect_null(...) at test-tutorials_netrics.R:4:5
-        2. │ └─testthat::quasi_label(enquo(object), label)
-        3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
-        4. └─netrics:::check_tute_functions(tute)
-        5.   └─testthat::expect_null(...) at ./helper-netrics.R:190:5
+        1. ├─base::suppressMessages(...) at test_netsummary_plot.R:23:12
+        2. │ └─base::withCallingHandlers(...)
+        3. └─testthat::expect_no_error(...)
+       ── Error ('test_summary.R:3:1'): (code run outside of `test_that()`) ───────────
+       Error in `multinethist.array(array(A, dim = c(nrow(A), ncol(A), 1)), h, common_f, method, control, ...)`: Layer 1: A is not a simple graph. All non-zero entries must be 1 (binary adjacency matrix).
+       Backtrace:
+           ▆
+        1. ├─nethist::multinethist(...) at test_summary.R:3:1
+        2. └─nethist:::multinethist.matrix(...)
+        3.   └─nethist:::multinethist.array(...)
        
-       [ FAIL 1 | WARN 0 | SKIP 41 | PASS 1803 ]
+       [ FAIL 5 | WARN 5 | SKIP 1 | PASS 210 ]
        Error:
        ! Test failures.
        Execution halted
+     ```
+
+## In both
+
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
      ```
 
 # optbdmaeAT (1.0.2)
@@ -995,7 +1003,7 @@ Run `revdepcheck::revdep_details(, "R6causal")` for more info
      <read *> 
      
      Error: processing vignette 'using_R6causal.Rmd' failed with diagnostics:
-     LaTeX failed to compile <lib>/R6causal.Rcheck/vign_test/R6causal/vignettes/using_R6causal.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips. See using_R6causal.log for more info.
+     LaTeX failed to compile using_R6causal.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips. See using_R6causal.log for more info.
      --- failed re-building ‘using_R6causal.Rmd’
      
      SUMMARY: processing the following file failed:
@@ -1145,6 +1153,46 @@ Run `revdepcheck::revdep_details(, "sfclust")` for more info
        Error:
        ! Test failures.
        Execution halted
+     ```
+
+# SpaDES.core (3.2.1)
+
+* GitHub: <https://github.com/PredictiveEcology/SpaDES.core>
+* Email: <mailto:eliot.mcintire@canada.ca>
+* GitHub mirror: <https://github.com/cran/SpaDES.core>
+
+Run `revdepcheck::revdep_details(, "SpaDES.core")` for more info
+
+## Newly broken
+
+*   checking tests ... ERROR
+     ```
+     ...
+       Error in `if (grepl("In .+:", w$message)) {     warningSplitOnColon(w)     invokeRestart("muffleWarning") }`: the condition has length > 1
+       Backtrace:
+            ▆
+         1. ├─SpaDES.core::simInit() at test-Copy.R:4:3
+         2. ├─SpaDES.core::simInit()
+         3. │ ├─SpaDES.core::simInit(...)
+         4. │ └─SpaDES.core::simInit(...)
+         5. │   ├─base::withCallingHandlers(...)
+         6. │   └─SpaDES.core:::resolveDepsRunInitIfPoss(...)
+         7. │     ├─SpaDES.core::.depsLoadOrder(sim, depsGr)
+         8. │     └─SpaDES.core::.depsLoadOrder(sim, depsGr)
+         9. │       └─igraph::topo_sort(simGraph, "out")
+        10. │         └─lifecycle::deprecate_soft(...)
+        11. │           └─lifecycle:::deprecate_warn0(...)
+        12. │             ├─base::withRestarts(...)
+        13. │             │ └─base (local) withOneRestart(expr, restarts[[1L]])
+        14. │             │   └─base (local) doWithOneRestart(return(expr), restart)
+        15. │             └─base::signalCondition(wrn)
+        16. └─SpaDES.core (local) `<fn>`(`<lfcycl__>`)
+       
+       [ FAIL 1 | WARN 0 | SKIP 180 | PASS 1443 ]
+       Error:
+       ! Test failures.
+       Execution halted
+       Ran 1/1 deferred expressions
      ```
 
 # tidygraph (1.3.1)

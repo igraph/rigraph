@@ -4,23 +4,13 @@
 # weighs each one by what its check is expected to cost on these runners,
 # decides which stored old-version results may stand beside this run's fresh
 # checks as second opinions, and partitions the packages into cost-balanced
-# shards. One shard becomes one
-# matrix leg of revdep3.yaml or revdep4.yaml -- the same plan serves both, and
-# the history it mines is shared: baselines, timings and reports of *either*
-# workflow feed the next run of either.
+# shards. One shard becomes one matrix leg of revdep4.yaml.
 #
-# The two engines spend a shard's minutes differently, and REVDEPX_ENGINE is
-# how the plan knows which bill to price:
+# The bill the plan prices: a package's two halves run sequentially, so the
+# package costs both of them end to end, and REVDEPX_WORKERS packages run at
+# once, so a shard's wall clock is its check load divided by the workers.
 #
-#   pair   (revdep3) - the two halves of a package run concurrently, one
-#            container each; a package costs the wall clock of its slower
-#            half, and a shard works through its packages one at a time.
-#   queue  (revdep4) - the halves run sequentially, so a package costs both
-#            of them end to end, and REVDEPX_WORKERS packages run at once,
-#            so a shard's wall clock is its check load divided by the
-#            workers.
-#
-# Both engines always check both halves fresh. A stored old result from an
+# Both halves are always checked fresh. A stored old result from an
 # earlier run (the baseline) rides along as a *second opinion* -- the shard
 # records whether the fresh old check reproduced it (`baseline_agrees`) --
 # and never substitutes for the check itself.
@@ -56,19 +46,16 @@
 #                             `broken` to take them from the committed report
 #   REVDEPX_WHICH           - "strong" (default) or "most" (adds Suggests/
 #                             Enhances dependents)
-#   REVDEPX_ENGINE          - "pair" (revdep3) or "queue" (revdep4); prices
-#                             the checks as described above (default: pair)
-#   REVDEPX_WORKERS         - queue engine only: packages checked concurrently
-#                             per shard (default: 4)
+#   REVDEPX_WORKERS         - packages checked concurrently per shard
+#                             (default: 4)
 #   REVDEPX_R_VERSION       - the full R version the *containers* check under,
 #                             e.g. "4.5.3", resolved by the workflow; required,
 #                             because the baseline key must name the R that ran
 #                             the checks, not the R running this script
 #   REVDEPX_WORKFLOWS       - workflow files whose completed runs the history
 #                             walk mines for baselines and timings (default:
-#                             "revdep3.yaml revdep4.yaml" -- the two engines
-#                             feed each other)
-#   REVDEPX_RETRY_RUN       - run id of an earlier revdep3/revdep4 run; check
+#                             "revdep4.yaml")
+#   REVDEPX_RETRY_RUN       - run id of an earlier revdepx run; check
 #                             only the packages that run could not declare ok
 #   REVDEPX_PART            - "i/G": check one G-th of the batch, for a revdep
 #                             set too big for a single run (the plan refuses
@@ -158,24 +145,26 @@ repo <- env_chr("GITHUB_REPOSITORY")
 # release flavor is the closest Linux number there is -- check_scale absorbs
 # the difference like any other speed gap.
 timing_flavor <- env_chr("REVDEPX_TIMING_FLAVOR", "r-release-linux-x86_64")
-engine <- match.arg(env_chr("REVDEPX_ENGINE", "pair"), c("pair", "queue"))
+# The queue engine is the only one -- the pair engine (revdep3) was retired
+# with its unmerged PR -- and the constant keeps the engine-tagged plan,
+# manifest and timings schema unchanged.
+engine <- "queue"
 workers <- max(1, env_num("REVDEPX_WORKERS", 4))
-# How many packages a shard works on at once. The pair engine runs one package
-# at a time (its two halves fill the runner); the queue engine runs one per
-# worker. This is the divisor that turns a shard's check load into wall clock.
-parallelism <- if (engine == "queue") workers else 1
+# How many packages a shard works on at once: one per worker. This is the
+# divisor that turns a shard's check load into wall clock.
+parallelism <- workers
 workflow_files <- strsplit(
-  env_chr("REVDEPX_WORKFLOWS", "revdep3.yaml revdep4.yaml"),
+  env_chr("REVDEPX_WORKFLOWS", "revdep4.yaml"),
   "[,[:space:]]+"
 )[[1]]
 workflow_files <- workflow_files[nzchar(workflow_files)]
-# Which of the two workflow files dispatched *this* run, for messages that
-# print a re-dispatch command. GITHUB_WORKFLOW_REF looks like
-# "owner/repo/.github/workflows/revdep3.yaml@refs/heads/main".
+# Which workflow file dispatched *this* run, for messages that print a
+# re-dispatch command. GITHUB_WORKFLOW_REF looks like
+# "owner/repo/.github/workflows/revdep4.yaml@refs/heads/main".
 this_workflow_file <- local({
   ref <- env_chr("GITHUB_WORKFLOW_REF")
   file <- basename(sub("@.*$", "", ref))
-  if (nzchar(file) && grepl("[.]ya?ml$", file)) file else "revdep3.yaml"
+  if (nzchar(file) && grepl("[.]ya?ml$", file)) file else "revdep4.yaml"
 })
 
 # The R the *checks* run under -- the container's, resolved by the workflow --
@@ -233,11 +222,11 @@ plan_nothing <- function(reason) {
 # The gh plumbing itself lives in util.R, because the shards fetch artifacts
 # too; what is planned here is *which* earlier runs to take them from.
 #
-# One walk over the completed runs of every revdepx workflow -- both engines
-# publish the same artifacts under the same names, so a revdep3 run's history
-# serves a revdep4 plan and the other way around -- youngest first across all
-# of them, answers every question this plan asks of its history, and asks the
-# API for a run's artifacts at most once:
+# One walk over the completed runs of every workflow in REVDEPX_WORKFLOWS --
+# runs of the retired pair engine published the same artifacts under the same
+# names, so old history still serves -- youngest first across all of them,
+# answers every question this plan asks of its history, and asks the API for
+# a run's artifacts at most once:
 #
 #   * which run donates the CRAN baseline -- the newest one that still has it;
 #   * which runs donate measured timings -- the youngest few, whose numbers
@@ -841,33 +830,22 @@ inform(
   " check times measured by an earlier run"
 )
 
-# Weight: what one package costs a worker in wall clock, and it depends on the
-# engine.
+# Weight: what one package costs a worker in wall clock.
 #
 # `check_seconds` is calibrated to mean *one half*: `collect.R` records the
-# mean of the positive per-half durations (for the pair engine the two are the
-# same number, the pair's wall clock, which is the slower half; for the queue
-# engine they are real and the mean is the honest middle), and
-# `calibration()` fits `median(seconds / T_total)` from that. So:
-#
-#   pair  - the halves run concurrently and the package costs the slower one:
-#           one `check_seconds`, exactly as revdep2 priced it. Multiplying by
-#           two here would price every shard at twice its wall clock -- twice
-#           the shards, each paying its own setup, and packages deferred at
-#           the deadline that would have fit.
-#   queue - the halves run back to back, so the package always costs both.
-#           Both halves run fresh in every engine: a stored old result is a
-#           second opinion (`baseline_agrees`), never a substitute, so a
-#           baseline changes no weight. This is where revdep2's
-#           `((!reuse) + 1) *` factor would otherwise come back; it stays
-#           retired on purpose.
-halves <- if (engine == "queue") 2 else 1
+# mean of the positive per-half durations and `calibration()` fits
+# `median(seconds / T_total)` from that. The halves run back to back, so the
+# package always costs both. Both halves run fresh: a stored old result is a
+# second opinion (`baseline_agrees`), never a substitute, so a baseline
+# changes no weight -- this is where revdep2's `((!reuse) + 1) *` factor
+# would otherwise come back, and it stays retired on purpose.
+halves <- 2
 weight <- halves * check_seconds / 60 + overhead_minutes
 
 # ------------------------------------------------------------- partitioning --
 
 n <- length(packages)
-# What the whole batch costs in *wall clock*: the queue engine works
+# What the whole batch costs in *wall clock*: the queue works
 # `parallelism` packages at once, so a shard's check minutes are its check
 # load divided by the workers -- a lower bound the per-shard model below
 # tightens for shards dominated by one giant.
@@ -930,8 +908,7 @@ ord <- order(-weight)
 #
 #   overhead + max(heaviest member, check sum / parallelism)
 #
-# For the pair engine (parallelism 1) the max() collapses and this is exactly
-# revdep2's model. For the queue engine the division alone would flatter a
+# The division alone would flatter a
 # shard dominated by one giant -- workers cannot share a package, so a shard
 # whose heaviest member outweighs everything else runs exactly as long as
 # that member, however many workers idle beside it. max(heaviest, mean work
@@ -1210,7 +1187,7 @@ plan <- list(
   r_full_version = r_full_version,
   base_image = base_image_tag,
   engine = engine,
-  workers = if (engine == "queue") workers else 1,
+  workers = workers,
   sha = head_sha,
   ref = env_chr("GITHUB_REF_NAME"),
   which = which_input,
@@ -1382,11 +1359,7 @@ append_summary(c(
   sprintf(
     "| Engine | `%s`%s |",
     engine,
-    if (engine == "queue") {
-      sprintf(" (%d workers per shard)", workers)
-    } else {
-      " (both halves concurrently, a container each)"
-    }
+    sprintf(" (%d workers per shard)", workers)
   ),
   sprintf(
     "| Check platform | R %s in containers on base `%s` |",

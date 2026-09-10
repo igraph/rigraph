@@ -23,7 +23,7 @@
 # Sequential halves make per-half durations real measurements -- revdep2
 # could only ever record the pair's shared wall clock. Both halves always
 # run fresh: where the plan finds a valid old-version result from an earlier
-# run -- of this workflow or of revdep3 -- it rides along as a *second
+# run it rides along as a *second
 # opinion* (`baseline_agrees` records whether the fresh old check reproduced
 # it, and disagreement is reported as drift), never as a substitute for the
 # check itself.
@@ -52,15 +52,11 @@
 #             the manifest, the baseline for later runs, and the timings the
 #             next plan calibrates from.
 #
-# Compatibility with revdep3 (the concurrent-pair sibling): the two
-# workflows share the `.github/workflows/revdepx/` scripts, the artifact
-# family (revdepx-plan/-pkg/-baseline/-timings/-report/-results-*), the
-# manifest schema and result vocabulary, the universe image on GHCR, and the
-# check platform. A revdep3 run reuses this workflow's baselines, timings,
-# universe image and reports -- and vice versa. `retry-run` accepts a run id
-# of either workflow. The shared concurrency group serializes the two
-# workflows against each other on the same ref, because they also share the
-# committed report and the baseline lineage.
+# The scripts live in `.github/workflows/revdepx/` (once shared with the
+# retired concurrent-pair sibling, revdep3, whose PR was closed unmerged);
+# artifacts, manifest schema and the universe image lineage are unchanged,
+# so history from the sibling's live runs still serves as baselines and
+# timings.
 #
 # Results land in artifacts:
 #   revdepx-report          the merged report -- fetch with
@@ -107,7 +103,7 @@ on:
         type: string
         default: "1"
       retry-run:
-        description: "Run id of an earlier revdep4 or revdep3 run; re-check only its not-ok packages"
+        description: "Run id of an earlier revdep4 run; re-check only its not-ok packages"
         type: string
         default: ""
       part:
@@ -157,11 +153,11 @@ run-name: "revdep4 ${{ inputs.packages && format('({0})', inputs.packages) || fo
 permissions:
   contents: read
 
-# One revdepx run per checked ref at a time -- across BOTH workflows, which
-# is why the group is not named after this file. revdep3 and revdep4 share
-# the committed report, the baseline lineage and the universe image's
-# `latest` tag; letting them interleave on the same ref would race all three.
-# A queued run waits rather than killing shards mid-check.
+# One revdepx run per checked ref at a time -- the group is named revdepx,
+# not after this file, a relic of the retired sibling workflow that shared
+# it. Two runs interleaving on one ref would race the committed report, the
+# baseline lineage and the universe image's `latest` tag. A queued run waits
+# rather than killing shards mid-check.
 #
 # `github.ref_name`, not `github.ref`: the input holds a bare name ("main")
 # while `github.ref` is fully qualified ("refs/heads/main"), and a group
@@ -216,9 +212,13 @@ env:
   # layers and stale system packages forever.
   REVDEPX_IMAGE_MAX_AGE_DAYS: ${{ vars.REVDEPX_IMAGE_MAX_AGE_DAYS || '14' }}
   # Per-check timeout: factor times the package's CRAN check time, but never
-  # below the floor -- CRAN's machines are not these runners.
+  # below the floor -- CRAN's machines are not these runners. The floor is
+  # 30 min because a saturated shard runs each check at roughly half speed
+  # (measured queue-vs-pair inflation: median 1.5x, p90 1.8x, and up to
+  # ~3x in the hottest windows): run 32574134229 killed four packages at
+  # the old 20-min floor that finish in 7-12 min uncontended.
   REVDEPX_TIMEOUT_FACTOR: ${{ vars.REVDEPX_TIMEOUT_FACTOR || '1.5' }}
-  REVDEPX_TIMEOUT_MIN_MINUTES: ${{ vars.REVDEPX_TIMEOUT_MIN_MINUTES || '20' }}
+  REVDEPX_TIMEOUT_MIN_MINUTES: ${{ vars.REVDEPX_TIMEOUT_MIN_MINUTES || '30' }}
   REVDEPX_DEADLINE_MINUTES: ${{ vars.REVDEPX_DEADLINE_MINUTES || '300' }}
 
 jobs:
@@ -937,8 +937,10 @@ jobs:
       # No timings in the check output. The two halves run at different
       # times next to different queue neighbours, so per-stage
       # `[user/elapsed]` stamps differ by construction and would be pure
-      # diff noise; what a stage cost is still recorded by the elapsed
-      # stamping on the driver log.
+      # diff noise. What a stage cost is recorded by the elapsed stamping
+      # on the driver log instead -- which the salvage now carries into the
+      # results artifact for every failed half, and check-half.sh prints as
+      # a stage timeline in the job log when a half dies.
       _R_CHECK_TIMINGS_: ""
       _R_CHECK_EXAMPLE_TIMING_THRESHOLD_: 99999
       # 300 lines of a failed test transcript in the check log, not R's
@@ -949,7 +951,7 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       SHARD: ${{ matrix.shard }}
       TIMEOUT_FACTOR: ${{ vars.REVDEPX_TIMEOUT_FACTOR || '1.5' }}
-      TIMEOUT_MIN_MINUTES: ${{ vars.REVDEPX_TIMEOUT_MIN_MINUTES || '20' }}
+      TIMEOUT_MIN_MINUTES: ${{ vars.REVDEPX_TIMEOUT_MIN_MINUTES || '30' }}
       DEADLINE_MINUTES: ${{ vars.REVDEPX_DEADLINE_MINUTES || '300' }}
 
     steps:
