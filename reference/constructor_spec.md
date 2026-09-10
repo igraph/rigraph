@@ -70,7 +70,7 @@ graph_(el, from_edgelist(directed = FALSE))
 #> Warning: `graph_()` was deprecated in igraph 2.1.0.
 #> ℹ Please use constructors directly, for instance graph_from_edgelist().
 #> ℹ graph_() will be removed in a future version of igraph.
-#> ── <igraph> ───────────────────────────────────────────────────────── 96de88b ──
+#> ── <igraph> ───────────────────────────────────────────────────────── e57f166 ──
 #> ℹ undirected
 #> ℹ 5 vertices · 5 edges
 #> 
@@ -78,7 +78,7 @@ graph_(el, from_edgelist(directed = FALSE))
 #> [1] 1 ─ 2  2 ─ 3  3 ─ 4  4 ─ 5  1 ─ 5 
 
 make_(tree(7))
-#> ── <igraph> Tree ──────────────────────────────────────────────────── dcb10a6 ──
+#> ── <igraph> Tree ──────────────────────────────────────────────────── 71a1d62 ──
 #> ℹ directed
 #> ℹ 7 vertices · 6 edges
 #> 
@@ -90,7 +90,7 @@ make_(tree(7))
 
 # Specifications can be combined with constructor modifiers
 make_(tree(7), with_vertex_(color = "red"))
-#> ── <igraph> Tree ──────────────────────────────────────────────────── 652e130 ──
+#> ── <igraph> Tree ──────────────────────────────────────────────────── e28671f ──
 #> ℹ directed
 #> ℹ 7 vertices · 6 edges
 #> 

@@ -65,7 +65,7 @@ g <- make_ring(10) %>%
   set_edge_attr("weight", value = 1:10) %>%
   set_edge_attr("color", value = "red")
 g
-#> ── <igraph> Ring graph ────────────────────────────────────────────── d1fa1d4 ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 963d485 ──
 #> ℹ undirected · weighted
 #> ℹ 10 vertices · 10 edges
 #> 
