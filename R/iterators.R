@@ -1550,7 +1550,7 @@ print_igraph_vs_legacy <- function(
     ## Double bracket
     va <- vertex_attr(graph)
     if (all(sapply(va, is.atomic))) {
-      print(as.data.frame(va, stringsAsFactors = FALSE)[
+      print(list2DF(va)[
         as.vector(x),
         ,
         drop = FALSE
@@ -1716,7 +1716,7 @@ print_igraph_vs_cli <- function(
     # atomic. If any attribute is list-valued, drop to a named list sliced to
     # the selected vertices instead of forcing it into a table.
     if (all(vapply(vertex_attrs, is.atomic, logical(1)))) {
-      print(as.data.frame(vertex_attrs, stringsAsFactors = FALSE)[
+      print(list2DF(vertex_attrs)[
         as.vector(x),
         ,
         drop = FALSE
