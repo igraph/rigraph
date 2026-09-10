@@ -27,8 +27,9 @@ frequency) is calculated.}
 \item{mul.size}{Logical. If TRUE the relative frequencies will be multiplied
 by the cluster sizes.}
 
-\item{\dots}{Additional attributes to pass to \code{cluster}, right now only
-\code{mode} makes sense.}
+\item{\dots}{For \code{component_distribution()}, forwarded to \code{components()}.
+For \code{components()}, \code{is_connected()}, \code{count_components()} and
+\code{largest_component()}, these dots must be empty.}
 
 \item{mode}{Character string, either \dQuote{weak} or \dQuote{strong}.  For
 directed graphs \dQuote{weak} implies weakly, \dQuote{strong} strongly

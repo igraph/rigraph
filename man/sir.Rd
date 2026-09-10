@@ -21,7 +21,9 @@ sir(graph, beta, gamma, ..., no.sim = 100)
 \arguments{
 \item{x}{A \code{sir} object, returned by the \code{sir()} function.}
 
-\item{\dots}{Additional arguments, ignored currently.}
+\item{\dots}{For \code{sir()} and \code{time_bins()}, these dots must be empty. For
+\code{median.sir()} and \code{quantile.sir()}, unused, present for S3 method
+consistency.}
 
 \item{middle}{Logical, whether to return the middle of the time bins,
 or the boundaries.}

@@ -437,7 +437,6 @@ is_biconnected <- function(graph) {
 
 
 #' @rdname components
-#' @inheritParams rlang::args_dots_empty
 #' @export
 largest_component <- function(
   graph,

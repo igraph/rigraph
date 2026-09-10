@@ -2,7 +2,6 @@
 % Please edit documentation in R/layout.R
 \name{layout_with_fr}
 \alias{layout_with_fr}
-\alias{with_fr}
 \title{The Fruchterman-Reingold layout algorithm}
 \usage{
 layout_with_fr(
@@ -26,13 +25,11 @@ layout_with_fr(
   repulserad = deprecated(),
   maxiter = deprecated()
 )
-
-with_fr(...)
 }
 \arguments{
 \item{graph}{The graph to lay out. Edge directions are ignored.}
 
-\item{...}{Passed to \code{layout_with_fr()}.}
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{coords}{Optional starting positions for the vertices. If this argument
 is not \code{NULL} then it should be an appropriate matrix of starting
@@ -131,7 +128,8 @@ Force-directed Placement. \emph{Software - Practice and Experience},
 }
 \seealso{
 \code{\link[=layout_with_drl]{layout_with_drl()}}, \code{\link[=layout_with_kk]{layout_with_kk()}} for
-other layout algorithms.
+other layout algorithms. See \code{\link[=with_fr]{with_fr()}} to build a lazy layout
+specification for \code{\link[=add_layout_]{add_layout_()}}.
 
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},

@@ -11,9 +11,8 @@ layout.auto(graph, dim = 2, ...)
 
 \item{dim}{Dimensions, should be 2 or 3.}
 
-\item{...}{For \code{layout_nicely()} the extra arguments are passed to
-the real layout function. For \code{nicely()} all argument are passed to
-\code{layout_nicely()}.}
+\item{...}{Extra arguments are passed to the real layout function that
+\code{layout_nicely()} ends up calling.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

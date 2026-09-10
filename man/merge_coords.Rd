@@ -14,8 +14,9 @@ layout_components(graph, layout = NULL, ...)
 
 \item{layouts}{A list of two-column matrices.}
 
-\item{\dots}{Additional arguments to pass to the \code{layout} layout
-function.}
+\item{\dots}{For \code{layout_components()}, additional arguments to pass to
+the \code{layout} layout function. For \code{merge_coords()}, these dots must be
+empty.}
 
 \item{method}{Character constant giving the method to use. Right now only
 \code{dla} is implemented.}

@@ -2,7 +2,6 @@
 % Please edit documentation in R/layout.R
 \name{layout_with_graphopt}
 \alias{layout_with_graphopt}
-\alias{with_graphopt}
 \title{The graphopt layout algorithm}
 \usage{
 layout_with_graphopt(
@@ -16,13 +15,11 @@ layout_with_graphopt(
   spring.constant = 1,
   max.sa.movement = 5
 )
-
-with_graphopt(...)
 }
 \arguments{
 \item{graph}{The input graph.}
 
-\item{...}{Passed to \code{layout_with_graphopt()}.}
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{start}{If given, then it should be a matrix with two columns and one
 line for each vertex. This matrix will be used as starting positions for the
@@ -68,6 +65,9 @@ reaches an equilibrium. (There is no simulated annealing or anything like
 that, so a stable fixed point is not guaranteed.)
 }
 \seealso{
+\code{\link[=with_graphopt]{with_graphopt()}} to build a lazy layout specification for
+\code{\link[=add_layout_]{add_layout_()}}.
+
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},
 \code{\link[=component_wise]{component_wise()}},

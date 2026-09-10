@@ -44,6 +44,9 @@ reference:
 - subtitle: "Stochastic constructors (random graph models)"
 - contents:
   - has_concept("games")
+- subtitle: Constructor specifications
+- contents:
+  - has_concept("constructor specifications")
 - subtitle: Constructor modifiers
 - contents:
   - has_concept("constructor modifiers")
@@ -56,6 +59,7 @@ reference:
 - title: Visualization
 - contents:
   - has_concept("graph layouts")
+  - has_concept("layout specifications")
   - has_concept("layout modifiers")
   - has_concept("layout_drl")
   - has_concept("palettes")

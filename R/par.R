@@ -195,23 +195,14 @@ igraph.pars.callbacks <- list("verbose" = igraph.pars.set.verbose)
 #'     }
 #'   }
 #'
-#' @aliases igraph_options igraph_opt
 #' @param \dots A list may be given as the only argument, or any number of
 #'   arguments may be in the `name=value` form, or no argument at all may be
 #'   given. See the Value and Details sections for explanation.
-#' @param x A character string holding an option name.
-#' @param default If the specified option is not set in the options list, this
-#'   value is returned. This facilitates retrieving an option and checking
-#'   whether it is set and setting it separately if not.
-#' @return `igraph_options()` returns a list with the old values of the
-#'   updated parameters, invisibly. Without any arguments, it returns the
-#'   values of all options.
-#'
-#'   For `igraph_opt()`, the current value set for option `x`, or
-#'   `NULL` if the option is unset.
+#' @return A list with the old values of the updated parameters, invisibly.
+#'   Without any arguments, it returns the values of all options.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso `igraph_options()` is similar to [options()] and
-#' `igraph_opt()` is similar to [getOption()].
+#' @seealso Similar to [options()]. See [igraph_opt()] to retrieve the
+#'   value of a single option.
 #' @keywords graphs
 #' @examples
 #'
@@ -294,9 +285,28 @@ get_all_options <- function() {
   res
 }
 
-#' @rdname igraph_options
+#' Query a single igraph parameter
+#'
+#' Retrieve the current value of one igraph option set via
+#' [igraph_options()].
+#'
+#' @param x A character string holding an option name.
 #' @inheritParams rlang::args_dots_empty
+#' @param default If the specified option is not set in the options list, this
+#'   value is returned. This facilitates retrieving an option and checking
+#'   whether it is set and setting it separately if not.
+#' @return The current value set for option `x`, or `NULL` if the option is
+#'   unset.
+#' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @seealso Similar to [getOption()]. See [igraph_options()] to set options.
+#' @keywords graphs
+#' @examples
+#' oldval <- igraph_opt("verbose")
+#' igraph_options(verbose = TRUE)
+#' layout_with_kk(make_ring(10))
+#' igraph_options(verbose = oldval)
 #' @export
+#' @family igraph options
 igraph_opt <- function(
   x,
   ...,

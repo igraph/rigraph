@@ -381,7 +381,6 @@ max_cliques <- function(
 }
 
 #' @rdname cliques
-#' @inheritParams rlang::args_dots_empty
 #' @export
 count_max_cliques <- function(
   graph,
@@ -566,7 +565,6 @@ weighted_cliques <- function(
     maximal = maximal
   )
 }
-#' @inheritParams rlang::args_dots_empty
 #' @export
 #' @rdname cliques
 largest_weighted_cliques <- function(
@@ -614,7 +612,6 @@ largest_weighted_cliques <- function(
     vertex_weights = vertex.weights
   )
 }
-#' @inheritParams rlang::args_dots_empty
 #' @export
 #' @rdname cliques
 weighted_clique_num <- function(
@@ -799,7 +796,6 @@ ivs_size <- function(graph) {
 independence_number <- ivs_size
 
 #' @rdname cliques
-#' @inheritParams rlang::args_dots_empty
 #' @export
 clique_size_counts <- function(
   graph,
@@ -898,7 +894,6 @@ is_complete <- function(graph) {
 #'
 #' @param graph The input graph.
 #' @param candidate The vertex set to test for being a clique.
-#' @inheritParams rlang::args_dots_empty
 #' @param directed Whether to consider edge directions.
 #' @return `is_clique()` returns `TRUE` if the candidate vertex set forms
 #'   a clique.

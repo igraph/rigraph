@@ -2519,6 +2519,8 @@ wheel <- function(
 #'   to their parents, while `undirected` creates an undirected
 #'   graph.
 #' @return An igraph graph
+#' @seealso [tree()] to build a lazy constructor specification for
+#'   [make_()] or [sample_()].
 #'
 #' @family deterministic constructors
 #' @export
@@ -2658,8 +2660,7 @@ sample_tree <- function(
   )
 }
 
-#' @rdname make_tree
-#' @param ... Passed to `make_tree()` or `sample_tree()`.
+#' @rdname constructor_spec
 #' @export
 tree <- function(...) {
   constructor_spec(list(make = make_tree, sample = sample_tree), ...)

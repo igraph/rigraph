@@ -2,7 +2,6 @@
 % Please edit documentation in R/layout.R
 \name{layout_with_kk}
 \alias{layout_with_kk}
-\alias{with_kk}
 \title{The Kamada-Kawai layout algorithm}
 \usage{
 layout_with_kk(
@@ -26,13 +25,11 @@ layout_with_kk(
   coolexp = deprecated(),
   start = deprecated()
 )
-
-with_kk(...)
 }
 \arguments{
 \item{graph}{The input graph. Edge directions are ignored.}
 
-\item{...}{Passed to \code{layout_with_kk()}.}
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{coords}{Starting coordinates in a two or three column matrix,
 depending on the \code{dim} argument.
@@ -114,7 +111,8 @@ Undirected Graphs. \emph{Information Processing Letters}, 31/1, 7--15, 1989.
 }
 \seealso{
 \code{\link[=layout_with_drl]{layout_with_drl()}}, \code{\link[=plot.igraph]{plot.igraph()}},
-\code{\link[=tkplot]{tkplot()}}
+\code{\link[=tkplot]{tkplot()}}. See \code{\link[=with_kk]{with_kk()}} to build a lazy layout specification for
+\code{\link[=add_layout_]{add_layout_()}}.
 
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},
