@@ -1,5 +1,18 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.3.9037
+
+## Chore
+
+- Improve errors in iterators.R (#1891, #2006).
+
+- Increase R minimal version to R4.0.0 (#2876).
+
+## Documentation
+
+- Fix dots docs thanks to roxygen2's warning about useless inheritParams (#2868).
+
+
 # igraph 2.3.3.9036
 
 ## Chore
