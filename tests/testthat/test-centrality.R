@@ -1074,12 +1074,12 @@ test_that("page_rank() covers migrated tail args and positional recovery", {
   # The weight attribute is a decoy that the explicit `weights` must override.
   E(star)$weight <- c(10, rep(1, 8))
 
-  # `algo` keeps its default value:
+  # `algorithm` keeps its default value:
   # non-default values select the legacy ARPACK implementation,
   # and `options` is only consumed by that implementation.
   res <- page_rank(
     star,
-    algo = "prpack",
+    algorithm = "prpack",
     vids = V(star)[1:5],
     directed = FALSE,
     damping = 0.9,
@@ -1106,7 +1106,25 @@ test_that("page_rank() covers migrated tail args and positional recovery", {
   lifecycle::expect_deprecated(
     res_legacy <- page_rank(star, "prpack")
   )
-  expect_identical(res_legacy, page_rank(star, algo = "prpack"))
+  expect_identical(res_legacy, page_rank(star, algorithm = "prpack"))
+})
+
+test_that("page_rank(algo = ) is deprecated but still works", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  star <- make_star(10, mode = "undirected")
+  expect_snapshot(
+    res_legacy <- page_rank(star, algo = "prpack")
+  )
+  expect_identical(res_legacy, page_rank(star, algorithm = "prpack"))
+  # `alg` prefixes both `algo` and `algorithm`, but they are the same argument,
+  # so it is recovered rather than rejected as ambiguous.
+  lifecycle::expect_deprecated(res_abbrev <- page_rank(star, alg = "prpack"))
+  expect_identical(res_abbrev, page_rank(star, algorithm = "prpack"))
+  # `d` really is ambiguous (`damping` vs `directed`) and stays an error.
+  expect_error(
+    page_rank(star, d = 0.5),
+    "matches multiple arguments"
+  )
 })
 
 test_that("strength() covers migrated tail args and positional recovery", {
