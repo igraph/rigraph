@@ -18,7 +18,7 @@ The graph, with the specified vertex attribute removed.
 Delete a vertex attribute
 }
 \examples{
-g <- make_ring(10) \%>\%
+g <- make_ring(10) |>
   set_vertex_attr("name", value = LETTERS[1:10])
 vertex_attr_names(g)
 g2 <- delete_vertex_attr(g, "name")

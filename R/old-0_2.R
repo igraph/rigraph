@@ -14,6 +14,6 @@ oldsample_0_2 <- function() {
       list(bar = c("A", "B", "C")),
       list(foo = c("a", "b", "c"))
     )
-  ) %>%
+  ) |>
     structure(class = "igraph")
 }

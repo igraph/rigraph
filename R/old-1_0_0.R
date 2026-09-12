@@ -16,7 +16,7 @@ oldsample_1_0_0 <- function() {
       list(foo = c("a", "b", "c"))
     ),
     ..env.1..
-  ) %>%
+  ) |>
     structure(class = "igraph")
   ..env.1..$.__igraph_version__. <- "0.8.0"
   ..env.1..$myid <- "0fb28c05-9cc1-4a24-ba62-f5c319a3051b"

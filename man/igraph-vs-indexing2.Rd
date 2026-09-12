@@ -29,8 +29,8 @@ attributes of the vertices in the sequence are printed as well.
 See \code{\link{[.igraph.vs}} for more about indexing vertex sequences.
 }
 \examples{
-g <- make_ring(10) \%>\%
-  set_vertex_attr("color", value = "red") \%>\%
+g <- make_ring(10) |>
+  set_vertex_attr("color", value = "red") |>
   set_vertex_attr("name", value = LETTERS[1:10])
 V(g)
 V(g)[[]]

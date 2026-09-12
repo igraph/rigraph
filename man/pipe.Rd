@@ -2,7 +2,10 @@
 % Please edit documentation in R/igraph-package.R
 \name{\%>\%}
 \alias{\%>\%}
-\title{Magrittr's pipes}
+\title{Magrittr's pipe}
+\usage{
+lhs \%>\% rhs
+}
 \arguments{
 \item{lhs}{Left hand side of the pipe.}
 
@@ -13,12 +16,16 @@ Result of applying the right hand side to the
 result of the left hand side.
 }
 \description{
-igraph re-exports the \verb{\%>\%} operator of magrittr, because
-we find it very useful. Please see the documentation in the
-\code{magrittr} package.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+igraph used to re-export the \verb{\%>\%} operator of magrittr. Now that R has its
+own base pipe, \verb{|>}, available since R 4.1.0, please use that instead. If
+you still need \verb{\%>\%} and its extra features (such as the \code{.} placeholder),
+import it from the \code{magrittr} package yourself.
 }
 \examples{
-make_ring(10) \%>\%
-  add_edges(c(1, 6)) \%>\%
+make_ring(10) |>
+  add_edges(c(1, 6)) |>
   plot()
 }
+\keyword{internal}

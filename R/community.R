@@ -687,9 +687,9 @@ print.membership <- function(x, ...) print(unclass(x), ...)
 #' @export
 #' @examples
 #' ## Compare to the correct clustering
-#' g <- (make_full_graph(10) + make_full_graph(10)) %>%
+#' g <- (make_full_graph(10) + make_full_graph(10)) |>
 #'   rewire(each_edge(p = 0.2))
-#' correct <- rep(1:2, each = 10) %>% as_membership()
+#' correct <- rep(1:2, each = 10) |> as_membership()
 #' fc <- cluster_fast_greedy(g)
 #' compare(correct, fc)
 #' compare(correct, membership(fc))
@@ -701,7 +701,7 @@ as_membership <- function(x) add_class(x, "membership")
 print.communities <- function(x, ...) {
   noc <- if (!is.null(x$membership)) max(membership(x), 0) else NA
   mod <- if (!is.null(x$modularity)) {
-    modularity(x) %>% format(digits = 2)
+    modularity(x) |> format(digits = 2)
   } else {
     NA_real_
   }
