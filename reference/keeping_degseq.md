@@ -50,7 +50,7 @@ g %>%
   degree()
 #>  [1] 2 2 2 2 2 2 2 2 2 2
 print_all(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 6ab45c2 ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── cf50038 ──
 #> ℹ undirected
 #> ℹ 10 vertices · 10 edges
 #> 
