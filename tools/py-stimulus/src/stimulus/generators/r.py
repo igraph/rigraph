@@ -22,7 +22,7 @@ from .utils import create_indentation_function
 indent = create_indentation_function("  ")
 
 init_functions = {
-    "igraph_vector_int_t": "IGRAPH_R_CHECK(igraph_vector_int_init(&%C%, 0));\nIGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);"
+    "igraph_vector_int_t": "IGRAPH_LOCAL_R_CHECK(igraph_vector_int_init(&%C%, 0));\nIGRAPH_LOCAL_FINALLY(igraph_vector_int_destroy, &%C%);"
 }
 
 
@@ -548,6 +548,10 @@ class RCCodeGenerator(SingleBlockCodeGenerator):
             res = "\n".join(inout + out + [retdecl] + ["SEXP r_result;"])
         else:
             res = "\n".join(inout + out + [retdecl] + ["SEXP r_result, r_names;"])
+        
+        # Add local finally stack declaration
+        res += "\nIGRAPH_LOCAL_FINALLY_STACK;"
+        
         return indent(res)
 
     def chunk_inconv(self, desc: FunctionDescriptor) -> str:
@@ -619,11 +623,11 @@ class RCCodeGenerator(SingleBlockCodeGenerator):
         res = ""
         # No return type means - return type is igraph_error_t
         if not desc.return_type:
-            res = f"  IGRAPH_R_CHECK({desc.name}({calls}));\n"
+            res = f"  IGRAPH_LOCAL_R_CHECK({desc.name}({calls}));\n"
         else:
             return_type = self.get_type_descriptor(desc.return_type)
             if return_type.name == "ERROR":
-                res = f"  IGRAPH_R_CHECK({desc.name}({calls}));\n"
+                res = f"  IGRAPH_LOCAL_R_CHECK({desc.name}({calls}));\n"
             elif return_type.name == "VOID":
                 res = f"  {desc.name}({calls});\n"
             else:
