@@ -344,7 +344,7 @@ plot.igraph <- function(
     ## different vertex shapes, do it by "endpoint"
     shape <- rep(shape, length.out = vcount(graph))
     ec <- edge.coords
-    ec[, 1:2] <- t(sapply(seq(length.out = nrow(el)), function(x) {
+    ec[, 1:2] <- t(sapply(seq(length.out = nrow(el)), \(x) {
       .igraph.shapes[[shape[el[x, 1]]]]$clip(
         edge.coords[x, , drop = FALSE],
         el[x, , drop = FALSE],
@@ -352,7 +352,7 @@ plot.igraph <- function(
         end = "from"
       )
     }))
-    ec[, 3:4] <- t(sapply(seq(length.out = nrow(el)), function(x) {
+    ec[, 3:4] <- t(sapply(seq(length.out = nrow(el)), \(x) {
       .igraph.shapes[[shape[el[x, 2]]]]$clip(
         edge.coords[x, , drop = FALSE],
         el[x, , drop = FALSE],
@@ -388,7 +388,7 @@ plot.igraph <- function(
 
     compute.bezier <- function(cp, points) {
       dt <- seq(0, 1, by = 1 / (points - 1))
-      sapply(dt, function(t) point.on.cubic.bezier(cp, t))
+      sapply(dt, \(t) point.on.cubic.bezier(cp, t))
     }
 
     plot.bezier <- function(
@@ -588,7 +588,7 @@ plot.igraph <- function(
         loop_angles <- seq(0, 2 * pi, length.out = n_loops + 1)[-1]
         gap_span <- 2 * pi
       } else {
-        angles <- sapply(incident_edges, function(e) {
+        angles <- sapply(incident_edges, \(e) {
           ends_e <- ends(graph, e, names = FALSE)
           other <- if (as.numeric(ends_e[1]) == v) {
             as.numeric(ends_e[2])
@@ -786,7 +786,7 @@ plot.igraph <- function(
     ecex <- rep(ecex, length.out = en)
 
     invisible(mapply(
-      function(x, y, label, col, family, font, cex) {
+      \(x, y, label, col, family, font, cex) {
         text(
           x,
           y,
@@ -815,7 +815,7 @@ plot.igraph <- function(
     if (length(unique(shape)) == 1) {
       .igraph.shapes[[shape[1]]]$plot(layout, params = params)
     } else {
-      sapply(seq(length.out = vcount(graph)), function(x) {
+      sapply(seq(length.out = vcount(graph)), \(x) {
         .igraph.shapes[[shape[x]]]$plot(
           layout[x, , drop = FALSE],
           v = x,
@@ -844,7 +844,7 @@ plot.igraph <- function(
 
     # Draw vertex labels
     invisible(mapply(
-      function(x0, y0, lbl, col, fam, fnt, cex, srt, adj) {
+      \(x0, y0, lbl, col, fam, fnt, cex, srt, adj) {
         text(
           x0,
           y0,

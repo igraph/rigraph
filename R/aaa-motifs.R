@@ -84,8 +84,8 @@ motifs_randesu_callback_closure_impl <- function(
             rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
           }
         },
-        error = function(e) e,
-        interrupt = function(e) e
+        error = \(e) e,
+        interrupt = \(e) e
       )
     }
   } else {

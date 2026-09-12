@@ -53,7 +53,7 @@ s3_register <- function(generic, class, method = NULL) {
   }
 
   # Always register hook in case package is later unloaded & reloaded
-  setHook(packageEvent(package, "onLoad"), function(...) {
+  setHook(packageEvent(package, "onLoad"), \(...) {
     register()
   })
 
@@ -107,9 +107,9 @@ s3_register <- function(generic, class, method = NULL) {
   format_msg <- function(x) paste(x, collapse = "\n")
   switch(fn,
     is_interactive = return(is_interactive_compat),
-    abort = return(function(msg) stop(format_msg(msg), call. = FALSE)),
-    warn = return(function(msg) warning(format_msg(msg), call. = FALSE)),
-    inform = return(function(msg) message(format_msg(msg)))
+    abort = return(\(msg) stop(format_msg(msg), call. = FALSE)),
+    warn = return(\(msg) warning(format_msg(msg), call. = FALSE)),
+    inform = return(\(msg) message(format_msg(msg)))
   )
 
   stop(sprintf("Internal error in rlang shims: Unknown function `%s()`.", fn))

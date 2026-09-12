@@ -201,11 +201,11 @@ console <- function() {
   scr <- tcltk::tkscrollbar(
     console,
     repeatinterval = 5,
-    command = function(...) tcltk::tkyview(txt, ...)
+    command = \(...) tcltk::tkyview(txt, ...)
   )
   txt <- tcltk::tktext(
     console,
-    yscrollcommand = function(...) tcltk::tkset(scr, ...),
+    yscrollcommand = \(...) tcltk::tkset(scr, ...),
     width = 60,
     height = 7,
     font = fn
@@ -213,12 +213,12 @@ console <- function() {
   tcltk::tkconfigure(txt, state = "disabled")
   pbar <- .igraph.progress.tkconsole.pbar(console)
 
-  bclear <- tcltk::tkbutton(lfr, text = "Clear", command = function() {
+  bclear <- tcltk::tkbutton(lfr, text = "Clear", command = \() {
     tcltk::tkconfigure(txt, state = "normal")
     tcltk::tkdelete(txt, "0.0", "end")
     tcltk::tkconfigure(txt, state = "disabled")
   })
-  bclose <- tcltk::tkbutton(lfr, text = "Close", command = function() {
+  bclose <- tcltk::tkbutton(lfr, text = "Close", command = \() {
     if (!is.na(oldverb) && igraph_opt("verbose") == "tkconsole") {
       igraph_options(verbose = oldverb)
     }
@@ -243,7 +243,7 @@ console <- function() {
   tcltk::tkpack(scr, side = "right", fill = "y", expand = 0)
   tcltk::tkpack(txt, side = "left", fill = "both", expand = 1)
 
-  tcltk::tkbind(console, "<Destroy>", function() {
+  tcltk::tkbind(console, "<Destroy>", \() {
     if (!is.na(oldverb) && igraph_opt("verbose") == "tkconsole") {
       igraph_options(verbose = oldverb)
     }

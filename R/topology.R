@@ -145,7 +145,7 @@ graph.get.isomorphisms.vf2 <- function(
     edge_color2 = edge.color2
   )
 
-  lapply(res, function(.x) V(graph2)[.x + 1])
+  lapply(res, \(.x) V(graph2)[.x + 1])
 }
 
 #' @export
@@ -166,7 +166,7 @@ graph.get.subisomorphisms.vf2 <- function(
     edge_color2 = edge.color2
   )
 
-  lapply(res, function(.x) V(graph1)[.x + 1])
+  lapply(res, \(.x) V(graph1)[.x + 1])
 }
 
 #' @export
@@ -262,7 +262,7 @@ graph.subisomorphic.lad <- function(
         "{.arg domains} length and {.arg pattern} number of vertices must match."
       )
     }
-    domains <- lapply(domains, function(x) as_igraph_vs(target, x) - 1)
+    domains <- lapply(domains, \(x) as_igraph_vs(target, x) - 1)
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
@@ -285,7 +285,7 @@ graph.subisomorphic.lad <- function(
     }
   }
   if (all.maps) {
-    res$maps <- lapply(res$maps, function(.x) V(target)[.x + 1])
+    res$maps <- lapply(res$maps, \(.x) V(target)[.x + 1])
   }
 
   res

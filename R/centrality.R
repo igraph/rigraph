@@ -1136,9 +1136,9 @@ arpack <- function(
     res$vectors <- rew$vectors
     res$values <- rew$values
 
-    res$values <- apply(res$values, 1, function(x) x[1] + x[2] * 1i)
+    res$values <- apply(res$values, 1, \(x) x[1] + x[2] * 1i)
     dim(res$vectors) <- c(nrow(res$vectors) * 2, ncol(res$vectors) / 2)
-    res$vectors <- apply(res$vectors, 2, function(x) {
+    res$vectors <- apply(res$vectors, 2, \(x) {
       l <- length(x) / 2
       x[1:l] + x[(l + 1):length(x)] * 1i
     })

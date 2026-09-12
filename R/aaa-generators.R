@@ -40,7 +40,7 @@ adjlist_impl <- function(
   duplicate = TRUE
 ) {
   # Argument checks
-  adjlist <- lapply(adjlist, function(x) as.numeric(x) - 1)
+  adjlist <- lapply(adjlist, \(x) as.numeric(x) - 1)
   mode <- switch_igraph_arg(
     mode,
     "out" = 1L,

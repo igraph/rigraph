@@ -5,20 +5,20 @@ make_closure <- function(fun, ...) {
   fun
 }
 
-has_glpk <- make_closure(glpk = NULL, function() {
+has_glpk <- make_closure(glpk = NULL, \() {
   if (is.null(glpk)) {
     glpk <<- tryCatch(
       {
         cluster_optimal(make_ring(10))
         TRUE
       },
-      error = function(e) FALSE
+      error = \(e) FALSE
     )
   }
   glpk
 })
 
-has_graphml <- make_closure(graphml = NULL, function() {
+has_graphml <- make_closure(graphml = NULL, \() {
   if (is.null(graphml)) {
     graphml <<- tryCatch(
       {
@@ -28,7 +28,7 @@ has_graphml <- make_closure(graphml = NULL, function() {
         )
         TRUE
       },
-      error = function(e) FALSE
+      error = \(e) FALSE
     )
   }
   graphml

@@ -1149,7 +1149,7 @@ print2.igraphHRG <- function(x, ...) {
   p <- format(x$prob, digits = 1)
   pw <- 4 + max(nchar(p))
   nn <- if (is.null(x$names)) seq_len(length(x$left) + 1) else x$names
-  op <- sapply(seq_along(x$left), function(i) {
+  op <- sapply(seq_along(x$left), \(i) {
     lc <- if (x$left[i] < 0) {
       paste(sep = "", "g", -x$left[i])
     } else {
@@ -1203,7 +1203,7 @@ print.igraphHRGConsensus <- function(x, ...) {
   ch <- tapply(id, x$parents, c)[-1] # first is zero
   bw <- nchar(as.character(length(x$weights)))
   vw <- max(nchar(id))
-  op <- sapply(seq_along(x$weights), function(i) {
+  op <- sapply(seq_along(x$weights), \(i) {
     mych <- format(ch[[i]], width = vw)
     if (length(ch[[i]]) * (vw + 1) + bw + 4 > getOption("width")) {
       mych <- gsub(" ", "x", mych, fixed = TRUE)
