@@ -166,6 +166,15 @@ void igraph_vector_int_list_destroy_pv(void *pv_ptr)
   igraph_vector_int_list_destroy((igraph_vector_int_list_t*) pv_ptr);
 }
 
+/* Restores R's RNG state from the igraph finally stack, so it runs even when an
+ * igraph call longjmps out via IGRAPH_R_CHECK. Pair every GetRNGstate() call
+ * with IGRAPH_FINALLY(Rx_PutRNGstate_pv, NULL), then on the success path call
+ * PutRNGstate() and IGRAPH_FINALLY_CLEAN(1). */
+static void Rx_PutRNGstate_pv(void *pv_ptr) {
+  (void) pv_ptr;
+  PutRNGstate();
+}
+
 /* HELPER: internal C; must use IGRAPH_CHECK */
 igraph_error_t Rw_get_int_scalar(SEXP sexp, R_xlen_t index, igraph_integer_t *res)
 {
@@ -1757,7 +1766,7 @@ SEXP Rx_igraph_ac_random_numeric(SEXP attr,
   PROTECT(attr2=AS_NUMERIC(attr));
   PROTECT(res=NEW_NUMERIC(len));
 
-  RNG_BEGIN();
+  GetRNGstate();
 
   for (igraph_integer_t i=0; i<len; i++) {
     igraph_vector_int_t *v=igraph_vector_int_list_get_ptr(merges, i);
@@ -1772,7 +1781,7 @@ SEXP Rx_igraph_ac_random_numeric(SEXP attr,
     }
   }
 
-  RNG_END();
+  PutRNGstate();
 
   UNPROTECT(2);
   return res;
@@ -4410,7 +4419,11 @@ SEXP Rx_igraph_layout_fruchterman_reingold(SEXP graph, SEXP coords,
   if (!Rf_isNull(miny)) { Rz_SEXP_to_vector(miny, &c_miny); }
   if (!Rf_isNull(maxy)) { Rz_SEXP_to_vector(maxy, &c_maxy); }
   /* Call igraph */
+  GetRNGstate();
+  IGRAPH_FINALLY(Rx_PutRNGstate_pv, NULL);
   IGRAPH_R_CHECK(igraph_layout_fruchterman_reingold(&c_graph, &c_coords, !Rf_isNull(coords), c_niter, c_start_temp, c_grid, (Rf_isNull(weights) ? 0 : &c_weights), (Rf_isNull(minx) ? 0 : &c_minx), (Rf_isNull(maxx) ? 0 : &c_maxx), (Rf_isNull(miny) ? 0 : &c_miny), (Rf_isNull(maxy) ? 0 : &c_maxy)));
+  PutRNGstate();
+  IGRAPH_FINALLY_CLEAN(1);
 
   /* Convert output */
   PROTECT(coords=Ry_igraph_matrix_to_SEXP(&c_coords));
@@ -4463,7 +4476,11 @@ SEXP Rx_igraph_layout_fruchterman_reingold_3d(SEXP graph, SEXP coords,
   if (!Rf_isNull(minz)) { Rz_SEXP_to_vector(minz, &c_minz); }
   if (!Rf_isNull(maxz)) { Rz_SEXP_to_vector(maxz, &c_maxz); }
   /* Call igraph */
+  GetRNGstate();
+  IGRAPH_FINALLY(Rx_PutRNGstate_pv, NULL);
   IGRAPH_R_CHECK(igraph_layout_fruchterman_reingold_3d(&c_graph, &c_coords, !Rf_isNull(coords), c_niter, c_start_temp, (Rf_isNull(weights) ? 0 : &c_weights), (Rf_isNull(minx) ? 0 : &c_minx), (Rf_isNull(maxx) ? 0 : &c_maxx), (Rf_isNull(miny) ? 0 : &c_miny), (Rf_isNull(maxy) ? 0 : &c_maxy), (Rf_isNull(minz) ? 0 : &c_minz), (Rf_isNull(maxz) ? 0 : &c_maxz)));
+  PutRNGstate();
+  IGRAPH_FINALLY_CLEAN(1);
 
   /* Convert output */
   PROTECT(coords=Ry_igraph_matrix_to_SEXP(&c_coords));
@@ -4513,7 +4530,11 @@ SEXP Rx_igraph_layout_kamada_kawai(SEXP graph, SEXP coords, SEXP maxiter,
   if (!Rf_isNull(miny)) { Rz_SEXP_to_vector(miny, &c_miny); }
   if (!Rf_isNull(maxy)) { Rz_SEXP_to_vector(maxy, &c_maxy); }
   /* Call igraph */
+  GetRNGstate();
+  IGRAPH_FINALLY(Rx_PutRNGstate_pv, NULL);
   IGRAPH_R_CHECK(igraph_layout_kamada_kawai(&c_graph, &c_coords, !Rf_isNull(coords), c_maxiter, c_epsilon, c_kkconst, (Rf_isNull(weights) ? 0 : &c_weights), (Rf_isNull(minx) ? 0 : &c_minx), (Rf_isNull(maxx) ? 0 : &c_maxx), (Rf_isNull(miny) ? 0 : &c_miny), (Rf_isNull(maxy) ? 0 : &c_maxy)));
+  PutRNGstate();
+  IGRAPH_FINALLY_CLEAN(1);
 
                                         /* Convert output */
   PROTECT(coords=Ry_igraph_matrix_to_SEXP(&c_coords));
@@ -4569,7 +4590,11 @@ SEXP Rx_igraph_layout_kamada_kawai_3d(SEXP graph, SEXP coords, SEXP maxiter,
   if (!Rf_isNull(minz)) { Rz_SEXP_to_vector(minz, &c_minz); }
   if (!Rf_isNull(maxz)) { Rz_SEXP_to_vector(maxz, &c_maxz); }
   /* Call igraph */
+  GetRNGstate();
+  IGRAPH_FINALLY(Rx_PutRNGstate_pv, NULL);
   IGRAPH_R_CHECK(igraph_layout_kamada_kawai_3d(&c_graph, &c_coords, !Rf_isNull(coords), c_maxiter, c_epsilon, c_kkconst, (Rf_isNull(weights) ? 0 : &c_weights), (Rf_isNull(minx) ? 0 : &c_minx), (Rf_isNull(maxx) ? 0 : &c_maxx), (Rf_isNull(miny) ? 0 : &c_miny), (Rf_isNull(maxy) ? 0 : &c_maxy), (Rf_isNull(minz) ? 0 : &c_minz), (Rf_isNull(maxz) ? 0 : &c_maxz)));
+  PutRNGstate();
+  IGRAPH_FINALLY_CLEAN(1);
 
                                         /* Convert output */
   PROTECT(coords=Ry_igraph_matrix_to_SEXP(&c_coords));
@@ -4602,7 +4627,11 @@ SEXP Rx_igraph_layout_graphopt(SEXP graph, SEXP pniter, SEXP pcharge,
   } else {
     Rz_SEXP_to_igraph_matrix_copy(start, &res);
   }
+  GetRNGstate();
+  IGRAPH_FINALLY(Rx_PutRNGstate_pv, NULL);
   IGRAPH_R_CHECK(igraph_layout_graphopt(&g, &res, niter, charge, mass, spring_length, spring_constant, max_sa_movement, !Rf_isNull(start)));
+  PutRNGstate();
+  IGRAPH_FINALLY_CLEAN(1);
   PROTECT(result=Ry_igraph_matrix_to_SEXP(&res));
   igraph_matrix_destroy(&res);
 
@@ -4628,7 +4657,11 @@ SEXP Rx_igraph_layout_lgl(SEXP graph, SEXP pmaxiter, SEXP pmaxdelta,
 
   Rz_SEXP_to_igraph(graph, &g);
   igraph_matrix_init(&res, 0, 0);
+  GetRNGstate();
+  IGRAPH_FINALLY(Rx_PutRNGstate_pv, NULL);
   IGRAPH_R_CHECK(igraph_layout_lgl(&g, &res, maxiter, maxdelta, area, coolexp, repulserad, cellsize, root));
+  PutRNGstate();
+  IGRAPH_FINALLY_CLEAN(1);
   PROTECT(result=Ry_igraph_matrix_to_SEXP(&res));
   igraph_matrix_destroy(&res);
 
@@ -4965,7 +4998,11 @@ SEXP Rx_igraph_layout_merge_dla(SEXP graphs, SEXP layouts) {
     igraph_matrix_update(dest, &source);
   }
   igraph_matrix_init(&res, 0, 0);
+  GetRNGstate();
+  IGRAPH_FINALLY(Rx_PutRNGstate_pv, NULL);
   IGRAPH_R_CHECK(igraph_layout_merge_dla(&graphvec, &matrixlist, &res));
+  PutRNGstate();
+  IGRAPH_FINALLY_CLEAN(1);
   igraph_vector_ptr_destroy(&graphvec);
   igraph_matrix_list_destroy(&matrixlist);
   PROTECT(result=Ry_igraph_matrix_to_SEXP(&res));
@@ -5803,7 +5840,11 @@ SEXP Rx_igraph_walktrap_community(SEXP graph, SEXP pweights,
   igraph_vector_init(&modularity, 0);
   igraph_vector_int_init(&membership, 0);
 
+  GetRNGstate();
+  IGRAPH_FINALLY(Rx_PutRNGstate_pv, NULL);
   IGRAPH_R_CHECK(igraph_community_walktrap(&g, ppweights, steps, &merges, &modularity, &membership));
+  PutRNGstate();
+  IGRAPH_FINALLY_CLEAN(1);
 
   PROTECT(result=NEW_LIST(3));
   if (LOGICAL(pmerges)[0]) {
@@ -7132,10 +7173,22 @@ SEXP Rx_igraph_vcount(SEXP graph) {
 
 /* TOP-LEVEL: called from R via .Call; must use IGRAPH_R_CHECK */
 SEXP Rx_igraph_layout_drl(SEXP graph, SEXP res, SEXP use_seed, SEXP options, SEXP weights) {
-  return R_igraph_layout_drl(graph, res, use_seed, options, weights);
+  SEXP result;
+  GetRNGstate();
+  IGRAPH_FINALLY(Rx_PutRNGstate_pv, NULL);
+  result = R_igraph_layout_drl(graph, res, use_seed, options, weights);
+  PutRNGstate();
+  IGRAPH_FINALLY_CLEAN(1);
+  return result;
 }
 
 /* TOP-LEVEL: called from R via .Call; must use IGRAPH_R_CHECK */
 SEXP Rx_igraph_layout_drl_3d(SEXP graph, SEXP res, SEXP use_seed, SEXP options, SEXP weights) {
-  return R_igraph_layout_drl_3d(graph, res, use_seed, options, weights);
+  SEXP result;
+  GetRNGstate();
+  IGRAPH_FINALLY(Rx_PutRNGstate_pv, NULL);
+  result = R_igraph_layout_drl_3d(graph, res, use_seed, options, weights);
+  PutRNGstate();
+  IGRAPH_FINALLY_CLEAN(1);
+  return result;
 }
