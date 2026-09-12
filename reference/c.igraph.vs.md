@@ -48,6 +48,6 @@ Other vertex and edge sequence operations:
 ``` r
 g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
 c(V(g)[1], V(g)["A"], V(g)[1:4])
-#> ── <vertex sequence> 6/10 · named · from 5a16d76 ───────────────────────────────
+#> ── <vertex sequence> 6/10 · named · from 4825aa9 ───────────────────────────────
 #> [1] A A A B C D
 ```

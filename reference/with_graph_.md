@@ -30,7 +30,7 @@ Constructor modifiers (and related functions):
 
 ``` r
 make_(ring(10), with_graph_(name = "10-ring"))
-#> ── <igraph> 10-ring ───────────────────────────────────────────────── f9dfc40 ──
+#> ── <igraph> 10-ring ───────────────────────────────────────────────── 28c3a0d ──
 #> ℹ undirected
 #> ℹ 10 vertices · 10 edges
 #> 
