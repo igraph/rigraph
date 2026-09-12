@@ -3,7 +3,7 @@ c\BeginDoc
 c
 c\Name: igraphdseigt
 c
-c\Description: 
+c\Description:
 c  Compute the eigenvalues of the current symmetric tridiagonal matrix
 c  and the corresponding error bounds given the current residual norm.
 c
@@ -20,16 +20,16 @@ c  N       Integer.  (INPUT)
 c          Size of the symmetric tridiagonal matrix H.
 c
 c  H       Double precision N by 2 array.  (INPUT)
-c          H contains the symmetric tridiagonal matrix with the 
-c          subdiagonal in the first column starting at H(2,1) and the 
-c          main diagonal in igraphsecond column.
+c          H contains the symmetric tridiagonal matrix with the
+c          subdiagonal in the first column starting at H(2,1) and the
+c          main diagonal in second column.
 c
 c  LDH     Integer.  (INPUT)
-c          Leading dimension of H exactly as declared in the calling 
+c          Leading dimension of H exactly as declared in the calling
 c          program.
 c
 c  EIG     Double precision array of length N.  (OUTPUT)
-c          On output, EIG contains the N eigenvalues of H possibly 
+c          On output, EIG contains the N eigenvalues of H possibly
 c          unsorted.  The BOUNDS arrays are returned in the
 c          same sorted order as EIG.
 c
@@ -59,22 +59,22 @@ c\Routines called:
 c     igraphdstqrb  ARPACK routine that computes the eigenvalues and the
 c             last components of the eigenvectors of a symmetric
 c             and tridiagonal matrix.
-c     igraphsecond  ARPACK utility routine for timing.
+c     igrapharscnd  ARPACK utility routine for timing.
 c     igraphdvout   ARPACK utility routine that prints vectors.
 c     dcopy   Level 1 BLAS that copies one vector to another.
 c
 c\Author
 c     Danny Sorensen               Phuong Vu
-c     Richard Lehoucq              CRPC / Rice University 
-c     Dept. of Computational &     Houston, Texas 
+c     Richard Lehoucq              CRPC / Rice University
+c     Dept. of Computational &     Houston, Texas
 c     Applied Mathematics
-c     Rice University           
-c     Houston, Texas            
+c     Rice University
+c     Houston, Texas
 c
 c\Revision history:
 c     xx/xx/92: Version ' 2.4'
 c
-c\SCCS Information: @(#) 
+c\SCCS Information: @(#)
 c FILE: seigt.F   SID: 2.4   DATE OF SID: 8/27/96   RELEASE: 2
 c
 c\Remarks
@@ -84,7 +84,7 @@ c\EndLib
 c
 c-----------------------------------------------------------------------
 c
-      subroutine igraphdseigt 
+      subroutine igraphdseigt
      &   ( rnorm, n, h, ldh, eig, bounds, workl, ierr )
 c
 c     %----------------------------------------------------%
@@ -127,7 +127,7 @@ c     %----------------------%
 c     | External Subroutines |
 c     %----------------------%
 c
-      external   dcopy, igraphdstqrb, igraphdvout, igraphsecond
+      external   dcopy, igraphdstqrb, igraphdvout, igrapharscnd
 c
 c     %-----------------------%
 c     | Executable Statements |
@@ -136,9 +136,9 @@ c
 c     %-------------------------------%
 c     | Initialize timing statistics  |
 c     | & message level for debugging |
-c     %-------------------------------% 
+c     %-------------------------------%
 c
-      call igraphsecond (t0)
+      call igrapharscnd (t0)
       msglvl = mseigt
 c
       if (msglvl .gt. 0) then
@@ -167,8 +167,8 @@ c
       do 30 k = 1, n
          bounds(k) = rnorm*abs(bounds(k))
    30 continue
-c 
-      call igraphsecond (t1)
+c
+      call igrapharscnd (t1)
       tseigt = tseigt + (t1 - t0)
 c
  9000 continue
