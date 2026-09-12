@@ -43,14 +43,9 @@ test_that("is_chordal works", {
 
 # ---- ellipsis migration: argument coverage ----------------------------
 
-# The first example graph from the Tarjan-Yannakakis paper, as in the test above.
-tarjan_yannakakis_graph <- function() {
-  graph_from_literal(
-    A - B:C:I, B - A:C:D, C - A:B:E:H, D - B:E:F,
-    E - C:D:F:H, F - D:E:G, G - F:H, H - C:E:G:I,
-    I - A:H
-  )
-}
+# The `tarjan_yannakakis_graph()` fixture used below -- the first example graph
+# from the Tarjan-Yannakakis paper, as in the test above -- lives in
+# helper-test-functions.R.
 
 test_that("is_chordal accepts alpha, alpham1, fillin, and newgraph by name", {
   g <- tarjan_yannakakis_graph()

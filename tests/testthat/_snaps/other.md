@@ -26,7 +26,7 @@
 # VS/ES require explicit conversion
 
     Code
-      V(karate_oldstyle)
+      V(karate_oldstyle_graph())
     Condition
       Error in `warn_version()`:
       ! This graph was created by a now unsupported old igraph version.

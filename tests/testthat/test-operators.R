@@ -6,8 +6,8 @@ test_that("union() works", {
   expect_vcount(gu, 11)
   expect_ecount(gu, 20)
   expect_equal(
-    order_by_two_first_columns(rbind(as_edgelist(g1), as_edgelist(g2))),
-    order_by_two_first_columns(as_edgelist(gu))
+    sort_edgelist_rows(rbind(as_edgelist(g1), as_edgelist(g2))),
+    sort_edgelist_rows(as_edgelist(gu))
   )
   expect_isomorphic(difference(gu, g1), g2)
   expect_isomorphic(intersection(gu, g2), g2)
@@ -18,8 +18,8 @@ test_that("disjoint_union() works", {
   g2 <- make_star(11, center = 11, mode = "undirected")
   gdu <- disjoint_union(g1, g2)
   expect_equal(
-    order_by_two_first_columns(as_edgelist(gdu)),
-    order_by_two_first_columns(rbind(
+    sort_edgelist_rows(as_edgelist(gdu)),
+    sort_edgelist_rows(rbind(
       as_edgelist(g1),
       as_edgelist(g2) + vcount(g1)
     ))
@@ -664,9 +664,9 @@ test_that("intersection of non-named graphs keeps attributes properly", {
 
   gi <- intersection(g, g2)
 
-  df <- rn(as_data_frame(g))
-  df2 <- rn(as_data_frame(g2))
-  dfi <- rn(as_data_frame(gi))
+  df <- name_rows_by_edge_endpoints(as_data_frame(g))
+  df2 <- name_rows_by_edge_endpoints(as_data_frame(g2))
+  dfi <- name_rows_by_edge_endpoints(as_data_frame(gi))
 
   expect_equal(df[rownames(dfi), ], dfi[, 1:3], ignore_attr = TRUE)
   expect_equal(df2[rownames(dfi), ], dfi[, c(1, 2, 4)], ignore_attr = TRUE)
@@ -682,9 +682,9 @@ test_that("union of non-named graphs keeps attributes properly", {
 
   gu <- union.igraph(g, g2)
 
-  df <- rn(as_data_frame(g))
-  df2 <- rn(as_data_frame(g2))
-  dfu <- rn(as_data_frame(gu))
+  df <- name_rows_by_edge_endpoints(as_data_frame(g))
+  df2 <- name_rows_by_edge_endpoints(as_data_frame(g2))
+  dfu <- name_rows_by_edge_endpoints(as_data_frame(gu))
 
   expect_equal(dfu[rownames(df), 1:3], df, ignore_attr = TRUE)
   expect_equal(dfu[rownames(df2), c(1, 2, 4)], df2, ignore_attr = TRUE)
@@ -1248,11 +1248,11 @@ test_that("rev on detached vs, names", {
   }
 })
 
-# `unique_tests` (the input/expected pairs used below) lives in
+# `unique_vertex_seq_cases()` (the input/expected pairs used below) lives in
 # helper-test-functions.R.
 
 test_that("unique on attached vs", {
-  sapply(unique_tests, function(d) {
+  sapply(unique_vertex_seq_cases(), function(d) {
     g <- make_ring(10)
     vg <- unique(V(g)[d[[1]]])
     vr <- V(g)[d[[2]]]
@@ -1261,7 +1261,7 @@ test_that("unique on attached vs", {
 })
 
 test_that("unique on detached vs", {
-  sapply(unique_tests, function(d) {
+  sapply(unique_vertex_seq_cases(), function(d) {
     g <- make_ring(10)
     vg <- V(g)[d[[1]]]
     vr <- V(g)[d[[2]]]
@@ -1273,7 +1273,7 @@ test_that("unique on detached vs", {
 })
 
 test_that("unique on attached vs, names", {
-  sapply(unique_tests, function(d) {
+  sapply(unique_vertex_seq_cases(), function(d) {
     g <- make_ring(10)
     V(g)$name <- letters[1:10]
     vg <- unique(V(g)[d[[1]]])
@@ -1283,7 +1283,7 @@ test_that("unique on attached vs, names", {
 })
 
 test_that("unique on detached vs, names", {
-  sapply(unique_tests, function(d) {
+  sapply(unique_vertex_seq_cases(), function(d) {
     g <- make_ring(10)
     V(g)$name <- letters[1:10]
     vg <- V(g)[d[[1]]]
@@ -1405,17 +1405,8 @@ test_that("graph.attr.comb defaults to the graph.attr.comb igraph option", {
   expect_length(graph_attr_names(compose(g1, g2)), 0)
 })
 
-# A fresh already-simple graph with two edge attributes, one of which the
-# default combination list keeps and one of which it drops. Each caller needs
-# its own: the C core's property cache lives in the graph object, and merely
-# asking whether the graph is simple changes what simplifying it does -- see
-# the second test below.
-simple_graph_with_attrs <- function() {
-  g <- make_graph(c(1, 2, 2, 3), directed = FALSE)
-  E(g)$weight <- c(1, 2)
-  E(g)$foo <- c("a", "b")
-  g
-}
+# The `simple_graph_with_edge_attrs()` fixture used below lives in
+# helper-test-functions.R.
 
 test_that("simplify() applies edge.attr.comb to an already-simple graph", {
   # `edge.attr.comb` does not only combine attributes across merged edges, it
@@ -1424,24 +1415,27 @@ test_that("simplify() applies edge.attr.comb to an already-simple graph", {
   # simple still has to go through the combination.
 
   # The default list ends in "ignore", so `weight` survives and `foo` does not.
-  expect_equal(edge_attr_names(simplify(simple_graph_with_attrs())), "weight")
+  expect_equal(
+    edge_attr_names(simplify(simple_graph_with_edge_attrs())),
+    "weight"
+  )
   expect_length(
     edge_attr_names(simplify(
-      simple_graph_with_attrs(),
+      simple_graph_with_edge_attrs(),
       edge.attr.comb = "ignore"
     )),
     0
   )
   expect_setequal(
     edge_attr_names(simplify(
-      simple_graph_with_attrs(),
+      simple_graph_with_edge_attrs(),
       edge.attr.comb = list(weight = "sum", foo = "first")
     )),
     c("weight", "foo")
   )
 
   # Values are untouched -- each edge is its own group.
-  expect_equal(E(simplify(simple_graph_with_attrs()))$weight, c(1, 2))
+  expect_equal(E(simplify(simple_graph_with_edge_attrs()))$weight, c(1, 2))
 })
 
 test_that("simplify() is still cache-sensitive, which is a C-core issue", {
@@ -1455,8 +1449,8 @@ test_that("simplify() is still cache-sensitive, which is a C-core issue", {
   # `is_simple(graph)`, which warmed the cache on every call and made the
   # cache-warm answer the only answer. It cannot cure it either --
   # that fix belongs in src/vendor/cigraph/src/operators/simplify.c.
-  cold <- simple_graph_with_attrs()
-  warm <- simple_graph_with_attrs()
+  cold <- simple_graph_with_edge_attrs()
+  warm <- simple_graph_with_edge_attrs()
   invisible(is_simple(warm))
 
   expect_length(edge_attr_names(simplify(cold, edge.attr.comb = "ignore")), 0)

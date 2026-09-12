@@ -51,15 +51,17 @@ test_that("embed_adjacency_matrix -- Undirected, unweighted case works", {
     scaled = FALSE
   )
 
-  expect_equal(as_lm$D, sort_by_magnitude(ss$values)[1:no])
-  expect_equal(au_lm$D, sort_by_magnitude(ss$values)[1:no])
+  expect_equal(as_lm$D, sort_eigenvalues_by_magnitude(ss$values)[1:no])
+  expect_equal(au_lm$D, sort_eigenvalues_by_magnitude(ss$values)[1:no])
   expect_equal(
     standardize_eigen_signs(as_lm$X),
-    standardize_eigen_signs(U[, order_by_magnitude(ss$values)][, 1:no])
+    standardize_eigen_signs(U[, order_eigenvalues_by_magnitude(ss$values)][,
+      1:no
+    ])
   )
   expect_equal(
     standardize_eigen_signs(au_lm$X),
-    X[, order_by_magnitude(ss$values)][, 1:no]
+    X[, order_eigenvalues_by_magnitude(ss$values)][, 1:no]
   )
 
   au_sa <- embed_adjacency_matrix(
@@ -138,15 +140,17 @@ test_that("embed_adjacency_matrix -- Undirected, weighted case works", {
     scaled = FALSE
   )
 
-  expect_equal(as_lm$D, sort_by_magnitude(ss$values)[1:no])
-  expect_equal(au_lm$D, sort_by_magnitude(ss$values)[1:no])
+  expect_equal(as_lm$D, sort_eigenvalues_by_magnitude(ss$values)[1:no])
+  expect_equal(au_lm$D, sort_eigenvalues_by_magnitude(ss$values)[1:no])
   expect_equal(
     standardize_eigen_signs(as_lm$X),
-    standardize_eigen_signs(U[, order_by_magnitude(ss$values)][, 1:no])
+    standardize_eigen_signs(U[, order_eigenvalues_by_magnitude(ss$values)][,
+      1:no
+    ])
   )
   expect_equal(
     standardize_eigen_signs(au_lm$X),
-    X[, order_by_magnitude(ss$values)][, 1:no]
+    X[, order_eigenvalues_by_magnitude(ss$values)][, 1:no]
   )
 
   au_sa <- embed_adjacency_matrix(
@@ -452,15 +456,15 @@ test_that("embed_laplacian_matrix -- Undirected, unweighted, D-A case works", {
     scaled = FALSE
   )
 
-  expect_equal(au_lm$D, sort_by_magnitude(D)[1:no])
+  expect_equal(au_lm$D, sort_eigenvalues_by_magnitude(D)[1:no])
   expect_equal(
     standardize_eigen_signs(au_lm$X),
-    standardize_eigen_signs(X[, order_by_magnitude(D)][, 1:no])
+    standardize_eigen_signs(X[, order_eigenvalues_by_magnitude(D)][, 1:no])
   )
-  expect_equal(as_lm$D, sort_by_magnitude(D)[1:no])
+  expect_equal(as_lm$D, sort_eigenvalues_by_magnitude(D)[1:no])
   expect_equal(
     standardize_eigen_signs(as_lm$X),
-    standardize_eigen_signs(U[, order_by_magnitude(D)][, 1:no])
+    standardize_eigen_signs(U[, order_eigenvalues_by_magnitude(D)][, 1:no])
   )
 
   ## SA
@@ -551,15 +555,15 @@ test_that("embed_laplacian_matrix -- Undirected, unweighted, DAD case works", {
     scaled = FALSE
   )
 
-  expect_equal(au_lm$D, sort_by_magnitude(D)[1:no])
+  expect_equal(au_lm$D, sort_eigenvalues_by_magnitude(D)[1:no])
   expect_equal(
     standardize_eigen_signs(au_lm$X),
-    standardize_eigen_signs(X[, order_by_magnitude(D)][, 1:no])
+    standardize_eigen_signs(X[, order_eigenvalues_by_magnitude(D)][, 1:no])
   )
-  expect_equal(as_lm$D, sort_by_magnitude(D)[1:no])
+  expect_equal(as_lm$D, sort_eigenvalues_by_magnitude(D)[1:no])
   expect_equal(
     standardize_eigen_signs(as_lm$X),
-    standardize_eigen_signs(U[, order_by_magnitude(D)][, 1:no])
+    standardize_eigen_signs(U[, order_eigenvalues_by_magnitude(D)][, 1:no])
   )
 
   ## SA
@@ -650,15 +654,15 @@ test_that("embed_laplacian_matrix -- Undirected, unweighted, I-DAD case works", 
     scaled = FALSE
   )
 
-  expect_equal(au_lm$D, sort_by_magnitude(D)[1:no])
+  expect_equal(au_lm$D, sort_eigenvalues_by_magnitude(D)[1:no])
   expect_equal(
     standardize_eigen_signs(au_lm$X),
-    standardize_eigen_signs(X[, order_by_magnitude(D)][, 1:no])
+    standardize_eigen_signs(X[, order_eigenvalues_by_magnitude(D)][, 1:no])
   )
-  expect_equal(as_lm$D, sort_by_magnitude(D)[1:no])
+  expect_equal(as_lm$D, sort_eigenvalues_by_magnitude(D)[1:no])
   expect_equal(
     standardize_eigen_signs(as_lm$X),
-    standardize_eigen_signs(U[, order_by_magnitude(D)][, 1:no])
+    standardize_eigen_signs(U[, order_eigenvalues_by_magnitude(D)][, 1:no])
   )
 
   ## SA
@@ -750,15 +754,15 @@ test_that("embed_laplacian_matrix -- Undirected, weighted, D-A case works", {
     scaled = FALSE
   )
 
-  expect_equal(au_lm$D, sort_by_magnitude(D)[1:no])
+  expect_equal(au_lm$D, sort_eigenvalues_by_magnitude(D)[1:no])
   expect_equal(
     standardize_eigen_signs(au_lm$X),
-    standardize_eigen_signs(X[, order_by_magnitude(D)][, 1:no])
+    standardize_eigen_signs(X[, order_eigenvalues_by_magnitude(D)][, 1:no])
   )
-  expect_equal(as_lm$D, sort_by_magnitude(D)[1:no])
+  expect_equal(as_lm$D, sort_eigenvalues_by_magnitude(D)[1:no])
   expect_equal(
     standardize_eigen_signs(as_lm$X),
-    standardize_eigen_signs(U[, order_by_magnitude(D)][, 1:no])
+    standardize_eigen_signs(U[, order_eigenvalues_by_magnitude(D)][, 1:no])
   )
 
   ## SA
@@ -847,15 +851,15 @@ test_that("embed_laplacian_matrix -- Undirected, unweighted, DAD case works", {
     scaled = FALSE
   )
 
-  expect_equal(au_lm$D, sort_by_magnitude(D)[1:no])
+  expect_equal(au_lm$D, sort_eigenvalues_by_magnitude(D)[1:no])
   expect_equal(
     standardize_eigen_signs(au_lm$X),
-    standardize_eigen_signs(X[, order_by_magnitude(D)][, 1:no])
+    standardize_eigen_signs(X[, order_eigenvalues_by_magnitude(D)][, 1:no])
   )
-  expect_equal(as_lm$D, sort_by_magnitude(D)[1:no])
+  expect_equal(as_lm$D, sort_eigenvalues_by_magnitude(D)[1:no])
   expect_equal(
     standardize_eigen_signs(as_lm$X),
-    standardize_eigen_signs(U[, order_by_magnitude(D)][, 1:no])
+    standardize_eigen_signs(U[, order_eigenvalues_by_magnitude(D)][, 1:no])
   )
 
   ## SA
@@ -947,15 +951,15 @@ test_that("embed_laplacian_matrix -- Undirected, unweighted, I-DAD case works", 
     scaled = FALSE
   )
 
-  expect_equal(au_lm$D, sort_by_magnitude(D)[1:no])
+  expect_equal(au_lm$D, sort_eigenvalues_by_magnitude(D)[1:no])
   expect_equal(
     standardize_eigen_signs(au_lm$X),
-    standardize_eigen_signs(X[, order_by_magnitude(D)][, 1:no])
+    standardize_eigen_signs(X[, order_eigenvalues_by_magnitude(D)][, 1:no])
   )
-  expect_equal(as_lm$D, sort_by_magnitude(D)[1:no])
+  expect_equal(as_lm$D, sort_eigenvalues_by_magnitude(D)[1:no])
   expect_equal(
     standardize_eigen_signs(as_lm$X),
-    standardize_eigen_signs(U[, order_by_magnitude(D)][, 1:no])
+    standardize_eigen_signs(U[, order_eigenvalues_by_magnitude(D)][, 1:no])
   )
 
   ## SA
