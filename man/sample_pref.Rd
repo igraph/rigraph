@@ -8,47 +8,51 @@
 \title{Trait-based random generation}
 \usage{
 sample_pref(
-  nodes,
+  n,
   types,
   ...,
   type.dist = NULL,
   fixed.sizes = FALSE,
   pref.matrix = NULL,
   directed = FALSE,
-  loops = FALSE
+  loops = FALSE,
+  nodes = deprecated()
 )
 
 pref(
-  nodes,
+  n,
   types,
   ...,
   type.dist = NULL,
   fixed.sizes = FALSE,
   pref.matrix = NULL,
   directed = FALSE,
-  loops = FALSE
+  loops = FALSE,
+  nodes = deprecated()
 )
 
 sample_asym_pref(
-  nodes,
+  n,
   types,
   ...,
   type.dist.matrix = NULL,
   pref.matrix = NULL,
-  loops = FALSE
+  loops = FALSE,
+  nodes = deprecated()
 )
 
 asym_pref(
-  nodes,
+  n,
   types,
   ...,
   type.dist.matrix = NULL,
   pref.matrix = NULL,
-  loops = FALSE
+  loops = FALSE,
+  nodes = deprecated()
 )
 }
 \arguments{
-\item{nodes}{The number of vertices in the graphs.}
+\item{n}{The number of vertices in the graphs.}
 
 \item{types}{The number of different vertex types.}
 
@@ -71,6 +75,8 @@ preferences to one.}
 \item{directed}{Logical, whether to create a directed graph.}
 
 \item{loops}{Logical, whether self-loops are allowed in the graph.}
+
+\item{nodes}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{n} instead.}
 
 \item{type.dist.matrix}{The joint distribution of the in- and out-vertex
 types. The default \code{NULL} gives a uniform distribution.}

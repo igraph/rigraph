@@ -18,9 +18,10 @@ migrations <- list(
     old = function(graph, nodes, directed) {},
     new = function(
       graph = NULL,
-      nodes = 0,
+      n = 0,
       ...,
-      directed = TRUE
+      directed = TRUE,
+      nodes = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -40,9 +41,10 @@ migrations <- list(
     old = function(graph, nodes, mode) {},
     new = function(
       graph = NULL,
-      nodes = 0,
+      n = 0,
       ...,
-      mode = c("out", "in", "all", "total")
+      mode = c("out", "in", "all", "total"),
+      nodes = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -55,6 +57,32 @@ migrations <- list(
       mode = c("all", "out", "in", "total"),
       loops = TRUE,
       normalized = TRUE
+    ) {},
+    when = "3.0.0"
+  ),
+
+  centr_degree_tmax = list(
+    old = function(graph, nodes, mode, loops) {},
+    new = function(
+      graph = NULL,
+      n = 0,
+      ...,
+      mode = c("all", "out", "in", "total"),
+      loops,
+      nodes = deprecated()
+    ) {},
+    when = "3.0.0"
+  ),
+
+  centr_eigen_tmax = list(
+    old = function(graph, nodes, directed, scale) {},
+    new = function(
+      graph = NULL,
+      n = 0,
+      ...,
+      directed = FALSE,
+      scale = deprecated(),
+      nodes = deprecated()
     ) {},
     when = "3.0.0"
   ),

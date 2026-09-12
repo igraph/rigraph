@@ -70,7 +70,7 @@ test_that("centr_betw_tmax() covers migrated tail args and positional recovery",
 
   # The graph form and the vertex-count form must agree.
   expect_equal(centr_betw_tmax(g, directed = FALSE), 24)
-  expect_equal(centr_betw_tmax(nodes = 5, directed = FALSE), 24)
+  expect_equal(centr_betw_tmax(n = 5, directed = FALSE), 24)
   # And they match what centr_betw() reports.
   expect_equal(
     centr_betw(g, directed = FALSE, normalized = FALSE)$theoretical_max,
@@ -110,7 +110,7 @@ test_that("centr_clo_tmax() covers migrated tail args and positional recovery", 
 
   # The graph form and the vertex-count form must agree.
   expect_equal(centr_clo_tmax(g, mode = "in"), 3.2)
-  expect_equal(centr_clo_tmax(nodes = 5, mode = "in"), 3.2)
+  expect_equal(centr_clo_tmax(n = 5, mode = "in"), 3.2)
   # And they match what centr_clo() reports.
   expect_equal(
     centr_clo(g, mode = "in", normalized = FALSE)$theoretical_max,
@@ -135,4 +135,21 @@ test_that("centralize() covers migrated tail args and positional recovery", {
     res_legacy <- centralize(scores, 12)
   )
   expect_identical(res_legacy, centralize(scores, theoretical.max = 12))
+})
+
+# ---- nodes -> n rename ------------------------------------------------
+
+test_that("centr_*_tmax(nodes = ) is deprecated but still works", {
+  lifecycle::expect_deprecated(
+    res_betw <- centr_betw_tmax(nodes = 5, directed = FALSE)
+  )
+  expect_identical(res_betw, centr_betw_tmax(n = 5, directed = FALSE))
+
+  lifecycle::expect_deprecated(
+    res_degree <- centr_degree_tmax(nodes = 5, mode = "all", loops = TRUE)
+  )
+  expect_identical(
+    res_degree,
+    centr_degree_tmax(n = 5, mode = "all", loops = TRUE)
+  )
 })

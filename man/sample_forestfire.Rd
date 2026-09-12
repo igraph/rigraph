@@ -5,16 +5,17 @@
 \title{Forest Fire Network Model}
 \usage{
 sample_forestfire(
-  nodes,
+  n,
   fw.prob,
   ...,
   bw.factor = 1,
   ambs = 1,
-  directed = TRUE
+  directed = TRUE,
+  nodes = deprecated()
 )
 }
 \arguments{
-\item{nodes}{The number of vertices in the graph.}
+\item{n}{The number of vertices in the graph.}
 
 \item{fw.prob}{The forward burning probability, see details below.}
 
@@ -26,6 +27,8 @@ probability is calculated as \code{bw.factor*fw.prob}.}
 \item{ambs}{The number of ambassador vertices.}
 
 \item{directed}{Logical, whether to create a directed graph.}
+
+\item{nodes}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{n} instead.}
 }
 \value{
 A simple graph, possibly directed if the \code{directed} argument is
