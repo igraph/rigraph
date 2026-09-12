@@ -124,6 +124,11 @@ color name.
 
 The default value is \dQuote{\code{SkyBlue2}}.
 }
+\item{alpha}{
+Opacity of the vertex fill, a number (or vector) in \verb{[0, 1]}, multiplied
+into any alpha already present in \code{color}. \code{1} (the default) means fully
+opaque. Frame colour, pie slices and labels are not affected.
+}
 \item{frame.color}{
 The color of the frame of the vertices, the same formats are allowed as for the fill color.
 
@@ -240,6 +245,21 @@ The rotation of the vertex labels, in degrees. Corresponds to the \code{srt} par
 \item{label.adj}{
 one or two numeric values, giving the horizontal and vertical adjustment of the vertex labels. See also \code{adj} in \code{\link[graphics:text]{graphics::text()}}.
 }
+\item{label.repel}{
+Logical scalar. If \code{TRUE}, overlapping vertex labels are iteratively nudged
+apart (in the spirit of \pkg{ggrepel}) and a thin leader line connects each
+moved label to its original position. The default is \code{FALSE}.
+}
+\item{label.halo}{
+The colour of a legibility halo (outline) drawn behind the vertex label
+text, so labels remain readable over edges and other vertices. The halo is
+drawn shadowtext-style: the glyphs are repeated, offset in a ring, in this
+colour, with the real label on top. \code{NA} (the default) draws no halo.
+}
+\item{label.halo.width}{
+The width of the label halo, as a fraction of the label height. Only has an
+effect when \code{label.halo} is not \code{NA}. The default is \code{0.15}.
+}
 \item{size.scaling}{
 Switches between absolute vertex sizing (FALSE,default) and relative (TRUE).
 If FALSE, \code{vertex.size} and \code{vertex.size2} are used as is.
@@ -306,6 +326,15 @@ The font size for the edge labels, see the corresponding vertex parameter for de
 \item{label.color}{
 The color of the edge labels, see the \code{color} vertex parameters on how to specify colors.
 }
+\item{label.halo}{
+The colour of a legibility halo (outline) drawn behind the edge label text.
+See the vertex parameter with the same name for details. \code{NA} (the default)
+draws no halo.
+}
+\item{label.halo.width}{
+The width of the edge label halo, as a fraction of the label height. Only
+has an effect when \code{label.halo} is not \code{NA}. The default is \code{0.15}.
+}
 \item{label.x}{
 The horizontal \code{NA} elements will be replaced by automatically calculated coordinates.
 If \code{NULL}, then all edge horizontal coordinates are calculated automatically.
@@ -331,6 +360,32 @@ This parameter is ignored for loop edges.
 The default value is \code{FALSE}.
 
 This parameter is currently ignored by \code{\link[=rglplot]{rglplot()}}.
+}
+\item{style}{
+The routing style for (non-loop) edges, a character scalar or vector,
+replicated to the number of edges. One of:
+\describe{
+\item{\code{"auto"}}{(default) straight, unless \code{curved} is non-zero (in which
+case an arc), reproducing the historical behaviour.}
+\item{\code{"straight"}}{a straight segment.}
+\item{\code{"arc"}}{a curved arc; the strength is taken from \code{curved} if it is
+non-zero, otherwise a default is used.}
+\item{\code{"elbow"}}{a two-corner orthogonal (right-angle) connector.}
+\item{\code{"diagonal"}}{a smooth S-curve with axis-aligned ends.}
+}
+This parameter is ignored for loop edges and by \code{\link[=rglplot]{rglplot()}}.
+}
+\item{alpha}{
+Opacity of the edge, a number (or vector) in \verb{[0, 1]}, multiplied into any
+alpha already present in \code{color} (and in the gradient endpoint colours).
+\code{1} (the default) means fully opaque.
+}
+\item{gradient}{
+Logical scalar or vector. If \code{TRUE}, the edge is drawn as a colour gradient
+running from its source vertex's colour to its target vertex's colour (a
+direction cue), and the arrowhead takes the target colour; \code{color} is then
+ignored for that edge's shaft. The default is \code{FALSE}. Ignored for loop
+edges and by \code{\link[=rglplot]{rglplot()}}.
 }
 \item{arrow.mode}{
 This parameter can be used to specify for which edges should arrows be drawn.
