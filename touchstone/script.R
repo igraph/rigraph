@@ -331,5 +331,50 @@ benchmark_run(
   n = 20
 )
 
+# ---------------------------------------------------------------------------
+# Group #6 - batch construction of many vertex sequences
+# One shared graph reference and one hoisted name source, with the whole
+# per-element loop in C, instead of per-object R work. These two calls each
+# return thousands of vertex sequences from a single C core call.
+# ---------------------------------------------------------------------------
+
+# ego() returns one vertex sequence per node -- a few thousand sequences built
+# in one call. Exercises create_vs_list() through neighborhood().
+benchmark_run(
+  expr_before_benchmark = {
+    library(igraph)
+    set.seed(42)
+    g <- sample_gnm(2000L, 10000L)
+    V(g)$name <- paste0("v", seq_len(2000L))
+    for (i in 1:2) {
+      ego(g, order = 2, nodes = V(g))
+    }
+    gc(full = TRUE)
+  },
+  ego_order2_named = for (i in 1:16) {
+    ego(g, order = 2, nodes = V(g))
+  },
+  n = 20
+)
+
+# Enumerate simple paths between hubs on a named graph: another high-volume
+# vertex-sequence-list path (create_vs_list() via all_simple_paths()).
+benchmark_run(
+  expr_before_benchmark = {
+    library(igraph)
+    set.seed(42)
+    g <- sample_gnm(500L, 2500L)
+    V(g)$name <- paste0("v", seq_len(500L))
+    for (i in 1:2) {
+      all_simple_paths(g, 1, 2:6, cutoff = 5)
+    }
+    gc(full = TRUE)
+  },
+  all_simple_paths_named = for (i in 1:33) {
+    all_simple_paths(g, 1, 2:6, cutoff = 5)
+  },
+  n = 20
+)
+
 # Create the artifacts consumed by the GitHub Action.
 benchmark_analyze()
