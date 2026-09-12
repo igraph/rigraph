@@ -42,7 +42,9 @@ any needed graph information before calling the function with a callback, or
 use collector mode (the default) and process results afterward.}
 }
 \value{
-If \code{callback} is \code{NULL}, returns a list of vertex sequences, corresponding
+If \code{callback} is \code{NULL}, returns a list of vertex sequences (if the \code{return.vs.es} igraph
+option is true, the default) or a list of numeric vectors of vertex IDs
+(if \code{return.vs.es} is false), corresponding
 to all mappings from the pattern graph to the target graph. If \code{callback} is
 provided, returns \code{NULL} invisibly.
 }
