@@ -552,7 +552,7 @@ i.parse.plot.params <- function(graph, params) {
     ret <- function() {
       v <- p[[type]][[name]]
       if (is.function(v) && !dontcall) {
-        v <- v(graph)
+        v <- call_user_callback(v, graph)
       }
       if (is.null(range)) {
         return(v)
