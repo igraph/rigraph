@@ -77,3 +77,22 @@
       [2,] -210  590 -380
       [3,] -200 -380  580
 
+# knnk errors
+
+    Code
+      knnk(g, "out")
+    Condition
+      Error in `knnk()`:
+      ! `...` must be empty.
+      x Problematic argument:
+      * ..1 = "out"
+      i Did you forget to name an argument?
+
+---
+
+    Code
+      knnk(g, from_mode = "foo")
+    Condition
+      Error in `degree_correlation_vector_impl()`:
+      ! `from_mode` must be one of "out", "in", "all", or "total", not "foo".
+
