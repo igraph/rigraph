@@ -174,7 +174,7 @@ automorphism_group_impl <- function(
     sh
   )
   if (igraph_opt("return.vs.es")) {
-    res$generators <- lapply(res$generators, unsafe_create_vs, graph = graph, verts = V(graph))
+    res$generators <- create_vs_list(graph, res$generators)
   }
   if (!details) {
     res <- res$generators

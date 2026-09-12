@@ -330,6 +330,47 @@ unsafe_create_vs <- function(graph, idx, verts = NULL) {
   res
 }
 
+# Build a list of vertex sequences from a list of vertex-ID vectors.
+#
+# This is the batch form of `unsafe_create_vs()` and replaces the
+# `lapply(idx_list, unsafe_create_vs, graph = graph, verts = V(graph))`
+# pattern. All the per-graph work -- `V(graph)`, the shared weak reference,
+# the graph id and the vertex-name source -- is hoisted out of the loop, so
+# each sequence costs one `as.integer()`, one name subset and one
+# `attributes<-` instead of a closure call that re-reads all of it.
+#
+# Having a single named entry point for "turn this list of ID vectors into a
+# list of vertex sequences" also means the construction loop can be moved
+# wholesale (e.g. into C) without touching any of the ~37 call sites.
+create_vs_list <- function(graph, idx_list) {
+  verts <- V(graph)
+  vs_env <- attr(verts, "env")
+  vs_graph <- attr(verts, "graph")
+  vertex_names <- attr(verts, "names")
+  if (is.null(vertex_names)) {
+    lapply(idx_list, function(idx) {
+      res <- as.integer(idx)
+      attributes(res) <- list(
+        class = "igraph.vs",
+        env = vs_env,
+        graph = vs_graph
+      )
+      res
+    })
+  } else {
+    lapply(idx_list, function(idx) {
+      res <- as.integer(idx)
+      attributes(res) <- list(
+        names = vertex_names[res],
+        class = "igraph.vs",
+        env = vs_env,
+        graph = vs_graph
+      )
+      res
+    })
+  }
+}
+
 # Internal function to quickly convert integer vectors to igraph.es
 # for use after C code, when NA and bounds checking is unnecessary
 # Also allows us to construct V(graph) outside the function call in

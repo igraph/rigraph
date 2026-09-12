@@ -17,7 +17,7 @@ cohesive_blocks_impl <- function(
     graph
   )
   if (igraph_opt("return.vs.es")) {
-    res$blocks <- lapply(res$blocks, unsafe_create_vs, graph = graph, verts = V(graph))
+    res$blocks <- create_vs_list(graph, res$blocks)
   }
   class(res) <- "cohesiveBlocks"
   res
@@ -176,7 +176,7 @@ all_st_cuts_impl <- function(
     res$cuts <- lapply(res$cuts, unsafe_create_es, graph = graph, es = E(graph))
   }
   if (igraph_opt("return.vs.es")) {
-    res$partition1s <- lapply(res$partition1s, unsafe_create_vs, graph = graph, verts = V(graph))
+    res$partition1s <- create_vs_list(graph, res$partition1s)
   }
   res
 }
@@ -225,7 +225,7 @@ all_st_mincuts_impl <- function(
     res$cuts <- lapply(res$cuts, unsafe_create_es, graph = graph, es = E(graph))
   }
   if (igraph_opt("return.vs.es")) {
-    res$partition1s <- lapply(res$partition1s, unsafe_create_vs, graph = graph, verts = V(graph))
+    res$partition1s <- create_vs_list(graph, res$partition1s)
   }
   res
 }
