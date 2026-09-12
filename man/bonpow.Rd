@@ -27,8 +27,8 @@ loops.  \code{loops} is \code{FALSE} by default.}
 \item{exponent}{exponent (decay rate) for the Bonacich power centrality
 score; can be negative}
 
-\item{rescale}{if true, centrality scores are rescaled such that they sum to
-1.}
+\item{rescale}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{normalized} in
+\code{\link[=power_centrality]{power_centrality()}} instead.}
 
 \item{tol}{tolerance for near-singularities during matrix inversion (see
 \code{\link[Matrix:solve]{Matrix::solve()}})}

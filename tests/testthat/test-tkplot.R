@@ -32,8 +32,8 @@ test_that("tk_fit() recovers positional `width`/`height` with a deprecation", {
   )
 })
 
-test_that("tk_coords() covers `norm` by name", {
-  expect_error(tk_coords(9999, norm = TRUE), "not found")
+test_that("tk_coords() covers `normalized` by name", {
+  expect_error(tk_coords(9999, normalized = TRUE), "not found")
 })
 
 test_that("tk_coords() recovers a positional `norm` with a deprecation", {
@@ -41,6 +41,14 @@ test_that("tk_coords() recovers a positional `norm` with a deprecation", {
 
   lifecycle::expect_deprecated(
     expect_error(tk_coords(9999, TRUE), "not found")
+  )
+})
+
+test_that("tk_coords() recovers the legacy `norm` name with a deprecation", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+
+  lifecycle::expect_deprecated(
+    expect_error(tk_coords(9999, norm = TRUE), "not found")
   )
 })
 

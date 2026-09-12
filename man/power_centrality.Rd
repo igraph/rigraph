@@ -10,7 +10,7 @@ power_centrality(
   ...,
   loops = FALSE,
   exponent = 1,
-  rescale = FALSE,
+  normalized = FALSE,
   tol = 1e-07,
   sparse = TRUE,
   weights = NULL
@@ -31,7 +31,7 @@ loops.  \code{loops} is \code{FALSE} by default.}
 \item{exponent}{exponent (decay rate) for the Bonacich power centrality
 score; can be negative}
 
-\item{rescale}{if true, centrality scores are rescaled such that they sum to
+\item{normalized}{if true, centrality scores are rescaled such that they sum to
 1.}
 
 \item{tol}{tolerance for near-singularities during matrix inversion (see
