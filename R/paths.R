@@ -499,3 +499,287 @@ distance_table <- function(
     directed = directed
   )
 }
+
+#' Widest paths between vertices
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' `widest_path_widths()` calculates the widths
+#' of the widest paths between pairs of vertices.
+#' `widest_paths()` calculates one widest path
+#' (the path itself, and not just its width)
+#' from a source vertex to one or more target vertices.
+#'
+#' @details
+#' The widest path between two vertices
+#' is the path with the largest bottleneck width,
+#' where the bottleneck width of a path
+#' is the smallest edge weight along the path.
+#' Edge weights are interpreted as widths, so both functions require them:
+#' supply them in `weights` or via a `weight` edge attribute.
+#'
+#' `widest_path_widths()` calculates the widths of pairwise widest paths
+#' from a set of vertices (`from`) to another set of vertices (`to`).
+#' Depending on the `algorithm` argument,
+#' it uses Dijkstra's algorithm (\sQuote{`dijkstra`}),
+#' which is faster for sparse graphs,
+#' or the Floyd-Warshall algorithm (\sQuote{`floyd-warshall`}),
+#' which is faster for dense graphs.
+#' With the default \sQuote{`automatic`},
+#' igraph chooses between the two algorithms
+#' based on the density of the graph.
+#'
+#' `widest_paths()` calculates a single widest path
+#' from the source vertex given in `from`
+#' to each of the target vertices given in `to`,
+#' using a modified Dijkstra's algorithm.
+#' If there is more than one widest path between two vertices,
+#' only one of them is returned.
+#'
+#' @param graph The graph to work on.
+#' @param from The source vertex for `widest_paths()`,
+#'   or the vertices from which the widest paths will be calculated
+#'   for `widest_path_widths()`.
+#'   In the latter, the default `NULL` selects all vertices.
+#' @param to The vertices to which the widest paths will be calculated.
+#'   The default `NULL` includes all vertices.
+#' @inheritParams rlang::args_dots_empty
+#' @param mode Character constant,
+#'   gives whether the widest paths to or from the given vertices
+#'   should be calculated for directed graphs.
+#'   If `out`, then the widest paths *from* the vertex,
+#'   if `in`, then *to* it will be considered.
+#'   If `all`, then the graph is treated as undirected,
+#'   i.e. edge directions are not taken into account.
+#'   This argument is ignored for undirected graphs.
+#' @param weights A numeric vector giving edge weights, interpreted as widths.
+#'   If it is `NULL` (the default), then the `weight` edge attribute is used.
+#'   Widest path functions require edge weights,
+#'   so an error is raised if the graph has no `weight` attribute
+#'   and `weights` is `NULL`.
+#'   `weights = NA` is not supported.
+#' @param algorithm Which algorithm to use for the calculation in
+#'   `widest_path_widths()`.
+#'   By default (\sQuote{`automatic`}),
+#'   igraph chooses between \sQuote{`dijkstra`} and \sQuote{`floyd-warshall`}
+#'   based on the density of the graph.
+#' @param output Character scalar,
+#'   defines how to report the widest paths in `widest_paths()`.
+#'   \dQuote{vpath} means that the vertices along the paths are reported,
+#'   \dQuote{epath} means that the edges along the paths are reported,
+#'   and \dQuote{both} requests both of them.
+#' @param predecessors Logical scalar,
+#'   whether to return the predecessor vertex of each vertex
+#'   in the widest path tree in `widest_paths()`.
+#'   The predecessor of vertex `i`
+#'   is the vertex from which vertex `i` was reached during the search.
+#'   The start vertex (in the `from` argument)
+#'   and vertices that were not reached during the search
+#'   have `NA` as predecessor.
+#'   Note that the search terminates
+#'   as soon as all vertices in `to` are reached.
+#' @param inbound_edges Logical scalar,
+#'   whether to return the inbound edge of each vertex
+#'   in the widest path tree in `widest_paths()`.
+#'   The inbound edge of vertex `i`
+#'   is the edge via which vertex `i` was reached during the search.
+#'   The start vertex (in the `from` argument)
+#'   and vertices that were not reached during the search
+#'   have `NA` as inbound edge.
+#'   Note that the search terminates
+#'   as soon as all vertices in `to` are reached.
+#'
+#' @return For `widest_path_widths()`
+#'   a numeric matrix with `length(to)` columns and `length(from)` rows.
+#'   The width of the widest path from a vertex to itself is `Inf`,
+#'   and it is `-Inf` for vertex pairs that are not connected by any path.
+#'
+#'   For `widest_paths()` a named list with four components is returned:
+#'   \describe{
+#'     \item{vpath}{
+#'       A list of length `length(to)`.
+#'       List element `i` contains the vertex IDs
+#'       on the widest path from vertex `from` to vertex `to[i]`
+#'       (or the other way for directed graphs,
+#'       depending on the `mode` argument).
+#'       The vector also contains `from` and `to[i]`
+#'       as the first and last elements.
+#'       If `from` is the same as `to[i]`, then it is only included once.
+#'       If there is no path between two vertices,
+#'       then a vector of length zero is returned as the list element.
+#'       This entry is `NULL` if it is not requested in the `output` argument.
+#'     }
+#'     \item{epath}{
+#'       A list similar to `vpath`,
+#'       but the vectors contain the edge IDs along the widest paths
+#'       instead of the vertex IDs.
+#'       This entry is `NULL` if it is not requested in the `output` argument.
+#'     }
+#'     \item{predecessors}{
+#'       The predecessor of each vertex, or `NULL` if it was not requested.
+#'     }
+#'     \item{inbound_edges}{
+#'       The inbound edge of each vertex, or `NULL` if it was not requested.
+#'     }
+#'   }
+#'
+#' @family paths
+#' @export
+#' @keywords graphs
+#' @examples
+#'
+#' g <- make_ring(10)
+#' E(g)$weight <- seq_len(ecount(g))
+#' widest_path_widths(g)
+#' widest_paths(g, from = 5)
+widest_path_widths <- function(
+  graph,
+  from = NULL,
+  to = NULL,
+  ...,
+  mode = c("all", "out", "in"),
+  weights = NULL,
+  algorithm = c("automatic", "dijkstra", "floyd-warshall")
+) {
+  rlang::check_dots_empty()
+  ensure_igraph(graph)
+
+  if (is.null(from)) {
+    from <- V(graph)
+  }
+  if (is.null(to)) {
+    to <- V(graph)
+  }
+  from <- as_igraph_vs(graph, from)
+  to <- as_igraph_vs(graph, to)
+  mode <- igraph_match_arg(mode)
+  algorithm <- igraph_match_arg(algorithm)
+  weights <- widest_path_weights(graph, weights)
+
+  if (algorithm == "automatic") {
+    # Dijkstra's algorithm is faster for sparse graphs,
+    # the Floyd-Warshall algorithm is faster for dense graphs.
+    algorithm <- if (ecount(graph) < vcount(graph)^2 / 10) {
+      "dijkstra"
+    } else {
+      "floyd-warshall"
+    }
+  }
+
+  res <- if (algorithm == "dijkstra") {
+    widest_path_widths_dijkstra_impl(
+      graph = graph,
+      from = from,
+      to = to,
+      weights = weights,
+      mode = mode
+    )
+  } else {
+    widest_path_widths_floyd_warshall_impl(
+      graph = graph,
+      from = from,
+      to = to,
+      weights = weights,
+      mode = mode
+    )
+  }
+
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    rownames(res) <- V(graph)$name[from]
+    colnames(res) <- V(graph)$name[to]
+  }
+  res
+}
+
+#' @rdname widest_path_widths
+#' @export
+widest_paths <- function(
+  graph,
+  from,
+  to = NULL,
+  ...,
+  mode = c("out", "all", "in"),
+  weights = NULL,
+  output = c("vpath", "epath", "both"),
+  predecessors = FALSE,
+  inbound_edges = FALSE
+) {
+  rlang::check_dots_empty()
+  ensure_igraph(graph)
+
+  if (is.null(to)) {
+    to <- V(graph)
+  }
+  mode <- igraph_match_arg(mode)
+  output <- igraph_match_arg(output)
+  weights <- widest_path_weights(graph, weights)
+
+  res <- get_widest_paths_impl(
+    graph = graph,
+    from = from,
+    to = to,
+    weights = weights,
+    mode = mode
+  )
+
+  predecessors_result <- NULL
+  if (predecessors) {
+    # The C library uses -1 for the start vertex
+    # and -2 for vertices that were not reached during the search,
+    # map both to NA.
+    predecessors_result <- res$parents + 1
+    predecessors_result[predecessors_result < 1] <- NA
+    if (igraph_opt("return.vs.es")) {
+      predecessors_result <- create_vs(graph, predecessors_result, na_ok = TRUE)
+    }
+  }
+
+  inbound_edges_result <- NULL
+  if (inbound_edges) {
+    # The C library uses -1 both for the start vertex
+    # and for vertices that were not reached during the search,
+    # map both to NA.
+    inbound_edges_result <- res$inbound_edges + 1
+    inbound_edges_result[inbound_edges_result < 1] <- NA
+    if (igraph_opt("return.vs.es")) {
+      inbound_edges_result <- create_es(
+        graph,
+        inbound_edges_result,
+        na_ok = TRUE
+      )
+    }
+  }
+
+  list(
+    vpath = if (output %in% c("vpath", "both")) res$vertices,
+    epath = if (output %in% c("epath", "both")) res$edges,
+    predecessors = predecessors_result,
+    inbound_edges = inbound_edges_result
+  )
+}
+
+# Widest path calculations interpret edge weights as widths
+# and cannot fall back to an unweighted computation,
+# so missing weights are an error rather than being silently ignored.
+widest_path_weights <- function(graph, weights, call = rlang::caller_env()) {
+  if (is.null(weights)) {
+    if (!("weight" %in% edge_attr_names(graph))) {
+      cli::cli_abort(
+        c(
+          "Widest path functions require edge weights.",
+          "i" = "Supply {.arg weights} or set a {.field weight} edge attribute."
+        ),
+        call = call
+      )
+    }
+    weights <- E(graph)$weight
+  }
+  if (length(weights) == 1 && is.na(weights)) {
+    cli::cli_abort(
+      "Widest path functions require edge weights, so {.code weights = NA} is not supported.",
+      call = call
+    )
+  }
+  as.numeric(weights)
+}
