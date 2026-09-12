@@ -469,7 +469,7 @@ as_adjacency_matrix <- function(
   # BEGIN GENERATED ARG_HANDLE: as_adjacency_matrix, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "at", "att"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("a", "at", "att"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn as_adjacency_matrix}.")
     # Pre-3.0.0 signature: as_adjacency_matrix(graph, type, attr, edges, names, sparse)
     .old_signature <- function(attr, edges, names, sparse, ...) {
@@ -872,7 +872,7 @@ as_adj_list <- function(
   # BEGIN GENERATED ARG_HANDLE: as_adj_list, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("m"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn as_adj_list}.")
     # Pre-3.0.0 signature: as_adj_list(graph, mode, loops, multiple)
     .old_signature <- function(mode, loops, multiple, ...) {
@@ -1422,7 +1422,7 @@ as_biadjacency_matrix <- function(
   # BEGIN GENERATED ARG_HANDLE: as_biadjacency_matrix, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "at", "att"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("a", "at", "att"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn as_biadjacency_matrix}.")
     # Pre-3.0.0 signature: as_biadjacency_matrix(graph, types, attr, names, sparse)
     .old_signature <- function(attr, names, sparse, ...) {

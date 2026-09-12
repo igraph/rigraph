@@ -986,7 +986,7 @@ mean_distance <- function(
   # BEGIN GENERATED ARG_HANDLE: mean_distance, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("d"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("d"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn mean_distance}.")
     # Pre-3.0.0 signature: mean_distance(graph, weights, directed, unconnected, details)
     .old_signature <- function(weights, directed, unconnected, details, ...) {
@@ -2733,7 +2733,7 @@ ego_size <- function(
   # BEGIN GENERATED ARG_HANDLE: ego_size, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("m"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn ego_size}.")
     # Pre-3.0.0 signature: ego_size(graph, order, nodes, mode, mindist)
     .old_signature <- function(mode, mindist, ...) {
@@ -2892,7 +2892,7 @@ ego <- function(
   # BEGIN GENERATED ARG_HANDLE: ego, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("m"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn ego}.")
     # Pre-3.0.0 signature: ego(graph, order, nodes, mode, mindist)
     .old_signature <- function(mode, mindist, ...) {
@@ -2971,7 +2971,7 @@ make_ego_graph <- function(
   # BEGIN GENERATED ARG_HANDLE: make_ego_graph, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("m"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn make_ego_graph}.")
     # Pre-3.0.0 signature: make_ego_graph(graph, order, nodes, mode, mindist)
     .old_signature <- function(mode, mindist, ...) {

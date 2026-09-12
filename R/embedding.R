@@ -117,7 +117,7 @@ embed_adjacency_matrix <- function(
   # BEGIN GENERATED ARG_HANDLE: embed_adjacency_matrix, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("w"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("w"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn embed_adjacency_matrix}.")
     # Pre-3.0.0 signature: embed_adjacency_matrix(graph, no, weights, which, scaled, cvec, options)
     .old_signature <- function(weights, which, scaled, cvec, options, ...) {
@@ -345,7 +345,7 @@ embed_laplacian_matrix <- function(
   # BEGIN GENERATED ARG_HANDLE: embed_laplacian_matrix, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("w"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("w"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn embed_laplacian_matrix}.")
     # Pre-3.0.0 signature: embed_laplacian_matrix(graph, no, weights, which, type, scaled, options)
     .old_signature <- function(weights, which, type, scaled, options, ...) {

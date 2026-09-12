@@ -182,7 +182,7 @@ motifs <- function(
   # BEGIN GENERATED ARG_HANDLE: motifs, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("c"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("c"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn motifs}.")
     # Pre-3.0.0 signature: motifs(graph, size, cut.prob, callback)
     .old_signature <- function(cut.prob, callback, ...) {
@@ -368,9 +368,9 @@ sample_motifs <- function(
   # BEGIN GENERATED ARG_HANDLE: sample_motifs, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("s"))
+    .arg_forbidden <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::sys.call())[-1L])), base::c("s"))
     if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn sample_motifs}.", i = "Spell out the full argument name."))
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("s", "sa", "sam", "samp", "sampl"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("s", "sa", "sam", "samp", "sampl"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn sample_motifs}.")
     # Pre-3.0.0 signature: sample_motifs(graph, size, cut.prob, sample.size, sample)
     .old_signature <- function(cut.prob, sample.size, sample, ...) {

@@ -128,7 +128,7 @@ is_chordal <- function(
   # BEGIN GENERATED ARG_HANDLE: is_chordal, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "al", "alp", "alph"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("a", "al", "alp", "alph"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn is_chordal}.")
     # Pre-3.0.0 signature: is_chordal(graph, alpha, alpham1, fillin, newgraph)
     .old_signature <- function(alpha, alpham1, fillin, newgraph, ...) {

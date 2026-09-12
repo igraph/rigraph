@@ -383,7 +383,7 @@ add_shape <- function(
   # BEGIN GENERATED ARG_HANDLE: add_shape, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("p"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("p"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn add_shape}.")
     # Pre-3.0.0 signature: add_shape(shape, clip, plot, parameters)
     .old_signature <- function(clip, plot, parameters, ...) {
