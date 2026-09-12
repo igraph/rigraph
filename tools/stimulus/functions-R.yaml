@@ -79,6 +79,18 @@ igraph_turan:
         name: Turan graph
       GATTR-PARAM: n, r
 
+igraph_hexagonal_lattice:
+    # Not yet described in the vendored interface definitions
+    # (src/vendor/cigraph/interfaces/functions.yaml),
+    # so the full signature is given here.
+    PARAMS: |-
+        OUT GRAPH graph, VECTOR_INT dimvector, *,
+        BOOLEAN directed=False, BOOLEAN mutual=False
+    R:
+      GATTR:
+        name: Hexagonal lattice
+      GATTR-PARAM: dimvector, directed, mutual
+
 #######################################
 # Constructors, games
 #######################################

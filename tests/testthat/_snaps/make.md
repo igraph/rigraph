@@ -173,3 +173,43 @@
       Error in `make_empty_graph()`:
       ! `directed` must be a logical, not a string.
 
+# make_hex_lattice() prints as expected
+
+    Code
+      make_hex_lattice(c(2, 2))
+    Output
+      IGRAPH U--- 16 19 -- Hexagonal lattice
+      + attr: name (g/c), dimvector (g/n), directed (g/l), mutual (g/l)
+      + edges:
+       [1]  1-- 2  1-- 7  2-- 3  3-- 4  3-- 9  4-- 5  5--11  6-- 7  6--12  7-- 8
+      [11]  8-- 9  8--14  9--10 10--11 10--16 12--13 13--14 14--15 15--16
+
+# make_hex_lattice() errors
+
+    Code
+      make_hex_lattice(-1)
+    Condition
+      Error in `hexagonal_lattice_impl()`:
+      ! Invalid dimension vector. Invalid value
+      Source: <file>:<line>
+
+---
+
+    Code
+      make_hex_lattice(c(2, 2, 2, 2))
+    Condition
+      Error in `hexagonal_lattice_impl()`:
+      ! The size of the dimension vector must be 1, 2 or 3, got 4. Invalid value
+      Source: <file>:<line>
+
+---
+
+    Code
+      make_hex_lattice(3, TRUE)
+    Condition
+      Error in `make_hex_lattice()`:
+      ! `...` must be empty.
+      x Problematic argument:
+      * ..1 = TRUE
+      i Did you forget to name an argument?
+

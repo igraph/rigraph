@@ -42,6 +42,7 @@ Other deterministic constructors:
 \code{\link[=make_full_graph]{make_full_graph()}},
 \code{\link[=make_full_multipartite]{make_full_multipartite()}},
 \code{\link[=make_graph]{make_graph()}},
+\code{\link[=make_hex_lattice]{make_hex_lattice()}},
 \code{\link[=make_lattice]{make_lattice()}},
 \code{\link[=make_ring]{make_ring()}},
 \code{\link[=make_star]{make_star()}},
