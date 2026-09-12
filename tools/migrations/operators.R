@@ -18,18 +18,18 @@ migrations <- list(
       g1,
       g2,
       byname,
-      graph.attr.comb,
-      vertex.attr.comb,
-      edge.attr.comb
+      graph.attr.comb = graph_attr_combine,
+      vertex.attr.comb = vertex_attr_combine,
+      edge.attr.comb = edge_attr_combine
     ) {},
     new = function(
       g1,
       g2,
       ...,
       byname = "auto",
-      graph.attr.comb = NULL,
-      vertex.attr.comb = "rename",
-      edge.attr.comb = "rename"
+      graph_attr_combine = NULL,
+      vertex_attr_combine = "rename",
+      edge_attr_combine = "rename"
     ) {},
     when = "3.0.0"
   ),
