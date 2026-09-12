@@ -2418,7 +2418,7 @@ alpha.centrality.dense <- function(
 ) {
   ensure_igraph(graph)
 
-  exo <- rep(exo, length.out = vcount(graph))
+  exo <- vctrs::vec_recycle(exo, vcount(graph))
   exo <- matrix(exo, ncol = 1)
 
   d <- t(as_adjacency_matrix(graph, weights = weights, sparse = FALSE))
@@ -2461,7 +2461,7 @@ alpha.centrality.sparse <- function(
   )
 
   ## exo
-  exo <- cbind(rep(exo, length.out = vc))
+  exo <- cbind(vctrs::vec_recycle(exo, vc))
 
   ## Solve the equation
   M3 <- M2 - alpha * M
