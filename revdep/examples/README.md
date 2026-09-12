@@ -35,6 +35,18 @@ Each issue has two files:
 #### Group F — `tkplot()` defunct (igraph 3.0.0)
 13. **tkplot-defunct-issue** — shared reproducer for Boptbd, c3net, ggm, optbdmaeAT, optrcdmaeAT (all direct callers of `igraph::tkplot()`)
 
+#### Group C (continued) — new in the `revdep2` run 31048405399
+14. **bootcluster-sample-degseq-method-issue** — `sample_degseq(method = "simple.no.multiple")` defunct, same as qgraph/degreenet
+
+#### Group G — Optional arguments passed positionally (deprecated for 3.0.0)
+15. **checked-neighbors-positional-issue** — `neighbors(g, v, "out")` warns; snapshot tests turn 315 warnings into a failure
+
+#### Group H — igraph regressions from the ellipsis move
+16. **htna-tna-empty-argument-issue** — a trailing comma reached the migration handler and errored; **fixed**, kept as the regression reproducer (htna cascades through tna)
+
+#### Group I — Silent result changes, not yet traced
+17. **semdeep-semrun-subscript-issue** — `SEMml(algo = "sem")` → subscript out of bounds inside `SEMgraph::SEMrun()`; unreduced, and the only example here without rendered output (SEMgraph needs Bioconductor packages)
+
 Three packages from the failure set (dci, ggraph, scistreer) are pure cascades through tidygraph and have no separate reproducer — see `tidygraph-bfs-father-issue` for the root cause.
 
 ## Running the Examples
