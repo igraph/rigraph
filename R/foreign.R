@@ -174,7 +174,7 @@ write.graph.fromraw <- function(buffer, file) {
 #' @aliases LGL Pajek GraphML GML DL UCINET
 #' @param file The connection to read from. This can be a local file, or a
 #'   `http` or `ftp` connection. It can also be a character string with
-#'   the file name or URI.
+#'   the file name or URI or contain the graph in a single string.
 #' @param format Character constant giving the file format. Right now
 #'   `edgelist`, `pajek`, `ncol`, `lgl`, `graphml`,
 #'   `dimacs`, `graphdb`, `gml` and `dl` are supported,
@@ -318,7 +318,17 @@ read_graph <- function(
   ),
   ...
 ) {
-  if (
+  from_string <- is.character(file) && length(file) == 1 && !file.exists(file)
+
+  if (from_string || inherits(file, "connection")) {
+    con <- if (inherits(file, "connection")) file else textConnection(file)
+    tmp <- tempfile()
+    writeLines(readLines(con), tmp)
+    if (!inherits(file, "connection")) {
+      close(con)
+    }
+    file <- tmp
+  } else if (
     !is.character(file) ||
       length(grep("://", file, fixed = TRUE)) > 0 ||
       length(grep("~", file, fixed = TRUE)) > 0
@@ -344,7 +354,6 @@ read_graph <- function(
   res
 }
 
-
 #' Writing the graph to a file in some format
 #'
 #' `write_graph()` is a general function for exporting graphs to foreign
@@ -352,7 +361,7 @@ read_graph <- function(
 #'
 #' @param graph The graph to export.
 #' @param file A connection or a string giving the file name to write the graph
-#'   to.
+#'   to. If file is `""`, `stdout()` or `"-"`, then the output is written directly to the terminal.
 #' @param format Character string giving the file format. Right now
 #'   `pajek`, `graphml`, `dot`, `gml`, `edgelist`,
 #'   `lgl`, `ncol`, `leda` and `dimacs` are implemented. As of igraph 0.4
@@ -479,10 +488,16 @@ write_graph <- function(
   ...
 ) {
   ensure_igraph(graph)
+
+  to_stdout <- identical(file, "") ||
+    identical(file, stdout()) ||
+    identical(file, "-")
+
   if (
     !is.character(file) ||
       length(grep("://", file, fixed = TRUE)) > 0 ||
-      length(grep("~", file, fixed = TRUE)) > 0
+      length(grep("~", file, fixed = TRUE)) > 0 ||
+      to_stdout
   ) {
     tmpfile <- TRUE
     origfile <- file
@@ -507,12 +522,18 @@ write_graph <- function(
 
   if (tmpfile) {
     buffer <- read.graph.toraw(file)
-    write.graph.fromraw(buffer, origfile)
+
+    if (to_stdout) {
+      raw_connection <- rawConnection(buffer)
+      on.exit(close(raw_connection))
+      cat(readLines(raw_connection), sep = "\n")
+    } else {
+      write.graph.fromraw(buffer, origfile)
+    }
   }
 
   invisible(res)
 }
-
 ################################################################
 # Plain edge list format, not sorted
 ################################################################
