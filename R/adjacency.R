@@ -62,7 +62,9 @@ graph.adjacency <- function(
 #'
 #' `graph_from_adjacency_matrix()` operates in two main modes, depending on the `weighted` argument.
 #'
-#' If this argument is `NULL` then an unweighted graph is created and an element of the adjacency matrix gives the number of edges to create between the two corresponding vertices.  The details depend on the value of the `mode` argument:
+#' If this argument is `NULL` then an unweighted graph is created
+#' and an element of the adjacency matrix gives the number of edges to create between the two corresponding vertices.
+#' The details depend on the value of the `mode` argument:
 #'   \describe{
 #'     \item{"directed"}{
 #'       The graph will be directed and a matrix element gives
@@ -94,7 +96,8 @@ graph.adjacency <- function(
 #'     }
 #'   }
 #'
-#' If the `weighted` argument is not `NULL` then the elements of the matrix give the weights of the edges (if they are not zero).  The details depend on the value of the `mode` argument:
+#' If the `weighted` argument is not `NULL` then the elements of the matrix give the weights of the edges (if they are not zero).
+#' The details depend on the value of the `mode` argument:
 #'   \describe{
 #'     \item{"directed"}{
 #'       The graph will be directed and a matrix element gives the edge weights.
@@ -141,7 +144,8 @@ graph.adjacency <- function(
 #'   If this is `FALSE` then the diagonal is zerod out first.
 #' @param add.colnames Character scalar, whether to add the column names as vertex attributes.
 #'   If it is `NULL` (the default) then, if present, column names are added as vertex attribute \sQuote{name}.
-#'   If `NA` or `FALSE` then they will not be added.  If a character constant, then it gives the name of the vertex attribute to add.
+#'   If `NA` or `FALSE` then they will not be added.
+#'   If a character constant, then it gives the name of the vertex attribute to add.
 #' @param add.rownames Character scalar, whether to add the row names as vertex attributes.
 #'   Possible values the same as the previous argument.
 #'   By default row names are not added.

@@ -753,7 +753,8 @@ arpack_defaults <- function() {
 #' Interface to the ARPACK library for calculating eigenvectors of sparse matrices
 #'
 #' @details
-#' ARPACK is a library for solving large scale eigenvalue problems.  The package is designed to compute a few eigenvalues and corresponding eigenvectors of a general \eqn{n} by \eqn{n} matrix \eqn{A}.
+#' ARPACK is a library for solving large scale eigenvalue problems.
+#' The package is designed to compute a few eigenvalues and corresponding eigenvectors of a general \eqn{n} by \eqn{n} matrix \eqn{A}.
 #' It is most appropriate for large sparse or structured matrices \eqn{A}
 #' where structured means that a matrix-vector product `w <- Av` requires order \eqn{n} rather than the usual order \eqn{n^2} floating point operations.
 #'
@@ -856,7 +857,8 @@ arpack_defaults <- function() {
 #'       Blocksize to be used in the recurrence. Please always leave this on the default value, one.
 #'     }
 #'     \item{mode}{
-#'       The type of the eigenproblem to be solved.  Possible values if the input matrix is symmetric:
+#'       The type of the eigenproblem to be solved.
+#'       Possible values if the input matrix is symmetric:
 #'         \describe{
 #'           \item{1}{
 #'             \eqn{Ax=\lambda x}{A*x=lambda*x}, \eqn{A} is symmetric.
@@ -1328,9 +1330,14 @@ eigen_defaults <- function() {
 #'
 #' Eigenvector centrality scores correspond to the values of the principal eigenvector of the graph's adjacency matrix; these scores may,
 #' in turn,
-#' be interpreted as arising from a reciprocal process in which the centrality of each actor is proportional to the sum of the centralities of those actors to whom he or she is connected.  In general,
+#' be interpreted as arising from a reciprocal process
+#' in which the centrality of each actor is proportional to the sum of the centralities of those actors to whom he or she is connected.
+#' In general,
 #' vertices with high eigenvector centralities are those which are connected to many other vertices which are, in turn,
-#' connected to many others (and so on).  The perceptive may realize that this implies that the largest values will be obtained by individuals in large cliques (or high-density substructures).  This is also intelligible from an algebraic point of view,
+#' connected to many others (and so on).
+#' The perceptive may realize that this implies
+#' that the largest values will be obtained by individuals in large cliques (or high-density substructures).
+#' This is also intelligible from an algebraic point of view,
 #' with the first eigenvector being closely related to the best rank-1 approximation of the adjacency matrix (a relationship which is easy to see in the special case of a diagonalizable symmetric real matrix via the \eqn{SLS^-1}{$S \Lambda S^{-1}$} decomposition).
 #'
 #' The adjacency matrix used in the eigenvector centrality calculation assumes that loop edges are counted *twice* in undirected graphs;
@@ -1803,7 +1810,8 @@ hub_score <- function(
 #'   The default is `"prpack"`,
 #'   which uses the PRPACK library (<https://github.com/dgleich/prpack>) to calculate PageRank scores by solving a set of linear equations.
 #'   This is a new implementation in igraph version 0.7, and the suggested one,
-#'   as it is the most stable and the fastest for all but small graphs.  `"arpack"` uses the ARPACK library,
+#'   as it is the most stable and the fastest for all but small graphs.
+#'   `"arpack"` uses the ARPACK library,
 #'   the default implementation from igraph version 0.5 until version 0.7. It computes PageRank scores by solving an eingevalue problem.
 #' @param vids The vertices of interest.
 #'   The default `NULL` selects all vertices.
@@ -2109,14 +2117,20 @@ bonpow.sparse <- function(
 
 #' Find Bonacich Power Centrality Scores of Network Positions
 #'
-#' `power_centrality()` takes a graph (`dat`) and returns the Boncich power centralities of positions (selected by `nodes`).  The decay rate for power contributions is specified by `exponent` (1 by default).
+#' `power_centrality()` takes a graph (`dat`) and returns the Boncich power centralities of positions (selected by `nodes`).
+#' The decay rate for power contributions is specified by `exponent` (1 by default).
 #'
 #' Bonacich's power centrality measure is defined by \eqn{C_{BP}\left(\alpha,\beta\right)=\alpha\left(\mathbf{I}-\beta\mathbf{A}\right)^{-1}\mathbf{A}\mathbf{1}}{C_BP(alpha,beta)=alpha
 #' (I-beta A)^-1 A 1}, where \eqn{\beta}{beta} is an attenuation parameter (set
-#' here by `exponent`) and \eqn{\mathbf{A}}{A} is the graph adjacency matrix.  (The coefficient \eqn{\alpha}{alpha} acts as a scaling parameter, and is set here (following Bonacich (1987)) such that the sum of squared scores is equal to the number of vertices.  This allows 1 to be used as a reference value for the ``middle'' of the centrality range.)  When \eqn{\beta \rightarrow }{beta->1/lambda_A1}\eqn{
+#' here by `exponent`) and \eqn{\mathbf{A}}{A} is the graph adjacency matrix.
+#' (The coefficient \eqn{\alpha}{alpha} acts as a scaling parameter,
+#' and is set here (following Bonacich (1987)) such that the sum of squared scores is equal to the number of vertices.
+#' This allows 1 to be used as a reference value for the ``middle'' of the centrality range.)
+#' When \eqn{\beta \rightarrow }{beta->1/lambda_A1}\eqn{
 #' 1/\lambda_{\mathbf{A}1}}{beta->1/lambda_A1} (the reciprocal of the largest
 #' eigenvalue of \eqn{\mathbf{A}}{A}), this is to within a constant multiple of the familiar eigenvector centrality score;
-#' for other values of \eqn{\beta}, the behavior of the measure is quite different.  In particular,
+#' for other values of \eqn{\beta}, the behavior of the measure is quite different.
+#' In particular,
 #' \eqn{\beta} gives positive and negative weight to even and odd walks, respectively,
 #' as can be seen from the series expansion \eqn{C_{BP}\left(\alpha,\beta\right)=\alpha \sum_{k=0}^\infty \beta^k
 #' }{C_BP(alpha,beta) = alpha sum( beta^k A^(k+1) 1, k in 0..infinity )}\eqn{
@@ -2124,13 +2138,19 @@ bonpow.sparse <- function(
 #' k in 0..infinity )} which converges so long as \eqn{|\beta|
 #' }{|beta|<1/lambda_A1}\eqn{ < 1/\lambda_{\mathbf{A}1}}{|beta|<1/lambda_A1}.
 #' The magnitude of \eqn{\beta}{beta} controls the influence of distant actors on ego's centrality score,
-#' with larger magnitudes indicating slower rates of decay.  (High rates, hence, imply a greater sensitivity to edge effects.)
+#' with larger magnitudes indicating slower rates of decay.
+#' (High rates, hence, imply a greater sensitivity to edge effects.)
 #'
-#' Interpretively, the Bonacich power measure corresponds to the notion that the power of a vertex is recursively defined by the sum of the power of its alters.  The nature of the recursion involved is then controlled by the power exponent:
+#' Interpretively, the Bonacich power measure corresponds to the notion
+#' that the power of a vertex is recursively defined by the sum of the power of its alters.
+#' The nature of the recursion involved is then controlled by the power exponent:
 #' positive values imply that vertices become more powerful as their alters become more powerful (as occurs in cooperative relations),
-#' while negative values imply that vertices become more powerful only as their alters become *weaker* (as occurs in competitive or antagonistic relations).  The magnitude of the exponent indicates the tendency of the effect to decay across long walks;
+#' while negative values imply that vertices become more powerful only
+#' as their alters become *weaker* (as occurs in competitive or antagonistic relations).
+#' The magnitude of the exponent indicates the tendency of the effect to decay across long walks;
 #' higher magnitudes imply slower decay.
-#' One interesting feature of this measure is its relative instability to changes in exponent magnitude (particularly in the negative case).  If your theory motivates use of this measure,
+#' One interesting feature of this measure is its relative instability to changes in exponent magnitude (particularly in the negative case).
+#' If your theory motivates use of this measure,
 #' you should be very careful to choose a decay parameter on a non-ad hoc basis.
 #'
 #' For directed networks,
@@ -2145,8 +2165,10 @@ bonpow.sparse <- function(
 #' @param nodes vertex sequence indicating which vertices are to be included in the calculation.
 #'   The default `NULL` selects all vertices.
 #' @inheritParams rlang::args_dots_empty
-#' @param loops Logical indicating whether or not the diagonal should be treated as valid data.  Set this true if and only
-#'   if the data can contain loops.  `loops` is `FALSE` by default.
+#' @param loops Logical indicating whether or not the diagonal should be treated as valid data.
+#' Set this true if and only
+#'   if the data can contain loops.
+#'   `loops` is `FALSE` by default.
 #' @param exponent exponent (decay rate) for the Bonacich power centrality score; can be negative
 #' @param rescale if true, centrality scores are rescaled such that they sum to 1.
 #' @param tol tolerance for near-singularities during matrix inversion (see [Matrix::solve()])
@@ -2156,7 +2178,8 @@ bonpow.sparse <- function(
 #' @return A vector, containing the centrality scores.
 #' @note This function was ported (i.e. copied) from the SNA package.
 #' @section Warning : Singular adjacency matrices cause no end of headaches for
-#' this algorithm; thus, the routine may fail in certain cases.  This will be fixed when we get a better algorithm.
+#' this algorithm; thus, the routine may fail in certain cases.
+#' This will be fixed when we get a better algorithm.
 #' @author Carter T. Butts
 #' (<https://www.faculty.uci.edu/profile.cfm?faculty_id=5057>), ported to
 #' igraph by Gabor Csardi \email{csardi.gabor@@gmail.com}

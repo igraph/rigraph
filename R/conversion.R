@@ -760,7 +760,8 @@ as_directed <- function(
 
 #' @rdname as_directed
 #' @param edge.attr.comb Specifies what to do with edge attributes,
-#'   if `mode="collapse"` or `mode="mutual"`.  In these cases many edges might be mapped to a single one in the new graph, and their attributes are combined.
+#'   if `mode="collapse"` or `mode="mutual"`.
+#'   In these cases many edges might be mapped to a single one in the new graph, and their attributes are combined.
 #'   Please see [attribute.combination()] for details on this.
 #'   The default `NULL` uses the `edge.attr.comb` igraph option.
 #' @export
@@ -1649,7 +1650,8 @@ as_long_data_frame <- function(graph) {
 #'
 #' Get adjacency or edgelist representation of the network stored as an `igraph` object.
 #'
-#' If `matrix.type` is `"edgelist"`, then a two-column numeric edge list matrix is returned.  The value of `attrname` is ignored.
+#' If `matrix.type` is `"edgelist"`, then a two-column numeric edge list matrix is returned.
+#' The value of `attrname` is ignored.
 #'
 #' If `matrix.type` is `"adjacency"`, then a square adjacency matrix is returned.
 #' For adjacency matrices, you can use the `attr` keyword argument to use the values of an edge attribute in the matrix cells.
@@ -1803,7 +1805,8 @@ graph.data.frame <- function(d, directed = TRUE, vertices = NULL) {
 #'
 #' If the `what` argument is `edges` (the default), then the edges of the graph and also the edge attributes are returned.
 #' The edges will be in the first two columns, named `from` and `to`.
-#' (This also denotes edge direction for directed graphs.)  For named graphs, the vertex names will be included in these columns, for other graphs, the numeric vertex IDs.
+#' (This also denotes edge direction for directed graphs.)
+#' For named graphs, the vertex names will be included in these columns, for other graphs, the numeric vertex IDs.
 #' The edge attributes will be in the other columns.
 #' It is not a good idea to have an edge attribute named `from` or `to`, because then the column named in the data frame will not be unique.
 #' The edges are listed in the order of their numeric IDs.
@@ -1814,7 +1817,8 @@ graph.data.frame <- function(d, directed = TRUE, vertices = NULL) {
 #' If the `what` argument is `both`, then both vertex and edge data is returned, in a list with named entries `vertices` and `edges`.
 #'
 #' @param d A data frame containing a symbolic edge list in the first two columns.
-#'   Additional columns are considered as edge attributes.  Since version 0.7 this argument is coerced to a data frame with `as.data.frame`.
+#'   Additional columns are considered as edge attributes.
+#'   Since version 0.7 this argument is coerced to a data frame with `as.data.frame`.
 #' @param directed Logical, whether or not to create a directed graph.
 #' @inheritParams rlang::args_dots_empty
 #' @param vertices A data frame with vertex metadata, or `NULL`.

@@ -1261,7 +1261,8 @@ is_weighted <- function(graph) {
 }
 
 #' @title Checks whether the graph has a vertex attribute called `type`.
-#' @description It does not check whether the graph is bipartite in the mathematical sense.  Use [bipartite_mapping()] for that.
+#' @description It does not check whether the graph is bipartite in the mathematical sense.
+#' Use [bipartite_mapping()] for that.
 #' @family bipartite
 #' @param graph The input graph
 #' @export

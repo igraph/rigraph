@@ -46,7 +46,8 @@ is.simple <- function(graph) {
 #'
 #' `is_simple()` checks whether a graph is simple.
 #'
-#' `simplify()` removes the loop and/or multiple edges from a graph.  If both `remove.loops` and `remove.multiple` are `TRUE` the function returns a simple graph.
+#' `simplify()` removes the loop and/or multiple edges from a graph.
+#' If both `remove.loops` and `remove.multiple` are `TRUE` the function returns a simple graph.
 #' If the graph is already simple, it is returned unchanged.
 #'
 #' `simplify_and_colorize()` constructs a new,

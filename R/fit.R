@@ -63,9 +63,12 @@ power.law.fit <- function(
 #' The goal of this function is to determine \eqn{\alpha}{alpha} if \eqn{x_\text{min}}{xmin} is given,
 #' or to determine \eqn{x_\text{min}}{xmin} and the corresponding value of \eqn{\alpha}{alpha}.
 #'
-#' `fit_power_law()` provides two maximum likelihood implementations.  If the `implementation` argument is \sQuote{`R.mle`},
-#' then the BFGS optimization (see [stats4::mle()]) algorithm is applied.  The additional arguments are passed to the mle function,
-#' so it is possible to change the optimization method and/or its parameters.  This implementation can *not* to fit the \eqn{x_\text{min}}{xmin} argument,
+#' `fit_power_law()` provides two maximum likelihood implementations.
+#' If the `implementation` argument is \sQuote{`R.mle`},
+#' then the BFGS optimization (see [stats4::mle()]) algorithm is applied.
+#' The additional arguments are passed to the mle function,
+#' so it is possible to change the optimization method and/or its parameters.
+#' This implementation can *not* to fit the \eqn{x_\text{min}}{xmin} argument,
 #' so use the \sQuote{`plfit`} implementation if you want to do that.
 #'
 #' The \sQuote{`plfit`} implementation also uses the maximum likelihood principle to determine \eqn{\alpha}{alpha} for a given \eqn{x_\text{min}}{xmin};

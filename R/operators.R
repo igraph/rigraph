@@ -262,7 +262,8 @@ apply_one_combiner <- function(comb, x) {
 #' Then a simple union is created.
 #' This function can also be used via the `%du%` operator.
 #'
-#' `disjoint_union()` handles graph, vertex and edge attributes.  In particular, it merges vertex and edge attributes using the [vctrs::vec_c()] function.
+#' `disjoint_union()` handles graph, vertex and edge attributes.
+#' In particular, it merges vertex and edge attributes using the [vctrs::vec_c()] function.
 #' For graphs that lack some vertex/edge attribute, the corresponding values in the new graph are set to a missing value (`NA` for scalar attributes, `NULL` for list attributes).
 #' Graph attributes are combined according to `graph.attr.comb`; by default any name clash is resolved by adding suffixes (`_1`, `_2`, ...).
 #' See [igraph-attribute-combination] for the available combiners.
@@ -558,7 +559,8 @@ union.default <- function(...) {
 #' The union of two or more graphs are created.
 #' The graphs may have identical or overlapping vertex sets.
 #'
-#' `union()` creates the union of two or more graphs.  Edges which are included in at least one graph will be part of the new graph.
+#' `union()` creates the union of two or more graphs.
+#' Edges which are included in at least one graph will be part of the new graph.
 #' This function can be also used via the `%u%` operator.
 #'
 #' If the `byname` argument is `TRUE` (or `auto` and all graphs are named),
@@ -644,9 +646,11 @@ intersection <- function(...) {
 
 #' Intersection of graphs
 #'
-#' The intersection of two or more graphs are created.  The graphs may have identical or overlapping vertex sets.
+#' The intersection of two or more graphs are created.
+#' The graphs may have identical or overlapping vertex sets.
 #'
-#' `intersection()` creates the intersection of two or more graphs: only edges present in all graphs will be included.  The corresponding operator is `%s%`.
+#' `intersection()` creates the intersection of two or more graphs: only edges present in all graphs will be included.
+#' The corresponding operator is `%s%`.
 #'
 #' If the `byname` argument is `TRUE` (or `auto` and all graphs are named),
 #' then the operation is performed on symbolic vertex names instead of the internal numeric vertex IDs.

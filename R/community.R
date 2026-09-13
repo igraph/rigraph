@@ -1406,10 +1406,13 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #'   This argument is ignored if the second form of the function is used (i.e. the \sQuote{`vertex`} argument is present).
 #'   It is also not implemented in the \dQuote{neg} implementation.
 #' @param start.temp Real constant,
-#'   the start temperature.  This argument is ignored if the second form of the function is used (i.e. the \sQuote{`vertex`} argument is present).
+#'   the start temperature.
+#'   This argument is ignored if the second form of the function is used (i.e. the \sQuote{`vertex`} argument is present).
 #' @param stop.temp Real constant, the stop temperature.
-#'   The simulation terminates if the temperature lowers below this level.  This argument is ignored if the second form of the function is used (i.e. the \sQuote{`vertex`} argument is present).
-#' @param cool.fact Cooling factor for the simulated annealing.  This argument is ignored
+#'   The simulation terminates if the temperature lowers below this level.
+#'   This argument is ignored if the second form of the function is used (i.e. the \sQuote{`vertex`} argument is present).
+#' @param cool.fact Cooling factor for the simulated annealing.
+#' This argument is ignored
 #'   if the second form of the function is used (i.e. the \sQuote{`vertex`} argument is present).
 #' @param update.rule Character constant giving the \sQuote{null-model} of the simulation.
 #'   Possible values: \dQuote{simple} and \dQuote{config}.
@@ -2012,7 +2015,9 @@ cluster_walktrap <- function(
 #'   It is ignored for undirected graphs.
 #' @param edge.betweenness Logical, whether to return the edge betweenness of the edges at the time of their removal.
 #' @param merges Logical,
-#'   whether to return the merge matrix representing the hierarchical community structure of the network.  This argument is called `merges`, even if the community structure algorithm itself is divisive and not agglomerative: it builds the tree from top to bottom.
+#'   whether to return the merge matrix representing the hierarchical community structure of the network.
+#'   This argument is called `merges`, even if the community structure algorithm itself is divisive and not agglomerative:
+#'   it builds the tree from top to bottom.
 #'   There is one line for each merge (i.e. split) in matrix, the first line is the first merge (last split).
 #'   The communities are identified by integer number starting from one.
 #'   Community IDs smaller than or equal to \eqn{N}, the number of vertices in the graph, belong to singleton communities,
@@ -2285,7 +2290,8 @@ igraph.i.levc.arp <- function(externalP, externalE) {
 #' a `P[i,j]` element of `P` is the probability that there is an edge between vertices `i` and `j` in a random network in which the degrees of all vertices are the same as in the input graph.
 #'
 #' The leading eigenvector method works by calculating the eigenvector of the modularity matrix for the largest positive eigenvalue and then separating vertices into two community based on the sign of the corresponding element in the eigenvector.
-#' If all elements in the eigenvector are of the same sign that means that the network has no underlying comuunity structure.  Check Newman's paper to understand why this is a good method for detecting community structure.
+#' If all elements in the eigenvector are of the same sign that means that the network has no underlying comuunity structure.
+#' Check Newman's paper to understand why this is a good method for detecting community structure.
 #'
 #' @param graph The input graph.
 #'   Should be undirected as the method needs a symmetric matrix.
@@ -2830,11 +2836,13 @@ cluster_optimal <- function(
 #'   Edge directions will be taken into account.
 #' @inheritParams rlang::args_dots_empty
 #' @param e.weights Numeric vector of edge weights.
-#'   The length must match the number of edges in the graph.  By default (`NULL`) the \sQuote{`weight`} edge attribute is used as weights.
+#'   The length must match the number of edges in the graph.
+#'   By default (`NULL`) the \sQuote{`weight`} edge attribute is used as weights.
 #'   If it is not present, then all edges are considered to have the same weight.
 #'   Larger edge weights correspond to stronger connections.
 #' @param v.weights Numeric vector of vertex weights.
-#'   The length must match the number of vertices in the graph.  By default (`NULL`) the \sQuote{`weight`} vertex attribute is used as weights.
+#'   The length must match the number of vertices in the graph.
+#'   By default (`NULL`) the \sQuote{`weight`} vertex attribute is used as weights.
 #'   If it is not present, then all vertices are considered to have the same weight.
 #'   A larger vertex weight means a larger probability that the random surfer jumps to that vertex.
 #' @param nb.trials The number of attempts to partition the network (can be any integer value equal or larger than 1).
@@ -2842,7 +2850,8 @@ cluster_optimal <- function(
 #' @return `cluster_infomap()` returns a [communities()] object,
 #'   please see the [communities()] manual page for details.
 #' @author Martin Rosvall wrote the original C++ code. This was ported to
-#' be more igraph-like by Emmanuel Navarro.  The R interface and some cosmetics was done by Gabor Csardi \email{csardi.gabor@@gmail.com}.
+#' be more igraph-like by Emmanuel Navarro.
+#' The R interface and some cosmetics was done by Gabor Csardi \email{csardi.gabor@@gmail.com}.
 #' @seealso Other community finding methods and [communities()].
 #' @references The original paper: M. Rosvall and C. T. Bergstrom, Maps of
 #' information flow reveal community structure in complex networks, *PNAS*

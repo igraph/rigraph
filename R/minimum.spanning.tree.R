@@ -55,7 +55,8 @@ minimum.spanning.tree <- function(
 #'   Edge weights are interpreted as distances.
 #' @param algorithm The algorithm to use for calculation.
 #'   `unweighted` can be used for unweighted graphs,
-#'   and `prim` runs Prim's algorithm for weighted graphs.  If this is `NULL` then igraph will select the algorithm automatically:
+#'   and `prim` runs Prim's algorithm for weighted graphs.
+#'   If this is `NULL` then igraph will select the algorithm automatically:
 #'   if the graph has an edge attribute called `weight` or the `weights` argument is not `NULL` then Prim's algorithm is chosen,
 #'   otherwise the unweighted algorithm is used.
 #' @param \dots Additional arguments, unused.

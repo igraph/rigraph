@@ -50,7 +50,8 @@
 #' @param mark.expand A numeric scalar or vector, the size of the border around the marked vertex groups.
 #'   It is in the same units as the vertex sizes.
 #'   If a vector is given, then different values are used for the different vertex groups.
-#' @param mark.lwd A numeric scalar or vector, the linewidth of the border around the marked vertex groups.  If a vector is given,
+#' @param mark.lwd A numeric scalar or vector, the linewidth of the border around the marked vertex groups.
+#' If a vector is given,
 #'   then different values are used for the different vertex groups.
 #' @param loop.size A numeric scalar that allows the user to scale the loop edges of the network.
 #'   The default loop size is 1. Larger values will produce larger loops.

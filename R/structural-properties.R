@@ -1013,7 +1013,8 @@ mean_distance <- function(
 #'   For undirected graphs this argument is ignored.
 #'   \dQuote{all} is a synonym of \dQuote{total}.
 #' @param loops Logical; whether the loop edges are also counted.
-#' @param normalized Logical, whether to normalize the degree.  If `TRUE` then the result is divided by \eqn{n-1},
+#' @param normalized Logical, whether to normalize the degree.
+#' If `TRUE` then the result is divided by \eqn{n-1},
 #'   where \eqn{n} is the number of vertices in the graph.
 #' @inheritParams rlang::args_dots_empty
 #' @return For `degree()` a numeric vector of the same length as argument `v`.
@@ -2136,7 +2137,8 @@ subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
 #'   }
 #' @inheritParams rlang::args_dots_empty
 #' @param vids The vertex IDs for the local transitivity will be calculated.
-#'   This will be ignored for global transitivity types.  The default value is `NULL`, in this case all vertices are considered.
+#'   This will be ignored for global transitivity types.
+#'   The default value is `NULL`, in this case all vertices are considered.
 #'   It is slightly faster to supply `NULL` here than `V(graph)`.
 #' @param weights Optional weights for weighted transitivity.
 #'   It is ignored for other transitivity measures.
@@ -3009,12 +3011,14 @@ coreness <- function(
 #' A topological sorting of a directed acyclic graph is a linear ordering of its nodes
 #' where each node comes before all nodes to which it has edges.
 #'
-#' Every DAG has at least one topological sort, and may have many.  This function returns a possible topological sort among them.
+#' Every DAG has at least one topological sort, and may have many.
+#' This function returns a possible topological sort among them.
 #' If the graph is not acyclic (it has at least one cycle), a partial topological sort is returned and a warning is issued.
 #'
 #' @param graph The input graph, should be directed
 #' @inheritParams rlang::args_dots_empty
-#' @param mode Specifies how to use the direction of the edges.  For \dQuote{`out`},
+#' @param mode Specifies how to use the direction of the edges.
+#' For \dQuote{`out`},
 #'   the sorting order ensures that each node comes before all nodes to which it has edges, so nodes with no incoming edges go first.
 #'   For \dQuote{`in`}, it is quite the opposite: each node comes before all nodes from which it receives edges.
 #'   Nodes with no outgoing edges go first.
@@ -3996,7 +4000,8 @@ dfs <- function(
 #' The strongly connected components are implemented by two consecutive depth-first searches.
 #'
 #' @param graph The graph to analyze.
-#' @param mode Character string, either \dQuote{weak} or \dQuote{strong}.  For directed graphs \dQuote{weak} implies weakly,
+#' @param mode Character string, either \dQuote{weak} or \dQuote{strong}.
+#'   For directed graphs \dQuote{weak} implies weakly,
 #'   \dQuote{strong} strongly connected components to search.
 #'   It is ignored for undirected graphs.
 #' @param \dots For `component_distribution()`, forwarded to `components()`.
@@ -4487,12 +4492,14 @@ laplacian_matrix <- function(
 #' and whether there exists a corresponding edge in the graph for every matched vertex pair.
 #' For bipartite graphs, it also verifies whether the matched vertices are in different parts of the graph.
 #'
-#' `is_max_matching()` checks whether a matching is maximal.  A matching is maximal if and only if there exists no unmatched vertex in a graph such that one of its neighbors is also unmatched.
+#' `is_max_matching()` checks whether a matching is maximal.
+#' A matching is maximal if and only if there exists no unmatched vertex in a graph such that one of its neighbors is also unmatched.
 #'
 #' `max_bipartite_match()` calculates a maximum matching in a bipartite graph.
 #' A matching in a bipartite graph is a partial assignment of vertices of the first kind to vertices of the second kind such that each vertex of the first kind is matched to at most one vertex of the second kind and vice versa, and matched vertices must be connected by an edge in the graph.
 #' The size (or cardinality) of a matching is the number of edges.
-#' A matching is a maximum matching if there exists no other matching with larger cardinality.  For weighted graphs, a maximum matching is a matching whose edges have the largest possible total weight among all possible matchings.
+#' A matching is a maximum matching if there exists no other matching with larger cardinality.
+#' For weighted graphs, a maximum matching is a matching whose edges have the largest possible total weight among all possible matchings.
 #'
 #' Maximum matchings in bipartite graphs are found by the push-relabel algorithm with greedy initialization and a global relabeling after every \eqn{n/2} steps
 #' where \eqn{n} is the number of vertices in the graph.

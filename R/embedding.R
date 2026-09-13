@@ -259,7 +259,8 @@ dim_select <- function(sv) {
 #'   Possible values: `D-A` means \eqn{D-A} where \eqn{D} is the degree matrix and \eqn{A} is the adjacency matrix;
 #'   `DAD` means \eqn{D^{1/2}}{D^1/2} times \eqn{A} times \eqn{D^{1/2}{D^1/2}},
 #'   \eqn{D^{1/2}}{D^1/2} is the inverse of the square root of the degree matrix; `I-DAD` means \eqn{I-D^{1/2}}{I-D^1/2},
-#'   where \eqn{I} is the identity matrix.  `OAP` is \eqn{O^{1/2}AP^{1/2}}{O^1/2 A P^1/2},
+#'   where \eqn{I} is the identity matrix.
+#'   `OAP` is \eqn{O^{1/2}AP^{1/2}}{O^1/2 A P^1/2},
 #'   where \eqn{O^{1/2}}{O^1/2} is the inverse of the square root of the out-degree matrix and \eqn{P^{1/2}}{P^1/2} is the same for the in-degree matrix.
 #'
 #'   `OAP` is not defined for undirected graphs, and is the only defined type for directed graphs.

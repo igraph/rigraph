@@ -888,14 +888,18 @@ as_star <- function(...) layout_spec(layout_as_star, ...)
 #'
 #' A tree-like layout, it is perfect for trees, acceptable for graphs with not too many cycles.
 #'
-#' Arranges the nodes in a tree where the given node is used as the root.  The tree is directed downwards and the parents are centered above its children.
+#' Arranges the nodes in a tree where the given node is used as the root.
+#' The tree is directed downwards and the parents are centered above its children.
 #' For the exact algorithm, the reference below.
 #'
 #' If the given graph is not a tree, a breadth-first search is executed first to obtain a possible spanning tree.
 #'
 #' @param graph The input graph.
 #' @inheritParams rlang::args_dots_empty
-#' @param root The index of the root vertex or root vertices.  If this is a non-empty vector then the supplied vertex IDs are used as the roots of the trees (or a single tree if the graph is connected).  If it is an empty vector,
+#' @param root The index of the root vertex or root vertices.
+#' If this is a non-empty vector then the supplied vertex IDs are used as the roots of the trees
+#' (or a single tree if the graph is connected).
+#' If it is an empty vector,
 #'   then the root vertices are automatically calculated based on topological sorting,
 #'   performed with the opposite mode than the `mode` argument.
 #'   After the vertices have been sorted, one is selected from each component.
@@ -905,7 +909,8 @@ as_star <- function(...) layout_spec(layout_as_star, ...)
 #'   which are not trees (i.e. they are unconnected and have tree components).
 #'   It specifies the level of the root vertices for every tree in the forest.
 #'   It is only considered if the `roots` argument is not an empty vector.
-#' @param mode Specifies which edges to consider when building the tree.  If it is \sQuote{out}, then only the outgoing,
+#' @param mode Specifies which edges to consider when building the tree.
+#' If it is \sQuote{out}, then only the outgoing,
 #'   if it is \sQuote{in}, then only the incoming edges of a parent are considered.
 #'   If it is \sQuote{all} then all edges are used (this was the behavior in igraph 0.5 and before).
 #'   This parameter also influences how the root vertices are calculated, if they are not given.
@@ -1695,7 +1700,8 @@ with_dh <- function(...) layout_spec(layout_with_dh, ...)
 #' @inheritParams rlang::args_dots_empty
 #' @param coords Optional starting positions for the vertices.
 #'   If this argument is not `NULL` then it should be an appropriate matrix of starting coordinates.
-#' @param dim Integer scalar, 2 or 3, the dimension of the layout.  Two dimensional layouts are places on a plane,
+#' @param dim Integer scalar, 2 or 3, the dimension of the layout.
+#' Two dimensional layouts are places on a plane,
 #'   three dimensional ones in the 3d space.
 #' @param niter Integer scalar, the number of iterations to perform.
 #' @param start.temp Real scalar, the start temperature.
@@ -2105,7 +2111,8 @@ with_gem <- function(...) layout_spec(layout_with_gem, ...)
 #' @param start If given, then it should be a matrix with two columns and one line for each vertex.
 #'   This matrix will be used as starting positions for the algorithm.
 #'   If not given, then a random starting matrix is used.
-#' @param niter Integer scalar, the number of iterations to perform.  Should be a couple of hundred in general.
+#' @param niter Integer scalar, the number of iterations to perform.
+#' Should be a couple of hundred in general.
 #'   If you have a large graph then you might want to only do a few iterations and then check the result.
 #'   If it is not good enough you can feed it in again in the `start` argument.
 #'   The default value is 500.
@@ -2230,7 +2237,8 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 #' @param coords Starting coordinates in a two or three column matrix,
 #'   depending on the `dim` argument.
 #'   Default: `NULL`.
-#' @param dim Integer scalar, 2 or 3, the dimension of the layout.  Two dimensional layouts are places on a plane,
+#' @param dim Integer scalar, 2 or 3, the dimension of the layout.
+#' Two dimensional layouts are places on a plane,
 #'   three dimensional ones in the 3d space.
 #' @param maxiter The maximum number of iterations to perform.
 #'   The algorithm might terminate earlier, see the `epsilon` argument.
@@ -2645,7 +2653,8 @@ layout.lgl <- function(..., params = list()) {
 #' This function generates the layout separately for each graph component and then merges them via [merge_coords()].
 #'
 #' @param graph The input graph.
-#' @param dist The distance matrix for the multidimensional scaling.  If `NULL` (the default),
+#' @param dist The distance matrix for the multidimensional scaling.
+#' If `NULL` (the default),
 #'   then the unweighted shortest path matrix is used.
 #' @param dim `layout_with_mds()` supports dimensions up to the number of nodes minus one, but only if the graph is connected;
 #'   for unconnected graphs, the only possible value is 2. This is because `merge_coords()` only works in 2D.
@@ -3075,7 +3084,8 @@ with_sugiyama <- function(...) layout_spec(layout_with_sugiyama, ...)
 #' `merge_coords()` takes a list of graphs and a list of coordinates and places the graphs in a common layout.
 #' The method to use is chosen via the `method` parameter, although right now only the `dla` method is implemented.
 #'
-#' The `dla` method covers the graph with circles.  Then it sorts the graphs based on the number of vertices first and places the largest graph at the center of the layout.
+#' The `dla` method covers the graph with circles.
+#' Then it sorts the graphs based on the number of vertices first and places the largest graph at the center of the layout.
 #' Then the other graphs are placed in decreasing order via a DLA (diffision limited aggregation) algorithm:
 #' the graph is placed randomly on a circle far away from the center and a random walk is conducted until the graph walks into the larger graphs already placed or walks too far from the center of the layout.
 #'
@@ -3396,7 +3406,9 @@ layout.drl <- function(
 #' The generator has the following parameters:
 #' \describe{
 #'     \item{edge.cut}{
-#'       Edge cutting is done in the late stages of the algorithm in order to achieve less dense layouts.  Edges are cut if there is a lot of stress on them (a large value in the objective function sum). The edge cutting parameter is a value between 0 and 1 with 0 representing no edge cutting and 1 representing maximal edge cutting.
+#'       Edge cutting is done in the late stages of the algorithm in order to achieve less dense layouts.
+#'       Edges are cut if there is a lot of stress on them (a large value in the objective function sum).
+#'       The edge cutting parameter is a value between 0 and 1 with 0 representing no edge cutting and 1 representing maximal edge cutting.
 #'     }
 #'     \item{init.iterations}{
 #'       Number of iterations in the first phase.

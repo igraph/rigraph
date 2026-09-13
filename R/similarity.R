@@ -10,9 +10,13 @@
 #' Methof `dice` calculates the pairwise Dice similarities for some (or all) of the vertices.
 #'
 #' The inverse log-weighted similarity of two vertices is the number of their common neighbors,
-#' weighted by the inverse logarithm of their degrees.  It is based on the assumption that two vertices should be considered more similar
+#' weighted by the inverse logarithm of their degrees.
+#' It is based on the assumption that two vertices should be considered more similar
 #' if they share a low-degree common neighbor,
-#' since high-degree common neighbors are more likely to appear even by pure chance.  Isolated vertices will have zero similarity to any other vertex.  Self-similarities are not calculated.  See the following paper for more details:
+#' since high-degree common neighbors are more likely to appear even by pure chance.
+#' Isolated vertices will have zero similarity to any other vertex.
+#' Self-similarities are not calculated.
+#' See the following paper for more details:
 #' Lada A. Adamic and Eytan Adar: Friends and neighbors on the Web.
 #' Social Networks, 25(3):211-230, 2003.
 #'

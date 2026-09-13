@@ -134,7 +134,8 @@ blockGraphs <- function(blocks, graph) {
 #' maximally \eqn{l}-cohesive subsets are recursively identified with \eqn{l>k}.
 #' Thus a hierarchy of vertex subsets is found, with the entire graph \eqn{G} at its root.
 #'
-#' The function `cohesive_blocks()` implements cohesive blocking.  It returns a `cohesiveBlocks` object.
+#' The function `cohesive_blocks()` implements cohesive blocking.
+#' It returns a `cohesiveBlocks` object.
 #' `cohesiveBlocks` should be handled as an opaque class, i.e. its internal structure should not be accessed directly,
 #' but through the functions listed here.
 #'
@@ -228,7 +229,8 @@ blockGraphs <- function(blocks, graph) {
 #' @param layout The layout of a plot, it is simply passed on to `plot.igraph()`, see the possible formats there.
 #'   The default `NULL` uses the Reingold-Tilford layout generator.
 #' @param \dots Additional arguments.
-#'   `plot_hierarchy()` and [plot()] pass them to `plot.igraph()`.  [print()] and [summary()] ignore them.
+#'   `plot_hierarchy()` and [plot()] pass them to `plot.igraph()`.
+#'   [print()] and [summary()] ignore them.
 #'   `cohesive_blocks()` and `export_pajek()` do not accept extra arguments; these dots must be empty for them.
 #' @return `cohesive_blocks()` returns a `cohesiveBlocks` object.
 #'

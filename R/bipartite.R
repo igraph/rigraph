@@ -100,7 +100,8 @@ bipartite.mapping <- function(graph) {
 #' without calculating the projections themselves.
 #' This is useful to check how much memory the projections would need if you have a large bipartite graph.
 #'
-#' `bipartite_projection()` calculates the actual projections.  You can use the `probe1` argument to specify the order of the projections in the result.
+#' `bipartite_projection()` calculates the actual projections.
+#' You can use the `probe1` argument to specify the order of the projections in the result.
 #' By default vertex type `FALSE` is the first and `TRUE` is the second.
 #'
 #' `bipartite_projection()` keeps vertex attributes.
@@ -114,7 +115,9 @@ bipartite.mapping <- function(graph) {
 #'   E.g. if there is an A-C-B and also an A-D-B triple in the bipartite graph (but no more X, such that A-X-B is also in the graph),
 #'   then the multiplicity of the A-B edge in the projection will be 2.
 #' @param probe1 This argument can be used to specify the order of the projections in the resulting list.
-#'   If given, then it is considered as a vertex ID (or a symbolic vertex name); the projection containing this vertex will be the first one in the result list.  This argument is ignored if only one projection is requested in argument `which`.
+#'   If given, then it is considered as a vertex ID (or a symbolic vertex name);
+#'   the projection containing this vertex will be the first one in the result list.
+#'   This argument is ignored if only one projection is requested in argument `which`.
 #' @param which A character scalar to specify which projection(s) to calculate.
 #'   The default is to calculate both.
 #' @param remove.type Logical, whether to remove the `type` vertex attribute from the projections.

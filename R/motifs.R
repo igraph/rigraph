@@ -114,7 +114,8 @@ dyad.census <- function(graph) {
 
 #' Graph motifs
 #'
-#' Graph motifs are small connected induced subgraphs with a well-defined structure.  These functions search a graph for various motifs.
+#' Graph motifs are small connected induced subgraphs with a well-defined structure.
+#' These functions search a graph for various motifs.
 #'
 #' `motifs()` searches a graph for motifs of a given size and returns a numeric vector containing the number of different motifs.
 #' The order of the motifs is defined by their isomorphism class, see [isomorphism_class()].
@@ -231,7 +232,8 @@ motifs <- function(
 
 #' Graph motifs
 #'
-#' Graph motifs are small connected induced subgraphs with a well-defined structure.  These functions search a graph for various motifs.
+#' Graph motifs are small connected induced subgraphs with a well-defined structure.
+#' These functions search a graph for various motifs.
 #'
 #' `count_motifs()` calculates the total number of motifs of a given size in graph.
 #'
@@ -308,7 +310,8 @@ count_motifs <- function(
 
 #' Graph motifs
 #'
-#' Graph motifs are small connected induced subgraphs with a well-defined structure.  These functions search a graph for various motifs.
+#' Graph motifs are small connected induced subgraphs with a well-defined structure.
+#' These functions search a graph for various motifs.
 #'
 #' `sample_motifs()` estimates the total number of motifs of a given size in a graph based on a sample.
 #'

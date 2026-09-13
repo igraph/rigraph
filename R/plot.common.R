@@ -9,7 +9,10 @@
 #' Actually it is an implementation of the [graphics::plot()] generic function,
 #' so you can write `plot(graph)` instead of `plot.igraph(graph)`.
 #' As it used the standard R devices it supports every output format for which R has an output device.
-#' The list is quite impressing: PostScript, PDF files, XFig files, SVG files, JPG, PNG and of course you can plot to the screen as well using the default devices, or the good-looking anti-aliased Cairo device.  See [plot.igraph()] for some more information.
+#' The list is quite impressing:
+#' PostScript, PDF files, XFig files, SVG files, JPG, PNG and of course you can plot to the screen as well using the default devices,
+#' or the good-looking anti-aliased Cairo device.
+#' See [plot.igraph()] for some more information.
 #'
 #' [tkplot()] does interactive 2D plotting using the `tcltk` package.
 #' It can only handle graphs of moderate size, a thousand vertices is probably already too many.
@@ -45,7 +48,8 @@
 #' If a parameter is not given in the command line,
 #' and the corresponding vertex/edge/graph attribute is also missing then the general igraph parameters handled by [igraph_options()] are also checked.
 #' Vertex parameters have prefix \sQuote{\code{vertex.}}, edge parameters are prefixed with \sQuote{\code{edge.}},
-#' general parameters like `layout` are prefixed with \sQuote{\code{plot}}.  These parameters are useful
+#' general parameters like `layout` are prefixed with \sQuote{\code{plot}}.
+#' These parameters are useful
 #' if you want all or most of your graphs to have the same look, vertex size, vertex color,
 #' etc. Then you don't need to set these at every plotting, and you also don't need to assign vertex/edge attributes to every graph.
 #'
@@ -55,7 +59,9 @@
 #' Different parameters can have different type, eg. vertex colors can be given as a character vector with color names,
 #' or as an integer vector with the color numbers from the current palette.
 #' Different types are valid for different parameters, this is discussed in detail in the next section.
-#' It is however always true that the parameter can always be a function object in which it will be called with the graph as its single argument to get the \dQuote{proper} value of the parameter.  (If the function returns another function object that will *not* be called again\dots)
+#' It is however always true that the parameter can always be a function object
+#' in which it will be called with the graph as its single argument to get the \dQuote{proper} value of the parameter.
+#' (If the function returns another function object that will *not* be called again\dots)
 #' @section The list of parameters: Vertex parameters first, note that the
 #' \sQuote{\code{vertex.}} prefix needs to be added if they are used as an argument or when setting via [igraph_options()].
 #' The value of the parameter may be scalar valid for every vertex or a vector with a separate value for each vertex.
@@ -121,7 +127,8 @@
 #'   Specify `NA` to omit vertex labels. The default vertex labels are the vertex IDs.
 #' }
 #' \item{label.family}{
-#'   The font family to be used for vertex labels.  As different plotting commands can used different fonts, they interpret this parameter different ways.
+#'   The font family to be used for vertex labels.
+#'   As different plotting commands can used different fonts, they interpret this parameter different ways.
 #'   The basic notation is, however, understood by both [plot.igraph()] and [tkplot()].
 #'   [rglplot()] does not support fonts at all right now, it ignores this parameter completely.
 #'

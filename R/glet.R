@@ -46,7 +46,8 @@ graphlets.candidate.basis <- function(graph, weights = NULL) {
 
 #' Graphlet decomposition of a graph
 #'
-#' Graphlet decomposition models a weighted undirected graph via the union of potentially overlapping dense social groups.  This is done by a two-step algorithm.
+#' Graphlet decomposition models a weighted undirected graph via the union of potentially overlapping dense social groups.
+#' This is done by a two-step algorithm.
 #' In the first step a candidate set of groups (a candidate basis) is created by finding cliques if the thresholded input graph.
 #' In the second step these the graph is projected on the candidate basis,
 #' resulting a weight coefficient for each clique in the candidate basis.

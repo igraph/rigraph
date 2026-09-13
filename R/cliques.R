@@ -171,7 +171,8 @@ clique.number <- function(graph) {
 #' `largest_cliques()` finds all largest cliques in the input graph.
 #' A clique is largest if there is no other clique including more vertices.
 #'
-#' `max_cliques()` finds all maximal cliques in the input graph.  A clique is maximal if it cannot be extended to a larger clique.
+#' `max_cliques()` finds all maximal cliques in the input graph.
+#' A clique is maximal if it cannot be extended to a larger clique.
 #' The largest cliques are always maximal, but a maximal clique is not necessarily the largest.
 #'
 #' `count_max_cliques()` counts the maximal cliques.

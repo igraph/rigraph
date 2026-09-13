@@ -135,7 +135,9 @@ hrg.consensus <- function(
 #' Fitting and sampling hierarchical random graph models.
 #'
 #' A hierarchical random graph is an ensemble of undirected graphs with \eqn{n} vertices.
-#' It is defined via a binary tree with \eqn{n} leaf and \eqn{n-1} internal vertices, where the internal vertices are labeled with probabilities.  The probability that two vertices are connected in the random graph is given by the probability label at their closest common ancestor.
+#' It is defined via a binary tree with \eqn{n} leaf and \eqn{n-1} internal vertices,
+#' where the internal vertices are labeled with probabilities.
+#' The probability that two vertices are connected in the random graph is given by the probability label at their closest common ancestor.
 #'
 #' Please see references below for more about hierarchical random graphs.
 #'
@@ -310,7 +312,8 @@ fit_hrg <- function(
 #' @param start Logical, whether to start the fitting/sampling from the supplied `igraphHRG` object, or from a random starting point.
 #' @param num.samples Number of samples to use for consensus generation or missing edge prediction.
 #' @return `consensus_tree()` returns a list of two objects.
-#'   The first is an `igraphHRGConsensus` object, the second is an `igraphHRG` object.  The `igraphHRGConsensus` object has the following members:
+#'   The first is an `igraphHRGConsensus` object, the second is an `igraphHRG` object.
+#'   The `igraphHRGConsensus` object has the following members:
 #'   \describe{
 #'     \item{parents}{
 #'       For each vertex, the ID of its parent vertex is stored,

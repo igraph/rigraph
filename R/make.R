@@ -2972,7 +2972,8 @@ line_graph <- function(graph) {
 #' De Bruijn graphs are labeled graphs representing the overlap of strings.
 #'
 #' A de Bruijn graph represents relationships between strings.
-#' An alphabet of `m` letters are used and strings of length `n` are considered.  A vertex corresponds to every possible string and there is a directed edge from vertex `v` to vertex `w`
+#' An alphabet of `m` letters are used and strings of length `n` are considered.
+#' A vertex corresponds to every possible string and there is a directed edge from vertex `v` to vertex `w`
 #' if the string of `v` can be transformed into the string of `w` by removing its first letter and appending a letter to it.
 #'
 #' Please note that the graph will have `m` to the power `n` vertices and even more edges,

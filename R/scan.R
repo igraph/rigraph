@@ -30,7 +30,8 @@
 #'
 #' `local_scan()` calculates exact local scan statistics.
 #'
-#' If `graph.them` is `NULL`, then `local_scan()` computes the \sQuote{us} variant of the scan statistics.  Otherwise,
+#' If `graph.them` is `NULL`, then `local_scan()` computes the \sQuote{us} variant of the scan statistics.
+#' Otherwise,
 #' `graph.them` should be an igraph object and the \sQuote{them} variant is computed using `graph.us` to extract the neighborhood information,
 #' and applying `FUN` on these neighborhoods in `graph.them`.
 #'
@@ -45,7 +46,8 @@
 #'   `ecount()` is used for unweighted graphs (if `weighted=FALSE`) and a function that computes the sum of edge weights is used for weighted graphs (if `weighted=TRUE`).
 #'   This argument is ignored if `k` is zero.
 #' @param weighted Logical, TRUE if the edge weights should be used for computation of the scan statistic.
-#'   If TRUE, the graph should be weighted.  Note that this argument is ignored if `FUN` is not `NULL`, `"ecount"` and `"sumweights"`.
+#'   If TRUE, the graph should be weighted.
+#'   Note that this argument is ignored if `FUN` is not `NULL`, `"ecount"` and `"sumweights"`.
 #' @param mode Character scalar, the kind of neighborhoods to use for the calculation.
 #'   One of \sQuote{`out`}, \sQuote{`in`}, \sQuote{`all`} or \sQuote{`total`}.
 #'   This argument is ignored for undirected graphs.
@@ -299,7 +301,8 @@ local_scan <- function(
 #'
 #' @param graphs A list of igraph graph objects.
 #'   They must be all directed or all undirected and they must have the same number of vertices.
-#' @param tau The number of previous time steps to consider for the time-dependent normalization for individual vertices.  In other words,
+#' @param tau The number of previous time steps to consider for the time-dependent normalization for individual vertices.
+#' In other words,
 #'   the current locality statistics of each vertex will be compared to this many previous time steps of the same vertex to decide whether it is significantly larger.
 #' @param ell The number of previous time steps to consider for the aggregated scan statistics.
 #'   This is essentially a smoothing parameter.

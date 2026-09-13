@@ -1320,7 +1320,8 @@ graph_from_isomorphism_class <- function(
 #'
 #' The canonical permutation brings every isomorphic graphs into the same (labeled) graph.
 #'
-#' `canonical_permutation()` computes a permutation which brings the graph into canonical form, as defined by the BLISS algorithm.  All isomorphic graphs have the same canonical form.
+#' `canonical_permutation()` computes a permutation which brings the graph into canonical form, as defined by the BLISS algorithm.
+#' All isomorphic graphs have the same canonical form.
 #'
 #' See the paper below for the details about BLISS.
 #' This and more information is available at <http://www.tcs.hut.fi/Software/bliss/index.html>.

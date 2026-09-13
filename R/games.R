@@ -795,8 +795,11 @@ aging.prefatt.game <- function(
 #'   See details below.
 #' @param directed Whether to create a directed graph.
 #' @param algorithm The algorithm to use for the graph generation.
-#'   `psumtree` uses a partial prefix-sum tree to generate the graph, this algorithm can handle any `power` and `zero.appeal` values and never generates multiple edges.  `psumtree-multiple` also uses a partial prefix-sum tree, but the generation of multiple edges is allowed.
-#'   Before the 0.6 version igraph used this algorithm if `power` was not one, or `zero.appeal` was not one.  `bag` is the algorithm that was previously (before version 0.6) used if `power` was one and `zero.appeal` was one as well.
+#'   `psumtree` uses a partial prefix-sum tree to generate the graph,
+#'   this algorithm can handle any `power` and `zero.appeal` values and never generates multiple edges.
+#'   `psumtree-multiple` also uses a partial prefix-sum tree, but the generation of multiple edges is allowed.
+#'   Before the 0.6 version igraph used this algorithm if `power` was not one, or `zero.appeal` was not one.
+#'   `bag` is the algorithm that was previously (before version 0.6) used if `power` was one and `zero.appeal` was one as well.
 #'   It works by putting the IDs of the vertices into a bag (multiset, really), exactly as many times as their (in-)degree, plus once more.
 #'   Then the required number of cited vertices are drawn from the bag, with replacement.
 #'   This method might generate multiple edges.
@@ -3895,7 +3898,8 @@ sample_bipartite_gnp <- function(
 #' The order of the vertices in the generated graph corresponds to the `block.sizes` argument.
 #'
 #' @param n Number of vertices in the graph.
-#' @param pref.matrix The matrix giving the Bernoulli rates.  This is a \eqn{K\times K}{KxK} matrix,
+#' @param pref.matrix The matrix giving the Bernoulli rates.
+#' This is a \eqn{K\times K}{KxK} matrix,
 #'   where \eqn{K} is the number of groups.
 #'   The probability of creating an edge between vertices from groups \eqn{i} and \eqn{j} is given by element \eqn{(i,j)}.
 #'   For undirected graphs, this matrix must be symmetric.
@@ -4888,8 +4892,11 @@ sample_forestfire <- function(
 #'   If you are resampling an Erdős-Rényi graph and you know the original edge probability of the Erdős-Rényi model,
 #'   you should supply that explicitly.
 #' @param permutation A numeric vector, a permutation vector that is applied on the vertices of the first graph,
-#'   to get the second graph.  If `NULL`, the vertices are not permuted.
-#' @return An unweighted graph of the same size as `old.graph` such that the correlation coefficient between the entries of the two adjacency matrices is `corr`.  Note each pair of corresponding matrix entries is a pair of correlated Bernoulli random variables.
+#'   to get the second graph.
+#'   If `NULL`, the vertices are not permuted.
+#' @return An unweighted graph of the same size as `old.graph`
+#' such that the correlation coefficient between the entries of the two adjacency matrices is `corr`.
+#' Note each pair of corresponding matrix entries is a pair of correlated Bernoulli random variables.
 #'
 #' @references Lyzinski, V., Fishkind, D. E., Priebe, C. E. (2013).  Seeded
 #' graph matching for correlated Erdős-Rényi graphs.
@@ -4972,7 +4979,8 @@ sample_correlated_gnp <- function(
 #'   it must in the open (0,1) interval.
 #' @param directed Logical, whether to generate directed graphs.
 #' @param permutation A numeric vector, a permutation vector that is applied on the vertices of the first graph,
-#'   to get the second graph.  If `NULL`, the vertices are not permuted.
+#'   to get the second graph.
+#'   If `NULL`, the vertices are not permuted.
 #' @return A list of two igraph objects, named `graph1` and `graph2`,
 #'   which are two graphs whose adjacency matrix entries are correlated with `corr`.
 #'
