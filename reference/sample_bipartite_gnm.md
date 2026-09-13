@@ -116,7 +116,7 @@ Random graph models (games):
 
 ## empty graph
 sample_bipartite_gnp(10, 5, p = 0)
-#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── c314d47 ──
+#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── 8fc191b ──
 #> ℹ undirected · bipartite
 #> ℹ 15 vertices · 0 edges
 #> 
@@ -126,7 +126,7 @@ sample_bipartite_gnp(10, 5, p = 0)
 
 ## full graph
 sample_bipartite_gnp(10, 5, p = 1)
-#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── 4a670ae ──
+#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── 05d1f04 ──
 #> ℹ undirected · bipartite
 #> ℹ 15 vertices · 50 edges
 #> 
@@ -145,7 +145,7 @@ sample_bipartite_gnp(10, 5, p = 1)
 
 ## random bipartite graph
 sample_bipartite_gnp(10, 5, p = 0.1)
-#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── a35fb05 ──
+#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── 71d0df9 ──
 #> ℹ undirected · bipartite
 #> ℹ 15 vertices · 4 edges
 #> 
@@ -158,7 +158,7 @@ sample_bipartite_gnp(10, 5, p = 0.1)
 
 ## directed bipartite graph, G(n,m)
 sample_bipartite_gnm(10, 5, m = 20, directed = TRUE, mode = "all")
-#> ── <igraph> Bipartite Gnm random graph ────────────────────────────── 6f15193 ──
+#> ── <igraph> Bipartite Gnm random graph ────────────────────────────── 2756f7f ──
 #> ℹ directed · bipartite
 #> ℹ 15 vertices · 20 edges
 #> 
