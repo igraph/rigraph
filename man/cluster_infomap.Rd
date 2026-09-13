@@ -7,8 +7,8 @@
 cluster_infomap(
   graph,
   ...,
-  e.weights = NULL,
-  v.weights = NULL,
+  weights = NULL,
+  vertex_weights = NULL,
   nb.trials = 10,
   modularity = TRUE
 )
@@ -18,13 +18,13 @@ cluster_infomap(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{e.weights}{Numeric vector of edge weights.
+\item{weights}{Numeric vector of edge weights.
 The length must match the number of edges in the graph.  By default (\code{NULL}) the
 \sQuote{\code{weight}} edge attribute is used as weights. If it is not
 present, then all edges are considered to have the same weight.
 Larger edge weights correspond to stronger connections.}
 
-\item{v.weights}{Numeric vector of vertex
+\item{vertex_weights}{Numeric vector of vertex
 weights. The length must match the number of vertices in the graph.  By
 default (\code{NULL}) the \sQuote{\code{weight}} vertex attribute is used as weights. If
 it is not present, then all vertices are considered to have the same weight.

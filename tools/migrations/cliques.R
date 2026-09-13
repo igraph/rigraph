@@ -39,33 +39,39 @@ migrations <- list(
   ),
 
   largest_weighted_cliques = list(
-    old = function(graph, vertex.weights) {},
+    old = function(graph, vertex.weights = vertex_weights) {},
     new = function(
       graph,
       ...,
-      vertex.weights = NULL
+      vertex_weights = NULL
     ) {},
     when = "3.0.0"
   ),
 
   weighted_clique_num = list(
-    old = function(graph, vertex.weights) {},
+    old = function(graph, vertex.weights = vertex_weights) {},
     new = function(
       graph,
       ...,
-      vertex.weights = NULL
+      vertex_weights = NULL
     ) {},
     when = "3.0.0"
   ),
 
   weighted_cliques = list(
-    old = function(graph, vertex.weights, min.weight, max.weight, maximal) {},
+    old = function(
+      graph,
+      vertex.weights = vertex_weights,
+      min.weight = min_weight,
+      max.weight = max_weight,
+      maximal
+    ) {},
     new = function(
       graph,
       ...,
-      vertex.weights = NULL,
-      min.weight = 0,
-      max.weight = 0,
+      vertex_weights = NULL,
+      min_weight = 0,
+      max_weight = 0,
       maximal = FALSE
     ) {},
     when = "3.0.0"
