@@ -1,3 +1,13 @@
+# cluster_leiden() recovers the renamed resolution_parameter argument
+
+    Code
+      res <- cluster_leiden(g, "modularity", resolution_parameter = 1.5)
+    Condition
+      Warning:
+      Calling `cluster_leiden()` with positional or abbreviated arguments was deprecated in igraph 3.0.0.
+      i Detected call: cluster_leiden(graph, objective_function, resolution_parameter)
+      i Use instead: cluster_leiden(graph, objective_function, resolution = )
+
 # modularity_matrix no longer accepts a membership argument for compatibility
 
     Code
