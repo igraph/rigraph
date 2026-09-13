@@ -125,9 +125,8 @@ power.law.fit <- function(
 #'       Numeric scalar, the exponent of the fitted power-law distribution.
 #'     }
 #'     \item{xmin}{
-#'       Numeric scalar, the minimum value from which the
-#'       power-law distribution was fitted. In other words, only the values larger
-#'       than `xmin` were used from the input vector.
+#'       Numeric scalar, the minimum value from which the power-law distribution was fitted.
+#'       In other words, only the values larger than `xmin` were used from the input vector.
 #'     }
 #'     \item{logLik}{
 #'       Numeric scalar, the log-likelihood of the fitted parameters.
@@ -138,10 +137,10 @@ power.law.fit <- function(
 #'       Smaller scores denote better fit.
 #'     }
 #'     \item{KS.p}{
-#'       Only for `p.value = TRUE`. Numeric scalar, the p-value of the Kolmogorov-Smirnov
-#'       test. Small p-values (less than 0.05) indicate that the test rejected the
-#'       hypothesis that the original data could have been drawn from the fitted
-#'       power-law distribution.
+#'       Only for `p.value = TRUE`.
+#'       Numeric scalar, the p-value of the Kolmogorov-Smirnov test.
+#'       Small p-values (less than 0.05) indicate that the test rejected the hypothesis
+#'       that the original data could have been drawn from the fitted power-law distribution.
 #'     }
 #'   }
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi

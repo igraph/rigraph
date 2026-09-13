@@ -9,9 +9,7 @@
 #' Actually it is an implementation of the [graphics::plot()] generic function,
 #' so you can write `plot(graph)` instead of `plot.igraph(graph)`.
 #' As it used the standard R devices it supports every output format for which R has an output device.
-#' The list is quite impressing: PostScript, PDF files, XFig files, SVG files, JPG,
-#' PNG and of course you can plot to the screen as well using the default devices,
-#' or the good-looking anti-aliased Cairo device.  See [plot.igraph()] for some more information.
+#' The list is quite impressing: PostScript, PDF files, XFig files, SVG files, JPG, PNG and of course you can plot to the screen as well using the default devices, or the good-looking anti-aliased Cairo device.  See [plot.igraph()] for some more information.
 #'
 #' [tkplot()] does interactive 2D plotting using the `tcltk` package.
 #' It can only handle graphs of moderate size, a thousand vertices is probably already too many.
@@ -36,11 +34,11 @@
 #' `layout` gives the layout of the graphs.
 #'
 #' The second way is to assign vertex, edge and graph attributes to the graph.
-#' These attributes have no prefix,
-#' ie. the color of the vertices is taken from the `color` vertex attribute and the color of the edges from the `color` edge attribute.
+#' These attributes have no prefix, ie. the color of the vertices is taken from the `color` vertex attribute
+#' and the color of the edges from the `color` edge attribute.
 #' The layout of the graph is given by the `layout` graph attribute.
-#' (Always assuming that the corresponding command argument is not present.) Setting vertex and edge attributes are handy
-#' if you want to assign a given \sQuote{look} to a graph,
+#' (Always assuming that the corresponding command argument is not present.)
+#' Setting vertex and edge attributes are handy if you want to assign a given \sQuote{look} to a graph,
 #' attributes are saved with the graph is you save it with [base::save()] or in GraphML format with [write_graph()],
 #' so the graph will have the same look after loading it again.
 #'
@@ -64,12 +62,10 @@
 #' (Shorter vectors are recycled.)
 #'   \describe{
 #'     \item{size}{
-#'   The size of the vertex, a numeric scalar or vector,
-#'   in the latter case each vertex sizes may differ.
-#'   This vertex sizes are scaled in order have about the same size of vertices
-#'   for a given value for all three plotting commands.
-#'   It does not need to be an integer number. The default value is 15.
-#'   This is big enough to place short labels on vertices.
+#'   The size of the vertex, a numeric scalar or vector, in the latter case each vertex sizes may differ.
+#'   This vertex sizes are scaled in order have about the same size of vertices for a given value for all three plotting commands.
+#'   It does not need to be an integer number.
+#'   The default value is 15. This is big enough to place short labels on vertices.
 #'   If `size.scaling` is `TRUE`, `relative.size` is used to scale the size appropriately.
 #' }
 #' \item{size2}{
@@ -81,18 +77,15 @@
 #'   The default is 15.
 #' }
 #' \item{color}{
-#'   The fill color of the vertex. If it is
-#'   numeric then the current palette is used, see
-#'   [grDevices::palette()]. If it is a character vector then it may
-#'   either contain integer values, named colors or RGB specified colors with
-#'   three or four bytes. All strings starting with \sQuote{\code{#}} are assumed
-#'   to be RGB color specifications. It is possible to mix named color and RGB
-#'   colors. Note that [tkplot()] ignores the fourth byte (alpha
-#'   channel) in the RGB color specification.
+#'   The fill color of the vertex.
+#'   If it is numeric then the current palette is used, see [grDevices::palette()].
+#'   If it is a character vector then it may either contain integer values, named colors or RGB specified colors with three or four bytes.
+#'   All strings starting with \sQuote{\code{#}} are assumed to be RGB color specifications.
+#'   It is possible to mix named color and RGB colors.
+#'   Note that [tkplot()] ignores the fourth byte (alpha channel) in the RGB color specification.
 #'
-#'   For `plot.igraph` and integer values, the default igraph palette is
-#'   used (see the \sQuote{palette} parameter below. Note that this is different
-#'   from the R palette.
+#'   For `plot.igraph` and integer values, the default igraph palette is used (see the \sQuote{palette} parameter below.
+#'   Note that this is different from the R palette.
 #'
 #'   If you don't want (some) vertices to have any color, supply `NA` as the
 #'   color name.
@@ -110,23 +103,16 @@
 #'   The width of the frame of the vertices. The default value is 1.
 #' }
 #' \item{shape}{
-#'   The shape of the vertex, currently \dQuote{\code{circle}},
-#'   \dQuote{\code{square}}, \dQuote{\code{csquare}}, \dQuote{\code{rectangle}},
-#'   \dQuote{\code{crectangle}}, \dQuote{\code{vrectangle}}, \dQuote{\code{pie}}
-#'   (see [vertex.shape.pie()]), \sQuote{\code{sphere}}, and
-#'   \dQuote{\code{none}} are supported, and only by the
-#'   [plot.igraph()] command. \dQuote{\code{none}} does not draw the
-#'   vertices at all, although vertex label are plotted (if given). See
-#'   [shapes()] for details about vertex shapes and
-#'   [vertex.shape.pie()] for using pie charts as vertices.
+#'   The shape of the vertex, currently \dQuote{\code{circle}}, \dQuote{\code{square}}, \dQuote{\code{csquare}}, \dQuote{\code{rectangle}},
+#'   \dQuote{\code{crectangle}}, \dQuote{\code{vrectangle}}, \dQuote{\code{pie}} (see [vertex.shape.pie()]), \sQuote{\code{sphere}},
+#'   and \dQuote{\code{none}} are supported, and only by the [plot.igraph()] command.
+#'   \dQuote{\code{none}} does not draw the vertices at all, although vertex label are plotted (if given).
+#'   See [shapes()] for details about vertex shapes and [vertex.shape.pie()] for using pie charts as vertices.
 #'
-#'   The \dQuote{\code{sphere}} vertex shape plots vertices as 3D ray-traced
-#'   spheres, in the given color and size. This produces a raster image and it is
-#'   only supported with some graphics devices. On some devices raster
-#'   transparency is not supported and the spheres do not have a transparent
-#'   background. See [dev.capabilities] and the
-#'   \sQuote{\code{rasterImage}} capability to check that your device is
-#'   supported.
+#'   The \dQuote{\code{sphere}} vertex shape plots vertices as 3D ray-traced spheres, in the given color and size.
+#'   This produces a raster image and it is only supported with some graphics devices.
+#'   On some devices raster transparency is not supported and the spheres do not have a transparent background.
+#'   See [dev.capabilities] and the \sQuote{\code{rasterImage}} capability to check that your device is supported.
 #'
 #'   By default vertices are drawn as circles.
 #' }
@@ -135,28 +121,23 @@
 #'   Specify `NA` to omit vertex labels. The default vertex labels are the vertex IDs.
 #' }
 #' \item{label.family}{
-#'   The
-#'   font family to be used for vertex labels.  As different plotting commands
-#'   can used different fonts, they interpret this parameter different ways. The
-#'   basic notation is, however, understood by both [plot.igraph()] and
-#'   [tkplot()]. [rglplot()] does not support fonts at all
-#'   right now, it ignores this parameter completely.
+#'   The font family to be used for vertex labels.  As different plotting commands can used different fonts, they interpret this parameter different ways.
+#'   The basic notation is, however, understood by both [plot.igraph()] and [tkplot()].
+#'   [rglplot()] does not support fonts at all right now, it ignores this parameter completely.
 #'
 #'   For [plot.igraph()] this parameter is simply passed to
 #'   [graphics::text()] as argument `family`.
 #'
-#'   For [tkplot()] some conversion is performed. If this parameter is
-#'   the name of an existing Tk font, then that font is used and the
-#'   `label.font` and `label.cex` parameters are ignored completely. If
-#'   it is one of the base families (serif, sans, mono) then Times, Helvetica or
-#'   Courier fonts are used, there are guaranteed to exist on all systems. For
-#'   the \sQuote{symbol} base family we used the symbol font is available,
-#'   otherwise the first font which has \sQuote{symbol} in its name. If the
-#'   parameter is not a name of the base families and it is also not a named Tk
-#'   font then we pass it to [tcltk::tkfont.create()] and hope the user
-#'   knows what she is doing. The `label.font` and `label.cex`
-#'   parameters are also passed to [tcltk::tkfont.create()] in this
-#'   case.
+#'   For [tkplot()] some conversion is performed.
+#'   If this parameter is the name of an existing Tk font, then that font is used and the `label.font`
+#'   and `label.cex` parameters are ignored completely.
+#'   If it is one of the base families (serif, sans, mono) then Times, Helvetica or Courier fonts are used,
+#'   there are guaranteed to exist on all systems.
+#'   For the \sQuote{symbol} base family we used the symbol font is available, otherwise the first font
+#'   which has \sQuote{symbol} in its name.
+#'   If the parameter is not a name of the base families and it is also not a named Tk font then we pass it to [tcltk::tkfont.create()]
+#'   and hope the user knows what she is doing.
+#'   The `label.font` and `label.cex` parameters are also passed to [tcltk::tkfont.create()] in this case.
 #'
 #'   The default value is \sQuote{serif}.
 #' }
@@ -222,10 +203,8 @@
 #'   If TRUE, `relative.size` is used to scale both appropriately with `relative.size`.
 #' }
 #' \item{relative.size}{
-#'   The relative size of the smallest and largest vertices as percentage of
-#'   the plotting region. When all vertices have the same size, then by default
-#'   the relative size observed in the plot will be equal to
-#'   \code{relative.size[2]}.
+#'   The relative size of the smallest and largest vertices as percentage of the plotting region.
+#'   When all vertices have the same size, then by default the relative size observed in the plot will be equal to \code{relative.size[2]}.
 #'   The default value is \code{c(.01,.025)} (1\% and 2.5\% respectively).
 #'
 #'   Only used if `size.scaling` is TRUE`.
@@ -249,12 +228,10 @@
 #'   The width of the arrows. The default value is 1.
 #' }
 #' \item{lty}{
-#'   The line type for the edges. Almost the
-#'   same format is accepted as for the standard graphics
-#'   [graphics::par()], 0 and \dQuote{blank} mean no edges, 1 and
-#'   \dQuote{solid} are for solid lines, the other possible values are: 2
-#'   (\dQuote{dashed}), 3 (\dQuote{dotted}), 4 (\dQuote{dotdash}), 5
-#'   (\dQuote{longdash}), 6 (\dQuote{twodash}).
+#'   The line type for the edges.
+#'   Almost the same format is accepted as for the standard graphics [graphics::par()], 0 and \dQuote{blank} mean no edges, 1
+#'   and \dQuote{solid} are for solid lines, the other possible values are: 2 (\dQuote{dashed}), 3 (\dQuote{dotted}), 4 (\dQuote{dotdash}),
+#'   5 (\dQuote{longdash}), 6 (\dQuote{twodash}).
 #'
 #'   [tkplot()] also accepts standard Tk line type strings, it does not
 #'   however support \dQuote{blank} lines, instead of type \sQuote{0} type

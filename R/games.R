@@ -766,9 +766,11 @@ aging.prefatt.game <- function(
 #' The number of edges initiated in a time step is given by the `m`, `out.dist` and `out.seq` arguments.
 #' If `out.seq` is given and not NULL then it gives the number of edges to add in a vector, the first element is ignored,
 #' the second is the number of edges to add in the second time step and so on.
-#' If `out.seq` is not given or null and `out.dist` is given and not NULL then it is used as a discrete distribution to generate the number of edges in each time step.
+#' If `out.seq` is not given or null and `out.dist` is given and not NULL
+#' then it is used as a discrete distribution to generate the number of edges in each time step.
 #' Its first element is the probability that no edges will be added, the second is the probability that one edge is added,
-#' etc. (`out.dist` does not need to sum up to one, it normalized automatically.) `out.dist` should contain non-negative numbers and at east one element should be positive.
+#' etc. (`out.dist` does not need to sum up to one, it normalized automatically.)
+#' `out.dist` should contain non-negative numbers and at east one element should be positive.
 #'
 #' If both `out.seq` and `out.dist` are omitted or NULL then `m` will be used,
 #' it should be a positive integer constant and `m` edges will be added in each time step.
@@ -793,12 +795,8 @@ aging.prefatt.game <- function(
 #'   See details below.
 #' @param directed Whether to create a directed graph.
 #' @param algorithm The algorithm to use for the graph generation.
-#'   `psumtree` uses a partial prefix-sum tree to generate the graph,
-#'   this algorithm can handle any `power` and `zero.appeal` values and never generates multiple edges.  `psumtree-multiple` also uses a partial prefix-sum tree,
-#'   but the generation of multiple edges is allowed.
-#'   Before the 0.6 version igraph used this algorithm if `power` was not one,
-#'   or `zero.appeal` was not one.  `bag` is the algorithm that was previously (before version 0.6) used
-#'   if `power` was one and `zero.appeal` was one as well.
+#'   `psumtree` uses a partial prefix-sum tree to generate the graph, this algorithm can handle any `power` and `zero.appeal` values and never generates multiple edges.  `psumtree-multiple` also uses a partial prefix-sum tree, but the generation of multiple edges is allowed.
+#'   Before the 0.6 version igraph used this algorithm if `power` was not one, or `zero.appeal` was not one.  `bag` is the algorithm that was previously (before version 0.6) used if `power` was one and `zero.appeal` was one as well.
 #'   It works by putting the IDs of the vertices into a bag (multiset, really), exactly as many times as their (in-)degree, plus once more.
 #'   Then the required number of cited vertices are drawn from the bag, with replacement.
 #'   This method might generate multiple edges.
@@ -4296,9 +4294,8 @@ sample_islands <- function(islands.n, islands.size, islands.pin, n.inter) {
 #'
 #' Generate a random graph where each vertex has the same degree.
 #'
-#' This game generates a directed or undirected random graph
-#' where the degrees of vertices are equal to a predefined constant k. For undirected graphs,
-#' at least one of k and the number of vertices must be even.
+#' This game generates a directed or undirected random graph where the degrees of vertices are equal to a predefined constant k.
+#' For undirected graphs, at least one of k and the number of vertices must be even.
 #'
 #' The game simply uses [sample_degseq()] with appropriately constructed degree sequences.
 #'
@@ -4414,22 +4411,18 @@ sample_k_regular <- function(
 #'
 #' To overcome this limitation, this function implements additional variants of the model,
 #' with modified expressions for the connection probability \eqn{p_{ij}}{p_ij} between vertices \eqn{i} and \eqn{j}.
-#' Let \eqn{q_{ij} = \frac{w_i w_j}{S}}{q_ij = w_i w_j / S},
-#' or \eqn{q_{ij} = \frac{w^\text{out}_i w^\text{in}_j}{S}}{q_ij = w^out_i w^in_j / S} in the directed case.
+#' Let \eqn{q_{ij} = \frac{w_i w_j}{S}}{q_ij = w_i w_j / S}, or \eqn{q_{ij} = \frac{w^\text{out}_i w^\text{in}_j}{S}}{q_ij = w^out_i w^in_j / S} in the directed case.
 #' All model variants become equivalent in the limit of sparse graphs where \eqn{q_{ij}} approaches zero.
-#' In the original Chung-Lu model, selectable by setting \code{variant} to \dQuote{original}, \eqn{p_{ij} =
-#' \min(q_{ij}, 1)}{p_ij = min(q_ij, 1)}. The \dQuote{maxent} variant,
-#' sometimes referred to as the generalized random graph, uses \eqn{p_{ij} =
-#' \frac{q_{ij}}{1 + q_{ij}}}{p_ij = q_ij / (1 + q_ij)}, and is equivalent to a
-#' maximum entropy model (i.e., exponential random graph model) with a constraint on expected degrees; see Park and Newman (2004),
-#' Section B, setting \eqn{\exp(-\Theta_{ij}) =
-#' \frac{w_i w_j}{S}}{exp(-Theta_ij) = w_i w_j / S}. This model is also discussed
-#' by Britton, Deijfen, and Martin-Löf (2006).
+#' In the original Chung-Lu model, selectable by setting \code{variant} to \dQuote{original},
+#' \eqn{p_{ij} = \min(q_{ij}, 1)}{p_ij = min(q_ij, 1)}.
+#' The \dQuote{maxent} variant, sometimes referred to as the generalized random graph, uses \eqn{p_{ij} = \frac{q_{ij}}{1 + q_{ij}}}{p_ij = q_ij / (1 + q_ij)},
+#' and is equivalent to a maximum entropy model (i.e., exponential random graph model) with a constraint on expected degrees; see Park and Newman (2004),
+#' Section B, setting \eqn{\exp(-\Theta_{ij}) = \frac{w_i w_j}{S}}{exp(-Theta_ij) = w_i w_j / S}.
+#' This model is also discussed by Britton, Deijfen, and Martin-Löf (2006).
 #' By virtue of being a degree-constrained maximum entropy model,
 #' it generates graphs with the same degree sequence with the same probability.
-#' A third variant can be requested with \dQuote{nr}, and uses \eqn{p_{ij} = 1 - \exp(-q_{ij})}{p_ij = 1 -
-#' exp(-q_ij)}. This is the underlying simple graph of a multigraph model
-#' introduced by Norros and Reittu (2006).
+#' A third variant can be requested with \dQuote{nr}, and uses \eqn{p_{ij} = 1 - \exp(-q_{ij})}{p_ij = 1 - exp(-q_ij)}.
+#' This is the underlying simple graph of a multigraph model introduced by Norros and Reittu (2006).
 #' For a discussion of these three model variants, see Section 16.4 of Bollobás, Janson, Riordan (2007), as well as Van Der Hofstad (2013).
 #'
 #' @references Chung, F., and Lu, L. (2002). Connected components in a random

@@ -832,8 +832,8 @@ arpack_defaults <- function() {
 #'       Numeric scalar. The number of eigenvalues to be computed.
 #'     }
 #'     \item{tol}{
-#'       Numeric scalar. Stopping criterion:
-#'       the relative accuracy of the Ritz value is considered acceptable
+#'       Numeric scalar.
+#'       Stopping criterion: the relative accuracy of the Ritz value is considered acceptable
 #'       if its error is less than `tol` times its estimated value.
 #'       If this is set to zero then machine precision is used.
 #'     }

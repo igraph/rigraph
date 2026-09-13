@@ -45,8 +45,7 @@ get.stochastic <- function(
 #' Let us define \eqn{D = \textrm{diag}(\sum_{i}M_{1i},
 #' \dots, \sum_{i}M_{ni})}{D=diag( sum(M[1,i], i), ..., sum(M[n,i], i) )}
 #'
-#' The (row) stochastic matrix is defined as \deqn{W = D^{-1}M,}{W = inv(D) M,}
-#' where it is assumed that \eqn{D} is non-singular.  Column stochastic matrices are defined in a symmetric way.
+#' The (row) stochastic matrix is defined as \deqn{W = D^{-1}M,}{W = inv(D) M,} where it is assumed that \eqn{D} is non-singular.  Column stochastic matrices are defined in a symmetric way.
 #'
 #' @param graph The input graph.
 #'   Must be of class `igraph`.

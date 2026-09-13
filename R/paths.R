@@ -241,9 +241,9 @@ is_acyclic <- function(graph) {
 #' @return A list with two components:
 #'   \describe{
 #'     \item{alpha}{
-#'       Numeric vector. The 1-based rank of each vertex in the graph
-#'       such that the vertex with rank 1 is visited first,
-#'       the vertex with rank 2 is visited second and so on.
+#'       Numeric vector.
+#'       The 1-based rank of each vertex in the graph such that the vertex with rank 1 is visited first, the vertex with rank 2 is visited second and
+#'       so on.
 #'     }
 #'     \item{alpham1}{
 #'       Numeric vector. The inverse of `alpha`.

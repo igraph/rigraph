@@ -488,17 +488,13 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 #' Vertex sequences can be indexed with positive numeric vectors,
 #' negative numeric vectors, logical vectors, character vectors:
 #' \itemize{
-#'   \item When indexed with positive numeric vectors, the vertices at the
-#'     given positions in the sequence are selected. This is the same as
-#'     indexing a regular R atomic vector with positive numeric vectors.
-#'   \item When indexed with negative numeric vectors, the vertices at the
-#'     given positions in the sequence are omitted. Again, this is the same
-#'     as indexing a regular R atomic vector.
-#'   \item When indexed with a logical vector, the lengths of the vertex
-#'     sequence and the index must match, and the vertices for which the
-#'     index is `TRUE` are selected.
-#'   \item Named graphs can be indexed with character vectors,
-#'     to select vertices with the given names.
+#'   \item When indexed with positive numeric vectors, the vertices at the given positions in the sequence are selected.
+#'     This is the same as indexing a regular R atomic vector with positive numeric vectors.
+#'   \item When indexed with negative numeric vectors, the vertices at the given positions in the sequence are omitted.
+#'     Again, this is the same as indexing a regular R atomic vector.
+#'   \item When indexed with a logical vector, the lengths of the vertex sequence and the index must match, and the vertices for
+#'     which the index is `TRUE` are selected.
+#'   \item Named graphs can be indexed with character vectors, to select vertices with the given names.
 #' }
 #'
 #' @section Vertex attributes:
@@ -913,23 +909,18 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' Edge sequences can be indexed with positive numeric vectors,
 #' negative numeric vectors, logical vectors, character vectors:
 #' \itemize{
-#'   \item When indexed with positive numeric vectors, the edges at the
-#'     given positions in the sequence are selected. This is the same as
-#'     indexing a regular R atomic vector with positive numeric vectors.
-#'   \item When indexed with negative numeric vectors, the edges at the
-#'     given positions in the sequence are omitted. Again, this is the same
-#'     as indexing a regular R atomic vector.
-#'   \item When indexed with a logical vector, the lengths of the edge
-#'     sequence and the index must match, and the edges for which the
-#'     index is `TRUE` are selected.
-#'   \item Named graphs can be indexed with character vectors,
-#'     to select edges with the given names. Note that a graph may
-#'     have edge names and vertex names, and both can be used to select
-#'     edges. Edge names are simply used as names of the numeric
-#'     edge ID vector. Vertex names effectively only work in graphs without
-#'     multiple edges, and must be separated with a `|` bar character
-#'     to select an edges that incident to the two given vertices. See
-#'     examples below.
+#'   \item When indexed with positive numeric vectors, the edges at the given positions in the sequence are selected.
+#'     This is the same as indexing a regular R atomic vector with positive numeric vectors.
+#'   \item When indexed with negative numeric vectors, the edges at the given positions in the sequence are omitted.
+#'     Again, this is the same as indexing a regular R atomic vector.
+#'   \item When indexed with a logical vector, the lengths of the edge sequence and the index must match, and the edges for
+#'     which the index is `TRUE` are selected.
+#'   \item Named graphs can be indexed with character vectors, to select edges with the given names.
+#'     Note that a graph may have edge names and vertex names, and both can be used to select edges.
+#'     Edge names are simply used as names of the numeric edge ID vector.
+#'     Vertex names effectively only work in graphs without multiple edges, and must be separated with a `|` bar character to select an edges
+#'     that incident to the two given vertices.
+#'     See examples below.
 #' }
 #'
 #' @section Edge attributes:
@@ -1676,11 +1667,10 @@ print_igraph_vs_cli <- function(
   #   * compact  -- a bare list of vertex ids, or names when present; produced
   #     by `V(g)[...]`.
   #
-  # `[[` and `[` build the *same* underlying sequence: `[[.igraph.vs` merely
-  # tags its result with a "single" attribute, which is_single_index() reads
-  # here. So the only signal asking for the detailed view is that flag. We use
-  # the table only when it is set AND the graph is still alive (a sequence can
-  # outlive its graph) AND the graph actually has attributes to tabulate;
+  # `[[` and `[` build the *same* underlying sequence: `[[.igraph.vs` merely tags its result with a "single" attribute,
+  # which is_single_index() reads here.
+  # So the only signal asking for the detailed view is that flag.
+  # We use the table only when it is set AND the graph is still alive (a sequence can outlive its graph) AND the graph actually has attributes to tabulate;
   # anything else falls through to the compact list below.
   if (
     is_single_index(x) &&
@@ -1688,9 +1678,8 @@ print_igraph_vs_cli <- function(
       length(vertex_attr_names(graph)) > 0
   ) {
     vertex_attrs <- vertex_attr(graph)
-    # A data.frame needs flat columns, so it works only when every attribute is
-    # atomic. If any attribute is list-valued, drop to a named list sliced to
-    # the selected vertices instead of forcing it into a table.
+    # A data.frame needs flat columns, so it works only when every attribute is atomic.
+    # If any attribute is list-valued, drop to a named list sliced to the selected vertices instead of forcing it into a table.
     if (all(vapply(vertex_attrs, is.atomic, logical(1)))) {
       print(list2DF(vertex_attrs)[
         as.vector(x),
@@ -1760,12 +1749,11 @@ print_igraph_es_cli <- function(
   #   * compact  -- a list of "tail <arrow> head" strings; produced by
   #     `E(g)[...]`. Handled further below.
   #
-  # As with vertex sequences, `[[` and `[` build the same underlying sequence;
-  # `[[.igraph.es` only tags its result with the "single" attribute that
-  # is_single_index() reads here. The table needs only that flag and a live
-  # graph -- unlike the vertex case there is no attribute-count check, because
-  # an edge always has endpoints to tabulate (the tail/head names plus their
-  # raw numeric ids in tid/hid), so the table is never empty.
+  # As with vertex sequences, `[[` and `[` build the same underlying sequence; `[[.igraph.es` only tags its result with the "single" attribute
+  # that is_single_index() reads here.
+  # The table needs only that flag and a live graph -- unlike the vertex case there is no attribute-count check,
+  # because an edge always has endpoints to tabulate (the tail/head names plus their raw numeric ids in tid/hid),
+  # so the table is never empty.
   if (is_single_index(x) && !is.null(graph)) {
     print_edge_detail(graph, x)
     return(invisible(x))
