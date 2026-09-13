@@ -849,7 +849,7 @@ adjacent_vertices <- function(
   res <- lapply(res, `+`, 1)
 
   if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
+    res <- create_vs_list(graph, res)
   }
 
   if (is_named(graph)) {
