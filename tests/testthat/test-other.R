@@ -63,19 +63,20 @@ test_that("serialization works", {
   })
 })
 
-# The old-format `karate_oldstyle` fixture (and its `karate_oldstyle_names`)
-# used below live in helper-test-functions.R.
+# The old-format `karate_oldstyle_graph()` fixture,
+# and its `karate_oldstyle_vertex_names()`,
+# live in helper-test-functions.R.
 
 test_that("VS/ES require explicit conversion", {
   expect_snapshot_igraph_error({
-    V(karate_oldstyle)
+    V(karate_oldstyle_graph())
   })
 })
 
 test_that("VS/ES work with old data type", {
-  karate2 <- upgrade_graph(karate_oldstyle)
+  karate2 <- upgrade_graph(karate_oldstyle_graph())
   vs2 <- V(karate2)
 
   expect_length(vs2, 34)
-  expect_equal(vs2$name, karate_oldstyle_names)
+  expect_equal(vs2$name, karate_oldstyle_vertex_names())
 })

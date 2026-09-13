@@ -11,7 +11,7 @@ test_that("Graphlets work for some simple graphs", {
   expect_equal(full_glet$thresholds, 1)
 
   E(full)[1 %--% 2]$weight <- 2
-  full_glet2 <- sortgl(graphlet_basis(full))
+  full_glet2 <- sort_graphlets_by_size(graphlet_basis(full))
 
   expect_equal(
     full_glet2,
@@ -39,7 +39,7 @@ test_that("Graphlets filtering works", {
     directed = FALSE,
     vertices = data.frame(LETTERS[1:5])
   )
-  glet <- sortgl(graphlet_basis(g))
+  glet <- sort_graphlets_by_size(graphlet_basis(g))
 
   expect_equal(unvs(glet$cliques), list(1:3, 2:5))
   expect_equal(glet$thresholds, c(8, 5))
@@ -51,7 +51,7 @@ test_that("Graphlets work for a bigger graph", {
   E(g)$weight <- sample(1:5, ecount(g), replace = TRUE)
 
   gl <- graphlet_basis(g)
-  gl2 <- graphlets.old(g)
+  gl2 <- graphlet_basis_reference(g)
 
   glo <- sort(sapply(unvs(gl$cliques), paste, collapse = "-"))
   gl2o <- sort(sapply(gl2, paste, collapse = "-"))
@@ -75,31 +75,18 @@ test_that("Graphlet projection works", {
 
   gl <- graphlet_basis(g)
   glp <- graphlets(g)
-  glp2 <- graphlets.project.old(g, cliques = gl$cliques, iter = 1000)
+  glp2 <- graphlet_proj_reference(g, cliques = gl$cliques, iter = 1000)
 
   expect_equal(glp, glp2)
 })
 
 # ---- ellipsis migration: argument coverage ----------------------------
 
-# Shared fixture: the weighted overlapping-groups graph from the examples.
-# Its `weight` edge attribute has four distinct threshold levels.
-make_graphlet_graph <- function() {
-  D1 <- matrix(0, 5, 5)
-  D2 <- matrix(0, 5, 5)
-  D3 <- matrix(0, 5, 5)
-  D1[1:3, 1:3] <- 2
-  D2[3:5, 3:5] <- 3
-  D3[2:5, 2:5] <- 1
-  simplify(graph_from_adjacency_matrix(
-    D1 + D2 + D3,
-    mode = "undirected",
-    weighted = TRUE
-  ))
-}
+# The `make_weighted_graphlet_graph()` fixture used below lives in
+# helper-test-functions.R.
 
 test_that("graphlet_basis() covers weights", {
-  g <- make_graphlet_graph()
+  g <- make_weighted_graphlet_graph()
 
   # The attribute weights yield a four-clique candidate basis,
   # uniform explicit weights override them and collapse the basis
@@ -118,7 +105,7 @@ test_that("graphlet_basis() covers weights", {
 })
 
 test_that("graphlet_proj() covers all tail arguments", {
-  g <- make_graphlet_graph()
+  g <- make_weighted_graphlet_graph()
   cl <- graphlet_basis(g)$cliques
 
   # The projection returns one non-negative weight per basis clique.
@@ -144,7 +131,7 @@ test_that("graphlet_proj() covers all tail arguments", {
 })
 
 test_that("graphlets() covers all tail arguments", {
-  g <- make_graphlet_graph()
+  g <- make_weighted_graphlet_graph()
   w <- rep(1, ecount(g))
 
   # Uniform weights collapse the basis to the two maximal cliques.

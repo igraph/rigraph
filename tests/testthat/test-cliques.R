@@ -462,14 +462,8 @@ test_that("max_cliques handles errors in callback", {
 
 # ---- ellipsis migration: argument coverage ----------------------------
 
-# Shared fixture: a triangle plus a disjoint edge.
-# The `weight` vertex attribute favors the edge,
-# an explicit weight vector can flip the result to the triangle.
-make_weighted_clique_graph <- function() {
-  g <- make_full_graph(3) %du% make_full_graph(2)
-  V(g)$weight <- c(1, 1, 1, 4, 4)
-  g
-}
+# The `make_weighted_clique_graph()` fixture used below lives in
+# helper-test-functions.R.
 
 test_that("clique_size_counts() recovers legacy positional arguments", {
   # `min`, `max` and `maximal` are exercised by name above.

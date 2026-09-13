@@ -141,17 +141,11 @@ test_that("print.igrapHRG() works", {
 
 # ---- ellipsis migration: argument coverage ----------------------------
 
-# A compact shared fixture: a tiny two-clique graph and one HRG fitted to it,
-# reused by the consensus_tree() and predict_edges() blocks below.
-# Fitting a real HRG is the awkward part of constructing valid inputs there.
-hrg_fixture <- function() {
-  g <- make_full_graph(4) + make_full_graph(4)
-  igraph_with_seed(1, list(graph = g, hrg = fit_hrg(g)))
-}
+# The `hrg_graph_and_fit()` fixture used below lives in helper-test-functions.R.
 
 test_that("fit_hrg() recovers a legacy positional argument", {
   rlang::local_options(lifecycle_verbosity = "warning")
-  fx <- hrg_fixture()
+  fx <- hrg_graph_and_fit()
 
   igraph_local_seed(2)
   lifecycle::expect_deprecated(
@@ -162,7 +156,7 @@ test_that("fit_hrg() recovers a legacy positional argument", {
 })
 
 test_that("consensus_tree() covers keyword-only tail arguments", {
-  fx <- hrg_fixture()
+  fx <- hrg_graph_and_fit()
   igraph_local_seed(3)
 
   res <- consensus_tree(fx$graph, hrg = fx$hrg, start = TRUE, num.samples = 100)
@@ -173,7 +167,7 @@ test_that("consensus_tree() covers keyword-only tail arguments", {
 
 test_that("consensus_tree() recovers a legacy positional argument", {
   rlang::local_options(lifecycle_verbosity = "warning")
-  fx <- hrg_fixture()
+  fx <- hrg_graph_and_fit()
 
   # `num.samples` is pinned small (by name) to keep the two runs fast; `start`
   # is the recovered positional argument.
@@ -189,7 +183,7 @@ test_that("consensus_tree() recovers a legacy positional argument", {
 })
 
 test_that("predict_edges() covers keyword-only tail arguments", {
-  fx <- hrg_fixture()
+  fx <- hrg_graph_and_fit()
   igraph_local_seed(5)
 
   res <- predict_edges(
@@ -206,7 +200,7 @@ test_that("predict_edges() covers keyword-only tail arguments", {
 
 test_that("predict_edges() recovers a legacy positional argument", {
   rlang::local_options(lifecycle_verbosity = "warning")
-  fx <- hrg_fixture()
+  fx <- hrg_graph_and_fit()
 
   igraph_local_seed(6)
   lifecycle::expect_deprecated(
