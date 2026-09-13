@@ -24,6 +24,24 @@
       i Please use `arpack_defaults()` instead.
       i So the function arpack_defaults(), not an object called arpack_defaults.
 
+# hits_scores(scale = ) is deprecated but still works
+
+    Code
+      res_legacy <- hits_scores(g, scale = FALSE)
+    Condition
+      Warning:
+      The `scale` argument of `hits_scores()` is deprecated as of igraph 3.0.0.
+      i Please use the `normalized` argument instead.
+
+---
+
+    Code
+      hits_scores(g, normalized = FALSE, scale = FALSE)
+    Condition
+      Error in `hits_scores()`:
+      ! Argument `normalized` of `hits_scores()` was supplied more than once.
+      i It was also supplied via its legacy name `scale`.
+
 # eigen_centrality() deprecated scale argument
 
     Code
