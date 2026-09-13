@@ -219,7 +219,8 @@
     Code
       triangular_lattice_impl(dimvector = c(2, 2))
     Output
-      IGRAPH U--- 4 5 -- 
+      IGRAPH U--- 4 5 -- Triangular lattice
+      + attr: name (g/c), dimvector (g/n), mutual (g/l)
       + edges:
       [1] 1--2 1--4 1--3 2--4 3--4
 
@@ -228,7 +229,8 @@
     Code
       triangular_lattice_impl(dimvector = c(2, 2), directed = TRUE, mutual = TRUE)
     Output
-      IGRAPH D--- 4 10 -- 
+      IGRAPH D--- 4 10 -- Triangular lattice
+      + attr: name (g/c), dimvector (g/n), mutual (g/l)
       + edges:
        [1] 1->2 2->1 1->4 4->1 1->3 3->1 2->4 4->2 3->4 4->3
 
