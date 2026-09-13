@@ -14,7 +14,6 @@ as_phylo(x, ...)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{as_phylo} methods were renamed \code{as.phylo}
-for more consistency with other R methods.
+\code{as_phylo} methods were renamed \code{as.phylo} for more consistency with other R methods.
 }
 \keyword{internal}

@@ -9,17 +9,16 @@ topological.sort(graph, mode = c("out", "all", "in"))
 \arguments{
 \item{graph}{The input graph, should be directed}
 
-\item{mode}{Specifies how to use the direction of the edges.  For
-\dQuote{\code{out}}, the sorting order ensures that each node comes before
-all nodes to which it has edges, so nodes with no incoming edges go first.
-For \dQuote{\verb{in}}, it is quite the opposite: each node comes before all
-nodes from which it receives edges. Nodes with no outgoing edges go first.}
+\item{mode}{Specifies how to use the direction of the edges.
+For \dQuote{\code{out}},
+the sorting order ensures that each node comes before all nodes to which it has edges, so nodes with no incoming edges go first.
+For \dQuote{\verb{in}}, it is quite the opposite: each node comes before all nodes from which it receives edges.
+Nodes with no outgoing edges go first.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{topological.sort()} was renamed to \code{\link[=topo_sort]{topo_sort()}} to create a more
-consistent API.
+\code{topological.sort()} was renamed to \code{\link[=topo_sort]{topo_sort()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_topological_sorting}{\code{topological_sorting()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

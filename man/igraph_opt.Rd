@@ -11,17 +11,14 @@ igraph_opt(x, ..., default = NULL)
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{default}{If the specified option is not set in the options list, this
-value is returned. This facilitates retrieving an option and checking
-whether it is set and setting it separately if not.}
+\item{default}{If the specified option is not set in the options list, this value is returned.
+This facilitates retrieving an option and checking whether it is set and setting it separately if not.}
 }
 \value{
-The current value set for option \code{x}, or \code{NULL} if the option is
-unset.
+The current value set for option \code{x}, or \code{NULL} if the option is unset.
 }
 \description{
-Retrieve the current value of one igraph option set via
-\code{\link[=igraph_options]{igraph_options()}}.
+Retrieve the current value of one igraph option set via \code{\link[=igraph_options]{igraph_options()}}.
 }
 \examples{
 oldval <- igraph_opt("verbose")
@@ -30,7 +27,8 @@ layout_with_kk(make_ring(10))
 igraph_options(verbose = oldval)
 }
 \seealso{
-Similar to \code{\link[=getOption]{getOption()}}. See \code{\link[=igraph_options]{igraph_options()}} to set options.
+Similar to \code{\link[=getOption]{getOption()}}.
+See \code{\link[=igraph_options]{igraph_options()}} to set options.
 
 Other igraph options:
 \code{\link[=igraph_options]{igraph_options()}},

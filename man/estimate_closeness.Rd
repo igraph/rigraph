@@ -19,24 +19,19 @@ estimate_closeness(
 \item{vids}{The vertices for which closeness will be calculated.
 The default \code{NULL} selects all vertices.}
 
-\item{mode}{Character string, defined the types of the paths used for
-measuring the distance in directed graphs. \dQuote{in} measures the paths
-\emph{to} a vertex, \dQuote{out} measures paths \emph{from} a vertex,
-\emph{all} uses undirected paths. This argument is ignored for undirected
-graphs.}
+\item{mode}{Character string, defined the types of the paths used for measuring the distance in directed graphs.
+\dQuote{in} measures the paths \emph{to} a vertex, \dQuote{out} measures paths \emph{from} a vertex, \emph{all} uses undirected paths.
+This argument is ignored for undirected graphs.}
 
-\item{cutoff}{The maximum path length to consider when calculating the
-closeness. If zero or negative then there is no such limit.}
+\item{cutoff}{The maximum path length to consider when calculating the closeness.
+If zero or negative then there is no such limit.}
 
-\item{weights}{Optional positive weight vector for calculating weighted
-closeness. If the graph has a \code{weight} edge attribute, then this is
-used by default. Weights are used for calculating weighted shortest
-paths, so they are interpreted as distances.}
+\item{weights}{Optional positive weight vector for calculating weighted closeness.
+If the graph has a \code{weight} edge attribute, then this is used by default.
+Weights are used for calculating weighted shortest paths, so they are interpreted as distances.}
 
-\item{normalized}{Logical, whether to calculate the normalized
-closeness, i.e. the inverse average distance to all reachable vertices.
-The non-normalized closeness is the inverse of the sum of distances to
-all reachable vertices.}
+\item{normalized}{Logical, whether to calculate the normalized closeness, i.e. the inverse average distance to all reachable vertices.
+The non-normalized closeness is the inverse of the sum of distances to all reachable vertices.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

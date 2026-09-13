@@ -7,7 +7,8 @@
 dyad_census(graph)
 }
 \arguments{
-\item{graph}{The input graph. A warning is given if it is not directed.}
+\item{graph}{The input graph.
+A warning is given if it is not directed.}
 }
 \value{
 A named numeric vector with three elements:
@@ -24,9 +25,9 @@ The number of pairs with no connection between them.
 }
 }
 \description{
-Classify dyads in a directed graphs. The relationship between each pair of
-vertices is measured. It can be in three states: mutual, asymmetric or
-non-existent.
+Classify dyads in a directed graphs.
+The relationship between each pair of vertices is measured.
+It can be in three states: mutual, asymmetric or non-existent.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_dyad_census}{\code{dyad_census()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}
@@ -46,8 +47,7 @@ Wasserman, S., and Faust, K. \emph{Social Network Analysis: Methods and
 Applications.} Cambridge: Cambridge University Press. 1994.
 }
 \seealso{
-\code{\link[=triad_census]{triad_census()}} for the same classification, but with
-triples.
+\code{\link[=triad_census]{triad_census()}} for the same classification, but with triples.
 
 Other graph motifs:
 \code{\link[=count_motifs]{count_motifs()}},

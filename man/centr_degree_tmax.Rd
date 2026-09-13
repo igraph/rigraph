@@ -12,19 +12,20 @@ centr_degree_tmax(
 )
 }
 \arguments{
-\item{graph}{The input graph. It can also be \code{NULL} if \code{nodes} is given.}
+\item{graph}{The input graph.
+It can also be \code{NULL} if \code{nodes} is given.}
 
-\item{nodes}{The number of vertices. This is ignored if the graph is given.}
+\item{nodes}{The number of vertices.
+This is ignored if the graph is given.}
 
-\item{mode}{This is the same as the \code{mode} argument of \code{degree()}. Ignored
-if \code{graph} is given and the graph is undirected.}
+\item{mode}{This is the same as the \code{mode} argument of \code{degree()}.
+Ignored if \code{graph} is given and the graph is undirected.}
 
-\item{loops}{Logical, whether to consider loops edges when
-calculating the degree.}
+\item{loops}{Logical, whether to consider loops edges when calculating the degree.}
 }
 \value{
-Real scalar, the theoretical maximum (unnormalized) graph degree
-centrality score for graphs with given order and other parameters.
+Real scalar,
+the theoretical maximum (unnormalized) graph degree centrality score for graphs with given order and other parameters.
 }
 \description{
 See \code{\link[=centralize]{centralize()}} for a summary of graph centralization.

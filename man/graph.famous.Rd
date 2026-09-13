@@ -15,36 +15,29 @@ graph.famous(
 )
 }
 \arguments{
-\item{edges}{A vector defining the edges, the first edge points
-from the first element to the second, the second edge from the third
-to the fourth, etc. For a numeric vector, these are interpreted
-as internal vertex IDs. For character vectors, they are interpreted
-as vertex names.
+\item{edges}{A vector defining the edges, the first edge points from the first element to the second,
+the second edge from the third to the fourth, etc. For a numeric vector, these are interpreted as internal vertex IDs.
+For character vectors, they are interpreted as vertex names.
 
-Alternatively, this can be a character scalar, the name of a
-notable graph. See Notable graphs below. The name is case
-insensitive.
+Alternatively, this can be a character scalar, the name of a notable graph.
+See Notable graphs below.
+The name is case insensitive.
 
-Starting from igraph 0.8.0, you can also include literals here,
-via igraph's formula notation (see \code{\link[=graph_from_literal]{graph_from_literal()}}).
-In this case, the first term of the formula has to start with
-a \sQuote{\code{~}} character, just like regular formulae in R.
+Starting from igraph 0.8.0, you can also include literals here, via igraph's formula notation (see \code{\link[=graph_from_literal]{graph_from_literal()}}).
+In this case, the first term of the formula has to start with a \sQuote{\code{~}} character, just like regular formulae in R.
 See examples below.}
 
-\item{...}{For \code{make_graph()}: extra arguments for the case when the
-graph is given via a literal, see \code{\link[=graph_from_literal]{graph_from_literal()}}.
-For \code{directed_graph()} and \code{undirected_graph()}:
-Passed to \code{make_directed_graph()} or \code{make_undirected_graph()}.}
+\item{...}{For \code{make_graph()}: extra arguments for the case when the graph is given via a literal, see \code{\link[=graph_from_literal]{graph_from_literal()}}.
+For \code{directed_graph()} and \code{undirected_graph()}: Passed to \code{make_directed_graph()} or \code{make_undirected_graph()}.}
 
-\item{n}{The number of vertices in the graph. This argument is
-ignored (with a warning) if \code{edges} are symbolic vertex names. It
-is also ignored if there is a bigger vertex ID in \code{edges}. This
-means that for this function it is safe to supply zero here if the
-vertex with the largest ID is not an isolate. The default \code{NULL} uses
-the largest vertex ID in \code{edges}.}
+\item{n}{The number of vertices in the graph.
+This argument is ignored (with a warning) if \code{edges} are symbolic vertex names.
+It is also ignored if there is a bigger vertex ID in \code{edges}.
+This means that for this function it is safe to supply zero here if the vertex with the largest ID is not an isolate.
+The default \code{NULL} uses the largest vertex ID in \code{edges}.}
 
-\item{isolates}{Character vector, names of isolate vertices,
-for symbolic edge lists. It is ignored for numeric edge lists.}
+\item{isolates}{Character vector, names of isolate vertices, for symbolic edge lists.
+It is ignored for numeric edge lists.}
 
 \item{directed}{Whether to create a directed graph.}
 
@@ -56,8 +49,7 @@ Do not give both of them.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.famous()} was renamed to \code{\link[=make_graph]{make_graph()}} to create a more
-consistent API.
+\code{graph.famous()} was renamed to \code{\link[=make_graph]{make_graph()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create}{\code{create()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous}{\code{famous()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty}{\code{empty()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple}{\code{is_simple()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

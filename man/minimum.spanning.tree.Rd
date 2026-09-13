@@ -9,25 +9,24 @@ minimum.spanning.tree(graph, weights = NULL, algorithm = NULL, ...)
 \arguments{
 \item{graph}{The graph object to analyze.}
 
-\item{weights}{Numeric vector giving the weights of the edges in the
-graph. The order is determined by the edge IDs. This is ignored if the
-\code{unweighted} algorithm is chosen. Edge weights are interpreted as
-distances.}
+\item{weights}{Numeric vector giving the weights of the edges in the graph.
+The order is determined by the edge IDs.
+This is ignored if the \code{unweighted} algorithm is chosen.
+Edge weights are interpreted as distances.}
 
-\item{algorithm}{The algorithm to use for calculation. \code{unweighted} can
-be used for unweighted graphs, and \code{prim} runs Prim's algorithm for
-weighted graphs.  If this is \code{NULL} then igraph will select the
-algorithm automatically: if the graph has an edge attribute called
-\code{weight} or the \code{weights} argument is not \code{NULL} then Prim's
-algorithm is chosen, otherwise the unweighted algorithm is used.}
+\item{algorithm}{The algorithm to use for calculation.
+\code{unweighted} can be used for unweighted graphs,
+and \code{prim} runs Prim's algorithm for weighted graphs.
+If this is \code{NULL} then igraph will select the algorithm automatically:
+if the graph has an edge attribute called \code{weight} or the \code{weights} argument is not \code{NULL} then Prim's algorithm is chosen,
+otherwise the unweighted algorithm is used.}
 
 \item{...}{Additional arguments, unused.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{minimum.spanning.tree()} was renamed to \code{\link[=mst]{mst()}} to create a more
-consistent API.
+\code{minimum.spanning.tree()} was renamed to \code{\link[=mst]{mst()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_minimum_spanning_tree_prim}{\code{minimum_spanning_tree_prim()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_minimum_spanning_tree_unweighted}{\code{minimum_spanning_tree_unweighted()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

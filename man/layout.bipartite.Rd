@@ -7,28 +7,23 @@
 layout.bipartite(graph, types = NULL, hgap = 1, vgap = 1, maxiter = 100)
 }
 \arguments{
-\item{graph}{The bipartite input graph. It should have a logical
-\sQuote{\code{type}} vertex attribute, or the \code{types} argument must be
-given.}
+\item{graph}{The bipartite input graph.
+It should have a logical \sQuote{\code{type}} vertex attribute, or the \code{types} argument must be given.}
 
-\item{types}{A logical vector, the vertex types. If this argument is
-\code{NULL} (the default), then the \sQuote{\code{type}} vertex attribute is
-used.}
+\item{types}{A logical vector, the vertex types.
+If this argument is \code{NULL} (the default), then the \sQuote{\code{type}} vertex attribute is used.}
 
-\item{hgap}{Real scalar, the minimum horizontal gap between vertices in the
-same layer.}
+\item{hgap}{Real scalar, the minimum horizontal gap between vertices in the same layer.}
 
 \item{vgap}{Real scalar, the distance between the two layers.}
 
-\item{maxiter}{Integer scalar, the maximum number of iterations in the
-crossing minimization stage. 100 is a reasonable default; if you feel that
-you have too many edge crossings, increase this.}
+\item{maxiter}{Integer scalar, the maximum number of iterations in the crossing minimization stage.
+100 is a reasonable default; if you feel that you have too many edge crossings, increase this.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{layout.bipartite()} was renamed to \code{\link[=layout_as_bipartite]{layout_as_bipartite()}} to create a more
-consistent API.
+\code{layout.bipartite()} was renamed to \code{\link[=layout_as_bipartite]{layout_as_bipartite()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_bipartite}{\code{layout_bipartite()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

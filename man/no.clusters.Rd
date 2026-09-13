@@ -9,14 +9,14 @@ no.clusters(graph, mode = c("weak", "strong"))
 \arguments{
 \item{graph}{The graph to analyze.}
 
-\item{mode}{Character string, either \dQuote{weak} or \dQuote{strong}.  For
-directed graphs \dQuote{weak} implies weakly, \dQuote{strong} strongly
-connected components to search. It is ignored for undirected graphs.}
+\item{mode}{Character string, either \dQuote{weak} or \dQuote{strong}.
+For directed graphs \dQuote{weak} implies weakly,
+\dQuote{strong} strongly connected components to search.
+It is ignored for undirected graphs.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{no.clusters()} was renamed to \code{\link[=count_components]{count_components()}} to create a more
-consistent API.
+\code{no.clusters()} was renamed to \code{\link[=count_components]{count_components()}} to create a more consistent API.
 }
 \keyword{internal}

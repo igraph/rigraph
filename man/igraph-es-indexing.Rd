@@ -24,10 +24,9 @@ with some extras.
 }
 \section{Multiple indices}{
 
-When using multiple indices within the bracket, all of them
-are evaluated independently, and then the results are concatenated
-using the \code{c()} function. E.g. \code{E(g)[1, 2, .inc(1)]}
-is equivalent to \code{c(E(g)[1], E(g)[2], E(g)[.inc(1)])}.
+When using multiple indices within the bracket, all of them are evaluated independently,
+and then the results are concatenated using the \code{c()} function.
+E.g. \code{E(g)[1, 2, .inc(1)]} is equivalent to \code{c(E(g)[1], E(g)[2], E(g)[.inc(1)])}.
 }
 
 \section{Index types}{
@@ -35,45 +34,38 @@ is equivalent to \code{c(E(g)[1], E(g)[2], E(g)[.inc(1)])}.
 Edge sequences can be indexed with positive numeric vectors,
 negative numeric vectors, logical vectors, character vectors:
 \itemize{
-\item When indexed with positive numeric vectors, the edges at the
-given positions in the sequence are selected. This is the same as
-indexing a regular R atomic vector with positive numeric vectors.
-\item When indexed with negative numeric vectors, the edges at the
-given positions in the sequence are omitted. Again, this is the same
-as indexing a regular R atomic vector.
-\item When indexed with a logical vector, the lengths of the edge
-sequence and the index must match, and the edges for which the
-index is \code{TRUE} are selected.
-\item Named graphs can be indexed with character vectors,
-to select edges with the given names. Note that a graph may
-have edge names and vertex names, and both can be used to select
-edges. Edge names are simply used as names of the numeric
-edge ID vector. Vertex names effectively only work in graphs without
-multiple edges, and must be separated with a \code{|} bar character
-to select an edges that incident to the two given vertices. See
-examples below.
+\item When indexed with positive numeric vectors, the edges at the given positions in the sequence are selected.
+This is the same as indexing a regular R atomic vector with positive numeric vectors.
+\item When indexed with negative numeric vectors, the edges at the given positions in the sequence are omitted.
+Again, this is the same as indexing a regular R atomic vector.
+\item When indexed with a logical vector, the lengths of the edge sequence and the index must match, and the edges for
+which the index is \code{TRUE} are selected.
+\item Named graphs can be indexed with character vectors, to select edges with the given names.
+Note that a graph may have edge names and vertex names, and both can be used to select edges.
+Edge names are simply used as names of the numeric edge ID vector.
+Vertex names effectively only work in graphs without multiple edges, and must be separated with a \code{|} bar character to select an edges
+that incident to the two given vertices.
+See examples below.
 }
 }
 
 \section{Edge attributes}{
 
-When indexing edge sequences, edge attributes can be referred
-to simply by using their names. E.g. if a graph has a \code{weight} edge
-attribute, then \code{E(G)[weight > 1]} selects all edges with a weight
-larger than one. See more examples below. Note that attribute names mask the
-names of variables present in the calling environment; if you need to look up
-a variable and you do not want a similarly named edge attribute to mask it,
-use the \code{.env} pronoun to perform the name lookup in the calling
-environment. In other words, use \code{E(g)[.env$weight > 1]} to make sure
-that \code{weight} is looked up from the calling environment even if there is
-an edge attribute with the same name. Similarly, you can use \code{.data} to
-match attribute names only.
+When indexing edge sequences, edge attributes can be referred to simply by using their names.
+E.g. if a graph has a \code{weight} edge attribute, then \code{E(G)[weight > 1]} selects all edges with a weight larger than one.
+See more examples below.
+Note that attribute names mask the names of variables present in the calling environment;
+if you need to look up a variable and you do not want a similarly named edge attribute to mask it,
+use the \code{.env} pronoun to perform the name lookup in the calling environment.
+In other words,
+use \code{E(g)[.env$weight > 1]} to make sure that \code{weight} is looked up from the calling environment even
+if there is an edge attribute with the same name.
+Similarly, you can use \code{.data} to match attribute names only.
 }
 
 \section{Special functions}{
 
-There are some special igraph functions that can be used
-only in expressions indexing edge sequences:
+There are some special igraph functions that can be used only in expressions indexing edge sequences:
 \describe{
 \item{\code{.inc}}{
 takes a vertex sequence, and selects all edges that have at least one incident vertex in the vertex sequence.
@@ -97,9 +89,8 @@ similar to \verb{\\\%--\\\%}, but edges \emph{to} the left hand side argument,
 pointing \emph{from} the right hand side argument, are selected, in directed graphs.
 }
 }
-Note that multiple special functions can be used together, or with
-regular indices, and then their results are concatenated. See more
-examples below.
+Note that multiple special functions can be used together, or with regular indices, and then their results are concatenated.
+See more examples below.
 }
 
 \examples{

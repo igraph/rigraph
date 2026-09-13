@@ -11,13 +11,12 @@ unfold_tree(graph, ..., mode = c("all", "out", "in", "total"), roots)
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{mode}{Character string, defined the types of the paths used for the
-breadth-first search. \dQuote{out} follows the outgoing, \dQuote{in} the
-incoming edges, \dQuote{all} and \dQuote{total} both of them. This argument
-is ignored for undirected graphs.}
+\item{mode}{Character string, defined the types of the paths used for the breadth-first search.
+\dQuote{out} follows the outgoing, \dQuote{in} the incoming edges, \dQuote{all} and \dQuote{total} both of them.
+This argument is ignored for undirected graphs.}
 
-\item{roots}{A vector giving the vertices from which the breadth-first
-search is performed. Typically it contains one vertex per component.}
+\item{roots}{A vector giving the vertices from which the breadth-first search is performed.
+Typically it contains one vertex per component.}
 }
 \value{
 A list with two components:
@@ -31,14 +30,12 @@ A numeric vector, it gives a mapping from the vertices of the new graph to the v
 }
 }
 \description{
-Perform a breadth-first search on a graph and convert it into a tree or
-forest by replicating vertices that were found more than once.
+Perform a breadth-first search on a graph and convert it into a tree or forest by replicating vertices that were found more than once.
 }
 \details{
 A forest is a graph, whose components are trees.
 
-The \code{roots} vector can be calculated by simply doing a topological sort
-in all components of the graph, see the examples below.
+The \code{roots} vector can be calculated by simply doing a topological sort in all components of the graph, see the examples below.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_unfold_tree}{\code{unfold_tree()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

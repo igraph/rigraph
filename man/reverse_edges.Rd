@@ -12,20 +12,18 @@ reverse_edges(graph, eids = NULL)
 \arguments{
 \item{graph}{The input graph.}
 
-\item{eids}{The edge IDs of the edges to reverse. The default \code{NULL}
-reverses all edges.}
+\item{eids}{The edge IDs of the edges to reverse.
+The default \code{NULL} reverses all edges.}
 
 \item{x}{The input graph.}
 }
 \value{
-The result graph where the direction of the edges with the given
-IDs are reversed
+The result graph where the direction of the edges with the given IDs are reversed
 }
 \description{
-The new graph will contain the same vertices, edges and attributes as
-the original graph, except that the direction of the edges selected by
-their edge IDs in the \code{eids} argument will be reversed. When reversing
-all edges, this operation is also known as graph transpose.
+The new graph will contain the same vertices, edges and attributes as the original graph,
+except that the direction of the edges selected by their edge IDs in the \code{eids} argument will be reversed.
+When reversing all edges, this operation is also known as graph transpose.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_reverse_edges}{\code{reverse_edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

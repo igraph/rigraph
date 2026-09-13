@@ -15,7 +15,8 @@ layout_with_gem(
 )
 }
 \arguments{
-\item{graph}{The input graph. Edge directions are ignored.}
+\item{graph}{The input graph.
+Edge directions are ignored.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
@@ -23,24 +24,22 @@ layout_with_gem(
 depending on the \code{dim} argument.
 Default: \code{NULL}.}
 
-\item{maxiter}{The maximum number of iterations to perform. Updating a
-single vertex counts as an iteration. The default \code{NULL} uses 40 * n * n,
-where n is the number of vertices. The original paper suggests 4 * n * n,
-but this usually only works if the other parameters are set up carefully.}
+\item{maxiter}{The maximum number of iterations to perform.
+Updating a single vertex counts as an iteration.
+The default \code{NULL} uses 40 * n * n, where n is the number of vertices.
+The original paper suggests 4 * n * n, but this usually only works if the other parameters are set up carefully.}
 
-\item{temp.max}{The maximum allowed local temperature. The default \code{NULL}
-uses the number of vertices.}
+\item{temp.max}{The maximum allowed local temperature.
+The default \code{NULL} uses the number of vertices.}
 
-\item{temp.min}{The global temperature at which the algorithm terminates
-(even before reaching \code{maxiter} iterations). A reasonable default is
-1/10.}
+\item{temp.min}{The global temperature at which the algorithm terminates (even before reaching \code{maxiter} iterations).
+A reasonable default is 1/10.}
 
-\item{temp.init}{Initial local temperature of all vertices. The default
-\code{NULL} uses the square root of the number of vertices.}
+\item{temp.init}{Initial local temperature of all vertices.
+The default \code{NULL} uses the square root of the number of vertices.}
 }
 \value{
-A numeric matrix with two columns, and as many rows as the number of
-vertices.
+A numeric matrix with two columns, and as many rows as the number of vertices.
 }
 \description{
 Place vertices on the plane using the GEM force-directed layout algorithm.
@@ -65,9 +64,8 @@ Layout Algorithm for Undirected Graphs, \emph{Proc. Graph Drawing 1994},
 LNCS 894, pp. 388-403, 1995.
 }
 \seealso{
-\code{\link[=layout_with_fr]{layout_with_fr()}},
-\code{\link[=plot.igraph]{plot.igraph()}}, \code{\link[=tkplot]{tkplot()}}. See \code{\link[=with_gem]{with_gem()}} to build a lazy layout
-specification for \code{\link[=add_layout_]{add_layout_()}}.
+\code{\link[=layout_with_fr]{layout_with_fr()}}, \code{\link[=plot.igraph]{plot.igraph()}}, \code{\link[=tkplot]{tkplot()}}.
+See \code{\link[=with_gem]{with_gem()}} to build a lazy layout specification for \code{\link[=add_layout_]{add_layout_()}}.
 
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},

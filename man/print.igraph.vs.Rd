@@ -9,11 +9,10 @@
 \arguments{
 \item{x}{A vertex sequence.}
 
-\item{full}{Whether to show the full sequence, or truncate the output
-to the screen size.}
+\item{full}{Whether to show the full sequence, or truncate the output to the screen size.}
 
-\item{id}{Whether to print the graph ID. The default \code{NULL} uses the
-\code{print.id} igraph option.}
+\item{id}{Whether to print the graph ID.
+The default \code{NULL} uses the \code{print.id} igraph option.}
 
 \item{...}{These arguments are currently ignored.}
 }
@@ -21,14 +20,12 @@ to the screen size.}
 The vertex sequence, invisibly.
 }
 \description{
-For long vertex sequences, the printing is truncated to fit to the
-screen. Use \code{\link[=print]{print()}} explicitly and the \code{full} argument to
-see the full sequence.
+For long vertex sequences, the printing is truncated to fit to the screen.
+Use \code{\link[=print]{print()}} explicitly and the \code{full} argument to see the full sequence.
 }
 \details{
-Vertex sequence created with the double bracket operator are
-printed differently, together with all attributes of the vertices
-in the sequence, as a table.
+Vertex sequence created with the double bracket operator are printed differently,
+together with all attributes of the vertices in the sequence, as a table.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

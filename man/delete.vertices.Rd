@@ -14,8 +14,7 @@ delete.vertices(graph, v)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{delete.vertices()} was renamed to \code{\link[=delete_vertices]{delete_vertices()}} to create a more
-consistent API.
+\code{delete.vertices()} was renamed to \code{\link[=delete_vertices]{delete_vertices()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_delete_vertices}{\code{delete_vertices()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

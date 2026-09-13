@@ -16,8 +16,7 @@ graph.full(n, directed = FALSE, loops = FALSE)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.full()} was renamed to \code{\link[=make_full_graph]{make_full_graph()}} to create a more
-consistent API.
+\code{graph.full()} was renamed to \code{\link[=make_full_graph]{make_full_graph()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_full}{\code{full()}}

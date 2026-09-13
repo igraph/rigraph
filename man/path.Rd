@@ -10,22 +10,18 @@ path(...)
 \item{...}{See details below.}
 }
 \value{
-A special object that can be used together with igraph
-graphs and the plus and minus operators.
+A special object that can be used together with igraph graphs and the plus and minus operators.
 }
 \description{
 This function can be used to add or delete edges that form a path.
 }
 \details{
-When adding edges via \code{+}, all unnamed arguments are
-concatenated, and each element of a final vector is interpreted
-as a vertex in the graph. For a vector of length \eqn{n+1}, \eqn{n}
-edges are then added, from vertex 1 to vertex 2, from vertex 2 to vertex
-3, etc. Named arguments will be used as edge attributes for the new
-edges.
+When adding edges via \code{+}, all unnamed arguments are concatenated,
+and each element of a final vector is interpreted as a vertex in the graph.
+For a vector of length \eqn{n+1}, \eqn{n} edges are then added, from vertex 1 to vertex 2, from vertex 2 to vertex 3,
+etc. Named arguments will be used as edge attributes for the new edges.
 
-When deleting edges, all attributes are concatenated and then passed
-to \code{\link[=delete_edges]{delete_edges()}}.
+When deleting edges, all attributes are concatenated and then passed to \code{\link[=delete_edges]{delete_edges()}}.
 }
 \examples{
 # Create a (directed) wheel

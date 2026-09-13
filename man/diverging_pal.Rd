@@ -7,8 +7,8 @@
 diverging_pal(n)
 }
 \arguments{
-\item{n}{The number of colors in the palette. The maximum is eleven
-currently.}
+\item{n}{The number of colors in the palette.
+The maximum is eleven currently.}
 }
 \value{
 A character vector of RGB color codes.
@@ -18,10 +18,8 @@ This is the \sQuote{PuOr} palette from \url{https://colorbrewer2.org/}.
 It has at most eleven colors.
 }
 \details{
-This is similar to \code{\link[=sequential_pal]{sequential_pal()}}, but it also puts
-emphasis on the mid-range values, plus the the two extreme ends.
-Use this palette, if you have such a quantity to mark with vertex
-colors.
+This is similar to \code{\link[=sequential_pal]{sequential_pal()}}, but it also puts emphasis on the mid-range values, plus the the two extreme ends.
+Use this palette, if you have such a quantity to mark with vertex colors.
 }
 \examples{
 \dontshow{if (rlang::is_installed(c("igraphdata", "scales"))) withAutoprint(\{ # examplesIf}

@@ -12,22 +12,19 @@ hierarchical_sbm(n, m, rho, C, p)
 \arguments{
 \item{n}{Integer scalar, the number of vertices.}
 
-\item{m}{Integer scalar, the number of vertices per block. \code{n / m} must
-be integer. Alternatively, an integer vector of block sizes, if not all the
-blocks have equal sizes.}
+\item{m}{Integer scalar, the number of vertices per block.
+\code{n / m} must be integer.
+Alternatively, an integer vector of block sizes, if not all the blocks have equal sizes.}
 
-\item{rho}{Numeric vector, the fraction of vertices per cluster, within a
-block. Must sum up to 1, and \code{rho * m} must be integer for all elements
-of rho. Alternatively a list of rho vectors, one for each block, if they are
-not the same for all blocks.}
+\item{rho}{Numeric vector, the fraction of vertices per cluster, within a block.
+Must sum up to 1, and \code{rho * m} must be integer for all elements of rho.
+Alternatively a list of rho vectors, one for each block, if they are not the same for all blocks.}
 
-\item{C}{A square, symmetric numeric matrix, the Bernoulli rates for the
-clusters within a block. Its size must mach the size of the \code{rho}
-vector. Alternatively, a list of square matrices, if the Bernoulli rates
-differ in different blocks.}
+\item{C}{A square, symmetric numeric matrix, the Bernoulli rates for the clusters within a block.
+Its size must mach the size of the \code{rho} vector.
+Alternatively, a list of square matrices, if the Bernoulli rates differ in different blocks.}
 
-\item{p}{Numeric scalar, the Bernoulli rate of connections between vertices
-in different blocks.}
+\item{p}{Numeric scalar, the Bernoulli rate of connections between vertices in different blocks.}
 }
 \value{
 An igraph graph.
@@ -36,8 +33,7 @@ An igraph graph.
 Sampling from a hierarchical stochastic block model of networks.
 }
 \details{
-The function generates a random graph according to the hierarchical
-stochastic block model.
+The function generates a random graph according to the hierarchical stochastic block model.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_hsbm_game}{\code{hsbm_game()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_hsbm_list_game}{\code{hsbm_list_game()}}

@@ -7,13 +7,11 @@
 graph.intersection(...)
 }
 \arguments{
-\item{...}{Arguments, their number and interpretation depends on
-the function that implements \code{intersection()}.}
+\item{...}{Arguments, their number and interpretation depends on the function that implements \code{intersection()}.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.intersection()} was renamed to \code{\link[=intersection]{intersection()}} to create a more
-consistent API.
+\code{graph.intersection()} was renamed to \code{\link[=intersection]{intersection()}} to create a more consistent API.
 }
 \keyword{internal}

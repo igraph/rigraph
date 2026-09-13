@@ -9,16 +9,15 @@ graph.extended.chordal.ring(n, w, directed = FALSE)
 \arguments{
 \item{n}{The number of vertices.}
 
-\item{w}{A matrix which specifies the extended chordal ring. See
-details below.}
+\item{w}{A matrix which specifies the extended chordal ring.
+See details below.}
 
 \item{directed}{Logical, whether or not to create a directed graph.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.extended.chordal.ring()} was renamed to \code{\link[=make_chordal_ring]{make_chordal_ring()}} to create a more
-consistent API.
+\code{graph.extended.chordal.ring()} was renamed to \code{\link[=make_chordal_ring]{make_chordal_ring()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_extended_chordal_ring}{\code{extended_chordal_ring()}}

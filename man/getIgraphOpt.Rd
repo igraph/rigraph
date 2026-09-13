@@ -9,14 +9,12 @@ getIgraphOpt(x, default = NULL)
 \arguments{
 \item{x}{A character string holding an option name.}
 
-\item{default}{If the specified option is not set in the options list, this
-value is returned. This facilitates retrieving an option and checking
-whether it is set and setting it separately if not.}
+\item{default}{If the specified option is not set in the options list, this value is returned.
+This facilitates retrieving an option and checking whether it is set and setting it separately if not.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{getIgraphOpt()} was renamed to \code{\link[=igraph_opt]{igraph_opt()}} to create a more
-consistent API.
+\code{getIgraphOpt()} was renamed to \code{\link[=igraph_opt]{igraph_opt()}} to create a more consistent API.
 }
 \keyword{internal}

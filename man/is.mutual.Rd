@@ -9,16 +9,15 @@ is.mutual(graph, eids = E(graph), loops = TRUE)
 \arguments{
 \item{graph}{The input graph.}
 
-\item{eids}{Edge sequence, the edges that will be probed. The default
-\code{NULL} includes all edges in the order of their IDs.}
+\item{eids}{Edge sequence, the edges that will be probed.
+The default \code{NULL} includes all edges in the order of their IDs.}
 
 \item{loops}{Logical, whether to consider directed self-loops to be mutual.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{is.mutual()} was renamed to \code{\link[=which_mutual]{which_mutual()}} to create a more
-consistent API.
+\code{is.mutual()} was renamed to \code{\link[=which_mutual]{which_mutual()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_mutual}{\code{is_mutual()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

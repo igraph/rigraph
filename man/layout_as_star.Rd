@@ -11,23 +11,20 @@ layout_as_star(graph, ..., center = NULL, order = NULL)
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{center}{The ID of the vertex to put in the center. The default
-\code{NULL} uses the first vertex.}
+\item{center}{The ID of the vertex to put in the center.
+The default \code{NULL} uses the first vertex.}
 
 \item{order}{Numeric vector, the order of the vertices along the perimeter.
 The default ordering is given by the vertex IDs.}
 }
 \value{
-A matrix with two columns and as many rows as the number of vertices
-in the input graph.
+A matrix with two columns and as many rows as the number of vertices in the input graph.
 }
 \description{
-A simple layout generator, that places one vertex in the center of a circle
-and the rest of the vertices equidistantly on the perimeter.
+A simple layout generator, that places one vertex in the center of a circle and the rest of the vertices equidistantly on the perimeter.
 }
 \details{
-It is possible to choose the vertex that will be in the center, and the
-order of the vertices can be also given.
+It is possible to choose the vertex that will be in the center, and the order of the vertices can be also given.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_star}{\code{layout_star()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_circle}{\code{layout_circle()}}
@@ -42,10 +39,9 @@ layout_as_star(g)
 layout_(g, as_star())
 }
 \seealso{
-\code{\link[=layout]{layout()}} and \code{\link[=layout_with_drl]{layout_with_drl()}} for other layout
-algorithms, \code{\link[=plot.igraph]{plot.igraph()}} and \code{\link[=tkplot]{tkplot()}} on how to
-plot graphs and \code{\link[=star]{star()}} on how to create ring graphs. See \code{\link[=as_star]{as_star()}} to
-build a lazy layout specification for \code{\link[=add_layout_]{add_layout_()}}.
+\code{\link[=layout]{layout()}} and \code{\link[=layout_with_drl]{layout_with_drl()}} for other layout algorithms,
+\code{\link[=plot.igraph]{plot.igraph()}} and \code{\link[=tkplot]{tkplot()}} on how to plot graphs and \code{\link[=star]{star()}} on how to create ring graphs.
+See \code{\link[=as_star]{as_star()}} to build a lazy layout specification for \code{\link[=add_layout_]{add_layout_()}}.
 
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},

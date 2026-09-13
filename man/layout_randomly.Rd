@@ -11,28 +11,25 @@ layout_randomly(graph, ..., dim = c(2, 3))
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{dim}{Integer scalar, the dimension of the space to use. It must be 2
-or 3.}
+\item{dim}{Integer scalar, the dimension of the space to use.
+It must be 2 or 3.}
 }
 \value{
 A numeric matrix with two or three columns.
 }
 \description{
-This function uniformly randomly places the vertices of the graph in two or
-three dimensions.
+This function uniformly randomly places the vertices of the graph in two or three dimensions.
 }
 \details{
-Randomly places vertices on a [-1,1] square (in 2d) or in a cube (in 3d). It
-is probably a useless layout, but it can use as a starting point for other
-layout generators.
+Randomly places vertices on a [-1,1] square (in 2d) or in a cube (in 3d).
+It is probably a useless layout, but it can use as a starting point for other layout generators.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_random_3d}{\code{layout_random_3d()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_random}{\code{layout_random()}}
 }
 
 \seealso{
-\code{\link[=randomly]{randomly()}} to build a lazy layout specification for
-\code{\link[=add_layout_]{add_layout_()}}.
+\code{\link[=randomly]{randomly()}} to build a lazy layout specification for \code{\link[=add_layout_]{add_layout_()}}.
 
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},

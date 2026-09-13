@@ -16,8 +16,8 @@ A logical vector of length one.
 This function tests whether the given graph is free of cycles.
 }
 \details{
-This function looks for directed cycles in directed graphs and undirected
-cycles in undirected graphs. Use \code{\link[=find_cycle]{find_cycle()}} to return a specific cycle.
+This function looks for directed cycles in directed graphs and undirected cycles in undirected graphs.
+Use \code{\link[=find_cycle]{find_cycle()}} to return a specific cycle.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_is_acyclic}{\code{is_acyclic()}}
@@ -30,8 +30,7 @@ is_acyclic(g)
 is_acyclic(as_undirected(g))
 }
 \seealso{
-\code{\link[=is_forest]{is_forest()}} and \code{\link[=is_dag]{is_dag()}} for functions specific to undirected
-and directed graphs.
+\code{\link[=is_forest]{is_forest()}} and \code{\link[=is_dag]{is_dag()}} for functions specific to undirected and directed graphs.
 
 Graph cycles:
 \code{\link[=feedback_arc_set]{feedback_arc_set()}},

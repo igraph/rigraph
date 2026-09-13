@@ -12,8 +12,7 @@ bipartite.mapping(graph)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{bipartite.mapping()} was renamed to \code{\link[=bipartite_mapping]{bipartite_mapping()}} to create a more
-consistent API.
+\code{bipartite.mapping()} was renamed to \code{\link[=bipartite_mapping]{bipartite_mapping()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_is_bipartite}{\code{is_bipartite()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

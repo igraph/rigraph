@@ -12,41 +12,32 @@ match_vertices(A, B, m, start, iteration)
 
 \item{B}{a numeric matrix, the adjacency matrix of the second graph}
 
-\item{m}{The number of seeds. The first \code{m} vertices of both graphs are
-matched.}
+\item{m}{The number of seeds.
+The first \code{m} vertices of both graphs are matched.}
 
-\item{start}{a numeric matrix, the permutation matrix estimate is
-initialized with \code{start}}
+\item{start}{a numeric matrix, the permutation matrix estimate is initialized with \code{start}}
 
 \item{iteration}{The number of iterations for the Frank-Wolfe algorithm}
 }
 \value{
-A numeric matrix which is the permutation matrix that determines the
-bijection between the graphs of \code{A} and \code{B}
+A numeric matrix which is the permutation matrix that determines the bijection between the graphs of \code{A} and \code{B}
 }
 \description{
-Given two adjacency matrices \code{A} and \code{B} of the same size, match
-the two graphs with the help of \code{m} seed vertex pairs which correspond
-to the first \code{m} rows (and columns) of the adjacency matrices.
+Given two adjacency matrices \code{A} and \code{B} of the same size,
+match the two graphs with the help of \code{m} seed vertex pairs
+which correspond to the first \code{m} rows (and columns) of the adjacency matrices.
 }
 \details{
-The approximate graph matching problem is to find a bijection between the
-vertices of two graphs , such that the number of edge disagreements between
-the corresponding vertex pairs is minimized. For seeded graph matching, part
-of the bijection that consist of known correspondences (the seeds) is known
-and the problem task is to complete the bijection by estimating the
-permutation matrix that permutes the rows and columns of the adjacency
-matrix of the second graph.
+The approximate graph matching problem is to find a bijection between the vertices of two graphs , such that the number of edge disagreements between the corresponding vertex pairs is minimized.
+For seeded graph matching,
+part of the bijection that consist of known correspondences (the seeds) is known and the problem task is to complete the bijection by estimating the permutation matrix that permutes the rows and columns of the adjacency matrix of the second graph.
 
-It is assumed that for the two supplied adjacency matrices \code{A} and
-\code{B}, both of size \eqn{n\times n}{n*n}, the first \eqn{m} rows(and
-columns) of \code{A} and \code{B} correspond to the same vertices in both
-graphs. That is, the \eqn{n \times n}{n*n} permutation matrix that defines
-the bijection is \eqn{I_{m} \bigoplus P} for a \eqn{(n-m)\times
+It is assumed that for the two supplied adjacency matrices \code{A} and \code{B}, both of size \eqn{n\times n}{n*n},
+the first \eqn{m} rows(and columns) of \code{A} and \code{B} correspond to the same vertices in both graphs.
+That is, the \eqn{n \times n}{n*n} permutation matrix that defines the bijection is \eqn{I_{m} \bigoplus P} for a \eqn{(n-m)\times
 (n-m)}{(n-m)*(n-m)} permutation matrix \eqn{P} and \eqn{m} times \eqn{m}
-identity matrix \eqn{I_{m}}. The function \code{match_vertices()} estimates
-the permutation matrix \eqn{P} via an optimization algorithm based on the
-Frank-Wolfe algorithm.
+identity matrix \eqn{I_{m}}.
+The function \code{match_vertices()} estimates the permutation matrix \eqn{P} via an optimization algorithm based on the Frank-Wolfe algorithm.
 
 See references for further details.
 }

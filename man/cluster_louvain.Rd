@@ -7,48 +7,42 @@
 cluster_louvain(graph, ..., weights = NULL, resolution = 1)
 }
 \arguments{
-\item{graph}{The input graph. It must be undirected.}
+\item{graph}{The input graph.
+It must be undirected.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{weights}{The weights of the edges. It must be a positive numeric vector,
-\code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
-\sQuote{weight} edge attribute, then that attribute will be used. If
-\code{NULL} and no such attribute is present, then the edges will have equal
-weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
-attribute, but you don't want to use it for community detection. A larger
-edge weight means a stronger connection for this function.}
+\item{weights}{The weights of the edges.
+It must be a positive numeric vector, \code{NULL} or \code{NA}.
+If it is \code{NULL} and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
+If \code{NULL} and no such attribute is present, then the edges will have equal weights.
+Set this to \code{NA} if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for community detection.
+A larger edge weight means a stronger connection for this function.}
 
-\item{resolution}{Optional resolution parameter that allows the user to
-adjust the resolution parameter of the modularity function that the algorithm
-uses internally. Lower values typically yield fewer, larger clusters. The
-original definition of modularity is recovered when the resolution parameter
-is set to 1.}
+\item{resolution}{Optional resolution parameter that allows the user to adjust the resolution parameter of the modularity function that the algorithm uses internally.
+Lower values typically yield fewer, larger clusters.
+The original definition of modularity is recovered when the resolution parameter is set to 1.}
 }
 \value{
-\code{cluster_louvain()} returns a \code{\link[=communities]{communities()}}
-object, please see the \code{\link[=communities]{communities()}} manual page for details.
+\code{cluster_louvain()} returns a \code{\link[=communities]{communities()}} object, please see the \code{\link[=communities]{communities()}} manual page for details.
 }
 \description{
-This function implements the multi-level modularity optimization algorithm
-for finding community structure, see references below. It is based on the
-modularity measure and a hierarchical approach.
+This function implements the multi-level modularity optimization algorithm for finding community structure, see references below.
+It is based on the modularity measure and a hierarchical approach.
 }
 \details{
-This function implements the multi-level modularity optimization algorithm
-for finding community structure, see VD Blondel, J-L Guillaume, R Lambiotte
-and E Lefebvre: Fast unfolding of community hierarchies in large networks,
+This function implements the multi-level modularity optimization algorithm for finding community structure, see VD Blondel,
+J-L Guillaume, R Lambiotte and E Lefebvre: Fast unfolding of community hierarchies in large networks,
 \url{https://arxiv.org/abs/0803.0476} for the details.
 
 It is based on the modularity measure and a hierarchical approach.
-Initially, each vertex is assigned to a community on its own. In every step,
-vertices are re-assigned to communities in a local, greedy way: each vertex
-is moved to the community with which it achieves the highest contribution to
-modularity. When no vertices can be reassigned, each community is considered
-a vertex on its own, and the process starts again with the merged
-communities. The process stops when there is only a single vertex left or
-when the modularity cannot be increased any more in a step. Since igraph 1.3,
-vertices are processed in a random order.
+Initially, each vertex is assigned to a community on its own.
+In every step, vertices are re-assigned to communities in a local, greedy way:
+each vertex is moved to the community with which it achieves the highest contribution to modularity.
+When no vertices can be reassigned, each community is considered a vertex on its own,
+and the process starts again with the merged communities.
+The process stops when there is only a single vertex left or when the modularity cannot be increased any more in a step.
+Since igraph 1.3, vertices are processed in a random order.
 
 This function was contributed by Tom Gregorovic.
 }
@@ -73,13 +67,8 @@ Mech. (2008) P10008
 See \code{\link[=communities]{communities()}} for extracting the membership,
 modularity scores, etc. from the results.
 
-Other community detection algorithms: \code{\link[=cluster_walktrap]{cluster_walktrap()}},
-\code{\link[=cluster_spinglass]{cluster_spinglass()}},
-\code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}},
-\code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}},
-\code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}},
-\code{\link[=cluster_label_prop]{cluster_label_prop()}}
-\code{\link[=cluster_leiden]{cluster_leiden()}}
+Other community detection algorithms: \code{\link[=cluster_walktrap]{cluster_walktrap()}}, \code{\link[=cluster_spinglass]{cluster_spinglass()}}, \code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}},
+\code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}}, \code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}}, \code{\link[=cluster_label_prop]{cluster_label_prop()}} \code{\link[=cluster_leiden]{cluster_leiden()}}
 
 Community detection:
 \code{\link[=as_membership]{as_membership()}},

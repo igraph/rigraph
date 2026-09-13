@@ -9,19 +9,15 @@ graph.star(n, mode = c("in", "out", "mutual", "undirected"), center = 1)
 \arguments{
 \item{n}{Number of vertices.}
 
-\item{mode}{It defines the direction of the
-edges, \verb{in}: the edges point \emph{to} the center, \code{out}:
-the edges point \emph{from} the center, \code{mutual}: a directed
-star is created with mutual edges, \code{undirected}: the edges
-are undirected.}
+\item{mode}{It defines the direction of the edges, \verb{in}: the edges point \emph{to} the center, \code{out}: the edges point \emph{from} the center,
+\code{mutual}: a directed star is created with mutual edges, \code{undirected}: the edges are undirected.}
 
 \item{center}{ID of the center vertex.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.star()} was renamed to \code{\link[=make_star]{make_star()}} to create a more
-consistent API.
+\code{graph.star()} was renamed to \code{\link[=make_star]{make_star()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_star}{\code{star()}}

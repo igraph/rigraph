@@ -9,10 +9,9 @@ layout_in_circle(graph, order = NULL)
 \arguments{
 \item{graph}{The input graph.}
 
-\item{order}{The vertices to place on the circle, in the order of their
-desired placement. Vertices that are not included here will be placed at
-(0,0). The default \code{NULL} selects all vertices, in the order of their
-IDs.}
+\item{order}{The vertices to place on the circle, in the order of their desired placement.
+Vertices that are not included here will be placed at (0,0).
+The default \code{NULL} selects all vertices, in the order of their IDs.}
 }
 \value{
 A numeric matrix with two columns, and one row for each vertex.
@@ -21,8 +20,7 @@ A numeric matrix with two columns, and one row for each vertex.
 Place vertices on a circle, in the order of their vertex IDs.
 }
 \details{
-If you want to order the vertices differently, then permute them using the
-\code{\link[=permute]{permute()}} function.
+If you want to order the vertices differently, then permute them using the \code{\link[=permute]{permute()}} function.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_circle}{\code{layout_circle()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
@@ -47,8 +45,7 @@ plot(karate, layout = coords)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-\code{\link[=in_circle]{in_circle()}} to build a lazy layout specification for
-\code{\link[=add_layout_]{add_layout_()}}.
+\code{\link[=in_circle]{in_circle()}} to build a lazy layout specification for \code{\link[=add_layout_]{add_layout_()}}.
 
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},

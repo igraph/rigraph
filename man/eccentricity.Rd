@@ -19,31 +19,26 @@ eccentricity(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{weights}{Possibly a numeric vector giving edge weights. If this is
-\code{NULL} and the graph has a \code{weight} edge attribute, then the
-attribute is used. If this is \code{NA} then no weights are used (even if
-the graph has a \code{weight} attribute). In a weighted graph, the length
-of a path is the sum of the weights of its constituent edges.}
+\item{weights}{Possibly a numeric vector giving edge weights.
+If this is \code{NULL} and the graph has a \code{weight} edge attribute, then the attribute is used.
+If this is \code{NA} then no weights are used (even if the graph has a \code{weight} attribute).
+In a weighted graph, the length of a path is the sum of the weights of its constituent edges.}
 
-\item{mode}{Character constant, gives whether the shortest paths to or from
-the given vertices should be calculated for directed graphs. If \code{out}
-then the shortest paths \emph{from} the vertex, if \verb{in} then \emph{to}
-it will be considered. If \code{all}, the default, then the graph is treated
-as undirected, i.e. edge directions are not taken into account. This
-argument is ignored for undirected graphs.}
+\item{mode}{Character constant,
+gives whether the shortest paths to or from the given vertices should be calculated for directed graphs.
+If \code{out} then the shortest paths \emph{from} the vertex, if \verb{in} then \emph{to} it will be considered.
+If \code{all}, the default, then the graph is treated as undirected, i.e. edge directions are not taken into account.
+This argument is ignored for undirected graphs.}
 }
 \value{
-\code{eccentricity()} returns a numeric vector, containing the
-eccentricity score of each given vertex.
+\code{eccentricity()} returns a numeric vector, containing the eccentricity score of each given vertex.
 }
 \description{
-The eccentricity of a vertex is its shortest path distance from the farthest
-other node in the graph.
+The eccentricity of a vertex is its shortest path distance from the farthest other node in the graph.
 }
 \details{
-The eccentricity of a vertex is calculated by measuring the shortest
-distance from (or to) the vertex, to (or from) all vertices in the graph,
-and taking the maximum.
+The eccentricity of a vertex is calculated by measuring the shortest distance from (or to) the vertex,
+to (or from) all vertices in the graph, and taking the maximum.
 
 This implementation ignores vertex pairs that are in different components.
 Isolate vertices have eccentricity zero.

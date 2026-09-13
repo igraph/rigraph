@@ -17,71 +17,57 @@ local_scan(
 )
 }
 \arguments{
-\item{graph.us, graph}{An igraph object, the graph for which the scan
-statistics will be computed}
+\item{graph.us, graph}{An igraph object, the graph for which the scan statistics will be computed}
 
 \item{graph.them}{An igraph object on which the \sQuote{them} statistics is computed,
 i.e. the neighborhoods calculated from \code{graph.us} are evaluated on \code{graph.them}.
 Default: \code{NULL}.}
 
-\item{k}{An integer scalar, the size of the local neighborhood for each
-vertex. Should be non-negative.}
+\item{k}{An integer scalar, the size of the local neighborhood for each vertex.
+Should be non-negative.}
 
-\item{FUN}{Character, a function name, or a function object itself, for
-computing the local statistic in each neighborhood. If \code{NULL}(the
-default value), \code{ecount()} is used for unweighted graphs (if
-\code{weighted=FALSE}) and a function that computes the sum of edge
-weights is used for weighted graphs (if \code{weighted=TRUE}). This
-argument is ignored if \code{k} is zero.}
+\item{FUN}{Character, a function name, or a function object itself, for computing the local statistic in each neighborhood.
+If \code{NULL}(the default value),
+\code{ecount()} is used for unweighted graphs (if \code{weighted=FALSE}) and a function that computes the sum of edge weights is used for weighted graphs (if \code{weighted=TRUE}).
+This argument is ignored if \code{k} is zero.}
 
-\item{weighted}{Logical, TRUE if the edge weights should be used
-for computation of the scan statistic. If TRUE, the graph should be
-weighted.  Note that this argument is ignored if \code{FUN} is not
-\code{NULL}, \code{"ecount"} and \code{"sumweights"}.}
+\item{weighted}{Logical, TRUE if the edge weights should be used for computation of the scan statistic.
+If TRUE, the graph should be weighted.
+Note that this argument is ignored if \code{FUN} is not \code{NULL}, \code{"ecount"} and \code{"sumweights"}.}
 
-\item{mode}{Character scalar, the kind of neighborhoods to use for the
-calculation. One of \sQuote{\code{out}}, \sQuote{\verb{in}},
-\sQuote{\code{all}} or \sQuote{\code{total}}. This argument is ignored
-for undirected graphs.}
+\item{mode}{Character scalar, the kind of neighborhoods to use for the calculation.
+One of \sQuote{\code{out}}, \sQuote{\verb{in}}, \sQuote{\code{all}} or \sQuote{\code{total}}.
+This argument is ignored for undirected graphs.}
 
-\item{neighborhoods}{A list of neighborhoods, one for each vertex, or
-\code{NULL}. If it is not \code{NULL}, then the function is evaluated on
-the induced subgraphs specified by these neighborhoods.
+\item{neighborhoods}{A list of neighborhoods, one for each vertex, or \code{NULL}.
+If it is not \code{NULL}, then the function is evaluated on the induced subgraphs specified by these neighborhoods.
 
-In theory this could be useful if the same \code{graph.us} graph is used
-for multiple \code{graph.them} arguments. Then the neighborhoods can be
-calculated on \code{graph.us} and used with multiple graphs. In
-practice, this is currently slower than simply using \code{graph.them}
-multiple times.}
+In theory this could be useful if the same \code{graph.us} graph is used for multiple \code{graph.them} arguments.
+Then the neighborhoods can be calculated on \code{graph.us} and used with multiple graphs.
+In practice, this is currently slower than simply using \code{graph.them} multiple times.}
 
-\item{weights}{Numeric vector, edge weights to use for the scan instead of the edge attribute weight. If \code{NULL} (the default) the edge weight attribute is used.}
+\item{weights}{Numeric vector, edge weights to use for the scan instead of the edge attribute weight.
+If \code{NULL} (the default) the edge weight attribute is used.}
 
-\item{\dots}{Arguments passed to \code{FUN}, the function that computes
-the local statistics.}
+\item{\dots}{Arguments passed to \code{FUN}, the function that computes the local statistics.}
 }
 \value{
-For \code{local_scan()} typically a numeric vector containing the
-computed local statistics for each vertex. In general a list or vector
-of objects, as returned by \code{FUN}.
+For \code{local_scan()} typically a numeric vector containing the computed local statistics for each vertex.
+In general a list or vector of objects, as returned by \code{FUN}.
 }
 \description{
-The scan statistic is a summary of the locality statistics that is
-computed from the local neighborhood of each vertex. The
-\code{local_scan()} function computes the local statistics for each vertex
-for a given neighborhood size and the statistic function.
+The scan statistic is a summary of the locality statistics that is computed from the local neighborhood of each vertex.
+The \code{local_scan()} function computes the local statistics for each vertex for a given neighborhood size and the statistic function.
 }
 \details{
-See the given reference below for the details on the local scan
-statistics.
+See the given reference below for the details on the local scan statistics.
 
 \code{local_scan()} calculates exact local scan statistics.
 
-If \code{graph.them} is \code{NULL}, then \code{local_scan()} computes the
-\sQuote{us} variant of the scan statistics.  Otherwise,
-\code{graph.them} should be an igraph object and the \sQuote{them}
-variant is computed using \code{graph.us} to extract the neighborhood
-information, and applying \code{FUN} on these neighborhoods in
-\code{graph.them}.
+If \code{graph.them} is \code{NULL}, then \code{local_scan()} computes the \sQuote{us} variant of the scan statistics.
+Otherwise,
+\code{graph.them} should be an igraph object and the \sQuote{them} variant is computed using \code{graph.us} to extract the neighborhood information,
+and applying \code{FUN} on these neighborhoods in \code{graph.them}.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_neighborhood_ecount}{\code{local_scan_neighborhood_ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_0_them}{\code{local_scan_0_them()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_1_ecount_them}{\code{local_scan_1_ecount_them()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_k_ecount_them}{\code{local_scan_k_ecount_them()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_0}{\code{local_scan_0()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_1_ecount}{\code{local_scan_1_ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_k_ecount}{\code{local_scan_k_ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_induced_subgraph}{\code{induced_subgraph()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

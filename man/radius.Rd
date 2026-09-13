@@ -11,33 +11,30 @@ radius(graph, ..., weights = NULL, mode = c("all", "out", "in", "total"))
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{weights}{Possibly a numeric vector giving edge weights. If this is
-\code{NULL} and the graph has a \code{weight} edge attribute, then the
-attribute is used. If this is \code{NA} then no weights are used (even if
-the graph has a \code{weight} attribute). In a weighted graph, the length
-of a path is the sum of the weights of its constituent edges.}
+\item{weights}{Possibly a numeric vector giving edge weights.
+If this is \code{NULL} and the graph has a \code{weight} edge attribute, then the attribute is used.
+If this is \code{NA} then no weights are used (even if the graph has a \code{weight} attribute).
+In a weighted graph, the length of a path is the sum of the weights of its constituent edges.}
 
-\item{mode}{Character constant, gives whether the shortest paths to or from
-the given vertices should be calculated for directed graphs. If \code{out}
-then the shortest paths \emph{from} the vertex, if \verb{in} then \emph{to}
-it will be considered. If \code{all}, the default, then the graph is treated
-as undirected, i.e. edge directions are not taken into account. This
-argument is ignored for undirected graphs.}
+\item{mode}{Character constant,
+gives whether the shortest paths to or from the given vertices should be calculated for directed graphs.
+If \code{out} then the shortest paths \emph{from} the vertex, if \verb{in} then \emph{to} it will be considered.
+If \code{all}, the default, then the graph is treated as undirected, i.e. edge directions are not taken into account.
+This argument is ignored for undirected graphs.}
 }
 \value{
 A numeric scalar, the radius of the graph.
 }
 \description{
-The eccentricity of a vertex is its distance from the farthest other node
-in the graph. The smallest eccentricity in a graph is called its radius.
+The eccentricity of a vertex is its distance from the farthest other node in the graph.
+The smallest eccentricity in a graph is called its radius.
 }
 \details{
-The eccentricity of a vertex is calculated by measuring the shortest
-distance from (or to) the vertex, to (or from) all vertices in the
-graph, and taking the maximum.
+The eccentricity of a vertex is calculated by measuring the shortest distance from (or to) the vertex,
+to (or from) all vertices in the graph, and taking the maximum.
 
-This implementation ignores vertex pairs that are in different
-components. Isolated vertices have eccentricity zero.
+This implementation ignores vertex pairs that are in different components.
+Isolated vertices have eccentricity zero.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_radius_dijkstra}{\code{radius_dijkstra()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
@@ -53,9 +50,7 @@ Harary, F. Graph Theory. Reading, MA: Addison-Wesley, p. 35,
 1994.
 }
 \seealso{
-\code{\link[=eccentricity]{eccentricity()}} for the underlying
-calculations, \link{distances} for general shortest path
-calculations.
+\code{\link[=eccentricity]{eccentricity()}} for the underlying calculations, \link{distances} for general shortest path calculations.
 
 Other paths:
 \code{\link[=all_simple_paths]{all_simple_paths()}},

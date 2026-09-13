@@ -19,30 +19,29 @@ bipartite.random.game(
 
 \item{n2}{Integer scalar, the number of top vertices.}
 
-\item{type}{Character scalar, the type of the graph, \sQuote{gnp} creates a
-\eqn{G(n,p)} graph, \sQuote{gnm} creates a \eqn{G(n,m)} graph. See details below.}
+\item{type}{Character scalar, the type of the graph, \sQuote{gnp} creates a \eqn{G(n,p)} graph,
+\sQuote{gnm} creates a \eqn{G(n,m)} graph.
+See details below.}
 
-\item{p}{Real scalar, connection probability for \eqn{G(n,p)} graphs. Should not
-be given for \eqn{G(n,m)} graphs.}
+\item{p}{Real scalar, connection probability for \eqn{G(n,p)} graphs.
+Should not be given for \eqn{G(n,m)} graphs.}
 
-\item{m}{Integer scalar, the number of edges for \eqn{G(n,m)} graphs. Should not
-be given for \eqn{G(n,p)} graphs.}
+\item{m}{Integer scalar, the number of edges for \eqn{G(n,m)} graphs.
+Should not be given for \eqn{G(n,p)} graphs.}
 
-\item{directed}{Logical, whether to create a directed graph. See also
-the \code{mode} argument.}
+\item{directed}{Logical, whether to create a directed graph.
+See also the \code{mode} argument.}
 
-\item{mode}{Character scalar, specifies how to direct the edges in directed
-graphs. If it is \sQuote{out}, then directed edges point from bottom
-vertices to top vertices. If it is \sQuote{in}, edges point from top
-vertices to bottom vertices. \sQuote{out} and \sQuote{in} do not generate
-mutual edges. If this argument is \sQuote{all}, then each edge direction is
-considered independently and mutual edges might be generated. This argument
-is ignored for undirected graphs.}
+\item{mode}{Character scalar, specifies how to direct the edges in directed graphs.
+If it is \sQuote{out}, then directed edges point from bottom vertices to top vertices.
+If it is \sQuote{in}, edges point from top vertices to bottom vertices.
+\sQuote{out} and \sQuote{in} do not generate mutual edges.
+If this argument is \sQuote{all}, then each edge direction is considered independently and mutual edges might be generated.
+This argument is ignored for undirected graphs.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{bipartite.random.game()} was renamed to \code{\link[=sample_bipartite]{sample_bipartite()}} to create a more
-consistent API.
+\code{bipartite.random.game()} was renamed to \code{\link[=sample_bipartite]{sample_bipartite()}} to create a more consistent API.
 }
 \keyword{internal}

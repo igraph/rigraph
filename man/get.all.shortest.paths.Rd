@@ -15,33 +15,29 @@ get.all.shortest.paths(
 \arguments{
 \item{graph}{The graph to work on.}
 
-\item{from}{Numeric constant, the vertex from or to the shortest paths will
-be calculated. Note that right now this is not a vector of vertex IDs, but
-only a single vertex.}
+\item{from}{Numeric constant, the vertex from or to the shortest paths will be calculated.
+Note that right now this is not a vector of vertex IDs, but only a single vertex.}
 
-\item{to}{Numeric vector, the vertices to which the shortest paths will be
-calculated. The default \code{NULL} includes all vertices. Note that for
-\code{distances()} every vertex must be included here at most once. (This
-is not required for \code{shortest_paths()}.}
+\item{to}{Numeric vector, the vertices to which the shortest paths will be calculated.
+The default \code{NULL} includes all vertices.
+Note that for \code{distances()} every vertex must be included here at most once.
+(This is not required for \code{shortest_paths()}.}
 
-\item{mode}{Character constant, gives whether the shortest paths to or from
-the given vertices should be calculated for directed graphs. If \code{out}
-then the shortest paths \emph{from} the vertex, if \verb{in} then \emph{to}
-it will be considered. If \code{all}, the default, then the graph is treated
-as undirected, i.e. edge directions are not taken into account. This
-argument is ignored for undirected graphs.}
+\item{mode}{Character constant,
+gives whether the shortest paths to or from the given vertices should be calculated for directed graphs.
+If \code{out} then the shortest paths \emph{from} the vertex, if \verb{in} then \emph{to} it will be considered.
+If \code{all}, the default, then the graph is treated as undirected, i.e. edge directions are not taken into account.
+This argument is ignored for undirected graphs.}
 
-\item{weights}{Possibly a numeric vector giving edge weights. If this is
-\code{NULL} and the graph has a \code{weight} edge attribute, then the
-attribute is used. If this is \code{NA} then no weights are used (even if
-the graph has a \code{weight} attribute). In a weighted graph, the length
-of a path is the sum of the weights of its constituent edges.}
+\item{weights}{Possibly a numeric vector giving edge weights.
+If this is \code{NULL} and the graph has a \code{weight} edge attribute, then the attribute is used.
+If this is \code{NA} then no weights are used (even if the graph has a \code{weight} attribute).
+In a weighted graph, the length of a path is the sum of the weights of its constituent edges.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{get.all.shortest.paths()} was renamed to \code{\link[=all_shortest_paths]{all_shortest_paths()}} to create a more
-consistent API.
+\code{get.all.shortest.paths()} was renamed to \code{\link[=all_shortest_paths]{all_shortest_paths()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_all_shortest_paths_dijkstra}{\code{get_all_shortest_paths_dijkstra()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_all_shortest_paths}{\code{get_all_shortest_paths()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

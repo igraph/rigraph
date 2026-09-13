@@ -7,7 +7,8 @@
 with_vertex_(...)
 }
 \arguments{
-\item{...}{The attributes to add. They must be named.}
+\item{...}{The attributes to add.
+They must be named.}
 }
 \description{
 Constructor modifier to add vertex attributes

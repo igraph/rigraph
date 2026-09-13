@@ -27,43 +27,35 @@ Default: \code{NULL}, the generated graph will be undirected.}
 
 \item{loops}{Logical, whether to allow loop edges in the graph.}
 
-\item{multiple}{Logical, whether to allow multiple edges in the
-graph.}
+\item{multiple}{Logical, whether to allow multiple edges in the graph.}
 }
 \value{
 An igraph graph, directed or undirected.
 }
 \description{
-This function generates a non-growing random graph with edge probabilities
-proportional to node fitness scores.
+This function generates a non-growing random graph with edge probabilities proportional to node fitness scores.
 }
 \details{
-This game generates a directed or undirected random graph where the
-probability of an edge between vertices \eqn{i} and \eqn{j} depends on the
-fitness scores of the two vertices involved. For undirected graphs, each
-vertex has a single fitness score. For directed graphs, each vertex has an
-out- and an in-fitness, and the probability of an edge from \eqn{i} to
-\eqn{j} depends on the out-fitness of vertex \eqn{i} and the in-fitness of
-vertex \eqn{j}.
+This game generates a directed or undirected random graph
+where the probability of an edge between vertices \eqn{i} and \eqn{j} depends on the fitness scores of the two vertices involved.
+For undirected graphs, each vertex has a single fitness score.
+For directed graphs, each vertex has an out- and an in-fitness,
+and the probability of an edge from \eqn{i} to \eqn{j} depends on the out-fitness of vertex \eqn{i} and the in-fitness of vertex \eqn{j}.
 
-The generation process goes as follows. We start from \eqn{N} disconnected
-nodes (where \eqn{N} is given by the length of the fitness vector). Then we
-randomly select two vertices \eqn{i} and \eqn{j}, with probabilities
-proportional to their fitnesses. (When the generated graph is directed,
-\eqn{i} is selected according to the out-fitnesses and \eqn{j} is selected
-according to the in-fitnesses). If the vertices are not connected yet (or if
-multiple edges are allowed), we connect them; otherwise we select a new
-pair. This is repeated until the desired number of links are created.
+The generation process goes as follows.
+We start from \eqn{N} disconnected nodes (where \eqn{N} is given by the length of the fitness vector).
+Then we randomly select two vertices \eqn{i} and \eqn{j}, with probabilities proportional to their fitnesses.
+(When the generated graph is directed, \eqn{i} is selected according to the out-fitnesses and \eqn{j} is selected according to the in-fitnesses).
+If the vertices are not connected yet (or if multiple edges are allowed), we connect them; otherwise we select a new pair.
+This is repeated until the desired number of links are created.
 
-It can be shown that the \emph{expected} degree of each vertex will be
-proportional to its fitness, although the actual, observed degree will not
-be. If you need to generate a graph with an exact degree sequence, consider
-\code{\link[=sample_degseq]{sample_degseq()}} instead.
+It can be shown that the \emph{expected} degree of each vertex will be proportional to its fitness, although the actual,
+observed degree will not be.
+If you need to generate a graph with an exact degree sequence, consider \code{\link[=sample_degseq]{sample_degseq()}} instead.
 
-This model is commonly used to generate static scale-free networks. To
-achieve this, you have to draw the fitness scores from the desired power-law
-distribution. Alternatively, you may use \code{\link[=sample_fitness_pl]{sample_fitness_pl()}}
-which generates the fitnesses for you with a given exponent.
+This model is commonly used to generate static scale-free networks.
+To achieve this, you have to draw the fitness scores from the desired power-law distribution.
+Alternatively, you may use \code{\link[=sample_fitness_pl]{sample_fitness_pl()}} which generates the fitnesses for you with a given exponent.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_static_fitness_game}{\code{static_fitness_game()}}

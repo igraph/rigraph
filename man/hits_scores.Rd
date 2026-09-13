@@ -11,18 +11,18 @@ hits_scores(graph, ..., scale = TRUE, weights = NULL, options = NULL)
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{scale}{Logical, whether to scale the result to have a maximum
-score of one. If no scaling is used then the result vector has unit length
-in the Euclidean norm.}
+\item{scale}{Logical, whether to scale the result to have a maximum score of one.
+If no scaling is used then the result vector has unit length in the Euclidean norm.}
 
-\item{weights}{Optional positive weight vector for calculating weighted
-scores. If the graph has a \code{weight} edge attribute, then this is used
-by default. Pass \code{NA} to ignore the weight attribute. This function
-interprets edge weights as connection strengths. The weights of parallel
-edges are effectively added up.}
+\item{weights}{Optional positive weight vector for calculating weighted scores.
+If the graph has a \code{weight} edge attribute, then this is used by default.
+Pass \code{NA} to ignore the weight attribute.
+This function interprets edge weights as connection strengths.
+The weights of parallel edges are effectively added up.}
 
-\item{options}{A named list, to override some ARPACK options. See
-\code{\link[=arpack]{arpack()}} for details. The default \code{NULL} uses \code{\link[=arpack_defaults]{arpack_defaults()}}.}
+\item{options}{A named list, to override some ARPACK options.
+See \code{\link[=arpack]{arpack()}} for details.
+The default \code{NULL} uses \code{\link[=arpack_defaults]{arpack_defaults()}}.}
 }
 \value{
 A named list with members:
@@ -42,17 +42,14 @@ Some information about the ARPACK computation, it has the same members as the \c
 }
 }
 \description{
-The hub scores of the vertices are defined as the principal eigenvector
-of \eqn{A A^T}{A*t(A)}, where \eqn{A} is the adjacency matrix of the
-graph.
+The hub scores of the vertices are defined as the principal eigenvector of \eqn{A A^T}{A*t(A)},
+where \eqn{A} is the adjacency matrix of the graph.
 }
 \details{
-Similarly, the authority scores of the vertices are defined as the principal
-eigenvector of \eqn{A^T A}{t(A)*A}, where \eqn{A} is the adjacency matrix of
-the graph.
+Similarly, the authority scores of the vertices are defined as the principal eigenvector of \eqn{A^T A}{t(A)*A},
+where \eqn{A} is the adjacency matrix of the graph.
 
-For undirected matrices the adjacency matrix is symmetric and the hub
-scores are the same as authority scores.
+For undirected matrices the adjacency matrix is symmetric and the hub scores are the same as authority scores.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_hub_and_authority_scores}{\code{hub_and_authority_scores()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
@@ -74,9 +71,8 @@ environment. \emph{Proc. 9th ACM-SIAM Symposium on Discrete Algorithms},
 as IBM Research Report RJ 10076, May 1997.
 }
 \seealso{
-\code{\link[=eigen_centrality]{eigen_centrality()}} for eigenvector centrality,
-\code{\link[=page_rank]{page_rank()}} for the Page Rank scores. \code{\link[=arpack]{arpack()}} for
-the underlining machinery of the computation.
+\code{\link[=eigen_centrality]{eigen_centrality()}} for eigenvector centrality, \code{\link[=page_rank]{page_rank()}} for the Page Rank scores.
+\code{\link[=arpack]{arpack()}} for the underlining machinery of the computation.
 
 Centrality measures:
 \code{\link[=alpha_centrality]{alpha_centrality()}},

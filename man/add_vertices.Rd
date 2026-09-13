@@ -11,21 +11,17 @@ add_vertices(graph, nv, ..., attr = list())
 
 \item{nv}{The number of vertices to add.}
 
-\item{...}{Additional arguments, they must be named,
-and they will be added as vertex attributes, for the newly added
-vertices. See also details below.}
+\item{...}{Additional arguments, they must be named, and they will be added as vertex attributes, for the newly added vertices.
+See also details below.}
 
-\item{attr}{A named list, its elements will be added
-as vertex attributes, for the newly added vertices. See also details
-below.}
+\item{attr}{A named list, its elements will be added as vertex attributes, for the newly added vertices.
+See also details below.}
 }
 \value{
 The graph, with the vertices (and attributes) added.
 }
 \description{
-If attributes are supplied, and they are not present in the graph,
-their values for the original vertices of the graph are set to
-\code{NA}.
+If attributes are supplied, and they are not present in the graph, their values for the original vertices of the graph are set to \code{NA}.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_add_vertices}{\code{add_vertices()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

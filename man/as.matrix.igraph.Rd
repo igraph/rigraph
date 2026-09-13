@@ -9,31 +9,25 @@
 \arguments{
 \item{x}{object of class \code{igraph}, the network}
 
-\item{matrix.type}{character, type of matrix to return, currently "adjacency"
-or "edgelist" are supported}
+\item{matrix.type}{character, type of matrix to return, currently "adjacency" or "edgelist" are supported}
 
 \item{\dots}{other arguments to/from other methods}
 }
 \value{
-Depending on the value of \code{matrix.type} either a square
-adjacency matrix or a two-column numeric matrix representing the edgelist.
+Depending on the value of \code{matrix.type} either a square adjacency matrix or a two-column numeric matrix representing the edgelist.
 }
 \description{
-Get adjacency or edgelist representation of the network stored as an
-\code{igraph} object.
+Get adjacency or edgelist representation of the network stored as an \code{igraph} object.
 }
 \details{
-If \code{matrix.type} is \code{"edgelist"}, then a two-column numeric edge list
-matrix is returned.  The value of \code{attrname} is ignored.
+If \code{matrix.type} is \code{"edgelist"}, then a two-column numeric edge list matrix is returned.
+The value of \code{attrname} is ignored.
 
-If \code{matrix.type} is \code{"adjacency"}, then a square adjacency matrix is
-returned. For adjacency matrices, you can use the \code{attr} keyword argument
-to use the values of an edge attribute in the matrix cells. See the
-documentation of \link{as_adjacency_matrix} for more details.
+If \code{matrix.type} is \code{"adjacency"}, then a square adjacency matrix is returned.
+For adjacency matrices, you can use the \code{attr} keyword argument to use the values of an edge attribute in the matrix cells.
+See the documentation of \link{as_adjacency_matrix} for more details.
 
-Other arguments passed through \code{...} are passed to either
-\code{\link[=as_adjacency_matrix]{as_adjacency_matrix()}} or \code{\link[=as_edgelist]{as_edgelist()}}
-depending on the value of \code{matrix.type}.
+Other arguments passed through \code{...} are passed to either \code{\link[=as_adjacency_matrix]{as_adjacency_matrix()}} or \code{\link[=as_edgelist]{as_edgelist()}} depending on the value of \code{matrix.type}.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist}{\code{get_edgelist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency}{\code{get_adjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency_sparse}{\code{get_adjacency_sparse()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

@@ -19,19 +19,17 @@ preference.game(
 
 \item{types}{The number of different vertex types.}
 
-\item{type.dist}{The distribution of the vertex types, a numeric vector of
-length \sQuote{types} containing non-negative numbers. The vector will be
-normed to obtain probabilities. The default \code{NULL} gives a uniform
-distribution.}
+\item{type.dist}{The distribution of the vertex types, a numeric vector of length \sQuote{types} containing non-negative numbers.
+The vector will be normed to obtain probabilities.
+The default \code{NULL} gives a uniform distribution.}
 
-\item{fixed.sizes}{Fix the number of vertices with a given vertex type
-label. The \code{type.dist} argument gives the group sizes (i.e. number of
-vertices with the different labels) in this case.}
+\item{fixed.sizes}{Fix the number of vertices with a given vertex type label.
+The \code{type.dist} argument gives the group sizes (i.e. number of vertices with the different labels) in this case.}
 
-\item{pref.matrix}{A square matrix giving the preferences of the vertex
-types. The matrix has \sQuote{types} rows and columns. When generating
-an undirected graph, it must be symmetric. The default \code{NULL} sets all
-preferences to one.}
+\item{pref.matrix}{A square matrix giving the preferences of the vertex types.
+The matrix has \sQuote{types} rows and columns.
+When generating an undirected graph, it must be symmetric.
+The default \code{NULL} sets all preferences to one.}
 
 \item{directed}{Logical, whether to create a directed graph.}
 
@@ -40,8 +38,7 @@ preferences to one.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{preference.game()} was renamed to \code{\link[=sample_pref]{sample_pref()}} to create a more
-consistent API.
+\code{preference.game()} was renamed to \code{\link[=sample_pref]{sample_pref()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_preference_game}{\code{preference_game()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

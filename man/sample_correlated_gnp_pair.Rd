@@ -9,27 +9,24 @@ sample_correlated_gnp_pair(n, corr, p, directed = FALSE, permutation = NULL)
 \arguments{
 \item{n}{Numeric scalar, the number of vertices for the sampled graphs.}
 
-\item{corr}{A scalar in the unit interval, the target Pearson correlation
-between the adjacency matrices of the original the generated graph (the
-adjacency matrix being used as a vector).}
+\item{corr}{A scalar in the unit interval,
+the target Pearson correlation between the adjacency matrices of the original the generated graph (the adjacency matrix being used as a vector).}
 
 \item{p}{A numeric scalar, the probability of an edge between two vertices,
 it must in the open (0,1) interval.}
 
 \item{directed}{Logical, whether to generate directed graphs.}
 
-\item{permutation}{A numeric vector, a permutation vector that is applied on
-the vertices of the first graph, to get the second graph.  If \code{NULL},
-the vertices are not permuted.}
+\item{permutation}{A numeric vector, a permutation vector that is applied on the vertices of the first graph,
+to get the second graph.
+If \code{NULL}, the vertices are not permuted.}
 }
 \value{
-A list of two igraph objects, named \code{graph1} and
-\code{graph2}, which are two graphs whose adjacency matrix entries are
-correlated with \code{corr}.
+A list of two igraph objects, named \code{graph1} and \code{graph2},
+which are two graphs whose adjacency matrix entries are correlated with \code{corr}.
 }
 \description{
-Sample a new graph by perturbing the adjacency matrix of a given graph and
-shuffling its vertices.
+Sample a new graph by perturbing the adjacency matrix of a given graph and shuffling its vertices.
 }
 \details{
 Please see the reference given below.

@@ -9,23 +9,19 @@ make_tree(n, children = 2, ..., mode = c("out", "in", "undirected"))
 \arguments{
 \item{n}{Number of vertices.}
 
-\item{children}{Integer scalar, the number of children of a vertex
-(except for leafs)}
+\item{children}{Integer scalar, the number of children of a vertex (except for leafs)}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{mode}{Defines the direction of the
-edges. \code{out} indicates that the edges point from the parent to
-the children, \verb{in} indicates that they point from the children
-to their parents, while \code{undirected} creates an undirected
-graph.}
+\item{mode}{Defines the direction of the edges.
+\code{out} indicates that the edges point from the parent to the children,
+\verb{in} indicates that they point from the children to their parents, while \code{undirected} creates an undirected graph.}
 }
 \value{
 An igraph graph
 }
 \description{
-Create a k-ary tree graph, where almost all vertices other than the leaves
-have the same number of children.
+Create a k-ary tree graph, where almost all vertices other than the leaves have the same number of children.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_kary_tree}{\code{kary_tree()}}

@@ -19,16 +19,13 @@ A new graph object.
 This function calculates the line graph of another graph.
 }
 \details{
-The line graph \code{L(G)} of a \code{G} undirected graph is defined as
-follows. \code{L(G)} has one vertex for each edge in \code{G} and two
-vertices in \code{L(G)} are connected by an edge if their corresponding
-edges share an end point.
+The line graph \code{L(G)} of a \code{G} undirected graph is defined as follows.
+\code{L(G)} has one vertex for each edge in \code{G} and two vertices in \code{L(G)} are connected by an edge
+if their corresponding edges share an end point.
 
-The line graph \code{L(G)} of a \code{G} directed graph is slightly
-different, \code{L(G)} has one vertex for each edge in \code{G} and two
-vertices in \code{L(G)} are connected by a directed edge if the target of
-the first vertex's corresponding edge is the same as the source of the
-second vertex's corresponding edge.
+The line graph \code{L(G)} of a \code{G} directed graph is slightly different,
+\code{L(G)} has one vertex for each edge in \code{G} and two vertices in \code{L(G)} are connected by a directed edge
+if the target of the first vertex's corresponding edge is the same as the source of the second vertex's corresponding edge.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_linegraph}{\code{linegraph()}}

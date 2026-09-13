@@ -12,8 +12,7 @@ clique.number(graph)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{clique.number()} was renamed to \code{\link[=clique_num]{clique_num()}} to create a more
-consistent API.
+\code{clique.number()} was renamed to \code{\link[=clique_num]{clique_num()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_clique_number}{\code{clique_number()}}

@@ -9,17 +9,15 @@ hrg(graph, prob)
 \arguments{
 \item{graph}{The igraph graph to create the HRG from.}
 
-\item{prob}{A vector of probabilities, one for each vertex, in the order of
-vertex IDs.}
+\item{prob}{A vector of probabilities, one for each vertex, in the order of vertex IDs.}
 }
 \value{
 \code{hrg()} returns an \code{igraphHRG} object.
 }
 \description{
-\code{hrg()} creates a HRG from an igraph graph. The igraph graph must be
-a directed binary tree, with \eqn{n-1} internal and \eqn{n} leaf
-vertices. The \code{prob} argument contains the HRG probability labels
-for each vertex; these are ignored for leaf vertices.
+\code{hrg()} creates a HRG from an igraph graph.
+The igraph graph must be a directed binary tree, with \eqn{n-1} internal and \eqn{n} leaf vertices.
+The \code{prob} argument contains the HRG probability labels for each vertex; these are ignored for leaf vertices.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_create}{\code{hrg_create()}}

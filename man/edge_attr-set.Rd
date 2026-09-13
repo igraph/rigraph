@@ -10,15 +10,13 @@ edge_attr(graph, name, index = NULL) <- value
 \arguments{
 \item{graph}{The graph.}
 
-\item{name}{The name of the edge attribute to set. If missing,
-then \code{value} must be a named list, and its entries are
-set as edge attributes.}
+\item{name}{The name of the edge attribute to set.
+If missing, then \code{value} must be a named list, and its entries are set as edge attributes.}
 
-\item{index}{An optional edge sequence to set the attributes
-of a subset of edges. The default \code{NULL} selects all edges.}
+\item{index}{An optional edge sequence to set the attributes of a subset of edges.
+The default \code{NULL} selects all edges.}
 
-\item{value}{The new value of the attribute(s) for all
-(or \code{index}) edges.}
+\item{value}{The new value of the attribute(s) for all (or \code{index}) edges.}
 }
 \value{
 The graph, with the edge attribute(s) added or set.

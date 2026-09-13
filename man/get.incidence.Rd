@@ -7,31 +7,26 @@
 get.incidence(graph, types = NULL, attr = NULL, names = TRUE, sparse = FALSE)
 }
 \arguments{
-\item{graph}{The input graph. The direction of the edges is ignored in
-directed graphs.}
+\item{graph}{The input graph.
+The direction of the edges is ignored in directed graphs.}
 
-\item{types}{An optional vertex type vector to use instead of the
-\code{type} vertex attribute. You must supply this argument if the graph has
-no \code{type} vertex attribute.}
+\item{types}{An optional vertex type vector to use instead of the \code{type} vertex attribute.
+You must supply this argument if the graph has no \code{type} vertex attribute.}
 
-\item{attr}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{weights} instead. A
-character edge attribute name is forwarded to \code{weights} unchanged; \code{NULL}
-becomes \code{weights = NA}, since \code{attr = NULL} asked for a traditional
-unweighted matrix while \code{weights = NULL} picks the \code{weight} attribute up.}
+\item{attr}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{weights} instead.
+A character edge attribute name is forwarded to \code{weights} unchanged; \code{NULL} becomes \code{weights = NA},
+since \code{attr = NULL} asked for a traditional unweighted matrix while \code{weights = NULL} picks the \code{weight} attribute up.}
 
-\item{names}{Logical, if \code{TRUE} and the vertices in the graph
-are named (i.e. the graph has a vertex attribute called \code{name}), then
-vertex names will be added to the result as row and column names. Otherwise
-the IDs of the vertices are used as row and column names.}
+\item{names}{Logical, if \code{TRUE} and the vertices in the graph are named (i.e. the graph has a vertex attribute called \code{name}),
+then vertex names will be added to the result as row and column names.
+Otherwise the IDs of the vertices are used as row and column names.}
 
-\item{sparse}{Logical, if it is \code{TRUE} then a sparse matrix is
-created, you will need the \code{Matrix} package for this.}
+\item{sparse}{Logical, if it is \code{TRUE} then a sparse matrix is created, you will need the \code{Matrix} package for this.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{get.incidence()} was renamed to \code{\link[=as_biadjacency_matrix]{as_biadjacency_matrix()}} to create a more
-consistent API.
+\code{get.incidence()} was renamed to \code{\link[=as_biadjacency_matrix]{as_biadjacency_matrix()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_get_biadjacency}{\code{get_biadjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist}{\code{get_edgelist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

@@ -7,29 +7,26 @@
 subgraph_centrality(graph, ..., diag = FALSE)
 }
 \arguments{
-\item{graph}{The input graph. It will be treated as undirected.}
+\item{graph}{The input graph.
+It will be treated as undirected.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{diag}{Logical, whether to include the diagonal of the adjacency
-matrix in the analysis. Giving \code{FALSE} here effectively eliminates the
-loops edges from the graph before the calculation.}
+\item{diag}{Logical, whether to include the diagonal of the adjacency matrix in the analysis.
+Giving \code{FALSE} here effectively eliminates the loops edges from the graph before the calculation.}
 }
 \value{
 A numeric vector, the subgraph centrality scores of the vertices.
 }
 \description{
-Subgraph centrality of a vertex measures the number of subgraphs a vertex
-participates in, weighting them according to their size.
+Subgraph centrality of a vertex measures the number of subgraphs a vertex participates in, weighting them according to their size.
 }
 \details{
-The subgraph centrality of a vertex is defined as the number of closed walks
-originating at the vertex, where longer walks are downweighted by the
-factorial of their length.
+The subgraph centrality of a vertex is defined as the number of closed walks originating at the vertex,
+where longer walks are downweighted by the factorial of their length.
 
-Currently the calculation is performed by explicitly calculating all
-eigenvalues and eigenvectors of the adjacency matrix of the graph. This
-effectively means that the measure can only be calculated for small graphs.
+Currently the calculation is performed by explicitly calculating all eigenvalues and eigenvectors of the adjacency matrix of the graph.
+This effectively means that the measure can only be calculated for small graphs.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency}{\code{get_adjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency_sparse}{\code{get_adjacency_sparse()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

@@ -26,60 +26,49 @@ from_adjacency(
 )
 }
 \arguments{
-\item{adjmatrix}{A square adjacency matrix. From igraph version 0.5.1 this
-can be a sparse matrix created with the \code{Matrix} package.}
+\item{adjmatrix}{A square adjacency matrix.
+From igraph version 0.5.1 this can be a sparse matrix created with the \code{Matrix} package.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{mode}{Character scalar, specifies how igraph should interpret the
-supplied matrix. See also the \code{weighted} argument, the interpretation
-depends on that too. Possible values are: \code{directed},
-\code{undirected}, \code{upper}, \code{lower}, \code{max}, \code{min},
-\code{plus}. See details below.}
+\item{mode}{Character scalar, specifies how igraph should interpret the supplied matrix.
+See also the \code{weighted} argument, the interpretation depends on that too.
+Possible values are: \code{directed}, \code{undirected}, \code{upper}, \code{lower}, \code{max}, \code{min}, \code{plus}.
+See details below.}
 
-\item{weighted}{This argument specifies whether to create a weighted graph
-from an adjacency matrix. If it is \code{NULL} then an unweighted graph is
-created and the elements of the adjacency matrix gives the number of edges
-between the vertices. If it is a character constant then for every non-zero
-matrix entry an edge is created and the value of the entry is added as an
-edge attribute named by the \code{weighted} argument. If it is \code{TRUE}
-then a weighted graph is created and the name of the edge attribute will be
-\code{weight}. See also details below.}
+\item{weighted}{This argument specifies whether to create a weighted graph from an adjacency matrix.
+If it is \code{NULL} then an unweighted graph is created and the elements of the adjacency matrix gives the number of edges between the vertices.
+If it is a character constant then for every non-zero matrix entry an edge is created and the value of the entry is added as an edge attribute named by the \code{weighted} argument.
+If it is \code{TRUE} then a weighted graph is created and the name of the edge attribute will be \code{weight}.
+See also details below.}
 
-\item{diag}{Logical, whether to include the diagonal of the matrix in
-the calculation. If this is \code{FALSE} then the diagonal is zerod out
-first.}
+\item{diag}{Logical, whether to include the diagonal of the matrix in the calculation.
+If this is \code{FALSE} then the diagonal is zerod out first.}
 
-\item{add.colnames}{Character scalar, whether to add the column names as
-vertex attributes. If it is \code{NULL} (the default) then, if
-present, column names are added as vertex attribute \sQuote{name}. If
-\code{NA} or \code{FALSE} then they will not be added.  If a character constant,
-then it gives the name of the vertex attribute to add.}
+\item{add.colnames}{Character scalar, whether to add the column names as vertex attributes.
+If it is \code{NULL} (the default) then, if present, column names are added as vertex attribute \sQuote{name}.
+If \code{NA} or \code{FALSE} then they will not be added.
+If a character constant, then it gives the name of the vertex attribute to add.}
 
-\item{add.rownames}{Character scalar, whether to add the row names as vertex
-attributes. Possible values the same as the previous argument. By default
-row names are not added. If \sQuote{\code{add.rownames}} and
-\sQuote{\code{add.colnames}} specify the same vertex attribute, then the
-former is ignored.}
+\item{add.rownames}{Character scalar, whether to add the row names as vertex attributes.
+Possible values the same as the previous argument.
+By default row names are not added.
+If \sQuote{\code{add.rownames}} and \sQuote{\code{add.colnames}} specify the same vertex attribute, then the former is ignored.}
 }
 \value{
 An igraph graph object.
 }
 \description{
-\code{graph_from_adjacency_matrix()} is a flexible function for creating \code{igraph}
-graphs from adjacency matrices.
+\code{graph_from_adjacency_matrix()} is a flexible function for creating \code{igraph} graphs from adjacency matrices.
 }
 \details{
-The order of the vertices are preserved, i.e. the vertex corresponding to
-the first row will be vertex 0 in the graph, etc.
+The order of the vertices are preserved, i.e. the vertex corresponding to the first row will be vertex 0 in the graph, etc.
 
-\code{graph_from_adjacency_matrix()} operates in two main modes, depending on the
-\code{weighted} argument.
+\code{graph_from_adjacency_matrix()} operates in two main modes, depending on the \code{weighted} argument.
 
-If this argument is \code{NULL} then an unweighted graph is created and an
-element of the adjacency matrix gives the number of edges to create between
-the two corresponding vertices.  The details depend on the value of the
-\code{mode} argument:
+If this argument is \code{NULL} then an unweighted graph is created
+and an element of the adjacency matrix gives the number of edges to create between the two corresponding vertices.
+The details depend on the value of the \code{mode} argument:
 \describe{
 \item{"directed"}{
 The graph will be directed and a matrix element gives
@@ -111,9 +100,8 @@ between vertex \code{i} and \code{j}.
 }
 }
 
-If the \code{weighted} argument is not \code{NULL} then the elements of the
-matrix give the weights of the edges (if they are not zero).  The details
-depend on the value of the \code{mode} argument:
+If the \code{weighted} argument is not \code{NULL} then the elements of the matrix give the weights of the edges (if they are not zero).
+The details depend on the value of the \code{mode} argument:
 \describe{
 \item{"directed"}{
 The graph will be directed and a matrix element gives the edge weights.
@@ -255,8 +243,7 @@ summary(g10)
 
 }
 \seealso{
-\code{\link[=make_graph]{make_graph()}} and \code{\link[=graph_from_literal]{graph_from_literal()}} for other ways to
-create graphs.
+\code{\link[=make_graph]{make_graph()}} and \code{\link[=graph_from_literal]{graph_from_literal()}} for other ways to create graphs.
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

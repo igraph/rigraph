@@ -9,20 +9,16 @@ graph.tree(n, children = 2, mode = c("out", "in", "undirected"))
 \arguments{
 \item{n}{Number of vertices.}
 
-\item{children}{Integer scalar, the number of children of a vertex
-(except for leafs)}
+\item{children}{Integer scalar, the number of children of a vertex (except for leafs)}
 
-\item{mode}{Defines the direction of the
-edges. \code{out} indicates that the edges point from the parent to
-the children, \verb{in} indicates that they point from the children
-to their parents, while \code{undirected} creates an undirected
-graph.}
+\item{mode}{Defines the direction of the edges.
+\code{out} indicates that the edges point from the parent to the children,
+\verb{in} indicates that they point from the children to their parents, while \code{undirected} creates an undirected graph.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.tree()} was renamed to \code{\link[=make_tree]{make_tree()}} to create a more
-consistent API.
+\code{graph.tree()} was renamed to \code{\link[=make_tree]{make_tree()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_kary_tree}{\code{kary_tree()}}

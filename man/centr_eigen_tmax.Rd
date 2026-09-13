@@ -12,22 +12,21 @@ centr_eigen_tmax(
 )
 }
 \arguments{
-\item{graph}{The input graph. It can also be \code{NULL}, if
-\code{nodes} is given.}
+\item{graph}{The input graph.
+It can also be \code{NULL}, if \code{nodes} is given.}
 
-\item{nodes}{The number of vertices. This is ignored if the graph is
-given.}
+\item{nodes}{The number of vertices.
+This is ignored if the graph is given.}
 
-\item{directed}{Logical, whether to consider edge directions
-during the calculation. Ignored in undirected graphs.}
+\item{directed}{Logical, whether to consider edge directions during the calculation.
+Ignored in undirected graphs.}
 
-\item{scale}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Ignored. Computing
-eigenvector centralization requires normalized eigenvector centrality scores.}
+\item{scale}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Ignored.
+Computing eigenvector centralization requires normalized eigenvector centrality scores.}
 }
 \value{
-Real scalar, the theoretical maximum (unnormalized) graph
-eigenvector centrality score for graphs with given vertex count and
-other parameters.
+Real scalar,
+the theoretical maximum (unnormalized) graph eigenvector centrality score for graphs with given vertex count and other parameters.
 }
 \description{
 See \code{\link[=centralize]{centralize()}} for a summary of graph centralization.

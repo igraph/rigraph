@@ -22,24 +22,20 @@ If no such mapping exists, then an empty vector.
 }
 }
 \description{
-This function decides whether the vertices of a network can be mapped to two
-vertex types in a way that no vertices of the same type are connected.
+This function decides whether the vertices of a network can be mapped to two vertex types in a way that no vertices of the same type are connected.
 }
 \details{
-A bipartite graph in igraph has a \sQuote{\code{type}} vertex attribute
-giving the two vertex types.
+A bipartite graph in igraph has a \sQuote{\code{type}} vertex attribute giving the two vertex types.
 
-This function simply checks whether a graph \emph{could} be bipartite. It
-tries to find a mapping that gives a possible division of the vertices into
-two classes, such that no two vertices of the same class are connected by an
-edge.
+This function simply checks whether a graph \emph{could} be bipartite.
+It tries to find a mapping that gives a possible division of the vertices into two classes,
+such that no two vertices of the same class are connected by an edge.
 
-The existence of such a mapping is equivalent of having no circuits of odd
-length in the graph. A graph with loop edges cannot bipartite.
+The existence of such a mapping is equivalent of having no circuits of odd length in the graph.
+A graph with loop edges cannot bipartite.
 
-Note that the mapping is not necessarily unique, e.g. if the graph has at
-least two components, then the vertices in the separate components can be
-mapped independently.
+Note that the mapping is not necessarily unique, e.g. if the graph has at least two components,
+then the vertices in the separate components can be mapped independently.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_is_bipartite}{\code{is_bipartite()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

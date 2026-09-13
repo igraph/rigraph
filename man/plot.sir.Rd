@@ -23,11 +23,10 @@
 )
 }
 \arguments{
-\item{x}{The output of the SIR simulation, coming from the \code{\link[=sir]{sir()}}
-function.}
+\item{x}{The output of the SIR simulation, coming from the \code{\link[=sir]{sir()}} function.}
 
-\item{comp}{Character scalar, which component to plot. Either \sQuote{NI}
-(infected, default), \sQuote{NS} (susceptible) or \sQuote{NR} (recovered).}
+\item{comp}{Character scalar, which component to plot.
+Either \sQuote{NI} (infected, default), \sQuote{NS} (susceptible) or \sQuote{NR} (recovered).}
 
 \item{median}{Logical, whether to plot the (binned) median.}
 
@@ -37,8 +36,8 @@ function.}
 
 \item{median_color}{Color of the median curve.}
 
-\item{quantile_color}{Color(s) of the quantile curves. (It is recycled if
-needed and non-needed entries are ignored if too long.)}
+\item{quantile_color}{Color(s) of the quantile curves.
+(It is recycled if needed and non-needed entries are ignored if too long.)}
 
 \item{lwd.median}{Line width of the median.}
 
@@ -46,30 +45,27 @@ needed and non-needed entries are ignored if too long.)}
 
 \item{lty.quantile}{Line type of the quantile curves.}
 
-\item{xlim}{The x limits, a two-element numeric vector. If \code{NULL}, then
-it is calculated from the data.}
+\item{xlim}{The x limits, a two-element numeric vector.
+If \code{NULL}, then it is calculated from the data.}
 
-\item{ylim}{The y limits, a two-element numeric vector. If \code{NULL}, then
-it is calculated from the data.}
+\item{ylim}{The y limits, a two-element numeric vector.
+If \code{NULL}, then it is calculated from the data.}
 
 \item{xlab}{The x label.}
 
-\item{ylab}{The y label. If \code{NULL} then it is automatically added based
-on the \code{comp} argument.}
+\item{ylab}{The y label.
+If \code{NULL} then it is automatically added based on the \code{comp} argument.}
 
-\item{\dots}{Additional arguments are passed to \code{\link[=plot]{plot()}}, that is run
-before any of the curves are added, to create the figure.}
+\item{\dots}{Additional arguments are passed to \code{\link[=plot]{plot()}}, that is run before any of the curves are added, to create the figure.}
 }
 \value{
 Nothing.
 }
 \description{
-This function can conveniently plot the results of multiple SIR model
-simulations.
+This function can conveniently plot the results of multiple SIR model simulations.
 }
 \details{
-The number of susceptible/infected/recovered individuals is plotted over
-time, for multiple simulations.
+The number of susceptible/infected/recovered individuals is plotted over time, for multiple simulations.
 }
 \examples{
 

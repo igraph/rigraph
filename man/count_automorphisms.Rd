@@ -14,18 +14,16 @@ count_automorphisms(
 \arguments{
 \item{graph}{The input graph, it is treated as undirected.}
 
-\item{colors}{The colors of the individual vertices of the graph; only
-vertices having the same color are allowed to match each other in an
-automorphism. When omitted, igraph uses the \code{color} attribute of the
-vertices, or, if there is no such vertex attribute, it simply assumes that
-all vertices have the same color. Pass NULL explicitly if the graph has a
-\code{color} vertex attribute but you do not want to use it.}
+\item{colors}{The colors of the individual vertices of the graph;
+only vertices having the same color are allowed to match each other in an automorphism.
+When omitted, igraph uses the \code{color} attribute of the vertices, or, if there is no such vertex attribute,
+it simply assumes that all vertices have the same color.
+Pass NULL explicitly if the graph has a \code{color} vertex attribute but you do not want to use it.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{sh}{The splitting heuristics for the BLISS algorithm. Possible values
-are:
-\sQuote{\code{f}}:
+\item{sh}{The splitting heuristics for the BLISS algorithm.
+Possible values are: \sQuote{\code{f}}:
 first non-singleton cell,
 \sQuote{\code{fl}}:
 first largest non-singleton cell,
@@ -65,18 +63,14 @@ Maximum level.
 }
 }
 \description{
-Calculate the number of automorphisms of a graph, i.e. the number of
-isomorphisms to itself.
+Calculate the number of automorphisms of a graph, i.e. the number of isomorphisms to itself.
 }
 \details{
-An automorphism of a graph is a permutation of its vertices which brings the
-graph into itself.
+An automorphism of a graph is a permutation of its vertices which brings the graph into itself.
 
-This function calculates the number of automorphism of a graph using the
-BLISS algorithm. See also the BLISS homepage at
-\url{http://www.tcs.hut.fi/Software/bliss/index.html}. If you need the
-automorphisms themselves, use \code{\link[=automorphism_group]{automorphism_group()}} to obtain
-a compact representation of the automorphism group.
+This function calculates the number of automorphism of a graph using the BLISS algorithm.
+See also the BLISS homepage at \url{http://www.tcs.hut.fi/Software/bliss/index.html}.
+If you need the automorphisms themselves, use \code{\link[=automorphism_group]{automorphism_group()}} to obtain a compact representation of the automorphism group.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_count_automorphisms}{\code{count_automorphisms()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
@@ -101,9 +95,7 @@ the Ninth Workshop on Algorithm Engineering and Experiments and the Fourth
 Workshop on Analytic Algorithms and Combinatorics.} 2007.
 }
 \seealso{
-\code{\link[=canonical_permutation]{canonical_permutation()}}, \code{\link[=permute]{permute()}},
-and \code{\link[=automorphism_group]{automorphism_group()}} for a compact representation of all
-automorphisms
+\code{\link[=canonical_permutation]{canonical_permutation()}}, \code{\link[=permute]{permute()}}, and \code{\link[=automorphism_group]{automorphism_group()}} for a compact representation of all automorphisms
 
 Other graph automorphism:
 \code{\link[=automorphism_group]{automorphism_group()}}

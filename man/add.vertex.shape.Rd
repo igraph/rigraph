@@ -12,28 +12,24 @@ add.vertex.shape(
 )
 }
 \arguments{
-\item{shape}{Character scalar, name of a vertex shape. If it is
-\code{NULL} for \code{shapes()}, then the names of all defined
-vertex shapes are returned.}
+\item{shape}{Character scalar, name of a vertex shape.
+If it is \code{NULL} for \code{shapes()}, then the names of all defined vertex shapes are returned.}
 
-\item{clip}{An R function object, the clipping function. The default
-\code{NULL} uses \code{shape_noclip}.}
+\item{clip}{An R function object, the clipping function.
+The default \code{NULL} uses \code{shape_noclip}.}
 
-\item{plot}{An R function object, the plotting function. The default
-\code{NULL} uses \code{shape_noplot}.}
+\item{plot}{An R function object, the plotting function.
+The default \code{NULL} uses \code{shape_noplot}.}
 
-\item{parameters}{Named list, additional plot/vertex/edge
-parameters. The element named define the new parameters, and the
-elements themselves define their default values.
-Vertex parameters should have a prefix
-\sQuote{\code{vertex.}}, edge parameters a prefix
-\sQuote{\code{edge.}}. Other general plotting parameters should have
-a prefix \sQuote{\code{plot.}}. See Details below.}
+\item{parameters}{Named list, additional plot/vertex/edge parameters.
+The element named define the new parameters, and the elements themselves define their default values.
+Vertex parameters should have a prefix \sQuote{\code{vertex.}}, edge parameters a prefix \sQuote{\code{edge.}}.
+Other general plotting parameters should have a prefix \sQuote{\code{plot.}}.
+See Details below.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{add.vertex.shape()} was renamed to \code{\link[=add_shape]{add_shape()}} to create a more
-consistent API.
+\code{add.vertex.shape()} was renamed to \code{\link[=add_shape]{add_shape()}} to create a more consistent API.
 }
 \keyword{internal}

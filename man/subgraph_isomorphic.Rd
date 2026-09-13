@@ -17,36 +17,33 @@ is_subgraph_isomorphic_to(
 )
 }
 \arguments{
-\item{pattern}{The smaller graph, it might be directed or
-undirected. Undirected graphs are treated as directed graphs with
-mutual edges.}
+\item{pattern}{The smaller graph, it might be directed or undirected.
+Undirected graphs are treated as directed graphs with mutual edges.}
 
-\item{target}{The bigger graph, it might be directed or
-undirected. Undirected graphs are treated as directed graphs with
-mutual edges.}
+\item{target}{The bigger graph, it might be directed or undirected.
+Undirected graphs are treated as directed graphs with mutual edges.}
 
-\item{method}{The method to use. Possible values: \sQuote{auto},
-\sQuote{lad}, \sQuote{vf2}. See their details below.}
+\item{method}{The method to use.
+Possible values: \sQuote{auto}, \sQuote{lad}, \sQuote{vf2}.
+See their details below.}
 
 \item{...}{Additional arguments, passed to the various methods.}
 }
 \value{
-Logical scalar, \code{TRUE} if the \code{pattern} is
-isomorphic to a (possibly induced) subgraph of \code{target}.
+Logical scalar, \code{TRUE} if the \code{pattern} is isomorphic to a (possibly induced) subgraph of \code{target}.
 }
 \description{
 Decide if a graph is subgraph isomorphic to another one
 }
 \section{\sQuote{auto} method}{
 
-This method currently selects \sQuote{lad}, always, as it seems
-to be superior on most graphs.
+This method currently selects \sQuote{lad}, always, as it seems to be superior on most graphs.
 }
 
 \section{\sQuote{lad} method}{
 
-This is the LAD algorithm by Solnon, see the reference below. It has
-the following extra arguments:
+This is the LAD algorithm by Solnon, see the reference below.
+It has the following extra arguments:
 \describe{
 \item{domains}{
 Matching restrictions.
@@ -68,9 +65,8 @@ It defaults to \code{Inf}, which means no limit.
 
 \section{\sQuote{vf2} method}{
 
-This method uses the VF2 algorithm by Cordella, Foggia et al., see
-references below. It supports vertex and edge colors and have the
-following extra arguments:
+This method uses the VF2 algorithm by Cordella, Foggia et al., see references below.
+It supports vertex and edge colors and have the following extra arguments:
 \describe{
 \item{vertex.color1, vertex.color2}{
 Optional integer vectors giving the colors of the vertices for colored graph isomorphism.

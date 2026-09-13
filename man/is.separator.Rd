@@ -7,17 +7,15 @@
 is.separator(graph, candidate)
 }
 \arguments{
-\item{graph}{The input graph. It may be directed, but edge directions are
-ignored.}
+\item{graph}{The input graph.
+It may be directed, but edge directions are ignored.}
 
-\item{candidate}{A numeric vector giving the vertex IDs of the candidate
-separator.}
+\item{candidate}{A numeric vector giving the vertex IDs of the candidate separator.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{is.separator()} was renamed to \code{\link[=is_separator]{is_separator()}} to create a more
-consistent API.
+\code{is.separator()} was renamed to \code{\link[=is_separator]{is_separator()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Separators.html#igraph_is_separator}{\code{is_separator()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

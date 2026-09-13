@@ -13,28 +13,23 @@ hrg.predict(
 )
 }
 \arguments{
-\item{graph}{The graph to fit the model to. Edge directions are ignored in
-directed graphs.}
+\item{graph}{The graph to fit the model to.
+Edge directions are ignored in directed graphs.}
 
-\item{hrg}{A hierarchical random graph model, in the form of an
-\code{igraphHRG} object. \code{predict_edges()} allow this to be
-\code{NULL} as well, then a HRG is fitted to the graph first, from a
-random starting point.}
+\item{hrg}{A hierarchical random graph model, in the form of an \code{igraphHRG} object.
+\code{predict_edges()} allow this to be \code{NULL} as well, then a HRG is fitted to the graph first, from a random starting point.}
 
-\item{start}{Logical, whether to start the fitting/sampling from the
-supplied \code{igraphHRG} object, or from a random starting point.}
+\item{start}{Logical, whether to start the fitting/sampling from the supplied \code{igraphHRG} object, or from a random starting point.}
 
-\item{num.samples}{Number of samples to use for consensus generation or
-missing edge prediction.}
+\item{num.samples}{Number of samples to use for consensus generation or missing edge prediction.}
 
-\item{num.bins}{Number of bins for the edge probabilities. Give a higher
-number for a more accurate prediction.}
+\item{num.bins}{Number of bins for the edge probabilities.
+Give a higher number for a more accurate prediction.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{hrg.predict()} was renamed to \code{\link[=predict_edges]{predict_edges()}} to create a more
-consistent API.
+\code{hrg.predict()} was renamed to \code{\link[=predict_edges]{predict_edges()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_predict}{\code{hrg_predict()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

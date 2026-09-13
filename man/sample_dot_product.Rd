@@ -10,27 +10,22 @@ sample_dot_product(vecs, ..., directed = FALSE)
 dot_product(vecs, ..., directed = FALSE)
 }
 \arguments{
-\item{vecs}{A numeric matrix in which each latent position vector is a
-column.}
+\item{vecs}{A numeric matrix in which each latent position vector is a column.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{directed}{A Logical, TRUE if the generated graph should be
-directed.}
+\item{directed}{A Logical, TRUE if the generated graph should be directed.}
 }
 \value{
-An igraph graph object which is the generated random dot product
-graph.
+An igraph graph object which is the generated random dot product graph.
 }
 \description{
 In this model, each vertex is represented by a latent position vector.
-Probability of an edge between two vertices are given by the dot product of
-their latent position vectors.
+Probability of an edge between two vertices are given by the dot product of their latent position vectors.
 }
 \details{
-The dot product of the latent position vectors should be in the [0,1]
-interval, otherwise a warning is given. For negative dot products, no edges
-are added; dot products that are larger than one always add an edge.
+The dot product of the latent position vectors should be in the [0,1] interval, otherwise a warning is given.
+For negative dot products, no edges are added; dot products that are larger than one always add an edge.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_dot_product_game}{\code{dot_product_game()}}
@@ -57,8 +52,7 @@ for social networks. Dissertation, Johns Hopkins University, Maryland, USA,
 2006.
 }
 \seealso{
-\code{\link[=sample_dirichlet]{sample_dirichlet()}}, \code{\link[=sample_sphere_surface]{sample_sphere_surface()}}
-and \code{\link[=sample_sphere_volume]{sample_sphere_volume()}} for sampling position vectors.
+\code{\link[=sample_dirichlet]{sample_dirichlet()}}, \code{\link[=sample_sphere_surface]{sample_sphere_surface()}} and \code{\link[=sample_sphere_volume]{sample_sphere_volume()}} for sampling position vectors.
 
 Random graph models (games):
 \code{\link[=bipartite_gnm]{bipartite_gnm()}},

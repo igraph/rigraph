@@ -24,27 +24,22 @@ layout_with_sugiyama(
 Layers are numbered from one.
 Default: \code{NULL}, igraph calculates the layers automatically.}
 
-\item{hgap}{Real scalar, the minimum horizontal gap between vertices in the
-same layer.}
+\item{hgap}{Real scalar, the minimum horizontal gap between vertices in the same layer.}
 
 \item{vgap}{Real scalar, the distance between layers.}
 
-\item{maxiter}{Integer scalar, the maximum number of iterations in the
-crossing minimization stage. 100 is a reasonable default; if you feel that
-you have too many edge crossings, increase this.}
+\item{maxiter}{Integer scalar, the maximum number of iterations in the crossing minimization stage.
+100 is a reasonable default; if you feel that you have too many edge crossings, increase this.}
 
-\item{weights}{Optional edge weight vector. If \code{NULL}, then the
-'weight' edge attribute is used, if there is one. Supply \code{NA} here and
-igraph ignores the edge weights. These are used only if the graph
-contains cycles; igraph will tend to reverse edges with smaller weights
-when breaking the cycles.}
+\item{weights}{Optional edge weight vector.
+If \code{NULL}, then the 'weight' edge attribute is used, if there is one.
+Supply \code{NA} here and igraph ignores the edge weights.
+These are used only if the graph contains cycles; igraph will tend to reverse edges with smaller weights when breaking the cycles.}
 
-\item{attributes}{Which graph/vertex/edge attributes to keep in the extended
-graph. \sQuote{default} keeps the \sQuote{size}, \sQuote{size2},
-\sQuote{shape}, \sQuote{label} and \sQuote{color} vertex attributes and the
-\sQuote{arrow.mode} and \sQuote{arrow.size} edge attributes. \sQuote{all}
-keep all graph, vertex and edge attributes, \sQuote{none} keeps none of
-them.}
+\item{attributes}{Which graph/vertex/edge attributes to keep in the extended graph.
+\sQuote{default} keeps the \sQuote{size}, \sQuote{size2}, \sQuote{shape},
+\sQuote{label} and \sQuote{color} vertex attributes and the \sQuote{arrow.mode} and \sQuote{arrow.size} edge attributes.
+\sQuote{all} keep all graph, vertex and edge attributes, \sQuote{none} keeps none of them.}
 }
 \value{
 A list with the components:
@@ -65,27 +60,22 @@ and it is the layout matrix for all (original and dummy) vertices.
 }
 }
 \description{
-Sugiyama layout algorithm for layered directed acyclic graphs. The algorithm
-minimized edge crossings.
+Sugiyama layout algorithm for layered directed acyclic graphs.
+The algorithm minimized edge crossings.
 }
 \details{
-This layout algorithm is designed for directed acyclic graphs where each
-vertex is assigned to a layer. Layers are indexed from zero, and vertices of
-the same layer will be placed on the same horizontal line. The X coordinates
-of vertices within each layer are decided by the heuristic proposed by
-Sugiyama et al. to minimize edge crossings.
+This layout algorithm is designed for directed acyclic graphs where each vertex is assigned to a layer.
+Layers are indexed from zero, and vertices of the same layer will be placed on the same horizontal line.
+The X coordinates of vertices within each layer are decided by the heuristic proposed by Sugiyama et al. to minimize edge crossings.
 
-You can also try to lay out undirected graphs, graphs containing cycles, or
-graphs without an a priori layered assignment with this algorithm. igraph
-will try to eliminate cycles and assign vertices to layers, but there is no
-guarantee on the quality of the layout in such cases.
+You can also try to lay out undirected graphs, graphs containing cycles,
+or graphs without an a priori layered assignment with this algorithm. igraph will try to eliminate cycles and assign vertices to layers,
+but there is no guarantee on the quality of the layout in such cases.
 
-The Sugiyama layout may introduce \dQuote{bends} on the edges in order to
-obtain a visually more pleasing layout. This is achieved by adding dummy
-nodes to edges spanning more than one layer. The resulting layout assigns
-coordinates not only to the nodes of the original graph but also to the
-dummy nodes. The layout algorithm will also return the extended graph with
-the dummy nodes.
+The Sugiyama layout may introduce \dQuote{bends} on the edges in order to obtain a visually more pleasing layout.
+This is achieved by adding dummy nodes to edges spanning more than one layer.
+The resulting layout assigns coordinates not only to the nodes of the original graph but also to the dummy nodes.
+The layout algorithm will also return the extended graph with the dummy nodes.
 
 For more details, see the reference below.
 }
@@ -240,8 +230,7 @@ Understanding of Hierarchical Systems". IEEE Transactions on Systems, Man
 and Cybernetics 11(2):109-125, 1981.
 }
 \seealso{
-\code{\link[=with_sugiyama]{with_sugiyama()}} to build a lazy layout specification for
-\code{\link[=add_layout_]{add_layout_()}}.
+\code{\link[=with_sugiyama]{with_sugiyama()}} to build a lazy layout specification for \code{\link[=add_layout_]{add_layout_()}}.
 
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},

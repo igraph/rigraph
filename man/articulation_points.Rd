@@ -10,24 +10,21 @@ articulation_points(graph)
 bridges(graph)
 }
 \arguments{
-\item{graph}{The input graph. It is treated as an undirected graph, even if
-it is directed.}
+\item{graph}{The input graph.
+It is treated as an undirected graph, even if it is directed.}
 }
 \value{
-For \code{articulation_points()}, a numeric vector giving the vertex
-IDs of the articulation points of the input graph. For \code{bridges()}, a
-numeric vector giving the edge IDs of the bridges of the input graph.
+For \code{articulation_points()}, a numeric vector giving the vertex IDs of the articulation points of the input graph.
+For \code{bridges()}, a numeric vector giving the edge IDs of the bridges of the input graph.
 }
 \description{
 \code{articulation_points()} finds the articulation points (or cut vertices)
 }
 \details{
-Articulation points or cut vertices are vertices whose removal increases the
-number of connected components in a graph. Similarly, bridges or cut-edges
-are edges whose removal increases the number of connected components in a
-graph. If the original graph was connected, then the removal of a single
-articulation point or a single bridge makes it disconnected. If a graph
-contains no articulation points, then its vertex connectivity is at least
+Articulation points or cut vertices are vertices whose removal increases the number of connected components in a graph.
+Similarly, bridges or cut-edges are edges whose removal increases the number of connected components in a graph.
+If the original graph was connected, then the removal of a single articulation point or a single bridge makes it disconnected.
+If a graph contains no articulation points, then its vertex connectivity is at least
 two.
 }
 \section{Related documentation in the C library}{

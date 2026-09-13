@@ -12,8 +12,8 @@ chordal_ring(n, w, ..., directed = FALSE)
 \arguments{
 \item{n}{The number of vertices.}
 
-\item{w}{A matrix which specifies the extended chordal ring. See
-details below.}
+\item{w}{A matrix which specifies the extended chordal ring.
+See details below.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
@@ -24,16 +24,13 @@ An igraph graph.
 }
 \description{
 \code{make_chordal_ring()} creates an extended chordal ring.
-An extended chordal ring is regular graph, each node has the same
-degree. It can be obtained from a simple ring by adding some extra
-edges specified by a matrix. Let p denote the number of columns in
-the \sQuote{\code{W}} matrix. The extra edges of vertex \code{i}
-are added according to column \verb{i mod p} in
-\sQuote{\code{W}}. The number of extra edges is the number
-of rows in \sQuote{\code{W}}: for each row \code{j} an edge
-\code{i->i+w[ij]} is added if \code{i+w[ij]} is less than the number
-of total nodes. See also Kotsis, G: Interconnection Topologies for
-Parallel Processing Systems, PARS Mitteilungen 11, 1-6, 1993.
+An extended chordal ring is regular graph, each node has the same degree.
+It can be obtained from a simple ring by adding some extra edges specified by a matrix.
+Let p denote the number of columns in the \sQuote{\code{W}} matrix.
+The extra edges of vertex \code{i} are added according to column \verb{i mod p} in \sQuote{\code{W}}.
+The number of extra edges is the number of rows in \sQuote{\code{W}}:
+for each row \code{j} an edge \code{i->i+w[ij]} is added if \code{i+w[ij]} is less than the number of total nodes.
+See also Kotsis, G: Interconnection Topologies for Parallel Processing Systems, PARS Mitteilungen 11, 1-6, 1993.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_extended_chordal_ring}{\code{extended_chordal_ring()}}

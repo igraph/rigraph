@@ -7,8 +7,7 @@
 \method{+}{igraph}(e1, e2)
 }
 \arguments{
-\item{e1}{First argument, probably an igraph graph, but see details
-below.}
+\item{e1}{First argument, probably an igraph graph, but see details below.}
 
 \item{e2}{Second argument, see details below.}
 }
@@ -17,8 +16,7 @@ Add vertices, edges or another graph to a graph
 }
 \details{
 The plus operator can be used to add vertices or edges to graph.
-The actual operation that is performed depends on the type of the
-right hand side argument.
+The actual operation that is performed depends on the type of the right hand side argument.
 \itemize{
 \item If is is another igraph graph object and they are both
 named graphs, then the union of the two graphs are calculated,
@@ -31,11 +29,9 @@ are added to the graph.
 \item If it is a character scalar or vector, then it is interpreted as
 the names of the vertices to add to the graph.
 \item If it is an object created with the \code{\link[=vertex]{vertex()}} or
-\code{\link[=vertices]{vertices()}} function, then new vertices are added to the
-graph. This form is appropriate when one wants to add some vertex
-attributes as well. The operands of the \code{vertices()} function
-specifies the number of vertices to add and their attributes as
-well.
+\code{\link[=vertices]{vertices()}} function, then new vertices are added to the graph.
+This form is appropriate when one wants to add some vertex attributes as well.
+The operands of the \code{vertices()} function specifies the number of vertices to add and their attributes as well.
 
 The unnamed arguments of \code{vertices()} are concatenated and
 used as the \sQuote{\code{name}} vertex attribute (i.e. vertex
@@ -46,17 +42,14 @@ attributes. Examples: \preformatted{  g <- g +
   g <- g + vertex("bar", "foobar")
   g <- g + vertices("bar2", "foobar2", color=1:2, shape="rectangle")}
 
-\code{vertex()} is just an alias to \code{vertices()}, and it is
-provided for readability. The user should use it if a single vertex
-is added to the graph.
+\code{vertex()} is just an alias to \code{vertices()}, and it is provided for readability.
+The user should use it if a single vertex is added to the graph.
 \item If it is an object created with the \code{\link[=edge]{edge()}} or
-\code{\link[=edges]{edges()}} function, then new edges will be added to the
-graph. The new edges and possibly their attributes can be specified as
-the arguments of the \code{edges()} function.
+\code{\link[=edges]{edges()}} function, then new edges will be added to the graph.
+The new edges and possibly their attributes can be specified as the arguments of the \code{edges()} function.
 
-The unnamed arguments of \code{edges()} are concatenated and used
-as vertex IDs of the end points of the new edges. The named
-arguments will be added as edge attributes.
+The unnamed arguments of \code{edges()} are concatenated and used as vertex IDs of the end points of the new edges.
+The named arguments will be added as edge attributes.
 
 Examples: \preformatted{  g <- make_empty_graph() +
          vertices(letters[1:10]) +
@@ -66,15 +59,13 @@ Examples: \preformatted{  g <- make_empty_graph() +
   g <- g + edges(c("bar", "foo", "foobar2", "bar2"), color="red", weight=1:2)}
 See more examples below.
 
-\code{edge()} is just an alias to \code{edges()} and it is provided
-for readability. The user should use it if a single edge is added to
-the graph.
+\code{edge()} is just an alias to \code{edges()} and it is provided for readability.
+The user should use it if a single edge is added to the graph.
 \item If it is an object created with the \code{\link[=path]{path()}} function, then
-new edges that form a path are added. The edges and possibly their
-attributes are specified as the arguments to the \code{path()}
-function. The non-named arguments are concatenated and interpreted
-as the vertex IDs along the path. The remaining arguments are added
-as edge attributes.
+new edges that form a path are added.
+The edges and possibly their attributes are specified as the arguments to the \code{path()} function.
+The non-named arguments are concatenated and interpreted as the vertex IDs along the path.
+The remaining arguments are added as edge attributes.
 
 Examples: \preformatted{  g <- make_empty_graph() + vertices(letters[1:10])
   g <- g + path("a", "b", "c", "d")

@@ -24,28 +24,27 @@
 \arguments{
 \item{x}{The graph to print.}
 
-\item{full}{Logical, whether to print the graph structure itself as
-well. The default \code{NULL} uses the \code{print.full} igraph option.}
+\item{full}{Logical, whether to print the graph structure itself as well.
+The default \code{NULL} uses the \code{print.full} igraph option.}
 
-\item{graph.attributes}{Logical, whether to print graph attributes. The
-default \code{NULL} uses the \code{print.graph.attributes} igraph option.}
+\item{graph.attributes}{Logical, whether to print graph attributes.
+The default \code{NULL} uses the \code{print.graph.attributes} igraph option.}
 
-\item{vertex.attributes}{Logical, whether to print vertex
-attributes. The default \code{NULL} uses the \code{print.vertex.attributes} igraph
-option.}
+\item{vertex.attributes}{Logical, whether to print vertex attributes.
+The default \code{NULL} uses the \code{print.vertex.attributes} igraph option.}
 
-\item{edge.attributes}{Logical, whether to print edge attributes. The
-default \code{NULL} uses the \code{print.edge.attributes} igraph option.}
+\item{edge.attributes}{Logical, whether to print edge attributes.
+The default \code{NULL} uses the \code{print.edge.attributes} igraph option.}
 
 \item{names}{Logical, whether to print symbolic vertex names (i.e.
 the \code{name} vertex attribute) or vertex IDs.}
 
-\item{max.lines}{The maximum number of lines to use. The rest of the
-output will be truncated. If not given, the \code{auto.print.lines} igraph
-option applies; \code{NULL} prints all lines.}
+\item{max.lines}{The maximum number of lines to use.
+The rest of the output will be truncated.
+If not given, the \code{auto.print.lines} igraph option applies; \code{NULL} prints all lines.}
 
-\item{id}{Whether to print the graph ID. The default \code{NULL} uses the
-\code{print.id} igraph option.}
+\item{id}{Whether to print the graph ID.
+The default \code{NULL} uses the \code{print.id} igraph option.}
 
 \item{\dots}{Additional agruments.}
 
@@ -55,62 +54,47 @@ option applies; \code{NULL} prints all lines.}
 All these functions return the graph invisibly.
 }
 \description{
-These functions attempt to print a graph to the terminal in a human readable
-form.
+These functions attempt to print a graph to the terminal in a human readable form.
 }
 \details{
-\code{summary.igraph} prints the number of vertices, edges and whether the
-graph is directed.
+\code{summary.igraph} prints the number of vertices, edges and whether the graph is directed.
 
-\code{print_all()} prints the same information, and also lists the edges, and
-optionally graph, vertex and/or edge attributes.
+\code{print_all()} prints the same information, and also lists the edges, and optionally graph, vertex and/or edge attributes.
 
-\code{print.igraph()} behaves either as \code{summary.igraph} or
-\code{print_all()} depending on the \code{full} argument. See also the
-\sQuote{print.full} igraph option and \code{\link[=igraph_opt]{igraph_opt()}}.
+\code{print.igraph()} behaves either as \code{summary.igraph} or \code{print_all()} depending on the \code{full} argument.
+See also the \sQuote{print.full} igraph option and \code{\link[=igraph_opt]{igraph_opt()}}.
 
-The graph summary printed by \code{summary.igraph} (and \code{print.igraph()}
-and \code{print_all()}) consists of one or more lines. The first line contains
-the basic properties of the graph, and the rest contains its attributes.
+The graph summary printed by \code{summary.igraph} (and \code{print.igraph()} and \code{print_all()}) consists of one or more lines.
+The first line contains the basic properties of the graph, and the rest contains its attributes.
 Here is an example, a small star graph with weighted directed edges and named
 vertices: \preformatted{    IGRAPH badcafe DNW- 10 9 -- In-star
     + attr: name (g/c), mode (g/c), center (g/n), name (v/c),
       weight (e/n) }
-The first line always
-starts with \code{IGRAPH}, showing you that the object is an igraph graph.
-Then a seven character code is printed, this the first seven characters
-of the unique ID of the graph. See \code{\link[=graph_id]{graph_id()}} for more.
-Then a four letter long code string is printed. The first letter
-distinguishes between directed (\sQuote{\code{D}}) and undirected
-(\sQuote{\code{U}}) graphs. The second letter is \sQuote{\code{N}} for named
-graphs, i.e. graphs with the \code{name} vertex attribute set. The third
-letter is \sQuote{\code{W}} for weighted graphs, i.e. graphs with the
-\code{weight} edge attribute set. The fourth letter is \sQuote{\code{B}} for
-bipartite graphs, i.e. for graphs with the \code{type} vertex attribute set.
+The first line always starts with \code{IGRAPH}, showing you that the object is an igraph graph.
+Then a seven character code is printed, this the first seven characters of the unique ID of the graph.
+See \code{\link[=graph_id]{graph_id()}} for more.
+Then a four letter long code string is printed.
+The first letter distinguishes between directed (\sQuote{\code{D}}) and undirected (\sQuote{\code{U}}) graphs.
+The second letter is \sQuote{\code{N}} for named graphs, i.e. graphs with the \code{name} vertex attribute set.
+The third letter is \sQuote{\code{W}} for weighted graphs, i.e. graphs with the \code{weight} edge attribute set.
+The fourth letter is \sQuote{\code{B}} for bipartite graphs, i.e. for graphs with the \code{type} vertex attribute set.
 
 This is followed by the number of vertices and edges, then two dashes.
 
 Finally, after two dashes, the name of the graph is printed, if it has one,
 i.e. if the \code{name} graph attribute is set.
 
-From the second line, the attributes of the graph are listed, separated by a
-comma. After the attribute names, the kind of the attribute -- graph
-(\sQuote{\code{g}}), vertex (\sQuote{\code{v}}) or edge (\sQuote{\code{e}})
--- is denoted, and the type of the attribute as well, character
-(\sQuote{\code{c}}), numeric (\sQuote{\code{n}}), logical
-(\sQuote{\code{l}}), or other (\sQuote{\code{x}}).
+From the second line, the attributes of the graph are listed, separated by a comma.
+After the attribute names, the kind of the attribute -- graph (\sQuote{\code{g}}), vertex (\sQuote{\code{v}}) or edge (\sQuote{\code{e}}) -- is denoted,
+and the type of the attribute as well, character (\sQuote{\code{c}}), numeric (\sQuote{\code{n}}), logical (\sQuote{\code{l}}), or other (\sQuote{\code{x}}).
 
-As of igraph 0.4 \code{print_all()} and \code{print.igraph()} use the
-\code{max.print} option, see \code{\link[base:options]{base::options()}} for details.
+As of igraph 0.4 \code{print_all()} and \code{print.igraph()} use the \code{max.print} option, see \code{\link[base:options]{base::options()}} for details.
 
-As of igraph 1.1.1, the \code{str.igraph} function is defunct, use
-\code{print_all()}.
+As of igraph 1.1.1, the \code{str.igraph} function is defunct, use \code{print_all()}.
 
-Output style is controlled by the \code{print.style} igraph option. The default
-\code{"cli"} produces cli-styled output with section rules, typed attribute
-listings and Unicode arrows for edges. Set
-\code{igraph_options(print.style = "classic")} for the historical
-\verb{IGRAPH ... DNW-} header relied on by parsers and tutorials.
+Output style is controlled by the \code{print.style} igraph option.
+The default \code{"cli"} produces cli-styled output with section rules, typed attribute listings and Unicode arrows for edges.
+Set \code{igraph_options(print.style = "classic")} for the historical \verb{IGRAPH ... DNW-} header relied on by parsers and tutorials.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_degree}{\code{degree()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}

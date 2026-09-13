@@ -13,16 +13,14 @@ neighbors(graph, v, ..., mode = c("out", "in", "all", "total"))
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{mode}{Whether to query outgoing (\sQuote{out}), incoming
-(\sQuote{in}) edges, or both types (\sQuote{all}). This is
-ignored for undirected graphs.}
+\item{mode}{Whether to query outgoing (\sQuote{out}), incoming (\sQuote{in}) edges, or both types (\sQuote{all}).
+This is ignored for undirected graphs.}
 }
 \value{
 A vertex sequence containing the neighbors of the input vertex.
 }
 \description{
-A vertex is a neighbor of another one (in other words, the two
-vertices are adjacent), if they are incident to the same edge.
+A vertex is a neighbor of another one (in other words, the two vertices are adjacent), if they are incident to the same edge.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_neighbors}{\code{neighbors()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

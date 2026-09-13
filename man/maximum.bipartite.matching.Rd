@@ -12,31 +12,27 @@ maximum.bipartite.matching(
 )
 }
 \arguments{
-\item{graph}{The input graph. It might be directed, but edge directions will
-be ignored.}
+\item{graph}{The input graph.
+It might be directed, but edge directions will be ignored.}
 
-\item{types}{Vertex types, if the graph is bipartite. By default they
-are taken from the \sQuote{\code{type}} vertex attribute, if present.}
+\item{types}{Vertex types, if the graph is bipartite.
+By default they are taken from the \sQuote{\code{type}} vertex attribute, if present.}
 
-\item{weights}{Potential edge weights. If the graph has an edge
-attribute called \sQuote{\code{weight}}, and this argument is
-\code{NULL}, then the edge attribute is used automatically.
-In weighted matching, the weights of the edges must match as
-much as possible.}
+\item{weights}{Potential edge weights.
+If the graph has an edge attribute called \sQuote{\code{weight}}, and this argument is \code{NULL},
+then the edge attribute is used automatically.
+In weighted matching, the weights of the edges must match as much as possible.}
 
-\item{eps}{A small real number used in equality tests in the weighted
-bipartite matching algorithm. Two real numbers are considered equal in
-the algorithm if their difference is smaller than \code{eps}. This is
-required to avoid the accumulation of numerical errors. The default
-\code{NULL} stands for the smallest \eqn{x}, such that
-\eqn{1+x \ne 1}{1+x != 1} holds (\code{.Machine$double.eps}). If you are running the algorithm with no weights, this argument
-is ignored.}
+\item{eps}{A small real number used in equality tests in the weighted bipartite matching algorithm.
+Two real numbers are considered equal in the algorithm if their difference is smaller than \code{eps}.
+This is required to avoid the accumulation of numerical errors.
+The default \code{NULL} stands for the smallest \eqn{x}, such that \eqn{1+x \ne 1}{1+x != 1} holds (\code{.Machine$double.eps}).
+If you are running the algorithm with no weights, this argument is ignored.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{maximum.bipartite.matching()} was renamed to \code{\link[=max_bipartite_match]{max_bipartite_match()}} to create a more
-consistent API.
+\code{maximum.bipartite.matching()} was renamed to \code{\link[=max_bipartite_match]{max_bipartite_match()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_maximum_bipartite_matching}{\code{maximum_bipartite_matching()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

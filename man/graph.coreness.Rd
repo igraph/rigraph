@@ -9,16 +9,15 @@ graph.coreness(graph, mode = c("all", "out", "in"))
 \arguments{
 \item{graph}{The input graph, it can be directed or undirected}
 
-\item{mode}{The type of the core in directed graphs. Character constant,
-possible values: \verb{in}: in-cores are computed, \code{out}: out-cores are
-computed, \code{all}: the corresponding undirected graph is considered. This
-argument is ignored for undirected graphs.}
+\item{mode}{The type of the core in directed graphs.
+Character constant, possible values: \verb{in}: in-cores are computed, \code{out}: out-cores are computed, \code{all}:
+the corresponding undirected graph is considered.
+This argument is ignored for undirected graphs.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.coreness()} was renamed to \code{\link[=coreness]{coreness()}} to create a more
-consistent API.
+\code{graph.coreness()} was renamed to \code{\link[=coreness]{coreness()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_coreness}{\code{coreness()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

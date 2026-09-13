@@ -27,7 +27,8 @@ layout_with_kk(
 )
 }
 \arguments{
-\item{graph}{The input graph. Edge directions are ignored.}
+\item{graph}{The input graph.
+Edge directions are ignored.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
@@ -35,64 +36,53 @@ layout_with_kk(
 depending on the \code{dim} argument.
 Default: \code{NULL}.}
 
-\item{dim}{Integer scalar, 2 or 3, the dimension of the layout.  Two
-dimensional layouts are places on a plane, three dimensional ones in the 3d
-space.}
+\item{dim}{Integer scalar, 2 or 3, the dimension of the layout.
+Two dimensional layouts are places on a plane,
+three dimensional ones in the 3d space.}
 
-\item{maxiter}{The maximum number of iterations to perform. The algorithm
-might terminate earlier, see the \code{epsilon} argument. The default \code{NULL}
-uses \code{50 * vcount(graph)}.}
+\item{maxiter}{The maximum number of iterations to perform.
+The algorithm might terminate earlier, see the \code{epsilon} argument.
+The default \code{NULL} uses \code{50 * vcount(graph)}.}
 
-\item{epsilon}{Numeric scalar, the algorithm terminates, if the maximal
-delta is less than this. (See the reference below for what delta means.) If
-you set this to zero, then the function always performs \code{maxiter}
-iterations.}
+\item{epsilon}{Numeric scalar, the algorithm terminates, if the maximal delta is less than this.
+(See the reference below for what delta means.) If you set this to zero, then the function always performs \code{maxiter} iterations.}
 
 \item{kkconst}{Numeric scalar, the Kamada-Kawai vertex attraction constant.
 The default \code{NULL} uses the number of vertices.}
 
 \item{weights}{Edge weights, larger values will result in longer edges.
-Note that this is the opposite of \code{\link[=layout_with_fr]{layout_with_fr()}}, which produces
-shorter edges for larger weights. Weights must be positive.}
+Note that this is the opposite of \code{\link[=layout_with_fr]{layout_with_fr()}}, which produces shorter edges for larger weights.
+Weights must be positive.}
 
-\item{minx}{Numeric vector that gives lower boundaries
-for the \sQuote{x} coordinates of the vertices.
+\item{minx}{Numeric vector that gives lower boundaries for the \sQuote{x} coordinates of the vertices.
 The length of the vector must match the number of vertices in the graph.
 Default: \code{NULL}.}
 
 \item{maxx}{Similar to \code{minx}, but gives the upper boundaries.}
 
-\item{miny}{Similar to \code{minx}, but gives the lower boundaries of the
-\sQuote{y} coordinates.}
+\item{miny}{Similar to \code{minx}, but gives the lower boundaries of the \sQuote{y} coordinates.}
 
-\item{maxy}{Similar to \code{minx}, but gives the upper boundaries of the
-\sQuote{y} coordinates.}
+\item{maxy}{Similar to \code{minx}, but gives the upper boundaries of the \sQuote{y} coordinates.}
 
-\item{minz}{Similar to \code{minx}, but gives the lower boundaries of the
-\sQuote{z} coordinates.}
+\item{minz}{Similar to \code{minx}, but gives the lower boundaries of the \sQuote{z} coordinates.}
 
-\item{maxz}{Similar to \code{minx}, but gives the upper boundaries of the
-\sQuote{z} coordinates.}
+\item{maxz}{Similar to \code{minx}, but gives the upper boundaries of the \sQuote{z} coordinates.}
 
-\item{niter, sigma, initemp, coolexp}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} These
-arguments are not supported from igraph version 0.8.0 and are ignored (with a warning).}
+\item{niter, sigma, initemp, coolexp}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} These arguments are not supported from igraph version 0.8.0 and are ignored (with a warning).}
 
 \item{start}{Deprecated synonym for \code{coords}, for compatibility.}
 }
 \value{
-A numeric matrix with two (dim=2) or three (dim=3) columns, and as
-many rows as the number of vertices, the x, y and potentially z coordinates
-of the vertices.
+A numeric matrix with two (dim=2) or three (dim=3) columns, and as many rows as the number of vertices, the x,
+y and potentially z coordinates of the vertices.
 }
 \description{
-Place the vertices on the plane, or in 3D space, based on a physical
-model of springs.
+Place the vertices on the plane, or in 3D space, based on a physical model of springs.
 }
 \details{
 See the referenced paper below for the details of the algorithm.
 
-This function was rewritten from scratch in igraph version 0.8.0 and it
-follows truthfully the original publication by Kamada and Kawai now.
+This function was rewritten from scratch in igraph version 0.8.0 and it follows truthfully the original publication by Kamada and Kawai now.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
@@ -110,9 +100,8 @@ Kamada, T. and Kawai, S.: An Algorithm for Drawing General
 Undirected Graphs. \emph{Information Processing Letters}, 31/1, 7--15, 1989.
 }
 \seealso{
-\code{\link[=layout_with_drl]{layout_with_drl()}}, \code{\link[=plot.igraph]{plot.igraph()}},
-\code{\link[=tkplot]{tkplot()}}. See \code{\link[=with_kk]{with_kk()}} to build a lazy layout specification for
-\code{\link[=add_layout_]{add_layout_()}}.
+\code{\link[=layout_with_drl]{layout_with_drl()}}, \code{\link[=plot.igraph]{plot.igraph()}}, \code{\link[=tkplot]{tkplot()}}.
+See \code{\link[=with_kk]{with_kk()}} to build a lazy layout specification for \code{\link[=add_layout_]{add_layout_()}}.
 
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},

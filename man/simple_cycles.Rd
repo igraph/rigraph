@@ -17,46 +17,45 @@ simple_cycles(
 \item{graph}{The input graph.}
 
 \item{mode}{Character constant specifying how to handle directed graphs.
-\code{out} follows edge directions, \verb{in} follows edges in the reverse direction,
-and \code{all} ignores edge directions. Ignored in undirected graphs.}
+\code{out} follows edge directions, \verb{in} follows edges in the reverse direction, and \code{all} ignores edge directions.
+Ignored in undirected graphs.}
 
-\item{min}{Lower limit on cycle lengths to consider. \code{NULL} means no limit.}
+\item{min}{Lower limit on cycle lengths to consider.
+\code{NULL} means no limit.}
 
-\item{max}{Upper limit on cycle lengths to consider. \code{NULL} means no limit.}
+\item{max}{Upper limit on cycle lengths to consider.
+\code{NULL} means no limit.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{callback}{Optional function to call for each cycle found. If provided,
-the function should accept two arguments: \code{vertices} (integer vector of vertex
-IDs in the cycle) and \code{edges} (integer vector of edge IDs
-in the cycle). The function should return \code{FALSE} to continue
-the search or \code{TRUE} to stop it. If \code{NULL} (the default), all cycles are
-collected and returned as a list.
+\item{callback}{Optional function to call for each cycle found.
+If provided, the function should accept two arguments:
+\code{vertices} (integer vector of vertex IDs in the cycle) and \code{edges} (integer vector of edge IDs in the cycle).
+The function should return \code{FALSE} to continue the search or \code{TRUE} to stop it.
+If \code{NULL} (the default), all cycles are collected and returned as a list.
 
-\strong{Important limitation:} Callback functions must NOT call any igraph
-functions (including simple queries like \code{vcount()} or \code{ecount()}). Doing
-so will cause R to crash due to nested \code{.Call()} state corruption. Extract
-any needed graph information before calling the function with a callback, or
-use collector mode (the default) and process results afterward.}
+\strong{Important limitation:} Callback functions must NOT call any igraph functions (including simple queries like \code{vcount()} or \code{ecount()}).
+Doing so will cause R to crash due to nested \code{.Call()} state corruption.
+Extract any needed graph information before calling the function with a callback,
+or use collector mode (the default) and process results afterward.}
 }
 \value{
-If \code{callback} is \code{NULL}, returns a list with two elements: \code{vertices}
-(list of integer vectors with vertex IDs) and \code{edges} (list of integer vectors
-with edge IDs). If \code{callback} is provided, returns \code{NULL} invisibly.
+If \code{callback} is \code{NULL}, returns a list with two elements:
+\code{vertices} (list of integer vectors with vertex IDs) and \code{edges} (list of integer vectors with edge IDs).
+If \code{callback} is provided, returns \code{NULL} invisibly.
 
-If \code{callback} is \code{NULL}, returns a list with two elements: \code{vertices}
-(list of integer vectors with vertex IDs) and \code{edges} (list of integer vectors
-with edge IDs). If \code{callback} is provided, returns \code{NULL} invisibly.
+If \code{callback} is \code{NULL}, returns a list with two elements:
+\code{vertices} (list of integer vectors with vertex IDs) and \code{edges} (list of integer vectors with edge IDs).
+If \code{callback} is provided, returns \code{NULL} invisibly.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-This function lists all simple cycles in a graph within a range of cycle
-lengths. A cycle is called simple if it has no repeated vertices.
+This function lists all simple cycles in a graph within a range of cycle lengths.
+A cycle is called simple if it has no repeated vertices.
 
-Multi-edges and self-loops are taken into account. Note that typical graphs
-have exponentially many cycles and the presence of multi-edges exacerbates
-this combinatorial explosion.
+Multi-edges and self-loops are taken into account.
+Note that typical graphs have exponentially many cycles and the presence of multi-edges exacerbates this combinatorial explosion.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_simple_cycles_callback}{\code{simple_cycles_callback()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_simple_cycles}{\code{simple_cycles()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

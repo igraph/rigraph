@@ -13,8 +13,7 @@ hrg_tree(hrg)
 An igraph graph with a vertex attribute called \code{"probability"}.
 }
 \description{
-\code{hrg_tree()} creates the corresponsing igraph tree of a hierarchical
-random graph model.
+\code{hrg_tree()} creates the corresponsing igraph tree of a hierarchical random graph model.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_from_hrg_dendrogram}{\code{from_hrg_dendrogram()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

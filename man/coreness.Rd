@@ -11,24 +11,21 @@ coreness(graph, ..., mode = c("all", "out", "in"))
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{mode}{The type of the core in directed graphs. Character constant,
-possible values: \verb{in}: in-cores are computed, \code{out}: out-cores are
-computed, \code{all}: the corresponding undirected graph is considered. This
-argument is ignored for undirected graphs.}
+\item{mode}{The type of the core in directed graphs.
+Character constant, possible values: \verb{in}: in-cores are computed, \code{out}: out-cores are computed, \code{all}:
+the corresponding undirected graph is considered.
+This argument is ignored for undirected graphs.}
 }
 \value{
-Numeric vector of integer numbers giving the coreness of each
-vertex.
+Numeric vector of integer numbers giving the coreness of each vertex.
 }
 \description{
-The k-core of graph is a maximal subgraph in which each vertex has at least
-degree k. The coreness of a vertex is k if it belongs to the k-core but not
-to the (k+1)-core.
+The k-core of graph is a maximal subgraph in which each vertex has at least degree k.
+The coreness of a vertex is k if it belongs to the k-core but not to the (k+1)-core.
 }
 \details{
-The k-core of a graph is the maximal subgraph in which every vertex has at
-least degree k. The cores of a graph form layers: the (k+1)-core is always a
-subgraph of the k-core.
+The k-core of a graph is the maximal subgraph in which every vertex has at least degree k.
+The cores of a graph form layers: the (k+1)-core is always a subgraph of the k-core.
 
 This function calculates the coreness for each vertex.
 }

@@ -9,25 +9,22 @@ get.edge.ids(graph, vp, directed = TRUE, error = FALSE, multi = deprecated())
 \arguments{
 \item{graph}{The input graph.}
 
-\item{vp}{The incident vertices, given as a two-column data frame, two-column matrix,
-or vector of vertex IDs or symbolic vertex names.
-For a vector, the values are interpreted pairwise, i.e. the first and second are used for
-the first edge, the third and fourth for the second, etc.}
+\item{vp}{The incident vertices, given as a two-column data frame, two-column matrix, or vector of vertex IDs or symbolic vertex names.
+For a vector, the values are interpreted pairwise, i.e. the first and second are used for the first edge,
+the third and fourth for the second, etc.}
 
-\item{directed}{Logical, whether to consider edge directions in
-directed graphs. This argument is ignored for undirected graphs.}
+\item{directed}{Logical, whether to consider edge directions in directed graphs.
+This argument is ignored for undirected graphs.}
 
-\item{error}{Logical, whether to report an error if an edge is not
-found in the graph. If \code{FALSE}, then no error is reported, and zero is
-returned for the non-existant edge(s).}
+\item{error}{Logical, whether to report an error if an edge is not found in the graph.
+If \code{FALSE}, then no error is reported, and zero is returned for the non-existant edge(s).}
 
 \item{multi}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{get.edge.ids()} was renamed to \code{\link[=get_edge_ids]{get_edge_ids()}} to create a more
-consistent API.
+\code{get.edge.ids()} was renamed to \code{\link[=get_edge_ids]{get_edge_ids()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}

@@ -11,18 +11,16 @@ graph.ring(n, directed = FALSE, mutual = FALSE, circular = TRUE)
 
 \item{directed}{Whether the graph is directed.}
 
-\item{mutual}{Whether directed edges are mutual. It is ignored in
-undirected graphs.}
+\item{mutual}{Whether directed edges are mutual.
+It is ignored in undirected graphs.}
 
-\item{circular}{Whether to create a circular ring. A non-circular
-ring is essentially a \dQuote{line}: a tree where every non-leaf
-vertex has one child.}
+\item{circular}{Whether to create a circular ring.
+A non-circular ring is essentially a \dQuote{line}: a tree where every non-leaf vertex has one child.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.ring()} was renamed to \code{\link[=make_ring]{make_ring()}} to create a more
-consistent API.
+\code{graph.ring()} was renamed to \code{\link[=make_ring]{make_ring()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_ring}{\code{ring()}}

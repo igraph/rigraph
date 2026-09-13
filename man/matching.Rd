@@ -13,35 +13,31 @@ is_max_matching(graph, matching, types = NULL)
 max_bipartite_match(graph, types = NULL, ..., weights = NULL, eps = NULL)
 }
 \arguments{
-\item{graph}{The input graph. It might be directed, but edge directions will
-be ignored.}
+\item{graph}{The input graph.
+It might be directed, but edge directions will be ignored.}
 
-\item{matching}{A potential matching. An integer vector that gives the
-pair in the matching for each vertex. For vertices without a pair,
-supply \code{NA} here.}
+\item{matching}{A potential matching.
+An integer vector that gives the pair in the matching for each vertex.
+For vertices without a pair, supply \code{NA} here.}
 
-\item{types}{Vertex types, if the graph is bipartite. By default they
-are taken from the \sQuote{\code{type}} vertex attribute, if present.}
+\item{types}{Vertex types, if the graph is bipartite.
+By default they are taken from the \sQuote{\code{type}} vertex attribute, if present.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{weights}{Potential edge weights. If the graph has an edge
-attribute called \sQuote{\code{weight}}, and this argument is
-\code{NULL}, then the edge attribute is used automatically.
-In weighted matching, the weights of the edges must match as
-much as possible.}
+\item{weights}{Potential edge weights.
+If the graph has an edge attribute called \sQuote{\code{weight}}, and this argument is \code{NULL},
+then the edge attribute is used automatically.
+In weighted matching, the weights of the edges must match as much as possible.}
 
-\item{eps}{A small real number used in equality tests in the weighted
-bipartite matching algorithm. Two real numbers are considered equal in
-the algorithm if their difference is smaller than \code{eps}. This is
-required to avoid the accumulation of numerical errors. The default
-\code{NULL} stands for the smallest \eqn{x}, such that
-\eqn{1+x \ne 1}{1+x != 1} holds (\code{.Machine$double.eps}). If you are running the algorithm with no weights, this argument
-is ignored.}
+\item{eps}{A small real number used in equality tests in the weighted bipartite matching algorithm.
+Two real numbers are considered equal in the algorithm if their difference is smaller than \code{eps}.
+This is required to avoid the accumulation of numerical errors.
+The default \code{NULL} stands for the smallest \eqn{x}, such that \eqn{1+x \ne 1}{1+x != 1} holds (\code{.Machine$double.eps}).
+If you are running the algorithm with no weights, this argument is ignored.}
 }
 \value{
-\code{is_matching()} and \code{is_max_matching()} return a logical
-scalar.
+\code{is_matching()} and \code{is_max_matching()} return a logical scalar.
 
 \code{max_bipartite_match()} returns a list with components:
 \describe{
@@ -60,36 +56,26 @@ Non-matched vertices are denoted by \code{NA}.
 }
 }
 \description{
-A matching in a graph means the selection of a set of edges that are
-pairwise non-adjacent, i.e. they have no common incident vertices. A
-matching is maximal if it is not a proper subset of any other matching.
+A matching in a graph means the selection of a set of edges that are pairwise non-adjacent, i.e. they have no common incident vertices.
+A matching is maximal if it is not a proper subset of any other matching.
 }
 \details{
-\code{is_matching()} checks a matching vector and verifies whether its
-length matches the number of vertices in the given graph, its values are
-between zero (inclusive) and the number of vertices (inclusive), and
-whether there exists a corresponding edge in the graph for every matched
-vertex pair. For bipartite graphs, it also verifies whether the matched
-vertices are in different parts of the graph.
+\code{is_matching()} checks a matching vector and verifies whether its length matches the number of vertices in the given graph,
+its values are between zero (inclusive) and the number of vertices (inclusive),
+and whether there exists a corresponding edge in the graph for every matched vertex pair.
+For bipartite graphs, it also verifies whether the matched vertices are in different parts of the graph.
 
-\code{is_max_matching()} checks whether a matching is maximal.  A matching
-is maximal if and only if there exists no unmatched vertex in a graph
-such that one of its neighbors is also unmatched.
+\code{is_max_matching()} checks whether a matching is maximal.
+A matching is maximal if and only if there exists no unmatched vertex in a graph such that one of its neighbors is also unmatched.
 
-\code{max_bipartite_match()} calculates a maximum matching in a bipartite
-graph. A matching in a bipartite graph is a partial assignment of
-vertices of the first kind to vertices of the second kind such that each
-vertex of the first kind is matched to at most one vertex of the second
-kind and vice versa, and matched vertices must be connected by an edge
-in the graph. The size (or cardinality) of a matching is the number of
-edges. A matching is a maximum matching if there exists no other
-matching with larger cardinality.  For weighted graphs, a maximum
-matching is a matching whose edges have the largest possible total
-weight among all possible matchings.
+\code{max_bipartite_match()} calculates a maximum matching in a bipartite graph.
+A matching in a bipartite graph is a partial assignment of vertices of the first kind to vertices of the second kind such that each vertex of the first kind is matched to at most one vertex of the second kind and vice versa, and matched vertices must be connected by an edge in the graph.
+The size (or cardinality) of a matching is the number of edges.
+A matching is a maximum matching if there exists no other matching with larger cardinality.
+For weighted graphs, a maximum matching is a matching whose edges have the largest possible total weight among all possible matchings.
 
-Maximum matchings in bipartite graphs are found by the push-relabel
-algorithm with greedy initialization and a global relabeling after every
-\eqn{n/2} steps where \eqn{n} is the number of vertices in the graph.
+Maximum matchings in bipartite graphs are found by the push-relabel algorithm with greedy initialization and a global relabeling after every \eqn{n/2} steps
+where \eqn{n} is the number of vertices in the graph.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_matching}{\code{is_matching()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_maximum_bipartite_matching}{\code{maximum_bipartite_matching()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_maximal_matching}{\code{is_maximal_matching()}}

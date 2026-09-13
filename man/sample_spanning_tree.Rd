@@ -7,25 +7,22 @@
 sample_spanning_tree(graph, ..., vid = 0)
 }
 \arguments{
-\item{graph}{The input graph to sample from. Edge directions are ignored if
-the graph is directed.}
+\item{graph}{The input graph to sample from.
+Edge directions are ignored if the graph is directed.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{vid}{When the graph is disconnected, this argument specifies how to
-handle the situation. When the argument is zero (the default), the sampling
-will be performed component-wise, and the result will be a spanning forest.
-When the argument contains a vertex ID, only the component containing the
-given vertex will be processed, and the result will be a spanning tree of the
-component of the graph.}
+\item{vid}{When the graph is disconnected, this argument specifies how to handle the situation.
+When the argument is zero (the default), the sampling will be performed component-wise, and the result will be a spanning forest.
+When the argument contains a vertex ID, only the component containing the given vertex will be processed,
+and the result will be a spanning tree of the component of the graph.}
 }
 \value{
-An edge sequence containing the edges of the spanning tree. Use
-\code{\link[=subgraph_from_edges]{subgraph_from_edges()}} to extract the corresponding subgraph.
+An edge sequence containing the edges of the spanning tree.
+Use \code{\link[=subgraph_from_edges]{subgraph_from_edges()}} to extract the corresponding subgraph.
 }
 \description{
-\code{sample_spanning_tree()} picks a spanning tree of an undirected graph
-randomly and uniformly, using loop-erased random walks.
+\code{sample_spanning_tree()} picks a spanning tree of an undirected graph randomly and uniformly, using loop-erased random walks.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_random_spanning_tree}{\code{random_spanning_tree()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}

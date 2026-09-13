@@ -11,20 +11,18 @@ plotHierarchy(
 )
 }
 \arguments{
-\item{layout}{The layout of a plot, it is simply passed on to
-\code{plot.igraph()}, see the possible formats there. The default \code{NULL} uses
-the Reingold-Tilford layout generator.}
+\item{layout}{The layout of a plot, it is simply passed on to \code{plot.igraph()}, see the possible formats there.
+The default \code{NULL} uses the Reingold-Tilford layout generator.}
 
-\item{...}{Additional arguments. \code{plot_hierarchy()} and \code{\link[=plot]{plot()}} pass
-them to \code{plot.igraph()}.  \code{\link[=print]{print()}} and \code{\link[=summary]{summary()}} ignore them.
-\code{cohesive_blocks()} and \code{export_pajek()} do not accept extra arguments;
-these dots must be empty for them.}
+\item{...}{Additional arguments.
+\code{plot_hierarchy()} and \code{\link[=plot]{plot()}} pass them to \code{plot.igraph()}.
+\code{\link[=print]{print()}} and \code{\link[=summary]{summary()}} ignore them.
+\code{cohesive_blocks()} and \code{export_pajek()} do not accept extra arguments; these dots must be empty for them.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{plotHierarchy()} was renamed to \code{\link[=plot_hierarchy]{plot_hierarchy()}} to create a more
-consistent API.
+\code{plotHierarchy()} was renamed to \code{\link[=plot_hierarchy]{plot_hierarchy()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

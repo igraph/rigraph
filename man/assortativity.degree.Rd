@@ -9,19 +9,15 @@ assortativity.degree(graph, directed = TRUE)
 \arguments{
 \item{graph}{The input graph, it can be directed or undirected.}
 
-\item{directed}{Logical, whether to consider edge directions for
-directed graphs.
+\item{directed}{Logical, whether to consider edge directions for directed graphs.
 This argument is ignored for undirected graphs.
-Supply
-\code{TRUE} here to do the natural thing, i.e. use directed version of the
-measure for directed graphs and the undirected version for undirected
-graphs.}
+Supply \code{TRUE} here to do the natural thing,
+i.e. use directed version of the measure for directed graphs and the undirected version for undirected graphs.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{assortativity.degree()} was renamed to \code{\link[=assortativity_degree]{assortativity_degree()}} to create a more
-consistent API.
+\code{assortativity.degree()} was renamed to \code{\link[=assortativity_degree]{assortativity_degree()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity_degree}{\code{assortativity_degree()}}

@@ -7,28 +7,23 @@
 graph.adjlist(adjlist, mode = c("out", "in", "all", "total"), duplicate = TRUE)
 }
 \arguments{
-\item{adjlist}{The adjacency list. It should be consistent, i.e. the maximum
-throughout all vectors in the list must be less than the number of vectors
-(=the number of vertices in the graph).}
+\item{adjlist}{The adjacency list.
+It should be consistent,
+i.e. the maximum throughout all vectors in the list must be less than the number of vectors (=the number of vertices in the graph).}
 
-\item{mode}{Character scalar, it specifies whether the graph to create is
-undirected (\sQuote{all} or \sQuote{total}) or directed; and in the latter
-case, whether it contains the outgoing (\sQuote{out}) or the incoming
-(\sQuote{in}) neighbors of the vertices.}
+\item{mode}{Character scalar, it specifies whether the graph to create is undirected (\sQuote{all} or \sQuote{total}) or directed;
+and in the latter case, whether it contains the outgoing (\sQuote{out}) or the incoming (\sQuote{in}) neighbors of the vertices.}
 
-\item{duplicate}{Logical. For undirected graphs it gives whether
-edges are included in the list twice. E.g. if it is \code{TRUE} then for an
-undirected \code{{A,B}} edge \code{graph_from_adj_list()} expects \code{A}
-included in the neighbors of \code{B} and \code{B} to be included in the
-neighbors of \code{A}.
+\item{duplicate}{Logical.
+For undirected graphs it gives whether edges are included in the list twice.
+E.g. if it is \code{TRUE} then for an undirected \code{{A,B}} edge \code{graph_from_adj_list()} expects \code{A} included in the neighbors of \code{B} and \code{B} to be included in the neighbors of \code{A}.
 
 This argument is ignored if \code{mode} is \code{out} or \verb{in}.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.adjlist()} was renamed to \code{\link[=graph_from_adj_list]{graph_from_adj_list()}} to create a more
-consistent API.
+\code{graph.adjlist()} was renamed to \code{\link[=graph_from_adj_list]{graph_from_adj_list()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_adjlist}{\code{adjlist()}}

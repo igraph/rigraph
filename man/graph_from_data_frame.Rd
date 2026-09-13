@@ -12,84 +12,68 @@ graph_from_data_frame(d, directed = TRUE, ..., vertices = NULL)
 \arguments{
 \item{x}{An igraph object.}
 
-\item{what}{Character constant, whether to return info about vertices,
-edges, or both. The default is \sQuote{edges}.}
+\item{what}{Character constant, whether to return info about vertices, edges, or both.
+The default is \sQuote{edges}.}
 
-\item{d}{A data frame containing a symbolic edge list in the first two
-columns. Additional columns are considered as edge attributes.  Since
-version 0.7 this argument is coerced to a data frame with
-\code{as.data.frame}.}
+\item{d}{A data frame containing a symbolic edge list in the first two columns.
+Additional columns are considered as edge attributes.
+Since version 0.7 this argument is coerced to a data frame with \code{as.data.frame}.}
 
 \item{directed}{Logical, whether or not to create a directed graph.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{vertices}{A data frame with vertex metadata, or \code{NULL}. See
-details below. Since version 0.7 this argument is coerced to a data frame
-with \code{as.data.frame}, if not \code{NULL}.}
+\item{vertices}{A data frame with vertex metadata, or \code{NULL}.
+See details below.
+Since version 0.7 this argument is coerced to a data frame with \code{as.data.frame}, if not \code{NULL}.}
 }
 \value{
-An igraph graph object for \code{graph_from_data_frame()}, and either a
-data frame or a list of two data frames named \code{edges} and
-\code{vertices} for \code{as.data.frame}.
+An igraph graph object for \code{graph_from_data_frame()},
+and either a data frame or a list of two data frames named \code{edges} and \code{vertices} for \code{as.data.frame}.
 }
 \description{
-This function creates an igraph graph from one or two data frames containing
-the (symbolic) edge list and edge/vertex attributes.
+This function creates an igraph graph from one or two data frames containing the (symbolic) edge list and edge/vertex attributes.
 }
 \details{
 \code{graph_from_data_frame()} creates igraph graphs from one or two data frames.
-It has two modes of operation, depending whether the \code{vertices}
-argument is \code{NULL} or not.
+It has two modes of operation, depending whether the \code{vertices} argument is \code{NULL} or not.
 
-If \code{vertices} is \code{NULL}, then the first two columns of \code{d}
-are used as a symbolic edge list and additional columns as edge attributes.
+If \code{vertices} is \code{NULL}, then the first two columns of \code{d} are used as a symbolic edge list and additional columns as edge attributes.
 The names of the attributes are taken from the names of the columns.
 
-If \code{vertices} is not \code{NULL}, then it must be a data frame giving
-vertex metadata. The first column of \code{vertices} is assumed to contain
-symbolic vertex names, this will be added to the graphs as the
-\sQuote{\code{name}} vertex attribute. Other columns will be added as
-additional vertex attributes. If \code{vertices} is not \code{NULL} then the
-symbolic edge list given in \code{d} is checked to contain only vertex names
-listed in \code{vertices}.
+If \code{vertices} is not \code{NULL}, then it must be a data frame giving vertex metadata.
+The first column of \code{vertices} is assumed to contain symbolic vertex names,
+this will be added to the graphs as the \sQuote{\code{name}} vertex attribute.
+Other columns will be added as additional vertex attributes.
+If \code{vertices} is not \code{NULL} then the symbolic edge list given in \code{d} is checked to contain only vertex names listed in \code{vertices}.
 
-Typically, the data frames are exported from some spreadsheet software like
-Excel and are imported into R via \code{\link[=read.table]{read.table()}},
+Typically, the data frames are exported from some spreadsheet software like Excel and are imported into R via \code{\link[=read.table]{read.table()}},
 \code{\link[=read.delim]{read.delim()}} or \code{\link[=read.csv]{read.csv()}}.
 
-All edges in the data frame are included in the graph, which may include
-multiple parallel edges and loops.
+All edges in the data frame are included in the graph, which may include multiple parallel edges and loops.
 
-\code{as_data_frame()} converts the igraph graph into one or more data
-frames, depending on the \code{what} argument.
+\code{as_data_frame()} converts the igraph graph into one or more data frames, depending on the \code{what} argument.
 
-If the \code{what} argument is \code{edges} (the default), then the edges of
-the graph and also the edge attributes are returned. The edges will be in
-the first two columns, named \code{from} and \code{to}. (This also denotes
-edge direction for directed graphs.)  For named graphs, the vertex names
-will be included in these columns, for other graphs, the numeric vertex IDs.
-The edge attributes will be in the other columns. It is not a good idea to
-have an edge attribute named \code{from} or \code{to}, because then the
-column named in the data frame will not be unique. The edges are listed in
-the order of their numeric IDs.
+If the \code{what} argument is \code{edges} (the default), then the edges of the graph and also the edge attributes are returned.
+The edges will be in the first two columns, named \code{from} and \code{to}.
+(This also denotes edge direction for directed graphs.)
+For named graphs, the vertex names will be included in these columns, for other graphs, the numeric vertex IDs.
+The edge attributes will be in the other columns.
+It is not a good idea to have an edge attribute named \code{from} or \code{to}, because then the column named in the data frame will not be unique.
+The edges are listed in the order of their numeric IDs.
 
-If the \code{what} argument is \code{vertices}, then vertex attributes are
-returned. Vertices are listed in the order of their numeric vertex IDs.
+If the \code{what} argument is \code{vertices}, then vertex attributes are returned.
+Vertices are listed in the order of their numeric vertex IDs.
 
-If the \code{what} argument is \code{both}, then both vertex and edge data
-is returned, in a list with named entries \code{vertices} and \code{edges}.
+If the \code{what} argument is \code{both}, then both vertex and edge data is returned, in a list with named entries \code{vertices} and \code{edges}.
 }
 \note{
-For \code{graph_from_data_frame()} \code{NA} elements in the first two
-columns \sQuote{d} are replaced by the string \dQuote{NA} before creating
-the graph. This means that all \code{NA}s will correspond to a single
-vertex.
+For \code{graph_from_data_frame()} \code{NA} elements in the first two columns \sQuote{d} are replaced by the string \dQuote{NA} before creating the graph.
+This means that all \code{NA}s will correspond to a single vertex.
 
-\code{NA} elements in the first column of \sQuote{vertices} are also
-replaced by the string \dQuote{NA}, but the rest of \sQuote{vertices} is not
-touched. In other words, vertex names (=the first column) cannot be
-\code{NA}, but other vertex attributes can.
+\code{NA} elements in the first column of \sQuote{vertices} are also replaced by the string \dQuote{NA},
+but the rest of \sQuote{vertices} is not touched.
+In other words, vertex names (=the first column) cannot be \code{NA}, but other vertex attributes can.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist}{\code{get_edgelist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_add_vertices}{\code{add_vertices()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty}{\code{empty()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
@@ -125,10 +109,8 @@ as_data_frame(g, what = "edges")
 
 }
 \seealso{
-\code{\link[=graph_from_literal]{graph_from_literal()}}
-for another way to create graphs, \code{\link[=read.table]{read.table()}} to read in tables
-from files. See \code{\link[=from_data_frame]{from_data_frame()}} to build a lazy constructor
-specification for \code{\link[=make_]{make_()}} or \code{\link[=sample_]{sample_()}}.
+\code{\link[=graph_from_literal]{graph_from_literal()}} for another way to create graphs, \code{\link[=read.table]{read.table()}} to read in tables from files.
+See \code{\link[=from_data_frame]{from_data_frame()}} to build a lazy constructor specification for \code{\link[=make_]{make_()}} or \code{\link[=sample_]{sample_()}}.
 
 Other conversion:
 \code{\link[=as.matrix.igraph]{as.matrix.igraph()}},

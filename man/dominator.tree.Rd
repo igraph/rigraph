@@ -7,22 +7,19 @@
 dominator.tree(graph, root, mode = c("out", "in", "all", "total"))
 }
 \arguments{
-\item{graph}{A directed graph. If it is not a flowgraph, and it contains
-some vertices not reachable from the root vertex, then these vertices will
-be collected and returned as part of the result.}
+\item{graph}{A directed graph.
+If it is not a flowgraph, and it contains some vertices not reachable from the root vertex,
+then these vertices will be collected and returned as part of the result.}
 
-\item{root}{The ID of the root (or source) vertex, this will be the root of
-the tree.}
+\item{root}{The ID of the root (or source) vertex, this will be the root of the tree.}
 
-\item{mode}{Constant, must be \sQuote{\verb{in}} or \sQuote{\code{out}}. If
-it is \sQuote{\verb{in}}, then all directions are considered as opposite to
-the original one in the input graph.}
+\item{mode}{Constant, must be \sQuote{\verb{in}} or \sQuote{\code{out}}.
+If it is \sQuote{\verb{in}}, then all directions are considered as opposite to the original one in the input graph.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{dominator.tree()} was renamed to \code{\link[=dominator_tree]{dominator_tree()}} to create a more
-consistent API.
+\code{dominator.tree()} was renamed to \code{\link[=dominator_tree]{dominator_tree()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_dominator_tree}{\code{dominator_tree()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

@@ -15,15 +15,13 @@
 \item{n}{Number of times to replicate it.}
 
 \item{mark}{Whether to mark the vertices with a \code{which} attribute,
-an integer number denoting which replication the vertex is coming
-from.}
+an integer number denoting which replication the vertex is coming from.}
 
 \item{...}{Additional arguments to satisfy S3 requirements,
 currently ignored.}
 }
 \description{
-The new graph will contain the input graph the given number
-of times, as unconnected components.
+The new graph will contain the input graph the given number of times, as unconnected components.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

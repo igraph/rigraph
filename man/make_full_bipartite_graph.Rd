@@ -31,22 +31,20 @@ full_bipartite_graph(
 \item{directed}{Logical, whether the graphs is directed.}
 
 \item{mode}{Scalar giving the kind of edges to create for directed graphs.
-If this is \sQuote{\code{out}} then all vertices of the first kind are
-connected to the others; \sQuote{\verb{in}} specifies the opposite
-direction; \sQuote{\code{all}} creates mutual edges. This argument is
-ignored for undirected graphs.x}
+If this is \sQuote{\code{out}} then all vertices of the first kind are connected to the others;
+\sQuote{\verb{in}} specifies the opposite direction; \sQuote{\code{all}} creates mutual edges.
+This argument is ignored for undirected graphs.x}
 }
 \value{
 An igraph graph, with the \sQuote{\code{type}} vertex attribute set.
 }
 \description{
-Bipartite graphs are also called two-mode by some. This function creates a
-bipartite graph in which every possible edge is present.
+Bipartite graphs are also called two-mode by some.
+This function creates a bipartite graph in which every possible edge is present.
 }
 \details{
 Bipartite graphs have a \sQuote{\code{type}} vertex attribute in igraph,
-this is boolean and \code{FALSE} for the vertices of the first kind and
-\code{TRUE} for vertices of the second kind.
+this is boolean and \code{FALSE} for the vertices of the first kind and \code{TRUE} for vertices of the second kind.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_full_bipartite}{\code{full_bipartite()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

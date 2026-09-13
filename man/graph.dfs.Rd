@@ -26,33 +26,30 @@ graph.dfs(
 \item{root}{The single root vertex to start the search from.}
 
 \item{mode}{For directed graphs specifies the type of edges to follow.
-\sQuote{out} follows outgoing, \sQuote{in} incoming edges. \sQuote{all}
-ignores edge directions completely. \sQuote{total} is a synonym for
-\sQuote{all}. This argument is ignored for undirected graphs.}
+\sQuote{out} follows outgoing, \sQuote{in} incoming edges.
+\sQuote{all} ignores edge directions completely.
+\sQuote{total} is a synonym for \sQuote{all}.
+This argument is ignored for undirected graphs.}
 
-\item{unreachable}{Logical, whether the search should visit the
-vertices that are unreachable from the given root vertex (or vertices). If
-\code{TRUE}, then additional searches are performed until all vertices are
-visited.}
+\item{unreachable}{Logical, whether the search should visit the vertices that are unreachable from the given root vertex (or vertices).
+If \code{TRUE}, then additional searches are performed until all vertices are visited.}
 
-\item{order}{Logical, whether to return the DFS ordering of the
-vertices.}
+\item{order}{Logical, whether to return the DFS ordering of the vertices.}
 
-\item{order.out}{Logical, whether to return the ordering based on
-leaving the subtree of the vertex.}
+\item{order.out}{Logical, whether to return the ordering based on leaving the subtree of the vertex.}
 
 \item{father}{Logical, whether to return the father of the vertices.}
 
-\item{dist}{Logical, whether to return the distance from the root of
-the search tree.}
+\item{dist}{Logical, whether to return the distance from the root of the search tree.}
 
 \item{in.callback}{Callback function.
-This is called whenever a vertex is visited. See details below.
+This is called whenever a vertex is visited.
+See details below.
 Default: \code{NULL}.}
 
 \item{out.callback}{Callback function.
-This is called whenever the subtree of a vertex is completed by the
-algorithm. See details below.
+This is called whenever the subtree of a vertex is completed by the algorithm.
+See details below.
 Default: \code{NULL}.}
 
 \item{extra}{Additional argument to supply to the callback function.}
@@ -60,14 +57,12 @@ Default: \code{NULL}.}
 \item{rho}{The environment in which the callback function is evaluated.
 The default \code{NULL} uses the caller's environment.}
 
-\item{neimode}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This argument is deprecated from igraph 1.3.0; use
-\code{mode} instead.}
+\item{neimode}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This argument is deprecated from igraph 1.3.0; use \code{mode} instead.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.dfs()} was renamed to \code{\link[=dfs]{dfs()}} to create a more
-consistent API.
+\code{graph.dfs()} was renamed to \code{\link[=dfs]{dfs()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

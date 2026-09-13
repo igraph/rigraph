@@ -11,18 +11,16 @@ set.vertex.attribute(graph, name, index = V(graph), value)
 
 \item{name}{The name of the attribute to set.}
 
-\item{index}{An optional vertex sequence to set the attributes
-of a subset of vertices. The default \code{NULL} selects all vertices.}
+\item{index}{An optional vertex sequence to set the attributes of a subset of vertices.
+The default \code{NULL} selects all vertices.}
 
-\item{value}{The new value of the attribute for all (or \code{index})
-vertices.
+\item{value}{The new value of the attribute for all (or \code{index}) vertices.
 If \code{NULL}, the input is returned unchanged.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{set.vertex.attribute()} was renamed to \code{\link[=set_vertex_attr]{set_vertex_attr()}} to create a more
-consistent API.
+\code{set.vertex.attribute()} was renamed to \code{\link[=set_vertex_attr]{set_vertex_attr()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

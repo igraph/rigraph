@@ -7,21 +7,20 @@
 is.maximal.matching(graph, matching, types = NULL)
 }
 \arguments{
-\item{graph}{The input graph. It might be directed, but edge directions will
-be ignored.}
+\item{graph}{The input graph.
+It might be directed, but edge directions will be ignored.}
 
-\item{matching}{A potential matching. An integer vector that gives the
-pair in the matching for each vertex. For vertices without a pair,
-supply \code{NA} here.}
+\item{matching}{A potential matching.
+An integer vector that gives the pair in the matching for each vertex.
+For vertices without a pair, supply \code{NA} here.}
 
-\item{types}{Vertex types, if the graph is bipartite. By default they
-are taken from the \sQuote{\code{type}} vertex attribute, if present.}
+\item{types}{Vertex types, if the graph is bipartite.
+By default they are taken from the \sQuote{\code{type}} vertex attribute, if present.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{is.maximal.matching()} was renamed to \code{\link[=is_max_matching]{is_max_matching()}} to create a more
-consistent API.
+\code{is.maximal.matching()} was renamed to \code{\link[=is_max_matching]{is_max_matching()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_maximal_matching}{\code{is_maximal_matching()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

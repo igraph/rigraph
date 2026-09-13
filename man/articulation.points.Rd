@@ -7,14 +7,13 @@
 articulation.points(graph)
 }
 \arguments{
-\item{graph}{The input graph. It is treated as an undirected graph, even if
-it is directed.}
+\item{graph}{The input graph.
+It is treated as an undirected graph, even if it is directed.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{articulation.points()} was renamed to \code{\link[=articulation_points]{articulation_points()}} to create a more
-consistent API.
+\code{articulation.points()} was renamed to \code{\link[=articulation_points]{articulation_points()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_articulation_points}{\code{articulation_points()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

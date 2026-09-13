@@ -20,21 +20,18 @@ voronoi_cells(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{weights}{Possibly a numeric vector giving edge weights. If this is
-\code{NULL} and the graph has a \code{weight} edge attribute, then the
-attribute is used. If this is \code{NA} then no weights are used (even if
-the graph has a \code{weight} attribute). In a weighted graph, the length
-of a path is the sum of the weights of its constituent edges.}
+\item{weights}{Possibly a numeric vector giving edge weights.
+If this is \code{NULL} and the graph has a \code{weight} edge attribute, then the attribute is used.
+If this is \code{NA} then no weights are used (even if the graph has a \code{weight} attribute).
+In a weighted graph, the length of a path is the sum of the weights of its constituent edges.}
 
-\item{mode}{Character string. In directed graphs, whether to compute
-distances from generator vertices to other vertices (\code{"out"}), to
-generator vertices from other vertices (\code{"in"}), or ignore edge
-directions entirely (\code{"all"}). Ignored in undirected graphs.}
+\item{mode}{Character string.
+In directed graphs, whether to compute distances from generator vertices to other vertices (\code{"out"}),
+to generator vertices from other vertices (\code{"in"}), or ignore edge directions entirely (\code{"all"}).
+Ignored in undirected graphs.}
 
-\item{tiebreaker}{Character string that specifies what to do when a vertex
-is at the same distance from multiple generators. \code{"random"} assigns
-a minimal-distance generator randomly, \code{"first"} takes the first one,
-and \code{"last"} takes the last one.}
+\item{tiebreaker}{Character string that specifies what to do when a vertex is at the same distance from multiple generators.
+\code{"random"} assigns a minimal-distance generator randomly, \code{"first"} takes the first one, and \code{"last"} takes the last one.}
 }
 \value{
 A named list with two components:
@@ -50,9 +47,8 @@ numeric vector giving the distance of each vertex from its generator
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-This function partitions the vertices of a graph based on a set of generator
-vertices. Each vertex is assigned to the generator vertex from (or to) which
-it is closest.
+This function partitions the vertices of a graph based on a set of generator vertices.
+Each vertex is assigned to the generator vertex from (or to) which it is closest.
 
 \code{\link[=groups]{groups()}} may be used on the output of this function.
 }

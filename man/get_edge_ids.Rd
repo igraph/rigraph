@@ -9,37 +9,32 @@ get_edge_ids(graph, vp, ..., directed = TRUE, error = FALSE)
 \arguments{
 \item{graph}{The input graph.}
 
-\item{vp}{The incident vertices, given as a two-column data frame, two-column matrix,
-or vector of vertex IDs or symbolic vertex names.
-For a vector, the values are interpreted pairwise, i.e. the first and second are used for
-the first edge, the third and fourth for the second, etc.}
+\item{vp}{The incident vertices, given as a two-column data frame, two-column matrix, or vector of vertex IDs or symbolic vertex names.
+For a vector, the values are interpreted pairwise, i.e. the first and second are used for the first edge,
+the third and fourth for the second, etc.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{directed}{Logical, whether to consider edge directions in
-directed graphs. This argument is ignored for undirected graphs.}
+\item{directed}{Logical, whether to consider edge directions in directed graphs.
+This argument is ignored for undirected graphs.}
 
-\item{error}{Logical, whether to report an error if an edge is not
-found in the graph. If \code{FALSE}, then no error is reported, and zero is
-returned for the non-existant edge(s).}
+\item{error}{Logical, whether to report an error if an edge is not found in the graph.
+If \code{FALSE}, then no error is reported, and zero is returned for the non-existant edge(s).}
 }
 \value{
 A numeric vector of edge IDs, one for each pair of input vertices.
-If there is no edge in the input graph for a given pair of vertices, then
-zero is reported. (If the \code{error} argument is \code{FALSE}.)
+If there is no edge in the input graph for a given pair of vertices, then zero is reported.
+(If the \code{error} argument is \code{FALSE}.)
 }
 \description{
-Find the edges in an igraph graph that have the specified end points. This
-function handles multi-graph (graphs with multiple edges) and can consider
-or ignore the edge directions in directed graphs.
+Find the edges in an igraph graph that have the specified end points.
+This function handles multi-graph (graphs with multiple edges) and can consider or ignore the edge directions in directed graphs.
 }
 \details{
-igraph vertex IDs are natural numbers, starting from one, up to the number
-of vertices in the graph. Similarly, edges are also numbered from one, up to
-the number of edges.
+igraph vertex IDs are natural numbers, starting from one, up to the number of vertices in the graph.
+Similarly, edges are also numbered from one, up to the number of edges.
 
-This function allows finding the edges of the graph, via their incident
-vertices.
+This function allows finding the edges of the graph, via their incident vertices.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}

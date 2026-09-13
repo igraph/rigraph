@@ -13,16 +13,14 @@ adjacent_vertices(graph, v, ..., mode = c("out", "in", "all", "total"))
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{mode}{Whether to query outgoing (\sQuote{out}), incoming
-(\sQuote{in}) edges, or both types (\sQuote{all}). This is
-ignored for undirected graphs.}
+\item{mode}{Whether to query outgoing (\sQuote{out}), incoming (\sQuote{in}) edges, or both types (\sQuote{all}).
+This is ignored for undirected graphs.}
 }
 \value{
 A list of vertex sequences.
 }
 \description{
-This function is similar to \code{\link[=neighbors]{neighbors()}}, but it queries
-the adjacent vertices for multiple vertices at once.
+This function is similar to \code{\link[=neighbors]{neighbors()}}, but it queries the adjacent vertices for multiple vertices at once.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

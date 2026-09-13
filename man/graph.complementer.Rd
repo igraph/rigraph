@@ -14,8 +14,7 @@ graph.complementer(graph, loops = FALSE)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.complementer()} was renamed to \code{\link[=complementer]{complementer()}} to create a more
-consistent API.
+\code{graph.complementer()} was renamed to \code{\link[=complementer]{complementer()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_complementer}{\code{complementer()}}

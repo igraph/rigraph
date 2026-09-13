@@ -25,36 +25,32 @@ layout_with_drl(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{use.seed}{Logical, whether to use the coordinates given in the
-\code{seed} argument as a starting point.}
+\item{use.seed}{Logical, whether to use the coordinates given in the \code{seed} argument as a starting point.}
 
-\item{seed}{A matrix with two columns, the starting coordinates for the
-vertices is \code{use.seed} is \code{TRUE}. It is ignored otherwise. The default
-\code{NULL} draws uniformly random starting coordinates.}
+\item{seed}{A matrix with two columns, the starting coordinates for the vertices is \code{use.seed} is \code{TRUE}.
+It is ignored otherwise.
+The default \code{NULL} draws uniformly random starting coordinates.}
 
-\item{options}{Options for the layout generator, a named list. See details
-below. The default \code{NULL} uses \code{drl_defaults$default}.}
+\item{options}{Options for the layout generator, a named list.
+See details below.
+The default \code{NULL} uses \code{drl_defaults$default}.}
 
-\item{weights}{The weights of the edges. It must be a positive numeric vector,
-\code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
-\sQuote{weight} edge attribute, then that attribute will be used. If
-\code{NULL} and no such attribute is present, then the edges will have equal
-weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
-attribute, but you don't want to use it for the layout. Larger edge weights
-correspond to stronger connections.}
+\item{weights}{The weights of the edges.
+It must be a positive numeric vector, \code{NULL} or \code{NA}.
+If it is \code{NULL} and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
+If \code{NULL} and no such attribute is present, then the edges will have equal weights.
+Set this to \code{NA} if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for the layout.
+Larger edge weights correspond to stronger connections.}
 
-\item{dim}{Either \sQuote{2} or \sQuote{3}, it specifies whether we want a
-two dimensional or a three dimensional layout. Note that because of the
-nature of the DrL algorithm, the three dimensional layout takes
-significantly longer to compute.}
+\item{dim}{Either \sQuote{2} or \sQuote{3}, it specifies whether we want a two dimensional or a three dimensional layout.
+Note that because of the nature of the DrL algorithm, the three dimensional layout takes significantly longer to compute.}
 }
 \value{
 A numeric matrix with two columns.
 }
 \description{
-DrL is a force-directed graph layout toolbox focused on real-world
-large-scale graphs, developed by Shawn Martin and colleagues at Sandia
-National Laboratories.
+DrL is a force-directed graph layout toolbox focused on real-world large-scale graphs,
+developed by Shawn Martin and colleagues at Sandia National Laboratories.
 }
 \details{
 This function implements the force-directed DrL layout generator.
@@ -62,7 +58,9 @@ This function implements the force-directed DrL layout generator.
 The generator has the following parameters:
 \describe{
 \item{edge.cut}{
-Edge cutting is done in the late stages of the algorithm in order to achieve less dense layouts.  Edges are cut if there is a lot of stress on them (a large value in the objective function sum). The edge cutting parameter is a value between 0 and 1 with 0 representing no edge cutting and 1 representing maximal edge cutting.
+Edge cutting is done in the late stages of the algorithm in order to achieve less dense layouts.
+Edges are cut if there is a lot of stress on them (a large value in the objective function sum).
+The edge cutting parameter is a value between 0 and 1 with 0 representing no edge cutting and 1 representing maximal edge cutting.
 }
 \item{init.iterations}{
 Number of iterations in the first phase.
@@ -138,10 +136,8 @@ Damping, simmer phase.
 }
 }
 
-There are five pre-defined parameter settings as well, these are called
-\code{drl_defaults$default}, \code{drl_defaults$coarsen},
-\code{drl_defaults$coarsest}, \code{drl_defaults$refine} and
-\code{drl_defaults$final}.
+There are five pre-defined parameter settings as well, these are called \code{drl_defaults$default}, \code{drl_defaults$coarsen},
+\code{drl_defaults$coarsest}, \code{drl_defaults$refine} and \code{drl_defaults$final}.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
@@ -160,8 +156,8 @@ Klavans, R., Boyack, K.W., DrL: Distributed Recursive (Graph) Layout. SAND
 Reports, 2008. 2936: p. 1-10.
 }
 \seealso{
-\code{\link[=layout]{layout()}} for other layout generators. See \code{\link[=with_drl]{with_drl()}} to
-build a lazy layout specification for \code{\link[=add_layout_]{add_layout_()}}.
+\code{\link[=layout]{layout()}} for other layout generators.
+See \code{\link[=with_drl]{with_drl()}} to build a lazy layout specification for \code{\link[=add_layout_]{add_layout_()}}.
 }
 \author{
 Shawn Martin (\url{https://www.cs.otago.ac.nz/homepages/smartin/})
