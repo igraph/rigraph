@@ -20,7 +20,7 @@ read_graph(
 \arguments{
 \item{file}{The connection to read from. This can be a local file, or a
 \code{http} or \code{ftp} connection. It can also be a character string with
-the file name or URI.}
+the file name or URI or contain the graph in a single string.}
 
 \item{format}{Character constant giving the file format. Right now
 \code{edgelist}, \code{pajek}, \code{ncol}, \code{lgl}, \code{graphml},
