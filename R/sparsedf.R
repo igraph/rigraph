@@ -19,9 +19,8 @@
 #
 ###################################################################
 
-# This is a sparse data frame. It is like a regular data frame,
-# but it allows for some columns to be constant, and then it
-# stores that column more economically.
+# This is a sparse data frame.
+# It is like a regular data frame, but it allows for some columns to be constant, and then it stores that column more economically.
 
 sdf <- function(..., row.names = NULL, NROW = NULL) {
   cols <- list(...)

@@ -3,8 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `igraph.to.graphNEL()` was renamed to [as_graphnel()] to create a more
-#' consistent API.
+#' `igraph.to.graphNEL()` was renamed to [as_graphnel()] to create a more consistent API.
 #' @inheritParams as_graphnel
 #' @keywords internal
 #' @export
@@ -19,8 +18,7 @@ igraph.to.graphNEL <- function(graph) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `igraph.from.graphNEL()` was renamed to [graph_from_graphnel()] to create a more
-#' consistent API.
+#' `igraph.from.graphNEL()` was renamed to [graph_from_graphnel()] to create a more consistent API.
 #' @inheritParams graph_from_graphnel
 #' @keywords internal
 #' @export
@@ -49,8 +47,7 @@ igraph.from.graphNEL <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.adjlist()` was renamed to [graph_from_adj_list()] to create a more
-#' consistent API.
+#' `graph.adjlist()` was renamed to [graph_from_adj_list()] to create a more consistent API.
 #' @inheritParams graph_from_adj_list
 #' @keywords internal
 #' @export
@@ -69,8 +66,7 @@ graph.adjlist <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `get.incidence()` was renamed to [as_biadjacency_matrix()] to create a more
-#' consistent API.
+#' `get.incidence()` was renamed to [as_biadjacency_matrix()] to create a more consistent API.
 #' @inheritParams as_biadjacency_matrix
 #' @keywords internal
 #' @export
@@ -101,8 +97,7 @@ get.incidence <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `get.edgelist()` was renamed to [as_edgelist()] to create a more
-#' consistent API.
+#' `get.edgelist()` was renamed to [as_edgelist()] to create a more consistent API.
 #' @inheritParams as_edgelist
 #' @keywords internal
 #' @export
@@ -117,8 +112,7 @@ get.edgelist <- function(graph, names = TRUE) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `get.data.frame()` was renamed to [as_data_frame()] to create a more
-#' consistent API.
+#' `get.data.frame()` was renamed to [as_data_frame()] to create a more consistent API.
 #' @inheritParams as_data_frame
 #' @keywords internal
 #' @export
@@ -133,8 +127,7 @@ get.data.frame <- function(x, what = c("edges", "vertices", "both")) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `get.adjacency()` was renamed to [as_adjacency_matrix()] to create a more
-#' consistent API.
+#' `get.adjacency()` was renamed to [as_adjacency_matrix()] to create a more consistent API.
 #' @inheritParams as_adjacency_matrix
 #' @keywords internal
 #' @export
@@ -163,8 +156,7 @@ get.adjacency <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `get.adjlist()` was renamed to [as_adj_list()] to create a more
-#' consistent API.
+#' `get.adjlist()` was renamed to [as_adj_list()] to create a more consistent API.
 #' @inheritParams as_adj_list
 #' @keywords internal
 #' @export
@@ -184,8 +176,7 @@ get.adjlist <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `get.adjedgelist()` was renamed to [as_adj_edge_list()] to create a more
-#' consistent API.
+#' `get.adjedgelist()` was renamed to [as_adj_edge_list()] to create a more consistent API.
 #' @inheritParams as_adj_edge_list
 #' @keywords internal
 #' @export
@@ -248,14 +239,12 @@ resolve_edge_weights <- function(
       },
       user_env = user_env
     )
-    # `attr` and `weights` spell "unweighted" differently, so the two cannot
-    # simply be assigned across. `attr = NULL` was the documented way to ask
-    # for a plain 0/1 matrix -- "If `NULL` a traditional adjacency matrix is
-    # returned" -- while `weights = NULL` means the opposite: use the `weight`
-    # edge attribute if the graph has one. Passing it straight through
-    # therefore inverts what the caller asked for, silently and without a
-    # warning, for every call that spelled it out. `NA` is how the new
-    # vocabulary says "unweighted".
+    # `attr` and `weights` spell "unweighted" differently, so the two cannot simply be assigned across.
+    # `attr = NULL` was the documented way to ask for a plain 0/1 matrix -- "If `NULL` a traditional adjacency matrix is returned" --
+    # while `weights = NULL` means the opposite: use the `weight` edge attribute if the graph has one.
+    # Passing it straight through therefore inverts what the caller asked for, silently and without a warning, for every call
+    # that spelled it out.
+    # `NA` is how the new vocabulary says "unweighted".
     #
     # `lifecycle::is_present()` is true for an explicit `NULL` -- only the
     # `deprecated()` sentinel counts as absent -- so this branch really does
@@ -400,47 +389,38 @@ get.adjacency.sparse <- function(
 
 #' Convert a graph to an adjacency matrix
 #'
-#' Sometimes it is useful to work with a standard representation of a
-#' graph, like an adjacency matrix.
+#' Sometimes it is useful to work with a standard representation of a graph, like an adjacency matrix.
 #'
-#' `as_adjacency_matrix()` returns the adjacency matrix of a graph, a
-#' regular matrix if `sparse` is `FALSE`, or a sparse matrix, as
-#' defined in the \sQuote{`Matrix`} package, if `sparse` if
-#' `TRUE`.
+#' `as_adjacency_matrix()` returns the adjacency matrix of a graph, a regular matrix if `sparse` is `FALSE`, or a sparse matrix,
+#' as defined in the \sQuote{`Matrix`} package, if `sparse` if `TRUE`.
 #'
 #' @param graph The graph to convert.
 #' @param type Gives how to create the adjacency matrix for undirected graphs.
-#'   It is ignored for directed graphs. Possible values: `upper`: the upper
-#'   right triangle of the matrix is used, `lower`: the lower left triangle
-#'   of the matrix is used. `both`: the whole matrix is used, a symmetric
-#'   matrix is returned.
+#'   It is ignored for directed graphs.
+#'   Possible values: `upper`: the upper right triangle of the matrix is used, `lower`: the lower left triangle of the matrix is used.
+#'   `both`: the whole matrix is used, a symmetric matrix is returned.
 #' @inheritParams rlang::args_dots_empty
 #' @param weights One of the following:
 #'   \itemize{
-#'     \item `NULL` (default): use the `weight` edge attribute if the graph has
-#'       one, otherwise return a traditional (unweighted) adjacency matrix.
+#'     \item `NULL` (default): use the `weight` edge attribute if the graph has one,
+#'       otherwise return a traditional (unweighted) adjacency matrix.
 #'     \item `NA`: explicitly unweighted, ignoring any `weight` edge attribute.
-#'     \item A numeric or logical vector of length [ecount()]: use these values
-#'       directly as edge weights.
-#'     \item A character scalar: the name of an edge attribute whose values are
-#'       used as weights. The attribute must be numeric or logical.
+#'     \item A numeric or logical vector of length [ecount()]: use these values directly as edge weights.
+#'     \item A character scalar: the name of an edge attribute whose values are used as weights.
+#'       The attribute must be numeric or logical.
 #'   }
-#'   If multiple edges share endpoints, the value of an arbitrarily chosen edge
-#'   is included in the matrix.
-#' @param attr `r lifecycle::badge("deprecated")` Use `weights` instead. A
-#'   character edge attribute name is forwarded to `weights` unchanged; `NULL`
-#'   becomes `weights = NA`, since `attr = NULL` asked for a traditional
-#'   unweighted matrix while `weights = NULL` picks the `weight` attribute up.
+#'   If multiple edges share endpoints, the value of an arbitrarily chosen edge is included in the matrix.
+#' @param attr `r lifecycle::badge("deprecated")` Use `weights` instead.
+#'   A character edge attribute name is forwarded to `weights` unchanged; `NULL` becomes `weights = NA`,
+#'   since `attr = NULL` asked for a traditional unweighted matrix while `weights = NULL` picks the `weight` attribute up.
 #' @param edges `r lifecycle::badge("deprecated")` Logical, whether to return the edge IDs in the matrix.
 #'   For non-existant edges zero is returned.
-#' @param names Logical, whether to assign row and column names
-#'   to the matrix. These are only assigned if the `name` vertex attribute
-#'   is present in the graph.
-#' @param sparse Logical, whether to create a sparse matrix. The
-#'   \sQuote{`Matrix`} package must be installed for creating sparse
-#'   matrices. The default `NULL` uses the `sparsematrices` igraph option.
-#' @return A `vcount(graph)` by `vcount(graph)` (usually) numeric
-#'   matrix.
+#' @param names Logical, whether to assign row and column names to the matrix.
+#'   These are only assigned if the `name` vertex attribute is present in the graph.
+#' @param sparse Logical, whether to create a sparse matrix.
+#'   The \sQuote{`Matrix`} package must be installed for creating sparse matrices.
+#'   The default `NULL` uses the `sparsematrices` igraph option.
+#' @return A `vcount(graph)` by `vcount(graph)` (usually) numeric matrix.
 #'
 #' @seealso [graph_from_adjacency_matrix()], [read_graph()]
 #' @examples
@@ -539,9 +519,7 @@ as_adjacency_matrix <- function(
 
 #' Convert a graph to an adjacency matrix
 #'
-#' `r lifecycle::badge("deprecated")`
-#' We plan to remove `as_adj()` in favor of the more explicitly named
-#' `as_adjacency_matrix()` so please use `as_adjacency_matrix()` instead.
+#' `r lifecycle::badge("deprecated")` We plan to remove `as_adj()` in favor of the more explicitly named `as_adjacency_matrix()` so please use `as_adjacency_matrix()` instead.
 #'
 #' @export
 #' @inheritParams as_adjacency_matrix
@@ -569,16 +547,14 @@ as_adj <- function(
 }
 #' Convert a graph to an edge list
 #'
-#' Sometimes it is useful to work with a standard representation of a
-#' graph, like an edge list.
+#' Sometimes it is useful to work with a standard representation of a graph, like an edge list.
 #'
 #' `as_edgelist()` returns the list of edges in a graph.
 #'
 #' @param graph The graph to convert.
 #' @inheritParams rlang::args_dots_empty
-#' @param names Whether to return a character matrix containing vertex
-#'   names (i.e. the `name` vertex attribute) if they exist or numeric
-#'   vertex IDs.
+#' @param names Whether to return a character matrix containing vertex names (i.e. the `name` vertex attribute)
+#'   if they exist or numeric vertex IDs.
 #' @return A `ecount(graph)` by 2 numeric matrix.
 #' @seealso [graph_from_adjacency_matrix()], [read_graph()]
 #' @keywords graphs
@@ -645,9 +621,8 @@ as_edgelist <- function(
 
 #' Convert between directed and undirected graphs
 #'
-#' `as_directed()` converts an undirected graph to directed,
-#' `as_undirected()` does the opposite, it converts a directed graph to
-#' undirected.
+#' `as_directed()` converts an undirected graph to directed, `as_undirected()` does the opposite,
+#' it converts a directed graph to undirected.
 #'
 #' Conversion algorithms for `as_directed()`:
 #'   \describe{
@@ -662,18 +637,13 @@ as_edgelist <- function(
 #'       edge, one in each direction.
 #'     }
 #'     \item{"random"}{
-#'       The number of edges in the graph stays the same, and
-#'       a randomly directed edge is created for each undirected edge. You
-#'       will get different results if you call the function multiple times
-#'       with the same graph.
+#'       The number of edges in the graph stays the same, and a randomly directed edge is created for each undirected edge.
+#'       You will get different results if you call the function multiple times with the same graph.
 #'     }
 #'     \item{"acyclic"}{
-#'       The number of edges in the graph stays the same, and
-#'       a directed edge is created for each undirected edge such that the
-#'       resulting graph is guaranteed to be acyclic. This is achieved by ensuring
-#'       that edges always point from a lower index vertex to a higher index.
-#'       Note that the graph may include cycles of length 1 if the original
-#'       graph contained loop edges.
+#'       The number of edges in the graph stays the same, and a directed edge is created for each undirected edge such that the resulting graph is guaranteed to be acyclic.
+#'       This is achieved by ensuring that edges always point from a lower index vertex to a higher index.
+#'       Note that the graph may include cycles of length 1 if the original graph contained loop edges.
 #'     }
 #'   }
 #'
@@ -690,23 +660,21 @@ as_edgelist <- function(
 #'       edge, no multiple edges will be created.
 #'     }
 #'     \item{"mutual"}{
-#'       One
-#'       undirected edge will be created for each pair of mutual edges. Non-mutual
-#'       edges are ignored. This mode might create multiple edges if there are more
-#'       than one mutual edge pairs between the same pair of vertices.
+#'       One undirected edge will be created for each pair of mutual edges.
+#'       Non-mutual edges are ignored.
+#'       This mode might create multiple edges if there are more than one mutual edge pairs between the same pair of vertices.
 #'     }
 #'   }
 #'
 #' @aliases as_directed as_undirected
 #' @param graph The graph to convert.
-#' @param mode Character constant, defines the conversion algorithm. For
-#'   `as_directed()` it can be `mutual` or `arbitrary`. For
-#'   `as_undirected()` it can be `each`, `collapse` or
-#'   `mutual`. See details below.
+#' @param mode Character constant, defines the conversion algorithm.
+#'   For `as_directed()` it can be `mutual` or `arbitrary`.
+#'   For `as_undirected()` it can be `each`, `collapse` or `mutual`.
+#'   See details below.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [simplify()] for removing multiple and/or loop edges from
-#' a graph.
+#' @seealso [simplify()] for removing multiple and/or loop edges from a graph.
 #' @family conversion
 #' @export
 #' @keywords graphs
@@ -791,11 +759,11 @@ as_directed <- function(
 }
 
 #' @rdname as_directed
-#' @param edge.attr.comb Specifies what to do with edge attributes, if
-#'   `mode="collapse"` or `mode="mutual"`.  In these cases many edges
-#'   might be mapped to a single one in the new graph, and their attributes are
-#'   combined. Please see [attribute.combination()] for details on
-#'   this. The default `NULL` uses the `edge.attr.comb` igraph option.
+#' @param edge.attr.comb Specifies what to do with edge attributes,
+#'   if `mode="collapse"` or `mode="mutual"`.
+#'   In these cases many edges might be mapped to a single one in the new graph, and their attributes are combined.
+#'   Please see [attribute.combination()] for details on this.
+#'   The default `NULL` uses the `edge.attr.comb` igraph option.
 #' @export
 as_undirected <- function(
   graph,
@@ -823,34 +791,27 @@ as_undirected <- function(
 
 #' Adjacency lists
 #'
-#' Create adjacency lists from a graph, either for adjacent edges or for
-#' neighboring vertices
+#' Create adjacency lists from a graph, either for adjacent edges or for neighboring vertices
 #'
-#' `as_adj_list()` returns a list of numeric vectors, which include the IDs
-#' of neighbor vertices (according to the `mode` argument) of all
-#' vertices.
+#' `as_adj_list()` returns a list of numeric vectors,
+#' which include the IDs of neighbor vertices (according to the `mode` argument) of all vertices.
 #'
-#' `as_adj_edge_list()` returns a list of numeric vectors, which include the
-#' IDs of adjacent edges (according to the `mode` argument) of all
-#' vertices.
+#' `as_adj_edge_list()` returns a list of numeric vectors,
+#' which include the IDs of adjacent edges (according to the `mode` argument) of all vertices.
 #'
 #' @param graph The input graph.
 #' @inheritParams rlang::args_dots_empty
-#' @param mode Character scalar, it gives what kind of adjacent edges/vertices
-#'   to include in the lists. \sQuote{`out`} is for outgoing edges/vertices,
-#'   \sQuote{`in`} is for incoming edges/vertices, \sQuote{`all`} is
-#'   for both. This argument is ignored for undirected graphs.
-#' @param loops Character scalar, one of `"ignore"` (to omit loops), `"twice"`
-#'   (to include loop edges twice) and `"once"` (to include them once). `"twice"`
-#'   is not allowed for directed graphs and will be replaced with `"once"`.
-#' @param multiple Logical, set to `FALSE` to use only one representative
-#'   of each set of parallel edges.
-#' @return A list of `igraph.vs` or a list of numeric vectors depending on
-#'   the value of `igraph_opt("return.vs.es")`, see details for performance
-#'   characteristics.
-#' @details If `igraph_opt("return.vs.es")` is true (default), the numeric
-#' vectors of the adjacency lists are coerced to `igraph.vs`, this can be
-#' a very expensive operation on large graphs.
+#' @param mode Character scalar, it gives what kind of adjacent edges/vertices to include in the lists.
+#'   \sQuote{`out`} is for outgoing edges/vertices, \sQuote{`in`} is for incoming edges/vertices, \sQuote{`all`} is for both.
+#'   This argument is ignored for undirected graphs.
+#' @param loops Character scalar, one of `"ignore"` (to omit loops),
+#'   `"twice"` (to include loop edges twice) and `"once"` (to include them once).
+#'   `"twice"` is not allowed for directed graphs and will be replaced with `"once"`.
+#' @param multiple Logical, set to `FALSE` to use only one representative of each set of parallel edges.
+#' @return A list of `igraph.vs` or a list of numeric vectors depending on the value of `igraph_opt("return.vs.es")`,
+#'   see details for performance characteristics.
+#' @details If `igraph_opt("return.vs.es")` is true (default), the numeric vectors of the adjacency lists are coerced to `igraph.vs`,
+#' this can be a very expensive operation on large graphs.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [as_edgelist()], [as_adjacency_matrix()]
 #' @family conversion
@@ -1002,34 +963,25 @@ as_adj_edge_list <- function(
 
 #' Convert graphNEL objects from the graph package to igraph
 #'
-#' The graphNEL class is defined in the `graph` package, it is another
-#' way to represent graphs. `graph_from_graphnel()` takes a graphNEL
-#' graph and converts it to an igraph graph. It handles all
-#' graph/vertex/edge attributes. If the graphNEL graph has a vertex
-#' attribute called \sQuote{`name`} it will be used as igraph vertex
-#' attribute \sQuote{`name`} and the graphNEL vertex names will be
-#' ignored.
+#' The graphNEL class is defined in the `graph` package, it is another way to represent graphs.
+#' `graph_from_graphnel()` takes a graphNEL graph and converts it to an igraph graph.
+#' It handles all graph/vertex/edge attributes.
+#' If the graphNEL graph has a vertex attribute called \sQuote{`name`} it will be used as igraph vertex attribute \sQuote{`name`} and the graphNEL vertex names will be ignored.
 #'
-#' Because graphNEL graphs poorly support multiple edges, the edge
-#' attributes of the multiple edges are lost: they are all replaced by the
-#' attributes of the first of the multiple edges.
+#' Because graphNEL graphs poorly support multiple edges, the edge attributes of the multiple edges are lost:
+#' they are all replaced by the attributes of the first of the multiple edges.
 #'
 #' @param graphNEL The graphNEL graph.
 #' @inheritParams rlang::args_dots_empty
-#' @param name Logical, whether to add graphNEL vertex names as an
-#'   igraph vertex attribute called \sQuote{`name`}.
-#' @param weight Logical, whether to add graphNEL edge weights as an
-#'   igraph edge attribute called \sQuote{`weight`}. (graphNEL graphs are
-#'   always weighted.)
-#' @param unlist.attrs Logical. graphNEL attribute query functions
-#'   return the values of the attributes in R lists, if this argument is
-#'   `TRUE` (the default) these will be converted to atomic vectors,
-#'   whenever possible, before adding them to the igraph graph.
+#' @param name Logical, whether to add graphNEL vertex names as an igraph vertex attribute called \sQuote{`name`}.
+#' @param weight Logical, whether to add graphNEL edge weights as an igraph edge attribute called \sQuote{`weight`}.
+#'   (graphNEL graphs are always weighted.)
+#' @param unlist.attrs Logical. graphNEL attribute query functions return the values of the attributes in R lists,
+#'   if this argument is `TRUE` (the default) these will be converted to atomic vectors, whenever possible,
+#'   before adding them to the igraph graph.
 #' @return `graph_from_graphnel()` returns an igraph graph object.
-#' @seealso [as_graphnel()] for the other direction,
-#' [as_adjacency_matrix()], [graph_from_adjacency_matrix()],
-#' [as_adj_list()] and [graph_from_adj_list()] for other
-#' graph representations.
+#' @seealso [as_graphnel()] for the other direction, [as_adjacency_matrix()], [graph_from_adjacency_matrix()],
+#' [as_adj_list()] and [graph_from_adj_list()] for other graph representations.
 #' @examplesIf rlang::is_installed("graph")
 #' ## Undirected
 #' g <- make_ring(10)
@@ -1149,22 +1101,18 @@ graph_from_graphnel <- function(
 
 #' Convert igraph graphs to graphNEL objects from the graph package
 #'
-#' The graphNEL class is defined in the `graph` package, it is another
-#' way to represent graphs. These functions are provided to convert between
-#' the igraph and the graphNEL objects.
+#' The graphNEL class is defined in the `graph` package, it is another way to represent graphs.
+#' These functions are provided to convert between the igraph and the graphNEL objects.
 #'
-#' `as_graphnel()` converts an igraph graph to a graphNEL graph. It
-#' converts all graph/vertex/edge attributes. If the igraph graph has a
-#' vertex attribute \sQuote{`name`}, then it will be used to assign
-#' vertex names in the graphNEL graph. Otherwise numeric igraph vertex IDs
-#' will be used for this purpose.
+#' `as_graphnel()` converts an igraph graph to a graphNEL graph.
+#' It converts all graph/vertex/edge attributes.
+#' If the igraph graph has a vertex attribute \sQuote{`name`}, then it will be used to assign vertex names in the graphNEL graph.
+#' Otherwise numeric igraph vertex IDs will be used for this purpose.
 #'
 #' @param graph An igraph graph object.
 #' @return `as_graphnel()` returns a graphNEL graph object.
-#' @seealso [graph_from_graphnel()] for the other direction,
-#' [as_adjacency_matrix()], [graph_from_adjacency_matrix()],
-#' [as_adj_list()] and [graph_from_adj_list()] for
-#' other graph representations.
+#' @seealso [graph_from_graphnel()] for the other direction, [as_adjacency_matrix()], [graph_from_adjacency_matrix()],
+#' [as_adj_list()] and [graph_from_adj_list()] for other graph representations.
 #'
 #' @examplesIf rlang::is_installed("graph")
 #' ## Undirected
@@ -1372,26 +1320,21 @@ get.incidence.sparse <- function(
 
 #' Bipartite adjacency matrix of a bipartite graph
 #'
-#' This function can return a sparse or dense bipartite adjacency matrix of a bipartite
-#' network. The bipartite adjacency matrix is an \eqn{n} times \eqn{m} matrix, \eqn{n}
-#' and \eqn{m} are the number of vertices of the two kinds.
+#' This function can return a sparse or dense bipartite adjacency matrix of a bipartite network.
+#' The bipartite adjacency matrix is an \eqn{n} times \eqn{m} matrix, \eqn{n} and \eqn{m} are the number of vertices of the two kinds.
 #'
-#' Bipartite graphs have a `type` vertex attribute in igraph, this is
-#' boolean and `FALSE` for the vertices of the first kind and `TRUE`
-#' for vertices of the second kind.
+#' Bipartite graphs have a `type` vertex attribute in igraph,
+#' this is boolean and `FALSE` for the vertices of the first kind and `TRUE` for vertices of the second kind.
 #'
-#' @param graph The input graph. The direction of the edges is ignored in
-#'   directed graphs.
-#' @param types An optional vertex type vector to use instead of the
-#'   `type` vertex attribute. You must supply this argument if the graph has
-#'   no `type` vertex attribute.
+#' @param graph The input graph.
+#'   The direction of the edges is ignored in directed graphs.
+#' @param types An optional vertex type vector to use instead of the `type` vertex attribute.
+#'   You must supply this argument if the graph has no `type` vertex attribute.
 #' @inheritParams as_adjacency_matrix
-#' @param names Logical, if `TRUE` and the vertices in the graph
-#'   are named (i.e. the graph has a vertex attribute called `name`), then
-#'   vertex names will be added to the result as row and column names. Otherwise
-#'   the IDs of the vertices are used as row and column names.
-#' @param sparse Logical, if it is `TRUE` then a sparse matrix is
-#'   created, you will need the `Matrix` package for this.
+#' @param names Logical, if `TRUE` and the vertices in the graph are named (i.e. the graph has a vertex attribute called `name`),
+#'   then vertex names will be added to the result as row and column names.
+#'   Otherwise the IDs of the vertices are used as row and column names.
+#' @param sparse Logical, if it is `TRUE` then a sparse matrix is created, you will need the `Matrix` package for this.
 #' @return A sparse or dense matrix.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [graph_from_biadjacency_matrix()] for the opposite operation.
@@ -1399,9 +1342,7 @@ get.incidence.sparse <- function(
 #' @export
 #' @keywords graphs
 #' @details
-#' Some authors refer to the bipartite adjacency matrix as the
-#' "bipartite incidence matrix". igraph 1.6.0 and later does not use
-#' this naming to avoid confusion with the edge-vertex incidence matrix.
+#' Some authors refer to the bipartite adjacency matrix as the "bipartite incidence matrix". igraph 1.6.0 and later does not use this naming to avoid confusion with the edge-vertex incidence matrix.
 #' @examples
 #'
 #' g <- make_bipartite_graph(c(0, 1, 0, 1, 0, 0), c(1, 2, 2, 3, 3, 4))
@@ -1487,14 +1428,11 @@ as_biadjacency_matrix <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `as_incidence_matrix()` was renamed to [as_biadjacency_matrix()] to create a more
-#' consistent API.
+#' `as_incidence_matrix()` was renamed to [as_biadjacency_matrix()] to create a more consistent API.
 #' @inheritParams as_biadjacency_matrix
 #' @keywords internal
 #' @details
-#' Some authors refer to the bipartite adjacency matrix as the
-#' "bipartite incidence matrix". igraph 1.6.0 and later does not use
-#' this naming to avoid confusion with the edge-vertex incidence matrix.
+#' Some authors refer to the bipartite adjacency matrix as the "bipartite incidence matrix". igraph 1.6.0 and later does not use this naming to avoid confusion with the edge-vertex incidence matrix.
 #' @export
 as_incidence_matrix <- function(...) {
   # nocov start
@@ -1507,8 +1445,8 @@ as_incidence_matrix <- function(...) {
 } # nocov end
 #' @rdname graph_from_data_frame
 #' @param x An igraph object.
-#' @param what Character constant, whether to return info about vertices,
-#'   edges, or both. The default is \sQuote{edges}.
+#' @param what Character constant, whether to return info about vertices, edges, or both.
+#'   The default is \sQuote{edges}.
 #' @family conversion
 #' @family biadjacency
 #' @export
@@ -1554,30 +1492,24 @@ as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
 
 #' Create graphs from adjacency lists
 #'
-#' An adjacency list is a list of numeric vectors, containing the neighbor
-#' vertices for each vertex. This function creates an igraph graph object from
-#' such a list.
+#' An adjacency list is a list of numeric vectors, containing the neighbor vertices for each vertex.
+#' This function creates an igraph graph object from such a list.
 #'
-#' Adjacency lists are handy if you intend to do many (small) modifications to
-#' a graph. In this case adjacency lists are more efficient than igraph graphs.
+#' Adjacency lists are handy if you intend to do many (small) modifications to a graph.
+#' In this case adjacency lists are more efficient than igraph graphs.
 #'
-#' The idea is that you convert your graph to an adjacency list by
-#' [as_adj_list()], do your modifications to the graphs and finally
-#' create again an igraph graph by calling `graph_from_adj_list()`.
+#' The idea is that you convert your graph to an adjacency list by [as_adj_list()],
+#' do your modifications to the graphs and finally create again an igraph graph by calling `graph_from_adj_list()`.
 #'
-#' @param adjlist The adjacency list. It should be consistent, i.e. the maximum
-#'   throughout all vectors in the list must be less than the number of vectors
-#'   (=the number of vertices in the graph).
+#' @param adjlist The adjacency list.
+#'   It should be consistent,
+#'   i.e. the maximum throughout all vectors in the list must be less than the number of vectors (=the number of vertices in the graph).
 #' @inheritParams rlang::args_dots_empty
-#' @param mode Character scalar, it specifies whether the graph to create is
-#'   undirected (\sQuote{all} or \sQuote{total}) or directed; and in the latter
-#'   case, whether it contains the outgoing (\sQuote{out}) or the incoming
-#'   (\sQuote{in}) neighbors of the vertices.
-#' @param duplicate Logical. For undirected graphs it gives whether
-#'   edges are included in the list twice. E.g. if it is `TRUE` then for an
-#'   undirected \code{{A,B}} edge `graph_from_adj_list()` expects `A`
-#'   included in the neighbors of `B` and `B` to be included in the
-#'   neighbors of `A`.
+#' @param mode Character scalar, it specifies whether the graph to create is undirected (\sQuote{all} or \sQuote{total}) or directed;
+#'   and in the latter case, whether it contains the outgoing (\sQuote{out}) or the incoming (\sQuote{in}) neighbors of the vertices.
+#' @param duplicate Logical.
+#'   For undirected graphs it gives whether edges are included in the list twice.
+#'   E.g. if it is `TRUE` then for an undirected \code{{A,B}} edge `graph_from_adj_list()` expects `A` included in the neighbors of `B` and `B` to be included in the neighbors of `A`.
 #'
 #'   This argument is ignored if `mode` is `out` or `in`.
 #' @return An igraph graph object.
@@ -1656,14 +1588,11 @@ graph_from_adj_list <- function(
 
 #' Convert a graph to a long data frame
 #'
-#' A long data frame contains all metadata about both the vertices
-#' and edges of the graph. It contains one row for each edge, and
-#' all metadata about that edge and its incident vertices are included
-#' in that row. The names of the columns that contain the metadata
-#' of the incident vertices are prefixed with `from_` and `to_`.
-#' The first two columns are always named `from` and `to` and
-#' they contain the numeric IDs of the incident vertices. The rows are
-#' listed in the order of numeric vertex IDs.
+#' A long data frame contains all metadata about both the vertices and edges of the graph.
+#' It contains one row for each edge, and all metadata about that edge and its incident vertices are included in that row.
+#' The names of the columns that contain the metadata of the incident vertices are prefixed with `from_` and `to_`.
+#' The first two columns are always named `from` and `to` and they contain the numeric IDs of the incident vertices.
+#' The rows are listed in the order of numeric vertex IDs.
 #'
 #' @param graph Input graph
 #' @return A long data frame.
@@ -1719,27 +1648,21 @@ as_long_data_frame <- function(graph) {
 
 #' Convert igraph objects to adjacency or edge list matrices
 #'
-#' Get adjacency or edgelist representation of the network stored as an
-#' `igraph` object.
+#' Get adjacency or edgelist representation of the network stored as an `igraph` object.
 #'
-#' If `matrix.type` is `"edgelist"`, then a two-column numeric edge list
-#' matrix is returned.  The value of `attrname` is ignored.
+#' If `matrix.type` is `"edgelist"`, then a two-column numeric edge list matrix is returned.
+#' The value of `attrname` is ignored.
 #'
-#' If `matrix.type` is `"adjacency"`, then a square adjacency matrix is
-#' returned. For adjacency matrices, you can use the `attr` keyword argument
-#' to use the values of an edge attribute in the matrix cells. See the
-#' documentation of [as_adjacency_matrix] for more details.
+#' If `matrix.type` is `"adjacency"`, then a square adjacency matrix is returned.
+#' For adjacency matrices, you can use the `attr` keyword argument to use the values of an edge attribute in the matrix cells.
+#' See the documentation of [as_adjacency_matrix] for more details.
 #'
-#' Other arguments passed through `...` are passed to either
-#' [as_adjacency_matrix()] or [as_edgelist()]
-#' depending on the value of `matrix.type`.
+#' Other arguments passed through `...` are passed to either [as_adjacency_matrix()] or [as_edgelist()] depending on the value of `matrix.type`.
 #'
 #' @param x object of class `igraph`, the network
-#' @param matrix.type character, type of matrix to return, currently "adjacency"
-#'   or "edgelist" are supported
+#' @param matrix.type character, type of matrix to return, currently "adjacency" or "edgelist" are supported
 #' @param \dots other arguments to/from other methods
-#' @return Depending on the value of `matrix.type` either a square
-#'   adjacency matrix or a two-column numeric matrix representing the edgelist.
+#' @return Depending on the value of `matrix.type` either a square adjacency matrix or a two-column numeric matrix representing the edgelist.
 #' @author Michal Bojanowski, originally from the `intergraph` package
 #' @family conversion
 #' @export
@@ -1766,8 +1689,7 @@ as.matrix.igraph <- function(x, matrix.type = c("adjacency", "edgelist"), ...) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `as.directed()` was renamed to [as_directed()] to create a more
-#' consistent API.
+#' `as.directed()` was renamed to [as_directed()] to create a more consistent API.
 #' @inheritParams as_directed
 #' @keywords internal
 #' @export
@@ -1784,8 +1706,7 @@ as.directed <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `as.undirected()` was renamed to [as_undirected()] to create a more
-#' consistent API.
+#' `as.undirected()` was renamed to [as_undirected()] to create a more consistent API.
 #' @inheritParams as_undirected
 #' @keywords internal
 #' @export
@@ -1803,8 +1724,7 @@ as.undirected <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.edgelist()` was renamed to [graph_from_edgelist()] to create a more
-#' consistent API.
+#' `graph.edgelist()` was renamed to [graph_from_edgelist()] to create a more consistent API.
 #' @inheritParams graph_from_edgelist
 #' @keywords internal
 #' @export
@@ -1823,8 +1743,7 @@ graph.edgelist <- function(el, directed = TRUE) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.data.frame()` was renamed to [graph_from_data_frame()] to create a more
-#' consistent API.
+#' `graph.data.frame()` was renamed to [graph_from_data_frame()] to create a more consistent API.
 #' @inheritParams graph_from_data_frame
 #' @keywords internal
 #' @export
@@ -1863,77 +1782,59 @@ graph.data.frame <- function(d, directed = TRUE, vertices = NULL) {
 
 #' Creating igraph graphs from data frames or vice-versa
 #'
-#' This function creates an igraph graph from one or two data frames containing
-#' the (symbolic) edge list and edge/vertex attributes.
+#' This function creates an igraph graph from one or two data frames containing the (symbolic) edge list and edge/vertex attributes.
 #'
 #' `graph_from_data_frame()` creates igraph graphs from one or two data frames.
-#' It has two modes of operation, depending whether the `vertices`
-#' argument is `NULL` or not.
+#' It has two modes of operation, depending whether the `vertices` argument is `NULL` or not.
 #'
-#' If `vertices` is `NULL`, then the first two columns of `d`
-#' are used as a symbolic edge list and additional columns as edge attributes.
+#' If `vertices` is `NULL`, then the first two columns of `d` are used as a symbolic edge list and additional columns as edge attributes.
 #' The names of the attributes are taken from the names of the columns.
 #'
-#' If `vertices` is not `NULL`, then it must be a data frame giving
-#' vertex metadata. The first column of `vertices` is assumed to contain
-#' symbolic vertex names, this will be added to the graphs as the
-#' \sQuote{`name`} vertex attribute. Other columns will be added as
-#' additional vertex attributes. If `vertices` is not `NULL` then the
-#' symbolic edge list given in `d` is checked to contain only vertex names
-#' listed in `vertices`.
+#' If `vertices` is not `NULL`, then it must be a data frame giving vertex metadata.
+#' The first column of `vertices` is assumed to contain symbolic vertex names,
+#' this will be added to the graphs as the \sQuote{`name`} vertex attribute.
+#' Other columns will be added as additional vertex attributes.
+#' If `vertices` is not `NULL` then the symbolic edge list given in `d` is checked to contain only vertex names listed in `vertices`.
 #'
-#' Typically, the data frames are exported from some spreadsheet software like
-#' Excel and are imported into R via [read.table()],
+#' Typically, the data frames are exported from some spreadsheet software like Excel and are imported into R via [read.table()],
 #' [read.delim()] or [read.csv()].
 #'
-#' All edges in the data frame are included in the graph, which may include
-#' multiple parallel edges and loops.
+#' All edges in the data frame are included in the graph, which may include multiple parallel edges and loops.
 #'
-#' `as_data_frame()` converts the igraph graph into one or more data
-#' frames, depending on the `what` argument.
+#' `as_data_frame()` converts the igraph graph into one or more data frames, depending on the `what` argument.
 #'
-#' If the `what` argument is `edges` (the default), then the edges of
-#' the graph and also the edge attributes are returned. The edges will be in
-#' the first two columns, named `from` and `to`. (This also denotes
-#' edge direction for directed graphs.)  For named graphs, the vertex names
-#' will be included in these columns, for other graphs, the numeric vertex IDs.
-#' The edge attributes will be in the other columns. It is not a good idea to
-#' have an edge attribute named `from` or `to`, because then the
-#' column named in the data frame will not be unique. The edges are listed in
-#' the order of their numeric IDs.
+#' If the `what` argument is `edges` (the default), then the edges of the graph and also the edge attributes are returned.
+#' The edges will be in the first two columns, named `from` and `to`.
+#' (This also denotes edge direction for directed graphs.)
+#' For named graphs, the vertex names will be included in these columns, for other graphs, the numeric vertex IDs.
+#' The edge attributes will be in the other columns.
+#' It is not a good idea to have an edge attribute named `from` or `to`, because then the column named in the data frame will not be unique.
+#' The edges are listed in the order of their numeric IDs.
 #'
-#' If the `what` argument is `vertices`, then vertex attributes are
-#' returned. Vertices are listed in the order of their numeric vertex IDs.
+#' If the `what` argument is `vertices`, then vertex attributes are returned.
+#' Vertices are listed in the order of their numeric vertex IDs.
 #'
-#' If the `what` argument is `both`, then both vertex and edge data
-#' is returned, in a list with named entries `vertices` and `edges`.
+#' If the `what` argument is `both`, then both vertex and edge data is returned, in a list with named entries `vertices` and `edges`.
 #'
-#' @param d A data frame containing a symbolic edge list in the first two
-#'   columns. Additional columns are considered as edge attributes.  Since
-#'   version 0.7 this argument is coerced to a data frame with
-#'   `as.data.frame`.
+#' @param d A data frame containing a symbolic edge list in the first two columns.
+#'   Additional columns are considered as edge attributes.
+#'   Since version 0.7 this argument is coerced to a data frame with `as.data.frame`.
 #' @param directed Logical, whether or not to create a directed graph.
 #' @inheritParams rlang::args_dots_empty
-#' @param vertices A data frame with vertex metadata, or `NULL`. See
-#'   details below. Since version 0.7 this argument is coerced to a data frame
-#'   with `as.data.frame`, if not `NULL`.
-#' @return An igraph graph object for `graph_from_data_frame()`, and either a
-#'   data frame or a list of two data frames named `edges` and
-#'   `vertices` for `as.data.frame`.
-#' @note For `graph_from_data_frame()` `NA` elements in the first two
-#' columns \sQuote{d} are replaced by the string \dQuote{NA} before creating
-#' the graph. This means that all `NA`s will correspond to a single
-#' vertex.
+#' @param vertices A data frame with vertex metadata, or `NULL`.
+#'   See details below.
+#'   Since version 0.7 this argument is coerced to a data frame with `as.data.frame`, if not `NULL`.
+#' @return An igraph graph object for `graph_from_data_frame()`,
+#'   and either a data frame or a list of two data frames named `edges` and `vertices` for `as.data.frame`.
+#' @note For `graph_from_data_frame()` `NA` elements in the first two columns \sQuote{d} are replaced by the string \dQuote{NA} before creating the graph.
+#' This means that all `NA`s will correspond to a single vertex.
 #'
-#' `NA` elements in the first column of \sQuote{vertices} are also
-#' replaced by the string \dQuote{NA}, but the rest of \sQuote{vertices} is not
-#' touched. In other words, vertex names (=the first column) cannot be
-#' `NA`, but other vertex attributes can.
+#' `NA` elements in the first column of \sQuote{vertices} are also replaced by the string \dQuote{NA},
+#' but the rest of \sQuote{vertices} is not touched.
+#' In other words, vertex names (=the first column) cannot be `NA`, but other vertex attributes can.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [graph_from_literal()]
-#' for another way to create graphs, [read.table()] to read in tables
-#' from files. See [from_data_frame()] to build a lazy constructor
-#' specification for [make_()] or [sample_()].
+#' @seealso [graph_from_literal()] for another way to create graphs, [read.table()] to read in tables from files.
+#' See [from_data_frame()] to build a lazy constructor specification for [make_()] or [sample_()].
 #' @keywords graphs
 #' @examples
 #'
@@ -2081,25 +1982,20 @@ graph_from_data_frame <- function(
 #' Constructor specifications for `graph_()`, `make_()` and `sample_()`
 #'
 #' @description
-#' Each of these functions builds a lazy constructor specification for the
-#' given graph constructor, to be used with [graph_()], [make_()] or
-#' [sample_()]. The specification is only evaluated when the graph is actually
-#' constructed, so it can be combined with constructor modifiers such as
-#' [with_vertex_()] or [with_edge_()].
+#' Each of these functions builds a lazy constructor specification for the given graph constructor, to be used with [graph_()],
+#' [make_()] or [sample_()].
+#' The specification is only evaluated when the graph is actually constructed,
+#' so it can be combined with constructor modifiers such as [with_vertex_()] or [with_edge_()].
 #'
-#' `from_data_frame()`, `from_edgelist()`, `tree()` and `degseq()` wrap
-#' [graph_from_data_frame()], [graph_from_edgelist()], [make_tree()] (or
-#' [sample_tree()]) and [sample_degseq()] (or [realize_degseq()]),
-#' respectively.
+#' `from_data_frame()`, `from_edgelist()`, `tree()` and `degseq()` wrap [graph_from_data_frame()], [graph_from_edgelist()],
+#' [make_tree()] (or [sample_tree()]) and [sample_degseq()] (or [realize_degseq()]), respectively.
 #'
-#' The other constructors have specification functions as well; they are
-#' documented together with the constructor they wrap, e.g. `ring()` on the
-#' [make_ring()] page.
+#' The other constructors have specification functions as well; they are documented together with the constructor they wrap,
+#' e.g. `ring()` on the [make_ring()] page.
 #'
 #' @param ... Forwarded to the corresponding constructor function.
 #' @return An object of class `igraph_constructor_spec`.
-#' @seealso [graph_()], [make_()] and [sample_()] to apply a constructor
-#'   specification.
+#' @seealso [graph_()], [make_()] and [sample_()] to apply a constructor specification.
 #' @family constructor specifications
 #' @keywords graphs
 #' @rdname constructor_spec
@@ -2119,20 +2015,18 @@ from_data_frame <- function(...) constructor_spec(graph_from_data_frame, ...)
 
 #' Create a graph from an edge list matrix
 #'
-#' `graph_from_edgelist()` creates a graph from an edge list. Its argument
-#' is a two-column matrix, each row defines one edge. If it is
-#' a numeric matrix then its elements are interpreted as vertex IDs. If
-#' it is a character matrix then it is interpreted as symbolic vertex
-#' names and a vertex ID will be assigned to each name, and also a
-#' `name` vertex attribute will be added.
+#' `graph_from_edgelist()` creates a graph from an edge list.
+#' Its argument is a two-column matrix, each row defines one edge.
+#' If it is a numeric matrix then its elements are interpreted as vertex IDs.
+#' If it is a character matrix then it is interpreted as symbolic vertex names and a vertex ID will be assigned to each name,
+#' and also a `name` vertex attribute will be added.
 #'
 #' @concept Edge list
 #' @param el The edge list, a two column matrix, character or numeric.
 #' @inheritParams rlang::args_dots_empty
 #' @param directed Whether to create a directed graph.
 #' @return An igraph graph.
-#' @seealso [from_edgelist()] to build a lazy constructor specification for
-#'   [make_()] or [sample_()].
+#' @seealso [from_edgelist()] to build a lazy constructor specification for [make_()] or [sample_()].
 #'
 #' @family deterministic constructors
 #' @export

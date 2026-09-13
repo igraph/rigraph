@@ -14,7 +14,6 @@ layout.reingold.tilford(..., params = list())
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{layout.reingold.tilford()} was renamed to \code{\link[=layout_as_tree]{layout_as_tree()}} to create a more
-consistent API.
+\code{layout.reingold.tilford()} was renamed to \code{\link[=layout_as_tree]{layout_as_tree()}} to create a more consistent API.
 }
 \keyword{internal}

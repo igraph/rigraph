@@ -3,89 +3,75 @@
 #' The common bits of the three plotting functions `plot.igraph`,
 #' `tkplot` and `rglplot` are discussed in this manual page.
 #'
-#' There are currently three different functions in the igraph package which
-#' can draw graph in various ways:
+#' There are currently three different functions in the igraph package which can draw graph in various ways:
 #'
 #' `plot.igraph` does simple non-interactive 2D plotting to R devices.
-#' Actually it is an implementation of the [graphics::plot()] generic
-#' function, so you can write `plot(graph)` instead of
-#' `plot.igraph(graph)`. As it used the standard R devices it supports
-#' every output format for which R has an output device. The list is quite
-#' impressing: PostScript, PDF files, XFig files, SVG files, JPG, PNG and of
-#' course you can plot to the screen as well using the default devices, or the
-#' good-looking anti-aliased Cairo device.  See [plot.igraph()] for
-#' some more information.
+#' Actually it is an implementation of the [graphics::plot()] generic function,
+#' so you can write `plot(graph)` instead of `plot.igraph(graph)`.
+#' As it used the standard R devices it supports every output format for which R has an output device.
+#' The list is quite impressing:
+#' PostScript, PDF files, XFig files, SVG files, JPG, PNG and of course you can plot to the screen as well using the default devices,
+#' or the good-looking anti-aliased Cairo device.
+#' See [plot.igraph()] for some more information.
 #'
-#' [tkplot()] does interactive 2D plotting using the `tcltk`
-#' package. It can only handle graphs of moderate size, a thousand vertices is
-#' probably already too many. Some parameters of the plotted graph can be
-#' changed interactively after issuing the `tkplot` command: the position,
-#' color and size of the vertices and the color and width of the edges. See
-#' [tkplot()] for details.
+#' [tkplot()] does interactive 2D plotting using the `tcltk` package.
+#' It can only handle graphs of moderate size, a thousand vertices is probably already too many.
+#' Some parameters of the plotted graph can be changed interactively after issuing the `tkplot` command: the position,
+#' color and size of the vertices and the color and width of the edges.
+#' See [tkplot()] for details.
 #'
-#' [rglplot()] is an experimental function to draw graphs in 3D using
-#' OpenGL. See [rglplot()] for some more information.
+#' [rglplot()] is an experimental function to draw graphs in 3D using OpenGL.
+#' See [rglplot()] for some more information.
 #'
 #' Please also check the examples below.
 #'
 #' @aliases igraph.plotting
 #' @section How to specify graphical parameters: There are three ways to give
-#' values to the parameters described below, in section 'Parameters'. We give
-#' these three ways here in the order of their precedence.
+#' values to the parameters described below, in section 'Parameters'.
+#' We give these three ways here in the order of their precedence.
 #'
-#' The first method is to supply named arguments to the plotting commands:
-#' [plot.igraph()], [tkplot()] or rglplot()].
-#' Parameters for vertices start with prefix \sQuote{\code{vertex.}},
-#' parameters for edges have prefix \sQuote{\code{edge.}}, and global
-#' parameters have no prefix. Eg. the color of the vertices can be given via
-#' argument `vertex.color`, whereas `edge.color` sets the color of
-#' the edges. `layout` gives the layout of the graphs.
+#' The first method is to supply named arguments to the plotting commands: [plot.igraph()], [tkplot()] or rglplot()].
+#' Parameters for vertices start with prefix \sQuote{\code{vertex.}}, parameters for edges have prefix \sQuote{\code{edge.}},
+#' and global parameters have no prefix.
+#' Eg. the color of the vertices can be given via argument `vertex.color`, whereas `edge.color` sets the color of the edges.
+#' `layout` gives the layout of the graphs.
 #'
 #' The second way is to assign vertex, edge and graph attributes to the graph.
-#' These attributes have no prefix, ie. the color of the vertices is taken from
-#' the `color` vertex attribute and the color of the edges from the
-#' `color` edge attribute. The layout of the graph is given by the
-#' `layout` graph attribute. (Always assuming that the corresponding
-#' command argument is not present.) Setting vertex and edge attributes are
-#' handy if you want to assign a given \sQuote{look} to a graph, attributes are
-#' saved with the graph is you save it with [base::save()] or in
-#' GraphML format with [write_graph()], so the graph will have the
-#' same look after loading it again.
+#' These attributes have no prefix, ie. the color of the vertices is taken from the `color` vertex attribute
+#' and the color of the edges from the `color` edge attribute.
+#' The layout of the graph is given by the `layout` graph attribute.
+#' (Always assuming that the corresponding command argument is not present.)
+#' Setting vertex and edge attributes are handy if you want to assign a given \sQuote{look} to a graph,
+#' attributes are saved with the graph is you save it with [base::save()] or in GraphML format with [write_graph()],
+#' so the graph will have the same look after loading it again.
 #'
-#' If a parameter is not given in the command line, and the corresponding
-#' vertex/edge/graph attribute is also missing then the general igraph
-#' parameters handled by [igraph_options()] are also checked. Vertex
-#' parameters have prefix \sQuote{\code{vertex.}}, edge parameters are prefixed
-#' with \sQuote{\code{edge.}}, general parameters like `layout` are
-#' prefixed with \sQuote{\code{plot}}.  These parameters are useful if you want
-#' all or most of your graphs to have the same look, vertex size, vertex color,
-#' etc. Then you don't need to set these at every plotting, and you also don't
-#' need to assign vertex/edge attributes to every graph.
+#' If a parameter is not given in the command line,
+#' and the corresponding vertex/edge/graph attribute is also missing then the general igraph parameters handled by [igraph_options()] are also checked.
+#' Vertex parameters have prefix \sQuote{\code{vertex.}}, edge parameters are prefixed with \sQuote{\code{edge.}},
+#' general parameters like `layout` are prefixed with \sQuote{\code{plot}}.
+#' These parameters are useful
+#' if you want all or most of your graphs to have the same look, vertex size, vertex color,
+#' etc. Then you don't need to set these at every plotting, and you also don't need to assign vertex/edge attributes to every graph.
 #'
-#' If the value of a parameter is not specified by any of the three ways
-#' described here, its default valued is used, as given in the source code.
+#' If the value of a parameter is not specified by any of the three ways described here, its default valued is used,
+#' as given in the source code.
 #'
-#' Different parameters can have different type, eg. vertex colors can be given
-#' as a character vector with color names, or as an integer vector with the
-#' color numbers from the current palette. Different types are valid for
-#' different parameters, this is discussed in detail in the next section. It is
-#' however always true that the parameter can always be a function object in
-#' which it will be called with the graph as its single argument to get the
-#' \dQuote{proper} value of the parameter.  (If the function returns another
-#' function object that will *not* be called again\dots)
+#' Different parameters can have different type, eg. vertex colors can be given as a character vector with color names,
+#' or as an integer vector with the color numbers from the current palette.
+#' Different types are valid for different parameters, this is discussed in detail in the next section.
+#' It is however always true that the parameter can always be a function object
+#' in which it will be called with the graph as its single argument to get the \dQuote{proper} value of the parameter.
+#' (If the function returns another function object that will *not* be called again\dots)
 #' @section The list of parameters: Vertex parameters first, note that the
-#' \sQuote{\code{vertex.}} prefix needs to be added if they are used as an
-#' argument or when setting via [igraph_options()]. The value of the
-#' parameter may be scalar valid for every vertex or a vector with a separate
-#' value for each vertex. (Shorter vectors are recycled.)
+#' \sQuote{\code{vertex.}} prefix needs to be added if they are used as an argument or when setting via [igraph_options()].
+#' The value of the parameter may be scalar valid for every vertex or a vector with a separate value for each vertex.
+#' (Shorter vectors are recycled.)
 #'   \describe{
 #'     \item{size}{
-#'   The size of the vertex, a numeric scalar or vector,
-#'   in the latter case each vertex sizes may differ.
-#'   This vertex sizes are scaled in order have about the same size of vertices
-#'   for a given value for all three plotting commands.
-#'   It does not need to be an integer number. The default value is 15.
-#'   This is big enough to place short labels on vertices.
+#'   The size of the vertex, a numeric scalar or vector, in the latter case each vertex sizes may differ.
+#'   This vertex sizes are scaled in order have about the same size of vertices for a given value for all three plotting commands.
+#'   It does not need to be an integer number.
+#'   The default value is 15. This is big enough to place short labels on vertices.
 #'   If `size.scaling` is `TRUE`, `relative.size` is used to scale the size appropriately.
 #' }
 #' \item{size2}{
@@ -97,18 +83,15 @@
 #'   The default is 15.
 #' }
 #' \item{color}{
-#'   The fill color of the vertex. If it is
-#'   numeric then the current palette is used, see
-#'   [grDevices::palette()]. If it is a character vector then it may
-#'   either contain integer values, named colors or RGB specified colors with
-#'   three or four bytes. All strings starting with \sQuote{\code{#}} are assumed
-#'   to be RGB color specifications. It is possible to mix named color and RGB
-#'   colors. Note that [tkplot()] ignores the fourth byte (alpha
-#'   channel) in the RGB color specification.
+#'   The fill color of the vertex.
+#'   If it is numeric then the current palette is used, see [grDevices::palette()].
+#'   If it is a character vector then it may either contain integer values, named colors or RGB specified colors with three or four bytes.
+#'   All strings starting with \sQuote{\code{#}} are assumed to be RGB color specifications.
+#'   It is possible to mix named color and RGB colors.
+#'   Note that [tkplot()] ignores the fourth byte (alpha channel) in the RGB color specification.
 #'
-#'   For `plot.igraph` and integer values, the default igraph palette is
-#'   used (see the \sQuote{palette} parameter below. Note that this is different
-#'   from the R palette.
+#'   For `plot.igraph` and integer values, the default igraph palette is used (see the \sQuote{palette} parameter below.
+#'   Note that this is different from the R palette.
 #'
 #'   If you don't want (some) vertices to have any color, supply `NA` as the
 #'   color name.
@@ -126,23 +109,16 @@
 #'   The width of the frame of the vertices. The default value is 1.
 #' }
 #' \item{shape}{
-#'   The shape of the vertex, currently \dQuote{\code{circle}},
-#'   \dQuote{\code{square}}, \dQuote{\code{csquare}}, \dQuote{\code{rectangle}},
-#'   \dQuote{\code{crectangle}}, \dQuote{\code{vrectangle}}, \dQuote{\code{pie}}
-#'   (see [vertex.shape.pie()]), \sQuote{\code{sphere}}, and
-#'   \dQuote{\code{none}} are supported, and only by the
-#'   [plot.igraph()] command. \dQuote{\code{none}} does not draw the
-#'   vertices at all, although vertex label are plotted (if given). See
-#'   [shapes()] for details about vertex shapes and
-#'   [vertex.shape.pie()] for using pie charts as vertices.
+#'   The shape of the vertex, currently \dQuote{\code{circle}}, \dQuote{\code{square}}, \dQuote{\code{csquare}}, \dQuote{\code{rectangle}},
+#'   \dQuote{\code{crectangle}}, \dQuote{\code{vrectangle}}, \dQuote{\code{pie}} (see [vertex.shape.pie()]), \sQuote{\code{sphere}},
+#'   and \dQuote{\code{none}} are supported, and only by the [plot.igraph()] command.
+#'   \dQuote{\code{none}} does not draw the vertices at all, although vertex label are plotted (if given).
+#'   See [shapes()] for details about vertex shapes and [vertex.shape.pie()] for using pie charts as vertices.
 #'
-#'   The \dQuote{\code{sphere}} vertex shape plots vertices as 3D ray-traced
-#'   spheres, in the given color and size. This produces a raster image and it is
-#'   only supported with some graphics devices. On some devices raster
-#'   transparency is not supported and the spheres do not have a transparent
-#'   background. See [dev.capabilities] and the
-#'   \sQuote{\code{rasterImage}} capability to check that your device is
-#'   supported.
+#'   The \dQuote{\code{sphere}} vertex shape plots vertices as 3D ray-traced spheres, in the given color and size.
+#'   This produces a raster image and it is only supported with some graphics devices.
+#'   On some devices raster transparency is not supported and the spheres do not have a transparent background.
+#'   See [dev.capabilities] and the \sQuote{\code{rasterImage}} capability to check that your device is supported.
 #'
 #'   By default vertices are drawn as circles.
 #' }
@@ -151,28 +127,24 @@
 #'   Specify `NA` to omit vertex labels. The default vertex labels are the vertex IDs.
 #' }
 #' \item{label.family}{
-#'   The
-#'   font family to be used for vertex labels.  As different plotting commands
-#'   can used different fonts, they interpret this parameter different ways. The
-#'   basic notation is, however, understood by both [plot.igraph()] and
-#'   [tkplot()]. [rglplot()] does not support fonts at all
-#'   right now, it ignores this parameter completely.
+#'   The font family to be used for vertex labels.
+#'   As different plotting commands can used different fonts, they interpret this parameter different ways.
+#'   The basic notation is, however, understood by both [plot.igraph()] and [tkplot()].
+#'   [rglplot()] does not support fonts at all right now, it ignores this parameter completely.
 #'
 #'   For [plot.igraph()] this parameter is simply passed to
 #'   [graphics::text()] as argument `family`.
 #'
-#'   For [tkplot()] some conversion is performed. If this parameter is
-#'   the name of an existing Tk font, then that font is used and the
-#'   `label.font` and `label.cex` parameters are ignored completely. If
-#'   it is one of the base families (serif, sans, mono) then Times, Helvetica or
-#'   Courier fonts are used, there are guaranteed to exist on all systems. For
-#'   the \sQuote{symbol} base family we used the symbol font is available,
-#'   otherwise the first font which has \sQuote{symbol} in its name. If the
-#'   parameter is not a name of the base families and it is also not a named Tk
-#'   font then we pass it to [tcltk::tkfont.create()] and hope the user
-#'   knows what she is doing. The `label.font` and `label.cex`
-#'   parameters are also passed to [tcltk::tkfont.create()] in this
-#'   case.
+#'   For [tkplot()] some conversion is performed.
+#'   If this parameter is the name of an existing Tk font, then that font is used and the `label.font`
+#'   and `label.cex` parameters are ignored completely.
+#'   If it is one of the base families (serif, sans, mono) then Times, Helvetica or Courier fonts are used,
+#'   there are guaranteed to exist on all systems.
+#'   For the \sQuote{symbol} base family we used the symbol font is available, otherwise the first font
+#'   which has \sQuote{symbol} in its name.
+#'   If the parameter is not a name of the base families and it is also not a named Tk font then we pass it to [tcltk::tkfont.create()]
+#'   and hope the user knows what she is doing.
+#'   The `label.font` and `label.cex` parameters are also passed to [tcltk::tkfont.create()] in this case.
 #'
 #'   The default value is \sQuote{serif}.
 #' }
@@ -238,18 +210,16 @@
 #'   If TRUE, `relative.size` is used to scale both appropriately with `relative.size`.
 #' }
 #' \item{relative.size}{
-#'   The relative size of the smallest and largest vertices as percentage of
-#'   the plotting region. When all vertices have the same size, then by default
-#'   the relative size observed in the plot will be equal to
-#'   \code{relative.size[2]}.
+#'   The relative size of the smallest and largest vertices as percentage of the plotting region.
+#'   When all vertices have the same size, then by default the relative size observed in the plot will be equal to \code{relative.size[2]}.
 #'   The default value is \code{c(.01,.025)} (1\% and 2.5\% respectively).
 #'
 #'   Only used if `size.scaling` is TRUE`.
 #' }
 #'   }
 #'
-#' Edge parameters require to add the \sQuote{\code{edge.}} prefix when used as
-#' arguments or set by [igraph_options()]. The edge parameters:
+#' Edge parameters require to add the \sQuote{\code{edge.}} prefix when used as arguments or set by [igraph_options()].
+#' The edge parameters:
 #' \describe{
 #' \item{color}{
 #'   The color of the edges, see the `color` vertex parameter for the possible values.
@@ -265,12 +235,10 @@
 #'   The width of the arrows. The default value is 1.
 #' }
 #' \item{lty}{
-#'   The line type for the edges. Almost the
-#'   same format is accepted as for the standard graphics
-#'   [graphics::par()], 0 and \dQuote{blank} mean no edges, 1 and
-#'   \dQuote{solid} are for solid lines, the other possible values are: 2
-#'   (\dQuote{dashed}), 3 (\dQuote{dotted}), 4 (\dQuote{dotdash}), 5
-#'   (\dQuote{longdash}), 6 (\dQuote{twodash}).
+#'   The line type for the edges.
+#'   Almost the same format is accepted as for the standard graphics [graphics::par()], 0 and \dQuote{blank} mean no edges, 1
+#'   and \dQuote{solid} are for solid lines, the other possible values are: 2 (\dQuote{dashed}), 3 (\dQuote{dotted}), 4 (\dQuote{dotdash}),
+#'   5 (\dQuote{longdash}), 6 (\dQuote{twodash}).
 #'
 #'   [tkplot()] also accepts standard Tk line type strings, it does not
 #'   however support \dQuote{blank} lines, instead of type \sQuote{0} type
@@ -492,8 +460,7 @@ NULL
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `autocurve.edges()` was renamed to [curve_multiple()] to create a more
-#' consistent API.
+#' `autocurve.edges()` was renamed to [curve_multiple()] to create a more consistent API.
 #' @inheritParams curve_multiple
 #' @keywords internal
 #' @export
@@ -698,23 +665,19 @@ i.postprocess.layout <- function(maybe_layout) {
 
 #' Optimal edge curvature when plotting graphs
 #'
-#' If graphs have multiple edges, then drawing them as straight lines does not
-#' show them when plotting the graphs; they will be on top of each other. One
-#' solution is to bend the edges, with diffenent curvature, so that all of them
-#' are visible.
+#' If graphs have multiple edges, then drawing them as straight lines does not show them when plotting the graphs;
+#' they will be on top of each other.
+#' One solution is to bend the edges, with diffenent curvature, so that all of them are visible.
 #'
-#' `curve_multiple()` calculates the optimal `edge.curved` vector for
-#' plotting a graph with multiple edges, so that all edges are visible.
+#' `curve_multiple()` calculates the optimal `edge.curved` vector for plotting a graph with multiple edges, so that all edges are visible.
 #'
 #' @param graph The input graph.
 #' @inheritParams rlang::args_dots_empty
-#' @param start The curvature at the two extreme edges. All edges will have a
-#'   curvature between `-start` and `start`, spaced equally.
+#' @param start The curvature at the two extreme edges.
+#'   All edges will have a curvature between `-start` and `start`, spaced equally.
 #' @return A numeric vector, its length is the number of edges in the graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [igraph.plotting] for all plotting parameters,
-#' [plot.igraph()], [tkplot()] and [rglplot()]
-#' for plotting functions.
+#' @seealso [igraph.plotting] for all plotting parameters, [plot.igraph()], [tkplot()] and [rglplot()] for plotting functions.
 #' @family plot.common
 #' @export
 #' @importFrom stats ave
@@ -4991,13 +4954,11 @@ i.default.values[["plot"]] <- i.plot.default
 
 #' Using pie charts as vertices in graph plots
 #'
-#' More complex vertex images can be used to express addtional information
-#' about vertices. E.g. pie charts can be used as vertices, to denote vertex
-#' classes, fuzzy classification of vertices, etc.
+#' More complex vertex images can be used to express addtional information about vertices.
+#' E.g. pie charts can be used as vertices, to denote vertex classes, fuzzy classification of vertices, etc.
 #'
-#' The vertex shape \sQuote{pie} makes igraph draw a pie chart for every
-#' vertex. There are some extra graphical vertex parameters that specify how
-#' the pie charts will look like:
+#' The vertex shape \sQuote{pie} makes igraph draw a pie chart for every vertex.
+#' There are some extra graphical vertex parameters that specify how the pie charts will look like:
 #'   \describe{
 #'     \item{pie}{
 #'       Numeric vector, gives the sizes of the pie slices.

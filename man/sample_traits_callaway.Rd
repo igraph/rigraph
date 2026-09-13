@@ -56,11 +56,12 @@ traits(
 
 \item{edge.per.step}{The number of edges to add to the graph per time step.}
 
-\item{type.dist}{The distribution of the vertex types. This is assumed to be
-stationary in time. The default \code{NULL} gives a uniform distribution.}
+\item{type.dist}{The distribution of the vertex types.
+This is assumed to be stationary in time.
+The default \code{NULL} gives a uniform distribution.}
 
-\item{pref.matrix}{A matrix giving the preferences of the given vertex
-types. These should be probabilities, i.e. numbers between zero and one.
+\item{pref.matrix}{A matrix giving the preferences of the given vertex types.
+These should be probabilities, i.e. numbers between zero and one.
 The default \code{NULL} sets all preferences to one.}
 
 \item{directed}{Logical, whether to generate directed graphs.}
@@ -71,23 +72,18 @@ The default \code{NULL} sets all preferences to one.}
 A new graph object.
 }
 \description{
-These functions implement evolving network models based on different vertex
-types.
+These functions implement evolving network models based on different vertex types.
 }
 \details{
-For \code{sample_traits_callaway()} the simulation goes like this: in each
-discrete time step a new vertex is added to the graph. The type of this
-vertex is generated based on \code{type.dist}. Then two vertices are
-selected uniformly randomly from the graph. The probability that they will
-be connected depends on the types of these vertices and is taken from
-\code{pref.matrix}. Then another two vertices are selected and this is
-repeated \code{edges.per.step} times in each time step.
+For \code{sample_traits_callaway()} the simulation goes like this: in each discrete time step a new vertex is added to the graph.
+The type of this vertex is generated based on \code{type.dist}.
+Then two vertices are selected uniformly randomly from the graph.
+The probability that they will be connected depends on the types of these vertices and is taken from \code{pref.matrix}.
+Then another two vertices are selected and this is repeated \code{edges.per.step} times in each time step.
 
-For \code{sample_traits()} the simulation goes like this: a single vertex is
-added at each time step. This new vertex tries to connect to \code{k}
-vertices in the graph. The probability that such a connection is realized
-depends on the types of the vertices involved and is taken from
-\code{pref.matrix}.
+For \code{sample_traits()} the simulation goes like this: a single vertex is added at each time step.
+This new vertex tries to connect to \code{k} vertices in the graph.
+The probability that such a connection is realized depends on the types of the vertices involved and is taken from \code{pref.matrix}.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_callaway_traits_game}{\code{callaway_traits_game()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_establishment_game}{\code{establishment_game()}}

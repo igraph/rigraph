@@ -21,23 +21,21 @@ k_shortest_paths(
 
 \item{to}{The target vertex of the shortest paths.}
 
-\item{k}{The number of paths to find. They will be returned in order of
-increasing length.}
+\item{k}{The number of paths to find.
+They will be returned in order of increasing length.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{weights}{Possibly a numeric vector giving edge weights. If this is
-\code{NULL} and the graph has a \code{weight} edge attribute, then the
-attribute is used. If this is \code{NA} then no weights are used (even if
-the graph has a \code{weight} attribute). In a weighted graph, the length
-of a path is the sum of the weights of its constituent edges.}
+\item{weights}{Possibly a numeric vector giving edge weights.
+If this is \code{NULL} and the graph has a \code{weight} edge attribute, then the attribute is used.
+If this is \code{NA} then no weights are used (even if the graph has a \code{weight} attribute).
+In a weighted graph, the length of a path is the sum of the weights of its constituent edges.}
 
-\item{mode}{Character constant, gives whether the shortest paths to or from
-the given vertices should be calculated for directed graphs. If \code{out}
-then the shortest paths \emph{from} the vertex, if \verb{in} then \emph{to}
-it will be considered. If \code{all}, the default, then the graph is treated
-as undirected, i.e. edge directions are not taken into account. This
-argument is ignored for undirected graphs.}
+\item{mode}{Character constant,
+gives whether the shortest paths to or from the given vertices should be calculated for directed graphs.
+If \code{out} then the shortest paths \emph{from} the vertex, if \verb{in} then \emph{to} it will be considered.
+If \code{all}, the default, then the graph is treated as undirected, i.e. edge directions are not taken into account.
+This argument is ignored for undirected graphs.}
 }
 \value{
 A named list with two components is returned:
@@ -51,9 +49,8 @@ The list of \eqn{k} shortest paths in terms of edges
 }
 }
 \description{
-Finds the \eqn{k} shortest paths between the given source and target
-vertex in order of increasing length. Currently this function uses
-Yen's algorithm.
+Finds the \eqn{k} shortest paths between the given source and target vertex in order of increasing length.
+Currently this function uses Yen's algorithm.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_k_shortest_paths}{\code{get_k_shortest_paths()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

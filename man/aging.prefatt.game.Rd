@@ -29,47 +29,43 @@ aging.prefatt.game(
 \item{aging.exp}{The exponent of the aging, usually a non-positive number,
 see details below.}
 
-\item{m}{The number of edges each new vertex creates (except the very first
-vertex). This argument is used only if both the \code{out.dist} and
-\code{out.seq} arguments are NULL.}
+\item{m}{The number of edges each new vertex creates (except the very first vertex).
+This argument is used only if both the \code{out.dist} and \code{out.seq} arguments are NULL.}
 
-\item{aging.bin}{The number of bins to use for measuring the age of
-vertices, see details below.}
+\item{aging.bin}{The number of bins to use for measuring the age of vertices, see details below.}
 
-\item{out.dist}{The discrete distribution to generate the number of edges to
-add in each time step if \code{out.seq} is NULL. See details below.}
+\item{out.dist}{The discrete distribution to generate the number of edges to add in each time step if \code{out.seq} is NULL.
+See details below.}
 
-\item{out.seq}{The number of edges to add in each time step, a vector
-containing as many elements as the number of vertices. See details below.}
+\item{out.seq}{The number of edges to add in each time step, a vector containing as many elements as the number of vertices.
+See details below.}
 
-\item{out.pref}{Logical, whether to include edges not initiated by
-the vertex as a basis of preferential attachment. See details below.}
+\item{out.pref}{Logical, whether to include edges not initiated by the vertex as a basis of preferential attachment.
+See details below.}
 
-\item{directed}{Logical, whether to generate a directed graph. See
-details below.}
+\item{directed}{Logical, whether to generate a directed graph.
+See details below.}
 
-\item{zero.deg.appeal}{The degree-dependent part of the
-\sQuote{attractiveness} of the vertices with no adjacent edges. See also
-details below.}
+\item{zero.deg.appeal}{The degree-dependent part of the \sQuote{attractiveness} of the vertices with no adjacent edges.
+See also details below.}
 
-\item{zero.age.appeal}{The age-dependent part of the \sQuote{attrativeness}
-of the vertices with age zero. It is usually zero, see details below.}
+\item{zero.age.appeal}{The age-dependent part of the \sQuote{attrativeness} of the vertices with age zero.
+It is usually zero, see details below.}
 
-\item{deg.coef}{The coefficient of the degree-dependent
-\sQuote{attractiveness}. See details below.}
+\item{deg.coef}{The coefficient of the degree-dependent \sQuote{attractiveness}.
+See details below.}
 
-\item{age.coef}{The coefficient of the age-dependent part of the
-\sQuote{attractiveness}. See details below.}
+\item{age.coef}{The coefficient of the age-dependent part of the \sQuote{attractiveness}.
+See details below.}
 
-\item{time.window}{Integer constant, if NULL only adjacent added in the last
-\code{time.windows} time steps are counted as a basis of the preferential
-attachment. See also details below.}
+\item{time.window}{Integer constant,
+if NULL only adjacent added in the last \code{time.windows} time steps are counted as a basis of the preferential attachment.
+See also details below.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{aging.prefatt.game()} was renamed to \code{\link[=sample_pa_age]{sample_pa_age()}} to create a more
-consistent API.
+\code{aging.prefatt.game()} was renamed to \code{\link[=sample_pa_age]{sample_pa_age()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_barabasi_aging_game}{\code{barabasi_aging_game()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_recent_degree_aging_game}{\code{recent_degree_aging_game()}}

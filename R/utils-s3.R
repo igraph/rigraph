@@ -63,10 +63,8 @@ s3_register <- function(generic, class, method = NULL) {
   }
 
   # Avoid registration failures during loading (pkgload or regular).
-  # Check that environment is locked because the registering package
-  # might be a dependency of the package that exports the generic. In
-  # that case, the exports (and the generic) might not be populated
-  # yet (#1225).
+  # Check that environment is locked because the registering package might be a dependency of the package that exports the generic.
+  # In that case, the exports (and the generic) might not be populated yet (#1225).
   if (isNamespaceLoaded(package) && is_sealed(package)) {
     register()
   }

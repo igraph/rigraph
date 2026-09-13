@@ -3,8 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `power.law.fit()` was renamed to [fit_power_law()] to create a more
-#' consistent API.
+#' `power.law.fit()` was renamed to [fit_power_law()] to create a more consistent API.
 #' @inheritParams fit_power_law
 #' @keywords internal
 #' @export
@@ -57,77 +56,69 @@ power.law.fit <- function(
 #'
 #' `fit_power_law()` fits a power-law distribution to a data set.
 #'
-#' This function fits a power-law distribution to a vector containing samples
-#' from a distribution (that is assumed to follow a power-law of course). In a
-#' power-law distribution, it is generally assumed that \eqn{P(X=x)} is
-#' proportional to \eqn{x^{-\alpha}}{x^-alpha}, where \eqn{x} is a positive
-#' number and \eqn{\alpha}{alpha} is greater than 1. In many real-world cases,
-#' the power-law behaviour kicks in only above a threshold value
-#' \eqn{x_\text{min}}{xmin}. The goal of this function is to determine
-#' \eqn{\alpha}{alpha} if \eqn{x_\text{min}}{xmin} is given, or to determine
-#' \eqn{x_\text{min}}{xmin} and the corresponding value of \eqn{\alpha}{alpha}.
+#' This function fits a power-law distribution to a vector containing samples from a distribution (that is assumed to follow a power-law of course).
+#' In a power-law distribution, it is generally assumed that \eqn{P(X=x)} is proportional to \eqn{x^{-\alpha}}{x^-alpha},
+#' where \eqn{x} is a positive number and \eqn{\alpha}{alpha} is greater than 1. In many real-world cases,
+#' the power-law behaviour kicks in only above a threshold value \eqn{x_\text{min}}{xmin}.
+#' The goal of this function is to determine \eqn{\alpha}{alpha} if \eqn{x_\text{min}}{xmin} is given,
+#' or to determine \eqn{x_\text{min}}{xmin} and the corresponding value of \eqn{\alpha}{alpha}.
 #'
-#' `fit_power_law()` provides two maximum likelihood implementations.  If
-#' the `implementation` argument is \sQuote{`R.mle`}, then the BFGS
-#' optimization (see [stats4::mle()]) algorithm is applied.  The additional
-#' arguments are passed to the mle function, so it is possible to change the
-#' optimization method and/or its parameters.  This implementation can
-#' *not* to fit the \eqn{x_\text{min}}{xmin} argument, so use the
-#' \sQuote{`plfit`} implementation if you want to do that.
+#' `fit_power_law()` provides two maximum likelihood implementations.
+#' If the `implementation` argument is \sQuote{`R.mle`},
+#' then the BFGS optimization (see [stats4::mle()]) algorithm is applied.
+#' The additional arguments are passed to the mle function,
+#' so it is possible to change the optimization method and/or its parameters.
+#' This implementation can *not* to fit the \eqn{x_\text{min}}{xmin} argument,
+#' so use the \sQuote{`plfit`} implementation if you want to do that.
 #'
-#' The \sQuote{`plfit`} implementation also uses the maximum likelihood
-#' principle to determine \eqn{\alpha}{alpha} for a given \eqn{x_\text{min}}{xmin};
-#' When \eqn{x_\text{min}}{xmin} is not given in advance, the algorithm will attempt
-#' to find its optimal value for which the \eqn{p}-value of a Kolmogorov-Smirnov
-#' test between the fitted distribution and the original sample is the largest.
-#' The function uses the method of Clauset, Shalizi and Newman to calculate the
-#' parameters of the fitted distribution. See references below for the details.
+#' The \sQuote{`plfit`} implementation also uses the maximum likelihood principle to determine \eqn{\alpha}{alpha} for a given \eqn{x_\text{min}}{xmin};
+#' When \eqn{x_\text{min}}{xmin} is not given in advance,
+#' the algorithm will attempt to find its optimal value for which the \eqn{p}-value of a Kolmogorov-Smirnov test between the fitted distribution and the original sample is the largest.
+#' The function uses the method of Clauset, Shalizi and Newman to calculate the parameters of the fitted distribution.
+#' See references below for the details.
 #'
 #' `r lifecycle::badge("experimental")`
 #'
 #' Pass `p.value = TRUE` to include the p-value in the output.
 #' This is not returned by default because the computation may be slow.
 #'
-#' @param x The data to fit, a numeric vector. For implementation
-#'   \sQuote{`R.mle`} the data must be integer values. For the
-#'   \sQuote{`plfit`} implementation non-integer values might be present and
-#'   then a continuous power-law distribution is fitted.
-#' @param xmin Numeric scalar, or `NULL`. The lower bound for fitting the
-#'   power-law. If `NULL`, the smallest value in `x` will be used for
-#'   the \sQuote{`R.mle`} implementation, and its value will be
-#'   automatically determined for the \sQuote{`plfit`} implementation. This
-#'   argument makes it possible to fit only the tail of the distribution.
-#' @param start Numeric scalar. The initial value of the exponent for the
-#'   minimizing function, for the \sQuote{`R.mle`} implementation. Usually
-#'   it is safe to leave this untouched.
-#' @param force.continuous Logical. Whether to force a continuous
-#'   distribution for the \sQuote{`plfit`} implementation, even if the
-#'   sample vector contains integer values only (by chance). If this argument is
-#'   false, igraph will assume a continuous distribution if at least one sample
-#'   is non-integer and assume a discrete distribution otherwise.
+#' @param x The data to fit, a numeric vector.
+#'   For implementation \sQuote{`R.mle`} the data must be integer values.
+#'   For the \sQuote{`plfit`} implementation non-integer values might be present and then a continuous power-law distribution is fitted.
+#' @param xmin Numeric scalar, or `NULL`.
+#'   The lower bound for fitting the power-law.
+#'   If `NULL`, the smallest value in `x` will be used for the \sQuote{`R.mle`} implementation,
+#'   and its value will be automatically determined for the \sQuote{`plfit`} implementation.
+#'   This argument makes it possible to fit only the tail of the distribution.
+#' @param start Numeric scalar.
+#'   The initial value of the exponent for the minimizing function, for the \sQuote{`R.mle`} implementation.
+#'   Usually it is safe to leave this untouched.
+#' @param force.continuous Logical.
+#'   Whether to force a continuous distribution for the \sQuote{`plfit`} implementation,
+#'   even if the sample vector contains integer values only (by chance).
+#'   If this argument is false,
+#'   igraph will assume a continuous distribution if at least one sample is non-integer and assume a discrete distribution otherwise.
 #' @param p.value `r lifecycle::badge("experimental")`
 #'
 #'   Set to `TRUE` to compute the p-value with `implementation = "plfit"`.
 #' @param p.precision `r lifecycle::badge("experimental")`
 #'
-#'   The desired precision of the p-value calculation. The
-#'   precision ultimately depends on the number of resampling attempts. The
-#'   number of resampling trials is determined by 0.25 divided by the square
-#'   of the required precision. For instance, a required precision of 0.01
-#'   means that 2500 samples will be drawn.
-#' @param implementation Character scalar. Which implementation to use. See
-#'   details below.
-#' @param \dots Additional arguments, passed to the maximum likelihood
-#'   optimizing function, [stats4::mle()], if the \sQuote{`R.mle`}
-#'   implementation is chosen. It is ignored by the \sQuote{`plfit`}
-#'   implementation.
-#' @return Depends on the `implementation` argument. If it is
-#'   \sQuote{`R.mle`}, then an object with class \sQuote{`mle`}. It can
-#'   be used to calculate confidence intervals and log-likelihood. See
-#'   [stats4::mle-class()] for details.
+#'   The desired precision of the p-value calculation.
+#'   The precision ultimately depends on the number of resampling attempts.
+#'   The number of resampling trials is determined by 0.25 divided by the square of the required precision.
+#'   For instance, a required precision of 0.01 means that 2500 samples will be drawn.
+#' @param implementation Character scalar.
+#'   Which implementation to use.
+#'   See details below.
+#' @param \dots Additional arguments, passed to the maximum likelihood optimizing function, [stats4::mle()],
+#'   if the \sQuote{`R.mle`} implementation is chosen.
+#'   It is ignored by the \sQuote{`plfit`} implementation.
+#' @return Depends on the `implementation` argument.
+#'   If it is \sQuote{`R.mle`}, then an object with class \sQuote{`mle`}.
+#'   It can be used to calculate confidence intervals and log-likelihood.
+#'   See [stats4::mle-class()] for details.
 #'
-#'   If `implementation` is \sQuote{`plfit`}, then the result is a
-#'   named list with entries:
+#'   If `implementation` is \sQuote{`plfit`}, then the result is a named list with entries:
 #'   \describe{
 #'     \item{continuous}{
 #'       Logical, whether the
@@ -137,9 +128,8 @@ power.law.fit <- function(
 #'       Numeric scalar, the exponent of the fitted power-law distribution.
 #'     }
 #'     \item{xmin}{
-#'       Numeric scalar, the minimum value from which the
-#'       power-law distribution was fitted. In other words, only the values larger
-#'       than `xmin` were used from the input vector.
+#'       Numeric scalar, the minimum value from which the power-law distribution was fitted.
+#'       In other words, only the values larger than `xmin` were used from the input vector.
 #'     }
 #'     \item{logLik}{
 #'       Numeric scalar, the log-likelihood of the fitted parameters.
@@ -150,10 +140,10 @@ power.law.fit <- function(
 #'       Smaller scores denote better fit.
 #'     }
 #'     \item{KS.p}{
-#'       Only for `p.value = TRUE`. Numeric scalar, the p-value of the Kolmogorov-Smirnov
-#'       test. Small p-values (less than 0.05) indicate that the test rejected the
-#'       hypothesis that the original data could have been drawn from the fitted
-#'       power-law distribution.
+#'       Only for `p.value = TRUE`.
+#'       Numeric scalar, the p-value of the Kolmogorov-Smirnov test.
+#'       Small p-values (less than 0.05) indicate that the test rejected the hypothesis
+#'       that the original data could have been drawn from the fitted power-law distribution.
 #'     }
 #'   }
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi

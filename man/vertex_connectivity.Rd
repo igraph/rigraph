@@ -16,65 +16,47 @@ vertex_disjoint_paths(graph, source = NULL, target = NULL)
 \arguments{
 \item{graph, x}{The input graph.}
 
-\item{source}{The ID of the source vertex, for \code{vertex_connectivity()} it
-can be \code{NULL}, see details below.}
+\item{source}{The ID of the source vertex, for \code{vertex_connectivity()} it can be \code{NULL}, see details below.}
 
-\item{target}{The ID of the target vertex, for \code{vertex_connectivity()} it
-can be \code{NULL}, see details below.}
+\item{target}{The ID of the target vertex, for \code{vertex_connectivity()} it can be \code{NULL}, see details below.}
 
-\item{\dots}{For \code{vertex_connectivity()}, these dots must be empty. For
-\code{cohesion()}, unused, present for S3 method consistency but may be used
-by other methods that implement it.}
+\item{\dots}{For \code{vertex_connectivity()}, these dots must be empty.
+For \code{cohesion()}, unused, present for S3 method consistency but may be used by other methods that implement it.}
 
-\item{checks}{Logical. Whether to check that the graph is connected
-and also the degree of the vertices. If the graph is not (strongly)
-connected then the connectivity is obviously zero. Otherwise if the minimum
-degree is one then the vertex connectivity is also one. It is a good idea to
-perform these checks, as they can be done quickly compared to the
-connectivity calculation itself.  They were suggested by Peter McMahan,
-thanks Peter.}
+\item{checks}{Logical.
+Whether to check that the graph is connected and also the degree of the vertices.
+If the graph is not (strongly) connected then the connectivity is obviously zero.
+Otherwise if the minimum degree is one then the vertex connectivity is also one.
+It is a good idea to perform these checks, as they can be done quickly compared to the connectivity calculation itself.
+They were suggested by Peter McMahan, thanks Peter.}
 }
 \value{
 A scalar real value.
 }
 \description{
-The vertex connectivity of a graph or two vertices, this is recently also
-called group cohesion.
+The vertex connectivity of a graph or two vertices, this is recently also called group cohesion.
 }
 \details{
-The vertex connectivity of two vertices (\code{source} and \code{target}) in
-a graph is the minimum number of vertices that must be deleted to
-eliminate all (directed) paths from \code{source} to \code{target}.
-\code{vertex_connectivity()} calculates this quantity if both the
-\code{source} and \code{target} arguments are given and they're not
-\code{NULL}.
+The vertex connectivity of two vertices (\code{source} and \code{target}) in a graph is the minimum number of vertices that must be deleted to eliminate all (directed) paths from \code{source} to \code{target}.
+\code{vertex_connectivity()} calculates this quantity if both the \code{source} and \code{target} arguments are given and they're not \code{NULL}.
 
-The vertex connectivity of a pair is the same as the number
-of different (i.e. node-independent) paths from source to
-target, assuming no direct edges between them.
+The vertex connectivity of a pair is the same as the number of different (i.e. node-independent) paths from source to target,
+assuming no direct edges between them.
 
-The vertex connectivity of a graph is the minimum vertex connectivity of all
-(ordered) pairs of vertices in the graph. In other words this is the minimum
-number of vertices needed to remove to make the graph not strongly
-connected. (If the graph is not strongly connected then this is zero.)
-\code{vertex_connectivity()} calculates this quantity if neither the
-\code{source} nor \code{target} arguments are given. (I.e. they are both
-\code{NULL}.)
+The vertex connectivity of a graph is the minimum vertex connectivity of all (ordered) pairs of vertices in the graph.
+In other words this is the minimum number of vertices needed to remove to make the graph not strongly connected.
+(If the graph is not strongly connected then this is zero.)
+\code{vertex_connectivity()} calculates this quantity if neither the \code{source} nor \code{target} arguments are given.
+(I.e. they are both \code{NULL}.)
 
-A set of vertex disjoint directed paths from \code{source} to \code{vertex}
-is a set of directed paths between them whose vertices do not contain common
-vertices (apart from \code{source} and \code{target}). The maximum number of
-vertex disjoint paths between two vertices is the same as their vertex
-connectivity in most cases (if the two vertices are not connected by an
-edge).
+A set of vertex disjoint directed paths from \code{source} to \code{vertex} is a set of directed paths between them whose vertices do not contain common vertices (apart from \code{source} and \code{target}).
+The maximum number of vertex disjoint paths between two vertices is the same as their vertex connectivity in most cases (if the two vertices are not connected by an edge).
 
-The cohesion of a graph (as defined by White and Harary, see references), is
-the vertex connectivity of the graph. This is calculated by
-\code{cohesion()}.
+The cohesion of a graph (as defined by White and Harary, see references), is the vertex connectivity of the graph.
+This is calculated by \code{cohesion()}.
 
-These three functions essentially calculate the same measure(s), more
-precisely \code{vertex_connectivity()} is the most general, the other two are
-included only for the ease of using more descriptive function names.
+These three functions essentially calculate the same measure(s), more precisely \code{vertex_connectivity()} is the most general,
+the other two are included only for the ease of using more descriptive function names.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_st_vertex_connectivity}{\code{st_vertex_connectivity()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_vertex_connectivity}{\code{vertex_connectivity()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_vertex_disjoint_paths}{\code{vertex_disjoint_paths()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_cohesion}{\code{cohesion()}}

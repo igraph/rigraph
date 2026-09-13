@@ -11,18 +11,14 @@ count_reachable(graph, ..., mode = c("out", "in", "all", "total"))
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{mode}{Character constant, defines how edge directions are considered
-in directed graphs.
+\item{mode}{Character constant, defines how edge directions are considered in directed graphs.
 \code{"out"} counts vertices reachable via outgoing edges,
-\code{"in"} counts vertices from which the current vertex is reachable via
-incoming edges,
-\code{"all"} or \code{"total"} ignores edge directions.
+\code{"in"} counts vertices from which the current vertex is reachable via incoming edges, \code{"all"} or \code{"total"} ignores edge directions.
 This parameter is ignored for undirected graphs.}
 }
 \value{
 An integer vector of length \code{vcount(graph)}.
-The i-th element is the number of vertices reachable from vertex i
-(including vertex i itself).
+The i-th element is the number of vertices reachable from vertex i (including vertex i itself).
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
@@ -30,11 +26,9 @@ The i-th element is the number of vertices reachable from vertex i
 \details{
 Counts the number of vertices reachable from each vertex in the graph.
 
-For each vertex in the graph, this function counts how many vertices
-are reachable from it, including the vertex itself.
+For each vertex in the graph, this function counts how many vertices are reachable from it, including the vertex itself.
 A vertex is reachable from another if there is a directed path between them.
-For undirected graphs, two vertices are reachable from each other if they
-are in the same connected component.
+For undirected graphs, two vertices are reachable from each other if they are in the same connected component.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_count_reachable}{\code{count_reachable()}}

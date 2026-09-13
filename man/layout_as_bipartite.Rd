@@ -14,38 +14,30 @@ layout_as_bipartite(
 )
 }
 \arguments{
-\item{graph}{The bipartite input graph. It should have a logical
-\sQuote{\code{type}} vertex attribute, or the \code{types} argument must be
-given.}
+\item{graph}{The bipartite input graph.
+It should have a logical \sQuote{\code{type}} vertex attribute, or the \code{types} argument must be given.}
 
-\item{types}{A logical vector, the vertex types. If this argument is
-\code{NULL} (the default), then the \sQuote{\code{type}} vertex attribute is
-used.}
+\item{types}{A logical vector, the vertex types.
+If this argument is \code{NULL} (the default), then the \sQuote{\code{type}} vertex attribute is used.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{hgap}{Real scalar, the minimum horizontal gap between vertices in the
-same layer.}
+\item{hgap}{Real scalar, the minimum horizontal gap between vertices in the same layer.}
 
 \item{vgap}{Real scalar, the distance between the two layers.}
 
-\item{maxiter}{Integer scalar, the maximum number of iterations in the
-crossing minimization stage. 100 is a reasonable default; if you feel that
-you have too many edge crossings, increase this.}
+\item{maxiter}{Integer scalar, the maximum number of iterations in the crossing minimization stage.
+100 is a reasonable default; if you feel that you have too many edge crossings, increase this.}
 }
 \value{
-A matrix with two columns and as many rows as the number of vertices
-in the input graph.
+A matrix with two columns and as many rows as the number of vertices in the input graph.
 }
 \description{
-Minimize edge-crossings in a simple two-row (or column) layout for bipartite
-graphs.
+Minimize edge-crossings in a simple two-row (or column) layout for bipartite graphs.
 }
 \details{
-The layout is created by first placing the vertices in two rows, according
-to their types. Then the positions within the rows are optimized to minimize
-edge crossings, using the Sugiyama algorithm (see
-\code{\link[=layout_with_sugiyama]{layout_with_sugiyama()}}).
+The layout is created by first placing the vertices in two rows, according to their types.
+Then the positions within the rows are optimized to minimize edge crossings, using the Sugiyama algorithm (see \code{\link[=layout_with_sugiyama]{layout_with_sugiyama()}}).
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_bipartite}{\code{layout_bipartite()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
@@ -66,8 +58,8 @@ g \%>\%
   plot()
 }
 \seealso{
-\code{\link[=layout_with_sugiyama]{layout_with_sugiyama()}}. See \code{\link[=as_bipartite]{as_bipartite()}} to build a lazy
-layout specification for \code{\link[=add_layout_]{add_layout_()}}.
+\code{\link[=layout_with_sugiyama]{layout_with_sugiyama()}}.
+See \code{\link[=as_bipartite]{as_bipartite()}} to build a lazy layout specification for \code{\link[=add_layout_]{add_layout_()}}.
 
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},

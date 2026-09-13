@@ -2,20 +2,17 @@
 % Please edit documentation in R/make.R
 \name{.extract_constructor_and_modifiers}
 \alias{.extract_constructor_and_modifiers}
-\title{Takes an argument list and extracts the constructor specification and
-constructor modifiers from it.}
+\title{Takes an argument list and extracts the constructor specification and constructor modifiers from it.}
 \usage{
 .extract_constructor_and_modifiers(..., .operation, .variant)
 }
 \arguments{
 \item{...}{Parameters to extract from}
 
-\item{.operation}{Human-readable description of the operation that this
-helper is a part of}
+\item{.operation}{Human-readable description of the operation that this helper is a part of}
 
-\item{.variant}{Constructor variant; must be one of \sQuote{make},
-\sQuote{graph} or \sQuote{sample}. Used in cases when the same constructor
-specification has deterministic and random variants.}
+\item{.variant}{Constructor variant; must be one of \sQuote{make}, \sQuote{graph} or \sQuote{sample}.
+Used in cases when the same constructor specification has deterministic and random variants.}
 }
 \value{
 A named list with three items:
@@ -32,7 +29,6 @@ the remaining, unparsed arguments.
 }
 }
 \description{
-This is a helper function for the common parts of \code{make_()} and
-\code{sample_()}.
+This is a helper function for the common parts of \code{make_()} and \code{sample_()}.
 }
 \keyword{internal}

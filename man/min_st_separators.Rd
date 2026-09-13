@@ -7,31 +7,28 @@
 min_st_separators(graph)
 }
 \arguments{
-\item{graph}{The input graph. It may be directed, but edge directions are
-ignored.}
+\item{graph}{The input graph.
+It may be directed, but edge directions are ignored.}
 }
 \value{
-A list of numeric vectors. Each vector contains a vertex set
-(defined by vertex IDs), each vector is an (s,t) separator of the input
-graph, for some \eqn{s} and \eqn{t}.
+A list of numeric vectors.
+Each vector contains a vertex set (defined by vertex IDs), each vector is an (s,t) separator of the input graph,
+for some \eqn{s} and \eqn{t}.
 }
 \description{
-List all vertex sets that are minimal \eqn{(s,t)} separators for some
-\eqn{s} and \eqn{t}, in an undirected graph.
+List all vertex sets that are minimal \eqn{(s,t)} separators for some \eqn{s} and \eqn{t}, in an undirected graph.
 }
 \details{
-A \eqn{(s,t)} vertex separator is a set of vertices, such that after their
-removal from the graph, there is no path between \eqn{s} and \eqn{t} in the
-graph.
+A \eqn{(s,t)} vertex separator is a set of vertices, such that after their removal from the graph,
+there is no path between \eqn{s} and \eqn{t} in the graph.
 
-A \eqn{(s,t)} vertex separator is minimal if none of its proper subsets is
-an \eqn{(s,t)} vertex separator for the same \eqn{s} and \eqn{t}.
+A \eqn{(s,t)} vertex separator is minimal
+if none of its proper subsets is an \eqn{(s,t)} vertex separator for the same \eqn{s} and \eqn{t}.
 }
 \section{Note}{
 
-Note that the code below returns \verb{\{1, 3\}} despite its subset \code{{1}} being a
-separator as well. This is because \verb{\{1, 3\}} is minimal with respect to
-separating vertices 2 and 4.
+Note that the code below returns \verb{\{1, 3\}} despite its subset \code{{1}} being a separator as well.
+This is because \verb{\{1, 3\}} is minimal with respect to separating vertices 2 and 4.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{g <- make_graph(~ 0-1-2-3-4-1)
 min_st_separators(g)

@@ -16,21 +16,17 @@ make_clusters(
 \arguments{
 \item{graph}{The graph of the community structure.}
 
-\item{membership}{The membership vector of the community structure, a
-numeric vector denoting the ID of the community for each vertex. It
-might be \code{NULL} for hierarchical community structures.}
+\item{membership}{The membership vector of the community structure, a numeric vector denoting the ID of the community for each vertex.
+It might be \code{NULL} for hierarchical community structures.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{algorithm}{Character string, the algorithm that generated
-the community structure, it can be arbitrary.}
+\item{algorithm}{Character string, the algorithm that generated the community structure, it can be arbitrary.}
 
-\item{merges}{A merge matrix, for hierarchical community structures (or
-\code{NULL} otherwise.}
+\item{merges}{A merge matrix, for hierarchical community structures (or \code{NULL} otherwise.}
 
-\item{modularity}{Modularity value of the community structure. If this
-is \code{TRUE} and the membership vector is available, then it the
-modularity values is calculated automatically.}
+\item{modularity}{Modularity value of the community structure.
+If this is \code{TRUE} and the membership vector is available, then it the modularity values is calculated automatically.}
 }
 \value{
 A \code{communities} object.
@@ -50,8 +46,7 @@ Number of vertices in the graph.
 }
 }
 \description{
-This is useful to integrate the results of community finding algorithms
-that are not included in igraph.
+This is useful to integrate the results of community finding algorithms that are not included in igraph.
 }
 \seealso{
 Community detection:

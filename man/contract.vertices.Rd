@@ -13,19 +13,17 @@ contract.vertices(
 \arguments{
 \item{graph}{The input graph, it can be directed or undirected.}
 
-\item{mapping}{A numeric vector that specifies the mapping. Its elements
-correspond to the vertices, and for each element the ID in the new graph is
-given.}
+\item{mapping}{A numeric vector that specifies the mapping.
+Its elements correspond to the vertices, and for each element the ID in the new graph is given.}
 
-\item{vertex.attr.comb}{Specifies how to combine the vertex attributes in
-the new graph. Please see \code{\link[=attribute.combination]{attribute.combination()}} for details. The
-default \code{NULL} uses the \code{vertex.attr.comb} igraph option.}
+\item{vertex.attr.comb}{Specifies how to combine the vertex attributes in the new graph.
+Please see \code{\link[=attribute.combination]{attribute.combination()}} for details.
+The default \code{NULL} uses the \code{vertex.attr.comb} igraph option.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{contract.vertices()} was renamed to \code{\link[=contract]{contract()}} to create a more
-consistent API.
+\code{contract.vertices()} was renamed to \code{\link[=contract]{contract()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_contract_vertices}{\code{contract_vertices()}}

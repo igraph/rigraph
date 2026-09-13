@@ -3,8 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `centralize.scores()` was renamed to [centralize()] to create a more
-#' consistent API.
+#' `centralize.scores()` was renamed to [centralize()] to create a more consistent API.
 #' @inheritParams centralize
 #' @keywords internal
 #' @export
@@ -23,8 +22,7 @@ centralize.scores <- function(scores, theoretical.max = 0, normalized = TRUE) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `centralization.evcent.tmax()` was renamed to [centr_eigen_tmax()] to create a more
-#' consistent API.
+#' `centralization.evcent.tmax()` was renamed to [centr_eigen_tmax()] to create a more consistent API.
 #' @inheritParams centr_eigen_tmax
 #' @keywords internal
 #' @export
@@ -53,8 +51,7 @@ centralization.evcent.tmax <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `centralization.evcent()` was renamed to [centr_eigen()] to create a more
-#' consistent API.
+#' `centralization.evcent()` was renamed to [centr_eigen()] to create a more consistent API.
 #' @inheritParams centr_eigen
 #' @keywords internal
 #' @export
@@ -81,8 +78,7 @@ centralization.evcent <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `centralization.degree.tmax()` was renamed to [centr_degree_tmax()] to create a more
-#' consistent API.
+#' `centralization.degree.tmax()` was renamed to [centr_degree_tmax()] to create a more consistent API.
 #' @inheritParams centr_degree_tmax
 #' @keywords internal
 #' @export
@@ -106,8 +102,7 @@ centralization.degree.tmax <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `centralization.degree()` was renamed to [centr_degree()] to create a more
-#' consistent API.
+#' `centralization.degree()` was renamed to [centr_degree()] to create a more consistent API.
 #' @inheritParams centr_degree
 #' @keywords internal
 #' @export
@@ -136,8 +131,7 @@ centralization.degree <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `centralization.closeness.tmax()` was renamed to [centr_clo_tmax()] to create a more
-#' consistent API.
+#' `centralization.closeness.tmax()` was renamed to [centr_clo_tmax()] to create a more consistent API.
 #' @inheritParams centr_clo_tmax
 #' @keywords internal
 #' @export
@@ -160,8 +154,7 @@ centralization.closeness.tmax <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `centralization.closeness()` was renamed to [centr_clo()] to create a more
-#' consistent API.
+#' `centralization.closeness()` was renamed to [centr_clo()] to create a more consistent API.
 #' @inheritParams centr_clo
 #' @keywords internal
 #' @export
@@ -184,8 +177,7 @@ centralization.closeness <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `centralization.betweenness.tmax()` was renamed to [centr_betw_tmax()] to create a more
-#' consistent API.
+#' `centralization.betweenness.tmax()` was renamed to [centr_betw_tmax()] to create a more consistent API.
 #' @inheritParams centr_betw_tmax
 #' @keywords internal
 #' @export
@@ -208,8 +200,7 @@ centralization.betweenness.tmax <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `centralization.betweenness()` was renamed to [centr_betw()] to create a more
-#' consistent API.
+#' `centralization.betweenness()` was renamed to [centr_betw()] to create a more consistent API.
 #' @inheritParams centr_betw
 #' @keywords internal
 #' @export
@@ -254,39 +245,31 @@ NULL
 
 #' Centralization of a graph
 #'
-#' Centralization is a method for creating a graph level centralization
-#' measure from the centrality scores of the vertices.
+#' Centralization is a method for creating a graph level centralization measure from the centrality scores of the vertices.
 #'
-#' Centralization is a general method for calculating a graph-level
-#' centrality score based on node-level centrality measure. The formula for
-#' this is
+#' Centralization is a general method for calculating a graph-level centrality score based on node-level centrality measure.
+#' The formula for this is
 #' \deqn{C(G)=\sum_v (\max_w c_w - c_v),}{ C(G)=sum(max(c(w), w) - c(v), v),}
 #' where \eqn{c_v}{c(v)} is the centrality of vertex \eqn{v}.
 #'
-#' The graph-level centralization measure can be normalized by dividing by the
-#' maximum theoretical score for a graph with the same number of vertices,
-#' using the same parameters, e.g. directedness, whether we consider loop
-#' edges, etc.
+#' The graph-level centralization measure can be normalized by dividing by the maximum theoretical score for a graph with the same number of vertices,
+#' using the same parameters, e.g. directedness, whether we consider loop edges, etc.
 #'
-#' For degree, closeness and betweenness the most centralized structure is
-#' some version of the star graph, in-star, out-star or undirected star.
+#' For degree, closeness and betweenness the most centralized structure is some version of the star graph, in-star,
+#' out-star or undirected star.
 #'
-#' For eigenvector centrality the most centralized structure is the graph
-#' with a single edge (and potentially many isolates).
+#' For eigenvector centrality the most centralized structure is the graph with a single edge (and potentially many isolates).
 #'
-#' `centralize()` implements general centralization formula to calculate
-#' a graph-level score from vertex-level scores.
+#' `centralize()` implements general centralization formula to calculate a graph-level score from vertex-level scores.
 #'
 #' @param scores The vertex level centrality scores.
 #' @inheritParams rlang::args_dots_empty
-#' @param theoretical.max Real scalar. The graph-level centralization measure of
-#'   the most centralized graph with the same number of vertices as the graph
-#'   under study. This is only used if the `normalized` argument is set
-#'   to `TRUE`.
-#' @param normalized Logical. Whether to normalize the graph level
-#'   centrality score by dividing by the supplied theoretical maximum.
-#' @return A real scalar, the centralization of the graph from which
-#'   `scores` were derived.
+#' @param theoretical.max Real scalar.
+#'   The graph-level centralization measure of the most centralized graph with the same number of vertices as the graph under study.
+#'   This is only used if the `normalized` argument is set to `TRUE`.
+#' @param normalized Logical.
+#'   Whether to normalize the graph level centrality score by dividing by the supplied theoretical maximum.
+#' @return A real scalar, the centralization of the graph from which `scores` were derived.
 #'
 #' @aliases centralization
 #' @family centralization related
@@ -371,12 +354,10 @@ centralize <- function(
 #'
 #' @param graph The input graph.
 #' @inheritParams rlang::args_dots_empty
-#' @param mode This is the same as the `mode` argument of
-#'   `degree()`.
-#' @param loops Logical, whether to consider loops edges when
-#'   calculating the degree.
-#' @param normalized Logical. Whether to normalize the graph level
-#'   centrality score by dividing by the theoretical maximum.
+#' @param mode This is the same as the `mode` argument of `degree()`.
+#' @param loops Logical, whether to consider loops edges when calculating the degree.
+#' @param normalized Logical.
+#'   Whether to normalize the graph level centrality score by dividing by the theoretical maximum.
 #' @return A named list with the following components:
 #'   \describe{
 #'     \item{res}{
@@ -463,13 +444,15 @@ centr_degree <- function(
 #'
 #' See [centralize()] for a summary of graph centralization.
 #'
-#' @param graph The input graph. It can also be `NULL` if `nodes` is given.
-#' @param nodes The number of vertices. This is ignored if the graph is given.
-#' @param mode This is the same as the `mode` argument of `degree()`. Ignored
-#'   if `graph` is given and the graph is undirected.
+#' @param graph The input graph.
+#'   It can also be `NULL` if `nodes` is given.
+#' @param nodes The number of vertices.
+#'   This is ignored if the graph is given.
+#' @param mode This is the same as the `mode` argument of `degree()`.
+#'   Ignored if `graph` is given and the graph is undirected.
 #' @inheritParams centr_degree
-#' @return Real scalar, the theoretical maximum (unnormalized) graph degree
-#'   centrality score for graphs with given order and other parameters.
+#' @return Real scalar,
+#'   the theoretical maximum (unnormalized) graph degree centrality score for graphs with given order and other parameters.
 #'
 #' @family centralization related
 #'
@@ -520,8 +503,7 @@ centr_degree_tmax <- function(
 #'
 #' @param graph The input graph.
 #' @inheritParams rlang::args_dots_empty
-#' @param directed Logical, whether to use directed shortest paths for
-#'   calculating betweenness.
+#' @param directed Logical, whether to use directed shortest paths for calculating betweenness.
 #' @inheritParams centr_degree
 #' @return A named list with the following components:
 #'   \describe{
@@ -614,17 +596,15 @@ centr_betw <- function(
 #'
 #' See [centralize()] for a summary of graph centralization.
 #'
-#' @param graph The input graph. It can also be `NULL` if
-#'   `nodes` and `directed` are both given.
-#' @param nodes The number of vertices. This is ignored if the graph is
-#'   given.
+#' @param graph The input graph.
+#'   It can also be `NULL` if `nodes` and `directed` are both given.
+#' @param nodes The number of vertices.
+#'   This is ignored if the graph is given.
 #' @inheritParams rlang::args_dots_empty
-#' @param directed Logical, whether to use directed shortest paths
-#'   for calculating betweenness. Ignored if an undirected graph was
-#'   given.
-#' @return Real scalar, the theoretical maximum (unnormalized) graph
-#'   betweenness centrality score for graphs with given order and other
-#'   parameters.
+#' @param directed Logical, whether to use directed shortest paths for calculating betweenness.
+#'   Ignored if an undirected graph was given.
+#' @return Real scalar,
+#'   the theoretical maximum (unnormalized) graph betweenness centrality score for graphs with given order and other parameters.
 #'
 #' @family centralization related
 #'
@@ -690,8 +670,7 @@ centr_betw_tmax <- function(
 #'
 #' @param graph The input graph.
 #' @inheritParams rlang::args_dots_empty
-#' @param mode This is the same as the `mode` argument of
-#'   `closeness()`.
+#' @param mode This is the same as the `mode` argument of `closeness()`.
 #' @inheritParams centr_degree
 #' @return A named list with the following components:
 #'   \describe{
@@ -775,16 +754,15 @@ centr_clo <- function(
 #'
 #' See [centralize()] for a summary of graph centralization.
 #'
-#' @param graph The input graph. It can also be `NULL` if
-#'   `nodes` is given.
-#' @param nodes The number of vertices. This is ignored if the graph is
-#'   given.
+#' @param graph The input graph.
+#'   It can also be `NULL` if `nodes` is given.
+#' @param nodes The number of vertices.
+#'   This is ignored if the graph is given.
 #' @inheritParams rlang::args_dots_empty
-#' @param mode This is the same as the `mode` argument of
-#'   `closeness()`. Ignored if an undirected graph is given.
-#' @return Real scalar, the theoretical maximum (unnormalized) graph
-#'   closeness centrality score for graphs with given order and other
-#'   parameters.
+#' @param mode This is the same as the `mode` argument of `closeness()`.
+#'   Ignored if an undirected graph is given.
+#' @return Real scalar,
+#'   the theoretical maximum (unnormalized) graph closeness centrality score for graphs with given order and other parameters.
 #'
 #' @family centralization related
 #'
@@ -849,12 +827,10 @@ centr_clo_tmax <- function(
 #' See [centralize()] for a summary of graph centralization.
 #'
 #' @param graph The input graph.
-#' @param directed Logical, whether to use directed shortest paths for
-#'   calculating eigenvector centrality.
-#' @param scale `r lifecycle::badge("deprecated")` Ignored. Computing
-#' eigenvector centralization requires normalized eigenvector centrality scores.
-#' @param options This is passed to [eigen_centrality()], the options
-#'   for the ARPACK eigensolver.
+#' @param directed Logical, whether to use directed shortest paths for calculating eigenvector centrality.
+#' @param scale `r lifecycle::badge("deprecated")` Ignored.
+#' Computing eigenvector centralization requires normalized eigenvector centrality scores.
+#' @param options This is passed to [eigen_centrality()], the options for the ARPACK eigensolver.
 #' @inheritParams centr_degree
 #' @return A named list with the following components:
 #'   \describe{
@@ -922,17 +898,16 @@ centr_eigen <- function(
 #'
 #' See [centralize()] for a summary of graph centralization.
 #'
-#' @param graph The input graph. It can also be `NULL`, if
-#'   `nodes` is given.
-#' @param nodes The number of vertices. This is ignored if the graph is
-#'   given.
-#' @param directed Logical, whether to consider edge directions
-#'   during the calculation. Ignored in undirected graphs.
-#' @param scale `r lifecycle::badge("deprecated")` Ignored. Computing
-#' eigenvector centralization requires normalized eigenvector centrality scores.
-#' @return Real scalar, the theoretical maximum (unnormalized) graph
-#'   eigenvector centrality score for graphs with given vertex count and
-#'   other parameters.
+#' @param graph The input graph.
+#'   It can also be `NULL`, if `nodes` is given.
+#' @param nodes The number of vertices.
+#'   This is ignored if the graph is given.
+#' @param directed Logical, whether to consider edge directions during the calculation.
+#'   Ignored in undirected graphs.
+#' @param scale `r lifecycle::badge("deprecated")` Ignored.
+#' Computing eigenvector centralization requires normalized eigenvector centrality scores.
+#' @return Real scalar,
+#'   the theoretical maximum (unnormalized) graph eigenvector centrality score for graphs with given vertex count and other parameters.
 #'
 #' @family centralization related
 #'

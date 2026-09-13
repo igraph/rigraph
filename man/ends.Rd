@@ -14,8 +14,8 @@ ends(graph, es, ..., names = TRUE)
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{names}{Whether to return vertex names or
-numeric vertex IDs. By default vertex names are used.}
+\item{names}{Whether to return vertex names or numeric vertex IDs.
+By default vertex names are used.}
 }
 \value{
 A two column matrix of vertex names or vertex IDs.

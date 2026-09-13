@@ -286,10 +286,9 @@
   }
 }
 
-# Print the "single index" (`[[`) edge detail view: one row per edge with
-# tail/head names, their raw numeric ids (tid/hid) and one column per atomic
-# edge attribute. If any attribute is list-valued, the frame can't hold it, so
-# fall back to a per-attribute named list sliced to the selected edges.
+# Print the "single index" (`[[`) edge detail view: one row per edge with tail/head names,
+# their raw numeric ids (tid/hid) and one column per atomic edge attribute.
+# If any attribute is list-valued, the frame can't hold it, so fall back to a per-attribute named list sliced to the selected edges.
 print_edge_detail <- function(graph, edges) {
   ea <- edge_attr(graph)
   if (all(vapply(ea, is.atomic, logical(1)))) {
@@ -505,80 +504,64 @@ print_all <- function(object, ...) {
 
 #' Print graphs to the terminal
 #'
-#' These functions attempt to print a graph to the terminal in a human readable
-#' form.
+#' These functions attempt to print a graph to the terminal in a human readable form.
 #'
-#' `summary.igraph` prints the number of vertices, edges and whether the
-#' graph is directed.
+#' `summary.igraph` prints the number of vertices, edges and whether the graph is directed.
 #'
-#' `print_all()` prints the same information, and also lists the edges, and
-#' optionally graph, vertex and/or edge attributes.
+#' `print_all()` prints the same information, and also lists the edges, and optionally graph, vertex and/or edge attributes.
 #'
-#' `print.igraph()` behaves either as `summary.igraph` or
-#' `print_all()` depending on the `full` argument. See also the
-#' \sQuote{print.full} igraph option and [igraph_opt()].
+#' `print.igraph()` behaves either as `summary.igraph` or `print_all()` depending on the `full` argument.
+#' See also the \sQuote{print.full} igraph option and [igraph_opt()].
 #'
-#' The graph summary printed by `summary.igraph` (and `print.igraph()`
-#' and `print_all()`) consists of one or more lines. The first line contains
-#' the basic properties of the graph, and the rest contains its attributes.
+#' The graph summary printed by `summary.igraph` (and `print.igraph()` and `print_all()`) consists of one or more lines.
+#' The first line contains the basic properties of the graph, and the rest contains its attributes.
 #' Here is an example, a small star graph with weighted directed edges and named
 #' vertices: \preformatted{    IGRAPH badcafe DNW- 10 9 -- In-star
 #'     + attr: name (g/c), mode (g/c), center (g/n), name (v/c),
 #'       weight (e/n) }
-#' The first line always
-#' starts with `IGRAPH`, showing you that the object is an igraph graph.
-#' Then a seven character code is printed, this the first seven characters
-#' of the unique ID of the graph. See [graph_id()] for more.
-#' Then a four letter long code string is printed. The first letter
-#' distinguishes between directed (\sQuote{`D`}) and undirected
-#' (\sQuote{`U`}) graphs. The second letter is \sQuote{`N`} for named
-#' graphs, i.e. graphs with the `name` vertex attribute set. The third
-#' letter is \sQuote{`W`} for weighted graphs, i.e. graphs with the
-#' `weight` edge attribute set. The fourth letter is \sQuote{`B`} for
-#' bipartite graphs, i.e. for graphs with the `type` vertex attribute set.
+#' The first line always starts with `IGRAPH`, showing you that the object is an igraph graph.
+#' Then a seven character code is printed, this the first seven characters of the unique ID of the graph.
+#' See [graph_id()] for more.
+#' Then a four letter long code string is printed.
+#' The first letter distinguishes between directed (\sQuote{`D`}) and undirected (\sQuote{`U`}) graphs.
+#' The second letter is \sQuote{`N`} for named graphs, i.e. graphs with the `name` vertex attribute set.
+#' The third letter is \sQuote{`W`} for weighted graphs, i.e. graphs with the `weight` edge attribute set.
+#' The fourth letter is \sQuote{`B`} for bipartite graphs, i.e. for graphs with the `type` vertex attribute set.
 #'
 #' This is followed by the number of vertices and edges, then two dashes.
 #'
 #' Finally, after two dashes, the name of the graph is printed, if it has one,
 #' i.e. if the `name` graph attribute is set.
 #'
-#' From the second line, the attributes of the graph are listed, separated by a
-#' comma. After the attribute names, the kind of the attribute -- graph
-#' (\sQuote{`g`}), vertex (\sQuote{`v`}) or edge (\sQuote{`e`})
-#' -- is denoted, and the type of the attribute as well, character
-#' (\sQuote{`c`}), numeric (\sQuote{`n`}), logical
-#' (\sQuote{`l`}), or other (\sQuote{`x`}).
+#' From the second line, the attributes of the graph are listed, separated by a comma.
+#' After the attribute names, the kind of the attribute -- graph (\sQuote{`g`}), vertex (\sQuote{`v`}) or edge (\sQuote{`e`}) -- is denoted,
+#' and the type of the attribute as well, character (\sQuote{`c`}), numeric (\sQuote{`n`}), logical (\sQuote{`l`}), or other (\sQuote{`x`}).
 #'
-#' As of igraph 0.4 `print_all()` and `print.igraph()` use the
-#' `max.print` option, see [base::options()] for details.
+#' As of igraph 0.4 `print_all()` and `print.igraph()` use the `max.print` option, see [base::options()] for details.
 #'
-#' As of igraph 1.1.1, the `str.igraph` function is defunct, use
-#' `print_all()`.
+#' As of igraph 1.1.1, the `str.igraph` function is defunct, use `print_all()`.
 #'
-#' Output style is controlled by the `print.style` igraph option. The default
-#' `"cli"` produces cli-styled output with section rules, typed attribute
-#' listings and Unicode arrows for edges. Set
-#' `igraph_options(print.style = "classic")` for the historical
-#' `IGRAPH ... DNW-` header relied on by parsers and tutorials.
+#' Output style is controlled by the `print.style` igraph option.
+#' The default `"cli"` produces cli-styled output with section rules, typed attribute listings and Unicode arrows for edges.
+#' Set `igraph_options(print.style = "classic")` for the historical `IGRAPH ... DNW-` header relied on by parsers and tutorials.
 #'
 #' @aliases print.igraph print_all summary.igraph str.igraph
 #' @param x The graph to print.
-#' @param full Logical, whether to print the graph structure itself as
-#'   well. The default `NULL` uses the `print.full` igraph option.
-#' @param graph.attributes Logical, whether to print graph attributes. The
-#'   default `NULL` uses the `print.graph.attributes` igraph option.
-#' @param vertex.attributes Logical, whether to print vertex
-#'   attributes. The default `NULL` uses the `print.vertex.attributes` igraph
-#'   option.
-#' @param edge.attributes Logical, whether to print edge attributes. The
-#'   default `NULL` uses the `print.edge.attributes` igraph option.
+#' @param full Logical, whether to print the graph structure itself as well.
+#'   The default `NULL` uses the `print.full` igraph option.
+#' @param graph.attributes Logical, whether to print graph attributes.
+#'   The default `NULL` uses the `print.graph.attributes` igraph option.
+#' @param vertex.attributes Logical, whether to print vertex attributes.
+#'   The default `NULL` uses the `print.vertex.attributes` igraph option.
+#' @param edge.attributes Logical, whether to print edge attributes.
+#'   The default `NULL` uses the `print.edge.attributes` igraph option.
 #' @param names Logical, whether to print symbolic vertex names (i.e.
 #'   the `name` vertex attribute) or vertex IDs.
-#' @param max.lines The maximum number of lines to use. The rest of the
-#'   output will be truncated. If not given, the `auto.print.lines` igraph
-#'   option applies; `NULL` prints all lines.
-#' @param id Whether to print the graph ID. The default `NULL` uses the
-#'   `print.id` igraph option.
+#' @param max.lines The maximum number of lines to use.
+#'   The rest of the output will be truncated.
+#'   If not given, the `auto.print.lines` igraph option applies; `NULL` prints all lines.
+#' @param id Whether to print the graph ID.
+#'   The default `NULL` uses the `print.id` igraph option.
 #' @param object The graph of which the summary will be printed.
 #' @param \dots Additional agruments.
 #' @return All these functions return the graph invisibly.
@@ -720,8 +703,8 @@ is_cli_style <- function() {
   identical(igraph_opt("print.style"), "cli")
 }
 
-# Emit a cli section rule. The leading blank line separates this section from
-# the previous one; `blank = FALSE` omits it for the first (header) rule.
+# Emit a cli section rule.
+# The leading blank line separates this section from the previous one; `blank = FALSE` omits it for the first (header) rule.
 cli_section <- function(title, right = NULL, blank = TRUE) {
   rule <- if (is.null(right)) {
     cli::rule(left = title)
@@ -746,10 +729,9 @@ print_cli_lines <- function(x, max.lines, omitted_footer) {
   }
 }
 
-# Format edge endpoints as "tail <arrow> head " strings. Endpoints are not
-# padded to a common width, so each edge reads with a single space around the
-# delimiter; the trailing space yields two spaces between edges once print()
-# adds its own single-space separator.
+# Format edge endpoints as "tail <arrow> head " strings.
+# Endpoints are not padded to a common width, so each edge reads with a single space around the delimiter;
+# the trailing space yields two spaces between edges once print() adds its own single-space separator.
 format_cli_edge_endpoints <- function(endpoints, arrow) {
   paste0(endpoints[, 1], " ", arrow, " ", endpoints[, 2], " ")
 }
@@ -853,9 +835,9 @@ print_igraph_attr_summary_cli <- function(x) {
   cli_section("Attributes")
   arrow <- if (cli::is_utf8_output()) "\u2192" else "->"
 
-  # Style names and type codes via cli's semantic classes (`.field`, `.cls`)
-  # rather than hand-picked colors, so cli's theme owns the palette and it
-  # respects NO_COLOR / non-tty output. `.cls` also supplies the `<...>`.
+  # Style names and type codes via cli's semantic classes (`.field`, `.cls`) rather than hand-picked colors,
+  # so cli's theme owns the palette and it respects NO_COLOR / non-tty output.
+  # `.cls` also supplies the `<...>`.
   format_line <- function(label, names, codes) {
     labels <- vapply(codes, attr_label_cli, character(1))
     parts <- vapply(

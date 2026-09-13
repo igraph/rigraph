@@ -15,22 +15,17 @@ sample_sphere_surface(dim, n = 1, ..., radius = 1, positive = TRUE)
 
 \item{radius}{Numeric scalar, the radius of the sphere to sample.}
 
-\item{positive}{Logical, whether to sample from the positive orthant
-of the sphere.}
+\item{positive}{Logical, whether to sample from the positive orthant of the sphere.}
 }
 \value{
-A \code{dim} (length of the \code{alpha} vector for
-\code{sample_dirichlet()}) times \code{n} matrix, whose columns are the sample
-vectors.
+A \code{dim} (length of the \code{alpha} vector for \code{sample_dirichlet()}) times \code{n} matrix, whose columns are the sample vectors.
 }
 \description{
-Sample finite-dimensional vectors to use as latent position vectors in
-random dot product graphs
+Sample finite-dimensional vectors to use as latent position vectors in random dot product graphs
 }
 \details{
-\code{sample_sphere_surface()} generates uniform samples from \eqn{S^{dim-1}}
-(the \code{(dim-1)}-sphere) with radius \code{radius}, i.e. the Euclidean
-norm of the samples equal \code{radius}.
+\code{sample_sphere_surface()} generates uniform samples from \eqn{S^{dim-1}} (the \code{(dim-1)}-sphere) with radius \code{radius},
+i.e. the Euclidean norm of the samples equal \code{radius}.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_sample_sphere_surface}{\code{sample_sphere_surface()}}

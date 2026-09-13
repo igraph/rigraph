@@ -3,8 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.directed()` was renamed to [is_directed()] to create a more
-#' consistent API.
+#' `is.directed()` was renamed to [is_directed()] to create a more consistent API.
 #' @inheritParams is_directed
 #' @keywords internal
 #' @export
@@ -19,8 +18,7 @@ is.directed <- function(graph) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `delete.vertices()` was renamed to [delete_vertices()] to create a more
-#' consistent API.
+#' `delete.vertices()` was renamed to [delete_vertices()] to create a more consistent API.
 #' @inheritParams delete_vertices
 #' @keywords internal
 #' @export
@@ -35,8 +33,7 @@ delete.vertices <- function(graph, v) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `delete.edges()` was renamed to [delete_edges()] to create a more
-#' consistent API.
+#' `delete.edges()` was renamed to [delete_edges()] to create a more consistent API.
 #' @inheritParams delete_edges
 #' @keywords internal
 #' @export
@@ -51,8 +48,7 @@ delete.edges <- function(graph, edges) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `add.vertices()` was renamed to [add_vertices()] to create a more
-#' consistent API.
+#' `add.vertices()` was renamed to [add_vertices()] to create a more consistent API.
 #' @inheritParams add_vertices
 #' @keywords internal
 #' @export
@@ -67,8 +63,7 @@ add.vertices <- function(graph, nv, ..., attr = list()) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `add.edges()` was renamed to [add_edges()] to create a more
-#' consistent API.
+#' `add.edges()` was renamed to [add_edges()] to create a more consistent API.
 #' @inheritParams add_edges
 #' @keywords internal
 #' @export
@@ -104,23 +99,18 @@ add.edges <- function(graph, edges, ..., attr = list()) {
 
 #' Add edges to a graph
 #'
-#' The new edges are given as a vertex sequence, e.g. internal
-#' numeric vertex IDs, or vertex names. The first edge points from
-#' `edges[1]` to `edges[2]`, the second from `edges[3]`
-#' to `edges[4]`, etc.
+#' The new edges are given as a vertex sequence, e.g. internal numeric vertex IDs, or vertex names.
+#' The first edge points from `edges[1]` to `edges[2]`, the second from `edges[3]` to `edges[4]`, etc.
 #'
 #' If attributes are supplied, and they are not present in the graph,
 #' their values for the original edges of the graph are set to `NA`.
 #'
 #' @param graph The input graph
-#' @param edges The edges to add, a vertex sequence with even number
-#'   of vertices.
-#' @param ... Additional arguments, they must be named,
-#'   and they will be added as edge attributes, for the newly added
-#'   edges. See also details below.
-#' @param attr A named list, its elements will be added
-#'   as edge attributes, for the newly added edges. See also details
-#'   below.
+#' @param edges The edges to add, a vertex sequence with even number of vertices.
+#' @param ... Additional arguments, they must be named, and they will be added as edge attributes, for the newly added edges.
+#'   See also details below.
+#' @param attr A named list, its elements will be added as edge attributes, for the newly added edges.
+#'   See also details below.
 #' @return The graph, with the edges (and attributes) added.
 #'
 #' @export
@@ -176,18 +166,14 @@ add_edges <- function(graph, edges, ..., attr = list()) {
 
 #' Add vertices to a graph
 #'
-#' If attributes are supplied, and they are not present in the graph,
-#' their values for the original vertices of the graph are set to
-#' `NA`.
+#' If attributes are supplied, and they are not present in the graph, their values for the original vertices of the graph are set to `NA`.
 #'
 #' @param graph The input graph.
 #' @param nv The number of vertices to add.
-#' @param ... Additional arguments, they must be named,
-#'   and they will be added as vertex attributes, for the newly added
-#'   vertices. See also details below.
-#' @param attr A named list, its elements will be added
-#'   as vertex attributes, for the newly added vertices. See also details
-#'   below.
+#' @param ... Additional arguments, they must be named, and they will be added as vertex attributes, for the newly added vertices.
+#'   See also details below.
+#' @param attr A named list, its elements will be added as vertex attributes, for the newly added vertices.
+#'   See also details below.
 #' @return The graph, with the vertices (and attributes) added.
 #'
 #' @family functions for manipulating graph structure
@@ -242,10 +228,9 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
 #' Delete edges from a graph
 #'
 #' @param graph The input graph.
-#' @param edges The edges to remove, specified as an edge sequence. Typically
-#'   this is either a numeric vector containing edge IDs, or a character vector
-#'   containing the IDs or names of the source and target vertices, separated by
-#'   `|`
+#' @param edges The edges to remove, specified as an edge sequence.
+#'   Typically this is either a numeric vector containing edge IDs,
+#'   or a character vector containing the IDs or names of the source and target vertices, separated by `|`
 #' @return The graph, with the edges removed.
 #'
 #' @family functions for manipulating graph structure
@@ -330,15 +315,13 @@ ecount <- gsize
 
 #' Neighboring (adjacent) vertices in a graph
 #'
-#' A vertex is a neighbor of another one (in other words, the two
-#' vertices are adjacent), if they are incident to the same edge.
+#' A vertex is a neighbor of another one (in other words, the two vertices are adjacent), if they are incident to the same edge.
 #'
 #' @param graph The input graph.
 #' @param v The vertex of which the adjacent vertices are queried.
 #' @inheritParams rlang::args_dots_empty
-#' @param mode Whether to query outgoing (\sQuote{out}), incoming
-#'   (\sQuote{in}) edges, or both types (\sQuote{all}). This is
-#'   ignored for undirected graphs.
+#' @param mode Whether to query outgoing (\sQuote{out}), incoming (\sQuote{in}) edges, or both types (\sQuote{all}).
+#'   This is ignored for undirected graphs.
 #' @return A vertex sequence containing the neighbors of the input vertex.
 #'
 #' @family structural queries
@@ -411,8 +394,7 @@ neighbors <- function(
 #' @param v The vertex of which the incident edges are queried.
 #' @inheritParams neighbors
 #' @inheritParams rlang::args_dots_empty
-#' @return An edge sequence containing the incident edges of
-#'   the input vertex.
+#' @return An edge sequence containing the incident edges of the input vertex.
 #'
 #' @family structural queries
 #'
@@ -501,8 +483,8 @@ is_directed <- function(graph) {
 #' @param graph The input graph
 #' @param es The sequence of edges to query
 #' @inheritParams rlang::args_dots_empty
-#' @param names Whether to return vertex names or
-#'   numeric vertex IDs. By default vertex names are used.
+#' @param names Whether to return vertex names or numeric vertex IDs.
+#'   By default vertex names are used.
 #' @return A two column matrix of vertex names or vertex IDs.
 #'
 #' @aliases get.edges
@@ -622,31 +604,26 @@ el_to_vec <- function(x, call = rlang::caller_env()) {
 
 #' Find the edge IDs based on the incident vertices of the edges
 #'
-#' Find the edges in an igraph graph that have the specified end points. This
-#' function handles multi-graph (graphs with multiple edges) and can consider
-#' or ignore the edge directions in directed graphs.
+#' Find the edges in an igraph graph that have the specified end points.
+#' This function handles multi-graph (graphs with multiple edges) and can consider or ignore the edge directions in directed graphs.
 #'
-#' igraph vertex IDs are natural numbers, starting from one, up to the number
-#' of vertices in the graph. Similarly, edges are also numbered from one, up to
-#' the number of edges.
+#' igraph vertex IDs are natural numbers, starting from one, up to the number of vertices in the graph.
+#' Similarly, edges are also numbered from one, up to the number of edges.
 #'
-#' This function allows finding the edges of the graph, via their incident
-#' vertices.
+#' This function allows finding the edges of the graph, via their incident vertices.
 #'
 #' @param graph The input graph.
-#' @param vp The incident vertices, given as a two-column data frame, two-column matrix,
-#'   or vector of vertex IDs or symbolic vertex names.
-#'   For a vector, the values are interpreted pairwise, i.e. the first and second are used for
-#'   the first edge, the third and fourth for the second, etc.
+#' @param vp The incident vertices, given as a two-column data frame, two-column matrix, or vector of vertex IDs or symbolic vertex names.
+#'   For a vector, the values are interpreted pairwise, i.e. the first and second are used for the first edge,
+#'   the third and fourth for the second, etc.
 #' @inheritParams rlang::args_dots_empty
-#' @param directed Logical, whether to consider edge directions in
-#'   directed graphs. This argument is ignored for undirected graphs.
-#' @param error Logical, whether to report an error if an edge is not
-#'   found in the graph. If `FALSE`, then no error is reported, and zero is
-#'   returned for the non-existant edge(s).
+#' @param directed Logical, whether to consider edge directions in directed graphs.
+#'   This argument is ignored for undirected graphs.
+#' @param error Logical, whether to report an error if an edge is not found in the graph.
+#'   If `FALSE`, then no error is reported, and zero is returned for the non-existant edge(s).
 #' @return A numeric vector of edge IDs, one for each pair of input vertices.
-#'   If there is no edge in the input graph for a given pair of vertices, then
-#'   zero is reported. (If the `error` argument is `FALSE`.)
+#'   If there is no edge in the input graph for a given pair of vertices, then zero is reported.
+#'   (If the `error` argument is `FALSE`.)
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
 #' @family structural queries
@@ -731,11 +708,9 @@ get_edge_ids <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `get.edge.ids()` was renamed to [get_edge_ids()] to create a more
-#' consistent API.
+#' `get.edge.ids()` was renamed to [get_edge_ids()] to create a more consistent API.
 #' @inheritParams get_edge_ids
-#' @param multi
-#'   `r lifecycle::badge("deprecated")`
+#' @param multi `r lifecycle::badge("deprecated")`
 #' @keywords internal
 #' @export
 get.edge.ids <- function(
@@ -783,8 +758,7 @@ gorder <- vcount
 
 #' Adjacent vertices of multiple vertices in a graph
 #'
-#' This function is similar to [neighbors()], but it queries
-#' the adjacent vertices for multiple vertices at once.
+#' This function is similar to [neighbors()], but it queries the adjacent vertices for multiple vertices at once.
 #'
 #' @param graph Input graph.
 #' @param v The vertices to query.
@@ -861,8 +835,7 @@ adjacent_vertices <- function(
 
 #' Incident edges of multiple vertices in a graph
 #'
-#' This function is similar to [incident()], but it
-#' queries multiple vertices at once.
+#' This function is similar to [incident()], but it queries multiple vertices at once.
 #'
 #' @param graph Input graph.
 #' @param v The vertices to query
@@ -939,20 +912,16 @@ incident_edges <- function(
 
 #' Invalidate the cache of a graph
 #'
-#' igraph graphs cache some basic properties (such as whether the graph is a
-#' DAG or whether it is simple) in an internal data structure for faster
-#' repeated queries. This function invalidates the cache, forcing a
-#' recalculation of the cached properties the next time they are needed.
+#' igraph graphs cache some basic properties (such as whether the graph is a DAG or whether it is simple) in an internal data structure for faster repeated queries.
+#' This function invalidates the cache, forcing a recalculation of the cached properties the next time they are needed.
 #'
-#' You should not need to call this function during normal usage; however, it
-#' may be useful for debugging cache-related issues. A tell-tale sign of an
-#' invalid cache entry is when the result of a cached function (such as
-#' \code{\link{is_dag}()} or \code{\link{is_simple}()}) changes after calling
-#' this function.
+#' You should not need to call this function during normal usage; however, it may be useful for debugging cache-related issues.
+#' A tell-tale sign of an invalid cache entry is
+#' when the result of a cached function (such as \code{\link{is_dag}()} or \code{\link{is_simple}()}) changes after calling this function.
 #'
 #' @param graph The graph whose cache is to be invalidated.
-#' @return The graph with its cache invalidated. Since the graph is modified
-#'   in place in R as well, you can also ignore the return value.
+#' @return The graph with its cache invalidated.
+#'   Since the graph is modified in place in R as well, you can also ignore the return value.
 #'
 #' @family low-level operations
 #'

@@ -3,8 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `get.stochastic()` was renamed to [stochastic_matrix()] to create a more
-#' consistent API.
+#' `get.stochastic()` was renamed to [stochastic_matrix()] to create a more consistent API.
 #' @inheritParams stochastic_matrix
 #' @keywords internal
 #' @export
@@ -42,23 +41,21 @@ get.stochastic <- function(
 #'
 #' Retrieves the stochastic matrix of a graph of class `igraph`.
 #'
-#' Let \eqn{M} be an \eqn{n \times n}{n x n} adjacency matrix with real
-#' non-negative entries. Let us define \eqn{D = \textrm{diag}(\sum_{i}M_{1i},
+#' Let \eqn{M} be an \eqn{n \times n}{n x n} adjacency matrix with real non-negative entries.
+#' Let us define \eqn{D = \textrm{diag}(\sum_{i}M_{1i},
 #' \dots, \sum_{i}M_{ni})}{D=diag( sum(M[1,i], i), ..., sum(M[n,i], i) )}
 #'
-#' The (row) stochastic matrix is defined as \deqn{W = D^{-1}M,}{W = inv(D) M,}
-#' where it is assumed that \eqn{D} is non-singular.  Column stochastic
-#' matrices are defined in a symmetric way.
+#' The (row) stochastic matrix is defined as \deqn{W = D^{-1}M,}{W = inv(D) M,} where it is assumed that \eqn{D} is non-singular.
+#' Column stochastic matrices are defined in a symmetric way.
 #'
-#' @param graph The input graph. Must be of class `igraph`.
+#' @param graph The input graph.
+#'   Must be of class `igraph`.
 #' @inheritParams rlang::args_dots_empty
-#' @param column.wise If `FALSE`, then the rows of the stochastic matrix
-#'   sum up to one; otherwise it is the columns.
-#' @param sparse Logical, whether to return a sparse matrix. The
-#'   `Matrix` package is needed for sparse matrices. The default `NULL` uses
-#'   the `sparsematrices` igraph option.
-#' @return A regular matrix or a matrix of class `Matrix` if a
-#'   `sparse` argument was `TRUE`.
+#' @param column.wise If `FALSE`, then the rows of the stochastic matrix sum up to one; otherwise it is the columns.
+#' @param sparse Logical, whether to return a sparse matrix.
+#'   The `Matrix` package is needed for sparse matrices.
+#'   The default `NULL` uses the `sparsematrices` igraph option.
+#' @return A regular matrix or a matrix of class `Matrix` if a `sparse` argument was `TRUE`.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [as_adjacency_matrix()]
 #' @export

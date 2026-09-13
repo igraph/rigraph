@@ -11,16 +11,14 @@ interconnected.islands.game(islands.n, islands.size, islands.pin, n.inter)
 
 \item{islands.size}{The size of islands in the graph.}
 
-\item{islands.pin}{The probability to create each possible edge into each
-island.}
+\item{islands.pin}{The probability to create each possible edge into each island.}
 
 \item{n.inter}{The number of edges to create between two islands.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{interconnected.islands.game()} was renamed to \code{\link[=sample_islands]{sample_islands()}} to create a more
-consistent API.
+\code{interconnected.islands.game()} was renamed to \code{\link[=sample_islands]{sample_islands()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_simple_interconnected_islands_game}{\code{simple_interconnected_islands_game()}}

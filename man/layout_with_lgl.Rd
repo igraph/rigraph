@@ -23,24 +23,23 @@ layout_with_lgl(
 
 \item{maxiter}{The maximum number of iterations to perform (150).}
 
-\item{maxdelta}{The maximum change for a vertex during an iteration. The
-default \code{NULL} uses the number of vertices.}
+\item{maxdelta}{The maximum change for a vertex during an iteration.
+The default \code{NULL} uses the number of vertices.}
 
-\item{area}{The area of the surface on which the vertices are placed. The
-default \code{NULL} uses the square of the number of vertices.}
+\item{area}{The area of the surface on which the vertices are placed.
+The default \code{NULL} uses the square of the number of vertices.}
 
 \item{coolexp}{The cooling exponent of the simulated annealing (1.5).}
 
-\item{repulserad}{Cancellation radius for the repulsion. The default
-\code{NULL} uses the \code{area} times the number of vertices.}
+\item{repulserad}{Cancellation radius for the repulsion.
+The default \code{NULL} uses the \code{area} times the number of vertices.}
 
-\item{cellsize}{The size of the cells for the grid. When calculating the
-repulsion forces between vertices only vertices in the same or neighboring
-grid cells are taken into account. The default \code{NULL} uses the square
-root of the square root of the \code{area}.}
+\item{cellsize}{The size of the cells for the grid.
+When calculating the repulsion forces between vertices only vertices in the same or neighboring grid cells are taken into account.
+The default \code{NULL} uses the square root of the square root of the \code{area}.}
 
-\item{root}{The ID of the vertex to place at the middle of the layout. The
-default value is -1 which means that a random vertex is selected.}
+\item{root}{The ID of the vertex to place at the middle of the layout.
+The default value is -1 which means that a random vertex is selected.}
 }
 \value{
 A numeric matrix with two columns and as many rows as vertices.
@@ -49,17 +48,15 @@ A numeric matrix with two columns and as many rows as vertices.
 A layout generator for larger graphs.
 }
 \details{
-\code{layout_with_lgl()} is for large connected graphs, it is similar to the layout
-generator of the Large Graph Layout software
-(\url{https://lgl.sourceforge.net/}).
+\code{layout_with_lgl()} is for large connected graphs,
+it is similar to the layout generator of the Large Graph Layout software (\url{https://lgl.sourceforge.net/}).
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
 }
 
 \seealso{
-\code{\link[=with_lgl]{with_lgl()}} to build a lazy layout specification for
-\code{\link[=add_layout_]{add_layout_()}}.
+\code{\link[=with_lgl]{with_lgl()}} to build a lazy layout specification for \code{\link[=add_layout_]{add_layout_()}}.
 
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},

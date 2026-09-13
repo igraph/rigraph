@@ -3,8 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `hrg.predict()` was renamed to [predict_edges()] to create a more
-#' consistent API.
+#' `hrg.predict()` was renamed to [predict_edges()] to create a more consistent API.
 #' @inheritParams predict_edges
 #' @keywords internal
 #' @export
@@ -31,8 +30,7 @@ hrg.predict <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `hrg.fit()` was renamed to [fit_hrg()] to create a more
-#' consistent API.
+#' `hrg.fit()` was renamed to [fit_hrg()] to create a more consistent API.
 #' @inheritParams fit_hrg
 #' @keywords internal
 #' @export
@@ -47,8 +45,7 @@ hrg.fit <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `hrg.game()` was renamed to [sample_hrg()] to create a more
-#' consistent API.
+#' `hrg.game()` was renamed to [sample_hrg()] to create a more consistent API.
 #' @inheritParams sample_hrg
 #' @keywords internal
 #' @export
@@ -63,8 +60,7 @@ hrg.game <- function(hrg) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `hrg.dendrogram()` was renamed to [hrg_tree()] to create a more
-#' consistent API.
+#' `hrg.dendrogram()` was renamed to [hrg_tree()] to create a more consistent API.
 #' @inheritParams hrg_tree
 #' @keywords internal
 #' @export
@@ -79,8 +75,7 @@ hrg.dendrogram <- function(hrg) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `hrg.create()` was renamed to [hrg()] to create a more
-#' consistent API.
+#' `hrg.create()` was renamed to [hrg()] to create a more consistent API.
 #' @inheritParams hrg
 #' @keywords internal
 #' @export
@@ -95,8 +90,7 @@ hrg.create <- function(graph, prob) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `hrg.consensus()` was renamed to [consensus_tree()] to create a more
-#' consistent API.
+#' `hrg.consensus()` was renamed to [consensus_tree()] to create a more consistent API.
 #' @inheritParams consensus_tree
 #' @keywords internal
 #' @export
@@ -140,24 +134,18 @@ hrg.consensus <- function(
 #'
 #' Fitting and sampling hierarchical random graph models.
 #'
-#' A hierarchical random graph is an ensemble of undirected graphs with \eqn{n}
-#' vertices. It is defined via a binary tree with \eqn{n} leaf and \eqn{n-1}
-#' internal vertices, where the internal vertices are labeled with
-#' probabilities.  The probability that two vertices are connected in the
-#' random graph is given by the probability label at their closest common
-#' ancestor.
+#' A hierarchical random graph is an ensemble of undirected graphs with \eqn{n} vertices.
+#' It is defined via a binary tree with \eqn{n} leaf and \eqn{n-1} internal vertices,
+#' where the internal vertices are labeled with probabilities.
+#' The probability that two vertices are connected in the random graph is given by the probability label at their closest common ancestor.
 #'
 #' Please see references below for more about hierarchical random graphs.
 #'
-#' igraph contains functions for fitting HRG models to a given network
-#' (`fit_hrg()`, for generating networks from a given HRG ensemble
-#' (`sample_hrg()`), converting an igraph graph to a HRG and back
-#' (`hrg()`, `hrg_tree()`), for calculating a consensus tree from a set
-#' of sampled HRGs (`consensus_tree()`) and for predicting missing edges in
-#' a network based on its HRG models (`predict_edges()`).
+#' igraph contains functions for fitting HRG models to a given network (`fit_hrg()`,
+#' for generating networks from a given HRG ensemble (`sample_hrg()`), converting an igraph graph to a HRG and back (`hrg()`, `hrg_tree()`),
+#' for calculating a consensus tree from a set of sampled HRGs (`consensus_tree()`) and for predicting missing edges in a network based on its HRG models (`predict_edges()`).
 #'
-#' The igraph HRG implementation is heavily based on the code published by
-#' Aaron Clauset, at his website (not functional any more).
+#' The igraph HRG implementation is heavily based on the code published by Aaron Clauset, at his website (not functional any more).
 #'
 #' @name hrg-methods
 #' @family hierarchical random graph functions
@@ -165,25 +153,22 @@ NULL
 
 #' Fit a hierarchical random graph model
 #'
-#' `fit_hrg()` fits a HRG to a given graph. It takes the specified
-#' `steps` number of MCMC steps to perform the fitting, or a convergence
-#' criteria if the specified number of steps is zero. `fit_hrg()` can start
-#' from a given HRG, if this is given in the `hrg()` argument and the
-#' `start` argument is `TRUE`. It can be converted to the `hclust` class using
-#' `as.hclust()` provided in this package.
+#' `fit_hrg()` fits a HRG to a given graph.
+#' It takes the specified `steps` number of MCMC steps to perform the fitting,
+#' or a convergence criteria if the specified number of steps is zero.
+#' `fit_hrg()` can start from a given HRG, if this is given in the `hrg()` argument and the `start` argument is `TRUE`.
+#' It can be converted to the `hclust` class using `as.hclust()` provided in this package.
 #'
-#' @param graph The graph to fit the model to. Edge directions are ignored in
-#'   directed graphs.
-#' @param hrg A hierarchical random graph model, in the form of an
-#'   `igraphHRG` object. `fit_hrg()` allows this to be `NULL`, in
-#'   which case a random starting point is used for the fitting.
+#' @param graph The graph to fit the model to.
+#'   Edge directions are ignored in directed graphs.
+#' @param hrg A hierarchical random graph model, in the form of an `igraphHRG` object.
+#'   `fit_hrg()` allows this to be `NULL`, in which case a random starting point is used for the fitting.
 #' @inheritParams rlang::args_dots_empty
-#' @param start Logical, whether to start the fitting/sampling from the
-#'   supplied `igraphHRG` object, or from a random starting point.
-#' @param steps The number of MCMC steps to make. If this is zero, then the
-#'   MCMC procedure is performed until convergence.
-#' @return `fit_hrg()` returns an `igraphHRG` object. This is a list
-#'   with the following members:
+#' @param start Logical, whether to start the fitting/sampling from the supplied `igraphHRG` object, or from a random starting point.
+#' @param steps The number of MCMC steps to make.
+#'   If this is zero, then the MCMC procedure is performed until convergence.
+#' @return `fit_hrg()` returns an `igraphHRG` object.
+#'   This is a list with the following members:
 #'   \describe{
 #'     \item{left}{
 #'       Vector that contains the left children of the internal tree vertices.
@@ -316,26 +301,19 @@ fit_hrg <- function(
 
 #' Create a consensus tree from several hierarchical random graph models
 #'
-#' `consensus_tree()` creates a consensus tree from several fitted
-#' hierarchical random graph models, using phylogeny methods. If the `hrg()`
-#' argument is given and `start` is set to `TRUE`, then it starts
-#' sampling from the given HRG. Otherwise it optimizes the HRG log-likelihood
-#' first, and then samples starting from the optimum.
+#' `consensus_tree()` creates a consensus tree from several fitted hierarchical random graph models, using phylogeny methods.
+#' If the `hrg()` argument is given and `start` is set to `TRUE`, then it starts sampling from the given HRG.
+#' Otherwise it optimizes the HRG log-likelihood first, and then samples starting from the optimum.
 #'
 #' @param graph The graph the models were fitted to.
-#' @param hrg A hierarchical random graph model, in the form of an
-#'   `igraphHRG` object. `consensus_tree()` allows this to be
-#'   `NULL` as well, then a HRG is fitted to the graph first, from a
-#'   random starting point.
+#' @param hrg A hierarchical random graph model, in the form of an `igraphHRG` object.
+#'   `consensus_tree()` allows this to be `NULL` as well, then a HRG is fitted to the graph first, from a random starting point.
 #' @inheritParams rlang::args_dots_empty
-#' @param start Logical, whether to start the fitting/sampling from the
-#'   supplied `igraphHRG` object, or from a random starting point.
-#' @param num.samples Number of samples to use for consensus generation or
-#'   missing edge prediction.
-#' @return `consensus_tree()` returns a list of two objects. The first
-#'   is an `igraphHRGConsensus` object, the second is an
-#'   `igraphHRG` object.  The `igraphHRGConsensus` object has the
-#'   following members:
+#' @param start Logical, whether to start the fitting/sampling from the supplied `igraphHRG` object, or from a random starting point.
+#' @param num.samples Number of samples to use for consensus generation or missing edge prediction.
+#' @return `consensus_tree()` returns a list of two objects.
+#'   The first is an `igraphHRGConsensus` object, the second is an `igraphHRG` object.
+#'   The `igraphHRGConsensus` object has the following members:
 #'   \describe{
 #'     \item{parents}{
 #'       For each vertex, the ID of its parent vertex is stored,
@@ -406,14 +384,12 @@ consensus_tree <- function(
 
 #' Create a hierarchical random graph from an igraph graph
 #'
-#' `hrg()` creates a HRG from an igraph graph. The igraph graph must be
-#' a directed binary tree, with \eqn{n-1} internal and \eqn{n} leaf
-#' vertices. The `prob` argument contains the HRG probability labels
-#' for each vertex; these are ignored for leaf vertices.
+#' `hrg()` creates a HRG from an igraph graph.
+#' The igraph graph must be a directed binary tree, with \eqn{n-1} internal and \eqn{n} leaf vertices.
+#' The `prob` argument contains the HRG probability labels for each vertex; these are ignored for leaf vertices.
 #'
 #' @param graph The igraph graph to create the HRG from.
-#' @param prob A vector of probabilities, one for each vertex, in the order of
-#'   vertex IDs.
+#' @param prob A vector of probabilities, one for each vertex, in the order of vertex IDs.
 #' @return `hrg()` returns an `igraphHRG` object.
 #'
 #' @family hierarchical random graph functions
@@ -428,8 +404,7 @@ hrg <- function(graph, prob) {
 
 #' Create an igraph graph from a hierarchical random graph model
 #'
-#' `hrg_tree()` creates the corresponsing igraph tree of a hierarchical
-#' random graph model.
+#' `hrg_tree()` creates the corresponsing igraph tree of a hierarchical random graph model.
 #'
 #' @param hrg A hierarchical random graph model.
 #' @return An igraph graph with a vertex attribute called `"probability"`.
@@ -454,8 +429,7 @@ hrg_tree <- function(hrg) {
 
 #' Sample from a hierarchical random graph model
 #'
-#' `sample_hrg()` samples a graph from a given hierarchical random graph
-#' model.
+#' `sample_hrg()` samples a graph from a given hierarchical random graph model.
 #'
 #' @param hrg A hierarchical random graph model.
 #' @return An igraph graph.
@@ -475,26 +449,20 @@ sample_hrg <- function(hrg) {
 }
 #' Predict edges based on a hierarchical random graph model
 #'
-#' `predict_edges()` uses a hierarchical random graph model to predict
-#' missing edges from a network. This is done by sampling hierarchical models
-#' around the optimum model, proportionally to their likelihood. The MCMC
-#' sampling is stated from `hrg()`, if it is given and the `start`
-#' argument is set to `TRUE`. Otherwise a HRG is fitted to the graph
-#' first.
+#' `predict_edges()` uses a hierarchical random graph model to predict missing edges from a network.
+#' This is done by sampling hierarchical models around the optimum model, proportionally to their likelihood.
+#' The MCMC sampling is stated from `hrg()`, if it is given and the `start` argument is set to `TRUE`.
+#' Otherwise a HRG is fitted to the graph first.
 #'
-#' @param graph The graph to fit the model to. Edge directions are ignored in
-#'   directed graphs.
-#' @param hrg A hierarchical random graph model, in the form of an
-#'   `igraphHRG` object. `predict_edges()` allow this to be
-#'   `NULL` as well, then a HRG is fitted to the graph first, from a
-#'   random starting point.
+#' @param graph The graph to fit the model to.
+#'   Edge directions are ignored in directed graphs.
+#' @param hrg A hierarchical random graph model, in the form of an `igraphHRG` object.
+#'   `predict_edges()` allow this to be `NULL` as well, then a HRG is fitted to the graph first, from a random starting point.
 #' @inheritParams rlang::args_dots_empty
-#' @param start Logical, whether to start the fitting/sampling from the
-#'   supplied `igraphHRG` object, or from a random starting point.
-#' @param num.samples Number of samples to use for consensus generation or
-#'   missing edge prediction.
-#' @param num.bins Number of bins for the edge probabilities. Give a higher
-#'   number for a more accurate prediction.
+#' @param start Logical, whether to start the fitting/sampling from the supplied `igraphHRG` object, or from a random starting point.
+#' @param num.samples Number of samples to use for consensus generation or missing edge prediction.
+#' @param num.bins Number of bins for the edge probabilities.
+#'   Give a higher number for a more accurate prediction.
 #' @return A list with entries:
 #'   \describe{
 #'     \item{edges}{
@@ -604,7 +572,8 @@ predict_edges <- function(
 #'
 #' @aliases as.igraph as.igraph.igraphHRG
 #' @param x The object to convert.
-#' @param \dots Additional arguments. None currently.
+#' @param \dots Additional arguments.
+#'   None currently.
 #' @return All these functions return an igraph graph.
 #' @export
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}.
@@ -639,8 +608,8 @@ as.igraph.igraphHRG <- function(x, ...) {
 }
 
 buildMerges <- function(object) {
-  ## Build a merge matrix. This is done by a post-order
-  ## traversal of the tree.
+  ## Build a merge matrix.
+  ## This is done by a post-order traversal of the tree.
 
   S <- numeric()
   vcount <- length(object$left) + 1
@@ -761,9 +730,8 @@ as.hclust.igraphHRG <- function(x, ...) {
   merge[gs] <- map[-merge[gs]]
   merge[-gs] <- -merge[-gs] - 1
 
-  ## To get the ordering, we need to recode the merge matrix again,
-  ## without using group ids. Here the right node is merged _into_
-  ## the left node.
+  ## To get the ordering, we need to recode the merge matrix again, without using group ids.
+  ## Here the right node is merged _into_ the left node.
   map2 <- numeric(nrow(merge))
   mergeInto <- merge
   for (i in seq_len(nrow(merge))) {
@@ -819,19 +787,18 @@ rlang::on_load(s3_register("ape::as.phylo", "igraphHRG"))
 #'
 #' Plot a hierarchical random graph as a dendrogram.
 #'
-#' `plot_dendrogram()` supports three different plotting functions, selected via
-#' the `mode` argument. By default the plotting function is taken from the
-#' `dend.plot.type` igraph option, and it has for possible values:
+#' `plot_dendrogram()` supports three different plotting functions, selected via the `mode` argument.
+#' By default the plotting function is taken from the `dend.plot.type` igraph option, and it has for possible values:
 #' \itemize{ \item `auto` Choose automatically between the plotting
-#' functions. As `plot.phylo` is the most sophisticated, that is choosen,
-#' whenever the `ape` package is available. Otherwise `plot.hclust`
-#' is used.  \item `phylo` Use `plot.phylo` from the `ape`
-#' package.  \item `hclust` Use `plot.hclust` from the `stats`
-#' package.  \item `dendrogram` Use `plot.dendrogram` from the
-#' `stats` package.  }
+#' functions.
+#' As `plot.phylo` is the most sophisticated, that is choosen, whenever the `ape` package is available.
+#' Otherwise `plot.hclust` is used.
+#' \item `phylo` Use `plot.phylo` from the `ape` package.
+#' \item `hclust` Use `plot.hclust` from the `stats` package.
+#' \item `dendrogram` Use `plot.dendrogram` from the `stats` package.  }
 #'
-#' The different plotting functions take different sets of arguments. When
-#' using `plot.phylo` (`mode="phylo"`), we have the following syntax:
+#' The different plotting functions take different sets of arguments.
+#' When using `plot.phylo` (`mode="phylo"`), we have the following syntax:
 #' \preformatted{
 #'     plot_dendrogram(x, mode="phylo", colbar = rainbow(11, start=0.7,
 #'             end=0.1), edge.color = NULL, use.edge.length = FALSE, \dots)
@@ -848,24 +815,16 @@ rlang::on_load(s3_register("ape::as.phylo", "igraphHRG"))
 #'             hang = 0.01, ann = FALSE, main = "", sub = "", xlab = "",
 #'             ylab = "", \dots)
 #' } The extra arguments not documented above: \itemize{
-#'   \item `rect` A numeric scalar, the number of groups to mark on
-#'     the dendrogram. The dendrogram is cut into exactly `rect`
-#'     groups and they are marked via the `rect.hclust` command. Set
-#'     this to zero if you don't want to mark any groups.
-#'   \item `colbar` The colors of the rectangles that mark the
-#'     vertex groups via the `rect` argument.
-#'   \item `hang` Where to put the leaf nodes, this corresponds to the
-#'     `hang` argument of `plot.hclust`.
-#'   \item `ann` Whether to annotate the plot, the `ann` argument
-#'     of `plot.hclust`.
-#'   \item `main` The main title of the plot, the `main` argument
-#'     of `plot.hclust`.
-#'   \item `sub` The sub-title of the plot, the `sub` argument of
-#'     `plot.hclust`.
-#'   \item `xlab` The label on the horizontal axis, passed to
-#'     `plot.hclust`.
-#'   \item `ylab` The label on the vertical axis, passed to
-#'     `plot.hclust`.
+#'   \item `rect` A numeric scalar, the number of groups to mark on the dendrogram.
+#'     The dendrogram is cut into exactly `rect` groups and they are marked via the `rect.hclust` command.
+#'     Set this to zero if you don't want to mark any groups.
+#'   \item `colbar` The colors of the rectangles that mark the vertex groups via the `rect` argument.
+#'   \item `hang` Where to put the leaf nodes, this corresponds to the `hang` argument of `plot.hclust`.
+#'   \item `ann` Whether to annotate the plot, the `ann` argument of `plot.hclust`.
+#'   \item `main` The main title of the plot, the `main` argument of `plot.hclust`.
+#'   \item `sub` The sub-title of the plot, the `sub` argument of `plot.hclust`.
+#'   \item `xlab` The label on the horizontal axis, passed to `plot.hclust`.
+#'   \item `ylab` The label on the vertical axis, passed to `plot.hclust`.
 #'   \item `dots` Attitional arguments to pass to `plot.hclust`.
 #' }
 #'
@@ -874,12 +833,11 @@ rlang::on_load(s3_register("ape::as.phylo", "igraphHRG"))
 #'     plot_dendrogram(x, \dots)
 #' } The extra arguments are simply passed to [as.dendrogram()].
 #'
-#' @param x An `igraphHRG`, a hierarchical random graph, as returned by
-#'   the [fit_hrg()] function.
-#' @param mode Which dendrogram plotting function to use. See details below.
+#' @param x An `igraphHRG`, a hierarchical random graph, as returned by the [fit_hrg()] function.
+#' @param mode Which dendrogram plotting function to use.
+#'   See details below.
 #'   The default `NULL` uses the `dend.plot.type` igraph option.
-#' @param \dots Additional arguments to supply to the dendrogram plotting
-#'   function.
+#' @param \dots Additional arguments to supply to the dendrogram plotting function.
 #' @return Returns whatever the return value was from the plotting function,
 #'   `plot.phylo`, `plot.dendrogram` or `plot.hclust`.
 #' @method plot_dendrogram igraphHRG
@@ -973,11 +931,10 @@ hrgPlotPhylo <- function(
 
 #' Print a hierarchical random graph model to the screen
 #'
-#' `igraphHRG` objects can be printed to the screen in two forms: as
-#' a tree or as a list, depending on the `type` argument of the
-#' print function. By default the `auto` type is used, which selects
-#' `tree` for small graphs and `simple` (=list) for bigger
-#' ones. The `tree` format looks like
+#' `igraphHRG` objects can be printed to the screen in two forms: as a tree or as a list,
+#' depending on the `type` argument of the print function.
+#' By default the `auto` type is used, which selects `tree` for small graphs and `simple` (=list) for bigger ones.
+#' The `tree` format looks like
 #'  this: \preformatted{Hierarchical random graph, at level 3:
 #' g1        p=   0
 #' '- g15    p=0.33  1
@@ -985,16 +942,12 @@ hrgPlotPhylo <- function(
 #' '- g8     p= 0.5
 #'    '- g16 p= 0.2  20 14 17 19 11 15 16 13
 #'    '- g5  p=   0  12 18  }
-#' This is a graph with 20 vertices, and the
-#' top three levels of the fitted hierarchical random graph are
-#' printed. The root node of the HRG is always vertex group #1
-#' (\sQuote{`g1`} in the the printout). Vertex pairs in the left
-#' subtree of `g1` connect to vertices in the right subtree with
-#' probability zero, according to the fitted model. `g1` has two
-#' subgroups, `g15` and `g8`. `g15` has a subgroup of a
-#' single vertex (vertex 1), and another larger subgroup that contains
-#' vertices 6, 3, etc. on lower levels, etc.
-#' The `plain` printing is simpler and faster to produce, but less
+#' This is a graph with 20 vertices, and the top three levels of the fitted hierarchical random graph are printed.
+#' The root node of the HRG is always vertex group #1 (\sQuote{`g1`} in the the printout).
+#' Vertex pairs in the left subtree of `g1` connect to vertices in the right subtree with probability zero, according to the fitted model.
+#' `g1` has two subgroups, `g15` and `g8`.
+#' `g15` has a subgroup of a single vertex (vertex 1), and another larger subgroup that contains vertices 6, 3, etc. on lower levels,
+#' etc. The `plain` printing is simpler and faster to produce, but less
 #' visual: \preformatted{Hierarchical random graph:
 #' g1  p=0.0 -> g12 g10   g2  p=1.0 -> 7 10      g3  p=1.0 -> g18 14
 #' g4  p=1.0 -> g17 15    g5  p=0.4 -> g15 17    g6  p=0.0 -> 1 4
@@ -1003,8 +956,7 @@ hrgPlotPhylo <- function(
 #' g13 p=0.0 -> g14 9     g14 p=1.0 -> 2 6       g15 p=0.2 -> g19 18
 #' g16 p=1.0 -> g13 g2    g17 p=0.5 -> g7 13     g18 p=1.0 -> 12 19
 #' g19 p=0.7 -> g3 20}
-#' It lists the two subgroups of each internal node, in
-#' as many columns as the screen width allows.
+#' It lists the two subgroups of each internal node, in as many columns as the screen width allows.
 #'
 #' @param x `igraphHRG` object to print.
 #' @param type How to print the dendrogram, see details below.
@@ -1179,14 +1131,12 @@ print2.igraphHRG <- function(x, ...) {
 
 #' Print a hierarchical random graph consensus tree to the screen
 #'
-#' Consensus dendrograms (`igraphHRGConsensus` objects) are printed
-#' simply by listing the children of each internal node of the
+#' Consensus dendrograms (`igraphHRGConsensus` objects) are printed simply by listing the children of each internal node of the
 #' dendrogram: \preformatted{HRG consensus tree:
 #' g1 -> 11 12 13 14 15 16 17 18 19 20
 #' g2 -> 1  2  3  4  5  6  7  8  9  10
 #' g3 -> g1 g2}
-#' The root of the dendrogram is `g3` (because it has no incoming
-#' edges), and it has two subgroups, `g1` and `g2`.
+#' The root of the dendrogram is `g3` (because it has no incoming edges), and it has two subgroups, `g1` and `g2`.
 #'
 #' @param x `igraphHRGConsensus` object to print.
 #' @param ... Ignored.

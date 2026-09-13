@@ -21,17 +21,15 @@ The default \code{NULL} selects all vertices.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{mode}{Character string, \dQuote{out} for out-degree, \dQuote{in} for
-in-degree or \dQuote{all} for the sum of the two. For undirected graphs this
-argument is ignored.}
+\item{mode}{Character string, \dQuote{out} for out-degree, \dQuote{in} for in-degree or \dQuote{all} for the sum of the two.
+For undirected graphs this argument is ignored.}
 
 \item{loops}{Logical; whether the loop edges are also counted.}
 
-\item{weights}{Weight vector. If the graph has a \code{weight} edge
-attribute, then this is used by default. If the graph does not have a
-\code{weight} edge attribute and this argument is \code{NULL}, then a
-\code{\link[=degree]{degree()}} is called. If this is \code{NA}, then no edge weights are used
-(even if the graph has a \code{weight} edge attribute).}
+\item{weights}{Weight vector.
+If the graph has a \code{weight} edge attribute, then this is used by default.
+If the graph does not have a \code{weight} edge attribute and this argument is \code{NULL}, then a \code{\link[=degree]{degree()}} is called.
+If this is \code{NA}, then no edge weights are used (even if the graph has a \code{weight} edge attribute).}
 }
 \value{
 A numeric vector giving the strength of the vertices.

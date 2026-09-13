@@ -13,21 +13,19 @@ canonical.permutation(
 \arguments{
 \item{graph}{The input graph, treated as undirected.}
 
-\item{colors}{The colors of the individual vertices of the graph; only
-vertices having the same color are allowed to match each other in an
-automorphism. When omitted, igraph uses the \code{color} attribute of the
-vertices, or, if there is no such vertex attribute, it simply assumes that
-all vertices have the same color. Pass NULL explicitly if the graph has a
-\code{color} vertex attribute but you do not want to use it.}
+\item{colors}{The colors of the individual vertices of the graph;
+only vertices having the same color are allowed to match each other in an automorphism.
+When omitted, igraph uses the \code{color} attribute of the vertices, or, if there is no such vertex attribute,
+it simply assumes that all vertices have the same color.
+Pass NULL explicitly if the graph has a \code{color} vertex attribute but you do not want to use it.}
 
-\item{sh}{Type of the heuristics to use for the BLISS algorithm. See details
-for possible values.}
+\item{sh}{Type of the heuristics to use for the BLISS algorithm.
+See details for possible values.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{canonical.permutation()} was renamed to \code{\link[=canonical_permutation]{canonical_permutation()}} to create a more
-consistent API.
+\code{canonical.permutation()} was renamed to \code{\link[=canonical_permutation]{canonical_permutation()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_canonical_permutation}{\code{canonical_permutation()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

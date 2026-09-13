@@ -11,20 +11,18 @@ layout_nicely(graph, dim = 2, ...)
 
 \item{dim}{Dimensions, should be 2 or 3.}
 
-\item{\dots}{Extra arguments are passed to the real layout function that
-\code{layout_nicely()} ends up calling.}
+\item{\dots}{Extra arguments are passed to the real layout function that \code{layout_nicely()} ends up calling.}
 }
 \value{
 A numeric matrix with two or three columns.
 }
 \description{
-This function tries to choose an appropriate graph layout algorithm for the
-graph, automatically, based on a simple algorithm. See details below.
+This function tries to choose an appropriate graph layout algorithm for the graph, automatically, based on a simple algorithm.
+See details below.
 }
 \details{
-\code{layout_nicely()} tries to choose an appropriate layout function for the
-supplied graph, and uses that to generate the layout. The current
-implementation works like this:
+\code{layout_nicely()} tries to choose an appropriate layout function for the supplied graph, and uses that to generate the layout.
+The current implementation works like this:
 \enumerate{
 \item If the graph has a graph attribute called \sQuote{layout},
 then this is used. If this attribute is an R function, then it is called, with the graph and any other extra arguments.
@@ -40,27 +38,25 @@ if the graph is connected and has less than 1000 vertices, the
 Fruchterman-Reingold layout is used, by calling \code{layout_with_fr()}.
 \item Otherwise the DrL layout is used, \code{layout_with_drl()} is called.  }
 
-In layout algorithm implementations, an argument named \sQuote{weights} is
-typically used to specify the weights of the edges if the layout algorithm
-supports them. In this case, omitting \sQuote{weights} or setting it to
-\code{NULL} will make igraph use the 'weight' edge attribute from the graph
-if it is present. However, most layout algorithms do not support non-positive
-weights, so \code{layout_nicely()} would fail if you simply called it on
-your graph without specifying explicit weights and the weights happened to
-include non-positive numbers. We strive to ensure that \code{layout_nicely()}
-works out-of-the-box for most graphs, so the rule is that if you omit
-\sQuote{weights} or set it to \code{NULL} and \code{layout_nicely()} would
-end up calling \code{layout_with_fr()} or \code{layout_with_drl()}, we do not
-forward the weights to these functions and issue a warning about this. You
-can use \code{weights = NA} to silence the warning.
+In layout algorithm implementations,
+an argument named \sQuote{weights} is typically used to specify the weights of the edges if the layout algorithm supports them.
+In this case,
+omitting \sQuote{weights} or setting it to \code{NULL} will make igraph use the 'weight' edge attribute from the graph if it is present.
+However, most layout algorithms do not support non-positive weights,
+so \code{layout_nicely()} would fail
+if you simply called it on your graph without specifying explicit weights and the weights happened to include non-positive numbers.
+We strive to ensure that \code{layout_nicely()} works out-of-the-box for most graphs,
+so the rule is that if you omit \sQuote{weights} or set it to \code{NULL} and \code{layout_nicely()} would end up calling \code{layout_with_fr()} or \code{layout_with_drl()},
+we do not forward the weights to these functions and issue a warning about this.
+You can use \code{weights = NA} to silence the warning.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_align}{\code{layout_align()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_forest}{\code{is_forest()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
 }
 
 \seealso{
-\code{\link[=plot.igraph]{plot.igraph()}}. See \code{\link[=nicely]{nicely()}} to build a lazy layout
-specification for \code{\link[=add_layout_]{add_layout_()}}.
+\code{\link[=plot.igraph]{plot.igraph()}}.
+See \code{\link[=nicely]{nicely()}} to build a lazy layout specification for \code{\link[=add_layout_]{add_layout_()}}.
 
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},

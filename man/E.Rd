@@ -12,52 +12,43 @@ E(graph, ..., P = NULL, path = NULL, directed = TRUE)
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{P}{A list of vertices to select edges via pairs of vertices.
-The first and second vertices select the first edge, the third
-and fourth the second, etc.}
+The first and second vertices select the first edge, the third and fourth the second, etc.}
 
 \item{path}{A list of vertices, to select edges along a path.
-Note that this only works reliable for simple graphs. If the graph
-has multiple edges, one of them will be chosen arbitrarily to
-be included in the edge sequence.}
+Note that this only works reliable for simple graphs.
+If the graph has multiple edges, one of them will be chosen arbitrarily to be included in the edge sequence.}
 
-\item{directed}{Whether to consider edge directions in the \code{P}
-argument, for directed graphs.}
+\item{directed}{Whether to consider edge directions in the \code{P} argument, for directed graphs.}
 }
 \value{
 An edge sequence of the graph.
 }
 \description{
-An edge sequence is a vector containing numeric edge IDs, with a special
-class attribute that allows custom operations: selecting subsets of
-edges based on attributes, or graph structure, creating the
-intersection, union of edges, etc.
+An edge sequence is a vector containing numeric edge IDs, with a special class attribute that allows custom operations:
+selecting subsets of edges based on attributes, or graph structure, creating the intersection, union of edges, etc.
 }
 \details{
-Edge sequences are usually used as igraph function arguments that
-refer to edges of a graph.
+Edge sequences are usually used as igraph function arguments that refer to edges of a graph.
 
-An edge sequence is tied to the graph it refers to: it really denoted
-the specific edges of that graph, and cannot be used together with
-another graph.
+An edge sequence is tied to the graph it refers to: it really denoted the specific edges of that graph,
+and cannot be used together with another graph.
 
-An edge sequence is most often created by the \code{E()} function. The
-result includes edges in increasing edge ID order by default (if. none
-of the \code{P} and \code{path} arguments are used). An edge
-sequence can be indexed by a numeric vector, just like a regular R
-vector. See links to other edge sequence operations below.
+An edge sequence is most often created by the \code{E()} function.
+The result includes edges in increasing edge ID order by default (if. none of the \code{P} and \code{path} arguments are used).
+An edge sequence can be indexed by a numeric vector, just like a regular R vector.
+See links to other edge sequence operations below.
 }
 \section{Indexing edge sequences}{
 
-Edge sequences mostly behave like regular vectors, but there are some
-additional indexing operations that are specific for them;
-e.g. selecting edges based on graph structure, or based on edge
-attributes. See \code{\link{[.igraph.es}} for details.
+Edge sequences mostly behave like regular vectors, but there are some additional indexing operations that are specific for them;
+e.g. selecting edges based on graph structure, or based on edge attributes.
+See \code{\link{[.igraph.es}} for details.
 }
 
 \section{Querying or setting attributes}{
 
-Edge sequences can be used to query or set attributes for the
-edges in the sequence. See \code{\link[=$.igraph.es]{$.igraph.es()}} for details.
+Edge sequences can be used to query or set attributes for the edges in the sequence.
+See \code{\link[=$.igraph.es]{$.igraph.es()}} for details.
 }
 
 \section{Related documentation in the C library}{

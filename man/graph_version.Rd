@@ -7,24 +7,21 @@
 graph_version(graph)
 }
 \arguments{
-\item{graph}{The input graph. If it is missing, then
-the version number of the current data format is returned.}
+\item{graph}{The input graph.
+If it is missing, then the version number of the current data format is returned.}
 }
 \value{
 An integer scalar.
 }
 \description{
-igraph's internal data representation changes sometimes between
-versions. This means that it is not always possible to use igraph objects
-that were created (and possibly saved to a file) with an older
-igraph version.
+igraph's internal data representation changes sometimes between versions.
+This means that it is not always possible to use igraph objects that were created (and possibly saved to a file) with an older igraph version.
 }
 \details{
 \code{graph_version()} queries the current data format,
 or the data format of a possibly older igraph graph.
 
-\code{\link[=upgrade_graph]{upgrade_graph()}} can convert an older data format
-to the current one.
+\code{\link[=upgrade_graph]{upgrade_graph()}} can convert an older data format to the current one.
 }
 \seealso{
 upgrade_graph to convert the data format of a graph.

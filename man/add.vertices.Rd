@@ -11,19 +11,16 @@ add.vertices(graph, nv, ..., attr = list())
 
 \item{nv}{The number of vertices to add.}
 
-\item{...}{Additional arguments, they must be named,
-and they will be added as vertex attributes, for the newly added
-vertices. See also details below.}
+\item{...}{Additional arguments, they must be named, and they will be added as vertex attributes, for the newly added vertices.
+See also details below.}
 
-\item{attr}{A named list, its elements will be added
-as vertex attributes, for the newly added vertices. See also details
-below.}
+\item{attr}{A named list, its elements will be added as vertex attributes, for the newly added vertices.
+See also details below.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{add.vertices()} was renamed to \code{\link[=add_vertices]{add_vertices()}} to create a more
-consistent API.
+\code{add.vertices()} was renamed to \code{\link[=add_vertices]{add_vertices()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_add_vertices}{\code{add_vertices()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

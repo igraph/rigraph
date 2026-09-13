@@ -2,8 +2,7 @@
 #' @title as_phylo
 #' @description `r lifecycle::badge("deprecated")`
 #'
-#' `as_phylo` methods were renamed `as.phylo`
-#' for more consistency with other R methods.
+#' `as_phylo` methods were renamed `as.phylo` for more consistency with other R methods.
 #'
 #' @export
 #' @param x object to be coerced

@@ -9,25 +9,23 @@ contract(graph, mapping, vertex.attr.comb = NULL)
 \arguments{
 \item{graph}{The input graph, it can be directed or undirected.}
 
-\item{mapping}{A numeric vector that specifies the mapping. Its elements
-correspond to the vertices, and for each element the ID in the new graph is
-given.}
+\item{mapping}{A numeric vector that specifies the mapping.
+Its elements correspond to the vertices, and for each element the ID in the new graph is given.}
 
-\item{vertex.attr.comb}{Specifies how to combine the vertex attributes in
-the new graph. Please see \code{\link[=attribute.combination]{attribute.combination()}} for details. The
-default \code{NULL} uses the \code{vertex.attr.comb} igraph option.}
+\item{vertex.attr.comb}{Specifies how to combine the vertex attributes in the new graph.
+Please see \code{\link[=attribute.combination]{attribute.combination()}} for details.
+The default \code{NULL} uses the \code{vertex.attr.comb} igraph option.}
 }
 \value{
 A new graph object.
 }
 \description{
-This function creates a new graph, by merging several vertices into one. The
-vertices in the new graph correspond to sets of vertices in the input graph.
+This function creates a new graph, by merging several vertices into one.
+The vertices in the new graph correspond to sets of vertices in the input graph.
 }
 \details{
-The attributes of the graph are kept. Graph and edge attributes are
-unchanged, vertex attributes are combined, according to the
-\code{vertex.attr.comb} parameter.
+The attributes of the graph are kept.
+Graph and edge attributes are unchanged, vertex attributes are combined, according to the \code{vertex.attr.comb} parameter.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_contract_vertices}{\code{contract_vertices()}}

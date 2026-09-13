@@ -20,71 +20,61 @@ modularity_matrix(
 \arguments{
 \item{x, graph}{The input graph.}
 
-\item{membership}{Numeric vector, one value for each vertex, the membership
-vector of the community structure.}
+\item{membership}{Numeric vector, one value for each vertex, the membership vector of the community structure.}
 
-\item{weights}{Numeric vector giving edge weights. Default: \code{NULL}.}
+\item{weights}{Numeric vector giving edge weights.
+Default: \code{NULL}.}
 
-\item{resolution}{The resolution parameter. Must be greater than or equal to
+\item{resolution}{The resolution parameter.
+Must be greater than or equal to
 0. Set it to 1 to use the classical definition of modularity.}
 
-\item{directed}{Whether to use the directed or undirected version of
-modularity. Ignored for undirected graphs.}
+\item{directed}{Whether to use the directed or undirected version of modularity.
+Ignored for undirected graphs.}
 
-\item{\dots}{For \code{modularity_matrix()}, these dots must be empty. For
-\code{modularity()}, unused, present for S3 method consistency but may be
-used by other methods that implement it.}
+\item{\dots}{For \code{modularity_matrix()}, these dots must be empty.
+For \code{modularity()}, unused, present for S3 method consistency but may be used by other methods that implement it.}
 }
 \value{
-For \code{modularity()} a numeric scalar, the modularity score of the
-given configuration.
+For \code{modularity()} a numeric scalar, the modularity score of the given configuration.
 
-For \code{modularity_matrix()} a numeric square matrix, its order is the number of
-vertices in the graph.
+For \code{modularity_matrix()} a numeric square matrix, its order is the number of vertices in the graph.
 }
 \description{
-This function calculates how modular is a given division of a graph into
-subgraphs.
+This function calculates how modular is a given division of a graph into subgraphs.
 }
 \details{
-\code{modularity()} calculates the modularity of a graph with respect to the
-given \code{membership} vector.
+\code{modularity()} calculates the modularity of a graph with respect to the given \code{membership} vector.
 
-The modularity of a graph with respect to some division (or vertex types)
-measures how good the division is, or how separated are the different vertex
+The modularity of a graph with respect to some division (or vertex types) measures how good the division is,
+or how separated are the different vertex
 types from each other. It defined as \deqn{Q=\frac{1}{2m} \sum_{i,j}
 (A_{ij}-\gamma\frac{k_i k_j}{2m})\delta(c_i,c_j),}{Q=1/(2m) * sum( (Aij-gamma*ki*kj/(2m)
 ) delta(ci,cj),i,j),} here \eqn{m} is the number of edges, \eqn{A_{ij}}{Aij}
-is the element of the \eqn{A} adjacency matrix in row \eqn{i} and column
-\eqn{j}, \eqn{k_i}{ki} is the degree of \eqn{i}, \eqn{k_j}{kj} is the degree
-of \eqn{j}, \eqn{c_i}{ci} is the type (or component) of \eqn{i},
-\eqn{c_j}{cj} that of \eqn{j}, the sum goes over all \eqn{i} and \eqn{j}
-pairs of vertices, and \eqn{\delta(x,y)}{delta(x,y)} is 1 if \eqn{x=y} and 0
-otherwise. For directed graphs, it is defined as
+is the element of the \eqn{A} adjacency matrix in row \eqn{i} and column \eqn{j}, \eqn{k_i}{ki} is the degree of \eqn{i},
+\eqn{k_j}{kj} is the degree of \eqn{j}, \eqn{c_i}{ci} is the type (or component) of \eqn{i}, \eqn{c_j}{cj} that of \eqn{j},
+the sum goes over all \eqn{i} and \eqn{j} pairs of vertices, and \eqn{\delta(x,y)}{delta(x,y)} is 1 if \eqn{x=y} and 0 otherwise.
+For directed graphs, it is defined as
 \deqn{Q = \frac{1}{m} \sum_{i,j} (A_{ij}-\gamma
 \frac{k_i^{out} k_j^{in}}{m})\delta(c_i,c_j).}{Q=1/(m) * sum(
 (Aij-gamma*ki^out*kj^in/(m) ) delta(ci,cj),i,j).}
 
-The resolution parameter \eqn{\gamma}{gamma} allows weighting the random
-null model, which might be useful when finding partitions with a high
-modularity. Maximizing modularity with higher values of the resolution
-parameter typically results in more, smaller clusters when finding
-partitions with a high modularity. Lower values typically results in fewer,
-larger clusters. The original definition of modularity is retrieved when
-setting \eqn{\gamma}{gamma} to 1.
+The resolution parameter \eqn{\gamma}{gamma} allows weighting the random null model,
+which might be useful when finding partitions with a high modularity.
+Maximizing modularity with higher values of the resolution parameter typically results in more,
+smaller clusters when finding partitions with a high modularity.
+Lower values typically results in fewer, larger clusters.
+The original definition of modularity is retrieved when setting \eqn{\gamma}{gamma} to 1.
 
-If edge weights are given, then these are considered as the element of the
-\eqn{A} adjacency matrix, and \eqn{k_i}{ki} is the sum of weights of
-adjacent edges for vertex \eqn{i}.
+If edge weights are given, then these are considered as the element of the \eqn{A} adjacency matrix,
+and \eqn{k_i}{ki} is the sum of weights of adjacent edges for vertex \eqn{i}.
 
-\code{modularity_matrix()} calculates the modularity matrix. This is a dense matrix,
-and it is defined as the difference of the adjacency matrix and the
-configuration model null model matrix. In other words element
-\eqn{M_{ij}}{M[i,j]} is given as \eqn{A_{ij}-d_i
+\code{modularity_matrix()} calculates the modularity matrix.
+This is a dense matrix, and it is defined as the difference of the adjacency matrix and the configuration model null model matrix.
+In other words element \eqn{M_{ij}}{M[i,j]} is given as \eqn{A_{ij}-d_i
 d_j/(2m)}{A[i,j]-d[i]d[j]/(2m)}, where \eqn{A_{ij}}{A[i,j]} is the (possibly
 weighted) adjacency matrix, \eqn{d_i}{d[i]} is the degree of vertex \eqn{i},
-and \eqn{m} is the number of edges (or the total weights in the graph, if it
-is weighed).
+and \eqn{m} is the number of edges (or the total weights in the graph, if it is weighed).
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_modularity}{\code{modularity()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_modularity_matrix}{\code{modularity_matrix()}}
@@ -104,11 +94,8 @@ Clauset, A.; Newman, M. E. J. & Moore, C. Finding community
 structure in very large networks, \emph{Physical Review E} 2004, 70, 066111
 }
 \seealso{
-\code{\link[=cluster_walktrap]{cluster_walktrap()}},
-\code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}},
-\code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}}, \code{\link[=cluster_spinglass]{cluster_spinglass()}},
-\code{\link[=cluster_louvain]{cluster_louvain()}} and \code{\link[=cluster_leiden]{cluster_leiden()}} for
-various community detection methods.
+\code{\link[=cluster_walktrap]{cluster_walktrap()}}, \code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}}, \code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}}, \code{\link[=cluster_spinglass]{cluster_spinglass()}},
+\code{\link[=cluster_louvain]{cluster_louvain()}} and \code{\link[=cluster_leiden]{cluster_leiden()}} for various community detection methods.
 
 Community detection:
 \code{\link[=as_membership]{as_membership()}},

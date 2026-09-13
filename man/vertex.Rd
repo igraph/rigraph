@@ -13,23 +13,19 @@ vertices(...)
 \item{...}{See details below.}
 }
 \value{
-A special object that can be used with together with
-igraph graphs and the plus and minus operators.
+A special object that can be used with together with igraph graphs and the plus and minus operators.
 }
 \description{
-This is a helper function that simplifies adding and deleting
-vertices to/from graphs.
+This is a helper function that simplifies adding and deleting vertices to/from graphs.
 }
 \details{
 \code{vertices()} is an alias for \code{vertex()}.
 
-When adding vertices via \code{+}, all unnamed arguments are interpreted
-as vertex names of the new vertices. Named arguments are interpreted as
-vertex attributes for the new vertices.
+When adding vertices via \code{+}, all unnamed arguments are interpreted as vertex names of the new vertices.
+Named arguments are interpreted as vertex attributes for the new vertices.
 
-When deleting vertices via \code{-}, all arguments of \code{vertex()} (or
-\code{vertices()}) are concatenated via \code{c()} and passed to
-\code{\link[=delete_vertices]{delete_vertices()}}.
+When deleting vertices via \code{-},
+all arguments of \code{vertex()} (or \code{vertices()}) are concatenated via \code{c()} and passed to \code{\link[=delete_vertices]{delete_vertices()}}.
 }
 \examples{
 g <- make_(ring(10), with_vertex_(name = LETTERS[1:10])) +

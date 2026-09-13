@@ -12,8 +12,7 @@ hrg.dendrogram(hrg)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{hrg.dendrogram()} was renamed to \code{\link[=hrg_tree]{hrg_tree()}} to create a more
-consistent API.
+\code{hrg.dendrogram()} was renamed to \code{\link[=hrg_tree]{hrg_tree()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_from_hrg_dendrogram}{\code{from_hrg_dendrogram()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

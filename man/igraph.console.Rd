@@ -9,7 +9,6 @@ igraph.console()
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{igraph.console()} was renamed to \code{\link[=console]{console()}} to create a more
-consistent API.
+\code{igraph.console()} was renamed to \code{\link[=console]{console()}} to create a more consistent API.
 }
 \keyword{internal}

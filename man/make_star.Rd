@@ -14,11 +14,8 @@ star(n, ..., mode = c("in", "out", "mutual", "undirected"), center = 1)
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{mode}{It defines the direction of the
-edges, \verb{in}: the edges point \emph{to} the center, \code{out}:
-the edges point \emph{from} the center, \code{mutual}: a directed
-star is created with mutual edges, \code{undirected}: the edges
-are undirected.}
+\item{mode}{It defines the direction of the edges, \verb{in}: the edges point \emph{to} the center, \code{out}: the edges point \emph{from} the center,
+\code{mutual}: a directed star is created with mutual edges, \code{undirected}: the edges are undirected.}
 
 \item{center}{ID of the center vertex.}
 }
@@ -26,8 +23,7 @@ are undirected.}
 An igraph graph.
 }
 \description{
-\code{star()} creates a star graph, in this every single vertex is
-connected to the center vertex and nobody else.
+\code{star()} creates a star graph, in this every single vertex is connected to the center vertex and nobody else.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_star}{\code{star()}}

@@ -18,44 +18,37 @@ as_adj(
 \item{graph}{The graph to convert.}
 
 \item{type}{Gives how to create the adjacency matrix for undirected graphs.
-It is ignored for directed graphs. Possible values: \code{upper}: the upper
-right triangle of the matrix is used, \code{lower}: the lower left triangle
-of the matrix is used. \code{both}: the whole matrix is used, a symmetric
-matrix is returned.}
+It is ignored for directed graphs.
+Possible values: \code{upper}: the upper right triangle of the matrix is used, \code{lower}: the lower left triangle of the matrix is used.
+\code{both}: the whole matrix is used, a symmetric matrix is returned.}
 
 \item{weights}{One of the following:
 \itemize{
-\item \code{NULL} (default): use the \code{weight} edge attribute if the graph has
-one, otherwise return a traditional (unweighted) adjacency matrix.
+\item \code{NULL} (default): use the \code{weight} edge attribute if the graph has one,
+otherwise return a traditional (unweighted) adjacency matrix.
 \item \code{NA}: explicitly unweighted, ignoring any \code{weight} edge attribute.
-\item A numeric or logical vector of length \code{\link[=ecount]{ecount()}}: use these values
-directly as edge weights.
-\item A character scalar: the name of an edge attribute whose values are
-used as weights. The attribute must be numeric or logical.
+\item A numeric or logical vector of length \code{\link[=ecount]{ecount()}}: use these values directly as edge weights.
+\item A character scalar: the name of an edge attribute whose values are used as weights.
+The attribute must be numeric or logical.
 }
-If multiple edges share endpoints, the value of an arbitrarily chosen edge
-is included in the matrix.}
+If multiple edges share endpoints, the value of an arbitrarily chosen edge is included in the matrix.}
 
-\item{attr}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{weights} instead. A
-character edge attribute name is forwarded to \code{weights} unchanged; \code{NULL}
-becomes \code{weights = NA}, since \code{attr = NULL} asked for a traditional
-unweighted matrix while \code{weights = NULL} picks the \code{weight} attribute up.}
+\item{attr}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{weights} instead.
+A character edge attribute name is forwarded to \code{weights} unchanged; \code{NULL} becomes \code{weights = NA},
+since \code{attr = NULL} asked for a traditional unweighted matrix while \code{weights = NULL} picks the \code{weight} attribute up.}
 
 \item{edges}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Logical, whether to return the edge IDs in the matrix.
 For non-existant edges zero is returned.}
 
-\item{names}{Logical, whether to assign row and column names
-to the matrix. These are only assigned if the \code{name} vertex attribute
-is present in the graph.}
+\item{names}{Logical, whether to assign row and column names to the matrix.
+These are only assigned if the \code{name} vertex attribute is present in the graph.}
 
-\item{sparse}{Logical, whether to create a sparse matrix. The
-\sQuote{\code{Matrix}} package must be installed for creating sparse
-matrices. The default \code{NULL} uses the \code{sparsematrices} igraph option.}
+\item{sparse}{Logical, whether to create a sparse matrix.
+The \sQuote{\code{Matrix}} package must be installed for creating sparse matrices.
+The default \code{NULL} uses the \code{sparsematrices} igraph option.}
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
-We plan to remove \code{as_adj()} in favor of the more explicitly named
-\code{as_adjacency_matrix()} so please use \code{as_adjacency_matrix()} instead.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} We plan to remove \code{as_adj()} in favor of the more explicitly named \code{as_adjacency_matrix()} so please use \code{as_adjacency_matrix()} instead.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency}{\code{get_adjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency_sparse}{\code{get_adjacency_sparse()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

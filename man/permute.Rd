@@ -9,9 +9,8 @@ permute(graph, permutation)
 \arguments{
 \item{graph}{The input graph, it can directed or undirected.}
 
-\item{permutation}{A numeric vector giving the permutation to apply. The
-first element is the new ID of vertex 1, etc. Every number between one and
-\code{vcount(graph)} must appear exactly once.}
+\item{permutation}{A numeric vector giving the permutation to apply.
+The first element is the new ID of vertex 1, etc. Every number between one and \code{vcount(graph)} must appear exactly once.}
 }
 \value{
 A new graph object.
@@ -20,10 +19,8 @@ A new graph object.
 Create a new graph, by permuting vertex IDs.
 }
 \details{
-This function creates a new graph from the input graph by permuting its
-vertices according to the specified mapping. Call this function with the
-output of \code{\link[=canonical_permutation]{canonical_permutation()}} to create the canonical form
-of a graph.
+This function creates a new graph from the input graph by permuting its vertices according to the specified mapping.
+Call this function with the output of \code{\link[=canonical_permutation]{canonical_permutation()}} to create the canonical form of a graph.
 
 \code{permute()} keeps all graph, vertex and edge attributes of the graph.
 }

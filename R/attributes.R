@@ -3,8 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `set.vertex.attribute()` was renamed to [set_vertex_attr()] to create a more
-#' consistent API.
+#' `set.vertex.attribute()` was renamed to [set_vertex_attr()] to create a more consistent API.
 #' @inheritParams set_vertex_attr
 #' @keywords internal
 #' @export
@@ -23,8 +22,7 @@ set.vertex.attribute <- function(graph, name, index = V(graph), value) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `set.graph.attribute()` was renamed to [set_graph_attr()] to create a more
-#' consistent API.
+#' `set.graph.attribute()` was renamed to [set_graph_attr()] to create a more consistent API.
 #' @inheritParams set_graph_attr
 #' @keywords internal
 #' @export
@@ -43,8 +41,7 @@ set.graph.attribute <- function(graph, name, value) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `set.edge.attribute()` was renamed to [set_edge_attr()] to create a more
-#' consistent API.
+#' `set.edge.attribute()` was renamed to [set_edge_attr()] to create a more consistent API.
 #' @inheritParams set_edge_attr
 #' @keywords internal
 #' @export
@@ -59,8 +56,7 @@ set.edge.attribute <- function(graph, name, index = E(graph), value) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `remove.vertex.attribute()` was renamed to [delete_vertex_attr()] to create a more
-#' consistent API.
+#' `remove.vertex.attribute()` was renamed to [delete_vertex_attr()] to create a more consistent API.
 #' @inheritParams delete_vertex_attr
 #' @keywords internal
 #' @export
@@ -79,8 +75,7 @@ remove.vertex.attribute <- function(graph, name) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `remove.graph.attribute()` was renamed to [delete_graph_attr()] to create a more
-#' consistent API.
+#' `remove.graph.attribute()` was renamed to [delete_graph_attr()] to create a more consistent API.
 #' @inheritParams delete_graph_attr
 #' @keywords internal
 #' @export
@@ -99,8 +94,7 @@ remove.graph.attribute <- function(graph, name) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `remove.edge.attribute()` was renamed to [delete_edge_attr()] to create a more
-#' consistent API.
+#' `remove.edge.attribute()` was renamed to [delete_edge_attr()] to create a more consistent API.
 #' @inheritParams delete_edge_attr
 #' @keywords internal
 #' @export
@@ -119,8 +113,7 @@ remove.edge.attribute <- function(graph, name) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `list.vertex.attributes()` was renamed to [vertex_attr_names()] to create a more
-#' consistent API.
+#' `list.vertex.attributes()` was renamed to [vertex_attr_names()] to create a more consistent API.
 #' @inheritParams vertex_attr_names
 #' @keywords internal
 #' @export
@@ -139,8 +132,7 @@ list.vertex.attributes <- function(graph) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `list.graph.attributes()` was renamed to [graph_attr_names()] to create a more
-#' consistent API.
+#' `list.graph.attributes()` was renamed to [graph_attr_names()] to create a more consistent API.
 #' @inheritParams graph_attr_names
 #' @keywords internal
 #' @export
@@ -159,8 +151,7 @@ list.graph.attributes <- function(graph) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `list.edge.attributes()` was renamed to [edge_attr_names()] to create a more
-#' consistent API.
+#' `list.edge.attributes()` was renamed to [edge_attr_names()] to create a more consistent API.
 #' @inheritParams edge_attr_names
 #' @keywords internal
 #' @export
@@ -179,8 +170,7 @@ list.edge.attributes <- function(graph) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.weighted()` was renamed to [is_weighted()] to create a more
-#' consistent API.
+#' `is.weighted()` was renamed to [is_weighted()] to create a more consistent API.
 #' @inheritParams is_weighted
 #' @keywords internal
 #' @export
@@ -195,8 +185,7 @@ is.weighted <- function(graph) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.named()` was renamed to [is_named()] to create a more
-#' consistent API.
+#' `is.named()` was renamed to [is_named()] to create a more consistent API.
 #' @inheritParams is_named
 #' @keywords internal
 #' @export
@@ -211,8 +200,7 @@ is.named <- function(graph) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.bipartite()` was renamed to [is_bipartite()] to create a more
-#' consistent API.
+#' `is.bipartite()` was renamed to [is_bipartite()] to create a more consistent API.
 #' @inheritParams is_bipartite
 #' @keywords internal
 #' @export
@@ -227,8 +215,7 @@ is.bipartite <- function(graph) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `get.vertex.attribute()` was renamed to [vertex_attr()] to create a more
-#' consistent API.
+#' `get.vertex.attribute()` was renamed to [vertex_attr()] to create a more consistent API.
 #' @inheritParams vertex_attr
 #' @keywords internal
 #' @export
@@ -243,8 +230,7 @@ get.vertex.attribute <- function(graph, name, index = V(graph)) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `get.graph.attribute()` was renamed to [graph_attr()] to create a more
-#' consistent API.
+#' `get.graph.attribute()` was renamed to [graph_attr()] to create a more consistent API.
 #' @inheritParams graph_attr
 #' @keywords internal
 #' @export
@@ -259,8 +245,7 @@ get.graph.attribute <- function(graph, name) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `get.edge.attribute()` was renamed to [edge_attr()] to create a more
-#' consistent API.
+#' `get.edge.attribute()` was renamed to [edge_attr()] to create a more consistent API.
 #' @inheritParams edge_attr
 #' @keywords internal
 #' @export
@@ -307,8 +292,8 @@ get.edge.attribute <- function(graph, name, index = E(graph)) {
 #' Graph attributes of a graph
 #'
 #' @param graph Input graph.
-#' @param name The name of attribute to query. If missing, then all
-#'   attributes are returned in a list.
+#' @param name The name of attribute to query.
+#'   If missing, then all attributes are returned in a list.
 #' @return A list of graph attributes, or a single graph attribute.
 #'
 #' @aliases graph.attributes
@@ -337,9 +322,8 @@ graph_attr <- function(graph, name) {
 #' Set all or some graph attributes
 #'
 #' @param graph The graph.
-#' @param name The name of the attribute to set. If missing, then
-#'   `value` should be a named list, and all list members
-#'   are set as attributes.
+#' @param name The name of the attribute to set.
+#'   If missing, then `value` should be a named list, and all list members are set as attributes.
 #' @param value The value of the attribute to set
 #' @return The graph, with the attribute(s) added.
 #'
@@ -430,12 +414,11 @@ graph.attributes <- function(graph) {
 #' Query vertex attributes of a graph
 #'
 #' @param graph The graph.
-#' @param name Name of the attribute to query. If missing, then
-#'   all vertex attributes are returned in a list.
-#' @param index An optional vertex sequence to query the attribute only
-#'   for these vertices. The default `NULL` selects all vertices.
-#' @return The value of the vertex attribute, or the list of
-#'   all vertex attributes, if `name` is missing.
+#' @param name Name of the attribute to query.
+#'   If missing, then all vertex attributes are returned in a list.
+#' @param index An optional vertex sequence to query the attribute only for these vertices.
+#'   The default `NULL` selects all vertices.
+#' @return The value of the vertex attribute, or the list of all vertex attributes, if `name` is missing.
 #'
 #' @aliases vertex.attributes
 #' @family attributes
@@ -478,13 +461,11 @@ vertex_attr <- function(graph, name, index = NULL) {
 #' Set one or more vertex attributes
 #'
 #' @param graph The graph.
-#' @param name The name of the vertex attribute to set. If missing,
-#'   then `value` must be a named list, and its entries are
-#'   set as vertex attributes.
-#' @param index An optional vertex sequence to set the attributes
-#'   of a subset of vertices. The default `NULL` selects all vertices.
-#' @param value The new value of the attribute(s) for all
-#'   (or `index`) vertices.
+#' @param name The name of the vertex attribute to set.
+#'   If missing, then `value` must be a named list, and its entries are set as vertex attributes.
+#' @param index An optional vertex sequence to set the attributes of a subset of vertices.
+#'   The default `NULL` selects all vertices.
+#' @param value The new value of the attribute(s) for all (or `index`) vertices.
 #' @return The graph, with the vertex attribute(s) added or set.
 #'
 #' @aliases vertex.attributes<-
@@ -517,10 +498,9 @@ vertex_attr <- function(graph, name, index = NULL) {
 #'
 #' @param graph The graph.
 #' @param name  The name of the attribute to set.
-#' @param index An optional vertex sequence to set the attributes
-#'   of a subset of vertices. The default `NULL` selects all vertices.
-#' @param value The new value of the attribute for all (or `index`)
-#'   vertices.
+#' @param index An optional vertex sequence to set the attributes of a subset of vertices.
+#'   The default `NULL` selects all vertices.
+#' @param value The new value of the attribute for all (or `index`) vertices.
 #'   If `NULL`, the input is returned unchanged.
 #' @return The graph, with the vertex attribute added or set.
 #'
@@ -563,8 +543,8 @@ set_vertex_attr <- function(graph, name, index = NULL, value) {
 #'
 #' @param graph The graph.
 #' @param ... <[`dynamic-dots`][rlang::dyn-dots]> Named arguments, where the names are the attributes
-#' @param index An optional vertex sequence to set the attributes
-#'   of a subset of vertices. The default `NULL` selects all vertices.
+#' @param index An optional vertex sequence to set the attributes of a subset of vertices.
+#'   The default `NULL` selects all vertices.
 #' @return The graph, with the vertex attributes added or set.
 #'
 #' @family attributes
@@ -754,12 +734,11 @@ set_value_at <- function(value, idx, length_out) {
 #' Query edge attributes of a graph
 #'
 #' @param graph The graph
-#' @param name The name of the attribute to query. If missing, then
-#'   all edge attributes are returned in a list.
-#' @param index An optional edge sequence to query edge attributes
-#'   for a subset of edges. The default `NULL` selects all edges.
-#' @return The value of the edge attribute, or the list of all
-#'   edge attributes if `name` is missing.
+#' @param name The name of the attribute to query.
+#'   If missing, then all edge attributes are returned in a list.
+#' @param index An optional edge sequence to query edge attributes for a subset of edges.
+#'   The default `NULL` selects all edges.
+#' @return The value of the edge attribute, or the list of all edge attributes if `name` is missing.
 #'
 #' @aliases edge.attributes
 #' @family attributes
@@ -803,13 +782,11 @@ edge_attr <- function(graph, name, index = NULL) {
 #' Set one or more edge attributes
 #'
 #' @param graph The graph.
-#' @param name The name of the edge attribute to set. If missing,
-#'   then `value` must be a named list, and its entries are
-#'   set as edge attributes.
-#' @param index An optional edge sequence to set the attributes
-#'   of a subset of edges. The default `NULL` selects all edges.
-#' @param value The new value of the attribute(s) for all
-#'   (or `index`) edges.
+#' @param name The name of the edge attribute to set.
+#'   If missing, then `value` must be a named list, and its entries are set as edge attributes.
+#' @param index An optional edge sequence to set the attributes of a subset of edges.
+#'   The default `NULL` selects all edges.
+#' @param value The new value of the attribute(s) for all (or `index`) edges.
 #' @return The graph, with the edge attribute(s) added or set.
 #'
 #' @aliases edge.attributes<-
@@ -841,10 +818,9 @@ edge_attr <- function(graph, name, index = NULL) {
 #'
 #' @param graph The graph
 #' @param name  The name of the attribute to set.
-#' @param index An optional edge sequence to set the attributes of
-#'   a subset of edges. The default `NULL` selects all edges.
-#' @param value The new value of the attribute for all (or `index`)
-#'   edges.
+#' @param index An optional edge sequence to set the attributes of a subset of edges.
+#'   The default `NULL` selects all edges.
+#' @param value The new value of the attribute for all (or `index`) edges.
 #'   If `NULL`, the input is returned unchanged.
 #' @return The graph, with the edge attribute added or set.
 #'
@@ -1223,20 +1199,15 @@ delete_edge_attr <- function(graph, name) {
 
 #' Named graphs
 #'
-#' An igraph graph is named, if there is a symbolic name associated with its
-#' vertices.
+#' An igraph graph is named, if there is a symbolic name associated with its vertices.
 #'
-#' In igraph vertices can always be identified and specified via their numeric
-#' vertex IDs. This is, however, not always convenient, and in many cases there
-#' exist symbolic IDs that correspond to the vertices. To allow this more
-#' flexible identification of vertices, one can assign a vertex attribute
-#' called \sQuote{name} to an igraph graph. After doing this, the symbolic
-#' vertex names can be used in all igraph functions, instead of the numeric
-#' IDs.
+#' In igraph vertices can always be identified and specified via their numeric vertex IDs.
+#' This is, however, not always convenient, and in many cases there exist symbolic IDs that correspond to the vertices.
+#' To allow this more flexible identification of vertices, one can assign a vertex attribute called \sQuote{name} to an igraph graph.
+#' After doing this, the symbolic vertex names can be used in all igraph functions, instead of the numeric IDs.
 #'
-#' Note that the uniqueness of vertex names are currently not enforced in
-#' igraph, you have to check that for yourself, when assigning the vertex
-#' names.
+#' Note that the uniqueness of vertex names are currently not enforced in igraph, you have to check that for yourself,
+#' when assigning the vertex names.
 #'
 #' @param graph The input graph.
 #' @return A logical scalar.
@@ -1260,19 +1231,16 @@ is_named <- function(graph) {
 
 #' Weighted graphs
 #'
-#' In weighted graphs, a real number is assigned to each (directed or
-#' undirected) edge.
+#' In weighted graphs, a real number is assigned to each (directed or undirected) edge.
 #'
-#' In igraph edge weights are represented via an edge attribute, called
-#' \sQuote{weight}. The `is_weighted()` function only checks that such an
-#' attribute exists. (It does not even checks that it is a numeric edge
-#' attribute.)
+#' In igraph edge weights are represented via an edge attribute, called \sQuote{weight}.
+#' The `is_weighted()` function only checks that such an attribute exists.
+#' (It does not even checks that it is a numeric edge attribute.)
 #'
 #' Edge weights are used for different purposes by the different functions.
-#' E.g. shortest path functions use it as the cost of the path; community
-#' finding methods use it as the strength of the relationship between two
-#' vertices, etc. Check the manual pages of the functions working with weighted
-#' graphs for details.
+#' E.g. shortest path functions use it as the cost of the path;
+#' community finding methods use it as the strength of the relationship between two vertices,
+#' etc. Check the manual pages of the functions working with weighted graphs for details.
 #'
 #' @param graph The input graph.
 #' @return A logical scalar.
@@ -1293,8 +1261,8 @@ is_weighted <- function(graph) {
 }
 
 #' @title Checks whether the graph has a vertex attribute called `type`.
-#' @description It does not check whether the graph is bipartite in the
-#'  mathematical sense.  Use [bipartite_mapping()] for that.
+#' @description It does not check whether the graph is bipartite in the mathematical sense.
+#' Use [bipartite_mapping()] for that.
 #' @family bipartite
 #' @param graph The input graph
 #' @export
@@ -1333,11 +1301,10 @@ igraph.i.attribute.combination <- function(comb, allow_rename = FALSE) {
   if (anyDuplicated(names(comb)) > 0) {
     cli::cli_warn("Some attributes are duplicated")
   }
-  # `known_codes` are the numeric values of the `igraph_attribute_combination_type_t`
-  # enum in the C library (see src/vendor/cigraph/include/igraph_attributes.h).
-  # Each code must stay aligned with its name in `known_names`. The DEFAULT (1) and
-  # FUNCTION (2) enum values are intentionally absent: FUNCTION is handled by the
-  # `!is.character(x)` branch below, and DEFAULT is not selectable by name.
+  # `known_codes` are the numeric values of the `igraph_attribute_combination_type_t` enum in the C library (see src/vendor/cigraph/include/igraph_attributes.h).
+  # Each code must stay aligned with its name in `known_names`.
+  # The DEFAULT (1) and FUNCTION (2) enum values are intentionally absent: FUNCTION is handled by the `!is.character(x)` branch below,
+  # and DEFAULT is not selectable by name.
   known_names <- c(
     "concat",
     "first",
@@ -1380,18 +1347,13 @@ igraph.i.attribute.combination <- function(comb, allow_rename = FALSE) {
 
 #' How igraph functions handle attributes when the graph changes
 #'
-#' Many times, when the structure of a graph is modified, vertices/edges map of
-#' the original graph map to vertices/edges in the newly created (modified)
-#' graph. For example [simplify()] maps multiple edges to single
-#' edges. igraph provides a flexible mechanism to specify what to do with the
-#' vertex/edge attributes in these cases.
+#' Many times, when the structure of a graph is modified,
+#' vertices/edges map of the original graph map to vertices/edges in the newly created (modified) graph.
+#' For example [simplify()] maps multiple edges to single edges. igraph provides a flexible mechanism to specify what to do with the vertex/edge attributes in these cases.
 #'
-#' The functions that support the combination of attributes have one or two
-#' extra arguments called `vertex.attr.comb` and/or `edge.attr.comb`
-#' that specify how to perform the mapping of the attributes. E.g.
-#' [contract()] contracts many vertices into a single one, the
-#' attributes of the vertices can be combined and stores as the vertex
-#' attributes of the new graph.
+#' The functions that support the combination of attributes have one or two extra arguments called `vertex.attr.comb` and/or `edge.attr.comb` that specify how to perform the mapping of the attributes.
+#' E.g. [contract()] contracts many vertices into a single one,
+#' the attributes of the vertices can be combined and stores as the vertex attributes of the new graph.
 #'
 #' The specification of the combination of (vertex or edge) attributes can be
 #' given as \enumerate{
@@ -1400,21 +1362,19 @@ igraph.i.attribute.combination <- function(comb, allow_rename = FALSE) {
 #'   \item a list of character scalars and/or function objects.
 #' }
 #'
-#' If it is a character scalar, then it refers to one of the predefined
-#' combinations, see their list below.
+#' If it is a character scalar, then it refers to one of the predefined combinations, see their list below.
 #'
-#' If it is a function, then the given function is expected to perform the
-#' combination. It will be called once for each new vertex/edge in the graph,
-#' with a single argument: the attribute values of the vertices that map to
-#' that single vertex.
+#' If it is a function, then the given function is expected to perform the combination.
+#' It will be called once for each new vertex/edge in the graph, with a single argument:
+#' the attribute values of the vertices that map to that single vertex.
 #'
-#' The third option, a list can be used to specify different combination
-#' methods for different attributes. A named entry of the list corresponds to
-#' the attribute with the same name. An unnamed entry (i.e. if the name is the
-#' empty string) of the list specifies the default combination method. I.e.
+#' The third option, a list can be used to specify different combination methods for different attributes.
+#' A named entry of the list corresponds to the attribute with the same name.
+#' An unnamed entry (i.e. if the name is the empty string) of the list specifies the default combination method.
+#' I.e.
 #' \preformatted{list(weight="sum", "ignore")} specifies that the weight of the
-#' new edge should be sum of the weights of the corresponding edges in the old
-#' graph; and that the rest of the attributes should be ignored (=dropped).
+#' new edge should be sum of the weights of the corresponding edges in the old graph;
+#' and that the rest of the attributes should be ignored (=dropped).
 #'
 #' @family attributes
 #' @name igraph-attribute-combination
@@ -1470,22 +1430,18 @@ igraph.i.attribute.combination <- function(comb, allow_rename = FALSE) {
 #'       This results almost always a complex attribute.
 #'     }
 #'     \item{"rename"}{
-#'       Keep clashing attributes side-by-side under disambiguated names by
-#'       appending `_1`, `_2`, ... suffixes. For example, if two graphs each
-#'       have an attribute called `group`, the resulting graph will have
-#'       attributes `group_1` and `group_2`, corresponding to the first and
-#'       second input graph, respectively. This is the default for the
-#'       graph operators [union()], [intersection()], [compose()] and
-#'       [disjoint_union()] and preserves their historical behaviour.
-#'       Only those operators accept `"rename"`; [simplify()] and
-#'       [contract()] will reject it because the rename strategy has no
-#'       per-element interpretation when many input values collapse into one.
+#'       Keep clashing attributes side-by-side under disambiguated names by appending `_1`, `_2`, ... suffixes.
+#'       For example, if two graphs each have an attribute called `group`, the resulting graph will have attributes `group_1` and `group_2`,
+#'       corresponding to the first and second input graph, respectively.
+#'       This is the default for the graph operators [union()], [intersection()], [compose()] and [disjoint_union()]
+#'       and preserves their historical behaviour.
+#'       Only those operators accept `"rename"`; [simplify()] and [contract()] will reject it because the rename strategy has no per-element interpretation
+#'       when many input values collapse into one.
 #'     }
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [graph_attr()], [vertex_attr()],
-#'   [edge_attr()] on how to use graph/vertex/edge attributes in
-#'   general. [igraph_options()] on igraph parameters.
+#' @seealso [graph_attr()], [vertex_attr()], [edge_attr()] on how to use graph/vertex/edge attributes in general.
+#'   [igraph_options()] on igraph parameters.
 #' @keywords graphs
 #' @examples
 #'
@@ -1521,9 +1477,8 @@ NULL
 
 #' Getting and setting graph attributes, shortcut
 #'
-#' The `$` operator is a shortcut to get and and set
-#' graph attributes. It is shorter and just as readable as
-#' [graph_attr()] and [set_graph_attr()].
+#' The `$` operator is a shortcut to get and and set graph attributes.
+#' It is shorter and just as readable as [graph_attr()] and [set_graph_attr()].
 #'
 #' @param x An igraph graph
 #' @param name Name of the attribute to get/set.

@@ -14,8 +14,7 @@ graph.full.citation(n, directed = TRUE)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.full.citation()} was renamed to \code{\link[=make_full_citation_graph]{make_full_citation_graph()}} to create a more
-consistent API.
+\code{graph.full.citation()} was renamed to \code{\link[=make_full_citation_graph]{make_full_citation_graph()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_full_citation}{\code{full_citation()}}

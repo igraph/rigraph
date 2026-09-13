@@ -12,23 +12,20 @@ read.graph(
 )
 }
 \arguments{
-\item{file}{The connection to read from. This can be a local file, or a
-\code{http} or \code{ftp} connection. It can also be a character string with
-the file name or URI.}
+\item{file}{The connection to read from.
+This can be a local file, or a \code{http} or \code{ftp} connection.
+It can also be a character string with the file name or URI.}
 
-\item{format}{Character constant giving the file format. Right now
-\code{edgelist}, \code{pajek}, \code{ncol}, \code{lgl}, \code{graphml},
-\code{dimacs}, \code{graphdb}, \code{gml} and \code{dl} are supported,
-the default is \code{edgelist}. As of igraph 0.4 this argument is case
-insensitive.}
+\item{format}{Character constant giving the file format.
+Right now \code{edgelist}, \code{pajek}, \code{ncol}, \code{lgl}, \code{graphml}, \code{dimacs}, \code{graphdb}, \code{gml} and \code{dl} are supported, the default is \code{edgelist}.
+As of igraph 0.4 this argument is case insensitive.}
 
 \item{...}{Additional arguments, see below.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{read.graph()} was renamed to \code{\link[=read_graph]{read_graph()}} to create a more
-consistent API.
+\code{read.graph()} was renamed to \code{\link[=read_graph]{read_graph()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_read_graph_pajek}{\code{read_graph_pajek()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_read_graph_graphml}{\code{read_graph_graphml()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_read_graph_gml}{\code{read_graph_gml()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_read_graph_dl}{\code{read_graph_dl()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_read_graph_graphdb}{\code{read_graph_graphdb()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

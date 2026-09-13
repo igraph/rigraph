@@ -11,26 +11,23 @@ feedback_vertex_set(graph, ..., weights = NULL, algo = c("exact_ip"))
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{weights}{Potential vertex weights. If the graph has a vertex
-attribute called \sQuote{\code{weight}}, and this argument is
-\code{NULL}, then the vertex attribute is used automatically. The goal of
-the feedback vertex set problem is to find a feedback vertex set with
-the smallest total weight.}
+\item{weights}{Potential vertex weights.
+If the graph has a vertex attribute called \sQuote{\code{weight}}, and this argument is \code{NULL},
+then the vertex attribute is used automatically.
+The goal of the feedback vertex set problem is to find a feedback vertex set with the smallest total weight.}
 
-\item{algo}{Specifies the algorithm to use. Currently, \dQuote{\code{exact_ip}},
-which solves the feedback vertex set problem with an exact integer
-programming approach, is the only option.}
+\item{algo}{Specifies the algorithm to use.
+Currently, \dQuote{\code{exact_ip}}, which solves the feedback vertex set problem with an exact integer programming approach,
+is the only option.}
 }
 \value{
-A vertex sequence (by default, but see the \code{return.vs.es} option
-of \code{\link[=igraph_options]{igraph_options()}}) containing the feedback vertex set.
+A vertex sequence (by default, but see the \code{return.vs.es} option of \code{\link[=igraph_options]{igraph_options()}}) containing the feedback vertex set.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-A feedback vertex set of a graph is a subset of vertices whose removal breaks
-all cycles in the graph. Finding a \emph{minimum} feedback vertex set is an
-NP-complete problem, both on directed and undirected graphs.
+A feedback vertex set of a graph is a subset of vertices whose removal breaks all cycles in the graph.
+Finding a \emph{minimum} feedback vertex set is an NP-complete problem, both on directed and undirected graphs.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_feedback_vertex_set}{\code{feedback_vertex_set()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

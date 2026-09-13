@@ -7,27 +7,24 @@
 igraph_options(...)
 }
 \arguments{
-\item{\dots}{A list may be given as the only argument, or any number of
-arguments may be in the \code{name=value} form, or no argument at all may be
-given. See the Value and Details sections for explanation.}
+\item{\dots}{A list may be given as the only argument, or any number of arguments may be in the \code{name=value} form,
+or no argument at all may be given.
+See the Value and Details sections for explanation.}
 }
 \value{
 A list with the old values of the updated parameters, invisibly.
 Without any arguments, it returns the values of all options.
 }
 \description{
-igraph has some parameters which (usually) affect the behavior of many
-functions. These can be set for the whole session via \code{igraph_options()}.
+igraph has some parameters which (usually) affect the behavior of many functions.
+These can be set for the whole session via \code{igraph_options()}.
 }
 \details{
-The parameter values set via a call to the \code{igraph_options()} function
-will remain in effect for the rest of the session, affecting the subsequent
-behaviour of the other functions of the \code{igraph} package for which the
-given parameters are relevant.
+The parameter values set via a call to the \code{igraph_options()} function will remain in effect for the rest of the session,
+affecting the subsequent behaviour of the other functions of the \code{igraph} package for which the given parameters are relevant.
 
-This offers the possibility of customizing the functioning of the
-\code{igraph} package, for instance by insertions of appropriate calls to
-\code{igraph_options()} in a load hook for package \pkg{igraph}.
+This offers the possibility of customizing the functioning of the \code{igraph} package,
+for instance by insertions of appropriate calls to \code{igraph_options()} in a load hook for package \pkg{igraph}.
 
 The currently used parameters in alphabetical order:
 \describe{
@@ -58,10 +55,9 @@ The default value is \code{list(weight="sum", name="concat", "ignore")}.
 See \code{\link[=attribute.combination]{attribute.combination()}} for details on this.
 }
 \item{graph.attr.comb}{
-Specifies what to do with the graph attributes when graphs are
-combined, e.g. via \code{\link[=union]{union()}}, \code{\link[=intersection]{intersection()}}, \code{\link[=disjoint_union]{disjoint_union()}}
-or \code{\link[=compose]{compose()}}. The default value is \code{"rename"}, which resolves any
-name clash by appending \verb{_1}, \verb{_2}, ... suffixes.
+Specifies what to do with the graph attributes when graphs are combined, e.g. via \code{\link[=union]{union()}}, \code{\link[=intersection]{intersection()}}, \code{\link[=disjoint_union]{disjoint_union()}}
+or \code{\link[=compose]{compose()}}.
+The default value is \code{"rename"}, which resolves any name clash by appending \verb{_1}, \verb{_2}, ... suffixes.
 See \code{\link[=attribute.combination]{attribute.combination()}} for details on this.
 }
 \item{print.edge.attributes}{
@@ -79,12 +75,9 @@ Logical constant, whether to print graph attributes when printing graphs. Defaul
 Logical constant, whether to print vertex attributes when printing graphs. Defaults to \code{FALSE}.
 }
 \item{print.style}{
-Character string controlling the visual style used by
-\code{\link[=print.igraph]{print.igraph()}}, \code{\link[=summary.igraph]{summary.igraph()}}, \code{\link[=print.igraph.vs]{print.igraph.vs()}} and
-\code{\link[=print.igraph.es]{print.igraph.es()}}. Possible values are \code{"cli"} (default, a
-cli-styled output with section rules, Unicode arrows for edges and
-typed attribute listings) and \code{"classic"} (the historical
-\verb{IGRAPH ... DNW-} header relied on by tutorials and parsers).
+Character string controlling the visual style used by \code{\link[=print.igraph]{print.igraph()}}, \code{\link[=summary.igraph]{summary.igraph()}}, \code{\link[=print.igraph.vs]{print.igraph.vs()}}
+and \code{\link[=print.igraph.es]{print.igraph.es()}}.
+Possible values are \code{"cli"} (default, a cli-styled output with section rules, Unicode arrows for edges and typed attribute listings) and \code{"classic"} (the historical \verb{IGRAPH ... DNW-} header relied on by tutorials and parsers).
 }
 \item{return.vs.es}{
 Whether functions that return a set or sequence of vertices/edges
@@ -122,8 +115,8 @@ igraph_opt("verbose")
 
 }
 \seealso{
-Similar to \code{\link[=options]{options()}}. See \code{\link[=igraph_opt]{igraph_opt()}} to retrieve the
-value of a single option.
+Similar to \code{\link[=options]{options()}}.
+See \code{\link[=igraph_opt]{igraph_opt()}} to retrieve the value of a single option.
 
 Other igraph options:
 \code{\link[=igraph_opt]{igraph_opt()}},

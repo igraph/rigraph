@@ -20,45 +20,37 @@ subgraph_from_edges(graph, eids, ..., delete.vertices = TRUE)
 \arguments{
 \item{graph}{The original graph.}
 
-\item{vids}{Numeric vector, the vertices of the original graph which will
-form the subgraph.}
+\item{vids}{Numeric vector, the vertices of the original graph which will form the subgraph.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{impl}{Character scalar, to choose between two implementation of the
-subgraph calculation. \sQuote{\code{copy_and_delete}} copies the graph
-first, and then deletes the vertices and edges that are not included in the
-result graph. \sQuote{\code{create_from_scratch}} searches for all vertices
-and edges that must be kept and then uses them to create the graph from
-scratch. \sQuote{\code{auto}} chooses between the two implementations
-automatically, using heuristics based on the size of the original and the
-result graph.}
+\item{impl}{Character scalar, to choose between two implementation of the subgraph calculation.
+\sQuote{\code{copy_and_delete}} copies the graph first, and then deletes the vertices and edges that are not included in the result graph.
+\sQuote{\code{create_from_scratch}} searches for all vertices and edges that must be kept and then uses them to create the graph from scratch.
+\sQuote{\code{auto}} chooses between the two implementations automatically,
+using heuristics based on the size of the original and the result graph.}
 
 \item{eids}{The edge IDs of the edges that will be kept in the result graph.}
 
-\item{delete.vertices}{Logical, whether to remove vertices that do
-not have any adjacent edges in \code{eids}.}
+\item{delete.vertices}{Logical, whether to remove vertices that do not have any adjacent edges in \code{eids}.}
 }
 \value{
 A new graph object.
 }
 \description{
-\code{subgraph()} creates a subgraph of a graph, containing only the specified
-vertices and all the edges among them.
+\code{subgraph()} creates a subgraph of a graph, containing only the specified vertices and all the edges among them.
 }
 \details{
-\code{induced_subgraph()} calculates the induced subgraph of a set of vertices
-in a graph. This means that exactly the specified vertices and all the edges
-between them will be kept in the result graph.
+\code{induced_subgraph()} calculates the induced subgraph of a set of vertices in a graph.
+This means that exactly the specified vertices and all the edges between them will be kept in the result graph.
 
-\code{subgraph_from_edges()} calculates the subgraph of a graph. For this function
-one can specify the vertices and edges to keep. This function will be
-renamed to \code{subgraph()} in the next major version of igraph.
+\code{subgraph_from_edges()} calculates the subgraph of a graph.
+For this function one can specify the vertices and edges to keep.
+This function will be renamed to \code{subgraph()} in the next major version of igraph.
 
-The \code{subgraph()} function currently does the same as \code{induced_subgraph()}
-(assuming \sQuote{\code{auto}} as the \code{impl} argument), but this behaviour
-is deprecated. In the next major version, \code{subgraph()} will overtake the
-functionality of \code{subgraph_from_edges()}.
+The \code{subgraph()} function currently does the same as \code{induced_subgraph()} (assuming \sQuote{\code{auto}} as the \code{impl} argument),
+but this behaviour is deprecated.
+In the next major version, \code{subgraph()} will overtake the functionality of \code{subgraph_from_edges()}.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_induced_subgraph}{\code{induced_subgraph()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_subgraph_from_edges}{\code{subgraph_from_edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

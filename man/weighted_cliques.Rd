@@ -14,16 +14,14 @@ weighted_cliques(
 )
 }
 \arguments{
-\item{graph}{The input graph, directed graphs will be considered as
-undirected ones, multiple edges and loops are ignored.}
+\item{graph}{The input graph, directed graphs will be considered as undirected ones, multiple edges and loops are ignored.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{vertex.weights}{Vertex weight vector. If the graph has a \code{weight}
-vertex attribute, then this is used by default. If the graph does not have a
-\code{weight} vertex attribute and this argument is \code{NULL}, then every
-vertex is assumed to have a weight of 1. Note that the current implementation
-of the weighted clique finder supports positive integer weights only.}
+\item{vertex.weights}{Vertex weight vector.
+If the graph has a \code{weight} vertex attribute, then this is used by default.
+If the graph does not have a \code{weight} vertex attribute and this argument is \code{NULL},
+then every vertex is assumed to have a weight of 1. Note that the current implementation of the weighted clique finder supports positive integer weights only.}
 
 \item{min.weight}{Numeric constant, lower limit on the weight of the cliques to find.
 \code{NULL} means no limit, i.e. it is the same as 0.}
@@ -31,29 +29,24 @@ of the weighted clique finder supports positive integer weights only.}
 \item{max.weight}{Numeric constant, upper limit on the weight of the cliques to find.
 \code{NULL} means no limit.}
 
-\item{maximal}{Specifies whether to look for all weighted cliques (\code{FALSE})
-or only the maximal ones (\code{TRUE}).}
+\item{maximal}{Specifies whether to look for all weighted cliques (\code{FALSE}) or only the maximal ones (\code{TRUE}).}
 }
 \value{
-\code{weighted_cliques()} and \code{largest_weighted_cliques()} return a
-list containing numeric vectors of vertex IDs. Each list element is a weighted
-clique, i.e. a vertex sequence of class \link[=V]{igraph.vs}.
+\code{weighted_cliques()} and \code{largest_weighted_cliques()} return a list containing numeric vectors of vertex IDs.
+Each list element is a weighted clique, i.e. a vertex sequence of class \link[=V]{igraph.vs}.
 
 \code{weighted_clique_num()} returns an integer scalar.
 }
 \description{
-These functions find all, the largest or all the maximal weighted cliques in
-an undirected graph. The weight of a clique is the sum of the weights of its
-vertices.
+These functions find all, the largest or all the maximal weighted cliques in an undirected graph.
+The weight of a clique is the sum of the weights of its vertices.
 }
 \details{
 \code{weighted_cliques()} finds all complete subgraphs in the input graph,
-obeying the weight limitations given in the \code{min} and \code{max}
-arguments.
+obeying the weight limitations given in the \code{min} and \code{max} arguments.
 
-\code{largest_weighted_cliques()} finds all largest weighted cliques in the
-input graph. A clique is largest if there is no other clique whose total
-weight is larger than the weight of this clique.
+\code{largest_weighted_cliques()} finds all largest weighted cliques in the input graph.
+A clique is largest if there is no other clique whose total weight is larger than the weight of this clique.
 
 \code{weighted_clique_num()} calculates the weight of the largest weighted clique(s).
 }

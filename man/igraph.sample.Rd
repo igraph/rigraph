@@ -16,8 +16,7 @@ igraph.sample(low, high, length)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{igraph.sample()} was renamed to \code{\link[=sample_seq]{sample_seq()}} to create a more
-consistent API.
+\code{igraph.sample()} was renamed to \code{\link[=sample_seq]{sample_seq()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_random_sample}{\code{random_sample()}}

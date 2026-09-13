@@ -7,24 +7,22 @@
 fit_hrg(graph, hrg = NULL, ..., start = FALSE, steps = 0)
 }
 \arguments{
-\item{graph}{The graph to fit the model to. Edge directions are ignored in
-directed graphs.}
+\item{graph}{The graph to fit the model to.
+Edge directions are ignored in directed graphs.}
 
-\item{hrg}{A hierarchical random graph model, in the form of an
-\code{igraphHRG} object. \code{fit_hrg()} allows this to be \code{NULL}, in
-which case a random starting point is used for the fitting.}
+\item{hrg}{A hierarchical random graph model, in the form of an \code{igraphHRG} object.
+\code{fit_hrg()} allows this to be \code{NULL}, in which case a random starting point is used for the fitting.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{start}{Logical, whether to start the fitting/sampling from the
-supplied \code{igraphHRG} object, or from a random starting point.}
+\item{start}{Logical, whether to start the fitting/sampling from the supplied \code{igraphHRG} object, or from a random starting point.}
 
-\item{steps}{The number of MCMC steps to make. If this is zero, then the
-MCMC procedure is performed until convergence.}
+\item{steps}{The number of MCMC steps to make.
+If this is zero, then the MCMC procedure is performed until convergence.}
 }
 \value{
-\code{fit_hrg()} returns an \code{igraphHRG} object. This is a list
-with the following members:
+\code{fit_hrg()} returns an \code{igraphHRG} object.
+This is a list with the following members:
 \describe{
 \item{left}{
 Vector that contains the left children of the internal tree vertices.
@@ -52,12 +50,11 @@ The number of vertices in the subtree below the given internal vertex, including
 }
 }
 \description{
-\code{fit_hrg()} fits a HRG to a given graph. It takes the specified
-\code{steps} number of MCMC steps to perform the fitting, or a convergence
-criteria if the specified number of steps is zero. \code{fit_hrg()} can start
-from a given HRG, if this is given in the \code{hrg()} argument and the
-\code{start} argument is \code{TRUE}. It can be converted to the \code{hclust} class using
-\code{as.hclust()} provided in this package.
+\code{fit_hrg()} fits a HRG to a given graph.
+It takes the specified \code{steps} number of MCMC steps to perform the fitting,
+or a convergence criteria if the specified number of steps is zero.
+\code{fit_hrg()} can start from a given HRG, if this is given in the \code{hrg()} argument and the \code{start} argument is \code{TRUE}.
+It can be converted to the \code{hclust} class using \code{as.hclust()} provided in this package.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_fit}{\code{hrg_fit()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

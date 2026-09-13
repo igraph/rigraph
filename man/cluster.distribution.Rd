@@ -9,21 +9,18 @@ cluster.distribution(graph, cumulative = FALSE, mul.size = FALSE, ...)
 \arguments{
 \item{graph}{The graph to analyze.}
 
-\item{cumulative}{Logical, if TRUE the cumulative distirubution (relative
-frequency) is calculated.}
+\item{cumulative}{Logical, if TRUE the cumulative distirubution (relative frequency) is calculated.}
 
-\item{mul.size}{Logical. If TRUE the relative frequencies will be multiplied
-by the cluster sizes.}
+\item{mul.size}{Logical.
+If TRUE the relative frequencies will be multiplied by the cluster sizes.}
 
 \item{...}{For \code{component_distribution()}, forwarded to \code{components()}.
-For \code{components()}, \code{is_connected()}, \code{count_components()} and
-\code{largest_component()}, these dots must be empty.}
+For \code{components()}, \code{is_connected()}, \code{count_components()} and \code{largest_component()}, these dots must be empty.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{cluster.distribution()} was renamed to \code{\link[=component_distribution]{component_distribution()}} to create a more
-consistent API.
+\code{cluster.distribution()} was renamed to \code{\link[=component_distribution]{component_distribution()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_connected_components}{\code{connected_components()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

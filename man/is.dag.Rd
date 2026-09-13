@@ -7,14 +7,13 @@
 is.dag(graph)
 }
 \arguments{
-\item{graph}{The input graph. It may be undirected, in which case
-\code{FALSE} is reported.}
+\item{graph}{The input graph.
+It may be undirected, in which case \code{FALSE} is reported.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{is.dag()} was renamed to \code{\link[=is_dag]{is_dag()}} to create a more
-consistent API.
+\code{is.dag()} was renamed to \code{\link[=is_dag]{is_dag()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_dag}{\code{is_dag()}}

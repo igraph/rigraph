@@ -3,8 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph()` was renamed to [make_graph()] to create a more
-#' consistent API.
+#' `graph()` was renamed to [make_graph()] to create a more consistent API.
 #' @inheritParams make_graph
 #' @keywords internal
 #' @export
@@ -128,8 +127,7 @@ graph <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.famous()` was renamed to [make_graph()] to create a more
-#' consistent API.
+#' `graph.famous()` was renamed to [make_graph()] to create a more consistent API.
 #' @inheritParams make_graph
 #' @keywords internal
 #' @export
@@ -253,8 +251,7 @@ graph.famous <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `line.graph()` was renamed to [make_line_graph()] to create a more
-#' consistent API.
+#' `line.graph()` was renamed to [make_line_graph()] to create a more consistent API.
 #' @inheritParams make_line_graph
 #' @keywords internal
 #' @export
@@ -277,8 +274,7 @@ line.graph <- function(graph) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.ring()` was renamed to [make_ring()] to create a more
-#' consistent API.
+#' `graph.ring()` was renamed to [make_ring()] to create a more consistent API.
 #' @inheritParams make_ring
 #' @keywords internal
 #' @export
@@ -304,8 +300,7 @@ graph.ring <- function(n, directed = FALSE, mutual = FALSE, circular = TRUE) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.tree()` was renamed to [make_tree()] to create a more
-#' consistent API.
+#' `graph.tree()` was renamed to [make_tree()] to create a more consistent API.
 #' @inheritParams make_tree
 #' @keywords internal
 #' @export
@@ -332,8 +327,7 @@ graph.tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.star()` was renamed to [make_star()] to create a more
-#' consistent API.
+#' `graph.star()` was renamed to [make_star()] to create a more consistent API.
 #' @inheritParams make_star
 #' @keywords internal
 #' @export
@@ -364,8 +358,7 @@ graph.star <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.lcf()` was renamed to [graph_from_lcf()] to create a more
-#' consistent API.
+#' `graph.lcf()` was renamed to [graph_from_lcf()] to create a more consistent API.
 #' @inheritParams graph_from_lcf
 #' @keywords internal
 #' @export
@@ -385,8 +378,7 @@ graph.lcf <- function(n, shifts, repeats = 1) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.lattice()` was renamed to [make_lattice()] to create a more
-#' consistent API.
+#' `graph.lattice()` was renamed to [make_lattice()] to create a more consistent API.
 #' @inheritParams make_lattice
 #' @keywords internal
 #' @export
@@ -452,8 +444,7 @@ graph.lattice <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.kautz()` was renamed to [make_kautz_graph()] to create a more
-#' consistent API.
+#' `graph.kautz()` was renamed to [make_kautz_graph()] to create a more consistent API.
 #' @inheritParams make_kautz_graph
 #' @keywords internal
 #' @export
@@ -477,8 +468,7 @@ graph.kautz <- function(m, n) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.full.citation()` was renamed to [make_full_citation_graph()] to create a more
-#' consistent API.
+#' `graph.full.citation()` was renamed to [make_full_citation_graph()] to create a more consistent API.
 #' @inheritParams make_full_citation_graph
 #' @keywords internal
 #' @export
@@ -504,8 +494,7 @@ graph.full.citation <- function(n, directed = TRUE) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.full.bipartite()` was renamed to [make_full_bipartite_graph()] to create a more
-#' consistent API.
+#' `graph.full.bipartite()` was renamed to [make_full_bipartite_graph()] to create a more consistent API.
 #' @inheritParams make_full_bipartite_graph
 #' @keywords internal
 #' @export
@@ -545,8 +534,7 @@ graph.full.bipartite <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.full()` was renamed to [make_full_graph()] to create a more
-#' consistent API.
+#' `graph.full()` was renamed to [make_full_graph()] to create a more consistent API.
 #' @inheritParams make_full_graph
 #' @keywords internal
 #' @export
@@ -570,8 +558,7 @@ graph.full <- function(n, directed = FALSE, loops = FALSE) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.formula()` was renamed to [graph_from_literal()] to create a more
-#' consistent API.
+#' `graph.formula()` was renamed to [graph_from_literal()] to create a more consistent API.
 #' @inheritParams graph_from_literal
 #' @keywords internal
 #' @export
@@ -587,8 +574,7 @@ graph.formula <- function(..., simplify = TRUE) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.extended.chordal.ring()` was renamed to [make_chordal_ring()] to create a more
-#' consistent API.
+#' `graph.extended.chordal.ring()` was renamed to [make_chordal_ring()] to create a more consistent API.
 #' @inheritParams make_chordal_ring
 #' @keywords internal
 #' @export
@@ -616,8 +602,7 @@ graph.extended.chordal.ring <- function(n, w, directed = FALSE) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.empty()` was renamed to [make_empty_graph()] to create a more
-#' consistent API.
+#' `graph.empty()` was renamed to [make_empty_graph()] to create a more consistent API.
 #' @inheritParams make_empty_graph
 #' @keywords internal
 #' @export
@@ -638,8 +623,7 @@ graph.empty <- function(n = 0, directed = TRUE) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.de.bruijn()` was renamed to [make_de_bruijn_graph()] to create a more
-#' consistent API.
+#' `graph.de.bruijn()` was renamed to [make_de_bruijn_graph()] to create a more consistent API.
 #' @inheritParams make_de_bruijn_graph
 #' @keywords internal
 #' @export
@@ -667,8 +651,7 @@ graph.de.bruijn <- function(m, n) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.bipartite()` was renamed to [make_bipartite_graph()] to create a more
-#' consistent API.
+#' `graph.bipartite()` was renamed to [make_bipartite_graph()] to create a more consistent API.
 #' @inheritParams make_bipartite_graph
 #' @keywords internal
 #' @export
@@ -718,8 +701,7 @@ graph.bipartite <- function(types, edges, directed = FALSE) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.atlas()` was renamed to [graph_from_atlas()] to create a more
-#' consistent API.
+#' `graph.atlas()` was renamed to [graph_from_atlas()] to create a more consistent API.
 #' @inheritParams graph_from_atlas
 #' @keywords internal
 #' @export
@@ -759,18 +741,14 @@ graph.atlas <- function(n) {
 ##
 ## -----------------------------------------------------------------
 
-#' Takes an argument list and extracts the constructor specification and
-#' constructor modifiers from it.
+#' Takes an argument list and extracts the constructor specification and constructor modifiers from it.
 #'
-#' This is a helper function for the common parts of `make_()` and
-#' `sample_()`.
+#' This is a helper function for the common parts of `make_()` and `sample_()`.
 #'
 #' @param ... Parameters to extract from
-#' @param .operation Human-readable description of the operation that this
-#'   helper is a part of
-#' @param .variant Constructor variant; must be one of \sQuote{make},
-#'   \sQuote{graph} or \sQuote{sample}. Used in cases when the same constructor
-#'   specification has deterministic and random variants.
+#' @param .operation Human-readable description of the operation that this helper is a part of
+#' @param .variant Constructor variant; must be one of \sQuote{make}, \sQuote{graph} or \sQuote{sample}.
+#'   Used in cases when the same constructor specification has deterministic and random variants.
 #' @return A named list with three items:
 #'   \describe{
 #'     \item{cons}{
@@ -827,8 +805,7 @@ graph.atlas <- function(n) {
 
 #'   Applies a set of constructor modifiers to an already constructed graph.
 #'
-#'   This is a helper function for the common parts of `make_()` and
-#'   `sample_()`.
+#'   This is a helper function for the common parts of `make_()` and `sample_()`.
 #'
 #' @param graph The graph to apply the modifiers to
 #' @param mods The modifiers to apply
@@ -916,15 +893,12 @@ graph.atlas <- function(n) {
 #' there is a corresponding function without the prefix: e.g.
 #' for [make_ring()] there is also [ring()], etc.
 #'
-#' The same is true for the random graph samplers, i.e. for each
-#' constructor with a `sample_` prefix, there is a corresponding
-#' function without that prefix.
+#' The same is true for the random graph samplers, i.e. for each constructor with a `sample_` prefix,
+#' there is a corresponding function without that prefix.
 #'
 #' These shorter forms can be used together with `make_()`.
-#' The advantage of this form is that the user can specify constructor
-#' modifiers which work with all constructors. E.g. the
-#' [with_vertex_()] modifier adds vertex attributes
-#' to the newly created graphs.
+#' The advantage of this form is that the user can specify constructor modifiers which work with all constructors.
+#' E.g. the [with_vertex_()] modifier adds vertex attributes to the newly created graphs.
 #'
 #' See the examples and the various constructor modifiers below.
 #'
@@ -972,15 +946,12 @@ make_ <- function(...) {
 #' there is a corresponding function without the prefix: e.g.
 #' for [sample_pa()] there is also [pa()], etc.
 #'
-#' The same is true for the deterministic graph samplers, i.e. for each
-#' constructor with a `make_` prefix, there is a corresponding
-#' function without that prefix.
+#' The same is true for the deterministic graph samplers, i.e. for each constructor with a `make_` prefix,
+#' there is a corresponding function without that prefix.
 #'
 #' These shorter forms can be used together with `sample_()`.
-#' The advantage of this form is that the user can specify constructor
-#' modifiers which work with all constructors. E.g. the
-#' [with_vertex_()] modifier adds vertex attributes
-#' to the newly created graphs.
+#' The advantage of this form is that the user can specify constructor modifiers which work with all constructors.
+#' E.g. the [with_vertex_()] modifier adds vertex attributes to the newly created graphs.
 #'
 #' See the examples and the various constructor modifiers below.
 #'
@@ -1152,7 +1123,8 @@ simplified <- function() {
 
 #' Constructor modifier to add vertex attributes
 #'
-#' @param ... The attributes to add. They must be named.
+#' @param ... The attributes to add.
+#'   They must be named.
 #'
 #' @family constructor modifiers
 #'
@@ -1179,7 +1151,8 @@ with_vertex_ <- function(...) {
 
 #' Constructor modifier to add edge attributes
 #'
-#' @param ... The attributes to add. They must be named.
+#' @param ... The attributes to add.
+#'   They must be named.
 #'
 #' @family constructor modifiers
 #'
@@ -1205,7 +1178,8 @@ with_edge_ <- function(...) {
 
 #' Constructor modifier to add graph attributes
 #'
-#' @param ... The attributes to add. They must be named.
+#' @param ... The attributes to add.
+#'   They must be named.
 #'
 #' @family constructor modifiers
 #'
@@ -1228,10 +1202,9 @@ with_graph_ <- function(...) {
 #'
 #' @section Notable graphs:
 #'
-#' `make_graph()` can create some notable graphs. The name of the
-#' graph (case insensitive), a character scalar must be supplied as
-#' the `edges` argument, and other arguments are ignored. (A warning
-#' is given is they are specified.)
+#' `make_graph()` can create some notable graphs.
+#' The name of the graph (case insensitive), a character scalar must be supplied as the `edges` argument, and other arguments are ignored.
+#' (A warning is given is they are specified.)
 #'
 #' `make_graph()` knows the following graphs:
 #'   \describe{
@@ -1370,33 +1343,26 @@ with_graph_ <- function(...) {
 #'   }
 #'
 #' @encoding UTF-8
-#' @param edges A vector defining the edges, the first edge points
-#'   from the first element to the second, the second edge from the third
-#'   to the fourth, etc. For a numeric vector, these are interpreted
-#'   as internal vertex IDs. For character vectors, they are interpreted
-#'   as vertex names.
+#' @param edges A vector defining the edges, the first edge points from the first element to the second,
+#'   the second edge from the third to the fourth, etc. For a numeric vector, these are interpreted as internal vertex IDs.
+#'   For character vectors, they are interpreted as vertex names.
 #'
-#'   Alternatively, this can be a character scalar, the name of a
-#'   notable graph. See Notable graphs below. The name is case
-#'   insensitive.
+#'   Alternatively, this can be a character scalar, the name of a notable graph.
+#'   See Notable graphs below.
+#'   The name is case insensitive.
 #'
-#'   Starting from igraph 0.8.0, you can also include literals here,
-#'   via igraph's formula notation (see [graph_from_literal()]).
-#'   In this case, the first term of the formula has to start with
-#'   a \sQuote{`~`} character, just like regular formulae in R.
+#'   Starting from igraph 0.8.0, you can also include literals here, via igraph's formula notation (see [graph_from_literal()]).
+#'   In this case, the first term of the formula has to start with a \sQuote{`~`} character, just like regular formulae in R.
 #'   See examples below.
-#' @param ... For `make_graph()`: extra arguments for the case when the
-#'   graph is given via a literal, see [graph_from_literal()].
-#'   For `directed_graph()` and `undirected_graph()`:
-#'   Passed to `make_directed_graph()` or `make_undirected_graph()`.
-#' @param n The number of vertices in the graph. This argument is
-#'   ignored (with a warning) if `edges` are symbolic vertex names. It
-#'   is also ignored if there is a bigger vertex ID in `edges`. This
-#'   means that for this function it is safe to supply zero here if the
-#'   vertex with the largest ID is not an isolate. The default `NULL` uses
-#'   the largest vertex ID in `edges`.
-#' @param isolates Character vector, names of isolate vertices,
-#'   for symbolic edge lists. It is ignored for numeric edge lists.
+#' @param ... For `make_graph()`: extra arguments for the case when the graph is given via a literal, see [graph_from_literal()].
+#'   For `directed_graph()` and `undirected_graph()`: Passed to `make_directed_graph()` or `make_undirected_graph()`.
+#' @param n The number of vertices in the graph.
+#'   This argument is ignored (with a warning) if `edges` are symbolic vertex names.
+#'   It is also ignored if there is a bigger vertex ID in `edges`.
+#'   This means that for this function it is safe to supply zero here if the vertex with the largest ID is not an isolate.
+#'   The default `NULL` uses the largest vertex ID in `edges`.
+#' @param isolates Character vector, names of isolate vertices, for symbolic edge lists.
+#'   It is ignored for numeric edge lists.
 #' @param directed Whether to create a directed graph.
 #' @param dir It is the same as `directed`, for compatibility.
 #'   Do not give both of them.
@@ -1698,85 +1664,70 @@ empty_graph <- function(
 
 #' Creating (small) graphs via a simple interface
 #'
-#' This function is useful if you want to create a small (named) graph
-#' quickly, it works for both directed and undirected graphs.
+#' This function is useful if you want to create a small (named) graph quickly, it works for both directed and undirected graphs.
 #'
 #' @details
 #' `graph_from_literal()` is very handy for creating small graphs quickly.
-#' You need to supply one or more R expressions giving the structure of
-#' the graph. The expressions consist of vertex names and edge
-#' operators. An edge operator is a sequence of \sQuote{`-`} and
-#' \sQuote{`+`} characters, the former is for the edges and the
-#' latter is used for arrow heads. The edges can be arbitrarily long,
-#' i.e. you may use as many \sQuote{`-`} characters to \dQuote{draw}
-#' them as you like.
+#' You need to supply one or more R expressions giving the structure of the graph.
+#' The expressions consist of vertex names and edge operators.
+#' An edge operator is a sequence of \sQuote{`-`} and \sQuote{`+`} characters,
+#' the former is for the edges and the latter is used for arrow heads.
+#' The edges can be arbitrarily long, i.e. you may use as many \sQuote{`-`} characters to \dQuote{draw} them as you like.
 #'
-#' If all edge operators consist of only \sQuote{`-`} characters
-#' then the graph will be undirected, whereas a single \sQuote{`+`}
-#' character implies a directed graph.
+#' If all edge operators consist of only \sQuote{`-`} characters then the graph will be undirected,
+#' whereas a single \sQuote{`+`} character implies a directed graph.
 #'
-#' Let us see some simple examples. Without arguments the function
-#' creates an empty graph:
+#' Let us see some simple examples.
+#' Without arguments the function creates an empty graph:
 #' \preformatted{  graph_from_literal()
 #' }
 #'
-#' A simple undirected graph with two vertices called \sQuote{A} and
-#' \sQuote{B} and one edge only:
+#' A simple undirected graph with two vertices called \sQuote{A} and \sQuote{B} and one edge only:
 #' \preformatted{  graph_from_literal(A-B)
 #' }
 #'
-#' Remember that the length of the edges does not matter, so we could
-#' have written the following, this creates the same graph:
+#' Remember that the length of the edges does not matter, so we could have written the following, this creates the same graph:
 #' \preformatted{  graph_from_literal( A-----B )
 #' }
 #'
-#' If you have many disconnected components in the graph, separate them
-#' with commas. You can also give isolate vertices.
+#' If you have many disconnected components in the graph, separate them with commas.
+#' You can also give isolate vertices.
 #' \preformatted{  graph_from_literal( A--B, C--D, E--F, G--H, I, J, K )
 #' }
 #'
-#' The \sQuote{`:`} operator can be used to define vertex sets. If
-#' an edge operator connects two vertex sets then every vertex from the
-#' first set will be connected to every vertex in the second set. The
-#' following form creates a full graph, including loop edges:
+#' The \sQuote{`:`} operator can be used to define vertex sets.
+#' If an edge operator connects two vertex sets then every vertex from the first set will be connected to every vertex in the second set.
+#' The following form creates a full graph, including loop edges:
 #' \preformatted{  graph_from_literal( A:B:C:D -- A:B:C:D )
 #' }
 #'
-#' In directed graphs, edges will be created only if the edge operator
-#' includes a arrow head (\sQuote{+}) *at the end* of the edge:
+#' In directed graphs, edges will be created only if the edge operator includes a arrow head (\sQuote{+}) *at the end* of the edge:
 #' \preformatted{  graph_from_literal( A -+ B -+ C )
 #'   graph_from_literal( A +- B -+ C )
 #'   graph_from_literal( A +- B -- C )
 #' }
-#' Thus in the third example no edge is created between vertices `B`
-#' and `C`.
+#' Thus in the third example no edge is created between vertices `B` and `C`.
 #'
 #' Mutual edges can be also created with a simple edge operator:
 #' \preformatted{  graph_from_literal( A +-+ B +---+ C ++ D + E)
 #' }
-#' Note again that the length of the edge operators is arbitrary,
-#' \sQuote{`+`}, \sQuote{`++`} and \sQuote{`+-----+`} have
-#' exactly the same meaning.
+#' Note again that the length of the edge operators is arbitrary, \sQuote{`+`},
+#' \sQuote{`++`} and \sQuote{`+-----+`} have exactly the same meaning.
 #'
-#' If the vertex names include spaces or other special characters then
-#' you need to quote them:
+#' If the vertex names include spaces or other special characters then you need to quote them:
 #' \preformatted{  graph_from_literal( "this is" +- "a silly" -+ "graph here" )
 #' }
-#' You can include any character in the vertex names this way, even
-#' \sQuote{+} and \sQuote{-} characters.
+#' You can include any character in the vertex names this way, even \sQuote{+} and \sQuote{-} characters.
 #'
 #' See more examples below.
 #'
-#' @param ... For `graph_from_literal()` the formulae giving the
-#'   structure of the graph, see details below. For `from_literal()`
-#'   all arguments are passed to `graph_from_literal()`.
-#' @param simplify Logical, whether to call [simplify()]
-#'   on the created graph. By default the graph is simplified, loop and
-#'   multiple edges are removed. [simplify()] is only called when the
-#'   created graph is not already simple, so the edge order from the
-#'   formula is preserved whenever no loops or multi-edges are present.
-#'   When the graph does contain loops or multi-edges (and `simplify =
-#'   TRUE`), [simplify()] reorders the edges into its canonical order.
+#' @param ... For `graph_from_literal()` the formulae giving the structure of the graph, see details below.
+#'   For `from_literal()` all arguments are passed to `graph_from_literal()`.
+#' @param simplify Logical, whether to call [simplify()] on the created graph.
+#'   By default the graph is simplified, loop and multiple edges are removed.
+#'   [simplify()] is only called when the created graph is not already simple,
+#'   so the edge order from the formula is preserved whenever no loops or multi-edges are present.
+#'   When the graph does contain loops or multi-edges (and `simplify = TRUE`), [simplify()] reorders the edges into its canonical order.
 #' @return An igraph graph
 #'
 #' @family deterministic constructors
@@ -1914,13 +1865,11 @@ graph_from_literal_i <- function(mf) {
   ids <- seq(along.with = v)
   names(ids) <- v
   res <- make_graph(unname(ids[edges]), n = length(v), directed = directed)
-  # `!is_simple()` is what keeps the formula's edge order when there is nothing
-  # to simplify (#824, #1981): `simplify()` rebuilds the graph sorted by
-  # endpoint, and a formula that declares no loops and no multiple edges has no
-  # reason to be rebuilt. The check belongs here rather than inside
-  # `simplify()`, where it also suppressed `edge.attr.comb` -- see the note
-  # there. `res` has no attributes yet, so skipping is unobservable beyond the
-  # order.
+  # `!is_simple()` is what keeps the formula's edge order when there is nothing to simplify (#824, #1981):
+  # `simplify()` rebuilds the graph sorted by endpoint,
+  # and a formula that declares no loops and no multiple edges has no reason to be rebuilt.
+  # The check belongs here rather than inside `simplify()`, where it also suppressed `edge.attr.comb` -- see the note there.
+  # `res` has no attributes yet, so skipping is unobservable beyond the order.
   if (simplify && !is_simple(res)) {
     res <- simplify(res)
   }
@@ -1938,17 +1887,13 @@ from_literal <- function(...) {
 
 #' Create a star graph, a tree with n vertices and n - 1 leaves
 #'
-#' `star()` creates a star graph, in this every single vertex is
-#' connected to the center vertex and nobody else.
+#' `star()` creates a star graph, in this every single vertex is connected to the center vertex and nobody else.
 #'
 #' @concept Star graph
 #' @param n Number of vertices.
 #' @inheritParams rlang::args_dots_empty
-#' @param mode It defines the direction of the
-#'   edges, `in`: the edges point *to* the center, `out`:
-#'   the edges point *from* the center, `mutual`: a directed
-#'   star is created with mutual edges, `undirected`: the edges
-#'   are undirected.
+#' @param mode It defines the direction of the edges, `in`: the edges point *to* the center, `out`: the edges point *from* the center,
+#'   `mutual`: a directed star is created with mutual edges, `undirected`: the edges are undirected.
 #' @param center ID of the center vertex.
 #' @return An igraph graph.
 #'
@@ -2188,26 +2133,21 @@ full_graph <- function(
 
 #' Create a lattice graph
 #'
-#' `make_lattice()` is a flexible function, it can create lattices of
-#' arbitrary dimensions, periodic or aperiodic ones. It has two
-#' forms. In the first form you only supply `dimvector`, but not
-#' `length` and `dim`. In the second form you omit
-#' `dimvector` and supply `length` and `dim`.
+#' `make_lattice()` is a flexible function, it can create lattices of arbitrary dimensions, periodic or aperiodic ones.
+#' It has two forms.
+#' In the first form you only supply `dimvector`, but not `length` and `dim`.
+#' In the second form you omit `dimvector` and supply `length` and `dim`.
 #'
 #' @concept Lattice
-#' @param dimvector A vector giving the size of the lattice in each
-#'   dimension.
-#' @param length Integer constant, for regular lattices, the size of the
-#'   lattice in each dimension.
+#' @param dimvector A vector giving the size of the lattice in each dimension.
+#' @param length Integer constant, for regular lattices, the size of the lattice in each dimension.
 #' @param dim Integer constant, the dimension of the lattice.
-#' @param nei The distance within which (inclusive) the neighbors on the
-#'   lattice will be connected. This parameter is not used right now.
+#' @param nei The distance within which (inclusive) the neighbors on the lattice will be connected.
+#'   This parameter is not used right now.
 #' @param directed Whether to create a directed lattice.
-#' @param mutual Logical, if `TRUE` directed lattices will be
-#'   mutually connected.
-#' @param periodic Logical vector, defines whether the generated lattice is
-#'   periodic along each dimension. This parameter may also be a single logical which will
-#'   be extended to a logical vector of `dimvector`` length.
+#' @param mutual Logical, if `TRUE` directed lattices will be mutually connected.
+#' @param periodic Logical vector, defines whether the generated lattice is periodic along each dimension.
+#'   This parameter may also be a single logical which will be extended to a logical vector of `dimvector`` length.
 #' @param circular Deprecated, use `periodic` instead.
 #' @return An igraph graph.
 #'
@@ -2295,17 +2235,15 @@ lattice <- function(
 
 #' Create a ring graph
 #'
-#' A ring is a one-dimensional lattice and this function is a special case
-#' of [make_lattice()].
+#' A ring is a one-dimensional lattice and this function is a special case of [make_lattice()].
 #'
 #' @param n Number of vertices.
 #' @inheritParams rlang::args_dots_empty
 #' @param directed Whether the graph is directed.
-#' @param mutual Whether directed edges are mutual. It is ignored in
-#'   undirected graphs.
-#' @param circular Whether to create a circular ring. A non-circular
-#'   ring is essentially a \dQuote{line}: a tree where every non-leaf
-#'   vertex has one child.
+#' @param mutual Whether directed edges are mutual.
+#'   It is ignored in undirected graphs.
+#' @param circular Whether to create a circular ring.
+#'   A non-circular ring is essentially a \dQuote{line}: a tree where every non-leaf vertex has one child.
 #' @return An igraph graph.
 #'
 #' @family deterministic constructors
@@ -2438,24 +2376,19 @@ ring <- function(
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' A wheel graph is created by connecting a center vertex to all vertices of a
-#' cycle graph.
-#' A wheel graph on `n` vertices can be thought of as a wheel with `n - 1`
-#' spokes.
-#' The cycle graph part makes up the rim, while the star graph part adds the
-#' spokes.
+#' A wheel graph is created by connecting a center vertex to all vertices of a cycle graph.
+#' A wheel graph on `n` vertices can be thought of as a wheel with `n - 1` spokes.
+#' The cycle graph part makes up the rim, while the star graph part adds the spokes.
 #'
-#' Note that the two and three-vertex wheel graphs are non-simple: The
-#' two-vertex wheel graph contains a self-loop, while the three-vertex wheel
-#' graph contains parallel edges (a 1-cycle and a 2-cycle, respectively).
+#' Note that the two and three-vertex wheel graphs are non-simple: The two-vertex wheel graph contains a self-loop,
+#' while the three-vertex wheel graph contains parallel edges (a 1-cycle and a 2-cycle, respectively).
 #'
 #' @concept Wheel graph
 #' @param n Number of vertices.
 #' @inheritParams rlang::args_dots_empty
 #' @param mode It defines the direction of the edges.
-#'   `in`: the edges point *to* the center, `out`: the edges point *from* the
-#'   center, `mutual`: a directed wheel is created with mutual edges,
-#'   `undirected`: the edges are undirected.
+#'   `in`: the edges point *to* the center, `out`: the edges point *from* the center, `mutual`:
+#'   a directed wheel is created with mutual edges, `undirected`: the edges are undirected.
 #' @param center ID of the center vertex.
 #' @return An igraph graph.
 #'
@@ -2505,19 +2438,15 @@ wheel <- function(
 
 #' Create tree graphs
 #'
-#' Create a k-ary tree graph, where almost all vertices other than the leaves
-#' have the same number of children.
+#' Create a k-ary tree graph, where almost all vertices other than the leaves have the same number of children.
 #'
 #' @concept Trees.
 #' @param n Number of vertices.
-#' @param children Integer scalar, the number of children of a vertex
-#'   (except for leafs)
+#' @param children Integer scalar, the number of children of a vertex (except for leafs)
 #' @inheritParams rlang::args_dots_empty
-#' @param mode Defines the direction of the
-#'   edges. `out` indicates that the edges point from the parent to
-#'   the children, `in` indicates that they point from the children
-#'   to their parents, while `undirected` creates an undirected
-#'   graph.
+#' @param mode Defines the direction of the edges.
+#'   `out` indicates that the edges point from the parent to the children,
+#'   `in` indicates that they point from the children to their parents, while `undirected` creates an undirected graph.
 #' @return An igraph graph
 #' @seealso [tree()] to build a lazy constructor specification for
 #'   [make_()] or [sample_()].
@@ -2585,22 +2514,20 @@ make_tree <- function(
 
 #' Sample trees randomly and uniformly
 #'
-#' `sample_tree()` generates a random with a given number of nodes uniform
-#' at random from the set of labelled trees.
+#' `sample_tree()` generates a random with a given number of nodes uniform at random from the set of labelled trees.
 #'
-#' In other words, the function generates each possible labelled tree with the
-#' given number of nodes with the same probability.
+#' In other words, the function generates each possible labelled tree with the given number of nodes with the same probability.
 #'
 #' @param n The number of nodes in the tree
 #' @inheritParams rlang::args_dots_empty
-#' @param directed Whether to create a directed tree. The edges of the tree are
-#'   oriented away from the root.
-#' @param method The algorithm to use to generate the tree. \sQuote{prufer}
-#'   samples Prüfer sequences uniformly and then converts the sampled sequence to
-#'   a tree. \sQuote{lerw} performs a loop-erased random walk on the complete
-#'   graph to uniformly sampleits spanning trees. (This is also known as Wilson's
-#'   algorithm). The default is \sQuote{lerw}. Note that the method based on
-#'   Prüfer sequences does not support directed trees at the moment.
+#' @param directed Whether to create a directed tree.
+#'   The edges of the tree are oriented away from the root.
+#' @param method The algorithm to use to generate the tree.
+#'   \sQuote{prufer} samples Prüfer sequences uniformly and then converts the sampled sequence to a tree.
+#'   \sQuote{lerw} performs a loop-erased random walk on the complete graph to uniformly sampleits spanning trees.
+#'   (This is also known as Wilson's algorithm).
+#'   The default is \sQuote{lerw}.
+#'   Note that the method based on Prüfer sequences does not support directed trees at the moment.
 #' @return A graph object.
 #'
 #' @family games
@@ -2671,14 +2598,12 @@ tree <- function(...) {
 
 #' Create an undirected tree graph from its Prüfer sequence
 #'
-#' `make_from_prufer()` creates an undirected tree graph from its Prüfer
-#' sequence.
+#' `make_from_prufer()` creates an undirected tree graph from its Prüfer sequence.
 #'
-#' The Prüfer sequence of a tree graph with n labeled vertices is a sequence of
-#' n-2 numbers, constructed as follows. If the graph has more than two vertices,
-#' find a vertex with degree one, remove it from the tree and add the label of
-#' the vertex that it was connected to to the sequence. Repeat until there are
-#' only two vertices in the remaining graph.
+#' The Prüfer sequence of a tree graph with n labeled vertices is a sequence of n-2 numbers, constructed as follows.
+#' If the graph has more than two vertices, find a vertex with degree one,
+#' remove it from the tree and add the label of the vertex that it was connected to to the sequence.
+#' Repeat until there are only two vertices in the remaining graph.
 #'
 #' @param prufer The Prüfer sequence to convert into a graph
 #' @return A graph object.
@@ -2707,11 +2632,8 @@ from_prufer <- function(prufer) {
 
 #' Create a graph from the Graph Atlas
 #'
-#' `graph_from_atlas()` creates graphs from the book
-#' \sQuote{An Atlas of Graphs} by
-#' Roland C. Read and Robin J. Wilson. The atlas contains all undirected
-#' graphs with up to seven vertices, numbered from 0 up to 1252. The
-#' graphs are listed:
+#' `graph_from_atlas()` creates graphs from the book \sQuote{An Atlas of Graphs} by Roland C. Read and Robin J. Wilson.
+#' The atlas contains all undirected graphs with up to seven vertices, numbered from 0 up to 1252. The graphs are listed:
 #' \enumerate{
 #'    \item in increasing order of number of nodes;
 #'    \item for a fixed number of nodes, in increasing order of the number
@@ -2754,20 +2676,17 @@ atlas <- function(n) {
 #' Create an extended chordal ring graph
 #'
 #' `make_chordal_ring()` creates an extended chordal ring.
-#' An extended chordal ring is regular graph, each node has the same
-#' degree. It can be obtained from a simple ring by adding some extra
-#' edges specified by a matrix. Let p denote the number of columns in
-#' the \sQuote{`W`} matrix. The extra edges of vertex `i`
-#' are added according to column `i mod p` in
-#' \sQuote{`W`}. The number of extra edges is the number
-#' of rows in \sQuote{`W`}: for each row `j` an edge
-#' `i->i+w[ij]` is added if `i+w[ij]` is less than the number
-#' of total nodes. See also Kotsis, G: Interconnection Topologies for
-#' Parallel Processing Systems, PARS Mitteilungen 11, 1-6, 1993.
+#' An extended chordal ring is regular graph, each node has the same degree.
+#' It can be obtained from a simple ring by adding some extra edges specified by a matrix.
+#' Let p denote the number of columns in the \sQuote{`W`} matrix.
+#' The extra edges of vertex `i` are added according to column `i mod p` in \sQuote{`W`}.
+#' The number of extra edges is the number of rows in \sQuote{`W`}:
+#' for each row `j` an edge `i->i+w[ij]` is added if `i+w[ij]` is less than the number of total nodes.
+#' See also Kotsis, G: Interconnection Topologies for Parallel Processing Systems, PARS Mitteilungen 11, 1-6, 1993.
 #'
 #' @param n The number of vertices.
-#' @param w A matrix which specifies the extended chordal ring. See
-#'   details below.
+#' @param w A matrix which specifies the extended chordal ring.
+#'   See details below.
 #' @inheritParams rlang::args_dots_empty
 #' @param directed Logical, whether or not to create a directed graph.
 #' @return An igraph graph.
@@ -2883,9 +2802,8 @@ chordal_ring <- function(
 
 #' Create a circulant graph
 #'
-#' A circulant graph \eqn{C_n^{\textrm{shifts}}} consists of \eqn{n} vertices
-#' \eqn{v_0, \ldots, v_{n-1}} such that for each \eqn{s_i} in the list of offsets
-#' `shifts`, \eqn{v_j} is connected to \eqn{v_{(j + s_i) \mod n}} for all \eqn{j}.
+#' A circulant graph \eqn{C_n^{\textrm{shifts}}} consists of \eqn{n} vertices \eqn{v_0, \ldots, v_{n-1}} such that for each \eqn{s_i} in the list of offsets `shifts`,
+#' \eqn{v_j} is connected to \eqn{v_{(j + s_i) \mod n}} for all \eqn{j}.
 #'
 #' The function can generate either directed or undirected graphs.
 #' It does not generate multi-edges or self-loops.
@@ -3007,16 +2925,13 @@ circulant <- function(
 #'
 #' This function calculates the line graph of another graph.
 #'
-#' The line graph `L(G)` of a `G` undirected graph is defined as
-#' follows. `L(G)` has one vertex for each edge in `G` and two
-#' vertices in `L(G)` are connected by an edge if their corresponding
-#' edges share an end point.
+#' The line graph `L(G)` of a `G` undirected graph is defined as follows.
+#' `L(G)` has one vertex for each edge in `G` and two vertices in `L(G)` are connected by an edge
+#' if their corresponding edges share an end point.
 #'
-#' The line graph `L(G)` of a `G` directed graph is slightly
-#' different, `L(G)` has one vertex for each edge in `G` and two
-#' vertices in `L(G)` are connected by a directed edge if the target of
-#' the first vertex's corresponding edge is the same as the source of the
-#' second vertex's corresponding edge.
+#' The line graph `L(G)` of a `G` directed graph is slightly different,
+#' `L(G)` has one vertex for each edge in `G` and two vertices in `L(G)` are connected by a directed edge
+#' if the target of the first vertex's corresponding edge is the same as the source of the second vertex's corresponding edge.
 #'
 #' @param graph The input graph, it can be directed or undirected.
 #' @return A new graph object.
@@ -3056,22 +2971,20 @@ line_graph <- function(graph) {
 #'
 #' De Bruijn graphs are labeled graphs representing the overlap of strings.
 #'
-#' A de Bruijn graph represents relationships between strings. An alphabet of
-#' `m` letters are used and strings of length `n` are considered.  A
-#' vertex corresponds to every possible string and there is a directed edge
-#' from vertex `v` to vertex `w` if the string of `v` can be
-#' transformed into the string of `w` by removing its first letter and
-#' appending a letter to it.
+#' A de Bruijn graph represents relationships between strings.
+#' An alphabet of `m` letters are used and strings of length `n` are considered.
+#' A vertex corresponds to every possible string and there is a directed edge from vertex `v` to vertex `w`
+#' if the string of `v` can be transformed into the string of `w` by removing its first letter and appending a letter to it.
 #'
-#' Please note that the graph will have `m` to the power `n` vertices
-#' and even more edges, so probably you don't want to supply too big numbers
-#' for `m` and `n`.
+#' Please note that the graph will have `m` to the power `n` vertices and even more edges,
+#' so probably you don't want to supply too big numbers for `m` and `n`.
 #'
-#' De Bruijn graphs have some interesting properties, please see another
-#' source, e.g. Wikipedia for details.
+#' De Bruijn graphs have some interesting properties, please see another source, e.g. Wikipedia for details.
 #'
-#' @param m Integer scalar, the size of the alphabet. See details below.
-#' @param n Integer scalar, the length of the labels. See details below.
+#' @param m Integer scalar, the size of the alphabet.
+#'   See details below.
+#' @param n Integer scalar, the length of the labels.
+#'   See details below.
 #' @return A graph object.
 #' @author Gabor Csardi <csardi.gabor@@gmail.com>
 #' @seealso [make_kautz_graph()], [make_line_graph()]
@@ -3108,18 +3021,17 @@ de_bruijn_graph <- function(m, n) {
 #'
 #' Kautz graphs are labeled graphs representing the overlap of strings.
 #'
-#' A Kautz graph is a labeled graph, vertices are labeled by strings of length
-#' `n+1` above an alphabet with `m+1` letters, with the restriction
-#' that every two consecutive letters in the string must be different. There is
-#' a directed edge from a vertex `v` to another vertex `w` if it is
-#' possible to transform the string of `v` into the string of `w` by
-#' removing the first letter and appending a letter to it.
+#' A Kautz graph is a labeled graph, vertices are labeled by strings of length `n+1` above an alphabet with `m+1` letters,
+#' with the restriction that every two consecutive letters in the string must be different.
+#' There is a directed edge from a vertex `v` to another vertex `w`
+#' if it is possible to transform the string of `v` into the string of `w` by removing the first letter and appending a letter to it.
 #'
-#' Kautz graphs have some interesting properties, see e.g. Wikipedia for
-#' details.
+#' Kautz graphs have some interesting properties, see e.g. Wikipedia for details.
 #'
-#' @param m Integer scalar, the size of the alphabet. See details below.
-#' @param n Integer scalar, the length of the labels. See details below.
+#' @param m Integer scalar, the size of the alphabet.
+#'   See details below.
+#' @param n Integer scalar, the length of the labels.
+#'   See details below.
 #' @return A graph object.
 #' @author Gabor Csardi <csardi.gabor@@gmail.com>, the first version in R was
 #' written by Vincent Matossian.
@@ -3154,22 +3066,20 @@ kautz_graph <- function(m, n) {
 
 #' Create a full bipartite graph
 #'
-#' Bipartite graphs are also called two-mode by some. This function creates a
-#' bipartite graph in which every possible edge is present.
+#' Bipartite graphs are also called two-mode by some.
+#' This function creates a bipartite graph in which every possible edge is present.
 #'
 #' Bipartite graphs have a \sQuote{`type`} vertex attribute in igraph,
-#' this is boolean and `FALSE` for the vertices of the first kind and
-#' `TRUE` for vertices of the second kind.
+#' this is boolean and `FALSE` for the vertices of the first kind and `TRUE` for vertices of the second kind.
 #'
 #' @param n1 The number of vertices of the first kind.
 #' @param n2 The number of vertices of the second kind.
 #' @inheritParams rlang::args_dots_empty
 #' @param directed Logical, whether the graphs is directed.
 #' @param mode Scalar giving the kind of edges to create for directed graphs.
-#'   If this is \sQuote{`out`} then all vertices of the first kind are
-#'   connected to the others; \sQuote{`in`} specifies the opposite
-#'   direction; \sQuote{`all`} creates mutual edges. This argument is
-#'   ignored for undirected graphs.x
+#'   If this is \sQuote{`out`} then all vertices of the first kind are connected to the others;
+#'   \sQuote{`in`} specifies the opposite direction; \sQuote{`all`} creates mutual edges.
+#'   This argument is ignored for undirected graphs.x
 #' @return An igraph graph, with the \sQuote{`type`} vertex attribute set.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [make_full_graph()] for creating one-mode full graphs
@@ -3305,34 +3215,29 @@ full_bipartite_graph <- function(
 
 #' Create a bipartite graph
 #'
-#' A bipartite graph has two kinds of vertices and connections are only allowed
-#' between different kinds.
+#' A bipartite graph has two kinds of vertices and connections are only allowed between different kinds.
 #'
-#' Bipartite graphs have a `type` vertex attribute in igraph, this is
-#' boolean and `FALSE` for the vertices of the first kind and `TRUE`
-#' for vertices of the second kind.
+#' Bipartite graphs have a `type` vertex attribute in igraph,
+#' this is boolean and `FALSE` for the vertices of the first kind and `TRUE` for vertices of the second kind.
 #'
-#' `make_bipartite_graph()` basically does three things. First it checks the
-#' `edges` vector against the vertex `types`. Then it creates a graph
-#' using the `edges` vector and finally it adds the `types` vector as
-#' a vertex attribute called `type`. `edges` may contain strings as
-#' vertex names; in this case, `types` must be a named vector that specifies
-#' the type for each vertex name that occurs in `edges`.
+#' `make_bipartite_graph()` basically does three things.
+#' First it checks the `edges` vector against the vertex `types`.
+#' Then it creates a graph using the `edges` vector and finally it adds the `types` vector as a vertex attribute called `type`.
+#' `edges` may contain strings as vertex names; in this case,
+#' `types` must be a named vector that specifies the type for each vertex name that occurs in `edges`.
 #'
-#' @param types A vector giving the vertex types. It will be coerced into
-#'   boolean. The length of the vector gives the number of vertices in the graph.
-#'   When the vector is a named vector, the names will be attached to the graph
-#'   as the `name` vertex attribute.
-#' @param edges A vector giving the edges of the graph, the same way as for the
-#'   regular [make_graph()] function. It is checked that the edges indeed
-#'   connect vertices of different kind, according to the supplied `types`
-#'   vector. The vector may be a string vector if `types` is a named vector.
+#' @param types A vector giving the vertex types.
+#'   It will be coerced into boolean.
+#'   The length of the vector gives the number of vertices in the graph.
+#'   When the vector is a named vector, the names will be attached to the graph as the `name` vertex attribute.
+#' @param edges A vector giving the edges of the graph, the same way as for the regular [make_graph()] function.
+#'   It is checked that the edges indeed connect vertices of different kind, according to the supplied `types` vector.
+#'   The vector may be a string vector if `types` is a named vector.
 #' @inheritParams rlang::args_dots_empty
-#' @param directed Logical, whether to create a directed graph. Note
-#'   that by default undirected graphs are created, as this is more common for
-#'   bipartite graphs.
-#' @return `make_bipartite_graph()` returns a bipartite igraph graph. In other
-#'   words, an igraph graph that has a vertex attribute named `type`.
+#' @param directed Logical, whether to create a directed graph.
+#'   Note that by default undirected graphs are created, as this is more common for bipartite graphs.
+#' @return `make_bipartite_graph()` returns a bipartite igraph graph.
+#'   In other words, an igraph graph that has a vertex attribute named `type`.
 #'
 #'   `is_bipartite()` returns a Logical.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -3476,21 +3381,18 @@ bipartite_graph <- function(
 
 #' Create a full multipartite graph
 #'
-#' A multipartite graph contains multiple types of vertices and connections
-#' are only possible between vertices of different types. This function
-#' creates a complete multipartite graph where all possible edges between
-#' different partitions are present.
+#' A multipartite graph contains multiple types of vertices and connections are only possible between vertices of different types.
+#' This function creates a complete multipartite graph where all possible edges between different partitions are present.
 #'
 #' @param n A numeric vector giving the number of vertices in each partition.
 #' @inheritParams rlang::args_dots_empty
 #' @param directed Logical, whether to create a directed graph.
 #' @param mode Character scalar, the type of connections for directed graphs.
-#'   If `"out"`, then edges point from vertices of partitions with lower
-#'   indices to partitions with higher indices; if `"in"`, then the opposite
-#'   direction is realized; `"all"` creates mutual edges. This parameter is
-#'   ignored for undirected graphs.
-#' @return An igraph graph with a vertex attribute `type` storing the
-#'   partition index of each vertex. Partition indices start from 1.
+#'   If `"out"`, then edges point from vertices of partitions with lower indices to partitions with higher indices; if `"in"`,
+#'   then the opposite direction is realized; `"all"` creates mutual edges.
+#'   This parameter is ignored for undirected graphs.
+#' @return An igraph graph with a vertex attribute `type` storing the partition index of each vertex.
+#'   Partition indices start from 1.
 #'
 #' @family deterministic constructors
 #' @export
@@ -3623,21 +3525,19 @@ full_multipartite <- function(
 
 #' Create a Turán graph
 #'
-#' Turán graphs are complete multipartite graphs with the property that the
-#' sizes of the partitions are as close to equal as possible.
+#' Turán graphs are complete multipartite graphs with the property that the sizes of the partitions are as close to equal as possible.
 #'
 #' @details
-#' The Turán graph with `n` vertices and `r` partitions is the densest
-#' graph on `n` vertices that does not contain a clique of size `r+1`.
+#' The Turán graph with `n` vertices and `r` partitions is the densest graph on `n` vertices that does not contain a clique of size `r+1`.
 #'
-#' This function generates undirected graphs. The null graph is
-#' returned when the number of vertices is zero. A complete graph is
-#' returned if the number of partitions is greater than the number of vertices.
+#' This function generates undirected graphs.
+#' The null graph is returned when the number of vertices is zero.
+#' A complete graph is returned if the number of partitions is greater than the number of vertices.
 #'
 #' @param n Integer, the number of vertices in the graph.
 #' @param r Integer, the number of partitions in the graph, must be positive.
-#' @return An igraph graph with a vertex attribute `type` storing the
-#'   partition index of each vertex. Partition indices start from 1.
+#' @return An igraph graph with a vertex attribute `type` storing the partition index of each vertex.
+#'   Partition indices start from 1.
 #'
 #' @family deterministic constructors
 #' @export
@@ -3677,9 +3577,9 @@ turan <- function(n, r) {
 
 #' Create a complete (full) citation graph
 #'
-#' `make_full_citation_graph()` creates a full citation graph. This is a
-#' directed graph, where every `i->j` edge is present if and only if
-#' \eqn{j<i}. If `directed=FALSE` then the graph is just a full graph.
+#' `make_full_citation_graph()` creates a full citation graph.
+#' This is a directed graph, where every `i->j` edge is present if and only if \eqn{j<i}.
+#' If `directed=FALSE` then the graph is just a full graph.
 #'
 #' @param n The number of vertices.
 #' @inheritParams rlang::args_dots_empty
@@ -3790,24 +3690,21 @@ full_citation_graph <- function(
 
 #' Creating a graph from LCF notation
 #'
-#' LCF is short for Lederberg-Coxeter-Frucht, it is a concise notation for
-#' 3-regular Hamiltonian graphs. It constists of three parameters, the number
-#' of vertices in the graph, a list of shifts giving additional edges to a
-#' cycle backbone and another integer giving how many times the shifts should
-#' be performed.
+#' LCF is short for Lederberg-Coxeter-Frucht, it is a concise notation for 3-regular Hamiltonian graphs.
+#' It constists of three parameters, the number of vertices in the graph,
+#' a list of shifts giving additional edges to a cycle backbone and another integer giving how many times the shifts should be performed.
 #' See <https://mathworld.wolfram.com/LCFNotation.html> for details.
 #'
 #'
 #' @aliases graph_from_lcf
-#' @param n Integer, the number of vertices in the graph. If `NULL` (default),
-#'   it is set to `len(shifts) * repeats`.
+#' @param n Integer, the number of vertices in the graph.
+#'   If `NULL` (default), it is set to `len(shifts) * repeats`.
 #' @param shifts Integer vector, the shifts.
 #' @param repeats Integer constant, how many times to repeat the shifts.
 #' @inheritParams rlang::args_dots_empty
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [make_graph()] can create arbitrary graphs, see also the other
-#' functions on the its manual page for creating special graphs.
+#' @seealso [make_graph()] can create arbitrary graphs, see also the other functions on the its manual page for creating special graphs.
 #' @keywords graphs
 #' @examples
 #'
@@ -3853,49 +3750,44 @@ graph_from_lcf <- function(
 
 #' Creating a graph from a given degree sequence, deterministically
 #'
-#' It is often useful to create a graph with given vertex degrees. This function
-#' creates such a graph in a deterministic manner.
+#' It is often useful to create a graph with given vertex degrees.
+#' This function creates such a graph in a deterministic manner.
 #'
-#' Simple undirected graphs are constructed using the Havel-Hakimi algorithm
-#' (undirected case), or the analogous Kleitman-Wang algorithm (directed case).
-#' These algorithms work by choosing an arbitrary vertex and connecting all its
-#' stubs to other vertices. This step is repeated until all degrees have been
-#' connected up.
+#' Simple undirected graphs are constructed using the Havel-Hakimi algorithm (undirected case),
+#' or the analogous Kleitman-Wang algorithm (directed case).
+#' These algorithms work by choosing an arbitrary vertex and connecting all its stubs to other vertices.
+#' This step is repeated until all degrees have been connected up.
 #'
-#' The \sQuote{method} argument controls in which order the vertices are
-#' selected during the course of the algorithm.
+#' The \sQuote{method} argument controls in which order the vertices are selected during the course of the algorithm.
 #'
-#' The \dQuote{smallest} method selects the vertex with the smallest remaining
-#' degree. The result is usually a graph with high negative degree assortativity.
-#' In the undirected case, this method is guaranteed to generate a connected
-#' graph, regardless of whether multi-edges are allowed, provided that a
-#' connected realization exists. See Horvát and Modes (2021) for details.
-#' In the directed case it tends to generate weakly connected graphs, but this
-#' is not guaranteed. This is the default method.
+#' The \dQuote{smallest} method selects the vertex with the smallest remaining degree.
+#' The result is usually a graph with high negative degree assortativity.
+#' In the undirected case, this method is guaranteed to generate a connected graph, regardless of whether multi-edges are allowed,
+#' provided that a connected realization exists.
+#' See Horvát and Modes (2021) for details.
+#' In the directed case it tends to generate weakly connected graphs, but this is not guaranteed.
+#' This is the default method.
 #'
-#' The \dQuote{largest} method selects the vertex with the largest remaining
-#' degree. The result is usually a graph with high positive degree assortativity,
-#' and is often disconnected.
+#' The \dQuote{largest} method selects the vertex with the largest remaining degree.
+#' The result is usually a graph with high positive degree assortativity, and is often disconnected.
 #'
 #' The \dQuote{index} method selects the vertices in order of their index.
 #'
-#' @param out.deg Numeric vector, the sequence of degrees (for undirected
-#'   graphs) or out-degrees (for directed graphs). For undirected graphs its sum
-#'   should be even. For directed graphs its sum should be the same as the sum of
-#'   `in.deg`.
-#' @param in.deg For directed graph, the in-degree sequence. By default this is
-#'   `NULL` and an undirected graph is created.
+#' @param out.deg Numeric vector, the sequence of degrees (for undirected graphs) or out-degrees (for directed graphs).
+#'   For undirected graphs its sum should be even.
+#'   For directed graphs its sum should be the same as the sum of `in.deg`.
+#' @param in.deg For directed graph, the in-degree sequence.
+#'   By default this is `NULL` and an undirected graph is created.
 #' @param method Character, the method for generating the graph; see below.
 #' @inheritParams rlang::args_dots_empty
 #' @param allowed.edge.types Character, specifies the types of allowed edges.
 #'   \dQuote{simple} allows simple graphs only (no loops, no multiple edges).
 #'   \dQuote{multiple} allows multiple edges but disallows loop.
-#'   \dQuote{loops} allows loop edges but disallows multiple edges (currently
-#'   unimplemented). \dQuote{all} allows all types of edges. The default is
-#'   \dQuote{simple}.
+#'   \dQuote{loops} allows loop edges but disallows multiple edges (currently unimplemented).
+#'   \dQuote{all} allows all types of edges.
+#'   The default is \dQuote{simple}.
 #' @return The new graph object.
-#' @seealso [sample_degseq()] for a randomized variant that samples
-#' from graphs with the given degree sequence.
+#' @seealso [sample_degseq()] for a randomized variant that samples from graphs with the given degree sequence.
 #' @references V. Havel,
 #' Poznámka o existenci konečných grafů (A remark on the existence of finite graphs),
 #' Časopis pro pěstování matematiky 80, 477-480 (1955).
@@ -4008,24 +3900,20 @@ realize_degseq <- function(
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' Constructs a bipartite graph from the degree sequences of its partitions,
-#' if one exists. This function uses a Havel-Hakimi style construction
-#' algorithm.
+#' Constructs a bipartite graph from the degree sequences of its partitions, if one exists.
+#' This function uses a Havel-Hakimi style construction algorithm.
 #'
 #' @details
-#' The \sQuote{method} argument controls in which order the vertices are
-#' selected during the course of the algorithm.
+#' The \sQuote{method} argument controls in which order the vertices are selected during the course of the algorithm.
 #'
-#' The \dQuote{smallest} method selects the vertex with the smallest remaining
-#' degree, from either partition. The result is usually a graph with high
-#' negative degree assortativity. In the undirected case, this method is
-#' guaranteed to generate a connected graph, regardless of whether multi-edges
-#' are allowed, provided that a connected realization exists. This is the
-#' default method.
+#' The \dQuote{smallest} method selects the vertex with the smallest remaining degree, from either partition.
+#' The result is usually a graph with high negative degree assortativity.
+#' In the undirected case, this method is guaranteed to generate a connected graph, regardless of whether multi-edges are allowed,
+#' provided that a connected realization exists.
+#' This is the default method.
 #'
-#' The \dQuote{largest} method selects the vertex with the largest remaining
-#' degree. The result is usually a graph with high positive degree
-#' assortativity, and is often disconnected.
+#' The \dQuote{largest} method selects the vertex with the largest remaining degree.
+#' The result is usually a graph with high positive degree assortativity, and is often disconnected.
 #'
 #' The \dQuote{index} method selects the vertices in order of their index.
 #'

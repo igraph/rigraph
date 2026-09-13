@@ -14,15 +14,14 @@ similarity.dice(
 \arguments{
 \item{graph}{The input graph.}
 
-\item{vids}{The vertex IDs for which the similarity is calculated. The
-default \code{NULL} selects all vertices.}
+\item{vids}{The vertex IDs for which the similarity is calculated.
+The default \code{NULL} selects all vertices.}
 
 \item{mode}{The type of neighboring vertices to use for the calculation,
 possible values: \sQuote{\code{out}}, \sQuote{\verb{in}},
 \sQuote{\code{all}}.}
 
-\item{loops}{Whether to include vertices themselves in the neighbor
-sets.}
+\item{loops}{Whether to include vertices themselves in the neighbor sets.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

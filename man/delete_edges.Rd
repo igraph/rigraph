@@ -9,10 +9,9 @@ delete_edges(graph, edges)
 \arguments{
 \item{graph}{The input graph.}
 
-\item{edges}{The edges to remove, specified as an edge sequence. Typically
-this is either a numeric vector containing edge IDs, or a character vector
-containing the IDs or names of the source and target vertices, separated by
-\code{|}}
+\item{edges}{The edges to remove, specified as an edge sequence.
+Typically this is either a numeric vector containing edge IDs,
+or a character vector containing the IDs or names of the source and target vertices, separated by \code{|}}
 }
 \value{
 The graph, with the edges removed.

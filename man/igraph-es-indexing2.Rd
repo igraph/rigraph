@@ -17,14 +17,11 @@ Another edge sequence, with metadata printing turned on.
 See details below.
 }
 \description{
-The double bracket operator can be used on edge sequences, to print
-the meta-data (edge attributes) of the edges in the sequence.
+The double bracket operator can be used on edge sequences, to print the meta-data (edge attributes) of the edges in the sequence.
 }
 \details{
-Technically, when used with edge sequences, the double bracket
-operator does exactly the same as the single bracket operator,
-but the resulting edge sequence is printed differently: all
-attributes of the edges in the sequence are printed as well.
+Technically, when used with edge sequences, the double bracket operator does exactly the same as the single bracket operator,
+but the resulting edge sequence is printed differently: all attributes of the edges in the sequence are printed as well.
 
 See \code{\link{[.igraph.es}} for more about indexing edge sequences.
 }

@@ -23,52 +23,41 @@ The default \code{NULL} selects all vertices.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{mode}{Character string, defined the types of the paths used for
-measuring the distance in directed graphs. \dQuote{in} measures the paths
-\emph{to} a vertex, \dQuote{out} measures paths \emph{from} a vertex,
-\emph{all} uses undirected paths. This argument is ignored for undirected
-graphs.}
+\item{mode}{Character string, defined the types of the paths used for measuring the distance in directed graphs.
+\dQuote{in} measures the paths \emph{to} a vertex, \dQuote{out} measures paths \emph{from} a vertex, \emph{all} uses undirected paths.
+This argument is ignored for undirected graphs.}
 
-\item{weights}{Optional positive weight vector for calculating weighted
-closeness. If the graph has a \code{weight} edge attribute, then this is
-used by default. Weights are used for calculating weighted shortest
-paths, so they are interpreted as distances.}
+\item{weights}{Optional positive weight vector for calculating weighted closeness.
+If the graph has a \code{weight} edge attribute, then this is used by default.
+Weights are used for calculating weighted shortest paths, so they are interpreted as distances.}
 
-\item{normalized}{Logical, whether to calculate the normalized
-closeness, i.e. the inverse average distance to all reachable vertices.
-The non-normalized closeness is the inverse of the sum of distances to
-all reachable vertices.}
+\item{normalized}{Logical, whether to calculate the normalized closeness, i.e. the inverse average distance to all reachable vertices.
+The non-normalized closeness is the inverse of the sum of distances to all reachable vertices.}
 
-\item{cutoff}{The maximum path length to consider when calculating the
-closeness. If zero or negative then there is no such limit.}
+\item{cutoff}{The maximum path length to consider when calculating the closeness.
+If zero or negative then there is no such limit.}
 }
 \value{
-Numeric vector with the closeness values of all the vertices in
-\code{v}.
+Numeric vector with the closeness values of all the vertices in \code{v}.
 }
 \description{
-Closeness centrality measures how many steps are required to access every other
-vertex from a given vertex.
+Closeness centrality measures how many steps are required to access every other vertex from a given vertex.
 }
 \details{
-The closeness centrality of a vertex is defined as the inverse of the
-sum of distances to all the other vertices in the graph:
+The closeness centrality of a vertex is defined as the inverse of the sum of distances to all the other vertices in the graph:
 
 \deqn{\frac{1}{\sum_{i\ne v} d_{vi}}}{1/sum( d(v,i), i != v)}
 
-If there is no (directed) path between vertex \code{v} and \code{i}, then
-\code{i} is omitted from the calculation. If no other vertices are reachable
-from \code{v}, then its closeness is returned as NaN.
+If there is no (directed) path between vertex \code{v} and \code{i}, then \code{i} is omitted from the calculation.
+If no other vertices are reachable from \code{v}, then its closeness is returned as NaN.
 
-\code{cutoff} or smaller. This can be run for larger graphs, as the running
-time is not quadratic (if \code{cutoff} is small). If \code{cutoff} is
-negative (which is the default), then the function calculates the exact
-closeness scores. Since igraph 1.6.0, a \code{cutoff} value of zero is treated
-literally, i.e. path with a length greater than zero are ignored.
+\code{cutoff} or smaller.
+This can be run for larger graphs, as the running time is not quadratic (if \code{cutoff} is small).
+If \code{cutoff} is negative (which is the default), then the function calculates the exact closeness scores.
+Since igraph 1.6.0, a \code{cutoff} value of zero is treated literally, i.e. path with a length greater than zero are ignored.
 
-Closeness centrality is meaningful only for connected graphs. In disconnected
-graphs, consider using the harmonic centrality with
-\code{\link[=harmonic_centrality]{harmonic_centrality()}}
+Closeness centrality is meaningful only for connected graphs.
+In disconnected graphs, consider using the harmonic centrality with \code{\link[=harmonic_centrality]{harmonic_centrality()}}
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_closeness_cutoff}{\code{closeness_cutoff()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

@@ -12,13 +12,12 @@ graph_id(x, ...)
 \item{...}{Not used currently.}
 }
 \value{
-The ID of the graph, a character scalar. For
-vertex and edge sequences the ID of the graph they were created from.
+The ID of the graph, a character scalar.
+For vertex and edge sequences the ID of the graph they were created from.
 }
 \description{
-Graph IDs are used to check that a vertex or edge sequence
-belongs to a graph. If you create a new graph by changing the
-structure of a graph, the new graph will have a new ID.
+Graph IDs are used to check that a vertex or edge sequence belongs to a graph.
+If you create a new graph by changing the structure of a graph, the new graph will have a new ID.
 Changing the attributes will not change the ID.
 }
 \examples{

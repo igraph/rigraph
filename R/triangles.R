@@ -3,8 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `adjacent.triangles()` was renamed to [count_triangles()] to create a more
-#' consistent API.
+#' `adjacent.triangles()` was renamed to [count_triangles()] to create a more consistent API.
 #' @inheritParams count_triangles
 #' @keywords internal
 #' @export
@@ -43,26 +42,23 @@ adjacent.triangles <- function(graph, vids = V(graph)) {
 
 #' Find triangles in graphs
 #'
-#' Count how many triangles a vertex is part of, in a graph, or just list the
-#' triangles of a graph.
+#' Count how many triangles a vertex is part of, in a graph, or just list the triangles of a graph.
 #'
-#' `triangles()` lists all triangles of a graph. For efficiency, all
-#' triangles are returned in a single vector. The first three vertices belong
-#' to the first triangle, etc.
+#' `triangles()` lists all triangles of a graph.
+#' For efficiency, all triangles are returned in a single vector.
+#' The first three vertices belong to the first triangle, etc.
 #'
 #' `count_triangles()` counts how many triangles a vertex is part of.
 #'
 #' @aliases triangles
-#' @param graph The input graph. It might be directed, but edge directions are
-#'   ignored.
-#' @param vids The vertices to query. This might be a vector of numeric IDs,
-#'   or a character vector of symbolic vertex names for named graphs. The
-#'   default `NULL` selects all vertices.
-#' @return For `triangles()` a numeric vector of vertex IDs, the first three
-#'   vertices belong to the first triangle found, etc.
+#' @param graph The input graph.
+#'   It might be directed, but edge directions are ignored.
+#' @param vids The vertices to query.
+#'   This might be a vector of numeric IDs, or a character vector of symbolic vertex names for named graphs.
+#'   The default `NULL` selects all vertices.
+#' @return For `triangles()` a numeric vector of vertex IDs, the first three vertices belong to the first triangle found, etc.
 #'
-#'   For `count_triangles()` a numeric vector, the number of triangles for all
-#'   vertices queried.
+#'   For `count_triangles()` a numeric vector, the number of triangles for all vertices queried.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [transitivity()]
 #' @keywords graphs

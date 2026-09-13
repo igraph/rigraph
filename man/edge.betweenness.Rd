@@ -18,22 +18,19 @@ edge.betweenness(
 \item{e}{The edges for which the edge betweenness will be calculated.
 The default \code{NULL} selects all edges.}
 
-\item{directed}{Logical, whether directed paths should be considered while
-determining the shortest paths.}
+\item{directed}{Logical, whether directed paths should be considered while determining the shortest paths.}
 
-\item{weights}{Optional positive weight vector for calculating weighted
-betweenness. If the graph has a \code{weight} edge attribute, then this is
-used by default. Weights are used to calculate weighted shortest paths,
-so they are interpreted as distances.}
+\item{weights}{Optional positive weight vector for calculating weighted betweenness.
+If the graph has a \code{weight} edge attribute, then this is used by default.
+Weights are used to calculate weighted shortest paths, so they are interpreted as distances.}
 
-\item{cutoff}{The maximum shortest path length to consider when calculating
-betweenness. If negative, then there is no such limit.}
+\item{cutoff}{The maximum shortest path length to consider when calculating betweenness.
+If negative, then there is no such limit.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{edge.betweenness()} was renamed to \code{\link[=edge_betweenness]{edge_betweenness()}} to create a more
-consistent API.
+\code{edge.betweenness()} was renamed to \code{\link[=edge_betweenness]{edge_betweenness()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_edge_betweenness_cutoff}{\code{edge_betweenness_cutoff()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

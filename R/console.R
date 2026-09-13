@@ -4,8 +4,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `igraph.console()` was renamed to [console()] to create a more
-#' consistent API.
+#' `igraph.console()` was renamed to [console()] to create a more consistent API.
 #'
 #' @keywords internal
 #' @export
@@ -38,16 +37,13 @@ igraph.console <- function() {
 
 #' The igraph console
 #'
-#' The igraph console is a GUI window that shows what the currently running
-#' igraph function is doing.
+#' The igraph console is a GUI window that shows what the currently running igraph function is doing.
 #'
 #' The console can be started by calling the `console()` function.
 #' Then it stays open, until the user closes it.
 #'
-#' Another way to start it to set the `verbose` igraph option to
-#' \dQuote{tkconsole} via `igraph_options()`. Then the console (re)opens
-#' each time an igraph function supporting it starts; to close it, set the
-#' `verbose` option to another value.
+#' Another way to start it to set the `verbose` igraph option to \dQuote{tkconsole} via `igraph_options()`.
+#' Then the console (re)opens each time an igraph function supporting it starts; to close it, set the `verbose` option to another value.
 #'
 #' The console is written in Tcl/Tk and required the `tcltk` package.
 #'

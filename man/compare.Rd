@@ -13,22 +13,18 @@ compare(
 )
 }
 \arguments{
-\item{comm1}{A \code{\link[=communities]{communities()}} object containing a community
-structure; or a numeric vector, the membership vector of the first community
-structure. The membership vector should contain the community ID of each
-vertex, the numbering of the communities starts with one.}
+\item{comm1}{A \code{\link[=communities]{communities()}} object containing a community structure; or a numeric vector,
+the membership vector of the first community structure.
+The membership vector should contain the community ID of each vertex, the numbering of the communities starts with one.}
 
-\item{comm2}{A \code{\link[=communities]{communities()}} object containing a community
-structure; or a numeric vector, the membership vector of the second
-community structure, in the same format as for the previous argument.}
+\item{comm2}{A \code{\link[=communities]{communities()}} object containing a community structure; or a numeric vector,
+the membership vector of the second community structure, in the same format as for the previous argument.}
 
-\item{method}{Character scalar, the comparison method to use. Possible
-values: \sQuote{vi} is the variation of information (VI) metric of Meila
-(2003), \sQuote{nmi} is the normalized mutual information measure proposed
-by Danon et al. (2005), \sQuote{split.join} is the split-join distance of
-can Dongen (2000), \sQuote{rand} is the Rand index of Rand (1971),
-\sQuote{adjusted.rand} is the adjusted Rand index by Hubert and Arabie
-(1985).}
+\item{method}{Character scalar, the comparison method to use.
+Possible values: \sQuote{vi} is the variation of information (VI) metric of Meila (2003),
+\sQuote{nmi} is the normalized mutual information measure proposed by Danon et al. (2005),
+\sQuote{split.join} is the split-join distance of can Dongen (2000), \sQuote{rand} is the Rand index of Rand (1971),
+\sQuote{adjusted.rand} is the adjusted Rand index by Hubert and Arabie (1985).}
 }
 \value{
 A real number.

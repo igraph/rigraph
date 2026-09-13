@@ -3,8 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `get.shortest.paths()` was renamed to [shortest_paths()] to create a more
-#' consistent API.
+#' `get.shortest.paths()` was renamed to [shortest_paths()] to create a more consistent API.
 #' @inheritParams shortest_paths
 #' @keywords internal
 #' @export
@@ -39,8 +38,7 @@ get.shortest.paths <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `get.all.shortest.paths()` was renamed to [all_shortest_paths()] to create a more
-#' consistent API.
+#' `get.all.shortest.paths()` was renamed to [all_shortest_paths()] to create a more consistent API.
 #' @inheritParams all_shortest_paths
 #' @keywords internal
 #' @export
@@ -71,8 +69,7 @@ get.all.shortest.paths <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `get.diameter()` was renamed to [get_diameter()] to create a more
-#' consistent API.
+#' `get.diameter()` was renamed to [get_diameter()] to create a more consistent API.
 #' @inheritParams get_diameter
 #' @keywords internal
 #' @export
@@ -97,8 +94,7 @@ get.diameter <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `unfold.tree()` was renamed to [unfold_tree()] to create a more
-#' consistent API.
+#' `unfold.tree()` was renamed to [unfold_tree()] to create a more consistent API.
 #' @inheritParams unfold_tree
 #' @keywords internal
 #' @export
@@ -113,8 +109,7 @@ unfold.tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `topological.sort()` was renamed to [topo_sort()] to create a more
-#' consistent API.
+#' `topological.sort()` was renamed to [topo_sort()] to create a more consistent API.
 #' @inheritParams topo_sort
 #' @keywords internal
 #' @export
@@ -129,8 +124,7 @@ topological.sort <- function(graph, mode = c("out", "all", "in")) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `shortest.paths()` was renamed to [distances()] to create a more
-#' consistent API.
+#' `shortest.paths()` was renamed to [distances()] to create a more consistent API.
 #' @inheritParams distances
 #' @keywords internal
 #' @export
@@ -167,8 +161,7 @@ shortest.paths <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `neighborhood.size()` was renamed to [ego_size()] to create a more
-#' consistent API.
+#' `neighborhood.size()` was renamed to [ego_size()] to create a more consistent API.
 #' @inheritParams ego_size
 #' @keywords internal
 #' @export
@@ -195,8 +188,7 @@ neighborhood.size <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `maximum.bipartite.matching()` was renamed to [max_bipartite_match()] to create a more
-#' consistent API.
+#' `maximum.bipartite.matching()` was renamed to [max_bipartite_match()] to create a more consistent API.
 #' @inheritParams max_bipartite_match
 #' @keywords internal
 #' @export
@@ -225,8 +217,7 @@ maximum.bipartite.matching <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.mutual()` was renamed to [which_mutual()] to create a more
-#' consistent API.
+#' `is.mutual()` was renamed to [which_mutual()] to create a more consistent API.
 #' @inheritParams which_mutual
 #' @keywords internal
 #' @export
@@ -241,8 +232,7 @@ is.mutual <- function(graph, eids = E(graph), loops = TRUE) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.multiple()` was renamed to [which_multiple()] to create a more
-#' consistent API.
+#' `is.multiple()` was renamed to [which_multiple()] to create a more consistent API.
 #' @inheritParams which_multiple
 #' @keywords internal
 #' @export
@@ -257,8 +247,7 @@ is.multiple <- function(graph, eids = E(graph)) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.maximal.matching()` was renamed to [is_max_matching()] to create a more
-#' consistent API.
+#' `is.maximal.matching()` was renamed to [is_max_matching()] to create a more consistent API.
 #' @inheritParams is_max_matching
 #' @keywords internal
 #' @export
@@ -277,8 +266,7 @@ is.maximal.matching <- function(graph, matching, types = NULL) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.matching()` was renamed to [is_matching()] to create a more
-#' consistent API.
+#' `is.matching()` was renamed to [is_matching()] to create a more consistent API.
 #' @inheritParams is_matching
 #' @keywords internal
 #' @export
@@ -293,8 +281,7 @@ is.matching <- function(graph, matching, types = NULL) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.loop()` was renamed to [which_loop()] to create a more
-#' consistent API.
+#' `is.loop()` was renamed to [which_loop()] to create a more consistent API.
 #' @inheritParams which_loop
 #' @keywords internal
 #' @export
@@ -309,8 +296,7 @@ is.loop <- function(graph, eids = E(graph)) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.connected()` was renamed to [is_connected()] to create a more
-#' consistent API.
+#' `is.connected()` was renamed to [is_connected()] to create a more consistent API.
 #' @inheritParams is_connected
 #' @keywords internal
 #' @export
@@ -325,8 +311,7 @@ is.connected <- function(graph, mode = c("weak", "strong")) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `induced.subgraph()` was renamed to [induced_subgraph()] to create a more
-#' consistent API.
+#' `induced.subgraph()` was renamed to [induced_subgraph()] to create a more consistent API.
 #' @inheritParams induced_subgraph
 #' @keywords internal
 #' @export
@@ -345,8 +330,7 @@ induced.subgraph <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `has.multiple()` was renamed to [any_multiple()] to create a more
-#' consistent API.
+#' `has.multiple()` was renamed to [any_multiple()] to create a more consistent API.
 #' @inheritParams any_multiple
 #' @keywords internal
 #' @export
@@ -361,8 +345,7 @@ has.multiple <- function(graph) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.neighborhood()` was renamed to [make_ego_graph()] to create a more
-#' consistent API.
+#' `graph.neighborhood()` was renamed to [make_ego_graph()] to create a more consistent API.
 #' @inheritParams make_ego_graph
 #' @keywords internal
 #' @export
@@ -389,8 +372,7 @@ graph.neighborhood <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.laplacian()` was renamed to [laplacian_matrix()] to create a more
-#' consistent API.
+#' `graph.laplacian()` was renamed to [laplacian_matrix()] to create a more consistent API.
 #' @inheritParams laplacian_matrix
 #' @keywords internal
 #' @export
@@ -415,8 +397,7 @@ graph.laplacian <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.knn()` was renamed to [knn()] to create a more
-#' consistent API.
+#' `graph.knn()` was renamed to [knn()] to create a more consistent API.
 #' @inheritParams knn
 #' @keywords internal
 #' @export
@@ -443,8 +424,7 @@ graph.knn <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.dfs()` was renamed to [dfs()] to create a more
-#' consistent API.
+#' `graph.dfs()` was renamed to [dfs()] to create a more consistent API.
 #' @param father Logical, whether to return the father of the vertices.
 #' @inheritParams dfs
 #' @keywords internal
@@ -488,8 +468,7 @@ graph.dfs <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.density()` was renamed to [edge_density()] to create a more
-#' consistent API.
+#' `graph.density()` was renamed to [edge_density()] to create a more consistent API.
 #' @inheritParams edge_density
 #' @keywords internal
 #' @export
@@ -504,8 +483,7 @@ graph.density <- function(graph, loops = FALSE) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.coreness()` was renamed to [coreness()] to create a more
-#' consistent API.
+#' `graph.coreness()` was renamed to [coreness()] to create a more consistent API.
 #' @inheritParams coreness
 #' @keywords internal
 #' @export
@@ -520,8 +498,7 @@ graph.coreness <- function(graph, mode = c("all", "out", "in")) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.bfs()` was renamed to [bfs()] to create a more
-#' consistent API.
+#' `graph.bfs()` was renamed to [bfs()] to create a more consistent API.
 #' @inheritParams bfs
 #' @param father Logical, whether to return the father of the vertices.
 #' @keywords internal
@@ -569,8 +546,7 @@ graph.bfs <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `farthest.nodes()` was renamed to [farthest_vertices()] to create a more
-#' consistent API.
+#' `farthest.nodes()` was renamed to [farthest_vertices()] to create a more consistent API.
 #' @inheritParams farthest_vertices
 #' @keywords internal
 #' @export
@@ -595,8 +571,7 @@ farthest.nodes <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `degree.distribution()` was renamed to [degree_distribution()] to create a more
-#' consistent API.
+#' `degree.distribution()` was renamed to [degree_distribution()] to create a more consistent API.
 #' @inheritParams degree_distribution
 #' @keywords internal
 #' @export
@@ -615,8 +590,7 @@ degree.distribution <- function(graph, cumulative = FALSE, ...) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `count.multiple()` was renamed to [count_multiple()] to create a more
-#' consistent API.
+#' `count.multiple()` was renamed to [count_multiple()] to create a more consistent API.
 #' @inheritParams count_multiple
 #' @keywords internal
 #' @export
@@ -631,8 +605,7 @@ count.multiple <- function(graph, eids = E(graph)) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `clusters()` was renamed to [components()] to create a more
-#' consistent API.
+#' `clusters()` was renamed to [components()] to create a more consistent API.
 #' @inheritParams components
 #' @keywords internal
 #' @export
@@ -647,8 +620,7 @@ clusters <- function(graph, mode = c("weak", "strong")) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `average.path.length()` was renamed to [mean_distance()] to create a more
-#' consistent API.
+#' `average.path.length()` was renamed to [mean_distance()] to create a more consistent API.
 #' @inheritParams mean_distance
 #' @keywords internal
 #' @export
@@ -700,28 +672,22 @@ average.path.length <- function(
 #'
 #' The diameter is calculated by using a breadth-first search like method.
 #'
-#' `get_diameter()` returns a path with the actual diameter. If there are
-#' many shortest paths of the length of the diameter, then it returns the first
-#' one found.
+#' `get_diameter()` returns a path with the actual diameter.
+#' If there are many shortest paths of the length of the diameter, then it returns the first one found.
 #'
-#' `farthest_vertices()` returns two vertex IDs, the vertices which are
-#' connected by the diameter path.
+#' `farthest_vertices()` returns two vertex IDs, the vertices which are connected by the diameter path.
 #'
 #' @param graph The graph to analyze.
 #' @inheritParams rlang::args_dots_empty
-#' @param directed Logical, whether directed or undirected paths are to be
-#'   considered. This is ignored for undirected graphs.
-#' @param unconnected Logical, what to do if the graph is unconnected. If
-#'   FALSE, the function will return a number that is one larger the largest
-#'   possible diameter, which is always the number of vertices. If TRUE, the
-#'   diameters of the connected components will be calculated and the largest one
-#'   will be returned.
-#' @param weights Optional positive weight vector for calculating weighted
-#'   distances. If the graph has a `weight` edge attribute, then this is
-#'   used by default.
-#' @return A numeric constant for `diameter()`, a numeric vector for
-#'   `get_diameter()`. `farthest_vertices()` returns a list with two
-#'   entries:
+#' @param directed Logical, whether directed or undirected paths are to be considered.
+#'   This is ignored for undirected graphs.
+#' @param unconnected Logical, what to do if the graph is unconnected.
+#'   If FALSE, the function will return a number that is one larger the largest possible diameter, which is always the number of vertices.
+#'   If TRUE, the diameters of the connected components will be calculated and the largest one will be returned.
+#' @param weights Optional positive weight vector for calculating weighted distances.
+#'   If the graph has a `weight` edge attribute, then this is used by default.
+#' @return A numeric constant for `diameter()`, a numeric vector for `get_diameter()`.
+#'   `farthest_vertices()` returns a list with two entries:
 #'   \describe{
 #'     \item{`vertices`}{
 #'       The two vertices that are the farthest.
@@ -1037,31 +1003,27 @@ mean_distance <- function(
 
 #' Degree and degree distribution of the vertices
 #'
-#' The degree of a vertex is its most basic structural property, the number of
-#' its adjacent edges.
+#' The degree of a vertex is its most basic structural property, the number of its adjacent edges.
 #'
 #'
 #' @param graph The graph to analyze.
 #' @param v The IDs of vertices of which the degree will be calculated.
 #'   The default `NULL` selects all vertices.
-#' @param mode Character string, \dQuote{out} for out-degree, \dQuote{in} for
-#'   in-degree or \dQuote{total} for the sum of the two. For undirected graphs
-#'   this argument is ignored. \dQuote{all} is a synonym of \dQuote{total}.
+#' @param mode Character string, \dQuote{out} for out-degree, \dQuote{in} for in-degree or \dQuote{total} for the sum of the two.
+#'   For undirected graphs this argument is ignored.
+#'   \dQuote{all} is a synonym of \dQuote{total}.
 #' @param loops Logical; whether the loop edges are also counted.
-#' @param normalized Logical, whether to normalize the degree.  If
-#'   `TRUE` then the result is divided by \eqn{n-1}, where \eqn{n} is the
-#'   number of vertices in the graph.
+#' @param normalized Logical, whether to normalize the degree.
+#' If `TRUE` then the result is divided by \eqn{n-1},
+#'   where \eqn{n} is the number of vertices in the graph.
 #' @inheritParams rlang::args_dots_empty
-#' @return For `degree()` a numeric vector of the same length as argument
-#'   `v`.
+#' @return For `degree()` a numeric vector of the same length as argument `v`.
 #'
-#'   For `degree_distribution()` a numeric vector of the same length as the
-#'   maximum degree plus one. The first element is the relative frequency zero
-#'   degree vertices, the second vertices with degree one, etc.
+#'   For `degree_distribution()` a numeric vector of the same length as the maximum degree plus one.
+#'   The first element is the relative frequency zero degree vertices, the second vertices with degree one, etc.
 #'
-#'   For `max_degree()`, the largest degree in the graph. When no vertices are
-#'   selected, or when the input is the null graph, zero is returned as this
-#'   is the smallest possible degree.
+#'   For `max_degree()`, the largest degree in the graph.
+#'   When no vertices are selected, or when the input is the null graph, zero is returned as this is the smallest possible degree.
 #'
 #'   For `mean_degree()`, the average degree in the graph as a single number.
 #'   For graphs with no vertices, `NaN` is returned.
@@ -1220,8 +1182,7 @@ mean_degree <- function(
 }
 
 #' @rdname degree
-#' @param cumulative Logical; whether the cumulative degree distribution is to
-#'   be calculated.
+#' @param cumulative Logical; whether the cumulative degree distribution is to be calculated.
 #' @export
 #' @importFrom graphics hist
 degree_distribution <- function(graph, cumulative = FALSE, ...) {
@@ -1240,121 +1201,93 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 
 #' Shortest (directed or undirected) paths between vertices
 #'
-#' `distances()` calculates the length of all the shortest paths from
-#' or to the vertices in the network. `shortest_paths()` calculates one
-#' shortest path (the path itself, and not just its length) from or to the
-#' given vertex.
+#' `distances()` calculates the length of all the shortest paths from or to the vertices in the network.
+#' `shortest_paths()` calculates one shortest path (the path itself, and not just its length) from or to the given vertex.
 #'
-#' The shortest path, or geodesic between two pair of vertices is a path with
-#' the minimal number of vertices. The functions documented in this manual page
-#' all calculate shortest paths between vertex pairs.
+#' The shortest path, or geodesic between two pair of vertices is a path with the minimal number of vertices.
+#' The functions documented in this manual page all calculate shortest paths between vertex pairs.
 #'
-#' `distances()` calculates the lengths of pairwise shortest paths from
-#' a set of vertices (`from`) to another set of vertices (`to`). It
-#' uses different algorithms, depending on the `algorithm` argument and
-#' the `weight` edge attribute of the graph. The implemented algorithms
-#' are breadth-first search (\sQuote{`unweighted`}), this only works for
-#' unweighted graphs; the Dijkstra algorithm (\sQuote{`dijkstra`}), this
-#' works for graphs with non-negative edge weights; the Bellman-Ford algorithm
-#' (\sQuote{`bellman-ford`}); Johnson's algorithm
-#' (\sQuote{`johnson`}); and a faster version of the Floyd-Warshall algorithm
-#' with expected quadratic running time (\sQuote{`floyd-warshall`}). The latter
-#' three algorithms work with arbitrary
-#' edge weights, but (naturally) only for graphs that don't have a negative
-#' cycle. Note that a negative-weight edge in an undirected graph implies
-#' such a cycle. Johnson's algorithm performs better than the Bellman-Ford
-#' one when many source (and target) vertices are given, with all-pairs
-#' shortest path length calculations being the typical use case.
+#' `distances()` calculates the lengths of pairwise shortest paths from a set of vertices (`from`) to another set of vertices (`to`).
+#' It uses different algorithms, depending on the `algorithm` argument and the `weight` edge attribute of the graph.
+#' The implemented algorithms are breadth-first search (\sQuote{`unweighted`}), this only works for unweighted graphs;
+#' the Dijkstra algorithm (\sQuote{`dijkstra`}), this works for graphs with non-negative edge weights;
+#' the Bellman-Ford algorithm (\sQuote{`bellman-ford`}); Johnson's algorithm (\sQuote{`johnson`});
+#' and a faster version of the Floyd-Warshall algorithm with expected quadratic running time (\sQuote{`floyd-warshall`}).
+#' The latter three algorithms work with arbitrary edge weights, but (naturally) only for graphs that don't have a negative cycle.
+#' Note that a negative-weight edge in an undirected graph implies such a cycle.
+#' Johnson's algorithm performs better than the Bellman-Ford one when many source (and target) vertices are given,
+#' with all-pairs shortest path length calculations being the typical use case.
 #'
-#' igraph can choose automatically between algorithms, and chooses the most
-#' efficient one that is appropriate for the supplied weights (if any). For
-#' automatic algorithm selection, supply \sQuote{`automatic`} as the
-#' `algorithm` argument. (This is also the default.)
+#' igraph can choose automatically between algorithms,
+#' and chooses the most efficient one that is appropriate for the supplied weights (if any).
+#' For automatic algorithm selection, supply \sQuote{`automatic`} as the `algorithm` argument.
+#' (This is also the default.)
 #'
-#' `shortest_paths()` calculates a single shortest path (i.e. the path
-#' itself, not just its length) between the source vertex given in `from`,
-#' to the target vertices given in `to`. `shortest_paths()` uses
-#' breadth-first search for unweighted graphs and Dijkstra's algorithm for
-#' weighted graphs. The latter only works if the edge weights are non-negative.
+#' `shortest_paths()` calculates a single shortest path (i.e. the path itself, not just its length) between the source vertex given in `from`,
+#' to the target vertices given in `to`.
+#' `shortest_paths()` uses breadth-first search for unweighted graphs and Dijkstra's algorithm for weighted graphs.
+#' The latter only works if the edge weights are non-negative.
 #'
-#' `all_shortest_paths()` calculates *all* shortest paths between
-#' pairs of vertices, including several shortest paths of the same length.
-#' More precisely, it computerd all shortest path starting at `from`, and
-#' ending at any vertex given in `to`. It uses a breadth-first search for
-#' unweighted graphs and Dijkstra's algorithm for weighted ones. The latter
-#' only supports non-negative edge weights. Caution: in multigraphs, the
-#' result size is exponentially large in the number of vertex pairs with
-#' multiple edges between them.
+#' `all_shortest_paths()` calculates *all* shortest paths between pairs of vertices, including several shortest paths of the same length.
+#' More precisely, it computerd all shortest path starting at `from`, and ending at any vertex given in `to`.
+#' It uses a breadth-first search for unweighted graphs and Dijkstra's algorithm for weighted ones.
+#' The latter only supports non-negative edge weights.
+#' Caution: in multigraphs, the result size is exponentially large in the number of vertex pairs with multiple edges between them.
 #'
-#' `mean_distance()` calculates the average path length in a graph, by
-#' calculating the shortest paths between all pairs of vertices (both ways for
-#' directed graphs). It uses a breadth-first search for unweighted graphs and
-#' Dijkstra's algorithm for weighted ones. The latter only supports non-negative
-#' edge weights.
+#' `mean_distance()` calculates the average path length in a graph,
+#' by calculating the shortest paths between all pairs of vertices (both ways for directed graphs).
+#' It uses a breadth-first search for unweighted graphs and Dijkstra's algorithm for weighted ones.
+#' The latter only supports non-negative edge weights.
 #'
-#' `distance_table()` calculates a histogram, by calculating the shortest
-#' path length between each pair of vertices. For directed graphs both
-#' directions are considered, so every pair of vertices appears twice in the
-#' histogram.
+#' `distance_table()` calculates a histogram, by calculating the shortest path length between each pair of vertices.
+#' For directed graphs both directions are considered, so every pair of vertices appears twice in the histogram.
 #'
 #' @param graph The graph to work on.
-#' @param v Numeric vector, the vertices from which the shortest paths will be
-#'   calculated. The default `NULL` selects all vertices.
-#' @param to Numeric vector, the vertices to which the shortest paths will be
-#'   calculated. The default `NULL` includes all vertices. Note that for
-#'   `distances()` every vertex must be included here at most once. (This
-#'   is not required for `shortest_paths()`.
+#' @param v Numeric vector, the vertices from which the shortest paths will be calculated.
+#'   The default `NULL` selects all vertices.
+#' @param to Numeric vector, the vertices to which the shortest paths will be calculated.
+#'   The default `NULL` includes all vertices.
+#'   Note that for `distances()` every vertex must be included here at most once.
+#'   (This is not required for `shortest_paths()`.
 #' @inheritParams rlang::args_dots_empty
-#' @param mode Character constant, gives whether the shortest paths to or from
-#'   the given vertices should be calculated for directed graphs. If `out`
-#'   then the shortest paths *from* the vertex, if `in` then *to*
-#'   it will be considered. If `all`, the default, then the graph is treated
-#'   as undirected, i.e. edge directions are not taken into account. This
-#'   argument is ignored for undirected graphs.
-#' @param weights Possibly a numeric vector giving edge weights. If this is
-#'   `NULL` and the graph has a `weight` edge attribute, then the
-#'   attribute is used. If this is `NA` then no weights are used (even if
-#'   the graph has a `weight` attribute). In a weighted graph, the length
-#'   of a path is the sum of the weights of its constituent edges.
-#' @param algorithm Which algorithm to use for the calculation. By default
-#'   igraph tries to select the fastest suitable algorithm. If there are no
-#'   weights, then an unweighted breadth-first search is used, otherwise if all
-#'   weights are positive, then Dijkstra's algorithm is used. If there are
-#'   negative weights and we do the calculation for more than 100 sources, then
-#'   Johnson's algorithm is used. Otherwise the Bellman-Ford algorithm is used.
-#'   You can override igraph's choice by explicitly giving this parameter. Note
-#'   that the igraph C core might still override your choice in obvious cases,
-#'   i.e. if there are no edge weights, then the unweighted algorithm will be
-#'   used, regardless of this argument.
+#' @param mode Character constant,
+#'   gives whether the shortest paths to or from the given vertices should be calculated for directed graphs.
+#'   If `out` then the shortest paths *from* the vertex, if `in` then *to* it will be considered.
+#'   If `all`, the default, then the graph is treated as undirected, i.e. edge directions are not taken into account.
+#'   This argument is ignored for undirected graphs.
+#' @param weights Possibly a numeric vector giving edge weights.
+#'   If this is `NULL` and the graph has a `weight` edge attribute, then the attribute is used.
+#'   If this is `NA` then no weights are used (even if the graph has a `weight` attribute).
+#'   In a weighted graph, the length of a path is the sum of the weights of its constituent edges.
+#' @param algorithm Which algorithm to use for the calculation.
+#'   By default igraph tries to select the fastest suitable algorithm.
+#'   If there are no weights, then an unweighted breadth-first search is used, otherwise if all weights are positive,
+#'   then Dijkstra's algorithm is used.
+#'   If there are negative weights and we do the calculation for more than 100 sources, then Johnson's algorithm is used.
+#'   Otherwise the Bellman-Ford algorithm is used.
+#'   You can override igraph's choice by explicitly giving this parameter.
+#'   Note that the igraph C core might still override your choice in obvious cases, i.e. if there are no edge weights,
+#'   then the unweighted algorithm will be used, regardless of this argument.
 #' @param details Whether to provide additional details in the result.
-#'   Functions accepting this argument (like `mean_distance()`) return
-#'   additional information like the number of disconnected vertex pairs in
-#'   the result when this parameter is set to `TRUE`.
-#' @param unconnected What to do if the graph is unconnected (not
-#'   strongly connected if directed paths are considered). If TRUE, only
-#'   the lengths of the existing paths are considered and averaged; if
-#'   FALSE, the length of the missing paths are considered as having infinite
-#'   length, making the mean distance infinite as well.
-#' @return For `distances()` a numeric matrix with `length(to)`
-#'   columns and `length(v)` rows. The shortest path length from a vertex to
-#'   itself is always zero. For unreachable vertices `Inf` is included.
+#'   Functions accepting this argument (like `mean_distance()`) return additional information like the number of disconnected vertex pairs in the result
+#'   when this parameter is set to `TRUE`.
+#' @param unconnected What to do if the graph is unconnected (not strongly connected if directed paths are considered).
+#'   If TRUE, only the lengths of the existing paths are considered and averaged; if FALSE,
+#'   the length of the missing paths are considered as having infinite length, making the mean distance infinite as well.
+#' @return For `distances()` a numeric matrix with `length(to)` columns and `length(v)` rows.
+#'   The shortest path length from a vertex to itself is always zero.
+#'   For unreachable vertices `Inf` is included.
 #'
 #'   For `shortest_paths()` a named list with four entries is returned:
 #'   \item{vpath}{This itself is a list, of length `length(to)`; list
-#'   element `i` contains the vertex IDs on the path from vertex `from`
-#'   to vertex `to[i]` (or the other way for directed graphs depending on
-#'   the `mode` argument). The vector also contains `from` and `i`
-#'   as the first and last elements. If `from` is the same as `i` then
-#'   it is only included once. If there is no path between two vertices then a
-#'   numeric vector of length zero is returned as the list element. If this
-#'   output is not requested in the `output` argument, then it will be
-#'   `NULL`.} \item{epath}{This is a list similar to `vpath`, but the
-#'   vectors of the list contain the edge IDs along the shortest paths, instead
-#'   of the vertex IDs. This entry is set to `NULL` if it is not requested
-#'   in the `output` argument.} \item{predecessors}{Numeric vector, the
-#'   predecessor of each vertex in the `to` argument, or `NULL` if it
-#'   was not requested.} \item{inbound_edges}{Numeric vector, the inbound edge
-#'   for each vertex, or `NULL`, if it was not requested.}
+#'   element `i` contains the vertex IDs on the path from vertex `from` to vertex `to[i]` (or the other way for directed graphs depending on the `mode` argument).
+#'   The vector also contains `from` and `i` as the first and last elements.
+#'   If `from` is the same as `i` then it is only included once.
+#'   If there is no path between two vertices then a numeric vector of length zero is returned as the list element.
+#'   If this output is not requested in the `output` argument, then it will be `NULL`.}
+#'   \item{epath}{This is a list similar to `vpath`, but the vectors of the list contain the edge IDs along the shortest paths, instead of the vertex IDs. This entry is set to `NULL` if it is not requested in the `output` argument.}
+#'   \item{predecessors}{Numeric vector, the predecessor of each vertex in the `to` argument, or `NULL` if it was not requested.}
+#'   \item{inbound_edges}{Numeric vector, the inbound edge for each vertex, or `NULL`, if it was not requested.}
 #'
 #'   For `all_shortest_paths()` a list is returned:
 #'   \describe{
@@ -1563,27 +1496,21 @@ distances <- function(
 }
 
 #' @rdname distances
-#' @param from Numeric constant, the vertex from or to the shortest paths will
-#'   be calculated. Note that right now this is not a vector of vertex IDs, but
-#'   only a single vertex.
+#' @param from Numeric constant, the vertex from or to the shortest paths will be calculated.
+#'   Note that right now this is not a vector of vertex IDs, but only a single vertex.
 #' @param output Character scalar, defines how to report the shortest paths.
-#'   \dQuote{vpath} means that the vertices along the paths are reported, this
-#'   form was used prior to igraph version 0.6. \dQuote{epath} means that the
-#'   edges along the paths are reported. \dQuote{both} means that both forms are
-#'   returned, in a named list with components \dQuote{vpath} and \dQuote{epath}.
-#' @param predecessors Logical, whether to return the predecessor vertex
-#'   for each vertex. The predecessor of vertex `i` in the tree is the
-#'   vertex from which vertex `i` was reached. The predecessor of the start
-#'   vertex (in the `from` argument) is itself by definition. If the
-#'   predecessor is zero, it means that the given vertex was not reached from the
-#'   source during the search. Note that the search terminates if all the
-#'   vertices in `to` are reached.
-#' @param inbound.edges Logical, whether to return the inbound edge for
-#'   each vertex. The inbound edge of vertex `i` in the tree is the edge via
-#'   which vertex `i` was reached. The start vertex and vertices that were
-#'   not reached during the search will have zero in the corresponding entry of
-#'   the vector. Note that the search terminates if all the vertices in `to`
-#'   are reached.
+#'   \dQuote{vpath} means that the vertices along the paths are reported,
+#'   this form was used prior to igraph version 0.6. \dQuote{epath} means that the edges along the paths are reported.
+#'   \dQuote{both} means that both forms are returned, in a named list with components \dQuote{vpath} and \dQuote{epath}.
+#' @param predecessors Logical, whether to return the predecessor vertex for each vertex.
+#'   The predecessor of vertex `i` in the tree is the vertex from which vertex `i` was reached.
+#'   The predecessor of the start vertex (in the `from` argument) is itself by definition.
+#'   If the predecessor is zero, it means that the given vertex was not reached from the source during the search.
+#'   Note that the search terminates if all the vertices in `to` are reached.
+#' @param inbound.edges Logical, whether to return the inbound edge for each vertex.
+#'   The inbound edge of vertex `i` in the tree is the edge via which vertex `i` was reached.
+#'   The start vertex and vertices that were not reached during the search will have zero in the corresponding entry of the vector.
+#'   Note that the search terminates if all the vertices in `to` are reached.
 #' @inheritParams rlang::args_dots_empty
 #' @export
 shortest_paths <- function(
@@ -1837,15 +1764,14 @@ all_shortest_paths <- function(
 
 #' Find the \eqn{k} shortest paths between two vertices
 #'
-#' Finds the \eqn{k} shortest paths between the given source and target
-#' vertex in order of increasing length. Currently this function uses
-#' Yen's algorithm.
+#' Finds the \eqn{k} shortest paths between the given source and target vertex in order of increasing length.
+#' Currently this function uses Yen's algorithm.
 #'
 #' @param graph The input graph.
 #' @param from The source vertex of the shortest paths.
 #' @param to The target vertex of the shortest paths.
-#' @param k The number of paths to find. They will be returned in order of
-#' increasing length.
+#' @param k The number of paths to find.
+#' They will be returned in order of increasing length.
 #' @inheritParams rlang::args_dots_empty
 #' @inheritParams shortest_paths
 #' @return A named list with two components is returned:
@@ -1887,21 +1813,20 @@ k_shortest_paths <- function(
 
 #' In- or out- component of a vertex
 #'
-#' Finds all vertices reachable from a given vertex, or the opposite: all
-#' vertices from which a given vertex is reachable via a directed path.
+#' Finds all vertices reachable from a given vertex, or the opposite:
+#' all vertices from which a given vertex is reachable via a directed path.
 #'
 #' A breadth-first search is conducted starting from vertex `v`.
 #'
 #' @param graph The graph to analyze.
 #' @param v The vertex to start the search from.
 #' @inheritParams rlang::args_dots_empty
-#' @param mode Character string, either \dQuote{in}, \dQuote{out} or
-#'   \dQuote{all}. If \dQuote{in} all vertices from which `v` is reachable
-#'   are listed. If \dQuote{out} all vertices reachable from `v` are
-#'   returned. If \dQuote{all} returns the union of these. It is ignored for
-#'   undirected graphs.
-#' @return Numeric vector, the IDs of the vertices in the same component as
-#'   `v`.
+#' @param mode Character string, either \dQuote{in}, \dQuote{out} or \dQuote{all}.
+#'   If \dQuote{in} all vertices from which `v` is reachable are listed.
+#'   If \dQuote{out} all vertices reachable from `v` are returned.
+#'   If \dQuote{all} returns the union of these.
+#'   It is ignored for undirected graphs.
+#' @return Numeric vector, the IDs of the vertices in the same component as `v`.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [components()]
 #' @family structural.properties
@@ -1976,21 +1901,18 @@ subcomponent <- function(
 
 #' Subgraph of a graph
 #'
-#' `subgraph()` creates a subgraph of a graph, containing only the specified
-#' vertices and all the edges among them.
+#' `subgraph()` creates a subgraph of a graph, containing only the specified vertices and all the edges among them.
 #'
-#' `induced_subgraph()` calculates the induced subgraph of a set of vertices
-#' in a graph. This means that exactly the specified vertices and all the edges
-#' between them will be kept in the result graph.
+#' `induced_subgraph()` calculates the induced subgraph of a set of vertices in a graph.
+#' This means that exactly the specified vertices and all the edges between them will be kept in the result graph.
 #'
-#' `subgraph_from_edges()` calculates the subgraph of a graph. For this function
-#' one can specify the vertices and edges to keep. This function will be
-#' renamed to `subgraph()` in the next major version of igraph.
+#' `subgraph_from_edges()` calculates the subgraph of a graph.
+#' For this function one can specify the vertices and edges to keep.
+#' This function will be renamed to `subgraph()` in the next major version of igraph.
 #'
-#' The `subgraph()` function currently does the same as `induced_subgraph()`
-#' (assuming \sQuote{`auto`} as the `impl` argument), but this behaviour
-#' is deprecated. In the next major version, `subgraph()` will overtake the
-#' functionality of `subgraph_from_edges()`.
+#' The `subgraph()` function currently does the same as `induced_subgraph()` (assuming \sQuote{`auto`} as the `impl` argument),
+#' but this behaviour is deprecated.
+#' In the next major version, `subgraph()` will overtake the functionality of `subgraph_from_edges()`.
 #'
 #' @aliases subgraph_from_edges
 #' @param graph The original graph.
@@ -2010,17 +1932,13 @@ subgraph <- function(graph, vids) {
 }
 
 #' @rdname subgraph
-#' @param vids Numeric vector, the vertices of the original graph which will
-#'   form the subgraph.
+#' @param vids Numeric vector, the vertices of the original graph which will form the subgraph.
 #' @inheritParams rlang::args_dots_empty
-#' @param impl Character scalar, to choose between two implementation of the
-#'   subgraph calculation. \sQuote{`copy_and_delete`} copies the graph
-#'   first, and then deletes the vertices and edges that are not included in the
-#'   result graph. \sQuote{`create_from_scratch`} searches for all vertices
-#'   and edges that must be kept and then uses them to create the graph from
-#'   scratch. \sQuote{`auto`} chooses between the two implementations
-#'   automatically, using heuristics based on the size of the original and the
-#'   result graph.
+#' @param impl Character scalar, to choose between two implementation of the subgraph calculation.
+#'   \sQuote{`copy_and_delete`} copies the graph first, and then deletes the vertices and edges that are not included in the result graph.
+#'   \sQuote{`create_from_scratch`} searches for all vertices and edges that must be kept and then uses them to create the graph from scratch.
+#'   \sQuote{`auto`} chooses between the two implementations automatically,
+#'   using heuristics based on the size of the original and the result graph.
 #' @export
 induced_subgraph <- function(
   graph,
@@ -2081,8 +1999,7 @@ induced_subgraph <- function(
 #' @rdname subgraph
 #' @param eids The edge IDs of the edges that will be kept in the result graph.
 #' @inheritParams rlang::args_dots_empty
-#' @param delete.vertices Logical, whether to remove vertices that do
-#'   not have any adjacent edges in `eids`.
+#' @param delete.vertices Logical, whether to remove vertices that do not have any adjacent edges in `eids`.
 #' @export
 subgraph_from_edges <- function(
   graph,
@@ -2146,8 +2063,7 @@ subgraph_from_edges <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `subgraph.edges()` was renamed to [subgraph_from_edges()] to create a more
-#' consistent API.
+#' `subgraph.edges()` was renamed to [subgraph_from_edges()] to create a more consistent API.
 #' @inheritParams subgraph_from_edges
 #' @keywords internal
 #' @export
@@ -2168,33 +2084,28 @@ subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
 
 #' Transitivity of a graph
 #'
-#' Transitivity measures the probability that the adjacent vertices of a vertex
-#' are connected. This is sometimes also called the clustering coefficient.
+#' Transitivity measures the probability that the adjacent vertices of a vertex are connected.
+#' This is sometimes also called the clustering coefficient.
 #'
-#' Note that there are essentially two classes of transitivity measures, one is
-#' a vertex-level, the other a graph level property.
+#' Note that there are essentially two classes of transitivity measures, one is a vertex-level, the other a graph level property.
 #'
-#' There are several generalizations of transitivity to weighted graphs, here
-#' we use the definition by A. Barrat, this is a local vertex-level quantity,
-#' its formula is
+#' There are several generalizations of transitivity to weighted graphs, here we use the definition by A. Barrat,
+#' this is a local vertex-level quantity, its formula is
 #'
 #' \deqn{C_i^w=\frac{1}{s_i(k_i-1)}\sum_{j,h}\frac{w_{ij}+w_{ih}}{2}a_{ij}a_{ih}a_{jh}}{
 #' weighted C_i = 1/s_i 1/(k_i-1) sum( (w_ij+w_ih)/2 a_ij a_ih a_jh, j, h)}
 #'
-#' \eqn{s_i}{s_i} is the strength of vertex \eqn{i}{i}, see
-#' [strength()], \eqn{a_{ij}}{a_ij} are elements of the
-#' adjacency matrix, \eqn{k_i}{k_i} is the vertex degree, \eqn{w_{ij}}{w_ij}
-#' are the weights.
+#' \eqn{s_i}{s_i} is the strength of vertex \eqn{i}{i}, see [strength()], \eqn{a_{ij}}{a_ij} are elements of the adjacency matrix,
+#' \eqn{k_i}{k_i} is the vertex degree, \eqn{w_{ij}}{w_ij} are the weights.
 #'
-#' This formula gives back the normal not-weighted local transitivity if all
-#' the edge weights are the same.
+#' This formula gives back the normal not-weighted local transitivity if all the edge weights are the same.
 #'
-#' The `barrat` type of transitivity does not work for graphs with
-#' multiple and/or loop edges. If you want to calculate it for a directed
-#' graph, call [as_undirected()] with the `collapse` mode first.
+#' The `barrat` type of transitivity does not work for graphs with multiple and/or loop edges.
+#' If you want to calculate it for a directed graph, call [as_undirected()] with the `collapse` mode first.
 #'
 #' @param graph The graph to analyze.
-#' @param type The type of the transitivity to calculate. Possible values:
+#' @param type The type of the transitivity to calculate.
+#'   Possible values:
 #'   \describe{
 #'     \item{"global"}{
 #'       The global transitivity of an undirected graph.
@@ -2226,28 +2137,22 @@ subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
 #'   }
 #' @inheritParams rlang::args_dots_empty
 #' @param vids The vertex IDs for the local transitivity will be calculated.
-#'   This will be ignored for global transitivity types.  The default value is
-#'   `NULL`, in this case all vertices are considered. It is slightly faster
-#'   to supply `NULL` here than `V(graph)`.
-#' @param weights Optional weights for weighted transitivity. It is ignored for
-#'   other transitivity measures. If it is `NULL` (the default) and the
-#'   graph has a `weight` edge attribute, then it is used automatically.
-#' @param isolates Character scalar, for local versions of transitivity, it
-#'   defines how to treat vertices with degree zero and one.
-#'   If it is \sQuote{`NaN`} then their local transitivity is
-#'   reported as `NaN` and they are not included in the averaging, for the
-#'   transitivity types that calculate an average. If there are no vertices with
-#'   degree two or higher, then the averaging will still result `NaN`. If it
-#'   is \sQuote{`zero`}, then we report 0 transitivity for them, and they
-#'   are included in the averaging, if an average is calculated.
-#'   For the global transitivity, it controls how to handle graphs with
-#'   no connected triplets: `NaN` or zero will be returned according to
-#'   the respective setting.
-#' @return For \sQuote{`global`} a single number, or `NaN` if there
-#'   are no connected triples in the graph.
+#'   This will be ignored for global transitivity types.
+#'   The default value is `NULL`, in this case all vertices are considered.
+#'   It is slightly faster to supply `NULL` here than `V(graph)`.
+#' @param weights Optional weights for weighted transitivity.
+#'   It is ignored for other transitivity measures.
+#'   If it is `NULL` (the default) and the graph has a `weight` edge attribute, then it is used automatically.
+#' @param isolates Character scalar, for local versions of transitivity, it defines how to treat vertices with degree zero and one.
+#'   If it is \sQuote{`NaN`} then their local transitivity is reported as `NaN` and they are not included in the averaging,
+#'   for the transitivity types that calculate an average.
+#'   If there are no vertices with degree two or higher, then the averaging will still result `NaN`.
+#'   If it is \sQuote{`zero`}, then we report 0 transitivity for them, and they are included in the averaging, if an average is calculated.
+#'   For the global transitivity, it controls how to handle graphs with no connected triplets:
+#'   `NaN` or zero will be returned according to the respective setting.
+#' @return For \sQuote{`global`} a single number, or `NaN` if there are no connected triples in the graph.
 #'
-#'   For \sQuote{`local`} a vector of transitivity scores, one for each
-#'   vertex in \sQuote{`vids`}.
+#'   For \sQuote{`local`} a vector of transitivity scores, one for each vertex in \sQuote{`vids`}.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Wasserman, S., and Faust, K. (1994). *Social Network
 #' Analysis: Methods and Applications.* Cambridge: Cambridge University Press.
@@ -2444,33 +2349,30 @@ transitivity <- function(
 
 #' Burt's constraint
 #'
-#' Given a graph, `constraint()` calculates Burt's constraint for each
-#' vertex.
+#' Given a graph, `constraint()` calculates Burt's constraint for each vertex.
 #'
-#' Burt's constraint is higher if ego has less, or mutually
-#' stronger related (i.e. more redundant) contacts. Burt's measure of
-#' constraint, \eqn{C_i}{C[i]}, of vertex \eqn{i}'s ego network
-#' \eqn{V_i}{V[i]}, is defined for directed and valued graphs,
+#' Burt's constraint is higher if ego has less, or mutually stronger related (i.e. more redundant) contacts.
+#' Burt's measure of constraint, \eqn{C_i}{C[i]}, of vertex \eqn{i}'s ego network \eqn{V_i}{V[i]},
+#' is defined for directed and valued graphs,
 #' \deqn{C_i=\sum_{j \in V_i \setminus \{i\}} (p_{ij}+\sum_{q \in V_i
 #'     \setminus \{i,j\}} p_{iq} p_{qj})^2}{
 #'   C[i] = sum( [sum( p[i,j] + p[i,q] p[q,j], q in V[i], q != i,j )]^2, j in
 #'   V[i], j != i).
 #' }
-#' for a graph of order (i.e. number of vertices) \eqn{N}, where
-#' proportional tie strengths are defined as
+#' for a graph of order (i.e. number of vertices) \eqn{N}, where proportional tie strengths are defined as
 #' \deqn{p_{ij} = \frac{a_{ij}+a_{ji}}{\sum_{k \in V_i \setminus \{i\}}(a_{ik}+a_{ki})},}{
 #'   p[i,j]=(a[i,j]+a[j,i]) / sum(a[i,k]+a[k,i], k in V[i], k != i),
 #' }
-#' \eqn{a_{ij}}{a[i,j]} are elements of \eqn{A} and the latter being the
-#' graph adjacency matrix. For isolated vertices, constraint is undefined.
+#' \eqn{a_{ij}}{a[i,j]} are elements of \eqn{A} and the latter being the graph adjacency matrix.
+#' For isolated vertices, constraint is undefined.
 #'
 #' @param graph A graph object, the input graph.
 #' @param nodes The vertices for which the constraint will be calculated.
 #'   The default `NULL` selects all vertices.
 #' @inheritParams rlang::args_dots_empty
-#' @param weights The weights of the edges. If this is `NULL` and there is
-#'   a `weight` edge attribute this is used. If there is no such edge
-#'   attribute all edges will have the same weight.
+#' @param weights The weights of the edges.
+#'   If this is `NULL` and there is a `weight` edge attribute this is used.
+#'   If there is no such edge attribute all edges will have the same weight.
 #' @return A numeric vector of constraint scores
 #' @author Jeroen Bruggeman
 #' (<https://sites.google.com/site/jebrug/jeroen-bruggeman-social-science>)
@@ -2554,20 +2456,18 @@ constraint <- function(
 #'
 #' Calculates the reciprocity of a directed graph.
 #'
-#' The measure of reciprocity defines the proportion of mutual connections, in
-#' a directed graph. It is most commonly defined as the probability that the
-#' opposite counterpart of a directed edge is also included in the graph. Or in
-#' adjacency matrix notation:
+#' The measure of reciprocity defines the proportion of mutual connections, in a directed graph.
+#' It is most commonly defined as the probability that the opposite counterpart of a directed edge is also included in the graph.
+#' Or in adjacency matrix notation:
 #' \eqn{1 - \left(\sum_{i,j} |A_{ij} - A_{ji}|\right) / \left(2\sum_{i,j} A_{ij}\right)}{1 - (sum_ij |A_ij - A_ji|) / (2 sum_ij A_ij)}.
 #' This measure is calculated if the `mode` argument is `default`.
 #'
-#' Prior to igraph version 0.6, another measure was implemented, defined as the
-#' probability of mutual connection between a vertex pair, if we know that
-#' there is a (possibly non-mutual) connection between them. In other words,
-#' (unordered) vertex pairs are classified into three groups: (1)
-#' not-connected, (2) non-reciprocally connected, (3) reciprocally connected.
-#' The result is the size of group (3), divided by the sum of group sizes
-#' (2)+(3). This measure is calculated if `mode` is `ratio`.
+#' Prior to igraph version 0.6, another measure was implemented, defined as the probability of mutual connection between a vertex pair,
+#' if we know that there is a (possibly non-mutual) connection between them.
+#' In other words, (unordered) vertex pairs are classified into three groups: (1) not-connected, (2) non-reciprocally connected,
+#' (3) reciprocally connected.
+#' The result is the size of group (3), divided by the sum of group sizes (2)+(3).
+#' This measure is calculated if `mode` is `ratio`.
 #'
 #' @param graph The graph object.
 #' @inheritParams rlang::args_dots_empty
@@ -2637,25 +2537,21 @@ reciprocity <- function(
 
 #' Graph density
 #'
-#' The density of a graph is the ratio of the actual number of edges and the
-#' largest possible number of edges in the graph, assuming that no multi-edges
-#' are present.
+#' The density of a graph is the ratio of the actual number of edges and the largest possible number of edges in the graph,
+#' assuming that no multi-edges are present.
 #'
-#' The concept of density is ill-defined for multigraphs. Note that this function
-#' does not check whether the graph has multi-edges and will return meaningless
-#' results for such graphs.
+#' The concept of density is ill-defined for multigraphs.
+#' Note that this function does not check whether the graph has multi-edges and will return meaningless results for such graphs.
 #'
 #' @param graph The input graph.
 #' @inheritParams rlang::args_dots_empty
 #' @param loops Logical, whether loop edges may exist in the graph.
-#'   This affects the calculation of the largest possible number of edges in the
-#'   graph. If this parameter is set to FALSE yet the graph contains self-loops,
-#'   the result will not be meaningful.
-#' @return A real constant. This function returns `NaN` (=0.0/0.0) for an
-#'   empty graph with zero vertices.
+#'   This affects the calculation of the largest possible number of edges in the graph.
+#'   If this parameter is set to FALSE yet the graph contains self-loops, the result will not be meaningful.
+#' @return A real constant.
+#'   This function returns `NaN` (=0.0/0.0) for an empty graph with zero vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [vcount()], [ecount()], [simplify()]
-#' to get rid of the multiple and/or loop edges.
+#' @seealso [vcount()], [ecount()], [simplify()] to get rid of the multiple and/or loop edges.
 #' @references Wasserman, S., and Faust, K.  (1994).  Social Network Analysis:
 #' Methods and Applications.  Cambridge: Cambridge University Press.
 #' @family structural.properties
@@ -2794,46 +2690,39 @@ neighborhood_size <- ego_size
 
 #' Neighborhood of graph vertices
 #'
-#' These functions find the vertices not farther than a given limit from
-#' another fixed vertex, these are called the neighborhood of the vertex.
-#' Note that `ego()` and `neighborhood()`,
-#' `ego_size()` and `neighborhood_size()`,
-#' `make_ego_graph()` and `make_neighborhood()_graph()`,
+#' These functions find the vertices not farther than a given limit from another fixed vertex,
+#' these are called the neighborhood of the vertex.
+#' Note that `ego()` and `neighborhood()`, `ego_size()` and `neighborhood_size()`, `make_ego_graph()` and `make_neighborhood()_graph()`,
 #' are synonyms (aliases).
 #'
-#' The neighborhood of a given order `r` of a vertex `v` includes all
-#' vertices which are closer to `v` than the order. I.e. order 0 is always
-#' `v` itself, order 1 is `v` plus its immediate neighbors, order 2
-#' is order 1 plus the immediate neighbors of the vertices in order 1, etc.
+#' The neighborhood of a given order `r` of a vertex `v` includes all vertices which are closer to `v` than the order.
+#' I.e. order 0 is always `v` itself, order 1 is `v` plus its immediate neighbors,
+#' order 2 is order 1 plus the immediate neighbors of the vertices in order 1, etc.
 #'
 #' `ego_size()`/`neighborhood_size()` (synonyms) returns the size of the neighborhoods of the given order,
 #' for each given vertex.
 #'
-#' `ego()`/`neighborhood()` (synonyms) returns the vertices belonging to the neighborhoods of the given
-#' order, for each given vertex.
+#' `ego()`/`neighborhood()` (synonyms) returns the vertices belonging to the neighborhoods of the given order, for each given vertex.
 #'
-#' `make_ego_graph()`/`make_neighborhood()_graph()` (synonyms) is creates (sub)graphs from all neighborhoods of
-#' the given vertices with the given order parameter. This function preserves
-#' the vertex, edge and graph attributes.
+#' `make_ego_graph()`/`make_neighborhood()_graph()` (synonyms) is creates (sub)graphs from all neighborhoods of the given vertices with the given order parameter.
+#' This function preserves the vertex, edge and graph attributes.
 #'
-#' `connect()` creates a new graph by connecting each vertex to
-#' all other vertices in its neighborhood.
+#' `connect()` creates a new graph by connecting each vertex to all other vertices in its neighborhood.
 #'
 #' @aliases neighborhood ego_graph
 #' @aliases connect ego_size ego
 #' @param graph The input graph.
-#' @param order Integer giving the order of the neighborhood. Negative values
-#'   indicate an infinite order.
+#' @param order Integer giving the order of the neighborhood.
+#'   Negative values indicate an infinite order.
 #' @param nodes The vertices for which the calculation is performed.
 #'   The default `NULL` selects all vertices.
 #' @inheritParams rlang::args_dots_empty
-#' @param mode Character constant, it specifies how to use the direction of
-#'   the edges if a directed graph is analyzed. For \sQuote{out} only the
-#'   outgoing edges are followed, so all vertices reachable from the source
-#'   vertex in at most `order` steps are counted. For \sQuote{"in"} all
-#'   vertices from which the source vertex is reachable in at most `order`
-#'   steps are counted. \sQuote{"all"} ignores the direction of the edges. This
-#'   argument is ignored for undirected graphs.
+#' @param mode Character constant, it specifies how to use the direction of the edges if a directed graph is analyzed.
+#'   For \sQuote{out} only the outgoing edges are followed,
+#'   so all vertices reachable from the source vertex in at most `order` steps are counted.
+#'   For \sQuote{"in"} all vertices from which the source vertex is reachable in at most `order` steps are counted.
+#'   \sQuote{"all"} ignores the direction of the edges.
+#'   This argument is ignored for undirected graphs.
 #' @param mindist The minimum distance to include the vertex in the result.
 #' @return
 #'   \itemize{
@@ -3033,24 +2922,21 @@ make_neighborhood_graph <- make_ego_graph
 
 #' K-core decomposition of graphs
 #'
-#' The k-core of graph is a maximal subgraph in which each vertex has at least
-#' degree k. The coreness of a vertex is k if it belongs to the k-core but not
-#' to the (k+1)-core.
+#' The k-core of graph is a maximal subgraph in which each vertex has at least degree k.
+#' The coreness of a vertex is k if it belongs to the k-core but not to the (k+1)-core.
 #'
-#' The k-core of a graph is the maximal subgraph in which every vertex has at
-#' least degree k. The cores of a graph form layers: the (k+1)-core is always a
-#' subgraph of the k-core.
+#' The k-core of a graph is the maximal subgraph in which every vertex has at least degree k.
+#' The cores of a graph form layers: the (k+1)-core is always a subgraph of the k-core.
 #'
 #' This function calculates the coreness for each vertex.
 #'
 #' @param graph The input graph, it can be directed or undirected
 #' @inheritParams rlang::args_dots_empty
-#' @param mode The type of the core in directed graphs. Character constant,
-#'   possible values: `in`: in-cores are computed, `out`: out-cores are
-#'   computed, `all`: the corresponding undirected graph is considered. This
-#'   argument is ignored for undirected graphs.
-#' @return Numeric vector of integer numbers giving the coreness of each
-#'   vertex.
+#' @param mode The type of the core in directed graphs.
+#'   Character constant, possible values: `in`: in-cores are computed, `out`: out-cores are computed, `all`:
+#'   the corresponding undirected graph is considered.
+#'   This argument is ignored for undirected graphs.
+#' @return Numeric vector of integer numbers giving the coreness of each vertex.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [degree()]
 #' @references Vladimir Batagelj, Matjaz Zaversnik: An O(m) Algorithm for Cores
@@ -3122,24 +3008,21 @@ coreness <- function(
 
 #' Topological sorting of vertices in a graph
 #'
-#' A topological sorting of a directed acyclic graph is a linear ordering of
-#' its nodes where each node comes before all nodes to which it has edges.
+#' A topological sorting of a directed acyclic graph is a linear ordering of its nodes
+#' where each node comes before all nodes to which it has edges.
 #'
-#' Every DAG has at least one topological sort, and may have many.  This
-#' function returns a possible topological sort among them. If the graph is not
-#' acyclic (it has at least one cycle), a partial topological sort is returned
-#' and a warning is issued.
+#' Every DAG has at least one topological sort, and may have many.
+#' This function returns a possible topological sort among them.
+#' If the graph is not acyclic (it has at least one cycle), a partial topological sort is returned and a warning is issued.
 #'
 #' @param graph The input graph, should be directed
 #' @inheritParams rlang::args_dots_empty
-#' @param mode Specifies how to use the direction of the edges.  For
-#'   \dQuote{`out`}, the sorting order ensures that each node comes before
-#'   all nodes to which it has edges, so nodes with no incoming edges go first.
-#'   For \dQuote{`in`}, it is quite the opposite: each node comes before all
-#'   nodes from which it receives edges. Nodes with no outgoing edges go first.
-#' @return A vertex sequence (by default, but see the `return.vs.es`
-#'   option of [igraph_options()]) containing vertices in
-#'   topologically sorted order.
+#' @param mode Specifies how to use the direction of the edges.
+#' For \dQuote{`out`},
+#'   the sorting order ensures that each node comes before all nodes to which it has edges, so nodes with no incoming edges go first.
+#'   For \dQuote{`in`}, it is quite the opposite: each node comes before all nodes from which it receives edges.
+#'   Nodes with no outgoing edges go first.
+#' @return A vertex sequence (by default, but see the `return.vs.es` option of [igraph_options()]) containing vertices in topologically sorted order.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the R interface
 #' @keywords graphs
@@ -3200,31 +3083,24 @@ topo_sort <- function(
 
 #' Finding a feedback arc set in a graph
 #'
-#' A feedback arc set of a graph is a subset of edges whose removal breaks all
-#' cycles in the graph.
+#' A feedback arc set of a graph is a subset of edges whose removal breaks all cycles in the graph.
 #'
-#' Feedback arc sets are typically used in directed graphs. The removal of a
-#' feedback arc set of a directed graph ensures that the remaining graph is a
-#' directed acyclic graph (DAG). For undirected graphs, the removal of a feedback
-#' arc set ensures that the remaining graph is a forest (i.e. every connected
-#' component is a tree).
+#' Feedback arc sets are typically used in directed graphs.
+#' The removal of a feedback arc set of a directed graph ensures that the remaining graph is a directed acyclic graph (DAG).
+#' For undirected graphs,
+#' the removal of a feedback arc set ensures that the remaining graph is a forest (i.e. every connected component is a tree).
 #'
 #' @param graph The input graph
 #' @inheritParams rlang::args_dots_empty
-#' @param weights Potential edge weights. If the graph has an edge
-#'   attribute called \sQuote{`weight`}, and this argument is
-#'   `NULL`, then the edge attribute is used automatically. The goal of
-#'   the feedback arc set problem is to find a feedback arc set with the smallest
-#'   total weight.
-#' @param algo Specifies the algorithm to use. \dQuote{`exact_ip`} solves
-#'   the feedback arc set problem with an exact integer programming algorithm that
-#'   guarantees that the total weight of the removed edges is as small as possible.
-#'   \dQuote{`approx_eades`} uses a fast (linear-time) approximation
-#'   algorithm from Eades, Lin and Smyth. \dQuote{`exact`} is an alias to
-#'   \dQuote{`exact_ip`} while \dQuote{`approx`} is an alias to
-#'   \dQuote{`approx_eades`}.
-#' @return An edge sequence (by default, but see the `return.vs.es` option
-#'   of [igraph_options()]) containing the feedback arc set.
+#' @param weights Potential edge weights.
+#'   If the graph has an edge attribute called \sQuote{`weight`}, and this argument is `NULL`,
+#'   then the edge attribute is used automatically.
+#'   The goal of the feedback arc set problem is to find a feedback arc set with the smallest total weight.
+#' @param algo Specifies the algorithm to use.
+#'   \dQuote{`exact_ip`} solves the feedback arc set problem with an exact integer programming algorithm that guarantees that the total weight of the removed edges is as small as possible.
+#'   \dQuote{`approx_eades`} uses a fast (linear-time) approximation algorithm from Eades, Lin and Smyth.
+#'   \dQuote{`exact`} is an alias to \dQuote{`exact_ip`} while \dQuote{`approx`} is an alias to \dQuote{`approx_eades`}.
+#' @return An edge sequence (by default, but see the `return.vs.es` option of [igraph_options()]) containing the feedback arc set.
 #' @references Peter Eades, Xuemin Lin and W.F.Smyth: A fast and effective
 #' heuristic for the feedback arc set problem. *Information Processing Letters*
 #' 47:6, pp. 319-323, 1993
@@ -3292,22 +3168,19 @@ feedback_arc_set <- function(
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' A feedback vertex set of a graph is a subset of vertices whose removal breaks
-#' all cycles in the graph. Finding a _minimum_ feedback vertex set is an
-#' NP-complete problem, both on directed and undirected graphs.
+#' A feedback vertex set of a graph is a subset of vertices whose removal breaks all cycles in the graph.
+#' Finding a _minimum_ feedback vertex set is an NP-complete problem, both on directed and undirected graphs.
 #'
 #' @param graph The input graph
 #' @inheritParams rlang::args_dots_empty
-#' @param weights Potential vertex weights. If the graph has a vertex
-#'   attribute called \sQuote{`weight`}, and this argument is
-#'   `NULL`, then the vertex attribute is used automatically. The goal of
-#'   the feedback vertex set problem is to find a feedback vertex set with
-#'   the smallest total weight.
-#' @param algo Specifies the algorithm to use. Currently, \dQuote{`exact_ip`},
-#'   which solves the feedback vertex set problem with an exact integer
-#'   programming approach, is the only option.
-#' @return A vertex sequence (by default, but see the `return.vs.es` option
-#'   of [igraph_options()]) containing the feedback vertex set.
+#' @param weights Potential vertex weights.
+#'   If the graph has a vertex attribute called \sQuote{`weight`}, and this argument is `NULL`,
+#'   then the vertex attribute is used automatically.
+#'   The goal of the feedback vertex set problem is to find a feedback vertex set with the smallest total weight.
+#' @param algo Specifies the algorithm to use.
+#'   Currently, \dQuote{`exact_ip`}, which solves the feedback vertex set problem with an exact integer programming approach,
+#'   is the only option.
+#' @return A vertex sequence (by default, but see the `return.vs.es` option of [igraph_options()]) containing the feedback vertex set.
 #' @keywords graphs
 #' @family structural.properties
 #' @family cycles
@@ -3370,17 +3243,16 @@ feedback_vertex_set <- function(
 #'
 #' The girth of a graph is the length of the shortest circle in it.
 #'
-#' The current implementation works for undirected graphs only, directed graphs
-#' are treated as undirected graphs. Loop edges and multiple edges are ignored.
+#' The current implementation works for undirected graphs only, directed graphs are treated as undirected graphs.
+#' Loop edges and multiple edges are ignored.
 #' If the graph is a forest (i.e. acyclic), then `Inf` is returned.
 #'
-#' This implementation is based on Alon Itai and Michael Rodeh: Finding a
-#' minimum circuit in a graph *Proceedings of the ninth annual ACM
-#' symposium on Theory of computing*, 1-10, 1977. The first implementation of
-#' this function was done by Keith Briggs, thanks Keith.
+#' This implementation is based on Alon Itai and Michael Rodeh:
+#' Finding a minimum circuit in a graph *Proceedings of the ninth annual ACM symposium on Theory of computing*,
+#' 1-10, 1977. The first implementation of this function was done by Keith Briggs, thanks Keith.
 #'
-#' @param graph The input graph. It may be directed, but the algorithm searches
-#'   for undirected circles anyway.
+#' @param graph The input graph.
+#'   It may be directed, but the algorithm searches for undirected circles anyway.
 #' @inheritParams rlang::args_dots_empty
 #' @param circle Logical, whether to return the shortest circle itself.
 #' @return A named list with two components:
@@ -3469,9 +3341,9 @@ girth <- function(
 
 #' Find the multiple or loop edges in a graph
 #'
-#' A loop edge is an edge from a vertex to itself. An edge is a multiple edge
-#' if it has exactly the same head and tail vertices as another edge. A graph
-#' without multiple and loop edges is called a simple graph.
+#' A loop edge is an edge from a vertex to itself.
+#' An edge is a multiple edge if it has exactly the same head and tail vertices as another edge.
+#' A graph without multiple and loop edges is called a simple graph.
 #'
 #' `any_loop()` decides whether the graph has any loop edges.
 #'
@@ -3481,23 +3353,20 @@ girth <- function(
 #'
 #' `any_multiple()` decides whether the graph has any multiple edges.
 #'
-#' `which_multiple()` decides whether the edges of the graph are multiple
-#' edges.
+#' `which_multiple()` decides whether the edges of the graph are multiple edges.
 #'
 #' `count_multiple()` counts the multiplicity of each edge of a graph.
 #'
-#' Note that the semantics for `which_multiple()` and `count_multiple()` is
-#' different. `which_multiple()` gives `TRUE` for all occurrences of a
-#' multiple edge except for one. I.e. if there are three `i-j` edges in the
-#' graph then `which_multiple()` returns `TRUE` for only two of them while
-#' `count_multiple()` returns \sQuote{3} for all three.
+#' Note that the semantics for `which_multiple()` and `count_multiple()` is different.
+#' `which_multiple()` gives `TRUE` for all occurrences of a multiple edge except for one.
+#' I.e. if there are three `i-j` edges in the graph then `which_multiple()` returns `TRUE` for only two of them
+#' while `count_multiple()` returns \sQuote{3} for all three.
 #'
-#' See the examples for getting rid of multiple edges while keeping their
-#' original multiplicity as an edge attribute.
+#' See the examples for getting rid of multiple edges while keeping their original multiplicity as an edge attribute.
 #'
 #' @param graph The input graph.
-#' @param eids The edges to which the query is restricted. The default
-#'   `NULL` selects all edges.
+#' @param eids The edges to which the query is restricted.
+#'   The default `NULL` selects all edges.
 #' @return `any_loop()` and `any_multiple()` return a Logical.
 #'   `which_loop()` and `which_multiple()` return a logical vector.
 #'   `count_loops()` returns a numeric scalar with the total number of loop edges.
@@ -3593,8 +3462,8 @@ count_loops <- function(graph) {
 
 #' Breadth-first search
 #'
-#' Breadth-first search is an algorithm to traverse a graph. We start from a
-#' root vertex and spread along every edge \dQuote{simultaneously}.
+#' Breadth-first search is an algorithm to traverse a graph.
+#' We start from a root vertex and spread along every edge \dQuote{simultaneously}.
 #'
 #'
 #' The callback function must have the following arguments:
@@ -3615,52 +3484,46 @@ count_loops <- function(graph) {
 #'     }
 #'   }
 #'
-#' The callback must return `FALSE`
-#' to continue the search or `TRUE` to terminate it. See examples below on how to
-#' use the callback function.
+#' The callback must return `FALSE` to continue the search or `TRUE` to terminate it.
+#' See examples below on how to use the callback function.
 #'
 #' @param graph The input graph.
-#' @param root Numeric vector, usually of length one. The root vertex, or root
-#'   vertices to start the search from. When several roots are given, they are
-#'   considered in the order they appear. If a root vertex was already reached
-#'   while searching from an earlier root, no separate search is started from
-#'   it, so it keeps the distance it was first found at rather than `0`.
+#' @param root Numeric vector, usually of length one.
+#'   The root vertex, or root vertices to start the search from.
+#'   When several roots are given, they are considered in the order they appear.
+#'   If a root vertex was already reached while searching from an earlier root, no separate search is started from it,
+#'   so it keeps the distance it was first found at rather than `0`.
 #' @param mode For directed graphs specifies the type of edges to follow.
-#'   \sQuote{out} follows outgoing, \sQuote{in} incoming edges. \sQuote{all}
-#'   ignores edge directions completely. \sQuote{total} is a synonym for
-#'   \sQuote{all}. This argument is ignored for undirected graphs.
-#' @param unreachable Logical, whether the search should visit the
-#'   vertices that are unreachable from the given root vertex (or vertices). If
-#'   `TRUE`, then additional searches are performed until all vertices are
-#'   visited.
-#' @param restricted `NULL` (=no restriction), or a vector of vertices
-#'   (IDs or symbolic names). In the latter case, the search is restricted to the
-#'   given vertices.
+#'   \sQuote{out} follows outgoing, \sQuote{in} incoming edges.
+#'   \sQuote{all} ignores edge directions completely.
+#'   \sQuote{total} is a synonym for \sQuote{all}.
+#'   This argument is ignored for undirected graphs.
+#' @param unreachable Logical, whether the search should visit the vertices that are unreachable from the given root vertex (or vertices).
+#'   If `TRUE`, then additional searches are performed until all vertices are visited.
+#' @param restricted `NULL` (=no restriction), or a vector of vertices (IDs or symbolic names).
+#'   In the latter case, the search is restricted to the given vertices.
 #' @param order Logical, whether to return the ordering of the vertices.
 #' @param rank Logical, whether to return the rank of the vertices.
 #' @param father `r lifecycle::badge("deprecated")` Use `parent` instead.
 #' @param parent Logical, whether to return the parent of the vertices.
-#' @param pred Logical, whether to return the predecessors of the
-#'   vertices.
-#' @param succ Logical, whether to return the successors of the
-#'   vertices.
-#' @param dist Logical, whether to return the distance from the root of
-#'   the search tree.
-#' @param callback Callback function. This is called whenever a vertex is visited.
-#'   The callback function should return `FALSE` to continue the search
-#'   or `TRUE` to stop it. See details below.
+#' @param pred Logical, whether to return the predecessors of the vertices.
+#' @param succ Logical, whether to return the successors of the vertices.
+#' @param dist Logical, whether to return the distance from the root of the search tree.
+#' @param callback Callback function.
+#'   This is called whenever a vertex is visited.
+#'   The callback function should return `FALSE` to continue the search or `TRUE` to stop it.
+#'   See details below.
 #'   Default: `NULL`.
 #' @param extra Additional argument to supply to the callback function.
 #' @param rho The environment in which the callback function is evaluated.
 #'   The default `NULL` uses the caller's environment.
-#' @param neimode `r lifecycle::badge("deprecated")` This argument is deprecated
-#'  from igraph 1.3.0; use `mode` instead.
+#' @param neimode `r lifecycle::badge("deprecated")` This argument is deprecated from igraph 1.3.0; use `mode` instead.
 #' @inheritParams rlang::args_dots_empty
 #' @return A named list with the following entries:
 #'   \describe{
 #'     \item{root}{
-#'       Numeric vector. The root vertex (or vertices) that was used as the
-#'       starting point of the search, as supplied in the `root` argument.
+#'       Numeric vector.
+#'       The root vertex (or vertices) that was used as the starting point of the search, as supplied in the `root` argument.
 #'     }
 #'     \item{neimode}{
 #'       Character scalar. The `mode` argument of the function call.
@@ -3698,9 +3561,8 @@ count_loops <- function(graph) {
 #'     }
 #'   }
 #'
-#'   Note that `order`, `rank`, `parent`, `pred`, `succ`
-#'   and `dist` might be `NULL` if their corresponding argument is
-#'   `FALSE`, i.e. if their calculation is not requested.
+#'   Note that `order`, `rank`, `parent`, `pred`, `succ` and `dist` might be `NULL` if their corresponding argument is `FALSE`,
+#'   i.e. if their calculation is not requested.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [dfs()] for depth-first search.
 #' @family structural.properties
@@ -3817,10 +3679,9 @@ bfs <- function(
     rho
   )
 
-  # The C implementation only returns the scalar `root` it was passed, which is
-  # always 0 (reported as 1) when multiple roots are supplied. Report all of the
-  # requested root vertices instead. See
-  # https://github.com/igraph/rigraph/issues/1639
+  # The C implementation only returns the scalar `root` it was passed, which is always 0 (reported as 1) when multiple roots are supplied.
+  # Report all of the requested root vertices instead.
+  # See https://github.com/igraph/rigraph/issues/1639
   res$root <- requested_roots
 
   # Remove in 1.4.0
@@ -3890,8 +3751,8 @@ bfs <- function(
 
 #' Depth-first search
 #'
-#' Depth-first search is an algorithm to traverse a graph. It starts from a
-#' root vertex and tries to go quickly as far from as possible.
+#' Depth-first search is an algorithm to traverse a graph.
+#' It starts from a root vertex and tries to go quickly as far from as possible.
 #'
 #' The callback functions must have the following arguments:
 #'   \describe{
@@ -3907,38 +3768,35 @@ bfs <- function(
 #'       The extra argument.
 #'     }
 #'   } The callback must return FALSE to continue the search or TRUE
-#' to terminate it. See examples below on how to use the callback functions.
+#' to terminate it.
+#' See examples below on how to use the callback functions.
 #'
 #' @param graph The input graph.
 #' @param root The single root vertex to start the search from.
 #' @param mode For directed graphs specifies the type of edges to follow.
-#'   \sQuote{out} follows outgoing, \sQuote{in} incoming edges. \sQuote{all}
-#'   ignores edge directions completely. \sQuote{total} is a synonym for
-#'   \sQuote{all}. This argument is ignored for undirected graphs.
-#' @param unreachable Logical, whether the search should visit the
-#'   vertices that are unreachable from the given root vertex (or vertices). If
-#'   `TRUE`, then additional searches are performed until all vertices are
-#'   visited.
-#' @param order Logical, whether to return the DFS ordering of the
-#'   vertices.
-#' @param order.out Logical, whether to return the ordering based on
-#'   leaving the subtree of the vertex.
+#'   \sQuote{out} follows outgoing, \sQuote{in} incoming edges.
+#'   \sQuote{all} ignores edge directions completely.
+#'   \sQuote{total} is a synonym for \sQuote{all}.
+#'   This argument is ignored for undirected graphs.
+#' @param unreachable Logical, whether the search should visit the vertices that are unreachable from the given root vertex (or vertices).
+#'   If `TRUE`, then additional searches are performed until all vertices are visited.
+#' @param order Logical, whether to return the DFS ordering of the vertices.
+#' @param order.out Logical, whether to return the ordering based on leaving the subtree of the vertex.
 #' @param father `r lifecycle::badge("deprecated")`, use `parent` instead.
 #' @param parent Logical, whether to return the parent of the vertices.
-#' @param dist Logical, whether to return the distance from the root of
-#'   the search tree.
+#' @param dist Logical, whether to return the distance from the root of the search tree.
 #' @param in.callback Callback function.
-#'   This is called whenever a vertex is visited. See details below.
+#'   This is called whenever a vertex is visited.
+#'   See details below.
 #'   Default: `NULL`.
 #' @param out.callback Callback function.
-#'   This is called whenever the subtree of a vertex is completed by the
-#'   algorithm. See details below.
+#'   This is called whenever the subtree of a vertex is completed by the algorithm.
+#'   See details below.
 #'   Default: `NULL`.
 #' @param extra Additional argument to supply to the callback function.
 #' @param rho The environment in which the callback function is evaluated.
 #'   The default `NULL` uses the caller's environment.
-#' @param neimode `r lifecycle::badge("deprecated")` This argument is deprecated from igraph 1.3.0; use
-#'   `mode` instead.
+#' @param neimode `r lifecycle::badge("deprecated")` This argument is deprecated from igraph 1.3.0; use `mode` instead.
 #' @inheritParams rlang::args_dots_empty
 #' @return A named list with the following entries:
 #'   \describe{
@@ -3966,9 +3824,8 @@ bfs <- function(
 #'     }
 #'   }
 #'
-#'   Note that `order`, `order.out`, `parent`, and `dist`
-#'   might be `NULL` if their corresponding argument is `FALSE`, i.e.
-#'   if their calculation is not requested.
+#'   Note that `order`, `order.out`, `parent`, and `dist` might be `NULL` if their corresponding argument is `FALSE`,
+#'   i.e. if their calculation is not requested.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [bfs()] for breadth-first search.
 #' @family structural.properties
@@ -4125,34 +3982,30 @@ dfs <- function(
 #'
 #' Calculate the maximal (weakly or strongly) connected components of a graph
 #'
-#' `is_connected()` decides whether the graph is weakly or strongly
-#' connected. The null graph is considered disconnected.
+#' `is_connected()` decides whether the graph is weakly or strongly connected.
+#' The null graph is considered disconnected.
 #'
-#' `components()` finds the maximal (weakly or strongly) connected components
-#' of a graph.
+#' `components()` finds the maximal (weakly or strongly) connected components of a graph.
 #'
-#' `count_components()` does almost the same as `components()` but returns only
-#' the number of clusters found instead of returning the actual clusters.
+#' `count_components()` does almost the same as `components()` but returns only the number of clusters found instead of returning the actual clusters.
 #'
-#' `component_distribution()` creates a histogram for the maximal connected
-#' component sizes.
+#' `component_distribution()` creates a histogram for the maximal connected component sizes.
 #'
-#' `largest_component()` returns the largest connected component of a graph. For
-#' directed graphs, optionally the largest weakly or strongly connected component.
-#' In case of a tie, the first component by vertex ID order is returned. Vertex
-#' IDs from the original graph are not retained in the returned graph.
+#' `largest_component()` returns the largest connected component of a graph.
+#' For directed graphs, optionally the largest weakly or strongly connected component.
+#' In case of a tie, the first component by vertex ID order is returned.
+#' Vertex IDs from the original graph are not retained in the returned graph.
 #'
 #' The weakly connected components are found by a simple breadth-first search.
-#' The strongly connected components are implemented by two consecutive
-#' depth-first searches.
+#' The strongly connected components are implemented by two consecutive depth-first searches.
 #'
 #' @param graph The graph to analyze.
-#' @param mode Character string, either \dQuote{weak} or \dQuote{strong}.  For
-#'   directed graphs \dQuote{weak} implies weakly, \dQuote{strong} strongly
-#'   connected components to search. It is ignored for undirected graphs.
+#' @param mode Character string, either \dQuote{weak} or \dQuote{strong}.
+#'   For directed graphs \dQuote{weak} implies weakly,
+#'   \dQuote{strong} strongly connected components to search.
+#'   It is ignored for undirected graphs.
 #' @param \dots For `component_distribution()`, forwarded to `components()`.
-#'   For `components()`, `is_connected()`, `count_components()` and
-#'   `largest_component()`, these dots must be empty.
+#'   For `components()`, `is_connected()`, `count_components()` and `largest_component()`, these dots must be empty.
 #' @return For `is_connected()` a Logical.
 #'
 #'   For `components()` a named list with three components:
@@ -4170,10 +4023,10 @@ dfs <- function(
 #'
 #'   For `count_components()` an integer constant is returned.
 #'
-#'   For `component_distribution()` a numeric vector with the relative
-#'   frequencies. The length of the vector is the size of the largest component
-#'   plus one. Note that (for currently unknown reasons) the first element of the
-#'   vector is the number of clusters of size zero, so this is always zero.
+#'   For `component_distribution()` a numeric vector with the relative frequencies.
+#'   The length of the vector is the size of the largest component plus one.
+#'   Note that (for currently unknown reasons) the first element of the vector is the number of clusters of size zero,
+#'   so this is always zero.
 #'
 #'   For `largest_component()` the largest connected component of the graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -4349,24 +4202,18 @@ count_components <- function(
 #'
 #' Counts the number of vertices reachable from each vertex in the graph.
 #'
-#' For each vertex in the graph, this function counts how many vertices
-#' are reachable from it, including the vertex itself.
+#' For each vertex in the graph, this function counts how many vertices are reachable from it, including the vertex itself.
 #' A vertex is reachable from another if there is a directed path between them.
-#' For undirected graphs, two vertices are reachable from each other if they
-#' are in the same connected component.
+#' For undirected graphs, two vertices are reachable from each other if they are in the same connected component.
 #'
 #' @param graph The input graph.
 #' @inheritParams rlang::args_dots_empty
-#' @param mode Character constant, defines how edge directions are considered
-#'   in directed graphs.
+#' @param mode Character constant, defines how edge directions are considered in directed graphs.
 #'   `"out"` counts vertices reachable via outgoing edges,
-#'   `"in"` counts vertices from which the current vertex is reachable via
-#'   incoming edges,
-#'   `"all"` or `"total"` ignores edge directions.
+#'   `"in"` counts vertices from which the current vertex is reachable via incoming edges, `"all"` or `"total"` ignores edge directions.
 #'   This parameter is ignored for undirected graphs.
 #' @return An integer vector of length `vcount(graph)`.
-#'   The i-th element is the number of vertices reachable from vertex i
-#'   (including vertex i itself).
+#'   The i-th element is the number of vertices reachable from vertex i (including vertex i itself).
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [components()], [subcomponent()], [is_connected()]
 #' @family components
@@ -4435,22 +4282,19 @@ count_reachable <- function(
 
 #' Convert a general graph into a forest
 #'
-#' Perform a breadth-first search on a graph and convert it into a tree or
-#' forest by replicating vertices that were found more than once.
+#' Perform a breadth-first search on a graph and convert it into a tree or forest by replicating vertices that were found more than once.
 #'
 #' A forest is a graph, whose components are trees.
 #'
-#' The `roots` vector can be calculated by simply doing a topological sort
-#' in all components of the graph, see the examples below.
+#' The `roots` vector can be calculated by simply doing a topological sort in all components of the graph, see the examples below.
 #'
 #' @param graph The input graph, it can be either directed or undirected.
 #' @inheritParams rlang::args_dots_empty
-#' @param mode Character string, defined the types of the paths used for the
-#'   breadth-first search. \dQuote{out} follows the outgoing, \dQuote{in} the
-#'   incoming edges, \dQuote{all} and \dQuote{total} both of them. This argument
-#'   is ignored for undirected graphs.
-#' @param roots A vector giving the vertices from which the breadth-first
-#'   search is performed. Typically it contains one vertex per component.
+#' @param mode Character string, defined the types of the paths used for the breadth-first search.
+#'   \dQuote{out} follows the outgoing, \dQuote{in} the incoming edges, \dQuote{all} and \dQuote{total} both of them.
+#'   This argument is ignored for undirected graphs.
+#' @param roots A vector giving the vertices from which the breadth-first search is performed.
+#'   Typically it contains one vertex per component.
 #' @return A list with two components:
 #'   \describe{
 #'     \item{tree}{
@@ -4534,40 +4378,33 @@ unfold_tree <- function(
 #'
 #' The Laplacian of a graph.
 #'
-#' The Laplacian Matrix of a graph is a symmetric matrix having the same number
-#' of rows and columns as the number of vertices in the graph and element (i,j)
-#' is d\[i\], the degree of vertex i if if i==j, -1 if i!=j and there is an edge
-#' between vertices i and j and 0 otherwise.
+#' The Laplacian Matrix of a graph is a symmetric matrix having the same number of rows and columns as the number of vertices in the graph and element (i,j) is d\[i\],
+#' the degree of vertex i if if i==j, -1 if i!=j and there is an edge between vertices i and j and 0 otherwise.
 #'
-#' The Laplacian matrix can also be normalized, with several
-#' conventional normalization methods.
+#' The Laplacian matrix can also be normalized, with several conventional normalization methods.
 #' See the "Normalization methods" section on this page.
 #'
-#' The weighted version of the Laplacian simply works with the weighted degree
-#' instead of the plain degree. I.e. (i,j) is d\[i\], the weighted degree of
-#' vertex i if if i==j, -w if i!=j and there is an edge between vertices i and
-#' j with weight w, and 0 otherwise. The weighted degree of a vertex is the sum
-#' of the weights of its adjacent edges.
+#' The weighted version of the Laplacian simply works with the weighted degree instead of the plain degree.
+#' I.e. (i,j) is d\[i\], the weighted degree of vertex i if if i==j, -w if i!=j and there is an edge between vertices i and j with weight w,
+#' and 0 otherwise.
+#' The weighted degree of a vertex is the sum of the weights of its adjacent edges.
 #'
 #' @param graph The input graph.
-#' @param normalization The normalization method to use when calculating the
-#'   Laplacian matrix. See the "Normalization methods" section on this page.
+#' @param normalization The normalization method to use when calculating the Laplacian matrix.
+#'   See the "Normalization methods" section on this page.
 #' @param normalized Deprecated, use `normalization` instead.
-#' @param weights An optional vector giving edge weights for weighted Laplacian
-#'   matrix. If this is `NULL` and the graph has an edge attribute called
-#'   `weight`, then it will be used automatically. Set this to `NA` if
-#'   you want the unweighted Laplacian on a graph that has a `weight` edge
-#'   attribute.
-#' @param sparse Logical, whether to return the result as a sparse
-#'   matrix. The `Matrix` package is required for sparse matrices.
+#' @param weights An optional vector giving edge weights for weighted Laplacian matrix.
+#'   If this is `NULL` and the graph has an edge attribute called `weight`, then it will be used automatically.
+#'   Set this to `NA` if you want the unweighted Laplacian on a graph that has a `weight` edge attribute.
+#' @param sparse Logical, whether to return the result as a sparse matrix.
+#'   The `Matrix` package is required for sparse matrices.
 #' @return A numeric matrix.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
 #' @keywords graphs
 #' @section Normalization methods:
 #'
-#' The Laplacian matrix \eqn{L} is defined in terms of the adjacency matrix
-#' \eqn{A} and a diagonal matrix \eqn{D} containing the degrees as follows:
+#' The Laplacian matrix \eqn{L} is defined in terms of the adjacency matrix \eqn{A} and a diagonal matrix \eqn{D} containing the degrees as follows:
 #'
 #' - "unnormalized": Unnormalized Laplacian, \eqn{L = D - A}.
 #' - "symmetric": Symmetrically normalized Laplacian,
@@ -4647,59 +4484,45 @@ laplacian_matrix <- function(
 
 #' Matching
 #'
-#' A matching in a graph means the selection of a set of edges that are
-#' pairwise non-adjacent, i.e. they have no common incident vertices. A
-#' matching is maximal if it is not a proper subset of any other matching.
+#' A matching in a graph means the selection of a set of edges that are pairwise non-adjacent, i.e. they have no common incident vertices.
+#' A matching is maximal if it is not a proper subset of any other matching.
 #'
-#' `is_matching()` checks a matching vector and verifies whether its
-#' length matches the number of vertices in the given graph, its values are
-#' between zero (inclusive) and the number of vertices (inclusive), and
-#' whether there exists a corresponding edge in the graph for every matched
-#' vertex pair. For bipartite graphs, it also verifies whether the matched
-#' vertices are in different parts of the graph.
+#' `is_matching()` checks a matching vector and verifies whether its length matches the number of vertices in the given graph,
+#' its values are between zero (inclusive) and the number of vertices (inclusive),
+#' and whether there exists a corresponding edge in the graph for every matched vertex pair.
+#' For bipartite graphs, it also verifies whether the matched vertices are in different parts of the graph.
 #'
-#' `is_max_matching()` checks whether a matching is maximal.  A matching
-#' is maximal if and only if there exists no unmatched vertex in a graph
-#' such that one of its neighbors is also unmatched.
+#' `is_max_matching()` checks whether a matching is maximal.
+#' A matching is maximal if and only if there exists no unmatched vertex in a graph such that one of its neighbors is also unmatched.
 #'
-#' `max_bipartite_match()` calculates a maximum matching in a bipartite
-#' graph. A matching in a bipartite graph is a partial assignment of
-#' vertices of the first kind to vertices of the second kind such that each
-#' vertex of the first kind is matched to at most one vertex of the second
-#' kind and vice versa, and matched vertices must be connected by an edge
-#' in the graph. The size (or cardinality) of a matching is the number of
-#' edges. A matching is a maximum matching if there exists no other
-#' matching with larger cardinality.  For weighted graphs, a maximum
-#' matching is a matching whose edges have the largest possible total
-#' weight among all possible matchings.
+#' `max_bipartite_match()` calculates a maximum matching in a bipartite graph.
+#' A matching in a bipartite graph is a partial assignment of vertices of the first kind to vertices of the second kind such that each vertex of the first kind is matched to at most one vertex of the second kind and vice versa, and matched vertices must be connected by an edge in the graph.
+#' The size (or cardinality) of a matching is the number of edges.
+#' A matching is a maximum matching if there exists no other matching with larger cardinality.
+#' For weighted graphs, a maximum matching is a matching whose edges have the largest possible total weight among all possible matchings.
 #'
-#' Maximum matchings in bipartite graphs are found by the push-relabel
-#' algorithm with greedy initialization and a global relabeling after every
-#' \eqn{n/2} steps where \eqn{n} is the number of vertices in the graph.
+#' Maximum matchings in bipartite graphs are found by the push-relabel algorithm with greedy initialization and a global relabeling after every \eqn{n/2} steps
+#' where \eqn{n} is the number of vertices in the graph.
 #'
 #' @rdname matching
 #' @aliases max_bipartite_match
-#' @param graph The input graph. It might be directed, but edge directions will
-#'   be ignored.
-#' @param types Vertex types, if the graph is bipartite. By default they
-#'   are taken from the \sQuote{`type`} vertex attribute, if present.
-#' @param matching A potential matching. An integer vector that gives the
-#'   pair in the matching for each vertex. For vertices without a pair,
-#'   supply `NA` here.
-#' @param weights Potential edge weights. If the graph has an edge
-#'   attribute called \sQuote{`weight`}, and this argument is
-#'   `NULL`, then the edge attribute is used automatically.
-#'   In weighted matching, the weights of the edges must match as
-#'   much as possible.
-#' @param eps A small real number used in equality tests in the weighted
-#'   bipartite matching algorithm. Two real numbers are considered equal in
-#'   the algorithm if their difference is smaller than `eps`. This is
-#'   required to avoid the accumulation of numerical errors. The default
-#'   `NULL` stands for the smallest \eqn{x}, such that
-#'   \eqn{1+x \ne 1}{1+x != 1} holds (`.Machine$double.eps`). If you are running the algorithm with no weights, this argument
-#'   is ignored.
-#' @return `is_matching()` and `is_max_matching()` return a logical
-#'   scalar.
+#' @param graph The input graph.
+#'   It might be directed, but edge directions will be ignored.
+#' @param types Vertex types, if the graph is bipartite.
+#'   By default they are taken from the \sQuote{`type`} vertex attribute, if present.
+#' @param matching A potential matching.
+#'   An integer vector that gives the pair in the matching for each vertex.
+#'   For vertices without a pair, supply `NA` here.
+#' @param weights Potential edge weights.
+#'   If the graph has an edge attribute called \sQuote{`weight`}, and this argument is `NULL`,
+#'   then the edge attribute is used automatically.
+#'   In weighted matching, the weights of the edges must match as much as possible.
+#' @param eps A small real number used in equality tests in the weighted bipartite matching algorithm.
+#'   Two real numbers are considered equal in the algorithm if their difference is smaller than `eps`.
+#'   This is required to avoid the accumulation of numerical errors.
+#'   The default `NULL` stands for the smallest \eqn{x}, such that \eqn{1+x \ne 1}{1+x != 1} holds (`.Machine$double.eps`).
+#'   If you are running the algorithm with no weights, this argument is ignored.
+#' @return `is_matching()` and `is_max_matching()` return a logical scalar.
 #'
 #'   `max_bipartite_match()` returns a list with components:
 #'   \describe{
@@ -4847,24 +4670,21 @@ max_bipartite_match <- function(
 #'
 #' This function checks the reciprocal pair of the supplied edges.
 #'
-#' In a directed graph an (A,B) edge is mutual if the graph also includes a
-#' (B,A) directed edge.
+#' In a directed graph an (A,B) edge is mutual if the graph also includes a (B,A) directed edge.
 #'
-#' Note that multi-graphs are not handled properly, i.e. if the graph contains
-#' two copies of (A,B) and one copy of (B,A), then these three edges are
-#' considered to be mutual.
+#' Note that multi-graphs are not handled properly, i.e. if the graph contains two copies of (A,B) and one copy of (B,A),
+#' then these three edges are considered to be mutual.
 #'
 #' Undirected graphs contain only mutual edges by definition.
 #'
 #' @param graph The input graph.
-#' @param eids Edge sequence, the edges that will be probed. The default
-#'   `NULL` includes all edges in the order of their IDs.
+#' @param eids Edge sequence, the edges that will be probed.
+#'   The default `NULL` includes all edges in the order of their IDs.
 #' @inheritParams rlang::args_dots_empty
 #' @param loops Logical, whether to consider directed self-loops to be mutual.
 #' @return A logical vector of the same length as the number of edges supplied.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [reciprocity()], [dyad_census()] if you just
-#' want some statistics about mutual edges.
+#' @seealso [reciprocity()], [dyad_census()] if you just want some statistics about mutual edges.
 #' @keywords graphs
 #' @examples
 #'
@@ -4930,42 +4750,36 @@ which_mutual <- function(
 
 #' Average nearest neighbor degree
 #'
-#' Calculate the average nearest neighbor degree of the given vertices and the
-#' same quantity in the function of vertex degree
+#' Calculate the average nearest neighbor degree of the given vertices and the same quantity in the function of vertex degree
 #'
-#' Note that for zero degree vertices the answer in \sQuote{`knn`} is
-#' `NaN` (zero divided by zero), the same is true for \sQuote{`knnk`}
-#' if a given degree never appears in the network.
+#' Note that for zero degree vertices the answer in \sQuote{`knn`} is `NaN` (zero divided by zero),
+#' the same is true for \sQuote{`knnk`} if a given degree never appears in the network.
 #'
 #' The weighted version computes a weighted average of the neighbor degrees as
 #'
 #' \deqn{k_{nn,u} = \frac{1}{s_u} \sum_v w_{uv} k_v,}{k_nn_u = 1/s_u sum_v w_uv k_v,}
 #'
-#' where \eqn{s_u = \sum_v w_{uv}}{s_u = sum_v w_uv} is the sum of the incident
-#' edge weights of vertex `u`, i.e. its strength.
-#' The sum runs over the neighbors `v` of vertex `u`
-#' as indicated by `mode`. \eqn{w_{uv}}{w_uv} denotes the weighted adjacency matrix
-#' and \eqn{k_v}{k_v} is the neighbors' degree, specified by `neighbor_degree_mode`.
+#' where \eqn{s_u = \sum_v w_{uv}}{s_u = sum_v w_uv} is the sum of the incident edge weights of vertex `u`, i.e. its strength.
+#' The sum runs over the neighbors `v` of vertex `u` as indicated by `mode`.
+#' \eqn{w_{uv}}{w_uv} denotes the weighted adjacency matrix and \eqn{k_v}{k_v} is the neighbors' degree,
+#' specified by `neighbor_degree_mode`.
 #'
-#' @param graph The input graph. It may be directed.
+#' @param graph The input graph.
+#'   It may be directed.
 #' @param vids The vertices for which the calculation is performed.
-#'   The default `NULL` includes all vertices. Note, that if not all vertices are given here, then
-#'   both \sQuote{`knn`} and \sQuote{`knnk`} will be calculated based
-#'   on the given vertices only.
+#'   The default `NULL` includes all vertices.
+#'   Note, that if not all vertices are given here,
+#'   then both \sQuote{`knn`} and \sQuote{`knnk`} will be calculated based on the given vertices only.
 #' @inheritParams rlang::args_dots_empty
-#' @param mode Character constant to indicate the type of neighbors to consider
-#'   in directed graphs. `out` considers out-neighbors, `in` considers
-#'   in-neighbors and `all` ignores edge directions.
+#' @param mode Character constant to indicate the type of neighbors to consider in directed graphs.
+#'   `out` considers out-neighbors, `in` considers in-neighbors and `all` ignores edge directions.
 #' @param neighbor.degree.mode The type of degree to average in directed graphs.
-#'   `out` averages out-degrees, `in` averages in-degrees and `all`
-#'   ignores edge directions for the degree calculation.
-#' @param weights Weight vector. If the graph has a `weight` edge
-#'   attribute, then this is used by default. If this argument is given, then
-#'   vertex strength (see [strength()]) is used instead of vertex
-#'   degree. But note that `knnk` is still given in the function of the
-#'   normal vertex degree.
-#'   Weights are are used to calculate a weighted degree (also called
-#'   [strength()]) instead of the degree.
+#'   `out` averages out-degrees, `in` averages in-degrees and `all` ignores edge directions for the degree calculation.
+#' @param weights Weight vector.
+#'   If the graph has a `weight` edge attribute, then this is used by default.
+#'   If this argument is given, then vertex strength (see [strength()]) is used instead of vertex degree.
+#'   But note that `knnk` is still given in the function of the normal vertex degree.
+#'   Weights are are used to calculate a weighted degree (also called [strength()]) instead of the degree.
 #' @return A list with two members:
 #'   \describe{
 #'     \item{knn}{

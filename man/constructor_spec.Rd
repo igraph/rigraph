@@ -26,20 +26,16 @@ deterministic; if \code{TRUE}, wraps \code{\link[=realize_degseq]{realize_degseq
 An object of class \code{igraph_constructor_spec}.
 }
 \description{
-Each of these functions builds a lazy constructor specification for the
-given graph constructor, to be used with \code{\link[=graph_]{graph_()}}, \code{\link[=make_]{make_()}} or
-\code{\link[=sample_]{sample_()}}. The specification is only evaluated when the graph is actually
-constructed, so it can be combined with constructor modifiers such as
-\code{\link[=with_vertex_]{with_vertex_()}} or \code{\link[=with_edge_]{with_edge_()}}.
+Each of these functions builds a lazy constructor specification for the given graph constructor, to be used with \code{\link[=graph_]{graph_()}},
+\code{\link[=make_]{make_()}} or \code{\link[=sample_]{sample_()}}.
+The specification is only evaluated when the graph is actually constructed,
+so it can be combined with constructor modifiers such as \code{\link[=with_vertex_]{with_vertex_()}} or \code{\link[=with_edge_]{with_edge_()}}.
 
-\code{from_data_frame()}, \code{from_edgelist()}, \code{tree()} and \code{degseq()} wrap
-\code{\link[=graph_from_data_frame]{graph_from_data_frame()}}, \code{\link[=graph_from_edgelist]{graph_from_edgelist()}}, \code{\link[=make_tree]{make_tree()}} (or
-\code{\link[=sample_tree]{sample_tree()}}) and \code{\link[=sample_degseq]{sample_degseq()}} (or \code{\link[=realize_degseq]{realize_degseq()}}),
-respectively.
+\code{from_data_frame()}, \code{from_edgelist()}, \code{tree()} and \code{degseq()} wrap \code{\link[=graph_from_data_frame]{graph_from_data_frame()}}, \code{\link[=graph_from_edgelist]{graph_from_edgelist()}},
+\code{\link[=make_tree]{make_tree()}} (or \code{\link[=sample_tree]{sample_tree()}}) and \code{\link[=sample_degseq]{sample_degseq()}} (or \code{\link[=realize_degseq]{realize_degseq()}}), respectively.
 
-The other constructors have specification functions as well; they are
-documented together with the constructor they wrap, e.g. \code{ring()} on the
-\code{\link[=make_ring]{make_ring()}} page.
+The other constructors have specification functions as well; they are documented together with the constructor they wrap,
+e.g. \code{ring()} on the \code{\link[=make_ring]{make_ring()}} page.
 }
 \examples{
 # Pass a constructor specification to graph_(), make_() or sample_()
@@ -52,8 +48,7 @@ make_(tree(7))
 make_(tree(7), with_vertex_(color = "red"))
 }
 \seealso{
-\code{\link[=graph_]{graph_()}}, \code{\link[=make_]{make_()}} and \code{\link[=sample_]{sample_()}} to apply a constructor
-specification.
+\code{\link[=graph_]{graph_()}}, \code{\link[=make_]{make_()}} and \code{\link[=sample_]{sample_()}} to apply a constructor specification.
 }
 \concept{constructor specifications}
 \keyword{graphs}

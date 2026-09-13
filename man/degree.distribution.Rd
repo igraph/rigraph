@@ -9,16 +9,14 @@ degree.distribution(graph, cumulative = FALSE, ...)
 \arguments{
 \item{graph}{The graph to analyze.}
 
-\item{cumulative}{Logical; whether the cumulative degree distribution is to
-be calculated.}
+\item{cumulative}{Logical; whether the cumulative degree distribution is to be calculated.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{degree.distribution()} was renamed to \code{\link[=degree_distribution]{degree_distribution()}} to create a more
-consistent API.
+\code{degree.distribution()} was renamed to \code{\link[=degree_distribution]{degree_distribution()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_degree}{\code{degree()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

@@ -7,21 +7,18 @@
 triad_census(graph)
 }
 \arguments{
-\item{graph}{The input graph, it should be directed. An undirected graph
-results a warning, and undefined results.}
+\item{graph}{The input graph, it should be directed.
+An undirected graph results a warning, and undefined results.}
 }
 \value{
-A numeric vector, the subgraph counts, in the order given in the
-above description.
+A numeric vector, the subgraph counts, in the order given in the above description.
 }
 \description{
-This function counts the different induced subgraphs of three vertices in
-a graph.
+This function counts the different induced subgraphs of three vertices in a graph.
 }
 \details{
 Triad census was defined by David and Leinhardt (see References below).
-Every triple of vertices (A, B, C) are classified into the 16 possible
-states:
+Every triple of vertices (A, B, C) are classified into the 16 possible states:
 \describe{
 \item{003}{
 A,B,C, the empty graph.
@@ -73,8 +70,7 @@ A<->B<->C, A<->C, the complete graph.
 }
 }
 
-This functions uses the RANDESU motif finder algorithm to find and count the
-subgraphs, see \code{\link[=motifs]{motifs()}}.
+This functions uses the RANDESU motif finder algorithm to find and count the subgraphs, see \code{\link[=motifs]{motifs()}}.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_triad_census}{\code{triad_census()}}

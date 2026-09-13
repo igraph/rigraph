@@ -4,14 +4,12 @@
 \alias{vertex.shape.pie}
 \title{Using pie charts as vertices in graph plots}
 \description{
-More complex vertex images can be used to express addtional information
-about vertices. E.g. pie charts can be used as vertices, to denote vertex
-classes, fuzzy classification of vertices, etc.
+More complex vertex images can be used to express addtional information about vertices.
+E.g. pie charts can be used as vertices, to denote vertex classes, fuzzy classification of vertices, etc.
 }
 \details{
-The vertex shape \sQuote{pie} makes igraph draw a pie chart for every
-vertex. There are some extra graphical vertex parameters that specify how
-the pie charts will look like:
+The vertex shape \sQuote{pie} makes igraph draw a pie chart for every vertex.
+There are some extra graphical vertex parameters that specify how the pie charts will look like:
 \describe{
 \item{pie}{
 Numeric vector, gives the sizes of the pie slices.

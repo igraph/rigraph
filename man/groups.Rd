@@ -9,22 +9,21 @@
 groups(x)
 }
 \arguments{
-\item{x}{Some object that represents a grouping of the vertices. See details
-below.}
+\item{x}{Some object that represents a grouping of the vertices.
+See details below.}
 }
 \value{
-A named list of numeric or character vectors. The names are just
-numbers that refer to the groups. The vectors themselves are numeric or
-symbolic vertex IDs.
+A named list of numeric or character vectors.
+The names are just numbers that refer to the groups.
+The vectors themselves are numeric or symbolic vertex IDs.
 }
 \description{
-Create a list of vertex groups from some graph clustering or community
-structure.
+Create a list of vertex groups from some graph clustering or community structure.
 }
 \details{
-Currently two methods are defined for this function. The default method
-works on the output of \code{\link[=components]{components()}}. (In fact it works on any
-object that is a list with an entry called \code{membership}.)
+Currently two methods are defined for this function.
+The default method works on the output of \code{\link[=components]{components()}}.
+(In fact it works on any object that is a list with an entry called \code{membership}.)
 
 The second method works on \code{\link[=communities]{communities()}} objects.
 }
@@ -37,8 +36,7 @@ g2 <- make_ring(10) + make_full_graph(5)
 groups(components(g2))
 }
 \seealso{
-\code{\link[=components]{components()}} and the various community finding
-functions.
+\code{\link[=components]{components()}} and the various community finding functions.
 
 Community detection:
 \code{\link[=as_membership]{as_membership()}},

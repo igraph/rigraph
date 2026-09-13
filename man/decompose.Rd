@@ -17,19 +17,16 @@ decompose(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{mode}{Character constant giving the type of the components, wither
-\code{weak} for weakly connected components or \code{strong} for strongly
-connected components.}
+\item{mode}{Character constant giving the type of the components,
+wither \code{weak} for weakly connected components or \code{strong} for strongly connected components.}
 
-\item{max.comps}{The maximum number of components to return. The first
-\code{max.comps} components will be returned (which hold at least
-\code{min.vertices} vertices, see the next parameter), the others will be
-ignored. Supply \code{NA} here if you don't want to limit the number of
-components.}
+\item{max.comps}{The maximum number of components to return.
+The first \code{max.comps} components will be returned (which hold at least \code{min.vertices} vertices, see the next parameter),
+the others will be ignored.
+Supply \code{NA} here if you don't want to limit the number of components.}
 
-\item{min.vertices}{The minimum number of vertices a component should
-contain in order to place it in the result list. E.g. supply 2 here to ignore
-isolate vertices.}
+\item{min.vertices}{The minimum number of vertices a component should contain in order to place it in the result list.
+E.g. supply 2 here to ignore isolate vertices.}
 }
 \value{
 A list of graph objects.

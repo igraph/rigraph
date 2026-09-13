@@ -7,7 +7,8 @@
 st_min_cuts(graph, source, target, ..., capacity = NULL)
 }
 \arguments{
-\item{graph}{The input graph. It must be directed.}
+\item{graph}{The input graph.
+It must be directed.}
 
 \item{source}{The ID of the source vertex.}
 
@@ -15,11 +16,9 @@ st_min_cuts(graph, source, target, ..., capacity = NULL)
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{capacity}{Numeric vector giving the edge capacities. If this is
-\code{NULL} and the graph has a \code{weight} edge attribute, then this
-attribute defines the edge capacities. For forcing unit edge capacities,
-even for graphs that have a \code{weight} edge attribute, supply \code{NA}
-here.}
+\item{capacity}{Numeric vector giving the edge capacities.
+If this is \code{NULL} and the graph has a \code{weight} edge attribute, then this attribute defines the edge capacities.
+For forcing unit edge capacities, even for graphs that have a \code{weight} edge attribute, supply \code{NA} here.}
 }
 \value{
 A list with entries:
@@ -40,18 +39,14 @@ generates the cut that contains exactly the edges that go from \eqn{X} to \eqn{V
 }
 }
 \description{
-Listing all minimum \eqn{(s,t)}-cuts of a directed graph, for given \eqn{s}
-and \eqn{t}.
+Listing all minimum \eqn{(s,t)}-cuts of a directed graph, for given \eqn{s} and \eqn{t}.
 }
 \details{
-Given a \eqn{G} directed graph and two, different and non-ajacent vertices,
-\eqn{s} and \eqn{t}, an \eqn{(s,t)}-cut is a set of edges, such that after
-removing these edges from \eqn{G} there is no directed path from \eqn{s} to
-\eqn{t}.
+Given a \eqn{G} directed graph and two, different and non-ajacent vertices, \eqn{s} and \eqn{t}, an \eqn{(s,t)}-cut is a set of edges,
+such that after removing these edges from \eqn{G} there is no directed path from \eqn{s} to \eqn{t}.
 
-The size of an \eqn{(s,t)}-cut is defined as the sum of the capacities (or
-weights) in the cut. For unweighted (=equally weighted) graphs, this is
-simply the number of edges.
+The size of an \eqn{(s,t)}-cut is defined as the sum of the capacities (or weights) in the cut.
+For unweighted (=equally weighted) graphs, this is simply the number of edges.
 
 An \eqn{(s,t)}-cut is minimum if it is of the smallest possible size.
 }

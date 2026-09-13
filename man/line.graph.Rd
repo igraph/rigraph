@@ -12,8 +12,7 @@ line.graph(graph)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{line.graph()} was renamed to \code{\link[=make_line_graph]{make_line_graph()}} to create a more
-consistent API.
+\code{line.graph()} was renamed to \code{\link[=make_line_graph]{make_line_graph()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_linegraph}{\code{linegraph()}}

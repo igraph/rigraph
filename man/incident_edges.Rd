@@ -13,16 +13,14 @@ incident_edges(graph, v, ..., mode = c("out", "in", "all", "total"))
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{mode}{Whether to query outgoing (\sQuote{out}), incoming
-(\sQuote{in}) edges, or both types (\sQuote{all}). This is
-ignored for undirected graphs.}
+\item{mode}{Whether to query outgoing (\sQuote{out}), incoming (\sQuote{in}) edges, or both types (\sQuote{all}).
+This is ignored for undirected graphs.}
 }
 \value{
 A list of edge sequences.
 }
 \description{
-This function is similar to \code{\link[=incident]{incident()}}, but it
-queries multiple vertices at once.
+This function is similar to \code{\link[=incident]{incident()}}, but it queries multiple vertices at once.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

@@ -9,35 +9,32 @@ mst(graph, weights = NULL, algorithm = NULL, ...)
 \arguments{
 \item{graph}{The graph object to analyze.}
 
-\item{weights}{Numeric vector giving the weights of the edges in the
-graph. The order is determined by the edge IDs. This is ignored if the
-\code{unweighted} algorithm is chosen. Edge weights are interpreted as
-distances.}
+\item{weights}{Numeric vector giving the weights of the edges in the graph.
+The order is determined by the edge IDs.
+This is ignored if the \code{unweighted} algorithm is chosen.
+Edge weights are interpreted as distances.}
 
-\item{algorithm}{The algorithm to use for calculation. \code{unweighted} can
-be used for unweighted graphs, and \code{prim} runs Prim's algorithm for
-weighted graphs.  If this is \code{NULL} then igraph will select the
-algorithm automatically: if the graph has an edge attribute called
-\code{weight} or the \code{weights} argument is not \code{NULL} then Prim's
-algorithm is chosen, otherwise the unweighted algorithm is used.}
+\item{algorithm}{The algorithm to use for calculation.
+\code{unweighted} can be used for unweighted graphs,
+and \code{prim} runs Prim's algorithm for weighted graphs.
+If this is \code{NULL} then igraph will select the algorithm automatically:
+if the graph has an edge attribute called \code{weight} or the \code{weights} argument is not \code{NULL} then Prim's algorithm is chosen,
+otherwise the unweighted algorithm is used.}
 
 \item{\dots}{Additional arguments, unused.}
 }
 \value{
-A graph object with the minimum spanning forest. To check whether it
-is a tree, check that the number of its edges is \code{vcount(graph)-1}.
-The edge and vertex attributes of the original graph are preserved in the
-result.
+A graph object with the minimum spanning forest.
+To check whether it is a tree, check that the number of its edges is \code{vcount(graph)-1}.
+The edge and vertex attributes of the original graph are preserved in the result.
 }
 \description{
-A \emph{spanning tree} of a connected graph is a connected subgraph with
-the smallest number of edges that includes all vertices of the graph.
-A graph will have many spanning trees. Among these, the \emph{minimum spanning
-tree} will have the smallest sum of edge weights.
+A \emph{spanning tree} of a connected graph is a connected subgraph with the smallest number of edges that includes all vertices of the graph.
+A graph will have many spanning trees.
+Among these, the \emph{minimum spanning tree} will have the smallest sum of edge weights.
 }
 \details{
-The \emph{minimum spanning forest} of a disconnected graph is the collection
-of minimum spanning trees of all of its components.
+The \emph{minimum spanning forest} of a disconnected graph is the collection of minimum spanning trees of all of its components.
 
 If the graph is not connected a minimum spanning forest is returned.
 }

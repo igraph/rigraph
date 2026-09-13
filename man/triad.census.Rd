@@ -7,14 +7,13 @@
 triad.census(graph)
 }
 \arguments{
-\item{graph}{The input graph, it should be directed. An undirected graph
-results a warning, and undefined results.}
+\item{graph}{The input graph, it should be directed.
+An undirected graph results a warning, and undefined results.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{triad.census()} was renamed to \code{\link[=triad_census]{triad_census()}} to create a more
-consistent API.
+\code{triad.census()} was renamed to \code{\link[=triad_census]{triad_census()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_triad_census}{\code{triad_census()}}

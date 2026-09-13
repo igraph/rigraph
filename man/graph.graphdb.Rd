@@ -17,41 +17,39 @@ graph.graphdb(
 )
 }
 \arguments{
-\item{url}{Complete URL with the file to import. Default: \code{NULL}.}
+\item{url}{Complete URL with the file to import.
+Default: \code{NULL}.}
 
-\item{prefix}{Gives the prefix. See details below. Possible values:
-\code{iso}, \code{i2}, \code{si4}, \code{si6}, \code{mcs10}, \code{mcs30},
-\code{mcs50}, \code{mcs70}, \code{mcs90}.}
+\item{prefix}{Gives the prefix.
+See details below.
+Possible values: \code{iso}, \code{i2}, \code{si4}, \code{si6}, \code{mcs10}, \code{mcs30}, \code{mcs50}, \code{mcs70}, \code{mcs90}.}
 
-\item{type}{Gives the graph type identifier. See details below. Possible
-values: \code{r001}, \code{r005}, \code{r01}, \code{r02}, \code{m2D},
-\code{m2Dr2}, \code{m2Dr4}, \code{m2Dr6} \code{m3D}, \code{m3Dr2},
-\code{m3Dr4}, \code{m3Dr6}, \code{m4D}, \code{m4Dr2}, \code{m4Dr4},
-\code{m4Dr6}, \code{b03}, \code{b03m}, \code{b06}, \code{b06m}, \code{b09},
-\code{b09m}.}
+\item{type}{Gives the graph type identifier.
+See details below.
+Possible values: \code{r001}, \code{r005}, \code{r01}, \code{r02}, \code{m2D}, \code{m2Dr2}, \code{m2Dr4}, \code{m2Dr6} \code{m3D}, \code{m3Dr2}, \code{m3Dr4}, \code{m3Dr6}, \code{m4D}, \code{m4Dr2},
+\code{m4Dr4}, \code{m4Dr6}, \code{b03}, \code{b03m}, \code{b06}, \code{b06m}, \code{b09}, \code{b09m}.}
 
 \item{nodes}{The number of vertices in the graph.}
 
-\item{pair}{Specifies which graph of the pair to read. Possible values:
-\code{A} and \code{B}.}
+\item{pair}{Specifies which graph of the pair to read.
+Possible values: \code{A} and \code{B}.}
 
-\item{which}{Gives the number of the graph to read. For every graph type
-there are a number of actual graphs in the database. This argument specifies
-which one to read.}
+\item{which}{Gives the number of the graph to read.
+For every graph type there are a number of actual graphs in the database.
+This argument specifies which one to read.}
 
-\item{base}{The base address of the database. See details below.}
+\item{base}{The base address of the database.
+See details below.}
 
-\item{compressed}{Logical, if TRUE than the file is expected to be
-compressed by gzip. If \code{url} is \code{NULL} then a \sQuote{\code{.gz}}
-suffix is added to the filename.}
+\item{compressed}{Logical, if TRUE than the file is expected to be compressed by gzip.
+If \code{url} is \code{NULL} then a \sQuote{\code{.gz}} suffix is added to the filename.}
 
 \item{directed}{Logical, whether to create a directed graph.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.graphdb()} was renamed to \code{\link[=graph_from_graphdb]{graph_from_graphdb()}} to create a more
-consistent API.
+\code{graph.graphdb()} was renamed to \code{\link[=graph_from_graphdb]{graph_from_graphdb()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_read_graph_graphdb}{\code{read_graph_graphdb()}}

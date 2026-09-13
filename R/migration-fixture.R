@@ -1,12 +1,9 @@
-# Test fixture for the in-place argument-migration generator (tools/migrations.R,
-# tools/generate-migrations.R). `migration_fixture()` carries a generated
-# ARG_HANDLE block that recovers a legacy call to its pre-3.0.0 signature
-# f(graph, n, weight, kind, directed) -- now
-# f(graph, n, ..., weights, type, directed), with `weight` renamed to `weights`
-# and `kind` to `type` (`directed` survives unchanged). The names are chosen so
-# the tests can exercise two renames, unique and ambiguous abbreviations, and
-# base-R matching of the head args (`graph`, `n`). It exists only to exercise the
-# generator end-to-end; see tests/testthat/test-migration-fixture.R.
+# Test fixture for the in-place argument-migration generator (tools/migrations.R, tools/generate-migrations.R).
+# `migration_fixture()` carries a generated ARG_HANDLE block that recovers a legacy call to its pre-3.0.0 signature f(graph, n, weight, kind, directed)
+# -- now f(graph, n, ..., weights, type, directed), with `weight` renamed to `weights` and `kind` to `type` (`directed` survives unchanged).
+# The names are chosen so the tests can exercise two renames, unique and ambiguous abbreviations,
+# and base-R matching of the head args (`graph`, `n`).
+# It exists only to exercise the generator end-to-end; see tests/testthat/test-migration-fixture.R.
 
 #' @noRd
 migration_fixture <- function(
@@ -67,13 +64,11 @@ migration_fixture <- function(
   )
 }
 
-# Second fixture: head/recoverable prefix overlaps. `dim` (recoverable) is a
-# strict prefix of the head arg `dimvector`, and the head arg `p` is a strict
-# prefix of the recoverable `permutation` -- the two shapes that
-# make_lattice()- and sample_correlated_gnp_pair()-style signatures hit. The
-# generated block gains a `.arg_forbidden` guard that rejects the forbidden
-# prefixes (`d`, `di`) when legacy arguments in `...` engage recovery; with
-# empty dots they bind the head arg via plain partial matching.
+# Second fixture: head/recoverable prefix overlaps.
+# `dim` (recoverable) is a strict prefix of the head arg `dimvector`, and the head arg `p` is a strict prefix of the recoverable `permutation` -- the two shapes
+# that make_lattice()- and sample_correlated_gnp_pair()-style signatures hit.
+# The generated block gains a `.arg_forbidden` guard that rejects the forbidden prefixes (`d`, `di`) when legacy arguments in `...` engage recovery;
+# with empty dots they bind the head arg via plain partial matching.
 migration_fixture_prefix <- function(
   dimvector,
   p,
@@ -128,14 +123,14 @@ migration_fixture_prefix <- function(
   )
 }
 
-# Third fixture: the two hazards a generated block faces in a real function
-# body. `names` and `c` are argument names, so the block's own calls would
-# resolve to them unless every call is namespace-qualified -- and a *missing*
-# formal is worse than a shadowing one, since R forces the promise while looking
-# for a function of that name. `attr` was renamed to `weights` while a
-# deprecated `attr` formal stayed behind, so `attr =` binds that formal while
-# its abbreviations (`a`, `at`, `att`) could mean either and are rejected. This
-# is the as_adjacency_matrix()/as_biadjacency_matrix() shape.
+# Third fixture: the two hazards a generated block faces in a real function body.
+# `names` and `c` are argument names,
+# so the block's own calls would resolve to them
+# unless every call is namespace-qualified -- and a *missing* formal is worse than a shadowing one,
+# since R forces the promise while looking for a function of that name.
+# `attr` was renamed to `weights` while a deprecated `attr` formal stayed behind,
+# so `attr =` binds that formal while its abbreviations (`a`, `at`, `att`) could mean either and are rejected.
+# This is the as_adjacency_matrix()/as_biadjacency_matrix() shape.
 migration_fixture_shadow <- function(
   graph,
   ...,

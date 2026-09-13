@@ -10,8 +10,7 @@ is_igraph(graph)
 \item{graph}{An R object.}
 }
 \value{
-A logical constant, \code{TRUE} if argument \code{graph} is a graph
-object.
+A logical constant, \code{TRUE} if argument \code{graph} is a graph object.
 }
 \description{
 Is this object an igraph graph?

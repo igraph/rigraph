@@ -13,32 +13,29 @@ infomap.community(
 )
 }
 \arguments{
-\item{graph}{The input graph. Edge directions will be taken into account.}
+\item{graph}{The input graph.
+Edge directions will be taken into account.}
 
 \item{e.weights}{Numeric vector of edge weights.
-The length must match the number of edges in the graph.  By default (\code{NULL}) the
-\sQuote{\code{weight}} edge attribute is used as weights. If it is not
-present, then all edges are considered to have the same weight.
+The length must match the number of edges in the graph.
+By default (\code{NULL}) the \sQuote{\code{weight}} edge attribute is used as weights.
+If it is not present, then all edges are considered to have the same weight.
 Larger edge weights correspond to stronger connections.}
 
-\item{v.weights}{Numeric vector of vertex
-weights. The length must match the number of vertices in the graph.  By
-default (\code{NULL}) the \sQuote{\code{weight}} vertex attribute is used as weights. If
-it is not present, then all vertices are considered to have the same weight.
-A larger vertex weight means a larger probability that the random surfer
-jumps to that vertex.}
+\item{v.weights}{Numeric vector of vertex weights.
+The length must match the number of vertices in the graph.
+By default (\code{NULL}) the \sQuote{\code{weight}} vertex attribute is used as weights.
+If it is not present, then all vertices are considered to have the same weight.
+A larger vertex weight means a larger probability that the random surfer jumps to that vertex.}
 
-\item{nb.trials}{The number of attempts to partition the network (can be any
-integer value equal or larger than 1).}
+\item{nb.trials}{The number of attempts to partition the network (can be any integer value equal or larger than 1).}
 
-\item{modularity}{Logical, whether to calculate the modularity score
-of the detected community structure.}
+\item{modularity}{Logical, whether to calculate the modularity score of the detected community structure.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{infomap.community()} was renamed to \code{\link[=cluster_infomap]{cluster_infomap()}} to create a more
-consistent API.
+\code{infomap.community()} was renamed to \code{\link[=cluster_infomap]{cluster_infomap()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_community_infomap}{\code{community_infomap()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

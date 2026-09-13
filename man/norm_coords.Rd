@@ -20,15 +20,14 @@ norm_coords(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{xmin, xmax}{The limits for the first coordinate, if one of them or both
-are \code{NULL} then no normalization is performed along this direction.}
+\item{xmin, xmax}{The limits for the first coordinate,
+if one of them or both are \code{NULL} then no normalization is performed along this direction.}
 
-\item{ymin, ymax}{The limits for the second coordinate, if one of them or
-both are \code{NULL} then no normalization is performed along this
-direction.}
+\item{ymin, ymax}{The limits for the second coordinate,
+if one of them or both are \code{NULL} then no normalization is performed along this direction.}
 
-\item{zmin, zmax}{The limits for the third coordinate, if one of them or both
-are \code{NULL} then no normalization is performed along this direction.}
+\item{zmin, zmax}{The limits for the third coordinate,
+if one of them or both are \code{NULL} then no normalization is performed along this direction.}
 }
 \value{
 A numeric matrix with at the same dimension as \code{layout}.
@@ -37,8 +36,7 @@ A numeric matrix with at the same dimension as \code{layout}.
 Rescale coordinates linearly to be within given bounds.
 }
 \details{
-\code{norm_coords()} normalizes a layout, it linearly transforms each
-coordinate separately to fit into the given limits.
+\code{norm_coords()} normalizes a layout, it linearly transforms each coordinate separately to fit into the given limits.
 }
 \seealso{
 Other graph layouts:

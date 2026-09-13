@@ -15,25 +15,18 @@ split_join_distance(comm1, comm2)
 Two integer numbers, see details below.
 }
 \description{
-The split-join distance between partitions A and B is the sum of the
-projection distance of A from B and the projection distance of B from
-A. The projection distance is an asymmetric measure and it is defined as
-follows:
+The split-join distance between partitions A and B is the sum of the projection distance of A from B and the projection distance of B from A. The projection distance is an asymmetric measure and it is defined as follows:
 }
 \details{
-First, each set in partition A is evaluated against all sets in
-partition B. For each set in partition A, the best matching set in
-partition B is found and the overlap size is calculated. (Matching is
-quantified by the size of the overlap between the two sets). Then, the
-maximal overlap sizes for each set in A are summed together and
-subtracted from the number of elements in A.
+First, each set in partition A is evaluated against all sets in partition B.
+For each set in partition A, the best matching set in partition B is found and the overlap size is calculated.
+(Matching is quantified by the size of the overlap between the two sets).
+Then, the maximal overlap sizes for each set in A are summed together and subtracted from the number of elements in A.
 
-The split-join distance will be returned as two numbers, the first is
-the projection distance of the first partition from the
-second, while the second number is the projection distance of the second
-partition from the first. This makes it easier to detect whether a
-partition is a subpartition of the other, since in this case, the
-corresponding distance will be zero.
+The split-join distance will be returned as two numbers, the first is the projection distance of the first partition from the second,
+while the second number is the projection distance of the second partition from the first.
+This makes it easier to detect whether a partition is a subpartition of the other, since in this case,
+the corresponding distance will be zero.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_split_join_distance}{\code{split_join_distance()}}

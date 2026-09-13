@@ -24,52 +24,42 @@ ba.game(
 i.e. linear preferential attachment.}
 
 \item{m}{Numeric constant, the number of edges to add in each time step,
-defaults to 1.
-This argument is only used if both \code{out.dist} and \code{out.seq} are omitted
-or NULL.}
+defaults to 1. This argument is only used if both \code{out.dist} and \code{out.seq} are omitted or NULL.}
 
-\item{out.dist}{Numeric vector, the distribution of the number of edges to
-add in each time step. This argument is only used if the \code{out.seq}
-argument is omitted or NULL.}
+\item{out.dist}{Numeric vector, the distribution of the number of edges to add in each time step.
+This argument is only used if the \code{out.seq} argument is omitted or NULL.}
 
-\item{out.seq}{Numeric vector giving the number of edges to add in each time
-step. Its first element is ignored as no edges are added in the first time
-step.}
+\item{out.seq}{Numeric vector giving the number of edges to add in each time step.
+Its first element is ignored as no edges are added in the first time step.}
 
-\item{out.pref}{Logical, if true the total degree is used for calculating
-the citation probability, otherwise the in-degree is used.}
+\item{out.pref}{Logical, if true the total degree is used for calculating the citation probability, otherwise the in-degree is used.}
 
-\item{zero.appeal}{The \sQuote{attractiveness} of the vertices with no
-adjacent edges. See details below.}
+\item{zero.appeal}{The \sQuote{attractiveness} of the vertices with no adjacent edges.
+See details below.}
 
 \item{directed}{Whether to create a directed graph.}
 
 \item{algorithm}{The algorithm to use for the graph generation.
-\code{psumtree} uses a partial prefix-sum tree to generate the graph, this
-algorithm can handle any \code{power} and \code{zero.appeal} values and
-never generates multiple edges.  \code{psumtree-multiple} also uses a
-partial prefix-sum tree, but the generation of multiple edges is allowed.
-Before the 0.6 version igraph used this algorithm if \code{power} was not
-one, or \code{zero.appeal} was not one.  \code{bag} is the algorithm that
-was previously (before version 0.6) used if \code{power} was one and
-\code{zero.appeal} was one as well. It works by putting the IDs of the
-vertices into a bag (multiset, really), exactly as many times as their
-(in-)degree, plus once more. Then the required number of cited vertices are
-drawn from the bag, with replacement. This method might generate multiple
-edges. It only works if \code{power} and \code{zero.appeal} are equal one.}
+\code{psumtree} uses a partial prefix-sum tree to generate the graph,
+this algorithm can handle any \code{power} and \code{zero.appeal} values and never generates multiple edges.
+\code{psumtree-multiple} also uses a partial prefix-sum tree, but the generation of multiple edges is allowed.
+Before the 0.6 version igraph used this algorithm if \code{power} was not one, or \code{zero.appeal} was not one.
+\code{bag} is the algorithm that was previously (before version 0.6) used if \code{power} was one and \code{zero.appeal} was one as well.
+It works by putting the IDs of the vertices into a bag (multiset, really), exactly as many times as their (in-)degree, plus once more.
+Then the required number of cited vertices are drawn from the bag, with replacement.
+This method might generate multiple edges.
+It only works if \code{power} and \code{zero.appeal} are equal one.}
 
-\item{start.graph}{\code{NULL} or an igraph graph. If a graph, then the
-supplied graph is used as a starting graph for the preferential attachment
-algorithm. The graph should have at least one vertex. If a graph is supplied
-here and the \code{out.seq} argument is not \code{NULL}, then it should
-contain the out degrees of the new vertices only, not the ones in the
-\code{start.graph}.}
+\item{start.graph}{\code{NULL} or an igraph graph.
+If a graph, then the supplied graph is used as a starting graph for the preferential attachment algorithm.
+The graph should have at least one vertex.
+If a graph is supplied here and the \code{out.seq} argument is not \code{NULL}, then it should contain the out degrees of the new vertices only,
+not the ones in the \code{start.graph}.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{ba.game()} was renamed to \code{\link[=sample_pa]{sample_pa()}} to create a more
-consistent API.
+\code{ba.game()} was renamed to \code{\link[=sample_pa]{sample_pa()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_barabasi_game}{\code{barabasi_game()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

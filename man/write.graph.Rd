@@ -15,21 +15,18 @@ write.graph(
 \arguments{
 \item{graph}{The graph to export.}
 
-\item{file}{A connection or a string giving the file name to write the graph
-to.}
+\item{file}{A connection or a string giving the file name to write the graph to.}
 
-\item{format}{Character string giving the file format. Right now
-\code{pajek}, \code{graphml}, \code{dot}, \code{gml}, \code{edgelist},
-\code{lgl}, \code{ncol}, \code{leda} and \code{dimacs} are implemented. As of igraph 0.4
-this argument is case insensitive.}
+\item{format}{Character string giving the file format.
+Right now \code{pajek}, \code{graphml}, \code{dot}, \code{gml}, \code{edgelist}, \code{lgl}, \code{ncol}, \code{leda} and \code{dimacs} are implemented.
+As of igraph 0.4 this argument is case insensitive.}
 
 \item{...}{Other, format specific arguments, see below.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{write.graph()} was renamed to \code{\link[=write_graph]{write_graph()}} to create a more
-consistent API.
+\code{write.graph()} was renamed to \code{\link[=write_graph]{write_graph()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_edgelist}{\code{write_graph_edgelist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_pajek}{\code{write_graph_pajek()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_graphml}{\code{write_graph_graphml()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_gml}{\code{write_graph_gml()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_dot}{\code{write_graph_dot()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_leda}{\code{write_graph_leda()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

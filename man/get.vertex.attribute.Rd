@@ -9,17 +9,16 @@ get.vertex.attribute(graph, name, index = V(graph))
 \arguments{
 \item{graph}{The graph.}
 
-\item{name}{Name of the attribute to query. If missing, then
-all vertex attributes are returned in a list.}
+\item{name}{Name of the attribute to query.
+If missing, then all vertex attributes are returned in a list.}
 
-\item{index}{An optional vertex sequence to query the attribute only
-for these vertices. The default \code{NULL} selects all vertices.}
+\item{index}{An optional vertex sequence to query the attribute only for these vertices.
+The default \code{NULL} selects all vertices.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{get.vertex.attribute()} was renamed to \code{\link[=vertex_attr]{vertex_attr()}} to create a more
-consistent API.
+\code{get.vertex.attribute()} was renamed to \code{\link[=vertex_attr]{vertex_attr()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

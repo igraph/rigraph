@@ -20,11 +20,12 @@ establishment.game(
 
 \item{k}{The number of trials per time step, see details below.}
 
-\item{type.dist}{The distribution of the vertex types. This is assumed to be
-stationary in time. The default \code{NULL} gives a uniform distribution.}
+\item{type.dist}{The distribution of the vertex types.
+This is assumed to be stationary in time.
+The default \code{NULL} gives a uniform distribution.}
 
-\item{pref.matrix}{A matrix giving the preferences of the given vertex
-types. These should be probabilities, i.e. numbers between zero and one.
+\item{pref.matrix}{A matrix giving the preferences of the given vertex types.
+These should be probabilities, i.e. numbers between zero and one.
 The default \code{NULL} sets all preferences to one.}
 
 \item{directed}{Logical, whether to generate directed graphs.}
@@ -32,8 +33,7 @@ The default \code{NULL} sets all preferences to one.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{establishment.game()} was renamed to \code{\link[=sample_traits]{sample_traits()}} to create a more
-consistent API.
+\code{establishment.game()} was renamed to \code{\link[=sample_traits]{sample_traits()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_establishment_game}{\code{establishment_game()}}

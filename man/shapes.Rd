@@ -17,50 +17,41 @@ shape_noplot(coords, v = NULL, params)
 add_shape(shape, ..., clip = NULL, plot = NULL, parameters = list())
 }
 \arguments{
-\item{shape}{Character scalar, name of a vertex shape. If it is
-\code{NULL} for \code{shapes()}, then the names of all defined
-vertex shapes are returned.}
+\item{shape}{Character scalar, name of a vertex shape.
+If it is \code{NULL} for \code{shapes()}, then the names of all defined vertex shapes are returned.}
 
-\item{coords, el, params, end, v}{See parameters of the clipping/plotting
-functions below.}
+\item{coords, el, params, end, v}{See parameters of the clipping/plotting functions below.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{clip}{An R function object, the clipping function. The default
-\code{NULL} uses \code{shape_noclip}.}
+\item{clip}{An R function object, the clipping function.
+The default \code{NULL} uses \code{shape_noclip}.}
 
-\item{plot}{An R function object, the plotting function. The default
-\code{NULL} uses \code{shape_noplot}.}
+\item{plot}{An R function object, the plotting function.
+The default \code{NULL} uses \code{shape_noplot}.}
 
-\item{parameters}{Named list, additional plot/vertex/edge
-parameters. The element named define the new parameters, and the
-elements themselves define their default values.
-Vertex parameters should have a prefix
-\sQuote{\code{vertex.}}, edge parameters a prefix
-\sQuote{\code{edge.}}. Other general plotting parameters should have
-a prefix \sQuote{\code{plot.}}. See Details below.}
+\item{parameters}{Named list, additional plot/vertex/edge parameters.
+The element named define the new parameters, and the elements themselves define their default values.
+Vertex parameters should have a prefix \sQuote{\code{vertex.}}, edge parameters a prefix \sQuote{\code{edge.}}.
+Other general plotting parameters should have a prefix \sQuote{\code{plot.}}.
+See Details below.}
 }
 \value{
-\code{shapes()} returns a character vector if the
-\code{shape} argument is \code{NULL}. It returns a named list with
-entries named \sQuote{clip} and \sQuote{plot}, both of them R
-functions.
+\code{shapes()} returns a character vector if the \code{shape} argument is \code{NULL}.
+It returns a named list with entries named \sQuote{clip} and \sQuote{plot}, both of them R functions.
 
 \code{add_shape()} returns \code{TRUE}, invisibly.
 
-\code{shape_noclip()} returns the appropriate columns of its
-\code{coords} argument.
+\code{shape_noclip()} returns the appropriate columns of its \code{coords} argument.
 }
 \description{
-Starting from version 0.5.1 igraph supports different
-vertex shapes when plotting graphs.
+Starting from version 0.5.1 igraph supports different vertex shapes when plotting graphs.
 }
 \details{
-In igraph a vertex shape is defined by two functions: 1) provides
-information about the size of the shape for clipping the edges and 2)
-plots the shape if requested. These functions are called \dQuote{shape
-functions} in the rest of this manual page. The first one is the
-clipping function and the second is the plotting function.
+In igraph a vertex shape is defined by two functions: 1) provides information about the size of the shape for clipping the edges and 2) plots the shape
+if requested.
+These functions are called \dQuote{shape functions} in the rest of this manual page.
+The first one is the clipping function and the second is the plotting function.
 
 The clipping function has the following arguments:
 \describe{
@@ -87,11 +78,9 @@ If \dQuote{\code{from}} the function is expected to clip the first column in the
 }
 }
 
-The clipping function should return a matrix
-with the same number of rows as the \code{el} arguments.
-If \code{end} is \code{both} then the matrix must have four
-columns, otherwise two. The matrix contains the modified coordinates,
-with the clipping applied.
+The clipping function should return a matrix with the same number of rows as the \code{el} arguments.
+If \code{end} is \code{both} then the matrix must have four columns, otherwise two.
+The matrix contains the modified coordinates, with the clipping applied.
 
 The plotting function has the following arguments:
 \describe{
@@ -108,27 +97,20 @@ The same as for the clipping function, see above.
 
 The return value of the plotting function is not used.
 
-\code{shapes()} can be used to list the names of all installed
-vertex shapes, by calling it without arguments, or setting the
-\code{shape} argument to \code{NULL}. If a shape name is given, then
-the clipping and plotting functions of that shape are returned in a
-named list.
+\code{shapes()} can be used to list the names of all installed vertex shapes, by calling it without arguments,
+or setting the \code{shape} argument to \code{NULL}.
+If a shape name is given, then the clipping and plotting functions of that shape are returned in a named list.
 
-\code{add_shape()} can be used to add new vertex shapes to
-igraph. For this one must give the clipping and plotting functions of
-the new shape. It is also possible to list the plot/vertex/edge
-parameters, in the \code{parameters} argument, that the clipping
-and/or plotting functions can make use of. An example would be a
-generic regular polygon shape, which can have a parameter for the
-number of sides.
+\code{add_shape()} can be used to add new vertex shapes to igraph.
+For this one must give the clipping and plotting functions of the new shape.
+It is also possible to list the plot/vertex/edge parameters, in the \code{parameters} argument,
+that the clipping and/or plotting functions can make use of.
+An example would be a generic regular polygon shape, which can have a parameter for the number of sides.
 
-\code{shape_noclip()} is a very simple clipping function that the
-user can use in their own shape definitions. It does no clipping, the
-edges will be drawn exactly until the listed vertex position
-coordinates.
+\code{shape_noclip()} is a very simple clipping function that the user can use in their own shape definitions.
+It does no clipping, the edges will be drawn exactly until the listed vertex position coordinates.
 
-\code{shape_noplot()} is a very simple (and probably not very
-useful) plotting function, that does not plot anything.
+\code{shape_noplot()} is a very simple (and probably not very useful) plotting function, that does not plot anything.
 }
 \examples{
 # all vertex shapes, minus "raster", that might not be available

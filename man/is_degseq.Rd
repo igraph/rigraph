@@ -7,23 +7,21 @@
 is_degseq(out.deg, in.deg = NULL)
 }
 \arguments{
-\item{out.deg}{Integer vector, the degree sequence for undirected graphs, or
-the out-degree sequence for directed graphs.}
+\item{out.deg}{Integer vector, the degree sequence for undirected graphs, or the out-degree sequence for directed graphs.}
 
-\item{in.deg}{\code{NULL} or an integer vector. For undirected graphs, it
-should be \code{NULL}. For directed graphs it specifies the in-degrees.}
+\item{in.deg}{\code{NULL} or an integer vector.
+For undirected graphs, it should be \code{NULL}.
+For directed graphs it specifies the in-degrees.}
 }
 \value{
 A logical scalar.
 }
 \description{
-\code{is_degseq()} checks whether the given vertex degrees (in- and
-out-degrees for directed graphs) can be realized by a graph. Note that the
-graph does not have to be simple, it may contain loop and multiple edges.
+\code{is_degseq()} checks whether the given vertex degrees (in- and out-degrees for directed graphs) can be realized by a graph.
+Note that the graph does not have to be simple, it may contain loop and multiple edges.
 For undirected graphs, it also checks whether the sum of degrees is even.
-For directed graphs, the function checks whether the lengths of the two
-degree vectors are equal and whether their sums are also equal. These are
-known sufficient and necessary conditions for a degree sequence to be valid.
+For directed graphs, the function checks whether the lengths of the two degree vectors are equal and whether their sums are also equal.
+These are known sufficient and necessary conditions for a degree sequence to be valid.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_graphical}{\code{is_graphical()}}

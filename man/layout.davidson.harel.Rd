@@ -18,42 +18,37 @@ layout.davidson.harel(
 )
 }
 \arguments{
-\item{graph}{The graph to lay out. Edge directions are ignored.}
+\item{graph}{The graph to lay out.
+Edge directions are ignored.}
 
-\item{coords}{Optional starting positions for the vertices. If this argument
-is not \code{NULL} then it should be an appropriate matrix of starting
-coordinates.}
+\item{coords}{Optional starting positions for the vertices.
+If this argument is not \code{NULL} then it should be an appropriate matrix of starting coordinates.}
 
 \item{maxiter}{Number of iterations to perform in the first phase.}
 
-\item{fineiter}{Number of iterations in the fine tuning phase. The
-default \code{NULL} uses \code{max(10, log2(vcount(graph)))}.}
+\item{fineiter}{Number of iterations in the fine tuning phase.
+The default \code{NULL} uses \code{max(10, log2(vcount(graph)))}.}
 
 \item{cool.fact}{Cooling factor.}
 
-\item{weight.node.dist}{Weight for the node-node distances component of the
-energy function.}
+\item{weight.node.dist}{Weight for the node-node distances component of the energy function.}
 
-\item{weight.border}{Weight for the distance from the border component of
-the energy function. It can be set to zero, if vertices are allowed to sit
-on the border.}
+\item{weight.border}{Weight for the distance from the border component of the energy function.
+It can be set to zero, if vertices are allowed to sit on the border.}
 
-\item{weight.edge.lengths}{Weight for the edge length component of the
-energy function. The default \code{NULL} uses \code{edge_density(graph) / 10}.}
+\item{weight.edge.lengths}{Weight for the edge length component of the energy function.
+The default \code{NULL} uses \code{edge_density(graph) / 10}.}
 
-\item{weight.edge.crossings}{Weight for the edge crossing component of the
-energy function. The default \code{NULL} uses
-\code{1 - sqrt(edge_density(graph))}.}
+\item{weight.edge.crossings}{Weight for the edge crossing component of the energy function.
+The default \code{NULL} uses \code{1 - sqrt(edge_density(graph))}.}
 
-\item{weight.node.edge.dist}{Weight for the node-edge distance component of
-the energy function. The default \code{NULL} uses
-\code{0.2 * (1 - edge_density(graph))}.}
+\item{weight.node.edge.dist}{Weight for the node-edge distance component of the energy function.
+The default \code{NULL} uses \code{0.2 * (1 - edge_density(graph))}.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{layout.davidson.harel()} was renamed to \code{\link[=layout_with_dh]{layout_with_dh()}} to create a more
-consistent API.
+\code{layout.davidson.harel()} was renamed to \code{\link[=layout_with_dh]{layout_with_dh()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_davidson_harel}{\code{layout_davidson_harel()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_density}{\code{density()}}

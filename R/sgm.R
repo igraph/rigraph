@@ -34,40 +34,31 @@ solve_LSAP <- function(x, maximum = FALSE) {
 
 #' Match Graphs given a seeding of vertex correspondences
 #'
-#' Given two adjacency matrices `A` and `B` of the same size, match
-#' the two graphs with the help of `m` seed vertex pairs which correspond
-#' to the first `m` rows (and columns) of the adjacency matrices.
+#' Given two adjacency matrices `A` and `B` of the same size,
+#' match the two graphs with the help of `m` seed vertex pairs
+#' which correspond to the first `m` rows (and columns) of the adjacency matrices.
 #'
-#' The approximate graph matching problem is to find a bijection between the
-#' vertices of two graphs , such that the number of edge disagreements between
-#' the corresponding vertex pairs is minimized. For seeded graph matching, part
-#' of the bijection that consist of known correspondences (the seeds) is known
-#' and the problem task is to complete the bijection by estimating the
-#' permutation matrix that permutes the rows and columns of the adjacency
-#' matrix of the second graph.
+#' The approximate graph matching problem is to find a bijection between the vertices of two graphs , such that the number of edge disagreements between the corresponding vertex pairs is minimized.
+#' For seeded graph matching,
+#' part of the bijection that consist of known correspondences (the seeds) is known and the problem task is to complete the bijection by estimating the permutation matrix that permutes the rows and columns of the adjacency matrix of the second graph.
 #'
-#' It is assumed that for the two supplied adjacency matrices `A` and
-#' `B`, both of size \eqn{n\times n}{n*n}, the first \eqn{m} rows(and
-#' columns) of `A` and `B` correspond to the same vertices in both
-#' graphs. That is, the \eqn{n \times n}{n*n} permutation matrix that defines
-#' the bijection is \eqn{I_{m} \bigoplus P} for a \eqn{(n-m)\times
+#' It is assumed that for the two supplied adjacency matrices `A` and `B`, both of size \eqn{n\times n}{n*n},
+#' the first \eqn{m} rows(and columns) of `A` and `B` correspond to the same vertices in both graphs.
+#' That is, the \eqn{n \times n}{n*n} permutation matrix that defines the bijection is \eqn{I_{m} \bigoplus P} for a \eqn{(n-m)\times
 #' (n-m)}{(n-m)*(n-m)} permutation matrix \eqn{P} and \eqn{m} times \eqn{m}
-#' identity matrix \eqn{I_{m}}. The function `match_vertices()` estimates
-#' the permutation matrix \eqn{P} via an optimization algorithm based on the
-#' Frank-Wolfe algorithm.
+#' identity matrix \eqn{I_{m}}.
+#' The function `match_vertices()` estimates the permutation matrix \eqn{P} via an optimization algorithm based on the Frank-Wolfe algorithm.
 #'
 #' See references for further details.
 #'
 #' @aliases seeded.graph.match
 #' @param A a numeric matrix, the adjacency matrix of the first graph
 #' @param B a numeric matrix, the adjacency matrix of the second graph
-#' @param m The number of seeds. The first `m` vertices of both graphs are
-#'   matched.
-#' @param start a numeric matrix, the permutation matrix estimate is
-#'   initialized with `start`
+#' @param m The number of seeds.
+#'   The first `m` vertices of both graphs are matched.
+#' @param start a numeric matrix, the permutation matrix estimate is initialized with `start`
 #' @param iteration The number of iterations for the Frank-Wolfe algorithm
-#' @return A numeric matrix which is the permutation matrix that determines the
-#'   bijection between the graphs of `A` and `B`
+#' @return A numeric matrix which is the permutation matrix that determines the bijection between the graphs of `A` and `B`
 #' @author Vince Lyzinski <https://www.ams.jhu.edu/~lyzinski/>
 #' @seealso
 #' [sample_correlated_gnp()],[sample_correlated_gnp_pair()]

@@ -9,15 +9,15 @@ clusters(graph, mode = c("weak", "strong"))
 \arguments{
 \item{graph}{The graph to analyze.}
 
-\item{mode}{Character string, either \dQuote{weak} or \dQuote{strong}.  For
-directed graphs \dQuote{weak} implies weakly, \dQuote{strong} strongly
-connected components to search. It is ignored for undirected graphs.}
+\item{mode}{Character string, either \dQuote{weak} or \dQuote{strong}.
+For directed graphs \dQuote{weak} implies weakly,
+\dQuote{strong} strongly connected components to search.
+It is ignored for undirected graphs.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{clusters()} was renamed to \code{\link[=components]{components()}} to create a more
-consistent API.
+\code{clusters()} was renamed to \code{\link[=components]{components()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_connected_components}{\code{connected_components()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

@@ -17,21 +17,18 @@ lastcit.game(
 
 \item{edges}{Number of edges per step.}
 
-\item{agebins}{Number of aging bins. The default \code{NULL} uses \code{n / 7100}.}
+\item{agebins}{Number of aging bins.
+The default \code{NULL} uses \code{n / 7100}.}
 
-\item{pref}{Vector (\code{sample_last_cit()} and \code{sample_cit_types()} or
-matrix (\code{sample_cit_cit_types()}) giving the (unnormalized) citation
-probabilities for the different vertex types. The default \code{NULL} uses
-\code{(1:(agebins + 1))^-3} for \code{sample_last_cit()} and all-one probabilities
-for the other two.}
+\item{pref}{Vector (\code{sample_last_cit()} and \code{sample_cit_types()} or matrix (\code{sample_cit_cit_types()}) giving the (unnormalized) citation probabilities for the different vertex types.
+The default \code{NULL} uses \code{(1:(agebins + 1))^-3} for \code{sample_last_cit()} and all-one probabilities for the other two.}
 
 \item{directed}{Logical, whether to generate directed networks.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{lastcit.game()} was renamed to \code{\link[=sample_last_cit]{sample_last_cit()}} to create a more
-consistent API.
+\code{lastcit.game()} was renamed to \code{\link[=sample_last_cit]{sample_last_cit()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_lastcit_game}{\code{lastcit_game()}}

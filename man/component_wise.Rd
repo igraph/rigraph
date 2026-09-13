@@ -7,13 +7,10 @@
 component_wise(merge_method = "dla")
 }
 \arguments{
-\item{merge_method}{Merging algorithm, the \code{method}
-argument of \code{\link[=merge_coords]{merge_coords()}}.}
+\item{merge_method}{Merging algorithm, the \code{method} argument of \code{\link[=merge_coords]{merge_coords()}}.}
 }
 \description{
-This is a layout modifier function, and it can be used
-to calculate the layout separately for each component
-of the graph.
+This is a layout modifier function, and it can be used to calculate the layout separately for each component of the graph.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_decompose}{\code{decompose()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

@@ -9,22 +9,21 @@ layout.grid(graph, width = 0, height = 0, dim = 2)
 \arguments{
 \item{graph}{The input graph.}
 
-\item{width}{The number of vertices in a single row of the grid. If this is
-zero or negative, then for 2d layouts the width of the grid will be the
-square root of the number of vertices in the graph, rounded up to the next
-integer. Similarly, it will be the cube root for 3d layouts.}
+\item{width}{The number of vertices in a single row of the grid.
+If this is zero or negative, then for 2d layouts the width of the grid will be the square root of the number of vertices in the graph,
+rounded up to the next integer.
+Similarly, it will be the cube root for 3d layouts.}
 
-\item{height}{The number of vertices in a single column of the grid, for
-three dimensional layouts. If this is zero or negative, then it is
-determinted automatically.}
+\item{height}{The number of vertices in a single column of the grid, for three dimensional layouts.
+If this is zero or negative, then it is determinted automatically.}
 
-\item{dim}{Two or three. Whether to make 2d or a 3d layout.}
+\item{dim}{Two or three.
+Whether to make 2d or a 3d layout.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{layout.grid()} was renamed to \code{\link[=layout_on_grid]{layout_on_grid()}} to create a more
-consistent API.
+\code{layout.grid()} was renamed to \code{\link[=layout_on_grid]{layout_on_grid()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_grid_3d}{\code{layout_grid_3d()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_grid}{\code{layout_grid()}}

@@ -51,62 +51,53 @@ export_pajek(blocks, graph, file, ..., project.file = TRUE)
 max_cohesion(blocks)
 }
 \arguments{
-\item{graph}{For \code{cohesive_blocks()} a graph object of class
-\code{igraph}. It must be undirected and simple. (See
-\code{\link[=is_simple]{is_simple()}}.)
+\item{graph}{For \code{cohesive_blocks()} a graph object of class \code{igraph}.
+It must be undirected and simple.
+(See \code{\link[=is_simple]{is_simple()}}.)
 
-For \code{graphs_from_cohesive_blocks()} and \code{export_pajek()} the same graph must be
-supplied whose cohesive block structure is given in the \code{blocks()}
-argument.}
+For \code{graphs_from_cohesive_blocks()} and \code{export_pajek()} the same graph must be supplied whose cohesive block structure is given in the \code{blocks()} argument.}
 
-\item{\dots}{Additional arguments. \code{plot_hierarchy()} and \code{\link[=plot]{plot()}} pass
-them to \code{plot.igraph()}.  \code{\link[=print]{print()}} and \code{\link[=summary]{summary()}} ignore them.
-\code{cohesive_blocks()} and \code{export_pajek()} do not accept extra arguments;
-these dots must be empty for them.}
+\item{\dots}{Additional arguments.
+\code{plot_hierarchy()} and \code{\link[=plot]{plot()}} pass them to \code{plot.igraph()}.
+\code{\link[=print]{print()}} and \code{\link[=summary]{summary()}} ignore them.
+\code{cohesive_blocks()} and \code{export_pajek()} do not accept extra arguments; these dots must be empty for them.}
 
-\item{labels}{Logical, whether to add the vertex labels to the result
-object. These labels can be then used when reporting and plotting the
-cohesive blocks.}
+\item{labels}{Logical, whether to add the vertex labels to the result object.
+These labels can be then used when reporting and plotting the cohesive blocks.}
 
-\item{blocks, x, object}{A \code{cohesiveBlocks} object, created with the
-\code{cohesive_blocks()} function.}
+\item{blocks, x, object}{A \code{cohesiveBlocks} object, created with the \code{cohesive_blocks()} function.}
 
-\item{y}{The graph whose cohesive blocks are supplied in the \code{x}
-argument.}
+\item{y}{The graph whose cohesive blocks are supplied in the \code{x} argument.}
 
-\item{colbar}{Color bar for the vertex colors. Its length should be at least
-\eqn{m+1}, where \eqn{m} is the maximum cohesion in the graph.
-Alternatively, the vertex colors can also be directly specified via the
-\code{col} argument.}
+\item{colbar}{Color bar for the vertex colors.
+Its length should be at least \eqn{m+1}, where \eqn{m} is the maximum cohesion in the graph.
+Alternatively, the vertex colors can also be directly specified via the \code{col} argument.}
 
-\item{col}{A vector of vertex colors, in any of the usual formats. (Symbolic
-color names (e.g. \sQuote{red}, \sQuote{blue}, etc.) , RGB colors (e.g.
-\sQuote{#FF9900FF}), integer numbers referring to the current palette. By
-default the given \code{colbar} is used and vertices with the same maximal
-cohesion will have the same color.}
+\item{col}{A vector of vertex colors, in any of the usual formats.
+(Symbolic color names (e.g. \sQuote{red}, \sQuote{blue}, etc.) , RGB colors (e.g. \sQuote{#FF9900FF}),
+integer numbers referring to the current palette.
+By default the given \code{colbar} is used and vertices with the same maximal cohesion will have the same color.}
 
-\item{mark.groups}{A list of vertex sets to mark on the plot by circling
-them. By default all cohesive blocks are marked, except the one
-corresponding to the all vertices.}
+\item{mark.groups}{A list of vertex sets to mark on the plot by circling them.
+By default all cohesive blocks are marked, except the one corresponding to the all vertices.}
 
-\item{layout}{The layout of a plot, it is simply passed on to
-\code{plot.igraph()}, see the possible formats there. The default \code{NULL} uses
-the Reingold-Tilford layout generator.}
+\item{layout}{The layout of a plot, it is simply passed on to \code{plot.igraph()}, see the possible formats there.
+The default \code{NULL} uses the Reingold-Tilford layout generator.}
 
 \item{file}{Defines the file (or connection) the Pajek file is written to.
 
-If the \code{project.file} argument is \code{TRUE}, then it can be a
-filename (with extension), a file object, or in general any king of
-connection object. The file/connection will be opened if it wasn't already.
+If the \code{project.file} argument is \code{TRUE}, then it can be a filename (with extension), a file object,
+or in general any king of connection object.
+The file/connection will be opened if it wasn't already.
 
-If the \code{project.file} argument is \code{FALSE}, then several files are
-created and \code{file} must be a character scalar containing the base name
-of the files, without extension. (But it can contain the path to the files.)
+If the \code{project.file} argument is \code{FALSE},
+then several files are created and \code{file} must be a character scalar containing the base name of the files, without extension.
+(But it can contain the path to the files.)
 
 See also details below.}
 
-\item{project.file}{Logical, whether to create a single Pajek project
-file containing all the data, or to create separated files for each item.
+\item{project.file}{Logical, whether to create a single Pajek project file containing all the data,
+or to create separated files for each item.
 See details below.}
 }
 \value{
@@ -114,17 +105,14 @@ See details below.}
 
 \code{blocks()} returns a list of numeric vectors, containing vertex IDs.
 
-\code{graphs_from_cohesive_blocks()} returns a list of igraph graphs, corresponding to the
-cohesive blocks.
+\code{graphs_from_cohesive_blocks()} returns a list of igraph graphs, corresponding to the cohesive blocks.
 
 \code{cohesion()} returns a numeric vector, the cohesion of each block.
 
-\code{hierarchy()} returns an igraph graph, the representation of the cohesive
-block hierarchy.
+\code{hierarchy()} returns an igraph graph, the representation of the cohesive block hierarchy.
 
-\code{parent()} returns a numeric vector giving the parent block of each
-cohesive block, in the block hierarchy. The block at the root of the
-hierarchy has no parent and \code{0} is returned for it.
+\code{parent()} returns a numeric vector giving the parent block of each cohesive block, in the block hierarchy.
+The block at the root of the hierarchy has no parent and \code{0} is returned for it.
 
 \code{plot_hierarchy()}, \code{\link[=plot]{plot()}} and \code{export_pajek()} return \code{NULL},
 invisibly.
@@ -132,8 +120,7 @@ invisibly.
 \code{max_cohesion()} returns a numeric vector with one entry for each vertex,
 giving the cohesion of its most cohesive block.
 
-\code{\link[=print]{print()}} and \code{\link[=summary]{summary()}} return the \code{cohesiveBlocks} object
-itself, invisibly.
+\code{\link[=print]{print()}} and \code{\link[=summary]{summary()}} return the \code{cohesiveBlocks} object itself, invisibly.
 
 \code{length} returns a numeric scalar, the number of blocks.
 }
@@ -141,88 +128,71 @@ itself, invisibly.
 Calculates cohesive blocks for objects of class \code{igraph}.
 }
 \details{
-Cohesive blocking is a method of determining hierarchical subsets of graph
-vertices based on their structural cohesion (or vertex connectivity). For a
-given graph \eqn{G}, a subset of its vertices \eqn{S\subset V(G)}{S} is said
-to be maximally \eqn{k}-cohesive if there is no superset of \eqn{S} with
-vertex connectivity greater than or equal to \eqn{k}. Cohesive blocking is a
-process through which, given a \eqn{k}-cohesive set of vertices, maximally
-\eqn{l}-cohesive subsets are recursively identified with \eqn{l>k}. Thus a
-hierarchy of vertex subsets is found, with the entire graph \eqn{G} at its
-root.
+Cohesive blocking is a method of determining hierarchical subsets of graph vertices based on their structural cohesion (or vertex connectivity).
+For a given graph \eqn{G},
+a subset of its vertices \eqn{S\subset V(G)}{S} is said to be maximally \eqn{k}-cohesive
+if there is no superset of \eqn{S} with vertex connectivity greater than or equal to \eqn{k}.
+Cohesive blocking is a process through which, given a \eqn{k}-cohesive set of vertices,
+maximally \eqn{l}-cohesive subsets are recursively identified with \eqn{l>k}.
+Thus a hierarchy of vertex subsets is found, with the entire graph \eqn{G} at its root.
 
-The function \code{cohesive_blocks()} implements cohesive blocking.  It
-returns a \code{cohesiveBlocks} object. \code{cohesiveBlocks} should be
-handled as an opaque class, i.e. its internal structure should not be
-accessed directly, but through the functions listed here.
+The function \code{cohesive_blocks()} implements cohesive blocking.
+It returns a \code{cohesiveBlocks} object.
+\code{cohesiveBlocks} should be handled as an opaque class, i.e. its internal structure should not be accessed directly,
+but through the functions listed here.
 
-The function \code{length} can be used on \code{cohesiveBlocks} objects and
-it gives the number of blocks.
+The function \code{length} can be used on \code{cohesiveBlocks} objects and it gives the number of blocks.
 
-The function \code{blocks()} returns the actual blocks stored in the
-\code{cohesiveBlocks} object. They are returned in a list of numeric
-vectors, each containing vertex IDs.
+The function \code{blocks()} returns the actual blocks stored in the \code{cohesiveBlocks} object.
+They are returned in a list of numeric vectors, each containing vertex IDs.
 
-The function \code{graphs_from_cohesive_blocks()} is similar, but returns the blocks as
-(induced) subgraphs of the input graph. The various (graph, vertex and edge)
-attributes are kept in the subgraph.
+The function \code{graphs_from_cohesive_blocks()} is similar, but returns the blocks as (induced) subgraphs of the input graph.
+The various (graph, vertex and edge) attributes are kept in the subgraph.
 
-The function \code{cohesion()} returns a numeric vector, the cohesion of the
-different blocks. The order of the blocks is the same as for the
-\code{blocks()} and \code{graphs_from_cohesive_blocks()} functions.
+The function \code{cohesion()} returns a numeric vector, the cohesion of the different blocks.
+The order of the blocks is the same as for the \code{blocks()} and \code{graphs_from_cohesive_blocks()} functions.
 
-The block hierarchy can be queried using the \code{hierarchy()} function. It
-returns an igraph graph, its vertex IDs are ordered according the order of
-the blocks in the \code{blocks()} and \code{graphs_from_cohesive_blocks()}, \code{cohesion()},
+The block hierarchy can be queried using the \code{hierarchy()} function.
+It returns an igraph graph,
+its vertex IDs are ordered according the order of the blocks in the \code{blocks()} and \code{graphs_from_cohesive_blocks()}, \code{cohesion()},
 etc. functions.
 
 \code{parent()} gives the parent vertex of each block, in the block hierarchy,
 for the root vertex it gives 0.
 
-\code{plot_hierarchy()} plots the hierarchy tree of the cohesive blocks on the
-active graphics device, by calling \code{igraph.plot}.
+\code{plot_hierarchy()} plots the hierarchy tree of the cohesive blocks on the active graphics device, by calling \code{igraph.plot}.
 
-The \code{export_pajek()} function can be used to export the graph and its
-cohesive blocks in Pajek format. It can either export a single Pajek project
-file with all the information, or a set of files, depending on its
-\code{project.file} argument. If \code{project.file} is \code{TRUE}, then
-the following information is written to the file (or connection) given in
-the \code{file} argument: (1) the input graph, together with its attributes,
-see \code{\link[=write_graph]{write_graph()}} for details; (2) the hierarchy graph; and (3)
-one binary partition for each cohesive block. If \code{project.file} is
-\code{FALSE}, then the \code{file} argument must be a character scalar and
-it is used as the base name for the generated files. If \code{file} is
-\sQuote{basename}, then the following files are created: (1)
-\sQuote{basename.net} for the original graph; (2)
-\sQuote{basename_hierarchy.net} for the hierarchy graph; (3)
-\sQuote{basename_block_x.net} for each cohesive block, where \sQuote{x} is
-the number of the block, starting with one.
+The \code{export_pajek()} function can be used to export the graph and its cohesive blocks in Pajek format.
+It can either export a single Pajek project file with all the information, or a set of files, depending on its \code{project.file} argument.
+If \code{project.file} is \code{TRUE}, then the following information is written to the file (or connection) given in the \code{file} argument:
+(1) the input graph, together with its attributes, see \code{\link[=write_graph]{write_graph()}} for details; (2) the hierarchy graph;
+and (3) one binary partition for each cohesive block.
+If \code{project.file} is \code{FALSE},
+then the \code{file} argument must be a character scalar and it is used as the base name for the generated files.
+If \code{file} is \sQuote{basename}, then the following files are created: (1) \sQuote{basename.net} for the original graph;
+(2) \sQuote{basename_hierarchy.net} for the hierarchy graph; (3) \sQuote{basename_block_x.net} for each cohesive block,
+where \sQuote{x} is the number of the block, starting with one.
 
-\code{max_cohesion()} returns the maximal cohesion of each vertex, i.e. the
-cohesion of the most cohesive block of the vertex.
+\code{max_cohesion()} returns the maximal cohesion of each vertex, i.e. the cohesion of the most cohesive block of the vertex.
 
-The generic function \code{\link[=summary]{summary()}} works on \code{cohesiveBlocks} objects
-and it prints a one line summary to the terminal.
+The generic function \code{\link[=summary]{summary()}} works on \code{cohesiveBlocks} objects and it prints a one line summary to the terminal.
 
-The generic function \code{\link[=print]{print()}} is also defined on \code{cohesiveBlocks}
-objects and it is invoked automatically if the name of the
-\code{cohesiveBlocks} object is typed in. It produces an output like this:
+The generic function \code{\link[=print]{print()}} is also defined on \code{cohesiveBlocks} objects and it is invoked automatically
+if the name of the \code{cohesiveBlocks} object is typed in.
+It produces an output like this:
 \preformatted{ Cohesive block structure:
 B-1 c 1, n 23
 '- B-2 c 2, n 14 oooooooo.. .o......oo ooo
 '- B-4 c 5, n  7 ooooooo... .......... ...
 '- B-3 c 2, n 10 ......o.oo o.oooooo.. ...
 '- B-5 c 3, n  4 ......o.oo o......... ...  }
-The left part shows the block structure, in this case for five
-blocks. The first block always corresponds to the whole graph, even if its
-cohesion is zero. Then cohesion of the block and the number of vertices in
-the block are shown. The last part is only printed if the display is wide
-enough and shows the vertices in the blocks, ordered by vertex IDs.
-\sQuote{o} means that the vertex is included, a dot means that it is not,
-and the vertices are shown in groups of ten.
+The left part shows the block structure, in this case for five blocks.
+The first block always corresponds to the whole graph, even if its cohesion is zero.
+Then cohesion of the block and the number of vertices in the block are shown.
+The last part is only printed if the display is wide enough and shows the vertices in the blocks, ordered by vertex IDs.
+\sQuote{o} means that the vertex is included, a dot means that it is not, and the vertices are shown in groups of ten.
 
-The generic function \code{\link[=plot]{plot()}} plots the graph, showing one or more
-cohesive blocks in it.
+The generic function \code{\link[=plot]{plot()}} plots the graph, showing one or more cohesive blocks in it.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_cohesive_blocks}{\code{cohesive_blocks()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_edgelist}{\code{write_graph_edgelist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_pajek}{\code{write_graph_pajek()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_graphml}{\code{write_graph_graphml()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_gml}{\code{write_graph_gml()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_dot}{\code{write_graph_dot()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_leda}{\code{write_graph_leda()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}

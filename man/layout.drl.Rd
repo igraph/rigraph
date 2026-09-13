@@ -16,34 +16,30 @@ layout.drl(
 \arguments{
 \item{graph}{The input graph, in can be directed or undirected.}
 
-\item{use.seed}{Logical, whether to use the coordinates given in the
-\code{seed} argument as a starting point.}
+\item{use.seed}{Logical, whether to use the coordinates given in the \code{seed} argument as a starting point.}
 
-\item{seed}{A matrix with two columns, the starting coordinates for the
-vertices is \code{use.seed} is \code{TRUE}. It is ignored otherwise. The default
-\code{NULL} draws uniformly random starting coordinates.}
+\item{seed}{A matrix with two columns, the starting coordinates for the vertices is \code{use.seed} is \code{TRUE}.
+It is ignored otherwise.
+The default \code{NULL} draws uniformly random starting coordinates.}
 
-\item{options}{Options for the layout generator, a named list. See details
-below. The default \code{NULL} uses \code{drl_defaults$default}.}
+\item{options}{Options for the layout generator, a named list.
+See details below.
+The default \code{NULL} uses \code{drl_defaults$default}.}
 
-\item{weights}{The weights of the edges. It must be a positive numeric vector,
-\code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
-\sQuote{weight} edge attribute, then that attribute will be used. If
-\code{NULL} and no such attribute is present, then the edges will have equal
-weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
-attribute, but you don't want to use it for the layout. Larger edge weights
-correspond to stronger connections.}
+\item{weights}{The weights of the edges.
+It must be a positive numeric vector, \code{NULL} or \code{NA}.
+If it is \code{NULL} and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
+If \code{NULL} and no such attribute is present, then the edges will have equal weights.
+Set this to \code{NA} if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for the layout.
+Larger edge weights correspond to stronger connections.}
 
-\item{dim}{Either \sQuote{2} or \sQuote{3}, it specifies whether we want a
-two dimensional or a three dimensional layout. Note that because of the
-nature of the DrL algorithm, the three dimensional layout takes
-significantly longer to compute.}
+\item{dim}{Either \sQuote{2} or \sQuote{3}, it specifies whether we want a two dimensional or a three dimensional layout.
+Note that because of the nature of the DrL algorithm, the three dimensional layout takes significantly longer to compute.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{layout.drl()} was renamed to \code{\link[=layout_with_drl]{layout_with_drl()}} to create a more
-consistent API.
+\code{layout.drl()} was renamed to \code{\link[=layout_with_drl]{layout_with_drl()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

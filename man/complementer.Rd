@@ -17,16 +17,13 @@ complementer(graph, ..., loops = FALSE)
 A new graph object.
 }
 \description{
-A complementer graph contains all edges that were not present in the input
-graph.
+A complementer graph contains all edges that were not present in the input graph.
 }
 \details{
-\code{complementer()} creates the complementer of a graph. Only edges
-which are \emph{not} present in the original graph will be included in the
-new graph.
+\code{complementer()} creates the complementer of a graph.
+Only edges which are \emph{not} present in the original graph will be included in the new graph.
 
-\code{complementer()} keeps graph and vertex attriubutes, edge
-attributes are lost.
+\code{complementer()} keeps graph and vertex attriubutes, edge attributes are lost.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_complementer}{\code{complementer()}}

@@ -11,16 +11,14 @@ as_edgelist(graph, ..., names = TRUE)
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{names}{Whether to return a character matrix containing vertex
-names (i.e. the \code{name} vertex attribute) if they exist or numeric
-vertex IDs.}
+\item{names}{Whether to return a character matrix containing vertex names (i.e. the \code{name} vertex attribute)
+if they exist or numeric vertex IDs.}
 }
 \value{
 A \code{ecount(graph)} by 2 numeric matrix.
 }
 \description{
-Sometimes it is useful to work with a standard representation of a
-graph, like an edge list.
+Sometimes it is useful to work with a standard representation of a graph, like an edge list.
 }
 \details{
 \code{as_edgelist()} returns the list of edges in a graph.

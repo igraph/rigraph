@@ -14,16 +14,14 @@
 \item{...}{Ignored, included for S3 signature compatibility.}
 }
 \value{
-A vertex sequence that contains only vertices that are part of
-\code{big}, but not part of \code{small}.
+A vertex sequence that contains only vertices that are part of \code{big}, but not part of \code{small}.
 }
 \description{
 Difference of vertex sequences
 }
 \details{
-They must belong to the same graph. Note that this function has
-\sQuote{set} semantics and the multiplicity of vertices is lost in the
-result.
+They must belong to the same graph.
+Note that this function has \sQuote{set} semantics and the multiplicity of vertices is lost in the result.
 }
 \examples{
 g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))

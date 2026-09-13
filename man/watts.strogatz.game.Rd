@@ -11,22 +11,18 @@ watts.strogatz.game(dim, size, nei, p, loops = FALSE, multiple = FALSE)
 
 \item{size}{Integer constant, the size of the lattice along each dimension.}
 
-\item{nei}{Integer constant, the neighborhood within which the vertices of
-the lattice will be connected.}
+\item{nei}{Integer constant, the neighborhood within which the vertices of the lattice will be connected.}
 
 \item{p}{Real constant between zero and one, the rewiring probability.}
 
-\item{loops}{Logical, whether loops edges are allowed in the
-generated graph.}
+\item{loops}{Logical, whether loops edges are allowed in the generated graph.}
 
-\item{multiple}{Logical, whether multiple edges are allowed int the
-generated graph.}
+\item{multiple}{Logical, whether multiple edges are allowed int the generated graph.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{watts.strogatz.game()} was renamed to \code{\link[=sample_smallworld]{sample_smallworld()}} to create a more
-consistent API.
+\code{watts.strogatz.game()} was renamed to \code{\link[=sample_smallworld]{sample_smallworld()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_watts_strogatz_game}{\code{watts_strogatz_game()}}

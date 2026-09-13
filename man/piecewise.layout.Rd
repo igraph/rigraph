@@ -9,18 +9,16 @@ piecewise.layout(graph, layout = layout_with_kk, ...)
 \arguments{
 \item{graph}{The input graph.}
 
-\item{layout}{A function object, the layout function to use. The default
-\code{NULL} uses \code{layout_with_kk}.}
+\item{layout}{A function object, the layout function to use.
+The default \code{NULL} uses \code{layout_with_kk}.}
 
-\item{...}{For \code{layout_components()}, additional arguments to pass to
-the \code{layout} layout function. For \code{merge_coords()}, these dots must be
-empty.}
+\item{...}{For \code{layout_components()}, additional arguments to pass to the \code{layout} layout function.
+For \code{merge_coords()}, these dots must be empty.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{piecewise.layout()} was renamed to \code{\link[=layout_components]{layout_components()}} to create a more
-consistent API.
+\code{piecewise.layout()} was renamed to \code{\link[=layout_components]{layout_components()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_decompose}{\code{decompose()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

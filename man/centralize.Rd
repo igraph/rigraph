@@ -12,42 +12,34 @@ centralize(scores, ..., theoretical.max = 0, normalized = TRUE)
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{theoretical.max}{Real scalar. The graph-level centralization measure of
-the most centralized graph with the same number of vertices as the graph
-under study. This is only used if the \code{normalized} argument is set
-to \code{TRUE}.}
+\item{theoretical.max}{Real scalar.
+The graph-level centralization measure of the most centralized graph with the same number of vertices as the graph under study.
+This is only used if the \code{normalized} argument is set to \code{TRUE}.}
 
-\item{normalized}{Logical. Whether to normalize the graph level
-centrality score by dividing by the supplied theoretical maximum.}
+\item{normalized}{Logical.
+Whether to normalize the graph level centrality score by dividing by the supplied theoretical maximum.}
 }
 \value{
-A real scalar, the centralization of the graph from which
-\code{scores} were derived.
+A real scalar, the centralization of the graph from which \code{scores} were derived.
 }
 \description{
-Centralization is a method for creating a graph level centralization
-measure from the centrality scores of the vertices.
+Centralization is a method for creating a graph level centralization measure from the centrality scores of the vertices.
 }
 \details{
-Centralization is a general method for calculating a graph-level
-centrality score based on node-level centrality measure. The formula for
-this is
+Centralization is a general method for calculating a graph-level centrality score based on node-level centrality measure.
+The formula for this is
 \deqn{C(G)=\sum_v (\max_w c_w - c_v),}{ C(G)=sum(max(c(w), w) - c(v), v),}
 where \eqn{c_v}{c(v)} is the centrality of vertex \eqn{v}.
 
-The graph-level centralization measure can be normalized by dividing by the
-maximum theoretical score for a graph with the same number of vertices,
-using the same parameters, e.g. directedness, whether we consider loop
-edges, etc.
+The graph-level centralization measure can be normalized by dividing by the maximum theoretical score for a graph with the same number of vertices,
+using the same parameters, e.g. directedness, whether we consider loop edges, etc.
 
-For degree, closeness and betweenness the most centralized structure is
-some version of the star graph, in-star, out-star or undirected star.
+For degree, closeness and betweenness the most centralized structure is some version of the star graph, in-star,
+out-star or undirected star.
 
-For eigenvector centrality the most centralized structure is the graph
-with a single edge (and potentially many isolates).
+For eigenvector centrality the most centralized structure is the graph with a single edge (and potentially many isolates).
 
-\code{centralize()} implements general centralization formula to calculate
-a graph-level score from vertex-level scores.
+\code{centralize()} implements general centralization formula to calculate a graph-level score from vertex-level scores.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization}{\code{centralization()}}

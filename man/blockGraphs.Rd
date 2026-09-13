@@ -7,18 +7,15 @@
 blockGraphs(blocks, graph)
 }
 \arguments{
-\item{graph}{For \code{cohesive_blocks()} a graph object of class
-\code{igraph}. It must be undirected and simple. (See
-\code{\link[=is_simple]{is_simple()}}.)
+\item{graph}{For \code{cohesive_blocks()} a graph object of class \code{igraph}.
+It must be undirected and simple.
+(See \code{\link[=is_simple]{is_simple()}}.)
 
-For \code{graphs_from_cohesive_blocks()} and \code{export_pajek()} the same graph must be
-supplied whose cohesive block structure is given in the \code{blocks()}
-argument.}
+For \code{graphs_from_cohesive_blocks()} and \code{export_pajek()} the same graph must be supplied whose cohesive block structure is given in the \code{blocks()} argument.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{blockGraphs()} was renamed to \code{\link[=graphs_from_cohesive_blocks]{graphs_from_cohesive_blocks()}} to create a more
-consistent API.
+\code{blockGraphs()} was renamed to \code{\link[=graphs_from_cohesive_blocks]{graphs_from_cohesive_blocks()}} to create a more consistent API.
 }
 \keyword{internal}

@@ -11,8 +11,7 @@ sample_islands(islands.n, islands.size, islands.pin, n.inter)
 
 \item{islands.size}{The size of islands in the graph.}
 
-\item{islands.pin}{The probability to create each possible edge into each
-island.}
+\item{islands.pin}{The probability to create each possible edge into each island.}
 
 \item{n.inter}{The number of edges to create between two islands.}
 }
@@ -20,8 +19,7 @@ island.}
 An igraph graph.
 }
 \description{
-Create a number of Erdős-Rényi random graphs with identical parameters, and
-connect them with the specified number of edges.
+Create a number of Erdős-Rényi random graphs with identical parameters, and connect them with the specified number of edges.
 }
 \section{Examples}{
 

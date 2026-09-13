@@ -3,8 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `maximal.independent.vertex.sets()` was renamed to [max_ivs()] to create a more
-#' consistent API.
+#' `maximal.independent.vertex.sets()` was renamed to [max_ivs()] to create a more consistent API.
 #' @inheritParams max_ivs
 #' @keywords internal
 #' @export
@@ -23,8 +22,7 @@ maximal.independent.vertex.sets <- function(graph) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `maximal.cliques.count()` was renamed to [count_max_cliques()] to create a more
-#' consistent API.
+#' `maximal.cliques.count()` was renamed to [count_max_cliques()] to create a more consistent API.
 #' @inheritParams count_max_cliques
 #' @keywords internal
 #' @export
@@ -48,8 +46,7 @@ maximal.cliques.count <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `maximal.cliques()` was renamed to [max_cliques()] to create a more
-#' consistent API.
+#' `maximal.cliques()` was renamed to [max_cliques()] to create a more consistent API.
 #' @inheritParams max_cliques
 #' @keywords internal
 #' @export
@@ -70,8 +67,7 @@ maximal.cliques <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `largest.independent.vertex.sets()` was renamed to [largest_ivs()] to create a more
-#' consistent API.
+#' `largest.independent.vertex.sets()` was renamed to [largest_ivs()] to create a more consistent API.
 #' @inheritParams largest_ivs
 #' @keywords internal
 #' @export
@@ -90,8 +86,7 @@ largest.independent.vertex.sets <- function(graph) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `largest.cliques()` was renamed to [largest_cliques()] to create a more
-#' consistent API.
+#' `largest.cliques()` was renamed to [largest_cliques()] to create a more consistent API.
 #' @inheritParams largest_cliques
 #' @keywords internal
 #' @export
@@ -106,8 +101,7 @@ largest.cliques <- function(graph) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `independent.vertex.sets()` was renamed to [ivs()] to create a more
-#' consistent API.
+#' `independent.vertex.sets()` was renamed to [ivs()] to create a more consistent API.
 #' @inheritParams ivs
 #' @keywords internal
 #' @export
@@ -122,8 +116,7 @@ independent.vertex.sets <- function(graph, min = NULL, max = NULL) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `independence.number()` was renamed to [ivs_size()] to create a more
-#' consistent API.
+#' `independence.number()` was renamed to [ivs_size()] to create a more consistent API.
 #' @inheritParams ivs_size
 #' @keywords internal
 #' @export
@@ -138,8 +131,7 @@ independence.number <- function(graph) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `clique.number()` was renamed to [clique_num()] to create a more
-#' consistent API.
+#' `clique.number()` was renamed to [clique_num()] to create a more consistent API.
 #' @inheritParams clique_num
 #' @keywords internal
 #' @export
@@ -171,66 +163,57 @@ clique.number <- function(graph) {
 
 #' Functions to find cliques, i.e. complete subgraphs in a graph
 #'
-#' These functions find all, the largest or all the maximal cliques in an
-#' undirected graph. The size of the largest clique can also be calculated.
+#' These functions find all, the largest or all the maximal cliques in an undirected graph.
+#' The size of the largest clique can also be calculated.
 #'
-#' `cliques()` find all complete subgraphs in the input graph, obeying the
-#' size limitations given in the `min` and `max` arguments.
+#' `cliques()` find all complete subgraphs in the input graph, obeying the size limitations given in the `min` and `max` arguments.
 #'
-#' `largest_cliques()` finds all largest cliques in the input graph. A
-#' clique is largest if there is no other clique including more vertices.
+#' `largest_cliques()` finds all largest cliques in the input graph.
+#' A clique is largest if there is no other clique including more vertices.
 #'
-#' `max_cliques()` finds all maximal cliques in the input graph.  A
-#' clique is maximal if it cannot be extended to a larger clique. The largest
-#' cliques are always maximal, but a maximal clique is not necessarily the
-#' largest.
+#' `max_cliques()` finds all maximal cliques in the input graph.
+#' A clique is maximal if it cannot be extended to a larger clique.
+#' The largest cliques are always maximal, but a maximal clique is not necessarily the largest.
 #'
 #' `count_max_cliques()` counts the maximal cliques.
 #'
 #' `clique_num()` calculates the size of the largest clique(s).
 #'
-#' `clique_size_counts()` returns a numeric vector representing a histogram
-#' of clique sizes, between the given minimum and maximum clique size.
+#' `clique_size_counts()` returns a numeric vector representing a histogram of clique sizes,
+#' between the given minimum and maximum clique size.
 #'
 #' `is_clique()` tests whether all pairs within a vertex set are connected.
 #'
 #' @inheritParams weighted_cliques
-#' @param graph The input graph, directed graphs will be considered as
-#'   undirected ones, multiple edges and loops are ignored.
+#' @param graph The input graph, directed graphs will be considered as undirected ones, multiple edges and loops are ignored.
 #' @param min Numeric constant, lower limit on the size of the cliques to find.
 #'   `NULL` means no limit, i.e. it is the same as 0.
 #' @param max Numeric constant, upper limit on the size of the cliques to find.
 #'   `NULL` means no limit.
 #' @param ... These dots are for future extensions and must be empty.
-#' @param callback Optional function to call for each clique found. If provided,
-#'   the function should accept one argument: `clique` (integer vector of vertex
-#'   IDs in the clique, 1-based indexing). The function should return `FALSE` to
-#'   continue the search or `TRUE` to stop it. If `NULL` (the default), all
-#'   cliques are collected and returned as a list.
+#' @param callback Optional function to call for each clique found.
+#'   If provided, the function should accept one argument: `clique` (integer vector of vertex IDs in the clique, 1-based indexing).
+#'   The function should return `FALSE` to continue the search or `TRUE` to stop it.
+#'   If `NULL` (the default), all cliques are collected and returned as a list.
 #'
-#'   **Important limitation:** Callback functions must NOT call any igraph
-#'   functions (including simple queries like `vcount()` or `ecount()`). Doing
-#'   so will cause R to crash due to reentrancy issues. Extract
-#'   any needed graph information before calling the function with a callback, or
-#'   use collector mode (the default) and process results afterward.
-#' @return `cliques()` returns a list containing numeric vectors of vertex IDs if
-#'   `callback` is `NULL`. Each list element is a clique, i.e. a vertex sequence
-#'   of class [igraph.vs][V]. If `callback` is provided, returns `NULL` invisibly.
+#'   **Important limitation:** Callback functions must NOT call any igraph functions (including simple queries like `vcount()` or `ecount()`).
+#'   Doing so will cause R to crash due to reentrancy issues.
+#'   Extract any needed graph information before calling the function with a callback,
+#'   or use collector mode (the default) and process results afterward.
+#' @return `cliques()` returns a list containing numeric vectors of vertex IDs if `callback` is `NULL`.
+#'   Each list element is a clique, i.e. a vertex sequence of class [igraph.vs][V].
+#'   If `callback` is provided, returns `NULL` invisibly.
 #'
-#'   `largest_cliques()` and `clique_num()` return a list containing numeric
-#'   vectors of vertex IDs. Each list element is a clique, i.e. a vertex sequence
-#'   of class [igraph.vs][V].
+#'   `largest_cliques()` and `clique_num()` return a list containing numeric vectors of vertex IDs.
+#'   Each list element is a clique, i.e. a vertex sequence of class [igraph.vs][V].
 #'
-#'   `max_cliques()` returns `NULL`, invisibly, if its `file`
-#'   argument is not `NULL`. The output is written to the specified file in
-#'   this case.
+#'   `max_cliques()` returns `NULL`, invisibly, if its `file` argument is not `NULL`.
+#'   The output is written to the specified file in this case.
 #'
-#'   `clique_num()` and `count_max_cliques()` return an integer
-#'   scalar.
+#'   `clique_num()` and `count_max_cliques()` return an integer scalar.
 #'
-#'   `clique_size_counts()` returns a numeric vector with the clique sizes such that
-#'   the i-th item belongs to cliques of size i. Trailing zeros are currently
-#'   truncated, but this might change in future versions.
+#'   `clique_size_counts()` returns a numeric vector with the clique sizes such that the i-th item belongs to cliques of size i.
+#'   Trailing zeros are currently truncated, but this might change in future versions.
 #'
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
@@ -286,16 +269,14 @@ largest_cliques <- function(graph) {
 }
 
 #' @rdname cliques
-#' @param subset If not `NULL`, then it must be a vector of vertex IDs,
-#'   numeric or symbolic if the graph is named. The algorithm is run from these
-#'   vertices only, so only a subset of all maximal cliques is returned. See the
-#'   Eppstein paper for details. This argument makes it possible to easily
-#'   parallelize the finding of maximal cliques.
-#' @param file If not `NULL`, then it must be a file name, i.e. a
-#'   character scalar. The output of the algorithm is written to this file. (If
-#'   it exists, then it will be overwritten.) Each clique will be a separate line
-#'   in the file, given with the numeric IDs of its vertices, separated by
-#'   whitespace.
+#' @param subset If not `NULL`, then it must be a vector of vertex IDs, numeric or symbolic if the graph is named.
+#'   The algorithm is run from these vertices only, so only a subset of all maximal cliques is returned.
+#'   See the Eppstein paper for details.
+#'   This argument makes it possible to easily parallelize the finding of maximal cliques.
+#' @param file If not `NULL`, then it must be a file name, i.e. a character scalar.
+#'   The output of the algorithm is written to this file.
+#'   (If it exists, then it will be overwritten.)
+#'   Each clique will be a separate line in the file, given with the numeric IDs of its vertices, separated by whitespace.
 #' @export
 max_cliques <- function(
   graph,
@@ -458,37 +439,30 @@ clique_num <- function(graph) {
 
 #' Functions to find weighted cliques, i.e. vertex-weighted complete subgraphs in a graph
 #'
-#' These functions find all, the largest or all the maximal weighted cliques in
-#' an undirected graph. The weight of a clique is the sum of the weights of its
-#' vertices.
+#' These functions find all, the largest or all the maximal weighted cliques in an undirected graph.
+#' The weight of a clique is the sum of the weights of its vertices.
 #'
 #' `weighted_cliques()` finds all complete subgraphs in the input graph,
-#' obeying the weight limitations given in the `min` and `max`
-#' arguments.
+#' obeying the weight limitations given in the `min` and `max` arguments.
 #'
-#' `largest_weighted_cliques()` finds all largest weighted cliques in the
-#' input graph. A clique is largest if there is no other clique whose total
-#' weight is larger than the weight of this clique.
+#' `largest_weighted_cliques()` finds all largest weighted cliques in the input graph.
+#' A clique is largest if there is no other clique whose total weight is larger than the weight of this clique.
 #'
 #' `weighted_clique_num()` calculates the weight of the largest weighted clique(s).
 #'
-#' @param graph The input graph, directed graphs will be considered as
-#'   undirected ones, multiple edges and loops are ignored.
+#' @param graph The input graph, directed graphs will be considered as undirected ones, multiple edges and loops are ignored.
 #' @param min.weight Numeric constant, lower limit on the weight of the cliques to find.
 #'   `NULL` means no limit, i.e. it is the same as 0.
 #' @param max.weight Numeric constant, upper limit on the weight of the cliques to find.
 #'   `NULL` means no limit.
 #' @inheritParams rlang::args_dots_empty
-#' @param vertex.weights Vertex weight vector. If the graph has a `weight`
-#'   vertex attribute, then this is used by default. If the graph does not have a
-#'   `weight` vertex attribute and this argument is `NULL`, then every
-#'   vertex is assumed to have a weight of 1. Note that the current implementation
-#'   of the weighted clique finder supports positive integer weights only.
-#' @param maximal Specifies whether to look for all weighted cliques (`FALSE`)
-#'   or only the maximal ones (`TRUE`).
-#' @return `weighted_cliques()` and `largest_weighted_cliques()` return a
-#'   list containing numeric vectors of vertex IDs. Each list element is a weighted
-#'   clique, i.e. a vertex sequence of class [igraph.vs][V].
+#' @param vertex.weights Vertex weight vector.
+#'   If the graph has a `weight` vertex attribute, then this is used by default.
+#'   If the graph does not have a `weight` vertex attribute and this argument is `NULL`,
+#'   then every vertex is assumed to have a weight of 1. Note that the current implementation of the weighted clique finder supports positive integer weights only.
+#' @param maximal Specifies whether to look for all weighted cliques (`FALSE`) or only the maximal ones (`TRUE`).
+#' @return `weighted_cliques()` and `largest_weighted_cliques()` return a list containing numeric vectors of vertex IDs.
+#'   Each list element is a weighted clique, i.e. a vertex sequence of class [igraph.vs][V].
 #'
 #'   `weighted_clique_num()` returns an integer scalar.
 #'
@@ -662,43 +636,34 @@ weighted_clique_num <- function(
 
 #' Independent vertex sets
 #'
-#' A vertex set is called independent if there no edges between any two
-#' vertices in it. These functions find independent vertex sets in undirected
-#' graphs
+#' A vertex set is called independent if there no edges between any two vertices in it.
+#' These functions find independent vertex sets in undirected graphs
 #'
-#' `ivs()` finds all independent vertex sets in the
-#' network, obeying the size limitations given in the `min` and `max`
-#' arguments.
+#' `ivs()` finds all independent vertex sets in the network, obeying the size limitations given in the `min` and `max` arguments.
 #'
-#' `largest_ivs()` finds the largest independent vertex
-#' sets in the graph. An independent vertex set is largest if there is no
-#' independent vertex set with more vertices.
+#' `largest_ivs()` finds the largest independent vertex sets in the graph.
+#' An independent vertex set is largest if there is no independent vertex set with more vertices.
 #'
-#' `max_ivs()` finds the maximal independent vertex
-#' sets in the graph. An independent vertex set is maximal if it cannot be
-#' extended to a larger independent vertex set. The largest independent vertex
-#' sets are maximal, but the opposite is not always true.
+#' `max_ivs()` finds the maximal independent vertex sets in the graph.
+#' An independent vertex set is maximal if it cannot be extended to a larger independent vertex set.
+#' The largest independent vertex sets are maximal, but the opposite is not always true.
 #'
-#' `ivs_size()` calculate the size of the largest independent
-#' vertex set(s).
+#' `ivs_size()` calculate the size of the largest independent vertex set(s).
 #'
 #' `independence_number()` is an alias for `ivs_size()`.
 #'
-#' These functions use the algorithm described by Tsukiyama et al., see
-#' reference below.
+#' These functions use the algorithm described by Tsukiyama et al., see reference below.
 #'
 #' `is_ivs()` tests if no pairs within a vertex set are connected.
 #'
 #' @param graph The input graph, directed graphs are considered as undirected,
 #'   loop edges and multiple edges are ignored.
-#' @param min Numeric constant, limit for the minimum size of the independent
-#'   vertex sets to find. `NULL` means no limit.
-#' @param max Numeric constant, limit for the maximum size of the independent
-#'   vertex sets to find. `NULL` means no limit.
-#' @return `ivs()`,
-#'   `largest_ivs()` and
-#'   `max_ivs()` return a list containing numeric
-#'   vertex IDs, each list element is an independent vertex set.
+#' @param min Numeric constant, limit for the minimum size of the independent vertex sets to find.
+#'   `NULL` means no limit.
+#' @param max Numeric constant, limit for the maximum size of the independent vertex sets to find.
+#'   `NULL` means no limit.
+#' @return `ivs()`, `largest_ivs()` and `max_ivs()` return a list containing numeric vertex IDs,
+#'   each list element is an independent vertex set.
 #'
 #'   `ivs_size()` returns an integer constant.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} ported it from the Very Nauty
@@ -773,8 +738,7 @@ max_ivs <- function(graph) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `maximal_ivs()` was renamed to [max_ivs()] to create a more
-#' consistent API.
+#' `maximal_ivs()` was renamed to [max_ivs()] to create a more consistent API.
 #' @export
 #' @inheritParams max_ivs
 #' @keywords internal
@@ -862,9 +826,8 @@ clique_size_counts <- function(
 
 #' Is this a complete graph?
 #'
-#' A graph is considered complete if there is an edge between all distinct
-#' directed pairs of vertices. igraph considers both the singleton graph
-#' and the null graph complete.
+#' A graph is considered complete
+#' if there is an edge between all distinct directed pairs of vertices. igraph considers both the singleton graph and the null graph complete.
 #'
 #' @param graph The input graph.
 #' @return True if the graph is complete.
@@ -889,14 +852,13 @@ is_complete <- function(graph) {
 #' @rdname cliques
 #'
 #' @description
-#' Tests if all pairs within a set of vertices are adjacent, i.e. whether they
-#' form a clique. An empty set and singleton set are considered to be a clique.
+#' Tests if all pairs within a set of vertices are adjacent, i.e. whether they form a clique.
+#' An empty set and singleton set are considered to be a clique.
 #'
 #' @param graph The input graph.
 #' @param candidate The vertex set to test for being a clique.
 #' @param directed Whether to consider edge directions.
-#' @return `is_clique()` returns `TRUE` if the candidate vertex set forms
-#'   a clique.
+#' @return `is_clique()` returns `TRUE` if the candidate vertex set forms a clique.
 #' @keywords graphs
 #' @export
 is_clique <- function(
@@ -951,8 +913,7 @@ is_clique <- function(
 #'
 #' @param graph The input graph.
 #' @param candidate The vertex set to test for being an independent set.
-#' @return `is_ivs()` returns `TRUE` if the candidate vertex set forms an
-#'   independent set.
+#' @return `is_ivs()` returns `TRUE` if the candidate vertex set forms an independent set.
 #' @keywords graphs
 #' @export
 is_ivs <- function(graph, candidate) {

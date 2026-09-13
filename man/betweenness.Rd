@@ -34,42 +34,34 @@ The default \code{NULL} selects all vertices.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{directed}{Logical, whether directed paths should be considered while
-determining the shortest paths.}
+\item{directed}{Logical, whether directed paths should be considered while determining the shortest paths.}
 
-\item{weights}{Optional positive weight vector for calculating weighted
-betweenness. If the graph has a \code{weight} edge attribute, then this is
-used by default. Weights are used to calculate weighted shortest paths,
-so they are interpreted as distances.}
+\item{weights}{Optional positive weight vector for calculating weighted betweenness.
+If the graph has a \code{weight} edge attribute, then this is used by default.
+Weights are used to calculate weighted shortest paths, so they are interpreted as distances.}
 
-\item{normalized}{Logical, whether to normalize the betweenness
-scores. If \code{TRUE}, then the results are normalized by the number of ordered
-or unordered vertex pairs in directed and undirected graphs, respectively.
+\item{normalized}{Logical, whether to normalize the betweenness scores.
+If \code{TRUE},
+then the results are normalized by the number of ordered or unordered vertex pairs in directed and undirected graphs, respectively.
 In an undirected graph,
 \deqn{B^n=\frac{2B}{(n-1)(n-2)},}{Bnorm=2 B / ((n-1)(n-2)),}
-where
-\eqn{B^n}{Bnorm} is the normalized, \eqn{B} the raw betweenness, and
-\eqn{n} is the number of vertices in the graph. Note that the same
-normalization factor is used even when setting a \code{cutoff} on the considered
-shortest path lengths, even though the number of vertex pairs reachable
-from each other may be less than \eqn{(n-1)(n-2)/2}.}
+where \eqn{B^n}{Bnorm} is the normalized, \eqn{B} the raw betweenness, and \eqn{n} is the number of vertices in the graph.
+Note that the same normalization factor is used even when setting a \code{cutoff} on the considered shortest path lengths,
+even though the number of vertex pairs reachable from each other may be less than \eqn{(n-1)(n-2)/2}.}
 
-\item{cutoff}{The maximum shortest path length to consider when calculating
-betweenness. If negative, then there is no such limit.}
+\item{cutoff}{The maximum shortest path length to consider when calculating betweenness.
+If negative, then there is no such limit.}
 
 \item{e}{The edges for which the edge betweenness will be calculated.
 The default \code{NULL} selects all edges.}
 }
 \value{
-A numeric vector with the betweenness score for each vertex in
-\code{v} for \code{betweenness()}.
+A numeric vector with the betweenness score for each vertex in \code{v} for \code{betweenness()}.
 
-A numeric vector with the edge betweenness score for each edge in \code{e}
-for \code{edge_betweenness()}.
+A numeric vector with the edge betweenness score for each edge in \code{e} for \code{edge_betweenness()}.
 }
 \description{
-The vertex and edge betweenness are (roughly) defined by the number of
-geodesics (shortest paths) going through a vertex or an edge.
+The vertex and edge betweenness are (roughly) defined by the number of geodesics (shortest paths) going through a vertex or an edge.
 }
 \details{
 The vertex betweenness of vertex \code{v} is defined by
@@ -81,26 +73,20 @@ The edge betweenness of edge \code{e} is defined by
 
 \deqn{\sum_{i\ne j} g_{iej}/g_{ij}.}{sum( g_iej / g_ij, i!=j).}
 
-\code{betweenness()} calculates vertex betweenness, \code{edge_betweenness()}
-calculates edge betweenness.
+\code{betweenness()} calculates vertex betweenness, \code{edge_betweenness()} calculates edge betweenness.
 
-Here \eqn{g_{ij}}{g_ij} is the total number of shortest paths between vertices
-\eqn{i} and \eqn{j} while \eqn{g_{ivj}} is the number of those shortest paths
-which pass though vertex \eqn{v}.
+Here \eqn{g_{ij}}{g_ij} is the total number of shortest paths between vertices \eqn{i} and \eqn{j}
+while \eqn{g_{ivj}} is the number of those shortest paths which pass though vertex \eqn{v}.
 
-Both functions allow you to consider only paths of length \code{cutoff} or
-smaller; this can be run for larger graphs, as the running time is not
-quadratic (if \code{cutoff} is small). If \code{cutoff} is negative (the default),
-then the function calculates the exact betweenness scores. Since igraph 1.6.0,
-a \code{cutoff} value of zero is treated literally, i.e. paths of length larger
-than zero are ignored.
+Both functions allow you to consider only paths of length \code{cutoff} or smaller; this can be run for larger graphs,
+as the running time is not quadratic (if \code{cutoff} is small).
+If \code{cutoff} is negative (the default), then the function calculates the exact betweenness scores.
+Since igraph 1.6.0, a \code{cutoff} value of zero is treated literally, i.e. paths of length larger than zero are ignored.
 
-For calculating the betweenness a similar algorithm to the one proposed by
-Brandes (see References) is used.
+For calculating the betweenness a similar algorithm to the one proposed by Brandes (see References) is used.
 }
 \note{
-\code{edge_betweenness()} might give false values for graphs with
-multiple edges.
+\code{edge_betweenness()} might give false values for graphs with multiple edges.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_betweenness_cutoff}{\code{betweenness_cutoff()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_edge_betweenness_cutoff}{\code{edge_betweenness_cutoff()}}

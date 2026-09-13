@@ -3,8 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `running.mean()` was renamed to [running_mean()] to create a more
-#' consistent API.
+#' `running.mean()` was renamed to [running_mean()] to create a more consistent API.
 #' @inheritParams running_mean
 #' @keywords internal
 #' @export
@@ -19,8 +18,7 @@ running.mean <- function(v, binwidth) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `igraph.sample()` was renamed to [sample_seq()] to create a more
-#' consistent API.
+#' `igraph.sample()` was renamed to [sample_seq()] to create a more consistent API.
 #' @inheritParams sample_seq
 #' @keywords internal
 #' @export
@@ -35,8 +33,7 @@ igraph.sample <- function(low, high, length) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `convex.hull()` was renamed to [convex_hull()] to create a more
-#' consistent API.
+#' `convex.hull()` was renamed to [convex_hull()] to create a more consistent API.
 #' @inheritParams convex_hull
 #' @keywords internal
 #' @export
@@ -68,13 +65,11 @@ convex.hull <- function(data) {
 
 #' Running mean of a time series
 #'
-#' `running_mean()` calculates the running mean in a vector with the given
-#' bin width.
+#' `running_mean()` calculates the running mean in a vector with the given bin width.
 #'
-#' The running mean of `v` is a `w` vector of length
-#' `length(v)-binwidth+1`. The first element of `w` ID the average of
-#' the first `binwidth` elements of `v`, the second element of
-#' `w` is the average of elements `2:(binwidth+1)`, etc.
+#' The running mean of `v` is a `w` vector of length `length(v)-binwidth+1`.
+#' The first element of `w` ID the average of the first `binwidth` elements of `v`,
+#' the second element of `w` is the average of elements `2:(binwidth+1)`, etc.
 #'
 #' @param v The numeric vector.
 #' @param binwidth Numeric constant, the size of the bin, should be meaningful,
@@ -104,12 +99,10 @@ running_mean <- function(v, binwidth) {
 
 #' Sampling a random integer sequence
 #'
-#' This function provides a very efficient way to pull an integer random sample
-#' sequence from an integer interval.
+#' This function provides a very efficient way to pull an integer random sample sequence from an integer interval.
 #'
-#' The algorithm runs in `O(length)` expected time, even if
-#' `high-low` is big. It is much faster (but of course less general) than
-#' the builtin `sample` function of R.
+#' The algorithm runs in `O(length)` expected time, even if `high-low` is big.
+#' It is much faster (but of course less general) than the builtin `sample` function of R.
 #'
 #' @param low The lower limit of the interval (inclusive).
 #' @param high The higher limit of the interval (inclusive).
@@ -137,19 +130,16 @@ sample_seq <- function(low, high, length) {
 
 #' Common handler for vertex type arguments in igraph functions
 #'
-#' This function takes the `types` and `graph` arguments from a
-#' public igraph function call and validates the vertex type vector.
+#' This function takes the `types` and `graph` arguments from a public igraph function call and validates the vertex type vector.
 #'
-#' When the provided vertex types are NULL and the graph has a `types`
-#' vertex attribute, then the value of this vertex attribute will be used as
-#' vertex types. Non-logical vertex type vectors are coerced into logical
-#' vectors after printing a warning.
+#' When the provided vertex types are NULL and the graph has a `types` vertex attribute,
+#' then the value of this vertex attribute will be used as vertex types.
+#' Non-logical vertex type vectors are coerced into logical vectors after printing a warning.
 #'
 #' @param types the vertex types
 #' @param graph the graph
 #' @param required whether the graph has to be bipartite
-#' @return A logical vector representing the resolved vertex type for each
-#'   vertex in the graph
+#' @return A logical vector representing the resolved vertex type for each vertex in the graph
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
 #' @dev
 #'
@@ -201,8 +191,7 @@ igraph.i.spMatrix <- function(M) {
 
 #' Convex hull of a set of vertices
 #'
-#' Calculate the convex hull of a set of points, i.e. the covering polygon that
-#' has the smallest area.
+#' Calculate the convex hull of a set of points, i.e. the covering polygon that has the smallest area.
 #'
 #'
 #' @param data The data points, a numeric matrix with two columns.

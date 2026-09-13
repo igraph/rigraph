@@ -14,45 +14,37 @@ graph.adjacency(
 )
 }
 \arguments{
-\item{adjmatrix}{A square adjacency matrix. From igraph version 0.5.1 this
-can be a sparse matrix created with the \code{Matrix} package.}
+\item{adjmatrix}{A square adjacency matrix.
+From igraph version 0.5.1 this can be a sparse matrix created with the \code{Matrix} package.}
 
-\item{mode}{Character scalar, specifies how igraph should interpret the
-supplied matrix. See also the \code{weighted} argument, the interpretation
-depends on that too. Possible values are: \code{directed},
-\code{undirected}, \code{upper}, \code{lower}, \code{max}, \code{min},
-\code{plus}. See details below.}
+\item{mode}{Character scalar, specifies how igraph should interpret the supplied matrix.
+See also the \code{weighted} argument, the interpretation depends on that too.
+Possible values are: \code{directed}, \code{undirected}, \code{upper}, \code{lower}, \code{max}, \code{min}, \code{plus}.
+See details below.}
 
-\item{weighted}{This argument specifies whether to create a weighted graph
-from an adjacency matrix. If it is \code{NULL} then an unweighted graph is
-created and the elements of the adjacency matrix gives the number of edges
-between the vertices. If it is a character constant then for every non-zero
-matrix entry an edge is created and the value of the entry is added as an
-edge attribute named by the \code{weighted} argument. If it is \code{TRUE}
-then a weighted graph is created and the name of the edge attribute will be
-\code{weight}. See also details below.}
+\item{weighted}{This argument specifies whether to create a weighted graph from an adjacency matrix.
+If it is \code{NULL} then an unweighted graph is created and the elements of the adjacency matrix gives the number of edges between the vertices.
+If it is a character constant then for every non-zero matrix entry an edge is created and the value of the entry is added as an edge attribute named by the \code{weighted} argument.
+If it is \code{TRUE} then a weighted graph is created and the name of the edge attribute will be \code{weight}.
+See also details below.}
 
-\item{diag}{Logical, whether to include the diagonal of the matrix in
-the calculation. If this is \code{FALSE} then the diagonal is zerod out
-first.}
+\item{diag}{Logical, whether to include the diagonal of the matrix in the calculation.
+If this is \code{FALSE} then the diagonal is zerod out first.}
 
-\item{add.colnames}{Character scalar, whether to add the column names as
-vertex attributes. If it is \code{NULL} (the default) then, if
-present, column names are added as vertex attribute \sQuote{name}. If
-\code{NA} or \code{FALSE} then they will not be added.  If a character constant,
-then it gives the name of the vertex attribute to add.}
+\item{add.colnames}{Character scalar, whether to add the column names as vertex attributes.
+If it is \code{NULL} (the default) then, if present, column names are added as vertex attribute \sQuote{name}.
+If \code{NA} or \code{FALSE} then they will not be added.
+If a character constant, then it gives the name of the vertex attribute to add.}
 
-\item{add.rownames}{Character scalar, whether to add the row names as vertex
-attributes. Possible values the same as the previous argument. By default
-row names are not added. If \sQuote{\code{add.rownames}} and
-\sQuote{\code{add.colnames}} specify the same vertex attribute, then the
-former is ignored.}
+\item{add.rownames}{Character scalar, whether to add the row names as vertex attributes.
+Possible values the same as the previous argument.
+By default row names are not added.
+If \sQuote{\code{add.rownames}} and \sQuote{\code{add.colnames}} specify the same vertex attribute, then the former is ignored.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.adjacency()} was renamed to \code{\link[=graph_from_adjacency_matrix]{graph_from_adjacency_matrix()}} to create a more
-consistent API.
+\code{graph.adjacency()} was renamed to \code{\link[=graph_from_adjacency_matrix]{graph_from_adjacency_matrix()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_adjacency}{\code{adjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_weighted_adjacency}{\code{weighted_adjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create}{\code{create()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty}{\code{empty()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous}{\code{famous()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple}{\code{is_simple()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

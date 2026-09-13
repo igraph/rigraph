@@ -10,9 +10,8 @@ graph_attr(graph, name) <- value
 \arguments{
 \item{graph}{The graph.}
 
-\item{name}{The name of the attribute to set. If missing, then
-\code{value} should be a named list, and all list members
-are set as attributes.}
+\item{name}{The name of the attribute to set.
+If missing, then \code{value} should be a named list, and all list members are set as attributes.}
 
 \item{value}{The value of the attribute to set}
 }

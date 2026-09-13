@@ -9,25 +9,21 @@ edge.disjoint.paths(graph, source = NULL, target = NULL, checks = TRUE)
 \arguments{
 \item{graph}{The input graph.}
 
-\item{source}{The ID of the source vertex, for \code{edge_connectivity()} it
-can be \code{NULL}, see details below.}
+\item{source}{The ID of the source vertex, for \code{edge_connectivity()} it can be \code{NULL}, see details below.}
 
-\item{target}{The ID of the target vertex, for \code{edge_connectivity()} it
-can be \code{NULL}, see details below.}
+\item{target}{The ID of the target vertex, for \code{edge_connectivity()} it can be \code{NULL}, see details below.}
 
-\item{checks}{Logical. Whether to check that the graph is connected
-and also the degree of the vertices. If the graph is not (strongly)
-connected then the connectivity is obviously zero. Otherwise if the minimum
-degree is one then the edge connectivity is also one. It is a good idea to
-perform these checks, as they can be done quickly compared to the
-connectivity calculation itself.  They were suggested by Peter McMahan,
-thanks Peter.}
+\item{checks}{Logical.
+Whether to check that the graph is connected and also the degree of the vertices.
+If the graph is not (strongly) connected then the connectivity is obviously zero.
+Otherwise if the minimum degree is one then the edge connectivity is also one.
+It is a good idea to perform these checks, as they can be done quickly compared to the connectivity calculation itself.
+They were suggested by Peter McMahan, thanks Peter.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{edge.disjoint.paths()} was renamed to \code{\link[=edge_connectivity]{edge_connectivity()}} to create a more
-consistent API.
+\code{edge.disjoint.paths()} was renamed to \code{\link[=edge_connectivity]{edge_connectivity()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_edge_connectivity}{\code{edge_connectivity()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_st_edge_connectivity}{\code{st_edge_connectivity()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

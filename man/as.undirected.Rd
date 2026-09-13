@@ -13,22 +13,21 @@ as.undirected(
 \arguments{
 \item{graph}{The graph to convert.}
 
-\item{mode}{Character constant, defines the conversion algorithm. For
-\code{as_directed()} it can be \code{mutual} or \code{arbitrary}. For
-\code{as_undirected()} it can be \code{each}, \code{collapse} or
-\code{mutual}. See details below.}
+\item{mode}{Character constant, defines the conversion algorithm.
+For \code{as_directed()} it can be \code{mutual} or \code{arbitrary}.
+For \code{as_undirected()} it can be \code{each}, \code{collapse} or \code{mutual}.
+See details below.}
 
-\item{edge.attr.comb}{Specifies what to do with edge attributes, if
-\code{mode="collapse"} or \code{mode="mutual"}.  In these cases many edges
-might be mapped to a single one in the new graph, and their attributes are
-combined. Please see \code{\link[=attribute.combination]{attribute.combination()}} for details on
-this. The default \code{NULL} uses the \code{edge.attr.comb} igraph option.}
+\item{edge.attr.comb}{Specifies what to do with edge attributes,
+if \code{mode="collapse"} or \code{mode="mutual"}.
+In these cases many edges might be mapped to a single one in the new graph, and their attributes are combined.
+Please see \code{\link[=attribute.combination]{attribute.combination()}} for details on this.
+The default \code{NULL} uses the \code{edge.attr.comb} igraph option.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{as.undirected()} was renamed to \code{\link[=as_undirected]{as_undirected()}} to create a more
-consistent API.
+\code{as.undirected()} was renamed to \code{\link[=as_undirected]{as_undirected()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_to_undirected}{\code{to_undirected()}}

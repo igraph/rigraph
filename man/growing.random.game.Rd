@@ -13,14 +13,13 @@ growing.random.game(n, m = 1, directed = TRUE, citation = FALSE)
 
 \item{directed}{Logical, whether to create a directed graph.}
 
-\item{citation}{Logical. If \code{TRUE} a citation graph is created, i.e. in
-each time step the added edges are originating from the new vertex.}
+\item{citation}{Logical.
+If \code{TRUE} a citation graph is created, i.e. in each time step the added edges are originating from the new vertex.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{growing.random.game()} was renamed to \code{\link[=sample_growing]{sample_growing()}} to create a more
-consistent API.
+\code{growing.random.game()} was renamed to \code{\link[=sample_growing]{sample_growing()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_growing_random_game}{\code{growing_random_game()}}

@@ -19,29 +19,25 @@ static.power.law.game(
 
 \item{no.of.edges}{The number of edges in the generated graph.}
 
-\item{exponent.out}{Numeric scalar, the power law exponent of the degree
-distribution. For directed graphs, this specifies the exponent of the
-out-degree distribution. It must be greater than or equal to 2. If you pass
-\code{Inf} here, you will get back an Erdős-Rényi random network.}
+\item{exponent.out}{Numeric scalar, the power law exponent of the degree distribution.
+For directed graphs, this specifies the exponent of the out-degree distribution.
+It must be greater than or equal to 2. If you pass \code{Inf} here, you will get back an Erdős-Rényi random network.}
 
-\item{exponent.in}{Numeric scalar. If negative, the generated graph will be
-undirected. If greater than or equal to 2, this argument specifies the
-exponent of the in-degree distribution. If non-negative but less than 2, an
-error will be generated.}
+\item{exponent.in}{Numeric scalar.
+If negative, the generated graph will be undirected.
+If greater than or equal to 2, this argument specifies the exponent of the in-degree distribution.
+If non-negative but less than 2, an error will be generated.}
 
 \item{loops}{Logical, whether to allow loop edges in the graph.}
 
-\item{multiple}{Logical, whether to allow multiple edges in the
-graph.}
+\item{multiple}{Logical, whether to allow multiple edges in the graph.}
 
-\item{finite.size.correction}{Logical, whether to use the proposed
-finite size correction of Cho et al., see references below.}
+\item{finite.size.correction}{Logical, whether to use the proposed finite size correction of Cho et al., see references below.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{static.power.law.game()} was renamed to \code{\link[=sample_fitness_pl]{sample_fitness_pl()}} to create a more
-consistent API.
+\code{static.power.law.game()} was renamed to \code{\link[=sample_fitness_pl]{sample_fitness_pl()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_static_power_law_game}{\code{static_power_law_game()}}

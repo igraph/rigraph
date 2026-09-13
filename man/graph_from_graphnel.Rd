@@ -17,34 +17,27 @@ graph_from_graphnel(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{name}{Logical, whether to add graphNEL vertex names as an
-igraph vertex attribute called \sQuote{\code{name}}.}
+\item{name}{Logical, whether to add graphNEL vertex names as an igraph vertex attribute called \sQuote{\code{name}}.}
 
-\item{weight}{Logical, whether to add graphNEL edge weights as an
-igraph edge attribute called \sQuote{\code{weight}}. (graphNEL graphs are
-always weighted.)}
+\item{weight}{Logical, whether to add graphNEL edge weights as an igraph edge attribute called \sQuote{\code{weight}}.
+(graphNEL graphs are always weighted.)}
 
-\item{unlist.attrs}{Logical. graphNEL attribute query functions
-return the values of the attributes in R lists, if this argument is
-\code{TRUE} (the default) these will be converted to atomic vectors,
-whenever possible, before adding them to the igraph graph.}
+\item{unlist.attrs}{Logical. graphNEL attribute query functions return the values of the attributes in R lists,
+if this argument is \code{TRUE} (the default) these will be converted to atomic vectors, whenever possible,
+before adding them to the igraph graph.}
 }
 \value{
 \code{graph_from_graphnel()} returns an igraph graph object.
 }
 \description{
-The graphNEL class is defined in the \code{graph} package, it is another
-way to represent graphs. \code{graph_from_graphnel()} takes a graphNEL
-graph and converts it to an igraph graph. It handles all
-graph/vertex/edge attributes. If the graphNEL graph has a vertex
-attribute called \sQuote{\code{name}} it will be used as igraph vertex
-attribute \sQuote{\code{name}} and the graphNEL vertex names will be
-ignored.
+The graphNEL class is defined in the \code{graph} package, it is another way to represent graphs.
+\code{graph_from_graphnel()} takes a graphNEL graph and converts it to an igraph graph.
+It handles all graph/vertex/edge attributes.
+If the graphNEL graph has a vertex attribute called \sQuote{\code{name}} it will be used as igraph vertex attribute \sQuote{\code{name}} and the graphNEL vertex names will be ignored.
 }
 \details{
-Because graphNEL graphs poorly support multiple edges, the edge
-attributes of the multiple edges are lost: they are all replaced by the
-attributes of the first of the multiple edges.
+Because graphNEL graphs poorly support multiple edges, the edge attributes of the multiple edges are lost:
+they are all replaced by the attributes of the first of the multiple edges.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist}{\code{get_edgelist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_adjlist}{\code{adjlist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
@@ -68,10 +61,8 @@ g4
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-\code{\link[=as_graphnel]{as_graphnel()}} for the other direction,
-\code{\link[=as_adjacency_matrix]{as_adjacency_matrix()}}, \code{\link[=graph_from_adjacency_matrix]{graph_from_adjacency_matrix()}},
-\code{\link[=as_adj_list]{as_adj_list()}} and \code{\link[=graph_from_adj_list]{graph_from_adj_list()}} for other
-graph representations.
+\code{\link[=as_graphnel]{as_graphnel()}} for the other direction, \code{\link[=as_adjacency_matrix]{as_adjacency_matrix()}}, \code{\link[=graph_from_adjacency_matrix]{graph_from_adjacency_matrix()}},
+\code{\link[=as_adj_list]{as_adj_list()}} and \code{\link[=graph_from_adj_list]{graph_from_adj_list()}} for other graph representations.
 
 Other conversion:
 \code{\link[=as.matrix.igraph]{as.matrix.igraph()}},

@@ -13,9 +13,8 @@ as_membership(x)
 The input vector, with the \code{membership} class added.
 }
 \description{
-This is useful if you want to use functions defined on
-membership vectors, but your membership vector does not
-come from an igraph clustering method.
+This is useful if you want to use functions defined on membership vectors,
+but your membership vector does not come from an igraph clustering method.
 }
 \examples{
 ## Compare to the correct clustering

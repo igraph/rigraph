@@ -11,18 +11,16 @@ set.edge.attribute(graph, name, index = E(graph), value)
 
 \item{name}{The name of the attribute to set.}
 
-\item{index}{An optional edge sequence to set the attributes of
-a subset of edges. The default \code{NULL} selects all edges.}
+\item{index}{An optional edge sequence to set the attributes of a subset of edges.
+The default \code{NULL} selects all edges.}
 
-\item{value}{The new value of the attribute for all (or \code{index})
-edges.
+\item{value}{The new value of the attribute for all (or \code{index}) edges.
 If \code{NULL}, the input is returned unchanged.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{set.edge.attribute()} was renamed to \code{\link[=set_edge_attr]{set_edge_attr()}} to create a more
-consistent API.
+\code{set.edge.attribute()} was renamed to \code{\link[=set_edge_attr]{set_edge_attr()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

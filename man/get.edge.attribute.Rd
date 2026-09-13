@@ -9,17 +9,16 @@ get.edge.attribute(graph, name, index = E(graph))
 \arguments{
 \item{graph}{The graph}
 
-\item{name}{The name of the attribute to query. If missing, then
-all edge attributes are returned in a list.}
+\item{name}{The name of the attribute to query.
+If missing, then all edge attributes are returned in a list.}
 
-\item{index}{An optional edge sequence to query edge attributes
-for a subset of edges. The default \code{NULL} selects all edges.}
+\item{index}{An optional edge sequence to query edge attributes for a subset of edges.
+The default \code{NULL} selects all edges.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{get.edge.attribute()} was renamed to \code{\link[=edge_attr]{edge_attr()}} to create a more
-consistent API.
+\code{get.edge.attribute()} was renamed to \code{\link[=edge_attr]{edge_attr()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

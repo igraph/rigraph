@@ -17,20 +17,18 @@ layout.norm(
 \arguments{
 \item{layout}{A matrix with two or three columns, the layout to normalize.}
 
-\item{xmin, xmax}{The limits for the first coordinate, if one of them or both
-are \code{NULL} then no normalization is performed along this direction.}
+\item{xmin, xmax}{The limits for the first coordinate,
+if one of them or both are \code{NULL} then no normalization is performed along this direction.}
 
-\item{ymin, ymax}{The limits for the second coordinate, if one of them or
-both are \code{NULL} then no normalization is performed along this
-direction.}
+\item{ymin, ymax}{The limits for the second coordinate,
+if one of them or both are \code{NULL} then no normalization is performed along this direction.}
 
-\item{zmin, zmax}{The limits for the third coordinate, if one of them or both
-are \code{NULL} then no normalization is performed along this direction.}
+\item{zmin, zmax}{The limits for the third coordinate,
+if one of them or both are \code{NULL} then no normalization is performed along this direction.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{layout.norm()} was renamed to \code{\link[=norm_coords]{norm_coords()}} to create a more
-consistent API.
+\code{layout.norm()} was renamed to \code{\link[=norm_coords]{norm_coords()}} to create a more consistent API.
 }
 \keyword{internal}

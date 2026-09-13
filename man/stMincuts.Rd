@@ -7,23 +7,21 @@
 stMincuts(graph, source, target, capacity = NULL)
 }
 \arguments{
-\item{graph}{The input graph. It must be directed.}
+\item{graph}{The input graph.
+It must be directed.}
 
 \item{source}{The ID of the source vertex.}
 
 \item{target}{The ID of the target vertex.}
 
-\item{capacity}{Numeric vector giving the edge capacities. If this is
-\code{NULL} and the graph has a \code{weight} edge attribute, then this
-attribute defines the edge capacities. For forcing unit edge capacities,
-even for graphs that have a \code{weight} edge attribute, supply \code{NA}
-here.}
+\item{capacity}{Numeric vector giving the edge capacities.
+If this is \code{NULL} and the graph has a \code{weight} edge attribute, then this attribute defines the edge capacities.
+For forcing unit edge capacities, even for graphs that have a \code{weight} edge attribute, supply \code{NA} here.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{stMincuts()} was renamed to \code{\link[=st_min_cuts]{st_min_cuts()}} to create a more
-consistent API.
+\code{stMincuts()} was renamed to \code{\link[=st_min_cuts]{st_min_cuts()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_all_st_mincuts}{\code{all_st_mincuts()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

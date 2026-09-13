@@ -7,18 +7,16 @@
 bipartite.projection.size(graph, types = NULL)
 }
 \arguments{
-\item{graph}{The input graph. It can be directed, but edge directions are
-ignored during the computation.}
+\item{graph}{The input graph.
+It can be directed, but edge directions are ignored during the computation.}
 
-\item{types}{An optional vertex type vector to use instead of the
-\sQuote{\code{type}} vertex attribute. You must supply this argument if the
-graph has no \sQuote{\code{type}} vertex attribute.}
+\item{types}{An optional vertex type vector to use instead of the \sQuote{\code{type}} vertex attribute.
+You must supply this argument if the graph has no \sQuote{\code{type}} vertex attribute.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{bipartite.projection.size()} was renamed to \code{\link[=bipartite_projection_size]{bipartite_projection_size()}} to create a more
-consistent API.
+\code{bipartite.projection.size()} was renamed to \code{\link[=bipartite_projection_size]{bipartite_projection_size()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_bipartite_projection_size}{\code{bipartite_projection_size()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

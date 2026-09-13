@@ -3,8 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `igraph.shape.noplot()` was renamed to [shape_noplot()] to create a more
-#' consistent API.
+#' `igraph.shape.noplot()` was renamed to [shape_noplot()] to create a more consistent API.
 #' @inheritParams shape_noplot
 #' @keywords internal
 #' @export
@@ -19,8 +18,7 @@ igraph.shape.noplot <- function(coords, v = NULL, params) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `igraph.shape.noclip()` was renamed to [shape_noclip()] to create a more
-#' consistent API.
+#' `igraph.shape.noclip()` was renamed to [shape_noclip()] to create a more consistent API.
 #' @inheritParams shape_noclip
 #' @keywords internal
 #' @export
@@ -40,8 +38,7 @@ igraph.shape.noclip <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `vertex.shapes()` was renamed to [shapes()] to create a more
-#' consistent API.
+#' `vertex.shapes()` was renamed to [shapes()] to create a more consistent API.
 #' @inheritParams shapes
 #' @keywords internal
 #' @export
@@ -56,8 +53,7 @@ vertex.shapes <- function(shape = NULL) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `add.vertex.shape()` was renamed to [add_shape()] to create a more
-#' consistent API.
+#' `add.vertex.shape()` was renamed to [add_shape()] to create a more consistent API.
 #' @inheritParams add_shape
 #' @keywords internal
 #' @export
@@ -149,15 +145,13 @@ add.vertex.shape <- function(
 
 #' Various vertex shapes when plotting igraph graphs
 #'
-#' Starting from version 0.5.1 igraph supports different
-#' vertex shapes when plotting graphs.
+#' Starting from version 0.5.1 igraph supports different vertex shapes when plotting graphs.
 #'
 #' @details
-#' In igraph a vertex shape is defined by two functions: 1) provides
-#' information about the size of the shape for clipping the edges and 2)
-#' plots the shape if requested. These functions are called \dQuote{shape
-#'   functions} in the rest of this manual page. The first one is the
-#' clipping function and the second is the plotting function.
+#' In igraph a vertex shape is defined by two functions: 1) provides information about the size of the shape for clipping the edges and 2) plots the shape
+#' if requested.
+#' These functions are called \dQuote{shape functions} in the rest of this manual page.
+#' The first one is the clipping function and the second is the plotting function.
 #'
 #' The clipping function has the following arguments:
 #' \describe{
@@ -184,11 +178,9 @@ add.vertex.shape <- function(
 #'     }
 #'   }
 #'
-#' The clipping function should return a matrix
-#' with the same number of rows as the `el` arguments.
-#' If `end` is `both` then the matrix must have four
-#' columns, otherwise two. The matrix contains the modified coordinates,
-#' with the clipping applied.
+#' The clipping function should return a matrix with the same number of rows as the `el` arguments.
+#' If `end` is `both` then the matrix must have four columns, otherwise two.
+#' The matrix contains the modified coordinates, with the clipping applied.
 #'
 #' The plotting function has the following arguments:
 #' \describe{
@@ -205,55 +197,41 @@ add.vertex.shape <- function(
 #'
 #' The return value of the plotting function is not used.
 #'
-#' `shapes()` can be used to list the names of all installed
-#' vertex shapes, by calling it without arguments, or setting the
-#' `shape` argument to `NULL`. If a shape name is given, then
-#' the clipping and plotting functions of that shape are returned in a
-#' named list.
+#' `shapes()` can be used to list the names of all installed vertex shapes, by calling it without arguments,
+#' or setting the `shape` argument to `NULL`.
+#' If a shape name is given, then the clipping and plotting functions of that shape are returned in a named list.
 #'
-#' `add_shape()` can be used to add new vertex shapes to
-#' igraph. For this one must give the clipping and plotting functions of
-#' the new shape. It is also possible to list the plot/vertex/edge
-#' parameters, in the `parameters` argument, that the clipping
-#' and/or plotting functions can make use of. An example would be a
-#' generic regular polygon shape, which can have a parameter for the
-#' number of sides.
+#' `add_shape()` can be used to add new vertex shapes to igraph.
+#' For this one must give the clipping and plotting functions of the new shape.
+#' It is also possible to list the plot/vertex/edge parameters, in the `parameters` argument,
+#' that the clipping and/or plotting functions can make use of.
+#' An example would be a generic regular polygon shape, which can have a parameter for the number of sides.
 #'
-#' `shape_noclip()` is a very simple clipping function that the
-#' user can use in their own shape definitions. It does no clipping, the
-#' edges will be drawn exactly until the listed vertex position
-#' coordinates.
+#' `shape_noclip()` is a very simple clipping function that the user can use in their own shape definitions.
+#' It does no clipping, the edges will be drawn exactly until the listed vertex position coordinates.
 #'
-#' `shape_noplot()` is a very simple (and probably not very
-#' useful) plotting function, that does not plot anything.
+#' `shape_noplot()` is a very simple (and probably not very useful) plotting function, that does not plot anything.
 #'
 #' @aliases   igraph.vertex.shapes
 #'
-#' @param shape Character scalar, name of a vertex shape. If it is
-#'    `NULL` for `shapes()`, then the names of all defined
-#'    vertex shapes are returned.
-#' @param clip An R function object, the clipping function. The default
-#'   `NULL` uses `shape_noclip`.
-#' @param plot An R function object, the plotting function. The default
-#'   `NULL` uses `shape_noplot`.
-#' @param parameters Named list, additional plot/vertex/edge
-#'    parameters. The element named define the new parameters, and the
-#'    elements themselves define their default values.
-#'    Vertex parameters should have a prefix
-#'    \sQuote{`vertex.`}, edge parameters a prefix
-#'    \sQuote{`edge.`}. Other general plotting parameters should have
-#'    a prefix \sQuote{`plot.`}. See Details below.
-#' @param coords,el,params,end,v See parameters of the clipping/plotting
-#'    functions below.
-#' @return `shapes()` returns a character vector if the
-#'    `shape` argument is `NULL`. It returns a named list with
-#'    entries named \sQuote{clip} and \sQuote{plot}, both of them R
-#'    functions.
+#' @param shape Character scalar, name of a vertex shape.
+#'    If it is `NULL` for `shapes()`, then the names of all defined vertex shapes are returned.
+#' @param clip An R function object, the clipping function.
+#'   The default `NULL` uses `shape_noclip`.
+#' @param plot An R function object, the plotting function.
+#'   The default `NULL` uses `shape_noplot`.
+#' @param parameters Named list, additional plot/vertex/edge parameters.
+#'    The element named define the new parameters, and the elements themselves define their default values.
+#'    Vertex parameters should have a prefix \sQuote{`vertex.`}, edge parameters a prefix \sQuote{`edge.`}.
+#'    Other general plotting parameters should have a prefix \sQuote{`plot.`}.
+#'    See Details below.
+#' @param coords,el,params,end,v See parameters of the clipping/plotting functions below.
+#' @return `shapes()` returns a character vector if the `shape` argument is `NULL`.
+#'    It returns a named list with entries named \sQuote{clip} and \sQuote{plot}, both of them R functions.
 #'
 #'    `add_shape()` returns `TRUE`, invisibly.
 #'
-#'    `shape_noclip()` returns the appropriate columns of its
-#'    `coords` argument.
+#'    `shape_noclip()` returns the appropriate columns of its `coords` argument.
 #' @family plot.shapes
 #' @export
 #'

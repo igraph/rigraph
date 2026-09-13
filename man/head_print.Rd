@@ -14,11 +14,10 @@ head_print(
 )
 }
 \arguments{
-\item{x}{The object to print, or a callback function. See
-\code{\link[=printer_callback]{printer_callback()}} for details.}
+\item{x}{The object to print, or a callback function.
+See \code{\link[=printer_callback]{printer_callback()}} for details.}
 
-\item{max_lines}{Maximum number of lines to print, \emph{not}
-including the header and the footer.}
+\item{max_lines}{Maximum number of lines to print, \emph{not} including the header and the footer.}
 
 \item{header}{The header, if a function, then it will be called,
 otherwise printed using \code{cat}.}
@@ -26,9 +25,8 @@ otherwise printed using \code{cat}.}
 \item{footer}{The footer, if a function, then it will be called,
 otherwise printed using \code{cat}.}
 
-\item{omitted_footer}{Footer that is only printed if anything
-is omitted from the printout. If a function, then it will be called,
-otherwise printed using \code{cat}.}
+\item{omitted_footer}{Footer that is only printed if anything is omitted from the printout.
+If a function, then it will be called, otherwise printed using \code{cat}.}
 
 \item{...}{Extra arguments to pass to \code{print()}.}
 }

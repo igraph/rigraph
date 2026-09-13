@@ -26,64 +26,54 @@
 
 \item{axes}{Logical, whether to plot axes, defaults to FALSE.}
 
-\item{add}{Logical, whether to add the plot to the current device, or
-delete the device's current contents first.}
+\item{add}{Logical, whether to add the plot to the current device, or delete the device's current contents first.}
 
-\item{xlim}{The limits for the horizontal axis, it is unlikely that you want
-to modify this.}
+\item{xlim}{The limits for the horizontal axis, it is unlikely that you want to modify this.}
 
-\item{ylim}{The limits for the vertical axis, it is unlikely that you want
-to modify this.}
+\item{ylim}{The limits for the vertical axis, it is unlikely that you want to modify this.}
 
-\item{mark.groups}{A list of vertex ID vectors. It is interpreted as a set
-of vertex groups. Each vertex group is highlighted, by plotting a colored
-smoothed polygon around and \dQuote{under} it. See the arguments below to
-control the look of the polygons.}
+\item{mark.groups}{A list of vertex ID vectors.
+It is interpreted as a set of vertex groups.
+Each vertex group is highlighted, by plotting a colored smoothed polygon around and \dQuote{under} it.
+See the arguments below to control the look of the polygons.}
 
-\item{mark.shape}{A numeric scalar or vector. Controls the smoothness of the
-vertex group marking polygons. This is basically the \sQuote{shape}
-parameter of the \code{\link[graphics:xspline]{graphics::xspline()}} function, its possible
-values are between -1 and 1. If it is a vector, then a different value is
-used for the different vertex groups.}
+\item{mark.shape}{A numeric scalar or vector.
+Controls the smoothness of the vertex group marking polygons.
+This is basically the \sQuote{shape} parameter of the \code{\link[graphics:xspline]{graphics::xspline()}} function,
+its possible values are between -1 and 1. If it is a vector, then a different value is used for the different vertex groups.}
 
-\item{mark.col}{A scalar or vector giving the colors of marking the
-polygons, in any format accepted by \code{\link[graphics:xspline]{graphics::xspline()}}; e.g.
-numeric color IDs, symbolic color names, or colors in RGB. The default
-\code{NULL} uses semi-transparent rainbow colors.}
+\item{mark.col}{A scalar or vector giving the colors of marking the polygons, in any format accepted by \code{\link[graphics:xspline]{graphics::xspline()}};
+e.g. numeric color IDs, symbolic color names, or colors in RGB.
+The default \code{NULL} uses semi-transparent rainbow colors.}
 
-\item{mark.border}{A scalar or vector giving the colors of the borders of
-the vertex group marking polygons. If it is \code{NA}, then no border is
-drawn. The default \code{NULL} uses rainbow colors.}
+\item{mark.border}{A scalar or vector giving the colors of the borders of the vertex group marking polygons.
+If it is \code{NA}, then no border is drawn.
+The default \code{NULL} uses rainbow colors.}
 
-\item{mark.expand}{A numeric scalar or vector, the size of the border around
-the marked vertex groups. It is in the same units as the vertex sizes. If a
-vector is given, then different values are used for the different vertex
-groups.}
+\item{mark.expand}{A numeric scalar or vector, the size of the border around the marked vertex groups.
+It is in the same units as the vertex sizes.
+If a vector is given, then different values are used for the different vertex groups.}
 
-\item{mark.lwd}{A numeric scalar or vector, the linewidth of the border around
-the marked vertex groups.  If a
-vector is given, then different values are used for the different vertex
-groups.}
+\item{mark.lwd}{A numeric scalar or vector, the linewidth of the border around the marked vertex groups.
+If a vector is given,
+then different values are used for the different vertex groups.}
 
-\item{loop.size}{A numeric scalar that allows the user to scale the loop edges
-of the network. The default loop size is 1. Larger values will produce larger
-loops.}
+\item{loop.size}{A numeric scalar that allows the user to scale the loop edges of the network.
+The default loop size is 1. Larger values will produce larger loops.}
 
-\item{\dots}{Additional plotting parameters. See \link{igraph.plotting} for
-the complete list.}
+\item{\dots}{Additional plotting parameters.
+See \link{igraph.plotting} for the complete list.}
 }
 \value{
 Returns \code{NULL}, invisibly.
 }
 \description{
-\code{plot.igraph()} is able to plot graphs to any R device. It is the
-non-interactive companion of the \code{tkplot()} function.
+\code{plot.igraph()} is able to plot graphs to any R device.
+It is the non-interactive companion of the \code{tkplot()} function.
 }
 \details{
-One convenient way to plot graphs is to plot with \code{\link[=tkplot]{tkplot()}}
-first, handtune the placement of the vertices, query the coordinates by the
-\code{\link[=tk_coords]{tk_coords()}} function and use them with \code{\link[=plot]{plot()}} to
-plot the graph to any R device.
+One convenient way to plot graphs is to plot with \code{\link[=tkplot]{tkplot()}} first, handtune the placement of the vertices,
+query the coordinates by the \code{\link[=tk_coords]{tk_coords()}} function and use them with \code{\link[=plot]{plot()}} to plot the graph to any R device.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist}{\code{get_edgelist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_incident}{\code{incident()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_loop}{\code{is_loop()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_convex_hull_2d}{\code{convex_hull_2d()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}
@@ -97,9 +87,7 @@ plot(g, layout = layout_with_kk, vertex.color = "green")
 }
 \seealso{
 \code{\link[=layout]{layout()}} for different layouts,
-\link{igraph.plotting} for the detailed description of the plotting
-parameters and \code{\link[=tkplot]{tkplot()}} and \code{\link[=rglplot]{rglplot()}} for other
-graph plotting functions.
+\link{igraph.plotting} for the detailed description of the plotting parameters and \code{\link[=tkplot]{tkplot()}} and \code{\link[=rglplot]{rglplot()}} for other graph plotting functions.
 
 Other plot:
 \code{\link[=rglplot]{rglplot()}}

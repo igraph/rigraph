@@ -3,8 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `write.graph()` was renamed to [write_graph()] to create a more
-#' consistent API.
+#' `write.graph()` was renamed to [write_graph()] to create a more consistent API.
 #' @inheritParams write_graph
 #' @keywords internal
 #' @export
@@ -34,8 +33,7 @@ write.graph <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `read.graph()` was renamed to [read_graph()] to create a more
-#' consistent API.
+#' `read.graph()` was renamed to [read_graph()] to create a more consistent API.
 #' @inheritParams read_graph
 #' @keywords internal
 #' @export
@@ -64,8 +62,7 @@ read.graph <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.graphdb()` was renamed to [graph_from_graphdb()] to create a more
-#' consistent API.
+#' `graph.graphdb()` was renamed to [graph_from_graphdb()] to create a more consistent API.
 #' @inheritParams graph_from_graphdb
 #' @keywords internal
 #' @export
@@ -163,48 +160,41 @@ write.graph.fromraw <- function(buffer, file) {
 
 #' Reading foreign file formats
 #'
-#' The `read_graph()` function is able to read graphs in various
-#' representations from a file, or from a http connection. Various formats
-#' are supported.
+#' The `read_graph()` function is able to read graphs in various representations from a file, or from a http connection.
+#' Various formats are supported.
 #'
-#' The `read_graph()` function may have additional arguments depending on
-#' the file format (the `format` argument). See the details separately for
-#' each file format, below.
+#' The `read_graph()` function may have additional arguments depending on the file format (the `format` argument).
+#' See the details separately for each file format, below.
 #'
 #' @aliases LGL Pajek GraphML GML DL UCINET
-#' @param file The connection to read from. This can be a local file, or a
-#'   `http` or `ftp` connection. It can also be a character string with
-#'   the file name or URI.
-#' @param format Character constant giving the file format. Right now
-#'   `edgelist`, `pajek`, `ncol`, `lgl`, `graphml`,
-#'   `dimacs`, `graphdb`, `gml` and `dl` are supported,
-#'   the default is `edgelist`. As of igraph 0.4 this argument is case
-#'   insensitive.
+#' @param file The connection to read from.
+#'   This can be a local file, or a `http` or `ftp` connection.
+#'   It can also be a character string with the file name or URI.
+#' @param format Character constant giving the file format.
+#'   Right now `edgelist`, `pajek`, `ncol`, `lgl`, `graphml`, `dimacs`, `graphdb`, `gml` and `dl` are supported, the default is `edgelist`.
+#'   As of igraph 0.4 this argument is case insensitive.
 #' @param \dots Additional arguments, see below.
 #' @return A graph object.
 #' @section Edge list format:
-#' This format is a simple text file with numeric
-#' vertex IDs defining the edges. There is no need to have newline characters
-#' between the edges, a simple space will also do. Vertex IDs contained in
-#' the file are assumed to start at zero.
+#' This format is a simple text file with numeric vertex IDs defining the edges.
+#' There is no need to have newline characters between the edges, a simple space will also do.
+#' Vertex IDs contained in the file are assumed to start at zero.
 #'
 #' Additional arguments:
 #'   \describe{
 #'     \item{n}{
-#'       The number of vertices in the
-#'       graph. If it is smaller than or equal to the largest integer in the file,
-#'       then it is ignored; so it is safe to set it to zero (the default).
+#'       The number of vertices in the graph.
+#'       If it is smaller than or equal to the largest integer in the file, then it is ignored;
+#'       so it is safe to set it to zero (the default).
 #'     }
 #'     \item{directed}{
-#'       Logical scalar, whether to create a directed graph. The
-#'       default value is `TRUE`.
+#'       Logical scalar, whether to create a directed graph.
+#'       The default value is `TRUE`.
 #'     }
 #'   }
 #' @section Pajek format:
-#' Currently igraph only supports Pajek network
-#' files, with a `.net` extension, but not Pajek project files with
-#' a `.paj` extension. Only network data is supported; permutations,
-#' hierarchies, clusters and vectors are not.
+#' Currently igraph only supports Pajek network files, with a `.net` extension, but not Pajek project files with a `.paj` extension.
+#' Only network data is supported; permutations, hierarchies, clusters and vectors are not.
 #' @section NCOL format:
 #' Additional arguments:
 #'   \describe{
@@ -245,7 +235,8 @@ write.graph.fromraw <- function(buffer, file) {
 #'     containing multiple graphs. Defaults to 0 for the first graph.}
 #' }
 #' @section LGL format:
-#' The .lgl format is used by the Large Graph Layout visualization software (<https://lgl.sourceforge.net>), it can describe undirected optionally weighted graphs
+#' The .lgl format is used by the Large Graph Layout visualization software (<https://lgl.sourceforge.net>),
+#' it can describe undirected optionally weighted graphs
 #' \describe{
 #'   \item{names}{Logical, whether to add vertex names as a vertex attribute
 #'     called "name". Default is TRUE.}
@@ -265,15 +256,15 @@ write.graph.fromraw <- function(buffer, file) {
 #' This is a line-oriented text file (ASCII) format.
 #' The first character of each line defines the type of the line.
 #' If the first character is c the line is a comment line and it is ignored.
-#' There is one problem line (p in the file),
-#' it must appear before any node and arc descriptor lines.
-#' The problem line has three fields separated by spaces: the problem type (max or edge),
-#' the number of vertices, and number of edges in the graph. In MAX problems,
-#' exactly two node identification lines are expected (n), one for the source, and one for the target vertex.
+#' There is one problem line (p in the file), it must appear before any node and arc descriptor lines.
+#' The problem line has three fields separated by spaces: the problem type (max or edge), the number of vertices,
+#' and number of edges in the graph.
+#' In MAX problems, exactly two node identification lines are expected (n), one for the source, and one for the target vertex.
 #' These have two fields: the ID of the vertex and the type of the vertex, either s ( = source) or t ( = target).
 #' Arc lines start with a and have three fields: the source vertex, the target vertex and the edge capacity.
-#' In EDGE problems, there may be a node line (n) for each node. It specifies the node index and an
-#'  integer node label. Nodes for which no explicit label was specified will use their index as label.
+#' In EDGE problems, there may be a node line (n) for each node.
+#' It specifies the node index and an integer node label.
+#' Nodes for which no explicit label was specified will use their index as label.
 #' In EDGE problems, each edge is specified as an edge line (e).
 #' \describe{
 #'   \item{directed}{Logical, whether to create a directed graph. Default is TRUE.}
@@ -291,9 +282,11 @@ write.graph.fromraw <- function(buffer, file) {
 #'   \item{directed}{Logical, whether to create a directed graph. Default is TRUE.}
 #' }
 #' @section GML format:
-#' GML is a quite general textual format. For the specifics of the implementation, see the linked documentation of the cClibrary.
+#' GML is a quite general textual format.
+#' For the specifics of the implementation, see the linked documentation of the cClibrary.
 #' @section GraphDB format:
-#'  This is a binary format, used in the ARG Graph Database for isomorphism testing. For more information, see <https://mivia.unisa.it/datasets/graph-database/arg-database/>
+#'  This is a binary format, used in the ARG Graph Database for isomorphism testing.
+#'  For more information, see <https://mivia.unisa.it/datasets/graph-database/arg-database/>
 #' \describe{
 #'   \item{directed}{Logical, whether to create a directed graph. Default is TRUE.}
 #' }
@@ -347,26 +340,25 @@ read_graph <- function(
 
 #' Writing the graph to a file in some format
 #'
-#' `write_graph()` is a general function for exporting graphs to foreign
-#' file formats. The recommended formats for data exchange are GraphML and GML.
+#' `write_graph()` is a general function for exporting graphs to foreign file formats.
+#' The recommended formats for data exchange are GraphML and GML.
 #'
 #' @param graph The graph to export.
-#' @param file A connection or a string giving the file name to write the graph
-#'   to.
-#' @param format Character string giving the file format. Right now
-#'   `pajek`, `graphml`, `dot`, `gml`, `edgelist`,
-#'   `lgl`, `ncol`, `leda` and `dimacs` are implemented. As of igraph 0.4
-#'   this argument is case insensitive.
+#' @param file A connection or a string giving the file name to write the graph to.
+#' @param format Character string giving the file format.
+#'   Right now `pajek`, `graphml`, `dot`, `gml`, `edgelist`, `lgl`, `ncol`, `leda` and `dimacs` are implemented.
+#'   As of igraph 0.4 this argument is case insensitive.
 #' @param \dots Other, format specific arguments, see below.
 #' @return A `NULL``, invisibly.
 #' @section Edge list format: The `edgelist` format is a simple text file,
-#' with one edge per line, the two zero-based numerical vertex IDs separated
-#' by a space character. Note that vertices are indexed starting with zero.
-#' The file is sorted by the first and the second column. This format has no
-#' additional arguments.
+#' with one edge per line, the two zero-based numerical vertex IDs separated by a space character.
+#' Note that vertices are indexed starting with zero.
+#' The file is sorted by the first and the second column.
+#' This format has no additional arguments.
 #' @section NCOL format: This format is a plain text edge list in which vertices
-#' are referred to by name rather than numerical ID. Edge weights may be
-#' optionally written. Additional parameters:
+#' are referred to by name rather than numerical ID.
+#' Edge weights may be optionally written.
+#' Additional parameters:
 #'   \describe{
 #'     \item{names}{
 #'       The name of a vertex attribute to take vertex names from or
@@ -378,10 +370,11 @@ read_graph <- function(
 #'     }
 #'   }
 #' @section Pajek format: The `pajek` format is provided for interoperability
-#' with the Pajek software only. Since the format does not have a formal
-#' specification, it is not recommended for general data exchange or archival.
+#' with the Pajek software only.
+#' Since the format does not have a formal specification, it is not recommended for general data exchange or archival.
 #' @section LGL format:
-#' The .lgl format is used by the Large Graph Layout visualization software (<https://lgl.sourceforge.net>), it can describe undirected optionally weighted graphs.
+#' The .lgl format is used by the Large Graph Layout visualization software (<https://lgl.sourceforge.net>),
+#' it can describe undirected optionally weighted graphs.
 #' \describe{
 #'   \item{names}{The name of a vertex attribute to use for vertex names, or
 #'     NULL to use numeric IDs.}
@@ -395,15 +388,15 @@ read_graph <- function(
 #' This is a line-oriented text file (ASCII) format.
 #' The first character of each line defines the type of the line.
 #' If the first character is c the line is a comment line and it is ignored.
-#' There is one problem line (p in the file),
-#' it must appear before any node and arc descriptor lines.
-#' The problem line has three fields separated by spaces: the problem type (max or edge),
-#' the number of vertices, and number of edges in the graph. In MAX problems,
-#' exactly two node identification lines are expected (n), one for the source, and one for the target vertex.
+#' There is one problem line (p in the file), it must appear before any node and arc descriptor lines.
+#' The problem line has three fields separated by spaces: the problem type (max or edge), the number of vertices,
+#' and number of edges in the graph.
+#' In MAX problems, exactly two node identification lines are expected (n), one for the source, and one for the target vertex.
 #' These have two fields: the ID of the vertex and the type of the vertex, either s ( = source) or t ( = target).
 #' Arc lines start with a and have three fields: the source vertex, the target vertex and the edge capacity.
-#' In EDGE problems, there may be a node line (n) for each node. It specifies the node index and an
-#'  integer node label. Nodes for which no explicit label was specified will use their index as label.
+#' In EDGE problems, there may be a node line (n) for each node.
+#' It specifies the node index and an integer node label.
+#' Nodes for which no explicit label was specified will use their index as label.
 #' In EDGE problems, each edge is specified as an edge line (e).
 #' \describe{
 #'   \item{source}{Numeric ID of the source vertex.}
@@ -422,8 +415,9 @@ read_graph <- function(
 #' @section GraphML format:
 #' GraphML is an XML-based file format for representing various types of graphs.
 #' When a numerical attribute value is NaN, it will be omitted from the file.
-#' This function assumes that non-ASCII characters in attribute names and string
-#' attribute values are UTF-8 encoded. If this is not the case, the resulting XML file will be invalid. Control characters, i.e. character codes up to and including 31 (with the exception of tab, cr and lf), are not allowed.
+#' This function assumes that non-ASCII characters in attribute names and string attribute values are UTF-8 encoded.
+#' If this is not the case, the resulting XML file will be invalid.
+#' Control characters, i.e. character codes up to and including 31 (with the exception of tab, cr and lf), are not allowed.
 #' \describe{
 #'   \item{prefixAttr}{Logical, whether to prefix attribute names to ensure
 #'     uniqueness across vertex/edge/graph attributes. Default is TRUE.}
@@ -432,8 +426,9 @@ read_graph <- function(
 #' @section LEDA format:
 #' This function writes a graph to an output stream in LEDA format.
 #' See <https://www.algorithmic-solutions.info/leda_guide/graphs/leda_native_graph_fileformat.html>.
-#' The support for the LEDA format is very basic at the moment; igraph writes only the LEDA graph section which supports one selected vertex and edge
-#' attribute and no layout information or visual attributes.
+#' The support for the LEDA format is very basic at the moment;
+#' igraph writes only the LEDA graph section
+#' which supports one selected vertex and edge attribute and no layout information or visual attributes.
 #' \describe{
 #'   \item{vertex.attr}{Name of vertex attribute to include in the file.}
 #'   \item{edge.attr}{Name of edge attribute to include in the file.}
@@ -442,8 +437,8 @@ read_graph <- function(
 #' DOT is the format used by the widely known GraphViz software, see <https://www.graphviz.org> for details.
 #' The grammar of the DOT format can be found here: <https://www.graphviz.org/doc/info/lang.html>.
 #' This is only a preliminary implementation, no visualization information is written.
-#' This format is meant solely for interoperability with Graphviz. It is not recommended for
-#' data exchange or archival.
+#' This format is meant solely for interoperability with Graphviz.
+#' It is not recommended for data exchange or archival.
 #'
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [read_graph()]
@@ -774,46 +769,40 @@ write.graph.dot <- function(graph, file) {
 
 #' Load a graph from the graph database for testing graph isomorphism.
 #'
-#' This function downloads a graph from a database created for the evaluation
-#' of graph isomorphism testing algorithms.
+#' This function downloads a graph from a database created for the evaluation of graph isomorphism testing algorithms.
 #'
-#' `graph_from_graphdb()` reads a graph from the graph database from an FTP or
-#' HTTP server or from a local copy. It has two modes of operation:
+#' `graph_from_graphdb()` reads a graph from the graph database from an FTP or HTTP server or from a local copy.
+#' It has two modes of operation:
 #'
-#' If the `url` argument is specified then it should the complete path to
-#' a local or remote graph database file. In this case we simply call
-#' [read_graph()] with the proper arguments to read the file.
+#' If the `url` argument is specified then it should the complete path to a local or remote graph database file.
+#' In this case we simply call [read_graph()] with the proper arguments to read the file.
 #'
-#' If `url` is `NULL`, and this is the default, then the filename is
-#' assembled from the `base`, `prefix`, `type`, `nodes`,
+#' If `url` is `NULL`, and this is the default, then the filename is assembled from the `base`, `prefix`, `type`, `nodes`,
 #' `pair` and `which` arguments.
 #'
-#' Unfortunately the original graph database homepage is now defunct, but see
-#' its old version at
-#' <https://web.archive.org/web/20090215182331/http://amalfi.dis.unina.it/graph/db/doc/graphdbat.html>
-#' for the actual format of a graph database file and other information.
+#' Unfortunately the original graph database homepage is now defunct,
+#' but see its old version at <https://web.archive.org/web/20090215182331/http://amalfi.dis.unina.it/graph/db/doc/graphdbat.html> for the actual format of a graph database file and other information.
 #'
-#' @param url Complete URL with the file to import. Default: `NULL`.
+#' @param url Complete URL with the file to import.
+#'   Default: `NULL`.
 #' @inheritParams rlang::args_dots_empty
-#' @param prefix Gives the prefix. See details below. Possible values:
-#'   `iso`, `i2`, `si4`, `si6`, `mcs10`, `mcs30`,
-#'   `mcs50`, `mcs70`, `mcs90`.
-#' @param type Gives the graph type identifier. See details below. Possible
-#'   values: `r001`, `r005`, `r01`, `r02`, `m2D`,
-#'   `m2Dr2`, `m2Dr4`, `m2Dr6` `m3D`, `m3Dr2`,
-#'   `m3Dr4`, `m3Dr6`, `m4D`, `m4Dr2`, `m4Dr4`,
-#'   `m4Dr6`, `b03`, `b03m`, `b06`, `b06m`, `b09`,
-#'   `b09m`.
+#' @param prefix Gives the prefix.
+#'   See details below.
+#'   Possible values: `iso`, `i2`, `si4`, `si6`, `mcs10`, `mcs30`, `mcs50`, `mcs70`, `mcs90`.
+#' @param type Gives the graph type identifier.
+#'   See details below.
+#'   Possible values: `r001`, `r005`, `r01`, `r02`, `m2D`, `m2Dr2`, `m2Dr4`, `m2Dr6` `m3D`, `m3Dr2`, `m3Dr4`, `m3Dr6`, `m4D`, `m4Dr2`,
+#'   `m4Dr4`, `m4Dr6`, `b03`, `b03m`, `b06`, `b06m`, `b09`, `b09m`.
 #' @param nodes The number of vertices in the graph.
-#' @param pair Specifies which graph of the pair to read. Possible values:
-#'   `A` and `B`.
-#' @param which Gives the number of the graph to read. For every graph type
-#'   there are a number of actual graphs in the database. This argument specifies
-#'   which one to read.
-#' @param base The base address of the database. See details below.
-#' @param compressed Logical, if TRUE than the file is expected to be
-#'   compressed by gzip. If `url` is `NULL` then a \sQuote{`.gz`}
-#'   suffix is added to the filename.
+#' @param pair Specifies which graph of the pair to read.
+#'   Possible values: `A` and `B`.
+#' @param which Gives the number of the graph to read.
+#'   For every graph type there are a number of actual graphs in the database.
+#'   This argument specifies which one to read.
+#' @param base The base address of the database.
+#'   See details below.
+#' @param compressed Logical, if TRUE than the file is expected to be compressed by gzip.
+#'   If `url` is `NULL` then a \sQuote{`.gz`} suffix is added to the filename.
 #' @param directed Logical, whether to create a directed graph.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}

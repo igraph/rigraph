@@ -11,8 +11,8 @@ forest.fire.game(nodes, fw.prob, bw.factor = 1, ambs = 1, directed = TRUE)
 
 \item{fw.prob}{The forward burning probability, see details below.}
 
-\item{bw.factor}{The backward burning ratio. The backward burning
-probability is calculated as \code{bw.factor*fw.prob}.}
+\item{bw.factor}{The backward burning ratio.
+The backward burning probability is calculated as \code{bw.factor*fw.prob}.}
 
 \item{ambs}{The number of ambassador vertices.}
 
@@ -21,8 +21,7 @@ probability is calculated as \code{bw.factor*fw.prob}.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{forest.fire.game()} was renamed to \code{\link[=sample_forestfire]{sample_forestfire()}} to create a more
-consistent API.
+\code{forest.fire.game()} was renamed to \code{\link[=sample_forestfire]{sample_forestfire()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_forest_fire_game}{\code{forest_fire_game()}}

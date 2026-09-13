@@ -14,53 +14,47 @@ cluster_label_prop(
 )
 }
 \arguments{
-\item{graph}{The input graph. Note that the algorithm was originally
-defined for undirected graphs. You are advised to set \sQuote{mode} to
-\code{all} if you pass a directed graph here to treat it as
-undirected.}
+\item{graph}{The input graph.
+Note that the algorithm was originally defined for undirected graphs.
+You are advised to set \sQuote{mode} to \code{all} if you pass a directed graph here to treat it as undirected.}
 
-\item{weights}{The weights of the edges. It must be a positive numeric vector,
-\code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
-\sQuote{weight} edge attribute, then that attribute will be used. If
-\code{NULL} and no such attribute is present, then the edges will have equal
-weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
-attribute, but you don't want to use it for community detection. A larger
-edge weight means a stronger connection for this function.}
+\item{weights}{The weights of the edges.
+It must be a positive numeric vector, \code{NULL} or \code{NA}.
+If it is \code{NULL} and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
+If \code{NULL} and no such attribute is present, then the edges will have equal weights.
+Set this to \code{NA} if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for community detection.
+A larger edge weight means a stronger connection for this function.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{mode}{Logical, whether to consider edge directions for the label propagation,
-and if so, in which direction the labels should propagate. Ignored for undirected graphs.
+\item{mode}{Logical, whether to consider edge directions for the label propagation, and if so,
+in which direction the labels should propagate.
+Ignored for undirected graphs.
 "all" means to ignore edge directions (even in directed graphs).
 "out" means to propagate labels along the natural direction of the edges.
 "in" means to propagate labels backwards (i.e. from head to tail).}
 
-\item{initial}{The initial state. If \code{NULL}, every vertex will have a
-different label at the beginning. Otherwise it must be a vector with an
-entry for each vertex. Non-negative values denote different labels, negative
-entries denote vertices without labels.}
+\item{initial}{The initial state.
+If \code{NULL}, every vertex will have a different label at the beginning.
+Otherwise it must be a vector with an entry for each vertex.
+Non-negative values denote different labels, negative entries denote vertices without labels.}
 
-\item{fixed}{Logical vector denoting which labels are fixed. Of course this
-makes sense only if you provided an initial state, otherwise this element
-will be ignored. Also note that vertices without labels cannot be fixed.}
+\item{fixed}{Logical vector denoting which labels are fixed.
+Of course this makes sense only if you provided an initial state, otherwise this element will be ignored.
+Also note that vertices without labels cannot be fixed.}
 }
 \value{
-\code{cluster_label_prop()} returns a
-\code{\link[=communities]{communities()}} object, please see the \code{\link[=communities]{communities()}}
-manual page for details.
+\code{cluster_label_prop()} returns a \code{\link[=communities]{communities()}} object, please see the \code{\link[=communities]{communities()}} manual page for details.
 }
 \description{
-This is a fast, nearly linear time algorithm for detecting community
-structure in networks. In works by labeling the vertices with unique labels
-and then updating the labels by majority voting in the neighborhood of the
-vertex.
+This is a fast, nearly linear time algorithm for detecting community structure in networks.
+In works by labeling the vertices with unique labels and then updating the labels by majority voting in the neighborhood of the vertex.
 }
 \details{
-This function implements the community detection method described in:
-Raghavan, U.N. and Albert, R. and Kumara, S.: Near linear time algorithm to
-detect community structures in large-scale networks. Phys Rev E 76, 036106.
-(2007). This version extends the original method by the ability to take edge
-weights into consideration and also by allowing some labels to be fixed.
+This function implements the community detection method described in: Raghavan, U.N. and Albert, R. and Kumara, S.:
+Near linear time algorithm to detect community structures in large-scale networks.
+Phys Rev E 76, 036106. (2007).
+This version extends the original method by the ability to take edge weights into consideration and also by allowing some labels to be fixed.
 
 From the abstract of the paper: \dQuote{In our algorithm every node is
 initialized with a unique label and at every step each node adopts the label
@@ -87,9 +81,8 @@ Rev E} 76, 036106. (2007)
 \seealso{
 \code{\link[=communities]{communities()}} for extracting the actual results.
 
-\code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}}, \code{\link[=cluster_walktrap]{cluster_walktrap()}},
-\code{\link[=cluster_spinglass]{cluster_spinglass()}}, \code{\link[=cluster_louvain]{cluster_louvain()}} and
-\code{\link[=cluster_leiden]{cluster_leiden()}} for other community detection methods.
+\code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}}, \code{\link[=cluster_walktrap]{cluster_walktrap()}}, \code{\link[=cluster_spinglass]{cluster_spinglass()}},
+\code{\link[=cluster_louvain]{cluster_louvain()}} and \code{\link[=cluster_leiden]{cluster_leiden()}} for other community detection methods.
 
 Community detection:
 \code{\link[=as_membership]{as_membership()}},

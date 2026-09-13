@@ -7,18 +7,17 @@
 cutat(communities, no, steps)
 }
 \arguments{
-\item{no}{Integer scalar, the desired number of communities. If too low or
-two high, then an error message is given. Exactly one of \code{no} and
-\code{steps} must be supplied.}
+\item{no}{Integer scalar, the desired number of communities.
+If too low or two high, then an error message is given.
+Exactly one of \code{no} and \code{steps} must be supplied.}
 
-\item{steps}{The number of merge operations to perform to produce the
-communities. Exactly one of \code{no} and \code{steps} must be supplied.}
+\item{steps}{The number of merge operations to perform to produce the communities.
+Exactly one of \code{no} and \code{steps} must be supplied.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{cutat()} was renamed to \code{\link[=cut_at]{cut_at()}} to create a more
-consistent API.
+\code{cutat()} was renamed to \code{\link[=cut_at]{cut_at()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_le_community_to_membership}{\code{le_community_to_membership()}}

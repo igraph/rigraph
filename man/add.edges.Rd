@@ -9,22 +9,18 @@ add.edges(graph, edges, ..., attr = list())
 \arguments{
 \item{graph}{The input graph}
 
-\item{edges}{The edges to add, a vertex sequence with even number
-of vertices.}
+\item{edges}{The edges to add, a vertex sequence with even number of vertices.}
 
-\item{...}{Additional arguments, they must be named,
-and they will be added as edge attributes, for the newly added
-edges. See also details below.}
+\item{...}{Additional arguments, they must be named, and they will be added as edge attributes, for the newly added edges.
+See also details below.}
 
-\item{attr}{A named list, its elements will be added
-as edge attributes, for the newly added edges. See also details
-below.}
+\item{attr}{A named list, its elements will be added as edge attributes, for the newly added edges.
+See also details below.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{add.edges()} was renamed to \code{\link[=add_edges]{add_edges()}} to create a more
-consistent API.
+\code{add.edges()} was renamed to \code{\link[=add_edges]{add_edges()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

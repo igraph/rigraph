@@ -11,11 +11,10 @@ centr_betw(graph, ..., directed = TRUE, normalized = TRUE)
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{directed}{Logical, whether to use directed shortest paths for
-calculating betweenness.}
+\item{directed}{Logical, whether to use directed shortest paths for calculating betweenness.}
 
-\item{normalized}{Logical. Whether to normalize the graph level
-centrality score by dividing by the theoretical maximum.}
+\item{normalized}{Logical.
+Whether to normalize the graph level centrality score by dividing by the theoretical maximum.}
 }
 \value{
 A named list with the following components:

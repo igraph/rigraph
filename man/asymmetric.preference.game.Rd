@@ -17,21 +17,20 @@ asymmetric.preference.game(
 
 \item{types}{The number of different vertex types.}
 
-\item{type.dist.matrix}{The joint distribution of the in- and out-vertex
-types. The default \code{NULL} gives a uniform distribution.}
+\item{type.dist.matrix}{The joint distribution of the in- and out-vertex types.
+The default \code{NULL} gives a uniform distribution.}
 
-\item{pref.matrix}{A square matrix giving the preferences of the vertex
-types. The matrix has \sQuote{types} rows and columns. When generating
-an undirected graph, it must be symmetric. The default \code{NULL} sets all
-preferences to one.}
+\item{pref.matrix}{A square matrix giving the preferences of the vertex types.
+The matrix has \sQuote{types} rows and columns.
+When generating an undirected graph, it must be symmetric.
+The default \code{NULL} sets all preferences to one.}
 
 \item{loops}{Logical, whether self-loops are allowed in the graph.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{asymmetric.preference.game()} was renamed to \code{\link[=sample_asym_pref]{sample_asym_pref()}} to create a more
-consistent API.
+\code{asymmetric.preference.game()} was renamed to \code{\link[=sample_asym_pref]{sample_asym_pref()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_asymmetric_preference_game}{\code{asymmetric_preference_game()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

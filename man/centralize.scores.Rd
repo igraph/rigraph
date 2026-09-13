@@ -9,19 +9,17 @@ centralize.scores(scores, theoretical.max = 0, normalized = TRUE)
 \arguments{
 \item{scores}{The vertex level centrality scores.}
 
-\item{theoretical.max}{Real scalar. The graph-level centralization measure of
-the most centralized graph with the same number of vertices as the graph
-under study. This is only used if the \code{normalized} argument is set
-to \code{TRUE}.}
+\item{theoretical.max}{Real scalar.
+The graph-level centralization measure of the most centralized graph with the same number of vertices as the graph under study.
+This is only used if the \code{normalized} argument is set to \code{TRUE}.}
 
-\item{normalized}{Logical. Whether to normalize the graph level
-centrality score by dividing by the supplied theoretical maximum.}
+\item{normalized}{Logical.
+Whether to normalize the graph level centrality score by dividing by the supplied theoretical maximum.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{centralize.scores()} was renamed to \code{\link[=centralize]{centralize()}} to create a more
-consistent API.
+\code{centralize.scores()} was renamed to \code{\link[=centralize]{centralize()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization}{\code{centralization()}}
