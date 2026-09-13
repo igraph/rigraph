@@ -123,20 +123,14 @@ For unreachable vertices \code{Inf} is included.
 
 For \code{shortest_paths()} a named list with four entries is returned:
 \item{vpath}{This itself is a list, of length \code{length(to)}; list
-element \code{i} contains the vertex IDs on the path from vertex \code{from}
-to vertex \code{to[i]} (or the other way for directed graphs depending on
-the \code{mode} argument). The vector also contains \code{from} and \code{i}
-as the first and last elements. If \code{from} is the same as \code{i} then
-it is only included once. If there is no path between two vertices then a
-numeric vector of length zero is returned as the list element. If this
-output is not requested in the \code{output} argument, then it will be
-\code{NULL}.} \item{epath}{This is a list similar to \code{vpath}, but the
-vectors of the list contain the edge IDs along the shortest paths, instead
-of the vertex IDs. This entry is set to \code{NULL} if it is not requested
-in the \code{output} argument.} \item{predecessors}{Numeric vector, the
-predecessor of each vertex in the \code{to} argument, or \code{NULL} if it
-was not requested.} \item{inbound_edges}{Numeric vector, the inbound edge
-for each vertex, or \code{NULL}, if it was not requested.}
+element \code{i} contains the vertex IDs on the path from vertex \code{from} to vertex \code{to[i]} (or the other way for directed graphs depending on the \code{mode} argument).
+The vector also contains \code{from} and \code{i} as the first and last elements.
+If \code{from} is the same as \code{i} then it is only included once.
+If there is no path between two vertices then a numeric vector of length zero is returned as the list element.
+If this output is not requested in the \code{output} argument, then it will be \code{NULL}.}
+\item{epath}{This is a list similar to \code{vpath}, but the vectors of the list contain the edge IDs along the shortest paths, instead of the vertex IDs. This entry is set to \code{NULL} if it is not requested in the \code{output} argument.}
+\item{predecessors}{Numeric vector, the predecessor of each vertex in the \code{to} argument, or \code{NULL} if it was not requested.}
+\item{inbound_edges}{Numeric vector, the inbound edge for each vertex, or \code{NULL}, if it was not requested.}
 
 For \code{all_shortest_paths()} a list is returned:
 \describe{

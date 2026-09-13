@@ -38,13 +38,12 @@ The \sQuote{Matrix} package is required for sparse matrix support}
 
 \item{weights}{One of the following:
 \itemize{
-\item \code{NULL} (default): use the \code{weight} edge attribute if the graph has
-one, otherwise return a traditional (unweighted) adjacency matrix.
+\item \code{NULL} (default): use the \code{weight} edge attribute if the graph has one,
+otherwise return a traditional (unweighted) adjacency matrix.
 \item \code{NA}: explicitly unweighted, ignoring any \code{weight} edge attribute.
-\item A numeric or logical vector of length \code{\link[=ecount]{ecount()}}: use these values
-directly as edge weights.
-\item A character scalar: the name of an edge attribute whose values are
-used as weights. The attribute must be numeric or logical.
+\item A numeric or logical vector of length \code{\link[=ecount]{ecount()}}: use these values directly as edge weights.
+\item A character scalar: the name of an edge attribute whose values are used as weights.
+The attribute must be numeric or logical.
 }
 If multiple edges share endpoints, the value of an arbitrarily chosen edge is included in the matrix.}
 }

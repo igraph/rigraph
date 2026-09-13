@@ -58,12 +58,8 @@ See details below.}
 \item{directed}{Whether to create a directed graph.}
 
 \item{algorithm}{The algorithm to use for the graph generation.
-\code{psumtree} uses a partial prefix-sum tree to generate the graph,
-this algorithm can handle any \code{power} and \code{zero.appeal} values and never generates multiple edges.  \code{psumtree-multiple} also uses a partial prefix-sum tree,
-but the generation of multiple edges is allowed.
-Before the 0.6 version igraph used this algorithm if \code{power} was not one,
-or \code{zero.appeal} was not one.  \code{bag} is the algorithm that was previously (before version 0.6) used
-if \code{power} was one and \code{zero.appeal} was one as well.
+\code{psumtree} uses a partial prefix-sum tree to generate the graph, this algorithm can handle any \code{power} and \code{zero.appeal} values and never generates multiple edges.  \code{psumtree-multiple} also uses a partial prefix-sum tree, but the generation of multiple edges is allowed.
+Before the 0.6 version igraph used this algorithm if \code{power} was not one, or \code{zero.appeal} was not one.  \code{bag} is the algorithm that was previously (before version 0.6) used if \code{power} was one and \code{zero.appeal} was one as well.
 It works by putting the IDs of the vertices into a bag (multiset, really), exactly as many times as their (in-)degree, plus once more.
 Then the required number of cited vertices are drawn from the bag, with replacement.
 This method might generate multiple edges.
@@ -95,9 +91,11 @@ is the in-degree of vertex \eqn{i} in the current time step (more precisely the 
 The number of edges initiated in a time step is given by the \code{m}, \code{out.dist} and \code{out.seq} arguments.
 If \code{out.seq} is given and not NULL then it gives the number of edges to add in a vector, the first element is ignored,
 the second is the number of edges to add in the second time step and so on.
-If \code{out.seq} is not given or null and \code{out.dist} is given and not NULL then it is used as a discrete distribution to generate the number of edges in each time step.
+If \code{out.seq} is not given or null and \code{out.dist} is given and not NULL
+then it is used as a discrete distribution to generate the number of edges in each time step.
 Its first element is the probability that no edges will be added, the second is the probability that one edge is added,
-etc. (\code{out.dist} does not need to sum up to one, it normalized automatically.) \code{out.dist} should contain non-negative numbers and at east one element should be positive.
+etc. (\code{out.dist} does not need to sum up to one, it normalized automatically.)
+\code{out.dist} should contain non-negative numbers and at east one element should be positive.
 
 If both \code{out.seq} and \code{out.dist} are omitted or NULL then \code{m} will be used,
 it should be a positive integer constant and \code{m} edges will be added in each time step.

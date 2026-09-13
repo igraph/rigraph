@@ -74,17 +74,15 @@ graph[1:3,5:6]
 graph[c(1,3,5),]}
 The first variants returns the full adjacency matrix, the other
 two return part of it.
-\item The \code{from} and \code{to} arguments can be used to check
-the existence of many edges. In this case, both \code{from} and
-\code{to} must be present and they must have the same length. They
-must contain vertex IDs or names. A numeric vector is returned, of
-the same length as \code{from} and \code{to}, it contains ones
-for existing edges edges and zeros for non-existing ones.
+\item The \code{from} and \code{to} arguments can be used to check the existence of many edges.
+In this case, both \code{from} and \code{to} must be present and they must have the same length.
+They must contain vertex IDs or names.
+A numeric vector is returned, of the same length as \code{from} and \code{to}, it contains ones for existing edges edges
+and zeros for non-existing ones.
 Example: \preformatted{  graph[from=1:3, to=c(2,3,5)]}.
-\item For weighted graphs, the \code{[} operator returns the edge
-weights. For non-esistent edges zero weights are returned. Other
-edge attributes can be queried as well, by giving the \code{attr}
-argument.
+\item For weighted graphs, the \code{[} operator returns the edge weights.
+For non-esistent edges zero weights are returned.
+Other edge attributes can be queried as well, by giving the \code{attr} argument.
 \item Querying edge IDs instead of the existance of edges or edge
 attributes. E.g. \preformatted{  graph[1, 2, edges=TRUE]}
 returns the ID of the edge between vertices 1 and 2, or zero if
@@ -100,10 +98,8 @@ i.e. no multiple edges are created.
 contains the name of the edge attribute to set, so it does not
 have to be \sQuote{weight}: \preformatted{  graph[1, 2, attr="weight"]<- 5
 graph[from=1:3, to=c(2,3,5)] <- c(1,-1,4)}
-If an edge is already present in the network, then only its
-weights or other attribute are updated. If the graph is already
-weighted, then the \code{attr="weight"} setting is implicit, and
-one does not need to give it explicitly.
+If an edge is already present in the network, then only its weights or other attribute are updated.
+If the graph is already weighted, then the \code{attr="weight"} setting is implicit, and one does not need to give it explicitly.
 \item Deleting edges. The replacement syntax allow the deletion of
 edges, by specifying \code{FALSE} or \code{NULL} as the
 replacement value: \preformatted{  graph[v, w] <- FALSE}

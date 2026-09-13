@@ -18,8 +18,8 @@ Two integer numbers, see details below.
 The split-join distance between partitions A and B is the sum of the projection distance of A from B and the projection distance of B from A. The projection distance is an asymmetric measure and it is defined as follows:
 }
 \details{
-First, each set in partition A is evaluated against all sets in partition B. For each set in partition A,
-the best matching set in partition B is found and the overlap size is calculated.
+First, each set in partition A is evaluated against all sets in partition B.
+For each set in partition A, the best matching set in partition B is found and the overlap size is calculated.
 (Matching is quantified by the size of the overlap between the two sets).
 Then, the maximal overlap sizes for each set in A are summed together and subtracted from the number of elements in A.
 

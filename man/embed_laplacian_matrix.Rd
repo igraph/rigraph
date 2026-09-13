@@ -71,8 +71,8 @@ The eigenvalues (for undirected graphs)
 or the singular values (for directed graphs) calculated by the algorithm.
 }
 \item{options}{
-A named list, information about the underlying ARPACK
-computation. See \code{\link[=arpack]{arpack()}} for the details.
+A named list, information about the underlying ARPACK computation.
+See \code{\link[=arpack]{arpack()}} for the details.
 }
 }
 }

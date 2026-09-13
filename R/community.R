@@ -1406,11 +1406,9 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #'   This argument is ignored if the second form of the function is used (i.e. the \sQuote{`vertex`} argument is present).
 #'   It is also not implemented in the \dQuote{neg} implementation.
 #' @param start.temp Real constant,
-#'   the start temperature.  This argument is ignored
-#'   if the second form of the function is used (i.e. the \sQuote{`vertex`} argument is present).
+#'   the start temperature.  This argument is ignored if the second form of the function is used (i.e. the \sQuote{`vertex`} argument is present).
 #' @param stop.temp Real constant, the stop temperature.
-#'   The simulation terminates if the temperature lowers below this level.  This argument is ignored
-#'   if the second form of the function is used (i.e. the \sQuote{`vertex`} argument is present).
+#'   The simulation terminates if the temperature lowers below this level.  This argument is ignored if the second form of the function is used (i.e. the \sQuote{`vertex`} argument is present).
 #' @param cool.fact Cooling factor for the simulated annealing.  This argument is ignored
 #'   if the second form of the function is used (i.e. the \sQuote{`vertex`} argument is present).
 #' @param update.rule Character constant giving the \sQuote{null-model} of the simulation.
@@ -2014,8 +2012,7 @@ cluster_walktrap <- function(
 #'   It is ignored for undirected graphs.
 #' @param edge.betweenness Logical, whether to return the edge betweenness of the edges at the time of their removal.
 #' @param merges Logical,
-#'   whether to return the merge matrix representing the hierarchical community structure of the network.  This argument is called `merges`,
-#'   even if the community structure algorithm itself is divisive and not agglomerative: it builds the tree from top to bottom.
+#'   whether to return the merge matrix representing the hierarchical community structure of the network.  This argument is called `merges`, even if the community structure algorithm itself is divisive and not agglomerative: it builds the tree from top to bottom.
 #'   There is one line for each merge (i.e. split) in matrix, the first line is the first merge (last split).
 #'   The communities are identified by integer number starting from one.
 #'   Community IDs smaller than or equal to \eqn{N}, the number of vertices in the graph, belong to singleton communities,
@@ -2845,8 +2842,7 @@ cluster_optimal <- function(
 #' @return `cluster_infomap()` returns a [communities()] object,
 #'   please see the [communities()] manual page for details.
 #' @author Martin Rosvall wrote the original C++ code. This was ported to
-#' be more igraph-like by Emmanuel Navarro.  The R interface and
-#' some cosmetics was done by Gabor Csardi \email{csardi.gabor@@gmail.com}.
+#' be more igraph-like by Emmanuel Navarro.  The R interface and some cosmetics was done by Gabor Csardi \email{csardi.gabor@@gmail.com}.
 #' @seealso Other community finding methods and [communities()].
 #' @references The original paper: M. Rosvall and C. T. Bergstrom, Maps of
 #' information flow reveal community structure in complex networks, *PNAS*
@@ -2972,12 +2968,12 @@ plot_dendrogram <- function(x, mode = NULL, ...) {
 #' `plot_dendrogram()` supports three different plotting functions, selected via the `mode` argument.
 #' By default the plotting function is taken from the `dend.plot.type` igraph option, and it has for possible values:
 #' \itemize{ \item `auto` Choose automatically between the plotting
-#' functions. As `plot.phylo` is the most sophisticated, that is choosen,
-#' whenever the `ape` package is available. Otherwise `plot.hclust`
-#' is used.  \item `phylo` Use `plot.phylo` from the `ape`
-#' package.  \item `hclust` Use `plot.hclust` from the `stats`
-#' package.  \item `dendrogram` Use `plot.dendrogram` from the
-#' `stats` package.  }
+#' functions.
+#' As `plot.phylo` is the most sophisticated, that is choosen, whenever the `ape` package is available.
+#' Otherwise `plot.hclust` is used.
+#' \item `phylo` Use `plot.phylo` from the `ape` package.
+#' \item `hclust` Use `plot.hclust` from the `stats` package.
+#' \item `dendrogram` Use `plot.dendrogram` from the `stats` package.  }
 #'
 #' The different plotting functions take different sets of arguments.
 #' When using `plot.phylo` (`mode="phylo"`), we have the following syntax:
@@ -2997,24 +2993,16 @@ plot_dendrogram <- function(x, mode = NULL, ...) {
 #'             hang = 0.01, ann = FALSE, main = "", sub = "", xlab = "",
 #'             ylab = "", \dots)
 #' } The extra arguments not documented above: \itemize{
-#'   \item `rect` A numeric scalar, the number of groups to mark on
-#'     the dendrogram. The dendrogram is cut into exactly `rect`
-#'     groups and they are marked via the `rect.hclust` command. Set
-#'     this to zero if you don't want to mark any groups.
-#'   \item `colbar` The colors of the rectangles that mark the
-#'     vertex groups via the `rect` argument.
-#'   \item `hang` Where to put the leaf nodes, this corresponds to the
-#'     `hang` argument of `plot.hclust`.
-#'   \item `ann`  Whether to annotate the plot, the `ann`
-#'     argument of `plot.hclust`.
-#'   \item `main` The main title of the plot, the `main` argument
-#'     of `plot.hclust`.
-#'   \item `sub` The sub-title of the plot, the `sub` argument of
-#'     `plot.hclust`.
-#'   \item `xlab` The label on the horizontal axis, passed to
-#'     `plot.hclust`.
-#'   \item `ylab` The label on the vertical axis, passed to
-#'     `plot.hclust`.
+#'   \item `rect` A numeric scalar, the number of groups to mark on the dendrogram.
+#'     The dendrogram is cut into exactly `rect` groups and they are marked via the `rect.hclust` command.
+#'     Set this to zero if you don't want to mark any groups.
+#'   \item `colbar` The colors of the rectangles that mark the vertex groups via the `rect` argument.
+#'   \item `hang` Where to put the leaf nodes, this corresponds to the `hang` argument of `plot.hclust`.
+#'   \item `ann`  Whether to annotate the plot, the `ann` argument of `plot.hclust`.
+#'   \item `main` The main title of the plot, the `main` argument of `plot.hclust`.
+#'   \item `sub` The sub-title of the plot, the `sub` argument of `plot.hclust`.
+#'   \item `xlab` The label on the horizontal axis, passed to `plot.hclust`.
+#'   \item `ylab` The label on the vertical axis, passed to `plot.hclust`.
 #'   \item `dots` Attitional arguments to pass to `plot.hclust`.
 #' }
 #'
@@ -3297,8 +3285,8 @@ i_compare <- function(
 #'
 #' The split-join distance between partitions A and B is the sum of the projection distance of A from B and the projection distance of B from A. The projection distance is an asymmetric measure and it is defined as follows:
 #'
-#' First, each set in partition A is evaluated against all sets in partition B. For each set in partition A,
-#' the best matching set in partition B is found and the overlap size is calculated.
+#' First, each set in partition A is evaluated against all sets in partition B.
+#' For each set in partition A, the best matching set in partition B is found and the overlap size is calculated.
 #' (Matching is quantified by the size of the overlap between the two sets).
 #' Then, the maximal overlap sizes for each set in A are summed together and subtracted from the number of elements in A.
 #'

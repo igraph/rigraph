@@ -93,8 +93,7 @@ Community detection:
 }
 \author{
 Martin Rosvall wrote the original C++ code. This was ported to
-be more igraph-like by Emmanuel Navarro.  The R interface and
-some cosmetics was done by Gabor Csardi \email{csardi.gabor@gmail.com}.
+be more igraph-like by Emmanuel Navarro.  The R interface and some cosmetics was done by Gabor Csardi \email{csardi.gabor@gmail.com}.
 }
 \concept{community}
 \keyword{graphs}

@@ -25,9 +25,7 @@ E.g. if there is an A-C-B and also an A-D-B triple in the bipartite graph (but n
 then the multiplicity of the A-B edge in the projection will be 2.}
 
 \item{probe1}{This argument can be used to specify the order of the projections in the resulting list.
-If given, then it is considered as a vertex ID (or a symbolic vertex name);
-the projection containing this vertex will be the first one in the result list.  This argument is ignored
-if only one projection is requested in argument \code{which}.}
+If given, then it is considered as a vertex ID (or a symbolic vertex name); the projection containing this vertex will be the first one in the result list.  This argument is ignored if only one projection is requested in argument \code{which}.}
 
 \item{which}{A character scalar to specify which projection(s) to calculate.
 The default is to calculate both.}

@@ -24,9 +24,8 @@ An igraph graph.
 Generate a random graph where each vertex has the same degree.
 }
 \details{
-This game generates a directed or undirected random graph
-where the degrees of vertices are equal to a predefined constant k. For undirected graphs,
-at least one of k and the number of vertices must be even.
+This game generates a directed or undirected random graph where the degrees of vertices are equal to a predefined constant k.
+For undirected graphs, at least one of k and the number of vertices must be even.
 
 The game simply uses \code{\link[=sample_degseq]{sample_degseq()}} with appropriately constructed degree sequences.
 }

@@ -8,8 +8,7 @@ Fitting and sampling hierarchical random graph models.
 }
 \details{
 A hierarchical random graph is an ensemble of undirected graphs with \eqn{n} vertices.
-It is defined via a binary tree with \eqn{n} leaf and \eqn{n-1} internal vertices,
-where the internal vertices are labeled with probabilities.  The probability that two vertices are connected in the random graph is given by the probability label at their closest common ancestor.
+It is defined via a binary tree with \eqn{n} leaf and \eqn{n-1} internal vertices, where the internal vertices are labeled with probabilities.  The probability that two vertices are connected in the random graph is given by the probability label at their closest common ancestor.
 
 Please see references below for more about hierarchical random graphs.
 

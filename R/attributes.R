@@ -1300,11 +1300,10 @@ igraph.i.attribute.combination <- function(comb, allow_rename = FALSE) {
   if (anyDuplicated(names(comb)) > 0) {
     cli::cli_warn("Some attributes are duplicated")
   }
-  # `known_codes` are the numeric values of the `igraph_attribute_combination_type_t`
-  # enum in the C library (see src/vendor/cigraph/include/igraph_attributes.h).
-  # Each code must stay aligned with its name in `known_names`. The DEFAULT (1) and
-  # FUNCTION (2) enum values are intentionally absent: FUNCTION is handled by the
-  # `!is.character(x)` branch below, and DEFAULT is not selectable by name.
+  # `known_codes` are the numeric values of the `igraph_attribute_combination_type_t` enum in the C library (see src/vendor/cigraph/include/igraph_attributes.h).
+  # Each code must stay aligned with its name in `known_names`.
+  # The DEFAULT (1) and FUNCTION (2) enum values are intentionally absent: FUNCTION is handled by the `!is.character(x)` branch below,
+  # and DEFAULT is not selectable by name.
   known_names <- c(
     "concat",
     "first",
@@ -1430,16 +1429,13 @@ igraph.i.attribute.combination <- function(comb, allow_rename = FALSE) {
 #'       This results almost always a complex attribute.
 #'     }
 #'     \item{"rename"}{
-#'       Keep clashing attributes side-by-side under disambiguated names by
-#'       appending `_1`, `_2`, ... suffixes. For example, if two graphs each
-#'       have an attribute called `group`, the resulting graph will have
-#'       attributes `group_1` and `group_2`, corresponding to the first and
-#'       second input graph, respectively. This is the default for the
-#'       graph operators [union()], [intersection()], [compose()] and
-#'       [disjoint_union()] and preserves their historical behaviour.
-#'       Only those operators accept `"rename"`; [simplify()] and
-#'       [contract()] will reject it because the rename strategy has no
-#'       per-element interpretation when many input values collapse into one.
+#'       Keep clashing attributes side-by-side under disambiguated names by appending `_1`, `_2`, ... suffixes.
+#'       For example, if two graphs each have an attribute called `group`, the resulting graph will have attributes `group_1` and `group_2`,
+#'       corresponding to the first and second input graph, respectively.
+#'       This is the default for the graph operators [union()], [intersection()], [compose()] and [disjoint_union()]
+#'       and preserves their historical behaviour.
+#'       Only those operators accept `"rename"`; [simplify()] and [contract()] will reject it because the rename strategy has no per-element interpretation
+#'       when many input values collapse into one.
 #'     }
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}

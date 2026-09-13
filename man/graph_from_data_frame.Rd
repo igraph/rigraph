@@ -58,8 +58,7 @@ All edges in the data frame are included in the graph, which may include multipl
 
 If the \code{what} argument is \code{edges} (the default), then the edges of the graph and also the edge attributes are returned.
 The edges will be in the first two columns, named \code{from} and \code{to}.
-(This also denotes edge direction for directed graphs.)  For named graphs, the vertex names will be included in these columns,
-for other graphs, the numeric vertex IDs.
+(This also denotes edge direction for directed graphs.)  For named graphs, the vertex names will be included in these columns, for other graphs, the numeric vertex IDs.
 The edge attributes will be in the other columns.
 It is not a good idea to have an edge attribute named \code{from} or \code{to}, because then the column named in the data frame will not be unique.
 The edges are listed in the order of their numeric IDs.

@@ -74,8 +74,8 @@
 #'       or the singular values (for directed graphs) calculated by the algorithm.
 #'     }
 #'     \item{options}{
-#'       A named list, information about the underlying ARPACK
-#'       computation. See [arpack()] for the details.
+#'       A named list, information about the underlying ARPACK computation.
+#'       See [arpack()] for the details.
 #'     }
 #'   }
 #' @seealso [sample_dot_product()]
@@ -284,8 +284,8 @@ dim_select <- function(sv) {
 #'       or the singular values (for directed graphs) calculated by the algorithm.
 #'     }
 #'     \item{options}{
-#'       A named list, information about the underlying ARPACK
-#'       computation. See [arpack()] for the details.
+#'       A named list, information about the underlying ARPACK computation.
+#'       See [arpack()] for the details.
 #'     }
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}

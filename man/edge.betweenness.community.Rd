@@ -32,8 +32,7 @@ It is ignored for undirected graphs.}
 \item{edge.betweenness}{Logical, whether to return the edge betweenness of the edges at the time of their removal.}
 
 \item{merges}{Logical,
-whether to return the merge matrix representing the hierarchical community structure of the network.  This argument is called \code{merges},
-even if the community structure algorithm itself is divisive and not agglomerative: it builds the tree from top to bottom.
+whether to return the merge matrix representing the hierarchical community structure of the network.  This argument is called \code{merges}, even if the community structure algorithm itself is divisive and not agglomerative: it builds the tree from top to bottom.
 There is one line for each merge (i.e. split) in matrix, the first line is the first merge (last split).
 The communities are identified by integer number starting from one.
 Community IDs smaller than or equal to \eqn{N}, the number of vertices in the graph, belong to singleton communities,

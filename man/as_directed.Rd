@@ -24,8 +24,7 @@ For \code{as_undirected()} it can be \code{each}, \code{collapse} or \code{mutua
 See details below.}
 
 \item{edge.attr.comb}{Specifies what to do with edge attributes,
-if \code{mode="collapse"} or \code{mode="mutual"}.  In these cases many edges might be mapped to a single one in the new graph,
-and their attributes are combined.
+if \code{mode="collapse"} or \code{mode="mutual"}.  In these cases many edges might be mapped to a single one in the new graph, and their attributes are combined.
 Please see \code{\link[=attribute.combination]{attribute.combination()}} for details on this.
 The default \code{NULL} uses the \code{edge.attr.comb} igraph option.}
 }
@@ -50,18 +49,13 @@ Two directed edges are created for each undirected
 edge, one in each direction.
 }
 \item{"random"}{
-The number of edges in the graph stays the same, and
-a randomly directed edge is created for each undirected edge. You
-will get different results if you call the function multiple times
-with the same graph.
+The number of edges in the graph stays the same, and a randomly directed edge is created for each undirected edge.
+You will get different results if you call the function multiple times with the same graph.
 }
 \item{"acyclic"}{
-The number of edges in the graph stays the same, and
-a directed edge is created for each undirected edge such that the
-resulting graph is guaranteed to be acyclic. This is achieved by ensuring
-that edges always point from a lower index vertex to a higher index.
-Note that the graph may include cycles of length 1 if the original
-graph contained loop edges.
+The number of edges in the graph stays the same, and a directed edge is created for each undirected edge such that the resulting graph is guaranteed to be acyclic.
+This is achieved by ensuring that edges always point from a lower index vertex to a higher index.
+Note that the graph may include cycles of length 1 if the original graph contained loop edges.
 }
 }
 
@@ -78,10 +72,9 @@ for each pair of vertices which are connected with at least one directed
 edge, no multiple edges will be created.
 }
 \item{"mutual"}{
-One
-undirected edge will be created for each pair of mutual edges. Non-mutual
-edges are ignored. This mode might create multiple edges if there are more
-than one mutual edge pairs between the same pair of vertices.
+One undirected edge will be created for each pair of mutual edges.
+Non-mutual edges are ignored.
+This mode might create multiple edges if there are more than one mutual edge pairs between the same pair of vertices.
 }
 }
 }

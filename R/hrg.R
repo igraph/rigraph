@@ -135,8 +135,7 @@ hrg.consensus <- function(
 #' Fitting and sampling hierarchical random graph models.
 #'
 #' A hierarchical random graph is an ensemble of undirected graphs with \eqn{n} vertices.
-#' It is defined via a binary tree with \eqn{n} leaf and \eqn{n-1} internal vertices,
-#' where the internal vertices are labeled with probabilities.  The probability that two vertices are connected in the random graph is given by the probability label at their closest common ancestor.
+#' It is defined via a binary tree with \eqn{n} leaf and \eqn{n-1} internal vertices, where the internal vertices are labeled with probabilities.  The probability that two vertices are connected in the random graph is given by the probability label at their closest common ancestor.
 #'
 #' Please see references below for more about hierarchical random graphs.
 #'
@@ -311,8 +310,7 @@ fit_hrg <- function(
 #' @param start Logical, whether to start the fitting/sampling from the supplied `igraphHRG` object, or from a random starting point.
 #' @param num.samples Number of samples to use for consensus generation or missing edge prediction.
 #' @return `consensus_tree()` returns a list of two objects.
-#'   The first is an `igraphHRGConsensus` object,
-#'   the second is an `igraphHRG` object.  The `igraphHRGConsensus` object has the following members:
+#'   The first is an `igraphHRGConsensus` object, the second is an `igraphHRG` object.  The `igraphHRGConsensus` object has the following members:
 #'   \describe{
 #'     \item{parents}{
 #'       For each vertex, the ID of its parent vertex is stored,
@@ -789,12 +787,12 @@ rlang::on_load(s3_register("ape::as.phylo", "igraphHRG"))
 #' `plot_dendrogram()` supports three different plotting functions, selected via the `mode` argument.
 #' By default the plotting function is taken from the `dend.plot.type` igraph option, and it has for possible values:
 #' \itemize{ \item `auto` Choose automatically between the plotting
-#' functions. As `plot.phylo` is the most sophisticated, that is choosen,
-#' whenever the `ape` package is available. Otherwise `plot.hclust`
-#' is used.  \item `phylo` Use `plot.phylo` from the `ape`
-#' package.  \item `hclust` Use `plot.hclust` from the `stats`
-#' package.  \item `dendrogram` Use `plot.dendrogram` from the
-#' `stats` package.  }
+#' functions.
+#' As `plot.phylo` is the most sophisticated, that is choosen, whenever the `ape` package is available.
+#' Otherwise `plot.hclust` is used.
+#' \item `phylo` Use `plot.phylo` from the `ape` package.
+#' \item `hclust` Use `plot.hclust` from the `stats` package.
+#' \item `dendrogram` Use `plot.dendrogram` from the `stats` package.  }
 #'
 #' The different plotting functions take different sets of arguments.
 #' When using `plot.phylo` (`mode="phylo"`), we have the following syntax:
@@ -814,24 +812,16 @@ rlang::on_load(s3_register("ape::as.phylo", "igraphHRG"))
 #'             hang = 0.01, ann = FALSE, main = "", sub = "", xlab = "",
 #'             ylab = "", \dots)
 #' } The extra arguments not documented above: \itemize{
-#'   \item `rect` A numeric scalar, the number of groups to mark on
-#'     the dendrogram. The dendrogram is cut into exactly `rect`
-#'     groups and they are marked via the `rect.hclust` command. Set
-#'     this to zero if you don't want to mark any groups.
-#'   \item `colbar` The colors of the rectangles that mark the
-#'     vertex groups via the `rect` argument.
-#'   \item `hang` Where to put the leaf nodes, this corresponds to the
-#'     `hang` argument of `plot.hclust`.
-#'   \item `ann` Whether to annotate the plot, the `ann` argument
-#'     of `plot.hclust`.
-#'   \item `main` The main title of the plot, the `main` argument
-#'     of `plot.hclust`.
-#'   \item `sub` The sub-title of the plot, the `sub` argument of
-#'     `plot.hclust`.
-#'   \item `xlab` The label on the horizontal axis, passed to
-#'     `plot.hclust`.
-#'   \item `ylab` The label on the vertical axis, passed to
-#'     `plot.hclust`.
+#'   \item `rect` A numeric scalar, the number of groups to mark on the dendrogram.
+#'     The dendrogram is cut into exactly `rect` groups and they are marked via the `rect.hclust` command.
+#'     Set this to zero if you don't want to mark any groups.
+#'   \item `colbar` The colors of the rectangles that mark the vertex groups via the `rect` argument.
+#'   \item `hang` Where to put the leaf nodes, this corresponds to the `hang` argument of `plot.hclust`.
+#'   \item `ann` Whether to annotate the plot, the `ann` argument of `plot.hclust`.
+#'   \item `main` The main title of the plot, the `main` argument of `plot.hclust`.
+#'   \item `sub` The sub-title of the plot, the `sub` argument of `plot.hclust`.
+#'   \item `xlab` The label on the horizontal axis, passed to `plot.hclust`.
+#'   \item `ylab` The label on the vertical axis, passed to `plot.hclust`.
 #'   \item `dots` Attitional arguments to pass to `plot.hclust`.
 #' }
 #'

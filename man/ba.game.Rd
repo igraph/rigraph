@@ -40,12 +40,8 @@ See details below.}
 \item{directed}{Whether to create a directed graph.}
 
 \item{algorithm}{The algorithm to use for the graph generation.
-\code{psumtree} uses a partial prefix-sum tree to generate the graph,
-this algorithm can handle any \code{power} and \code{zero.appeal} values and never generates multiple edges.  \code{psumtree-multiple} also uses a partial prefix-sum tree,
-but the generation of multiple edges is allowed.
-Before the 0.6 version igraph used this algorithm if \code{power} was not one,
-or \code{zero.appeal} was not one.  \code{bag} is the algorithm that was previously (before version 0.6) used
-if \code{power} was one and \code{zero.appeal} was one as well.
+\code{psumtree} uses a partial prefix-sum tree to generate the graph, this algorithm can handle any \code{power} and \code{zero.appeal} values and never generates multiple edges.  \code{psumtree-multiple} also uses a partial prefix-sum tree, but the generation of multiple edges is allowed.
+Before the 0.6 version igraph used this algorithm if \code{power} was not one, or \code{zero.appeal} was not one.  \code{bag} is the algorithm that was previously (before version 0.6) used if \code{power} was one and \code{zero.appeal} was one as well.
 It works by putting the IDs of the vertices into a bag (multiset, really), exactly as many times as their (in-)degree, plus once more.
 Then the required number of cited vertices are drawn from the bag, with replacement.
 This method might generate multiple edges.

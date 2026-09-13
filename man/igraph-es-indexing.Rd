@@ -34,23 +34,18 @@ E.g. \code{E(g)[1, 2, .inc(1)]} is equivalent to \code{c(E(g)[1], E(g)[2], E(g)[
 Edge sequences can be indexed with positive numeric vectors,
 negative numeric vectors, logical vectors, character vectors:
 \itemize{
-\item When indexed with positive numeric vectors, the edges at the
-given positions in the sequence are selected. This is the same as
-indexing a regular R atomic vector with positive numeric vectors.
-\item When indexed with negative numeric vectors, the edges at the
-given positions in the sequence are omitted. Again, this is the same
-as indexing a regular R atomic vector.
-\item When indexed with a logical vector, the lengths of the edge
-sequence and the index must match, and the edges for which the
-index is \code{TRUE} are selected.
-\item Named graphs can be indexed with character vectors,
-to select edges with the given names. Note that a graph may
-have edge names and vertex names, and both can be used to select
-edges. Edge names are simply used as names of the numeric
-edge ID vector. Vertex names effectively only work in graphs without
-multiple edges, and must be separated with a \code{|} bar character
-to select an edges that incident to the two given vertices. See
-examples below.
+\item When indexed with positive numeric vectors, the edges at the given positions in the sequence are selected.
+This is the same as indexing a regular R atomic vector with positive numeric vectors.
+\item When indexed with negative numeric vectors, the edges at the given positions in the sequence are omitted.
+Again, this is the same as indexing a regular R atomic vector.
+\item When indexed with a logical vector, the lengths of the edge sequence and the index must match, and the edges for
+which the index is \code{TRUE} are selected.
+\item Named graphs can be indexed with character vectors, to select edges with the given names.
+Note that a graph may have edge names and vertex names, and both can be used to select edges.
+Edge names are simply used as names of the numeric edge ID vector.
+Vertex names effectively only work in graphs without multiple edges, and must be separated with a \code{|} bar character to select an edges
+that incident to the two given vertices.
+See examples below.
 }
 }
 

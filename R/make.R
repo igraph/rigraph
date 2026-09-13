@@ -1352,8 +1352,8 @@ with_graph_ <- function(...) {
 #'   The name is case insensitive.
 #'
 #'   Starting from igraph 0.8.0, you can also include literals here, via igraph's formula notation (see [graph_from_literal()]).
-#'   In this case, the first term of the formula has to start with a \sQuote{`~`} character,
-#'   just like regular formulae in R. See examples below.
+#'   In this case, the first term of the formula has to start with a \sQuote{`~`} character, just like regular formulae in R.
+#'   See examples below.
 #' @param ... For `make_graph()`: extra arguments for the case when the graph is given via a literal, see [graph_from_literal()].
 #'   For `directed_graph()` and `undirected_graph()`: Passed to `make_directed_graph()` or `make_undirected_graph()`.
 #' @param n The number of vertices in the graph.

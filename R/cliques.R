@@ -211,8 +211,8 @@ clique.number <- function(graph) {
 #'
 #'   `clique_num()` and `count_max_cliques()` return an integer scalar.
 #'
-#'   `clique_size_counts()` returns a numeric vector with the clique sizes such that the i-th item belongs to cliques of size i. Trailing zeros are currently truncated,
-#'   but this might change in future versions.
+#'   `clique_size_counts()` returns a numeric vector with the clique sizes such that the i-th item belongs to cliques of size i.
+#'   Trailing zeros are currently truncated, but this might change in future versions.
 #'
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
@@ -274,8 +274,8 @@ largest_cliques <- function(graph) {
 #'   This argument makes it possible to easily parallelize the finding of maximal cliques.
 #' @param file If not `NULL`, then it must be a file name, i.e. a character scalar.
 #'   The output of the algorithm is written to this file.
-#'   (If it exists, then it will be overwritten.) Each clique will be a separate line in the file,
-#'   given with the numeric IDs of its vertices, separated by whitespace.
+#'   (If it exists, then it will be overwritten.)
+#'   Each clique will be a separate line in the file, given with the numeric IDs of its vertices, separated by whitespace.
 #' @export
 max_cliques <- function(
   graph,

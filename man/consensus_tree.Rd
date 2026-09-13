@@ -20,8 +20,7 @@ consensus_tree(graph, hrg = NULL, ..., start = FALSE, num.samples = 10000)
 }
 \value{
 \code{consensus_tree()} returns a list of two objects.
-The first is an \code{igraphHRGConsensus} object,
-the second is an \code{igraphHRG} object.  The \code{igraphHRGConsensus} object has the following members:
+The first is an \code{igraphHRGConsensus} object, the second is an \code{igraphHRG} object.  The \code{igraphHRGConsensus} object has the following members:
 \describe{
 \item{parents}{
 For each vertex, the ID of its parent vertex is stored,

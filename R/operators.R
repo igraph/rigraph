@@ -262,10 +262,8 @@ apply_one_combiner <- function(comb, x) {
 #' Then a simple union is created.
 #' This function can also be used via the `%du%` operator.
 #'
-#' `disjoint_union()` handles graph, vertex and edge attributes.  In particular,
-#' it merges vertex and edge attributes using the [vctrs::vec_c()] function.
-#' For graphs that lack some vertex/edge attribute,
-#' the corresponding values in the new graph are set to a missing value (`NA` for scalar attributes, `NULL` for list attributes).
+#' `disjoint_union()` handles graph, vertex and edge attributes.  In particular, it merges vertex and edge attributes using the [vctrs::vec_c()] function.
+#' For graphs that lack some vertex/edge attribute, the corresponding values in the new graph are set to a missing value (`NA` for scalar attributes, `NULL` for list attributes).
 #' Graph attributes are combined according to `graph.attr.comb`; by default any name clash is resolved by adding suffixes (`_1`, `_2`, ...).
 #' See [igraph-attribute-combination] for the available combiners.
 #'
@@ -648,8 +646,7 @@ intersection <- function(...) {
 #'
 #' The intersection of two or more graphs are created.  The graphs may have identical or overlapping vertex sets.
 #'
-#' `intersection()` creates the intersection of two or more graphs:
-#' only edges present in all graphs will be included.  The corresponding operator is `%s%`.
+#' `intersection()` creates the intersection of two or more graphs: only edges present in all graphs will be included.  The corresponding operator is `%s%`.
 #'
 #' If the `byname` argument is `TRUE` (or `auto` and all graphs are named),
 #' then the operation is performed on symbolic vertex names instead of the internal numeric vertex IDs.
@@ -1256,11 +1253,9 @@ path <- function(...) {
 #'   - If it is a character scalar or vector, then it is interpreted as
 #'     the names of the vertices to add to the graph.
 #'   - If it is an object created with the [vertex()] or
-#'     [vertices()] function, then new vertices are added to the
-#'     graph. This form is appropriate when one wants to add some vertex
-#'     attributes as well. The operands of the `vertices()` function
-#'     specifies the number of vertices to add and their attributes as
-#'     well.
+#'     [vertices()] function, then new vertices are added to the graph.
+#'     This form is appropriate when one wants to add some vertex attributes as well.
+#'     The operands of the `vertices()` function specifies the number of vertices to add and their attributes as well.
 #'
 #'     The unnamed arguments of `vertices()` are concatenated and
 #'     used as the \sQuote{`name`} vertex attribute (i.e. vertex
@@ -1271,18 +1266,15 @@ path <- function(...) {
 #'   g <- g + vertex("bar", "foobar")
 #'   g <- g + vertices("bar2", "foobar2", color=1:2, shape="rectangle")}
 #'
-#'     `vertex()` is just an alias to `vertices()`, and it is
-#'     provided for readability. The user should use it if a single vertex
-#'     is added to the graph.
+#'     `vertex()` is just an alias to `vertices()`, and it is provided for readability.
+#'     The user should use it if a single vertex is added to the graph.
 #'
 #'   - If it is an object created with the [edge()] or
-#'     [edges()] function, then new edges will be added to the
-#'     graph. The new edges and possibly their attributes can be specified as
-#'     the arguments of the `edges()` function.
+#'     [edges()] function, then new edges will be added to the graph.
+#'     The new edges and possibly their attributes can be specified as the arguments of the `edges()` function.
 #'
-#'     The unnamed arguments of `edges()` are concatenated and used
-#'     as vertex IDs of the end points of the new edges. The named
-#'     arguments will be added as edge attributes.
+#'     The unnamed arguments of `edges()` are concatenated and used as vertex IDs of the end points of the new edges.
+#'     The named arguments will be added as edge attributes.
 #'
 #'     Examples: \preformatted{  g <- make_empty_graph() +
 #'          vertices(letters[1:10]) +
@@ -1292,16 +1284,14 @@ path <- function(...) {
 #'   g <- g + edges(c("bar", "foo", "foobar2", "bar2"), color="red", weight=1:2)}
 #'     See more examples below.
 #'
-#'     `edge()` is just an alias to `edges()` and it is provided
-#'     for readability. The user should use it if a single edge is added to
-#'     the graph.
+#'     `edge()` is just an alias to `edges()` and it is provided for readability.
+#'     The user should use it if a single edge is added to the graph.
 #'
 #'   - If it is an object created with the [path()] function, then
-#'     new edges that form a path are added. The edges and possibly their
-#'     attributes are specified as the arguments to the `path()`
-#'     function. The non-named arguments are concatenated and interpreted
-#'     as the vertex IDs along the path. The remaining arguments are added
-#'     as edge attributes.
+#'     new edges that form a path are added.
+#'     The edges and possibly their attributes are specified as the arguments to the `path()` function.
+#'     The non-named arguments are concatenated and interpreted as the vertex IDs along the path.
+#'     The remaining arguments are added as edge attributes.
 #'
 #'     Examples: \preformatted{  g <- make_empty_graph() + vertices(letters[1:10])
 #'   g <- g + path("a", "b", "c", "d")
@@ -1415,19 +1405,13 @@ path <- function(...) {
 #'   deleted from the graph. Example: \preformatted{  g <- make_ring(10)
 #' V(g)$name <- letters[1:10]
 #' g <- g - c("a", "b")}
-#' \item If `e2` is a vertex sequence (e.g. created by the
-#'   [V()] function), then these vertices will be deleted from
-#'   the graph.
-#' \item If it is an edge sequence (e.g. created by the [E()]
-#'   function), then these edges will be deleted from the graph.
-#' \item If it is an object created with the [vertex()] (or the
-#'   [vertices()]) function, then all arguments of [vertices()] are
-#'   concatenated and the result is interpreted as a vector of vertex
-#'   IDs. These vertices will be removed from the graph.
-#' \item If it is an object created with the [edge()] (or the
-#'   [edges()]) function, then all arguments of [edges()] are
-#'   concatenated and then interpreted as edges to be removed from the
-#'   graph.
+#' \item If `e2` is a vertex sequence (e.g. created by the [V()] function), then these vertices will be deleted from the graph.
+#' \item If it is an edge sequence (e.g. created by the [E()] function), then these edges will be deleted from the graph.
+#' \item If it is an object created with the [vertex()] (or the [vertices()]) function, then all arguments of [vertices()] are concatenated
+#'   and the result is interpreted as a vector of vertex IDs.
+#'   These vertices will be removed from the graph.
+#' \item If it is an object created with the [edge()] (or the [edges()]) function, then all arguments of [edges()] are concatenated and
+#'   then interpreted as edges to be removed from the graph.
 #'   Example: \preformatted{  g <- make_ring(10)
 #' V(g)$name <- letters[1:10]
 #' E(g)$name <- LETTERS[1:10]

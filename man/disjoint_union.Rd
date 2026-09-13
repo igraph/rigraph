@@ -32,10 +32,8 @@ Thus first the vertices in the second, third, etc. graphs are relabeled to have 
 Then a simple union is created.
 This function can also be used via the \verb{\%du\%} operator.
 
-\code{disjoint_union()} handles graph, vertex and edge attributes.  In particular,
-it merges vertex and edge attributes using the \code{\link[vctrs:vec_c]{vctrs::vec_c()}} function.
-For graphs that lack some vertex/edge attribute,
-the corresponding values in the new graph are set to a missing value (\code{NA} for scalar attributes, \code{NULL} for list attributes).
+\code{disjoint_union()} handles graph, vertex and edge attributes.  In particular, it merges vertex and edge attributes using the \code{\link[vctrs:vec_c]{vctrs::vec_c()}} function.
+For graphs that lack some vertex/edge attribute, the corresponding values in the new graph are set to a missing value (\code{NA} for scalar attributes, \code{NULL} for list attributes).
 Graph attributes are combined according to \code{graph.attr.comb}; by default any name clash is resolved by adding suffixes (\verb{_1}, \verb{_2}, ...).
 See \link{igraph-attribute-combination} for the available combiners.
 

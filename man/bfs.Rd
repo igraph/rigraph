@@ -78,8 +78,8 @@ The default \code{NULL} uses the caller's environment.}
 A named list with the following entries:
 \describe{
 \item{root}{
-Numeric vector. The root vertex (or vertices) that was used as the
-starting point of the search, as supplied in the \code{root} argument.
+Numeric vector.
+The root vertex (or vertices) that was used as the starting point of the search, as supplied in the \code{root} argument.
 }
 \item{neimode}{
 Character scalar. The \code{mode} argument of the function call.

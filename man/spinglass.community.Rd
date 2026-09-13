@@ -42,12 +42,10 @@ This argument is ignored if the second form of the function is used (i.e. the \s
 It is also not implemented in the \dQuote{neg} implementation.}
 
 \item{start.temp}{Real constant,
-the start temperature.  This argument is ignored
-if the second form of the function is used (i.e. the \sQuote{\code{vertex}} argument is present).}
+the start temperature.  This argument is ignored if the second form of the function is used (i.e. the \sQuote{\code{vertex}} argument is present).}
 
 \item{stop.temp}{Real constant, the stop temperature.
-The simulation terminates if the temperature lowers below this level.  This argument is ignored
-if the second form of the function is used (i.e. the \sQuote{\code{vertex}} argument is present).}
+The simulation terminates if the temperature lowers below this level.  This argument is ignored if the second form of the function is used (i.e. the \sQuote{\code{vertex}} argument is present).}
 
 \item{cool.fact}{Cooling factor for the simulated annealing.  This argument is ignored
 if the second form of the function is used (i.e. the \sQuote{\code{vertex}} argument is present).}

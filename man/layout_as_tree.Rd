@@ -51,8 +51,7 @@ A numeric matrix with two columns, and one row for each vertex.
 A tree-like layout, it is perfect for trees, acceptable for graphs with not too many cycles.
 }
 \details{
-Arranges the nodes in a tree
-where the given node is used as the root.  The tree is directed downwards and the parents are centered above its children.
+Arranges the nodes in a tree where the given node is used as the root.  The tree is directed downwards and the parents are centered above its children.
 For the exact algorithm, the reference below.
 
 If the given graph is not a tree, a breadth-first search is executed first to obtain a possible spanning tree.

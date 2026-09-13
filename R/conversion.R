@@ -239,14 +239,12 @@ resolve_edge_weights <- function(
       },
       user_env = user_env
     )
-    # `attr` and `weights` spell "unweighted" differently, so the two cannot
-    # simply be assigned across. `attr = NULL` was the documented way to ask
-    # for a plain 0/1 matrix -- "If `NULL` a traditional adjacency matrix is
-    # returned" -- while `weights = NULL` means the opposite: use the `weight`
-    # edge attribute if the graph has one. Passing it straight through
-    # therefore inverts what the caller asked for, silently and without a
-    # warning, for every call that spelled it out. `NA` is how the new
-    # vocabulary says "unweighted".
+    # `attr` and `weights` spell "unweighted" differently, so the two cannot simply be assigned across.
+    # `attr = NULL` was the documented way to ask for a plain 0/1 matrix -- "If `NULL` a traditional adjacency matrix is returned" --
+    # while `weights = NULL` means the opposite: use the `weight` edge attribute if the graph has one.
+    # Passing it straight through therefore inverts what the caller asked for, silently and without a warning, for every call
+    # that spelled it out.
+    # `NA` is how the new vocabulary says "unweighted".
     #
     # `lifecycle::is_present()` is true for an explicit `NULL` -- only the
     # `deprecated()` sentinel counts as absent -- so this branch really does
@@ -404,13 +402,12 @@ get.adjacency.sparse <- function(
 #' @inheritParams rlang::args_dots_empty
 #' @param weights One of the following:
 #'   \itemize{
-#'     \item `NULL` (default): use the `weight` edge attribute if the graph has
-#'       one, otherwise return a traditional (unweighted) adjacency matrix.
+#'     \item `NULL` (default): use the `weight` edge attribute if the graph has one,
+#'       otherwise return a traditional (unweighted) adjacency matrix.
 #'     \item `NA`: explicitly unweighted, ignoring any `weight` edge attribute.
-#'     \item A numeric or logical vector of length [ecount()]: use these values
-#'       directly as edge weights.
-#'     \item A character scalar: the name of an edge attribute whose values are
-#'       used as weights. The attribute must be numeric or logical.
+#'     \item A numeric or logical vector of length [ecount()]: use these values directly as edge weights.
+#'     \item A character scalar: the name of an edge attribute whose values are used as weights.
+#'       The attribute must be numeric or logical.
 #'   }
 #'   If multiple edges share endpoints, the value of an arbitrarily chosen edge is included in the matrix.
 #' @param attr `r lifecycle::badge("deprecated")` Use `weights` instead.
@@ -640,18 +637,13 @@ as_edgelist <- function(
 #'       edge, one in each direction.
 #'     }
 #'     \item{"random"}{
-#'       The number of edges in the graph stays the same, and
-#'       a randomly directed edge is created for each undirected edge. You
-#'       will get different results if you call the function multiple times
-#'       with the same graph.
+#'       The number of edges in the graph stays the same, and a randomly directed edge is created for each undirected edge.
+#'       You will get different results if you call the function multiple times with the same graph.
 #'     }
 #'     \item{"acyclic"}{
-#'       The number of edges in the graph stays the same, and
-#'       a directed edge is created for each undirected edge such that the
-#'       resulting graph is guaranteed to be acyclic. This is achieved by ensuring
-#'       that edges always point from a lower index vertex to a higher index.
-#'       Note that the graph may include cycles of length 1 if the original
-#'       graph contained loop edges.
+#'       The number of edges in the graph stays the same, and a directed edge is created for each undirected edge such that the resulting graph is guaranteed to be acyclic.
+#'       This is achieved by ensuring that edges always point from a lower index vertex to a higher index.
+#'       Note that the graph may include cycles of length 1 if the original graph contained loop edges.
 #'     }
 #'   }
 #'
@@ -668,10 +660,9 @@ as_edgelist <- function(
 #'       edge, no multiple edges will be created.
 #'     }
 #'     \item{"mutual"}{
-#'       One
-#'       undirected edge will be created for each pair of mutual edges. Non-mutual
-#'       edges are ignored. This mode might create multiple edges if there are more
-#'       than one mutual edge pairs between the same pair of vertices.
+#'       One undirected edge will be created for each pair of mutual edges.
+#'       Non-mutual edges are ignored.
+#'       This mode might create multiple edges if there are more than one mutual edge pairs between the same pair of vertices.
 #'     }
 #'   }
 #'
@@ -769,8 +760,7 @@ as_directed <- function(
 
 #' @rdname as_directed
 #' @param edge.attr.comb Specifies what to do with edge attributes,
-#'   if `mode="collapse"` or `mode="mutual"`.  In these cases many edges might be mapped to a single one in the new graph,
-#'   and their attributes are combined.
+#'   if `mode="collapse"` or `mode="mutual"`.  In these cases many edges might be mapped to a single one in the new graph, and their attributes are combined.
 #'   Please see [attribute.combination()] for details on this.
 #'   The default `NULL` uses the `edge.attr.comb` igraph option.
 #' @export
@@ -1813,8 +1803,7 @@ graph.data.frame <- function(d, directed = TRUE, vertices = NULL) {
 #'
 #' If the `what` argument is `edges` (the default), then the edges of the graph and also the edge attributes are returned.
 #' The edges will be in the first two columns, named `from` and `to`.
-#' (This also denotes edge direction for directed graphs.)  For named graphs, the vertex names will be included in these columns,
-#' for other graphs, the numeric vertex IDs.
+#' (This also denotes edge direction for directed graphs.)  For named graphs, the vertex names will be included in these columns, for other graphs, the numeric vertex IDs.
 #' The edge attributes will be in the other columns.
 #' It is not a good idea to have an edge attribute named `from` or `to`, because then the column named in the data frame will not be unique.
 #' The edges are listed in the order of their numeric IDs.

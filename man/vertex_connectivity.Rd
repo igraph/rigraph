@@ -27,8 +27,7 @@ Not used by \code{vertex_connectivity()} directly but may be used by other metho
 Whether to check that the graph is connected and also the degree of the vertices.
 If the graph is not (strongly) connected then the connectivity is obviously zero.
 Otherwise if the minimum degree is one then the vertex connectivity is also one.
-It is a good idea to perform these checks,
-as they can be done quickly compared to the connectivity calculation itself.  They were suggested by Peter McMahan, thanks Peter.}
+It is a good idea to perform these checks, as they can be done quickly compared to the connectivity calculation itself.  They were suggested by Peter McMahan, thanks Peter.}
 }
 \value{
 A scalar real value.
@@ -45,8 +44,8 @@ assuming no direct edges between them.
 
 The vertex connectivity of a graph is the minimum vertex connectivity of all (ordered) pairs of vertices in the graph.
 In other words this is the minimum number of vertices needed to remove to make the graph not strongly connected.
-(If the graph is not strongly connected then this is zero.) \code{vertex_connectivity()} calculates this quantity
-if neither the \code{source} nor \code{target} arguments are given.
+(If the graph is not strongly connected then this is zero.)
+\code{vertex_connectivity()} calculates this quantity if neither the \code{source} nor \code{target} arguments are given.
 (I.e. they are both \code{NULL}.)
 
 A set of vertex disjoint directed paths from \code{source} to \code{vertex} is a set of directed paths between them whose vertices do not contain common vertices (apart from \code{source} and \code{target}).

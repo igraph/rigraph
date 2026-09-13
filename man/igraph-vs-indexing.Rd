@@ -37,17 +37,13 @@ E.g. \code{V(g)[1, 2, .nei(1)]} is equivalent to \code{c(V(g)[1], V(g)[2], V(g)[
 Vertex sequences can be indexed with positive numeric vectors,
 negative numeric vectors, logical vectors, character vectors:
 \itemize{
-\item When indexed with positive numeric vectors, the vertices at the
-given positions in the sequence are selected. This is the same as
-indexing a regular R atomic vector with positive numeric vectors.
-\item When indexed with negative numeric vectors, the vertices at the
-given positions in the sequence are omitted. Again, this is the same
-as indexing a regular R atomic vector.
-\item When indexed with a logical vector, the lengths of the vertex
-sequence and the index must match, and the vertices for which the
-index is \code{TRUE} are selected.
-\item Named graphs can be indexed with character vectors,
-to select vertices with the given names.
+\item When indexed with positive numeric vectors, the vertices at the given positions in the sequence are selected.
+This is the same as indexing a regular R atomic vector with positive numeric vectors.
+\item When indexed with negative numeric vectors, the vertices at the given positions in the sequence are omitted.
+Again, this is the same as indexing a regular R atomic vector.
+\item When indexed with a logical vector, the lengths of the vertex sequence and the index must match, and the vertices for
+which the index is \code{TRUE} are selected.
+\item Named graphs can be indexed with character vectors, to select vertices with the given names.
 }
 }
 

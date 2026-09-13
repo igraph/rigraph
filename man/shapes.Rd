@@ -48,10 +48,10 @@ It returns a named list with entries named \sQuote{clip} and \sQuote{plot}, both
 Starting from version 0.5.1 igraph supports different vertex shapes when plotting graphs.
 }
 \details{
-In igraph a vertex shape is defined by two functions: 1) provides information about the size of the shape for clipping the edges and 2) plots the shape if requested.
-These functions are called \dQuote{shape
-functions} in the rest of this manual page. The first one is the
-clipping function and the second is the plotting function.
+In igraph a vertex shape is defined by two functions: 1) provides information about the size of the shape for clipping the edges and 2) plots the shape
+if requested.
+These functions are called \dQuote{shape functions} in the rest of this manual page.
+The first one is the clipping function and the second is the plotting function.
 
 The clipping function has the following arguments:
 \describe{

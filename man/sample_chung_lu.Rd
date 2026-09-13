@@ -88,22 +88,18 @@ Thus, the original Chung-Lu model cannot produce certain (large) expected degree
 
 To overcome this limitation, this function implements additional variants of the model,
 with modified expressions for the connection probability \eqn{p_{ij}}{p_ij} between vertices \eqn{i} and \eqn{j}.
-Let \eqn{q_{ij} = \frac{w_i w_j}{S}}{q_ij = w_i w_j / S},
-or \eqn{q_{ij} = \frac{w^\text{out}_i w^\text{in}_j}{S}}{q_ij = w^out_i w^in_j / S} in the directed case.
+Let \eqn{q_{ij} = \frac{w_i w_j}{S}}{q_ij = w_i w_j / S}, or \eqn{q_{ij} = \frac{w^\text{out}_i w^\text{in}_j}{S}}{q_ij = w^out_i w^in_j / S} in the directed case.
 All model variants become equivalent in the limit of sparse graphs where \eqn{q_{ij}} approaches zero.
-In the original Chung-Lu model, selectable by setting \code{variant} to \dQuote{original}, \eqn{p_{ij} =
-\min(q_{ij}, 1)}{p_ij = min(q_ij, 1)}. The \dQuote{maxent} variant,
-sometimes referred to as the generalized random graph, uses \eqn{p_{ij} =
-\frac{q_{ij}}{1 + q_{ij}}}{p_ij = q_ij / (1 + q_ij)}, and is equivalent to a
-maximum entropy model (i.e., exponential random graph model) with a constraint on expected degrees; see Park and Newman (2004),
-Section B, setting \eqn{\exp(-\Theta_{ij}) =
-\frac{w_i w_j}{S}}{exp(-Theta_ij) = w_i w_j / S}. This model is also discussed
-by Britton, Deijfen, and Martin-Löf (2006).
+In the original Chung-Lu model, selectable by setting \code{variant} to \dQuote{original},
+\eqn{p_{ij} = \min(q_{ij}, 1)}{p_ij = min(q_ij, 1)}.
+The \dQuote{maxent} variant, sometimes referred to as the generalized random graph, uses \eqn{p_{ij} = \frac{q_{ij}}{1 + q_{ij}}}{p_ij = q_ij / (1 + q_ij)},
+and is equivalent to a maximum entropy model (i.e., exponential random graph model) with a constraint on expected degrees; see Park and Newman (2004),
+Section B, setting \eqn{\exp(-\Theta_{ij}) = \frac{w_i w_j}{S}}{exp(-Theta_ij) = w_i w_j / S}.
+This model is also discussed by Britton, Deijfen, and Martin-Löf (2006).
 By virtue of being a degree-constrained maximum entropy model,
 it generates graphs with the same degree sequence with the same probability.
-A third variant can be requested with \dQuote{nr}, and uses \eqn{p_{ij} = 1 - \exp(-q_{ij})}{p_ij = 1 -
-exp(-q_ij)}. This is the underlying simple graph of a multigraph model
-introduced by Norros and Reittu (2006).
+A third variant can be requested with \dQuote{nr}, and uses \eqn{p_{ij} = 1 - \exp(-q_{ij})}{p_ij = 1 - exp(-q_ij)}.
+This is the underlying simple graph of a multigraph model introduced by Norros and Reittu (2006).
 For a discussion of these three model variants, see Section 16.4 of Bollobás, Janson, Riordan (2007), as well as Van Der Hofstad (2013).
 }
 \section{Related documentation in the C library}{

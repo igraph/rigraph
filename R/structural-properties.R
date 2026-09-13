@@ -1279,20 +1279,14 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #'
 #'   For `shortest_paths()` a named list with four entries is returned:
 #'   \item{vpath}{This itself is a list, of length `length(to)`; list
-#'   element `i` contains the vertex IDs on the path from vertex `from`
-#'   to vertex `to[i]` (or the other way for directed graphs depending on
-#'   the `mode` argument). The vector also contains `from` and `i`
-#'   as the first and last elements. If `from` is the same as `i` then
-#'   it is only included once. If there is no path between two vertices then a
-#'   numeric vector of length zero is returned as the list element. If this
-#'   output is not requested in the `output` argument, then it will be
-#'   `NULL`.} \item{epath}{This is a list similar to `vpath`, but the
-#'   vectors of the list contain the edge IDs along the shortest paths, instead
-#'   of the vertex IDs. This entry is set to `NULL` if it is not requested
-#'   in the `output` argument.} \item{predecessors}{Numeric vector, the
-#'   predecessor of each vertex in the `to` argument, or `NULL` if it
-#'   was not requested.} \item{inbound_edges}{Numeric vector, the inbound edge
-#'   for each vertex, or `NULL`, if it was not requested.}
+#'   element `i` contains the vertex IDs on the path from vertex `from` to vertex `to[i]` (or the other way for directed graphs depending on the `mode` argument).
+#'   The vector also contains `from` and `i` as the first and last elements.
+#'   If `from` is the same as `i` then it is only included once.
+#'   If there is no path between two vertices then a numeric vector of length zero is returned as the list element.
+#'   If this output is not requested in the `output` argument, then it will be `NULL`.}
+#'   \item{epath}{This is a list similar to `vpath`, but the vectors of the list contain the edge IDs along the shortest paths, instead of the vertex IDs. This entry is set to `NULL` if it is not requested in the `output` argument.}
+#'   \item{predecessors}{Numeric vector, the predecessor of each vertex in the `to` argument, or `NULL` if it was not requested.}
+#'   \item{inbound_edges}{Numeric vector, the inbound edge for each vertex, or `NULL`, if it was not requested.}
 #'
 #'   For `all_shortest_paths()` a list is returned:
 #'   \describe{
@@ -2926,11 +2920,11 @@ make_neighborhood_graph <- make_ego_graph
 
 #' K-core decomposition of graphs
 #'
-#' The k-core of graph is a maximal subgraph in which each vertex has at least degree k. The coreness of a vertex is k
-#' if it belongs to the k-core but not to the (k+1)-core.
+#' The k-core of graph is a maximal subgraph in which each vertex has at least degree k.
+#' The coreness of a vertex is k if it belongs to the k-core but not to the (k+1)-core.
 #'
-#' The k-core of a graph is the maximal subgraph in which every vertex has at least degree k. The cores of a graph form layers:
-#' the (k+1)-core is always a subgraph of the k-core.
+#' The k-core of a graph is the maximal subgraph in which every vertex has at least degree k.
+#' The cores of a graph form layers: the (k+1)-core is always a subgraph of the k-core.
 #'
 #' This function calculates the coreness for each vertex.
 #'
@@ -3524,8 +3518,8 @@ count_loops <- function(graph) {
 #' @return A named list with the following entries:
 #'   \describe{
 #'     \item{root}{
-#'       Numeric vector. The root vertex (or vertices) that was used as the
-#'       starting point of the search, as supplied in the `root` argument.
+#'       Numeric vector.
+#'       The root vertex (or vertices) that was used as the starting point of the search, as supplied in the `root` argument.
 #'     }
 #'     \item{neimode}{
 #'       Character scalar. The `mode` argument of the function call.
@@ -4495,15 +4489,12 @@ laplacian_matrix <- function(
 #' and whether there exists a corresponding edge in the graph for every matched vertex pair.
 #' For bipartite graphs, it also verifies whether the matched vertices are in different parts of the graph.
 #'
-#' `is_max_matching()` checks whether a matching is maximal.  A matching is maximal if and only
-#' if there exists no unmatched vertex in a graph such that one of its neighbors is also unmatched.
+#' `is_max_matching()` checks whether a matching is maximal.  A matching is maximal if and only if there exists no unmatched vertex in a graph such that one of its neighbors is also unmatched.
 #'
 #' `max_bipartite_match()` calculates a maximum matching in a bipartite graph.
-#' A matching in a bipartite graph is a partial assignment of vertices of the first kind to vertices of the second kind such that each vertex of the first kind is matched to at most one vertex of the second kind and vice versa,
-#' and matched vertices must be connected by an edge in the graph.
+#' A matching in a bipartite graph is a partial assignment of vertices of the first kind to vertices of the second kind such that each vertex of the first kind is matched to at most one vertex of the second kind and vice versa, and matched vertices must be connected by an edge in the graph.
 #' The size (or cardinality) of a matching is the number of edges.
-#' A matching is a maximum matching if there exists no other matching with larger cardinality.  For weighted graphs,
-#' a maximum matching is a matching whose edges have the largest possible total weight among all possible matchings.
+#' A matching is a maximum matching if there exists no other matching with larger cardinality.  For weighted graphs, a maximum matching is a matching whose edges have the largest possible total weight among all possible matchings.
 #'
 #' Maximum matchings in bipartite graphs are found by the push-relabel algorithm with greedy initialization and a global relabeling after every \eqn{n/2} steps
 #' where \eqn{n} is the number of vertices in the graph.

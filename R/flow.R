@@ -464,8 +464,8 @@ min_cut <- function(
 #'
 #' The vertex connectivity of a graph is the minimum vertex connectivity of all (ordered) pairs of vertices in the graph.
 #' In other words this is the minimum number of vertices needed to remove to make the graph not strongly connected.
-#' (If the graph is not strongly connected then this is zero.) `vertex_connectivity()` calculates this quantity
-#' if neither the `source` nor `target` arguments are given.
+#' (If the graph is not strongly connected then this is zero.)
+#' `vertex_connectivity()` calculates this quantity if neither the `source` nor `target` arguments are given.
 #' (I.e. they are both `NULL`.)
 #'
 #' A set of vertex disjoint directed paths from `source` to `vertex` is a set of directed paths between them whose vertices do not contain common vertices (apart from `source` and `target`).
@@ -486,8 +486,7 @@ min_cut <- function(
 #'   Whether to check that the graph is connected and also the degree of the vertices.
 #'   If the graph is not (strongly) connected then the connectivity is obviously zero.
 #'   Otherwise if the minimum degree is one then the vertex connectivity is also one.
-#'   It is a good idea to perform these checks,
-#'   as they can be done quickly compared to the connectivity calculation itself.  They were suggested by Peter McMahan, thanks Peter.
+#'   It is a good idea to perform these checks, as they can be done quickly compared to the connectivity calculation itself.  They were suggested by Peter McMahan, thanks Peter.
 #' @param ... Additional arguments passed to methods.
 #'   Not used by `vertex_connectivity()` directly but may be used by other methods that implement `cohesion()`.
 #' @return A scalar real value.
@@ -582,8 +581,7 @@ vertex_connectivity <- function(
 #' The edge connectivity of a pair of vertices (`source` and `target`) is the minimum number of edges needed to remove to eliminate all (directed) paths from `source` to `target`.
 #' `edge_connectivity()` calculates this quantity if both the `source` and `target` arguments are given (and not `NULL`).
 #'
-#' The edge connectivity of a graph is the minimum of the edge connectivity of every (ordered) pair of vertices in the graph.  `edge_connectivity()` calculates this quantity
-#' if neither the `source` nor the `target` arguments are given (i.e. they are both `NULL`).
+#' The edge connectivity of a graph is the minimum of the edge connectivity of every (ordered) pair of vertices in the graph.  `edge_connectivity()` calculates this quantity if neither the `source` nor the `target` arguments are given (i.e. they are both `NULL`).
 #'
 #' @section `edge_disjoint_paths()` The maximum number of edge-disjoint paths between two vertices:
 #' A set of paths between two vertices is called edge-disjoint if they do not share any edges.
@@ -616,8 +614,7 @@ vertex_connectivity <- function(
 #'   Whether to check that the graph is connected and also the degree of the vertices.
 #'   If the graph is not (strongly) connected then the connectivity is obviously zero.
 #'   Otherwise if the minimum degree is one then the edge connectivity is also one.
-#'   It is a good idea to perform these checks,
-#'   as they can be done quickly compared to the connectivity calculation itself.  They were suggested by Peter McMahan, thanks Peter.
+#'   It is a good idea to perform these checks, as they can be done quickly compared to the connectivity calculation itself.  They were suggested by Peter McMahan, thanks Peter.
 #' @return A scalar real value.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Douglas R. White and Frank Harary (2001): The cohesiveness of blocks in

@@ -65,10 +65,9 @@ The default value is \code{list(weight="sum", name="concat", "ignore")}.
 See \code{\link[=attribute.combination]{attribute.combination()}} for details on this.
 }
 \item{graph.attr.comb}{
-Specifies what to do with the graph attributes when graphs are
-combined, e.g. via \code{\link[=union]{union()}}, \code{\link[=intersection]{intersection()}}, \code{\link[=disjoint_union]{disjoint_union()}}
-or \code{\link[=compose]{compose()}}. The default value is \code{"rename"}, which resolves any
-name clash by appending \verb{_1}, \verb{_2}, ... suffixes.
+Specifies what to do with the graph attributes when graphs are combined, e.g. via \code{\link[=union]{union()}}, \code{\link[=intersection]{intersection()}}, \code{\link[=disjoint_union]{disjoint_union()}}
+or \code{\link[=compose]{compose()}}.
+The default value is \code{"rename"}, which resolves any name clash by appending \verb{_1}, \verb{_2}, ... suffixes.
 See \code{\link[=attribute.combination]{attribute.combination()}} for details on this.
 }
 \item{print.edge.attributes}{
@@ -86,12 +85,9 @@ Logical constant, whether to print graph attributes when printing graphs. Defaul
 Logical constant, whether to print vertex attributes when printing graphs. Defaults to \code{FALSE}.
 }
 \item{print.style}{
-Character string controlling the visual style used by
-\code{\link[=print.igraph]{print.igraph()}}, \code{\link[=summary.igraph]{summary.igraph()}}, \code{\link[=print.igraph.vs]{print.igraph.vs()}} and
-\code{\link[=print.igraph.es]{print.igraph.es()}}. Possible values are \code{"cli"} (default, a
-cli-styled output with section rules, Unicode arrows for edges and
-typed attribute listings) and \code{"classic"} (the historical
-\verb{IGRAPH ... DNW-} header relied on by tutorials and parsers).
+Character string controlling the visual style used by \code{\link[=print.igraph]{print.igraph()}}, \code{\link[=summary.igraph]{summary.igraph()}}, \code{\link[=print.igraph.vs]{print.igraph.vs()}}
+and \code{\link[=print.igraph.es]{print.igraph.es()}}.
+Possible values are \code{"cli"} (default, a cli-styled output with section rules, Unicode arrows for edges and typed attribute listings) and \code{"classic"} (the historical \verb{IGRAPH ... DNW-} header relied on by tutorials and parsers).
 }
 \item{return.vs.es}{
 Whether functions that return a set or sequence of vertices/edges

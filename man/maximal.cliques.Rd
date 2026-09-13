@@ -22,8 +22,8 @@ This argument makes it possible to easily parallelize the finding of maximal cli
 
 \item{file}{If not \code{NULL}, then it must be a file name, i.e. a character scalar.
 The output of the algorithm is written to this file.
-(If it exists, then it will be overwritten.) Each clique will be a separate line in the file,
-given with the numeric IDs of its vertices, separated by whitespace.}
+(If it exists, then it will be overwritten.)
+Each clique will be a separate line in the file, given with the numeric IDs of its vertices, separated by whitespace.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

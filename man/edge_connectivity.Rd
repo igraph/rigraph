@@ -25,8 +25,7 @@ adhesion(graph, ..., checks = TRUE)
 Whether to check that the graph is connected and also the degree of the vertices.
 If the graph is not (strongly) connected then the connectivity is obviously zero.
 Otherwise if the minimum degree is one then the edge connectivity is also one.
-It is a good idea to perform these checks,
-as they can be done quickly compared to the connectivity calculation itself.  They were suggested by Peter McMahan, thanks Peter.}
+It is a good idea to perform these checks, as they can be done quickly compared to the connectivity calculation itself.  They were suggested by Peter McMahan, thanks Peter.}
 }
 \value{
 A scalar real value.
@@ -39,8 +38,7 @@ The edge connectivity of a graph or two vertices, this is recently also called g
 The edge connectivity of a pair of vertices (\code{source} and \code{target}) is the minimum number of edges needed to remove to eliminate all (directed) paths from \code{source} to \code{target}.
 \code{edge_connectivity()} calculates this quantity if both the \code{source} and \code{target} arguments are given (and not \code{NULL}).
 
-The edge connectivity of a graph is the minimum of the edge connectivity of every (ordered) pair of vertices in the graph.  \code{edge_connectivity()} calculates this quantity
-if neither the \code{source} nor the \code{target} arguments are given (i.e. they are both \code{NULL}).
+The edge connectivity of a graph is the minimum of the edge connectivity of every (ordered) pair of vertices in the graph.  \code{edge_connectivity()} calculates this quantity if neither the \code{source} nor the \code{target} arguments are given (i.e. they are both \code{NULL}).
 }
 
 \section{\code{edge_disjoint_paths()} The maximum number of edge-disjoint paths between two vertices}{

@@ -65,15 +65,12 @@ its values are between zero (inclusive) and the number of vertices (inclusive),
 and whether there exists a corresponding edge in the graph for every matched vertex pair.
 For bipartite graphs, it also verifies whether the matched vertices are in different parts of the graph.
 
-\code{is_max_matching()} checks whether a matching is maximal.  A matching is maximal if and only
-if there exists no unmatched vertex in a graph such that one of its neighbors is also unmatched.
+\code{is_max_matching()} checks whether a matching is maximal.  A matching is maximal if and only if there exists no unmatched vertex in a graph such that one of its neighbors is also unmatched.
 
 \code{max_bipartite_match()} calculates a maximum matching in a bipartite graph.
-A matching in a bipartite graph is a partial assignment of vertices of the first kind to vertices of the second kind such that each vertex of the first kind is matched to at most one vertex of the second kind and vice versa,
-and matched vertices must be connected by an edge in the graph.
+A matching in a bipartite graph is a partial assignment of vertices of the first kind to vertices of the second kind such that each vertex of the first kind is matched to at most one vertex of the second kind and vice versa, and matched vertices must be connected by an edge in the graph.
 The size (or cardinality) of a matching is the number of edges.
-A matching is a maximum matching if there exists no other matching with larger cardinality.  For weighted graphs,
-a maximum matching is a matching whose edges have the largest possible total weight among all possible matchings.
+A matching is a maximum matching if there exists no other matching with larger cardinality.  For weighted graphs, a maximum matching is a matching whose edges have the largest possible total weight among all possible matchings.
 
 Maximum matchings in bipartite graphs are found by the push-relabel algorithm with greedy initialization and a global relabeling after every \eqn{n/2} steps
 where \eqn{n} is the number of vertices in the graph.
