@@ -8,8 +8,8 @@ exportPajek(blocks, graph, file, project.file = TRUE)
 }
 \arguments{
 \item{graph}{For \code{cohesive_blocks()} a graph object of class \code{igraph}.
-It must be undirected and simple.
-(See \code{\link[=is_simple]{is_simple()}}.)
+ It must be undirected and simple.
+ (See \code{\link[=is_simple]{is_simple()}}.)
 
 For \code{graphs_from_cohesive_blocks()} and \code{export_pajek()} the same graph must be supplied whose cohesive block structure is given in the \code{blocks()} argument.}
 
@@ -17,17 +17,17 @@ For \code{graphs_from_cohesive_blocks()} and \code{export_pajek()} the same grap
 
 If the \code{project.file} argument is \code{TRUE}, then it can be a filename (with extension), a file object,
 or in general any king of connection object.
-The file/connection will be opened if it wasn't already.
+ The file/connection will be opened if it wasn't already.
 
 If the \code{project.file} argument is \code{FALSE},
 then several files are created and \code{file} must be a character scalar containing the base name of the files, without extension.
-(But it can contain the path to the files.)
+ (But it can contain the path to the files.)
 
 See also details below.}
 
 \item{project.file}{Logical, whether to create a single Pajek project file containing all the data,
 or to create separated files for each item.
-See details below.}
+ See details below.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

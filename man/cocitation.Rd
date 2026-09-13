@@ -14,16 +14,16 @@ bibcoupling(graph, v = NULL)
 
 \item{v}{Vertex sequence or numeric vector,
 the vertex IDs for which the cocitation or bibliographic coupling values we want to calculate.
-The default \code{NULL} selects all vertices.}
+ The default \code{NULL} selects all vertices.}
 }
 \value{
 A numeric matrix with \code{length(v)} lines and \code{vcount(graph)} columns.
-Element \verb{(i,j)} contains the cocitation or bibliographic coupling for vertices \code{v[i]} and \code{j}.
+ Element \verb{(i,j)} contains the cocitation or bibliographic coupling for vertices \code{v[i]} and \code{j}.
 }
 \description{
 Two vertices are cocited if there is another vertex citing both of them.
-\code{cocitation()} simply counts how many types two vertices are cocited.
-The bibliographic coupling of two vertices is the number of other vertices they both cite, \code{bibcoupling()} calculates this.
+ \code{cocitation()} simply counts how many types two vertices are cocited.
+ The bibliographic coupling of two vertices is the number of other vertices they both cite, \code{bibcoupling()} calculates this.
 }
 \details{
 \code{cocitation()} calculates the cocitation counts for the vertices in the \code{v} argument and all vertices in the graph.
@@ -31,7 +31,7 @@ The bibliographic coupling of two vertices is the number of other vertices they 
 \code{bibcoupling()} calculates the bibliographic coupling for vertices in \code{v} and all vertices in the graph.
 
 Calculating the cocitation or bibliographic coupling for only one vertex costs the same amount of computation as for all vertices.
-This might change in the future.
+ This might change in the future.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_cocitation}{\code{cocitation()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_bibcoupling}{\code{bibcoupling()}}

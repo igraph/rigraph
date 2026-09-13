@@ -14,7 +14,7 @@
 }
 \value{
 Another edge sequence, with metadata printing turned on.
-See details below.
+ See details below.
 }
 \description{
 The double bracket operator can be used on edge sequences, to print the meta-data (edge attributes) of the edges in the sequence.

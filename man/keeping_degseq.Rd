@@ -18,7 +18,7 @@ while preserving the original graph's degree distribution.
 \details{
 The rewiring algorithm chooses two arbitrary edges in each step ((a,b) and (c,d)) and substitutes them with (a,d) and (c,b),
 if they not already exists in the graph.
-The algorithm does not create multiple edges.
+ The algorithm does not create multiple edges.
 }
 \examples{
 g <- make_ring(10)

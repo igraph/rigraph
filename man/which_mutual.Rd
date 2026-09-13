@@ -10,7 +10,7 @@ which_mutual(graph, eids = NULL, ..., loops = TRUE)
 \item{graph}{The input graph.}
 
 \item{eids}{Edge sequence, the edges that will be probed.
-The default \code{NULL} includes all edges in the order of their IDs.}
+ The default \code{NULL} includes all edges in the order of their IDs.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 

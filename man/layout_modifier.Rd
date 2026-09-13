@@ -8,7 +8,7 @@ layout_modifier(...)
 }
 \arguments{
 \item{...}{Named arguments that define the modifier.
-Must include:
+ Must include:
 \describe{
 \item{ID}{A unique identifier string for the modifier}
 \item{type}{Either \code{"pre"} for pre-layout or \code{"post"} for post-layout}
@@ -22,7 +22,7 @@ An object of class \code{igraph_layout_modifier}.
 }
 \description{
 This is a constructor function for creating custom layout modifiers.
-Layout modifiers can be used with \code{\link[=layout_]{layout_()}} to modify how layouts are calculated or to transform the resulting coordinates.
+ Layout modifiers can be used with \code{\link[=layout_]{layout_()}} to modify how layouts are calculated or to transform the resulting coordinates.
 }
 \examples{
 # Create a custom post-layout modifier that scales coordinates

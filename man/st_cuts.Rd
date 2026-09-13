@@ -8,7 +8,7 @@ st_cuts(graph, source, target)
 }
 \arguments{
 \item{graph}{The input graph.
-It must be directed.}
+ It must be directed.}
 
 \item{source}{The source vertex.}
 
@@ -19,14 +19,14 @@ A list with entries:
 \describe{
 \item{cuts}{
 A list of numeric vectors containing edge IDs.
-Each vector is an \eqn{(s,t)}-cut.
-}
+ Each vector is an \eqn{(s,t)}-cut.
+ }
 \item{partition1s}{
 A list of numeric vectors containing vertex IDs, they correspond to the edge cuts.
-Each vertex set is a generator of the corresponding cut, i.e. in the graph \eqn{G=(V,E)},
+ Each vertex set is a generator of the corresponding cut, i.e. in the graph \eqn{G=(V,E)},
 the vertex set \eqn{X} and its complementer \eqn{V-X},
 generates the cut that contains exactly the edges that go from \eqn{X} to \eqn{V-X}.
-}
+ }
 }
 }
 \description{

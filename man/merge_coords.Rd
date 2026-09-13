@@ -15,15 +15,15 @@ layout_components(graph, layout = NULL, ...)
 \item{layouts}{A list of two-column matrices.}
 
 \item{\dots}{For \code{layout_components()}, additional arguments to pass to the \code{layout} layout function.
-For \code{merge_coords()}, these dots must be empty.}
+ For \code{merge_coords()}, these dots must be empty.}
 
 \item{method}{Character constant giving the method to use.
-Right now only \code{dla} is implemented.}
+ Right now only \code{dla} is implemented.}
 
 \item{graph}{The input graph.}
 
 \item{layout}{A function object, the layout function to use.
-The default \code{NULL} uses \code{layout_with_kk}.}
+ The default \code{NULL} uses \code{layout_with_kk}.}
 }
 \value{
 A matrix with two columns and as many lines as the total number of vertices in the graphs.
@@ -33,15 +33,15 @@ Place several graphs on the same layout
 }
 \details{
 \code{merge_coords()} takes a list of graphs and a list of coordinates and places the graphs in a common layout.
-The method to use is chosen via the \code{method} parameter, although right now only the \code{dla} method is implemented.
+ The method to use is chosen via the \code{method} parameter, although right now only the \code{dla} method is implemented.
 
 The \code{dla} method covers the graph with circles.
-Then it sorts the graphs based on the number of vertices first and places the largest graph at the center of the layout.
-Then the other graphs are placed in decreasing order via a DLA (diffision limited aggregation) algorithm:
+ Then it sorts the graphs based on the number of vertices first and places the largest graph at the center of the layout.
+ Then the other graphs are placed in decreasing order via a DLA (diffision limited aggregation) algorithm:
 the graph is placed randomly on a circle far away from the center and a random walk is conducted until the graph walks into the larger graphs already placed or walks too far from the center of the layout.
 
 The \code{layout_components()} function disassembles the graph first into maximal connected components and calls the supplied \code{layout} function for each component separately.
-Finally it merges the layouts via calling \code{merge_coords()}.
+ Finally it merges the layouts via calling \code{merge_coords()}.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_decompose}{\code{decompose()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

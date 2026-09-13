@@ -19,26 +19,26 @@ all_simple_paths(
 \item{from}{The source vertex.}
 
 \item{to}{The target vertex of vertices.
-The default \code{NULL} selects all vertices.}
+ The default \code{NULL} selects all vertices.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character constant,
 gives whether the shortest paths to or from the given vertices should be calculated for directed graphs.
-If \code{out} then the shortest paths \emph{from} the vertex, if \verb{in} then \emph{to} it will be considered.
-If \code{all}, the default, then the corresponding undirected graph will be used, i.e. not directed paths are searched.
-This argument is ignored for undirected graphs.}
+ If \code{out} then the shortest paths \emph{from} the vertex, if \verb{in} then \emph{to} it will be considered.
+ If \code{all}, the default, then the corresponding undirected graph will be used, i.e. not directed paths are searched.
+ This argument is ignored for undirected graphs.}
 
 \item{cutoff}{Maximum length of the paths that are considered.
-If negative, no cutoff is used.}
+ If negative, no cutoff is used.}
 }
 \value{
 A list of integer vectors, each integer vector is a path from the source vertex to one of the target vertices.
-A path is given by its vertex IDs.
+ A path is given by its vertex IDs.
 }
 \description{
 This function lists all simple paths from one source vertex to another vertex or vertices.
-A path is simple if contains no repeated vertices.
+ A path is simple if contains no repeated vertices.
 }
 \details{
 Note that potentially there are exponentially many paths between two vertices of a graph,

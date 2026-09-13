@@ -15,16 +15,16 @@ is_graphical(
 \item{out.deg}{Integer vector, the degree sequence for undirected graphs, or the out-degree sequence for directed graphs.}
 
 \item{in.deg}{\code{NULL} or an integer vector.
-For undirected graphs, it should be \code{NULL}.
-For directed graphs it specifies the in-degrees.}
+ For undirected graphs, it should be \code{NULL}.
+ For directed graphs it specifies the in-degrees.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{allowed.edge.types}{The allowed edge types in the graph.
-\sQuote{simple} means that neither loop nor multiple edges are allowed (i.e. the graph must be simple).
-\sQuote{loops} means that loop edges are allowed but mutiple edges are not.
-\sQuote{multi} means that multiple edges are allowed but loop edges are not.
-\sQuote{all} means that both loop edges and multiple edges are allowed.}
+ \sQuote{simple} means that neither loop nor multiple edges are allowed (i.e. the graph must be simple).
+ \sQuote{loops} means that loop edges are allowed but mutiple edges are not.
+ \sQuote{multi} means that multiple edges are allowed but loop edges are not.
+ \sQuote{all} means that both loop edges and multiple edges are allowed.}
 }
 \value{
 A logical scalar.
@@ -34,7 +34,7 @@ Determine whether the given vertex degrees (in- and out-degrees for directed gra
 }
 \details{
 The classical concept of graphicality assumes simple graphs.
-This function can perform the check also when self-loops, multi-edges, or both are allowed in the graph.
+ This function can perform the check also when self-loops, multi-edges, or both are allowed in the graph.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_graphical}{\code{is_graphical()}}

@@ -26,7 +26,7 @@
 \item{x}{The output of the SIR simulation, coming from the \code{\link[=sir]{sir()}} function.}
 
 \item{comp}{Character scalar, which component to plot.
-Either \sQuote{NI} (infected, default), \sQuote{NS} (susceptible) or \sQuote{NR} (recovered).}
+ Either \sQuote{NI} (infected, default), \sQuote{NS} (susceptible) or \sQuote{NR} (recovered).}
 
 \item{median}{Logical, whether to plot the (binned) median.}
 
@@ -37,7 +37,7 @@ Either \sQuote{NI} (infected, default), \sQuote{NS} (susceptible) or \sQuote{NR}
 \item{median_color}{Color of the median curve.}
 
 \item{quantile_color}{Color(s) of the quantile curves.
-(It is recycled if needed and non-needed entries are ignored if too long.)}
+ (It is recycled if needed and non-needed entries are ignored if too long.)}
 
 \item{lwd.median}{Line width of the median.}
 
@@ -46,15 +46,15 @@ Either \sQuote{NI} (infected, default), \sQuote{NS} (susceptible) or \sQuote{NR}
 \item{lty.quantile}{Line type of the quantile curves.}
 
 \item{xlim}{The x limits, a two-element numeric vector.
-If \code{NULL}, then it is calculated from the data.}
+ If \code{NULL}, then it is calculated from the data.}
 
 \item{ylim}{The y limits, a two-element numeric vector.
-If \code{NULL}, then it is calculated from the data.}
+ If \code{NULL}, then it is calculated from the data.}
 
 \item{xlab}{The x label.}
 
 \item{ylab}{The y label.
-If \code{NULL} then it is automatically added based on the \code{comp} argument.}
+ If \code{NULL} then it is automatically added based on the \code{comp} argument.}
 
 \item{\dots}{Additional arguments are passed to \code{\link[=plot]{plot()}}, that is run before any of the curves are added, to create the figure.}
 }

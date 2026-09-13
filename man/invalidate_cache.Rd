@@ -11,15 +11,15 @@ invalidate_cache(graph)
 }
 \value{
 The graph with its cache invalidated.
-Since the graph is modified in place in R as well, you can also ignore the return value.
+ Since the graph is modified in place in R as well, you can also ignore the return value.
 }
 \description{
 igraph graphs cache some basic properties (such as whether the graph is a DAG or whether it is simple) in an internal data structure for faster repeated queries.
-This function invalidates the cache, forcing a recalculation of the cached properties the next time they are needed.
+ This function invalidates the cache, forcing a recalculation of the cached properties the next time they are needed.
 }
 \details{
 You should not need to call this function during normal usage; however, it may be useful for debugging cache-related issues.
-A tell-tale sign of an invalid cache entry is
+ A tell-tale sign of an invalid cache entry is
 when the result of a cached function (such as \code{\link{is_dag}()} or \code{\link{is_simple}()}) changes after calling this function.
 }
 \section{Related documentation in the C library}{

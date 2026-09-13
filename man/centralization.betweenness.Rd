@@ -12,7 +12,7 @@ centralization.betweenness(graph, directed = TRUE, normalized = TRUE)
 \item{directed}{Logical, whether to use directed shortest paths for calculating betweenness.}
 
 \item{normalized}{Logical.
-Whether to normalize the graph level centrality score by dividing by the theoretical maximum.}
+ Whether to normalize the graph level centrality score by dividing by the theoretical maximum.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

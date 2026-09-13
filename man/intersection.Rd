@@ -14,9 +14,9 @@ Depends on the function that implements this method.
 }
 \description{
 This is an S3 generic function.
-See \code{methods("intersection")} for the actual implementations for various S3 classes.
-Initially it is implemented for igraph graphs and igraph vertex and edge sequences.
-See \code{\link[=intersection.igraph]{intersection.igraph()}}, and \code{\link[=intersection.igraph.vs]{intersection.igraph.vs()}}.
+ See \code{methods("intersection")} for the actual implementations for various S3 classes.
+ Initially it is implemented for igraph graphs and igraph vertex and edge sequences.
+ See \code{\link[=intersection.igraph]{intersection.igraph()}}, and \code{\link[=intersection.igraph.vs]{intersection.igraph.vs()}}.
 }
 \seealso{
 Other functions for manipulating graph structure:

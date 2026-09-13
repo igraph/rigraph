@@ -19,7 +19,7 @@ growing(n, m = 1, ..., directed = TRUE, citation = FALSE)
 \item{directed}{Logical, whether to create a directed graph.}
 
 \item{citation}{Logical.
-If \code{TRUE} a citation graph is created, i.e. in each time step the added edges are originating from the new vertex.}
+ If \code{TRUE} a citation graph is created, i.e. in each time step the added edges are originating from the new vertex.}
 }
 \value{
 A new graph object.
@@ -29,7 +29,7 @@ This function creates a random graph by simulating its stochastic evolution.
 }
 \details{
 This is discrete time step model, in each time step a new vertex is added to the graph and \code{m} new edges are created.
-If \code{citation} is \code{FALSE} these edges are connecting two uniformly randomly chosen vertices,
+ If \code{citation} is \code{FALSE} these edges are connecting two uniformly randomly chosen vertices,
 otherwise the edges are connecting new vertex to uniformly randomly chosen old vertices.
 }
 \section{Related documentation in the C library}{

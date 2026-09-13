@@ -8,26 +8,26 @@ dyad_census(graph)
 }
 \arguments{
 \item{graph}{The input graph.
-A warning is given if it is not directed.}
+ A warning is given if it is not directed.}
 }
 \value{
 A named numeric vector with three elements:
 \describe{
 \item{mut}{
 The number of pairs with mutual connections.
-}
+ }
 \item{asym}{
 The number of pairs with non-mutual connections.
-}
+ }
 \item{null}{
 The number of pairs with no connection between them.
-}
+ }
 }
 }
 \description{
 Classify dyads in a directed graphs.
-The relationship between each pair of vertices is measured.
-It can be in three states: mutual, asymmetric or non-existent.
+ The relationship between each pair of vertices is measured.
+ It can be in three states: mutual, asymmetric or non-existent.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_dyad_census}{\code{dyad_census()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}
@@ -41,7 +41,7 @@ dyad_census(g)
 \references{
 Holland, P.W. and Leinhardt, S. A Method for Detecting Structure
 in Sociometric Data. \emph{American Journal of Sociology}, 76, 492--513.
-1970.
+ 1970.
 
 Wasserman, S., and Faust, K. \emph{Social Network Analysis: Methods and
 Applications.} Cambridge: Cambridge University Press. 1994.

@@ -16,17 +16,17 @@ graph.neighborhood(
 \item{graph}{The input graph.}
 
 \item{order}{Integer giving the order of the neighborhood.
-Negative values indicate an infinite order.}
+ Negative values indicate an infinite order.}
 
 \item{nodes}{The vertices for which the calculation is performed.
-The default \code{NULL} selects all vertices.}
+ The default \code{NULL} selects all vertices.}
 
 \item{mode}{Character constant, it specifies how to use the direction of the edges if a directed graph is analyzed.
-For \sQuote{out} only the outgoing edges are followed,
+ For \sQuote{out} only the outgoing edges are followed,
 so all vertices reachable from the source vertex in at most \code{order} steps are counted.
-For \sQuote{"in"} all vertices from which the source vertex is reachable in at most \code{order} steps are counted.
-\sQuote{"all"} ignores the direction of the edges.
-This argument is ignored for undirected graphs.}
+ For \sQuote{"in"} all vertices from which the source vertex is reachable in at most \code{order} steps are counted.
+ \sQuote{"all"} ignores the direction of the edges.
+ This argument is ignored for undirected graphs.}
 
 \item{mindist}{The minimum distance to include the vertex in the result.}
 }

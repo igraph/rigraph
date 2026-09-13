@@ -8,7 +8,7 @@ is_dag(graph)
 }
 \arguments{
 \item{graph}{The input graph.
-It may be undirected, in which case \code{FALSE} is reported.}
+ It may be undirected, in which case \code{FALSE} is reported.}
 }
 \value{
 A logical vector of length one.
@@ -18,7 +18,7 @@ This function tests whether the given graph is a DAG, a directed acyclic graph.
 }
 \details{
 \code{is_dag()} checks whether there is a directed cycle in the graph.
-If not, the graph is a DAG.
+ If not, the graph is a DAG.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_dag}{\code{is_dag()}}

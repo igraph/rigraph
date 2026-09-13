@@ -17,7 +17,7 @@ An igraph graph.
 }
 \description{
 \code{graph_from_atlas()} creates graphs from the book \sQuote{An Atlas of Graphs} by Roland C. Read and Robin J. Wilson.
-The atlas contains all undirected graphs with up to seven vertices, numbered from 0 up to 1252. The graphs are listed:
+ The atlas contains all undirected graphs with up to seven vertices, numbered from 0 up to 1252. The graphs are listed:
 \enumerate{
 \item in increasing order of number of nodes;
 \item for a fixed number of nodes, in increasing order of the number
@@ -26,7 +26,7 @@ of edges;
 the degree sequence, for example 111223 < 112222;
 \item for fixed degree sequence, in increasing number of
 automorphisms.
-}
+ }
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_atlas}{\code{atlas()}}

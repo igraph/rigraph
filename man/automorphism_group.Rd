@@ -17,14 +17,14 @@ automorphism_group(
 
 \item{colors}{The colors of the individual vertices of the graph;
 only vertices having the same color are allowed to match each other in an automorphism.
-When omitted, igraph uses the \code{color} attribute of the vertices, or, if there is no such vertex attribute,
+ When omitted, igraph uses the \code{color} attribute of the vertices, or, if there is no such vertex attribute,
 it simply assumes that all vertices have the same color.
-Pass NULL explicitly if the graph has a \code{color} vertex attribute but you do not want to use it.}
+ Pass NULL explicitly if the graph has a \code{color} vertex attribute but you do not want to use it.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{sh}{The splitting heuristics for the BLISS algorithm.
-Possible values are: \sQuote{\code{f}}:
+ Possible values are: \sQuote{\code{f}}:
 first non-singleton cell,
 \sQuote{\code{fl}}:
 first largest non-singleton cell,
@@ -44,15 +44,15 @@ first smallest maximally non-trivially connected non-singleton cell.}
 \value{
 When \code{details} is \code{FALSE},
 a list of vertex permutations that form a generating set of the automorphism group of the input graph.
-When \code{details} is \code{TRUE}, a named list with two members:
+ When \code{details} is \code{TRUE}, a named list with two members:
 \describe{
 \item{generators}{
 Returns the generators themselves
 }
 \item{info}{
 Additional information about the BLISS internals.
-See \code{\link[=count_automorphisms]{count_automorphisms()}} for more details.
-}
+ See \code{\link[=count_automorphisms]{count_automorphisms()}} for more details.
+ }
 }
 }
 \description{
@@ -60,12 +60,12 @@ Compute the generating set of the automorphism group of a graph.
 }
 \details{
 An automorphism of a graph is a permutation of its vertices which brings the graph into itself.
-The automorphisms of a graph form a group and there exists a subset of this group (i.e. a set of permutations) such that every other permutation can be expressed as a combination of these permutations.
-These permutations are called the generating set of the automorphism group.
+ The automorphisms of a graph form a group and there exists a subset of this group (i.e. a set of permutations) such that every other permutation can be expressed as a combination of these permutations.
+ These permutations are called the generating set of the automorphism group.
 
 This function calculates a possible generating set of the automorphism of a graph using the BLISS algorithm.
-See also the BLISS homepage at \url{http://www.tcs.hut.fi/Software/bliss/index.html}.
-The calculated generating set is not necessarily minimal, and it may depend on the splitting heuristics used by BLISS.
+ See also the BLISS homepage at \url{http://www.tcs.hut.fi/Software/bliss/index.html}.
+ The calculated generating set is not necessarily minimal, and it may depend on the splitting heuristics used by BLISS.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_automorphism_group}{\code{automorphism_group()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

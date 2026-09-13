@@ -12,21 +12,21 @@ unfold_tree(graph, ..., mode = c("all", "out", "in", "total"), roots)
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character string, defined the types of the paths used for the breadth-first search.
-\dQuote{out} follows the outgoing, \dQuote{in} the incoming edges, \dQuote{all} and \dQuote{total} both of them.
-This argument is ignored for undirected graphs.}
+ \dQuote{out} follows the outgoing, \dQuote{in} the incoming edges, \dQuote{all} and \dQuote{total} both of them.
+ This argument is ignored for undirected graphs.}
 
 \item{roots}{A vector giving the vertices from which the breadth-first search is performed.
-Typically it contains one vertex per component.}
+ Typically it contains one vertex per component.}
 }
 \value{
 A list with two components:
 \describe{
 \item{tree}{
 The result, an \code{igraph} object, a tree or a forest.
-}
+ }
 \item{vertex_index}{
 A numeric vector, it gives a mapping from the vertices of the new graph to the vertices of the old graph.
-}
+ }
 }
 }
 \description{

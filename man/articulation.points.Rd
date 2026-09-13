@@ -8,7 +8,7 @@ articulation.points(graph)
 }
 \arguments{
 \item{graph}{The input graph.
-It is treated as an undirected graph, even if it is directed.}
+ It is treated as an undirected graph, even if it is directed.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

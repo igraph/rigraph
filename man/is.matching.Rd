@@ -8,14 +8,14 @@ is.matching(graph, matching, types = NULL)
 }
 \arguments{
 \item{graph}{The input graph.
-It might be directed, but edge directions will be ignored.}
+ It might be directed, but edge directions will be ignored.}
 
 \item{matching}{A potential matching.
-An integer vector that gives the pair in the matching for each vertex.
-For vertices without a pair, supply \code{NA} here.}
+ An integer vector that gives the pair in the matching for each vertex.
+ For vertices without a pair, supply \code{NA} here.}
 
 \item{types}{Vertex types, if the graph is bipartite.
-By default they are taken from the \sQuote{\code{type}} vertex attribute, if present.}
+ By default they are taken from the \sQuote{\code{type}} vertex attribute, if present.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

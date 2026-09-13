@@ -11,13 +11,13 @@ from_literal(...)
 }
 \arguments{
 \item{...}{For \code{graph_from_literal()} the formulae giving the structure of the graph, see details below.
-For \code{from_literal()} all arguments are passed to \code{graph_from_literal()}.}
+ For \code{from_literal()} all arguments are passed to \code{graph_from_literal()}.}
 
 \item{simplify}{Logical, whether to call \code{\link[=simplify]{simplify()}} on the created graph.
-By default the graph is simplified, loop and multiple edges are removed.
-\code{\link[=simplify]{simplify()}} is only called when the created graph is not already simple,
+ By default the graph is simplified, loop and multiple edges are removed.
+ \code{\link[=simplify]{simplify()}} is only called when the created graph is not already simple,
 so the edge order from the formula is preserved whenever no loops or multi-edges are present.
-When the graph does contain loops or multi-edges (and \code{simplify = TRUE}), \code{\link[=simplify]{simplify()}} reorders the edges into its canonical order.}
+ When the graph does contain loops or multi-edges (and \code{simplify = TRUE}), \code{\link[=simplify]{simplify()}} reorders the edges into its canonical order.}
 }
 \value{
 An igraph graph
@@ -27,17 +27,17 @@ This function is useful if you want to create a small (named) graph quickly, it 
 }
 \details{
 \code{graph_from_literal()} is very handy for creating small graphs quickly.
-You need to supply one or more R expressions giving the structure of the graph.
-The expressions consist of vertex names and edge operators.
-An edge operator is a sequence of \sQuote{\code{-}} and \sQuote{\code{+}} characters,
+ You need to supply one or more R expressions giving the structure of the graph.
+ The expressions consist of vertex names and edge operators.
+ An edge operator is a sequence of \sQuote{\code{-}} and \sQuote{\code{+}} characters,
 the former is for the edges and the latter is used for arrow heads.
-The edges can be arbitrarily long, i.e. you may use as many \sQuote{\code{-}} characters to \dQuote{draw} them as you like.
+ The edges can be arbitrarily long, i.e. you may use as many \sQuote{\code{-}} characters to \dQuote{draw} them as you like.
 
 If all edge operators consist of only \sQuote{\code{-}} characters then the graph will be undirected,
 whereas a single \sQuote{\code{+}} character implies a directed graph.
 
 Let us see some simple examples.
-Without arguments the function creates an empty graph:
+ Without arguments the function creates an empty graph:
 \preformatted{  graph_from_literal()
 }
 
@@ -50,13 +50,13 @@ Remember that the length of the edges does not matter, so we could have written 
 }
 
 If you have many disconnected components in the graph, separate them with commas.
-You can also give isolate vertices.
-\preformatted{  graph_from_literal( A--B, C--D, E--F, G--H, I, J, K )
+ You can also give isolate vertices.
+ \preformatted{  graph_from_literal( A--B, C--D, E--F, G--H, I, J, K )
 }
 
 The \sQuote{\code{:}} operator can be used to define vertex sets.
-If an edge operator connects two vertex sets then every vertex from the first set will be connected to every vertex in the second set.
-The following form creates a full graph, including loop edges:
+ If an edge operator connects two vertex sets then every vertex from the first set will be connected to every vertex in the second set.
+ The following form creates a full graph, including loop edges:
 \preformatted{  graph_from_literal( A:B:C:D -- A:B:C:D )
 }
 

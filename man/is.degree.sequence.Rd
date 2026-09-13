@@ -10,8 +10,8 @@ is.degree.sequence(out.deg, in.deg = NULL)
 \item{out.deg}{Integer vector, the degree sequence for undirected graphs, or the out-degree sequence for directed graphs.}
 
 \item{in.deg}{\code{NULL} or an integer vector.
-For undirected graphs, it should be \code{NULL}.
-For directed graphs it specifies the in-degrees.}
+ For undirected graphs, it should be \code{NULL}.
+ For directed graphs it specifies the in-degrees.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

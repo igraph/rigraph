@@ -10,14 +10,14 @@ connect.neighborhood(graph, order, mode = c("all", "out", "in", "total"))
 \item{graph}{The input graph.}
 
 \item{order}{Integer giving the order of the neighborhood.
-Negative values indicate an infinite order.}
+ Negative values indicate an infinite order.}
 
 \item{mode}{Character constant, it specifies how to use the direction of the edges if a directed graph is analyzed.
-For \sQuote{out} only the outgoing edges are followed,
+ For \sQuote{out} only the outgoing edges are followed,
 so all vertices reachable from the source vertex in at most \code{order} steps are counted.
-For \sQuote{"in"} all vertices from which the source vertex is reachable in at most \code{order} steps are counted.
-\sQuote{"all"} ignores the direction of the edges.
-This argument is ignored for undirected graphs.}
+ For \sQuote{"in"} all vertices from which the source vertex is reachable in at most \code{order} steps are counted.
+ \sQuote{"all"} ignores the direction of the edges.
+ This argument is ignored for undirected graphs.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

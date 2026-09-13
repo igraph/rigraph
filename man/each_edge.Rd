@@ -22,13 +22,13 @@ each_edge(
 \item{multiple}{Logical, whether multiple edges are allowed in the generated graph.}
 
 \item{mode}{Character string, specifies which endpoint of the edges to rewire in directed graphs.
-\sQuote{all} rewires both endpoints, \sQuote{in} rewires the start (tail) of each directed edge,
+ \sQuote{all} rewires both endpoints, \sQuote{in} rewires the start (tail) of each directed edge,
 \sQuote{out} rewires the end (head) of each directed edge.
-Ignored for undirected graphs.}
+ Ignored for undirected graphs.}
 }
 \description{
 This function can be used together with \code{\link[=rewire]{rewire()}}.
-This method rewires the endpoints of the edges with a constant probability uniformly randomly to a new vertex in a graph.
+ This method rewires the endpoints of the edges with a constant probability uniformly randomly to a new vertex in a graph.
 }
 \details{
 Note that this method might create graphs with multiple and/or loop edges.

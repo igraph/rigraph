@@ -8,7 +8,7 @@ minimal.st.separators(graph)
 }
 \arguments{
 \item{graph}{The input graph.
-It may be directed, but edge directions are ignored.}
+ It may be directed, but edge directions are ignored.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

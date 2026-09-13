@@ -21,7 +21,7 @@ This function provides a very efficient way to pull an integer random sample seq
 }
 \details{
 The algorithm runs in \code{O(length)} expected time, even if \code{high-low} is big.
-It is much faster (but of course less general) than the builtin \code{sample} function of R.
+ It is much faster (but of course less general) than the builtin \code{sample} function of R.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_random_sample}{\code{random_sample()}}

@@ -8,11 +8,11 @@ dendPlot(x, mode = igraph_opt("dend.plot.type"), ...)
 }
 \arguments{
 \item{x}{An object containing the community structure of a graph.
-See \code{\link[=communities]{communities()}} for details.}
+ See \code{\link[=communities]{communities()}} for details.}
 
 \item{mode}{Which dendrogram plotting function to use.
-See details below.
-The default \code{NULL} uses the \code{dend.plot.type} igraph option.}
+ See details below.
+ The default \code{NULL} uses the \code{dend.plot.type} igraph option.}
 
 \item{...}{Additional arguments to supply to the dendrogram plotting function.}
 }

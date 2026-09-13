@@ -20,60 +20,60 @@ cluster_leiden(
 }
 \arguments{
 \item{graph}{The input graph.
-It must be undirected.}
+ It must be undirected.}
 
 \item{objective_function}{Whether to use the Constant Potts Model (CPM) or modularity.
-Must be either \code{"CPM"} or \code{"modularity"}.}
+ Must be either \code{"CPM"} or \code{"modularity"}.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{The weights of the edges.
-It must be a positive numeric vector, \code{NULL} or \code{NA}.
-If it is \code{NULL} and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
-If \code{NULL} and no such attribute is present, then the edges will have equal weights.
-Set this to \code{NA} if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for community detection.
-A larger edge weight means a stronger connection for this function.}
+ It must be a positive numeric vector, \code{NULL} or \code{NA}.
+ If it is \code{NULL} and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
+ If \code{NULL} and no such attribute is present, then the edges will have equal weights.
+ Set this to \code{NA} if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for community detection.
+ A larger edge weight means a stronger connection for this function.}
 
 \item{resolution}{The resolution parameter to use.
-Higher resolutions lead to more smaller communities, while lower resolutions lead to fewer larger communities.}
+ Higher resolutions lead to more smaller communities, while lower resolutions lead to fewer larger communities.}
 
 \item{resolution_parameter}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}} Use \code{resolution} instead.}
 
 \item{beta}{Parameter affecting the randomness in the Leiden algorithm.
-This affects only the refinement step of the algorithm.}
+ This affects only the refinement step of the algorithm.}
 
 \item{initial_membership}{If provided, the Leiden algorithm will try to improve this provided membership.
-If no argument is provided, the aglorithm simply starts from the singleton partition.}
+ If no argument is provided, the aglorithm simply starts from the singleton partition.}
 
 \item{n_iterations}{the number of iterations to iterate the Leiden algorithm.
-Each iteration may improve the partition further.}
+ Each iteration may improve the partition further.}
 
 \item{vertex_weights}{the vertex weights used in the Leiden algorithm.
-If this is not provided, it will be automatically determined on the basis of the \code{objective_function}.
-Please see the details of this function how to interpret the vertex weights.}
+ If this is not provided, it will be automatically determined on the basis of the \code{objective_function}.
+ Please see the details of this function how to interpret the vertex weights.}
 }
 \value{
 \code{cluster_leiden()} returns a \code{\link[=communities]{communities()}} object, please see the \code{\link[=communities]{communities()}} manual page for details.
 }
 \description{
 The Leiden algorithm is similar to the Louvain algorithm, \code{\link[=cluster_louvain]{cluster_louvain()}}, but it is faster and yields higher quality solutions.
-It can optimize both modularity and the Constant Potts Model,
+ It can optimize both modularity and the Constant Potts Model,
 which does not suffer from the resolution-limit (see preprint \url{https://arxiv.org/abs/1104.3083}).
 }
 \details{
 The Leiden algorithm consists of three phases: (1) local moving of nodes,
 (2) refinement of the partition and (3) aggregation of the network based on the refined partition,
 using the non-refined partition to create an initial partition for the aggregate network.
-In the local move procedure in the Leiden algorithm, only nodes whose neighborhood has changed are visited.
-The refinement is done by restarting from a singleton partition within each cluster and gradually merging the subclusters.
-When aggregating, a single cluster may then be represented by several nodes (which are the subclusters identified in the refinement).
+ In the local move procedure in the Leiden algorithm, only nodes whose neighborhood has changed are visited.
+ The refinement is done by restarting from a singleton partition within each cluster and gradually merging the subclusters.
+ When aggregating, a single cluster may then be represented by several nodes (which are the subclusters identified in the refinement).
 
 The Leiden algorithm provides several guarantees.
-The Leiden algorithm is typically iterated: the output of one iteration is used as the input for the next iteration.
-At each iteration all clusters are guaranteed to be connected and well-separated.
-After an iteration in which nothing has changed, all nodes and some parts are guaranteed to be locally optimally assigned.
-Finally, asymptotically, all subsets of all clusters are guaranteed to be locally optimally assigned.
-For more details, please see Traag, Waltman & van Eck (2019).
+ The Leiden algorithm is typically iterated: the output of one iteration is used as the input for the next iteration.
+ At each iteration all clusters are guaranteed to be connected and well-separated.
+ After an iteration in which nothing has changed, all nodes and some parts are guaranteed to be locally optimally assigned.
+ Finally, asymptotically, all subsets of all clusters are guaranteed to be locally optimally assigned.
+ For more details, please see Traag, Waltman & van Eck (2019).
 
 The objective function being optimized is
 
@@ -83,13 +83,13 @@ where \eqn{m}{m} is the total edge weight, \eqn{A_{ij}}{A_ij} is the weight of e
 \eqn{\gamma}{gamma} is the so-called resolution parameter, \eqn{n_i} is the node weight of node \eqn{i},
 \eqn{\sigma_i}{s_i} is the cluster of node \eqn{i} and \eqn{\delta(x, y) = 1}{d(x, y) = 1} if and only
 if \eqn{x = y} and \eqn{0} otherwise.
-By setting \eqn{n_i = k_i}, the degree of node \eqn{i}, and dividing \eqn{\gamma}{gamma} by \eqn{2m},
+ By setting \eqn{n_i = k_i}, the degree of node \eqn{i}, and dividing \eqn{\gamma}{gamma} by \eqn{2m},
 you effectively obtain an expression for modularity.
 
 Hence, the standard modularity will be optimized
 when you supply the degrees as \code{vertex_weights} and by supplying as a resolution parameter \eqn{\frac{1}{2m}}{1/(2m)},
 with \eqn{m} the number of edges.
-If you do not specify any \code{vertex_weights},
+ If you do not specify any \code{vertex_weights},
 the correct vertex weights and scaling of \eqn{\gamma}{gamma} is determined automatically by the \code{objective_function} argument.
 }
 \section{Related documentation in the C library}{

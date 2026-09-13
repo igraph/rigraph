@@ -8,7 +8,7 @@ is_biconnected(graph)
 }
 \arguments{
 \item{graph}{The input graph.
-Edge directions are ignored.}
+ Edge directions are ignored.}
 }
 \value{
 Logical, \code{TRUE} if the graph is biconnected.

@@ -33,7 +33,7 @@ A graph object.
 
 Since igraph version 0.8.0, both \code{erdos.renyi.game()} and \code{random.graph.game()} are deprecated,
 and \code{\link[=sample_gnp]{sample_gnp()}} and \code{\link[=sample_gnm]{sample_gnm()}} should be used instead.
-See these for more details.
+ See these for more details.
 
 \code{random.graph.game()} is an (also deprecated) alias to this function.
 }

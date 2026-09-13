@@ -14,8 +14,8 @@ graph.maxflow(graph, source, target, capacity = NULL)
 \item{target}{The ID of the target vertex (sometimes also called sink).}
 
 \item{capacity}{Vector giving the capacity of the edges.
-If this is \code{NULL} (the default) then the \code{capacity} edge attribute is used.
-Note that the \code{weight} edge attribute is not used by this function.}
+ If this is \code{NULL} (the default) then the \code{capacity} edge attribute is used.
+ Note that the \code{weight} edge attribute is not used by this function.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

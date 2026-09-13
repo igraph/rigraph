@@ -10,7 +10,7 @@ graph.extended.chordal.ring(n, w, directed = FALSE)
 \item{n}{The number of vertices.}
 
 \item{w}{A matrix which specifies the extended chordal ring.
-See details below.}
+ See details below.}
 
 \item{directed}{Logical, whether or not to create a directed graph.}
 }

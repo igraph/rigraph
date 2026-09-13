@@ -14,10 +14,10 @@ subcomponent(graph, v, ..., mode = c("all", "out", "in"))
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character string, either \dQuote{in}, \dQuote{out} or \dQuote{all}.
-If \dQuote{in} all vertices from which \code{v} is reachable are listed.
-If \dQuote{out} all vertices reachable from \code{v} are returned.
-If \dQuote{all} returns the union of these.
-It is ignored for undirected graphs.}
+ If \dQuote{in} all vertices from which \code{v} is reachable are listed.
+ If \dQuote{out} all vertices reachable from \code{v} are returned.
+ If \dQuote{all} returns the union of these.
+ It is ignored for undirected graphs.}
 }
 \value{
 Numeric vector, the IDs of the vertices in the same component as \code{v}.

@@ -8,13 +8,13 @@ graph.formula(..., simplify = TRUE)
 }
 \arguments{
 \item{...}{For \code{graph_from_literal()} the formulae giving the structure of the graph, see details below.
-For \code{from_literal()} all arguments are passed to \code{graph_from_literal()}.}
+ For \code{from_literal()} all arguments are passed to \code{graph_from_literal()}.}
 
 \item{simplify}{Logical, whether to call \code{\link[=simplify]{simplify()}} on the created graph.
-By default the graph is simplified, loop and multiple edges are removed.
-\code{\link[=simplify]{simplify()}} is only called when the created graph is not already simple,
+ By default the graph is simplified, loop and multiple edges are removed.
+ \code{\link[=simplify]{simplify()}} is only called when the created graph is not already simple,
 so the edge order from the formula is preserved whenever no loops or multi-edges are present.
-When the graph does contain loops or multi-edges (and \code{simplify = TRUE}), \code{\link[=simplify]{simplify()}} reorders the edges into its canonical order.}
+ When the graph does contain loops or multi-edges (and \code{simplify = TRUE}), \code{\link[=simplify]{simplify()}} reorders the edges into its canonical order.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

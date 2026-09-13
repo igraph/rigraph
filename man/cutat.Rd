@@ -8,11 +8,11 @@ cutat(communities, no, steps)
 }
 \arguments{
 \item{no}{Integer scalar, the desired number of communities.
-If too low or two high, then an error message is given.
-Exactly one of \code{no} and \code{steps} must be supplied.}
+ If too low or two high, then an error message is given.
+ Exactly one of \code{no} and \code{steps} must be supplied.}
 
 \item{steps}{The number of merge operations to perform to produce the communities.
-Exactly one of \code{no} and \code{steps} must be supplied.}
+ Exactly one of \code{no} and \code{steps} must be supplied.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

@@ -14,11 +14,11 @@ contract.vertices(
 \item{graph}{The input graph, it can be directed or undirected.}
 
 \item{mapping}{A numeric vector that specifies the mapping.
-Its elements correspond to the vertices, and for each element the ID in the new graph is given.}
+ Its elements correspond to the vertices, and for each element the ID in the new graph is given.}
 
 \item{vertex.attr.comb}{Specifies how to combine the vertex attributes in the new graph.
-Please see \code{\link[=attribute.combination]{attribute.combination()}} for details.
-The default \code{NULL} uses the \code{vertex.attr.comb} igraph option.}
+ Please see \code{\link[=attribute.combination]{attribute.combination()}} for details.
+ The default \code{NULL} uses the \code{vertex.attr.comb} igraph option.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

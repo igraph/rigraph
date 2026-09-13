@@ -15,13 +15,13 @@ compare(
 \arguments{
 \item{comm1}{A \code{\link[=communities]{communities()}} object containing a community structure; or a numeric vector,
 the membership vector of the first community structure.
-The membership vector should contain the community ID of each vertex, the numbering of the communities starts with one.}
+ The membership vector should contain the community ID of each vertex, the numbering of the communities starts with one.}
 
 \item{comm2}{A \code{\link[=communities]{communities()}} object containing a community structure; or a numeric vector,
 the membership vector of the second community structure, in the same format as for the previous argument.}
 
 \item{method}{Character scalar, the comparison method to use.
-Possible values: \sQuote{vi} is the variation of information (VI) metric of Meila (2003),
+ Possible values: \sQuote{vi} is the variation of information (VI) metric of Meila (2003),
 \sQuote{nmi} is the normalized mutual information measure proposed by Danon et al. (2005),
 \sQuote{split.join} is the split-join distance of can Dongen (2000), \sQuote{rand} is the Rand index of Rand (1971),
 \sQuote{adjusted.rand} is the adjusted Rand index by Hubert and Arabie (1985).}
@@ -47,7 +47,7 @@ compare(membership(sg), membership(le))
 }
 \references{
 Meila M: Comparing clusterings by the variation of information.
-In: Scholkopf B, Warmuth MK (eds.). \emph{Learning Theory and Kernel
+ In: Scholkopf B, Warmuth MK (eds.). \emph{Learning Theory and Kernel
 Machines: 16th Annual Conference on Computational Learning Theory and 7th
 Kernel Workshop}, COLT/Kernel 2003, Washington, DC, USA. Lecture Notes in
 Computer Science, vol. 2777, Springer, 2003. ISBN: 978-3-540-40720-1.
@@ -60,7 +60,7 @@ experiments. Technical Report INS-R0012, National Research Institute for
 Mathematics and Computer Science in the Netherlands, Amsterdam, May 2000.
 
 Rand WM: Objective criteria for the evaluation of clustering methods.
-\emph{J Am Stat Assoc} 66(336):846-850, 1971.
+ \emph{J Am Stat Assoc} 66(336):846-850, 1971.
 
 Hubert L and Arabie P: Comparing partitions. \emph{Journal of
 Classification} 2:193-218, 1985.

@@ -10,9 +10,9 @@ graph.union(..., byname = "auto")
 \item{...}{Graph objects or lists of graph objects.}
 
 \item{byname}{A Logical, or the character scalar \code{auto}.
-Whether to perform the operation based on symbolic vertex names.
-If it is \code{auto}, that means \code{TRUE} if all graphs are named and \code{FALSE} otherwise.
-A warning is generated if \code{auto} and some (but not all) graphs are named.}
+ Whether to perform the operation based on symbolic vertex names.
+ If it is \code{auto}, that means \code{TRUE} if all graphs are named and \code{FALSE} otherwise.
+ A warning is generated if \code{auto} and some (but not all) graphs are named.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

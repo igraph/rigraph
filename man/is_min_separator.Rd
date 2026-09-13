@@ -8,7 +8,7 @@ is_min_separator(graph, candidate)
 }
 \arguments{
 \item{graph}{The input graph.
-It may be directed, but edge directions are ignored.}
+ It may be directed, but edge directions are ignored.}
 
 \item{candidate}{A numeric vector giving the vertex IDs of the candidate separator.}
 }
@@ -20,7 +20,7 @@ Check whether a given set of vertices is a minimal vertex separator.
 }
 \details{
 \code{is_min_separator()} decides whether the supplied vertex set is a minimal vertex separator.
-A minimal vertex separator is a vertex separator, such that none of its proper subsets are a vertex separator.
+ A minimal vertex separator is a vertex separator, such that none of its proper subsets are a vertex separator.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Separators.html#igraph_is_minimal_separator}{\code{is_minimal_separator()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

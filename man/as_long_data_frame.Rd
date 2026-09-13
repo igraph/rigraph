@@ -14,10 +14,10 @@ A long data frame.
 }
 \description{
 A long data frame contains all metadata about both the vertices and edges of the graph.
-It contains one row for each edge, and all metadata about that edge and its incident vertices are included in that row.
-The names of the columns that contain the metadata of the incident vertices are prefixed with \code{from_} and \code{to_}.
-The first two columns are always named \code{from} and \code{to} and they contain the numeric IDs of the incident vertices.
-The rows are listed in the order of numeric vertex IDs.
+ It contains one row for each edge, and all metadata about that edge and its incident vertices are included in that row.
+ The names of the columns that contain the metadata of the incident vertices are prefixed with \code{from_} and \code{to_}.
+ The first two columns are always named \code{from} and \code{to} and they contain the numeric IDs of the incident vertices.
+ The rows are listed in the order of numeric vertex IDs.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist}{\code{get_edgelist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

@@ -19,7 +19,7 @@ Sample finite-dimensional vectors to use as latent position vectors in random do
 }
 \details{
 \code{sample_dirichlet()} generates samples from the Dirichlet distribution with given \eqn{\alpha}{alpha} parameter.
-The sample is drawn from \code{length(alpha)-1}-simplex.
+ The sample is drawn from \code{length(alpha)-1}-simplex.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_sample_dirichlet}{\code{sample_dirichlet()}}

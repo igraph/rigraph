@@ -20,23 +20,23 @@ Delete vertices or edges from a graph
 }
 \details{
 The minus operator (\sQuote{\code{-}}) can be used to remove vertices or edges from the graph.
-The operation performed is selected based on the type of the right hand side argument:
+ The operation performed is selected based on the type of the right hand side argument:
 \itemize{
 \item If it is an igraph graph object, then the difference of the
 two graphs is calculated, see \code{\link[=difference]{difference()}}.
-\item If it is a numeric or character vector, then it is interpreted
+ \item If it is a numeric or character vector, then it is interpreted
 as a vector of vertex IDs and the specified vertices will be
 deleted from the graph. Example: \preformatted{  g <- make_ring(10)
 V(g)$name <- letters[1:10]
 g <- g - c("a", "b")}
 \item If \code{e2} is a vertex sequence (e.g. created by the \code{\link[=V]{V()}} function), then these vertices will be deleted from the graph.
-\item If it is an edge sequence (e.g. created by the \code{\link[=E]{E()}} function), then these edges will be deleted from the graph.
-\item If it is an object created with the \code{\link[=vertex]{vertex()}} (or the \code{\link[=vertices]{vertices()}}) function, then all arguments of \code{\link[=vertices]{vertices()}} are concatenated
+ \item If it is an edge sequence (e.g. created by the \code{\link[=E]{E()}} function), then these edges will be deleted from the graph.
+ \item If it is an object created with the \code{\link[=vertex]{vertex()}} (or the \code{\link[=vertices]{vertices()}}) function, then all arguments of \code{\link[=vertices]{vertices()}} are concatenated
 and the result is interpreted as a vector of vertex IDs.
-These vertices will be removed from the graph.
-\item If it is an object created with the \code{\link[=edge]{edge()}} (or the \code{\link[=edges]{edges()}}) function, then all arguments of \code{\link[=edges]{edges()}} are concatenated and
+ These vertices will be removed from the graph.
+ \item If it is an object created with the \code{\link[=edge]{edge()}} (or the \code{\link[=edges]{edges()}}) function, then all arguments of \code{\link[=edges]{edges()}} are concatenated and
 then interpreted as edges to be removed from the graph.
-Example: \preformatted{  g <- make_ring(10)
+ Example: \preformatted{  g <- make_ring(10)
 V(g)$name <- letters[1:10]
 E(g)$name <- LETTERS[1:10]
 g <- g - edge("e|f")
@@ -44,7 +44,7 @@ g <- g - edge("H")}
 \item If it is an object created with the \code{\link[=path]{path()}} function,
 then all \code{\link[=path]{path()}} arguments are concatenated and then interpreted
 as a path along which edges will be removed from the graph.
-Example: \preformatted{  g <- make_ring(10)
+ Example: \preformatted{  g <- make_ring(10)
 V(g)$name <- letters[1:10]
 g <- g - path("a", "b", "c", "d")}
 }

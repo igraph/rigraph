@@ -12,10 +12,10 @@ add_vertices(graph, nv, ..., attr = list())
 \item{nv}{The number of vertices to add.}
 
 \item{...}{Additional arguments, they must be named, and they will be added as vertex attributes, for the newly added vertices.
-See also details below.}
+ See also details below.}
 
 \item{attr}{A named list, its elements will be added as vertex attributes, for the newly added vertices.
-See also details below.}
+ See also details below.}
 }
 \value{
 The graph, with the vertices (and attributes) added.

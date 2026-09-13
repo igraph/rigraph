@@ -8,7 +8,7 @@ is.minimal.separator(graph, candidate)
 }
 \arguments{
 \item{graph}{The input graph.
-It may be directed, but edge directions are ignored.}
+ It may be directed, but edge directions are ignored.}
 
 \item{candidate}{A numeric vector giving the vertex IDs of the candidate separator.}
 }

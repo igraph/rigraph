@@ -19,15 +19,15 @@ as_undirected(
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character constant, defines the conversion algorithm.
-For \code{as_directed()} it can be \code{mutual} or \code{arbitrary}.
-For \code{as_undirected()} it can be \code{each}, \code{collapse} or \code{mutual}.
-See details below.}
+ For \code{as_directed()} it can be \code{mutual} or \code{arbitrary}.
+ For \code{as_undirected()} it can be \code{each}, \code{collapse} or \code{mutual}.
+ See details below.}
 
 \item{edge.attr.comb}{Specifies what to do with edge attributes,
 if \code{mode="collapse"} or \code{mode="mutual"}.
-In these cases many edges might be mapped to a single one in the new graph, and their attributes are combined.
-Please see \code{\link[=attribute.combination]{attribute.combination()}} for details on this.
-The default \code{NULL} uses the \code{edge.attr.comb} igraph option.}
+ In these cases many edges might be mapped to a single one in the new graph, and their attributes are combined.
+ Please see \code{\link[=attribute.combination]{attribute.combination()}} for details on this.
+ The default \code{NULL} uses the \code{edge.attr.comb} igraph option.}
 }
 \value{
 A new graph object.
@@ -44,20 +44,20 @@ The number of edges in the graph stays the same, an
 arbitrarily directed edge is created for each undirected edge, but the
 direction of the edge is deterministic (i.e. it always points the same
 way if you call the function multiple times).
-}
+ }
 \item{"mutual"}{
 Two directed edges are created for each undirected
 edge, one in each direction.
-}
+ }
 \item{"random"}{
 The number of edges in the graph stays the same, and a randomly directed edge is created for each undirected edge.
-You will get different results if you call the function multiple times with the same graph.
-}
+ You will get different results if you call the function multiple times with the same graph.
+ }
 \item{"acyclic"}{
 The number of edges in the graph stays the same, and a directed edge is created for each undirected edge such that the resulting graph is guaranteed to be acyclic.
-This is achieved by ensuring that edges always point from a lower index vertex to a higher index.
-Note that the graph may include cycles of length 1 if the original graph contained loop edges.
-}
+ This is achieved by ensuring that edges always point from a lower index vertex to a higher index.
+ Note that the graph may include cycles of length 1 if the original graph contained loop edges.
+ }
 }
 
 Conversion algorithms for \code{as_undirected()}:
@@ -66,17 +66,17 @@ Conversion algorithms for \code{as_undirected()}:
 The number of edges remains constant, an undirected edge
 is created for each directed one, this version might create graphs with
 multiple edges.
-}
+ }
 \item{"collapse"}{
 One undirected edge will be created
 for each pair of vertices which are connected with at least one directed
 edge, no multiple edges will be created.
-}
+ }
 \item{"mutual"}{
 One undirected edge will be created for each pair of mutual edges.
-Non-mutual edges are ignored.
-This mode might create multiple edges if there are more than one mutual edge pairs between the same pair of vertices.
-}
+ Non-mutual edges are ignored.
+ This mode might create multiple edges if there are more than one mutual edge pairs between the same pair of vertices.
+ }
 }
 }
 \section{Related documentation in the C library}{

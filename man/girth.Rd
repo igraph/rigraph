@@ -8,7 +8,7 @@ girth(graph, ..., circle = TRUE)
 }
 \arguments{
 \item{graph}{The input graph.
-It may be directed, but the algorithm searches for undirected circles anyway.}
+ It may be directed, but the algorithm searches for undirected circles anyway.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
@@ -19,10 +19,10 @@ A named list with two components:
 \describe{
 \item{girth}{
 Integer constant, the girth of the graph, or \code{Inf} if the graph is acyclic.
-}
+ }
 \item{circle}{
 Numeric vector with the vertex IDs in the shortest circle.
-}
+ }
 }
 }
 \description{
@@ -30,8 +30,8 @@ The girth of a graph is the length of the shortest circle in it.
 }
 \details{
 The current implementation works for undirected graphs only, directed graphs are treated as undirected graphs.
-Loop edges and multiple edges are ignored.
-If the graph is a forest (i.e. acyclic), then \code{Inf} is returned.
+ Loop edges and multiple edges are ignored.
+ If the graph is a forest (i.e. acyclic), then \code{Inf} is returned.
 
 This implementation is based on Alon Itai and Michael Rodeh:
 Finding a minimum circuit in a graph \emph{Proceedings of the ninth annual ACM symposium on Theory of computing},

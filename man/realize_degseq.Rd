@@ -14,20 +14,20 @@ realize_degseq(
 }
 \arguments{
 \item{out.deg}{Numeric vector, the sequence of degrees (for undirected graphs) or out-degrees (for directed graphs).
-For undirected graphs its sum should be even.
-For directed graphs its sum should be the same as the sum of \code{in.deg}.}
+ For undirected graphs its sum should be even.
+ For directed graphs its sum should be the same as the sum of \code{in.deg}.}
 
 \item{in.deg}{For directed graph, the in-degree sequence.
-By default this is \code{NULL} and an undirected graph is created.}
+ By default this is \code{NULL} and an undirected graph is created.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{allowed.edge.types}{Character, specifies the types of allowed edges.
-\dQuote{simple} allows simple graphs only (no loops, no multiple edges).
-\dQuote{multiple} allows multiple edges but disallows loop.
-\dQuote{loops} allows loop edges but disallows multiple edges (currently unimplemented).
-\dQuote{all} allows all types of edges.
-The default is \dQuote{simple}.}
+ \dQuote{simple} allows simple graphs only (no loops, no multiple edges).
+ \dQuote{multiple} allows multiple edges but disallows loop.
+ \dQuote{loops} allows loop edges but disallows multiple edges (currently unimplemented).
+ \dQuote{all} allows all types of edges.
+ The default is \dQuote{simple}.}
 
 \item{method}{Character, the method for generating the graph; see below.}
 }
@@ -36,26 +36,26 @@ The new graph object.
 }
 \description{
 It is often useful to create a graph with given vertex degrees.
-This function creates such a graph in a deterministic manner.
+ This function creates such a graph in a deterministic manner.
 }
 \details{
 Simple undirected graphs are constructed using the Havel-Hakimi algorithm (undirected case),
 or the analogous Kleitman-Wang algorithm (directed case).
-These algorithms work by choosing an arbitrary vertex and connecting all its stubs to other vertices.
-This step is repeated until all degrees have been connected up.
+ These algorithms work by choosing an arbitrary vertex and connecting all its stubs to other vertices.
+ This step is repeated until all degrees have been connected up.
 
 The \sQuote{method} argument controls in which order the vertices are selected during the course of the algorithm.
 
 The \dQuote{smallest} method selects the vertex with the smallest remaining degree.
-The result is usually a graph with high negative degree assortativity.
-In the undirected case, this method is guaranteed to generate a connected graph, regardless of whether multi-edges are allowed,
+ The result is usually a graph with high negative degree assortativity.
+ In the undirected case, this method is guaranteed to generate a connected graph, regardless of whether multi-edges are allowed,
 provided that a connected realization exists.
-See Horvát and Modes (2021) for details.
-In the directed case it tends to generate weakly connected graphs, but this is not guaranteed.
-This is the default method.
+ See Horvát and Modes (2021) for details.
+ In the directed case it tends to generate weakly connected graphs, but this is not guaranteed.
+ This is the default method.
 
 The \dQuote{largest} method selects the vertex with the largest remaining degree.
-The result is usually a graph with high positive degree assortativity, and is often disconnected.
+ The result is usually a graph with high positive degree assortativity, and is often disconnected.
 
 The \dQuote{index} method selects the vertices in order of their index.
 }
@@ -98,16 +98,16 @@ https://eudml.org/doc/19050
 S. L. Hakimi,
 On Realizability of a Set of Integers as Degrees of the Vertices of a Linear Graph,
 Journal of the SIAM 10, 3 (1962).
-\doi{10.1137/0111010}
+ \doi{10.1137/0111010}
 
 D. J. Kleitman and D. L. Wang,
 Algorithms for Constructing Graphs and Digraphs with Given Valences and Factors,
 Discrete Mathematics 6, 1 (1973).
-\doi{10.1016/0012-365X(73)90037-X}
+ \doi{10.1016/0012-365X(73)90037-X}
 
 Sz. Horvát and C. D. Modes,
 Connectedness matters: construction and exact random sampling of connected networks (2021).
-\doi{10.1088/2632-072X/abced5}
+ \doi{10.1088/2632-072X/abced5}
 }
 \seealso{
 \code{\link[=sample_degseq]{sample_degseq()}} for a randomized variant that samples from graphs with the given degree sequence.

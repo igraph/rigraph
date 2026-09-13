@@ -17,36 +17,36 @@ alpha.centrality(
 }
 \arguments{
 \item{graph}{The input graph, can be directed or undirected.
-In undirected graphs, edges are treated as if they were reciprocal directed ones.}
+ In undirected graphs, edges are treated as if they were reciprocal directed ones.}
 
 \item{nodes}{Vertex sequence, the vertices for which the alpha centrality values are returned.
-The default \code{NULL} selects all vertices.
-(For technical reasons they will be calculated for all vertices, anyway.)}
+ The default \code{NULL} selects all vertices.
+ (For technical reasons they will be calculated for all vertices, anyway.)}
 
 \item{alpha}{Parameter specifying the relative importance of endogenous versus exogenous factors in the determination of centrality.
-See details below.}
+ See details below.}
 
 \item{loops}{Whether to eliminate loop edges from the graph before the calculation.}
 
 \item{exo}{The exogenous factors, in most cases this is either a constant -- the same factor for every node,
 or a vector giving the factor for every vertex.
-Note that too long vectors will be truncated and too short vectors will be replicated to match the number of vertices.}
+ Note that too long vectors will be truncated and too short vectors will be replicated to match the number of vertices.}
 
 \item{weights}{One of the following:
 \itemize{
 \item \code{NULL} (default): use the \code{weight} edge attribute if the graph has one,
 otherwise return a traditional (unweighted) adjacency matrix.
-\item \code{NA}: explicitly unweighted, ignoring any \code{weight} edge attribute.
-\item A numeric or logical vector of length \code{\link[=ecount]{ecount()}}: use these values directly as edge weights.
-\item A character scalar: the name of an edge attribute whose values are used as weights.
-The attribute must be numeric or logical.
-}
+ \item \code{NA}: explicitly unweighted, ignoring any \code{weight} edge attribute.
+ \item A numeric or logical vector of length \code{\link[=ecount]{ecount()}}: use these values directly as edge weights.
+ \item A character scalar: the name of an edge attribute whose values are used as weights.
+ The attribute must be numeric or logical.
+ }
 If multiple edges share endpoints, the value of an arbitrarily chosen edge is included in the matrix.}
 
 \item{tol}{Tolerance for near-singularities during matrix inversion, see \code{\link[Matrix:solve]{Matrix::solve()}}.}
 
 \item{sparse}{Logical, whether to use sparse matrices for the calculation.
-The \sQuote{Matrix} package is required for sparse matrix support}
+ The \sQuote{Matrix} package is required for sparse matrix support}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

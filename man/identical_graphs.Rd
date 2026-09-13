@@ -19,7 +19,7 @@ Logical scalar
 \description{
 Two graphs are considered identical by this function if and only
 if they are represented in exactly the same way in the internal R representation.
-This means that the two graphs must have the same list of vertices and edges, in exactly the same order, with same directedness,
+ This means that the two graphs must have the same list of vertices and edges, in exactly the same order, with same directedness,
 and the two graphs must also have identical graph, vertex and edge attributes.
 }
 \details{

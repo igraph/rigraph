@@ -8,13 +8,13 @@ cohesive.blocks(graph, labels = TRUE)
 }
 \arguments{
 \item{graph}{For \code{cohesive_blocks()} a graph object of class \code{igraph}.
-It must be undirected and simple.
-(See \code{\link[=is_simple]{is_simple()}}.)
+ It must be undirected and simple.
+ (See \code{\link[=is_simple]{is_simple()}}.)
 
 For \code{graphs_from_cohesive_blocks()} and \code{export_pajek()} the same graph must be supplied whose cohesive block structure is given in the \code{blocks()} argument.}
 
 \item{labels}{Logical, whether to add the vertex labels to the result object.
-These labels can be then used when reporting and plotting the cohesive blocks.}
+ These labels can be then used when reporting and plotting the cohesive blocks.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

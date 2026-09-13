@@ -10,14 +10,14 @@ get.diameter(graph, directed = TRUE, unconnected = TRUE, weights = NULL)
 \item{graph}{The graph to analyze.}
 
 \item{directed}{Logical, whether directed or undirected paths are to be considered.
-This is ignored for undirected graphs.}
+ This is ignored for undirected graphs.}
 
 \item{unconnected}{Logical, what to do if the graph is unconnected.
-If FALSE, the function will return a number that is one larger the largest possible diameter, which is always the number of vertices.
-If TRUE, the diameters of the connected components will be calculated and the largest one will be returned.}
+ If FALSE, the function will return a number that is one larger the largest possible diameter, which is always the number of vertices.
+ If TRUE, the diameters of the connected components will be calculated and the largest one will be returned.}
 
 \item{weights}{Optional positive weight vector for calculating weighted distances.
-If the graph has a \code{weight} edge attribute, then this is used by default.}
+ If the graph has a \code{weight} edge attribute, then this is used by default.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

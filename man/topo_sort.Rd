@@ -12,10 +12,10 @@ topo_sort(graph, ..., mode = c("out", "all", "in"))
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Specifies how to use the direction of the edges.
-For \dQuote{\code{out}},
+ For \dQuote{\code{out}},
 the sorting order ensures that each node comes before all nodes to which it has edges, so nodes with no incoming edges go first.
-For \dQuote{\verb{in}}, it is quite the opposite: each node comes before all nodes from which it receives edges.
-Nodes with no outgoing edges go first.}
+ For \dQuote{\verb{in}}, it is quite the opposite: each node comes before all nodes from which it receives edges.
+ Nodes with no outgoing edges go first.}
 }
 \value{
 A vertex sequence (by default, but see the \code{return.vs.es} option of \code{\link[=igraph_options]{igraph_options()}}) containing vertices in topologically sorted order.
@@ -26,8 +26,8 @@ where each node comes before all nodes to which it has edges.
 }
 \details{
 Every DAG has at least one topological sort, and may have many.
-This function returns a possible topological sort among them.
-If the graph is not acyclic (it has at least one cycle), a partial topological sort is returned and a warning is issued.
+ This function returns a possible topological sort among them.
+ If the graph is not acyclic (it has at least one cycle), a partial topological sort is returned and a warning is issued.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_topological_sorting}{\code{topological_sorting()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

@@ -28,35 +28,35 @@ layout_with_kk(
 }
 \arguments{
 \item{graph}{The input graph.
-Edge directions are ignored.}
+ Edge directions are ignored.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{coords}{Starting coordinates in a two or three column matrix,
 depending on the \code{dim} argument.
-Default: \code{NULL}.}
+ Default: \code{NULL}.}
 
 \item{dim}{Integer scalar, 2 or 3, the dimension of the layout.
-Two dimensional layouts are places on a plane,
+ Two dimensional layouts are places on a plane,
 three dimensional ones in the 3d space.}
 
 \item{maxiter}{The maximum number of iterations to perform.
-The algorithm might terminate earlier, see the \code{epsilon} argument.
-The default \code{NULL} uses \code{50 * vcount(graph)}.}
+ The algorithm might terminate earlier, see the \code{epsilon} argument.
+ The default \code{NULL} uses \code{50 * vcount(graph)}.}
 
 \item{epsilon}{Numeric scalar, the algorithm terminates, if the maximal delta is less than this.
-(See the reference below for what delta means.) If you set this to zero, then the function always performs \code{maxiter} iterations.}
+ (See the reference below for what delta means.) If you set this to zero, then the function always performs \code{maxiter} iterations.}
 
 \item{kkconst}{Numeric scalar, the Kamada-Kawai vertex attraction constant.
-The default \code{NULL} uses the number of vertices.}
+ The default \code{NULL} uses the number of vertices.}
 
 \item{weights}{Edge weights, larger values will result in longer edges.
-Note that this is the opposite of \code{\link[=layout_with_fr]{layout_with_fr()}}, which produces shorter edges for larger weights.
-Weights must be positive.}
+ Note that this is the opposite of \code{\link[=layout_with_fr]{layout_with_fr()}}, which produces shorter edges for larger weights.
+ Weights must be positive.}
 
 \item{minx}{Numeric vector that gives lower boundaries for the \sQuote{x} coordinates of the vertices.
-The length of the vector must match the number of vertices in the graph.
-Default: \code{NULL}.}
+ The length of the vector must match the number of vertices in the graph.
+ Default: \code{NULL}.}
 
 \item{maxx}{Similar to \code{minx}, but gives the upper boundaries.}
 
@@ -101,7 +101,7 @@ Undirected Graphs. \emph{Information Processing Letters}, 31/1, 7--15, 1989.
 }
 \seealso{
 \code{\link[=layout_with_drl]{layout_with_drl()}}, \code{\link[=plot.igraph]{plot.igraph()}}, \code{\link[=tkplot]{tkplot()}}.
-See \code{\link[=with_kk]{with_kk()}} to build a lazy layout specification for \code{\link[=add_layout_]{add_layout_()}}.
+ See \code{\link[=with_kk]{with_kk()}} to build a lazy layout specification for \code{\link[=add_layout_]{add_layout_()}}.
 
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},

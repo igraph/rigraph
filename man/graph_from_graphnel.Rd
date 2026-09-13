@@ -20,7 +20,7 @@ graph_from_graphnel(
 \item{name}{Logical, whether to add graphNEL vertex names as an igraph vertex attribute called \sQuote{\code{name}}.}
 
 \item{weight}{Logical, whether to add graphNEL edge weights as an igraph edge attribute called \sQuote{\code{weight}}.
-(graphNEL graphs are always weighted.)}
+ (graphNEL graphs are always weighted.)}
 
 \item{unlist.attrs}{Logical. graphNEL attribute query functions return the values of the attributes in R lists,
 if this argument is \code{TRUE} (the default) these will be converted to atomic vectors, whenever possible,
@@ -31,9 +31,9 @@ before adding them to the igraph graph.}
 }
 \description{
 The graphNEL class is defined in the \code{graph} package, it is another way to represent graphs.
-\code{graph_from_graphnel()} takes a graphNEL graph and converts it to an igraph graph.
-It handles all graph/vertex/edge attributes.
-If the graphNEL graph has a vertex attribute called \sQuote{\code{name}} it will be used as igraph vertex attribute \sQuote{\code{name}} and the graphNEL vertex names will be ignored.
+ \code{graph_from_graphnel()} takes a graphNEL graph and converts it to an igraph graph.
+ It handles all graph/vertex/edge attributes.
+ If the graphNEL graph has a vertex attribute called \sQuote{\code{name}} it will be used as igraph vertex attribute \sQuote{\code{name}} and the graphNEL vertex names will be ignored.
 }
 \details{
 Because graphNEL graphs poorly support multiple edges, the edge attributes of the multiple edges are lost:

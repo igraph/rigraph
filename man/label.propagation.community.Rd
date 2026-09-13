@@ -15,33 +15,33 @@ label.propagation.community(
 }
 \arguments{
 \item{graph}{The input graph.
-Note that the algorithm was originally defined for undirected graphs.
-You are advised to set \sQuote{mode} to \code{all} if you pass a directed graph here to treat it as undirected.}
+ Note that the algorithm was originally defined for undirected graphs.
+ You are advised to set \sQuote{mode} to \code{all} if you pass a directed graph here to treat it as undirected.}
 
 \item{weights}{The weights of the edges.
-It must be a positive numeric vector, \code{NULL} or \code{NA}.
-If it is \code{NULL} and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
-If \code{NULL} and no such attribute is present, then the edges will have equal weights.
-Set this to \code{NA} if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for community detection.
-A larger edge weight means a stronger connection for this function.}
+ It must be a positive numeric vector, \code{NULL} or \code{NA}.
+ If it is \code{NULL} and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
+ If \code{NULL} and no such attribute is present, then the edges will have equal weights.
+ Set this to \code{NA} if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for community detection.
+ A larger edge weight means a stronger connection for this function.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Logical, whether to consider edge directions for the label propagation, and if so,
 in which direction the labels should propagate.
-Ignored for undirected graphs.
-"all" means to ignore edge directions (even in directed graphs).
-"out" means to propagate labels along the natural direction of the edges.
-"in" means to propagate labels backwards (i.e. from head to tail).}
+ Ignored for undirected graphs.
+ "all" means to ignore edge directions (even in directed graphs).
+ "out" means to propagate labels along the natural direction of the edges.
+ "in" means to propagate labels backwards (i.e. from head to tail).}
 
 \item{initial}{The initial state.
-If \code{NULL}, every vertex will have a different label at the beginning.
-Otherwise it must be a vector with an entry for each vertex.
-Non-negative values denote different labels, negative entries denote vertices without labels.}
+ If \code{NULL}, every vertex will have a different label at the beginning.
+ Otherwise it must be a vector with an entry for each vertex.
+ Non-negative values denote different labels, negative entries denote vertices without labels.}
 
 \item{fixed}{Logical vector denoting which labels are fixed.
-Of course this makes sense only if you provided an initial state, otherwise this element will be ignored.
-Also note that vertices without labels cannot be fixed.}
+ Of course this makes sense only if you provided an initial state, otherwise this element will be ignored.
+ Also note that vertices without labels cannot be fixed.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

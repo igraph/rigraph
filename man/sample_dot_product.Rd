@@ -21,11 +21,11 @@ An igraph graph object which is the generated random dot product graph.
 }
 \description{
 In this model, each vertex is represented by a latent position vector.
-Probability of an edge between two vertices are given by the dot product of their latent position vectors.
+ Probability of an edge between two vertices are given by the dot product of their latent position vectors.
 }
 \details{
 The dot product of the latent position vectors should be in the [0,1] interval, otherwise a warning is given.
-For negative dot products, no edges are added; dot products that are larger than one always add an edge.
+ For negative dot products, no edges are added; dot products that are larger than one always add an edge.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_dot_product_game}{\code{dot_product_game()}}

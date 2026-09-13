@@ -28,7 +28,7 @@ An object of class \code{igraph_constructor_spec}.
 \description{
 Each of these functions builds a lazy constructor specification for the given graph constructor, to be used with \code{\link[=graph_]{graph_()}},
 \code{\link[=make_]{make_()}} or \code{\link[=sample_]{sample_()}}.
-The specification is only evaluated when the graph is actually constructed,
+ The specification is only evaluated when the graph is actually constructed,
 so it can be combined with constructor modifiers such as \code{\link[=with_vertex_]{with_vertex_()}} or \code{\link[=with_edge_]{with_edge_()}}.
 
 \code{from_data_frame()}, \code{from_edgelist()}, \code{tree()} and \code{degseq()} wrap \code{\link[=graph_from_data_frame]{graph_from_data_frame()}}, \code{\link[=graph_from_edgelist]{graph_from_edgelist()}},

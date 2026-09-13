@@ -19,7 +19,7 @@ it must in the open (0,1) interval.}
 
 \item{permutation}{A numeric vector, a permutation vector that is applied on the vertices of the first graph,
 to get the second graph.
-If \code{NULL}, the vertices are not permuted.}
+ If \code{NULL}, the vertices are not permuted.}
 }
 \value{
 A list of two igraph objects, named \code{graph1} and \code{graph2},
@@ -46,7 +46,7 @@ cor(as.vector(gg[[1]][]), as.vector(gg[[2]][]))
 \references{
 Lyzinski, V., Fishkind, D. E., Priebe, C. E. (2013).  Seeded
 graph matching for correlated Erdős-Rényi graphs.
-\url{https://arxiv.org/abs/1304.7844}
+ \url{https://arxiv.org/abs/1304.7844}
 }
 \seealso{
 Random graph models (games):

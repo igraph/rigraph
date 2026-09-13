@@ -20,7 +20,7 @@ A numeric vector of length \code{length(v)-binwidth+1}
 }
 \details{
 The running mean of \code{v} is a \code{w} vector of length \code{length(v)-binwidth+1}.
-The first element of \code{w} ID the average of the first \code{binwidth} elements of \code{v},
+ The first element of \code{w} ID the average of the first \code{binwidth} elements of \code{v},
 the second element of \code{w} is the average of elements \code{2:(binwidth+1)}, etc.
 }
 \section{Related documentation in the C library}{

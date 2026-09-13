@@ -30,30 +30,30 @@ edge_betweenness(
 \item{graph}{The graph to analyze.}
 
 \item{v}{The vertices for which the vertex betweenness will be calculated.
-The default \code{NULL} selects all vertices.}
+ The default \code{NULL} selects all vertices.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{directed}{Logical, whether directed paths should be considered while determining the shortest paths.}
 
 \item{weights}{Optional positive weight vector for calculating weighted betweenness.
-If the graph has a \code{weight} edge attribute, then this is used by default.
-Weights are used to calculate weighted shortest paths, so they are interpreted as distances.}
+ If the graph has a \code{weight} edge attribute, then this is used by default.
+ Weights are used to calculate weighted shortest paths, so they are interpreted as distances.}
 
 \item{normalized}{Logical, whether to normalize the betweenness scores.
-If \code{TRUE},
+ If \code{TRUE},
 then the results are normalized by the number of ordered or unordered vertex pairs in directed and undirected graphs, respectively.
-In an undirected graph,
+ In an undirected graph,
 \deqn{B^n=\frac{2B}{(n-1)(n-2)},}{Bnorm=2 B / ((n-1)(n-2)),}
 where \eqn{B^n}{Bnorm} is the normalized, \eqn{B} the raw betweenness, and \eqn{n} is the number of vertices in the graph.
-Note that the same normalization factor is used even when setting a \code{cutoff} on the considered shortest path lengths,
+ Note that the same normalization factor is used even when setting a \code{cutoff} on the considered shortest path lengths,
 even though the number of vertex pairs reachable from each other may be less than \eqn{(n-1)(n-2)/2}.}
 
 \item{cutoff}{The maximum shortest path length to consider when calculating betweenness.
-If negative, then there is no such limit.}
+ If negative, then there is no such limit.}
 
 \item{e}{The edges for which the edge betweenness will be calculated.
-The default \code{NULL} selects all edges.}
+ The default \code{NULL} selects all edges.}
 }
 \value{
 A numeric vector with the betweenness score for each vertex in \code{v} for \code{betweenness()}.
@@ -80,8 +80,8 @@ while \eqn{g_{ivj}} is the number of those shortest paths which pass though vert
 
 Both functions allow you to consider only paths of length \code{cutoff} or smaller; this can be run for larger graphs,
 as the running time is not quadratic (if \code{cutoff} is small).
-If \code{cutoff} is negative (the default), then the function calculates the exact betweenness scores.
-Since igraph 1.6.0, a \code{cutoff} value of zero is treated literally, i.e. paths of length larger than zero are ignored.
+ If \code{cutoff} is negative (the default), then the function calculates the exact betweenness scores.
+ Since igraph 1.6.0, a \code{cutoff} value of zero is treated literally, i.e. paths of length larger than zero are ignored.
 
 For calculating the betweenness a similar algorithm to the one proposed by Brandes (see References) is used.
 }
@@ -102,11 +102,11 @@ edge_betweenness(g)
 \references{
 Freeman, L.C. (1979). Centrality in Social Networks I:
 Conceptual Clarification. \emph{Social Networks}, 1, 215-239.
-\doi{10.1016/0378-8733(78)90021-7}
+ \doi{10.1016/0378-8733(78)90021-7}
 
 Ulrik Brandes, A Faster Algorithm for Betweenness Centrality. \emph{Journal
 of Mathematical Sociology} 25(2):163-177, 2001.
-\doi{10.1080/0022250X.2001.9990249}
+ \doi{10.1080/0022250X.2001.9990249}
 }
 \seealso{
 \code{\link[=closeness]{closeness()}}, \code{\link[=degree]{degree()}}, \code{\link[=harmonic_centrality]{harmonic_centrality()}}

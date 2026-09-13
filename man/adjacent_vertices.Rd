@@ -14,7 +14,7 @@ adjacent_vertices(graph, v, ..., mode = c("out", "in", "all", "total"))
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Whether to query outgoing (\sQuote{out}), incoming (\sQuote{in}) edges, or both types (\sQuote{all}).
-This is ignored for undirected graphs.}
+ This is ignored for undirected graphs.}
 }
 \value{
 A list of vertex sequences.

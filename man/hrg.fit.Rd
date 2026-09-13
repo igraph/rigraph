@@ -8,15 +8,15 @@ hrg.fit(graph, hrg = NULL, start = FALSE, steps = 0)
 }
 \arguments{
 \item{graph}{The graph to fit the model to.
-Edge directions are ignored in directed graphs.}
+ Edge directions are ignored in directed graphs.}
 
 \item{hrg}{A hierarchical random graph model, in the form of an \code{igraphHRG} object.
-\code{fit_hrg()} allows this to be \code{NULL}, in which case a random starting point is used for the fitting.}
+ \code{fit_hrg()} allows this to be \code{NULL}, in which case a random starting point is used for the fitting.}
 
 \item{start}{Logical, whether to start the fitting/sampling from the supplied \code{igraphHRG} object, or from a random starting point.}
 
 \item{steps}{The number of MCMC steps to make.
-If this is zero, then the MCMC procedure is performed until convergence.}
+ If this is zero, then the MCMC procedure is performed until convergence.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

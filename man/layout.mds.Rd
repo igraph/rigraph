@@ -10,7 +10,7 @@ layout.mds(graph, dist = NULL, dim = 2, options = arpack_defaults())
 \item{graph}{The input graph.}
 
 \item{dist}{The distance matrix for the multidimensional scaling.
-If \code{NULL} (the default),
+ If \code{NULL} (the default),
 then the unweighted shortest path matrix is used.}
 
 \item{dim}{\code{layout_with_mds()} supports dimensions up to the number of nodes minus one, but only if the graph is connected;
@@ -18,7 +18,7 @@ for unconnected graphs, the only possible value is 2. This is because \code{merg
 
 \item{options}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This argument is not supported from igraph version 1.6.0,
 as ARPACK is not used any more for solving the eigenproblem.
-Supplying it raises an error.}
+ Supplying it raises an error.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

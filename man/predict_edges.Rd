@@ -15,10 +15,10 @@ predict_edges(
 }
 \arguments{
 \item{graph}{The graph to fit the model to.
-Edge directions are ignored in directed graphs.}
+ Edge directions are ignored in directed graphs.}
 
 \item{hrg}{A hierarchical random graph model, in the form of an \code{igraphHRG} object.
-\code{predict_edges()} allow this to be \code{NULL} as well, then a HRG is fitted to the graph first, from a random starting point.}
+ \code{predict_edges()} allow this to be \code{NULL} as well, then a HRG is fitted to the graph first, from a random starting point.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
@@ -27,27 +27,27 @@ Edge directions are ignored in directed graphs.}
 \item{num.samples}{Number of samples to use for consensus generation or missing edge prediction.}
 
 \item{num.bins}{Number of bins for the edge probabilities.
-Give a higher number for a more accurate prediction.}
+ Give a higher number for a more accurate prediction.}
 }
 \value{
 A list with entries:
 \describe{
 \item{edges}{
 The predicted edges, in a two-column matrix of vertex IDs.
-}
+ }
 \item{prob}{
 Probabilities of these edges, according to the fitted model.
-}
+ }
 \item{hrg}{
 The (supplied or fitted) hierarchical random graph model.
-}
+ }
 }
 }
 \description{
 \code{predict_edges()} uses a hierarchical random graph model to predict missing edges from a network.
-This is done by sampling hierarchical models around the optimum model, proportionally to their likelihood.
-The MCMC sampling is stated from \code{hrg()}, if it is given and the \code{start} argument is set to \code{TRUE}.
-Otherwise a HRG is fitted to the graph first.
+ This is done by sampling hierarchical models around the optimum model, proportionally to their likelihood.
+ The MCMC sampling is stated from \code{hrg()}, if it is given and the \code{start} argument is set to \code{TRUE}.
+ Otherwise a HRG is fitted to the graph first.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_predict}{\code{hrg_predict()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

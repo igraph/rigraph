@@ -16,14 +16,14 @@ create.communities(
 \item{graph}{The graph of the community structure.}
 
 \item{membership}{The membership vector of the community structure, a numeric vector denoting the ID of the community for each vertex.
-It might be \code{NULL} for hierarchical community structures.}
+ It might be \code{NULL} for hierarchical community structures.}
 
 \item{algorithm}{Character string, the algorithm that generated the community structure, it can be arbitrary.}
 
 \item{merges}{A merge matrix, for hierarchical community structures (or \code{NULL} otherwise.}
 
 \item{modularity}{Modularity value of the community structure.
-If this is \code{TRUE} and the membership vector is available, then it the modularity values is calculated automatically.}
+ If this is \code{TRUE} and the membership vector is available, then it the modularity values is calculated automatically.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

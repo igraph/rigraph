@@ -9,14 +9,14 @@ count_subgraph_isomorphisms(pattern, target, method = c("lad", "vf2"), ...)
 }
 \arguments{
 \item{pattern}{The smaller graph, it might be directed or undirected.
-Undirected graphs are treated as directed graphs with mutual edges.}
+ Undirected graphs are treated as directed graphs with mutual edges.}
 
 \item{target}{The bigger graph, it might be directed or undirected.
-Undirected graphs are treated as directed graphs with mutual edges.}
+ Undirected graphs are treated as directed graphs with mutual edges.}
 
 \item{method}{The method to use.
-Possible values: \sQuote{lad}, \sQuote{vf2}.
-See their details below.}
+ Possible values: \sQuote{lad}, \sQuote{vf2}.
+ See their details below.}
 
 \item{...}{Additional arguments, passed to the various methods.}
 }
@@ -29,40 +29,40 @@ Count the isomorphic mappings between a graph and the subgraphs of another graph
 \section{\sQuote{lad} method}{
 
 This is the LAD algorithm by Solnon, see the reference below.
-It has the following extra arguments:
+ It has the following extra arguments:
 \describe{
 \item{domains}{
 Matching restrictions.
-It must be a list of \code{target} vertex sets, given as numeric vertex IDs or symbolic vertex names.
-The length of the list must be \code{vcount(pattern)} and for each vertex in \code{pattern}
+ It must be a list of \code{target} vertex sets, given as numeric vertex IDs or symbolic vertex names.
+ The length of the list must be \code{vcount(pattern)} and for each vertex in \code{pattern}
 it gives the allowed matching vertices in \code{target}.
-Defaults to \code{NULL}.
-}
+ Defaults to \code{NULL}.
+ }
 \item{induced}{
 Logical scalar, whether to search for an induced subgraph. It is \code{FALSE} by default.
-}
+ }
 \item{time.limit}{
 The processor time limit for the computation, in seconds. It defaults to \code{Inf}, which means no limit.
-}
+ }
 }
 }
 
 \section{\sQuote{vf2} method}{
 
 This method uses the VF2 algorithm by Cordella, Foggia et al., see references below.
-It supports vertex and edge colors and have the following extra arguments:
+ It supports vertex and edge colors and have the following extra arguments:
 \describe{
 \item{vertex.color1, vertex.color2}{
 Optional integer vectors giving the colors of the vertices for colored graph isomorphism.
-If they are not given, but the graph has a \dQuote{color} vertex attribute, then it will be used.
-If you want to ignore these attributes, then supply \code{NULL} for both of these arguments.
-See also examples below.
-}
+ If they are not given, but the graph has a \dQuote{color} vertex attribute, then it will be used.
+ If you want to ignore these attributes, then supply \code{NULL} for both of these arguments.
+ See also examples below.
+ }
 \item{edge.color1, edge.color2}{
 Optional integer vectors giving the colors of the edges for edge-colored (sub)graph isomorphism.
-If they are not given, but the graph has a \dQuote{color} edge attribute, then it will be used.
-If you want to ignore these attributes, then supply \code{NULL} for both of these arguments.
-}
+ If they are not given, but the graph has a \dQuote{color} edge attribute, then it will be used.
+ If you want to ignore these attributes, then supply \code{NULL} for both of these arguments.
+ }
 }
 }
 

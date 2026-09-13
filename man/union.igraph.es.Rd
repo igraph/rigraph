@@ -17,8 +17,8 @@ Union of edge sequences
 }
 \details{
 They must belong to the same graph.
-Note that this function has \sQuote{set} semantics and the multiplicity of edges is lost in the result.
-(This is to match the behavior of the based \code{unique} function.)
+ Note that this function has \sQuote{set} semantics and the multiplicity of edges is lost in the result.
+ (This is to match the behavior of the based \code{unique} function.)
 }
 \examples{
 g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))

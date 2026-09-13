@@ -11,7 +11,7 @@ graph_attr(graph, name)
 \item{graph}{Input graph.}
 
 \item{name}{The name of attribute to query.
-If missing, then all attributes are returned in a list.}
+ If missing, then all attributes are returned in a list.}
 }
 \value{
 A list of graph attributes, or a single graph attribute.

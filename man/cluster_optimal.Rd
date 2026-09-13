@@ -8,16 +8,16 @@ cluster_optimal(graph, ..., weights = NULL)
 }
 \arguments{
 \item{graph}{The input graph.
-It may be undirected or directed.}
+ It may be undirected or directed.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{The weights of the edges.
-It must be a positive numeric vector, \code{NULL} or \code{NA}.
-If it is \code{NULL} and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
-If \code{NULL} and no such attribute is present, then the edges will have equal weights.
-Set this to \code{NA} if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for community detection.
-A larger edge weight means a stronger connection for this function.}
+ It must be a positive numeric vector, \code{NULL} or \code{NA}.
+ If it is \code{NULL} and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
+ If \code{NULL} and no such attribute is present, then the edges will have equal weights.
+ Set this to \code{NA} if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for community detection.
+ A larger edge weight means a stronger connection for this function.}
 }
 \value{
 \code{cluster_optimal()} returns a \code{\link[=communities]{communities()}} object,
@@ -31,11 +31,11 @@ This function calculates the optimal community structure for a graph, in terms o
 
 The calculation is done by transforming the modularity maximization into an integer programming problem,
 and then calling the GLPK library to solve that.
-Please the reference below for details.
+ Please the reference below for details.
 
 Note that modularity optimization is an NP-complete problem, and all known algorithms for it have exponential time complexity.
-This means that you probably don't want to run this function on larger graphs.
-Graphs with up to fifty vertices should be fine, graphs with a couple of hundred vertices might be possible.
+ This means that you probably don't want to run this function on larger graphs.
+ Graphs with up to fifty vertices should be fine, graphs with a couple of hundred vertices might be possible.
 }
 \section{Examples}{
 
@@ -72,7 +72,7 @@ Martin Hoefer, Zoran Nikoloski, Dorothea Wagner: On Modularity Clustering,
 }
 \seealso{
 \code{\link[=communities]{communities()}} for the documentation of the result, \code{\link[=modularity]{modularity()}}.
-See also \code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}} for a fast greedy optimizer.
+ See also \code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}} for a fast greedy optimizer.
 
 Community detection:
 \code{\link[=as_membership]{as_membership()}},

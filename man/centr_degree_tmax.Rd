@@ -13,13 +13,13 @@ centr_degree_tmax(
 }
 \arguments{
 \item{graph}{The input graph.
-It can also be \code{NULL} if \code{nodes} is given.}
+ It can also be \code{NULL} if \code{nodes} is given.}
 
 \item{nodes}{The number of vertices.
-This is ignored if the graph is given.}
+ This is ignored if the graph is given.}
 
 \item{mode}{This is the same as the \code{mode} argument of \code{degree()}.
-Ignored if \code{graph} is given and the graph is undirected.}
+ Ignored if \code{graph} is given and the graph is undirected.}
 
 \item{loops}{Logical, whether to consider loops edges when calculating the degree.}
 }

@@ -14,34 +14,34 @@ motifs(graph, size = 3, ..., cut.prob = NULL, callback = NULL)
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{cut.prob}{Numeric vector giving the probabilities that the search graph is cut at a certain level.
-Its length should be the same as the size of the motif (the \code{size} argument).
-If \code{NULL}, the default, no cuts are made.}
+ Its length should be the same as the size of the motif (the \code{size} argument).
+ If \code{NULL}, the default, no cuts are made.}
 
 \item{callback}{Optional callback function to call for each motif found.
-The function should accept two arguments:
+ The function should accept two arguments:
 \code{vids} (integer vector of vertex IDs in the motif) and \code{isoclass} (the isomorphism class of the motif).
-The function should return \code{FALSE} to continue the search or \code{TRUE} to stop it.
-If \code{NULL} (the default), motif counts are returned as a numeric vector.
+ The function should return \code{FALSE} to continue the search or \code{TRUE} to stop it.
+ If \code{NULL} (the default), motif counts are returned as a numeric vector.
 
 \strong{Important limitation:} Callback functions must NOT call any igraph functions (including simple queries like \code{vcount()} or \code{ecount()}).
-Doing so will cause R to crash due to reentrancy issues.
-Extract any needed graph information before calling the function with a callback,
+ Doing so will cause R to crash due to reentrancy issues.
+ Extract any needed graph information before calling the function with a callback,
 or use collector mode (the default) and process results afterward.}
 }
 \value{
 When \code{callback} is \code{NULL}, \code{motifs()} returns a numeric vector, the number of occurrences of each motif in the graph.
-The motifs are ordered by their isomorphism classes.
-Note that for unconnected subgraphs, which are not considered to be motifs, the result will be \code{NA}.
+ The motifs are ordered by their isomorphism classes.
+ Note that for unconnected subgraphs, which are not considered to be motifs, the result will be \code{NA}.
 
 When \code{callback} is provided, the function returns \code{NULL} invisibly and calls the callback function for each motif found.
 }
 \description{
 Graph motifs are small connected induced subgraphs with a well-defined structure.
-These functions search a graph for various motifs.
+ These functions search a graph for various motifs.
 }
 \details{
 \code{motifs()} searches a graph for motifs of a given size and returns a numeric vector containing the number of different motifs.
-The order of the motifs is defined by their isomorphism class, see \code{\link[=isomorphism_class]{isomorphism_class()}}.
+ The order of the motifs is defined by their isomorphism class, see \code{\link[=isomorphism_class]{isomorphism_class()}}.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu_callback}{\code{motifs_randesu_callback()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu}{\code{motifs_randesu()}}

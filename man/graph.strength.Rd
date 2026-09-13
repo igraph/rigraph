@@ -16,17 +16,17 @@ graph.strength(
 \item{graph}{The input graph.}
 
 \item{vids}{The vertices for which the strength will be calculated.
-The default \code{NULL} selects all vertices.}
+ The default \code{NULL} selects all vertices.}
 
 \item{mode}{Character string, \dQuote{out} for out-degree, \dQuote{in} for in-degree or \dQuote{all} for the sum of the two.
-For undirected graphs this argument is ignored.}
+ For undirected graphs this argument is ignored.}
 
 \item{loops}{Logical; whether the loop edges are also counted.}
 
 \item{weights}{Weight vector.
-If the graph has a \code{weight} edge attribute, then this is used by default.
-If the graph does not have a \code{weight} edge attribute and this argument is \code{NULL}, then a \code{\link[=degree]{degree()}} is called.
-If this is \code{NA}, then no edge weights are used (even if the graph has a \code{weight} edge attribute).}
+ If the graph has a \code{weight} edge attribute, then this is used by default.
+ If the graph does not have a \code{weight} edge attribute and this argument is \code{NULL}, then a \code{\link[=degree]{degree()}} is called.
+ If this is \code{NA}, then no edge weights are used (even if the graph has a \code{weight} edge attribute).}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

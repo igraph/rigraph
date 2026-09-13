@@ -16,10 +16,10 @@ as_biadjacency_matrix(
 }
 \arguments{
 \item{graph}{The input graph.
-The direction of the edges is ignored in directed graphs.}
+ The direction of the edges is ignored in directed graphs.}
 
 \item{types}{An optional vertex type vector to use instead of the \code{type} vertex attribute.
-You must supply this argument if the graph has no \code{type} vertex attribute.}
+ You must supply this argument if the graph has no \code{type} vertex attribute.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
@@ -27,21 +27,21 @@ You must supply this argument if the graph has no \code{type} vertex attribute.}
 \itemize{
 \item \code{NULL} (default): use the \code{weight} edge attribute if the graph has one,
 otherwise return a traditional (unweighted) adjacency matrix.
-\item \code{NA}: explicitly unweighted, ignoring any \code{weight} edge attribute.
-\item A numeric or logical vector of length \code{\link[=ecount]{ecount()}}: use these values directly as edge weights.
-\item A character scalar: the name of an edge attribute whose values are used as weights.
-The attribute must be numeric or logical.
-}
+ \item \code{NA}: explicitly unweighted, ignoring any \code{weight} edge attribute.
+ \item A numeric or logical vector of length \code{\link[=ecount]{ecount()}}: use these values directly as edge weights.
+ \item A character scalar: the name of an edge attribute whose values are used as weights.
+ The attribute must be numeric or logical.
+ }
 If multiple edges share endpoints, the value of an arbitrarily chosen edge is included in the matrix.}
 
 \item{names}{Logical, if \code{TRUE} and the vertices in the graph are named (i.e. the graph has a vertex attribute called \code{name}),
 then vertex names will be added to the result as row and column names.
-Otherwise the IDs of the vertices are used as row and column names.}
+ Otherwise the IDs of the vertices are used as row and column names.}
 
 \item{sparse}{Logical, if it is \code{TRUE} then a sparse matrix is created, you will need the \code{Matrix} package for this.}
 
 \item{attr}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{weights} instead.
-A character edge attribute name is forwarded to \code{weights} unchanged; \code{NULL} becomes \code{weights = NA},
+ A character edge attribute name is forwarded to \code{weights} unchanged; \code{NULL} becomes \code{weights = NA},
 since \code{attr = NULL} asked for a traditional unweighted matrix while \code{weights = NULL} picks the \code{weight} attribute up.}
 }
 \value{
@@ -49,7 +49,7 @@ A sparse or dense matrix.
 }
 \description{
 This function can return a sparse or dense bipartite adjacency matrix of a bipartite network.
-The bipartite adjacency matrix is an \eqn{n} times \eqn{m} matrix, \eqn{n} and \eqn{m} are the number of vertices of the two kinds.
+ The bipartite adjacency matrix is an \eqn{n} times \eqn{m} matrix, \eqn{n} and \eqn{m} are the number of vertices of the two kinds.
 }
 \details{
 Bipartite graphs have a \code{type} vertex attribute in igraph,

@@ -9,15 +9,15 @@ igraph_options(...)
 \arguments{
 \item{\dots}{A list may be given as the only argument, or any number of arguments may be in the \code{name=value} form,
 or no argument at all may be given.
-See the Value and Details sections for explanation.}
+ See the Value and Details sections for explanation.}
 }
 \value{
 A list with the old values of the updated parameters, invisibly.
-Without any arguments, it returns the values of all options.
+ Without any arguments, it returns the values of all options.
 }
 \description{
 igraph has some parameters which (usually) affect the behavior of many functions.
-These can be set for the whole session via \code{igraph_options()}.
+ These can be set for the whole session via \code{igraph_options()}.
 }
 \details{
 The parameter values set via a call to the \code{igraph_options()} function will remain in effect for the rest of the session,
@@ -31,74 +31,74 @@ The currently used parameters in alphabetical order:
 \item{add.params}{
 Logical scalar, whether to add model parameter to the graphs
 that are created by the various graph constructors.
-By default it is \code{TRUE}.
-}
+ By default it is \code{TRUE}.
+ }
 \item{add.vertex.names}{
 Logical scalar, whether to add vertex names to node level indices,
 like degree, betweenness scores, etc.
 By default it is \code{TRUE}.
-}
+ }
 \item{annotate.plot}{
 Logical scalar, whether to annotate igraph plots
 with the graph's name (\code{name} graph attribute, if present) as \code{main},
 and with the number of vertices and edges as \code{xlab}.
-Defaults to \code{FALSE}.
-}
+ Defaults to \code{FALSE}.
+ }
 \item{dend.plot.type}{
 The plotting function to use when plotting community structure dendrograms via \code{\link[=plot_dendrogram]{plot_dendrogram()}}.
-Possible values are \sQuote{auto} (the default), \sQuote{phylo}, \sQuote{hclust} and \sQuote{dendrogram}.
-See \code{\link[=plot_dendrogram]{plot_dendrogram()}} for details.
-}
+ Possible values are \sQuote{auto} (the default), \sQuote{phylo}, \sQuote{hclust} and \sQuote{dendrogram}.
+ See \code{\link[=plot_dendrogram]{plot_dendrogram()}} for details.
+ }
 \item{edge.attr.comb}{
 Specifies what to do with the edge attributes if the graph is modified.
-The default value is \code{list(weight="sum", name="concat", "ignore")}.
-See \code{\link[=attribute.combination]{attribute.combination()}} for details on this.
-}
+ The default value is \code{list(weight="sum", name="concat", "ignore")}.
+ See \code{\link[=attribute.combination]{attribute.combination()}} for details on this.
+ }
 \item{graph.attr.comb}{
 Specifies what to do with the graph attributes when graphs are combined, e.g. via \code{\link[=union]{union()}}, \code{\link[=intersection]{intersection()}}, \code{\link[=disjoint_union]{disjoint_union()}}
 or \code{\link[=compose]{compose()}}.
-The default value is \code{"rename"}, which resolves any name clash by appending \verb{_1}, \verb{_2}, ... suffixes.
-See \code{\link[=attribute.combination]{attribute.combination()}} for details on this.
-}
+ The default value is \code{"rename"}, which resolves any name clash by appending \verb{_1}, \verb{_2}, ... suffixes.
+ See \code{\link[=attribute.combination]{attribute.combination()}} for details on this.
+ }
 \item{print.edge.attributes}{
 Logical constant, whether to print edge attributes when printing graphs.
-Defaults to \code{FALSE}.
-}
+ Defaults to \code{FALSE}.
+ }
 \item{print.full}{
 Logical scalar, whether \code{\link[=print.igraph]{print.igraph()}} should show the graph structure as well,
 or only a summary of the graph.
-}
+ }
 \item{print.graph.attributes}{
 Logical constant, whether to print graph attributes when printing graphs. Defaults to \code{FALSE}.
-}
+ }
 \item{print.vertex.attributes}{
 Logical constant, whether to print vertex attributes when printing graphs. Defaults to \code{FALSE}.
-}
+ }
 \item{print.style}{
 Character string controlling the visual style used by \code{\link[=print.igraph]{print.igraph()}}, \code{\link[=summary.igraph]{summary.igraph()}}, \code{\link[=print.igraph.vs]{print.igraph.vs()}}
 and \code{\link[=print.igraph.es]{print.igraph.es()}}.
-Possible values are \code{"cli"} (default, a cli-styled output with section rules, Unicode arrows for edges and typed attribute listings) and \code{"classic"} (the historical \verb{IGRAPH ... DNW-} header relied on by tutorials and parsers).
-}
+ Possible values are \code{"cli"} (default, a cli-styled output with section rules, Unicode arrows for edges and typed attribute listings) and \code{"classic"} (the historical \verb{IGRAPH ... DNW-} header relied on by tutorials and parsers).
+ }
 \item{return.vs.es}{
 Whether functions that return a set or sequence of vertices/edges
 should return formal vertex/edge sequence objects.
-This option was introduced in igraph version 1.0.0 and defaults to TRUE.
-If your package requires the old behavior, you can set it to FALSE in the \code{.onLoad} function of your package,
+ This option was introduced in igraph version 1.0.0 and defaults to TRUE.
+ If your package requires the old behavior, you can set it to FALSE in the \code{.onLoad} function of your package,
 without affecting other packages.
-}
+ }
 \item{sparsematrices}{
 Whether to use the \code{Matrix} package for (sparse) matrices.
-It is recommended, if the user works with larger graphs.
-}
+ It is recommended, if the user works with larger graphs.
+ }
 \item{verbose}{
 Logical constant, whether igraph functions should talk more than minimal.
-E.g. if \code{TRUE} then some functions will use progress bars while computing. Defaults to \code{FALSE}.
-}
+ E.g. if \code{TRUE} then some functions will use progress bars while computing. Defaults to \code{FALSE}.
+ }
 \item{vertex.attr.comb}{
 Specifies what to do with the vertex attributes if the graph is modified.
-The default value is \code{list(name="concat", "ignore")}.
-See \code{\link[=attribute.combination]{attribute.combination()}} for details on this.
-}
+ The default value is \code{list(name="concat", "ignore")}.
+ See \code{\link[=attribute.combination]{attribute.combination()}} for details on this.
+ }
 }
 }
 \examples{
@@ -116,7 +116,7 @@ igraph_opt("verbose")
 }
 \seealso{
 Similar to \code{\link[=options]{options()}}.
-See \code{\link[=igraph_opt]{igraph_opt()}} to retrieve the value of a single option.
+ See \code{\link[=igraph_opt]{igraph_opt()}} to retrieve the value of a single option.
 
 Other igraph options:
 \code{\link[=igraph_opt]{igraph_opt()}},

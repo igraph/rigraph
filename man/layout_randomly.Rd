@@ -12,7 +12,7 @@ layout_randomly(graph, ..., dim = c(2, 3))
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{dim}{Integer scalar, the dimension of the space to use.
-It must be 2 or 3.}
+ It must be 2 or 3.}
 }
 \value{
 A numeric matrix with two or three columns.
@@ -22,7 +22,7 @@ This function uniformly randomly places the vertices of the graph in two or thre
 }
 \details{
 Randomly places vertices on a [-1,1] square (in 2d) or in a cube (in 3d).
-It is probably a useless layout, but it can use as a starting point for other layout generators.
+ It is probably a useless layout, but it can use as a starting point for other layout generators.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_random_3d}{\code{layout_random_3d()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_random}{\code{layout_random()}}

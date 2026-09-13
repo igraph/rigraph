@@ -21,7 +21,7 @@ E(x, path = NULL, P = NULL, directed = NULL) <- value
 }
 \arguments{
 \item{x}{An edge sequence.
-For \verb{E<-} it is a graph.}
+ For \verb{E<-} it is a graph.}
 
 \item{i}{Index.}
 
@@ -32,13 +32,13 @@ For \verb{E<-} it is a graph.}
 \item{path}{Select edges along a path, given by a vertex sequence See \code{\link[=E]{E()}}.}
 
 \item{P}{Select edges via pairs of vertices.
-See \code{\link[=E]{E()}}.}
+ See \code{\link[=E]{E()}}.}
 
 \item{directed}{Whether to use edge directions for the \code{path} or \code{P} arguments.}
 }
 \value{
 A vector or list, containing the values of the attribute \code{name} for the edges in the sequence.
-For numeric, character or logical attributes, it is a vector of the appropriate type, otherwise it is a list.
+ For numeric, character or logical attributes, it is a vector of the appropriate type, otherwise it is a list.
 }
 \description{
 The \code{$} operator is a syntactic sugar to query and set edge attributes, for edges in an edge sequence.

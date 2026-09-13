@@ -12,7 +12,7 @@ igraph_opt(x, ..., default = NULL)
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{default}{If the specified option is not set in the options list, this value is returned.
-This facilitates retrieving an option and checking whether it is set and setting it separately if not.}
+ This facilitates retrieving an option and checking whether it is set and setting it separately if not.}
 }
 \value{
 The current value set for option \code{x}, or \code{NULL} if the option is unset.
@@ -28,7 +28,7 @@ igraph_options(verbose = oldval)
 }
 \seealso{
 Similar to \code{\link[=getOption]{getOption()}}.
-See \code{\link[=igraph_options]{igraph_options()}} to set options.
+ See \code{\link[=igraph_options]{igraph_options()}} to set options.
 
 Other igraph options:
 \code{\link[=igraph_options]{igraph_options()}},

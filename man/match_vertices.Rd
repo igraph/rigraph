@@ -13,7 +13,7 @@ match_vertices(A, B, m, start, iteration)
 \item{B}{a numeric matrix, the adjacency matrix of the second graph}
 
 \item{m}{The number of seeds.
-The first \code{m} vertices of both graphs are matched.}
+ The first \code{m} vertices of both graphs are matched.}
 
 \item{start}{a numeric matrix, the permutation matrix estimate is initialized with \code{start}}
 
@@ -29,15 +29,15 @@ which correspond to the first \code{m} rows (and columns) of the adjacency matri
 }
 \details{
 The approximate graph matching problem is to find a bijection between the vertices of two graphs , such that the number of edge disagreements between the corresponding vertex pairs is minimized.
-For seeded graph matching,
+ For seeded graph matching,
 part of the bijection that consist of known correspondences (the seeds) is known and the problem task is to complete the bijection by estimating the permutation matrix that permutes the rows and columns of the adjacency matrix of the second graph.
 
 It is assumed that for the two supplied adjacency matrices \code{A} and \code{B}, both of size \eqn{n\times n}{n*n},
 the first \eqn{m} rows(and columns) of \code{A} and \code{B} correspond to the same vertices in both graphs.
-That is, the \eqn{n \times n}{n*n} permutation matrix that defines the bijection is \eqn{I_{m} \bigoplus P} for a \eqn{(n-m)\times
+ That is, the \eqn{n \times n}{n*n} permutation matrix that defines the bijection is \eqn{I_{m} \bigoplus P} for a \eqn{(n-m)\times
 (n-m)}{(n-m)*(n-m)} permutation matrix \eqn{P} and \eqn{m} times \eqn{m}
 identity matrix \eqn{I_{m}}.
-The function \code{match_vertices()} estimates the permutation matrix \eqn{P} via an optimization algorithm based on the Frank-Wolfe algorithm.
+ The function \code{match_vertices()} estimates the permutation matrix \eqn{P} via an optimization algorithm based on the Frank-Wolfe algorithm.
 
 See references for further details.
 }
@@ -55,8 +55,8 @@ P
 \references{
 Vogelstein, J. T., Conroy, J. M., Podrazik, L. J., Kratzer, S.
 G., Harley, E. T., Fishkind, D. E.,Vogelstein, R. J., Priebe, C. E. (2011).
-Fast Approximate Quadratic Programming for Large (Brain) Graph Matching.
-Online: \url{https://arxiv.org/abs/1112.5507}
+ Fast Approximate Quadratic Programming for Large (Brain) Graph Matching.
+ Online: \url{https://arxiv.org/abs/1112.5507}
 
 Fishkind, D. E., Adali, S., Priebe, C. E. (2012). Seeded Graph Matching
 Online: \url{https://arxiv.org/abs/1209.0367}

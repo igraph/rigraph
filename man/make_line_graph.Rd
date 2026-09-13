@@ -20,7 +20,7 @@ This function calculates the line graph of another graph.
 }
 \details{
 The line graph \code{L(G)} of a \code{G} undirected graph is defined as follows.
-\code{L(G)} has one vertex for each edge in \code{G} and two vertices in \code{L(G)} are connected by an edge
+ \code{L(G)} has one vertex for each edge in \code{G} and two vertices in \code{L(G)} are connected by an edge
 if their corresponding edges share an end point.
 
 The line graph \code{L(G)} of a \code{G} directed graph is slightly different,

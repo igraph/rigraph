@@ -27,33 +27,33 @@ i.e. linear preferential attachment.}
 defaults to 1. This argument is only used if both \code{out.dist} and \code{out.seq} are omitted or NULL.}
 
 \item{out.dist}{Numeric vector, the distribution of the number of edges to add in each time step.
-This argument is only used if the \code{out.seq} argument is omitted or NULL.}
+ This argument is only used if the \code{out.seq} argument is omitted or NULL.}
 
 \item{out.seq}{Numeric vector giving the number of edges to add in each time step.
-Its first element is ignored as no edges are added in the first time step.}
+ Its first element is ignored as no edges are added in the first time step.}
 
 \item{out.pref}{Logical, if true the total degree is used for calculating the citation probability, otherwise the in-degree is used.}
 
 \item{zero.appeal}{The \sQuote{attractiveness} of the vertices with no adjacent edges.
-See details below.}
+ See details below.}
 
 \item{directed}{Whether to create a directed graph.}
 
 \item{algorithm}{The algorithm to use for the graph generation.
-\code{psumtree} uses a partial prefix-sum tree to generate the graph,
+ \code{psumtree} uses a partial prefix-sum tree to generate the graph,
 this algorithm can handle any \code{power} and \code{zero.appeal} values and never generates multiple edges.
-\code{psumtree-multiple} also uses a partial prefix-sum tree, but the generation of multiple edges is allowed.
-Before the 0.6 version igraph used this algorithm if \code{power} was not one, or \code{zero.appeal} was not one.
-\code{bag} is the algorithm that was previously (before version 0.6) used if \code{power} was one and \code{zero.appeal} was one as well.
-It works by putting the IDs of the vertices into a bag (multiset, really), exactly as many times as their (in-)degree, plus once more.
-Then the required number of cited vertices are drawn from the bag, with replacement.
-This method might generate multiple edges.
-It only works if \code{power} and \code{zero.appeal} are equal one.}
+ \code{psumtree-multiple} also uses a partial prefix-sum tree, but the generation of multiple edges is allowed.
+ Before the 0.6 version igraph used this algorithm if \code{power} was not one, or \code{zero.appeal} was not one.
+ \code{bag} is the algorithm that was previously (before version 0.6) used if \code{power} was one and \code{zero.appeal} was one as well.
+ It works by putting the IDs of the vertices into a bag (multiset, really), exactly as many times as their (in-)degree, plus once more.
+ Then the required number of cited vertices are drawn from the bag, with replacement.
+ This method might generate multiple edges.
+ It only works if \code{power} and \code{zero.appeal} are equal one.}
 
 \item{start.graph}{\code{NULL} or an igraph graph.
-If a graph, then the supplied graph is used as a starting graph for the preferential attachment algorithm.
-The graph should have at least one vertex.
-If a graph is supplied here and the \code{out.seq} argument is not \code{NULL}, then it should contain the out degrees of the new vertices only,
+ If a graph, then the supplied graph is used as a starting graph for the preferential attachment algorithm.
+ The graph should have at least one vertex.
+ If a graph is supplied here and the \code{out.seq} argument is not \code{NULL}, then it should contain the out degrees of the new vertices only,
 not the ones in the \code{start.graph}.}
 }
 \description{

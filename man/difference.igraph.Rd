@@ -9,15 +9,15 @@
 }
 \arguments{
 \item{big}{The left hand side argument of the minus operator.
-A directed or undirected graph.}
+ A directed or undirected graph.}
 
 \item{small}{The right hand side argument of the minus operator.
-A directed ot undirected graph.}
+ A directed ot undirected graph.}
 
 \item{byname}{A Logical, or the character scalar \code{auto}.
-Whether to perform the operation based on symbolic vertex names.
-If it is \code{auto}, that means \code{TRUE} if both graphs are named and \code{FALSE} otherwise.
-A warning is generated if \code{auto} and one graph, but not both graphs are named.}
+ Whether to perform the operation based on symbolic vertex names.
+ If it is \code{auto}, that means \code{TRUE} if both graphs are named and \code{FALSE} otherwise.
+ A warning is generated if \code{auto} and one graph, but not both graphs are named.}
 
 \item{...}{Ignored, included for S3 compatibility.}
 }
@@ -29,12 +29,12 @@ The difference of two graphs are created.
 }
 \details{
 \code{difference()} creates the difference of two graphs.
-Only edges present in the first graph but not in the second will be be included in the new graph.
-The corresponding operator is \verb{\%m\%}.
+ Only edges present in the first graph but not in the second will be be included in the new graph.
+ The corresponding operator is \verb{\%m\%}.
 
 If the \code{byname} argument is \code{TRUE} (or \code{auto} and the graphs are all named),
 then the operation is performed based on symbolic vertex names.
-Otherwise numeric vertex IDs are used.
+ Otherwise numeric vertex IDs are used.
 
 \code{difference()} keeps all attributes (graph, vertex and edge) of the first graph.
 

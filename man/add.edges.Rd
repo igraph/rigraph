@@ -12,10 +12,10 @@ add.edges(graph, edges, ..., attr = list())
 \item{edges}{The edges to add, a vertex sequence with even number of vertices.}
 
 \item{...}{Additional arguments, they must be named, and they will be added as edge attributes, for the newly added edges.
-See also details below.}
+ See also details below.}
 
 \item{attr}{A named list, its elements will be added as edge attributes, for the newly added edges.
-See also details below.}
+ See also details below.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

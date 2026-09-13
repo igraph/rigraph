@@ -8,7 +8,7 @@ dominator_tree(graph, root, ..., mode = c("out", "in", "all", "total"))
 }
 \arguments{
 \item{graph}{A directed graph.
-If it is not a flowgraph, and it contains some vertices not reachable from the root vertex,
+ If it is not a flowgraph, and it contains some vertices not reachable from the root vertex,
 then these vertices will be collected and returned as part of the result.}
 
 \item{root}{The ID of the root (or source) vertex, this will be the root of the tree.}
@@ -16,24 +16,24 @@ then these vertices will be collected and returned as part of the result.}
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Constant, must be \sQuote{\verb{in}} or \sQuote{\code{out}}.
-If it is \sQuote{\verb{in}}, then all directions are considered as opposite to the original one in the input graph.}
+ If it is \sQuote{\verb{in}}, then all directions are considered as opposite to the original one in the input graph.}
 }
 \value{
 A list with components:
 \describe{
 \item{dom}{
 A numeric vector giving the immediate dominators for each vertex.
-For vertices that are unreachable from the root, it contains \code{NaN}.
-For the root vertex itself it contains minus one.
-}
+ For vertices that are unreachable from the root, it contains \code{NaN}.
+ For the root vertex itself it contains minus one.
+ }
 \item{domtree}{
 A graph object, the dominator tree.
-Its vertex IDs are the as the vertex IDs of the input graph.
-Isolate vertices are the ones that are unreachable from the root.
-}
+ Its vertex IDs are the as the vertex IDs of the input graph.
+ Isolate vertices are the ones that are unreachable from the root.
+ }
 \item{leftout}{
 A numeric vector containing the vertex IDs that are unreachable from the root.
-}
+ }
 }
 }
 \description{
@@ -42,15 +42,15 @@ Dominator tree of a directed graph.
 \details{
 A flowgraph is a directed graph with a distinguished start (or root) vertex \eqn{r}, such that for any vertex \eqn{v},
 there is a path from \eqn{r} to \eqn{v}.
-A vertex \eqn{v} dominates another vertex \eqn{w} (not equal to \eqn{v}), if every path from \eqn{r} to \eqn{w} contains \eqn{v}.
-Vertex \eqn{v} is the immediate dominator or \eqn{w}, \eqn{v=\textrm{idom}(w)}{v=idom(w)},
+ A vertex \eqn{v} dominates another vertex \eqn{w} (not equal to \eqn{v}), if every path from \eqn{r} to \eqn{w} contains \eqn{v}.
+ Vertex \eqn{v} is the immediate dominator or \eqn{w}, \eqn{v=\textrm{idom}(w)}{v=idom(w)},
 if \eqn{v} dominates \eqn{w} and every other dominator of \eqn{w} dominates \eqn{v}.
-The edges \eqn{{(\textrm{idom}(w), w)| w \ne r}}{{(idom(w),w)| w is not r}} form a directed tree, rooted at \eqn{r},
+ The edges \eqn{{(\textrm{idom}(w), w)| w \ne r}}{{(idom(w),w)| w is not r}} form a directed tree, rooted at \eqn{r},
 called the dominator tree of the graph.
-Vertex \eqn{v} dominates vertex \eqn{w} if and only if \eqn{v} is an ancestor of \eqn{w} in the dominator tree.
+ Vertex \eqn{v} dominates vertex \eqn{w} if and only if \eqn{v} is an ancestor of \eqn{w} in the dominator tree.
 
 This function implements the Lengauer-Tarjan algorithm to construct the dominator tree of a directed graph.
-For details see the reference below.
+ For details see the reference below.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_dominator_tree}{\code{dominator_tree()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

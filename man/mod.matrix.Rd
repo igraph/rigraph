@@ -10,14 +10,14 @@ mod.matrix(graph, membership, weights = NULL, resolution = 1, directed = TRUE)
 \item{membership}{Numeric vector, one value for each vertex, the membership vector of the community structure.}
 
 \item{weights}{Numeric vector giving edge weights.
-Default: \code{NULL}.}
+ Default: \code{NULL}.}
 
 \item{resolution}{The resolution parameter.
-Must be greater than or equal to
+ Must be greater than or equal to
 0. Set it to 1 to use the classical definition of modularity.}
 
 \item{directed}{Whether to use the directed or undirected version of modularity.
-Ignored for undirected graphs.}
+ Ignored for undirected graphs.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

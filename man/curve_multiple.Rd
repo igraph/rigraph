@@ -12,7 +12,7 @@ curve_multiple(graph, ..., start = 0.5)
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{start}{The curvature at the two extreme edges.
-All edges will have a curvature between \code{-start} and \code{start}, spaced equally.}
+ All edges will have a curvature between \code{-start} and \code{start}, spaced equally.}
 }
 \value{
 A numeric vector, its length is the number of edges in the graph.
@@ -20,7 +20,7 @@ A numeric vector, its length is the number of edges in the graph.
 \description{
 If graphs have multiple edges, then drawing them as straight lines does not show them when plotting the graphs;
 they will be on top of each other.
-One solution is to bend the edges, with diffenent curvature, so that all of them are visible.
+ One solution is to bend the edges, with diffenent curvature, so that all of them are visible.
 }
 \details{
 \code{curve_multiple()} calculates the optimal \code{edge.curved} vector for plotting a graph with multiple edges, so that all edges are visible.

@@ -17,11 +17,11 @@ In weighted graphs, a real number is assigned to each (directed or undirected) e
 }
 \details{
 In igraph edge weights are represented via an edge attribute, called \sQuote{weight}.
-The \code{is_weighted()} function only checks that such an attribute exists.
-(It does not even checks that it is a numeric edge attribute.)
+ The \code{is_weighted()} function only checks that such an attribute exists.
+ (It does not even checks that it is a numeric edge attribute.)
 
 Edge weights are used for different purposes by the different functions.
-E.g. shortest path functions use it as the cost of the path;
+ E.g. shortest path functions use it as the cost of the path;
 community finding methods use it as the strength of the relationship between two vertices,
 etc. Check the manual pages of the functions working with weighted graphs for details.
 }

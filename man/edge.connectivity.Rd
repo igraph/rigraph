@@ -14,11 +14,11 @@ edge.connectivity(graph, source = NULL, target = NULL, checks = TRUE)
 \item{target}{The ID of the target vertex, for \code{edge_connectivity()} it can be \code{NULL}, see details below.}
 
 \item{checks}{Logical.
-Whether to check that the graph is connected and also the degree of the vertices.
-If the graph is not (strongly) connected then the connectivity is obviously zero.
-Otherwise if the minimum degree is one then the edge connectivity is also one.
-It is a good idea to perform these checks, as they can be done quickly compared to the connectivity calculation itself.
-They were suggested by Peter McMahan, thanks Peter.}
+ Whether to check that the graph is connected and also the degree of the vertices.
+ If the graph is not (strongly) connected then the connectivity is obviously zero.
+ Otherwise if the minimum degree is one then the edge connectivity is also one.
+ It is a good idea to perform these checks, as they can be done quickly compared to the connectivity calculation itself.
+ They were suggested by Peter McMahan, thanks Peter.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

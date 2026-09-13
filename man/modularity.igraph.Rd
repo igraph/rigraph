@@ -23,17 +23,17 @@ modularity_matrix(
 \item{membership}{Numeric vector, one value for each vertex, the membership vector of the community structure.}
 
 \item{weights}{Numeric vector giving edge weights.
-Default: \code{NULL}.}
+ Default: \code{NULL}.}
 
 \item{resolution}{The resolution parameter.
-Must be greater than or equal to
+ Must be greater than or equal to
 0. Set it to 1 to use the classical definition of modularity.}
 
 \item{directed}{Whether to use the directed or undirected version of modularity.
-Ignored for undirected graphs.}
+ Ignored for undirected graphs.}
 
 \item{\dots}{For \code{modularity_matrix()}, these dots must be empty.
-For \code{modularity()}, unused, present for S3 method consistency but may be used by other methods that implement it.}
+ For \code{modularity()}, unused, present for S3 method consistency but may be used by other methods that implement it.}
 }
 \value{
 For \code{modularity()} a numeric scalar, the modularity score of the given configuration.
@@ -54,24 +54,24 @@ types from each other. It defined as \deqn{Q=\frac{1}{2m} \sum_{i,j}
 is the element of the \eqn{A} adjacency matrix in row \eqn{i} and column \eqn{j}, \eqn{k_i}{ki} is the degree of \eqn{i},
 \eqn{k_j}{kj} is the degree of \eqn{j}, \eqn{c_i}{ci} is the type (or component) of \eqn{i}, \eqn{c_j}{cj} that of \eqn{j},
 the sum goes over all \eqn{i} and \eqn{j} pairs of vertices, and \eqn{\delta(x,y)}{delta(x,y)} is 1 if \eqn{x=y} and 0 otherwise.
-For directed graphs, it is defined as
+ For directed graphs, it is defined as
 \deqn{Q = \frac{1}{m} \sum_{i,j} (A_{ij}-\gamma
 \frac{k_i^{out} k_j^{in}}{m})\delta(c_i,c_j).}{Q=1/(m) * sum(
 (Aij-gamma*ki^out*kj^in/(m) ) delta(ci,cj),i,j).}
 
 The resolution parameter \eqn{\gamma}{gamma} allows weighting the random null model,
 which might be useful when finding partitions with a high modularity.
-Maximizing modularity with higher values of the resolution parameter typically results in more,
+ Maximizing modularity with higher values of the resolution parameter typically results in more,
 smaller clusters when finding partitions with a high modularity.
-Lower values typically results in fewer, larger clusters.
-The original definition of modularity is retrieved when setting \eqn{\gamma}{gamma} to 1.
+ Lower values typically results in fewer, larger clusters.
+ The original definition of modularity is retrieved when setting \eqn{\gamma}{gamma} to 1.
 
 If edge weights are given, then these are considered as the element of the \eqn{A} adjacency matrix,
 and \eqn{k_i}{ki} is the sum of weights of adjacent edges for vertex \eqn{i}.
 
 \code{modularity_matrix()} calculates the modularity matrix.
-This is a dense matrix, and it is defined as the difference of the adjacency matrix and the configuration model null model matrix.
-In other words element \eqn{M_{ij}}{M[i,j]} is given as \eqn{A_{ij}-d_i
+ This is a dense matrix, and it is defined as the difference of the adjacency matrix and the configuration model null model matrix.
+ In other words element \eqn{M_{ij}}{M[i,j]} is given as \eqn{A_{ij}-d_i
 d_j/(2m)}{A[i,j]-d[i]d[j]/(2m)}, where \eqn{A_{ij}}{A[i,j]} is the (possibly
 weighted) adjacency matrix, \eqn{d_i}{d[i]} is the degree of vertex \eqn{i},
 and \eqn{m} is the number of edges (or the total weights in the graph, if it is weighed).

@@ -17,26 +17,26 @@ cluster_leading_eigen(
 }
 \arguments{
 \item{graph}{The input graph.
-Should be undirected as the method needs a symmetric matrix.}
+ Should be undirected as the method needs a symmetric matrix.}
 
 \item{steps}{The number of steps to take, this is actually the number of tries to make a step.
-It is not a particularly useful parameter.}
+ It is not a particularly useful parameter.}
 
 \item{weights}{The weights of the edges.
-It must be a positive numeric vector, \code{NULL} or \code{NA}.
-If it is \code{NULL} and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
-If \code{NULL} and no such attribute is present, then the edges will have equal weights.
-Set this to \code{NA} if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for community detection.
-A larger edge weight means a stronger connection for this function.}
+ It must be a positive numeric vector, \code{NULL} or \code{NA}.
+ If it is \code{NULL} and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
+ If \code{NULL} and no such attribute is present, then the edges will have equal weights.
+ Set this to \code{NA} if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for community detection.
+ A larger edge weight means a stronger connection for this function.}
 
 \item{start}{\code{NULL}, or a numeric membership vector, giving the start configuration of the algorithm.}
 
 \item{options}{A named list to override some ARPACK options.}
 
 \item{callback}{Callback function.
-This is called after each iteration, after calculating the leading eigenvector of the modularity matrix.
-See details below.
-Default: \code{NULL}.}
+ This is called after each iteration, after calculating the leading eigenvector of the modularity matrix.
+ See details below.
+ Default: \code{NULL}.}
 
 \item{extra}{Additional argument to supply to the callback function.}
 
@@ -48,18 +48,18 @@ Default: \code{NULL}.}
 \item{membership}{
 The membership vector at the end of the algorithm,
 when no more splits are possible.
-}
+ }
 \item{merges}{
 The merges matrix starting from the state
 described by the \code{membership} member.
-This is a two-column matrix and each line describes a merge of two communities,
+ This is a two-column matrix and each line describes a merge of two communities,
 the first line is the first merge and it creates community \sQuote{\code{N}},
 \code{N} is the number of initial communities in the graph,
 the second line creates community \code{N+1}, etc.
 }
 \item{options}{
 Information about the underlying ARPACK computation, see \code{\link[=arpack]{arpack()}} for details.
-}
+ }
 }
 }
 \description{
@@ -72,44 +72,44 @@ eigenvector} method developed by Mark Newman, see the reference below.
 The heart of the method is the definition of the modularity matrix, \code{B}, which is \code{B=A-P},
 \code{A} being the adjacency matrix of the (undirected) network,
 and \code{P} contains the probability that certain edges are present according to the \sQuote{configuration model}.
-In other words,
+ In other words,
 a \code{P[i,j]} element of \code{P} is the probability that there is an edge between vertices \code{i} and \code{j} in a random network in which the degrees of all vertices are the same as in the input graph.
 
 The leading eigenvector method works by calculating the eigenvector of the modularity matrix for the largest positive eigenvalue and then separating vertices into two community based on the sign of the corresponding element in the eigenvector.
-If all elements in the eigenvector are of the same sign that means that the network has no underlying comuunity structure.
-Check Newman's paper to understand why this is a good method for detecting community structure.
+ If all elements in the eigenvector are of the same sign that means that the network has no underlying comuunity structure.
+ Check Newman's paper to understand why this is a good method for detecting community structure.
 }
 \section{Callback functions}{
  The \code{callback} argument can be used to
 supply a function that is called after each eigenvector calculation.
-The following arguments are supplied to this function:
+ The following arguments are supplied to this function:
 
 \describe{
 \item{membership}{
 The actual membership vector, with zero-based indexing.
-}
+ }
 \item{community}{
 The community that the algorithm just tried to split, community numbering starts with zero here.
-}
+ }
 \item{value}{
 The eigenvalue belonging to the leading eigenvector the algorithm just found.
-}
+ }
 \item{vector}{
 The leading eigenvector the algorithm just found.
-}
+ }
 \item{multiplier}{
 An R function that can be used to multiple the actual modularity matrix
 with an arbitrary vector.
-Supply the vector as an argument to perform this multiplication.
-This function can be used with ARPACK.
-}
+ Supply the vector as an argument to perform this multiplication.
+ This function can be used with ARPACK.
+ }
 \item{extra}{
 The \code{extra} argument that was passed to \code{cluster_leading_eigen()}.
-}
+ }
 }
 
 The callback function should return a scalar number.
-If this number is non-zero, then the clustering is terminated.
+ If this number is non-zero, then the clustering is terminated.
 }
 
 \section{Related documentation in the C library}{

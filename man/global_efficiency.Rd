@@ -31,27 +31,27 @@ average_local_efficiency(
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{The edge weights.
-All edge weights must be non-negative; additionally, no edge weight may be NaN.
-If it is \code{NULL} (the default) and the graph has a \code{weight} edge attribute, then it is used automatically.}
+ All edge weights must be non-negative; additionally, no edge weight may be NaN.
+ If it is \code{NULL} (the default) and the graph has a \code{weight} edge attribute, then it is used automatically.}
 
 \item{directed}{Logical, whether to consider directed paths.
-Ignored for undirected graphs.}
+ Ignored for undirected graphs.}
 
 \item{vids}{The vertex IDs of the vertices for which the calculation will be done.
-Applies to the local efficiency calculation only.
-The default \code{NULL} selects all vertices.}
+ Applies to the local efficiency calculation only.
+ The default \code{NULL} selects all vertices.}
 
 \item{mode}{Specifies how to define the local neighborhood of a vertex in directed graphs.
-\dQuote{out} considers out-neighbors only, \dQuote{in} considers in-neighbors only, \dQuote{all} considers both.}
+ \dQuote{out} considers out-neighbors only, \dQuote{in} considers in-neighbors only, \dQuote{all} considers both.}
 }
 \value{
 For \code{global_efficiency()}, the global efficiency of the graph as a single number.
-For \code{average_local_efficiency()}, the average local efficiency of the graph as a single number.
-For \code{local_efficiency()}, the local efficiency of each vertex in a vector.
+ For \code{average_local_efficiency()}, the average local efficiency of the graph as a single number.
+ For \code{local_efficiency()}, the local efficiency of each vertex in a vector.
 }
 \description{
 These functions calculate the global or average local efficiency of a network, or the local efficiency of every vertex in the network.
-See below for definitions.
+ See below for definitions.
 }
 \section{Global efficiency}{
 
@@ -66,7 +66,7 @@ E_g = 1/(n*(n-1)) sum_{i!=j} 1/d_ij}
 where \eqn{n}{n} is the number of vertices.
 
 The inverse distance between pairs that are not reachable from each other is considered to be zero.
-For graphs with fewer than 2 vertices, NaN is returned.
+ For graphs with fewer than 2 vertices, NaN is returned.
 }
 
 \section{Local efficiency}{
@@ -74,10 +74,10 @@ For graphs with fewer than 2 vertices, NaN is returned.
 
 The local efficiency of a network around a vertex is defined as follows:
 We remove the vertex and compute the distances (shortest path lengths) between its neighbours through the rest of the network.
-The local efficiency around the removed vertex is the average of the inverse of these distances.
+ The local efficiency around the removed vertex is the average of the inverse of these distances.
 
 The inverse distance between two vertices which are not reachable from each other is considered to be zero.
-The local efficiency around a vertex with fewer than two neighbours is taken to be zero by convention.
+ The local efficiency around a vertex with fewer than two neighbours is taken to be zero by convention.
 }
 
 \section{Average local efficiency}{

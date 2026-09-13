@@ -10,14 +10,14 @@ get.edge.ids(graph, vp, directed = TRUE, error = FALSE, multi = deprecated())
 \item{graph}{The input graph.}
 
 \item{vp}{The incident vertices, given as a two-column data frame, two-column matrix, or vector of vertex IDs or symbolic vertex names.
-For a vector, the values are interpreted pairwise, i.e. the first and second are used for the first edge,
+ For a vector, the values are interpreted pairwise, i.e. the first and second are used for the first edge,
 the third and fourth for the second, etc.}
 
 \item{directed}{Logical, whether to consider edge directions in directed graphs.
-This argument is ignored for undirected graphs.}
+ This argument is ignored for undirected graphs.}
 
 \item{error}{Logical, whether to report an error if an edge is not found in the graph.
-If \code{FALSE}, then no error is reported, and zero is returned for the non-existant edge(s).}
+ If \code{FALSE}, then no error is reported, and zero is returned for the non-existant edge(s).}
 
 \item{multi}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 }

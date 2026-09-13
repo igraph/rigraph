@@ -14,12 +14,12 @@ get.adjedgelist(
 \item{graph}{The input graph.}
 
 \item{mode}{Character scalar, it gives what kind of adjacent edges/vertices to include in the lists.
-\sQuote{\code{out}} is for outgoing edges/vertices, \sQuote{\verb{in}} is for incoming edges/vertices, \sQuote{\code{all}} is for both.
-This argument is ignored for undirected graphs.}
+ \sQuote{\code{out}} is for outgoing edges/vertices, \sQuote{\verb{in}} is for incoming edges/vertices, \sQuote{\code{all}} is for both.
+ This argument is ignored for undirected graphs.}
 
 \item{loops}{Character scalar, one of \code{"ignore"} (to omit loops),
 \code{"twice"} (to include loop edges twice) and \code{"once"} (to include them once).
-\code{"twice"} is not allowed for directed graphs and will be replaced with \code{"once"}.}
+ \code{"twice"} is not allowed for directed graphs and will be replaced with \code{"once"}.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

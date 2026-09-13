@@ -16,42 +16,42 @@ max_flow(graph, source, target, ..., capacity = NULL)
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{capacity}{Vector giving the capacity of the edges.
-If this is \code{NULL} (the default) then the \code{capacity} edge attribute is used.
-Note that the \code{weight} edge attribute is not used by this function.}
+ If this is \code{NULL} (the default) then the \code{capacity} edge attribute is used.
+ Note that the \code{weight} edge attribute is not used by this function.}
 }
 \value{
 A named list with components:
 \describe{
 \item{value}{
 A numeric scalar, the value of the maximum flow.
-}
+ }
 \item{flow}{
 A numeric vector, the flow itself, one entry for each edge.
-For undirected graphs this entry is bit trickier,
+ For undirected graphs this entry is bit trickier,
 since for these the flow direction is not predetermined by the edge direction.
-For these graphs the elements of the this vector can be negative,
+ For these graphs the elements of the this vector can be negative,
 this means that the flow goes from the bigger vertex ID to the smaller one.
-Positive values mean that the flow goes from the smaller vertex ID to the bigger one.
-}
+ Positive values mean that the flow goes from the smaller vertex ID to the bigger one.
+ }
 \item{cut}{
 A numeric vector of edge IDs, the minimum cut corresponding to the maximum flow.
-}
+ }
 \item{partition1}{
 A numeric vector of vertex IDs, the vertices in the first partition of the minimum cut corresponding to the maximum flow.
-}
+ }
 \item{partition2}{
 A numeric vector of vertex IDs, the vertices in the second partition of the minimum cut corresponding to the maximum flow.
-}
+ }
 \item{stats}{
 A list with some statistics from the push-relabel algorithm.
-Five integer values currently:
+ Five integer values currently:
 \code{nopush} is the number of push operations,
 \code{norelabel} the number of relabelings,
 \code{nogap} is the number of times the gap heuristics was used,
 \code{nogapnodes} is the total number of gap nodes omitted because of the gap heuristics and
 \code{nobfs} is the number of times a global breadth-first-search update was performed
 to assign better height (=distance) values to the vertices.
-}
+ }
 }
 }
 \description{
@@ -59,11 +59,11 @@ In a graph where each edge has a given flow capacity the maximal flow between tw
 }
 \details{
 \code{max_flow()} calculates the maximum flow between two vertices in a weighted (i.e. valued) graph.
-A flow from \code{source} to \code{target} is an assignment of non-negative real numbers to the edges of the graph, satisfying two properties:
+ A flow from \code{source} to \code{target} is an assignment of non-negative real numbers to the edges of the graph, satisfying two properties:
 (1) for each edge the flow (i.e. the assigned number) is not more than the capacity of the edge (the \code{capacity} parameter or edge attribute),
 (2) for every vertex, except the source and the target the incoming flow is the same as the outgoing flow.
-The value of the flow is the incoming flow of the \code{target} vertex.
-The maximum flow is the flow of maximum value.
+ The value of the flow is the incoming flow of the \code{target} vertex.
+ The maximum flow is the flow of maximum value.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_maxflow}{\code{maxflow()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}

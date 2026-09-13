@@ -22,7 +22,7 @@ This function takes the \code{types} and \code{graph} arguments from a public ig
 \details{
 When the provided vertex types are NULL and the graph has a \code{types} vertex attribute,
 then the value of this vertex attribute will be used as vertex types.
-Non-logical vertex type vectors are coerced into logical vectors after printing a warning.
+ Non-logical vertex type vectors are coerced into logical vectors after printing a warning.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

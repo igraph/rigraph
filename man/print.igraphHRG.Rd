@@ -21,8 +21,8 @@ The hierarchical random graph model itself, invisibly.
 \description{
 \code{igraphHRG} objects can be printed to the screen in two forms: as a tree or as a list,
 depending on the \code{type} argument of the print function.
-By default the \code{auto} type is used, which selects \code{tree} for small graphs and \code{simple} (=list) for bigger ones.
-The \code{tree} format looks like
+ By default the \code{auto} type is used, which selects \code{tree} for small graphs and \code{simple} (=list) for bigger ones.
+ The \code{tree} format looks like
 this: \preformatted{Hierarchical random graph, at level 3:
 g1        p=   0
 '- g15    p=0.33  1
@@ -31,10 +31,10 @@ g1        p=   0
    '- g16 p= 0.2  20 14 17 19 11 15 16 13
    '- g5  p=   0  12 18  }
 This is a graph with 20 vertices, and the top three levels of the fitted hierarchical random graph are printed.
-The root node of the HRG is always vertex group #1 (\sQuote{\code{g1}} in the the printout).
-Vertex pairs in the left subtree of \code{g1} connect to vertices in the right subtree with probability zero, according to the fitted model.
-\code{g1} has two subgroups, \code{g15} and \code{g8}.
-\code{g15} has a subgroup of a single vertex (vertex 1), and another larger subgroup that contains vertices 6, 3, etc. on lower levels,
+ The root node of the HRG is always vertex group #1 (\sQuote{\code{g1}} in the the printout).
+ Vertex pairs in the left subtree of \code{g1} connect to vertices in the right subtree with probability zero, according to the fitted model.
+ \code{g1} has two subgroups, \code{g15} and \code{g8}.
+ \code{g15} has a subgroup of a single vertex (vertex 1), and another larger subgroup that contains vertices 6, 3, etc. on lower levels,
 etc. The \code{plain} printing is simpler and faster to produce, but less
 visual: \preformatted{Hierarchical random graph:
 g1  p=0.0 -> g12 g10   g2  p=1.0 -> 7 10      g3  p=1.0 -> g18 14

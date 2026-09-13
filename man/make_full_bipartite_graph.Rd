@@ -31,16 +31,16 @@ full_bipartite_graph(
 \item{directed}{Logical, whether the graphs is directed.}
 
 \item{mode}{Scalar giving the kind of edges to create for directed graphs.
-If this is \sQuote{\code{out}} then all vertices of the first kind are connected to the others;
+ If this is \sQuote{\code{out}} then all vertices of the first kind are connected to the others;
 \sQuote{\verb{in}} specifies the opposite direction; \sQuote{\code{all}} creates mutual edges.
-This argument is ignored for undirected graphs.x}
+ This argument is ignored for undirected graphs.x}
 }
 \value{
 An igraph graph, with the \sQuote{\code{type}} vertex attribute set.
 }
 \description{
 Bipartite graphs are also called two-mode by some.
-This function creates a bipartite graph in which every possible edge is present.
+ This function creates a bipartite graph in which every possible edge is present.
 }
 \details{
 Bipartite graphs have a \sQuote{\code{type}} vertex attribute in igraph,

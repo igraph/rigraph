@@ -42,36 +42,36 @@ is_clique(graph, candidate, ..., directed = FALSE)
 \item{graph}{The input graph.}
 
 \item{min}{Numeric constant, lower limit on the size of the cliques to find.
-\code{NULL} means no limit, i.e. it is the same as 0.}
+ \code{NULL} means no limit, i.e. it is the same as 0.}
 
 \item{max}{Numeric constant, upper limit on the size of the cliques to find.
-\code{NULL} means no limit.}
+ \code{NULL} means no limit.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{callback}{Optional function to call for each clique found.
-If provided, the function should accept one argument: \code{clique} (integer vector of vertex IDs in the clique, 1-based indexing).
-The function should return \code{FALSE} to continue the search or \code{TRUE} to stop it.
-If \code{NULL} (the default), all cliques are collected and returned as a list.
+ If provided, the function should accept one argument: \code{clique} (integer vector of vertex IDs in the clique, 1-based indexing).
+ The function should return \code{FALSE} to continue the search or \code{TRUE} to stop it.
+ If \code{NULL} (the default), all cliques are collected and returned as a list.
 
 \strong{Important limitation:} Callback functions must NOT call any igraph functions (including simple queries like \code{vcount()} or \code{ecount()}).
-Doing so will cause R to crash due to reentrancy issues.
-Extract any needed graph information before calling the function with a callback,
+ Doing so will cause R to crash due to reentrancy issues.
+ Extract any needed graph information before calling the function with a callback,
 or use collector mode (the default) and process results afterward.}
 
 \item{subset}{If not \code{NULL}, then it must be a vector of vertex IDs, numeric or symbolic if the graph is named.
-The algorithm is run from these vertices only, so only a subset of all maximal cliques is returned.
-See the Eppstein paper for details.
-This argument makes it possible to easily parallelize the finding of maximal cliques.}
+ The algorithm is run from these vertices only, so only a subset of all maximal cliques is returned.
+ See the Eppstein paper for details.
+ This argument makes it possible to easily parallelize the finding of maximal cliques.}
 
 \item{file}{If not \code{NULL}, then it must be a file name, i.e. a character scalar.
-The output of the algorithm is written to this file.
-(If it exists, then it will be overwritten.)
-Each clique will be a separate line in the file, given with the numeric IDs of its vertices, separated by whitespace.}
+ The output of the algorithm is written to this file.
+ (If it exists, then it will be overwritten.)
+ Each clique will be a separate line in the file, given with the numeric IDs of its vertices, separated by whitespace.}
 
 \item{vertex.weights}{Vertex weight vector.
-If the graph has a \code{weight} vertex attribute, then this is used by default.
-If the graph does not have a \code{weight} vertex attribute and this argument is \code{NULL},
+ If the graph has a \code{weight} vertex attribute, then this is used by default.
+ If the graph does not have a \code{weight} vertex attribute and this argument is \code{NULL},
 then every vertex is assumed to have a weight of 1. Note that the current implementation of the weighted clique finder supports positive integer weights only.}
 
 \item{maximal}{Specifies whether to look for all weighted cliques (\code{FALSE}) or only the maximal ones (\code{TRUE}).}
@@ -82,14 +82,14 @@ then every vertex is assumed to have a weight of 1. Note that the current implem
 }
 \value{
 \code{cliques()} returns a list containing numeric vectors of vertex IDs if \code{callback} is \code{NULL}.
-Each list element is a clique, i.e. a vertex sequence of class \link[=V]{igraph.vs}.
-If \code{callback} is provided, returns \code{NULL} invisibly.
+ Each list element is a clique, i.e. a vertex sequence of class \link[=V]{igraph.vs}.
+ If \code{callback} is provided, returns \code{NULL} invisibly.
 
 \code{largest_cliques()} and \code{clique_num()} return a list containing numeric vectors of vertex IDs.
-Each list element is a clique, i.e. a vertex sequence of class \link[=V]{igraph.vs}.
+ Each list element is a clique, i.e. a vertex sequence of class \link[=V]{igraph.vs}.
 
 \code{max_cliques()} returns \code{NULL}, invisibly, if its \code{file} argument is not \code{NULL}.
-The output is written to the specified file in this case.
+ The output is written to the specified file in this case.
 
 \code{clique_num()} and \code{count_max_cliques()} return an integer scalar.
 
@@ -100,20 +100,20 @@ Trailing zeros are currently truncated, but this might change in future versions
 }
 \description{
 These functions find all, the largest or all the maximal cliques in an undirected graph.
-The size of the largest clique can also be calculated.
+ The size of the largest clique can also be calculated.
 
 Tests if all pairs within a set of vertices are adjacent, i.e. whether they form a clique.
-An empty set and singleton set are considered to be a clique.
+ An empty set and singleton set are considered to be a clique.
 }
 \details{
 \code{cliques()} find all complete subgraphs in the input graph, obeying the size limitations given in the \code{min} and \code{max} arguments.
 
 \code{largest_cliques()} finds all largest cliques in the input graph.
-A clique is largest if there is no other clique including more vertices.
+ A clique is largest if there is no other clique including more vertices.
 
 \code{max_cliques()} finds all maximal cliques in the input graph.
-A clique is maximal if it cannot be extended to a larger clique.
-The largest cliques are always maximal, but a maximal clique is not necessarily the largest.
+ A clique is maximal if it cannot be extended to a larger clique.
+ The largest cliques are always maximal, but a maximal clique is not necessarily the largest.
 
 \code{count_max_cliques()} counts the maximal cliques.
 

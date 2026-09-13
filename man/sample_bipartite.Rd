@@ -24,23 +24,23 @@ bipartite(..., type = NULL)
 
 \item{type}{Character scalar, the type of the graph, \sQuote{gnp} creates a \eqn{G(n,p)} graph,
 \sQuote{gnm} creates a \eqn{G(n,m)} graph.
-See details below.}
+ See details below.}
 
 \item{p}{Real scalar, connection probability for \eqn{G(n,p)} graphs.
-Should not be given for \eqn{G(n,m)} graphs.}
+ Should not be given for \eqn{G(n,m)} graphs.}
 
 \item{m}{Integer scalar, the number of edges for \eqn{G(n,m)} graphs.
-Should not be given for \eqn{G(n,p)} graphs.}
+ Should not be given for \eqn{G(n,p)} graphs.}
 
 \item{directed}{Logical, whether to create a directed graph.
-See also the \code{mode} argument.}
+ See also the \code{mode} argument.}
 
 \item{mode}{Character scalar, specifies how to direct the edges in directed graphs.
-If it is \sQuote{out}, then directed edges point from bottom vertices to top vertices.
-If it is \sQuote{in}, edges point from top vertices to bottom vertices.
-\sQuote{out} and \sQuote{in} do not generate mutual edges.
-If this argument is \sQuote{all}, then each edge direction is considered independently and mutual edges might be generated.
-This argument is ignored for undirected graphs.}
+ If it is \sQuote{out}, then directed edges point from bottom vertices to top vertices.
+ If it is \sQuote{in}, edges point from top vertices to bottom vertices.
+ \sQuote{out} and \sQuote{in} do not generate mutual edges.
+ If this argument is \sQuote{all}, then each edge direction is considered independently and mutual edges might be generated.
+ This argument is ignored for undirected graphs.}
 
 \item{...}{Passed to \code{sample_bipartite()}.}
 }
@@ -49,7 +49,7 @@ A bipartite igraph graph.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Generate bipartite graphs using the Erdős-Rényi model.
-Use \code{\link[=sample_bipartite_gnm]{sample_bipartite_gnm()}} and \code{\link[=sample_bipartite_gnp]{sample_bipartite_gnp()}} instead.
+ Use \code{\link[=sample_bipartite_gnm]{sample_bipartite_gnm()}} and \code{\link[=sample_bipartite_gnp]{sample_bipartite_gnp()}} instead.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_bipartite_game_gnm}{\code{bipartite_game_gnm()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_bipartite_game_gnp}{\code{bipartite_game_gnp()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

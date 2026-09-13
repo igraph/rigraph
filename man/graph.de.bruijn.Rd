@@ -8,10 +8,10 @@ graph.de.bruijn(m, n)
 }
 \arguments{
 \item{m}{Integer scalar, the size of the alphabet.
-See details below.}
+ See details below.}
 
 \item{n}{Integer scalar, the length of the labels.
-See details below.}
+ See details below.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

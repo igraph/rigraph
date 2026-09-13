@@ -23,14 +23,14 @@ graph.lattice(
 \item{dim}{Integer constant, the dimension of the lattice.}
 
 \item{nei}{The distance within which (inclusive) the neighbors on the lattice will be connected.
-This parameter is not used right now.}
+ This parameter is not used right now.}
 
 \item{directed}{Whether to create a directed lattice.}
 
 \item{mutual}{Logical, if \code{TRUE} directed lattices will be mutually connected.}
 
 \item{periodic}{Logical vector, defines whether the generated lattice is periodic along each dimension.
-This parameter may also be a single logical which will be extended to a logical vector of `dimvector`` length.}
+ This parameter may also be a single logical which will be extended to a logical vector of `dimvector`` length.}
 
 \item{circular}{Deprecated, use \code{periodic} instead.}
 }

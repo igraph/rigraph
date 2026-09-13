@@ -16,8 +16,8 @@ hrg(graph, prob)
 }
 \description{
 \code{hrg()} creates a HRG from an igraph graph.
-The igraph graph must be a directed binary tree, with \eqn{n-1} internal and \eqn{n} leaf vertices.
-The \code{prob} argument contains the HRG probability labels for each vertex; these are ignored for leaf vertices.
+ The igraph graph must be a directed binary tree, with \eqn{n-1} internal and \eqn{n} leaf vertices.
+ The \code{prob} argument contains the HRG probability labels for each vertex; these are ignored for leaf vertices.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_create}{\code{hrg_create()}}

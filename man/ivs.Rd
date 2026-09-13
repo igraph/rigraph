@@ -25,10 +25,10 @@ is_ivs(graph, candidate)
 \item{graph}{The input graph.}
 
 \item{min}{Numeric constant, limit for the minimum size of the independent vertex sets to find.
-\code{NULL} means no limit.}
+ \code{NULL} means no limit.}
 
 \item{max}{Numeric constant, limit for the maximum size of the independent vertex sets to find.
-\code{NULL} means no limit.}
+ \code{NULL} means no limit.}
 
 \item{candidate}{The vertex set to test for being an independent set.}
 }
@@ -42,17 +42,17 @@ each list element is an independent vertex set.
 }
 \description{
 A vertex set is called independent if there no edges between any two vertices in it.
-These functions find independent vertex sets in undirected graphs
+ These functions find independent vertex sets in undirected graphs
 }
 \details{
 \code{ivs()} finds all independent vertex sets in the network, obeying the size limitations given in the \code{min} and \code{max} arguments.
 
 \code{largest_ivs()} finds the largest independent vertex sets in the graph.
-An independent vertex set is largest if there is no independent vertex set with more vertices.
+ An independent vertex set is largest if there is no independent vertex set with more vertices.
 
 \code{max_ivs()} finds the maximal independent vertex sets in the graph.
-An independent vertex set is maximal if it cannot be extended to a larger independent vertex set.
-The largest independent vertex sets are maximal, but the opposite is not always true.
+ An independent vertex set is maximal if it cannot be extended to a larger independent vertex set.
+ The largest independent vertex sets are maximal, but the opposite is not always true.
 
 \code{ivs_size()} calculate the size of the largest independent vertex set(s).
 

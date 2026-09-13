@@ -10,7 +10,7 @@ get.data.frame(x, what = c("edges", "vertices", "both"))
 \item{x}{An igraph object.}
 
 \item{what}{Character constant, whether to return info about vertices, edges, or both.
-The default is \sQuote{edges}.}
+ The default is \sQuote{edges}.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

@@ -10,7 +10,7 @@ layout_with_mds(graph, dist = NULL, dim = 2, options = deprecated())
 \item{graph}{The input graph.}
 
 \item{dist}{The distance matrix for the multidimensional scaling.
-If \code{NULL} (the default),
+ If \code{NULL} (the default),
 then the unweighted shortest path matrix is used.}
 
 \item{dim}{\code{layout_with_mds()} supports dimensions up to the number of nodes minus one, but only if the graph is connected;
@@ -18,7 +18,7 @@ for unconnected graphs, the only possible value is 2. This is because \code{merg
 
 \item{options}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This argument is not supported from igraph version 1.6.0,
 as ARPACK is not used any more for solving the eigenproblem.
-Supplying it raises an error.}
+ Supplying it raises an error.}
 }
 \value{
 A numeric matrix with \code{dim} columns.
@@ -28,7 +28,7 @@ Multidimensional scaling of some distance matrix defined on the vertices of a gr
 }
 \details{
 \code{layout_with_mds()} uses classical multidimensional scaling (Torgerson scaling) for generating the coordinates.
-Multidimensional scaling aims to place points from a higher dimensional space in a (typically) 2 dimensional plane,
+ Multidimensional scaling aims to place points from a higher dimensional space in a (typically) 2 dimensional plane,
 so that the distances between the points are kept as much as this is possible.
 
 By default igraph uses the shortest path matrix as the distances between the nodes,
@@ -55,7 +55,7 @@ Scaling}.  Second edition. Chapman and Hall.
 }
 \seealso{
 \code{\link[=layout]{layout()}}, \code{\link[=plot.igraph]{plot.igraph()}}.
-See \code{\link[=with_mds]{with_mds()}} to build a lazy layout specification for \code{\link[=add_layout_]{add_layout_()}}.
+ See \code{\link[=with_mds]{with_mds()}} to build a lazy layout specification for \code{\link[=add_layout_]{add_layout_()}}.
 
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},

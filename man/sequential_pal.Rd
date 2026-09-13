@@ -8,14 +8,14 @@ sequential_pal(n)
 }
 \arguments{
 \item{n}{The number of colors in the palette.
-The maximum is nine currently.}
+ The maximum is nine currently.}
 }
 \value{
 A character vector of RGB color codes.
 }
 \description{
 This is the \sQuote{OrRd} palette from \url{https://colorbrewer2.org/}.
-It has at most nine colors.
+ It has at most nine colors.
 }
 \details{
 Use this palette, if vertex colors mark some ordinal quantity, e.g. some centrality measure, or some ordinal vertex covariate,

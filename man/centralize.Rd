@@ -13,11 +13,11 @@ centralize(scores, ..., theoretical.max = 0, normalized = TRUE)
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{theoretical.max}{Real scalar.
-The graph-level centralization measure of the most centralized graph with the same number of vertices as the graph under study.
-This is only used if the \code{normalized} argument is set to \code{TRUE}.}
+ The graph-level centralization measure of the most centralized graph with the same number of vertices as the graph under study.
+ This is only used if the \code{normalized} argument is set to \code{TRUE}.}
 
 \item{normalized}{Logical.
-Whether to normalize the graph level centrality score by dividing by the supplied theoretical maximum.}
+ Whether to normalize the graph level centrality score by dividing by the supplied theoretical maximum.}
 }
 \value{
 A real scalar, the centralization of the graph from which \code{scores} were derived.
@@ -27,7 +27,7 @@ Centralization is a method for creating a graph level centralization measure fro
 }
 \details{
 Centralization is a general method for calculating a graph-level centrality score based on node-level centrality measure.
-The formula for this is
+ The formula for this is
 \deqn{C(G)=\sum_v (\max_w c_w - c_v),}{ C(G)=sum(max(c(w), w) - c(v), v),}
 where \eqn{c_v}{c(v)} is the centrality of vertex \eqn{v}.
 

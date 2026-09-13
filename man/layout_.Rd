@@ -17,64 +17,64 @@ layout_(graph, layout, ...)
 \item{graph}{The input graph.}
 
 \item{layout}{The layout specification.
-It must be a call to a layout specification function.}
+ It must be a call to a layout specification function.}
 
 \item{...}{Further modifiers, see a complete list below.
-For the \code{\link[=print]{print()}} methods, it is ignored.}
+ For the \code{\link[=print]{print()}} methods, it is ignored.}
 
 \item{x}{The layout specification}
 }
 \value{
 The return value of the layout function, usually a two column matrix.
-For 3D layouts a three column matrix.
+ For 3D layouts a three column matrix.
 }
 \description{
 This is a generic function to apply a layout function to a graph.
 }
 \details{
 There are two ways to calculate graph layouts in igraph.
-The first way is to call a layout function (they all have prefix \code{layout_()} on a graph, to get the vertex coordinates.
+ The first way is to call a layout function (they all have prefix \code{layout_()} on a graph, to get the vertex coordinates.
 
 The second way (new in igraph 0.8.0), has two steps, and it is more flexible.
-First you call a layout specification function (the one without the \code{layout_()} prefix,
+ First you call a layout specification function (the one without the \code{layout_()} prefix,
 and then \code{layout_()} (or \code{\link[=add_layout_]{add_layout_()}}) to perform the layouting.
 
 The second way is preferred, as it is more flexible.
-It allows operations before and after the layouting.
-E.g. using the \code{component_wise()} argument, the layout can be calculated separately for each component,
+ It allows operations before and after the layouting.
+ E.g. using the \code{component_wise()} argument, the layout can be calculated separately for each component,
 and then merged to get the final results.
 }
 \section{Modifiers}{
 
 Modifiers modify how a layout calculation is performed.
-Modifiers are applied in the order they are specified as arguments to \code{layout_()}.
+ Modifiers are applied in the order they are specified as arguments to \code{layout_()}.
 
 There are two types of modifiers:
 \itemize{
 \item \strong{Pre-layout modifiers} affect how the layout is calculated.
-Only one pre-layout modifier can be used at a time.
-\item \strong{Post-layout modifiers} transform the resulting coordinates.
-Multiple post-layout modifiers can be chained together.
-}
+ Only one pre-layout modifier can be used at a time.
+ \item \strong{Post-layout modifiers} transform the resulting coordinates.
+ Multiple post-layout modifiers can be chained together.
+ }
 
 Currently implemented modifiers:
 \itemize{
 \item \code{component_wise()} (pre-layout) calculates the layout separately
 for each component of the graph, and then merges them.
-\item \code{normalize()} (post-layout) scales the layout to a square.
-}
+ \item \code{normalize()} (post-layout) scales the layout to a square.
+ }
 
 Custom modifiers can be created using the \code{layout_modifier()} function.
-A custom modifier must specify:
+ A custom modifier must specify:
 \itemize{
 \item \code{id}: A unique identifier string for the modifier
 \item \code{type}: Either \code{"pre"} for pre-layout or \code{"post"} for post-layout
 \item \code{args}: A list of arguments to pass to the apply function
 \item \code{apply}: A function with signature
 \verb{function(graph, layout, modifier_args)} that performs the modification.
-For pre-layout modifiers, \code{layout} is the layout specification.
-For post-layout modifiers, \code{layout} is the coordinate matrix to transform.
-}
+ For pre-layout modifiers, \code{layout} is the layout specification.
+ For post-layout modifiers, \code{layout} is the coordinate matrix to transform.
+ }
 }
 
 \examples{

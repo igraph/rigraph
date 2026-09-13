@@ -18,15 +18,15 @@ hub_score(graph, scale = TRUE, weights = NULL, options = arpack_defaults())
 \item{graph}{The input graph.}
 
 \item{scale}{Logical, whether to scale the result to have a maximum score of one.
-If no scaling is used then the result vector has unit length in the Euclidean norm.}
+ If no scaling is used then the result vector has unit length in the Euclidean norm.}
 
 \item{weights}{Optional positive weight vector for calculating weighted scores.
-If the graph has a \code{weight} edge attribute, then this is used by default.
-This function interprets edge weights as connection strengths.
-In the random surfer model, an edge with a larger weight is more likely to be selected by the surfer.}
+ If the graph has a \code{weight} edge attribute, then this is used by default.
+ This function interprets edge weights as connection strengths.
+ In the random surfer model, an edge with a larger weight is more likely to be selected by the surfer.}
 
 \item{options}{A named list, to override some ARPACK options.
-See \code{\link[=arpack]{arpack()}} for details.}
+ See \code{\link[=arpack]{arpack()}} for details.}
 }
 \description{
 Kleinberg's authority centrality scores.

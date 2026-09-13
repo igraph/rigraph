@@ -8,7 +8,7 @@ stCuts(graph, source, target)
 }
 \arguments{
 \item{graph}{The input graph.
-It must be directed.}
+ It must be directed.}
 
 \item{source}{The source vertex.}
 

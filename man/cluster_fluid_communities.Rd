@@ -8,13 +8,13 @@ cluster_fluid_communities(graph, no.of.communities)
 }
 \arguments{
 \item{graph}{The input graph.
-The graph must be simple and connected.
-Empty graphs are not supported as well as single vertex graphs.
-Edge directions are ignored.
-Weights are not considered.}
+ The graph must be simple and connected.
+ Empty graphs are not supported as well as single vertex graphs.
+ Edge directions are ignored.
+ Weights are not considered.}
 
 \item{no.of.communities}{The number of communities to be found.
-Must be greater than 0 and fewer than number of vertices in the graph.}
+ Must be greater than 0 and fewer than number of vertices in the graph.}
 }
 \value{
 \code{cluster_fluid_communities()} returns a \code{\link[=communities]{communities()}} object, please see the \code{\link[=communities]{communities()}} manual page for details.

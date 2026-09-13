@@ -17,10 +17,10 @@ normalize(
 \item{xmin, xmax}{Minimum and maximum for x coordinates.}
 
 \item{ymin, ymax}{Minimum and maximum for y coordinates.
-When omitted, they follow \code{xmin} and \code{xmax}; \code{NULL} disables normalization along this axis.}
+ When omitted, they follow \code{xmin} and \code{xmax}; \code{NULL} disables normalization along this axis.}
 
 \item{zmin, zmax}{Minimum and maximum for z coordinates.
-When omitted, they follow \code{xmin} and \code{xmax}; \code{NULL} disables normalization along this axis.}
+ When omitted, they follow \code{xmin} and \code{xmax}; \code{NULL} disables normalization along this axis.}
 }
 \description{
 Scale coordinates of a layout.

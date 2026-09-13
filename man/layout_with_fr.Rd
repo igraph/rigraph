@@ -28,36 +28,36 @@ layout_with_fr(
 }
 \arguments{
 \item{graph}{The graph to lay out.
-Edge directions are ignored.}
+ Edge directions are ignored.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{coords}{Optional starting positions for the vertices.
-If this argument is not \code{NULL} then it should be an appropriate matrix of starting coordinates.}
+ If this argument is not \code{NULL} then it should be an appropriate matrix of starting coordinates.}
 
 \item{dim}{Integer scalar, 2 or 3, the dimension of the layout.
-Two dimensional layouts are places on a plane,
+ Two dimensional layouts are places on a plane,
 three dimensional ones in the 3d space.}
 
 \item{niter}{Integer scalar, the number of iterations to perform.}
 
 \item{start.temp}{Real scalar, the start temperature.
-This is the maximum amount of movement alloved along one axis, within one step, for a vertex.
-Currently it is decreased linearly to zero during the iteration.
-The default \code{NULL} uses \code{sqrt(vcount(graph))}.}
+ This is the maximum amount of movement alloved along one axis, within one step, for a vertex.
+ Currently it is decreased linearly to zero during the iteration.
+ The default \code{NULL} uses \code{sqrt(vcount(graph))}.}
 
 \item{grid}{Character scalar, whether to use the faster, but less accurate grid based implementation of the algorithm.
-By default (\dQuote{auto}), the grid-based implementation is used if the graph has more than one thousand vertices.}
+ By default (\dQuote{auto}), the grid-based implementation is used if the graph has more than one thousand vertices.}
 
 \item{weights}{A vector giving edge weights.
-The \code{weight} edge attribute is used by default, if present.
-If weights are given, then the attraction along the edges will be multiplied by the given edge weights.
-This places vertices connected with a highly weighted edge closer to each other.
-Weights must be positive.}
+ The \code{weight} edge attribute is used by default, if present.
+ If weights are given, then the attraction along the edges will be multiplied by the given edge weights.
+ This places vertices connected with a highly weighted edge closer to each other.
+ Weights must be positive.}
 
 \item{minx}{Numeric vector that gives lower boundaries for the \sQuote{x} coordinates of the vertices.
-The length of the vector must match the number of vertices in the graph.
-Default: \code{NULL}.}
+ The length of the vector must match the number of vertices in the graph.
+ Default: \code{NULL}.}
 
 \item{maxx}{Similar to \code{minx}, but gives the upper boundaries.}
 
@@ -117,7 +117,7 @@ Force-directed Placement. \emph{Software - Practice and Experience},
 }
 \seealso{
 \code{\link[=layout_with_drl]{layout_with_drl()}}, \code{\link[=layout_with_kk]{layout_with_kk()}} for other layout algorithms.
-See \code{\link[=with_fr]{with_fr()}} to build a lazy layout specification for \code{\link[=add_layout_]{add_layout_()}}.
+ See \code{\link[=with_fr]{with_fr()}} to build a lazy layout specification for \code{\link[=add_layout_]{add_layout_()}}.
 
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},

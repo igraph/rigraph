@@ -18,8 +18,8 @@ write_graph(
 \item{file}{A connection or a string giving the file name to write the graph to.}
 
 \item{format}{Character string giving the file format.
-Right now \code{pajek}, \code{graphml}, \code{dot}, \code{gml}, \code{edgelist}, \code{lgl}, \code{ncol}, \code{leda} and \code{dimacs} are implemented.
-As of igraph 0.4 this argument is case insensitive.}
+ Right now \code{pajek}, \code{graphml}, \code{dot}, \code{gml}, \code{edgelist}, \code{lgl}, \code{ncol}, \code{leda} and \code{dimacs} are implemented.
+ As of igraph 0.4 this argument is case insensitive.}
 
 \item{\dots}{Other, format specific arguments, see below.}
 }
@@ -28,69 +28,69 @@ A `NULL``, invisibly.
 }
 \description{
 \code{write_graph()} is a general function for exporting graphs to foreign file formats.
-The recommended formats for data exchange are GraphML and GML.
+ The recommended formats for data exchange are GraphML and GML.
 }
 \section{Edge list format}{
  The \code{edgelist} format is a simple text file,
 with one edge per line, the two zero-based numerical vertex IDs separated by a space character.
-Note that vertices are indexed starting with zero.
-The file is sorted by the first and the second column.
-This format has no additional arguments.
+ Note that vertices are indexed starting with zero.
+ The file is sorted by the first and the second column.
+ This format has no additional arguments.
 }
 
 \section{NCOL format}{
  This format is a plain text edge list in which vertices
 are referred to by name rather than numerical ID.
-Edge weights may be optionally written.
-Additional parameters:
+ Edge weights may be optionally written.
+ Additional parameters:
 \describe{
 \item{names}{
 The name of a vertex attribute to take vertex names from or
 \code{NULL} to use zero-based numerical IDs.
-}
+ }
 \item{weights}{
 The name of an edge attribute to take edge weights from or
 \code{NULL} to omit edge weights.
-}
+ }
 }
 }
 
 \section{Pajek format}{
  The \code{pajek} format is provided for interoperability
 with the Pajek software only.
-Since the format does not have a formal specification, it is not recommended for general data exchange or archival.
+ Since the format does not have a formal specification, it is not recommended for general data exchange or archival.
 }
 
 \section{LGL format}{
 
 The .lgl format is used by the Large Graph Layout visualization software (\url{https://lgl.sourceforge.net}),
 it can describe undirected optionally weighted graphs.
-\describe{
+ \describe{
 \item{names}{The name of a vertex attribute to use for vertex names, or
 NULL to use numeric IDs.}
 \item{weights}{The name of an edge attribute to use for edge weights, or
 NULL to omit weights.}
 \item{isolates}{Logical, whether to include isolated vertices in the file.
-Default is FALSE.}
+ Default is FALSE.}
 }
 }
 
 \section{DIMACS format}{
 
 This is a line-oriented text file (ASCII) format.
-The first character of each line defines the type of the line.
-If the first character is c the line is a comment line and it is ignored.
-There is one problem line (p in the file), it must appear before any node and arc descriptor lines.
-The problem line has three fields separated by spaces: the problem type (max or edge), the number of vertices,
+ The first character of each line defines the type of the line.
+ If the first character is c the line is a comment line and it is ignored.
+ There is one problem line (p in the file), it must appear before any node and arc descriptor lines.
+ The problem line has three fields separated by spaces: the problem type (max or edge), the number of vertices,
 and number of edges in the graph.
-In MAX problems, exactly two node identification lines are expected (n), one for the source, and one for the target vertex.
-These have two fields: the ID of the vertex and the type of the vertex, either s ( = source) or t ( = target).
-Arc lines start with a and have three fields: the source vertex, the target vertex and the edge capacity.
-In EDGE problems, there may be a node line (n) for each node.
-It specifies the node index and an integer node label.
-Nodes for which no explicit label was specified will use their index as label.
-In EDGE problems, each edge is specified as an edge line (e).
-\describe{
+ In MAX problems, exactly two node identification lines are expected (n), one for the source, and one for the target vertex.
+ These have two fields: the ID of the vertex and the type of the vertex, either s ( = source) or t ( = target).
+ Arc lines start with a and have three fields: the source vertex, the target vertex and the edge capacity.
+ In EDGE problems, there may be a node line (n) for each node.
+ It specifies the node index and an integer node label.
+ Nodes for which no explicit label was specified will use their index as label.
+ In EDGE problems, each edge is specified as an edge line (e).
+ \describe{
 \item{source}{Numeric ID of the source vertex.}
 \item{target}{Numeric ID of the target vertex.}
 \item{capacity}{The name of an edge attribute to use for edge capacities,
@@ -101,7 +101,7 @@ or NULL to use the "capacity" attribute if it exists.}
 \section{GML format}{
 
 GML is a quite general textual format.
-\describe{
+ \describe{
 \item{ID}{Optional numeric vertex IDs to use.}
 \item{creator}{Optional string specifying the creator of the file.}
 }
@@ -110,11 +110,11 @@ GML is a quite general textual format.
 \section{GraphML format}{
 
 GraphML is an XML-based file format for representing various types of graphs.
-When a numerical attribute value is NaN, it will be omitted from the file.
-This function assumes that non-ASCII characters in attribute names and string attribute values are UTF-8 encoded.
-If this is not the case, the resulting XML file will be invalid.
-Control characters, i.e. character codes up to and including 31 (with the exception of tab, cr and lf), are not allowed.
-\describe{
+ When a numerical attribute value is NaN, it will be omitted from the file.
+ This function assumes that non-ASCII characters in attribute names and string attribute values are UTF-8 encoded.
+ If this is not the case, the resulting XML file will be invalid.
+ Control characters, i.e. character codes up to and including 31 (with the exception of tab, cr and lf), are not allowed.
+ \describe{
 \item{prefixAttr}{Logical, whether to prefix attribute names to ensure
 uniqueness across vertex/edge/graph attributes. Default is TRUE.}
 }
@@ -123,11 +123,11 @@ uniqueness across vertex/edge/graph attributes. Default is TRUE.}
 \section{LEDA format}{
 
 This function writes a graph to an output stream in LEDA format.
-See \url{https://www.algorithmic-solutions.info/leda_guide/graphs/leda_native_graph_fileformat.html}.
-The support for the LEDA format is very basic at the moment;
+ See \url{https://www.algorithmic-solutions.info/leda_guide/graphs/leda_native_graph_fileformat.html}.
+ The support for the LEDA format is very basic at the moment;
 igraph writes only the LEDA graph section
 which supports one selected vertex and edge attribute and no layout information or visual attributes.
-\describe{
+ \describe{
 \item{vertex.attr}{Name of vertex attribute to include in the file.}
 \item{edge.attr}{Name of edge attribute to include in the file.}
 }
@@ -136,10 +136,10 @@ which supports one selected vertex and edge attribute and no layout information 
 \section{DOT format}{
 
 DOT is the format used by the widely known GraphViz software, see \url{https://www.graphviz.org} for details.
-The grammar of the DOT format can be found here: \url{https://www.graphviz.org/doc/info/lang.html}.
-This is only a preliminary implementation, no visualization information is written.
-This format is meant solely for interoperability with Graphviz.
-It is not recommended for data exchange or archival.
+ The grammar of the DOT format can be found here: \url{https://www.graphviz.org/doc/info/lang.html}.
+ This is only a preliminary implementation, no visualization information is written.
+ This format is meant solely for interoperability with Graphviz.
+ It is not recommended for data exchange or archival.
 }
 
 \section{Related documentation in the C library}{

@@ -12,14 +12,14 @@ sample_tree(n, ..., directed = FALSE, method = c("lerw", "prufer"))
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{directed}{Whether to create a directed tree.
-The edges of the tree are oriented away from the root.}
+ The edges of the tree are oriented away from the root.}
 
 \item{method}{The algorithm to use to generate the tree.
-\sQuote{prufer} samples Prüfer sequences uniformly and then converts the sampled sequence to a tree.
-\sQuote{lerw} performs a loop-erased random walk on the complete graph to uniformly sampleits spanning trees.
-(This is also known as Wilson's algorithm).
-The default is \sQuote{lerw}.
-Note that the method based on Prüfer sequences does not support directed trees at the moment.}
+ \sQuote{prufer} samples Prüfer sequences uniformly and then converts the sampled sequence to a tree.
+ \sQuote{lerw} performs a loop-erased random walk on the complete graph to uniformly sampleits spanning trees.
+ (This is also known as Wilson's algorithm).
+ The default is \sQuote{lerw}.
+ Note that the method based on Prüfer sequences does not support directed trees at the moment.}
 }
 \value{
 A graph object.

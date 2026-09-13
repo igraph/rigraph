@@ -22,28 +22,28 @@ cluster_edge_betweenness(
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{The weights of the edges.
-It must be a positive numeric vector, \code{NULL} or \code{NA}.
-If it is \code{NULL} and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
-If \code{NULL} and no such attribute is present, then the edges will have equal weights.
-Set this to \code{NA} if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for community detection.
-Edge weights are used to calculate weighted edge betweenness.
-This means that edges are interpreted as distances, not as connection strengths.}
+ It must be a positive numeric vector, \code{NULL} or \code{NA}.
+ If it is \code{NULL} and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
+ If \code{NULL} and no such attribute is present, then the edges will have equal weights.
+ Set this to \code{NA} if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for community detection.
+ Edge weights are used to calculate weighted edge betweenness.
+ This means that edges are interpreted as distances, not as connection strengths.}
 
 \item{directed}{Logical, whether to calculate directed edge betweenness for directed graphs.
-It is ignored for undirected graphs.}
+ It is ignored for undirected graphs.}
 
 \item{edge.betweenness}{Logical, whether to return the edge betweenness of the edges at the time of their removal.}
 
 \item{merges}{Logical,
 whether to return the merge matrix representing the hierarchical community structure of the network.
-This argument is called \code{merges}, even if the community structure algorithm itself is divisive and not agglomerative:
+ This argument is called \code{merges}, even if the community structure algorithm itself is divisive and not agglomerative:
 it builds the tree from top to bottom.
-There is one line for each merge (i.e. split) in matrix, the first line is the first merge (last split).
-The communities are identified by integer number starting from one.
-Community IDs smaller than or equal to \eqn{N}, the number of vertices in the graph, belong to singleton communities,
+ There is one line for each merge (i.e. split) in matrix, the first line is the first merge (last split).
+ The communities are identified by integer number starting from one.
+ Community IDs smaller than or equal to \eqn{N}, the number of vertices in the graph, belong to singleton communities,
 i.e. individual vertices.
-Before the first merge we have \eqn{N} communities numbered from one to \eqn{N}.
-The first merge, the first line of the matrix creates community \eqn{N+1}, the second merge creates community \eqn{N+2}, etc.}
+ Before the first merge we have \eqn{N} communities numbered from one to \eqn{N}.
+ The first merge, the first line of the matrix creates community \eqn{N+1}, the second merge creates community \eqn{N+2}, etc.}
 
 \item{bridges}{Logical, whether to return a list the edge removals which actually splitted a component of the graph.}
 
@@ -57,18 +57,18 @@ considering all possibly community structures along the edge-betweenness based e
 }
 \description{
 Community structure detection based on the betweenness of the edges in the network.
-This method is also known as the Girvan-Newman algorithm.
+ This method is also known as the Girvan-Newman algorithm.
 }
 \details{
 The idea behind this method is that the betweenness of the edges connecting two communities is typically high,
 as many of the shortest paths between vertices in separate communities pass through them.
-The algorithm successively removes edges with the highest betweenness, recalculating betweenness values after each removal.
-This way eventually the network splits into two components, then one of these components splits again, and so on,
+ The algorithm successively removes edges with the highest betweenness, recalculating betweenness values after each removal.
+ This way eventually the network splits into two components, then one of these components splits again, and so on,
 until all edges are removed.
-The resulting hierarhical partitioning of the vertices can be encoded as a dendrogram.
+ The resulting hierarhical partitioning of the vertices can be encoded as a dendrogram.
 
 \code{cluster_edge_betweenness()} returns various information collected through the run of the algorithm.
-Specifically, \code{removed.edges} contains the edge IDs in order of the edges' removal;
+ Specifically, \code{removed.edges} contains the edge IDs in order of the edges' removal;
 \code{edge.betweenness} contains the betweenness of each of these at the time of their removal;
 and \code{bridges} contains the IDs of edges whose removal caused a split.
 }

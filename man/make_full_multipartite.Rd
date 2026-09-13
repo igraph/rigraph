@@ -17,17 +17,17 @@ full_multipartite(n, ..., directed = FALSE, mode = c("all", "out", "in"))
 \item{directed}{Logical, whether to create a directed graph.}
 
 \item{mode}{Character scalar, the type of connections for directed graphs.
-If \code{"out"}, then edges point from vertices of partitions with lower indices to partitions with higher indices; if \code{"in"},
+ If \code{"out"}, then edges point from vertices of partitions with lower indices to partitions with higher indices; if \code{"in"},
 then the opposite direction is realized; \code{"all"} creates mutual edges.
-This parameter is ignored for undirected graphs.}
+ This parameter is ignored for undirected graphs.}
 }
 \value{
 An igraph graph with a vertex attribute \code{type} storing the partition index of each vertex.
-Partition indices start from 1.
+ Partition indices start from 1.
 }
 \description{
 A multipartite graph contains multiple types of vertices and connections are only possible between vertices of different types.
-This function creates a complete multipartite graph where all possible edges between different partitions are present.
+ This function creates a complete multipartite graph where all possible edges between different partitions are present.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_full_multipartite}{\code{full_multipartite()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
