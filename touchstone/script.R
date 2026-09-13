@@ -376,5 +376,50 @@ benchmark_run(
   n = 20
 )
 
+# ---------------------------------------------------------------------------
+# Group #7 - what lazy names specifically buy
+# Two cases where the name vector is never actually read, so with an ALTREP
+# `names` attribute it is never built:
+#   * construct many sequences but only ask for their lengths;
+#   * subset a large named vertex sequence positionally (Extract_subset
+#     composes indices in O(1) instead of copying a subset of the names).
+# ---------------------------------------------------------------------------
+
+benchmark_run(
+  expr_before_benchmark = {
+    library(igraph)
+    set.seed(42)
+    g <- sample_gnp(200L, 0.16, directed = FALSE)
+    V(g)$name <- paste0("v", seq_len(gorder(g)))
+    for (i in 1:2) {
+      lengths(max_cliques(g))
+    }
+    gc(full = TRUE)
+  },
+  max_cliques_sizes_named = for (i in 1:30) {
+    lengths(max_cliques(g))
+  },
+  n = 20
+)
+
+benchmark_run(
+  expr_before_benchmark = {
+    library(igraph)
+    set.seed(42)
+    g <- sample_gnm(50000L, 100000L)
+    V(g)$name <- paste0("v", seq_len(50000L))
+    v <- V(g)
+    pick <- sample(50000L, 10000L)
+    for (i in 1:5) {
+      v[pick]
+    }
+    gc(full = TRUE)
+  },
+  vs_subset_positional = for (i in 1:880) {
+    v[pick]
+  },
+  n = 20
+)
+
 # Create the artifacts consumed by the GitHub Action.
 benchmark_analyze()
