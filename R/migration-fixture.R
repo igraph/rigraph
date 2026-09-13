@@ -20,7 +20,7 @@ migration_fixture <- function(
   # BEGIN GENERATED ARG_HANDLE: migration_fixture, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("w", "we", "wei", "weig", "weigh"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("w", "we", "wei", "weig", "weigh"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn migration_fixture}.")
     # Pre-3.0.0 signature: migration_fixture(graph, n, weight, kind, directed)
     .old_signature <- function(weight, kind, directed, ...) {
@@ -84,7 +84,7 @@ migration_fixture_prefix <- function(
   # BEGIN GENERATED ARG_HANDLE: migration_fixture_prefix, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("d", "di"))
+    .arg_forbidden <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::sys.call())[-1L])), base::c("d", "di"))
     if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn migration_fixture_prefix}.", i = "Spell out the full argument name."))
     # Pre-3.0.0 signature: migration_fixture_prefix(dimvector, p, dim, permutation)
     .old_signature <- function(dim, permutation, ...) {
@@ -147,7 +147,7 @@ migration_fixture_shadow <- function(
   # BEGIN GENERATED ARG_HANDLE: migration_fixture_shadow, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "at", "att"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("a", "at", "att"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn migration_fixture_shadow}.")
     # Pre-3.0.0 signature: migration_fixture_shadow(graph, attr, names, c)
     .old_signature <- function(attr, names, c, ...) {
