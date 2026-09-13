@@ -7,19 +7,18 @@
 categorical_pal(n)
 }
 \arguments{
-\item{n}{The number of colors in the palette. We simply take the first
-\code{n} colors from the total 8.}
+\item{n}{The number of colors in the palette.
+We simply take the first \code{n} colors from the total 8.}
 }
 \value{
 A character vector of RGB color codes.
 }
 \description{
-This is a color blind friendly palette from
-\url{https://jfly.uni-koeln.de/color/}. It has 8 colors.
+This is a color blind friendly palette from \url{https://jfly.uni-koeln.de/color/}.
+It has 8 colors.
 }
 \details{
-This is the suggested palette for visualizations where vertex colors
-mark categories, e.g. community membership.
+This is the suggested palette for visualizations where vertex colors mark categories, e.g. community membership.
 }
 \section{Examples}{
 

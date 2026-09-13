@@ -16,14 +16,12 @@ i.e. smaller than the length of \code{v}.}
 A numeric vector of length \code{length(v)-binwidth+1}
 }
 \description{
-\code{running_mean()} calculates the running mean in a vector with the given
-bin width.
+\code{running_mean()} calculates the running mean in a vector with the given bin width.
 }
 \details{
-The running mean of \code{v} is a \code{w} vector of length
-\code{length(v)-binwidth+1}. The first element of \code{w} ID the average of
-the first \code{binwidth} elements of \code{v}, the second element of
-\code{w} is the average of elements \code{2:(binwidth+1)}, etc.
+The running mean of \code{v} is a \code{w} vector of length \code{length(v)-binwidth+1}.
+The first element of \code{w} ID the average of the first \code{binwidth} elements of \code{v},
+the second element of \code{w} is the average of elements \code{2:(binwidth+1)}, etc.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_running_mean}{\code{running_mean()}}

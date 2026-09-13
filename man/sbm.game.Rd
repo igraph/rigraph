@@ -9,14 +9,13 @@ sbm.game(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE)
 \arguments{
 \item{n}{Number of vertices in the graph.}
 
-\item{pref.matrix}{The matrix giving the Bernoulli rates.  This is a
-\eqn{K\times K}{KxK} matrix, where \eqn{K} is the number of groups. The
-probability of creating an edge between vertices from groups \eqn{i} and
-\eqn{j} is given by element \eqn{(i,j)}. For undirected graphs, this matrix
-must be symmetric.}
+\item{pref.matrix}{The matrix giving the Bernoulli rates.  This is a \eqn{K\times K}{KxK} matrix,
+where \eqn{K} is the number of groups.
+The probability of creating an edge between vertices from groups \eqn{i} and \eqn{j} is given by element \eqn{(i,j)}.
+For undirected graphs, this matrix must be symmetric.}
 
-\item{block.sizes}{Numeric vector giving the number of vertices in each
-group. The sum of the vector must match the number of vertices.}
+\item{block.sizes}{Numeric vector giving the number of vertices in each group.
+The sum of the vector must match the number of vertices.}
 
 \item{directed}{Logical, whether to create a directed graph.}
 
@@ -25,8 +24,7 @@ group. The sum of the vector must match the number of vertices.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{sbm.game()} was renamed to \code{\link[=sample_sbm]{sample_sbm()}} to create a more
-consistent API.
+\code{sbm.game()} was renamed to \code{\link[=sample_sbm]{sample_sbm()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_sbm_game}{\code{sbm_game()}}

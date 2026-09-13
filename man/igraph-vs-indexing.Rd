@@ -12,8 +12,7 @@
 
 \item{...}{Indices, see details below.}
 
-\item{na_ok}{Whether it is OK to have \code{NA}s in the vertex
-sequence.}
+\item{na_ok}{Whether it is OK to have \code{NA}s in the vertex sequence.}
 }
 \value{
 Another vertex sequence, referring to the same graph.
@@ -23,18 +22,14 @@ Vertex sequences can be indexed very much like a plain numeric R vector,
 with some extras.
 }
 \details{
-Vertex sequences can be indexed using both the single bracket and
-the double bracket operators, and they both work the same way.
-The only difference between them is that the double bracket operator
-marks the result for printing vertex attributes.
+Vertex sequences can be indexed using both the single bracket and the double bracket operators, and they both work the same way.
+The only difference between them is that the double bracket operator marks the result for printing vertex attributes.
 }
 \section{Multiple indices}{
 
-When using multiple indices within the bracket, all of them
-are evaluated independently, and then the results are concatenated
-using the \code{c()} function (except for the \code{na_ok} argument,
-which is special an must be named. E.g. \code{V(g)[1, 2, .nei(1)]}
-is equivalent to \code{c(V(g)[1], V(g)[2], V(g)[.nei(1)])}.
+When using multiple indices within the bracket, all of them are evaluated independently,
+and then the results are concatenated using the \code{c()} function (except for the \code{na_ok} argument, which is special an must be named.
+E.g. \code{V(g)[1, 2, .nei(1)]} is equivalent to \code{c(V(g)[1], V(g)[2], V(g)[.nei(1)])}.
 }
 
 \section{Index types}{
@@ -58,23 +53,21 @@ to select vertices with the given names.
 
 \section{Vertex attributes}{
 
-When indexing vertex sequences, vertex attributes can be referred
-to simply by using their names. E.g. if a graph has a \code{name} vertex
-attribute, then \code{V(g)[name == "foo"]} is equivalent to
-\code{V(g)[V(g)$name == "foo"]}. See more examples below. Note that attribute
-names mask the names of variables present in the calling environment; if
-you need to look up a variable and you do not want a similarly named
-vertex attribute to mask it, use the \code{.env} pronoun to perform the
-name lookup in the calling environment. In other words, use
-\code{V(g)[.env$name == "foo"]} to make sure that \code{name} is looked up
-from the calling environment even if there is a vertex attribute with the
-same name. Similarly, you can use \code{.data} to match attribute names only.
+When indexing vertex sequences, vertex attributes can be referred to simply by using their names.
+E.g. if a graph has a \code{name} vertex attribute, then \code{V(g)[name == "foo"]} is equivalent to \code{V(g)[V(g)$name == "foo"]}.
+See more examples below.
+Note that attribute names mask the names of variables present in the calling environment;
+if you need to look up a variable and you do not want a similarly named vertex attribute to mask it,
+use the \code{.env} pronoun to perform the name lookup in the calling environment.
+In other words,
+use \code{V(g)[.env$name == "foo"]} to make sure that \code{name} is looked up from the calling environment even
+if there is a vertex attribute with the same name.
+Similarly, you can use \code{.data} to match attribute names only.
 }
 
 \section{Special functions}{
 
-There are some special igraph functions that can be used only
-in expressions indexing vertex sequences:
+There are some special igraph functions that can be used only in expressions indexing vertex sequences:
 \describe{
 \item{\code{.nei}}{
 takes a vertex sequence as its argument
@@ -97,9 +90,8 @@ Similar to \code{.inc}, but only considers the heads of the edges.
 and \code{.outnei(v)} is a shorthand for \code{.nei(v, mode = "out")}.
 }
 }
-Note that multiple special functions can be used together, or with
-regular indices, and then their results are concatenated. See more
-examples below.
+Note that multiple special functions can be used together, or with regular indices, and then their results are concatenated.
+See more examples below.
 }
 
 \examples{

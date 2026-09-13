@@ -11,26 +11,24 @@ sample_tree(n, ..., directed = FALSE, method = c("lerw", "prufer"))
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{directed}{Whether to create a directed tree. The edges of the tree are
-oriented away from the root.}
+\item{directed}{Whether to create a directed tree.
+The edges of the tree are oriented away from the root.}
 
-\item{method}{The algorithm to use to generate the tree. \sQuote{prufer}
-samples Prüfer sequences uniformly and then converts the sampled sequence to
-a tree. \sQuote{lerw} performs a loop-erased random walk on the complete
-graph to uniformly sampleits spanning trees. (This is also known as Wilson's
-algorithm). The default is \sQuote{lerw}. Note that the method based on
-Prüfer sequences does not support directed trees at the moment.}
+\item{method}{The algorithm to use to generate the tree.
+\sQuote{prufer} samples Prüfer sequences uniformly and then converts the sampled sequence to a tree.
+\sQuote{lerw} performs a loop-erased random walk on the complete graph to uniformly sampleits spanning trees.
+(This is also known as Wilson's algorithm).
+The default is \sQuote{lerw}.
+Note that the method based on Prüfer sequences does not support directed trees at the moment.}
 }
 \value{
 A graph object.
 }
 \description{
-\code{sample_tree()} generates a random with a given number of nodes uniform
-at random from the set of labelled trees.
+\code{sample_tree()} generates a random with a given number of nodes uniform at random from the set of labelled trees.
 }
 \details{
-In other words, the function generates each possible labelled tree with the
-given number of nodes with the same probability.
+In other words, the function generates each possible labelled tree with the given number of nodes with the same probability.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_tree_game}{\code{tree_game()}}

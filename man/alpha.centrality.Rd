@@ -16,24 +16,21 @@ alpha.centrality(
 )
 }
 \arguments{
-\item{graph}{The input graph, can be directed or undirected. In undirected
-graphs, edges are treated as if they were reciprocal directed ones.}
+\item{graph}{The input graph, can be directed or undirected.
+In undirected graphs, edges are treated as if they were reciprocal directed ones.}
 
-\item{nodes}{Vertex sequence, the vertices for which the alpha centrality
-values are returned. The default \code{NULL} selects all vertices.
+\item{nodes}{Vertex sequence, the vertices for which the alpha centrality values are returned.
+The default \code{NULL} selects all vertices.
 (For technical reasons they will be calculated for all vertices, anyway.)}
 
-\item{alpha}{Parameter specifying the relative importance of endogenous
-versus exogenous factors in the determination of centrality. See details
-below.}
+\item{alpha}{Parameter specifying the relative importance of endogenous versus exogenous factors in the determination of centrality.
+See details below.}
 
-\item{loops}{Whether to eliminate loop edges from the graph before the
-calculation.}
+\item{loops}{Whether to eliminate loop edges from the graph before the calculation.}
 
-\item{exo}{The exogenous factors, in most cases this is either a constant --
-the same factor for every node, or a vector giving the factor for every
-vertex. Note that too long vectors will be truncated and too short vectors
-will be replicated to match the number of vertices.}
+\item{exo}{The exogenous factors, in most cases this is either a constant -- the same factor for every node,
+or a vector giving the factor for every vertex.
+Note that too long vectors will be truncated and too short vectors will be replicated to match the number of vertices.}
 
 \item{weights}{One of the following:
 \itemize{
@@ -45,21 +42,17 @@ directly as edge weights.
 \item A character scalar: the name of an edge attribute whose values are
 used as weights. The attribute must be numeric or logical.
 }
-If multiple edges share endpoints, the value of an arbitrarily chosen edge
-is included in the matrix.}
+If multiple edges share endpoints, the value of an arbitrarily chosen edge is included in the matrix.}
 
-\item{tol}{Tolerance for near-singularities during matrix inversion, see
-\code{\link[Matrix:solve]{Matrix::solve()}}.}
+\item{tol}{Tolerance for near-singularities during matrix inversion, see \code{\link[Matrix:solve]{Matrix::solve()}}.}
 
-\item{sparse}{Logical, whether to use sparse matrices for the
-calculation. The \sQuote{Matrix} package is required for sparse matrix
-support}
+\item{sparse}{Logical, whether to use sparse matrices for the calculation.
+The \sQuote{Matrix} package is required for sparse matrix support}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{alpha.centrality()} was renamed to \code{\link[=alpha_centrality]{alpha_centrality()}} to create a more
-consistent API.
+\code{alpha.centrality()} was renamed to \code{\link[=alpha_centrality]{alpha_centrality()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency}{\code{get_adjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency_sparse}{\code{get_adjacency_sparse()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

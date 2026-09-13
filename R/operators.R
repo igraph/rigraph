@@ -3,8 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.intersection()` was renamed to [intersection()] to create a more
-#' consistent API.
+#' `graph.intersection()` was renamed to [intersection()] to create a more consistent API.
 #' @inheritParams intersection
 #' @keywords internal
 #' @export
@@ -19,8 +18,7 @@ graph.intersection <- function(...) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.union()` was renamed to [union.igraph()] to create a more
-#' consistent API.
+#' `graph.union()` was renamed to [union.igraph()] to create a more consistent API.
 #' @inheritParams union.igraph
 #' @keywords internal
 #' @export
@@ -35,8 +33,7 @@ graph.union <- function(..., byname = "auto") {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.difference()` was renamed to [difference()] to create a more
-#' consistent API.
+#' `graph.difference()` was renamed to [difference()] to create a more consistent API.
 #' @inheritParams difference
 #' @keywords internal
 #' @export
@@ -51,8 +48,7 @@ graph.difference <- function(...) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.disjoint.union()` was renamed to [disjoint_union()] to create a more
-#' consistent API.
+#' `graph.disjoint.union()` was renamed to [disjoint_union()] to create a more consistent API.
 #' @inheritParams disjoint_union
 #' @keywords internal
 #' @export
@@ -71,8 +67,7 @@ graph.disjoint.union <- function(...) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.compose()` was renamed to [compose()] to create a more
-#' consistent API.
+#' `graph.compose()` was renamed to [compose()] to create a more consistent API.
 #' @inheritParams compose
 #' @keywords internal
 #' @export
@@ -87,8 +82,7 @@ graph.compose <- function(g1, g2, byname = "auto") {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.complementer()` was renamed to [complementer()] to create a more
-#' consistent API.
+#' `graph.complementer()` was renamed to [complementer()] to create a more consistent API.
 #' @inheritParams complementer
 #' @keywords internal
 #' @export
@@ -203,11 +197,9 @@ combine.attrs <- function(
   attr
 }
 
-# Historical behaviour for clashing attributes: a value present in a single
-# input graph is copied as-is, otherwise each copy is kept side-by-side under a
-# disambiguated `name_1`, `name_2`, ... name. Returns a named list to splice
-# into the result; `getval` is the per-graph accessor closure from
-# `combine.attrs()`.
+# Historical behaviour for clashing attributes: a value present in a single input graph is copied as-is,
+# otherwise each copy is kept side-by-side under a disambiguated `name_1`, `name_2`, ... name.
+# Returns a named list to splice into the result; `getval` is the per-graph accessor closure from `combine.attrs()`.
 rename_attr_if_needed <- function(name, w, getval) {
   if (length(w) == 1) {
     stats::setNames(list(getval(w, name)), name)
@@ -262,38 +254,34 @@ apply_one_combiner <- function(comb, x) {
 
 #' Disjoint union of graphs
 #'
-#' The union of two or more graphs are created. The graphs are assumed to have
-#' disjoint vertex sets.
+#' The union of two or more graphs are created.
+#' The graphs are assumed to have disjoint vertex sets.
 #'
 #' `disjoint_union()` creates a union of two or more disjoint graphs.
-#' Thus first the vertices in the second, third, etc. graphs are relabeled to
-#' have completely disjoint graphs. Then a simple union is created. This
-#' function can also be used via the `%du%` operator.
+#' Thus first the vertices in the second, third, etc. graphs are relabeled to have completely disjoint graphs.
+#' Then a simple union is created.
+#' This function can also be used via the `%du%` operator.
 #'
-#' `disjoint_union()` handles graph, vertex and edge attributes.  In
-#' particular, it merges vertex and edge attributes using the [vctrs::vec_c()]
-#' function. For graphs that lack some vertex/edge attribute, the corresponding
-#' values in the new graph are set to a missing value (`NA` for scalar attributes,
-#' `NULL` for list attributes). Graph attributes are combined according to
-#' `graph.attr.comb`; by default any name clash is resolved by adding
-#' suffixes (`_1`, `_2`, ...). See [igraph-attribute-combination] for the
-#' available combiners.
+#' `disjoint_union()` handles graph, vertex and edge attributes.  In particular,
+#' it merges vertex and edge attributes using the [vctrs::vec_c()] function.
+#' For graphs that lack some vertex/edge attribute,
+#' the corresponding values in the new graph are set to a missing value (`NA` for scalar attributes, `NULL` for list attributes).
+#' Graph attributes are combined according to `graph.attr.comb`; by default any name clash is resolved by adding suffixes (`_1`, `_2`, ...).
+#' See [igraph-attribute-combination] for the available combiners.
 #'
-#' Note that if both graphs have vertex names (i.e. a `name` vertex
-#' attribute), then the concatenated vertex names might be non-unique in the
-#' result. A warning is given if this happens.
+#' Note that if both graphs have vertex names (i.e. a `name` vertex attribute),
+#' then the concatenated vertex names might be non-unique in the result.
+#' A warning is given if this happens.
 #'
-#' An error is generated if some input graphs are directed and others are
-#' undirected.
+#' An error is generated if some input graphs are directed and others are undirected.
 #'
 #' @aliases %du%
 #' @param \dots Graph objects or lists of graph objects.
 #' @param x,y Graph objects.
 #' @param graph.attr.comb Specification for combining shared graph attributes.
-#'   The default `NULL` uses the `graph.attr.comb` igraph option (`"rename"`
-#'   unless changed via [igraph_options()]), which preserves the historical
-#'   behaviour of appending `_1`, `_2`, ... suffixes to clashing attribute
-#'   names. See [igraph-attribute-combination] for the available combiners.
+#'   The default `NULL` uses the `graph.attr.comb` igraph option (`"rename"` unless changed via [igraph_options()]),
+#'   which preserves the historical behaviour of appending `_1`, `_2`, ... suffixes to clashing attribute names.
+#'   See [igraph-attribute-combination] for the available combiners.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
@@ -546,15 +534,12 @@ disjoint_union <- function(
 
 #' Union of two or more sets
 #'
-#' This is an S3 generic function. See `methods("union")`
-#' for the actual implementations for various S3 classes. Initially
-#' it is implemented for igraph graphs and igraph vertex and edge
-#' sequences. See
-#' [union.igraph()], and
-#' [union.igraph.vs()].
+#' This is an S3 generic function.
+#' See `methods("union")` for the actual implementations for various S3 classes.
+#' Initially it is implemented for igraph graphs and igraph vertex and edge sequences.
+#' See [union.igraph()], and [union.igraph.vs()].
 #'
-#' @param ... Arguments, their number and interpretation depends on
-#'   the function that implements `union()`.
+#' @param ... Arguments, their number and interpretation depends on the function that implements `union()`.
 #' @return Depends on the function that implements this method.
 #'
 #' @family functions for manipulating graph structure
@@ -572,46 +557,38 @@ union.default <- function(...) {
 
 #' Union of graphs
 #'
-#' The union of two or more graphs are created. The graphs may have identical
-#' or overlapping vertex sets.
+#' The union of two or more graphs are created.
+#' The graphs may have identical or overlapping vertex sets.
 #'
-#' `union()` creates the union of two or more graphs.  Edges which are
-#' included in at least one graph will be part of the new graph. This function
-#' can be also used via the `%u%` operator.
+#' `union()` creates the union of two or more graphs.  Edges which are included in at least one graph will be part of the new graph.
+#' This function can be also used via the `%u%` operator.
 #'
-#' If the `byname` argument is `TRUE` (or `auto` and all graphs
-#' are named), then the operation is performed on symbolic vertex names instead
-#' of the internal numeric vertex IDs.
+#' If the `byname` argument is `TRUE` (or `auto` and all graphs are named),
+#' then the operation is performed on symbolic vertex names instead of the internal numeric vertex IDs.
 #'
-#' `union()` keeps the attributes of all graphs. All graph, vertex and
-#' edge attributes are copied to the result. By default, if an attribute is
-#' present in multiple graphs and would result in a name clash, that attribute
-#' is renamed by adding suffixes: `_1`, `_2`, etc. Pass `graph.attr.comb`,
-#' `vertex.attr.comb` or `edge.attr.comb` to combine clashing attributes
-#' instead, e.g. by summing or by taking the first non-`NA` value. See
-#' [igraph-attribute-combination] for the available combiners.
+#' `union()` keeps the attributes of all graphs.
+#' All graph, vertex and edge attributes are copied to the result.
+#' By default, if an attribute is present in multiple graphs and would result in a name clash, that attribute is renamed by adding suffixes:
+#' `_1`, `_2`, etc. Pass `graph.attr.comb`, `vertex.attr.comb` or `edge.attr.comb` to combine clashing attributes instead,
+#' e.g. by summing or by taking the first non-`NA` value.
+#' See [igraph-attribute-combination] for the available combiners.
 #'
-#' The `name` vertex attribute is treated specially if the operation is
-#' performed based on symbolic vertex names. In this case `name` must be
-#' present in all graphs, and it is not renamed in the result graph.
+#' The `name` vertex attribute is treated specially if the operation is performed based on symbolic vertex names.
+#' In this case `name` must be present in all graphs, and it is not renamed in the result graph.
 #'
-#' An error is generated if some input graphs are directed and others are
-#' undirected.
+#' An error is generated if some input graphs are directed and others are undirected.
 #'
 #' @aliases %u%
 #' @param \dots Graph objects or lists of graph objects.
-#' @param byname A Logical, or the character scalar `auto`. Whether
-#'   to perform the operation based on symbolic vertex names. If it is
-#'   `auto`, that means `TRUE` if all graphs are named and `FALSE`
-#'   otherwise. A warning is generated if `auto` and some (but not all)
-#'   graphs are named.
-#' @param graph.attr.comb,vertex.attr.comb,edge.attr.comb Specification for
-#'   combining clashing graph, vertex and edge attributes. `vertex.attr.comb`
-#'   and `edge.attr.comb` default to `"rename"`; `graph.attr.comb` defaults to
-#'   the `graph.attr.comb` igraph option (`"rename"` unless changed via
-#'   [igraph_options()]). `"rename"` preserves the historical behaviour of
-#'   appending `_1`, `_2`, ... suffixes. See [igraph-attribute-combination] for
-#'   the available combiners.
+#' @param byname A Logical, or the character scalar `auto`.
+#'   Whether to perform the operation based on symbolic vertex names.
+#'   If it is `auto`, that means `TRUE` if all graphs are named and `FALSE` otherwise.
+#'   A warning is generated if `auto` and some (but not all) graphs are named.
+#' @param graph.attr.comb,vertex.attr.comb,edge.attr.comb Specification for combining clashing graph, vertex and edge attributes.
+#'   `vertex.attr.comb` and `edge.attr.comb` default to `"rename"`;
+#'   `graph.attr.comb` defaults to the `graph.attr.comb` igraph option (`"rename"` unless changed via [igraph_options()]).
+#'   `"rename"` preserves the historical behaviour of appending `_1`, `_2`, ... suffixes.
+#'   See [igraph-attribute-combination] for the available combiners.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @method union igraph
@@ -653,15 +630,12 @@ union.igraph <- function(
 
 #' Intersection of two or more sets
 #'
-#' This is an S3 generic function. See `methods("intersection")`
-#' for the actual implementations for various S3 classes. Initially
-#' it is implemented for igraph graphs and igraph vertex and edge
-#' sequences. See
-#' [intersection.igraph()], and
-#' [intersection.igraph.vs()].
+#' This is an S3 generic function.
+#' See `methods("intersection")` for the actual implementations for various S3 classes.
+#' Initially it is implemented for igraph graphs and igraph vertex and edge sequences.
+#' See [intersection.igraph()], and [intersection.igraph.vs()].
 #'
-#' @param ... Arguments, their number and interpretation depends on
-#'   the function that implements `intersection()`.
+#' @param ... Arguments, their number and interpretation depends on the function that implements `intersection()`.
 #' @return Depends on the function that implements this method.
 #'
 #' @family functions for manipulating graph structure
@@ -672,47 +646,36 @@ intersection <- function(...) {
 
 #' Intersection of graphs
 #'
-#' The intersection of two or more graphs are created.  The graphs may have
-#' identical or overlapping vertex sets.
+#' The intersection of two or more graphs are created.  The graphs may have identical or overlapping vertex sets.
 #'
 #' `intersection()` creates the intersection of two or more graphs:
-#' only edges present in all graphs will be included.  The corresponding
-#' operator is `%s%`.
+#' only edges present in all graphs will be included.  The corresponding operator is `%s%`.
 #'
-#' If the `byname` argument is `TRUE` (or `auto` and all graphs
-#' are named), then the operation is performed on symbolic vertex names instead
-#' of the internal numeric vertex IDs.
+#' If the `byname` argument is `TRUE` (or `auto` and all graphs are named),
+#' then the operation is performed on symbolic vertex names instead of the internal numeric vertex IDs.
 #'
-#' `intersection()` keeps the attributes of all graphs. All graph,
-#' vertex and edge attributes are copied to the result. By default, if an
-#' attribute is present in multiple graphs and would result in a name clash,
-#' that attribute is renamed by adding suffixes: `_1`, `_2`, etc. Pass
-#' `graph.attr.comb`, `vertex.attr.comb` or `edge.attr.comb` to combine
-#' clashing attributes instead; see [igraph-attribute-combination] for the
-#' available combiners.
+#' `intersection()` keeps the attributes of all graphs.
+#' All graph, vertex and edge attributes are copied to the result.
+#' By default, if an attribute is present in multiple graphs and would result in a name clash, that attribute is renamed by adding suffixes:
+#' `_1`, `_2`, etc. Pass `graph.attr.comb`, `vertex.attr.comb` or `edge.attr.comb` to combine clashing attributes instead;
+#' see [igraph-attribute-combination] for the available combiners.
 #'
-#' The `name` vertex attribute is treated specially if the operation is
-#' performed based on symbolic vertex names. In this case `name` must be
-#' present in all graphs, and it is not renamed in the result graph.
+#' The `name` vertex attribute is treated specially if the operation is performed based on symbolic vertex names.
+#' In this case `name` must be present in all graphs, and it is not renamed in the result graph.
 #'
-#' An error is generated if some input graphs are directed and others are
-#' undirected.
+#' An error is generated if some input graphs are directed and others are undirected.
 #'
 #' @aliases %s%
 #' @param \dots Graph objects or lists of graph objects.
-#' @param byname A Logical, or the character scalar `auto`. Whether
-#'   to perform the operation based on symbolic vertex names. If it is
-#'   `auto`, that means `TRUE` if all graphs are named and `FALSE`
-#'   otherwise. A warning is generated if `auto` and some (but not all)
-#'   graphs are named.
-#' @param keep.all.vertices Logical, whether to keep vertices that only
-#'   appear in a subset of the input graphs.
-#' @param graph.attr.comb,vertex.attr.comb,edge.attr.comb Specification for
-#'   combining clashing graph, vertex and edge attributes. `vertex.attr.comb`
-#'   and `edge.attr.comb` default to `"rename"`; `graph.attr.comb` defaults to
-#'   the `graph.attr.comb` igraph option (`"rename"` unless changed via
-#'   [igraph_options()]). See [igraph-attribute-combination] for the available
-#'   combiners.
+#' @param byname A Logical, or the character scalar `auto`.
+#'   Whether to perform the operation based on symbolic vertex names.
+#'   If it is `auto`, that means `TRUE` if all graphs are named and `FALSE` otherwise.
+#'   A warning is generated if `auto` and some (but not all) graphs are named.
+#' @param keep.all.vertices Logical, whether to keep vertices that only appear in a subset of the input graphs.
+#' @param graph.attr.comb,vertex.attr.comb,edge.attr.comb Specification for combining clashing graph, vertex and edge attributes.
+#'   `vertex.attr.comb` and `edge.attr.comb` default to `"rename"`;
+#'   `graph.attr.comb` defaults to the `graph.attr.comb` igraph option (`"rename"` unless changed via [igraph_options()]).
+#'   See [igraph-attribute-combination] for the available combiners.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @method intersection igraph
@@ -755,15 +718,12 @@ intersection.igraph <- function(
 
 #' Difference of two sets
 #'
-#' This is an S3 generic function. See `methods("difference")`
-#' for the actual implementations for various S3 classes. Initially
-#' it is implemented for igraph graphs (difference of edges in two graphs),
-#' and igraph vertex and edge sequences. See
-#' [difference.igraph()], and
-#' [difference.igraph.vs()].
+#' This is an S3 generic function.
+#' See `methods("difference")` for the actual implementations for various S3 classes.
+#' Initially it is implemented for igraph graphs (difference of edges in two graphs), and igraph vertex and edge sequences.
+#' See [difference.igraph()], and [difference.igraph.vs()].
 #'
-#' @param ... Arguments, their number and interpretation depends on
-#'   the function that implements `difference()`.
+#' @param ... Arguments, their number and interpretation depends on the function that implements `difference()`.
 #' @return Depends on the function that implements this method.
 #'
 #' @family functions for manipulating graph structure
@@ -777,30 +737,27 @@ difference <- function(...) {
 #'
 #' The difference of two graphs are created.
 #'
-#' `difference()` creates the difference of two graphs. Only edges
-#' present in the first graph but not in the second will be be included in the
-#' new graph. The corresponding operator is `%m%`.
+#' `difference()` creates the difference of two graphs.
+#' Only edges present in the first graph but not in the second will be be included in the new graph.
+#' The corresponding operator is `%m%`.
 #'
-#' If the `byname` argument is `TRUE` (or `auto` and the graphs
-#' are all named), then the operation is performed based on symbolic vertex
-#' names. Otherwise numeric vertex IDs are used.
+#' If the `byname` argument is `TRUE` (or `auto` and the graphs are all named),
+#' then the operation is performed based on symbolic vertex names.
+#' Otherwise numeric vertex IDs are used.
 #'
-#' `difference()` keeps all attributes (graph, vertex and edge) of the
-#' first graph.
+#' `difference()` keeps all attributes (graph, vertex and edge) of the first graph.
 #'
-#' Note that `big` and `small` must both be directed or both be
-#' undirected, otherwise an error message is given.
+#' Note that `big` and `small` must both be directed or both be undirected, otherwise an error message is given.
 #'
 #' @aliases %m%
-#' @param big The left hand side argument of the minus operator. A directed or
-#'   undirected graph.
-#' @param small The right hand side argument of the minus operator. A directed
-#'   ot undirected graph.
-#' @param byname A Logical, or the character scalar `auto`. Whether
-#'   to perform the operation based on symbolic vertex names. If it is
-#'   `auto`, that means `TRUE` if both graphs are named and
-#'   `FALSE` otherwise. A warning is generated if `auto` and one graph,
-#'   but not both graphs are named.
+#' @param big The left hand side argument of the minus operator.
+#'   A directed or undirected graph.
+#' @param small The right hand side argument of the minus operator.
+#'   A directed ot undirected graph.
+#' @param byname A Logical, or the character scalar `auto`.
+#'   Whether to perform the operation based on symbolic vertex names.
+#'   If it is `auto`, that means `TRUE` if both graphs are named and `FALSE` otherwise.
+#'   A warning is generated if `auto` and one graph, but not both graphs are named.
 #' @param ... Ignored, included for S3 compatibility.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -870,15 +827,12 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
 
 #' Complementer of a graph
 #'
-#' A complementer graph contains all edges that were not present in the input
-#' graph.
+#' A complementer graph contains all edges that were not present in the input graph.
 #'
-#' `complementer()` creates the complementer of a graph. Only edges
-#' which are *not* present in the original graph will be included in the
-#' new graph.
+#' `complementer()` creates the complementer of a graph.
+#' Only edges which are *not* present in the original graph will be included in the new graph.
 #'
-#' `complementer()` keeps graph and vertex attriubutes, edge
-#' attributes are lost.
+#' `complementer()` keeps graph and vertex attriubutes, edge attributes are lost.
 #'
 #' @param graph The input graph, can be directed or undirected.
 #' @inheritParams rlang::args_dots_empty
@@ -951,59 +905,51 @@ complementer <- function(
 #'
 #' Relational composition of two graph.
 #'
-#' `compose()` creates the relational composition of two graphs. The
-#' new graph will contain an (a,b) edge only if there is a vertex c, such that
-#' edge (a,c) is included in the first graph and (c,b) is included in the
-#' second graph. The corresponding operator is `%c%`.
+#' `compose()` creates the relational composition of two graphs.
+#' The new graph will contain an (a,b) edge only if there is a vertex c,
+#' such that edge (a,c) is included in the first graph and (c,b) is included in the second graph.
+#' The corresponding operator is `%c%`.
 #'
-#' The function gives an error if one of the input graphs is directed and the
-#' other is undirected.
+#' The function gives an error if one of the input graphs is directed and the other is undirected.
 #'
-#' If the `byname` argument is `TRUE` (or `auto` and the graphs
-#' are all named), then the operation is performed based on symbolic vertex
-#' names. Otherwise numeric vertex IDs are used.
+#' If the `byname` argument is `TRUE` (or `auto` and the graphs are all named),
+#' then the operation is performed based on symbolic vertex names.
+#' Otherwise numeric vertex IDs are used.
 #'
-#' `compose()` keeps the attributes of both graphs. All graph, vertex
-#' and edge attributes are copied to the result. By default, if an attribute
-#' is present in both graphs and would result in a name clash, that attribute
-#' is renamed by adding suffixes: `_1`, `_2`. Pass `graph.attr.comb`,
-#' `vertex.attr.comb` or `edge.attr.comb` to combine clashing attributes
-#' instead; see [igraph-attribute-combination] for the available combiners.
+#' `compose()` keeps the attributes of both graphs.
+#' All graph, vertex and edge attributes are copied to the result.
+#' By default, if an attribute is present in both graphs and would result in a name clash, that attribute is renamed by adding suffixes:
+#' `_1`, `_2`.
+#' Pass `graph.attr.comb`, `vertex.attr.comb` or `edge.attr.comb` to combine clashing attributes instead;
+#' see [igraph-attribute-combination] for the available combiners.
 #'
-#' The `name` vertex attribute is treated specially if the operation is
-#' performed based on symbolic vertex names. In this case `name` must be
-#' present in both graphs, and it is not renamed in the result graph.
+#' The `name` vertex attribute is treated specially if the operation is performed based on symbolic vertex names.
+#' In this case `name` must be present in both graphs, and it is not renamed in the result graph.
 #'
-#' Note that an edge in the result graph corresponds to two edges in the input,
-#' one in the first graph, one in the second. This mapping is not injective and
-#' several edges in the result might correspond to the same edge in the first
-#' (and/or the second) graph. The edge attributes in the result graph are
-#' updated accordingly.
+#' Note that an edge in the result graph corresponds to two edges in the input, one in the first graph, one in the second.
+#' This mapping is not injective and several edges in the result might correspond to the same edge in the first (and/or the second) graph.
+#' The edge attributes in the result graph are updated accordingly.
 #'
-#' Also note that the function may generate multigraphs, if there are more than
-#' one way to find edges (a,b) in g1 and (b,c) in g2 for an edge (a,c) in the
-#' result. See [simplify()] if you want to get rid of the multiple
-#' edges.
+#' Also note that the function may generate multigraphs,
+#' if there are more than one way to find edges (a,b) in g1 and (b,c) in g2 for an edge (a,c) in the result.
+#' See [simplify()] if you want to get rid of the multiple edges.
 #'
-#' The function may create loop edges, if edges (a,b) and (b,a) are present in
-#' g1 and g2, respectively, then (a,a) is included in the result. See
-#' [simplify()] if you want to get rid of the self-loops.
+#' The function may create loop edges, if edges (a,b) and (b,a) are present in g1 and g2, respectively,
+#' then (a,a) is included in the result.
+#' See [simplify()] if you want to get rid of the self-loops.
 #'
 #' @aliases %c%
 #' @param g1 The first input graph.
 #' @param g2 The second input graph.
 #' @inheritParams rlang::args_dots_empty
-#' @param byname A Logical, or the character scalar `auto`. Whether
-#'   to perform the operation based on symbolic vertex names. If it is
-#'   `auto`, that means `TRUE` if both graphs are named and
-#'   `FALSE` otherwise. A warning is generated if `auto` and one graph,
-#'   but not both graphs are named.
-#' @param graph.attr.comb,vertex.attr.comb,edge.attr.comb Specification for
-#'   combining clashing graph, vertex and edge attributes. `vertex.attr.comb`
-#'   and `edge.attr.comb` default to `"rename"`; `graph.attr.comb` defaults to
-#'   the `graph.attr.comb` igraph option (`"rename"` unless changed via
-#'   [igraph_options()]). See [igraph-attribute-combination] for the available
-#'   combiners.
+#' @param byname A Logical, or the character scalar `auto`.
+#'   Whether to perform the operation based on symbolic vertex names.
+#'   If it is `auto`, that means `TRUE` if both graphs are named and `FALSE` otherwise.
+#'   A warning is generated if `auto` and one graph, but not both graphs are named.
+#' @param graph.attr.comb,vertex.attr.comb,edge.attr.comb Specification for combining clashing graph, vertex and edge attributes.
+#'   `vertex.attr.comb` and `edge.attr.comb` default to `"rename"`;
+#'   `graph.attr.comb` defaults to the `graph.attr.comb` igraph option (`"rename"` unless changed via [igraph_options()]).
+#'   See [igraph-attribute-combination] for the available combiners.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @family functions for manipulating graph structure
@@ -1168,25 +1114,19 @@ compose <- function(
 
 #' Helper function for adding and deleting edges
 #'
-#' This is a helper function that simplifies adding and deleting
-#' edges to/from graphs.
+#' This is a helper function that simplifies adding and deleting edges to/from graphs.
 #'
 #' `edges()` is an alias for `edge()`.
 #'
 #' @details
-#' When adding edges via `+`, all unnamed arguments of
-#' `edge()` (or `edges()`) are concatenated, and then passed to
-#' [add_edges()]. They are interpreted as pairs of vertex IDs,
-#' and an edge will added between each pair. Named arguments will be
-#' used as edge attributes for the new edges.
+#' When adding edges via `+`, all unnamed arguments of `edge()` (or `edges()`) are concatenated, and then passed to [add_edges()].
+#' They are interpreted as pairs of vertex IDs, and an edge will added between each pair.
+#' Named arguments will be used as edge attributes for the new edges.
 #'
-#' When deleting edges via `-`, all arguments of `edge()` (or
-#' `edges()`) are concatenated via `c()` and passed to
-#' [delete_edges()].
+#' When deleting edges via `-`, all arguments of `edge()` (or `edges()`) are concatenated via `c()` and passed to [delete_edges()].
 #'
 #' @param ... See details below.
-#' @return A special object that can be used with together with
-#'   igraph graphs and the plus and minus operators.
+#' @return A special object that can be used with together with igraph graphs and the plus and minus operators.
 #'
 #' @family functions for manipulating graph structure
 #'
@@ -1217,23 +1157,19 @@ edges <- edge
 
 #' Helper function for adding and deleting vertices
 #'
-#' This is a helper function that simplifies adding and deleting
-#' vertices to/from graphs.
+#' This is a helper function that simplifies adding and deleting vertices to/from graphs.
 #'
 #' `vertices()` is an alias for `vertex()`.
 #'
 #' @details
-#' When adding vertices via `+`, all unnamed arguments are interpreted
-#' as vertex names of the new vertices. Named arguments are interpreted as
-#' vertex attributes for the new vertices.
+#' When adding vertices via `+`, all unnamed arguments are interpreted as vertex names of the new vertices.
+#' Named arguments are interpreted as vertex attributes for the new vertices.
 #'
-#' When deleting vertices via `-`, all arguments of `vertex()` (or
-#' `vertices()`) are concatenated via `c()` and passed to
-#' [delete_vertices()].
+#' When deleting vertices via `-`,
+#' all arguments of `vertex()` (or `vertices()`) are concatenated via `c()` and passed to [delete_vertices()].
 #'
 #' @param ... See details below.
-#' @return A special object that can be used with together with
-#'   igraph graphs and the plus and minus operators.
+#' @return A special object that can be used with together with igraph graphs and the plus and minus operators.
 #'
 #' @family functions for manipulating graph structure
 #'
@@ -1270,19 +1206,15 @@ vertices <- vertex
 #' This function can be used to add or delete edges that form a path.
 #'
 #' @details
-#' When adding edges via `+`, all unnamed arguments are
-#' concatenated, and each element of a final vector is interpreted
-#' as a vertex in the graph. For a vector of length \eqn{n+1}, \eqn{n}
-#' edges are then added, from vertex 1 to vertex 2, from vertex 2 to vertex
-#' 3, etc. Named arguments will be used as edge attributes for the new
-#' edges.
+#' When adding edges via `+`, all unnamed arguments are concatenated,
+#' and each element of a final vector is interpreted as a vertex in the graph.
+#' For a vector of length \eqn{n+1}, \eqn{n} edges are then added, from vertex 1 to vertex 2, from vertex 2 to vertex 3,
+#' etc. Named arguments will be used as edge attributes for the new edges.
 #'
-#' When deleting edges, all attributes are concatenated and then passed
-#' to [delete_edges()].
+#' When deleting edges, all attributes are concatenated and then passed to [delete_edges()].
 #'
 #' @param ... See details below.
-#' @return A special object that can be used together with igraph
-#'   graphs and the plus and minus operators.
+#' @return A special object that can be used together with igraph graphs and the plus and minus operators.
 #'
 #' @family functions for manipulating graph structure
 #'
@@ -1311,8 +1243,7 @@ path <- function(...) {
 #'
 #' @details
 #'   The plus operator can be used to add vertices or edges to graph.
-#'   The actual operation that is performed depends on the type of the
-#'   right hand side argument.
+#'   The actual operation that is performed depends on the type of the right hand side argument.
 #'
 #'   - If is is another igraph graph object and they are both
 #'     named graphs, then the union of the two graphs are calculated,
@@ -1384,8 +1315,7 @@ path <- function(...) {
 #'   For clarity, we suggest to always put the graph object on the left
 #'   hand side of the operator: \preformatted{  graph <- make_empty_graph() + "foo" + "bar"}
 #'
-#' @param e1 First argument, probably an igraph graph, but see details
-#'    below.
+#' @param e1 First argument, probably an igraph graph, but see details below.
 #' @param e2 Second argument, see details below.
 #'
 #' @family functions for manipulating graph structure
@@ -1475,9 +1405,8 @@ path <- function(...) {
 #' Delete vertices or edges from a graph
 #'
 #' @details
-#' The minus operator (\sQuote{`-`}) can be used to remove vertices
-#' or edges from the graph. The operation performed is selected based on
-#' the type of the right hand side argument:
+#' The minus operator (\sQuote{`-`}) can be used to remove vertices or edges from the graph.
+#' The operation performed is selected based on the type of the right hand side argument:
 #' \itemize{
 #' \item If it is an igraph graph object, then the difference of the
 #'   two graphs is calculated, see [difference()].
@@ -1556,14 +1485,12 @@ path <- function(...) {
 
 #' Replicate a graph multiple times
 #'
-#' The new graph will contain the input graph the given number
-#' of times, as unconnected components.
+#' The new graph will contain the input graph the given number of times, as unconnected components.
 #'
 #' @param x The input graph.
 #' @param n Number of times to replicate it.
 #' @param mark Whether to mark the vertices with a `which` attribute,
-#'   an integer number denoting which replication the vertex is coming
-#'   from.
+#'   an integer number denoting which replication the vertex is coming from.
 #' @param ... Additional arguments to satisfy S3 requirements,
 #'   currently ignored.
 #'
@@ -1608,16 +1535,14 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
 
 #' Reverse edges in a graph
 #'
-#' The new graph will contain the same vertices, edges and attributes as
-#' the original graph, except that the direction of the edges selected by
-#' their edge IDs in the `eids` argument will be reversed. When reversing
-#' all edges, this operation is also known as graph transpose.
+#' The new graph will contain the same vertices, edges and attributes as the original graph,
+#' except that the direction of the edges selected by their edge IDs in the `eids` argument will be reversed.
+#' When reversing all edges, this operation is also known as graph transpose.
 #'
 #' @param graph The input graph.
-#' @param eids The edge IDs of the edges to reverse. The default `NULL`
-#'   reverses all edges.
-#' @return The result graph where the direction of the edges with the given
-#'   IDs are reversed
+#' @param eids The edge IDs of the edges to reverse.
+#'   The default `NULL` reverses all edges.
+#' @return The result graph where the direction of the edges with the given IDs are reversed
 #'
 #' @examples
 #'

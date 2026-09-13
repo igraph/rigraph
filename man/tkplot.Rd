@@ -41,8 +41,8 @@ tk_canvas(tkp.id)
 
 \item{canvas.width, canvas.height}{The size of the tkplot drawing area.}
 
-\item{\dots}{Additional plotting parameters. See \link{igraph.plotting} for
-the complete list.}
+\item{\dots}{Additional plotting parameters.
+See \link{igraph.plotting} for the complete list.}
 
 \item{tkp.id}{The ID of the tkplot window to close/reshape/etc.}
 
@@ -58,92 +58,75 @@ the complete list.}
 
 \item{norm}{Logical, should we norm the coordinates.}
 
-\item{coords}{Two-column numeric matrix, the new coordinates of the
-vertices, in absolute coordinates.}
+\item{coords}{Two-column numeric matrix, the new coordinates of the vertices, in absolute coordinates.}
 
 \item{degree}{The degree to rotate the plot.}
 
 \item{rad}{The degree to rotate the plot, in radian.}
 }
 \value{
-\code{tkplot()} returns an integer, the ID of the plot, this can be
-used to manipulate it from the command line.
+\code{tkplot()} returns an integer, the ID of the plot, this can be used to manipulate it from the command line.
 
 \code{tk_canvas()} returns \code{tkwin} object, the Tk canvas.
 
 \code{tk_coords()} returns a matrix with the coordinates.
 
-\code{tk_close()}, \code{tk_off()}, \code{tk_fit()},
-\code{tk_reshape()}, \code{tk_postscript()}, \code{tk_center()}
-and \code{tk_rotate()} return \code{NULL} invisibly.
+\code{tk_close()}, \code{tk_off()}, \code{tk_fit()}, \code{tk_reshape()}, \code{tk_postscript()}, \code{tk_center()} and \code{tk_rotate()} return \code{NULL} invisibly.
 }
 \description{
-\code{tkplot()} and its companion functions serve as an interactive graph
-drawing facility. Not all parameters of the plot can be changed
-interactively right now though, e.g. the colors of vertices, edges, and also
-others have to be pre-defined.
+\code{tkplot()} and its companion functions serve as an interactive graph drawing facility.
+Not all parameters of the plot can be changed interactively right now though, e.g. the colors of vertices, edges,
+and also others have to be pre-defined.
 }
 \details{
-\code{tkplot()} is an interactive graph drawing facility. It is not very well
-developed at this stage, but it should be still useful.
+\code{tkplot()} is an interactive graph drawing facility.
+It is not very well developed at this stage, but it should be still useful.
 
-It's handling should be quite straightforward most of the time, here are
-some remarks and hints.
+It's handling should be quite straightforward most of the time, here are some remarks and hints.
 
-There are different popup menus, activated by the right mouse button, for
-vertices and edges. Both operate on the current selection if the vertex/edge
-under the cursor is part of the selection and operate on the vertex/edge
-under the cursor if it is not.
+There are different popup menus, activated by the right mouse button, for vertices and edges.
+Both operate on the current selection
+if the vertex/edge under the cursor is part of the selection and operate on the vertex/edge under the cursor if it is not.
 
 One selection can be active at a time, either a vertex or an edge selection.
-A vertex/edge can be added to a selection by holding the \code{control} key
-while clicking on it with the left mouse button. Doing this again deselect
-the vertex/edge.
+A vertex/edge can be added to a selection by holding the \code{control} key while clicking on it with the left mouse button.
+Doing this again deselect the vertex/edge.
 
-Selections can be made also from the "Select" menu. The "Select some
-vertices" dialog allows to give an expression for the vertices to be
-selected: this can be a list of numeric R expessions separated by commas,
-like \verb{1,2:10,12,14,15} for example. Similarly in the "Select some
-edges" dialog two such lists can be given and all edges connecting a vertex
-in the first list to one in the second list will be selected.
+Selections can be made also from the "Select" menu.
+The "Select some vertices" dialog allows to give an expression for the vertices to be selected:
+this can be a list of numeric R expessions separated by commas, like \verb{1,2:10,12,14,15} for example.
+Similarly in the "Select some edges" dialog two such lists can be given and all edges connecting a vertex in the first list to one in the second list will be selected.
 
-In the color dialog a color name like 'orange' or RGB notation can also be
-used.
+In the color dialog a color name like 'orange' or RGB notation can also be used.
 
-The \code{tkplot()} command creates a new Tk window with the graphical
-representation of \code{graph}. The command returns an integer number, the
-tkplot ID. The other commands utilize this ID to be able to query or
-manipulate the plot.
+The \code{tkplot()} command creates a new Tk window with the graphical representation of \code{graph}.
+The command returns an integer number, the tkplot ID.
+The other commands utilize this ID to be able to query or manipulate the plot.
 
 \code{tk_close()} closes the Tk plot with ID \code{tkp.id}.
 
 \code{tk_off()} closes all Tk plots.
 
-\code{tk_fit()} fits the plot to the given rectangle
-(\code{width} and \code{height}), if some of these are \code{NULL} the
-actual physical width od height of the plot window is used.
+\code{tk_fit()} fits the plot to the given rectangle (\code{width} and \code{height}),
+if some of these are \code{NULL} the actual physical width od height of the plot window is used.
 
-\code{tk_reshape()} applies a new layout to the plot, its optional
-parameters will be collected to a list analogous to \code{layout.par}.
+\code{tk_reshape()} applies a new layout to the plot, its optional parameters will be collected to a list analogous to \code{layout.par}.
 
-\code{tk_postscript()} creates a dialog window for saving the plot
-in postscript format.
+\code{tk_postscript()} creates a dialog window for saving the plot in postscript format.
 
-\code{tk_canvas()} returns the Tk canvas object that belongs to a graph
-plot. The canvas can be directly manipulated then, e.g. labels can be added,
-it could be saved to a file programmatically, etc. See an example below.
+\code{tk_canvas()} returns the Tk canvas object that belongs to a graph plot.
+The canvas can be directly manipulated then, e.g. labels can be added, it could be saved to a file programmatically,
+etc. See an example below.
 
 \code{tk_coords()} returns the coordinates of the vertices in a matrix.
 Each row corresponds to one vertex.
 
-\code{tk_set_coords()} sets the coordinates of the vertices. A two-column
-matrix specifies the new positions, with each row corresponding to a single
-vertex.
+\code{tk_set_coords()} sets the coordinates of the vertices.
+A two-column matrix specifies the new positions, with each row corresponding to a single vertex.
 
 \code{tk_center()} shifts the figure to the center of its plot window.
 
-\code{tk_rotate()} rotates the figure, its parameter can be given either
-in degrees or in radians.
+\code{tk_rotate()} rotates the figure, its parameter can be given either in degrees or in radians.
 
 tkplot.center tkplot.rotate
 }

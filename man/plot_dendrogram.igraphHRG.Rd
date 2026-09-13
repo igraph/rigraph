@@ -7,14 +7,13 @@
 \method{plot_dendrogram}{igraphHRG}(x, mode = NULL, ...)
 }
 \arguments{
-\item{x}{An \code{igraphHRG}, a hierarchical random graph, as returned by
-the \code{\link[=fit_hrg]{fit_hrg()}} function.}
+\item{x}{An \code{igraphHRG}, a hierarchical random graph, as returned by the \code{\link[=fit_hrg]{fit_hrg()}} function.}
 
-\item{mode}{Which dendrogram plotting function to use. See details below.
+\item{mode}{Which dendrogram plotting function to use.
+See details below.
 The default \code{NULL} uses the \code{dend.plot.type} igraph option.}
 
-\item{\dots}{Additional arguments to supply to the dendrogram plotting
-function.}
+\item{\dots}{Additional arguments to supply to the dendrogram plotting function.}
 }
 \value{
 Returns whatever the return value was from the plotting function,
@@ -24,9 +23,8 @@ Returns whatever the return value was from the plotting function,
 Plot a hierarchical random graph as a dendrogram.
 }
 \details{
-\code{plot_dendrogram()} supports three different plotting functions, selected via
-the \code{mode} argument. By default the plotting function is taken from the
-\code{dend.plot.type} igraph option, and it has for possible values:
+\code{plot_dendrogram()} supports three different plotting functions, selected via the \code{mode} argument.
+By default the plotting function is taken from the \code{dend.plot.type} igraph option, and it has for possible values:
 \itemize{ \item \code{auto} Choose automatically between the plotting
 functions. As \code{plot.phylo} is the most sophisticated, that is choosen,
 whenever the \code{ape} package is available. Otherwise \code{plot.hclust}
@@ -35,8 +33,8 @@ package.  \item \code{hclust} Use \code{plot.hclust} from the \code{stats}
 package.  \item \code{dendrogram} Use \code{plot.dendrogram} from the
 \code{stats} package.  }
 
-The different plotting functions take different sets of arguments. When
-using \code{plot.phylo} (\code{mode="phylo"}), we have the following syntax:
+The different plotting functions take different sets of arguments.
+When using \code{plot.phylo} (\code{mode="phylo"}), we have the following syntax:
 \preformatted{
     plot_dendrogram(x, mode="phylo", colbar = rainbow(11, start=0.7,
             end=0.1), edge.color = NULL, use.edge.length = FALSE, \dots)

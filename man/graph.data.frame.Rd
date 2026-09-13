@@ -7,22 +7,19 @@
 graph.data.frame(d, directed = TRUE, vertices = NULL)
 }
 \arguments{
-\item{d}{A data frame containing a symbolic edge list in the first two
-columns. Additional columns are considered as edge attributes.  Since
-version 0.7 this argument is coerced to a data frame with
-\code{as.data.frame}.}
+\item{d}{A data frame containing a symbolic edge list in the first two columns.
+Additional columns are considered as edge attributes.  Since version 0.7 this argument is coerced to a data frame with \code{as.data.frame}.}
 
 \item{directed}{Logical, whether or not to create a directed graph.}
 
-\item{vertices}{A data frame with vertex metadata, or \code{NULL}. See
-details below. Since version 0.7 this argument is coerced to a data frame
-with \code{as.data.frame}, if not \code{NULL}.}
+\item{vertices}{A data frame with vertex metadata, or \code{NULL}.
+See details below.
+Since version 0.7 this argument is coerced to a data frame with \code{as.data.frame}, if not \code{NULL}.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.data.frame()} was renamed to \code{\link[=graph_from_data_frame]{graph_from_data_frame()}} to create a more
-consistent API.
+\code{graph.data.frame()} was renamed to \code{\link[=graph_from_data_frame]{graph_from_data_frame()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_add_vertices}{\code{add_vertices()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty}{\code{empty()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

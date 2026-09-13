@@ -7,11 +7,12 @@
 graph.diversity(graph, weights = NULL, vids = V(graph))
 }
 \arguments{
-\item{graph}{The input graph. Edge directions are ignored.}
+\item{graph}{The input graph.
+Edge directions are ignored.}
 
-\item{weights}{\code{NULL}, or the vector of edge weights to use for the
-computation. If \code{NULL}, then the \sQuote{weight} attibute is used. Note
-that this measure is not defined for unweighted graphs.}
+\item{weights}{\code{NULL}, or the vector of edge weights to use for the computation.
+If \code{NULL}, then the \sQuote{weight} attibute is used.
+Note that this measure is not defined for unweighted graphs.}
 
 \item{vids}{The vertex IDs for which to calculate the measure.
 The default \code{NULL} selects all vertices.}
@@ -19,8 +20,7 @@ The default \code{NULL} selects all vertices.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.diversity()} was renamed to \code{\link[=diversity]{diversity()}} to create a more
-consistent API.
+\code{graph.diversity()} was renamed to \code{\link[=diversity]{diversity()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_diversity}{\code{diversity()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

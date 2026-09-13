@@ -15,23 +15,20 @@ centralization.evcent(
 \arguments{
 \item{graph}{The input graph.}
 
-\item{directed}{Logical, whether to use directed shortest paths for
-calculating eigenvector centrality.}
+\item{directed}{Logical, whether to use directed shortest paths for calculating eigenvector centrality.}
 
-\item{scale}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Ignored. Computing
-eigenvector centralization requires normalized eigenvector centrality scores.}
+\item{scale}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Ignored.
+Computing eigenvector centralization requires normalized eigenvector centrality scores.}
 
-\item{options}{This is passed to \code{\link[=eigen_centrality]{eigen_centrality()}}, the options
-for the ARPACK eigensolver.}
+\item{options}{This is passed to \code{\link[=eigen_centrality]{eigen_centrality()}}, the options for the ARPACK eigensolver.}
 
-\item{normalized}{Logical. Whether to normalize the graph level
-centrality score by dividing by the theoretical maximum.}
+\item{normalized}{Logical.
+Whether to normalize the graph level centrality score by dividing by the theoretical maximum.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{centralization.evcent()} was renamed to \code{\link[=centr_eigen]{centr_eigen()}} to create a more
-consistent API.
+\code{centralization.evcent()} was renamed to \code{\link[=centr_eigen]{centr_eigen()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization_eigenvector_centrality}{\code{centralization_eigenvector_centrality()}}

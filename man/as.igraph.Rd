@@ -10,7 +10,8 @@ as.igraph(x, ...)
 \arguments{
 \item{x}{The object to convert.}
 
-\item{\dots}{Additional arguments. None currently.}
+\item{\dots}{Additional arguments.
+None currently.}
 }
 \value{
 All these functions return an igraph graph.

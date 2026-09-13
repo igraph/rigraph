@@ -18,24 +18,23 @@ as_undirected(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{mode}{Character constant, defines the conversion algorithm. For
-\code{as_directed()} it can be \code{mutual} or \code{arbitrary}. For
-\code{as_undirected()} it can be \code{each}, \code{collapse} or
-\code{mutual}. See details below.}
+\item{mode}{Character constant, defines the conversion algorithm.
+For \code{as_directed()} it can be \code{mutual} or \code{arbitrary}.
+For \code{as_undirected()} it can be \code{each}, \code{collapse} or \code{mutual}.
+See details below.}
 
-\item{edge.attr.comb}{Specifies what to do with edge attributes, if
-\code{mode="collapse"} or \code{mode="mutual"}.  In these cases many edges
-might be mapped to a single one in the new graph, and their attributes are
-combined. Please see \code{\link[=attribute.combination]{attribute.combination()}} for details on
-this. The default \code{NULL} uses the \code{edge.attr.comb} igraph option.}
+\item{edge.attr.comb}{Specifies what to do with edge attributes,
+if \code{mode="collapse"} or \code{mode="mutual"}.  In these cases many edges might be mapped to a single one in the new graph,
+and their attributes are combined.
+Please see \code{\link[=attribute.combination]{attribute.combination()}} for details on this.
+The default \code{NULL} uses the \code{edge.attr.comb} igraph option.}
 }
 \value{
 A new graph object.
 }
 \description{
-\code{as_directed()} converts an undirected graph to directed,
-\code{as_undirected()} does the opposite, it converts a directed graph to
-undirected.
+\code{as_directed()} converts an undirected graph to directed, \code{as_undirected()} does the opposite,
+it converts a directed graph to undirected.
 }
 \details{
 Conversion algorithms for \code{as_directed()}:
@@ -123,8 +122,7 @@ print(ug4, e = TRUE)
 
 }
 \seealso{
-\code{\link[=simplify]{simplify()}} for removing multiple and/or loop edges from
-a graph.
+\code{\link[=simplify]{simplify()}} for removing multiple and/or loop edges from a graph.
 
 Other conversion:
 \code{\link[=as.matrix.igraph]{as.matrix.igraph()}},

@@ -15,45 +15,38 @@ cluster_walktrap(
 )
 }
 \arguments{
-\item{graph}{The input graph. Edge directions are ignored in directed
-graphs.}
+\item{graph}{The input graph.
+Edge directions are ignored in directed graphs.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{weights}{The weights of the edges. It must be a positive numeric vector,
-\code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
-\sQuote{weight} edge attribute, then that attribute will be used. If
-\code{NULL} and no such attribute is present, then the edges will have equal
-weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
-attribute, but you don't want to use it for community detection. Larger edge
-weights increase the probability that an edge is selected by the random
-walker. In other words, larger edge weights correspond to stronger connections.}
+\item{weights}{The weights of the edges.
+It must be a positive numeric vector, \code{NULL} or \code{NA}.
+If it is \code{NULL} and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
+If \code{NULL} and no such attribute is present, then the edges will have equal weights.
+Set this to \code{NA} if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for community detection.
+Larger edge weights increase the probability that an edge is selected by the random walker.
+In other words, larger edge weights correspond to stronger connections.}
 
 \item{steps}{The length of the random walks to perform.}
 
-\item{merges}{Logical, whether to include the merge matrix in the
-result.}
+\item{merges}{Logical, whether to include the merge matrix in the result.}
 
-\item{modularity}{Logical, whether to include the vector of the
-modularity scores in the result. If the \code{membership} argument is true,
-then it will always be calculated.}
+\item{modularity}{Logical, whether to include the vector of the modularity scores in the result.
+If the \code{membership} argument is true, then it will always be calculated.}
 
-\item{membership}{Logical, whether to calculate the membership vector
-for the split corresponding to the highest modularity value.}
+\item{membership}{Logical, whether to calculate the membership vector for the split corresponding to the highest modularity value.}
 }
 \value{
-\code{cluster_walktrap()} returns a \code{\link[=communities]{communities()}}
-object, please see the \code{\link[=communities]{communities()}} manual page for details.
+\code{cluster_walktrap()} returns a \code{\link[=communities]{communities()}} object, please see the \code{\link[=communities]{communities()}} manual page for details.
 }
 \description{
-This function tries to find densely connected subgraphs, also called
-communities in a graph via random walks. The idea is that short random walks
-tend to stay in the same community.
+This function tries to find densely connected subgraphs, also called communities in a graph via random walks.
+The idea is that short random walks tend to stay in the same community.
 }
 \details{
-This function is the implementation of the Walktrap community finding
-algorithm, see Pascal Pons, Matthieu Latapy: Computing communities in large
-networks using random walks, https://arxiv.org/abs/physics/0512106
+This function is the implementation of the Walktrap community finding algorithm, see Pascal Pons, Matthieu Latapy:
+Computing communities in large networks using random walks, https://arxiv.org/abs/physics/0512106
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
@@ -71,15 +64,10 @@ Pascal Pons, Matthieu Latapy: Computing communities in large
 networks using random walks, https://arxiv.org/abs/physics/0512106
 }
 \seealso{
-See \code{\link[=communities]{communities()}} on getting the actual membership
-vector, merge matrix, modularity score, etc.
+See \code{\link[=communities]{communities()}} on getting the actual membership vector, merge matrix, modularity score, etc.
 
-\code{\link[=modularity]{modularity()}} and \code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}},
-\code{\link[=cluster_spinglass]{cluster_spinglass()}},
-\code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}},
-\code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}}, \code{\link[=cluster_louvain]{cluster_louvain()}},
-and \code{\link[=cluster_leiden]{cluster_leiden()}} for other community detection
-methods.
+\code{\link[=modularity]{modularity()}} and \code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}}, \code{\link[=cluster_spinglass]{cluster_spinglass()}}, \code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}}, \code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}},
+\code{\link[=cluster_louvain]{cluster_louvain()}}, and \code{\link[=cluster_leiden]{cluster_leiden()}} for other community detection methods.
 
 Community detection:
 \code{\link[=as_membership]{as_membership()}},

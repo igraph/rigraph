@@ -11,14 +11,12 @@ subgraph.edges(graph, eids, delete.vertices = TRUE)
 
 \item{eids}{The edge IDs of the edges that will be kept in the result graph.}
 
-\item{delete.vertices}{Logical, whether to remove vertices that do
-not have any adjacent edges in \code{eids}.}
+\item{delete.vertices}{Logical, whether to remove vertices that do not have any adjacent edges in \code{eids}.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{subgraph.edges()} was renamed to \code{\link[=subgraph_from_edges]{subgraph_from_edges()}} to create a more
-consistent API.
+\code{subgraph.edges()} was renamed to \code{\link[=subgraph_from_edges]{subgraph_from_edges()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_subgraph_from_edges}{\code{subgraph_from_edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

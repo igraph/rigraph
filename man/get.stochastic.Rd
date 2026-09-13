@@ -11,20 +11,19 @@ get.stochastic(
 )
 }
 \arguments{
-\item{graph}{The input graph. Must be of class \code{igraph}.}
+\item{graph}{The input graph.
+Must be of class \code{igraph}.}
 
-\item{column.wise}{If \code{FALSE}, then the rows of the stochastic matrix
-sum up to one; otherwise it is the columns.}
+\item{column.wise}{If \code{FALSE}, then the rows of the stochastic matrix sum up to one; otherwise it is the columns.}
 
-\item{sparse}{Logical, whether to return a sparse matrix. The
-\code{Matrix} package is needed for sparse matrices. The default \code{NULL} uses
-the \code{sparsematrices} igraph option.}
+\item{sparse}{Logical, whether to return a sparse matrix.
+The \code{Matrix} package is needed for sparse matrices.
+The default \code{NULL} uses the \code{sparsematrices} igraph option.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{get.stochastic()} was renamed to \code{\link[=stochastic_matrix]{stochastic_matrix()}} to create a more
-consistent API.
+\code{get.stochastic()} was renamed to \code{\link[=stochastic_matrix]{stochastic_matrix()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_stochastic}{\code{get_stochastic()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_stochastic_sparse}{\code{get_stochastic_sparse()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

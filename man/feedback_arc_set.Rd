@@ -16,34 +16,27 @@ feedback_arc_set(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{weights}{Potential edge weights. If the graph has an edge
-attribute called \sQuote{\code{weight}}, and this argument is
-\code{NULL}, then the edge attribute is used automatically. The goal of
-the feedback arc set problem is to find a feedback arc set with the smallest
-total weight.}
+\item{weights}{Potential edge weights.
+If the graph has an edge attribute called \sQuote{\code{weight}}, and this argument is \code{NULL},
+then the edge attribute is used automatically.
+The goal of the feedback arc set problem is to find a feedback arc set with the smallest total weight.}
 
-\item{algo}{Specifies the algorithm to use. \dQuote{\code{exact_ip}} solves
-the feedback arc set problem with an exact integer programming algorithm that
-guarantees that the total weight of the removed edges is as small as possible.
-\dQuote{\code{approx_eades}} uses a fast (linear-time) approximation
-algorithm from Eades, Lin and Smyth. \dQuote{\code{exact}} is an alias to
-\dQuote{\code{exact_ip}} while \dQuote{\code{approx}} is an alias to
-\dQuote{\code{approx_eades}}.}
+\item{algo}{Specifies the algorithm to use.
+\dQuote{\code{exact_ip}} solves the feedback arc set problem with an exact integer programming algorithm that guarantees that the total weight of the removed edges is as small as possible.
+\dQuote{\code{approx_eades}} uses a fast (linear-time) approximation algorithm from Eades, Lin and Smyth.
+\dQuote{\code{exact}} is an alias to \dQuote{\code{exact_ip}} while \dQuote{\code{approx}} is an alias to \dQuote{\code{approx_eades}}.}
 }
 \value{
-An edge sequence (by default, but see the \code{return.vs.es} option
-of \code{\link[=igraph_options]{igraph_options()}}) containing the feedback arc set.
+An edge sequence (by default, but see the \code{return.vs.es} option of \code{\link[=igraph_options]{igraph_options()}}) containing the feedback arc set.
 }
 \description{
-A feedback arc set of a graph is a subset of edges whose removal breaks all
-cycles in the graph.
+A feedback arc set of a graph is a subset of edges whose removal breaks all cycles in the graph.
 }
 \details{
-Feedback arc sets are typically used in directed graphs. The removal of a
-feedback arc set of a directed graph ensures that the remaining graph is a
-directed acyclic graph (DAG). For undirected graphs, the removal of a feedback
-arc set ensures that the remaining graph is a forest (i.e. every connected
-component is a tree).
+Feedback arc sets are typically used in directed graphs.
+The removal of a feedback arc set of a directed graph ensures that the remaining graph is a directed acyclic graph (DAG).
+For undirected graphs,
+the removal of a feedback arc set ensures that the remaining graph is a forest (i.e. every connected component is a tree).
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_feedback_arc_set}{\code{feedback_arc_set()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

@@ -2,39 +2,31 @@
 % Please edit documentation in R/games.R
 \name{sample_correlated_gnp}
 \alias{sample_correlated_gnp}
-\title{Generate a new random graph from a given graph by randomly
-adding/removing edges}
+\title{Generate a new random graph from a given graph by randomly adding/removing edges}
 \usage{
 sample_correlated_gnp(old.graph, corr, ..., p = NULL, permutation = NULL)
 }
 \arguments{
 \item{old.graph}{The original graph.}
 
-\item{corr}{A scalar in the unit interval, the target Pearson
-correlation between the adjacency matrices of the original and the generated
-graph (the adjacency matrix being used as a vector).}
+\item{corr}{A scalar in the unit interval,
+the target Pearson correlation between the adjacency matrices of the original and the generated graph (the adjacency matrix being used as a vector).}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{p}{A numeric scalar, the probability of an edge between two
-vertices, it must in the open (0,1) interval. The default \code{NULL} uses the
-empirical edge density of the graph. If you are resampling an Erdős-Rényi graph and
-you know the original edge probability of the Erdős-Rényi model, you should
-supply that explicitly.}
+\item{p}{A numeric scalar, the probability of an edge between two vertices, it must in the open (0,1) interval.
+The default \code{NULL} uses the empirical edge density of the graph.
+If you are resampling an Erdős-Rényi graph and you know the original edge probability of the Erdős-Rényi model,
+you should supply that explicitly.}
 
-\item{permutation}{A numeric vector, a permutation vector that is
-applied on the vertices of the first graph, to get the second graph.  If
-\code{NULL}, the vertices are not permuted.}
+\item{permutation}{A numeric vector, a permutation vector that is applied on the vertices of the first graph,
+to get the second graph.  If \code{NULL}, the vertices are not permuted.}
 }
 \value{
-An unweighted graph of the same size as \code{old.graph} such
-that the correlation coefficient between the entries of the two
-adjacency matrices is \code{corr}.  Note each pair of corresponding
-matrix entries is a pair of correlated Bernoulli random variables.
+An unweighted graph of the same size as \code{old.graph} such that the correlation coefficient between the entries of the two adjacency matrices is \code{corr}.  Note each pair of corresponding matrix entries is a pair of correlated Bernoulli random variables.
 }
 \description{
-Sample a new graph by perturbing the adjacency matrix of a given graph
-and shuffling its vertices.
+Sample a new graph by perturbing the adjacency matrix of a given graph and shuffling its vertices.
 }
 \details{
 Please see the reference given below.

@@ -9,8 +9,8 @@ which_mutual(graph, eids = NULL, ..., loops = TRUE)
 \arguments{
 \item{graph}{The input graph.}
 
-\item{eids}{Edge sequence, the edges that will be probed. The default
-\code{NULL} includes all edges in the order of their IDs.}
+\item{eids}{Edge sequence, the edges that will be probed.
+The default \code{NULL} includes all edges in the order of their IDs.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
@@ -23,12 +23,10 @@ A logical vector of the same length as the number of edges supplied.
 This function checks the reciprocal pair of the supplied edges.
 }
 \details{
-In a directed graph an (A,B) edge is mutual if the graph also includes a
-(B,A) directed edge.
+In a directed graph an (A,B) edge is mutual if the graph also includes a (B,A) directed edge.
 
-Note that multi-graphs are not handled properly, i.e. if the graph contains
-two copies of (A,B) and one copy of (B,A), then these three edges are
-considered to be mutual.
+Note that multi-graphs are not handled properly, i.e. if the graph contains two copies of (A,B) and one copy of (B,A),
+then these three edges are considered to be mutual.
 
 Undirected graphs contain only mutual edges by definition.
 }
@@ -45,8 +43,7 @@ which_mutual(g)
 sum(which_mutual(g)) / 2 == dyad_census(g)$mut
 }
 \seealso{
-\code{\link[=reciprocity]{reciprocity()}}, \code{\link[=dyad_census]{dyad_census()}} if you just
-want some statistics about mutual edges.
+\code{\link[=reciprocity]{reciprocity()}}, \code{\link[=dyad_census]{dyad_census()}} if you just want some statistics about mutual edges.
 
 Other structural.properties:
 \code{\link[=bfs]{bfs()}},

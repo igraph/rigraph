@@ -15,16 +15,14 @@ graph.motifs.est(
 \arguments{
 \item{graph}{Graph object, the input graph.}
 
-\item{size}{The size of the motif, currently size 3 and 4 are supported
-in directed graphs and sizes 3-6 in undirected graphs.}
+\item{size}{The size of the motif, currently size 3 and 4 are supported in directed graphs and sizes 3-6 in undirected graphs.}
 
-\item{cut.prob}{Numeric vector giving the probabilities that the search
-graph is cut at a certain level. Its length should be the same as the size
-of the motif (the \code{size} argument).
+\item{cut.prob}{Numeric vector giving the probabilities that the search graph is cut at a certain level.
+Its length should be the same as the size of the motif (the \code{size} argument).
 If \verb{rep(0, size))}, the default, no cuts are made.}
 
-\item{sample.size}{The number of vertices to use as a starting point for
-finding motifs. Only used if the \code{sample} argument is \code{NULL}.
+\item{sample.size}{The number of vertices to use as a starting point for finding motifs.
+Only used if the \code{sample} argument is \code{NULL}.
 The default is \code{ceiling(vcount(graph) / 10)} .}
 
 \item{sample}{Vertices to use as a starting point for finding motifs.
@@ -33,8 +31,7 @@ Default: \code{NULL}.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.motifs.est()} was renamed to \code{\link[=sample_motifs]{sample_motifs()}} to create a more
-consistent API.
+\code{graph.motifs.est()} was renamed to \code{\link[=sample_motifs]{sample_motifs()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu_estimate}{\code{motifs_randesu_estimate()}}

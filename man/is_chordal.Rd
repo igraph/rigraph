@@ -14,19 +14,16 @@ is_chordal(
 )
 }
 \arguments{
-\item{graph}{The input graph. It may be directed, but edge directions are
-ignored, as the algorithm is defined for undirected graphs.}
+\item{graph}{The input graph.
+It may be directed, but edge directions are ignored, as the algorithm is defined for undirected graphs.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{alpha}{Numeric vector, the maximal chardinality ordering of the
-vertices. If it is \code{NULL}, then it is automatically calculated by
-calling \code{\link[=max_cardinality]{max_cardinality()}}, or from \code{alpham1} if
-that is given..}
+\item{alpha}{Numeric vector, the maximal chardinality ordering of the vertices.
+If it is \code{NULL}, then it is automatically calculated by calling \code{\link[=max_cardinality]{max_cardinality()}}, or from \code{alpham1} if that is given..}
 
-\item{alpham1}{Numeric vector, the inverse of \code{alpha}. If it is
-\code{NULL}, then it is automatically calculated by calling
-\code{\link[=max_cardinality]{max_cardinality()}}, or from \code{alpha}.}
+\item{alpham1}{Numeric vector, the inverse of \code{alpha}.
+If it is \code{NULL}, then it is automatically calculated by calling \code{\link[=max_cardinality]{max_cardinality()}}, or from \code{alpha}.}
 
 \item{fillin}{Logical, whether to calculate the fill-in edges.}
 
@@ -47,15 +44,13 @@ If requested, then the triangulated graph, an \code{igraph} object. \code{NULL} 
 }
 }
 \description{
-A graph is chordal (or triangulated) if each of its cycles of four or more
-nodes has a chord, which is an edge joining two nodes that are not adjacent
-in the cycle. An equivalent definition is that any chordless cycles have at
-most three nodes.
+A graph is chordal (or triangulated) if each of its cycles of four or more nodes has a chord,
+which is an edge joining two nodes that are not adjacent in the cycle.
+An equivalent definition is that any chordless cycles have at most three nodes.
 }
 \details{
-The chordality of the graph is decided by first performing maximum
-cardinality search on it (if the \code{alpha} and \code{alpham1} arguments
-are \code{NULL}), and then calculating the set of fill-in edges.
+The chordality of the graph is decided by first performing maximum cardinality search on it (if the \code{alpha} and \code{alpham1} arguments are \code{NULL}),
+and then calculating the set of fill-in edges.
 
 The set of fill-in edges is empty if and only if the graph is chordal.
 

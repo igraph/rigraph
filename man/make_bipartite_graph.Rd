@@ -10,43 +10,38 @@ make_bipartite_graph(types, edges, ..., directed = FALSE)
 bipartite_graph(types, edges, ..., directed = FALSE)
 }
 \arguments{
-\item{types}{A vector giving the vertex types. It will be coerced into
-boolean. The length of the vector gives the number of vertices in the graph.
-When the vector is a named vector, the names will be attached to the graph
-as the \code{name} vertex attribute.}
+\item{types}{A vector giving the vertex types.
+It will be coerced into boolean.
+The length of the vector gives the number of vertices in the graph.
+When the vector is a named vector, the names will be attached to the graph as the \code{name} vertex attribute.}
 
-\item{edges}{A vector giving the edges of the graph, the same way as for the
-regular \code{\link[=make_graph]{make_graph()}} function. It is checked that the edges indeed
-connect vertices of different kind, according to the supplied \code{types}
-vector. The vector may be a string vector if \code{types} is a named vector.}
+\item{edges}{A vector giving the edges of the graph, the same way as for the regular \code{\link[=make_graph]{make_graph()}} function.
+It is checked that the edges indeed connect vertices of different kind, according to the supplied \code{types} vector.
+The vector may be a string vector if \code{types} is a named vector.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{directed}{Logical, whether to create a directed graph. Note
-that by default undirected graphs are created, as this is more common for
-bipartite graphs.}
+\item{directed}{Logical, whether to create a directed graph.
+Note that by default undirected graphs are created, as this is more common for bipartite graphs.}
 }
 \value{
-\code{make_bipartite_graph()} returns a bipartite igraph graph. In other
-words, an igraph graph that has a vertex attribute named \code{type}.
+\code{make_bipartite_graph()} returns a bipartite igraph graph.
+In other words, an igraph graph that has a vertex attribute named \code{type}.
 
 \code{is_bipartite()} returns a Logical.
 }
 \description{
-A bipartite graph has two kinds of vertices and connections are only allowed
-between different kinds.
+A bipartite graph has two kinds of vertices and connections are only allowed between different kinds.
 }
 \details{
-Bipartite graphs have a \code{type} vertex attribute in igraph, this is
-boolean and \code{FALSE} for the vertices of the first kind and \code{TRUE}
-for vertices of the second kind.
+Bipartite graphs have a \code{type} vertex attribute in igraph,
+this is boolean and \code{FALSE} for the vertices of the first kind and \code{TRUE} for vertices of the second kind.
 
-\code{make_bipartite_graph()} basically does three things. First it checks the
-\code{edges} vector against the vertex \code{types}. Then it creates a graph
-using the \code{edges} vector and finally it adds the \code{types} vector as
-a vertex attribute called \code{type}. \code{edges} may contain strings as
-vertex names; in this case, \code{types} must be a named vector that specifies
-the type for each vertex name that occurs in \code{edges}.
+\code{make_bipartite_graph()} basically does three things.
+First it checks the \code{edges} vector against the vertex \code{types}.
+Then it creates a graph using the \code{edges} vector and finally it adds the \code{types} vector as a vertex attribute called \code{type}.
+\code{edges} may contain strings as vertex names; in this case,
+\code{types} must be a named vector that specifies the type for each vertex name that occurs in \code{edges}.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_create_bipartite}{\code{create_bipartite()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

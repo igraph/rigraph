@@ -7,25 +7,22 @@
 graph.bipartite(types, edges, directed = FALSE)
 }
 \arguments{
-\item{types}{A vector giving the vertex types. It will be coerced into
-boolean. The length of the vector gives the number of vertices in the graph.
-When the vector is a named vector, the names will be attached to the graph
-as the \code{name} vertex attribute.}
+\item{types}{A vector giving the vertex types.
+It will be coerced into boolean.
+The length of the vector gives the number of vertices in the graph.
+When the vector is a named vector, the names will be attached to the graph as the \code{name} vertex attribute.}
 
-\item{edges}{A vector giving the edges of the graph, the same way as for the
-regular \code{\link[=make_graph]{make_graph()}} function. It is checked that the edges indeed
-connect vertices of different kind, according to the supplied \code{types}
-vector. The vector may be a string vector if \code{types} is a named vector.}
+\item{edges}{A vector giving the edges of the graph, the same way as for the regular \code{\link[=make_graph]{make_graph()}} function.
+It is checked that the edges indeed connect vertices of different kind, according to the supplied \code{types} vector.
+The vector may be a string vector if \code{types} is a named vector.}
 
-\item{directed}{Logical, whether to create a directed graph. Note
-that by default undirected graphs are created, as this is more common for
-bipartite graphs.}
+\item{directed}{Logical, whether to create a directed graph.
+Note that by default undirected graphs are created, as this is more common for bipartite graphs.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.bipartite()} was renamed to \code{\link[=make_bipartite_graph]{make_bipartite_graph()}} to create a more
-consistent API.
+\code{graph.bipartite()} was renamed to \code{\link[=make_bipartite_graph]{make_bipartite_graph()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_create_bipartite}{\code{create_bipartite()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

@@ -13,18 +13,15 @@
 \item{...}{Additional arguments, passed to \code{[}.}
 }
 \value{
-The double bracket operator returns another vertex sequence,
-with meta-data (attribute) printing turned on. See details below.
+The double bracket operator returns another vertex sequence, with meta-data (attribute) printing turned on.
+See details below.
 }
 \description{
-The double bracket operator can be used on vertex sequences, to print
-the meta-data (vertex attributes) of the vertices in the sequence.
+The double bracket operator can be used on vertex sequences, to print the meta-data (vertex attributes) of the vertices in the sequence.
 }
 \details{
-Technically, when used with vertex sequences, the double bracket
-operator does exactly the same as the single bracket operator,
-but the resulting vertex sequence is printed differently: all
-attributes of the vertices in the sequence are printed as well.
+Technically, when used with vertex sequences, the double bracket operator does exactly the same as the single bracket operator,
+but the resulting vertex sequence is printed differently: all attributes of the vertices in the sequence are printed as well.
 
 See \code{\link{[.igraph.vs}} for more about indexing vertex sequences.
 }

@@ -7,8 +7,7 @@
 igraph_version()
 }
 \value{
-A character scalar, the igraph version string, with an attribute
-\code{"c_version"} giving the C library version string.
+A character scalar, the igraph version string, with an attribute \code{"c_version"} giving the C library version string.
 }
 \description{
 Returns the R package version,

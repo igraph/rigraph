@@ -3,8 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `igraph.options()` was renamed to [igraph_options()] to create a more
-#' consistent API.
+#' `igraph.options()` was renamed to [igraph_options()] to create a more consistent API.
 #' @inheritParams igraph_options
 #' @keywords internal
 #' @export
@@ -19,8 +18,7 @@ igraph.options <- function(...) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `getIgraphOpt()` was renamed to [igraph_opt()] to create a more
-#' consistent API.
+#' `getIgraphOpt()` was renamed to [igraph_opt()] to create a more consistent API.
 #' @inheritParams igraph_opt
 #' @keywords internal
 #' @export
@@ -104,17 +102,14 @@ igraph.pars.callbacks <- list("verbose" = igraph.pars.set.verbose)
 
 #' Parameters for the igraph package
 #'
-#' igraph has some parameters which (usually) affect the behavior of many
-#' functions. These can be set for the whole session via `igraph_options()`.
+#' igraph has some parameters which (usually) affect the behavior of many functions.
+#' These can be set for the whole session via `igraph_options()`.
 #'
-#' The parameter values set via a call to the `igraph_options()` function
-#' will remain in effect for the rest of the session, affecting the subsequent
-#' behaviour of the other functions of the `igraph` package for which the
-#' given parameters are relevant.
+#' The parameter values set via a call to the `igraph_options()` function will remain in effect for the rest of the session,
+#' affecting the subsequent behaviour of the other functions of the `igraph` package for which the given parameters are relevant.
 #'
-#' This offers the possibility of customizing the functioning of the
-#' `igraph` package, for instance by insertions of appropriate calls to
-#' `igraph_options()` in a load hook for package \pkg{igraph}.
+#' This offers the possibility of customizing the functioning of the `igraph` package,
+#' for instance by insertions of appropriate calls to `igraph_options()` in a load hook for package \pkg{igraph}.
 #'
 #' The currently used parameters in alphabetical order:
 #' \describe{
@@ -196,22 +191,18 @@ igraph.pars.callbacks <- list("verbose" = igraph.pars.set.verbose)
 #'   }
 #'
 #' @aliases igraph_options igraph_opt
-#' @param \dots A list may be given as the only argument, or any number of
-#'   arguments may be in the `name=value` form, or no argument at all may be
-#'   given. See the Value and Details sections for explanation.
+#' @param \dots A list may be given as the only argument, or any number of arguments may be in the `name=value` form,
+#'   or no argument at all may be given.
+#'   See the Value and Details sections for explanation.
 #' @param x A character string holding an option name.
-#' @param default If the specified option is not set in the options list, this
-#'   value is returned. This facilitates retrieving an option and checking
-#'   whether it is set and setting it separately if not.
-#' @return `igraph_options()` returns a list with the old values of the
-#'   updated parameters, invisibly. Without any arguments, it returns the
-#'   values of all options.
+#' @param default If the specified option is not set in the options list, this value is returned.
+#'   This facilitates retrieving an option and checking whether it is set and setting it separately if not.
+#' @return `igraph_options()` returns a list with the old values of the updated parameters, invisibly.
+#'   Without any arguments, it returns the values of all options.
 #'
-#'   For `igraph_opt()`, the current value set for option `x`, or
-#'   `NULL` if the option is unset.
+#'   For `igraph_opt()`, the current value set for option `x`, or `NULL` if the option is unset.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso `igraph_options()` is similar to [options()] and
-#' `igraph_opt()` is similar to [getOption()].
+#' @seealso `igraph_options()` is similar to [options()] and `igraph_opt()` is similar to [getOption()].
 #' @keywords graphs
 #' @examples
 #'

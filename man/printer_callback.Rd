@@ -10,8 +10,8 @@ printer_callback(fun)
 \item{fun}{The function to use as a printer callback function.}
 }
 \description{
-A printer callback function is a function can performs the actual
-printing. It has a number of subcommands, that are called by
+A printer callback function is a function can performs the actual printing.
+It has a number of subcommands, that are called by
 the \code{printer} package, in a form \preformatted{
     printer_callback("subcommand", argument1, argument2, ...)
 } See the examples below.

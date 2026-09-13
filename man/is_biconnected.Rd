@@ -7,7 +7,8 @@
 is_biconnected(graph)
 }
 \arguments{
-\item{graph}{The input graph. Edge directions are ignored.}
+\item{graph}{The input graph.
+Edge directions are ignored.}
 }
 \value{
 Logical, \code{TRUE} if the graph is biconnected.
@@ -18,13 +19,11 @@ Logical, \code{TRUE} if the graph is biconnected.
 Tests whether a graph is biconnected.
 }
 \details{
-A graph is biconnected if the removal of any single vertex (and its adjacent
-edges) does not disconnect it.
+A graph is biconnected if the removal of any single vertex (and its adjacent edges) does not disconnect it.
 
 igraph does not consider single-vertex graphs biconnected.
 
-Note that some authors do not consider the graph consisting of
-two connected vertices as biconnected, however, igraph does.
+Note that some authors do not consider the graph consisting of two connected vertices as biconnected, however, igraph does.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_biconnected}{\code{is_biconnected()}}

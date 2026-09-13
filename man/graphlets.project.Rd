@@ -13,26 +13,23 @@ graphlets.project(
 )
 }
 \arguments{
-\item{graph}{The input graph, edge directions are ignored. Only simple graph
-(i.e. graphs without self-loops and multiple edges) are supported.}
+\item{graph}{The input graph, edge directions are ignored.
+Only simple graph (i.e. graphs without self-loops and multiple edges) are supported.}
 
-\item{weights}{Edge weights. If the graph has a \code{weight} edge attribute
-and this argument is \code{NULL} (the default), then the \code{weight} edge
-attribute is used.}
+\item{weights}{Edge weights.
+If the graph has a \code{weight} edge attribute and this argument is \code{NULL} (the default), then the \code{weight} edge attribute is used.}
 
-\item{cliques}{A list of vertex IDs, the graphlet basis to use for the
-projection.}
+\item{cliques}{A list of vertex IDs, the graphlet basis to use for the projection.}
 
 \item{niter}{Integer scalar, the number of iterations to perform.}
 
-\item{Mu}{Starting weights for the projection. The default \code{NULL} uses a
-weight of one for each clique.}
+\item{Mu}{Starting weights for the projection.
+The default \code{NULL} uses a weight of one for each clique.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graphlets.project()} was renamed to \code{\link[=graphlet_proj]{graphlet_proj()}} to create a more
-consistent API.
+\code{graphlets.project()} was renamed to \code{\link[=graphlet_proj]{graphlet_proj()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Graphlets.html#igraph_graphlets_project}{\code{graphlets_project()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

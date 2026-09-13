@@ -7,19 +7,18 @@
 dendPlot(x, mode = igraph_opt("dend.plot.type"), ...)
 }
 \arguments{
-\item{x}{An object containing the community structure of a graph. See
-\code{\link[=communities]{communities()}} for details.}
+\item{x}{An object containing the community structure of a graph.
+See \code{\link[=communities]{communities()}} for details.}
 
-\item{mode}{Which dendrogram plotting function to use. See details below.
+\item{mode}{Which dendrogram plotting function to use.
+See details below.
 The default \code{NULL} uses the \code{dend.plot.type} igraph option.}
 
-\item{...}{Additional arguments to supply to the dendrogram plotting
-function.}
+\item{...}{Additional arguments to supply to the dendrogram plotting function.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{dendPlot()} was renamed to \code{\link[=plot_dendrogram]{plot_dendrogram()}} to create a more
-consistent API.
+\code{dendPlot()} was renamed to \code{\link[=plot_dendrogram]{plot_dendrogram()}} to create a more consistent API.
 }
 \keyword{internal}

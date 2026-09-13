@@ -9,16 +9,14 @@ delete.edges(graph, edges)
 \arguments{
 \item{graph}{The input graph.}
 
-\item{edges}{The edges to remove, specified as an edge sequence. Typically
-this is either a numeric vector containing edge IDs, or a character vector
-containing the IDs or names of the source and target vertices, separated by
-\code{|}}
+\item{edges}{The edges to remove, specified as an edge sequence.
+Typically this is either a numeric vector containing edge IDs,
+or a character vector containing the IDs or names of the source and target vertices, separated by \code{|}}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{delete.edges()} was renamed to \code{\link[=delete_edges]{delete_edges()}} to create a more
-consistent API.
+\code{delete.edges()} was renamed to \code{\link[=delete_edges]{delete_edges()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_delete_edges}{\code{delete_edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

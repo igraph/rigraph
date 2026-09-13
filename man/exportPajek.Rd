@@ -7,35 +7,32 @@
 exportPajek(blocks, graph, file, project.file = TRUE)
 }
 \arguments{
-\item{graph}{For \code{cohesive_blocks()} a graph object of class
-\code{igraph}. It must be undirected and simple. (See
-\code{\link[=is_simple]{is_simple()}}.)
+\item{graph}{For \code{cohesive_blocks()} a graph object of class \code{igraph}.
+It must be undirected and simple.
+(See \code{\link[=is_simple]{is_simple()}}.)
 
-For \code{graphs_from_cohesive_blocks()} and \code{export_pajek()} the same graph must be
-supplied whose cohesive block structure is given in the \code{blocks()}
-argument.}
+For \code{graphs_from_cohesive_blocks()} and \code{export_pajek()} the same graph must be supplied whose cohesive block structure is given in the \code{blocks()} argument.}
 
 \item{file}{Defines the file (or connection) the Pajek file is written to.
 
-If the \code{project.file} argument is \code{TRUE}, then it can be a
-filename (with extension), a file object, or in general any king of
-connection object. The file/connection will be opened if it wasn't already.
+If the \code{project.file} argument is \code{TRUE}, then it can be a filename (with extension), a file object,
+or in general any king of connection object.
+The file/connection will be opened if it wasn't already.
 
-If the \code{project.file} argument is \code{FALSE}, then several files are
-created and \code{file} must be a character scalar containing the base name
-of the files, without extension. (But it can contain the path to the files.)
+If the \code{project.file} argument is \code{FALSE},
+then several files are created and \code{file} must be a character scalar containing the base name of the files, without extension.
+(But it can contain the path to the files.)
 
 See also details below.}
 
-\item{project.file}{Logical, whether to create a single Pajek project
-file containing all the data, or to create separated files for each item.
+\item{project.file}{Logical, whether to create a single Pajek project file containing all the data,
+or to create separated files for each item.
 See details below.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{exportPajek()} was renamed to \code{\link[=export_pajek]{export_pajek()}} to create a more
-consistent API.
+\code{exportPajek()} was renamed to \code{\link[=export_pajek]{export_pajek()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_edgelist}{\code{write_graph_edgelist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_pajek}{\code{write_graph_pajek()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_graphml}{\code{write_graph_graphml()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_gml}{\code{write_graph_gml()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_dot}{\code{write_graph_dot()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_leda}{\code{write_graph_leda()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

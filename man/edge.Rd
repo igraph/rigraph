@@ -13,25 +13,19 @@ edges(...)
 \item{...}{See details below.}
 }
 \value{
-A special object that can be used with together with
-igraph graphs and the plus and minus operators.
+A special object that can be used with together with igraph graphs and the plus and minus operators.
 }
 \description{
-This is a helper function that simplifies adding and deleting
-edges to/from graphs.
+This is a helper function that simplifies adding and deleting edges to/from graphs.
 }
 \details{
 \code{edges()} is an alias for \code{edge()}.
 
-When adding edges via \code{+}, all unnamed arguments of
-\code{edge()} (or \code{edges()}) are concatenated, and then passed to
-\code{\link[=add_edges]{add_edges()}}. They are interpreted as pairs of vertex IDs,
-and an edge will added between each pair. Named arguments will be
-used as edge attributes for the new edges.
+When adding edges via \code{+}, all unnamed arguments of \code{edge()} (or \code{edges()}) are concatenated, and then passed to \code{\link[=add_edges]{add_edges()}}.
+They are interpreted as pairs of vertex IDs, and an edge will added between each pair.
+Named arguments will be used as edge attributes for the new edges.
 
-When deleting edges via \code{-}, all arguments of \code{edge()} (or
-\code{edges()}) are concatenated via \code{c()} and passed to
-\code{\link[=delete_edges]{delete_edges()}}.
+When deleting edges via \code{-}, all arguments of \code{edge()} (or \code{edges()}) are concatenated via \code{c()} and passed to \code{\link[=delete_edges]{delete_edges()}}.
 }
 \examples{
 g <- make_ring(10) \%>\%

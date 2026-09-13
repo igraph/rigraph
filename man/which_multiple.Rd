@@ -24,8 +24,8 @@ count_loops(graph)
 \arguments{
 \item{graph}{The input graph.}
 
-\item{eids}{The edges to which the query is restricted. The default
-\code{NULL} selects all edges.}
+\item{eids}{The edges to which the query is restricted.
+The default \code{NULL} selects all edges.}
 }
 \value{
 \code{any_loop()} and \code{any_multiple()} return a Logical.
@@ -34,9 +34,9 @@ count_loops(graph)
 \code{count_multiple()} returns a numeric vector.
 }
 \description{
-A loop edge is an edge from a vertex to itself. An edge is a multiple edge
-if it has exactly the same head and tail vertices as another edge. A graph
-without multiple and loop edges is called a simple graph.
+A loop edge is an edge from a vertex to itself.
+An edge is a multiple edge if it has exactly the same head and tail vertices as another edge.
+A graph without multiple and loop edges is called a simple graph.
 }
 \details{
 \code{any_loop()} decides whether the graph has any loop edges.
@@ -47,19 +47,16 @@ without multiple and loop edges is called a simple graph.
 
 \code{any_multiple()} decides whether the graph has any multiple edges.
 
-\code{which_multiple()} decides whether the edges of the graph are multiple
-edges.
+\code{which_multiple()} decides whether the edges of the graph are multiple edges.
 
 \code{count_multiple()} counts the multiplicity of each edge of a graph.
 
-Note that the semantics for \code{which_multiple()} and \code{count_multiple()} is
-different. \code{which_multiple()} gives \code{TRUE} for all occurrences of a
-multiple edge except for one. I.e. if there are three \code{i-j} edges in the
-graph then \code{which_multiple()} returns \code{TRUE} for only two of them while
-\code{count_multiple()} returns \sQuote{3} for all three.
+Note that the semantics for \code{which_multiple()} and \code{count_multiple()} is different.
+\code{which_multiple()} gives \code{TRUE} for all occurrences of a multiple edge except for one.
+I.e. if there are three \code{i-j} edges in the graph then \code{which_multiple()} returns \code{TRUE} for only two of them
+while \code{count_multiple()} returns \sQuote{3} for all three.
 
-See the examples for getting rid of multiple edges while keeping their
-original multiplicity as an edge attribute.
+See the examples for getting rid of multiple edges while keeping their original multiplicity as an edge attribute.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_multiple}{\code{is_multiple()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_has_multiple}{\code{has_multiple()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_count_multiple}{\code{count_multiple()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_loop}{\code{is_loop()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_has_loop}{\code{has_loop()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_count_loops}{\code{count_loops()}}

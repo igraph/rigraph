@@ -3,8 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.incidence()` was renamed to [graph_from_biadjacency_matrix()] to create a more
-#' consistent API.
+#' `graph.incidence()` was renamed to [graph_from_biadjacency_matrix()] to create a more consistent API.
 #' @inheritParams graph_from_biadjacency_matrix
 #' @keywords internal
 #' @export
@@ -124,53 +123,41 @@ graph_incidence_build <- function(
 
 #' Create graphs from a bipartite adjacency matrix
 #'
-#' `graph_from_biadjacency_matrix()` creates a bipartite igraph graph from an incidence
-#' matrix.
+#' `graph_from_biadjacency_matrix()` creates a bipartite igraph graph from an incidence matrix.
 #'
 #' Bipartite graphs have a \sQuote{`type`} vertex attribute in igraph,
-#' this is boolean and `FALSE` for the vertices of the first kind and
-#' `TRUE` for vertices of the second kind.
+#' this is boolean and `FALSE` for the vertices of the first kind and `TRUE` for vertices of the second kind.
 #'
-#' `graph_from_biadjacency_matrix()` can operate in two modes, depending on the
-#' `multiple` argument. If it is `FALSE` then a single edge is
-#' created for every non-zero element in the bipartite adjacency matrix. If
-#' `multiple` is `TRUE`, then the matrix elements are rounded up to
-#' the closest non-negative integer to get the number of edges to create
-#' between a pair of vertices.
+#' `graph_from_biadjacency_matrix()` can operate in two modes, depending on the `multiple` argument.
+#' If it is `FALSE` then a single edge is created for every non-zero element in the bipartite adjacency matrix.
+#' If `multiple` is `TRUE`,
+#' then the matrix elements are rounded up to the closest non-negative integer to get the number of edges to create between a pair of vertices.
 #'
-#' @param incidence The input bipartite adjacency matrix. It can also be a sparse matrix
-#'   from the `Matrix` package.
+#' @param incidence The input bipartite adjacency matrix.
+#'   It can also be a sparse matrix from the `Matrix` package.
 #' @inheritParams rlang::args_dots_empty
 #' @param directed Logical, whether to create a directed graph.
-#' @param mode A character constant, defines the direction of the edges in
-#'   directed graphs, ignored for undirected graphs. If \sQuote{`out`}, then
-#'   edges go from vertices of the first kind (corresponding to rows in the
-#'   bipartite adjacency matrix) to vertices of the second kind (columns in the incidence
-#'   matrix). If \sQuote{`in`}, then the opposite direction is used. If
-#'   \sQuote{`all`} or \sQuote{`total`}, then mutual edges are created.
-#' @param multiple Logical, specifies how to interpret the matrix
-#'   elements. See details below.
-#' @param weighted This argument specifies whether to create a weighted graph
-#'   from the bipartite adjacency matrix. If it is `NULL` then an unweighted graph is
-#'   created and the `multiple` argument is used to determine the edges of
-#'   the graph. If it is a character constant then for every non-zero matrix
-#'   entry an edge is created and the value of the entry is added as an edge
-#'   attribute named by the `weighted` argument. If it is `TRUE` then a
-#'   weighted graph is created and the name of the edge attribute will be
-#'   \sQuote{`weight`}.
+#' @param mode A character constant, defines the direction of the edges in directed graphs, ignored for undirected graphs.
+#'   If \sQuote{`out`},
+#'   then edges go from vertices of the first kind (corresponding to rows in the bipartite adjacency matrix) to vertices of the second kind (columns in the incidence matrix).
+#'   If \sQuote{`in`}, then the opposite direction is used.
+#'   If \sQuote{`all`} or \sQuote{`total`}, then mutual edges are created.
+#' @param multiple Logical, specifies how to interpret the matrix elements.
+#'   See details below.
+#' @param weighted This argument specifies whether to create a weighted graph from the bipartite adjacency matrix.
+#'   If it is `NULL` then an unweighted graph is created and the `multiple` argument is used to determine the edges of the graph.
+#'   If it is a character constant then for every non-zero matrix entry an edge is created and the value of the entry is added as an edge attribute named by the `weighted` argument.
+#'   If it is `TRUE` then a weighted graph is created and the name of the edge attribute will be \sQuote{`weight`}.
 #' @param add.names A character constant, `NA` or `NULL`.
-#'   `graph_from_biadjacency_matrix()` can add the row and column names of the incidence
-#'   matrix as vertex attributes. If this argument is `NULL` (the default)
-#'   and the bipartite adjacency matrix has both row and column names, then these are added
-#'   as the \sQuote{`name`} vertex attribute. If you want a different vertex
-#'   attribute for this, then give the name of the attributes as a character
-#'   string. If this argument is `NA`, then no vertex attributes (other than
-#'   type) will be added.
-#' @return A bipartite igraph graph. In other words, an igraph graph that has a
-#'   vertex attribute `type`.
+#'   `graph_from_biadjacency_matrix()` can add the row and column names of the incidence matrix as vertex attributes.
+#'   If this argument is `NULL` (the default) and the bipartite adjacency matrix has both row and column names,
+#'   then these are added as the \sQuote{`name`} vertex attribute.
+#'   If you want a different vertex attribute for this, then give the name of the attributes as a character string.
+#'   If this argument is `NA`, then no vertex attributes (other than type) will be added.
+#' @return A bipartite igraph graph.
+#'   In other words, an igraph graph that has a vertex attribute `type`.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [make_bipartite_graph()] for another way to create bipartite
-#' graphs
+#' @seealso [make_bipartite_graph()] for another way to create bipartite graphs
 #' @keywords graphs
 #' @examples
 #'
@@ -180,9 +167,7 @@ graph_incidence_build <- function(
 #' graph_from_biadjacency_matrix(inc)
 #'
 #' @details
-#' Some authors refer to the bipartite adjacency matrix as the
-#' "bipartite incidence matrix". igraph 1.6.0 and later does not use
-#' this naming to avoid confusion with the edge-vertex incidence matrix.
+#' Some authors refer to the bipartite adjacency matrix as the "bipartite incidence matrix". igraph 1.6.0 and later does not use this naming to avoid confusion with the edge-vertex incidence matrix.
 #' @family biadjacency
 #' @export
 graph_from_biadjacency_matrix <- function(
@@ -307,14 +292,11 @@ graph_from_biadjacency_matrix <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph_from_incidence_matrix()` was renamed to [graph_from_biadjacency_matrix()] to create a more
-#' consistent API.
+#' `graph_from_incidence_matrix()` was renamed to [graph_from_biadjacency_matrix()] to create a more consistent API.
 #' @inheritParams graph_from_biadjacency_matrix
 #' @keywords internal
 #' @details
-#' Some authors refer to the bipartite adjacency matrix as the
-#' "bipartite incidence matrix". igraph 1.6.0 and later does not use
-#' this naming to avoid confusion with the edge-vertex incidence matrix.
+#' Some authors refer to the bipartite adjacency matrix as the "bipartite incidence matrix". igraph 1.6.0 and later does not use this naming to avoid confusion with the edge-vertex incidence matrix.
 #' @export
 from_incidence_matrix <- function(...) {
   # nocov start
@@ -330,14 +312,11 @@ from_incidence_matrix <- function(...) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph_from_incidence_matrix()` was renamed to [graph_from_biadjacency_matrix()] to create a more
-#' consistent API.
+#' `graph_from_incidence_matrix()` was renamed to [graph_from_biadjacency_matrix()] to create a more consistent API.
 #' @inheritParams graph_from_biadjacency_matrix
 #' @keywords internal
 #' @details
-#' Some authors refer to the bipartite adjacency matrix as the
-#' "bipartite incidence matrix". igraph 1.6.0 and later does not use
-#' this naming to avoid confusion with the edge-vertex incidence matrix.
+#' Some authors refer to the bipartite adjacency matrix as the "bipartite incidence matrix". igraph 1.6.0 and later does not use this naming to avoid confusion with the edge-vertex incidence matrix.
 #' @export
 graph_from_incidence_matrix <- function(...) {
   # nocov start

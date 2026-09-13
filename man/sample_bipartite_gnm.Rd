@@ -38,16 +38,15 @@ sample_bipartite_gnp(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{directed}{Logical, whether to create a directed graph. See also
-the \code{mode} argument.}
+\item{directed}{Logical, whether to create a directed graph.
+See also the \code{mode} argument.}
 
-\item{mode}{Character scalar, specifies how to direct the edges in directed
-graphs. If it is \sQuote{out}, then directed edges point from bottom
-vertices to top vertices. If it is \sQuote{in}, edges point from top
-vertices to bottom vertices. \sQuote{out} and \sQuote{in} do not generate
-mutual edges. If this argument is \sQuote{all}, then each edge direction is
-considered independently and mutual edges might be generated. This argument
-is ignored for undirected graphs.}
+\item{mode}{Character scalar, specifies how to direct the edges in directed graphs.
+If it is \sQuote{out}, then directed edges point from bottom vertices to top vertices.
+If it is \sQuote{in}, edges point from top vertices to bottom vertices.
+\sQuote{out} and \sQuote{in} do not generate mutual edges.
+If this argument is \sQuote{all}, then each edge direction is considered independently and mutual edges might be generated.
+This argument is ignored for undirected graphs.}
 
 \item{p}{Real scalar, connection probability for \eqn{G(n,p)} graphs.}
 }
@@ -55,11 +54,11 @@ is ignored for undirected graphs.}
 Generate bipartite graphs using the Erdős-Rényi model
 }
 \details{
-Similarly to unipartite (one-mode) networks, we can define the \eqn{G(n,p)}, and
-\eqn{G(n,m)} graph classes for bipartite graphs, via their generating process.
-In \eqn{G(n,p)} every possible edge between top and bottom vertices is realized
-with probability \eqn{p}, independently of the rest of the edges. In \eqn{G(n,m)}, we
-uniformly choose \eqn{m} edges to realize.
+Similarly to unipartite (one-mode) networks, we can define the \eqn{G(n,p)}, and \eqn{G(n,m)} graph classes for bipartite graphs,
+via their generating process.
+In \eqn{G(n,p)} every possible edge between top and bottom vertices is realized with probability \eqn{p},
+independently of the rest of the edges.
+In \eqn{G(n,m)}, we uniformly choose \eqn{m} edges to realize.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_bipartite_game_gnm}{\code{bipartite_game_gnm()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_bipartite_game_gnp}{\code{bipartite_game_gnp()}}

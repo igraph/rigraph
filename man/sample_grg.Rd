@@ -12,30 +12,25 @@ grg(nodes, radius, ..., torus = FALSE, coords = FALSE)
 \arguments{
 \item{nodes}{The number of vertices in the graph.}
 
-\item{radius}{The radius within which the vertices will be connected by an
-edge.}
+\item{radius}{The radius within which the vertices will be connected by an edge.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{torus}{Logical, whether to use a torus instead of a square.}
 
-\item{coords}{Logical, whether to add the positions of the vertices
-as vertex attributes called \sQuote{\code{x}} and \sQuote{\code{y}}.}
+\item{coords}{Logical, whether to add the positions of the vertices as vertex attributes called \sQuote{\code{x}} and \sQuote{\code{y}}.}
 }
 \value{
-A graph object. If \code{coords} is \code{TRUE} then with vertex
-attributes \sQuote{\code{x}} and \sQuote{\code{y}}.
+A graph object.
+If \code{coords} is \code{TRUE} then with vertex attributes \sQuote{\code{x}} and \sQuote{\code{y}}.
 }
 \description{
-Generate a random graph based on the distance of random point on a unit
-square
+Generate a random graph based on the distance of random point on a unit square
 }
 \details{
-First a number of points are dropped on a unit square, these points
-correspond to the vertices of the graph to create. Two points will be
-connected with an undirected edge if they are closer to each other in
-Euclidean norm than a given radius. If the \code{torus} argument is
-\code{TRUE} then a unit area torus is used instead of a square.
+First a number of points are dropped on a unit square, these points correspond to the vertices of the graph to create.
+Two points will be connected with an undirected edge if they are closer to each other in Euclidean norm than a given radius.
+If the \code{torus} argument is \code{TRUE} then a unit area torus is used instead of a square.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

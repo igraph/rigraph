@@ -10,15 +10,13 @@ vertex_attr(graph, name, index = NULL) <- value
 \arguments{
 \item{graph}{The graph.}
 
-\item{name}{The name of the vertex attribute to set. If missing,
-then \code{value} must be a named list, and its entries are
-set as vertex attributes.}
+\item{name}{The name of the vertex attribute to set.
+If missing, then \code{value} must be a named list, and its entries are set as vertex attributes.}
 
-\item{index}{An optional vertex sequence to set the attributes
-of a subset of vertices. The default \code{NULL} selects all vertices.}
+\item{index}{An optional vertex sequence to set the attributes of a subset of vertices.
+The default \code{NULL} selects all vertices.}
 
-\item{value}{The new value of the attribute(s) for all
-(or \code{index}) vertices.}
+\item{value}{The new value of the attribute(s) for all (or \code{index}) vertices.}
 }
 \value{
 The graph, with the vertex attribute(s) added or set.

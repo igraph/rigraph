@@ -15,27 +15,25 @@ graph.neighborhood(
 \arguments{
 \item{graph}{The input graph.}
 
-\item{order}{Integer giving the order of the neighborhood. Negative values
-indicate an infinite order.}
+\item{order}{Integer giving the order of the neighborhood.
+Negative values indicate an infinite order.}
 
 \item{nodes}{The vertices for which the calculation is performed.
 The default \code{NULL} selects all vertices.}
 
-\item{mode}{Character constant, it specifies how to use the direction of
-the edges if a directed graph is analyzed. For \sQuote{out} only the
-outgoing edges are followed, so all vertices reachable from the source
-vertex in at most \code{order} steps are counted. For \sQuote{"in"} all
-vertices from which the source vertex is reachable in at most \code{order}
-steps are counted. \sQuote{"all"} ignores the direction of the edges. This
-argument is ignored for undirected graphs.}
+\item{mode}{Character constant, it specifies how to use the direction of the edges if a directed graph is analyzed.
+For \sQuote{out} only the outgoing edges are followed,
+so all vertices reachable from the source vertex in at most \code{order} steps are counted.
+For \sQuote{"in"} all vertices from which the source vertex is reachable in at most \code{order} steps are counted.
+\sQuote{"all"} ignores the direction of the edges.
+This argument is ignored for undirected graphs.}
 
 \item{mindist}{The minimum distance to include the vertex in the result.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.neighborhood()} was renamed to \code{\link[=make_ego_graph]{make_ego_graph()}} to create a more
-consistent API.
+\code{graph.neighborhood()} was renamed to \code{\link[=make_ego_graph]{make_ego_graph()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

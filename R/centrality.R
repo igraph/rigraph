@@ -3,8 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `subgraph.centrality()` was renamed to [subgraph_centrality()] to create a more
-#' consistent API.
+#' `subgraph.centrality()` was renamed to [subgraph_centrality()] to create a more consistent API.
 #' @inheritParams subgraph_centrality
 #' @keywords internal
 #' @export
@@ -23,8 +22,7 @@ subgraph.centrality <- function(graph, diag = FALSE) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `page.rank()` was renamed to [page_rank()] to create a more
-#' consistent API.
+#' `page.rank()` was renamed to [page_rank()] to create a more consistent API.
 #' @inheritParams page_rank
 #' @keywords internal
 #' @export
@@ -57,8 +55,7 @@ page.rank <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `hub.score()` was renamed to [hub_score()] to create a more
-#' consistent API.
+#' `hub.score()` was renamed to [hub_score()] to create a more consistent API.
 #' @inheritParams hub_score
 #' @keywords internal
 #' @export
@@ -76,8 +73,7 @@ hub.score <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `authority.score()` was renamed to [authority_score()] to create a more
-#' consistent API.
+#' `authority.score()` was renamed to [authority_score()] to create a more consistent API.
 #' @inheritParams authority_score
 #' @keywords internal
 #' @export
@@ -95,8 +91,7 @@ authority.score <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.strength()` was renamed to [strength()] to create a more
-#' consistent API.
+#' `graph.strength()` was renamed to [strength()] to create a more consistent API.
 #' @inheritParams strength
 #' @keywords internal
 #' @export
@@ -123,8 +118,7 @@ graph.strength <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.eigen()` was renamed to [spectrum()] to create a more
-#' consistent API.
+#' `graph.eigen()` was renamed to [spectrum()] to create a more consistent API.
 #' @inheritParams spectrum
 #' @keywords internal
 #' @export
@@ -156,8 +150,7 @@ graph.eigen <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.diversity()` was renamed to [diversity()] to create a more
-#' consistent API.
+#' `graph.diversity()` was renamed to [diversity()] to create a more consistent API.
 #' @inheritParams diversity
 #' @keywords internal
 #' @export
@@ -172,8 +165,7 @@ graph.diversity <- function(graph, weights = NULL, vids = V(graph)) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `evcent()` was renamed to [eigen_centrality()] to create a more
-#' consistent API.
+#' `evcent()` was renamed to [eigen_centrality()] to create a more consistent API.
 #' @inheritParams eigen_centrality
 #' @keywords internal
 #' @export
@@ -200,8 +192,7 @@ evcent <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `edge.betweenness()` was renamed to [edge_betweenness()] to create a more
-#' consistent API.
+#' `edge.betweenness()` was renamed to [edge_betweenness()] to create a more consistent API.
 #' @inheritParams edge_betweenness
 #' @keywords internal
 #' @export
@@ -228,8 +219,7 @@ edge.betweenness <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `bonpow()` was renamed to [power_centrality()] to create a more
-#' consistent API.
+#' `bonpow()` was renamed to [power_centrality()] to create a more consistent API.
 #' @inheritParams power_centrality
 #' @keywords internal
 #' @export
@@ -260,8 +250,7 @@ bonpow <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `alpha.centrality()` was renamed to [alpha_centrality()] to create a more
-#' consistent API.
+#' `alpha.centrality()` was renamed to [alpha_centrality()] to create a more consistent API.
 #' @inheritParams alpha_centrality
 #' @keywords internal
 #' @export
@@ -315,8 +304,7 @@ alpha.centrality <- function(
 #' `r lifecycle::badge("deprecated")`
 #'
 #' Use [betweenness()] with the `cutoff` argument instead.
-#' @param vids The vertices for which the vertex betweenness estimation will be
-#'   calculated.
+#' @param vids The vertices for which the vertex betweenness estimation will be calculated.
 #' @inheritParams betweenness
 #' @keywords internal
 #' @export
@@ -349,8 +337,7 @@ betweenness.estimate <- estimate_betweenness
 
 #' Vertex and edge betweenness centrality
 #'
-#' The vertex and edge betweenness are (roughly) defined by the number of
-#' geodesics (shortest paths) going through a vertex or an edge.
+#' The vertex and edge betweenness are (roughly) defined by the number of geodesics (shortest paths) going through a vertex or an edge.
 #'
 #' The vertex betweenness of vertex `v` is defined by
 #'
@@ -361,22 +348,17 @@ betweenness.estimate <- estimate_betweenness
 #'
 #' \deqn{\sum_{i\ne j} g_{iej}/g_{ij}.}{sum( g_iej / g_ij, i!=j).}
 #'
-#' `betweenness()` calculates vertex betweenness, `edge_betweenness()`
-#' calculates edge betweenness.
+#' `betweenness()` calculates vertex betweenness, `edge_betweenness()` calculates edge betweenness.
 #'
-#' Here \eqn{g_{ij}}{g_ij} is the total number of shortest paths between vertices
-#' \eqn{i} and \eqn{j} while \eqn{g_{ivj}} is the number of those shortest paths
-#' which pass though vertex \eqn{v}.
+#' Here \eqn{g_{ij}}{g_ij} is the total number of shortest paths between vertices \eqn{i} and \eqn{j}
+#' while \eqn{g_{ivj}} is the number of those shortest paths which pass though vertex \eqn{v}.
 #'
-#' Both functions allow you to consider only paths of length `cutoff` or
-#' smaller; this can be run for larger graphs, as the running time is not
-#' quadratic (if `cutoff` is small). If `cutoff` is negative (the default),
-#' then the function calculates the exact betweenness scores. Since igraph 1.6.0,
-#' a `cutoff` value of zero is treated literally, i.e. paths of length larger
-#' than zero are ignored.
+#' Both functions allow you to consider only paths of length `cutoff` or smaller; this can be run for larger graphs,
+#' as the running time is not quadratic (if `cutoff` is small).
+#' If `cutoff` is negative (the default), then the function calculates the exact betweenness scores.
+#' Since igraph 1.6.0, a `cutoff` value of zero is treated literally, i.e. paths of length larger than zero are ignored.
 #'
-#' For calculating the betweenness a similar algorithm to the one proposed by
-#' Brandes (see References) is used.
+#' For calculating the betweenness a similar algorithm to the one proposed by Brandes (see References) is used.
 #'
 #' @aliases betweenness.estimate
 #' @aliases edge.betweenness.estimate
@@ -384,33 +366,25 @@ betweenness.estimate <- estimate_betweenness
 #' @param v The vertices for which the vertex betweenness will be calculated.
 #'   The default `NULL` selects all vertices.
 #' @inheritParams rlang::args_dots_empty
-#' @param directed Logical, whether directed paths should be considered while
-#'   determining the shortest paths.
-#' @param weights Optional positive weight vector for calculating weighted
-#'   betweenness. If the graph has a `weight` edge attribute, then this is
-#'   used by default. Weights are used to calculate weighted shortest paths,
-#'   so they are interpreted as distances.
-#' @param normalized Logical, whether to normalize the betweenness
-#'   scores. If `TRUE`, then the results are normalized by the number of ordered
-#'   or unordered vertex pairs in directed and undirected graphs, respectively.
+#' @param directed Logical, whether directed paths should be considered while determining the shortest paths.
+#' @param weights Optional positive weight vector for calculating weighted betweenness.
+#'   If the graph has a `weight` edge attribute, then this is used by default.
+#'   Weights are used to calculate weighted shortest paths, so they are interpreted as distances.
+#' @param normalized Logical, whether to normalize the betweenness scores.
+#'   If `TRUE`,
+#'   then the results are normalized by the number of ordered or unordered vertex pairs in directed and undirected graphs, respectively.
 #'   In an undirected graph,
 #'   \deqn{B^n=\frac{2B}{(n-1)(n-2)},}{Bnorm=2 B / ((n-1)(n-2)),}
-#'   where
-#'   \eqn{B^n}{Bnorm} is the normalized, \eqn{B} the raw betweenness, and
-#'   \eqn{n} is the number of vertices in the graph. Note that the same
-#'   normalization factor is used even when setting a `cutoff` on the considered
-#'   shortest path lengths, even though the number of vertex pairs reachable
-#'   from each other may be less than \eqn{(n-1)(n-2)/2}.
-#' @param cutoff The maximum shortest path length to consider when calculating
-#'   betweenness. If negative, then there is no such limit.
-#' @return A numeric vector with the betweenness score for each vertex in
-#'   `v` for `betweenness()`.
+#'   where \eqn{B^n}{Bnorm} is the normalized, \eqn{B} the raw betweenness, and \eqn{n} is the number of vertices in the graph.
+#'   Note that the same normalization factor is used even when setting a `cutoff` on the considered shortest path lengths,
+#'   even though the number of vertex pairs reachable from each other may be less than \eqn{(n-1)(n-2)/2}.
+#' @param cutoff The maximum shortest path length to consider when calculating betweenness.
+#'   If negative, then there is no such limit.
+#' @return A numeric vector with the betweenness score for each vertex in `v` for `betweenness()`.
 #'
-#'   A numeric vector with the edge betweenness score for each edge in `e`
-#'   for `edge_betweenness()`.
+#'   A numeric vector with the edge betweenness score for each edge in `e` for `edge_betweenness()`.
 #'
-#' @note `edge_betweenness()` might give false values for graphs with
-#' multiple edges.
+#' @note `edge_betweenness()` might give false values for graphs with multiple edges.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [closeness()], [degree()], [harmonic_centrality()]
 #' @references Freeman, L.C. (1979). Centrality in Social Networks I:
@@ -603,51 +577,40 @@ edge.betweenness.estimate <- estimate_edge_betweenness
 
 #' Closeness centrality of vertices
 #'
-#' Closeness centrality measures how many steps are required to access every other
-#' vertex from a given vertex.
+#' Closeness centrality measures how many steps are required to access every other vertex from a given vertex.
 #'
-#' The closeness centrality of a vertex is defined as the inverse of the
-#' sum of distances to all the other vertices in the graph:
+#' The closeness centrality of a vertex is defined as the inverse of the sum of distances to all the other vertices in the graph:
 #'
 #' \deqn{\frac{1}{\sum_{i\ne v} d_{vi}}}{1/sum( d(v,i), i != v)}
 #'
-#' If there is no (directed) path between vertex `v` and `i`, then
-#' `i` is omitted from the calculation. If no other vertices are reachable
-#' from `v`, then its closeness is returned as NaN.
+#' If there is no (directed) path between vertex `v` and `i`, then `i` is omitted from the calculation.
+#' If no other vertices are reachable from `v`, then its closeness is returned as NaN.
 #'
 # " You may use the \code{cutoff} argument to consider only paths of length
-#' `cutoff` or smaller. This can be run for larger graphs, as the running
-#' time is not quadratic (if `cutoff` is small). If `cutoff` is
-#' negative (which is the default), then the function calculates the exact
-#' closeness scores. Since igraph 1.6.0, a `cutoff` value of zero is treated
-#' literally, i.e. path with a length greater than zero are ignored.
+#' `cutoff` or smaller.
+#' This can be run for larger graphs, as the running time is not quadratic (if `cutoff` is small).
+#' If `cutoff` is negative (which is the default), then the function calculates the exact closeness scores.
+#' Since igraph 1.6.0, a `cutoff` value of zero is treated literally, i.e. path with a length greater than zero are ignored.
 #'
-#' Closeness centrality is meaningful only for connected graphs. In disconnected
-#' graphs, consider using the harmonic centrality with
-#' [harmonic_centrality()]
+#' Closeness centrality is meaningful only for connected graphs.
+#' In disconnected graphs, consider using the harmonic centrality with [harmonic_centrality()]
 #'
 #' @aliases closeness.estimate
 #' @param graph The graph to analyze.
 #' @param vids The vertices for which closeness will be calculated.
 #'   The default `NULL` selects all vertices.
 #' @inheritParams rlang::args_dots_empty
-#' @param mode Character string, defined the types of the paths used for
-#'   measuring the distance in directed graphs. \dQuote{in} measures the paths
-#'   *to* a vertex, \dQuote{out} measures paths *from* a vertex,
-#'   *all* uses undirected paths. This argument is ignored for undirected
-#'   graphs.
-#' @param normalized Logical, whether to calculate the normalized
-#'   closeness, i.e. the inverse average distance to all reachable vertices.
-#'   The non-normalized closeness is the inverse of the sum of distances to
-#'   all reachable vertices.
-#' @param weights Optional positive weight vector for calculating weighted
-#'   closeness. If the graph has a `weight` edge attribute, then this is
-#'   used by default. Weights are used for calculating weighted shortest
-#'   paths, so they are interpreted as distances.
-#' @param cutoff The maximum path length to consider when calculating the
-#'   closeness. If zero or negative then there is no such limit.
-#' @return Numeric vector with the closeness values of all the vertices in
-#'   `v`.
+#' @param mode Character string, defined the types of the paths used for measuring the distance in directed graphs.
+#'   \dQuote{in} measures the paths *to* a vertex, \dQuote{out} measures paths *from* a vertex, *all* uses undirected paths.
+#'   This argument is ignored for undirected graphs.
+#' @param normalized Logical, whether to calculate the normalized closeness, i.e. the inverse average distance to all reachable vertices.
+#'   The non-normalized closeness is the inverse of the sum of distances to all reachable vertices.
+#' @param weights Optional positive weight vector for calculating weighted closeness.
+#'   If the graph has a `weight` edge attribute, then this is used by default.
+#'   Weights are used for calculating weighted shortest paths, so they are interpreted as distances.
+#' @param cutoff The maximum path length to consider when calculating the closeness.
+#'   If zero or negative then there is no such limit.
+#' @return Numeric vector with the closeness values of all the vertices in `v`.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Freeman, L.C. (1979). Centrality in Social Networks I:
 #' Conceptual Clarification. *Social Networks*, 1, 215-239.
@@ -787,32 +750,26 @@ arpack_defaults <- function() {
 
 #' ARPACK eigenvector calculation
 #'
-#' Interface to the ARPACK library for calculating eigenvectors of sparse
-#' matrices
+#' Interface to the ARPACK library for calculating eigenvectors of sparse matrices
 #'
 #' @details
-#' ARPACK is a library for solving large scale eigenvalue problems.  The
-#' package is designed to compute a few eigenvalues and corresponding
-#' eigenvectors of a general \eqn{n} by \eqn{n} matrix \eqn{A}. It is most
-#' appropriate for large sparse or structured matrices \eqn{A} where structured
-#' means that a matrix-vector product `w <- Av` requires order \eqn{n}
-#' rather than the usual order \eqn{n^2} floating point operations.
+#' ARPACK is a library for solving large scale eigenvalue problems.  The package is designed to compute a few eigenvalues and corresponding eigenvectors of a general \eqn{n} by \eqn{n} matrix \eqn{A}.
+#' It is most appropriate for large sparse or structured matrices \eqn{A}
+#' where structured means that a matrix-vector product `w <- Av` requires order \eqn{n} rather than the usual order \eqn{n^2} floating point operations.
 #'
-#' This function is an interface to ARPACK. igraph does not contain all ARPACK
-#' routines, only the ones dealing with symmetric and non-symmetric eigenvalue
-#' problems using double precision real numbers.
+#' This function is an interface to ARPACK. igraph does not contain all ARPACK routines,
+#' only the ones dealing with symmetric and non-symmetric eigenvalue problems using double precision real numbers.
 #'
-#' The eigenvalue calculation in ARPACK (in the simplest case) involves the
-#' calculation of the \eqn{Av} product where \eqn{A} is the matrix we work with
-#' and \eqn{v} is an arbitrary vector. The function supplied in the `fun`
-#' argument is expected to perform this product. If the product can be done
-#' efficiently, e.g. if the matrix is sparse, then `arpack()` is usually
-#' able to calculate the eigenvalues very quickly.
+#' The eigenvalue calculation in ARPACK (in the simplest case) involves the calculation of the \eqn{Av} product
+#' where \eqn{A} is the matrix we work with and \eqn{v} is an arbitrary vector.
+#' The function supplied in the `fun` argument is expected to perform this product.
+#' If the product can be done efficiently, e.g. if the matrix is sparse,
+#' then `arpack()` is usually able to calculate the eigenvalues very quickly.
 #'
 #' @details
 #' The `options` argument specifies what kind of calculation to perform.
-#' It is a list with the following members, they correspond directly to ARPACK
-#' parameters. On input it has the following fields:
+#' It is a list with the following members, they correspond directly to ARPACK parameters.
+#' On input it has the following fields:
 #'   \describe{
 #'     \item{bmat}{
 #'       Character constant, possible values:
@@ -990,22 +947,19 @@ arpack_defaults <- function() {
 #'
 #' @aliases arpack arpack-options arpack.unpack.complex
 #' @aliases arpack_defaults
-#' @param func The function to perform the matrix-vector multiplication. ARPACK
-#'   requires to perform these by the user. The function gets the vector \eqn{x}
-#'   as the first argument, and it should return \eqn{Ax}, where \eqn{A} is the
-#'   \dQuote{input matrix}. (The input matrix is never given explicitly.) The
-#'   second argument is `extra`.
+#' @param func The function to perform the matrix-vector multiplication.
+#'   ARPACK requires to perform these by the user.
+#'   The function gets the vector \eqn{x} as the first argument, and it should return \eqn{Ax}, where \eqn{A} is the \dQuote{input matrix}.
+#'   (The input matrix is never given explicitly.) The second argument is `extra`.
 #' @param extra Extra argument to supply to `func`.
-#' @param sym Logical, whether the input matrix is symmetric. Always
-#'   supply `TRUE` here if it is, since it can speed up the computation.
-#' @param options Options to ARPACK, a named list to overwrite some of the
-#'   default option values. See details below.
+#' @param sym Logical, whether the input matrix is symmetric.
+#'   Always supply `TRUE` here if it is, since it can speed up the computation.
+#' @param options Options to ARPACK, a named list to overwrite some of the default option values.
+#'   See details below.
 #' @param env The environment in which `func` will be evaluated.
-#' @param complex Whether to convert the eigenvectors returned by ARPACK into R
-#'   complex vectors. By default this is not done for symmetric problems (these
-#'   only have real eigenvectors/values), but only non-symmetric ones. If you
-#'   have a non-symmetric problem, but you're sure that the results will be real,
-#'   then supply `FALSE` here.
+#' @param complex Whether to convert the eigenvectors returned by ARPACK into R complex vectors.
+#'   By default this is not done for symmetric problems (these only have real eigenvectors/values), but only non-symmetric ones.
+#'   If you have a non-symmetric problem, but you're sure that the results will be real, then supply `FALSE` here.
 #' @return A named list with the following members:
 #'   \describe{
 #'     \item{values}{
@@ -1024,9 +978,8 @@ arpack_defaults <- function() {
 #'   }
 #' @author Rich Lehoucq, Kristi Maschhoff, Danny Sorensen, Chao Yang for
 #' ARPACK, Gabor Csardi \email{csardi.gabor@@gmail.com} for the R interface.
-#' @seealso [eigen_centrality()], [page_rank()],
-#' [hub_score()], [cluster_leading_eigen()] are some of the
-#' functions in igraph that use ARPACK.
+#' @seealso [eigen_centrality()], [page_rank()], [hub_score()],
+#' [cluster_leading_eigen()] are some of the functions in igraph that use ARPACK.
 #' @references D.C. Sorensen, Implicit Application of Polynomial Filters in a
 #' k-Step Arnoldi Method. *SIAM J. Matr. Anal. Apps.*, 13 (1992), pp
 #' 357-385.
@@ -1171,22 +1124,19 @@ arpack.unpack.complex <- function(vectors, values, nev) {
 
 #' Find subgraph centrality scores of network positions
 #'
-#' Subgraph centrality of a vertex measures the number of subgraphs a vertex
-#' participates in, weighting them according to their size.
+#' Subgraph centrality of a vertex measures the number of subgraphs a vertex participates in, weighting them according to their size.
 #'
-#' The subgraph centrality of a vertex is defined as the number of closed walks
-#' originating at the vertex, where longer walks are downweighted by the
-#' factorial of their length.
+#' The subgraph centrality of a vertex is defined as the number of closed walks originating at the vertex,
+#' where longer walks are downweighted by the factorial of their length.
 #'
-#' Currently the calculation is performed by explicitly calculating all
-#' eigenvalues and eigenvectors of the adjacency matrix of the graph. This
-#' effectively means that the measure can only be calculated for small graphs.
+#' Currently the calculation is performed by explicitly calculating all eigenvalues and eigenvectors of the adjacency matrix of the graph.
+#' This effectively means that the measure can only be calculated for small graphs.
 #'
-#' @param graph The input graph. It will be treated as undirected.
+#' @param graph The input graph.
+#'   It will be treated as undirected.
 #' @inheritParams rlang::args_dots_empty
-#' @param diag Logical, whether to include the diagonal of the adjacency
-#'   matrix in the analysis. Giving `FALSE` here effectively eliminates the
-#'   loops edges from the graph before the calculation.
+#' @param diag Logical, whether to include the diagonal of the adjacency matrix in the analysis.
+#'   Giving `FALSE` here effectively eliminates the loops edges from the graph before the calculation.
 #' @return A numeric vector, the subgraph centrality scores of the vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com} based on the Matlab
 #' code by Ernesto Estrada
@@ -1263,11 +1213,9 @@ subgraph_centrality <- function(
 
 #' Eigenvalues and eigenvectors of the adjacency matrix of a graph
 #'
-#' Calculate selected eigenvalues and eigenvectors of a (supposedly sparse)
-#' graph.
+#' Calculate selected eigenvalues and eigenvectors of a (supposedly sparse) graph.
 #'
-#' The `which` argument is a list and it specifies which eigenvalues and
-#' corresponding eigenvectors to calculate: There are eight options:
+#' The `which` argument is a list and it specifies which eigenvalues and corresponding eigenvectors to calculate: There are eight options:
 #' \enumerate{ \item Eigenvalues with the largest magnitude. Set `pos` to
 #' `LM`, and `howmany` to the number of eigenvalues you want.  \item
 #' Eigenvalues with the smallest magnitude. Set `pos` to `SM` and
@@ -1288,13 +1236,13 @@ subgraph_centrality <- function(
 #'
 #' @aliases spectrum igraph.eigen.default
 #' @param graph The input graph, can be directed or undirected.
-#' @param algorithm The algorithm to use. Currently only `arpack` is
-#'   implemented, which uses the ARPACK solver. See also [arpack()].
-#' @param which A list to specify which eigenvalues and eigenvectors to
-#'   calculate. By default the leading (i.e. largest magnitude) eigenvalue and
-#'   the corresponding eigenvector is calculated.
-#' @param options Options for the ARPACK solver. See
-#'   [arpack_defaults()].
+#' @param algorithm The algorithm to use.
+#'   Currently only `arpack` is implemented, which uses the ARPACK solver.
+#'   See also [arpack()].
+#' @param which A list to specify which eigenvalues and eigenvectors to calculate.
+#'   By default the leading (i.e. largest magnitude) eigenvalue and the corresponding eigenvector is calculated.
+#' @param options Options for the ARPACK solver.
+#'   See [arpack_defaults()].
 #' @return Depends on the algorithm used.
 #'
 #'   For `arpack` a list with three entries is returned:
@@ -1376,68 +1324,50 @@ eigen_defaults <- function() {
 
 #' Eigenvector centrality of vertices
 #'
-#' `eigen_centrality()` takes a graph (`graph`) and returns the
-#' eigenvector centralities of the vertices `v` within it.
+#' `eigen_centrality()` takes a graph (`graph`) and returns the eigenvector centralities of the vertices `v` within it.
 #'
-#' Eigenvector centrality scores correspond to the values of the principal
-#' eigenvector of the graph's adjacency matrix; these scores may, in turn, be
-#' interpreted as arising from a reciprocal process in which the centrality of
-#' each actor is proportional to the sum of the centralities of those actors to
-#' whom he or she is connected.  In general, vertices with high eigenvector
-#' centralities are those which are connected to many other vertices which are,
-#' in turn, connected to many others (and so on).  The perceptive may realize
-#' that this implies that the largest values will be obtained by individuals in
-#' large cliques (or high-density substructures).  This is also intelligible
-#' from an algebraic point of view, with the first eigenvector being closely
-#' related to the best rank-1 approximation of the adjacency matrix (a
-#' relationship which is easy to see in the special case of a diagonalizable
-#' symmetric real matrix via the \eqn{SLS^-1}{$S \Lambda S^{-1}$}
-#' decomposition).
+#' Eigenvector centrality scores correspond to the values of the principal eigenvector of the graph's adjacency matrix; these scores may,
+#' in turn,
+#' be interpreted as arising from a reciprocal process in which the centrality of each actor is proportional to the sum of the centralities of those actors to whom he or she is connected.  In general,
+#' vertices with high eigenvector centralities are those which are connected to many other vertices which are, in turn,
+#' connected to many others (and so on).  The perceptive may realize that this implies that the largest values will be obtained by individuals in large cliques (or high-density substructures).  This is also intelligible from an algebraic point of view,
+#' with the first eigenvector being closely related to the best rank-1 approximation of the adjacency matrix (a relationship which is easy to see in the special case of a diagonalizable symmetric real matrix via the \eqn{SLS^-1}{$S \Lambda S^{-1}$} decomposition).
 #'
-#' The adjacency matrix used in the eigenvector centrality calculation assumes
-#' that loop edges are counted *twice* in undirected graphs; this is because
-#' each loop edge has *two* endpoints that are both connected to the same vertex,
+#' The adjacency matrix used in the eigenvector centrality calculation assumes that loop edges are counted *twice* in undirected graphs;
+#' this is because each loop edge has *two* endpoints that are both connected to the same vertex,
 #' and you could traverse the loop edge via either endpoint.
 #'
-#' In the directed case, the left eigenvector of the adjacency matrix is
-#' calculated. In other words, the centrality of a vertex is proportional to
-#' the sum of centralities of vertices pointing to it.
+#' In the directed case, the left eigenvector of the adjacency matrix is calculated.
+#' In other words, the centrality of a vertex is proportional to the sum of centralities of vertices pointing to it.
 #'
 #' Eigenvector centrality is meaningful only for (strongly) connected graphs.
-#' Undirected graphs that are not connected should be decomposed into connected
-#' components, and the eigenvector centrality calculated for each separately.
-#' This function does not verify that the graph is connected. If it is not, in
-#' the undirected case the scores of all but one component will be zeros.
+#' Undirected graphs that are not connected should be decomposed into connected components,
+#' and the eigenvector centrality calculated for each separately.
+#' This function does not verify that the graph is connected.
+#' If it is not, in the undirected case the scores of all but one component will be zeros.
 #'
-#' Also note that the adjacency matrix of a directed acyclic graph or the
-#' adjacency matrix of an empty graph does not possess positive eigenvalues,
-#' therefore the eigenvector centrality is not defined for these graphs.
-#' igraph will return an eigenvalue of zero in such cases. The eigenvector
-#' centralities will all be equal for an empty graph and will all be zeros for
-#' a directed acyclic graph. Such pathological cases can be detected by checking
-#' whether the eigenvalue is very close to zero.
+#' Also note that the adjacency matrix of a directed acyclic graph or the adjacency matrix of an empty graph does not possess positive eigenvalues,
+#' therefore the eigenvector centrality is not defined for these graphs. igraph will return an eigenvalue of zero in such cases.
+#' The eigenvector centralities will all be equal for an empty graph and will all be zeros for a directed acyclic graph.
+#' Such pathological cases can be detected by checking whether the eigenvalue is very close to zero.
 #'
-#' From igraph version 0.5 this function uses ARPACK for the underlying
-#' computation, see [arpack()] for more about ARPACK in igraph.
+#' From igraph version 0.5 this function uses ARPACK for the underlying computation, see [arpack()] for more about ARPACK in igraph.
 #'
 #' @param graph Graph to be analyzed.
-#' @param directed Logical, whether to consider direction of the edges
-#'   in directed graphs. It is ignored for undirected graphs.
-#' @param scale `r lifecycle::badge("deprecated")` Normalization will always take
-#' place.
-#' @param weights A numerical vector or `NULL`. This argument can be used
-#'   to give edge weights for calculating the weighted eigenvector centrality of
-#'   vertices. If this is `NULL` and the graph has a `weight` edge
-#'   attribute then that is used. If `weights` is a numerical vector then it is
-#'   used, even if the graph has a `weight` edge attribute. If this is
-#'   `NA`, then no edge weights are used (even if the graph has a
-#'   `weight` edge attribute). Note that if there are negative edge weights
-#'   and the direction of the edges is considered, then the eigenvector might be
-#'   complex. In this case only the real part is reported.
-#'   This function interprets weights as connection strength. Higher
-#'   weights spread the centrality better.
-#' @param options A named list, to override some ARPACK options. See
-#'   [arpack()] for details.
+#' @param directed Logical, whether to consider direction of the edges in directed graphs.
+#'   It is ignored for undirected graphs.
+#' @param scale `r lifecycle::badge("deprecated")` Normalization will always take place.
+#' @param weights A numerical vector or `NULL`.
+#'   This argument can be used to give edge weights for calculating the weighted eigenvector centrality of vertices.
+#'   If this is `NULL` and the graph has a `weight` edge attribute then that is used.
+#'   If `weights` is a numerical vector then it is used, even if the graph has a `weight` edge attribute.
+#'   If this is `NA`, then no edge weights are used (even if the graph has a `weight` edge attribute).
+#'   Note that if there are negative edge weights and the direction of the edges is considered, then the eigenvector might be complex.
+#'   In this case only the real part is reported.
+#'   This function interprets weights as connection strength.
+#'   Higher weights spread the centrality better.
+#' @param options A named list, to override some ARPACK options.
+#'   See [arpack()] for details.
 #' @return A named list with components:
 #'   \describe{
 #'     \item{vector}{
@@ -1516,15 +1446,13 @@ eigen_centrality <- function(
 #' @param vids The vertices for which the strength will be calculated.
 #'   The default `NULL` selects all vertices.
 #' @inheritParams rlang::args_dots_empty
-#' @param mode Character string, \dQuote{out} for out-degree, \dQuote{in} for
-#'   in-degree or \dQuote{all} for the sum of the two. For undirected graphs this
-#'   argument is ignored.
+#' @param mode Character string, \dQuote{out} for out-degree, \dQuote{in} for in-degree or \dQuote{all} for the sum of the two.
+#'   For undirected graphs this argument is ignored.
 #' @inheritParams degree
-#' @param weights Weight vector. If the graph has a `weight` edge
-#'   attribute, then this is used by default. If the graph does not have a
-#'   `weight` edge attribute and this argument is `NULL`, then a
-#'   [degree()] is called. If this is `NA`, then no edge weights are used
-#'   (even if the graph has a `weight` edge attribute).
+#' @param weights Weight vector.
+#'   If the graph has a `weight` edge attribute, then this is used by default.
+#'   If the graph does not have a `weight` edge attribute and this argument is `NULL`, then a [degree()] is called.
+#'   If this is `NA`, then no edge weights are used (even if the graph has a `weight` edge attribute).
 #' @return A numeric vector giving the strength of the vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [degree()] for the unweighted version.
@@ -1610,24 +1538,23 @@ strength <- function(
 #'
 #' Calculates a measure of diversity for all vertices.
 #'
-#' The diversity of a vertex is defined as the (scaled) Shannon entropy of the
-#' weights of its incident edges:
+#' The diversity of a vertex is defined as the (scaled) Shannon entropy of the weights of its incident edges:
 #' \deqn{D(i)=\frac{H(i)}{\log k_i}}{D(i)=H(i)/log(k[i])}
 #' and
 #' \deqn{H(i)=-\sum_{j=1}^{k_i} p_{ij}\log p_{ij},}{H(i) =
 #'   -sum(p[i,j] log(p[i,j]), j=1..k[i]),} where
 #' \deqn{p_{ij}=\frac{w_{ij}}{\sum_{l=1}^{k_i}}V_{il},}{p[i,j] = w[i,j] /
 #' sum(w[i,l], l=1..k[i]),} and \eqn{k_i}{k[i]} is the (total) degree of vertex
-#' \eqn{i}, \eqn{w_{ij}}{w[i,j]} is the weight of the edge(s) between vertices
-#' \eqn{i} and \eqn{j}.
+#' \eqn{i}, \eqn{w_{ij}}{w[i,j]} is the weight of the edge(s) between vertices \eqn{i} and \eqn{j}.
 #'
 #' For vertices with degree less than two the function returns `NaN`.
 #'
-#' @param graph The input graph. Edge directions are ignored.
+#' @param graph The input graph.
+#'   Edge directions are ignored.
 #' @inheritParams rlang::args_dots_empty
-#' @param weights `NULL`, or the vector of edge weights to use for the
-#'   computation. If `NULL`, then the \sQuote{weight} attibute is used. Note
-#'   that this measure is not defined for unweighted graphs.
+#' @param weights `NULL`, or the vector of edge weights to use for the computation.
+#'   If `NULL`, then the \sQuote{weight} attibute is used.
+#'   Note that this measure is not defined for unweighted graphs.
 #' @param vids The vertex IDs for which to calculate the measure.
 #'   The default `NULL` selects all vertices.
 #' @return A numeric vector, its length is the number of vertices.
@@ -1705,28 +1632,25 @@ diversity <- function(
 
 #' Kleinberg's hub and authority centrality scores.
 #'
-#' The hub scores of the vertices are defined as the principal eigenvector
-#' of \eqn{A A^T}{A*t(A)}, where \eqn{A} is the adjacency matrix of the
-#' graph.
+#' The hub scores of the vertices are defined as the principal eigenvector of \eqn{A A^T}{A*t(A)},
+#' where \eqn{A} is the adjacency matrix of the graph.
 #'
-#' Similarly, the authority scores of the vertices are defined as the principal
-#' eigenvector of \eqn{A^T A}{t(A)*A}, where \eqn{A} is the adjacency matrix of
-#' the graph.
+#' Similarly, the authority scores of the vertices are defined as the principal eigenvector of \eqn{A^T A}{t(A)*A},
+#' where \eqn{A} is the adjacency matrix of the graph.
 #'
-#' For undirected matrices the adjacency matrix is symmetric and the hub
-#' scores are the same as authority scores.
+#' For undirected matrices the adjacency matrix is symmetric and the hub scores are the same as authority scores.
 #'
 #' @param graph The input graph.
-#' @param scale Logical, whether to scale the result to have a maximum
-#'   score of one. If no scaling is used then the result vector has unit length
-#'   in the Euclidean norm.
-#' @param weights Optional positive weight vector for calculating weighted
-#'   scores. If the graph has a `weight` edge attribute, then this is used
-#'   by default. Pass `NA` to ignore the weight attribute. This function
-#'   interprets edge weights as connection strengths. The weights of parallel
-#'   edges are effectively added up.
-#' @param options A named list, to override some ARPACK options. See
-#'   [arpack()] for details. The default `NULL` uses [arpack_defaults()].
+#' @param scale Logical, whether to scale the result to have a maximum score of one.
+#'   If no scaling is used then the result vector has unit length in the Euclidean norm.
+#' @param weights Optional positive weight vector for calculating weighted scores.
+#'   If the graph has a `weight` edge attribute, then this is used by default.
+#'   Pass `NA` to ignore the weight attribute.
+#'   This function interprets edge weights as connection strengths.
+#'   The weights of parallel edges are effectively added up.
+#' @param options A named list, to override some ARPACK options.
+#'   See [arpack()] for details.
+#'   The default `NULL` uses [arpack_defaults()].
 #' @inheritParams rlang::args_dots_empty
 #' @return A named list with members:
 #'   \describe{
@@ -1743,9 +1667,8 @@ diversity <- function(
 #'       Some information about the ARPACK computation, it has the same members as the `options` member returned by [arpack()], see that for documentation.
 #'     }
 #'   }
-#' @seealso [eigen_centrality()] for eigenvector centrality,
-#' [page_rank()] for the Page Rank scores. [arpack()] for
-#' the underlining machinery of the computation.
+#' @seealso [eigen_centrality()] for eigenvector centrality, [page_rank()] for the Page Rank scores.
+#' [arpack()] for the underlining machinery of the computation.
 #' @references J. Kleinberg. Authoritative sources in a hyperlinked
 #' environment. *Proc. 9th ACM-SIAM Symposium on Discrete Algorithms*,
 #' 1998. Extended version in *Journal of the ACM* 46(1999). Also appears
@@ -1784,8 +1707,8 @@ hits_scores <- function(
 
 #' @title Kleinberg's authority centrality scores.
 #' @rdname hub_score
-#' @param options A named list, to override some ARPACK options. See
-#'   [arpack()] for details.
+#' @param options A named list, to override some ARPACK options.
+#'   See [arpack()] for details.
 #' @export
 authority_score <- function(
   graph,
@@ -1819,17 +1742,14 @@ authority_score <- function(
 #' @title Kleinberg's hub centrality scores.
 #' @rdname hub_score
 #' @param graph The input graph.
-#' @param scale Logical, whether to scale the result to have a maximum
-#'   score of one. If no scaling is used then the result vector has unit length
-#'   in the Euclidean norm.
-#' @param weights Optional positive weight vector for calculating weighted
-#'   scores. If the graph has a `weight` edge attribute, then this is used
-#'   by default.
-#'   This function interprets edge weights as connection strengths. In the
-#'   random surfer model, an edge with a larger weight is more likely to be
-#'   selected by the surfer.
-#' @param options A named list, to override some ARPACK options. See
-#'   [arpack()] for details.
+#' @param scale Logical, whether to scale the result to have a maximum score of one.
+#'   If no scaling is used then the result vector has unit length in the Euclidean norm.
+#' @param weights Optional positive weight vector for calculating weighted scores.
+#'   If the graph has a `weight` edge attribute, then this is used by default.
+#'   This function interprets edge weights as connection strengths.
+#'   In the random surfer model, an edge with a larger weight is more likely to be selected by the surfer.
+#' @param options A named list, to override some ARPACK options.
+#'   See [arpack()] for details.
 #' @family centrality
 #' @export
 hub_score <- function(
@@ -1865,55 +1785,45 @@ hub_score <- function(
 #'
 #' Calculates the Google PageRank for the specified vertices.
 #'
-#' For the explanation of the PageRank algorithm, see the following webpage:
-#' <http://infolab.stanford.edu/~backrub/google.html>, or the following
-#' reference:
+#' For the explanation of the PageRank algorithm, see the following webpage: <http://infolab.stanford.edu/~backrub/google.html>,
+#' or the following reference:
 #'
-#' Sergey Brin and Larry Page: The Anatomy of a Large-Scale Hypertextual Web
-#' Search Engine. Proceedings of the 7th World-Wide Web Conference, Brisbane,
-#' Australia, April 1998.
+#' Sergey Brin and Larry Page: The Anatomy of a Large-Scale Hypertextual Web Search Engine.
+#' Proceedings of the 7th World-Wide Web Conference, Brisbane, Australia, April 1998.
 #'
-#' The `page_rank()` function can use either the PRPACK library or ARPACK
-#' (see [arpack()]) to perform the calculation.
+#' The `page_rank()` function can use either the PRPACK library or ARPACK (see [arpack()]) to perform the calculation.
 #'
-#' Please note that the PageRank of a given vertex depends on the PageRank of
-#' all other vertices, so even if you want to calculate the PageRank for only
-#' some of the vertices, all of them must be calculated. Requesting the
-#' PageRank for only some of the vertices does not result in any performance
-#' increase at all.
+#' Please note that the PageRank of a given vertex depends on the PageRank of all other vertices,
+#' so even if you want to calculate the PageRank for only some of the vertices, all of them must be calculated.
+#' Requesting the PageRank for only some of the vertices does not result in any performance increase at all.
 #'
 #' @param graph The graph object.
 #' @inheritParams rlang::args_dots_empty
-#' @param algo Character scalar, which implementation to use to carry out the
-#'   calculation. The default is `"prpack"`, which uses the PRPACK library
-#'   (<https://github.com/dgleich/prpack>) to calculate PageRank scores
-#'   by solving a set of linear equations. This is a new implementation in igraph
-#'   version 0.7, and the suggested one, as it is the most stable and the fastest
-#'   for all but small graphs.  `"arpack"` uses the ARPACK library, the
-#'   default implementation from igraph version 0.5 until version 0.7. It computes
-#'   PageRank scores by solving an eingevalue problem.
+#' @param algo Character scalar, which implementation to use to carry out the calculation.
+#'   The default is `"prpack"`,
+#'   which uses the PRPACK library (<https://github.com/dgleich/prpack>) to calculate PageRank scores by solving a set of linear equations.
+#'   This is a new implementation in igraph version 0.7, and the suggested one,
+#'   as it is the most stable and the fastest for all but small graphs.  `"arpack"` uses the ARPACK library,
+#'   the default implementation from igraph version 0.5 until version 0.7. It computes PageRank scores by solving an eingevalue problem.
 #' @param vids The vertices of interest.
 #'   The default `NULL` selects all vertices.
-#' @param directed Logical, if true directed paths will be considered for
-#'   directed graphs. It is ignored for undirected graphs.
+#' @param directed Logical, if true directed paths will be considered for directed graphs.
+#'   It is ignored for undirected graphs.
 #' @param damping The damping factor (\sQuote{d} in the original paper).
-#' @param personalized Optional vector giving a probability distribution to
-#'   calculate personalized PageRank. For personalized PageRank, the probability
-#'   of jumping to a node when abandoning the random walk is not uniform, but it
-#'   is given by this vector. The vector should contains an entry for each vertex
-#'   and it will be rescaled to sum up to one.
-#' @param weights A numerical vector or `NULL`. This argument can be used
-#'   to give edge weights for calculating the weighted PageRank of vertices. If
-#'   this is `NULL` and the graph has a `weight` edge attribute then
-#'   that is used. If `weights` is a numerical vector then it used, even if
-#'   the graph has a `weights` edge attribute. If this is `NA`, then no
-#'   edge weights are used (even if the graph has a `weight` edge attribute.
-#'   This function interprets edge weights as connection strengths. In the
-#'   random surfer model, an edge with a larger weight is more likely to be
-#'   selected by the surfer.
-#' @param options A named list, to override some ARPACK options. See
-#'   [arpack()] for details. This argument is ignored if the PRPACK
-#'   implementation is used.
+#' @param personalized Optional vector giving a probability distribution to calculate personalized PageRank.
+#'   For personalized PageRank, the probability of jumping to a node when abandoning the random walk is not uniform,
+#'   but it is given by this vector.
+#'   The vector should contains an entry for each vertex and it will be rescaled to sum up to one.
+#' @param weights A numerical vector or `NULL`.
+#'   This argument can be used to give edge weights for calculating the weighted PageRank of vertices.
+#'   If this is `NULL` and the graph has a `weight` edge attribute then that is used.
+#'   If `weights` is a numerical vector then it used, even if the graph has a `weights` edge attribute.
+#'   If this is `NA`, then no edge weights are used (even if the graph has a `weight` edge attribute.
+#'   This function interprets edge weights as connection strengths.
+#'   In the random surfer model, an edge with a larger weight is more likely to be selected by the surfer.
+#' @param options A named list, to override some ARPACK options.
+#'   See [arpack()] for details.
+#'   This argument is ignored if the PRPACK implementation is used.
 #' @return A named list with entries:
 #'   \describe{
 #'     \item{vector}{
@@ -2028,36 +1938,31 @@ page_rank <- function(
 
 #' Harmonic centrality of vertices
 #'
-#' The harmonic centrality of a vertex is the mean inverse distance to all other
-#' vertices. The inverse distance to an unreachable vertex is considered to be zero.
+#' The harmonic centrality of a vertex is the mean inverse distance to all other vertices.
+#' The inverse distance to an unreachable vertex is considered to be zero.
 #'
-#' The `cutoff` argument can be used to restrict the calculation to paths
-#' of length `cutoff` or smaller only; this can be used for larger graphs
-#' to speed up the calculation. If `cutoff` is negative (which is the
-#' default), then the function calculates the exact harmonic centrality scores.
+#' The `cutoff` argument can be used to restrict the calculation to paths of length `cutoff` or smaller only;
+#' this can be used for larger graphs to speed up the calculation.
+#' If `cutoff` is negative (which is the default), then the function calculates the exact harmonic centrality scores.
 #'
 #' @param graph The graph to analyze.
 #' @param vids The vertices for which harmonic centrality will be calculated.
 #'   The default `NULL` selects all vertices.
 #' @inheritParams rlang::args_dots_empty
-#' @param mode Character string, defining the types of the paths used for
-#'   measuring the distance in directed graphs. \dQuote{out} follows paths along
-#'   the edge directions only, \dQuote{in} traverses the edges in reverse, while
-#'   \dQuote{all} ignores edge directions. This argument is ignored for undirected
-#'   graphs.
-#' @param normalized Logical, whether to calculate the normalized
-#'   harmonic centrality. If true, the result is the mean inverse path length to
-#'   other vertices, i.e. it is normalized by the number of vertices minus one.
+#' @param mode Character string, defining the types of the paths used for measuring the distance in directed graphs.
+#'   \dQuote{out} follows paths along the edge directions only, \dQuote{in} traverses the edges in reverse,
+#'   while \dQuote{all} ignores edge directions.
+#'   This argument is ignored for undirected graphs.
+#' @param normalized Logical, whether to calculate the normalized harmonic centrality.
+#'   If true, the result is the mean inverse path length to other vertices, i.e. it is normalized by the number of vertices minus one.
 #'   If false, the result is the sum of inverse path lengths to other vertices.
-#' @param weights Optional positive weight vector for calculating weighted
-#'   harmonic centrality. If the graph has a `weight` edge attribute, then
-#'   this is used by default. Weights are used for calculating weighted shortest
-#'   paths, so they are interpreted as distances.
-#' @param cutoff The maximum path length to consider when calculating the
-#'   harmonic centrality. There is no such limit when the cutoff is negative. Note that
-#'   zero cutoff means that only paths of at most length 0 are considered.
-#' @return Numeric vector with the harmonic centrality scores of all the vertices in
-#'   `v`.
+#' @param weights Optional positive weight vector for calculating weighted harmonic centrality.
+#'   If the graph has a `weight` edge attribute, then this is used by default.
+#'   Weights are used for calculating weighted shortest paths, so they are interpreted as distances.
+#' @param cutoff The maximum path length to consider when calculating the harmonic centrality.
+#'   There is no such limit when the cutoff is negative.
+#'   Note that zero cutoff means that only paths of at most length 0 are considered.
+#' @return Numeric vector with the harmonic centrality scores of all the vertices in `v`.
 #' @seealso [betweenness()], [closeness()]
 #' @references M. Marchiori and V. Latora, Harmony in the small-world,
 #' *Physica A* 285, pp. 539-546 (2000).
@@ -2204,79 +2109,54 @@ bonpow.sparse <- function(
 
 #' Find Bonacich Power Centrality Scores of Network Positions
 #'
-#' `power_centrality()` takes a graph (`dat`) and returns the Boncich power
-#' centralities of positions (selected by `nodes`).  The decay rate for
-#' power contributions is specified by `exponent` (1 by default).
+#' `power_centrality()` takes a graph (`dat`) and returns the Boncich power centralities of positions (selected by `nodes`).  The decay rate for power contributions is specified by `exponent` (1 by default).
 #'
-#' Bonacich's power centrality measure is defined by
-#' \eqn{C_{BP}\left(\alpha,\beta\right)=\alpha\left(\mathbf{I}-\beta\mathbf{A}\right)^{-1}\mathbf{A}\mathbf{1}}{C_BP(alpha,beta)=alpha
+#' Bonacich's power centrality measure is defined by \eqn{C_{BP}\left(\alpha,\beta\right)=\alpha\left(\mathbf{I}-\beta\mathbf{A}\right)^{-1}\mathbf{A}\mathbf{1}}{C_BP(alpha,beta)=alpha
 #' (I-beta A)^-1 A 1}, where \eqn{\beta}{beta} is an attenuation parameter (set
-#' here by `exponent`) and \eqn{\mathbf{A}}{A} is the graph adjacency
-#' matrix.  (The coefficient \eqn{\alpha}{alpha} acts as a scaling parameter,
-#' and is set here (following Bonacich (1987)) such that the sum of squared
-#' scores is equal to the number of vertices.  This allows 1 to be used as a
-#' reference value for the ``middle'' of the centrality range.)  When
-#' \eqn{\beta \rightarrow }{beta->1/lambda_A1}\eqn{
+#' here by `exponent`) and \eqn{\mathbf{A}}{A} is the graph adjacency matrix.  (The coefficient \eqn{\alpha}{alpha} acts as a scaling parameter, and is set here (following Bonacich (1987)) such that the sum of squared scores is equal to the number of vertices.  This allows 1 to be used as a reference value for the ``middle'' of the centrality range.)  When \eqn{\beta \rightarrow }{beta->1/lambda_A1}\eqn{
 #' 1/\lambda_{\mathbf{A}1}}{beta->1/lambda_A1} (the reciprocal of the largest
-#' eigenvalue of \eqn{\mathbf{A}}{A}), this is to within a constant multiple of
-#' the familiar eigenvector centrality score; for other values of \eqn{\beta},
-#' the behavior of the measure is quite different.  In particular, \eqn{\beta}
-#' gives positive and negative weight to even and odd walks, respectively, as
-#' can be seen from the series expansion
-#' \eqn{C_{BP}\left(\alpha,\beta\right)=\alpha \sum_{k=0}^\infty \beta^k
+#' eigenvalue of \eqn{\mathbf{A}}{A}), this is to within a constant multiple of the familiar eigenvector centrality score;
+#' for other values of \eqn{\beta}, the behavior of the measure is quite different.  In particular,
+#' \eqn{\beta} gives positive and negative weight to even and odd walks, respectively,
+#' as can be seen from the series expansion \eqn{C_{BP}\left(\alpha,\beta\right)=\alpha \sum_{k=0}^\infty \beta^k
 #' }{C_BP(alpha,beta) = alpha sum( beta^k A^(k+1) 1, k in 0..infinity )}\eqn{
 #' \mathbf{A}^{k+1} \mathbf{1}}{C_BP(alpha,beta) = alpha sum( beta^k A^(k+1) 1,
 #' k in 0..infinity )} which converges so long as \eqn{|\beta|
 #' }{|beta|<1/lambda_A1}\eqn{ < 1/\lambda_{\mathbf{A}1}}{|beta|<1/lambda_A1}.
-#' The magnitude of \eqn{\beta}{beta} controls the influence of distant actors
-#' on ego's centrality score, with larger magnitudes indicating slower rates of
-#' decay.  (High rates, hence, imply a greater sensitivity to edge effects.)
+#' The magnitude of \eqn{\beta}{beta} controls the influence of distant actors on ego's centrality score,
+#' with larger magnitudes indicating slower rates of decay.  (High rates, hence, imply a greater sensitivity to edge effects.)
 #'
-#' Interpretively, the Bonacich power measure corresponds to the notion that
-#' the power of a vertex is recursively defined by the sum of the power of its
-#' alters.  The nature of the recursion involved is then controlled by the
-#' power exponent: positive values imply that vertices become more powerful as
-#' their alters become more powerful (as occurs in cooperative relations),
-#' while negative values imply that vertices become more powerful only as their
-#' alters become *weaker* (as occurs in competitive or antagonistic
-#' relations).  The magnitude of the exponent indicates the tendency of the
-#' effect to decay across long walks; higher magnitudes imply slower decay.
-#' One interesting feature of this measure is its relative instability to
-#' changes in exponent magnitude (particularly in the negative case).  If your
-#' theory motivates use of this measure, you should be very careful to choose a
-#' decay parameter on a non-ad hoc basis.
+#' Interpretively, the Bonacich power measure corresponds to the notion that the power of a vertex is recursively defined by the sum of the power of its alters.  The nature of the recursion involved is then controlled by the power exponent:
+#' positive values imply that vertices become more powerful as their alters become more powerful (as occurs in cooperative relations),
+#' while negative values imply that vertices become more powerful only as their alters become *weaker* (as occurs in competitive or antagonistic relations).  The magnitude of the exponent indicates the tendency of the effect to decay across long walks;
+#' higher magnitudes imply slower decay.
+#' One interesting feature of this measure is its relative instability to changes in exponent magnitude (particularly in the negative case).  If your theory motivates use of this measure,
+#' you should be very careful to choose a decay parameter on a non-ad hoc basis.
 #'
-#' For directed networks, the Bonacich power measure can be understood as
-#' similar to status in the network where higher status nodes have more edges
-#' that point from them to others with status. Node A's centrality depends
-#' on the centrality of all the nodes that A points toward, and their centrality
-#' depends on the nodes they point toward, etc. Note, this means that a node
-#' with an out-degree of 0 will have a Bonacich power centrality of 0 as they
-#' do not point towards anyone. When using this with directed network it
-#' is important to think about the edge direction and what it represents.
+#' For directed networks,
+#' the Bonacich power measure can be understood as similar to status in the network
+#' where higher status nodes have more edges that point from them to others with status.
+#' Node A's centrality depends on the centrality of all the nodes that A points toward,
+#' and their centrality depends on the nodes they point toward, etc. Note,
+#' this means that a node with an out-degree of 0 will have a Bonacich power centrality of 0 as they do not point towards anyone.
+#' When using this with directed network it is important to think about the edge direction and what it represents.
 #'
 #' @param graph the input graph.
-#' @param nodes vertex sequence indicating which vertices are to be included in
-#'   the calculation. The default `NULL` selects all vertices.
+#' @param nodes vertex sequence indicating which vertices are to be included in the calculation.
+#'   The default `NULL` selects all vertices.
 #' @inheritParams rlang::args_dots_empty
-#' @param loops Logical indicating whether or not the diagonal should be
-#'   treated as valid data.  Set this true if and only if the data can contain
-#'   loops.  `loops` is `FALSE` by default.
-#' @param exponent exponent (decay rate) for the Bonacich power centrality
-#'   score; can be negative
-#' @param rescale if true, centrality scores are rescaled such that they sum to
-#'   1.
-#' @param tol tolerance for near-singularities during matrix inversion (see
-#'   [Matrix::solve()])
-#' @param sparse Logical, whether to use sparse matrices for the
-#'   calculation. The \sQuote{Matrix} package is required for sparse matrix
-#'   support
+#' @param loops Logical indicating whether or not the diagonal should be treated as valid data.  Set this true if and only
+#'   if the data can contain loops.  `loops` is `FALSE` by default.
+#' @param exponent exponent (decay rate) for the Bonacich power centrality score; can be negative
+#' @param rescale if true, centrality scores are rescaled such that they sum to 1.
+#' @param tol tolerance for near-singularities during matrix inversion (see [Matrix::solve()])
+#' @param sparse Logical, whether to use sparse matrices for the calculation.
+#'   The \sQuote{Matrix} package is required for sparse matrix support
 #' @inheritParams as_adjacency_matrix
 #' @return A vector, containing the centrality scores.
 #' @note This function was ported (i.e. copied) from the SNA package.
 #' @section Warning : Singular adjacency matrices cause no end of headaches for
-#' this algorithm; thus, the routine may fail in certain cases.  This will be
-#' fixed when we get a better algorithm.
+#' this algorithm; thus, the routine may fail in certain cases.  This will be fixed when we get a better algorithm.
 #' @author Carter T. Butts
 #' (<https://www.faculty.uci.edu/profile.cfm?faculty_id=5057>), ported to
 #' igraph by Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -2473,43 +2353,33 @@ alpha.centrality.sparse <- function(
 
 #' Find Bonacich alpha centrality scores of network positions
 #'
-#' `alpha_centrality()` calculates the alpha centrality of some (or all)
-#' vertices in a graph.
+#' `alpha_centrality()` calculates the alpha centrality of some (or all) vertices in a graph.
 #'
-#' The alpha centrality measure can be considered as a generalization of
-#' eigenvector centrality to directed graphs. It was proposed by Bonacich in
-#' 2001 (see reference below).
+#' The alpha centrality measure can be considered as a generalization of eigenvector centrality to directed graphs.
+#' It was proposed by Bonacich in 2001 (see reference below).
 #'
 #' The alpha centrality of the vertices in a graph is defined as the solution
 #' of the following matrix equation: \deqn{x=\alpha A^T x+e,}{x=alpha t(A)x+e,}
-#' where \eqn{A}{A} is the (not necessarily symmetric) adjacency matrix of the
-#' graph, \eqn{e}{e} is the vector of exogenous sources of status of the
-#' vertices and \eqn{\alpha}{alpha} is the relative importance of the
-#' endogenous versus exogenous factors.
+#' where \eqn{A}{A} is the (not necessarily symmetric) adjacency matrix of the graph,
+#' \eqn{e}{e} is the vector of exogenous sources of status of the vertices and \eqn{\alpha}{alpha} is the relative importance of the endogenous versus exogenous factors.
 #'
-#' @param graph The input graph, can be directed or undirected. In undirected
-#'   graphs, edges are treated as if they were reciprocal directed ones.
-#' @param nodes Vertex sequence, the vertices for which the alpha centrality
-#'   values are returned. The default `NULL` selects all vertices.
+#' @param graph The input graph, can be directed or undirected.
+#'   In undirected graphs, edges are treated as if they were reciprocal directed ones.
+#' @param nodes Vertex sequence, the vertices for which the alpha centrality values are returned.
+#'   The default `NULL` selects all vertices.
 #'   (For technical reasons they will be calculated for all vertices, anyway.)
 #' @inheritParams rlang::args_dots_empty
-#' @param alpha Parameter specifying the relative importance of endogenous
-#'   versus exogenous factors in the determination of centrality. See details
-#'   below.
-#' @param loops Whether to eliminate loop edges from the graph before the
-#'   calculation.
-#' @param exo The exogenous factors, in most cases this is either a constant --
-#'   the same factor for every node, or a vector giving the factor for every
-#'   vertex. Note that too long vectors will be truncated and too short vectors
-#'   will be replicated to match the number of vertices.
+#' @param alpha Parameter specifying the relative importance of endogenous versus exogenous factors in the determination of centrality.
+#'   See details below.
+#' @param loops Whether to eliminate loop edges from the graph before the calculation.
+#' @param exo The exogenous factors, in most cases this is either a constant -- the same factor for every node,
+#'   or a vector giving the factor for every vertex.
+#'   Note that too long vectors will be truncated and too short vectors will be replicated to match the number of vertices.
 #' @inheritParams as_adjacency_matrix
-#' @param tol Tolerance for near-singularities during matrix inversion, see
-#'   [Matrix::solve()].
-#' @param sparse Logical, whether to use sparse matrices for the
-#'   calculation. The \sQuote{Matrix} package is required for sparse matrix
-#'   support
-#' @return A numeric vector contaning the centrality scores for the selected
-#'   vertices.
+#' @param tol Tolerance for near-singularities during matrix inversion, see [Matrix::solve()].
+#' @param sparse Logical, whether to use sparse matrices for the calculation.
+#'   The \sQuote{Matrix} package is required for sparse matrix support
+#' @return A numeric vector contaning the centrality scores for the selected vertices.
 #' @section Warning: Singular adjacency matrices cause problems for this
 #' algorithm, the routine may fail is certain cases.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}

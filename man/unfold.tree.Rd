@@ -9,19 +9,17 @@ unfold.tree(graph, mode = c("all", "out", "in", "total"), roots)
 \arguments{
 \item{graph}{The input graph, it can be either directed or undirected.}
 
-\item{mode}{Character string, defined the types of the paths used for the
-breadth-first search. \dQuote{out} follows the outgoing, \dQuote{in} the
-incoming edges, \dQuote{all} and \dQuote{total} both of them. This argument
-is ignored for undirected graphs.}
+\item{mode}{Character string, defined the types of the paths used for the breadth-first search.
+\dQuote{out} follows the outgoing, \dQuote{in} the incoming edges, \dQuote{all} and \dQuote{total} both of them.
+This argument is ignored for undirected graphs.}
 
-\item{roots}{A vector giving the vertices from which the breadth-first
-search is performed. Typically it contains one vertex per component.}
+\item{roots}{A vector giving the vertices from which the breadth-first search is performed.
+Typically it contains one vertex per component.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{unfold.tree()} was renamed to \code{\link[=unfold_tree]{unfold_tree()}} to create a more
-consistent API.
+\code{unfold.tree()} was renamed to \code{\link[=unfold_tree]{unfold_tree()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_unfold_tree}{\code{unfold_tree()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

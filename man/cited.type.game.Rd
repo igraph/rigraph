@@ -19,25 +19,20 @@ cited.type.game(
 \item{edges}{Number of edges per step.}
 
 \item{types}{Vector of length \sQuote{\code{n}}, the types of the vertices.
-Types are numbered from zero. The default \code{NULL} gives all vertices
-type zero.}
+Types are numbered from zero.
+The default \code{NULL} gives all vertices type zero.}
 
-\item{pref}{Vector (\code{sample_last_cit()} and \code{sample_cit_types()} or
-matrix (\code{sample_cit_cit_types()}) giving the (unnormalized) citation
-probabilities for the different vertex types. The default \code{NULL} uses
-\code{(1:(agebins + 1))^-3} for \code{sample_last_cit()} and all-one probabilities
-for the other two.}
+\item{pref}{Vector (\code{sample_last_cit()} and \code{sample_cit_types()} or matrix (\code{sample_cit_cit_types()}) giving the (unnormalized) citation probabilities for the different vertex types.
+The default \code{NULL} uses \code{(1:(agebins + 1))^-3} for \code{sample_last_cit()} and all-one probabilities for the other two.}
 
 \item{directed}{Logical, whether to generate directed networks.}
 
-\item{attr}{Logical, whether to add the vertex types to the generated
-graph as a vertex attribute called \sQuote{\code{type}}.}
+\item{attr}{Logical, whether to add the vertex types to the generated graph as a vertex attribute called \sQuote{\code{type}}.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{cited.type.game()} was renamed to \code{\link[=sample_cit_types]{sample_cit_types()}} to create a more
-consistent API.
+\code{cited.type.game()} was renamed to \code{\link[=sample_cit_types]{sample_cit_types()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_cited_type_game}{\code{cited_type_game()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

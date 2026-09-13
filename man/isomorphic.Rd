@@ -23,9 +23,9 @@ is_isomorphic_to(
 
 \item{graph2}{The second graph.}
 
-\item{method}{The method to use. Possible values: \sQuote{auto},
-\sQuote{direct}, \sQuote{vf2}, \sQuote{bliss}. See their details
-below.}
+\item{method}{The method to use.
+Possible values: \sQuote{auto}, \sQuote{direct}, \sQuote{vf2}, \sQuote{bliss}.
+See their details below.}
 
 \item{...}{Additional arguments, passed to the various methods.}
 }
@@ -52,16 +52,14 @@ used.
 
 \section{\sQuote{direct} method}{
 
-This method only works on graphs with three or four vertices,
-and it is based on a pre-calculated and stored table. It does not
-have any extra arguments.
+This method only works on graphs with three or four vertices, and it is based on a pre-calculated and stored table.
+It does not have any extra arguments.
 }
 
 \section{\sQuote{vf2} method}{
 
-This method uses the VF2 algorithm by Cordella, Foggia et al., see
-references below. It supports vertex and edge colors and have the
-following extra arguments:
+This method uses the VF2 algorithm by Cordella, Foggia et al., see references below.
+It supports vertex and edge colors and have the following extra arguments:
 \describe{
 \item{vertex.color1, vertex.color2}{
 Optional integer vectors giving the colors of the vertices for colored graph isomorphism.
@@ -79,11 +77,9 @@ If you want to ignore these attributes, then supply \code{NULL} for both of thes
 
 \section{\sQuote{bliss} method}{
 
-Uses the BLISS algorithm by Junttila and Kaski, and it works for
-undirected graphs. For both graphs the
-\code{\link[=canonical_permutation]{canonical_permutation()}} and then the \code{\link[=permute]{permute()}}
-function is called to transfer them into canonical form; finally the
-canonical forms are compared.
+Uses the BLISS algorithm by Junttila and Kaski, and it works for undirected graphs.
+For both graphs the \code{\link[=canonical_permutation]{canonical_permutation()}} and then the \code{\link[=permute]{permute()}} function is called to transfer them into canonical form;
+finally the canonical forms are compared.
 Extra arguments:
 \describe{
 \item{sh}{

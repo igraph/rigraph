@@ -12,8 +12,7 @@ tkplot.center(tkp.id)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{tkplot.center()} was renamed to \code{\link[=tk_center]{tk_center()}} to create a more
-consistent API.
+\code{tkplot.center()} was renamed to \code{\link[=tk_center]{tk_center()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

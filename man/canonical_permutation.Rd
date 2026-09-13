@@ -14,17 +14,16 @@ canonical_permutation(
 \arguments{
 \item{graph}{The input graph, treated as undirected.}
 
-\item{colors}{The colors of the individual vertices of the graph; only
-vertices having the same color are allowed to match each other in an
-automorphism. When omitted, igraph uses the \code{color} attribute of the
-vertices, or, if there is no such vertex attribute, it simply assumes that
-all vertices have the same color. Pass NULL explicitly if the graph has a
-\code{color} vertex attribute but you do not want to use it.}
+\item{colors}{The colors of the individual vertices of the graph;
+only vertices having the same color are allowed to match each other in an automorphism.
+When omitted, igraph uses the \code{color} attribute of the vertices, or, if there is no such vertex attribute,
+it simply assumes that all vertices have the same color.
+Pass NULL explicitly if the graph has a \code{color} vertex attribute but you do not want to use it.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{sh}{Type of the heuristics to use for the BLISS algorithm. See details
-for possible values.}
+\item{sh}{Type of the heuristics to use for the BLISS algorithm.
+See details for possible values.}
 }
 \value{
 A list with the following members:
@@ -61,16 +60,14 @@ can easily exceed values that are exactly representable in floating point.
 }
 }
 \description{
-The canonical permutation brings every isomorphic graphs into the same
-(labeled) graph.
+The canonical permutation brings every isomorphic graphs into the same (labeled) graph.
 }
 \details{
-\code{canonical_permutation()} computes a permutation which brings the graph
-into canonical form, as defined by the BLISS algorithm.  All isomorphic
-graphs have the same canonical form.
+\code{canonical_permutation()} computes a permutation which brings the graph into canonical form,
+as defined by the BLISS algorithm.  All isomorphic graphs have the same canonical form.
 
-See the paper below for the details about BLISS. This and more information
-is available at \url{http://www.tcs.hut.fi/Software/bliss/index.html}.
+See the paper below for the details about BLISS.
+This and more information is available at \url{http://www.tcs.hut.fi/Software/bliss/index.html}.
 
 The possible values for the \code{sh} argument are:
 \describe{
@@ -93,8 +90,7 @@ Largest maximally non-trivially connected non-singleton cell.
 Smallest maximally non-trivially connected non-singleton cell.
 }
 }
-See the paper in references for details
-about these.
+See the paper in references for details about these.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_canonical_permutation}{\code{canonical_permutation()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
@@ -126,9 +122,8 @@ the Ninth Workshop on Algorithm Engineering and Experiments and the Fourth
 Workshop on Analytic Algorithms and Combinatorics.} 2007.
 }
 \seealso{
-\code{\link[=permute]{permute()}} to apply a permutation to a graph,
-\code{\link[=isomorphic]{isomorphic()}} for deciding graph isomorphism, possibly
-based on canonical labels.
+\code{\link[=permute]{permute()}} to apply a permutation to a graph, \code{\link[=isomorphic]{isomorphic()}} for deciding graph isomorphism,
+possibly based on canonical labels.
 
 Other graph isomorphism:
 \code{\link[=count_isomorphisms]{count_isomorphisms()}},

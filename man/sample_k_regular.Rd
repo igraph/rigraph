@@ -7,11 +7,9 @@
 sample_k_regular(no.of.nodes, k, ..., directed = FALSE, multiple = FALSE)
 }
 \arguments{
-\item{no.of.nodes}{Integer scalar, the number of vertices in the generated
-graph.}
+\item{no.of.nodes}{Integer scalar, the number of vertices in the generated graph.}
 
-\item{k}{Integer scalar, the degree of each vertex in the graph, or the
-out-degree and in-degree in a directed graph.}
+\item{k}{Integer scalar, the degree of each vertex in the graph, or the out-degree and in-degree in a directed graph.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
@@ -26,12 +24,11 @@ An igraph graph.
 Generate a random graph where each vertex has the same degree.
 }
 \details{
-This game generates a directed or undirected random graph where the degrees
-of vertices are equal to a predefined constant k. For undirected graphs, at
-least one of k and the number of vertices must be even.
+This game generates a directed or undirected random graph
+where the degrees of vertices are equal to a predefined constant k. For undirected graphs,
+at least one of k and the number of vertices must be even.
 
-The game simply uses \code{\link[=sample_degseq]{sample_degseq()}} with appropriately
-constructed degree sequences.
+The game simply uses \code{\link[=sample_degseq]{sample_degseq()}} with appropriately constructed degree sequences.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_k_regular_game}{\code{k_regular_game()}}
@@ -50,8 +47,7 @@ layout(matrix(1:9, nrow = 3, byrow = TRUE))
 sapply(k10, plot, vertex.label = NA)
 }
 \seealso{
-\code{\link[=sample_degseq]{sample_degseq()}} for a generator with prescribed degree
-sequence.
+\code{\link[=sample_degseq]{sample_degseq()}} for a generator with prescribed degree sequence.
 
 Random graph models (games):
 \code{\link[=bipartite_gnm]{bipartite_gnm()}},

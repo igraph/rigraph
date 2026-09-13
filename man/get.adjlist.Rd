@@ -14,23 +14,20 @@ get.adjlist(
 \arguments{
 \item{graph}{The input graph.}
 
-\item{mode}{Character scalar, it gives what kind of adjacent edges/vertices
-to include in the lists. \sQuote{\code{out}} is for outgoing edges/vertices,
-\sQuote{\verb{in}} is for incoming edges/vertices, \sQuote{\code{all}} is
-for both. This argument is ignored for undirected graphs.}
+\item{mode}{Character scalar, it gives what kind of adjacent edges/vertices to include in the lists.
+\sQuote{\code{out}} is for outgoing edges/vertices, \sQuote{\verb{in}} is for incoming edges/vertices, \sQuote{\code{all}} is for both.
+This argument is ignored for undirected graphs.}
 
-\item{loops}{Character scalar, one of \code{"ignore"} (to omit loops), \code{"twice"}
-(to include loop edges twice) and \code{"once"} (to include them once). \code{"twice"}
-is not allowed for directed graphs and will be replaced with \code{"once"}.}
+\item{loops}{Character scalar, one of \code{"ignore"} (to omit loops),
+\code{"twice"} (to include loop edges twice) and \code{"once"} (to include them once).
+\code{"twice"} is not allowed for directed graphs and will be replaced with \code{"once"}.}
 
-\item{multiple}{Logical, set to \code{FALSE} to use only one representative
-of each set of parallel edges.}
+\item{multiple}{Logical, set to \code{FALSE} to use only one representative of each set of parallel edges.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{get.adjlist()} was renamed to \code{\link[=as_adj_list]{as_adj_list()}} to create a more
-consistent API.
+\code{get.adjlist()} was renamed to \code{\link[=as_adj_list]{as_adj_list()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

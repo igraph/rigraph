@@ -11,24 +11,22 @@ is.graphical.degree.sequence(
 )
 }
 \arguments{
-\item{out.deg}{Integer vector, the degree sequence for undirected graphs, or
-the out-degree sequence for directed graphs.}
+\item{out.deg}{Integer vector, the degree sequence for undirected graphs, or the out-degree sequence for directed graphs.}
 
-\item{in.deg}{\code{NULL} or an integer vector. For undirected graphs, it
-should be \code{NULL}. For directed graphs it specifies the in-degrees.}
+\item{in.deg}{\code{NULL} or an integer vector.
+For undirected graphs, it should be \code{NULL}.
+For directed graphs it specifies the in-degrees.}
 
-\item{allowed.edge.types}{The allowed edge types in the graph. \sQuote{simple}
-means that neither loop nor multiple edges are allowed (i.e. the graph must be
-simple). \sQuote{loops} means that loop edges are allowed but mutiple edges
-are not. \sQuote{multi} means that multiple edges are allowed but loop edges
-are not. \sQuote{all} means that both loop edges and multiple edges are
-allowed.}
+\item{allowed.edge.types}{The allowed edge types in the graph.
+\sQuote{simple} means that neither loop nor multiple edges are allowed (i.e. the graph must be simple).
+\sQuote{loops} means that loop edges are allowed but mutiple edges are not.
+\sQuote{multi} means that multiple edges are allowed but loop edges are not.
+\sQuote{all} means that both loop edges and multiple edges are allowed.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{is.graphical.degree.sequence()} was renamed to \code{\link[=is_graphical]{is_graphical()}} to create a more
-consistent API.
+\code{is.graphical.degree.sequence()} was renamed to \code{\link[=is_graphical]{is_graphical()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_graphical}{\code{is_graphical()}}

@@ -16,11 +16,8 @@ atlas(n)
 An igraph graph.
 }
 \description{
-\code{graph_from_atlas()} creates graphs from the book
-\sQuote{An Atlas of Graphs} by
-Roland C. Read and Robin J. Wilson. The atlas contains all undirected
-graphs with up to seven vertices, numbered from 0 up to 1252. The
-graphs are listed:
+\code{graph_from_atlas()} creates graphs from the book \sQuote{An Atlas of Graphs} by Roland C. Read and Robin J. Wilson.
+The atlas contains all undirected graphs with up to seven vertices, numbered from 0 up to 1252. The graphs are listed:
 \enumerate{
 \item in increasing order of number of nodes;
 \item for a fixed number of nodes, in increasing order of the number

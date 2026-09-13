@@ -23,23 +23,19 @@ farthest_vertices(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{directed}{Logical, whether directed or undirected paths are to be
-considered. This is ignored for undirected graphs.}
+\item{directed}{Logical, whether directed or undirected paths are to be considered.
+This is ignored for undirected graphs.}
 
-\item{unconnected}{Logical, what to do if the graph is unconnected. If
-FALSE, the function will return a number that is one larger the largest
-possible diameter, which is always the number of vertices. If TRUE, the
-diameters of the connected components will be calculated and the largest one
-will be returned.}
+\item{unconnected}{Logical, what to do if the graph is unconnected.
+If FALSE, the function will return a number that is one larger the largest possible diameter, which is always the number of vertices.
+If TRUE, the diameters of the connected components will be calculated and the largest one will be returned.}
 
-\item{weights}{Optional positive weight vector for calculating weighted
-distances. If the graph has a \code{weight} edge attribute, then this is
-used by default.}
+\item{weights}{Optional positive weight vector for calculating weighted distances.
+If the graph has a \code{weight} edge attribute, then this is used by default.}
 }
 \value{
-A numeric constant for \code{diameter()}, a numeric vector for
-\code{get_diameter()}. \code{farthest_vertices()} returns a list with two
-entries:
+A numeric constant for \code{diameter()}, a numeric vector for \code{get_diameter()}.
+\code{farthest_vertices()} returns a list with two entries:
 \describe{
 \item{\code{vertices}}{
 The two vertices that are the farthest.
@@ -55,12 +51,10 @@ The diameter of a graph is the length of the longest geodesic.
 \details{
 The diameter is calculated by using a breadth-first search like method.
 
-\code{get_diameter()} returns a path with the actual diameter. If there are
-many shortest paths of the length of the diameter, then it returns the first
-one found.
+\code{get_diameter()} returns a path with the actual diameter.
+If there are many shortest paths of the length of the diameter, then it returns the first one found.
 
-\code{farthest_vertices()} returns two vertex IDs, the vertices which are
-connected by the diameter path.
+\code{farthest_vertices()} returns two vertex IDs, the vertices which are connected by the diameter path.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

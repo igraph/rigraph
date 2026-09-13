@@ -14,20 +14,19 @@ graph.eigen(
 \arguments{
 \item{graph}{The input graph, can be directed or undirected.}
 
-\item{algorithm}{The algorithm to use. Currently only \code{arpack} is
-implemented, which uses the ARPACK solver. See also \code{\link[=arpack]{arpack()}}.}
+\item{algorithm}{The algorithm to use.
+Currently only \code{arpack} is implemented, which uses the ARPACK solver.
+See also \code{\link[=arpack]{arpack()}}.}
 
-\item{which}{A list to specify which eigenvalues and eigenvectors to
-calculate. By default the leading (i.e. largest magnitude) eigenvalue and
-the corresponding eigenvector is calculated.}
+\item{which}{A list to specify which eigenvalues and eigenvectors to calculate.
+By default the leading (i.e. largest magnitude) eigenvalue and the corresponding eigenvector is calculated.}
 
-\item{options}{Options for the ARPACK solver. See
-\code{\link[=arpack_defaults]{arpack_defaults()}}.}
+\item{options}{Options for the ARPACK solver.
+See \code{\link[=arpack_defaults]{arpack_defaults()}}.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.eigen()} was renamed to \code{\link[=spectrum]{spectrum()}} to create a more
-consistent API.
+\code{graph.eigen()} was renamed to \code{\link[=spectrum]{spectrum()}} to create a more consistent API.
 }
 \keyword{internal}

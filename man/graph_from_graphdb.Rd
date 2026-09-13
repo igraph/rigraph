@@ -18,35 +18,34 @@ graph_from_graphdb(
 )
 }
 \arguments{
-\item{url}{Complete URL with the file to import. Default: \code{NULL}.}
+\item{url}{Complete URL with the file to import.
+Default: \code{NULL}.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{prefix}{Gives the prefix. See details below. Possible values:
-\code{iso}, \code{i2}, \code{si4}, \code{si6}, \code{mcs10}, \code{mcs30},
-\code{mcs50}, \code{mcs70}, \code{mcs90}.}
+\item{prefix}{Gives the prefix.
+See details below.
+Possible values: \code{iso}, \code{i2}, \code{si4}, \code{si6}, \code{mcs10}, \code{mcs30}, \code{mcs50}, \code{mcs70}, \code{mcs90}.}
 
-\item{type}{Gives the graph type identifier. See details below. Possible
-values: \code{r001}, \code{r005}, \code{r01}, \code{r02}, \code{m2D},
-\code{m2Dr2}, \code{m2Dr4}, \code{m2Dr6} \code{m3D}, \code{m3Dr2},
-\code{m3Dr4}, \code{m3Dr6}, \code{m4D}, \code{m4Dr2}, \code{m4Dr4},
-\code{m4Dr6}, \code{b03}, \code{b03m}, \code{b06}, \code{b06m}, \code{b09},
-\code{b09m}.}
+\item{type}{Gives the graph type identifier.
+See details below.
+Possible values: \code{r001}, \code{r005}, \code{r01}, \code{r02}, \code{m2D}, \code{m2Dr2}, \code{m2Dr4}, \code{m2Dr6} \code{m3D}, \code{m3Dr2}, \code{m3Dr4}, \code{m3Dr6}, \code{m4D}, \code{m4Dr2},
+\code{m4Dr4}, \code{m4Dr6}, \code{b03}, \code{b03m}, \code{b06}, \code{b06m}, \code{b09}, \code{b09m}.}
 
 \item{nodes}{The number of vertices in the graph.}
 
-\item{pair}{Specifies which graph of the pair to read. Possible values:
-\code{A} and \code{B}.}
+\item{pair}{Specifies which graph of the pair to read.
+Possible values: \code{A} and \code{B}.}
 
-\item{which}{Gives the number of the graph to read. For every graph type
-there are a number of actual graphs in the database. This argument specifies
-which one to read.}
+\item{which}{Gives the number of the graph to read.
+For every graph type there are a number of actual graphs in the database.
+This argument specifies which one to read.}
 
-\item{base}{The base address of the database. See details below.}
+\item{base}{The base address of the database.
+See details below.}
 
-\item{compressed}{Logical, if TRUE than the file is expected to be
-compressed by gzip. If \code{url} is \code{NULL} then a \sQuote{\code{.gz}}
-suffix is added to the filename.}
+\item{compressed}{Logical, if TRUE than the file is expected to be compressed by gzip.
+If \code{url} is \code{NULL} then a \sQuote{\code{.gz}} suffix is added to the filename.}
 
 \item{directed}{Logical, whether to create a directed graph.}
 }
@@ -54,25 +53,20 @@ suffix is added to the filename.}
 A new graph object.
 }
 \description{
-This function downloads a graph from a database created for the evaluation
-of graph isomorphism testing algorithms.
+This function downloads a graph from a database created for the evaluation of graph isomorphism testing algorithms.
 }
 \details{
-\code{graph_from_graphdb()} reads a graph from the graph database from an FTP or
-HTTP server or from a local copy. It has two modes of operation:
+\code{graph_from_graphdb()} reads a graph from the graph database from an FTP or HTTP server or from a local copy.
+It has two modes of operation:
 
-If the \code{url} argument is specified then it should the complete path to
-a local or remote graph database file. In this case we simply call
-\code{\link[=read_graph]{read_graph()}} with the proper arguments to read the file.
+If the \code{url} argument is specified then it should the complete path to a local or remote graph database file.
+In this case we simply call \code{\link[=read_graph]{read_graph()}} with the proper arguments to read the file.
 
-If \code{url} is \code{NULL}, and this is the default, then the filename is
-assembled from the \code{base}, \code{prefix}, \code{type}, \code{nodes},
+If \code{url} is \code{NULL}, and this is the default, then the filename is assembled from the \code{base}, \code{prefix}, \code{type}, \code{nodes},
 \code{pair} and \code{which} arguments.
 
-Unfortunately the original graph database homepage is now defunct, but see
-its old version at
-\url{https://web.archive.org/web/20090215182331/http://amalfi.dis.unina.it/graph/db/doc/graphdbat.html}
-for the actual format of a graph database file and other information.
+Unfortunately the original graph database homepage is now defunct,
+but see its old version at \url{https://web.archive.org/web/20090215182331/http://amalfi.dis.unina.it/graph/db/doc/graphdbat.html} for the actual format of a graph database file and other information.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_read_graph_graphdb}{\code{read_graph_graphdb()}}

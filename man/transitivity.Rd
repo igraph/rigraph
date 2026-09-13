@@ -17,7 +17,8 @@ transitivity(
 \arguments{
 \item{graph}{The graph to analyze.}
 
-\item{type}{The type of the transitivity to calculate. Possible values:
+\item{type}{The type of the transitivity to calculate.
+Possible values:
 \describe{
 \item{"global"}{
 The global transitivity of an undirected graph.
@@ -51,59 +52,46 @@ The same as \code{barrat}.
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{vids}{The vertex IDs for the local transitivity will be calculated.
-This will be ignored for global transitivity types.  The default value is
-\code{NULL}, in this case all vertices are considered. It is slightly faster
-to supply \code{NULL} here than \code{V(graph)}.}
+This will be ignored for global transitivity types.  The default value is \code{NULL}, in this case all vertices are considered.
+It is slightly faster to supply \code{NULL} here than \code{V(graph)}.}
 
-\item{weights}{Optional weights for weighted transitivity. It is ignored for
-other transitivity measures. If it is \code{NULL} (the default) and the
-graph has a \code{weight} edge attribute, then it is used automatically.}
+\item{weights}{Optional weights for weighted transitivity.
+It is ignored for other transitivity measures.
+If it is \code{NULL} (the default) and the graph has a \code{weight} edge attribute, then it is used automatically.}
 
-\item{isolates}{Character scalar, for local versions of transitivity, it
-defines how to treat vertices with degree zero and one.
-If it is \sQuote{\code{NaN}} then their local transitivity is
-reported as \code{NaN} and they are not included in the averaging, for the
-transitivity types that calculate an average. If there are no vertices with
-degree two or higher, then the averaging will still result \code{NaN}. If it
-is \sQuote{\code{zero}}, then we report 0 transitivity for them, and they
-are included in the averaging, if an average is calculated.
-For the global transitivity, it controls how to handle graphs with
-no connected triplets: \code{NaN} or zero will be returned according to
-the respective setting.}
+\item{isolates}{Character scalar, for local versions of transitivity, it defines how to treat vertices with degree zero and one.
+If it is \sQuote{\code{NaN}} then their local transitivity is reported as \code{NaN} and they are not included in the averaging,
+for the transitivity types that calculate an average.
+If there are no vertices with degree two or higher, then the averaging will still result \code{NaN}.
+If it is \sQuote{\code{zero}}, then we report 0 transitivity for them, and they are included in the averaging, if an average is calculated.
+For the global transitivity, it controls how to handle graphs with no connected triplets:
+\code{NaN} or zero will be returned according to the respective setting.}
 }
 \value{
-For \sQuote{\code{global}} a single number, or \code{NaN} if there
-are no connected triples in the graph.
+For \sQuote{\code{global}} a single number, or \code{NaN} if there are no connected triples in the graph.
 
-For \sQuote{\code{local}} a vector of transitivity scores, one for each
-vertex in \sQuote{\code{vids}}.
+For \sQuote{\code{local}} a vector of transitivity scores, one for each vertex in \sQuote{\code{vids}}.
 }
 \description{
-Transitivity measures the probability that the adjacent vertices of a vertex
-are connected. This is sometimes also called the clustering coefficient.
+Transitivity measures the probability that the adjacent vertices of a vertex are connected.
+This is sometimes also called the clustering coefficient.
 }
 \details{
-Note that there are essentially two classes of transitivity measures, one is
-a vertex-level, the other a graph level property.
+Note that there are essentially two classes of transitivity measures, one is a vertex-level, the other a graph level property.
 
-There are several generalizations of transitivity to weighted graphs, here
-we use the definition by A. Barrat, this is a local vertex-level quantity,
-its formula is
+There are several generalizations of transitivity to weighted graphs, here we use the definition by A. Barrat,
+this is a local vertex-level quantity, its formula is
 
 \deqn{C_i^w=\frac{1}{s_i(k_i-1)}\sum_{j,h}\frac{w_{ij}+w_{ih}}{2}a_{ij}a_{ih}a_{jh}}{
 weighted C_i = 1/s_i 1/(k_i-1) sum( (w_ij+w_ih)/2 a_ij a_ih a_jh, j, h)}
 
-\eqn{s_i}{s_i} is the strength of vertex \eqn{i}{i}, see
-\code{\link[=strength]{strength()}}, \eqn{a_{ij}}{a_ij} are elements of the
-adjacency matrix, \eqn{k_i}{k_i} is the vertex degree, \eqn{w_{ij}}{w_ij}
-are the weights.
+\eqn{s_i}{s_i} is the strength of vertex \eqn{i}{i}, see \code{\link[=strength]{strength()}}, \eqn{a_{ij}}{a_ij} are elements of the adjacency matrix,
+\eqn{k_i}{k_i} is the vertex degree, \eqn{w_{ij}}{w_ij} are the weights.
 
-This formula gives back the normal not-weighted local transitivity if all
-the edge weights are the same.
+This formula gives back the normal not-weighted local transitivity if all the edge weights are the same.
 
-The \code{barrat} type of transitivity does not work for graphs with
-multiple and/or loop edges. If you want to calculate it for a directed
-graph, call \code{\link[=as_undirected]{as_undirected()}} with the \code{collapse} mode first.
+The \code{barrat} type of transitivity does not work for graphs with multiple and/or loop edges.
+If you want to calculate it for a directed graph, call \code{\link[=as_undirected]{as_undirected()}} with the \code{collapse} mode first.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_avglocal_undirected}{\code{transitivity_avglocal_undirected()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_barrat}{\code{transitivity_barrat()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_local_undirected}{\code{transitivity_local_undirected()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_undirected}{\code{transitivity_undirected()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

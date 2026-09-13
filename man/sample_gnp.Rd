@@ -12,13 +12,11 @@ gnp(n, p, ..., directed = FALSE, loops = FALSE)
 \arguments{
 \item{n}{The number of vertices in the graph.}
 
-\item{p}{The probability for drawing an edge between two
-arbitrary vertices (\eqn{G(n,p)} graph).}
+\item{p}{The probability for drawing an edge between two arbitrary vertices (\eqn{G(n,p)} graph).}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{directed}{Logical, whether the graph will be directed, defaults to
-\code{FALSE}.}
+\item{directed}{Logical, whether the graph will be directed, defaults to \code{FALSE}.}
 
 \item{loops}{Logical, whether to add loop edges, defaults to \code{FALSE}.}
 }
@@ -27,16 +25,14 @@ A graph object.
 }
 \description{
 Every possible edge is created independently with the same probability \code{p}.
-This model is also referred to as a Bernoulli random graph since the
-connectivity status of vertex pairs follows a Bernoulli distribution.
+This model is also referred to as a Bernoulli random graph since the connectivity status of vertex pairs follows a Bernoulli distribution.
 }
 \details{
-The graph has \code{n} vertices and each pair of vertices is connected
-with the same probability \code{p}. The \code{loops} parameter controls whether
-self-connections are also considered. This model effectively constrains
-the average number of edges, \eqn{p m_\text{max}}, where \eqn{m_\text{max}}
-is the largest possible number of edges, which depends on whether the
-graph is directed or undirected and whether self-loops are allowed.
+The graph has \code{n} vertices and each pair of vertices is connected with the same probability \code{p}.
+The \code{loops} parameter controls whether self-connections are also considered.
+This model effectively constrains the average number of edges, \eqn{p m_\text{max}},
+where \eqn{m_\text{max}} is the largest possible number of edges,
+which depends on whether the graph is directed or undirected and whether self-loops are allowed.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_erdos_renyi_game_gnp}{\code{erdos_renyi_game_gnp()}}

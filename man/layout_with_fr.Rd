@@ -30,68 +30,56 @@ layout_with_fr(
 with_fr(...)
 }
 \arguments{
-\item{graph}{The graph to lay out. Edge directions are ignored.}
+\item{graph}{The graph to lay out.
+Edge directions are ignored.}
 
 \item{...}{Passed to \code{layout_with_fr()}.}
 
-\item{coords}{Optional starting positions for the vertices. If this argument
-is not \code{NULL} then it should be an appropriate matrix of starting
-coordinates.}
+\item{coords}{Optional starting positions for the vertices.
+If this argument is not \code{NULL} then it should be an appropriate matrix of starting coordinates.}
 
-\item{dim}{Integer scalar, 2 or 3, the dimension of the layout.  Two
-dimensional layouts are places on a plane, three dimensional ones in the 3d
-space.}
+\item{dim}{Integer scalar, 2 or 3, the dimension of the layout.  Two dimensional layouts are places on a plane,
+three dimensional ones in the 3d space.}
 
 \item{niter}{Integer scalar, the number of iterations to perform.}
 
-\item{start.temp}{Real scalar, the start temperature. This is the maximum
-amount of movement alloved along one axis, within one step, for a vertex.
-Currently it is decreased linearly to zero during the iteration. The
-default \code{NULL} uses \code{sqrt(vcount(graph))}.}
+\item{start.temp}{Real scalar, the start temperature.
+This is the maximum amount of movement alloved along one axis, within one step, for a vertex.
+Currently it is decreased linearly to zero during the iteration.
+The default \code{NULL} uses \code{sqrt(vcount(graph))}.}
 
-\item{grid}{Character scalar, whether to use the faster, but less accurate
-grid based implementation of the algorithm. By default (\dQuote{auto}), the
-grid-based implementation is used if the graph has more than one thousand
-vertices.}
+\item{grid}{Character scalar, whether to use the faster, but less accurate grid based implementation of the algorithm.
+By default (\dQuote{auto}), the grid-based implementation is used if the graph has more than one thousand vertices.}
 
-\item{weights}{A vector giving edge weights. The \code{weight} edge
-attribute is used by default, if present. If weights are given, then the
-attraction along the edges will be multiplied by the given edge weights.
-This places vertices connected with a highly weighted edge closer to
-each other. Weights must be positive.}
+\item{weights}{A vector giving edge weights.
+The \code{weight} edge attribute is used by default, if present.
+If weights are given, then the attraction along the edges will be multiplied by the given edge weights.
+This places vertices connected with a highly weighted edge closer to each other.
+Weights must be positive.}
 
-\item{minx}{Numeric vector that gives lower boundaries
-for the \sQuote{x} coordinates of the vertices.
+\item{minx}{Numeric vector that gives lower boundaries for the \sQuote{x} coordinates of the vertices.
 The length of the vector must match the number of vertices in the graph.
 Default: \code{NULL}.}
 
 \item{maxx}{Similar to \code{minx}, but gives the upper boundaries.}
 
-\item{miny}{Similar to \code{minx}, but gives the lower boundaries of the
-\sQuote{y} coordinates.}
+\item{miny}{Similar to \code{minx}, but gives the lower boundaries of the \sQuote{y} coordinates.}
 
-\item{maxy}{Similar to \code{minx}, but gives the upper boundaries of the
-\sQuote{y} coordinates.}
+\item{maxy}{Similar to \code{minx}, but gives the upper boundaries of the \sQuote{y} coordinates.}
 
-\item{minz}{Similar to \code{minx}, but gives the lower boundaries of the
-\sQuote{z} coordinates.}
+\item{minz}{Similar to \code{minx}, but gives the lower boundaries of the \sQuote{z} coordinates.}
 
-\item{maxz}{Similar to \code{minx}, but gives the upper boundaries of the
-\sQuote{z} coordinates.}
+\item{maxz}{Similar to \code{minx}, but gives the upper boundaries of the \sQuote{z} coordinates.}
 
-\item{coolexp, maxdelta, area, repulserad}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} These
-arguments are not supported from igraph version 0.8.0 and are ignored
-(with a warning).}
+\item{coolexp, maxdelta, area, repulserad}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} These arguments are not supported from igraph version 0.8.0 and are ignored (with a warning).}
 
 \item{maxiter}{A deprecated synonym of \code{niter}, for compatibility.}
 }
 \value{
-A two- or three-column matrix, each row giving the coordinates of a
-vertex, according to the IDs of the vertex IDs.
+A two- or three-column matrix, each row giving the coordinates of a vertex, according to the IDs of the vertex IDs.
 }
 \description{
-Place vertices on the plane using the force-directed layout algorithm by
-Fruchterman and Reingold.
+Place vertices on the plane using the force-directed layout algorithm by Fruchterman and Reingold.
 }
 \details{
 See the referenced paper below for the details of the algorithm.
@@ -130,8 +118,7 @@ Force-directed Placement. \emph{Software - Practice and Experience},
 21(11):1129-1164.
 }
 \seealso{
-\code{\link[=layout_with_drl]{layout_with_drl()}}, \code{\link[=layout_with_kk]{layout_with_kk()}} for
-other layout algorithms.
+\code{\link[=layout_with_drl]{layout_with_drl()}}, \code{\link[=layout_with_kk]{layout_with_kk()}} for other layout algorithms.
 
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},

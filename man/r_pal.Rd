@@ -13,9 +13,8 @@ r_pal(n)
 A character vector of color names.
 }
 \description{
-This is the default R palette, to be able to reproduce the
-colors of older igraph versions. Its colors are appropriate
-for categories, but they are not very attractive.
+This is the default R palette, to be able to reproduce the colors of older igraph versions.
+Its colors are appropriate for categories, but they are not very attractive.
 }
 \seealso{
 Other palettes:

@@ -10,16 +10,14 @@
 \item{...}{The vertex sequences to take the intersection of.}
 }
 \value{
-A vertex sequence that contains vertices that appear in all
-given sequences, each vertex exactly once.
+A vertex sequence that contains vertices that appear in all given sequences, each vertex exactly once.
 }
 \description{
 Intersection of vertex sequences
 }
 \details{
-They must belong to the same graph. Note that this function has
-\sQuote{set} semantics and the multiplicity of vertices is lost in the
-result.
+They must belong to the same graph.
+Note that this function has \sQuote{set} semantics and the multiplicity of vertices is lost in the result.
 }
 \examples{
 g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))

@@ -22,42 +22,37 @@ layout_with_dh(
 with_dh(...)
 }
 \arguments{
-\item{graph}{The graph to lay out. Edge directions are ignored.}
+\item{graph}{The graph to lay out.
+Edge directions are ignored.}
 
 \item{...}{Passed to \code{layout_with_dh()}.}
 
-\item{coords}{Optional starting positions for the vertices. If this argument
-is not \code{NULL} then it should be an appropriate matrix of starting
-coordinates.}
+\item{coords}{Optional starting positions for the vertices.
+If this argument is not \code{NULL} then it should be an appropriate matrix of starting coordinates.}
 
 \item{maxiter}{Number of iterations to perform in the first phase.}
 
-\item{fineiter}{Number of iterations in the fine tuning phase. The
-default \code{NULL} uses \code{max(10, log2(vcount(graph)))}.}
+\item{fineiter}{Number of iterations in the fine tuning phase.
+The default \code{NULL} uses \code{max(10, log2(vcount(graph)))}.}
 
 \item{cool.fact}{Cooling factor.}
 
-\item{weight.node.dist}{Weight for the node-node distances component of the
-energy function.}
+\item{weight.node.dist}{Weight for the node-node distances component of the energy function.}
 
-\item{weight.border}{Weight for the distance from the border component of
-the energy function. It can be set to zero, if vertices are allowed to sit
-on the border.}
+\item{weight.border}{Weight for the distance from the border component of the energy function.
+It can be set to zero, if vertices are allowed to sit on the border.}
 
-\item{weight.edge.lengths}{Weight for the edge length component of the
-energy function. The default \code{NULL} uses \code{edge_density(graph) / 10}.}
+\item{weight.edge.lengths}{Weight for the edge length component of the energy function.
+The default \code{NULL} uses \code{edge_density(graph) / 10}.}
 
-\item{weight.edge.crossings}{Weight for the edge crossing component of the
-energy function. The default \code{NULL} uses
-\code{1 - sqrt(edge_density(graph))}.}
+\item{weight.edge.crossings}{Weight for the edge crossing component of the energy function.
+The default \code{NULL} uses \code{1 - sqrt(edge_density(graph))}.}
 
-\item{weight.node.edge.dist}{Weight for the node-edge distance component of
-the energy function. The default \code{NULL} uses
-\code{0.2 * (1 - edge_density(graph))}.}
+\item{weight.node.edge.dist}{Weight for the node-edge distance component of the energy function.
+The default \code{NULL} uses \code{0.2 * (1 - edge_density(graph))}.}
 }
 \value{
-A matrix with two columns, containing the x and y coordinates
-of the vertices:
+A matrix with two columns, containing the x and y coordinates of the vertices:
 \describe{
 \item{x}{
 The x-coordinate of the vertex.
@@ -68,25 +63,22 @@ The y-coordinate of the vertex.
 }
 }
 \description{
-Place vertices of a graph on the plane, according to the simulated annealing
-algorithm by Davidson and Harel.
+Place vertices of a graph on the plane, according to the simulated annealing algorithm by Davidson and Harel.
 }
 \details{
-This function implements the algorithm by Davidson and Harel, see Ron
-Davidson, David Harel: Drawing Graphs Nicely Using Simulated Annealing. ACM
-Transactions on Graphics 15(4), pp. 301-331, 1996.
+This function implements the algorithm by Davidson and Harel, see Ron Davidson, David Harel:
+Drawing Graphs Nicely Using Simulated Annealing.
+ACM Transactions on Graphics 15(4), pp. 301-331, 1996.
 
 The algorithm uses simulated annealing and a sophisticated energy function,
-which is unfortunately hard to parameterize for different graphs. The
-original publication did not disclose any parameter values, and the ones
-below were determined by experimentation.
+which is unfortunately hard to parameterize for different graphs.
+The original publication did not disclose any parameter values, and the ones below were determined by experimentation.
 
-The algorithm consists of two phases, an annealing phase, and a fine-tuning
-phase. There is no simulated annealing in the second phase.
+The algorithm consists of two phases, an annealing phase, and a fine-tuning phase.
+There is no simulated annealing in the second phase.
 
-Our implementation tries to follow the original publication, as much as
-possible. The only major difference is that coordinates are explicitly kept
-within the bounds of the rectangle of the layout.
+Our implementation tries to follow the original publication, as much as possible.
+The only major difference is that coordinates are explicitly kept within the bounds of the rectangle of the layout.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_davidson_harel}{\code{layout_davidson_harel()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_density}{\code{density()}}

@@ -23,14 +23,13 @@
 
 #' Palette for categories
 #'
-#' This is a color blind friendly palette from
-#' <https://jfly.uni-koeln.de/color/>. It has 8 colors.
+#' This is a color blind friendly palette from <https://jfly.uni-koeln.de/color/>.
+#' It has 8 colors.
 #'
-#' This is the suggested palette for visualizations where vertex colors
-#' mark categories, e.g. community membership.
+#' This is the suggested palette for visualizations where vertex colors mark categories, e.g. community membership.
 #'
-#' @param n The number of colors in the palette. We simply take the first
-#'   `n` colors from the total 8.
+#' @param n The number of colors in the palette.
+#'   We simply take the first `n` colors from the total 8.
 #' @return A character vector of RGB color codes.
 #'
 #' @section Examples:
@@ -79,12 +78,11 @@ categorical_pal <- function(n) {
 #' This is the \sQuote{OrRd} palette from <https://colorbrewer2.org/>.
 #' It has at most nine colors.
 #'
-#' Use this palette, if vertex colors mark some ordinal quantity, e.g. some
-#' centrality measure, or some ordinal vertex covariate, like the age of
-#' people, or their seniority level.
+#' Use this palette, if vertex colors mark some ordinal quantity, e.g. some centrality measure, or some ordinal vertex covariate,
+#' like the age of people, or their seniority level.
 #'
-#' @param n The number of colors in the palette. The maximum is nine
-#'   currently.
+#' @param n The number of colors in the palette.
+#'   The maximum is nine currently.
 #' @return A character vector of RGB color codes.
 #'
 #' @family palettes
@@ -155,13 +153,11 @@ sequential_pal <- function(n) {
 #' This is the \sQuote{PuOr} palette from <https://colorbrewer2.org/>.
 #' It has at most eleven colors.
 #'
-#' This is similar to [sequential_pal()], but it also puts
-#' emphasis on the mid-range values, plus the the two extreme ends.
-#' Use this palette, if you have such a quantity to mark with vertex
-#' colors.
+#' This is similar to [sequential_pal()], but it also puts emphasis on the mid-range values, plus the the two extreme ends.
+#' Use this palette, if you have such a quantity to mark with vertex colors.
 #'
-#' @param n The number of colors in the palette. The maximum is eleven
-#'   currently.
+#' @param n The number of colors in the palette.
+#'   The maximum is eleven currently.
 #' @return A character vector of RGB color codes.
 #'
 #' @family palettes
@@ -265,9 +261,8 @@ diverging_pal <- function(n) {
 
 #' The default R palette
 #'
-#' This is the default R palette, to be able to reproduce the
-#' colors of older igraph versions. Its colors are appropriate
-#' for categories, but they are not very attractive.
+#' This is the default R palette, to be able to reproduce the colors of older igraph versions.
+#' Its colors are appropriate for categories, but they are not very attractive.
 #'
 #' @param n The number of colors to use, the maximum is eight.
 #' @return A character vector of color names.

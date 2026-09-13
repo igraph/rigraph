@@ -15,26 +15,23 @@ eigen_centrality(
 \arguments{
 \item{graph}{Graph to be analyzed.}
 
-\item{directed}{Logical, whether to consider direction of the edges
-in directed graphs. It is ignored for undirected graphs.}
+\item{directed}{Logical, whether to consider direction of the edges in directed graphs.
+It is ignored for undirected graphs.}
 
-\item{scale}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Normalization will always take
-place.}
+\item{scale}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Normalization will always take place.}
 
-\item{weights}{A numerical vector or \code{NULL}. This argument can be used
-to give edge weights for calculating the weighted eigenvector centrality of
-vertices. If this is \code{NULL} and the graph has a \code{weight} edge
-attribute then that is used. If \code{weights} is a numerical vector then it is
-used, even if the graph has a \code{weight} edge attribute. If this is
-\code{NA}, then no edge weights are used (even if the graph has a
-\code{weight} edge attribute). Note that if there are negative edge weights
-and the direction of the edges is considered, then the eigenvector might be
-complex. In this case only the real part is reported.
-This function interprets weights as connection strength. Higher
-weights spread the centrality better.}
+\item{weights}{A numerical vector or \code{NULL}.
+This argument can be used to give edge weights for calculating the weighted eigenvector centrality of vertices.
+If this is \code{NULL} and the graph has a \code{weight} edge attribute then that is used.
+If \code{weights} is a numerical vector then it is used, even if the graph has a \code{weight} edge attribute.
+If this is \code{NA}, then no edge weights are used (even if the graph has a \code{weight} edge attribute).
+Note that if there are negative edge weights and the direction of the edges is considered, then the eigenvector might be complex.
+In this case only the real part is reported.
+This function interprets weights as connection strength.
+Higher weights spread the centrality better.}
 
-\item{options}{A named list, to override some ARPACK options. See
-\code{\link[=arpack]{arpack()}} for details.}
+\item{options}{A named list, to override some ARPACK options.
+See \code{\link[=arpack]{arpack()}} for details.}
 }
 \value{
 A named list with components:
@@ -51,50 +48,35 @@ A named list, information about the underlying ARPACK computation. See \code{\li
 }
 }
 \description{
-\code{eigen_centrality()} takes a graph (\code{graph}) and returns the
-eigenvector centralities of the vertices \code{v} within it.
+\code{eigen_centrality()} takes a graph (\code{graph}) and returns the eigenvector centralities of the vertices \code{v} within it.
 }
 \details{
-Eigenvector centrality scores correspond to the values of the principal
-eigenvector of the graph's adjacency matrix; these scores may, in turn, be
-interpreted as arising from a reciprocal process in which the centrality of
-each actor is proportional to the sum of the centralities of those actors to
-whom he or she is connected.  In general, vertices with high eigenvector
-centralities are those which are connected to many other vertices which are,
-in turn, connected to many others (and so on).  The perceptive may realize
-that this implies that the largest values will be obtained by individuals in
-large cliques (or high-density substructures).  This is also intelligible
-from an algebraic point of view, with the first eigenvector being closely
-related to the best rank-1 approximation of the adjacency matrix (a
-relationship which is easy to see in the special case of a diagonalizable
-symmetric real matrix via the \eqn{SLS^-1}{$S \Lambda S^{-1}$}
-decomposition).
+Eigenvector centrality scores correspond to the values of the principal eigenvector of the graph's adjacency matrix; these scores may,
+in turn,
+be interpreted as arising from a reciprocal process in which the centrality of each actor is proportional to the sum of the centralities of those actors to whom he or she is connected.  In general,
+vertices with high eigenvector centralities are those which are connected to many other vertices which are, in turn,
+connected to many others (and so on).  The perceptive may realize that this implies that the largest values will be obtained by individuals in large cliques (or high-density substructures).  This is also intelligible from an algebraic point of view,
+with the first eigenvector being closely related to the best rank-1 approximation of the adjacency matrix (a relationship which is easy to see in the special case of a diagonalizable symmetric real matrix via the \eqn{SLS^-1}{$S \Lambda S^{-1}$} decomposition).
 
-The adjacency matrix used in the eigenvector centrality calculation assumes
-that loop edges are counted \emph{twice} in undirected graphs; this is because
-each loop edge has \emph{two} endpoints that are both connected to the same vertex,
+The adjacency matrix used in the eigenvector centrality calculation assumes that loop edges are counted \emph{twice} in undirected graphs;
+this is because each loop edge has \emph{two} endpoints that are both connected to the same vertex,
 and you could traverse the loop edge via either endpoint.
 
-In the directed case, the left eigenvector of the adjacency matrix is
-calculated. In other words, the centrality of a vertex is proportional to
-the sum of centralities of vertices pointing to it.
+In the directed case, the left eigenvector of the adjacency matrix is calculated.
+In other words, the centrality of a vertex is proportional to the sum of centralities of vertices pointing to it.
 
 Eigenvector centrality is meaningful only for (strongly) connected graphs.
-Undirected graphs that are not connected should be decomposed into connected
-components, and the eigenvector centrality calculated for each separately.
-This function does not verify that the graph is connected. If it is not, in
-the undirected case the scores of all but one component will be zeros.
+Undirected graphs that are not connected should be decomposed into connected components,
+and the eigenvector centrality calculated for each separately.
+This function does not verify that the graph is connected.
+If it is not, in the undirected case the scores of all but one component will be zeros.
 
-Also note that the adjacency matrix of a directed acyclic graph or the
-adjacency matrix of an empty graph does not possess positive eigenvalues,
-therefore the eigenvector centrality is not defined for these graphs.
-igraph will return an eigenvalue of zero in such cases. The eigenvector
-centralities will all be equal for an empty graph and will all be zeros for
-a directed acyclic graph. Such pathological cases can be detected by checking
-whether the eigenvalue is very close to zero.
+Also note that the adjacency matrix of a directed acyclic graph or the adjacency matrix of an empty graph does not possess positive eigenvalues,
+therefore the eigenvector centrality is not defined for these graphs. igraph will return an eigenvalue of zero in such cases.
+The eigenvector centralities will all be equal for an empty graph and will all be zeros for a directed acyclic graph.
+Such pathological cases can be detected by checking whether the eigenvalue is very close to zero.
 
-From igraph version 0.5 this function uses ARPACK for the underlying
-computation, see \code{\link[=arpack]{arpack()}} for more about ARPACK in igraph.
+From igraph version 0.5 this function uses ARPACK for the underlying computation, see \code{\link[=arpack]{arpack()}} for more about ARPACK in igraph.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_eigenvector_centrality}{\code{eigenvector_centrality()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

@@ -21,33 +21,27 @@ layout.sugiyama(
 Layers are numbered from one.
 Default: \code{NULL}, igraph calculates the layers automatically.}
 
-\item{hgap}{Real scalar, the minimum horizontal gap between vertices in the
-same layer.}
+\item{hgap}{Real scalar, the minimum horizontal gap between vertices in the same layer.}
 
 \item{vgap}{Real scalar, the distance between layers.}
 
-\item{maxiter}{Integer scalar, the maximum number of iterations in the
-crossing minimization stage. 100 is a reasonable default; if you feel that
-you have too many edge crossings, increase this.}
+\item{maxiter}{Integer scalar, the maximum number of iterations in the crossing minimization stage.
+100 is a reasonable default; if you feel that you have too many edge crossings, increase this.}
 
-\item{weights}{Optional edge weight vector. If \code{NULL}, then the
-'weight' edge attribute is used, if there is one. Supply \code{NA} here and
-igraph ignores the edge weights. These are used only if the graph
-contains cycles; igraph will tend to reverse edges with smaller weights
-when breaking the cycles.}
+\item{weights}{Optional edge weight vector.
+If \code{NULL}, then the 'weight' edge attribute is used, if there is one.
+Supply \code{NA} here and igraph ignores the edge weights.
+These are used only if the graph contains cycles; igraph will tend to reverse edges with smaller weights when breaking the cycles.}
 
-\item{attributes}{Which graph/vertex/edge attributes to keep in the extended
-graph. \sQuote{default} keeps the \sQuote{size}, \sQuote{size2},
-\sQuote{shape}, \sQuote{label} and \sQuote{color} vertex attributes and the
-\sQuote{arrow.mode} and \sQuote{arrow.size} edge attributes. \sQuote{all}
-keep all graph, vertex and edge attributes, \sQuote{none} keeps none of
-them.}
+\item{attributes}{Which graph/vertex/edge attributes to keep in the extended graph.
+\sQuote{default} keeps the \sQuote{size}, \sQuote{size2}, \sQuote{shape},
+\sQuote{label} and \sQuote{color} vertex attributes and the \sQuote{arrow.mode} and \sQuote{arrow.size} edge attributes.
+\sQuote{all} keep all graph, vertex and edge attributes, \sQuote{none} keeps none of them.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{layout.sugiyama()} was renamed to \code{\link[=layout_with_sugiyama]{layout_with_sugiyama()}} to create a more
-consistent API.
+\code{layout.sugiyama()} was renamed to \code{\link[=layout_with_sugiyama]{layout_with_sugiyama()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_sugiyama}{\code{layout_sugiyama()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist}{\code{get_edgelist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

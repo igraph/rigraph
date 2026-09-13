@@ -20,20 +20,18 @@ sample_forestfire(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{bw.factor}{The backward burning ratio. The backward burning
-probability is calculated as \code{bw.factor*fw.prob}.}
+\item{bw.factor}{The backward burning ratio.
+The backward burning probability is calculated as \code{bw.factor*fw.prob}.}
 
 \item{ambs}{The number of ambassador vertices.}
 
 \item{directed}{Logical, whether to create a directed graph.}
 }
 \value{
-A simple graph, possibly directed if the \code{directed} argument is
-\code{TRUE}.
+A simple graph, possibly directed if the \code{directed} argument is \code{TRUE}.
 }
 \description{
-This is a growing network model, which resembles of how the forest fire
-spreads by igniting trees close by.
+This is a growing network model, which resembles of how the forest fire spreads by igniting trees close by.
 }
 \details{
 The forest fire model intends to reproduce the following network
@@ -43,9 +41,10 @@ Communities.  \item Densification power-law. The network is densifying in
 time, according to a power-law rule.  \item Shrinking diameter. The diameter
 of the network decreases in time.  }
 
-The network is generated in the following way. One vertex is added at a
-time. This vertex connects to (cites) \code{ambs} vertices already present
-in the network, chosen uniformly random. Now, for each cited vertex \eqn{v}
+The network is generated in the following way.
+One vertex is added at a time.
+This vertex connects to (cites) \code{ambs} vertices already present in the network, chosen uniformly random.
+Now, for each cited vertex \eqn{v}
 we do the following procedure: \enumerate{ \item We generate two random
 number, \eqn{x} and \eqn{y}, that are geometrically distributed with means
 \eqn{p/(1-p)} and \eqn{rp(1-rp)}. (\eqn{p} is \code{fw.prob}, \eqn{r} is
@@ -56,11 +55,8 @@ available then we cite all of them.  \item The same procedure is applied to
 all the newly cited vertices.  }
 }
 \note{
-The version of the model in the published paper is incorrect in the
-sense that it cannot generate the kind of graphs the authors claim. A
-corrected version is available from
-\url{https://www.cs.cmu.edu/~jure/pubs/powergrowth-tkdd.pdf}, our
-implementation is based on this.
+The version of the model in the published paper is incorrect in the sense that it cannot generate the kind of graphs the authors claim.
+A corrected version is available from \url{https://www.cs.cmu.edu/~jure/pubs/powergrowth-tkdd.pdf}, our implementation is based on this.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_forest_fire_game}{\code{forest_fire_game()}}
@@ -86,8 +82,7 @@ time: densification laws, shrinking diameters and possible explanations.
 conference on Knowledge discovery in data mining}, 177--187, 2005.
 }
 \seealso{
-\code{\link[=sample_pa]{sample_pa()}} for the basic preferential attachment
-model.
+\code{\link[=sample_pa]{sample_pa()}} for the basic preferential attachment model.
 
 Random graph models (games):
 \code{\link[=bipartite_gnm]{bipartite_gnm()}},

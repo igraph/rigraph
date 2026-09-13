@@ -15,20 +15,18 @@ turan(n, r)
 \item{r}{Integer, the number of partitions in the graph, must be positive.}
 }
 \value{
-An igraph graph with a vertex attribute \code{type} storing the
-partition index of each vertex. Partition indices start from 1.
+An igraph graph with a vertex attribute \code{type} storing the partition index of each vertex.
+Partition indices start from 1.
 }
 \description{
-Turán graphs are complete multipartite graphs with the property that the
-sizes of the partitions are as close to equal as possible.
+Turán graphs are complete multipartite graphs with the property that the sizes of the partitions are as close to equal as possible.
 }
 \details{
-The Turán graph with \code{n} vertices and \code{r} partitions is the densest
-graph on \code{n} vertices that does not contain a clique of size \code{r+1}.
+The Turán graph with \code{n} vertices and \code{r} partitions is the densest graph on \code{n} vertices that does not contain a clique of size \code{r+1}.
 
-This function generates undirected graphs. The null graph is
-returned when the number of vertices is zero. A complete graph is
-returned if the number of partitions is greater than the number of vertices.
+This function generates undirected graphs.
+The null graph is returned when the number of vertices is zero.
+A complete graph is returned if the number of partitions is greater than the number of vertices.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_turan}{\code{turan()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

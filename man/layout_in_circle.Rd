@@ -12,10 +12,9 @@ in_circle(...)
 \arguments{
 \item{graph}{The input graph.}
 
-\item{order}{The vertices to place on the circle, in the order of their
-desired placement. Vertices that are not included here will be placed at
-(0,0). The default \code{NULL} selects all vertices, in the order of their
-IDs.}
+\item{order}{The vertices to place on the circle, in the order of their desired placement.
+Vertices that are not included here will be placed at (0,0).
+The default \code{NULL} selects all vertices, in the order of their IDs.}
 
 \item{...}{Passed to \code{layout_in_circle()}.}
 }
@@ -26,8 +25,7 @@ A numeric matrix with two columns, and one row for each vertex.
 Place vertices on a circle, in the order of their vertex IDs.
 }
 \details{
-If you want to order the vertices differently, then permute them using the
-\code{\link[=permute]{permute()}} function.
+If you want to order the vertices differently, then permute them using the \code{\link[=permute]{permute()}} function.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_circle}{\code{layout_circle()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

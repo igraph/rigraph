@@ -135,34 +135,30 @@ quantile.sir <- function(x, comp = c("NI", "NS", "NR"), prob, ...) {
 
 #' Plotting the results on multiple SIR model runs
 #'
-#' This function can conveniently plot the results of multiple SIR model
-#' simulations.
+#' This function can conveniently plot the results of multiple SIR model simulations.
 #'
-#' The number of susceptible/infected/recovered individuals is plotted over
-#' time, for multiple simulations.
+#' The number of susceptible/infected/recovered individuals is plotted over time, for multiple simulations.
 #'
-#' @param x The output of the SIR simulation, coming from the [sir()]
-#'   function.
-#' @param comp Character scalar, which component to plot. Either \sQuote{NI}
-#'   (infected, default), \sQuote{NS} (susceptible) or \sQuote{NR} (recovered).
+#' @param x The output of the SIR simulation, coming from the [sir()] function.
+#' @param comp Character scalar, which component to plot.
+#'   Either \sQuote{NI} (infected, default), \sQuote{NS} (susceptible) or \sQuote{NR} (recovered).
 #' @param median Logical, whether to plot the (binned) median.
 #' @param quantiles A vector of (binned) quantiles to plot.
 #' @param color Color of the individual simulation curves.
 #' @param median_color Color of the median curve.
-#' @param quantile_color Color(s) of the quantile curves. (It is recycled if
-#'   needed and non-needed entries are ignored if too long.)
+#' @param quantile_color Color(s) of the quantile curves.
+#'   (It is recycled if needed and non-needed entries are ignored if too long.)
 #' @param lwd.median Line width of the median.
 #' @param lwd.quantile Line width of the quantile curves.
 #' @param lty.quantile Line type of the quantile curves.
-#' @param xlim The x limits, a two-element numeric vector. If `NULL`, then
-#'   it is calculated from the data.
-#' @param ylim The y limits, a two-element numeric vector. If `NULL`, then
-#'   it is calculated from the data.
+#' @param xlim The x limits, a two-element numeric vector.
+#'   If `NULL`, then it is calculated from the data.
+#' @param ylim The y limits, a two-element numeric vector.
+#'   If `NULL`, then it is calculated from the data.
 #' @param xlab The x label.
-#' @param ylab The y label. If `NULL` then it is automatically added based
-#'   on the `comp` argument.
-#' @param \dots Additional arguments are passed to [plot()], that is run
-#'   before any of the curves are added, to create the figure.
+#' @param ylab The y label.
+#'   If `NULL` then it is automatically added based on the `comp` argument.
+#' @param \dots Additional arguments are passed to [plot()], that is run before any of the curves are added, to create the figure.
 #' @return Nothing.
 #' @author Eric Kolaczyk (<https://kolaczyk.github.io/>) and Gabor
 #' Csardi \email{csardi.gabor@@gmail.com}.

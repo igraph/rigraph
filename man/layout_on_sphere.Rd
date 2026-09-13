@@ -18,16 +18,13 @@ on_sphere(...)
 A numeric matrix with three columns, and one row for each vertex.
 }
 \description{
-Place vertices on a sphere, approximately uniformly, in the order of their
-vertex IDs.
+Place vertices on a sphere, approximately uniformly, in the order of their vertex IDs.
 }
 \details{
-\code{layout_on_sphere()} places the vertices (approximately) uniformly on the
-surface of a sphere, this is thus a 3d layout. It is not clear however what
-\dQuote{uniformly on a sphere} means.
+\code{layout_on_sphere()} places the vertices (approximately) uniformly on the surface of a sphere, this is thus a 3d layout.
+It is not clear however what \dQuote{uniformly on a sphere} means.
 
-If you want to order the vertices differently, then permute them using the
-\code{\link[=permute]{permute()}} function.
+If you want to order the vertices differently, then permute them using the \code{\link[=permute]{permute()}} function.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_sphere}{\code{layout_sphere()}}

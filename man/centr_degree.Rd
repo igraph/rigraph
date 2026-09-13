@@ -17,14 +17,12 @@ centr_degree(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{mode}{This is the same as the \code{mode} argument of
-\code{degree()}.}
+\item{mode}{This is the same as the \code{mode} argument of \code{degree()}.}
 
-\item{loops}{Logical, whether to consider loops edges when
-calculating the degree.}
+\item{loops}{Logical, whether to consider loops edges when calculating the degree.}
 
-\item{normalized}{Logical. Whether to normalize the graph level
-centrality score by dividing by the theoretical maximum.}
+\item{normalized}{Logical.
+Whether to normalize the graph level centrality score by dividing by the theoretical maximum.}
 }
 \value{
 A named list with the following components:

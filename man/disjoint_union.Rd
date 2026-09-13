@@ -13,10 +13,9 @@ x \%du\% y
 \item{\dots}{Graph objects or lists of graph objects.}
 
 \item{graph.attr.comb}{Specification for combining shared graph attributes.
-The default \code{NULL} uses the \code{graph.attr.comb} igraph option (\code{"rename"}
-unless changed via \code{\link[=igraph_options]{igraph_options()}}), which preserves the historical
-behaviour of appending \verb{_1}, \verb{_2}, ... suffixes to clashing attribute
-names. See \link{igraph-attribute-combination} for the available combiners.}
+The default \code{NULL} uses the \code{graph.attr.comb} igraph option (\code{"rename"} unless changed via \code{\link[=igraph_options]{igraph_options()}}),
+which preserves the historical behaviour of appending \verb{_1}, \verb{_2}, ... suffixes to clashing attribute names.
+See \link{igraph-attribute-combination} for the available combiners.}
 
 \item{x, y}{Graph objects.}
 }
@@ -24,30 +23,27 @@ names. See \link{igraph-attribute-combination} for the available combiners.}
 A new graph object.
 }
 \description{
-The union of two or more graphs are created. The graphs are assumed to have
-disjoint vertex sets.
+The union of two or more graphs are created.
+The graphs are assumed to have disjoint vertex sets.
 }
 \details{
 \code{disjoint_union()} creates a union of two or more disjoint graphs.
-Thus first the vertices in the second, third, etc. graphs are relabeled to
-have completely disjoint graphs. Then a simple union is created. This
-function can also be used via the \verb{\%du\%} operator.
+Thus first the vertices in the second, third, etc. graphs are relabeled to have completely disjoint graphs.
+Then a simple union is created.
+This function can also be used via the \verb{\%du\%} operator.
 
-\code{disjoint_union()} handles graph, vertex and edge attributes.  In
-particular, it merges vertex and edge attributes using the \code{\link[vctrs:vec_c]{vctrs::vec_c()}}
-function. For graphs that lack some vertex/edge attribute, the corresponding
-values in the new graph are set to a missing value (\code{NA} for scalar attributes,
-\code{NULL} for list attributes). Graph attributes are combined according to
-\code{graph.attr.comb}; by default any name clash is resolved by adding
-suffixes (\verb{_1}, \verb{_2}, ...). See \link{igraph-attribute-combination} for the
-available combiners.
+\code{disjoint_union()} handles graph, vertex and edge attributes.  In particular,
+it merges vertex and edge attributes using the \code{\link[vctrs:vec_c]{vctrs::vec_c()}} function.
+For graphs that lack some vertex/edge attribute,
+the corresponding values in the new graph are set to a missing value (\code{NA} for scalar attributes, \code{NULL} for list attributes).
+Graph attributes are combined according to \code{graph.attr.comb}; by default any name clash is resolved by adding suffixes (\verb{_1}, \verb{_2}, ...).
+See \link{igraph-attribute-combination} for the available combiners.
 
-Note that if both graphs have vertex names (i.e. a \code{name} vertex
-attribute), then the concatenated vertex names might be non-unique in the
-result. A warning is given if this happens.
+Note that if both graphs have vertex names (i.e. a \code{name} vertex attribute),
+then the concatenated vertex names might be non-unique in the result.
+A warning is given if this happens.
 
-An error is generated if some input graphs are directed and others are
-undirected.
+An error is generated if some input graphs are directed and others are undirected.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

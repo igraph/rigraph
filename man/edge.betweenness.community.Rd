@@ -18,49 +18,40 @@ edge.betweenness.community(
 \arguments{
 \item{graph}{The graph to analyze.}
 
-\item{weights}{The weights of the edges. It must be a positive numeric vector,
-\code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
-\sQuote{weight} edge attribute, then that attribute will be used. If
-\code{NULL} and no such attribute is present, then the edges will have equal
-weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
-attribute, but you don't want to use it for community detection. Edge weights
-are used to calculate weighted edge betweenness. This means that edges are
-interpreted as distances, not as connection strengths.}
+\item{weights}{The weights of the edges.
+It must be a positive numeric vector, \code{NULL} or \code{NA}.
+If it is \code{NULL} and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
+If \code{NULL} and no such attribute is present, then the edges will have equal weights.
+Set this to \code{NA} if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for community detection.
+Edge weights are used to calculate weighted edge betweenness.
+This means that edges are interpreted as distances, not as connection strengths.}
 
-\item{directed}{Logical, whether to calculate directed edge
-betweenness for directed graphs. It is ignored for undirected graphs.}
+\item{directed}{Logical, whether to calculate directed edge betweenness for directed graphs.
+It is ignored for undirected graphs.}
 
-\item{edge.betweenness}{Logical, whether to return the edge
-betweenness of the edges at the time of their removal.}
+\item{edge.betweenness}{Logical, whether to return the edge betweenness of the edges at the time of their removal.}
 
-\item{merges}{Logical, whether to return the merge matrix
-representing the hierarchical community structure of the network.  This
-argument is called \code{merges}, even if the community structure algorithm
-itself is divisive and not agglomerative: it builds the tree from top to
-bottom. There is one line for each merge (i.e. split) in matrix, the first
-line is the first merge (last split). The communities are identified by
-integer number starting from one. Community IDs smaller than or equal to
-\eqn{N}, the number of vertices in the graph, belong to singleton
-communities, i.e. individual vertices. Before the first merge we have \eqn{N}
-communities numbered from one to \eqn{N}. The first merge, the first line of
-the matrix creates community \eqn{N+1}, the second merge creates community
-\eqn{N+2}, etc.}
+\item{merges}{Logical,
+whether to return the merge matrix representing the hierarchical community structure of the network.  This argument is called \code{merges},
+even if the community structure algorithm itself is divisive and not agglomerative: it builds the tree from top to bottom.
+There is one line for each merge (i.e. split) in matrix, the first line is the first merge (last split).
+The communities are identified by integer number starting from one.
+Community IDs smaller than or equal to \eqn{N}, the number of vertices in the graph, belong to singleton communities,
+i.e. individual vertices.
+Before the first merge we have \eqn{N} communities numbered from one to \eqn{N}.
+The first merge, the first line of the matrix creates community \eqn{N+1}, the second merge creates community \eqn{N+2}, etc.}
 
-\item{bridges}{Logical, whether to return a list the edge removals
-which actually splitted a component of the graph.}
+\item{bridges}{Logical, whether to return a list the edge removals which actually splitted a component of the graph.}
 
-\item{modularity}{Logical, whether to calculate the maximum
-modularity score, considering all possibly community structures along the
-edge-betweenness based edge removals.}
+\item{modularity}{Logical, whether to calculate the maximum modularity score,
+considering all possibly community structures along the edge-betweenness based edge removals.}
 
-\item{membership}{Logical, whether to calculate the membership
-vector corresponding to the highest possible modularity score.}
+\item{membership}{Logical, whether to calculate the membership vector corresponding to the highest possible modularity score.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{edge.betweenness.community()} was renamed to \code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}} to create a more
-consistent API.
+\code{edge.betweenness.community()} was renamed to \code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

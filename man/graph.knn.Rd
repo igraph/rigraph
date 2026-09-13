@@ -13,34 +13,30 @@ graph.knn(
 )
 }
 \arguments{
-\item{graph}{The input graph. It may be directed.}
+\item{graph}{The input graph.
+It may be directed.}
 
 \item{vids}{The vertices for which the calculation is performed.
-The default \code{NULL} includes all vertices. Note, that if not all vertices are given here, then
-both \sQuote{\code{knn}} and \sQuote{\code{knnk}} will be calculated based
-on the given vertices only.}
+The default \code{NULL} includes all vertices.
+Note, that if not all vertices are given here,
+then both \sQuote{\code{knn}} and \sQuote{\code{knnk}} will be calculated based on the given vertices only.}
 
-\item{mode}{Character constant to indicate the type of neighbors to consider
-in directed graphs. \code{out} considers out-neighbors, \verb{in} considers
-in-neighbors and \code{all} ignores edge directions.}
+\item{mode}{Character constant to indicate the type of neighbors to consider in directed graphs.
+\code{out} considers out-neighbors, \verb{in} considers in-neighbors and \code{all} ignores edge directions.}
 
 \item{neighbor.degree.mode}{The type of degree to average in directed graphs.
-\code{out} averages out-degrees, \verb{in} averages in-degrees and \code{all}
-ignores edge directions for the degree calculation.}
+\code{out} averages out-degrees, \verb{in} averages in-degrees and \code{all} ignores edge directions for the degree calculation.}
 
-\item{weights}{Weight vector. If the graph has a \code{weight} edge
-attribute, then this is used by default. If this argument is given, then
-vertex strength (see \code{\link[=strength]{strength()}}) is used instead of vertex
-degree. But note that \code{knnk} is still given in the function of the
-normal vertex degree.
-Weights are are used to calculate a weighted degree (also called
-\code{\link[=strength]{strength()}}) instead of the degree.}
+\item{weights}{Weight vector.
+If the graph has a \code{weight} edge attribute, then this is used by default.
+If this argument is given, then vertex strength (see \code{\link[=strength]{strength()}}) is used instead of vertex degree.
+But note that \code{knnk} is still given in the function of the normal vertex degree.
+Weights are are used to calculate a weighted degree (also called \code{\link[=strength]{strength()}}) instead of the degree.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.knn()} was renamed to \code{\link[=knn]{knn()}} to create a more
-consistent API.
+\code{graph.knn()} was renamed to \code{\link[=knn]{knn()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_avg_nearest_neighbor_degree}{\code{avg_nearest_neighbor_degree()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

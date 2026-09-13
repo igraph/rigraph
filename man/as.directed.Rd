@@ -9,16 +9,15 @@ as.directed(graph, mode = c("mutual", "arbitrary", "random", "acyclic"))
 \arguments{
 \item{graph}{The graph to convert.}
 
-\item{mode}{Character constant, defines the conversion algorithm. For
-\code{as_directed()} it can be \code{mutual} or \code{arbitrary}. For
-\code{as_undirected()} it can be \code{each}, \code{collapse} or
-\code{mutual}. See details below.}
+\item{mode}{Character constant, defines the conversion algorithm.
+For \code{as_directed()} it can be \code{mutual} or \code{arbitrary}.
+For \code{as_undirected()} it can be \code{each}, \code{collapse} or \code{mutual}.
+See details below.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{as.directed()} was renamed to \code{\link[=as_directed]{as_directed()}} to create a more
-consistent API.
+\code{as.directed()} was renamed to \code{\link[=as_directed]{as_directed()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_to_directed}{\code{to_directed()}}

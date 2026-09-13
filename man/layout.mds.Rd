@@ -9,23 +9,20 @@ layout.mds(graph, dist = NULL, dim = 2, options = arpack_defaults())
 \arguments{
 \item{graph}{The input graph.}
 
-\item{dist}{The distance matrix for the multidimensional scaling.  If
-\code{NULL} (the default), then the unweighted shortest path matrix is used.}
+\item{dist}{The distance matrix for the multidimensional scaling.  If \code{NULL} (the default),
+then the unweighted shortest path matrix is used.}
 
-\item{dim}{\code{layout_with_mds()} supports dimensions up to the number of nodes
-minus one, but only if the graph is connected; for unconnected graphs, the
-only possible value is 2. This is because \code{merge_coords()} only works in
-2D.}
+\item{dim}{\code{layout_with_mds()} supports dimensions up to the number of nodes minus one, but only if the graph is connected;
+for unconnected graphs, the only possible value is 2. This is because \code{merge_coords()} only works in 2D.}
 
-\item{options}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This argument is not
-supported from igraph version 1.6.0, as ARPACK is not used any more for
-solving the eigenproblem. Supplying it raises an error.}
+\item{options}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This argument is not supported from igraph version 1.6.0,
+as ARPACK is not used any more for solving the eigenproblem.
+Supplying it raises an error.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{layout.mds()} was renamed to \code{\link[=layout_with_mds]{layout_with_mds()}} to create a more
-consistent API.
+\code{layout.mds()} was renamed to \code{\link[=layout_with_mds]{layout_with_mds()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_mds}{\code{layout_mds()}}

@@ -16,19 +16,17 @@ ring(n, ..., directed = FALSE, mutual = FALSE, circular = TRUE)
 
 \item{directed}{Whether the graph is directed.}
 
-\item{mutual}{Whether directed edges are mutual. It is ignored in
-undirected graphs.}
+\item{mutual}{Whether directed edges are mutual.
+It is ignored in undirected graphs.}
 
-\item{circular}{Whether to create a circular ring. A non-circular
-ring is essentially a \dQuote{line}: a tree where every non-leaf
-vertex has one child.}
+\item{circular}{Whether to create a circular ring.
+A non-circular ring is essentially a \dQuote{line}: a tree where every non-leaf vertex has one child.}
 }
 \value{
 An igraph graph.
 }
 \description{
-A ring is a one-dimensional lattice and this function is a special case
-of \code{\link[=make_lattice]{make_lattice()}}.
+A ring is a one-dimensional lattice and this function is a special case of \code{\link[=make_lattice]{make_lattice()}}.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_ring}{\code{ring()}}

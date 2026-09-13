@@ -5,19 +5,14 @@
 \alias{attribute.combination}
 \title{How igraph functions handle attributes when the graph changes}
 \description{
-Many times, when the structure of a graph is modified, vertices/edges map of
-the original graph map to vertices/edges in the newly created (modified)
-graph. For example \code{\link[=simplify]{simplify()}} maps multiple edges to single
-edges. igraph provides a flexible mechanism to specify what to do with the
-vertex/edge attributes in these cases.
+Many times, when the structure of a graph is modified,
+vertices/edges map of the original graph map to vertices/edges in the newly created (modified) graph.
+For example \code{\link[=simplify]{simplify()}} maps multiple edges to single edges. igraph provides a flexible mechanism to specify what to do with the vertex/edge attributes in these cases.
 }
 \details{
-The functions that support the combination of attributes have one or two
-extra arguments called \code{vertex.attr.comb} and/or \code{edge.attr.comb}
-that specify how to perform the mapping of the attributes. E.g.
-\code{\link[=contract]{contract()}} contracts many vertices into a single one, the
-attributes of the vertices can be combined and stores as the vertex
-attributes of the new graph.
+The functions that support the combination of attributes have one or two extra arguments called \code{vertex.attr.comb} and/or \code{edge.attr.comb} that specify how to perform the mapping of the attributes.
+E.g. \code{\link[=contract]{contract()}} contracts many vertices into a single one,
+the attributes of the vertices can be combined and stores as the vertex attributes of the new graph.
 
 The specification of the combination of (vertex or edge) attributes can be
 given as \enumerate{
@@ -26,21 +21,19 @@ given as \enumerate{
 \item a list of character scalars and/or function objects.
 }
 
-If it is a character scalar, then it refers to one of the predefined
-combinations, see their list below.
+If it is a character scalar, then it refers to one of the predefined combinations, see their list below.
 
-If it is a function, then the given function is expected to perform the
-combination. It will be called once for each new vertex/edge in the graph,
-with a single argument: the attribute values of the vertices that map to
-that single vertex.
+If it is a function, then the given function is expected to perform the combination.
+It will be called once for each new vertex/edge in the graph, with a single argument:
+the attribute values of the vertices that map to that single vertex.
 
-The third option, a list can be used to specify different combination
-methods for different attributes. A named entry of the list corresponds to
-the attribute with the same name. An unnamed entry (i.e. if the name is the
-empty string) of the list specifies the default combination method. I.e.
+The third option, a list can be used to specify different combination methods for different attributes.
+A named entry of the list corresponds to the attribute with the same name.
+An unnamed entry (i.e. if the name is the empty string) of the list specifies the default combination method.
+I.e.
 \preformatted{list(weight="sum", "ignore")} specifies that the weight of the
-new edge should be sum of the weights of the corresponding edges in the old
-graph; and that the rest of the attributes should be ignored (=dropped).
+new edge should be sum of the weights of the corresponding edges in the old graph;
+and that the rest of the attributes should be ignored (=dropped).
 }
 \section{Predefined combination functions}{
  The following combination
@@ -140,9 +133,8 @@ simplify(g, edge.attr.comb = list(
 ))
 }
 \seealso{
-\code{\link[=graph_attr]{graph_attr()}}, \code{\link[=vertex_attr]{vertex_attr()}},
-\code{\link[=edge_attr]{edge_attr()}} on how to use graph/vertex/edge attributes in
-general. \code{\link[=igraph_options]{igraph_options()}} on igraph parameters.
+\code{\link[=graph_attr]{graph_attr()}}, \code{\link[=vertex_attr]{vertex_attr()}}, \code{\link[=edge_attr]{edge_attr()}} on how to use graph/vertex/edge attributes in general.
+\code{\link[=igraph_options]{igraph_options()}} on igraph parameters.
 
 Vertex, edge and graph attributes:
 \code{\link[=delete_edge_attr]{delete_edge_attr()}},

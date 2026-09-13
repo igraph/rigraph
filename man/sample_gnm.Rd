@@ -16,8 +16,7 @@ gnm(n, m, ..., directed = FALSE, loops = FALSE)
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{directed}{Logical, whether the graph will be directed, defaults to
-\code{FALSE}.}
+\item{directed}{Logical, whether the graph will be directed, defaults to \code{FALSE}.}
 
 \item{loops}{Logical, whether to add loop edges, defaults to \code{FALSE}.}
 }
@@ -28,9 +27,9 @@ A graph object.
 Random graph with a fixed number of edges and vertices.
 }
 \details{
-The graph has \code{n} vertices and \code{m} edges. The edges are chosen uniformly
-at random from the set of all vertex pairs. This set includes potential
-self-connections as well if the \code{loops} parameter is \code{TRUE}.
+The graph has \code{n} vertices and \code{m} edges.
+The edges are chosen uniformly at random from the set of all vertex pairs.
+This set includes potential self-connections as well if the \code{loops} parameter is \code{TRUE}.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_erdos_renyi_game_gnm}{\code{erdos_renyi_game_gnm()}}

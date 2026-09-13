@@ -14,41 +14,33 @@ smallworld(dim, size, nei, p, ..., loops = FALSE, multiple = FALSE)
 
 \item{size}{Integer constant, the size of the lattice along each dimension.}
 
-\item{nei}{Integer constant, the neighborhood within which the vertices of
-the lattice will be connected.}
+\item{nei}{Integer constant, the neighborhood within which the vertices of the lattice will be connected.}
 
 \item{p}{Real constant between zero and one, the rewiring probability.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{loops}{Logical, whether loops edges are allowed in the
-generated graph.}
+\item{loops}{Logical, whether loops edges are allowed in the generated graph.}
 
-\item{multiple}{Logical, whether multiple edges are allowed int the
-generated graph.}
+\item{multiple}{Logical, whether multiple edges are allowed int the generated graph.}
 }
 \value{
 A graph object.
 }
 \description{
-This function generates networks with the small-world property
-based on a variant of the Watts-Strogatz model. The network is obtained
-by first creating a periodic undirected lattice, then rewiring both
-endpoints of each edge with probability \code{p}, while avoiding the
-creation of multi-edges.
+This function generates networks with the small-world property based on a variant of the Watts-Strogatz model.
+The network is obtained by first creating a periodic undirected lattice, then rewiring both endpoints of each edge with probability \code{p},
+while avoiding the creation of multi-edges.
 }
 \details{
-Note that this function might create graphs with loops and/or multiple
-edges. You can use \code{\link[=simplify]{simplify()}} to get rid of these.
+Note that this function might create graphs with loops and/or multiple edges.
+You can use \code{\link[=simplify]{simplify()}} to get rid of these.
 
-This process differs from the original model of Watts and Strogatz
-(see reference) in that it rewires \strong{both} endpoints of edges. Thus in
-the limit of \code{p=1}, we obtain a G(n,m) random graph with the
-same number of vertices and edges as the original lattice. In comparison,
-the original Watts-Strogatz model only rewires a single endpoint of each edge,
+This process differs from the original model of Watts and Strogatz (see reference) in that it rewires \strong{both} endpoints of edges.
+Thus in the limit of \code{p=1}, we obtain a G(n,m) random graph with the same number of vertices and edges as the original lattice.
+In comparison, the original Watts-Strogatz model only rewires a single endpoint of each edge,
 thus the network does not become fully random even for \code{p=1}.
-For appropriate choices of \code{p}, both models exhibit the property of
-simultaneously having short path lengths and high clustering.
+For appropriate choices of \code{p}, both models exhibit the property of simultaneously having short path lengths and high clustering.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_watts_strogatz_game}{\code{watts_strogatz_game()}}

@@ -7,24 +7,17 @@
 Fitting and sampling hierarchical random graph models.
 }
 \details{
-A hierarchical random graph is an ensemble of undirected graphs with \eqn{n}
-vertices. It is defined via a binary tree with \eqn{n} leaf and \eqn{n-1}
-internal vertices, where the internal vertices are labeled with
-probabilities.  The probability that two vertices are connected in the
-random graph is given by the probability label at their closest common
-ancestor.
+A hierarchical random graph is an ensemble of undirected graphs with \eqn{n} vertices.
+It is defined via a binary tree with \eqn{n} leaf and \eqn{n-1} internal vertices,
+where the internal vertices are labeled with probabilities.  The probability that two vertices are connected in the random graph is given by the probability label at their closest common ancestor.
 
 Please see references below for more about hierarchical random graphs.
 
-igraph contains functions for fitting HRG models to a given network
-(\code{fit_hrg()}, for generating networks from a given HRG ensemble
-(\code{sample_hrg()}), converting an igraph graph to a HRG and back
-(\code{hrg()}, \code{hrg_tree()}), for calculating a consensus tree from a set
-of sampled HRGs (\code{consensus_tree()}) and for predicting missing edges in
-a network based on its HRG models (\code{predict_edges()}).
+igraph contains functions for fitting HRG models to a given network (\code{fit_hrg()},
+for generating networks from a given HRG ensemble (\code{sample_hrg()}), converting an igraph graph to a HRG and back (\code{hrg()}, \code{hrg_tree()}),
+for calculating a consensus tree from a set of sampled HRGs (\code{consensus_tree()}) and for predicting missing edges in a network based on its HRG models (\code{predict_edges()}).
 
-The igraph HRG implementation is heavily based on the code published by
-Aaron Clauset, at his website (not functional any more).
+The igraph HRG implementation is heavily based on the code published by Aaron Clauset, at his website (not functional any more).
 }
 \seealso{
 Other hierarchical random graph functions:

@@ -60,78 +60,66 @@ all_shortest_paths(
 \item{directed}{Whether to consider directed paths in directed graphs,
 this argument is ignored for undirected graphs.}
 
-\item{weights}{Possibly a numeric vector giving edge weights. If this is
-\code{NULL} and the graph has a \code{weight} edge attribute, then the
-attribute is used. If this is \code{NA} then no weights are used (even if
-the graph has a \code{weight} attribute). In a weighted graph, the length
-of a path is the sum of the weights of its constituent edges.}
+\item{weights}{Possibly a numeric vector giving edge weights.
+If this is \code{NULL} and the graph has a \code{weight} edge attribute, then the attribute is used.
+If this is \code{NA} then no weights are used (even if the graph has a \code{weight} attribute).
+In a weighted graph, the length of a path is the sum of the weights of its constituent edges.}
 
-\item{unconnected}{What to do if the graph is unconnected (not
-strongly connected if directed paths are considered). If TRUE, only
-the lengths of the existing paths are considered and averaged; if
-FALSE, the length of the missing paths are considered as having infinite
-length, making the mean distance infinite as well.}
+\item{unconnected}{What to do if the graph is unconnected (not strongly connected if directed paths are considered).
+If TRUE, only the lengths of the existing paths are considered and averaged; if FALSE,
+the length of the missing paths are considered as having infinite length, making the mean distance infinite as well.}
 
 \item{details}{Whether to provide additional details in the result.
-Functions accepting this argument (like \code{mean_distance()}) return
-additional information like the number of disconnected vertex pairs in
-the result when this parameter is set to \code{TRUE}.}
+Functions accepting this argument (like \code{mean_distance()}) return additional information like the number of disconnected vertex pairs in the result
+when this parameter is set to \code{TRUE}.}
 
-\item{v}{Numeric vector, the vertices from which the shortest paths will be
-calculated. The default \code{NULL} selects all vertices.}
+\item{v}{Numeric vector, the vertices from which the shortest paths will be calculated.
+The default \code{NULL} selects all vertices.}
 
-\item{to}{Numeric vector, the vertices to which the shortest paths will be
-calculated. The default \code{NULL} includes all vertices. Note that for
-\code{distances()} every vertex must be included here at most once. (This
-is not required for \code{shortest_paths()}.}
+\item{to}{Numeric vector, the vertices to which the shortest paths will be calculated.
+The default \code{NULL} includes all vertices.
+Note that for \code{distances()} every vertex must be included here at most once.
+(This is not required for \code{shortest_paths()}.}
 
-\item{mode}{Character constant, gives whether the shortest paths to or from
-the given vertices should be calculated for directed graphs. If \code{out}
-then the shortest paths \emph{from} the vertex, if \verb{in} then \emph{to}
-it will be considered. If \code{all}, the default, then the graph is treated
-as undirected, i.e. edge directions are not taken into account. This
-argument is ignored for undirected graphs.}
+\item{mode}{Character constant,
+gives whether the shortest paths to or from the given vertices should be calculated for directed graphs.
+If \code{out} then the shortest paths \emph{from} the vertex, if \verb{in} then \emph{to} it will be considered.
+If \code{all}, the default, then the graph is treated as undirected, i.e. edge directions are not taken into account.
+This argument is ignored for undirected graphs.}
 
-\item{algorithm}{Which algorithm to use for the calculation. By default
-igraph tries to select the fastest suitable algorithm. If there are no
-weights, then an unweighted breadth-first search is used, otherwise if all
-weights are positive, then Dijkstra's algorithm is used. If there are
-negative weights and we do the calculation for more than 100 sources, then
-Johnson's algorithm is used. Otherwise the Bellman-Ford algorithm is used.
-You can override igraph's choice by explicitly giving this parameter. Note
-that the igraph C core might still override your choice in obvious cases,
-i.e. if there are no edge weights, then the unweighted algorithm will be
-used, regardless of this argument.}
+\item{algorithm}{Which algorithm to use for the calculation.
+By default igraph tries to select the fastest suitable algorithm.
+If there are no weights, then an unweighted breadth-first search is used, otherwise if all weights are positive,
+then Dijkstra's algorithm is used.
+If there are negative weights and we do the calculation for more than 100 sources, then Johnson's algorithm is used.
+Otherwise the Bellman-Ford algorithm is used.
+You can override igraph's choice by explicitly giving this parameter.
+Note that the igraph C core might still override your choice in obvious cases, i.e. if there are no edge weights,
+then the unweighted algorithm will be used, regardless of this argument.}
 
-\item{from}{Numeric constant, the vertex from or to the shortest paths will
-be calculated. Note that right now this is not a vector of vertex IDs, but
-only a single vertex.}
+\item{from}{Numeric constant, the vertex from or to the shortest paths will be calculated.
+Note that right now this is not a vector of vertex IDs, but only a single vertex.}
 
 \item{output}{Character scalar, defines how to report the shortest paths.
-\dQuote{vpath} means that the vertices along the paths are reported, this
-form was used prior to igraph version 0.6. \dQuote{epath} means that the
-edges along the paths are reported. \dQuote{both} means that both forms are
-returned, in a named list with components \dQuote{vpath} and \dQuote{epath}.}
+\dQuote{vpath} means that the vertices along the paths are reported,
+this form was used prior to igraph version 0.6. \dQuote{epath} means that the edges along the paths are reported.
+\dQuote{both} means that both forms are returned, in a named list with components \dQuote{vpath} and \dQuote{epath}.}
 
-\item{predecessors}{Logical, whether to return the predecessor vertex
-for each vertex. The predecessor of vertex \code{i} in the tree is the
-vertex from which vertex \code{i} was reached. The predecessor of the start
-vertex (in the \code{from} argument) is itself by definition. If the
-predecessor is zero, it means that the given vertex was not reached from the
-source during the search. Note that the search terminates if all the
-vertices in \code{to} are reached.}
+\item{predecessors}{Logical, whether to return the predecessor vertex for each vertex.
+The predecessor of vertex \code{i} in the tree is the vertex from which vertex \code{i} was reached.
+The predecessor of the start vertex (in the \code{from} argument) is itself by definition.
+If the predecessor is zero, it means that the given vertex was not reached from the source during the search.
+Note that the search terminates if all the vertices in \code{to} are reached.}
 
-\item{inbound.edges}{Logical, whether to return the inbound edge for
-each vertex. The inbound edge of vertex \code{i} in the tree is the edge via
-which vertex \code{i} was reached. The start vertex and vertices that were
-not reached during the search will have zero in the corresponding entry of
-the vector. Note that the search terminates if all the vertices in \code{to}
-are reached.}
+\item{inbound.edges}{Logical, whether to return the inbound edge for each vertex.
+The inbound edge of vertex \code{i} in the tree is the edge via which vertex \code{i} was reached.
+The start vertex and vertices that were not reached during the search will have zero in the corresponding entry of the vector.
+Note that the search terminates if all the vertices in \code{to} are reached.}
 }
 \value{
-For \code{distances()} a numeric matrix with \code{length(to)}
-columns and \code{length(v)} rows. The shortest path length from a vertex to
-itself is always zero. For unreachable vertices \code{Inf} is included.
+For \code{distances()} a numeric matrix with \code{length(to)} columns and \code{length(v)} rows.
+The shortest path length from a vertex to itself is always zero.
+For unreachable vertices \code{Inf} is included.
 
 For \code{shortest_paths()} a named list with four entries is returned:
 \item{vpath}{This itself is a list, of length \code{length(to)}; list
@@ -195,63 +183,47 @@ and \eqn{n(n-1)/2} for undirected graphs.
 }
 }
 \description{
-\code{distances()} calculates the length of all the shortest paths from
-or to the vertices in the network. \code{shortest_paths()} calculates one
-shortest path (the path itself, and not just its length) from or to the
-given vertex.
+\code{distances()} calculates the length of all the shortest paths from or to the vertices in the network.
+\code{shortest_paths()} calculates one shortest path (the path itself, and not just its length) from or to the given vertex.
 }
 \details{
-The shortest path, or geodesic between two pair of vertices is a path with
-the minimal number of vertices. The functions documented in this manual page
-all calculate shortest paths between vertex pairs.
+The shortest path, or geodesic between two pair of vertices is a path with the minimal number of vertices.
+The functions documented in this manual page all calculate shortest paths between vertex pairs.
 
-\code{distances()} calculates the lengths of pairwise shortest paths from
-a set of vertices (\code{from}) to another set of vertices (\code{to}). It
-uses different algorithms, depending on the \code{algorithm} argument and
-the \code{weight} edge attribute of the graph. The implemented algorithms
-are breadth-first search (\sQuote{\code{unweighted}}), this only works for
-unweighted graphs; the Dijkstra algorithm (\sQuote{\code{dijkstra}}), this
-works for graphs with non-negative edge weights; the Bellman-Ford algorithm
-(\sQuote{\code{bellman-ford}}); Johnson's algorithm
-(\sQuote{\code{johnson}}); and a faster version of the Floyd-Warshall algorithm
-with expected quadratic running time (\sQuote{\code{floyd-warshall}}). The latter
-three algorithms work with arbitrary
-edge weights, but (naturally) only for graphs that don't have a negative
-cycle. Note that a negative-weight edge in an undirected graph implies
-such a cycle. Johnson's algorithm performs better than the Bellman-Ford
-one when many source (and target) vertices are given, with all-pairs
-shortest path length calculations being the typical use case.
+\code{distances()} calculates the lengths of pairwise shortest paths from a set of vertices (\code{from}) to another set of vertices (\code{to}).
+It uses different algorithms, depending on the \code{algorithm} argument and the \code{weight} edge attribute of the graph.
+The implemented algorithms are breadth-first search (\sQuote{\code{unweighted}}), this only works for unweighted graphs;
+the Dijkstra algorithm (\sQuote{\code{dijkstra}}), this works for graphs with non-negative edge weights;
+the Bellman-Ford algorithm (\sQuote{\code{bellman-ford}}); Johnson's algorithm (\sQuote{\code{johnson}});
+and a faster version of the Floyd-Warshall algorithm with expected quadratic running time (\sQuote{\code{floyd-warshall}}).
+The latter three algorithms work with arbitrary edge weights, but (naturally) only for graphs that don't have a negative cycle.
+Note that a negative-weight edge in an undirected graph implies such a cycle.
+Johnson's algorithm performs better than the Bellman-Ford one when many source (and target) vertices are given,
+with all-pairs shortest path length calculations being the typical use case.
 
-igraph can choose automatically between algorithms, and chooses the most
-efficient one that is appropriate for the supplied weights (if any). For
-automatic algorithm selection, supply \sQuote{\code{automatic}} as the
-\code{algorithm} argument. (This is also the default.)
+igraph can choose automatically between algorithms,
+and chooses the most efficient one that is appropriate for the supplied weights (if any).
+For automatic algorithm selection, supply \sQuote{\code{automatic}} as the \code{algorithm} argument.
+(This is also the default.)
 
-\code{shortest_paths()} calculates a single shortest path (i.e. the path
-itself, not just its length) between the source vertex given in \code{from},
-to the target vertices given in \code{to}. \code{shortest_paths()} uses
-breadth-first search for unweighted graphs and Dijkstra's algorithm for
-weighted graphs. The latter only works if the edge weights are non-negative.
+\code{shortest_paths()} calculates a single shortest path (i.e. the path itself, not just its length) between the source vertex given in \code{from},
+to the target vertices given in \code{to}.
+\code{shortest_paths()} uses breadth-first search for unweighted graphs and Dijkstra's algorithm for weighted graphs.
+The latter only works if the edge weights are non-negative.
 
-\code{all_shortest_paths()} calculates \emph{all} shortest paths between
-pairs of vertices, including several shortest paths of the same length.
-More precisely, it computerd all shortest path starting at \code{from}, and
-ending at any vertex given in \code{to}. It uses a breadth-first search for
-unweighted graphs and Dijkstra's algorithm for weighted ones. The latter
-only supports non-negative edge weights. Caution: in multigraphs, the
-result size is exponentially large in the number of vertex pairs with
-multiple edges between them.
+\code{all_shortest_paths()} calculates \emph{all} shortest paths between pairs of vertices, including several shortest paths of the same length.
+More precisely, it computerd all shortest path starting at \code{from}, and ending at any vertex given in \code{to}.
+It uses a breadth-first search for unweighted graphs and Dijkstra's algorithm for weighted ones.
+The latter only supports non-negative edge weights.
+Caution: in multigraphs, the result size is exponentially large in the number of vertex pairs with multiple edges between them.
 
-\code{mean_distance()} calculates the average path length in a graph, by
-calculating the shortest paths between all pairs of vertices (both ways for
-directed graphs). It uses a breadth-first search for unweighted graphs and
-Dijkstra's algorithm for weighted ones. The latter only supports non-negative
-edge weights.
+\code{mean_distance()} calculates the average path length in a graph,
+by calculating the shortest paths between all pairs of vertices (both ways for directed graphs).
+It uses a breadth-first search for unweighted graphs and Dijkstra's algorithm for weighted ones.
+The latter only supports non-negative edge weights.
 
-\code{distance_table()} calculates a histogram, by calculating the shortest
-path length between each pair of vertices. For directed graphs both
-directions are considered, so every pair of vertices appears twice in the
-histogram.
+\code{distance_table()} calculates a histogram, by calculating the shortest path length between each pair of vertices.
+For directed graphs both directions are considered, so every pair of vertices appears twice in the histogram.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_path_length_hist}{\code{path_length_hist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_average_path_length_dijkstra}{\code{average_path_length_dijkstra()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_all_shortest_paths_dijkstra}{\code{get_all_shortest_paths_dijkstra()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_all_shortest_paths}{\code{get_all_shortest_paths()}}

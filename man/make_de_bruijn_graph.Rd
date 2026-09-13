@@ -10,9 +10,11 @@ make_de_bruijn_graph(m, n)
 de_bruijn_graph(m, n)
 }
 \arguments{
-\item{m}{Integer scalar, the size of the alphabet. See details below.}
+\item{m}{Integer scalar, the size of the alphabet.
+See details below.}
 
-\item{n}{Integer scalar, the length of the labels. See details below.}
+\item{n}{Integer scalar, the length of the labels.
+See details below.}
 }
 \value{
 A graph object.
@@ -21,19 +23,14 @@ A graph object.
 De Bruijn graphs are labeled graphs representing the overlap of strings.
 }
 \details{
-A de Bruijn graph represents relationships between strings. An alphabet of
-\code{m} letters are used and strings of length \code{n} are considered.  A
-vertex corresponds to every possible string and there is a directed edge
-from vertex \code{v} to vertex \code{w} if the string of \code{v} can be
-transformed into the string of \code{w} by removing its first letter and
-appending a letter to it.
+A de Bruijn graph represents relationships between strings.
+An alphabet of \code{m} letters are used and strings of length \code{n} are considered.  A vertex corresponds to every possible string and there is a directed edge from vertex \code{v} to vertex \code{w}
+if the string of \code{v} can be transformed into the string of \code{w} by removing its first letter and appending a letter to it.
 
-Please note that the graph will have \code{m} to the power \code{n} vertices
-and even more edges, so probably you don't want to supply too big numbers
-for \code{m} and \code{n}.
+Please note that the graph will have \code{m} to the power \code{n} vertices and even more edges,
+so probably you don't want to supply too big numbers for \code{m} and \code{n}.
 
-De Bruijn graphs have some interesting properties, please see another
-source, e.g. Wikipedia for details.
+De Bruijn graphs have some interesting properties, please see another source, e.g. Wikipedia for details.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_de_bruijn}{\code{de_bruijn()}}

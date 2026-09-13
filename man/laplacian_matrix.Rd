@@ -15,17 +15,15 @@ laplacian_matrix(
 \arguments{
 \item{graph}{The input graph.}
 
-\item{weights}{An optional vector giving edge weights for weighted Laplacian
-matrix. If this is \code{NULL} and the graph has an edge attribute called
-\code{weight}, then it will be used automatically. Set this to \code{NA} if
-you want the unweighted Laplacian on a graph that has a \code{weight} edge
-attribute.}
+\item{weights}{An optional vector giving edge weights for weighted Laplacian matrix.
+If this is \code{NULL} and the graph has an edge attribute called \code{weight}, then it will be used automatically.
+Set this to \code{NA} if you want the unweighted Laplacian on a graph that has a \code{weight} edge attribute.}
 
-\item{sparse}{Logical, whether to return the result as a sparse
-matrix. The \code{Matrix} package is required for sparse matrices.}
+\item{sparse}{Logical, whether to return the result as a sparse matrix.
+The \code{Matrix} package is required for sparse matrices.}
 
-\item{normalization}{The normalization method to use when calculating the
-Laplacian matrix. See the "Normalization methods" section on this page.}
+\item{normalization}{The normalization method to use when calculating the Laplacian matrix.
+See the "Normalization methods" section on this page.}
 
 \item{normalized}{Deprecated, use \code{normalization} instead.}
 }
@@ -36,26 +34,21 @@ A numeric matrix.
 The Laplacian of a graph.
 }
 \details{
-The Laplacian Matrix of a graph is a symmetric matrix having the same number
-of rows and columns as the number of vertices in the graph and element (i,j)
-is d[i], the degree of vertex i if if i==j, -1 if i!=j and there is an edge
-between vertices i and j and 0 otherwise.
+The Laplacian Matrix of a graph is a symmetric matrix having the same number of rows and columns as the number of vertices in the graph and element (i,j) is d[i],
+the degree of vertex i if if i==j, -1 if i!=j and there is an edge between vertices i and j and 0 otherwise.
 
-The Laplacian matrix can also be normalized, with several
-conventional normalization methods.
+The Laplacian matrix can also be normalized, with several conventional normalization methods.
 See the "Normalization methods" section on this page.
 
-The weighted version of the Laplacian simply works with the weighted degree
-instead of the plain degree. I.e. (i,j) is d[i], the weighted degree of
-vertex i if if i==j, -w if i!=j and there is an edge between vertices i and
-j with weight w, and 0 otherwise. The weighted degree of a vertex is the sum
-of the weights of its adjacent edges.
+The weighted version of the Laplacian simply works with the weighted degree instead of the plain degree.
+I.e. (i,j) is d[i], the weighted degree of vertex i if if i==j, -w if i!=j and there is an edge between vertices i and j with weight w,
+and 0 otherwise.
+The weighted degree of a vertex is the sum of the weights of its adjacent edges.
 }
 \section{Normalization methods}{
 
 
-The Laplacian matrix \eqn{L} is defined in terms of the adjacency matrix
-\eqn{A} and a diagonal matrix \eqn{D} containing the degrees as follows:
+The Laplacian matrix \eqn{L} is defined in terms of the adjacency matrix \eqn{A} and a diagonal matrix \eqn{D} containing the degrees as follows:
 \itemize{
 \item "unnormalized": Unnormalized Laplacian, \eqn{L = D - A}.
 \item "symmetric": Symmetrically normalized Laplacian,

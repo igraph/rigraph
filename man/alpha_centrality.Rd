@@ -17,26 +17,23 @@ alpha_centrality(
 )
 }
 \arguments{
-\item{graph}{The input graph, can be directed or undirected. In undirected
-graphs, edges are treated as if they were reciprocal directed ones.}
+\item{graph}{The input graph, can be directed or undirected.
+In undirected graphs, edges are treated as if they were reciprocal directed ones.}
 
-\item{nodes}{Vertex sequence, the vertices for which the alpha centrality
-values are returned. The default \code{NULL} selects all vertices.
+\item{nodes}{Vertex sequence, the vertices for which the alpha centrality values are returned.
+The default \code{NULL} selects all vertices.
 (For technical reasons they will be calculated for all vertices, anyway.)}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{alpha}{Parameter specifying the relative importance of endogenous
-versus exogenous factors in the determination of centrality. See details
-below.}
+\item{alpha}{Parameter specifying the relative importance of endogenous versus exogenous factors in the determination of centrality.
+See details below.}
 
-\item{loops}{Whether to eliminate loop edges from the graph before the
-calculation.}
+\item{loops}{Whether to eliminate loop edges from the graph before the calculation.}
 
-\item{exo}{The exogenous factors, in most cases this is either a constant --
-the same factor for every node, or a vector giving the factor for every
-vertex. Note that too long vectors will be truncated and too short vectors
-will be replicated to match the number of vertices.}
+\item{exo}{The exogenous factors, in most cases this is either a constant -- the same factor for every node,
+or a vector giving the factor for every vertex.
+Note that too long vectors will be truncated and too short vectors will be replicated to match the number of vertices.}
 
 \item{weights}{One of the following:
 \itemize{
@@ -48,35 +45,27 @@ directly as edge weights.
 \item A character scalar: the name of an edge attribute whose values are
 used as weights. The attribute must be numeric or logical.
 }
-If multiple edges share endpoints, the value of an arbitrarily chosen edge
-is included in the matrix.}
+If multiple edges share endpoints, the value of an arbitrarily chosen edge is included in the matrix.}
 
-\item{tol}{Tolerance for near-singularities during matrix inversion, see
-\code{\link[Matrix:solve]{Matrix::solve()}}.}
+\item{tol}{Tolerance for near-singularities during matrix inversion, see \code{\link[Matrix:solve]{Matrix::solve()}}.}
 
-\item{sparse}{Logical, whether to use sparse matrices for the
-calculation. The \sQuote{Matrix} package is required for sparse matrix
-support}
+\item{sparse}{Logical, whether to use sparse matrices for the calculation.
+The \sQuote{Matrix} package is required for sparse matrix support}
 }
 \value{
-A numeric vector contaning the centrality scores for the selected
-vertices.
+A numeric vector contaning the centrality scores for the selected vertices.
 }
 \description{
-\code{alpha_centrality()} calculates the alpha centrality of some (or all)
-vertices in a graph.
+\code{alpha_centrality()} calculates the alpha centrality of some (or all) vertices in a graph.
 }
 \details{
-The alpha centrality measure can be considered as a generalization of
-eigenvector centrality to directed graphs. It was proposed by Bonacich in
-2001 (see reference below).
+The alpha centrality measure can be considered as a generalization of eigenvector centrality to directed graphs.
+It was proposed by Bonacich in 2001 (see reference below).
 
 The alpha centrality of the vertices in a graph is defined as the solution
 of the following matrix equation: \deqn{x=\alpha A^T x+e,}{x=alpha t(A)x+e,}
-where \eqn{A}{A} is the (not necessarily symmetric) adjacency matrix of the
-graph, \eqn{e}{e} is the vector of exogenous sources of status of the
-vertices and \eqn{\alpha}{alpha} is the relative importance of the
-endogenous versus exogenous factors.
+where \eqn{A}{A} is the (not necessarily symmetric) adjacency matrix of the graph,
+\eqn{e}{e} is the vector of exogenous sources of status of the vertices and \eqn{\alpha}{alpha} is the relative importance of the endogenous versus exogenous factors.
 }
 \section{Warning}{
  Singular adjacency matrices cause problems for this

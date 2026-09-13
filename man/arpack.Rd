@@ -19,27 +19,24 @@ arpack(
 )
 }
 \arguments{
-\item{func}{The function to perform the matrix-vector multiplication. ARPACK
-requires to perform these by the user. The function gets the vector \eqn{x}
-as the first argument, and it should return \eqn{Ax}, where \eqn{A} is the
-\dQuote{input matrix}. (The input matrix is never given explicitly.) The
-second argument is \code{extra}.}
+\item{func}{The function to perform the matrix-vector multiplication.
+ARPACK requires to perform these by the user.
+The function gets the vector \eqn{x} as the first argument, and it should return \eqn{Ax}, where \eqn{A} is the \dQuote{input matrix}.
+(The input matrix is never given explicitly.) The second argument is \code{extra}.}
 
 \item{extra}{Extra argument to supply to \code{func}.}
 
-\item{sym}{Logical, whether the input matrix is symmetric. Always
-supply \code{TRUE} here if it is, since it can speed up the computation.}
+\item{sym}{Logical, whether the input matrix is symmetric.
+Always supply \code{TRUE} here if it is, since it can speed up the computation.}
 
-\item{options}{Options to ARPACK, a named list to overwrite some of the
-default option values. See details below.}
+\item{options}{Options to ARPACK, a named list to overwrite some of the default option values.
+See details below.}
 
 \item{env}{The environment in which \code{func} will be evaluated.}
 
-\item{complex}{Whether to convert the eigenvectors returned by ARPACK into R
-complex vectors. By default this is not done for symmetric problems (these
-only have real eigenvectors/values), but only non-symmetric ones. If you
-have a non-symmetric problem, but you're sure that the results will be real,
-then supply \code{FALSE} here.}
+\item{complex}{Whether to convert the eigenvectors returned by ARPACK into R complex vectors.
+By default this is not done for symmetric problems (these only have real eigenvectors/values), but only non-symmetric ones.
+If you have a non-symmetric problem, but you're sure that the results will be real, then supply \code{FALSE} here.}
 }
 \value{
 A named list with the following members:
@@ -60,31 +57,25 @@ See the details above.
 }
 }
 \description{
-Interface to the ARPACK library for calculating eigenvectors of sparse
-matrices
+Interface to the ARPACK library for calculating eigenvectors of sparse matrices
 }
 \details{
-ARPACK is a library for solving large scale eigenvalue problems.  The
-package is designed to compute a few eigenvalues and corresponding
-eigenvectors of a general \eqn{n} by \eqn{n} matrix \eqn{A}. It is most
-appropriate for large sparse or structured matrices \eqn{A} where structured
-means that a matrix-vector product \code{w <- Av} requires order \eqn{n}
-rather than the usual order \eqn{n^2} floating point operations.
+ARPACK is a library for solving large scale eigenvalue problems.  The package is designed to compute a few eigenvalues and corresponding eigenvectors of a general \eqn{n} by \eqn{n} matrix \eqn{A}.
+It is most appropriate for large sparse or structured matrices \eqn{A}
+where structured means that a matrix-vector product \code{w <- Av} requires order \eqn{n} rather than the usual order \eqn{n^2} floating point operations.
 
-This function is an interface to ARPACK. igraph does not contain all ARPACK
-routines, only the ones dealing with symmetric and non-symmetric eigenvalue
-problems using double precision real numbers.
+This function is an interface to ARPACK. igraph does not contain all ARPACK routines,
+only the ones dealing with symmetric and non-symmetric eigenvalue problems using double precision real numbers.
 
-The eigenvalue calculation in ARPACK (in the simplest case) involves the
-calculation of the \eqn{Av} product where \eqn{A} is the matrix we work with
-and \eqn{v} is an arbitrary vector. The function supplied in the \code{fun}
-argument is expected to perform this product. If the product can be done
-efficiently, e.g. if the matrix is sparse, then \code{arpack()} is usually
-able to calculate the eigenvalues very quickly.
+The eigenvalue calculation in ARPACK (in the simplest case) involves the calculation of the \eqn{Av} product
+where \eqn{A} is the matrix we work with and \eqn{v} is an arbitrary vector.
+The function supplied in the \code{fun} argument is expected to perform this product.
+If the product can be done efficiently, e.g. if the matrix is sparse,
+then \code{arpack()} is usually able to calculate the eigenvalues very quickly.
 
 The \code{options} argument specifies what kind of calculation to perform.
-It is a list with the following members, they correspond directly to ARPACK
-parameters. On input it has the following fields:
+It is a list with the following members, they correspond directly to ARPACK parameters.
+On input it has the following fields:
 \describe{
 \item{bmat}{
 Character constant, possible values:
@@ -320,9 +311,8 @@ Matrices. \emph{Linear Algebra and its Applications}, vol 88/89, pp 575-595,
 (1987).
 }
 \seealso{
-\code{\link[=eigen_centrality]{eigen_centrality()}}, \code{\link[=page_rank]{page_rank()}},
-\code{\link[=hub_score]{hub_score()}}, \code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}} are some of the
-functions in igraph that use ARPACK.
+\code{\link[=eigen_centrality]{eigen_centrality()}}, \code{\link[=page_rank]{page_rank()}}, \code{\link[=hub_score]{hub_score()}},
+\code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}} are some of the functions in igraph that use ARPACK.
 }
 \author{
 Rich Lehoucq, Kristi Maschhoff, Danny Sorensen, Chao Yang for

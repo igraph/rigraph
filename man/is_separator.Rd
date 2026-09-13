@@ -7,23 +7,18 @@
 is_separator(graph, candidate)
 }
 \arguments{
-\item{graph}{The input graph. It may be directed, but edge directions are
-ignored.}
+\item{graph}{The input graph.
+It may be directed, but edge directions are ignored.}
 
-\item{candidate}{A numeric vector giving the vertex IDs of the candidate
-separator.}
+\item{candidate}{A numeric vector giving the vertex IDs of the candidate separator.}
 }
 \value{
-A Logical, whether the supplied vertex set is a (minimal)
-vertex separator or not.
-lists all vertex separator of minimum size.
+A Logical, whether the supplied vertex set is a (minimal) vertex separator or not. lists all vertex separator of minimum size.
 }
 \description{
-\code{is_separator()} determines whether the supplied vertex set is a vertex
-separator:
-A vertex set \eqn{S} is a separator if there are vertices \eqn{u} and \eqn{v}
-in the graph such that all paths between \eqn{u} and \eqn{v} pass
-through some vertices in \eqn{S}.
+\code{is_separator()} determines whether the supplied vertex set is a vertex separator:
+A vertex set \eqn{S} is a separator
+if there are vertices \eqn{u} and \eqn{v} in the graph such that all paths between \eqn{u} and \eqn{v} pass through some vertices in \eqn{S}.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Separators.html#igraph_is_separator}{\code{is_separator()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

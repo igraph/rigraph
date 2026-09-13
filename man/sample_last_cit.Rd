@@ -67,38 +67,31 @@ cit_cit_types(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{agebins}{Number of aging bins. The default \code{NULL} uses \code{n / 7100}.}
+\item{agebins}{Number of aging bins.
+The default \code{NULL} uses \code{n / 7100}.}
 
-\item{pref}{Vector (\code{sample_last_cit()} and \code{sample_cit_types()} or
-matrix (\code{sample_cit_cit_types()}) giving the (unnormalized) citation
-probabilities for the different vertex types. The default \code{NULL} uses
-\code{(1:(agebins + 1))^-3} for \code{sample_last_cit()} and all-one probabilities
-for the other two.}
+\item{pref}{Vector (\code{sample_last_cit()} and \code{sample_cit_types()} or matrix (\code{sample_cit_cit_types()}) giving the (unnormalized) citation probabilities for the different vertex types.
+The default \code{NULL} uses \code{(1:(agebins + 1))^-3} for \code{sample_last_cit()} and all-one probabilities for the other two.}
 
 \item{directed}{Logical, whether to generate directed networks.}
 
 \item{types}{Vector of length \sQuote{\code{n}}, the types of the vertices.
-Types are numbered from zero. The default \code{NULL} gives all vertices
-type zero.}
+Types are numbered from zero.
+The default \code{NULL} gives all vertices type zero.}
 
-\item{attr}{Logical, whether to add the vertex types to the generated
-graph as a vertex attribute called \sQuote{\code{type}}.}
+\item{attr}{Logical, whether to add the vertex types to the generated graph as a vertex attribute called \sQuote{\code{type}}.}
 }
 \value{
 A new graph.
 }
 \description{
-\code{sample_last_cit()} creates a graph, where vertices age, and
-gain new connections based on how long ago their last citation
-happened.
+\code{sample_last_cit()} creates a graph, where vertices age, and gain new connections based on how long ago their last citation happened.
 }
 \details{
-\code{sample_cit_cit_types()} is a stochastic block model where the
-graph is growing.
+\code{sample_cit_cit_types()} is a stochastic block model where the graph is growing.
 
 \code{sample_cit_types()} is similarly a growing stochastic block model,
-but the probability of an edge depends on the (potentially) cited
-vertex only.
+but the probability of an edge depends on the (potentially) cited vertex only.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_lastcit_game}{\code{lastcit_game()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_cited_type_game}{\code{cited_type_game()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_citing_cited_type_game}{\code{citing_cited_type_game()}}

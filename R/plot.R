@@ -21,58 +21,45 @@
 
 #' Plotting of graphs
 #'
-#' `plot.igraph()` is able to plot graphs to any R device. It is the
-#' non-interactive companion of the `tkplot()` function.
+#' `plot.igraph()` is able to plot graphs to any R device.
+#' It is the non-interactive companion of the `tkplot()` function.
 #'
-#' One convenient way to plot graphs is to plot with [tkplot()]
-#' first, handtune the placement of the vertices, query the coordinates by the
-#' [tk_coords()] function and use them with [plot()] to
-#' plot the graph to any R device.
+#' One convenient way to plot graphs is to plot with [tkplot()] first, handtune the placement of the vertices,
+#' query the coordinates by the [tk_coords()] function and use them with [plot()] to plot the graph to any R device.
 #'
 #' @aliases plot.graph
 #' @param x The graph to plot.
 #' @param axes Logical, whether to plot axes, defaults to FALSE.
-#' @param add Logical, whether to add the plot to the current device, or
-#'   delete the device's current contents first.
-#' @param xlim The limits for the horizontal axis, it is unlikely that you want
-#'   to modify this.
-#' @param ylim The limits for the vertical axis, it is unlikely that you want
-#'   to modify this.
-#' @param mark.groups A list of vertex ID vectors. It is interpreted as a set
-#'   of vertex groups. Each vertex group is highlighted, by plotting a colored
-#'   smoothed polygon around and \dQuote{under} it. See the arguments below to
-#'   control the look of the polygons.
-#' @param mark.shape A numeric scalar or vector. Controls the smoothness of the
-#'   vertex group marking polygons. This is basically the \sQuote{shape}
-#'   parameter of the [graphics::xspline()] function, its possible
-#'   values are between -1 and 1. If it is a vector, then a different value is
-#'   used for the different vertex groups.
-#' @param mark.col A scalar or vector giving the colors of marking the
-#'   polygons, in any format accepted by [graphics::xspline()]; e.g.
-#'   numeric color IDs, symbolic color names, or colors in RGB. The default
-#'   `NULL` uses semi-transparent rainbow colors.
-#' @param mark.border A scalar or vector giving the colors of the borders of
-#'   the vertex group marking polygons. If it is `NA`, then no border is
-#'   drawn. The default `NULL` uses rainbow colors.
-#' @param mark.expand A numeric scalar or vector, the size of the border around
-#'   the marked vertex groups. It is in the same units as the vertex sizes. If a
-#'   vector is given, then different values are used for the different vertex
-#'   groups.
-#' @param mark.lwd A numeric scalar or vector, the linewidth of the border around
-#'   the marked vertex groups.  If a
-#'   vector is given, then different values are used for the different vertex
-#'   groups.
-#' @param loop.size A numeric scalar that allows the user to scale the loop edges
-#'   of the network. The default loop size is 1. Larger values will produce larger
-#'   loops.
-#' @param \dots Additional plotting parameters. See [igraph.plotting] for
-#'   the complete list.
+#' @param add Logical, whether to add the plot to the current device, or delete the device's current contents first.
+#' @param xlim The limits for the horizontal axis, it is unlikely that you want to modify this.
+#' @param ylim The limits for the vertical axis, it is unlikely that you want to modify this.
+#' @param mark.groups A list of vertex ID vectors.
+#'   It is interpreted as a set of vertex groups.
+#'   Each vertex group is highlighted, by plotting a colored smoothed polygon around and \dQuote{under} it.
+#'   See the arguments below to control the look of the polygons.
+#' @param mark.shape A numeric scalar or vector.
+#'   Controls the smoothness of the vertex group marking polygons.
+#'   This is basically the \sQuote{shape} parameter of the [graphics::xspline()] function,
+#'   its possible values are between -1 and 1. If it is a vector, then a different value is used for the different vertex groups.
+#' @param mark.col A scalar or vector giving the colors of marking the polygons, in any format accepted by [graphics::xspline()];
+#'   e.g. numeric color IDs, symbolic color names, or colors in RGB.
+#'   The default `NULL` uses semi-transparent rainbow colors.
+#' @param mark.border A scalar or vector giving the colors of the borders of the vertex group marking polygons.
+#'   If it is `NA`, then no border is drawn.
+#'   The default `NULL` uses rainbow colors.
+#' @param mark.expand A numeric scalar or vector, the size of the border around the marked vertex groups.
+#'   It is in the same units as the vertex sizes.
+#'   If a vector is given, then different values are used for the different vertex groups.
+#' @param mark.lwd A numeric scalar or vector, the linewidth of the border around the marked vertex groups.  If a vector is given,
+#'   then different values are used for the different vertex groups.
+#' @param loop.size A numeric scalar that allows the user to scale the loop edges of the network.
+#'   The default loop size is 1. Larger values will produce larger loops.
+#' @param \dots Additional plotting parameters.
+#'   See [igraph.plotting] for the complete list.
 #' @return Returns `NULL`, invisibly.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [layout()] for different layouts,
-#' [igraph.plotting] for the detailed description of the plotting
-#' parameters and [tkplot()] and [rglplot()] for other
-#' graph plotting functions.
+#' [igraph.plotting] for the detailed description of the plotting parameters and [tkplot()] and [rglplot()] for other graph plotting functions.
 #' @method plot igraph
 #' @export
 #' @rawNamespace export(plot.igraph)
@@ -875,22 +862,19 @@ plot.igraph <- function(
 
 #' 3D plotting of graphs with OpenGL
 #'
-#' Using the `rgl` package, `rglplot()` plots a graph in 3D. The plot
-#' can be zoomed, rotated, shifted, etc. but the coordinates of the vertices is
-#' fixed.
+#' Using the `rgl` package, `rglplot()` plots a graph in 3D.
+#' The plot can be zoomed, rotated, shifted, etc. but the coordinates of the vertices is fixed.
 #'
-#' Note that `rglplot()` is considered to be highly experimental. It is not
-#' very useful either. See [igraph.plotting] for the possible
-#' arguments.
+#' Note that `rglplot()` is considered to be highly experimental.
+#' It is not very useful either.
+#' See [igraph.plotting] for the possible arguments.
 #'
 #' @aliases rglplot.igraph
 #' @param x The graph to plot.
-#' @param \dots Additional arguments, see [igraph.plotting] for the
-#'   details
+#' @param \dots Additional arguments, see [igraph.plotting] for the details
 #' @return `NULL`, invisibly.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [igraph.plotting], [plot.igraph()] for the 2D
-#' version, [tkplot()] for interactive graph drawing in 2D.
+#' @seealso [igraph.plotting], [plot.igraph()] for the 2D version, [tkplot()] for interactive graph drawing in 2D.
 #' @family plot
 #' @export
 #' @keywords graphs

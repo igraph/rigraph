@@ -10,15 +10,14 @@ edge_attr(graph, name, index = NULL)
 \arguments{
 \item{graph}{The graph}
 
-\item{name}{The name of the attribute to query. If missing, then
-all edge attributes are returned in a list.}
+\item{name}{The name of the attribute to query.
+If missing, then all edge attributes are returned in a list.}
 
-\item{index}{An optional edge sequence to query edge attributes
-for a subset of edges. The default \code{NULL} selects all edges.}
+\item{index}{An optional edge sequence to query edge attributes for a subset of edges.
+The default \code{NULL} selects all edges.}
 }
 \value{
-The value of the edge attribute, or the list of all
-edge attributes if \code{name} is missing.
+The value of the edge attribute, or the list of all edge attributes if \code{name} is missing.
 }
 \description{
 Query edge attributes of a graph

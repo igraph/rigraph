@@ -18,15 +18,12 @@ For every graph constructor in igraph that has a \code{sample_} prefix,
 there is a corresponding function without the prefix: e.g.
 for \code{\link[=sample_pa]{sample_pa()}} there is also \code{\link[=pa]{pa()}}, etc.
 
-The same is true for the deterministic graph samplers, i.e. for each
-constructor with a \code{make_} prefix, there is a corresponding
-function without that prefix.
+The same is true for the deterministic graph samplers, i.e. for each constructor with a \code{make_} prefix,
+there is a corresponding function without that prefix.
 
 These shorter forms can be used together with \code{sample_()}.
-The advantage of this form is that the user can specify constructor
-modifiers which work with all constructors. E.g. the
-\code{\link[=with_vertex_]{with_vertex_()}} modifier adds vertex attributes
-to the newly created graphs.
+The advantage of this form is that the user can specify constructor modifiers which work with all constructors.
+E.g. the \code{\link[=with_vertex_]{with_vertex_()}} modifier adds vertex attributes to the newly created graphs.
 
 See the examples and the various constructor modifiers below.
 }

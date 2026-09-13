@@ -3,8 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `permute.vertices()` was renamed to [permute()] to create a more
-#' consistent API.
+#' `permute.vertices()` was renamed to [permute()] to create a more consistent API.
 #' @inheritParams permute
 #' @keywords internal
 #' @export
@@ -19,8 +18,7 @@ permute.vertices <- function(graph, permutation) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.isocreate()` was renamed to [graph_from_isomorphism_class()] to create a more
-#' consistent API.
+#' `graph.isocreate()` was renamed to [graph_from_isomorphism_class()] to create a more consistent API.
 #' @inheritParams graph_from_isomorphism_class
 #' @keywords internal
 #' @export
@@ -43,8 +41,7 @@ graph.isocreate <- function(size, number, directed = TRUE) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.automorphisms()` was renamed to [count_automorphisms()] to create a more
-#' consistent API.
+#' `graph.automorphisms()` was renamed to [count_automorphisms()] to create a more consistent API.
 #' @inheritParams count_automorphisms
 #' @keywords internal
 #' @export
@@ -67,8 +64,7 @@ graph.automorphisms <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `canonical.permutation()` was renamed to [canonical_permutation()] to create a more
-#' consistent API.
+#' `canonical.permutation()` was renamed to [canonical_permutation()] to create a more consistent API.
 #' @inheritParams canonical_permutation
 #' @keywords internal
 #' @export
@@ -91,8 +87,7 @@ canonical.permutation <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `automorphisms()` was renamed to [count_automorphisms()] to create a more
-#' consistent API.
+#' `automorphisms()` was renamed to [count_automorphisms()] to create a more consistent API.
 #' @inheritParams count_automorphisms
 #' @keywords internal
 #' @export
@@ -310,14 +305,12 @@ graph.subisomorphic.lad <- function(
 #' }
 #'
 #' @section \sQuote{direct} method:
-#' This method only works on graphs with three or four vertices,
-#' and it is based on a pre-calculated and stored table. It does not
-#' have any extra arguments.
+#' This method only works on graphs with three or four vertices, and it is based on a pre-calculated and stored table.
+#' It does not have any extra arguments.
 #'
 #' @section \sQuote{vf2} method:
-#' This method uses the VF2 algorithm by Cordella, Foggia et al., see
-#' references below. It supports vertex and edge colors and have the
-#' following extra arguments:
+#' This method uses the VF2 algorithm by Cordella, Foggia et al., see references below.
+#' It supports vertex and edge colors and have the following extra arguments:
 #' \describe{
 #'     \item{vertex.color1, vertex.color2}{
 #'       Optional integer vectors giving the colors of the vertices for colored graph isomorphism.
@@ -333,11 +326,9 @@ graph.subisomorphic.lad <- function(
 #'   }
 #'
 #' @section \sQuote{bliss} method:
-#' Uses the BLISS algorithm by Junttila and Kaski, and it works for
-#' undirected graphs. For both graphs the
-#' [canonical_permutation()] and then the [permute()]
-#' function is called to transfer them into canonical form; finally the
-#' canonical forms are compared.
+#' Uses the BLISS algorithm by Junttila and Kaski, and it works for undirected graphs.
+#' For both graphs the [canonical_permutation()] and then the [permute()] function is called to transfer them into canonical form;
+#' finally the canonical forms are compared.
 #' Extra arguments:
 #' \describe{
 #'     \item{sh}{
@@ -348,9 +339,9 @@ graph.subisomorphic.lad <- function(
 #'
 #' @param graph1 The first graph.
 #' @param graph2 The second graph.
-#' @param method The method to use. Possible values: \sQuote{auto},
-#'   \sQuote{direct}, \sQuote{vf2}, \sQuote{bliss}. See their details
-#'   below.
+#' @param method The method to use.
+#'   Possible values: \sQuote{auto}, \sQuote{direct}, \sQuote{vf2}, \sQuote{bliss}.
+#'   See their details below.
 #' @param ... Additional arguments, passed to the various methods.
 #' @return Logical scalar, `TRUE` if the graphs are isomorphic.
 #'
@@ -639,12 +630,11 @@ is_isomorphic_to <- isomorphic
 #' Decide if a graph is subgraph isomorphic to another one
 #'
 #' @section \sQuote{auto} method:
-#' This method currently selects \sQuote{lad}, always, as it seems
-#' to be superior on most graphs.
+#' This method currently selects \sQuote{lad}, always, as it seems to be superior on most graphs.
 #'
 #' @section \sQuote{lad} method:
-#' This is the LAD algorithm by Solnon, see the reference below. It has
-#' the following extra arguments:
+#' This is the LAD algorithm by Solnon, see the reference below.
+#' It has the following extra arguments:
 #' \describe{
 #'     \item{domains}{
 #'       Matching restrictions.
@@ -664,9 +654,8 @@ is_isomorphic_to <- isomorphic
 #'   }
 #'
 #' @section \sQuote{vf2} method:
-#' This method uses the VF2 algorithm by Cordella, Foggia et al., see
-#' references below. It supports vertex and edge colors and have the
-#' following extra arguments:
+#' This method uses the VF2 algorithm by Cordella, Foggia et al., see references below.
+#' It supports vertex and edge colors and have the following extra arguments:
 #' \describe{
 #'     \item{vertex.color1, vertex.color2}{
 #'       Optional integer vectors giving the colors of the vertices for colored graph isomorphism.
@@ -681,17 +670,15 @@ is_isomorphic_to <- isomorphic
 #'     }
 #'   }
 #'
-#' @param pattern The smaller graph, it might be directed or
-#'   undirected. Undirected graphs are treated as directed graphs with
-#'   mutual edges.
-#' @param target The bigger graph, it might be directed or
-#'   undirected. Undirected graphs are treated as directed graphs with
-#'   mutual edges.
-#' @param method The method to use. Possible values: \sQuote{auto},
-#'   \sQuote{lad}, \sQuote{vf2}. See their details below.
+#' @param pattern The smaller graph, it might be directed or undirected.
+#'   Undirected graphs are treated as directed graphs with mutual edges.
+#' @param target The bigger graph, it might be directed or undirected.
+#'   Undirected graphs are treated as directed graphs with mutual edges.
+#' @param method The method to use.
+#'   Possible values: \sQuote{auto}, \sQuote{lad}, \sQuote{vf2}.
+#'   See their details below.
 #' @param ... Additional arguments, passed to the various methods.
-#' @return Logical scalar, `TRUE` if the `pattern` is
-#'   isomorphic to a (possibly induced) subgraph of `target`.
+#' @return Logical scalar, `TRUE` if the `pattern` is isomorphic to a (possibly induced) subgraph of `target`.
 #'
 #' @aliases graph.subisomorphic.vf2 graph.subisomorphic.lad
 #'
@@ -764,8 +751,7 @@ is_subgraph_isomorphic_to <- subgraph_isomorphic
 #'
 #' @param graph1 The first graph.
 #' @param graph2 The second graph.
-#' @param method Currently only \sQuote{vf2} is supported, see
-#'   [isomorphic()] for details about it and extra arguments.
+#' @param method Currently only \sQuote{vf2} is supported, see [isomorphic()] for details about it and extra arguments.
 #' @param ... Passed to the individual methods.
 #' @return Number of isomorphic mappings between the two graphs.
 #'
@@ -873,12 +859,11 @@ graph.count.isomorphisms.vf2 <- function(
   )
 }
 
-#' Count the isomorphic mappings between a graph and the subgraphs of
-#' another graph
+#' Count the isomorphic mappings between a graph and the subgraphs of another graph
 #'
 #' @section \sQuote{lad} method:
-#' This is the LAD algorithm by Solnon, see the reference below. It has
-#' the following extra arguments:
+#' This is the LAD algorithm by Solnon, see the reference below.
+#' It has the following extra arguments:
 #' \describe{
 #'     \item{domains}{
 #'       Matching restrictions.
@@ -896,9 +881,8 @@ graph.count.isomorphisms.vf2 <- function(
 #'   }
 #'
 #' @section \sQuote{vf2} method:
-#' This method uses the VF2 algorithm by Cordella, Foggia et al., see
-#' references below. It supports vertex and edge colors and have the
-#' following extra arguments:
+#' This method uses the VF2 algorithm by Cordella, Foggia et al., see references below.
+#' It supports vertex and edge colors and have the following extra arguments:
 #' \describe{
 #'     \item{vertex.color1, vertex.color2}{
 #'       Optional integer vectors giving the colors of the vertices for colored graph isomorphism.
@@ -913,17 +897,15 @@ graph.count.isomorphisms.vf2 <- function(
 #'     }
 #'   }
 #'
-#' @param pattern The smaller graph, it might be directed or
-#'   undirected. Undirected graphs are treated as directed graphs with
-#'   mutual edges.
-#' @param target The bigger graph, it might be directed or
-#'   undirected. Undirected graphs are treated as directed graphs with
-#'   mutual edges.
-#' @param method The method to use. Possible values:
-#'   \sQuote{lad}, \sQuote{vf2}. See their details below.
+#' @param pattern The smaller graph, it might be directed or undirected.
+#'   Undirected graphs are treated as directed graphs with mutual edges.
+#' @param target The bigger graph, it might be directed or undirected.
+#'   Undirected graphs are treated as directed graphs with mutual edges.
+#' @param method The method to use.
+#'   Possible values: \sQuote{lad}, \sQuote{vf2}.
+#'   See their details below.
 #' @param ... Additional arguments, passed to the various methods.
-#' @return Logical scalar, `TRUE` if the `pattern` is
-#'   isomorphic to a (possibly induced) subgraph of `target`.
+#' @return Logical scalar, `TRUE` if the `pattern` is isomorphic to a (possibly induced) subgraph of `target`.
 #'
 #' @aliases graph.count.subisomorphisms.vf2
 #'
@@ -1028,25 +1010,21 @@ graph.count.subisomorphisms.vf2 <- function(
 #'
 #' @param graph1 The first graph.
 #' @param graph2 The second graph.
-#' @param method Currently only \sQuote{vf2} is supported, see
-#'   [isomorphic()] for details about it and extra arguments.
+#' @param method Currently only \sQuote{vf2} is supported, see [isomorphic()] for details about it and extra arguments.
 #' @param ... Extra arguments, passed to the various methods.
 #' @param callback Optional callback function to call for each isomorphism found.
-#'   If provided, the function should accept two arguments: `map12` (integer vector
-#'   mapping vertex IDs from graph1 to graph2, 1-based indexing) and `map21`
-#'   (integer vector mapping vertex IDs from graph2 to graph1, 1-based indexing).
+#'   If provided, the function should accept two arguments:
+#'   `map12` (integer vector mapping vertex IDs from graph1 to graph2, 1-based indexing) and `map21` (integer vector mapping vertex IDs from graph2 to graph1, 1-based indexing).
 #'   The function should return `FALSE` to continue the search or `TRUE` to stop it.
 #'   If `NULL` (the default), all isomorphisms are collected and returned as a list.
 #'   Only supported for `method = "vf2"`.
 #'
-#'   **Important limitation:** Callback functions must NOT call any igraph
-#'   functions (including simple queries like `vcount()` or `ecount()`). Doing
-#'   so will cause R to crash due to reentrancy issues. Extract
-#'   any needed graph information before calling the function with a callback, or
-#'   use collector mode (the default) and process results afterward.
-#' @return If `callback` is `NULL`, returns a list of vertex sequences, corresponding
-#'   to all mappings from the first graph to the second. If `callback` is provided,
-#'   returns `NULL` invisibly.
+#'   **Important limitation:** Callback functions must NOT call any igraph functions (including simple queries like `vcount()` or `ecount()`).
+#'   Doing so will cause R to crash due to reentrancy issues.
+#'   Extract any needed graph information before calling the function with a callback,
+#'   or use collector mode (the default) and process results afterward.
+#' @return If `callback` is `NULL`, returns a list of vertex sequences, corresponding to all mappings from the first graph to the second.
+#'   If `callback` is provided, returns `NULL` invisibly.
 #'
 #' @aliases graph.get.isomorphisms.vf2
 #'
@@ -1109,8 +1087,8 @@ isomorphisms <- function(graph1, graph2, method = "vf2", ..., callback = NULL) {
 #' All isomorphic mappings between a graph and subgraphs of another graph
 #'
 #' @section \sQuote{lad} method:
-#' This is the LAD algorithm by Solnon, see the reference below. It has
-#' the following extra arguments:
+#' This is the LAD algorithm by Solnon, see the reference below.
+#' It has the following extra arguments:
 #' \describe{
 #'     \item{domains}{
 #'       Matching restrictions.
@@ -1130,9 +1108,8 @@ isomorphisms <- function(graph1, graph2, method = "vf2", ..., callback = NULL) {
 #'   }
 #'
 #' @section \sQuote{vf2} method:
-#' This method uses the VF2 algorithm by Cordella, Foggia et al., see
-#' references below. It supports vertex and edge colors and have the
-#' following extra arguments:
+#' This method uses the VF2 algorithm by Cordella, Foggia et al., see references below.
+#' It supports vertex and edge colors and have the following extra arguments:
 #' \describe{
 #'     \item{vertex.color1, vertex.color2}{
 #'       Optional integer vectors giving the colors of the vertices for colored graph isomorphism.
@@ -1147,31 +1124,28 @@ isomorphisms <- function(graph1, graph2, method = "vf2", ..., callback = NULL) {
 #'     }
 #'   }
 #'
-#' @param pattern The smaller graph, it might be directed or
-#'   undirected. Undirected graphs are treated as directed graphs with
-#'   mutual edges.
-#' @param target The bigger graph, it might be directed or
-#'   undirected. Undirected graphs are treated as directed graphs with
-#'   mutual edges.
-#' @param method The method to use. Possible values: \sQuote{auto},
-#'   \sQuote{lad}, \sQuote{vf2}. See their details below.
+#' @param pattern The smaller graph, it might be directed or undirected.
+#'   Undirected graphs are treated as directed graphs with mutual edges.
+#' @param target The bigger graph, it might be directed or undirected.
+#'   Undirected graphs are treated as directed graphs with mutual edges.
+#' @param method The method to use.
+#'   Possible values: \sQuote{auto}, \sQuote{lad}, \sQuote{vf2}.
+#'   See their details below.
 #' @param ... Additional arguments, passed to the various methods.
 #' @param callback Optional callback function to call for each subisomorphism found.
-#'   If provided, the function should accept two arguments: `map12` (integer vector
-#'   mapping vertex IDs from pattern to target, 1-based indexing) and `map21`
-#'   (integer vector mapping vertex IDs from target to pattern, 1-based indexing).
+#'   If provided, the function should accept two arguments:
+#'   `map12` (integer vector mapping vertex IDs from pattern to target, 1-based indexing) and `map21` (integer vector mapping vertex IDs from target to pattern, 1-based indexing).
 #'   The function should return `FALSE` to continue the search or `TRUE` to stop it.
 #'   If `NULL` (the default), all subisomorphisms are collected and returned as a list.
 #'   Only supported for `method = "vf2"`.
 #'
-#'   **Important limitation:** Callback functions must NOT call any igraph
-#'   functions (including simple queries like `vcount()` or `ecount()`). Doing
-#'   so will cause R to crash due to reentrancy issues. Extract
-#'   any needed graph information before calling the function with a callback, or
-#'   use collector mode (the default) and process results afterward.
-#' @return If `callback` is `NULL`, returns a list of vertex sequences, corresponding
-#'   to all mappings from the pattern graph to the target graph. If `callback` is
-#'   provided, returns `NULL` invisibly.
+#'   **Important limitation:** Callback functions must NOT call any igraph functions (including simple queries like `vcount()` or `ecount()`).
+#'   Doing so will cause R to crash due to reentrancy issues.
+#'   Extract any needed graph information before calling the function with a callback,
+#'   or use collector mode (the default) and process results afterward.
+#' @return If `callback` is `NULL`, returns a list of vertex sequences,
+#'   corresponding to all mappings from the pattern graph to the target graph.
+#'   If `callback` is provided, returns `NULL` invisibly.
 #'
 #' @aliases graph.get.subisomorphisms.vf2
 #'
@@ -1245,14 +1219,12 @@ subgraph_isomorphisms <- function(
 #' Isomorphism class of a graph
 #'
 #' The isomorphism class is a non-negative integer number.
-#' Graphs (with the same number of vertices) having the same isomorphism
-#' class are isomorphic and isomorphic graphs always have the same
-#' isomorphism class. Currently it can handle directed graphs with 3 or 4
-#' vertices and undirected graphs with 3 to 6 vertices.
+#' Graphs (with the same number of vertices) having the same isomorphism class are isomorphic and isomorphic graphs always have the same isomorphism class.
+#' Currently it can handle directed graphs with 3 or 4 vertices and undirected graphs with 3 to 6 vertices.
 #'
 #' @param graph The input graph.
-#' @param v Optionally a vertex sequence. If not missing, then an induced
-#'   subgraph of the input graph, consisting of this vertices, is used.
+#' @param v Optionally a vertex sequence.
+#'   If not missing, then an induced subgraph of the input graph, consisting of this vertices, is used.
 #' @return An integer number.
 #'
 #' @aliases graph.isoclass graph.isoclass.subgraph
@@ -1284,17 +1256,14 @@ graph.isoclass <- function(graph) {
 #' Create a graph from an isomorphism class
 #'
 #' The isomorphism class is a non-negative integer number.
-#' Graphs (with the same number of vertices) having the same isomorphism
-#' class are isomorphic and isomorphic graphs always have the same
-#' isomorphism class. Currently it can handle directed graphs with 3 or 4
-#' vertices and undirected graphd with 3 to 6 vertices.
+#' Graphs (with the same number of vertices) having the same isomorphism class are isomorphic and isomorphic graphs always have the same isomorphism class.
+#' Currently it can handle directed graphs with 3 or 4 vertices and undirected graphd with 3 to 6 vertices.
 #'
 #' @param size The number of vertices in the graph.
 #' @param number The isomorphism class.
 #' @inheritParams rlang::args_dots_empty
 #' @param directed Whether to create a directed graph (the default).
-#' @return An igraph object, the graph of the given size, directedness
-#'   and isomorphism class.
+#' @return An igraph object, the graph of the given size, directedness and isomorphism class.
 #'
 #' @family graph isomorphism
 #' @export
@@ -1349,15 +1318,13 @@ graph_from_isomorphism_class <- function(
 
 #' Canonical permutation of a graph
 #'
-#' The canonical permutation brings every isomorphic graphs into the same
-#' (labeled) graph.
+#' The canonical permutation brings every isomorphic graphs into the same (labeled) graph.
 #'
-#' `canonical_permutation()` computes a permutation which brings the graph
-#' into canonical form, as defined by the BLISS algorithm.  All isomorphic
-#' graphs have the same canonical form.
+#' `canonical_permutation()` computes a permutation which brings the graph into canonical form,
+#' as defined by the BLISS algorithm.  All isomorphic graphs have the same canonical form.
 #'
-#' See the paper below for the details about BLISS. This and more information
-#' is available at <http://www.tcs.hut.fi/Software/bliss/index.html>.
+#' See the paper below for the details about BLISS.
+#' This and more information is available at <http://www.tcs.hut.fi/Software/bliss/index.html>.
 #'
 #' The possible values for the `sh` argument are:
 #' \describe{
@@ -1380,19 +1347,17 @@ graph_from_isomorphism_class <- function(
 #'       Smallest maximally non-trivially connected non-singleton cell.
 #'     }
 #'   }
-#' See the paper in references for details
-#' about these.
+#' See the paper in references for details about these.
 #'
 #' @param graph The input graph, treated as undirected.
-#' @param colors The colors of the individual vertices of the graph; only
-#'   vertices having the same color are allowed to match each other in an
-#'   automorphism. When omitted, igraph uses the `color` attribute of the
-#'   vertices, or, if there is no such vertex attribute, it simply assumes that
-#'   all vertices have the same color. Pass NULL explicitly if the graph has a
-#'   `color` vertex attribute but you do not want to use it.
+#' @param colors The colors of the individual vertices of the graph;
+#'   only vertices having the same color are allowed to match each other in an automorphism.
+#'   When omitted, igraph uses the `color` attribute of the vertices, or, if there is no such vertex attribute,
+#'   it simply assumes that all vertices have the same color.
+#'   Pass NULL explicitly if the graph has a `color` vertex attribute but you do not want to use it.
 #' @inheritParams rlang::args_dots_empty
-#' @param sh Type of the heuristics to use for the BLISS algorithm. See details
-#'   for possible values.
+#' @param sh Type of the heuristics to use for the BLISS algorithm.
+#'   See details for possible values.
 #' @return A list with the following members:
 #'   \describe{
 #'     \item{labeling}{
@@ -1427,9 +1392,8 @@ graph_from_isomorphism_class <- function(
 #'   }
 #' @author Tommi Junttila for BLISS, Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the igraph and R interfaces.
-#' @seealso [permute()] to apply a permutation to a graph,
-#' [isomorphic()] for deciding graph isomorphism, possibly
-#' based on canonical labels.
+#' @seealso [permute()] to apply a permutation to a graph, [isomorphic()] for deciding graph isomorphism,
+#' possibly based on canonical labels.
 #' @references Tommi Junttila and Petteri Kaski: Engineering an Efficient
 #' Canonical Labeling Tool for Large and Sparse Graphs, *Proceedings of
 #' the Ninth Workshop on Algorithm Engineering and Experiments and the Fourth
@@ -1508,17 +1472,14 @@ canonical_permutation <- function(
 #'
 #' Create a new graph, by permuting vertex IDs.
 #'
-#' This function creates a new graph from the input graph by permuting its
-#' vertices according to the specified mapping. Call this function with the
-#' output of [canonical_permutation()] to create the canonical form
-#' of a graph.
+#' This function creates a new graph from the input graph by permuting its vertices according to the specified mapping.
+#' Call this function with the output of [canonical_permutation()] to create the canonical form of a graph.
 #'
 #' `permute()` keeps all graph, vertex and edge attributes of the graph.
 #'
 #' @param graph The input graph, it can directed or undirected.
-#' @param permutation A numeric vector giving the permutation to apply. The
-#'   first element is the new ID of vertex 1, etc. Every number between one and
-#'   `vcount(graph)` must appear exactly once.
+#' @param permutation A numeric vector giving the permutation to apply.
+#'   The first element is the new ID of vertex 1, etc. Every number between one and `vcount(graph)` must appear exactly once.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [canonical_permutation()]
@@ -1559,29 +1520,23 @@ graph.isomorphic <- function(graph1, graph2) {
 
 #' Number of automorphisms
 #'
-#' Calculate the number of automorphisms of a graph, i.e. the number of
-#' isomorphisms to itself.
+#' Calculate the number of automorphisms of a graph, i.e. the number of isomorphisms to itself.
 #'
-#' An automorphism of a graph is a permutation of its vertices which brings the
-#' graph into itself.
+#' An automorphism of a graph is a permutation of its vertices which brings the graph into itself.
 #'
-#' This function calculates the number of automorphism of a graph using the
-#' BLISS algorithm. See also the BLISS homepage at
-#' <http://www.tcs.hut.fi/Software/bliss/index.html>. If you need the
-#' automorphisms themselves, use [automorphism_group()] to obtain
-#' a compact representation of the automorphism group.
+#' This function calculates the number of automorphism of a graph using the BLISS algorithm.
+#' See also the BLISS homepage at <http://www.tcs.hut.fi/Software/bliss/index.html>.
+#' If you need the automorphisms themselves, use [automorphism_group()] to obtain a compact representation of the automorphism group.
 #'
 #' @param graph The input graph, it is treated as undirected.
-#' @param colors The colors of the individual vertices of the graph; only
-#'   vertices having the same color are allowed to match each other in an
-#'   automorphism. When omitted, igraph uses the `color` attribute of the
-#'   vertices, or, if there is no such vertex attribute, it simply assumes that
-#'   all vertices have the same color. Pass NULL explicitly if the graph has a
-#'   `color` vertex attribute but you do not want to use it.
+#' @param colors The colors of the individual vertices of the graph;
+#'   only vertices having the same color are allowed to match each other in an automorphism.
+#'   When omitted, igraph uses the `color` attribute of the vertices, or, if there is no such vertex attribute,
+#'   it simply assumes that all vertices have the same color.
+#'   Pass NULL explicitly if the graph has a `color` vertex attribute but you do not want to use it.
 #' @inheritParams rlang::args_dots_empty
-#' @param sh The splitting heuristics for the BLISS algorithm. Possible values
-#'   are:
-#'   \sQuote{`f`}:
+#' @param sh The splitting heuristics for the BLISS algorithm.
+#'   Possible values are: \sQuote{`f`}:
 #'     first non-singleton cell,
 #'   \sQuote{`fl`}:
 #'     first largest non-singleton cell,
@@ -1620,9 +1575,7 @@ graph.isomorphic <- function(graph1, graph2) {
 #' @author Tommi Junttila (<https://users.ics.aalto.fi/tjunttil/>) for BLISS
 #' and Gabor Csardi \email{csardi.gabor@@gmail.com} for the igraph glue code
 #' and this manual page.
-#' @seealso [canonical_permutation()], [permute()],
-#' and [automorphism_group()] for a compact representation of all
-#' automorphisms
+#' @seealso [canonical_permutation()], [permute()], and [automorphism_group()] for a compact representation of all automorphisms
 #' @references Tommi Junttila and Petteri Kaski: Engineering an Efficient
 #' Canonical Labeling Tool for Large and Sparse Graphs, *Proceedings of
 #' the Ninth Workshop on Algorithm Engineering and Experiments and the Fourth
@@ -1694,29 +1647,23 @@ count_automorphisms <- function(
 #'
 #' Compute the generating set of the automorphism group of a graph.
 #'
-#' An automorphism of a graph is a permutation of its vertices which brings the
-#' graph into itself. The automorphisms of a graph form a group and there exists
-#' a subset of this group (i.e. a set of permutations) such that every other
-#' permutation can be expressed as a combination of these permutations. These
-#' permutations are called the generating set of the automorphism group.
+#' An automorphism of a graph is a permutation of its vertices which brings the graph into itself.
+#' The automorphisms of a graph form a group and there exists a subset of this group (i.e. a set of permutations) such that every other permutation can be expressed as a combination of these permutations.
+#' These permutations are called the generating set of the automorphism group.
 #'
-#' This function calculates a possible generating set of the automorphism of
-#' a graph using the BLISS algorithm. See also the BLISS homepage at
-#' <http://www.tcs.hut.fi/Software/bliss/index.html>. The calculated
-#' generating set is not necessarily minimal, and it may depend on the splitting
-#' heuristics used by BLISS.
+#' This function calculates a possible generating set of the automorphism of a graph using the BLISS algorithm.
+#' See also the BLISS homepage at <http://www.tcs.hut.fi/Software/bliss/index.html>.
+#' The calculated generating set is not necessarily minimal, and it may depend on the splitting heuristics used by BLISS.
 #'
 #' @param graph The input graph, it is treated as undirected.
-#' @param colors The colors of the individual vertices of the graph; only
-#'   vertices having the same color are allowed to match each other in an
-#'   automorphism. When omitted, igraph uses the `color` attribute of the
-#'   vertices, or, if there is no such vertex attribute, it simply assumes that
-#'   all vertices have the same color. Pass NULL explicitly if the graph has a
-#'   `color` vertex attribute but you do not want to use it.
+#' @param colors The colors of the individual vertices of the graph;
+#'   only vertices having the same color are allowed to match each other in an automorphism.
+#'   When omitted, igraph uses the `color` attribute of the vertices, or, if there is no such vertex attribute,
+#'   it simply assumes that all vertices have the same color.
+#'   Pass NULL explicitly if the graph has a `color` vertex attribute but you do not want to use it.
 #' @inheritParams rlang::args_dots_empty
-#' @param sh The splitting heuristics for the BLISS algorithm. Possible values
-#'   are:
-#'   \sQuote{`f`}:
+#' @param sh The splitting heuristics for the BLISS algorithm.
+#'   Possible values are: \sQuote{`f`}:
 #'     first non-singleton cell,
 #'   \sQuote{`fl`}:
 #'     first largest non-singleton cell,
@@ -1730,10 +1677,9 @@ count_automorphisms <- function(
 #'     non-trivially connected non-singleton cell,
 #'   \sQuote{`fsm`}:
 #'     first smallest maximally non-trivially connected non-singleton cell.
-#' @param details Specifies whether to provide additional details about the
-#'   BLISS internals in the result.
-#' @return When `details` is `FALSE`, a list of vertex permutations
-#'   that form a generating set of the automorphism group of the input graph.
+#' @param details Specifies whether to provide additional details about the BLISS internals in the result.
+#' @return When `details` is `FALSE`,
+#'   a list of vertex permutations that form a generating set of the automorphism group of the input graph.
 #'   When `details` is `TRUE`, a named list with two members:
 #'   \describe{
 #'     \item{generators}{
@@ -1820,16 +1766,12 @@ automorphism_group <- function(
 #' `r lifecycle::badge("experimental")`
 #'
 #' Computes the transitive closure of a graph.
-#' The resulting graph will have an edge from vertex \eqn{i} to vertex \eqn{j}
-#' if \eqn{j} is reachable from \eqn{i} in the original graph.
+#' The resulting graph will have an edge from vertex \eqn{i} to vertex \eqn{j} if \eqn{j} is reachable from \eqn{i} in the original graph.
 #'
-#' The transitive closure of a graph is a new graph where there is an edge
-#' between any two vertices if there is a path between them in the original
-#' graph.
-#' For directed graphs, an edge from \eqn{i} to \eqn{j} is added if there is
-#' a directed path from \eqn{i} to \eqn{j}.
-#' For undirected graphs, this is equivalent to connecting all vertices that
-#' are in the same connected component.
+#' The transitive closure of a graph is a new graph where there is an edge between any two vertices
+#' if there is a path between them in the original graph.
+#' For directed graphs, an edge from \eqn{i} to \eqn{j} is added if there is a directed path from \eqn{i} to \eqn{j}.
+#' For undirected graphs, this is equivalent to connecting all vertices that are in the same connected component.
 #'
 #' @param graph The input graph.
 #'   It can be directed or undirected.

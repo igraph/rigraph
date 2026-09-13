@@ -7,8 +7,7 @@
 \method{+}{igraph}(e1, e2)
 }
 \arguments{
-\item{e1}{First argument, probably an igraph graph, but see details
-below.}
+\item{e1}{First argument, probably an igraph graph, but see details below.}
 
 \item{e2}{Second argument, see details below.}
 }
@@ -17,8 +16,7 @@ Add vertices, edges or another graph to a graph
 }
 \details{
 The plus operator can be used to add vertices or edges to graph.
-The actual operation that is performed depends on the type of the
-right hand side argument.
+The actual operation that is performed depends on the type of the right hand side argument.
 \itemize{
 \item If is is another igraph graph object and they are both
 named graphs, then the union of the two graphs are calculated,

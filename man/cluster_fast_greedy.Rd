@@ -14,41 +14,34 @@ cluster_fast_greedy(
 )
 }
 \arguments{
-\item{graph}{The input graph. It must be undirected and must not have
-multi-edges.}
+\item{graph}{The input graph.
+It must be undirected and must not have multi-edges.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{merges}{Logical, whether to return the merge matrix.}
 
-\item{modularity}{Logical, whether to return a vector containing the
-modularity after each merge.}
+\item{modularity}{Logical, whether to return a vector containing the modularity after each merge.}
 
-\item{membership}{Logical, whether to calculate the membership vector
-corresponding to the maximum modularity score, considering all possible
-community structures along the merges.}
+\item{membership}{Logical, whether to calculate the membership vector corresponding to the maximum modularity score,
+considering all possible community structures along the merges.}
 
-\item{weights}{The weights of the edges. It must be a positive numeric vector,
-\code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
-\sQuote{weight} edge attribute, then that attribute will be used. If
-\code{NULL} and no such attribute is present, then the edges will have equal
-weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
-attribute, but you don't want to use it for community detection. A larger
-edge weight means a stronger connection for this function.}
+\item{weights}{The weights of the edges.
+It must be a positive numeric vector, \code{NULL} or \code{NA}.
+If it is \code{NULL} and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
+If \code{NULL} and no such attribute is present, then the edges will have equal weights.
+Set this to \code{NA} if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for community detection.
+A larger edge weight means a stronger connection for this function.}
 }
 \value{
-\code{cluster_fast_greedy()} returns a \code{\link[=communities]{communities()}}
-object, please see the \code{\link[=communities]{communities()}} manual page for details.
+\code{cluster_fast_greedy()} returns a \code{\link[=communities]{communities()}} object, please see the \code{\link[=communities]{communities()}} manual page for details.
 }
 \description{
-This function tries to find dense subgraph, also called communities in
-graphs via directly optimizing a modularity score.
+This function tries to find dense subgraph, also called communities in graphs via directly optimizing a modularity score.
 }
 \details{
-This function implements the fast greedy modularity optimization algorithm
-for finding community structure, see A Clauset, MEJ Newman, C Moore: Finding
-community structure in very large networks,
-http://www.arxiv.org/abs/cond-mat/0408187 for the details.
+This function implements the fast greedy modularity optimization algorithm for finding community structure, see A Clauset, MEJ Newman,
+C Moore: Finding community structure in very large networks, http://www.arxiv.org/abs/cond-mat/0408187 for the details.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
@@ -70,11 +63,8 @@ very large networks, http://www.arxiv.org/abs/cond-mat/0408187
 \seealso{
 \code{\link[=communities]{communities()}} for extracting the results.
 
-See also \code{\link[=cluster_walktrap]{cluster_walktrap()}},
-\code{\link[=cluster_spinglass]{cluster_spinglass()}},
-\code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}} and
-\code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}}, \code{\link[=cluster_louvain]{cluster_louvain()}}
-\code{\link[=cluster_leiden]{cluster_leiden()}} for other methods.
+See also \code{\link[=cluster_walktrap]{cluster_walktrap()}}, \code{\link[=cluster_spinglass]{cluster_spinglass()}}, \code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}} and \code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}},
+\code{\link[=cluster_louvain]{cluster_louvain()}} \code{\link[=cluster_leiden]{cluster_leiden()}} for other methods.
 
 Community detection:
 \code{\link[=as_membership]{as_membership()}},

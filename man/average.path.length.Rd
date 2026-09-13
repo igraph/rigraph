@@ -15,31 +15,26 @@ average.path.length(
 \arguments{
 \item{graph}{The graph to work on.}
 
-\item{weights}{Possibly a numeric vector giving edge weights. If this is
-\code{NULL} and the graph has a \code{weight} edge attribute, then the
-attribute is used. If this is \code{NA} then no weights are used (even if
-the graph has a \code{weight} attribute). In a weighted graph, the length
-of a path is the sum of the weights of its constituent edges.}
+\item{weights}{Possibly a numeric vector giving edge weights.
+If this is \code{NULL} and the graph has a \code{weight} edge attribute, then the attribute is used.
+If this is \code{NA} then no weights are used (even if the graph has a \code{weight} attribute).
+In a weighted graph, the length of a path is the sum of the weights of its constituent edges.}
 
 \item{directed}{Whether to consider directed paths in directed graphs,
 this argument is ignored for undirected graphs.}
 
-\item{unconnected}{What to do if the graph is unconnected (not
-strongly connected if directed paths are considered). If TRUE, only
-the lengths of the existing paths are considered and averaged; if
-FALSE, the length of the missing paths are considered as having infinite
-length, making the mean distance infinite as well.}
+\item{unconnected}{What to do if the graph is unconnected (not strongly connected if directed paths are considered).
+If TRUE, only the lengths of the existing paths are considered and averaged; if FALSE,
+the length of the missing paths are considered as having infinite length, making the mean distance infinite as well.}
 
 \item{details}{Whether to provide additional details in the result.
-Functions accepting this argument (like \code{mean_distance()}) return
-additional information like the number of disconnected vertex pairs in
-the result when this parameter is set to \code{TRUE}.}
+Functions accepting this argument (like \code{mean_distance()}) return additional information like the number of disconnected vertex pairs in the result
+when this parameter is set to \code{TRUE}.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{average.path.length()} was renamed to \code{\link[=mean_distance]{mean_distance()}} to create a more
-consistent API.
+\code{average.path.length()} was renamed to \code{\link[=mean_distance]{mean_distance()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_average_path_length_dijkstra}{\code{average_path_length_dijkstra()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

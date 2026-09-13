@@ -16,34 +16,29 @@ sample_motifs(
 \arguments{
 \item{graph}{Graph object, the input graph.}
 
-\item{size}{The size of the motif, currently size 3 and 4 are supported
-in directed graphs and sizes 3-6 in undirected graphs.}
+\item{size}{The size of the motif, currently size 3 and 4 are supported in directed graphs and sizes 3-6 in undirected graphs.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{cut.prob}{Numeric vector giving the probabilities that the search
-graph is cut at a certain level. Its length should be the same as the size
-of the motif (the \code{size} argument).
+\item{cut.prob}{Numeric vector giving the probabilities that the search graph is cut at a certain level.
+Its length should be the same as the size of the motif (the \code{size} argument).
 If \code{NULL}, the default, no cuts are made.}
 
-\item{sample.size}{The number of vertices to use as a starting point for
-finding motifs. Only used if the \code{sample} argument is \code{NULL}.
+\item{sample.size}{The number of vertices to use as a starting point for finding motifs.
+Only used if the \code{sample} argument is \code{NULL}.
 The default is \code{ceiling(vcount(graph) / 10)} .}
 
 \item{sample}{Vertices to use as a starting point for finding motifs.
 Default: \code{NULL}.}
 }
 \value{
-A numeric scalar, an estimate for the total number of motifs in
-the graph.
+A numeric scalar, an estimate for the total number of motifs in the graph.
 }
 \description{
-Graph motifs are small connected induced subgraphs with a well-defined
-structure.  These functions search a graph for various motifs.
+Graph motifs are small connected induced subgraphs with a well-defined structure.  These functions search a graph for various motifs.
 }
 \details{
-\code{sample_motifs()} estimates the total number of motifs of a given
-size in a graph based on a sample.
+\code{sample_motifs()} estimates the total number of motifs of a given size in a graph based on a sample.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu_estimate}{\code{motifs_randesu_estimate()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

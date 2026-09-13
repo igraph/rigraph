@@ -13,25 +13,21 @@ upgrade_graph(graph)
 The graph in the current format.
 }
 \description{
-igraph's internal data representation changes sometimes between
-versions. This means that it is not possible to use igraph objects
-that were created (and possibly saved to a file) with an older
-igraph version.
+igraph's internal data representation changes sometimes between versions.
+This means that it is not possible to use igraph objects that were created (and possibly saved to a file) with an older igraph version.
 }
 \details{
 \code{\link[=graph_version]{graph_version()}} queries the current data format,
 or the data format of a possibly older igraph graph.
 
-\code{upgrade_graph()} can convert an older data format
-to the current one.
+\code{upgrade_graph()} can convert an older data format to the current one.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
 }
 
 \seealso{
-graph_version to check the current data format version
-or the version of a graph.
+graph_version to check the current data format version or the version of a graph.
 
 Other versions:
 \code{\link[=graph_version]{graph_version()}}

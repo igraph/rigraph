@@ -11,16 +11,15 @@ tkplot.reshape(tkp.id, newlayout, ..., params)
 
 \item{newlayout}{The new layout, see the \code{layout} parameter of tkplot.}
 
-\item{...}{Additional plotting parameters. See \link{igraph.plotting} for
-the complete list.}
+\item{...}{Additional plotting parameters.
+See \link{igraph.plotting} for the complete list.}
 
 \item{params}{Extra parameters in a list, to pass to the layout function.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{tkplot.reshape()} was renamed to \code{\link[=tk_reshape]{tk_reshape()}} to create a more
-consistent API.
+\code{tkplot.reshape()} was renamed to \code{\link[=tk_reshape]{tk_reshape()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

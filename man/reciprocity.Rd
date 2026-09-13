@@ -22,20 +22,18 @@ A numeric scalar between zero and one.
 Calculates the reciprocity of a directed graph.
 }
 \details{
-The measure of reciprocity defines the proportion of mutual connections, in
-a directed graph. It is most commonly defined as the probability that the
-opposite counterpart of a directed edge is also included in the graph. Or in
-adjacency matrix notation:
+The measure of reciprocity defines the proportion of mutual connections, in a directed graph.
+It is most commonly defined as the probability that the opposite counterpart of a directed edge is also included in the graph.
+Or in adjacency matrix notation:
 \eqn{1 - \left(\sum_{i,j} |A_{ij} - A_{ji}|\right) / \left(2\sum_{i,j} A_{ij}\right)}{1 - (sum_ij |A_ij - A_ji|) / (2 sum_ij A_ij)}.
 This measure is calculated if the \code{mode} argument is \code{default}.
 
-Prior to igraph version 0.6, another measure was implemented, defined as the
-probability of mutual connection between a vertex pair, if we know that
-there is a (possibly non-mutual) connection between them. In other words,
-(unordered) vertex pairs are classified into three groups: (1)
-not-connected, (2) non-reciprocally connected, (3) reciprocally connected.
-The result is the size of group (3), divided by the sum of group sizes
-(2)+(3). This measure is calculated if \code{mode} is \code{ratio}.
+Prior to igraph version 0.6, another measure was implemented, defined as the probability of mutual connection between a vertex pair,
+if we know that there is a (possibly non-mutual) connection between them.
+In other words, (unordered) vertex pairs are classified into three groups: (1) not-connected, (2) non-reciprocally connected,
+(3) reciprocally connected.
+The result is the size of group (3), divided by the sum of group sizes (2)+(3).
+This measure is calculated if \code{mode} is \code{ratio}.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_reciprocity}{\code{reciprocity()}}

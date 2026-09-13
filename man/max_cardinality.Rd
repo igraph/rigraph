@@ -7,8 +7,8 @@
 max_cardinality(graph)
 }
 \arguments{
-\item{graph}{The input graph. It may be directed, but edge directions are
-ignored, as the algorithm is defined for undirected graphs.}
+\item{graph}{The input graph.
+It may be directed, but edge directions are ignored, as the algorithm is defined for undirected graphs.}
 }
 \value{
 A list with two components:
@@ -25,16 +25,13 @@ In other words, the elements of this vector are the vertices in reverse maximum 
 }
 }
 \description{
-Maximum cardinality search is a simple ordering a vertices that is useful in
-determining the chordality of a graph.
+Maximum cardinality search is a simple ordering a vertices that is useful in determining the chordality of a graph.
 }
 \details{
-Maximum cardinality search visits the vertices in such an order that every
-time the vertex with the most already visited neighbors is visited. Ties are
-broken randomly.
+Maximum cardinality search visits the vertices in such an order that every time the vertex with the most already visited neighbors is visited.
+Ties are broken randomly.
 
-The algorithm provides a simple basis for deciding whether a graph is
-chordal, see References below, and also \code{\link[=is_chordal]{is_chordal()}}.
+The algorithm provides a simple basis for deciding whether a graph is chordal, see References below, and also \code{\link[=is_chordal]{is_chordal()}}.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_maximum_cardinality_search}{\code{maximum_cardinality_search()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

@@ -14,20 +14,17 @@ centralization.degree(
 \arguments{
 \item{graph}{The input graph.}
 
-\item{mode}{This is the same as the \code{mode} argument of
-\code{degree()}.}
+\item{mode}{This is the same as the \code{mode} argument of \code{degree()}.}
 
-\item{loops}{Logical, whether to consider loops edges when
-calculating the degree.}
+\item{loops}{Logical, whether to consider loops edges when calculating the degree.}
 
-\item{normalized}{Logical. Whether to normalize the graph level
-centrality score by dividing by the theoretical maximum.}
+\item{normalized}{Logical.
+Whether to normalize the graph level centrality score by dividing by the theoretical maximum.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{centralization.degree()} was renamed to \code{\link[=centr_degree]{centr_degree()}} to create a more
-consistent API.
+\code{centralization.degree()} was renamed to \code{\link[=centr_degree]{centr_degree()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization_degree}{\code{centralization_degree()}}

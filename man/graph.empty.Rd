@@ -14,8 +14,7 @@ graph.empty(n = 0, directed = TRUE)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.empty()} was renamed to \code{\link[=make_empty_graph]{make_empty_graph()}} to create a more
-consistent API.
+\code{graph.empty()} was renamed to \code{\link[=make_empty_graph]{make_empty_graph()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty}{\code{empty()}}

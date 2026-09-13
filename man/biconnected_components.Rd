@@ -7,8 +7,8 @@
 biconnected_components(graph)
 }
 \arguments{
-\item{graph}{The input graph. It is treated as an undirected graph, even if
-it is directed.}
+\item{graph}{The input graph.
+It is treated as an undirected graph, even if it is directed.}
 }
 \value{
 A named list with three components:
@@ -36,14 +36,12 @@ The articulation points of the graph. See \code{\link[=articulation_points]{arti
 Finding the biconnected components of a graph
 }
 \details{
-A graph is biconnected if the removal of any single vertex (and its adjacent
-edges) does not disconnect it.
+A graph is biconnected if the removal of any single vertex (and its adjacent edges) does not disconnect it.
 
 A biconnected component of a graph is a maximal biconnected subgraph of it.
-The biconnected components of a graph can be given by the partition of its
-edges: every edge is a member of exactly one biconnected component. Note
-that this is not true for vertices: the same vertex can be part of many
-biconnected components.
+The biconnected components of a graph can be given by the partition of its edges:
+every edge is a member of exactly one biconnected component.
+Note that this is not true for vertices: the same vertex can be part of many biconnected components.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_biconnected_components}{\code{biconnected_components()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

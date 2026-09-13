@@ -7,22 +7,21 @@
 cluster_fluid_communities(graph, no.of.communities)
 }
 \arguments{
-\item{graph}{The input graph. The graph must be simple and connected.
+\item{graph}{The input graph.
+The graph must be simple and connected.
 Empty graphs are not supported as well as single vertex graphs.
-Edge directions are ignored. Weights are not considered.}
+Edge directions are ignored.
+Weights are not considered.}
 
-\item{no.of.communities}{The number of communities to be found. Must be
-greater than 0 and fewer than number of vertices in the graph.}
+\item{no.of.communities}{The number of communities to be found.
+Must be greater than 0 and fewer than number of vertices in the graph.}
 }
 \value{
-\code{cluster_fluid_communities()} returns a \code{\link[=communities]{communities()}}
-object, please see the \code{\link[=communities]{communities()}} manual page for details.
+\code{cluster_fluid_communities()} returns a \code{\link[=communities]{communities()}} object, please see the \code{\link[=communities]{communities()}} manual page for details.
 }
 \description{
-The algorithm detects communities based on the simple idea of
-several fluids interacting in a non-homogeneous environment
-(the graph topology), expanding and contracting based on their
-interaction and density.
+The algorithm detects communities based on the simple idea of several fluids interacting in a non-homogeneous environment (the graph topology),
+expanding and contracting based on their interaction and density.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_community_fluid_communities}{\code{community_fluid_communities()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
@@ -43,14 +42,8 @@ Springer, vol 689, p 229, doi: 10.1007/978-3-319-72150-7_19
 See \code{\link[=communities]{communities()}} for extracting the membership,
 modularity scores, etc. from the results.
 
-Other community detection algorithms: \code{\link[=cluster_walktrap]{cluster_walktrap()}},
-\code{\link[=cluster_spinglass]{cluster_spinglass()}},
-\code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}},
-\code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}},
-\code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}},
-\code{\link[=cluster_label_prop]{cluster_label_prop()}}
-\code{\link[=cluster_louvain]{cluster_louvain()}},
-\code{\link[=cluster_leiden]{cluster_leiden()}}
+Other community detection algorithms: \code{\link[=cluster_walktrap]{cluster_walktrap()}}, \code{\link[=cluster_spinglass]{cluster_spinglass()}}, \code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}},
+\code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}}, \code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}}, \code{\link[=cluster_label_prop]{cluster_label_prop()}} \code{\link[=cluster_louvain]{cluster_louvain()}}, \code{\link[=cluster_leiden]{cluster_leiden()}}
 
 Community detection:
 \code{\link[=as_membership]{as_membership()}},

@@ -20,46 +20,38 @@ simplify_and_colorize(graph)
 \arguments{
 \item{graph}{The graph to work on.}
 
-\item{remove.multiple}{Logical, whether the multiple edges are to be
-removed.}
+\item{remove.multiple}{Logical, whether the multiple edges are to be removed.}
 
 \item{remove.loops}{Logical, whether the loop edges are to be removed.}
 
-\item{edge.attr.comb}{Specifies what to do with edge attributes, if
-\code{remove.multiple=TRUE}. In this case many edges might be mapped to a
-single one in the new graph, and their attributes are combined. Please see
-\code{\link[=attribute.combination]{attribute.combination()}} for details on this. The default \code{NULL} uses
-the \code{edge.attr.comb} igraph option.}
+\item{edge.attr.comb}{Specifies what to do with edge attributes, if \code{remove.multiple=TRUE}.
+In this case many edges might be mapped to a single one in the new graph, and their attributes are combined.
+Please see \code{\link[=attribute.combination]{attribute.combination()}} for details on this.
+The default \code{NULL} uses the \code{edge.attr.comb} igraph option.}
 }
 \value{
-a graph object with the loop and/or multiple edges removed; the
-input graph is returned unchanged if it is already simple.
+a graph object with the loop and/or multiple edges removed; the input graph is returned unchanged if it is already simple.
 }
 \description{
 Simple graphs are graphs which do not contain loop and multiple edges.
 }
 \details{
-A loop edge is an edge for which the two endpoints are the same
-vertex. Two edges are multiple edges if they have exactly the same two
-endpoints (for directed graphs order does matter). A graph is simple is
-it does not contain loop edges and multiple edges.
+A loop edge is an edge for which the two endpoints are the same vertex.
+Two edges are multiple edges if they have exactly the same two endpoints (for directed graphs order does matter).
+A graph is simple is it does not contain loop edges and multiple edges.
 
 \code{is_simple()} checks whether a graph is simple.
 
-\code{simplify()} removes the loop and/or multiple edges from a graph.  If
-both \code{remove.loops} and \code{remove.multiple} are \code{TRUE} the
-function returns a simple graph. If the graph is already simple, it is
-returned unchanged.
+\code{simplify()} removes the loop and/or multiple edges from a graph.  If both \code{remove.loops} and \code{remove.multiple} are \code{TRUE} the function returns a simple graph.
+If the graph is already simple, it is returned unchanged.
 
-\code{simplify_and_colorize()} constructs a new, simple graph from a graph and
-also sets a \code{color} attribute on both the vertices and the edges.
-The colors of the vertices represent the number of self-loops that were
-originally incident on them, while the colors of the edges represent the
-multiplicities of the same edges in the original graph. This allows one to
-take into account the edge multiplicities and the number of loop edges in
-the VF2 isomorphism algorithm. Other graph, vertex and edge attributes from
-the original graph are discarded as the primary purpose of this function is
-to facilitate the usage of multigraphs with the VF2 algorithm.
+\code{simplify_and_colorize()} constructs a new,
+simple graph from a graph and also sets a \code{color} attribute on both the vertices and the edges.
+The colors of the vertices represent the number of self-loops that were originally incident on them,
+while the colors of the edges represent the multiplicities of the same edges in the original graph.
+This allows one to take into account the edge multiplicities and the number of loop edges in the VF2 isomorphism algorithm.
+Other graph,
+vertex and edge attributes from the original graph are discarded as the primary purpose of this function is to facilitate the usage of multigraphs with the VF2 algorithm.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple}{\code{is_simple()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_simplify_and_colorize}{\code{simplify_and_colorize()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
@@ -74,9 +66,7 @@ is_simple(simplify(g, remove.multiple = FALSE))
 is_simple(simplify(g))
 }
 \seealso{
-\code{\link[=which_loop]{which_loop()}}, \code{\link[=which_multiple]{which_multiple()}} and
-\code{\link[=count_multiple]{count_multiple()}}, \code{\link[=delete_edges]{delete_edges()}},
-\code{\link[=delete_vertices]{delete_vertices()}}
+\code{\link[=which_loop]{which_loop()}}, \code{\link[=which_multiple]{which_multiple()}} and \code{\link[=count_multiple]{count_multiple()}}, \code{\link[=delete_edges]{delete_edges()}}, \code{\link[=delete_vertices]{delete_vertices()}}
 
 Other functions for manipulating graph structure:
 \code{\link[=+.igraph]{+.igraph()}},

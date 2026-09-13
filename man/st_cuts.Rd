@@ -7,7 +7,8 @@
 st_cuts(graph, source, target)
 }
 \arguments{
-\item{graph}{The input graph. It must be directed.}
+\item{graph}{The input graph.
+It must be directed.}
 
 \item{source}{The source vertex.}
 
@@ -32,10 +33,8 @@ generates the cut that contains exactly the edges that go from \eqn{X} to \eqn{V
 List all (s,t)-cuts in a directed graph.
 }
 \details{
-Given a \eqn{G} directed graph and two, different and non-ajacent vertices,
-\eqn{s} and \eqn{t}, an \eqn{(s,t)}-cut is a set of edges, such that after
-removing these edges from \eqn{G} there is no directed path from \eqn{s} to
-\eqn{t}.
+Given a \eqn{G} directed graph and two, different and non-ajacent vertices, \eqn{s} and \eqn{t}, an \eqn{(s,t)}-cut is a set of edges,
+such that after removing these edges from \eqn{G} there is no directed path from \eqn{s} to \eqn{t}.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_all_st_cuts}{\code{all_st_cuts()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

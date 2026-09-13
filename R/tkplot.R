@@ -4,8 +4,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `tkplot.setcoords()` was renamed to [tk_set_coords()] to create a more
-#' consistent API.
+#' `tkplot.setcoords()` was renamed to [tk_set_coords()] to create a more consistent API.
 #' @inheritParams tk_set_coords
 #' @keywords internal
 #' @export
@@ -20,8 +19,7 @@ tkplot.setcoords <- function(tkp.id, coords) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `tkplot.rotate()` was renamed to [tk_rotate()] to create a more
-#' consistent API.
+#' `tkplot.rotate()` was renamed to [tk_rotate()] to create a more consistent API.
 #' @inheritParams tk_rotate
 #' @keywords internal
 #' @export
@@ -36,8 +34,7 @@ tkplot.rotate <- function(tkp.id, degree = NULL, rad = NULL) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `tkplot.reshape()` was renamed to [tk_reshape()] to create a more
-#' consistent API.
+#' `tkplot.reshape()` was renamed to [tk_reshape()] to create a more consistent API.
 #' @inheritParams tk_reshape
 #' @keywords internal
 #' @export
@@ -52,8 +49,7 @@ tkplot.reshape <- function(tkp.id, newlayout, ..., params) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `tkplot.off()` was renamed to [tk_off()] to create a more
-#' consistent API.
+#' `tkplot.off()` was renamed to [tk_off()] to create a more consistent API.
 #'
 #' @keywords internal
 #' @export
@@ -68,8 +64,7 @@ tkplot.off <- function() {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `tkplot.getcoords()` was renamed to [tk_coords()] to create a more
-#' consistent API.
+#' `tkplot.getcoords()` was renamed to [tk_coords()] to create a more consistent API.
 #' @inheritParams tk_coords
 #' @keywords internal
 #' @export
@@ -84,8 +79,7 @@ tkplot.getcoords <- function(tkp.id, norm = FALSE) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `tkplot.fit.to.screen()` was renamed to [tk_fit()] to create a more
-#' consistent API.
+#' `tkplot.fit.to.screen()` was renamed to [tk_fit()] to create a more consistent API.
 #' @inheritParams tk_fit
 #' @keywords internal
 #' @export
@@ -100,8 +94,7 @@ tkplot.fit.to.screen <- function(tkp.id, width = NULL, height = NULL) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `tkplot.export.postscript()` was renamed to [tk_postscript()] to create a more
-#' consistent API.
+#' `tkplot.export.postscript()` was renamed to [tk_postscript()] to create a more consistent API.
 #' @inheritParams tk_postscript
 #' @keywords internal
 #' @export
@@ -120,8 +113,7 @@ tkplot.export.postscript <- function(tkp.id) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `tkplot.close()` was renamed to [tk_close()] to create a more
-#' consistent API.
+#' `tkplot.close()` was renamed to [tk_close()] to create a more consistent API.
 #' @inheritParams tk_close
 #' @keywords internal
 #' @export
@@ -136,8 +128,7 @@ tkplot.close <- function(tkp.id, window.close = TRUE) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `tkplot.center()` was renamed to [tk_center()] to create a more
-#' consistent API.
+#' `tkplot.center()` was renamed to [tk_center()] to create a more consistent API.
 #' @inheritParams tk_center
 #' @keywords internal
 #' @export
@@ -152,8 +143,7 @@ tkplot.center <- function(tkp.id) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `tkplot.canvas()` was renamed to [tk_canvas()] to create a more
-#' consistent API.
+#' `tkplot.canvas()` was renamed to [tk_canvas()] to create a more consistent API.
 #' @inheritParams tk_canvas
 #' @keywords internal
 #' @export
@@ -197,71 +187,58 @@ assign(".next", 1, .tkplot.env)
 
 #' Interactive plotting of graphs
 #'
-#' `tkplot()` and its companion functions serve as an interactive graph
-#' drawing facility. Not all parameters of the plot can be changed
-#' interactively right now though, e.g. the colors of vertices, edges, and also
-#' others have to be pre-defined.
+#' `tkplot()` and its companion functions serve as an interactive graph drawing facility.
+#' Not all parameters of the plot can be changed interactively right now though, e.g. the colors of vertices, edges,
+#' and also others have to be pre-defined.
 #'
-#' `tkplot()` is an interactive graph drawing facility. It is not very well
-#' developed at this stage, but it should be still useful.
+#' `tkplot()` is an interactive graph drawing facility.
+#' It is not very well developed at this stage, but it should be still useful.
 #'
-#' It's handling should be quite straightforward most of the time, here are
-#' some remarks and hints.
+#' It's handling should be quite straightforward most of the time, here are some remarks and hints.
 #'
-#' There are different popup menus, activated by the right mouse button, for
-#' vertices and edges. Both operate on the current selection if the vertex/edge
-#' under the cursor is part of the selection and operate on the vertex/edge
-#' under the cursor if it is not.
+#' There are different popup menus, activated by the right mouse button, for vertices and edges.
+#' Both operate on the current selection
+#' if the vertex/edge under the cursor is part of the selection and operate on the vertex/edge under the cursor if it is not.
 #'
 #' One selection can be active at a time, either a vertex or an edge selection.
-#' A vertex/edge can be added to a selection by holding the `control` key
-#' while clicking on it with the left mouse button. Doing this again deselect
-#' the vertex/edge.
+#' A vertex/edge can be added to a selection by holding the `control` key while clicking on it with the left mouse button.
+#' Doing this again deselect the vertex/edge.
 #'
-#' Selections can be made also from the "Select" menu. The "Select some
-#' vertices" dialog allows to give an expression for the vertices to be
-#' selected: this can be a list of numeric R expessions separated by commas,
-#' like `1,2:10,12,14,15` for example. Similarly in the "Select some
-#' edges" dialog two such lists can be given and all edges connecting a vertex
-#' in the first list to one in the second list will be selected.
+#' Selections can be made also from the "Select" menu.
+#' The "Select some vertices" dialog allows to give an expression for the vertices to be selected:
+#' this can be a list of numeric R expessions separated by commas, like `1,2:10,12,14,15` for example.
+#' Similarly in the "Select some edges" dialog two such lists can be given and all edges connecting a vertex in the first list to one in the second list will be selected.
 #'
-#' In the color dialog a color name like 'orange' or RGB notation can also be
-#' used.
+#' In the color dialog a color name like 'orange' or RGB notation can also be used.
 #'
-#' The `tkplot()` command creates a new Tk window with the graphical
-#' representation of `graph`. The command returns an integer number, the
-#' tkplot ID. The other commands utilize this ID to be able to query or
-#' manipulate the plot.
+#' The `tkplot()` command creates a new Tk window with the graphical representation of `graph`.
+#' The command returns an integer number, the tkplot ID.
+#' The other commands utilize this ID to be able to query or manipulate the plot.
 #'
 #' `tk_close()` closes the Tk plot with ID `tkp.id`.
 #'
 #' `tk_off()` closes all Tk plots.
 #'
-#' `tk_fit()` fits the plot to the given rectangle
-#' (`width` and `height`), if some of these are `NULL` the
-#' actual physical width od height of the plot window is used.
+#' `tk_fit()` fits the plot to the given rectangle (`width` and `height`),
+#' if some of these are `NULL` the actual physical width od height of the plot window is used.
 #'
-#' `tk_reshape()` applies a new layout to the plot, its optional
-#' parameters will be collected to a list analogous to `layout.par`.
+#' `tk_reshape()` applies a new layout to the plot, its optional parameters will be collected to a list analogous to `layout.par`.
 #'
-#' `tk_postscript()` creates a dialog window for saving the plot
-#' in postscript format.
+#' `tk_postscript()` creates a dialog window for saving the plot in postscript format.
 #'
-#' `tk_canvas()` returns the Tk canvas object that belongs to a graph
-#' plot. The canvas can be directly manipulated then, e.g. labels can be added,
-#' it could be saved to a file programmatically, etc. See an example below.
+#' `tk_canvas()` returns the Tk canvas object that belongs to a graph plot.
+#' The canvas can be directly manipulated then, e.g. labels can be added, it could be saved to a file programmatically,
+#' etc. See an example below.
 #'
 #' `tk_coords()` returns the coordinates of the vertices in a matrix.
 #' Each row corresponds to one vertex.
 #'
-#' `tk_set_coords()` sets the coordinates of the vertices. A two-column
-#' matrix specifies the new positions, with each row corresponding to a single
-#' vertex.
+#' `tk_set_coords()` sets the coordinates of the vertices.
+#' A two-column matrix specifies the new positions, with each row corresponding to a single vertex.
 #'
 #' `tk_center()` shifts the figure to the center of its plot window.
 #'
-#' `tk_rotate()` rotates the figure, its parameter can be given either
-#' in degrees or in radians.
+#' `tk_rotate()` rotates the figure, its parameter can be given either in degrees or in radians.
 #'
 #' tkplot.center tkplot.rotate
 #' @param graph The `graph` to plot.
@@ -272,22 +249,18 @@ assign(".next", 1, .tkplot.env)
 #' @param height The height of the rectangle for generating new coordinates.
 #' @param newlayout The new layout, see the `layout` parameter of tkplot.
 #' @param norm Logical, should we norm the coordinates.
-#' @param coords Two-column numeric matrix, the new coordinates of the
-#'   vertices, in absolute coordinates.
+#' @param coords Two-column numeric matrix, the new coordinates of the vertices, in absolute coordinates.
 #' @param degree The degree to rotate the plot.
 #' @param rad The degree to rotate the plot, in radian.
-#' @param \dots Additional plotting parameters. See [igraph.plotting] for
-#'   the complete list.
-#' @return `tkplot()` returns an integer, the ID of the plot, this can be
-#'   used to manipulate it from the command line.
+#' @param \dots Additional plotting parameters.
+#'   See [igraph.plotting] for the complete list.
+#' @return `tkplot()` returns an integer, the ID of the plot, this can be used to manipulate it from the command line.
 #'
 #'   `tk_canvas()` returns `tkwin` object, the Tk canvas.
 #'
 #'   `tk_coords()` returns a matrix with the coordinates.
 #'
-#'   `tk_close()`, `tk_off()`, `tk_fit()`,
-#'   `tk_reshape()`, `tk_postscript()`, `tk_center()`
-#'   and `tk_rotate()` return `NULL` invisibly.
+#'   `tk_close()`, `tk_off()`, `tk_fit()`, `tk_reshape()`, `tk_postscript()`, `tk_center()` and `tk_rotate()` return `NULL` invisibly.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [plot.igraph()], [layout()]
 #' @family tkplot

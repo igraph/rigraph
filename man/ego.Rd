@@ -70,18 +70,17 @@ make_neighborhood_graph(
 \arguments{
 \item{graph}{The input graph.}
 
-\item{order}{Integer giving the order of the neighborhood. Negative values
-indicate an infinite order.}
+\item{order}{Integer giving the order of the neighborhood.
+Negative values indicate an infinite order.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{mode}{Character constant, it specifies how to use the direction of
-the edges if a directed graph is analyzed. For \sQuote{out} only the
-outgoing edges are followed, so all vertices reachable from the source
-vertex in at most \code{order} steps are counted. For \sQuote{"in"} all
-vertices from which the source vertex is reachable in at most \code{order}
-steps are counted. \sQuote{"all"} ignores the direction of the edges. This
-argument is ignored for undirected graphs.}
+\item{mode}{Character constant, it specifies how to use the direction of the edges if a directed graph is analyzed.
+For \sQuote{out} only the outgoing edges are followed,
+so all vertices reachable from the source vertex in at most \code{order} steps are counted.
+For \sQuote{"in"} all vertices from which the source vertex is reachable in at most \code{order} steps are counted.
+\sQuote{"all"} ignores the direction of the edges.
+This argument is ignored for undirected graphs.}
 
 \item{nodes}{The vertices for which the calculation is performed.
 The default \code{NULL} selects all vertices.}
@@ -99,31 +98,25 @@ see details for performance characteristics.}
 }
 }
 \description{
-These functions find the vertices not farther than a given limit from
-another fixed vertex, these are called the neighborhood of the vertex.
-Note that \code{ego()} and \code{neighborhood()},
-\code{ego_size()} and \code{neighborhood_size()},
-\code{make_ego_graph()} and \verb{make_neighborhood()_graph()},
+These functions find the vertices not farther than a given limit from another fixed vertex,
+these are called the neighborhood of the vertex.
+Note that \code{ego()} and \code{neighborhood()}, \code{ego_size()} and \code{neighborhood_size()}, \code{make_ego_graph()} and \verb{make_neighborhood()_graph()},
 are synonyms (aliases).
 }
 \details{
-The neighborhood of a given order \code{r} of a vertex \code{v} includes all
-vertices which are closer to \code{v} than the order. I.e. order 0 is always
-\code{v} itself, order 1 is \code{v} plus its immediate neighbors, order 2
-is order 1 plus the immediate neighbors of the vertices in order 1, etc.
+The neighborhood of a given order \code{r} of a vertex \code{v} includes all vertices which are closer to \code{v} than the order.
+I.e. order 0 is always \code{v} itself, order 1 is \code{v} plus its immediate neighbors,
+order 2 is order 1 plus the immediate neighbors of the vertices in order 1, etc.
 
 \code{ego_size()}/\code{neighborhood_size()} (synonyms) returns the size of the neighborhoods of the given order,
 for each given vertex.
 
-\code{ego()}/\code{neighborhood()} (synonyms) returns the vertices belonging to the neighborhoods of the given
-order, for each given vertex.
+\code{ego()}/\code{neighborhood()} (synonyms) returns the vertices belonging to the neighborhoods of the given order, for each given vertex.
 
-\code{make_ego_graph()}/\verb{make_neighborhood()_graph()} (synonyms) is creates (sub)graphs from all neighborhoods of
-the given vertices with the given order parameter. This function preserves
-the vertex, edge and graph attributes.
+\code{make_ego_graph()}/\verb{make_neighborhood()_graph()} (synonyms) is creates (sub)graphs from all neighborhoods of the given vertices with the given order parameter.
+This function preserves the vertex, edge and graph attributes.
 
-\code{connect()} creates a new graph by connecting each vertex to
-all other vertices in its neighborhood.
+\code{connect()} creates a new graph by connecting each vertex to all other vertices in its neighborhood.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_connect_neighborhood}{\code{connect_neighborhood()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

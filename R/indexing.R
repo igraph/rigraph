@@ -111,8 +111,8 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
 #' Query and manipulate a graph as it were an adjacency matrix
 #'
 #' @details
-#' The single bracket indexes the (possibly weighted) adjacency matrix of
-#' the graph. Here is what you can do with it:
+#' The single bracket indexes the (possibly weighted) adjacency matrix of the graph.
+#' Here is what you can do with it:
 #'
 #' \enumerate{
 #' \item Check whether there is an edge between two vertices (\eqn{v}
@@ -173,33 +173,34 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
 #'  creates a star graph.
 #'
 #' Of course, the indexing operators support vertex names,
-#' so instead of a numeric vertex ID a vertex can also be given to
-#' \sQuote{`[`} and \sQuote{`[[`}.
+#' so instead of a numeric vertex ID a vertex can also be given to \sQuote{`[`} and \sQuote{`[[`}.
 #'
 #' @param x The graph.
-#' @param i Index. Vertex IDs or names or logical vectors. See details
-#'   below.
-#' @param j Index. Vertex IDs or names or logical vectors. See details
-#'   below.
+#' @param i Index.
+#'   Vertex IDs or names or logical vectors.
+#'   See details below.
+#' @param j Index.
+#'   Vertex IDs or names or logical vectors.
+#'   See details below.
 #' @param ... Currently ignored.
-#' @param from A numeric or character vector giving vertex IDs or
-#'   names. Together with the `to` argument, it can be used to
-#'   query/set a sequence of edges. See details below. This argument cannot
-#'   be present together with any of the `i` and `j` arguments
-#'   and if it is present, then the `to` argument must be present as
-#'   well.
-#' @param to A numeric or character vector giving vertex IDs or
-#'   names. Together with the `from` argument, it can be used to
-#'   query/set a sequence of edges. See details below. This argument cannot
-#'   be present together with any of the `i` and `j` arguments
-#'   and if it is present, then the `from` argument must be present as
-#'   well.
+#' @param from A numeric or character vector giving vertex IDs or names.
+#'   Together with the `to` argument, it can be used to query/set a sequence of edges.
+#'   See details below.
+#'   This argument cannot be present together with any of the `i` and `j` arguments and if it is present,
+#'   then the `to` argument must be present as well.
+#' @param to A numeric or character vector giving vertex IDs or names.
+#'   Together with the `from` argument, it can be used to query/set a sequence of edges.
+#'   See details below.
+#'   This argument cannot be present together with any of the `i` and `j` arguments and if it is present,
+#'   then the `from` argument must be present as well.
 #' @param sparse Logical, whether to return sparse matrices.
 #' @param edges Logical, whether to return edge IDs.
 #' @param drop Ignored.
-#' @param attr Name of an edge attribute. This attribute is queried and returned.
+#' @param attr Name of an edge attribute.
+#'   This attribute is queried and returned.
 #'   Default: `NULL`.
-#' @return A scalar or matrix. See details below.
+#' @return A scalar or matrix.
+#'   See details below.
 #'
 #' @family structural queries
 #'
@@ -315,8 +316,8 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
 #' Query and manipulate a graph as it were an adjacency list
 #'
 #' @details
-#' The double bracket operator indexes the (imaginary) adjacency list
-#' of the graph. This can used for the following operations:
+#' The double bracket operator indexes the (imaginary) adjacency list of the graph.
+#' This can used for the following operations:
 #' \enumerate{
 #'   \item Querying the adjacent vertices for one or more
 #'     vertices: \preformatted{  graph[[1:3,]]
@@ -333,35 +334,30 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
 #'     \eqn{v} to vertices \eqn{w}.
 #'  }
 #'
-#' The alternative argument names `from` and `to` can be used
-#' instead of the usual `i` and `j`, to make the code more
+#' The alternative argument names `from` and `to` can be used instead of the usual `i` and `j`, to make the code more
 #' readable: \preformatted{ graph[[from = 1:3]]
 #' graph[[from = v, to = w, edges = TRUE]]}
 #'
-#' \sQuote{`[[`} operators allows logical indices and negative indices
-#' as well, with the usual R semantics.
+#' \sQuote{`[[`} operators allows logical indices and negative indices as well, with the usual R semantics.
 #'
-#' Vertex names are also supported, so instead of a numeric vertex ID a
-#' vertex can also be given to \sQuote{`[`} and \sQuote{`[[`}.
+#' Vertex names are also supported, so instead of a numeric vertex ID a vertex can also be given to \sQuote{`[`} and \sQuote{`[[`}.
 #'
 #' @param x The graph.
 #' @param i Index, integer, character or logical, see details below.
 #' @param j Index, integer, character or logical, see details below.
-#' @param from A numeric or character vector giving vertex IDs or
-#'   names. Together with the `to` argument, it can be used to
-#'   query/set a sequence of edges. See details below. This argument cannot
-#'   be present together with any of the `i` and `j` arguments
-#'   and if it is present, then the `to` argument must be present as
-#'   well.
-#' @param to A numeric or character vector giving vertex IDs or
-#'   names. Together with the `from` argument, it can be used to
-#'   query/set a sequence of edges. See details below. This argument cannot
-#'   be present together with any of the `i` and `j` arguments
-#'   and if it is present, then the `from` argument must be present as
-#'   well.
+#' @param from A numeric or character vector giving vertex IDs or names.
+#'   Together with the `to` argument, it can be used to query/set a sequence of edges.
+#'   See details below.
+#'   This argument cannot be present together with any of the `i` and `j` arguments and if it is present,
+#'   then the `to` argument must be present as well.
+#' @param to A numeric or character vector giving vertex IDs or names.
+#'   Together with the `from` argument, it can be used to query/set a sequence of edges.
+#'   See details below.
+#'   This argument cannot be present together with any of the `i` and `j` arguments and if it is present,
+#'   then the `from` argument must be present as well.
 #' @param ... Additional arguments are not used currently.
-#' @param directed Logical, whether to consider edge directions
-#'   in directed graphs. It is ignored for undirected graphs.
+#' @param directed Logical, whether to consider edge directions in directed graphs.
+#'   It is ignored for undirected graphs.
 #' @param edges Logical, whether to return edge IDs.
 #' @param exact Ignored.
 #'

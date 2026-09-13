@@ -21,79 +21,67 @@ cluster_spinglass(
 )
 }
 \arguments{
-\item{graph}{The input graph. Edge directions are ignored in directed graphs.}
+\item{graph}{The input graph.
+Edge directions are ignored in directed graphs.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{weights}{The weights of the edges. It must be a positive numeric vector,
-\code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
-\sQuote{weight} edge attribute, then that attribute will be used. If
-\code{NULL} and no such attribute is present, then the edges will have equal
-weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
-attribute, but you don't want to use it for community detection. A larger
-edge weight means a stronger connection for this function.}
+\item{weights}{The weights of the edges.
+It must be a positive numeric vector, \code{NULL} or \code{NA}.
+If it is \code{NULL} and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
+If \code{NULL} and no such attribute is present, then the edges will have equal weights.
+Set this to \code{NA} if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for community detection.
+A larger edge weight means a stronger connection for this function.}
 
-\item{vertex}{This parameter can be used to calculate the community of a
-given vertex without calculating all communities. Note that if this argument
-is present then some other arguments are ignored.}
+\item{vertex}{This parameter can be used to calculate the community of a given vertex without calculating all communities.
+Note that if this argument is present then some other arguments are ignored.}
 
-\item{spins}{Integer constant, the number of spins to use. This is the upper
-limit for the number of communities. It is not a problem to supply a
-(reasonably) big number here, in which case some spin states will be
-unpopulated.}
+\item{spins}{Integer constant, the number of spins to use.
+This is the upper limit for the number of communities.
+It is not a problem to supply a (reasonably) big number here, in which case some spin states will be unpopulated.}
 
-\item{parupdate}{Logical, whether to update the spins of the
-vertices in parallel (synchronously) or not. This argument is ignored if the
-second form of the function is used (i.e. the \sQuote{\code{vertex}} argument
-is present). It is also not implemented in the \dQuote{neg} implementation.}
+\item{parupdate}{Logical, whether to update the spins of the vertices in parallel (synchronously) or not.
+This argument is ignored if the second form of the function is used (i.e. the \sQuote{\code{vertex}} argument is present).
+It is also not implemented in the \dQuote{neg} implementation.}
 
-\item{start.temp}{Real constant, the start temperature.  This argument is
-ignored if the second form of the function is used (i.e. the
-\sQuote{\code{vertex}} argument is present).}
+\item{start.temp}{Real constant,
+the start temperature.  This argument is ignored
+if the second form of the function is used (i.e. the \sQuote{\code{vertex}} argument is present).}
 
-\item{stop.temp}{Real constant, the stop temperature. The simulation
-terminates if the temperature lowers below this level.  This argument is
-ignored if the second form of the function is used (i.e. the
-\sQuote{\code{vertex}} argument is present).}
+\item{stop.temp}{Real constant, the stop temperature.
+The simulation terminates if the temperature lowers below this level.  This argument is ignored
+if the second form of the function is used (i.e. the \sQuote{\code{vertex}} argument is present).}
 
-\item{cool.fact}{Cooling factor for the simulated annealing.  This argument
-is ignored if the second form of the function is used (i.e. the
-\sQuote{\code{vertex}} argument is present).}
+\item{cool.fact}{Cooling factor for the simulated annealing.  This argument is ignored
+if the second form of the function is used (i.e. the \sQuote{\code{vertex}} argument is present).}
 
-\item{update.rule}{Character constant giving the \sQuote{null-model} of the
-simulation. Possible values: \dQuote{simple} and \dQuote{config}.
-\dQuote{simple} uses a random graph with the same number of edges as the
-baseline probability and \dQuote{config} uses a random graph with the same
-vertex degrees as the input graph.}
+\item{update.rule}{Character constant giving the \sQuote{null-model} of the simulation.
+Possible values: \dQuote{simple} and \dQuote{config}.
+\dQuote{simple} uses a random graph with the same number of edges as the baseline probability and \dQuote{config} uses a random graph with the same vertex degrees as the input graph.}
 
-\item{gamma}{Real constant, the gamma argument of the algorithm. This
-specifies the balance between the importance of present and non-present
-edges in a community. Roughly, a comunity is a set of vertices having many
-edges inside the community and few edges outside the community. The default
-1.0 value makes existing and non-existing links equally important. Smaller
-values make the existing links, greater values the missing links more
-important.}
+\item{gamma}{Real constant, the gamma argument of the algorithm.
+This specifies the balance between the importance of present and non-present edges in a community.
+Roughly, a comunity is a set of vertices having many edges inside the community and few edges outside the community.
+The default 1.0 value makes existing and non-existing links equally important.
+Smaller values make the existing links, greater values the missing links more important.}
 
-\item{implementation}{Character scalar. Currently igraph contains two
-implementations for the Spin-glass community finding algorithm. The faster
-original implementation is the default. The other implementation, that takes
-into account negative weights, can be chosen by supplying \sQuote{neg} here.}
+\item{implementation}{Character scalar.
+Currently igraph contains two implementations for the Spin-glass community finding algorithm.
+The faster original implementation is the default.
+The other implementation, that takes into account negative weights, can be chosen by supplying \sQuote{neg} here.}
 
-\item{gamma.minus}{Real constant, the gamma.minus parameter of the
-algorithm. This specifies the balance between the importance of present and
-non-present negative weighted edges in a community. Smaller values of
-gamma.minus, leads to communities with lesser negative intra-connectivity.
-If this argument is set to zero, the algorithm reduces to a graph coloring
-algorithm, using the number of spins as the number of colors. This argument
-is ignored if the \sQuote{orig} implementation is chosen.}
+\item{gamma.minus}{Real constant, the gamma.minus parameter of the algorithm.
+This specifies the balance between the importance of present and non-present negative weighted edges in a community.
+Smaller values of gamma.minus, leads to communities with lesser negative intra-connectivity.
+If this argument is set to zero, the algorithm reduces to a graph coloring algorithm,
+using the number of spins as the number of colors.
+This argument is ignored if the \sQuote{orig} implementation is chosen.}
 }
 \value{
-If the \code{vertex} argument is not given, i.e. the first form is
-used then a \code{\link[=cluster_spinglass]{cluster_spinglass()}} returns a
-\code{\link[=communities]{communities()}} object.
+If the \code{vertex} argument is not given,
+i.e. the first form is used then a \code{\link[=cluster_spinglass]{cluster_spinglass()}} returns a \code{\link[=communities]{communities()}} object.
 
-If the \code{vertex} argument is present, i.e. the second form is used then a
-named list is returned with the following components:
+If the \code{vertex} argument is present, i.e. the second form is used then a named list is returned with the following components:
 \describe{
 \item{community}{
 Numeric vector giving the IDs of the vertices in the same community as \code{vertex}.
@@ -113,27 +101,23 @@ The number of edges between the community of \code{vertex} and the rest of the g
 }
 }
 \description{
-This function tries to find communities in graphs via a spin-glass model and
-simulated annealing.
+This function tries to find communities in graphs via a spin-glass model and simulated annealing.
 }
 \details{
-This function tries to find communities in a graph. A community is a set of
-nodes with many edges inside the community and few edges between outside it
-(i.e. between the community itself and the rest of the graph.)
+This function tries to find communities in a graph.
+A community is a set of nodes with many edges inside the community and few edges between outside it (i.e. between the community itself and the rest of the graph.)
 
-This idea is reversed for edges having a negative weight, i.e. few negative
-edges inside a community and many negative edges between communities. Note
-that only the \sQuote{neg} implementation supports negative edge weights.
+This idea is reversed for edges having a negative weight,
+i.e. few negative edges inside a community and many negative edges between communities.
+Note that only the \sQuote{neg} implementation supports negative edge weights.
 
-The \code{spinglass.cummunity} function can solve two problems related to
-community detection. If the \code{vertex} argument is not given (or it is
-\code{NULL}), then the regular community detection problem is solved
-(approximately), i.e. partitioning the vertices into communities, by
-optimizing the an energy function.
+The \code{spinglass.cummunity} function can solve two problems related to community detection.
+If the \code{vertex} argument is not given (or it is \code{NULL}), then the regular community detection problem is solved (approximately),
+i.e. partitioning the vertices into communities, by optimizing the an energy function.
 
-If the \code{vertex} argument is given and it is not \code{NULL}, then it
-must be a vertex ID, and the same energy function is used to find the
-community of the the given vertex. See also the examples below.
+If the \code{vertex} argument is given and it is not \code{NULL}, then it must be a vertex ID,
+and the same energy function is used to find the community of the the given vertex.
+See also the examples below.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

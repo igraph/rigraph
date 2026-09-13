@@ -15,72 +15,58 @@ adhesion(graph, ..., checks = TRUE)
 \arguments{
 \item{graph}{The input graph.}
 
-\item{source}{The ID of the source vertex, for \code{edge_connectivity()} it
-can be \code{NULL}, see details below.}
+\item{source}{The ID of the source vertex, for \code{edge_connectivity()} it can be \code{NULL}, see details below.}
 
-\item{target}{The ID of the target vertex, for \code{edge_connectivity()} it
-can be \code{NULL}, see details below.}
+\item{target}{The ID of the target vertex, for \code{edge_connectivity()} it can be \code{NULL}, see details below.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{checks}{Logical. Whether to check that the graph is connected
-and also the degree of the vertices. If the graph is not (strongly)
-connected then the connectivity is obviously zero. Otherwise if the minimum
-degree is one then the edge connectivity is also one. It is a good idea to
-perform these checks, as they can be done quickly compared to the
-connectivity calculation itself.  They were suggested by Peter McMahan,
-thanks Peter.}
+\item{checks}{Logical.
+Whether to check that the graph is connected and also the degree of the vertices.
+If the graph is not (strongly) connected then the connectivity is obviously zero.
+Otherwise if the minimum degree is one then the edge connectivity is also one.
+It is a good idea to perform these checks,
+as they can be done quickly compared to the connectivity calculation itself.  They were suggested by Peter McMahan, thanks Peter.}
 }
 \value{
 A scalar real value.
 }
 \description{
-The edge connectivity of a graph or two vertices, this is recently also
-called group adhesion.
+The edge connectivity of a graph or two vertices, this is recently also called group adhesion.
 }
 \section{\code{edge_connectivity()} Edge connectivity}{
 
-The edge connectivity of a pair of vertices (\code{source} and
-\code{target}) is the minimum number of edges needed to remove to eliminate
-all (directed) paths from \code{source} to \code{target}.
-\code{edge_connectivity()} calculates this quantity if both the \code{source}
-and \code{target} arguments are given (and not \code{NULL}).
+The edge connectivity of a pair of vertices (\code{source} and \code{target}) is the minimum number of edges needed to remove to eliminate all (directed) paths from \code{source} to \code{target}.
+\code{edge_connectivity()} calculates this quantity if both the \code{source} and \code{target} arguments are given (and not \code{NULL}).
 
-The edge connectivity of a graph is the minimum of the edge connectivity of
-every (ordered) pair of vertices in the graph.  \code{edge_connectivity()}
-calculates this quantity if neither the \code{source} nor the \code{target}
-arguments are given (i.e. they are both \code{NULL}).
+The edge connectivity of a graph is the minimum of the edge connectivity of every (ordered) pair of vertices in the graph.  \code{edge_connectivity()} calculates this quantity
+if neither the \code{source} nor the \code{target} arguments are given (i.e. they are both \code{NULL}).
 }
 
 \section{\code{edge_disjoint_paths()} The maximum number of edge-disjoint paths between two vertices}{
 
-A set of paths between two vertices is called edge-disjoint if they do not
-share any edges. The maximum number of edge-disjoint paths are calculated
-by this function using maximum flow techniques. Directed paths are
-considered in directed graphs.
+A set of paths between two vertices is called edge-disjoint if they do not share any edges.
+The maximum number of edge-disjoint paths are calculated by this function using maximum flow techniques.
+Directed paths are considered in directed graphs.
 
-A set of edge disjoint paths between two vertices is a set of paths between
-them containing no common edges. The maximum number of edge disjoint paths
-between two vertices is the same as their edge connectivity.
+A set of edge disjoint paths between two vertices is a set of paths between them containing no common edges.
+The maximum number of edge disjoint paths between two vertices is the same as their edge connectivity.
 
-When there are no direct edges between the source and the target, the number
-of vertex-disjoint paths is the same as the vertex connectivity of
-the two vertices. When some edges are present, each one of them
-contributes one extra path.
+When there are no direct edges between the source and the target,
+the number of vertex-disjoint paths is the same as the vertex connectivity of the two vertices.
+When some edges are present, each one of them contributes one extra path.
 }
 
 \section{\code{adhesion()} Adhesion of a graph}{
 
-The adhesion of a graph is the minimum number of edges needed to remove to
-obtain a graph which is not strongly connected. This is the same as the edge
-connectivity of the graph.
+The adhesion of a graph is the minimum number of edges needed to remove to obtain a graph which is not strongly connected.
+This is the same as the edge connectivity of the graph.
 }
 
 \section{All three functions}{
 
-The three functions documented on this page calculate similar properties,
-more precisely the most general is \code{edge_connectivity()}, the others are
-included only for having more descriptive function names.
+The three functions documented on this page calculate similar properties, more precisely the most general is \code{edge_connectivity()},
+the others are included only for having more descriptive function names.
 }
 
 \section{Related documentation in the C library}{

@@ -15,8 +15,8 @@ max_flow(graph, source, target, ..., capacity = NULL)
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{capacity}{Vector giving the capacity of the edges. If this is
-\code{NULL} (the default) then the \code{capacity} edge attribute is used.
+\item{capacity}{Vector giving the capacity of the edges.
+If this is \code{NULL} (the default) then the \code{capacity} edge attribute is used.
 Note that the \code{weight} edge attribute is not used by this function.}
 }
 \value{
@@ -55,19 +55,15 @@ to assign better height (=distance) values to the vertices.
 }
 }
 \description{
-In a graph where each edge has a given flow capacity the maximal flow
-between two vertices is calculated.
+In a graph where each edge has a given flow capacity the maximal flow between two vertices is calculated.
 }
 \details{
-\code{max_flow()} calculates the maximum flow between two vertices in a
-weighted (i.e. valued) graph. A flow from \code{source} to \code{target} is
-an assignment of non-negative real numbers to the edges of the graph,
-satisfying two properties: (1) for each edge the flow (i.e. the assigned
-number) is not more than the capacity of the edge (the \code{capacity}
-parameter or edge attribute), (2) for every vertex, except the source and
-the target the incoming flow is the same as the outgoing flow. The value of
-the flow is the incoming flow of the \code{target} vertex. The maximum flow
-is the flow of maximum value.
+\code{max_flow()} calculates the maximum flow between two vertices in a weighted (i.e. valued) graph.
+A flow from \code{source} to \code{target} is an assignment of non-negative real numbers to the edges of the graph, satisfying two properties:
+(1) for each edge the flow (i.e. the assigned number) is not more than the capacity of the edge (the \code{capacity} parameter or edge attribute),
+(2) for every vertex, except the source and the target the incoming flow is the same as the outgoing flow.
+The value of the flow is the incoming flow of the \code{target} vertex.
+The maximum flow is the flow of maximum value.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_maxflow}{\code{maxflow()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}

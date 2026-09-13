@@ -9,14 +9,13 @@ get.data.frame(x, what = c("edges", "vertices", "both"))
 \arguments{
 \item{x}{An igraph object.}
 
-\item{what}{Character constant, whether to return info about vertices,
-edges, or both. The default is \sQuote{edges}.}
+\item{what}{Character constant, whether to return info about vertices, edges, or both.
+The default is \sQuote{edges}.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{get.data.frame()} was renamed to \code{\link[=as_data_frame]{as_data_frame()}} to create a more
-consistent API.
+\code{get.data.frame()} was renamed to \code{\link[=as_data_frame]{as_data_frame()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist}{\code{get_edgelist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

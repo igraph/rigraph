@@ -7,8 +7,8 @@
 sequential_pal(n)
 }
 \arguments{
-\item{n}{The number of colors in the palette. The maximum is nine
-currently.}
+\item{n}{The number of colors in the palette.
+The maximum is nine currently.}
 }
 \value{
 A character vector of RGB color codes.
@@ -18,9 +18,8 @@ This is the \sQuote{OrRd} palette from \url{https://colorbrewer2.org/}.
 It has at most nine colors.
 }
 \details{
-Use this palette, if vertex colors mark some ordinal quantity, e.g. some
-centrality measure, or some ordinal vertex covariate, like the age of
-people, or their seniority level.
+Use this palette, if vertex colors mark some ordinal quantity, e.g. some centrality measure, or some ordinal vertex covariate,
+like the age of people, or their seniority level.
 }
 \examples{
 \dontshow{if (rlang::is_installed(c("igraphdata", "scales"))) withAutoprint(\{ # examplesIf}

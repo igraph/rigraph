@@ -22,27 +22,22 @@
 #' Cocitation coupling
 #'
 #' Two vertices are cocited if there is another vertex citing both of them.
-#' `cocitation()` simply counts how many types two vertices are cocited. The
-#' bibliographic coupling of two vertices is the number of other vertices they
-#' both cite, `bibcoupling()` calculates this.
+#' `cocitation()` simply counts how many types two vertices are cocited.
+#' The bibliographic coupling of two vertices is the number of other vertices they both cite, `bibcoupling()` calculates this.
 #'
-#' `cocitation()` calculates the cocitation counts for the vertices in the
-#' `v` argument and all vertices in the graph.
+#' `cocitation()` calculates the cocitation counts for the vertices in the `v` argument and all vertices in the graph.
 #'
-#' `bibcoupling()` calculates the bibliographic coupling for vertices in
-#' `v` and all vertices in the graph.
+#' `bibcoupling()` calculates the bibliographic coupling for vertices in `v` and all vertices in the graph.
 #'
-#' Calculating the cocitation or bibliographic coupling for only one vertex
-#' costs the same amount of computation as for all vertices. This might change
-#' in the future.
+#' Calculating the cocitation or bibliographic coupling for only one vertex costs the same amount of computation as for all vertices.
+#' This might change in the future.
 #'
 #' @param graph The graph object to analyze
-#' @param v Vertex sequence or numeric vector, the vertex IDs for which the
-#'   cocitation or bibliographic coupling values we want to calculate. The
-#'   default `NULL` selects all vertices.
-#' @return A numeric matrix with `length(v)` lines and
-#'   `vcount(graph)` columns. Element `(i,j)` contains the cocitation
-#'   or bibliographic coupling for vertices `v[i]` and `j`.
+#' @param v Vertex sequence or numeric vector,
+#'   the vertex IDs for which the cocitation or bibliographic coupling values we want to calculate.
+#'   The default `NULL` selects all vertices.
+#' @return A numeric matrix with `length(v)` lines and `vcount(graph)` columns.
+#'   Element `(i,j)` contains the cocitation or bibliographic coupling for vertices `v[i]` and `j`.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @family cocitation
 #' @export

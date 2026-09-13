@@ -17,13 +17,11 @@ sample_seq(low, high, length)
 An increasing numeric vector containing integers, the sample.
 }
 \description{
-This function provides a very efficient way to pull an integer random sample
-sequence from an integer interval.
+This function provides a very efficient way to pull an integer random sample sequence from an integer interval.
 }
 \details{
-The algorithm runs in \code{O(length)} expected time, even if
-\code{high-low} is big. It is much faster (but of course less general) than
-the builtin \code{sample} function of R.
+The algorithm runs in \code{O(length)} expected time, even if \code{high-low} is big.
+It is much faster (but of course less general) than the builtin \code{sample} function of R.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_random_sample}{\code{random_sample()}}

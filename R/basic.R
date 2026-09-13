@@ -3,8 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.igraph()` was renamed to [is_igraph()] to create a more
-#' consistent API.
+#' `is.igraph()` was renamed to [is_igraph()] to create a more consistent API.
 #' @inheritParams is_igraph
 #' @keywords internal
 #' @export
@@ -37,8 +36,7 @@ is.igraph <- function(graph) {
 #' Is this object an igraph graph?
 #'
 #' @param graph An R object.
-#' @return A logical constant, `TRUE` if argument `graph` is a graph
-#'   object.
+#' @return A logical constant, `TRUE` if argument `graph` is a graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
 #' @keywords graphs
@@ -58,9 +56,8 @@ is_igraph <- function(graph) {
 
 #' Head of the edge(s) in a graph
 #'
-#' For undirected graphs, head and tail is not defined.  In this case
-#' `head_of()` returns vertices incident to the supplied edges, and
-#' `tail_of()` returns the other end(s) of the edge(s).
+#' For undirected graphs, head and tail is not defined.  In this case `head_of()` returns vertices incident to the supplied edges,
+#' and `tail_of()` returns the other end(s) of the edge(s).
 #'
 #' @param graph The input graph.
 #' @param es The edges to query.
@@ -75,9 +72,8 @@ head_of <- function(graph, es) {
 
 #' Tails of the edge(s) in a graph
 #'
-#' For undirected graphs, head and tail is not defined.  In this case
-#' `tail_of()` returns vertices incident to the supplied edges, and
-#' `head_of()` returns the other end(s) of the edge(s).
+#' For undirected graphs, head and tail is not defined.  In this case `tail_of()` returns vertices incident to the supplied edges,
+#' and `head_of()` returns the other end(s) of the edge(s).
 #'
 #' @param graph The input graph.
 #' @param es The edges to query.

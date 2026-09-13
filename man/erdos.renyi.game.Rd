@@ -16,15 +16,12 @@ erdos.renyi.game(
 \arguments{
 \item{n}{The number of vertices in the graph.}
 
-\item{p.or.m}{Either the probability for drawing an edge between two
-arbitrary vertices (\eqn{G(n,p)} graph), or the number of edges in
-the graph (for \eqn{G(n,m)} graphs).}
+\item{p.or.m}{Either the probability for drawing an edge between two arbitrary vertices (\eqn{G(n,p)} graph),
+or the number of edges in the graph (for \eqn{G(n,m)} graphs).}
 
-\item{type}{The type of the random graph to create, either \code{gnp()}
-(\eqn{G(n,p)} graph) or \code{gnm()} (\eqn{G(n,m)} graph).}
+\item{type}{The type of the random graph to create, either \code{gnp()} (\eqn{G(n,p)} graph) or \code{gnm()} (\eqn{G(n,m)} graph).}
 
-\item{directed}{Logical, whether the graph will be directed, defaults to
-\code{FALSE}.}
+\item{directed}{Logical, whether the graph will be directed, defaults to \code{FALSE}.}
 
 \item{loops}{Logical, whether to add loop edges, defaults to \code{FALSE}.}
 }
@@ -34,9 +31,9 @@ A graph object.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-Since igraph version 0.8.0, both \code{erdos.renyi.game()} and
-\code{random.graph.game()} are deprecated, and \code{\link[=sample_gnp]{sample_gnp()}} and
-\code{\link[=sample_gnm]{sample_gnm()}} should be used instead. See these for more details.
+Since igraph version 0.8.0, both \code{erdos.renyi.game()} and \code{random.graph.game()} are deprecated,
+and \code{\link[=sample_gnp]{sample_gnp()}} and \code{\link[=sample_gnm]{sample_gnm()}} should be used instead.
+See these for more details.
 
 \code{random.graph.game()} is an (also deprecated) alias to this function.
 }

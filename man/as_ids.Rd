@@ -22,15 +22,12 @@ A character or numeric vector, see details below.
 Convert a vertex or edge sequence to an ordinary vector
 }
 \details{
-For graphs without names, a numeric vector is returned, containing the
-internal numeric vertex or edge IDs.
+For graphs without names, a numeric vector is returned, containing the internal numeric vertex or edge IDs.
 
-For graphs with names, and vertex sequences, the vertex names are
-returned in a character vector.
+For graphs with names, and vertex sequences, the vertex names are returned in a character vector.
 
-For graphs with names and edge sequences, a character vector is
-returned, with the \sQuote{bar} notation: \code{a|b} means an edge from
-vertex \code{a} to vertex \code{b}.
+For graphs with names and edge sequences, a character vector is returned, with the \sQuote{bar} notation:
+\code{a|b} means an edge from vertex \code{a} to vertex \code{b}.
 }
 \examples{
 g <- make_ring(10)

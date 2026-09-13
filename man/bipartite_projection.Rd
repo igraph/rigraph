@@ -18,56 +18,48 @@ bipartite_projection(
 bipartite_projection_size(graph, types = NULL)
 }
 \arguments{
-\item{graph}{The input graph. It can be directed, but edge directions are
-ignored during the computation.}
+\item{graph}{The input graph.
+It can be directed, but edge directions are ignored during the computation.}
 
-\item{types}{An optional vertex type vector to use instead of the
-\sQuote{\code{type}} vertex attribute. You must supply this argument if the
-graph has no \sQuote{\code{type}} vertex attribute.}
+\item{types}{An optional vertex type vector to use instead of the \sQuote{\code{type}} vertex attribute.
+You must supply this argument if the graph has no \sQuote{\code{type}} vertex attribute.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{multiplicity}{If \code{TRUE}, then igraph keeps the multiplicity of
-the edges as an edge attribute called \sQuote{weight}.
-E.g. if there is an A-C-B and also an A-D-B
-triple in the bipartite graph (but no more X, such that A-X-B is also in the
-graph), then the multiplicity of the A-B edge in the projection will be 2.}
+\item{multiplicity}{If \code{TRUE}, then igraph keeps the multiplicity of the edges as an edge attribute called \sQuote{weight}.
+E.g. if there is an A-C-B and also an A-D-B triple in the bipartite graph (but no more X, such that A-X-B is also in the graph),
+then the multiplicity of the A-B edge in the projection will be 2.}
 
-\item{probe1}{This argument can be used to specify the order of the
-projections in the resulting list. If given, then it is considered as a
-vertex ID (or a symbolic vertex name); the projection containing this vertex
-will be the first one in the result list.  This argument is ignored if only
-one projection is requested in argument \code{which}.}
+\item{probe1}{This argument can be used to specify the order of the projections in the resulting list.
+If given, then it is considered as a vertex ID (or a symbolic vertex name);
+the projection containing this vertex will be the first one in the result list.  This argument is ignored
+if only one projection is requested in argument \code{which}.}
 
 \item{which}{A character scalar to specify which projection(s) to calculate.
 The default is to calculate both.}
 
-\item{remove.type}{Logical, whether to remove the \code{type} vertex
-attribute from the projections. This makes sense because these graphs are
-not bipartite any more. However if you want to combine them with each other
-(or other bipartite graphs), then it is worth keeping this attribute. By
-default it will be removed.}
+\item{remove.type}{Logical, whether to remove the \code{type} vertex attribute from the projections.
+This makes sense because these graphs are not bipartite any more.
+However if you want to combine them with each other (or other bipartite graphs), then it is worth keeping this attribute.
+By default it will be removed.}
 }
 \value{
-A list of two undirected graphs. See details above.
+A list of two undirected graphs.
+See details above.
 }
 \description{
 A bipartite graph is projected into two one-mode networks
 }
 \details{
-Bipartite graphs have a \code{type} vertex attribute in igraph, this is
-boolean and \code{FALSE} for the vertices of the first kind and \code{TRUE}
-for vertices of the second kind.
+Bipartite graphs have a \code{type} vertex attribute in igraph,
+this is boolean and \code{FALSE} for the vertices of the first kind and \code{TRUE} for vertices of the second kind.
 
-\code{bipartite_projection_size()} calculates the number of vertices and edges
-in the two projections of the bipartite graphs, without calculating the
-projections themselves. This is useful to check how much memory the
-projections would need if you have a large bipartite graph.
+\code{bipartite_projection_size()} calculates the number of vertices and edges in the two projections of the bipartite graphs,
+without calculating the projections themselves.
+This is useful to check how much memory the projections would need if you have a large bipartite graph.
 
-\code{bipartite_projection()} calculates the actual projections.  You can use
-the \code{probe1} argument to specify the order of the projections in the
-result. By default vertex type \code{FALSE} is the first and \code{TRUE} is
-the second.
+\code{bipartite_projection()} calculates the actual projections.  You can use the \code{probe1} argument to specify the order of the projections in the result.
+By default vertex type \code{FALSE} is the first and \code{TRUE} is the second.
 
 \code{bipartite_projection()} keeps vertex attributes.
 }

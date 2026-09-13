@@ -16,17 +16,16 @@ plot_dendrogram(x, mode = NULL, ...)
 )
 }
 \arguments{
-\item{x}{An object containing the community structure of a graph. See
-\code{\link[=communities]{communities()}} for details.}
+\item{x}{An object containing the community structure of a graph.
+See \code{\link[=communities]{communities()}} for details.}
 
-\item{mode}{Which dendrogram plotting function to use. See details below.
+\item{mode}{Which dendrogram plotting function to use.
+See details below.
 The default \code{NULL} uses the \code{dend.plot.type} igraph option.}
 
-\item{\dots}{Additional arguments to supply to the dendrogram plotting
-function.}
+\item{\dots}{Additional arguments to supply to the dendrogram plotting function.}
 
-\item{use.modularity}{Logical, whether to use the modularity values
-to define the height of the branches.}
+\item{use.modularity}{Logical, whether to use the modularity values to define the height of the branches.}
 
 \item{palette}{The color palette to use for colored plots.}
 }
@@ -38,9 +37,8 @@ Returns whatever the return value was from the plotting function,
 Plot a hierarchical community structure as a dendrogram.
 }
 \details{
-\code{plot_dendrogram()} supports three different plotting functions, selected via
-the \code{mode} argument. By default the plotting function is taken from the
-\code{dend.plot.type} igraph option, and it has for possible values:
+\code{plot_dendrogram()} supports three different plotting functions, selected via the \code{mode} argument.
+By default the plotting function is taken from the \code{dend.plot.type} igraph option, and it has for possible values:
 \itemize{ \item \code{auto} Choose automatically between the plotting
 functions. As \code{plot.phylo} is the most sophisticated, that is choosen,
 whenever the \code{ape} package is available. Otherwise \code{plot.hclust}
@@ -49,8 +47,8 @@ package.  \item \code{hclust} Use \code{plot.hclust} from the \code{stats}
 package.  \item \code{dendrogram} Use \code{plot.dendrogram} from the
 \code{stats} package.  }
 
-The different plotting functions take different sets of arguments. When
-using \code{plot.phylo} (\code{mode="phylo"}), we have the following syntax:
+The different plotting functions take different sets of arguments.
+When using \code{plot.phylo} (\code{mode="phylo"}), we have the following syntax:
 \preformatted{
     plot_dendrogram(x, mode="phylo", colbar = palette(),
             edge.color = NULL, use.edge.length = FALSE, \dots)

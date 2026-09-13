@@ -3,8 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `no.clusters()` was renamed to [count_components()] to create a more
-#' consistent API.
+#' `no.clusters()` was renamed to [count_components()] to create a more consistent API.
 #' @inheritParams count_components
 #' @keywords internal
 #' @export
@@ -19,8 +18,7 @@ no.clusters <- function(graph, mode = c("weak", "strong")) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `decompose.graph()` was renamed to [decompose()] to create a more
-#' consistent API.
+#' `decompose.graph()` was renamed to [decompose()] to create a more consistent API.
 #' @inheritParams decompose
 #' @keywords internal
 #' @export
@@ -45,8 +43,7 @@ decompose.graph <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `cluster.distribution()` was renamed to [component_distribution()] to create a more
-#' consistent API.
+#' `cluster.distribution()` was renamed to [component_distribution()] to create a more consistent API.
 #' @inheritParams component_distribution
 #' @keywords internal
 #' @export
@@ -75,8 +72,7 @@ cluster.distribution <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `biconnected.components()` was renamed to [biconnected_components()] to create a more
-#' consistent API.
+#' `biconnected.components()` was renamed to [biconnected_components()] to create a more consistent API.
 #' @inheritParams biconnected_components
 #' @keywords internal
 #' @export
@@ -95,8 +91,7 @@ biconnected.components <- function(graph) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `articulation.points()` was renamed to [articulation_points()] to create a more
-#' consistent API.
+#' `articulation.points()` was renamed to [articulation_points()] to create a more consistent API.
 #' @inheritParams articulation_points
 #' @keywords internal
 #' @export
@@ -135,10 +130,9 @@ articulation.points <- function(graph) {
 ###################################################################
 
 #' @rdname components
-#' @param cumulative Logical, if TRUE the cumulative distirubution (relative
-#'   frequency) is calculated.
-#' @param mul.size Logical. If TRUE the relative frequencies will be multiplied
-#'   by the cluster sizes.
+#' @param cumulative Logical, if TRUE the cumulative distirubution (relative frequency) is calculated.
+#' @param mul.size Logical.
+#'   If TRUE the relative frequencies will be multiplied by the cluster sizes.
 #' @family components
 #' @export
 #' @importFrom graphics hist
@@ -172,17 +166,14 @@ component_distribution <- function(
 #'
 #' @param graph The original graph.
 #' @inheritParams rlang::args_dots_empty
-#' @param mode Character constant giving the type of the components, wither
-#'   `weak` for weakly connected components or `strong` for strongly
-#'   connected components.
-#' @param max.comps The maximum number of components to return. The first
-#'   `max.comps` components will be returned (which hold at least
-#'   `min.vertices` vertices, see the next parameter), the others will be
-#'   ignored. Supply `NA` here if you don't want to limit the number of
-#'   components.
-#' @param min.vertices The minimum number of vertices a component should
-#'   contain in order to place it in the result list. E.g. supply 2 here to ignore
-#'   isolate vertices.
+#' @param mode Character constant giving the type of the components,
+#'   wither `weak` for weakly connected components or `strong` for strongly connected components.
+#' @param max.comps The maximum number of components to return.
+#'   The first `max.comps` components will be returned (which hold at least `min.vertices` vertices, see the next parameter),
+#'   the others will be ignored.
+#'   Supply `NA` here if you don't want to limit the number of components.
+#' @param min.vertices The minimum number of vertices a component should contain in order to place it in the result list.
+#'   E.g. supply 2 here to ignore isolate vertices.
 #' @return A list of graph objects.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [is_connected()] to decide whether a graph is connected,
@@ -265,20 +256,17 @@ decompose <- function(
 #' `articulation_points()` finds the articulation points (or cut vertices)
 # " of a graph, while \code{bridges()} finds the bridges (or cut-edges) of a graph.
 #'
-#' Articulation points or cut vertices are vertices whose removal increases the
-#' number of connected components in a graph. Similarly, bridges or cut-edges
-#' are edges whose removal increases the number of connected components in a
-#' graph. If the original graph was connected, then the removal of a single
-#' articulation point or a single bridge makes it disconnected. If a graph
-#' contains no articulation points, then its vertex connectivity is at least
+#' Articulation points or cut vertices are vertices whose removal increases the number of connected components in a graph.
+#' Similarly, bridges or cut-edges are edges whose removal increases the number of connected components in a graph.
+#' If the original graph was connected, then the removal of a single articulation point or a single bridge makes it disconnected.
+#' If a graph contains no articulation points, then its vertex connectivity is at least
 # " two. If a graph contains no bridges, then its edge connectivity is at least
 #' two.
 #'
-#' @param graph The input graph. It is treated as an undirected graph, even if
-#'   it is directed.
-#' @return For `articulation_points()`, a numeric vector giving the vertex
-#'   IDs of the articulation points of the input graph. For `bridges()`, a
-#'   numeric vector giving the edge IDs of the bridges of the input graph.
+#' @param graph The input graph.
+#'   It is treated as an undirected graph, even if it is directed.
+#' @return For `articulation_points()`, a numeric vector giving the vertex IDs of the articulation points of the input graph.
+#'   For `bridges()`, a numeric vector giving the edge IDs of the bridges of the input graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [biconnected_components()], [components()],
 #' [is_connected()], [vertex_connectivity()],
@@ -315,17 +303,15 @@ bridges <- function(graph) {
 #'
 #' Finding the biconnected components of a graph
 #'
-#' A graph is biconnected if the removal of any single vertex (and its adjacent
-#' edges) does not disconnect it.
+#' A graph is biconnected if the removal of any single vertex (and its adjacent edges) does not disconnect it.
 #'
 #' A biconnected component of a graph is a maximal biconnected subgraph of it.
-#' The biconnected components of a graph can be given by the partition of its
-#' edges: every edge is a member of exactly one biconnected component. Note
-#' that this is not true for vertices: the same vertex can be part of many
-#' biconnected components.
+#' The biconnected components of a graph can be given by the partition of its edges:
+#' every edge is a member of exactly one biconnected component.
+#' Note that this is not true for vertices: the same vertex can be part of many biconnected components.
 #'
-#' @param graph The input graph. It is treated as an undirected graph, even if
-#'   it is directed.
+#' @param graph The input graph.
+#'   It is treated as an undirected graph, even if it is directed.
 #' @return A named list with three components:
 #'   \describe{
 #'     \item{no}{
@@ -409,15 +395,14 @@ biconnected_components <- function(graph) {
 #' Tests whether a graph is biconnected.
 #'
 #' @details
-#' A graph is biconnected if the removal of any single vertex (and its adjacent
-#' edges) does not disconnect it.
+#' A graph is biconnected if the removal of any single vertex (and its adjacent edges) does not disconnect it.
 #'
 #' igraph does not consider single-vertex graphs biconnected.
 #'
-#' Note that some authors do not consider the graph consisting of
-#' two connected vertices as biconnected, however, igraph does.
+#' Note that some authors do not consider the graph consisting of two connected vertices as biconnected, however, igraph does.
 #'
-#' @param graph The input graph. Edge directions are ignored.
+#' @param graph The input graph.
+#'   Edge directions are ignored.
 #' @return Logical, `TRUE` if the graph is biconnected.
 #' @seealso [articulation_points()], [biconnected_components()],
 #' [is_connected()], [vertex_connectivity()]

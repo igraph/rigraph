@@ -7,13 +7,13 @@
 dyad.census(graph)
 }
 \arguments{
-\item{graph}{The input graph. A warning is given if it is not directed.}
+\item{graph}{The input graph.
+A warning is given if it is not directed.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{dyad.census()} was renamed to \code{\link[=dyad_census]{dyad_census()}} to create a more
-consistent API.
+\code{dyad.census()} was renamed to \code{\link[=dyad_census]{dyad_census()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_dyad_census}{\code{dyad_census()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}

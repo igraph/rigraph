@@ -7,8 +7,8 @@
 girth(graph, ..., circle = TRUE)
 }
 \arguments{
-\item{graph}{The input graph. It may be directed, but the algorithm searches
-for undirected circles anyway.}
+\item{graph}{The input graph.
+It may be directed, but the algorithm searches for undirected circles anyway.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
@@ -29,14 +29,13 @@ Numeric vector with the vertex IDs in the shortest circle.
 The girth of a graph is the length of the shortest circle in it.
 }
 \details{
-The current implementation works for undirected graphs only, directed graphs
-are treated as undirected graphs. Loop edges and multiple edges are ignored.
+The current implementation works for undirected graphs only, directed graphs are treated as undirected graphs.
+Loop edges and multiple edges are ignored.
 If the graph is a forest (i.e. acyclic), then \code{Inf} is returned.
 
-This implementation is based on Alon Itai and Michael Rodeh: Finding a
-minimum circuit in a graph \emph{Proceedings of the ninth annual ACM
-symposium on Theory of computing}, 1-10, 1977. The first implementation of
-this function was done by Keith Briggs, thanks Keith.
+This implementation is based on Alon Itai and Michael Rodeh:
+Finding a minimum circuit in a graph \emph{Proceedings of the ninth annual ACM symposium on Theory of computing},
+1-10, 1977. The first implementation of this function was done by Keith Briggs, thanks Keith.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

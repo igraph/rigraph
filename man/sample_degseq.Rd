@@ -16,18 +16,18 @@ sample_degseq(
 degseq(..., deterministic = FALSE)
 }
 \arguments{
-\item{out.deg}{Numeric vector, the sequence of degrees (for undirected
-graphs) or out-degrees (for directed graphs). For undirected graphs its sum
-should be even. For directed graphs its sum should be the same as the sum of
-\code{in.deg}.}
+\item{out.deg}{Numeric vector, the sequence of degrees (for undirected graphs) or out-degrees (for directed graphs).
+For undirected graphs its sum should be even.
+For directed graphs its sum should be the same as the sum of \code{in.deg}.}
 
-\item{in.deg}{For directed graph, the in-degree sequence. By default this is
-\code{NULL} and an undirected graph is created.}
+\item{in.deg}{For directed graph, the in-degree sequence.
+By default this is \code{NULL} and an undirected graph is created.}
 
 \item{...}{Passed to \code{realize_degseq()} if \sQuote{deterministic} is true,
 or to \code{sample_degseq()} otherwise.}
 
-\item{method}{Character, the method for generating the graph. See Details.}
+\item{method}{Character, the method for generating the graph.
+See Details.}
 
 \item{deterministic}{Whether the construction should be deterministic}
 }
@@ -35,52 +35,42 @@ or to \code{sample_degseq()} otherwise.}
 The new graph object.
 }
 \description{
-It is often useful to create a graph with given vertex degrees. This function
-creates such a graph in a randomized manner.
+It is often useful to create a graph with given vertex degrees.
+This function creates such a graph in a randomized manner.
 }
 \details{
-The \dQuote{configuration} method (formerly called "simple") implements the
-configuration model. For undirected graphs, it puts all vertex IDs in a bag
-such that the multiplicity of a vertex in the bag is the same as its degree.
-Then it draws pairs from the bag until the bag becomes empty. This method may
-generate both loop (self) edges and multiple edges. For directed graphs,
-the algorithm is basically the same, but two separate bags are used
-for the in- and out-degrees. Undirected graphs are generated
-with probability proportional to \eqn{(\prod_{i<j} A_{ij} ! \prod_i A_{ii} !!)^{-1}},
+The \dQuote{configuration} method (formerly called "simple") implements the configuration model.
+For undirected graphs, it puts all vertex IDs in a bag such that the multiplicity of a vertex in the bag is the same as its degree.
+Then it draws pairs from the bag until the bag becomes empty.
+This method may generate both loop (self) edges and multiple edges.
+For directed graphs, the algorithm is basically the same, but two separate bags are used for the in- and out-degrees.
+Undirected graphs are generated with probability proportional to \eqn{(\prod_{i<j} A_{ij} ! \prod_i A_{ii} !!)^{-1}},
 where A denotes the adjacency matrix and !! denotes the double factorial.
 Here A is assumed to have twice the number of self-loops on its diagonal.
 The corresponding expression for directed graphs is \eqn{(\prod_{i,j} A_{ij}!)^{-1}}.
-Thus the probability of all simple graphs
-(which only have 0s and 1s in the adjacency matrix)
-is the same, while that of non-simple ones depends on their edge and
-self-loop multiplicities.
+Thus the probability of all simple graphs (which only have 0s and 1s in the adjacency matrix) is the same,
+while that of non-simple ones depends on their edge and self-loop multiplicities.
 
-The \dQuote{fast.heur.simple} method (formerly called "simple.no.multiple")
-generates simple graphs.
-It is similar to \dQuote{configuration} but tries to avoid multiple and
-loop edges and restarts the generation from scratch if it gets stuck.
-It can generate all simple realizations of a degree sequence,
-but it is not guaranteed to sample them uniformly.
-This method is relatively fast and it will eventually succeed
-if the provided degree sequence is graphical, but there is no upper bound on
-the number of iterations.
+The \dQuote{fast.heur.simple} method (formerly called "simple.no.multiple") generates simple graphs.
+It is similar to \dQuote{configuration} but tries to avoid multiple and loop edges and restarts the generation from scratch
+if it gets stuck.
+It can generate all simple realizations of a degree sequence, but it is not guaranteed to sample them uniformly.
+This method is relatively fast and it will eventually succeed if the provided degree sequence is graphical,
+but there is no upper bound on the number of iterations.
 
-The \dQuote{configuration.simple} method (formerly called "simple.no.multiple.uniform")
-is
-identical to \dQuote{configuration}, but if the generated graph is not simple,
-it rejects it and re-starts the generation.
+The \dQuote{configuration.simple} method (formerly called "simple.no.multiple.uniform") is identical to \dQuote{configuration},
+but if the generated graph is not simple, it rejects it and re-starts the generation.
 It generates all simple graphs with the same probability.
 
 The \dQuote{vl} method samples undirected connected graphs approximately uniformly.
 It is a Monte Carlo method based on degree-preserving edge switches.
-This generator should be favoured if undirected and connected graphs are to be
-generated and execution time is not a concern. igraph uses
-the original implementation of Fabien Viger; for the algorithm, see
-\url{https://web.archive.org/web/20250428012457/https://www-complexnetworks.lip6.fr/~latapy/FV/generation.html}
-and the paper \url{https://arxiv.org/abs/cs/0502085}.
+This generator should be favoured
+if undirected and connected graphs are to be generated and execution time is not a concern. igraph uses the original implementation of Fabien Viger;
+for the algorithm,
+see \url{https://web.archive.org/web/20250428012457/https://www-complexnetworks.lip6.fr/~latapy/FV/generation.html} and the paper \url{https://arxiv.org/abs/cs/0502085}.
 
-The \dQuote{edge.switching.simple} is an MCMC sampler based on
-degree-preserving edge switches. It generates simple undirected or directed graphs.
+The \dQuote{edge.switching.simple} is an MCMC sampler based on degree-preserving edge switches.
+It generates simple undirected or directed graphs.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_degree_sequence_game}{\code{degree_sequence_game()}}

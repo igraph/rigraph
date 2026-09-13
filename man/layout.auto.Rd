@@ -11,15 +11,13 @@ layout.auto(graph, dim = 2, ...)
 
 \item{dim}{Dimensions, should be 2 or 3.}
 
-\item{...}{For \code{layout_nicely()} the extra arguments are passed to
-the real layout function. For \code{nicely()} all argument are passed to
-\code{layout_nicely()}.}
+\item{...}{For \code{layout_nicely()} the extra arguments are passed to the real layout function.
+For \code{nicely()} all argument are passed to \code{layout_nicely()}.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{layout.auto()} was renamed to \code{\link[=layout_nicely]{layout_nicely()}} to create a more
-consistent API.
+\code{layout.auto()} was renamed to \code{\link[=layout_nicely]{layout_nicely()}} to create a more consistent API.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_align}{\code{layout_align()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_forest}{\code{is_forest()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

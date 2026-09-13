@@ -36,38 +36,32 @@ The default \code{NULL} selects all vertices.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{mode}{Character string, \dQuote{out} for out-degree, \dQuote{in} for
-in-degree or \dQuote{total} for the sum of the two. For undirected graphs
-this argument is ignored. \dQuote{all} is a synonym of \dQuote{total}.}
+\item{mode}{Character string, \dQuote{out} for out-degree, \dQuote{in} for in-degree or \dQuote{total} for the sum of the two.
+For undirected graphs this argument is ignored.
+\dQuote{all} is a synonym of \dQuote{total}.}
 
 \item{loops}{Logical; whether the loop edges are also counted.}
 
-\item{normalized}{Logical, whether to normalize the degree.  If
-\code{TRUE} then the result is divided by \eqn{n-1}, where \eqn{n} is the
-number of vertices in the graph.}
+\item{normalized}{Logical, whether to normalize the degree.  If \code{TRUE} then the result is divided by \eqn{n-1},
+where \eqn{n} is the number of vertices in the graph.}
 
-\item{cumulative}{Logical; whether the cumulative degree distribution is to
-be calculated.}
+\item{cumulative}{Logical; whether the cumulative degree distribution is to be calculated.}
 }
 \value{
-For \code{degree()} a numeric vector of the same length as argument
-\code{v}.
+For \code{degree()} a numeric vector of the same length as argument \code{v}.
 
-For \code{degree_distribution()} a numeric vector of the same length as the
-maximum degree plus one. The first element is the relative frequency zero
-degree vertices, the second vertices with degree one, etc.
+For \code{degree_distribution()} a numeric vector of the same length as the maximum degree plus one.
+The first element is the relative frequency zero degree vertices, the second vertices with degree one, etc.
 
-For \code{max_degree()}, the largest degree in the graph. When no vertices are
-selected, or when the input is the null graph, zero is returned as this
-is the smallest possible degree.
+For \code{max_degree()}, the largest degree in the graph.
+When no vertices are selected, or when the input is the null graph, zero is returned as this is the smallest possible degree.
 
 For \code{mean_degree()}, the average degree in the graph as a single number.
 For graphs with no vertices, \code{NaN} is returned.
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \description{
-The degree of a vertex is its most basic structural property, the number of
-its adjacent edges.
+The degree of a vertex is its most basic structural property, the number of its adjacent edges.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_degree}{\code{degree()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_maxdegree}{\code{maxdegree()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_mean_degree}{\code{mean_degree()}}

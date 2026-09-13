@@ -50,14 +50,12 @@ rewire <- function(graph, with) {
 
 #' Graph rewiring while preserving the degree distribution
 #'
-#' This function can be used together with [rewire()] to
-#' randomly rewire the edges while preserving the original graph's degree
-#' distribution.
+#' This function can be used together with [rewire()] to randomly rewire the edges
+#' while preserving the original graph's degree distribution.
 #'
-#' The rewiring algorithm chooses two arbitrary edges in each step ((a,b)
-#' and (c,d)) and substitutes them with (a,d) and (c,b), if they not
-#' already exists in the graph. The algorithm does not create multiple
-#' edges.
+#' The rewiring algorithm chooses two arbitrary edges in each step ((a,b) and (c,d)) and substitutes them with (a,d) and (c,b),
+#' if they not already exists in the graph.
+#' The algorithm does not create multiple edges.
 #'
 #' @param loops Whether to allow destroying and creating loop edges.
 #' @param niter Number of rewiring trials to perform.
@@ -96,21 +94,18 @@ rewire_keeping_degseq <- function(graph, loops, niter) {
 #' Rewires the endpoints of the edges of a graph to a random vertex
 #'
 #' This function can be used together with [rewire()].
-#' This method rewires the endpoints of the edges with a constant probability
-#' uniformly randomly to a new vertex in a graph.
+#' This method rewires the endpoints of the edges with a constant probability uniformly randomly to a new vertex in a graph.
 #'
 #' Note that this method might create graphs with multiple and/or loop edges.
 #'
 #' @param prob The rewiring probability, a real number between zero and one.
 #' @inheritParams rlang::args_dots_empty
-#' @param loops Logical, whether loop edges are allowed in the rewired
-#'   graph.
-#' @param multiple Logical, whether multiple edges are allowed in the
-#'   generated graph.
-#' @param mode Character string, specifies which endpoint of the edges to rewire
-#'   in directed graphs. \sQuote{all} rewires both endpoints, \sQuote{in} rewires
-#'   the start (tail) of each directed edge, \sQuote{out} rewires the end (head)
-#'   of each directed edge. Ignored for undirected graphs.
+#' @param loops Logical, whether loop edges are allowed in the rewired graph.
+#' @param multiple Logical, whether multiple edges are allowed in the generated graph.
+#' @param mode Character string, specifies which endpoint of the edges to rewire in directed graphs.
+#'   \sQuote{all} rewires both endpoints, \sQuote{in} rewires the start (tail) of each directed edge,
+#'   \sQuote{out} rewires the end (head) of each directed edge.
+#'   Ignored for undirected graphs.
 #'
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @family rewiring functions

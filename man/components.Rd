@@ -21,18 +21,16 @@ count_components(graph, ..., mode = c("weak", "strong"))
 \arguments{
 \item{graph}{The graph to analyze.}
 
-\item{cumulative}{Logical, if TRUE the cumulative distirubution (relative
-frequency) is calculated.}
+\item{cumulative}{Logical, if TRUE the cumulative distirubution (relative frequency) is calculated.}
 
-\item{mul.size}{Logical. If TRUE the relative frequencies will be multiplied
-by the cluster sizes.}
+\item{mul.size}{Logical.
+If TRUE the relative frequencies will be multiplied by the cluster sizes.}
 
-\item{\dots}{Additional attributes to pass to \code{cluster}, right now only
-\code{mode} makes sense.}
+\item{\dots}{Additional attributes to pass to \code{cluster}, right now only \code{mode} makes sense.}
 
-\item{mode}{Character string, either \dQuote{weak} or \dQuote{strong}.  For
-directed graphs \dQuote{weak} implies weakly, \dQuote{strong} strongly
-connected components to search. It is ignored for undirected graphs.}
+\item{mode}{Character string, either \dQuote{weak} or \dQuote{strong}.  For directed graphs \dQuote{weak} implies weakly,
+\dQuote{strong} strongly connected components to search.
+It is ignored for undirected graphs.}
 }
 \value{
 For \code{is_connected()} a Logical.
@@ -52,10 +50,10 @@ numeric constant, the number of clusters.
 
 For \code{count_components()} an integer constant is returned.
 
-For \code{component_distribution()} a numeric vector with the relative
-frequencies. The length of the vector is the size of the largest component
-plus one. Note that (for currently unknown reasons) the first element of the
-vector is the number of clusters of size zero, so this is always zero.
+For \code{component_distribution()} a numeric vector with the relative frequencies.
+The length of the vector is the size of the largest component plus one.
+Note that (for currently unknown reasons) the first element of the vector is the number of clusters of size zero,
+so this is always zero.
 
 For \code{largest_component()} the largest connected component of the graph.
 }
@@ -63,26 +61,22 @@ For \code{largest_component()} the largest connected component of the graph.
 Calculate the maximal (weakly or strongly) connected components of a graph
 }
 \details{
-\code{is_connected()} decides whether the graph is weakly or strongly
-connected. The null graph is considered disconnected.
+\code{is_connected()} decides whether the graph is weakly or strongly connected.
+The null graph is considered disconnected.
 
-\code{components()} finds the maximal (weakly or strongly) connected components
-of a graph.
+\code{components()} finds the maximal (weakly or strongly) connected components of a graph.
 
-\code{count_components()} does almost the same as \code{components()} but returns only
-the number of clusters found instead of returning the actual clusters.
+\code{count_components()} does almost the same as \code{components()} but returns only the number of clusters found instead of returning the actual clusters.
 
-\code{component_distribution()} creates a histogram for the maximal connected
-component sizes.
+\code{component_distribution()} creates a histogram for the maximal connected component sizes.
 
-\code{largest_component()} returns the largest connected component of a graph. For
-directed graphs, optionally the largest weakly or strongly connected component.
-In case of a tie, the first component by vertex ID order is returned. Vertex
-IDs from the original graph are not retained in the returned graph.
+\code{largest_component()} returns the largest connected component of a graph.
+For directed graphs, optionally the largest weakly or strongly connected component.
+In case of a tie, the first component by vertex ID order is returned.
+Vertex IDs from the original graph are not retained in the returned graph.
 
 The weakly connected components are found by a simple breadth-first search.
-The strongly connected components are implemented by two consecutive
-depth-first searches.
+The strongly connected components are implemented by two consecutive depth-first searches.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_connected_components}{\code{connected_components()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_induced_subgraph}{\code{induced_subgraph()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_connected}{\code{is_connected()}}

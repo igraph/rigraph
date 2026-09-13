@@ -9,25 +9,20 @@ add_edges(graph, edges, ..., attr = list())
 \arguments{
 \item{graph}{The input graph}
 
-\item{edges}{The edges to add, a vertex sequence with even number
-of vertices.}
+\item{edges}{The edges to add, a vertex sequence with even number of vertices.}
 
-\item{...}{Additional arguments, they must be named,
-and they will be added as edge attributes, for the newly added
-edges. See also details below.}
+\item{...}{Additional arguments, they must be named, and they will be added as edge attributes, for the newly added edges.
+See also details below.}
 
-\item{attr}{A named list, its elements will be added
-as edge attributes, for the newly added edges. See also details
-below.}
+\item{attr}{A named list, its elements will be added as edge attributes, for the newly added edges.
+See also details below.}
 }
 \value{
 The graph, with the edges (and attributes) added.
 }
 \description{
-The new edges are given as a vertex sequence, e.g. internal
-numeric vertex IDs, or vertex names. The first edge points from
-\code{edges[1]} to \code{edges[2]}, the second from \code{edges[3]}
-to \code{edges[4]}, etc.
+The new edges are given as a vertex sequence, e.g. internal numeric vertex IDs, or vertex names.
+The first edge points from \code{edges[1]} to \code{edges[2]}, the second from \code{edges[3]} to \code{edges[4]}, etc.
 }
 \details{
 If attributes are supplied, and they are not present in the graph,

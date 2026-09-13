@@ -20,27 +20,27 @@
 \arguments{
 \item{x}{The graph.}
 
-\item{i}{Index. Vertex IDs or names or logical vectors. See details
-below.}
+\item{i}{Index.
+Vertex IDs or names or logical vectors.
+See details below.}
 
-\item{j}{Index. Vertex IDs or names or logical vectors. See details
-below.}
+\item{j}{Index.
+Vertex IDs or names or logical vectors.
+See details below.}
 
 \item{...}{Currently ignored.}
 
-\item{from}{A numeric or character vector giving vertex IDs or
-names. Together with the \code{to} argument, it can be used to
-query/set a sequence of edges. See details below. This argument cannot
-be present together with any of the \code{i} and \code{j} arguments
-and if it is present, then the \code{to} argument must be present as
-well.}
+\item{from}{A numeric or character vector giving vertex IDs or names.
+Together with the \code{to} argument, it can be used to query/set a sequence of edges.
+See details below.
+This argument cannot be present together with any of the \code{i} and \code{j} arguments and if it is present,
+then the \code{to} argument must be present as well.}
 
-\item{to}{A numeric or character vector giving vertex IDs or
-names. Together with the \code{from} argument, it can be used to
-query/set a sequence of edges. See details below. This argument cannot
-be present together with any of the \code{i} and \code{j} arguments
-and if it is present, then the \code{from} argument must be present as
-well.}
+\item{to}{A numeric or character vector giving vertex IDs or names.
+Together with the \code{from} argument, it can be used to query/set a sequence of edges.
+See details below.
+This argument cannot be present together with any of the \code{i} and \code{j} arguments and if it is present,
+then the \code{from} argument must be present as well.}
 
 \item{sparse}{Logical, whether to return sparse matrices.}
 
@@ -48,18 +48,20 @@ well.}
 
 \item{drop}{Ignored.}
 
-\item{attr}{Name of an edge attribute. This attribute is queried and returned.
+\item{attr}{Name of an edge attribute.
+This attribute is queried and returned.
 Default: \code{NULL}.}
 }
 \value{
-A scalar or matrix. See details below.
+A scalar or matrix.
+See details below.
 }
 \description{
 Query and manipulate a graph as it were an adjacency matrix
 }
 \details{
-The single bracket indexes the (possibly weighted) adjacency matrix of
-the graph. Here is what you can do with it:
+The single bracket indexes the (possibly weighted) adjacency matrix of the graph.
+Here is what you can do with it:
 
 \enumerate{
 \item Check whether there is an edge between two vertices (\eqn{v}
@@ -120,8 +122,7 @@ G[-1,1] <- TRUE}
 creates a star graph.
 
 Of course, the indexing operators support vertex names,
-so instead of a numeric vertex ID a vertex can also be given to
-\sQuote{\code{[}} and \sQuote{\code{[[}}.
+so instead of a numeric vertex ID a vertex can also be given to \sQuote{\code{[}} and \sQuote{\code{[[}}.
 }
 \seealso{
 Other structural queries:

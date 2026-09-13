@@ -22,9 +22,8 @@ circulant(n, shifts, ..., directed = FALSE)
 An igraph graph.
 }
 \description{
-A circulant graph \eqn{C_n^{\textrm{shifts}}} consists of \eqn{n} vertices
-\eqn{v_0, \ldots, v_{n-1}} such that for each \eqn{s_i} in the list of offsets
-\code{shifts}, \eqn{v_j} is connected to \eqn{v_{(j + s_i) \mod n}} for all \eqn{j}.
+A circulant graph \eqn{C_n^{\textrm{shifts}}} consists of \eqn{n} vertices \eqn{v_0, \ldots, v_{n-1}} such that for each \eqn{s_i} in the list of offsets \code{shifts},
+\eqn{v_j} is connected to \eqn{v_{(j + s_i) \mod n}} for all \eqn{j}.
 }
 \details{
 The function can generate either directed or undirected graphs.

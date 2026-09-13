@@ -25,39 +25,32 @@ as_adj_edge_list(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{mode}{Character scalar, it gives what kind of adjacent edges/vertices
-to include in the lists. \sQuote{\code{out}} is for outgoing edges/vertices,
-\sQuote{\verb{in}} is for incoming edges/vertices, \sQuote{\code{all}} is
-for both. This argument is ignored for undirected graphs.}
+\item{mode}{Character scalar, it gives what kind of adjacent edges/vertices to include in the lists.
+\sQuote{\code{out}} is for outgoing edges/vertices, \sQuote{\verb{in}} is for incoming edges/vertices, \sQuote{\code{all}} is for both.
+This argument is ignored for undirected graphs.}
 
-\item{loops}{Character scalar, one of \code{"ignore"} (to omit loops), \code{"twice"}
-(to include loop edges twice) and \code{"once"} (to include them once). \code{"twice"}
-is not allowed for directed graphs and will be replaced with \code{"once"}.}
+\item{loops}{Character scalar, one of \code{"ignore"} (to omit loops),
+\code{"twice"} (to include loop edges twice) and \code{"once"} (to include them once).
+\code{"twice"} is not allowed for directed graphs and will be replaced with \code{"once"}.}
 
-\item{multiple}{Logical, set to \code{FALSE} to use only one representative
-of each set of parallel edges.}
+\item{multiple}{Logical, set to \code{FALSE} to use only one representative of each set of parallel edges.}
 }
 \value{
-A list of \code{igraph.vs} or a list of numeric vectors depending on
-the value of \code{igraph_opt("return.vs.es")}, see details for performance
-characteristics.
+A list of \code{igraph.vs} or a list of numeric vectors depending on the value of \code{igraph_opt("return.vs.es")},
+see details for performance characteristics.
 }
 \description{
-Create adjacency lists from a graph, either for adjacent edges or for
-neighboring vertices
+Create adjacency lists from a graph, either for adjacent edges or for neighboring vertices
 }
 \details{
-\code{as_adj_list()} returns a list of numeric vectors, which include the IDs
-of neighbor vertices (according to the \code{mode} argument) of all
-vertices.
+\code{as_adj_list()} returns a list of numeric vectors,
+which include the IDs of neighbor vertices (according to the \code{mode} argument) of all vertices.
 
-\code{as_adj_edge_list()} returns a list of numeric vectors, which include the
-IDs of adjacent edges (according to the \code{mode} argument) of all
-vertices.
+\code{as_adj_edge_list()} returns a list of numeric vectors,
+which include the IDs of adjacent edges (according to the \code{mode} argument) of all vertices.
 
-If \code{igraph_opt("return.vs.es")} is true (default), the numeric
-vectors of the adjacency lists are coerced to \code{igraph.vs}, this can be
-a very expensive operation on large graphs.
+If \code{igraph_opt("return.vs.es")} is true (default), the numeric vectors of the adjacency lists are coerced to \code{igraph.vs},
+this can be a very expensive operation on large graphs.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

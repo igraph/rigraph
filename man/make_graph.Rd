@@ -28,36 +28,29 @@ directed_graph(...)
 undirected_graph(...)
 }
 \arguments{
-\item{edges}{A vector defining the edges, the first edge points
-from the first element to the second, the second edge from the third
-to the fourth, etc. For a numeric vector, these are interpreted
-as internal vertex IDs. For character vectors, they are interpreted
-as vertex names.
+\item{edges}{A vector defining the edges, the first edge points from the first element to the second,
+the second edge from the third to the fourth, etc. For a numeric vector, these are interpreted as internal vertex IDs.
+For character vectors, they are interpreted as vertex names.
 
-Alternatively, this can be a character scalar, the name of a
-notable graph. See Notable graphs below. The name is case
-insensitive.
+Alternatively, this can be a character scalar, the name of a notable graph.
+See Notable graphs below.
+The name is case insensitive.
 
-Starting from igraph 0.8.0, you can also include literals here,
-via igraph's formula notation (see \code{\link[=graph_from_literal]{graph_from_literal()}}).
-In this case, the first term of the formula has to start with
-a \sQuote{\code{~}} character, just like regular formulae in R.
-See examples below.}
+Starting from igraph 0.8.0, you can also include literals here, via igraph's formula notation (see \code{\link[=graph_from_literal]{graph_from_literal()}}).
+In this case, the first term of the formula has to start with a \sQuote{\code{~}} character,
+just like regular formulae in R. See examples below.}
 
-\item{...}{For \code{make_graph()}: extra arguments for the case when the
-graph is given via a literal, see \code{\link[=graph_from_literal]{graph_from_literal()}}.
-For \code{directed_graph()} and \code{undirected_graph()}:
-Passed to \code{make_directed_graph()} or \code{make_undirected_graph()}.}
+\item{...}{For \code{make_graph()}: extra arguments for the case when the graph is given via a literal, see \code{\link[=graph_from_literal]{graph_from_literal()}}.
+For \code{directed_graph()} and \code{undirected_graph()}: Passed to \code{make_directed_graph()} or \code{make_undirected_graph()}.}
 
-\item{n}{The number of vertices in the graph. This argument is
-ignored (with a warning) if \code{edges} are symbolic vertex names. It
-is also ignored if there is a bigger vertex ID in \code{edges}. This
-means that for this function it is safe to supply zero here if the
-vertex with the largest ID is not an isolate. The default \code{NULL} uses
-the largest vertex ID in \code{edges}.}
+\item{n}{The number of vertices in the graph.
+This argument is ignored (with a warning) if \code{edges} are symbolic vertex names.
+It is also ignored if there is a bigger vertex ID in \code{edges}.
+This means that for this function it is safe to supply zero here if the vertex with the largest ID is not an isolate.
+The default \code{NULL} uses the largest vertex ID in \code{edges}.}
 
-\item{isolates}{Character vector, names of isolate vertices,
-for symbolic edge lists. It is ignored for numeric edge lists.}
+\item{isolates}{Character vector, names of isolate vertices, for symbolic edge lists.
+It is ignored for numeric edge lists.}
 
 \item{directed}{Whether to create a directed graph.}
 
@@ -75,10 +68,9 @@ Create an igraph graph from a list of edges, or a notable graph
 \section{Notable graphs}{
 
 
-\code{make_graph()} can create some notable graphs. The name of the
-graph (case insensitive), a character scalar must be supplied as
-the \code{edges} argument, and other arguments are ignored. (A warning
-is given is they are specified.)
+\code{make_graph()} can create some notable graphs.
+The name of the graph (case insensitive), a character scalar must be supplied as the \code{edges} argument, and other arguments are ignored.
+(A warning is given is they are specified.)
 
 \code{make_graph()} knows the following graphs:
 \describe{

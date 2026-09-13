@@ -13,22 +13,20 @@ graphlet_proj(graph, ..., weights = NULL, cliques, niter = 1000, Mu = NULL)
 graphlets(graph, ..., weights = NULL, niter = 1000)
 }
 \arguments{
-\item{graph}{The input graph, edge directions are ignored. Only simple graph
-(i.e. graphs without self-loops and multiple edges) are supported.}
+\item{graph}{The input graph, edge directions are ignored.
+Only simple graph (i.e. graphs without self-loops and multiple edges) are supported.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{weights}{Edge weights. If the graph has a \code{weight} edge attribute
-and this argument is \code{NULL} (the default), then the \code{weight} edge
-attribute is used.}
+\item{weights}{Edge weights.
+If the graph has a \code{weight} edge attribute and this argument is \code{NULL} (the default), then the \code{weight} edge attribute is used.}
 
-\item{cliques}{A list of vertex IDs, the graphlet basis to use for the
-projection.}
+\item{cliques}{A list of vertex IDs, the graphlet basis to use for the projection.}
 
 \item{niter}{Integer scalar, the number of iterations to perform.}
 
-\item{Mu}{Starting weights for the projection. The default \code{NULL} uses a
-weight of one for each clique.}
+\item{Mu}{Starting weights for the projection.
+The default \code{NULL} uses a weight of one for each clique.}
 }
 \value{
 \code{graphlets()} returns a list with two members:
@@ -53,24 +51,19 @@ The weight thresholds used for finding the subgraphs.
 }
 }
 
-\code{graphlet_proj()} return a numeric vector, the weights of the graphlet
-basis subgraphs.
+\code{graphlet_proj()} return a numeric vector, the weights of the graphlet basis subgraphs.
 }
 \description{
-Graphlet decomposition models a weighted undirected graph via the union of
-potentially overlapping dense social groups.  This is done by a two-step
-algorithm. In the first step a candidate set of groups (a candidate basis)
-is created by finding cliques if the thresholded input graph. In the second
-step these the graph is projected on the candidate basis, resulting a weight
-coefficient for each clique in the candidate basis.
+Graphlet decomposition models a weighted undirected graph via the union of potentially overlapping dense social groups.  This is done by a two-step algorithm.
+In the first step a candidate set of groups (a candidate basis) is created by finding cliques if the thresholded input graph.
+In the second step these the graph is projected on the candidate basis,
+resulting a weight coefficient for each clique in the candidate basis.
 }
 \details{
-igraph contains three functions for performing the graph decomponsition of a
-graph. The first is \code{graphlets()}, which performed both steps on the
-method and returns a list of subgraphs, with their corresponding weights.
-The second and third functions correspond to the first and second steps of
-the algorithm, and they are useful if the user wishes to perform them
-individually: \code{graphlet_basis()} and \code{graphlet_proj()}.
+igraph contains three functions for performing the graph decomponsition of a graph.
+The first is \code{graphlets()}, which performed both steps on the method and returns a list of subgraphs, with their corresponding weights.
+The second and third functions correspond to the first and second steps of the algorithm,
+and they are useful if the user wishes to perform them individually: \code{graphlet_basis()} and \code{graphlet_proj()}.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Graphlets.html#igraph_graphlets_candidate_basis}{\code{graphlets_candidate_basis()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Graphlets.html#igraph_graphlets_project}{\code{graphlets_project()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Graphlets.html#igraph_graphlets}{\code{graphlets()}}

@@ -19,9 +19,8 @@ An igraph graph.
 Delete vertices or edges from a graph
 }
 \details{
-The minus operator (\sQuote{\code{-}}) can be used to remove vertices
-or edges from the graph. The operation performed is selected based on
-the type of the right hand side argument:
+The minus operator (\sQuote{\code{-}}) can be used to remove vertices or edges from the graph.
+The operation performed is selected based on the type of the right hand side argument:
 \itemize{
 \item If it is an igraph graph object, then the difference of the
 two graphs is calculated, see \code{\link[=difference]{difference()}}.
