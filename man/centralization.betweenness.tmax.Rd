@@ -8,10 +8,9 @@ centralization.betweenness.tmax(graph = NULL, nodes = 0, directed = TRUE)
 }
 \arguments{
 \item{graph}{The input graph. It can also be \code{NULL} if
-\code{nodes} and \code{directed} are both given.}
+\code{n} and \code{directed} are both given.}
 
-\item{nodes}{The number of vertices. This is ignored if the graph is
-given.}
+\item{nodes}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{n} instead.}
 
 \item{directed}{Logical, whether to use directed shortest paths
 for calculating betweenness. Ignored if an undirected graph was

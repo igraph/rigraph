@@ -15,7 +15,7 @@ preference.game(
 )
 }
 \arguments{
-\item{nodes}{The number of vertices in the graphs.}
+\item{nodes}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{n} instead.}
 
 \item{types}{The number of different vertex types.}
 

@@ -6,22 +6,25 @@
 \usage{
 centr_clo_tmax(
   graph = NULL,
-  nodes = 0,
+  n = 0,
   ...,
-  mode = c("out", "in", "all", "total")
+  mode = c("out", "in", "all", "total"),
+  nodes = deprecated()
 )
 }
 \arguments{
 \item{graph}{The input graph. It can also be \code{NULL} if
-\code{nodes} is given.}
+\code{n} is given.}
 
-\item{nodes}{The number of vertices. This is ignored if the graph is
+\item{n}{The number of vertices. This is ignored if the graph is
 given.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{This is the same as the \code{mode} argument of
 \code{closeness()}. Ignored if an undirected graph is given.}
+
+\item{nodes}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{n} instead.}
 }
 \value{
 Real scalar, the theoretical maximum (unnormalized) graph
