@@ -12,7 +12,7 @@ igraph.from.graphNEL(graphNEL, name = TRUE, weight = TRUE, unlist.attrs = TRUE)
 \item{name}{Logical, whether to add graphNEL vertex names as an igraph vertex attribute called \sQuote{\code{name}}.}
 
 \item{weight}{Logical, whether to add graphNEL edge weights as an igraph edge attribute called \sQuote{\code{weight}}.
-(graphNEL graphs are always weighted.)}
+ (graphNEL graphs are always weighted.)}
 
 \item{unlist.attrs}{Logical. graphNEL attribute query functions return the values of the attributes in R lists,
 if this argument is \code{TRUE} (the default) these will be converted to atomic vectors, whenever possible,

@@ -18,38 +18,38 @@ harmonic_centrality(
 \item{graph}{The graph to analyze.}
 
 \item{vids}{The vertices for which harmonic centrality will be calculated.
-The default \code{NULL} selects all vertices.}
+ The default \code{NULL} selects all vertices.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character string, defining the types of the paths used for measuring the distance in directed graphs.
-\dQuote{out} follows paths along the edge directions only, \dQuote{in} traverses the edges in reverse,
+ \dQuote{out} follows paths along the edge directions only, \dQuote{in} traverses the edges in reverse,
 while \dQuote{all} ignores edge directions.
-This argument is ignored for undirected graphs.}
+ This argument is ignored for undirected graphs.}
 
 \item{weights}{Optional positive weight vector for calculating weighted harmonic centrality.
-If the graph has a \code{weight} edge attribute, then this is used by default.
-Weights are used for calculating weighted shortest paths, so they are interpreted as distances.}
+ If the graph has a \code{weight} edge attribute, then this is used by default.
+ Weights are used for calculating weighted shortest paths, so they are interpreted as distances.}
 
 \item{normalized}{Logical, whether to calculate the normalized harmonic centrality.
-If true, the result is the mean inverse path length to other vertices, i.e. it is normalized by the number of vertices minus one.
-If false, the result is the sum of inverse path lengths to other vertices.}
+ If true, the result is the mean inverse path length to other vertices, i.e. it is normalized by the number of vertices minus one.
+ If false, the result is the sum of inverse path lengths to other vertices.}
 
 \item{cutoff}{The maximum path length to consider when calculating the harmonic centrality.
-There is no such limit when the cutoff is negative.
-Note that zero cutoff means that only paths of at most length 0 are considered.}
+ There is no such limit when the cutoff is negative.
+ Note that zero cutoff means that only paths of at most length 0 are considered.}
 }
 \value{
 Numeric vector with the harmonic centrality scores of all the vertices in \code{v}.
 }
 \description{
 The harmonic centrality of a vertex is the mean inverse distance to all other vertices.
-The inverse distance to an unreachable vertex is considered to be zero.
+ The inverse distance to an unreachable vertex is considered to be zero.
 }
 \details{
 The \code{cutoff} argument can be used to restrict the calculation to paths of length \code{cutoff} or smaller only;
 this can be used for larger graphs to speed up the calculation.
-If \code{cutoff} is negative (which is the default), then the function calculates the exact harmonic centrality scores.
+ If \code{cutoff} is negative (which is the default), then the function calculates the exact harmonic centrality scores.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_harmonic_centrality_cutoff}{\code{harmonic_centrality_cutoff()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

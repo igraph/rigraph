@@ -11,11 +11,11 @@ count_triangles(graph, vids = NULL)
 }
 \arguments{
 \item{graph}{The input graph.
-It might be directed, but edge directions are ignored.}
+ It might be directed, but edge directions are ignored.}
 
 \item{vids}{The vertices to query.
-This might be a vector of numeric IDs, or a character vector of symbolic vertex names for named graphs.
-The default \code{NULL} selects all vertices.}
+ This might be a vector of numeric IDs, or a character vector of symbolic vertex names for named graphs.
+ The default \code{NULL} selects all vertices.}
 }
 \value{
 For \code{triangles()} a numeric vector of vertex IDs, the first three vertices belong to the first triangle found, etc.
@@ -27,8 +27,8 @@ Count how many triangles a vertex is part of, in a graph, or just list the trian
 }
 \details{
 \code{triangles()} lists all triangles of a graph.
-For efficiency, all triangles are returned in a single vector.
-The first three vertices belong to the first triangle, etc.
+ For efficiency, all triangles are returned in a single vector.
+ The first three vertices belong to the first triangle, etc.
 
 \code{count_triangles()} counts how many triangles a vertex is part of.
 }

@@ -12,15 +12,15 @@ layout_on_grid(graph, ..., width = 0, height = 0, dim = 2)
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{width}{The number of vertices in a single row of the grid.
-If this is zero or negative, then for 2d layouts the width of the grid will be the square root of the number of vertices in the graph,
+ If this is zero or negative, then for 2d layouts the width of the grid will be the square root of the number of vertices in the graph,
 rounded up to the next integer.
-Similarly, it will be the cube root for 3d layouts.}
+ Similarly, it will be the cube root for 3d layouts.}
 
 \item{height}{The number of vertices in a single column of the grid, for three dimensional layouts.
-If this is zero or negative, then it is determinted automatically.}
+ If this is zero or negative, then it is determinted automatically.}
 
 \item{dim}{Two or three.
-Whether to make 2d or a 3d layout.}
+ Whether to make 2d or a 3d layout.}
 }
 \value{
 A two-column or three-column matrix.
@@ -30,7 +30,7 @@ This layout places vertices on a rectangular grid, in two or three dimensions.
 }
 \details{
 The function places the vertices on a simple rectangular grid, one after the other.
-If you want to change the order of the vertices, then see the \code{\link[=permute]{permute()}} function.
+ If you want to change the order of the vertices, then see the \code{\link[=permute]{permute()}} function.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_grid_3d}{\code{layout_grid_3d()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_grid}{\code{layout_grid()}}
@@ -51,7 +51,7 @@ if (interactive() && requireNamespace("rgl", quietly = TRUE)) {
 }
 \seealso{
 \code{\link[=layout]{layout()}} for other layout generators.
-See \code{\link[=on_grid]{on_grid()}} to build a lazy layout specification for \code{\link[=add_layout_]{add_layout_()}}.
+ See \code{\link[=on_grid]{on_grid()}} to build a lazy layout specification for \code{\link[=add_layout_]{add_layout_()}}.
 
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},

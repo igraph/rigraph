@@ -10,8 +10,8 @@
 \item{x}{A vertex sequence.}
 
 \item{incomparables}{a vector of values that cannot be compared.
-Passed to base function \code{duplicated}.
-See details there.}
+ Passed to base function \code{duplicated}.
+ See details there.}
 
 \item{...}{Passed to base function \code{duplicated()}.}
 }

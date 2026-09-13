@@ -16,9 +16,9 @@ induced.subgraph(
 \item{vids}{Numeric vector, the vertices of the original graph which will form the subgraph.}
 
 \item{impl}{Character scalar, to choose between two implementation of the subgraph calculation.
-\sQuote{\code{copy_and_delete}} copies the graph first, and then deletes the vertices and edges that are not included in the result graph.
-\sQuote{\code{create_from_scratch}} searches for all vertices and edges that must be kept and then uses them to create the graph from scratch.
-\sQuote{\code{auto}} chooses between the two implementations automatically,
+ \sQuote{\code{copy_and_delete}} copies the graph first, and then deletes the vertices and edges that are not included in the result graph.
+ \sQuote{\code{create_from_scratch}} searches for all vertices and edges that must be kept and then uses them to create the graph from scratch.
+ \sQuote{\code{auto}} chooses between the two implementations automatically,
 using heuristics based on the size of the original and the result graph.}
 }
 \description{

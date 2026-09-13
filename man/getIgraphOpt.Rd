@@ -10,7 +10,7 @@ getIgraphOpt(x, default = NULL)
 \item{x}{A character string holding an option name.}
 
 \item{default}{If the specified option is not set in the options list, this value is returned.
-This facilitates retrieving an option and checking whether it is set and setting it separately if not.}
+ This facilitates retrieving an option and checking whether it is set and setting it separately if not.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

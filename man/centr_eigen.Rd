@@ -18,32 +18,32 @@ centr_eigen(
 \item{directed}{Logical, whether to use directed shortest paths for calculating eigenvector centrality.}
 
 \item{scale}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Ignored.
-Computing eigenvector centralization requires normalized eigenvector centrality scores.}
+ Computing eigenvector centralization requires normalized eigenvector centrality scores.}
 
 \item{options}{This is passed to \code{\link[=eigen_centrality]{eigen_centrality()}}, the options for the ARPACK eigensolver.}
 
 \item{normalized}{Logical.
-Whether to normalize the graph level centrality score by dividing by the theoretical maximum.}
+ Whether to normalize the graph level centrality score by dividing by the theoretical maximum.}
 }
 \value{
 A named list with the following components:
 \describe{
 \item{vector}{
 The node-level centrality scores.
-}
+ }
 \item{value}{
 The corresponding eigenvalue.
-}
+ }
 \item{options}{
 ARPACK options, see the return value of \code{\link[=eigen_centrality]{eigen_centrality()}} for details.
-}
+ }
 \item{centralization}{
 The graph level centrality index.
-}
+ }
 \item{theoretical_max}{
 The same as above, the theoretical maximum centralization score
 for a graph with the same number of vertices.
-}
+ }
 }
 }
 \description{

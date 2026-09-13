@@ -8,15 +8,15 @@ stMincuts(graph, source, target, capacity = NULL)
 }
 \arguments{
 \item{graph}{The input graph.
-It must be directed.}
+ It must be directed.}
 
 \item{source}{The ID of the source vertex.}
 
 \item{target}{The ID of the target vertex.}
 
 \item{capacity}{Numeric vector giving the edge capacities.
-If this is \code{NULL} and the graph has a \code{weight} edge attribute, then this attribute defines the edge capacities.
-For forcing unit edge capacities, even for graphs that have a \code{weight} edge attribute, supply \code{NA} here.}
+ If this is \code{NULL} and the graph has a \code{weight} edge attribute, then this attribute defines the edge capacities.
+ For forcing unit edge capacities, even for graphs that have a \code{weight} edge attribute, supply \code{NA} here.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

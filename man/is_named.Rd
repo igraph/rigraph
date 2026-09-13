@@ -17,9 +17,9 @@ An igraph graph is named, if there is a symbolic name associated with its vertic
 }
 \details{
 In igraph vertices can always be identified and specified via their numeric vertex IDs.
-This is, however, not always convenient, and in many cases there exist symbolic IDs that correspond to the vertices.
-To allow this more flexible identification of vertices, one can assign a vertex attribute called \sQuote{name} to an igraph graph.
-After doing this, the symbolic vertex names can be used in all igraph functions, instead of the numeric IDs.
+ This is, however, not always convenient, and in many cases there exist symbolic IDs that correspond to the vertices.
+ To allow this more flexible identification of vertices, one can assign a vertex attribute called \sQuote{name} to an igraph graph.
+ After doing this, the symbolic vertex names can be used in all igraph functions, instead of the numeric IDs.
 
 Note that the uniqueness of vertex names are currently not enforced in igraph, you have to check that for yourself,
 when assigning the vertex names.

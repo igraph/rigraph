@@ -27,7 +27,7 @@ A circulant graph \eqn{C_n^{\textrm{shifts}}} consists of \eqn{n} vertices \eqn{
 }
 \details{
 The function can generate either directed or undirected graphs.
-It does not generate multi-edges or self-loops.
+ It does not generate multi-edges or self-loops.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_circulant}{\code{circulant()}}

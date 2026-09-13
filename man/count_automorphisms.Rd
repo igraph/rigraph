@@ -16,14 +16,14 @@ count_automorphisms(
 
 \item{colors}{The colors of the individual vertices of the graph;
 only vertices having the same color are allowed to match each other in an automorphism.
-When omitted, igraph uses the \code{color} attribute of the vertices, or, if there is no such vertex attribute,
+ When omitted, igraph uses the \code{color} attribute of the vertices, or, if there is no such vertex attribute,
 it simply assumes that all vertices have the same color.
-Pass NULL explicitly if the graph has a \code{color} vertex attribute but you do not want to use it.}
+ Pass NULL explicitly if the graph has a \code{color} vertex attribute but you do not want to use it.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{sh}{The splitting heuristics for the BLISS algorithm.
-Possible values are: \sQuote{\code{f}}:
+ Possible values are: \sQuote{\code{f}}:
 first non-singleton cell,
 \sQuote{\code{fl}}:
 first largest non-singleton cell,
@@ -43,23 +43,23 @@ A named list with the following members:
 \describe{
 \item{group_size}{
 The size of the automorphism group of the input graph, as a string.
-This number is exact if igraph was compiled with the GMP library, and approximate otherwise.
-}
+ This number is exact if igraph was compiled with the GMP library, and approximate otherwise.
+ }
 \item{nof_nodes}{
 The number of nodes in the search tree.
-}
+ }
 \item{nof_leaf_nodes}{
 The number of leaf nodes in the search tree.
-}
+ }
 \item{nof_bad_nodes}{
 Number of bad nodes.
-}
+ }
 \item{nof_canupdates}{
 Number of canrep updates.
-}
+ }
 \item{max_level}{
 Maximum level.
-}
+ }
 }
 }
 \description{
@@ -69,8 +69,8 @@ Calculate the number of automorphisms of a graph, i.e. the number of isomorphism
 An automorphism of a graph is a permutation of its vertices which brings the graph into itself.
 
 This function calculates the number of automorphism of a graph using the BLISS algorithm.
-See also the BLISS homepage at \url{http://www.tcs.hut.fi/Software/bliss/index.html}.
-If you need the automorphisms themselves, use \code{\link[=automorphism_group]{automorphism_group()}} to obtain a compact representation of the automorphism group.
+ See also the BLISS homepage at \url{http://www.tcs.hut.fi/Software/bliss/index.html}.
+ If you need the automorphisms themselves, use \code{\link[=automorphism_group]{automorphism_group()}} to obtain a compact representation of the automorphism group.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_count_automorphisms}{\code{count_automorphisms()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

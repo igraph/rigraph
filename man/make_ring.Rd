@@ -17,10 +17,10 @@ ring(n, ..., directed = FALSE, mutual = FALSE, circular = TRUE)
 \item{directed}{Whether the graph is directed.}
 
 \item{mutual}{Whether directed edges are mutual.
-It is ignored in undirected graphs.}
+ It is ignored in undirected graphs.}
 
 \item{circular}{Whether to create a circular ring.
-A non-circular ring is essentially a \dQuote{line}: a tree where every non-leaf vertex has one child.}
+ A non-circular ring is essentially a \dQuote{line}: a tree where every non-leaf vertex has one child.}
 }
 \value{
 An igraph graph.

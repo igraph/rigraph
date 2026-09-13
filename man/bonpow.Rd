@@ -18,12 +18,12 @@ bonpow(
 \item{graph}{the input graph.}
 
 \item{nodes}{vertex sequence indicating which vertices are to be included in the calculation.
-The default \code{NULL} selects all vertices.}
+ The default \code{NULL} selects all vertices.}
 
 \item{loops}{Logical indicating whether or not the diagonal should be treated as valid data.
-Set this true if and only
+ Set this true if and only
 if the data can contain loops.
-\code{loops} is \code{FALSE} by default.}
+ \code{loops} is \code{FALSE} by default.}
 
 \item{exponent}{exponent (decay rate) for the Bonacich power centrality score; can be negative}
 
@@ -32,7 +32,7 @@ if the data can contain loops.
 \item{tol}{tolerance for near-singularities during matrix inversion (see \code{\link[Matrix:solve]{Matrix::solve()}})}
 
 \item{sparse}{Logical, whether to use sparse matrices for the calculation.
-The \sQuote{Matrix} package is required for sparse matrix support}
+ The \sQuote{Matrix} package is required for sparse matrix support}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

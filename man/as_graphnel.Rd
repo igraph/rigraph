@@ -14,13 +14,13 @@ as_graphnel(graph)
 }
 \description{
 The graphNEL class is defined in the \code{graph} package, it is another way to represent graphs.
-These functions are provided to convert between the igraph and the graphNEL objects.
+ These functions are provided to convert between the igraph and the graphNEL objects.
 }
 \details{
 \code{as_graphnel()} converts an igraph graph to a graphNEL graph.
-It converts all graph/vertex/edge attributes.
-If the igraph graph has a vertex attribute \sQuote{\code{name}}, then it will be used to assign vertex names in the graphNEL graph.
-Otherwise numeric igraph vertex IDs will be used for this purpose.
+ It converts all graph/vertex/edge attributes.
+ If the igraph graph has a vertex attribute \sQuote{\code{name}}, then it will be used to assign vertex names in the graphNEL graph.
+ Otherwise numeric igraph vertex IDs will be used for this purpose.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist}{\code{get_edgelist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_has_multiple}{\code{has_multiple()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

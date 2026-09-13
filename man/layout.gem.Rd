@@ -15,25 +15,25 @@ layout.gem(
 }
 \arguments{
 \item{graph}{The input graph.
-Edge directions are ignored.}
+ Edge directions are ignored.}
 
 \item{coords}{Starting coordinates in a two or three column matrix,
 depending on the \code{dim} argument.
-Default: \code{NULL}.}
+ Default: \code{NULL}.}
 
 \item{maxiter}{The maximum number of iterations to perform.
-Updating a single vertex counts as an iteration.
-The default \code{NULL} uses 40 * n * n, where n is the number of vertices.
-The original paper suggests 4 * n * n, but this usually only works if the other parameters are set up carefully.}
+ Updating a single vertex counts as an iteration.
+ The default \code{NULL} uses 40 * n * n, where n is the number of vertices.
+ The original paper suggests 4 * n * n, but this usually only works if the other parameters are set up carefully.}
 
 \item{temp.max}{The maximum allowed local temperature.
-The default \code{NULL} uses the number of vertices.}
+ The default \code{NULL} uses the number of vertices.}
 
 \item{temp.min}{The global temperature at which the algorithm terminates (even before reaching \code{maxiter} iterations).
-A reasonable default is 1/10.}
+ A reasonable default is 1/10.}
 
 \item{temp.init}{Initial local temperature of all vertices.
-The default \code{NULL} uses the square root of the number of vertices.}
+ The default \code{NULL} uses the square root of the number of vertices.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

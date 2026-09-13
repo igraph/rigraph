@@ -8,16 +8,16 @@ diversity(graph, ..., weights = NULL, vids = NULL)
 }
 \arguments{
 \item{graph}{The input graph.
-Edge directions are ignored.}
+ Edge directions are ignored.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{\code{NULL}, or the vector of edge weights to use for the computation.
-If \code{NULL}, then the \sQuote{weight} attibute is used.
-Note that this measure is not defined for unweighted graphs.}
+ If \code{NULL}, then the \sQuote{weight} attibute is used.
+ Note that this measure is not defined for unweighted graphs.}
 
 \item{vids}{The vertex IDs for which to calculate the measure.
-The default \code{NULL} selects all vertices.}
+ The default \code{NULL} selects all vertices.}
 }
 \value{
 A numeric vector, its length is the number of vertices.

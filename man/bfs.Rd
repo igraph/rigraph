@@ -28,24 +28,24 @@ bfs(
 \item{graph}{The input graph.}
 
 \item{root}{Numeric vector, usually of length one.
-The root vertex, or root vertices to start the search from.
-When several roots are given, they are considered in the order they appear.
-If a root vertex was already reached while searching from an earlier root, no separate search is started from it,
+ The root vertex, or root vertices to start the search from.
+ When several roots are given, they are considered in the order they appear.
+ If a root vertex was already reached while searching from an earlier root, no separate search is started from it,
 so it keeps the distance it was first found at rather than \code{0}.}
 
 \item{mode}{For directed graphs specifies the type of edges to follow.
-\sQuote{out} follows outgoing, \sQuote{in} incoming edges.
-\sQuote{all} ignores edge directions completely.
-\sQuote{total} is a synonym for \sQuote{all}.
-This argument is ignored for undirected graphs.}
+ \sQuote{out} follows outgoing, \sQuote{in} incoming edges.
+ \sQuote{all} ignores edge directions completely.
+ \sQuote{total} is a synonym for \sQuote{all}.
+ This argument is ignored for undirected graphs.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{unreachable}{Logical, whether the search should visit the vertices that are unreachable from the given root vertex (or vertices).
-If \code{TRUE}, then additional searches are performed until all vertices are visited.}
+ If \code{TRUE}, then additional searches are performed until all vertices are visited.}
 
 \item{restricted}{\code{NULL} (=no restriction), or a vector of vertices (IDs or symbolic names).
-In the latter case, the search is restricted to the given vertices.}
+ In the latter case, the search is restricted to the given vertices.}
 
 \item{order}{Logical, whether to return the ordering of the vertices.}
 
@@ -60,15 +60,15 @@ In the latter case, the search is restricted to the given vertices.}
 \item{dist}{Logical, whether to return the distance from the root of the search tree.}
 
 \item{callback}{Callback function.
-This is called whenever a vertex is visited.
-The callback function should return \code{FALSE} to continue the search or \code{TRUE} to stop it.
-See details below.
-Default: \code{NULL}.}
+ This is called whenever a vertex is visited.
+ The callback function should return \code{FALSE} to continue the search or \code{TRUE} to stop it.
+ See details below.
+ Default: \code{NULL}.}
 
 \item{extra}{Additional argument to supply to the callback function.}
 
 \item{rho}{The environment in which the callback function is evaluated.
-The default \code{NULL} uses the caller's environment.}
+ The default \code{NULL} uses the caller's environment.}
 
 \item{neimode}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This argument is deprecated from igraph 1.3.0; use \code{mode} instead.}
 
@@ -79,42 +79,42 @@ A named list with the following entries:
 \describe{
 \item{root}{
 Numeric vector.
-The root vertex (or vertices) that was used as the starting point of the search, as supplied in the \code{root} argument.
-}
+ The root vertex (or vertices) that was used as the starting point of the search, as supplied in the \code{root} argument.
+ }
 \item{neimode}{
 Character scalar. The \code{mode} argument of the function call.
-Note that for undirected graphs this is always \sQuote{all}, irrespectively of the supplied value.
-}
+ Note that for undirected graphs this is always \sQuote{all}, irrespectively of the supplied value.
+ }
 \item{order}{
 The vertex IDs, in the order in which they were visited by the search.
-A vertex sequence (\code{igraph.vs}), or a numeric vector if the
+ A vertex sequence (\code{igraph.vs}), or a numeric vector if the
 \code{return.vs.es} option (see \code{\link[=igraph_options]{igraph_options()}}) is \code{FALSE}.
-}
+ }
 \item{rank}{
 Numeric vector. The rank for each vertex, zero for unreachable vertices.
-}
+ }
 \item{parent}{
 The parent of each vertex, i.e. the vertex it was discovered from.
-A vertex sequence (\code{igraph.vs}), or a numeric vector if the
+ A vertex sequence (\code{igraph.vs}), or a numeric vector if the
 \code{return.vs.es} option is \code{FALSE}.
-}
+ }
 \item{father}{
 Like parent, kept for compatibility for now.
-}
+ }
 \item{pred}{
 The previously visited vertex for each vertex, or 0 if there was no such vertex.
-A vertex sequence (\code{igraph.vs}), or a numeric vector if the
+ A vertex sequence (\code{igraph.vs}), or a numeric vector if the
 \code{return.vs.es} option is \code{FALSE}.
-}
+ }
 \item{succ}{
 The next vertex that was visited after the current one, or 0 if there was no such vertex.
-A vertex sequence (\code{igraph.vs}), or a numeric vector if the
+ A vertex sequence (\code{igraph.vs}), or a numeric vector if the
 \code{return.vs.es} option is \code{FALSE}.
-}
+ }
 \item{dist}{
 Numeric vector, for each vertex its distance from the root of the search tree.
-Unreachable vertices have a negative distance as of igraph 1.6.0, this used to be \code{NaN}.
-}
+ Unreachable vertices have a negative distance as of igraph 1.6.0, this used to be \code{NaN}.
+ }
 }
 
 Note that \code{order}, \code{rank}, \code{parent}, \code{pred}, \code{succ} and \code{dist} might be \code{NULL} if their corresponding argument is \code{FALSE},
@@ -122,14 +122,14 @@ i.e. if their calculation is not requested.
 }
 \description{
 Breadth-first search is an algorithm to traverse a graph.
-We start from a root vertex and spread along every edge \dQuote{simultaneously}.
+ We start from a root vertex and spread along every edge \dQuote{simultaneously}.
 }
 \details{
 The callback function must have the following arguments:
 \describe{
 \item{graph}{
 The input graph is passed to the callback function here.
-}
+ }
 \item{data}{
 A named numeric vector, with the following entries:
 \sQuote{vid}, the vertex that was just visited,
@@ -137,14 +137,14 @@ A named numeric vector, with the following entries:
 \sQuote{succ}, its successor (zero if this is the last vertex),
 \sQuote{rank}, the rank of the current vertex,
 \sQuote{dist}, its distance from the root of the search tree.
-}
+ }
 \item{extra}{
 The extra argument.
-}
+ }
 }
 
 The callback must return \code{FALSE} to continue the search or \code{TRUE} to terminate it.
-See examples below on how to use the callback function.
+ See examples below on how to use the callback function.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

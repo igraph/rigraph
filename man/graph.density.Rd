@@ -10,8 +10,8 @@ graph.density(graph, loops = FALSE)
 \item{graph}{The input graph.}
 
 \item{loops}{Logical, whether loop edges may exist in the graph.
-This affects the calculation of the largest possible number of edges in the graph.
-If this parameter is set to FALSE yet the graph contains self-loops, the result will not be meaningful.}
+ This affects the calculation of the largest possible number of edges in the graph.
+ If this parameter is set to FALSE yet the graph contains self-loops, the result will not be meaningful.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

@@ -10,10 +10,10 @@ layout.star(graph, center = V(graph)[1], order = NULL)
 \item{graph}{The graph to layout.}
 
 \item{center}{The ID of the vertex to put in the center.
-The default \code{NULL} uses the first vertex.}
+ The default \code{NULL} uses the first vertex.}
 
 \item{order}{Numeric vector, the order of the vertices along the perimeter.
-The default ordering is given by the vertex IDs.}
+ The default ordering is given by the vertex IDs.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

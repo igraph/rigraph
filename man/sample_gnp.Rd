@@ -25,12 +25,12 @@ A graph object.
 }
 \description{
 Every possible edge is created independently with the same probability \code{p}.
-This model is also referred to as a Bernoulli random graph since the connectivity status of vertex pairs follows a Bernoulli distribution.
+ This model is also referred to as a Bernoulli random graph since the connectivity status of vertex pairs follows a Bernoulli distribution.
 }
 \details{
 The graph has \code{n} vertices and each pair of vertices is connected with the same probability \code{p}.
-The \code{loops} parameter controls whether self-connections are also considered.
-This model effectively constrains the average number of edges, \eqn{p m_\text{max}},
+ The \code{loops} parameter controls whether self-connections are also considered.
+ This model effectively constrains the average number of edges, \eqn{p m_\text{max}},
 where \eqn{m_\text{max}} is the largest possible number of edges,
 which depends on whether the graph is directed or undirected and whether self-loops are allowed.
 }

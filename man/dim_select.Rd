@@ -19,14 +19,14 @@ Select the number of significant singular values, by finding the \sQuote{elbow} 
 The input of the function is a numeric vector which contains the measure of \sQuote{importance} for each dimension.
 
 For spectral embedding, these are the singular values of the adjacency matrix.
-The singular values are assumed to be generated from a Gaussian mixture distribution with two components that have different means and same variance.
-The dimensionality \eqn{d} is chosen to maximize the likelihood
+ The singular values are assumed to be generated from a Gaussian mixture distribution with two components that have different means and same variance.
+ The dimensionality \eqn{d} is chosen to maximize the likelihood
 when the \eqn{d} largest singular values are assigned to one component of the mixture and the rest of the singular values assigned to the other component.
 
 This function can also be used for the general separation problem,
 where we assume that the left and the right of the vector are coming from two Normal distributions, with different means,
 and we want to know their border.
-See examples below.
+ See examples below.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Embedding.html#igraph_dim_select}{\code{dim_select()}}

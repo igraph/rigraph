@@ -8,34 +8,34 @@ fit_hrg(graph, hrg = NULL, ..., start = FALSE, steps = 0)
 }
 \arguments{
 \item{graph}{The graph to fit the model to.
-Edge directions are ignored in directed graphs.}
+ Edge directions are ignored in directed graphs.}
 
 \item{hrg}{A hierarchical random graph model, in the form of an \code{igraphHRG} object.
-\code{fit_hrg()} allows this to be \code{NULL}, in which case a random starting point is used for the fitting.}
+ \code{fit_hrg()} allows this to be \code{NULL}, in which case a random starting point is used for the fitting.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{start}{Logical, whether to start the fitting/sampling from the supplied \code{igraphHRG} object, or from a random starting point.}
 
 \item{steps}{The number of MCMC steps to make.
-If this is zero, then the MCMC procedure is performed until convergence.}
+ If this is zero, then the MCMC procedure is performed until convergence.}
 }
 \value{
 \code{fit_hrg()} returns an \code{igraphHRG} object.
-This is a list with the following members:
+ This is a list with the following members:
 \describe{
 \item{left}{
 Vector that contains the left children of the internal tree vertices.
-The first vertex is always the root vertex,
+ The first vertex is always the root vertex,
 so the first element of the vector is the left child of the root vertex.
-Internal vertices are denoted with negative numbers,
+ Internal vertices are denoted with negative numbers,
 starting from -1 and going down, i.e. the root vertex is -1.
-Leaf vertices are denoted by non-negative number, starting from zero and up.
-}
+ Leaf vertices are denoted by non-negative number, starting from zero and up.
+ }
 \item{right}{
 Vector that contains the right children of the vertices,
 with the same encoding as the \code{left} vector.
-}
+ }
 \item{prob}{
 The connection probabilities attached to the internal vertices,
 the first number belongs to the root vertex (i.e. internal vertex -1),
@@ -43,18 +43,18 @@ the second to internal vertex -2, etc.
 }
 \item{edges}{
 The number of edges in the subtree below the given internal vertex.
-}
+ }
 \item{vertices}{
 The number of vertices in the subtree below the given internal vertex, including itself.
-}
+ }
 }
 }
 \description{
 \code{fit_hrg()} fits a HRG to a given graph.
-It takes the specified \code{steps} number of MCMC steps to perform the fitting,
+ It takes the specified \code{steps} number of MCMC steps to perform the fitting,
 or a convergence criteria if the specified number of steps is zero.
-\code{fit_hrg()} can start from a given HRG, if this is given in the \code{hrg()} argument and the \code{start} argument is \code{TRUE}.
-It can be converted to the \code{hclust} class using \code{as.hclust()} provided in this package.
+ \code{fit_hrg()} can start from a given HRG, if this is given in the \code{hrg()} argument and the \code{start} argument is \code{TRUE}.
+ It can be converted to the \code{hclust} class using \code{as.hclust()} provided in this package.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_fit}{\code{hrg_fit()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

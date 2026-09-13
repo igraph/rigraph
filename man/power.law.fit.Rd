@@ -15,32 +15,32 @@ power.law.fit(
 }
 \arguments{
 \item{x}{The data to fit, a numeric vector.
-For implementation \sQuote{\code{R.mle}} the data must be integer values.
-For the \sQuote{\code{plfit}} implementation non-integer values might be present and then a continuous power-law distribution is fitted.}
+ For implementation \sQuote{\code{R.mle}} the data must be integer values.
+ For the \sQuote{\code{plfit}} implementation non-integer values might be present and then a continuous power-law distribution is fitted.}
 
 \item{xmin}{Numeric scalar, or \code{NULL}.
-The lower bound for fitting the power-law.
-If \code{NULL}, the smallest value in \code{x} will be used for the \sQuote{\code{R.mle}} implementation,
+ The lower bound for fitting the power-law.
+ If \code{NULL}, the smallest value in \code{x} will be used for the \sQuote{\code{R.mle}} implementation,
 and its value will be automatically determined for the \sQuote{\code{plfit}} implementation.
-This argument makes it possible to fit only the tail of the distribution.}
+ This argument makes it possible to fit only the tail of the distribution.}
 
 \item{start}{Numeric scalar.
-The initial value of the exponent for the minimizing function, for the \sQuote{\code{R.mle}} implementation.
-Usually it is safe to leave this untouched.}
+ The initial value of the exponent for the minimizing function, for the \sQuote{\code{R.mle}} implementation.
+ Usually it is safe to leave this untouched.}
 
 \item{force.continuous}{Logical.
-Whether to force a continuous distribution for the \sQuote{\code{plfit}} implementation,
+ Whether to force a continuous distribution for the \sQuote{\code{plfit}} implementation,
 even if the sample vector contains integer values only (by chance).
-If this argument is false,
+ If this argument is false,
 igraph will assume a continuous distribution if at least one sample is non-integer and assume a discrete distribution otherwise.}
 
 \item{implementation}{Character scalar.
-Which implementation to use.
-See details below.}
+ Which implementation to use.
+ See details below.}
 
 \item{...}{Additional arguments, passed to the maximum likelihood optimizing function, \code{\link[stats4:mle]{stats4::mle()}},
 if the \sQuote{\code{R.mle}} implementation is chosen.
-It is ignored by the \sQuote{\code{plfit}} implementation.}
+ It is ignored by the \sQuote{\code{plfit}} implementation.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

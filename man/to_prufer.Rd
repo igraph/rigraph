@@ -17,9 +17,9 @@ The Prüfer sequence of the graph, represented as a numeric vector of vertex IDs
 }
 \details{
 The Prüfer sequence of a tree graph with n labeled vertices is a sequence of n-2 numbers, constructed as follows.
-If the graph has more than two vertices, find a vertex with degree one,
+ If the graph has more than two vertices, find a vertex with degree one,
 remove it from the tree and add the label of the vertex that it was connected to to the sequence.
-Repeat until there are only two vertices in the remaining graph.
+ Repeat until there are only two vertices in the remaining graph.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_to_prufer}{\code{to_prufer()}}

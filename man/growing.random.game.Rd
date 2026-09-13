@@ -14,7 +14,7 @@ growing.random.game(n, m = 1, directed = TRUE, citation = FALSE)
 \item{directed}{Logical, whether to create a directed graph.}
 
 \item{citation}{Logical.
-If \code{TRUE} a citation graph is created, i.e. in each time step the added edges are originating from the new vertex.}
+ If \code{TRUE} a citation graph is created, i.e. in each time step the added edges are originating from the new vertex.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

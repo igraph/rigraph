@@ -18,39 +18,39 @@
 \item{\dots}{Graph objects or lists of graph objects.}
 
 \item{byname}{A Logical, or the character scalar \code{auto}.
-Whether to perform the operation based on symbolic vertex names.
-If it is \code{auto}, that means \code{TRUE} if all graphs are named and \code{FALSE} otherwise.
-A warning is generated if \code{auto} and some (but not all) graphs are named.}
+ Whether to perform the operation based on symbolic vertex names.
+ If it is \code{auto}, that means \code{TRUE} if all graphs are named and \code{FALSE} otherwise.
+ A warning is generated if \code{auto} and some (but not all) graphs are named.}
 
 \item{keep.all.vertices}{Logical, whether to keep vertices that only appear in a subset of the input graphs.}
 
 \item{graph.attr.comb, vertex.attr.comb, edge.attr.comb}{Specification for combining clashing graph, vertex and edge attributes.
-\code{vertex.attr.comb} and \code{edge.attr.comb} default to \code{"rename"};
+ \code{vertex.attr.comb} and \code{edge.attr.comb} default to \code{"rename"};
 \code{graph.attr.comb} defaults to the \code{graph.attr.comb} igraph option (\code{"rename"} unless changed via \code{\link[=igraph_options]{igraph_options()}}).
-See \link{igraph-attribute-combination} for the available combiners.}
+ See \link{igraph-attribute-combination} for the available combiners.}
 }
 \value{
 A new graph object.
 }
 \description{
 The intersection of two or more graphs are created.
-The graphs may have identical or overlapping vertex sets.
+ The graphs may have identical or overlapping vertex sets.
 }
 \details{
 \code{intersection()} creates the intersection of two or more graphs: only edges present in all graphs will be included.
-The corresponding operator is \verb{\%s\%}.
+ The corresponding operator is \verb{\%s\%}.
 
 If the \code{byname} argument is \code{TRUE} (or \code{auto} and all graphs are named),
 then the operation is performed on symbolic vertex names instead of the internal numeric vertex IDs.
 
 \code{intersection()} keeps the attributes of all graphs.
-All graph, vertex and edge attributes are copied to the result.
-By default, if an attribute is present in multiple graphs and would result in a name clash, that attribute is renamed by adding suffixes:
+ All graph, vertex and edge attributes are copied to the result.
+ By default, if an attribute is present in multiple graphs and would result in a name clash, that attribute is renamed by adding suffixes:
 \verb{_1}, \verb{_2}, etc. Pass \code{graph.attr.comb}, \code{vertex.attr.comb} or \code{edge.attr.comb} to combine clashing attributes instead;
 see \link{igraph-attribute-combination} for the available combiners.
 
 The \code{name} vertex attribute is treated specially if the operation is performed based on symbolic vertex names.
-In this case \code{name} must be present in all graphs, and it is not renamed in the result graph.
+ In this case \code{name} must be present in all graphs, and it is not renamed in the result graph.
 
 An error is generated if some input graphs are directed and others are undirected.
 }

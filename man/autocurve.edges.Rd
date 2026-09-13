@@ -10,7 +10,7 @@ autocurve.edges(graph, start = 0.5)
 \item{graph}{The input graph.}
 
 \item{start}{The curvature at the two extreme edges.
-All edges will have a curvature between \code{-start} and \code{start}, spaced equally.}
+ All edges will have a curvature between \code{-start} and \code{start}, spaced equally.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

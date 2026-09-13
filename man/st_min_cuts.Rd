@@ -8,7 +8,7 @@ st_min_cuts(graph, source, target, ..., capacity = NULL)
 }
 \arguments{
 \item{graph}{The input graph.
-It must be directed.}
+ It must be directed.}
 
 \item{source}{The ID of the source vertex.}
 
@@ -17,25 +17,25 @@ It must be directed.}
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{capacity}{Numeric vector giving the edge capacities.
-If this is \code{NULL} and the graph has a \code{weight} edge attribute, then this attribute defines the edge capacities.
-For forcing unit edge capacities, even for graphs that have a \code{weight} edge attribute, supply \code{NA} here.}
+ If this is \code{NULL} and the graph has a \code{weight} edge attribute, then this attribute defines the edge capacities.
+ For forcing unit edge capacities, even for graphs that have a \code{weight} edge attribute, supply \code{NA} here.}
 }
 \value{
 A list with entries:
 \describe{
 \item{value}{
 Numeric scalar, the size of the minimum cut(s).
-}
+ }
 \item{cuts}{
 A list of numeric vectors containing edge IDs. Each vector is a minimum \eqn{(s,t)}-cut.
-}
+ }
 \item{partition1s}{
 A list of numeric vectors containing vertex IDs,
 they correspond to the edge cuts.
-Each vertex set is a generator of the corresponding cut, i.e. in the graph \eqn{G=(V,E)},
+ Each vertex set is a generator of the corresponding cut, i.e. in the graph \eqn{G=(V,E)},
 the vertex set \eqn{X} and its complementer \eqn{V-X},
 generates the cut that contains exactly the edges that go from \eqn{X} to \eqn{V-X}.
-}
+ }
 }
 }
 \description{
@@ -46,7 +46,7 @@ Given a \eqn{G} directed graph and two, different and non-ajacent vertices, \eqn
 such that after removing these edges from \eqn{G} there is no directed path from \eqn{s} to \eqn{t}.
 
 The size of an \eqn{(s,t)}-cut is defined as the sum of the capacities (or weights) in the cut.
-For unweighted (=equally weighted) graphs, this is simply the number of edges.
+ For unweighted (=equally weighted) graphs, this is simply the number of edges.
 
 An \eqn{(s,t)}-cut is minimum if it is of the smallest possible size.
 }

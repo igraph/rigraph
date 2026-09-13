@@ -18,54 +18,54 @@ transitivity(
 \item{graph}{The graph to analyze.}
 
 \item{type}{The type of the transitivity to calculate.
-Possible values:
+ Possible values:
 \describe{
 \item{"global"}{
 The global transitivity of an undirected graph.
-This is simply the ratio of the count of triangles and connected triples in the graph.
-In directed graphs, edge directions are ignored.
-}
+ This is simply the ratio of the count of triangles and connected triples in the graph.
+ In directed graphs, edge directions are ignored.
+ }
 \item{"local"}{
 The local transitivity of an undirected graph.
-It is calculated for each vertex given in the \code{vids} argument.
-The local transitivity of a vertex is the ratio of the count of triangles connected to the vertex
+ It is calculated for each vertex given in the \code{vids} argument.
+ The local transitivity of a vertex is the ratio of the count of triangles connected to the vertex
 and the triples centered on the vertex.
-In directed graphs, edge directions are ignored.
-}
+ In directed graphs, edge directions are ignored.
+ }
 \item{"undirected"}{
 This is the same as \code{global}.
-}
+ }
 \item{"globalundirected"}{
 This is the same as \code{global}.
-}
+ }
 \item{"localundirected"}{
 This is the same as \code{local}.
-}
+ }
 \item{"barrat"}{
 The weighted transitivity as defined by A. Barrat. See details below.
-}
+ }
 \item{"weighted"}{
 The same as \code{barrat}.
-}
+ }
 }}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{vids}{The vertex IDs for the local transitivity will be calculated.
-This will be ignored for global transitivity types.
-The default value is \code{NULL}, in this case all vertices are considered.
-It is slightly faster to supply \code{NULL} here than \code{V(graph)}.}
+ This will be ignored for global transitivity types.
+ The default value is \code{NULL}, in this case all vertices are considered.
+ It is slightly faster to supply \code{NULL} here than \code{V(graph)}.}
 
 \item{weights}{Optional weights for weighted transitivity.
-It is ignored for other transitivity measures.
-If it is \code{NULL} (the default) and the graph has a \code{weight} edge attribute, then it is used automatically.}
+ It is ignored for other transitivity measures.
+ If it is \code{NULL} (the default) and the graph has a \code{weight} edge attribute, then it is used automatically.}
 
 \item{isolates}{Character scalar, for local versions of transitivity, it defines how to treat vertices with degree zero and one.
-If it is \sQuote{\code{NaN}} then their local transitivity is reported as \code{NaN} and they are not included in the averaging,
+ If it is \sQuote{\code{NaN}} then their local transitivity is reported as \code{NaN} and they are not included in the averaging,
 for the transitivity types that calculate an average.
-If there are no vertices with degree two or higher, then the averaging will still result \code{NaN}.
-If it is \sQuote{\code{zero}}, then we report 0 transitivity for them, and they are included in the averaging, if an average is calculated.
-For the global transitivity, it controls how to handle graphs with no connected triplets:
+ If there are no vertices with degree two or higher, then the averaging will still result \code{NaN}.
+ If it is \sQuote{\code{zero}}, then we report 0 transitivity for them, and they are included in the averaging, if an average is calculated.
+ For the global transitivity, it controls how to handle graphs with no connected triplets:
 \code{NaN} or zero will be returned according to the respective setting.}
 }
 \value{
@@ -75,7 +75,7 @@ For \sQuote{\code{local}} a vector of transitivity scores, one for each vertex i
 }
 \description{
 Transitivity measures the probability that the adjacent vertices of a vertex are connected.
-This is sometimes also called the clustering coefficient.
+ This is sometimes also called the clustering coefficient.
 }
 \details{
 Note that there are essentially two classes of transitivity measures, one is a vertex-level, the other a graph level property.
@@ -92,7 +92,7 @@ weighted C_i = 1/s_i 1/(k_i-1) sum( (w_ij+w_ih)/2 a_ij a_ih a_jh, j, h)}
 This formula gives back the normal not-weighted local transitivity if all the edge weights are the same.
 
 The \code{barrat} type of transitivity does not work for graphs with multiple and/or loop edges.
-If you want to calculate it for a directed graph, call \code{\link[=as_undirected]{as_undirected()}} with the \code{collapse} mode first.
+ If you want to calculate it for a directed graph, call \code{\link[=as_undirected]{as_undirected()}} with the \code{collapse} mode first.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_avglocal_undirected}{\code{transitivity_avglocal_undirected()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_barrat}{\code{transitivity_barrat()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_local_undirected}{\code{transitivity_local_undirected()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_undirected}{\code{transitivity_undirected()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
@@ -127,7 +127,7 @@ Analysis: Methods and Applications.} Cambridge: Cambridge University Press.
 
 Alain Barrat, Marc Barthelemy, Romualdo Pastor-Satorras, Alessandro
 Vespignani: The architecture of complex weighted networks, Proc. Natl. Acad.
-Sci. USA 101, 3747 (2004)
+ Sci. USA 101, 3747 (2004)
 }
 \seealso{
 Other structural.properties:

@@ -12,33 +12,33 @@ hits_scores(graph, ..., scale = TRUE, weights = NULL, options = NULL)
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{scale}{Logical, whether to scale the result to have a maximum score of one.
-If no scaling is used then the result vector has unit length in the Euclidean norm.}
+ If no scaling is used then the result vector has unit length in the Euclidean norm.}
 
 \item{weights}{Optional positive weight vector for calculating weighted scores.
-If the graph has a \code{weight} edge attribute, then this is used by default.
-Pass \code{NA} to ignore the weight attribute.
-This function interprets edge weights as connection strengths.
-The weights of parallel edges are effectively added up.}
+ If the graph has a \code{weight} edge attribute, then this is used by default.
+ Pass \code{NA} to ignore the weight attribute.
+ This function interprets edge weights as connection strengths.
+ The weights of parallel edges are effectively added up.}
 
 \item{options}{A named list, to override some ARPACK options.
-See \code{\link[=arpack]{arpack()}} for details.
-The default \code{NULL} uses \code{\link[=arpack_defaults]{arpack_defaults()}}.}
+ See \code{\link[=arpack]{arpack()}} for details.
+ The default \code{NULL} uses \code{\link[=arpack_defaults]{arpack_defaults()}}.}
 }
 \value{
 A named list with members:
 \describe{
 \item{hub}{
 The hub score of the vertices.
-}
+ }
 \item{authority}{
 The authority score of the vertices.
-}
+ }
 \item{value}{
 The corresponding eigenvalue of the calculated principal eigenvector.
-}
+ }
 \item{options}{
 Some information about the ARPACK computation, it has the same members as the \code{options} member returned by \code{\link[=arpack]{arpack()}}, see that for documentation.
-}
+ }
 }
 }
 \description{
@@ -72,7 +72,7 @@ as IBM Research Report RJ 10076, May 1997.
 }
 \seealso{
 \code{\link[=eigen_centrality]{eigen_centrality()}} for eigenvector centrality, \code{\link[=page_rank]{page_rank()}} for the Page Rank scores.
-\code{\link[=arpack]{arpack()}} for the underlining machinery of the computation.
+ \code{\link[=arpack]{arpack()}} for the underlining machinery of the computation.
 
 Centrality measures:
 \code{\link[=alpha_centrality]{alpha_centrality()}},

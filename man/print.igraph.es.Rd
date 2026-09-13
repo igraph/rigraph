@@ -12,7 +12,7 @@
 \item{full}{Whether to show the full sequence, or truncate the output to the screen size.}
 
 \item{id}{Whether to print the graph ID.
-The default \code{NULL} uses the \code{print.id} igraph option.}
+ The default \code{NULL} uses the \code{print.id} igraph option.}
 
 \item{...}{Currently ignored.}
 }
@@ -21,7 +21,7 @@ The edge sequence, invisibly.
 }
 \description{
 For long edge sequences, the printing is truncated to fit to the screen.
-Use \code{\link[=print]{print()}} explicitly and the \code{full} argument to see the full sequence.
+ Use \code{\link[=print]{print()}} explicitly and the \code{full} argument to see the full sequence.
 }
 \details{
 Edge sequences created with the double bracket operator are printed differently,

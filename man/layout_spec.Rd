@@ -62,13 +62,13 @@ An object of class \code{igraph_layout_spec}.
 }
 \description{
 Each of these functions builds a lazy layout specification for the given layout function, to be used with \code{\link[=layout_]{layout_()}} or \code{\link[=add_layout_]{add_layout_()}}.
-The specification is only evaluated when the layout is actually computed,
+ The specification is only evaluated when the layout is actually computed,
 so it can be combined with layout modifiers such as \code{\link[=component_wise]{component_wise()}} or \code{\link[=normalize]{normalize()}}.
 
 \code{as_bipartite()}, \code{as_star()} and \code{as_tree()} wrap \code{\link[=layout_as_bipartite]{layout_as_bipartite()}}, \code{\link[=layout_as_star]{layout_as_star()}} and \code{\link[=layout_as_tree]{layout_as_tree()}} respectively.
-\code{in_circle()}, \code{nicely()}, \code{on_grid()}, \code{on_sphere()} and \code{randomly()} wrap \code{\link[=layout_in_circle]{layout_in_circle()}}, \code{\link[=layout_nicely]{layout_nicely()}}, \code{\link[=layout_on_grid]{layout_on_grid()}},
+ \code{in_circle()}, \code{nicely()}, \code{on_grid()}, \code{on_sphere()} and \code{randomly()} wrap \code{\link[=layout_in_circle]{layout_in_circle()}}, \code{\link[=layout_nicely]{layout_nicely()}}, \code{\link[=layout_on_grid]{layout_on_grid()}},
 \code{\link[=layout_on_sphere]{layout_on_sphere()}} and \code{\link[=layout_randomly]{layout_randomly()}}.
-\code{with_dh()}, \code{with_fr()}, \code{with_gem()}, \code{with_graphopt()}, \code{with_kk()}, \code{with_lgl()}, \code{with_mds()},
+ \code{with_dh()}, \code{with_fr()}, \code{with_gem()}, \code{with_graphopt()}, \code{with_kk()}, \code{with_lgl()}, \code{with_mds()},
 \code{with_sugiyama()} and \code{with_drl()} wrap \code{\link[=layout_with_dh]{layout_with_dh()}}, \code{\link[=layout_with_fr]{layout_with_fr()}}, \code{\link[=layout_with_gem]{layout_with_gem()}}, \code{\link[=layout_with_graphopt]{layout_with_graphopt()}},
 \code{\link[=layout_with_kk]{layout_with_kk()}}, \code{\link[=layout_with_lgl]{layout_with_lgl()}}, \code{\link[=layout_with_mds]{layout_with_mds()}}, \code{\link[=layout_with_sugiyama]{layout_with_sugiyama()}} and \code{\link[=layout_with_drl]{layout_with_drl()}}.
 }

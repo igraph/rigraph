@@ -21,22 +21,22 @@ sample_motifs(
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{cut.prob}{Numeric vector giving the probabilities that the search graph is cut at a certain level.
-Its length should be the same as the size of the motif (the \code{size} argument).
-If \code{NULL}, the default, no cuts are made.}
+ Its length should be the same as the size of the motif (the \code{size} argument).
+ If \code{NULL}, the default, no cuts are made.}
 
 \item{sample.size}{The number of vertices to use as a starting point for finding motifs.
-Only used if the \code{sample} argument is \code{NULL}.
-The default is \code{ceiling(vcount(graph) / 10)} .}
+ Only used if the \code{sample} argument is \code{NULL}.
+ The default is \code{ceiling(vcount(graph) / 10)} .}
 
 \item{sample}{Vertices to use as a starting point for finding motifs.
-Default: \code{NULL}.}
+ Default: \code{NULL}.}
 }
 \value{
 A numeric scalar, an estimate for the total number of motifs in the graph.
 }
 \description{
 Graph motifs are small connected induced subgraphs with a well-defined structure.
-These functions search a graph for various motifs.
+ These functions search a graph for various motifs.
 }
 \details{
 \code{sample_motifs()} estimates the total number of motifs of a given size in a graph based on a sample.

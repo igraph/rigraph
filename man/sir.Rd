@@ -22,76 +22,76 @@ sir(graph, beta, gamma, ..., no.sim = 100)
 \item{x}{A \code{sir} object, returned by the \code{sir()} function.}
 
 \item{\dots}{For \code{sir()} and \code{time_bins()}, these dots must be empty.
-For \code{median.sir()} and \code{quantile.sir()}, unused, present for S3 method consistency.}
+ For \code{median.sir()} and \code{quantile.sir()}, unused, present for S3 method consistency.}
 
 \item{middle}{Logical, whether to return the middle of the time bins,
 or the boundaries.}
 
 \item{na.rm}{Logical, whether to ignore \code{NA} values.
-\code{sir} objects do not contain any \code{NA} values currently,
+ \code{sir} objects do not contain any \code{NA} values currently,
 so this argument is effectively ignored.}
 
 \item{comp}{Character scalar.
-The component to calculate the quantile of.
-\code{NI} is infected agents, \code{NS} is susceptibles, \code{NR} stands for recovered.}
+ The component to calculate the quantile of.
+ \code{NI} is infected agents, \code{NS} is susceptibles, \code{NR} stands for recovered.}
 
 \item{prob}{Numeric vector of probabilities, in [0,1], they specify the quantiles to calculate.}
 
 \item{graph}{The graph to run the model on.
-If directed, then edge directions are ignored and a warning is given.}
+ If directed, then edge directions are ignored and a warning is given.}
 
 \item{beta}{Non-negative scalar.
-The rate of infection of an individual that is susceptible and has a single infected neighbor.
-The infection rate of a susceptible individual with n infected neighbors is n times beta.
-Formally this is the rate parameter of an exponential distribution.}
+ The rate of infection of an individual that is susceptible and has a single infected neighbor.
+ The infection rate of a susceptible individual with n infected neighbors is n times beta.
+ Formally this is the rate parameter of an exponential distribution.}
 
 \item{gamma}{Positive scalar.
-The rate of recovery of an infected individual.
-Formally, this is the rate parameter of an exponential distribution.}
+ The rate of recovery of an infected individual.
+ Formally, this is the rate parameter of an exponential distribution.}
 
 \item{no.sim}{Integer scalar, the number simulation runs to perform.}
 }
 \value{
 For \code{sir()} the results are returned in an object of class \sQuote{\code{sir}}, which is a list,
 with one element for each simulation.
-Each simulation is itself a list with the following elements.
-They are all numeric vectors, with equal length:
+ Each simulation is itself a list with the following elements.
+ They are all numeric vectors, with equal length:
 \describe{
 \item{times}{
 The times of the events.
-}
+ }
 \item{NS}{
 The number of susceptibles in the population, over time.
-}
+ }
 \item{NI}{
 The number of infected individuals in the population, over time.
-}
+ }
 \item{NR}{
 The number of recovered individuals in the population, over time.
-}
+ }
 }
 
 Function \code{time_bins()} returns a numeric vector, the middle or the boundaries of the time bins, depending on the \code{middle} argument.
 
 \code{median} returns a list of three named numeric vectors, \code{NS}, \code{NI} and \code{NR}.
-The names within the vectors are created from the time bins.
+ The names within the vectors are created from the time bins.
 
 \code{quantile} returns the same vector as \code{median} (but only one, the one requested) if only one quantile is requested.
-If multiple quantiles are requested, then a list of these vectors is returned, one for each quantile.
+ If multiple quantiles are requested, then a list of these vectors is returned, one for each quantile.
 }
 \description{
 Run simulations for an SIR (susceptible-infected-recovered) model, on a graph
 }
 \details{
 The SIR model is a simple model from epidemiology.
-The individuals of the population might be in three states: susceptible, infected and recovered.
-Recovered people are assumed to be immune to the disease.
-Susceptibles become infected with a rate that depends on their number of infected neighbors.
-Infected people become recovered with a constant rate.
+ The individuals of the population might be in three states: susceptible, infected and recovered.
+ Recovered people are assumed to be immune to the disease.
+ Susceptibles become infected with a rate that depends on their number of infected neighbors.
+ Infected people become recovered with a constant rate.
 
 The function \code{sir()} simulates the model.
-This function runs multiple simulations, all starting with a single uniformly randomly chosen infected individual.
-A simulation is stopped when no infected individuals are left.
+ This function runs multiple simulations, all starting with a single uniformly randomly chosen infected individual.
+ A simulation is stopped when no infected individuals are left.
 
 Function \code{time_bins()} bins the simulation steps, using the Freedman-Diaconis heuristics to determine the bin width.
 

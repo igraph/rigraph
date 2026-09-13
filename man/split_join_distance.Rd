@@ -20,12 +20,12 @@ The split-join distance between partitions A and B is the sum of the projection 
 \details{
 First, each set in partition A is evaluated against all sets in partition B.
 For each set in partition A, the best matching set in partition B is found and the overlap size is calculated.
-(Matching is quantified by the size of the overlap between the two sets).
-Then, the maximal overlap sizes for each set in A are summed together and subtracted from the number of elements in A.
+ (Matching is quantified by the size of the overlap between the two sets).
+ Then, the maximal overlap sizes for each set in A are summed together and subtracted from the number of elements in A.
 
 The split-join distance will be returned as two numbers, the first is the projection distance of the first partition from the second,
 while the second number is the projection distance of the second partition from the first.
-This makes it easier to detect whether a partition is a subpartition of the other, since in this case,
+ This makes it easier to detect whether a partition is a subpartition of the other, since in this case,
 the corresponding distance will be zero.
 }
 \section{Related documentation in the C library}{

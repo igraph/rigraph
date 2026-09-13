@@ -14,10 +14,10 @@ A named list with components:
 \describe{
 \item{resverts}{
 The indices of the input vertices that constritute the convex hull.
-}
+ }
 \item{rescoords}{
 The coordinates of the corners of the convex hull.
-}
+ }
 }
 }
 \description{

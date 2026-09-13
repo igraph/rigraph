@@ -16,19 +16,19 @@ average.path.length(
 \item{graph}{The graph to work on.}
 
 \item{weights}{Possibly a numeric vector giving edge weights.
-If this is \code{NULL} and the graph has a \code{weight} edge attribute, then the attribute is used.
-If this is \code{NA} then no weights are used (even if the graph has a \code{weight} attribute).
-In a weighted graph, the length of a path is the sum of the weights of its constituent edges.}
+ If this is \code{NULL} and the graph has a \code{weight} edge attribute, then the attribute is used.
+ If this is \code{NA} then no weights are used (even if the graph has a \code{weight} attribute).
+ In a weighted graph, the length of a path is the sum of the weights of its constituent edges.}
 
 \item{directed}{Whether to consider directed paths in directed graphs,
 this argument is ignored for undirected graphs.}
 
 \item{unconnected}{What to do if the graph is unconnected (not strongly connected if directed paths are considered).
-If TRUE, only the lengths of the existing paths are considered and averaged; if FALSE,
+ If TRUE, only the lengths of the existing paths are considered and averaged; if FALSE,
 the length of the missing paths are considered as having infinite length, making the mean distance infinite as well.}
 
 \item{details}{Whether to provide additional details in the result.
-Functions accepting this argument (like \code{mean_distance()}) return additional information like the number of disconnected vertex pairs in the result
+ Functions accepting this argument (like \code{mean_distance()}) return additional information like the number of disconnected vertex pairs in the result
 when this parameter is set to \code{TRUE}.}
 }
 \description{

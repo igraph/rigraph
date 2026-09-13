@@ -13,12 +13,12 @@ read.graph(
 }
 \arguments{
 \item{file}{The connection to read from.
-This can be a local file, or a \code{http} or \code{ftp} connection.
-It can also be a character string with the file name or URI.}
+ This can be a local file, or a \code{http} or \code{ftp} connection.
+ It can also be a character string with the file name or URI.}
 
 \item{format}{Character constant giving the file format.
-Right now \code{edgelist}, \code{pajek}, \code{ncol}, \code{lgl}, \code{graphml}, \code{dimacs}, \code{graphdb}, \code{gml} and \code{dl} are supported, the default is \code{edgelist}.
-As of igraph 0.4 this argument is case insensitive.}
+ Right now \code{edgelist}, \code{pajek}, \code{ncol}, \code{lgl}, \code{graphml}, \code{dimacs}, \code{graphdb}, \code{gml} and \code{dl} are supported, the default is \code{edgelist}.
+ As of igraph 0.4 this argument is case insensitive.}
 
 \item{...}{Additional arguments, see below.}
 }

@@ -18,25 +18,25 @@ layout.sugiyama(
 \item{graph}{The input graph.}
 
 \item{layers}{A numeric vector of the layer indices of the vertices.
-Layers are numbered from one.
-Default: \code{NULL}, igraph calculates the layers automatically.}
+ Layers are numbered from one.
+ Default: \code{NULL}, igraph calculates the layers automatically.}
 
 \item{hgap}{Real scalar, the minimum horizontal gap between vertices in the same layer.}
 
 \item{vgap}{Real scalar, the distance between layers.}
 
 \item{maxiter}{Integer scalar, the maximum number of iterations in the crossing minimization stage.
-100 is a reasonable default; if you feel that you have too many edge crossings, increase this.}
+ 100 is a reasonable default; if you feel that you have too many edge crossings, increase this.}
 
 \item{weights}{Optional edge weight vector.
-If \code{NULL}, then the 'weight' edge attribute is used, if there is one.
-Supply \code{NA} here and igraph ignores the edge weights.
-These are used only if the graph contains cycles; igraph will tend to reverse edges with smaller weights when breaking the cycles.}
+ If \code{NULL}, then the 'weight' edge attribute is used, if there is one.
+ Supply \code{NA} here and igraph ignores the edge weights.
+ These are used only if the graph contains cycles; igraph will tend to reverse edges with smaller weights when breaking the cycles.}
 
 \item{attributes}{Which graph/vertex/edge attributes to keep in the extended graph.
-\sQuote{default} keeps the \sQuote{size}, \sQuote{size2}, \sQuote{shape},
+ \sQuote{default} keeps the \sQuote{size}, \sQuote{size2}, \sQuote{shape},
 \sQuote{label} and \sQuote{color} vertex attributes and the \sQuote{arrow.mode} and \sQuote{arrow.size} edge attributes.
-\sQuote{all} keep all graph, vertex and edge attributes, \sQuote{none} keeps none of them.}
+ \sQuote{all} keep all graph, vertex and edge attributes, \sQuote{none} keeps none of them.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

@@ -12,12 +12,12 @@ edge_density(graph, ..., loops = FALSE)
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{loops}{Logical, whether loop edges may exist in the graph.
-This affects the calculation of the largest possible number of edges in the graph.
-If this parameter is set to FALSE yet the graph contains self-loops, the result will not be meaningful.}
+ This affects the calculation of the largest possible number of edges in the graph.
+ If this parameter is set to FALSE yet the graph contains self-loops, the result will not be meaningful.}
 }
 \value{
 A real constant.
-This function returns \code{NaN} (=0.0/0.0) for an empty graph with zero vertices.
+ This function returns \code{NaN} (=0.0/0.0) for an empty graph with zero vertices.
 }
 \description{
 The density of a graph is the ratio of the actual number of edges and the largest possible number of edges in the graph,
@@ -25,7 +25,7 @@ assuming that no multi-edges are present.
 }
 \details{
 The concept of density is ill-defined for multigraphs.
-Note that this function does not check whether the graph has multi-edges and will return meaningless results for such graphs.
+ Note that this function does not check whether the graph has multi-edges and will return meaningless results for such graphs.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_density}{\code{density()}}

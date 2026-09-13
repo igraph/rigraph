@@ -9,7 +9,7 @@ igraph.options(...)
 \arguments{
 \item{...}{A list may be given as the only argument, or any number of arguments may be in the \code{name=value} form,
 or no argument at all may be given.
-See the Value and Details sections for explanation.}
+ See the Value and Details sections for explanation.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

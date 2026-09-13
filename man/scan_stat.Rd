@@ -8,14 +8,14 @@ scan_stat(graphs, tau = 1, ell = 0, locality = c("us", "them"), ...)
 }
 \arguments{
 \item{graphs}{A list of igraph graph objects.
-They must be all directed or all undirected and they must have the same number of vertices.}
+ They must be all directed or all undirected and they must have the same number of vertices.}
 
 \item{tau}{The number of previous time steps to consider for the time-dependent normalization for individual vertices.
-In other words,
+ In other words,
 the current locality statistics of each vertex will be compared to this many previous time steps of the same vertex to decide whether it is significantly larger.}
 
 \item{ell}{The number of previous time steps to consider for the aggregated scan statistics.
-This is essentially a smoothing parameter.}
+ This is essentially a smoothing parameter.}
 
 \item{locality}{Whether to calculate the \sQuote{us} or \sQuote{them} statistics.}
 
@@ -26,17 +26,17 @@ A list with entries:
 \describe{
 \item{stat}{
 The scan statistics in each time step.
-It is \code{NA} for the initial \code{tau + ell} time steps.
-}
+ It is \code{NA} for the initial \code{tau + ell} time steps.
+ }
 \item{arg_max_v}{
 The (numeric) vertex IDs for the vertex with the largest locality statistics, at each time step.
-It is \code{NA} for the initial \code{tau + ell} time steps.
-}
+ It is \code{NA} for the initial \code{tau + ell} time steps.
+ }
 }
 }
 \description{
 Calculate scan statistics on a time series of graphs.
-This is done by calculating the local scan statistics for each graph and each vertex,
+ This is done by calculating the local scan statistics for each graph and each vertex,
 and then normalizing across the vertices and across the time steps.
 }
 \section{Related documentation in the C library}{

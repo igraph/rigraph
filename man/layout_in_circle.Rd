@@ -10,8 +10,8 @@ layout_in_circle(graph, order = NULL)
 \item{graph}{The input graph.}
 
 \item{order}{The vertices to place on the circle, in the order of their desired placement.
-Vertices that are not included here will be placed at (0,0).
-The default \code{NULL} selects all vertices, in the order of their IDs.}
+ Vertices that are not included here will be placed at (0,0).
+ The default \code{NULL} selects all vertices, in the order of their IDs.}
 }
 \value{
 A numeric matrix with two columns, and one row for each vertex.

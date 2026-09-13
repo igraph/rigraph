@@ -20,8 +20,8 @@ An igraph object, the graph of the given size, directedness and isomorphism clas
 }
 \description{
 The isomorphism class is a non-negative integer number.
-Graphs (with the same number of vertices) having the same isomorphism class are isomorphic and isomorphic graphs always have the same isomorphism class.
-Currently it can handle directed graphs with 3 or 4 vertices and undirected graphd with 3 to 6 vertices.
+ Graphs (with the same number of vertices) having the same isomorphism class are isomorphic and isomorphic graphs always have the same isomorphism class.
+ Currently it can handle directed graphs with 3 or 4 vertices and undirected graphd with 3 to 6 vertices.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isoclass_create}{\code{isoclass_create()}}

@@ -8,7 +8,7 @@ vertex.shapes(shape = NULL)
 }
 \arguments{
 \item{shape}{Character scalar, name of a vertex shape.
-If it is \code{NULL} for \code{shapes()}, then the names of all defined vertex shapes are returned.}
+ If it is \code{NULL} for \code{shapes()}, then the names of all defined vertex shapes are returned.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

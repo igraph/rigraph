@@ -12,7 +12,7 @@ set_vertex_attrs(graph, ..., index = NULL)
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}> Named arguments, where the names are the attributes}
 
 \item{index}{An optional vertex sequence to set the attributes of a subset of vertices.
-The default \code{NULL} selects all vertices.}
+ The default \code{NULL} selects all vertices.}
 }
 \value{
 The graph, with the vertex attributes added or set.

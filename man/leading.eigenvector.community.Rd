@@ -17,26 +17,26 @@ leading.eigenvector.community(
 }
 \arguments{
 \item{graph}{The input graph.
-Should be undirected as the method needs a symmetric matrix.}
+ Should be undirected as the method needs a symmetric matrix.}
 
 \item{steps}{The number of steps to take, this is actually the number of tries to make a step.
-It is not a particularly useful parameter.}
+ It is not a particularly useful parameter.}
 
 \item{weights}{The weights of the edges.
-It must be a positive numeric vector, \code{NULL} or \code{NA}.
-If it is \code{NULL} and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
-If \code{NULL} and no such attribute is present, then the edges will have equal weights.
-Set this to \code{NA} if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for community detection.
-A larger edge weight means a stronger connection for this function.}
+ It must be a positive numeric vector, \code{NULL} or \code{NA}.
+ If it is \code{NULL} and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
+ If \code{NULL} and no such attribute is present, then the edges will have equal weights.
+ Set this to \code{NA} if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for community detection.
+ A larger edge weight means a stronger connection for this function.}
 
 \item{start}{\code{NULL}, or a numeric membership vector, giving the start configuration of the algorithm.}
 
 \item{options}{A named list to override some ARPACK options.}
 
 \item{callback}{Callback function.
-This is called after each iteration, after calculating the leading eigenvector of the modularity matrix.
-See details below.
-Default: \code{NULL}.}
+ This is called after each iteration, after calculating the leading eigenvector of the modularity matrix.
+ See details below.
+ Default: \code{NULL}.}
 
 \item{extra}{Additional argument to supply to the callback function.}
 

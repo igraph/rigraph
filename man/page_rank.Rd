@@ -22,50 +22,50 @@ page_rank(
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{algo}{Character scalar, which implementation to use to carry out the calculation.
-The default is \code{"prpack"},
+ The default is \code{"prpack"},
 which uses the PRPACK library (\url{https://github.com/dgleich/prpack}) to calculate PageRank scores by solving a set of linear equations.
-This is a new implementation in igraph version 0.7, and the suggested one,
+ This is a new implementation in igraph version 0.7, and the suggested one,
 as it is the most stable and the fastest for all but small graphs.
-\code{"arpack"} uses the ARPACK library,
+ \code{"arpack"} uses the ARPACK library,
 the default implementation from igraph version 0.5 until version 0.7. It computes PageRank scores by solving an eingevalue problem.}
 
 \item{vids}{The vertices of interest.
-The default \code{NULL} selects all vertices.}
+ The default \code{NULL} selects all vertices.}
 
 \item{directed}{Logical, if true directed paths will be considered for directed graphs.
-It is ignored for undirected graphs.}
+ It is ignored for undirected graphs.}
 
 \item{damping}{The damping factor (\sQuote{d} in the original paper).}
 
 \item{personalized}{Optional vector giving a probability distribution to calculate personalized PageRank.
-For personalized PageRank, the probability of jumping to a node when abandoning the random walk is not uniform,
+ For personalized PageRank, the probability of jumping to a node when abandoning the random walk is not uniform,
 but it is given by this vector.
-The vector should contains an entry for each vertex and it will be rescaled to sum up to one.}
+ The vector should contains an entry for each vertex and it will be rescaled to sum up to one.}
 
 \item{weights}{A numerical vector or \code{NULL}.
-This argument can be used to give edge weights for calculating the weighted PageRank of vertices.
-If this is \code{NULL} and the graph has a \code{weight} edge attribute then that is used.
-If \code{weights} is a numerical vector then it used, even if the graph has a \code{weights} edge attribute.
-If this is \code{NA}, then no edge weights are used (even if the graph has a \code{weight} edge attribute.
-This function interprets edge weights as connection strengths.
-In the random surfer model, an edge with a larger weight is more likely to be selected by the surfer.}
+ This argument can be used to give edge weights for calculating the weighted PageRank of vertices.
+ If this is \code{NULL} and the graph has a \code{weight} edge attribute then that is used.
+ If \code{weights} is a numerical vector then it used, even if the graph has a \code{weights} edge attribute.
+ If this is \code{NA}, then no edge weights are used (even if the graph has a \code{weight} edge attribute.
+ This function interprets edge weights as connection strengths.
+ In the random surfer model, an edge with a larger weight is more likely to be selected by the surfer.}
 
 \item{options}{A named list, to override some ARPACK options.
-See \code{\link[=arpack]{arpack()}} for details.
-This argument is ignored if the PRPACK implementation is used.}
+ See \code{\link[=arpack]{arpack()}} for details.
+ This argument is ignored if the PRPACK implementation is used.}
 }
 \value{
 A named list with entries:
 \describe{
 \item{vector}{
 A numeric vector with the PageRank scores.
-}
+ }
 \item{value}{
 When using the ARPACK method, the eigenvalue corresponding to the eigenvector with the PageRank scores is returned here. It is expected to be exactly one, and can be used to check that ARPACK has successfully converged to the expected eingevector. When using the PRPACK method, it is always set to 1.0.
-}
+ }
 \item{options}{
 Some information about the underlying ARPACK calculation. See \code{\link[=arpack]{arpack()}} for details. This entry is \code{NULL} if not the ARPACK implementation was used.
-}
+ }
 }
 }
 \description{
@@ -76,13 +76,13 @@ For the explanation of the PageRank algorithm, see the following webpage: \url{h
 or the following reference:
 
 Sergey Brin and Larry Page: The Anatomy of a Large-Scale Hypertextual Web Search Engine.
-Proceedings of the 7th World-Wide Web Conference, Brisbane, Australia, April 1998.
+ Proceedings of the 7th World-Wide Web Conference, Brisbane, Australia, April 1998.
 
 The \code{page_rank()} function can use either the PRPACK library or ARPACK (see \code{\link[=arpack]{arpack()}}) to perform the calculation.
 
 Please note that the PageRank of a given vertex depends on the PageRank of all other vertices,
 so even if you want to calculate the PageRank for only some of the vertices, all of them must be calculated.
-Requesting the PageRank for only some of the vertices does not result in any performance increase at all.
+ Requesting the PageRank for only some of the vertices does not result in any performance increase at all.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_personalized_pagerank}{\code{personalized_pagerank()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

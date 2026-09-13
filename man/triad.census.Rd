@@ -8,7 +8,7 @@ triad.census(graph)
 }
 \arguments{
 \item{graph}{The input graph, it should be directed.
-An undirected graph results a warning, and undefined results.}
+ An undirected graph results a warning, and undefined results.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

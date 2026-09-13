@@ -17,7 +17,7 @@ similarity(
 \item{graph}{The input graph.}
 
 \item{vids}{The vertex IDs for which the similarity is calculated.
-The default \code{NULL} selects all vertices.}
+ The default \code{NULL} selects all vertices.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
@@ -31,28 +31,28 @@ possible values: \sQuote{\code{out}}, \sQuote{\verb{in}},
 }
 \value{
 A \code{length(vids)} by \code{length(vids)} numeric matrix containing the similarity scores.
-This argument is ignored by the \code{invlogweighted} method.
+ This argument is ignored by the \code{invlogweighted} method.
 }
 \description{
 These functions calculates similarity scores for vertices based on their connection patterns.
 }
 \details{
 The Jaccard similarity coefficient of two vertices is the number of common neighbors divided by the number of vertices that are neighbors of at least one of the two vertices being considered.
-The \code{jaccard} method calculates the pairwise Jaccard similarities for some (or all) of the vertices.
+ The \code{jaccard} method calculates the pairwise Jaccard similarities for some (or all) of the vertices.
 
 The Dice similarity coefficient of two vertices is twice the number of common neighbors divided by the sum of the degrees of the vertices.
-Methof \code{dice} calculates the pairwise Dice similarities for some (or all) of the vertices.
+ Methof \code{dice} calculates the pairwise Dice similarities for some (or all) of the vertices.
 
 The inverse log-weighted similarity of two vertices is the number of their common neighbors,
 weighted by the inverse logarithm of their degrees.
-It is based on the assumption that two vertices should be considered more similar
+ It is based on the assumption that two vertices should be considered more similar
 if they share a low-degree common neighbor,
 since high-degree common neighbors are more likely to appear even by pure chance.
-Isolated vertices will have zero similarity to any other vertex.
-Self-similarities are not calculated.
-See the following paper for more details:
+ Isolated vertices will have zero similarity to any other vertex.
+ Self-similarities are not calculated.
+ See the following paper for more details:
 Lada A. Adamic and Eytan Adar: Friends and neighbors on the Web.
-Social Networks, 25(3):211-230, 2003.
+ Social Networks, 25(3):211-230, 2003.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_similarity_dice}{\code{similarity_dice()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_similarity_inverse_log_weighted}{\code{similarity_inverse_log_weighted()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_similarity_jaccard}{\code{similarity_jaccard()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
@@ -66,7 +66,7 @@ similarity(g, method = "jaccard")
 }
 \references{
 Lada A. Adamic and Eytan Adar: Friends and neighbors on the Web.
-\emph{Social Networks}, 25(3):211-230, 2003.
+ \emph{Social Networks}, 25(3):211-230, 2003.
 }
 \seealso{
 Other cocitation:

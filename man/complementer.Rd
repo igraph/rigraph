@@ -21,7 +21,7 @@ A complementer graph contains all edges that were not present in the input graph
 }
 \details{
 \code{complementer()} creates the complementer of a graph.
-Only edges which are \emph{not} present in the original graph will be included in the new graph.
+ Only edges which are \emph{not} present in the original graph will be included in the new graph.
 
 \code{complementer()} keeps graph and vertex attriubutes, edge attributes are lost.
 }

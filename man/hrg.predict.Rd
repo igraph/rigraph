@@ -14,17 +14,17 @@ hrg.predict(
 }
 \arguments{
 \item{graph}{The graph to fit the model to.
-Edge directions are ignored in directed graphs.}
+ Edge directions are ignored in directed graphs.}
 
 \item{hrg}{A hierarchical random graph model, in the form of an \code{igraphHRG} object.
-\code{predict_edges()} allow this to be \code{NULL} as well, then a HRG is fitted to the graph first, from a random starting point.}
+ \code{predict_edges()} allow this to be \code{NULL} as well, then a HRG is fitted to the graph first, from a random starting point.}
 
 \item{start}{Logical, whether to start the fitting/sampling from the supplied \code{igraphHRG} object, or from a random starting point.}
 
 \item{num.samples}{Number of samples to use for consensus generation or missing edge prediction.}
 
 \item{num.bins}{Number of bins for the edge probabilities.
-Give a higher number for a more accurate prediction.}
+ Give a higher number for a more accurate prediction.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

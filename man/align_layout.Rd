@@ -3,7 +3,7 @@
 \name{align_layout}
 \alias{align_layout}
 \title{Align a vertex layout This function centers a vertex layout on the coordinate system origin and rotates the layout to achieve a visually pleasing alignment with the coordinate axes.
-Doing this is particularly useful with force-directed layouts such as \code{\link[=layout_with_fr]{layout_with_fr()}}.}
+ Doing this is particularly useful with force-directed layouts such as \code{\link[=layout_with_fr]{layout_with_fr()}}.}
 \usage{
 align_layout(graph, layout)
 }
@@ -17,7 +17,7 @@ modified layout matrix
 }
 \description{
 Align a vertex layout This function centers a vertex layout on the coordinate system origin and rotates the layout to achieve a visually pleasing alignment with the coordinate axes.
-Doing this is particularly useful with force-directed layouts such as \code{\link[=layout_with_fr]{layout_with_fr()}}.
+ Doing this is particularly useful with force-directed layouts such as \code{\link[=layout_with_fr]{layout_with_fr()}}.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_align}{\code{layout_align()}}

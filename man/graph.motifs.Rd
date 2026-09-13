@@ -12,8 +12,8 @@ graph.motifs(graph, size = 3, cut.prob = rep(0, size))
 \item{size}{The size of the motif, currently sizes 3 and 4 are supported in directed graphs and sizes 3 to 6 in undirected graphs.}
 
 \item{cut.prob}{Numeric vector giving the probabilities that the search graph is cut at a certain level.
-Its length should be the same as the size of the motif (the \code{size} argument).
-If \verb{rep(0, size))}, the default, no cuts are made.}
+ Its length should be the same as the size of the motif (the \code{size} argument).
+ If \verb{rep(0, size))}, the default, no cuts are made.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

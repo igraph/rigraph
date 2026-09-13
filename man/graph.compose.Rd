@@ -12,9 +12,9 @@ graph.compose(g1, g2, byname = "auto")
 \item{g2}{The second input graph.}
 
 \item{byname}{A Logical, or the character scalar \code{auto}.
-Whether to perform the operation based on symbolic vertex names.
-If it is \code{auto}, that means \code{TRUE} if both graphs are named and \code{FALSE} otherwise.
-A warning is generated if \code{auto} and one graph, but not both graphs are named.}
+ Whether to perform the operation based on symbolic vertex names.
+ If it is \code{auto}, that means \code{TRUE} if both graphs are named and \code{FALSE} otherwise.
+ A warning is generated if \code{auto} and one graph, but not both graphs are named.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

@@ -21,7 +21,7 @@ V(x) <- value
 }
 \arguments{
 \item{x}{A vertex sequence.
-For \verb{V<-} it is a graph.}
+ For \verb{V<-} it is a graph.}
 
 \item{i}{Index.}
 
@@ -31,7 +31,7 @@ For \verb{V<-} it is a graph.}
 }
 \value{
 A vector or list, containing the values of attribute \code{name} for the vertices in the vertex sequence.
-For numeric, character or logical attributes, it is a vector of the appropriate type, otherwise it is a list.
+ For numeric, character or logical attributes, it is a vector of the appropriate type, otherwise it is a list.
 }
 \description{
 The \code{$} operator is a syntactic sugar to query and set the attributes of the vertices in a vertex sequence.

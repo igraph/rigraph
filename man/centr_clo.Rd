@@ -14,24 +14,24 @@ centr_clo(graph, ..., mode = c("out", "in", "all", "total"), normalized = TRUE)
 \item{mode}{This is the same as the \code{mode} argument of \code{closeness()}.}
 
 \item{normalized}{Logical.
-Whether to normalize the graph level centrality score by dividing by the theoretical maximum.}
+ Whether to normalize the graph level centrality score by dividing by the theoretical maximum.}
 }
 \value{
 A named list with the following components:
 \describe{
 \item{res}{
 The node-level centrality scores.
-}
+ }
 \item{centralization}{
 The graph level centrality index.
-}
+ }
 \item{theoretical_max}{
 The maximum theoretical graph level centralization score
 for a graph with the given number of vertices,
 using the same parameters.
-If the \code{normalized} argument was \code{TRUE},
+ If the \code{normalized} argument was \code{TRUE},
 then the result was divided by this number.
-}
+ }
 }
 }
 \description{

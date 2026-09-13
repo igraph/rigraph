@@ -13,7 +13,7 @@ graph_from_adj_list(
 }
 \arguments{
 \item{adjlist}{The adjacency list.
-It should be consistent,
+ It should be consistent,
 i.e. the maximum throughout all vectors in the list must be less than the number of vectors (=the number of vertices in the graph).}
 
 \item{...}{These dots are for future extensions and must be empty.}
@@ -22,8 +22,8 @@ i.e. the maximum throughout all vectors in the list must be less than the number
 and in the latter case, whether it contains the outgoing (\sQuote{out}) or the incoming (\sQuote{in}) neighbors of the vertices.}
 
 \item{duplicate}{Logical.
-For undirected graphs it gives whether edges are included in the list twice.
-E.g. if it is \code{TRUE} then for an undirected \code{{A,B}} edge \code{graph_from_adj_list()} expects \code{A} included in the neighbors of \code{B} and \code{B} to be included in the neighbors of \code{A}.
+ For undirected graphs it gives whether edges are included in the list twice.
+ E.g. if it is \code{TRUE} then for an undirected \code{{A,B}} edge \code{graph_from_adj_list()} expects \code{A} included in the neighbors of \code{B} and \code{B} to be included in the neighbors of \code{A}.
 
 This argument is ignored if \code{mode} is \code{out} or \verb{in}.}
 }
@@ -32,11 +32,11 @@ An igraph graph object.
 }
 \description{
 An adjacency list is a list of numeric vectors, containing the neighbor vertices for each vertex.
-This function creates an igraph graph object from such a list.
+ This function creates an igraph graph object from such a list.
 }
 \details{
 Adjacency lists are handy if you intend to do many (small) modifications to a graph.
-In this case adjacency lists are more efficient than igraph graphs.
+ In this case adjacency lists are more efficient than igraph graphs.
 
 The idea is that you convert your graph to an adjacency list by \code{\link[=as_adj_list]{as_adj_list()}},
 do your modifications to the graphs and finally create again an igraph graph by calling \code{graph_from_adj_list()}.

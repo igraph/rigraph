@@ -10,13 +10,13 @@ sbm.game(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE)
 \item{n}{Number of vertices in the graph.}
 
 \item{pref.matrix}{The matrix giving the Bernoulli rates.
-This is a \eqn{K\times K}{KxK} matrix,
+ This is a \eqn{K\times K}{KxK} matrix,
 where \eqn{K} is the number of groups.
-The probability of creating an edge between vertices from groups \eqn{i} and \eqn{j} is given by element \eqn{(i,j)}.
-For undirected graphs, this matrix must be symmetric.}
+ The probability of creating an edge between vertices from groups \eqn{i} and \eqn{j} is given by element \eqn{(i,j)}.
+ For undirected graphs, this matrix must be symmetric.}
 
 \item{block.sizes}{Numeric vector giving the number of vertices in each group.
-The sum of the vector must match the number of vertices.}
+ The sum of the vector must match the number of vertices.}
 
 \item{directed}{Logical, whether to create a directed graph.}
 

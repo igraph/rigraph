@@ -8,17 +8,17 @@ layout.bipartite(graph, types = NULL, hgap = 1, vgap = 1, maxiter = 100)
 }
 \arguments{
 \item{graph}{The bipartite input graph.
-It should have a logical \sQuote{\code{type}} vertex attribute, or the \code{types} argument must be given.}
+ It should have a logical \sQuote{\code{type}} vertex attribute, or the \code{types} argument must be given.}
 
 \item{types}{A logical vector, the vertex types.
-If this argument is \code{NULL} (the default), then the \sQuote{\code{type}} vertex attribute is used.}
+ If this argument is \code{NULL} (the default), then the \sQuote{\code{type}} vertex attribute is used.}
 
 \item{hgap}{Real scalar, the minimum horizontal gap between vertices in the same layer.}
 
 \item{vgap}{Real scalar, the distance between the two layers.}
 
 \item{maxiter}{Integer scalar, the maximum number of iterations in the crossing minimization stage.
-100 is a reasonable default; if you feel that you have too many edge crossings, increase this.}
+ 100 is a reasonable default; if you feel that you have too many edge crossings, increase this.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

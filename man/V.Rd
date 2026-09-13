@@ -17,7 +17,7 @@ Create a vertex sequence (vs) containing all vertices of a graph.
 }
 \details{
 A vertex sequence is just what the name says it is: a sequence of vertices.
-Vertex sequences are usually used as igraph function arguments that refer to vertices of a graph.
+ Vertex sequences are usually used as igraph function arguments that refer to vertices of a graph.
 
 A vertex sequence is tied to the graph it refers to: it really denoted the specific vertices of that graph,
 and cannot be used together with another graph.
@@ -27,21 +27,21 @@ but it has a special class attribute which makes it possible to perform graph sp
 like selecting a subset of the vertices based on graph structure, or vertex attributes.
 
 A vertex sequence is most often created by the \code{V()} function.
-The result of this includes all vertices in increasing vertex ID order.
-A vertex sequence can be indexed by a numeric vector, just like a regular R vector.
-See \code{\link{[.igraph.vs}} and additional links to other vertex sequence operations below.
+ The result of this includes all vertices in increasing vertex ID order.
+ A vertex sequence can be indexed by a numeric vector, just like a regular R vector.
+ See \code{\link{[.igraph.vs}} and additional links to other vertex sequence operations below.
 }
 \section{Indexing vertex sequences}{
 
 Vertex sequences mostly behave like regular vectors, but there are some additional indexing operations that are specific for them;
 e.g. selecting vertices based on graph structure, or based on vertex attributes.
-See \code{\link{[.igraph.vs}} for details.
+ See \code{\link{[.igraph.vs}} for details.
 }
 
 \section{Querying or setting attributes}{
 
 Vertex sequences can be used to query or set attributes for the vertices in the sequence.
-See \code{\link[=$.igraph.vs]{$.igraph.vs()}} for details.
+ See \code{\link[=$.igraph.vs]{$.igraph.vs()}} for details.
 }
 
 \section{Related documentation in the C library}{

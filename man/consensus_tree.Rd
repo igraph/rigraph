@@ -10,7 +10,7 @@ consensus_tree(graph, hrg = NULL, ..., start = FALSE, num.samples = 10000)
 \item{graph}{The graph the models were fitted to.}
 
 \item{hrg}{A hierarchical random graph model, in the form of an \code{igraphHRG} object.
-\code{consensus_tree()} allows this to be \code{NULL} as well, then a HRG is fitted to the graph first, from a random starting point.}
+ \code{consensus_tree()} allows this to be \code{NULL} as well, then a HRG is fitted to the graph first, from a random starting point.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
@@ -20,26 +20,26 @@ consensus_tree(graph, hrg = NULL, ..., start = FALSE, num.samples = 10000)
 }
 \value{
 \code{consensus_tree()} returns a list of two objects.
-The first is an \code{igraphHRGConsensus} object, the second is an \code{igraphHRG} object.
-The \code{igraphHRGConsensus} object has the following members:
+ The first is an \code{igraphHRGConsensus} object, the second is an \code{igraphHRG} object.
+ The \code{igraphHRGConsensus} object has the following members:
 \describe{
 \item{parents}{
 For each vertex, the ID of its parent vertex is stored,
 or zero, if the vertex is the root vertex in the tree.
-The first n vertex IDs (from 0) refer to the original vertices of the graph,
+ The first n vertex IDs (from 0) refer to the original vertices of the graph,
 the other IDs refer to vertex groups.
-}
+ }
 \item{weights}{
 Numeric vector, counts the number of times a given tree split
 occurred in the generated network samples, for each internal vertices.
-The order is the same as in the \code{parents} vector.
-}
+ The order is the same as in the \code{parents} vector.
+ }
 }
 }
 \description{
 \code{consensus_tree()} creates a consensus tree from several fitted hierarchical random graph models, using phylogeny methods.
-If the \code{hrg()} argument is given and \code{start} is set to \code{TRUE}, then it starts sampling from the given HRG.
-Otherwise it optimizes the HRG log-likelihood first, and then samples starting from the optimum.
+ If the \code{hrg()} argument is given and \code{start} is set to \code{TRUE}, then it starts sampling from the given HRG.
+ Otherwise it optimizes the HRG log-likelihood first, and then samples starting from the optimum.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_consensus}{\code{hrg_consensus()}}

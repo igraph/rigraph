@@ -10,15 +10,15 @@ layout.grid(graph, width = 0, height = 0, dim = 2)
 \item{graph}{The input graph.}
 
 \item{width}{The number of vertices in a single row of the grid.
-If this is zero or negative, then for 2d layouts the width of the grid will be the square root of the number of vertices in the graph,
+ If this is zero or negative, then for 2d layouts the width of the grid will be the square root of the number of vertices in the graph,
 rounded up to the next integer.
-Similarly, it will be the cube root for 3d layouts.}
+ Similarly, it will be the cube root for 3d layouts.}
 
 \item{height}{The number of vertices in a single column of the grid, for three dimensional layouts.
-If this is zero or negative, then it is determinted automatically.}
+ If this is zero or negative, then it is determinted automatically.}
 
 \item{dim}{Two or three.
-Whether to make 2d or a 3d layout.}
+ Whether to make 2d or a 3d layout.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

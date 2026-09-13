@@ -8,8 +8,8 @@ blockGraphs(blocks, graph)
 }
 \arguments{
 \item{graph}{For \code{cohesive_blocks()} a graph object of class \code{igraph}.
-It must be undirected and simple.
-(See \code{\link[=is_simple]{is_simple()}}.)
+ It must be undirected and simple.
+ (See \code{\link[=is_simple]{is_simple()}}.)
 
 For \code{graphs_from_cohesive_blocks()} and \code{export_pajek()} the same graph must be supplied whose cohesive block structure is given in the \code{blocks()} argument.}
 }

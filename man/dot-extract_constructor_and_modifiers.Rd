@@ -12,7 +12,7 @@
 \item{.operation}{Human-readable description of the operation that this helper is a part of}
 
 \item{.variant}{Constructor variant; must be one of \sQuote{make}, \sQuote{graph} or \sQuote{sample}.
-Used in cases when the same constructor specification has deterministic and random variants.}
+ Used in cases when the same constructor specification has deterministic and random variants.}
 }
 \value{
 A named list with three items:
@@ -25,7 +25,7 @@ the modifiers
 }
 \item{args}{
 the remaining, unparsed arguments.
-}
+ }
 }
 }
 \description{

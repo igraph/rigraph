@@ -14,13 +14,13 @@ is.chordal(
 }
 \arguments{
 \item{graph}{The input graph.
-It may be directed, but edge directions are ignored, as the algorithm is defined for undirected graphs.}
+ It may be directed, but edge directions are ignored, as the algorithm is defined for undirected graphs.}
 
 \item{alpha}{Numeric vector, the maximal chardinality ordering of the vertices.
-If it is \code{NULL}, then it is automatically calculated by calling \code{\link[=max_cardinality]{max_cardinality()}}, or from \code{alpham1} if that is given..}
+ If it is \code{NULL}, then it is automatically calculated by calling \code{\link[=max_cardinality]{max_cardinality()}}, or from \code{alpham1} if that is given..}
 
 \item{alpham1}{Numeric vector, the inverse of \code{alpha}.
-If it is \code{NULL}, then it is automatically calculated by calling \code{\link[=max_cardinality]{max_cardinality()}}, or from \code{alpha}.}
+ If it is \code{NULL}, then it is automatically calculated by calling \code{\link[=max_cardinality]{max_cardinality()}}, or from \code{alpha}.}
 
 \item{fillin}{Logical, whether to calculate the fill-in edges.}
 

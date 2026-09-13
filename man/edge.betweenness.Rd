@@ -16,16 +16,16 @@ edge.betweenness(
 \item{graph}{The graph to analyze.}
 
 \item{e}{The edges for which the edge betweenness will be calculated.
-The default \code{NULL} selects all edges.}
+ The default \code{NULL} selects all edges.}
 
 \item{directed}{Logical, whether directed paths should be considered while determining the shortest paths.}
 
 \item{weights}{Optional positive weight vector for calculating weighted betweenness.
-If the graph has a \code{weight} edge attribute, then this is used by default.
-Weights are used to calculate weighted shortest paths, so they are interpreted as distances.}
+ If the graph has a \code{weight} edge attribute, then this is used by default.
+ Weights are used to calculate weighted shortest paths, so they are interpreted as distances.}
 
 \item{cutoff}{The maximum shortest path length to consider when calculating betweenness.
-If negative, then there is no such limit.}
+ If negative, then there is no such limit.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

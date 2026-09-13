@@ -10,10 +10,10 @@ independent.vertex.sets(graph, min = NULL, max = NULL)
 \item{graph}{The input graph.}
 
 \item{min}{Numeric constant, limit for the minimum size of the independent vertex sets to find.
-\code{NULL} means no limit.}
+ \code{NULL} means no limit.}
 
 \item{max}{Numeric constant, limit for the maximum size of the independent vertex sets to find.
-\code{NULL} means no limit.}
+ \code{NULL} means no limit.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

@@ -17,11 +17,11 @@ graph.laplacian(
 \item{normalized}{Deprecated, use \code{normalization} instead.}
 
 \item{weights}{An optional vector giving edge weights for weighted Laplacian matrix.
-If this is \code{NULL} and the graph has an edge attribute called \code{weight}, then it will be used automatically.
-Set this to \code{NA} if you want the unweighted Laplacian on a graph that has a \code{weight} edge attribute.}
+ If this is \code{NULL} and the graph has an edge attribute called \code{weight}, then it will be used automatically.
+ Set this to \code{NA} if you want the unweighted Laplacian on a graph that has a \code{weight} edge attribute.}
 
 \item{sparse}{Logical, whether to return the result as a sparse matrix.
-The \code{Matrix} package is required for sparse matrices.}
+ The \code{Matrix} package is required for sparse matrices.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

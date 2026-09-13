@@ -9,7 +9,7 @@
 \description{
 The \code{.data} and \code{.env} pronouns make it explicit where to look up attribute names when indexing \code{V(g)} or \code{E(g)},
 i.e. the vertex or edge sequence of a graph.
-These pronouns are inspired by \code{.data} and \code{.env} in \code{rlang} - thanks to Michał Bojanowski for bringing these to our attention.
+ These pronouns are inspired by \code{.data} and \code{.env} in \code{rlang} - thanks to Michał Bojanowski for bringing these to our attention.
 
 The rules are simple:
 \itemize{
@@ -19,8 +19,8 @@ The rules are simple:
 
 Note that \code{.data} and \code{.env} are injected dynamically into the environment where the indexing expressions are evaluated;
 you cannot get access to these objects outside the context of an indexing expression.
-To avoid warnings printed by \verb{R CMD check} when code containing \code{.data} and \code{.env} is checked,
+ To avoid warnings printed by \verb{R CMD check} when code containing \code{.data} and \code{.env} is checked,
 you can import \code{.data} and \code{.env} from \code{igraph} if needed.
-Alternatively, you can declare them explicitly with \code{utils::globalVariables()} to silence the warnings.
+ Alternatively, you can declare them explicitly with \code{utils::globalVariables()} to silence the warnings.
 }
 \concept{env-and-data}

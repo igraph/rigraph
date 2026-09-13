@@ -15,36 +15,36 @@ knn(
 }
 \arguments{
 \item{graph}{The input graph.
-It may be directed.}
+ It may be directed.}
 
 \item{vids}{The vertices for which the calculation is performed.
-The default \code{NULL} includes all vertices.
-Note, that if not all vertices are given here,
+ The default \code{NULL} includes all vertices.
+ Note, that if not all vertices are given here,
 then both \sQuote{\code{knn}} and \sQuote{\code{knnk}} will be calculated based on the given vertices only.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character constant to indicate the type of neighbors to consider in directed graphs.
-\code{out} considers out-neighbors, \verb{in} considers in-neighbors and \code{all} ignores edge directions.}
+ \code{out} considers out-neighbors, \verb{in} considers in-neighbors and \code{all} ignores edge directions.}
 
 \item{neighbor.degree.mode}{The type of degree to average in directed graphs.
-\code{out} averages out-degrees, \verb{in} averages in-degrees and \code{all} ignores edge directions for the degree calculation.}
+ \code{out} averages out-degrees, \verb{in} averages in-degrees and \code{all} ignores edge directions for the degree calculation.}
 
 \item{weights}{Weight vector.
-If the graph has a \code{weight} edge attribute, then this is used by default.
-If this argument is given, then vertex strength (see \code{\link[=strength]{strength()}}) is used instead of vertex degree.
-But note that \code{knnk} is still given in the function of the normal vertex degree.
-Weights are are used to calculate a weighted degree (also called \code{\link[=strength]{strength()}}) instead of the degree.}
+ If the graph has a \code{weight} edge attribute, then this is used by default.
+ If this argument is given, then vertex strength (see \code{\link[=strength]{strength()}}) is used instead of vertex degree.
+ But note that \code{knnk} is still given in the function of the normal vertex degree.
+ Weights are are used to calculate a weighted degree (also called \code{\link[=strength]{strength()}}) instead of the degree.}
 }
 \value{
 A list with two members:
 \describe{
 \item{knn}{
 A numeric vector giving the average nearest neighbor degree for all vertices in \code{vids}.
-}
+ }
 \item{knnk}{
 A numeric vector, its length is the maximum (total) vertex degree in the graph.
-The first element is the average nearest neighbor degree of vertices with degree one, etc.
+ The first element is the average nearest neighbor degree of vertices with degree one, etc.
 }
 }
 }
@@ -60,8 +60,8 @@ The weighted version computes a weighted average of the neighbor degrees as
 \deqn{k_{nn,u} = \frac{1}{s_u} \sum_v w_{uv} k_v,}{k_nn_u = 1/s_u sum_v w_uv k_v,}
 
 where \eqn{s_u = \sum_v w_{uv}}{s_u = sum_v w_uv} is the sum of the incident edge weights of vertex \code{u}, i.e. its strength.
-The sum runs over the neighbors \code{v} of vertex \code{u} as indicated by \code{mode}.
-\eqn{w_{uv}}{w_uv} denotes the weighted adjacency matrix and \eqn{k_v}{k_v} is the neighbors' degree,
+ The sum runs over the neighbors \code{v} of vertex \code{u} as indicated by \code{mode}.
+ \eqn{w_{uv}}{w_uv} denotes the weighted adjacency matrix and \eqn{k_v}{k_v} is the neighbors' degree,
 specified by \code{neighbor_degree_mode}.
 }
 \section{Related documentation in the C library}{
@@ -92,7 +92,7 @@ knn(g5)
 \references{
 Alain Barrat, Marc Barthelemy, Romualdo Pastor-Satorras,
 Alessandro Vespignani: The architecture of complex weighted networks, Proc.
-Natl. Acad. Sci. USA 101, 3747 (2004)
+ Natl. Acad. Sci. USA 101, 3747 (2004)
 }
 \seealso{
 Other structural.properties:

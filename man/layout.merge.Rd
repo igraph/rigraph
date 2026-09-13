@@ -12,7 +12,7 @@ layout.merge(graphs, layouts, method = "dla")
 \item{layouts}{A list of two-column matrices.}
 
 \item{method}{Character constant giving the method to use.
-Right now only \code{dla} is implemented.}
+ Right now only \code{dla} is implemented.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

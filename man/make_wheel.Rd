@@ -15,7 +15,7 @@ wheel(n, ..., mode = c("in", "out", "mutual", "undirected"), center = 1)
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{It defines the direction of the edges.
-\verb{in}: the edges point \emph{to} the center, \code{out}: the edges point \emph{from} the center, \code{mutual}:
+ \verb{in}: the edges point \emph{to} the center, \code{out}: the edges point \emph{from} the center, \code{mutual}:
 a directed wheel is created with mutual edges, \code{undirected}: the edges are undirected.}
 
 \item{center}{ID of the center vertex.}
@@ -27,8 +27,8 @@ An igraph graph.
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
 A wheel graph is created by connecting a center vertex to all vertices of a cycle graph.
-A wheel graph on \code{n} vertices can be thought of as a wheel with \code{n - 1} spokes.
-The cycle graph part makes up the rim, while the star graph part adds the spokes.
+ A wheel graph on \code{n} vertices can be thought of as a wheel with \code{n - 1} spokes.
+ The cycle graph part makes up the rim, while the star graph part adds the spokes.
 
 Note that the two and three-vertex wheel graphs are non-simple: The two-vertex wheel graph contains a self-loop,
 while the three-vertex wheel graph contains parallel edges (a 1-cycle and a 2-cycle, respectively).

@@ -23,14 +23,14 @@ compose(
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{byname}{A Logical, or the character scalar \code{auto}.
-Whether to perform the operation based on symbolic vertex names.
-If it is \code{auto}, that means \code{TRUE} if both graphs are named and \code{FALSE} otherwise.
-A warning is generated if \code{auto} and one graph, but not both graphs are named.}
+ Whether to perform the operation based on symbolic vertex names.
+ If it is \code{auto}, that means \code{TRUE} if both graphs are named and \code{FALSE} otherwise.
+ A warning is generated if \code{auto} and one graph, but not both graphs are named.}
 
 \item{graph.attr.comb, vertex.attr.comb, edge.attr.comb}{Specification for combining clashing graph, vertex and edge attributes.
-\code{vertex.attr.comb} and \code{edge.attr.comb} default to \code{"rename"};
+ \code{vertex.attr.comb} and \code{edge.attr.comb} default to \code{"rename"};
 \code{graph.attr.comb} defaults to the \code{graph.attr.comb} igraph option (\code{"rename"} unless changed via \code{\link[=igraph_options]{igraph_options()}}).
-See \link{igraph-attribute-combination} for the available combiners.}
+ See \link{igraph-attribute-combination} for the available combiners.}
 }
 \value{
 A new graph object.
@@ -40,37 +40,37 @@ Relational composition of two graph.
 }
 \details{
 \code{compose()} creates the relational composition of two graphs.
-The new graph will contain an (a,b) edge only if there is a vertex c,
+ The new graph will contain an (a,b) edge only if there is a vertex c,
 such that edge (a,c) is included in the first graph and (c,b) is included in the second graph.
-The corresponding operator is \verb{\%c\%}.
+ The corresponding operator is \verb{\%c\%}.
 
 The function gives an error if one of the input graphs is directed and the other is undirected.
 
 If the \code{byname} argument is \code{TRUE} (or \code{auto} and the graphs are all named),
 then the operation is performed based on symbolic vertex names.
-Otherwise numeric vertex IDs are used.
+ Otherwise numeric vertex IDs are used.
 
 \code{compose()} keeps the attributes of both graphs.
-All graph, vertex and edge attributes are copied to the result.
-By default, if an attribute is present in both graphs and would result in a name clash, that attribute is renamed by adding suffixes:
+ All graph, vertex and edge attributes are copied to the result.
+ By default, if an attribute is present in both graphs and would result in a name clash, that attribute is renamed by adding suffixes:
 \verb{_1}, \verb{_2}.
-Pass \code{graph.attr.comb}, \code{vertex.attr.comb} or \code{edge.attr.comb} to combine clashing attributes instead;
+ Pass \code{graph.attr.comb}, \code{vertex.attr.comb} or \code{edge.attr.comb} to combine clashing attributes instead;
 see \link{igraph-attribute-combination} for the available combiners.
 
 The \code{name} vertex attribute is treated specially if the operation is performed based on symbolic vertex names.
-In this case \code{name} must be present in both graphs, and it is not renamed in the result graph.
+ In this case \code{name} must be present in both graphs, and it is not renamed in the result graph.
 
 Note that an edge in the result graph corresponds to two edges in the input, one in the first graph, one in the second.
-This mapping is not injective and several edges in the result might correspond to the same edge in the first (and/or the second) graph.
-The edge attributes in the result graph are updated accordingly.
+ This mapping is not injective and several edges in the result might correspond to the same edge in the first (and/or the second) graph.
+ The edge attributes in the result graph are updated accordingly.
 
 Also note that the function may generate multigraphs,
 if there are more than one way to find edges (a,b) in g1 and (b,c) in g2 for an edge (a,c) in the result.
-See \code{\link[=simplify]{simplify()}} if you want to get rid of the multiple edges.
+ See \code{\link[=simplify]{simplify()}} if you want to get rid of the multiple edges.
 
 The function may create loop edges, if edges (a,b) and (b,a) are present in g1 and g2, respectively,
 then (a,a) is included in the result.
-See \code{\link[=simplify]{simplify()}} if you want to get rid of the self-loops.
+ See \code{\link[=simplify]{simplify()}} if you want to get rid of the self-loops.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_permute_vertices}{\code{permute_vertices()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

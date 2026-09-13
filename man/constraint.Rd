@@ -10,13 +10,13 @@ constraint(graph, nodes = NULL, ..., weights = NULL)
 \item{graph}{A graph object, the input graph.}
 
 \item{nodes}{The vertices for which the constraint will be calculated.
-The default \code{NULL} selects all vertices.}
+ The default \code{NULL} selects all vertices.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{The weights of the edges.
-If this is \code{NULL} and there is a \code{weight} edge attribute this is used.
-If there is no such edge attribute all edges will have the same weight.}
+ If this is \code{NULL} and there is a \code{weight} edge attribute this is used.
+ If there is no such edge attribute all edges will have the same weight.}
 }
 \value{
 A numeric vector of constraint scores
@@ -26,7 +26,7 @@ Given a graph, \code{constraint()} calculates Burt's constraint for each vertex.
 }
 \details{
 Burt's constraint is higher if ego has less, or mutually stronger related (i.e. more redundant) contacts.
-Burt's measure of constraint, \eqn{C_i}{C[i]}, of vertex \eqn{i}'s ego network \eqn{V_i}{V[i]},
+ Burt's measure of constraint, \eqn{C_i}{C[i]}, of vertex \eqn{i}'s ego network \eqn{V_i}{V[i]},
 is defined for directed and valued graphs,
 \deqn{C_i=\sum_{j \in V_i \setminus \{i\}} (p_{ij}+\sum_{q \in V_i
     \setminus \{i,j\}} p_{iq} p_{qj})^2}{
@@ -38,7 +38,7 @@ for a graph of order (i.e. number of vertices) \eqn{N}, where proportional tie s
   p[i,j]=(a[i,j]+a[j,i]) / sum(a[i,k]+a[k,i], k in V[i], k != i),
 }
 \eqn{a_{ij}}{a[i,j]} are elements of \eqn{A} and the latter being the graph adjacency matrix.
-For isolated vertices, constraint is undefined.
+ For isolated vertices, constraint is undefined.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_constraint}{\code{constraint()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
@@ -52,7 +52,7 @@ constraint(g)
 }
 \references{
 Burt, R.S. (2004). Structural holes and good ideas.
-\emph{American Journal of Sociology} 110, 349-399.
+ \emph{American Journal of Sociology} 110, 349-399.
 }
 \seealso{
 Other structural.properties:

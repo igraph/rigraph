@@ -8,7 +8,7 @@ with_graph_(...)
 }
 \arguments{
 \item{...}{The attributes to add.
-They must be named.}
+ They must be named.}
 }
 \description{
 Constructor modifier to add graph attributes

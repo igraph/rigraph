@@ -14,15 +14,15 @@ as.undirected(
 \item{graph}{The graph to convert.}
 
 \item{mode}{Character constant, defines the conversion algorithm.
-For \code{as_directed()} it can be \code{mutual} or \code{arbitrary}.
-For \code{as_undirected()} it can be \code{each}, \code{collapse} or \code{mutual}.
-See details below.}
+ For \code{as_directed()} it can be \code{mutual} or \code{arbitrary}.
+ For \code{as_undirected()} it can be \code{each}, \code{collapse} or \code{mutual}.
+ See details below.}
 
 \item{edge.attr.comb}{Specifies what to do with edge attributes,
 if \code{mode="collapse"} or \code{mode="mutual"}.
-In these cases many edges might be mapped to a single one in the new graph, and their attributes are combined.
-Please see \code{\link[=attribute.combination]{attribute.combination()}} for details on this.
-The default \code{NULL} uses the \code{edge.attr.comb} igraph option.}
+ In these cases many edges might be mapped to a single one in the new graph, and their attributes are combined.
+ Please see \code{\link[=attribute.combination]{attribute.combination()}} for details on this.
+ The default \code{NULL} uses the \code{edge.attr.comb} igraph option.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

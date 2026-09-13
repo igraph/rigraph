@@ -13,7 +13,7 @@ Result of applying the right hand side to the result of the left hand side.
 }
 \description{
 igraph re-exports the \verb{\%>\%} operator of magrittr, because we find it very useful.
-Please see the documentation in the \code{magrittr} package.
+ Please see the documentation in the \code{magrittr} package.
 }
 \examples{
 make_ring(10) \%>\%

@@ -8,14 +8,14 @@ graph.diversity(graph, weights = NULL, vids = V(graph))
 }
 \arguments{
 \item{graph}{The input graph.
-Edge directions are ignored.}
+ Edge directions are ignored.}
 
 \item{weights}{\code{NULL}, or the vector of edge weights to use for the computation.
-If \code{NULL}, then the \sQuote{weight} attibute is used.
-Note that this measure is not defined for unweighted graphs.}
+ If \code{NULL}, then the \sQuote{weight} attibute is used.
+ Note that this measure is not defined for unweighted graphs.}
 
 \item{vids}{The vertex IDs for which to calculate the measure.
-The default \code{NULL} selects all vertices.}
+ The default \code{NULL} selects all vertices.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

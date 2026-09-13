@@ -10,14 +10,14 @@ minimum.spanning.tree(graph, weights = NULL, algorithm = NULL, ...)
 \item{graph}{The graph object to analyze.}
 
 \item{weights}{Numeric vector giving the weights of the edges in the graph.
-The order is determined by the edge IDs.
-This is ignored if the \code{unweighted} algorithm is chosen.
-Edge weights are interpreted as distances.}
+ The order is determined by the edge IDs.
+ This is ignored if the \code{unweighted} algorithm is chosen.
+ Edge weights are interpreted as distances.}
 
 \item{algorithm}{The algorithm to use for calculation.
-\code{unweighted} can be used for unweighted graphs,
+ \code{unweighted} can be used for unweighted graphs,
 and \code{prim} runs Prim's algorithm for weighted graphs.
-If this is \code{NULL} then igraph will select the algorithm automatically:
+ If this is \code{NULL} then igraph will select the algorithm automatically:
 if the graph has an edge attribute called \code{weight} or the \code{weights} argument is not \code{NULL} then Prim's algorithm is chosen,
 otherwise the unweighted algorithm is used.}
 

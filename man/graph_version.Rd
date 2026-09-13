@@ -8,14 +8,14 @@ graph_version(graph)
 }
 \arguments{
 \item{graph}{The input graph.
-If it is missing, then the version number of the current data format is returned.}
+ If it is missing, then the version number of the current data format is returned.}
 }
 \value{
 An integer scalar.
 }
 \description{
 igraph's internal data representation changes sometimes between versions.
-This means that it is not always possible to use igraph objects that were created (and possibly saved to a file) with an older igraph version.
+ This means that it is not always possible to use igraph objects that were created (and possibly saved to a file) with an older igraph version.
 }
 \details{
 \code{graph_version()} queries the current data format,

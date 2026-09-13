@@ -8,7 +8,7 @@
 }
 \arguments{
 \item{...}{The vertex sequences to concatenate.
-They must refer to the same graph.}
+ They must refer to the same graph.}
 
 \item{recursive}{Ignored, included for S3 compatibility with the base \code{c} function.}
 }

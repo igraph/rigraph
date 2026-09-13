@@ -12,9 +12,9 @@ coreness(graph, ..., mode = c("all", "out", "in"))
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{The type of the core in directed graphs.
-Character constant, possible values: \verb{in}: in-cores are computed, \code{out}: out-cores are computed, \code{all}:
+ Character constant, possible values: \verb{in}: in-cores are computed, \code{out}: out-cores are computed, \code{all}:
 the corresponding undirected graph is considered.
-This argument is ignored for undirected graphs.}
+ This argument is ignored for undirected graphs.}
 }
 \value{
 Numeric vector of integer numbers giving the coreness of each vertex.

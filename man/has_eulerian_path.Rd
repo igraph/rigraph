@@ -21,30 +21,30 @@ eulerian_cycle(graph)
 \value{
 For \code{has_eulerian_path()} and \code{has_eulerian_cycle()},
 a logical value that indicates whether the graph contains an Eulerian path or cycle.
-For \code{eulerian_path()} and \code{eulerian_cycle()}, a named list with two entries:
+ For \code{eulerian_path()} and \code{eulerian_cycle()}, a named list with two entries:
 \describe{
 \item{epath}{
 A vector containing the edge IDs along the Eulerian path or cycle.
-}
+ }
 \item{vpath}{
 A vector containing the vertex IDs along the Eulerian path or cycle.
-}
+ }
 }
 }
 \description{
 \code{has_eulerian_path()} and \code{has_eulerian_cycle()} checks whether there is an Eulerian path or cycle in the input graph.
-\code{eulerian_path()} and \code{eulerian_cycle()} return such a path or cycle if it exists, and throws an error otherwise.
+ \code{eulerian_path()} and \code{eulerian_cycle()} return such a path or cycle if it exists, and throws an error otherwise.
 }
 \details{
 \code{has_eulerian_path()} decides whether the input graph has an Eulerian \emph{path},
 i.e. a path that passes through every edge of the graph exactly once, and returns a logical value as a result.
-\code{eulerian_path()} returns a possible Eulerian path, described with its edge and vertex sequence,
+ \code{eulerian_path()} returns a possible Eulerian path, described with its edge and vertex sequence,
 or throws an error if no such path exists.
 
 \code{has_eulerian_cycle()} decides whether the input graph has an Eulerian \emph{cycle},
 i.e. a path that passes through every edge of the graph exactly once and that returns to its starting point,
 and returns a logical value as a result.
-\code{eulerian_cycle()} returns a possible Eulerian cycle, described with its edge and vertex sequence,
+ \code{eulerian_cycle()} returns a possible Eulerian cycle, described with its edge and vertex sequence,
 or throws an error if no such cycle exists.
 }
 \section{Related documentation in the C library}{

@@ -8,7 +8,7 @@ dyad.census(graph)
 }
 \arguments{
 \item{graph}{The input graph.
-A warning is given if it is not directed.}
+ A warning is given if it is not directed.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

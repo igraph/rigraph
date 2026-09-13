@@ -10,9 +10,9 @@ graph.coreness(graph, mode = c("all", "out", "in"))
 \item{graph}{The input graph, it can be directed or undirected}
 
 \item{mode}{The type of the core in directed graphs.
-Character constant, possible values: \verb{in}: in-cores are computed, \code{out}: out-cores are computed, \code{all}:
+ Character constant, possible values: \verb{in}: in-cores are computed, \code{out}: out-cores are computed, \code{all}:
 the corresponding undirected graph is considered.
-This argument is ignored for undirected graphs.}
+ This argument is ignored for undirected graphs.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

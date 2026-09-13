@@ -10,10 +10,10 @@ topological.sort(graph, mode = c("out", "all", "in"))
 \item{graph}{The input graph, should be directed}
 
 \item{mode}{Specifies how to use the direction of the edges.
-For \dQuote{\code{out}},
+ For \dQuote{\code{out}},
 the sorting order ensures that each node comes before all nodes to which it has edges, so nodes with no incoming edges go first.
-For \dQuote{\verb{in}}, it is quite the opposite: each node comes before all nodes from which it receives edges.
-Nodes with no outgoing edges go first.}
+ For \dQuote{\verb{in}}, it is quite the opposite: each node comes before all nodes from which it receives edges.
+ Nodes with no outgoing edges go first.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

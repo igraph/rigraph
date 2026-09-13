@@ -62,8 +62,8 @@ communities(x)
 \item{communities, x, object}{A \code{communities} object, the result of an igraph community detection function.}
 
 \item{\dots}{Additional arguments.
-\code{plot.communities} passes these to \code{\link[=plot.igraph]{plot.igraph()}}.
-The other functions silently ignore them.}
+ \code{plot.communities} passes these to \code{\link[=plot.igraph]{plot.igraph()}}.
+ The other functions silently ignore them.}
 
 \item{graph}{An igraph graph object, corresponding to \code{communities}.}
 
@@ -73,38 +73,38 @@ see \code{\link[=plot.hclust]{plot.hclust()}}.}
 \item{use.modularity}{Logical, whether to use the modularity values to define the height of the branches.}
 
 \item{no}{Integer scalar, the desired number of communities.
-If too low or two high, then an error message is given.
-Exactly one of \code{no} and \code{steps} must be supplied.}
+ If too low or two high, then an error message is given.
+ Exactly one of \code{no} and \code{steps} must be supplied.}
 
 \item{steps}{The number of merge operations to perform to produce the communities.
-Exactly one of \code{no} and \code{steps} must be supplied.}
+ Exactly one of \code{no} and \code{steps} must be supplied.}
 
 \item{y}{An igraph graph object, corresponding to the communities in \code{x}.}
 
 \item{col}{A vector of colors, in any format that is accepted by the regular R plotting methods.
-This vector gives the colors of the vertices explicitly.}
+ This vector gives the colors of the vertices explicitly.}
 
 \item{mark.groups}{A list of numeric vectors.
-The communities can be highlighted using colored polygons.
-The groups for which the polygons are drawn are given here.
-The default is to use the groups given by the communities.
-Supply \code{NULL} here if you do not want to highlight any groups.}
+ The communities can be highlighted using colored polygons.
+ The groups for which the polygons are drawn are given here.
+ The default is to use the groups given by the communities.
+ Supply \code{NULL} here if you do not want to highlight any groups.}
 
 \item{edge.color}{The colors of the edges.
-By default the edges within communities are colored green and other edges are red.}
+ By default the edges within communities are colored green and other edges are red.}
 
 \item{membership}{Numeric vector, one value for each vertex, the membership vector of the community structure.
-Might also be \code{NULL} if the community structure is given in another way, e.g. by a merge matrix.}
+ Might also be \code{NULL} if the community structure is given in another way, e.g. by a merge matrix.}
 
 \item{algorithm}{Name of the algorithm that produced the community structure (character scalar).
-Default: \code{NULL}, meaning an unknown algorithm.}
+ Default: \code{NULL}, meaning an unknown algorithm.}
 
 \item{merges}{Merge matrix of the hierarchical community structure.
-See \code{merges()} below for more information on its format.
-Default: \code{NULL}.}
+ See \code{merges()} below for more information on its format.
+ Default: \code{NULL}.}
 
 \item{modularity}{Numeric scalar or vector, the modularity value of the community structure.
-It can also be \code{NULL}, if the modularity of the (best) split is not available.}
+ It can also be \code{NULL}, if the modularity of the (best) split is not available.}
 }
 \value{
 \code{\link[=print]{print()}} returns the \code{communities} object itself,
@@ -138,15 +138,15 @@ invisibly.
 }
 \description{
 igraph community detection functions return their results as an object from the \code{communities} class.
-This manual page describes the operations of this class.
+ This manual page describes the operations of this class.
 }
 \details{
 Community structure detection algorithms try to find dense subgraphs in directed or undirected graphs, by optimizing some criteria,
 and usually using heuristics.
 
 igraph implements a number of community detection methods (see them below), all of which return an object of the class \code{communities}.
-Because the community structure detection algorithms are different, \code{communities} objects do not always have the same structure.
-Nevertheless, they have some common operations, these are documented here.
+ Because the community structure detection algorithms are different, \code{communities} objects do not always have the same structure.
+ Nevertheless, they have some common operations, these are documented here.
 
 The \code{\link[=print]{print()}} generic function is defined for \code{communities}, it prints a short summary.
 
@@ -155,41 +155,41 @@ The \code{length} generic function call be called on \code{communities} and retu
 The \code{sizes()} function returns the community sizes, in the order of their IDs.
 
 \code{membership()} gives the division of the vertices, into communities.
-It returns a numeric vector, one value for each vertex, the ID of its community.
-Community IDs start from one.
-Note that some algorithms calculate the complete (or incomplete) hierarchical structure of the communities,
+ It returns a numeric vector, one value for each vertex, the ID of its community.
+ Community IDs start from one.
+ Note that some algorithms calculate the complete (or incomplete) hierarchical structure of the communities,
 and not just a single partitioning.
-For these algorithms typically the membership for the highest modularity value is returned,
+ For these algorithms typically the membership for the highest modularity value is returned,
 but see also the manual pages of the individual algorithms.
 
 \code{communities()} is also the name of a function, that returns a list of communities, each identified by their vertices.
-The vertices will have symbolic names if the \code{add.vertex.names} igraph option is set, and the graph itself was named.
-Otherwise numeric vertex IDs are used.
+ The vertices will have symbolic names if the \code{add.vertex.names} igraph option is set, and the graph itself was named.
+ Otherwise numeric vertex IDs are used.
 
 \code{modularity()} gives the modularity score of the partitioning.
-(See \code{\link[=modularity.igraph]{modularity.igraph()}} for details.
-For algorithms that do not result a single partitioning, the highest modularity value is returned.
+ (See \code{\link[=modularity.igraph]{modularity.igraph()}} for details.
+ For algorithms that do not result a single partitioning, the highest modularity value is returned.
 
 \code{algorithm()} gives the name of the algorithm that was used to calculate the community structure.
 
 \code{crossing()} returns a logical vector, with one value for each edge, ordered according to the edge IDs.
-The value is \code{TRUE} iff the edge connects two different communities, according to the (best) membership vector,
+ The value is \code{TRUE} iff the edge connects two different communities, according to the (best) membership vector,
 as returned by \code{membership()}.
 
 \code{is_hierarchical()} checks whether a hierarchical algorithm was used to find the community structure.
-Some functions only make sense for hierarchical methods (e.g. \code{merges()}, \code{cut_at()} and \code{\link[=as.dendrogram]{as.dendrogram()}}).
+ Some functions only make sense for hierarchical methods (e.g. \code{merges()}, \code{cut_at()} and \code{\link[=as.dendrogram]{as.dendrogram()}}).
 
 \code{merges()} returns the merge matrix for hierarchical methods.
-An error message is given, if a non-hierarchical method was used to find the community structure.
-You can check this by calling \code{is_hierarchical()} on the \code{communities} object.
+ An error message is given, if a non-hierarchical method was used to find the community structure.
+ You can check this by calling \code{is_hierarchical()} on the \code{communities} object.
 
 \code{cut_at()} cuts the merge tree of a hierarchical community finding method, at the desired place and returns a membership vector.
-The desired place can be expressed as the desired number of communities or as the number of merge steps to make.
-The function gives an error message, if called with a non-hierarchical method.
+ The desired place can be expressed as the desired number of communities or as the number of merge steps to make.
+ The function gives an error message, if called with a non-hierarchical method.
 
 \code{\link[=as.dendrogram]{as.dendrogram()}} converts a hierarchical community structure to a \code{dendrogram} object.
-It only works for hierarchical methods, and gives an error message to others.
-See \code{\link[stats:dendrogram]{stats::dendrogram()}} for details.
+ It only works for hierarchical methods, and gives an error message to others.
+ See \code{\link[stats:dendrogram]{stats::dendrogram()}} for details.
 
 \code{\link[stats:as.hclust]{stats::as.hclust()}} is similar to \code{\link[=as.dendrogram]{as.dendrogram()}}, but converts a hierarchical community structure to a \code{hclust} object.
 
@@ -201,9 +201,9 @@ and returns a character vector that gives the steps performed by the algorithm w
 \code{code_len()} is defined for the InfoMAP method (\code{\link[=cluster_infomap]{cluster_infomap()}} and returns the code length of the partition.
 
 It is possibly to call the \code{\link[=plot]{plot()}} function on \code{communities} objects.
-This will plot the graph (and uses \code{\link[=plot.igraph]{plot.igraph()}} internally), with the communities shown.
-By default it colores the vertices according to their communities, and also marks the vertex groups corresponding to the communities.
-It passes additional arguments to \code{\link[=plot.igraph]{plot.igraph()}}, please see that and also \link{igraph.plotting} on how to change the plot.
+ This will plot the graph (and uses \code{\link[=plot.igraph]{plot.igraph()}} internally), with the communities shown.
+ By default it colores the vertices according to their communities, and also marks the vertex groups corresponding to the communities.
+ It passes additional arguments to \code{\link[=plot.igraph]{plot.igraph()}}, please see that and also \link{igraph.plotting} on how to change the plot.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist}{\code{get_edgelist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_le_community_to_membership}{\code{le_community_to_membership()}}

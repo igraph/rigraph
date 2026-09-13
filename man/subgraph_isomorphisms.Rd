@@ -15,33 +15,33 @@ subgraph_isomorphisms(
 }
 \arguments{
 \item{pattern}{The smaller graph, it might be directed or undirected.
-Undirected graphs are treated as directed graphs with mutual edges.}
+ Undirected graphs are treated as directed graphs with mutual edges.}
 
 \item{target}{The bigger graph, it might be directed or undirected.
-Undirected graphs are treated as directed graphs with mutual edges.}
+ Undirected graphs are treated as directed graphs with mutual edges.}
 
 \item{method}{The method to use.
-Possible values: \sQuote{auto}, \sQuote{lad}, \sQuote{vf2}.
-See their details below.}
+ Possible values: \sQuote{auto}, \sQuote{lad}, \sQuote{vf2}.
+ See their details below.}
 
 \item{...}{Additional arguments, passed to the various methods.}
 
 \item{callback}{Optional callback function to call for each subisomorphism found.
-If provided, the function should accept two arguments:
+ If provided, the function should accept two arguments:
 \code{map12} (integer vector mapping vertex IDs from pattern to target, 1-based indexing) and \code{map21} (integer vector mapping vertex IDs from target to pattern, 1-based indexing).
-The function should return \code{FALSE} to continue the search or \code{TRUE} to stop it.
-If \code{NULL} (the default), all subisomorphisms are collected and returned as a list.
-Only supported for \code{method = "vf2"}.
+ The function should return \code{FALSE} to continue the search or \code{TRUE} to stop it.
+ If \code{NULL} (the default), all subisomorphisms are collected and returned as a list.
+ Only supported for \code{method = "vf2"}.
 
 \strong{Important limitation:} Callback functions must NOT call any igraph functions (including simple queries like \code{vcount()} or \code{ecount()}).
-Doing so will cause R to crash due to reentrancy issues.
-Extract any needed graph information before calling the function with a callback,
+ Doing so will cause R to crash due to reentrancy issues.
+ Extract any needed graph information before calling the function with a callback,
 or use collector mode (the default) and process results afterward.}
 }
 \value{
 If \code{callback} is \code{NULL}, returns a list of vertex sequences,
 corresponding to all mappings from the pattern graph to the target graph.
-If \code{callback} is provided, returns \code{NULL} invisibly.
+ If \code{callback} is provided, returns \code{NULL} invisibly.
 }
 \description{
 All isomorphic mappings between a graph and subgraphs of another graph
@@ -49,42 +49,42 @@ All isomorphic mappings between a graph and subgraphs of another graph
 \section{\sQuote{lad} method}{
 
 This is the LAD algorithm by Solnon, see the reference below.
-It has the following extra arguments:
+ It has the following extra arguments:
 \describe{
 \item{domains}{
 Matching restrictions.
-It must be a list of \code{target} vertex sets, given as numeric vertex IDs or symbolic vertex names.
-The length of the list must be \code{vcount(pattern)} and for each vertex in \code{pattern}
+ It must be a list of \code{target} vertex sets, given as numeric vertex IDs or symbolic vertex names.
+ The length of the list must be \code{vcount(pattern)} and for each vertex in \code{pattern}
 it gives the allowed matching vertices in \code{target}.
-Defaults to \code{NULL}.
-}
+ Defaults to \code{NULL}.
+ }
 \item{induced}{
 Logical scalar, whether to search for an induced subgraph.
-It is \code{FALSE} by default.
-}
+ It is \code{FALSE} by default.
+ }
 \item{time.limit}{
 The processor time limit for the computation, in seconds.
-It defaults to \code{Inf}, which means no limit.
-}
+ It defaults to \code{Inf}, which means no limit.
+ }
 }
 }
 
 \section{\sQuote{vf2} method}{
 
 This method uses the VF2 algorithm by Cordella, Foggia et al., see references below.
-It supports vertex and edge colors and have the following extra arguments:
+ It supports vertex and edge colors and have the following extra arguments:
 \describe{
 \item{vertex.color1, vertex.color2}{
 Optional integer vectors giving the colors of the vertices for colored graph isomorphism.
-If they are not given, but the graph has a \dQuote{color} vertex attribute, then it will be used.
-If you want to ignore these attributes, then supply \code{NULL} for both of these arguments.
-See also examples below.
-}
+ If they are not given, but the graph has a \dQuote{color} vertex attribute, then it will be used.
+ If you want to ignore these attributes, then supply \code{NULL} for both of these arguments.
+ See also examples below.
+ }
 \item{edge.color1, edge.color2}{
 Optional integer vectors giving the colors of the edges for edge-colored (sub)graph isomorphism.
-If they are not given, but the graph has a \dQuote{color} edge attribute, then it will be used.
-If you want to ignore these attributes, then supply \code{NULL} for both of these arguments.
-}
+ If they are not given, but the graph has a \dQuote{color} edge attribute, then it will be used.
+ If you want to ignore these attributes, then supply \code{NULL} for both of these arguments.
+ }
 }
 }
 

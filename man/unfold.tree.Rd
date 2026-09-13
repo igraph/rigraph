@@ -10,11 +10,11 @@ unfold.tree(graph, mode = c("all", "out", "in", "total"), roots)
 \item{graph}{The input graph, it can be either directed or undirected.}
 
 \item{mode}{Character string, defined the types of the paths used for the breadth-first search.
-\dQuote{out} follows the outgoing, \dQuote{in} the incoming edges, \dQuote{all} and \dQuote{total} both of them.
-This argument is ignored for undirected graphs.}
+ \dQuote{out} follows the outgoing, \dQuote{in} the incoming edges, \dQuote{all} and \dQuote{total} both of them.
+ This argument is ignored for undirected graphs.}
 
 \item{roots}{A vector giving the vertices from which the breadth-first search is performed.
-Typically it contains one vertex per component.}
+ Typically it contains one vertex per component.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

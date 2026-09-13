@@ -11,10 +11,10 @@ de_bruijn_graph(m, n)
 }
 \arguments{
 \item{m}{Integer scalar, the size of the alphabet.
-See details below.}
+ See details below.}
 
 \item{n}{Integer scalar, the length of the labels.
-See details below.}
+ See details below.}
 }
 \value{
 A graph object.
@@ -24,8 +24,8 @@ De Bruijn graphs are labeled graphs representing the overlap of strings.
 }
 \details{
 A de Bruijn graph represents relationships between strings.
-An alphabet of \code{m} letters are used and strings of length \code{n} are considered.
-A vertex corresponds to every possible string and there is a directed edge from vertex \code{v} to vertex \code{w}
+ An alphabet of \code{m} letters are used and strings of length \code{n} are considered.
+ A vertex corresponds to every possible string and there is a directed edge from vertex \code{v} to vertex \code{w}
 if the string of \code{v} can be transformed into the string of \code{w} by removing its first letter and appending a letter to it.
 
 Please note that the graph will have \code{m} to the power \code{n} vertices and even more edges,

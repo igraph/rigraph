@@ -11,7 +11,7 @@ printer_callback(fun)
 }
 \description{
 A printer callback function is a function can performs the actual printing.
-It has a number of subcommands, that are called by
+ It has a number of subcommands, that are called by
 the \code{printer} package, in a form \preformatted{
     printer_callback("subcommand", argument1, argument2, ...)
 } See the examples below.
@@ -22,8 +22,8 @@ The subcommands:
 \describe{
 \item{\code{length}}{
 The length of the data to print, the number of items, in natural units.
-E.g. for a list of objects, it is the number of objects.
-}
+ E.g. for a list of objects, it is the number of objects.
+ }
 \item{\code{min_width}}{
 TODO
 }
@@ -32,7 +32,7 @@ Width of one item, if \code{no} items will be printed. TODO
 }
 \item{\code{print}}{
 Argument: \code{no}. Do the actual printing, print \code{no} items.
-}
+ }
 \item{\code{done}}{
 TODO
 }

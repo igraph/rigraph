@@ -14,7 +14,7 @@ fastgreedy.community(
 }
 \arguments{
 \item{graph}{The input graph.
-It must be undirected and must not have multi-edges.}
+ It must be undirected and must not have multi-edges.}
 
 \item{merges}{Logical, whether to return the merge matrix.}
 
@@ -24,11 +24,11 @@ It must be undirected and must not have multi-edges.}
 considering all possible community structures along the merges.}
 
 \item{weights}{The weights of the edges.
-It must be a positive numeric vector, \code{NULL} or \code{NA}.
-If it is \code{NULL} and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
-If \code{NULL} and no such attribute is present, then the edges will have equal weights.
-Set this to \code{NA} if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for community detection.
-A larger edge weight means a stronger connection for this function.}
+ It must be a positive numeric vector, \code{NULL} or \code{NA}.
+ If it is \code{NULL} and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
+ If \code{NULL} and no such attribute is present, then the edges will have equal weights.
+ Set this to \code{NA} if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for community detection.
+ A larger edge weight means a stronger connection for this function.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

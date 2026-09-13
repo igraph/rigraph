@@ -16,45 +16,45 @@ canonical_permutation(
 
 \item{colors}{The colors of the individual vertices of the graph;
 only vertices having the same color are allowed to match each other in an automorphism.
-When omitted, igraph uses the \code{color} attribute of the vertices, or, if there is no such vertex attribute,
+ When omitted, igraph uses the \code{color} attribute of the vertices, or, if there is no such vertex attribute,
 it simply assumes that all vertices have the same color.
-Pass NULL explicitly if the graph has a \code{color} vertex attribute but you do not want to use it.}
+ Pass NULL explicitly if the graph has a \code{color} vertex attribute but you do not want to use it.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{sh}{Type of the heuristics to use for the BLISS algorithm.
-See details for possible values.}
+ See details for possible values.}
 }
 \value{
 A list with the following members:
 \describe{
 \item{labeling}{
 The canonical permutation which takes the input graph into canonical form.
-A numeric vector, the first element is the new label of vertex 0, the second element for vertex 1, etc.
+ A numeric vector, the first element is the new label of vertex 0, the second element for vertex 1, etc.
 }
 \item{info}{
 Some information about the BLISS computation. A named list with the following members:
 \describe{
 \item{"nof_nodes"}{
 The number of nodes in the search tree.
-}
+ }
 \item{"nof_leaf_nodes"}{
 The number of leaf nodes in the search tree.
-}
+ }
 \item{"nof_bad_nodes"}{
 Number of bad nodes.
-}
+ }
 \item{"nof_canupdates"}{
 Number of canrep updates.
-}
+ }
 \item{"max_level"}{
 Maximum level.
-}
+ }
 \item{"group_size"}{
 The size of the automorphism group of the input graph, as a string.
-The string representation is necessary because the group size
+ The string representation is necessary because the group size
 can easily exceed values that are exactly representable in floating point.
-}
+ }
 }
 }
 }
@@ -64,31 +64,31 @@ The canonical permutation brings every isomorphic graphs into the same (labeled)
 }
 \details{
 \code{canonical_permutation()} computes a permutation which brings the graph into canonical form, as defined by the BLISS algorithm.
-All isomorphic graphs have the same canonical form.
+ All isomorphic graphs have the same canonical form.
 
 See the paper below for the details about BLISS.
-This and more information is available at \url{http://www.tcs.hut.fi/Software/bliss/index.html}.
+ This and more information is available at \url{http://www.tcs.hut.fi/Software/bliss/index.html}.
 
 The possible values for the \code{sh} argument are:
 \describe{
 \item{"f"}{
 First non-singleton cell.
-}
+ }
 \item{"fl"}{
 First largest non-singleton cell.
-}
+ }
 \item{"fs"}{
 First smallest non-singleton cell.
-}
+ }
 \item{"fm"}{
 First maximally non-trivially connectec non-singleton cell.
-}
+ }
 \item{"flm"}{
 Largest maximally non-trivially connected non-singleton cell.
-}
+ }
 \item{"fsm"}{
 Smallest maximally non-trivially connected non-singleton cell.
-}
+ }
 }
 See the paper in references for details about these.
 }

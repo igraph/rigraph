@@ -8,15 +8,15 @@ stochastic_matrix(graph, ..., column.wise = FALSE, sparse = NULL)
 }
 \arguments{
 \item{graph}{The input graph.
-Must be of class \code{igraph}.}
+ Must be of class \code{igraph}.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{column.wise}{If \code{FALSE}, then the rows of the stochastic matrix sum up to one; otherwise it is the columns.}
 
 \item{sparse}{Logical, whether to return a sparse matrix.
-The \code{Matrix} package is needed for sparse matrices.
-The default \code{NULL} uses the \code{sparsematrices} igraph option.}
+ The \code{Matrix} package is needed for sparse matrices.
+ The default \code{NULL} uses the \code{sparsematrices} igraph option.}
 }
 \value{
 A regular matrix or a matrix of class \code{Matrix} if a \code{sparse} argument was \code{TRUE}.
@@ -26,11 +26,11 @@ Retrieves the stochastic matrix of a graph of class \code{igraph}.
 }
 \details{
 Let \eqn{M} be an \eqn{n \times n}{n x n} adjacency matrix with real non-negative entries.
-Let us define \eqn{D = \textrm{diag}(\sum_{i}M_{1i},
+ Let us define \eqn{D = \textrm{diag}(\sum_{i}M_{1i},
 \dots, \sum_{i}M_{ni})}{D=diag( sum(M[1,i], i), ..., sum(M[n,i], i) )}
 
 The (row) stochastic matrix is defined as \deqn{W = D^{-1}M,}{W = inv(D) M,} where it is assumed that \eqn{D} is non-singular.
-Column stochastic matrices are defined in a symmetric way.
+ Column stochastic matrices are defined in a symmetric way.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_stochastic}{\code{get_stochastic()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_stochastic_sparse}{\code{get_stochastic_sparse()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}

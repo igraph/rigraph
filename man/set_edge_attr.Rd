@@ -12,10 +12,10 @@ set_edge_attr(graph, name, index = NULL, value)
 \item{name}{The name of the attribute to set.}
 
 \item{index}{An optional edge sequence to set the attributes of a subset of edges.
-The default \code{NULL} selects all edges.}
+ The default \code{NULL} selects all edges.}
 
 \item{value}{The new value of the attribute for all (or \code{index}) edges.
-If \code{NULL}, the input is returned unchanged.}
+ If \code{NULL}, the input is returned unchanged.}
 }
 \value{
 The graph, with the edge attribute added or set.

@@ -8,13 +8,13 @@ dominator.tree(graph, root, mode = c("out", "in", "all", "total"))
 }
 \arguments{
 \item{graph}{A directed graph.
-If it is not a flowgraph, and it contains some vertices not reachable from the root vertex,
+ If it is not a flowgraph, and it contains some vertices not reachable from the root vertex,
 then these vertices will be collected and returned as part of the result.}
 
 \item{root}{The ID of the root (or source) vertex, this will be the root of the tree.}
 
 \item{mode}{Constant, must be \sQuote{\verb{in}} or \sQuote{\code{out}}.
-If it is \sQuote{\verb{in}}, then all directions are considered as opposite to the original one in the input graph.}
+ If it is \sQuote{\verb{in}}, then all directions are considered as opposite to the original one in the input graph.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

@@ -17,7 +17,7 @@ Intersection of vertex sequences
 }
 \details{
 They must belong to the same graph.
-Note that this function has \sQuote{set} semantics and the multiplicity of vertices is lost in the result.
+ Note that this function has \sQuote{set} semantics and the multiplicity of vertices is lost in the result.
 }
 \examples{
 g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))

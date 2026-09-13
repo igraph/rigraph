@@ -15,27 +15,27 @@ bipartite.projection(
 }
 \arguments{
 \item{graph}{The input graph.
-It can be directed, but edge directions are ignored during the computation.}
+ It can be directed, but edge directions are ignored during the computation.}
 
 \item{types}{An optional vertex type vector to use instead of the \sQuote{\code{type}} vertex attribute.
-You must supply this argument if the graph has no \sQuote{\code{type}} vertex attribute.}
+ You must supply this argument if the graph has no \sQuote{\code{type}} vertex attribute.}
 
 \item{multiplicity}{If \code{TRUE}, then igraph keeps the multiplicity of the edges as an edge attribute called \sQuote{weight}.
-E.g. if there is an A-C-B and also an A-D-B triple in the bipartite graph (but no more X, such that A-X-B is also in the graph),
+ E.g. if there is an A-C-B and also an A-D-B triple in the bipartite graph (but no more X, such that A-X-B is also in the graph),
 then the multiplicity of the A-B edge in the projection will be 2.}
 
 \item{probe1}{This argument can be used to specify the order of the projections in the resulting list.
-If given, then it is considered as a vertex ID (or a symbolic vertex name);
+ If given, then it is considered as a vertex ID (or a symbolic vertex name);
 the projection containing this vertex will be the first one in the result list.
-This argument is ignored if only one projection is requested in argument \code{which}.}
+ This argument is ignored if only one projection is requested in argument \code{which}.}
 
 \item{which}{A character scalar to specify which projection(s) to calculate.
-The default is to calculate both.}
+ The default is to calculate both.}
 
 \item{remove.type}{Logical, whether to remove the \code{type} vertex attribute from the projections.
-This makes sense because these graphs are not bipartite any more.
-However if you want to combine them with each other (or other bipartite graphs), then it is worth keeping this attribute.
-By default it will be removed.}
+ This makes sense because these graphs are not bipartite any more.
+ However if you want to combine them with each other (or other bipartite graphs), then it is worth keeping this attribute.
+ By default it will be removed.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

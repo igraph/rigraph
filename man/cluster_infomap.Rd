@@ -15,21 +15,21 @@ cluster_infomap(
 }
 \arguments{
 \item{graph}{The input graph.
-Edge directions will be taken into account.}
+ Edge directions will be taken into account.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{e.weights}{Numeric vector of edge weights.
-The length must match the number of edges in the graph.
-By default (\code{NULL}) the \sQuote{\code{weight}} edge attribute is used as weights.
-If it is not present, then all edges are considered to have the same weight.
-Larger edge weights correspond to stronger connections.}
+ The length must match the number of edges in the graph.
+ By default (\code{NULL}) the \sQuote{\code{weight}} edge attribute is used as weights.
+ If it is not present, then all edges are considered to have the same weight.
+ Larger edge weights correspond to stronger connections.}
 
 \item{v.weights}{Numeric vector of vertex weights.
-The length must match the number of vertices in the graph.
-By default (\code{NULL}) the \sQuote{\code{weight}} vertex attribute is used as weights.
-If it is not present, then all vertices are considered to have the same weight.
-A larger vertex weight means a larger probability that the random surfer jumps to that vertex.}
+ The length must match the number of vertices in the graph.
+ By default (\code{NULL}) the \sQuote{\code{weight}} vertex attribute is used as weights.
+ If it is not present, then all vertices are considered to have the same weight.
+ A larger vertex weight means a larger probability that the random surfer jumps to that vertex.}
 
 \item{nb.trials}{The number of attempts to partition the network (can be any integer value equal or larger than 1).}
 
@@ -41,7 +41,7 @@ please see the \code{\link[=communities]{communities()}} manual page for details
 }
 \description{
 Find community structure that minimizes the expected description length of a random walker trajectory.
-If the graph is directed, edge directions will be taken into account.
+ If the graph is directed, edge directions will be taken into account.
 }
 \details{
 Please see the details of this method in the references given below.
@@ -67,7 +67,7 @@ information flow reveal community structure in complex networks, \emph{PNAS}
 
 A more detailed paper: M. Rosvall, D. Axelsson, and C. T. Bergstrom, The map
 equation, \emph{Eur. Phys. J. Special Topics} 178, 13 (2009).
-\doi{10.1140/epjst/e2010-01179-1}, \url{https://arxiv.org/abs/0906.1405}.
+ \doi{10.1140/epjst/e2010-01179-1}, \url{https://arxiv.org/abs/0906.1405}.
 }
 \seealso{
 Other community finding methods and \code{\link[=communities]{communities()}}.
@@ -96,7 +96,7 @@ Community detection:
 \author{
 Martin Rosvall wrote the original C++ code. This was ported to
 be more igraph-like by Emmanuel Navarro.
-The R interface and some cosmetics was done by Gabor Csardi \email{csardi.gabor@gmail.com}.
+ The R interface and some cosmetics was done by Gabor Csardi \email{csardi.gabor@gmail.com}.
 }
 \concept{community}
 \keyword{graphs}

@@ -12,15 +12,15 @@ isomorphism_class(graph, v)
 \item{graph}{The input graph.}
 
 \item{v}{Optionally a vertex sequence.
-If not missing, then an induced subgraph of the input graph, consisting of this vertices, is used.}
+ If not missing, then an induced subgraph of the input graph, consisting of this vertices, is used.}
 }
 \value{
 An integer number.
 }
 \description{
 The isomorphism class is a non-negative integer number.
-Graphs (with the same number of vertices) having the same isomorphism class are isomorphic and isomorphic graphs always have the same isomorphism class.
-Currently it can handle directed graphs with 3 or 4 vertices and undirected graphs with 3 to 6 vertices.
+ Graphs (with the same number of vertices) having the same isomorphism class are isomorphic and isomorphic graphs always have the same isomorphism class.
+ Currently it can handle directed graphs with 3 or 4 vertices and undirected graphs with 3 to 6 vertices.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isoclass_subgraph}{\code{isoclass_subgraph()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isoclass}{\code{isoclass()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

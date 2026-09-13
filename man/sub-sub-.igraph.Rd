@@ -14,21 +14,21 @@
 \item{j}{Index, integer, character or logical, see details below.}
 
 \item{from}{A numeric or character vector giving vertex IDs or names.
-Together with the \code{to} argument, it can be used to query/set a sequence of edges.
-See details below.
-This argument cannot be present together with any of the \code{i} and \code{j} arguments and if it is present,
+ Together with the \code{to} argument, it can be used to query/set a sequence of edges.
+ See details below.
+ This argument cannot be present together with any of the \code{i} and \code{j} arguments and if it is present,
 then the \code{to} argument must be present as well.}
 
 \item{to}{A numeric or character vector giving vertex IDs or names.
-Together with the \code{from} argument, it can be used to query/set a sequence of edges.
-See details below.
-This argument cannot be present together with any of the \code{i} and \code{j} arguments and if it is present,
+ Together with the \code{from} argument, it can be used to query/set a sequence of edges.
+ See details below.
+ This argument cannot be present together with any of the \code{i} and \code{j} arguments and if it is present,
 then the \code{from} argument must be present as well.}
 
 \item{...}{Additional arguments are not used currently.}
 
 \item{directed}{Logical, whether to consider edge directions in directed graphs.
-It is ignored for undirected graphs.}
+ It is ignored for undirected graphs.}
 
 \item{edges}{Logical, whether to return edge IDs.}
 
@@ -39,14 +39,14 @@ Query and manipulate a graph as it were an adjacency list
 }
 \details{
 The double bracket operator indexes the (imaginary) adjacency list of the graph.
-This can used for the following operations:
+ This can used for the following operations:
 \enumerate{
 \item Querying the adjacent vertices for one or more
 vertices: \preformatted{  graph[[1:3,]]
 graph[[,1:3]]}
 The first form gives the successors, the second the predecessors
 or the 1:3 vertices. (For undirected graphs they are equivalent.)
-\item Querying the incident edges for one or more vertices,
+ \item Querying the incident edges for one or more vertices,
 if the \code{edges} argument is set to
 \code{TRUE}: \preformatted{  graph[[1:3, , edges=TRUE]]
 graph[[, 1:3, edges=TRUE]]}
@@ -54,7 +54,7 @@ graph[[, 1:3, edges=TRUE]]}
 if both indices are used. E.g. \preformatted{  graph[[v, w, edges=TRUE]]}
 gives the edge IDs of all the edges that exist from vertices
 \eqn{v} to vertices \eqn{w}.
-}
+ }
 
 The alternative argument names \code{from} and \code{to} can be used instead of the usual \code{i} and \code{j}, to make the code more
 readable: \preformatted{ graph[[from = 1:3]]

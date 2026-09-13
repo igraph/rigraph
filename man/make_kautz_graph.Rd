@@ -11,10 +11,10 @@ kautz_graph(m, n)
 }
 \arguments{
 \item{m}{Integer scalar, the size of the alphabet.
-See details below.}
+ See details below.}
 
 \item{n}{Integer scalar, the length of the labels.
-See details below.}
+ See details below.}
 }
 \value{
 A graph object.
@@ -25,7 +25,7 @@ Kautz graphs are labeled graphs representing the overlap of strings.
 \details{
 A Kautz graph is a labeled graph, vertices are labeled by strings of length \code{n+1} above an alphabet with \code{m+1} letters,
 with the restriction that every two consecutive letters in the string must be different.
-There is a directed edge from a vertex \code{v} to another vertex \code{w}
+ There is a directed edge from a vertex \code{v} to another vertex \code{w}
 if it is possible to transform the string of \code{v} into the string of \code{w} by removing the first letter and appending a letter to it.
 
 Kautz graphs have some interesting properties, see e.g. Wikipedia for details.

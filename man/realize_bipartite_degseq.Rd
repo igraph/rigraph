@@ -20,8 +20,8 @@ realize_bipartite_degseq(
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{allowed.edge.types}{Character, specifies the types of allowed edges.
-\dQuote{simple} allows simple graphs only (no multiple edges).
-\dQuote{multiple} allows multiple edges.}
+ \dQuote{simple} allows simple graphs only (no multiple edges).
+ \dQuote{multiple} allows multiple edges.}
 
 \item{method}{Character, the method for generating the graph; see below.}
 }
@@ -32,19 +32,19 @@ The new graph object.
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
 Constructs a bipartite graph from the degree sequences of its partitions, if one exists.
-This function uses a Havel-Hakimi style construction algorithm.
+ This function uses a Havel-Hakimi style construction algorithm.
 }
 \details{
 The \sQuote{method} argument controls in which order the vertices are selected during the course of the algorithm.
 
 The \dQuote{smallest} method selects the vertex with the smallest remaining degree, from either partition.
-The result is usually a graph with high negative degree assortativity.
-In the undirected case, this method is guaranteed to generate a connected graph, regardless of whether multi-edges are allowed,
+ The result is usually a graph with high negative degree assortativity.
+ In the undirected case, this method is guaranteed to generate a connected graph, regardless of whether multi-edges are allowed,
 provided that a connected realization exists.
-This is the default method.
+ This is the default method.
 
 The \dQuote{largest} method selects the vertex with the largest remaining degree.
-The result is usually a graph with high positive degree assortativity, and is often disconnected.
+ The result is usually a graph with high positive degree assortativity, and is often disconnected.
 
 The \dQuote{index} method selects the vertices in order of their index.
 }

@@ -25,18 +25,18 @@ count_loops(graph)
 \item{graph}{The input graph.}
 
 \item{eids}{The edges to which the query is restricted.
-The default \code{NULL} selects all edges.}
+ The default \code{NULL} selects all edges.}
 }
 \value{
 \code{any_loop()} and \code{any_multiple()} return a Logical.
-\code{which_loop()} and \code{which_multiple()} return a logical vector.
-\code{count_loops()} returns a numeric scalar with the total number of loop edges.
-\code{count_multiple()} returns a numeric vector.
+ \code{which_loop()} and \code{which_multiple()} return a logical vector.
+ \code{count_loops()} returns a numeric scalar with the total number of loop edges.
+ \code{count_multiple()} returns a numeric vector.
 }
 \description{
 A loop edge is an edge from a vertex to itself.
-An edge is a multiple edge if it has exactly the same head and tail vertices as another edge.
-A graph without multiple and loop edges is called a simple graph.
+ An edge is a multiple edge if it has exactly the same head and tail vertices as another edge.
+ A graph without multiple and loop edges is called a simple graph.
 }
 \details{
 \code{any_loop()} decides whether the graph has any loop edges.
@@ -52,8 +52,8 @@ A graph without multiple and loop edges is called a simple graph.
 \code{count_multiple()} counts the multiplicity of each edge of a graph.
 
 Note that the semantics for \code{which_multiple()} and \code{count_multiple()} is different.
-\code{which_multiple()} gives \code{TRUE} for all occurrences of a multiple edge except for one.
-I.e. if there are three \code{i-j} edges in the graph then \code{which_multiple()} returns \code{TRUE} for only two of them
+ \code{which_multiple()} gives \code{TRUE} for all occurrences of a multiple edge except for one.
+ I.e. if there are three \code{i-j} edges in the graph then \code{which_multiple()} returns \code{TRUE} for only two of them
 while \code{count_multiple()} returns \sQuote{3} for all three.
 
 See the examples for getting rid of multiple edges while keeping their original multiplicity as an edge attribute.

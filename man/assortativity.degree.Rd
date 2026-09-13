@@ -10,8 +10,8 @@ assortativity.degree(graph, directed = TRUE)
 \item{graph}{The input graph, it can be directed or undirected.}
 
 \item{directed}{Logical, whether to consider edge directions for directed graphs.
-This argument is ignored for undirected graphs.
-Supply \code{TRUE} here to do the natural thing,
+ This argument is ignored for undirected graphs.
+ Supply \code{TRUE} here to do the natural thing,
 i.e. use directed version of the measure for directed graphs and the undirected version for undirected graphs.}
 }
 \description{

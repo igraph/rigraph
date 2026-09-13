@@ -21,61 +21,61 @@ layout_with_sugiyama(
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{layers}{A numeric vector of the layer indices of the vertices.
-Layers are numbered from one.
-Default: \code{NULL}, igraph calculates the layers automatically.}
+ Layers are numbered from one.
+ Default: \code{NULL}, igraph calculates the layers automatically.}
 
 \item{hgap}{Real scalar, the minimum horizontal gap between vertices in the same layer.}
 
 \item{vgap}{Real scalar, the distance between layers.}
 
 \item{maxiter}{Integer scalar, the maximum number of iterations in the crossing minimization stage.
-100 is a reasonable default; if you feel that you have too many edge crossings, increase this.}
+ 100 is a reasonable default; if you feel that you have too many edge crossings, increase this.}
 
 \item{weights}{Optional edge weight vector.
-If \code{NULL}, then the 'weight' edge attribute is used, if there is one.
-Supply \code{NA} here and igraph ignores the edge weights.
-These are used only if the graph contains cycles; igraph will tend to reverse edges with smaller weights when breaking the cycles.}
+ If \code{NULL}, then the 'weight' edge attribute is used, if there is one.
+ Supply \code{NA} here and igraph ignores the edge weights.
+ These are used only if the graph contains cycles; igraph will tend to reverse edges with smaller weights when breaking the cycles.}
 
 \item{attributes}{Which graph/vertex/edge attributes to keep in the extended graph.
-\sQuote{default} keeps the \sQuote{size}, \sQuote{size2}, \sQuote{shape},
+ \sQuote{default} keeps the \sQuote{size}, \sQuote{size2}, \sQuote{shape},
 \sQuote{label} and \sQuote{color} vertex attributes and the \sQuote{arrow.mode} and \sQuote{arrow.size} edge attributes.
-\sQuote{all} keep all graph, vertex and edge attributes, \sQuote{none} keeps none of them.}
+ \sQuote{all} keep all graph, vertex and edge attributes, \sQuote{none} keeps none of them.}
 }
 \value{
 A list with the components:
 \describe{
 \item{layout}{
 The layout, a two-column matrix, for the original graph vertices.
-}
+ }
 \item{layout.dummy}{
 The layout for the dummy vertices, a two column matrix.
-}
+ }
 \item{extd_graph}{
 The original graph, extended with dummy vertices.
-The \sQuote{dummy} vertex attribute is set on this graph,
+ The \sQuote{dummy} vertex attribute is set on this graph,
 it is a logical attributes, and it tells you whether the vertex is a dummy vertex.
-The \sQuote{layout} graph attribute is also set,
+ The \sQuote{layout} graph attribute is also set,
 and it is the layout matrix for all (original and dummy) vertices.
-}
+ }
 }
 }
 \description{
 Sugiyama layout algorithm for layered directed acyclic graphs.
-The algorithm minimized edge crossings.
+ The algorithm minimized edge crossings.
 }
 \details{
 This layout algorithm is designed for directed acyclic graphs where each vertex is assigned to a layer.
-Layers are indexed from zero, and vertices of the same layer will be placed on the same horizontal line.
-The X coordinates of vertices within each layer are decided by the heuristic proposed by Sugiyama et al. to minimize edge crossings.
+ Layers are indexed from zero, and vertices of the same layer will be placed on the same horizontal line.
+ The X coordinates of vertices within each layer are decided by the heuristic proposed by Sugiyama et al. to minimize edge crossings.
 
 You can also try to lay out undirected graphs, graphs containing cycles,
 or graphs without an a priori layered assignment with this algorithm. igraph will try to eliminate cycles and assign vertices to layers,
 but there is no guarantee on the quality of the layout in such cases.
 
 The Sugiyama layout may introduce \dQuote{bends} on the edges in order to obtain a visually more pleasing layout.
-This is achieved by adding dummy nodes to edges spanning more than one layer.
-The resulting layout assigns coordinates not only to the nodes of the original graph but also to the dummy nodes.
-The layout algorithm will also return the extended graph with the dummy nodes.
+ This is achieved by adding dummy nodes to edges spanning more than one layer.
+ The resulting layout assigns coordinates not only to the nodes of the original graph but also to the dummy nodes.
+ The layout algorithm will also return the extended graph with the dummy nodes.
 
 For more details, see the reference below.
 }

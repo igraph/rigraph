@@ -55,23 +55,23 @@ asym_pref(
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{type.dist}{The distribution of the vertex types, a numeric vector of length \sQuote{types} containing non-negative numbers.
-The vector will be normed to obtain probabilities.
-The default \code{NULL} gives a uniform distribution.}
+ The vector will be normed to obtain probabilities.
+ The default \code{NULL} gives a uniform distribution.}
 
 \item{fixed.sizes}{Fix the number of vertices with a given vertex type label.
-The \code{type.dist} argument gives the group sizes (i.e. number of vertices with the different labels) in this case.}
+ The \code{type.dist} argument gives the group sizes (i.e. number of vertices with the different labels) in this case.}
 
 \item{pref.matrix}{A square matrix giving the preferences of the vertex types.
-The matrix has \sQuote{types} rows and columns.
-When generating an undirected graph, it must be symmetric.
-The default \code{NULL} sets all preferences to one.}
+ The matrix has \sQuote{types} rows and columns.
+ When generating an undirected graph, it must be symmetric.
+ The default \code{NULL} sets all preferences to one.}
 
 \item{directed}{Logical, whether to create a directed graph.}
 
 \item{loops}{Logical, whether self-loops are allowed in the graph.}
 
 \item{type.dist.matrix}{The joint distribution of the in- and out-vertex types.
-The default \code{NULL} gives a uniform distribution.}
+ The default \code{NULL} gives a uniform distribution.}
 }
 \value{
 An igraph graph.
@@ -81,14 +81,14 @@ Generation of random graphs based on different vertex types.
 }
 \details{
 Both models generate random graphs with given vertex types.
-For \code{sample_pref()} the probability that two vertices will be connected depends on their type and is given by the \sQuote{pref.matrix} argument.
-This matrix should be symmetric to make sense but this is not checked.
-The distribution of the different vertex types is given by the \sQuote{type.dist} vector.
+ For \code{sample_pref()} the probability that two vertices will be connected depends on their type and is given by the \sQuote{pref.matrix} argument.
+ This matrix should be symmetric to make sense but this is not checked.
+ The distribution of the different vertex types is given by the \sQuote{type.dist} vector.
 
 For \code{sample_asym_pref()} each vertex has an in-type and an out-type and a directed graph is created.
-The probability that a directed edge is realized from a vertex with a given out-type to a vertex with a given in-type is given in the \sQuote{pref.matrix} argument,
+ The probability that a directed edge is realized from a vertex with a given out-type to a vertex with a given in-type is given in the \sQuote{pref.matrix} argument,
 which can be asymmetric.
-The joint distribution for the in- and out-types is given in the \sQuote{type.dist.matrix} argument.
+ The joint distribution for the in- and out-types is given in the \sQuote{type.dist.matrix} argument.
 
 The types of the generated vertices can be retrieved from the \code{type} vertex attribute for \code{sample_pref()} and from the \code{intype} and \code{outtype} vertex attribute for \code{sample_asym_pref()}.
 }

@@ -12,7 +12,7 @@ forest.fire.game(nodes, fw.prob, bw.factor = 1, ambs = 1, directed = TRUE)
 \item{fw.prob}{The forward burning probability, see details below.}
 
 \item{bw.factor}{The backward burning ratio.
-The backward burning probability is calculated as \code{bw.factor*fw.prob}.}
+ The backward burning probability is calculated as \code{bw.factor*fw.prob}.}
 
 \item{ambs}{The number of ambassador vertices.}
 

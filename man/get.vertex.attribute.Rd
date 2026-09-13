@@ -10,10 +10,10 @@ get.vertex.attribute(graph, name, index = V(graph))
 \item{graph}{The graph.}
 
 \item{name}{Name of the attribute to query.
-If missing, then all vertex attributes are returned in a list.}
+ If missing, then all vertex attributes are returned in a list.}
 
 \item{index}{An optional vertex sequence to query the attribute only for these vertices.
-The default \code{NULL} selects all vertices.}
+ The default \code{NULL} selects all vertices.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

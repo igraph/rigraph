@@ -12,7 +12,7 @@ graph_from_lcf(shifts, ..., n = NULL, repeats = 1L)
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{n}{Integer, the number of vertices in the graph.
-If \code{NULL} (default), it is set to \code{len(shifts) * repeats}.}
+ If \code{NULL} (default), it is set to \code{len(shifts) * repeats}.}
 
 \item{repeats}{Integer constant, how many times to repeat the shifts.}
 }
@@ -21,9 +21,9 @@ A graph object.
 }
 \description{
 LCF is short for Lederberg-Coxeter-Frucht, it is a concise notation for 3-regular Hamiltonian graphs.
-It constists of three parameters, the number of vertices in the graph,
+ It constists of three parameters, the number of vertices in the graph,
 a list of shifts giving additional edges to a cycle backbone and another integer giving how many times the shifts should be performed.
-See \url{https://mathworld.wolfram.com/LCFNotation.html} for details.
+ See \url{https://mathworld.wolfram.com/LCFNotation.html} for details.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_lcf_vector}{\code{lcf_vector()}}

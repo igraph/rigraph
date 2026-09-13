@@ -17,7 +17,7 @@ make_clusters(
 \item{graph}{The graph of the community structure.}
 
 \item{membership}{The membership vector of the community structure, a numeric vector denoting the ID of the community for each vertex.
-It might be \code{NULL} for hierarchical community structures.}
+ It might be \code{NULL} for hierarchical community structures.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
@@ -26,23 +26,23 @@ It might be \code{NULL} for hierarchical community structures.}
 \item{merges}{A merge matrix, for hierarchical community structures (or \code{NULL} otherwise.}
 
 \item{modularity}{Modularity value of the community structure.
-If this is \code{TRUE} and the membership vector is available, then it the modularity values is calculated automatically.}
+ If this is \code{TRUE} and the membership vector is available, then it the modularity values is calculated automatically.}
 }
 \value{
 A \code{communities} object.
-\describe{
+ \describe{
 \item{membership}{
 A numeric vector giving the community ID for each vertex.
-}
+ }
 \item{modularity}{
 The modularity score of the partition.
-}
+ }
 \item{algorithm}{
 If known, the algorithm used to obtain the communities.
-}
+ }
 \item{vcount}{
 Number of vertices in the graph.
-}
+ }
 }
 }
 \description{

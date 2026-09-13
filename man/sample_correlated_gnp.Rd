@@ -15,18 +15,18 @@ the target Pearson correlation between the adjacency matrices of the original an
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{p}{A numeric scalar, the probability of an edge between two vertices, it must in the open (0,1) interval.
-The default \code{NULL} uses the empirical edge density of the graph.
-If you are resampling an Erdős-Rényi graph and you know the original edge probability of the Erdős-Rényi model,
+ The default \code{NULL} uses the empirical edge density of the graph.
+ If you are resampling an Erdős-Rényi graph and you know the original edge probability of the Erdős-Rényi model,
 you should supply that explicitly.}
 
 \item{permutation}{A numeric vector, a permutation vector that is applied on the vertices of the first graph,
 to get the second graph.
-If \code{NULL}, the vertices are not permuted.}
+ If \code{NULL}, the vertices are not permuted.}
 }
 \value{
 An unweighted graph of the same size as \code{old.graph}
 such that the correlation coefficient between the entries of the two adjacency matrices is \code{corr}.
-Note each pair of corresponding matrix entries is a pair of correlated Bernoulli random variables.
+ Note each pair of corresponding matrix entries is a pair of correlated Bernoulli random variables.
 }
 \description{
 Sample a new graph by perturbing the adjacency matrix of a given graph and shuffling its vertices.
@@ -48,7 +48,7 @@ g2
 \references{
 Lyzinski, V., Fishkind, D. E., Priebe, C. E. (2013).  Seeded
 graph matching for correlated Erdős-Rényi graphs.
-\url{https://arxiv.org/abs/1304.7844}
+ \url{https://arxiv.org/abs/1304.7844}
 }
 \seealso{
 Random graph models (games):

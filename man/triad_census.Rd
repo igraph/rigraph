@@ -8,7 +8,7 @@ triad_census(graph)
 }
 \arguments{
 \item{graph}{The input graph, it should be directed.
-An undirected graph results a warning, and undefined results.}
+ An undirected graph results a warning, and undefined results.}
 }
 \value{
 A numeric vector, the subgraph counts, in the order given in the above description.
@@ -18,26 +18,26 @@ This function counts the different induced subgraphs of three vertices in a grap
 }
 \details{
 Triad census was defined by David and Leinhardt (see References below).
-Every triple of vertices (A, B, C) are classified into the 16 possible states:
+ Every triple of vertices (A, B, C) are classified into the 16 possible states:
 \describe{
 \item{003}{
 A,B,C, the empty graph.
-}
+ }
 \item{012}{
 A->B, C, the graph with a single directed edge.
-}
+ }
 \item{102}{
 A<->B, C, the graph with a mutual connection between two vertices.
-}
+ }
 \item{021D}{
 A<-B->C, the out-star.
-}
+ }
 \item{021U}{
 A->B<-C, the in-star.
-}
+ }
 \item{021C}{
 A->B->C, directed line.
-}
+ }
 \item{111D}{
 A<->B<-C.
 }
@@ -67,7 +67,7 @@ A->B<->C, A<->C.
 }
 \item{300}{
 A<->B<->C, A<->C, the complete graph.
-}
+ }
 }
 
 This functions uses the RANDESU motif finder algorithm to find and count the subgraphs, see \code{\link[=motifs]{motifs()}}.

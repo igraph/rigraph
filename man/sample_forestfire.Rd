@@ -21,7 +21,7 @@ sample_forestfire(
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{bw.factor}{The backward burning ratio.
-The backward burning probability is calculated as \code{bw.factor*fw.prob}.}
+ The backward burning probability is calculated as \code{bw.factor*fw.prob}.}
 
 \item{ambs}{The number of ambassador vertices.}
 
@@ -42,9 +42,9 @@ time, according to a power-law rule.  \item Shrinking diameter. The diameter
 of the network decreases in time.  }
 
 The network is generated in the following way.
-One vertex is added at a time.
-This vertex connects to (cites) \code{ambs} vertices already present in the network, chosen uniformly random.
-Now, for each cited vertex \eqn{v}
+ One vertex is added at a time.
+ This vertex connects to (cites) \code{ambs} vertices already present in the network, chosen uniformly random.
+ Now, for each cited vertex \eqn{v}
 we do the following procedure: \enumerate{ \item We generate two random
 number, \eqn{x} and \eqn{y}, that are geometrically distributed with means
 \eqn{p/(1-p)} and \eqn{rp(1-rp)}. (\eqn{p} is \code{fw.prob}, \eqn{r} is
@@ -56,7 +56,7 @@ all the newly cited vertices.  }
 }
 \note{
 The version of the model in the published paper is incorrect in the sense that it cannot generate the kind of graphs the authors claim.
-A corrected version is available from \url{https://www.cs.cmu.edu/~jure/pubs/powergrowth-tkdd.pdf}, our implementation is based on this.
+ A corrected version is available from \url{https://www.cs.cmu.edu/~jure/pubs/powergrowth-tkdd.pdf}, our implementation is based on this.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_forest_fire_game}{\code{forest_fire_game()}}
@@ -78,7 +78,7 @@ points(seq(along.with = dd2) - 1, dd2, col = 2, pch = 2)
 \references{
 Jure Leskovec, Jon Kleinberg and Christos Faloutsos. Graphs over
 time: densification laws, shrinking diameters and possible explanations.
-\emph{KDD '05: Proceeding of the eleventh ACM SIGKDD international
+ \emph{KDD '05: Proceeding of the eleventh ACM SIGKDD international
 conference on Knowledge discovery in data mining}, 177--187, 2005.
 }
 \seealso{

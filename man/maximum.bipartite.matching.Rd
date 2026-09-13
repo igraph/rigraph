@@ -13,21 +13,21 @@ maximum.bipartite.matching(
 }
 \arguments{
 \item{graph}{The input graph.
-It might be directed, but edge directions will be ignored.}
+ It might be directed, but edge directions will be ignored.}
 
 \item{types}{Vertex types, if the graph is bipartite.
-By default they are taken from the \sQuote{\code{type}} vertex attribute, if present.}
+ By default they are taken from the \sQuote{\code{type}} vertex attribute, if present.}
 
 \item{weights}{Potential edge weights.
-If the graph has an edge attribute called \sQuote{\code{weight}}, and this argument is \code{NULL},
+ If the graph has an edge attribute called \sQuote{\code{weight}}, and this argument is \code{NULL},
 then the edge attribute is used automatically.
-In weighted matching, the weights of the edges must match as much as possible.}
+ In weighted matching, the weights of the edges must match as much as possible.}
 
 \item{eps}{A small real number used in equality tests in the weighted bipartite matching algorithm.
-Two real numbers are considered equal in the algorithm if their difference is smaller than \code{eps}.
-This is required to avoid the accumulation of numerical errors.
-The default \code{NULL} stands for the smallest \eqn{x}, such that \eqn{1+x \ne 1}{1+x != 1} holds (\code{.Machine$double.eps}).
-If you are running the algorithm with no weights, this argument is ignored.}
+ Two real numbers are considered equal in the algorithm if their difference is smaller than \code{eps}.
+ This is required to avoid the accumulation of numerical errors.
+ The default \code{NULL} stands for the smallest \eqn{x}, such that \eqn{1+x \ne 1}{1+x != 1} holds (\code{.Machine$double.eps}).
+ If you are running the algorithm with no weights, this argument is ignored.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

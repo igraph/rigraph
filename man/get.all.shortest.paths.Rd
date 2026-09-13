@@ -16,23 +16,23 @@ get.all.shortest.paths(
 \item{graph}{The graph to work on.}
 
 \item{from}{Numeric constant, the vertex from or to the shortest paths will be calculated.
-Note that right now this is not a vector of vertex IDs, but only a single vertex.}
+ Note that right now this is not a vector of vertex IDs, but only a single vertex.}
 
 \item{to}{Numeric vector, the vertices to which the shortest paths will be calculated.
-The default \code{NULL} includes all vertices.
-Note that for \code{distances()} every vertex must be included here at most once.
-(This is not required for \code{shortest_paths()}.}
+ The default \code{NULL} includes all vertices.
+ Note that for \code{distances()} every vertex must be included here at most once.
+ (This is not required for \code{shortest_paths()}.}
 
 \item{mode}{Character constant,
 gives whether the shortest paths to or from the given vertices should be calculated for directed graphs.
-If \code{out} then the shortest paths \emph{from} the vertex, if \verb{in} then \emph{to} it will be considered.
-If \code{all}, the default, then the graph is treated as undirected, i.e. edge directions are not taken into account.
-This argument is ignored for undirected graphs.}
+ If \code{out} then the shortest paths \emph{from} the vertex, if \verb{in} then \emph{to} it will be considered.
+ If \code{all}, the default, then the graph is treated as undirected, i.e. edge directions are not taken into account.
+ This argument is ignored for undirected graphs.}
 
 \item{weights}{Possibly a numeric vector giving edge weights.
-If this is \code{NULL} and the graph has a \code{weight} edge attribute, then the attribute is used.
-If this is \code{NA} then no weights are used (even if the graph has a \code{weight} attribute).
-In a weighted graph, the length of a path is the sum of the weights of its constituent edges.}
+ If this is \code{NULL} and the graph has a \code{weight} edge attribute, then the attribute is used.
+ If this is \code{NA} then no weights are used (even if the graph has a \code{weight} attribute).
+ In a weighted graph, the length of a path is the sum of the weights of its constituent edges.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

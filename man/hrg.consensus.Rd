@@ -10,7 +10,7 @@ hrg.consensus(graph, hrg = NULL, start = FALSE, num.samples = 10000)
 \item{graph}{The graph the models were fitted to.}
 
 \item{hrg}{A hierarchical random graph model, in the form of an \code{igraphHRG} object.
-\code{consensus_tree()} allows this to be \code{NULL} as well, then a HRG is fitted to the graph first, from a random starting point.}
+ \code{consensus_tree()} allows this to be \code{NULL} as well, then a HRG is fitted to the graph first, from a random starting point.}
 
 \item{start}{Logical, whether to start the fitting/sampling from the supplied \code{igraphHRG} object, or from a random starting point.}
 

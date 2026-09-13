@@ -8,10 +8,10 @@ subgraph.centrality(graph, diag = FALSE)
 }
 \arguments{
 \item{graph}{The input graph.
-It will be treated as undirected.}
+ It will be treated as undirected.}
 
 \item{diag}{Logical, whether to include the diagonal of the adjacency matrix in the analysis.
-Giving \code{FALSE} here effectively eliminates the loops edges from the graph before the calculation.}
+ Giving \code{FALSE} here effectively eliminates the loops edges from the graph before the calculation.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

@@ -16,11 +16,11 @@ static.fitness.game(
 \item{no.of.edges}{The number of edges in the generated graph.}
 
 \item{fitness.out}{A numeric vector containing the fitness of each vertex.
-For directed graphs, this specifies the out-fitness of each vertex.}
+ For directed graphs, this specifies the out-fitness of each vertex.}
 
 \item{fitness.in}{Numeric vector that specifies the in-fitness of each vertex.
-The generated graph will be directed.
-Default: \code{NULL}, the generated graph will be undirected.}
+ The generated graph will be directed.
+ Default: \code{NULL}, the generated graph will be undirected.}
 
 \item{loops}{Logical, whether to allow loop edges in the graph.}
 

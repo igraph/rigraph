@@ -10,9 +10,9 @@ no.clusters(graph, mode = c("weak", "strong"))
 \item{graph}{The graph to analyze.}
 
 \item{mode}{Character string, either \dQuote{weak} or \dQuote{strong}.
-For directed graphs \dQuote{weak} implies weakly,
+ For directed graphs \dQuote{weak} implies weakly,
 \dQuote{strong} strongly connected components to search.
-It is ignored for undirected graphs.}
+ It is ignored for undirected graphs.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

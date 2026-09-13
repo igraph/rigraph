@@ -23,33 +23,33 @@ min_cut(
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{capacity}{Vector giving the capacity of the edges.
-If this is \code{NULL} (the default) then the \code{capacity} edge attribute is used.}
+ If this is \code{NULL} (the default) then the \code{capacity} edge attribute is used.}
 
 \item{value.only}{Logical, if \code{TRUE} only the minimum cut value is returned,
 if \code{FALSE} the edges in the cut and a the two (or more) partitions are also returned.}
 }
 \value{
 For \code{min_cut()} a nuieric constant, the value of the minimum cut, except if \code{value.only = FALSE}.
-In this case a named list with components:
+ In this case a named list with components:
 \describe{
 \item{value}{
 Numeric scalar, the cut value.
-}
+ }
 \item{cut}{
 Numeric vector, the edges in the cut.
-}
+ }
 \item{partition1}{
 The vertices in the first partition after the cut edges are removed.
-Note that these vertices might be actually in different components
+ Note that these vertices might be actually in different components
 (after the cut edges are removed),
 as the graph may fall apart into more than two components.
-}
+ }
 \item{partition2}{
 The vertices in the second partition after the cut edges are removed.
-Note that these vertices might be actually in different components
+ Note that these vertices might be actually in different components
 (after the cut edges are removed),
 as the graph may fall apart into more than two components.
-}
+ }
 }
 }
 \description{
@@ -59,7 +59,7 @@ as the graph may fall apart into more than two components.
 The minimum st-cut between \code{source} and \code{target} is the minimum total weight of edges needed to remove to eliminate all paths from \code{source} to \code{target}.
 
 The minimum cut of a graph is the minimum total weight of the edges needed to remove to separate the graph into (at least) two components.
-(Which is to make the graph \emph{not} strongly connected in the directed case.)
+ (Which is to make the graph \emph{not} strongly connected in the directed case.)
 
 The maximum flow between two vertices in a graph is the same as the minimum st-cut,
 so \code{max_flow()} and \code{min_cut()} essentially calculate the same quantity,

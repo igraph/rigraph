@@ -8,18 +8,18 @@ min_separators(graph)
 }
 \arguments{
 \item{graph}{The input graph.
-It may be directed, but edge directions are ignored.}
+ It may be directed, but edge directions are ignored.}
 }
 \value{
 A list of numeric vectors.
-Each numeric vector is a vertex separator.
+ Each numeric vector is a vertex separator.
 }
 \description{
 Find all vertex sets of minimal size whose removal separates the graph into more components
 }
 \details{
 This function implements the Kanevsky algorithm for finding all minimal-size vertex separators in an undirected graph.
-See the reference below for the details.
+ See the reference below for the details.
 
 In the special case of a fully connected input graph with \eqn{n} vertices,
 all subsets of size \eqn{n-1} are listed as the result.
