@@ -3,8 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graphlets.project()` was renamed to [graphlet_proj()] to create a more
-#' consistent API.
+#' `graphlets.project()` was renamed to [graphlet_proj()] to create a more consistent API.
 #' @inheritParams graphlet_proj
 #' @keywords internal
 #' @export
@@ -31,8 +30,7 @@ graphlets.project <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graphlets.candidate.basis()` was renamed to [graphlet_basis()] to create a more
-#' consistent API.
+#' `graphlets.candidate.basis()` was renamed to [graphlet_basis()] to create a more consistent API.
 #' @inheritParams graphlet_basis
 #' @keywords internal
 #' @export
@@ -48,31 +46,25 @@ graphlets.candidate.basis <- function(graph, weights = NULL) {
 
 #' Graphlet decomposition of a graph
 #'
-#' Graphlet decomposition models a weighted undirected graph via the union of
-#' potentially overlapping dense social groups.  This is done by a two-step
-#' algorithm. In the first step a candidate set of groups (a candidate basis)
-#' is created by finding cliques if the thresholded input graph. In the second
-#' step these the graph is projected on the candidate basis, resulting a weight
-#' coefficient for each clique in the candidate basis.
+#' Graphlet decomposition models a weighted undirected graph via the union of potentially overlapping dense social groups.  This is done by a two-step algorithm.
+#' In the first step a candidate set of groups (a candidate basis) is created by finding cliques if the thresholded input graph.
+#' In the second step these the graph is projected on the candidate basis,
+#' resulting a weight coefficient for each clique in the candidate basis.
 #'
-#' igraph contains three functions for performing the graph decomponsition of a
-#' graph. The first is `graphlets()`, which performed both steps on the
-#' method and returns a list of subgraphs, with their corresponding weights.
-#' The second and third functions correspond to the first and second steps of
-#' the algorithm, and they are useful if the user wishes to perform them
-#' individually: `graphlet_basis()` and `graphlet_proj()`.
+#' igraph contains three functions for performing the graph decomponsition of a graph.
+#' The first is `graphlets()`, which performed both steps on the method and returns a list of subgraphs, with their corresponding weights.
+#' The second and third functions correspond to the first and second steps of the algorithm,
+#' and they are useful if the user wishes to perform them individually: `graphlet_basis()` and `graphlet_proj()`.
 #'
-#' @param graph The input graph, edge directions are ignored. Only simple graph
-#'   (i.e. graphs without self-loops and multiple edges) are supported.
+#' @param graph The input graph, edge directions are ignored.
+#'   Only simple graph (i.e. graphs without self-loops and multiple edges) are supported.
 #' @inheritParams rlang::args_dots_empty
-#' @param weights Edge weights. If the graph has a `weight` edge attribute
-#'   and this argument is `NULL` (the default), then the `weight` edge
-#'   attribute is used.
+#' @param weights Edge weights.
+#'   If the graph has a `weight` edge attribute and this argument is `NULL` (the default), then the `weight` edge attribute is used.
 #' @param niter Integer scalar, the number of iterations to perform.
-#' @param cliques A list of vertex IDs, the graphlet basis to use for the
-#'   projection.
-#' @param Mu Starting weights for the projection. The default `NULL` uses a
-#'   weight of one for each clique.
+#' @param cliques A list of vertex IDs, the graphlet basis to use for the projection.
+#' @param Mu Starting weights for the projection.
+#'   The default `NULL` uses a weight of one for each clique.
 #' @return `graphlets()` returns a list with two members:
 #'   \describe{
 #'     \item{cliques}{
@@ -95,8 +87,7 @@ graphlets.candidate.basis <- function(graph, weights = NULL) {
 #'     }
 #'   }
 #'
-#'   `graphlet_proj()` return a numeric vector, the weights of the graphlet
-#'   basis subgraphs.
+#'   `graphlet_proj()` return a numeric vector, the weights of the graphlet basis subgraphs.
 #' @examples
 #'
 #' ## Create an example graph first

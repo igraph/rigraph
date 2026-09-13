@@ -3,8 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `assortativity.nominal()` was renamed to [assortativity_nominal()] to create a more
-#' consistent API.
+#' `assortativity.nominal()` was renamed to [assortativity_nominal()] to create a more consistent API.
 #' @inheritParams assortativity_nominal
 #' @keywords internal
 #' @export
@@ -33,8 +32,7 @@ assortativity.nominal <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `assortativity.degree()` was renamed to [assortativity_degree()] to create a more
-#' consistent API.
+#' `assortativity.degree()` was renamed to [assortativity_degree()] to create a more consistent API.
 #' @inheritParams assortativity_degree
 #' @keywords internal
 #' @export
@@ -73,27 +71,26 @@ assortativity.degree <- function(graph, directed = TRUE) {
 
 #' Assortativity coefficient
 #'
-#' The assortativity coefficient is positive if similar vertices (based on some
-#' external property) tend to connect to each, and negative otherwise.
+#' The assortativity coefficient is positive if similar vertices (based on some external property) tend to connect to each,
+#' and negative otherwise.
 #'
-#' The assortativity coefficient measures the level of homophyly of the graph,
-#' based on some vertex labeling or values assigned to vertices. If the
-#' coefficient is high, that means that connected vertices tend to have the
-#' same labels or similar assigned values.
+#' The assortativity coefficient measures the level of homophyly of the graph, based on some vertex labeling or values assigned to vertices.
+#' If the coefficient is high, that means that connected vertices tend to have the same labels or similar assigned values.
 #'
-#' M.E.J. Newman defined two kinds of assortativity coefficients, the first one
-#' is for categorical labels of vertices. `assortativity_nominal()`
-#' calculates this measure. It is defined as
+#' M.E.J.
+#' Newman defined two kinds of assortativity coefficients, the first one is for categorical labels of vertices.
+#' `assortativity_nominal()` calculates this measure.
+#' It is defined as
 #'
 #' \deqn{r=\frac{\sum_i e_{ii}-\sum_i a_i b_i}{1-\sum_i a_i b_i}}{
 #' r=(sum(e(i,i), i) - sum(a(i)b(i), i)) / (1 - sum(a(i)b(i), i))}
 #'
-#' where \eqn{e_{ij}}{e(i,j)} is the fraction of edges connecting vertices of
-#' type \eqn{i} and \eqn{j}, \eqn{a_i=\sum_j e_{ij}}{a(i)=sum(e(i,j), j)} and
-#' \eqn{b_j=\sum_i e_{ij}}{b(j)=sum(e(i,j), i)}.
+#' where \eqn{e_{ij}}{e(i,j)} is the fraction of edges connecting vertices of type \eqn{i} and \eqn{j},
+#' \eqn{a_i=\sum_j e_{ij}}{a(i)=sum(e(i,j), j)} and \eqn{b_j=\sum_i e_{ij}}{b(j)=sum(e(i,j), i)}.
 #'
-#' The second assortativity variant is based on values assigned to the
-#' vertices. `assortativity()` calculates this measure. It is defined as
+#' The second assortativity variant is based on values assigned to the vertices.
+#' `assortativity()` calculates this measure.
+#' It is defined as
 #'
 #' \deqn{r=\frac1{\sigma_q^2}\sum_{jk} jk(e_{jk}-q_j q_k)}{
 #' sum(jk(e(j,k)-q(j)q(k)), j, k) / sigma(q)^2}
@@ -103,18 +100,15 @@ assortativity.degree <- function(graph, directed = TRUE) {
 #' \deqn{r=\frac1{\sigma_o\sigma_i}\sum_{jk}jk(e_{jk}-q_j^o q_k^i)}{
 #' sum(jk(e(j,k)-qout(j)qin(k)), j, k) / sigma(qin) / sigma(qout) }
 #'
-#' for directed ones. Here \eqn{q_i^o=\sum_j e_{ij}}{qout(i)=sum(e(i,j), j)},
-#' \eqn{q_i^i=\sum_j e_{ji}}{qin(i)=sum(e(j,i), j)}, moreover,
-#' \eqn{\sigma_q}{\sigma(q)}, \eqn{\sigma_o}{\sigma(qout)} and
-#' \eqn{\sigma_i}{\sigma(qin)} are the standard deviations of \eqn{q},
+#' for directed ones.
+#' Here \eqn{q_i^o=\sum_j e_{ij}}{qout(i)=sum(e(i,j), j)}, \eqn{q_i^i=\sum_j e_{ji}}{qin(i)=sum(e(j,i), j)}, moreover,
+#' \eqn{\sigma_q}{\sigma(q)}, \eqn{\sigma_o}{\sigma(qout)} and \eqn{\sigma_i}{\sigma(qin)} are the standard deviations of \eqn{q},
 #' \eqn{q^o}{qout} and \eqn{q^i}{qin}, respectively.
 #'
-#' The reason of the difference is that in directed networks the relationship
-#' is not symmetric, so it is possible to assign different values to the
-#' outgoing and the incoming end of the edges.
+#' The reason of the difference is that in directed networks the relationship is not symmetric,
+#' so it is possible to assign different values to the outgoing and the incoming end of the edges.
 #'
-#' `assortativity_degree()` uses vertex degree as vertex values
-#' and calls `assortativity()`.
+#' `assortativity_degree()` uses vertex degree as vertex values and calls `assortativity()`.
 #'
 #' Undirected graphs are effectively treated as directed ones with all-reciprocal edges.
 #' Thus, self-loops are taken into account twice in undirected graphs.
@@ -123,27 +117,17 @@ assortativity.degree <- function(graph, directed = TRUE) {
 #' @param graph The input graph, it can be directed or undirected.
 #' @param values The vertex values, these can be arbitrary numeric values.
 #' @inheritParams rlang::args_dots_empty
-#' @param values.in A second value vector to use for the incoming edges when
-#'   calculating assortativity for a directed graph.
-#'   Supply `NULL` here if
-#'   you want to use the same values for outgoing and incoming edges.
-#'   This
-#'   argument is ignored (with a warning) if it is not `NULL` and undirected
-#'   assortativity coefficient is being calculated.
-#' @param directed Logical, whether to consider edge directions for
-#'   directed graphs.
+#' @param values.in A second value vector to use for the incoming edges when calculating assortativity for a directed graph.
+#'   Supply `NULL` here if you want to use the same values for outgoing and incoming edges.
+#'   This argument is ignored (with a warning) if it is not `NULL` and undirected assortativity coefficient is being calculated.
+#' @param directed Logical, whether to consider edge directions for directed graphs.
 #'   This argument is ignored for undirected graphs.
-#'   Supply
-#'   `TRUE` here to do the natural thing, i.e. use directed version of the
-#'   measure for directed graphs and the undirected version for undirected
-#'   graphs.
+#'   Supply `TRUE` here to do the natural thing,
+#'   i.e. use directed version of the measure for directed graphs and the undirected version for undirected graphs.
 #' @param normalized Logical, whether to compute the normalized assortativity.
 #' The non-normalized nominal assortativity is identical to modularity.
-#' The non-normalized value-based assortativity is simply the covariance of the
-#' values at the two ends of edges.
-#' @param types1,types2
-#'   `r lifecycle::badge("deprecated")`
-#'   Deprecated aliases for `values` and `values.in`, respectively.
+#' The non-normalized value-based assortativity is simply the covariance of the values at the two ends of edges.
+#' @param types1,types2 `r lifecycle::badge("deprecated")` Deprecated aliases for `values` and `values.in`, respectively.
 #' @return A single real number.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references M. E. J. Newman: Mixing patterns in networks, *Phys. Rev.
@@ -234,10 +218,10 @@ assortativity_legacy <- function(
   )
 }
 
-#' @param types Vector giving the vertex types. They as assumed to be integer
-#'   numbers, starting with one. Non-integer values are converted to integers
-#'   with [as.integer()]. Character vectors are converted to integers using
-#'   [as.factor()].
+#' @param types Vector giving the vertex types.
+#'   They as assumed to be integer numbers, starting with one.
+#'   Non-integer values are converted to integers with [as.integer()].
+#'   Character vectors are converted to integers using [as.factor()].
 #' @rdname assortativity
 #' @inheritParams rlang::args_dots_empty
 #' @export

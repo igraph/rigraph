@@ -3,8 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.graphical.degree.sequence()` was renamed to [is_graphical()] to create a more
-#' consistent API.
+#' `is.graphical.degree.sequence()` was renamed to [is_graphical()] to create a more consistent API.
 #' @inheritParams is_graphical
 #' @keywords internal
 #' @export
@@ -31,8 +30,7 @@ is.graphical.degree.sequence <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.degree.sequence()` was renamed to [is_degseq()] to create a more
-#' consistent API.
+#' `is.degree.sequence()` was renamed to [is_degseq()] to create a more consistent API.
 #' @inheritParams is_degseq
 #' @keywords internal
 #' @export
@@ -67,19 +65,17 @@ is.degree.sequence <- function(out.deg, in.deg = NULL) {
 
 #' Check if a degree sequence is valid for a multi-graph
 #'
-#' `is_degseq()` checks whether the given vertex degrees (in- and
-#' out-degrees for directed graphs) can be realized by a graph. Note that the
-#' graph does not have to be simple, it may contain loop and multiple edges.
+#' `is_degseq()` checks whether the given vertex degrees (in- and out-degrees for directed graphs) can be realized by a graph.
+#' Note that the graph does not have to be simple, it may contain loop and multiple edges.
 #' For undirected graphs, it also checks whether the sum of degrees is even.
-#' For directed graphs, the function checks whether the lengths of the two
-#' degree vectors are equal and whether their sums are also equal. These are
-#' known sufficient and necessary conditions for a degree sequence to be valid.
+#' For directed graphs, the function checks whether the lengths of the two degree vectors are equal and whether their sums are also equal.
+#' These are known sufficient and necessary conditions for a degree sequence to be valid.
 #'
 #' @aliases is_degseq
-#' @param out.deg Integer vector, the degree sequence for undirected graphs, or
-#'   the out-degree sequence for directed graphs.
-#' @param in.deg `NULL` or an integer vector. For undirected graphs, it
-#'   should be `NULL`. For directed graphs it specifies the in-degrees.
+#' @param out.deg Integer vector, the degree sequence for undirected graphs, or the out-degree sequence for directed graphs.
+#' @param in.deg `NULL` or an integer vector.
+#'   For undirected graphs, it should be `NULL`.
+#'   For directed graphs it specifies the in-degrees.
 #' @return A logical scalar.
 #' @author Tamás Nepusz \email{ntamas@@gmail.com} and Szabolcs Horvát \email{szhorvat@gmail.com}
 #' @references Z Király, Recognizing graphic degree sequences and generating
@@ -106,24 +102,21 @@ is_degseq <- function(out.deg, in.deg = NULL) {
 
 #' Is a degree sequence graphical?
 #'
-#' Determine whether the given vertex degrees (in- and out-degrees for
-#' directed graphs) can be realized by a graph.
+#' Determine whether the given vertex degrees (in- and out-degrees for directed graphs) can be realized by a graph.
 #'
-#' The classical concept of graphicality assumes simple graphs. This function
-#' can perform the check also when self-loops, multi-edges, or both are allowed
-#' in the graph.
+#' The classical concept of graphicality assumes simple graphs.
+#' This function can perform the check also when self-loops, multi-edges, or both are allowed in the graph.
 #'
-#' @param out.deg Integer vector, the degree sequence for undirected graphs, or
-#'   the out-degree sequence for directed graphs.
-#' @param in.deg `NULL` or an integer vector. For undirected graphs, it
-#'   should be `NULL`. For directed graphs it specifies the in-degrees.
+#' @param out.deg Integer vector, the degree sequence for undirected graphs, or the out-degree sequence for directed graphs.
+#' @param in.deg `NULL` or an integer vector.
+#'   For undirected graphs, it should be `NULL`.
+#'   For directed graphs it specifies the in-degrees.
 #' @inheritParams rlang::args_dots_empty
-#' @param allowed.edge.types The allowed edge types in the graph. \sQuote{simple}
-#'   means that neither loop nor multiple edges are allowed (i.e. the graph must be
-#'   simple). \sQuote{loops} means that loop edges are allowed but mutiple edges
-#'   are not. \sQuote{multi} means that multiple edges are allowed but loop edges
-#'   are not. \sQuote{all} means that both loop edges and multiple edges are
-#'   allowed.
+#' @param allowed.edge.types The allowed edge types in the graph.
+#'   \sQuote{simple} means that neither loop nor multiple edges are allowed (i.e. the graph must be simple).
+#'   \sQuote{loops} means that loop edges are allowed but mutiple edges are not.
+#'   \sQuote{multi} means that multiple edges are allowed but loop edges are not.
+#'   \sQuote{all} means that both loop edges and multiple edges are allowed.
 #' @return A logical scalar.
 #' @author Tamás Nepusz \email{ntamas@@gmail.com}
 #' @references Hakimi SL: On the realizability of a set of integers as degrees

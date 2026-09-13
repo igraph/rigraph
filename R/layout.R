@@ -3,8 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `piecewise.layout()` was renamed to [layout_components()] to create a more
-#' consistent API.
+#' `piecewise.layout()` was renamed to [layout_components()] to create a more consistent API.
 #' @inheritParams layout_components
 #' @keywords internal
 #' @export
@@ -23,8 +22,7 @@ piecewise.layout <- function(graph, layout = layout_with_kk, ...) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.sugiyama()` was renamed to [layout_with_sugiyama()] to create a more
-#' consistent API.
+#' `layout.sugiyama()` was renamed to [layout_with_sugiyama()] to create a more consistent API.
 #' @inheritParams layout_with_sugiyama
 #' @keywords internal
 #' @export
@@ -59,8 +57,7 @@ layout.sugiyama <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.star()` was renamed to [layout_as_star()] to create a more
-#' consistent API.
+#' `layout.star()` was renamed to [layout_as_star()] to create a more consistent API.
 #' @inheritParams layout_as_star
 #' @keywords internal
 #' @export
@@ -75,8 +72,7 @@ layout.star <- function(graph, center = V(graph)[1], order = NULL) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.norm()` was renamed to [norm_coords()] to create a more
-#' consistent API.
+#' `layout.norm()` was renamed to [norm_coords()] to create a more consistent API.
 #' @inheritParams norm_coords
 #' @keywords internal
 #' @export
@@ -107,8 +103,7 @@ layout.norm <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.merge()` was renamed to [merge_coords()] to create a more
-#' consistent API.
+#' `layout.merge()` was renamed to [merge_coords()] to create a more consistent API.
 #' @inheritParams merge_coords
 #' @keywords internal
 #' @export
@@ -123,8 +118,7 @@ layout.merge <- function(graphs, layouts, method = "dla") {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.mds()` was renamed to [layout_with_mds()] to create a more
-#' consistent API.
+#' `layout.mds()` was renamed to [layout_with_mds()] to create a more consistent API.
 #' @inheritParams layout_with_mds
 #' @keywords internal
 #' @export
@@ -144,8 +138,7 @@ layout.mds <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.grid()` was renamed to [layout_on_grid()] to create a more
-#' consistent API.
+#' `layout.grid()` was renamed to [layout_on_grid()] to create a more consistent API.
 #' @inheritParams layout_on_grid
 #' @keywords internal
 #' @export
@@ -160,8 +153,7 @@ layout.grid <- function(graph, width = 0, height = 0, dim = 2) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.graphopt()` was renamed to [layout_with_graphopt()] to create a more
-#' consistent API.
+#' `layout.graphopt()` was renamed to [layout_with_graphopt()] to create a more consistent API.
 #' @inheritParams layout_with_graphopt
 #' @keywords internal
 #' @export
@@ -198,8 +190,7 @@ layout.graphopt <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.gem()` was renamed to [layout_with_gem()] to create a more
-#' consistent API.
+#' `layout.gem()` was renamed to [layout_with_gem()] to create a more consistent API.
 #' @inheritParams layout_with_gem
 #' @keywords internal
 #' @export
@@ -228,8 +219,7 @@ layout.gem <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.davidson.harel()` was renamed to [layout_with_dh()] to create a more
-#' consistent API.
+#' `layout.davidson.harel()` was renamed to [layout_with_dh()] to create a more consistent API.
 #' @inheritParams layout_with_dh
 #' @keywords internal
 #' @export
@@ -270,8 +260,7 @@ layout.davidson.harel <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.bipartite()` was renamed to [layout_as_bipartite()] to create a more
-#' consistent API.
+#' `layout.bipartite()` was renamed to [layout_as_bipartite()] to create a more consistent API.
 #' @inheritParams layout_as_bipartite
 #' @keywords internal
 #' @export
@@ -302,8 +291,7 @@ layout.bipartite <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.auto()` was renamed to [layout_nicely()] to create a more
-#' consistent API.
+#' `layout.auto()` was renamed to [layout_nicely()] to create a more consistent API.
 #' @inheritParams layout_nicely
 #' @keywords internal
 #' @export
@@ -342,30 +330,24 @@ layout.auto <- function(graph, dim = 2, ...) {
 
 #' Graph layouts
 #'
-#' This is a generic function to apply a layout function to
-#' a graph.
+#' This is a generic function to apply a layout function to a graph.
 #'
 #' There are two ways to calculate graph layouts in igraph.
-#' The first way is to call a layout function (they all have
-#' prefix `layout_()` on a graph, to get the vertex coordinates.
+#' The first way is to call a layout function (they all have prefix `layout_()` on a graph, to get the vertex coordinates.
 #'
-#' The second way (new in igraph 0.8.0), has two steps, and it
-#' is more flexible. First you call a layout specification
-#' function (the one without the `layout_()` prefix, and
-#' then `layout_()` (or [add_layout_()]) to
-#' perform the layouting.
+#' The second way (new in igraph 0.8.0), has two steps, and it is more flexible.
+#' First you call a layout specification function (the one without the `layout_()` prefix,
+#' and then `layout_()` (or [add_layout_()]) to perform the layouting.
 #'
-#' The second way is preferred, as it is more flexible. It allows
-#' operations before and after the layouting. E.g. using the
-#' `component_wise()` argument, the layout can be calculated
-#' separately for each component, and then merged to get the
-#' final results.
+#' The second way is preferred, as it is more flexible.
+#' It allows operations before and after the layouting.
+#' E.g. using the `component_wise()` argument, the layout can be calculated separately for each component,
+#' and then merged to get the final results.
 #'
 #' @aliases layout
 #' @section Modifiers:
 #' Modifiers modify how a layout calculation is performed.
-#' Modifiers are applied in the order they are specified as arguments to
-#' `layout_()`.
+#' Modifiers are applied in the order they are specified as arguments to `layout_()`.
 #'
 #' There are two types of modifiers:
 #' \itemize{
@@ -395,15 +377,14 @@ layout.auto <- function(graph, dim = 2, ...) {
 #' }
 #'
 #' @param graph The input graph.
-#' @param layout The layout specification. It must be a call
-#'   to a layout specification function.
+#' @param layout The layout specification.
+#'   It must be a call to a layout specification function.
 #' @param ... Further modifiers, see a complete list below.
 #'   For the [print()] methods, it is ignored.
-#' @return The return value of the layout function, usually a
-#'   two column matrix. For 3D layouts a three column matrix.
+#' @return The return value of the layout function, usually a two column matrix.
+#'   For 3D layouts a three column matrix.
 #'
-#' @seealso [add_layout_()] to add the layout to the
-#'   graph as an attribute.
+#' @seealso [add_layout_()] to add the layout to the graph as an attribute.
 #' @export
 #' @family graph layouts
 #' @examples
@@ -521,10 +502,10 @@ print.igraph_layout_spec <- function(x, ...) {
 #' Create a layout modifier
 #'
 #' This is a constructor function for creating custom layout modifiers.
-#' Layout modifiers can be used with [layout_()] to modify how layouts
-#' are calculated or to transform the resulting coordinates.
+#' Layout modifiers can be used with [layout_()] to modify how layouts are calculated or to transform the resulting coordinates.
 #'
-#' @param ... Named arguments that define the modifier. Must include:
+#' @param ... Named arguments that define the modifier.
+#'   Must include:
 #'   \describe{
 #'     \item{ID}{A unique identifier string for the modifier}
 #'     \item{type}{Either `"pre"` for pre-layout or `"post"` for post-layout}
@@ -535,8 +516,7 @@ print.igraph_layout_spec <- function(x, ...) {
 #'
 #' @return An object of class `igraph_layout_modifier`.
 #'
-#' @seealso [layout_()] for using modifiers, [component_wise()], [normalize()]
-#'   for examples of built-in modifiers.
+#' @seealso [layout_()] for using modifiers, [component_wise()], [normalize()] for examples of built-in modifiers.
 #'
 #' @family layout modifiers
 #' @export
@@ -574,12 +554,9 @@ print.igraph_layout_modifier <- function(x, ...) {
 
 #' Component-wise layout
 #'
-#' This is a layout modifier function, and it can be used
-#' to calculate the layout separately for each component
-#' of the graph.
+#' This is a layout modifier function, and it can be used to calculate the layout separately for each component of the graph.
 #'
-#' @param merge_method Merging algorithm, the `method`
-#'   argument of [merge_coords()].
+#' @param merge_method Merging algorithm, the `method` argument of [merge_coords()].
 #'
 #' @family layout modifiers
 #' @family graph layouts
@@ -619,12 +596,10 @@ component_wise <- function(merge_method = "dla") {
 #' Scale coordinates of a layout.
 #'
 #' @param xmin,xmax Minimum and maximum for x coordinates.
-#' @param ymin,ymax Minimum and maximum for y coordinates. When omitted,
-#'   they follow `xmin` and `xmax`; `NULL` disables normalization along
-#'   this axis.
-#' @param zmin,zmax Minimum and maximum for z coordinates. When omitted,
-#'   they follow `xmin` and `xmax`; `NULL` disables normalization along
-#'   this axis.
+#' @param ymin,ymax Minimum and maximum for y coordinates.
+#'   When omitted, they follow `xmin` and `xmax`; `NULL` disables normalization along this axis.
+#' @param zmin,zmax Minimum and maximum for z coordinates.
+#'   When omitted, they follow `xmin` and `xmax`; `NULL` disables normalization along this axis.
 #'
 #' @family layout modifiers
 #' @family graph layouts
@@ -678,32 +653,24 @@ normalize <- function(
 
 #' Simple two-row layout for bipartite graphs
 #'
-#' Minimize edge-crossings in a simple two-row (or column) layout for bipartite
-#' graphs.
+#' Minimize edge-crossings in a simple two-row (or column) layout for bipartite graphs.
 #'
-#' The layout is created by first placing the vertices in two rows, according
-#' to their types. Then the positions within the rows are optimized to minimize
-#' edge crossings, using the Sugiyama algorithm (see
-#' [layout_with_sugiyama()]).
+#' The layout is created by first placing the vertices in two rows, according to their types.
+#' Then the positions within the rows are optimized to minimize edge crossings, using the Sugiyama algorithm (see [layout_with_sugiyama()]).
 #'
-#' @param graph The bipartite input graph. It should have a logical
-#'   \sQuote{`type`} vertex attribute, or the `types` argument must be
-#'   given.
-#' @param types A logical vector, the vertex types. If this argument is
-#'   `NULL` (the default), then the \sQuote{`type`} vertex attribute is
-#'   used.
+#' @param graph The bipartite input graph.
+#'   It should have a logical \sQuote{`type`} vertex attribute, or the `types` argument must be given.
+#' @param types A logical vector, the vertex types.
+#'   If this argument is `NULL` (the default), then the \sQuote{`type`} vertex attribute is used.
 #' @inheritParams rlang::args_dots_empty
-#' @param hgap Real scalar, the minimum horizontal gap between vertices in the
-#'   same layer.
+#' @param hgap Real scalar, the minimum horizontal gap between vertices in the same layer.
 #' @param vgap Real scalar, the distance between the two layers.
-#' @param maxiter Integer scalar, the maximum number of iterations in the
-#'   crossing minimization stage. 100 is a reasonable default; if you feel that
-#'   you have too many edge crossings, increase this.
-#' @return A matrix with two columns and as many rows as the number of vertices
-#'   in the input graph.
+#' @param maxiter Integer scalar, the maximum number of iterations in the crossing minimization stage.
+#'   100 is a reasonable default; if you feel that you have too many edge crossings, increase this.
+#' @return A matrix with two columns and as many rows as the number of vertices in the input graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [layout_with_sugiyama()]. See [as_bipartite()] to build a lazy
-#'   layout specification for [add_layout_()].
+#' @seealso [layout_with_sugiyama()].
+#'   See [as_bipartite()] to build a lazy layout specification for [add_layout_()].
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -783,27 +750,20 @@ layout_as_bipartite <- function(
 #' Layout specifications for `layout_()` and `add_layout_()`
 #'
 #' @description
-#' Each of these functions builds a lazy layout specification for the given
-#' layout function, to be used with [layout_()] or [add_layout_()]. The
-#' specification is only evaluated when the layout is actually computed, so it
-#' can be combined with layout modifiers such as [component_wise()] or
-#' [normalize()].
+#' Each of these functions builds a lazy layout specification for the given layout function, to be used with [layout_()] or [add_layout_()].
+#' The specification is only evaluated when the layout is actually computed,
+#' so it can be combined with layout modifiers such as [component_wise()] or [normalize()].
 #'
-#' `as_bipartite()`, `as_star()` and `as_tree()` wrap [layout_as_bipartite()],
-#' [layout_as_star()] and [layout_as_tree()] respectively. `in_circle()`,
-#' `nicely()`, `on_grid()`, `on_sphere()` and `randomly()` wrap
-#' [layout_in_circle()], [layout_nicely()], [layout_on_grid()],
-#' [layout_on_sphere()] and [layout_randomly()]. `with_dh()`, `with_fr()`,
-#' `with_gem()`, `with_graphopt()`, `with_kk()`, `with_lgl()`, `with_mds()`,
-#' `with_sugiyama()` and `with_drl()` wrap [layout_with_dh()],
-#' [layout_with_fr()], [layout_with_gem()], [layout_with_graphopt()],
-#' [layout_with_kk()], [layout_with_lgl()], [layout_with_mds()],
-#' [layout_with_sugiyama()] and [layout_with_drl()].
+#' `as_bipartite()`, `as_star()` and `as_tree()` wrap [layout_as_bipartite()], [layout_as_star()] and [layout_as_tree()] respectively.
+#' `in_circle()`, `nicely()`, `on_grid()`, `on_sphere()` and `randomly()` wrap [layout_in_circle()], [layout_nicely()], [layout_on_grid()],
+#' [layout_on_sphere()] and [layout_randomly()].
+#' `with_dh()`, `with_fr()`, `with_gem()`, `with_graphopt()`, `with_kk()`, `with_lgl()`, `with_mds()`,
+#' `with_sugiyama()` and `with_drl()` wrap [layout_with_dh()], [layout_with_fr()], [layout_with_gem()], [layout_with_graphopt()],
+#' [layout_with_kk()], [layout_with_lgl()], [layout_with_mds()], [layout_with_sugiyama()] and [layout_with_drl()].
 #'
 #' @param ... Forwarded to the corresponding `layout_*()` function.
 #' @return An object of class `igraph_layout_spec`.
-#' @seealso [layout_()] and [add_layout_()] to apply a layout specification
-#'   to a graph.
+#' @seealso [layout_()] and [add_layout_()] to apply a layout specification to a graph.
 #' @family layout specifications
 #' @keywords graphs
 #' @rdname layout_spec
@@ -830,25 +790,21 @@ as_bipartite <- function(...) layout_spec(layout_as_bipartite, ...)
 
 #' Generate coordinates to place the vertices of a graph in a star-shape
 #'
-#' A simple layout generator, that places one vertex in the center of a circle
-#' and the rest of the vertices equidistantly on the perimeter.
+#' A simple layout generator, that places one vertex in the center of a circle and the rest of the vertices equidistantly on the perimeter.
 #'
-#' It is possible to choose the vertex that will be in the center, and the
-#' order of the vertices can be also given.
+#' It is possible to choose the vertex that will be in the center, and the order of the vertices can be also given.
 #'
 #' @param graph The graph to layout.
 #' @inheritParams rlang::args_dots_empty
-#' @param center The ID of the vertex to put in the center. The default
-#'   `NULL` uses the first vertex.
+#' @param center The ID of the vertex to put in the center.
+#'   The default `NULL` uses the first vertex.
 #' @param order Numeric vector, the order of the vertices along the perimeter.
 #'   The default ordering is given by the vertex IDs.
-#' @return A matrix with two columns and as many rows as the number of vertices
-#'   in the input graph.
+#' @return A matrix with two columns and as many rows as the number of vertices in the input graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [layout()] and [layout_with_drl()] for other layout
-#' algorithms, [plot.igraph()] and [tkplot()] on how to
-#' plot graphs and [star()] on how to create ring graphs. See [as_star()] to
-#' build a lazy layout specification for [add_layout_()].
+#' @seealso [layout()] and [layout_with_drl()] for other layout algorithms,
+#' [plot.igraph()] and [tkplot()] on how to plot graphs and [star()] on how to create ring graphs.
+#' See [as_star()] to build a lazy layout specification for [add_layout_()].
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -930,38 +886,31 @@ as_star <- function(...) layout_spec(layout_as_star, ...)
 
 #' The Reingold-Tilford graph layout algorithm
 #'
-#' A tree-like layout, it is perfect for trees, acceptable for graphs with not
-#' too many cycles.
+#' A tree-like layout, it is perfect for trees, acceptable for graphs with not too many cycles.
 #'
-#' Arranges the nodes in a tree where the given node is used as the root.  The
-#' tree is directed downwards and the parents are centered above its children.
+#' Arranges the nodes in a tree
+#' where the given node is used as the root.  The tree is directed downwards and the parents are centered above its children.
 #' For the exact algorithm, the reference below.
 #'
-#' If the given graph is not a tree, a breadth-first search is executed first
-#' to obtain a possible spanning tree.
+#' If the given graph is not a tree, a breadth-first search is executed first to obtain a possible spanning tree.
 #'
 #' @param graph The input graph.
 #' @inheritParams rlang::args_dots_empty
-#' @param root The index of the root vertex or root vertices.  If this is a
-#'   non-empty vector then the supplied vertex IDs are used as the roots of the
-#'   trees (or a single tree if the graph is connected).  If it is an empty
-#'   vector, then the root vertices are automatically calculated based on
-#'   topological sorting, performed with the opposite mode than the `mode`
-#'   argument. After the vertices have been sorted, one is selected from each
-#'   component.
-#' @param circular Logical, whether to plot the tree in a circular
-#'   fashion. Defaults to `FALSE`, so the tree branches are going bottom-up
-#'   (or top-down, see the `flip.y` argument.
-#' @param rootlevel This argument can be useful when drawing forests which are
-#'   not trees (i.e. they are unconnected and have tree components). It specifies
-#'   the level of the root vertices for every tree in the forest. It is only
-#'   considered if the `roots` argument is not an empty vector.
-#' @param mode Specifies which edges to consider when building the tree.  If it
-#'   is \sQuote{out}, then only the outgoing, if it is \sQuote{in}, then only the
-#'   incoming edges of a parent are considered. If it is \sQuote{all} then all
-#'   edges are used (this was the behavior in igraph 0.5 and before). This
-#'   parameter also influences how the root vertices are calculated, if they are
-#'   not given. See the `roots` parameter.
+#' @param root The index of the root vertex or root vertices.  If this is a non-empty vector then the supplied vertex IDs are used as the roots of the trees (or a single tree if the graph is connected).  If it is an empty vector,
+#'   then the root vertices are automatically calculated based on topological sorting,
+#'   performed with the opposite mode than the `mode` argument.
+#'   After the vertices have been sorted, one is selected from each component.
+#' @param circular Logical, whether to plot the tree in a circular fashion.
+#'   Defaults to `FALSE`, so the tree branches are going bottom-up (or top-down, see the `flip.y` argument.
+#' @param rootlevel This argument can be useful when drawing forests
+#'   which are not trees (i.e. they are unconnected and have tree components).
+#'   It specifies the level of the root vertices for every tree in the forest.
+#'   It is only considered if the `roots` argument is not an empty vector.
+#' @param mode Specifies which edges to consider when building the tree.  If it is \sQuote{out}, then only the outgoing,
+#'   if it is \sQuote{in}, then only the incoming edges of a parent are considered.
+#'   If it is \sQuote{all} then all edges are used (this was the behavior in igraph 0.5 and before).
+#'   This parameter also influences how the root vertices are calculated, if they are not given.
+#'   See the `roots` parameter.
 #' @param flip.y Logical, whether to flip the \sQuote{y} coordinates.
 #'   The default is flipping because that puts the root vertex on the top.
 #' @return A numeric matrix with two columns, and one row for each vertex.
@@ -969,8 +918,7 @@ as_star <- function(...) layout_spec(layout_as_star, ...)
 #' \email{csardi.gabor@@gmail.com}
 #' @references Reingold, E and Tilford, J (1981). Tidier drawing of trees.
 #' *IEEE Trans. on Softw. Eng.*, SE-7(2):223--228.
-#' @seealso [as_tree()] to build a lazy layout specification for
-#'   [add_layout_()].
+#' @seealso [as_tree()] to build a lazy layout specification for [add_layout_()].
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -1079,8 +1027,7 @@ as_tree <- function(...) layout_spec(layout_as_tree, ...)
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.reingold.tilford()` was renamed to [layout_as_tree()] to create a more
-#' consistent API.
+#' `layout.reingold.tilford()` was renamed to [layout_as_tree()] to create a more consistent API.
 #' @param ... Passed to the new layout functions.
 #' @param params Passed to the new layout functions as arguments.
 #' @keywords internal
@@ -1100,18 +1047,15 @@ layout.reingold.tilford <- function(..., params = list()) {
 #'
 #' Place vertices on a circle, in the order of their vertex IDs.
 #'
-#' If you want to order the vertices differently, then permute them using the
-#' [permute()] function.
+#' If you want to order the vertices differently, then permute them using the [permute()] function.
 #'
 #' @param graph The input graph.
-#' @param order The vertices to place on the circle, in the order of their
-#'   desired placement. Vertices that are not included here will be placed at
-#'   (0,0). The default `NULL` selects all vertices, in the order of their
-#'   IDs.
+#' @param order The vertices to place on the circle, in the order of their desired placement.
+#'   Vertices that are not included here will be placed at (0,0).
+#'   The default `NULL` selects all vertices, in the order of their IDs.
 #' @return A numeric matrix with two columns, and one row for each vertex.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [in_circle()] to build a lazy layout specification for
-#'   [add_layout_()].
+#' @seealso [in_circle()] to build a lazy layout specification for [add_layout_()].
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -1150,8 +1094,7 @@ in_circle <- function(...) layout_spec(layout_in_circle, ...)
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.circle()` was renamed to [layout_in_circle()] to create a more
-#' consistent API.
+#' `layout.circle()` was renamed to [layout_in_circle()] to create a more consistent API.
 #' @param ... Passed to the new layout functions.
 #' @param params Passed to the new layout functions as arguments.
 #' @keywords internal
@@ -1165,12 +1108,11 @@ layout.circle <- function(..., params = list()) {
 
 #' Choose an appropriate graph layout algorithm automatically
 #'
-#' This function tries to choose an appropriate graph layout algorithm for the
-#' graph, automatically, based on a simple algorithm. See details below.
+#' This function tries to choose an appropriate graph layout algorithm for the graph, automatically, based on a simple algorithm.
+#' See details below.
 #'
-#' `layout_nicely()` tries to choose an appropriate layout function for the
-#' supplied graph, and uses that to generate the layout. The current
-#' implementation works like this:
+#' `layout_nicely()` tries to choose an appropriate layout function for the supplied graph, and uses that to generate the layout.
+#' The current implementation works like this:
 #' \enumerate{
 #' \item If the graph has a graph attribute called \sQuote{layout},
 #' then this is used. If this attribute is an R function, then it is called, with the graph and any other extra arguments.
@@ -1186,28 +1128,25 @@ layout.circle <- function(..., params = list()) {
 #' Fruchterman-Reingold layout is used, by calling `layout_with_fr()`.
 #' \item Otherwise the DrL layout is used, `layout_with_drl()` is called.  }
 #'
-#' In layout algorithm implementations, an argument named \sQuote{weights} is
-#' typically used to specify the weights of the edges if the layout algorithm
-#' supports them. In this case, omitting \sQuote{weights} or setting it to
-#' `NULL` will make igraph use the 'weight' edge attribute from the graph
-#' if it is present. However, most layout algorithms do not support non-positive
-#' weights, so `layout_nicely()` would fail if you simply called it on
-#' your graph without specifying explicit weights and the weights happened to
-#' include non-positive numbers. We strive to ensure that `layout_nicely()`
-#' works out-of-the-box for most graphs, so the rule is that if you omit
-#' \sQuote{weights} or set it to `NULL` and `layout_nicely()` would
-#' end up calling `layout_with_fr()` or `layout_with_drl()`, we do not
-#' forward the weights to these functions and issue a warning about this. You
-#' can use `weights = NA` to silence the warning.
+#' In layout algorithm implementations,
+#' an argument named \sQuote{weights} is typically used to specify the weights of the edges if the layout algorithm supports them.
+#' In this case,
+#' omitting \sQuote{weights} or setting it to `NULL` will make igraph use the 'weight' edge attribute from the graph if it is present.
+#' However, most layout algorithms do not support non-positive weights,
+#' so `layout_nicely()` would fail
+#' if you simply called it on your graph without specifying explicit weights and the weights happened to include non-positive numbers.
+#' We strive to ensure that `layout_nicely()` works out-of-the-box for most graphs,
+#' so the rule is that if you omit \sQuote{weights} or set it to `NULL` and `layout_nicely()` would end up calling `layout_with_fr()` or `layout_with_drl()`,
+#' we do not forward the weights to these functions and issue a warning about this.
+#' You can use `weights = NA` to silence the warning.
 #'
 #' @param graph The input graph
 #' @param dim Dimensions, should be 2 or 3.
-#' @param \dots Extra arguments are passed to the real layout function that
-#'   `layout_nicely()` ends up calling.
+#' @param \dots Extra arguments are passed to the real layout function that `layout_nicely()` ends up calling.
 #' @return A numeric matrix with two or three columns.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [plot.igraph()]. See [nicely()] to build a lazy layout
-#'   specification for [add_layout_()].
+#' @seealso [plot.igraph()].
+#'   See [nicely()] to build a lazy layout specification for [add_layout_()].
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -1282,27 +1221,25 @@ nicely <- function(...) layout_spec(layout_nicely, ...)
 
 #' Simple grid layout
 #'
-#' This layout places vertices on a rectangular grid, in two or three
-#' dimensions.
+#' This layout places vertices on a rectangular grid, in two or three dimensions.
 #'
-#' The function places the vertices on a simple rectangular grid, one after the
-#' other. If you want to change the order of the vertices, then see the
-#' [permute()] function.
+#' The function places the vertices on a simple rectangular grid, one after the other.
+#' If you want to change the order of the vertices, then see the [permute()] function.
 #'
 #' @param graph The input graph.
 #' @inheritParams rlang::args_dots_empty
-#' @param width The number of vertices in a single row of the grid. If this is
-#'   zero or negative, then for 2d layouts the width of the grid will be the
-#'   square root of the number of vertices in the graph, rounded up to the next
-#'   integer. Similarly, it will be the cube root for 3d layouts.
-#' @param height The number of vertices in a single column of the grid, for
-#'   three dimensional layouts. If this is zero or negative, then it is
-#'   determinted automatically.
-#' @param dim Two or three. Whether to make 2d or a 3d layout.
+#' @param width The number of vertices in a single row of the grid.
+#'   If this is zero or negative, then for 2d layouts the width of the grid will be the square root of the number of vertices in the graph,
+#'   rounded up to the next integer.
+#'   Similarly, it will be the cube root for 3d layouts.
+#' @param height The number of vertices in a single column of the grid, for three dimensional layouts.
+#'   If this is zero or negative, then it is determinted automatically.
+#' @param dim Two or three.
+#'   Whether to make 2d or a 3d layout.
 #' @return A two-column or three-column matrix.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
-#' @seealso [layout()] for other layout generators. See [on_grid()] to build
-#'   a lazy layout specification for [add_layout_()].
+#' @seealso [layout()] for other layout generators.
+#'   See [on_grid()] to build a lazy layout specification for [add_layout_()].
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -1396,21 +1333,17 @@ on_grid <- function(...) layout_spec(layout_on_grid, ...)
 
 #' Graph layout with vertices on the surface of a sphere
 #'
-#' Place vertices on a sphere, approximately uniformly, in the order of their
-#' vertex IDs.
+#' Place vertices on a sphere, approximately uniformly, in the order of their vertex IDs.
 #'
-#' `layout_on_sphere()` places the vertices (approximately) uniformly on the
-#' surface of a sphere, this is thus a 3d layout. It is not clear however what
-#' \dQuote{uniformly on a sphere} means.
+#' `layout_on_sphere()` places the vertices (approximately) uniformly on the surface of a sphere, this is thus a 3d layout.
+#' It is not clear however what \dQuote{uniformly on a sphere} means.
 #'
-#' If you want to order the vertices differently, then permute them using the
-#' [permute()] function.
+#' If you want to order the vertices differently, then permute them using the [permute()] function.
 #'
 #' @param graph The input graph.
 #' @return A numeric matrix with three columns, and one row for each vertex.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [on_sphere()] to build a lazy layout specification for
-#'   [add_layout_()].
+#' @seealso [on_sphere()] to build a lazy layout specification for [add_layout_()].
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -1430,8 +1363,7 @@ on_sphere <- function(...) layout_spec(layout_on_sphere, ...)
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.sphere()` was renamed to [layout_on_sphere()] to create a more
-#' consistent API.
+#' `layout.sphere()` was renamed to [layout_on_sphere()] to create a more consistent API.
 #' @param ... Passed to the new layout functions.
 #' @param params Passed to the new layout functions as arguments.
 #' @keywords internal
@@ -1445,21 +1377,18 @@ layout.sphere <- function(..., params = list()) {
 
 #' Randomly place vertices on a plane or in 3d space
 #'
-#' This function uniformly randomly places the vertices of the graph in two or
-#' three dimensions.
+#' This function uniformly randomly places the vertices of the graph in two or three dimensions.
 #'
-#' Randomly places vertices on a \[-1,1\] square (in 2d) or in a cube (in 3d). It
-#' is probably a useless layout, but it can use as a starting point for other
-#' layout generators.
+#' Randomly places vertices on a \[-1,1\] square (in 2d) or in a cube (in 3d).
+#' It is probably a useless layout, but it can use as a starting point for other layout generators.
 #'
 #' @param graph The input graph.
 #' @inheritParams rlang::args_dots_empty
-#' @param dim Integer scalar, the dimension of the space to use. It must be 2
-#'   or 3.
+#' @param dim Integer scalar, the dimension of the space to use.
+#'   It must be 2 or 3.
 #' @return A numeric matrix with two or three columns.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [randomly()] to build a lazy layout specification for
-#'   [add_layout_()].
+#' @seealso [randomly()] to build a lazy layout specification for [add_layout_()].
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -1526,8 +1455,7 @@ randomly <- function(...) layout_spec(layout_randomly, ...)
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.random()` was renamed to [layout_randomly()] to create a more
-#' consistent API.
+#' `layout.random()` was renamed to [layout_randomly()] to create a more consistent API.
 #' @param ... Passed to the new layout functions.
 #' @param params Passed to the new layout functions as arguments.
 #' @keywords internal
@@ -1542,49 +1470,41 @@ layout.random <- function(..., params = list()) {
 
 #' The Davidson-Harel layout algorithm
 #'
-#' Place vertices of a graph on the plane, according to the simulated annealing
-#' algorithm by Davidson and Harel.
+#' Place vertices of a graph on the plane, according to the simulated annealing algorithm by Davidson and Harel.
 #'
-#' This function implements the algorithm by Davidson and Harel, see Ron
-#' Davidson, David Harel: Drawing Graphs Nicely Using Simulated Annealing. ACM
-#' Transactions on Graphics 15(4), pp. 301-331, 1996.
+#' This function implements the algorithm by Davidson and Harel, see Ron Davidson, David Harel:
+#' Drawing Graphs Nicely Using Simulated Annealing.
+#' ACM Transactions on Graphics 15(4), pp. 301-331, 1996.
 #'
 #' The algorithm uses simulated annealing and a sophisticated energy function,
-#' which is unfortunately hard to parameterize for different graphs. The
-#' original publication did not disclose any parameter values, and the ones
-#' below were determined by experimentation.
+#' which is unfortunately hard to parameterize for different graphs.
+#' The original publication did not disclose any parameter values, and the ones below were determined by experimentation.
 #'
-#' The algorithm consists of two phases, an annealing phase, and a fine-tuning
-#' phase. There is no simulated annealing in the second phase.
+#' The algorithm consists of two phases, an annealing phase, and a fine-tuning phase.
+#' There is no simulated annealing in the second phase.
 #'
-#' Our implementation tries to follow the original publication, as much as
-#' possible. The only major difference is that coordinates are explicitly kept
-#' within the bounds of the rectangle of the layout.
+#' Our implementation tries to follow the original publication, as much as possible.
+#' The only major difference is that coordinates are explicitly kept within the bounds of the rectangle of the layout.
 #'
-#' @param graph The graph to lay out. Edge directions are ignored.
+#' @param graph The graph to lay out.
+#'   Edge directions are ignored.
 #' @inheritParams rlang::args_dots_empty
-#' @param coords Optional starting positions for the vertices. If this argument
-#'   is not `NULL` then it should be an appropriate matrix of starting
-#'   coordinates.
+#' @param coords Optional starting positions for the vertices.
+#'   If this argument is not `NULL` then it should be an appropriate matrix of starting coordinates.
 #' @param maxiter Number of iterations to perform in the first phase.
-#' @param fineiter Number of iterations in the fine tuning phase. The
-#'   default `NULL` uses `max(10, log2(vcount(graph)))`.
+#' @param fineiter Number of iterations in the fine tuning phase.
+#'   The default `NULL` uses `max(10, log2(vcount(graph)))`.
 #' @param cool.fact Cooling factor.
-#' @param weight.node.dist Weight for the node-node distances component of the
-#'   energy function.
-#' @param weight.border Weight for the distance from the border component of
-#'   the energy function. It can be set to zero, if vertices are allowed to sit
-#'   on the border.
-#' @param weight.edge.lengths Weight for the edge length component of the
-#'   energy function. The default `NULL` uses `edge_density(graph) / 10`.
-#' @param weight.edge.crossings Weight for the edge crossing component of the
-#'   energy function. The default `NULL` uses
-#'   `1 - sqrt(edge_density(graph))`.
-#' @param weight.node.edge.dist Weight for the node-edge distance component of
-#'   the energy function. The default `NULL` uses
-#'   `0.2 * (1 - edge_density(graph))`.
-#' @return A matrix with two columns, containing the x and y coordinates
-#'   of the vertices:
+#' @param weight.node.dist Weight for the node-node distances component of the energy function.
+#' @param weight.border Weight for the distance from the border component of the energy function.
+#'   It can be set to zero, if vertices are allowed to sit on the border.
+#' @param weight.edge.lengths Weight for the edge length component of the energy function.
+#'   The default `NULL` uses `edge_density(graph) / 10`.
+#' @param weight.edge.crossings Weight for the edge crossing component of the energy function.
+#'   The default `NULL` uses `1 - sqrt(edge_density(graph))`.
+#' @param weight.node.edge.dist Weight for the node-edge distance component of the energy function.
+#'   The default `NULL` uses `0.2 * (1 - edge_density(graph))`.
+#' @return A matrix with two columns, containing the x and y coordinates of the vertices:
 #'   \describe{
 #'     \item{x}{
 #'       The x-coordinate of the vertex.
@@ -1594,9 +1514,8 @@ layout.random <- function(..., params = list()) {
 #'     }
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [layout_with_fr()],
-#' [layout_with_kk()] for other layout algorithms. See [with_dh()] to build a
-#' lazy layout specification for [add_layout_()].
+#' @seealso [layout_with_fr()], [layout_with_kk()] for other layout algorithms.
+#' See [with_dh()] to build a lazy layout specification for [add_layout_()].
 #' @references Ron Davidson, David Harel: Drawing Graphs Nicely Using Simulated
 #' Annealing. *ACM Transactions on Graphics* 15(4), pp. 301-331, 1996.
 #' @export
@@ -1766,58 +1685,45 @@ with_dh <- function(...) layout_spec(layout_with_dh, ...)
 
 #' The Fruchterman-Reingold layout algorithm
 #'
-#' Place vertices on the plane using the force-directed layout algorithm by
-#' Fruchterman and Reingold.
+#' Place vertices on the plane using the force-directed layout algorithm by Fruchterman and Reingold.
 #'
 #' See the referenced paper below for the details of the algorithm.
 #'
 #' This function was rewritten from scratch in igraph version 0.8.0.
 #'
-#' @param graph The graph to lay out. Edge directions are ignored.
+#' @param graph The graph to lay out.
+#'   Edge directions are ignored.
 #' @inheritParams rlang::args_dots_empty
-#' @param coords Optional starting positions for the vertices. If this argument
-#'   is not `NULL` then it should be an appropriate matrix of starting
-#'   coordinates.
-#' @param dim Integer scalar, 2 or 3, the dimension of the layout.  Two
-#'   dimensional layouts are places on a plane, three dimensional ones in the 3d
-#'   space.
+#' @param coords Optional starting positions for the vertices.
+#'   If this argument is not `NULL` then it should be an appropriate matrix of starting coordinates.
+#' @param dim Integer scalar, 2 or 3, the dimension of the layout.  Two dimensional layouts are places on a plane,
+#'   three dimensional ones in the 3d space.
 #' @param niter Integer scalar, the number of iterations to perform.
-#' @param start.temp Real scalar, the start temperature. This is the maximum
-#'   amount of movement alloved along one axis, within one step, for a vertex.
-#'   Currently it is decreased linearly to zero during the iteration. The
-#'   default `NULL` uses `sqrt(vcount(graph))`.
-#' @param grid Character scalar, whether to use the faster, but less accurate
-#'   grid based implementation of the algorithm. By default (\dQuote{auto}), the
-#'   grid-based implementation is used if the graph has more than one thousand
-#'   vertices.
-#' @param weights A vector giving edge weights. The `weight` edge
-#'   attribute is used by default, if present. If weights are given, then the
-#'   attraction along the edges will be multiplied by the given edge weights.
-#'   This places vertices connected with a highly weighted edge closer to
-#'   each other. Weights must be positive.
-#' @param minx Numeric vector that gives lower boundaries
-#'   for the \sQuote{x} coordinates of the vertices.
+#' @param start.temp Real scalar, the start temperature.
+#'   This is the maximum amount of movement alloved along one axis, within one step, for a vertex.
+#'   Currently it is decreased linearly to zero during the iteration.
+#'   The default `NULL` uses `sqrt(vcount(graph))`.
+#' @param grid Character scalar, whether to use the faster, but less accurate grid based implementation of the algorithm.
+#'   By default (\dQuote{auto}), the grid-based implementation is used if the graph has more than one thousand vertices.
+#' @param weights A vector giving edge weights.
+#'   The `weight` edge attribute is used by default, if present.
+#'   If weights are given, then the attraction along the edges will be multiplied by the given edge weights.
+#'   This places vertices connected with a highly weighted edge closer to each other.
+#'   Weights must be positive.
+#' @param minx Numeric vector that gives lower boundaries for the \sQuote{x} coordinates of the vertices.
 #'   The length of the vector must match the number of vertices in the graph.
 #'   Default: `NULL`.
 #' @param maxx Similar to `minx`, but gives the upper boundaries.
-#' @param miny Similar to `minx`, but gives the lower boundaries of the
-#'   \sQuote{y} coordinates.
-#' @param maxy Similar to `minx`, but gives the upper boundaries of the
-#'   \sQuote{y} coordinates.
-#' @param minz Similar to `minx`, but gives the lower boundaries of the
-#'   \sQuote{z} coordinates.
-#' @param maxz Similar to `minx`, but gives the upper boundaries of the
-#'   \sQuote{z} coordinates.
-#' @param coolexp,maxdelta,area,repulserad `r lifecycle::badge("deprecated")` These
-#'  arguments are not supported from igraph version 0.8.0 and are ignored
-#'  (with a warning).
+#' @param miny Similar to `minx`, but gives the lower boundaries of the \sQuote{y} coordinates.
+#' @param maxy Similar to `minx`, but gives the upper boundaries of the \sQuote{y} coordinates.
+#' @param minz Similar to `minx`, but gives the lower boundaries of the \sQuote{z} coordinates.
+#' @param maxz Similar to `minx`, but gives the upper boundaries of the \sQuote{z} coordinates.
+#' @param coolexp,maxdelta,area,repulserad `r lifecycle::badge("deprecated")` These arguments are not supported from igraph version 0.8.0 and are ignored (with a warning).
 #' @param maxiter A deprecated synonym of `niter`, for compatibility.
-#' @return A two- or three-column matrix, each row giving the coordinates of a
-#'   vertex, according to the IDs of the vertex IDs.
+#' @return A two- or three-column matrix, each row giving the coordinates of a vertex, according to the IDs of the vertex IDs.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [layout_with_drl()], [layout_with_kk()] for
-#' other layout algorithms. See [with_fr()] to build a lazy layout
-#' specification for [add_layout_()].
+#' @seealso [layout_with_drl()], [layout_with_kk()] for other layout algorithms.
+#' See [with_fr()] to build a lazy layout specification for [add_layout_()].
 #' @references Fruchterman, T.M.J. and Reingold, E.M. (1991). Graph Drawing by
 #' Force-directed Placement. *Software - Practice and Experience*,
 #' 21(11):1129-1164.
@@ -2042,8 +1948,7 @@ with_fr <- function(...) layout_spec(layout_with_fr, ...)
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.fruchterman.reingold()` was renamed to [layout_with_fr()] to create a more
-#' consistent API.
+#' `layout.fruchterman.reingold()` was renamed to [layout_with_fr()] to create a more consistent API.
 #' @param ... Passed to the new layout functions.
 #' @param params Passed to the new layout functions as arguments.
 #' @keywords internal
@@ -2065,28 +1970,26 @@ layout.fruchterman.reingold <- function(..., params = list()) {
 #'
 #' See the referenced paper below for the details of the algorithm.
 #'
-#' @param graph The input graph. Edge directions are ignored.
+#' @param graph The input graph.
+#'   Edge directions are ignored.
 #' @inheritParams rlang::args_dots_empty
 #' @param coords Starting coordinates in a two or three column matrix,
 #'   depending on the `dim` argument.
 #'   Default: `NULL`.
-#' @param maxiter The maximum number of iterations to perform. Updating a
-#'   single vertex counts as an iteration. The default `NULL` uses 40 * n * n,
-#'   where n is the number of vertices. The original paper suggests 4 * n * n,
-#'   but this usually only works if the other parameters are set up carefully.
-#' @param temp.max The maximum allowed local temperature. The default `NULL`
-#'   uses the number of vertices.
-#' @param temp.min The global temperature at which the algorithm terminates
-#'   (even before reaching `maxiter` iterations). A reasonable default is
-#'   1/10.
-#' @param temp.init Initial local temperature of all vertices. The default
-#'   `NULL` uses the square root of the number of vertices.
-#' @return A numeric matrix with two columns, and as many rows as the number of
-#'   vertices.
+#' @param maxiter The maximum number of iterations to perform.
+#'   Updating a single vertex counts as an iteration.
+#'   The default `NULL` uses 40 * n * n, where n is the number of vertices.
+#'   The original paper suggests 4 * n * n, but this usually only works if the other parameters are set up carefully.
+#' @param temp.max The maximum allowed local temperature.
+#'   The default `NULL` uses the number of vertices.
+#' @param temp.min The global temperature at which the algorithm terminates (even before reaching `maxiter` iterations).
+#'   A reasonable default is 1/10.
+#' @param temp.init Initial local temperature of all vertices.
+#'   The default `NULL` uses the square root of the number of vertices.
+#' @return A numeric matrix with two columns, and as many rows as the number of vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [layout_with_fr()],
-#' [plot.igraph()], [tkplot()]. See [with_gem()] to build a lazy layout
-#' specification for [add_layout_()].
+#' @seealso [layout_with_fr()], [plot.igraph()], [tkplot()].
+#' See [with_gem()] to build a lazy layout specification for [add_layout_()].
 #' @references Arne Frick, Andreas Ludwig, Heiko Mehldau: A Fast Adaptive
 #' Layout Algorithm for Undirected Graphs, *Proc. Graph Drawing 1994*,
 #' LNCS 894, pp. 388-403, 1995.
@@ -2191,44 +2094,35 @@ with_gem <- function(...) layout_spec(layout_with_gem, ...)
 
 #' The graphopt layout algorithm
 #'
-#' A force-directed layout algorithm, that scales relatively well to large
-#' graphs.
+#' A force-directed layout algorithm, that scales relatively well to large graphs.
 #'
-#' `layout_with_graphopt()` is a port of the graphopt layout algorithm by Michael
-#' Schmuhl. graphopt version 0.4.1 was rewritten in C and the support for
-#' layers was removed (might be added later) and a code was a bit reorganized
-#' to avoid some unnecessary steps is the node charge (see below) is zero.
+#' `layout_with_graphopt()` is a port of the graphopt layout algorithm by Michael Schmuhl. graphopt version 0.4.1 was rewritten in C and the support for layers was removed (might be added later) and a code was a bit reorganized to avoid some unnecessary steps is the node charge (see below) is zero.
 #'
-#' graphopt uses physical analogies for defining attracting and repelling
-#' forces among the vertices and then the physical system is simulated until it
-#' reaches an equilibrium. (There is no simulated annealing or anything like
-#' that, so a stable fixed point is not guaranteed.)
+#' graphopt uses physical analogies for defining attracting and repelling forces among the vertices and then the physical system is simulated until it reaches an equilibrium.
+#' (There is no simulated annealing or anything like that, so a stable fixed point is not guaranteed.)
 #'
 #' @param graph The input graph.
 #' @inheritParams rlang::args_dots_empty
-#' @param start If given, then it should be a matrix with two columns and one
-#'   line for each vertex. This matrix will be used as starting positions for the
-#'   algorithm. If not given, then a random starting matrix is used.
-#' @param niter Integer scalar, the number of iterations to perform.  Should be
-#'   a couple of hundred in general. If you have a large graph then you might
-#'   want to only do a few iterations and then check the result. If it is not
-#'   good enough you can feed it in again in the `start` argument. The
-#'   default value is 500.
-#' @param charge The charge of the vertices, used to calculate electric
-#'   repulsion. The default is 0.001.
-#' @param mass The mass of the vertices, used for the spring forces. The
-#'   default is 30.
-#' @param spring.length The length of the springs, an integer number. The
-#'   default value is zero.
+#' @param start If given, then it should be a matrix with two columns and one line for each vertex.
+#'   This matrix will be used as starting positions for the algorithm.
+#'   If not given, then a random starting matrix is used.
+#' @param niter Integer scalar, the number of iterations to perform.  Should be a couple of hundred in general.
+#'   If you have a large graph then you might want to only do a few iterations and then check the result.
+#'   If it is not good enough you can feed it in again in the `start` argument.
+#'   The default value is 500.
+#' @param charge The charge of the vertices, used to calculate electric repulsion.
+#'   The default is 0.001.
+#' @param mass The mass of the vertices, used for the spring forces.
+#'   The default is 30.
+#' @param spring.length The length of the springs, an integer number.
+#'   The default value is zero.
 #' @param spring.constant The spring constant, the default value is one.
-#' @param max.sa.movement Real constant, it gives the maximum amount of
-#'   movement allowed in a single step along a single axis. The default value is
-#'   5.
+#' @param max.sa.movement Real constant, it gives the maximum amount of movement allowed in a single step along a single axis.
+#'   The default value is 5.
 #' @return A numeric matrix with two columns, and a row for each vertex.
 #' @author Michael Schmuhl for the original graphopt code, rewritten and
 #' wrapped by Gabor Csardi \email{csardi.gabor@@gmail.com}.
-#' @seealso [with_graphopt()] to build a lazy layout specification for
-#'   [add_layout_()].
+#' @seealso [with_graphopt()] to build a lazy layout specification for [add_layout_()].
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -2325,57 +2219,45 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 
 #' The Kamada-Kawai layout algorithm
 #'
-#' Place the vertices on the plane, or in 3D space, based on a physical
-#' model of springs.
+#' Place the vertices on the plane, or in 3D space, based on a physical model of springs.
 #'
 #' See the referenced paper below for the details of the algorithm.
 #'
-#' This function was rewritten from scratch in igraph version 0.8.0 and it
-#' follows truthfully the original publication by Kamada and Kawai now.
+#' This function was rewritten from scratch in igraph version 0.8.0 and it follows truthfully the original publication by Kamada and Kawai now.
 #'
-#' @param graph The input graph. Edge directions are ignored.
+#' @param graph The input graph.
+#'   Edge directions are ignored.
 #' @inheritParams rlang::args_dots_empty
 #' @param coords Starting coordinates in a two or three column matrix,
 #'   depending on the `dim` argument.
 #'   Default: `NULL`.
-#' @param dim Integer scalar, 2 or 3, the dimension of the layout.  Two
-#'   dimensional layouts are places on a plane, three dimensional ones in the 3d
-#'   space.
-#' @param maxiter The maximum number of iterations to perform. The algorithm
-#'   might terminate earlier, see the `epsilon` argument. The default `NULL`
-#'   uses `50 * vcount(graph)`.
-#' @param epsilon Numeric scalar, the algorithm terminates, if the maximal
-#'   delta is less than this. (See the reference below for what delta means.) If
-#'   you set this to zero, then the function always performs `maxiter`
-#'   iterations.
+#' @param dim Integer scalar, 2 or 3, the dimension of the layout.  Two dimensional layouts are places on a plane,
+#'   three dimensional ones in the 3d space.
+#' @param maxiter The maximum number of iterations to perform.
+#'   The algorithm might terminate earlier, see the `epsilon` argument.
+#'   The default `NULL` uses `50 * vcount(graph)`.
+#' @param epsilon Numeric scalar, the algorithm terminates, if the maximal delta is less than this.
+#'   (See the reference below for what delta means.) If you set this to zero, then the function always performs `maxiter` iterations.
 #' @param kkconst Numeric scalar, the Kamada-Kawai vertex attraction constant.
 #'   The default `NULL` uses the number of vertices.
 #' @param weights Edge weights, larger values will result in longer edges.
-#'   Note that this is the opposite of [layout_with_fr()], which produces
-#'   shorter edges for larger weights. Weights must be positive.
-#' @param minx Numeric vector that gives lower boundaries
-#'   for the \sQuote{x} coordinates of the vertices.
+#'   Note that this is the opposite of [layout_with_fr()], which produces shorter edges for larger weights.
+#'   Weights must be positive.
+#' @param minx Numeric vector that gives lower boundaries for the \sQuote{x} coordinates of the vertices.
 #'   The length of the vector must match the number of vertices in the graph.
 #'   Default: `NULL`.
 #' @param maxx Similar to `minx`, but gives the upper boundaries.
-#' @param miny Similar to `minx`, but gives the lower boundaries of the
-#'   \sQuote{y} coordinates.
-#' @param maxy Similar to `minx`, but gives the upper boundaries of the
-#'   \sQuote{y} coordinates.
-#' @param minz Similar to `minx`, but gives the lower boundaries of the
-#'   \sQuote{z} coordinates.
-#' @param maxz Similar to `minx`, but gives the upper boundaries of the
-#'   \sQuote{z} coordinates.
-#' @param niter,sigma,initemp,coolexp `r lifecycle::badge("deprecated")` These
-#' arguments are not supported from igraph version 0.8.0 and are ignored (with a warning).
+#' @param miny Similar to `minx`, but gives the lower boundaries of the \sQuote{y} coordinates.
+#' @param maxy Similar to `minx`, but gives the upper boundaries of the \sQuote{y} coordinates.
+#' @param minz Similar to `minx`, but gives the lower boundaries of the \sQuote{z} coordinates.
+#' @param maxz Similar to `minx`, but gives the upper boundaries of the \sQuote{z} coordinates.
+#' @param niter,sigma,initemp,coolexp `r lifecycle::badge("deprecated")` These arguments are not supported from igraph version 0.8.0 and are ignored (with a warning).
 #' @param start Deprecated synonym for `coords`, for compatibility.
-#' @return A numeric matrix with two (dim=2) or three (dim=3) columns, and as
-#'   many rows as the number of vertices, the x, y and potentially z coordinates
-#'   of the vertices.
+#' @return A numeric matrix with two (dim=2) or three (dim=3) columns, and as many rows as the number of vertices, the x,
+#'   y and potentially z coordinates of the vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [layout_with_drl()], [plot.igraph()],
-#' [tkplot()]. See [with_kk()] to build a lazy layout specification for
-#' [add_layout_()].
+#' @seealso [layout_with_drl()], [plot.igraph()], [tkplot()].
+#' See [with_kk()] to build a lazy layout specification for [add_layout_()].
 #' @references Kamada, T. and Kawai, S.: An Algorithm for Drawing General
 #' Undirected Graphs. *Information Processing Letters*, 31/1, 7--15, 1989.
 #' @export
@@ -2588,8 +2470,7 @@ with_kk <- function(...) layout_spec(layout_with_kk, ...)
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.kamada.kawai()` was renamed to [layout_with_kk()] to create a more
-#' consistent API.
+#' `layout.kamada.kawai()` was renamed to [layout_with_kk()] to create a more consistent API.
 #' @param ... Passed to the new layout functions.
 #' @param params Passed to the new layout functions as arguments.
 #' @keywords internal
@@ -2609,30 +2490,27 @@ layout.kamada.kawai <- function(..., params = list()) {
 #'
 #' A layout generator for larger graphs.
 #'
-#' `layout_with_lgl()` is for large connected graphs, it is similar to the layout
-#' generator of the Large Graph Layout software
-#' (<https://lgl.sourceforge.net/>).
+#' `layout_with_lgl()` is for large connected graphs,
+#' it is similar to the layout generator of the Large Graph Layout software (<https://lgl.sourceforge.net/>).
 #'
 #' @param graph The input graph
 #' @inheritParams rlang::args_dots_empty
 #' @param maxiter The maximum number of iterations to perform (150).
-#' @param maxdelta The maximum change for a vertex during an iteration. The
-#'   default `NULL` uses the number of vertices.
-#' @param area The area of the surface on which the vertices are placed. The
-#'   default `NULL` uses the square of the number of vertices.
+#' @param maxdelta The maximum change for a vertex during an iteration.
+#'   The default `NULL` uses the number of vertices.
+#' @param area The area of the surface on which the vertices are placed.
+#'   The default `NULL` uses the square of the number of vertices.
 #' @param coolexp The cooling exponent of the simulated annealing (1.5).
-#' @param repulserad Cancellation radius for the repulsion. The default
-#'   `NULL` uses the `area` times the number of vertices.
-#' @param cellsize The size of the cells for the grid. When calculating the
-#'   repulsion forces between vertices only vertices in the same or neighboring
-#'   grid cells are taken into account. The default `NULL` uses the square
-#'   root of the square root of the `area`.
-#' @param root The ID of the vertex to place at the middle of the layout. The
-#'   default value is -1 which means that a random vertex is selected.
+#' @param repulserad Cancellation radius for the repulsion.
+#'   The default `NULL` uses the `area` times the number of vertices.
+#' @param cellsize The size of the cells for the grid.
+#'   When calculating the repulsion forces between vertices only vertices in the same or neighboring grid cells are taken into account.
+#'   The default `NULL` uses the square root of the square root of the `area`.
+#' @param root The ID of the vertex to place at the middle of the layout.
+#'   The default value is -1 which means that a random vertex is selected.
 #' @return A numeric matrix with two columns and as many rows as vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [with_lgl()] to build a lazy layout specification for
-#'   [add_layout_()].
+#' @seealso [with_lgl()] to build a lazy layout specification for [add_layout_()].
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -2739,8 +2617,7 @@ with_lgl <- function(...) layout_spec(layout_with_lgl, ...)
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.lgl()` was renamed to [layout_with_lgl()] to create a more
-#' consistent API.
+#' `layout.lgl()` was renamed to [layout_with_lgl()] to create a more consistent API.
 #' @param ... Passed to the new layout functions.
 #' @param params Passed to the new layout functions as arguments.
 #' @keywords internal
@@ -2754,39 +2631,33 @@ layout.lgl <- function(..., params = list()) {
 
 #' Graph layout by multidimensional scaling
 #'
-#' Multidimensional scaling of some distance matrix defined on the vertices of
-#' a graph.
+#' Multidimensional scaling of some distance matrix defined on the vertices of a graph.
 #'
-#' `layout_with_mds()` uses classical multidimensional scaling (Torgerson scaling)
-#' for generating the coordinates. Multidimensional scaling aims to place points
-#' from a higher dimensional space in a (typically) 2 dimensional plane, so that
-#' the distances between the points are kept as much as this is possible.
+#' `layout_with_mds()` uses classical multidimensional scaling (Torgerson scaling) for generating the coordinates.
+#' Multidimensional scaling aims to place points from a higher dimensional space in a (typically) 2 dimensional plane,
+#' so that the distances between the points are kept as much as this is possible.
 #'
-#' By default igraph uses the shortest path matrix as the distances between the
-#' nodes, but the user can override this via the `dist` argument.
+#' By default igraph uses the shortest path matrix as the distances between the nodes,
+#' but the user can override this via the `dist` argument.
 #'
-#' Warning: If the graph is symmetric to the exchange of two vertices (as is the
-#' case with leaves of a tree connecting to the same parent), classical
-#' multidimensional scaling may assign the same coordinates to these vertices.
+#' Warning: If the graph is symmetric to the exchange of two vertices (as is the case with leaves of a tree connecting to the same parent),
+#' classical multidimensional scaling may assign the same coordinates to these vertices.
 #'
-#' This function generates the layout separately for each graph component and
-#' then merges them via [merge_coords()].
+#' This function generates the layout separately for each graph component and then merges them via [merge_coords()].
 #'
 #' @param graph The input graph.
-#' @param dist The distance matrix for the multidimensional scaling.  If
-#'   `NULL` (the default), then the unweighted shortest path matrix is used.
-#' @param dim `layout_with_mds()` supports dimensions up to the number of nodes
-#'   minus one, but only if the graph is connected; for unconnected graphs, the
-#'   only possible value is 2. This is because `merge_coords()` only works in
-#'   2D.
-#' @param options `r lifecycle::badge("deprecated")` This argument is not
-#'   supported from igraph version 1.6.0, as ARPACK is not used any more for
-#'   solving the eigenproblem. Supplying it raises an error.
+#' @param dist The distance matrix for the multidimensional scaling.  If `NULL` (the default),
+#'   then the unweighted shortest path matrix is used.
+#' @param dim `layout_with_mds()` supports dimensions up to the number of nodes minus one, but only if the graph is connected;
+#'   for unconnected graphs, the only possible value is 2. This is because `merge_coords()` only works in 2D.
+#' @param options `r lifecycle::badge("deprecated")` This argument is not supported from igraph version 1.6.0,
+#'   as ARPACK is not used any more for solving the eigenproblem.
+#'   Supplying it raises an error.
 #' @return A numeric matrix with `dim` columns.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
-#' @seealso [layout()], [plot.igraph()]. See [with_mds()] to build a lazy
-#'   layout specification for [add_layout_()].
+#' @seealso [layout()], [plot.igraph()].
+#'   See [with_mds()] to build a lazy layout specification for [add_layout_()].
 #' @references Cox, T. F. and Cox, M. A. A. (2001) *Multidimensional
 #' Scaling*.  Second edition. Chapman and Hall.
 #' @export
@@ -2824,26 +2695,21 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
 
 #' The Sugiyama graph layout generator
 #'
-#' Sugiyama layout algorithm for layered directed acyclic graphs. The algorithm
-#' minimized edge crossings.
+#' Sugiyama layout algorithm for layered directed acyclic graphs.
+#' The algorithm minimized edge crossings.
 #'
-#' This layout algorithm is designed for directed acyclic graphs where each
-#' vertex is assigned to a layer. Layers are indexed from zero, and vertices of
-#' the same layer will be placed on the same horizontal line. The X coordinates
-#' of vertices within each layer are decided by the heuristic proposed by
-#' Sugiyama et al. to minimize edge crossings.
+#' This layout algorithm is designed for directed acyclic graphs where each vertex is assigned to a layer.
+#' Layers are indexed from zero, and vertices of the same layer will be placed on the same horizontal line.
+#' The X coordinates of vertices within each layer are decided by the heuristic proposed by Sugiyama et al. to minimize edge crossings.
 #'
-#' You can also try to lay out undirected graphs, graphs containing cycles, or
-#' graphs without an a priori layered assignment with this algorithm. igraph
-#' will try to eliminate cycles and assign vertices to layers, but there is no
-#' guarantee on the quality of the layout in such cases.
+#' You can also try to lay out undirected graphs, graphs containing cycles,
+#' or graphs without an a priori layered assignment with this algorithm. igraph will try to eliminate cycles and assign vertices to layers,
+#' but there is no guarantee on the quality of the layout in such cases.
 #'
-#' The Sugiyama layout may introduce \dQuote{bends} on the edges in order to
-#' obtain a visually more pleasing layout. This is achieved by adding dummy
-#' nodes to edges spanning more than one layer. The resulting layout assigns
-#' coordinates not only to the nodes of the original graph but also to the
-#' dummy nodes. The layout algorithm will also return the extended graph with
-#' the dummy nodes.
+#' The Sugiyama layout may introduce \dQuote{bends} on the edges in order to obtain a visually more pleasing layout.
+#' This is achieved by adding dummy nodes to edges spanning more than one layer.
+#' The resulting layout assigns coordinates not only to the nodes of the original graph but also to the dummy nodes.
+#' The layout algorithm will also return the extended graph with the dummy nodes.
 #'
 #' For more details, see the reference below.
 #'
@@ -2852,23 +2718,18 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
 #' @param layers A numeric vector of the layer indices of the vertices.
 #'   Layers are numbered from one.
 #'   Default: `NULL`, igraph calculates the layers automatically.
-#' @param hgap Real scalar, the minimum horizontal gap between vertices in the
-#'   same layer.
+#' @param hgap Real scalar, the minimum horizontal gap between vertices in the same layer.
 #' @param vgap Real scalar, the distance between layers.
-#' @param maxiter Integer scalar, the maximum number of iterations in the
-#'   crossing minimization stage. 100 is a reasonable default; if you feel that
-#'   you have too many edge crossings, increase this.
-#' @param weights Optional edge weight vector. If `NULL`, then the
-#'   'weight' edge attribute is used, if there is one. Supply `NA` here and
-#'   igraph ignores the edge weights. These are used only if the graph
-#'   contains cycles; igraph will tend to reverse edges with smaller weights
-#'   when breaking the cycles.
-#' @param attributes Which graph/vertex/edge attributes to keep in the extended
-#'   graph. \sQuote{default} keeps the \sQuote{size}, \sQuote{size2},
-#'   \sQuote{shape}, \sQuote{label} and \sQuote{color} vertex attributes and the
-#'   \sQuote{arrow.mode} and \sQuote{arrow.size} edge attributes. \sQuote{all}
-#'   keep all graph, vertex and edge attributes, \sQuote{none} keeps none of
-#'   them.
+#' @param maxiter Integer scalar, the maximum number of iterations in the crossing minimization stage.
+#'   100 is a reasonable default; if you feel that you have too many edge crossings, increase this.
+#' @param weights Optional edge weight vector.
+#'   If `NULL`, then the 'weight' edge attribute is used, if there is one.
+#'   Supply `NA` here and igraph ignores the edge weights.
+#'   These are used only if the graph contains cycles; igraph will tend to reverse edges with smaller weights when breaking the cycles.
+#' @param attributes Which graph/vertex/edge attributes to keep in the extended graph.
+#'   \sQuote{default} keeps the \sQuote{size}, \sQuote{size2}, \sQuote{shape},
+#'   \sQuote{label} and \sQuote{color} vertex attributes and the \sQuote{arrow.mode} and \sQuote{arrow.size} edge attributes.
+#'   \sQuote{all} keep all graph, vertex and edge attributes, \sQuote{none} keeps none of them.
 #' @return A list with the components:
 #' \describe{
 #'     \item{layout}{
@@ -2886,8 +2747,7 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
 #'     }
 #'   }
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
-#' @seealso [with_sugiyama()] to build a lazy layout specification for
-#'   [add_layout_()].
+#' @seealso [with_sugiyama()] to build a lazy layout specification for [add_layout_()].
 #' @references K. Sugiyama, S. Tagawa and M. Toda, "Methods for Visual
 #' Understanding of Hierarchical Systems". IEEE Transactions on Systems, Man
 #' and Cybernetics 11(2):109-125, 1981.
@@ -3213,35 +3073,25 @@ with_sugiyama <- function(...) layout_spec(layout_with_sugiyama, ...)
 #'
 #' Place several graphs on the same layout
 #'
-#' `merge_coords()` takes a list of graphs and a list of coordinates and
-#' places the graphs in a common layout. The method to use is chosen via the
-#' `method` parameter, although right now only the `dla` method is
-#' implemented.
+#' `merge_coords()` takes a list of graphs and a list of coordinates and places the graphs in a common layout.
+#' The method to use is chosen via the `method` parameter, although right now only the `dla` method is implemented.
 #'
-#' The `dla` method covers the graph with circles.  Then it sorts the
-#' graphs based on the number of vertices first and places the largest graph at
-#' the center of the layout. Then the other graphs are placed in decreasing
-#' order via a DLA (diffision limited aggregation) algorithm: the graph is
-#' placed randomly on a circle far away from the center and a random walk is
-#' conducted until the graph walks into the larger graphs already placed or
-#' walks too far from the center of the layout.
+#' The `dla` method covers the graph with circles.  Then it sorts the graphs based on the number of vertices first and places the largest graph at the center of the layout.
+#' Then the other graphs are placed in decreasing order via a DLA (diffision limited aggregation) algorithm:
+#' the graph is placed randomly on a circle far away from the center and a random walk is conducted until the graph walks into the larger graphs already placed or walks too far from the center of the layout.
 #'
-#' The `layout_components()` function disassembles the graph first into
-#' maximal connected components and calls the supplied `layout` function
-#' for each component separately. Finally it merges the layouts via calling
-#' `merge_coords()`.
+#' The `layout_components()` function disassembles the graph first into maximal connected components and calls the supplied `layout` function for each component separately.
+#' Finally it merges the layouts via calling `merge_coords()`.
 #'
 #' @param graphs A list of graph objects.
 #' @param layouts A list of two-column matrices.
-#' @param method Character constant giving the method to use. Right now only
-#'   `dla` is implemented.
-#' @param layout A function object, the layout function to use. The default
-#'   `NULL` uses `layout_with_kk`.
-#' @param \dots For `layout_components()`, additional arguments to pass to
-#'   the `layout` layout function. For `merge_coords()`, these dots must be
-#'   empty.
-#' @return A matrix with two columns and as many lines as the total number of
-#'   vertices in the graphs.
+#' @param method Character constant giving the method to use.
+#'   Right now only `dla` is implemented.
+#' @param layout A function object, the layout function to use.
+#'   The default `NULL` uses `layout_with_kk`.
+#' @param \dots For `layout_components()`, additional arguments to pass to the `layout` layout function.
+#'   For `merge_coords()`, these dots must be empty.
+#' @return A matrix with two columns and as many lines as the total number of vertices in the graphs.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [plot.igraph()], [tkplot()],
 #' [layout()], [disjoint_union()]
@@ -3318,18 +3168,16 @@ merge_coords <- function(
 #'
 #' Rescale coordinates linearly to be within given bounds.
 #'
-#' `norm_coords()` normalizes a layout, it linearly transforms each
-#' coordinate separately to fit into the given limits.
+#' `norm_coords()` normalizes a layout, it linearly transforms each coordinate separately to fit into the given limits.
 #'
 #' @param layout A matrix with two or three columns, the layout to normalize.
 #' @inheritParams rlang::args_dots_empty
-#' @param xmin,xmax The limits for the first coordinate, if one of them or both
-#'   are `NULL` then no normalization is performed along this direction.
-#' @param ymin,ymax The limits for the second coordinate, if one of them or
-#'   both are `NULL` then no normalization is performed along this
-#'   direction.
-#' @param zmin,zmax The limits for the third coordinate, if one of them or both
-#'   are `NULL` then no normalization is performed along this direction.
+#' @param xmin,xmax The limits for the first coordinate,
+#'   if one of them or both are `NULL` then no normalization is performed along this direction.
+#' @param ymin,ymax The limits for the second coordinate,
+#'   if one of them or both are `NULL` then no normalization is performed along this direction.
+#' @param zmin,zmax The limits for the third coordinate,
+#'   if one of them or both are `NULL` then no normalization is performed along this direction.
 #' @return A numeric matrix with at the same dimension as `layout`.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
@@ -3515,8 +3363,7 @@ layout.fruchterman.reingold.grid <- function(graph, ...) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.drl()` was renamed to [layout_with_drl()] to create a more
-#' consistent API.
+#' `layout.drl()` was renamed to [layout_with_drl()] to create a more consistent API.
 #' @inheritParams layout_with_drl
 #' @keywords internal
 #' @export
@@ -3542,9 +3389,8 @@ layout.drl <- function(
 
 #' The DrL graph layout generator
 #'
-#' DrL is a force-directed graph layout toolbox focused on real-world
-#' large-scale graphs, developed by Shawn Martin and colleagues at Sandia
-#' National Laboratories.
+#' DrL is a force-directed graph layout toolbox focused on real-world large-scale graphs,
+#' developed by Shawn Martin and colleagues at Sandia National Laboratories.
 #'
 #' This function implements the force-directed DrL layout generator.
 #'
@@ -3627,39 +3473,34 @@ layout.drl <- function(
 #'     }
 #'   }
 #'
-#' There are five pre-defined parameter settings as well, these are called
-#' `drl_defaults$default`, `drl_defaults$coarsen`,
-#' `drl_defaults$coarsest`, `drl_defaults$refine` and
-#' `drl_defaults$final`.
+#' There are five pre-defined parameter settings as well, these are called `drl_defaults$default`, `drl_defaults$coarsen`,
+#' `drl_defaults$coarsest`, `drl_defaults$refine` and `drl_defaults$final`.
 #'
 #' @aliases drl_defaults igraph.drl.coarsen
 #' @aliases igraph.drl.coarsest igraph.drl.default igraph.drl.final igraph.drl.refine
 #' @param graph The input graph, in can be directed or undirected.
 #' @inheritParams rlang::args_dots_empty
-#' @param use.seed Logical, whether to use the coordinates given in the
-#'   `seed` argument as a starting point.
-#' @param seed A matrix with two columns, the starting coordinates for the
-#'   vertices is `use.seed` is `TRUE`. It is ignored otherwise. The default
-#'   `NULL` draws uniformly random starting coordinates.
-#' @param options Options for the layout generator, a named list. See details
-#'   below. The default `NULL` uses `drl_defaults$default`.
-#' @param weights The weights of the edges. It must be a positive numeric vector,
-#'   `NULL` or `NA`. If it is `NULL` and the input graph has a
-#'   \sQuote{weight} edge attribute, then that attribute will be used. If
-#'   `NULL` and no such attribute is present, then the edges will have equal
-#'   weights. Set this to `NA` if the graph was a \sQuote{weight} edge
-#'   attribute, but you don't want to use it for the layout. Larger edge weights
-#'   correspond to stronger connections.
-#' @param dim Either \sQuote{2} or \sQuote{3}, it specifies whether we want a
-#'   two dimensional or a three dimensional layout. Note that because of the
-#'   nature of the DrL algorithm, the three dimensional layout takes
-#'   significantly longer to compute.
+#' @param use.seed Logical, whether to use the coordinates given in the `seed` argument as a starting point.
+#' @param seed A matrix with two columns, the starting coordinates for the vertices is `use.seed` is `TRUE`.
+#'   It is ignored otherwise.
+#'   The default `NULL` draws uniformly random starting coordinates.
+#' @param options Options for the layout generator, a named list.
+#'   See details below.
+#'   The default `NULL` uses `drl_defaults$default`.
+#' @param weights The weights of the edges.
+#'   It must be a positive numeric vector, `NULL` or `NA`.
+#'   If it is `NULL` and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
+#'   If `NULL` and no such attribute is present, then the edges will have equal weights.
+#'   Set this to `NA` if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for the layout.
+#'   Larger edge weights correspond to stronger connections.
+#' @param dim Either \sQuote{2} or \sQuote{3}, it specifies whether we want a two dimensional or a three dimensional layout.
+#'   Note that because of the nature of the DrL algorithm, the three dimensional layout takes significantly longer to compute.
 #' @return A numeric matrix with two columns.
 #' @author Shawn Martin (<https://www.cs.otago.ac.nz/homepages/smartin/>)
 #' and Gabor Csardi \email{csardi.gabor@@gmail.com} for the R/igraph interface
 #' and the three dimensional version.
-#' @seealso [layout()] for other layout generators. See [with_drl()] to
-#'   build a lazy layout specification for [add_layout_()].
+#' @seealso [layout()] for other layout generators.
+#'   See [with_drl()] to build a lazy layout specification for [add_layout_()].
 #' @references See the following technical report: Martin, S., Brown, W.M.,
 #' Klavans, R., Boyack, K.W., DrL: Distributed Recursive (Graph) Layout. SAND
 #' Reports, 2008. 2936: p. 1-10.
@@ -3939,10 +3780,8 @@ drl_defaults <- list(
   refine = igraph.drl.refine
 )
 
-#' Align a vertex layout
-#' This function centers a vertex layout on the coordinate system origin and
-#' rotates the layout to achieve a visually pleasing alignment with the coordinate
-#' axes. Doing this is particularly useful with force-directed layouts such as [layout_with_fr()].
+#' Align a vertex layout This function centers a vertex layout on the coordinate system origin and rotates the layout to achieve a visually pleasing alignment with the coordinate axes.
+#' Doing this is particularly useful with force-directed layouts such as [layout_with_fr()].
 #' @param graph The graph whose layout is to be aligned.
 #' @param layout A matrix whose rows are the coordinates of vertices.
 #' @return modified layout matrix

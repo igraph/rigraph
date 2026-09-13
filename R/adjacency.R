@@ -3,8 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.adjacency()` was renamed to [graph_from_adjacency_matrix()] to create a more
-#' consistent API.
+#' `graph.adjacency()` was renamed to [graph_from_adjacency_matrix()] to create a more consistent API.
 #' @inheritParams graph_from_adjacency_matrix
 #' @keywords internal
 #' @export
@@ -57,19 +56,13 @@ graph.adjacency <- function(
 
 #' Create graphs from adjacency matrices
 #'
-#' `graph_from_adjacency_matrix()` is a flexible function for creating `igraph`
-#' graphs from adjacency matrices.
+#' `graph_from_adjacency_matrix()` is a flexible function for creating `igraph` graphs from adjacency matrices.
 #'
-#' The order of the vertices are preserved, i.e. the vertex corresponding to
-#' the first row will be vertex 0 in the graph, etc.
+#' The order of the vertices are preserved, i.e. the vertex corresponding to the first row will be vertex 0 in the graph, etc.
 #'
-#' `graph_from_adjacency_matrix()` operates in two main modes, depending on the
-#' `weighted` argument.
+#' `graph_from_adjacency_matrix()` operates in two main modes, depending on the `weighted` argument.
 #'
-#' If this argument is `NULL` then an unweighted graph is created and an
-#' element of the adjacency matrix gives the number of edges to create between
-#' the two corresponding vertices.  The details depend on the value of the
-#' `mode` argument:
+#' If this argument is `NULL` then an unweighted graph is created and an element of the adjacency matrix gives the number of edges to create between the two corresponding vertices.  The details depend on the value of the `mode` argument:
 #'   \describe{
 #'     \item{"directed"}{
 #'       The graph will be directed and a matrix element gives
@@ -101,9 +94,7 @@ graph.adjacency <- function(
 #'     }
 #'   }
 #'
-#' If the `weighted` argument is not `NULL` then the elements of the
-#' matrix give the weights of the edges (if they are not zero).  The details
-#' depend on the value of the `mode` argument:
+#' If the `weighted` argument is not `NULL` then the elements of the matrix give the weights of the edges (if they are not zero).  The details depend on the value of the `mode` argument:
 #'   \describe{
 #'     \item{"directed"}{
 #'       The graph will be directed and a matrix element gives the edge weights.
@@ -134,39 +125,30 @@ graph.adjacency <- function(
 #'     }
 #'   }
 #'
-#' @param adjmatrix A square adjacency matrix. From igraph version 0.5.1 this
-#'   can be a sparse matrix created with the `Matrix` package.
+#' @param adjmatrix A square adjacency matrix.
+#'   From igraph version 0.5.1 this can be a sparse matrix created with the `Matrix` package.
 #' @inheritParams rlang::args_dots_empty
-#' @param mode Character scalar, specifies how igraph should interpret the
-#'   supplied matrix. See also the `weighted` argument, the interpretation
-#'   depends on that too. Possible values are: `directed`,
-#'   `undirected`, `upper`, `lower`, `max`, `min`,
-#'   `plus`. See details below.
-#' @param weighted This argument specifies whether to create a weighted graph
-#'   from an adjacency matrix. If it is `NULL` then an unweighted graph is
-#'   created and the elements of the adjacency matrix gives the number of edges
-#'   between the vertices. If it is a character constant then for every non-zero
-#'   matrix entry an edge is created and the value of the entry is added as an
-#'   edge attribute named by the `weighted` argument. If it is `TRUE`
-#'   then a weighted graph is created and the name of the edge attribute will be
-#'   `weight`. See also details below.
-#' @param diag Logical, whether to include the diagonal of the matrix in
-#'   the calculation. If this is `FALSE` then the diagonal is zerod out
-#'   first.
-#' @param add.colnames Character scalar, whether to add the column names as
-#'   vertex attributes. If it is `NULL` (the default) then, if
-#'   present, column names are added as vertex attribute \sQuote{name}. If
-#'   `NA` or `FALSE` then they will not be added.  If a character constant,
-#'   then it gives the name of the vertex attribute to add.
-#' @param add.rownames Character scalar, whether to add the row names as vertex
-#'   attributes. Possible values the same as the previous argument. By default
-#'   row names are not added. If \sQuote{`add.rownames`} and
-#'   \sQuote{`add.colnames`} specify the same vertex attribute, then the
-#'   former is ignored.
+#' @param mode Character scalar, specifies how igraph should interpret the supplied matrix.
+#'   See also the `weighted` argument, the interpretation depends on that too.
+#'   Possible values are: `directed`, `undirected`, `upper`, `lower`, `max`, `min`, `plus`.
+#'   See details below.
+#' @param weighted This argument specifies whether to create a weighted graph from an adjacency matrix.
+#'   If it is `NULL` then an unweighted graph is created and the elements of the adjacency matrix gives the number of edges between the vertices.
+#'   If it is a character constant then for every non-zero matrix entry an edge is created and the value of the entry is added as an edge attribute named by the `weighted` argument.
+#'   If it is `TRUE` then a weighted graph is created and the name of the edge attribute will be `weight`.
+#'   See also details below.
+#' @param diag Logical, whether to include the diagonal of the matrix in the calculation.
+#'   If this is `FALSE` then the diagonal is zerod out first.
+#' @param add.colnames Character scalar, whether to add the column names as vertex attributes.
+#'   If it is `NULL` (the default) then, if present, column names are added as vertex attribute \sQuote{name}.
+#'   If `NA` or `FALSE` then they will not be added.  If a character constant, then it gives the name of the vertex attribute to add.
+#' @param add.rownames Character scalar, whether to add the row names as vertex attributes.
+#'   Possible values the same as the previous argument.
+#'   By default row names are not added.
+#'   If \sQuote{`add.rownames`} and \sQuote{`add.colnames`} specify the same vertex attribute, then the former is ignored.
 #' @return An igraph graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [make_graph()] and [graph_from_literal()] for other ways to
-#' create graphs.
+#' @seealso [make_graph()] and [graph_from_literal()] for other ways to create graphs.
 #' @keywords graphs
 #' @examples
 #'
@@ -592,8 +574,8 @@ graph.adjacency.sparse <- function(
   }
 
   vc <- nrow(adjmatrix)
-  # Exit early for empty graphs. Use na.counted = TRUE so that NA entries
-  # (which are stored explicitly) do not cause nnzero() to return NA.
+  # Exit early for empty graphs.
+  # Use na.counted = TRUE so that NA entries (which are stored explicitly) do not cause nnzero() to return NA.
   if (vc == 1 || Matrix::nnzero(adjmatrix, na.counted = TRUE) == 0) {
     return(make_empty_graph(n = vc, directed = (mode == "directed")))
   }

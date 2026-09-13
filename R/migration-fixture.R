@@ -128,14 +128,14 @@ migration_fixture_prefix <- function(
   )
 }
 
-# Third fixture: the two hazards a generated block faces in a real function
-# body. `names` and `c` are argument names, so the block's own calls would
-# resolve to them unless every call is namespace-qualified -- and a *missing*
-# formal is worse than a shadowing one, since R forces the promise while looking
-# for a function of that name. `attr` was renamed to `weights` while a
-# deprecated `attr` formal stayed behind, so `attr =` binds that formal while
-# its abbreviations (`a`, `at`, `att`) could mean either and are rejected. This
-# is the as_adjacency_matrix()/as_biadjacency_matrix() shape.
+# Third fixture: the two hazards a generated block faces in a real function body.
+# `names` and `c` are argument names,
+# so the block's own calls would resolve to them
+# unless every call is namespace-qualified -- and a *missing* formal is worse than a shadowing one,
+# since R forces the promise while looking for a function of that name.
+# `attr` was renamed to `weights` while a deprecated `attr` formal stayed behind,
+# so `attr =` binds that formal while its abbreviations (`a`, `at`, `att`) could mean either and are rejected.
+# This is the as_adjacency_matrix()/as_biadjacency_matrix() shape.
 migration_fixture_shadow <- function(
   graph,
   ...,

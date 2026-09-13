@@ -3,8 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.chordal()` was renamed to [is_chordal()] to create a more
-#' consistent API.
+#' `is.chordal()` was renamed to [is_chordal()] to create a more consistent API.
 #' @inheritParams is_chordal
 #' @keywords internal
 #' @export
@@ -52,29 +51,24 @@ is.chordal <- function(
 
 #' Chordality of a graph
 #'
-#' A graph is chordal (or triangulated) if each of its cycles of four or more
-#' nodes has a chord, which is an edge joining two nodes that are not adjacent
-#' in the cycle. An equivalent definition is that any chordless cycles have at
-#' most three nodes.
+#' A graph is chordal (or triangulated) if each of its cycles of four or more nodes has a chord,
+#' which is an edge joining two nodes that are not adjacent in the cycle.
+#' An equivalent definition is that any chordless cycles have at most three nodes.
 #'
-#' The chordality of the graph is decided by first performing maximum
-#' cardinality search on it (if the `alpha` and `alpham1` arguments
-#' are `NULL`), and then calculating the set of fill-in edges.
+#' The chordality of the graph is decided by first performing maximum cardinality search on it (if the `alpha` and `alpham1` arguments are `NULL`),
+#' and then calculating the set of fill-in edges.
 #'
 #' The set of fill-in edges is empty if and only if the graph is chordal.
 #'
 #' It is also true that adding the fill-in edges to the graph makes it chordal.
 #'
-#' @param graph The input graph. It may be directed, but edge directions are
-#'   ignored, as the algorithm is defined for undirected graphs.
+#' @param graph The input graph.
+#'   It may be directed, but edge directions are ignored, as the algorithm is defined for undirected graphs.
 #' @inheritParams rlang::args_dots_empty
-#' @param alpha Numeric vector, the maximal chardinality ordering of the
-#'   vertices. If it is `NULL`, then it is automatically calculated by
-#'   calling [max_cardinality()], or from `alpham1` if
-#'   that is given..
-#' @param alpham1 Numeric vector, the inverse of `alpha`. If it is
-#'   `NULL`, then it is automatically calculated by calling
-#'   [max_cardinality()], or from `alpha`.
+#' @param alpha Numeric vector, the maximal chardinality ordering of the vertices.
+#'   If it is `NULL`, then it is automatically calculated by calling [max_cardinality()], or from `alpham1` if that is given..
+#' @param alpham1 Numeric vector, the inverse of `alpha`.
+#'   If it is `NULL`, then it is automatically calculated by calling [max_cardinality()], or from `alpha`.
 #' @param fillin Logical, whether to calculate the fill-in edges.
 #' @param newgraph Logical, whether to calculate the triangulated graph.
 #' @return A list with three members:

@@ -98,10 +98,8 @@ modify_list <- function(x, y) {
 #' Test function to verify error formatting with file and line information
 #'
 #' @description
-#' This is a test function that throws an error from C code with file and line
-#' information.
-#' The error message should include the source file and line number where the
-#' error occurred.
+#' This is a test function that throws an error from C code with file and line information.
+#' The error message should include the source file and line number where the error occurred.
 #'
 #' @return This function never returns; it always throws an error.
 #' @keywords internal

@@ -31,19 +31,16 @@ pkg_graph_version <- ver_1_5_0
 
 #' igraph data structure versions
 #'
-#' igraph's internal data representation changes sometimes between
-#' versions. This means that it is not always possible to use igraph objects
-#' that were created (and possibly saved to a file) with an older
-#' igraph version.
+#' igraph's internal data representation changes sometimes between versions.
+#' This means that it is not always possible to use igraph objects that were created (and possibly saved to a file) with an older igraph version.
 #'
 #' `graph_version()` queries the current data format,
 #' or the data format of a possibly older igraph graph.
 #'
-#' [upgrade_graph()] can convert an older data format
-#' to the current one.
+#' [upgrade_graph()] can convert an older data format to the current one.
 #'
-#' @param graph The input graph. If it is missing, then
-#'   the version number of the current data format is returned.
+#' @param graph The input graph.
+#'   If it is missing, then the version number of the current data format is returned.
 #' @return An integer scalar.
 #'
 #' @seealso upgrade_graph to convert the data format of a graph.
@@ -62,22 +59,18 @@ graph_version <- function(graph) {
 
 #' igraph data structure versions
 #'
-#' igraph's internal data representation changes sometimes between
-#' versions. This means that it is not possible to use igraph objects
-#' that were created (and possibly saved to a file) with an older
-#' igraph version.
+#' igraph's internal data representation changes sometimes between versions.
+#' This means that it is not possible to use igraph objects that were created (and possibly saved to a file) with an older igraph version.
 #'
 #' [graph_version()] queries the current data format,
 #' or the data format of a possibly older igraph graph.
 #'
-#' `upgrade_graph()` can convert an older data format
-#' to the current one.
+#' `upgrade_graph()` can convert an older data format to the current one.
 #'
 #' @param graph The input graph.
 #' @return The graph in the current format.
 #'
-#' @seealso graph_version to check the current data format version
-#' or the version of a graph.
+#' @seealso graph_version to check the current data format version or the version of a graph.
 #' @family versions
 #' @export
 upgrade_graph <- function(graph) {
@@ -184,8 +177,7 @@ clear_native_ptr <- function(g) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `igraph.version()` was renamed to [igraph_version()] to create a more
-#' consistent API.
+#' `igraph.version()` was renamed to [igraph_version()] to create a more consistent API.
 #'
 #' @keywords internal
 #' @export
@@ -203,8 +195,7 @@ igraph.version <- function() {
 #' Returns the R package version,
 #' prints the R package version and C library version.
 #'
-#' @return A character scalar, the igraph version string, with an attribute
-#'  `"c_version"` giving the C library version string.
+#' @return A character scalar, the igraph version string, with an attribute `"c_version"` giving the C library version string.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 #' @keywords internal

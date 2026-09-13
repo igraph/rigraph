@@ -1,7 +1,7 @@
 #' Create a printer callback function
 #'
-#' A printer callback function is a function can performs the actual
-#' printing. It has a number of subcommands, that are called by
+#' A printer callback function is a function can performs the actual printing.
+#' It has a number of subcommands, that are called by
 #' the `printer` package, in a form \preformatted{
 #'     printer_callback("subcommand", argument1, argument2, ...)
 #' } See the examples below.
@@ -63,17 +63,15 @@ print_head_foot <- function(head_foot) {
 
 #' Print the only the head of an R object
 #'
-#' @param x The object to print, or a callback function. See
-#'   [printer_callback()] for details.
-#' @param max_lines Maximum number of lines to print, *not*
-#'   including the header and the footer.
+#' @param x The object to print, or a callback function.
+#'   See [printer_callback()] for details.
+#' @param max_lines Maximum number of lines to print, *not* including the header and the footer.
 #' @param header The header, if a function, then it will be called,
 #'   otherwise printed using `cat`.
 #' @param footer The footer, if a function, then it will be called,
 #'   otherwise printed using `cat`.
-#' @param omitted_footer Footer that is only printed if anything
-#'   is omitted from the printout. If a function, then it will be called,
-#'   otherwise printed using `cat`.
+#' @param omitted_footer Footer that is only printed if anything is omitted from the printout.
+#'   If a function, then it will be called, otherwise printed using `cat`.
 #' @param ... Extra arguments to pass to `print()`.
 #' @return `x`, invisibly.
 #'
@@ -136,7 +134,8 @@ head_print_callback <- function(
   minw <- x("min_width")
   ow <- getOption("width", 80)
 
-  ## Max number of items we can print. This is an upper bound.
+  ## Max number of items we can print.
+  ## This is an upper bound.
   can_max <- min(floor(ow / minw) * max_lines, len)
   if (can_max == 0) {
     return()
@@ -189,8 +188,8 @@ head_print_callback <- function(
 #'
 #' @param ... Passed to the printing function.
 #' @param .indent Character scalar, indent the printout with this.
-#' @param .printer The printing function. The default `NULL` uses
-#'   [print].
+#' @param .printer The printing function.
+#'   The default `NULL` uses [print].
 #' @return The first element in `...`, invisibly.
 #'
 #' @export

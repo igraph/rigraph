@@ -35,13 +35,12 @@ or Github, with the [pak package](https://pak.r-lib.org/):
 pak::pak("igraph/rigraph")
 ```
 
-When compiling from sources, make sure that you have C, C++ and Fortran
-compilers, as well as development packages for `glpk` and `libxml2`.
+When compiling from sources, make sure that you have C, C++ and Fortran compilers,
+as well as development packages for `glpk` and `libxml2`.
 On Debian/Ubuntu, use `apt install libglpk-dev libxml2-dev`.
 On Fedora, use `yum install glpk-devel libxml2-devel`.
 
-For installation from source on Windows, you need to have
-[RTools](https://cran.r-project.org/bin/windows/Rtools/) installed.
+For installation from source on Windows, you need to have [RTools](https://cran.r-project.org/bin/windows/Rtools/) installed.
 For versions R >= 4.0 you can install the dependencies using:
 
 ```
@@ -56,7 +55,8 @@ See the [Installation FAQ](https://r.igraph.org/articles/installation-troublesho
 
 See the [igraph package's website](https://r.igraph.org/) for the complete manual.
 
-A good entry point is the "Get started" vignette, in [English](https://r.igraph.org/articles/igraph.html) or [Spanish](https://r.igraph.org/articles/igraph_ES.html).
+A good entry point is the "Get started" vignette,
+in [English](https://r.igraph.org/articles/igraph.html) or [Spanish](https://r.igraph.org/articles/igraph_ES.html).
 
 For an overview of igraph's functionality see the [reference index](https://r.igraph.org/reference/index.html).
 It includes [experimental functions](https://r.igraph.org/reference/index.html#experimental-functions) on which we especially welcome feedback 
@@ -64,8 +64,7 @@ It includes [experimental functions](https://r.igraph.org/reference/index.html#e
 
 ## Contributions
 
-Please read our
-[contribution guide](https://github.com/igraph/rigraph/blob/dev/CONTRIBUTING.md).
+Please read our [contribution guide](https://github.com/igraph/rigraph/blob/dev/CONTRIBUTING.md).
 
 ## License
 

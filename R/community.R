@@ -3,8 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `create.communities()` was renamed to [make_clusters()] to create a more
-#' consistent API.
+#' `create.communities()` was renamed to [make_clusters()] to create a more consistent API.
 #' @inheritParams make_clusters
 #' @keywords internal
 #' @export
@@ -31,8 +30,7 @@ create.communities <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `walktrap.community()` was renamed to [cluster_walktrap()] to create a more
-#' consistent API.
+#' `walktrap.community()` was renamed to [cluster_walktrap()] to create a more consistent API.
 #' @inheritParams cluster_walktrap
 #' @keywords internal
 #' @export
@@ -65,8 +63,7 @@ walktrap.community <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `spinglass.community()` was renamed to [cluster_spinglass()] to create a more
-#' consistent API.
+#' `spinglass.community()` was renamed to [cluster_spinglass()] to create a more consistent API.
 #' @inheritParams cluster_spinglass
 #' @keywords internal
 #' @export
@@ -111,8 +108,7 @@ spinglass.community <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `showtrace()` was renamed to [show_trace()] to create a more
-#' consistent API.
+#' `showtrace()` was renamed to [show_trace()] to create a more consistent API.
 #' @inheritParams show_trace
 #' @keywords internal
 #' @export
@@ -127,8 +123,7 @@ showtrace <- function(communities) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `optimal.community()` was renamed to [cluster_optimal()] to create a more
-#' consistent API.
+#' `optimal.community()` was renamed to [cluster_optimal()] to create a more consistent API.
 #' @inheritParams cluster_optimal
 #' @keywords internal
 #' @export
@@ -143,8 +138,7 @@ optimal.community <- function(graph, weights = NULL) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `multilevel.community()` was renamed to [cluster_louvain()] to create a more
-#' consistent API.
+#' `multilevel.community()` was renamed to [cluster_louvain()] to create a more consistent API.
 #' @inheritParams cluster_louvain
 #' @keywords internal
 #' @export
@@ -163,8 +157,7 @@ multilevel.community <- function(graph, weights = NULL, resolution = 1) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `mod.matrix()` was renamed to [modularity_matrix()] to create a more
-#' consistent API.
+#' `mod.matrix()` was renamed to [modularity_matrix()] to create a more consistent API.
 #' @inheritParams modularity_matrix
 #' @keywords internal
 #' @export
@@ -191,8 +184,7 @@ mod.matrix <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `leading.eigenvector.community()` was renamed to [cluster_leading_eigen()] to create a more
-#' consistent API.
+#' `leading.eigenvector.community()` was renamed to [cluster_leading_eigen()] to create a more consistent API.
 #' @inheritParams cluster_leading_eigen
 #' @keywords internal
 #' @export
@@ -229,8 +221,7 @@ leading.eigenvector.community <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `label.propagation.community()` was renamed to [cluster_label_prop()] to create a more
-#' consistent API.
+#' `label.propagation.community()` was renamed to [cluster_label_prop()] to create a more consistent API.
 #' @inheritParams cluster_label_prop
 #' @keywords internal
 #' @export
@@ -263,8 +254,7 @@ label.propagation.community <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.hierarchical()` was renamed to [is_hierarchical()] to create a more
-#' consistent API.
+#' `is.hierarchical()` was renamed to [is_hierarchical()] to create a more consistent API.
 #' @inheritParams is_hierarchical
 #' @keywords internal
 #' @export
@@ -279,8 +269,7 @@ is.hierarchical <- function(communities) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `infomap.community()` was renamed to [cluster_infomap()] to create a more
-#' consistent API.
+#' `infomap.community()` was renamed to [cluster_infomap()] to create a more consistent API.
 #' @inheritParams cluster_infomap
 #' @keywords internal
 #' @export
@@ -307,8 +296,7 @@ infomap.community <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `fastgreedy.community()` was renamed to [cluster_fast_greedy()] to create a more
-#' consistent API.
+#' `fastgreedy.community()` was renamed to [cluster_fast_greedy()] to create a more consistent API.
 #' @inheritParams cluster_fast_greedy
 #' @keywords internal
 #' @export
@@ -339,8 +327,7 @@ fastgreedy.community <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `edge.betweenness.community()` was renamed to [cluster_edge_betweenness()] to create a more
-#' consistent API.
+#' `edge.betweenness.community()` was renamed to [cluster_edge_betweenness()] to create a more consistent API.
 #' @inheritParams cluster_edge_betweenness
 #' @keywords internal
 #' @export
@@ -377,8 +364,7 @@ edge.betweenness.community <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `dendPlot()` was renamed to [plot_dendrogram()] to create a more
-#' consistent API.
+#' `dendPlot()` was renamed to [plot_dendrogram()] to create a more consistent API.
 #' @inheritParams plot_dendrogram
 #' @keywords internal
 #' @export
@@ -393,8 +379,7 @@ dendPlot <- function(x, mode = igraph_opt("dend.plot.type"), ...) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `cutat()` was renamed to [cut_at()] to create a more
-#' consistent API.
+#' `cutat()` was renamed to [cut_at()] to create a more consistent API.
 #' @inheritParams cut_at
 #' @keywords internal
 #' @export
@@ -409,8 +394,7 @@ cutat <- function(communities, no, steps) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `contract.vertices()` was renamed to [contract()] to create a more
-#' consistent API.
+#' `contract.vertices()` was renamed to [contract()] to create a more consistent API.
 #' @inheritParams contract
 #' @keywords internal
 #' @export
@@ -433,8 +417,7 @@ contract.vertices <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `code.length()` was renamed to [code_len()] to create a more
-#' consistent API.
+#' `code.length()` was renamed to [code_len()] to create a more consistent API.
 #' @inheritParams code_len
 #' @keywords internal
 #' @export
@@ -470,136 +453,107 @@ code.length <- function(communities) {
 
 #' Functions to deal with the result of network community detection
 #'
-#' igraph community detection functions return their results as an object from
-#' the `communities` class. This manual page describes the operations of
-#' this class.
+#' igraph community detection functions return their results as an object from the `communities` class.
+#' This manual page describes the operations of this class.
 #'
-#' Community structure detection algorithms try to find dense subgraphs in
-#' directed or undirected graphs, by optimizing some criteria, and usually
-#' using heuristics.
+#' Community structure detection algorithms try to find dense subgraphs in directed or undirected graphs, by optimizing some criteria,
+#' and usually using heuristics.
 #'
-#' igraph implements a number of community detection methods (see them below),
-#' all of which return an object of the class `communities`. Because the
-#' community structure detection algorithms are different, `communities`
-#' objects do not always have the same structure. Nevertheless, they have some
-#' common operations, these are documented here.
+#' igraph implements a number of community detection methods (see them below), all of which return an object of the class `communities`.
+#' Because the community structure detection algorithms are different, `communities` objects do not always have the same structure.
+#' Nevertheless, they have some common operations, these are documented here.
 #'
-#' The [print()] generic function is defined for `communities`, it
-#' prints a short summary.
+#' The [print()] generic function is defined for `communities`, it prints a short summary.
 #'
-#' The `length` generic function call be called on `communities` and
-#' returns the number of communities.
+#' The `length` generic function call be called on `communities` and returns the number of communities.
 #'
-#' The `sizes()` function returns the community sizes, in the order of their
-#' IDs.
+#' The `sizes()` function returns the community sizes, in the order of their IDs.
 #'
-#' `membership()` gives the division of the vertices, into communities. It
-#' returns a numeric vector, one value for each vertex, the ID of its
-#' community. Community IDs start from one. Note that some algorithms calculate
-#' the complete (or incomplete) hierarchical structure of the communities, and
-#' not just a single partitioning. For these algorithms typically the
-#' membership for the highest modularity value is returned, but see also the
-#' manual pages of the individual algorithms.
+#' `membership()` gives the division of the vertices, into communities.
+#' It returns a numeric vector, one value for each vertex, the ID of its community.
+#' Community IDs start from one.
+#' Note that some algorithms calculate the complete (or incomplete) hierarchical structure of the communities,
+#' and not just a single partitioning.
+#' For these algorithms typically the membership for the highest modularity value is returned,
+#' but see also the manual pages of the individual algorithms.
 #'
-#' `communities()` is also the name of a function, that returns a list of
-#' communities, each identified by their vertices. The vertices will have
-#' symbolic names if the `add.vertex.names` igraph option is set, and the
-#' graph itself was named. Otherwise numeric vertex IDs are used.
+#' `communities()` is also the name of a function, that returns a list of communities, each identified by their vertices.
+#' The vertices will have symbolic names if the `add.vertex.names` igraph option is set, and the graph itself was named.
+#' Otherwise numeric vertex IDs are used.
 #'
-#' `modularity()` gives the modularity score of the partitioning. (See
-#' [modularity.igraph()] for details. For algorithms that do not
-#' result a single partitioning, the highest modularity value is returned.
+#' `modularity()` gives the modularity score of the partitioning.
+#' (See [modularity.igraph()] for details.
+#' For algorithms that do not result a single partitioning, the highest modularity value is returned.
 #'
-#' `algorithm()` gives the name of the algorithm that was used to calculate
-#' the community structure.
+#' `algorithm()` gives the name of the algorithm that was used to calculate the community structure.
 #'
-#' `crossing()` returns a logical vector, with one value for each edge,
-#' ordered according to the edge IDs. The value is `TRUE` iff the edge
-#' connects two different communities, according to the (best) membership
-#' vector, as returned by `membership()`.
+#' `crossing()` returns a logical vector, with one value for each edge, ordered according to the edge IDs.
+#' The value is `TRUE` iff the edge connects two different communities, according to the (best) membership vector,
+#' as returned by `membership()`.
 #'
-#' `is_hierarchical()` checks whether a hierarchical algorithm was used to
-#' find the community structure. Some functions only make sense for
-#' hierarchical methods (e.g. `merges()`, `cut_at()` and
-#' [as.dendrogram()]).
+#' `is_hierarchical()` checks whether a hierarchical algorithm was used to find the community structure.
+#' Some functions only make sense for hierarchical methods (e.g. `merges()`, `cut_at()` and [as.dendrogram()]).
 #'
-#' `merges()` returns the merge matrix for hierarchical methods. An error
-#' message is given, if a non-hierarchical method was used to find the
-#' community structure. You can check this by calling `is_hierarchical()` on
-#' the `communities` object.
+#' `merges()` returns the merge matrix for hierarchical methods.
+#' An error message is given, if a non-hierarchical method was used to find the community structure.
+#' You can check this by calling `is_hierarchical()` on the `communities` object.
 #'
-#' `cut_at()` cuts the merge tree of a hierarchical community finding method,
-#' at the desired place and returns a membership vector. The desired place can
-#' be expressed as the desired number of communities or as the number of merge
-#' steps to make. The function gives an error message, if called with a
-#' non-hierarchical method.
+#' `cut_at()` cuts the merge tree of a hierarchical community finding method, at the desired place and returns a membership vector.
+#' The desired place can be expressed as the desired number of communities or as the number of merge steps to make.
+#' The function gives an error message, if called with a non-hierarchical method.
 #'
-#' [as.dendrogram()] converts a hierarchical community structure to a
-#' `dendrogram` object. It only works for hierarchical methods, and gives
-#' an error message to others. See [stats::dendrogram()] for details.
+#' [as.dendrogram()] converts a hierarchical community structure to a `dendrogram` object.
+#' It only works for hierarchical methods, and gives an error message to others.
+#' See [stats::dendrogram()] for details.
 #'
-#' [stats::as.hclust()] is similar to [as.dendrogram()], but converts a
-#' hierarchical community structure to a `hclust` object.
+#' [stats::as.hclust()] is similar to [as.dendrogram()], but converts a hierarchical community structure to a `hclust` object.
 #'
-#' [ape::as.phylo()] converts a hierarchical community structure to a `phylo`
-#' object, you will need the `ape` package for this.
+#' [ape::as.phylo()] converts a hierarchical community structure to a `phylo` object, you will need the `ape` package for this.
 #'
-#' `show_trace()` works (currently) only for communities found by the leading
-#' eigenvector method ([cluster_leading_eigen()]), and
-#' returns a character vector that gives the steps performed by the algorithm
-#' while finding the communities.
+#' `show_trace()` works (currently) only for communities found by the leading eigenvector method ([cluster_leading_eigen()]),
+#' and returns a character vector that gives the steps performed by the algorithm while finding the communities.
 #'
-#' `code_len()` is defined for the InfoMAP method
-#' ([cluster_infomap()] and returns the code length of the
-#' partition.
+#' `code_len()` is defined for the InfoMAP method ([cluster_infomap()] and returns the code length of the partition.
 #'
-#' It is possibly to call the [plot()] function on `communities`
-#' objects. This will plot the graph (and uses [plot.igraph()]
-#' internally), with the communities shown. By default it colores the vertices
-#' according to their communities, and also marks the vertex groups
-#' corresponding to the communities. It passes additional arguments to
-#' [plot.igraph()], please see that and also
-#' [igraph.plotting] on how to change the plot.
+#' It is possibly to call the [plot()] function on `communities` objects.
+#' This will plot the graph (and uses [plot.igraph()] internally), with the communities shown.
+#' By default it colores the vertices according to their communities, and also marks the vertex groups corresponding to the communities.
+#' It passes additional arguments to [plot.igraph()], please see that and also [igraph.plotting] on how to change the plot.
 #'
 #' @rdname communities
 #' @family community
-#' @param communities,x,object A `communities` object, the result of an
-#'   igraph community detection function.
+#' @param communities,x,object A `communities` object, the result of an igraph community detection function.
 #' @param graph An igraph graph object, corresponding to `communities`.
-#' @param y An igraph graph object, corresponding to the communities in
-#'   `x`.
-#' @param no Integer scalar, the desired number of communities. If too low or
-#'   two high, then an error message is given. Exactly one of `no` and
-#'   `steps` must be supplied.
-#' @param steps The number of merge operations to perform to produce the
-#'   communities. Exactly one of `no` and `steps` must be supplied.
-#' @param col A vector of colors, in any format that is accepted by the regular
-#'   R plotting methods. This vector gives the colors of the vertices explicitly.
-#' @param mark.groups A list of numeric vectors. The communities can be
-#'   highlighted using colored polygons. The groups for which the polygons are
-#'   drawn are given here. The default is to use the groups given by the
-#'   communities. Supply `NULL` here if you do not want to highlight any
-#'   groups.
-#' @param edge.color The colors of the edges. By default the edges within
-#'   communities are colored green and other edges are red.
-#' @param hang Numeric scalar indicating how the height of leaves should be
-#'   computed from the heights of their parents; see [plot.hclust()].
-#' @param use.modularity Logical, whether to use the modularity values
-#'   to define the height of the branches.
-#' @param \dots Additional arguments. `plot.communities` passes these to
-#'   [plot.igraph()]. The other functions silently ignore
-#'   them.
-#' @param membership Numeric vector, one value for each vertex, the membership
-#'   vector of the community structure. Might also be `NULL` if the
-#'   community structure is given in another way, e.g. by a merge matrix.
-#' @param algorithm Name of the algorithm that produced the community
-#'   structure (character scalar). Default: `NULL`, meaning an unknown algorithm.
-#' @param merges Merge matrix of the hierarchical
-#'   community structure. See `merges()` below for more information on its
-#'   format. Default: `NULL`.
-#' @param modularity Numeric scalar or vector, the modularity value of the
-#'   community structure. It can also be `NULL`, if the modularity of the
-#'   (best) split is not available.
+#' @param y An igraph graph object, corresponding to the communities in `x`.
+#' @param no Integer scalar, the desired number of communities.
+#'   If too low or two high, then an error message is given.
+#'   Exactly one of `no` and `steps` must be supplied.
+#' @param steps The number of merge operations to perform to produce the communities.
+#'   Exactly one of `no` and `steps` must be supplied.
+#' @param col A vector of colors, in any format that is accepted by the regular R plotting methods.
+#'   This vector gives the colors of the vertices explicitly.
+#' @param mark.groups A list of numeric vectors.
+#'   The communities can be highlighted using colored polygons.
+#'   The groups for which the polygons are drawn are given here.
+#'   The default is to use the groups given by the communities.
+#'   Supply `NULL` here if you do not want to highlight any groups.
+#' @param edge.color The colors of the edges.
+#'   By default the edges within communities are colored green and other edges are red.
+#' @param hang Numeric scalar indicating how the height of leaves should be computed from the heights of their parents;
+#'   see [plot.hclust()].
+#' @param use.modularity Logical, whether to use the modularity values to define the height of the branches.
+#' @param \dots Additional arguments.
+#'   `plot.communities` passes these to [plot.igraph()].
+#'   The other functions silently ignore them.
+#' @param membership Numeric vector, one value for each vertex, the membership vector of the community structure.
+#'   Might also be `NULL` if the community structure is given in another way, e.g. by a merge matrix.
+#' @param algorithm Name of the algorithm that produced the community structure (character scalar).
+#'   Default: `NULL`, meaning an unknown algorithm.
+#' @param merges Merge matrix of the hierarchical community structure.
+#'   See `merges()` below for more information on its format.
+#'   Default: `NULL`.
+#' @param modularity Numeric scalar or vector, the modularity value of the community structure.
+#'   It can also be `NULL`, if the modularity of the (best) split is not available.
 #' @return [print()] returns the `communities` object itself,
 #'   invisibly.
 #'
@@ -607,8 +561,7 @@ code.length <- function(communities) {
 #'
 #'   `sizes()` returns a numeric vector.
 #'
-#'   `membership()` returns a numeric vector, one number for each vertex in
-#'   the graph that was the input of the community detection.
+#'   `membership()` returns a numeric vector, one number for each vertex in the graph that was the input of the community detection.
 #'
 #'   `modularity()` returns a numeric scalar.
 #'
@@ -620,24 +573,20 @@ code.length <- function(communities) {
 #'
 #'   `merges()` returns a two-column numeric matrix.
 #'
-#'   `cut_at()` returns a numeric vector, the membership vector of the
-#'   vertices.
+#'   `cut_at()` returns a numeric vector, the membership vector of the vertices.
 #'
 #'   [as.dendrogram()] returns a [dendrogram] object.
 #'
 #'   `show_trace()` returns a character vector.
 #'
-#'   `code_len()` returns a numeric scalar for communities found with the
-#'   InfoMAP method and `NULL` for other methods.
+#'   `code_len()` returns a numeric scalar for communities found with the InfoMAP method and `NULL` for other methods.
 #'
 #'   [plot()] for `communities` objects returns `NULL`, invisibly.
 #'
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso See [plot_dendrogram()] for plotting community structure
-#' dendrograms.
+#' @seealso See [plot_dendrogram()] for plotting community structure dendrograms.
 #'
-#' See [compare()] for comparing two community structures
-#' on the same graph.
+#' See [compare()] for comparing two community structures on the same graph.
 #' @keywords graphs
 #' @export
 #' @examples
@@ -677,9 +626,8 @@ print.membership <- function(x, ...) print(unclass(x), ...)
 
 #' Declare a numeric vector as a membership vector
 #'
-#' This is useful if you want to use functions defined on
-#' membership vectors, but your membership vector does not
-#' come from an igraph clustering method.
+#' This is useful if you want to use functions defined on membership vectors,
+#' but your membership vector does not come from an igraph clustering method.
 #'
 #' @param x The input vector.
 #' @return The input vector, with the `membership` class added.
@@ -738,21 +686,16 @@ print.communities <- function(x, ...) {
 
 #' Creates a communities object.
 #'
-#' This is useful to integrate the results of community finding algorithms
-#' that are not included in igraph.
+#' This is useful to integrate the results of community finding algorithms that are not included in igraph.
 #'
 #' @param graph The graph of the community structure.
-#' @param membership The membership vector of the community structure, a
-#'   numeric vector denoting the ID of the community for each vertex. It
-#'   might be `NULL` for hierarchical community structures.
+#' @param membership The membership vector of the community structure, a numeric vector denoting the ID of the community for each vertex.
+#'   It might be `NULL` for hierarchical community structures.
 #' @inheritParams rlang::args_dots_empty
-#' @param algorithm Character string, the algorithm that generated
-#'   the community structure, it can be arbitrary.
-#' @param merges A merge matrix, for hierarchical community structures (or
-#'   `NULL` otherwise.
-#' @param modularity Modularity value of the community structure. If this
-#'   is `TRUE` and the membership vector is available, then it the
-#'   modularity values is calculated automatically.
+#' @param algorithm Character string, the algorithm that generated the community structure, it can be arbitrary.
+#' @param merges A merge matrix, for hierarchical community structures (or `NULL` otherwise.
+#' @param modularity Modularity value of the community structure.
+#'   If this is `TRUE` and the membership vector is available, then it the modularity values is calculated automatically.
 #' @return A `communities` object.
 #'   \describe{
 #'     \item{membership}{
@@ -870,71 +813,58 @@ modularity <- function(x, ...) {
 
 #' Modularity of a community structure of a graph
 #'
-#' This function calculates how modular is a given division of a graph into
-#' subgraphs.
+#' This function calculates how modular is a given division of a graph into subgraphs.
 #'
-#' `modularity()` calculates the modularity of a graph with respect to the
-#' given `membership` vector.
+#' `modularity()` calculates the modularity of a graph with respect to the given `membership` vector.
 #'
-#' The modularity of a graph with respect to some division (or vertex types)
-#' measures how good the division is, or how separated are the different vertex
+#' The modularity of a graph with respect to some division (or vertex types) measures how good the division is,
+#' or how separated are the different vertex
 #' types from each other. It defined as \deqn{Q=\frac{1}{2m} \sum_{i,j}
 #' (A_{ij}-\gamma\frac{k_i k_j}{2m})\delta(c_i,c_j),}{Q=1/(2m) * sum( (Aij-gamma*ki*kj/(2m)
 #' ) delta(ci,cj),i,j),} here \eqn{m} is the number of edges, \eqn{A_{ij}}{Aij}
-#' is the element of the \eqn{A} adjacency matrix in row \eqn{i} and column
-#' \eqn{j}, \eqn{k_i}{ki} is the degree of \eqn{i}, \eqn{k_j}{kj} is the degree
-#' of \eqn{j}, \eqn{c_i}{ci} is the type (or component) of \eqn{i},
-#' \eqn{c_j}{cj} that of \eqn{j}, the sum goes over all \eqn{i} and \eqn{j}
-#' pairs of vertices, and \eqn{\delta(x,y)}{delta(x,y)} is 1 if \eqn{x=y} and 0
-#' otherwise. For directed graphs, it is defined as
+#' is the element of the \eqn{A} adjacency matrix in row \eqn{i} and column \eqn{j}, \eqn{k_i}{ki} is the degree of \eqn{i},
+#' \eqn{k_j}{kj} is the degree of \eqn{j}, \eqn{c_i}{ci} is the type (or component) of \eqn{i}, \eqn{c_j}{cj} that of \eqn{j},
+#' the sum goes over all \eqn{i} and \eqn{j} pairs of vertices, and \eqn{\delta(x,y)}{delta(x,y)} is 1 if \eqn{x=y} and 0 otherwise.
+#' For directed graphs, it is defined as
 #' \deqn{Q = \frac{1}{m} \sum_{i,j} (A_{ij}-\gamma
 #' \frac{k_i^{out} k_j^{in}}{m})\delta(c_i,c_j).}{Q=1/(m) * sum(
 #' (Aij-gamma*ki^out*kj^in/(m) ) delta(ci,cj),i,j).}
 #'
-#' The resolution parameter \eqn{\gamma}{gamma} allows weighting the random
-#' null model, which might be useful when finding partitions with a high
-#' modularity. Maximizing modularity with higher values of the resolution
-#' parameter typically results in more, smaller clusters when finding
-#' partitions with a high modularity. Lower values typically results in fewer,
-#' larger clusters. The original definition of modularity is retrieved when
-#' setting \eqn{\gamma}{gamma} to 1.
+#' The resolution parameter \eqn{\gamma}{gamma} allows weighting the random null model,
+#' which might be useful when finding partitions with a high modularity.
+#' Maximizing modularity with higher values of the resolution parameter typically results in more,
+#' smaller clusters when finding partitions with a high modularity.
+#' Lower values typically results in fewer, larger clusters.
+#' The original definition of modularity is retrieved when setting \eqn{\gamma}{gamma} to 1.
 #'
-#' If edge weights are given, then these are considered as the element of the
-#' \eqn{A} adjacency matrix, and \eqn{k_i}{ki} is the sum of weights of
-#' adjacent edges for vertex \eqn{i}.
+#' If edge weights are given, then these are considered as the element of the \eqn{A} adjacency matrix,
+#' and \eqn{k_i}{ki} is the sum of weights of adjacent edges for vertex \eqn{i}.
 #'
-#' `modularity_matrix()` calculates the modularity matrix. This is a dense matrix,
-#' and it is defined as the difference of the adjacency matrix and the
-#' configuration model null model matrix. In other words element
-#' \eqn{M_{ij}}{M[i,j]} is given as \eqn{A_{ij}-d_i
+#' `modularity_matrix()` calculates the modularity matrix.
+#' This is a dense matrix, and it is defined as the difference of the adjacency matrix and the configuration model null model matrix.
+#' In other words element \eqn{M_{ij}}{M[i,j]} is given as \eqn{A_{ij}-d_i
 #' d_j/(2m)}{A[i,j]-d[i]d[j]/(2m)}, where \eqn{A_{ij}}{A[i,j]} is the (possibly
 #' weighted) adjacency matrix, \eqn{d_i}{d[i]} is the degree of vertex \eqn{i},
-#' and \eqn{m} is the number of edges (or the total weights in the graph, if it
-#' is weighed).
+#' and \eqn{m} is the number of edges (or the total weights in the graph, if it is weighed).
 #'
 #' @aliases modularity
 #' @param x,graph The input graph.
-#' @param membership Numeric vector, one value for each vertex, the membership
-#'   vector of the community structure.
-#' @param weights Numeric vector giving edge weights. Default: `NULL`.
-#' @param resolution The resolution parameter. Must be greater than or equal to
+#' @param membership Numeric vector, one value for each vertex, the membership vector of the community structure.
+#' @param weights Numeric vector giving edge weights.
+#'   Default: `NULL`.
+#' @param resolution The resolution parameter.
+#'   Must be greater than or equal to
 #'   0. Set it to 1 to use the classical definition of modularity.
-#' @param directed Whether to use the directed or undirected version of
-#'   modularity. Ignored for undirected graphs.
-#' @param \dots For `modularity_matrix()`, these dots must be empty. For
-#'   `modularity()`, unused, present for S3 method consistency but may be
-#'   used by other methods that implement it.
-#' @return For `modularity()` a numeric scalar, the modularity score of the
-#'   given configuration.
+#' @param directed Whether to use the directed or undirected version of modularity.
+#'   Ignored for undirected graphs.
+#' @param \dots For `modularity_matrix()`, these dots must be empty.
+#'   For `modularity()`, unused, present for S3 method consistency but may be used by other methods that implement it.
+#' @return For `modularity()` a numeric scalar, the modularity score of the given configuration.
 #'
-#'   For `modularity_matrix()` a numeric square matrix, its order is the number of
-#'   vertices in the graph.
+#'   For `modularity_matrix()` a numeric square matrix, its order is the number of vertices in the graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [cluster_walktrap()],
-#' [cluster_edge_betweenness()],
-#' [cluster_fast_greedy()], [cluster_spinglass()],
-#' [cluster_louvain()] and [cluster_leiden()] for
-#' various community detection methods.
+#' @seealso [cluster_walktrap()], [cluster_edge_betweenness()], [cluster_fast_greedy()], [cluster_spinglass()],
+#' [cluster_louvain()] and [cluster_leiden()] for various community detection methods.
 #' @references Clauset, A.; Newman, M. E. J. & Moore, C. Finding community
 #' structure in very large networks, *Physical Review E* 2004, 70, 066111
 #' @method modularity igraph
@@ -1441,86 +1371,70 @@ community.to.membership2 <- function(merges, vcount, steps) {
 
 #' Finding communities in graphs based on statistical meachanics
 #'
-#' This function tries to find communities in graphs via a spin-glass model and
-#' simulated annealing.
+#' This function tries to find communities in graphs via a spin-glass model and simulated annealing.
 #'
-#' This function tries to find communities in a graph. A community is a set of
-#' nodes with many edges inside the community and few edges between outside it
-#' (i.e. between the community itself and the rest of the graph.)
+#' This function tries to find communities in a graph.
+#' A community is a set of nodes with many edges inside the community and few edges between outside it (i.e. between the community itself and the rest of the graph.)
 #'
-#' This idea is reversed for edges having a negative weight, i.e. few negative
-#' edges inside a community and many negative edges between communities. Note
-#' that only the \sQuote{neg} implementation supports negative edge weights.
+#' This idea is reversed for edges having a negative weight,
+#' i.e. few negative edges inside a community and many negative edges between communities.
+#' Note that only the \sQuote{neg} implementation supports negative edge weights.
 #'
-#' The `spinglass.cummunity` function can solve two problems related to
-#' community detection. If the `vertex` argument is not given (or it is
-#' `NULL`), then the regular community detection problem is solved
-#' (approximately), i.e. partitioning the vertices into communities, by
-#' optimizing the an energy function.
+#' The `spinglass.cummunity` function can solve two problems related to community detection.
+#' If the `vertex` argument is not given (or it is `NULL`), then the regular community detection problem is solved (approximately),
+#' i.e. partitioning the vertices into communities, by optimizing the an energy function.
 #'
-#' If the `vertex` argument is given and it is not `NULL`, then it
-#' must be a vertex ID, and the same energy function is used to find the
-#' community of the the given vertex. See also the examples below.
+#' If the `vertex` argument is given and it is not `NULL`, then it must be a vertex ID,
+#' and the same energy function is used to find the community of the the given vertex.
+#' See also the examples below.
 #'
-#' @param graph The input graph. Edge directions are ignored in directed graphs.
+#' @param graph The input graph.
+#'   Edge directions are ignored in directed graphs.
 #' @inheritParams rlang::args_dots_empty
-#' @param weights The weights of the edges. It must be a positive numeric vector,
-#'   `NULL` or `NA`. If it is `NULL` and the input graph has a
-#'   \sQuote{weight} edge attribute, then that attribute will be used. If
-#'   `NULL` and no such attribute is present, then the edges will have equal
-#'   weights. Set this to `NA` if the graph was a \sQuote{weight} edge
-#'   attribute, but you don't want to use it for community detection. A larger
-#'   edge weight means a stronger connection for this function.
-#' @param vertex This parameter can be used to calculate the community of a
-#'   given vertex without calculating all communities. Note that if this argument
-#'   is present then some other arguments are ignored.
-#' @param spins Integer constant, the number of spins to use. This is the upper
-#'   limit for the number of communities. It is not a problem to supply a
-#'   (reasonably) big number here, in which case some spin states will be
-#'   unpopulated.
-#' @param parupdate Logical, whether to update the spins of the
-#'   vertices in parallel (synchronously) or not. This argument is ignored if the
-#'   second form of the function is used (i.e. the \sQuote{`vertex`} argument
-#'   is present). It is also not implemented in the \dQuote{neg} implementation.
-#' @param start.temp Real constant, the start temperature.  This argument is
-#'   ignored if the second form of the function is used (i.e. the
-#'   \sQuote{`vertex`} argument is present).
-#' @param stop.temp Real constant, the stop temperature. The simulation
-#'   terminates if the temperature lowers below this level.  This argument is
-#'   ignored if the second form of the function is used (i.e. the
-#'   \sQuote{`vertex`} argument is present).
-#' @param cool.fact Cooling factor for the simulated annealing.  This argument
-#'   is ignored if the second form of the function is used (i.e. the
-#'   \sQuote{`vertex`} argument is present).
-#' @param update.rule Character constant giving the \sQuote{null-model} of the
-#'   simulation. Possible values: \dQuote{simple} and \dQuote{config}.
-#'   \dQuote{simple} uses a random graph with the same number of edges as the
-#'   baseline probability and \dQuote{config} uses a random graph with the same
-#'   vertex degrees as the input graph.
-#' @param gamma Real constant, the gamma argument of the algorithm. This
-#'   specifies the balance between the importance of present and non-present
-#'   edges in a community. Roughly, a comunity is a set of vertices having many
-#'   edges inside the community and few edges outside the community. The default
-#'   1.0 value makes existing and non-existing links equally important. Smaller
-#'   values make the existing links, greater values the missing links more
-#'   important.
-#' @param implementation Character scalar. Currently igraph contains two
-#'   implementations for the Spin-glass community finding algorithm. The faster
-#'   original implementation is the default. The other implementation, that takes
-#'   into account negative weights, can be chosen by supplying \sQuote{neg} here.
-#' @param gamma.minus Real constant, the gamma.minus parameter of the
-#'   algorithm. This specifies the balance between the importance of present and
-#'   non-present negative weighted edges in a community. Smaller values of
-#'   gamma.minus, leads to communities with lesser negative intra-connectivity.
-#'   If this argument is set to zero, the algorithm reduces to a graph coloring
-#'   algorithm, using the number of spins as the number of colors. This argument
-#'   is ignored if the \sQuote{orig} implementation is chosen.
-#' @return If the `vertex` argument is not given, i.e. the first form is
-#'   used then a [cluster_spinglass()] returns a
-#'   [communities()] object.
+#' @param weights The weights of the edges.
+#'   It must be a positive numeric vector, `NULL` or `NA`.
+#'   If it is `NULL` and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
+#'   If `NULL` and no such attribute is present, then the edges will have equal weights.
+#'   Set this to `NA` if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for community detection.
+#'   A larger edge weight means a stronger connection for this function.
+#' @param vertex This parameter can be used to calculate the community of a given vertex without calculating all communities.
+#'   Note that if this argument is present then some other arguments are ignored.
+#' @param spins Integer constant, the number of spins to use.
+#'   This is the upper limit for the number of communities.
+#'   It is not a problem to supply a (reasonably) big number here, in which case some spin states will be unpopulated.
+#' @param parupdate Logical, whether to update the spins of the vertices in parallel (synchronously) or not.
+#'   This argument is ignored if the second form of the function is used (i.e. the \sQuote{`vertex`} argument is present).
+#'   It is also not implemented in the \dQuote{neg} implementation.
+#' @param start.temp Real constant,
+#'   the start temperature.  This argument is ignored
+#'   if the second form of the function is used (i.e. the \sQuote{`vertex`} argument is present).
+#' @param stop.temp Real constant, the stop temperature.
+#'   The simulation terminates if the temperature lowers below this level.  This argument is ignored
+#'   if the second form of the function is used (i.e. the \sQuote{`vertex`} argument is present).
+#' @param cool.fact Cooling factor for the simulated annealing.  This argument is ignored
+#'   if the second form of the function is used (i.e. the \sQuote{`vertex`} argument is present).
+#' @param update.rule Character constant giving the \sQuote{null-model} of the simulation.
+#'   Possible values: \dQuote{simple} and \dQuote{config}.
+#'   \dQuote{simple} uses a random graph with the same number of edges as the baseline probability and \dQuote{config} uses a random graph with the same vertex degrees as the input graph.
+#' @param gamma Real constant, the gamma argument of the algorithm.
+#'   This specifies the balance between the importance of present and non-present edges in a community.
+#'   Roughly, a comunity is a set of vertices having many edges inside the community and few edges outside the community.
+#'   The default 1.0 value makes existing and non-existing links equally important.
+#'   Smaller values make the existing links, greater values the missing links more important.
+#' @param implementation Character scalar.
+#'   Currently igraph contains two implementations for the Spin-glass community finding algorithm.
+#'   The faster original implementation is the default.
+#'   The other implementation, that takes into account negative weights, can be chosen by supplying \sQuote{neg} here.
+#' @param gamma.minus Real constant, the gamma.minus parameter of the algorithm.
+#'   This specifies the balance between the importance of present and non-present negative weighted edges in a community.
+#'   Smaller values of gamma.minus, leads to communities with lesser negative intra-connectivity.
+#'   If this argument is set to zero, the algorithm reduces to a graph coloring algorithm,
+#'   using the number of spins as the number of colors.
+#'   This argument is ignored if the \sQuote{orig} implementation is chosen.
+#' @return If the `vertex` argument is not given,
+#'   i.e. the first form is used then a [cluster_spinglass()] returns a [communities()] object.
 #'
-#'   If the `vertex` argument is present, i.e. the second form is used then a
-#'   named list is returned with the following components:
+#'   If the `vertex` argument is present, i.e. the second form is used then a named list is returned with the following components:
 #'   \describe{
 #'     \item{community}{
 #'       Numeric vector giving the IDs of the vertices in the same community as `vertex`.
@@ -1698,93 +1612,72 @@ cluster_spinglass <- function(
 #' Finding community structure of a graph using the Leiden algorithm of Traag,
 #' van Eck & Waltman.
 #'
-#' The Leiden algorithm is similar to the Louvain algorithm,
-#' [cluster_louvain()], but it is faster and yields higher quality
-#' solutions. It can optimize both modularity and the Constant Potts Model,
-#' which does not suffer from the resolution-limit (see preprint
-#' <https://arxiv.org/abs/1104.3083>).
+#' The Leiden algorithm is similar to the Louvain algorithm, [cluster_louvain()], but it is faster and yields higher quality solutions.
+#' It can optimize both modularity and the Constant Potts Model,
+#' which does not suffer from the resolution-limit (see preprint <https://arxiv.org/abs/1104.3083>).
 #'
 #' The Leiden algorithm consists of three phases: (1) local moving of nodes,
-#' (2) refinement of the partition and (3) aggregation of the network based on
-#' the refined partition, using the non-refined partition to create an initial
-#' partition for the aggregate network. In the local move procedure in the
-#' Leiden algorithm, only nodes whose neighborhood has changed are visited. The
-#' refinement is done by restarting from a singleton partition within each
-#' cluster and gradually merging the subclusters. When aggregating, a single
-#' cluster may then be represented by several nodes (which are the subclusters
-#' identified in the refinement).
+#' (2) refinement of the partition and (3) aggregation of the network based on the refined partition,
+#' using the non-refined partition to create an initial partition for the aggregate network.
+#' In the local move procedure in the Leiden algorithm, only nodes whose neighborhood has changed are visited.
+#' The refinement is done by restarting from a singleton partition within each cluster and gradually merging the subclusters.
+#' When aggregating, a single cluster may then be represented by several nodes (which are the subclusters identified in the refinement).
 #'
-#' The Leiden algorithm provides several guarantees. The Leiden algorithm is
-#' typically iterated: the output of one iteration is used as the input for the
-#' next iteration. At each iteration all clusters are guaranteed to be
-#' connected and well-separated. After an iteration in which nothing has
-#' changed, all nodes and some parts are guaranteed to be locally optimally
-#' assigned. Finally, asymptotically, all subsets of all clusters are
-#' guaranteed to be locally optimally assigned. For more details, please see
-#' Traag, Waltman & van Eck (2019).
+#' The Leiden algorithm provides several guarantees.
+#' The Leiden algorithm is typically iterated: the output of one iteration is used as the input for the next iteration.
+#' At each iteration all clusters are guaranteed to be connected and well-separated.
+#' After an iteration in which nothing has changed, all nodes and some parts are guaranteed to be locally optimally assigned.
+#' Finally, asymptotically, all subsets of all clusters are guaranteed to be locally optimally assigned.
+#' For more details, please see Traag, Waltman & van Eck (2019).
 #'
 #' The objective function being optimized is
 #'
 #' \deqn{\frac{1}{2m} \sum_{ij} (A_{ij} - \gamma n_i n_j)\delta(\sigma_i, \sigma_j)}{1 / 2m sum_ij (A_ij - gamma n_i n_j)d(s_i, s_j)}
 #'
-#' where \eqn{m}{m} is the total edge weight, \eqn{A_{ij}}{A_ij} is the weight
-#' of edge \eqn{(i, j)}, \eqn{\gamma}{gamma} is the so-called resolution
-#' parameter, \eqn{n_i} is the node weight of node \eqn{i}, \eqn{\sigma_i}{s_i}
-#' is the cluster of node \eqn{i} and \eqn{\delta(x, y) = 1}{d(x, y) = 1} if and
-#' only if \eqn{x = y} and \eqn{0} otherwise. By setting \eqn{n_i = k_i}, the
-#' degree of node \eqn{i}, and dividing \eqn{\gamma}{gamma} by \eqn{2m}, you
-#' effectively obtain an expression for modularity.
+#' where \eqn{m}{m} is the total edge weight, \eqn{A_{ij}}{A_ij} is the weight of edge \eqn{(i, j)},
+#' \eqn{\gamma}{gamma} is the so-called resolution parameter, \eqn{n_i} is the node weight of node \eqn{i},
+#' \eqn{\sigma_i}{s_i} is the cluster of node \eqn{i} and \eqn{\delta(x, y) = 1}{d(x, y) = 1} if and only
+#' if \eqn{x = y} and \eqn{0} otherwise.
+#' By setting \eqn{n_i = k_i}, the degree of node \eqn{i}, and dividing \eqn{\gamma}{gamma} by \eqn{2m},
+#' you effectively obtain an expression for modularity.
 #'
-#' Hence, the standard modularity will be optimized when you supply the degrees
-#' as `vertex_weights` and by supplying as a resolution parameter
-#' \eqn{\frac{1}{2m}}{1/(2m)}, with \eqn{m} the number of edges. If you do not
-#' specify any `vertex_weights`, the correct vertex weights and scaling of
-#' \eqn{\gamma}{gamma} is determined automatically by the
-#' `objective_function` argument.
+#' Hence, the standard modularity will be optimized
+#' when you supply the degrees as `vertex_weights` and by supplying as a resolution parameter \eqn{\frac{1}{2m}}{1/(2m)},
+#' with \eqn{m} the number of edges.
+#' If you do not specify any `vertex_weights`,
+#' the correct vertex weights and scaling of \eqn{\gamma}{gamma} is determined automatically by the `objective_function` argument.
 #'
-#' @param graph The input graph. It must be undirected.
-#' @param objective_function Whether to use the Constant Potts Model (CPM) or
-#'   modularity. Must be either `"CPM"` or `"modularity"`.
-#' @param weights The weights of the edges. It must be a positive numeric vector,
-#'   `NULL` or `NA`. If it is `NULL` and the input graph has a
-#'   \sQuote{weight} edge attribute, then that attribute will be used. If
-#'   `NULL` and no such attribute is present, then the edges will have equal
-#'   weights. Set this to `NA` if the graph was a \sQuote{weight} edge
-#'   attribute, but you don't want to use it for community detection. A larger
-#'   edge weight means a stronger connection for this function.
-#' @param resolution The resolution parameter to use. Higher
-#'   resolutions lead to more smaller communities, while lower resolutions lead
-#'   to fewer larger communities.
+#' @param graph The input graph.
+#'   It must be undirected.
+#' @param objective_function Whether to use the Constant Potts Model (CPM) or modularity.
+#'   Must be either `"CPM"` or `"modularity"`.
+#' @param weights The weights of the edges.
+#'   It must be a positive numeric vector, `NULL` or `NA`.
+#'   If it is `NULL` and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
+#'   If `NULL` and no such attribute is present, then the edges will have equal weights.
+#'   Set this to `NA` if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for community detection.
+#'   A larger edge weight means a stronger connection for this function.
+#' @param resolution The resolution parameter to use.
+#'   Higher resolutions lead to more smaller communities, while lower resolutions lead to fewer larger communities.
 #' @param resolution_parameter  `r lifecycle::badge("superseded")` Use `resolution` instead.
 #' @param beta Parameter affecting the randomness in the Leiden algorithm.
 #'   This affects only the refinement step of the algorithm.
-#' @param initial_membership If provided, the Leiden algorithm
-#'   will try to improve this provided membership. If no argument is
-#'   provided, the aglorithm simply starts from the singleton partition.
-#' @param n_iterations the number of iterations to iterate the Leiden
-#'   algorithm. Each iteration may improve the partition further.
+#' @param initial_membership If provided, the Leiden algorithm will try to improve this provided membership.
+#'   If no argument is provided, the aglorithm simply starts from the singleton partition.
+#' @param n_iterations the number of iterations to iterate the Leiden algorithm.
+#'   Each iteration may improve the partition further.
 #' @param vertex_weights the vertex weights used in the Leiden algorithm.
-#'   If this is not provided, it will be automatically determined on the basis
-#'   of the `objective_function`. Please see the details of this function
-#'   how to interpret the vertex weights.
+#'   If this is not provided, it will be automatically determined on the basis of the `objective_function`.
+#'   Please see the details of this function how to interpret the vertex weights.
 #' @inheritParams rlang::args_dots_empty
-#' @return `cluster_leiden()` returns a [communities()]
-#'   object, please see the [communities()] manual page for details.
+#' @return `cluster_leiden()` returns a [communities()] object, please see the [communities()] manual page for details.
 #' @author Vincent Traag
 #' @seealso See [communities()] for extracting the membership,
 #' modularity scores, etc. from the results.
 #'
-#' Other community detection algorithms: [cluster_walktrap()],
-#' [cluster_spinglass()],
-#' [cluster_leading_eigen()],
-#' [cluster_edge_betweenness()],
-#' [cluster_fast_greedy()],
-#' [cluster_label_prop()]
-#' [cluster_louvain()]
-#' [cluster_fluid_communities()]
-#' [cluster_infomap()]
-#' [cluster_optimal()]
-#' [cluster_walktrap()]
+#' Other community detection algorithms: [cluster_walktrap()], [cluster_spinglass()], [cluster_leading_eigen()],
+#' [cluster_edge_betweenness()], [cluster_fast_greedy()],
+#' [cluster_label_prop()] [cluster_louvain()] [cluster_fluid_communities()] [cluster_infomap()] [cluster_optimal()] [cluster_walktrap()]
 #' @references Traag, V. A., Waltman, L., & van Eck, N. J. (2019). From Louvain
 #'   to Leiden: guaranteeing well-connected communities. Scientific
 #'   reports, 9(1), 5233. doi: 10.1038/s41598-019-41695-z, arXiv:1810.08473v3 \[cs.SI\]
@@ -1909,30 +1802,23 @@ cluster_leiden <- function(
 
 #' Community detection algorithm based on interacting fluids
 #'
-#' The algorithm detects communities based on the simple idea of
-#' several fluids interacting in a non-homogeneous environment
-#' (the graph topology), expanding and contracting based on their
-#' interaction and density.
+#' The algorithm detects communities based on the simple idea of several fluids interacting in a non-homogeneous environment (the graph topology),
+#' expanding and contracting based on their interaction and density.
 #'
-#' @param graph The input graph. The graph must be simple and connected.
+#' @param graph The input graph.
+#'   The graph must be simple and connected.
 #'   Empty graphs are not supported as well as single vertex graphs.
-#'   Edge directions are ignored. Weights are not considered.
-#' @param no.of.communities The number of communities to be found. Must be
-#'   greater than 0 and fewer than number of vertices in the graph.
-#' @return `cluster_fluid_communities()` returns a [communities()]
-#'   object, please see the [communities()] manual page for details.
+#'   Edge directions are ignored.
+#'   Weights are not considered.
+#' @param no.of.communities The number of communities to be found.
+#'   Must be greater than 0 and fewer than number of vertices in the graph.
+#' @return `cluster_fluid_communities()` returns a [communities()] object, please see the [communities()] manual page for details.
 #' @author Ferran Parés
 #' @seealso See [communities()] for extracting the membership,
 #' modularity scores, etc. from the results.
 #'
-#' Other community detection algorithms: [cluster_walktrap()],
-#' [cluster_spinglass()],
-#' [cluster_leading_eigen()],
-#' [cluster_edge_betweenness()],
-#' [cluster_fast_greedy()],
-#' [cluster_label_prop()]
-#' [cluster_louvain()],
-#' [cluster_leiden()]
+#' Other community detection algorithms: [cluster_walktrap()], [cluster_spinglass()], [cluster_leading_eigen()],
+#' [cluster_edge_betweenness()], [cluster_fast_greedy()], [cluster_label_prop()] [cluster_louvain()], [cluster_leiden()]
 #' @references Parés F, Gasulla DG, et. al. (2018) Fluid Communities: A Competitive,
 #' Scalable and Diverse Community Detection Algorithm. In: Complex Networks
 #' &amp; Their Applications VI: Proceedings of Complex Networks 2017 (The Sixth
@@ -1963,46 +1849,34 @@ cluster_fluid_communities <- function(graph, no.of.communities) {
 
 #' Community structure via short random walks
 #'
-#' This function tries to find densely connected subgraphs, also called
-#' communities in a graph via random walks. The idea is that short random walks
-#' tend to stay in the same community.
+#' This function tries to find densely connected subgraphs, also called communities in a graph via random walks.
+#' The idea is that short random walks tend to stay in the same community.
 #'
-#' This function is the implementation of the Walktrap community finding
-#' algorithm, see Pascal Pons, Matthieu Latapy: Computing communities in large
-#' networks using random walks, https://arxiv.org/abs/physics/0512106
+#' This function is the implementation of the Walktrap community finding algorithm, see Pascal Pons, Matthieu Latapy:
+#' Computing communities in large networks using random walks, https://arxiv.org/abs/physics/0512106
 #'
-#' @param graph The input graph. Edge directions are ignored in directed
-#'   graphs.
+#' @param graph The input graph.
+#'   Edge directions are ignored in directed graphs.
 #' @inheritParams rlang::args_dots_empty
-#' @param weights The weights of the edges. It must be a positive numeric vector,
-#'   `NULL` or `NA`. If it is `NULL` and the input graph has a
-#'   \sQuote{weight} edge attribute, then that attribute will be used. If
-#'   `NULL` and no such attribute is present, then the edges will have equal
-#'   weights. Set this to `NA` if the graph was a \sQuote{weight} edge
-#'   attribute, but you don't want to use it for community detection. Larger edge
-#'   weights increase the probability that an edge is selected by the random
-#'   walker. In other words, larger edge weights correspond to stronger connections.
+#' @param weights The weights of the edges.
+#'   It must be a positive numeric vector, `NULL` or `NA`.
+#'   If it is `NULL` and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
+#'   If `NULL` and no such attribute is present, then the edges will have equal weights.
+#'   Set this to `NA` if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for community detection.
+#'   Larger edge weights increase the probability that an edge is selected by the random walker.
+#'   In other words, larger edge weights correspond to stronger connections.
 #' @param steps The length of the random walks to perform.
-#' @param merges Logical, whether to include the merge matrix in the
-#'   result.
-#' @param modularity Logical, whether to include the vector of the
-#'   modularity scores in the result. If the `membership` argument is true,
-#'   then it will always be calculated.
-#' @param membership Logical, whether to calculate the membership vector
-#'   for the split corresponding to the highest modularity value.
-#' @return `cluster_walktrap()` returns a [communities()]
-#'   object, please see the [communities()] manual page for details.
+#' @param merges Logical, whether to include the merge matrix in the result.
+#' @param modularity Logical, whether to include the vector of the modularity scores in the result.
+#'   If the `membership` argument is true, then it will always be calculated.
+#' @param membership Logical, whether to calculate the membership vector for the split corresponding to the highest modularity value.
+#' @return `cluster_walktrap()` returns a [communities()] object, please see the [communities()] manual page for details.
 #' @author Pascal Pons (<http://psl.pons.free.fr/>) and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the R and igraph interface
-#' @seealso See [communities()] on getting the actual membership
-#' vector, merge matrix, modularity score, etc.
+#' @seealso See [communities()] on getting the actual membership vector, merge matrix, modularity score, etc.
 #'
-#' [modularity()] and [cluster_fast_greedy()],
-#' [cluster_spinglass()],
-#' [cluster_leading_eigen()],
-#' [cluster_edge_betweenness()], [cluster_louvain()],
-#' and [cluster_leiden()] for other community detection
-#' methods.
+#' [modularity()] and [cluster_fast_greedy()], [cluster_spinglass()], [cluster_leading_eigen()], [cluster_edge_betweenness()],
+#' [cluster_louvain()], and [cluster_leiden()] for other community detection methods.
 #' @references Pascal Pons, Matthieu Latapy: Computing communities in large
 #' networks using random walks, https://arxiv.org/abs/physics/0512106
 #' @family community
@@ -2112,70 +1986,52 @@ cluster_walktrap <- function(
 
 #' Community structure detection based on edge betweenness
 #'
-#' Community structure detection based on the betweenness of the edges
-#' in the network. This method is also known as the Girvan-Newman
-#' algorithm.
+#' Community structure detection based on the betweenness of the edges in the network.
+#' This method is also known as the Girvan-Newman algorithm.
 #'
-#' The idea behind this method is that the betweenness of the edges connecting
-#' two communities is typically high, as many of the shortest paths between
-#' vertices in separate communities pass through them. The algorithm
-#' successively removes edges with the highest betweenness, recalculating
-#' betweenness values after each removal. This way eventually the network splits
-#' into two components, then one of these components splits again, and so on,
-#' until all edges are removed. The resulting hierarhical partitioning of the
-#' vertices can be encoded as a dendrogram.
+#' The idea behind this method is that the betweenness of the edges connecting two communities is typically high,
+#' as many of the shortest paths between vertices in separate communities pass through them.
+#' The algorithm successively removes edges with the highest betweenness, recalculating betweenness values after each removal.
+#' This way eventually the network splits into two components, then one of these components splits again, and so on,
+#' until all edges are removed.
+#' The resulting hierarhical partitioning of the vertices can be encoded as a dendrogram.
 #'
-#' `cluster_edge_betweenness()` returns various information collected
-#' through the run of the algorithm. Specifically, `removed.edges` contains
-#' the edge IDs in order of the edges' removal; `edge.betweenness` contains
-#' the betweenness of each of these at the time of their removal; and
-#' `bridges` contains the IDs of edges whose removal caused a split.
+#' `cluster_edge_betweenness()` returns various information collected through the run of the algorithm.
+#' Specifically, `removed.edges` contains the edge IDs in order of the edges' removal;
+#' `edge.betweenness` contains the betweenness of each of these at the time of their removal;
+#' and `bridges` contains the IDs of edges whose removal caused a split.
 #'
 #' @param graph The graph to analyze.
 #' @inheritParams rlang::args_dots_empty
-#' @param weights The weights of the edges. It must be a positive numeric vector,
-#'   `NULL` or `NA`. If it is `NULL` and the input graph has a
-#'   \sQuote{weight} edge attribute, then that attribute will be used. If
-#'   `NULL` and no such attribute is present, then the edges will have equal
-#'   weights. Set this to `NA` if the graph was a \sQuote{weight} edge
-#'   attribute, but you don't want to use it for community detection. Edge weights
-#'   are used to calculate weighted edge betweenness. This means that edges are
-#'   interpreted as distances, not as connection strengths.
-#' @param directed Logical, whether to calculate directed edge
-#'   betweenness for directed graphs. It is ignored for undirected graphs.
-#' @param edge.betweenness Logical, whether to return the edge
-#'   betweenness of the edges at the time of their removal.
-#' @param merges Logical, whether to return the merge matrix
-#'   representing the hierarchical community structure of the network.  This
-#'   argument is called `merges`, even if the community structure algorithm
-#'   itself is divisive and not agglomerative: it builds the tree from top to
-#'   bottom. There is one line for each merge (i.e. split) in matrix, the first
-#'   line is the first merge (last split). The communities are identified by
-#'   integer number starting from one. Community IDs smaller than or equal to
-#'   \eqn{N}, the number of vertices in the graph, belong to singleton
-#'   communities, i.e. individual vertices. Before the first merge we have \eqn{N}
-#'   communities numbered from one to \eqn{N}. The first merge, the first line of
-#'   the matrix creates community \eqn{N+1}, the second merge creates community
-#'   \eqn{N+2}, etc.
-#' @param bridges Logical, whether to return a list the edge removals
-#'   which actually splitted a component of the graph.
-#' @param modularity Logical, whether to calculate the maximum
-#'   modularity score, considering all possibly community structures along the
-#'   edge-betweenness based edge removals.
-#' @param membership Logical, whether to calculate the membership
-#'   vector corresponding to the highest possible modularity score.
-#' @return `cluster_edge_betweenness()` returns a
-#'   [communities()] object, please see the [communities()]
-#'   manual page for details.
+#' @param weights The weights of the edges.
+#'   It must be a positive numeric vector, `NULL` or `NA`.
+#'   If it is `NULL` and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
+#'   If `NULL` and no such attribute is present, then the edges will have equal weights.
+#'   Set this to `NA` if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for community detection.
+#'   Edge weights are used to calculate weighted edge betweenness.
+#'   This means that edges are interpreted as distances, not as connection strengths.
+#' @param directed Logical, whether to calculate directed edge betweenness for directed graphs.
+#'   It is ignored for undirected graphs.
+#' @param edge.betweenness Logical, whether to return the edge betweenness of the edges at the time of their removal.
+#' @param merges Logical,
+#'   whether to return the merge matrix representing the hierarchical community structure of the network.  This argument is called `merges`,
+#'   even if the community structure algorithm itself is divisive and not agglomerative: it builds the tree from top to bottom.
+#'   There is one line for each merge (i.e. split) in matrix, the first line is the first merge (last split).
+#'   The communities are identified by integer number starting from one.
+#'   Community IDs smaller than or equal to \eqn{N}, the number of vertices in the graph, belong to singleton communities,
+#'   i.e. individual vertices.
+#'   Before the first merge we have \eqn{N} communities numbered from one to \eqn{N}.
+#'   The first merge, the first line of the matrix creates community \eqn{N+1}, the second merge creates community \eqn{N+2}, etc.
+#' @param bridges Logical, whether to return a list the edge removals which actually splitted a component of the graph.
+#' @param modularity Logical, whether to calculate the maximum modularity score,
+#'   considering all possibly community structures along the edge-betweenness based edge removals.
+#' @param membership Logical, whether to calculate the membership vector corresponding to the highest possible modularity score.
+#' @return `cluster_edge_betweenness()` returns a [communities()] object, please see the [communities()] manual page for details.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [edge_betweenness()] for the definition and calculation
-#' of the edge betweenness, [cluster_walktrap()],
-#' [cluster_fast_greedy()],
-#' [cluster_leading_eigen()] for other community detection
-#' methods.
+#' @seealso [edge_betweenness()] for the definition and calculation of the edge betweenness, [cluster_walktrap()], [cluster_fast_greedy()],
+#' [cluster_leading_eigen()] for other community detection methods.
 #'
-#' See [communities()] for extracting the results of the community
-#' detection.
+#' See [communities()] for extracting the results of the community detection.
 #' @references M Newman and M Girvan: Finding and evaluating community
 #' structure in networks, *Physical Review E* 69, 026113 (2004)
 #' @family community
@@ -2289,41 +2145,31 @@ cluster_edge_betweenness <- function(
 
 #' Community structure via greedy optimization of modularity
 #'
-#' This function tries to find dense subgraph, also called communities in
-#' graphs via directly optimizing a modularity score.
+#' This function tries to find dense subgraph, also called communities in graphs via directly optimizing a modularity score.
 #'
-#' This function implements the fast greedy modularity optimization algorithm
-#' for finding community structure, see A Clauset, MEJ Newman, C Moore: Finding
-#' community structure in very large networks,
-#' http://www.arxiv.org/abs/cond-mat/0408187 for the details.
+#' This function implements the fast greedy modularity optimization algorithm for finding community structure, see A Clauset, MEJ Newman,
+#' C Moore: Finding community structure in very large networks, http://www.arxiv.org/abs/cond-mat/0408187 for the details.
 #'
-#' @param graph The input graph. It must be undirected and must not have
-#'   multi-edges.
+#' @param graph The input graph.
+#'   It must be undirected and must not have multi-edges.
 #' @inheritParams rlang::args_dots_empty
 #' @param merges Logical, whether to return the merge matrix.
-#' @param modularity Logical, whether to return a vector containing the
-#'   modularity after each merge.
-#' @param membership Logical, whether to calculate the membership vector
-#'   corresponding to the maximum modularity score, considering all possible
-#'   community structures along the merges.
-#' @param weights The weights of the edges. It must be a positive numeric vector,
-#'   `NULL` or `NA`. If it is `NULL` and the input graph has a
-#'   \sQuote{weight} edge attribute, then that attribute will be used. If
-#'   `NULL` and no such attribute is present, then the edges will have equal
-#'   weights. Set this to `NA` if the graph was a \sQuote{weight} edge
-#'   attribute, but you don't want to use it for community detection. A larger
-#'   edge weight means a stronger connection for this function.
-#' @return `cluster_fast_greedy()` returns a [communities()]
-#'   object, please see the [communities()] manual page for details.
+#' @param modularity Logical, whether to return a vector containing the modularity after each merge.
+#' @param membership Logical, whether to calculate the membership vector corresponding to the maximum modularity score,
+#'   considering all possible community structures along the merges.
+#' @param weights The weights of the edges.
+#'   It must be a positive numeric vector, `NULL` or `NA`.
+#'   If it is `NULL` and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
+#'   If `NULL` and no such attribute is present, then the edges will have equal weights.
+#'   Set this to `NA` if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for community detection.
+#'   A larger edge weight means a stronger connection for this function.
+#' @return `cluster_fast_greedy()` returns a [communities()] object, please see the [communities()] manual page for details.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the R interface.
 #' @seealso [communities()] for extracting the results.
 #'
-#' See also [cluster_walktrap()],
-#' [cluster_spinglass()],
-#' [cluster_leading_eigen()] and
-#' [cluster_edge_betweenness()], [cluster_louvain()]
-#' [cluster_leiden()] for other methods.
+#' See also [cluster_walktrap()], [cluster_spinglass()], [cluster_leading_eigen()] and [cluster_edge_betweenness()],
+#' [cluster_louvain()] [cluster_leiden()] for other methods.
 #' @references A Clauset, MEJ Newman, C Moore: Finding community structure in
 #' very large networks, http://www.arxiv.org/abs/cond-mat/0408187
 #' @family community
@@ -2428,53 +2274,41 @@ igraph.i.levc.arp <- function(externalP, externalE) {
 }
 
 
-#' Community structure detecting based on the leading eigenvector of the
-#' community matrix
+#' Community structure detecting based on the leading eigenvector of the community matrix
 #'
-#' This function tries to find densely connected subgraphs in a graph by
-#' calculating the leading non-negative eigenvector of the modularity matrix of
-#' the graph.
+#' This function tries to find densely connected subgraphs in a graph by calculating the leading non-negative eigenvector of the modularity matrix of the graph.
 #'
 #' The function documented in these section implements the \sQuote{leading
 #' eigenvector} method developed by Mark Newman, see the reference below.
 #'
-#' The heart of the method is the definition of the modularity matrix,
-#' `B`, which is `B=A-P`, `A` being the adjacency matrix of the
-#' (undirected) network, and `P` contains the probability that certain
-#' edges are present according to the \sQuote{configuration model}. In other
-#' words, a `P[i,j]` element of `P` is the probability that there is
-#' an edge between vertices `i` and `j` in a random network in which
-#' the degrees of all vertices are the same as in the input graph.
+#' The heart of the method is the definition of the modularity matrix, `B`, which is `B=A-P`,
+#' `A` being the adjacency matrix of the (undirected) network,
+#' and `P` contains the probability that certain edges are present according to the \sQuote{configuration model}.
+#' In other words,
+#' a `P[i,j]` element of `P` is the probability that there is an edge between vertices `i` and `j` in a random network in which the degrees of all vertices are the same as in the input graph.
 #'
-#' The leading eigenvector method works by calculating the eigenvector of the
-#' modularity matrix for the largest positive eigenvalue and then separating
-#' vertices into two community based on the sign of the corresponding element
-#' in the eigenvector. If all elements in the eigenvector are of the same sign
-#' that means that the network has no underlying comuunity structure.  Check
-#' Newman's paper to understand why this is a good method for detecting
-#' community structure.
+#' The leading eigenvector method works by calculating the eigenvector of the modularity matrix for the largest positive eigenvalue and then separating vertices into two community based on the sign of the corresponding element in the eigenvector.
+#' If all elements in the eigenvector are of the same sign that means that the network has no underlying comuunity structure.  Check Newman's paper to understand why this is a good method for detecting community structure.
 #'
-#' @param graph The input graph. Should be undirected as the method needs a
-#'   symmetric matrix.
-#' @param steps The number of steps to take, this is actually the number of
-#'   tries to make a step. It is not a particularly useful parameter.
-#' @param weights The weights of the edges. It must be a positive numeric vector,
-#'   `NULL` or `NA`. If it is `NULL` and the input graph has a
-#'   \sQuote{weight} edge attribute, then that attribute will be used. If
-#'   `NULL` and no such attribute is present, then the edges will have equal
-#'   weights. Set this to `NA` if the graph was a \sQuote{weight} edge
-#'   attribute, but you don't want to use it for community detection. A larger
-#'   edge weight means a stronger connection for this function.
-#' @param start `NULL`, or a numeric membership vector, giving the start
-#'   configuration of the algorithm.
+#' @param graph The input graph.
+#'   Should be undirected as the method needs a symmetric matrix.
+#' @param steps The number of steps to take, this is actually the number of tries to make a step.
+#'   It is not a particularly useful parameter.
+#' @param weights The weights of the edges.
+#'   It must be a positive numeric vector, `NULL` or `NA`.
+#'   If it is `NULL` and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
+#'   If `NULL` and no such attribute is present, then the edges will have equal weights.
+#'   Set this to `NA` if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for community detection.
+#'   A larger edge weight means a stronger connection for this function.
+#' @param start `NULL`, or a numeric membership vector, giving the start configuration of the algorithm.
 #' @param options A named list to override some ARPACK options.
-#' @param callback Callback function. This
-#'   is called after each iteration, after calculating the leading eigenvector of
-#'   the modularity matrix. See details below. Default: `NULL`.
+#' @param callback Callback function.
+#'   This is called after each iteration, after calculating the leading eigenvector of the modularity matrix.
+#'   See details below.
+#'   Default: `NULL`.
 #' @param extra Additional argument to supply to the callback function.
 #' @param env The environment in which the callback function is evaluated.
-#' @return `cluster_leading_eigen()` returns a named list with the
-#'   following members:
+#' @return `cluster_leading_eigen()` returns a named list with the following members:
 #'   \describe{
 #'     \item{membership}{
 #'       The membership vector at the end of the algorithm,
@@ -2493,8 +2327,8 @@ igraph.i.levc.arp <- function(externalP, externalE) {
 #'     }
 #'   }
 #' @section Callback functions: The `callback` argument can be used to
-#' supply a function that is called after each eigenvector calculation. The
-#' following arguments are supplied to this function:
+#' supply a function that is called after each eigenvector calculation.
+#' The following arguments are supplied to this function:
 #'
 #' \describe{
 #'     \item{membership}{
@@ -2520,8 +2354,8 @@ igraph.i.levc.arp <- function(externalP, externalE) {
 #'     }
 #'   }
 #'
-#'   The callback function should return a scalar number. If this number
-#'   is non-zero, then the clustering is terminated.
+#'   The callback function should return a scalar number.
+#'   If this number is non-zero, then the clustering is terminated.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [modularity()], [cluster_walktrap()],
 #' [cluster_edge_betweenness()],
@@ -2608,16 +2442,13 @@ cluster_leading_eigen <- function(
 
 #' Finding communities based on propagating labels
 #'
-#' This is a fast, nearly linear time algorithm for detecting community
-#' structure in networks. In works by labeling the vertices with unique labels
-#' and then updating the labels by majority voting in the neighborhood of the
-#' vertex.
+#' This is a fast, nearly linear time algorithm for detecting community structure in networks.
+#' In works by labeling the vertices with unique labels and then updating the labels by majority voting in the neighborhood of the vertex.
 #'
-#' This function implements the community detection method described in:
-#' Raghavan, U.N. and Albert, R. and Kumara, S.: Near linear time algorithm to
-#' detect community structures in large-scale networks. Phys Rev E 76, 036106.
-#' (2007). This version extends the original method by the ability to take edge
-#' weights into consideration and also by allowing some labels to be fixed.
+#' This function implements the community detection method described in: Raghavan, U.N. and Albert, R. and Kumara, S.:
+#' Near linear time algorithm to detect community structures in large-scale networks.
+#' Phys Rev E 76, 036106. (2007).
+#' This version extends the original method by the ability to take edge weights into consideration and also by allowing some labels to be fixed.
 #'
 #' From the abstract of the paper: \dQuote{In our algorithm every node is
 #' initialized with a unique label and at every step each node adopts the label
@@ -2625,40 +2456,36 @@ cluster_leading_eigen <- function(
 #' connected groups of nodes form a consensus on a unique label to form
 #' communities.}
 #'
-#' @param graph The input graph. Note that the algorithm was originally
-#'   defined for undirected graphs. You are advised to set \sQuote{mode} to
-#'   `all` if you pass a directed graph here to treat it as
-#'   undirected.
-#' @param weights The weights of the edges. It must be a positive numeric vector,
-#'   `NULL` or `NA`. If it is `NULL` and the input graph has a
-#'   \sQuote{weight} edge attribute, then that attribute will be used. If
-#'   `NULL` and no such attribute is present, then the edges will have equal
-#'   weights. Set this to `NA` if the graph was a \sQuote{weight} edge
-#'   attribute, but you don't want to use it for community detection. A larger
-#'   edge weight means a stronger connection for this function.
+#' @param graph The input graph.
+#'   Note that the algorithm was originally defined for undirected graphs.
+#'   You are advised to set \sQuote{mode} to `all` if you pass a directed graph here to treat it as undirected.
+#' @param weights The weights of the edges.
+#'   It must be a positive numeric vector, `NULL` or `NA`.
+#'   If it is `NULL` and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
+#'   If `NULL` and no such attribute is present, then the edges will have equal weights.
+#'   Set this to `NA` if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for community detection.
+#'   A larger edge weight means a stronger connection for this function.
 #' @inheritParams rlang::args_dots_empty
-#' @param mode Logical, whether to consider edge directions for the label propagation,
-#' and if so, in which direction the labels should propagate. Ignored for undirected graphs.
+#' @param mode Logical, whether to consider edge directions for the label propagation, and if so,
+#' in which direction the labels should propagate.
+#' Ignored for undirected graphs.
 #' "all" means to ignore edge directions (even in directed graphs).
 #' "out" means to propagate labels along the natural direction of the edges.
 #' "in" means to propagate labels backwards (i.e. from head to tail).
-#' @param initial The initial state. If `NULL`, every vertex will have a
-#'   different label at the beginning. Otherwise it must be a vector with an
-#'   entry for each vertex. Non-negative values denote different labels, negative
-#'   entries denote vertices without labels.
-#' @param fixed Logical vector denoting which labels are fixed. Of course this
-#'   makes sense only if you provided an initial state, otherwise this element
-#'   will be ignored. Also note that vertices without labels cannot be fixed.
-#' @return `cluster_label_prop()` returns a
-#'   [communities()] object, please see the [communities()]
-#'   manual page for details.
+#' @param initial The initial state.
+#'   If `NULL`, every vertex will have a different label at the beginning.
+#'   Otherwise it must be a vector with an entry for each vertex.
+#'   Non-negative values denote different labels, negative entries denote vertices without labels.
+#' @param fixed Logical vector denoting which labels are fixed.
+#'   Of course this makes sense only if you provided an initial state, otherwise this element will be ignored.
+#'   Also note that vertices without labels cannot be fixed.
+#' @return `cluster_label_prop()` returns a [communities()] object, please see the [communities()] manual page for details.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} for the C implementation,
 #' Gabor Csardi \email{csardi.gabor@@gmail.com} for this manual page.
 #' @seealso [communities()] for extracting the actual results.
 #'
-#' [cluster_fast_greedy()], [cluster_walktrap()],
-#' [cluster_spinglass()], [cluster_louvain()] and
-#' [cluster_leiden()] for other community detection methods.
+#' [cluster_fast_greedy()], [cluster_walktrap()], [cluster_spinglass()],
+#' [cluster_louvain()] and [cluster_leiden()] for other community detection methods.
 #' @references Raghavan, U.N. and Albert, R. and Kumara, S.: Near linear time
 #' algorithm to detect community structures in large-scale networks. *Phys
 #' Rev E* 76, 036106. (2007)
@@ -2746,54 +2573,43 @@ cluster_label_prop0 <- function(
 
 #' Finding community structure by multi-level optimization of modularity
 #'
-#' This function implements the multi-level modularity optimization algorithm
-#' for finding community structure, see references below. It is based on the
-#' modularity measure and a hierarchical approach.
+#' This function implements the multi-level modularity optimization algorithm for finding community structure, see references below.
+#' It is based on the modularity measure and a hierarchical approach.
 #'
-#' This function implements the multi-level modularity optimization algorithm
-#' for finding community structure, see VD Blondel, J-L Guillaume, R Lambiotte
-#' and E Lefebvre: Fast unfolding of community hierarchies in large networks,
+#' This function implements the multi-level modularity optimization algorithm for finding community structure, see VD Blondel,
+#' J-L Guillaume, R Lambiotte and E Lefebvre: Fast unfolding of community hierarchies in large networks,
 #' <https://arxiv.org/abs/0803.0476> for the details.
 #'
 #' It is based on the modularity measure and a hierarchical approach.
-#' Initially, each vertex is assigned to a community on its own. In every step,
-#' vertices are re-assigned to communities in a local, greedy way: each vertex
-#' is moved to the community with which it achieves the highest contribution to
-#' modularity. When no vertices can be reassigned, each community is considered
-#' a vertex on its own, and the process starts again with the merged
-#' communities. The process stops when there is only a single vertex left or
-#' when the modularity cannot be increased any more in a step. Since igraph 1.3,
-#' vertices are processed in a random order.
+#' Initially, each vertex is assigned to a community on its own.
+#' In every step, vertices are re-assigned to communities in a local, greedy way:
+#' each vertex is moved to the community with which it achieves the highest contribution to modularity.
+#' When no vertices can be reassigned, each community is considered a vertex on its own,
+#' and the process starts again with the merged communities.
+#' The process stops when there is only a single vertex left or when the modularity cannot be increased any more in a step.
+#' Since igraph 1.3, vertices are processed in a random order.
 #'
 #' This function was contributed by Tom Gregorovic.
 #'
-#' @param graph The input graph. It must be undirected.
+#' @param graph The input graph.
+#'   It must be undirected.
 #' @inheritParams rlang::args_dots_empty
-#' @param weights The weights of the edges. It must be a positive numeric vector,
-#'   `NULL` or `NA`. If it is `NULL` and the input graph has a
-#'   \sQuote{weight} edge attribute, then that attribute will be used. If
-#'   `NULL` and no such attribute is present, then the edges will have equal
-#'   weights. Set this to `NA` if the graph was a \sQuote{weight} edge
-#'   attribute, but you don't want to use it for community detection. A larger
-#'   edge weight means a stronger connection for this function.
-#' @param resolution Optional resolution parameter that allows the user to
-#'   adjust the resolution parameter of the modularity function that the algorithm
-#'   uses internally. Lower values typically yield fewer, larger clusters. The
-#'   original definition of modularity is recovered when the resolution parameter
-#'   is set to 1.
-#' @return `cluster_louvain()` returns a [communities()]
-#'   object, please see the [communities()] manual page for details.
+#' @param weights The weights of the edges.
+#'   It must be a positive numeric vector, `NULL` or `NA`.
+#'   If it is `NULL` and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
+#'   If `NULL` and no such attribute is present, then the edges will have equal weights.
+#'   Set this to `NA` if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for community detection.
+#'   A larger edge weight means a stronger connection for this function.
+#' @param resolution Optional resolution parameter that allows the user to adjust the resolution parameter of the modularity function that the algorithm uses internally.
+#'   Lower values typically yield fewer, larger clusters.
+#'   The original definition of modularity is recovered when the resolution parameter is set to 1.
+#' @return `cluster_louvain()` returns a [communities()] object, please see the [communities()] manual page for details.
 #' @author Tom Gregorovic, Tamas Nepusz \email{ntamas@@gmail.com}
 #' @seealso See [communities()] for extracting the membership,
 #' modularity scores, etc. from the results.
 #'
-#' Other community detection algorithms: [cluster_walktrap()],
-#' [cluster_spinglass()],
-#' [cluster_leading_eigen()],
-#' [cluster_edge_betweenness()],
-#' [cluster_fast_greedy()],
-#' [cluster_label_prop()]
-#' [cluster_leiden()]
+#' Other community detection algorithms: [cluster_walktrap()], [cluster_spinglass()], [cluster_leading_eigen()],
+#' [cluster_edge_betweenness()], [cluster_fast_greedy()], [cluster_label_prop()] [cluster_leiden()]
 #' @references Vincent D. Blondel, Jean-Loup Guillaume, Renaud Lambiotte,
 #' Etienne Lefebvre: Fast unfolding of communities in large networks. J. Stat.
 #' Mech. (2008) P10008
@@ -2883,21 +2699,17 @@ cluster_louvain <- function(
 
 #' Optimal community structure
 #'
-#' This function calculates the optimal community structure of a graph, by
-#' maximizing the modularity measure over all possible partitions.
+#' This function calculates the optimal community structure of a graph, by maximizing the modularity measure over all possible partitions.
 #'
-#' This function calculates the optimal community structure for a graph, in
-#' terms of maximal modularity score.
+#' This function calculates the optimal community structure for a graph, in terms of maximal modularity score.
 #'
-#' The calculation is done by transforming the modularity maximization into an
-#' integer programming problem, and then calling the GLPK library to solve
-#' that. Please the reference below for details.
+#' The calculation is done by transforming the modularity maximization into an integer programming problem,
+#' and then calling the GLPK library to solve that.
+#' Please the reference below for details.
 #'
-#' Note that modularity optimization is an NP-complete problem, and all known
-#' algorithms for it have exponential time complexity. This means that you
-#' probably don't want to run this function on larger graphs. Graphs with up to
-#' fifty vertices should be fine, graphs with a couple of hundred vertices
-#' might be possible.
+#' Note that modularity optimization is an NP-complete problem, and all known algorithms for it have exponential time complexity.
+#' This means that you probably don't want to run this function on larger graphs.
+#' Graphs with up to fifty vertices should be fine, graphs with a couple of hundred vertices might be possible.
 #'
 #' @section Examples:
 #' \preformatted{
@@ -2920,21 +2732,20 @@ cluster_louvain <- function(
 #' print(modularity(fc))
 #' }
 #'
-#' @param graph The input graph. It may be undirected or directed.
+#' @param graph The input graph.
+#'   It may be undirected or directed.
 #' @inheritParams rlang::args_dots_empty
-#' @param weights The weights of the edges. It must be a positive numeric
-#'   vector, `NULL` or `NA`. If it is `NULL` and the input graph has a
-#'   \sQuote{weight} edge attribute, then that attribute will be used. If
-#'   `NULL` and no such attribute is present, then the edges will have equal
-#'   weights. Set this to `NA` if the graph was a \sQuote{weight} edge
-#'   attribute, but you don't want to use it for community detection. A larger
-#'   edge weight means a stronger connection for this function.
+#' @param weights The weights of the edges.
+#'   It must be a positive numeric vector, `NULL` or `NA`.
+#'   If it is `NULL` and the input graph has a \sQuote{weight} edge attribute, then that attribute will be used.
+#'   If `NULL` and no such attribute is present, then the edges will have equal weights.
+#'   Set this to `NA` if the graph was a \sQuote{weight} edge attribute, but you don't want to use it for community detection.
+#'   A larger edge weight means a stronger connection for this function.
 #' @return `cluster_optimal()` returns a [communities()] object,
 #'   please see the [communities()] manual page for details.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [communities()] for the documentation of the result,
-#' [modularity()]. See also [cluster_fast_greedy()] for a
-#' fast greedy optimizer.
+#' @seealso [communities()] for the documentation of the result, [modularity()].
+#' See also [cluster_fast_greedy()] for a fast greedy optimizer.
 #' @references Ulrik Brandes, Daniel Delling, Marco Gaertler, Robert Gorke,
 #' Martin Hoefer, Zoran Nikoloski, Dorothea Wagner: On Modularity Clustering,
 #' *IEEE Transactions on Knowledge and Data Engineering* 20(2):172-188,
@@ -3013,29 +2824,24 @@ cluster_optimal <- function(
 
 #' Infomap community finding
 #'
-#' Find community structure that minimizes the expected description length of a
-#' random walker trajectory. If the graph is directed, edge directions will
-#' be taken into account.
+#' Find community structure that minimizes the expected description length of a random walker trajectory.
+#' If the graph is directed, edge directions will be taken into account.
 #'
 #' Please see the details of this method in the references given below.
 #'
-#' @param graph The input graph. Edge directions will be taken into account.
+#' @param graph The input graph.
+#'   Edge directions will be taken into account.
 #' @inheritParams rlang::args_dots_empty
 #' @param e.weights Numeric vector of edge weights.
-#'   The length must match the number of edges in the graph.  By default (`NULL`) the
-#'   \sQuote{`weight`} edge attribute is used as weights. If it is not
-#'   present, then all edges are considered to have the same weight.
+#'   The length must match the number of edges in the graph.  By default (`NULL`) the \sQuote{`weight`} edge attribute is used as weights.
+#'   If it is not present, then all edges are considered to have the same weight.
 #'   Larger edge weights correspond to stronger connections.
-#' @param v.weights Numeric vector of vertex
-#'   weights. The length must match the number of vertices in the graph.  By
-#'   default (`NULL`) the \sQuote{`weight`} vertex attribute is used as weights. If
-#'   it is not present, then all vertices are considered to have the same weight.
-#'   A larger vertex weight means a larger probability that the random surfer
-#'   jumps to that vertex.
-#' @param nb.trials The number of attempts to partition the network (can be any
-#'   integer value equal or larger than 1).
-#' @param modularity Logical, whether to calculate the modularity score
-#'   of the detected community structure.
+#' @param v.weights Numeric vector of vertex weights.
+#'   The length must match the number of vertices in the graph.  By default (`NULL`) the \sQuote{`weight`} vertex attribute is used as weights.
+#'   If it is not present, then all vertices are considered to have the same weight.
+#'   A larger vertex weight means a larger probability that the random surfer jumps to that vertex.
+#' @param nb.trials The number of attempts to partition the network (can be any integer value equal or larger than 1).
+#' @param modularity Logical, whether to calculate the modularity score of the detected community structure.
 #' @return `cluster_infomap()` returns a [communities()] object,
 #'   please see the [communities()] manual page for details.
 #' @author Martin Rosvall wrote the original C++ code. This was ported to
@@ -3163,9 +2969,8 @@ plot_dendrogram <- function(x, mode = NULL, ...) {
 #'
 #' Plot a hierarchical community structure as a dendrogram.
 #'
-#' `plot_dendrogram()` supports three different plotting functions, selected via
-#' the `mode` argument. By default the plotting function is taken from the
-#' `dend.plot.type` igraph option, and it has for possible values:
+#' `plot_dendrogram()` supports three different plotting functions, selected via the `mode` argument.
+#' By default the plotting function is taken from the `dend.plot.type` igraph option, and it has for possible values:
 #' \itemize{ \item `auto` Choose automatically between the plotting
 #' functions. As `plot.phylo` is the most sophisticated, that is choosen,
 #' whenever the `ape` package is available. Otherwise `plot.hclust`
@@ -3174,8 +2979,8 @@ plot_dendrogram <- function(x, mode = NULL, ...) {
 #' package.  \item `dendrogram` Use `plot.dendrogram` from the
 #' `stats` package.  }
 #'
-#' The different plotting functions take different sets of arguments. When
-#' using `plot.phylo` (`mode="phylo"`), we have the following syntax:
+#' The different plotting functions take different sets of arguments.
+#' When using `plot.phylo` (`mode="phylo"`), we have the following syntax:
 #' \preformatted{
 #'     plot_dendrogram(x, mode="phylo", colbar = palette(),
 #'             edge.color = NULL, use.edge.length = FALSE, \dots)
@@ -3218,14 +3023,13 @@ plot_dendrogram <- function(x, mode = NULL, ...) {
 #'     plot_dendrogram(x, \dots)
 #' } The extra arguments are simply passed to [as.dendrogram()].
 #'
-#' @param x An object containing the community structure of a graph. See
-#'   [communities()] for details.
-#' @param mode Which dendrogram plotting function to use. See details below.
+#' @param x An object containing the community structure of a graph.
+#'   See [communities()] for details.
+#' @param mode Which dendrogram plotting function to use.
+#'   See details below.
 #'   The default `NULL` uses the `dend.plot.type` igraph option.
-#' @param \dots Additional arguments to supply to the dendrogram plotting
-#'   function.
-#' @param use.modularity Logical, whether to use the modularity values
-#'   to define the height of the branches.
+#' @param \dots Additional arguments to supply to the dendrogram plotting function.
+#' @param use.modularity Logical, whether to use the modularity values to define the height of the branches.
 #' @param palette The color palette to use for colored plots.
 #' @return Returns whatever the return value was from the plotting function,
 #'   `plot.phylo`, `plot.dendrogram` or `plot.hclust`.
@@ -3365,20 +3169,16 @@ dendPlotPhylo <- function(
 #'
 #'
 #' @aliases compare.communities compare.membership
-#' @param comm1 A [communities()] object containing a community
-#'   structure; or a numeric vector, the membership vector of the first community
-#'   structure. The membership vector should contain the community ID of each
-#'   vertex, the numbering of the communities starts with one.
-#' @param comm2 A [communities()] object containing a community
-#'   structure; or a numeric vector, the membership vector of the second
-#'   community structure, in the same format as for the previous argument.
-#' @param method Character scalar, the comparison method to use. Possible
-#'   values: \sQuote{vi} is the variation of information (VI) metric of Meila
-#'   (2003), \sQuote{nmi} is the normalized mutual information measure proposed
-#'   by Danon et al. (2005), \sQuote{split.join} is the split-join distance of
-#'   can Dongen (2000), \sQuote{rand} is the Rand index of Rand (1971),
-#'   \sQuote{adjusted.rand} is the adjusted Rand index by Hubert and Arabie
-#'   (1985).
+#' @param comm1 A [communities()] object containing a community structure; or a numeric vector,
+#'   the membership vector of the first community structure.
+#'   The membership vector should contain the community ID of each vertex, the numbering of the communities starts with one.
+#' @param comm2 A [communities()] object containing a community structure; or a numeric vector,
+#'   the membership vector of the second community structure, in the same format as for the previous argument.
+#' @param method Character scalar, the comparison method to use.
+#'   Possible values: \sQuote{vi} is the variation of information (VI) metric of Meila (2003),
+#'   \sQuote{nmi} is the normalized mutual information measure proposed by Danon et al. (2005),
+#'   \sQuote{split.join} is the split-join distance of can Dongen (2000), \sQuote{rand} is the Rand index of Rand (1971),
+#'   \sQuote{adjusted.rand} is the adjusted Rand index by Hubert and Arabie (1985).
 #' @return A real number.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
 #' @references Meila M: Comparing clusterings by the variation of information.
@@ -3495,24 +3295,17 @@ i_compare <- function(
 
 #' Split-join distance of two community structures
 #'
-#' The split-join distance between partitions A and B is the sum of the
-#' projection distance of A from B and the projection distance of B from
-#' A. The projection distance is an asymmetric measure and it is defined as
-#' follows:
+#' The split-join distance between partitions A and B is the sum of the projection distance of A from B and the projection distance of B from A. The projection distance is an asymmetric measure and it is defined as follows:
 #'
-#' First, each set in partition A is evaluated against all sets in
-#' partition B. For each set in partition A, the best matching set in
-#' partition B is found and the overlap size is calculated. (Matching is
-#' quantified by the size of the overlap between the two sets). Then, the
-#' maximal overlap sizes for each set in A are summed together and
-#' subtracted from the number of elements in A.
+#' First, each set in partition A is evaluated against all sets in partition B. For each set in partition A,
+#' the best matching set in partition B is found and the overlap size is calculated.
+#' (Matching is quantified by the size of the overlap between the two sets).
+#' Then, the maximal overlap sizes for each set in A are summed together and subtracted from the number of elements in A.
 #'
-#' The split-join distance will be returned as two numbers, the first is
-#' the projection distance of the first partition from the
-#' second, while the second number is the projection distance of the second
-#' partition from the first. This makes it easier to detect whether a
-#' partition is a subpartition of the other, since in this case, the
-#' corresponding distance will be zero.
+#' The split-join distance will be returned as two numbers, the first is the projection distance of the first partition from the second,
+#' while the second number is the projection distance of the second partition from the first.
+#' This makes it easier to detect whether a partition is a subpartition of the other, since in this case,
+#' the corresponding distance will be zero.
 #'
 #' @param comm1 The first community structure.
 #' @param comm2 The second community structure.
@@ -3546,23 +3339,21 @@ split_join_distance <- function(comm1, comm2) {
 
 #' Groups of a vertex partitioning
 #'
-#' Create a list of vertex groups from some graph clustering or community
-#' structure.
+#' Create a list of vertex groups from some graph clustering or community structure.
 #'
-#' Currently two methods are defined for this function. The default method
-#' works on the output of [components()]. (In fact it works on any
-#' object that is a list with an entry called `membership`.)
+#' Currently two methods are defined for this function.
+#' The default method works on the output of [components()].
+#' (In fact it works on any object that is a list with an entry called `membership`.)
 #'
 #' The second method works on [communities()] objects.
 #'
 #' @aliases groups.default groups.communities
-#' @param x Some object that represents a grouping of the vertices. See details
-#'   below.
-#' @return A named list of numeric or character vectors. The names are just
-#'   numbers that refer to the groups. The vectors themselves are numeric or
-#'   symbolic vertex IDs.
-#' @seealso [components()] and the various community finding
-#' functions.
+#' @param x Some object that represents a grouping of the vertices.
+#'   See details below.
+#' @return A named list of numeric or character vectors.
+#'   The names are just numbers that refer to the groups.
+#'   The vectors themselves are numeric or symbolic vertex IDs.
+#' @seealso [components()] and the various community finding functions.
 #' @examples
 #' g <- make_graph("Zachary")
 #' fgc <- cluster_fast_greedy(g)
@@ -3616,20 +3407,18 @@ communities <- groups.communities
 
 #' Contract several vertices into a single one
 #'
-#' This function creates a new graph, by merging several vertices into one. The
-#' vertices in the new graph correspond to sets of vertices in the input graph.
+#' This function creates a new graph, by merging several vertices into one.
+#' The vertices in the new graph correspond to sets of vertices in the input graph.
 #'
-#' The attributes of the graph are kept. Graph and edge attributes are
-#' unchanged, vertex attributes are combined, according to the
-#' `vertex.attr.comb` parameter.
+#' The attributes of the graph are kept.
+#' Graph and edge attributes are unchanged, vertex attributes are combined, according to the `vertex.attr.comb` parameter.
 #'
 #' @param graph The input graph, it can be directed or undirected.
-#' @param mapping A numeric vector that specifies the mapping. Its elements
-#'   correspond to the vertices, and for each element the ID in the new graph is
-#'   given.
-#' @param vertex.attr.comb Specifies how to combine the vertex attributes in
-#'   the new graph. Please see [attribute.combination()] for details. The
-#'   default `NULL` uses the `vertex.attr.comb` igraph option.
+#' @param mapping A numeric vector that specifies the mapping.
+#'   Its elements correspond to the vertices, and for each element the ID in the new graph is given.
+#' @param vertex.attr.comb Specifies how to combine the vertex attributes in the new graph.
+#'   Please see [attribute.combination()] for details.
+#'   The default `NULL` uses the `vertex.attr.comb` igraph option.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
@@ -3672,22 +3461,19 @@ contract <- function(
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' This function partitions the vertices of a graph based on a set of generator
-#' vertices. Each vertex is assigned to the generator vertex from (or to) which
-#' it is closest.
+#' This function partitions the vertices of a graph based on a set of generator vertices.
+#' Each vertex is assigned to the generator vertex from (or to) which it is closest.
 #'
 #' [groups()] may be used on the output of this function.
 #'
 #' @param graph The graph to partition into Voronoi cells.
 #' @param generators The generator vertices of the Voronoi cells.
-#' @param mode Character string. In directed graphs, whether to compute
-#'   distances from generator vertices to other vertices (`"out"`), to
-#'   generator vertices from other vertices (`"in"`), or ignore edge
-#'   directions entirely (`"all"`). Ignored in undirected graphs.
-#' @param tiebreaker Character string that specifies what to do when a vertex
-#'   is at the same distance from multiple generators. `"random"` assigns
-#'   a minimal-distance generator randomly, `"first"` takes the first one,
-#'   and `"last"` takes the last one.
+#' @param mode Character string.
+#'   In directed graphs, whether to compute distances from generator vertices to other vertices (`"out"`),
+#'   to generator vertices from other vertices (`"in"`), or ignore edge directions entirely (`"all"`).
+#'   Ignored in undirected graphs.
+#' @param tiebreaker Character string that specifies what to do when a vertex is at the same distance from multiple generators.
+#'   `"random"` assigns a minimal-distance generator randomly, `"first"` takes the first one, and `"last"` takes the last one.
 #' @inheritParams distances
 #' @inheritParams rlang::args_dots_empty
 #' @return A named list with two components:

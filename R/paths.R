@@ -3,8 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `path.length.hist()` was renamed to [distance_table()] to create a more
-#' consistent API.
+#' `path.length.hist()` was renamed to [distance_table()] to create a more consistent API.
 #' @inheritParams distance_table
 #' @keywords internal
 #' @export
@@ -19,8 +18,7 @@ path.length.hist <- function(graph, directed = TRUE) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `maximum.cardinality.search()` was renamed to [max_cardinality()] to create a more
-#' consistent API.
+#' `maximum.cardinality.search()` was renamed to [max_cardinality()] to create a more consistent API.
 #' @inheritParams max_cardinality
 #' @keywords internal
 #' @export
@@ -39,8 +37,7 @@ maximum.cardinality.search <- function(graph) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.dag()` was renamed to [is_dag()] to create a more
-#' consistent API.
+#' `is.dag()` was renamed to [is_dag()] to create a more consistent API.
 #' @inheritParams is_dag
 #' @keywords internal
 #' @export
@@ -74,31 +71,28 @@ is.dag <- function(graph) {
 
 #' List all simple paths from one source
 #'
-#' This function lists all simple paths from one source vertex to another
-#' vertex or vertices. A path is simple if contains no repeated vertices.
+#' This function lists all simple paths from one source vertex to another vertex or vertices.
+#' A path is simple if contains no repeated vertices.
 #'
-#' Note that potentially there are exponentially many paths between two
-#' vertices of a graph, and you may run out of memory when using this
-#' function, if your graph is lattice-like.
+#' Note that potentially there are exponentially many paths between two vertices of a graph,
+#' and you may run out of memory when using this function, if your graph is lattice-like.
 #'
 #' This function ignores multiple and loop edges.
 #'
 #' @param graph The input graph.
 #' @param from The source vertex.
-#' @param to The target vertex of vertices. The default `NULL` selects all
-#'   vertices.
+#' @param to The target vertex of vertices.
+#'   The default `NULL` selects all vertices.
 #' @inheritParams rlang::args_dots_empty
-#' @param mode Character constant, gives whether the shortest paths to or
-#'   from the given vertices should be calculated for directed graphs. If
-#'   `out` then the shortest paths *from* the vertex, if `in`
-#'   then *to* it will be considered. If `all`, the default, then
-#'   the corresponding undirected graph will be used, i.e. not directed paths
-#'   are searched. This argument is ignored for undirected graphs.
-#' @param cutoff Maximum length of the paths that are considered. If negative,
-#'   no cutoff is used.
-#' @return A list of integer vectors, each integer vector is a path from
-#'   the source vertex to one of the target vertices. A path is given by its
-#'   vertex IDs.
+#' @param mode Character constant,
+#'   gives whether the shortest paths to or from the given vertices should be calculated for directed graphs.
+#'   If `out` then the shortest paths *from* the vertex, if `in` then *to* it will be considered.
+#'   If `all`, the default, then the corresponding undirected graph will be used, i.e. not directed paths are searched.
+#'   This argument is ignored for undirected graphs.
+#' @param cutoff Maximum length of the paths that are considered.
+#'   If negative, no cutoff is used.
+#' @return A list of integer vectors, each integer vector is a path from the source vertex to one of the target vertices.
+#'   A path is given by its vertex IDs.
 #' @keywords graphs
 #' @examples
 #'
@@ -181,14 +175,13 @@ all_simple_paths <- function(
 
 #' Directed acyclic graphs
 #'
-#' This function tests whether the given graph is a DAG, a directed acyclic
-#' graph.
+#' This function tests whether the given graph is a DAG, a directed acyclic graph.
 #'
-#' `is_dag()` checks whether there is a directed cycle in the graph. If not,
-#' the graph is a DAG.
+#' `is_dag()` checks whether there is a directed cycle in the graph.
+#' If not, the graph is a DAG.
 #'
-#' @param graph The input graph. It may be undirected, in which case
-#'   `FALSE` is reported.
+#' @param graph The input graph.
+#'   It may be undirected, in which case `FALSE` is reported.
 #' @return A logical vector of length one.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} for the C code, Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the R interface.
@@ -212,8 +205,8 @@ is_dag <- function(graph) {
 #'
 #' This function tests whether the given graph is free of cycles.
 #'
-#' This function looks for directed cycles in directed graphs and undirected
-#' cycles in undirected graphs. Use [find_cycle()] to return a specific cycle.
+#' This function looks for directed cycles in directed graphs and undirected cycles in undirected graphs.
+#' Use [find_cycle()] to return a specific cycle.
 #'
 #' @param graph The input graph.
 #' @return A logical vector of length one.
@@ -223,8 +216,7 @@ is_dag <- function(graph) {
 #' g <- make_graph(c(1, 2, 1, 3, 2, 4, 3, 4), directed = TRUE)
 #' is_acyclic(g)
 #' is_acyclic(as_undirected(g))
-#' @seealso [is_forest()] and [is_dag()] for functions specific to undirected
-#' and directed graphs.
+#' @seealso [is_forest()] and [is_dag()] for functions specific to undirected and directed graphs.
 #' @family cycles
 #' @family structural.properties
 #' @export
@@ -236,19 +228,16 @@ is_acyclic <- function(graph) {
 
 #' Maximum cardinality search
 #'
-#' Maximum cardinality search is a simple ordering a vertices that is useful in
-#' determining the chordality of a graph.
+#' Maximum cardinality search is a simple ordering a vertices that is useful in determining the chordality of a graph.
 #'
-#' Maximum cardinality search visits the vertices in such an order that every
-#' time the vertex with the most already visited neighbors is visited. Ties are
-#' broken randomly.
+#' Maximum cardinality search visits the vertices in such an order that every time the vertex with the most already visited neighbors is visited.
+#' Ties are broken randomly.
 #'
-#' The algorithm provides a simple basis for deciding whether a graph is
-#' chordal, see References below, and also [is_chordal()].
+#' The algorithm provides a simple basis for deciding whether a graph is chordal, see References below, and also [is_chordal()].
 #'
 #' @aliases max_cardinality
-#' @param graph The input graph. It may be directed, but edge directions are
-#'   ignored, as the algorithm is defined for undirected graphs.
+#' @param graph The input graph.
+#'   It may be directed, but edge directions are ignored, as the algorithm is defined for undirected graphs.
 #' @return A list with two components:
 #'   \describe{
 #'     \item{alpha}{
@@ -297,12 +286,10 @@ max_cardinality <- function(graph) {
 
 #' Eccentricity of the vertices in a graph
 #'
-#' The eccentricity of a vertex is its shortest path distance from the farthest
-#' other node in the graph.
+#' The eccentricity of a vertex is its shortest path distance from the farthest other node in the graph.
 #'
-#' The eccentricity of a vertex is calculated by measuring the shortest
-#' distance from (or to) the vertex, to (or from) all vertices in the graph,
-#' and taking the maximum.
+#' The eccentricity of a vertex is calculated by measuring the shortest distance from (or to) the vertex,
+#' to (or from) all vertices in the graph, and taking the maximum.
 #'
 #' This implementation ignores vertex pairs that are in different components.
 #' Isolate vertices have eccentricity zero.
@@ -311,8 +298,7 @@ max_cardinality <- function(graph) {
 #' @param vids The vertices for which the eccentricity is calculated.
 #' @inheritParams distances
 #' @inheritParams rlang::args_dots_empty
-#' @return `eccentricity()` returns a numeric vector, containing the
-#'   eccentricity score of each given vertex.
+#' @return `eccentricity()` returns a numeric vector, containing the eccentricity score of each given vertex.
 #' @seealso [radius()] for a related concept,
 #'   [distances()] for general shortest path calculations.
 #' @references Harary, F. Graph Theory. Reading, MA: Addison-Wesley, p. 35,
@@ -356,23 +342,20 @@ eccentricity <- function(
 
 #' Radius of a graph
 #'
-#' The eccentricity of a vertex is its distance from the farthest other node
-#' in the graph. The smallest eccentricity in a graph is called its radius.
+#' The eccentricity of a vertex is its distance from the farthest other node in the graph.
+#' The smallest eccentricity in a graph is called its radius.
 #'
-#' The eccentricity of a vertex is calculated by measuring the shortest
-#' distance from (or to) the vertex, to (or from) all vertices in the
-#' graph, and taking the maximum.
+#' The eccentricity of a vertex is calculated by measuring the shortest distance from (or to) the vertex,
+#' to (or from) all vertices in the graph, and taking the maximum.
 #'
-#' This implementation ignores vertex pairs that are in different
-#' components. Isolated vertices have eccentricity zero.
+#' This implementation ignores vertex pairs that are in different components.
+#' Isolated vertices have eccentricity zero.
 #'
 #' @param graph The input graph, it can be directed or undirected.
 #' @inheritParams eccentricity
 #' @inheritParams rlang::args_dots_empty
 #' @return A numeric scalar, the radius of the graph.
-#' @seealso [eccentricity()] for the underlying
-#'   calculations, [distances] for general shortest path
-#'   calculations.
+#' @seealso [eccentricity()] for the underlying calculations, [distances] for general shortest path calculations.
 #' @references Harary, F. Graph Theory. Reading, MA: Addison-Wesley, p. 35,
 #' 1994.
 #' @examples
