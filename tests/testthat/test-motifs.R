@@ -270,6 +270,70 @@ test_that("motifs with callback output matches expected", {
   })
 })
 
+test_that("motifs with callback respects cut.prob", {
+  igraph_local_seed(123)
+
+  g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
+
+  count_no_cut <- 0
+  motifs(g, 3, callback = function(vids, isoclass) {
+    count_no_cut <<- count_no_cut + 1
+    FALSE # continue
+  })
+
+  # An all-zero cut probability vector visits every motif.
+  count_zero_cut <- 0
+  motifs(g, 3, cut.prob = c(0, 0, 0), callback = function(vids, isoclass) {
+    count_zero_cut <<- count_zero_cut + 1
+    FALSE # continue
+  })
+  expect_identical(count_zero_cut, count_no_cut)
+
+  # Positive cut probabilities can only reduce the number of visits.
+  count_with_cut <- 0
+  motifs(g, 3, cut.prob = c(0.5, 0, 0), callback = function(vids, isoclass) {
+    count_with_cut <<- count_with_cut + 1
+    FALSE # continue
+  })
+  expect_lte(count_with_cut, count_no_cut)
+})
+
+test_that("motifs_randesu_callback_closure_impl agrees with motifs()", {
+  g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
+
+  # Call the generated impl directly with the full argument set.
+  # With an all-zero cut probability vector the search is exhaustive,
+  # so the result is deterministic.
+  impl_isoclasses <- integer(0)
+  res <- motifs_randesu_callback_closure_impl(
+    graph = g,
+    size = 3,
+    cut_prob = c(0, 0, 0),
+    callback = function(vids, isoclass) {
+      impl_isoclasses <<- c(impl_isoclasses, isoclass)
+      FALSE # continue
+    }
+  )
+  expect_null(res)
+
+  # The callback visits every connected triple.
+  expect_length(impl_isoclasses, count_motifs(g, 3))
+
+  # The isomorphism-class tallies agree with the counts from motifs().
+  counts <- motifs(g, 3)
+  tallies <- tabulate(impl_isoclasses, nbins = length(counts))
+  expect_identical(tallies, c(0L, 0L, 8L, 4L))
+  expect_identical(tallies[!is.na(counts)], as.integer(counts[!is.na(counts)]))
+
+  # The exported wrapper reports the same motifs in the same order.
+  wrapper_isoclasses <- integer(0)
+  motifs(g, 3, cut.prob = c(0, 0, 0), callback = function(vids, isoclass) {
+    wrapper_isoclasses <<- c(wrapper_isoclasses, isoclass)
+    FALSE # continue
+  })
+  expect_identical(wrapper_isoclasses, impl_isoclasses)
+})
+
 # ---- ellipsis migration: argument coverage ----------------------------
 
 test_that("motifs() recovers legacy positional arguments", {
