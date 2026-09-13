@@ -55,6 +55,7 @@ corresponding to all mappings from the first graph to the second. If
 
 ## Related documentation in the C library
 
+[`get_isomorphisms_vf2_callback()`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_get_isomorphisms_vf2_callback),
 [`get_isomorphisms_vf2()`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_get_isomorphisms_vf2),
 [`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
 [`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),

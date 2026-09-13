@@ -46,4 +46,5 @@ maximal.cliques(graph, min = NULL, max = NULL, subset = NULL, file = NULL)
 
 ## Related documentation in the C library
 
+[`maximal_cliques_callback()`](https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_maximal_cliques_callback),
 [`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
