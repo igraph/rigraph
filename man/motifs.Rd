@@ -43,7 +43,7 @@ Graph motifs are small connected induced subgraphs with a well-defined structure
 The order of the motifs is defined by their isomorphism class, see \code{\link[=isomorphism_class]{isomorphism_class()}}.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu_callback}{\code{motifs_randesu_callback_closure()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu}{\code{motifs_randesu()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu_callback}{\code{motifs_randesu_callback()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu}{\code{motifs_randesu()}}
 }
 
 \examples{
