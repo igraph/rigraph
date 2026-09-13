@@ -1398,11 +1398,21 @@ test_that("feedback_arc_set() tail arguments and legacy positional recovery", {
   g <- make_ring(4, directed = TRUE)
 
   # The exact algorithm removes the cheapest edge of the single cycle.
-  fas <- feedback_arc_set(g, weights = c(4, 3, 2, 1), algo = "exact_ip")
+  fas <- feedback_arc_set(g, weights = c(4, 3, 2, 1), algorithm = "exact_ip")
   expect_equal(as.numeric(fas), 4)
 
   lifecycle::expect_deprecated(res <- feedback_arc_set(g, c(4, 3, 2, 1)))
   expect_equal(res, feedback_arc_set(g, weights = c(4, 3, 2, 1)))
+
+  # The legacy `algo` name is recovered as `algorithm`.
+  lifecycle::expect_deprecated(
+    res_legacy <- feedback_arc_set(
+      g,
+      weights = c(4, 3, 2, 1),
+      algo = "exact_ip"
+    )
+  )
+  expect_equal(res_legacy, fas)
 })
 
 test_that("feedback_vertex_set() tail arguments and legacy positional recovery", {
@@ -1411,11 +1421,21 @@ test_that("feedback_vertex_set() tail arguments and legacy positional recovery",
   g <- make_ring(4, directed = TRUE)
 
   # The cheapest vertex of the single cycle is removed.
-  fvs <- feedback_vertex_set(g, weights = c(4, 3, 2, 1), algo = "exact_ip")
+  fvs <- feedback_vertex_set(g, weights = c(4, 3, 2, 1), algorithm = "exact_ip")
   expect_equal(as.numeric(fvs), 4)
 
   lifecycle::expect_deprecated(res <- feedback_vertex_set(g, c(4, 3, 2, 1)))
   expect_equal(res, feedback_vertex_set(g, weights = c(4, 3, 2, 1)))
+
+  # The legacy `algo` name is recovered as `algorithm`.
+  lifecycle::expect_deprecated(
+    res_legacy <- feedback_vertex_set(
+      g,
+      weights = c(4, 3, 2, 1),
+      algo = "exact_ip"
+    )
+  )
+  expect_equal(res_legacy, fvs)
 })
 
 test_that("girth() tail arguments and legacy positional recovery", {
