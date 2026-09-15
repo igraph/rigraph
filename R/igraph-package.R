@@ -6,36 +6,6 @@
 ## usethis namespace: end
 NULL
 
-#' Magrittr's pipe
-#'
-#' @description
-#' `r lifecycle::badge("deprecated")`
-#'
-#' igraph used to re-export the `%>%` operator of magrittr. Now that R has its
-#' own base pipe, `|>`, available since R 4.1.0, please use that instead. If
-#' you still need `%>%` and its extra features (such as the `.` placeholder),
-#' import it from the `magrittr` package yourself.
-#'
-#' @param lhs Left hand side of the pipe.
-#' @param rhs Right hand side of the pipe.
-#' @return Result of applying the right hand side to the
-#'   result of the left hand side.
-#'
-#' @export
-#' @name %>%
-#' @rdname pipe
-#' @keywords internal
-#' @examples
-#' make_ring(10) |>
-#'   add_edges(c(1, 6)) |>
-#'   plot()
-`%>%` <- function(lhs, rhs) {
-  lifecycle::deprecate_soft("2.4.0", "`%>%`()", "`|>`()")
-  lhs <- substitute(lhs)
-  rhs <- substitute(rhs)
-  eval.parent(as.call(list(quote(magrittr::`%>%`), lhs, rhs)))
-}
-
 #' The igraph package
 #'
 #' igraph is a library and R package for network analysis.
