@@ -41,7 +41,6 @@ Imports:
     graphics,
     grDevices,
     lifecycle,
-    magrittr,
     Matrix,
     pkgconfig (>= 2.0.0),
     rlang (>= 1.1.0),
