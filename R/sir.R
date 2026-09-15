@@ -53,7 +53,9 @@
 #' @param gamma Positive scalar. The rate of recovery of an infected
 #'   individual. Formally, this is the rate parameter of an exponential
 #'   distribution.
-#' @inheritParams rlang::args_dots_empty
+#' @param \dots For `sir()` and `time_bins()`, these dots must be empty. For
+#'   `median.sir()` and `quantile.sir()`, unused, present for S3 method
+#'   consistency.
 #' @param no.sim Integer scalar, the number simulation runs to perform.
 #' @param x A `sir` object, returned by the `sir()` function.
 #' @param middle Logical, whether to return the middle of the time bins,
@@ -66,7 +68,6 @@
 #'   for recovered.
 #' @param prob Numeric vector of probabilities, in \[0,1\], they specify the
 #'   quantiles to calculate.
-#' @param \dots Additional arguments, ignored currently.
 #' @return For `sir()` the results are returned in an object of class
 #'   \sQuote{`sir`}, which is a list, with one element for each simulation.
 #'   Each simulation is itself a list with the following elements. They are all

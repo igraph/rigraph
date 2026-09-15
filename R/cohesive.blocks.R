@@ -224,7 +224,6 @@ blockGraphs <- function(blocks, graph) {
 #'   For `graphs_from_cohesive_blocks()` and `export_pajek()` the same graph must be
 #'   supplied whose cohesive block structure is given in the `blocks()`
 #'   argument.
-#' @inheritParams rlang::args_dots_empty
 #' @param labels Logical, whether to add the vertex labels to the result
 #'   object. These labels can be then used when reporting and plotting the
 #'   cohesive blocks.
@@ -263,6 +262,8 @@ blockGraphs <- function(blocks, graph) {
 #'   the Reingold-Tilford layout generator.
 #' @param \dots Additional arguments. `plot_hierarchy()` and [plot()] pass
 #'   them to `plot.igraph()`.  [print()] and [summary()] ignore them.
+#'   `cohesive_blocks()` and `export_pajek()` do not accept extra arguments;
+#'   these dots must be empty for them.
 #' @return `cohesive_blocks()` returns a `cohesiveBlocks` object.
 #'
 #'   `blocks()` returns a list of numeric vectors, containing vertex IDs.
@@ -632,7 +633,6 @@ exportPajek.cohesiveblocks.nopf <- function(blocks, graph, file) {
 }
 
 #' @rdname cohesive_blocks
-#' @inheritParams rlang::args_dots_empty
 #' @export
 export_pajek <- function(
   blocks,

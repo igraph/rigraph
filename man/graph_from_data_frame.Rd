@@ -3,14 +3,11 @@
 \name{as_data_frame}
 \alias{as_data_frame}
 \alias{graph_from_data_frame}
-\alias{from_data_frame}
 \title{Creating igraph graphs from data frames or vice-versa}
 \usage{
 as_data_frame(x, what = c("edges", "vertices", "both"))
 
 graph_from_data_frame(d, directed = TRUE, ..., vertices = NULL)
-
-from_data_frame(...)
 }
 \arguments{
 \item{x}{An igraph object.}
@@ -25,7 +22,7 @@ version 0.7 this argument is coerced to a data frame with
 
 \item{directed}{Logical, whether or not to create a directed graph.}
 
-\item{...}{Passed to \code{graph_from_data_frame()}.}
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{vertices}{A data frame with vertex metadata, or \code{NULL}. See
 details below. Since version 0.7 this argument is coerced to a data frame
@@ -130,7 +127,8 @@ as_data_frame(g, what = "edges")
 \seealso{
 \code{\link[=graph_from_literal]{graph_from_literal()}}
 for another way to create graphs, \code{\link[=read.table]{read.table()}} to read in tables
-from files.
+from files. See \code{\link[=from_data_frame]{from_data_frame()}} to build a lazy constructor
+specification for \code{\link[=make_]{make_()}} or \code{\link[=sample_]{sample_()}}.
 
 Other conversion:
 \code{\link[=as.matrix.igraph]{as.matrix.igraph()}},

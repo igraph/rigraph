@@ -1,89 +1,15 @@
-# ggpicrust2 (2.5.17)
+# ctmm (1.3.0)
 
-* GitHub: <https://github.com/cafferychen777/ggpicrust2>
-* Email: <mailto:cafferychen7850@gmail.com>
-* GitHub mirror: <https://github.com/cran/ggpicrust2>
+* GitHub mirror: <https://github.com/cran/ctmm>
 
-Run `revdepcheck::cloud_details(, "ggpicrust2")` for more info
+Run `revdepcheck::revdep_details(, "ctmm")` for more info
 
 ## Error before installation
 
 ### Devel
 
 ```
-* using log directory ‘/tmp/workdir/ggpicrust2/new/ggpicrust2.Rcheck’
-* using R version 4.5.1 (2025-06-13)
-* using platform: x86_64-pc-linux-gnu
-* R was compiled by
-    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
-    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
-* running under: Ubuntu 24.04.4 LTS
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘ggpicrust2/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘ggpicrust2’ version ‘2.5.17’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... INFO
-Package suggested but not available for checking: ‘lefser’
-* checking if this is a source package ... OK
-* checking if there is a namespace ... OK
-* checking for executable files ... OK
-* checking for hidden files and directories ... OK
-* checking for portable file names ... OK
-* checking for sufficient/correct file permissions ... OK
-* checking whether package ‘ggpicrust2’ can be installed ... OK
-* checking installed package size ... INFO
-  installed size is  9.5Mb
-  sub-directories of 1Mb or more:
-    data      6.5Mb
-    extdata   1.0Mb
-    help      1.4Mb
-* checking package directory ... OK
-* checking ‘build’ directory ... OK
-* checking DESCRIPTION meta-information ... OK
-* checking top-level files ... OK
-* checking for left-over files ... OK
-* checking index information ... OK
-* checking package subdirectories ... OK
-* checking code files for non-ASCII characters ... OK
-* checking R files for syntax errors ... OK
-* checking whether the package can be loaded ... OK
-* checking whether the package can be loaded with stated dependencies ... OK
-* checking whether the package can be unloaded cleanly ... OK
-* checking whether the namespace can be loaded with stated dependencies ... OK
-* checking whether the namespace can be unloaded cleanly ... OK
-* checking loading without being on the library search path ... OK
-* checking whether startup messages can be suppressed ... OK
-* checking dependencies in R code ... OK
-* checking S3 generic/method consistency ... OK
-* checking replacement functions ... OK
-* checking foreign function calls ... OK
-* checking R code for possible problems ... OK
-* checking Rd files ... OK
-* checking Rd metadata ... OK
-* checking Rd cross-references ... OK
-* checking for missing documentation entries ... OK
-* checking for code/documentation mismatches ... OK
-* checking Rd \usage sections ... OK
-* checking Rd contents ... OK
-* checking for unstated dependencies in examples ... OK
-* checking contents of ‘data’ directory ... OK
-* checking data for non-ASCII characters ... OK
-* checking LazyData ... OK
-* checking data for ASCII and uncompressed saves ... OK
-* checking installed files from ‘inst/doc’ ... OK
-* checking files in ‘vignettes’ ... OK
-* checking examples ... OK
-* checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... OK
-  Running ‘testthat.R’
-* checking for unstated dependencies in vignettes ... OK
-* checking package vignettes ... OK
-* checking re-building of vignette outputs ... OK
-* DONE
-Status: OK
+new check timed out after 1800s, at: * checking re-building of vignette outputs ...
 
 
 
@@ -93,82 +19,108 @@ Status: OK
 ### CRAN
 
 ```
-* using log directory ‘/tmp/workdir/ggpicrust2/old/ggpicrust2.Rcheck’
-* using R version 4.5.1 (2025-06-13)
-* using platform: x86_64-pc-linux-gnu
-* R was compiled by
-    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
-    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
-* running under: Ubuntu 24.04.4 LTS
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘ggpicrust2/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘ggpicrust2’ version ‘2.5.17’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... INFO
-Package suggested but not available for checking: ‘lefser’
-* checking if this is a source package ... OK
-* checking if there is a namespace ... OK
-* checking for executable files ... OK
-* checking for hidden files and directories ... OK
-* checking for portable file names ... OK
-* checking for sufficient/correct file permissions ... OK
-* checking whether package ‘ggpicrust2’ can be installed ... OK
-* checking installed package size ... INFO
-  installed size is  9.5Mb
-  sub-directories of 1Mb or more:
-    data      6.5Mb
-    extdata   1.0Mb
-    help      1.4Mb
-* checking package directory ... OK
-* checking ‘build’ directory ... OK
-* checking DESCRIPTION meta-information ... OK
-* checking top-level files ... OK
-* checking for left-over files ... OK
-* checking index information ... OK
-* checking package subdirectories ... OK
-* checking code files for non-ASCII characters ... OK
-* checking R files for syntax errors ... OK
-* checking whether the package can be loaded ... OK
-* checking whether the package can be loaded with stated dependencies ... OK
-* checking whether the package can be unloaded cleanly ... OK
-* checking whether the namespace can be loaded with stated dependencies ... OK
-* checking whether the namespace can be unloaded cleanly ... OK
-* checking loading without being on the library search path ... OK
-* checking whether startup messages can be suppressed ... OK
-* checking dependencies in R code ... OK
-* checking S3 generic/method consistency ... OK
-* checking replacement functions ... OK
-* checking foreign function calls ... OK
-* checking R code for possible problems ... OK
-* checking Rd files ... OK
-* checking Rd metadata ... OK
-* checking Rd cross-references ... OK
-* checking for missing documentation entries ... OK
-* checking for code/documentation mismatches ... OK
-* checking Rd \usage sections ... OK
-* checking Rd contents ... OK
-* checking for unstated dependencies in examples ... OK
-* checking contents of ‘data’ directory ... OK
-* checking data for non-ASCII characters ... OK
-* checking LazyData ... OK
-* checking data for ASCII and uncompressed saves ... OK
-* checking installed files from ‘inst/doc’ ... OK
-* checking files in ‘vignettes’ ... OK
-* checking examples ... OK
-* checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... OK
-  Running ‘testthat.R’
-* checking for unstated dependencies in vignettes ... OK
-* checking package vignettes ... OK
-* checking re-building of vignette outputs ... OK
-* DONE
-Status: OK
+new check timed out after 1800s, at: * checking re-building of vignette outputs ...
 
 
 
+
+
+```
+# E2E (0.1.3)
+
+* GitHub mirror: <https://github.com/cran/E2E>
+
+Run `revdepcheck::revdep_details(, "E2E")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+new check timed out after 1802s, at: * checking re-building of vignette outputs ...
+
+
+
+
+
+```
+### CRAN
+
+```
+new check timed out after 1802s, at: * checking re-building of vignette outputs ...
+
+
+
+
+
+```
+# gllvm (2.0.13)
+
+* GitHub mirror: <https://github.com/cran/gllvm>
+
+Run `revdepcheck::revdep_details(, "gllvm")` for more info
+
+## In both
+
+*   checking whether package ‘gllvm’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/gllvm.Rcheck/00install.out’ for details.
+     ```
+
+## Installation
+
+### Devel
+
+```
+[... 17181 earlier lines omitted; the full 00install.out is in the check artifact ...]
+/opt/revdepx/lib/RcppEigen/include/Eigen/src/Core/DenseBase.h:41:34:   required from ‘class Eigen::DenseBase<Eigen::Transpose<const Eigen::Block<const Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::Transpose<Eigen::Matrix<double, -1, -1> >, 0>, 1, -1, false> > >’
+/opt/revdepx/lib/RcppEigen/include/Eigen/src/Core/MatrixBase.h:48:34:   required from ‘class Eigen::MatrixBase<Eigen::Transpose<const Eigen::Block<const Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::Transpose<Eigen::Matrix<double, -1, -1> >, 0>, 1, -1, false> > >’
+/opt/revdepx/lib/RcppEigen/include/Eigen/src/Core/Transpose.h:118:37:   required from ‘class Eigen::TransposeImpl<const Eigen::Block<const Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::Transpose<Eigen::Matrix<double, -1, -1> >, 0>, 1, -1, false>, Eigen::Dense>’
+/opt/revdepx/lib/RcppEigen/include/Eigen/src/Core/Transpose.h:52:37:   required from ‘class Eigen::Transpose<const Eigen::Block<const Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::Transpose<Eigen::Matrix<double, -1, -1> >, 0>, 1, -1, false> >’
+/opt/revdepx/lib/RcppEigen/include/Eigen/src/Core/Dot.h:50:23:   required from ‘static Eigen::internal::dot_nocheck<T, U, true>::ResScalar Eigen::internal::dot_nocheck<T, U, true>::run(const Eigen::MatrixBase<Derived>&, const Eigen::MatrixBase<U>&) [with T = Eigen::Block<const Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::Transpose<Eigen::Matrix<double, -1, -1> >, 0>, 1, -1, false>; U = Eigen::Block<const Eigen::Block<const Eigen::Matrix<double, -1, -1>, -1, 1, true>, -1, 1, true>; ResScalar = double]’
+/opt/revdepx/lib/RcppEigen/include/Eigen/src/Core/Dot.h:84:58:   [ skipping 31 instantiation contexts, use -ftemplate-backtrace-limit=0 to disable ]
+/opt/revdepx/lib/TMB/include/tmbutils/newton.hpp:698:27:   required from ‘newton::matrix<double> newton::jacobian_sparse_plus_lowrank_t<Fac>::llt_solve(const sparse_plus_lowrank<double>&, const newton::matrix<double>&) [with Fac = Eigen::SimplicialLDLT<Eigen::SparseMatrix<double> >]’
+/opt/revdepx/lib/TMB/include/tmbutils/newton.hpp:1081:33:   required from ‘const char* newton::NewtonOperator<Functor, Hessian_Type>::newton_iterate(newton::vector<double>&) [with Functor = newton::slice<>; Hessian_Type = newton::jacobian_sparse_plus_lowrank_t<Eigen::SimplicialLDLT<Eigen::SparseMatrix<double> > >]’
+/opt/revdepx/lib/TMB/include/tmbutils/newton.hpp:1155:5:   required from ‘void newton::NewtonOperator<Functor, Hessian_Type>::forward(TMBad::ForwardArgs<double>&) [with Functor = newton::slice<>; Hessian_Type = newton::jacobian_sparse_plus_lowrank_t<Eigen::SimplicialLDLT<Eigen::SparseMatrix<double> > >]’
+...
+/opt/revdepx/lib/TMB/include/tiny_ad/atomic.hpp:30:1:   required from ‘void atomic::bessel_kOp<order, ninput, noutput, mask>::reverse(TMBad::ReverseArgs<Type>&) [with Type = double; int order = 3; int ninput = 2; int noutput = 8; long int mask = 9]’
+/opt/revdepx/lib/TMB/include/TMBad/global.hpp:1762:28:   required from ‘void TMBad::global::AddForwardMarkReverseMark<OperatorBase>::reverse(TMBad::ReverseArgs<Type>&) [with Type = double; OperatorBase = TMBad::global::AddIncrementDecrement<TMBad::global::AddDependencies<TMBad::global::AddInputSizeOutputSize<atomic::bessel_kOp<3, 2, 8, 9> > > >]’
+/opt/revdepx/lib/TMB/include/TMBad/global.hpp:2155:57:   required from ‘void TMBad::global::Complete<OperatorBase>::reverse(TMBad::ReverseArgs<double>&) [with OperatorBase = atomic::bessel_kOp<3, 2, 8, 9>]’
+/opt/revdepx/lib/TMB/include/TMBad/global.hpp:2155:10:   required from here
+/opt/revdepx/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:56:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
+g++: fatal error: Killed signal terminated program cc1plus
+compilation terminated.
+make: *** [/usr/local/lib/R/etc/Makeconf:199: gllvm.o] Error 1
+ERROR: compilation failed for package ‘gllvm’
+* removing ‘/revdepx/out/gllvm.Rcheck/gllvm’
+
+
+```
+### CRAN
+
+```
+[... 17181 earlier lines omitted; the full 00install.out is in the check artifact ...]
+/opt/revdepx/lib/RcppEigen/include/Eigen/src/Core/DenseBase.h:41:34:   required from ‘class Eigen::DenseBase<Eigen::Transpose<const Eigen::Block<const Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::Transpose<Eigen::Matrix<double, -1, -1> >, 0>, 1, -1, false> > >’
+/opt/revdepx/lib/RcppEigen/include/Eigen/src/Core/MatrixBase.h:48:34:   required from ‘class Eigen::MatrixBase<Eigen::Transpose<const Eigen::Block<const Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::Transpose<Eigen::Matrix<double, -1, -1> >, 0>, 1, -1, false> > >’
+/opt/revdepx/lib/RcppEigen/include/Eigen/src/Core/Transpose.h:118:37:   required from ‘class Eigen::TransposeImpl<const Eigen::Block<const Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::Transpose<Eigen::Matrix<double, -1, -1> >, 0>, 1, -1, false>, Eigen::Dense>’
+/opt/revdepx/lib/RcppEigen/include/Eigen/src/Core/Transpose.h:52:37:   required from ‘class Eigen::Transpose<const Eigen::Block<const Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::Transpose<Eigen::Matrix<double, -1, -1> >, 0>, 1, -1, false> >’
+/opt/revdepx/lib/RcppEigen/include/Eigen/src/Core/Dot.h:50:23:   required from ‘static Eigen::internal::dot_nocheck<T, U, true>::ResScalar Eigen::internal::dot_nocheck<T, U, true>::run(const Eigen::MatrixBase<Derived>&, const Eigen::MatrixBase<U>&) [with T = Eigen::Block<const Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::Transpose<Eigen::Matrix<double, -1, -1> >, 0>, 1, -1, false>; U = Eigen::Block<const Eigen::Block<const Eigen::Matrix<double, -1, -1>, -1, 1, true>, -1, 1, true>; ResScalar = double]’
+/opt/revdepx/lib/RcppEigen/include/Eigen/src/Core/Dot.h:84:58:   [ skipping 31 instantiation contexts, use -ftemplate-backtrace-limit=0 to disable ]
+/opt/revdepx/lib/TMB/include/tmbutils/newton.hpp:698:27:   required from ‘newton::matrix<double> newton::jacobian_sparse_plus_lowrank_t<Fac>::llt_solve(const sparse_plus_lowrank<double>&, const newton::matrix<double>&) [with Fac = Eigen::SimplicialLDLT<Eigen::SparseMatrix<double> >]’
+/opt/revdepx/lib/TMB/include/tmbutils/newton.hpp:1081:33:   required from ‘const char* newton::NewtonOperator<Functor, Hessian_Type>::newton_iterate(newton::vector<double>&) [with Functor = newton::slice<>; Hessian_Type = newton::jacobian_sparse_plus_lowrank_t<Eigen::SimplicialLDLT<Eigen::SparseMatrix<double> > >]’
+/opt/revdepx/lib/TMB/include/tmbutils/newton.hpp:1155:5:   required from ‘void newton::NewtonOperator<Functor, Hessian_Type>::forward(TMBad::ForwardArgs<double>&) [with Functor = newton::slice<>; Hessian_Type = newton::jacobian_sparse_plus_lowrank_t<Eigen::SimplicialLDLT<Eigen::SparseMatrix<double> > >]’
+...
+/opt/revdepx/lib/TMB/include/tiny_ad/atomic.hpp:30:1:   required from ‘void atomic::bessel_kOp<order, ninput, noutput, mask>::reverse(TMBad::ReverseArgs<Type>&) [with Type = double; int order = 3; int ninput = 2; int noutput = 8; long int mask = 9]’
+/opt/revdepx/lib/TMB/include/TMBad/global.hpp:1762:28:   required from ‘void TMBad::global::AddForwardMarkReverseMark<OperatorBase>::reverse(TMBad::ReverseArgs<Type>&) [with Type = double; OperatorBase = TMBad::global::AddIncrementDecrement<TMBad::global::AddDependencies<TMBad::global::AddInputSizeOutputSize<atomic::bessel_kOp<3, 2, 8, 9> > > >]’
+/opt/revdepx/lib/TMB/include/TMBad/global.hpp:2155:57:   required from ‘void TMBad::global::Complete<OperatorBase>::reverse(TMBad::ReverseArgs<double>&) [with OperatorBase = atomic::bessel_kOp<3, 2, 8, 9>]’
+/opt/revdepx/lib/TMB/include/TMBad/global.hpp:2155:10:   required from here
+/opt/revdepx/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:56:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
+g++: fatal error: Killed signal terminated program cc1plus
+compilation terminated.
+make: *** [/usr/local/lib/R/etc/Makeconf:199: gllvm.o] Error 1
+ERROR: compilation failed for package ‘gllvm’
+* removing ‘/revdepx/out/gllvm.Rcheck/gllvm’
 
 
 ```
@@ -200,150 +152,18 @@ Source tarball could not be downloaded
 
 
 ```
-# Libra (1.7)
+# orchaRd (2.2.1)
 
-* GitHub mirror: <https://github.com/cran/Libra>
+* GitHub mirror: <https://github.com/cran/orchaRd>
 
-Run `revdepcheck::revdep_details(, "Libra")` for more info
-
-## In both
-
-*   checking whether package ‘Libra’ can be installed ... ERROR
-     ```
-     Installation failed.
-     See ‘<lib>/Libra.Rcheck/00install.out’ for details.
-     ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘Libra’ ...
-** this is package ‘Libra’ version ‘1.7’
-** package ‘Libra’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-using C compiler: ‘gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0’
-gcc -I"/opt/R/4.6.1/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c LBLasso.c -o LBLasso.o
-LBLasso.c:8:10: fatal error: gsl/gsl_vector.h: No such file or directory
-    8 | #include <gsl/gsl_vector.h>
-      |          ^~~~~~~~~~~~~~~~~~
-compilation terminated.
-make: *** [/opt/R/4.6.1/lib/R/etc/Makeconf:190: LBLasso.o] Error 1
-ERROR: compilation failed for package ‘Libra’
-* removing ‘/home/runner/work/_temp/revdep2-work/check/Libra/new/Libra.Rcheck/Libra’
-
-
-```
-### CRAN
-
-```
-* installing *source* package ‘Libra’ ...
-** this is package ‘Libra’ version ‘1.7’
-** package ‘Libra’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-using C compiler: ‘gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0’
-gcc -I"/opt/R/4.6.1/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c LBLasso.c -o LBLasso.o
-LBLasso.c:8:10: fatal error: gsl/gsl_vector.h: No such file or directory
-    8 | #include <gsl/gsl_vector.h>
-      |          ^~~~~~~~~~~~~~~~~~
-compilation terminated.
-make: *** [/opt/R/4.6.1/lib/R/etc/Makeconf:190: LBLasso.o] Error 1
-ERROR: compilation failed for package ‘Libra’
-* removing ‘/home/runner/work/_temp/revdep2-work/check/Libra/old/Libra.Rcheck/Libra’
-
-
-```
-# MiscMetabar (0.16.8)
-
-* GitHub: <https://github.com/adrientaudiere/MiscMetabar>
-* Email: <mailto:adrien.taudiere@zaclys.net>
-* GitHub mirror: <https://github.com/cran/MiscMetabar>
-
-Run `revdepcheck::cloud_details(, "MiscMetabar")` for more info
+Run `revdepcheck::revdep_details(, "orchaRd")` for more info
 
 ## Error before installation
 
 ### Devel
 
 ```
-* using log directory ‘/tmp/workdir/MiscMetabar/new/MiscMetabar.Rcheck’
-* using R version 4.5.1 (2025-06-13)
-* using platform: x86_64-pc-linux-gnu
-* R was compiled by
-    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
-    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
-* running under: Ubuntu 24.04.4 LTS
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘MiscMetabar/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘MiscMetabar’ version ‘0.16.8’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... INFO
-Packages suggested but not available for checking:
-  'ANCOMBC', 'lefser', 'mia'
-* checking if this is a source package ... OK
-* checking if there is a namespace ... OK
-* checking for executable files ... OK
-* checking for hidden files and directories ... OK
-* checking for portable file names ... OK
-* checking for sufficient/correct file permissions ... OK
-* checking whether package ‘MiscMetabar’ can be installed ... OK
-* checking installed package size ... INFO
-  installed size is  7.4Mb
-  sub-directories of 1Mb or more:
-    R         1.5Mb
-    data      2.0Mb
-    extdata   1.2Mb
-    help      1.8Mb
-* checking package directory ... OK
-* checking ‘build’ directory ... OK
-* checking DESCRIPTION meta-information ... OK
-* checking top-level files ... OK
-* checking for left-over files ... OK
-* checking index information ... OK
-* checking package subdirectories ... OK
-* checking code files for non-ASCII characters ... OK
-* checking R files for syntax errors ... OK
-* checking whether the package can be loaded ... OK
-* checking whether the package can be loaded with stated dependencies ... OK
-* checking whether the package can be unloaded cleanly ... OK
-* checking whether the namespace can be loaded with stated dependencies ... OK
-* checking whether the namespace can be unloaded cleanly ... OK
-* checking loading without being on the library search path ... OK
-* checking dependencies in R code ... OK
-* checking S3 generic/method consistency ... OK
-* checking replacement functions ... OK
-* checking foreign function calls ... OK
-* checking R code for possible problems ... OK
-* checking Rd files ... OK
-* checking Rd metadata ... OK
-* checking Rd cross-references ... OK
-* checking for missing documentation entries ... OK
-* checking for code/documentation mismatches ... OK
-* checking Rd \usage sections ... OK
-* checking Rd contents ... OK
-* checking for unstated dependencies in examples ... OK
-* checking contents of ‘data’ directory ... OK
-* checking data for non-ASCII characters ... OK
-* checking LazyData ... OK
-* checking data for ASCII and uncompressed saves ... OK
-* checking installed files from ‘inst/doc’ ... OK
-* checking files in ‘vignettes’ ... OK
-* checking examples ... OK
-* checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... OK
-  Running ‘spelling.R’
-  Running ‘testthat.R’
-* checking for unstated dependencies in vignettes ... OK
-* checking package vignettes ... OK
-* checking re-building of vignette outputs ... OK
-* DONE
-Status: OK
+old check timed out after 1800s, at: * checking tests ...
 
 
 
@@ -353,273 +173,25 @@ Status: OK
 ### CRAN
 
 ```
-* using log directory ‘/tmp/workdir/MiscMetabar/old/MiscMetabar.Rcheck’
-* using R version 4.5.1 (2025-06-13)
-* using platform: x86_64-pc-linux-gnu
-* R was compiled by
-    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
-    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
-* running under: Ubuntu 24.04.4 LTS
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘MiscMetabar/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘MiscMetabar’ version ‘0.16.8’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... INFO
-Packages suggested but not available for checking:
-  'ANCOMBC', 'lefser', 'mia'
-* checking if this is a source package ... OK
-* checking if there is a namespace ... OK
-* checking for executable files ... OK
-* checking for hidden files and directories ... OK
-* checking for portable file names ... OK
-* checking for sufficient/correct file permissions ... OK
-* checking whether package ‘MiscMetabar’ can be installed ... OK
-* checking installed package size ... INFO
-  installed size is  7.4Mb
-  sub-directories of 1Mb or more:
-    R         1.5Mb
-    data      2.0Mb
-    extdata   1.2Mb
-    help      1.8Mb
-* checking package directory ... OK
-* checking ‘build’ directory ... OK
-* checking DESCRIPTION meta-information ... OK
-* checking top-level files ... OK
-* checking for left-over files ... OK
-* checking index information ... OK
-* checking package subdirectories ... OK
-* checking code files for non-ASCII characters ... OK
-* checking R files for syntax errors ... OK
-* checking whether the package can be loaded ... OK
-* checking whether the package can be loaded with stated dependencies ... OK
-* checking whether the package can be unloaded cleanly ... OK
-* checking whether the namespace can be loaded with stated dependencies ... OK
-* checking whether the namespace can be unloaded cleanly ... OK
-* checking loading without being on the library search path ... OK
-* checking dependencies in R code ... OK
-* checking S3 generic/method consistency ... OK
-* checking replacement functions ... OK
-* checking foreign function calls ... OK
-* checking R code for possible problems ... OK
-* checking Rd files ... OK
-* checking Rd metadata ... OK
-* checking Rd cross-references ... OK
-* checking for missing documentation entries ... OK
-* checking for code/documentation mismatches ... OK
-* checking Rd \usage sections ... OK
-* checking Rd contents ... OK
-* checking for unstated dependencies in examples ... OK
-* checking contents of ‘data’ directory ... OK
-* checking data for non-ASCII characters ... OK
-* checking LazyData ... OK
-* checking data for ASCII and uncompressed saves ... OK
-* checking installed files from ‘inst/doc’ ... OK
-* checking files in ‘vignettes’ ... OK
-* checking examples ... OK
-* checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... OK
-  Running ‘spelling.R’
-  Running ‘testthat.R’
-* checking for unstated dependencies in vignettes ... OK
-* checking package vignettes ... OK
-* checking re-building of vignette outputs ... OK
-* DONE
-Status: OK
+old check timed out after 1800s, at: * checking tests ...
 
 
 
 
 
 ```
-# optbdmaeAT (1.0.2)
+# PortfolioTesteR (0.1.4)
 
-* GitHub mirror: <https://github.com/cran/optbdmaeAT>
+* GitHub mirror: <https://github.com/cran/PortfolioTesteR>
 
-Run `revdepcheck::revdep_details(, "optbdmaeAT")` for more info
-
-## In both
-
-*   checking whether package ‘optbdmaeAT’ can be installed ... ERROR
-     ```
-     Installation failed.
-     See ‘<lib>/optbdmaeAT.Rcheck/00install.out’ for details.
-     ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘optbdmaeAT’ ...
-** this is package ‘optbdmaeAT’ version ‘1.0.2’
-** package ‘optbdmaeAT’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** byte-compile and prepare package for lazy loading
-Warning message:
-no DISPLAY variable so Tk is not available 
-Error in structure(.External(.C_dotTclObjv, objv), class = "tclObj") : 
-  [tcl] invalid command name "font".
-
-Error: unable to load R code in package ‘optbdmaeAT’
-Execution halted
-ERROR: lazy loading failed for package ‘optbdmaeAT’
-* removing ‘/home/runner/work/_temp/revdep2-work/check/optbdmaeAT/new/optbdmaeAT.Rcheck/optbdmaeAT’
-
-
-```
-### CRAN
-
-```
-* installing *source* package ‘optbdmaeAT’ ...
-** this is package ‘optbdmaeAT’ version ‘1.0.2’
-** package ‘optbdmaeAT’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** byte-compile and prepare package for lazy loading
-Warning message:
-no DISPLAY variable so Tk is not available 
-Error in structure(.External(.C_dotTclObjv, objv), class = "tclObj") : 
-  [tcl] invalid command name "font".
-
-Error: unable to load R code in package ‘optbdmaeAT’
-Execution halted
-ERROR: lazy loading failed for package ‘optbdmaeAT’
-* removing ‘/home/runner/work/_temp/revdep2-work/check/optbdmaeAT/old/optbdmaeAT.Rcheck/optbdmaeAT’
-
-
-```
-# optrcdmaeAT (1.0.1)
-
-* GitHub mirror: <https://github.com/cran/optrcdmaeAT>
-
-Run `revdepcheck::revdep_details(, "optrcdmaeAT")` for more info
-
-## In both
-
-*   checking whether package ‘optrcdmaeAT’ can be installed ... ERROR
-     ```
-     Installation failed.
-     See ‘<lib>/optrcdmaeAT.Rcheck/00install.out’ for details.
-     ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘optrcdmaeAT’ ...
-** this is package ‘optrcdmaeAT’ version ‘1.0.1’
-** package ‘optrcdmaeAT’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** byte-compile and prepare package for lazy loading
-Warning message:
-no DISPLAY variable so Tk is not available 
-Error in structure(.External(.C_dotTclObjv, objv), class = "tclObj") : 
-  [tcl] invalid command name "font".
-
-Error: unable to load R code in package ‘optrcdmaeAT’
-Execution halted
-ERROR: lazy loading failed for package ‘optrcdmaeAT’
-* removing ‘/home/runner/work/_temp/revdep2-work/check/optrcdmaeAT/new/optrcdmaeAT.Rcheck/optrcdmaeAT’
-
-
-```
-### CRAN
-
-```
-* installing *source* package ‘optrcdmaeAT’ ...
-** this is package ‘optrcdmaeAT’ version ‘1.0.1’
-** package ‘optrcdmaeAT’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** byte-compile and prepare package for lazy loading
-Warning message:
-no DISPLAY variable so Tk is not available 
-Error in structure(.External(.C_dotTclObjv, objv), class = "tclObj") : 
-  [tcl] invalid command name "font".
-
-Error: unable to load R code in package ‘optrcdmaeAT’
-Execution halted
-ERROR: lazy loading failed for package ‘optrcdmaeAT’
-* removing ‘/home/runner/work/_temp/revdep2-work/check/optrcdmaeAT/old/optrcdmaeAT.Rcheck/optrcdmaeAT’
-
-
-```
-# soptdmaeA (1.0.1)
-
-* GitHub mirror: <https://github.com/cran/soptdmaeA>
-
-Run `revdepcheck::revdep_details(, "soptdmaeA")` for more info
-
-## In both
-
-*   checking whether package ‘soptdmaeA’ can be installed ... ERROR
-     ```
-     Installation failed.
-     See ‘<lib>/soptdmaeA.Rcheck/00install.out’ for details.
-     ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘soptdmaeA’ ...
-** this is package ‘soptdmaeA’ version ‘1.0.1’
-** package ‘soptdmaeA’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** byte-compile and prepare package for lazy loading
-Warning message:
-no DISPLAY variable so Tk is not available 
-Error in structure(.External(.C_dotTclObjv, objv), class = "tclObj") : 
-  [tcl] invalid command name "font".
-
-Error: unable to load R code in package ‘soptdmaeA’
-Execution halted
-ERROR: lazy loading failed for package ‘soptdmaeA’
-* removing ‘/home/runner/work/_temp/revdep2-work/check/soptdmaeA/new/soptdmaeA.Rcheck/soptdmaeA’
-
-
-```
-### CRAN
-
-```
-* installing *source* package ‘soptdmaeA’ ...
-** this is package ‘soptdmaeA’ version ‘1.0.1’
-** package ‘soptdmaeA’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** byte-compile and prepare package for lazy loading
-Warning message:
-no DISPLAY variable so Tk is not available 
-Error in structure(.External(.C_dotTclObjv, objv), class = "tclObj") : 
-  [tcl] invalid command name "font".
-
-Error: unable to load R code in package ‘soptdmaeA’
-Execution halted
-ERROR: lazy loading failed for package ‘soptdmaeA’
-* removing ‘/home/runner/work/_temp/revdep2-work/check/soptdmaeA/old/soptdmaeA.Rcheck/soptdmaeA’
-
-
-```
-# streamDAG (1.6)
-
-* GitHub mirror: <https://github.com/cran/streamDAG>
-
-Run `revdepcheck::revdep_details(, "streamDAG")` for more info
+Run `revdepcheck::revdep_details(, "PortfolioTesteR")` for more info
 
 ## Error before installation
 
 ### Devel
 
 ```
-Dependencies not installed: asbio, gWidgets2tcltk
+new check timed out after 1801s, at: * checking re-building of vignette outputs ...
 
 
 
@@ -629,7 +201,121 @@ Dependencies not installed: asbio, gWidgets2tcltk
 ### CRAN
 
 ```
-Dependencies not installed: asbio, gWidgets2tcltk
+new check timed out after 1801s, at: * checking re-building of vignette outputs ...
+
+
+
+
+
+```
+# scITD (1.0.4)
+
+* GitHub mirror: <https://github.com/cran/scITD>
+
+Run `revdepcheck::revdep_details(, "scITD")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+Source tarball could not be downloaded
+
+
+
+
+
+```
+### CRAN
+
+```
+Source tarball could not be downloaded
+
+
+
+
+
+```
+# sphet (2.1-1)
+
+* GitHub mirror: <https://github.com/cran/sphet>
+
+Run `revdepcheck::revdep_details(, "sphet")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+Not checked (deferred)
+
+
+
+
+
+```
+### CRAN
+
+```
+Not checked (deferred)
+
+
+
+
+
+```
+# tinyVAST (1.6.2)
+
+* GitHub mirror: <https://github.com/cran/tinyVAST>
+
+Run `revdepcheck::revdep_details(, "tinyVAST")` for more info
+
+## In both
+
+*   checking whether package ‘tinyVAST’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/tinyVAST.Rcheck/00install.out’ for details.
+     ```
+
+## Installation
+
+### Devel
+
+```
+<00install.out file does not exist>
+
+
+```
+### CRAN
+
+```
+<00install.out file does not exist>
+
+
+```
+# xpect (1.2)
+
+* GitHub mirror: <https://github.com/cran/xpect>
+
+Run `revdepcheck::revdep_details(, "xpect")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+new check timed out after 1801s, at: * checking tests ...
+
+
+
+
+
+```
+### CRAN
+
+```
+new check timed out after 1801s, at: * checking tests ...
 
 
 

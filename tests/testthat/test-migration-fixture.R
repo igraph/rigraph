@@ -1,3 +1,4 @@
+# jarl-ignore-file missing_argument: this is the test's point
 # Tests for the in-place argument-migration generator (tools/generate-migrations.R)
 # via the fixture `migration_fixture()` (R/migration-fixture.R). Old signature
 # f(graph, n, weight, kind, directed); new f(graph, n, ..., weights, type,

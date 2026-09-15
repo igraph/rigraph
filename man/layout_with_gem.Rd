@@ -2,7 +2,6 @@
 % Please edit documentation in R/layout.R
 \name{layout_with_gem}
 \alias{layout_with_gem}
-\alias{with_gem}
 \title{The GEM layout algorithm}
 \usage{
 layout_with_gem(
@@ -14,13 +13,11 @@ layout_with_gem(
   temp.min = 0.1,
   temp.init = NULL
 )
-
-with_gem(...)
 }
 \arguments{
 \item{graph}{The input graph. Edge directions are ignored.}
 
-\item{...}{Passed to \code{layout_with_gem()}.}
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{coords}{Starting coordinates in a two or three column matrix,
 depending on the \code{dim} argument.
@@ -69,7 +66,8 @@ LNCS 894, pp. 388-403, 1995.
 }
 \seealso{
 \code{\link[=layout_with_fr]{layout_with_fr()}},
-\code{\link[=plot.igraph]{plot.igraph()}}, \code{\link[=tkplot]{tkplot()}}
+\code{\link[=plot.igraph]{plot.igraph()}}, \code{\link[=tkplot]{tkplot()}}. See \code{\link[=with_gem]{with_gem()}} to build a lazy layout
+specification for \code{\link[=add_layout_]{add_layout_()}}.
 
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},

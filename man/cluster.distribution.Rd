@@ -15,8 +15,9 @@ frequency) is calculated.}
 \item{mul.size}{Logical. If TRUE the relative frequencies will be multiplied
 by the cluster sizes.}
 
-\item{...}{Additional attributes to pass to \code{cluster}, right now only
-\code{mode} makes sense.}
+\item{...}{For \code{component_distribution()}, forwarded to \code{components()}.
+For \code{components()}, \code{is_connected()}, \code{count_components()} and
+\code{largest_component()}, these dots must be empty.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

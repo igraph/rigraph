@@ -31,7 +31,9 @@ vector of the community structure.}
 \item{directed}{Whether to use the directed or undirected version of
 modularity. Ignored for undirected graphs.}
 
-\item{\dots}{Additional arguments, none currently.}
+\item{\dots}{For \code{modularity_matrix()}, these dots must be empty. For
+\code{modularity()}, unused, present for S3 method consistency but may be
+used by other methods that implement it.}
 }
 \value{
 For \code{modularity()} a numeric scalar, the modularity score of the

@@ -1,5 +1,7 @@
 # SEMgraph (1.2.4)
 
+* GitHub: <https://github.com/fernandoPalluzzi/SEMgraph>
+* Email: <mailto:barbara.tarantino01@universitadipavia.it>
 * GitHub mirror: <https://github.com/cran/SEMgraph>
 
 Run `revdepcheck::revdep_details(, "SEMgraph")` for more info
@@ -35,3 +37,4 @@ Run `revdepcheck::revdep_details(, "SEMgraph")` for more info
      Calls: SEMdag -> getParents -> buildLevels
      Execution halted
      ```
+

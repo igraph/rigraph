@@ -36,3 +36,11 @@ Run `revdepcheck::revdep_details(, "degreenet")` for more info
      Execution halted
      ```
 
+## In both
+
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
+     ```
+

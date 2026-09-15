@@ -2,7 +2,6 @@
 % Please edit documentation in R/layout.R
 \name{layout_with_sugiyama}
 \alias{layout_with_sugiyama}
-\alias{with_sugiyama}
 \title{The Sugiyama graph layout generator}
 \usage{
 layout_with_sugiyama(
@@ -15,13 +14,11 @@ layout_with_sugiyama(
   weights = NULL,
   attributes = c("default", "all", "none")
 )
-
-with_sugiyama(...)
 }
 \arguments{
 \item{graph}{The input graph.}
 
-\item{...}{Passed to \code{layout_with_sugiyama()}.}
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{layers}{A numeric vector of the layer indices of the vertices.
 Layers are numbered from one.
@@ -243,6 +240,9 @@ Understanding of Hierarchical Systems". IEEE Transactions on Systems, Man
 and Cybernetics 11(2):109-125, 1981.
 }
 \seealso{
+\code{\link[=with_sugiyama]{with_sugiyama()}} to build a lazy layout specification for
+\code{\link[=add_layout_]{add_layout_()}}.
+
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},
 \code{\link[=component_wise]{component_wise()}},

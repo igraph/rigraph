@@ -229,7 +229,7 @@ apply_attr_combiner <- function(comb, vals, type) {
     x <- x[!is.na(x)]
     apply_one_combiner(comb, x)
   })
-  if (all(vapply(out, length, integer(1)) == 1L)) {
+  if (all(lengths(out) == 1L)) {
     unlist(out)
   } else {
     out

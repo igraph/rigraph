@@ -13,6 +13,20 @@
 # ---
 #
 # ## Changelog
+# 2026-03-30:
+# - `check_name()` has been removed from the standalone file because of a
+#   conflict with `recipes::check_name()`.
+#
+# 2026-03-17:
+# - `check_bool()`, `check_string()`, `check_number_decimal()`,
+#   `check_number_whole()`, and `check_data_frame()` are now exported
+#   from rlang. Language type checkers (`check_symbol()`,
+#   `check_call()`, etc.), column type checkers (`check_character()`,
+#   `check_logical()`), and `check_arg()` remain in the standalone file.
+# - `check_formula()` now requires an evaluated formula, not a defused one.
+#
+# 2025-09-19:
+# - `check_logical()` gains an `allow_na` argument (@jonthegeek, #1724)
 #
 # 2024-08-15:
 # - `check_character()` gains an `allow_na` argument (@martaalcalde, #1724)
@@ -60,255 +74,6 @@
 # - Added changelog.
 #
 # nocov start
-
-# Scalars -----------------------------------------------------------------
-
-.standalone_types_check_dot_call <- .Call
-
-check_bool <- function(
-  x,
-  ...,
-  allow_na = FALSE,
-  allow_null = FALSE,
-  arg = caller_arg(x),
-  call = caller_env()
-) {
-  if (
-    !missing(x) &&
-      .standalone_types_check_dot_call(
-        ffi_standalone_is_bool_1.0.7,
-        x,
-        allow_na,
-        allow_null
-      )
-  ) {
-    return(invisible(NULL))
-  }
-
-  stop_input_type(
-    x,
-    c("`TRUE`", "`FALSE`"),
-    ...,
-    allow_na = allow_na,
-    allow_null = allow_null,
-    arg = arg,
-    call = call
-  )
-}
-
-check_string <- function(
-  x,
-  ...,
-  allow_empty = TRUE,
-  allow_na = FALSE,
-  allow_null = FALSE,
-  arg = caller_arg(x),
-  call = caller_env()
-) {
-  if (!missing(x)) {
-    is_string <- .rlang_check_is_string(
-      x,
-      allow_empty = allow_empty,
-      allow_na = allow_na,
-      allow_null = allow_null
-    )
-    if (is_string) {
-      return(invisible(NULL))
-    }
-  }
-
-  stop_input_type(
-    x,
-    "a single string",
-    ...,
-    allow_na = allow_na,
-    allow_null = allow_null,
-    arg = arg,
-    call = call
-  )
-}
-
-.rlang_check_is_string <- function(x, allow_empty, allow_na, allow_null) {
-  if (is_string(x)) {
-    if (allow_empty || !is_string(x, "")) {
-      return(TRUE)
-    }
-  }
-
-  if (allow_null && is_null(x)) {
-    return(TRUE)
-  }
-
-  if (allow_na && (identical(x, NA) || identical(x, na_chr))) {
-    return(TRUE)
-  }
-
-  FALSE
-}
-
-check_name <- function(
-  x,
-  ...,
-  allow_null = FALSE,
-  arg = caller_arg(x),
-  call = caller_env()
-) {
-  if (!missing(x)) {
-    is_string <- .rlang_check_is_string(
-      x,
-      allow_empty = FALSE,
-      allow_na = FALSE,
-      allow_null = allow_null
-    )
-    if (is_string) {
-      return(invisible(NULL))
-    }
-  }
-
-  stop_input_type(
-    x,
-    "a valid name",
-    ...,
-    allow_na = FALSE,
-    allow_null = allow_null,
-    arg = arg,
-    call = call
-  )
-}
-
-IS_NUMBER_true <- 0
-IS_NUMBER_false <- 1
-IS_NUMBER_oob <- 2
-
-check_number_decimal <- function(
-  x,
-  ...,
-  min = NULL,
-  max = NULL,
-  allow_infinite = TRUE,
-  allow_na = FALSE,
-  allow_null = FALSE,
-  arg = caller_arg(x),
-  call = caller_env()
-) {
-  if (missing(x)) {
-    exit_code <- IS_NUMBER_false
-  } else if (
-    0 ==
-      (exit_code <- .standalone_types_check_dot_call(
-        ffi_standalone_check_number_1.0.7,
-        x,
-        allow_decimal = TRUE,
-        min,
-        max,
-        allow_infinite,
-        allow_na,
-        allow_null
-      ))
-  ) {
-    return(invisible(NULL))
-  }
-
-  .stop_not_number(
-    x,
-    ...,
-    exit_code = exit_code,
-    allow_decimal = TRUE,
-    min = min,
-    max = max,
-    allow_na = allow_na,
-    allow_null = allow_null,
-    arg = arg,
-    call = call
-  )
-}
-
-check_number_whole <- function(
-  x,
-  ...,
-  min = NULL,
-  max = NULL,
-  allow_infinite = FALSE,
-  allow_na = FALSE,
-  allow_null = FALSE,
-  arg = caller_arg(x),
-  call = caller_env()
-) {
-  if (missing(x)) {
-    exit_code <- IS_NUMBER_false
-  } else if (
-    0 ==
-      (exit_code <- .standalone_types_check_dot_call(
-        ffi_standalone_check_number_1.0.7,
-        x,
-        allow_decimal = FALSE,
-        min,
-        max,
-        allow_infinite,
-        allow_na,
-        allow_null
-      ))
-  ) {
-    return(invisible(NULL))
-  }
-
-  .stop_not_number(
-    x,
-    ...,
-    exit_code = exit_code,
-    allow_decimal = FALSE,
-    min = min,
-    max = max,
-    allow_na = allow_na,
-    allow_null = allow_null,
-    arg = arg,
-    call = call
-  )
-}
-
-.stop_not_number <- function(
-  x,
-  ...,
-  exit_code,
-  allow_decimal,
-  min,
-  max,
-  allow_na,
-  allow_null,
-  arg,
-  call
-) {
-  if (allow_decimal) {
-    what <- "a number"
-  } else {
-    what <- "a whole number"
-  }
-
-  if (exit_code == IS_NUMBER_oob) {
-    min <- min %||% -Inf
-    max <- max %||% Inf
-
-    if (min > -Inf && max < Inf) {
-      what <- sprintf("%s between %s and %s", what, min, max)
-    } else if (x < min) {
-      what <- sprintf("%s larger than or equal to %s", what, min)
-    } else if (x > max) {
-      what <- sprintf("%s smaller than or equal to %s", what, max)
-    } else {
-      abort("Unexpected state in OOB check", .internal = TRUE)
-    }
-  }
-
-  stop_input_type(
-    x,
-    what,
-    ...,
-    allow_na = allow_na,
-    allow_null = allow_null,
-    arg = arg,
-    call = call
-  )
-}
 
 check_symbol <- function(
   x,
@@ -476,15 +241,24 @@ check_formula <- function(
   x,
   ...,
   allow_null = FALSE,
+  allow_unevaluated = FALSE,
   arg = caller_arg(x),
   call = caller_env()
 ) {
   if (!missing(x)) {
-    if (is_formula(x)) {
-      return(invisible(NULL))
-    }
     if (allow_null && is_null(x)) {
       return(invisible(NULL))
+    }
+    scoped <- if (allow_unevaluated) NULL else TRUE
+    if (is_formula(x, scoped = scoped)) {
+      return(invisible(NULL))
+    }
+    if (!allow_unevaluated && is_formula(x)) {
+      cli::cli_abort(
+        "{.arg {arg}} must be an evaluated formula, not a defused one.",
+        arg = arg,
+        call = call
+      )
     }
   }
 
@@ -543,12 +317,20 @@ check_character <- function(
 check_logical <- function(
   x,
   ...,
+  allow_na = TRUE,
   allow_null = FALSE,
   arg = caller_arg(x),
   call = caller_env()
 ) {
   if (!missing(x)) {
     if (is_logical(x)) {
+      if (!allow_na && any(is.na(x))) {
+        abort(
+          sprintf("`%s` can't contain NA values.", arg),
+          arg = arg,
+          call = call
+        )
+      }
       return(invisible(NULL))
     }
     if (allow_null && is_null(x)) {
@@ -561,32 +343,6 @@ check_logical <- function(
     "a logical vector",
     ...,
     allow_na = FALSE,
-    allow_null = allow_null,
-    arg = arg,
-    call = call
-  )
-}
-
-check_data_frame <- function(
-  x,
-  ...,
-  allow_null = FALSE,
-  arg = caller_arg(x),
-  call = caller_env()
-) {
-  if (!missing(x)) {
-    if (is.data.frame(x)) {
-      return(invisible(NULL))
-    }
-    if (allow_null && is_null(x)) {
-      return(invisible(NULL))
-    }
-  }
-
-  stop_input_type(
-    x,
-    "a data frame",
-    ...,
     allow_null = allow_null,
     arg = arg,
     call = call

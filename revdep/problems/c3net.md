@@ -3,7 +3,7 @@
 * Email: <mailto:altayscience@gmail.com>
 * GitHub mirror: <https://github.com/cran/c3net>
 
-Run `revdepcheck::cloud_details(, "c3net")` for more info
+Run `revdepcheck::revdep_details(, "c3net")` for more info
 
 ## Newly broken
 
@@ -36,3 +36,4 @@ Run `revdepcheck::cloud_details(, "c3net")` for more info
       6.           └─rlang::cnd_signal(...)
      Execution halted
      ```
+

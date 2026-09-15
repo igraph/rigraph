@@ -3,7 +3,7 @@
 * Email: <mailto:diboobayu@gmail.com>
 * GitHub mirror: <https://github.com/cran/Boptbd>
 
-Run `revdepcheck::cloud_details(, "Boptbd")` for more info
+Run `revdepcheck::revdep_details(, "Boptbd")` for more info
 
 ## Newly broken
 
@@ -36,3 +36,4 @@ Run `revdepcheck::cloud_details(, "Boptbd")` for more info
       5.         └─rlang::cnd_signal(...)
      Execution halted
      ```
+

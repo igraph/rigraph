@@ -11,25 +11,25 @@ Run `revdepcheck::revdep_details(, "sfclust")` for more info
 *   checking tests ... ERROR
      ```
      ...
-        [4] 0.17     - 1.00       [4] 
-        [5] 0.15     - 1.00       [5] 
-        [6] 0.35     - 1.00       [6] 
-        [7] 0.35     - 1.00       [7] 
-        [8] 0.19     - 1.00       [8] 
-        [9] 0.00     - 1.00       [9] 
-       [10] 0.15     - 1.00       [10]
-       [11] 0.19     - 1.00       [11]
-       [12] 0.07     - 1.00       [12]
-       [13] 0.39     - 1.00       [13]
-       [14] 0.10     - 1.00       [14]
-       [15] 0.39     - 1.00       [15]
-       [16] 0.00     - 1.00       [16]
-       [17] 0.07     - 1.00       [17]
-       [18] 0.11     - 1.00       [18]
-       [19] 0.10     - 1.00       [19]
-       [20] 0.11     - 1.00       [20]
-       [21] 0.55     - 1.00       [21]
-       [22] 0.55     - 1.00       [22]
+       `expected@x`: 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00            ...
+       
+       ── Failure ('test-generate-clusters.R:158:3'): genclust: stars with raster ─────
+       Expected `as_adjacency_matrix(clust$mst)` to equal `as(A, "generalMatrix")`.
+       Differences:
+         `actual@x`: 0.77 0.77 0.07 0.07 0.13 0.76 0.54 0.40 0.54 0.44 and 12 more...
+       `expected@x`: 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00            ...
+       
+       ── Failure ('test-generate-clusters.R:180:3'): genclust: stars with raster and NA cells ──
+       Expected `as_adjacency_matrix(clust$graph)` to equal `as(A, "generalMatrix")`.
+       Differences:
+         `actual@x`: 0.46 0.17 0.31 0.46 0.17 0.15 0.35 0.31 0.35 0.19 and 20 more...
+       `expected@x`: 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00            ...
+       
+       ── Failure ('test-generate-clusters.R:186:3'): genclust: stars with raster and NA cells ──
+       Expected `as_adjacency_matrix(clust$mst)` to equal `as(A, "generalMatrix")`.
+       Differences:
+         `actual@x`: 0.46 0.17 0.46 0.17 0.15 0.35 0.35 0.19 0.00 0.15 and 12 more...
+       `expected@x`: 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00            ...
        
        
        [ FAIL 11 | WARN 0 | SKIP 8 | PASS 119 ]

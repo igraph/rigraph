@@ -15,7 +15,7 @@ Run `revdepcheck::revdep_details(, "cranly")` for more info
       1. ├─base::summary(package_network)
       2. └─cranly:::summary.cranly_network(package_network)
       3.   └─igraph::eigen_centrality(cranly_graph, scale = FALSE)
-      4.     └─lifecycle::deprecate_stop(...) at igraph/R/centrality.R:1493:7
+      4.     └─lifecycle::deprecate_stop(...)
       5.       └─lifecycle:::deprecate_stop0(msg)
      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      
