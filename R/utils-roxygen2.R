@@ -266,7 +266,7 @@ c_links_factory <- function() {
     )
     local_cache <- file.path(local_cache_dir, "clinks.csv")
     if (file.exists(local_cache)) {
-      clinks <- read.csv(local_cache)
+      clinks <- utils::read.csv(local_cache)
       cache[[base_path]] <<- clinks
       return(clinks)
     }
@@ -282,7 +282,7 @@ c_links_factory <- function() {
     entries <- xml2::xml_find_all(index, ".//dt")
 
     clinks <- purrr::map_df(entries, handle_dt, igraph_version = igraph_version)
-    write.csv(clinks, local_cache, row.names = FALSE)
+    utils::write.csv(clinks, local_cache, row.names = FALSE)
 
     cache[[base_path]] <<- clinks
     clinks
