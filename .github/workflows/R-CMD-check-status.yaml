@@ -15,6 +15,12 @@
 #      status check. Even then the value must be a real 40-hex commit.
 #   2. No event field is interpolated with `${{ }}` into the script. Values
 #      reach the shell through the environment, where they stay inert data.
+#
+# The script itself lives in the `rcc-status-update` action, named in full
+# because this job has no checkout and a `./.github/workflows/...` reference
+# would need one. `@main` is the ref this workflow already runs from,
+# `workflow_run` using the default branch of the base repository, so naming it
+# changes nothing about which code runs.
 on:
   workflow_run:
     workflows:
@@ -46,68 +52,16 @@ jobs:
       statuses: write
 
     steps:
-      - name: "Update commit status"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPO: ${{ github.repository }}
-          RUN_ID: ${{ github.event.workflow_run.id }}
-          RUN_STATUS: ${{ github.event.workflow_run.status }}
-          RUN_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
-          RUN_URL: ${{ github.event.workflow_run.html_url }}
-          RUN_NAME: ${{ github.event.workflow_run.name }}
-          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
-          HEAD_REPO: ${{ github.event.workflow_run.head_repository.full_name }}
-        run: |
-          set -euo pipefail
-
-          sha=""
-
-          if [ "${RUN_STATUS}" = "completed" ]; then
-            if [ "${RUN_CONCLUSION}" = "success" ]; then
-              state="success"
-            else
-              state="failure"
-            fi
-
-            # See rule 1 in the security note at the top of this file.
-            if [ "${HEAD_REPO}" = "${REPO}" ]; then
-              artifact_id=$(
-                gh api "repos/${REPO}/actions/runs/${RUN_ID}/artifacts" \
-                  --jq '[.artifacts[] | select(.name == "rcc-smoke-sha") | .id][0] // empty'
-              ) || artifact_id=""
-
-              if [ -n "${artifact_id}" ]; then
-                workdir=$(mktemp -d)
-                gh api "repos/${REPO}/actions/artifacts/${artifact_id}/zip" > "${workdir}/artifact.zip"
-                # -j flattens stored paths, so a crafted archive cannot write
-                # outside the temporary directory.
-                unzip -j -o "${workdir}/artifact.zip" -d "${workdir}" > /dev/null
-                candidate=$(tr -d '[:space:]' < "${workdir}/rcc-smoke-sha.txt") || candidate=""
-                rm -rf "${workdir}"
-
-                if printf '%s' "${candidate}" | grep -qE '^[0-9a-f]{40}$' &&
-                   gh api "repos/${REPO}/commits/${candidate}" --jq .sha > /dev/null 2>&1; then
-                  sha="${candidate}"
-                elif [ -n "${candidate}" ]; then
-                  echo "::warning::Ignoring unusable rcc-smoke-sha artifact contents"
-                fi
-              fi
-            fi
-          else
-            state="pending"
-          fi
-
-          if [ -z "${sha}" ]; then
-            sha="${HEAD_SHA}"
-          fi
-
-          gh api \
-            --method POST \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            "repos/${REPO}/statuses/${sha}" \
-            -f "state=${state}" \
-            -f "target_url=${RUN_URL}" \
-            -f "description=${RUN_NAME}" \
-            -f "context=rcc"
-        shell: bash
+      - name: Update commit status
+        uses: cynkra/cynkratemplate/.github/actions/rcc-status-update@main
+        with:
+          gh-token: ${{ secrets.GITHUB_TOKEN }}
+          repo: ${{ github.repository }}
+          run-id: ${{ github.event.workflow_run.id }}
+          run-attempt: ${{ github.event.workflow_run.run_attempt }}
+          run-status: ${{ github.event.workflow_run.status }}
+          run-conclusion: ${{ github.event.workflow_run.conclusion }}
+          run-url: ${{ github.event.workflow_run.html_url }}
+          run-name: ${{ github.event.workflow_run.name }}
+          head-sha: ${{ github.event.workflow_run.head_sha }}
+          head-repo: ${{ github.event.workflow_run.head_repository.full_name }}
