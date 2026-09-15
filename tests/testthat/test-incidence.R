@@ -37,18 +37,18 @@ test_that("graph_from_biadjacency_matrix() works - dense, modes", {
   out_g <- graph_from_biadjacency_matrix(inc, directed = TRUE, mode = "out")
   expect_true(is_directed(out_g))
   expect_length(E(out_g), 7)
-  expect_equal(as_adj_list(out_g, mode = "out")$A %>% as.numeric(), c(6, 7))
+  expect_equal(as_adj_list(out_g, mode = "out")$A |> as.numeric(), c(6, 7))
 
   in_g <- graph_from_biadjacency_matrix(inc, directed = TRUE, mode = "in")
   expect_true(is_directed(in_g))
   expect_length(E(in_g), 7)
-  expect_equal(as_adj_list(in_g, mode = "in")$A %>% as.numeric(), c(6, 7))
+  expect_equal(as_adj_list(in_g, mode = "in")$A |> as.numeric(), c(6, 7))
 
   mutual_g <- graph_from_biadjacency_matrix(inc, directed = TRUE, mode = "all")
   expect_true(is_directed(mutual_g))
   expect_length(E(mutual_g), 14)
   expect_equal(
-    as_adj_list(mutual_g, mode = "all")$A %>% as.numeric(),
+    as_adj_list(mutual_g, mode = "all")$A |> as.numeric(),
     c(6, 6, 7, 7)
   )
 })
@@ -68,7 +68,7 @@ test_that("graph_from_biadjacency_matrix() works - dense, modes, weighted", {
   )
   expect_true(is_directed(out_g))
   expect_length(E(out_g), 8)
-  expect_equal(as_adj_list(out_g, mode = "out")$A %>% as.numeric(), c(6, 7, 8))
+  expect_equal(as_adj_list(out_g, mode = "out")$A |> as.numeric(), c(6, 7, 8))
 
   in_g <- graph_from_biadjacency_matrix(
     inc,
@@ -78,7 +78,7 @@ test_that("graph_from_biadjacency_matrix() works - dense, modes, weighted", {
   )
   expect_true(is_directed(in_g))
   expect_length(E(in_g), 8)
-  expect_equal(as_adj_list(in_g, mode = "in")$A %>% as.numeric(), c(6, 7, 8))
+  expect_equal(as_adj_list(in_g, mode = "in")$A |> as.numeric(), c(6, 7, 8))
 
   mutual_g <- graph_from_biadjacency_matrix(
     inc,
@@ -89,7 +89,7 @@ test_that("graph_from_biadjacency_matrix() works - dense, modes, weighted", {
   expect_true(is_directed(mutual_g))
   expect_length(E(mutual_g), 16)
   expect_equal(
-    as_adj_list(mutual_g, mode = "all")$A %>% as.numeric(),
+    as_adj_list(mutual_g, mode = "all")$A |> as.numeric(),
     c(6, 6, 7, 7, 8, 8)
   )
 
@@ -145,18 +145,18 @@ test_that("graph_from_biadjacency_matrix() works - sparse, modes", {
   out_g <- graph_from_biadjacency_matrix(inc, directed = TRUE, mode = "out")
   expect_true(is_directed(out_g))
   expect_length(E(out_g), 7)
-  expect_equal(as_adj_list(out_g, mode = "out")$A %>% as.numeric(), c(6, 7))
+  expect_equal(as_adj_list(out_g, mode = "out")$A |> as.numeric(), c(6, 7))
 
   in_g <- graph_from_biadjacency_matrix(inc, directed = TRUE, mode = "in")
   expect_true(is_directed(in_g))
   expect_length(E(in_g), 7)
-  expect_equal(as_adj_list(in_g, mode = "in")$A %>% as.numeric(), c(6, 7))
+  expect_equal(as_adj_list(in_g, mode = "in")$A |> as.numeric(), c(6, 7))
 
   mutual_g <- graph_from_biadjacency_matrix(inc, directed = TRUE, mode = "all")
   expect_true(is_directed(mutual_g))
   expect_length(E(mutual_g), 14)
   expect_equal(
-    as_adj_list(mutual_g, mode = "all")$A %>% as.numeric(),
+    as_adj_list(mutual_g, mode = "all")$A |> as.numeric(),
     c(6, 6, 7, 7)
   )
 })
@@ -177,7 +177,7 @@ test_that("graph_from_biadjacency_matrix() works - sparse, modes, weighted", {
   )
   expect_true(is_directed(out_g))
   expect_length(E(out_g), 8)
-  expect_equal(as_adj_list(out_g, mode = "out")$A %>% as.numeric(), c(6, 7, 8))
+  expect_equal(as_adj_list(out_g, mode = "out")$A |> as.numeric(), c(6, 7, 8))
 
   in_g <- graph_from_biadjacency_matrix(
     inc,
@@ -187,7 +187,7 @@ test_that("graph_from_biadjacency_matrix() works - sparse, modes, weighted", {
   )
   expect_true(is_directed(in_g))
   expect_length(E(in_g), 8)
-  expect_equal(as_adj_list(in_g, mode = "in")$A %>% as.numeric(), c(6, 7, 8))
+  expect_equal(as_adj_list(in_g, mode = "in")$A |> as.numeric(), c(6, 7, 8))
 
   mutual_g <- graph_from_biadjacency_matrix(
     inc,
@@ -198,7 +198,7 @@ test_that("graph_from_biadjacency_matrix() works - sparse, modes, weighted", {
   expect_true(is_directed(mutual_g))
   expect_length(E(mutual_g), 16)
   expect_equal(
-    as_adj_list(mutual_g, mode = "all")$A %>% as.numeric(),
+    as_adj_list(mutual_g, mode = "all")$A |> as.numeric(),
     c(6, 6, 7, 7, 8, 8)
   )
 })

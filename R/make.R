@@ -995,7 +995,7 @@ make_ <- function(...) {
 #'   block.sizes = c(10, 10)
 #' ))
 #'
-#' blocky2 <- pref_matrix %>%
+#' blocky2 <- pref_matrix |>
 #'   sample_sbm(n = 20, block.sizes = c(10, 10))
 #' @family games
 #' @family constructor modifiers
@@ -1165,7 +1165,7 @@ simplified <- function() {
 #'     frame.color = "#7fcdbb",
 #'     name = LETTERS[1:10]
 #'   )
-#' ) %>%
+#' ) |>
 #'   plot()
 with_vertex_ <- function(...) {
   args <- grab_args()
@@ -1191,7 +1191,7 @@ with_vertex_ <- function(...) {
 #'     color = "red",
 #'     weight = rep(1:2, 5)
 #'   )
-#' ) %>%
+#' ) |>
 #'   plot()
 with_edge_ <- function(...) {
   args <- grab_args()

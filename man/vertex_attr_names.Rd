@@ -16,8 +16,8 @@ Character vector, the names of the vertex attributes.
 List names of vertex attributes
 }
 \examples{
-g <- make_ring(10) \%>\%
-  set_vertex_attr("name", value = LETTERS[1:10]) \%>\%
+g <- make_ring(10) |>
+  set_vertex_attr("name", value = LETTERS[1:10]) |>
   set_vertex_attr("color", value = rep("green", 10))
 vertex_attr_names(g)
 plot(g)
