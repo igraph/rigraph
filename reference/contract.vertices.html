@@ -64,7 +64,7 @@ consistent API.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">contract.vertices</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
 <span>  <span class="va">mapping</span>,</span>
-<span>  vertex.attr.comb <span class="op">=</span> <span class="fu"><a href="igraph_opt.html">igraph_opt</a></span><span class="op">(</span><span class="st">"vertex.attr.comb"</span><span class="op">)</span></span>
+<span>  vertex.attr.comb <span class="op">=</span> <span class="fu"><a href="igraph_opt.html">igraph_opt</a></span><span class="op">(</span><span class="st">"vertex_attr_combine"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -80,12 +80,6 @@ consistent API.</p>
 <dd><p>A numeric vector that specifies the mapping. Its elements
 correspond to the vertices, and for each element the ID in the new graph is
 given.</p></dd>
-
-
-<dt id="arg-vertex-attr-comb">vertex.attr.comb<a class="anchor" aria-label="anchor" href="#arg-vertex-attr-comb"></a></dt>
-<dd><p>Specifies how to combine the vertex attributes in
-the new graph. Please see <code><a href="igraph-attribute-combination.html">attribute.combination()</a></code> for details. The
-default <code>NULL</code> uses the <code>vertex.attr.comb</code> igraph option.</p></dd>
 
 </dl></div>
     <div class="section level2">

@@ -106,12 +106,13 @@ Defaults to <code>FALSE</code>.</p></dd>
 Possible values are ‘auto’ (the default), ‘phylo’, ‘hclust’ and ‘dendrogram’.
 See <code><a href="plot_dendrogram.communities.html">plot_dendrogram()</a></code> for details.</p></dd>
 
-<dt>edge.attr.comb</dt>
+<dt>edge_attr_combine</dt>
 <dd><p>Specifies what to do with the edge attributes if the graph is modified.
 The default value is <code>list(weight="sum", name="concat", "ignore")</code>.
-See <code><a href="igraph-attribute-combination.html">attribute.combination()</a></code> for details on this.</p></dd>
+See <code><a href="igraph-attribute-combination.html">attribute.combination()</a></code> for details on this. The former dotted
+name <code>edge.attr.comb</code> still works but is soft-deprecated.</p></dd>
 
-<dt>graph.attr.comb</dt>
+<dt>graph_attr_combine</dt>
 <dd><p>Specifies what to do with the graph attributes when graphs are
 combined, e.g. via <code><a href="union.html">union()</a></code>, <code><a href="intersection.html">intersection()</a></code>, <code><a href="disjoint_union.html">disjoint_union()</a></code>
 or <code><a href="compose.html">compose()</a></code>. The default value is <code>"rename"</code>, which resolves any
@@ -155,10 +156,11 @@ It is recommended, if the user works with larger graphs.</p></dd>
 <dd><p>Logical constant, whether igraph functions should talk more than minimal.
 E.g. if <code>TRUE</code> then some functions will use progress bars while computing. Defaults to <code>FALSE</code>.</p></dd>
 
-<dt>vertex.attr.comb</dt>
+<dt>vertex_attr_combine</dt>
 <dd><p>Specifies what to do with the vertex attributes if the graph is modified.
 The default value is <code>list(name="concat", "ignore")</code>.
-See <code><a href="igraph-attribute-combination.html">attribute.combination()</a></code> for details on this.</p></dd>
+See <code><a href="igraph-attribute-combination.html">attribute.combination()</a></code> for details on this. The former dotted
+name <code>vertex.attr.comb</code> still works but is soft-deprecated.</p></dd>
 
 
 </dl></div>

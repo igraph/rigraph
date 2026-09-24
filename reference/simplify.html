@@ -59,7 +59,8 @@
 <span>  <span class="va">graph</span>,</span>
 <span>  remove.multiple <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  remove.loops <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  edge.attr.comb <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  edge_attr_combine <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">is_simple</span><span class="op">(</span><span class="va">graph</span><span class="op">)</span></span>
@@ -84,12 +85,16 @@ removed.</p></dd>
 <dd><p>Logical, whether the loop edges are to be removed.</p></dd>
 
 
-<dt id="arg-edge-attr-comb">edge.attr.comb<a class="anchor" aria-label="anchor" href="#arg-edge-attr-comb"></a></dt>
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
+
+
+<dt id="arg-edge-attr-combine">edge_attr_combine<a class="anchor" aria-label="anchor" href="#arg-edge-attr-combine"></a></dt>
 <dd><p>Specifies what to do with edge attributes, if
 <code>remove.multiple=TRUE</code>. In this case many edges might be mapped to a
 single one in the new graph, and their attributes are combined. Please see
 <code><a href="igraph-attribute-combination.html">attribute.combination()</a></code> for details on this. The default <code>NULL</code> uses
-the <code>edge.attr.comb</code> igraph option.</p></dd>
+the <code>edge_attr_combine</code> igraph option.</p></dd>
 
 </dl></div>
     <div class="section level2">

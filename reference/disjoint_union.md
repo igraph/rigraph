@@ -6,7 +6,7 @@ have disjoint vertex sets.
 ## Usage
 
 ``` r
-disjoint_union(..., graph.attr.comb = NULL)
+disjoint_union(..., graph_attr_combine = NULL)
 
 x %du% y
 ```
@@ -17,10 +17,10 @@ x %du% y
 
   Graph objects or lists of graph objects.
 
-- graph.attr.comb:
+- graph_attr_combine:
 
   Specification for combining shared graph attributes. The default
-  `NULL` uses the `graph.attr.comb` igraph option (`"rename"` unless
+  `NULL` uses the `graph_attr_combine` igraph option (`"rename"` unless
   changed via
   [`igraph_options()`](https://r.igraph.org/reference/igraph_options.md)),
   which preserves the historical behaviour of appending `_1`, `_2`, ...
@@ -49,7 +49,7 @@ particular, it merges vertex and edge attributes using the
 function. For graphs that lack some vertex/edge attribute, the
 corresponding values in the new graph are set to a missing value (`NA`
 for scalar attributes, `NULL` for list attributes). Graph attributes are
-combined according to `graph.attr.comb`; by default any name clash is
+combined according to `graph_attr_combine`; by default any name clash is
 resolved by adding suffixes (`_1`, `_2`, ...). See
 [igraph-attribute-combination](https://r.igraph.org/reference/igraph-attribute-combination.md)
 for the available combiners.
@@ -110,7 +110,7 @@ V(g1)$name <- letters[1:10]
 g2 <- make_ring(10)
 V(g2)$name <- letters[11:20]
 print_all(g1 %du% g2)
-#> ── <igraph> ───────────────────────────────────────────────────────── 587f03c ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 823f8e2 ──
 #> ℹ undirected · named
 #> ℹ 20 vertices · 19 edges
 #> 

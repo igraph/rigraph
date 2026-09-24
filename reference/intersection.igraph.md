@@ -11,9 +11,9 @@ intersection(
   ...,
   byname = "auto",
   keep.all.vertices = TRUE,
-  graph.attr.comb = igraph_opt("graph.attr.comb"),
-  vertex.attr.comb = "rename",
-  edge.attr.comb = "rename"
+  graph_attr_combine = igraph_opt("graph_attr_combine"),
+  vertex_attr_combine = "rename",
+  edge_attr_combine = "rename"
 )
 ```
 
@@ -35,12 +35,12 @@ intersection(
   Logical, whether to keep vertices that only appear in a subset of the
   input graphs.
 
-- graph.attr.comb, vertex.attr.comb, edge.attr.comb:
+- graph_attr_combine, vertex_attr_combine, edge_attr_combine:
 
   Specification for combining clashing graph, vertex and edge
-  attributes. `vertex.attr.comb` and `edge.attr.comb` default to
-  `"rename"`; `graph.attr.comb` defaults to the `graph.attr.comb` igraph
-  option (`"rename"` unless changed via
+  attributes. `vertex_attr_combine` and `edge_attr_combine` default to
+  `"rename"`; `graph_attr_combine` defaults to the `graph_attr_combine`
+  igraph option (`"rename"` unless changed via
   [`igraph_options()`](https://r.igraph.org/reference/igraph_options.md)).
   See
   [igraph-attribute-combination](https://r.igraph.org/reference/igraph-attribute-combination.md)
@@ -64,9 +64,9 @@ internal numeric vertex IDs.
 the attributes of all graphs. All graph, vertex and edge attributes are
 copied to the result. By default, if an attribute is present in multiple
 graphs and would result in a name clash, that attribute is renamed by
-adding suffixes: `_1`, `_2`, etc. Pass `graph.attr.comb`,
-`vertex.attr.comb` or `edge.attr.comb` to combine clashing attributes
-instead; see
+adding suffixes: `_1`, `_2`, etc. Pass `graph_attr_combine`,
+`vertex_attr_combine` or `edge_attr_combine` to combine clashing
+attributes instead; see
 [igraph-attribute-combination](https://r.igraph.org/reference/igraph-attribute-combination.md)
 for the available combiners.
 
@@ -128,7 +128,7 @@ net1 <- graph_from_literal(
 )
 net2 <- graph_from_literal(D - A:F:Y, B - A - X - F - H - Z, F - Y)
 print_all(net1 %s% net2)
-#> ── <igraph> ───────────────────────────────────────────────────────── f3a6869 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 3cb7622 ──
 #> ℹ undirected · named
 #> ℹ 13 vertices · 4 edges
 #> 

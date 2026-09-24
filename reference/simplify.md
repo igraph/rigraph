@@ -9,7 +9,8 @@ simplify(
   graph,
   remove.multiple = TRUE,
   remove.loops = TRUE,
-  edge.attr.comb = NULL
+  ...,
+  edge_attr_combine = NULL
 )
 
 is_simple(graph)
@@ -31,13 +32,17 @@ simplify_and_colorize(graph)
 
   Logical, whether the loop edges are to be removed.
 
-- edge.attr.comb:
+- ...:
+
+  These dots are for future extensions and must be empty.
+
+- edge_attr_combine:
 
   Specifies what to do with edge attributes, if `remove.multiple=TRUE`.
   In this case many edges might be mapped to a single one in the new
   graph, and their attributes are combined. Please see
   [`attribute.combination()`](https://r.igraph.org/reference/igraph-attribute-combination.md)
-  for details on this. The default `NULL` uses the `edge.attr.comb`
+  for details on this. The default `NULL` uses the `edge_attr_combine`
   igraph option.
 
 ## Value

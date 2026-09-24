@@ -62,15 +62,16 @@ The currently used parameters in alphabetical order:
   [`plot_dendrogram()`](https://r.igraph.org/reference/plot_dendrogram.communities.md)
   for details.
 
-- edge.attr.comb:
+- edge_attr_combine:
 
   Specifies what to do with the edge attributes if the graph is
   modified. The default value is
   `list(weight="sum", name="concat", "ignore")`. See
   [`attribute.combination()`](https://r.igraph.org/reference/igraph-attribute-combination.md)
-  for details on this.
+  for details on this. The former dotted name `edge.attr.comb` still
+  works but is soft-deprecated.
 
-- graph.attr.comb:
+- graph_attr_combine:
 
   Specifies what to do with the graph attributes when graphs are
   combined, e.g. via
@@ -137,12 +138,13 @@ The currently used parameters in alphabetical order:
   minimal. E.g. if `TRUE` then some functions will use progress bars
   while computing. Defaults to `FALSE`.
 
-- vertex.attr.comb:
+- vertex_attr_combine:
 
   Specifies what to do with the vertex attributes if the graph is
   modified. The default value is `list(name="concat", "ignore")`. See
   [`attribute.combination()`](https://r.igraph.org/reference/igraph-attribute-combination.md)
-  for details on this.
+  for details on this. The former dotted name `vertex.attr.comb` still
+  works but is soft-deprecated.
 
 ## See also
 

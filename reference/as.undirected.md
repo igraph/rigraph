@@ -12,7 +12,7 @@ create a more consistent API.
 as.undirected(
   graph,
   mode = c("collapse", "each", "mutual"),
-  edge.attr.comb = igraph_opt("edge.attr.comb")
+  edge.attr.comb = igraph_opt("edge_attr_combine")
 )
 ```
 
@@ -29,15 +29,6 @@ as.undirected(
   can be `mutual` or `arbitrary`. For
   [`as_undirected()`](https://r.igraph.org/reference/as_directed.md) it
   can be `each`, `collapse` or `mutual`. See details below.
-
-- edge.attr.comb:
-
-  Specifies what to do with edge attributes, if `mode="collapse"` or
-  `mode="mutual"`. In these cases many edges might be mapped to a single
-  one in the new graph, and their attributes are combined. Please see
-  [`attribute.combination()`](https://r.igraph.org/reference/igraph-attribute-combination.md)
-  for details on this. The default `NULL` uses the `edge.attr.comb`
-  igraph option.
 
 ## Related documentation in the C library
 

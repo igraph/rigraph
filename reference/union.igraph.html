@@ -62,9 +62,9 @@ or overlapping vertex sets.</p>
 <span><span class="fu"><a href="union.html">union</a></span><span class="op">(</span></span>
 <span>  <span class="va">...</span>,</span>
 <span>  byname <span class="op">=</span> <span class="st">"auto"</span>,</span>
-<span>  graph.attr.comb <span class="op">=</span> <span class="fu"><a href="igraph_opt.html">igraph_opt</a></span><span class="op">(</span><span class="st">"graph.attr.comb"</span><span class="op">)</span>,</span>
-<span>  vertex.attr.comb <span class="op">=</span> <span class="st">"rename"</span>,</span>
-<span>  edge.attr.comb <span class="op">=</span> <span class="st">"rename"</span></span>
+<span>  graph_attr_combine <span class="op">=</span> <span class="fu"><a href="igraph_opt.html">igraph_opt</a></span><span class="op">(</span><span class="st">"graph_attr_combine"</span><span class="op">)</span>,</span>
+<span>  vertex_attr_combine <span class="op">=</span> <span class="st">"rename"</span>,</span>
+<span>  edge_attr_combine <span class="op">=</span> <span class="st">"rename"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -84,11 +84,11 @@ otherwise. A warning is generated if <code>auto</code> and some (but not all)
 graphs are named.</p></dd>
 
 
-<dt id="arg-graph-attr-comb-vertex-attr-comb-edge-attr-comb">graph.attr.comb, vertex.attr.comb, edge.attr.comb<a class="anchor" aria-label="anchor" href="#arg-graph-attr-comb-vertex-attr-comb-edge-attr-comb"></a></dt>
+<dt id="arg-graph-attr-combine-vertex-attr-combine-edge-attr-combine">graph_attr_combine, vertex_attr_combine, edge_attr_combine<a class="anchor" aria-label="anchor" href="#arg-graph-attr-combine-vertex-attr-combine-edge-attr-combine"></a></dt>
 <dd><p>Specification for
-combining clashing graph, vertex and edge attributes. <code>vertex.attr.comb</code>
-and <code>edge.attr.comb</code> default to <code>"rename"</code>; <code>graph.attr.comb</code> defaults to
-the <code>graph.attr.comb</code> igraph option (<code>"rename"</code> unless changed via
+combining clashing graph, vertex and edge attributes. <code>vertex_attr_combine</code>
+and <code>edge_attr_combine</code> default to <code>"rename"</code>; <code>graph_attr_combine</code> defaults to
+the <code>graph_attr_combine</code> igraph option (<code>"rename"</code> unless changed via
 <code><a href="igraph_options.html">igraph_options()</a></code>). <code>"rename"</code> preserves the historical behaviour of
 appending <code>_1</code>, <code>_2</code>, ... suffixes. See <a href="igraph-attribute-combination.html">igraph-attribute-combination</a> for
 the available combiners.</p></dd>
@@ -109,8 +109,8 @@ of the internal numeric vertex IDs.</p>
 <p><code><a href="union.html">union()</a></code> keeps the attributes of all graphs. All graph, vertex and
 edge attributes are copied to the result. By default, if an attribute is
 present in multiple graphs and would result in a name clash, that attribute
-is renamed by adding suffixes: <code>_1</code>, <code>_2</code>, etc. Pass <code>graph.attr.comb</code>,
-<code>vertex.attr.comb</code> or <code>edge.attr.comb</code> to combine clashing attributes
+is renamed by adding suffixes: <code>_1</code>, <code>_2</code>, etc. Pass <code>graph_attr_combine</code>,
+<code>vertex_attr_combine</code> or <code>edge_attr_combine</code> to combine clashing attributes
 instead, e.g. by summing or by taking the first non-<code>NA</code> value. See
 <a href="igraph-attribute-combination.html">igraph-attribute-combination</a> for the available combiners.</p>
 <p>The <code>name</code> vertex attribute is treated specially if the operation is
@@ -166,7 +166,7 @@ undirected.</p>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">net2</span> <span class="op">&lt;-</span> <span class="fu"><a href="graph_from_literal.html">graph_from_literal</a></span><span class="op">(</span><span class="va">D</span> <span class="op">-</span> <span class="va">A</span><span class="op">:</span><span class="cn">F</span><span class="op">:</span><span class="va">Y</span>, <span class="va">B</span> <span class="op">-</span> <span class="va">A</span> <span class="op">-</span> <span class="va">X</span> <span class="op">-</span> <span class="cn">F</span> <span class="op">-</span> <span class="va">H</span> <span class="op">-</span> <span class="va">Z</span>, <span class="cn">F</span> <span class="op">-</span> <span class="va">Y</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="print.igraph.html">print_all</a></span><span class="op">(</span><span class="va">net1</span> <span class="op">%u%</span> <span class="va">net2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── 66145e7 ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── e565452 ──</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected · named</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 13 vertices · 21 edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
