@@ -1,5 +1,6 @@
-# Test fixture for the in-place argument-migration generator (tools/migrations.R,
-# tools/generate-migrations.R). `migration_fixture()` carries a generated
+# Test fixture for the in-place argument-migration generator
+# (tools/migrations/fixture.R, tools/generate-migrations.R).
+# `migration_fixture()` carries a generated
 # ARG_HANDLE block that recovers a legacy call to its pre-3.0.0 signature
 # f(graph, n, weight, kind, directed) -- now
 # f(graph, n, ..., weights, type, directed), with `weight` renamed to `weights`

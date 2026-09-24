@@ -740,7 +740,7 @@ as_edgelist <- function(
 #' E(g4)$weight <- seq_len(ecount(g4))
 #' ug4 <- as_undirected(g4,
 #'   mode = "mutual",
-#'   edge.attr.comb = list(weight = length)
+#'   edge_attr_combine = list(weight = length)
 #' )
 #' print(ug4, e = TRUE)
 #'
@@ -791,21 +791,59 @@ as_directed <- function(
 }
 
 #' @rdname as_directed
-#' @param edge.attr.comb Specifies what to do with edge attributes, if
+#' @param edge_attr_combine Specifies what to do with edge attributes, if
 #'   `mode="collapse"` or `mode="mutual"`.  In these cases many edges
 #'   might be mapped to a single one in the new graph, and their attributes are
 #'   combined. Please see [attribute.combination()] for details on
-#'   this. The default `NULL` uses the `edge.attr.comb` igraph option.
+#'   this. The default `NULL` uses the `edge_attr_combine` igraph option.
 #' @export
 as_undirected <- function(
   graph,
   mode = c("collapse", "each", "mutual"),
-  edge.attr.comb = NULL
+  ...,
+  edge_attr_combine = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: as_undirected, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("e", "ed", "edg", "edge"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn as_undirected}.")
+    # Pre-3.0.0 signature: as_undirected(graph, mode, edge.attr.comb)
+    .old_signature <- function(edge.attr.comb, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn as_undirected}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn as_undirected}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(edge.attr.comb)) base::list(edge_attr_combine = edge.attr.comb)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(edge_attr_combine)) "edge_attr_combine"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn as_undirected} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `as_undirected()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  as_undirected(", base::paste(base::c("graph", "mode", base::c(edge_attr_combine = "edge.attr.comb")[.arg_names]), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    as_undirected(", base::paste(base::c("graph", "mode", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   ensure_igraph(graph)
-  if (is.null(edge.attr.comb)) {
-    edge.attr.comb <- igraph_opt("edge.attr.comb")
+  if (is.null(edge_attr_combine)) {
+    edge_attr_combine <- igraph_opt("edge_attr_combine")
   }
 
   mode <- igraph_match_arg(mode)
@@ -814,7 +852,7 @@ as_undirected <- function(
   res <- to_undirected_impl(
     graph = graph,
     mode = mode,
-    edge_attr_comb = edge.attr.comb
+    edge_attr_comb = edge_attr_combine
   )
 
   res
@@ -1792,10 +1830,10 @@ as.directed <- function(
 as.undirected <- function(
   graph,
   mode = c("collapse", "each", "mutual"),
-  edge.attr.comb = igraph_opt("edge.attr.comb")
+  edge.attr.comb = igraph_opt("edge_attr_combine")
 ) {
   lifecycle::deprecate_warn("2.1.0", "as.undirected()", "as_undirected()")
-  as_undirected(graph = graph, mode = mode, edge.attr.comb = edge.attr.comb)
+  as_undirected(graph = graph, mode = mode, edge_attr_combine = edge.attr.comb)
 }
 
 #' Create a graph from an edge list matrix
