@@ -238,7 +238,6 @@ reference:
 - title: internal
   contents:
   - igraph-package
-  - "%>%"
 
 authors:
   Gábor Csárdi:

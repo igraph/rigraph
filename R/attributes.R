@@ -379,7 +379,7 @@ graph_attr <- function(graph, name) {
 #'
 #' @export
 #' @examples
-#' g <- make_ring(10) %>%
+#' g <- make_ring(10) |>
 #'   set_graph_attr("layout", layout_with_fr)
 #' g
 #' plot(g)
@@ -442,8 +442,8 @@ graph.attributes <- function(graph) {
 #'
 #' @export
 #' @examples
-#' g <- make_ring(10) %>%
-#'   set_vertex_attr("color", value = "red") %>%
+#' g <- make_ring(10) |>
+#'   set_vertex_attr("color", value = "red") |>
 #'   set_vertex_attr("label", value = letters[1:10])
 #' vertex_attr(g, "label")
 #' vertex_attr(g)
@@ -528,7 +528,7 @@ vertex_attr <- function(graph, name, index = NULL) {
 #'
 #' @export
 #' @examples
-#' g <- make_ring(10) %>%
+#' g <- make_ring(10) |>
 #'   set_vertex_attr("label", value = LETTERS[1:10])
 #' g
 #' plot(g)
@@ -766,8 +766,8 @@ set_value_at <- function(value, idx, length_out) {
 #'
 #' @export
 #' @examples
-#' g <- make_ring(10) %>%
-#'   set_edge_attr("weight", value = 1:10) %>%
+#' g <- make_ring(10) |>
+#'   set_edge_attr("weight", value = 1:10) |>
 #'   set_edge_attr("color", value = "red")
 #' g
 #' plot(g, edge.width = E(g)$weight)
@@ -852,7 +852,7 @@ edge_attr <- function(graph, name, index = NULL) {
 #'
 #' @export
 #' @examples
-#' g <- make_ring(10) %>%
+#' g <- make_ring(10) |>
 #'   set_edge_attr("label", value = LETTERS[1:10])
 #' g
 #' plot(g)
@@ -1052,8 +1052,8 @@ graph_attr_names <- function(graph) {
 #'
 #' @export
 #' @examples
-#' g <- make_ring(10) %>%
-#'   set_vertex_attr("name", value = LETTERS[1:10]) %>%
+#' g <- make_ring(10) |>
+#'   set_vertex_attr("name", value = LETTERS[1:10]) |>
 #'   set_vertex_attr("color", value = rep("green", 10))
 #' vertex_attr_names(g)
 #' plot(g)
@@ -1082,7 +1082,7 @@ vertex_attr_names <- function(graph) {
 #'
 #' @export
 #' @examples
-#' g <- make_ring(10) %>%
+#' g <- make_ring(10) |>
 #'   set_edge_attr("label", value = letters[1:10])
 #' edge_attr_names(g)
 #' plot(g)
@@ -1149,7 +1149,7 @@ delete_graph_attr <- function(graph, name) {
 #'
 #' @export
 #' @examples
-#' g <- make_ring(10) %>%
+#' g <- make_ring(10) |>
 #'   set_vertex_attr("name", value = LETTERS[1:10])
 #' vertex_attr_names(g)
 #' g2 <- delete_vertex_attr(g, "name")
@@ -1189,7 +1189,7 @@ delete_vertex_attr <- function(graph, name) {
 #'
 #' @export
 #' @examples
-#' g <- make_ring(10) %>%
+#' g <- make_ring(10) |>
 #'   set_edge_attr("name", value = LETTERS[1:10])
 #' edge_attr_names(g)
 #' g2 <- delete_edge_attr(g, "name")

@@ -28,8 +28,8 @@ gsize(g)
 ecount(g)
 
 # Number of edges in a G(n,p) graph
-replicate(100, sample_gnp(10, 1 / 2), simplify = FALSE) \%>\%
-  vapply(gsize, 0) \%>\%
+replicate(100, sample_gnp(10, 1 / 2), simplify = FALSE) |>
+  vapply(gsize, 0) |>
   hist()
 }
 \seealso{
