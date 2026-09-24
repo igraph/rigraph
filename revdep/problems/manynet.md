@@ -1,4 +1,4 @@
-# manynet (2.3.1)
+# manynet (2.3.4)
 
 * GitHub: <https://github.com/stocnet/manynet>
 * Email: <mailto:james.hollway@graduateinstitute.ch>
@@ -16,7 +16,7 @@ Run `revdepcheck::revdep_details(, "manynet")` for more info
         2. │ └─testthat::quasi_label(enquo(object), label)
         3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
         4. └─manynet:::check_tute_functions(tute)
-        5.   └─testthat::expect_null(...) at ./helper-manynet.R:225:5
+        5.   └─testthat::expect_null(...) at ./helper-manynet.R:233:5
        ── Failure ('test-tutorials_manynet.R:4:5'): manynet tutorial code runs without warnings or errors ──
        Expected `w` to be NULL.
        Differences:
@@ -30,9 +30,9 @@ Run `revdepcheck::revdep_details(, "manynet")` for more info
         2. │ └─testthat::quasi_label(enquo(object), label)
         3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
         4. └─manynet:::check_tute_functions(tute)
-        5.   └─testthat::expect_null(...) at ./helper-manynet.R:225:5
+        5.   └─testthat::expect_null(...) at ./helper-manynet.R:233:5
        
-       [ FAIL 6 | WARN 1317 | SKIP 96 | PASS 4747 ]
+       [ FAIL 6 | WARN 767 | SKIP 90 | PASS 4996 ]
        Error:
        ! Test failures.
        Execution halted
