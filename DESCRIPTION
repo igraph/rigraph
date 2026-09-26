@@ -82,7 +82,7 @@ Config/comment/gha/extra-packages: graph is an optional Enhances
     4.4.0, where a published release still exists.
 Config/Needs/build: devtools, irlba, pkgconfig
 Config/Needs/coverage: covr
-Config/Needs/roxygen2: r-lib/roxygen2, igraph/igraph.r2cdocs,
+Config/Needs/roxygen2: r-lib/roxygen2, 
     moodymudskipper/devtag
 Config/Needs/website: here, readr, tibble, xmlparsedata, xml2
 Config/testthat/edition: 3
@@ -91,6 +91,6 @@ Config/testthat/start-first: aaa-auto, vs-es, scan, vs-operators, weakref,
     watts.strogatz.game
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace",
-    "igraph.r2cdocs::docs_rd", "devtag::dev_roclet"))
+    "igraph:::docs_rd", "devtag::dev_roclet"))
 SystemRequirements: libxml2 (optional), glpk (>= 4.57, optional)
 Config/roxygen2/version: 8.1.0.9000
