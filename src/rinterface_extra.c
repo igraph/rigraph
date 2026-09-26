@@ -299,7 +299,7 @@ SEXP Rx_igraph_safe_eval_in_env(SEXP expr_call, SEXP rho, Rx_igraph_safe_eval_re
   SET_TAG(CDDR(CDR(try_catch_call)), Rf_install("interrupt"));
 
   /* execute the call */
-  SEXP retval = PROTECT(Rf_eval(try_catch_call, rho));
+  SEXP retval = PROTECT(Rx_igraph_eval_callback(try_catch_call, rho));
 
   /* did we get an error or an interrupt? */
   if (result) {
@@ -2371,6 +2371,60 @@ void Rx_igraph_set_in_r_check(bool set) {
   Rx_igraph_in_r_check = set;
 }
 
+/* How many R callbacks a running algorithm is waiting on.
+ *
+ * R code that igraph reaches from inside an algorithm -- a search callback, an
+ * attribute combination function, an ARPACK multiplication -- can find its way
+ * back into igraph without meaning to: `length()` on a graph calls `vcount()`,
+ * and lifecycle gets there through `rlang::trace_back()` while it assembles a
+ * backtrace for a deprecation warning. While that is going on the "finally"
+ * stack belongs to the algorithm that is still running, and the nested call
+ * must not unwind it (see R_igraph_finalizer()). */
+static int Rx_igraph_running_callbacks = 0;
+
+/* HELPER: internal C; must use IGRAPH_CHECK */
+bool Rx_igraph_callback_running(void) {
+  return Rx_igraph_running_callbacks > 0;
+}
+
+typedef struct Rx_igraph_i_callback_t {
+  SEXP call;
+  SEXP rho;
+} Rx_igraph_i_callback_t;
+
+/* HELPER: internal C; must use IGRAPH_CHECK */
+static SEXP Rx_igraph_i_eval_callback(void *data) {
+  Rx_igraph_i_callback_t *callback = data;
+  return Rf_eval(callback->call, callback->rho);
+}
+
+/* HELPER: internal C; must use IGRAPH_CHECK */
+static void Rx_igraph_i_left_callback(void *data, Rboolean jump) {
+  (void) data;
+  (void) jump;
+  Rx_igraph_running_callbacks--;
+}
+
+/* HELPER: internal C; must use IGRAPH_CHECK */
+SEXP Rx_igraph_eval_callback(SEXP call, SEXP rho) {
+  Rx_igraph_i_callback_t callback = { call, rho };
+  SEXP continuation = PROTECT(R_MakeUnwindCont());
+  SEXP result;
+
+  Rx_igraph_running_callbacks++;
+  /* R_UnwindProtect() rather than a plain decrement afterwards: a callback
+   * that raises an error unwinds past us, and a count left standing would
+   * silence R_igraph_finalizer() for the rest of the session. */
+  result = R_UnwindProtect(
+    Rx_igraph_i_eval_callback, &callback,
+    Rx_igraph_i_left_callback, NULL,
+    continuation
+  );
+
+  UNPROTECT(1);
+  return result;
+}
+
 /* HELPER: internal C; must use IGRAPH_CHECK */
 void Rx_igraph_error(void) {
   Rx_igraph_errors_count = 0;
@@ -2648,6 +2702,17 @@ SEXP Rx_igraph_set_verbose(SEXP verbose) {
 
 /* TOP-LEVEL: called from R via .Call; must use IGRAPH_R_CHECK */
 SEXP R_igraph_finalizer(void) {
+  /* Every igraph function calls this on exit, to clean up after an algorithm
+   * that was left half-way. One reached from a callback is not that case: the
+   * "finally" stack then holds the structures of the algorithm that is still
+   * running, and freeing them leaves it working on destroyed memory -- the
+   * algorithm carries on and trips over an assertion, or takes R down with it.
+   * The algorithm cleans up after itself when it finishes, and the error path
+   * of the callback frees the stack before it aborts. */
+  if (Rx_igraph_callback_running()) {
+    return R_NilValue;
+  }
+
   IGRAPH_FINALLY_FREE();
   int px = 0;
   SEXP rho;
@@ -6070,7 +6135,7 @@ igraph_error_t Rx_igraph_i_arpack_callback(igraph_real_t *to, const igraph_real_
   memcpy(REAL(s_from), from, sizeof(igraph_real_t) * (size_t) n);
 
   PROTECT(R_fcall = Rf_lang3(data->fun, s_from, data->extra));
-  PROTECT(s_to = Rf_eval(R_fcall, data->rho));
+  PROTECT(s_to = Rx_igraph_eval_callback(R_fcall, data->rho));
   memcpy(to, REAL(s_to), sizeof(igraph_real_t) * (size_t) n);
 
   UNPROTECT(3);
