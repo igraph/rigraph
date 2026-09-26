@@ -7,7 +7,7 @@
 grg.game(nodes, radius, torus = FALSE, coords = FALSE)
 }
 \arguments{
-\item{nodes}{The number of vertices in the graph.}
+\item{nodes}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{n} instead.}
 
 \item{radius}{The radius within which the vertices will be connected by an
 edge.}
