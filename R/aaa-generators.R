@@ -431,6 +431,12 @@ generalized_petersen_impl <- function(
     k
   )
 
+  if (igraph_opt("add.params")) {
+    res$name <- 'Generalized Petersen graph'
+    res$n <- n
+    res$k <- k
+  }
+
   res
 }
 
@@ -839,6 +845,12 @@ regular_tree_impl <- function(
     type
   )
 
+  if (igraph_opt("add.params")) {
+    res$name <- 'Regular tree'
+    res$h <- h
+    res$k <- k
+  }
+
   res
 }
 
@@ -857,6 +869,11 @@ symmetric_tree_impl <- function(
     branches,
     type
   )
+
+  if (igraph_opt("add.params")) {
+    res$name <- 'Symmetric tree'
+    res$branches <- branches
+  }
 
   res
 }

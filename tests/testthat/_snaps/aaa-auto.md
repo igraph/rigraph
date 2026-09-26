@@ -300,7 +300,8 @@
     Code
       symmetric_tree_impl(branches = 3)
     Output
-      IGRAPH D--- 4 3 -- 
+      IGRAPH D--- 4 3 -- Symmetric tree
+      + attr: name (g/c), branches (g/n)
       + edges:
       [1] 1->2 1->3 1->4
 
@@ -309,7 +310,8 @@
     Code
       symmetric_tree_impl(branches = 3, type = "in")
     Output
-      IGRAPH D--- 4 3 -- 
+      IGRAPH D--- 4 3 -- Symmetric tree
+      + attr: name (g/c), branches (g/n)
       + edges:
       [1] 2->1 3->1 4->1
 
@@ -327,7 +329,8 @@
     Code
       regular_tree_impl(h = 2)
     Output
-      IGRAPH U--- 10 9 -- 
+      IGRAPH U--- 10 9 -- Regular tree
+      + attr: name (g/c), h (g/n), k (g/n)
       + edges:
       [1] 1-- 2 1-- 3 1-- 4 2-- 5 2-- 6 3-- 7 3-- 8 4-- 9 4--10
 
@@ -336,7 +339,8 @@
     Code
       regular_tree_impl(h = 2, k = 4, type = "in")
     Output
-      IGRAPH D--- 17 16 -- 
+      IGRAPH D--- 17 16 -- Regular tree
+      + attr: name (g/c), h (g/n), k (g/n)
       + edges:
        [1]  2->1  3->1  4->1  5->1  6->2  7->2  8->2  9->3 10->3 11->3 12->4 13->4
       [13] 14->4 15->5 16->5 17->5
@@ -762,7 +766,8 @@
     Code
       generalized_petersen_impl(n = 5, k = 2)
     Output
-      IGRAPH U--- 10 15 -- 
+      IGRAPH U--- 10 15 -- Generalized Petersen graph
+      + attr: name (g/c), n (g/n), k (g/n)
       + edges:
        [1] 1-- 2 1-- 6 6-- 8 2-- 3 2-- 7 7-- 9 3-- 4 3-- 8 8--10 4-- 5 4-- 9 6-- 9
       [13] 1-- 5 5--10 7--10
