@@ -744,6 +744,12 @@ triangular_lattice_impl <- function(
     mutual
   )
 
+  if (igraph_opt("add.params")) {
+    res$name <- 'Triangular lattice'
+    res$dimvector <- dimvector
+    res$mutual <- mutual
+  }
+
   res
 }
 
