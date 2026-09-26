@@ -10,11 +10,11 @@ oldsample_0_5 <- function() {
     seq(0, 3, by = 1),
     list(
       c(1, 0),
-      list() %>%
+      list() |>
         structure(names = character(0)),
       list(bar = c("A", "B", "C")),
       list(foo = c("a", "b", "c"))
     )
-  ) %>%
+  ) |>
     structure(class = "igraph")
 }

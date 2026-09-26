@@ -153,15 +153,15 @@ gives the edge weights.
 g1 <- sample(
   x = 0:1, size = 100, replace = TRUE,
   prob = c(0.9, 0.1)
-) \%>\%
-  matrix(ncol = 10) \%>\%
+) |>
+  matrix(ncol = 10) |>
   graph_from_adjacency_matrix()
 
 g2 <- sample(
   x = 0:5, size = 100, replace = TRUE,
   prob = c(0.9, 0.02, 0.02, 0.02, 0.02, 0.02)
-) \%>\%
-  matrix(ncol = 10) \%>\%
+) |>
+  matrix(ncol = 10) |>
   graph_from_adjacency_matrix(weighted = TRUE)
 E(g2)$weight
 

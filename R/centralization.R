@@ -478,8 +478,8 @@ centr_degree <- function(
 #' @examples
 #' # A BA graph is quite centralized
 #' g <- sample_pa(1000, m = 4)
-#' centr_degree(g, normalized = FALSE)$centralization %>%
-#'   `/`(centr_degree_tmax(g, loops = FALSE))
+#' centr_degree(g, normalized = FALSE)$centralization /
+#'   centr_degree_tmax(g, loops = FALSE)
 #' centr_degree(g, normalized = TRUE)$centralization
 centr_degree_tmax <- function(
   graph = NULL,
@@ -633,8 +633,7 @@ centr_betw <- function(
 #' @examples
 #' # A BA graph is quite centralized
 #' g <- sample_pa(1000, m = 4)
-#' centr_betw(g, normalized = FALSE)$centralization %>%
-#'   `/`(centr_betw_tmax(g))
+#' centr_betw(g, normalized = FALSE)$centralization / centr_betw_tmax(g)
 #' centr_betw(g, normalized = TRUE)$centralization
 centr_betw_tmax <- function(
   graph = NULL,
@@ -793,8 +792,7 @@ centr_clo <- function(
 #' @examples
 #' # A BA graph is quite centralized
 #' g <- sample_pa(1000, m = 4)
-#' centr_clo(g, normalized = FALSE)$centralization %>%
-#'   `/`(centr_clo_tmax(g))
+#' centr_clo(g, normalized = FALSE)$centralization / centr_clo_tmax(g)
 #' centr_clo(g, normalized = TRUE)$centralization
 centr_clo_tmax <- function(
   graph = NULL,
@@ -941,8 +939,7 @@ centr_eigen <- function(
 #' @examples
 #' # A BA graph is quite centralized
 #' g <- sample_pa(1000, m = 4)
-#' centr_eigen(g, normalized = FALSE)$centralization %>%
-#'   `/`(centr_eigen_tmax(g))
+#' centr_eigen(g, normalized = FALSE)$centralization / centr_eigen_tmax(g)
 #' centr_eigen(g, normalized = TRUE)$centralization
 centr_eigen_tmax <- function(
   graph = NULL,

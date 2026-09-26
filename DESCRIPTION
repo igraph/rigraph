@@ -35,13 +35,12 @@ URL: https://r.igraph.org/, https://igraph.org/,
 BugReports: https://github.com/igraph/rigraph/issues
 Depends:
     methods,
-    R (>= 4.0.0)
+    R (>= 4.1.0)
 Imports:
     cli,
     graphics,
     grDevices,
     lifecycle,
-    magrittr,
     Matrix,
     pkgconfig (>= 2.0.0),
     rlang (>= 1.1.0),
