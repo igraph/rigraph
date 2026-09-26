@@ -279,6 +279,12 @@ test_that("`layout_with_mds()` stress test, graph with multiple components", {
 
   ## Small stress test
 
+  # DSYEVR fails to converge with BLIS for some of these graphs
+  skip_if(
+    grepl("blis", extSoftVersion()["BLAS"], ignore.case = TRUE),
+    "BLIS BLAS"
+  )
+
   for (i in 1:10) {
     g <- sample_gnp(100, 2 / 100)
     l <- layout_with_mds(g)
