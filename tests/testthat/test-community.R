@@ -787,8 +787,8 @@ test_that("cluster_infomap() covers migrated tail args and positional recovery",
 
   res <- cluster_infomap(
     karate,
-    e.weights = rep(1, ecount(karate)),
-    v.weights = rep(1, vcount(karate)),
+    weights = rep(1, ecount(karate)),
+    vertex_weights = rep(1, vcount(karate)),
     nb.trials = 3,
     modularity = FALSE
   )
@@ -804,7 +804,23 @@ test_that("cluster_infomap() covers migrated tail args and positional recovery",
     res_legacy <- cluster_infomap(karate, ew)
   )
   set.seed(1)
-  expect_identical(res_legacy, cluster_infomap(karate, e.weights = ew))
+  expect_identical(res_legacy, cluster_infomap(karate, weights = ew))
+
+  # The legacy `e.weights` and `v.weights` names are recovered.
+  set.seed(1)
+  lifecycle::expect_deprecated(
+    res_enamed <- cluster_infomap(karate, e.weights = ew)
+  )
+  expect_identical(res_enamed, res_legacy)
+  set.seed(1)
+  lifecycle::expect_deprecated(
+    res_vnamed <- cluster_infomap(karate, v.weights = rep(1, vcount(karate)))
+  )
+  set.seed(1)
+  expect_identical(
+    res_vnamed,
+    cluster_infomap(karate, vertex_weights = rep(1, vcount(karate)))
+  )
 })
 
 test_that("cluster_louvain() covers migrated tail args and positional recovery", {
