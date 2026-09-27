@@ -16,4 +16,4 @@ tkplot.export.postscript(tkp.id)
 
 - tkp.id:
 
-  The id of the tkplot window to close/reshape/etc.
+  The ID of the tkplot window to close/reshape/etc.

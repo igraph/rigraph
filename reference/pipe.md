@@ -3,12 +3,6 @@
 igraph re-exports the `%>%` operator of magrittr, because we find it
 very useful. Please see the documentation in the `magrittr` package.
 
-## Usage
-
-``` r
-lhs %>% rhs
-```
-
 ## Arguments
 
 - lhs:

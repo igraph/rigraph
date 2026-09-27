@@ -4,7 +4,6 @@
 <url><loc>https://r.igraph.org/AUTHORS-list.html</loc></url>
 <url><loc>https://r.igraph.org/BRANCHES.html</loc></url>
 <url><loc>https://r.igraph.org/CONTRIBUTING.html</loc></url>
-<url><loc>https://r.igraph.org/articles/current-deprecations.html</loc></url>
 <url><loc>https://r.igraph.org/articles/deprecated-dot-case.html</loc></url>
 <url><loc>https://r.igraph.org/articles/igraph.html</loc></url>
 <url><loc>https://r.igraph.org/articles/igraph_ES.html</loc></url>
@@ -133,6 +132,7 @@
 <url><loc>https://r.igraph.org/reference/consensus_tree.html</loc></url>
 <url><loc>https://r.igraph.org/reference/console.html</loc></url>
 <url><loc>https://r.igraph.org/reference/constraint.html</loc></url>
+<url><loc>https://r.igraph.org/reference/constructor_spec.html</loc></url>
 <url><loc>https://r.igraph.org/reference/contract.html</loc></url>
 <url><loc>https://r.igraph.org/reference/contract.vertices.html</loc></url>
 <url><loc>https://r.igraph.org/reference/convex.hull.html</loc></url>
@@ -221,7 +221,6 @@
 <url><loc>https://r.igraph.org/reference/get.data.frame.html</loc></url>
 <url><loc>https://r.igraph.org/reference/get.diameter.html</loc></url>
 <url><loc>https://r.igraph.org/reference/get.edge.attribute.html</loc></url>
-<url><loc>https://r.igraph.org/reference/get.edge.html</loc></url>
 <url><loc>https://r.igraph.org/reference/get.edge.ids.html</loc></url>
 <url><loc>https://r.igraph.org/reference/get.edgelist.html</loc></url>
 <url><loc>https://r.igraph.org/reference/get.graph.attribute.html</loc></url>
@@ -345,6 +344,7 @@
 <url><loc>https://r.igraph.org/reference/igraph.shape.noplot.html</loc></url>
 <url><loc>https://r.igraph.org/reference/igraph.to.graphNEL.html</loc></url>
 <url><loc>https://r.igraph.org/reference/igraph.version.html</loc></url>
+<url><loc>https://r.igraph.org/reference/igraph_opt.html</loc></url>
 <url><loc>https://r.igraph.org/reference/igraph_options.html</loc></url>
 <url><loc>https://r.igraph.org/reference/igraph_version.html</loc></url>
 <url><loc>https://r.igraph.org/reference/incident.html</loc></url>
@@ -420,7 +420,6 @@
 <url><loc>https://r.igraph.org/reference/layout.fruchterman.reingold.html</loc></url>
 <url><loc>https://r.igraph.org/reference/layout.gem.html</loc></url>
 <url><loc>https://r.igraph.org/reference/layout.graphopt.html</loc></url>
-<url><loc>https://r.igraph.org/reference/layout.grid.3d.html</loc></url>
 <url><loc>https://r.igraph.org/reference/layout.grid.html</loc></url>
 <url><loc>https://r.igraph.org/reference/layout.kamada.kawai.html</loc></url>
 <url><loc>https://r.igraph.org/reference/layout.lgl.html</loc></url>
@@ -444,6 +443,7 @@
 <url><loc>https://r.igraph.org/reference/layout_on_grid.html</loc></url>
 <url><loc>https://r.igraph.org/reference/layout_on_sphere.html</loc></url>
 <url><loc>https://r.igraph.org/reference/layout_randomly.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout_spec.html</loc></url>
 <url><loc>https://r.igraph.org/reference/layout_with_dh.html</loc></url>
 <url><loc>https://r.igraph.org/reference/layout_with_drl.html</loc></url>
 <url><loc>https://r.igraph.org/reference/layout_with_fr.html</loc></url>

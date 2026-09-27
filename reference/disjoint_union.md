@@ -6,7 +6,7 @@ have disjoint vertex sets.
 ## Usage
 
 ``` r
-disjoint_union(...)
+disjoint_union(..., graph_attr_combine = NULL)
 
 x %du% y
 ```
@@ -16,6 +16,17 @@ x %du% y
 - ...:
 
   Graph objects or lists of graph objects.
+
+- graph_attr_combine:
+
+  Specification for combining shared graph attributes. The default
+  `NULL` uses the `graph_attr_combine` igraph option (`"rename"` unless
+  changed via
+  [`igraph_options()`](https://r.igraph.org/reference/igraph_options.md)),
+  which preserves the historical behaviour of appending `_1`, `_2`, ...
+  suffixes to clashing attribute names. See
+  [igraph-attribute-combination](https://r.igraph.org/reference/igraph-attribute-combination.md)
+  for the available combiners.
 
 - x, y:
 
@@ -38,8 +49,10 @@ particular, it merges vertex and edge attributes using the
 function. For graphs that lack some vertex/edge attribute, the
 corresponding values in the new graph are set to a missing value (`NA`
 for scalar attributes, `NULL` for list attributes). Graph attributes are
-simply copied to the result. If this would result a name clash, then
-they are renamed by adding suffixes: \_1, \_2, etc.
+combined according to `graph_attr_combine`; by default any name clash is
+resolved by adding suffixes (`_1`, `_2`, ...). See
+[igraph-attribute-combination](https://r.igraph.org/reference/igraph-attribute-combination.md)
+for the available combiners.
 
 Note that if both graphs have vertex names (i.e. a `name` vertex
 attribute), then the concatenated vertex names might be non-unique in
@@ -51,8 +64,8 @@ undirected.
 ## Related documentation in the C library
 
 [`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
 [`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
 [`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
 
 ## See also
@@ -97,10 +110,15 @@ V(g1)$name <- letters[1:10]
 g2 <- make_ring(10)
 V(g2)$name <- letters[11:20]
 print_all(g1 %du% g2)
-#> IGRAPH acab757 UN-- 20 19 -- 
-#> + attr: name_1 (g/c), name_2 (g/c), mode (g/c), center (g/n), mutual
-#> | (g/l), circular (g/l), name (v/c)
-#> + edges from acab757 (vertex names):
-#>  [1] a--b a--c a--d a--e a--f a--g a--h a--i a--j k--l l--m m--n n--o o--p p--q
-#> [16] q--r r--s s--t k--t
+#> ── <igraph> ───────────────────────────────────────────────────────── cfa8ee7 ──
+#> ℹ undirected · named
+#> ℹ 20 vertices · 19 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name_1 <chr>, name_2 <chr>, mode <chr>, center <dbl>, mutual <lgl>, circular <lgl>
+#> → vertex: name <chr>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#>  [1] a ─ b  a ─ c  a ─ d  a ─ e  a ─ f  a ─ g  a ─ h  a ─ i  a ─ j  k ─ l 
+#> [11] l ─ m  m ─ n  n ─ o  o ─ p  p ─ q  q ─ r  r ─ s  s ─ t  k ─ t 
 ```

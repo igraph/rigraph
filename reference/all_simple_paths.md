@@ -9,7 +9,8 @@ vertex or vertices. A path is simple if contains no repeated vertices.
 all_simple_paths(
   graph,
   from,
-  to = V(graph),
+  to = NULL,
+  ...,
   mode = c("out", "in", "all", "total"),
   cutoff = -1
 )
@@ -27,7 +28,12 @@ all_simple_paths(
 
 - to:
 
-  The target vertex of vertices. Defaults to all vertices.
+  The target vertex of vertices. The default `NULL` selects all
+  vertices.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - mode:
 
@@ -46,7 +52,7 @@ all_simple_paths(
 ## Value
 
 A list of integer vectors, each integer vector is a path from the source
-vertex to one of the target vertices. A path is given by its vertex ids.
+vertex to one of the target vertices. A path is given by its vertex IDs.
 
 ## Details
 
@@ -76,28 +82,28 @@ Other paths: [`diameter()`](https://r.igraph.org/reference/diameter.md),
 g <- make_ring(10)
 all_simple_paths(g, 1, 5)
 #> [[1]]
-#> + 5/10 vertices, from 36c71d4:
+#> ── <vertex sequence> 5/10 · from ea457c5 ───────────────────────────────────────
 #> [1] 1 2 3 4 5
 #> 
 #> [[2]]
-#> + 7/10 vertices, from 36c71d4:
+#> ── <vertex sequence> 7/10 · from ea457c5 ───────────────────────────────────────
 #> [1]  1 10  9  8  7  6  5
 #> 
 all_simple_paths(g, 1, c(3, 5))
 #> [[1]]
-#> + 3/10 vertices, from 36c71d4:
+#> ── <vertex sequence> 3/10 · from ea457c5 ───────────────────────────────────────
 #> [1] 1 2 3
 #> 
 #> [[2]]
-#> + 5/10 vertices, from 36c71d4:
+#> ── <vertex sequence> 5/10 · from ea457c5 ───────────────────────────────────────
 #> [1] 1 2 3 4 5
 #> 
 #> [[3]]
-#> + 7/10 vertices, from 36c71d4:
+#> ── <vertex sequence> 7/10 · from ea457c5 ───────────────────────────────────────
 #> [1]  1 10  9  8  7  6  5
 #> 
 #> [[4]]
-#> + 9/10 vertices, from 36c71d4:
+#> ── <vertex sequence> 9/10 · from ea457c5 ───────────────────────────────────────
 #> [1]  1 10  9  8  7  6  5  4  3
 #> 
 ```

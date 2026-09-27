@@ -1,13 +1,11 @@
 # Graph layout with vertices on a circle.
 
-Place vertices on a circle, in the order of their vertex ids.
+Place vertices on a circle, in the order of their vertex IDs.
 
 ## Usage
 
 ``` r
-layout_in_circle(graph, order = V(graph))
-
-in_circle(...)
+layout_in_circle(graph, order = NULL)
 ```
 
 ## Arguments
@@ -20,11 +18,8 @@ in_circle(...)
 
   The vertices to place on the circle, in the order of their desired
   placement. Vertices that are not included here will be placed at
-  (0,0).
-
-- ...:
-
-  Passed to `layout_in_circle()`.
+  (0,0). The default `NULL` selects all vertices, in the order of their
+  IDs.
 
 ## Value
 
@@ -41,6 +36,10 @@ the [`permute()`](https://r.igraph.org/reference/permute.md) function.
 [`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
+
+[`in_circle()`](https://r.igraph.org/reference/layout_spec.md) to build
+a lazy layout specification for
+[`add_layout_()`](https://r.igraph.org/reference/add_layout_.md).
 
 Other graph layouts:
 [`add_layout_()`](https://r.igraph.org/reference/add_layout_.md),

@@ -6,9 +6,7 @@ of a graph.
 ## Usage
 
 ``` r
-layout_with_mds(graph, dist = NULL, dim = 2, options = arpack_defaults())
-
-with_mds(...)
+layout_with_mds(graph, dist = NULL, dim = 2, options = deprecated())
 ```
 
 ## Arguments
@@ -32,12 +30,9 @@ with_mds(...)
 
 - options:
 
-  This is currently ignored, as ARPACK is not used any more for solving
-  the eigenproblem
-
-- ...:
-
-  Passed to `layout_with_mds()`.
+  **\[deprecated\]** This argument is not supported from igraph version
+  1.6.0, as ARPACK is not used any more for solving the eigenproblem.
+  Supplying it raises an error.
 
 ## Value
 
@@ -75,7 +70,10 @@ edition. Chapman and Hall.
 ## See also
 
 [`layout()`](https://r.igraph.org/reference/layout_.md),
-[`plot.igraph()`](https://r.igraph.org/reference/plot.igraph.md)
+[`plot.igraph()`](https://r.igraph.org/reference/plot.igraph.md). See
+[`with_mds()`](https://r.igraph.org/reference/layout_spec.md) to build a
+lazy layout specification for
+[`add_layout_()`](https://r.igraph.org/reference/add_layout_.md).
 
 Other graph layouts:
 [`add_layout_()`](https://r.igraph.org/reference/add_layout_.md),

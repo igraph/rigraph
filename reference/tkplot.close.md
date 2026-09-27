@@ -16,7 +16,7 @@ tkplot.close(tkp.id, window.close = TRUE)
 
 - tkp.id:
 
-  The id of the tkplot window to close/reshape/etc.
+  The ID of the tkplot window to close/reshape/etc.
 
 - window.close:
 

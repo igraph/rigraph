@@ -13,7 +13,8 @@ instead.
 as_adj(
   graph,
   type = c("both", "upper", "lower"),
-  attr = NULL,
+  weights = NULL,
+  attr = deprecated(),
   edges = deprecated(),
   names = TRUE,
   sparse = igraph_opt("sparsematrices")
@@ -34,36 +35,48 @@ as_adj(
   the matrix is used. `both`: the whole matrix is used, a symmetric
   matrix is returned.
 
+- weights:
+
+  One of the following:
+
+  - `NULL` (default): use the `weight` edge attribute if the graph has
+    one, otherwise return a traditional (unweighted) adjacency matrix.
+
+  - `NA`: explicitly unweighted, ignoring any `weight` edge attribute.
+
+  - A numeric or logical vector of length
+    [`ecount()`](https://r.igraph.org/reference/gsize.md): use these
+    values directly as edge weights.
+
+  - A character scalar: the name of an edge attribute whose values are
+    used as weights. The attribute must be numeric or logical.
+
+  If multiple edges share endpoints, the value of an arbitrarily chosen
+  edge is included in the matrix.
+
 - attr:
 
-  Either `NULL` or a character string giving an edge attribute name. If
-  `NULL` a traditional adjacency matrix is returned. If not `NULL` then
-  the values of the given edge attribute are included in the adjacency
-  matrix. If the graph has multiple edges, the edge attribute of an
-  arbitrarily chosen edge (for the multiple edges) is included. This
-  argument is ignored if `edges` is `TRUE`.
-
-  Note that this works only for certain attribute types. If the `sparse`
-  argumen is `TRUE`, then the attribute must be either logical or
-  numeric. If the `sparse` argument is `FALSE`, then character is also
-  allowed. The reason for the difference is that the `Matrix` package
-  does not support character sparse matrices yet.
+  **\[deprecated\]** Use `weights` instead. A character edge attribute
+  name is forwarded to `weights` unchanged; `NULL` becomes
+  `weights = NA`, since `attr = NULL` asked for a traditional unweighted
+  matrix while `weights = NULL` picks the `weight` attribute up.
 
 - edges:
 
-  **\[deprecated\]** Logical scalar, whether to return the edge ids in
-  the matrix. For non-existant edges zero is returned.
+  **\[deprecated\]** Logical, whether to return the edge IDs in the
+  matrix. For non-existant edges zero is returned.
 
 - names:
 
-  Logical constant, whether to assign row and column names to the
-  matrix. These are only assigned if the `name` vertex attribute is
-  present in the graph.
+  Logical, whether to assign row and column names to the matrix. These
+  are only assigned if the `name` vertex attribute is present in the
+  graph.
 
 - sparse:
 
-  Logical scalar, whether to create a sparse matrix. The ‘`Matrix`’
-  package must be installed for creating sparse matrices.
+  Logical, whether to create a sparse matrix. The ‘`Matrix`’ package
+  must be installed for creating sparse matrices. The default `NULL`
+  uses the `sparsematrices` igraph option.
 
 ## Related documentation in the C library
 

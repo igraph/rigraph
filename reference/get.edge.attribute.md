@@ -26,7 +26,7 @@ get.edge.attribute(graph, name, index = E(graph))
 - index:
 
   An optional edge sequence to query edge attributes for a subset of
-  edges.
+  edges. The default `NULL` selects all edges.
 
 ## Related documentation in the C library
 

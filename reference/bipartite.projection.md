@@ -43,7 +43,7 @@ bipartite.projection(
 - probe1:
 
   This argument can be used to specify the order of the projections in
-  the resulting list. If given, then it is considered as a vertex id (or
+  the resulting list. If given, then it is considered as a vertex ID (or
   a symbolic vertex name); the projection containing this vertex will be
   the first one in the result list. This argument is ignored if only one
   projection is requested in argument `which`.
@@ -55,7 +55,7 @@ bipartite.projection(
 
 - remove.type:
 
-  Logical scalar, whether to remove the `type` vertex attribute from the
+  Logical, whether to remove the `type` vertex attribute from the
   projections. This makes sense because these graphs are not bipartite
   any more. However if you want to combine them with each other (or
   other bipartite graphs), then it is worth keeping this attribute. By

@@ -19,7 +19,7 @@ probability that an old vertex is cited depends on its in-degree
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9038</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,7 +51,7 @@ probability that an old vertex is cited depends on its in-degree
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Generate an evolving random graph with preferential attachment and aging</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/games.R" class="external-link"><code>R/games.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/games.R" class="external-link"><code>R/games.R</code></a></small>
       <div class="d-none name"><code>sample_pa_age.Rd</code></div>
     </div>
 
@@ -69,6 +69,7 @@ probability that an old vertex is cited depends on its in-degree
 <span>  <span class="va">pa.exp</span>,</span>
 <span>  <span class="va">aging.exp</span>,</span>
 <span>  m <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  aging.bin <span class="op">=</span> <span class="fl">300</span>,</span>
 <span>  out.dist <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  out.seq <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -86,6 +87,7 @@ probability that an old vertex is cited depends on its in-degree
 <span>  <span class="va">pa.exp</span>,</span>
 <span>  <span class="va">aging.exp</span>,</span>
 <span>  m <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  aging.bin <span class="op">=</span> <span class="fl">300</span>,</span>
 <span>  out.dist <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  out.seq <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -122,6 +124,10 @@ vertex). This argument is used only if both the <code>out.dist</code> and
 <code>out.seq</code> arguments are NULL.</p></dd>
 
 
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
+
+
 <dt id="arg-aging-bin">aging.bin<a class="anchor" aria-label="anchor" href="#arg-aging-bin"></a></dt>
 <dd><p>The number of bins to use for measuring the age of
 vertices, see details below.</p></dd>
@@ -138,12 +144,12 @@ containing as many elements as the number of vertices. See details below.</p></d
 
 
 <dt id="arg-out-pref">out.pref<a class="anchor" aria-label="anchor" href="#arg-out-pref"></a></dt>
-<dd><p>Logical constant, whether to include edges not initiated by
+<dd><p>Logical, whether to include edges not initiated by
 the vertex as a basis of preferential attachment. See details below.</p></dd>
 
 
 <dt id="arg-directed">directed<a class="anchor" aria-label="anchor" href="#arg-directed"></a></dt>
-<dd><p>Logical constant, whether to generate a directed graph. See
+<dd><p>Logical, whether to generate a directed graph. See
 details below.</p></dd>
 
 
@@ -265,9 +271,9 @@ the vertex itself except if <code>out.pref</code> is set to <code>TRUE</code>.</
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu">sample_pa_age</span><span class="op">(</span><span class="fl">10000</span>, pa.exp <span class="op">=</span> <span class="fl">1</span>, aging.exp <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, aging.bin <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g3</span> <span class="op">&lt;-</span> <span class="fu">sample_pa_age</span><span class="op">(</span><span class="fl">10000</span>, pa.exp <span class="op">=</span> <span class="fl">1</span>, aging.exp <span class="op">=</span> <span class="op">-</span><span class="fl">3</span>, aging.bin <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fu"><a href="degree.html">degree</a></span><span class="op">(</span><span class="va">g1</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 155</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 193</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fu"><a href="degree.html">degree</a></span><span class="op">(</span><span class="va">g2</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 27</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 33</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fu"><a href="degree.html">degree</a></span><span class="op">(</span><span class="va">g3</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 11</span>
 </code></pre></div>

@@ -8,10 +8,10 @@ Scale coordinates of a layout.
 normalize(
   xmin = -1,
   xmax = 1,
-  ymin = xmin,
-  ymax = xmax,
-  zmin = xmin,
-  zmax = xmax
+  ymin = NULL,
+  ymax = NULL,
+  zmin = NULL,
+  zmax = NULL
 )
 ```
 
@@ -23,11 +23,13 @@ normalize(
 
 - ymin, ymax:
 
-  Minimum and maximum for y coordinates.
+  Minimum and maximum for y coordinates. When omitted, they follow
+  `xmin` and `xmax`; `NULL` disables normalization along this axis.
 
 - zmin, zmax:
 
-  Minimum and maximum for z coordinates.
+  Minimum and maximum for z coordinates. When omitted, they follow
+  `xmin` and `xmax`; `NULL` disables normalization along this axis.
 
 ## See also
 
@@ -65,15 +67,15 @@ Other graph layouts:
 
 ``` r
 layout_(make_ring(10), with_fr(), normalize())
-#>             [,1]       [,2]
-#>  [1,]  0.4076009 -0.9100312
-#>  [2,]  0.8645217 -0.4764106
-#>  [3,]  1.0000000  0.1388144
-#>  [4,]  0.7473962  0.7089222
-#>  [5,]  0.2021167  1.0000000
-#>  [6,] -0.4097792  0.9134202
-#>  [7,] -0.8688450  0.4833613
-#>  [8,] -1.0000000 -0.1308647
-#>  [9,] -0.7490148 -0.7046509
-#> [10,] -0.2073220 -1.0000000
+#>             [,1]        [,2]
+#>  [1,]  0.7738661 -0.63329611
+#>  [2,]  1.0000000 -0.01457634
+#>  [3,]  0.8336608  0.61930828
+#>  [4,]  0.3436190  1.00000000
+#>  [5,] -0.2645944  0.99545569
+#>  [6,] -0.7727763  0.62808822
+#>  [7,] -1.0000000  0.01209923
+#>  [8,] -0.8366545 -0.62163536
+#>  [9,] -0.3437400 -1.00000000
+#> [10,]  0.2636660 -0.99741995
 ```

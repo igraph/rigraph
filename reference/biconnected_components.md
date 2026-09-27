@@ -27,7 +27,7 @@ A named list with three components:
 - tree_edges:
 
   The components themselves, a list of numeric vectors. Each vector is a
-  set of edge ids giving the edges in a biconnected component. These
+  set of edge IDs giving the edges in a biconnected component. These
   edges define a spanning tree of the component.
 
 - component_edges:

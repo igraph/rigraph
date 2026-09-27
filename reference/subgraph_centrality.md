@@ -6,7 +6,7 @@ vertex participates in, weighting them according to their size.
 ## Usage
 
 ``` r
-subgraph_centrality(graph, diag = FALSE)
+subgraph_centrality(graph, ..., diag = FALSE)
 ```
 
 ## Arguments
@@ -15,11 +15,15 @@ subgraph_centrality(graph, diag = FALSE)
 
   The input graph. It will be treated as undirected.
 
+- ...:
+
+  These dots are for future extensions and must be empty.
+
 - diag:
 
-  Boolean scalar, whether to include the diagonal of the adjacency
-  matrix in the analysis. Giving `FALSE` here effectively eliminates the
-  loops edges from the graph before the calculation.
+  Logical, whether to include the diagonal of the adjacency matrix in
+  the analysis. Giving `FALSE` here effectively eliminates the loops
+  edges from the graph before the calculation.
 
 ## Value
 
@@ -80,6 +84,10 @@ Ernesto Estrada
 ``` r
 
 g <- sample_pa(100, m = 4, dir = FALSE)
+#> Warning: Calling `sample_pa()` with positional or abbreviated arguments was deprecated
+#> in igraph 3.0.0.
+#> ℹ Detected call: sample_pa(n, power, m, directed)
+#> ℹ Use instead: sample_pa(n, power, m, directed = )
 sc <- subgraph_centrality(g)
 cor(degree(g), sc)
 #> [1] 0.929038

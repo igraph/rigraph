@@ -5,7 +5,7 @@ Query vertex attributes of a graph
 ## Usage
 
 ``` r
-vertex_attr(graph, name, index = V(graph))
+vertex_attr(graph, name, index = NULL)
 ```
 
 ## Arguments
@@ -22,7 +22,7 @@ vertex_attr(graph, name, index = V(graph))
 - index:
 
   An optional vertex sequence to query the attribute only for these
-  vertices.
+  vertices. The default `NULL` selects all vertices.
 
 ## Value
 

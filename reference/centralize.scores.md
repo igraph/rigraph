@@ -27,8 +27,8 @@ centralize.scores(scores, theoretical.max = 0, normalized = TRUE)
 
 - normalized:
 
-  Logical scalar. Whether to normalize the graph level centrality score
-  by dividing by the supplied theoretical maximum.
+  Logical. Whether to normalize the graph level centrality score by
+  dividing by the supplied theoretical maximum.
 
 ## Related documentation in the C library
 

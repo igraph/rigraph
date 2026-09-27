@@ -47,9 +47,9 @@ exportPajek(blocks, graph, file, project.file = TRUE)
 
 - project.file:
 
-  Logical scalar, whether to create a single Pajek project file
-  containing all the data, or to create separated files for each item.
-  See details below.
+  Logical, whether to create a single Pajek project file containing all
+  the data, or to create separated files for each item. See details
+  below.
 
 ## Related documentation in the C library
 

@@ -22,7 +22,8 @@ dendPlot(x, mode = igraph_opt("dend.plot.type"), ...)
 
 - mode:
 
-  Which dendrogram plotting function to use. See details below.
+  Which dendrogram plotting function to use. See details below. The
+  default `NULL` uses the `dend.plot.type` igraph option.
 
 - ...:
 

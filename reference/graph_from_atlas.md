@@ -27,7 +27,7 @@ atlas(n)
 
 - n:
 
-  The id of the graph to create.
+  The ID of the graph to create.
 
 ## Value
 
@@ -62,13 +62,23 @@ Other deterministic constructors:
 ``` r
 ## Some randomly picked graphs from the atlas
 graph_from_atlas(sample(0:1252, 1))
-#> IGRAPH ee4b1d6 U--- 7 9 -- Graph from the Atlas #464
-#> + attr: name (g/c), n (g/n)
-#> + edges from ee4b1d6:
-#> [1] 2--4 2--3 1--3 1--6 5--6 4--5 3--4 1--4 1--5
+#> ── <igraph> Graph from the Atlas #464 ─────────────────────────────── 7e6cd38 ──
+#> ℹ undirected
+#> ℹ 7 vertices · 9 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, n <dbl>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#> [1] 2 ─ 4  2 ─ 3  1 ─ 3  1 ─ 6  5 ─ 6  4 ─ 5  3 ─ 4  1 ─ 4  1 ─ 5 
 graph_from_atlas(sample(0:1252, 1))
-#> IGRAPH 7c9d053 U--- 6 8 -- Graph from the Atlas #139
-#> + attr: name (g/c), n (g/n)
-#> + edges from 7c9d053:
-#> [1] 1--2 2--3 3--4 4--5 1--5 2--4 2--5 1--6
+#> ── <igraph> Graph from the Atlas #139 ─────────────────────────────── 038e6e4 ──
+#> ℹ undirected
+#> ℹ 6 vertices · 8 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, n <dbl>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#> [1] 1 ─ 2  2 ─ 3  3 ─ 4  4 ─ 5  1 ─ 5  2 ─ 4  2 ─ 5  1 ─ 6 
 ```

@@ -37,7 +37,11 @@ graph.bfs(
 - root:
 
   Numeric vector, usually of length one. The root vertex, or root
-  vertices to start the search from.
+  vertices to start the search from. When several roots are given, they
+  are considered in the order they appear. If a root vertex was already
+  reached while searching from an earlier root, no separate search is
+  started from it, so it keeps the distance it was first found at rather
+  than `0`.
 
 - mode:
 
@@ -48,47 +52,46 @@ graph.bfs(
 
 - unreachable:
 
-  Logical scalar, whether the search should visit the vertices that are
+  Logical, whether the search should visit the vertices that are
   unreachable from the given root vertex (or vertices). If `TRUE`, then
   additional searches are performed until all vertices are visited.
 
 - restricted:
 
-  `NULL` (=no restriction), or a vector of vertices (ids or symbolic
+  `NULL` (=no restriction), or a vector of vertices (IDs or symbolic
   names). In the latter case, the search is restricted to the given
   vertices.
 
 - order:
 
-  Logical scalar, whether to return the ordering of the vertices.
+  Logical, whether to return the ordering of the vertices.
 
 - rank:
 
-  Logical scalar, whether to return the rank of the vertices.
+  Logical, whether to return the rank of the vertices.
 
 - father:
 
-  Logical scalar, whether to return the father of the vertices.
+  Logical, whether to return the father of the vertices.
 
 - pred:
 
-  Logical scalar, whether to return the predecessors of the vertices.
+  Logical, whether to return the predecessors of the vertices.
 
 - succ:
 
-  Logical scalar, whether to return the successors of the vertices.
+  Logical, whether to return the successors of the vertices.
 
 - dist:
 
-  Logical scalar, whether to return the distance from the root of the
-  search tree.
+  Logical, whether to return the distance from the root of the search
+  tree.
 
 - callback:
 
-  If not `NULL`, then it must be callback function. This is called
-  whenever a vertex is visited. The callback function should return
-  `FALSE` to continue the search or `TRUE` to stop it. See details
-  below.
+  Callback function. This is called whenever a vertex is visited. The
+  callback function should return `FALSE` to continue the search or
+  `TRUE` to stop it. See details below. Default: `NULL`.
 
 - extra:
 
@@ -96,7 +99,8 @@ graph.bfs(
 
 - rho:
 
-  The environment in which the callback function is evaluated.
+  The environment in which the callback function is evaluated. The
+  default `NULL` uses the caller's environment.
 
 - neimode:
 

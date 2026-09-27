@@ -8,7 +8,8 @@ geodesics (shortest paths) going through a vertex or an edge.
 ``` r
 betweenness(
   graph,
-  v = V(graph),
+  v = NULL,
+  ...,
   directed = TRUE,
   weights = NULL,
   normalized = FALSE,
@@ -17,7 +18,8 @@ betweenness(
 
 edge_betweenness(
   graph,
-  e = E(graph),
+  e = NULL,
+  ...,
   directed = TRUE,
   weights = NULL,
   cutoff = -1
@@ -32,7 +34,12 @@ edge_betweenness(
 
 - v:
 
-  The vertices for which the vertex betweenness will be calculated.
+  The vertices for which the vertex betweenness will be calculated. The
+  default `NULL` selects all vertices.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - directed:
 
@@ -48,16 +55,15 @@ edge_betweenness(
 
 - normalized:
 
-  Logical scalar, whether to normalize the betweenness scores. If
-  `TRUE`, then the results are normalized by the number of ordered or
-  unordered vertex pairs in directed and undirected graphs,
-  respectively. In an undirected graph,
-  \$\$B^n=\frac{2B}{(n-1)(n-2)},\$\$ where \\B^n\\ is the normalized,
-  \\B\\ the raw betweenness, and \\n\\ is the number of vertices in the
-  graph. Note that the same normalization factor is used even when
-  setting a `cutoff` on the considered shortest path lengths, even
-  though the number of vertex pairs reachable from each other may be
-  less than \\(n-1)(n-2)/2\\.
+  Logical, whether to normalize the betweenness scores. If `TRUE`, then
+  the results are normalized by the number of ordered or unordered
+  vertex pairs in directed and undirected graphs, respectively. In an
+  undirected graph, \$\$B^n=\frac{2B}{(n-1)(n-2)},\$\$ where \\B^n\\ is
+  the normalized, \\B\\ the raw betweenness, and \\n\\ is the number of
+  vertices in the graph. Note that the same normalization factor is used
+  even when setting a `cutoff` on the considered shortest path lengths,
+  even though the number of vertex pairs reachable from each other may
+  be less than \\(n-1)(n-2)/2\\.
 
 - cutoff:
 
@@ -66,7 +72,8 @@ edge_betweenness(
 
 - e:
 
-  The edges for which the edge betweenness will be calculated.
+  The edges for which the edge betweenness will be calculated. The
+  default `NULL` selects all edges.
 
 ## Value
 

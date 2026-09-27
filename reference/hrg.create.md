@@ -21,7 +21,7 @@ hrg.create(graph, prob)
 - prob:
 
   A vector of probabilities, one for each vertex, in the order of vertex
-  ids.
+  IDs.
 
 ## Related documentation in the C library
 

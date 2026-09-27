@@ -16,7 +16,7 @@ tkplot.getcoords(tkp.id, norm = FALSE)
 
 - tkp.id:
 
-  The id of the tkplot window to close/reshape/etc.
+  The ID of the tkplot window to close/reshape/etc.
 
 - norm:
 

@@ -6,7 +6,7 @@ summary of graph centralization.
 ## Usage
 
 ``` r
-centr_clo(graph, mode = c("out", "in", "all", "total"), normalized = TRUE)
+centr_clo(graph, ..., mode = c("out", "in", "all", "total"), normalized = TRUE)
 ```
 
 ## Arguments
@@ -15,6 +15,10 @@ centr_clo(graph, mode = c("out", "in", "all", "total"), normalized = TRUE)
 
   The input graph.
 
+- ...:
+
+  These dots are for future extensions and must be empty.
+
 - mode:
 
   This is the same as the `mode` argument of
@@ -22,8 +26,8 @@ centr_clo(graph, mode = c("out", "in", "all", "total"), normalized = TRUE)
 
 - normalized:
 
-  Logical scalar. Whether to normalize the graph level centrality score
-  by dividing by the theoretical maximum.
+  Logical. Whether to normalize the graph level centrality score by
+  dividing by the theoretical maximum.
 
 ## Value
 

@@ -6,9 +6,7 @@ dimensions.
 ## Usage
 
 ``` r
-layout_on_grid(graph, width = 0, height = 0, dim = 2)
-
-on_grid(...)
+layout_on_grid(graph, ..., width = 0, height = 0, dim = 2)
 ```
 
 ## Arguments
@@ -16,6 +14,10 @@ on_grid(...)
 - graph:
 
   The input graph.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - width:
 
@@ -34,10 +36,6 @@ on_grid(...)
 
   Two or three. Whether to make 2d or a 3d layout.
 
-- ...:
-
-  Passed to `layout_on_grid()`.
-
 ## Value
 
 A two-column or three-column matrix.
@@ -50,13 +48,16 @@ the other. If you want to change the order of the vertices, then see the
 
 ## Related documentation in the C library
 
-[`layout_grid()`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_grid),
-[`layout_grid_3d()`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_grid_3d)
+[`layout_grid_3d()`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_grid_3d),
+[`layout_grid()`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_grid)
 
 ## See also
 
 [`layout()`](https://r.igraph.org/reference/layout_.md) for other layout
-generators
+generators. See
+[`on_grid()`](https://r.igraph.org/reference/layout_spec.md) to build a
+lazy layout specification for
+[`add_layout_()`](https://r.igraph.org/reference/add_layout_.md).
 
 Other graph layouts:
 [`add_layout_()`](https://r.igraph.org/reference/add_layout_.md),

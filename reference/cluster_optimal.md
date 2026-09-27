@@ -6,7 +6,7 @@ maximizing the modularity measure over all possible partitions.
 ## Usage
 
 ``` r
-cluster_optimal(graph, weights = NULL)
+cluster_optimal(graph, ..., weights = NULL)
 ```
 
 ## Arguments
@@ -14,6 +14,10 @@ cluster_optimal(graph, weights = NULL)
 - graph:
 
   The input graph. It may be undirected or directed.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - weights:
 

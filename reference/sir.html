@@ -15,7 +15,7 @@ graph"><meta property="og:image" content="https://r.igraph.org/logo.png"></head>
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9038</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ graph"><meta property="og:image" content="https://r.igraph.org/logo.png"></head>
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>SIR model on graphs</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/epi.R" class="external-link"><code>R/epi.R</code></a>, <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/sir.R" class="external-link"><code>R/sir.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/epi.R" class="external-link"><code>R/epi.R</code></a>, <a href="https://github.com/igraph/rigraph/blob/main/R/sir.R" class="external-link"><code>R/sir.R</code></a></small>
       <div class="d-none name"><code>sir.Rd</code></div>
     </div>
 
@@ -58,10 +58,10 @@ graph</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">time_bins</span><span class="op">(</span><span class="va">x</span>, middle <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">time_bins</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, middle <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'sir'</span></span>
-<span><span class="fu">time_bins</span><span class="op">(</span><span class="va">x</span>, middle <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu">time_bins</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, middle <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'sir'</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span>
@@ -69,7 +69,7 @@ graph</p>
 <span><span class="co"># S3 method for class 'sir'</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, comp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NI"</span>, <span class="st">"NS"</span>, <span class="st">"NR"</span><span class="op">)</span>, <span class="va">prob</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">sir</span><span class="op">(</span><span class="va">graph</span>, <span class="va">beta</span>, <span class="va">gamma</span>, no.sim <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">sir</span><span class="op">(</span><span class="va">graph</span>, <span class="va">beta</span>, <span class="va">gamma</span>, <span class="va">...</span>, no.sim <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -80,19 +80,21 @@ graph</p>
 <dd><p>A <code>sir</code> object, returned by the <code>sir()</code> function.</p></dd>
 
 
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>For <code>sir()</code> and <code>time_bins()</code>, these dots must be empty. For
+<code>median.sir()</code> and <code>quantile.sir()</code>, unused, present for S3 method
+consistency.</p></dd>
+
+
 <dt id="arg-middle">middle<a class="anchor" aria-label="anchor" href="#arg-middle"></a></dt>
-<dd><p>Logical scalar, whether to return the middle of the time bins,
+<dd><p>Logical, whether to return the middle of the time bins,
 or the boundaries.</p></dd>
 
 
 <dt id="arg-na-rm">na.rm<a class="anchor" aria-label="anchor" href="#arg-na-rm"></a></dt>
-<dd><p>Logical scalar, whether to ignore <code>NA</code> values.  <code>sir</code>
+<dd><p>Logical, whether to ignore <code>NA</code> values.  <code>sir</code>
 objects do not contain any <code>NA</code> values currently, so this argument is
 effectively ignored.</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional arguments, ignored currently.</p></dd>
 
 
 <dt id="arg-comp">comp<a class="anchor" aria-label="anchor" href="#arg-comp"></a></dt>

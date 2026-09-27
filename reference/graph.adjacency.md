@@ -46,7 +46,7 @@ graph.adjacency(
 
 - diag:
 
-  Logical scalar, whether to include the diagonal of the matrix in the
+  Logical, whether to include the diagonal of the matrix in the
   calculation. If this is `FALSE` then the diagonal is zerod out first.
 
 - add.colnames:
@@ -74,5 +74,6 @@ graph.adjacency(
 [`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
 [`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
 [`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
+[`is_simple()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple),
 [`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
 [`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)

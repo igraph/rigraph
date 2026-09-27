@@ -9,11 +9,10 @@ function creates such a graph in a randomized manner.
 sample_degseq(
   out.deg,
   in.deg = NULL,
+  ...,
   method = c("configuration", "vl", "fast.heur.simple", "configuration.simple",
     "edge.switching.simple")
 )
-
-degseq(..., deterministic = FALSE)
 ```
 
 ## Arguments
@@ -30,19 +29,13 @@ degseq(..., deterministic = FALSE)
   For directed graph, the in-degree sequence. By default this is `NULL`
   and an undirected graph is created.
 
+- ...:
+
+  These dots are for future extensions and must be empty.
+
 - method:
 
   Character, the method for generating the graph. See Details.
-
-- ...:
-
-  Passed to
-  [`realize_degseq()`](https://r.igraph.org/reference/realize_degseq.md)
-  if ‘deterministic’ is true, or to `sample_degseq()` otherwise.
-
-- deterministic:
-
-  Whether the construction should be deterministic
 
 ## Value
 
@@ -101,7 +94,11 @@ directed graphs.
 [`simplify()`](https://r.igraph.org/reference/simplify.md) to get rid of
 the multiple and/or loops edges,
 [`realize_degseq()`](https://r.igraph.org/reference/realize_degseq.md)
-for a deterministic variant.
+for a deterministic variant. See
+[`degseq()`](https://r.igraph.org/reference/constructor_spec.md) to
+build a lazy constructor specification for
+[`make_()`](https://r.igraph.org/reference/make_.md) or
+[`sample_()`](https://r.igraph.org/reference/sample_.md).
 
 Random graph models (games):
 [`bipartite_gnm()`](https://r.igraph.org/reference/sample_bipartite_gnm.md),
@@ -146,7 +143,7 @@ degree(undirected_graph)
 #>  [38] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
 #>  [75] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
 is_simple(undirected_graph) # sometimes TRUE, but can be FALSE
-#> [1] TRUE
+#> [1] FALSE
 
 
 directed_graph <- sample_degseq(1:10, 10:1)

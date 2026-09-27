@@ -15,7 +15,7 @@ vertices in the new graph correspond to sets of vertices in the input graph."><m
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9038</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ vertices in the new graph correspond to sets of vertices in the input graph."><m
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Contract several vertices into a single one</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/community.R" class="external-link"><code>R/community.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/community.R" class="external-link"><code>R/community.R</code></a></small>
       <div class="d-none name"><code>contract.Rd</code></div>
     </div>
 
@@ -58,7 +58,7 @@ vertices in the new graph correspond to sets of vertices in the input graph.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">contract</span><span class="op">(</span><span class="va">graph</span>, <span class="va">mapping</span>, vertex.attr.comb <span class="op">=</span> <span class="fu"><a href="igraph_options.html">igraph_opt</a></span><span class="op">(</span><span class="st">"vertex.attr.comb"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">contract</span><span class="op">(</span><span class="va">graph</span>, <span class="va">mapping</span>, <span class="va">...</span>, vertex_attr_combine <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -71,13 +71,18 @@ vertices in the new graph correspond to sets of vertices in the input graph.</p>
 
 <dt id="arg-mapping">mapping<a class="anchor" aria-label="anchor" href="#arg-mapping"></a></dt>
 <dd><p>A numeric vector that specifies the mapping. Its elements
-correspond to the vertices, and for each element the id in the new graph is
+correspond to the vertices, and for each element the ID in the new graph is
 given.</p></dd>
 
 
-<dt id="arg-vertex-attr-comb">vertex.attr.comb<a class="anchor" aria-label="anchor" href="#arg-vertex-attr-comb"></a></dt>
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
+
+
+<dt id="arg-vertex-attr-combine">vertex_attr_combine<a class="anchor" aria-label="anchor" href="#arg-vertex-attr-combine"></a></dt>
 <dd><p>Specifies how to combine the vertex attributes in
-the new graph. Please see <code><a href="igraph-attribute-combination.html">attribute.combination()</a></code> for details.</p></dd>
+the new graph. Please see <code><a href="igraph-attribute-combination.html">attribute.combination()</a></code> for details. The
+default <code>NULL</code> uses the <code>vertex_attr_combine</code> igraph option.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -88,7 +93,7 @@ the new graph. Please see <code><a href="igraph-attribute-combination.html">attr
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The attributes of the graph are kept. Graph and edge attributes are
 unchanged, vertex attributes are combined, according to the
-<code>vertex.attr.comb</code> parameter.</p>
+<code>vertex_attr_combine</code> parameter.</p>
     </div>
     <div class="section level2">
     <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
@@ -136,18 +141,24 @@ unchanged, vertex attributes are combined, according to the
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">weight</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="gsize.html">ecount</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu">contract</span><span class="op">(</span><span class="va">g</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, each <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  vertex.attr.comb <span class="op">=</span> <span class="va">toString</span></span></span>
+<span class="r-in"><span>  vertex_attr_combine <span class="op">=</span> <span class="va">toString</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## graph and edge attributes are kept, vertex attributes are</span></span></span>
 <span class="r-in"><span><span class="co">## combined using the 'toString' function.</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">g2</span>, g <span class="op">=</span> <span class="cn">TRUE</span>, v <span class="op">=</span> <span class="cn">TRUE</span>, e <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH bac268b UNW- 5 10 -- Ring</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c), weight</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | (e/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from bac268b (vertex names):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] a, b--a, b a, b--c, d c, d--c, d c, d--e, f e, f--e, f e, f--g, h</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] g, h--g, h g, h--i, j i, j--i, j a, b--i, j</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Ring ──────────────────────────────────────────────────── faec987 ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected · named · weighted</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 5 vertices · 10 edges</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Attributes ──────────────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → graph:  <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span>, <span style="color: #00BB00;">mutual</span> <span style="color: #0000BB;">&lt;lgl&gt;</span>, <span style="color: #00BB00;">circular</span> <span style="color: #0000BB;">&lt;lgl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → vertex: <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → edge:   <span style="color: #00BB00;">weight</span> <span style="color: #0000BB;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Edges (vertex names) ────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] a, b ─ a, b  a, b ─ c, d  c, d ─ c, d  c, d ─ e, f  e, f ─ e, f </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] e, f ─ g, h  g, h ─ g, h  g, h ─ i, j  i, j ─ i, j  a, b ─ i, j </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

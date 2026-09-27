@@ -8,6 +8,7 @@ summary of graph centralization.
 ``` r
 centr_degree(
   graph,
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = TRUE,
   normalized = TRUE
@@ -20,6 +21,10 @@ centr_degree(
 
   The input graph.
 
+- ...:
+
+  These dots are for future extensions and must be empty.
+
 - mode:
 
   This is the same as the `mode` argument of
@@ -27,13 +32,12 @@ centr_degree(
 
 - loops:
 
-  Logical scalar, whether to consider loops edges when calculating the
-  degree.
+  Logical, whether to consider loops edges when calculating the degree.
 
 - normalized:
 
-  Logical scalar. Whether to normalize the graph level centrality score
-  by dividing by the theoretical maximum.
+  Logical. Whether to normalize the graph level centrality score by
+  dividing by the theoretical maximum.
 
 ## Value
 

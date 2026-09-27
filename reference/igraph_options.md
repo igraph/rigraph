@@ -8,8 +8,6 @@ functions. These can be set for the whole session via
 
 ``` r
 igraph_options(...)
-
-igraph_opt(x, default = NULL)
 ```
 
 ## Arguments
@@ -20,24 +18,10 @@ igraph_opt(x, default = NULL)
   may be in the `name=value` form, or no argument at all may be given.
   See the Value and Details sections for explanation.
 
-- x:
-
-  A character string holding an option name.
-
-- default:
-
-  If the specified option is not set in the options list, this value is
-  returned. This facilitates retrieving an option and checking whether
-  it is set and setting it separately if not.
-
 ## Value
 
-`igraph_options()` returns a list with the old values of the updated
-parameters, invisibly. Without any arguments, it returns the values of
-all options.
-
-For `igraph_opt()`, the current value set for option `x`, or `NULL` if
-the option is unset.
+A list with the old values of the updated parameters, invisibly. Without
+any arguments, it returns the values of all options.
 
 ## Details
 
@@ -78,11 +62,25 @@ The currently used parameters in alphabetical order:
   [`plot_dendrogram()`](https://r.igraph.org/reference/plot_dendrogram.communities.md)
   for details.
 
-- edge.attr.comb:
+- edge_attr_combine:
 
   Specifies what to do with the edge attributes if the graph is
   modified. The default value is
   `list(weight="sum", name="concat", "ignore")`. See
+  [`attribute.combination()`](https://r.igraph.org/reference/igraph-attribute-combination.md)
+  for details on this. The former dotted name `edge.attr.comb` still
+  works but is soft-deprecated.
+
+- graph_attr_combine:
+
+  Specifies what to do with the graph attributes when graphs are
+  combined, e.g. via
+  [`union()`](https://r.igraph.org/reference/union.md),
+  [`intersection()`](https://r.igraph.org/reference/intersection.md),
+  [`disjoint_union()`](https://r.igraph.org/reference/disjoint_union.md)
+  or [`compose()`](https://r.igraph.org/reference/compose.md). The
+  default value is `"rename"`, which resolves any name clash by
+  appending `_1`, `_2`, ... suffixes. See
   [`attribute.combination()`](https://r.igraph.org/reference/igraph-attribute-combination.md)
   for details on this.
 
@@ -108,6 +106,19 @@ The currently used parameters in alphabetical order:
   Logical constant, whether to print vertex attributes when printing
   graphs. Defaults to `FALSE`.
 
+- print.style:
+
+  Character string controlling the visual style used by
+  [`print.igraph()`](https://r.igraph.org/reference/print.igraph.md),
+  [`summary.igraph()`](https://r.igraph.org/reference/print.igraph.md),
+  [`print.igraph.vs()`](https://r.igraph.org/reference/print.igraph.vs.md)
+  and
+  [`print.igraph.es()`](https://r.igraph.org/reference/print.igraph.es.md).
+  Possible values are `"cli"` (default, a cli-styled output with section
+  rules, Unicode arrows for edges and typed attribute listings) and
+  `"classic"` (the historical `IGRAPH ... DNW-` header relied on by
+  tutorials and parsers).
+
 - return.vs.es:
 
   Whether functions that return a set or sequence of vertices/edges
@@ -127,20 +138,22 @@ The currently used parameters in alphabetical order:
   minimal. E.g. if `TRUE` then some functions will use progress bars
   while computing. Defaults to `FALSE`.
 
-- vertex.attr.comb:
+- vertex_attr_combine:
 
   Specifies what to do with the vertex attributes if the graph is
   modified. The default value is `list(name="concat", "ignore")`. See
   [`attribute.combination()`](https://r.igraph.org/reference/igraph-attribute-combination.md)
-  for details on this.
+  for details on this. The former dotted name `vertex.attr.comb` still
+  works but is soft-deprecated.
 
 ## See also
 
-`igraph_options()` is similar to
-[`options()`](https://rdrr.io/r/base/options.html) and `igraph_opt()` is
-similar to [`getOption()`](https://rdrr.io/r/base/options.html).
+Similar to [`options()`](https://rdrr.io/r/base/options.html). See
+[`igraph_opt()`](https://r.igraph.org/reference/igraph_opt.md) to
+retrieve the value of a single option.
 
 Other igraph options:
+[`igraph_opt()`](https://r.igraph.org/reference/igraph_opt.md),
 [`with_igraph_opt()`](https://r.igraph.org/reference/with_igraph_opt.md)
 
 ## Author

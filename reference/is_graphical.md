@@ -9,6 +9,7 @@ directed graphs) can be realized by a graph.
 is_graphical(
   out.deg,
   in.deg = NULL,
+  ...,
   allowed.edge.types = c("simple", "loops", "multi", "all")
 )
 ```
@@ -24,6 +25,10 @@ is_graphical(
 
   `NULL` or an integer vector. For undirected graphs, it should be
   `NULL`. For directed graphs it specifies the in-degrees.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - allowed.edge.types:
 

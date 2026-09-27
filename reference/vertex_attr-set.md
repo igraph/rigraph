@@ -5,7 +5,7 @@ Set one or more vertex attributes
 ## Usage
 
 ``` r
-vertex_attr(graph, name, index = V(graph)) <- value
+vertex_attr(graph, name, index = NULL) <- value
 ```
 
 ## Arguments
@@ -22,7 +22,7 @@ vertex_attr(graph, name, index = V(graph)) <- value
 - index:
 
   An optional vertex sequence to set the attributes of a subset of
-  vertices.
+  vertices. The default `NULL` selects all vertices.
 
 - value:
 
@@ -64,10 +64,15 @@ vertex_attr(g) <- list(
 )
 vertex_attr(g, "label") <- V(g)$name
 g
-#> IGRAPH c2e89aa UN-- 10 10 -- Ring graph
-#> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c), color
-#> | (v/c), label (v/c)
-#> + edges from c2e89aa (vertex names):
-#>  [1] A--B B--C C--D D--E E--F F--G G--H H--I I--J A--J
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 41504fd ──
+#> ℹ undirected · named
+#> ℹ 10 vertices · 10 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
+#> → vertex: name <chr>, color <chr>, label <chr>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#>  [1] A ─ B  B ─ C  C ─ D  D ─ E  E ─ F  F ─ G  G ─ H  H ─ I  I ─ J  A ─ J 
 plot(g)
 ```

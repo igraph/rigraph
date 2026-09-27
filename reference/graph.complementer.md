@@ -20,7 +20,7 @@ graph.complementer(graph, loops = FALSE)
 
 - loops:
 
-  Logical constant, whether to generate loop edges.
+  Logical, whether to generate loop edges.
 
 ## Related documentation in the C library
 

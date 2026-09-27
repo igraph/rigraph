@@ -8,6 +8,7 @@ and simulated annealing.
 ``` r
 cluster_spinglass(
   graph,
+  ...,
   weights = NULL,
   vertex = NULL,
   spins = 25,
@@ -27,6 +28,10 @@ cluster_spinglass(
 - graph:
 
   The input graph. Edge directions are ignored in directed graphs.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - weights:
 
@@ -53,10 +58,10 @@ cluster_spinglass(
 
 - parupdate:
 
-  Logical constant, whether to update the spins of the vertices in
-  parallel (synchronously) or not. This argument is ignored if the
-  second form of the function is used (i.e. the ‘`vertex`’ argument is
-  present). It is also not implemented in the “neg” implementation.
+  Logical, whether to update the spins of the vertices in parallel
+  (synchronously) or not. This argument is ignored if the second form of
+  the function is used (i.e. the ‘`vertex`’ argument is present). It is
+  also not implemented in the “neg” implementation.
 
 - start.temp:
 
@@ -123,7 +128,7 @@ named list is returned with the following components:
 
 - community:
 
-  Numeric vector giving the ids of the vertices in the same community as
+  Numeric vector giving the IDs of the vertices in the same community as
   `vertex`.
 
 - cohesion:
@@ -162,7 +167,7 @@ community detection. If the `vertex` argument is not given (or it is
 optimizing the an energy function.
 
 If the `vertex` argument is given and it is not `NULL`, then it must be
-a vertex id, and the same energy function is used to find the community
+a vertex ID, and the same energy function is used to find the community
 of the the given vertex. See also the examples below.
 
 ## Related documentation in the C library

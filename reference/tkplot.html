@@ -19,7 +19,7 @@ others have to be pre-defined."><meta property="og:image" content="https://r.igr
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9038</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,7 +51,7 @@ others have to be pre-defined."><meta property="og:image" content="https://r.igr
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Interactive plotting of graphs</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/tkplot.R" class="external-link"><code>R/tkplot.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/tkplot.R" class="external-link"><code>R/tkplot.R</code></a></small>
       <div class="d-none name"><code>tkplot.Rd</code></div>
     </div>
 
@@ -66,11 +66,11 @@ others have to be pre-defined.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">tkplot</span><span class="op">(</span><span class="va">graph</span>, canvas.width <span class="op">=</span> <span class="fl">450</span>, canvas.height <span class="op">=</span> <span class="fl">450</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">tk_close</span><span class="op">(</span><span class="va">tkp.id</span>, window.close <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu">tk_close</span><span class="op">(</span><span class="va">tkp.id</span>, <span class="va">...</span>, window.close <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">tk_off</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">tk_fit</span><span class="op">(</span><span class="va">tkp.id</span>, width <span class="op">=</span> <span class="cn">NULL</span>, height <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span><span class="fu">tk_fit</span><span class="op">(</span><span class="va">tkp.id</span>, <span class="va">...</span>, width <span class="op">=</span> <span class="cn">NULL</span>, height <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">tk_center</span><span class="op">(</span><span class="va">tkp.id</span><span class="op">)</span></span>
 <span></span>
@@ -78,11 +78,11 @@ others have to be pre-defined.</p>
 <span></span>
 <span><span class="fu">tk_postscript</span><span class="op">(</span><span class="va">tkp.id</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">tk_coords</span><span class="op">(</span><span class="va">tkp.id</span>, norm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu">tk_coords</span><span class="op">(</span><span class="va">tkp.id</span>, <span class="va">...</span>, norm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">tk_set_coords</span><span class="op">(</span><span class="va">tkp.id</span>, <span class="va">coords</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">tk_rotate</span><span class="op">(</span><span class="va">tkp.id</span>, degree <span class="op">=</span> <span class="cn">NULL</span>, rad <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span><span class="fu">tk_rotate</span><span class="op">(</span><span class="va">tkp.id</span>, <span class="va">...</span>, degree <span class="op">=</span> <span class="cn">NULL</span>, rad <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">tk_canvas</span><span class="op">(</span><span class="va">tkp.id</span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -100,12 +100,13 @@ others have to be pre-defined.</p>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional plotting parameters. See <a href="plot.common.html">igraph.plotting</a> for
-the complete list.</p></dd>
+<dd><p>For <code>tkplot()</code>, additional plotting parameters, see
+<a href="plot.common.html">igraph.plotting</a> for the complete list. For <code>tk_close()</code>, <code>tk_fit()</code>,
+<code>tk_coords()</code> and <code>tk_rotate()</code>, these dots must be empty.</p></dd>
 
 
 <dt id="arg-tkp-id">tkp.id<a class="anchor" aria-label="anchor" href="#arg-tkp-id"></a></dt>
-<dd><p>The id of the tkplot window to close/reshape/etc.</p></dd>
+<dd><p>The ID of the tkplot window to close/reshape/etc.</p></dd>
 
 
 <dt id="arg-window-close">window.close<a class="anchor" aria-label="anchor" href="#arg-window-close"></a></dt>
@@ -147,7 +148,7 @@ vertices, in absolute coordinates.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p><code>tkplot()</code> returns an integer, the id of the plot, this can be
+    <p><code>tkplot()</code> returns an integer, the ID of the plot, this can be
 used to manipulate it from the command line.</p>
 <p><code>tk_canvas()</code> returns <code>tkwin</code> object, the Tk canvas.</p>
 <p><code>tk_coords()</code> returns a matrix with the coordinates.</p>
@@ -179,9 +180,9 @@ in the first list to one in the second list will be selected.</p>
 used.</p>
 <p>The <code>tkplot()</code> command creates a new Tk window with the graphical
 representation of <code>graph</code>. The command returns an integer number, the
-tkplot id. The other commands utilize this id to be able to query or
+tkplot ID. The other commands utilize this ID to be able to query or
 manipulate the plot.</p>
-<p><code>tk_close()</code> closes the Tk plot with id <code>tkp.id</code>.</p>
+<p><code>tk_close()</code> closes the Tk plot with ID <code>tkp.id</code>.</p>
 <p><code>tk_off()</code> closes all Tk plots.</p>
 <p><code>tk_fit()</code> fits the plot to the given rectangle
 (<code>width</code> and <code>height</code>), if some of these are <code>NULL</code> the
@@ -240,7 +241,7 @@ in degrees or in radians.</p>
     </div>
     <div class="section level2">
     <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
-    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount" class="external-link"><code>vcount()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed" class="external-link"><code>is_directed()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist" class="external-link"><code>get_edgelist()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges" class="external-link"><code>edges()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids" class="external-link"><code>get_eids()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount" class="external-link"><code>ecount()</code></a></p>
+    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount" class="external-link"><code>vcount()</code></a></p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

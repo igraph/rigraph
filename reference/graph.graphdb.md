@@ -26,7 +26,7 @@ graph.graphdb(
 
 - url:
 
-  If not `NULL` it is a complete URL with the file to import.
+  Complete URL with the file to import. Default: `NULL`.
 
 - prefix:
 
@@ -61,13 +61,12 @@ graph.graphdb(
 
 - compressed:
 
-  Logical constant, if TRUE than the file is expected to be compressed
-  by gzip. If `url` is `NULL` then a ‘`.gz`’ suffix is added to the
-  filename.
+  Logical, if TRUE than the file is expected to be compressed by gzip.
+  If `url` is `NULL` then a ‘`.gz`’ suffix is added to the filename.
 
 - directed:
 
-  Logical constant, whether to create a directed graph.
+  Logical, whether to create a directed graph.
 
 ## Related documentation in the C library
 

@@ -23,7 +23,7 @@ are synonyms (aliases)."><meta property="og:image" content="https://r.igraph.org
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9038</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +55,7 @@ are synonyms (aliases)."><meta property="og:image" content="https://r.igraph.org
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Neighborhood of graph vertices</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/games.R" class="external-link"><code>R/games.R</code></a>, <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/structural-properties.R" class="external-link"><code>R/structural-properties.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/games.R" class="external-link"><code>R/games.R</code></a>, <a href="https://github.com/igraph/rigraph/blob/main/R/structural-properties.R" class="external-link"><code>R/structural-properties.R</code></a></small>
       <div class="d-none name"><code>ego.Rd</code></div>
     </div>
 
@@ -70,12 +70,13 @@ are synonyms (aliases).</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">connect</span><span class="op">(</span><span class="va">graph</span>, <span class="va">order</span>, mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"out"</span>, <span class="st">"in"</span>, <span class="st">"total"</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">connect</span><span class="op">(</span><span class="va">graph</span>, <span class="va">order</span>, <span class="va">...</span>, mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"out"</span>, <span class="st">"in"</span>, <span class="st">"total"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">ego_size</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
 <span>  order <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  nodes <span class="op">=</span> <span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span>,</span>
+<span>  nodes <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"out"</span>, <span class="st">"in"</span><span class="op">)</span>,</span>
 <span>  mindist <span class="op">=</span> <span class="fl">0</span></span>
 <span><span class="op">)</span></span>
@@ -83,7 +84,8 @@ are synonyms (aliases).</p>
 <span><span class="fu">neighborhood_size</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
 <span>  order <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  nodes <span class="op">=</span> <span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span>,</span>
+<span>  nodes <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"out"</span>, <span class="st">"in"</span><span class="op">)</span>,</span>
 <span>  mindist <span class="op">=</span> <span class="fl">0</span></span>
 <span><span class="op">)</span></span>
@@ -91,7 +93,8 @@ are synonyms (aliases).</p>
 <span><span class="fu">ego</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
 <span>  order <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  nodes <span class="op">=</span> <span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span>,</span>
+<span>  nodes <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"out"</span>, <span class="st">"in"</span><span class="op">)</span>,</span>
 <span>  mindist <span class="op">=</span> <span class="fl">0</span></span>
 <span><span class="op">)</span></span>
@@ -99,7 +102,8 @@ are synonyms (aliases).</p>
 <span><span class="fu">neighborhood</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
 <span>  order <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  nodes <span class="op">=</span> <span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span>,</span>
+<span>  nodes <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"out"</span>, <span class="st">"in"</span><span class="op">)</span>,</span>
 <span>  mindist <span class="op">=</span> <span class="fl">0</span></span>
 <span><span class="op">)</span></span>
@@ -107,7 +111,8 @@ are synonyms (aliases).</p>
 <span><span class="fu">make_ego_graph</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
 <span>  order <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  nodes <span class="op">=</span> <span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span>,</span>
+<span>  nodes <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"out"</span>, <span class="st">"in"</span><span class="op">)</span>,</span>
 <span>  mindist <span class="op">=</span> <span class="fl">0</span></span>
 <span><span class="op">)</span></span>
@@ -115,7 +120,8 @@ are synonyms (aliases).</p>
 <span><span class="fu">make_neighborhood_graph</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
 <span>  order <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  nodes <span class="op">=</span> <span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span>,</span>
+<span>  nodes <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"out"</span>, <span class="st">"in"</span><span class="op">)</span>,</span>
 <span>  mindist <span class="op">=</span> <span class="fl">0</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -134,6 +140,10 @@ are synonyms (aliases).</p>
 indicate an infinite order.</p></dd>
 
 
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
+
+
 <dt id="arg-mode">mode<a class="anchor" aria-label="anchor" href="#arg-mode"></a></dt>
 <dd><p>Character constant, it specifies how to use the direction of
 the edges if a directed graph is analyzed. For ‘out’ only the
@@ -145,7 +155,8 @@ argument is ignored for undirected graphs.</p></dd>
 
 
 <dt id="arg-nodes">nodes<a class="anchor" aria-label="anchor" href="#arg-nodes"></a></dt>
-<dd><p>The vertices for which the calculation is performed.</p></dd>
+<dd><p>The vertices for which the calculation is performed.
+The default <code>NULL</code> selects all vertices.</p></dd>
 
 
 <dt id="arg-mindist">mindist<a class="anchor" aria-label="anchor" href="#arg-mindist"></a></dt>
@@ -263,82 +274,82 @@ done by Vincent Matossian</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">ego</span><span class="op">(</span><span class="va">g</span>, order <span class="op">=</span> <span class="fl">0</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/10 vertex, from 375c3cc:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 1/10 · from 04e52db ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/10 vertex, from 375c3cc:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 1/10 · from 04e52db ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/10 vertex, from 375c3cc:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 1/10 · from 04e52db ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">ego</span><span class="op">(</span><span class="va">g</span>, order <span class="op">=</span> <span class="fl">1</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/10 vertices, from 375c3cc:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 3/10 · from 04e52db ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1  2 10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/10 vertices, from 375c3cc:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 3/10 · from 04e52db ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2 1 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/10 vertices, from 375c3cc:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 3/10 · from 04e52db ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3 2 4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">ego</span><span class="op">(</span><span class="va">g</span>, order <span class="op">=</span> <span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from 375c3cc:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 5/10 · from 04e52db ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1  2 10  3  9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from 375c3cc:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 5/10 · from 04e52db ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  2  1  3 10  4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from 375c3cc:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 5/10 · from 04e52db ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3 2 4 1 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># neighborhood() is an alias of ego()</span></span></span>
 <span class="r-in"><span><span class="fu">neighborhood</span><span class="op">(</span><span class="va">g</span>, order <span class="op">=</span> <span class="fl">0</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/10 vertex, from 375c3cc:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 1/10 · from 04e52db ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/10 vertex, from 375c3cc:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 1/10 · from 04e52db ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/10 vertex, from 375c3cc:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 1/10 · from 04e52db ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">neighborhood</span><span class="op">(</span><span class="va">g</span>, order <span class="op">=</span> <span class="fl">1</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/10 vertices, from 375c3cc:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 3/10 · from 04e52db ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1  2 10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/10 vertices, from 375c3cc:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 3/10 · from 04e52db ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2 1 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/10 vertices, from 375c3cc:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 3/10 · from 04e52db ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3 2 4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">neighborhood</span><span class="op">(</span><span class="va">g</span>, order <span class="op">=</span> <span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from 375c3cc:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 5/10 · from 04e52db ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1  2 10  3  9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from 375c3cc:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 5/10 · from 04e52db ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  2  1  3 10  4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from 375c3cc:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 5/10 · from 04e52db ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3 2 4 1 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
@@ -346,42 +357,78 @@ done by Vincent Matossian</p>
 <span class="r-in"><span><span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span>, <span class="st">"e"</span>, <span class="st">"f"</span>, <span class="st">"g"</span>, <span class="st">"h"</span>, <span class="st">"i"</span>, <span class="st">"j"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">make_ego_graph</span><span class="op">(</span><span class="va">g</span>, order <span class="op">=</span> <span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 5f4259a UN-- 5 4 -- Ring graph</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 5f4259a (vertex names):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] a--b b--c a--j i--j</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Ring graph ────────────────────────────────────────────── 5f3bd4c ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected · named</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 5 vertices · 4 edges</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Attributes ──────────────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → graph:  <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span>, <span style="color: #00BB00;">mutual</span> <span style="color: #0000BB;">&lt;lgl&gt;</span>, <span style="color: #00BB00;">circular</span> <span style="color: #0000BB;">&lt;lgl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → vertex: <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Edges (vertex names) ────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] a ─ b  b ─ c  a ─ j  i ─ j </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH b547a4d UN-- 5 4 -- Ring graph</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from b547a4d (vertex names):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] a--b b--c c--d a--j</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Ring graph ────────────────────────────────────────────── 95f5fa4 ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected · named</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 5 vertices · 4 edges</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Attributes ──────────────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → graph:  <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span>, <span style="color: #00BB00;">mutual</span> <span style="color: #0000BB;">&lt;lgl&gt;</span>, <span style="color: #00BB00;">circular</span> <span style="color: #0000BB;">&lt;lgl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → vertex: <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Edges (vertex names) ────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] a ─ b  b ─ c  c ─ d  a ─ j </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 3ec6fed UN-- 5 4 -- Ring graph</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 3ec6fed (vertex names):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] a--b b--c c--d d--e</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Ring graph ────────────────────────────────────────────── 5f4214f ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected · named</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 5 vertices · 4 edges</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Attributes ──────────────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → graph:  <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span>, <span style="color: #00BB00;">mutual</span> <span style="color: #0000BB;">&lt;lgl&gt;</span>, <span style="color: #00BB00;">circular</span> <span style="color: #0000BB;">&lt;lgl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → vertex: <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Edges (vertex names) ────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] a ─ b  b ─ c  c ─ d  d ─ e </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="co"># make_neighborhood_graph() is an alias of make_ego_graph()</span></span></span>
 <span class="r-in"><span><span class="fu">make_neighborhood_graph</span><span class="op">(</span><span class="va">g</span>, order <span class="op">=</span> <span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH b36f996 UN-- 5 4 -- Ring graph</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from b36f996 (vertex names):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] a--b b--c a--j i--j</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Ring graph ────────────────────────────────────────────── bde44d5 ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected · named</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 5 vertices · 4 edges</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Attributes ──────────────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → graph:  <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span>, <span style="color: #00BB00;">mutual</span> <span style="color: #0000BB;">&lt;lgl&gt;</span>, <span style="color: #00BB00;">circular</span> <span style="color: #0000BB;">&lt;lgl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → vertex: <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Edges (vertex names) ────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] a ─ b  b ─ c  a ─ j  i ─ j </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH cd4b236 UN-- 5 4 -- Ring graph</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from cd4b236 (vertex names):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] a--b b--c c--d a--j</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Ring graph ────────────────────────────────────────────── d4abc91 ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected · named</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 5 vertices · 4 edges</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Attributes ──────────────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → graph:  <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span>, <span style="color: #00BB00;">mutual</span> <span style="color: #0000BB;">&lt;lgl&gt;</span>, <span style="color: #00BB00;">circular</span> <span style="color: #0000BB;">&lt;lgl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → vertex: <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Edges (vertex names) ────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] a ─ b  b ─ c  c ─ d  a ─ j </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 760ce99 UN-- 5 4 -- Ring graph</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 760ce99 (vertex names):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] a--b b--c c--d d--e</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Ring graph ────────────────────────────────────────────── 30ac5f2 ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected · named</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 5 vertices · 4 edges</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Attributes ──────────────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → graph:  <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span>, <span style="color: #00BB00;">mutual</span> <span style="color: #0000BB;">&lt;lgl&gt;</span>, <span style="color: #00BB00;">circular</span> <span style="color: #0000BB;">&lt;lgl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → vertex: <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Edges (vertex names) ────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] a ─ b  b ─ c  c ─ d  d ─ e </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># connecting to the neighborhood</span></span></span>

@@ -17,7 +17,7 @@ consistent API."><meta property="og:image" content="https://r.igraph.org/logo.pn
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9038</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +49,7 @@ consistent API."><meta property="og:image" content="https://r.igraph.org/logo.pn
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Shortest (directed or undirected) paths between vertices</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/structural-properties.R" class="external-link"><code>R/structural-properties.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/structural-properties.R" class="external-link"><code>R/structural-properties.R</code></a></small>
       <div class="d-none name"><code>get.shortest.paths.Rd</code></div>
     </div>
 
@@ -84,13 +84,13 @@ consistent API.</p>
 
 <dt id="arg-from">from<a class="anchor" aria-label="anchor" href="#arg-from"></a></dt>
 <dd><p>Numeric constant, the vertex from or to the shortest paths will
-be calculated. Note that right now this is not a vector of vertex ids, but
+be calculated. Note that right now this is not a vector of vertex IDs, but
 only a single vertex.</p></dd>
 
 
 <dt id="arg-to">to<a class="anchor" aria-label="anchor" href="#arg-to"></a></dt>
 <dd><p>Numeric vector, the vertices to which the shortest paths will be
-calculated. By default it includes all vertices. Note that for
+calculated. The default <code>NULL</code> includes all vertices. Note that for
 <code><a href="distances.html">distances()</a></code> every vertex must be included here at most once. (This
 is not required for <code><a href="distances.html">shortest_paths()</a></code>.</p></dd>
 
@@ -121,7 +121,7 @@ returned, in a named list with components “vpath” and “epath”.</p></dd>
 
 
 <dt id="arg-predecessors">predecessors<a class="anchor" aria-label="anchor" href="#arg-predecessors"></a></dt>
-<dd><p>Logical scalar, whether to return the predecessor vertex
+<dd><p>Logical, whether to return the predecessor vertex
 for each vertex. The predecessor of vertex <code>i</code> in the tree is the
 vertex from which vertex <code>i</code> was reached. The predecessor of the start
 vertex (in the <code>from</code> argument) is itself by definition. If the
@@ -131,7 +131,7 @@ vertices in <code>to</code> are reached.</p></dd>
 
 
 <dt id="arg-inbound-edges">inbound.edges<a class="anchor" aria-label="anchor" href="#arg-inbound-edges"></a></dt>
-<dd><p>Logical scalar, whether to return the inbound edge for
+<dd><p>Logical, whether to return the inbound edge for
 each vertex. The inbound edge of vertex <code>i</code> in the tree is the edge via
 which vertex <code>i</code> was reached. The start vertex and vertices that were
 not reached during the search will have zero in the corresponding entry of

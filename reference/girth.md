@@ -5,7 +5,7 @@ The girth of a graph is the length of the shortest circle in it.
 ## Usage
 
 ``` r
-girth(graph, circle = TRUE)
+girth(graph, ..., circle = TRUE)
 ```
 
 ## Arguments
@@ -15,9 +15,13 @@ girth(graph, circle = TRUE)
   The input graph. It may be directed, but the algorithm searches for
   undirected circles anyway.
 
+- ...:
+
+  These dots are for future extensions and must be empty.
+
 - circle:
 
-  Logical scalar, whether to return the shortest circle itself.
+  Logical, whether to return the shortest circle itself.
 
 ## Value
 
@@ -30,7 +34,7 @@ A named list with two components:
 
 - circle:
 
-  Numeric vector with the vertex ids in the shortest circle.
+  Numeric vector with the vertex IDs in the shortest circle.
 
 ## Details
 
@@ -106,7 +110,7 @@ girth(g)
 #> [1] Inf
 #> 
 #> $circle
-#> + 0/1000 vertices, from 64398de:
+#> ── <vertex sequence> 0/1000 · from 0c2572a ─────────────────────────────────────
 #> 
 
 # The worst case running time is for a ring
@@ -116,7 +120,7 @@ girth(g)
 #> [1] 100
 #> 
 #> $circle
-#> + 100/100 vertices, from 4b32470:
+#> ── <vertex sequence> 100/100 · from 434683e ────────────────────────────────────
 #>   [1]  51  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68
 #>  [19]  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85  86
 #>  [37]  87  88  89  90  91  92  93  94  95  96  97  98  99 100   1   2   3   4
@@ -132,7 +136,7 @@ girth(g)
 #> [1] 10
 #> 
 #> $circle
-#> + 10/1000 vertices, from dec6082:
+#> ── <vertex sequence> 10/1000 · from 54932bc ────────────────────────────────────
 #>  [1] 819 813 578 477 824 199  53 759 280 787
 #> 
 ```

@@ -25,7 +25,7 @@ set.vertex.attribute(graph, name, index = V(graph), value)
 - index:
 
   An optional vertex sequence to set the attributes of a subset of
-  vertices.
+  vertices. The default `NULL` selects all vertices.
 
 - value:
 

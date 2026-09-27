@@ -11,6 +11,7 @@ random_walk(
   graph,
   start,
   steps,
+  ...,
   weights = NULL,
   mode = c("out", "in", "all", "total"),
   stuck = c("return", "error")
@@ -20,6 +21,7 @@ random_edge_walk(
   graph,
   start,
   steps,
+  ...,
   weights = NULL,
   mode = c("out", "in", "all", "total"),
   stuck = c("return", "error")
@@ -39,6 +41,10 @@ random_edge_walk(
 - steps:
 
   The number of steps to make.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - weights:
 
@@ -98,9 +104,9 @@ w <- random_walk(g, start = 1, steps = 10000)
 
 ## These are similar, but not exactly the same
 cor(table(w), ec)
-#> [1] 0.962221
+#> [1] 0.9623483
 
 ## But these are (almost) the same
 cor(table(w), pg)
-#> [1] 0.9999313
+#> [1] 0.9999208
 ```

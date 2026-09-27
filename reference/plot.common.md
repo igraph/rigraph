@@ -177,7 +177,7 @@ recycled.)
 - label:
 
   The vertex labels. They will be converted to character. Specify `NA`
-  to omit vertex labels. The default vertex labels are the vertex ids.
+  to omit vertex labels. The default vertex labels are the vertex IDs.
 
 - label.family:
 

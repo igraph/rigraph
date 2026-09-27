@@ -79,8 +79,8 @@ invisibly.
 
 ## Related documentation in the C library
 
-[`simple_cycles()`](https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_simple_cycles),
 [`simple_cycles_callback()`](https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_simple_cycles_callback),
+[`simple_cycles()`](https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_simple_cycles),
 [`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
 [`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
 [`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
@@ -105,96 +105,96 @@ g <- graph_from_literal(A -+ B -+ C -+ A -+ D -+ E +- F -+ A, E -+ E, A -+ F, si
 simple_cycles(g)
 #> $vertices
 #> $vertices[[1]]
-#> + 3/6 vertices, named, from 9e2c921:
+#> ── <vertex sequence> 3/6 · named · from ba71885 ────────────────────────────────
 #> [1] A B C
 #> 
 #> $vertices[[2]]
-#> + 2/6 vertices, named, from 9e2c921:
+#> ── <vertex sequence> 2/6 · named · from ba71885 ────────────────────────────────
 #> [1] A F
 #> 
 #> $vertices[[3]]
-#> + 1/6 vertex, named, from 9e2c921:
+#> ── <vertex sequence> 1/6 · named · from ba71885 ────────────────────────────────
 #> [1] E
 #> 
 #> 
 #> $edges
 #> $edges[[1]]
-#> + 3/9 edges from 9e2c921 (vertex names):
-#> [1] A->B B->C C->A
+#> ── <edge sequence> 3/9 · vertex names · from ba71885 ───────────────────────────
+#> [1] A → B  B → C  C → A 
 #> 
 #> $edges[[2]]
-#> + 2/9 edges from 9e2c921 (vertex names):
-#> [1] A->F F->A
+#> ── <edge sequence> 2/9 · vertex names · from ba71885 ───────────────────────────
+#> [1] A → F  F → A 
 #> 
 #> $edges[[3]]
-#> + 1/9 edge from 9e2c921 (vertex names):
-#> [1] E->E
+#> ── <edge sequence> 1/9 · vertex names · from ba71885 ───────────────────────────
+#> [1] E → E 
 #> 
 #> 
 simple_cycles(g, mode = "all") # ignore edge directions
 #> $vertices
 #> $vertices[[1]]
-#> + 3/6 vertices, named, from 9e2c921:
+#> ── <vertex sequence> 3/6 · named · from ba71885 ────────────────────────────────
 #> [1] A B C
 #> 
 #> $vertices[[2]]
-#> + 4/6 vertices, named, from 9e2c921:
+#> ── <vertex sequence> 4/6 · named · from ba71885 ────────────────────────────────
 #> [1] A D E F
 #> 
 #> $vertices[[3]]
-#> + 4/6 vertices, named, from 9e2c921:
+#> ── <vertex sequence> 4/6 · named · from ba71885 ────────────────────────────────
 #> [1] A D E F
 #> 
 #> $vertices[[4]]
-#> + 2/6 vertices, named, from 9e2c921:
+#> ── <vertex sequence> 2/6 · named · from ba71885 ────────────────────────────────
 #> [1] A F
 #> 
 #> $vertices[[5]]
-#> + 1/6 vertex, named, from 9e2c921:
+#> ── <vertex sequence> 1/6 · named · from ba71885 ────────────────────────────────
 #> [1] E
 #> 
 #> 
 #> $edges
 #> $edges[[1]]
-#> + 3/9 edges from 9e2c921 (vertex names):
-#> [1] A->B B->C C->A
+#> ── <edge sequence> 3/9 · vertex names · from ba71885 ───────────────────────────
+#> [1] A → B  B → C  C → A 
 #> 
 #> $edges[[2]]
-#> + 4/9 edges from 9e2c921 (vertex names):
-#> [1] A->D D->E F->E F->A
+#> ── <edge sequence> 4/9 · vertex names · from ba71885 ───────────────────────────
+#> [1] A → D  D → E  F → E  F → A 
 #> 
 #> $edges[[3]]
-#> + 4/9 edges from 9e2c921 (vertex names):
-#> [1] A->D D->E F->E A->F
+#> ── <edge sequence> 4/9 · vertex names · from ba71885 ───────────────────────────
+#> [1] A → D  D → E  F → E  A → F 
 #> 
 #> $edges[[4]]
-#> + 2/9 edges from 9e2c921 (vertex names):
-#> [1] F->A A->F
+#> ── <edge sequence> 2/9 · vertex names · from ba71885 ───────────────────────────
+#> [1] F → A  A → F 
 #> 
 #> $edges[[5]]
-#> + 1/9 edge from 9e2c921 (vertex names):
-#> [1] E->E
+#> ── <edge sequence> 1/9 · vertex names · from ba71885 ───────────────────────────
+#> [1] E → E 
 #> 
 #> 
 simple_cycles(g, mode = "all", min = 2, max = 3) # limit cycle lengths
 #> $vertices
 #> $vertices[[1]]
-#> + 3/6 vertices, named, from 9e2c921:
+#> ── <vertex sequence> 3/6 · named · from ba71885 ────────────────────────────────
 #> [1] A B C
 #> 
 #> $vertices[[2]]
-#> + 2/6 vertices, named, from 9e2c921:
+#> ── <vertex sequence> 2/6 · named · from ba71885 ────────────────────────────────
 #> [1] A F
 #> 
 #> 
 #> $edges
 #> $edges[[1]]
-#> + 3/9 edges from 9e2c921 (vertex names):
-#> [1] A->B B->C C->A
+#> ── <edge sequence> 3/9 · vertex names · from ba71885 ───────────────────────────
+#> [1] A → B  B → C  C → A 
 #> 
 #> $edges[[2]]
-#> + 2/9 edges from 9e2c921 (vertex names):
-#> [1] F->A A->F
+#> ── <edge sequence> 2/9 · vertex names · from ba71885 ───────────────────────────
+#> [1] F → A  A → F 
 #> 
 #> 
 ```

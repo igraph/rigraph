@@ -15,7 +15,7 @@ algorithm by Davidson and Harel."><meta property="og:image" content="https://r.i
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9038</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ algorithm by Davidson and Harel."><meta property="og:image" content="https://r.i
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>The Davidson-Harel layout algorithm</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/layout.R" class="external-link"><code>R/layout.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/layout.R" class="external-link"><code>R/layout.R</code></a></small>
       <div class="d-none name"><code>layout_with_dh.Rd</code></div>
     </div>
 
@@ -60,18 +60,17 @@ algorithm by Davidson and Harel.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">layout_with_dh</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  coords <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  maxiter <span class="op">=</span> <span class="fl">10</span>,</span>
-<span>  fineiter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log2</a></span><span class="op">(</span><span class="fu"><a href="gorder.html">vcount</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  fineiter <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  cool.fact <span class="op">=</span> <span class="fl">0.75</span>,</span>
 <span>  weight.node.dist <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  weight.border <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  weight.edge.lengths <span class="op">=</span> <span class="fu"><a href="edge_density.html">edge_density</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">/</span><span class="fl">10</span>,</span>
-<span>  weight.edge.crossings <span class="op">=</span> <span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="edge_density.html">edge_density</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  weight.node.edge.dist <span class="op">=</span> <span class="fl">0.2</span> <span class="op">*</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="edge_density.html">edge_density</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">with_dh</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span>  weight.edge.lengths <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  weight.edge.crossings <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  weight.node.edge.dist <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -80,6 +79,10 @@ algorithm by Davidson and Harel.</p>
 
 <dl><dt id="arg-graph">graph<a class="anchor" aria-label="anchor" href="#arg-graph"></a></dt>
 <dd><p>The graph to lay out. Edge directions are ignored.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-coords">coords<a class="anchor" aria-label="anchor" href="#arg-coords"></a></dt>
@@ -93,7 +96,8 @@ coordinates.</p></dd>
 
 
 <dt id="arg-fineiter">fineiter<a class="anchor" aria-label="anchor" href="#arg-fineiter"></a></dt>
-<dd><p>Number of iterations in the fine tuning phase.</p></dd>
+<dd><p>Number of iterations in the fine tuning phase. The
+default <code>NULL</code> uses <code>max(10, log2(vcount(graph)))</code>.</p></dd>
 
 
 <dt id="arg-cool-fact">cool.fact<a class="anchor" aria-label="anchor" href="#arg-cool-fact"></a></dt>
@@ -113,21 +117,19 @@ on the border.</p></dd>
 
 <dt id="arg-weight-edge-lengths">weight.edge.lengths<a class="anchor" aria-label="anchor" href="#arg-weight-edge-lengths"></a></dt>
 <dd><p>Weight for the edge length component of the
-energy function.</p></dd>
+energy function. The default <code>NULL</code> uses <code>edge_density(graph) / 10</code>.</p></dd>
 
 
 <dt id="arg-weight-edge-crossings">weight.edge.crossings<a class="anchor" aria-label="anchor" href="#arg-weight-edge-crossings"></a></dt>
 <dd><p>Weight for the edge crossing component of the
-energy function.</p></dd>
+energy function. The default <code>NULL</code> uses
+<code>1 - sqrt(edge_density(graph))</code>.</p></dd>
 
 
 <dt id="arg-weight-node-edge-dist">weight.node.edge.dist<a class="anchor" aria-label="anchor" href="#arg-weight-node-edge-dist"></a></dt>
 <dd><p>Weight for the node-edge distance component of
-the energy function.</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Passed to <code>layout_with_dh()</code>.</p></dd>
+the energy function. The default <code>NULL</code> uses
+<code>0.2 * (1 - edge_density(graph))</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -168,7 +170,8 @@ Annealing. <em>ACM Transactions on Graphics</em> 15(4), pp. 301-331, 1996.</p>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="layout_with_fr.html">layout_with_fr()</a></code>,
-<code><a href="layout_with_kk.html">layout_with_kk()</a></code> for other layout algorithms.</p>
+<code><a href="layout_with_kk.html">layout_with_kk()</a></code> for other layout algorithms. See <code><a href="layout_spec.html">with_dh()</a></code> to build a
+lazy layout specification for <code><a href="add_layout_.html">add_layout_()</a></code>.</p>
 <p>Other graph layouts:
 <code><a href="add_layout_.html">add_layout_()</a></code>,
 <code><a href="component_wise.html">component_wise()</a></code>,

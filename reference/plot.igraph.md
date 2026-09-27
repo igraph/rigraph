@@ -15,9 +15,9 @@ plot(
   xlim = NULL,
   ylim = NULL,
   mark.groups = list(),
-  mark.shape = 1/2,
-  mark.col = rainbow(length(mark.groups), alpha = 0.3),
-  mark.border = rainbow(length(mark.groups), alpha = 1),
+  mark.shape = 0.5,
+  mark.col = NULL,
+  mark.border = NULL,
   mark.expand = 15,
   mark.lwd = 1,
   loop.size = 1,
@@ -37,8 +37,8 @@ plot(
 
 - add:
 
-  Logical scalar, whether to add the plot to the current device, or
-  delete the device's current contents first.
+  Logical, whether to add the plot to the current device, or delete the
+  device's current contents first.
 
 - xlim:
 
@@ -52,7 +52,7 @@ plot(
 
 - mark.groups:
 
-  A list of vertex id vectors. It is interpreted as a set of vertex
+  A list of vertex ID vectors. It is interpreted as a set of vertex
   groups. Each vertex group is highlighted, by plotting a colored
   smoothed polygon around and “under” it. See the arguments below to
   control the look of the polygons.
@@ -70,12 +70,14 @@ plot(
   A scalar or vector giving the colors of marking the polygons, in any
   format accepted by
   [`graphics::xspline()`](https://rdrr.io/r/graphics/xspline.html); e.g.
-  numeric color ids, symbolic color names, or colors in RGB.
+  numeric color IDs, symbolic color names, or colors in RGB. The default
+  `NULL` uses semi-transparent rainbow colors.
 
 - mark.border:
 
   A scalar or vector giving the colors of the borders of the vertex
-  group marking polygons. If it is `NA`, then no border is drawn.
+  group marking polygons. If it is `NA`, then no border is drawn. The
+  default `NULL` uses rainbow colors.
 
 - mark.expand:
 

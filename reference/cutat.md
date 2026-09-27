@@ -24,3 +24,7 @@ cutat(communities, no, steps)
 
   The number of merge operations to perform to produce the communities.
   Exactly one of `no` and `steps` must be supplied.
+
+## Related documentation in the C library
+
+[`le_community_to_membership()`](https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_le_community_to_membership)

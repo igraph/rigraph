@@ -17,7 +17,7 @@ consistent API."><meta property="og:image" content="https://r.igraph.org/logo.pn
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9038</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +49,7 @@ consistent API."><meta property="og:image" content="https://r.igraph.org/logo.pn
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Depth-first search</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/structural-properties.R" class="external-link"><code>R/structural-properties.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/structural-properties.R" class="external-link"><code>R/structural-properties.R</code></a></small>
       <div class="d-none name"><code>graph.dfs.Rd</code></div>
     </div>
 
@@ -98,40 +98,42 @@ ignores edge directions completely. ‘total’ is a synonym for
 
 
 <dt id="arg-unreachable">unreachable<a class="anchor" aria-label="anchor" href="#arg-unreachable"></a></dt>
-<dd><p>Logical scalar, whether the search should visit the
+<dd><p>Logical, whether the search should visit the
 vertices that are unreachable from the given root vertex (or vertices). If
 <code>TRUE</code>, then additional searches are performed until all vertices are
 visited.</p></dd>
 
 
 <dt id="arg-order">order<a class="anchor" aria-label="anchor" href="#arg-order"></a></dt>
-<dd><p>Logical scalar, whether to return the DFS ordering of the
+<dd><p>Logical, whether to return the DFS ordering of the
 vertices.</p></dd>
 
 
 <dt id="arg-order-out">order.out<a class="anchor" aria-label="anchor" href="#arg-order-out"></a></dt>
-<dd><p>Logical scalar, whether to return the ordering based on
+<dd><p>Logical, whether to return the ordering based on
 leaving the subtree of the vertex.</p></dd>
 
 
 <dt id="arg-father">father<a class="anchor" aria-label="anchor" href="#arg-father"></a></dt>
-<dd><p>Logical scalar, whether to return the father of the vertices.</p></dd>
+<dd><p>Logical, whether to return the father of the vertices.</p></dd>
 
 
 <dt id="arg-dist">dist<a class="anchor" aria-label="anchor" href="#arg-dist"></a></dt>
-<dd><p>Logical scalar, whether to return the distance from the root of
+<dd><p>Logical, whether to return the distance from the root of
 the search tree.</p></dd>
 
 
 <dt id="arg-in-callback">in.callback<a class="anchor" aria-label="anchor" href="#arg-in-callback"></a></dt>
-<dd><p>If not <code>NULL</code>, then it must be callback function.
-This is called whenever a vertex is visited. See details below.</p></dd>
+<dd><p>Callback function.
+This is called whenever a vertex is visited. See details below.
+Default: <code>NULL</code>.</p></dd>
 
 
 <dt id="arg-out-callback">out.callback<a class="anchor" aria-label="anchor" href="#arg-out-callback"></a></dt>
-<dd><p>If not <code>NULL</code>, then it must be callback function.
+<dd><p>Callback function.
 This is called whenever the subtree of a vertex is completed by the
-algorithm. See details below.</p></dd>
+algorithm. See details below.
+Default: <code>NULL</code>.</p></dd>
 
 
 <dt id="arg-extra">extra<a class="anchor" aria-label="anchor" href="#arg-extra"></a></dt>
@@ -139,7 +141,8 @@ algorithm. See details below.</p></dd>
 
 
 <dt id="arg-rho">rho<a class="anchor" aria-label="anchor" href="#arg-rho"></a></dt>
-<dd><p>The environment in which the callback function is evaluated.</p></dd>
+<dd><p>The environment in which the callback function is evaluated.
+The default <code>NULL</code> uses the caller's environment.</p></dd>
 
 
 <dt id="arg-neimode">neimode<a class="anchor" aria-label="anchor" href="#arg-neimode"></a></dt>

@@ -10,7 +10,7 @@ starting from the optimum.
 ## Usage
 
 ``` r
-consensus_tree(graph, hrg = NULL, start = FALSE, num.samples = 10000)
+consensus_tree(graph, hrg = NULL, ..., start = FALSE, num.samples = 10000)
 ```
 
 ## Arguments
@@ -24,6 +24,10 @@ consensus_tree(graph, hrg = NULL, start = FALSE, num.samples = 10000)
   A hierarchical random graph model, in the form of an `igraphHRG`
   object. `consensus_tree()` allows this to be `NULL` as well, then a
   HRG is fitted to the graph first, from a random starting point.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - start:
 
@@ -43,9 +47,9 @@ consensus_tree(graph, hrg = NULL, start = FALSE, num.samples = 10000)
 
 - parents:
 
-  For each vertex, the id of its parent vertex is stored, or zero, if
-  the vertex is the root vertex in the tree. The first n vertex ids
-  (from 0) refer to the original vertices of the graph, the other ids
+  For each vertex, the ID of its parent vertex is stored, or zero, if
+  the vertex is the root vertex in the tree. The first n vertex IDs
+  (from 0) refer to the original vertices of the graph, the other IDs
   refer to vertex groups.
 
 - weights:

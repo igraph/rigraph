@@ -1,9 +1,9 @@
-# Get the id of a graph
+# Get the ID of a graph
 
-Graph ids are used to check that a vertex or edge sequence belongs to a
+Graph IDs are used to check that a vertex or edge sequence belongs to a
 graph. If you create a new graph by changing the structure of a graph,
-the new graph will have a new id. Changing the attributes will not
-change the id.
+the new graph will have a new ID. Changing the attributes will not
+change the ID.
 
 ## Usage
 
@@ -23,21 +23,21 @@ graph_id(x, ...)
 
 ## Value
 
-The id of the graph, a character scalar. For vertex and edge sequences
-the id of the graph they were created from.
+The ID of the graph, a character scalar. For vertex and edge sequences
+the ID of the graph they were created from.
 
 ## Examples
 
 ``` r
 g <- make_ring(10)
 graph_id(g)
-#> [1] "8551d194-cdf0-442b-bd7a-6bc802e9913c"
+#> [1] "cb29570a-1794-42e6-85b2-1f07db90f2b2"
 graph_id(V(g))
-#> [1] "8551d194-cdf0-442b-bd7a-6bc802e9913c"
+#> [1] "cb29570a-1794-42e6-85b2-1f07db90f2b2"
 graph_id(E(g))
-#> [1] "8551d194-cdf0-442b-bd7a-6bc802e9913c"
+#> [1] "cb29570a-1794-42e6-85b2-1f07db90f2b2"
 
 g2 <- g + 1
 graph_id(g2)
-#> [1] "8a15f2ba-b7eb-4ccd-9589-5840ef0fa02e"
+#> [1] "ce22d541-d458-4fa4-8517-bc354d4064bc"
 ```

@@ -10,11 +10,11 @@ also others have to be pre-defined.
 ``` r
 tkplot(graph, canvas.width = 450, canvas.height = 450, ...)
 
-tk_close(tkp.id, window.close = TRUE)
+tk_close(tkp.id, ..., window.close = TRUE)
 
 tk_off()
 
-tk_fit(tkp.id, width = NULL, height = NULL)
+tk_fit(tkp.id, ..., width = NULL, height = NULL)
 
 tk_center(tkp.id)
 
@@ -22,11 +22,11 @@ tk_reshape(tkp.id, newlayout, ..., params)
 
 tk_postscript(tkp.id)
 
-tk_coords(tkp.id, norm = FALSE)
+tk_coords(tkp.id, ..., norm = FALSE)
 
 tk_set_coords(tkp.id, coords)
 
-tk_rotate(tkp.id, degree = NULL, rad = NULL)
+tk_rotate(tkp.id, ..., degree = NULL, rad = NULL)
 
 tk_canvas(tkp.id)
 ```
@@ -43,13 +43,14 @@ tk_canvas(tkp.id)
 
 - ...:
 
-  Additional plotting parameters. See
+  For `tkplot()`, additional plotting parameters, see
   [igraph.plotting](https://r.igraph.org/reference/plot.common.md) for
-  the complete list.
+  the complete list. For `tk_close()`, `tk_fit()`, `tk_coords()` and
+  `tk_rotate()`, these dots must be empty.
 
 - tkp.id:
 
-  The id of the tkplot window to close/reshape/etc.
+  The ID of the tkplot window to close/reshape/etc.
 
 - window.close:
 
@@ -90,7 +91,7 @@ tk_canvas(tkp.id)
 
 ## Value
 
-`tkplot()` returns an integer, the id of the plot, this can be used to
+`tkplot()` returns an integer, the ID of the plot, this can be used to
 manipulate it from the command line.
 
 `tk_canvas()` returns `tkwin` object, the Tk canvas.
@@ -130,10 +131,10 @@ be used.
 
 The `tkplot()` command creates a new Tk window with the graphical
 representation of `graph`. The command returns an integer number, the
-tkplot id. The other commands utilize this id to be able to query or
+tkplot ID. The other commands utilize this ID to be able to query or
 manipulate the plot.
 
-`tk_close()` closes the Tk plot with id `tkp.id`.
+`tk_close()` closes the Tk plot with ID `tkp.id`.
 
 `tk_off()` closes all Tk plots.
 
@@ -199,12 +200,7 @@ tkplot.center tkplot.rotate
 
 ## Related documentation in the C library
 
-[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`is_directed()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed),
-[`get_edgelist()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist),
-[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
 

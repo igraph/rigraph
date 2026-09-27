@@ -8,6 +8,7 @@ evaluation of graph isomorphism testing algorithms.
 ``` r
 graph_from_graphdb(
   url = NULL,
+  ...,
   prefix = "iso",
   type = "r001",
   nodes = NULL,
@@ -23,7 +24,11 @@ graph_from_graphdb(
 
 - url:
 
-  If not `NULL` it is a complete URL with the file to import.
+  Complete URL with the file to import. Default: `NULL`.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - prefix:
 
@@ -58,13 +63,12 @@ graph_from_graphdb(
 
 - compressed:
 
-  Logical constant, if TRUE than the file is expected to be compressed
-  by gzip. If `url` is `NULL` then a ‘`.gz`’ suffix is added to the
-  filename.
+  Logical, if TRUE than the file is expected to be compressed by gzip.
+  If `url` is `NULL` then a ‘`.gz`’ suffix is added to the filename.
 
 - directed:
 
-  Logical constant, whether to create a directed graph.
+  Logical, whether to create a directed graph.
 
 ## Value
 

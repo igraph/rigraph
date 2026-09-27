@@ -30,8 +30,14 @@ Constructor modifiers (and related functions):
 
 ``` r
 make_(ring(10), with_graph_(name = "10-ring"))
-#> IGRAPH ce443ce U--- 10 10 -- 10-ring
-#> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from ce443ce:
-#>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
+#> ── <igraph> 10-ring ───────────────────────────────────────────────── 7e6d080 ──
+#> ℹ undirected
+#> ℹ 10 vertices · 10 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#>  [1] 1 ─ 2   2 ─ 3   3 ─ 4   4 ─ 5   5 ─ 6   6 ─ 7   7 ─ 8   8 ─ 9   9 ─ 10 
+#> [10] 1 ─ 10 
 ```

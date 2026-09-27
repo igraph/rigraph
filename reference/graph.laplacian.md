@@ -36,8 +36,8 @@ graph.laplacian(
 
 - sparse:
 
-  Logical scalar, whether to return the result as a sparse matrix. The
-  `Matrix` package is required for sparse matrices.
+  Logical, whether to return the result as a sparse matrix. The `Matrix`
+  package is required for sparse matrices.
 
 ## Related documentation in the C library
 

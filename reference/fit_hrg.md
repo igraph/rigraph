@@ -12,7 +12,7 @@ in this package.
 ## Usage
 
 ``` r
-fit_hrg(graph, hrg = NULL, start = FALSE, steps = 0)
+fit_hrg(graph, hrg = NULL, ..., start = FALSE, steps = 0)
 ```
 
 ## Arguments
@@ -27,6 +27,10 @@ fit_hrg(graph, hrg = NULL, start = FALSE, steps = 0)
   A hierarchical random graph model, in the form of an `igraphHRG`
   object. `fit_hrg()` allows this to be `NULL`, in which case a random
   starting point is used for the fitting.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - start:
 
