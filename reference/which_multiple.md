@@ -7,13 +7,13 @@ A graph without multiple and loop edges is called a simple graph.
 ## Usage
 
 ``` r
-which_multiple(graph, eids = NULL)
+which_multiple(graph, eids = E(graph))
 
 any_multiple(graph)
 
-count_multiple(graph, eids = NULL)
+count_multiple(graph, eids = E(graph))
 
-which_loop(graph, eids = NULL)
+which_loop(graph, eids = E(graph))
 
 any_loop(graph)
 
@@ -28,15 +28,15 @@ count_loops(graph)
 
 - eids:
 
-  The edges to which the query is restricted. The default `NULL` selects
-  all edges.
+  The edges to which the query is restricted. By default this is all
+  edges in the graph.
 
 ## Value
 
-`any_loop()` and `any_multiple()` return a Logical. `which_loop()` and
-`which_multiple()` return a logical vector. `count_loops()` returns a
-numeric scalar with the total number of loop edges. `count_multiple()`
-returns a numeric vector.
+`any_loop()` and `any_multiple()` return a logical scalar.
+`which_loop()` and `which_multiple()` return a logical vector.
+`count_loops()` returns a numeric scalar with the total number of loop
+edges. `count_multiple()` returns a numeric vector.
 
 ## Details
 
@@ -148,7 +148,7 @@ which_multiple(make_graph(c(1, 2, 2, 1), dir = FALSE))
 # Remove multiple edges but keep multiplicity
 g <- sample_pa(10, m = 3, algorithm = "bag")
 E(g)$weight <- count_multiple(g)
-g <- simplify(g, edge_attr_combine = list(weight = "min"))
+g <- simplify(g, edge.attr.comb = list(weight = "min"))
 any(which_multiple(g))
 #> [1] FALSE
 E(g)$weight

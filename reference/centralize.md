@@ -6,7 +6,7 @@ measure from the centrality scores of the vertices.
 ## Usage
 
 ``` r
-centralize(scores, ..., theoretical.max = 0, normalized = TRUE)
+centralize(scores, theoretical.max = 0, normalized = TRUE)
 ```
 
 ## Arguments
@@ -14,10 +14,6 @@ centralize(scores, ..., theoretical.max = 0, normalized = TRUE)
 - scores:
 
   The vertex level centrality scores.
-
-- ...:
-
-  These dots are for future extensions and must be empty.
 
 - theoretical.max:
 
@@ -28,8 +24,8 @@ centralize(scores, ..., theoretical.max = 0, normalized = TRUE)
 
 - normalized:
 
-  Logical. Whether to normalize the graph level centrality score by
-  dividing by the supplied theoretical maximum.
+  Logical scalar. Whether to normalize the graph level centrality score
+  by dividing by the supplied theoretical maximum.
 
 ## Value
 
@@ -97,10 +93,6 @@ centr_eigen(g, directed = FALSE)$centralization
 deg <- degree(g)
 tmax <- centr_degree_tmax(g, loops = FALSE)
 centralize(deg, tmax)
-#> Warning: Calling `centralize()` with positional or abbreviated arguments was deprecated
-#> in igraph 3.0.0.
-#> ℹ Detected call: centralize(scores, theoretical.max)
-#> ℹ Use instead: centralize(scores, theoretical.max = )
 #> [1] 0.1645032
 
 # The most centralized graph according to eigenvector centrality

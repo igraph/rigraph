@@ -8,7 +8,6 @@ algorithm minimized edge crossings.
 ``` r
 layout_with_sugiyama(
   graph,
-  ...,
   layers = NULL,
   hgap = 1,
   vgap = 1,
@@ -16,6 +15,8 @@ layout_with_sugiyama(
   weights = NULL,
   attributes = c("default", "all", "none")
 )
+
+with_sugiyama(...)
 ```
 
 ## Arguments
@@ -24,15 +25,11 @@ layout_with_sugiyama(
 
   The input graph.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - layers:
 
-  A numeric vector of the layer indices of the vertices. Layers are
-  numbered from one. Default: `NULL`, igraph calculates the layers
-  automatically.
+  A numeric vector or `NULL`. If not `NULL`, then it should specify the
+  layer index of the vertices. Layers are numbered from one. If `NULL`,
+  then igraph calculates the layers automatically.
 
 - hgap:
 
@@ -64,6 +61,10 @@ layout_with_sugiyama(
   vertex attributes and the ‘arrow.mode’ and ‘arrow.size’ edge
   attributes. ‘all’ keep all graph, vertex and edge attributes, ‘none’
   keeps none of them.
+
+- ...:
+
+  Passed to `layout_with_sugiyama()`.
 
 ## Value
 
@@ -124,10 +125,6 @@ Hierarchical Systems". IEEE Transactions on Systems, Man and Cybernetics
 11(2):109-125, 1981.
 
 ## See also
-
-[`with_sugiyama()`](https://r.igraph.org/reference/layout_spec.md) to
-build a lazy layout specification for
-[`add_layout_()`](https://r.igraph.org/reference/add_layout_.md).
 
 Other graph layouts:
 [`add_layout_()`](https://r.igraph.org/reference/add_layout_.md),
@@ -224,7 +221,7 @@ lay1 <- layout_with_sugiyama(DC, layers = apply(sapply(
 ), 1, which))
 
 ## Simple plot, not very nice
-par(mar = rep(0.1, 4))
+par(mar = rep(.1, 4))
 plot(DC, layout = lay1$layout, vertex.label.cex = 0.5)
 
 
@@ -295,7 +292,7 @@ origvert <- c(rep(TRUE, vcount(ex)), rep(FALSE, nrow(layex$layout.dummy)))
 realedge <- as_edgelist(layex$extd_graph)[, 2] <= vcount(ex)
 plot(layex$extd_graph,
   vertex.label.cex = 0.5,
-  edge.arrow.size = 0.5,
+  edge.arrow.size = .5,
   vertex.size = ifelse(origvert, 5, 0),
   vertex.shape = ifelse(origvert, "square", "none"),
   vertex.label = ifelse(origvert, V(ex)$name, ""),

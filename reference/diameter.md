@@ -5,17 +5,11 @@ The diameter of a graph is the length of the longest geodesic.
 ## Usage
 
 ``` r
-diameter(graph, ..., directed = TRUE, unconnected = TRUE, weights = NULL)
+diameter(graph, directed = TRUE, unconnected = TRUE, weights = NULL)
 
-get_diameter(graph, ..., directed = TRUE, unconnected = TRUE, weights = NULL)
+get_diameter(graph, directed = TRUE, unconnected = TRUE, weights = NULL)
 
-farthest_vertices(
-  graph,
-  ...,
-  directed = TRUE,
-  unconnected = TRUE,
-  weights = NULL
-)
+farthest_vertices(graph, directed = TRUE, unconnected = TRUE, weights = NULL)
 ```
 
 ## Arguments
@@ -23,10 +17,6 @@ farthest_vertices(
 - graph:
 
   The graph to analyze.
-
-- ...:
-
-  These dots are for future extensions and must be empty.
 
 - directed:
 
@@ -67,7 +57,7 @@ The diameter is calculated by using a breadth-first search like method.
 many shortest paths of the length of the diameter, then it returns the
 first one found.
 
-`farthest_vertices()` returns two vertex IDs, the vertices which are
+`farthest_vertices()` returns two vertex ids, the vertices which are
 connected by the diameter path.
 
 ## Related documentation in the C library
@@ -110,11 +100,11 @@ E(g)$weight <- sample(seq_len(ecount(g)))
 diameter(g)
 #> [1] 27
 get_diameter(g)
-#> ── <vertex sequence> 5/10 · from 906ee29 ───────────────────────────────────────
+#> + 5/10 vertices, from 164d59b:
 #> [1]  1 10  9  8  7
 diameter(g, weights = NA)
 #> [1] 5
 get_diameter(g, weights = NA)
-#> ── <vertex sequence> 6/10 · from 906ee29 ───────────────────────────────────────
+#> + 6/10 vertices, from 164d59b:
 #> [1] 1 2 3 4 5 6
 ```

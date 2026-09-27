@@ -10,8 +10,8 @@ what to do with the vertex/edge attributes in these cases.
 ## Details
 
 The functions that support the combination of attributes have one or two
-extra arguments called `vertex_attr_combine` and/or `edge_attr_combine`
-that specify how to perform the mapping of the attributes. E.g.
+extra arguments called `vertex.attr.comb` and/or `edge.attr.comb` that
+specify how to perform the mapping of the attributes. E.g.
 [`contract()`](https://r.igraph.org/reference/contract.md) contracts
 many vertices into a single one, the attributes of the vertices can be
 combined and stores as the vertex attributes of the new graph.
@@ -112,23 +112,6 @@ The following combination behaviors are predefined:
   [`c()`](https://rdrr.io/r/base/c.html) function. This results almost
   always a complex attribute.
 
-- "rename":
-
-  Keep clashing attributes side-by-side under disambiguated names by
-  appending `_1`, `_2`, ... suffixes. For example, if two graphs each
-  have an attribute called `group`, the resulting graph will have
-  attributes `group_1` and `group_2`, corresponding to the first and
-  second input graph, respectively. This is the default for the graph
-  operators [`union()`](https://r.igraph.org/reference/union.md),
-  [`intersection()`](https://r.igraph.org/reference/intersection.md),
-  [`compose()`](https://r.igraph.org/reference/compose.md) and
-  [`disjoint_union()`](https://r.igraph.org/reference/disjoint_union.md)
-  and preserves their historical behaviour. Only those operators accept
-  `"rename"`; [`simplify()`](https://r.igraph.org/reference/simplify.md)
-  and [`contract()`](https://r.igraph.org/reference/contract.md) will
-  reject it because the rename strategy has no per-element
-  interpretation when many input values collapse into one.
-
 ## See also
 
 [`graph_attr()`](https://r.igraph.org/reference/graph_attr.md),
@@ -175,68 +158,43 @@ igraph_options(print.vertex.attributes = TRUE)
 igraph_options(print.edge.attributes = TRUE)
 
 ## new attribute is the sum of the old ones
-simplify(g, edge_attr_combine = "sum")
-#> ── <igraph> ───────────────────────────────────────────────────────── 9c77a74 ──
-#> ℹ directed · weighted
-#> ℹ 4 vertices · 3 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → edge:   weight <dbl>
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#> [1] 1 → 2  2 → 3  3 → 4 
+simplify(g, edge.attr.comb = "sum")
+#> IGRAPH f6139af D-W- 4 3 -- 
+#> + attr: weight (e/n)
+#> + edges from f6139af:
+#> [1] 1->2 2->3 3->4
 
 ## collect attributes into a string
-simplify(g, edge_attr_combine = toString)
-#> ── <igraph> ───────────────────────────────────────────────────────── f9958ac ──
-#> ℹ directed · weighted
-#> ℹ 4 vertices · 3 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → edge:   weight <chr>
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#> [1] 1 → 2  2 → 3  3 → 4 
+simplify(g, edge.attr.comb = toString)
+#> IGRAPH b634200 D-W- 4 3 -- 
+#> + attr: weight (e/c)
+#> + edges from b634200:
+#> [1] 1->2 2->3 3->4
 
 ## concatenate them into a vector, this creates a complex
 ## attribute
-simplify(g, edge_attr_combine = "concat")
-#> ── <igraph> ───────────────────────────────────────────────────────── cc38cf4 ──
-#> ℹ directed · weighted
-#> ℹ 4 vertices · 3 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → edge:   weight <list>
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#> [1] 1 → 2  2 → 3  3 → 4 
+simplify(g, edge.attr.comb = "concat")
+#> IGRAPH 224bb9e D-W- 4 3 -- 
+#> + attr: weight (e/x)
+#> + edges from 224bb9e:
+#> [1] 1->2 2->3 3->4
 
 E(g)$name <- letters[seq_len(ecount(g))]
 
 ## both attributes are collected into strings
-simplify(g, edge_attr_combine = toString)
-#> ── <igraph> ───────────────────────────────────────────────────────── ee9267e ──
-#> ℹ directed · weighted
-#> ℹ 4 vertices · 3 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → edge:   weight <chr>, name <chr>
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#> [1] 1 → 2  2 → 3  3 → 4 
+simplify(g, edge.attr.comb = toString)
+#> IGRAPH 06bce19 D-W- 4 3 -- 
+#> + attr: weight (e/c), name (e/c)
+#> + edges from 06bce19:
+#> [1] 1->2 2->3 3->4
 
 ## harmonic average of weights, names are dropped
-simplify(g, edge_attr_combine = list(
+simplify(g, edge.attr.comb = list(
   weight = function(x) length(x) / sum(1 / x),
   name = "ignore"
 ))
-#> ── <igraph> ───────────────────────────────────────────────────────── 3ffd997 ──
-#> ℹ directed · weighted
-#> ℹ 4 vertices · 3 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → edge:   weight <dbl>
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#> [1] 1 → 2  2 → 3  3 → 4 
+#> IGRAPH 9011ee4 D-W- 4 3 -- 
+#> + attr: weight (e/n)
+#> + edges from 9011ee4:
+#> [1] 1->2 2->3 3->4
 ```

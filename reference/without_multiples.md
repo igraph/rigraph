@@ -24,26 +24,18 @@ Constructor modifiers (and related functions):
 
 ``` r
 sample_(pa(10, m = 3, algorithm = "bag"))
-#> ── <igraph> Barabasi graph ────────────────────────────────────────── 145ba6c ──
-#> ℹ directed
-#> ℹ 10 vertices · 27 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, power <dbl>, m <dbl>, zero.appeal <dbl>, algorithm <chr>
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#>  [1] 2 → 1   2 → 1   2 → 1   3 → 2   3 → 2   3 → 1   4 → 1   4 → 3   4 → 1  
-#> [10] 5 → 3   5 → 1   5 → 3   6 → 1   6 → 3   6 → 1   7 → 1   7 → 3   7 → 3  
-#> [19] 8 → 1   8 → 1   8 → 3   9 → 1   9 → 3   9 → 1   10 → 1  10 → 1  10 → 2 
+#> IGRAPH 854b391 D--- 10 27 -- Barabasi graph
+#> + attr: name (g/c), power (g/n), m (g/n), zero.appeal (g/n), algorithm
+#> | (g/c)
+#> + edges from 854b391:
+#>  [1]  2->1  2->1  2->1  3->2  3->2  3->1  4->1  4->3  4->1  5->3  5->1  5->3
+#> [13]  6->1  6->3  6->1  7->1  7->3  7->3  8->1  8->1  8->3  9->1  9->3  9->1
+#> [25] 10->1 10->1 10->2
 sample_(pa(10, m = 3, algorithm = "bag"), without_multiples())
-#> ── <igraph> Barabasi graph ────────────────────────────────────────── eb0f09e ──
-#> ℹ directed
-#> ℹ 10 vertices · 16 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, power <dbl>, m <dbl>, zero.appeal <dbl>, algorithm <chr>
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#>  [1] 2 → 1   3 → 1   4 → 1   4 → 2   4 → 3   5 → 1   5 → 2   6 → 3   7 → 1  
-#> [10] 7 → 3   8 → 1   8 → 6   9 → 1   9 → 2   9 → 8   10 → 1 
+#> IGRAPH 14ab1b0 D--- 10 16 -- Barabasi graph
+#> + attr: name (g/c), power (g/n), m (g/n), zero.appeal (g/n), algorithm
+#> | (g/c)
+#> + edges from 14ab1b0:
+#>  [1]  2->1  3->1  4->1  4->2  4->3  5->1  5->2  6->3  7->1  7->3  8->1  8->6
+#> [13]  9->1  9->2  9->8 10->1
 ```

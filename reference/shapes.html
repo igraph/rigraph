@@ -15,7 +15,7 @@ vertex shapes when plotting graphs."><meta property="og:image" content="https://
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9038</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ vertex shapes when plotting graphs."><meta property="og:image" content="https://
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Various vertex shapes when plotting igraph graphs</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/plot.shapes.R" class="external-link"><code>R/plot.shapes.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/plot.shapes.R" class="external-link"><code>R/plot.shapes.R</code></a></small>
       <div class="d-none name"><code>shapes.Rd</code></div>
     </div>
 
@@ -64,7 +64,7 @@ vertex shapes when plotting graphs.</p>
 <span></span>
 <span><span class="fu">shape_noplot</span><span class="op">(</span><span class="va">coords</span>, v <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">params</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">add_shape</span><span class="op">(</span><span class="va">shape</span>, <span class="va">...</span>, clip <span class="op">=</span> <span class="cn">NULL</span>, plot <span class="op">=</span> <span class="cn">NULL</span>, parameters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">add_shape</span><span class="op">(</span><span class="va">shape</span>, clip <span class="op">=</span> <span class="va">shape_noclip</span>, plot <span class="op">=</span> <span class="va">shape_noplot</span>, parameters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -82,18 +82,12 @@ vertex shapes are returned.</p></dd>
 functions below.</p></dd>
 
 
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>These dots are for future extensions and must be empty.</p></dd>
-
-
 <dt id="arg-clip">clip<a class="anchor" aria-label="anchor" href="#arg-clip"></a></dt>
-<dd><p>An R function object, the clipping function. The default
-<code>NULL</code> uses <code>shape_noclip</code>.</p></dd>
+<dd><p>An R function object, the clipping function.</p></dd>
 
 
 <dt id="arg-plot">plot<a class="anchor" aria-label="anchor" href="#arg-plot"></a></dt>
-<dd><p>An R function object, the plotting function. The default
-<code>NULL</code> uses <code>shape_noplot</code>.</p></dd>
+<dd><p>An R function object, the plotting function.</p></dd>
 
 
 <dt id="arg-parameters">parameters<a class="anchor" aria-label="anchor" href="#arg-parameters"></a></dt>
@@ -154,7 +148,7 @@ with the clipping applied.</p>
 <dd><p>The coordinates of the vertices, a matrix with two columns.</p></dd>
 
 <dt>v</dt>
-<dd><p>The IDs of the vertices to plot. It should match the number of rows in the <code>coords</code> argument.</p></dd>
+<dd><p>The ids of the vertices to plot. It should match the number of rows in the <code>coords</code> argument.</p></dd>
 
 <dt>params</dt>
 <dd><p>The same as for the clipping function, see above.</p></dd>

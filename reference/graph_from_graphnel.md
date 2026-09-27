@@ -10,13 +10,7 @@ vertex names will be ignored.
 ## Usage
 
 ``` r
-graph_from_graphnel(
-  graphNEL,
-  ...,
-  name = TRUE,
-  weight = TRUE,
-  unlist.attrs = TRUE
-)
+graph_from_graphnel(graphNEL, name = TRUE, weight = TRUE, unlist.attrs = TRUE)
 ```
 
 ## Arguments
@@ -25,26 +19,22 @@ graph_from_graphnel(
 
   The graphNEL graph.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - name:
 
-  Logical, whether to add graphNEL vertex names as an igraph vertex
-  attribute called ‘`name`’.
+  Logical scalar, whether to add graphNEL vertex names as an igraph
+  vertex attribute called ‘`name`’.
 
 - weight:
 
-  Logical, whether to add graphNEL edge weights as an igraph edge
+  Logical scalar, whether to add graphNEL edge weights as an igraph edge
   attribute called ‘`weight`’. (graphNEL graphs are always weighted.)
 
 - unlist.attrs:
 
-  Logical. graphNEL attribute query functions return the values of the
-  attributes in R lists, if this argument is `TRUE` (the default) these
-  will be converted to atomic vectors, whenever possible, before adding
-  them to the igraph graph.
+  Logical scalar. graphNEL attribute query functions return the values
+  of the attributes in R lists, if this argument is `TRUE` (the default)
+  these will be converted to atomic vectors, whenever possible, before
+  adding them to the igraph graph.
 
 ## Value
 
@@ -96,17 +86,11 @@ V(g)$name <- letters[1:10]
 GNEL <- as_graphnel(g)
 g2 <- graph_from_graphnel(GNEL)
 g2
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 8a4ce94 ──
-#> ℹ undirected · named · weighted
-#> ℹ 10 vertices · 10 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
-#> → vertex: name <chr>
-#> → edge:   weight <dbl>
-#> 
-#> ── Edges (vertex names) ────────────────────────────────────────────────────────
-#>  [1] a ─ b  a ─ j  b ─ c  c ─ d  d ─ e  e ─ f  f ─ g  g ─ h  h ─ i  i ─ j 
+#> IGRAPH fe5fbef UNW- 10 10 -- Ring graph
+#> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c), weight
+#> | (e/n)
+#> + edges from fe5fbef (vertex names):
+#>  [1] a--b a--j b--c c--d d--e e--f f--g g--h h--i i--j
 
 ## Directed
 g3 <- make_star(10, mode = "in")
@@ -114,15 +98,8 @@ V(g3)$name <- letters[1:10]
 GNEL2 <- as_graphnel(g3)
 g4 <- graph_from_graphnel(GNEL2)
 g4
-#> ── <igraph> In-star ───────────────────────────────────────────────── 2656b1b ──
-#> ℹ directed · named · weighted
-#> ℹ 10 vertices · 9 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, mode <chr>, center <dbl>
-#> → vertex: name <chr>
-#> → edge:   weight <dbl>
-#> 
-#> ── Edges (vertex names) ────────────────────────────────────────────────────────
-#> [1] b → a  c → a  d → a  e → a  f → a  g → a  h → a  i → a  j → a 
+#> IGRAPH 34ecf63 DNW- 10 9 -- In-star
+#> + attr: name (g/c), mode (g/c), center (g/n), name (v/c), weight (e/n)
+#> + edges from 34ecf63 (vertex names):
+#> [1] b->a c->a d->a e->a f->a g->a h->a i->a j->a
 ```

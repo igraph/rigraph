@@ -2,15 +2,17 @@
 
 `graph_from_edgelist()` creates a graph from an edge list. Its argument
 is a two-column matrix, each row defines one edge. If it is a numeric
-matrix then its elements are interpreted as vertex IDs. If it is a
+matrix then its elements are interpreted as vertex ids. If it is a
 character matrix then it is interpreted as symbolic vertex names and a
-vertex ID will be assigned to each name, and also a `name` vertex
+vertex id will be assigned to each name, and also a `name` vertex
 attribute will be added.
 
 ## Usage
 
 ``` r
-graph_from_edgelist(el, ..., directed = TRUE)
+graph_from_edgelist(el, directed = TRUE)
+
+from_edgelist(...)
 ```
 
 ## Arguments
@@ -19,13 +21,13 @@ graph_from_edgelist(el, ..., directed = TRUE)
 
   The edge list, a two column matrix, character or numeric.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - directed:
 
   Whether to create a directed graph.
+
+- ...:
+
+  Passed to `graph_from_edgelist()`.
 
 ## Value
 
@@ -37,15 +39,9 @@ An igraph graph.
 [`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty),
 [`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
 [`famous()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
-[`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
-[`is_simple()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple)
+[`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify)
 
 ## See also
-
-[`from_edgelist()`](https://r.igraph.org/reference/constructor_spec.md)
-to build a lazy constructor specification for
-[`make_()`](https://r.igraph.org/reference/make_.md) or
-[`sample_()`](https://r.igraph.org/reference/sample_.md).
 
 Other deterministic constructors:
 [`graph_from_atlas()`](https://r.igraph.org/reference/graph_from_atlas.md),
@@ -70,23 +66,14 @@ Other deterministic constructors:
 ``` r
 el <- matrix(c("foo", "bar", "bar", "foobar"), nc = 2, byrow = TRUE)
 graph_from_edgelist(el)
-#> ── <igraph> ───────────────────────────────────────────────────────── 70ed165 ──
-#> ℹ directed · named
-#> ℹ 3 vertices · 2 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → vertex: name <chr>
-#> 
-#> ── Edges (vertex names) ────────────────────────────────────────────────────────
-#> [1] foo → bar     bar → foobar 
+#> IGRAPH 9690407 DN-- 3 2 -- 
+#> + attr: name (v/c)
+#> + edges from 9690407 (vertex names):
+#> [1] foo->bar    bar->foobar
 
 # Create a ring by hand
 graph_from_edgelist(cbind(1:10, c(2:10, 1)))
-#> ── <igraph> ───────────────────────────────────────────────────────── f42f1be ──
-#> ℹ directed
-#> ℹ 10 vertices · 10 edges
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#>  [1] 1 → 2   2 → 3   3 → 4   4 → 5   5 → 6   6 → 7   7 → 8   8 → 9   9 → 10 
-#> [10] 10 → 1 
+#> IGRAPH aa9a18d D--- 10 10 -- 
+#> + edges from aa9a18d:
+#>  [1]  1-> 2  2-> 3  3-> 4  4-> 5  5-> 6  6-> 7  7-> 8  8-> 9  9->10 10-> 1
 ```

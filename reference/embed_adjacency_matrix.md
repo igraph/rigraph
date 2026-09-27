@@ -8,12 +8,11 @@ Spectral decomposition of the adjacency matrices of graphs.
 embed_adjacency_matrix(
   graph,
   no,
-  ...,
   weights = NULL,
   which = c("lm", "la", "sa"),
   scaled = TRUE,
-  cvec = NULL,
-  options = NULL
+  cvec = strength(graph, weights = weights)/(vcount(graph) - 1),
+  options = arpack_defaults()
 )
 ```
 
@@ -29,10 +28,6 @@ embed_adjacency_matrix(
   spectral embedding. Should be smaller than the number of vertices. The
   largest `no`-dimensional non-zero singular values are used for the
   spectral embedding.
-
-- ...:
-
-  These dots are for future extensions and must be empty.
 
 - weights:
 
@@ -51,20 +46,19 @@ embed_adjacency_matrix(
 
 - scaled:
 
-  Logical, if `FALSE`, then \\U\\ and \\V\\ are returned instead of
-  \\X\\ and \\Y\\.
+  Logical scalar, if `FALSE`, then \\U\\ and \\V\\ are returned instead
+  of \\X\\ and \\Y\\.
 
 - cvec:
 
   A numeric vector, its length is the number vertices in the graph. This
-  vector is added to the diagonal of the adjacency matrix. The default
-  `NULL` uses
-  `strength(graph, weights = weights) / (vcount(graph) - 1)`.
+  vector is added to the diagonal of the adjacency matrix.
 
 - options:
 
   A named list containing the parameters for the SVD computation
-  algorithm in ARPACK. The default `NULL` uses the values given by
+  algorithm in ARPACK. By default, the list of values is assigned the
+  values given by
   [`arpack_defaults()`](https://r.igraph.org/reference/arpack.md).
 
 ## Value

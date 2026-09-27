@@ -6,7 +6,7 @@ Plot a hierarchical random graph as a dendrogram.
 
 ``` r
 # S3 method for class 'igraphHRG'
-plot_dendrogram(x, mode = NULL, ...)
+plot_dendrogram(x, mode = igraph_opt("dend.plot.type"), ...)
 ```
 
 ## Arguments
@@ -18,8 +18,7 @@ plot_dendrogram(x, mode = NULL, ...)
 
 - mode:
 
-  Which dendrogram plotting function to use. See details below. The
-  default `NULL` uses the `dend.plot.type` igraph option.
+  Which dendrogram plotting function to use. See details below.
 
 - ...:
 

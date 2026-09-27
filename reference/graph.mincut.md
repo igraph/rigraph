@@ -26,11 +26,11 @@ graph.mincut(
 
 - source:
 
-  The ID of the source vertex.
+  The id of the source vertex.
 
 - target:
 
-  The ID of the target vertex (sometimes also called sink).
+  The id of the target vertex (sometimes also called sink).
 
 - capacity:
 
@@ -39,9 +39,9 @@ graph.mincut(
 
 - value.only:
 
-  Logical, if `TRUE` only the minimum cut value is returned, if `FALSE`
-  the edges in the cut and a the two (or more) partitions are also
-  returned.
+  Logical scalar, if `TRUE` only the minimum cut value is returned, if
+  `FALSE` the edges in the cut and a the two (or more) partitions are
+  also returned.
 
 ## Related documentation in the C library
 

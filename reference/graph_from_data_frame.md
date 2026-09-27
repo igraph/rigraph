@@ -8,7 +8,9 @@ containing the (symbolic) edge list and edge/vertex attributes.
 ``` r
 as_data_frame(x, what = c("edges", "vertices", "both"))
 
-graph_from_data_frame(d, directed = TRUE, ..., vertices = NULL)
+graph_from_data_frame(d, directed = TRUE, vertices = NULL)
+
+from_data_frame(...)
 ```
 
 ## Arguments
@@ -30,17 +32,17 @@ graph_from_data_frame(d, directed = TRUE, ..., vertices = NULL)
 
 - directed:
 
-  Logical, whether or not to create a directed graph.
-
-- ...:
-
-  These dots are for future extensions and must be empty.
+  Logical scalar, whether or not to create a directed graph.
 
 - vertices:
 
   A data frame with vertex metadata, or `NULL`. See details below. Since
   version 0.7 this argument is coerced to a data frame with
   `as.data.frame`, if not `NULL`.
+
+- ...:
+
+  Passed to `graph_from_data_frame()`.
 
 ## Value
 
@@ -81,14 +83,14 @@ If the `what` argument is `edges` (the default), then the edges of the
 graph and also the edge attributes are returned. The edges will be in
 the first two columns, named `from` and `to`. (This also denotes edge
 direction for directed graphs.) For named graphs, the vertex names will
-be included in these columns, for other graphs, the numeric vertex IDs.
+be included in these columns, for other graphs, the numeric vertex ids.
 The edge attributes will be in the other columns. It is not a good idea
 to have an edge attribute named `from` or `to`, because then the column
 named in the data frame will not be unique. The edges are listed in the
-order of their numeric IDs.
+order of their numeric ids.
 
 If the `what` argument is `vertices`, then vertex attributes are
-returned. Vertices are listed in the order of their numeric vertex IDs.
+returned. Vertices are listed in the order of their numeric vertex ids.
 
 If the `what` argument is `both`, then both vertex and edge data is
 returned, in a list with named entries `vertices` and `edges`.
@@ -119,11 +121,7 @@ attributes can.
 [`graph_from_literal()`](https://r.igraph.org/reference/graph_from_literal.md)
 for another way to create graphs,
 [`read.table()`](https://rdrr.io/r/utils/read.table.html) to read in
-tables from files. See
-[`from_data_frame()`](https://r.igraph.org/reference/constructor_spec.md)
-to build a lazy constructor specification for
-[`make_()`](https://r.igraph.org/reference/make_.md) or
-[`sample_()`](https://r.igraph.org/reference/sample_.md).
+tables from files.
 
 Other conversion:
 [`as.matrix.igraph()`](https://r.igraph.org/reference/as.matrix.igraph.md),
@@ -169,17 +167,12 @@ relations <- data.frame(
 )
 g <- graph_from_data_frame(relations, directed = TRUE, vertices = actors)
 print(g, e = TRUE, v = TRUE)
-#> ── <igraph> ───────────────────────────────────────────────────────── 31cd6fe ──
-#> ℹ directed · named
-#> ℹ 5 vertices · 6 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → vertex: name <chr>, age <dbl>, gender <chr>
-#> → edge:   same.dept <lgl>, friendship <dbl>, advice <dbl>
-#> 
-#> ── Edges (vertex names) ────────────────────────────────────────────────────────
-#> [1] Bob → Alice        Cecil → Bob        Cecil → Alice      David → Alice     
-#> [5] David → Bob        Esmeralda → Alice 
+#> IGRAPH 10a2cb0 DN-- 5 6 -- 
+#> + attr: name (v/c), age (v/n), gender (v/c), same.dept (e/l),
+#> | friendship (e/n), advice (e/n)
+#> + edges from 10a2cb0 (vertex names):
+#> [1] Bob      ->Alice Cecil    ->Bob   Cecil    ->Alice David    ->Alice
+#> [5] David    ->Bob   Esmeralda->Alice
 
 ## The opposite operation
 as_data_frame(g, what = "vertices")

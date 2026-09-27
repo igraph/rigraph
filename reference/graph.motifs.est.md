@@ -44,8 +44,8 @@ graph.motifs.est(
 
 - sample:
 
-  Vertices to use as a starting point for finding motifs. Default:
-  `NULL`.
+  If not `NULL` then it specifies the vertices to use as a starting
+  point for finding motifs.
 
 ## Related documentation in the C library
 

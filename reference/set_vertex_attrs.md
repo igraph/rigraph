@@ -5,7 +5,7 @@ Set multiple vertex attributes
 ## Usage
 
 ``` r
-set_vertex_attrs(graph, ..., index = NULL)
+set_vertex_attrs(graph, ..., index = V(graph))
 ```
 
 ## Arguments
@@ -22,7 +22,7 @@ set_vertex_attrs(graph, ..., index = NULL)
 - index:
 
   An optional vertex sequence to set the attributes of a subset of
-  vertices. The default `NULL` selects all vertices.
+  vertices.
 
 ## Value
 
@@ -59,39 +59,24 @@ Vertex, edge and graph attributes:
 ``` r
 g <- make_ring(10)
 set_vertex_attrs(g, color = "blue", size = 10, name = LETTERS[1:10])
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 3d09448 ──
-#> ℹ undirected · named
-#> ℹ 10 vertices · 10 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
-#> → vertex: color <chr>, size <dbl>, name <chr>
-#> 
-#> ── Edges (vertex names) ────────────────────────────────────────────────────────
-#>  [1] A ─ B  B ─ C  C ─ D  D ─ E  E ─ F  F ─ G  G ─ H  H ─ I  I ─ J  A ─ J 
+#> IGRAPH 2498b6d UN-- 10 10 -- Ring graph
+#> + attr: name (g/c), mutual (g/l), circular (g/l), color (v/c), size
+#> | (v/n), name (v/c)
+#> + edges from 2498b6d (vertex names):
+#>  [1] A--B B--C C--D D--E E--F F--G G--H H--I I--J A--J
 # use splicing if suplying a list
 x <- list(color = "red", name = LETTERS[1:10])
 set_vertex_attrs(g, !!!x)
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 3d09448 ──
-#> ℹ undirected · named
-#> ℹ 10 vertices · 10 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
-#> → vertex: color <chr>, name <chr>
-#> 
-#> ── Edges (vertex names) ────────────────────────────────────────────────────────
-#>  [1] A ─ B  B ─ C  C ─ D  D ─ E  E ─ F  F ─ G  G ─ H  H ─ I  I ─ J  A ─ J 
+#> IGRAPH 2498b6d UN-- 10 10 -- Ring graph
+#> + attr: name (g/c), mutual (g/l), circular (g/l), color (v/c), name
+#> | (v/c)
+#> + edges from 2498b6d (vertex names):
+#>  [1] A--B B--C C--D D--E E--F F--G G--H H--I I--J A--J
 # to set an attribute named "index" use `:=`
 set_vertex_attrs(g, color = "blue", index := 10, name = LETTERS[1:10])
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 3d09448 ──
-#> ℹ undirected · named
-#> ℹ 10 vertices · 10 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
-#> → vertex: color <chr>, index <dbl>, name <chr>
-#> 
-#> ── Edges (vertex names) ────────────────────────────────────────────────────────
-#>  [1] A ─ B  B ─ C  C ─ D  D ─ E  E ─ F  F ─ G  G ─ H  H ─ I  I ─ J  A ─ J 
+#> IGRAPH 2498b6d UN-- 10 10 -- Ring graph
+#> + attr: name (g/c), mutual (g/l), circular (g/l), color (v/c), index
+#> | (v/n), name (v/c)
+#> + edges from 2498b6d (vertex names):
+#>  [1] A--B B--C C--D D--E E--F F--G G--H H--I I--J A--J
 ```

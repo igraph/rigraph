@@ -6,7 +6,9 @@ circle and the rest of the vertices equidistantly on the perimeter.
 ## Usage
 
 ``` r
-layout_as_star(graph, ..., center = NULL, order = NULL)
+layout_as_star(graph, center = V(graph)[1], order = NULL)
+
+as_star(...)
 ```
 
 ## Arguments
@@ -15,19 +17,19 @@ layout_as_star(graph, ..., center = NULL, order = NULL)
 
   The graph to layout.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - center:
 
-  The ID of the vertex to put in the center. The default `NULL` uses the
-  first vertex.
+  The id of the vertex to put in the center. By default it is the first
+  vertex.
 
 - order:
 
   Numeric vector, the order of the vertices along the perimeter. The
-  default ordering is given by the vertex IDs.
+  default ordering is given by the vertex ids.
+
+- ...:
+
+  Arguments to pass to `layout_as_star()`.
 
 ## Value
 
@@ -53,10 +55,7 @@ for other layout algorithms,
 [`plot.igraph()`](https://r.igraph.org/reference/plot.igraph.md) and
 [`tkplot()`](https://r.igraph.org/reference/tkplot.md) on how to plot
 graphs and [`star()`](https://r.igraph.org/reference/make_star.md) on
-how to create ring graphs. See
-[`as_star()`](https://r.igraph.org/reference/layout_spec.md) to build a
-lazy layout specification for
-[`add_layout_()`](https://r.igraph.org/reference/add_layout_.md).
+how to create ring graphs.
 
 Other graph layouts:
 [`add_layout_()`](https://r.igraph.org/reference/add_layout_.md),

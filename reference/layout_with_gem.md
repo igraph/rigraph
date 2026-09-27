@@ -8,13 +8,14 @@ algorithm.
 ``` r
 layout_with_gem(
   graph,
-  ...,
   coords = NULL,
-  maxiter = NULL,
-  temp.max = NULL,
-  temp.min = 0.1,
-  temp.init = NULL
+  maxiter = 40 * vcount(graph)^2,
+  temp.max = max(vcount(graph), 1),
+  temp.min = 1/10,
+  temp.init = sqrt(max(vcount(graph), 1))
 )
+
+with_gem(...)
 ```
 
 ## Arguments
@@ -23,26 +24,22 @@ layout_with_gem(
 
   The input graph. Edge directions are ignored.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - coords:
 
-  Starting coordinates in a two or three column matrix, depending on the
-  `dim` argument. Default: `NULL`.
+  If not `NULL`, then the starting coordinates should be given here, in
+  a two or three column matrix, depending on the `dim` argument.
 
 - maxiter:
 
   The maximum number of iterations to perform. Updating a single vertex
-  counts as an iteration. The default `NULL` uses 40 \* n \* n, where n
+  counts as an iteration. A reasonable default is 40 \* n \* n, where n
   is the number of vertices. The original paper suggests 4 \* n \* n,
   but this usually only works if the other parameters are set up
   carefully.
 
 - temp.max:
 
-  The maximum allowed local temperature. The default `NULL` uses the
+  The maximum allowed local temperature. A reasonable default is the
   number of vertices.
 
 - temp.min:
@@ -52,8 +49,12 @@ layout_with_gem(
 
 - temp.init:
 
-  Initial local temperature of all vertices. The default `NULL` uses the
+  Initial local temperature of all vertices. A reasonable default is the
   square root of the number of vertices.
+
+- ...:
+
+  Passed to `layout_with_gem()`.
 
 ## Value
 
@@ -79,10 +80,7 @@ pp. 388-403, 1995.
 
 [`layout_with_fr()`](https://r.igraph.org/reference/layout_with_fr.md),
 [`plot.igraph()`](https://r.igraph.org/reference/plot.igraph.md),
-[`tkplot()`](https://r.igraph.org/reference/tkplot.md). See
-[`with_gem()`](https://r.igraph.org/reference/layout_spec.md) to build a
-lazy layout specification for
-[`add_layout_()`](https://r.igraph.org/reference/add_layout_.md).
+[`tkplot()`](https://r.igraph.org/reference/tkplot.md)
 
 Other graph layouts:
 [`add_layout_()`](https://r.igraph.org/reference/add_layout_.md),

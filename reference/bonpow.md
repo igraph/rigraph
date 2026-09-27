@@ -29,11 +29,11 @@ bonpow(
 - nodes:
 
   vertex sequence indicating which vertices are to be included in the
-  calculation. The default `NULL` selects all vertices.
+  calculation. By default, all vertices are included.
 
 - loops:
 
-  Logical indicating whether or not the diagonal should be treated as
+  boolean indicating whether or not the diagonal should be treated as
   valid data. Set this true if and only if the data can contain loops.
   `loops` is `FALSE` by default.
 
@@ -49,17 +49,18 @@ bonpow(
 - tol:
 
   tolerance for near-singularities during matrix inversion (see
-  [`Matrix::solve()`](https://rdrr.io/pkg/Matrix/man/solve-methods.html))
+  [`solve()`](https://rdrr.io/pkg/Matrix/man/solve-methods.html))
 
 - sparse:
 
-  Logical, whether to use sparse matrices for the calculation. The
-  ‘Matrix’ package is required for sparse matrix support
+  Logical scalar, whether to use sparse matrices for the calculation.
+  The ‘Matrix’ package is required for sparse matrix support
 
 ## Related documentation in the C library
 
 [`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
 [`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
+[`degree()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_degree),
 [`get_adjacency()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency),
 [`get_adjacency_sparse()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency_sparse),
 [`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),

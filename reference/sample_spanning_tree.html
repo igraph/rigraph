@@ -15,7 +15,7 @@ randomly and uniformly, using loop-erased random walks."><meta property="og:imag
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9038</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ randomly and uniformly, using loop-erased random walks."><meta property="og:imag
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Samples from the spanning trees of a graph randomly and uniformly</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/trees.R" class="external-link"><code>R/trees.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/trees.R" class="external-link"><code>R/trees.R</code></a></small>
       <div class="d-none name"><code>sample_spanning_tree.Rd</code></div>
     </div>
 
@@ -58,7 +58,7 @@ randomly and uniformly, using loop-erased random walks.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sample_spanning_tree</span><span class="op">(</span><span class="va">graph</span>, <span class="va">...</span>, vid <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sample_spanning_tree</span><span class="op">(</span><span class="va">graph</span>, vid <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -68,10 +68,6 @@ randomly and uniformly, using loop-erased random walks.</p>
 <dl><dt id="arg-graph">graph<a class="anchor" aria-label="anchor" href="#arg-graph"></a></dt>
 <dd><p>The input graph to sample from. Edge directions are ignored if
 the graph is directed.</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-vid">vid<a class="anchor" aria-label="anchor" href="#arg-vid"></a></dt>

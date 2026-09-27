@@ -24,9 +24,12 @@ layout.auto(graph, dim = 2, ...)
 
 - ...:
 
-  Extra arguments are passed to the real layout function that
+  For
   [`layout_nicely()`](https://r.igraph.org/reference/layout_nicely.md)
-  ends up calling.
+  the extra arguments are passed to the real layout function. For
+  [`nicely()`](https://r.igraph.org/reference/layout_nicely.md) all
+  argument are passed to
+  [`layout_nicely()`](https://r.igraph.org/reference/layout_nicely.md).
 
 ## Related documentation in the C library
 

@@ -48,8 +48,8 @@ sample_bipartite_gnp(
 
 - directed:
 
-  Logical, whether to create a directed graph. See also the `mode`
-  argument.
+  Logical scalar, whether to create a directed graph. See also the
+  `mode` argument.
 
 - mode:
 
@@ -116,58 +116,33 @@ Random graph models (games):
 
 ## empty graph
 sample_bipartite_gnp(10, 5, p = 0)
-#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── adce025 ──
-#> ℹ undirected · bipartite
-#> ℹ 15 vertices · 0 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, p <dbl>
-#> → vertex: type <lgl>
+#> IGRAPH ffcdade U--B 15 0 -- Bipartite Gnp random graph
+#> + attr: name (g/c), p (g/n), type (v/l)
+#> + edges from ffcdade:
 
 ## full graph
 sample_bipartite_gnp(10, 5, p = 1)
-#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── c2d42ff ──
-#> ℹ undirected · bipartite
-#> ℹ 15 vertices · 50 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, p <dbl>
-#> → vertex: type <lgl>
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#>  [1] 1 ─ 11   1 ─ 12   1 ─ 13   1 ─ 14   1 ─ 15   2 ─ 11   2 ─ 12   2 ─ 13  
-#>  [9] 2 ─ 14   2 ─ 15   3 ─ 11   3 ─ 12   3 ─ 13   3 ─ 14   3 ─ 15   4 ─ 11  
-#> [17] 4 ─ 12   4 ─ 13   4 ─ 14   4 ─ 15   5 ─ 11   5 ─ 12   5 ─ 13   5 ─ 14  
-#> [25] 5 ─ 15   6 ─ 11   6 ─ 12   6 ─ 13   6 ─ 14   6 ─ 15   7 ─ 11   7 ─ 12  
-#> [33] 7 ─ 13   7 ─ 14   7 ─ 15   8 ─ 11   8 ─ 12   8 ─ 13   8 ─ 14   8 ─ 15  
-#> [41] 9 ─ 11   9 ─ 12   9 ─ 13   9 ─ 14   9 ─ 15   10 ─ 11  10 ─ 12  10 ─ 13 
-#> [49] 10 ─ 14  10 ─ 15 
+#> IGRAPH 112e8f4 U--B 15 50 -- Bipartite Gnp random graph
+#> + attr: name (g/c), p (g/n), type (v/l)
+#> + edges from 112e8f4:
+#>  [1]  1--11  1--12  1--13  1--14  1--15  2--11  2--12  2--13  2--14  2--15
+#> [11]  3--11  3--12  3--13  3--14  3--15  4--11  4--12  4--13  4--14  4--15
+#> [21]  5--11  5--12  5--13  5--14  5--15  6--11  6--12  6--13  6--14  6--15
+#> [31]  7--11  7--12  7--13  7--14  7--15  8--11  8--12  8--13  8--14  8--15
+#> [41]  9--11  9--12  9--13  9--14  9--15 10--11 10--12 10--13 10--14 10--15
 
 ## random bipartite graph
-sample_bipartite_gnp(10, 5, p = 0.1)
-#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── fa2d5e7 ──
-#> ℹ undirected · bipartite
-#> ℹ 15 vertices · 4 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, p <dbl>
-#> → vertex: type <lgl>
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#> [1] 7 ─ 12  2 ─ 13  3 ─ 13  6 ─ 15 
+sample_bipartite_gnp(10, 5, p = .1)
+#> IGRAPH 73575d4 U--B 15 6 -- Bipartite Gnp random graph
+#> + attr: name (g/c), p (g/n), type (v/l)
+#> + edges from 73575d4:
+#> [1]  7--11  6--14  9--14  3--15  6--15 10--15
 
 ## directed bipartite graph, G(n,m)
 sample_bipartite_gnm(10, 5, m = 20, directed = TRUE, mode = "all")
-#> ── <igraph> Bipartite Gnm random graph ────────────────────────────── 2ba5528 ──
-#> ℹ directed · bipartite
-#> ℹ 15 vertices · 20 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, m <dbl>
-#> → vertex: type <lgl>
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#>  [1] 10 → 11  2 → 12   3 → 12   4 → 12   3 → 13   6 → 13   7 → 13   8 → 13  
-#>  [9] 10 → 13  6 → 14   10 → 14  7 → 15   11 → 1   11 → 3   12 → 3   14 → 4  
-#> [17] 11 → 7   11 → 8   12 → 8   15 → 8  
+#> IGRAPH 105beed D--B 15 20 -- Bipartite Gnm random graph
+#> + attr: name (g/c), m (g/n), type (v/l)
+#> + edges from 105beed:
+#>  [1]  4->12  4->13  7->13  8->13  3->14  5->14  7->14  4->15 15-> 1 11-> 2
+#> [11] 14-> 2 11-> 3 14-> 4 13-> 5 12-> 6 14-> 6 11-> 7 12-> 7 15-> 9 12->10
 ```

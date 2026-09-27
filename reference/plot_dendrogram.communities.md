@@ -5,12 +5,12 @@ Plot a hierarchical community structure as a dendrogram.
 ## Usage
 
 ``` r
-plot_dendrogram(x, mode = NULL, ...)
+plot_dendrogram(x, mode = igraph_opt("dend.plot.type"), ...)
 
 # S3 method for class 'communities'
 plot_dendrogram(
   x,
-  mode = NULL,
+  mode = igraph_opt("dend.plot.type"),
   ...,
   use.modularity = FALSE,
   palette = categorical_pal(8)
@@ -27,8 +27,7 @@ plot_dendrogram(
 
 - mode:
 
-  Which dendrogram plotting function to use. See details below. The
-  default `NULL` uses the `dend.plot.type` igraph option.
+  Which dendrogram plotting function to use. See details below.
 
 - ...:
 
@@ -36,8 +35,8 @@ plot_dendrogram(
 
 - use.modularity:
 
-  Logical, whether to use the modularity values to define the height of
-  the branches.
+  Logical scalar, whether to use the modularity values to define the
+  height of the branches.
 
 - palette:
 

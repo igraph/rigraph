@@ -16,7 +16,7 @@ tkplot.rotate(tkp.id, degree = NULL, rad = NULL)
 
 - tkp.id:
 
-  The ID of the tkplot window to close/reshape/etc.
+  The id of the tkplot window to close/reshape/etc.
 
 - degree:
 

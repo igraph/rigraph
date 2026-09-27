@@ -1,6 +1,6 @@
 # Permute the vertices of a graph
 
-Create a new graph, by permuting vertex IDs.
+Create a new graph, by permuting vertex ids.
 
 ## Usage
 
@@ -17,7 +17,7 @@ permute(graph, permutation)
 - permutation:
 
   A numeric vector giving the permutation to apply. The first element is
-  the new ID of vertex 1, etc. Every number between one and
+  the new id of vertex 1, etc. Every number between one and
   `vcount(graph)` must appear exactly once.
 
 ## Value
@@ -92,11 +92,11 @@ isomorphic(g, g2)
 g2$name
 #> [1] "Random graph, Gnm, 20, 50"
 V(g2)$name
-#>  [1] "q" "m" "k" "t" "h" "j" "n" "r" "g" "f" "i" "l" "b" "s" "e" "d" "a" "c" "o"
-#> [20] "p"
+#>  [1] "i" "j" "a" "r" "m" "b" "t" "e" "g" "c" "q" "s" "d" "l" "f" "n" "k" "h" "p"
+#> [20] "o"
 E(g2)$weight
-#>  [1] 2 3 1 4 2 4 3 5 4 4 3 3 2 3 3 2 1 3 3 3 5 5 1 2 3 2 3 1 1 1 3 2 1 5 2 2 5 3
-#> [39] 4 4 1 1 4 1 3 3 2 5 1 2
+#>  [1] 3 2 2 2 4 3 2 3 1 4 2 4 3 5 4 4 3 3 2 3 3 2 1 3 3 3 5 5 1 2 3 2 3 1 1 1 3 2
+#> [39] 1 5 2 2 5 3 4 4 1 1 4 1
 all(sort(E(g2)$weight) == sort(E(g)$weight))
 #> [1] TRUE
 ```

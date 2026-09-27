@@ -33,7 +33,7 @@ graphlets.project(
 
 - cliques:
 
-  A list of vertex IDs, the graphlet basis to use for the projection.
+  A list of vertex ids, the graphlet basis to use for the projection.
 
 - niter:
 
@@ -41,8 +41,7 @@ graphlets.project(
 
 - Mu:
 
-  Starting weights for the projection. The default `NULL` uses a weight
-  of one for each clique.
+  Starting weights for the projection.
 
 ## Related documentation in the C library
 

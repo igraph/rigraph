@@ -5,7 +5,7 @@ Query edge attributes of a graph
 ## Usage
 
 ``` r
-edge_attr(graph, name, index = NULL)
+edge_attr(graph, name, index = E(graph))
 ```
 
 ## Arguments
@@ -22,7 +22,7 @@ edge_attr(graph, name, index = NULL)
 - index:
 
   An optional edge sequence to query edge attributes for a subset of
-  edges. The default `NULL` selects all edges.
+  edges.
 
 ## Value
 
@@ -65,16 +65,10 @@ g <- make_ring(10) %>%
   set_edge_attr("weight", value = 1:10) %>%
   set_edge_attr("color", value = "red")
 g
-#> ── <igraph> Ring graph ────────────────────────────────────────────── e64c3c3 ──
-#> ℹ undirected · weighted
-#> ℹ 10 vertices · 10 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
-#> → edge:   weight <dbl>, color <chr>
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#>  [1] 1 ─ 2   2 ─ 3   3 ─ 4   4 ─ 5   5 ─ 6   6 ─ 7   7 ─ 8   8 ─ 9   9 ─ 10 
-#> [10] 1 ─ 10 
+#> IGRAPH 9e07f6d U-W- 10 10 -- Ring graph
+#> + attr: name (g/c), mutual (g/l), circular (g/l), weight (e/n), color
+#> | (e/c)
+#> + edges from 9e07f6d:
+#>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 plot(g, edge.width = E(g)$weight)
 ```

@@ -8,7 +8,6 @@ graphs via directly optimizing a modularity score.
 ``` r
 cluster_fast_greedy(
   graph,
-  ...,
   merges = TRUE,
   modularity = TRUE,
   membership = TRUE,
@@ -22,24 +21,20 @@ cluster_fast_greedy(
 
   The input graph. It must be undirected and must not have multi-edges.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - merges:
 
-  Logical, whether to return the merge matrix.
+  Logical scalar, whether to return the merge matrix.
 
 - modularity:
 
-  Logical, whether to return a vector containing the modularity after
-  each merge.
+  Logical scalar, whether to return a vector containing the modularity
+  after each merge.
 
 - membership:
 
-  Logical, whether to calculate the membership vector corresponding to
-  the maximum modularity score, considering all possible community
-  structures along the merges.
+  Logical scalar, whether to calculate the membership vector
+  corresponding to the maximum modularity score, considering all
+  possible community structures along the merges.
 
 - weights:
 

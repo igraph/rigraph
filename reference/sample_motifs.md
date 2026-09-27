@@ -9,8 +9,7 @@ structure. These functions search a graph for various motifs.
 sample_motifs(
   graph,
   size = 3,
-  ...,
-  cut.prob = NULL,
+  cut.prob = rep(0, size),
   sample.size = NULL,
   sample = NULL
 )
@@ -27,10 +26,6 @@ sample_motifs(
   The size of the motif, currently size 3 and 4 are supported in
   directed graphs and sizes 3-6 in undirected graphs.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - cut.prob:
 
   Numeric vector giving the probabilities that the search graph is cut
@@ -45,8 +40,8 @@ sample_motifs(
 
 - sample:
 
-  Vertices to use as a starting point for finding motifs. Default:
-  `NULL`.
+  If not `NULL` then it specifies the vertices to use as a starting
+  point for finding motifs.
 
 ## Value
 
@@ -77,9 +72,9 @@ Other graph motifs:
 ``` r
 g <- sample_pa(100)
 motifs(g, 3)
-#>  [1]  NA  NA 347  NA  88   0   0   0   0   0   0   0   0   0   0   0
+#>  [1]  NA  NA 268  NA  83   0   0   0   0   0   0   0   0   0   0   0
 count_motifs(g, 3)
-#> [1] 435
+#> [1] 351
 sample_motifs(g, 3)
-#> [1] 30
+#> [1] 10
 ```

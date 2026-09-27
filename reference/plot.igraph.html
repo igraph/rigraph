@@ -15,7 +15,7 @@ non-interactive companion of the tkplot() function."><meta property="og:image" c
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9038</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ non-interactive companion of the tkplot() function."><meta property="og:image" c
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Plotting of graphs</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/plot.R" class="external-link"><code>R/plot.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/plot.R" class="external-link"><code>R/plot.R</code></a></small>
       <div class="d-none name"><code>plot.igraph.Rd</code></div>
     </div>
 
@@ -66,9 +66,9 @@ non-interactive companion of the <code><a href="tkplot.html">tkplot()</a></code>
 <span>  xlim <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  ylim <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  mark.groups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  mark.shape <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>  mark.col <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  mark.border <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  mark.shape <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">2</span>,</span>
+<span>  mark.col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">mark.groups</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span>,</span>
+<span>  mark.border <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">mark.groups</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
 <span>  mark.expand <span class="op">=</span> <span class="fl">15</span>,</span>
 <span>  mark.lwd <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  loop.size <span class="op">=</span> <span class="fl">1</span>,</span>
@@ -89,7 +89,7 @@ non-interactive companion of the <code><a href="tkplot.html">tkplot()</a></code>
 
 
 <dt id="arg-add">add<a class="anchor" aria-label="anchor" href="#arg-add"></a></dt>
-<dd><p>Logical, whether to add the plot to the current device, or
+<dd><p>Logical scalar, whether to add the plot to the current device, or
 delete the device's current contents first.</p></dd>
 
 
@@ -104,7 +104,7 @@ to modify this.</p></dd>
 
 
 <dt id="arg-mark-groups">mark.groups<a class="anchor" aria-label="anchor" href="#arg-mark-groups"></a></dt>
-<dd><p>A list of vertex ID vectors. It is interpreted as a set
+<dd><p>A list of vertex id vectors. It is interpreted as a set
 of vertex groups. Each vertex group is highlighted, by plotting a colored
 smoothed polygon around and “under” it. See the arguments below to
 control the look of the polygons.</p></dd>
@@ -121,14 +121,13 @@ used for the different vertex groups.</p></dd>
 <dt id="arg-mark-col">mark.col<a class="anchor" aria-label="anchor" href="#arg-mark-col"></a></dt>
 <dd><p>A scalar or vector giving the colors of marking the
 polygons, in any format accepted by <code><a href="https://rdrr.io/r/graphics/xspline.html" class="external-link">graphics::xspline()</a></code>; e.g.
-numeric color IDs, symbolic color names, or colors in RGB. The default
-<code>NULL</code> uses semi-transparent rainbow colors.</p></dd>
+numeric color ids, symbolic color names, or colors in RGB.</p></dd>
 
 
 <dt id="arg-mark-border">mark.border<a class="anchor" aria-label="anchor" href="#arg-mark-border"></a></dt>
 <dd><p>A scalar or vector giving the colors of the borders of
 the vertex group marking polygons. If it is <code>NA</code>, then no border is
-drawn. The default <code>NULL</code> uses rainbow colors.</p></dd>
+drawn.</p></dd>
 
 
 <dt id="arg-mark-expand">mark.expand<a class="anchor" aria-label="anchor" href="#arg-mark-expand"></a></dt>

@@ -17,7 +17,7 @@ this class."><meta property="og:image" content="https://r.igraph.org/logo.png"><
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9038</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +49,7 @@ this class."><meta property="og:image" content="https://r.igraph.org/logo.png"><
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Functions to deal with the result of network community detection</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/community.R" class="external-link"><code>R/community.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/community.R" class="external-link"><code>R/community.R</code></a></small>
       <div class="d-none name"><code>communities.Rd</code></div>
     </div>
 
@@ -132,7 +132,7 @@ computed from the heights of their parents; see <code><a href="https://rdrr.io/r
 
 
 <dt id="arg-use-modularity">use.modularity<a class="anchor" aria-label="anchor" href="#arg-use-modularity"></a></dt>
-<dd><p>Logical, whether to use the modularity values
+<dd><p>Logical scalar, whether to use the modularity values
 to define the height of the branches.</p></dd>
 
 
@@ -177,14 +177,15 @@ community structure is given in another way, e.g. by a merge matrix.</p></dd>
 
 
 <dt id="arg-algorithm">algorithm<a class="anchor" aria-label="anchor" href="#arg-algorithm"></a></dt>
-<dd><p>Name of the algorithm that produced the community
-structure (character scalar). Default: <code>NULL</code>, meaning an unknown algorithm.</p></dd>
+<dd><p>If not <code>NULL</code> (meaning an unknown algorithm), then a
+character scalar, the name of the algorithm that produced the community
+structure.</p></dd>
 
 
 <dt id="arg-merges">merges<a class="anchor" aria-label="anchor" href="#arg-merges"></a></dt>
-<dd><p>Merge matrix of the hierarchical
+<dd><p>If not <code>NULL</code>, then the merge matrix of the hierarchical
 community structure. See <code>merges()</code> below for more information on its
-format. Default: <code>NULL</code>.</p></dd>
+format.</p></dd>
 
 
 <dt id="arg-modularity">modularity<a class="anchor" aria-label="anchor" href="#arg-modularity"></a></dt>
@@ -204,7 +205,7 @@ the graph that was the input of the community detection.</p>
 <p><code><a href="modularity.igraph.html">modularity()</a></code> returns a numeric scalar.</p>
 <p><code>algorithm()</code> returns a character scalar.</p>
 <p><code>crossing()</code> returns a logical vector.</p>
-<p><code>is_hierarchical()</code> returns a Logical.</p>
+<p><code>is_hierarchical()</code> returns a logical scalar.</p>
 <p><code>merges()</code> returns a two-column numeric matrix.</p>
 <p><code>cut_at()</code> returns a numeric vector, the membership vector of the
 vertices.</p>
@@ -229,10 +230,10 @@ prints a short summary.</p>
 <p>The <code>length</code> generic function call be called on <code>communities</code> and
 returns the number of communities.</p>
 <p>The <code>sizes()</code> function returns the community sizes, in the order of their
-IDs.</p>
+ids.</p>
 <p><code>membership()</code> gives the division of the vertices, into communities. It
-returns a numeric vector, one value for each vertex, the ID of its
-community. Community IDs start from one. Note that some algorithms calculate
+returns a numeric vector, one value for each vertex, the id of its
+community. Community ids start from one. Note that some algorithms calculate
 the complete (or incomplete) hierarchical structure of the communities, and
 not just a single partitioning. For these algorithms typically the
 membership for the highest modularity value is returned, but see also the
@@ -240,14 +241,14 @@ manual pages of the individual algorithms.</p>
 <p><code>communities()</code> is also the name of a function, that returns a list of
 communities, each identified by their vertices. The vertices will have
 symbolic names if the <code>add.vertex.names</code> igraph option is set, and the
-graph itself was named. Otherwise numeric vertex IDs are used.</p>
+graph itself was named. Otherwise numeric vertex ids are used.</p>
 <p><code><a href="modularity.igraph.html">modularity()</a></code> gives the modularity score of the partitioning. (See
 <code><a href="modularity.igraph.html">modularity.igraph()</a></code> for details. For algorithms that do not
 result a single partitioning, the highest modularity value is returned.</p>
 <p><code>algorithm()</code> gives the name of the algorithm that was used to calculate
 the community structure.</p>
 <p><code>crossing()</code> returns a logical vector, with one value for each edge,
-ordered according to the edge IDs. The value is <code>TRUE</code> iff the edge
+ordered according to the edge ids. The value is <code>TRUE</code> iff the edge
 connects two different communities, according to the (best) membership
 vector, as returned by <code>membership()</code>.</p>
 <p><code>is_hierarchical()</code> checks whether a hierarchical algorithm was used to
@@ -287,7 +288,7 @@ corresponding to the communities. It passes additional arguments to
     </div>
     <div class="section level2">
     <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
-    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist" class="external-link"><code>get_edgelist()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount" class="external-link"><code>vcount()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_le_community_to_membership" class="external-link"><code>le_community_to_membership()</code></a></p>
+    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist" class="external-link"><code>get_edgelist()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount" class="external-link"><code>vcount()</code></a></p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

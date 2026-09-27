@@ -10,7 +10,6 @@ randomly to a new vertex in a graph.
 ``` r
 each_edge(
   prob,
-  ...,
   loops = FALSE,
   multiple = FALSE,
   mode = c("all", "out", "in", "total")
@@ -23,17 +22,14 @@ each_edge(
 
   The rewiring probability, a real number between zero and one.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - loops:
 
-  Logical, whether loop edges are allowed in the rewired graph.
+  Logical scalar, whether loop edges are allowed in the rewired graph.
 
 - multiple:
 
-  Logical, whether multiple edges are allowed in the generated graph.
+  Logical scalar, whether multiple edges are allowed in the generated
+  graph.
 
 - mode:
 

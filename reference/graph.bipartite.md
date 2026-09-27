@@ -31,9 +31,9 @@ graph.bipartite(types, edges, directed = FALSE)
 
 - directed:
 
-  Logical, whether to create a directed graph. Note that by default
-  undirected graphs are created, as this is more common for bipartite
-  graphs.
+  Whether to create a directed graph, boolean constant. Note that by
+  default undirected graphs are created, as this is more common for
+  bipartite graphs.
 
 ## Related documentation in the C library
 

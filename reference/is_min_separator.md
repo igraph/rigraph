@@ -16,11 +16,11 @@ is_min_separator(graph, candidate)
 
 - candidate:
 
-  A numeric vector giving the vertex IDs of the candidate separator.
+  A numeric vector giving the vertex ids of the candidate separator.
 
 ## Value
 
-A Logical, whether the supplied vertex set is a (minimal) vertex
+A logical scalar, whether the supplied vertex set is a (minimal) vertex
 separator or not.
 
 ## Details

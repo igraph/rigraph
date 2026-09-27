@@ -8,13 +8,14 @@ not too many cycles.
 ``` r
 layout_as_tree(
   graph,
-  ...,
   root = numeric(),
   circular = FALSE,
   rootlevel = numeric(),
   mode = c("out", "in", "all"),
   flip.y = TRUE
 )
+
+as_tree(...)
 ```
 
 ## Arguments
@@ -23,14 +24,10 @@ layout_as_tree(
 
   The input graph.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - root:
 
   The index of the root vertex or root vertices. If this is a non-empty
-  vector then the supplied vertex IDs are used as the roots of the trees
+  vector then the supplied vertex ids are used as the roots of the trees
   (or a single tree if the graph is connected). If it is an empty
   vector, then the root vertices are automatically calculated based on
   topological sorting, performed with the opposite mode than the `mode`
@@ -39,9 +36,9 @@ layout_as_tree(
 
 - circular:
 
-  Logical, whether to plot the tree in a circular fashion. Defaults to
-  `FALSE`, so the tree branches are going bottom-up (or top-down, see
-  the `flip.y` argument.
+  Logical scalar, whether to plot the tree in a circular fashion.
+  Defaults to `FALSE`, so the tree branches are going bottom-up (or
+  top-down, see the `flip.y` argument.
 
 - rootlevel:
 
@@ -61,8 +58,12 @@ layout_as_tree(
 
 - flip.y:
 
-  Logical, whether to flip the ‘y’ coordinates. The default is flipping
-  because that puts the root vertex on the top.
+  Logical scalar, whether to flip the ‘y’ coordinates. The default is
+  flipping because that puts the root vertex on the top.
+
+- ...:
+
+  Passed to `layout_as_tree()`.
 
 ## Value
 
@@ -87,10 +88,6 @@ Reingold, E and Tilford, J (1981). Tidier drawing of trees. *IEEE Trans.
 on Softw. Eng.*, SE-7(2):223–228.
 
 ## See also
-
-[`as_tree()`](https://r.igraph.org/reference/layout_spec.md) to build a
-lazy layout specification for
-[`add_layout_()`](https://r.igraph.org/reference/add_layout_.md).
 
 Other graph layouts:
 [`add_layout_()`](https://r.igraph.org/reference/add_layout_.md),

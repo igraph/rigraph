@@ -9,8 +9,7 @@ considered to be zero.
 ``` r
 harmonic_centrality(
   graph,
-  vids = NULL,
-  ...,
+  vids = V(graph),
   mode = c("out", "in", "all", "total"),
   weights = NULL,
   normalized = FALSE,
@@ -26,12 +25,7 @@ harmonic_centrality(
 
 - vids:
 
-  The vertices for which harmonic centrality will be calculated. The
-  default `NULL` selects all vertices.
-
-- ...:
-
-  These dots are for future extensions and must be empty.
+  The vertices for which harmonic centrality will be calculated.
 
 - mode:
 
@@ -50,10 +44,11 @@ harmonic_centrality(
 
 - normalized:
 
-  Logical, whether to calculate the normalized harmonic centrality. If
-  true, the result is the mean inverse path length to other vertices,
-  i.e. it is normalized by the number of vertices minus one. If false,
-  the result is the sum of inverse path lengths to other vertices.
+  Logical scalar, whether to calculate the normalized harmonic
+  centrality. If true, the result is the mean inverse path length to
+  other vertices, i.e. it is normalized by the number of vertices minus
+  one. If false, the result is the sum of inverse path lengths to other
+  vertices.
 
 - cutoff:
 

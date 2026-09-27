@@ -5,7 +5,7 @@ Generate a random graph where each vertex has the same degree.
 ## Usage
 
 ``` r
-sample_k_regular(no.of.nodes, k, ..., directed = FALSE, multiple = FALSE)
+sample_k_regular(no.of.nodes, k, directed = FALSE, multiple = FALSE)
 ```
 
 ## Arguments
@@ -19,17 +19,13 @@ sample_k_regular(no.of.nodes, k, ..., directed = FALSE, multiple = FALSE)
   Integer scalar, the degree of each vertex in the graph, or the
   out-degree and in-degree in a directed graph.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - directed:
 
-  Logical, whether to create a directed graph.
+  Logical scalar, whether to create a directed graph.
 
 - multiple:
 
-  Logical, whether multiple edges are allowed.
+  Logical scalar, whether multiple edges are allowed.
 
 ## Value
 

@@ -8,8 +8,7 @@ the same quantity in the function of vertex degree
 ``` r
 knn(
   graph,
-  vids = NULL,
-  ...,
+  vids = V(graph),
   mode = c("all", "out", "in", "total"),
   neighbor.degree.mode = c("all", "out", "in", "total"),
   weights = NULL
@@ -24,14 +23,10 @@ knn(
 
 - vids:
 
-  The vertices for which the calculation is performed. The default
-  `NULL` includes all vertices. Note, that if not all vertices are given
-  here, then both ‘`knn`’ and ‘`knnk`’ will be calculated based on the
-  given vertices only.
-
-- ...:
-
-  These dots are for future extensions and must be empty.
+  The vertices for which the calculation is performed. Normally it
+  includes all vertices. Note, that if not all vertices are given here,
+  then both ‘`knn`’ and ‘`knnk`’ will be calculated based on the given
+  vertices only.
 
 - mode:
 

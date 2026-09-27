@@ -9,7 +9,6 @@ that are not included in igraph.
 make_clusters(
   graph,
   membership = NULL,
-  ...,
   algorithm = NULL,
   merges = NULL,
   modularity = TRUE
@@ -25,12 +24,8 @@ make_clusters(
 - membership:
 
   The membership vector of the community structure, a numeric vector
-  denoting the ID of the community for each vertex. It might be `NULL`
+  denoting the id of the community for each vertex. It might be `NULL`
   for hierarchical community structures.
-
-- ...:
-
-  These dots are for future extensions and must be empty.
 
 - algorithm:
 
@@ -54,7 +49,7 @@ A `communities` object.
 
 - membership:
 
-  A numeric vector giving the community ID for each vertex.
+  A numeric vector giving the community id for each vertex.
 
 - modularity:
 

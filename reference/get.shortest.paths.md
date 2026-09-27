@@ -31,13 +31,13 @@ get.shortest.paths(
 - from:
 
   Numeric constant, the vertex from or to the shortest paths will be
-  calculated. Note that right now this is not a vector of vertex IDs,
+  calculated. Note that right now this is not a vector of vertex ids,
   but only a single vertex.
 
 - to:
 
   Numeric vector, the vertices to which the shortest paths will be
-  calculated. The default `NULL` includes all vertices. Note that for
+  calculated. By default it includes all vertices. Note that for
   [`distances()`](https://r.igraph.org/reference/distances.md) every
   vertex must be included here at most once. (This is not required for
   [`shortest_paths()`](https://r.igraph.org/reference/distances.md).
@@ -69,22 +69,22 @@ get.shortest.paths(
 
 - predecessors:
 
-  Logical, whether to return the predecessor vertex for each vertex. The
-  predecessor of vertex `i` in the tree is the vertex from which vertex
-  `i` was reached. The predecessor of the start vertex (in the `from`
-  argument) is itself by definition. If the predecessor is zero, it
-  means that the given vertex was not reached from the source during the
-  search. Note that the search terminates if all the vertices in `to`
-  are reached.
+  Logical scalar, whether to return the predecessor vertex for each
+  vertex. The predecessor of vertex `i` in the tree is the vertex from
+  which vertex `i` was reached. The predecessor of the start vertex (in
+  the `from` argument) is itself by definition. If the predecessor is
+  zero, it means that the given vertex was not reached from the source
+  during the search. Note that the search terminates if all the vertices
+  in `to` are reached.
 
 - inbound.edges:
 
-  Logical, whether to return the inbound edge for each vertex. The
-  inbound edge of vertex `i` in the tree is the edge via which vertex
-  `i` was reached. The start vertex and vertices that were not reached
-  during the search will have zero in the corresponding entry of the
-  vector. Note that the search terminates if all the vertices in `to`
-  are reached.
+  Logical scalar, whether to return the inbound edge for each vertex.
+  The inbound edge of vertex `i` in the tree is the edge via which
+  vertex `i` was reached. The start vertex and vertices that were not
+  reached during the search will have zero in the corresponding entry of
+  the vector. Note that the search terminates if all the vertices in
+  `to` are reached.
 
 - algorithm:
 

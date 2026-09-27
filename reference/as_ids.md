@@ -27,7 +27,7 @@ A character or numeric vector, see details below.
 ## Details
 
 For graphs without names, a numeric vector is returned, containing the
-internal numeric vertex or edge IDs.
+internal numeric vertex or edge ids.
 
 For graphs with names, and vertex sequences, the vertex names are
 returned in a character vector.

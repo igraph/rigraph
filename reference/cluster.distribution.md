@@ -30,16 +30,8 @@ cluster.distribution(graph, cumulative = FALSE, mul.size = FALSE, ...)
 
 - ...:
 
-  For
-  [`component_distribution()`](https://r.igraph.org/reference/components.md),
-  forwarded to
-  [`components()`](https://r.igraph.org/reference/components.md). For
-  [`components()`](https://r.igraph.org/reference/components.md),
-  [`is_connected()`](https://r.igraph.org/reference/components.md),
-  [`count_components()`](https://r.igraph.org/reference/components.md)
-  and
-  [`largest_component()`](https://r.igraph.org/reference/components.md),
-  these dots must be empty.
+  Additional attributes to pass to `cluster`, right now only `mode`
+  makes sense.
 
 ## Related documentation in the C library
 

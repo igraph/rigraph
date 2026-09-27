@@ -5,7 +5,7 @@ Indent a printout
 ## Usage
 
 ``` r
-indent_print(..., .indent = " ", .printer = NULL)
+indent_print(..., .indent = " ", .printer = print)
 ```
 
 ## Arguments
@@ -20,7 +20,7 @@ indent_print(..., .indent = " ", .printer = NULL)
 
 - .printer:
 
-  The printing function. The default `NULL` uses
+  The printing function, defaults to
   [print](https://rdrr.io/r/base/print.html).
 
 ## Value

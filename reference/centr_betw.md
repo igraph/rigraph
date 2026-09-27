@@ -6,7 +6,7 @@ summary of graph centralization.
 ## Usage
 
 ``` r
-centr_betw(graph, ..., directed = TRUE, normalized = TRUE)
+centr_betw(graph, directed = TRUE, normalized = TRUE)
 ```
 
 ## Arguments
@@ -15,19 +15,15 @@ centr_betw(graph, ..., directed = TRUE, normalized = TRUE)
 
   The input graph.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - directed:
 
-  Logical, whether to use directed shortest paths for calculating
+  logical scalar, whether to use directed shortest paths for calculating
   betweenness.
 
 - normalized:
 
-  Logical. Whether to normalize the graph level centrality score by
-  dividing by the theoretical maximum.
+  Logical scalar. Whether to normalize the graph level centrality score
+  by dividing by the theoretical maximum.
 
 ## Value
 

@@ -9,9 +9,9 @@ multi-edges.
 ## Usage
 
 ``` r
-sample_smallworld(dim, size, nei, p, ..., loops = FALSE, multiple = FALSE)
+sample_smallworld(dim, size, nei, p, loops = FALSE, multiple = FALSE)
 
-smallworld(dim, size, nei, p, ..., loops = FALSE, multiple = FALSE)
+smallworld(dim, size, nei, p, loops = FALSE, multiple = FALSE)
 ```
 
 ## Arguments
@@ -33,17 +33,15 @@ smallworld(dim, size, nei, p, ..., loops = FALSE, multiple = FALSE)
 
   Real constant between zero and one, the rewiring probability.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - loops:
 
-  Logical, whether loops edges are allowed in the generated graph.
+  Logical scalar, whether loops edges are allowed in the generated
+  graph.
 
 - multiple:
 
-  Logical, whether multiple edges are allowed int the generated graph.
+  Logical scalar, whether multiple edges are allowed int the generated
+  graph.
 
 ## Value
 
@@ -117,7 +115,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 g <- sample_smallworld(1, 100, 5, 0.05)
 mean_distance(g)
-#> [1] 2.704444
+#> [1] 2.705859
 transitivity(g, type = "average")
-#> [1] 0.5105538
+#> [1] 0.499254
 ```

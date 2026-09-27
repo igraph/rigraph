@@ -8,11 +8,10 @@ Fruchterman and Reingold.
 ``` r
 layout_with_fr(
   graph,
-  ...,
   coords = NULL,
   dim = c(2, 3),
   niter = 500,
-  start.temp = NULL,
+  start.temp = sqrt(vcount(graph)),
   grid = c("auto", "grid", "nogrid"),
   weights = NULL,
   minx = NULL,
@@ -27,6 +26,8 @@ layout_with_fr(
   repulserad = deprecated(),
   maxiter = deprecated()
 )
+
+with_fr(...)
 ```
 
 ## Arguments
@@ -34,10 +35,6 @@ layout_with_fr(
 - graph:
 
   The graph to lay out. Edge directions are ignored.
-
-- ...:
-
-  These dots are for future extensions and must be empty.
 
 - coords:
 
@@ -58,8 +55,7 @@ layout_with_fr(
 
   Real scalar, the start temperature. This is the maximum amount of
   movement alloved along one axis, within one step, for a vertex.
-  Currently it is decreased linearly to zero during the iteration. The
-  default `NULL` uses `sqrt(vcount(graph))`.
+  Currently it is decreased linearly to zero during the iteration.
 
 - grid:
 
@@ -78,9 +74,9 @@ layout_with_fr(
 
 - minx:
 
-  Numeric vector that gives lower boundaries for the ‘x’ coordinates of
-  the vertices. The length of the vector must match the number of
-  vertices in the graph. Default: `NULL`.
+  If not `NULL`, then it must be a numeric vector that gives lower
+  boundaries for the ‘x’ coordinates of the vertices. The length of the
+  vector must match the number of vertices in the graph.
 
 - maxx:
 
@@ -115,10 +111,14 @@ layout_with_fr(
 
   A deprecated synonym of `niter`, for compatibility.
 
+- ...:
+
+  Passed to `layout_with_fr()`.
+
 ## Value
 
 A two- or three-column matrix, each row giving the coordinates of a
-vertex, according to the IDs of the vertex IDs.
+vertex, according to the ids of the vertex ids.
 
 ## Details
 
@@ -143,10 +143,7 @@ Force-directed Placement. *Software - Practice and Experience*,
 
 [`layout_with_drl()`](https://r.igraph.org/reference/layout_with_drl.md),
 [`layout_with_kk()`](https://r.igraph.org/reference/layout_with_kk.md)
-for other layout algorithms. See
-[`with_fr()`](https://r.igraph.org/reference/layout_spec.md) to build a
-lazy layout specification for
-[`add_layout_()`](https://r.igraph.org/reference/add_layout_.md).
+for other layout algorithms.
 
 Other graph layouts:
 [`add_layout_()`](https://r.igraph.org/reference/add_layout_.md),

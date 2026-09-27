@@ -5,7 +5,7 @@ Incident vertices of some graph edges
 ## Usage
 
 ``` r
-ends(graph, es, ..., names = TRUE)
+ends(graph, es, names = TRUE)
 ```
 
 ## Arguments
@@ -18,18 +18,14 @@ ends(graph, es, ..., names = TRUE)
 
   The sequence of edges to query
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - names:
 
-  Whether to return vertex names or numeric vertex IDs. By default
+  Whether to return vertex names or numeric vertex ids. By default
   vertex names are used.
 
 ## Value
 
-A two column matrix of vertex names or vertex IDs.
+A two column matrix of vertex names or vertex ids.
 
 ## Related documentation in the C library
 

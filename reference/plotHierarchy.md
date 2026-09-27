@@ -22,8 +22,8 @@ plotHierarchy(
 
   The layout of a plot, it is simply passed on to
   [`plot.igraph()`](https://r.igraph.org/reference/plot.igraph.md), see
-  the possible formats there. The default `NULL` uses the
-  Reingold-Tilford layout generator.
+  the possible formats there. By default the Reingold-Tilford layout
+  generator is used.
 
 - ...:
 
@@ -33,10 +33,6 @@ plotHierarchy(
   to [`plot.igraph()`](https://r.igraph.org/reference/plot.igraph.md).
   [`print()`](https://rdrr.io/r/base/print.html) and
   [`summary()`](https://rdrr.io/r/base/summary.html) ignore them.
-  [`cohesive_blocks()`](https://r.igraph.org/reference/cohesive_blocks.md)
-  and
-  [`export_pajek()`](https://r.igraph.org/reference/cohesive_blocks.md)
-  do not accept extra arguments; these dots must be empty for them.
 
 ## Related documentation in the C library
 

@@ -9,7 +9,6 @@ function creates such a graph in a deterministic manner.
 realize_degseq(
   out.deg,
   in.deg = NULL,
-  ...,
   allowed.edge.types = c("simple", "loops", "multi", "all"),
   method = c("smallest", "largest", "index")
 )
@@ -28,10 +27,6 @@ realize_degseq(
 
   For directed graph, the in-degree sequence. By default this is `NULL`
   and an undirected graph is created.
-
-- ...:
-
-  These dots are for future extensions and must be empty.
 
 - allowed.edge.types:
 

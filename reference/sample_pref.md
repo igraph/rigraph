@@ -8,10 +8,9 @@ Generation of random graphs based on different vertex types.
 sample_pref(
   nodes,
   types,
-  ...,
-  type.dist = NULL,
+  type.dist = rep(1, types),
   fixed.sizes = FALSE,
-  pref.matrix = NULL,
+  pref.matrix = matrix(1, types, types),
   directed = FALSE,
   loops = FALSE
 )
@@ -19,10 +18,9 @@ sample_pref(
 pref(
   nodes,
   types,
-  ...,
-  type.dist = NULL,
+  type.dist = rep(1, types),
   fixed.sizes = FALSE,
-  pref.matrix = NULL,
+  pref.matrix = matrix(1, types, types),
   directed = FALSE,
   loops = FALSE
 )
@@ -30,18 +28,16 @@ pref(
 sample_asym_pref(
   nodes,
   types,
-  ...,
-  type.dist.matrix = NULL,
-  pref.matrix = NULL,
+  type.dist.matrix = matrix(1, types, types),
+  pref.matrix = matrix(1, types, types),
   loops = FALSE
 )
 
 asym_pref(
   nodes,
   types,
-  ...,
-  type.dist.matrix = NULL,
-  pref.matrix = NULL,
+  type.dist.matrix = matrix(1, types, types),
+  pref.matrix = matrix(1, types, types),
   loops = FALSE
 )
 ```
@@ -56,15 +52,11 @@ asym_pref(
 
   The number of different vertex types.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - type.dist:
 
   The distribution of the vertex types, a numeric vector of length
   ‘types’ containing non-negative numbers. The vector will be normed to
-  obtain probabilities. The default `NULL` gives a uniform distribution.
+  obtain probabilities.
 
 - fixed.sizes:
 
@@ -76,20 +68,19 @@ asym_pref(
 
   A square matrix giving the preferences of the vertex types. The matrix
   has ‘types’ rows and columns. When generating an undirected graph, it
-  must be symmetric. The default `NULL` sets all preferences to one.
+  must be symmetric.
 
 - directed:
 
-  Logical, whether to create a directed graph.
+  Logical scalar, whether to create a directed graph.
 
 - loops:
 
-  Logical, whether self-loops are allowed in the graph.
+  Logical scalar, whether self-loops are allowed in the graph.
 
 - type.dist.matrix:
 
-  The joint distribution of the in- and out-vertex types. The default
-  `NULL` gives a uniform distribution.
+  The joint distribution of the in- and out-vertex types.
 
 ## Value
 

@@ -16,7 +16,7 @@ tkplot.center(tkp.id)
 
 - tkp.id:
 
-  The ID of the tkplot window to close/reshape/etc.
+  The id of the tkplot window to close/reshape/etc.
 
 ## Related documentation in the C library
 

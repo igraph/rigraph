@@ -27,19 +27,17 @@ layout.drl(
 
 - use.seed:
 
-  Logical, whether to use the coordinates given in the `seed` argument
-  as a starting point.
+  Logical scalar, whether to use the coordinates given in the `seed`
+  argument as a starting point.
 
 - seed:
 
   A matrix with two columns, the starting coordinates for the vertices
-  is `use.seed` is `TRUE`. It is ignored otherwise. The default `NULL`
-  draws uniformly random starting coordinates.
+  is `use.seed` is `TRUE`. It is ignored otherwise.
 
 - options:
 
-  Options for the layout generator, a named list. See details below. The
-  default `NULL` uses `drl_defaults$default`.
+  Options for the layout generator, a named list. See details below.
 
 - weights:
 

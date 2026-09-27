@@ -8,7 +8,6 @@ A bipartite graph is projected into two one-mode networks
 bipartite_projection(
   graph,
   types = NULL,
-  ...,
   multiplicity = TRUE,
   probe1 = NULL,
   which = c("both", "true", "false"),
@@ -31,10 +30,6 @@ bipartite_projection_size(graph, types = NULL)
   attribute. You must supply this argument if the graph has no ‘`type`’
   vertex attribute.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - multiplicity:
 
   If `TRUE`, then igraph keeps the multiplicity of the edges as an edge
@@ -46,7 +41,7 @@ bipartite_projection_size(graph, types = NULL)
 - probe1:
 
   This argument can be used to specify the order of the projections in
-  the resulting list. If given, then it is considered as a vertex ID (or
+  the resulting list. If given, then it is considered as a vertex id (or
   a symbolic vertex name); the projection containing this vertex will be
   the first one in the result list. This argument is ignored if only one
   projection is requested in argument `which`.
@@ -58,7 +53,7 @@ bipartite_projection_size(graph, types = NULL)
 
 - remove.type:
 
-  Logical, whether to remove the `type` vertex attribute from the
+  Logical scalar, whether to remove the `type` vertex attribute from the
   projections. This makes sense because these graphs are not bipartite
   any more. However if you want to combine them with each other (or
   other bipartite graphs), then it is worth keeping this attribute. By
@@ -133,28 +128,14 @@ g2 <- graph_from_biadjacency_matrix(M)
 g2$name <- "Event network"
 proj2 <- bipartite_projection(g2)
 print(proj2[[1]], g = TRUE, e = TRUE)
-#> ── <igraph> Event network ─────────────────────────────────────────── aaabdc0 ──
-#> ℹ undirected · named · weighted
-#> ℹ 5 vertices · 6 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>
-#> → vertex: name <chr>
-#> → edge:   weight <dbl>
-#> 
-#> ── Edges (vertex names) ────────────────────────────────────────────────────────
-#> [1] Alice ─ Bob    Alice ─ Cecil  Alice ─ Dan    Bob ─ Cecil    Bob ─ Dan     
-#> [6] Cecil ─ Dan   
+#> IGRAPH b520388 UNW- 5 6 -- Event network
+#> + attr: name (g/c), name (v/c), weight (e/n)
+#> + edges from b520388 (vertex names):
+#> [1] Alice--Bob   Alice--Cecil Alice--Dan   Bob  --Cecil Bob  --Dan  
+#> [6] Cecil--Dan  
 print(proj2[[2]], g = TRUE, e = TRUE)
-#> ── <igraph> Event network ─────────────────────────────────────────── 9a23413 ──
-#> ℹ undirected · named · weighted
-#> ℹ 3 vertices · 2 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>
-#> → vertex: name <chr>
-#> → edge:   weight <dbl>
-#> 
-#> ── Edges (vertex names) ────────────────────────────────────────────────────────
-#> [1] Party ─ Skiing      Skiing ─ Badminton 
+#> IGRAPH 011422a UNW- 3 2 -- Event network
+#> + attr: name (g/c), name (v/c), weight (e/n)
+#> + edges from 011422a (vertex names):
+#> [1] Party --Skiing    Skiing--Badminton
 ```

@@ -36,17 +36,16 @@ establishment.game(
 - type.dist:
 
   The distribution of the vertex types. This is assumed to be stationary
-  in time. The default `NULL` gives a uniform distribution.
+  in time.
 
 - pref.matrix:
 
   A matrix giving the preferences of the given vertex types. These
-  should be probabilities, i.e. numbers between zero and one. The
-  default `NULL` sets all preferences to one.
+  should be probabilities, i.e. numbers between zero and one.
 
 - directed:
 
-  Logical, whether to generate directed graphs.
+  Logical constant, whether to generate directed graphs.
 
 ## Related documentation in the C library
 

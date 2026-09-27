@@ -8,9 +8,9 @@ vertices they both cite, `bibcoupling()` calculates this.
 ## Usage
 
 ``` r
-cocitation(graph, v = NULL)
+cocitation(graph, v = V(graph))
 
-bibcoupling(graph, v = NULL)
+bibcoupling(graph, v = V(graph))
 ```
 
 ## Arguments
@@ -21,9 +21,9 @@ bibcoupling(graph, v = NULL)
 
 - v:
 
-  Vertex sequence or numeric vector, the vertex IDs for which the
+  Vertex sequence or numeric vector, the vertex ids for which the
   cocitation or bibliographic coupling values we want to calculate. The
-  default `NULL` selects all vertices.
+  default is all vertices.
 
 ## Value
 

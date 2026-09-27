@@ -8,12 +8,11 @@ model of springs.
 ``` r
 layout_with_kk(
   graph,
-  ...,
   coords = NULL,
   dim = c(2, 3),
-  maxiter = NULL,
+  maxiter = 50 * vcount(graph),
   epsilon = 0,
-  kkconst = NULL,
+  kkconst = max(vcount(graph), 1),
   weights = NULL,
   minx = NULL,
   maxx = NULL,
@@ -27,6 +26,8 @@ layout_with_kk(
   coolexp = deprecated(),
   start = deprecated()
 )
+
+with_kk(...)
 ```
 
 ## Arguments
@@ -35,14 +36,10 @@ layout_with_kk(
 
   The input graph. Edge directions are ignored.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - coords:
 
-  Starting coordinates in a two or three column matrix, depending on the
-  `dim` argument. Default: `NULL`.
+  If not `NULL`, then the starting coordinates should be given here, in
+  a two or three column matrix, depending on the `dim` argument.
 
 - dim:
 
@@ -52,8 +49,7 @@ layout_with_kk(
 - maxiter:
 
   The maximum number of iterations to perform. The algorithm might
-  terminate earlier, see the `epsilon` argument. The default `NULL` uses
-  `50 * vcount(graph)`.
+  terminate earlier, see the `epsilon` argument.
 
 - epsilon:
 
@@ -63,8 +59,8 @@ layout_with_kk(
 
 - kkconst:
 
-  Numeric scalar, the Kamada-Kawai vertex attraction constant. The
-  default `NULL` uses the number of vertices.
+  Numeric scalar, the Kamada-Kawai vertex attraction constant. Typical
+  (and default) value is the number of vertices.
 
 - weights:
 
@@ -76,9 +72,9 @@ layout_with_kk(
 
 - minx:
 
-  Numeric vector that gives lower boundaries for the ‘x’ coordinates of
-  the vertices. The length of the vector must match the number of
-  vertices in the graph. Default: `NULL`.
+  If not `NULL`, then it must be a numeric vector that gives lower
+  boundaries for the ‘x’ coordinates of the vertices. The length of the
+  vector must match the number of vertices in the graph.
 
 - maxx:
 
@@ -113,6 +109,10 @@ layout_with_kk(
 
   Deprecated synonym for `coords`, for compatibility.
 
+- ...:
+
+  Passed to `layout_with_kk()`.
+
 ## Value
 
 A numeric matrix with two (dim=2) or three (dim=3) columns, and as many
@@ -142,10 +142,7 @@ Graphs. *Information Processing Letters*, 31/1, 7–15, 1989.
 
 [`layout_with_drl()`](https://r.igraph.org/reference/layout_with_drl.md),
 [`plot.igraph()`](https://r.igraph.org/reference/plot.igraph.md),
-[`tkplot()`](https://r.igraph.org/reference/tkplot.md). See
-[`with_kk()`](https://r.igraph.org/reference/layout_spec.md) to build a
-lazy layout specification for
-[`add_layout_()`](https://r.igraph.org/reference/add_layout_.md).
+[`tkplot()`](https://r.igraph.org/reference/tkplot.md)
 
 Other graph layouts:
 [`add_layout_()`](https://r.igraph.org/reference/add_layout_.md),

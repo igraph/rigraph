@@ -16,7 +16,7 @@ tkplot.reshape(tkp.id, newlayout, ..., params)
 
 - tkp.id:
 
-  The ID of the tkplot window to close/reshape/etc.
+  The id of the tkplot window to close/reshape/etc.
 
 - newlayout:
 
@@ -24,15 +24,9 @@ tkplot.reshape(tkp.id, newlayout, ..., params)
 
 - ...:
 
-  For [`tkplot()`](https://r.igraph.org/reference/tkplot.md), additional
-  plotting parameters, see
+  Additional plotting parameters. See
   [igraph.plotting](https://r.igraph.org/reference/plot.common.md) for
-  the complete list. For
-  [`tk_close()`](https://r.igraph.org/reference/tkplot.md),
-  [`tk_fit()`](https://r.igraph.org/reference/tkplot.md),
-  [`tk_coords()`](https://r.igraph.org/reference/tkplot.md) and
-  [`tk_rotate()`](https://r.igraph.org/reference/tkplot.md), these dots
-  must be empty.
+  the complete list.
 
 - params:
 

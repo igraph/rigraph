@@ -17,7 +17,7 @@ National Laboratories."><meta property="og:image" content="https://r.igraph.org/
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9038</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +49,7 @@ National Laboratories."><meta property="og:image" content="https://r.igraph.org/
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>The DrL graph layout generator</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/layout.R" class="external-link"><code>R/layout.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/layout.R" class="external-link"><code>R/layout.R</code></a></small>
       <div class="d-none name"><code>layout_with_drl.Rd</code></div>
     </div>
 
@@ -63,13 +63,14 @@ National Laboratories.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">layout_with_drl</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
-<span>  <span class="va">...</span>,</span>
 <span>  use.seed <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  seed <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  options <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  seed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="gorder.html">vcount</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span> <span class="op">*</span> <span class="fl">2</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
+<span>  options <span class="op">=</span> <span class="va">drl_defaults</span><span class="op">$</span><span class="va">default</span>,</span>
 <span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">with_drl</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -80,24 +81,19 @@ National Laboratories.</p>
 <dd><p>The input graph, in can be directed or undirected.</p></dd>
 
 
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>These dots are for future extensions and must be empty.</p></dd>
-
-
 <dt id="arg-use-seed">use.seed<a class="anchor" aria-label="anchor" href="#arg-use-seed"></a></dt>
-<dd><p>Logical, whether to use the coordinates given in the
+<dd><p>Logical scalar, whether to use the coordinates given in the
 <code>seed</code> argument as a starting point.</p></dd>
 
 
 <dt id="arg-seed">seed<a class="anchor" aria-label="anchor" href="#arg-seed"></a></dt>
 <dd><p>A matrix with two columns, the starting coordinates for the
-vertices is <code>use.seed</code> is <code>TRUE</code>. It is ignored otherwise. The default
-<code>NULL</code> draws uniformly random starting coordinates.</p></dd>
+vertices is <code>use.seed</code> is <code>TRUE</code>. It is ignored otherwise.</p></dd>
 
 
 <dt id="arg-options">options<a class="anchor" aria-label="anchor" href="#arg-options"></a></dt>
 <dd><p>Options for the layout generator, a named list. See details
-below. The default <code>NULL</code> uses <code>drl_defaults$default</code>.</p></dd>
+below.</p></dd>
 
 
 <dt id="arg-weights">weights<a class="anchor" aria-label="anchor" href="#arg-weights"></a></dt>
@@ -115,6 +111,10 @@ correspond to stronger connections.</p></dd>
 two dimensional or a three dimensional layout. Note that because of the
 nature of the DrL algorithm, the three dimensional layout takes
 significantly longer to compute.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Passed to <code>layout_with_drl()</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -217,8 +217,7 @@ Reports, 2008. 2936: p. 1-10.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="layout_.html">layout()</a></code> for other layout generators. See <code><a href="layout_spec.html">with_drl()</a></code> to
-build a lazy layout specification for <code><a href="add_layout_.html">add_layout_()</a></code>.</p></div>
+    <div class="dont-index"><p><code><a href="layout_.html">layout()</a></code> for other layout generators.</p></div>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>

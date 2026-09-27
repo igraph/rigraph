@@ -47,12 +47,9 @@ pak::pak(dependencies = "Config/Needs/build")
 - Run tests: `testthat::test_local(reporter = "check")`
 - Run tests for a single file `test-foo.R`:
   `testthat::test_local(filter = "foo", reporter = "check")`
-- Build package:
-  [`devtools::build()`](https://devtools.r-lib.org/reference/build.html)
-- Check package:
-  [`devtools::check()`](https://devtools.r-lib.org/reference/check.html)
-- Update `.Rd` documentation:
-  [`devtools::document()`](https://devtools.r-lib.org/reference/document.html)
+- Build package: `devtools::build()`
+- Check package: `devtools::check()`
+- Update `.Rd` documentation: `devtools::document()`
 - Format code: `air format .`
 
 ## Code Style and Documentation
@@ -105,22 +102,13 @@ pak::pak(dependencies = "Config/Needs/build")
 - Document internal functions using devtag (work in progress)
 - Link to C documentation using `@cdocs` tag:
   `#' @cdocs igraph_function_name`
-- Write “ID”/“IDs” (not “id”/“ids”) when referring to vertex/edge IDs in
-  documentation *prose*. Lowercase stays only where the token is code:
-  argument names, runnable `@examples`, and spans in `` `...` `` or
-  `\code{}`. Run `Rscript tools/check-id-casing.R` to find violations in
-  roxygen prose.
-- Always run
-  [`devtools::document()`](https://devtools.r-lib.org/reference/document.html)
-  after updating documentation
+- Always run `devtools::document()` after updating documentation
 
 ### Naming Conventions
 
 - Use `max` for maximal (graph theory term: a vertex is maximal if no
   other vertex dominates it) and `largest` for maximum (the biggest
   value in a set)
-- Use `make_xxx()` for functions creating graphs in a deterministic way,
-  and `sample_xxx()` for functions sampling graphs from some ensemble
 
 ### New functions
 
@@ -133,10 +121,8 @@ All new functions must include:
 - An “experimental” badge via `r lifecycle::badge("experimental")`
 - All arguments in `snake_case`, with documentation and suitable
   defaults
-- An ellipsis guarded with `check_dots_empty()` separating the head
-  (required and defining arguments) from keyword-only options, following
-  the zoning rules in
-  [CONTRIBUTING.md](https://r.igraph.org/CONTRIBUTING.html#argument-order-and-the-ellipsis)
+- An ellipsis guarded with `check_dots_empty()` separating mandatory and
+  optional arguments
 - Argument validation using built-in `check_*()` functions or
   `igraph_arg_match()`
 
@@ -198,6 +184,4 @@ change.
 - When testing error behavior, prefer snapshot tests.
 - Run tests frequently during development and at the end:
   `testthat::test_local(reporter = "check")`
-- Run
-  [`devtools::check()`](https://devtools.r-lib.org/reference/check.html)
-  as a final step to ensure all checks pass.
+- Run `devtools::check()` as a final step to ensure all checks pass.

@@ -12,7 +12,7 @@ more consistent API.
 contract.vertices(
   graph,
   mapping,
-  vertex.attr.comb = igraph_opt("vertex_attr_combine")
+  vertex.attr.comb = igraph_opt("vertex.attr.comb")
 )
 ```
 
@@ -25,8 +25,15 @@ contract.vertices(
 - mapping:
 
   A numeric vector that specifies the mapping. Its elements correspond
-  to the vertices, and for each element the ID in the new graph is
+  to the vertices, and for each element the id in the new graph is
   given.
+
+- vertex.attr.comb:
+
+  Specifies how to combine the vertex attributes in the new graph.
+  Please see
+  [`attribute.combination()`](https://r.igraph.org/reference/igraph-attribute-combination.md)
+  for details.
 
 ## Related documentation in the C library
 

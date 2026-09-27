@@ -15,7 +15,7 @@ form."><meta property="og:image" content="https://r.igraph.org/logo.png"></head>
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9038</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ form."><meta property="og:image" content="https://r.igraph.org/logo.png"></head>
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Print graphs to the terminal</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/print.R" class="external-link"><code>R/print.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/print.R" class="external-link"><code>R/print.R</code></a></small>
       <div class="d-none name"><code>print.igraph.Rd</code></div>
     </div>
 
@@ -61,13 +61,13 @@ form.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for class 'igraph'</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
-<span>  full <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  graph.attributes <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  vertex.attributes <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  edge.attributes <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  full <span class="op">=</span> <span class="fu"><a href="igraph_options.html">igraph_opt</a></span><span class="op">(</span><span class="st">"print.full"</span><span class="op">)</span>,</span>
+<span>  graph.attributes <span class="op">=</span> <span class="fu"><a href="igraph_options.html">igraph_opt</a></span><span class="op">(</span><span class="st">"print.graph.attributes"</span><span class="op">)</span>,</span>
+<span>  vertex.attributes <span class="op">=</span> <span class="fu"><a href="igraph_options.html">igraph_opt</a></span><span class="op">(</span><span class="st">"print.vertex.attributes"</span><span class="op">)</span>,</span>
+<span>  edge.attributes <span class="op">=</span> <span class="fu"><a href="igraph_options.html">igraph_opt</a></span><span class="op">(</span><span class="st">"print.edge.attributes"</span><span class="op">)</span>,</span>
 <span>  names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  max.lines <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  id <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  max.lines <span class="op">=</span> <span class="fu"><a href="igraph_options.html">igraph_opt</a></span><span class="op">(</span><span class="st">"auto.print.lines"</span><span class="op">)</span>,</span>
+<span>  id <span class="op">=</span> <span class="fu"><a href="igraph_options.html">igraph_opt</a></span><span class="op">(</span><span class="st">"print.id"</span><span class="op">)</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -84,40 +84,35 @@ form.</p>
 
 
 <dt id="arg-full">full<a class="anchor" aria-label="anchor" href="#arg-full"></a></dt>
-<dd><p>Logical, whether to print the graph structure itself as
-well. The default <code>NULL</code> uses the <code>print.full</code> igraph option.</p></dd>
+<dd><p>Logical scalar, whether to print the graph structure itself as
+well.</p></dd>
 
 
 <dt id="arg-graph-attributes">graph.attributes<a class="anchor" aria-label="anchor" href="#arg-graph-attributes"></a></dt>
-<dd><p>Logical, whether to print graph attributes. The
-default <code>NULL</code> uses the <code>print.graph.attributes</code> igraph option.</p></dd>
+<dd><p>Logical constant, whether to print graph attributes.</p></dd>
 
 
 <dt id="arg-vertex-attributes">vertex.attributes<a class="anchor" aria-label="anchor" href="#arg-vertex-attributes"></a></dt>
-<dd><p>Logical, whether to print vertex
-attributes. The default <code>NULL</code> uses the <code>print.vertex.attributes</code> igraph
-option.</p></dd>
+<dd><p>Logical constant, whether to print vertex
+attributes.</p></dd>
 
 
 <dt id="arg-edge-attributes">edge.attributes<a class="anchor" aria-label="anchor" href="#arg-edge-attributes"></a></dt>
-<dd><p>Logical, whether to print edge attributes. The
-default <code>NULL</code> uses the <code>print.edge.attributes</code> igraph option.</p></dd>
+<dd><p>Logical constant, whether to print edge attributes.</p></dd>
 
 
 <dt id="arg-names">names<a class="anchor" aria-label="anchor" href="#arg-names"></a></dt>
-<dd><p>Logical, whether to print symbolic vertex names (i.e.
-the <code>name</code> vertex attribute) or vertex IDs.</p></dd>
+<dd><p>Logical constant, whether to print symbolic vertex names (i.e.
+the <code>name</code> vertex attribute) or vertex ids.</p></dd>
 
 
 <dt id="arg-max-lines">max.lines<a class="anchor" aria-label="anchor" href="#arg-max-lines"></a></dt>
 <dd><p>The maximum number of lines to use. The rest of the
-output will be truncated. If not given, the <code>auto.print.lines</code> igraph
-option applies; <code>NULL</code> prints all lines.</p></dd>
+output will be truncated.</p></dd>
 
 
 <dt id="arg-id">id<a class="anchor" aria-label="anchor" href="#arg-id"></a></dt>
-<dd><p>Whether to print the graph ID. The default <code>NULL</code> uses the
-<code>print.id</code> igraph option.</p></dd>
+<dd><p>Whether to print the graph ID.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -140,7 +135,7 @@ graph is directed.</p>
 optionally graph, vertex and/or edge attributes.</p>
 <p><code>print.igraph()</code> behaves either as <code>summary.igraph</code> or
 <code>print_all()</code> depending on the <code>full</code> argument. See also the
-‘print.full’ igraph option and <code><a href="igraph_opt.html">igraph_opt()</a></code>.</p>
+‘print.full’ igraph option and <code><a href="igraph_options.html">igraph_opt()</a></code>.</p>
 <p>The graph summary printed by <code>summary.igraph</code> (and <code>print.igraph()</code>
 and <code>print_all()</code>) consists of one or more lines. The first line contains
 the basic properties of the graph, and the rest contains its attributes.
@@ -150,7 +145,7 @@ vertices:</p><div class="sourceCode"><pre><code>    IGRAPH badcafe DNW- 10 9 -- 
       weight (e/n) </code></pre></div><p>The first line always
 starts with <code>IGRAPH</code>, showing you that the object is an igraph graph.
 Then a seven character code is printed, this the first seven characters
-of the unique ID of the graph. See <code><a href="graph_id.html">graph_id()</a></code> for more.
+of the unique id of the graph. See <code><a href="graph_id.html">graph_id()</a></code> for more.
 Then a four letter long code string is printed. The first letter
 distinguishes between directed (‘<code>D</code>’) and undirected
 (‘<code>U</code>’) graphs. The second letter is ‘<code>N</code>’ for named
@@ -171,11 +166,6 @@ comma. After the attribute names, the kind of the attribute – graph
 <code>max.print</code> option, see <code><a href="https://rdrr.io/r/base/options.html" class="external-link">base::options()</a></code> for details.</p>
 <p>As of igraph 1.1.1, the <code>str.igraph</code> function is defunct, use
 <code>print_all()</code>.</p>
-<p>Output style is controlled by the <code>print.style</code> igraph option. The default
-<code>"cli"</code> produces cli-styled output with section rules, typed attribute
-listings and Unicode arrows for edges. Set
-<code>igraph_options(print.style = "classic")</code> for the historical
-<code>IGRAPH ... DNW-</code> header relied on by parsers and tutorials.</p>
     </div>
     <div class="section level2">
     <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
@@ -191,23 +181,13 @@ listings and Unicode arrows for edges. Set
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Ring graph ────────────────────────────────────────────── 62aacf6 ──</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 10 vertices · 10 edges</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── Attributes ──────────────────────────────────────────────────────────────────</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> → graph:  <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span>, <span style="color: #00BB00;">mutual</span> <span style="color: #0000BB;">&lt;lgl&gt;</span>, <span style="color: #00BB00;">circular</span> <span style="color: #0000BB;">&lt;lgl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── Edges ───────────────────────────────────────────────────────────────────────</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 ─ 2   2 ─ 3   3 ─ 4   4 ─ 5   5 ─ 6   6 ─ 7   7 ─ 8   8 ─ 9   9 ─ 10 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10] 1 ─ 10 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 647b48b U--- 10 10 -- Ring graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 647b48b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Ring graph ────────────────────────────────────────────── 62aacf6 ──</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 10 vertices · 10 edges</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── Attributes ──────────────────────────────────────────────────────────────────</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> → graph:  <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span>, <span style="color: #00BB00;">mutual</span> <span style="color: #0000BB;">&lt;lgl&gt;</span>, <span style="color: #00BB00;">circular</span> <span style="color: #0000BB;">&lt;lgl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 647b48b U--- 10 10 -- Ring graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l)</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

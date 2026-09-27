@@ -27,20 +27,20 @@ layout.gem(
 
 - coords:
 
-  Starting coordinates in a two or three column matrix, depending on the
-  `dim` argument. Default: `NULL`.
+  If not `NULL`, then the starting coordinates should be given here, in
+  a two or three column matrix, depending on the `dim` argument.
 
 - maxiter:
 
   The maximum number of iterations to perform. Updating a single vertex
-  counts as an iteration. The default `NULL` uses 40 \* n \* n, where n
+  counts as an iteration. A reasonable default is 40 \* n \* n, where n
   is the number of vertices. The original paper suggests 4 \* n \* n,
   but this usually only works if the other parameters are set up
   carefully.
 
 - temp.max:
 
-  The maximum allowed local temperature. The default `NULL` uses the
+  The maximum allowed local temperature. A reasonable default is the
   number of vertices.
 
 - temp.min:
@@ -50,7 +50,7 @@ layout.gem(
 
 - temp.init:
 
-  Initial local temperature of all vertices. The default `NULL` uses the
+  Initial local temperature of all vertices. A reasonable default is the
   square root of the number of vertices.
 
 ## Related documentation in the C library

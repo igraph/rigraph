@@ -24,8 +24,7 @@ similarity.invlogweighted(
 
 - vids:
 
-  The vertex IDs for which the similarity is calculated. The default
-  `NULL` selects all vertices.
+  The vertex ids for which the similarity is calculated.
 
 - mode:
 

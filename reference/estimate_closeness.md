@@ -26,8 +26,7 @@ estimate_closeness(
 
 - vids:
 
-  The vertices for which closeness will be calculated. The default
-  `NULL` selects all vertices.
+  The vertices for which closeness will be calculated.
 
 - mode:
 
@@ -50,10 +49,10 @@ estimate_closeness(
 
 - normalized:
 
-  Logical, whether to calculate the normalized closeness, i.e. the
-  inverse average distance to all reachable vertices. The non-normalized
-  closeness is the inverse of the sum of distances to all reachable
-  vertices.
+  Logical scalar, whether to calculate the normalized closeness, i.e.
+  the inverse average distance to all reachable vertices. The
+  non-normalized closeness is the inverse of the sum of distances to all
+  reachable vertices.
 
 ## Related documentation in the C library
 

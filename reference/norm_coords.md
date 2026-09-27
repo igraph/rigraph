@@ -7,7 +7,6 @@ Rescale coordinates linearly to be within given bounds.
 ``` r
 norm_coords(
   layout,
-  ...,
   xmin = -1,
   xmax = 1,
   ymin = -1,
@@ -22,10 +21,6 @@ norm_coords(
 - layout:
 
   A matrix with two or three columns, the layout to normalize.
-
-- ...:
-
-  These dots are for future extensions and must be empty.
 
 - xmin, xmax:
 

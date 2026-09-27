@@ -41,8 +41,7 @@ layout.davidson.harel(
 
 - fineiter:
 
-  Number of iterations in the fine tuning phase. The default `NULL` uses
-  `max(10, log2(vcount(graph)))`.
+  Number of iterations in the fine tuning phase.
 
 - cool.fact:
 
@@ -60,18 +59,15 @@ layout.davidson.harel(
 
 - weight.edge.lengths:
 
-  Weight for the edge length component of the energy function. The
-  default `NULL` uses `edge_density(graph) / 10`.
+  Weight for the edge length component of the energy function.
 
 - weight.edge.crossings:
 
-  Weight for the edge crossing component of the energy function. The
-  default `NULL` uses `1 - sqrt(edge_density(graph))`.
+  Weight for the edge crossing component of the energy function.
 
 - weight.node.edge.dist:
 
   Weight for the node-edge distance component of the energy function.
-  The default `NULL` uses `0.2 * (1 - edge_density(graph))`.
 
 ## Related documentation in the C library
 

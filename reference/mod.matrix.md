@@ -21,7 +21,7 @@ mod.matrix(graph, membership, weights = NULL, resolution = 1, directed = TRUE)
 
 - weights:
 
-  Numeric vector giving edge weights. Default: `NULL`.
+  If not `NULL` then a numeric vector giving edge weights.
 
 - resolution:
 

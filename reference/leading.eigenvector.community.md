@@ -54,9 +54,9 @@ leading.eigenvector.community(
 
 - callback:
 
-  Callback function. This is called after each iteration, after
-  calculating the leading eigenvector of the modularity matrix. See
-  details below. Default: `NULL`.
+  If not `NULL`, then it must be callback function. This is called after
+  each iteration, after calculating the leading eigenvector of the
+  modularity matrix. See details below.
 
 - extra:
 

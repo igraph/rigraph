@@ -9,7 +9,6 @@ will be taken into account.
 ``` r
 cluster_infomap(
   graph,
-  ...,
   e.weights = NULL,
   v.weights = NULL,
   nb.trials = 10,
@@ -23,25 +22,22 @@ cluster_infomap(
 
   The input graph. Edge directions will be taken into account.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - e.weights:
 
-  Numeric vector of edge weights. The length must match the number of
-  edges in the graph. By default (`NULL`) the ‘`weight`’ edge attribute
-  is used as weights. If it is not present, then all edges are
+  If not `NULL`, then a numeric vector of edge weights. The length must
+  match the number of edges in the graph. By default the ‘`weight`’ edge
+  attribute is used as weights. If it is not present, then all edges are
   considered to have the same weight. Larger edge weights correspond to
   stronger connections.
 
 - v.weights:
 
-  Numeric vector of vertex weights. The length must match the number of
-  vertices in the graph. By default (`NULL`) the ‘`weight`’ vertex
-  attribute is used as weights. If it is not present, then all vertices
-  are considered to have the same weight. A larger vertex weight means a
-  larger probability that the random surfer jumps to that vertex.
+  If not `NULL`, then a numeric vector of vertex weights. The length
+  must match the number of vertices in the graph. By default the
+  ‘`weight`’ vertex attribute is used as weights. If it is not present,
+  then all vertices are considered to have the same weight. A larger
+  vertex weight means a larger probability that the random surfer jumps
+  to that vertex.
 
 - nb.trials:
 
@@ -50,8 +46,8 @@ cluster_infomap(
 
 - modularity:
 
-  Logical, whether to calculate the modularity score of the detected
-  community structure.
+  Logical scalar, whether to calculate the modularity score of the
+  detected community structure.
 
 ## Value
 

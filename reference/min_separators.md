@@ -80,72 +80,72 @@ mw5 <- induced_subgraph(mw, as.character(1:7))
 
 min_separators(mw)
 #> [[1]]
-#> ── <vertex sequence> 1/23 · named · from cbc0c04 ───────────────────────────────
+#> + 1/23 vertex, named, from 9be7387:
 #> [1] 7
 #> 
 min_separators(mw1)
 #> [[1]]
-#> ── <vertex sequence> 2/14 · named · from 194ad58 ───────────────────────────────
+#> + 2/14 vertices, named, from 7dda1d8:
 #> [1] 5  19
 #> 
 #> [[2]]
-#> ── <vertex sequence> 2/14 · named · from 194ad58 ───────────────────────────────
+#> + 2/14 vertices, named, from 7dda1d8:
 #> [1] 5 7
 #> 
 #> [[3]]
-#> ── <vertex sequence> 2/14 · named · from 194ad58 ───────────────────────────────
+#> + 2/14 vertices, named, from 7dda1d8:
 #> [1] 7  21
 #> 
 #> [[4]]
-#> ── <vertex sequence> 2/14 · named · from 194ad58 ───────────────────────────────
+#> + 2/14 vertices, named, from 7dda1d8:
 #> [1] 21 19
 #> 
 min_separators(mw2)
 #> [[1]]
-#> ── <vertex sequence> 2/10 · named · from cf51d2c ───────────────────────────────
+#> + 2/10 vertices, named, from 339552e:
 #> [1] 10 16
 #> 
 #> [[2]]
-#> ── <vertex sequence> 2/10 · named · from cf51d2c ───────────────────────────────
+#> + 2/10 vertices, named, from 339552e:
 #> [1] 14 16
 #> 
 #> [[3]]
-#> ── <vertex sequence> 2/10 · named · from cf51d2c ───────────────────────────────
+#> + 2/10 vertices, named, from 339552e:
 #> [1] 8  10
 #> 
 min_separators(mw3)
 #> [[1]]
-#> ── <vertex sequence> 2/7 · named · from 9b14c8d ────────────────────────────────
+#> + 2/7 vertices, named, from cf9f940:
 #> [1] 21 19
 #> 
 min_separators(mw4)
 #> [[1]]
-#> ── <vertex sequence> 3/4 · named · from 8352baf ────────────────────────────────
+#> + 3/4 vertices, named, from 9703bcc:
 #> [1] 8  11 14
 #> 
 #> [[2]]
-#> ── <vertex sequence> 3/4 · named · from 8352baf ────────────────────────────────
+#> + 3/4 vertices, named, from 9703bcc:
 #> [1] 7  11 14
 #> 
 #> [[3]]
-#> ── <vertex sequence> 3/4 · named · from 8352baf ────────────────────────────────
+#> + 3/4 vertices, named, from 9703bcc:
 #> [1] 7  8  14
 #> 
 #> [[4]]
-#> ── <vertex sequence> 3/4 · named · from 8352baf ────────────────────────────────
+#> + 3/4 vertices, named, from 9703bcc:
 #> [1] 7  8  11
 #> 
 min_separators(mw5)
 #> [[1]]
-#> ── <vertex sequence> 5/7 · named · from 22b30b1 ────────────────────────────────
+#> + 5/7 vertices, named, from 34627b2:
 #> [1] 2 3 4 5 6
 #> 
 #> [[2]]
-#> ── <vertex sequence> 5/7 · named · from 22b30b1 ────────────────────────────────
+#> + 5/7 vertices, named, from 34627b2:
 #> [1] 1 3 4 5 7
 #> 
 #> [[3]]
-#> ── <vertex sequence> 5/7 · named · from 22b30b1 ────────────────────────────────
+#> + 5/7 vertices, named, from 34627b2:
 #> [1] 1 2 4 6 7
 #> 
 
@@ -166,47 +166,47 @@ camp <- graph_from_literal(
 )
 min_separators(camp)
 #> [[1]]
-#> ── <vertex sequence> 2/18 · named · from b6cf710 ───────────────────────────────
+#> + 2/18 vertices, named, from c5b47ba:
 #> [1] Pat   Holly
 #> 
 #> [[2]]
-#> ── <vertex sequence> 2/18 · named · from b6cf710 ───────────────────────────────
+#> + 2/18 vertices, named, from c5b47ba:
 #> [1] Pat     Michael
 #> 
 #> [[3]]
-#> ── <vertex sequence> 2/18 · named · from b6cf710 ───────────────────────────────
+#> + 2/18 vertices, named, from c5b47ba:
 #> [1] Pat  John
 #> 
 #> [[4]]
-#> ── <vertex sequence> 2/18 · named · from b6cf710 ───────────────────────────────
+#> + 2/18 vertices, named, from c5b47ba:
 #> [1] Holly Gery 
 #> 
 #> [[5]]
-#> ── <vertex sequence> 2/18 · named · from b6cf710 ───────────────────────────────
+#> + 2/18 vertices, named, from c5b47ba:
 #> [1] Michael Gery   
 #> 
 #> [[6]]
-#> ── <vertex sequence> 2/18 · named · from b6cf710 ───────────────────────────────
+#> + 2/18 vertices, named, from c5b47ba:
 #> [1] John Gery
 #> 
 #> [[7]]
-#> ── <vertex sequence> 2/18 · named · from b6cf710 ───────────────────────────────
+#> + 2/18 vertices, named, from c5b47ba:
 #> [1] Gery Russ
 #> 
 #> [[8]]
-#> ── <vertex sequence> 2/18 · named · from b6cf710 ───────────────────────────────
+#> + 2/18 vertices, named, from c5b47ba:
 #> [1] Holly   Michael
 #> 
 #> [[9]]
-#> ── <vertex sequence> 2/18 · named · from b6cf710 ───────────────────────────────
+#> + 2/18 vertices, named, from c5b47ba:
 #> [1] Holly John 
 #> 
 #> [[10]]
-#> ── <vertex sequence> 2/18 · named · from b6cf710 ───────────────────────────────
+#> + 2/18 vertices, named, from c5b47ba:
 #> [1] Steve Bert 
 #> 
 #> [[11]]
-#> ── <vertex sequence> 2/18 · named · from b6cf710 ───────────────────────────────
+#> + 2/18 vertices, named, from c5b47ba:
 #> [1] Steve Russ 
 #> 
 ```

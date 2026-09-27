@@ -29,8 +29,8 @@ laplacian_matrix(
 
 - sparse:
 
-  Logical, whether to return the result as a sparse matrix. The `Matrix`
-  package is required for sparse matrices.
+  Logical scalar, whether to return the result as a sparse matrix. The
+  `Matrix` package is required for sparse matrices.
 
 - normalization:
 
