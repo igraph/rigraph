@@ -6,9 +6,13 @@ on:
 
 name: revdep
 
+permissions:
+  contents: read
+
 jobs:
   matrix:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-26.04
+    timeout-minutes: 30 # longest run seen: 2 min
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
 
@@ -16,61 +20,47 @@ jobs:
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      RSPM: https://packagemanager.rstudio.com/cran/__linux__/bionic/latest
+      RSPM: https://packagemanager.posit.co/cran/__linux__/resolute/latest
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       # prevent rgl issues because no X11 display is available
       RGL_USE_NULL: true
-      # Begin custom: env vars
-      # End custom: env vars
 
     steps:
       - name: Check rate limits
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          curl -s --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/rate_limit
+          curl -s --header "authorization: Bearer ${GH_TOKEN}" https://api.github.com/rate_limit
         shell: bash
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      # FIXME: Avoid reissuing succesful jobs
+      # FIXME: Avoid reissuing successful jobs
       # https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#list-jobs-for-a-workflow-run
       # https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#workflow-runs
-      - id: set-matrix
-        run: |
-          package <- read.dcf("DESCRIPTION")[, "Package"][[1]]
-          deps <- tools:::package_dependencies(package, reverse = TRUE, which = c("Depends", "Imports", "LinkingTo", "Suggests"))[[1]]
-          json <- paste0(
-            '{"package":[',
-            paste0('"', deps, '"', collapse = ","),
-            ']}'
-          )
-          writeLines(json)
-          writeLines(paste0("matrix=", json), Sys.getenv("GITHUB_OUTPUT"))
-        shell: Rscript {0}
+      - name: Collect the reverse dependencies
+        id: set-matrix
+        uses: cynkra/cynkratemplate/.github/actions/revdep-collect-deps@main
 
   check-matrix:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-26.04
+    timeout-minutes: 15 # longest run seen: 1 min
     needs: matrix
     steps:
-      - name: Install json2yaml
-        run: |
-          sudo npm install -g json2yaml
+      - uses: actions/checkout@v6
 
       - name: Check matrix definition
-        run: |
-          matrix='${{ needs.matrix.outputs.matrix }}'
-          echo $matrix
-          echo $matrix | jq .
-          echo $matrix | json2yaml
+        uses: cynkra/cynkratemplate/.github/actions/matrix-check@main
+        with:
+          matrix: ${{ needs.matrix.outputs.matrix }}
 
   R-CMD-check:
     needs: matrix
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-26.04
+    timeout-minutes: 120 # no recent runs to measure
 
     name: 'revdep: ${{ matrix.package }}'
-
-    # Begin custom: services
-    # End custom: services
 
     strategy:
       fail-fast: false
@@ -78,28 +68,25 @@ jobs:
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      RSPM: https://packagemanager.rstudio.com/cran/__linux__/bionic/latest
+      RSPM: https://packagemanager.posit.co/cran/__linux__/resolute/latest
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       # prevent rgl issues because no X11 display is available
       RGL_USE_NULL: true
-      # Begin custom: env vars
-      # End custom: env vars
 
     steps:
-      - name: Check rate limits
+      - name: Check rate limits before checking
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          curl -s --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/rate_limit
+          curl -s --header "authorization: Bearer ${GH_TOKEN}" https://api.github.com/rate_limit
         shell: bash
 
-      - uses: actions/checkout@v4
-
-      # Begin custom: before install
-      # End custom: before install
+      - uses: actions/checkout@v6
 
       - name: Use RSPM
         run: |
           mkdir -p /home/runner/work/_temp/Library
-          echo 'local({release <- system2("lsb_release", "-sc", stdout = TRUE); options(repos=c(CRAN = paste0("https://packagemanager.rstudio.com/all/__linux__/", release, "/latest")), HTTPUserAgent = sprintf("R/%s R (%s)", getRversion(), paste(getRversion(), R.version$platform, R.version$arch, R.version$os)))}); .libPaths("/home/runner/work/_temp/Library")' | sudo tee /etc/R/Rprofile.site
+          echo 'local({release <- system2("lsb_release", "-sc", stdout = TRUE); options(repos=c(CRAN = paste0("https://packagemanager.posit.co/all/__linux__/", release, "/latest")), HTTPUserAgent = sprintf("R/%s R (%s)", getRversion(), paste(getRversion(), R.version$platform, R.version$arch, R.version$os)))}); .libPaths("/home/runner/work/_temp/Library")' | sudo tee /etc/R/Rprofile.site
 
       - name: Install remotes
         run: |
@@ -109,11 +96,24 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@v2
 
-      - name: Install system dependencies
+      - name: Close the log group that setup-pandoc leaves open
+        # See `.github/actions/install/action.yml` for why this is needed.
+        # Fixed upstream by https://github.com/r-lib/actions/pull/1103.
         if: runner.os == 'Linux'
         run: |
+          echo "::endgroup::"
+        shell: bash
+
+      - name: Install system dependencies
+        if: runner.os == 'Linux'
+        # The runner is ubuntu-26.04, but remotes::system_requirements() hardcodes
+        # its supported list up to ubuntu-24.04 (r-lib/remotes, R/system_requirements.R;
+        # no tracking issue yet -- one should be filed). The rstudio/r-system-requirements
+        # catalog itself already covers 26.04, and apt package names are stable across
+        # LTS releases, so the 24.04 mappings install correctly on 26.04.
+        run: |
           sudo apt-get update -y
-          Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "22.04")); package <- "${{ matrix.package }}"; deps <- tools::package_dependencies(package, which = "Suggests")[[1]]; lapply(c(package, deps), function(x) { writeLines(remotes::system_requirements("ubuntu", "22.04", package = x)) })' | sort | uniq > .github/deps.sh
+          Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "24.04")); package <- "${{ matrix.package }}"; deps <- tools::package_dependencies(package, which = "Suggests")[[1]]; lapply(c(package, deps), function(x) { writeLines(remotes::system_requirements("ubuntu", "24.04", package = x)) })' | sort | uniq > .github/deps.sh
           cat .github/deps.sh
           sudo sh < .github/deps.sh
 
@@ -125,89 +125,40 @@ jobs:
         shell: Rscript {0}
 
       - name: Session info old
-        run: |
-          options(width = 100)
-          if (!requireNamespace("sessioninfo", quietly = TRUE)) install.packages("sessioninfo")
-          pkgs <- installed.packages()[, "Package"]
-          sessioninfo::session_info(pkgs, include_base = TRUE)
-        shell: Rscript {0}
-
-      # Begin custom: after install
-      # End custom: after install
+        uses: cynkra/cynkratemplate/.github/actions/session-info@main
 
       - name: Check old
-        env:
-          _R_CHECK_CRAN_INCOMING_: false
-          _R_CHECK_SYSTEM_CLOCK_: false
-          _R_CHECK_FUTURE_FILE_TIMESTAMPS_: false
         # Avoid downloading binary package from RSPM
-        run: |
-          package <- "${{ matrix.package }}"
-          options(HTTPUserAgent = "gha")
-          path <- download.packages(package, destdir = ".github")[, 2]
-          print(path)
-
-          dir <- file.path("revdep", package)
-          dir.create(dir, showWarnings = FALSE, recursive = TRUE)
-          check <- rcmdcheck::rcmdcheck(path, args = c("--no-manual", "--as-cran"), error_on = "never", check_dir = file.path(dir, "check"))
-          file.rename(file.path(dir, "check"), file.path(dir, "old"))
-          saveRDS(check, file.path(dir, "old.rds"))
-        shell: Rscript {0}
-
+        uses: cynkra/cynkratemplate/.github/actions/revdep-check-old@main
+        with:
+          package: ${{ matrix.package }}
       - name: Install local package
         run: |
           remotes::install_local(".", force = TRUE)
         shell: Rscript {0}
 
       - name: Session info new
-        run: |
-          options(width = 100)
-          pkgs <- installed.packages()[, "Package"]
-          sessioninfo::session_info(pkgs, include_base = TRUE)
-        shell: Rscript {0}
+        uses: cynkra/cynkratemplate/.github/actions/session-info@main
 
       - name: Check new
-        env:
-          _R_CHECK_CRAN_INCOMING_: false
-          _R_CHECK_SYSTEM_CLOCK_: false
-          _R_CHECK_FUTURE_FILE_TIMESTAMPS_: false
-        run: |
-          package <- "${{ matrix.package }}"
-          path <- dir(".github", pattern = paste0("^", package), full.names = TRUE)[[1]]
-          print(path)
-
-          dir <- file.path("revdep", package)
-          check <- rcmdcheck::rcmdcheck(path, args = c("--no-manual", "--as-cran"), error_on = "never", check_dir = file.path(dir, "check"))
-          file.rename(file.path(dir, "check"), file.path(dir, "new"))
-          saveRDS(check, file.path(dir, "new.rds"))
-        shell: Rscript {0}
-
+        uses: cynkra/cynkratemplate/.github/actions/revdep-check-new@main
+        with:
+          package: ${{ matrix.package }}
       - name: Compare
-        run: |
-          package <- "${{ matrix.package }}"
-          dir <- file.path("revdep", package)
-          old <- readRDS(file.path(dir, "old.rds"))
-          new <- readRDS(file.path(dir, "new.rds"))
-          compare <- rcmdcheck::compare_checks(old, new)
-          compare
-          cmp <- compare$cmp
-          if (!identical(cmp[cmp$which == "old", "output"], cmp[cmp$which == "new", "output"])) {
-            if (!requireNamespace("waldo", quietly = TRUE)) install.packages("waldo")
-            print(waldo::compare(old, new))
-
-            stop("Check output differs.")
-          }
-        shell: Rscript {0}
-
+        uses: cynkra/cynkratemplate/.github/actions/revdep-compare@main
+        with:
+          package: ${{ matrix.package }}
       - name: Upload check results
         if: failure()
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v6
         with:
           name: ${{ matrix.package }}-results
           path: revdep/${{ matrix.package }}
 
-      - name: Check rate limits
+      - name: Check rate limits after checking
         if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          curl -s --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/rate_limit
+          curl -s --header "authorization: Bearer ${GH_TOKEN}" https://api.github.com/rate_limit
         shell: bash

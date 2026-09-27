@@ -1,5 +1,26 @@
 # Workflow to update the status of a commit for the R-CMD-check workflow
 # Necessary because remote PRs cannot update the status of the commit
+#
+# SECURITY -- `workflow_run` runs from the default branch of the BASE
+# repository and this job holds `statuses: write`, so it can mark any commit
+# in this repository green. The run it reacts to may be a pull request from a
+# fork, which means both the run's metadata and its artifacts are
+# attacker-controlled. Two rules follow, and both are load-bearing:
+#
+#   1. The `rcc-smoke-sha` artifact is only read when the triggering run came
+#      from this repository. For a `pull_request` event GitHub uses the
+#      workflow file *from the pull request head*, so a fork can rewrite `rcc`
+#      to upload any artifact it likes; trusting it would let anyone set an
+#      arbitrary `rcc` status on an arbitrary commit and so satisfy a required
+#      status check. Even then the value must be a real 40-hex commit.
+#   2. No event field is interpolated with `${{ }}` into the script. Values
+#      reach the shell through the environment, where they stay inert data.
+#
+# The script itself lives in the `rcc-status-update` action, named in full
+# because this job has no checkout and a `./.github/workflows/...` reference
+# would need one. `@main` is the ref this workflow already runs from,
+# `workflow_run` using the default branch of the base repository, so naming it
+# changes nothing about which code runs.
 on:
   workflow_run:
     workflows:
@@ -10,70 +31,38 @@ on:
 
 name: rcc-status
 
+permissions: {}
+
 jobs:
   rcc-status:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
+    timeout-minutes: 15 # longest run seen: 1 min
 
     name: "Update commit status"
 
+    # Only run if triggered by rcc workflow
+    if: github.event.workflow_run.name == 'rcc'
+
     permissions:
+      # Required to list and download the triggering run's artifacts.
+      # The workflow did not previously request this, so the `rcc-smoke-sha`
+      # lookup below could not have succeeded.
+      actions: read
+      # Also used to verify that the SHA read from the artifact really exists
       contents: read
       statuses: write
 
     steps:
-      - name: "Update commit status"
-        # Only run if triggered by rcc workflow
-        if: github.event.workflow_run.name == 'rcc'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set -x
-
-          if [ "${{ github.event.workflow_run.status }}" == "completed" ]; then
-            if [ "${{ github.event.workflow_run.conclusion }}" == "success" ]; then
-              state="success"
-            else
-              state="failure"
-            fi
-
-            # Read artifact ID
-            artifact_id=$(gh api \
-              -H "Accept: application/vnd.github+json" \
-              -H "X-GitHub-Api-Version: 2022-11-28" \
-              repos/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}/artifacts | jq -r '.artifacts[] | select(.name == "rcc-smoke-sha") | .id')
-
-            if [ -n "${artifact_id}" ]; then
-              # Download artifact
-              curl -L -o rcc-smoke-sha.zip \
-                -H "Accept: application/vnd.github+json" \
-                -H "Authorization: Bearer ${GH_TOKEN}" \
-                -H "X-GitHub-Api-Version: 2022-11-28" \
-                https://api.github.com/repos/${{ github.repository }}/actions/artifacts/${artifact_id}/zip
-
-              # Unzip artifact
-              unzip rcc-smoke-sha.zip
-
-              # Read artifact
-              sha=$(cat rcc-smoke-sha.txt)
-
-              # Clean up
-              rm rcc-smoke-sha.zip rcc-smoke-sha.txt
-            fi
-          else
-            state="pending"
-          fi
-
-          if [ -z "${sha}" ]; then
-            sha=${{ github.event.workflow_run.head_sha }}
-          fi
-
-          html_url=${{ github.event.workflow_run.html_url }}
-          description=${{ github.event.workflow_run.name }}
-
-          gh api \
-            --method POST \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            repos/${{ github.repository }}/statuses/${sha} \
-            -f "state=${state}" -f "target_url=${html_url}" -f "description=${description}" -f "context=rcc"
-        shell: bash
+      - name: Update commit status
+        uses: cynkra/cynkratemplate/.github/actions/rcc-status-update@main
+        with:
+          gh-token: ${{ secrets.GITHUB_TOKEN }}
+          repo: ${{ github.repository }}
+          run-id: ${{ github.event.workflow_run.id }}
+          run-attempt: ${{ github.event.workflow_run.run_attempt }}
+          run-status: ${{ github.event.workflow_run.status }}
+          run-conclusion: ${{ github.event.workflow_run.conclusion }}
+          run-url: ${{ github.event.workflow_run.html_url }}
+          run-name: ${{ github.event.workflow_run.name }}
+          head-sha: ${{ github.event.workflow_run.head_sha }}
+          head-repo: ${{ github.event.workflow_run.head_repository.full_name }}

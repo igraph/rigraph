@@ -1,3 +1,35 @@
+# Posts the formatting patch produced by the `rcc` workflow
+# as a comment on the pull request it came from.
+#
+# SECURITY -- `workflow_run` is a privileged trigger.
+# It runs from the default branch of the BASE repository
+# with a token that can write to it,
+# and it fires for `rcc` runs of pull requests from forks.
+# Everything reachable from `github.event.workflow_run` is therefore
+# attacker-controlled data, not trusted input:
+#
+#   * `head_branch` is a fork branch name, and `git check-ref-format`
+#     permits `"`, `` ` ``, `;` and `$(...)` in branch names.
+#   * `head_commit.message`, repository descriptions and similar fields
+#     are free text and may contain quotes.
+#   * The `changes-patch` artifact was produced by a run
+#     that executed the fork's code, so its contents are arbitrary.
+#
+# Consequently no field of the event is ever interpolated with `${{ }}`
+# into a shell script; values are passed through the environment
+# so the shell treats them as inert data.
+# The pull request head is deliberately NOT checked out:
+# this job only needs the artifact, and not checking out
+# avoids placing a credentialed `.git/config`
+# next to attacker-controlled files.
+# That is why the steps below name their actions in full
+# rather than as `./.github/workflows/...`:
+# an action is fetched into the runner's action cache and not into the
+# workspace, so it is the one way to share a script with a job that has
+# no checkout. `@main` is the ref this workflow already runs from,
+# `workflow_run` using the default branch of the base repository.
+#
+# https://securitylab.github.com/resources/github-actions-preventing-pwn-requests/
 name: commit-suggest.yaml
 
 on:
@@ -6,28 +38,31 @@ on:
     types:
       - completed
 
-permissions:
-  contents: write
-  pull-requests: write
+# Deny everything by default; the job opts back into the minimum it needs.
+# This matters more here than in most workflows: `workflow_run` runs from the
+# default branch with a token that can write to this repository, on runs that
+# belong to a pull request from a fork.
+permissions: {}
 
 jobs:
   commit-suggest:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
+    timeout-minutes: 15 # longest run seen: 1 min
     if: github.event.workflow_run.event == 'pull_request'
 
+    permissions:
+      # Required by actions/download-artifact to read another run's artifacts.
+      # The workflow did not previously request this, so the download could
+      # only ever have failed -- silently, under `continue-on-error: true`.
+      actions: read
+      # `contents: read` is deliberately absent: the pull request checkout is
+      # gone, and nothing else in this job reads the repository.
+      # Required to post the suggestion comment
+      pull-requests: write
+
     steps:
-      - name: Show event payload
-        run: |
-          echo '${{ toJson(github.event) }}' | jq .
-        shell: bash
-
-      - name: Checkout PR
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.workflow_run.head_sha }}
-
       - name: Download artifact
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: changes-patch
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -47,52 +82,22 @@ jobs:
 
       - name: Find PR number for branch from correct head repository
         id: find-pr
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        run: |
-          PR_NUMBER=$(gh pr list --head ${{ github.event.workflow_run.head_branch }} --state open --json number,headRepositoryOwner --jq '.[] | select(.headRepositoryOwner.login == "${{ github.event.workflow_run.head_repository.owner.login }}") | .number' || echo "")
-          echo "pr_number=$PR_NUMBER" >> $GITHUB_OUTPUT
-        shell: bash
-
+        if: steps.check-artifact.outputs.has_diff == 'true'
+        uses: cynkra/cynkratemplate/.github/actions/commit-suggest-find-pr@main
+        with:
+          gh-token: ${{ github.token }}
+          head-branch: ${{ github.event.workflow_run.head_branch }}
+          head-owner: ${{ github.event.workflow_run.head_repository.owner.login }}
       - name: Generate comment body
-        if: steps.check-artifact.outputs.has_diff == 'true'
-        id: comment-body
-        run: |
-          cat << 'EOF' > comment.md
-          ## Formatting suggestions available
-
-          A patch file with formatting suggestions has been generated. You can apply it using one of these methods:
-
-          ### Method 1: Apply via gh CLI
-
-          ```bash
-          # Download and apply the patch directly
-          gh run download ${{ github.event.workflow_run.id }} --repo ${{ github.repository }} --name changes-patch && patch -p1 < changes.patch && rm changes.patch
-          ```
-
-          ### Method 2: View the patch
-
-          <details>
-          <summary>Click to see the patch contents</summary>
-
-          ```diff
-          EOF
-
-          cat changes.patch >> comment.md
-
-          cat << 'EOF' >> comment.md
-          ```
-
-          </details>
-
-          ---
-          *This comment was automatically generated by the commit-suggester workflow.*
-          EOF
-        shell: bash
-
+        if: steps.check-artifact.outputs.has_diff == 'true' && steps.find-pr.outputs.pr_number != ''
+        uses: cynkra/cynkratemplate/.github/actions/commit-suggest-body@main
+        with:
+          run-id: ${{ github.event.workflow_run.id }}
+          repo: ${{ github.repository }}
+          pr-number: ${{ steps.find-pr.outputs.pr_number }}
       - name: Post or update comment
-        if: steps.check-artifact.outputs.has_diff == 'true'
-        uses: thollander/actions-comment-pull-request@v3
+        if: steps.check-artifact.outputs.has_diff == 'true' && steps.find-pr.outputs.pr_number != ''
+        uses: thollander/actions-comment-pull-request@24bffb9b452ba05a4f3f77933840a6a841d1b32b # v3.0.1
         with:
           pr-number: ${{ steps.find-pr.outputs.pr_number }}
           file-path: comment.md
