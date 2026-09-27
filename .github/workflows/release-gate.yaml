@@ -1,0 +1,107 @@
+# Mechanical release checks for `cran-*` branches, as discussed in cynkra/cynkratemplate#147.
+# They run on every push, so that the result describes the commit that will be submitted,
+# not a box ticked a few commits earlier.
+#
+# The checks are the actions of BristolMyersSquibb/blockr.ci,
+# pinned to the commit that the issue links to:
+# - `gate` fails on the file-level conditions of devtools' release checks:
+#   a three-component version, no dependency pinned to a development version, no Remotes,
+#   NEWS.md shipped as itself, no placeholder vignette titles.
+# - `docs` checks for `\value` in every help page with a `\usage` section,
+#   and for a README.md that matches its README.Rmd.
+# - `soft` reports spelling, URLs and the NOTEs of R CMD check --as-cran --run-donttest
+#   with the CRAN incoming checks turned on, and never fails on a finding.
+# Each job writes its findings to the job summary.
+on:
+  push:
+    branches:
+      - cran-*
+  workflow_dispatch:
+
+name: release-gate
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    runs-on: ubuntu-26.04
+    timeout-minutes: 15
+
+    name: "Hard gates"
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - name: Run the hard gates
+        uses: BristolMyersSquibb/blockr.ci/.github/actions/release-gate@5ee8e2be16e71e96628c6c5c60c20c03f1b35155
+
+  docs:
+    runs-on: ubuntu-26.04
+    timeout-minutes: 60
+
+    name: "Documentation"
+
+    # About 300 help pages of igraph document no return value,
+    # so this job reports without holding up a release.
+    continue-on-error: true
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Install R and the package dependencies
+        uses: cynkra/cynkratemplate/.github/actions/install@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          cache-version: release-gate-docs-1
+          extra-packages: any::devtools
+
+      - name: Check the generated documentation
+        uses: BristolMyersSquibb/blockr.ci/.github/actions/release-docs@5ee8e2be16e71e96628c6c5c60c20c03f1b35155
+
+  soft:
+    runs-on: ubuntu-26.04
+    timeout-minutes: 120
+
+    name: "Soft checks"
+
+    env:
+      # Left off everywhere else, because the recency and frequency checks cannot be disabled with it.
+      _R_CHECK_CRAN_INCOMING_: "true"
+      _R_CHECK_CRAN_INCOMING_REMOTE_: "true"
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Run the repository-specific before-install steps
+        uses: ./.github/workflows/custom/before-install
+        if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''
+
+      - name: Install R and the package dependencies
+        uses: cynkra/cynkratemplate/.github/actions/install@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          cache-version: release-gate-soft-1
+          needs: check
+          extra-packages: any::rcmdcheck any::urlchecker any::spelling
+
+      - name: Run the repository-specific after-install steps
+        uses: ./.github/workflows/custom/after-install
+        if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
+
+      - name: Run the soft checks
+        uses: BristolMyersSquibb/blockr.ci/.github/actions/release-soft@5ee8e2be16e71e96628c6c5c60c20c03f1b35155
