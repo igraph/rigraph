@@ -4841,7 +4841,7 @@ curve_multiple <- function(graph, start = 0.5) {
       16777215L,
       16777215L
     ),
-    .Dim = c(64L, 64L),
+    dim = c(64L, 64L),
     class = "nativeRaster",
     channels = 4L
   )
