@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.4
+
+## Bug fixes
+
+- Avoid deprecated special names in `structure()` calls and add `\usage` to the documentation of `%>%`, for compatibility with R-devel.
+
+## Testing
+
+- Skip the `layout_with_mds()` stress test with BLIS, where LAPACK's `DSYEVR` fails to converge for some random graphs.
+
+
 # igraph 2.3.3
 
 ## Bug fixes
