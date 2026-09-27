@@ -102,8 +102,8 @@ Workshop on Analytic Algorithms and Combinatorics.} 2007.
 and \code{\link[=automorphism_group]{automorphism_group()}} for a compact representation of all
 automorphisms
 
-Other graph automorphism: 
-\code{\link{automorphism_group}()}
+Other graph automorphism:
+\code{\link[=automorphism_group]{automorphism_group()}}
 }
 \author{
 Tommi Junttila (\url{https://users.ics.aalto.fi/tjunttil/}) for BLISS

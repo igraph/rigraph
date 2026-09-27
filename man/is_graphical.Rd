@@ -54,8 +54,8 @@ realize graphical degree sequences of directed graphs.  \emph{The Electronic
 Journal of Combinatorics} 17(1):R66, 2010.
 }
 \seealso{
-Other graphical degree sequences: 
-\code{\link{is_degseq}()}
+Other graphical degree sequences:
+\code{\link[=is_degseq]{is_degseq()}}
 }
 \author{
 Tamás Nepusz \email{ntamas@gmail.com}

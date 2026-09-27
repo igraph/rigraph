@@ -53,11 +53,11 @@ graph_center(ring)
 \seealso{
 \code{\link[=eccentricity]{eccentricity()}}, \code{\link[=radius]{radius()}}
 
-Other paths: 
-\code{\link{all_simple_paths}()},
-\code{\link{diameter}()},
-\code{\link{distance_table}()},
-\code{\link{eccentricity}()},
-\code{\link{radius}()}
+Other paths:
+\code{\link[=all_simple_paths]{all_simple_paths()}},
+\code{\link[=diameter]{diameter()}},
+\code{\link[=distance_table]{distance_table()}},
+\code{\link[=eccentricity]{eccentricity()}},
+\code{\link[=radius]{radius()}}
 }
 \concept{paths}

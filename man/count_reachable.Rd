@@ -57,12 +57,12 @@ count_reachable(g3, mode = "all")
 \seealso{
 \code{\link[=components]{components()}}, \code{\link[=subcomponent]{subcomponent()}}, \code{\link[=is_connected]{is_connected()}}
 
-Connected components
-\code{\link{articulation_points}()},
-\code{\link{biconnected_components}()},
-\code{\link{component_distribution}()},
-\code{\link{decompose}()},
-\code{\link{is_biconnected}()}
+Connected components:
+\code{\link[=articulation_points]{articulation_points()}},
+\code{\link[=biconnected_components]{biconnected_components()}},
+\code{\link[=component_distribution]{component_distribution()}},
+\code{\link[=decompose]{decompose()}},
+\code{\link[=is_biconnected]{is_biconnected()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

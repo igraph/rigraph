@@ -138,7 +138,7 @@ of clique sizes, between the given minimum and maximum clique size.
 \code{is_clique()} tests whether all pairs within a vertex set are connected.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_cliques}{\code{cliques()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_largest_cliques}{\code{largest_cliques()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_clique_number}{\code{clique_number()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_largest_weighted_cliques}{\code{largest_weighted_cliques()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_weighted_clique_number}{\code{weighted_clique_number()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_clique_size_hist}{\code{clique_size_hist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_maximal_cliques_hist}{\code{maximal_cliques_hist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_is_clique}{\code{is_clique()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_cliques}{\code{cliques()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_cliques_callback}{\code{cliques_callback()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_largest_cliques}{\code{largest_cliques()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_maximal_cliques_callback}{\code{maximal_cliques_callback()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_clique_number}{\code{clique_number()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_largest_weighted_cliques}{\code{largest_weighted_cliques()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_weighted_clique_number}{\code{weighted_clique_number()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_clique_size_hist}{\code{clique_size_hist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_maximal_cliques_hist}{\code{maximal_cliques_hist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_is_clique}{\code{is_clique()}}
 }
 
 \examples{
@@ -162,10 +162,10 @@ David Eppstein, Maarten Loffler, Darren Strash: Listing All Maximal Cliques
 in Sparse Graphs in Near-optimal Time.  \url{https://arxiv.org/abs/1006.5440}
 }
 \seealso{
-Other cliques: 
-\code{\link{is_complete}()},
-\code{\link{ivs}()},
-\code{\link{weighted_cliques}()}
+Other cliques:
+\code{\link[=is_complete]{is_complete()}},
+\code{\link[=ivs]{ivs()}},
+\code{\link[=weighted_cliques]{weighted_cliques()}}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi

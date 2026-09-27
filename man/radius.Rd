@@ -57,11 +57,11 @@ Harary, F. Graph Theory. Reading, MA: Addison-Wesley, p. 35,
 calculations, \link{distances} for general shortest path
 calculations.
 
-Other paths: 
-\code{\link{all_simple_paths}()},
-\code{\link{diameter}()},
-\code{\link{distance_table}()},
-\code{\link{eccentricity}()},
-\code{\link{graph_center}()}
+Other paths:
+\code{\link[=all_simple_paths]{all_simple_paths()}},
+\code{\link[=diameter]{diameter()}},
+\code{\link[=distance_table]{distance_table()}},
+\code{\link[=eccentricity]{eccentricity()}},
+\code{\link[=graph_center]{graph_center()}}
 }
 \concept{paths}

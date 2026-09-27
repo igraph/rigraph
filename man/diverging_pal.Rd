@@ -47,9 +47,9 @@ plot(karate)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other palettes: 
-\code{\link{categorical_pal}()},
-\code{\link{r_pal}()},
-\code{\link{sequential_pal}()}
+Other palettes:
+\code{\link[=categorical_pal]{categorical_pal()}},
+\code{\link[=r_pal]{r_pal()}},
+\code{\link[=sequential_pal]{sequential_pal()}}
 }
 \concept{palettes}

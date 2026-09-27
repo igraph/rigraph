@@ -50,8 +50,8 @@ bibcoupling(g)
 
 }
 \seealso{
-Other cocitation: 
-\code{\link{similarity}()}
+Other cocitation:
+\code{\link[=similarity]{similarity()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

@@ -58,16 +58,16 @@ E(g4)[[]]
 E(g4)[[1:5]]
 }
 \seealso{
-Other vertex and edge sequences: 
-\code{\link{E}()},
-\code{\link{V}()},
-\code{\link{as_ids}()},
+Other vertex and edge sequences:
+\code{\link[=E]{E()}},
+\code{\link[=V]{V()}},
+\code{\link[=as_ids]{as_ids()}},
 \code{\link{igraph-es-attributes}},
 \code{\link{igraph-es-indexing}},
 \code{\link{igraph-es-indexing2}},
 \code{\link{igraph-vs-attributes}},
 \code{\link{igraph-vs-indexing}},
 \code{\link{igraph-vs-indexing2}},
-\code{\link{print.igraph.vs}()}
+\code{\link[=print.igraph.vs]{print.igraph.vs()}}
 }
 \concept{vertex and edge sequences}

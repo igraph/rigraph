@@ -33,7 +33,7 @@ to the current one.
 graph_version to check the current data format version
 or the version of a graph.
 
-Other versions: 
-\code{\link{graph_version}()}
+Other versions:
+\code{\link[=graph_version]{graph_version()}}
 }
 \concept{versions}

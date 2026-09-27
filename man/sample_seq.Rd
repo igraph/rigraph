@@ -41,9 +41,9 @@ Random Sampling, \emph{ACM Transactions on Mathematical Software}, 13/1,
 58--67.
 }
 \seealso{
-Other other: 
-\code{\link{convex_hull}()},
-\code{\link{running_mean}()}
+Other other:
+\code{\link[=convex_hull]{convex_hull()}},
+\code{\link[=running_mean]{running_mean()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

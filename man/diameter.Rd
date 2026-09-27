@@ -78,12 +78,12 @@ get_diameter(g, weights = NA)
 \seealso{
 \code{\link[=distances]{distances()}}
 
-Other paths: 
-\code{\link{all_simple_paths}()},
-\code{\link{distance_table}()},
-\code{\link{eccentricity}()},
-\code{\link{graph_center}()},
-\code{\link{radius}()}
+Other paths:
+\code{\link[=all_simple_paths]{all_simple_paths()}},
+\code{\link[=distance_table]{distance_table()}},
+\code{\link[=eccentricity]{eccentricity()}},
+\code{\link[=graph_center]{graph_center()}},
+\code{\link[=radius]{radius()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

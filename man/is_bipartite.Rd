@@ -14,9 +14,9 @@ It does not check whether the graph is bipartite in the
 mathematical sense.  Use \code{\link[=bipartite_mapping]{bipartite_mapping()}} for that.
 }
 \seealso{
-Bipartite graphs
-\code{\link{bipartite_mapping}()},
-\code{\link{bipartite_projection}()},
-\code{\link{make_bipartite_graph}()}
+Bipartite graphs:
+\code{\link[=bipartite_mapping]{bipartite_mapping()}},
+\code{\link[=bipartite_projection]{bipartite_projection()}},
+\code{\link[=make_bipartite_graph]{make_bipartite_graph()}}
 }
 \concept{bipartite}

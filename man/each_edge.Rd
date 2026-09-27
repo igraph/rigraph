@@ -48,9 +48,9 @@ g2 <- g \%>\% rewire(each_edge(mode = "in", multiple = TRUE, prob = 0.2))
 degree(g, mode = "in") == degree(g2, mode = "in")
 }
 \seealso{
-Other rewiring functions: 
-\code{\link{keeping_degseq}()},
-\code{\link{rewire}()}
+Other rewiring functions:
+\code{\link[=keeping_degseq]{keeping_degseq()}},
+\code{\link[=rewire]{rewire()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

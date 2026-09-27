@@ -56,11 +56,11 @@ is_forest(g, details = TRUE)
 
 }
 \seealso{
-Other trees: 
-\code{\link{is_tree}()},
-\code{\link{make_from_prufer}()},
-\code{\link{sample_spanning_tree}()},
-\code{\link{to_prufer}()}
+Other trees:
+\code{\link[=is_tree]{is_tree()}},
+\code{\link[=make_from_prufer]{make_from_prufer()}},
+\code{\link[=sample_spanning_tree]{sample_spanning_tree()}},
+\code{\link[=to_prufer]{to_prufer()}}
 }
 \concept{trees}
 \keyword{graphs}

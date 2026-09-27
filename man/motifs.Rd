@@ -49,7 +49,7 @@ the motifs is defined by their isomorphism class, see
 \code{\link[=isomorphism_class]{isomorphism_class()}}.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu}{\code{motifs_randesu()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu_callback}{\code{motifs_randesu_callback_closure()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu}{\code{motifs_randesu()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu_callback}{\code{motifs_randesu_callback()}}
 }
 
 \examples{
@@ -68,9 +68,9 @@ motifs(g, 3, callback = function(vids, isoclass) {
 \seealso{
 \code{\link[=isomorphism_class]{isomorphism_class()}}
 
-Other graph motifs: 
-\code{\link{count_motifs}()},
-\code{\link{dyad_census}()},
-\code{\link{sample_motifs}()}
+Other graph motifs:
+\code{\link[=count_motifs]{count_motifs()}},
+\code{\link[=dyad_census]{dyad_census()}},
+\code{\link[=sample_motifs]{sample_motifs()}}
 }
 \concept{graph motifs}

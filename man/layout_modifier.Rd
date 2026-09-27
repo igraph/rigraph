@@ -46,8 +46,8 @@ plot(g, layout = coords)
 \code{\link[=layout_]{layout_()}} for using modifiers, \code{\link[=component_wise]{component_wise()}}, \code{\link[=normalize]{normalize()}}
 for examples of built-in modifiers.
 
-Other layout modifiers: 
-\code{\link{component_wise}()},
-\code{\link{normalize}()}
+Other layout modifiers:
+\code{\link[=component_wise]{component_wise()}},
+\code{\link[=normalize]{normalize()}}
 }
 \concept{layout modifiers}

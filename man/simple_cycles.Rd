@@ -59,7 +59,7 @@ have exponentially many cycles and the presence of multi-edges exacerbates
 this combinatorial explosion.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_simple_cycles}{\code{simple_cycles()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_simple_cycles}{\code{simple_cycles()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_simple_cycles_callback}{\code{simple_cycles_callback()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
 }
 
 \examples{
@@ -71,14 +71,14 @@ simple_cycles(g, mode = "all", min = 2, max = 3) # limit cycle lengths
 
 }
 \seealso{
-Graph cycles
-\code{\link{feedback_arc_set}()},
-\code{\link{feedback_vertex_set}()},
-\code{\link{find_cycle}()},
-\code{\link{girth}()},
-\code{\link{has_eulerian_path}()},
-\code{\link{is_acyclic}()},
-\code{\link{is_dag}()}
+Graph cycles:
+\code{\link[=feedback_arc_set]{feedback_arc_set()}},
+\code{\link[=feedback_vertex_set]{feedback_vertex_set()}},
+\code{\link[=find_cycle]{find_cycle()}},
+\code{\link[=girth]{girth()}},
+\code{\link[=has_eulerian_path]{has_eulerian_path()}},
+\code{\link[=is_acyclic]{is_acyclic()}},
+\code{\link[=is_dag]{is_dag()}}
 }
 \concept{cycles}
 \keyword{graphs}

@@ -40,12 +40,12 @@ is_biconnected(make_full_graph(2))
 \code{\link[=articulation_points]{articulation_points()}}, \code{\link[=biconnected_components]{biconnected_components()}},
 \code{\link[=is_connected]{is_connected()}}, \code{\link[=vertex_connectivity]{vertex_connectivity()}}
 
-Connected components
-\code{\link{articulation_points}()},
-\code{\link{biconnected_components}()},
-\code{\link{component_distribution}()},
-\code{\link{count_reachable}()},
-\code{\link{decompose}()}
+Connected components:
+\code{\link[=articulation_points]{articulation_points()}},
+\code{\link[=biconnected_components]{biconnected_components()}},
+\code{\link[=component_distribution]{component_distribution()}},
+\code{\link[=count_reachable]{count_reachable()}},
+\code{\link[=decompose]{decompose()}}
 }
 \concept{components}
 \keyword{graphs}

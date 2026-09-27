@@ -16,14 +16,14 @@ Constructor modifier to add graph attributes
 make_(ring(10), with_graph_(name = "10-ring"))
 }
 \seealso{
-Constructor modifiers (and related functions)
-\code{\link{make_}()},
-\code{\link{sample_}()},
-\code{\link{simplified}()},
-\code{\link{with_edge_}()},
-\code{\link{with_vertex_}()},
-\code{\link{without_attr}()},
-\code{\link{without_loops}()},
-\code{\link{without_multiples}()}
+Constructor modifiers (and related functions):
+\code{\link[=make_]{make_()}},
+\code{\link[=sample_]{sample_()}},
+\code{\link[=simplified]{simplified()}},
+\code{\link[=with_edge_]{with_edge_()}},
+\code{\link[=with_vertex_]{with_vertex_()}},
+\code{\link[=without_attr]{without_attr()}},
+\code{\link[=without_loops]{without_loops()}},
+\code{\link[=without_multiples]{without_multiples()}}
 }
 \concept{constructor modifiers}

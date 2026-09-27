@@ -87,8 +87,8 @@ graph_from_biadjacency_matrix(inc)
 \code{\link[=make_bipartite_graph]{make_bipartite_graph()}} for another way to create bipartite
 graphs
 
-Other biadjacency: 
-\code{\link{as_data_frame}()}
+Other biadjacency:
+\code{\link[=as_data_frame]{as_data_frame()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

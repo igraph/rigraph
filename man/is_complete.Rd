@@ -33,10 +33,10 @@ is_complete(g)
 \seealso{
 \code{\link[=make_full_graph]{make_full_graph()}}
 
-Other cliques: 
-\code{\link{cliques}()},
-\code{\link{ivs}()},
-\code{\link{weighted_cliques}()}
+Other cliques:
+\code{\link[=cliques]{cliques()}},
+\code{\link[=ivs]{ivs()}},
+\code{\link[=weighted_cliques]{weighted_cliques()}}
 }
 \concept{cliques}
 \keyword{graphs}
