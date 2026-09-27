@@ -6,7 +6,6 @@ runs:
     - name: Use GLPK on macOS
       if: runner.os == 'macOS'
       run: |
-        # Append: the install action has already put the ccache wrappers and MAKEFLAGS there.
         echo -e 'CPPFLAGS = -I/opt/homebrew/include\nLDFLAGS = -L/opt/homebrew/lib' | tee -a ~/.R/Makevars
       shell: bash
 
