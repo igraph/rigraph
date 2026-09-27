@@ -1,0 +1,101 @@
+# Uploads the source package to win-builder (https://win-builder.r-project.org),
+# which checks it on Windows and mails the result to the maintainer in DESCRIPTION
+# 15 to 30 minutes later.
+# This is devtools::check_win_devel(), with the tarball built in CI instead of locally.
+#
+# A push to a `cran-*` branch uploads only when this file changes,
+# so that adding the workflow to a release branch submits once.
+# Every other upload is started by hand, because each one sends an email.
+on:
+  push:
+    branches:
+      - cran-*
+    paths:
+      - .github/workflows/winbuilder.yaml
+  workflow_dispatch:
+    inputs:
+      queues:
+        description: "Space-separated win-builder queues: R-devel, R-release, R-oldrelease"
+        type: string
+        default: "R-devel"
+
+name: win-builder
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  winbuilder:
+    runs-on: ubuntu-26.04
+    timeout-minutes: 60
+
+    name: "Upload to win-builder"
+
+    env:
+      # A push carries no inputs.
+      QUEUES: ${{ inputs.queues || 'R-devel' }}
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Check the queue names
+        run: |
+          for queue in $QUEUES; do
+            case "$queue" in
+              R-devel|R-release|R-oldrelease) ;;
+              *) echo "::error::Unknown win-builder queue: $queue"; exit 1 ;;
+            esac
+          done
+        shell: bash
+
+      - name: Run the repository-specific before-install steps
+        uses: ./.github/workflows/custom/before-install
+        if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''
+
+      - name: Install R and the package dependencies
+        uses: cynkra/cynkratemplate/.github/actions/install@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          cache-version: winbuilder-1
+          needs: build
+          extra-packages: ""
+
+      - name: Run the repository-specific after-install steps
+        uses: ./.github/workflows/custom/after-install
+        if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
+
+      - name: Build the source package
+        id: build
+        run: |
+          R CMD build .
+          tarball="$(ls -1 *.tar.gz)"
+          echo "tarball=$tarball" | tee -a "$GITHUB_OUTPUT"
+        shell: bash
+
+      - name: Upload the source package to win-builder
+        env:
+          TARBALL: ${{ steps.build.outputs.tarball }}
+        run: |
+          for queue in $QUEUES; do
+            curl --fail --silent --show-error --retry 3 -T "$TARBALL" "ftp://win-builder.r-project.org/$queue/"
+            echo "Uploaded $TARBALL to $queue."
+          done
+          {
+            echo "### win-builder"
+            echo
+            echo "Uploaded \`$TARBALL\` to: $QUEUES."
+            echo "The results are mailed to the maintainer in \`DESCRIPTION\`."
+          } >> "$GITHUB_STEP_SUMMARY"
+        shell: bash
+
+      - name: Keep the uploaded source package
+        uses: actions/upload-artifact@v6
+        with:
+          name: winbuilder-source-package
+          path: ${{ steps.build.outputs.tarball }}
