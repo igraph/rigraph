@@ -2,7 +2,7 @@ igraph 2.3.4
 
 ## Cran Repository Policy
 
-- [ ] Reviewed CRP last edited 2026-04-21.
+- [x] Reviewed CRP last edited 2026-04-21.
 
 ## Current CRAN check results
 
