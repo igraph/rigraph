@@ -64,7 +64,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           cache-version: winbuilder-1
           needs: build
-          extra-packages: ""
 
       - name: Run the repository-specific after-install steps
         uses: ./.github/workflows/custom/after-install
