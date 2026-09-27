@@ -20,8 +20,8 @@ count.multiple(graph, eids = E(graph))
 
 - eids:
 
-  The edges to which the query is restricted. The default `NULL` selects
-  all edges.
+  The edges to which the query is restricted. By default this is all
+  edges in the graph.
 
 ## Related documentation in the C library
 

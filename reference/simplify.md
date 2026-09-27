@@ -9,8 +9,7 @@ simplify(
   graph,
   remove.multiple = TRUE,
   remove.loops = TRUE,
-  ...,
-  edge_attr_combine = NULL
+  edge.attr.comb = igraph_opt("edge.attr.comb")
 )
 
 is_simple(graph)
@@ -32,23 +31,17 @@ simplify_and_colorize(graph)
 
   Logical, whether the loop edges are to be removed.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
-- edge_attr_combine:
+- edge.attr.comb:
 
   Specifies what to do with edge attributes, if `remove.multiple=TRUE`.
   In this case many edges might be mapped to a single one in the new
   graph, and their attributes are combined. Please see
   [`attribute.combination()`](https://r.igraph.org/reference/igraph-attribute-combination.md)
-  for details on this. The default `NULL` uses the `edge_attr_combine`
-  igraph option.
+  for details on this.
 
 ## Value
 
-a graph object with the loop and/or multiple edges removed; the input
-graph is returned unchanged if it is already simple.
+a new graph object with the edges deleted.
 
 ## Details
 
@@ -61,8 +54,7 @@ not contain loop edges and multiple edges.
 
 `simplify()` removes the loop and/or multiple edges from a graph. If
 both `remove.loops` and `remove.multiple` are `TRUE` the function
-returns a simple graph. If the graph is already simple, it is returned
-unchanged.
+returns a simple graph.
 
 `simplify_and_colorize()` constructs a new, simple graph from a graph
 and also sets a `color` attribute on both the vertices and the edges.

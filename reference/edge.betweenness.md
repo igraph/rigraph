@@ -26,8 +26,7 @@ edge.betweenness(
 
 - e:
 
-  The edges for which the edge betweenness will be calculated. The
-  default `NULL` selects all edges.
+  The edges for which the edge betweenness will be calculated.
 
 - directed:
 

@@ -15,7 +15,7 @@ Fruchterman and Reingold."><meta property="og:image" content="https://r.igraph.o
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9037</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ Fruchterman and Reingold."><meta property="og:image" content="https://r.igraph.o
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>The Fruchterman-Reingold layout algorithm</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/layout.R" class="external-link"><code>R/layout.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/layout.R" class="external-link"><code>R/layout.R</code></a></small>
       <div class="d-none name"><code>layout_with_fr.Rd</code></div>
     </div>
 
@@ -60,11 +60,10 @@ Fruchterman and Reingold.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">layout_with_fr</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
-<span>  <span class="va">...</span>,</span>
 <span>  coords <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
 <span>  niter <span class="op">=</span> <span class="fl">500</span>,</span>
-<span>  start.temp <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  start.temp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="gorder.html">vcount</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  grid <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"auto"</span>, <span class="st">"grid"</span>, <span class="st">"nogrid"</span><span class="op">)</span>,</span>
 <span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  minx <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -78,7 +77,9 @@ Fruchterman and Reingold.</p>
 <span>  area <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  repulserad <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  maxiter <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">with_fr</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -87,10 +88,6 @@ Fruchterman and Reingold.</p>
 
 <dl><dt id="arg-graph">graph<a class="anchor" aria-label="anchor" href="#arg-graph"></a></dt>
 <dd><p>The graph to lay out. Edge directions are ignored.</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-coords">coords<a class="anchor" aria-label="anchor" href="#arg-coords"></a></dt>
@@ -112,8 +109,7 @@ space.</p></dd>
 <dt id="arg-start-temp">start.temp<a class="anchor" aria-label="anchor" href="#arg-start-temp"></a></dt>
 <dd><p>Real scalar, the start temperature. This is the maximum
 amount of movement alloved along one axis, within one step, for a vertex.
-Currently it is decreased linearly to zero during the iteration. The
-default <code>NULL</code> uses <code>sqrt(vcount(graph))</code>.</p></dd>
+Currently it is decreased linearly to zero during the iteration.</p></dd>
 
 
 <dt id="arg-grid">grid<a class="anchor" aria-label="anchor" href="#arg-grid"></a></dt>
@@ -132,10 +128,9 @@ each other. Weights must be positive.</p></dd>
 
 
 <dt id="arg-minx">minx<a class="anchor" aria-label="anchor" href="#arg-minx"></a></dt>
-<dd><p>Numeric vector that gives lower boundaries
-for the ‘x’ coordinates of the vertices.
-The length of the vector must match the number of vertices in the graph.
-Default: <code>NULL</code>.</p></dd>
+<dd><p>If not <code>NULL</code>, then it must be a numeric vector that gives
+lower boundaries for the ‘x’ coordinates of the vertices. The length
+of the vector must match the number of vertices in the graph.</p></dd>
 
 
 <dt id="arg-maxx">maxx<a class="anchor" aria-label="anchor" href="#arg-maxx"></a></dt>
@@ -171,11 +166,15 @@ arguments are not supported from igraph version 0.8.0 and are ignored
 <dt id="arg-maxiter">maxiter<a class="anchor" aria-label="anchor" href="#arg-maxiter"></a></dt>
 <dd><p>A deprecated synonym of <code>niter</code>, for compatibility.</p></dd>
 
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Passed to <code>layout_with_fr()</code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A two- or three-column matrix, each row giving the coordinates of a
-vertex, according to the IDs of the vertex IDs.</p>
+vertex, according to the ids of the vertex ids.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -195,8 +194,7 @@ Force-directed Placement. <em>Software - Practice and Experience</em>,
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="layout_with_drl.html">layout_with_drl()</a></code>, <code><a href="layout_with_kk.html">layout_with_kk()</a></code> for
-other layout algorithms. See <code><a href="layout_spec.html">with_fr()</a></code> to build a lazy layout
-specification for <code><a href="add_layout_.html">add_layout_()</a></code>.</p>
+other layout algorithms.</p>
 <p>Other graph layouts:
 <code><a href="add_layout_.html">add_layout_()</a></code>,
 <code><a href="component_wise.html">component_wise()</a></code>,

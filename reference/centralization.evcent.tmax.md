@@ -29,8 +29,8 @@ centralization.evcent.tmax(
 
 - directed:
 
-  Logical, whether to consider edge directions during the calculation.
-  Ignored in undirected graphs.
+  logical scalar, whether to consider edge directions during the
+  calculation. Ignored in undirected graphs.
 
 - scale:
 

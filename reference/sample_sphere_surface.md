@@ -6,7 +6,7 @@ random dot product graphs
 ## Usage
 
 ``` r
-sample_sphere_surface(dim, n = 1, ..., radius = 1, positive = TRUE)
+sample_sphere_surface(dim, n = 1, radius = 1, positive = TRUE)
 ```
 
 ## Arguments
@@ -19,17 +19,14 @@ sample_sphere_surface(dim, n = 1, ..., radius = 1, positive = TRUE)
 
   Integer scalar, the sample size.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - radius:
 
   Numeric scalar, the radius of the sphere to sample.
 
 - positive:
 
-  Logical, whether to sample from the positive orthant of the sphere.
+  Logical scalar, whether to sample from the positive orthant of the
+  sphere.
 
 ## Value
 

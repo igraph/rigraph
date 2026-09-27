@@ -6,7 +6,13 @@ of \\A A^T\\, where \\A\\ is the adjacency matrix of the graph.
 ## Usage
 
 ``` r
-hits_scores(graph, ..., scale = TRUE, weights = NULL, options = NULL)
+hits_scores(
+  graph,
+  ...,
+  scale = TRUE,
+  weights = NULL,
+  options = arpack_defaults()
+)
 ```
 
 ## Arguments
@@ -21,9 +27,9 @@ hits_scores(graph, ..., scale = TRUE, weights = NULL, options = NULL)
 
 - scale:
 
-  Logical, whether to scale the result to have a maximum score of one.
-  If no scaling is used then the result vector has unit length in the
-  Euclidean norm.
+  Logical scalar, whether to scale the result to have a maximum score of
+  one. If no scaling is used then the result vector has unit length in
+  the Euclidean norm.
 
 - weights:
 
@@ -37,8 +43,6 @@ hits_scores(graph, ..., scale = TRUE, weights = NULL, options = NULL)
 
   A named list, to override some ARPACK options. See
   [`arpack()`](https://r.igraph.org/reference/arpack.md) for details.
-  The default `NULL` uses
-  [`arpack_defaults()`](https://r.igraph.org/reference/arpack.md).
 
 ## Value
 
@@ -192,10 +196,12 @@ hits_scores(g)
 g2 <- make_ring(10)
 hits_scores(g2)
 #> $hub
-#>  [1] 1 0 1 0 1 0 1 0 1 0
+#>  [1] 0.999997 1.000000 0.999997 1.000000 0.999997 1.000000 0.999997 1.000000
+#>  [9] 0.999997 1.000000
 #> 
 #> $authority
-#>  [1] 0 1 0 1 0 1 0 1 0 1
+#>  [1] 1.000000 0.999997 1.000000 0.999997 1.000000 0.999997 1.000000 0.999997
+#>  [9] 1.000000 0.999997
 #> 
 #> $value
 #> [1] 4
@@ -259,7 +265,7 @@ hits_scores(g2)
 #> [1] 0
 #> 
 #> $options$numreo
-#> [1] 5
+#> [1] 4
 #> 
 #> 
 ```

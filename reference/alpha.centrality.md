@@ -31,8 +31,8 @@ alpha.centrality(
 - nodes:
 
   Vertex sequence, the vertices for which the alpha centrality values
-  are returned. The default `NULL` selects all vertices. (For technical
-  reasons they will be calculated for all vertices, anyway.)
+  are returned. (For technical reasons they will be calculated for all
+  vertices, anyway.)
 
 - alpha:
 
@@ -53,32 +53,20 @@ alpha.centrality(
 
 - weights:
 
-  One of the following:
-
-  - `NULL` (default): use the `weight` edge attribute if the graph has
-    one, otherwise return a traditional (unweighted) adjacency matrix.
-
-  - `NA`: explicitly unweighted, ignoring any `weight` edge attribute.
-
-  - A numeric or logical vector of length
-    [`ecount()`](https://r.igraph.org/reference/gsize.md): use these
-    values directly as edge weights.
-
-  - A character scalar: the name of an edge attribute whose values are
-    used as weights. The attribute must be numeric or logical.
-
-  If multiple edges share endpoints, the value of an arbitrarily chosen
-  edge is included in the matrix.
+  A character scalar that gives the name of the edge attribute to use in
+  the adjacency matrix. If it is `NULL`, then the ‘weight’ edge
+  attribute of the graph is used, if there is one. Otherwise, or if it
+  is `NA`, then the calculation uses the standard adjacency matrix.
 
 - tol:
 
   Tolerance for near-singularities during matrix inversion, see
-  [`Matrix::solve()`](https://rdrr.io/pkg/Matrix/man/solve-methods.html).
+  [`solve()`](https://rdrr.io/r/base/solve.html).
 
 - sparse:
 
-  Logical, whether to use sparse matrices for the calculation. The
-  ‘Matrix’ package is required for sparse matrix support
+  Logical scalar, whether to use sparse matrices for the calculation.
+  The ‘Matrix’ package is required for sparse matrix support
 
 ## Related documentation in the C library
 

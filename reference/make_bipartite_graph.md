@@ -6,9 +6,9 @@ allowed between different kinds.
 ## Usage
 
 ``` r
-make_bipartite_graph(types, edges, ..., directed = FALSE)
+make_bipartite_graph(types, edges, directed = FALSE)
 
-bipartite_graph(types, edges, ..., directed = FALSE)
+bipartite_graph(types, edges, directed = FALSE)
 ```
 
 ## Arguments
@@ -28,15 +28,11 @@ bipartite_graph(types, edges, ..., directed = FALSE)
   different kind, according to the supplied `types` vector. The vector
   may be a string vector if `types` is a named vector.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - directed:
 
-  Logical, whether to create a directed graph. Note that by default
-  undirected graphs are created, as this is more common for bipartite
-  graphs.
+  Whether to create a directed graph, boolean constant. Note that by
+  default undirected graphs are created, as this is more common for
+  bipartite graphs.
 
 ## Value
 
@@ -44,7 +40,7 @@ bipartite_graph(types, edges, ..., directed = FALSE)
 words, an igraph graph that has a vertex attribute named `type`.
 
 [`is_bipartite()`](https://r.igraph.org/reference/is_bipartite.md)
-returns a Logical.
+returns a logical scalar.
 
 ## Details
 
@@ -84,13 +80,8 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 g <- make_bipartite_graph(rep(0:1, length.out = 10), c(1:10))
 print(g, v = TRUE)
-#> ── <igraph> ───────────────────────────────────────────────────────── d574169 ──
-#> ℹ undirected · bipartite
-#> ℹ 10 vertices · 5 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → vertex: type <lgl>
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#> [1] 1 ─ 2   3 ─ 4   5 ─ 6   7 ─ 8   9 ─ 10 
+#> IGRAPH fe788d1 U--B 10 5 -- 
+#> + attr: type (v/l)
+#> + edges from fe788d1:
+#> [1] 1-- 2 3-- 4 5-- 6 7-- 8 9--10
 ```

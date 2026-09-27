@@ -42,18 +42,18 @@ walktrap.community(
 
 - merges:
 
-  Logical, whether to include the merge matrix in the result.
+  Logical scalar, whether to include the merge matrix in the result.
 
 - modularity:
 
-  Logical, whether to include the vector of the modularity scores in the
-  result. If the `membership` argument is true, then it will always be
-  calculated.
+  Logical scalar, whether to include the vector of the modularity scores
+  in the result. If the `membership` argument is true, then it will
+  always be calculated.
 
 - membership:
 
-  Logical, whether to calculate the membership vector for the split
-  corresponding to the highest modularity value.
+  Logical scalar, whether to calculate the membership vector for the
+  split corresponding to the highest modularity value.
 
 ## Related documentation in the C library
 

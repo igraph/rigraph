@@ -24,26 +24,18 @@ Constructor modifiers (and related functions):
 
 ``` r
 sample_(pa(10, m = 3, algorithm = "bag"))
-#> ── <igraph> Barabasi graph ────────────────────────────────────────── d39e99e ──
-#> ℹ directed
-#> ℹ 10 vertices · 27 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, power <dbl>, m <dbl>, zero.appeal <dbl>, algorithm <chr>
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#>  [1] 2 → 1   2 → 1   2 → 1   3 → 1   3 → 1   3 → 2   4 → 1   4 → 1   4 → 1  
-#> [10] 5 → 1   5 → 1   5 → 1   6 → 1   6 → 1   6 → 2   7 → 1   7 → 1   7 → 1  
-#> [19] 8 → 2   8 → 1   8 → 1   9 → 1   9 → 6   9 → 2   10 → 2  10 → 8  10 → 1 
+#> IGRAPH 71311bf D--- 10 27 -- Barabasi graph
+#> + attr: name (g/c), power (g/n), m (g/n), zero.appeal (g/n), algorithm
+#> | (g/c)
+#> + edges from 71311bf:
+#>  [1]  2->1  2->1  2->1  3->1  3->1  3->2  4->1  4->1  4->1  5->1  5->1  5->1
+#> [13]  6->1  6->1  6->2  7->1  7->1  7->1  8->2  8->1  8->1  9->1  9->6  9->2
+#> [25] 10->2 10->8 10->1
 sample_(pa(10, m = 3, algorithm = "bag"), simplified())
-#> ── <igraph> Barabasi graph ────────────────────────────────────────── 0a9a9e5 ──
-#> ℹ directed
-#> ℹ 10 vertices · 13 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, power <dbl>, m <dbl>, zero.appeal <dbl>, algorithm <chr>
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#>  [1] 2 → 1   3 → 1   3 → 2   4 → 1   4 → 2   5 → 1   5 → 4   6 → 1   7 → 1  
-#> [10] 8 → 1   8 → 2   9 → 1   10 → 1 
+#> IGRAPH 8d95a68 D--- 10 13 -- Barabasi graph
+#> + attr: name (g/c), power (g/n), m (g/n), zero.appeal (g/n), algorithm
+#> | (g/c)
+#> + edges from 8d95a68:
+#>  [1]  2->1  3->1  3->2  4->1  4->2  5->1  5->4  6->1  7->1  8->1  8->2  9->1
+#> [13] 10->1
 ```

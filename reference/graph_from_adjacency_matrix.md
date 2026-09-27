@@ -8,7 +8,6 @@
 ``` r
 graph_from_adjacency_matrix(
   adjmatrix,
-  ...,
   mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"),
   weighted = NULL,
   diag = TRUE,
@@ -18,7 +17,6 @@ graph_from_adjacency_matrix(
 
 from_adjacency(
   adjmatrix,
-  ...,
   mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"),
   weighted = NULL,
   diag = TRUE,
@@ -33,10 +31,6 @@ from_adjacency(
 
   A square adjacency matrix. From igraph version 0.5.1 this can be a
   sparse matrix created with the `Matrix` package.
-
-- ...:
-
-  These dots are for future extensions and must be empty.
 
 - mode:
 
@@ -58,7 +52,7 @@ from_adjacency(
 
 - diag:
 
-  Logical, whether to include the diagonal of the matrix in the
+  Logical scalar, whether to include the diagonal of the matrix in the
   calculation. If this is `FALSE` then the diagonal is zerod out first.
 
 - add.colnames:
@@ -178,7 +172,6 @@ on the value of the `mode` argument:
 [`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
 [`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
 [`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
-[`is_simple()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple),
 [`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
 [`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
 
@@ -298,18 +291,13 @@ all(expected_g9_weights == actual_g9_weights)
 
 ## row/column names
 rownames(adj_matrix) <- sample(letters, nrow(adj_matrix))
-colnames(adj_matrix) <- seq_len(ncol(adj_matrix))
+colnames(adj_matrix) <- seq(ncol(adj_matrix))
 g10 <- graph_from_adjacency_matrix(
   adj_matrix,
   weighted = TRUE,
   add.rownames = "code"
 )
 summary(g10)
-#> ── <igraph> ───────────────────────────────────────────────────────── e58e2d8 ──
-#> ℹ directed · named · weighted
-#> ℹ 10 vertices · 57 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → vertex: name <chr>, code <chr>
-#> → edge:   weight <dbl>
+#> IGRAPH 3919c7e DNW- 10 57 -- 
+#> + attr: name (v/c), code (v/c), weight (e/n)
 ```

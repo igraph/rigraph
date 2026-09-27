@@ -6,9 +6,9 @@ of [`make_lattice()`](https://r.igraph.org/reference/make_lattice.md).
 ## Usage
 
 ``` r
-make_ring(n, ..., directed = FALSE, mutual = FALSE, circular = TRUE)
+make_ring(n, directed = FALSE, mutual = FALSE, circular = TRUE)
 
-ring(n, ..., directed = FALSE, mutual = FALSE, circular = TRUE)
+ring(n, directed = FALSE, mutual = FALSE, circular = TRUE)
 ```
 
 ## Arguments
@@ -16,10 +16,6 @@ ring(n, ..., directed = FALSE, mutual = FALSE, circular = TRUE)
 - n:
 
   Number of vertices.
-
-- ...:
-
-  These dots are for future extensions and must be empty.
 
 - directed:
 
@@ -66,42 +62,28 @@ Other deterministic constructors:
 
 ``` r
 print_all(make_ring(10))
-#> ── <igraph> Ring graph ────────────────────────────────────────────── c02208e ──
-#> ℹ undirected
-#> ℹ 10 vertices · 10 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
-#> 
-#> ── Graph attributes ────────────────────────────────────────────────────────────
-#> name:
-#>   [1] "Ring graph"
-#> mutual:
-#>   [1] FALSE
-#> circular:
-#>   [1] TRUE
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#>  [1] 1 ─ 2   2 ─ 3   3 ─ 4   4 ─ 5   5 ─ 6   6 ─ 7   7 ─ 8   8 ─ 9   9 ─ 10 
-#> [10] 1 ─ 10 
+#> IGRAPH e1a1416 U--- 10 10 -- Ring graph
+#> + attr: name (g/c), mutual (g/l), circular (g/l)
+#> + graph attributes:
+#> | + name:
+#> |   [1] "Ring graph"
+#> | + mutual:
+#> |   [1] FALSE
+#> | + circular:
+#> |   [1] TRUE
+#> + edges from e1a1416:
+#>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 print_all(make_ring(10, directed = TRUE, mutual = TRUE))
-#> ── <igraph> Ring graph ────────────────────────────────────────────── a24bcd7 ──
-#> ℹ directed
-#> ℹ 10 vertices · 20 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
-#> 
-#> ── Graph attributes ────────────────────────────────────────────────────────────
-#> name:
-#>   [1] "Ring graph"
-#> mutual:
-#>   [1] TRUE
-#> circular:
-#>   [1] TRUE
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#>  [1] 1 → 2   2 → 1   2 → 3   3 → 2   3 → 4   4 → 3   4 → 5   5 → 4   5 → 6  
-#> [10] 6 → 5   6 → 7   7 → 6   7 → 8   8 → 7   8 → 9   9 → 8   9 → 10  10 → 9 
-#> [19] 10 → 1  1 → 10 
+#> IGRAPH 10bb77b D--- 10 20 -- Ring graph
+#> + attr: name (g/c), mutual (g/l), circular (g/l)
+#> + graph attributes:
+#> | + name:
+#> |   [1] "Ring graph"
+#> | + mutual:
+#> |   [1] TRUE
+#> | + circular:
+#> |   [1] TRUE
+#> + edges from 10bb77b:
+#>  [1]  1-> 2  2-> 1  2-> 3  3-> 2  3-> 4  4-> 3  4-> 5  5-> 4  5-> 6  6-> 5
+#> [11]  6-> 7  7-> 6  7-> 8  8-> 7  8-> 9  9-> 8  9->10 10-> 9 10-> 1  1->10
 ```

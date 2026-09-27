@@ -6,7 +6,7 @@ and \\t\\.
 ## Usage
 
 ``` r
-st_min_cuts(graph, source, target, ..., capacity = NULL)
+st_min_cuts(graph, source, target, capacity = NULL)
 ```
 
 ## Arguments
@@ -17,15 +17,11 @@ st_min_cuts(graph, source, target, ..., capacity = NULL)
 
 - source:
 
-  The ID of the source vertex.
+  The id of the source vertex.
 
 - target:
 
-  The ID of the target vertex.
-
-- ...:
-
-  These dots are for future extensions and must be empty.
+  The id of the target vertex.
 
 - capacity:
 
@@ -44,12 +40,12 @@ A list with entries:
 
 - cuts:
 
-  A list of numeric vectors containing edge IDs. Each vector is a
+  A list of numeric vectors containing edge ids. Each vector is a
   minimum \\(s,t)\\-cut.
 
 - partition1s:
 
-  A list of numeric vectors containing vertex IDs, they correspond to
+  A list of numeric vectors containing vertex ids, they correspond to
   the edge cuts. Each vertex set is a generator of the corresponding
   cut, i.e. in the graph \\G=(V,E)\\, the vertex set \\X\\ and its
   complementer \\V-X\\, generates the cut that contains exactly the
@@ -114,29 +110,29 @@ st_min_cuts(g, source = "s", target = "t")
 #> 
 #> $cuts
 #> $cuts[[1]]
-#> ── <edge sequence> 2/14 · vertex names · from 844ebbb ──────────────────────────
-#> [1] s → a  s → b 
+#> + 2/14 edges from c2a7939 (vertex names):
+#> [1] s->a s->b
 #> 
 #> $cuts[[2]]
-#> ── <edge sequence> 2/14 · vertex names · from 844ebbb ──────────────────────────
-#> [1] s → a  b → t 
+#> + 2/14 edges from c2a7939 (vertex names):
+#> [1] s->a b->t
 #> 
 #> $cuts[[3]]
-#> ── <edge sequence> 2/14 · vertex names · from 844ebbb ──────────────────────────
-#> [1] a → t  b → t 
+#> + 2/14 edges from c2a7939 (vertex names):
+#> [1] a->t b->t
 #> 
 #> 
 #> $partition1s
 #> $partition1s[[1]]
-#> ── <vertex sequence> 1/9 · named · from 844ebbb ────────────────────────────────
+#> + 1/9 vertex, named, from c2a7939:
 #> [1] s
 #> 
 #> $partition1s[[2]]
-#> ── <vertex sequence> 2/9 · named · from 844ebbb ────────────────────────────────
+#> + 2/9 vertices, named, from c2a7939:
 #> [1] s b
 #> 
 #> $partition1s[[3]]
-#> ── <vertex sequence> 8/9 · named · from 844ebbb ────────────────────────────────
+#> + 8/9 vertices, named, from c2a7939:
 #> [1] s b a 5 4 3 2 1
 #> 
 #> 

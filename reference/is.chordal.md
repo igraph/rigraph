@@ -41,8 +41,8 @@ is.chordal(
 
 - fillin:
 
-  Logical, whether to calculate the fill-in edges.
+  Logical scalar, whether to calculate the fill-in edges.
 
 - newgraph:
 
-  Logical, whether to calculate the triangulated graph.
+  Logical scalar, whether to calculate the triangulated graph.

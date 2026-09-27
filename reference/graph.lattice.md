@@ -51,9 +51,10 @@ graph.lattice(
 
 - periodic:
 
-  Logical vector, defines whether the generated lattice is periodic
-  along each dimension. This parameter may also be a single logical
-  which will be extended to a logical vector of \`dimvector“ length.
+  Logical vector, Boolean vector, defines whether the generated lattice
+  is periodic along each dimension. This parameter may also be scalar
+  boolen value which will be extended to boolean vector with dimvector
+  length.
 
 - circular:
 

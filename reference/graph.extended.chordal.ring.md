@@ -24,7 +24,7 @@ graph.extended.chordal.ring(n, w, directed = FALSE)
 
 - directed:
 
-  Logical, whether or not to create a directed graph.
+  Logical scalar, whether or not to create a directed graph.
 
 ## Related documentation in the C library
 

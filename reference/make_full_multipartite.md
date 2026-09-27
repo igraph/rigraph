@@ -8,9 +8,9 @@ different partitions are present.
 ## Usage
 
 ``` r
-make_full_multipartite(n, ..., directed = FALSE, mode = c("all", "out", "in"))
+make_full_multipartite(n, directed = FALSE, mode = c("all", "out", "in"))
 
-full_multipartite(n, ..., directed = FALSE, mode = c("all", "out", "in"))
+full_multipartite(n, directed = FALSE, mode = c("all", "out", "in"))
 ```
 
 ## Arguments
@@ -19,13 +19,9 @@ full_multipartite(n, ..., directed = FALSE, mode = c("all", "out", "in"))
 
   A numeric vector giving the number of vertices in each partition.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - directed:
 
-  Logical, whether to create a directed graph.
+  Logical scalar, whether to create a directed graph.
 
 - mode:
 

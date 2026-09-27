@@ -9,7 +9,7 @@ is an NP-complete problem, both on directed and undirected graphs.
 ## Usage
 
 ``` r
-feedback_vertex_set(graph, ..., weights = NULL, algo = c("exact_ip"))
+feedback_vertex_set(graph, weights = NULL, algo = c("exact_ip"))
 ```
 
 ## Arguments
@@ -17,10 +17,6 @@ feedback_vertex_set(graph, ..., weights = NULL, algo = c("exact_ip"))
 - graph:
 
   The input graph
-
-- ...:
-
-  These dots are for future extensions and must be empty.
 
 - weights:
 
@@ -89,6 +85,6 @@ Graph cycles:
 
 g <- make_lattice(c(3,3))
 feedback_vertex_set(g)
-#> ── <vertex sequence> 2/9 · from 9aed351 ────────────────────────────────────────
+#> + 2/9 vertices, from daf212a:
 #> [1] 2 8
 ```

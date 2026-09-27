@@ -9,13 +9,14 @@ National Laboratories.
 ``` r
 layout_with_drl(
   graph,
-  ...,
   use.seed = FALSE,
-  seed = NULL,
-  options = NULL,
+  seed = matrix(runif(vcount(graph) * 2), ncol = 2),
+  options = drl_defaults$default,
   weights = NULL,
   dim = c(2, 3)
 )
+
+with_drl(...)
 ```
 
 ## Arguments
@@ -24,25 +25,19 @@ layout_with_drl(
 
   The input graph, in can be directed or undirected.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - use.seed:
 
-  Logical, whether to use the coordinates given in the `seed` argument
-  as a starting point.
+  Logical scalar, whether to use the coordinates given in the `seed`
+  argument as a starting point.
 
 - seed:
 
   A matrix with two columns, the starting coordinates for the vertices
-  is `use.seed` is `TRUE`. It is ignored otherwise. The default `NULL`
-  draws uniformly random starting coordinates.
+  is `use.seed` is `TRUE`. It is ignored otherwise.
 
 - options:
 
-  Options for the layout generator, a named list. See details below. The
-  default `NULL` uses `drl_defaults$default`.
+  Options for the layout generator, a named list. See details below.
 
 - weights:
 
@@ -60,6 +55,10 @@ layout_with_drl(
   three dimensional layout. Note that because of the nature of the DrL
   algorithm, the three dimensional layout takes significantly longer to
   compute.
+
+- ...:
+
+  Passed to `layout_with_drl()`.
 
 ## Value
 
@@ -195,10 +194,7 @@ Reports, 2008. 2936: p. 1-10.
 ## See also
 
 [`layout()`](https://r.igraph.org/reference/layout_.md) for other layout
-generators. See
-[`with_drl()`](https://r.igraph.org/reference/layout_spec.md) to build a
-lazy layout specification for
-[`add_layout_()`](https://r.igraph.org/reference/add_layout_.md).
+generators.
 
 ## Author
 

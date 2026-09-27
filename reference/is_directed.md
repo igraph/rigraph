@@ -16,7 +16,7 @@ is_directed(graph)
 
 ## Value
 
-Logical, whether the graph is directed.
+Logical scalar, whether the graph is directed.
 
 ## Related documentation in the C library
 

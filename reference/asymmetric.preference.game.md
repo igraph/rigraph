@@ -30,18 +30,17 @@ asymmetric.preference.game(
 
 - type.dist.matrix:
 
-  The joint distribution of the in- and out-vertex types. The default
-  `NULL` gives a uniform distribution.
+  The joint distribution of the in- and out-vertex types.
 
 - pref.matrix:
 
   A square matrix giving the preferences of the vertex types. The matrix
   has ‘types’ rows and columns. When generating an undirected graph, it
-  must be symmetric. The default `NULL` sets all preferences to one.
+  must be symmetric.
 
 - loops:
 
-  Logical, whether self-loops are allowed in the graph.
+  Logical scalar, whether self-loops are allowed in the graph.
 
 ## Related documentation in the C library
 

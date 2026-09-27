@@ -6,7 +6,7 @@ are adjacent), if they are incident to the same edge.
 ## Usage
 
 ``` r
-neighbors(graph, v, ..., mode = c("out", "in", "all", "total"))
+neighbors(graph, v, mode = c("out", "in", "all", "total"))
 ```
 
 ## Arguments
@@ -18,10 +18,6 @@ neighbors(graph, v, ..., mode = c("out", "in", "all", "total"))
 - v:
 
   The vertex of which the adjacent vertices are queried.
-
-- ...:
-
-  These dots are for future extensions and must be empty.
 
 - mode:
 
@@ -61,6 +57,6 @@ g <- make_graph("Zachary")
 n1 <- neighbors(g, 1)
 n34 <- neighbors(g, 34)
 intersection(n1, n34)
-#> ── <vertex sequence> 4/34 · from 35b5ed2 ───────────────────────────────────────
+#> + 4/34 vertices, from 583645b:
 #> [1]  9 14 20 32
 ```

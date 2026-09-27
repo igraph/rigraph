@@ -21,7 +21,7 @@ permute.vertices(graph, permutation)
 - permutation:
 
   A numeric vector giving the permutation to apply. The first element is
-  the new ID of vertex 1, etc. Every number between one and
+  the new id of vertex 1, etc. Every number between one and
   `vcount(graph)` must appear exactly once.
 
 ## Related documentation in the C library

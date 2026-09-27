@@ -7,7 +7,7 @@ input graph.
 ## Usage
 
 ``` r
-contract(graph, mapping, ..., vertex_attr_combine = NULL)
+contract(graph, mapping, vertex.attr.comb = igraph_opt("vertex.attr.comb"))
 ```
 
 ## Arguments
@@ -19,20 +19,15 @@ contract(graph, mapping, ..., vertex_attr_combine = NULL)
 - mapping:
 
   A numeric vector that specifies the mapping. Its elements correspond
-  to the vertices, and for each element the ID in the new graph is
+  to the vertices, and for each element the id in the new graph is
   given.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
-- vertex_attr_combine:
+- vertex.attr.comb:
 
   Specifies how to combine the vertex attributes in the new graph.
   Please see
   [`attribute.combination()`](https://r.igraph.org/reference/igraph-attribute-combination.md)
-  for details. The default `NULL` uses the `vertex_attr_combine` igraph
-  option.
+  for details.
 
 ## Value
 
@@ -42,7 +37,7 @@ A new graph object.
 
 The attributes of the graph are kept. Graph and edge attributes are
 unchanged, vertex attributes are combined, according to the
-`vertex_attr_combine` parameter.
+`vertex.attr.comb` parameter.
 
 ## Related documentation in the C library
 
@@ -90,22 +85,16 @@ V(g)$name <- letters[1:vcount(g)]
 E(g)$weight <- runif(ecount(g))
 
 g2 <- contract(g, rep(1:5, each = 2),
-  vertex_attr_combine = toString
+  vertex.attr.comb = toString
 )
 
 ## graph and edge attributes are kept, vertex attributes are
 ## combined using the 'toString' function.
 print(g2, g = TRUE, v = TRUE, e = TRUE)
-#> ── <igraph> Ring ──────────────────────────────────────────────────── da5690b ──
-#> ℹ undirected · named · weighted
-#> ℹ 5 vertices · 10 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
-#> → vertex: name <chr>
-#> → edge:   weight <dbl>
-#> 
-#> ── Edges (vertex names) ────────────────────────────────────────────────────────
-#>  [1] a, b ─ a, b  a, b ─ c, d  c, d ─ c, d  c, d ─ e, f  e, f ─ e, f 
-#>  [6] e, f ─ g, h  g, h ─ g, h  g, h ─ i, j  i, j ─ i, j  a, b ─ i, j 
+#> IGRAPH a378e48 UNW- 5 10 -- Ring
+#> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c), weight
+#> | (e/n)
+#> + edges from a378e48 (vertex names):
+#>  [1] a, b--a, b a, b--c, d c, d--c, d c, d--e, f e, f--e, f e, f--g, h
+#>  [7] g, h--g, h g, h--i, j i, j--i, j a, b--i, j
 ```

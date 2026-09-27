@@ -15,7 +15,7 @@ graphs via directly optimizing a modularity score."><meta property="og:image" co
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9037</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ graphs via directly optimizing a modularity score."><meta property="og:image" co
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Community structure via greedy optimization of modularity</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/community.R" class="external-link"><code>R/community.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/community.R" class="external-link"><code>R/community.R</code></a></small>
       <div class="d-none name"><code>cluster_fast_greedy.Rd</code></div>
     </div>
 
@@ -60,7 +60,6 @@ graphs via directly optimizing a modularity score.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cluster_fast_greedy</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
-<span>  <span class="va">...</span>,</span>
 <span>  merges <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  modularity <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  membership <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -77,21 +76,17 @@ graphs via directly optimizing a modularity score.</p>
 multi-edges.</p></dd>
 
 
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>These dots are for future extensions and must be empty.</p></dd>
-
-
 <dt id="arg-merges">merges<a class="anchor" aria-label="anchor" href="#arg-merges"></a></dt>
-<dd><p>Logical, whether to return the merge matrix.</p></dd>
+<dd><p>Logical scalar, whether to return the merge matrix.</p></dd>
 
 
 <dt id="arg-modularity">modularity<a class="anchor" aria-label="anchor" href="#arg-modularity"></a></dt>
-<dd><p>Logical, whether to return a vector containing the
+<dd><p>Logical scalar, whether to return a vector containing the
 modularity after each merge.</p></dd>
 
 
 <dt id="arg-membership">membership<a class="anchor" aria-label="anchor" href="#arg-membership"></a></dt>
-<dd><p>Logical, whether to calculate the membership vector
+<dd><p>Logical scalar, whether to calculate the membership vector
 corresponding to the maximum modularity score, considering all possible
 community structures along the merges.</p></dd>
 

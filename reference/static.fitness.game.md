@@ -31,17 +31,20 @@ static.fitness.game(
 
 - fitness.in:
 
-  Numeric vector that specifies the in-fitness of each vertex. The
-  generated graph will be directed. Default: `NULL`, the generated graph
-  will be undirected.
+  If `NULL` (the default), the generated graph will be undirected. If
+  not `NULL`, then it should be a numeric vector and it specifies the
+  in-fitness of each vertex.
+
+  If this argument is not `NULL`, then a directed graph is generated,
+  otherwise an undirected one.
 
 - loops:
 
-  Logical, whether to allow loop edges in the graph.
+  Logical scalar, whether to allow loop edges in the graph.
 
 - multiple:
 
-  Logical, whether to allow multiple edges in the graph.
+  Logical scalar, whether to allow multiple edges in the graph.
 
 ## Related documentation in the C library
 

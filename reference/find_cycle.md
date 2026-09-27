@@ -12,7 +12,7 @@ determine if a graph has cycles, without returning a specific cycle.
 ## Usage
 
 ``` r
-find_cycle(graph, ..., mode = c("out", "in", "all", "total"))
+find_cycle(graph, mode = c("out", "in", "all", "total"))
 ```
 
 ## Arguments
@@ -20,10 +20,6 @@ find_cycle(graph, ..., mode = c("out", "in", "all", "total"))
 - graph:
 
   The input graph.
-
-- ...:
-
-  These dots are for future extensions and must be empty.
 
 - mode:
 
@@ -34,7 +30,7 @@ find_cycle(graph, ..., mode = c("out", "in", "all", "total"))
 ## Value
 
 A list of integer vectors, each integer vector is a path from the source
-vertex to one of the target vertices. A path is given by its vertex IDs.
+vertex to one of the target vertices. A path is given by its vertex ids.
 
 ## Related documentation in the C library
 
@@ -62,20 +58,20 @@ Graph cycles:
 g <- make_lattice(c(3, 3))
 find_cycle(g)
 #> $vertices
-#> ── <vertex sequence> 4/9 · from c79bab2 ────────────────────────────────────────
+#> + 4/9 vertices, from 5a6f8a3:
 #> [1] 9 6 5 8
 #> 
 #> $edges
-#> ── <edge sequence> 4/12 · from c79bab2 ─────────────────────────────────────────
-#> [1] 8 ─ 9  6 ─ 9  5 ─ 6  5 ─ 8 
+#> + 4/12 edges from 5a6f8a3:
+#> [1] 8--9 6--9 5--6 5--8
 #> 
 
 # Empty results are returned for acyclic graphs
 find_cycle(sample_tree(5))
 #> $vertices
-#> ── <vertex sequence> 0/5 · from 4fe5b15 ────────────────────────────────────────
+#> + 0/5 vertices, from c35ec95:
 #> 
 #> $edges
-#> ── <edge sequence> 0/4 · from 4fe5b15 ──────────────────────────────────────────
+#> + 0/4 edges from c35ec95:
 #> 
 ```

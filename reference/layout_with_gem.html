@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9037</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>The GEM layout algorithm</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/layout.R" class="external-link"><code>R/layout.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/layout.R" class="external-link"><code>R/layout.R</code></a></small>
       <div class="d-none name"><code>layout_with_gem.Rd</code></div>
     </div>
 
@@ -57,13 +57,14 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">layout_with_gem</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
-<span>  <span class="va">...</span>,</span>
 <span>  coords <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  maxiter <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  temp.max <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  temp.min <span class="op">=</span> <span class="fl">0.1</span>,</span>
-<span>  temp.init <span class="op">=</span> <span class="cn">NULL</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span>  maxiter <span class="op">=</span> <span class="fl">40</span> <span class="op">*</span> <span class="fu"><a href="gorder.html">vcount</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>,</span>
+<span>  temp.max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fu"><a href="gorder.html">vcount</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>  temp.min <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">10</span>,</span>
+<span>  temp.init <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fu"><a href="gorder.html">vcount</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">with_gem</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -74,26 +75,22 @@
 <dd><p>The input graph. Edge directions are ignored.</p></dd>
 
 
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>These dots are for future extensions and must be empty.</p></dd>
-
-
 <dt id="arg-coords">coords<a class="anchor" aria-label="anchor" href="#arg-coords"></a></dt>
-<dd><p>Starting coordinates in a two or three column matrix,
-depending on the <code>dim</code> argument.
-Default: <code>NULL</code>.</p></dd>
+<dd><p>If not <code>NULL</code>, then the starting coordinates should be
+given here, in a two or three column matrix, depending on the <code>dim</code>
+argument.</p></dd>
 
 
 <dt id="arg-maxiter">maxiter<a class="anchor" aria-label="anchor" href="#arg-maxiter"></a></dt>
 <dd><p>The maximum number of iterations to perform. Updating a
-single vertex counts as an iteration. The default <code>NULL</code> uses 40 * n * n,
+single vertex counts as an iteration.  A reasonable default is 40 * n * n,
 where n is the number of vertices. The original paper suggests 4 * n * n,
 but this usually only works if the other parameters are set up carefully.</p></dd>
 
 
 <dt id="arg-temp-max">temp.max<a class="anchor" aria-label="anchor" href="#arg-temp-max"></a></dt>
-<dd><p>The maximum allowed local temperature. The default <code>NULL</code>
-uses the number of vertices.</p></dd>
+<dd><p>The maximum allowed local temperature. A reasonable default
+is the number of vertices.</p></dd>
 
 
 <dt id="arg-temp-min">temp.min<a class="anchor" aria-label="anchor" href="#arg-temp-min"></a></dt>
@@ -103,8 +100,12 @@ uses the number of vertices.</p></dd>
 
 
 <dt id="arg-temp-init">temp.init<a class="anchor" aria-label="anchor" href="#arg-temp-init"></a></dt>
-<dd><p>Initial local temperature of all vertices. The default
-<code>NULL</code> uses the square root of the number of vertices.</p></dd>
+<dd><p>Initial local temperature of all vertices. A reasonable
+default is the square root of the number of vertices.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Passed to <code>layout_with_gem()</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -129,8 +130,7 @@ LNCS 894, pp. 388-403, 1995.</p>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="layout_with_fr.html">layout_with_fr()</a></code>,
-<code><a href="plot.igraph.html">plot.igraph()</a></code>, <code><a href="tkplot.html">tkplot()</a></code>. See <code><a href="layout_spec.html">with_gem()</a></code> to build a lazy layout
-specification for <code><a href="add_layout_.html">add_layout_()</a></code>.</p>
+<code><a href="plot.igraph.html">plot.igraph()</a></code>, <code><a href="tkplot.html">tkplot()</a></code></p>
 <p>Other graph layouts:
 <code><a href="add_layout_.html">add_layout_()</a></code>,
 <code><a href="component_wise.html">component_wise()</a></code>,

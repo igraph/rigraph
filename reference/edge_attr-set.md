@@ -5,7 +5,7 @@ Set one or more edge attributes
 ## Usage
 
 ``` r
-edge_attr(graph, name, index = NULL) <- value
+edge_attr(graph, name, index = E(graph)) <- value
 ```
 
 ## Arguments
@@ -22,7 +22,6 @@ edge_attr(graph, name, index = NULL) <- value
 - index:
 
   An optional edge sequence to set the attributes of a subset of edges.
-  The default `NULL` selects all edges.
 
 - value:
 
@@ -64,16 +63,10 @@ edge_attr(g) <- list(
 )
 edge_attr(g, "label") <- E(g)$name
 g
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 2d0a831 ──
-#> ℹ undirected
-#> ℹ 10 vertices · 10 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
-#> → edge:   name <chr>, color <chr>, label <chr>
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#>  [1] 1 ─ 2   2 ─ 3   3 ─ 4   4 ─ 5   5 ─ 6   6 ─ 7   7 ─ 8   8 ─ 9   9 ─ 10 
-#> [10] 1 ─ 10 
+#> IGRAPH 1c14b03 U--- 10 10 -- Ring graph
+#> + attr: name (g/c), mutual (g/l), circular (g/l), name (e/c), color
+#> | (e/c), label (e/c)
+#> + edges from 1c14b03:
+#>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 plot(g)
 ```

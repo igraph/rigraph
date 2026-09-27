@@ -8,7 +8,6 @@ Compute the generating set of the automorphism group of a graph.
 automorphism_group(
   graph,
   colors = NULL,
-  ...,
   sh = c("fm", "f", "fs", "fl", "flm", "fsm"),
   details = FALSE
 )
@@ -28,10 +27,6 @@ automorphism_group(
   vertices, or, if there is no such vertex attribute, it simply assumes
   that all vertices have the same color. Pass NULL explicitly if the
   graph has a `color` vertex attribute but you do not want to use it.
-
-- ...:
-
-  These dots are for future extensions and must be empty.
 
 - sh:
 
@@ -114,11 +109,11 @@ Nepusz <ntamas@gmail.com> for this manual page.
 g <- make_ring(10)
 automorphism_group(g)
 #> [[1]]
-#> ── <vertex sequence> 10/10 · from 8d6d3a8 ──────────────────────────────────────
+#> + 10/10 vertices, from ccfb3c1:
 #>  [1]  1 10  9  8  7  6  5  4  3  2
 #> 
 #> [[2]]
-#> ── <vertex sequence> 10/10 · from 8d6d3a8 ──────────────────────────────────────
+#> + 10/10 vertices, from ccfb3c1:
 #>  [1]  2  3  4  5  6  7  8  9 10  1
 #> 
 ```

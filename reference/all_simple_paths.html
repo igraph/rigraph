@@ -15,7 +15,7 @@ vertex or vertices. A path is simple if contains no repeated vertices."><meta pr
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9037</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ vertex or vertices. A path is simple if contains no repeated vertices."><meta pr
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>List all simple paths from one source</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/paths.R" class="external-link"><code>R/paths.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/paths.R" class="external-link"><code>R/paths.R</code></a></small>
       <div class="d-none name"><code>all_simple_paths.Rd</code></div>
     </div>
 
@@ -61,8 +61,7 @@ vertex or vertices. A path is simple if contains no repeated vertices.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">all_simple_paths</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
 <span>  <span class="va">from</span>,</span>
-<span>  to <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  <span class="va">...</span>,</span>
+<span>  to <span class="op">=</span> <span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span>,</span>
 <span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"out"</span>, <span class="st">"in"</span>, <span class="st">"all"</span>, <span class="st">"total"</span><span class="op">)</span>,</span>
 <span>  cutoff <span class="op">=</span> <span class="op">-</span><span class="fl">1</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -81,12 +80,7 @@ vertex or vertices. A path is simple if contains no repeated vertices.</p>
 
 
 <dt id="arg-to">to<a class="anchor" aria-label="anchor" href="#arg-to"></a></dt>
-<dd><p>The target vertex of vertices. The default <code>NULL</code> selects all
-vertices.</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>These dots are for future extensions and must be empty.</p></dd>
+<dd><p>The target vertex of vertices. Defaults to all vertices.</p></dd>
 
 
 <dt id="arg-mode">mode<a class="anchor" aria-label="anchor" href="#arg-mode"></a></dt>
@@ -107,7 +101,7 @@ no cutoff is used.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A list of integer vectors, each integer vector is a path from
 the source vertex to one of the target vertices. A path is given by its
-vertex IDs.</p>
+vertex ids.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -136,28 +130,28 @@ function, if your graph is lattice-like.</p>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">all_simple_paths</span><span class="op">(</span><span class="va">g</span>, <span class="fl">1</span>, <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 5/10 · from 1203c25 ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from dc9f259:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 2 3 4 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 7/10 · from 1203c25 ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 7/10 vertices, from dc9f259:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1 10  9  8  7  6  5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">all_simple_paths</span><span class="op">(</span><span class="va">g</span>, <span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 3/10 · from 1203c25 ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/10 vertices, from dc9f259:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 2 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 5/10 · from 1203c25 ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from dc9f259:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 2 3 4 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 7/10 · from 1203c25 ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 7/10 vertices, from dc9f259:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1 10  9  8  7  6  5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 9/10 · from 1203c25 ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 9/10 vertices, from dc9f259:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1 10  9  8  7  6  5  4  3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>

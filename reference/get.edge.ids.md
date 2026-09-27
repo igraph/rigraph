@@ -1,4 +1,4 @@
-# Find the edge IDs based on the incident vertices of the edges
+# Find the edge ids based on the incident vertices of the edges
 
 **\[deprecated\]**
 
@@ -21,20 +21,20 @@ get.edge.ids(graph, vp, directed = TRUE, error = FALSE, multi = deprecated())
 - vp:
 
   The incident vertices, given as a two-column data frame, two-column
-  matrix, or vector of vertex IDs or symbolic vertex names. For a
+  matrix, or vector of vertex ids or symbolic vertex names. For a
   vector, the values are interpreted pairwise, i.e. the first and second
   are used for the first edge, the third and fourth for the second, etc.
 
 - directed:
 
-  Logical, whether to consider edge directions in directed graphs. This
-  argument is ignored for undirected graphs.
+  Logical scalar, whether to consider edge directions in directed
+  graphs. This argument is ignored for undirected graphs.
 
 - error:
 
-  Logical, whether to report an error if an edge is not found in the
-  graph. If `FALSE`, then no error is reported, and zero is returned for
-  the non-existant edge(s).
+  Logical scalar, whether to report an error if an edge is not found in
+  the graph. If `FALSE`, then no error is reported, and zero is returned
+  for the non-existant edge(s).
 
 - multi:
 

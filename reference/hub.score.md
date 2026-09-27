@@ -20,9 +20,9 @@ hub.score(graph, scale = TRUE, weights = NULL, options = arpack_defaults())
 
 - scale:
 
-  Logical, whether to scale the result to have a maximum score of one.
-  If no scaling is used then the result vector has unit length in the
-  Euclidean norm.
+  Logical scalar, whether to scale the result to have a maximum score of
+  one. If no scaling is used then the result vector has unit length in
+  the Euclidean norm.
 
 - weights:
 
@@ -36,3 +36,11 @@ hub.score(graph, scale = TRUE, weights = NULL, options = arpack_defaults())
 
   A named list, to override some ARPACK options. See
   [`arpack()`](https://r.igraph.org/reference/arpack.md) for details.
+
+## Related documentation in the C library
+
+[`hub_and_authority_scores()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_hub_and_authority_scores),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)

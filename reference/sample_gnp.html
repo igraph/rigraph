@@ -17,7 +17,7 @@ connectivity status of vertex pairs follows a Bernoulli distribution."><meta pro
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9037</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +49,7 @@ connectivity status of vertex pairs follows a Bernoulli distribution."><meta pro
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Generate random graphs according to the \(G(n,p)\) Erdős-Rényi model</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/games.R" class="external-link"><code>R/games.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/games.R" class="external-link"><code>R/games.R</code></a></small>
       <div class="d-none name"><code>sample_gnp.Rd</code></div>
     </div>
 
@@ -61,9 +61,9 @@ connectivity status of vertex pairs follows a Bernoulli distribution.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sample_gnp</span><span class="op">(</span><span class="va">n</span>, <span class="va">p</span>, <span class="va">...</span>, directed <span class="op">=</span> <span class="cn">FALSE</span>, loops <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sample_gnp</span><span class="op">(</span><span class="va">n</span>, <span class="va">p</span>, directed <span class="op">=</span> <span class="cn">FALSE</span>, loops <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">gnp</span><span class="op">(</span><span class="va">n</span>, <span class="va">p</span>, <span class="va">...</span>, directed <span class="op">=</span> <span class="cn">FALSE</span>, loops <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">gnp</span><span class="op">(</span><span class="va">n</span>, <span class="va">p</span>, directed <span class="op">=</span> <span class="cn">FALSE</span>, loops <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -77,10 +77,6 @@ connectivity status of vertex pairs follows a Bernoulli distribution.</p>
 <dt id="arg-p">p<a class="anchor" aria-label="anchor" href="#arg-p"></a></dt>
 <dd><p>The probability for drawing an edge between two
 arbitrary vertices (\(G(n,p)\) graph).</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-directed">directed<a class="anchor" aria-label="anchor" href="#arg-directed"></a></dt>
@@ -155,9 +151,9 @@ Mathematicae</em> 6, 290–297 (1959).</p>
 <span class="r-in"><span><span class="co"># Random graph with expected mean degree of 2</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">sample_gnp</span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">2</span> <span class="op">/</span> <span class="fl">1000</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="fu"><a href="degree.html">degree</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.912</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.926</span>
 <span class="r-in"><span><span class="fu"><a href="degree.html">degree_distribution</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.159 0.274 0.242 0.201 0.082 0.033 0.007 0.000 0.002</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.123 0.300 0.278 0.180 0.079 0.029 0.009 0.001 0.001</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Pick a simple graph on 6 vertices uniformly at random</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">sample_gnp</span><span class="op">(</span><span class="fl">6</span>, <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span></span></span>

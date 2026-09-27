@@ -21,7 +21,7 @@ bfs(
   dist = FALSE,
   callback = NULL,
   extra = NULL,
-  rho = NULL,
+  rho = parent.frame(),
   neimode = deprecated(),
   father = deprecated()
 )
@@ -36,11 +36,7 @@ bfs(
 - root:
 
   Numeric vector, usually of length one. The root vertex, or root
-  vertices to start the search from. When several roots are given, they
-  are considered in the order they appear. If a root vertex was already
-  reached while searching from an earlier root, no separate search is
-  started from it, so it keeps the distance it was first found at rather
-  than `0`.
+  vertices to start the search from.
 
 - mode:
 
@@ -55,46 +51,47 @@ bfs(
 
 - unreachable:
 
-  Logical, whether the search should visit the vertices that are
+  Logical scalar, whether the search should visit the vertices that are
   unreachable from the given root vertex (or vertices). If `TRUE`, then
   additional searches are performed until all vertices are visited.
 
 - restricted:
 
-  `NULL` (=no restriction), or a vector of vertices (IDs or symbolic
+  `NULL` (=no restriction), or a vector of vertices (ids or symbolic
   names). In the latter case, the search is restricted to the given
   vertices.
 
 - order:
 
-  Logical, whether to return the ordering of the vertices.
+  Logical scalar, whether to return the ordering of the vertices.
 
 - rank:
 
-  Logical, whether to return the rank of the vertices.
+  Logical scalar, whether to return the rank of the vertices.
 
 - parent:
 
-  Logical, whether to return the parent of the vertices.
+  Logical scalar, whether to return the parent of the vertices.
 
 - pred:
 
-  Logical, whether to return the predecessors of the vertices.
+  Logical scalar, whether to return the predecessors of the vertices.
 
 - succ:
 
-  Logical, whether to return the successors of the vertices.
+  Logical scalar, whether to return the successors of the vertices.
 
 - dist:
 
-  Logical, whether to return the distance from the root of the search
-  tree.
+  Logical scalar, whether to return the distance from the root of the
+  search tree.
 
 - callback:
 
-  Callback function. This is called whenever a vertex is visited. The
-  callback function should return `FALSE` to continue the search or
-  `TRUE` to stop it. See details below. Default: `NULL`.
+  If not `NULL`, then it must be callback function. This is called
+  whenever a vertex is visited. The callback function should return
+  `FALSE` to continue the search or `TRUE` to stop it. See details
+  below.
 
 - extra:
 
@@ -102,8 +99,7 @@ bfs(
 
 - rho:
 
-  The environment in which the callback function is evaluated. The
-  default `NULL` uses the caller's environment.
+  The environment in which the callback function is evaluated.
 
 - neimode:
 
@@ -120,8 +116,8 @@ A named list with the following entries:
 
 - root:
 
-  Numeric vector. The root vertex (or vertices) that was used as the
-  starting point of the search, as supplied in the `root` argument.
+  Numeric scalar. The root vertex that was used as the starting point of
+  the search.
 
 - neimode:
 
@@ -131,11 +127,8 @@ A named list with the following entries:
 
 - order:
 
-  The vertex IDs, in the order in which they were visited by the search.
-  A vertex sequence (`igraph.vs`), or a numeric vector if the
-  `return.vs.es` option (see
-  [`igraph_options()`](https://r.igraph.org/reference/igraph_options.md))
-  is `FALSE`.
+  Numeric vector. The vertex ids, in the order in which they were
+  visited by the search.
 
 - rank:
 
@@ -144,9 +137,8 @@ A named list with the following entries:
 
 - parent:
 
-  The parent of each vertex, i.e. the vertex it was discovered from. A
-  vertex sequence (`igraph.vs`), or a numeric vector if the
-  `return.vs.es` option is `FALSE`.
+  Numeric vector. The parent of each vertex, i.e. the vertex it was
+  discovered from.
 
 - father:
 
@@ -154,15 +146,13 @@ A named list with the following entries:
 
 - pred:
 
-  The previously visited vertex for each vertex, or 0 if there was no
-  such vertex. A vertex sequence (`igraph.vs`), or a numeric vector if
-  the `return.vs.es` option is `FALSE`.
+  Numeric vector. The previously visited vertex for each vertex, or 0 if
+  there was no such vertex.
 
 - succ:
 
-  The next vertex that was visited after the current one, or 0 if there
-  was no such vertex. A vertex sequence (`igraph.vs`), or a numeric
-  vector if the `return.vs.es` option is `FALSE`.
+  Numeric vector. The next vertex that was visited after the current
+  one, or 0 if there was no such vertex.
 
 - dist:
 
@@ -252,22 +242,22 @@ bfs(make_ring(10) %du% make_ring(10),
 #> [1] "out"
 #> 
 #> $order
-#> ── <vertex sequence> 20/20 · from 9d0ccd9 ──────────────────────────────────────
+#> + 20/20 vertices, from 544ed3a:
 #>  [1]  1  2 10  3  9  4  8  5  7  6 11 12 20 13 19 14 18 15 17 16
 #> 
 #> $rank
 #>  [1]  1  2  4  6  8 10  9  7  5  3 11 12 14 16 18 20 19 17 15 13
 #> 
 #> $parent
-#> ── <vertex sequence> 20/20 · from 9d0ccd9 ──────────────────────────────────────
+#> + 20/20 vertices, from 544ed3a:
 #>  [1] NA  1  2  3  4  5  8  9 10  1 NA 11 12 13 14 15 18 19 20 11
 #> 
 #> $pred
-#> ── <vertex sequence> 20/20 · from 9d0ccd9 ──────────────────────────────────────
+#> + 20/20 vertices, from 544ed3a:
 #>  [1] NA  1 10  9  8  7  5  4  3  2 NA 11 20 19 18 17 15 14 13 12
 #> 
 #> $succ
-#> ── <vertex sequence> 20/20 · from 9d0ccd9 ──────────────────────────────────────
+#> + 20/20 vertices, from 544ed3a:
 #>  [1]  2 10  9  8  7 NA  6  5  4  3 12 20 19 18 17 NA 16 15 14 13
 #> 
 #> $dist
@@ -277,7 +267,7 @@ bfs(make_ring(10) %du% make_ring(10),
 #> [1] "out"
 #> 
 #> $father
-#> ── <vertex sequence> 20/20 · from 9d0ccd9 ──────────────────────────────────────
+#> + 20/20 vertices, from 544ed3a:
 #>  [1] NA  1  2  3  4  5  8  9 10  1 NA 11 12 13 14 15 18 19 20 11
 #> 
 
@@ -344,7 +334,7 @@ bfs(make_ring(10) %du% make_ring(10), root = 1, callback = f)
 #> [1] "out"
 #> 
 #> $order
-#> ── <vertex sequence> 20/20 · from d61ab13 ──────────────────────────────────────
+#> + 20/20 vertices, from 93e38b1:
 #>  [1]  1  2 10  3  9  4  8  5  7  6 11 12 20 13 19 14 18 15 17 16
 #> 
 #> $rank

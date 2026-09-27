@@ -19,7 +19,7 @@ dfs(
   in.callback = NULL,
   out.callback = NULL,
   extra = NULL,
-  rho = NULL,
+  rho = parent.frame(),
   neimode = deprecated(),
   father = deprecated()
 )
@@ -48,37 +48,38 @@ dfs(
 
 - unreachable:
 
-  Logical, whether the search should visit the vertices that are
+  Logical scalar, whether the search should visit the vertices that are
   unreachable from the given root vertex (or vertices). If `TRUE`, then
   additional searches are performed until all vertices are visited.
 
 - order:
 
-  Logical, whether to return the DFS ordering of the vertices.
+  Logical scalar, whether to return the DFS ordering of the vertices.
 
 - order.out:
 
-  Logical, whether to return the ordering based on leaving the subtree
-  of the vertex.
+  Logical scalar, whether to return the ordering based on leaving the
+  subtree of the vertex.
 
 - parent:
 
-  Logical, whether to return the parent of the vertices.
+  Logical scalar, whether to return the parent of the vertices.
 
 - dist:
 
-  Logical, whether to return the distance from the root of the search
-  tree.
+  Logical scalar, whether to return the distance from the root of the
+  search tree.
 
 - in.callback:
 
-  Callback function. This is called whenever a vertex is visited. See
-  details below. Default: `NULL`.
+  If not `NULL`, then it must be callback function. This is called
+  whenever a vertex is visited. See details below.
 
 - out.callback:
 
-  Callback function. This is called whenever the subtree of a vertex is
-  completed by the algorithm. See details below. Default: `NULL`.
+  If not `NULL`, then it must be callback function. This is called
+  whenever the subtree of a vertex is completed by the algorithm. See
+  details below.
 
 - extra:
 
@@ -86,8 +87,7 @@ dfs(
 
 - rho:
 
-  The environment in which the callback function is evaluated. The
-  default `NULL` uses the caller's environment.
+  The environment in which the callback function is evaluated.
 
 - neimode:
 
@@ -115,12 +115,12 @@ A named list with the following entries:
 
 - order:
 
-  Numeric vector. The vertex IDs, in the order in which they were
+  Numeric vector. The vertex ids, in the order in which they were
   visited by the search.
 
 - order.out:
 
-  Numeric vector, the vertex IDs, in the order of the completion of
+  Numeric vector, the vertex ids, in the order of the completion of
   their subtree.
 
 - parent:
@@ -221,15 +221,15 @@ dfs(
 #> [1] "out"
 #> 
 #> $order
-#> ── <vertex sequence> 20/20 · from 419cf45 ──────────────────────────────────────
+#> + 20/20 vertices, from c4d4db4:
 #>  [1]  1  2  4  8  9  5 10  3  6  7 11 12 14 18 19 15 20 13 16 17
 #> 
 #> $order.out
-#> ── <vertex sequence> 20/20 · from 419cf45 ──────────────────────────────────────
+#> + 20/20 vertices, from c4d4db4:
 #>  [1]  8  9  4 10  5  2  6  7  3  1 18 19 14 20 15 12 16 17 13 11
 #> 
 #> $parent
-#> ── <vertex sequence> 20/20 · from 419cf45 ──────────────────────────────────────
+#> + 20/20 vertices, from c4d4db4:
 #>  [1] NA  1  1  2  2  3  3  4  4  5 NA 11 11 12 12 13 13 14 14 15
 #> 
 #> $dist
@@ -239,7 +239,7 @@ dfs(
 #> [1] "out"
 #> 
 #> $father
-#> ── <vertex sequence> 20/20 · from 419cf45 ──────────────────────────────────────
+#> + 20/20 vertices, from c4d4db4:
 #>  [1] NA  1  1  2  2  3  3  4  4  5 NA 11 11 12 12 13 13 14 14 15
 #> 
 

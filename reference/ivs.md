@@ -43,7 +43,7 @@ is_ivs(graph, candidate)
 ## Value
 
 `ivs()`, `largest_ivs()` and `max_ivs()` return a list containing
-numeric vertex IDs, each list element is an independent vertex set.
+numeric vertex ids, each list element is an independent vertex set.
 
 `ivs_size()` returns an integer constant.
 
@@ -113,86 +113,83 @@ ivs_size(g)
 #> [1] 4
 ivs(g, min = ivs_size(g))
 #> [[1]]
-#> ── <vertex sequence> 4/100 · from 88f7f84 ──────────────────────────────────────
+#> + 4/100 vertices, from 7e2f399:
 #> [1]  7 37 55 56
 #> 
 #> [[2]]
-#> ── <vertex sequence> 4/100 · from 88f7f84 ──────────────────────────────────────
+#> + 4/100 vertices, from 7e2f399:
 #> [1]  7 55 56 69
 #> 
 #> [[3]]
-#> ── <vertex sequence> 4/100 · from 88f7f84 ──────────────────────────────────────
+#> + 4/100 vertices, from 7e2f399:
 #> [1]  7 56 69 74
 #> 
 #> [[4]]
-#> ── <vertex sequence> 4/100 · from 88f7f84 ──────────────────────────────────────
+#> + 4/100 vertices, from 7e2f399:
 #> [1]  8 15 73 80
 #> 
 #> [[5]]
-#> ── <vertex sequence> 4/100 · from 88f7f84 ──────────────────────────────────────
+#> + 4/100 vertices, from 7e2f399:
 #> [1]  8 15 73 84
 #> 
 #> [[6]]
-#> ── <vertex sequence> 4/100 · from 88f7f84 ──────────────────────────────────────
+#> + 4/100 vertices, from 7e2f399:
 #> [1] 13 16 37 40
 #> 
 #> [[7]]
-#> ── <vertex sequence> 4/100 · from 88f7f84 ──────────────────────────────────────
+#> + 4/100 vertices, from 7e2f399:
 #> [1] 21 32 45 61
 #> 
 #> [[8]]
-#> ── <vertex sequence> 4/100 · from 88f7f84 ──────────────────────────────────────
+#> + 4/100 vertices, from 7e2f399:
 #> [1] 22 55 56 64
 #> 
 #> [[9]]
-#> ── <vertex sequence> 4/100 · from 88f7f84 ──────────────────────────────────────
+#> + 4/100 vertices, from 7e2f399:
 #> [1] 23 69 75 90
 #> 
 largest_ivs(g)
 #> [[1]]
-#> ── <vertex sequence> 4/100 · from 88f7f84 ──────────────────────────────────────
+#> + 4/100 vertices, from 7e2f399:
 #> [1] 21 32 45 61
 #> 
 #> [[2]]
-#> ── <vertex sequence> 4/100 · from 88f7f84 ──────────────────────────────────────
+#> + 4/100 vertices, from 7e2f399:
 #> [1]  7 37 55 56
 #> 
 #> [[3]]
-#> ── <vertex sequence> 4/100 · from 88f7f84 ──────────────────────────────────────
+#> + 4/100 vertices, from 7e2f399:
 #> [1]  7 55 56 69
 #> 
 #> [[4]]
-#> ── <vertex sequence> 4/100 · from 88f7f84 ──────────────────────────────────────
+#> + 4/100 vertices, from 7e2f399:
 #> [1]  7 56 69 74
 #> 
 #> [[5]]
-#> ── <vertex sequence> 4/100 · from 88f7f84 ──────────────────────────────────────
+#> + 4/100 vertices, from 7e2f399:
 #> [1]  8 15 73 80
 #> 
 #> [[6]]
-#> ── <vertex sequence> 4/100 · from 88f7f84 ──────────────────────────────────────
+#> + 4/100 vertices, from 7e2f399:
 #> [1]  8 15 73 84
 #> 
 #> [[7]]
-#> ── <vertex sequence> 4/100 · from 88f7f84 ──────────────────────────────────────
+#> + 4/100 vertices, from 7e2f399:
 #> [1] 22 55 56 64
 #> 
 #> [[8]]
-#> ── <vertex sequence> 4/100 · from 88f7f84 ──────────────────────────────────────
+#> + 4/100 vertices, from 7e2f399:
 #> [1] 23 69 75 90
 #> 
 #> [[9]]
-#> ── <vertex sequence> 4/100 · from 88f7f84 ──────────────────────────────────────
+#> + 4/100 vertices, from 7e2f399:
 #> [1] 13 16 37 40
 #> 
 # Empty graph
 induced_subgraph(g, largest_ivs(g)[[1]])
-#> ── <igraph> Erdos-Renyi (gnp) graph ───────────────────────────────── 26d5dfd ──
-#> ℹ undirected
-#> ℹ 4 vertices · 0 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, type <chr>, loops <lgl>, p <dbl>
+#> IGRAPH a6c88cc U--- 4 0 -- Erdos-Renyi (gnp) graph
+#> + attr: name (g/c), type (g/c), loops (g/l), p (g/n)
+#> + edges from a6c88cc:
 
 length(max_ivs(g))
 #> [1] 326

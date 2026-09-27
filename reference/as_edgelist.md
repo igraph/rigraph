@@ -6,7 +6,7 @@ graph, like an edge list.
 ## Usage
 
 ``` r
-as_edgelist(graph, ..., names = TRUE)
+as_edgelist(graph, names = TRUE)
 ```
 
 ## Arguments
@@ -15,14 +15,10 @@ as_edgelist(graph, ..., names = TRUE)
 
   The graph to convert.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - names:
 
   Whether to return a character matrix containing vertex names (i.e. the
-  `name` vertex attribute) if they exist or numeric vertex IDs.
+  `name` vertex attribute) if they exist or numeric vertex ids.
 
 ## Value
 

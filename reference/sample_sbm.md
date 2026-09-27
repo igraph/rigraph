@@ -5,9 +5,9 @@ Sampling from the stochastic block model of networks
 ## Usage
 
 ``` r
-sample_sbm(n, pref.matrix, block.sizes, ..., directed = FALSE, loops = FALSE)
+sample_sbm(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE)
 
-sbm(n, pref.matrix, block.sizes, ..., directed = FALSE, loops = FALSE)
+sbm(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE)
 ```
 
 ## Arguments
@@ -28,17 +28,13 @@ sbm(n, pref.matrix, block.sizes, ..., directed = FALSE, loops = FALSE)
   Numeric vector giving the number of vertices in each group. The sum of
   the vector must match the number of vertices.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - directed:
 
-  Logical, whether to create a directed graph.
+  Logical scalar, whether to create a directed graph.
 
 - loops:
 
-  Logical, whether self-loops are allowed in the graph.
+  Logical scalar, whether self-loops are allowed in the graph.
 
 ## Value
 
@@ -100,26 +96,19 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ``` r
 
 ## Two groups with not only few connection between groups
-pm <- cbind(c(0.1, 0.001), c(0.001, 0.05))
+pm <- cbind(c(.1, .001), c(.001, .05))
 g <- sample_sbm(1000, pref.matrix = pm, block.sizes = c(300, 700))
 g
-#> ── <igraph> Stochastic block model ────────────────────────────────── af947d4 ──
-#> ℹ undirected
-#> ℹ 1000 vertices · 16827 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, loops <lgl>
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#>     [1] 2 ─ 9       6 ─ 10      6 ─ 12      7 ─ 12      8 ─ 12      6 ─ 13     
-#>     [7] 7 ─ 14      12 ─ 14     13 ─ 15     2 ─ 16      9 ─ 16      8 ─ 17     
-#>    [13] 13 ─ 17     14 ─ 17     3 ─ 18      16 ─ 19     2 ─ 20      7 ─ 20     
-#>    [19] 10 ─ 20     13 ─ 20     2 ─ 21      5 ─ 21      7 ─ 21      13 ─ 21    
-#>    [25] 18 ─ 21     8 ─ 22      11 ─ 23     13 ─ 23     2 ─ 24      20 ─ 24    
-#>    [31] 23 ─ 24     1 ─ 25      4 ─ 25      13 ─ 25     7 ─ 26      13 ─ 26    
-#>    [37] 18 ─ 26     19 ─ 26     21 ─ 27     1 ─ 28      5 ─ 28      15 ─ 28    
-#>    [43] 25 ─ 28     1 ─ 29      20 ─ 29     4 ─ 30      1 ─ 31      10 ─ 31    
-#>    [49] 17 ─ 31     27 ─ 31     14 ─ 32     18 ─ 32     21 ─ 32     24 ─ 32    
-#>    [55] 5 ─ 33      27 ─ 33     5 ─ 34      15 ─ 34     24 ─ 34     26 ─ 34    
+#> IGRAPH e6af3e3 U--- 1000 16856 -- Stochastic block model
+#> + attr: name (g/c), loops (g/l)
+#> + edges from e6af3e3:
+#>  [1]  2-- 7  2-- 8  7-- 8  6--10  8--10  8--12  9--12  7--13  4--14  8--14
+#> [11]  9--15  4--20  5--20  7--20 19--21 20--21 21--22  2--23  6--23 18--24
+#> [21] 18--25 17--26 24--26  3--27 23--27 18--28 19--28 23--29 13--30 21--30
+#> [31]  8--31 12--31 14--31  2--32  5--32 10--32 13--32 21--32 24--32 29--32
+#> [41]  5--33 10--33 18--33 21--33 29--33  4--34 12--34 27--34 17--35 22--35
+#> [51]  5--36 10--36 12--36 26--36  6--37  7--37 15--37 16--37 19--37  2--38
+#> [61]  4--38  7--38 11--38  2--39  5--39  1--40  4--40 25--40 19--41 22--41
+#> [71] 36--41 40--41 18--42 22--42 35--42 36--42 41--42 24--43 30--43 33--43
 #> + ... omitted several edges
 ```

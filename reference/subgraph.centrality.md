@@ -20,9 +20,9 @@ subgraph.centrality(graph, diag = FALSE)
 
 - diag:
 
-  Logical, whether to include the diagonal of the adjacency matrix in
-  the analysis. Giving `FALSE` here effectively eliminates the loops
-  edges from the graph before the calculation.
+  Boolean scalar, whether to include the diagonal of the adjacency
+  matrix in the analysis. Giving `FALSE` here effectively eliminates the
+  loops edges from the graph before the calculation.
 
 ## Related documentation in the C library
 

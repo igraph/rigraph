@@ -5,7 +5,7 @@ Calculates cohesive blocks for objects of class `igraph`.
 ## Usage
 
 ``` r
-cohesive_blocks(graph, ..., labels = TRUE)
+cohesive_blocks(graph, labels = TRUE)
 
 # S3 method for class 'cohesiveBlocks'
 length(x)
@@ -37,9 +37,13 @@ plot(
   ...
 )
 
-plot_hierarchy(blocks, layout = NULL, ...)
+plot_hierarchy(
+  blocks,
+  layout = layout_as_tree(hierarchy(blocks), root = 1),
+  ...
+)
 
-export_pajek(blocks, graph, file, ..., project.file = TRUE)
+export_pajek(blocks, graph, file, project.file = TRUE)
 
 max_cohesion(blocks)
 ```
@@ -56,6 +60,17 @@ max_cohesion(blocks)
   graph must be supplied whose cohesive block structure is given in the
   `blocks()` argument.
 
+- labels:
+
+  Logical scalar, whether to add the vertex labels to the result object.
+  These labels can be then used when reporting and plotting the cohesive
+  blocks.
+
+- blocks, x, object:
+
+  A `cohesiveBlocks` object, created with the `cohesive_blocks()`
+  function.
+
 - ...:
 
   Additional arguments. `plot_hierarchy()` and
@@ -63,19 +78,6 @@ max_cohesion(blocks)
   [`plot.igraph()`](https://r.igraph.org/reference/plot.igraph.md).
   [`print()`](https://rdrr.io/r/base/print.html) and
   [`summary()`](https://rdrr.io/r/base/summary.html) ignore them.
-  `cohesive_blocks()` and `export_pajek()` do not accept extra
-  arguments; these dots must be empty for them.
-
-- labels:
-
-  Logical, whether to add the vertex labels to the result object. These
-  labels can be then used when reporting and plotting the cohesive
-  blocks.
-
-- blocks, x, object:
-
-  A `cohesiveBlocks` object, created with the `cohesive_blocks()`
-  function.
 
 - y:
 
@@ -106,8 +108,8 @@ max_cohesion(blocks)
 
   The layout of a plot, it is simply passed on to
   [`plot.igraph()`](https://r.igraph.org/reference/plot.igraph.md), see
-  the possible formats there. The default `NULL` uses the
-  Reingold-Tilford layout generator.
+  the possible formats there. By default the Reingold-Tilford layout
+  generator is used.
 
 - file:
 
@@ -126,15 +128,15 @@ max_cohesion(blocks)
 
 - project.file:
 
-  Logical, whether to create a single Pajek project file containing all
-  the data, or to create separated files for each item. See details
-  below.
+  Logical scalar, whether to create a single Pajek project file
+  containing all the data, or to create separated files for each item.
+  See details below.
 
 ## Value
 
 `cohesive_blocks()` returns a `cohesiveBlocks` object.
 
-`blocks()` returns a list of numeric vectors, containing vertex IDs.
+`blocks()` returns a list of numeric vectors, containing vertex ids.
 
 `graphs_from_cohesive_blocks()` returns a list of igraph graphs,
 corresponding to the cohesive blocks.
@@ -184,7 +186,7 @@ gives the number of blocks.
 
 The function `blocks()` returns the actual blocks stored in the
 `cohesiveBlocks` object. They are returned in a list of numeric vectors,
-each containing vertex IDs.
+each containing vertex ids.
 
 The function `graphs_from_cohesive_blocks()` is similar, but returns the
 blocks as (induced) subgraphs of the input graph. The various (graph,
@@ -197,7 +199,7 @@ order of the blocks is the same as for the `blocks()` and
 `graphs_from_cohesive_blocks()` functions.
 
 The block hierarchy can be queried using the `hierarchy()` function. It
-returns an igraph graph, its vertex IDs are ordered according the order
+returns an igraph graph, its vertex ids are ordered according the order
 of the blocks in the `blocks()` and `graphs_from_cohesive_blocks()`,
 [`cohesion()`](https://r.igraph.org/reference/vertex_connectivity.md),
 etc. functions.
@@ -247,7 +249,7 @@ The left part shows the block structure, in this case for five blocks.
 The first block always corresponds to the whole graph, even if its
 cohesion is zero. Then cohesion of the block and the number of vertices
 in the block are shown. The last part is only printed if the display is
-wide enough and shows the vertices in the blocks, ordered by vertex IDs.
+wide enough and shows the vertices in the blocks, ordered by vertex ids.
 ‘o’ means that the vertex is included, a dot means that it is not, and
 the vertices are shown in groups of ten.
 
@@ -313,23 +315,23 @@ mwBlocks
 #>    '- B-5   c 3, n  4   ......o.oo o......... ... 
 blocks(mwBlocks)
 #> [[1]]
-#> ── <vertex sequence> 23/23 · named · from 8bbdfea ──────────────────────────────
+#> + 23/23 vertices, named, from 06f0af2:
 #>  [1] 1  2  3  4  5  6  7  21 8  11 14 19 9  10 12 13 16 15 17 18 20 22 23
 #> 
 #> [[2]]
-#> ── <vertex sequence> 14/23 · named · from 8bbdfea ──────────────────────────────
+#> + 14/23 vertices, named, from 06f0af2:
 #>  [1] 1  2  3  4  5  6  7  21 19 17 18 20 22 23
 #> 
 #> [[3]]
-#> ── <vertex sequence> 10/23 · named · from 8bbdfea ──────────────────────────────
+#> + 10/23 vertices, named, from 06f0af2:
 #>  [1] 7  8  11 14 9  10 12 13 16 15
 #> 
 #> [[4]]
-#> ── <vertex sequence> 7/23 · named · from 8bbdfea ───────────────────────────────
+#> + 7/23 vertices, named, from 06f0af2:
 #> [1] 1 2 3 4 5 6 7
 #> 
 #> [[5]]
-#> ── <vertex sequence> 4/23 · named · from 8bbdfea ───────────────────────────────
+#> + 4/23 vertices, named, from 06f0af2:
 #> [1] 7  8  11 14
 #> 
 cohesion(mwBlocks)

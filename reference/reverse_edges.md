@@ -8,7 +8,7 @@ all edges, this operation is also known as graph transpose.
 ## Usage
 
 ``` r
-reverse_edges(graph, eids = NULL)
+reverse_edges(graph, eids = E(graph))
 
 # S3 method for class 'igraph'
 t(x)
@@ -22,8 +22,7 @@ t(x)
 
 - eids:
 
-  The edge IDs of the edges to reverse. The default `NULL` reverses all
-  edges.
+  The edge IDs of the edges to reverse.
 
 - x:
 
@@ -76,13 +75,8 @@ Other functions for manipulating graph structure:
 
 g <- make_graph(~ 1 -+ 2, 2 -+ 3, 3 -+ 4)
 reverse_edges(g, 2)
-#> ── <igraph> ───────────────────────────────────────────────────────── 7e1934a ──
-#> ℹ directed · named
-#> ℹ 4 vertices · 3 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → vertex: name <chr>
-#> 
-#> ── Edges (vertex names) ────────────────────────────────────────────────────────
-#> [1] 1 → 2  3 → 2  3 → 4 
+#> IGRAPH 8234a32 DN-- 4 3 -- 
+#> + attr: name (v/c)
+#> + edges from 8234a32 (vertex names):
+#> [1] 1->2 3->2 3->4
 ```

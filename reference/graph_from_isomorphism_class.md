@@ -9,7 +9,7 @@ undirected graphd with 3 to 6 vertices.
 ## Usage
 
 ``` r
-graph_from_isomorphism_class(size, number, ..., directed = TRUE)
+graph_from_isomorphism_class(size, number, directed = TRUE)
 ```
 
 ## Arguments
@@ -21,10 +21,6 @@ graph_from_isomorphism_class(size, number, ..., directed = TRUE)
 - number:
 
   The isomorphism class.
-
-- ...:
-
-  These dots are for future extensions and must be empty.
 
 - directed:
 

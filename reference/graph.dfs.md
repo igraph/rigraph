@@ -45,37 +45,38 @@ graph.dfs(
 
 - unreachable:
 
-  Logical, whether the search should visit the vertices that are
+  Logical scalar, whether the search should visit the vertices that are
   unreachable from the given root vertex (or vertices). If `TRUE`, then
   additional searches are performed until all vertices are visited.
 
 - order:
 
-  Logical, whether to return the DFS ordering of the vertices.
+  Logical scalar, whether to return the DFS ordering of the vertices.
 
 - order.out:
 
-  Logical, whether to return the ordering based on leaving the subtree
-  of the vertex.
+  Logical scalar, whether to return the ordering based on leaving the
+  subtree of the vertex.
 
 - father:
 
-  Logical, whether to return the father of the vertices.
+  Logical scalar, whether to return the father of the vertices.
 
 - dist:
 
-  Logical, whether to return the distance from the root of the search
-  tree.
+  Logical scalar, whether to return the distance from the root of the
+  search tree.
 
 - in.callback:
 
-  Callback function. This is called whenever a vertex is visited. See
-  details below. Default: `NULL`.
+  If not `NULL`, then it must be callback function. This is called
+  whenever a vertex is visited. See details below.
 
 - out.callback:
 
-  Callback function. This is called whenever the subtree of a vertex is
-  completed by the algorithm. See details below. Default: `NULL`.
+  If not `NULL`, then it must be callback function. This is called
+  whenever the subtree of a vertex is completed by the algorithm. See
+  details below.
 
 - extra:
 
@@ -83,8 +84,7 @@ graph.dfs(
 
 - rho:
 
-  The environment in which the callback function is evaluated. The
-  default `NULL` uses the caller's environment.
+  The environment in which the callback function is evaluated.
 
 - neimode:
 

@@ -1,4 +1,4 @@
-# Find the edge IDs based on the incident vertices of the edges
+# Find the edge ids based on the incident vertices of the edges
 
 Find the edges in an igraph graph that have the specified end points.
 This function handles multi-graph (graphs with multiple edges) and can
@@ -7,7 +7,7 @@ consider or ignore the edge directions in directed graphs.
 ## Usage
 
 ``` r
-get_edge_ids(graph, vp, ..., directed = TRUE, error = FALSE)
+get_edge_ids(graph, vp, directed = TRUE, error = FALSE)
 ```
 
 ## Arguments
@@ -19,34 +19,30 @@ get_edge_ids(graph, vp, ..., directed = TRUE, error = FALSE)
 - vp:
 
   The incident vertices, given as a two-column data frame, two-column
-  matrix, or vector of vertex IDs or symbolic vertex names. For a
+  matrix, or vector of vertex ids or symbolic vertex names. For a
   vector, the values are interpreted pairwise, i.e. the first and second
   are used for the first edge, the third and fourth for the second, etc.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - directed:
 
-  Logical, whether to consider edge directions in directed graphs. This
-  argument is ignored for undirected graphs.
+  Logical scalar, whether to consider edge directions in directed
+  graphs. This argument is ignored for undirected graphs.
 
 - error:
 
-  Logical, whether to report an error if an edge is not found in the
-  graph. If `FALSE`, then no error is reported, and zero is returned for
-  the non-existant edge(s).
+  Logical scalar, whether to report an error if an edge is not found in
+  the graph. If `FALSE`, then no error is reported, and zero is returned
+  for the non-existant edge(s).
 
 ## Value
 
-A numeric vector of edge IDs, one for each pair of input vertices. If
+A numeric vector of edge ids, one for each pair of input vertices. If
 there is no edge in the input graph for a given pair of vertices, then
 zero is reported. (If the `error` argument is `FALSE`.)
 
 ## Details
 
-igraph vertex IDs are natural numbers, starting from one, up to the
+igraph vertex ids are natural numbers, starting from one, up to the
 number of vertices in the graph. Similarly, edges are also numbered from
 one, up to the number of edges.
 
@@ -88,8 +84,8 @@ Gabor Csardi <csardi.gabor@gmail.com>
 g <- make_ring(10)
 ei <- get_edge_ids(g, c(1, 2, 4, 5))
 E(g)[ei]
-#> ── <edge sequence> 2/10 · from 3e9961e ─────────────────────────────────────────
-#> [1] 1 ─ 2  4 ─ 5 
+#> + 2/10 edges from b44cbbb:
+#> [1] 1--2 4--5
 
 ## non-existant edge
 get_edge_ids(g, c(2, 1, 1, 4, 5, 4))
@@ -102,6 +98,6 @@ eis <- get_edge_ids(g, c(1, 2, 1, 2))
 eis
 #> [1] 5 5
 E(g)[eis]
-#> ── <edge sequence> 2/5 · from 3de802f ──────────────────────────────────────────
-#> [1] 1 → 2  1 → 2 
+#> + 2/5 edges from b042ba4:
+#> [1] 1->2 1->2
 ```

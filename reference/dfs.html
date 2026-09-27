@@ -15,7 +15,7 @@ root vertex and tries to go quickly as far from as possible."><meta property="og
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9037</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ root vertex and tries to go quickly as far from as possible."><meta property="og
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Depth-first search</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/structural-properties.R" class="external-link"><code>R/structural-properties.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/structural-properties.R" class="external-link"><code>R/structural-properties.R</code></a></small>
       <div class="d-none name"><code>dfs.Rd</code></div>
     </div>
 
@@ -71,7 +71,7 @@ root vertex and tries to go quickly as far from as possible.</p>
 <span>  in.callback <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  out.callback <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  extra <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  rho <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  rho <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  neimode <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  father <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -101,42 +101,40 @@ ignores edge directions completely. ‘total’ is a synonym for
 
 
 <dt id="arg-unreachable">unreachable<a class="anchor" aria-label="anchor" href="#arg-unreachable"></a></dt>
-<dd><p>Logical, whether the search should visit the
+<dd><p>Logical scalar, whether the search should visit the
 vertices that are unreachable from the given root vertex (or vertices). If
 <code>TRUE</code>, then additional searches are performed until all vertices are
 visited.</p></dd>
 
 
 <dt id="arg-order">order<a class="anchor" aria-label="anchor" href="#arg-order"></a></dt>
-<dd><p>Logical, whether to return the DFS ordering of the
+<dd><p>Logical scalar, whether to return the DFS ordering of the
 vertices.</p></dd>
 
 
 <dt id="arg-order-out">order.out<a class="anchor" aria-label="anchor" href="#arg-order-out"></a></dt>
-<dd><p>Logical, whether to return the ordering based on
+<dd><p>Logical scalar, whether to return the ordering based on
 leaving the subtree of the vertex.</p></dd>
 
 
 <dt id="arg-parent">parent<a class="anchor" aria-label="anchor" href="#arg-parent"></a></dt>
-<dd><p>Logical, whether to return the parent of the vertices.</p></dd>
+<dd><p>Logical scalar, whether to return the parent of the vertices.</p></dd>
 
 
 <dt id="arg-dist">dist<a class="anchor" aria-label="anchor" href="#arg-dist"></a></dt>
-<dd><p>Logical, whether to return the distance from the root of
+<dd><p>Logical scalar, whether to return the distance from the root of
 the search tree.</p></dd>
 
 
 <dt id="arg-in-callback">in.callback<a class="anchor" aria-label="anchor" href="#arg-in-callback"></a></dt>
-<dd><p>Callback function.
-This is called whenever a vertex is visited. See details below.
-Default: <code>NULL</code>.</p></dd>
+<dd><p>If not <code>NULL</code>, then it must be callback function.
+This is called whenever a vertex is visited. See details below.</p></dd>
 
 
 <dt id="arg-out-callback">out.callback<a class="anchor" aria-label="anchor" href="#arg-out-callback"></a></dt>
-<dd><p>Callback function.
+<dd><p>If not <code>NULL</code>, then it must be callback function.
 This is called whenever the subtree of a vertex is completed by the
-algorithm. See details below.
-Default: <code>NULL</code>.</p></dd>
+algorithm. See details below.</p></dd>
 
 
 <dt id="arg-extra">extra<a class="anchor" aria-label="anchor" href="#arg-extra"></a></dt>
@@ -144,8 +142,7 @@ Default: <code>NULL</code>.</p></dd>
 
 
 <dt id="arg-rho">rho<a class="anchor" aria-label="anchor" href="#arg-rho"></a></dt>
-<dd><p>The environment in which the callback function is evaluated.
-The default <code>NULL</code> uses the caller's environment.</p></dd>
+<dd><p>The environment in which the callback function is evaluated.</p></dd>
 
 
 <dt id="arg-neimode">neimode<a class="anchor" aria-label="anchor" href="#arg-neimode"></a></dt>
@@ -167,10 +164,10 @@ The default <code>NULL</code> uses the caller's environment.</p></dd>
 Note that for undirected graphs this is always ‘all’, irrespectively of the supplied value.</p></dd>
 
 <dt>order</dt>
-<dd><p>Numeric vector. The vertex IDs, in the order in which they were visited by the search.</p></dd>
+<dd><p>Numeric vector. The vertex ids, in the order in which they were visited by the search.</p></dd>
 
 <dt>order.out</dt>
-<dd><p>Numeric vector, the vertex IDs, in the order of the completion of their subtree.</p></dd>
+<dd><p>Numeric vector, the vertex ids, in the order of the completion of their subtree.</p></dd>
 
 <dt>parent</dt>
 <dd><p>Numeric vector. The parent of each vertex, i.e. the vertex it was discovered from.</p></dd>
@@ -260,15 +257,15 @@ to terminate it. See examples below on how to use the callback functions.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "out"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $order</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 20/20 · from 419cf45 ──────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from c4d4db4:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1  2  4  8  9  5 10  3  6  7 11 12 14 18 19 15 20 13 16 17</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $order.out</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 20/20 · from 419cf45 ──────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from c4d4db4:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  8  9  4 10  5  2  6  7  3  1 18 19 14 20 15 12 16 17 13 11</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parent</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 20/20 · from 419cf45 ──────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from c4d4db4:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA  1  1  2  2  3  3  4  4  5 NA 11 11 12 12 13 13 14 14 15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $dist</span>
@@ -278,7 +275,7 @@ to terminate it. See examples below on how to use the callback functions.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "out"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $father</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 20/20 · from 419cf45 ──────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from c4d4db4:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA  1  1  2  2  3  3  4  4  5 NA 11 11 12 12 13 13 14 14 15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>

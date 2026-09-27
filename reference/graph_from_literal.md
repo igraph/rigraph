@@ -21,17 +21,10 @@ from_literal(...)
 
 - simplify:
 
-  Logical, whether to call
+  Logical scalar, whether to call
   [`simplify()`](https://r.igraph.org/reference/simplify.md) on the
   created graph. By default the graph is simplified, loop and multiple
   edges are removed.
-  [`simplify()`](https://r.igraph.org/reference/simplify.md) is only
-  called when the created graph is not already simple, so the edge order
-  from the formula is preserved whenever no loops or multi-edges are
-  present. When the graph does contain loops or multi-edges (and
-  `simplify = TRUE`),
-  [`simplify()`](https://r.igraph.org/reference/simplify.md) reorders
-  the edges into its canonical order.
 
 ## Value
 
@@ -109,7 +102,6 @@ See more examples below.
 
 [`create()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create),
 [`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
-[`is_simple()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple),
 [`famous()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
 [`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
 [`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty)
@@ -144,30 +136,20 @@ g <- graph_from_literal(
   Cecil - Gordon
 )
 g
-#> ── <igraph> ───────────────────────────────────────────────────────── 200273a ──
-#> ℹ undirected · named
-#> ℹ 6 vertices · 6 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → vertex: name <chr>
-#> 
-#> ── Edges (vertex names) ────────────────────────────────────────────────────────
-#> [1] Alice ─ Bob     Bob ─ Cecil     Alice ─ Cecil   Cecil ─ Daniel 
-#> [5] Cecil ─ Eugene  Cecil ─ Gordon 
+#> IGRAPH f311732 UN-- 6 6 -- 
+#> + attr: name (v/c)
+#> + edges from f311732 (vertex names):
+#> [1] Alice--Bob    Alice--Cecil  Bob  --Cecil  Cecil--Daniel Cecil--Eugene
+#> [6] Cecil--Gordon
 
 # Another undirected graph, ":" notation
 g2 <- graph_from_literal(Alice - Bob:Cecil:Daniel, Cecil:Daniel - Eugene:Gordon)
 g2
-#> ── <igraph> ───────────────────────────────────────────────────────── 084afe3 ──
-#> ℹ undirected · named
-#> ℹ 6 vertices · 7 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → vertex: name <chr>
-#> 
-#> ── Edges (vertex names) ────────────────────────────────────────────────────────
-#> [1] Alice ─ Bob      Alice ─ Cecil    Alice ─ Daniel   Cecil ─ Eugene  
-#> [5] Cecil ─ Gordon   Daniel ─ Eugene  Daniel ─ Gordon 
+#> IGRAPH 02b2f72 UN-- 6 7 -- 
+#> + attr: name (v/c)
+#> + edges from 02b2f72 (vertex names):
+#> [1] Alice --Bob    Alice --Cecil  Alice --Daniel Cecil --Eugene Cecil --Gordon
+#> [6] Daniel--Eugene Daniel--Gordon
 
 # A directed graph
 g3 <- graph_from_literal(
@@ -175,55 +157,35 @@ g3 <- graph_from_literal(
   Eugene --+ Gordon:Helen
 )
 g3
-#> ── <igraph> ───────────────────────────────────────────────────────── 32e2be9 ──
-#> ℹ directed · named
-#> ℹ 7 vertices · 6 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → vertex: name <chr>
-#> 
-#> ── Edges (vertex names) ────────────────────────────────────────────────────────
-#> [1] Bob → Alice      Alice → Bob      Bob → Cecil      Daniel → Cecil  
-#> [5] Eugene → Gordon  Eugene → Helen  
+#> IGRAPH 05e7db6 DN-- 7 6 -- 
+#> + attr: name (v/c)
+#> + edges from 05e7db6 (vertex names):
+#> [1] Alice ->Bob    Bob   ->Alice  Bob   ->Cecil  Daniel->Cecil  Eugene->Gordon
+#> [6] Eugene->Helen 
 
 # A graph with isolate vertices
 g4 <- graph_from_literal(Alice -- Bob -- Daniel, Cecil:Gordon, Helen)
 g4
-#> ── <igraph> ───────────────────────────────────────────────────────── cc2a769 ──
-#> ℹ undirected · named
-#> ℹ 6 vertices · 2 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → vertex: name <chr>
-#> 
-#> ── Edges (vertex names) ────────────────────────────────────────────────────────
-#> [1] Alice ─ Bob   Bob ─ Daniel 
+#> IGRAPH 1c325f3 UN-- 6 2 -- 
+#> + attr: name (v/c)
+#> + edges from 1c325f3 (vertex names):
+#> [1] Alice--Bob    Bob  --Daniel
 V(g4)$name
 #> [1] "Alice"  "Bob"    "Daniel" "Cecil"  "Gordon" "Helen" 
 
 # "Arrows" can be arbitrarily long
 g5 <- graph_from_literal(Alice +---------+ Bob)
 g5
-#> ── <igraph> ───────────────────────────────────────────────────────── aab9dce ──
-#> ℹ directed · named
-#> ℹ 2 vertices · 2 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → vertex: name <chr>
-#> 
-#> ── Edges (vertex names) ────────────────────────────────────────────────────────
-#> [1] Bob → Alice  Alice → Bob 
+#> IGRAPH 75006c8 DN-- 2 2 -- 
+#> + attr: name (v/c)
+#> + edges from 75006c8 (vertex names):
+#> [1] Alice->Bob   Bob  ->Alice
 
 # Special vertex names
 g6 <- graph_from_literal("+" -- "-", "*" -- "/", "%%" -- "%/%")
 g6
-#> ── <igraph> ───────────────────────────────────────────────────────── 4e06172 ──
-#> ℹ undirected · named
-#> ℹ 6 vertices · 3 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → vertex: name <chr>
-#> 
-#> ── Edges (vertex names) ────────────────────────────────────────────────────────
-#> [1] + ─ -     * ─ /     %% ─ %/% 
+#> IGRAPH dbc5846 UN-- 6 3 -- 
+#> + attr: name (v/c)
+#> + edges from dbc5846 (vertex names):
+#> [1] + ---   * --/   %%--%/%
 ```

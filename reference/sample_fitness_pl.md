@@ -11,7 +11,6 @@ sample_fitness_pl(
   no.of.edges,
   exponent.out,
   exponent.in = -1,
-  ...,
   loops = FALSE,
   multiple = FALSE,
   finite.size.correction = TRUE
@@ -42,22 +41,18 @@ sample_fitness_pl(
   the in-degree distribution. If non-negative but less than 2, an error
   will be generated.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - loops:
 
-  Logical, whether to allow loop edges in the graph.
+  Logical scalar, whether to allow loop edges in the graph.
 
 - multiple:
 
-  Logical, whether to allow multiple edges in the graph.
+  Logical scalar, whether to allow multiple edges in the graph.
 
 - finite.size.correction:
 
-  Logical, whether to use the proposed finite size correction of Cho et
-  al., see references below.
+  Logical scalar, whether to use the proposed finite size correction of
+  Cho et al., see references below.
 
 ## Value
 

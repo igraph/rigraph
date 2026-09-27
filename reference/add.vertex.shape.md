@@ -27,13 +27,11 @@ add.vertex.shape(
 
 - clip:
 
-  An R function object, the clipping function. The default `NULL` uses
-  `shape_noclip`.
+  An R function object, the clipping function.
 
 - plot:
 
-  An R function object, the plotting function. The default `NULL` uses
-  `shape_noplot`.
+  An R function object, the plotting function.
 
 - parameters:
 

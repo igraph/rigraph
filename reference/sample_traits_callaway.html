@@ -15,7 +15,7 @@ types."><meta property="og:image" content="https://r.igraph.org/logo.png"></head
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9037</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ types."><meta property="og:image" content="https://r.igraph.org/logo.png"></head
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Graph generation based on different vertex types</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/games.R" class="external-link"><code>R/games.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/games.R" class="external-link"><code>R/games.R</code></a></small>
       <div class="d-none name"><code>sample_traits_callaway.Rd</code></div>
     </div>
 
@@ -61,20 +61,18 @@ types.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sample_traits_callaway</span><span class="op">(</span></span>
 <span>  <span class="va">nodes</span>,</span>
 <span>  <span class="va">types</span>,</span>
-<span>  <span class="va">...</span>,</span>
 <span>  edge.per.step <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  type.dist <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  pref.matrix <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  type.dist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span><span class="op">)</span>,</span>
+<span>  pref.matrix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span>, <span class="va">types</span><span class="op">)</span>,</span>
 <span>  directed <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">traits_callaway</span><span class="op">(</span></span>
 <span>  <span class="va">nodes</span>,</span>
 <span>  <span class="va">types</span>,</span>
-<span>  <span class="va">...</span>,</span>
 <span>  edge.per.step <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  type.dist <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  pref.matrix <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  type.dist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span><span class="op">)</span>,</span>
+<span>  pref.matrix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span>, <span class="va">types</span><span class="op">)</span>,</span>
 <span>  directed <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -82,9 +80,8 @@ types.</p>
 <span>  <span class="va">nodes</span>,</span>
 <span>  <span class="va">types</span>,</span>
 <span>  k <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  <span class="va">...</span>,</span>
-<span>  type.dist <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  pref.matrix <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  type.dist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span><span class="op">)</span>,</span>
+<span>  pref.matrix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span>, <span class="va">types</span><span class="op">)</span>,</span>
 <span>  directed <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -92,9 +89,8 @@ types.</p>
 <span>  <span class="va">nodes</span>,</span>
 <span>  <span class="va">types</span>,</span>
 <span>  k <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  <span class="va">...</span>,</span>
-<span>  type.dist <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  pref.matrix <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  type.dist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span><span class="op">)</span>,</span>
+<span>  pref.matrix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span>, <span class="va">types</span><span class="op">)</span>,</span>
 <span>  directed <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -111,27 +107,22 @@ types.</p>
 <dd><p>The number of different vertex types.</p></dd>
 
 
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>These dots are for future extensions and must be empty.</p></dd>
-
-
 <dt id="arg-edge-per-step">edge.per.step<a class="anchor" aria-label="anchor" href="#arg-edge-per-step"></a></dt>
 <dd><p>The number of edges to add to the graph per time step.</p></dd>
 
 
 <dt id="arg-type-dist">type.dist<a class="anchor" aria-label="anchor" href="#arg-type-dist"></a></dt>
 <dd><p>The distribution of the vertex types. This is assumed to be
-stationary in time. The default <code>NULL</code> gives a uniform distribution.</p></dd>
+stationary in time.</p></dd>
 
 
 <dt id="arg-pref-matrix">pref.matrix<a class="anchor" aria-label="anchor" href="#arg-pref-matrix"></a></dt>
 <dd><p>A matrix giving the preferences of the given vertex
-types. These should be probabilities, i.e. numbers between zero and one.
-The default <code>NULL</code> sets all preferences to one.</p></dd>
+types. These should be probabilities, i.e. numbers between zero and one.</p></dd>
 
 
 <dt id="arg-directed">directed<a class="anchor" aria-label="anchor" href="#arg-directed"></a></dt>
-<dd><p>Logical, whether to generate directed graphs.</p></dd>
+<dd><p>Logical constant, whether to generate directed graphs.</p></dd>
 
 
 <dt id="arg-k">k<a class="anchor" aria-label="anchor" href="#arg-k"></a></dt>

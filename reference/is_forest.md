@@ -6,7 +6,7 @@ returns a set of possible root vertices for its components.
 ## Usage
 
 ``` r
-is_forest(graph, ..., mode = c("out", "in", "all", "total"), details = FALSE)
+is_forest(graph, mode = c("out", "in", "all", "total"), details = FALSE)
 ```
 
 ## Arguments
@@ -14,10 +14,6 @@ is_forest(graph, ..., mode = c("out", "in", "all", "total"), details = FALSE)
 - graph:
 
   An igraph graph object
-
-- ...:
-
-  These dots are for future extensions and must be empty.
 
 - mode:
 
@@ -79,7 +75,7 @@ is_forest(g, details = TRUE)
 #> [1] TRUE
 #> 
 #> $roots
-#> ── <vertex sequence> 2/8 · from a2d7007 ────────────────────────────────────────
+#> + 2/8 vertices, from 54ad03f:
 #> [1] 1 4
 #> 
 ```

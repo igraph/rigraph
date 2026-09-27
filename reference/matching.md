@@ -11,7 +11,12 @@ is_matching(graph, matching, types = NULL)
 
 is_max_matching(graph, matching, types = NULL)
 
-max_bipartite_match(graph, types = NULL, ..., weights = NULL, eps = NULL)
+max_bipartite_match(
+  graph,
+  types = NULL,
+  weights = NULL,
+  eps = .Machine$double.eps
+)
 ```
 
 ## Arguments
@@ -32,10 +37,6 @@ max_bipartite_match(graph, types = NULL, ..., weights = NULL, eps = NULL)
   Vertex types, if the graph is bipartite. By default they are taken
   from the ‘`type`’ vertex attribute, if present.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - weights:
 
   Potential edge weights. If the graph has an edge attribute called
@@ -48,10 +49,9 @@ max_bipartite_match(graph, types = NULL, ..., weights = NULL, eps = NULL)
   A small real number used in equality tests in the weighted bipartite
   matching algorithm. Two real numbers are considered equal in the
   algorithm if their difference is smaller than `eps`. This is required
-  to avoid the accumulation of numerical errors. The default `NULL`
-  stands for the smallest \\x\\, such that \\1+x \ne 1\\ holds
-  (`.Machine$double.eps`). If you are running the algorithm with no
-  weights, this argument is ignored.
+  to avoid the accumulation of numerical errors. By default it is set to
+  the smallest \\x\\, such that \\1+x \ne 1\\ holds. If you are running
+  the algorithm with no weights, this argument is ignored.
 
 ## Value
 
@@ -71,7 +71,7 @@ max_bipartite_match(graph, types = NULL, ..., weights = NULL, eps = NULL)
 
 - matching:
 
-  The matching itself. Numeric vertex ID, or vertex names if the graph
+  The matching itself. Numeric vertex id, or vertex names if the graph
   was named. Non-matched vertices are denoted by `NA`.
 
 ## Details
@@ -166,24 +166,18 @@ is_max_matching(g, m3)
 
 V(g)$type <- rep(c(FALSE, TRUE), 3)
 print_all(g, v = TRUE)
-#> ── <igraph> ───────────────────────────────────────────────────────── d75d568 ──
-#> ℹ undirected · named · bipartite
-#> ℹ 6 vertices · 5 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → vertex: name <chr>, type <lgl>
-#> 
-#> ── Vertex attributes ───────────────────────────────────────────────────────────
-#>     name  type
-#> [1]    a FALSE
-#> [2]    b  TRUE
-#> [3]    c FALSE
-#> [4]    d  TRUE
-#> [5]    e FALSE
-#> [6]    f  TRUE
-#> 
-#> ── Edges (vertex names) ────────────────────────────────────────────────────────
-#> [1] a ─ b  b ─ c  c ─ d  d ─ e  e ─ f 
+#> IGRAPH b3a5c69 UN-B 6 5 -- 
+#> + attr: name (v/c), type (v/l)
+#> + vertex attributes:
+#> |     name  type
+#> | [1]    a FALSE
+#> | [2]    b  TRUE
+#> | [3]    c FALSE
+#> | [4]    d  TRUE
+#> | [5]    e FALSE
+#> | [6]    f  TRUE
+#> + edges from b3a5c69 (vertex names):
+#> [1] a--b b--c c--d d--e e--f
 max_bipartite_match(g)
 #> $matching_size
 #> [1] 3
@@ -199,25 +193,19 @@ max_bipartite_match(g)
 g2 <- graph_from_literal(a - b - c - d - e - f - g)
 V(g2)$type <- rep(c(FALSE, TRUE), length.out = vcount(g2))
 print_all(g2, v = TRUE)
-#> ── <igraph> ───────────────────────────────────────────────────────── 277f623 ──
-#> ℹ undirected · named · bipartite
-#> ℹ 7 vertices · 6 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → vertex: name <chr>, type <lgl>
-#> 
-#> ── Vertex attributes ───────────────────────────────────────────────────────────
-#>     name  type
-#> [1]    a FALSE
-#> [2]    b  TRUE
-#> [3]    c FALSE
-#> [4]    d  TRUE
-#> [5]    e FALSE
-#> [6]    f  TRUE
-#> [7]    g FALSE
-#> 
-#> ── Edges (vertex names) ────────────────────────────────────────────────────────
-#> [1] a ─ b  b ─ c  c ─ d  d ─ e  e ─ f  f ─ g 
+#> IGRAPH 0064440 UN-B 7 6 -- 
+#> + attr: name (v/c), type (v/l)
+#> + vertex attributes:
+#> |     name  type
+#> | [1]    a FALSE
+#> | [2]    b  TRUE
+#> | [3]    c FALSE
+#> | [4]    d  TRUE
+#> | [5]    e FALSE
+#> | [6]    f  TRUE
+#> | [7]    g FALSE
+#> + edges from 0064440 (vertex names):
+#> [1] a--b b--c c--d d--e e--f f--g
 max_bipartite_match(g2)
 #> $matching_size
 #> [1] 3

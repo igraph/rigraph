@@ -6,9 +6,9 @@ to the center vertex and nobody else.
 ## Usage
 
 ``` r
-make_star(n, ..., mode = c("in", "out", "mutual", "undirected"), center = 1)
+make_star(n, mode = c("in", "out", "mutual", "undirected"), center = 1)
 
-star(n, ..., mode = c("in", "out", "mutual", "undirected"), center = 1)
+star(n, mode = c("in", "out", "mutual", "undirected"), center = 1)
 ```
 
 ## Arguments
@@ -16,10 +16,6 @@ star(n, ..., mode = c("in", "out", "mutual", "undirected"), center = 1)
 - n:
 
   Number of vertices.
-
-- ...:
-
-  These dots are for future extensions and must be empty.
 
 - mode:
 
@@ -64,23 +60,13 @@ Other deterministic constructors:
 
 ``` r
 make_star(10, mode = "out")
-#> ── <igraph> Out-star ──────────────────────────────────────────────── d93a354 ──
-#> ℹ directed
-#> ℹ 10 vertices · 9 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, mode <chr>, center <dbl>
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#> [1] 1 → 2   1 → 3   1 → 4   1 → 5   1 → 6   1 → 7   1 → 8   1 → 9   1 → 10 
+#> IGRAPH 1272c09 D--- 10 9 -- Out-star
+#> + attr: name (g/c), mode (g/c), center (g/n)
+#> + edges from 1272c09:
+#> [1] 1-> 2 1-> 3 1-> 4 1-> 5 1-> 6 1-> 7 1-> 8 1-> 9 1->10
 make_star(5, mode = "undirected")
-#> ── <igraph> Star ──────────────────────────────────────────────────── f84342f ──
-#> ℹ undirected
-#> ℹ 5 vertices · 4 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, mode <chr>, center <dbl>
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#> [1] 1 ─ 2  1 ─ 3  1 ─ 4  1 ─ 5 
+#> IGRAPH 41d3457 U--- 5 4 -- Star
+#> + attr: name (g/c), mode (g/c), center (g/n)
+#> + edges from 41d3457:
+#> [1] 1--2 1--3 1--4 1--5
 ```

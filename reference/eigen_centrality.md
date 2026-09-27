@@ -23,7 +23,7 @@ eigen_centrality(
 
 - directed:
 
-  Logical, whether to consider direction of the edges in directed
+  Logical scalar, whether to consider direction of the edges in directed
   graphs. It is ignored for undirected graphs.
 
 - scale:
@@ -223,7 +223,7 @@ eigen_centrality(g)
 #> [1] 0
 #> 
 #> $options$numreo
-#> [1] 5
+#> [1] 6
 #> 
 #> 
 ```

@@ -67,13 +67,13 @@ Other paths:
 ``` r
 tree <- make_tree(100, 7)
 graph_center(tree)
-#> ── <vertex sequence> 2/100 · from df47151 ──────────────────────────────────────
+#> + 2/100 vertices, from 93ecc1f:
 #> [1] 1 2
 graph_center(tree, mode = "in")
-#> ── <vertex sequence> 1/100 · from df47151 ──────────────────────────────────────
+#> + 1/100 vertex, from 93ecc1f:
 #> [1] 1
 graph_center(tree, mode = "out")
-#> ── <vertex sequence> 85/100 · from df47151 ─────────────────────────────────────
+#> + 85/100 vertices, from 93ecc1f:
 #>  [1]  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34
 #> [20]  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51  52  53
 #> [39]  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68  69  70  71  72
@@ -83,11 +83,11 @@ graph_center(tree, mode = "out")
 # Without and with weights
 ring <- make_ring(10)
 graph_center(ring)
-#> ── <vertex sequence> 10/10 · from fd99da3 ──────────────────────────────────────
+#> + 10/10 vertices, from a25da2e:
 #>  [1]  1  2  3  4  5  6  7  8  9 10
 # Add weights
 E(ring)$weight <- seq_len(ecount(ring))
 graph_center(ring)
-#> ── <vertex sequence> 1/10 · from fd99da3 ───────────────────────────────────────
+#> + 1/10 vertex, from a25da2e:
 #> [1] 7
 ```

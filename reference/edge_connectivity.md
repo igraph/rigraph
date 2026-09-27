@@ -6,11 +6,11 @@ called group adhesion.
 ## Usage
 
 ``` r
-edge_connectivity(graph, source = NULL, target = NULL, ..., checks = TRUE)
+edge_connectivity(graph, source = NULL, target = NULL, checks = TRUE)
 
 edge_disjoint_paths(graph, source = NULL, target = NULL)
 
-adhesion(graph, ..., checks = TRUE)
+adhesion(graph, checks = TRUE)
 ```
 
 ## Arguments
@@ -21,27 +21,23 @@ adhesion(graph, ..., checks = TRUE)
 
 - source:
 
-  The ID of the source vertex, for `edge_connectivity()` it can be
+  The id of the source vertex, for `edge_connectivity()` it can be
   `NULL`, see details below.
 
 - target:
 
-  The ID of the target vertex, for `edge_connectivity()` it can be
+  The id of the target vertex, for `edge_connectivity()` it can be
   `NULL`, see details below.
-
-- ...:
-
-  These dots are for future extensions and must be empty.
 
 - checks:
 
-  Logical. Whether to check that the graph is connected and also the
-  degree of the vertices. If the graph is not (strongly) connected then
-  the connectivity is obviously zero. Otherwise if the minimum degree is
-  one then the edge connectivity is also one. It is a good idea to
-  perform these checks, as they can be done quickly compared to the
-  connectivity calculation itself. They were suggested by Peter McMahan,
-  thanks Peter.
+  Logical constant. Whether to check that the graph is connected and
+  also the degree of the vertices. If the graph is not (strongly)
+  connected then the connectivity is obviously zero. Otherwise if the
+  minimum degree is one then the edge connectivity is also one. It is a
+  good idea to perform these checks, as they can be done quickly
+  compared to the connectivity calculation itself. They were suggested
+  by Peter McMahan, thanks Peter.
 
 ## Value
 
@@ -91,8 +87,8 @@ the others are included only for having more descriptive function names.
 
 ## Related documentation in the C library
 
-[`edge_connectivity()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_edge_connectivity),
 [`st_edge_connectivity()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_st_edge_connectivity),
+[`edge_connectivity()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_edge_connectivity),
 [`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
 [`edge_disjoint_paths()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_edge_disjoint_paths),
 [`adhesion()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_adhesion)

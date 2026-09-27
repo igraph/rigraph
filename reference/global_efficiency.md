@@ -7,12 +7,11 @@ below for definitions.
 ## Usage
 
 ``` r
-global_efficiency(graph, ..., weights = NULL, directed = TRUE)
+global_efficiency(graph, weights = NULL, directed = TRUE)
 
 local_efficiency(
   graph,
-  vids = NULL,
-  ...,
+  vids = V(graph),
   weights = NULL,
   directed = TRUE,
   mode = c("all", "out", "in", "total")
@@ -20,7 +19,6 @@ local_efficiency(
 
 average_local_efficiency(
   graph,
-  ...,
   weights = NULL,
   directed = TRUE,
   mode = c("all", "out", "in", "total")
@@ -33,10 +31,6 @@ average_local_efficiency(
 
   The graph to analyze.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - weights:
 
   The edge weights. All edge weights must be non-negative; additionally,
@@ -45,14 +39,13 @@ average_local_efficiency(
 
 - directed:
 
-  Logical, whether to consider directed paths. Ignored for undirected
-  graphs.
+  Logical scalar, whether to consider directed paths. Ignored for
+  undirected graphs.
 
 - vids:
 
-  The vertex IDs of the vertices for which the calculation will be done.
-  Applies to the local efficiency calculation only. The default `NULL`
-  selects all vertices.
+  The vertex ids of the vertices for which the calculation will be done.
+  Applies to the local efficiency calculation only.
 
 - mode:
 

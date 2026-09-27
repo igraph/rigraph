@@ -19,7 +19,7 @@ most three nodes."><meta property="og:image" content="https://r.igraph.org/logo.
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9037</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,7 +51,7 @@ most three nodes."><meta property="og:image" content="https://r.igraph.org/logo.
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Chordality of a graph</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/decomposition.R" class="external-link"><code>R/decomposition.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/decomposition.R" class="external-link"><code>R/decomposition.R</code></a></small>
       <div class="d-none name"><code>is_chordal.Rd</code></div>
     </div>
 
@@ -66,7 +66,6 @@ most three nodes.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">is_chordal</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
-<span>  <span class="va">...</span>,</span>
 <span>  alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  alpham1 <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fillin <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -83,10 +82,6 @@ most three nodes.</p>
 ignored, as the algorithm is defined for undirected graphs.</p></dd>
 
 
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>These dots are for future extensions and must be empty.</p></dd>
-
-
 <dt id="arg-alpha">alpha<a class="anchor" aria-label="anchor" href="#arg-alpha"></a></dt>
 <dd><p>Numeric vector, the maximal chardinality ordering of the
 vertices. If it is <code>NULL</code>, then it is automatically calculated by
@@ -101,17 +96,17 @@ that is given..</p></dd>
 
 
 <dt id="arg-fillin">fillin<a class="anchor" aria-label="anchor" href="#arg-fillin"></a></dt>
-<dd><p>Logical, whether to calculate the fill-in edges.</p></dd>
+<dd><p>Logical scalar, whether to calculate the fill-in edges.</p></dd>
 
 
 <dt id="arg-newgraph">newgraph<a class="anchor" aria-label="anchor" href="#arg-newgraph"></a></dt>
-<dd><p>Logical, whether to calculate the triangulated graph.</p></dd>
+<dd><p>Logical scalar, whether to calculate the triangulated graph.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A list with three members:</p><dl><dt>chordal</dt>
-<dd><p>Logical, it is <code>TRUE</code> iff the input graph is chordal.</p></dd>
+<dd><p>Logical scalar, it is <code>TRUE</code> iff the input graph is chordal.</p></dd>
 
 <dt>fillin</dt>
 <dd><p>If requested, then a numeric vector giving the fill-in edges. <code>NULL</code> otherwise.</p></dd>
@@ -161,7 +156,7 @@ of Computation</em> 13, 566–579.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 9 4 6 8 3 5 7 2 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $alpham1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 9/9 · named · from 1627fde ────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 9/9 vertices, named, from d5eb084:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] G F D B E C H I A</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">is_chordal</span><span class="op">(</span><span class="va">g1</span>, fillin <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
@@ -185,7 +180,7 @@ of Computation</em> 13, 566–579.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 10  8  9  6  7  5  4  2  3  1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $alpham1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 10/10 · named · from 82f3b75 ──────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 10/10 vertices, named, from 2ea7d3c:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] J H I G C F D B E A</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">is_chordal</span><span class="op">(</span><span class="va">g2</span>, fillin <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>

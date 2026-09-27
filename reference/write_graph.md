@@ -125,7 +125,7 @@ is specified as an edge line (e).
 
 GML is a quite general textual format.
 
-- ID:
+- id:
 
   Optional numeric vertex IDs to use.
 

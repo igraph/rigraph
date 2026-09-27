@@ -55,16 +55,10 @@ Vertex, edge and graph attributes:
 g <- make_graph(~ A - B:C:D)
 graph_attr(g, "name") <- "4-star"
 g
-#> ── <igraph> 4-star ────────────────────────────────────────────────── 0eae0cf ──
-#> ℹ undirected · named
-#> ℹ 4 vertices · 3 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>
-#> → vertex: name <chr>
-#> 
-#> ── Edges (vertex names) ────────────────────────────────────────────────────────
-#> [1] A ─ B  A ─ C  A ─ D 
+#> IGRAPH 1fc3cf4 UN-- 4 3 -- 4-star
+#> + attr: name (g/c), name (v/c)
+#> + edges from 1fc3cf4 (vertex names):
+#> [1] A--B A--C A--D
 
 graph_attr(g) <- list(
   layout = layout_with_fr(g),

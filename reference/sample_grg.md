@@ -6,9 +6,9 @@ square
 ## Usage
 
 ``` r
-sample_grg(nodes, radius, ..., torus = FALSE, coords = FALSE)
+sample_grg(nodes, radius, torus = FALSE, coords = FALSE)
 
-grg(nodes, radius, ..., torus = FALSE, coords = FALSE)
+grg(nodes, radius, torus = FALSE, coords = FALSE)
 ```
 
 ## Arguments
@@ -21,17 +21,13 @@ grg(nodes, radius, ..., torus = FALSE, coords = FALSE)
 
   The radius within which the vertices will be connected by an edge.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - torus:
 
-  Logical, whether to use a torus instead of a square.
+  Logical constant, whether to use a torus instead of a square.
 
 - coords:
 
-  Logical, whether to add the positions of the vertices as vertex
+  Logical scalar, whether to add the positions of the vertices as vertex
   attributes called ‘`x`’ and ‘`y`’.
 
 ## Value

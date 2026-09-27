@@ -8,7 +8,6 @@ the network. This method is also known as the Girvan-Newman algorithm.
 ``` r
 cluster_edge_betweenness(
   graph,
-  ...,
   weights = NULL,
   directed = TRUE,
   edge.betweenness = TRUE,
@@ -25,10 +24,6 @@ cluster_edge_betweenness(
 
   The graph to analyze.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - weights:
 
   The weights of the edges. It must be a positive numeric vector, `NULL`
@@ -42,23 +37,23 @@ cluster_edge_betweenness(
 
 - directed:
 
-  Logical, whether to calculate directed edge betweenness for directed
-  graphs. It is ignored for undirected graphs.
+  Logical constant, whether to calculate directed edge betweenness for
+  directed graphs. It is ignored for undirected graphs.
 
 - edge.betweenness:
 
-  Logical, whether to return the edge betweenness of the edges at the
-  time of their removal.
+  Logical constant, whether to return the edge betweenness of the edges
+  at the time of their removal.
 
 - merges:
 
-  Logical, whether to return the merge matrix representing the
+  Logical constant, whether to return the merge matrix representing the
   hierarchical community structure of the network. This argument is
   called `merges`, even if the community structure algorithm itself is
   divisive and not agglomerative: it builds the tree from top to bottom.
   There is one line for each merge (i.e. split) in matrix, the first
   line is the first merge (last split). The communities are identified
-  by integer number starting from one. Community IDs smaller than or
+  by integer number starting from one. Community ids smaller than or
   equal to \\N\\, the number of vertices in the graph, belong to
   singleton communities, i.e. individual vertices. Before the first
   merge we have \\N\\ communities numbered from one to \\N\\. The first
@@ -67,19 +62,19 @@ cluster_edge_betweenness(
 
 - bridges:
 
-  Logical, whether to return a list the edge removals which actually
-  splitted a component of the graph.
+  Logical constant, whether to return a list the edge removals which
+  actually splitted a component of the graph.
 
 - modularity:
 
-  Logical, whether to calculate the maximum modularity score,
+  Logical constant, whether to calculate the maximum modularity score,
   considering all possibly community structures along the
   edge-betweenness based edge removals.
 
 - membership:
 
-  Logical, whether to calculate the membership vector corresponding to
-  the highest possible modularity score.
+  Logical constant, whether to calculate the membership vector
+  corresponding to the highest possible modularity score.
 
 ## Value
 

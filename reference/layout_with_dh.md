@@ -8,17 +8,18 @@ annealing algorithm by Davidson and Harel.
 ``` r
 layout_with_dh(
   graph,
-  ...,
   coords = NULL,
   maxiter = 10,
-  fineiter = NULL,
+  fineiter = max(10, log2(vcount(graph))),
   cool.fact = 0.75,
   weight.node.dist = 1,
   weight.border = 0,
-  weight.edge.lengths = NULL,
-  weight.edge.crossings = NULL,
-  weight.node.edge.dist = NULL
+  weight.edge.lengths = edge_density(graph)/10,
+  weight.edge.crossings = 1 - sqrt(edge_density(graph)),
+  weight.node.edge.dist = 0.2 * (1 - edge_density(graph))
 )
+
+with_dh(...)
 ```
 
 ## Arguments
@@ -26,10 +27,6 @@ layout_with_dh(
 - graph:
 
   The graph to lay out. Edge directions are ignored.
-
-- ...:
-
-  These dots are for future extensions and must be empty.
 
 - coords:
 
@@ -43,8 +40,7 @@ layout_with_dh(
 
 - fineiter:
 
-  Number of iterations in the fine tuning phase. The default `NULL` uses
-  `max(10, log2(vcount(graph)))`.
+  Number of iterations in the fine tuning phase.
 
 - cool.fact:
 
@@ -62,18 +58,19 @@ layout_with_dh(
 
 - weight.edge.lengths:
 
-  Weight for the edge length component of the energy function. The
-  default `NULL` uses `edge_density(graph) / 10`.
+  Weight for the edge length component of the energy function.
 
 - weight.edge.crossings:
 
-  Weight for the edge crossing component of the energy function. The
-  default `NULL` uses `1 - sqrt(edge_density(graph))`.
+  Weight for the edge crossing component of the energy function.
 
 - weight.node.edge.dist:
 
   Weight for the node-edge distance component of the energy function.
-  The default `NULL` uses `0.2 * (1 - edge_density(graph))`.
+
+- ...:
+
+  Passed to `layout_with_dh()`.
 
 ## Value
 
@@ -121,10 +118,7 @@ Annealing. *ACM Transactions on Graphics* 15(4), pp. 301-331, 1996.
 
 [`layout_with_fr()`](https://r.igraph.org/reference/layout_with_fr.md),
 [`layout_with_kk()`](https://r.igraph.org/reference/layout_with_kk.md)
-for other layout algorithms. See
-[`with_dh()`](https://r.igraph.org/reference/layout_spec.md) to build a
-lazy layout specification for
-[`add_layout_()`](https://r.igraph.org/reference/add_layout_.md).
+for other layout algorithms.
 
 Other graph layouts:
 [`add_layout_()`](https://r.igraph.org/reference/add_layout_.md),

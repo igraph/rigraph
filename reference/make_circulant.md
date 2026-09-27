@@ -8,9 +8,9 @@ all \\j\\.
 ## Usage
 
 ``` r
-make_circulant(n, shifts, ..., directed = FALSE)
+make_circulant(n, shifts, directed = FALSE)
 
-circulant(n, shifts, ..., directed = FALSE)
+circulant(n, shifts, directed = FALSE)
 ```
 
 ## Arguments
@@ -23,13 +23,9 @@ circulant(n, shifts, ..., directed = FALSE)
 
   Integer vector, a list of the offsets within the circulant graph.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - directed:
 
-  Logical, whether to create a directed graph.
+  Boolean, whether to create a directed graph.
 
 ## Value
 

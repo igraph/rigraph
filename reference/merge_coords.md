@@ -5,9 +5,9 @@ Place several graphs on the same layout
 ## Usage
 
 ``` r
-merge_coords(graphs, layouts, ..., method = "dla")
+merge_coords(graphs, layouts, method = "dla")
 
-layout_components(graph, layout = NULL, ...)
+layout_components(graph, layout = layout_with_kk, ...)
 ```
 
 ## Arguments
@@ -20,12 +20,6 @@ layout_components(graph, layout = NULL, ...)
 
   A list of two-column matrices.
 
-- ...:
-
-  For `layout_components()`, additional arguments to pass to the
-  `layout` layout function. For `merge_coords()`, these dots must be
-  empty.
-
 - method:
 
   Character constant giving the method to use. Right now only `dla` is
@@ -37,8 +31,11 @@ layout_components(graph, layout = NULL, ...)
 
 - layout:
 
-  A function object, the layout function to use. The default `NULL` uses
-  `layout_with_kk`.
+  A function object, the layout function to use.
+
+- ...:
+
+  Additional arguments to pass to the `layout` layout function.
 
 ## Value
 
@@ -113,10 +110,6 @@ graphs <- lapply(sample(5:20, 20, replace = TRUE),
   barabasi.game,
   directed = FALSE
 )
-#> Warning: `barabasi.game()` was deprecated in igraph 2.0.0.
-#> ℹ Please use `sample_pa()` instead.
-#> ℹ The deprecated feature was likely used in the base package.
-#>   Please report the issue to the authors.
 layouts <- lapply(graphs, layout_with_kk)
 lay <- merge_coords(graphs, layouts)
 g <- disjoint_union(graphs)

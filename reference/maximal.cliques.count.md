@@ -30,7 +30,7 @@ maximal.cliques.count(graph, min = NULL, max = NULL, subset = NULL)
 
 - subset:
 
-  If not `NULL`, then it must be a vector of vertex IDs, numeric or
+  If not `NULL`, then it must be a vector of vertex ids, numeric or
   symbolic if the graph is named. The algorithm is run from these
   vertices only, so only a subset of all maximal cliques is returned.
   See the Eppstein paper for details. This argument makes it possible to

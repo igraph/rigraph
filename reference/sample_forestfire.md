@@ -6,14 +6,7 @@ spreads by igniting trees close by.
 ## Usage
 
 ``` r
-sample_forestfire(
-  nodes,
-  fw.prob,
-  ...,
-  bw.factor = 1,
-  ambs = 1,
-  directed = TRUE
-)
+sample_forestfire(nodes, fw.prob, bw.factor = 1, ambs = 1, directed = TRUE)
 ```
 
 ## Arguments
@@ -26,10 +19,6 @@ sample_forestfire(
 
   The forward burning probability, see details below.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - bw.factor:
 
   The backward burning ratio. The backward burning probability is
@@ -41,7 +30,7 @@ sample_forestfire(
 
 - directed:
 
-  Logical, whether to create a directed graph.
+  Logical scalar, whether to create a directed graph.
 
 ## Value
 
@@ -149,6 +138,6 @@ dd2 <- degree_distribution(g, mode = "out")
 # Note that some in- or out-degrees are zero which will be excluded from the logarithmic plot.
 plot(seq(along.with = dd1) - 1, dd1, log = "xy")
 #> Warning: 1 x value <= 0 omitted from logarithmic plot
-#> Warning: 487 y values <= 0 omitted from logarithmic plot
+#> Warning: 640 y values <= 0 omitted from logarithmic plot
 points(seq(along.with = dd2) - 1, dd2, col = 2, pch = 2)
 ```

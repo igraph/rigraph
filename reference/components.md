@@ -8,13 +8,13 @@ graph
 ``` r
 component_distribution(graph, cumulative = FALSE, mul.size = FALSE, ...)
 
-largest_component(graph, ..., mode = c("weak", "strong"))
+largest_component(graph, mode = c("weak", "strong"))
 
-components(graph, ..., mode = c("weak", "strong"))
+components(graph, mode = c("weak", "strong"))
 
-is_connected(graph, ..., mode = c("weak", "strong"))
+is_connected(graph, mode = c("weak", "strong"))
 
-count_components(graph, ..., mode = c("weak", "strong"))
+count_components(graph, mode = c("weak", "strong"))
 ```
 
 ## Arguments
@@ -35,9 +35,8 @@ count_components(graph, ..., mode = c("weak", "strong"))
 
 - ...:
 
-  For `component_distribution()`, forwarded to `components()`. For
-  `components()`, `is_connected()`, `count_components()` and
-  `largest_component()`, these dots must be empty.
+  Additional attributes to pass to `cluster`, right now only `mode`
+  makes sense.
 
 - mode:
 
@@ -47,13 +46,13 @@ count_components(graph, ..., mode = c("weak", "strong"))
 
 ## Value
 
-For `is_connected()` a Logical.
+For `is_connected()` a logical constant.
 
 For `components()` a named list with three components:
 
 - membership:
 
-  numeric vector giving the cluster ID to which each vertex belongs.
+  numeric vector giving the cluster id to which each vertex belongs.
 
 - csize:
 
@@ -180,13 +179,8 @@ groups(clu)
 #> [1] 17
 #> 
 largest_component(g)
-#> ── <igraph> Erdos-Renyi (gnp) graph ───────────────────────────────── 4d060df ──
-#> ℹ undirected
-#> ℹ 8 vertices · 7 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, type <chr>, loops <lgl>, p <dbl>
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#> [1] 2 ─ 3  1 ─ 4  4 ─ 5  2 ─ 6  5 ─ 6  6 ─ 7  6 ─ 8 
+#> IGRAPH 1952a75 U--- 8 7 -- Erdos-Renyi (gnp) graph
+#> + attr: name (g/c), type (g/c), loops (g/l), p (g/n)
+#> + edges from 1952a75:
+#> [1] 2--3 1--4 4--5 2--6 5--6 6--7 6--8
 ```

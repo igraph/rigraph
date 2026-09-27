@@ -15,7 +15,7 @@ random dot product graphs"><meta property="og:image" content="https://r.igraph.o
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9037</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ random dot product graphs"><meta property="og:image" content="https://r.igraph.o
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Sample vectors uniformly from the volume of a sphere</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/embedding.R" class="external-link"><code>R/embedding.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/embedding.R" class="external-link"><code>R/embedding.R</code></a></small>
       <div class="d-none name"><code>sample_sphere_volume.Rd</code></div>
     </div>
 
@@ -58,7 +58,7 @@ random dot product graphs</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sample_sphere_volume</span><span class="op">(</span><span class="va">dim</span>, n <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span>, radius <span class="op">=</span> <span class="fl">1</span>, positive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sample_sphere_volume</span><span class="op">(</span><span class="va">dim</span>, n <span class="op">=</span> <span class="fl">1</span>, radius <span class="op">=</span> <span class="fl">1</span>, positive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -73,16 +73,12 @@ random dot product graphs</p>
 <dd><p>Integer scalar, the sample size.</p></dd>
 
 
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>These dots are for future extensions and must be empty.</p></dd>
-
-
 <dt id="arg-radius">radius<a class="anchor" aria-label="anchor" href="#arg-radius"></a></dt>
 <dd><p>Numeric scalar, the radius of the sphere to sample.</p></dd>
 
 
 <dt id="arg-positive">positive<a class="anchor" aria-label="anchor" href="#arg-positive"></a></dt>
-<dd><p>Logical, whether to sample from the positive orthant
+<dd><p>Logical scalar, whether to sample from the positive orthant
 of the sphere.</p></dd>
 
 </dl></div>
@@ -117,9 +113,9 @@ smaller or equal to <code>radius</code>.</p>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">vec.norm</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 0.7877281 0.7171085 0.9518279 0.7578889 0.9594476 0.8536693 0.8357129</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8] 0.9662138 0.7459983 0.6767769 0.9014655 0.9316284 0.9158282 0.8733909</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [15] 0.9222619 0.9996337 0.5291639 0.7421754 0.8308839 0.1709651</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 0.8677224 0.3721885 0.9794482 0.8961492 0.8888843 0.7408265 0.6663391</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8] 0.8284712 0.7891663 0.4069648 0.8902029 0.6007150 0.9983231 0.6678435</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [15] 0.8851258 0.9605417 0.9463845 0.9371525 0.9360247 0.8204755</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -9,20 +9,24 @@ connections based on how long ago their last citation happened.
 sample_last_cit(
   n,
   edges = 1,
-  ...,
-  agebins = NULL,
-  pref = NULL,
+  agebins = n/7100,
+  pref = (1:(agebins + 1))^-3,
   directed = TRUE
 )
 
-last_cit(n, edges = 1, ..., agebins = NULL, pref = NULL, directed = TRUE)
+last_cit(
+  n,
+  edges = 1,
+  agebins = n/7100,
+  pref = (1:(agebins + 1))^-3,
+  directed = TRUE
+)
 
 sample_cit_types(
   n,
   edges = 1,
-  types = NULL,
-  ...,
-  pref = NULL,
+  types = rep(0, n),
+  pref = rep(1, length(types)),
   directed = TRUE,
   attr = TRUE
 )
@@ -30,9 +34,8 @@ sample_cit_types(
 cit_types(
   n,
   edges = 1,
-  types = NULL,
-  ...,
-  pref = NULL,
+  types = rep(0, n),
+  pref = rep(1, length(types)),
   directed = TRUE,
   attr = TRUE
 )
@@ -40,9 +43,8 @@ cit_types(
 sample_cit_cit_types(
   n,
   edges = 1,
-  types = NULL,
-  ...,
-  pref = NULL,
+  types = rep(0, n),
+  pref = matrix(1, nrow = length(types), ncol = length(types)),
   directed = TRUE,
   attr = TRUE
 )
@@ -50,9 +52,8 @@ sample_cit_cit_types(
 cit_cit_types(
   n,
   edges = 1,
-  types = NULL,
-  ...,
-  pref = NULL,
+  types = rep(0, n),
+  pref = matrix(1, nrow = length(types), ncol = length(types)),
   directed = TRUE,
   attr = TRUE
 )
@@ -68,35 +69,29 @@ cit_cit_types(
 
   Number of edges per step.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - agebins:
 
-  Number of aging bins. The default `NULL` uses `n / 7100`.
+  Number of aging bins.
 
 - pref:
 
   Vector (`sample_last_cit()` and `sample_cit_types()` or matrix
   (`sample_cit_cit_types()`) giving the (unnormalized) citation
-  probabilities for the different vertex types. The default `NULL` uses
-  `(1:(agebins + 1))^-3` for `sample_last_cit()` and all-one
-  probabilities for the other two.
+  probabilities for the different vertex types.
 
 - directed:
 
-  Logical, whether to generate directed networks.
+  Logical scalar, whether to generate directed networks.
 
 - types:
 
   Vector of length ‘`n`’, the types of the vertices. Types are numbered
-  from zero. The default `NULL` gives all vertices type zero.
+  from zero.
 
 - attr:
 
-  Logical, whether to add the vertex types to the generated graph as a
-  vertex attribute called ‘`type`’.
+  Logical scalar, whether to add the vertex types to the generated graph
+  as a vertex attribute called ‘`type`’.
 
 ## Value
 

@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9037</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="logo.png" class="logo" alt=""><h1>AI Agent Development Guidelines for igraph</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/AGENTS.md" class="external-link"><code>AGENTS.md</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/AGENTS.md" class="external-link"><code>AGENTS.md</code></a></small>
     </div>
 
 <div id="ai-agent-development-guidelines-for-igraph" class="section level1">
@@ -146,13 +146,11 @@
 <li>Document internal functions using devtag (work in progress)</li>
 <li>Link to C documentation using <code>@cdocs</code> tag: <code>#' @cdocs igraph_function_name</code>
 </li>
-<li>Write “ID”/“IDs” (not “id”/“ids”) when referring to vertex/edge IDs in documentation <em>prose</em>. Lowercase stays only where the token is code: argument names, runnable <code>@examples</code>, and spans in <code>`...`</code> or <code>\code{}</code>. Run <code>Rscript tools/check-id-casing.R</code> to find violations in roxygen prose.</li>
 <li>Always run <code><a href="https://devtools.r-lib.org/reference/document.html" class="external-link">devtools::document()</a></code> after updating documentation</li>
 </ul></div>
 <div class="section level3">
 <h3 id="naming-conventions">Naming Conventions<a class="anchor" aria-label="anchor" href="#naming-conventions"></a></h3>
 <ul><li>Use <code>max</code> for maximal (graph theory term: a vertex is maximal if no other vertex dominates it) and <code>largest</code> for maximum (the biggest value in a set)</li>
-<li>Use <code>make_xxx()</code> for functions creating graphs in a deterministic way, and <code>sample_xxx()</code> for functions sampling graphs from some ensemble</li>
 </ul></div>
 <div class="section level3">
 <h3 id="new-functions">New functions<a class="anchor" aria-label="anchor" href="#new-functions"></a></h3>
@@ -164,8 +162,7 @@
 <li>An “experimental” badge via <code>r lifecycle::badge("experimental")</code>
 </li>
 <li>All arguments in <code>snake_case</code>, with documentation and suitable defaults</li>
-<li>An ellipsis guarded with <code>check_dots_empty()</code> separating the head (required and defining arguments) from keyword-only options, following the zoning rules in <a href="CONTRIBUTING.html#argument-order-and-the-ellipsis">CONTRIBUTING.md</a>
-</li>
+<li>An ellipsis guarded with <code>check_dots_empty()</code> separating mandatory and optional arguments</li>
 <li>Argument validation using built-in <code>check_*()</code> functions or <code>igraph_arg_match()</code>
 </li>
 </ul><p><strong>For callback functions:</strong></p>
