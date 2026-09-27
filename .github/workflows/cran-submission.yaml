@@ -3,6 +3,8 @@
 # through CRAN's submission form, then an issue that tracks the submission.
 # CRAN mails a confirmation link to the maintainer in DESCRIPTION,
 # and the submission only counts once that link has been followed.
+# After a successful upload, the `tag` job tags the submitted commit as `v<version>`,
+# with the NEWS.md section of that version as the message, like the tags fledge creates.
 #
 # Only a run started by hand submits, and only with the input `confirmation` set to CONFIRM,
 # which the action checks itself.
@@ -46,15 +48,64 @@ jobs:
       # The action opens an issue that tracks the submission.
       issues: write
 
+    outputs:
+      pkg-name: ${{ steps.submit.outputs.pkg-name }}
+      pkg-version: ${{ steps.submit.outputs.pkg-version }}
+      submission-status: ${{ steps.submit.outputs.submission-status }}
+
     steps:
       - uses: actions/checkout@v6
         with:
           persist-credentials: false
 
       - name: Check and submit the package
+        id: submit
         # v1.0.3, pinned: this step uploads to CRAN.
         uses: coatless-actions/cran-submission@0224a35fffe0afcac8392b2520d966537866da83
         with:
           confirmation: ${{ inputs.confirmation }}
           error-on: warning
           create-issue: true
+
+  # A job of its own, so that the token that can push the tag
+  # is never available to the steps that build and check the package.
+  tag:
+    needs: cran-submission
+    if: needs.cran-submission.outputs.submission-status == 'success'
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    name: "Tag the submitted commit"
+
+    permissions:
+      contents: write
+
+    steps:
+      # The same commit as the submission: both jobs check out `github.sha`.
+      - uses: actions/checkout@v6
+
+      - name: Configure the Git identity
+        uses: cynkra/cynkratemplate/.github/actions/git-identity@main
+
+      - name: Create and push the tag
+        env:
+          PKG_NAME: ${{ needs.cran-submission.outputs.pkg-name }}
+          PKG_VERSION: ${{ needs.cran-submission.outputs.pkg-version }}
+        run: |
+          message="$RUNNER_TEMP/tag-message.md"
+          # The section from the version's heading to the next one, without the leading "# ".
+          awk -v heading="# $PKG_NAME $PKG_VERSION" '
+            $0 == heading { found = 1; print substr($0, 3); next }
+            found && /^# / { exit }
+            found { print }
+          ' NEWS.md > "$message"
+          if [ ! -s "$message" ]; then
+            echo "::error::NEWS.md has no section for $PKG_NAME $PKG_VERSION."
+            exit 1
+          fi
+          # The default cleanup would drop the "## ..." subheadings as comment lines.
+          git tag -a "v$PKG_VERSION" --cleanup=whitespace -F "$message"
+          git push origin "refs/tags/v$PKG_VERSION"
+          echo "Tagged $(git rev-parse --short HEAD) as v$PKG_VERSION." | tee -a "$GITHUB_STEP_SUMMARY"
+        shell: bash
