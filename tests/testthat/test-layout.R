@@ -279,7 +279,8 @@ test_that("`layout_with_mds()` stress test, graph with multiple components", {
 
   ## Small stress test
 
-  # DSYEVR fails to converge with BLIS for some of these graphs
+  # DSYEVR fails to converge with BLIS for some of these graphs.
+  # Reproduced in the C core: https://github.com/igraph/igraph/pull/2933
   skip_if(
     grepl("blis", extSoftVersion()["BLAS"], ignore.case = TRUE),
     "BLIS BLAS"
