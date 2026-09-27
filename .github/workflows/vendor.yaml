@@ -1,0 +1,76 @@
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/vendor.yaml"
+      - "scripts/vendor-one.sh"
+  workflow_dispatch:
+  # schedule:
+  #   - cron: "0 * * * *"
+
+concurrency:
+  group: ${{ github.workflow }}
+
+name: vendor
+
+jobs:
+  vendor:
+    runs-on: ubuntu-latest
+    # Only run in the vendoring repository
+    if: github.repository == 'krlmlr/rigraph'
+    strategy:
+      matrix:
+        # REMINDER: When changing branch names below,
+        # update the documentation in BRANCHES.md accordingly
+        include:
+          - branch: main-dev
+            upstream: main-dev
+
+    name: "Update vendored sources (${{ matrix.branch }})"
+
+    permissions:
+      contents: write
+      statuses: read
+      actions: write
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          ref: ${{ matrix.branch }}
+
+      - uses: actions/checkout@v6
+        with:
+          repository: krlmlr/igraph
+          path: ./igraph
+          fetch-depth: 0
+          ref: ${{ matrix.upstream }}
+
+      - uses: ./.github/workflows/git-identity
+
+      - uses: ./.github/workflows/install
+        with:
+          cache-version: rcc-vendor
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Vendor sources
+        id: vendor
+        run: |
+          git pull --rebase
+          scripts/vendor-one.sh ./igraph --commits 30
+          rm -rf ./igraph
+          # Check if ahead of upstream branch
+          # If yes, set a step output and push directly
+          if [ $(git rev-list HEAD...origin/${{ matrix.branch }} --count) -gt 0 ]; then
+            git push
+            # Avoid set-output, it's deprecated
+            echo "vendor=ok" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Enumerate commits and trigger rcc workflow
+        # if: steps.vendor.outputs.vendor == 'ok'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: scripts/each-rcc.sh
+        shell: bash
