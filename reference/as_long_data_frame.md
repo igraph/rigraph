@@ -5,8 +5,8 @@ edges of the graph. It contains one row for each edge, and all metadata
 about that edge and its incident vertices are included in that row. The
 names of the columns that contain the metadata of the incident vertices
 are prefixed with `from_` and `to_`. The first two columns are always
-named `from` and `to` and they contain the numeric ids of the incident
-vertices. The rows are listed in the order of numeric vertex ids.
+named `from` and `to` and they contain the numeric IDs of the incident
+vertices. The rows are listed in the order of numeric vertex IDs.
 
 ## Usage
 

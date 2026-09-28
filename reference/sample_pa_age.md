@@ -13,6 +13,7 @@ sample_pa_age(
   pa.exp,
   aging.exp,
   m = NULL,
+  ...,
   aging.bin = 300,
   out.dist = NULL,
   out.seq = NULL,
@@ -30,6 +31,7 @@ pa_age(
   pa.exp,
   aging.exp,
   m = NULL,
+  ...,
   aging.bin = 300,
   out.dist = NULL,
   out.seq = NULL,
@@ -64,6 +66,10 @@ pa_age(
   vertex). This argument is used only if both the `out.dist` and
   `out.seq` arguments are NULL.
 
+- ...:
+
+  These dots are for future extensions and must be empty.
+
 - aging.bin:
 
   The number of bins to use for measuring the age of vertices, see
@@ -81,13 +87,12 @@ pa_age(
 
 - out.pref:
 
-  Logical constant, whether to include edges not initiated by the vertex
-  as a basis of preferential attachment. See details below.
+  Logical, whether to include edges not initiated by the vertex as a
+  basis of preferential attachment. See details below.
 
 - directed:
 
-  Logical constant, whether to generate a directed graph. See details
-  below.
+  Logical, whether to generate a directed graph. See details below.
 
 - zero.deg.appeal:
 
@@ -213,9 +218,9 @@ g1 <- sample_pa_age(10000, pa.exp = 1, aging.exp = 0, aging.bin = 1000)
 g2 <- sample_pa_age(10000, pa.exp = 1, aging.exp = -1, aging.bin = 1000)
 g3 <- sample_pa_age(10000, pa.exp = 1, aging.exp = -3, aging.bin = 1000)
 max(degree(g1))
-#> [1] 155
+#> [1] 193
 max(degree(g2))
-#> [1] 27
+#> [1] 33
 max(degree(g3))
 #> [1] 11
 ```

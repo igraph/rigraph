@@ -20,12 +20,12 @@ subgraph.edges(graph, eids, delete.vertices = TRUE)
 
 - eids:
 
-  The edge ids of the edges that will be kept in the result graph.
+  The edge IDs of the edges that will be kept in the result graph.
 
 - delete.vertices:
 
-  Logical scalar, whether to remove vertices that do not have any
-  adjacent edges in `eids`.
+  Logical, whether to remove vertices that do not have any adjacent
+  edges in `eids`.
 
 ## Related documentation in the C library
 

@@ -6,7 +6,12 @@ summary of graph centralization.
 ## Usage
 
 ``` r
-centr_clo_tmax(graph = NULL, nodes = 0, mode = c("out", "in", "all", "total"))
+centr_clo_tmax(
+  graph = NULL,
+  nodes = 0,
+  ...,
+  mode = c("out", "in", "all", "total")
+)
 ```
 
 ## Arguments
@@ -18,6 +23,10 @@ centr_clo_tmax(graph = NULL, nodes = 0, mode = c("out", "in", "all", "total"))
 - nodes:
 
   The number of vertices. This is ignored if the graph is given.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - mode:
 

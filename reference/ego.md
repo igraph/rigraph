@@ -9,12 +9,13 @@ Note that `ego()` and `neighborhood()`, `ego_size()` and
 ## Usage
 
 ``` r
-connect(graph, order, mode = c("all", "out", "in", "total"))
+connect(graph, order, ..., mode = c("all", "out", "in", "total"))
 
 ego_size(
   graph,
   order = 1,
-  nodes = V(graph),
+  nodes = NULL,
+  ...,
   mode = c("all", "out", "in"),
   mindist = 0
 )
@@ -22,7 +23,8 @@ ego_size(
 neighborhood_size(
   graph,
   order = 1,
-  nodes = V(graph),
+  nodes = NULL,
+  ...,
   mode = c("all", "out", "in"),
   mindist = 0
 )
@@ -30,7 +32,8 @@ neighborhood_size(
 ego(
   graph,
   order = 1,
-  nodes = V(graph),
+  nodes = NULL,
+  ...,
   mode = c("all", "out", "in"),
   mindist = 0
 )
@@ -38,7 +41,8 @@ ego(
 neighborhood(
   graph,
   order = 1,
-  nodes = V(graph),
+  nodes = NULL,
+  ...,
   mode = c("all", "out", "in"),
   mindist = 0
 )
@@ -46,7 +50,8 @@ neighborhood(
 make_ego_graph(
   graph,
   order = 1,
-  nodes = V(graph),
+  nodes = NULL,
+  ...,
   mode = c("all", "out", "in"),
   mindist = 0
 )
@@ -54,7 +59,8 @@ make_ego_graph(
 make_neighborhood_graph(
   graph,
   order = 1,
-  nodes = V(graph),
+  nodes = NULL,
+  ...,
   mode = c("all", "out", "in"),
   mindist = 0
 )
@@ -71,6 +77,10 @@ make_neighborhood_graph(
   Integer giving the order of the neighborhood. Negative values indicate
   an infinite order.
 
+- ...:
+
+  These dots are for future extensions and must be empty.
+
 - mode:
 
   Character constant, it specifies how to use the direction of the edges
@@ -83,7 +93,8 @@ make_neighborhood_graph(
 
 - nodes:
 
-  The vertices for which the calculation is performed.
+  The vertices for which the calculation is performed. The default
+  `NULL` selects all vertices.
 
 - mindist:
 
@@ -211,82 +222,82 @@ neighborhood_size(g, order = 2, 1:3)
 
 ego(g, order = 0, 1:3)
 #> [[1]]
-#> + 1/10 vertex, from 2b083bf:
+#> ── <vertex sequence> 1/10 · from f25b5a2 ───────────────────────────────────────
 #> [1] 1
 #> 
 #> [[2]]
-#> + 1/10 vertex, from 2b083bf:
+#> ── <vertex sequence> 1/10 · from f25b5a2 ───────────────────────────────────────
 #> [1] 2
 #> 
 #> [[3]]
-#> + 1/10 vertex, from 2b083bf:
+#> ── <vertex sequence> 1/10 · from f25b5a2 ───────────────────────────────────────
 #> [1] 3
 #> 
 ego(g, order = 1, 1:3)
 #> [[1]]
-#> + 3/10 vertices, from 2b083bf:
+#> ── <vertex sequence> 3/10 · from f25b5a2 ───────────────────────────────────────
 #> [1]  1  2 10
 #> 
 #> [[2]]
-#> + 3/10 vertices, from 2b083bf:
+#> ── <vertex sequence> 3/10 · from f25b5a2 ───────────────────────────────────────
 #> [1] 2 1 3
 #> 
 #> [[3]]
-#> + 3/10 vertices, from 2b083bf:
+#> ── <vertex sequence> 3/10 · from f25b5a2 ───────────────────────────────────────
 #> [1] 3 2 4
 #> 
 ego(g, order = 2, 1:3)
 #> [[1]]
-#> + 5/10 vertices, from 2b083bf:
+#> ── <vertex sequence> 5/10 · from f25b5a2 ───────────────────────────────────────
 #> [1]  1  2 10  3  9
 #> 
 #> [[2]]
-#> + 5/10 vertices, from 2b083bf:
+#> ── <vertex sequence> 5/10 · from f25b5a2 ───────────────────────────────────────
 #> [1]  2  1  3 10  4
 #> 
 #> [[3]]
-#> + 5/10 vertices, from 2b083bf:
+#> ── <vertex sequence> 5/10 · from f25b5a2 ───────────────────────────────────────
 #> [1] 3 2 4 1 5
 #> 
 
 # neighborhood() is an alias of ego()
 neighborhood(g, order = 0, 1:3)
 #> [[1]]
-#> + 1/10 vertex, from 2b083bf:
+#> ── <vertex sequence> 1/10 · from f25b5a2 ───────────────────────────────────────
 #> [1] 1
 #> 
 #> [[2]]
-#> + 1/10 vertex, from 2b083bf:
+#> ── <vertex sequence> 1/10 · from f25b5a2 ───────────────────────────────────────
 #> [1] 2
 #> 
 #> [[3]]
-#> + 1/10 vertex, from 2b083bf:
+#> ── <vertex sequence> 1/10 · from f25b5a2 ───────────────────────────────────────
 #> [1] 3
 #> 
 neighborhood(g, order = 1, 1:3)
 #> [[1]]
-#> + 3/10 vertices, from 2b083bf:
+#> ── <vertex sequence> 3/10 · from f25b5a2 ───────────────────────────────────────
 #> [1]  1  2 10
 #> 
 #> [[2]]
-#> + 3/10 vertices, from 2b083bf:
+#> ── <vertex sequence> 3/10 · from f25b5a2 ───────────────────────────────────────
 #> [1] 2 1 3
 #> 
 #> [[3]]
-#> + 3/10 vertices, from 2b083bf:
+#> ── <vertex sequence> 3/10 · from f25b5a2 ───────────────────────────────────────
 #> [1] 3 2 4
 #> 
 neighborhood(g, order = 2, 1:3)
 #> [[1]]
-#> + 5/10 vertices, from 2b083bf:
+#> ── <vertex sequence> 5/10 · from f25b5a2 ───────────────────────────────────────
 #> [1]  1  2 10  3  9
 #> 
 #> [[2]]
-#> + 5/10 vertices, from 2b083bf:
+#> ── <vertex sequence> 5/10 · from f25b5a2 ───────────────────────────────────────
 #> [1]  2  1  3 10  4
 #> 
 #> [[3]]
-#> + 5/10 vertices, from 2b083bf:
+#> ── <vertex sequence> 5/10 · from f25b5a2 ───────────────────────────────────────
 #> [1] 3 2 4 1 5
 #> 
 
@@ -294,42 +305,78 @@ neighborhood(g, order = 2, 1:3)
 V(g)$name <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j")
 make_ego_graph(g, order = 2, 1:3)
 #> [[1]]
-#> IGRAPH db42336 UN-- 5 4 -- Ring graph
-#> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)
-#> + edges from db42336 (vertex names):
-#> [1] a--b b--c a--j i--j
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 9c2191e ──
+#> ℹ undirected · named
+#> ℹ 5 vertices · 4 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
+#> → vertex: name <chr>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#> [1] a ─ b  b ─ c  a ─ j  i ─ j 
 #> 
 #> [[2]]
-#> IGRAPH 8d83993 UN-- 5 4 -- Ring graph
-#> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)
-#> + edges from 8d83993 (vertex names):
-#> [1] a--b b--c c--d a--j
+#> ── <igraph> Ring graph ────────────────────────────────────────────── b96450a ──
+#> ℹ undirected · named
+#> ℹ 5 vertices · 4 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
+#> → vertex: name <chr>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#> [1] a ─ b  b ─ c  c ─ d  a ─ j 
 #> 
 #> [[3]]
-#> IGRAPH 36b53d9 UN-- 5 4 -- Ring graph
-#> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)
-#> + edges from 36b53d9 (vertex names):
-#> [1] a--b b--c c--d d--e
+#> ── <igraph> Ring graph ────────────────────────────────────────────── fac6561 ──
+#> ℹ undirected · named
+#> ℹ 5 vertices · 4 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
+#> → vertex: name <chr>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#> [1] a ─ b  b ─ c  c ─ d  d ─ e 
 #> 
 # make_neighborhood_graph() is an alias of make_ego_graph()
 make_neighborhood_graph(g, order = 2, 1:3)
 #> [[1]]
-#> IGRAPH bd93f47 UN-- 5 4 -- Ring graph
-#> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)
-#> + edges from bd93f47 (vertex names):
-#> [1] a--b b--c a--j i--j
+#> ── <igraph> Ring graph ────────────────────────────────────────────── b9ea25a ──
+#> ℹ undirected · named
+#> ℹ 5 vertices · 4 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
+#> → vertex: name <chr>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#> [1] a ─ b  b ─ c  a ─ j  i ─ j 
 #> 
 #> [[2]]
-#> IGRAPH bc3eccb UN-- 5 4 -- Ring graph
-#> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)
-#> + edges from bc3eccb (vertex names):
-#> [1] a--b b--c c--d a--j
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 191fd62 ──
+#> ℹ undirected · named
+#> ℹ 5 vertices · 4 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
+#> → vertex: name <chr>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#> [1] a ─ b  b ─ c  c ─ d  a ─ j 
 #> 
 #> [[3]]
-#> IGRAPH 92f6dd5 UN-- 5 4 -- Ring graph
-#> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)
-#> + edges from 92f6dd5 (vertex names):
-#> [1] a--b b--c c--d d--e
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 6abdad1 ──
+#> ℹ undirected · named
+#> ℹ 5 vertices · 4 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
+#> → vertex: name <chr>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#> [1] a ─ b  b ─ c  c ─ d  d ─ e 
 #> 
 
 # connecting to the neighborhood

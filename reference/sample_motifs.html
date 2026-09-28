@@ -15,7 +15,7 @@ structure.  These functions search a graph for various motifs."><meta property="
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9039</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ structure.  These functions search a graph for various motifs."><meta property="
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Graph motifs</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/motifs.R" class="external-link"><code>R/motifs.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/motifs.R" class="external-link"><code>R/motifs.R</code></a></small>
       <div class="d-none name"><code>sample_motifs.Rd</code></div>
     </div>
 
@@ -61,7 +61,8 @@ structure.  These functions search a graph for various motifs.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sample_motifs</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
 <span>  size <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>  cut.prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">size</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  cut.prob <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sample.size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sample <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -80,6 +81,10 @@ structure.  These functions search a graph for various motifs.</p>
 in directed graphs and sizes 3-6 in undirected graphs.</p></dd>
 
 
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
+
+
 <dt id="arg-cut-prob">cut.prob<a class="anchor" aria-label="anchor" href="#arg-cut-prob"></a></dt>
 <dd><p>Numeric vector giving the probabilities that the search
 graph is cut at a certain level. Its length should be the same as the size
@@ -94,8 +99,8 @@ The default is <code>ceiling(vcount(graph) / 10)</code> .</p></dd>
 
 
 <dt id="arg-sample">sample<a class="anchor" aria-label="anchor" href="#arg-sample"></a></dt>
-<dd><p>If not <code>NULL</code> then it specifies the vertices to use as a
-starting point for finding motifs.</p></dd>
+<dd><p>Vertices to use as a starting point for finding motifs.
+Default: <code>NULL</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -125,11 +130,11 @@ size in a graph based on a sample.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_pa.html">sample_pa</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="motifs.html">motifs</a></span><span class="op">(</span><span class="va">g</span>, <span class="fl">3</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  NA  NA 268  NA  83   0   0   0   0   0   0   0   0   0   0   0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  NA  NA 347  NA  88   0   0   0   0   0   0   0   0   0   0   0</span>
 <span class="r-in"><span><span class="fu"><a href="count_motifs.html">count_motifs</a></span><span class="op">(</span><span class="va">g</span>, <span class="fl">3</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 351</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 435</span>
 <span class="r-in"><span><span class="fu">sample_motifs</span><span class="op">(</span><span class="va">g</span>, <span class="fl">3</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 30</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

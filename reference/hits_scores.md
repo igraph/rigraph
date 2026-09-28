@@ -6,13 +6,7 @@ of \\A A^T\\, where \\A\\ is the adjacency matrix of the graph.
 ## Usage
 
 ``` r
-hits_scores(
-  graph,
-  ...,
-  scale = TRUE,
-  weights = NULL,
-  options = arpack_defaults()
-)
+hits_scores(graph, ..., scale = TRUE, weights = NULL, options = NULL)
 ```
 
 ## Arguments
@@ -27,9 +21,9 @@ hits_scores(
 
 - scale:
 
-  Logical scalar, whether to scale the result to have a maximum score of
-  one. If no scaling is used then the result vector has unit length in
-  the Euclidean norm.
+  Logical, whether to scale the result to have a maximum score of one.
+  If no scaling is used then the result vector has unit length in the
+  Euclidean norm.
 
 - weights:
 
@@ -43,6 +37,8 @@ hits_scores(
 
   A named list, to override some ARPACK options. See
   [`arpack()`](https://r.igraph.org/reference/arpack.md) for details.
+  The default `NULL` uses
+  [`arpack_defaults()`](https://r.igraph.org/reference/arpack.md).
 
 ## Value
 

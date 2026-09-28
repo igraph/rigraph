@@ -20,8 +20,8 @@ is.loop(graph, eids = E(graph))
 
 - eids:
 
-  The edges to which the query is restricted. By default this is all
-  edges in the graph.
+  The edges to which the query is restricted. The default `NULL` selects
+  all edges.
 
 ## Related documentation in the C library
 

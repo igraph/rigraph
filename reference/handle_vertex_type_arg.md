@@ -6,7 +6,7 @@ igraph function call and validates the vertex type vector.
 ## Usage
 
 ``` r
-handle_vertex_type_arg(types, graph, required = T)
+handle_vertex_type_arg(types, graph, required = TRUE)
 ```
 
 ## Arguments

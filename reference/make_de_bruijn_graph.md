@@ -60,13 +60,23 @@ Gabor Csardi <csardi.gabor@gmail.com>
 # de Bruijn graphs can be created recursively by line graphs as well
 g <- make_de_bruijn_graph(2, 1)
 make_de_bruijn_graph(2, 2)
-#> IGRAPH cf9c9fb D--- 4 8 -- De-Bruijn graph 2-2
-#> + attr: name (g/c), m (g/n), n (g/n)
-#> + edges from cf9c9fb:
-#> [1] 1->1 1->2 2->3 2->4 3->1 3->2 4->3 4->4
+#> ── <igraph> De-Bruijn graph 2-2 ───────────────────────────────────── 6bc6ce2 ──
+#> ℹ directed
+#> ℹ 4 vertices · 8 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, m <dbl>, n <dbl>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#> [1] 1 → 1  1 → 2  2 → 3  2 → 4  3 → 1  3 → 2  4 → 3  4 → 4 
 make_line_graph(g)
-#> IGRAPH 2a57c50 D--- 4 8 -- Line graph
-#> + attr: name (g/c)
-#> + edges from 2a57c50:
-#> [1] 1->1 3->1 1->2 3->2 2->3 4->3 2->4 4->4
+#> ── <igraph> Line graph ────────────────────────────────────────────── 629991a ──
+#> ℹ directed
+#> ℹ 4 vertices · 8 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#> [1] 1 → 1  3 → 1  1 → 2  3 → 2  2 → 3  4 → 3  2 → 4  4 → 4 
 ```

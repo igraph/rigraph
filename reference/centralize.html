@@ -15,7 +15,7 @@ measure from the centrality scores of the vertices."><meta property="og:image" c
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9039</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ measure from the centrality scores of the vertices."><meta property="og:image" c
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Centralization of a graph</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/centralization.R" class="external-link"><code>R/centralization.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/centralization.R" class="external-link"><code>R/centralization.R</code></a></small>
       <div class="d-none name"><code>centralize.Rd</code></div>
     </div>
 
@@ -58,7 +58,7 @@ measure from the centrality scores of the vertices.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">centralize</span><span class="op">(</span><span class="va">scores</span>, theoretical.max <span class="op">=</span> <span class="fl">0</span>, normalized <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">centralize</span><span class="op">(</span><span class="va">scores</span>, <span class="va">...</span>, theoretical.max <span class="op">=</span> <span class="fl">0</span>, normalized <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -69,6 +69,10 @@ measure from the centrality scores of the vertices.</p>
 <dd><p>The vertex level centrality scores.</p></dd>
 
 
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
+
+
 <dt id="arg-theoretical-max">theoretical.max<a class="anchor" aria-label="anchor" href="#arg-theoretical-max"></a></dt>
 <dd><p>Real scalar. The graph-level centralization measure of
 the most centralized graph with the same number of vertices as the graph
@@ -77,7 +81,7 @@ to <code>TRUE</code>.</p></dd>
 
 
 <dt id="arg-normalized">normalized<a class="anchor" aria-label="anchor" href="#arg-normalized"></a></dt>
-<dd><p>Logical scalar. Whether to normalize the graph level
+<dd><p>Logical. Whether to normalize the graph level
 centrality score by dividing by the supplied theoretical maximum.</p></dd>
 
 </dl></div>
@@ -143,6 +147,10 @@ Methods and Applications.</em> Cambridge University Press.</p>
 <span class="r-in"><span><span class="va">deg</span> <span class="op">&lt;-</span> <span class="fu"><a href="degree.html">degree</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">tmax</span> <span class="op">&lt;-</span> <span class="fu"><a href="centr_degree_tmax.html">centr_degree_tmax</a></span><span class="op">(</span><span class="va">g</span>, loops <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">centralize</span><span class="op">(</span><span class="va">deg</span>, <span class="va">tmax</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Calling `centralize()` with positional or abbreviated arguments was deprecated</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> in igraph 3.0.0.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Detected call: centralize(scores, theoretical.max)</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Use instead: centralize(scores, theoretical.max = )</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1645032</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># The most centralized graph according to eigenvector centrality</span></span></span>

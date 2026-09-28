@@ -15,7 +15,7 @@ called group cohesion."><meta property="og:image" content="https://r.igraph.org/
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9039</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ called group cohesion."><meta property="og:image" content="https://r.igraph.org/
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Vertex connectivity</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/flow.R" class="external-link"><code>R/flow.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/flow.R" class="external-link"><code>R/flow.R</code></a></small>
       <div class="d-none name"><code>vertex_connectivity.Rd</code></div>
     </div>
 
@@ -58,7 +58,7 @@ called group cohesion.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">vertex_connectivity</span><span class="op">(</span><span class="va">graph</span>, source <span class="op">=</span> <span class="cn">NULL</span>, target <span class="op">=</span> <span class="cn">NULL</span>, checks <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">vertex_connectivity</span><span class="op">(</span><span class="va">graph</span>, source <span class="op">=</span> <span class="cn">NULL</span>, target <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span>, checks <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">vertex_disjoint_paths</span><span class="op">(</span><span class="va">graph</span>, source <span class="op">=</span> <span class="cn">NULL</span>, target <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
@@ -75,28 +75,29 @@ called group cohesion.</p>
 
 
 <dt id="arg-source">source<a class="anchor" aria-label="anchor" href="#arg-source"></a></dt>
-<dd><p>The id of the source vertex, for <code>vertex_connectivity()</code> it
+<dd><p>The ID of the source vertex, for <code>vertex_connectivity()</code> it
 can be <code>NULL</code>, see details below.</p></dd>
 
 
 <dt id="arg-target">target<a class="anchor" aria-label="anchor" href="#arg-target"></a></dt>
-<dd><p>The id of the target vertex, for <code>vertex_connectivity()</code> it
+<dd><p>The ID of the target vertex, for <code>vertex_connectivity()</code> it
 can be <code>NULL</code>, see details below.</p></dd>
 
 
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>For <code>vertex_connectivity()</code>, these dots must be empty. For
+<code>cohesion()</code>, unused, present for S3 method consistency but may be used
+by other methods that implement it.</p></dd>
+
+
 <dt id="arg-checks">checks<a class="anchor" aria-label="anchor" href="#arg-checks"></a></dt>
-<dd><p>Logical constant. Whether to check that the graph is connected
+<dd><p>Logical. Whether to check that the graph is connected
 and also the degree of the vertices. If the graph is not (strongly)
 connected then the connectivity is obviously zero. Otherwise if the minimum
 degree is one then the vertex connectivity is also one. It is a good idea to
 perform these checks, as they can be done quickly compared to the
 connectivity calculation itself.  They were suggested by Peter McMahan,
 thanks Peter.</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional arguments passed to methods. Not used by <code>vertex_connectivity()</code>
-directly but may be used by other methods that implement <code>cohesion()</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

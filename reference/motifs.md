@@ -6,7 +6,7 @@ structure. These functions search a graph for various motifs.
 ## Usage
 
 ``` r
-motifs(graph, size = 3, cut.prob = NULL, callback = NULL)
+motifs(graph, size = 3, ..., cut.prob = NULL, callback = NULL)
 ```
 
 ## Arguments
@@ -19,6 +19,10 @@ motifs(graph, size = 3, cut.prob = NULL, callback = NULL)
 
   The size of the motif, currently sizes 3 and 4 are supported in
   directed graphs and sizes 3 to 6 in undirected graphs.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - cut.prob:
 
@@ -62,8 +66,8 @@ the motifs is defined by their isomorphism class, see
 
 ## Related documentation in the C library
 
-[`motifs_randesu()`](https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu),
-[`motifs_randesu_callback()`](https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu_callback)
+[`motifs_randesu_callback()`](https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu_callback),
+[`motifs_randesu()`](https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu)
 
 ## See also
 

@@ -12,7 +12,7 @@ shape_noclip(coords, el, params, end = c("both", "from", "to"))
 
 shape_noplot(coords, v = NULL, params)
 
-add_shape(shape, clip = shape_noclip, plot = shape_noplot, parameters = list())
+add_shape(shape, ..., clip = NULL, plot = NULL, parameters = list())
 ```
 
 ## Arguments
@@ -26,13 +26,19 @@ add_shape(shape, clip = shape_noclip, plot = shape_noplot, parameters = list())
 
   See parameters of the clipping/plotting functions below.
 
+- ...:
+
+  These dots are for future extensions and must be empty.
+
 - clip:
 
-  An R function object, the clipping function.
+  An R function object, the clipping function. The default `NULL` uses
+  `shape_noclip`.
 
 - plot:
 
-  An R function object, the plotting function.
+  An R function object, the plotting function. The default `NULL` uses
+  `shape_noplot`.
 
 - parameters:
 
@@ -101,7 +107,7 @@ The plotting function has the following arguments:
 
 - v:
 
-  The ids of the vertices to plot. It should match the number of rows in
+  The IDs of the vertices to plot. It should match the number of rows in
   the `coords` argument.
 
 - params:

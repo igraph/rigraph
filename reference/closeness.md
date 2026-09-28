@@ -8,7 +8,8 @@ every other vertex from a given vertex.
 ``` r
 closeness(
   graph,
-  vids = V(graph),
+  vids = NULL,
+  ...,
   mode = c("out", "in", "all", "total"),
   weights = NULL,
   normalized = FALSE,
@@ -24,7 +25,12 @@ closeness(
 
 - vids:
 
-  The vertices for which closeness will be calculated.
+  The vertices for which closeness will be calculated. The default
+  `NULL` selects all vertices.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - mode:
 
@@ -42,10 +48,10 @@ closeness(
 
 - normalized:
 
-  Logical scalar, whether to calculate the normalized closeness, i.e.
-  the inverse average distance to all reachable vertices. The
-  non-normalized closeness is the inverse of the sum of distances to all
-  reachable vertices.
+  Logical, whether to calculate the normalized closeness, i.e. the
+  inverse average distance to all reachable vertices. The non-normalized
+  closeness is the inverse of the sum of distances to all reachable
+  vertices.
 
 - cutoff:
 

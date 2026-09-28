@@ -26,7 +26,7 @@ get.vertex.attribute(graph, name, index = V(graph))
 - index:
 
   An optional vertex sequence to query the attribute only for these
-  vertices.
+  vertices. The default `NULL` selects all vertices.
 
 ## Related documentation in the C library
 

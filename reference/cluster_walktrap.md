@@ -9,6 +9,7 @@ walks tend to stay in the same community.
 ``` r
 cluster_walktrap(
   graph,
+  ...,
   weights = NULL,
   steps = 4,
   merges = TRUE,
@@ -22,6 +23,10 @@ cluster_walktrap(
 - graph:
 
   The input graph. Edge directions are ignored in directed graphs.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - weights:
 
@@ -40,18 +45,18 @@ cluster_walktrap(
 
 - merges:
 
-  Logical scalar, whether to include the merge matrix in the result.
+  Logical, whether to include the merge matrix in the result.
 
 - modularity:
 
-  Logical scalar, whether to include the vector of the modularity scores
-  in the result. If the `membership` argument is true, then it will
-  always be calculated.
+  Logical, whether to include the vector of the modularity scores in the
+  result. If the `membership` argument is true, then it will always be
+  calculated.
 
 - membership:
 
-  Logical scalar, whether to calculate the membership vector for the
-  split corresponding to the highest modularity value.
+  Logical, whether to calculate the membership vector for the split
+  corresponding to the highest modularity value.
 
 ## Value
 

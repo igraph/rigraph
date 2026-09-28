@@ -17,7 +17,7 @@ consistent API."><meta property="og:image" content="https://r.igraph.org/logo.pn
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9039</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +49,7 @@ consistent API."><meta property="og:image" content="https://r.igraph.org/logo.pn
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Infomap community finding</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/community.R" class="external-link"><code>R/community.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/community.R" class="external-link"><code>R/community.R</code></a></small>
       <div class="d-none name"><code>infomap.community.Rd</code></div>
     </div>
 
@@ -79,17 +79,17 @@ consistent API.</p>
 
 
 <dt id="arg-e-weights">e.weights<a class="anchor" aria-label="anchor" href="#arg-e-weights"></a></dt>
-<dd><p>If not <code>NULL</code>, then a numeric vector of edge weights.
-The length must match the number of edges in the graph.  By default the
+<dd><p>Numeric vector of edge weights.
+The length must match the number of edges in the graph.  By default (<code>NULL</code>) the
 ‘<code>weight</code>’ edge attribute is used as weights. If it is not
 present, then all edges are considered to have the same weight.
 Larger edge weights correspond to stronger connections.</p></dd>
 
 
 <dt id="arg-v-weights">v.weights<a class="anchor" aria-label="anchor" href="#arg-v-weights"></a></dt>
-<dd><p>If not <code>NULL</code>, then a numeric vector of vertex
+<dd><p>Numeric vector of vertex
 weights. The length must match the number of vertices in the graph.  By
-default the ‘<code>weight</code>’ vertex attribute is used as weights. If
+default (<code>NULL</code>) the ‘<code>weight</code>’ vertex attribute is used as weights. If
 it is not present, then all vertices are considered to have the same weight.
 A larger vertex weight means a larger probability that the random surfer
 jumps to that vertex.</p></dd>
@@ -101,7 +101,7 @@ integer value equal or larger than 1).</p></dd>
 
 
 <dt id="arg-modularity">modularity<a class="anchor" aria-label="anchor" href="#arg-modularity"></a></dt>
-<dd><p>Logical scalar, whether to calculate the modularity score
+<dd><p>Logical, whether to calculate the modularity score
 of the detected community structure.</p></dd>
 
 </dl></div>

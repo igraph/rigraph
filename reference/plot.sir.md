@@ -40,7 +40,7 @@ plot(
 
 - median:
 
-  Logical scalar, whether to plot the (binned) median.
+  Logical, whether to plot the (binned) median.
 
 - quantiles:
 

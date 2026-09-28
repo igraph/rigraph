@@ -6,7 +6,7 @@ also called group cohesion.
 ## Usage
 
 ``` r
-vertex_connectivity(graph, source = NULL, target = NULL, checks = TRUE)
+vertex_connectivity(graph, source = NULL, target = NULL, ..., checks = TRUE)
 
 vertex_disjoint_paths(graph, source = NULL, target = NULL)
 
@@ -22,29 +22,29 @@ cohesion(x, checks = TRUE, ...)
 
 - source:
 
-  The id of the source vertex, for `vertex_connectivity()` it can be
+  The ID of the source vertex, for `vertex_connectivity()` it can be
   `NULL`, see details below.
 
 - target:
 
-  The id of the target vertex, for `vertex_connectivity()` it can be
+  The ID of the target vertex, for `vertex_connectivity()` it can be
   `NULL`, see details below.
-
-- checks:
-
-  Logical constant. Whether to check that the graph is connected and
-  also the degree of the vertices. If the graph is not (strongly)
-  connected then the connectivity is obviously zero. Otherwise if the
-  minimum degree is one then the vertex connectivity is also one. It is
-  a good idea to perform these checks, as they can be done quickly
-  compared to the connectivity calculation itself. They were suggested
-  by Peter McMahan, thanks Peter.
 
 - ...:
 
-  Additional arguments passed to methods. Not used by
-  `vertex_connectivity()` directly but may be used by other methods that
-  implement `cohesion()`.
+  For `vertex_connectivity()`, these dots must be empty. For
+  `cohesion()`, unused, present for S3 method consistency but may be
+  used by other methods that implement it.
+
+- checks:
+
+  Logical. Whether to check that the graph is connected and also the
+  degree of the vertices. If the graph is not (strongly) connected then
+  the connectivity is obviously zero. Otherwise if the minimum degree is
+  one then the vertex connectivity is also one. It is a good idea to
+  perform these checks, as they can be done quickly compared to the
+  connectivity calculation itself. They were suggested by Peter McMahan,
+  thanks Peter.
 
 ## Value
 

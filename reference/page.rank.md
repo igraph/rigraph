@@ -41,7 +41,7 @@ page.rank(
 
 - vids:
 
-  The vertices of interest.
+  The vertices of interest. The default `NULL` selects all vertices.
 
 - directed:
 

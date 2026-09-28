@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9039</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Merging graph layouts</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/layout.R" class="external-link"><code>R/layout.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/layout.R" class="external-link"><code>R/layout.R</code></a></small>
       <div class="d-none name"><code>merge_coords.Rd</code></div>
     </div>
 
@@ -55,9 +55,9 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">merge_coords</span><span class="op">(</span><span class="va">graphs</span>, <span class="va">layouts</span>, method <span class="op">=</span> <span class="st">"dla"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">merge_coords</span><span class="op">(</span><span class="va">graphs</span>, <span class="va">layouts</span>, <span class="va">...</span>, method <span class="op">=</span> <span class="st">"dla"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">layout_components</span><span class="op">(</span><span class="va">graph</span>, layout <span class="op">=</span> <span class="va">layout_with_kk</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">layout_components</span><span class="op">(</span><span class="va">graph</span>, layout <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -72,6 +72,12 @@
 <dd><p>A list of two-column matrices.</p></dd>
 
 
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>For <code>layout_components()</code>, additional arguments to pass to
+the <code>layout</code> layout function. For <code>merge_coords()</code>, these dots must be
+empty.</p></dd>
+
+
 <dt id="arg-method">method<a class="anchor" aria-label="anchor" href="#arg-method"></a></dt>
 <dd><p>Character constant giving the method to use. Right now only
 <code>dla</code> is implemented.</p></dd>
@@ -82,12 +88,8 @@
 
 
 <dt id="arg-layout">layout<a class="anchor" aria-label="anchor" href="#arg-layout"></a></dt>
-<dd><p>A function object, the layout function to use.</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional arguments to pass to the <code>layout</code> layout
-function.</p></dd>
+<dd><p>A function object, the layout function to use. The default
+<code>NULL</code> uses <code>layout_with_kk</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -157,6 +159,10 @@ for each component separately. Finally it merges the layouts via calling
 <span class="r-in"><span>  <span class="va">barabasi.game</span>,</span></span>
 <span class="r-in"><span>  directed <span class="op">=</span> <span class="cn">FALSE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>`barabasi.game()` was deprecated in igraph 2.0.0.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Please use `sample_pa()` instead.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> The deprecated feature was likely used in the <span style="color: #0000BB;">base</span> package.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>   Please report the issue to the authors.</span>
 <span class="r-in"><span><span class="va">layouts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">graphs</span>, <span class="va">layout_with_kk</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">lay</span> <span class="op">&lt;-</span> <span class="fu">merge_coords</span><span class="op">(</span><span class="va">graphs</span>, <span class="va">layouts</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="disjoint_union.html">disjoint_union</a></span><span class="op">(</span><span class="va">graphs</span><span class="op">)</span></span></span>

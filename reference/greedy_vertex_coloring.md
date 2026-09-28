@@ -6,7 +6,11 @@ based on a simple greedy algorithm.
 ## Usage
 
 ``` r
-greedy_vertex_coloring(graph, heuristic = c("colored_neighbors", "dsatur"))
+greedy_vertex_coloring(
+  graph,
+  ...,
+  heuristic = c("colored_neighbors", "dsatur")
+)
 ```
 
 ## Arguments
@@ -14,6 +18,10 @@ greedy_vertex_coloring(graph, heuristic = c("colored_neighbors", "dsatur"))
 - graph:
 
   The graph object to color.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - heuristic:
 

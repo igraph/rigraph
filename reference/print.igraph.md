@@ -9,13 +9,13 @@ readable form.
 # S3 method for class 'igraph'
 print(
   x,
-  full = igraph_opt("print.full"),
-  graph.attributes = igraph_opt("print.graph.attributes"),
-  vertex.attributes = igraph_opt("print.vertex.attributes"),
-  edge.attributes = igraph_opt("print.edge.attributes"),
+  full = NULL,
+  graph.attributes = NULL,
+  vertex.attributes = NULL,
+  edge.attributes = NULL,
   names = TRUE,
-  max.lines = igraph_opt("auto.print.lines"),
-  id = igraph_opt("print.id"),
+  max.lines = NULL,
+  id = NULL,
   ...
 )
 
@@ -31,33 +31,39 @@ summary(object, ...)
 
 - full:
 
-  Logical scalar, whether to print the graph structure itself as well.
+  Logical, whether to print the graph structure itself as well. The
+  default `NULL` uses the `print.full` igraph option.
 
 - graph.attributes:
 
-  Logical constant, whether to print graph attributes.
+  Logical, whether to print graph attributes. The default `NULL` uses
+  the `print.graph.attributes` igraph option.
 
 - vertex.attributes:
 
-  Logical constant, whether to print vertex attributes.
+  Logical, whether to print vertex attributes. The default `NULL` uses
+  the `print.vertex.attributes` igraph option.
 
 - edge.attributes:
 
-  Logical constant, whether to print edge attributes.
+  Logical, whether to print edge attributes. The default `NULL` uses the
+  `print.edge.attributes` igraph option.
 
 - names:
 
-  Logical constant, whether to print symbolic vertex names (i.e. the
-  `name` vertex attribute) or vertex ids.
+  Logical, whether to print symbolic vertex names (i.e. the `name`
+  vertex attribute) or vertex IDs.
 
 - max.lines:
 
   The maximum number of lines to use. The rest of the output will be
-  truncated.
+  truncated. If not given, the `auto.print.lines` igraph option applies;
+  `NULL` prints all lines.
 
 - id:
 
-  Whether to print the graph ID.
+  Whether to print the graph ID. The default `NULL` uses the `print.id`
+  igraph option.
 
 - ...:
 
@@ -82,7 +88,7 @@ optionally graph, vertex and/or edge attributes.
 `print.igraph()` behaves either as `summary.igraph` or `print_all()`
 depending on the `full` argument. See also the ‘print.full’ igraph
 option and
-[`igraph_opt()`](https://r.igraph.org/reference/igraph_options.md).
+[`igraph_opt()`](https://r.igraph.org/reference/igraph_opt.md).
 
 The graph summary printed by `summary.igraph` (and `print.igraph()` and
 `print_all()`) consists of one or more lines. The first line contains
@@ -96,7 +102,7 @@ named vertices:
 
 The first line always starts with `IGRAPH`, showing you that the object
 is an igraph graph. Then a seven character code is printed, this the
-first seven characters of the unique id of the graph. See
+first seven characters of the unique ID of the graph. See
 [`graph_id()`](https://r.igraph.org/reference/graph_id.md) for more.
 Then a four letter long code string is printed. The first letter
 distinguishes between directed (‘`D`’) and undirected (‘`U`’) graphs.
@@ -124,6 +130,12 @@ details.
 As of igraph 1.1.1, the `str.igraph` function is defunct, use
 `print_all()`.
 
+Output style is controlled by the `print.style` igraph option. The
+default `"cli"` produces cli-styled output with section rules, typed
+attribute listings and Unicode arrows for edges. Set
+`igraph_options(print.style = "classic")` for the historical
+`IGRAPH ... DNW-` header relied on by parsers and tutorials.
+
 ## Related documentation in the C library
 
 [`degree()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_degree),
@@ -143,11 +155,21 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 g <- make_ring(10)
 g
-#> IGRAPH b2c622b U--- 10 10 -- Ring graph
-#> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from b2c622b:
-#>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 529a369 ──
+#> ℹ undirected
+#> ℹ 10 vertices · 10 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#>  [1] 1 ─ 2   2 ─ 3   3 ─ 4   4 ─ 5   5 ─ 6   6 ─ 7   7 ─ 8   8 ─ 9   9 ─ 10 
+#> [10] 1 ─ 10 
 summary(g)
-#> IGRAPH b2c622b U--- 10 10 -- Ring graph
-#> + attr: name (g/c), mutual (g/l), circular (g/l)
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 529a369 ──
+#> ℹ undirected
+#> ℹ 10 vertices · 10 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
 ```

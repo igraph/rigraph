@@ -6,7 +6,7 @@ summary of graph centralization.
 ## Usage
 
 ``` r
-centr_betw_tmax(graph = NULL, nodes = 0, directed = TRUE)
+centr_betw_tmax(graph = NULL, nodes = 0, ..., directed = TRUE)
 ```
 
 ## Arguments
@@ -20,9 +20,13 @@ centr_betw_tmax(graph = NULL, nodes = 0, directed = TRUE)
 
   The number of vertices. This is ignored if the graph is given.
 
+- ...:
+
+  These dots are for future extensions and must be empty.
+
 - directed:
 
-  Logical scalar, whether to use directed shortest paths for calculating
+  Logical, whether to use directed shortest paths for calculating
   betweenness. Ignored if an undirected graph was given.
 
 ## Value

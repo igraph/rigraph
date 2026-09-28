@@ -28,12 +28,12 @@ shortest.paths(
 - v:
 
   Numeric vector, the vertices from which the shortest paths will be
-  calculated.
+  calculated. The default `NULL` selects all vertices.
 
 - to:
 
   Numeric vector, the vertices to which the shortest paths will be
-  calculated. By default it includes all vertices. Note that for
+  calculated. The default `NULL` includes all vertices. Note that for
   [`distances()`](https://r.igraph.org/reference/distances.md) every
   vertex must be included here at most once. (This is not required for
   [`shortest_paths()`](https://r.igraph.org/reference/distances.md).

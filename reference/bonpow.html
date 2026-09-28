@@ -17,7 +17,7 @@ consistent API."><meta property="og:image" content="https://r.igraph.org/logo.pn
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9039</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +49,7 @@ consistent API."><meta property="og:image" content="https://r.igraph.org/logo.pn
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Find Bonacich Power Centrality Scores of Network Positions</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/centrality.R" class="external-link"><code>R/centrality.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/centrality.R" class="external-link"><code>R/centrality.R</code></a></small>
       <div class="d-none name"><code>bonpow.Rd</code></div>
     </div>
 
@@ -82,11 +82,11 @@ consistent API.</p>
 
 <dt id="arg-nodes">nodes<a class="anchor" aria-label="anchor" href="#arg-nodes"></a></dt>
 <dd><p>vertex sequence indicating which vertices are to be included in
-the calculation.  By default, all vertices are included.</p></dd>
+the calculation. The default <code>NULL</code> selects all vertices.</p></dd>
 
 
 <dt id="arg-loops">loops<a class="anchor" aria-label="anchor" href="#arg-loops"></a></dt>
-<dd><p>boolean indicating whether or not the diagonal should be
+<dd><p>Logical indicating whether or not the diagonal should be
 treated as valid data.  Set this true if and only if the data can contain
 loops.  <code>loops</code> is <code>FALSE</code> by default.</p></dd>
 
@@ -103,18 +103,18 @@ score; can be negative</p></dd>
 
 <dt id="arg-tol">tol<a class="anchor" aria-label="anchor" href="#arg-tol"></a></dt>
 <dd><p>tolerance for near-singularities during matrix inversion (see
-<code><a href="https://rdrr.io/pkg/Matrix/man/solve-methods.html" class="external-link">solve()</a></code>)</p></dd>
+<code><a href="https://rdrr.io/pkg/Matrix/man/solve-methods.html" class="external-link">Matrix::solve()</a></code>)</p></dd>
 
 
 <dt id="arg-sparse">sparse<a class="anchor" aria-label="anchor" href="#arg-sparse"></a></dt>
-<dd><p>Logical scalar, whether to use sparse matrices for the
+<dd><p>Logical, whether to use sparse matrices for the
 calculation. The ‘Matrix’ package is required for sparse matrix
 support</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
-    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount" class="external-link"><code>vcount()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify" class="external-link"><code>simplify()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_degree" class="external-link"><code>degree()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency" class="external-link"><code>get_adjacency()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency_sparse" class="external-link"><code>get_adjacency_sparse()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges" class="external-link"><code>edges()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids" class="external-link"><code>get_eids()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount" class="external-link"><code>ecount()</code></a></p>
+    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount" class="external-link"><code>vcount()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify" class="external-link"><code>simplify()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency" class="external-link"><code>get_adjacency()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency_sparse" class="external-link"><code>get_adjacency_sparse()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges" class="external-link"><code>edges()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids" class="external-link"><code>get_eids()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount" class="external-link"><code>ecount()</code></a></p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

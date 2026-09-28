@@ -15,7 +15,7 @@ subgraphs."><meta property="og:image" content="https://r.igraph.org/logo.png"></
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9039</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ subgraphs."><meta property="og:image" content="https://r.igraph.org/logo.png"></
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Modularity of a community structure of a graph</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/community.R" class="external-link"><code>R/community.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/community.R" class="external-link"><code>R/community.R</code></a></small>
       <div class="d-none name"><code>modularity.igraph.Rd</code></div>
     </div>
 
@@ -64,6 +64,7 @@ subgraphs.</p>
 <span><span class="fu">modularity_matrix</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
 <span>  membership <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  resolution <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  directed <span class="op">=</span> <span class="cn">TRUE</span></span>
@@ -84,7 +85,7 @@ vector of the community structure.</p></dd>
 
 
 <dt id="arg-weights">weights<a class="anchor" aria-label="anchor" href="#arg-weights"></a></dt>
-<dd><p>If not <code>NULL</code> then a numeric vector giving edge weights.</p></dd>
+<dd><p>Numeric vector giving edge weights. Default: <code>NULL</code>.</p></dd>
 
 
 <dt id="arg-resolution">resolution<a class="anchor" aria-label="anchor" href="#arg-resolution"></a></dt>
@@ -98,7 +99,9 @@ modularity. Ignored for undirected graphs.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional arguments, none currently.</p></dd>
+<dd><p>For <code>modularity_matrix()</code>, these dots must be empty. For
+<code>modularity()</code>, unused, present for S3 method consistency but may be
+used by other methods that implement it.</p></dd>
 
 </dl></div>
     <div class="section level2">

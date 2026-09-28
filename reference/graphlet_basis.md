@@ -11,17 +11,11 @@ basis.
 ## Usage
 
 ``` r
-graphlet_basis(graph, weights = NULL)
+graphlet_basis(graph, ..., weights = NULL)
 
-graphlet_proj(
-  graph,
-  weights = NULL,
-  cliques,
-  niter = 1000,
-  Mu = rep(1, length(cliques))
-)
+graphlet_proj(graph, ..., weights = NULL, cliques, niter = 1000, Mu = NULL)
 
-graphlets(graph, weights = NULL, niter = 1000)
+graphlets(graph, ..., weights = NULL, niter = 1000)
 ```
 
 ## Arguments
@@ -31,6 +25,10 @@ graphlets(graph, weights = NULL, niter = 1000)
   The input graph, edge directions are ignored. Only simple graph (i.e.
   graphs without self-loops and multiple edges) are supported.
 
+- ...:
+
+  These dots are for future extensions and must be empty.
+
 - weights:
 
   Edge weights. If the graph has a `weight` edge attribute and this
@@ -39,7 +37,7 @@ graphlets(graph, weights = NULL, niter = 1000)
 
 - cliques:
 
-  A list of vertex ids, the graphlet basis to use for the projection.
+  A list of vertex IDs, the graphlet basis to use for the projection.
 
 - niter:
 
@@ -47,7 +45,8 @@ graphlets(graph, weights = NULL, niter = 1000)
 
 - Mu:
 
-  Starting weights for the projection.
+  Starting weights for the projection. The default `NULL` uses a weight
+  of one for each clique.
 
 ## Value
 
@@ -56,7 +55,7 @@ graphlets(graph, weights = NULL, niter = 1000)
 - cliques:
 
   A list of subgraphs, the candidate graphlet basis. Each subgraph is
-  give by a vector of vertex ids.
+  give by a vector of vertex IDs.
 
 - Mu:
 
@@ -67,7 +66,7 @@ graphlets(graph, weights = NULL, niter = 1000)
 - cliques:
 
   A list of subgraphs, the candidate graphlet basis. Each subgraph is
-  give by a vector of vertex ids.
+  give by a vector of vertex IDs.
 
 - thresholds:
 
@@ -123,7 +122,7 @@ plot(g, layout = co)
 gl <- graphlets(g, niter = 1000)
 
 ## Plot graphlets
-for (i in 1:length(gl$cliques)) {
+for (i in seq_along(gl$cliques)) {
   sel <- gl$cliques[[i]]
   V(g)$color <- "white"
   V(g)[sel]$color <- "#E495A5"

@@ -8,11 +8,12 @@ Spectral decomposition of Laplacian matrices of graphs.
 embed_laplacian_matrix(
   graph,
   no,
+  ...,
   weights = NULL,
   which = c("lm", "la", "sa"),
   type = c("default", "D-A", "DAD", "I-DAD", "OAP"),
   scaled = TRUE,
-  options = arpack_defaults()
+  options = NULL
 )
 ```
 
@@ -28,6 +29,10 @@ embed_laplacian_matrix(
   spectral embedding. Should be smaller than the number of vertices. The
   largest `no`-dimensional non-zero singular values are used for the
   spectral embedding.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - weights:
 
@@ -68,14 +73,13 @@ embed_laplacian_matrix(
 
 - scaled:
 
-  Logical scalar, if `FALSE`, then \\U\\ and \\V\\ are returned instead
-  of \\X\\ and \\Y\\.
+  Logical, if `FALSE`, then \\U\\ and \\V\\ are returned instead of
+  \\X\\ and \\Y\\.
 
 - options:
 
   A named list containing the parameters for the SVD computation
-  algorithm in ARPACK. By default, the list of values is assigned the
-  values given by
+  algorithm in ARPACK. The default `NULL` uses the values given by
   [`arpack_defaults()`](https://r.igraph.org/reference/arpack.md).
 
 ## Value

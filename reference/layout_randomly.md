@@ -6,9 +6,7 @@ or three dimensions.
 ## Usage
 
 ``` r
-layout_randomly(graph, dim = c(2, 3))
-
-randomly(...)
+layout_randomly(graph, ..., dim = c(2, 3))
 ```
 
 ## Arguments
@@ -17,13 +15,13 @@ randomly(...)
 
   The input graph.
 
+- ...:
+
+  These dots are for future extensions and must be empty.
+
 - dim:
 
   Integer scalar, the dimension of the space to use. It must be 2 or 3.
-
-- ...:
-
-  Parameters to pass to `layout_randomly()`.
 
 ## Value
 
@@ -37,10 +35,14 @@ for other layout generators.
 
 ## Related documentation in the C library
 
-[`layout_random()`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_random),
-[`layout_random_3d()`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_random_3d)
+[`layout_random_3d()`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_random_3d),
+[`layout_random()`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_random)
 
 ## See also
+
+[`randomly()`](https://r.igraph.org/reference/layout_spec.md) to build a
+lazy layout specification for
+[`add_layout_()`](https://r.igraph.org/reference/add_layout_.md).
 
 Other graph layouts:
 [`add_layout_()`](https://r.igraph.org/reference/add_layout_.md),

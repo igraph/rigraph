@@ -5,7 +5,7 @@ Calculates the reciprocity of a directed graph.
 ## Usage
 
 ``` r
-reciprocity(graph, ignore.loops = TRUE, mode = c("default", "ratio"))
+reciprocity(graph, ..., ignore.loops = TRUE, mode = c("default", "ratio"))
 ```
 
 ## Arguments
@@ -14,9 +14,13 @@ reciprocity(graph, ignore.loops = TRUE, mode = c("default", "ratio"))
 
   The graph object.
 
+- ...:
+
+  These dots are for future extensions and must be empty.
+
 - ignore.loops:
 
-  Logical constant, whether to ignore loop edges.
+  Logical, whether to ignore loop edges.
 
 - mode:
 
@@ -86,5 +90,5 @@ Tamas Nepusz <ntamas@gmail.com> and Gabor Csardi
 
 g <- sample_gnp(20, 5 / 20, directed = TRUE)
 reciprocity(g)
-#> [1] 0.25
+#> [1] 0.3870968
 ```

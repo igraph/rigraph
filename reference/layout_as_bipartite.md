@@ -6,9 +6,14 @@ bipartite graphs.
 ## Usage
 
 ``` r
-layout_as_bipartite(graph, types = NULL, hgap = 1, vgap = 1, maxiter = 100)
-
-as_bipartite(...)
+layout_as_bipartite(
+  graph,
+  types = NULL,
+  ...,
+  hgap = 1,
+  vgap = 1,
+  maxiter = 100
+)
 ```
 
 ## Arguments
@@ -22,6 +27,10 @@ as_bipartite(...)
 
   A logical vector, the vertex types. If this argument is `NULL` (the
   default), then the ‘`type`’ vertex attribute is used.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - hgap:
 
@@ -37,10 +46,6 @@ as_bipartite(...)
   Integer scalar, the maximum number of iterations in the crossing
   minimization stage. 100 is a reasonable default; if you feel that you
   have too many edge crossings, increase this.
-
-- ...:
-
-  Arguments to pass to `layout_as_bipartite()`.
 
 ## Value
 
@@ -61,7 +66,10 @@ optimized to minimize edge crossings, using the Sugiyama algorithm (see
 
 ## See also
 
-[`layout_with_sugiyama()`](https://r.igraph.org/reference/layout_with_sugiyama.md)
+[`layout_with_sugiyama()`](https://r.igraph.org/reference/layout_with_sugiyama.md).
+See [`as_bipartite()`](https://r.igraph.org/reference/layout_spec.md) to
+build a lazy layout specification for
+[`add_layout_()`](https://r.igraph.org/reference/add_layout_.md).
 
 Other graph layouts:
 [`add_layout_()`](https://r.igraph.org/reference/add_layout_.md),

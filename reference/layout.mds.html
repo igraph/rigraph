@@ -17,7 +17,7 @@ consistent API."><meta property="og:image" content="https://r.igraph.org/logo.pn
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9039</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +49,7 @@ consistent API."><meta property="og:image" content="https://r.igraph.org/logo.pn
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Graph layout by multidimensional scaling</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/layout.R" class="external-link"><code>R/layout.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/layout.R" class="external-link"><code>R/layout.R</code></a></small>
       <div class="d-none name"><code>layout.mds.Rd</code></div>
     </div>
 
@@ -85,8 +85,9 @@ only possible value is 2. This is because <code><a href="merge_coords.html">merg
 
 
 <dt id="arg-options">options<a class="anchor" aria-label="anchor" href="#arg-options"></a></dt>
-<dd><p>This is currently ignored, as ARPACK is not used any more for
-solving the eigenproblem</p></dd>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> This argument is not
+supported from igraph version 1.6.0, as ARPACK is not used any more for
+solving the eigenproblem. Supplying it raises an error.</p></dd>
 
 </dl></div>
     <div class="section level2">

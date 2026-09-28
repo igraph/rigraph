@@ -8,6 +8,7 @@ an incidence matrix.
 ``` r
 graph_from_biadjacency_matrix(
   incidence,
+  ...,
   directed = FALSE,
   mode = c("all", "out", "in", "total"),
   multiple = FALSE,
@@ -23,9 +24,13 @@ graph_from_biadjacency_matrix(
   The input bipartite adjacency matrix. It can also be a sparse matrix
   from the `Matrix` package.
 
+- ...:
+
+  These dots are for future extensions and must be empty.
+
 - directed:
 
-  Logical scalar, whether to create a directed graph.
+  Logical, whether to create a directed graph.
 
 - mode:
 
@@ -38,8 +43,8 @@ graph_from_biadjacency_matrix(
 
 - multiple:
 
-  Logical scalar, specifies how to interpret the matrix elements. See
-  details below.
+  Logical, specifies how to interpret the matrix elements. See details
+  below.
 
 - weighted:
 
@@ -93,6 +98,7 @@ avoid confusion with the edge-vertex incidence matrix.
 [`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
 [`famous()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
 [`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
+[`is_simple()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple),
 [`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
 [`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
 [`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
@@ -117,8 +123,13 @@ inc <- matrix(sample(0:1, 15, repl = TRUE), 3, 5)
 colnames(inc) <- letters[1:5]
 rownames(inc) <- LETTERS[1:3]
 graph_from_biadjacency_matrix(inc)
-#> IGRAPH eb64f51 UN-B 8 5 -- 
-#> + attr: type (v/l), name (v/c)
-#> + edges from eb64f51 (vertex names):
-#> [1] A--d A--e B--a C--a C--d
+#> ── <igraph> ───────────────────────────────────────────────────────── 309fcd7 ──
+#> ℹ undirected · named · bipartite
+#> ℹ 8 vertices · 5 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → vertex: type <lgl>, name <chr>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#> [1] A ─ d  A ─ e  B ─ a  C ─ a  C ─ d 
 ```

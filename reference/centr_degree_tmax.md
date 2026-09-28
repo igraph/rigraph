@@ -32,8 +32,7 @@ centr_degree_tmax(
 
 - loops:
 
-  Logical scalar, whether to consider loops edges when calculating the
-  degree.
+  Logical, whether to consider loops edges when calculating the degree.
 
 ## Value
 

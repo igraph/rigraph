@@ -29,8 +29,9 @@ get.stochastic(
 
 - sparse:
 
-  Logical scalar, whether to return a sparse matrix. The `Matrix`
-  package is needed for sparse matrices.
+  Logical, whether to return a sparse matrix. The `Matrix` package is
+  needed for sparse matrices. The default `NULL` uses the
+  `sparsematrices` igraph option.
 
 ## Related documentation in the C library
 

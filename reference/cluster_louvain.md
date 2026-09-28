@@ -7,7 +7,7 @@ based on the modularity measure and a hierarchical approach.
 ## Usage
 
 ``` r
-cluster_louvain(graph, weights = NULL, resolution = 1)
+cluster_louvain(graph, ..., weights = NULL, resolution = 1)
 ```
 
 ## Arguments
@@ -15,6 +15,10 @@ cluster_louvain(graph, weights = NULL, resolution = 1)
 - graph:
 
   The input graph. It must be undirected.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - weights:
 

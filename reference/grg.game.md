@@ -24,11 +24,11 @@ grg.game(nodes, radius, torus = FALSE, coords = FALSE)
 
 - torus:
 
-  Logical constant, whether to use a torus instead of a square.
+  Logical, whether to use a torus instead of a square.
 
 - coords:
 
-  Logical scalar, whether to add the positions of the vertices as vertex
+  Logical, whether to add the positions of the vertices as vertex
   attributes called ‘`x`’ and ‘`y`’.
 
 ## Related documentation in the C library

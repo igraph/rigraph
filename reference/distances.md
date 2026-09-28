@@ -8,10 +8,11 @@ vertex.
 ## Usage
 
 ``` r
-distance_table(graph, directed = TRUE)
+distance_table(graph, ..., directed = TRUE)
 
 mean_distance(
   graph,
+  ...,
   weights = NULL,
   directed = TRUE,
   unconnected = TRUE,
@@ -20,8 +21,9 @@ mean_distance(
 
 distances(
   graph,
-  v = V(graph),
-  to = V(graph),
+  v = NULL,
+  to = NULL,
+  ...,
   mode = c("all", "out", "in"),
   weights = NULL,
   algorithm = c("automatic", "unweighted", "dijkstra", "bellman-ford", "johnson",
@@ -31,7 +33,8 @@ distances(
 shortest_paths(
   graph,
   from,
-  to = V(graph),
+  to = NULL,
+  ...,
   mode = c("out", "all", "in"),
   weights = NULL,
   output = c("vpath", "epath", "both"),
@@ -43,7 +46,8 @@ shortest_paths(
 all_shortest_paths(
   graph,
   from,
-  to = V(graph),
+  to = NULL,
+  ...,
   mode = c("out", "all", "in"),
   weights = NULL
 )
@@ -54,6 +58,10 @@ all_shortest_paths(
 - graph:
 
   The graph to work on.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - directed:
 
@@ -86,12 +94,12 @@ all_shortest_paths(
 - v:
 
   Numeric vector, the vertices from which the shortest paths will be
-  calculated.
+  calculated. The default `NULL` selects all vertices.
 
 - to:
 
   Numeric vector, the vertices to which the shortest paths will be
-  calculated. By default it includes all vertices. Note that for
+  calculated. The default `NULL` includes all vertices. Note that for
   `distances()` every vertex must be included here at most once. (This
   is not required for `shortest_paths()`.
 
@@ -120,7 +128,7 @@ all_shortest_paths(
 - from:
 
   Numeric constant, the vertex from or to the shortest paths will be
-  calculated. Note that right now this is not a vector of vertex ids,
+  calculated. Note that right now this is not a vector of vertex IDs,
   but only a single vertex.
 
 - output:
@@ -133,22 +141,22 @@ all_shortest_paths(
 
 - predecessors:
 
-  Logical scalar, whether to return the predecessor vertex for each
-  vertex. The predecessor of vertex `i` in the tree is the vertex from
-  which vertex `i` was reached. The predecessor of the start vertex (in
-  the `from` argument) is itself by definition. If the predecessor is
-  zero, it means that the given vertex was not reached from the source
-  during the search. Note that the search terminates if all the vertices
-  in `to` are reached.
+  Logical, whether to return the predecessor vertex for each vertex. The
+  predecessor of vertex `i` in the tree is the vertex from which vertex
+  `i` was reached. The predecessor of the start vertex (in the `from`
+  argument) is itself by definition. If the predecessor is zero, it
+  means that the given vertex was not reached from the source during the
+  search. Note that the search terminates if all the vertices in `to`
+  are reached.
 
 - inbound.edges:
 
-  Logical scalar, whether to return the inbound edge for each vertex.
-  The inbound edge of vertex `i` in the tree is the edge via which
-  vertex `i` was reached. The start vertex and vertices that were not
-  reached during the search will have zero in the corresponding entry of
-  the vector. Note that the search terminates if all the vertices in
-  `to` are reached.
+  Logical, whether to return the inbound edge for each vertex. The
+  inbound edge of vertex `i` in the tree is the edge via which vertex
+  `i` was reached. The start vertex and vertices that were not reached
+  during the search will have zero in the corresponding entry of the
+  vector. Note that the search terminates if all the vertices in `to`
+  are reached.
 
 ## Value
 
@@ -161,7 +169,7 @@ For `shortest_paths()` a named list with four entries is returned:
 - vpath:
 
   This itself is a list, of length `length(to)`; list element `i`
-  contains the vertex ids on the path from vertex `from` to vertex
+  contains the vertex IDs on the path from vertex `from` to vertex
   `to[i]` (or the other way for directed graphs depending on the `mode`
   argument). The vector also contains `from` and `i` as the first and
   last elements. If `from` is the same as `i` then it is only included
@@ -172,7 +180,7 @@ For `shortest_paths()` a named list with four entries is returned:
 - epath:
 
   This is a list similar to `vpath`, but the vectors of the list contain
-  the edge ids along the shortest paths, instead of the vertex ids. This
+  the edge IDs along the shortest paths, instead of the vertex IDs. This
   entry is set to `NULL` if it is not requested in the `output`
   argument.
 
@@ -197,7 +205,7 @@ For `all_shortest_paths()` a list is returned:
 - epaths:
 
   This is a list similar to vpaths, but the vectors of the list contain
-  the edge ids along the shortest paths, instead of the vertex ids.
+  the edge IDs along the shortest paths, instead of the vertex IDs.
 
 - nrgeo:
 
@@ -296,8 +304,8 @@ the histogram.
 [`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
 [`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
 [`is_directed()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed),
-[`get_all_shortest_paths()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_all_shortest_paths),
-[`get_all_shortest_paths_dijkstra()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_all_shortest_paths_dijkstra)
+[`get_all_shortest_paths_dijkstra()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_all_shortest_paths_dijkstra),
+[`get_all_shortest_paths()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_all_shortest_paths)
 
 ## References
 
@@ -363,43 +371,43 @@ distances(g)
 shortest_paths(g, 5)
 #> $vpath
 #> $vpath[[1]]
-#> + 5/10 vertices, from 65c53ee:
+#> ── <vertex sequence> 5/10 · from a2a1dcc ───────────────────────────────────────
 #> [1] 5 4 3 2 1
 #> 
 #> $vpath[[2]]
-#> + 4/10 vertices, from 65c53ee:
+#> ── <vertex sequence> 4/10 · from a2a1dcc ───────────────────────────────────────
 #> [1] 5 4 3 2
 #> 
 #> $vpath[[3]]
-#> + 3/10 vertices, from 65c53ee:
+#> ── <vertex sequence> 3/10 · from a2a1dcc ───────────────────────────────────────
 #> [1] 5 4 3
 #> 
 #> $vpath[[4]]
-#> + 2/10 vertices, from 65c53ee:
+#> ── <vertex sequence> 2/10 · from a2a1dcc ───────────────────────────────────────
 #> [1] 5 4
 #> 
 #> $vpath[[5]]
-#> + 1/10 vertex, from 65c53ee:
+#> ── <vertex sequence> 1/10 · from a2a1dcc ───────────────────────────────────────
 #> [1] 5
 #> 
 #> $vpath[[6]]
-#> + 2/10 vertices, from 65c53ee:
+#> ── <vertex sequence> 2/10 · from a2a1dcc ───────────────────────────────────────
 #> [1] 5 6
 #> 
 #> $vpath[[7]]
-#> + 3/10 vertices, from 65c53ee:
+#> ── <vertex sequence> 3/10 · from a2a1dcc ───────────────────────────────────────
 #> [1] 5 6 7
 #> 
 #> $vpath[[8]]
-#> + 4/10 vertices, from 65c53ee:
+#> ── <vertex sequence> 4/10 · from a2a1dcc ───────────────────────────────────────
 #> [1] 5 6 7 8
 #> 
 #> $vpath[[9]]
-#> + 5/10 vertices, from 65c53ee:
+#> ── <vertex sequence> 5/10 · from a2a1dcc ───────────────────────────────────────
 #> [1] 5 6 7 8 9
 #> 
 #> $vpath[[10]]
-#> + 6/10 vertices, from 65c53ee:
+#> ── <vertex sequence> 6/10 · from a2a1dcc ───────────────────────────────────────
 #> [1]  5  4  3  2  1 10
 #> 
 #> 
@@ -415,38 +423,38 @@ shortest_paths(g, 5)
 all_shortest_paths(g, 1, 6:8)
 #> $vpaths
 #> $vpaths[[1]]
-#> + 6/10 vertices, from 65c53ee:
+#> ── <vertex sequence> 6/10 · from a2a1dcc ───────────────────────────────────────
 #> [1]  1 10  9  8  7  6
 #> 
 #> $vpaths[[2]]
-#> + 6/10 vertices, from 65c53ee:
+#> ── <vertex sequence> 6/10 · from a2a1dcc ───────────────────────────────────────
 #> [1] 1 2 3 4 5 6
 #> 
 #> $vpaths[[3]]
-#> + 5/10 vertices, from 65c53ee:
+#> ── <vertex sequence> 5/10 · from a2a1dcc ───────────────────────────────────────
 #> [1]  1 10  9  8  7
 #> 
 #> $vpaths[[4]]
-#> + 4/10 vertices, from 65c53ee:
+#> ── <vertex sequence> 4/10 · from a2a1dcc ───────────────────────────────────────
 #> [1]  1 10  9  8
 #> 
 #> 
 #> $epaths
 #> $epaths[[1]]
-#> + 5/10 edges from 65c53ee:
-#> [1] 1--10 9--10 8-- 9 7-- 8 6-- 7
+#> ── <edge sequence> 5/10 · from a2a1dcc ─────────────────────────────────────────
+#> [1] 1 ─ 10  9 ─ 10  8 ─ 9   7 ─ 8   6 ─ 7  
 #> 
 #> $epaths[[2]]
-#> + 5/10 edges from 65c53ee:
-#> [1] 1--2 2--3 3--4 4--5 5--6
+#> ── <edge sequence> 5/10 · from a2a1dcc ─────────────────────────────────────────
+#> [1] 1 ─ 2  2 ─ 3  3 ─ 4  4 ─ 5  5 ─ 6 
 #> 
 #> $epaths[[3]]
-#> + 4/10 edges from 65c53ee:
-#> [1] 1--10 9--10 8-- 9 7-- 8
+#> ── <edge sequence> 4/10 · from a2a1dcc ─────────────────────────────────────────
+#> [1] 1 ─ 10  9 ─ 10  8 ─ 9   7 ─ 8  
 #> 
 #> $epaths[[4]]
-#> + 3/10 edges from 65c53ee:
-#> [1] 1--10 9--10 8-- 9
+#> ── <edge sequence> 3/10 · from a2a1dcc ─────────────────────────────────────────
+#> [1] 1 ─ 10  9 ─ 10  8 ─ 9  
 #> 
 #> 
 #> $nrgeo
@@ -454,19 +462,19 @@ all_shortest_paths(g, 1, 6:8)
 #> 
 #> $res
 #> $res[[1]]
-#> + 6/10 vertices, from 65c53ee:
+#> ── <vertex sequence> 6/10 · from a2a1dcc ───────────────────────────────────────
 #> [1]  1 10  9  8  7  6
 #> 
 #> $res[[2]]
-#> + 6/10 vertices, from 65c53ee:
+#> ── <vertex sequence> 6/10 · from a2a1dcc ───────────────────────────────────────
 #> [1] 1 2 3 4 5 6
 #> 
 #> $res[[3]]
-#> + 5/10 vertices, from 65c53ee:
+#> ── <vertex sequence> 5/10 · from a2a1dcc ───────────────────────────────────────
 #> [1]  1 10  9  8  7
 #> 
 #> $res[[4]]
-#> + 4/10 vertices, from 65c53ee:
+#> ── <vertex sequence> 4/10 · from a2a1dcc ───────────────────────────────────────
 #> [1]  1 10  9  8
 #> 
 #> 

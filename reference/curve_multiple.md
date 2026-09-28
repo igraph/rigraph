@@ -8,7 +8,7 @@ that all of them are visible.
 ## Usage
 
 ``` r
-curve_multiple(graph, start = 0.5)
+curve_multiple(graph, ..., start = 0.5)
 ```
 
 ## Arguments
@@ -16,6 +16,10 @@ curve_multiple(graph, start = 0.5)
 - graph:
 
   The input graph.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - start:
 

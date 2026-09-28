@@ -34,8 +34,9 @@ layout.mds(graph, dist = NULL, dim = 2, options = arpack_defaults())
 
 - options:
 
-  This is currently ignored, as ARPACK is not used any more for solving
-  the eigenproblem
+  **\[deprecated\]** This argument is not supported from igraph version
+  1.6.0, as ARPACK is not used any more for solving the eigenproblem.
+  Supplying it raises an error.
 
 ## Related documentation in the C library
 

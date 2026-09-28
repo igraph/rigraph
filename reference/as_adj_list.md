@@ -8,6 +8,7 @@ neighboring vertices
 ``` r
 as_adj_list(
   graph,
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = c("twice", "once", "ignore"),
   multiple = TRUE
@@ -15,6 +16,7 @@ as_adj_list(
 
 as_adj_edge_list(
   graph,
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = c("twice", "once", "ignore")
 )
@@ -25,6 +27,10 @@ as_adj_edge_list(
 - graph:
 
   The input graph.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - mode:
 
@@ -42,8 +48,8 @@ as_adj_edge_list(
 
 - multiple:
 
-  Logical scalar, set to `FALSE` to use only one representative of each
-  set of parallel edges.
+  Logical, set to `FALSE` to use only one representative of each set of
+  parallel edges.
 
 ## Value
 
@@ -53,11 +59,11 @@ characteristics.
 
 ## Details
 
-`as_adj_list()` returns a list of numeric vectors, which include the ids
+`as_adj_list()` returns a list of numeric vectors, which include the IDs
 of neighbor vertices (according to the `mode` argument) of all vertices.
 
 `as_adj_edge_list()` returns a list of numeric vectors, which include
-the ids of adjacent edges (according to the `mode` argument) of all
+the IDs of adjacent edges (according to the `mode` argument) of all
 vertices.
 
 If `igraph_opt("return.vs.es")` is true (default), the numeric vectors
@@ -100,84 +106,84 @@ Gabor Csardi <csardi.gabor@gmail.com>
 g <- make_ring(10)
 as_adj_list(g)
 #> [[1]]
-#> + 2/10 vertices, from 43944ec:
+#> ── <vertex sequence> 2/10 · from cd85006 ───────────────────────────────────────
 #> [1]  2 10
 #> 
 #> [[2]]
-#> + 2/10 vertices, from 43944ec:
+#> ── <vertex sequence> 2/10 · from cd85006 ───────────────────────────────────────
 #> [1] 1 3
 #> 
 #> [[3]]
-#> + 2/10 vertices, from 43944ec:
+#> ── <vertex sequence> 2/10 · from cd85006 ───────────────────────────────────────
 #> [1] 2 4
 #> 
 #> [[4]]
-#> + 2/10 vertices, from 43944ec:
+#> ── <vertex sequence> 2/10 · from cd85006 ───────────────────────────────────────
 #> [1] 3 5
 #> 
 #> [[5]]
-#> + 2/10 vertices, from 43944ec:
+#> ── <vertex sequence> 2/10 · from cd85006 ───────────────────────────────────────
 #> [1] 4 6
 #> 
 #> [[6]]
-#> + 2/10 vertices, from 43944ec:
+#> ── <vertex sequence> 2/10 · from cd85006 ───────────────────────────────────────
 #> [1] 5 7
 #> 
 #> [[7]]
-#> + 2/10 vertices, from 43944ec:
+#> ── <vertex sequence> 2/10 · from cd85006 ───────────────────────────────────────
 #> [1] 6 8
 #> 
 #> [[8]]
-#> + 2/10 vertices, from 43944ec:
+#> ── <vertex sequence> 2/10 · from cd85006 ───────────────────────────────────────
 #> [1] 7 9
 #> 
 #> [[9]]
-#> + 2/10 vertices, from 43944ec:
+#> ── <vertex sequence> 2/10 · from cd85006 ───────────────────────────────────────
 #> [1]  8 10
 #> 
 #> [[10]]
-#> + 2/10 vertices, from 43944ec:
+#> ── <vertex sequence> 2/10 · from cd85006 ───────────────────────────────────────
 #> [1] 1 9
 #> 
 as_adj_edge_list(g)
 #> [[1]]
-#> + 2/10 edges from 43944ec:
-#> [1] 1-- 2 1--10
+#> ── <edge sequence> 2/10 · from cd85006 ─────────────────────────────────────────
+#> [1] 1 ─ 2   1 ─ 10 
 #> 
 #> [[2]]
-#> + 2/10 edges from 43944ec:
-#> [1] 1--2 2--3
+#> ── <edge sequence> 2/10 · from cd85006 ─────────────────────────────────────────
+#> [1] 1 ─ 2  2 ─ 3 
 #> 
 #> [[3]]
-#> + 2/10 edges from 43944ec:
-#> [1] 2--3 3--4
+#> ── <edge sequence> 2/10 · from cd85006 ─────────────────────────────────────────
+#> [1] 2 ─ 3  3 ─ 4 
 #> 
 #> [[4]]
-#> + 2/10 edges from 43944ec:
-#> [1] 3--4 4--5
+#> ── <edge sequence> 2/10 · from cd85006 ─────────────────────────────────────────
+#> [1] 3 ─ 4  4 ─ 5 
 #> 
 #> [[5]]
-#> + 2/10 edges from 43944ec:
-#> [1] 4--5 5--6
+#> ── <edge sequence> 2/10 · from cd85006 ─────────────────────────────────────────
+#> [1] 4 ─ 5  5 ─ 6 
 #> 
 #> [[6]]
-#> + 2/10 edges from 43944ec:
-#> [1] 5--6 6--7
+#> ── <edge sequence> 2/10 · from cd85006 ─────────────────────────────────────────
+#> [1] 5 ─ 6  6 ─ 7 
 #> 
 #> [[7]]
-#> + 2/10 edges from 43944ec:
-#> [1] 6--7 7--8
+#> ── <edge sequence> 2/10 · from cd85006 ─────────────────────────────────────────
+#> [1] 6 ─ 7  7 ─ 8 
 #> 
 #> [[8]]
-#> + 2/10 edges from 43944ec:
-#> [1] 7--8 8--9
+#> ── <edge sequence> 2/10 · from cd85006 ─────────────────────────────────────────
+#> [1] 7 ─ 8  8 ─ 9 
 #> 
 #> [[9]]
-#> + 2/10 edges from 43944ec:
-#> [1] 8-- 9 9--10
+#> ── <edge sequence> 2/10 · from cd85006 ─────────────────────────────────────────
+#> [1] 8 ─ 9   9 ─ 10 
 #> 
 #> [[10]]
-#> + 2/10 edges from 43944ec:
-#> [1] 1--10 9--10
+#> ── <edge sequence> 2/10 · from cd85006 ─────────────────────────────────────────
+#> [1] 1 ─ 10  9 ─ 10 
 #> 
 ```

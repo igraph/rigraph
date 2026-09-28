@@ -33,7 +33,7 @@ Parallel Processing Systems, PARS Mitteilungen 11, 1-6, 1993."><meta property="o
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9039</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,7 +65,7 @@ Parallel Processing Systems, PARS Mitteilungen 11, 1-6, 1993."><meta property="o
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Create an extended chordal ring graph</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/make.R" class="external-link"><code>R/make.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/make.R" class="external-link"><code>R/make.R</code></a></small>
       <div class="d-none name"><code>make_chordal_ring.Rd</code></div>
     </div>
 
@@ -85,9 +85,9 @@ Parallel Processing Systems, PARS Mitteilungen 11, 1-6, 1993.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">make_chordal_ring</span><span class="op">(</span><span class="va">n</span>, <span class="va">w</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">make_chordal_ring</span><span class="op">(</span><span class="va">n</span>, <span class="va">w</span>, <span class="va">...</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">chordal_ring</span><span class="op">(</span><span class="va">n</span>, <span class="va">w</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">chordal_ring</span><span class="op">(</span><span class="va">n</span>, <span class="va">w</span>, <span class="va">...</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -103,8 +103,12 @@ Parallel Processing Systems, PARS Mitteilungen 11, 1-6, 1993.</p>
 details below.</p></dd>
 
 
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
+
+
 <dt id="arg-directed">directed<a class="anchor" aria-label="anchor" href="#arg-directed"></a></dt>
-<dd><p>Logical scalar, whether or not to create a directed graph.</p></dd>
+<dd><p>Logical, whether or not to create a directed graph.</p></dd>
 
 </dl></div>
     <div class="section level2">

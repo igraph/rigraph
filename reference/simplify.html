@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9039</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Simple graphs</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/simple.R" class="external-link"><code>R/simple.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/simple.R" class="external-link"><code>R/simple.R</code></a></small>
       <div class="d-none name"><code>simplify.Rd</code></div>
     </div>
 
@@ -59,7 +59,8 @@
 <span>  <span class="va">graph</span>,</span>
 <span>  remove.multiple <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  remove.loops <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  edge.attr.comb <span class="op">=</span> <span class="fu"><a href="igraph_options.html">igraph_opt</a></span><span class="op">(</span><span class="st">"edge.attr.comb"</span><span class="op">)</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  edge_attr_combine <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">is_simple</span><span class="op">(</span><span class="va">graph</span><span class="op">)</span></span>
@@ -84,16 +85,22 @@ removed.</p></dd>
 <dd><p>Logical, whether the loop edges are to be removed.</p></dd>
 
 
-<dt id="arg-edge-attr-comb">edge.attr.comb<a class="anchor" aria-label="anchor" href="#arg-edge-attr-comb"></a></dt>
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
+
+
+<dt id="arg-edge-attr-combine">edge_attr_combine<a class="anchor" aria-label="anchor" href="#arg-edge-attr-combine"></a></dt>
 <dd><p>Specifies what to do with edge attributes, if
 <code>remove.multiple=TRUE</code>. In this case many edges might be mapped to a
 single one in the new graph, and their attributes are combined. Please see
-<code><a href="igraph-attribute-combination.html">attribute.combination()</a></code> for details on this.</p></dd>
+<code><a href="igraph-attribute-combination.html">attribute.combination()</a></code> for details on this. The default <code>NULL</code> uses
+the <code>edge_attr_combine</code> igraph option.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>a new graph object with the edges deleted.</p>
+    <p>a graph object with the loop and/or multiple edges removed; the
+input graph is returned unchanged if it is already simple.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -104,7 +111,8 @@ it does not contain loop edges and multiple edges.</p>
 <p><code>is_simple()</code> checks whether a graph is simple.</p>
 <p><code>simplify()</code> removes the loop and/or multiple edges from a graph.  If
 both <code>remove.loops</code> and <code>remove.multiple</code> are <code>TRUE</code> the
-function returns a simple graph.</p>
+function returns a simple graph. If the graph is already simple, it is
+returned unchanged.</p>
 <p><code>simplify_and_colorize()</code> constructs a new, simple graph from a graph and
 also sets a <code>color</code> attribute on both the vertices and the edges.
 The colors of the vertices represent the number of self-loops that were

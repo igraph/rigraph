@@ -20,10 +20,10 @@ TODO
 
 ## Related documentation in the C library
 
-[`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
 [`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
 [`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
 [`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
 
 ## Examples
@@ -31,14 +31,17 @@ TODO
 ``` r
 ## These are equivalent
 graph_(cbind(1:5, 2:6), from_edgelist(directed = FALSE))
-#> Warning: `graph_()` was deprecated in igraph 2.1.0.
-#> ℹ Please use constructors directly, for instance graph_from_edgelist().
-#> ℹ graph_() will be removed in a future version of igraph.
-#> IGRAPH 7bc25bc U--- 6 5 -- 
-#> + edges from 7bc25bc:
-#> [1] 1--2 2--3 3--4 4--5 5--6
+#> ── <igraph> ───────────────────────────────────────────────────────── 3f47145 ──
+#> ℹ undirected
+#> ℹ 6 vertices · 5 edges
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#> [1] 1 ─ 2  2 ─ 3  3 ─ 4  4 ─ 5  5 ─ 6 
 graph_(cbind(1:5, 2:6), from_edgelist(), directed = FALSE)
-#> IGRAPH f7f0925 U--- 6 5 -- 
-#> + edges from f7f0925:
-#> [1] 1--2 2--3 3--4 4--5 5--6
+#> ── <igraph> ───────────────────────────────────────────────────────── 87e201c ──
+#> ℹ undirected
+#> ℹ 6 vertices · 5 edges
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#> [1] 1 ─ 2  2 ─ 3  3 ─ 4  4 ─ 5  5 ─ 6 
 ```

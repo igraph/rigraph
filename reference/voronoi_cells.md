@@ -64,7 +64,7 @@ A named list with two components:
 
 - membership:
 
-  numeric vector giving the cluster id to which each vertex belongs.
+  numeric vector giving the cluster ID to which each vertex belongs.
 
 - distances:
 

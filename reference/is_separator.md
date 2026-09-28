@@ -19,11 +19,11 @@ is_separator(graph, candidate)
 
 - candidate:
 
-  A numeric vector giving the vertex ids of the candidate separator.
+  A numeric vector giving the vertex IDs of the candidate separator.
 
 ## Value
 
-A logical scalar, whether the supplied vertex set is a (minimal) vertex
+A Logical, whether the supplied vertex set is a (minimal) vertex
 separator or not. lists all vertex separator of minimum size.
 
 ## Related documentation in the C library
@@ -51,11 +51,11 @@ Other flow:
 ring <- make_ring(4)
 min_st_separators(ring)
 #> [[1]]
-#> + 2/4 vertices, from 24621d8:
+#> ── <vertex sequence> 2/4 · from 5955d2b ────────────────────────────────────────
 #> [1] 2 4
 #> 
 #> [[2]]
-#> + 2/4 vertices, from 24621d8:
+#> ── <vertex sequence> 2/4 · from 5955d2b ────────────────────────────────────────
 #> [1] 1 3
 #> 
 is_separator(ring, 1)

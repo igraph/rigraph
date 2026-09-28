@@ -3,8 +3,8 @@
 **\[deprecated\]**
 
 `getIgraphOpt()` was renamed to
-[`igraph_opt()`](https://r.igraph.org/reference/igraph_options.md) to
-create a more consistent API.
+[`igraph_opt()`](https://r.igraph.org/reference/igraph_opt.md) to create
+a more consistent API.
 
 ## Usage
 

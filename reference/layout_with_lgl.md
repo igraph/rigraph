@@ -7,16 +7,15 @@ A layout generator for larger graphs.
 ``` r
 layout_with_lgl(
   graph,
+  ...,
   maxiter = 150,
-  maxdelta = vcount(graph),
-  area = vcount(graph)^2,
+  maxdelta = NULL,
+  area = NULL,
   coolexp = 1.5,
-  repulserad = area * vcount(graph),
-  cellsize = sqrt(sqrt(area)),
+  repulserad = NULL,
+  cellsize = NULL,
   root = NULL
 )
-
-with_lgl(...)
 ```
 
 ## Arguments
@@ -25,19 +24,23 @@ with_lgl(...)
 
   The input graph
 
+- ...:
+
+  These dots are for future extensions and must be empty.
+
 - maxiter:
 
   The maximum number of iterations to perform (150).
 
 - maxdelta:
 
-  The maximum change for a vertex during an iteration (the number of
-  vertices).
+  The maximum change for a vertex during an iteration. The default
+  `NULL` uses the number of vertices.
 
 - area:
 
-  The area of the surface on which the vertices are placed (square of
-  the number of vertices).
+  The area of the surface on which the vertices are placed. The default
+  `NULL` uses the square of the number of vertices.
 
 - coolexp:
 
@@ -45,23 +48,20 @@ with_lgl(...)
 
 - repulserad:
 
-  Cancellation radius for the repulsion (the `area` times the number of
-  vertices).
+  Cancellation radius for the repulsion. The default `NULL` uses the
+  `area` times the number of vertices.
 
 - cellsize:
 
   The size of the cells for the grid. When calculating the repulsion
   forces between vertices only vertices in the same or neighboring grid
-  cells are taken into account (the fourth root of the number of `area`.
+  cells are taken into account. The default `NULL` uses the square root
+  of the square root of the `area`.
 
 - root:
 
-  The id of the vertex to place at the middle of the layout. The default
+  The ID of the vertex to place at the middle of the layout. The default
   value is -1 which means that a random vertex is selected.
-
-- ...:
-
-  Passed to `layout_with_lgl()`.
 
 ## Value
 
@@ -78,6 +78,10 @@ layout generator of the Large Graph Layout software
 [`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
+
+[`with_lgl()`](https://r.igraph.org/reference/layout_spec.md) to build a
+lazy layout specification for
+[`add_layout_()`](https://r.igraph.org/reference/add_layout_.md).
 
 Other graph layouts:
 [`add_layout_()`](https://r.igraph.org/reference/add_layout_.md),

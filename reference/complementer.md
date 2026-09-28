@@ -6,7 +6,7 @@ input graph.
 ## Usage
 
 ``` r
-complementer(graph, loops = FALSE)
+complementer(graph, ..., loops = FALSE)
 ```
 
 ## Arguments
@@ -15,9 +15,13 @@ complementer(graph, loops = FALSE)
 
   The input graph, can be directed or undirected.
 
+- ...:
+
+  These dots are for future extensions and must be empty.
+
 - loops:
 
-  Logical constant, whether to generate loop edges.
+  Logical, whether to generate loop edges.
 
 ## Value
 
@@ -75,26 +79,37 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Complementer of a ring
 g <- make_ring(10)
 complementer(g)
-#> IGRAPH 85d5dcc U--- 10 35 -- Ring graph
-#> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from 85d5dcc:
-#>  [1] 1-- 9 1-- 8 1-- 7 1-- 6 1-- 5 1-- 4 1-- 3 2--10 2-- 9 2-- 8 2-- 7 2-- 6
-#> [13] 2-- 5 2-- 4 3--10 3-- 9 3-- 8 3-- 7 3-- 6 3-- 5 4--10 4-- 9 4-- 8 4-- 7
-#> [25] 4-- 6 5--10 5-- 9 5-- 8 5-- 7 6--10 6-- 9 6-- 8 7--10 7-- 9 8--10
+#> ── <igraph> Ring graph ────────────────────────────────────────────── e26db2b ──
+#> ℹ undirected
+#> ℹ 10 vertices · 35 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#>  [1] 1 ─ 9   1 ─ 8   1 ─ 7   1 ─ 6   1 ─ 5   1 ─ 4   1 ─ 3   2 ─ 10  2 ─ 9  
+#> [10] 2 ─ 8   2 ─ 7   2 ─ 6   2 ─ 5   2 ─ 4   3 ─ 10  3 ─ 9   3 ─ 8   3 ─ 7  
+#> [19] 3 ─ 6   3 ─ 5   4 ─ 10  4 ─ 9   4 ─ 8   4 ─ 7   4 ─ 6   5 ─ 10  5 ─ 9  
+#> [28] 5 ─ 8   5 ─ 7   6 ─ 10  6 ─ 9   6 ─ 8   7 ─ 10  7 ─ 9   8 ─ 10 
 
 ## A graph and its complementer give together the full graph
 g <- make_ring(10)
 gc <- complementer(g)
 gu <- union(g, gc)
 gu
-#> IGRAPH f2f74d8 U--- 10 45 -- 
-#> + attr: name_1 (g/c), name_2 (g/c), mutual_1 (g/l), mutual_2 (g/l),
-#> | circular_1 (g/l), circular_2 (g/l)
-#> + edges from f2f74d8:
-#>  [1] 9--10 8--10 8-- 9 7--10 7-- 9 7-- 8 6--10 6-- 9 6-- 8 6-- 7 5--10 5-- 9
-#> [13] 5-- 8 5-- 7 5-- 6 4--10 4-- 9 4-- 8 4-- 7 4-- 6 4-- 5 3--10 3-- 9 3-- 8
-#> [25] 3-- 7 3-- 6 3-- 5 3-- 4 2--10 2-- 9 2-- 8 2-- 7 2-- 6 2-- 5 2-- 4 2-- 3
-#> [37] 1--10 1-- 9 1-- 8 1-- 7 1-- 6 1-- 5 1-- 4 1-- 3 1-- 2
+#> ── <igraph> ───────────────────────────────────────────────────────── 8048b44 ──
+#> ℹ undirected
+#> ℹ 10 vertices · 45 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name_1 <chr>, name_2 <chr>, mutual_1 <lgl>, mutual_2 <lgl>, circular_1 <lgl>, circular_2 <lgl>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#>  [1] 9 ─ 10  8 ─ 10  8 ─ 9   7 ─ 10  7 ─ 9   7 ─ 8   6 ─ 10  6 ─ 9   6 ─ 8  
+#> [10] 6 ─ 7   5 ─ 10  5 ─ 9   5 ─ 8   5 ─ 7   5 ─ 6   4 ─ 10  4 ─ 9   4 ─ 8  
+#> [19] 4 ─ 7   4 ─ 6   4 ─ 5   3 ─ 10  3 ─ 9   3 ─ 8   3 ─ 7   3 ─ 6   3 ─ 5  
+#> [28] 3 ─ 4   2 ─ 10  2 ─ 9   2 ─ 8   2 ─ 7   2 ─ 6   2 ─ 5   2 ─ 4   2 ─ 3  
+#> [37] 1 ─ 10  1 ─ 9   1 ─ 8   1 ─ 7   1 ─ 6   1 ─ 5   1 ─ 4   1 ─ 3   1 ─ 2  
 isomorphic(gu, make_full_graph(vcount(g)))
 #> [1] TRUE
 ```

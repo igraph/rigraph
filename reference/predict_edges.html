@@ -23,7 +23,7 @@ first."><meta property="og:image" content="https://r.igraph.org/logo.png"></head
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9039</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +55,7 @@ first."><meta property="og:image" content="https://r.igraph.org/logo.png"></head
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Predict edges based on a hierarchical random graph model</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.4/R/hrg.R" class="external-link"><code>R/hrg.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/hrg.R" class="external-link"><code>R/hrg.R</code></a></small>
       <div class="d-none name"><code>predict_edges.Rd</code></div>
     </div>
 
@@ -73,6 +73,7 @@ first.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">predict_edges</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
 <span>  hrg <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  start <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  num.samples <span class="op">=</span> <span class="fl">10000</span>,</span>
 <span>  num.bins <span class="op">=</span> <span class="fl">25</span></span>
@@ -95,6 +96,10 @@ directed graphs.</p></dd>
 random starting point.</p></dd>
 
 
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
+
+
 <dt id="arg-start">start<a class="anchor" aria-label="anchor" href="#arg-start"></a></dt>
 <dd><p>Logical, whether to start the fitting/sampling from the
 supplied <code>igraphHRG</code> object, or from a random starting point.</p></dd>
@@ -113,7 +118,7 @@ number for a more accurate prediction.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A list with entries:</p><dl><dt>edges</dt>
-<dd><p>The predicted edges, in a two-column matrix of vertex ids.</p></dd>
+<dd><p>The predicted edges, in a two-column matrix of vertex IDs.</p></dd>
 
 <dt>prob</dt>
 <dd><p>Probabilities of these edges, according to the fitted model.</p></dd>

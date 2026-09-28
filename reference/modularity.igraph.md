@@ -12,6 +12,7 @@ modularity(x, membership, weights = NULL, resolution = 1, directed = TRUE, ...)
 modularity_matrix(
   graph,
   membership = lifecycle::deprecated(),
+  ...,
   weights = NULL,
   resolution = 1,
   directed = TRUE
@@ -31,7 +32,7 @@ modularity_matrix(
 
 - weights:
 
-  If not `NULL` then a numeric vector giving edge weights.
+  Numeric vector giving edge weights. Default: `NULL`.
 
 - resolution:
 
@@ -45,7 +46,9 @@ modularity_matrix(
 
 - ...:
 
-  Additional arguments, none currently.
+  For `modularity_matrix()`, these dots must be empty. For
+  `modularity()`, unused, present for S3 method consistency but may be
+  used by other methods that implement it.
 
 ## Value
 

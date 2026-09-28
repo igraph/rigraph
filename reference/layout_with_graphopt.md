@@ -8,6 +8,7 @@ graphs.
 ``` r
 layout_with_graphopt(
   graph,
+  ...,
   start = NULL,
   niter = 500,
   charge = 0.001,
@@ -16,8 +17,6 @@ layout_with_graphopt(
   spring.constant = 1,
   max.sa.movement = 5
 )
-
-with_graphopt(...)
 ```
 
 ## Arguments
@@ -25,6 +24,10 @@ with_graphopt(...)
 - graph:
 
   The input graph.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - start:
 
@@ -64,10 +67,6 @@ with_graphopt(...)
   Real constant, it gives the maximum amount of movement allowed in a
   single step along a single axis. The default value is 5.
 
-- ...:
-
-  Passed to `layout_with_graphopt()`.
-
 ## Value
 
 A numeric matrix with two columns, and a row for each vertex.
@@ -86,6 +85,10 @@ until it reaches an equilibrium. (There is no simulated annealing or
 anything like that, so a stable fixed point is not guaranteed.)
 
 ## See also
+
+[`with_graphopt()`](https://r.igraph.org/reference/layout_spec.md) to
+build a lazy layout specification for
+[`add_layout_()`](https://r.igraph.org/reference/add_layout_.md).
 
 Other graph layouts:
 [`add_layout_()`](https://r.igraph.org/reference/add_layout_.md),

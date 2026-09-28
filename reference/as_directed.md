@@ -7,12 +7,13 @@ undirected.
 ## Usage
 
 ``` r
-as_directed(graph, mode = c("mutual", "arbitrary", "random", "acyclic"))
+as_directed(graph, ..., mode = c("mutual", "arbitrary", "random", "acyclic"))
 
 as_undirected(
   graph,
   mode = c("collapse", "each", "mutual"),
-  edge.attr.comb = igraph_opt("edge.attr.comb")
+  ...,
+  edge_attr_combine = NULL
 )
 ```
 
@@ -22,6 +23,10 @@ as_undirected(
 
   The graph to convert.
 
+- ...:
+
+  These dots are for future extensions and must be empty.
+
 - mode:
 
   Character constant, defines the conversion algorithm. For
@@ -29,13 +34,14 @@ as_undirected(
   `as_undirected()` it can be `each`, `collapse` or `mutual`. See
   details below.
 
-- edge.attr.comb:
+- edge_attr_combine:
 
   Specifies what to do with edge attributes, if `mode="collapse"` or
   `mode="mutual"`. In these cases many edges might be mapped to a single
   one in the new graph, and their attributes are combined. Please see
   [`attribute.combination()`](https://r.igraph.org/reference/igraph-attribute-combination.md)
-  for details on this.
+  for details on this. The default `NULL` uses the `edge_attr_combine`
+  igraph option.
 
 ## Value
 
@@ -126,27 +132,50 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 g <- make_ring(10)
 as_directed(g, "mutual")
-#> IGRAPH ddc3796 D--- 10 20 -- Ring graph
-#> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from ddc3796:
-#>  [1]  1-> 2  2-> 3  3-> 4  4-> 5  5-> 6  6-> 7  7-> 8  8-> 9  9->10  1->10
-#> [11]  2-> 1  3-> 2  4-> 3  5-> 4  6-> 5  7-> 6  8-> 7  9-> 8 10-> 9 10-> 1
+#> Warning: Calling `as_directed()` with positional or abbreviated arguments was deprecated
+#> in igraph 3.0.0.
+#> ℹ Detected call: as_directed(graph, mode)
+#> ℹ Use instead: as_directed(graph, mode = )
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 330365c ──
+#> ℹ directed
+#> ℹ 10 vertices · 20 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#>  [1] 1 → 2   2 → 3   3 → 4   4 → 5   5 → 6   6 → 7   7 → 8   8 → 9   9 → 10 
+#> [10] 1 → 10  2 → 1   3 → 2   4 → 3   5 → 4   6 → 5   7 → 6   8 → 7   9 → 8  
+#> [19] 10 → 9  10 → 1 
 g2 <- make_star(10)
 as_undirected(g)
-#> IGRAPH ee9e709 U--- 10 10 -- Ring graph
-#> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from ee9e709:
-#>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 2d26f68 ──
+#> ℹ undirected
+#> ℹ 10 vertices · 10 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#>  [1] 1 ─ 2   2 ─ 3   3 ─ 4   4 ─ 5   5 ─ 6   6 ─ 7   7 ─ 8   8 ─ 9   9 ─ 10 
+#> [10] 1 ─ 10 
 
 # Combining edge attributes
 g3 <- make_ring(10, directed = TRUE, mutual = TRUE)
 E(g3)$weight <- seq_len(ecount(g3))
 ug3 <- as_undirected(g3)
 print(ug3, e = TRUE)
-#> IGRAPH bca9803 U-W- 10 10 -- Ring graph
-#> + attr: name (g/c), mutual (g/l), circular (g/l), weight (e/n)
-#> + edges from bca9803:
-#>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 1--10 9--10
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 05c2e54 ──
+#> ℹ undirected · weighted
+#> ℹ 10 vertices · 10 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
+#> → edge:   weight <dbl>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#>  [1] 1 ─ 2   2 ─ 3   3 ─ 4   4 ─ 5   5 ─ 6   6 ─ 7   7 ─ 8   8 ─ 9   1 ─ 10 
+#> [10] 9 ─ 10 
 if (FALSE) { # rlang::is_interactive()
 x11(width = 10, height = 5)
 layout(rbind(1:2))
@@ -162,11 +191,16 @@ g4 <- make_graph(c(
 E(g4)$weight <- seq_len(ecount(g4))
 ug4 <- as_undirected(g4,
   mode = "mutual",
-  edge.attr.comb = list(weight = length)
+  edge_attr_combine = list(weight = length)
 )
 print(ug4, e = TRUE)
-#> IGRAPH e28e34e U-W- 10 7 -- 
-#> + attr: weight (e/n)
-#> + edges from e28e34e:
-#> [1]  6-- 7  7-- 8  8-- 9  8-- 9  9-- 9 10--10 10--10
+#> ── <igraph> ───────────────────────────────────────────────────────── 84ba83c ──
+#> ℹ undirected · weighted
+#> ℹ 10 vertices · 7 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → edge:   weight <dbl>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#> [1] 6 ─ 7    7 ─ 8    8 ─ 9    8 ─ 9    9 ─ 9    10 ─ 10  10 ─ 10 
 ```
