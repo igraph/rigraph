@@ -1,5 +1,26 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.3.9039
+
+## Bug fixes
+
+### ci
+
+- Append the GLPK flags to `~/.R/Makevars` instead of overwriting it (#2911).
+
+### ci
+
+- Restore the custom actions and the workflows the template sync deleted (#2910).
+
+## Continuous integration
+
+- Run coverage checks after pkgdown push.
+
+## Uncategorized
+
+- Feat(ci): Render `README.md` and `index.md` in CI (cynkra/cynkratemplate#118).
+
+
 # igraph 2.3.3.9038
 
 ## Chore
