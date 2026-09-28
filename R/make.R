@@ -1918,7 +1918,7 @@ graph_from_literal_i <- function(mf) {
   # to simplify (#824, #1981): `simplify()` rebuilds the graph sorted by
   # endpoint, and a formula that declares no loops and no multiple edges has no
   # reason to be rebuilt. The check belongs here rather than inside
-  # `simplify()`, where it also suppressed `edge.attr.comb` -- see the note
+  # `simplify()`, where it also suppressed `edge_attr_combine` -- see the note
   # there. `res` has no attributes yet, so skipping is unobservable beyond the
   # order.
   if (simplify && !is_simple(res)) {
@@ -2519,6 +2519,8 @@ wheel <- function(
 #'   to their parents, while `undirected` creates an undirected
 #'   graph.
 #' @return An igraph graph
+#' @seealso [tree()] to build a lazy constructor specification for
+#'   [make_()] or [sample_()].
 #'
 #' @family deterministic constructors
 #' @export
@@ -2658,8 +2660,7 @@ sample_tree <- function(
   )
 }
 
-#' @rdname make_tree
-#' @param ... Passed to `make_tree()` or `sample_tree()`.
+#' @rdname constructor_spec
 #' @export
 tree <- function(...) {
   constructor_spec(list(make = make_tree, sample = sample_tree), ...)

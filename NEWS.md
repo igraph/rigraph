@@ -1,5 +1,130 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.3.9039
+
+## Bug fixes
+
+### ci
+
+- Append the GLPK flags to `~/.R/Makevars` instead of overwriting it (#2911).
+
+### ci
+
+- Restore the custom actions and the workflows the template sync deleted (#2910).
+
+## Continuous integration
+
+- Run coverage checks after pkgdown push.
+
+## Uncategorized
+
+- Feat(ci): Render `README.md` and `index.md` in CI (cynkra/cynkratemplate#118).
+
+
+# igraph 2.3.3.9038
+
+## Chore
+
+- Remove Copilot setup steps.
+
+- Auto-update from GitHub Actions (#2901).
+
+## Documentation
+
+- Drop the branch from the coverage badge (#2902).
+
+## Refactoring
+
+- Snake_case attr-comb options & arguments, soft-deprecate dotted names (#2742).
+
+## Uncategorized
+
+- Refactor(ci): Serve the revdep scripts with the actions instead of copying them (cynkra/cynkratemplate#149).
+
+- Feat: Build a binary package in every check job and share it as an artifact (cynkra/cynkratemplate#141).
+
+- Fix(ci): Collect the fleet's workflow fixes after the move to central actions (cynkra/cynkratemplate#139).
+
+- Refactor(ci): Serve the actions from this repository instead of copying them (cynkra/cynkratemplate#121).
+
+- Fix(ci): Keep the raw name expression out of the running job's step list (cynkra/cynkratemplate#119).
+
+- Fix(fledge): Push the bump to the default branch wherever that is allowed (cynkra/cynkratemplate#117).
+
+- Fix(ci): Make a failing `rcc` run say what failed, and link to it (cynkra/cynkratemplate#115).
+
+- Fix(ci): Exempt deprecation warnings from the roxygenize warning gate (cynkra/cynkratemplate#114).
+
+- Perf(revdepx): Compile the revdeps' checks through ccache.
+
+- Fix(ci): Survive an archived CRAN package, and install it from where it still lives.
+
+- Ci: Fail the roxygenize step on roxygen2 warnings (#111).
+
+
+# igraph 2.3.3.9037
+
+## Chore
+
+- Improve errors in iterators.R (#1891, #2006).
+
+- Increase R minimal version to R4.0.0 (#2876).
+
+## Documentation
+
+- Fix dots docs thanks to roxygen2's warning about useless inheritParams (#2868).
+
+
+# igraph 2.3.3.9036
+
+## Chore
+
+- Update standalone files (#2881).
+
+
+# igraph 2.3.3.9035
+
+## Bug fixes
+
+### ci
+
+- Align the workflow kit with `cynkratemplate` (#2892).
+
+### ci
+
+- Filter OS-restricted packages out of the revdep plan (#2889).
+
+### ci
+
+- Backport kit fixes from `rigraph`, `duckdb-r` and `dm`.
+
+## Features
+
+### ci
+
+- Make the revdep driver log's timing record durable and visible (#2891).
+
+## Chore
+
+### ci
+
+- Retire the pair engine from the revdepx core (#2885).
+
+- Re-run the reverse-dependency check (most, depth 2) (#2883).
+
+- Breaking change: rm unused argument in `layout_with_mds()` (#2730, #2869).
+
+- Some Jarl fixes (#2874).
+
+## Documentation
+
+- Rm deprecations vignette as it is not useful (#2848, #2873).
+
+## Breaking changes
+
+- Breaking change: rm unused argument in `layout_with_mds()` (#2730, #2869).
+
+
 # igraph 2.3.3.9034
 
 ## Bug fixes

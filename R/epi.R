@@ -20,7 +20,6 @@
 ###################################################################
 
 #' @rdname sir
-#' @inheritParams rlang::args_dots_empty
 #' @export
 time_bins <- function(
   x,

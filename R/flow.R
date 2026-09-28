@@ -521,7 +521,9 @@ min_cut <- function(
 #'   can be `NULL`, see details below.
 #' @param target The ID of the target vertex, for `vertex_connectivity()` it
 #'   can be `NULL`, see details below.
-#' @inheritParams rlang::args_dots_empty
+#' @param \dots For `vertex_connectivity()`, these dots must be empty. For
+#'   `cohesion()`, unused, present for S3 method consistency but may be used
+#'   by other methods that implement it.
 #' @param checks Logical. Whether to check that the graph is connected
 #'   and also the degree of the vertices. If the graph is not (strongly)
 #'   connected then the connectivity is obviously zero. Otherwise if the minimum
@@ -529,8 +531,6 @@ min_cut <- function(
 #'   perform these checks, as they can be done quickly compared to the
 #'   connectivity calculation itself.  They were suggested by Peter McMahan,
 #'   thanks Peter.
-#' @param ... Additional arguments passed to methods. Not used by `vertex_connectivity()`
-#'   directly but may be used by other methods that implement `cohesion()`.
 #' @return A scalar real value.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references White, Douglas R and Frank Harary 2001. The Cohesiveness of

@@ -8,7 +8,6 @@
 \alias{igraph.drl.default}
 \alias{igraph.drl.final}
 \alias{igraph.drl.refine}
-\alias{with_drl}
 \title{The DrL graph layout generator}
 \usage{
 layout_with_drl(
@@ -20,13 +19,11 @@ layout_with_drl(
   weights = NULL,
   dim = c(2, 3)
 )
-
-with_drl(...)
 }
 \arguments{
 \item{graph}{The input graph, in can be directed or undirected.}
 
-\item{...}{Passed to \code{layout_with_drl()}.}
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{use.seed}{Logical, whether to use the coordinates given in the
 \code{seed} argument as a starting point.}
@@ -163,7 +160,8 @@ Klavans, R., Boyack, K.W., DrL: Distributed Recursive (Graph) Layout. SAND
 Reports, 2008. 2936: p. 1-10.
 }
 \seealso{
-\code{\link[=layout]{layout()}} for other layout generators.
+\code{\link[=layout]{layout()}} for other layout generators. See \code{\link[=with_drl]{with_drl()}} to
+build a lazy layout specification for \code{\link[=add_layout_]{add_layout_()}}.
 }
 \author{
 Shawn Martin (\url{https://www.cs.otago.ac.nz/homepages/smartin/})

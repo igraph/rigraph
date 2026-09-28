@@ -6,7 +6,7 @@ runs:
     - name: Use GLPK on macOS
       if: runner.os == 'macOS'
       run: |
-        echo -e 'CPPFLAGS = -I/opt/homebrew/include\nLDFLAGS = -L/opt/homebrew/lib' | tee ~/.R/Makevars
+        echo -e 'CPPFLAGS = -I/opt/homebrew/include\nLDFLAGS = -L/opt/homebrew/lib' | tee -a ~/.R/Makevars
       shell: bash
 
     # Regenerate the in-place ARG_HANDLE blocks from the registry files under
