@@ -333,13 +333,12 @@ benchmark_run(
 
 # ---------------------------------------------------------------------------
 # Group #6 - batch construction of many vertex sequences
-# One shared graph reference and one hoisted name source, with the whole
-# per-element loop in C, instead of per-object R work. These two calls each
-# return thousands of vertex sequences from a single C core call.
+# These two calls each return thousands of vertex sequences from a single C
+# core call, so per-sequence construction cost dominates.
 # ---------------------------------------------------------------------------
 
 # ego() returns one vertex sequence per node -- a few thousand sequences built
-# in one call. Exercises create_vs_list() through neighborhood().
+# in one call.
 benchmark_run(
   expr_before_benchmark = {
     library(igraph)
@@ -358,7 +357,7 @@ benchmark_run(
 )
 
 # Enumerate simple paths between hubs on a named graph: another high-volume
-# vertex-sequence-list path (create_vs_list() via all_simple_paths()).
+# vertex-sequence-list path.
 benchmark_run(
   expr_before_benchmark = {
     library(igraph)
