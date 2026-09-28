@@ -2,17 +2,14 @@
 % Please edit documentation in R/layout.R
 \name{layout_as_star}
 \alias{layout_as_star}
-\alias{as_star}
 \title{Generate coordinates to place the vertices of a graph in a star-shape}
 \usage{
 layout_as_star(graph, ..., center = NULL, order = NULL)
-
-as_star(...)
 }
 \arguments{
 \item{graph}{The graph to layout.}
 
-\item{...}{Arguments to pass to \code{layout_as_star()}.}
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{center}{The ID of the vertex to put in the center. The default
 \code{NULL} uses the first vertex.}
@@ -47,7 +44,8 @@ layout_(g, as_star())
 \seealso{
 \code{\link[=layout]{layout()}} and \code{\link[=layout_with_drl]{layout_with_drl()}} for other layout
 algorithms, \code{\link[=plot.igraph]{plot.igraph()}} and \code{\link[=tkplot]{tkplot()}} on how to
-plot graphs and \code{\link[=star]{star()}} on how to create ring graphs.
+plot graphs and \code{\link[=star]{star()}} on how to create ring graphs. See \code{\link[=as_star]{as_star()}} to
+build a lazy layout specification for \code{\link[=add_layout_]{add_layout_()}}.
 
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},
