@@ -2651,6 +2651,10 @@ SEXP Rx_igraph_vs_list(SEXP idx_list, SEXP names_src, SEXP env, SEXP graph_id) {
       SEXP nm=PROTECT(Rf_allocVector(STRSXP, len));
       for (R_xlen_t k=0; k < len; k++) {
         int j=pidx[k];
+        /* Bounds guard: STRING_ELT() does no range checking, so an invalid ID
+         * would read past the end of `names_src`. Callers pass IDs straight
+         * from the C core, which are always in range; NA mirrors what the R
+         * subset `vertex_names[res]` gave for NA or out-of-range IDs. */
         if (j == NA_INTEGER || j < 1 || j > nsource) {
           SET_STRING_ELT(nm, k, NA_STRING);
         } else {
