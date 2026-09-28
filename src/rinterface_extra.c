@@ -2646,6 +2646,10 @@ static SEXP Rx_igraph_lazy_names_materialize(SEXP vec) {
   PROTECT(data=Rf_allocVector(STRSXP, n));
   for (R_xlen_t i=0; i < n; i++) {
     int j=pidx[i];
+    /* Bounds guard: STRING_ELT() does no range checking, so an invalid ID
+     * would read past the end of `source`. IDs come straight from the C core
+     * and are always in range; NA mirrors what an R subset gives for NA or
+     * out-of-range IDs. */
     if (j == NA_INTEGER || j < 1 || j > nsource) {
       SET_STRING_ELT(data, i, NA_STRING);
     } else {
