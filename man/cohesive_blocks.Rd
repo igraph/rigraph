@@ -60,7 +60,9 @@ supplied whose cohesive block structure is given in the \code{blocks()}
 argument.}
 
 \item{\dots}{Additional arguments. \code{plot_hierarchy()} and \code{\link[=plot]{plot()}} pass
-them to \code{plot.igraph()}.  \code{\link[=print]{print()}} and \code{\link[=summary]{summary()}} ignore them.}
+them to \code{plot.igraph()}.  \code{\link[=print]{print()}} and \code{\link[=summary]{summary()}} ignore them.
+\code{cohesive_blocks()} and \code{export_pajek()} do not accept extra arguments;
+these dots must be empty for them.}
 
 \item{labels}{Logical, whether to add the vertex labels to the result
 object. These labels can be then used when reporting and plotting the

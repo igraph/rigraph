@@ -2,7 +2,7 @@
 <!-- badges: start -->
 ![R-CMD-check](https://github.com/igraph/rigraph/workflows/R-CMD-check/badge.svg)
 ![CRAN Downloads](https://cranlogs.r-pkg.org/badges/igraph)
-[![Codecov test coverage](https://codecov.io/gh/igraph/rigraph/branch/main/graph/badge.svg)](https://app.codecov.io/gh/igraph/rigraph?branch=main)
+[![Codecov test coverage](https://codecov.io/gh/igraph/rigraph/graph/badge.svg)](https://app.codecov.io/gh/igraph/rigraph/tree/main)
 <!-- badges: end -->
 
 # R/igraph <a href="https://r.igraph.org/"><img src="man/figures/logo.png" align="right" height="120" alt="igraph website" /></a>
