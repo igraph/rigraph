@@ -2,17 +2,14 @@
 % Please edit documentation in R/layout.R
 \name{layout_on_grid}
 \alias{layout_on_grid}
-\alias{on_grid}
 \title{Simple grid layout}
 \usage{
 layout_on_grid(graph, ..., width = 0, height = 0, dim = 2)
-
-on_grid(...)
 }
 \arguments{
 \item{graph}{The input graph.}
 
-\item{...}{Passed to \code{layout_on_grid()}.}
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{width}{The number of vertices in a single row of the grid. If this is
 zero or negative, then for 2d layouts the width of the grid will be the
@@ -55,7 +52,8 @@ if (interactive() && requireNamespace("rgl", quietly = TRUE)) {
 }
 }
 \seealso{
-\code{\link[=layout]{layout()}} for other layout generators
+\code{\link[=layout]{layout()}} for other layout generators. See \code{\link[=on_grid]{on_grid()}} to build
+a lazy layout specification for \code{\link[=add_layout_]{add_layout_()}}.
 
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},

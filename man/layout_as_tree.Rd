@@ -2,7 +2,6 @@
 % Please edit documentation in R/layout.R
 \name{layout_as_tree}
 \alias{layout_as_tree}
-\alias{as_tree}
 \title{The Reingold-Tilford graph layout algorithm}
 \usage{
 layout_as_tree(
@@ -14,13 +13,11 @@ layout_as_tree(
   mode = c("out", "in", "all"),
   flip.y = TRUE
 )
-
-as_tree(...)
 }
 \arguments{
 \item{graph}{The input graph.}
 
-\item{...}{Passed to \code{layout_as_tree()}.}
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{root}{The index of the root vertex or root vertices.  If this is a
 non-empty vector then the supplied vertex IDs are used as the roots of the
@@ -87,6 +84,9 @@ Reingold, E and Tilford, J (1981). Tidier drawing of trees.
 \emph{IEEE Trans. on Softw. Eng.}, SE-7(2):223--228.
 }
 \seealso{
+\code{\link[=as_tree]{as_tree()}} to build a lazy layout specification for
+\code{\link[=add_layout_]{add_layout_()}}.
+
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},
 \code{\link[=component_wise]{component_wise()}},

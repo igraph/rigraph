@@ -9,8 +9,9 @@
 # shards: the heaviest round-robin first, everything else placed where it
 # shares the most dependencies. The shard count follows the parallel capacity,
 # because only max-parallel shards ever run at once and every shard past that
-# pays another setup without starting any earlier (see revdep2/README.md for
-# the algorithm and its trade-offs).
+# pays another setup without starting any earlier (see
+# https://github.com/cynkra/cynkratemplate/blob/main/.github/actions/revdep2/README.md
+# for the algorithm and its trade-offs).
 #
 # The build job compiles the dev version once into the binary artifact every
 # shard installs; it needs only the checkout, so it runs in parallel with
@@ -40,7 +41,8 @@
 # Results land in artifacts:
 #   revdep2-report    the merged report -- fetch with
 #                     `gh run download <run-id> --name revdep2-report`
-#                     or ./.github/workflows/revdep2/fetch.sh <run-id>
+#                     or .github/actions/revdep2/fetch.sh <run-id>,
+#                     run from a checkout of cynkra/cynkratemplate
 #   revdep2-baseline  old-version results, reused by later runs when the
 #                     revdep's version, our CRAN version, the R series and the
 #                     resolved dependency versions all still match (and the
@@ -58,7 +60,7 @@
 #
 # Dispatch-only, deliberately: nothing here runs on push. `ref` checks any
 # branch, tag or commit SHA (the dispatch itself can only target a branch or
-# tag, and the tree must contain these scripts), `depth` widens the net to
+# tag; the scripts come with the actions, not from that tree), `depth` widens the net to
 # transitive reverse dependencies, and `dry-run` stops after planning. Check
 # results never turn the run red -- the summary and the report artifact are
 # the deliverable; only infrastructure failures fail jobs.
@@ -67,7 +69,7 @@ on:
   workflow_dispatch:
     inputs:
       ref:
-        description: "Branch, tag, or commit SHA to check (the tree must contain the revdep2 scripts); default: the dispatched ref"
+        description: "Branch, tag, or commit SHA to check; default: the dispatched ref"
         type: string
         default: ""
       packages:
@@ -224,6 +226,10 @@ jobs:
       actions: read
 
     steps:
+      # The scripts are served with the kit's actions, not copied into the repository.
+      - name: Locate the revdep scripts
+        uses: cynkra/cynkratemplate/.github/actions/revdep-scripts@main
+
       - name: Check out the ref under test
         uses: actions/checkout@v6
         with:
@@ -252,7 +258,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           OUT: ${{ runner.temp }}/plan.json
         run: |
-          Rscript ./.github/workflows/revdep2/plan.R
+          Rscript "${REVDEP2_DIR}/plan.R"
         shell: bash
 
       # Before anything can fail: the shards are planned, and the plan is
@@ -278,17 +284,7 @@ jobs:
       # instead of a bare exit 143.
       - name: Make room for the dependency universe
         if: steps.plan.outputs.shards != '0' && inputs.dry-run != true
-        run: |
-          before=$(df -BG --output=avail / | tail -1 | tr -dc '0-9')
-          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc \
-            /usr/local/.ghcup /opt/hostedtoolcache/CodeQL \
-            /usr/local/share/powershell /usr/share/swift || true
-          sudo docker image prune --all --force > /dev/null 2>&1 || true
-          after=$(df -BG --output=avail / | tail -1 | tr -dc '0-9')
-          echo "Free disk: ${before}G -> ${after}G"
-          free -g
-        shell: bash
-
+        uses: cynkra/cynkratemplate/.github/actions/revdep2-disk-room@main
       # The preflight downloads every dependency binary once; saving the pak
       # cache under the plan's hash hands the shards a warm start.
       - name: Cache the pak package cache
@@ -307,48 +303,18 @@ jobs:
         # here would take the shard matrix with it.
         continue-on-error: true
         if: steps.plan.outputs.shards != '0' && inputs.dry-run != true
-        env:
-          GH_TOKEN: ${{ github.token }}
-          PLAN: ${{ runner.temp }}/plan.json
-          OUT_DIR: ${{ runner.temp }}/preflight
-          LIB_OUT: ${{ runner.temp }}/lib
-          LIB_INDEX_OUT: ${{ runner.temp }}/lib-index
-          PKG_SYSREQS: true
-          RESOURCE_LOG: ${{ runner.temp }}/preflight/resources.log
-          # `/tmp` on this image is its own filesystem of about 8 GB -- half
-          # the RAM, so a tmpfs -- while the disk `runner.temp` lives on has
-          # over 100 GB free. Everything R does temporarily lands there:
-          # source builds, unpacked tarballs, and callr's own startup files.
-          # In run 31303054725 it filled after eleven chunks, and callr could
-          # then not start R at all -- "error writing to connection" from the
-          # saveRDS of its startup environment -- which failed every chunk
-          # after it in about a second. The space is on the big disk.
-          TMPDIR: ${{ runner.temp }}/tmp
-          TMP: ${{ runner.temp }}/tmp
-          TEMP: ${{ runner.temp }}/tmp
-          RESOURCE_PHASE_FILE: ${{ runner.temp }}/preflight/phase
-        run: |
-          mkdir -p "${RUNNER_TEMP}/preflight" "${RUNNER_TEMP}/tmp"
-          watch=./.github/workflows/revdep2/watch-resources.sh
-          # Backgrounded and left running, like the shard's. It used to be
-          # killed when this step ended, which left the two artifact uploads
-          # after it unsampled -- and this job's library artifact is gigabytes
-          # (4.1 GB in run 31951756102), so "the runner stopped answering while
-          # packing" was exactly as unanswerable as it was for shard 16.
-          # `preflight.R` moves the label on through RESOURCE_PHASE_FILE.
-          "${watch}" once "before the install"
-          "${watch}" watch 30 "preflight" &
-          disown || true
-          unbuffered=""
-          if command -v stdbuf > /dev/null 2>&1; then
-            unbuffered="stdbuf -oL -eL"
-          fi
-          status=0
-          ${unbuffered} Rscript ./.github/workflows/revdep2/preflight.R || status=$?
-          "${watch}" once "after the install"
-          exit "${status}"
-        shell: bash
-
+        uses: cynkra/cynkratemplate/.github/actions/revdep2-install-universe@main
+        with:
+          gh-token: ${{ github.token }}
+          plan: ${{ runner.temp }}/plan.json
+          out-dir: ${{ runner.temp }}/preflight
+          lib-out: ${{ runner.temp }}/lib
+          lib-index-out: ${{ runner.temp }}/lib-index
+          resource-log: ${{ runner.temp }}/preflight/resources.log
+          tmpdir: ${{ runner.temp }}/tmp
+          tmp: ${{ runner.temp }}/tmp
+          temp: ${{ runner.temp }}/tmp
+          resource-phase-file: ${{ runner.temp }}/preflight/phase
       # Runs even when the install step died, because "how much disk and
       # memory were left" is the first question about a job that was killed
       # rather than failed. It cannot run when the *runner* died -- hence the
@@ -357,8 +323,8 @@ jobs:
       - name: Report what the install consumed
         if: always() && steps.plan.outputs.shards != '0' && inputs.dry-run != true
         run: |
-          ./.github/workflows/revdep2/watch-resources.sh once "after the job"
-          ./.github/workflows/revdep2/watch-resources.sh oom
+          "${REVDEP2_DIR}/watch-resources.sh" once "after the job"
+          "${REVDEP2_DIR}/watch-resources.sh" oom
           du -sh ~/.cache/R/pkgcache "${RUNNER_TEMP}/lib" 2>/dev/null || true
         shell: bash
 
@@ -403,6 +369,7 @@ jobs:
     if: inputs.dry-run != true
 
     runs-on: ubuntu-26.04
+    timeout-minutes: 90 # longest run seen: 9 min
 
     name: "Build the dev binary"
 
@@ -410,13 +377,17 @@ jobs:
       contents: read
 
     steps:
+      # The scripts are served with the kit's actions, not copied into the repository.
+      - name: Locate the revdep scripts
+        uses: cynkra/cynkratemplate/.github/actions/revdep-scripts@main
+
       - name: Check out the ref under test
         uses: actions/checkout@v6
         with:
           ref: ${{ inputs.ref || github.ref }}
 
       - name: Install R and the package dependencies
-        uses: ./.github/workflows/install
+        uses: cynkra/cynkratemplate/.github/actions/install@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           cache-version: revdep2-1
@@ -426,7 +397,7 @@ jobs:
         env:
           OUT_DIR: ${{ runner.temp }}/pkg
         run: |
-          Rscript ./.github/workflows/revdep2/build.R
+          Rscript "${REVDEP2_DIR}/build.R"
         shell: bash
 
       - name: Upload the package binary
@@ -541,6 +512,10 @@ jobs:
       PKG_SYSREQS: true
 
     steps:
+      # The scripts are served with the kit's actions, not copied into the repository.
+      - name: Locate the revdep scripts
+        uses: cynkra/cynkratemplate/.github/actions/revdep-scripts@main
+
       - name: Check out the ref under test
         uses: actions/checkout@v6
         with:
@@ -550,7 +525,7 @@ jobs:
         uses: r-lib/actions/setup-pandoc@v2
 
       - name: Close the log group that setup-pandoc leaves open
-        # See `.github/workflows/install/action.yml` for why this is needed.
+        # See `.github/actions/install/action.yml` for why this is needed.
         # Fixed upstream by https://github.com/r-lib/actions/pull/1103.
         if: runner.os == 'Linux'
         run: |
@@ -629,25 +604,9 @@ jobs:
       # a later write is what reliably overrides an earlier one. This step runs
       # after it and before both driver steps.
       - name: Point the driver at this runner's directories
-        env:
-          NOT_CRAN_INPUT: ${{ env.REVDEP2_NOT_CRAN }}
-        run: |
-          mkdir -p "${RUNNER_TEMP}/tmp"
-          {
-            echo "NOT_CRAN=${NOT_CRAN_INPUT}"
-            echo "PLAN=${RUNNER_TEMP}/plan/plan.json"
-            echo "PKG_DIR=${RUNNER_TEMP}/pkg"
-            echo "LIB_DIR=${RUNNER_TEMP}/lib"
-            echo "BASELINE_DIR=${RUNNER_TEMP}/baseline"
-            echo "OUT_DIR=${RUNNER_TEMP}/results"
-            # The same small `/tmp` as the preflight, and a shard builds source
-            # packages and unpacks check directories into it for hours.
-            echo "TMPDIR=${RUNNER_TEMP}/tmp"
-            echo "TMP=${RUNNER_TEMP}/tmp"
-            echo "TEMP=${RUNNER_TEMP}/tmp"
-          } >> "${GITHUB_ENV}"
-        shell: bash
-
+        uses: cynkra/cynkratemplate/.github/actions/revdep2-driver-env@main
+        with:
+          not-cran-input: ${{ env.REVDEP2_NOT_CRAN }}
       # Two steps, one driver. The install is minutes to an hour and the checks
       # are hours, and as one step the run page could only report their sum --
       # so "shard 14 took five hours" said nothing about whether it spent them
@@ -674,7 +633,7 @@ jobs:
       # upload.
       - name: Start the resource sampler
         run: |
-          watch=./.github/workflows/revdep2/watch-resources.sh
+          watch="${REVDEP2_DIR}/watch-resources.sh"
           "${watch}" once "shard ${SHARD} before the install"
           RESOURCE_LOG="${RUNNER_TEMP}/results/resources.log" \
             "${watch}" watch 30 "shard ${SHARD}" &
@@ -685,7 +644,7 @@ jobs:
         env:
           PHASE: install
         run: |
-          Rscript ./.github/workflows/revdep2/shard.R
+          Rscript "${REVDEP2_DIR}/shard.R"
         shell: bash
 
       # The checks run in three slices, each followed by an upload.
@@ -722,7 +681,7 @@ jobs:
           PHASE: check
           CHECK_SLICE: 1/3
         run: |
-          Rscript ./.github/workflows/revdep2/shard.R
+          Rscript "${REVDEP2_DIR}/shard.R"
         shell: bash
 
       # Named per attempt: a re-run of one shard must not overwrite the results
@@ -746,7 +705,7 @@ jobs:
           PHASE: check
           CHECK_SLICE: 2/3
         run: |
-          Rscript ./.github/workflows/revdep2/shard.R
+          Rscript "${REVDEP2_DIR}/shard.R"
         shell: bash
 
       - name: Upload the shard results (2 of 3)
@@ -765,7 +724,7 @@ jobs:
           PHASE: check
           CHECK_SLICE: 3/3
         run: |
-          Rscript ./.github/workflows/revdep2/shard.R
+          Rscript "${REVDEP2_DIR}/shard.R"
         shell: bash
 
       # Before the final upload, so the last sample and the OOM verdict ride in
@@ -775,8 +734,8 @@ jobs:
       - name: Report what the shard consumed
         if: always()
         run: |
-          ./.github/workflows/revdep2/watch-resources.sh once "shard ${SHARD} after the checks"
-          ./.github/workflows/revdep2/watch-resources.sh oom
+          "${REVDEP2_DIR}/watch-resources.sh" once "shard ${SHARD} after the checks"
+          "${REVDEP2_DIR}/watch-resources.sh" oom
           df -BG / "${RUNNER_TEMP}" 2>/dev/null || true
         shell: bash
 
@@ -811,6 +770,7 @@ jobs:
       && inputs.dry-run != true
 
     runs-on: ubuntu-26.04
+    timeout-minutes: 120 # longest run seen: 3 min
 
     name: "Collect results and report"
 
@@ -821,6 +781,10 @@ jobs:
       actions: read
 
     steps:
+      # The scripts are served with the kit's actions, not copied into the repository.
+      - name: Locate the revdep scripts
+        uses: cynkra/cynkratemplate/.github/actions/revdep-scripts@main
+
       - name: Check out the ref under test
         uses: actions/checkout@v6
         with:
@@ -886,7 +850,7 @@ jobs:
           BASELINE_OUT: ${{ runner.temp }}/baseline
           TIMINGS_OUT: ${{ runner.temp }}/timings
         run: |
-          Rscript ./.github/workflows/revdep2/collect.R
+          Rscript "${REVDEP2_DIR}/collect.R"
         shell: bash
 
       - name: Upload the report
@@ -927,62 +891,9 @@ jobs:
           && vars.REVDEP2_COMMIT_REPORT != 'false'
           && steps.collect.outputs.compared != '0'
         continue-on-error: true
-        env:
-          REF_INPUT: ${{ inputs.ref }}
-        run: |
-          set -eu
-          # Without a `ref` input the dispatch decides, and GitHub says outright
-          # what kind of ref it was; with one, only the remote can say whether
-          # it names a branch. Anything else -- a tag, a SHA, a branch that does
-          # not exist here -- has nowhere to put a commit.
-          if [ -z "${REF_INPUT}" ]; then
-            REF="${GITHUB_REF_NAME}"
-            if [ "${GITHUB_REF_TYPE}" != "branch" ]; then
-              echo "::notice::${REF} is a ${GITHUB_REF_TYPE}, not a branch; the report stays in the artifact only."
-              exit 0
-            fi
-          else
-            REF="${REF_INPUT}"
-            if ! git ls-remote --exit-code --heads origin "${REF}" > /dev/null 2>&1; then
-              echo "::notice::${REF} is not a branch of this repository; the report stays in the artifact only."
-              exit 0
-            fi
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # Only what this run generated, and only what it managed to write:
-          # a collector that fell back to the manifest-derived summary has a
-          # README.md and no problems.md, which is a report, not an error.
-          files=""
-          for f in README.md problems.md failures.md cran.md manifest.json; do
-            if [ -f "revdep/${f}" ]; then
-              files="${files} revdep/${f}"
-            fi
-          done
-          # The per-package sections `problems.md` and `failures.md` are
-          # assembled from. `git add <dir>` stages removals as well, which is
-          # what retires a package the run found fixed.
-          for d in problems failures; do
-            if [ -d "revdep/${d}" ]; then
-              files="${files} revdep/${d}"
-            fi
-          done
-          if [ -z "${files}" ]; then
-            echo "::notice::No report files were written; nothing to commit."
-            exit 0
-          fi
-          git add -- ${files}
-          if git diff --cached --quiet; then
-            echo "::notice::The report is unchanged; nothing to commit."
-            exit 0
-          fi
-          git commit -m "chore: Update revdep report from run ${GITHUB_RUN_ID}" \
-            -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-          git fetch origin "${REF}"
-          git rebase "origin/${REF}"
-          git push origin "HEAD:${REF}"
-          echo "::notice::Report committed to ${REF}."
-        shell: bash
+        uses: cynkra/cynkratemplate/.github/actions/revdep-commit-report@main
+        with:
+          ref: ${{ inputs.ref }}
 
       - name: Upload the new baseline
         uses: actions/upload-artifact@v6

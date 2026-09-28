@@ -2,7 +2,6 @@
 % Please edit documentation in R/layout.R
 \name{layout_with_lgl}
 \alias{layout_with_lgl}
-\alias{with_lgl}
 \title{Large Graph Layout}
 \usage{
 layout_with_lgl(
@@ -16,13 +15,11 @@ layout_with_lgl(
   cellsize = NULL,
   root = NULL
 )
-
-with_lgl(...)
 }
 \arguments{
 \item{graph}{The input graph}
 
-\item{...}{Passed to \code{layout_with_lgl()}.}
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{maxiter}{The maximum number of iterations to perform (150).}
 
@@ -61,6 +58,9 @@ generator of the Large Graph Layout software
 }
 
 \seealso{
+\code{\link[=with_lgl]{with_lgl()}} to build a lazy layout specification for
+\code{\link[=add_layout_]{add_layout_()}}.
+
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},
 \code{\link[=component_wise]{component_wise()}},

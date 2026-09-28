@@ -254,8 +254,97 @@ benchmark_run(
   n = 20
 )
 
+# Indexed attribute assignment, e.g. `E(g)[weight > 0.5]$color <- "red"`:
+# `$<-.igraph.es` evaluates the edge predicate, then set_edge_attr() pads the
+# attribute to full length and writes it back into the graph.
+benchmark_run(
+  expr_before_benchmark = {
+    library(igraph)
+    set.seed(42)
+    g <- sample_gnm(1000L, 5000L)
+    V(g)$name <- paste0("v", seq_len(1000L))
+    E(g)$weight <- runif(5000L)
+    for (i in 1:5) {
+      E(g)[weight > 0.5]$color <- "red"
+    }
+    gc(full = TRUE)
+  },
+  es_attr_assign = for (i in 1:105) {
+    E(g)[weight > 0.5]$color <- "red"
+  },
+  n = 20
+)
+
 # ---------------------------------------------------------------------------
-# Group #5 - vertex/edge sequence construction on named graphs
+# Group #5 - neighborhood queries
+# incident_edges(): wraps each of the 1000 C result vectors into an edge
+# sequence (index conversion, graph reference, names).
+# neighbors(): a single call is cheap, so this measures the per-call R overhead
+# (argument checks, name -> ID resolution, vertex sequence construction) that
+# dominates when users call it in a loop.
+# ---------------------------------------------------------------------------
+benchmark_run(
+  expr_before_benchmark = {
+    library(igraph)
+    set.seed(42)
+    g <- sample_gnm(1000L, 5000L)
+    V(g)$name <- paste0("v", seq_len(1000L))
+    for (i in 1:5) {
+      incident_edges(g, V(g))
+    }
+    gc(full = TRUE)
+  },
+  incident_edges = for (i in 1:7) {
+    incident_edges(g, V(g))
+  },
+  n = 20
+)
+
+benchmark_run(
+  expr_before_benchmark = {
+    library(igraph)
+    set.seed(42)
+    g <- sample_gnm(1000L, 5000L)
+    V(g)$name <- paste0("v", seq_len(1000L))
+    for (i in 1:5) {
+      neighbors(g, "v500")
+    }
+    gc(full = TRUE)
+  },
+  neighbors_by_name = for (i in 1:950) {
+    neighbors(g, "v500")
+  },
+  n = 20
+)
+
+# ---------------------------------------------------------------------------
+# Group #6 - set operations
+# union() of named graphs: aligns the vertex sets by name, rewrites both edge
+# lists, and merges the clashing attributes into `_1`/`_2` columns.
+# ---------------------------------------------------------------------------
+benchmark_run(
+  expr_before_benchmark = {
+    library(igraph)
+    set.seed(42)
+    g1 <- sample_gnm(1000L, 5000L)
+    V(g1)$name <- paste0("v", seq_len(1000L))
+    E(g1)$weight <- runif(5000L)
+    g2 <- sample_gnm(1000L, 5000L)
+    V(g2)$name <- paste0("v", sample(seq_len(1500L), 1000L))
+    E(g2)$weight <- runif(5000L)
+    for (i in 1:5) {
+      union(g1, g2)
+    }
+    gc(full = TRUE)
+  },
+  union_named = for (i in 1:19) {
+    union(g1, g2)
+  },
+  n = 20
+)
+
+# ---------------------------------------------------------------------------
+# Group #7 - vertex/edge sequence construction on named graphs
 # Functions that return (many) vertex/edge sequences pay for building the
 # `names`/`vnames` attribute and attaching a graph reference to every object.
 # These benchmarks exercise that construction path on *named* graphs, where
@@ -332,7 +421,7 @@ benchmark_run(
 )
 
 # ---------------------------------------------------------------------------
-# Group #6 - batch construction of many vertex sequences
+# Group #8 - batch construction of many vertex sequences
 # These two calls each return thousands of vertex sequences from a single C
 # core call, so per-sequence construction cost dominates.
 # ---------------------------------------------------------------------------

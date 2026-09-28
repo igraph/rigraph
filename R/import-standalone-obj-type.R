@@ -6,12 +6,15 @@
 # ---
 # repo: r-lib/rlang
 # file: standalone-obj-type.R
-# last-updated: 2024-02-14
+# last-updated: 2025-10-02
 # license: https://unlicense.org
 # imports: rlang (>= 1.1.0)
 # ---
 #
 # ## Changelog
+#
+# 2025-10-02:
+# - `obj_type_friendly()` now shows the dimensionality of arrays.
 #
 # 2024-02-14:
 # - `obj_type_friendly()` now works for S7 objects.
@@ -188,14 +191,16 @@ vec_type_friendly <- function(x, length = FALSE) {
   }
 
   if (type == "list") {
-    if (n_dim < 2) {
+    if (n_dim == 0) {
       return(add_length("a list"))
-    } else if (is.data.frame(x)) {
-      return("a data frame")
     } else if (n_dim == 2) {
-      return("a list matrix")
+      if (is.data.frame(x)) {
+        return("a data frame")
+      } else {
+        return("a list matrix")
+      }
     } else {
-      return("a list array")
+      return(sprintf("a list %sD array", n_dim))
     }
   }
 
@@ -211,12 +216,12 @@ vec_type_friendly <- function(x, length = FALSE) {
     type = paste0("a ", type, " %s")
   )
 
-  if (n_dim < 2) {
+  if (n_dim == 0) {
     kind <- "vector"
   } else if (n_dim == 2) {
     kind <- "matrix"
   } else {
-    kind <- "array"
+    kind <- sprintf("%sD array", n_dim)
   }
   out <- sprintf(type, kind)
 
@@ -288,58 +293,6 @@ obj_type_oo <- function(x) {
   } else {
     "S3"
   }
-}
-
-#' @param x The object type which does not conform to `what`. Its
-#'   `obj_type_friendly()` is taken and mentioned in the error message.
-#' @param what The friendly expected type as a string. Can be a
-#'   character vector of expected types, in which case the error
-#'   message mentions all of them in an "or" enumeration.
-#' @param show_value Passed to `value` argument of `obj_type_friendly()`.
-#' @param ... Arguments passed to [abort()].
-#' @inheritParams args_error_context
-#' @noRd
-stop_input_type <- function(
-  x,
-  what,
-  ...,
-  allow_na = FALSE,
-  allow_null = FALSE,
-  show_value = TRUE,
-  arg = caller_arg(x),
-  call = caller_env()
-) {
-  # From standalone-cli.R
-  cli <- env_get_list(
-    nms = c("format_arg", "format_code"),
-    last = topenv(),
-    default = function(x) sprintf("`%s`", x),
-    inherit = TRUE
-  )
-
-  if (allow_na) {
-    what <- c(what, cli$format_code("NA"))
-  }
-  if (allow_null) {
-    what <- c(what, cli$format_code("NULL"))
-  }
-  if (length(what)) {
-    what <- oxford_comma(what)
-  }
-  if (inherits(arg, "AsIs")) {
-    format_arg <- identity
-  } else {
-    format_arg <- cli$format_arg
-  }
-
-  message <- sprintf(
-    "%s must be %s, not %s.",
-    format_arg(arg),
-    what,
-    obj_type_friendly(x, value = show_value)
-  )
-
-  abort(message, ..., call = call, arg = arg)
 }
 
 oxford_comma <- function(chr, sep = ", ", final = "or") {

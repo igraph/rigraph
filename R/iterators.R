@@ -182,7 +182,7 @@ graph_id.igraph.es <- function(x, ...) {
 }
 
 is_complete_iterator <- function(x) {
-  identical(attr(x, "is_all"), TRUE)
+  isTRUE(attr(x, "is_all"))
 }
 
 set_complete_iterator <- function(x, value = TRUE) {
@@ -1188,7 +1188,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
       }
       if (is.logical(ii) && (length(ii) != length(x) && length(ii) != 1)) {
         cli::cli_abort(
-          "Error: Logical index length does not match the number of edges. Recycling is not allowed."
+          "Logical index length does not match the number of edges. Recycling is not allowed."
         )
       }
 
@@ -1253,11 +1253,19 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @name igraph-vs-attributes
 #' @export
 `[[<-.igraph.vs` <- function(x, i, value) {
+  if (!rlang::has_name(attributes(value), "attr_name")) {
+    cli::cli_abort("Can't find {.val name} for vertex attribute.")
+  }
   if (
-    !"name" %in% names(attributes(value)) ||
-      !"value" %in% names(attributes(value))
+    !rlang::has_name(attributes(value), "attr_value") &&
+      !is_complete_iterator(value)
   ) {
-    cli::cli_abort("Invalid indexing.")
+    cli::cli_abort(
+      c(
+        "Can't find {.val value} for vertex attribute {.val {attr(value, 'attr_name')}}.",
+        i = "Removing an attribute is only supported for the whole vertex sequence, e.g. {.code V(g)${attr(value, 'attr_name')} <- NULL}, not a subset. Use {.fn delete_vertex_attr}."
+      )
+    )
   }
   if (is.null(get_vs_graph(x))) {
     cli::cli_abort("Graph is unknown.", .internal = TRUE)
@@ -1275,11 +1283,19 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @name igraph-es-attributes
 #' @export
 `[[<-.igraph.es` <- function(x, i, value) {
+  if (!rlang::has_name(attributes(value), "attr_name")) {
+    cli::cli_abort("Can't find {.val name} for edge attribute.")
+  }
   if (
-    !"name" %in% names(attributes(value)) ||
-      !"value" %in% names(attributes(value))
+    !rlang::has_name(attributes(value), "attr_value") &&
+      !is_complete_iterator(value)
   ) {
-    cli::cli_abort("Invalid indexing.")
+    cli::cli_abort(
+      c(
+        "Can't find {.val value} for edge attribute {.val {attr(value, 'attr_name')}}.",
+        i = "Removing an attribute is only supported for the whole edge sequence, e.g. {.code E(g)${attr(value, 'attr_name')} <- NULL}, not a subset. Use {.fn delete_edge_attr}."
+      )
+    )
   }
   if (is.null(get_es_graph(x))) {
     cli::cli_abort("Graph is unknown.", .internal = TRUE)
@@ -1348,7 +1364,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 `$.igraph.vs` <- function(x, name) {
   graph <- get_vs_graph(x)
   if (is.null(graph)) {
-    cli::cli_abort("Graph is unknown")
+    cli::cli_abort("Can't find graph.")
   }
   res <- vertex_attr(graph, name, x)
   if (is_single_index(x)) {
@@ -1401,7 +1417,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 `$.igraph.es` <- function(x, name) {
   graph <- get_es_graph(x)
   if (is.null(graph)) {
-    cli::cli_abort("Graph is unknown")
+    cli::cli_abort("Can't find graph.")
   }
   res <- edge_attr(graph, name, x)
   if (is_single_index(x)) {
@@ -1419,10 +1435,10 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @export
 `$<-.igraph.vs` <- function(x, name, value) {
   if (is.null(get_vs_graph(x))) {
-    cli::cli_abort("Graph is unknown")
+    cli::cli_abort("Can't find graph.")
   }
-  attr(x, "name") <- name
-  attr(x, "value") <- value
+  attr(x, "attr_name") <- name
+  attr(x, "attr_value") <- value
   x
 }
 
@@ -1434,10 +1450,10 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @family vertex and edge sequences
 `$<-.igraph.es` <- function(x, name, value) {
   if (is.null(get_es_graph(x))) {
-    cli::cli_abort("Graph is unknown")
+    cli::cli_abort("Can't find graph.")
   }
-  attr(x, "name") <- name
-  attr(x, "value") <- value
+  attr(x, "attr_name") <- name
+  attr(x, "attr_value") <- value
   x
 }
 
@@ -1445,17 +1461,25 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @export
 `V<-` <- function(x, value) {
   ensure_igraph(x)
-  if (
-    !"name" %in% names(attributes(value)) ||
-      !"value" %in% names(attributes(value))
-  ) {
-    cli::cli_abort("invalid indexing")
+  if (!rlang::has_name(attributes(value), "attr_name")) {
+    cli::cli_abort("Can't find {.val name} for vertex attribute.")
+  }
+  if (!rlang::has_name(attributes(value), "attr_value")) {
+    if (is_complete_iterator(value)) {
+      return(delete_vertex_attr(x, attr(value, "attr_name")))
+    }
+    cli::cli_abort(
+      c(
+        "Can't find {.val value} for vertex attribute {.val {attr(value, 'attr_name')}}.",
+        i = "Removing an attribute is only supported for the whole vertex sequence, e.g. {.code V(g)${attr(value, 'attr_name')} <- NULL}, not a subset. Use {.fn delete_vertex_attr}."
+      )
+    )
   }
   i_set_vertex_attr(
     x,
-    attr(value, "name"),
+    name = attr(value, "attr_name"),
     index = value,
-    value = attr(value, "value"),
+    value = attr(value, "attr_value"),
     check = FALSE
   )
 }
@@ -1469,17 +1493,25 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @export
 `E<-` <- function(x, path = NULL, P = NULL, directed = NULL, value) {
   ensure_igraph(x)
-  if (
-    !"name" %in% names(attributes(value)) ||
-      !"value" %in% names(attributes(value))
-  ) {
-    cli::cli_abort("invalid indexing")
+  if (!rlang::has_name(attributes(value), "attr_name")) {
+    cli::cli_abort("Can't find {.val name} for edge attribute.")
+  }
+  if (!rlang::has_name(attributes(value), "attr_value")) {
+    if (is_complete_iterator(value)) {
+      return(delete_edge_attr(x, attr(value, "attr_name")))
+    }
+    cli::cli_abort(
+      c(
+        "Can't find {.val value} for edge attribute {.val {attr(value, 'attr_name')}}.",
+        i = "Removing an attribute is only supported for the whole edge sequence, e.g. {.code E(g)${attr(value, 'attr_name')} <- NULL}, not a subset. Use {.fn delete_edge_attr}."
+      )
+    )
   }
   i_set_edge_attr(
     x,
-    attr(value, "name"),
+    name = attr(value, "attr_name"),
     index = value,
-    value = attr(value, "value"),
+    value = attr(value, "attr_value"),
     check = FALSE
   )
 }
@@ -1576,7 +1608,7 @@ print_igraph_vs_legacy <- function(
     ## Double bracket
     va <- vertex_attr(graph)
     if (all(sapply(va, is.atomic))) {
-      print(as.data.frame(va, stringsAsFactors = FALSE)[
+      print(list2DF(va)[
         as.vector(x),
         ,
         drop = FALSE
@@ -1742,7 +1774,7 @@ print_igraph_vs_cli <- function(
     # atomic. If any attribute is list-valued, drop to a named list sliced to
     # the selected vertices instead of forcing it into a table.
     if (all(vapply(vertex_attrs, is.atomic, logical(1)))) {
-      print(as.data.frame(vertex_attrs, stringsAsFactors = FALSE)[
+      print(list2DF(vertex_attrs)[
         as.vector(x),
         ,
         drop = FALSE

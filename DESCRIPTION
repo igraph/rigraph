@@ -1,6 +1,6 @@
 Package: igraph
 Title: Network Analysis and Visualization
-Version: 2.3.3.9034
+Version: 2.3.3.9039
 Authors@R: c(
     person("Gábor", "Csárdi", , "csardi.gabor@gmail.com", role = "aut",
            comment = c(ORCID = "0000-0001-7098-9676")),
@@ -35,7 +35,7 @@ URL: https://r.igraph.org/, https://igraph.org/,
 BugReports: https://github.com/igraph/rigraph/issues
 Depends:
     methods,
-    R (>= 3.5.0)
+    R (>= 4.0.0)
 Imports:
     cli,
     graphics,
