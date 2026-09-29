@@ -49,16 +49,16 @@ add_cdocs_section <- function(topic, base_path) {
 }
 
 present_cdocs_link <- function(value, base_path) {
-  strings <- map_chr(
+  cdocs_links <- map_chr(
     unique(value),
     format_cdocs_single_link,
     base_path
   )
 
-  # Filter out empty strings
-  strings <- strings[nzchar(strings)]
+  # Filter out empty links
+  cdocs_links <- cdocs_links[nzchar(cdocs_links)]
 
-  paste(strings, collapse = ", ")
+  toString(cdocs_links)
 }
 
 
