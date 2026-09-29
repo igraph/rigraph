@@ -147,7 +147,8 @@ migrations <- list(
       d,
       directed = TRUE,
       ...,
-      vertices = NULL
+      vertices = NULL,
+      vertex_ids = FALSE
     ) {},
     when = "3.0.0"
   ),

@@ -851,6 +851,97 @@ test_that("graph_from_data_frame works on matrices", {
   expect_equal(as.data.frame(el), el2, ignore_attr = TRUE)
 })
 
+test_that("graph_from_data_frame(vertex_ids = TRUE) round-trips unnamed graphs (#223)", {
+  g <- make_graph(~ A, B - -C, C - -D)
+  V(g)$a <- letters[1:4]
+  E(g)$w <- c(1.5, 2.5)
+  g <- delete_vertex_attr(g, "name")
+
+  df <- as_data_frame(g, what = "both")
+  r <- graph_from_data_frame(
+    df$edges,
+    directed = FALSE,
+    vertices = df$vertices,
+    vertex_ids = TRUE
+  )
+
+  expect_identical_graphs(g, r)
+  expect_false(is_named(r))
+  expect_identical(V(r)$a, letters[1:4])
+  expect_identical(E(r)$w, c(1.5, 2.5))
+  expect_identical(as_data_frame(r, what = "both"), df)
+})
+
+test_that("graph_from_data_frame(vertex_ids = TRUE) works without attributes", {
+  # Graph without any attributes and with an isolated vertex
+  g <- make_empty_graph(6)
+  g <- add_edges(g, c(1, 2, 2, 3, 3, 1, 4, 5))
+
+  df <- as_data_frame(g, what = "both")
+  r <- graph_from_data_frame(
+    df$edges,
+    vertices = df$vertices,
+    vertex_ids = TRUE
+  )
+  expect_identical_graphs(g, r)
+  expect_equal(vcount(r), 6)
+})
+
+test_that("graph_from_data_frame(vertex_ids = TRUE) infers the vertex count", {
+  d <- data.frame(from = c(2, 3), to = c(3, 5))
+  g <- graph_from_data_frame(d, vertex_ids = TRUE)
+  expect_equal(vcount(g), 5)
+  expect_false(is_named(g))
+  expect_equal(as_edgelist(g), cbind(c(2, 3), c(3, 5)))
+})
+
+test_that("graph_from_data_frame(vertex_ids = TRUE) keeps a `name` column", {
+  d <- data.frame(from = 1, to = 2)
+  v <- data.frame(name = c("x", "y"), size = 1:2)
+  g <- graph_from_data_frame(d, vertices = v, vertex_ids = TRUE)
+  expect_identical(V(g)$name, c("x", "y"))
+  expect_identical(V(g)$size, 1:2)
+})
+
+test_that("graph_from_data_frame(vertex_ids = TRUE) errors", {
+  expect_snapshot(error = TRUE, {
+    graph_from_data_frame(
+      data.frame(from = "a", to = "b"),
+      vertex_ids = TRUE
+    )
+    graph_from_data_frame(
+      data.frame(from = 1.5, to = 2),
+      vertex_ids = TRUE
+    )
+    graph_from_data_frame(
+      data.frame(from = 1, to = 4),
+      vertices = data.frame(a = 1:3),
+      vertex_ids = TRUE
+    )
+    graph_from_data_frame(
+      data.frame(from = 1, to = 2),
+      vertex_ids = NA
+    )
+  })
+})
+
+test_that("graph_from_data_frame() hints at `vertex_ids` for numeric edges", {
+  expect_snapshot(error = TRUE, {
+    graph_from_data_frame(
+      data.frame(from = 2, to = 3),
+      vertices = data.frame(a = letters[1:4])
+    )
+    graph_from_data_frame(
+      data.frame(from = 1, to = 2),
+      vertices = data.frame(row.names = 1:2)
+    )
+    graph_from_data_frame(
+      data.frame(from = "x", to = "y"),
+      vertices = data.frame(name = c("a", "b"))
+    )
+  })
+})
+
 test_that("edge names work", {
   ## named edges
   local_igraph_options(print.edge.attributes = TRUE)
