@@ -124,15 +124,22 @@ identical_graphs <- function(
   .Call(Rx_igraph_identical_graphs, g1, g2, as.logical(attrs))
 }
 
-# Build the `names` attribute of a vertex/edge sequence lazily.
-#
-# `source` is the graph's full vertex/edge name vector (shared by reference
-# across all sequences of the graph) and `idx` is a 1-based index into it.
-# The result is an ALTREP string vector that only materializes the actual
-# names when they are first accessed (printing, named indexing, `as_ids()`),
-# so constructing a sequence stays cheap even when many of them are returned
-# at once (e.g. `max_cliques()`). Subsetting it stays lazy too, via the
-# class's `Extract_subset` method. Returns `NULL` when there is no source.
+#' Build the `names` attribute of a vertex/edge sequence lazily
+#'
+#' @description
+#' Returns an ALTREP string vector that only materializes the actual names
+#' when they are first accessed (printing, named indexing, `as_ids()`).
+#' Constructing a sequence therefore stays cheap,
+#' even when many of them are returned at once (e.g. `max_cliques()`).
+#' Subsetting the result stays lazy too,
+#' via the ALTREP class's `Extract_subset` method.
+#'
+#' @param source The graph's full vertex/edge name vector,
+#'   shared by reference across all sequences of the graph.
+#' @param idx A 1-based index into `source`.
+#' @return A lazy character vector of the same length as `idx`,
+#'   or `NULL` if `source` is `NULL`.
+#' @dev
 lazy_index_names <- function(source, idx) {
   if (is.null(source)) {
     return(NULL)
@@ -330,12 +337,14 @@ unsafe_create_vs <- function(graph, idx, verts = NULL) {
     verts <- V(graph)
   }
   # `idx` are vertex IDs straight from C, and `verts` is the full `V(graph)`,
-  # so `verts[idx]` would just be `idx` again -- skip that copy and use the
-  # IDs directly as the payload. Names are taken lazily from `verts` (an
-  # ALTREP that composes in O(1) under subsetting), and the graph reference is
-  # shared from `verts`. All attributes are set in one `attributes<-` call to
-  # avoid the per-object shallow copies that dominate when many sequences are
-  # built (e.g. `max_cliques()`).
+  # so `verts[idx]` would just be `idx` again.
+  # Skip that copy and use the IDs directly as the payload.
+  # Names are taken lazily from `verts`
+  # (an ALTREP that composes in O(1) under subsetting),
+  # and the graph reference is shared from `verts`.
+  # All attributes are set in one `attributes<-` call
+  # to avoid the per-object shallow copies
+  # that dominate when many sequences are built (e.g. `max_cliques()`).
   vertex_names <- attr(verts, "names")
   res <- as.integer(idx)
   attributes(res) <- list(
@@ -347,20 +356,23 @@ unsafe_create_vs <- function(graph, idx, verts = NULL) {
   res
 }
 
-# Build a list of vertex sequences from a list of vertex-ID vectors.
-#
-# This is the batch form of `unsafe_create_vs()` and replaces the
-# `lapply(idx_list, unsafe_create_vs, graph = graph, verts = V(graph))`
-# pattern. The per-graph work -- `V(graph)`, the shared weak reference, the
-# graph id and the lazy name source -- is hoisted out of the loop, so each
-# sequence only costs one `as.integer()` and one `attributes<-`. This is what
-# brings construction of many sequences (e.g. `max_cliques()`) down close to
-# the cost of returning bare numeric indices.
+#' Build a list of vertex sequences from a list of vertex-ID vectors
+#'
+#' @description
+#' Batch form of `unsafe_create_vs()`, replacing the
+#' `lapply(idx_list, unsafe_create_vs, graph = graph, verts = V(graph))` pattern.
+#' `V(graph)` is built only once,
+#' which mints the single weak reference and graph ID shared by all sequences.
+#' The per-element loop (payload coercion, lazy-names ALTREP, attribute setting)
+#' runs in C without any per-object R overhead.
+#' This brings construction of many sequences (e.g. `max_cliques()`)
+#' close to the cost of returning bare vertex IDs.
+#'
+#' @param graph The graph the vertex IDs refer to.
+#' @param idx_list A list of vertex-ID vectors, as returned from C.
+#' @return A list of `igraph.vs` objects, one per element of `idx_list`.
+#' @dev
 create_vs_list <- function(graph, idx_list) {
-  # `verts <- V(graph)` is what mints the single shared weak reference and graph
-  # id; build it once and hand the pieces to C, which runs the per-element
-  # construction loop (payload coercion, lazy-names ALTREP, attribute setting)
-  # without any per-object R overhead.
   verts <- V(graph)
   .Call(
     Rx_igraph_vs_list,
@@ -542,13 +554,14 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
   if (!na_ok && anyNA(res)) {
     cli::cli_abort("Unknown vertex selected.")
   }
-  # Set every attribute in a single `attributes<-` call rather than one
-  # `attr<-`/`class<-` at a time: each incremental assignment shallow-copies
-  # the vector, and that copying dominates when many sequences are built
-  # (e.g. `max_cliques()`). `names` is carried over from the subset above (a
-  # lazy ALTREP, or NULL); env/graph are carried from `x`, mirroring
-  # `simple_es_index()`, so sequences derived from one `V(graph)` share its
-  # weak reference instead of each minting a fresh one.
+  # Set every attribute in a single `attributes<-` call
+  # rather than one `attr<-`/`class<-` at a time:
+  # each incremental assignment shallow-copies the vector,
+  # and that copying dominates when many sequences are built (e.g. `max_cliques()`).
+  # `names` is carried over from the subset above (a lazy ALTREP, or `NULL`).
+  # env/graph are carried from `x`, mirroring `simple_es_index()`,
+  # so sequences derived from one `V(graph)` share its weak reference
+  # instead of each minting a fresh one.
   attributes(res) <- list(
     names = attr(res, "names"),
     class = "igraph.vs",
