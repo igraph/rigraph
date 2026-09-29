@@ -145,150 +145,116 @@ find_impl <- function(topic, base_path) {
 }
 
 
-# https://blog.r-hub.io/2021/07/30/cache/#function-factory
-treesitter_graph_factory <- function() {
-  cache <- list()
+treesitter_graph <- function(base_path) {
+  all_r_scripts <- fs::dir_ls(fs::path(base_path, "R"), glob = "*R")
+  all_r_code <- purrr::map_chr(
+    all_r_scripts,
+    \(x) readLines(x) |> paste(collapse = "\n")
+  ) |>
+    paste(collapse = "\n")
 
-  function(base_path) {
-    if (!is.null(cache[[base_path]])) {
-      return(cache[[base_path]])
-    }
+  r_language <- treesitter.r::language()
+  r_parser <- treesitter::parser(language = r_language)
+  tree <- treesitter::parser_parse(r_parser, all_r_code)
 
-    all_r_scripts <- fs::dir_ls(fs::path(base_path, "R"), glob = "*R")
-    all_r_code <- purrr::map_chr(
-      all_r_scripts,
-      \(x) readLines(x) |> paste(collapse = "\n")
-    ) |>
-      paste(collapse = "\n")
-
-    r_language <- treesitter.r::language()
-    r_parser <- treesitter::parser(language = r_language)
-    tree <- treesitter::parser_parse(r_parser, all_r_code)
-
-    # Query to find all function definitions with their names
-    func_def_query <- treesitter::query(
-      r_language,
-      '(binary_operator
+  # Query to find all function definitions with their names
+  func_def_query <- treesitter::query(
+    r_language,
+    '(binary_operator
         lhs: (identifier) @func_name
         rhs: (function_definition) @func_def
       )'
-    )
+  )
 
-    # Extract all function definitions
-    root_node <- treesitter::tree_root_node(tree)
-    all_matches <- treesitter::query_matches(func_def_query, root_node)[[1]]
+  # Extract all function definitions
+  root_node <- treesitter::tree_root_node(tree)
+  all_matches <- treesitter::query_matches(func_def_query, root_node)[[1]]
 
-    # Extract function names and definition nodes from matches
-    # Each match contains paired func_name and func_def captures
-    func_names <- purrr::map_chr(all_matches, \(m) {
-      treesitter::node_text(m$node[[which(m$name == "func_name")]])
-    })
-    func_def_nodes <- purrr::map(all_matches, \(m) {
-      m$node[[which(m$name == "func_def")]]
-    })
+  # Extract function names and definition nodes from matches
+  # Each match contains paired func_name and func_def captures
+  func_names <- purrr::map_chr(all_matches, \(m) {
+    treesitter::node_text(m$node[[which(m$name == "func_name")]])
+  })
+  func_def_nodes <- purrr::map(all_matches, \(m) {
+    m$node[[which(m$name == "func_def")]]
+  })
 
-    # Query to find all function calls
-    func_call_query <- treesitter::query(
-      r_language,
-      '(call
+  # Query to find all function calls
+  func_call_query <- treesitter::query(
+    r_language,
+    '(call
         function: (identifier) @call_name
       )'
-    )
+  )
 
-    # Build the call graph table
-    call_graph_df <- purrr::map2_dfr(
-      func_def_nodes,
-      func_names,
-      \(func_def_node, func_name) {
-        # Query for function calls within this function definition
-        calls <- treesitter::query_captures(func_call_query, func_def_node)
+  # Build the call graph table
+  call_graph_df <- purrr::map2_dfr(
+    func_def_nodes,
+    func_names,
+    \(func_def_node, func_name) {
+      # Query for function calls within this function definition
+      calls <- treesitter::query_captures(func_call_query, func_def_node)
 
-        if (length(calls$node) > 0) {
-          call_names <- purrr::map_chr(calls$node, treesitter::node_text)
-          data.frame(
-            from = func_name,
-            to = call_names,
-            stringsAsFactors = FALSE
-          )
-        } else {
-          data.frame(from = character(), to = character())
-        }
+      if (length(calls$node) > 0) {
+        call_names <- purrr::map_chr(calls$node, treesitter::node_text)
+        data.frame(
+          from = func_name,
+          to = call_names,
+          stringsAsFactors = FALSE
+        )
+      } else {
+        data.frame(from = character(), to = character())
       }
-    )
-
-    graph <- graph_from_data_frame(call_graph_df)
-    cache[[base_path]] <<- graph
-    graph
-  }
-}
-treesitter_graph <- treesitter_graph_factory()
-
-igraph_c_version_factory <- function() {
-  cache <- list()
-
-  function(base_path) {
-    if (!is.null(cache[[base_path]])) {
-      return(cache[[base_path]])
     }
+  )
 
-    c_lines <- readLines(file.path(
-      base_path,
-      "src",
-      "vendor",
-      "igraph_version.h"
-    ))
-    version_line <- c_lines[startsWith(c_lines, "#define IGRAPH_VERSION ")]
-
-    c_version <- regmatches(
-      version_line,
-      regexec('"([^"]+)"', version_line)
-    )[[1]][2]
-    cache[[base_path]] <<- c_version
-    c_version
-  }
+  graph_from_data_frame(call_graph_df)
 }
-igraph_c_version <- igraph_c_version_factory()
 
-c_links_factory <- function() {
-  cache <- list()
+igraph_c_version <- function(base_path) {
+  c_lines <- readLines(file.path(
+    base_path,
+    "src",
+    "vendor",
+    "igraph_version.h"
+  ))
+  version_line <- c_lines[startsWith(c_lines, "#define IGRAPH_VERSION ")]
 
-  function(base_path) {
-    if (!is.null(cache[[base_path]])) {
-      return(cache[[base_path]])
-    }
-
-    igraph_version <- igraph_c_version(base_path)
-
-    local_cache_dir <- file.path(
-      tools::R_user_dir("igraph", "data"),
-      "links",
-      igraph_version
-    )
-    local_cache <- file.path(local_cache_dir, "clinks.csv")
-    if (file.exists(local_cache)) {
-      clinks <- utils::read.csv(local_cache)
-      cache[[base_path]] <<- clinks
-      return(clinks)
-    }
-
-    dir.create(local_cache_dir, recursive = TRUE)
-
-    index_url <- sprintf(
-      "https://igraph.org/c/html/%s/ix01.html",
-      igraph_version
-    )
-    index <- xml2::read_html(index_url)
-
-    entries <- xml2::xml_find_all(index, ".//dt")
-
-    clinks <- purrr::map_df(entries, handle_dt, igraph_version = igraph_version)
-    utils::write.csv(clinks, local_cache, row.names = FALSE)
-
-    cache[[base_path]] <<- clinks
-    clinks
-  }
+  c_version <- regmatches(
+    version_line,
+    regexec('"([^"]+)"', version_line)
+  )[[1]][2]
+  c_version
 }
-c_links <- c_links_factory()
+
+c_links <- function(base_path) {
+  igraph_version <- igraph_c_version(base_path)
+
+  local_cache_dir <- file.path(
+    tools::R_user_dir("igraph", "data"),
+    "links",
+    igraph_version
+  )
+  local_cache <- file.path(local_cache_dir, "clinks.csv")
+  if (file.exists(local_cache)) {
+    return(utils::read.csv(local_cache))
+  }
+
+  dir.create(local_cache_dir, recursive = TRUE)
+
+  index_url <- sprintf(
+    "https://igraph.org/c/html/%s/ix01.html",
+    igraph_version
+  )
+  index <- xml2::read_html(index_url)
+
+  entries <- xml2::xml_find_all(index, ".//dt")
+
+  clinks <- purrr::map_df(entries, handle_dt, igraph_version = igraph_version)
+  utils::write.csv(clinks, local_cache, row.names = FALSE)
+
+  clinks
+}
 
 handle_dt <- function(dt, igraph_version) {
   href <- xml2::xml_attr(xml2::xml_child(dt), "href")
@@ -301,6 +267,17 @@ handle_dt <- function(dt, igraph_version) {
 }
 
 on_load({
+  # Memoised at load time rather than at build time,
+  # as recommended by memoise.
+  # memoise is only needed when rendering the documentation,
+  # so the functions stay uncached when it is not installed.
+  # `on_load()` evaluates in the namespace itself, hence `<-` and not `<<-`.
+  if (rlang::is_installed("memoise")) {
+    treesitter_graph <- memoise::memoise(treesitter_graph)
+    igraph_c_version <- memoise::memoise(igraph_c_version)
+    c_links <- memoise::memoise(c_links)
+  }
+
   vctrs::s3_register(
     "roxygen2::roclet_process",
     "roclet_docs_rd",

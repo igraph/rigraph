@@ -64,7 +64,8 @@ Suggests:
     vdiffr,
     withr
 Enhances: 
-    graph
+    graph,
+    memoise
 LinkingTo: 
     cpp11 (>= 0.5.0)
 VignetteBuilder: 
@@ -82,7 +83,7 @@ Config/comment/gha/extra-packages: graph is an optional Enhances
     4.4.0, where a published release still exists.
 Config/Needs/build: devtools, irlba, pkgconfig
 Config/Needs/coverage: covr
-Config/Needs/roxygen2: r-lib/roxygen2, 
+Config/Needs/roxygen2: r-lib/roxygen2, memoise,
     moodymudskipper/devtag
 Config/Needs/website: here, readr, tibble, xmlparsedata, xml2
 Config/testthat/edition: 3
