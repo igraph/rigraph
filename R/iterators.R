@@ -78,6 +78,8 @@ get_es_graph_id <- get_vs_graph_id <- function(seq) {
 #' @inheritParams rlang::args_dots_empty
 #' @param attrs Whether to compare the attributes of the graphs
 #' @return Logical scalar
+#' @seealso [is_same_graph()] to ignore the order of vertices and edges,
+#'   [isomorphic()] to ignore vertex labels altogether.
 #' @export
 identical_graphs <- function(
   g1,
@@ -122,6 +124,84 @@ identical_graphs <- function(
 
   stopifnot(is_igraph(g1), is_igraph(g2))
   .Call(Rx_igraph_identical_graphs, g1, g2, as.logical(attrs))
+}
+
+#' Decide if two graphs are the same as labelled graphs
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' Two graphs are the same if they have the same directedness,
+#' the same vertex set and the same edge set.
+#' Unlike [identical_graphs()], the order in which vertices and edges are
+#' stored is ignored,
+#' and unlike [isomorphic()], vertices are not relabelled.
+#'
+#' @details
+#' If `use_names` is `TRUE` and both graphs have a `name` vertex attribute,
+#' vertices are matched by name, so the two graphs may store their vertices
+#' in a different order.
+#' Vertex names must be unique in both graphs in this case.
+#' Otherwise, vertices are matched by their IDs.
+#'
+#' Edges are compared as a multiset:
+#' the order of the edges and, in undirected graphs, the order of the
+#' endpoints of an edge do not matter,
+#' but the multiplicity of each edge does.
+#'
+#' Graph, vertex and edge attributes other than `name` are not compared.
+#'
+#' @param g1,g2 The two graphs.
+#' @inheritParams rlang::args_dots_empty
+#' @param use_names Logical scalar, whether to match vertices by their names
+#'   if both graphs have a `name` vertex attribute.
+#' @return A logical scalar, `TRUE` if the two graphs are the same.
+#' @seealso [identical_graphs()] for comparing the internal representation,
+#'   [isomorphic()] for comparing graphs up to relabelling of the vertices.
+#' @cdocs igraph_is_same_graph
+#' @export
+#' @examples
+#' # Same edges, stored in a different order
+#' g1 <- make_graph(c(1, 2, 2, 3, 3, 1), directed = FALSE)
+#' g2 <- make_graph(c(3, 2, 1, 3, 2, 1), directed = FALSE)
+#' identical_graphs(g1, g2)
+#' is_same_graph(g1, g2)
+#'
+#' # Same named graph, vertices stored in a different order
+#' edges <- data.frame(from = c("a", "b"), to = c("b", "c"))
+#' g3 <- graph_from_data_frame(edges, vertices = c("a", "b", "c"))
+#' g4 <- graph_from_data_frame(edges, vertices = c("c", "b", "a"))
+#' identical_graphs(g3, g4)
+#' is_same_graph(g3, g4)
+#' is_same_graph(g3, g4, use_names = FALSE)
+#'
+#' # Isomorphic, but not the same
+#' star1 <- make_star(4, mode = "undirected")
+#' star2 <- make_graph(c(2, 1, 2, 3, 2, 4), directed = FALSE)
+#' is_same_graph(star1, star2)
+#' isomorphic(star1, star2)
+is_same_graph <- function(g1, g2, ..., use_names = TRUE) {
+  check_dots_empty()
+  ensure_igraph(g1)
+  ensure_igraph(g2)
+  check_bool(use_names)
+
+  if (use_names && is_named(g1) && is_named(g2)) {
+    names1 <- V(g1)$name
+    names2 <- V(g2)$name
+    if (anyDuplicated(names1) || anyDuplicated(names2)) {
+      cli::cli_abort(c(
+        "Vertex names must be unique to match vertices by name.",
+        i = "Use {.code use_names = FALSE} to match vertices by their IDs."
+      ))
+    }
+    if (length(names1) != length(names2) || !setequal(names1, names2)) {
+      return(FALSE)
+    }
+    g2 <- permute(g2, match(names2, names1))
+  }
+
+  is_same_graph_impl(graph1 = g1, graph2 = g2)
 }
 
 add_vses_graph_ref <- function(vses, graph) {

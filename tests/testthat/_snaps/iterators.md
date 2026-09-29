@@ -1,3 +1,30 @@
+# is_same_graph() errors
+
+    Code
+      is_same_graph(dup, dup)
+    Condition
+      Error in `is_same_graph()`:
+      ! Vertex names must be unique to match vertices by name.
+      i Use `use_names = FALSE` to match vertices by their IDs.
+    Code
+      is_same_graph(g, g, TRUE)
+    Condition
+      Error in `is_same_graph()`:
+      ! `...` must be empty.
+      x Problematic argument:
+      * ..1 = TRUE
+      i Did you forget to name an argument?
+    Code
+      is_same_graph(g, g, use_names = NA)
+    Condition
+      Error in `is_same_graph()`:
+      ! `use_names` must be `TRUE` or `FALSE`, not `NA`.
+    Code
+      is_same_graph(g, NULL)
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
 # printing connected vs/es works
 
     Code

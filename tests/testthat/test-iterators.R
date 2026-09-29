@@ -199,6 +199,95 @@ test_that("identical_graphs considers attributes", {
   expect_identical_graphs(g, g2, attrs = FALSE)
 })
 
+test_that("is_same_graph() ignores edge order", {
+  g <- make_ring(10)
+  g_edit <- g + edge(7, 9) + edge(8, 10) - edge("7|8") - edge("9|10")
+
+  adj <- as_adjacency_matrix(g, sparse = FALSE)
+  adj[7, 8] <- adj[8, 7] <- adj[9, 10] <- adj[10, 9] <- 0
+  adj[7, 9] <- adj[9, 7] <- adj[8, 10] <- adj[10, 8] <- 1
+  g_adj <- graph_from_adjacency_matrix(adj, mode = "undirected")
+
+  expect_not_identical_graphs(g_edit, g_adj)
+  expect_true(is_same_graph(g_edit, g_adj))
+})
+
+test_that("is_same_graph() ignores endpoint order in undirected graphs only", {
+  g1 <- make_graph(c(1, 2, 2, 3), directed = FALSE)
+  g2 <- make_graph(c(3, 2, 2, 1), directed = FALSE)
+  expect_true(is_same_graph(g1, g2))
+
+  d1 <- make_graph(c(1, 2, 2, 3), directed = TRUE)
+  d2 <- make_graph(c(3, 2, 2, 1), directed = TRUE)
+  expect_false(is_same_graph(d1, d2))
+  expect_false(is_same_graph(g1, d1))
+})
+
+test_that("is_same_graph() respects edge multiplicities", {
+  g1 <- make_graph(c(1, 2, 1, 2, 2, 3), directed = FALSE)
+  g2 <- make_graph(c(2, 3, 2, 1, 1, 2), directed = FALSE)
+  g3 <- make_graph(c(1, 2, 2, 3, 2, 3), directed = FALSE)
+  expect_true(is_same_graph(g1, g2))
+  expect_false(is_same_graph(g1, g3))
+})
+
+test_that("is_same_graph() distinguishes isomorphic graphs", {
+  g1 <- make_star(4, mode = "undirected")
+  g2 <- permute(g1, c(2, 1, 3, 4))
+  expect_true(isomorphic(g1, g2))
+  expect_false(is_same_graph(g1, g2))
+  expect_false(is_same_graph(make_ring(5), make_ring(6)))
+})
+
+test_that("is_same_graph() matches vertices by name", {
+  igraph_local_seed(50)
+  edges <- unique(cbind(
+    paste0("v", sample(100:200, 10)),
+    paste0("v", sample(100:200, 10))
+  ))
+  vertices <- unique(as.vector(edges))
+
+  g1 <- graph_from_data_frame(edges, directed = TRUE)
+  g2 <- graph_from_data_frame(edges, directed = TRUE, vertices = sort(vertices))
+
+  expect_not_identical_graphs(g1, g2)
+  expect_true(is_same_graph(g1, g2))
+  expect_false(is_same_graph(g1, g2, use_names = FALSE))
+})
+
+test_that("is_same_graph() compares vertex name sets", {
+  g1 <- make_graph(~ a - b, b - c)
+  g2 <- make_graph(~ a - b, b - d)
+  g3 <- make_graph(~ a - b, b - c, d)
+  expect_false(is_same_graph(g1, g2))
+  expect_false(is_same_graph(g1, g3))
+})
+
+test_that("is_same_graph() uses IDs unless both graphs are named", {
+  g1 <- make_ring(3)
+  g2 <- set_vertex_attr(make_ring(3), "name", value = c("c", "b", "a"))
+  expect_true(is_same_graph(g1, g2))
+})
+
+test_that("is_same_graph() ignores attributes other than names", {
+  g1 <- set_edge_attr(make_ring(3), "weight", value = 1:3)
+  g2 <- set_graph_attr(make_ring(3), "name", "ring")
+  expect_true(is_same_graph(g1, g2))
+})
+
+test_that("is_same_graph() errors", {
+  g <- make_ring(3)
+  dup <- set_vertex_attr(g, "name", value = c("a", "a", "b"))
+
+  expect_snapshot(error = TRUE, {
+    is_same_graph(dup, dup)
+    is_same_graph(g, g, TRUE)
+    is_same_graph(g, g, use_names = NA)
+    is_same_graph(g, NULL)
+  })
+  expect_true(is_same_graph(dup, dup, use_names = FALSE))
+})
+
 test_that("we can create vertex/edge seqs", {
   g <- make_ring(10)
   V(g) %&&% expect_true(TRUE)
