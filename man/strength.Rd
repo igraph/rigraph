@@ -30,7 +30,7 @@ argument is ignored.}
 \item{weights}{Weight vector. If the graph has a \code{weight} edge
 attribute, then this is used by default. If the graph does not have a
 \code{weight} edge attribute and this argument is \code{NULL}, then a
-\code{\link[=degree]{degree()}} is called. If this is \code{NA}, then no edge weights are used
+\code{\link[ape:degree]{degree()}} is called. If this is \code{NA}, then no edge weights are used
 (even if the graph has a \code{weight} edge attribute).}
 }
 \value{
@@ -61,7 +61,7 @@ Alessandro Vespignani: The architecture of complex weighted networks, Proc.
 Natl. Acad. Sci. USA 101, 3747 (2004)
 }
 \seealso{
-\code{\link[=degree]{degree()}} for the unweighted version.
+\code{\link[ape:degree]{degree()}} for the unweighted version.
 
 Centrality measures:
 \code{\link[=alpha_centrality]{alpha_centrality()}},

@@ -118,7 +118,7 @@ Conference, Brisbane, Australia, April 1998.
 }
 \seealso{
 Other centrality scores: \code{\link[=closeness]{closeness()}},
-\code{\link[=betweenness]{betweenness()}}, \code{\link[=degree]{degree()}}
+\code{\link[=betweenness]{betweenness()}}, \code{\link[ape:degree]{degree()}}
 
 Centrality measures:
 \code{\link[=alpha_centrality]{alpha_centrality()}},

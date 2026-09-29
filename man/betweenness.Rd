@@ -123,7 +123,7 @@ of Mathematical Sociology} 25(2):163-177, 2001.
 \doi{10.1080/0022250X.2001.9990249}
 }
 \seealso{
-\code{\link[=closeness]{closeness()}}, \code{\link[=degree]{degree()}}, \code{\link[=harmonic_centrality]{harmonic_centrality()}}
+\code{\link[=closeness]{closeness()}}, \code{\link[ape:degree]{degree()}}, \code{\link[=harmonic_centrality]{harmonic_centrality()}}
 
 Centrality measures:
 \code{\link[=alpha_centrality]{alpha_centrality()}},
