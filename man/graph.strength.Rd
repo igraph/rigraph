@@ -27,7 +27,7 @@ argument is ignored.}
 \item{weights}{Weight vector. If the graph has a \code{weight} edge
 attribute, then this is used by default. If the graph does not have a
 \code{weight} edge attribute and this argument is \code{NULL}, then a
-\code{\link[ape:degree]{degree()}} is called. If this is \code{NA}, then no edge weights are used
+\code{\link[=degree]{degree()}} is called. If this is \code{NA}, then no edge weights are used
 (even if the graph has a \code{weight} edge attribute).}
 }
 \description{

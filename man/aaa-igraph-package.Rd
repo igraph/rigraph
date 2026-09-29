@@ -107,7 +107,7 @@ Some vertex/edge/graph attributes are treated specially. One of them
 is the \sQuote{name} attribute. This is used for printing the graph
 instead of the numerical IDs, if it exists. Vertex names can also be
 used to specify a vector or set of vertices, in all igraph
-functions. E.g. \code{\link[ape:degree]{degree()}} has a \code{v} argument
+functions. E.g. \code{\link[=degree]{degree()}} has a \code{v} argument
 that gives the vertices for which the degree is calculated. This
 argument can be given as a character vector of vertex names.
 

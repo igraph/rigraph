@@ -51,7 +51,7 @@ Seidman S. B. (1983) Network structure and minimum degree, \emph{Social
 Networks}, 5, 269--287.
 }
 \seealso{
-\code{\link[ape:degree]{degree()}}
+\code{\link[=degree]{degree()}}
 
 Other structural.properties:
 \code{\link[=bfs]{bfs()}},

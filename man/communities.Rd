@@ -254,7 +254,7 @@ plot(wc, karate)
 See \code{\link[=plot_dendrogram]{plot_dendrogram()}} for plotting community structure
 dendrograms.
 
-See \code{\link[testthat:compare]{compare()}} for comparing two community structures
+See \code{\link[=compare]{compare()}} for comparing two community structures
 on the same graph.
 
 Community detection:

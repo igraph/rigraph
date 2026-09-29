@@ -50,7 +50,7 @@ attributes. Examples: \preformatted{  g <- g +
 provided for readability. The user should use it if a single vertex
 is added to the graph.
 \item If it is an object created with the \code{\link[=edge]{edge()}} or
-\code{\link[ape:edges]{edges()}} function, then new edges will be added to the
+\code{\link[=edges]{edges()}} function, then new edges will be added to the
 graph. The new edges and possibly their attributes can be specified as
 the arguments of the \code{edges()} function.
 

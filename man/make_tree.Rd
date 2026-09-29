@@ -36,7 +36,7 @@ make_tree(10, 2)
 make_tree(10, 3, mode = "undirected")
 }
 \seealso{
-\code{\link[cli:tree]{tree()}} to build a lazy constructor specification for
+\code{\link[=tree]{tree()}} to build a lazy constructor specification for
 \code{\link[=make_]{make_()}} or \code{\link[=sample_]{sample_()}}.
 
 Other deterministic constructors:

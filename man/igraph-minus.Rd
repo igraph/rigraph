@@ -40,7 +40,7 @@ function), then these edges will be deleted from the graph.
 concatenated and the result is interpreted as a vector of vertex
 IDs. These vertices will be removed from the graph.
 \item If it is an object created with the \code{\link[=edge]{edge()}} (or the
-\code{\link[ape:edges]{edges()}}) function, then all arguments of \code{\link[ape:edges]{edges()}} are
+\code{\link[=edges]{edges()}}) function, then all arguments of \code{\link[=edges]{edges()}} are
 concatenated and then interpreted as edges to be removed from the
 graph.
 Example: \preformatted{  g <- make_ring(10)
