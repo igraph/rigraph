@@ -58,8 +58,6 @@
 #'   consistency.
 #' @param no.sim Integer scalar, the number simulation runs to perform.
 #' @param x A `sir` object, returned by the `sir()` function.
-#' @param middle Logical, whether to return the middle of the time bins,
-#'   or the boundaries.
 #' @param na.rm Logical, whether to ignore `NA` values.  `sir`
 #'   objects do not contain any `NA` values currently, so this argument is
 #'   effectively ignored.

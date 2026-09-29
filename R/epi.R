@@ -19,21 +19,23 @@
 #
 ###################################################################
 
+#' @param x A `sir` object, returned by the `sir()` function
+#' @param middle Logical, whether to return the middle of the time bins,
+#'   or the boundaries.
 #' @rdname sir
+#' @importFrom stats IQR
 #' @export
+
 time_bins <- function(
   x,
   ...,
   middle = TRUE
 ) {
-  UseMethod("time_bins")
-}
-
-#' @method time_bins sir
-#' @rdname sir
-#' @export
-#' @importFrom stats IQR
-time_bins.sir <- function(x, ..., middle = TRUE) {
+  if (!inherits(x, "sir")) {
+    cli::cli_abort(
+      "{.arg x} must be a `sir` object, not a {.obj_type_friendly {x}}."
+    )
+  }
   # BEGIN GENERATED ARG_HANDLE: time_bins, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {

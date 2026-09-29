@@ -2,15 +2,12 @@
 % Please edit documentation in R/epi.R, R/sir.R
 \name{time_bins}
 \alias{time_bins}
-\alias{time_bins.sir}
 \alias{median.sir}
 \alias{quantile.sir}
 \alias{sir}
 \title{SIR model on graphs}
 \usage{
 time_bins(x, ..., middle = TRUE)
-
-\method{time_bins}{sir}(x, ..., middle = TRUE)
 
 \method{median}{sir}(x, na.rm = FALSE, ...)
 
