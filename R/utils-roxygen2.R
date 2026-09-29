@@ -56,7 +56,7 @@ present_cdocs_link <- function(value, base_path) {
   )
 
   # Filter out empty strings
-  strings <- strings[strings != ""]
+  strings <- strings[nzchar(strings)]
 
   paste(strings, collapse = ", ")
 }
