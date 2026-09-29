@@ -4,16 +4,20 @@
 \alias{lazy_index_names}
 \title{Build the \code{names} attribute of a vertex/edge sequence lazily}
 \usage{
-lazy_index_names(source, idx)
+lazy_index_names(source, idx = NULL)
 }
 \arguments{
 \item{source}{The graph's full vertex/edge name vector,
 shared by reference across all sequences of the graph.}
 
-\item{idx}{A 1-based index into \code{source}.}
+\item{idx}{A 1-based index into \code{source},
+or \code{NULL} for all of \code{source} in order.
+The latter skips the copy when names are looked up,
+e.g. in \code{V(g)["a"]}.}
 }
 \value{
-A lazy character vector of the same length as \code{idx},
+A lazy character vector of the same length as \code{idx}
+(or \code{source} if \code{idx} is \code{NULL}),
 or \code{NULL} if \code{source} is \code{NULL}.
 }
 \description{
