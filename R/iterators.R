@@ -129,8 +129,6 @@ identical_graphs <- function(
 #' Decide if two graphs are the same as labelled graphs
 #'
 #' @description
-#' `r lifecycle::badge("experimental")`
-#'
 #' Two graphs are the same if they have the same directedness,
 #' the same vertex set and the same edge set.
 #' Unlike [identical_graphs()], the order in which vertices and edges are
