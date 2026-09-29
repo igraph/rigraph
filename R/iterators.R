@@ -136,11 +136,15 @@ identical_graphs <- function(
 #'
 #' @param source The graph's full vertex/edge name vector,
 #'   shared by reference across all sequences of the graph.
-#' @param idx A 1-based index into `source`.
-#' @return A lazy character vector of the same length as `idx`,
+#' @param idx A 1-based index into `source`,
+#'   or `NULL` for all of `source` in order.
+#'   The latter skips the copy when names are looked up,
+#'   e.g. in `V(g)["a"]`.
+#' @return A lazy character vector of the same length as `idx`
+#'   (or `source` if `idx` is `NULL`),
 #'   or `NULL` if `source` is `NULL`.
 #' @dev
-lazy_index_names <- function(source, idx) {
+lazy_index_names <- function(source, idx = NULL) {
   if (is.null(source)) {
     return(NULL)
   }
@@ -313,7 +317,7 @@ V <- function(graph) {
 
   res <- seq_len(vcount(graph))
   if (is_named(graph)) {
-    names(res) <- lazy_index_names(vertex_attr(graph)$name, res)
+    names(res) <- lazy_index_names(vertex_attr(graph)$name)
   }
   class(res) <- "igraph.vs"
   res <- set_complete_iterator(res)
@@ -531,7 +535,10 @@ E <- function(
   }
 
   if ("name" %in% edge_attr_names(graph)) {
-    names(res) <- lazy_index_names(edge_attr(graph)$name, res)
+    names(res) <- lazy_index_names(
+      edge_attr(graph)$name,
+      if (!is_complete_iterator(res)) res
+    )
   }
   if (is_named(graph)) {
     el <- ends(graph, es = res)
@@ -905,7 +912,9 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
   }
 
   res <- drop_null(res)
-  if (length(res)) {
+  if (length(res) == 1) {
+    res[[1]]
+  } else if (length(res)) {
     do_call(c, res)
   } else {
     x[FALSE]

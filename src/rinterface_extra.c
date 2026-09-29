@@ -2627,7 +2627,9 @@ static R_altrep_class_t Rx_igraph_altrep_to_class;
 static R_altrep_class_t Rx_igraph_lazy_names_class;
 
 static R_xlen_t Rx_igraph_lazy_names_length(SEXP vec) {
-  return XLENGTH(VECTOR_ELT(R_altrep_data1(vec), 1));
+  SEXP d1=R_altrep_data1(vec);
+  SEXP idx=VECTOR_ELT(d1, 1);
+  return XLENGTH(idx == R_NilValue ? VECTOR_ELT(d1, 0) : idx);
 }
 
 static SEXP Rx_igraph_lazy_names_materialize(SEXP vec) {
@@ -2666,7 +2668,14 @@ static SEXP Rx_igraph_lazy_names_materialize(SEXP vec) {
  * vector, so a read-only data pointer is all callers (as.vector(), coercion)
  * need. */
 static void *Rx_igraph_lazy_names_dataptr(SEXP vec, Rboolean writeable) {
-  return (void *) DATAPTR_RO(Rx_igraph_lazy_names_materialize(vec));
+  SEXP data=Rx_igraph_lazy_names_materialize(vec);
+  /* An identity vector caches the graph's own name vector (see
+   * Rx_igraph_lazy_names()); never hand out a writable pointer into it. */
+  if (writeable && data == VECTOR_ELT(R_altrep_data1(vec), 0)) {
+    data=Rf_duplicate(data);
+    R_set_altrep_data2(vec, data);
+  }
+  return (void *) DATAPTR_RO(data);
 }
 
 static const void *Rx_igraph_lazy_names_dataptr_or_null(SEXP vec) {
@@ -2692,8 +2701,9 @@ static SEXP Rx_igraph_lazy_names_extract_subset(SEXP vec, SEXP indx, SEXP call) 
   SEXP d1=R_altrep_data1(vec);
   SEXP source=VECTOR_ELT(d1, 0);
   SEXP idx=VECTOR_ELT(d1, 1);
-  R_xlen_t leni=XLENGTH(idx);
-  const int *pidx=INTEGER(idx);
+  int identity=(idx == R_NilValue);
+  R_xlen_t leni=XLENGTH(identity ? source : idx);
+  const int *pidx=identity ? NULL : INTEGER(idx);
 
   SEXP indx_int=PROTECT(Rf_coerceVector(indx, INTSXP));
   R_xlen_t n=XLENGTH(indx_int);
@@ -2706,7 +2716,7 @@ static SEXP Rx_igraph_lazy_names_extract_subset(SEXP vec, SEXP indx, SEXP call) 
     if (p == NA_INTEGER || p < 1 || p > leni) {
       pnew[k]=NA_INTEGER;
     } else {
-      pnew[k]=pidx[p - 1];
+      pnew[k]=identity ? p : pidx[p - 1];
     }
   }
 
@@ -2720,17 +2730,26 @@ static SEXP Rx_igraph_lazy_names_extract_subset(SEXP vec, SEXP indx, SEXP call) 
 
 /* Construct a lazy-names vector from a character `source` and a (1-based)
  * integer `idx`. Returns R_NilValue when `source` is not usable, so callers
- * can fall back to no names. */
+ * can fall back to no names.
+ *
+ * `idx = NULL` stands for the identity 1..length(source), as for the full
+ * V(graph). Then the names are exactly `source`, so it is used as the
+ * materialized cache right away: name lookups (V(g)["a"], V(g)[attr == value])
+ * read `source` directly instead of copying it, while subsets still stay lazy.
+ * data1 then holds a NULL index, which the length and subset methods handle;
+ * materialization never needs it because data2 is always set. */
 SEXP Rx_igraph_lazy_names(SEXP source, SEXP idx) {
   if (TYPEOF(source) != STRSXP) {
     return R_NilValue;
   }
 
-  SEXP idx_int=PROTECT(Rf_coerceVector(idx, INTSXP));
+  int identity=(idx == R_NilValue);
+  SEXP idx_int=PROTECT(identity ? R_NilValue : Rf_coerceVector(idx, INTSXP));
   SEXP d1=PROTECT(Rf_allocVector(VECSXP, 2));
   SET_VECTOR_ELT(d1, 0, source);
   SET_VECTOR_ELT(d1, 1, idx_int);
-  SEXP res=R_new_altrep(Rx_igraph_lazy_names_class, d1, R_NilValue);
+  SEXP res=R_new_altrep(Rx_igraph_lazy_names_class, d1,
+                        identity ? source : R_NilValue);
   UNPROTECT(2);
   return res;
 }
