@@ -64,8 +64,15 @@ Suggests:
     vdiffr,
     withr
 Enhances: 
+    fs,
     graph,
-    memoise
+    memoise,
+    purrr,
+    roxygen2,
+    tibble,
+    treesitter,
+    treesitter.r,
+    xml2
 LinkingTo: 
     cpp11 (>= 0.5.0)
 VignetteBuilder: 
