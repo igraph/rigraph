@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.3.9040
+
+## Continuous integration
+
+### touchstone
+
+- Benchmark `incident_edges()`, `neighbors()`, `union()` and indexed edge attribute assignment (#2914).
+
+
 # igraph 2.3.3.9039
 
 ## Bug fixes
