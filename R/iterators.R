@@ -161,6 +161,11 @@ identical_graphs <- function(
 #' - [isomorphic()]: is there any way to relabel the vertices of one graph
 #'   so that it becomes the same as the other?
 #'
+#' Each check is stricter than the next one:
+#' identical graphs are always the same,
+#' and graphs that are the same are always isomorphic,
+#' but not the other way round.
+#'
 #' @param g1,g2 The two graphs.
 #' @inheritParams rlang::args_dots_empty
 #' @param use_names Logical scalar, whether to identify vertices by their
@@ -182,6 +187,13 @@ identical_graphs <- function(
 #' g3 <- make_graph(c(1, 3, 2, 3), directed = FALSE)
 #' is_same_graph(g1, g3)
 #' isomorphic(g1, g3)
+#'
+#' # After bringing both graphs into canonical form,
+#' # is_same_graph() tests for isomorphism.
+#' # For named graphs, use `use_names = FALSE`:
+#' # matching vertices by name would undo the reordering.
+#' canon <- function(g) permute(g, canonical_permutation(g)$labeling)
+#' is_same_graph(canon(g1), canon(g3))
 #'
 #' # Named vertices stored in a different order
 #' edges <- data.frame(from = c("a", "b"), to = c("b", "c"))
