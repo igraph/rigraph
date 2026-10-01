@@ -273,6 +273,7 @@ generators:
     - igraph_circulant
     - igraph_cycle_graph
     - igraph_extended_chordal_ring
+    - igraph_hexagonal_lattice
     - igraph_hypercube
     - igraph_lcf_vector
     - igraph_path_graph

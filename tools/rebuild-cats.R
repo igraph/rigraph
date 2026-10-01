@@ -187,7 +187,11 @@ placements <- rbind(
 
   c("structural", "summary-statistics", "igraph_density"),
   c("structural", "summary-statistics", "igraph_diversity"),
-  c("structural", "summary-statistics", "igraph_mean_degree")
+  c("structural", "summary-statistics", "igraph_mean_degree"),
+
+  # --- New exposed constructors ---------------------------------------------
+
+  c("generators", "regular-structure-generators", "igraph_hexagonal_lattice")
 )
 colnames(placements) <- c("category", "subcategory", "fn")
 placements <- as.data.frame(placements, stringsAsFactors = FALSE)
