@@ -47,7 +47,7 @@ write_graph_gml_impl <- function(
   graph,
   outstream,
   options = c("default", "encode_only_quot"),
-  id,
+  id = NULL,
   creator = NULL
 ) {
   # Argument checks
@@ -55,7 +55,9 @@ write_graph_gml_impl <- function(
   check_string(outstream)
 
   options <- switch_igraph_arg(options, "default" = 0L, "encode_only_quot" = 1L)
-  id <- as.numeric(id)
+  if (!is.null(id)) {
+    id <- as.numeric(id)
+  }
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
