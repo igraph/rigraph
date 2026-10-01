@@ -95,6 +95,7 @@ Other functions for manipulating graph structure:
 \code{\link[=edge]{edge()}},
 \code{\link{igraph-minus}},
 \code{\link[=intersection]{intersection()}},
+\code{\link[=mycielskian]{mycielskian()}},
 \code{\link[=path]{path()}},
 \code{\link[=permute]{permute()}},
 \code{\link[=rep.igraph]{rep.igraph()}},

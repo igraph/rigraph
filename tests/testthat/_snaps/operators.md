@@ -38,3 +38,23 @@
       Error in `vertices()`:
       ! Duplicate attribute names in `vertices()`: "foo" and "bar".
 
+# mycielskian() errors
+
+    Code
+      mycielskian(make_ring(3), k = -1)
+    Condition
+      Error in `mycielskian_impl()`:
+      ! The number of Mycielski iterations must not be negative. Invalid value
+      Source: <file>:<line>
+
+---
+
+    Code
+      mycielskian(make_ring(3), 2, TRUE)
+    Condition
+      Error in `mycielskian()`:
+      ! `...` must be empty.
+      x Problematic argument:
+      * ..1 = TRUE
+      i Did you forget to name an argument?
+

@@ -173,3 +173,22 @@
       Error in `make_empty_graph()`:
       ! `directed` must be a logical, not a string.
 
+# make_mycielski_graph() errors
+
+    Code
+      make_mycielski_graph(-1)
+    Condition
+      Error in `mycielski_graph_impl()`:
+      ! The Mycielski graph order must not be negative. Invalid value
+      Source: <file>:<line>
+
+---
+
+    Code
+      make_mycielski_graph(3, directed = TRUE)
+    Condition
+      Error in `make_mycielski_graph()`:
+      ! `...` must be empty.
+      x Problematic argument:
+      * directed = TRUE
+
