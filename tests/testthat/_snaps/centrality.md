@@ -59,3 +59,13 @@
       Error in `arpack()`:
       ! Can't use unkown ARPACK options: unknown_thing1, unknown_thing2
 
+# page_rank(algo = ) is deprecated but still works
+
+    Code
+      res_legacy <- page_rank(star, algo = "prpack")
+    Condition
+      Warning:
+      Calling `page_rank()` with positional or abbreviated arguments was deprecated in igraph 3.0.0.
+      i Detected call: page_rank(graph, algo)
+      i Use instead: page_rank(graph, algorithm = )
+

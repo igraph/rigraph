@@ -4,7 +4,7 @@
 \alias{feedback_vertex_set}
 \title{Finding a feedback vertex set in a graph}
 \usage{
-feedback_vertex_set(graph, ..., weights = NULL, algo = c("exact_ip"))
+feedback_vertex_set(graph, ..., weights = NULL, algorithm = c("exact_ip"))
 }
 \arguments{
 \item{graph}{The input graph}
@@ -17,7 +17,7 @@ attribute called \sQuote{\code{weight}}, and this argument is
 the feedback vertex set problem is to find a feedback vertex set with
 the smallest total weight.}
 
-\item{algo}{Specifies the algorithm to use. Currently, \dQuote{\code{exact_ip}},
+\item{algorithm}{Specifies the algorithm to use. Currently, \dQuote{\code{exact_ip}},
 which solves the feedback vertex set problem with an exact integer
 programming approach, is the only option.}
 }
