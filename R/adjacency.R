@@ -294,9 +294,9 @@ graph_from_adjacency_matrix <- function(
   # BEGIN GENERATED ARG_HANDLE: graph_from_adjacency_matrix, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("a", "ad"))
+    .arg_forbidden <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::sys.call())[-1L])), base::c("a", "ad"))
     if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn graph_from_adjacency_matrix}.", i = "Spell out the full argument name."))
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "ad", "add", "add."))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("a", "ad", "add", "add."))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn graph_from_adjacency_matrix}.")
     # Pre-3.0.0 signature: graph_from_adjacency_matrix(adjmatrix, mode, weighted, diag, add.colnames, add.rownames)
     .old_signature <- function(mode, weighted, diag, add.colnames, add.rownames, ...) {
@@ -452,9 +452,9 @@ from_adjacency <- function(
   # BEGIN GENERATED ARG_HANDLE: from_adjacency, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("a", "ad"))
+    .arg_forbidden <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::sys.call())[-1L])), base::c("a", "ad"))
     if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn from_adjacency}.", i = "Spell out the full argument name."))
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "ad", "add", "add."))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("a", "ad", "add", "add."))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn from_adjacency}.")
     # Pre-3.0.0 signature: from_adjacency(adjmatrix, mode, weighted, diag, add.colnames, add.rownames)
     .old_signature <- function(mode, weighted, diag, add.colnames, add.rownames, ...) {
