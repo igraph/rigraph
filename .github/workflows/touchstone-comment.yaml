@@ -1,7 +1,10 @@
 name: Continuous Benchmarks (Comment)
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref }}
+  # `github.head_ref` is empty for `workflow_run` events,
+  # which put every PR into one shared group,
+  # so a comment job for one PR cancelled the one for another.
+  group: ${{ github.workflow }}-${{ github.event.workflow_run.head_branch }}
   cancel-in-progress: true
 
 on:
