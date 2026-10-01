@@ -45,6 +45,12 @@ igraph_circulant:
         name: Circulant graph
       GATTR-PARAM: shifts
 
+igraph_generalized_petersen:
+    R:
+      GATTR:
+        name: Generalized Petersen graph
+      GATTR-PARAM: n, k
+
 igraph_lcf_vector:
     R:
       GATTR:
@@ -78,6 +84,18 @@ igraph_turan:
       GATTR:
         name: Turan graph
       GATTR-PARAM: n, r
+
+igraph_regular_tree:
+    R:
+      GATTR:
+        name: Regular tree
+      GATTR-PARAM: h, k
+
+igraph_symmetric_tree:
+    R:
+      GATTR:
+        name: Symmetric tree
+      GATTR-PARAM: branches
 
 #######################################
 # Constructors, games

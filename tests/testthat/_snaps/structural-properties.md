@@ -77,3 +77,14 @@
       [2,] -210  590 -380
       [3,] -200 -380  580
 
+# any_mutual rejects invalid arguments
+
+    Code
+      any_mutual(g, FALSE)
+    Condition
+      Error in `any_mutual()`:
+      ! `...` must be empty.
+      x Problematic argument:
+      * ..1 = FALSE
+      i Did you forget to name an argument?
+

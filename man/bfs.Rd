@@ -188,6 +188,7 @@ bfs(make_ring(10) \%du\% make_ring(10), root = 1, callback = f)
 \code{\link[=dfs]{dfs()}} for depth-first search.
 
 Other structural.properties:
+\code{\link[=any_mutual]{any_mutual()}},
 \code{\link[=component_distribution]{component_distribution()}},
 \code{\link[=connect]{connect()}},
 \code{\link[=constraint]{constraint()}},
