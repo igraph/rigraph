@@ -364,3 +364,39 @@ test_that("get_edge_ids() tail arguments and legacy positional recovery", {
   )
   expect_identical(res, get_edge_ids(g, c(2, 1), directed = FALSE))
 })
+
+test_that("head_of respects return.vs.es option", {
+  g <- make_tree(6, children = 2)
+  V(g)$name <- paste0("V", 1:6)
+
+  # Test with return.vs.es = TRUE (default)
+  local_igraph_options(return.vs.es = TRUE)
+  result <- head_of(g, E(g)[c(1, 4)])
+  expect_s3_class(result, "igraph.vs")
+  expect_length(result, 2)
+
+  # Test with return.vs.es = FALSE
+  local_igraph_options(return.vs.es = FALSE)
+  result <- head_of(g, E(g)[c(1, 4)])
+  expect_type(result, "double")
+  expect_length(result, 2)
+  expect_equal(as.numeric(result), c(2, 5))
+})
+
+test_that("tail_of respects return.vs.es option", {
+  g <- make_tree(6, children = 2)
+  V(g)$name <- paste0("V", 1:6)
+
+  # Test with return.vs.es = TRUE (default)
+  local_igraph_options(return.vs.es = TRUE)
+  result <- tail_of(g, E(g)[c(1, 4)])
+  expect_s3_class(result, "igraph.vs")
+  expect_length(result, 2)
+
+  # Test with return.vs.es = FALSE
+  local_igraph_options(return.vs.es = FALSE)
+  result <- tail_of(g, E(g)[c(1, 4)])
+  expect_type(result, "double")
+  expect_length(result, 2)
+  expect_equal(as.numeric(result), c(1, 2))
+})
