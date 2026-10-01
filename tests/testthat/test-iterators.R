@@ -279,6 +279,45 @@ test_that("is_same_graph() ignores attributes other than names", {
   expect_true(is_same_graph(g1, g2))
 })
 
+test_that("is_same_graph() compares selected vertex attributes", {
+  star <- make_star(4, mode = "undirected")
+  g1 <- set_vertex_attr(star, "color", value = c(1, 2, 2, 2))
+  g1 <- set_vertex_attr(g1, "size", value = 1:4)
+  g2 <- set_vertex_attr(star, "color", value = c(1, 3, 3, 3))
+  g2 <- set_vertex_attr(g2, "size", value = 1:4)
+
+  expect_true(is_same_graph(g1, g2))
+  expect_true(is_same_graph(g1, g2, vertex_attrs = "size"))
+  expect_false(is_same_graph(g1, g2, vertex_attrs = "color"))
+  expect_false(is_same_graph(g1, g2, vertex_attrs = c("size", "color")))
+  expect_true(is_same_graph(g1, g1, vertex_attrs = c("size", "color")))
+  expect_true(is_same_graph(g1, g2, vertex_attrs = character()))
+})
+
+test_that("is_same_graph() compares vertex attributes after matching names", {
+  edges <- data.frame(from = c("a", "b"), to = c("b", "c"))
+  vertices1 <- data.frame(name = c("a", "b", "c"), color = c(1, 2, 3))
+  vertices2 <- data.frame(name = c("c", "b", "a"), color = c(3, 2, 1))
+  g1 <- graph_from_data_frame(edges, directed = FALSE, vertices = vertices1)
+  g2 <- graph_from_data_frame(edges, directed = FALSE, vertices = vertices2)
+
+  expect_true(is_same_graph(g1, g2, vertex_attrs = "color"))
+})
+
+test_that("is_same_graph() compares vertex attributes exactly", {
+  g1 <- set_vertex_attr(make_ring(3), "color", value = c(1, 2, 3))
+  g2 <- set_vertex_attr(make_ring(3), "color", value = 1:3)
+  expect_false(is_same_graph(g1, g2, vertex_attrs = "color"))
+})
+
+test_that("is_same_graph() compares names as attributes when not matching by them", {
+  g1 <- set_vertex_attr(make_ring(3), "name", value = c("a", "b", "c"))
+  g2 <- set_vertex_attr(make_ring(3), "name", value = c("c", "b", "a"))
+
+  expect_true(is_same_graph(g1, g2, use_names = FALSE))
+  expect_false(is_same_graph(g1, g2, use_names = FALSE, vertex_attrs = "name"))
+})
+
 test_that("is_same_graph() errors", {
   g <- make_ring(3)
   dup <- set_vertex_attr(g, "name", value = c("a", "a", "b"))
@@ -288,6 +327,14 @@ test_that("is_same_graph() errors", {
     is_same_graph(g, g, TRUE)
     is_same_graph(g, g, use_names = NA)
     is_same_graph(g, NULL)
+    is_same_graph(g, g, vertex_attrs = 1)
+    is_same_graph(g, g, vertex_attrs = NA_character_)
+    is_same_graph(
+      g,
+      set_vertex_attr(g, "color", value = 1:3),
+      vertex_attrs = "color"
+    )
+    is_same_graph(g, g, vertex_attrs = c("color", "size"))
   })
   expect_true(is_same_graph(dup, dup, use_names = FALSE))
 })

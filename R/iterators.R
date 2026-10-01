@@ -149,7 +149,12 @@ identical_graphs <- function(
 #' The order of the edges does not matter,
 #' and neither does the order of the two endpoints of an undirected edge.
 #'
-#' Graph, vertex and edge attributes other than `name` are not compared.
+#' Vertex attributes listed in `vertex_attrs` must also be identical,
+#' after matching up the vertices.
+#' They are compared exactly, with [identical()],
+#' so for example the integer `1L` and the double `1` are different values.
+#' Graph and edge attributes are never compared,
+#' and neither are vertex attributes other than those in `vertex_attrs`.
 #'
 #' The three ways of comparing graphs answer different questions:
 #' - [identical_graphs()]: do the two objects store exactly the same data,
@@ -170,6 +175,11 @@ identical_graphs <- function(
 #' @inheritParams rlang::args_dots_empty
 #' @param use_names Logical scalar, whether to identify vertices by their
 #'   names if both graphs have a `name` vertex attribute.
+#' @param vertex_attrs Character vector of vertex attribute names to compare,
+#'   or `NULL` to compare none.
+#'   Every attribute must exist in both graphs.
+#'   Including `"name"` is only meaningful with `use_names = FALSE`,
+#'   otherwise names match by construction.
 #' @return A logical scalar, `TRUE` if the two graphs are the same.
 #' @seealso [identical_graphs()] for comparing the internal representation,
 #'   [isomorphic()] for comparing graphs up to relabelling of the vertices.
@@ -202,11 +212,29 @@ identical_graphs <- function(
 #' identical_graphs(g4, g5)
 #' is_same_graph(g4, g5)
 #' is_same_graph(g4, g5, use_names = FALSE)
-is_same_graph <- function(g1, g2, ..., use_names = TRUE) {
+#'
+#' # Vertex-coloured graphs: same edges, different colours
+#' star <- make_star(4, mode = "undirected")
+#' c1 <- set_vertex_attr(star, "color", value = c(1, 2, 2, 2))
+#' c2 <- set_vertex_attr(star, "color", value = c(1, 3, 3, 3))
+#' is_same_graph(c1, c2)
+#' is_same_graph(c1, c2, vertex_attrs = "color")
+is_same_graph <- function(g1, g2, ..., use_names = TRUE, vertex_attrs = NULL) {
   check_dots_empty()
   ensure_igraph(g1)
   ensure_igraph(g2)
   check_bool(use_names)
+  check_character(vertex_attrs, allow_na = FALSE, allow_null = TRUE)
+
+  missing1 <- setdiff(vertex_attrs, vertex_attr_names(g1))
+  missing2 <- setdiff(vertex_attrs, vertex_attr_names(g2))
+  if (length(missing1) > 0 || length(missing2) > 0) {
+    cli::cli_abort(c(
+      "All {.arg vertex_attrs} must exist in both graphs.",
+      x = if (length(missing1) > 0) "Missing in {.arg g1}: {.val {missing1}}.",
+      x = if (length(missing2) > 0) "Missing in {.arg g2}: {.val {missing2}}."
+    ))
+  }
 
   if (use_names && xor(is_named(g1), is_named(g2))) {
     cli::cli_warn(c(
@@ -230,7 +258,17 @@ is_same_graph <- function(g1, g2, ..., use_names = TRUE) {
     g2 <- permute(g2, match(names2, names1))
   }
 
-  is_same_graph_impl(graph1 = g1, graph2 = g2)
+  if (!is_same_graph_impl(graph1 = g1, graph2 = g2)) {
+    return(FALSE)
+  }
+
+  for (attr in vertex_attrs) {
+    if (!identical(vertex_attr(g1, attr), vertex_attr(g2, attr))) {
+      return(FALSE)
+    }
+  }
+
+  TRUE
 }
 
 add_vses_graph_ref <- function(vses, graph) {

@@ -33,6 +33,29 @@
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
+    Code
+      is_same_graph(g, g, vertex_attrs = 1)
+    Condition
+      Error in `is_same_graph()`:
+      ! `vertex_attrs` must be a character vector or `NULL`, not the number 1.
+    Code
+      is_same_graph(g, g, vertex_attrs = NA_character_)
+    Condition
+      Error in `is_same_graph()`:
+      ! `vertex_attrs` can't contain NA values.
+    Code
+      is_same_graph(g, set_vertex_attr(g, "color", value = 1:3), vertex_attrs = "color")
+    Condition
+      Error in `is_same_graph()`:
+      ! All `vertex_attrs` must exist in both graphs.
+      x Missing in `g1`: "color".
+    Code
+      is_same_graph(g, g, vertex_attrs = c("color", "size"))
+    Condition
+      Error in `is_same_graph()`:
+      ! All `vertex_attrs` must exist in both graphs.
+      x Missing in `g1`: "color" and "size".
+      x Missing in `g2`: "color" and "size".
 
 # printing connected vs/es works
 
