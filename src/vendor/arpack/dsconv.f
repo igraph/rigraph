@@ -3,7 +3,7 @@ c\BeginDoc
 c
 c\Name: igraphdsconv
 c
-c\Description: 
+c\Description:
 c  Convergence testing for the symmetric Arnoldi eigenvalue routine.
 c
 c\Usage:
@@ -34,23 +34,23 @@ c
 c\BeginLib
 c
 c\Routines called:
-c     igraphsecond  ARPACK utility routine for timing.
-c     dlamch  LAPACK routine that determines machine constants. 
+c     igrapharscnd  ARPACK utility routine for timing.
+c     dlamch  LAPACK routine that determines machine constants.
 c
 c\Author
 c     Danny Sorensen               Phuong Vu
-c     Richard Lehoucq              CRPC / Rice University 
-c     Dept. of Computational &     Houston, Texas 
+c     Richard Lehoucq              CRPC / Rice University
+c     Dept. of Computational &     Houston, Texas
 c     Applied Mathematics
-c     Rice University           
-c     Houston, Texas            
+c     Rice University
+c     Houston, Texas
 c
-c\SCCS Information: @(#) 
+c\SCCS Information: @(#)
 c FILE: sconv.F   SID: 2.4   DATE OF SID: 4/19/96   RELEASE: 2
 c
 c\Remarks
 c     1. Starting with version 2.4, this routine no longer uses the
-c        Parlett strategy using the gap conditions. 
+c        Parlett strategy using the gap conditions.
 c
 c\EndLib
 c
@@ -106,9 +106,9 @@ c     %-----------------------%
 c     | Executable Statements |
 c     %-----------------------%
 c
-      call igraphsecond (t0)
+      call igrapharscnd (t0)
 c
-      eps23 = dlamch('Epsilon-Machine') 
+      eps23 = dlamch('Epsilon-Machine')
       eps23 = eps23**(2.0D+0 / 3.0D+0)
 c
       nconv  = 0
@@ -125,10 +125,10 @@ c
          end if
 c
    10 continue
-c 
-      call igraphsecond (t1)
+c
+      call igrapharscnd (t1)
       tsconv = tsconv + (t1 - t0)
-c 
+c
       return
 c
 c     %---------------%

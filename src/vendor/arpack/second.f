@@ -1,4 +1,4 @@
-      SUBROUTINE IGRAPHSECOND( T )
+      SUBROUTINE IGRAPHARSCND( T )
 *
       REAL       T
 *
@@ -10,34 +10,14 @@
 *  Purpose
 *  =======
 *
-*  SECOND returns the user time for a process in igraphseconds.
-*  This version gets the time from the system function ETIME.
-*
-*     .. Local Scalars ..
-      REAL               T1
-*     ..
-*     .. Local Arrays ..
-      REAL               TARRAY( 2 )
-*     ..
-*     .. External Functions ..
-      REAL               ETIME
-*     ..
-*     .. Executable Statements ..
-*
-*     ======================================
-*     This has been changed by the CRAN team.
-*     Needs to be back-ported to igrapch/C
-*     ======================================
+*  IGRAPHARSCND returns the user time for a process in seconds.
+*  This version was modified by the igraph team to always return 0,
+*  since igraph does not require ARPACK's timing functionality.
 *
       T = 0.0
       RETURN
 *
-*     ======================================
-*     This has been changed by the CRAN team
-*     Needs to be back-ported to igrapch/C
-*     ======================================
 *
-*
-*     End of SECOND
+*     End of IGRAPHARSCND
 *
       END
