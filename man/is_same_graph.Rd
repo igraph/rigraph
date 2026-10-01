@@ -11,57 +11,72 @@ is_same_graph(g1, g2, ..., use_names = TRUE)
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{use_names}{Logical scalar, whether to match vertices by their names
-if both graphs have a \code{name} vertex attribute.}
+\item{use_names}{Logical scalar, whether to identify vertices by their
+names if both graphs have a \code{name} vertex attribute.}
 }
 \value{
 A logical scalar, \code{TRUE} if the two graphs are the same.
 }
 \description{
-Two graphs are the same if they have the same directedness,
-the same vertex set and the same edge set.
+Two graphs are the same as labelled graphs if they have the same
+directedness, the same vertices and the same edges.
 Unlike \code{\link[=identical_graphs]{identical_graphs()}}, the order in which vertices and edges are
-stored is ignored,
-and unlike \code{\link[=isomorphic]{isomorphic()}}, vertices are not relabelled.
+stored does not matter.
+Unlike \code{\link[=isomorphic]{isomorphic()}}, vertices are not relabelled.
 }
 \details{
+Vertices can be identified by their index or by their name,
+and \code{use_names} controls which one is used.
 If \code{use_names} is \code{TRUE} and both graphs have a \code{name} vertex attribute,
-vertices are matched by name, so the two graphs may store their vertices
-in a different order.
+a vertex of \code{g1} corresponds to the vertex with the same name in \code{g2},
+wherever it is stored.
 Vertex names must be unique in both graphs in this case.
-Otherwise, vertices are matched by their IDs.
+Otherwise, the \eqn{i}-th vertex of \code{g1} corresponds to the
+\eqn{i}-th vertex of \code{g2}.
 
-Edges are compared as a multiset:
-the order of the edges and, in undirected graphs, the order of the
-endpoints of an edge do not matter,
-but the multiplicity of each edge does.
+Two graphs have the same edges if every edge occurs equally often in both.
+The order of the edges does not matter,
+and neither does the order of the two endpoints of an undirected edge.
 
 Graph, vertex and edge attributes other than \code{name} are not compared.
+
+The three ways of comparing graphs answer different questions:
+\itemize{
+\item \code{\link[=identical_graphs]{identical_graphs()}}: do the two objects store exactly the same data,
+in the same order?
+This is mostly useful in tests,
+or before transferring edge attributes from one graph to the other by
+position.
+\item \code{is_same_graph()}: do the same vertices have the same connections?
+\item \code{\link[=isomorphic]{isomorphic()}}: is there any way to relabel the vertices of one graph
+so that it becomes the same as the other?
+}
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_same_graph}{\code{is_same_graph()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_permute_vertices}{\code{permute_vertices()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
 }
 
 \examples{
-# Same edges, stored in a different order
-g1 <- make_graph(c(1, 2, 2, 3, 3, 1), directed = FALSE)
-g2 <- make_graph(c(3, 2, 1, 3, 2, 1), directed = FALSE)
+# 1-2, 3-2 and 2-3, 1-2 only differ in the order of the edges and of
+# their endpoints, so they are the same graph.
+g1 <- make_graph(c(1, 2, 3, 2), directed = FALSE)
+g2 <- make_graph(c(2, 3, 1, 2), directed = FALSE)
 identical_graphs(g1, g2)
 is_same_graph(g1, g2)
 
-# Same named graph, vertices stored in a different order
-edges <- data.frame(from = c("a", "b"), to = c("b", "c"))
-g3 <- graph_from_data_frame(edges, vertices = c("a", "b", "c"))
-g4 <- graph_from_data_frame(edges, vertices = c("c", "b", "a"))
-identical_graphs(g3, g4)
-is_same_graph(g3, g4)
-is_same_graph(g3, g4, use_names = FALSE)
+# 1-3, 2-3 is isomorphic to them, but not the same:
+# it contains the edge 1-3, which g1 does not.
+g3 <- make_graph(c(1, 3, 2, 3), directed = FALSE)
+is_same_graph(g1, g3)
+isomorphic(g1, g3)
 
-# Isomorphic, but not the same
-star1 <- make_star(4, mode = "undirected")
-star2 <- make_graph(c(2, 1, 2, 3, 2, 4), directed = FALSE)
-is_same_graph(star1, star2)
-isomorphic(star1, star2)
+# Named vertices stored in a different order
+edges <- data.frame(from = c("a", "b"), to = c("b", "c"))
+g4 <- graph_from_data_frame(edges, vertices = c("a", "b", "c"))
+g5 <- graph_from_data_frame(edges, vertices = c("c", "b", "a"))
+identical_graphs(g4, g5)
+is_same_graph(g4, g5)
+is_same_graph(g4, g5, use_names = FALSE)
 }
 \seealso{
 \code{\link[=identical_graphs]{identical_graphs()}} for comparing the internal representation,
