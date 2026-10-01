@@ -6,12 +6,13 @@ migrations <- list(
   asym_pref = list(
     old = function(nodes, types, type.dist.matrix, pref.matrix, loops) {},
     new = function(
-      nodes,
+      n,
       types,
       ...,
       type.dist.matrix = NULL,
       pref.matrix = NULL,
-      loops = FALSE
+      loops = FALSE,
+      nodes = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -81,11 +82,12 @@ migrations <- list(
   grg = list(
     old = function(nodes, radius, torus, coords) {},
     new = function(
-      nodes,
+      n,
       radius,
       ...,
       torus = FALSE,
-      coords = FALSE
+      coords = FALSE,
+      nodes = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -180,14 +182,15 @@ migrations <- list(
       loops
     ) {},
     new = function(
-      nodes,
+      n,
       types,
       ...,
       type.dist = NULL,
       fixed.sizes = FALSE,
       pref.matrix = NULL,
       directed = FALSE,
-      loops = FALSE
+      loops = FALSE,
+      nodes = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -195,12 +198,13 @@ migrations <- list(
   sample_asym_pref = list(
     old = function(nodes, types, type.dist.matrix, pref.matrix, loops) {},
     new = function(
-      nodes,
+      n,
       types,
       ...,
       type.dist.matrix = NULL,
       pref.matrix = NULL,
-      loops = FALSE
+      loops = FALSE,
+      nodes = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -311,12 +315,13 @@ migrations <- list(
   sample_forestfire = list(
     old = function(nodes, fw.prob, bw.factor, ambs, directed) {},
     new = function(
-      nodes,
+      n,
       fw.prob,
       ...,
       bw.factor = 1,
       ambs = 1,
-      directed = TRUE
+      directed = TRUE,
+      nodes = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -348,11 +353,12 @@ migrations <- list(
   sample_grg = list(
     old = function(nodes, radius, torus, coords) {},
     new = function(
-      nodes,
+      n,
       radius,
       ...,
       torus = FALSE,
-      coords = FALSE
+      coords = FALSE,
+      nodes = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -463,14 +469,15 @@ migrations <- list(
       loops
     ) {},
     new = function(
-      nodes,
+      n,
       types,
       ...,
       type.dist = NULL,
       fixed.sizes = FALSE,
       pref.matrix = NULL,
       directed = FALSE,
-      loops = FALSE
+      loops = FALSE,
+      nodes = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -505,13 +512,14 @@ migrations <- list(
   sample_traits = list(
     old = function(nodes, types, k, type.dist, pref.matrix, directed) {},
     new = function(
-      nodes,
+      n,
       types,
       k = 1,
       ...,
       type.dist = NULL,
       pref.matrix = NULL,
-      directed = FALSE
+      directed = FALSE,
+      nodes = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -526,13 +534,14 @@ migrations <- list(
       directed
     ) {},
     new = function(
-      nodes,
+      n,
       types,
       ...,
       edge.per.step = 1,
       type.dist = NULL,
       pref.matrix = NULL,
-      directed = FALSE
+      directed = FALSE,
+      nodes = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -567,13 +576,14 @@ migrations <- list(
   traits = list(
     old = function(nodes, types, k, type.dist, pref.matrix, directed) {},
     new = function(
-      nodes,
+      n,
       types,
       k = 1,
       ...,
       type.dist = NULL,
       pref.matrix = NULL,
-      directed = FALSE
+      directed = FALSE,
+      nodes = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -588,13 +598,14 @@ migrations <- list(
       directed
     ) {},
     new = function(
-      nodes,
+      n,
       types,
       ...,
       edge.per.step = 1,
       type.dist = NULL,
       pref.matrix = NULL,
-      directed = FALSE
+      directed = FALSE,
+      nodes = deprecated()
     ) {},
     when = "3.0.0"
   )

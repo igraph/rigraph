@@ -42,7 +42,7 @@ centralization.evcent.tmax <- function(
   )
   centr_eigen_tmax(
     graph = graph,
-    nodes = nodes,
+    n = nodes,
     directed = directed,
     scale = scale
   )
@@ -98,7 +98,7 @@ centralization.degree.tmax <- function(
     "centralization.degree.tmax()",
     "centr_degree_tmax()"
   )
-  centr_degree_tmax(graph = graph, nodes = nodes, mode = mode, loops = loops)
+  centr_degree_tmax(graph = graph, n = nodes, mode = mode, loops = loops)
 } # nocov end
 
 #' Centralize a graph according to the degrees of vertices
@@ -152,7 +152,7 @@ centralization.closeness.tmax <- function(
     "centralization.closeness.tmax()",
     "centr_clo_tmax()"
   )
-  centr_clo_tmax(graph = graph, nodes = nodes, mode = mode)
+  centr_clo_tmax(graph = graph, n = nodes, mode = mode)
 } # nocov end
 
 #' Centralize a graph according to the closeness of vertices
@@ -200,7 +200,7 @@ centralization.betweenness.tmax <- function(
     "centralization.betweenness.tmax()",
     "centr_betw_tmax()"
   )
-  centr_betw_tmax(graph = graph, nodes = nodes, directed = directed)
+  centr_betw_tmax(graph = graph, n = nodes, directed = directed)
 } # nocov end
 
 #' Centralize a graph according to the betweenness of vertices
@@ -463,8 +463,10 @@ centr_degree <- function(
 #'
 #' See [centralize()] for a summary of graph centralization.
 #'
-#' @param graph The input graph. It can also be `NULL` if `nodes` is given.
-#' @param nodes The number of vertices. This is ignored if the graph is given.
+#' @param graph The input graph. It can also be `NULL` if `n` is given.
+#' @param n The number of vertices. This is ignored if the graph is given.
+#' @param nodes `r lifecycle::badge("deprecated")` Use `n` instead.
+#' @inheritParams rlang::args_dots_empty
 #' @param mode This is the same as the `mode` argument of `degree()`. Ignored
 #'   if `graph` is given and the graph is undirected.
 #' @inheritParams centr_degree
@@ -483,10 +485,64 @@ centr_degree <- function(
 #' centr_degree(g, normalized = TRUE)$centralization
 centr_degree_tmax <- function(
   graph = NULL,
-  nodes = 0,
+  n = 0,
+  ...,
   mode = c("all", "out", "in", "total"),
-  loops
+  loops,
+  nodes = deprecated()
 ) {
+  # BEGIN GENERATED ARG_HANDLE: centr_degree_tmax, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: centr_degree_tmax(graph, nodes, mode, loops)
+    .old_signature <- function(mode, loops, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn centr_degree_tmax}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn centr_degree_tmax}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(mode)) base::list(mode = mode),
+        if (!base::missing(loops)) base::list(loops = loops)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(mode)) "mode",
+        if (!base::missing(loops)) "loops"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn centr_degree_tmax} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `centr_degree_tmax()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  centr_degree_tmax(", base::paste(base::c("graph", "n", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    centr_degree_tmax(", base::paste(base::c("graph", "n", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
+  if (lifecycle::is_present(nodes)) {
+    if (!missing(n)) {
+      cli::cli_abort(c(
+        "Argument {.arg n} of {.fn centr_degree_tmax} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg nodes}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "centr_degree_tmax(nodes = )",
+      "centr_degree_tmax(n = )"
+    )
+    n <- nodes
+  }
+
   if (!lifecycle::is_present(loops)) {
     lifecycle::deprecate_stop(
       when = "2.0.0",
@@ -498,14 +554,14 @@ centr_degree_tmax <- function(
   # Argument checks
   ensure_igraph(graph, optional = TRUE)
 
-  nodes <- as.numeric(nodes)
+  n <- as.numeric(n)
 
   loops <- as.logical(loops)
 
   # Function call
   res <- centralization_degree_tmax_impl(
     graph = graph,
-    nodes = nodes,
+    nodes = n,
     mode = mode,
     loops = loops
   )
@@ -615,9 +671,10 @@ centr_betw <- function(
 #' See [centralize()] for a summary of graph centralization.
 #'
 #' @param graph The input graph. It can also be `NULL` if
-#'   `nodes` and `directed` are both given.
-#' @param nodes The number of vertices. This is ignored if the graph is
+#'   `n` and `directed` are both given.
+#' @param n The number of vertices. This is ignored if the graph is
 #'   given.
+#' @param nodes `r lifecycle::badge("deprecated")` Use `n` instead.
 #' @inheritParams rlang::args_dots_empty
 #' @param directed Logical, whether to use directed shortest paths
 #'   for calculating betweenness. Ignored if an undirected graph was
@@ -638,9 +695,10 @@ centr_betw <- function(
 #' centr_betw(g, normalized = TRUE)$centralization
 centr_betw_tmax <- function(
   graph = NULL,
-  nodes = 0,
+  n = 0,
   ...,
-  directed = TRUE
+  directed = TRUE,
+  nodes = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: centr_betw_tmax, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -669,17 +727,32 @@ centr_betw_tmax <- function(
         "3.0.0",
         what = base::I("Calling `centr_betw_tmax()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  centr_betw_tmax(", base::paste(base::c("graph", "nodes", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    centr_betw_tmax(", base::paste(base::c("graph", "nodes", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  centr_betw_tmax(", base::paste(base::c("graph", "n", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    centr_betw_tmax(", base::paste(base::c("graph", "n", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
+  if (lifecycle::is_present(nodes)) {
+    if (!missing(n)) {
+      cli::cli_abort(c(
+        "Argument {.arg n} of {.fn centr_betw_tmax} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg nodes}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "centr_betw_tmax(nodes = )",
+      "centr_betw_tmax(n = )"
+    )
+    n <- nodes
+  }
+
   centralization_betweenness_tmax_impl(
     graph = graph,
-    nodes = nodes,
+    nodes = n,
     directed = directed
   )
 }
@@ -776,9 +849,10 @@ centr_clo <- function(
 #' See [centralize()] for a summary of graph centralization.
 #'
 #' @param graph The input graph. It can also be `NULL` if
-#'   `nodes` is given.
-#' @param nodes The number of vertices. This is ignored if the graph is
+#'   `n` is given.
+#' @param n The number of vertices. This is ignored if the graph is
 #'   given.
+#' @param nodes `r lifecycle::badge("deprecated")` Use `n` instead.
 #' @inheritParams rlang::args_dots_empty
 #' @param mode This is the same as the `mode` argument of
 #'   `closeness()`. Ignored if an undirected graph is given.
@@ -798,9 +872,10 @@ centr_clo <- function(
 #' centr_clo(g, normalized = TRUE)$centralization
 centr_clo_tmax <- function(
   graph = NULL,
-  nodes = 0,
+  n = 0,
   ...,
-  mode = c("out", "in", "all", "total")
+  mode = c("out", "in", "all", "total"),
+  nodes = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: centr_clo_tmax, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -829,17 +904,32 @@ centr_clo_tmax <- function(
         "3.0.0",
         what = base::I("Calling `centr_clo_tmax()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  centr_clo_tmax(", base::paste(base::c("graph", "nodes", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    centr_clo_tmax(", base::paste(base::c("graph", "nodes", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  centr_clo_tmax(", base::paste(base::c("graph", "n", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    centr_clo_tmax(", base::paste(base::c("graph", "n", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
+  if (lifecycle::is_present(nodes)) {
+    if (!missing(n)) {
+      cli::cli_abort(c(
+        "Argument {.arg n} of {.fn centr_clo_tmax} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg nodes}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "centr_clo_tmax(nodes = )",
+      "centr_clo_tmax(n = )"
+    )
+    n <- nodes
+  }
+
   centralization_closeness_tmax_impl(
     graph = graph,
-    nodes = nodes,
+    nodes = n,
     mode = mode
   )
 }
@@ -923,9 +1013,11 @@ centr_eigen <- function(
 #' See [centralize()] for a summary of graph centralization.
 #'
 #' @param graph The input graph. It can also be `NULL`, if
-#'   `nodes` is given.
-#' @param nodes The number of vertices. This is ignored if the graph is
+#'   `n` is given.
+#' @param n The number of vertices. This is ignored if the graph is
 #'   given.
+#' @param nodes `r lifecycle::badge("deprecated")` Use `n` instead.
+#' @inheritParams rlang::args_dots_empty
 #' @param directed Logical, whether to consider edge directions
 #'   during the calculation. Ignored in undirected graphs.
 #' @param scale `r lifecycle::badge("deprecated")` Ignored. Computing
@@ -946,10 +1038,64 @@ centr_eigen <- function(
 #' centr_eigen(g, normalized = TRUE)$centralization
 centr_eigen_tmax <- function(
   graph = NULL,
-  nodes = 0,
+  n = 0,
+  ...,
   directed = FALSE,
-  scale = deprecated()
+  scale = deprecated(),
+  nodes = deprecated()
 ) {
+  # BEGIN GENERATED ARG_HANDLE: centr_eigen_tmax, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: centr_eigen_tmax(graph, nodes, directed, scale)
+    .old_signature <- function(directed, scale, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn centr_eigen_tmax}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn centr_eigen_tmax}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(directed)) base::list(directed = directed),
+        if (!base::missing(scale)) base::list(scale = scale)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(directed)) "directed",
+        if (!base::missing(scale)) "scale"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn centr_eigen_tmax} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `centr_eigen_tmax()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  centr_eigen_tmax(", base::paste(base::c("graph", "n", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    centr_eigen_tmax(", base::paste(base::c("graph", "n", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
+  if (lifecycle::is_present(nodes)) {
+    if (!missing(n)) {
+      cli::cli_abort(c(
+        "Argument {.arg n} of {.fn centr_eigen_tmax} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg nodes}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "centr_eigen_tmax(nodes = )",
+      "centr_eigen_tmax(n = )"
+    )
+    n <- nodes
+  }
+
   if (lifecycle::is_present(scale)) {
     lifecycle::deprecate_warn(
       "2.2.0",
@@ -961,7 +1107,7 @@ centr_eigen_tmax <- function(
 
   centralization_eigenvector_centrality_tmax_impl(
     graph = graph,
-    nodes = nodes,
+    nodes = n,
     directed = directed,
     scale = TRUE
   )

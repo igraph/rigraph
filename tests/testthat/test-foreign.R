@@ -66,13 +66,13 @@ test_that("graph_from_graphdb works", {
   # docker run --rm -ti -v $PWD:/rigraph -e MAKEFLAGS=-j4 ghcr.io/cynkra/r-debug/r-debug-csan-igraph:latest RDcsan -q -e 'filename <- "/rigraph/DESCRIPTION"; gz_file_con <- file(filename, open = "rb"); file_con <- gzcon(gz_file_con); close(file_con); gc()'
   skip_if(Sys.getenv("R_SANITIZER") == "true")
 
-  expect_silent(graph_from_graphdb(nodes = 1000))
+  expect_silent(graph_from_graphdb(n = 1000))
   expect_snapshot_igraph_error(graph_from_graphdb())
   expect_snapshot_igraph_error(
-    graph_from_graphdb(nodes = 10, prefix = "not_existing")
+    graph_from_graphdb(n = 10, prefix = "not_existing")
   )
   expect_snapshot_igraph_error(
-    graph_from_graphdb(nodes = 10, type = "not_existing")
+    graph_from_graphdb(n = 10, type = "not_existing")
   )
 })
 
@@ -95,7 +95,7 @@ test_that("graph_from_graphdb() accepts every tail argument by name", {
       url = NULL,
       prefix = "iso",
       type = "r001",
-      nodes = 1000,
+      n = 1000,
       pair = "A",
       which = 0,
       base = "https://github.com/igraph/graphsdb/raw/refs/heads/main",
@@ -120,7 +120,7 @@ test_that("graph_from_graphdb() wires up legacy positional recovery", {
   # a download.
   lifecycle::expect_deprecated(
     expect_error(
-      graph_from_graphdb(NULL, "not_existing", nodes = 10),
+      graph_from_graphdb(NULL, "not_existing", n = 10),
       regexp = "not a valid prefix"
     )
   )

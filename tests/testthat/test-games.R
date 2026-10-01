@@ -1702,3 +1702,43 @@ test_that("sample_correlated_gnp() recovers positional p", {
     sample_correlated_gnp(base_graph, 0.8, p = 0.3)
   )
 })
+
+# ---- nodes -> n rename ------------------------------------------------
+
+test_that("sample_grg(nodes = ) is deprecated but still works", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  igraph_local_seed(42)
+  expected <- sample_grg(n = 10, radius = 1)
+  igraph_local_seed(42)
+  expect_snapshot(
+    g <- sample_grg(nodes = 10, radius = 1)
+  )
+  expect_identical_graphs(g, expected)
+})
+
+test_that("sample_grg() rejects `n` supplied both directly and as `nodes`", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  expect_snapshot(
+    sample_grg(10, radius = 1, nodes = 10),
+    error = TRUE
+  )
+})
+
+test_that("sample_pref(nodes = ) and sample_forestfire(nodes = ) are deprecated but still work", {
+  igraph_local_seed(1)
+  lifecycle::expect_deprecated(
+    g_pref_legacy <- sample_pref(nodes = 20, types = 2)
+  )
+  igraph_local_seed(1)
+  expect_identical_graphs(g_pref_legacy, sample_pref(n = 20, types = 2))
+
+  igraph_local_seed(1)
+  lifecycle::expect_deprecated(
+    g_fire_legacy <- sample_forestfire(nodes = 30, fw.prob = 0.2)
+  )
+  igraph_local_seed(1)
+  expect_identical_graphs(
+    g_fire_legacy,
+    sample_forestfire(n = 30, fw.prob = 0.2)
+  )
+})

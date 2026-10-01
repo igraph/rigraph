@@ -4,13 +4,19 @@
 \alias{centr_betw_tmax}
 \title{Theoretical maximum for betweenness centralization}
 \usage{
-centr_betw_tmax(graph = NULL, nodes = 0, ..., directed = TRUE)
+centr_betw_tmax(
+  graph = NULL,
+  n = 0,
+  ...,
+  directed = TRUE,
+  nodes = deprecated()
+)
 }
 \arguments{
 \item{graph}{The input graph. It can also be \code{NULL} if
-\code{nodes} and \code{directed} are both given.}
+\code{n} and \code{directed} are both given.}
 
-\item{nodes}{The number of vertices. This is ignored if the graph is
+\item{n}{The number of vertices. This is ignored if the graph is
 given.}
 
 \item{...}{These dots are for future extensions and must be empty.}
@@ -18,6 +24,8 @@ given.}
 \item{directed}{Logical, whether to use directed shortest paths
 for calculating betweenness. Ignored if an undirected graph was
 given.}
+
+\item{nodes}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{n} instead.}
 }
 \value{
 Real scalar, the theoretical maximum (unnormalized) graph
