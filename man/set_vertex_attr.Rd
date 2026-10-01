@@ -29,7 +29,7 @@ Set vertex attributes
 }
 
 \examples{
-g <- make_ring(10) \%>\%
+g <- make_ring(10) |>
   set_vertex_attr("label", value = LETTERS[1:10])
 g
 plot(g)

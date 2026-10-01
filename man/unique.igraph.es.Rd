@@ -23,7 +23,7 @@ Remove duplicate edges from an edge sequence
 \examples{
 g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
 E(g)[1, 1:5, 1:10, 5:10]
-E(g)[1, 1:5, 1:10, 5:10] \%>\% unique()
+E(g)[1, 1:5, 1:10, 5:10] |> unique()
 }
 \seealso{
 Other vertex and edge sequence operations:

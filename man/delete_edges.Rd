@@ -25,11 +25,11 @@ Delete edges from a graph
 }
 
 \examples{
-g <- make_ring(10) \%>\%
+g <- make_ring(10) |>
   delete_edges(seq(1, 9, by = 2))
 g
 
-g <- make_ring(10) \%>\%
+g <- make_ring(10) |>
   delete_edges("10|1")
 g
 

@@ -1,4 +1,4 @@
-# sfclust (1.1.0)
+# sfclust (1.1.1)
 
 * GitHub: <https://github.com/ErickChacon/sfclust>
 * Email: <mailto:erick.chaconmontalvan@wur.nl>

@@ -128,14 +128,14 @@ add.edges <- function(graph, edges, ..., attr = list()) {
 #' @family functions for manipulating graph structure
 #'
 #' @examples
-#' g <- make_empty_graph(n = 5) %>%
+#' g <- make_empty_graph(n = 5) |>
 #'   add_edges(c(
 #'     1, 2,
 #'     2, 3,
 #'     3, 4,
 #'     4, 5
-#'   )) %>%
-#'   set_edge_attr("color", value = "red") %>%
+#'   )) |>
+#'   set_edge_attr("color", value = "red") |>
 #'   add_edges(c(5, 1), color = "green")
 #' E(g)[[]]
 #' plot(g)
@@ -194,9 +194,9 @@ add_edges <- function(graph, edges, ..., attr = list()) {
 #'
 #' @export
 #' @examples
-#' g <- make_empty_graph() %>%
-#'   add_vertices(3, color = "red") %>%
-#'   add_vertices(2, color = "green") %>%
+#' g <- make_empty_graph() |>
+#'   add_vertices(3, color = "red") |>
+#'   add_vertices(2, color = "green") |>
 #'   add_edges(c(
 #'     1, 2,
 #'     2, 3,
@@ -252,11 +252,11 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
 #'
 #' @export
 #' @examples
-#' g <- make_ring(10) %>%
+#' g <- make_ring(10) |>
 #'   delete_edges(seq(1, 9, by = 2))
 #' g
 #'
-#' g <- make_ring(10) %>%
+#' g <- make_ring(10) |>
 #'   delete_edges("10|1")
 #' g
 #'
@@ -280,12 +280,12 @@ delete_edges <- function(graph, edges) {
 #'
 #' @export
 #' @examples
-#' g <- make_ring(10) %>%
+#' g <- make_ring(10) |>
 #'   set_vertex_attr("name", value = LETTERS[1:10])
 #' g
 #' V(g)
 #'
-#' g2 <- delete_vertices(g, c(1, 5)) %>%
+#' g2 <- delete_vertices(g, c(1, 5)) |>
 #'   delete_vertices("B")
 #' g2
 #' V(g2)
@@ -316,8 +316,8 @@ delete_vertices <- function(graph, v) {
 #' ecount(g)
 #'
 #' # Number of edges in a G(n,p) graph
-#' replicate(100, sample_gnp(10, 1 / 2), simplify = FALSE) %>%
-#'   vapply(gsize, 0) %>%
+#' replicate(100, sample_gnp(10, 1 / 2), simplify = FALSE) |>
+#'   vapply(gsize, 0) |>
 #'   hist()
 gsize <- function(graph) {
   ecount_impl(

@@ -21,8 +21,8 @@ of the graph.
 
 \examples{
 g <- make_ring(10) + make_ring(10)
-g \%>\%
-  add_layout_(in_circle(), component_wise()) \%>\%
+g |>
+  add_layout_(in_circle(), component_wise()) |>
   plot()
 }
 \seealso{

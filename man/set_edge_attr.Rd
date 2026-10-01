@@ -29,7 +29,7 @@ Set edge attributes
 }
 
 \examples{
-g <- make_ring(10) \%>\%
+g <- make_ring(10) |>
   set_edge_attr("label", value = LETTERS[1:10])
 g
 plot(g)

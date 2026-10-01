@@ -1,23 +1,23 @@
 ## revdepcheck results
 
-We checked 3470 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 799 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 26 new problems
- * We failed to check 8 packages
+ * We saw 39 new problems
+ * We failed to check 4 packages
 
 Issues with CRAN packages are summarised below.
 
 ### New problems
 (This reports the first line of each new failure)
 
+* bitriad
+  checking examples ... ERROR
+
 * Boptbd
   checking examples ... ERROR
 
 * c3net
   checking examples ... ERROR
-
-* cfid
-  checking tests ... ERROR
 
 * comato
   checking examples ... ERROR
@@ -37,6 +37,11 @@ Issues with CRAN packages are summarised below.
   checking examples ... ERROR
   checking tests ... ERROR
 
+* EDOIF
+  checking examples ... ERROR
+  checking re-building of vignette outputs ... ERROR
+  checking R code for possible problems ... NOTE
+
 * ggm
   checking examples ... ERROR
 
@@ -50,21 +55,46 @@ Issues with CRAN packages are summarised below.
 * GoodFitSBM
   checking examples ... ERROR
 
+* gor
+  checking examples ... ERROR
+  checking R code for possible problems ... NOTE
+
+* handwriter
+  checking examples ... ERROR
+  checking re-building of vignette outputs ... ERROR
+  checking R code for possible problems ... NOTE
+
+* iDINGO
+  checking examples ... ERROR
+  checking R code for possible problems ... NOTE
+
 * manynet
   checking tests ... ERROR
 
 * MetaNet
   checking examples ... ERROR
 
-* migraph
-  checking tests ... ERROR
+* MRReg
+  checking examples ... ERROR
+  checking re-building of vignette outputs ... ERROR
+  checking R code for possible problems ... NOTE
 
 * nat
   checking examples ... ERROR
   checking tests ... ERROR
   checking re-building of vignette outputs ... ERROR
 
+* neatmaps
+  checking examples ... ERROR
+
 * nethist
+  checking tests ... ERROR
+
+* NetOrigin
+  checking examples ... ERROR
+  checking R code for possible problems ... NOTE
+
+* netrics
   checking tests ... ERROR
 
 * optbdmaeAT
@@ -76,6 +106,19 @@ Issues with CRAN packages are summarised below.
 * R6causal
   checking whether package ‘R6causal’ can be installed ... WARNING
 
+* RNAseqNet
+  checking examples ... ERROR
+  checking R code for possible problems ... NOTE
+
+* Rnmr1D
+  checking R code for possible problems ... NOTE
+
+* rSDI
+  checking re-building of vignette outputs ... ERROR
+
+* RSP
+  checking R code for possible problems ... NOTE
+
 * scistreer
   checking examples ... ERROR
 
@@ -85,23 +128,26 @@ Issues with CRAN packages are summarised below.
 * sfclust
   checking tests ... ERROR
 
+* soptdmaeA
+  checking R code for possible problems ... NOTE
+
 * SpaDES.core
   checking tests ... ERROR
+
+* SurvHiDim
+  checking examples ... ERROR
+  checking R code for possible problems ... NOTE
+
+* threejs
+  checking examples ... ERROR
 
 * tidygraph
   checking examples ... ERROR
   checking tests ... ERROR
 
-* vkR
-  checking dependencies in R code ... WARNING
-
 ### Failed to check
 
-* ctmm            (NA)
-* E2E             (NA)
-* gllvm           (NA)
-* hespdiv         (NA)
-* orchaRd         (NA)
-* PortfolioTesteR (NA)
-* sphet           (NA)
-* xpect           (NA)
+* CINNA    (NA)
+* graph4lg (NA)
+* mau      (NA)
+* pomdp    (NA)

@@ -17,7 +17,7 @@ Reverse the order in a vertex sequence
 }
 \examples{
 g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
-V(g) \%>\% rev()
+V(g) |> rev()
 }
 \seealso{
 Other vertex and edge sequence operations:

@@ -92,7 +92,6 @@ S3method(unique,igraph.vs)
 export("%--%")
 export("%->%")
 export("%<-%")
-export("%>%")
 export("%c%")
 export("%du%")
 export("%m%")
@@ -950,7 +949,6 @@ importFrom(graphics,
   xyinch
 )
 importFrom(lifecycle,deprecated)
-importFrom(magrittr,"%>%")
 importFrom(pkgconfig,
   get_config,
   set_config,

@@ -28,8 +28,8 @@ Query vertex attributes of a graph
 }
 
 \examples{
-g <- make_ring(10) \%>\%
-  set_vertex_attr("color", value = "red") \%>\%
+g <- make_ring(10) |>
+  set_vertex_attr("color", value = "red") |>
   set_vertex_attr("label", value = letters[1:10])
 vertex_attr(g, "label")
 vertex_attr(g)

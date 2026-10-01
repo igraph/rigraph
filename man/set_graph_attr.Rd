@@ -20,7 +20,7 @@ The graph with the new graph attribute added or set.
 An existing attribute with the same name is overwritten.
 }
 \examples{
-g <- make_ring(10) \%>\%
+g <- make_ring(10) |>
   set_graph_attr("layout", layout_with_fr)
 g
 plot(g)
