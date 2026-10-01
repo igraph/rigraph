@@ -2611,14 +2611,157 @@ static void *Rx_igraph_altrep_to(SEXP vec, Rboolean writeable) {
 static R_altrep_class_t Rx_igraph_altrep_from_class;
 static R_altrep_class_t Rx_igraph_altrep_to_class;
 
+/* ------------------------------------------------------------------------
+ * Lazy names for vertex/edge sequences.
+ *
+ * A vertex/edge sequence carries its `names` attribute as an instance of this
+ * ALTREP string class instead of a materialized character vector. The actual
+ * names are only built when an element is touched (printing, named indexing,
+ * as_ids()), not when the sequence is constructed -- which is the common case
+ * for functions that return tens of thousands of sequences (e.g. max_cliques).
+ *
+ * data1 = list(source, idx): `source` is the graph's full vertex/edge name
+ *   vector (shared by reference across all sequences of a graph) and `idx` is a
+ *   1-based integer index into `source`. data2 caches the materialized STRSXP.
+ * ------------------------------------------------------------------------ */
+static R_altrep_class_t Rx_igraph_lazy_names_class;
+
+static R_xlen_t Rx_igraph_lazy_names_length(SEXP vec) {
+  SEXP d1=R_altrep_data1(vec);
+  SEXP idx=VECTOR_ELT(d1, 1);
+  return XLENGTH(idx == R_NilValue ? VECTOR_ELT(d1, 0) : idx);
+}
+
+static SEXP Rx_igraph_lazy_names_materialize(SEXP vec) {
+  SEXP data=R_altrep_data2(vec);
+  if (data != R_NilValue) {
+    return data;
+  }
+
+  SEXP d1=R_altrep_data1(vec);
+  SEXP source=VECTOR_ELT(d1, 0);
+  SEXP idx=VECTOR_ELT(d1, 1);
+  R_xlen_t n=XLENGTH(idx);
+  R_xlen_t nsource=XLENGTH(source);
+  const int *pidx=INTEGER(idx);
+
+  PROTECT(data=Rf_allocVector(STRSXP, n));
+  for (R_xlen_t i=0; i < n; i++) {
+    int j=pidx[i];
+    /* Bounds guard: STRING_ELT() does no range checking, so an invalid ID
+     * would read past the end of `source`. IDs come straight from the C core
+     * and are always in range; NA mirrors what an R subset gives for NA or
+     * out-of-range IDs. */
+    if (j == NA_INTEGER || j < 1 || j > nsource) {
+      SET_STRING_ELT(data, i, NA_STRING);
+    } else {
+      SET_STRING_ELT(data, i, STRING_ELT(source, j - 1));
+    }
+  }
+  R_set_altrep_data2(vec, data);
+  UNPROTECT(1);
+  return data;
+}
+
+/* DATAPTR_RO / DATAPTR_OR_NULL are used here rather than DATAPTR: the latter
+ * is non-API as of R 4.5. The materialized cache is a standard read-only name
+ * vector, so a read-only data pointer is all callers (as.vector(), coercion)
+ * need. */
+static void *Rx_igraph_lazy_names_dataptr(SEXP vec, Rboolean writeable) {
+  SEXP data=Rx_igraph_lazy_names_materialize(vec);
+  /* An identity vector caches the graph's own name vector (see
+   * Rx_igraph_lazy_names()); never hand out a writable pointer into it. */
+  if (writeable && data == VECTOR_ELT(R_altrep_data1(vec), 0)) {
+    data=Rf_duplicate(data);
+    R_set_altrep_data2(vec, data);
+  }
+  return (void *) DATAPTR_RO(data);
+}
+
+static const void *Rx_igraph_lazy_names_dataptr_or_null(SEXP vec) {
+  SEXP data=R_altrep_data2(vec);
+  if (data == R_NilValue) {
+    return NULL;
+  }
+  return DATAPTR_OR_NULL(data);
+}
+
+static SEXP Rx_igraph_lazy_names_elt(SEXP vec, R_xlen_t i) {
+  return STRING_ELT(Rx_igraph_lazy_names_materialize(vec), i);
+}
+
+/* Subsetting stays lazy: return a fresh lazy-names vector with composed
+ * indices instead of materializing. Falls back to the default (materialize)
+ * for index types we do not handle here by returning NULL. */
+static SEXP Rx_igraph_lazy_names_extract_subset(SEXP vec, SEXP indx, SEXP call) {
+  if (TYPEOF(indx) != INTSXP && TYPEOF(indx) != REALSXP) {
+    return NULL;
+  }
+
+  SEXP d1=R_altrep_data1(vec);
+  SEXP source=VECTOR_ELT(d1, 0);
+  SEXP idx=VECTOR_ELT(d1, 1);
+  int identity=(idx == R_NilValue);
+  R_xlen_t leni=XLENGTH(identity ? source : idx);
+  const int *pidx=identity ? NULL : INTEGER(idx);
+
+  SEXP indx_int=PROTECT(Rf_coerceVector(indx, INTSXP));
+  R_xlen_t n=XLENGTH(indx_int);
+  const int *pind=INTEGER(indx_int);
+
+  SEXP new_idx=PROTECT(Rf_allocVector(INTSXP, n));
+  int *pnew=INTEGER(new_idx);
+  for (R_xlen_t k=0; k < n; k++) {
+    int p=pind[k];
+    if (p == NA_INTEGER || p < 1 || p > leni) {
+      pnew[k]=NA_INTEGER;
+    } else {
+      pnew[k]=identity ? p : pidx[p - 1];
+    }
+  }
+
+  SEXP d1n=PROTECT(Rf_allocVector(VECSXP, 2));
+  SET_VECTOR_ELT(d1n, 0, source);
+  SET_VECTOR_ELT(d1n, 1, new_idx);
+  SEXP res=R_new_altrep(Rx_igraph_lazy_names_class, d1n, R_NilValue);
+  UNPROTECT(3);
+  return res;
+}
+
+/* Construct a lazy-names vector from a character `source` and a (1-based)
+ * integer `idx`. Returns R_NilValue when `source` is not usable, so callers
+ * can fall back to no names.
+ *
+ * `idx = NULL` stands for the identity 1..length(source), as for the full
+ * V(graph). Then the names are exactly `source`, so it is used as the
+ * materialized cache right away: name lookups (V(g)["a"], V(g)[attr == value])
+ * read `source` directly instead of copying it, while subsets still stay lazy.
+ * data1 then holds a NULL index, which the length and subset methods handle;
+ * materialization never needs it because data2 is always set. */
+SEXP Rx_igraph_lazy_names(SEXP source, SEXP idx) {
+  if (TYPEOF(source) != STRSXP) {
+    return R_NilValue;
+  }
+
+  int identity=(idx == R_NilValue);
+  SEXP idx_int=PROTECT(identity ? R_NilValue : Rf_coerceVector(idx, INTSXP));
+  SEXP d1=PROTECT(Rf_allocVector(VECSXP, 2));
+  SET_VECTOR_ELT(d1, 0, source);
+  SET_VECTOR_ELT(d1, 1, idx_int);
+  SEXP res=R_new_altrep(Rx_igraph_lazy_names_class, d1,
+                        identity ? source : R_NilValue);
+  UNPROTECT(2);
+  return res;
+}
+
 /* Batch constructor for a list of vertex sequences.
  *
  * Builds the whole `lapply(idx_list, unsafe_create_vs, ...)` result in one C
  * pass: for each vertex-ID vector it produces a fresh integer payload, attaches
- * the corresponding vertex names (when the graph is named), and sets the shared
- * `env` weak reference, the `graph` id and the `igraph.vs` class. This keeps the
- * per-object R overhead (closure call, `as.integer`, name subset,
- * `attributes<-`) out of the loop entirely.
+ * a lazy-names ALTREP (when the graph is named), and sets the shared `env`
+ * weak reference, the `graph` id and the `igraph.vs` class. This keeps the
+ * per-object R overhead (closure call, `as.integer`, `.Call`, `attributes<-`)
+ * out of the loop entirely.
  *
  *   idx_list  : VECSXP of vertex-ID vectors (integer or double)
  *   names_src : graph's full vertex-name STRSXP, or NULL for unnamed graphs
@@ -2628,7 +2771,6 @@ static R_altrep_class_t Rx_igraph_altrep_to_class;
 SEXP Rx_igraph_vs_list(SEXP idx_list, SEXP names_src, SEXP env, SEXP graph_id) {
   R_xlen_t n=XLENGTH(idx_list);
   int named=(TYPEOF(names_src) == STRSXP);
-  R_xlen_t nsource=named ? XLENGTH(names_src) : 0;
   SEXP env_sym=Rf_install("env");
   SEXP graph_sym=Rf_install("graph");
   SEXP out=PROTECT(Rf_allocVector(VECSXP, n));
@@ -2646,23 +2788,12 @@ SEXP Rx_igraph_vs_list(SEXP idx_list, SEXP names_src, SEXP env, SEXP graph_id) {
     }
 
     if (named) {
-      R_xlen_t len=XLENGTH(payload);
-      const int *pidx=INTEGER(payload);
-      SEXP nm=PROTECT(Rf_allocVector(STRSXP, len));
-      for (R_xlen_t k=0; k < len; k++) {
-        int j=pidx[k];
-        /* Bounds guard: STRING_ELT() does no range checking, so an invalid ID
-         * would read past the end of `names_src`. Callers pass IDs straight
-         * from the C core, which are always in range; NA mirrors what the R
-         * subset `vertex_names[res]` gave for NA or out-of-range IDs. */
-        if (j == NA_INTEGER || j < 1 || j > nsource) {
-          SET_STRING_ELT(nm, k, NA_STRING);
-        } else {
-          SET_STRING_ELT(nm, k, STRING_ELT(names_src, j - 1));
-        }
-      }
+      SEXP d1=PROTECT(Rf_allocVector(VECSXP, 2));
+      SET_VECTOR_ELT(d1, 0, names_src);
+      SET_VECTOR_ELT(d1, 1, payload);
+      SEXP nm=PROTECT(R_new_altrep(Rx_igraph_lazy_names_class, d1, R_NilValue));
       Rf_setAttrib(payload, R_NamesSymbol, nm);
-      UNPROTECT(1);
+      UNPROTECT(2);
     }
 
     Rf_setAttrib(payload, env_sym, env);
@@ -2689,6 +2820,13 @@ void Rx_igraph_init_vector_class(DllInfo *dll) {
 
   R_set_altrep_Length_method(Rx_igraph_altrep_to_class, Rx_igraph_altrep_length);
   R_set_altvec_Dataptr_method(Rx_igraph_altrep_to_class, Rx_igraph_altrep_to);
+
+  Rx_igraph_lazy_names_class=R_make_altstring_class("igraph_lazy_names", "igraph", dll);
+  R_set_altrep_Length_method(Rx_igraph_lazy_names_class, Rx_igraph_lazy_names_length);
+  R_set_altvec_Dataptr_method(Rx_igraph_lazy_names_class, Rx_igraph_lazy_names_dataptr);
+  R_set_altvec_Dataptr_or_null_method(Rx_igraph_lazy_names_class, Rx_igraph_lazy_names_dataptr_or_null);
+  R_set_altvec_Extract_subset_method(Rx_igraph_lazy_names_class, Rx_igraph_lazy_names_extract_subset);
+  R_set_altstring_Elt_method(Rx_igraph_lazy_names_class, Rx_igraph_lazy_names_elt);
 }
 
 /* HELPER: internal C; must use IGRAPH_CHECK */
