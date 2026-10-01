@@ -4,7 +4,7 @@
 \alias{is_same_graph}
 \title{Decide if two graphs are the same as labelled graphs}
 \usage{
-is_same_graph(g1, g2, ..., use_names = TRUE)
+is_same_graph(g1, g2, ..., use_names = TRUE, vertex_attrs = NULL)
 }
 \arguments{
 \item{g1, g2}{The two graphs.}
@@ -13,6 +13,12 @@ is_same_graph(g1, g2, ..., use_names = TRUE)
 
 \item{use_names}{Logical scalar, whether to identify vertices by their
 names if both graphs have a \code{name} vertex attribute.}
+
+\item{vertex_attrs}{Character vector of vertex attribute names to compare,
+or \code{NULL} to compare none.
+Every attribute must exist in both graphs.
+Including \code{"name"} is only meaningful with \code{use_names = FALSE},
+otherwise names match by construction.}
 }
 \value{
 A logical scalar, \code{TRUE} if the two graphs are the same.
@@ -38,7 +44,12 @@ Two graphs have the same edges if every edge occurs equally often in both.
 The order of the edges does not matter,
 and neither does the order of the two endpoints of an undirected edge.
 
-Graph, vertex and edge attributes other than \code{name} are not compared.
+Vertex attributes listed in \code{vertex_attrs} must also be identical,
+after matching up the vertices.
+They are compared exactly, with \code{\link[=identical]{identical()}},
+so for example the integer \code{1L} and the double \code{1} are different values.
+Graph and edge attributes are never compared,
+and neither are vertex attributes other than those in \code{vertex_attrs}.
 
 The three ways of comparing graphs answer different questions:
 \itemize{
@@ -89,6 +100,13 @@ g5 <- graph_from_data_frame(edges, vertices = c("c", "b", "a"))
 identical_graphs(g4, g5)
 is_same_graph(g4, g5)
 is_same_graph(g4, g5, use_names = FALSE)
+
+# Vertex-coloured graphs: same edges, different colours
+star <- make_star(4, mode = "undirected")
+c1 <- set_vertex_attr(star, "color", value = c(1, 2, 2, 2))
+c2 <- set_vertex_attr(star, "color", value = c(1, 3, 3, 3))
+is_same_graph(c1, c2)
+is_same_graph(c1, c2, vertex_attrs = "color")
 }
 \seealso{
 \code{\link[=identical_graphs]{identical_graphs()}} for comparing the internal representation,
