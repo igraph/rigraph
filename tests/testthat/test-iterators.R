@@ -266,7 +266,11 @@ test_that("is_same_graph() compares vertex name sets", {
 test_that("is_same_graph() uses IDs unless both graphs are named", {
   g1 <- make_ring(3)
   g2 <- set_vertex_attr(make_ring(3), "name", value = c("c", "b", "a"))
-  expect_true(is_same_graph(g1, g2))
+
+  expect_snapshot(res <- is_same_graph(g1, g2))
+  expect_true(res)
+  expect_true(is_same_graph(g1, g2, use_names = FALSE))
+  expect_no_warning(is_same_graph(g1, g1))
 })
 
 test_that("is_same_graph() ignores attributes other than names", {

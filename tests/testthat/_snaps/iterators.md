@@ -1,3 +1,12 @@
+# is_same_graph() uses IDs unless both graphs are named
+
+    Code
+      res <- is_same_graph(g1, g2)
+    Condition
+      Warning:
+      Only one of the graphs has vertex names, matching vertices by their IDs.
+      i Use `use_names = FALSE` to silence this warning.
+
 # is_same_graph() errors
 
     Code

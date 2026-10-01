@@ -129,60 +129,79 @@ identical_graphs <- function(
 #' Decide if two graphs are the same as labelled graphs
 #'
 #' @description
-#' Two graphs are the same if they have the same directedness,
-#' the same vertex set and the same edge set.
+#' Two graphs are the same as labelled graphs if they have the same
+#' directedness, the same vertices and the same edges.
 #' Unlike [identical_graphs()], the order in which vertices and edges are
-#' stored is ignored,
-#' and unlike [isomorphic()], vertices are not relabelled.
+#' stored does not matter.
+#' Unlike [isomorphic()], vertices are not relabelled.
 #'
 #' @details
+#' Vertices can be identified by their index or by their name,
+#' and `use_names` controls which one is used.
 #' If `use_names` is `TRUE` and both graphs have a `name` vertex attribute,
-#' vertices are matched by name, so the two graphs may store their vertices
-#' in a different order.
+#' a vertex of `g1` corresponds to the vertex with the same name in `g2`,
+#' wherever it is stored.
 #' Vertex names must be unique in both graphs in this case.
-#' Otherwise, vertices are matched by their IDs.
+#' Otherwise, the \eqn{i}-th vertex of `g1` corresponds to the
+#' \eqn{i}-th vertex of `g2`.
 #'
-#' Edges are compared as a multiset:
-#' the order of the edges and, in undirected graphs, the order of the
-#' endpoints of an edge do not matter,
-#' but the multiplicity of each edge does.
+#' Two graphs have the same edges if every edge occurs equally often in both.
+#' The order of the edges does not matter,
+#' and neither does the order of the two endpoints of an undirected edge.
 #'
 #' Graph, vertex and edge attributes other than `name` are not compared.
 #'
+#' The three ways of comparing graphs answer different questions:
+#' - [identical_graphs()]: do the two objects store exactly the same data,
+#'   in the same order?
+#'   This is mostly useful in tests,
+#'   or before transferring edge attributes from one graph to the other by
+#'   position.
+#' - `is_same_graph()`: do the same vertices have the same connections?
+#' - [isomorphic()]: is there any way to relabel the vertices of one graph
+#'   so that it becomes the same as the other?
+#'
 #' @param g1,g2 The two graphs.
 #' @inheritParams rlang::args_dots_empty
-#' @param use_names Logical scalar, whether to match vertices by their names
-#'   if both graphs have a `name` vertex attribute.
+#' @param use_names Logical scalar, whether to identify vertices by their
+#'   names if both graphs have a `name` vertex attribute.
 #' @return A logical scalar, `TRUE` if the two graphs are the same.
 #' @seealso [identical_graphs()] for comparing the internal representation,
 #'   [isomorphic()] for comparing graphs up to relabelling of the vertices.
-#' @cdocs igraph_is_same_graph
 #' @export
 #' @examples
-#' # Same edges, stored in a different order
-#' g1 <- make_graph(c(1, 2, 2, 3, 3, 1), directed = FALSE)
-#' g2 <- make_graph(c(3, 2, 1, 3, 2, 1), directed = FALSE)
+#' # 1-2, 3-2 and 2-3, 1-2 only differ in the order of the edges and of
+#' # their endpoints, so they are the same graph.
+#' g1 <- make_graph(c(1, 2, 3, 2), directed = FALSE)
+#' g2 <- make_graph(c(2, 3, 1, 2), directed = FALSE)
 #' identical_graphs(g1, g2)
 #' is_same_graph(g1, g2)
 #'
-#' # Same named graph, vertices stored in a different order
-#' edges <- data.frame(from = c("a", "b"), to = c("b", "c"))
-#' g3 <- graph_from_data_frame(edges, vertices = c("a", "b", "c"))
-#' g4 <- graph_from_data_frame(edges, vertices = c("c", "b", "a"))
-#' identical_graphs(g3, g4)
-#' is_same_graph(g3, g4)
-#' is_same_graph(g3, g4, use_names = FALSE)
+#' # 1-3, 2-3 is isomorphic to them, but not the same:
+#' # it contains the edge 1-3, which g1 does not.
+#' g3 <- make_graph(c(1, 3, 2, 3), directed = FALSE)
+#' is_same_graph(g1, g3)
+#' isomorphic(g1, g3)
 #'
-#' # Isomorphic, but not the same
-#' star1 <- make_star(4, mode = "undirected")
-#' star2 <- make_graph(c(2, 1, 2, 3, 2, 4), directed = FALSE)
-#' is_same_graph(star1, star2)
-#' isomorphic(star1, star2)
+#' # Named vertices stored in a different order
+#' edges <- data.frame(from = c("a", "b"), to = c("b", "c"))
+#' g4 <- graph_from_data_frame(edges, vertices = c("a", "b", "c"))
+#' g5 <- graph_from_data_frame(edges, vertices = c("c", "b", "a"))
+#' identical_graphs(g4, g5)
+#' is_same_graph(g4, g5)
+#' is_same_graph(g4, g5, use_names = FALSE)
 is_same_graph <- function(g1, g2, ..., use_names = TRUE) {
   check_dots_empty()
   ensure_igraph(g1)
   ensure_igraph(g2)
   check_bool(use_names)
+
+  if (use_names && xor(is_named(g1), is_named(g2))) {
+    cli::cli_warn(c(
+      "Only one of the graphs has vertex names, matching vertices by their IDs.",
+      i = "Use {.code use_names = FALSE} to silence this warning."
+    ))
+  }
 
   if (use_names && is_named(g1) && is_named(g2)) {
     names1 <- V(g1)$name
