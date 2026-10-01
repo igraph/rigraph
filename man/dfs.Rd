@@ -17,9 +17,7 @@ dfs(
   in.callback = NULL,
   out.callback = NULL,
   extra = NULL,
-  rho = NULL,
-  neimode = deprecated(),
-  father = deprecated()
+  rho = NULL
 )
 }
 \arguments{
@@ -63,11 +61,6 @@ Default: \code{NULL}.}
 
 \item{rho}{The environment in which the callback function is evaluated.
 The default \code{NULL} uses the caller's environment.}
-
-\item{neimode}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This argument is deprecated from igraph 1.3.0; use
-\code{mode} instead.}
-
-\item{father}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}, use \code{parent} instead.}
 }
 \value{
 A named list with the following entries:
@@ -75,7 +68,7 @@ A named list with the following entries:
 \item{root}{
 Numeric scalar. The root vertex that was used as the starting point of the search.
 }
-\item{neimode}{
+\item{mode}{
 Character scalar. The \code{mode} argument of the function call.
 Note that for undirected graphs this is always \sQuote{all}, irrespectively of the supplied value.
 }
@@ -87,9 +80,6 @@ Numeric vector, the vertex IDs, in the order of the completion of their subtree.
 }
 \item{parent}{
 Numeric vector. The parent of each vertex, i.e. the vertex it was discovered from.
-}
-\item{father}{
-Like parent, kept for compatibility for now.
 }
 \item{dist}{
 Numeric vector, for each vertex its distance from the root of the search tree.

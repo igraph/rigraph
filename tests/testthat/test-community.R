@@ -455,6 +455,21 @@ test_that("cluster_leiden works", {
   )
 })
 
+test_that("cluster_leiden() recovers the renamed resolution_parameter argument", {
+  g <- make_graph("Zachary")
+
+  rlang::local_options(lifecycle_verbosity = "warning")
+  igraph_with_seed(42, {
+    expect_snapshot(
+      res <- cluster_leiden(g, "modularity", resolution_parameter = 1.5)
+    )
+  })
+  igraph_with_seed(42, {
+    ref <- cluster_leiden(g, "modularity", resolution = 1.5)
+  })
+  expect_equal(res, ref)
+})
+
 test_that("modularity_matrix works", {
   karate <- make_graph("zachary")
 
