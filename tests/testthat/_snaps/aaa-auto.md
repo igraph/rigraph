@@ -1781,6 +1781,39 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
+# widest_path_widths_dijkstra_impl basic
+
+    Code
+      widest_path_widths_dijkstra_impl(graph = g, from = 1, to = 3, weights = c(1, 2))
+    Output
+           [,1]
+      [1,]    1
+
+# widest_path_widths_dijkstra_impl errors
+
+    Code
+      widest_path_widths_dijkstra_impl(graph = NULL, from = 1, to = 3)
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
+# widest_path_widths_floyd_warshall_impl basic
+
+    Code
+      widest_path_widths_floyd_warshall_impl(graph = g, from = 1, to = 3, weights = c(
+        1, 2))
+    Output
+           [,1]
+      [1,]    1
+
+# widest_path_widths_floyd_warshall_impl errors
+
+    Code
+      widest_path_widths_floyd_warshall_impl(graph = NULL, from = 1, to = 3)
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
 # spanner_impl basic
 
     Code
