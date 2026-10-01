@@ -1054,6 +1054,7 @@ graph.count.subisomorphisms.vf2 <- function(
 #' @family graph isomorphism
 isomorphisms <- function(graph1, graph2, method = "vf2", ..., callback = NULL) {
   method <- igraph_match_arg(method)
+  callback <- as_user_callback(callback)
 
   if (method != "vf2") {
     cli::cli_abort(
@@ -1185,6 +1186,7 @@ subgraph_isomorphisms <- function(
   callback = NULL
 ) {
   method <- igraph_match_arg(method)
+  callback <- as_user_callback(callback)
 
   if (!is.null(callback) && method != "vf2") {
     cli::cli_abort(
