@@ -1,5 +1,18 @@
 # Changelog
 
+## igraph 2.3.3.9040
+
+### Continuous integration
+
+#### touchstone
+
+- Benchmark
+  [`incident_edges()`](https://r.igraph.org/reference/incident_edges.md),
+  [`neighbors()`](https://r.igraph.org/reference/neighbors.md),
+  [`union()`](https://r.igraph.org/reference/union.md) and indexed edge
+  attribute assignment
+  ([\#2914](https://github.com/igraph/rigraph/issues/2914)).
+
 ## igraph 2.3.3.9039
 
 ### Bug fixes

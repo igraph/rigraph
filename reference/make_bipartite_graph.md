@@ -84,7 +84,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 g <- make_bipartite_graph(rep(0:1, length.out = 10), c(1:10))
 print(g, v = TRUE)
-#> ── <igraph> ───────────────────────────────────────────────────────── f66ddb8 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── d914e8a ──
 #> ℹ undirected · bipartite
 #> ℹ 10 vertices · 5 edges
 #> 
