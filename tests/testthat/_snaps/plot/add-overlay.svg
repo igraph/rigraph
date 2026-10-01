@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' data-engine-version='2.0' width='720.00pt' height='576.00pt' viewBox='0 0 720.00 576.00'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<defs>
+  <clipPath id='cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA='>
+    <rect x='0.00' y='0.00' width='720.00' height='576.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+</g>
+<defs>
+  <clipPath id='cpNTkuMDR8Njg5Ljc2fDU5LjA0fDUwMi41Ng=='>
+    <rect x='59.04' y='59.04' width='630.72' height='443.52' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpNTkuMDR8Njg5Ljc2fDU5LjA0fDUwMi41Ng==)'>
+<line x1='247.78' y1='349.24' x2='364.13' y2='349.24' style='stroke-width: 0.75; stroke: #A9A9A9;' />
+<line x1='384.67' y1='349.24' x2='501.02' y2='349.24' style='stroke-width: 0.75; stroke: #A9A9A9;' />
+<line x1='247.78' y1='349.24' x2='501.02' y2='349.24' style='stroke-width: 0.75; stroke: #A9A9A9;' />
+<circle cx='237.51' cy='349.24' r='10.27' style='stroke-width: 0.75; fill: #FF0000;' />
+<circle cx='374.40' cy='349.24' r='10.27' style='stroke-width: 0.75; fill: #FF0000;' />
+<circle cx='511.29' cy='349.24' r='10.27' style='stroke-width: 0.75; fill: #FF0000;' />
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+<text x='237.51' y='353.37' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text x='374.40' y='353.43' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>2</text>
+<text x='511.29' y='353.38' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>3</text>
+</g>
+<g clip-path='url(#cpNTkuMDR8Njg5Ljc2fDU5LjA0fDUwMi41Ng==)'>
+<line x1='247.78' y1='212.36' x2='364.13' y2='212.36' style='stroke-width: 0.75; stroke: #A9A9A9;' />
+<line x1='384.67' y1='212.36' x2='501.02' y2='212.36' style='stroke-width: 0.75; stroke: #A9A9A9;' />
+<line x1='247.78' y1='212.36' x2='501.02' y2='212.36' style='stroke-width: 0.75; stroke: #A9A9A9;' />
+<circle cx='237.51' cy='212.36' r='10.27' style='stroke-width: 0.75; fill: #0000FF;' />
+<circle cx='374.40' cy='212.36' r='10.27' style='stroke-width: 0.75; fill: #0000FF;' />
+<circle cx='511.29' cy='212.36' r='10.27' style='stroke-width: 0.75; fill: #0000FF;' />
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+<text x='237.51' y='216.48' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text x='374.40' y='216.55' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>2</text>
+<text x='511.29' y='216.49' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>3</text>
+</g>
+</svg>

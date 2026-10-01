@@ -576,46 +576,9 @@ plot(g,
 
 This latter approach is preferred if you want to keep the properties of the visual representation of your graph separate from the graph itself.
 
-In summary, there are special vertex and edge properties that correspond to the visual representation of the graph. These attributes override the default settings of igraph (i.e color, weight, name, shape, layout, etc.). The following two tables summarise the most frequently used visual attributes for vertices and edges, respectively:
+In summary, there are special vertex and edge properties that correspond to the visual representation of the graph. These attributes override the default settings of igraph (i.e color, weight, name, shape, layout, etc.).
 
-### Vertex attributes controlling graph plots
-
-| Attribute name | Keyword argument      | Purpose                                                                                                                                                                                                                                        |
-|----------------------|----------------------|-----------------------------|
-| `color`        | `vertex.color`        | Color of the vertex                                                                                                                                                                                                                            |
-| `label`        | `vertex.label`        | Label of the vertex. They will be converted to character. Specify NA to omit vertex labels. The default vertex labels are the vertex ids.                                                                                                      |
-| `label.cex`    | `vertex.label.cex`    | Font size of the vertex label, interpreted as a multiplicative factor, similarly to R's `text` function                                                                                                                                        |
-| `label.color`  | `vertex.label.color`  | Color of the vertex label                                                                                                                                                                                                                      |
-| `label.degree` | `vertex.label.degree` | It defines the position of the vertex labels, relative to the center of the vertices. It is interpreted as an angle in radian, zero means 'to the right', and 'pi' means to the left, up is -pi/2 and down is pi/2. The default value is -pi/4 |
-| `label.dist`   | `vertex.label.dist`   | Distance of the vertex label from the vertex itself, relative to the vertex size                                                                                                                                                               |
-| `label.family` | `vertex.label.family` | Font family of the vertex, similarly to R's `text` function                                                                                                                                                                                    |
-| `label.font`   | `vertex.label.font`   | Font within the font family of the vertex, similarly to R's `text` function                                                                                                                                                                    |
-| `shape`        | `vertex.shape`        | The shape of the vertex, currently "circle", "square", "csquare", "rectangle", "crectangle", "vrectangle", "pie" (see vertex.shape.pie), 'sphere', and "none" are supported, and only by the plot.igraph command.                              |
-| `size`         | `vertex.size`         | The size of the vertex, a numeric scalar or vector, in the latter case each vertex sizes may differ                                                                                                                                            |
-
-### Edge attributes controlling graph plots
-
-| Attribute name | Keyword argument   | Purpose                                                                                                                                                                                                                                     |
-|-------------------------|-----------------------------|------------------|
-| `color`        | `edge.color`        | Color of the edge                                                                                                                                                                                                                           |
-| `curved`       | `edge.curved`       | A numeric value specifies the curvature of the edge; zero curvature means straight edges, negative values means the edge bends clockwise, positive values the opposite. TRUE means curvature 0.5, FALSE means curvature zero                |
-| `arrow.size`   | `edge.arrow.size`   | Currently this is a constant, so it is the same for every edge. If a vector is submitted then only the first element is used, that is to say if this is taken from an edge attribute then only the attribute of the first edge is used for all arrows. |
-| `arrow.width`  | `edge.arrow.width`  | The width of the arrows. Currently this is a constant, so it is the same for every edge                                                                                                                                                     |
-| `width`        | `edge.width`        | Width of the edge in pixels                                                                                                                                                                                                                 |
-| `label`        | `edge.label`        | If specified, it adds a label to the edge.                                                                                                                                                                                                  |
-| `label.cex`    | `edge.label.cex`    | Font size of the edge label, interpreted as a multiplicative factor, similarly to R's `text` function                                                                                                                                        |
-| `label.color`  | `edge.label.color`  | Color of the edge label                                                                                                                                                                                                                      |
-| `label.family` | `edge.label.family` | Font family of the edge, similarly to R's `text` function                                                                                                                                                                                    |
-| `label.font`   | `edge.label.font`   | Font within the font family of the edge, similarly to R's `text` function                                                                                                                                                                    |
-
-### Generic arguments of `plot()`
-
-These settings can be specified as arguments to the `plot` function to control the overall appearance of the plot.
-
-| Keyword argument  | Purpose                                                                                                                                                                                                                                                           |
-|--------------------------------|----------------------------------------|
-| `layout`          | The layout to be used. It can be an instance of `Layout`, a list of tuples containing X-Y coordinates, or the name of a layout algorithm. The default is `auto`, which selects a layout algorithm automatically based on the size and connectedness of the graph. |
-| `margin`          | The amount of empty space below, over, at the left and right of the plot, it is a numeric vector of length four.                                                                                                                                                  |
+igraph's plotting engine is far richer than this short overview: vertex shapes, colour scales with automatic legends, edge styles and gradients, label repelling and halos, group highlighting, custom shapes and SVG export are all supported. For a complete, runnable tour of every plotting feature, see the [**Plotting graphs**](plotting.html) article.
 
 ## igraph and the outside world
 
