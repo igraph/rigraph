@@ -1,10 +1,18 @@
 # vertices() works
 
+    Can't recycle `name` (size 2) to match `foo` (size 3).
+
+---
+
+    Cannot add named vertices to a non-empty unnamed graph. Existing vertices will have `NA` names.
+
+---
+
     Code
       make_empty_graph(1) + vertices("a", "b", foo = 5:7)
     Condition
       Error:
-      ! Can't recycle `name` (size 2) to match `foo` (size 3).
+      ! Cannot add named vertices to a non-empty unnamed graph. Existing vertices will have `NA` names.
 
 # vertices() errors on duplicate attribute names
 
@@ -37,4 +45,28 @@
     Condition
       Error in `vertices()`:
       ! Duplicate attribute names in `vertices()`: "foo" and "bar".
+
+# adding named vertices to non-empty unnamed graphs errors
+
+    Cannot add named vertices to a non-empty unnamed graph. Existing vertices will have `NA` names.
+
+---
+
+    Cannot add named vertices to a non-empty unnamed graph. Existing vertices will have `NA` names.
+
+---
+
+    Cannot add named vertices to a non-empty unnamed graph. Existing vertices will have `NA` names.
+
+---
+
+    Cannot add named vertices to a non-empty unnamed graph. Existing vertices will have `NA` names.
+
+---
+
+    Cannot add named vertices to a non-empty unnamed graph. Existing vertices will have `NA` names.
+
+---
+
+    Cannot add named vertices to a non-empty unnamed graph. Existing vertices will have `NA` names.
 
