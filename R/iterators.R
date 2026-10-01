@@ -301,8 +301,7 @@ create_vs <- function(graph, idx, na_ok = FALSE) {
   if (na_ok) {
     idx <- ifelse(idx < 1 | idx > gorder(graph), NA, idx)
   }
-  res <- simple_vs_index(V(graph), idx, na_ok = na_ok)
-  add_vses_graph_ref(res, graph)
+  simple_vs_index(V(graph), idx, na_ok = na_ok)
 }
 
 # Internal function to quickly convert integer vectors to igraph.vs
@@ -714,8 +713,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
   ) ||
     inherits(rlang::quo_get_expr(args[[1]]), "integer")
   if (length(args) == 1 && first_arg_is_numericish) {
-    res <- simple_vs_index(x, rlang::quo_get_expr(args[[1]]), na_ok)
-    return(add_vses_graph_ref(res, get_vs_graph(x)))
+    return(simple_vs_index(x, rlang::quo_get_expr(args[[1]]), na_ok))
   }
 
   ## Special case: single symbol argument, no such attribute
@@ -725,8 +723,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
       !(as.character(rlang::quo_get_expr(args[[1]])) %in%
         vertex_attr_names(graph))
     ) {
-      res <- simple_vs_index(x, rlang::eval_tidy(args[[1]]), na_ok)
-      return(add_vses_graph_ref(res, graph))
+      return(simple_vs_index(x, rlang::eval_tidy(args[[1]]), na_ok))
     }
   }
 
@@ -883,11 +880,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
         )
       }
 
-      ii <- simple_vs_index(x, ii, na_ok)
-      attr(ii, "env") <- attr(x, "env")
-      attr(ii, "graph") <- attr(x, "graph")
-      class(ii) <- class(x)
-      ii
+      simple_vs_index(x, ii, na_ok)
     })
   }
 
