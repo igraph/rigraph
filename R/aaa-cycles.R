@@ -380,7 +380,7 @@ simple_cycles_impl <- function(
     max_cycle_length
   )
   if (igraph_opt("return.vs.es")) {
-    res$vertices <- lapply(res$vertices, unsafe_create_vs, graph = graph, verts = V(graph))
+    res$vertices <- create_vs_list(graph, res$vertices)
   }
   if (igraph_opt("return.vs.es")) {
     res$edges <- lapply(res$edges, unsafe_create_es, graph = graph, es = E(graph))

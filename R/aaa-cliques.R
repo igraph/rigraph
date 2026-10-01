@@ -107,7 +107,7 @@ cliques_impl <- function(
     max
   )
   if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
+    res <- create_vs_list(graph, res)
   }
   res
 }
@@ -163,7 +163,7 @@ largest_cliques_impl <- function(
     graph
   )
   if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
+    res <- create_vs_list(graph, res)
   }
   res
 }
@@ -303,7 +303,7 @@ maximal_cliques_impl <- function(
     max_size
   )
   if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
+    res <- create_vs_list(graph, res)
   }
   res
 }
@@ -338,7 +338,7 @@ maximal_cliques_subset_impl <- function(
     max_size
   )
   if (igraph_opt("return.vs.es")) {
-    res$res <- lapply(res$res, unsafe_create_vs, graph = graph, verts = V(graph))
+    res$res <- create_vs_list(graph, res$res)
   }
   if (!details) {
     res <- res$res
@@ -383,7 +383,7 @@ independent_vertex_sets_impl <- function(
     max_size
   )
   if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
+    res <- create_vs_list(graph, res)
   }
   res
 }
@@ -420,7 +420,7 @@ largest_independent_vertex_sets_impl <- function(
     graph
   )
   if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
+    res <- create_vs_list(graph, res)
   }
   res
 }
@@ -438,7 +438,7 @@ maximal_independent_vertex_sets_impl <- function(
     graph
   )
   if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
+    res <- create_vs_list(graph, res)
   }
   res
 }
@@ -468,7 +468,7 @@ largest_weighted_cliques_impl <- function(
     vertex_weights
   )
   if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
+    res <- create_vs_list(graph, res)
   }
   res
 }
@@ -531,7 +531,7 @@ weighted_cliques_impl <- function(
     maximal
   )
   if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
+    res <- create_vs_list(graph, res)
   }
   res
 }
