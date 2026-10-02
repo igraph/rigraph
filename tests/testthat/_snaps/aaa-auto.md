@@ -56,6 +56,21 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
+# is_same_graph_impl basic
+
+    Code
+      is_same_graph_impl(graph1 = g1, graph2 = g2)
+    Output
+      [1] TRUE
+
+# is_same_graph_impl errors
+
+    Code
+      is_same_graph_impl(graph1 = NULL, graph2 = make_ring(3))
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
 # delete_vertices_idx_impl basic
 
     Code

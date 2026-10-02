@@ -104,6 +104,31 @@ test_that("copy_impl errors", {
   ))
 })
 
+# 3a. is_same_graph_impl
+
+test_that("is_same_graph_impl basic", {
+  igraph_local_seed(20250909)
+  g1 <- make_graph(c(1, 2, 2, 3), directed = FALSE)
+  g2 <- make_graph(c(3, 2, 2, 1), directed = FALSE)
+
+  expect_snapshot(is_same_graph_impl(
+    graph1 = g1,
+    graph2 = g2
+  ))
+
+  # Structured tests
+  expect_true(is_same_graph_impl(graph1 = g1, graph2 = g2))
+  expect_false(is_same_graph_impl(graph1 = g1, graph2 = make_ring(3)))
+})
+
+test_that("is_same_graph_impl errors", {
+  igraph_local_seed(20250909)
+  expect_snapshot_igraph_error(is_same_graph_impl(
+    graph1 = NULL,
+    graph2 = make_ring(3)
+  ))
+})
+
 # 4. delete_vertices_idx_impl
 
 test_that("delete_vertices_idx_impl basic", {

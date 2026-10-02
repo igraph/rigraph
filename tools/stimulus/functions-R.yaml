@@ -24,8 +24,8 @@ igraph_get_all_eids_between:
     DEPS: from ON graph, to ON graph, eids ON graph
 
 igraph_is_same_graph:
-    # Not needed in R; we can simply compare things in the R layer without
-    # calling into C
+    # Used by is_same_graph(), which matches vertices by name before calling
+    # into C
 
 #######################################
 # Constructors, deterministic
