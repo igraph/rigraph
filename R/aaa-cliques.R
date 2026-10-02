@@ -452,7 +452,7 @@ largest_weighted_cliques_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(vertex_weights) && "weight" %in% vertex_attr_names(graph)) {
-    vertex_weights <- V(graph)$weight
+    vertex_weights <- vertex_attr(graph, "weight")
   }
   if (!is.null(vertex_weights) && !all(is.na(vertex_weights))) {
     vertex_weights <- as.numeric(vertex_weights)
@@ -480,7 +480,7 @@ weighted_clique_number_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(vertex_weights) && "weight" %in% vertex_attr_names(graph)) {
-    vertex_weights <- V(graph)$weight
+    vertex_weights <- vertex_attr(graph, "weight")
   }
   if (!is.null(vertex_weights) && !all(is.na(vertex_weights))) {
     vertex_weights <- as.numeric(vertex_weights)
@@ -509,7 +509,7 @@ weighted_cliques_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(vertex_weights) && "weight" %in% vertex_attr_names(graph)) {
-    vertex_weights <- V(graph)$weight
+    vertex_weights <- vertex_attr(graph, "weight")
   }
   if (!is.null(vertex_weights) && !all(is.na(vertex_weights))) {
     vertex_weights <- as.numeric(vertex_weights)

@@ -312,7 +312,7 @@ EDGE_SELECTOR:
 EDGEWEIGHTS:
     INCONV: |-
         if (is.null(%I%) && "weight" %in% edge_attr_names(%I1%)) {
-          %I% <- E(%I1%)$weight
+          %I% <- edge_attr(%I1%, "weight")
         }
         if (!is.null(%I%) && !all(is.na(%I%))) {
           %I% <- as.numeric(%I%)
@@ -332,7 +332,7 @@ EDGE_LENGTHS:
 VERTEXWEIGHTS:
     INCONV: |-
         if (is.null(%I%) && "weight" %in% vertex_attr_names(%I1%)) {
-          %I% <- V(%I1%)$weight
+          %I% <- vertex_attr(%I1%, "weight")
         }
         if (!is.null(%I%) && !all(is.na(%I%))) {
           %I% <- as.numeric(%I%)
@@ -343,7 +343,7 @@ VERTEXWEIGHTS:
 EDGE_CAPACITY:
     INCONV: |-
         if (is.null(%I%) && "capacity" %in% edge_attr_names(%I1%)) {
-          %I% <- E(%I1%)$capacity
+          %I% <- edge_attr(%I1%, "capacity")
         }
         if (!is.null(%I%) && !all(is.na(%I%))) {
           %I% <- as.numeric(%I%)
@@ -375,7 +375,7 @@ VERTEX_COLOR:
     INCONV: |-
         if (is_missing(%I%)) {
           if ("color" %in% vertex_attr_names(%I1%)) {
-            %I% <- V(%I1%)$color
+            %I% <- vertex_attr(%I1%, "color")
           } else {
             %I% <- NULL
           }
@@ -394,7 +394,7 @@ EDGE_COLOR:
     INCONV: |-
         if (is_missing(%I%)) {
           if ("color" %in% edge_attr_names(%I1%)) {
-            %I% <- E(%I1%)$color
+            %I% <- edge_attr(%I1%, "color")
           } else {
             %I% <- NULL
           }

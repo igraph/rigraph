@@ -400,7 +400,7 @@ cohesive_blocks <- function(
   )
   class(res) <- "cohesiveBlocks"
   if (labels && "name" %in% vertex_attr_names(graph)) {
-    res$labels <- V(graph)$name
+    res$labels <- vertex_attr(graph, "name")
   }
   if (igraph_opt("return.vs.es")) {
     res$blocks <- lapply(

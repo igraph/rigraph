@@ -147,7 +147,7 @@ automorphism_group_impl <- function(
   ensure_igraph(graph)
   if (is_missing(colors)) {
     if ("color" %in% vertex_attr_names(graph)) {
-      colors <- V(graph)$color
+      colors <- vertex_attr(graph, "color")
     } else {
       colors <- NULL
     }
@@ -191,7 +191,7 @@ canonical_permutation_impl <- function(
   ensure_igraph(graph)
   if (is_missing(colors)) {
     if ("color" %in% vertex_attr_names(graph)) {
-      colors <- V(graph)$color
+      colors <- vertex_attr(graph, "color")
     } else {
       colors <- NULL
     }
@@ -230,7 +230,7 @@ count_automorphisms_impl <- function(
   ensure_igraph(graph)
   if (is_missing(colors)) {
     if ("color" %in% vertex_attr_names(graph)) {
-      colors <- V(graph)$color
+      colors <- vertex_attr(graph, "color")
     } else {
       colors <- NULL
     }

@@ -11,7 +11,7 @@ community_optimal_modularity_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -91,7 +91,7 @@ modularity_impl <- function(
   ensure_igraph(graph)
   membership <- as.numeric(membership)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -124,7 +124,7 @@ modularity_matrix_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -200,7 +200,7 @@ community_spinglass_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -248,7 +248,7 @@ community_spinglass_single_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -292,7 +292,7 @@ community_leading_eigenvector_callback_closure_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -378,7 +378,7 @@ community_fastgreedy_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -410,7 +410,7 @@ community_leiden_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -418,7 +418,7 @@ community_leiden_impl <- function(
     weights <- NULL
   }
   if (is.null(vertex_weights) && "weight" %in% vertex_attr_names(graph)) {
-    vertex_weights <- V(graph)$weight
+    vertex_weights <- vertex_attr(graph, "weight")
   }
   if (!is.null(vertex_weights) && !all(is.na(vertex_weights))) {
     vertex_weights <- as.numeric(vertex_weights)
@@ -458,7 +458,7 @@ community_multilevel_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -492,7 +492,7 @@ community_eb_get_merges_impl <- function(
   directed <- as.logical(directed)
   edges <- as_igraph_es(graph, edges)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -522,7 +522,7 @@ community_edge_betweenness_impl <- function(
   ensure_igraph(graph)
   directed <- as.logical(directed)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -574,7 +574,7 @@ community_infomap_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(e_weights) && "weight" %in% edge_attr_names(graph)) {
-    e_weights <- E(graph)$weight
+    e_weights <- edge_attr(graph, "weight")
   }
   if (!is.null(e_weights) && !all(is.na(e_weights))) {
     e_weights <- as.numeric(e_weights)
@@ -582,7 +582,7 @@ community_infomap_impl <- function(
     e_weights <- NULL
   }
   if (is.null(v_weights) && "weight" %in% vertex_attr_names(graph)) {
-    v_weights <- V(graph)$weight
+    v_weights <- vertex_attr(graph, "weight")
   }
   if (!is.null(v_weights) && !all(is.na(v_weights))) {
     v_weights <- as.numeric(v_weights)
@@ -623,7 +623,7 @@ community_label_propagation_impl <- function(
     "total" = 3L
   )
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -668,7 +668,7 @@ community_voronoi_impl <- function(
     lengths <- NULL
   }
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -710,7 +710,7 @@ community_walktrap_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)

@@ -204,7 +204,7 @@ all_st_mincuts_impl <- function(
     )
   }
   if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
-    capacity <- E(graph)$capacity
+    capacity <- edge_attr(graph, "capacity")
   }
   if (!is.null(capacity) && !all(is.na(capacity))) {
     capacity <- as.numeric(capacity)
@@ -237,7 +237,7 @@ gomory_hu_tree_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
-    capacity <- E(graph)$capacity
+    capacity <- edge_attr(graph, "capacity")
   }
   if (!is.null(capacity) && !all(is.na(capacity))) {
     capacity <- as.numeric(capacity)
@@ -263,7 +263,7 @@ mincut_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
-    capacity <- E(graph)$capacity
+    capacity <- edge_attr(graph, "capacity")
   }
   if (!is.null(capacity) && !all(is.na(capacity))) {
     capacity <- as.numeric(capacity)
@@ -297,7 +297,7 @@ mincut_value_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
-    capacity <- E(graph)$capacity
+    capacity <- edge_attr(graph, "capacity")
   }
   if (!is.null(capacity) && !all(is.na(capacity))) {
     capacity <- as.numeric(capacity)
@@ -339,7 +339,7 @@ st_mincut_impl <- function(
     )
   }
   if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
-    capacity <- E(graph)$capacity
+    capacity <- edge_attr(graph, "capacity")
   }
   if (!is.null(capacity) && !all(is.na(capacity))) {
     capacity <- as.numeric(capacity)
@@ -391,7 +391,7 @@ st_mincut_value_impl <- function(
     )
   }
   if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
-    capacity <- E(graph)$capacity
+    capacity <- edge_attr(graph, "capacity")
   }
   if (!is.null(capacity) && !all(is.na(capacity))) {
     capacity <- as.numeric(capacity)
@@ -583,7 +583,7 @@ maxflow_impl <- function(
     )
   }
   if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
-    capacity <- E(graph)$capacity
+    capacity <- edge_attr(graph, "capacity")
   }
   if (!is.null(capacity) && !all(is.na(capacity))) {
     capacity <- as.numeric(capacity)
@@ -635,7 +635,7 @@ maxflow_value_impl <- function(
     )
   }
   if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
-    capacity <- E(graph)$capacity
+    capacity <- edge_attr(graph, "capacity")
   }
   if (!is.null(capacity) && !all(is.na(capacity))) {
     capacity <- as.numeric(capacity)
@@ -664,7 +664,7 @@ residual_graph_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
-    capacity <- E(graph)$capacity
+    capacity <- edge_attr(graph, "capacity")
   }
   if (!is.null(capacity) && !all(is.na(capacity))) {
     capacity <- as.numeric(capacity)
@@ -693,7 +693,7 @@ reverse_residual_graph_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
-    capacity <- E(graph)$capacity
+    capacity <- edge_attr(graph, "capacity")
   }
   if (!is.null(capacity) && !all(is.na(capacity))) {
     capacity <- as.numeric(capacity)

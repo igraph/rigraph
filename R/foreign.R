@@ -686,7 +686,7 @@ write.graph.dimacs <- function(
     target <- graph_attr(graph, "target")
   }
   if (is.null(capacity)) {
-    capacity <- E(graph)$capacity
+    capacity <- edge_attr(graph, "capacity")
   }
 
   on.exit(.Call(Rx_igraph_finalizer))

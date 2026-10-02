@@ -343,5 +343,29 @@ benchmark_run(
   n = 20
 )
 
+# ---------------------------------------------------------------------------
+# Group #9 - reading the `weight` attribute of a named graph
+# Every weighted function used to read the default weights via
+# `E(graph)$weight`, which builds the full edge sequence including its
+# "from|to" names on a graph with vertex names.
+# ---------------------------------------------------------------------------
+benchmark_run(
+  expr_before_benchmark = {
+    library(igraph)
+    set.seed(42)
+    g <- sample_gnm(1000L, 5000L)
+    V(g)$name <- paste0("v", seq_len(1000L))
+    E(g)$weight <- runif(5000L)
+    for (i in 1:5) {
+      strength(g, 1:10)
+    }
+    gc(full = TRUE)
+  },
+  strength_weighted_named = for (i in 1:150) {
+    strength(g, 1:10)
+  },
+  n = 20
+)
+
 # Create the artifacts consumed by the GitHub Action.
 benchmark_analyze()

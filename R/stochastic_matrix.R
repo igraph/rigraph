@@ -155,7 +155,7 @@ stochastic_matrix <- function(
   }
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    rownames(res) <- colnames(res) <- V(graph)$name
+    rownames(res) <- colnames(res) <- vertex_attr(graph, "name")
   }
 
   res

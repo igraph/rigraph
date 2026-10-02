@@ -365,7 +365,7 @@ get.adjacency.dense <- function(
   }
 
   if (names && "name" %in% vertex_attr_names(graph)) {
-    colnames(res) <- rownames(res) <- V(graph)$name
+    colnames(res) <- rownames(res) <- vertex_attr(graph, "name")
   }
   res
 }
@@ -392,7 +392,7 @@ get.adjacency.sparse <- function(
   res <- igraph.i.spMatrix(sparse_adjacency)
 
   if (names && "name" %in% vertex_attr_names(graph)) {
-    colnames(res) <- rownames(res) <- V(graph)$name
+    colnames(res) <- rownames(res) <- vertex_attr(graph, "name")
   }
 
   res
@@ -636,7 +636,7 @@ as_edgelist <- function(
   res <- matrix(get_edgelist_impl(graph = graph, bycol = TRUE), ncol = 2)
   res <- res + 1
   if (names && "name" %in% vertex_attr_names(graph)) {
-    res <- matrix(V(graph)$name[res], ncol = 2)
+    res <- matrix(vertex_attr(graph, "name")[res], ncol = 2)
   }
 
   res
@@ -967,7 +967,7 @@ as_adj_list <- function(
     res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
   }
   if (is_named(graph)) {
-    names(res) <- V(graph)$name
+    names(res) <- vertex_attr(graph, "name")
   }
   res
 }
@@ -1033,7 +1033,7 @@ as_adj_edge_list <- function(
   res <- .Call(Rx_igraph_get_adjedgelist, graph, mode, loops)
   res <- lapply(res, function(.x) E(graph)[.x + 1])
   if (is_named(graph)) {
-    names(res) <- V(graph)$name
+    names(res) <- vertex_attr(graph, "name")
   }
   res
 }
@@ -1227,15 +1227,23 @@ as_graphnel <- function(graph) {
     cli::cli_abort("multiple edges are not supported in graphNEL graphs")
   }
 
-  if ("name" %in% vertex_attr_names(graph) && is.character(V(graph)$name)) {
-    name <- V(graph)$name
+  if (
+    "name" %in%
+      vertex_attr_names(graph) &&
+      is.character(vertex_attr(graph, "name"))
+  ) {
+    name <- vertex_attr(graph, "name")
   } else {
     name <- as.character(seq(vcount(graph)))
   }
 
   edgemode <- if (is_directed(graph)) "directed" else "undirected"
 
-  if ("weight" %in% edge_attr_names(graph) && is.numeric(E(graph)$weight)) {
+  if (
+    "weight" %in%
+      edge_attr_names(graph) &&
+      is.numeric(edge_attr(graph, "weight"))
+  ) {
     al <- lapply(
       as_adj_edge_list(graph, mode = "out", loops = "once"),
       as.vector
@@ -1243,7 +1251,7 @@ as_graphnel <- function(graph) {
     for (i in seq(along.with = al)) {
       edges <- ends(graph, al[[i]], names = FALSE)
       edges <- ifelse(edges[, 2] == i, edges[, 1], edges[, 2])
-      weights <- E(graph)$weight[al[[i]]]
+      weights <- edge_attr(graph, "weight")[al[[i]]]
       al[[i]] <- list(edges = edges, weights = weights)
     }
   } else {
@@ -1315,8 +1323,8 @@ get.incidence.dense <- function(
     )
 
     if (names && "name" %in% vertex_attr_names(graph)) {
-      rownames(res$res) <- V(graph)$name[res$row_ids]
-      colnames(res$res) <- V(graph)$name[res$col_ids]
+      rownames(res$res) <- vertex_attr(graph, "name")[res$row_ids]
+      colnames(res$res) <- vertex_attr(graph, "name")[res$col_ids]
     } else {
       rownames(res$res) <- res$row_ids
       colnames(res$res) <- res$col_ids
@@ -1350,8 +1358,8 @@ get.incidence.dense <- function(
   res[el] <- weights
 
   if (names && "name" %in% vertex_attr_names(graph)) {
-    rownames(res) <- V(graph)$name[which(!types)]
-    colnames(res) <- V(graph)$name[which(types)]
+    rownames(res) <- vertex_attr(graph, "name")[which(!types)]
+    colnames(res) <- vertex_attr(graph, "name")[which(types)]
   } else {
     rownames(res) <- which(!types)
     colnames(res) <- which(types)
@@ -1398,8 +1406,8 @@ get.incidence.sparse <- function(
   res <- Matrix::spMatrix(n1, n2, i = el[, 1], j = el[, 2], x = value)
 
   if (names && "name" %in% vertex_attr_names(graph)) {
-    rownames(res) <- V(graph)$name[which(!types)]
-    colnames(res) <- V(graph)$name[which(types)]
+    rownames(res) <- vertex_attr(graph, "name")[which(!types)]
+    colnames(res) <- vertex_attr(graph, "name")[which(types)]
   } else {
     rownames(res) <- which(!types)
     colnames(res) <- which(types)
@@ -1726,7 +1734,7 @@ as_long_data_frame <- function(graph) {
   )
   class(ver) <- "data.frame"
   rn <- if (is_named(graph)) {
-    V(graph)$name
+    vertex_attr(graph, "name")
   } else {
     seq_len(vcount(graph))
   }

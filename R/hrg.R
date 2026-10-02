@@ -306,7 +306,7 @@ fit_hrg <- function(
   )
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    res$names <- V(graph)$name
+    res$names <- vertex_attr(graph, "name")
   }
 
   class(res) <- "igraphHRG"

@@ -155,7 +155,7 @@ sample_seq <- function(low, high, length) {
 #'
 handle_vertex_type_arg <- function(types, graph, required = TRUE) {
   if (is.null(types) && "type" %in% vertex_attr_names(graph)) {
-    types <- V(graph)$type
+    types <- vertex_attr(graph, "type")
   }
   if (!is.null(types)) {
     if (!is.logical(types)) {
