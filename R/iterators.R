@@ -640,13 +640,12 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     return(x)
   }
 
-  ## Special case: single numeric argument
-  first_arg_is_numericish <- inherits(
-    rlang::quo_get_expr(args[[1]]),
-    "numeric"
-  ) ||
-    inherits(rlang::quo_get_expr(args[[1]]), "integer")
-  if (length(args) == 1 && first_arg_is_numericish) {
+  ## Special case: single literal argument (number, string or logical).
+  ## A literal evaluates to itself in the data mask,
+  ## so building the mask (which copies every vertex attribute) is wasted work.
+  first_arg_is_literal <- is.atomic(rlang::quo_get_expr(args[[1]])) &&
+    !is.null(rlang::quo_get_expr(args[[1]]))
+  if (length(args) == 1 && first_arg_is_literal) {
     res <- simple_vs_index(x, rlang::quo_get_expr(args[[1]]), na_ok)
     return(add_vses_graph_ref(res, get_vs_graph(x)))
   }
@@ -1857,7 +1856,7 @@ as_igraph_vs <- function(graph, v, na.ok = FALSE) {
     }
   }
   if (is.character(v) && "name" %in% vertex_attr_names(graph)) {
-    v <- as.numeric(match(v, V(graph)$name))
+    v <- as.numeric(match(v, vertex_attr(graph)$name))
     if (!na.ok && anyNA(v)) {
       cli::cli_abort("Invalid vertex names")
     }

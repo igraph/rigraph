@@ -343,5 +343,28 @@ benchmark_run(
   n = 20
 )
 
+# ---------------------------------------------------------------------------
+# Group #7 - indexing by a literal
+# `V(g)["v500"]` and `V(g)[TRUE]` used to build the full attribute data mask,
+# although a literal evaluates to itself.
+# ---------------------------------------------------------------------------
+benchmark_run(
+  expr_before_benchmark = {
+    library(igraph)
+    set.seed(42)
+    g <- sample_gnm(1000L, 5000L)
+    V(g)$name <- paste0("v", seq_len(1000L))
+    V(g)$color <- sample(c("red", "blue", "green"), 1000L, replace = TRUE)
+    for (i in 1:5) {
+      V(g)["v500"]
+    }
+    gc(full = TRUE)
+  },
+  vs_by_literal_name = for (i in 1:770) {
+    V(g)["v500"]
+  },
+  n = 20
+)
+
 # Create the artifacts consumed by the GitHub Action.
 benchmark_analyze()
