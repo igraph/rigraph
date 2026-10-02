@@ -30,3 +30,32 @@
       Error in `cluster_leiden()`:
       ! `objective_function` must be one of "cpm" or "modularity", not "something".
 
+# igraph_match_arg() rejects what rlang::arg_match() rejects
+
+    Code
+      f("o")
+    Condition
+      Error in `f()`:
+      ! `mode` must be one of "all", "out", "in", or "total", not "o".
+      i Did you mean "out"?
+    Code
+      f("foo")
+    Condition
+      Error in `f()`:
+      ! `mode` must be one of "all", "out", "in", or "total", not "foo".
+    Code
+      f(c("out", "in"))
+    Condition
+      Error in `f()`:
+      ! `mode` must be one of "all", "out", "in", or "total", not "out".
+    Code
+      f(NA_character_)
+    Condition
+      Error in `f()`:
+      ! `mode` must be a single string, not a character `NA`.
+    Code
+      f(1)
+    Condition
+      Error in `f()`:
+      ! `mode` must be one of "all", "out", "in", or "total", not "1".
+

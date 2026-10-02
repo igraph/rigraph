@@ -343,5 +343,27 @@ benchmark_run(
   n = 20
 )
 
+# ---------------------------------------------------------------------------
+# Group #7 - per-call argument overhead
+# A cheap query on a few vertices, so the fixed R cost of every call
+# (argument matching via `igraph_match_arg()`, vertex conversion) dominates
+# over the C work.
+# ---------------------------------------------------------------------------
+benchmark_run(
+  expr_before_benchmark = {
+    library(igraph)
+    set.seed(42)
+    g <- sample_gnm(1000L, 5000L)
+    for (i in 1:5) {
+      degree(g, 1:10, mode = "out")
+    }
+    gc(full = TRUE)
+  },
+  degree_few_vertices = for (i in 1:1230) {
+    degree(g, 1:10, mode = "out")
+  },
+  n = 20
+)
+
 # Create the artifacts consumed by the GitHub Action.
 benchmark_analyze()
