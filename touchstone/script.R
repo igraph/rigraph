@@ -344,7 +344,7 @@ benchmark_run(
 )
 
 # ---------------------------------------------------------------------------
-# Group #7 - indexing by a literal
+# Group #8 - indexing by a literal
 # `V(g)["v500"]` and `V(g)[TRUE]` used to build the full attribute data mask,
 # although a literal evaluates to itself.
 # ---------------------------------------------------------------------------
