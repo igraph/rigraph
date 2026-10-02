@@ -1235,15 +1235,19 @@ layout_nicely <- function(graph, dim = 2, ...) {
 
   if (all(c("x", "y") %in% vertex_attr_names(graph))) {
     if ("z" %in% vertex_attr_names(graph)) {
-      cbind(V(graph)$x, V(graph)$y, V(graph)$z)
+      cbind(
+        vertex_attr(graph, "x"),
+        vertex_attr(graph, "y"),
+        vertex_attr(graph, "z")
+      )
     } else {
-      cbind(V(graph)$x, V(graph)$y)
+      cbind(vertex_attr(graph, "x"), vertex_attr(graph, "y"))
     }
   } else {
     args <- list(...)
     if (!("weights" %in% names(args)) || is.null(args$weights)) {
       if ("weight" %in% edge_attr_names(graph)) {
-        weights <- E(graph)$weight
+        weights <- edge_attr(graph, "weight")
         if (any(weights <= 0, na.rm = TRUE)) {
           cli::cli_warn(
             "Non-positive edge weight found, ignoring all weights during graph layout."
@@ -1961,7 +1965,7 @@ layout_with_fr <- function(
   grid <- switch(grid, "grid" = 0L, "nogrid" = 1L, "auto" = 2L)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -2503,7 +2507,7 @@ layout_with_kk <- function(
   epsilon <- as.numeric(epsilon)
   kkconst <- as.numeric(kkconst)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -3134,34 +3138,55 @@ layout_with_sugiyama <- function(
   if (attributes == "default" || attributes == "all") {
     if ("size" %in% vertex_attr_names(graph)) {
       V(res$extd_graph)$size <- 0
-      V(res$extd_graph)$size[!V(res$extd_graph)$dummy] <- V(graph)$size
+      V(res$extd_graph)$size[!V(res$extd_graph)$dummy] <- vertex_attr(
+        graph,
+        "size"
+      )
     }
     if ("size2" %in% vertex_attr_names(graph)) {
       V(res$extd_graph)$size2 <- 0
-      V(res$extd_graph)$size2[!V(res$extd_graph)$dummy] <- V(graph)$size2
+      V(res$extd_graph)$size2[!V(res$extd_graph)$dummy] <- vertex_attr(
+        graph,
+        "size2"
+      )
     }
     if ("shape" %in% vertex_attr_names(graph)) {
       V(res$extd_graph)$shape <- "none"
-      V(res$extd_graph)$shape[!V(res$extd_graph)$dummy] <- V(graph)$shape
+      V(res$extd_graph)$shape[!V(res$extd_graph)$dummy] <- vertex_attr(
+        graph,
+        "shape"
+      )
     }
     if ("label" %in% vertex_attr_names(graph)) {
       V(res$extd_graph)$label <- ""
-      V(res$extd_graph)$label[!V(res$extd_graph)$dummy] <- V(graph)$label
+      V(res$extd_graph)$label[!V(res$extd_graph)$dummy] <- vertex_attr(
+        graph,
+        "label"
+      )
     }
     if ("color" %in% vertex_attr_names(graph)) {
-      V(res$extd_graph)$color <- head(V(graph)$color, 1)
-      V(res$extd_graph)$color[!V(res$extd_graph)$dummy] <- V(graph)$color
+      V(res$extd_graph)$color <- head(vertex_attr(graph, "color"), 1)
+      V(res$extd_graph)$color[!V(res$extd_graph)$dummy] <- vertex_attr(
+        graph,
+        "color"
+      )
     }
     eetar <- as_edgelist(res$extd_graph, names = FALSE)[, 2]
     E(res$extd_graph)$arrow.mode <- 0
     if ("arrow.mode" %in% edge_attr_names(graph)) {
-      E(res$extd_graph)$arrow.mode[eetar <= vc] <- E(graph)$arrow.mode
+      E(res$extd_graph)$arrow.mode[eetar <= vc] <- edge_attr(
+        graph,
+        "arrow.mode"
+      )
     } else {
       E(res$extd_graph)$arrow.mode[eetar <= vc] <- is_directed(graph) * 2
     }
     if ("arrow.size" %in% edge_attr_names(graph)) {
       E(res$extd_graph)$arrow.size <- 0
-      E(res$extd_graph)$arrow.size[eetar <= vc] <- E(graph)$arrow.size
+      E(res$extd_graph)$arrow.size[eetar <= vc] <- edge_attr(
+        graph,
+        "arrow.size"
+      )
     }
   }
 
@@ -3742,7 +3767,7 @@ layout_with_drl <- function(
   options <- modify_list(drl_defaults$default, options)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !anyNA(weights)) {
     weights <- as.numeric(weights)

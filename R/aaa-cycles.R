@@ -11,7 +11,7 @@ feedback_arc_set_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -42,7 +42,7 @@ feedback_vertex_set_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% vertex_attr_names(graph)) {
-    weights <- V(graph)$weight
+    weights <- vertex_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -145,7 +145,7 @@ fundamental_cycles_impl <- function(
   }
   bfs_cutoff <- as.numeric(bfs_cutoff)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -181,7 +181,7 @@ minimum_cycle_basis_impl <- function(
   complete <- as.logical(complete)
   use_cycle_order <- as.logical(use_cycle_order)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)

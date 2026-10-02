@@ -16,7 +16,7 @@ adjacency_spectral_embedding_impl <- function(
   ensure_igraph(graph)
   no <- as.numeric(no)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -73,7 +73,7 @@ laplacian_spectral_embedding_impl <- function(
   ensure_igraph(graph)
   no <- as.numeric(no)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)

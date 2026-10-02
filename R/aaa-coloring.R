@@ -30,7 +30,7 @@ is_edge_coloring_impl <- function(
   ensure_igraph(graph)
   if (is_missing(types)) {
     if ("color" %in% edge_attr_names(graph)) {
-      types <- E(graph)$color
+      types <- edge_attr(graph, "color")
     } else {
       types <- NULL
     }
@@ -74,7 +74,7 @@ is_vertex_coloring_impl <- function(
   ensure_igraph(graph)
   if (is_missing(types)) {
     if ("color" %in% vertex_attr_names(graph)) {
-      types <- V(graph)$color
+      types <- vertex_attr(graph, "color")
     } else {
       types <- NULL
     }

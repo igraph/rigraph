@@ -1905,7 +1905,7 @@ as_igraph_es <- function(graph, e) {
     ## Based on edge ids/names
     if (length(Names) != 0) {
       if ("name" %in% edge_attr_names(graph)) {
-        res[Names] <- as.numeric(match(e[Names], E(graph)$name))
+        res[Names] <- as.numeric(match(e[Names], edge_attr(graph, "name")))
       } else {
         res[Names] <- as.numeric(e[Names])
       }
