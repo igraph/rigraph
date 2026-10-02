@@ -92,6 +92,38 @@
       + 10/? edges (deleted) (vertex names):
        [1] a|b b|c c|d d|e e|f f|g g|h h|i i|j a|j
 
+# unknown literal vertex indices error
+
+    Code
+      V(g)["zz"]
+    Condition
+      Error in `simple_vs_index()`:
+      ! Unknown vertex selected.
+
+---
+
+    Code
+      V(g)[NA]
+    Condition
+      Error in `simple_vs_index()`:
+      ! Unknown vertex selected.
+
+---
+
+    Code
+      V(make_ring(5))["a"]
+    Condition
+      Error in `simple_vs_index()`:
+      ! Unknown vertex selected.
+
+# vertex names resolve to IDs
+
+    Code
+      as_igraph_vs(g, "zz")
+    Condition
+      Error in `as_igraph_vs()`:
+      ! Invalid vertex names
+
 # logical indices are not recycled
 
     Code

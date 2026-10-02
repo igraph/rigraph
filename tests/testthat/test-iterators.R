@@ -436,6 +436,38 @@ test_that("edge indexes are stored as raw numbers", {
   expect_error(induced_subgraph(g, 1:2), NA)
 })
 
+test_that("literal vertex indices give the same result as computed ones", {
+  # A literal takes a fast path, wrapping it in `c()` forces the general one.
+  g <- make_ring(5)
+  V(g)$name <- letters[1:5]
+  V(g)$color <- "red"
+  v <- V(g)
+  expect_identical(v["c"], v[c("c")])
+  expect_identical(v[3], v[c(3)])
+  expect_identical(v[3L], v[c(3L)])
+  expect_identical(v[TRUE], v[c(TRUE)])
+  expect_identical(v[FALSE], v[c(FALSE)])
+  expect_identical(V(g)["c"]$color, "red")
+  expect_identical(get_vs_graph(v["c"]), get_vs_graph(v))
+  expect_identical(v[NA, na_ok = TRUE], v[c(NA), na_ok = TRUE])
+})
+
+test_that("unknown literal vertex indices error", {
+  g <- make_ring(5)
+  V(g)$name <- letters[1:5]
+  expect_snapshot_igraph_error(V(g)["zz"])
+  expect_snapshot_igraph_error(V(g)[NA])
+  expect_snapshot_igraph_error(V(make_ring(5))["a"])
+})
+
+test_that("vertex names resolve to IDs", {
+  g <- make_ring(5)
+  V(g)$name <- letters[1:5]
+  expect_identical(as_igraph_vs(g, c("e", "b")), c(5, 2))
+  expect_identical(neighbors(g, "c"), V(g)[c("b", "d")])
+  expect_snapshot_igraph_error(as_igraph_vs(g, "zz"))
+})
+
 test_that("logical indices are not recycled", {
   # https://github.com/igraph/rigraph/issues/848
   g <- make_ring(5)
