@@ -246,9 +246,9 @@ test_that("ivs() works, cliques of complement", {
   # that the independent vertex sets of G are
   # the same as the cliques of the complement of G (and vice versa)
   gnp <- sample_gnp(50, 0.8)
-  ivs <- ivs(gnp, min = ivs_size(gnp)) %>% lapply(as.numeric)
+  ivs <- ivs(gnp, min = ivs_size(gnp)) |> lapply(as.numeric)
   complement <- complementer(gnp)
-  cliques <- cliques(complement, min = ivs_size(gnp)) %>% lapply(as.numeric)
+  cliques <- cliques(complement, min = ivs_size(gnp)) |> lapply(as.numeric)
 
   expect_equal(length(ivs), length(cliques))
 

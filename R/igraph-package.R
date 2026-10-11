@@ -2,29 +2,8 @@
 #' @import methods
 ## usethis namespace: start
 #' @importFrom lifecycle deprecated
-#' @importFrom magrittr %>%
 #' @import rlang
 ## usethis namespace: end
-NULL
-
-#' Magrittr's pipes
-#'
-#' igraph re-exports the `%>%` operator of magrittr, because
-#' we find it very useful. Please see the documentation in the
-#' `magrittr` package.
-#'
-#' @param lhs Left hand side of the pipe.
-#' @param rhs Right hand side of the pipe.
-#' @return Result of applying the right hand side to the
-#'   result of the left hand side.
-#'
-#' @export
-#' @name %>%
-#' @rdname pipe
-#' @examples
-#' make_ring(10) %>%
-#'   add_edges(c(1, 6)) %>%
-#'   plot()
 NULL
 
 #' The igraph package

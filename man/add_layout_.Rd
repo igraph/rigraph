@@ -21,8 +21,8 @@ The input graph, with the layout added.
 Add layout to graph
 }
 \examples{
-(make_star(11) + make_star(11)) \%>\%
-  add_layout_(as_star(), component_wise()) \%>\%
+(make_star(11) + make_star(11)) |>
+  add_layout_(as_star(), component_wise()) |>
   plot()
 }
 \seealso{

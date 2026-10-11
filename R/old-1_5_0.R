@@ -16,7 +16,7 @@ oldsample_1_5_0 <- function() {
       list(foo = c("a", "b", "c"))
     ),
     ..env.1..
-  ) %>%
+  ) |>
     structure(class = "igraph")
 
   # This will be reconstructed on demand.

@@ -18,7 +18,7 @@ Reverse the order in an edge sequence
 \examples{
 g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
 E(g)
-E(g) \%>\% rev()
+E(g) |> rev()
 }
 \seealso{
 Other vertex and edge sequence operations:

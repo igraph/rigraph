@@ -61,7 +61,7 @@ g <- make_ring(10)
 V(g)
 
 # Vertex ids of a named graph
-g2 <- make_ring(10) \%>\%
+g2 <- make_ring(10) |>
   set_vertex_attr("name", value = letters[1:10])
 V(g2)
 }

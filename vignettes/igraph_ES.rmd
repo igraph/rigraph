@@ -140,12 +140,12 @@ Si intentas añadir aristas a vértices con IDs no válidos (por ejemplo, intent
 g <- add_edges(g, edges = c(38, 37))
 ```
 
-Añadamos más vértices y aristas a nuestro grafo. En `igraph` podemos utilizar el paquete `magrittr`, que proporciona un mecanismo para encadenar comandos con el operador `%>%`:
+Añadamos más vértices y aristas a nuestro grafo. En `igraph` podemos utilizar el operador de tubería (`pipe`) base de R, `|>`, para encadenar comandos:
 
 ```{r echo = TRUE}
-g <- g %>%
-  add_edges(edges = c(1, 34)) %>%
-  add_vertices(3) %>%
+g <- g |>
+  add_edges(edges = c(1, 34)) |>
+  add_vertices(3) |>
   add_edges(edges = c(38, 39, 39, 40, 40, 38, 40, 37))
 g
 ```
@@ -164,7 +164,7 @@ g <- delete_edges(g, edge_id_para_borrar)
 Por ejemplo, para crear un grafo con forma de anillo y para partirlo:
 
 ```{r echo = TRUE}
-g <- make_ring(10) %>% delete_edges("10|1")
+g <- make_ring(10) |> delete_edges("10|1")
 plot(g)
 ```
 
@@ -271,7 +271,7 @@ E(g)$is_formal <- c(FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE)
 summary(g)
 ```
 
-`V` y `E` son la forma estándar de obtener una secuencia de todos los vértices y aristas respectivamente. Esto asigna un atributo a *todos* los vértices/aristas a la vez. Otra forma de generar nuestra red social es con el uso de `set_vertex_attr()` y `set_edge_attr()` y el operador `%>%`:
+`V` y `E` son la forma estándar de obtener una secuencia de todos los vértices y aristas respectivamente. Esto asigna un atributo a *todos* los vértices/aristas a la vez. Otra forma de generar nuestra red social es con el uso de `set_vertex_attr()` y `set_edge_attr()` y el operador `|>`:
 
 ```{r echo = TRUE, eval=FALSE}
 g <- make_graph(
@@ -279,9 +279,9 @@ g <- make_graph(
   Himari-Alice:Nang:Moshe:Samira,
   Ibrahim-Nang:Moshe,
   Nang-Samira
-) %>%
-  set_vertex_attr("age", value = c(25, 31, 18, 23, 47, 22, 50)) %>%
-  set_vertex_attr("gender", value = c("f", "m", "f", "m", "m", "f", "m")) %>%
+) |>
+  set_vertex_attr("age", value = c(25, 31, 18, 23, 47, 22, 50)) |>
+  set_vertex_attr("gender", value = c("f", "m", "f", "m", "m", "f", "m")) |>
   set_edge_attr("is_formal", value = c(FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE))
 summary(g)
 ```

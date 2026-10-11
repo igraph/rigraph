@@ -1,3 +1,46 @@
+# bitriad (0.4)
+
+* Email: <mailto:cornelioid@gmail.com>
+* GitHub mirror: <https://github.com/cran/bitriad>
+
+Run `revdepcheck::revdep_details(, "bitriad")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     Running examples in ‘bitriad-Ex.R’ failed
+     The error most likely occurred in:
+     
+     > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+     > ### Name: modes
+     > ### Title: Actor and event node iteration and attribute querying and
+     > ###   assignment
+     > ### Aliases: modes V1 V2 actor_attr event_attr set_actor_attr
+     > ###   set_event_attr V1<- V2<-
+     > 
+     > ### ** Examples
+     > 
+     > data(women_clique)
+     > print(V1(women_clique))
+     ── <vertex sequence> 5/10 · named · from bb1857e ───────────────────────────────
+     [1] Miss A Miss B Miss C Miss D Miss E
+     > print(V2(women_clique))
+     ── <vertex sequence> 5/10 · named · from bb1857e ───────────────────────────────
+     [1] Bridge   Dinner   Movies   Dance    Visiting
+     > V1(women_clique)$label <- LETTERS[1:5]
+     Error in `V1<-`(`*tmp*`, value = 1:5) : invalid indexing
+     Execution halted
+     ```
+
+## In both
+
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
+     ```
+
 # Boptbd (1.0.7)
 
 * Email: <mailto:diboobayu@gmail.com>
@@ -116,6 +159,72 @@ Run `revdepcheck::revdep_details(, "cfid")` for more info
        Execution halted
      ```
 
+# CINNA (1.2.2)
+
+* GitHub mirror: <https://github.com/cran/CINNA>
+
+Run `revdepcheck::revdep_details(, "CINNA")` for more info
+
+## Newly broken
+
+*   checking whether package ‘CINNA’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/CINNA.Rcheck/00install.out’ for details.
+     ```
+
+## Newly fixed
+
+*   checking dependencies in R code ... NOTE
+     ```
+     Namespace in Imports field not imported from: ‘circlize’
+       All declared Imports should be used.
+     ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘CINNA’ ...
+** this is package ‘CINNA’ version ‘1.2.2’
+** package ‘CINNA’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+Error: object ‘%>%’ is not exported by 'namespace:igraph'
+Execution halted
+ERROR: lazy loading failed for package ‘CINNA’
+* removing ‘/revdepx/out/CINNA.Rcheck/CINNA’
+
+
+```
+### CRAN
+
+```
+* installing *source* package ‘CINNA’ ...
+** this is package ‘CINNA’ version ‘1.2.2’
+** package ‘CINNA’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (CINNA)
+
+
+```
 # comato (1.1)
 
 * Email: <mailto:andreas.muehling@tum.de>
@@ -431,6 +540,83 @@ Run `revdepcheck::revdep_details(, "ECoL")` for more info
        Execution halted
      ```
 
+# EDOIF (0.1.4)
+
+* GitHub: <https://github.com/DarkEyes/EDOIF>
+* Email: <mailto:grandca@gmail.com>
+* GitHub mirror: <https://github.com/cran/EDOIF>
+
+Run `revdepcheck::revdep_details(, "EDOIF")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     > 
+     > # Generate simulation data
+     > nInv<-100
+     > initMean=10
+     > stepMean=20
+     > std=8
+     > simData1<-c()
+     > simData1$Values<-rnorm(nInv,mean=initMean,sd=std)
+     > simData1$Group<-rep(c("C1"),times=nInv)
+     > simData1$Values<-c(simData1$Values,rnorm(nInv,mean=initMean,sd=std) )
+     > simData1$Group<-c(simData1$Group,rep(c("C2"),times=nInv))
+     > simData1$Values<-c(simData1$Values,rnorm(nInv,mean=initMean+2*stepMean,sd=std) )
+     > simData1$Group<-c(simData1$Group,rep(c("C3"),times=nInv) )
+     > simData1$Values<-c(simData1$Values,rnorm(nInv,mean=initMean+3*stepMean,sd=std) )
+     > simData1$Group<-c(simData1$Group, rep(c("C4"),times=nInv) )
+     > simData1$Values<-c(simData1$Values,rnorm(nInv,mean=initMean+4*stepMean,sd=std) )
+     > simData1$Group<-c(simData1$Group, rep(c("C5"),times=nInv) )
+     > 
+     > # Performing ordering infernce from simData1
+     > 
+     > resultObj<-EDOIF(simData1$Values,simData1$Group)
+     Error in graph_from_adjacency_matrix(adjMat) %>% set_vertex_attr("label",  : 
+       could not find function "%>%"
+     Calls: EDOIF -> getiGraphOBJ
+     Execution halted
+     ```
+
+*   checking re-building of vignette outputs ... ERROR
+     ```
+     Error(s) in re-building vignettes:
+       ...
+     --- re-building ‘EDOIF_demo.Rmd’ using knitr
+     
+     Quitting from EDOIF_demo.Rmd:33-45 [unnamed-chunk-1]
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     <error/rlang_error>
+     Error in `graph_from_adjacency_matrix(adjMat) %>% set_vertex_attr("label", value = sortedGroupList)`:
+     ! could not find function "%>%"
+     ---
+     Backtrace:
+         ▆
+      1. └─EDOIF::EDOIF(Values, Group, bootT = bootT, alpha = alpha)
+      2.   └─EDOIF::getiGraphOBJ(out5$adjMat, out1$sortedGroupList)
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     
+     Error: processing vignette 'EDOIF_demo.Rmd' failed with diagnostics:
+     could not find function "%>%"
+     --- failed re-building ‘EDOIF_demo.Rmd’
+     
+     SUMMARY: processing the following file failed:
+       ‘EDOIF_demo.Rmd’
+     
+     Error: Vignette re-building failed.
+     Execution halted
+     ```
+
+*   checking R code for possible problems ... NOTE
+     ```
+     getiGraphOBJ: no visible global function definition for ‘%>%’
+     plotGraph: no visible global function definition for ‘%>%’
+     Undefined global functions or variables:
+       %>%
+     ```
+
 # ggm (2.5.4)
 
 * Email: <mailto:giovanni.marchetti@unifi.it>
@@ -548,7 +734,7 @@ Run `revdepcheck::revdep_details(, "ggraph")` for more info
        ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
      ```
 
-# glyrepr (1.0.0)
+# glyrepr (1.1.0)
 
 * GitHub: <https://github.com/glycoverse/glyrepr>
 * Email: <mailto:23110220018@m.fudan.edu.cn>
@@ -561,31 +747,39 @@ Run `revdepcheck::revdep_details(, "glyrepr")` for more info
 *   checking tests ... ERROR
      ```
      ...
-         'test-floating-parts.R:480:1', 'test-floating-substituents.R:94:1',
-         'test-floating-substituents.R:133:1', 'test-floating-substituents.R:173:1',
-         'test-floating-validation.R:37:1', 'test-floating-validation.R:51:1',
-         'test-floating-validation.R:65:1', 'test-floating-validation.R:79:1',
-         'test-floating-validation.R:109:1', 'test-floating-validation.R:139:1',
-         'test-floating-validation.R:159:1', 'test-floating-validation.R:203:1',
-         'test-low-level-structure.R:46:1', 'test-low-level-structure.R:82:1',
-         'test-low-level-structure.R:159:1', 'test-low-level-structure.R:222:1',
-         'test-low-level-structure.R:236:1', 'test-smap.R:1041:1',
-         'test-structure-tables.R:497:1', 'test-structure.R:520:1',
-         'test-structure.R:539:1', 'test-structure.R:588:1', 'test-structure.R:608:1',
-         'test-structure.R:668:1', 'test-structure.R:675:1', 'test-structure.R:683:1',
-         'test-structure.R:724:1', 'test-structure.R:779:1'
+         'test-floating-substituents.R:94:1', 'test-floating-substituents.R:133:1',
+         'test-floating-substituents.R:173:1', 'test-floating-validation.R:37:1',
+         'test-floating-validation.R:51:1', 'test-floating-validation.R:65:1',
+         'test-floating-validation.R:79:1', 'test-floating-validation.R:109:1',
+         'test-floating-validation.R:139:1', 'test-floating-validation.R:159:1',
+         'test-floating-validation.R:203:1', 'test-low-level-structure.R:46:1',
+         'test-low-level-structure.R:82:1', 'test-low-level-structure.R:159:1',
+         'test-low-level-structure.R:222:1', 'test-low-level-structure.R:236:1',
+         'test-smap.R:1041:1', 'test-structure-arrays.R:53:1',
+         'test-structure-arrays.R:137:1', 'test-structure-tables.R:497:1',
+         'test-structure.R:574:1', 'test-structure.R:593:1', 'test-structure.R:642:1',
+         'test-structure.R:662:1', 'test-structure.R:722:1', 'test-structure.R:729:1',
+         'test-structure.R:737:1', 'test-structure.R:778:1', 'test-structure.R:833:1'
        
        ══ Failed tests ════════════════════════════════════════════════════════════════
        ── Error ('test-structure-to-iupac.R:124:3'): structure_to_iupac handles complex branched structures ──
        <purrr_error_indexed/rlang_error/error/condition>
-       Error in `purrr::map(valid_graphs, function(graph) {     checkmate::assert_class(graph, "igraph")     graph %>% validate_glycan_graph() %>% canonicalize_glycan_graph() })`: i In index: 1.
+       Error in `purrr::map(graphs, process_glycan_structure_element)`: i In index: 1.
        Caused by error in `validate_glycan_graph()`:
        ! Duplicated linkage positions.
        
-       [ FAIL 1 | WARN 0 | SKIP 46 | PASS 1885 ]
+       [ FAIL 1 | WARN 0 | SKIP 51 | PASS 2073 ]
        Error:
        ! Test failures.
        Execution halted
+     ```
+
+## In both
+
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
      ```
 
 # GoodFitSBM (0.0.1)
@@ -628,7 +822,198 @@ Run `revdepcheck::revdep_details(, "GoodFitSBM")` for more info
      Execution halted
      ```
 
-# manynet (2.3.1)
+# gor (2.0)
+
+* Email: <mailto:casencha@unizar.es>
+* GitHub mirror: <https://github.com/cran/gor>
+
+Run `revdepcheck::revdep_details(, "gor")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     > 
+     > ### ** Examples
+     > 
+     > library(igraph)
+     
+     Attaching package: ‘igraph’
+     
+     The following objects are masked from ‘package:stats’:
+     
+         decompose, spectrum
+     
+     The following object is masked from ‘package:base’:
+     
+         union
+     
+     > ## Example with known vertex cover
+     > K25 <- make_full_graph(25)   # Cover of size 24
+     > X0 <- build_cover_approx(K25)
+     > X0$size  # 24
+     [1] 24
+     > plot_cover(X0, K25)
+     Error in gcov %>% add_edges(t(eG[as.numeric(incident(G, v)), ])) : 
+       could not find function "%>%"
+     Calls: plot_cover
+     Execution halted
+     ```
+
+*   checking R code for possible problems ... NOTE
+     ```
+     compute_lower_bound_1tree: no visible global function definition for
+       ‘%>%’
+     crossover_tours: no visible global function definition for ‘%>%’
+     plot_cover: no visible global function definition for ‘%>%’
+     Undefined global functions or variables:
+       %>%
+     ```
+
+# handwriter (3.2.4)
+
+* GitHub: <https://github.com/CSAFE-ISU/handwriter>
+* Email: <mailto:srein@iastate.edu>
+* GitHub mirror: <https://github.com/cran/handwriter>
+
+Run `revdepcheck::revdep_details(, "handwriter")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     Running examples in ‘handwriter-Ex.R’ failed
+     The error most likely occurred in:
+     
+     > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+     > ### Name: calculate_accuracy
+     > ### Title: Calculate Accuracy
+     > ### Aliases: calculate_accuracy
+     > 
+     > ### ** Examples
+     > 
+     > # calculate the accuracy for example analysis performed on test documents and a model with 1 chain
+     > calculate_accuracy(example_analysis)
+     Error in pp %>% tidyr::separate(known_writer, into = c(NA, NA, "known_writer_ID"),  : 
+       could not find function "%>%"
+     Calls: calculate_accuracy
+     Execution halted
+     ```
+
+*   checking re-building of vignette outputs ... ERROR
+     ```
+     Error(s) in re-building vignettes:
+       ...
+     --- re-building ‘handwriter.Rmd’ using rmarkdown
+     
+     Quitting from handwriter.Rmd:74-77 [unnamed-chunk-4]
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     <error/rlang_error>
+     Error in `counts %>% dplyr::group_by(writer, doc, cluster) %>% dplyr::summarize(count = dplyr::n())`:
+     ! could not find function "%>%"
+     ---
+     Backtrace:
+         ▆
+      1. └─handwriter::format_template_data(template = template)
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     
+     Error: processing vignette 'handwriter.Rmd' failed with diagnostics:
+     could not find function "%>%"
+     --- failed re-building ‘handwriter.Rmd’
+     
+     SUMMARY: processing the following file failed:
+       ‘handwriter.Rmd’
+     
+     Error: Vignette re-building failed.
+     Execution halted
+     ```
+
+*   checking R code for possible problems ... NOTE
+     ```
+     ...
+     chooseCenters: no visible global function definition for ‘%>%’
+     delete_crazy_graphs: no visible global function definition for ‘%>%’
+     format_model_data: no visible global function definition for ‘%>%’
+     format_questioned_data: no visible global function definition for ‘%>%’
+     format_template_data: no visible global function definition for ‘%>%’
+     get_cluster_fill_counts: no visible global function definition for
+       ‘%>%’
+     get_cluster_fill_rates: no visible global function definition for ‘%>%’
+     get_strata: no visible global function definition for ‘%>%’
+     plot_cluster_centers: no visible global function definition for ‘%>%’
+     plot_cluster_fill_counts: no visible global function definition for
+       ‘%>%’
+     plot_cluster_fill_rates: no visible global function definition for
+       ‘%>%’
+     plot_credible_intervals: no visible global function definition for
+       ‘%>%’
+     plot_graphs : format_graph_df: no visible global function definition
+       for ‘%>%’
+     plot_graphs: no visible global function definition for ‘%>%’
+     plot_posterior_probabilities: no visible global function definition for
+       ‘%>%’
+     plot_trace: no visible global function definition for ‘%>%’
+     plot_writer_profiles: no visible global function definition for ‘%>%’
+     Undefined global functions or variables:
+       %>%
+     ```
+
+## In both
+
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
+     ```
+
+# iDINGO (1.0.4)
+
+* Email: <mailto:cclass@butler.edu>
+* GitHub mirror: <https://github.com/cran/iDINGO>
+
+Run `revdepcheck::revdep_details(, "iDINGO")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     > # Plot the iDINGO result using a p-value threshold of 0.01.
+     > plotNetwork(brca$fit, threshold = 0.01, thresh.type = "p.val")
+     Warning: `graph.data.frame()` was deprecated in igraph 2.0.0.
+     ℹ Please use `graph_from_data_frame()` instead.
+     ℹ The deprecated feature was likely used in the iDINGO package.
+       Please report the issue to the authors.
+     Warning: `get.data.frame()` was deprecated in igraph 2.0.0.
+     ℹ Please use `as_data_frame()` instead.
+     ℹ The deprecated feature was likely used in the visNetwork package.
+       Please report the issue at
+       <https://github.com/datastorm-open/visNetwork/issues>.
+     Warning: `is.directed()` was deprecated in igraph 2.0.0.
+     ℹ Please use `is_directed()` instead.
+     ℹ The deprecated feature was likely used in the visNetwork package.
+       Please report the issue at
+       <https://github.com/datastorm-open/visNetwork/issues>.
+     Warning: `layout.norm()` was deprecated in igraph 2.0.0.
+     ℹ Please use `norm_coords()` instead.
+     ℹ The deprecated feature was likely used in the visNetwork package.
+       Please report the issue at
+       <https://github.com/datastorm-open/visNetwork/issues>.
+     Error in visNet %>% visGroups(groupname = groups[1], color = list(background = "lightgreen",  : 
+       could not find function "%>%"
+     Calls: plotNetwork
+     Execution halted
+     ```
+
+*   checking R code for possible problems ... NOTE
+     ```
+     plotNetwork: no visible global function definition for ‘%>%’
+     Undefined global functions or variables:
+       %>%
+     ```
+
+# manynet (2.3.4)
 
 * GitHub: <https://github.com/stocnet/manynet>
 * Email: <mailto:james.hollway@graduateinstitute.ch>
@@ -646,7 +1031,7 @@ Run `revdepcheck::revdep_details(, "manynet")` for more info
         2. │ └─testthat::quasi_label(enquo(object), label)
         3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
         4. └─manynet:::check_tute_functions(tute)
-        5.   └─testthat::expect_null(...) at ./helper-manynet.R:225:5
+        5.   └─testthat::expect_null(...) at ./helper-manynet.R:233:5
        ── Failure ('test-tutorials_manynet.R:4:5'): manynet tutorial code runs without warnings or errors ──
        Expected `w` to be NULL.
        Differences:
@@ -660,14 +1045,68 @@ Run `revdepcheck::revdep_details(, "manynet")` for more info
         2. │ └─testthat::quasi_label(enquo(object), label)
         3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
         4. └─manynet:::check_tute_functions(tute)
-        5.   └─testthat::expect_null(...) at ./helper-manynet.R:225:5
+        5.   └─testthat::expect_null(...) at ./helper-manynet.R:233:5
        
-       [ FAIL 6 | WARN 1317 | SKIP 96 | PASS 4747 ]
+       [ FAIL 6 | WARN 767 | SKIP 90 | PASS 4996 ]
        Error:
        ! Test failures.
        Execution halted
      ```
 
+# mau (0.4.0)
+
+* GitHub mirror: <https://github.com/cran/mau>
+
+Run `revdepcheck::revdep_details(, "mau")` for more info
+
+## Newly broken
+
+*   checking whether package ‘mau’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/mau.Rcheck/00install.out’ for details.
+     ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘mau’ ...
+** this is package ‘mau’ version ‘0.4.0’
+** package ‘mau’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error: object ‘%>%’ is not exported by 'namespace:igraph'
+Execution halted
+ERROR: lazy loading failed for package ‘mau’
+* removing ‘/revdepx/out/mau.Rcheck/mau’
+
+
+```
+### CRAN
+
+```
+* installing *source* package ‘mau’ ...
+** this is package ‘mau’ version ‘0.4.0’
+** package ‘mau’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (mau)
+
+
+```
 # MetaNet (0.3.2)
 
 * GitHub: <https://github.com/Asa12138/MetaNet>
@@ -736,6 +1175,82 @@ Run `revdepcheck::revdep_details(, "migraph")` for more info
        Error:
        ! Test failures.
        Execution halted
+     ```
+
+# MRReg (0.1.6)
+
+* GitHub: <https://github.com/DarkEyes/MRReg>
+* Email: <mailto:grandca@gmail.com>
+* GitHub mirror: <https://github.com/cran/MRReg>
+
+Run `revdepcheck::revdep_details(, "MRReg")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+       essentially perfect fit: summary may be unreliable
+     Warning in summary.lm(submodels[[inx2]]) :
+       essentially perfect fit: summary may be unreliable
+     Warning in summary.lm(submodels[[inx2]]) :
+       essentially perfect fit: summary may be unreliable
+     Warning in summary.lm(submodels[[inx2]]) :
+       essentially perfect fit: summary may be unreliable
+     Warning in summary.lm(submodels[[inx2]]) :
+       essentially perfect fit: summary may be unreliable
+     Warning in summary.lm(submodels[[inx2]]) :
+       essentially perfect fit: summary may be unreliable
+     Warning in summary.lm(submodels[[inx2]]) :
+       essentially perfect fit: summary may be unreliable
+     Warning in summary.lm(submodels[[inx2]]) :
+       essentially perfect fit: summary may be unreliable
+     Warning in summary.lm(submodels[[inx2]]) :
+       essentially perfect fit: summary may be unreliable
+     Warning in summary.lm(submodels[[inx2]]) :
+       essentially perfect fit: summary may be unreliable
+     > # Plotting the result
+     > plotOptimalClustersTree(obj)
+     Error in graph_from_adjacency_matrix(adjMat) %>% set_vertex_attr("label",  : 
+       could not find function "%>%"
+     Calls: plotOptimalClustersTree
+     Execution halted
+     ```
+
+*   checking re-building of vignette outputs ... ERROR
+     ```
+     Error(s) in re-building vignettes:
+       ...
+     --- re-building ‘MDLResFramework_Demo.Rmd’ using knitr
+     
+     Quitting from MDLResFramework_Demo.Rmd:50-52 [unnamed-chunk-2]
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     <error/rlang_error>
+     Error in `graph_from_adjacency_matrix(adjMat) %>% set_vertex_attr("label", value = nameList)`:
+     ! could not find function "%>%"
+     ---
+     Backtrace:
+         ▆
+      1. └─MRReg::plotOptimalClustersTree(out)
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     
+     Error: processing vignette 'MDLResFramework_Demo.Rmd' failed with diagnostics:
+     could not find function "%>%"
+     --- failed re-building ‘MDLResFramework_Demo.Rmd’
+     
+     SUMMARY: processing the following file failed:
+       ‘MDLResFramework_Demo.Rmd’
+     
+     Error: Vignette re-building failed.
+     Execution halted
+     ```
+
+*   checking R code for possible problems ... NOTE
+     ```
+     plotOptimalClustersTree: no visible global function definition for
+       ‘%>%’
+     Undefined global functions or variables:
+       %>%
      ```
 
 # nat (1.8.26)
@@ -843,7 +1358,63 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
 *   checking for detritus in the temp directory ... NOTE
      ```
      Found the following files/directories:
-       ‘org.chromium.Chromium.lbepW8’
+       ‘org.chromium.Chromium.5hUvPq’
+     ```
+
+# neatmaps (2.1.0)
+
+* GitHub: <https://github.com/PhilBoileau/neatmaps>
+* Email: <mailto:philippe_boileau@berkeley.edu>
+* GitHub mirror: <https://github.com/cran/neatmaps>
+
+Run `revdepcheck::revdep_details(, "neatmaps")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     > ### ** Examples
+     > 
+     > # create the data frame using the network, node and edge attributes
+     > df <- netsDataFrame(network_attr_df,
+     +                     node_attr_df,
+     +                     edge_df)
+     Warning: `graph.density()` was deprecated in igraph 2.0.0.
+     ℹ Please use `edge_density()` instead.
+     ℹ The deprecated feature was likely used in the neatmaps package.
+       Please report the issue to the authors.
+     > 
+     > # run the neatmap code on df
+     > neat_res <- neatmap(df, scale_df = "ecdf", max_k = 3, reps = 100, 
+     +                     xlab = "vars", ylab = "nets", xlab_cex = 1, ylab_cex = 1)
+     Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+     ℹ Please use `linewidth` instead.
+     ℹ The deprecated feature was likely used in the dendextend package.
+       Please report the issue at <https://github.com/talgalili/dendextend/issues>.
+     > 
+     > # get the consensus cluster results for each iteration
+     > consensus_res_df <- consClustResTable(neat_res)
+     Error in cc_res$clusterConsensus %>% as.data.frame : 
+       could not find function "%>%"
+     Calls: consClustResTable
+     Execution halted
+     ```
+
+## In both
+
+*   checking R code for possible problems ... NOTE
+     ```
+     consClustResTable: no visible global function definition for ‘%>%’
+     Undefined global functions or variables:
+       %>%
+     
+     Found if() conditions comparing class() to string:
+     File ‘neatmaps/R/aggNodeAttr.R’: if (class(node_df) != "data.frame" || (("mean" %in% measure_of_cent) == FALSE) && ("median" %in% measure_of_cent) == FALSE) ...
+     File ‘neatmaps/R/createNetworks.R’: if (class(edge_df) != "data.frame") ...
+     File ‘neatmaps/R/getStructuralAttr.R’: if (class(net_list) != "list" || sum(sapply(net_list, class) == "igraph") != length(net_list)) ...
+     File ‘neatmaps/R/netsDataFrame.R’: if (class(net_attr_df) != "data.frame" || class(node_attr_df) != "data.frame" || class(edge_df) != "data.frame" || nrow(net_attr_df) != nrow(node_attr_df) || nrow(net_attr_df) != nrow(edge_df)) ...
+     Use inherits() (or maybe is()) instead.
      ```
 
 # nethist (1.0.0)
@@ -892,6 +1463,91 @@ Run `revdepcheck::revdep_details(, "nethist")` for more info
      ```
      Compilation used the following non-portable flag(s):
        ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
+     ```
+
+# NetOrigin (1.1-7)
+
+* GitHub: <https://github.com/jmanitz/NetOrigin>
+* Email: <mailto:r@manitz.org>
+* GitHub mirror: <https://github.com/cran/NetOrigin>
+
+Run `revdepcheck::revdep_details(, "NetOrigin")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     Running examples in ‘NetOrigin-Ex.R’ failed
+     The error most likely occurred in:
+     
+     > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+     > ### Name: origin-methods
+     > ### Title: methods for origin estimation objects of class 'origin'
+     > ### Aliases: origin-methods print.origin summary.origin plot.origin
+     > ###   performance.origin
+     > 
+     > ### ** Examples
+     > 
+     > data(ptnGoe)
+     > data(delayGoe)
+     > 
+     > res <- origin(events=delayGoe[10,-c(1:2)], type='centrality', graph=ptnGoe)
+     This graph was created by an old(er) igraph version.
+     ℹ Call `igraph::upgrade_graph()` on it to use with the current igraph version.
+     For now we convert it on the fly...
+     Error in aux %>% dplyr::filter(events > 0) %>% dplyr::select(id) : 
+       could not find function "%>%"
+     Calls: origin -> origin_centrality
+     Execution halted
+     ```
+
+*   checking R code for possible problems ... NOTE
+     ```
+     origin_backtracking: no visible global function definition for ‘%>%’
+     origin_centrality: no visible global function definition for ‘%>%’
+     origin_edm: no visible global function definition for ‘%>%’
+     Undefined global functions or variables:
+       %>%
+     ```
+
+# netrics (1.0.3)
+
+* GitHub: <https://github.com/stocnet/netrics>
+* Email: <mailto:james.hollway@graduateinstitute.ch>
+* GitHub mirror: <https://github.com/cran/netrics>
+
+Run `revdepcheck::revdep_details(, "netrics")` for more info
+
+## Newly broken
+
+*   checking tests ... ERROR
+     ```
+     ...
+         'test-measure_net.R:6:7'
+       • grepl("tie_is_imbalanced", fn) && ob == "twomode" is TRUE (1):
+         'test-mark_ties.R:5:7'
+       • grepl("triad", fn) && is_twomode(data_objs[[ob]]) is TRUE (1):
+         'test-motif_net.R:6:7'
+       • grepl("triad|dyad", fn) && is_twomode(data_objs[[ob]]) is TRUE (2):
+         'test-motif_nodes.R:5:7', 'test-motif_nodes.R:5:7'
+       
+       ══ Failed tests ════════════════════════════════════════════════════════════════
+       ── Failure ('test-member_community.R:65:3'): every k-capable algorithm returns exactly k communities ──
+       Expected the warnings and messages raised to match regexp "communities".
+       Actual text:
+       x | 
+       Backtrace:
+           ▆
+        1. ├─testthat::expect_s3_class(...) at test-member_community.R:65:3
+        2. │ └─testthat::quasi_label(enquo(object))
+        3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
+        4. └─netrics:::expect_snet_warn(...)
+        5.   └─testthat::expect_match(...) at ./helper-netrics.R:46:3
+       
+       [ FAIL 1 | WARN 0 | SKIP 38 | PASS 2774 ]
+       Error:
+       ! Test failures.
+       Execution halted
      ```
 
 # optbdmaeAT (1.0.2)
@@ -972,6 +1628,84 @@ Run `revdepcheck::revdep_details(, "optrcdmaeAT")` for more info
      Execution halted
      ```
 
+# pomdp (1.2.7)
+
+* GitHub mirror: <https://github.com/cran/pomdp>
+
+Run `revdepcheck::revdep_details(, "pomdp")` for more info
+
+## Newly broken
+
+*   checking whether package ‘pomdp’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/pomdp.Rcheck/00install.out’ for details.
+     ```
+
+## Newly fixed
+
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
+     ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘pomdp’ ...
+** this is package ‘pomdp’ version ‘1.2.7’
+** package ‘pomdp’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+specified C++17
+using C++ compiler: ‘g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
+using C++17
+g++ -std=gnu++17 -I"/usr/local/lib/R/include" -DNDEBUG  -I'/opt/revdepx/lib/Rcpp/include' -I/usr/local/include    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -g0  -c POMDP.cpp -o POMDP.o
+g++ -std=gnu++17 -I"/usr/local/lib/R/include" -DNDEBUG  -I'/opt/revdepx/lib/Rcpp/include' -I/usr/local/include    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -g0  -c RcppExports.cpp -o RcppExports.o
+...
+g++ -std=gnu++17 -shared -L/usr/local/lib/R/lib -L/usr/local/lib -o pomdp.so POMDP.o RcppExports.o math.o model.o sample_simplex.o simulate_MDP.o simulate_POMDP.o -L/usr/local/lib/R/lib -lR
+installing to /revdepx/out/pomdp.Rcheck/00LOCK-pomdp/00new/pomdp/libs
+** R
+** data
+** inst
+** byte-compile and prepare package for lazy loading
+Error: object ‘%>%’ is not exported by 'namespace:igraph'
+Execution halted
+ERROR: lazy loading failed for package ‘pomdp’
+* removing ‘/revdepx/out/pomdp.Rcheck/pomdp’
+
+
+```
+### CRAN
+
+```
+* installing *source* package ‘pomdp’ ...
+** this is package ‘pomdp’ version ‘1.2.7’
+** package ‘pomdp’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+specified C++17
+using C++ compiler: ‘g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
+using C++17
+g++ -std=gnu++17 -I"/usr/local/lib/R/include" -DNDEBUG  -I'/opt/revdepx/lib/Rcpp/include' -I/usr/local/include    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -g0  -c POMDP.cpp -o POMDP.o
+g++ -std=gnu++17 -I"/usr/local/lib/R/include" -DNDEBUG  -I'/opt/revdepx/lib/Rcpp/include' -I/usr/local/include    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -g0  -c RcppExports.cpp -o RcppExports.o
+...
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (pomdp)
+
+
+```
 # R6causal (0.8.3)
 
 * Email: <mailto:juha.karvanen@iki.fi>
@@ -1011,6 +1745,150 @@ Run `revdepcheck::revdep_details(, "R6causal")` for more info
      
      Error: Vignette re-building failed.
      Execution halted
+     ```
+
+# RNAseqNet (0.1.5)
+
+* Email: <mailto:nathalie.vialaneix@inrae.fr>
+* GitHub mirror: <https://github.com/cran/RNAseqNet>
+
+Run `revdepcheck::revdep_details(, "RNAseqNet")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     Running examples in ‘RNAseqNet-Ex.R’ failed
+     The error most likely occurred in:
+     
+     > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+     > ### Name: GLMnetwork
+     > ### Title: Infer a network from RNA-seq expression.
+     > ### Aliases: GLMnetwork
+     > 
+     > ### ** Examples
+     > 
+     > data(lung)
+     > lambdas <- 4 * 10^(seq(0, -2, length = 10))
+     > ref_lung <- GLMnetwork(lung, lambdas = lambdas)
+     Error in lapply(all_glms, function(alist) alist[, indl]) %>% unlist() : 
+       could not find function "%>%"
+     Calls: GLMnetwork -> lapply -> FUN
+     Execution halted
+     ```
+
+*   checking R code for possible problems ... NOTE
+     ```
+     GLMnetwork : <anonymous>: no visible global function definition for
+       ‘%>%’
+     chooseSigma: no visible global function definition for ‘%>%’
+     imputedGLMnetwork: no visible global function definition for ‘%>%’
+     stabilitySelection: no visible global function definition for ‘%>%’
+     Undefined global functions or variables:
+       %>%
+     ```
+
+# Rnmr1D (1.3.2)
+
+* GitHub: <https://github.com/INRA/Rnmr1D>
+* Email: <mailto:daniel.jacob@inrae.fr>
+* GitHub mirror: <https://github.com/cran/Rnmr1D>
+
+Run `revdepcheck::revdep_details(, "Rnmr1D")` for more info
+
+## Newly broken
+
+*   checking R code for possible problems ... NOTE
+     ```
+     ggplotPlotly: no visible global function definition for ‘%>%’
+     Undefined global functions or variables:
+       %>%
+     ```
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+     ```
+     Namespace in Imports field not imported from: ‘impute’
+       All declared Imports should be used.
+     ```
+
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
+     ```
+
+# rSDI (0.2.2)
+
+* GitHub: <https://github.com/ehengirmen/rSDI>
+* Email: <mailto:mehmetgencer@yahoo.com>
+* GitHub mirror: <https://github.com/cran/rSDI>
+
+Run `revdepcheck::revdep_details(, "rSDI")` for more info
+
+## Newly broken
+
+*   checking re-building of vignette outputs ... ERROR
+     ```
+     Error(s) in re-building vignettes:
+       ...
+     --- re-building ‘rSDI.Rmd’ using rmarkdown
+     
+     Quitting from rSDI.Rmd:186-194 [multi.metric.example]
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     <error/rlang_error>
+     Error in `toyGraph %>% SDI(variant = "nuw") %>% SDI(variant = "niu") %>% SDI(variant = "vuw") %>%
+         SDI(variant = "vuu")`:
+     ! could not find function "%>%"
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     
+     Error: processing vignette 'rSDI.Rmd' failed with diagnostics:
+     could not find function "%>%"
+     --- failed re-building ‘rSDI.Rmd’
+     
+     SUMMARY: processing the following file failed:
+       ‘rSDI.Rmd’
+     
+     Error: Vignette re-building failed.
+     Execution halted
+     ```
+
+# RSP (1.0.0)
+
+* Email: <mailto:erencan@aybek.net>
+* GitHub mirror: <https://github.com/cran/RSP>
+
+Run `revdepcheck::revdep_details(, "RSP")` for more info
+
+## Newly broken
+
+*   checking R code for possible problems ... NOTE
+     ```
+     CFA : server : build_cfa_visnetwork: no visible global function
+       definition for ‘%>%’
+     CFA : server: no visible global function definition for ‘%>%’
+     FA : server : apply_loading_cutoff_style: no visible global function
+       definition for ‘%>%’
+     FA : server: no visible global function definition for ‘%>%’
+     INTERNAL : server : style_summary_gt: no visible global function
+       definition for ‘%>%’
+     INTERNAL : server: no visible global function definition for ‘%>%’
+     INTERNAL : server : make_plotly_bar: no visible global function
+       definition for ‘%>%’
+     INTERNAL : server : make_plotly_bar2: no visible global function
+       definition for ‘%>%’
+     IRT : server: no visible global function definition for ‘%>%’
+     ITEMAN : <anonymous>: no visible global function definition for ‘%>%’
+     ITEMAN : server: no visible global function definition for ‘%>%’
+     PCA : server : apply_loading_cutoff_style: no visible global function
+       definition for ‘%>%’
+     PCA : server: no visible global function definition for ‘%>%’
+     SIMDATA : server : styled_gt: no visible global function definition for
+       ‘%>%’
+     SIMDATA : server: no visible global function definition for ‘%>%’
+     Undefined global functions or variables:
+       %>%
      ```
 
 # scistreer (1.2.1)
@@ -1115,7 +1993,7 @@ Run `revdepcheck::revdep_details(, "SEMgraph")` for more info
      Execution halted
      ```
 
-# sfclust (1.1.0)
+# sfclust (1.1.1)
 
 * GitHub: <https://github.com/ErickChacon/sfclust>
 * Email: <mailto:erick.chaconmontalvan@wur.nl>
@@ -1153,6 +2031,23 @@ Run `revdepcheck::revdep_details(, "sfclust")` for more info
        Error:
        ! Test failures.
        Execution halted
+     ```
+
+# soptdmaeA (1.0.1)
+
+* Email: <mailto:diboobayu@gmail.com>
+* GitHub mirror: <https://github.com/cran/soptdmaeA>
+
+Run `revdepcheck::revdep_details(, "soptdmaeA")` for more info
+
+## Newly broken
+
+*   checking R code for possible problems ... NOTE
+     ```
+     graphsoptd.mae: no visible global function definition for ‘%>%’
+     summary.soptdmaeA: no visible global function definition for ‘%>%’
+     Undefined global functions or variables:
+       %>%
      ```
 
 # SpaDES.core (3.2.1)
@@ -1193,6 +2088,91 @@ Run `revdepcheck::revdep_details(, "SpaDES.core")` for more info
        ! Test failures.
        Execution halted
        Ran 1/1 deferred expressions
+     ```
+
+# SurvHiDim (0.1.1)
+
+* Email: <mailto:atanustat@gmail.com>
+* GitHub mirror: <https://github.com/cran/SurvHiDim>
+
+Run `revdepcheck::revdep_details(, "SurvHiDim")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     Running examples in ‘SurvHiDim-Ex.R’ failed
+     The error most likely occurred in:
+     
+     > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+     > ### Name: hidimSurvlas
+     > ### Title: hidimSurvlas Two step filteration without bonferroni correction
+     > ### Aliases: hidimSurvlas
+     > 
+     > ### ** Examples
+     > 
+     > ##
+     > data(hnscc)
+     > hidimSurvlas(7,105,0.05,ID="id",OS="os",Death="death",PFS="pfs",Prog="prog",hnscc)
+     Error in commondata2 %>% data.matrix() : could not find function "%>%"
+     Calls: hidimSurvlas
+     Execution halted
+     ```
+
+*   checking R code for possible problems ... NOTE
+     ```
+     hidimSurvbonlas: no visible global function definition for ‘%>%’
+     hidimSurvlas: no visible global function definition for ‘%>%’
+     Undefined global functions or variables:
+       %>%
+     ```
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+     ```
+     Namespace in Imports field not imported from: ‘readr’
+       All declared Imports should be used.
+     ```
+
+# threejs (0.3.4)
+
+* GitHub: <https://github.com/bwlewis/rthreejs>
+* Email: <mailto:blewis@illposed.net>
+* GitHub mirror: <https://github.com/cran/threejs>
+
+Run `revdepcheck::revdep_details(, "threejs")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     > r     <- 1.0
+     > x <- (R + r * cos(theta)) * cos(phi)
+     > y <- (R + r * cos(theta)) * sin(phi)
+     > z <- r * sin(theta)
+     > d <- 6
+     > h <- 6
+     > t <- 2 * runif (N) - 1
+     > w <- t^2 * sqrt(1 - t^2)
+     > x1 <- d * cos(theta) * sin(phi) * w
+     > y1 <- d * sin(theta) * sin(phi) * w
+     > i <- order(phi)
+     > j <- order(t)
+     > col <- c( rainbow(length(phi))[order(i)],
+     +          rainbow(length(t), start=0, end=2/6)[order(j)])
+     > M <- cbind(x=c(x, x1), y=c(y, y1), z=c(z, h*t))
+     > scatterplot3js(M, size=0.5, color=col, bg="black", pch=".")
+     > 
+     > # Plot generic text using 'pch' (we label some points in this example)
+     > set.seed(1)
+     > x <- rnorm(5); y <- rnorm(5); z <- rnorm(5)
+     > scatterplot3js(x, y, z, pch="@") %>%
+     +    points3d(x + 0.1, y + 0.1, z, color="red", pch=paste("point", 1:5))
+     Error in scatterplot3js(x, y, z, pch = "@") %>% points3d(x + 0.1, y +  : 
+       could not find function "%>%"
+     Execution halted
      ```
 
 # tidygraph (1.3.1)

@@ -28,8 +28,8 @@ Query edge attributes of a graph
 }
 
 \examples{
-g <- make_ring(10) \%>\%
-  set_edge_attr("weight", value = 1:10) \%>\%
+g <- make_ring(10) |>
+  set_edge_attr("weight", value = 1:10) |>
   set_edge_attr("color", value = "red")
 g
 plot(g, edge.width = E(g)$weight)
