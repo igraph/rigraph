@@ -5,7 +5,9 @@
 #
 # The claims are about which upstream commit comes next and how its vendor
 # commit is written, along the two stretches of the line and across the seam
-# between them (scripts/series-config.sh). Nine things are checked.
+# between them (scripts/series-config.sh), and about the vendor strand, where
+# `--strand` writes the vendoring alone and scripts/series-vendor.sh derives the
+# buffer from it. Twelve things are checked.
 #
 #   1. On the replay, the walk vendors the replay's next commit whatever the
 #      clone's HEAD says, names it krlmlr/igraph@, links krlmlr/igraph's pull
@@ -26,6 +28,13 @@
 #   7. With nothing left to vendor, a run exits 0 and leaves the tree as it was.
 #   8. A clone whose HEAD is on another line is refused with exit 5.
 #   9. A clone without tags, and a shallow one, are refused with exit 6.
+#  10. `--strand` writes a commit of the vendor paths alone (`series_vendor_paths`),
+#      the parsers and the threading header among them, with no counter, and
+#      restores whatever else the generator wrote.
+#  11. A patch/ entry upstream now carries is retired in the strand commit.
+#  12. series-vendor.sh picks the strand commits onto the buffer, regenerates
+#      what the buffer owns there (`series_regenerate()`), stamps the counter,
+#      and carries the retirement; a level buffer picks nothing.
 #
 # Usage:
 #   scripts/vendor-one-test.sh
@@ -56,7 +65,7 @@ mkdir -p "$TMPDIR"
 #
 # igraph's CMake, as far as vendoring reads it: the version header, from
 # `git describe --tags` in the source tree. R is only asked to register cpp11,
-# which has nothing to register here.
+# which has nothing to register here. Makefile-cigraph is the package's, below.
 
 STUBS=$SCRATCH/stubs
 mkdir -p "$STUBS"
@@ -152,7 +161,8 @@ git commit -q -m "vendor: Update vendored sources (tag 0.10.17) to igraph/igraph
 
 SCRIPTS=$SCRATCH/scripts
 mkdir -p "$SCRIPTS"
-cp "$HERE/vendor-one.sh" "$HERE/vendor-lib.sh" "$HERE/series-config.sh" "$SCRIPTS/"
+cp "$HERE/vendor-one.sh" "$HERE/vendor-lib.sh" "$HERE/series-config.sh" \
+  "$HERE/series-lib.sh" "$HERE/series-vendor.sh" "$SCRIPTS/"
 sed -i -E "s/^series_replay_tip=.*/series_replay_tip=$RT/; s/^series_seam=.*/series_seam=$SEAM/" "$SCRIPTS/series-config.sh"
 grep -q "^series_replay_tip=$RT\$" "$SCRIPTS/series-config.sh" &&
   grep -q "^series_seam=$SEAM\$" "$SCRIPTS/series-config.sh" || {
@@ -178,6 +188,7 @@ version() { git -C "$PKG" show "${1:-HEAD}:DESCRIPTION" | sed -n 's/^Version: //
 header() { git -C "$PKG" show "${1:-HEAD}:src/vendor/igraph_version.h" | sed -En 's/^#define IGRAPH_VERSION "(.*)"$/\1/p'; }
 changed() { git -C "$PKG" diff --name-only "$1" "$2" | tr '\n' ' ' | sed 's/ $//'; }
 clean() { [ -z "$(git -C "$PKG" status --porcelain)" ] && echo clean || echo dirty; }
+clean_in() { [ -z "$(git -C "$1" status --porcelain)" ] && echo clean || echo dirty; }
 
 # --- the replay (claims 1 and 2) ---------------------------------------------------
 
@@ -285,6 +296,88 @@ run shallow "$SCRATCH/shallow" --commits 1
 is "a shallow clone is refused with exit 6" "$status" 6
 has "saying so" "$(cat "$log")" "SHALLOW UPSTREAM CLONE"
 is "and nothing is vendored" "$(git -C "$PKG" rev-parse HEAD)" "$done_at"
+
+# --- the vendor strand (claims 10 to 12) ---------------------------------------------
+#
+# A second package, as `main` is seeded: vendored at 0.10.17 with its one patch,
+# the seed's fifth component, and a Makefile-cigraph whose targets write from
+# the vendored tree what the real one writes. The strand's targets also leave a
+# file outside the vendor paths, which the run must restore.
+
+echo "the vendor strand"
+git -C "$UP" checkout -q --detach main
+REMOTE=$SCRATCH/remote.git
+git init -q --bare -b main "$REMOTE"
+STRAND=$SCRATCH/strand
+git init -q -b main "$STRAND"
+cd "$STRAND"
+git remote add origin "$REMOTE"
+echo '/igraph/' >.gitignore
+printf 'Package: igraph.dev\nVersion: 2.2.1.9003.0\n' >DESCRIPTION
+printf '%s\n' '.PHONY: all patches src/vendor/igraph_threading.h src/rinterface.c r_wrappers src/sources.mk' \
+  'all:' \
+  'patches:' \
+  '	mkdir -p src/vendor/io && cat src/vendor/cigraph/src/*.c >src/vendor/io/parser.c && echo stray >src/stray.txt' \
+  'src/vendor/igraph_threading.h:' '	cp src/vendor/cigraph/include/igraph.h $@' \
+  'src/rinterface.c:' '	cat src/vendor/cigraph/src/a.c >$@' \
+  'r_wrappers:' '	mkdir -p R && cat src/vendor/cigraph/src/a.c >R/aaa-auto.R' \
+  'src/sources.mk:' '	ls src/vendor/cigraph/src >src/sources-igraph.mk' >Makefile-cigraph
+mkdir -p patch src/vendor/cigraph/src src/vendor/cigraph/include
+git -C "$PKG" show "$(git -C "$PKG" rev-list --max-parents=0 HEAD):patch/0001-Add-b.patch" >patch/0001-Add-b.patch
+echo a0 >src/vendor/cigraph/src/a.c
+echo fix >src/vendor/cigraph/src/b.c
+echo h0 >src/vendor/cigraph/include/igraph.h
+echo '#define IGRAPH_VERSION "0.10.17"' >src/vendor/igraph_version.h
+git add -A
+git commit -q -m "vendor: Update vendored sources (tag 0.10.17) to igraph/igraph@$T0"
+git commit -q --allow-empty -m 'chore: Add fifth version component'
+SEED=$(git rev-parse HEAD)
+git push -q origin "$SEED:refs/heads/main-vendor" "$SEED:refs/heads/main-build"
+
+set +e
+VENDOR_REPO=$STRAND bash "$SCRIPTS/vendor-one.sh" --strand --commits 2 "$UP" 2>&1 | cat >"$SCRATCH/strand.log"
+status=${PIPESTATUS[0]}
+set -e
+strand_changed() { git -C "$STRAND" diff --name-only "$1~1" "$1" | tr '\n' ' ' | sed 's/ $//'; }
+is "the strand run exits 0" "$status" 0
+is "two strand commits, for the replay's first two" \
+  "$(git -C "$STRAND" log --format=%s "$SEED..HEAD" | tr '\n' '|')" \
+  "vendor: Update vendored sources to krlmlr/igraph@$R2|vendor: Update vendored sources to krlmlr/igraph@$R1|"
+is "the first carries the vendor paths alone, the parsers and the threading header among them" \
+  "$(strand_changed HEAD~1)" \
+  "src/vendor/cigraph/src/a.c src/vendor/igraph_threading.h src/vendor/igraph_version.h src/vendor/io/parser.c"
+is "and no counter" "$(git -C "$STRAND" show HEAD:DESCRIPTION | sed -n 's/^Version: //p')" 2.2.1.9003.0
+is "what the generator wrote elsewhere is restored" \
+  "$([ -e "$STRAND/src/stray.txt" ] && echo kept || echo restored) $(clean_in "$STRAND")" "restored clean"
+is "the second retires the patch whose change it carries, on the strand" \
+  "$(git -C "$STRAND" ls-tree --name-only HEAD patch/)" ""
+has "the retirement is in the strand commit" "$(strand_changed HEAD)" "patch/0001-Add-b.patch"
+git -C "$STRAND" push -q origin HEAD:refs/heads/main-vendor
+
+BUILD=$SCRATCH/build
+git -C "$STRAND" worktree add -q --detach "$BUILD" origin/main-build
+pick() {
+  set +e
+  (cd "$BUILD" && bash "$SCRIPTS/series-vendor.sh" main --no-check-glue "$@") 2>&1 | cat >"$SCRATCH/pick.log"
+  status=${PIPESTATUS[0]}
+  set -e
+}
+pick
+is "series-vendor.sh picks with exit 0" "$status" 0
+has "both strand commits" "$(cat "$SCRATCH/pick.log")" "main-build: 2 commit(s) picked from main-vendor"
+is "each pick has its strand commit's vendor paths, blob for blob" \
+  "$(for c in HEAD~1 HEAD; do git -C "$BUILD" diff --quiet "origin/main-vendor${c#HEAD}" "$c" -- \
+       src/vendor/cigraph src/vendor/igraph_version.h src/vendor/igraph_threading.h src/vendor/io patch && echo same; done | tr '\n' ' ')" \
+  "same same "
+is "the buffer regenerates the interface from the picked tree" "$(git -C "$BUILD" show HEAD:src/rinterface.c)" a2
+is "and the R wrappers and the source lists" \
+  "$(git -C "$BUILD" show HEAD:R/aaa-auto.R) $(git -C "$BUILD" show HEAD:src/sources-igraph.mk | tr '\n' ' ')" "a2 a.c b.c "
+is "each pick stamps the counter" \
+  "$(for c in HEAD~1 HEAD; do git -C "$BUILD" show "$c:DESCRIPTION" | sed -n 's/^Version: //p'; done | tr '\n' ' ')" \
+  "2.2.1.9003.1 2.2.1.9003.2 "
+is "the retirement rides along" "$(git -C "$BUILD" ls-tree --name-only HEAD patch/)" ""
+pick
+has "a level buffer picks nothing" "$(cat "$SCRATCH/pick.log")" "nothing to pick"
 
 echo
 echo "$pass passed, $fail failed"
