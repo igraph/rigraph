@@ -4,7 +4,7 @@ What a series guarantees, and what would actually catch a violation.
 
 * **Linearity**: the series' history is linear and merge-free, so it stays bisectable; ports are cherry-picks.
 * **One upstream commit per vendor commit**, contiguous along the tracked line ([`operations/vendoring/model/`](/handbook/operations/vendoring/model/README.md)).
-* **Green per commit**: a `-green` ref only ever fast-forwards, and only over commits with recorded successful runs.
+* **Green per commit**: a `-green` ref only ever fast-forwards, and only over commits with recorded successful runs, the seed's included.
 * **Version**: each strand advances its own version component and freezes the other; the fifth rises with every vendor commit.
 * **Source of truth**: R-side work is born on `main` and reaches a series by porting, never the reverse.
 * **Flavor**: the names inside a branch agree with each other everywhere in the branch.

@@ -26,8 +26,10 @@ A series is discovered, not configured: the loop serves every `<S>-build` with a
   Fast-forward only; r-universe builds it.
 * `<S>-build-base`: the `-build` commit equivalent to `-green`, by vendored upstream SHA; set every firing, read by nothing.
 
-All four start equal at the seed: `main` with the flavor applied by [`scripts/flavor.sh`](/scripts/flavor.sh)
+The seed is `main` with the flavor applied by [`scripts/flavor.sh`](/scripts/flavor.sh)
 and a commit stamping a fifth version component of `.0` ([`series-open`](/.claude/skills/series-open/SKILL.md)).
+`-build`, `-dev` and `-build-base` start at the seed's tip, and `-green` at its base, `main`,
+so that CI judges the flavor commits like any other before green moves over them.
 The buffer is deliberately untested, so that vendoring can run ahead while CI catches up;
 what keeps CI off it is that the workflows it carries match no branch named `*-build`, which the port stage keeps true by syncing its tooling too.
 
