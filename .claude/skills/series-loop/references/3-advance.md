@@ -1,6 +1,7 @@
 # Stage 3: advance the frontier, and read what r-universe made of the last one
 
-*Reference for stage 3 of [`series-loop`](../SKILL.md), read when the stage has work.*
+*Reference for stage 3 of [`series-loop`](../SKILL.md), read when the stage has work;
+the handbook leaf is [`operations/vendoring/series-loop/`](/handbook/operations/vendoring/series-loop/README.md).*
 
 [`scripts/series-advance.sh`](/scripts/series-advance.sh) fast-forwards `main-green`
 to the newest `main-dev` commit such that every commit in `main-green..<that commit>` has a `success` record.

@@ -1,6 +1,7 @@
 # Stage 2: repair the oldest `main-dev` failure
 
-*Reference for stage 2 of [`series-loop`](../SKILL.md), read when the stage has work.*
+*Reference for stage 2 of [`series-loop`](../SKILL.md), read when the stage has work;
+the handbook leaf is [`operations/vendoring/series-loop/`](/handbook/operations/vendoring/series-loop/README.md).*
 
 Every commit in `main-green..main-dev` is decided by an `each-rcc` leg,
 and **the leg's own run is where its result is read**.
@@ -141,8 +142,8 @@ is mirrored onto `main-build` in the commit for the same upstream SHA,
 and a `patch/` entry onto `main-vendor` as a commit of its own, which stage 1 picks,
 because the next tree regenerated there wants it too ([`3-advance.md`](3-advance.md)).
 
-**The fix order** in the playbook is the earlier manual playbook's, unchanged in substance
-([`rcc-smoke-fix.md`](/.claude/skills/rcc-smoke-fix.md)): the lowest level that resolves a failure is the one that travels best.
+**The fix order** in the playbook is the earlier manual playbook's, unchanged in substance:
+the lowest level that resolves a failure is the one that travels best.
 A `patch/` entry is retired by the vendor run itself once upstream carries its change;
 a Stimulus definition regenerates the interface for every later engine;
 R code is read by a reviewer of `main` at a landing;

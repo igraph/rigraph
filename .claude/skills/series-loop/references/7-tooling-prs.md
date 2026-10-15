@@ -1,6 +1,7 @@
 # Stage 7: open a pull request for whatever the tooling got wrong
 
-*Reference for stage 7 of [`series-loop`](../SKILL.md), read when the stage has work.*
+*Reference for stage 7 of [`series-loop`](../SKILL.md), read when the stage has work;
+the handbook leaf is [`operations/vendoring/series-loop/`](/handbook/operations/vendoring/series-loop/README.md).*
 
 A firing that had to work around a bug in the tooling owes `main` a pull request before it ends.
 Not a fix to this firing, a fix to the next one.

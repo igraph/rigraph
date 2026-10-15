@@ -2,7 +2,7 @@
 #
 # Every flavor but the mainline one ships this package under a different name:
 # `scripts/flavor.sh` applies `scripts/flavor.patch`, which renames `igraph` to
-# `igraph.dev`, and so on. See BRANCHES.md.
+# `igraph.dev`, and so on. See handbook/branches/flavors/README.md.
 #
 # Every hard-coded `igraph::`, `igraph:::`, `"igraph"`, or `library(igraph)` that
 # the patch does not rewrite keeps pointing at the mainline package in those

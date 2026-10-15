@@ -1,6 +1,7 @@
 # Rerun one commit: `retry-main-dev`
 
-*Reference for [`series-loop`](../SKILL.md)'s retry ledger, read before pushing one.*
+*Reference for [`series-loop`](../SKILL.md)'s retry ledger, read before pushing one;
+the handbook leaf is [`operations/vendoring/series-loop/`](/handbook/operations/vendoring/series-loop/README.md).*
 
 Some runs fail for reasons the commit had no part in:
 a CDN that refused the TLS handshake in the `pkgdown` gate, a leg cancelled mid-flight, a runner that never reported.

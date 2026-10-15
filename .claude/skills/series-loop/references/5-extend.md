@@ -1,6 +1,7 @@
 # Stage 5: extend `main-dev`
 
-*Reference for stage 5 of [`series-loop`](../SKILL.md), read when the stage has work.*
+*Reference for stage 5 of [`series-loop`](../SKILL.md), read when the stage has work;
+the handbook leaf is [`operations/vendoring/series-loop/`](/handbook/operations/vendoring/series-loop/README.md).*
 
 [`scripts/series-advance.sh`](/scripts/series-advance.sh) appends the next ≤ 100 commits from `main-build` and pushes,
 **whether or not the commits already in flight have reported**.

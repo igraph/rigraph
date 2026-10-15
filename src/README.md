@@ -1,5 +1,7 @@
 # igraph/src
 
+*Handbook: [`operations/vendoring/pipeline/`](/handbook/operations/vendoring/pipeline/README.md) owns how the C sources are updated, and [`architecture/glue/`](/handbook/architecture/glue/README.md) what lives here.*
+
 ## Updating the C sources
 
 1. Clean the `src/` directory:

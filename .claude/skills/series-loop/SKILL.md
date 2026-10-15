@@ -5,6 +5,8 @@ description: Drive rigraph's vendoring series loop for its one series, `main`, p
 
 # The series loop: vendor, promote, repair
 
+*Handbook: [`operations/vendoring/series-loop/`](/handbook/operations/vendoring/series-loop/README.md), what the loop is and when it runs.*
+
 The routine that walks the vendored igraph C library forward one upstream commit at a time,
 lets CI judge every commit, and publishes the verified prefix.
 It is a scheduled agent routine, not a workflow:
@@ -12,8 +14,8 @@ nothing under `.github/` starts it, and its schedule lives with the routine, out
 Nothing is scheduled yet.
 A firing runs in a fresh cloud session with `krlmlr/rigraph`, `igraph/rigraph` and `igraph/igraph` attached;
 `krlmlr/igraph` is public and is read anonymously.
-It replaces the manual playbook [`rcc-smoke-fix.md`](/.claude/skills/rcc-smoke-fix.md),
-which repaired by forking `broken-<sha>-dev` branches; this loop repairs in place.
+It replaces the earlier manual playbook, which repaired by forking `broken-<sha>-dev` branches;
+this loop repairs in place.
 The loop and its scripts are ported from duckdb-r ([`.series-source`](/.series-source) records from where).
 
 **This file is the playbook**: the order of the stages, the commands, the verdicts and the stop rules.
