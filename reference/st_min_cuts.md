@@ -71,8 +71,8 @@ An \\(s,t)\\-cut is minimum if it is of the smallest possible size.
 ## Related documentation in the C library
 
 [`all_st_mincuts()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_all_st_mincuts),
-[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
 [`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
 [`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
 [`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
 
@@ -114,29 +114,29 @@ st_min_cuts(g, source = "s", target = "t")
 #> 
 #> $cuts
 #> $cuts[[1]]
-#> ── <edge sequence> 2/14 · vertex names · from 1c001e3 ──────────────────────────
+#> ── <edge sequence> 2/14 · vertex names · from e12a8aa ──────────────────────────
 #> [1] s → a  s → b 
 #> 
 #> $cuts[[2]]
-#> ── <edge sequence> 2/14 · vertex names · from 1c001e3 ──────────────────────────
+#> ── <edge sequence> 2/14 · vertex names · from e12a8aa ──────────────────────────
 #> [1] s → a  b → t 
 #> 
 #> $cuts[[3]]
-#> ── <edge sequence> 2/14 · vertex names · from 1c001e3 ──────────────────────────
+#> ── <edge sequence> 2/14 · vertex names · from e12a8aa ──────────────────────────
 #> [1] a → t  b → t 
 #> 
 #> 
 #> $partition1s
 #> $partition1s[[1]]
-#> ── <vertex sequence> 1/9 · named · from 1c001e3 ────────────────────────────────
+#> ── <vertex sequence> 1/9 · named · from e12a8aa ────────────────────────────────
 #> [1] s
 #> 
 #> $partition1s[[2]]
-#> ── <vertex sequence> 2/9 · named · from 1c001e3 ────────────────────────────────
+#> ── <vertex sequence> 2/9 · named · from e12a8aa ────────────────────────────────
 #> [1] s b
 #> 
 #> $partition1s[[3]]
-#> ── <vertex sequence> 8/9 · named · from 1c001e3 ────────────────────────────────
+#> ── <vertex sequence> 8/9 · named · from e12a8aa ────────────────────────────────
 #> [1] s b a 5 4 3 2 1
 #> 
 #> 

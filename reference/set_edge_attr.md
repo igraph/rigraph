@@ -67,7 +67,7 @@ Vertex, edge and graph attributes:
 g <- make_ring(10) %>%
   set_edge_attr("label", value = LETTERS[1:10])
 g
-#> ── <igraph> Ring graph ────────────────────────────────────────────── a2a8f56 ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 624d80c ──
 #> ℹ undirected
 #> ℹ 10 vertices · 10 edges
 #> 

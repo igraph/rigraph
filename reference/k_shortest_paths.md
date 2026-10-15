@@ -73,8 +73,8 @@ A named list with two components is returned:
 ## Related documentation in the C library
 
 [`get_k_shortest_paths()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_k_shortest_paths),
-[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
 [`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
 [`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
 [`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
 
