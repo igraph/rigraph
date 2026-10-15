@@ -76,7 +76,7 @@ and stops at its own deadline, deferring the rest to the next run.
 **Every commit weighs the same.**
 duckdb-r weighs a commit by how many objects of its unity build the change invalidates;
 rigraph has no unity build, and the vendored C library dominates every build alike,
-so `each-cost.py` gives each commit one constant weight,
+so the estimator [`scripts/series-config.sh`](/scripts/series-config.sh) names, `each-cost.py`, gives each commit one constant weight,
 and `each-plan.sh` records how that weight and the minutes it is converted with were measured.
 
 ## The store

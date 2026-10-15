@@ -33,12 +33,11 @@ Telling them apart:
 * **4, `PATCH BROKEN`**: a `patch/` entry neither applies nor reverses on the regenerated tree, because the code it patches moved.
 * **5, `WRONG UPSTREAM LINE`**: the clone's `HEAD` is not on the line the buffer vendors.
   Past the seam the walk ends at that `HEAD`, so it has to be igraph/igraph's `main`.
-* **6, one of three banners.**
-  `SHALLOW UPSTREAM CLONE` and `NO VERSION IN THE UPSTREAM CLONE` refuse before anything is vendored,
+* **6, `SHALLOW UPSTREAM CLONE` or `NO VERSION IN THE UPSTREAM CLONE`**, refused before anything is vendored,
   because igraph's CMake stamps the version from `git describe --tags`.
-  `GLUE CHECK COULD NOT RUN` means `./configure` failed and nothing was compiled, so it says nothing about the commit at `HEAD`.
 * **7, `GENERATION FAILED`**: CMake, Stimulus or `cpp11::cpp_register()` failed on the regenerated tree, which is left uncommitted.
   Most often upstream renamed or merged a function in its interface definitions, and the fix is in `tools/stimulus/` or `patch/`.
+* **8, `GLUE CHECK COULD NOT RUN`**: `./configure` failed and nothing was compiled, so it says nothing about the commit at `HEAD`.
 
 ## A red commit on `main-dev`
 
