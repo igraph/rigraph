@@ -3,6 +3,9 @@
 \name{\%>\%}
 \alias{\%>\%}
 \title{Magrittr's pipes}
+\usage{
+lhs \%>\% rhs
+}
 \arguments{
 \item{lhs}{Left hand side of the pipe.}
 

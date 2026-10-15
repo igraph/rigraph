@@ -262,6 +262,22 @@ test_that("vs/es references are weak", {
   expect_null(get_es_graph(es))
 })
 
+test_that("indexing a vertex sequence with one argument shares its reference", {
+  g <- make_ring(10)
+  V(g)$name <- letters[1:10]
+  V(g)$color <- rep(c("red", "blue"), 5)
+  vs <- V(g)
+
+  by_name <- vs[c("c", "a")]
+  by_attr <- vs[color == "red"]
+
+  expect_identical(attr(by_name, "env"), attr(vs, "env"))
+  expect_identical(attr(by_attr, "env"), attr(vs, "env"))
+  expect_equal(as_ids(by_name), c("c", "a"))
+  expect_equal(as.integer(by_attr), c(1L, 3L, 5L, 7L, 9L))
+  expect_equal(as_ids(vs[c("c", "a"), "b"]), c("c", "a", "b"))
+})
+
 test_that("save/load breaks references", {
   g <- make_ring(10)
   vs <- V(g)

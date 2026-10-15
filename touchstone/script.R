@@ -465,7 +465,7 @@ benchmark_run(
 )
 
 # ---------------------------------------------------------------------------
-# Group #9 - what lazy names specifically buy
+# Group #12 - what lazy names specifically buy
 # Two cases where the name vector is never actually read, so with an ALTREP
 # `names` attribute it is never built:
 #   * construct many sequences but only ask for their lengths;
