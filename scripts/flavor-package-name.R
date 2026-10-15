@@ -30,7 +30,7 @@
 # Vendored sources under `src/vendor/` and testthat snapshots are left alone.
 #
 # Base R only, and no reliance on the package being loaded, so that CI can run
-# this against a plain checkout.
+# this against a plain checkout (see .github/workflows/custom/after-install).
 # `tests/testthat/test-flavor-package-name.R` wraps it for `testthat::test_local()`;
 # that test cannot carry the check on its own, because `R CMD check` runs the
 # tests from a built tarball, where neither the sources nor this directory
