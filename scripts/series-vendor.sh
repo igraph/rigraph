@@ -34,7 +34,8 @@
 #   scripts/series-*.sh (handbook/operations/vendoring/series-loop/README.md).
 #
 # Exit status: 2 usage; 1 refused, or a pick that conflicts; 3 broken glue,
-# with the pick at HEAD; 8 the glue check could not run, as vendor-one.sh says it.
+# with the pick at HEAD; 7 the buffer's generator failed, with the pick undone;
+# 8 the glue check could not run; the last three as vendor-one.sh says them.
 
 set -euo pipefail
 # shellcheck source=series-lib.sh
@@ -77,18 +78,11 @@ git fetch -q "$remote"
 vendor_ref="refs/remotes/$remote/$S-vendor"
 build_ref="refs/remotes/$remote/$S-build"
 
-# An ERE over the vendor paths, each matched as itself or as a directory.
-vendor_re=''
-for p in "${series_vendor_paths[@]}"; do
-  vendor_re="${vendor_re:+$vendor_re|}$(series_re_of "$p")"
-done
-vendor_re="^($vendor_re)(/|\$)"
-
-# <tree-ish>'s entries under the vendor paths, as `ls-tree -r` prints them.
-vendor_entries() { git ls-tree -r --full-tree "$1" | awk -F'\t' -v re="$vendor_re" '$2 ~ re'; }
-
-# What two commits are twins by: the same vendor paths, blob for blob.
-vendor_key() { vendor_entries "$1" | git hash-object --stdin; }
+# The vendor paths as an ERE, a tree's entries under them, and the key two
+# commits are twins by: scripts/series-lib.sh.
+vendor_re=$(series_vendor_re)
+vendor_entries() { series_vendor_entries "$1"; }
+vendor_key() { series_vendor_key "$1"; }
 
 # The tree of <base> with the vendor paths taken whole from <from>.
 splice() { # <base> <from> -> tree
@@ -102,9 +96,13 @@ splice() { # <base> <from> -> tree
   rm -f "$idx"
 }
 
-# A commit with <from>'s message and author on <parent>, holding <tree>.
+# A commit with <from>'s message and author on <parent>, holding <tree>. For
+# --init the message stops before an `R-side fix` section, which explains glue
+# the strand commit does not carry.
+trim_fix=''
 commit_like() { # <from> <parent> <tree> -> commit
   git log -1 --format=%B "$1" |
+    { if [ -n "$trim_fix" ]; then awk 'tolower($0) ~ /^r-side fix/ { exit } { print }' | sed -e :a -e '/^\n*$/{$d;N;ba' -e '}'; else cat; fi; } |
     GIT_AUTHOR_NAME="$(git log -1 --format=%an "$1")" \
     GIT_AUTHOR_EMAIL="$(git log -1 --format=%ae "$1")" \
     GIT_AUTHOR_DATE="$(git log -1 --format=%aD "$1")" \
@@ -135,6 +133,7 @@ if [ "$mode" = init ]; then
   fi
   seed=$(series_seed_of "$build_ref")
   [ -n "$seed" ] || { echo "Error: $S-build has no seed to start the strand above" >&2; exit 1; }
+  trim_fix=1
   prev=$seed
   n=0
   while IFS= read -r c; do
@@ -249,7 +248,14 @@ for c in $todo; do
     echo "Resolve it, 'git cherry-pick --continue', and rerun." >&2
     exit 1
   }
-  series_regenerate
+  if ! series_regenerate; then
+    git reset -q --hard HEAD~1
+    echo >&2
+    echo "=== GENERATOR FAILED after picking $(git rev-parse --short "$c") $subj ===" >&2
+    echo "The pick is undone, and the buffer stands where it did. Fix what the generator reads" >&2
+    echo "on the buffer, commit it here, and rerun: the pick is taken again above the fix." >&2
+    exit 7
+  fi
   if series_is_vendor "$subj"; then stamp; fi
   git add -A
   git commit -q --amend --no-edit

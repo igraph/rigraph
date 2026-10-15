@@ -7,7 +7,7 @@
 # Usage: scripts/vendor.sh [<upstream clone>]
 #
 # Exit status as scripts/vendor-one.sh's: 4 a patch neither applies nor
-# reverses, 7 the R/C interface could not be generated.
+# reverses, 7 a generator failed.
 #
 # https://unix.stackexchange.com/a/654932/19205
 # Using bash for -o pipefail
@@ -83,14 +83,46 @@ fi
 
 echo "Importing commit $commit"
 
-regen_status=0
-series_generate "$upstream_dir" full || regen_status=$?
-if [ "$regen_status" != 0 ]; then
-  echo "Error: regeneration failed with status $regen_status; the tree is left as it got." >&2
+# In two phases around the patch stack (scripts/series-config.sh): the tree,
+# the patches, and what is derived from the patched tree. A failing phase
+# stops with exit 7, as vendor-one.sh's does.
+generator_failed() {
+  echo "Error: the generator failed ($1); the tree is left as it got." >&2
   echo "  Before rerunning, remove ./${upstream_dir} or pass it as the argument:" >&2
   echo "  this script always clones, so a leftover clone makes it fail." >&2
-  exit "$regen_status"
-fi
+  exit 7
+}
+series_generate_tree "$upstream_dir" || generator_failed "the tree"
+
+# `--reverse` needs `--forward` beside it: on its own it prompts
+# ("Unreversed patch detected!  Ignore -R? [n]") and hangs a run whose
+# stdin is a terminal.
+# scripts/vendor-one.sh has the same three-way split and the same exit 4.
+for f in patch/*.patch; do
+  [ -e "$f" ] || continue
+  if patch -i "$f" -p1 --forward --dry-run; then
+    patch -i "$f" -p1 --forward --no-backup-if-mismatch
+  elif patch -i "$f" -p1 --reverse --forward --dry-run; then
+    echo "Removing patch $f (its change is already in the regenerated tree)"
+    rm "$f"
+  else
+    echo ""
+    echo "=== PATCH BROKEN: $f (upstream ${commit}) ==="
+    echo "It neither applies forward nor reverses cleanly, so its change is"
+    echo "not in the regenerated tree and cannot be re-applied: the code it"
+    echo "patches moved."
+    echo "The regenerated sources for ${commit} are in the working tree,"
+    echo "uncommitted, and the upstream clone is kept."
+    echo "Rebase $f against them, keeping the rebased patch outside the tree,"
+    echo "then 'git checkout -- .' and put it back."
+    echo "Before rerunning, remove ./${upstream_dir} or pass it as the argument:"
+    echo "this script always clones, so a leftover clone makes it fail."
+    echo "Delete $f only after confirming its change is genuinely upstream."
+    exit 4
+  fi
+done
+
+series_generate_derived full || generator_failed "deriving from the patched tree"
 
 message=
 # Always vendor tags

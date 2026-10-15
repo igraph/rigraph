@@ -117,6 +117,21 @@ series_is_regenerated() { # <path>
   return 1
 }
 
+# The vendor paths (scripts/series-config.sh) as an ERE, each matched as itself
+# or as a directory; a tree's entries under them; and the key two commits are
+# twins by, the same vendor paths blob for blob (scripts/series-vendor.sh).
+series_vendor_re() {
+  local re='' p
+  for p in "${series_vendor_paths[@]}"; do re="${re:+$re|}$(series_re_of "$p")"; done
+  printf '^(%s)(/|$)' "$re"
+}
+series_vendor_entries() { # <tree-ish> -> `ls-tree -r` lines under the vendor paths
+  git ls-tree -r --full-tree "$1" | awk -F'\t' -v re="$(series_vendor_re)" '$2 ~ re'
+}
+series_vendor_key() { # <tree-ish> -> one hash
+  series_vendor_entries "$1" | git hash-object --stdin
+}
+
 # The marker a subject carries, `<owner>/<repo>@<sha>` as the subject spells it,
 # for a message that names the commit: a history may carry more than one owner.
 series_marker_of() { # <subject> -> marker, empty when none

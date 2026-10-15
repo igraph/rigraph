@@ -614,22 +614,25 @@ for S in "${series[@]}"; do
   # The vendor strand the buffer is derived from (handbook/branches/model/README.md):
   # absent on a series opened before it existed, ahead of the buffer while
   # stage 1's picks are due, or behind it where something vendored onto the
-  # buffer directly. Read by newest vendored SHA, like every twin here.
+  # buffer directly. Read by the vendor paths blob for blob, as the picks find
+  # their twins, so a patch carry counts like a vendor commit.
   vendor="$remote/$S-vendor"
   if ! git rev-parse -q --verify "$vendor" >/dev/null; then
     echo "  VENDOR  $S has no vendor strand; derive it once from the buffer:"
     echo "          scripts/series-vendor.sh $S --init --remote $remote --push"
-  else
-    v_up=$(series_vendored_sha "$vendor" 2>/dev/null)
-    b_up=$(series_vendored_sha "$build" 2>/dev/null)
-    if [ "$v_up" != "$b_up" ]; then
-      if [ -n "$b_up" ] && at=$(git log -1 --format=%H --fixed-strings --grep="@$b_up" "$vendor") && [ -n "$at" ]; then
-        echo "  VENDOR  $S-vendor is $(git rev-list --count "$at..$vendor") commit(s) ahead of $S-build; stage 1 picks them:"
-        echo "          scripts/series-vendor.sh $S --remote $remote --push   # from a worktree at $S-build"
-      else
-        echo "  VENDOR  $S-build vendors ${b_up:0:10}, which $S-vendor does not: something vendored onto the buffer directly."
-        echo "          Vendor onto the strand (vendor-one.sh --strand) and pick; the buffer never leads it."
-      fi
+  elif [ "$(series_vendor_key "$vendor")" != "$(series_vendor_key "$build")" ]; then
+    bkey=$(series_vendor_key "$build")
+    at=''
+    for c in $(git rev-list -n "$base_scan_depth" "$vendor"); do
+      if [ "$(series_vendor_key "$c")" = "$bkey" ]; then at=$c; break; fi
+    done
+    if [ -n "$at" ]; then
+      echo "  VENDOR  $S-vendor is $(git rev-list --count "$at..$vendor") commit(s) ahead of $S-build; stage 1 picks them:"
+      echo "          scripts/series-vendor.sh $S --remote $remote --push   # from a worktree at $S-build"
+    else
+      echo "  VENDOR  $S-build's vendor paths match none of the newest $base_scan_depth commits of $S-vendor:"
+      echo "          something vendored onto the buffer directly. Vendor onto the strand"
+      echo "          (vendor-one.sh --strand) and pick; the buffer never leads it."
     fi
   fi
 

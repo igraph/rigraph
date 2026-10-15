@@ -1,6 +1,7 @@
 #!/bin/bash
-# Carry `patch/` entries from `<S>-dev` onto `<S>-build`, the way stage 5 carries
-# tests and glue onto a forward series.
+# Carry `patch/` entries from `<S>-dev` onto `<S>-vendor`, the strand the buffer
+# is derived from, the way stage 5 carries tests and glue onto a forward series;
+# a series with no strand yet takes them onto `<S>-build` as before.
 #
 # `vendor-one.sh` applies the *buffer's* `patch/*.patch` to every tree it
 # regenerates, so the buffer is where an entry has to live to have any effect on
@@ -86,7 +87,12 @@ S=${args[0]}
 
 git fetch -q "$remote"
 
-build="refs/remotes/$remote/$S-build"
+# The strand carries the patch stack (handbook/branches/model/README.md), so a
+# carry lands there and reaches the buffer by the next pick (scripts/series-vendor.sh);
+# the buffer takes it only where the series has no strand yet.
+target=build
+git rev-parse -q --verify "refs/remotes/$remote/$S-vendor" >/dev/null && target=vendor
+build="refs/remotes/$remote/$S-$target"
 dev="refs/remotes/$remote/$S-dev"
 for r in "$build" "$dev"; do
   git rev-parse -q --verify "$r" >/dev/null || { echo "$S: no $r" >&2; exit 1; }
@@ -196,5 +202,5 @@ ${satisfied[*]:+already in the tree, entry taken to match the names: ${satisfied
 EOF
 
 next=$(git -C "$wt" rev-parse HEAD)
-git push "$remote" "$next:refs/heads/$S-build"
-echo "  build -> $(git rev-parse --short "$next")"
+git push "$remote" "$next:refs/heads/$S-$target"
+echo "  $target -> $(git rev-parse --short "$next")"

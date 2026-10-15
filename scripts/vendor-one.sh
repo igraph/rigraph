@@ -2,7 +2,7 @@
 # Vendors igraph sources commit-by-commit from the upstream repository.
 # Used by the series loop (.claude/skills/series-loop/SKILL.md).
 #
-# Usage: scripts/vendor-one.sh [--commits N] [--no-check-glue] [<upstream clone>]
+# Usage: scripts/vendor-one.sh [--commits N] [--strand] [--no-check-glue] [<upstream clone>]
 #
 # The upstream clone must reach both stretches of the line
 # (scripts/series-config.sh): the replay branch of krlmlr/igraph, and
@@ -12,8 +12,8 @@
 # Exit status: 0 done or nothing to do, 1 an error, 3 the glue does not compile
 # against the vendored headers, 4 a patch neither applies nor reverses,
 # 5 the clone's HEAD is on another upstream line, 6 the clone cannot say what
-# version it is, 7 the R/C interface could not be generated, 8 the glue check
-# could not run.
+# version it is, 7 a generator failed (scripts/series-config.sh), 8 the glue
+# check could not run.
 #
 # https://unix.stackexchange.com/a/654932/19205
 # Using bash for -o pipefail
@@ -53,6 +53,7 @@ upstream_basedir=""
 num_commits=1
 check_glue=true
 strand=false
+strand_flag=''
 
 # Matches the bound in series_vendored_sha() (scripts/series-lib.sh).
 base_scan_depth="${BASE_SCAN_DEPTH:-20}"
@@ -71,6 +72,7 @@ while [ $# -gt 0 ]; do
       # A commit for the vendor strand (scripts/series-vendor.sh): what vendoring
       # writes and nothing of the buffer's -- no counter, no glue gate.
       strand=true
+      strand_flag=--strand
       check_glue=false
       shift
       ;;
@@ -295,32 +297,65 @@ while [ $commits_vendored -lt $num_commits ]; do
       exit 1
     }
 
-    regen_status=0
-    series_generate "$upstream_dir" "$([ "$strand" = true ] && echo strand || echo full)" || regen_status=$?
-    if [ "$regen_status" = 4 ]; then
-      exit 4
-    elif [ "$regen_status" != 0 ]; then
+    # The tree is not deleted here: rconfigure.py moves it aside itself and puts
+    # back the inode of every regenerated file that did not change, so a file
+    # whose content is the same keeps its stat cache entry and every later git
+    # command over ~3550 files stays cheap -- which this loop pays twice per
+    # candidate, kept or skipped. Files upstream dropped still go: they are in
+    # the tree that was moved aside, and never come back from it.
+    echo "R: configure"
+    series_generate_tree "$upstream_dir" || {
       echo ""
-      echo "=== GENERATION FAILED for upstream ${commit} ==="
-      if [ "$strand" = true ]; then
-        echo "CMake, flex or bison failed on the regenerated tree,"
-        echo "which is in the working tree, uncommitted; the upstream clone is kept."
-        echo "Check that the three are installed. A change upstream that they cannot"
-        echo "take needs a patch/ entry, which rides on the strand: keep it outside the tree,"
-      else
-        echo "CMake, Stimulus or cpp11::cpp_register() failed on the regenerated tree,"
-        echo "which is in the working tree, uncommitted; the upstream clone is kept."
-        echo "Most often an interface changed upstream: adapt tools/stimulus/*.yaml"
-        echo "or add a patch/ entry, keeping the fix outside the tree,"
-      fi
-      echo "then 'git checkout -- . && git clean -fd src R', put it back, and land it"
-      echo "with the vendor commit for ${commit} like this:"
-      echo "  git commit -m 'tmp: fix generation' -- <the fix>"
-      echo "  $0$([ "$strand" = true ] && echo ' --strand') --commits 1 <upstream>"
-      echo "  { git log -1 --format=%B; printf '\\nR-side fix:\\n\\n%s\\n' '<what was adapted>'; } >../vendor.msg"
-      echo "  git reset --soft HEAD~2 && git commit -q -F ../vendor.msg"
+      echo "=== GENERATOR FAILED regenerating the tree for upstream ${commit} ==="
+      echo "Nothing was committed; the regenerated files are in the working tree."
+      echo "Fix the generator's input, 'git checkout -- .', and rerun this script."
+      rm -rf "$upstream_dir"
       exit 7
-    fi
+    }
+
+    # `--reverse` needs `--forward` beside it: on its own it prompts
+    # ("Unreversed patch detected!  Ignore -R? [n]") and hangs a run whose
+    # stdin is a terminal.
+    # scripts/vendor.sh has the same three-way split and the same exit 4.
+    for f in patch/*.patch; do
+      [ -e "$f" ] || continue   # rigraph: a stack every entry of which has retired
+      if patch -i "$f" -p1 --forward --dry-run; then
+        patch -i "$f" -p1 --forward --no-backup-if-mismatch
+      elif patch -i "$f" -p1 --reverse --forward --dry-run; then
+        echo "Removing patch $f (its change is already in the regenerated tree)"
+        rm "$f"
+      else
+        echo ""
+        echo "=== PATCH BROKEN: $f (upstream ${commit}) ==="
+        echo "It neither applies forward nor reverses cleanly, so its change is"
+        echo "not in the regenerated tree and cannot be re-applied: the code it"
+        echo "patches moved."
+        echo "The regenerated sources for ${commit} are in the working tree,"
+        echo "uncommitted, and the upstream clone is kept."
+        echo "Rebase $f against them, keeping the rebased patch outside the tree,"
+        echo "then 'git checkout -- .', put it back, and rerun this script."
+        echo "Delete it only after confirming its change is genuinely upstream --"
+        echo "the effect it had, however upstream reached it, not this diff."
+        echo "A deletion has to ride in the vendor commit for ${commit}, and this"
+        echo "script refuses to start on a dirty tree, so land it in three steps:"
+        echo "  git checkout -- . && git rm $f && git commit -m 'tmp: retire patch'"
+        echo "  $0 ${strand_flag:+$strand_flag }--commits 1 <upstream>"
+        echo "  git reset --soft HEAD~2 && git commit   # keep the vendor message,"
+        echo "                                          # add an 'R-side fix' section"
+        exit 4
+      fi
+    done
+
+    # What is derived from the patched tree: the parsers a vendored grammar
+    # generates, a header a template fills, and for a buffer commit the R side.
+    series_generate_derived "$([ "$strand" = true ] && echo strand || echo full)" || {
+      echo ""
+      echo "=== GENERATOR FAILED deriving from the patched tree for upstream ${commit} ==="
+      echo "Nothing was committed; the regenerated files are in the working tree."
+      echo "Fix the generator's input, 'git checkout -- . && git clean -fd', and rerun this script."
+      rm -rf "$upstream_dir"
+      exit 7
+    }
 
     # Always vendor tags
     tag=$(exact_tag "$commit")
@@ -331,8 +366,10 @@ while [ $commits_vendored -lt $num_commits ]; do
     fi
 
     # The engine file always differs, so "more than one" is the test for a
-    # real change, over the directory holding the tree and the stamp.
-    if [ "$(git status --porcelain -- "${series_scan_dir}" | wc -l)" -gt 1 ]; then
+    # real change, over the directory holding the tree and the stamp, or for a
+    # strand commit over the paths it stages.
+    if [ "$strand" = true ]; then changed=("${series_vendor_paths[@]}"); else changed=("${series_scan_dir}"); fi
+    if [ "$(git status --porcelain -- "${changed[@]}" | wc -l)" -gt 1 ]; then
       message="vendor: Update vendored sources to ${owner}@$commit"
       break
     fi
@@ -428,9 +465,8 @@ while [ $commits_vendored -lt $num_commits ]; do
       echo "--no-check-glue skips the check altogether."
       # Its own code, below the ones already spoken for: 3 is broken glue, 4 a
       # broken patch, 5 the wrong upstream line, 6 a clone that cannot name a
-      # version. 7 is left free for a generator that fails before the commit,
-      # which a repository whose vendoring runs one takes, so the two stay in
-      # step (handbook/operations/vendoring/troubleshooting/README.md).
+      # version, 7 a generator that failed before the commit
+      # (handbook/operations/vendoring/troubleshooting/README.md).
       exit 8
     elif [ "$glue_status" != 0 ]; then
       echo ""
