@@ -1,4 +1,4 @@
 library(testthat)
-library(igraph)
+library(igraph.dev)
 
-test_check("igraph")
+test_check("igraph.dev")

@@ -33,7 +33,7 @@ knitr::opts_chunk$set(fig.width = 6, fig.height = 6)
 ```
 
 ```{r setup}
-library("igraph")
+library("igraph.dev")
 ```
 
 Now you have all `igraph` functions available.

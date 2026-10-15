@@ -9,15 +9,12 @@
 
 R/igraph is an R package of the igraph network analysis library.
 
+This package is the `igraph.dev` flavor of R/igraph,
+and is only available from R-universe.
+
 ## Installation
 
-You can install the stable version of R/igraph from CRAN:
-
-```r
-install.packages("igraph")
-```
-
-For the development version, you can use R-universe
+You can install it from R-universe:
 
 ```r
 options(
@@ -26,13 +23,7 @@ options(
     CRAN = 'https://cloud.r-project.org'
   )
 )
-install.packages('igraph')
-```
-
-or Github, with the [pak package](https://pak.r-lib.org/):
-
-```r
-pak::pak("igraph/rigraph")
+install.packages('igraph.dev')
 ```
 
 When compiling from sources, make sure that you have C, C++ and Fortran

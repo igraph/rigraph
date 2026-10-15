@@ -1,4 +1,4 @@
-Package: igraph
+Package: igraph.dev
 Title: Network Analysis and Visualization
 Version: 2.3.3.9042
 Authors@R: c(

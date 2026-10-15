@@ -237,7 +237,7 @@ reference:
   - has_lifecycle("experimental")
 - title: internal
   contents:
-  - igraph-package
+  - igraph.dev-package
   - "%>%"
 
 authors:

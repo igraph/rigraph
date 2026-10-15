@@ -1,4 +1,4 @@
-#' @useDynLib igraph, .registration = TRUE
+#' @useDynLib igraph.dev, .registration = TRUE
 #' @import methods
 ## usethis namespace: start
 #' @importFrom lifecycle deprecated
@@ -32,10 +32,10 @@ NULL
 #'
 #' igraph is a library and R package for network analysis.
 #'
-#' @rdname aaa-igraph-package
-#' @name igraph-package
+#' @rdname aaa-igraph.dev-package
+#' @name igraph.dev-package
 #' @keywords internal
-#' @aliases igraph-package igraph
+#' @aliases igraph.dev-package igraph.dev
 #'
 #' @section Introduction:
 #' The main goals of the igraph library is to provide a set of data types

@@ -976,4 +976,4 @@ importFrom(utils,
   tail,
   txtProgressBar
 )
-useDynLib(igraph, .registration = TRUE)
+useDynLib(igraph.dev, .registration = TRUE)
