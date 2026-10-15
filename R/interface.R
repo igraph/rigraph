@@ -544,7 +544,8 @@ is_directed <- function(graph) {
 #' Incident vertices of some graph edges
 #'
 #' @param graph The input graph
-#' @param es The sequence of edges to query
+#' @param edges The sequence of edges to query
+#' @param es `r lifecycle::badge("deprecated")` Use `edges` instead.
 #' @inheritParams rlang::args_dots_empty
 #' @param names Whether to return vertex names or
 #'   numeric vertex IDs. By default vertex names are used.
@@ -560,13 +561,16 @@ is_directed <- function(graph) {
 #' ends(g, E(g))
 ends <- function(
   graph,
-  es,
+  edges,
   ...,
-  names = TRUE
+  names = TRUE,
+  es = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: ends, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("e"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn ends}.", i = "Spell out the full argument name."))
     # Pre-3.0.0 signature: ends(graph, es, names)
     .old_signature <- function(names, ...) {
       if (...length() > 0L) {
@@ -591,24 +595,35 @@ ends <- function(
         "3.0.0",
         what = base::I("Calling `ends()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  ends(", base::paste(base::c("graph", "es", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    ends(", base::paste(base::c("graph", "es", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  ends(", base::paste(base::c("graph", "edges", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    ends(", base::paste(base::c("graph", "edges", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
+  if (lifecycle::is_present(es)) {
+    if (!missing(edges)) {
+      cli::cli_abort(c(
+        "Argument {.arg edges} of {.fn ends} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg es}."
+      ))
+    }
+    lifecycle::deprecate_soft("3.0.0", "ends(es = )", "ends(edges = )")
+    edges <- es
+  }
+
   ensure_igraph(graph)
 
-  res <- matrix(NA_integer_, ncol = length(es), nrow = 2)
+  res <- matrix(NA_integer_, ncol = length(edges), nrow = 2)
 
-  if (length(es) > 0) {
+  if (length(edges) > 0) {
     edge_data <- edges_impl(
       graph = graph,
-      eids = es
+      eids = edges
     )
-    res[, !is.na(es)] <- edge_data
+    res[, !is.na(edges)] <- edge_data
   }
 
   if (names && is_named(graph)) {

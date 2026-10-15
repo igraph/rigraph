@@ -336,11 +336,11 @@ test_that("ends() tail arguments and legacy positional recovery", {
   # The endpoint matrix contains vertex names with names = TRUE
   # and vertex IDs with names = FALSE.
   expect_equal(
-    ends(g, es = 1:2),
+    ends(g, edges = 1:2),
     matrix(c("a", "b", "b", "c"), nrow = 2)
   )
   expect_equal(
-    ends(g, es = 1:2, names = FALSE),
+    ends(g, edges = 1:2, names = FALSE),
     matrix(c(1, 2, 2, 3), nrow = 2)
   )
 
@@ -393,4 +393,11 @@ test_that("neighbors(v = ) and incident(v = ) are deprecated but still work", {
   expect_equal(res_legacy, incident(g, vertex = 1))
 
   expect_snapshot_igraph_error(neighbors(g, vertex = 1, v = 2))
+})
+
+test_that("ends(es = ) is deprecated but still works", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  g <- make_ring(5)
+  lifecycle::expect_deprecated(res <- ends(g, es = 1:2))
+  expect_equal(res, ends(g, edges = 1:2))
 })

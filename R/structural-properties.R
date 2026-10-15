@@ -2152,20 +2152,24 @@ induced_subgraph <- function(
 }
 
 #' @rdname subgraph
-#' @param eids The edge IDs of the edges that will be kept in the result graph.
+#' @param edges The edge IDs of the edges that will be kept in the result graph.
+#' @param eids `r lifecycle::badge("deprecated")` Use `edges` instead.
 #' @inheritParams rlang::args_dots_empty
 #' @param delete.vertices Logical, whether to remove vertices that do
-#'   not have any adjacent edges in `eids`.
+#'   not have any adjacent edges in `edges`.
 #' @export
 subgraph_from_edges <- function(
   graph,
-  eids,
+  edges,
   ...,
-  delete.vertices = TRUE
+  delete.vertices = TRUE,
+  eids = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: subgraph_from_edges, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("e"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn subgraph_from_edges}.", i = "Spell out the full argument name."))
     # Pre-3.0.0 signature: subgraph_from_edges(graph, eids, delete.vertices)
     .old_signature <- function(delete.vertices, ...) {
       if (...length() > 0L) {
@@ -2190,24 +2194,39 @@ subgraph_from_edges <- function(
         "3.0.0",
         what = base::I("Calling `subgraph_from_edges()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  subgraph_from_edges(", base::paste(base::c("graph", "eids", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    subgraph_from_edges(", base::paste(base::c("graph", "eids", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  subgraph_from_edges(", base::paste(base::c("graph", "edges", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    subgraph_from_edges(", base::paste(base::c("graph", "edges", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
+  if (lifecycle::is_present(eids)) {
+    if (!missing(edges)) {
+      cli::cli_abort(c(
+        "Argument {.arg edges} of {.fn subgraph_from_edges} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg eids}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "subgraph_from_edges(eids = )",
+      "subgraph_from_edges(edges = )"
+    )
+    edges <- eids
+  }
+
   # Argument checks
   # Argument checks
   ensure_igraph(graph)
-  eids <- as_igraph_es(graph, eids)
+  edges <- as_igraph_es(graph, edges)
   delete.vertices <- as.logical(delete.vertices)
 
   # Function call
   res <- subgraph_from_edges_impl(
     graph = graph,
-    eids = eids,
+    eids = edges,
     delete_vertices = delete.vertices
   )
 
@@ -3631,8 +3650,9 @@ girth <- function(
 #' original multiplicity as an edge attribute.
 #'
 #' @param graph The input graph.
-#' @param eids The edges to which the query is restricted. The default
+#' @param edges The edges to which the query is restricted. The default
 #'   `NULL` selects all edges.
+#' @param eids `r lifecycle::badge("deprecated")` Use `edges` instead.
 #' @return `any_loop()` and `any_multiple()` return a Logical.
 #'   `which_loop()` and `which_multiple()` return a logical vector.
 #'   `count_loops()` returns a numeric scalar with the total number of loop edges.
@@ -3669,14 +3689,29 @@ girth <- function(
 #' any(which_multiple(g))
 #' E(g)$weight
 #'
-which_multiple <- function(graph, eids = NULL) {
-  if (is.null(eids)) {
-    eids <- E(graph)
+which_multiple <- function(graph, edges = NULL, eids = deprecated()) {
+  if (lifecycle::is_present(eids)) {
+    if (!missing(edges)) {
+      cli::cli_abort(c(
+        "Argument {.arg edges} of {.fn which_multiple} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg eids}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "which_multiple(eids = )",
+      "which_multiple(edges = )"
+    )
+    edges <- eids
+  }
+
+  if (is.null(edges)) {
+    edges <- E(graph)
   }
 
   is_multiple_impl(
     graph = graph,
-    eids = eids
+    eids = edges
   )
 }
 #' @rdname which_multiple
@@ -3688,26 +3723,56 @@ any_multiple <- function(graph) {
 }
 #' @rdname which_multiple
 #' @export
-count_multiple <- function(graph, eids = NULL) {
-  if (is.null(eids)) {
-    eids <- E(graph)
+count_multiple <- function(graph, edges = NULL, eids = deprecated()) {
+  if (lifecycle::is_present(eids)) {
+    if (!missing(edges)) {
+      cli::cli_abort(c(
+        "Argument {.arg edges} of {.fn count_multiple} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg eids}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "count_multiple(eids = )",
+      "count_multiple(edges = )"
+    )
+    edges <- eids
+  }
+
+  if (is.null(edges)) {
+    edges <- E(graph)
   }
 
   count_multiple_impl(
     graph = graph,
-    eids = eids
+    eids = edges
   )
 }
 #' @rdname which_multiple
 #' @export
-which_loop <- function(graph, eids = NULL) {
-  if (is.null(eids)) {
-    eids <- E(graph)
+which_loop <- function(graph, edges = NULL, eids = deprecated()) {
+  if (lifecycle::is_present(eids)) {
+    if (!missing(edges)) {
+      cli::cli_abort(c(
+        "Argument {.arg edges} of {.fn which_loop} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg eids}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "which_loop(eids = )",
+      "which_loop(edges = )"
+    )
+    edges <- eids
+  }
+
+  if (is.null(edges)) {
+    edges <- E(graph)
   }
 
   is_loop_impl(
     graph = graph,
-    eids = eids
+    eids = edges
   )
 }
 #' @rdname which_multiple
@@ -4992,8 +5057,9 @@ max_bipartite_match <- function(
 #' Undirected graphs contain only mutual edges by definition.
 #'
 #' @param graph The input graph.
-#' @param eids Edge sequence, the edges that will be probed. The default
+#' @param edges Edge sequence, the edges that will be probed. The default
 #'   `NULL` includes all edges in the order of their IDs.
+#' @param eids `r lifecycle::badge("deprecated")` Use `edges` instead.
 #' @inheritParams rlang::args_dots_empty
 #' @param loops Logical, whether to consider directed self-loops to be mutual.
 #' @return A logical vector of the same length as the number of edges supplied.
@@ -5012,13 +5078,16 @@ max_bipartite_match <- function(
 #' @export
 which_mutual <- function(
   graph,
-  eids = NULL,
+  edges = NULL,
   ...,
-  loops = TRUE
+  loops = TRUE,
+  eids = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: which_mutual, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("e"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn which_mutual}.", i = "Spell out the full argument name."))
     # Pre-3.0.0 signature: which_mutual(graph, eids, loops)
     .old_signature <- function(loops, ...) {
       if (...length() > 0L) {
@@ -5043,21 +5112,36 @@ which_mutual <- function(
         "3.0.0",
         what = base::I("Calling `which_mutual()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  which_mutual(", base::paste(base::c("graph", "eids", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    which_mutual(", base::paste(base::c("graph", "eids", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  which_mutual(", base::paste(base::c("graph", "edges", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    which_mutual(", base::paste(base::c("graph", "edges", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
-  if (is.null(eids)) {
-    eids <- E(graph)
+  if (lifecycle::is_present(eids)) {
+    if (!missing(edges)) {
+      cli::cli_abort(c(
+        "Argument {.arg edges} of {.fn which_mutual} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg eids}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "which_mutual(eids = )",
+      "which_mutual(edges = )"
+    )
+    edges <- eids
+  }
+
+  if (is.null(edges)) {
+    edges <- E(graph)
   }
 
   is_mutual_impl(
     graph = graph,
-    eids = eids,
+    eids = edges,
     loops = loops
   )
 }
