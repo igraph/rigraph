@@ -17,9 +17,12 @@ test_that("convex_hull uses 1-based indexing, #613", {
 })
 
 test_that("can create graphs when igraph is not attached", {
-  g <- callr::r(function() {
-    igraph::make_ring(3, directed = TRUE)
-  })
+  # The subprocess is handed the package name, so that a flavor checks itself
+  # rather than whichever `igraph` the library holds.
+  g <- callr::r(
+    function(pkg) asNamespace(pkg)$make_ring(3, directed = TRUE),
+    list(pkg = get_package_name())
+  )
   g2 <- make_ring(3, directed = TRUE)
   expect_identical(
     unclass(g)[-igraph_t_idx_env],
