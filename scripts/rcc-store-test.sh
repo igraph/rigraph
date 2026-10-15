@@ -23,8 +23,8 @@
 #      a writer that landed in between.
 #   5. It survives every shape the branch can legitimately have.
 #
-# Checks 4 and 5 need scripts/rcc-consolidate.sh, which rigraph has not ported
-# from duckdb-r, and are reported as skipped without it.
+# Checks 4 and 5 need scripts/rcc-consolidate.sh, and are reported as skipped
+# without it.
 # duckdb-r's sixth check, of the one-shot cutover from its old `rcc` branch,
 # is gone with the cutover: rigraph's store started out as `rcc2`.
 #
