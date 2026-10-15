@@ -365,37 +365,11 @@ biconnected_components <- function(graph) {
   )
 
   if (igraph_opt("return.vs.es")) {
-    res$tree_edges <- lapply(
-      res$tree_edges,
-      unsafe_create_es,
-      graph = graph,
-      es = E(graph)
-    )
-    # Add backward-compatible dotted name
+    # biconnected_components_impl() already returns igraph.vs/igraph.es
+    # fields under their snake_case names; only add the
+    # backward-compatible dotted aliases here.
     res$tree.edges <- res$tree_edges
-  }
-
-  if (igraph_opt("return.vs.es")) {
-    res$component_edges <- lapply(
-      res$component_edges,
-      unsafe_create_es,
-      graph = graph,
-      es = E(graph)
-    )
-    # Add backward-compatible dotted name
     res$component.edges <- res$component_edges
-  }
-  if (igraph_opt("return.vs.es")) {
-    res$components <- lapply(
-      res$components,
-      unsafe_create_vs,
-      graph = graph,
-      verts = V(graph)
-    )
-  }
-  if (igraph_opt("return.vs.es")) {
-    res$articulation_points <- create_vs(graph, res$articulation_points)
-    # Add backward-compatible dotted name
     res$articulation.points <- res$articulation_points
   }
   res
