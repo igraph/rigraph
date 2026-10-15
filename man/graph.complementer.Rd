@@ -9,7 +9,7 @@ graph.complementer(graph, loops = FALSE)
 \arguments{
 \item{graph}{The input graph, can be directed or undirected.}
 
-\item{loops}{Logical constant, whether to generate loop edges.}
+\item{loops}{Logical, whether to generate loop edges.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

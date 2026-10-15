@@ -5,15 +5,17 @@
 \alias{gnp}
 \title{Generate random graphs according to the \eqn{G(n,p)} Erdős-Rényi model}
 \usage{
-sample_gnp(n, p, directed = FALSE, loops = FALSE)
+sample_gnp(n, p, ..., directed = FALSE, loops = FALSE)
 
-gnp(n, p, directed = FALSE, loops = FALSE)
+gnp(n, p, ..., directed = FALSE, loops = FALSE)
 }
 \arguments{
 \item{n}{The number of vertices in the graph.}
 
 \item{p}{The probability for drawing an edge between two
 arbitrary vertices (\eqn{G(n,p)} graph).}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{directed}{Logical, whether the graph will be directed, defaults to
 \code{FALSE}.}

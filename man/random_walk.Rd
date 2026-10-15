@@ -9,6 +9,7 @@ random_walk(
   graph,
   start,
   steps,
+  ...,
   weights = NULL,
   mode = c("out", "in", "all", "total"),
   stuck = c("return", "error")
@@ -18,6 +19,7 @@ random_edge_walk(
   graph,
   start,
   steps,
+  ...,
   weights = NULL,
   mode = c("out", "in", "all", "total"),
   stuck = c("return", "error")
@@ -29,6 +31,8 @@ random_edge_walk(
 \item{start}{The start vertex.}
 
 \item{steps}{The number of steps to make.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{The edge weights. Larger edge weights increase the
 probability that an edge is selected by the random walker. In other

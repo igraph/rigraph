@@ -2,26 +2,26 @@
 % Please edit documentation in R/layout.R
 \name{layout_with_dh}
 \alias{layout_with_dh}
-\alias{with_dh}
 \title{The Davidson-Harel layout algorithm}
 \usage{
 layout_with_dh(
   graph,
+  ...,
   coords = NULL,
   maxiter = 10,
-  fineiter = max(10, log2(vcount(graph))),
+  fineiter = NULL,
   cool.fact = 0.75,
   weight.node.dist = 1,
   weight.border = 0,
-  weight.edge.lengths = edge_density(graph)/10,
-  weight.edge.crossings = 1 - sqrt(edge_density(graph)),
-  weight.node.edge.dist = 0.2 * (1 - edge_density(graph))
+  weight.edge.lengths = NULL,
+  weight.edge.crossings = NULL,
+  weight.node.edge.dist = NULL
 )
-
-with_dh(...)
 }
 \arguments{
 \item{graph}{The graph to lay out. Edge directions are ignored.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{coords}{Optional starting positions for the vertices. If this argument
 is not \code{NULL} then it should be an appropriate matrix of starting
@@ -29,7 +29,8 @@ coordinates.}
 
 \item{maxiter}{Number of iterations to perform in the first phase.}
 
-\item{fineiter}{Number of iterations in the fine tuning phase.}
+\item{fineiter}{Number of iterations in the fine tuning phase. The
+default \code{NULL} uses \code{max(10, log2(vcount(graph)))}.}
 
 \item{cool.fact}{Cooling factor.}
 
@@ -41,15 +42,15 @@ the energy function. It can be set to zero, if vertices are allowed to sit
 on the border.}
 
 \item{weight.edge.lengths}{Weight for the edge length component of the
-energy function.}
+energy function. The default \code{NULL} uses \code{edge_density(graph) / 10}.}
 
 \item{weight.edge.crossings}{Weight for the edge crossing component of the
-energy function.}
+energy function. The default \code{NULL} uses
+\code{1 - sqrt(edge_density(graph))}.}
 
 \item{weight.node.edge.dist}{Weight for the node-edge distance component of
-the energy function.}
-
-\item{...}{Passed to \code{layout_with_dh()}.}
+the energy function. The default \code{NULL} uses
+\code{0.2 * (1 - edge_density(graph))}.}
 }
 \value{
 A matrix with two columns, containing the x and y coordinates
@@ -149,7 +150,8 @@ Annealing. \emph{ACM Transactions on Graphics} 15(4), pp. 301-331, 1996.
 }
 \seealso{
 \code{\link[=layout_with_fr]{layout_with_fr()}},
-\code{\link[=layout_with_kk]{layout_with_kk()}} for other layout algorithms.
+\code{\link[=layout_with_kk]{layout_with_kk()}} for other layout algorithms. See \code{\link[=with_dh]{with_dh()}} to build a
+lazy layout specification for \code{\link[=add_layout_]{add_layout_()}}.
 
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},

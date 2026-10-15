@@ -127,7 +127,7 @@ test_that("r_pal() works correctly", {
 test_that("r_pal() handles edge cases", {
   # Warning for too many colors (note: message says "divergent" - this might be a bug!)
   expect_warning(
-    result <- r_pal(15),
+    r_pal(15),
     "Cannot make 15 divergent colors" # This warning message seems wrong
   )
 

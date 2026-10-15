@@ -78,11 +78,13 @@ pak::pak(dependencies = "Config/Needs/build")
 - Document all arguments and return values
 - Document internal functions using devtag (work in progress)
 - Link to C documentation using `@cdocs` tag: `#' @cdocs igraph_function_name`
+- Write "ID"/"IDs" (not "id"/"ids") when referring to vertex/edge IDs in documentation *prose*. Lowercase stays only where the token is code: argument names, runnable `@examples`, and spans in `` `...` `` or `\code{}`. Run `Rscript tools/check-id-casing.R` to find violations in roxygen prose.
 - Always run `devtools::document()` after updating documentation
 
 ### Naming Conventions
 
 - Use `max` for maximal (graph theory term: a vertex is maximal if no other vertex dominates it) and `largest` for maximum (the biggest value in a set)
+- Use `make_xxx()` for functions creating graphs in a deterministic way, and `sample_xxx()` for functions sampling graphs from some ensemble
 
 ### New functions
 
@@ -94,7 +96,7 @@ All new functions must include:
 - A concept so that it exists in the pkgdown reference index
 - An "experimental" badge via `r lifecycle::badge("experimental")`
 - All arguments in `snake_case`, with documentation and suitable defaults
-- An ellipsis guarded with `check_dots_empty()` separating mandatory and optional arguments
+- An ellipsis guarded with `check_dots_empty()` separating the head (required and defining arguments) from keyword-only options, following the zoning rules in [CONTRIBUTING.md](CONTRIBUTING.md#argument-order-and-the-ellipsis)
 - Argument validation using built-in `check_*()` functions or `igraph_arg_match()`
 
 **For callback functions:**

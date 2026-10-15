@@ -10,7 +10,7 @@
 #' @export
 path.length.hist <- function(graph, directed = TRUE) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "path.length.hist()", "distance_table()")
+  lifecycle::deprecate_warn("2.0.0", "path.length.hist()", "distance_table()")
   distance_table(graph = graph, directed = directed)
 } # nocov end
 
@@ -26,7 +26,7 @@ path.length.hist <- function(graph, directed = TRUE) {
 #' @export
 maximum.cardinality.search <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "maximum.cardinality.search()",
     "max_cardinality()"
@@ -46,7 +46,7 @@ maximum.cardinality.search <- function(graph) {
 #' @export
 is.dag <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "is.dag()", "is_dag()")
+  lifecycle::deprecate_warn("2.0.0", "is.dag()", "is_dag()")
   is_dag(graph = graph)
 } # nocov end
 ## -----------------------------------------------------------------------
@@ -85,7 +85,9 @@ is.dag <- function(graph) {
 #'
 #' @param graph The input graph.
 #' @param from The source vertex.
-#' @param to The target vertex of vertices. Defaults to all vertices.
+#' @param to The target vertex of vertices. The default `NULL` selects all
+#'   vertices.
+#' @inheritParams rlang::args_dots_empty
 #' @param mode Character constant, gives whether the shortest paths to or
 #'   from the given vertices should be calculated for directed graphs. If
 #'   `out` then the shortest paths *from* the vertex, if `in`
@@ -96,7 +98,7 @@ is.dag <- function(graph) {
 #'   no cutoff is used.
 #' @return A list of integer vectors, each integer vector is a path from
 #'   the source vertex to one of the target vertices. A path is given by its
-#'   vertex ids.
+#'   vertex IDs.
 #' @keywords graphs
 #' @examples
 #'
@@ -109,12 +111,53 @@ is.dag <- function(graph) {
 all_simple_paths <- function(
   graph,
   from,
-  to = V(graph),
+  to = NULL,
+  ...,
   mode = c("out", "in", "all", "total"),
   cutoff = -1
 ) {
+  # BEGIN GENERATED ARG_HANDLE: all_simple_paths, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: all_simple_paths(graph, from, to, mode, cutoff)
+    .old_signature <- function(mode, cutoff, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn all_simple_paths}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn all_simple_paths}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(mode)) base::list(mode = mode),
+        if (!base::missing(cutoff)) base::list(cutoff = cutoff)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(mode)) "mode",
+        if (!base::missing(cutoff)) "cutoff"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn all_simple_paths} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `all_simple_paths()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  all_simple_paths(", base::paste(base::c("graph", "from", "to", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    all_simple_paths(", base::paste(base::c("graph", "from", "to", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   ## Argument checks
   ensure_igraph(graph)
+  if (is.null(to)) {
+    to <- V(graph)
+  }
 
   ## Function call
   res <- with_igraph_opt(
@@ -287,7 +330,7 @@ eccentricity <- function(
   mode = c("all", "out", "in", "total")
 ) {
   if (...length() > 0) {
-    lifecycle::deprecate_soft(
+    lifecycle::deprecate_warn(
       "2.1.0",
       "eccentricity(... =)",
       details = "The argument `mode` must be named."
@@ -345,7 +388,7 @@ radius <- function(
   mode = c("all", "out", "in", "total")
 ) {
   if (...length() > 0) {
-    lifecycle::deprecate_soft(
+    lifecycle::deprecate_warn(
       "2.1.0",
       "radius(... =)",
       details = "The argument `mode` must be named."
@@ -407,10 +450,50 @@ graph_center <- function(
 }
 
 #' @rdname distances
+#' @inheritParams rlang::args_dots_empty
 #' @param directed Whether to consider directed paths in directed graphs,
 #'   this argument is ignored for undirected graphs.
 #' @export
-distance_table <- function(graph, directed = TRUE) {
+distance_table <- function(
+  graph,
+  ...,
+  directed = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: distance_table, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: distance_table(graph, directed)
+    .old_signature <- function(directed, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn distance_table}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn distance_table}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(directed)) base::list(directed = directed)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(directed)) "directed"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn distance_table} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `distance_table()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  distance_table(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    distance_table(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   path_length_hist_impl(
     graph = graph,
     directed = directed

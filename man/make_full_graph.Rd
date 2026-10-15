@@ -5,12 +5,14 @@
 \alias{full_graph}
 \title{Create a full graph}
 \usage{
-make_full_graph(n, directed = FALSE, loops = FALSE)
+make_full_graph(n, ..., directed = FALSE, loops = FALSE)
 
-full_graph(n, directed = FALSE, loops = FALSE)
+full_graph(n, ..., directed = FALSE, loops = FALSE)
 }
 \arguments{
 \item{n}{Number of vertices.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{directed}{Whether to create a directed graph.}
 

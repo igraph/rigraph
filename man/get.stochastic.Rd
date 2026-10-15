@@ -16,8 +16,9 @@ get.stochastic(
 \item{column.wise}{If \code{FALSE}, then the rows of the stochastic matrix
 sum up to one; otherwise it is the columns.}
 
-\item{sparse}{Logical scalar, whether to return a sparse matrix. The
-\code{Matrix} package is needed for sparse matrices.}
+\item{sparse}{Logical, whether to return a sparse matrix. The
+\code{Matrix} package is needed for sparse matrices. The default \code{NULL} uses
+the \code{sparsematrices} igraph option.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

@@ -2,12 +2,9 @@
 % Please edit documentation in R/make.R
 \name{make_tree}
 \alias{make_tree}
-\alias{tree}
 \title{Create tree graphs}
 \usage{
-make_tree(n, children = 2, mode = c("out", "in", "undirected"))
-
-tree(...)
+make_tree(n, children = 2, ..., mode = c("out", "in", "undirected"))
 }
 \arguments{
 \item{n}{Number of vertices.}
@@ -15,13 +12,13 @@ tree(...)
 \item{children}{Integer scalar, the number of children of a vertex
 (except for leafs)}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{mode}{Defines the direction of the
 edges. \code{out} indicates that the edges point from the parent to
 the children, \verb{in} indicates that they point from the children
 to their parents, while \code{undirected} creates an undirected
 graph.}
-
-\item{...}{Passed to \code{make_tree()} or \code{sample_tree()}.}
 }
 \value{
 An igraph graph
@@ -39,6 +36,9 @@ make_tree(10, 2)
 make_tree(10, 3, mode = "undirected")
 }
 \seealso{
+\code{\link[=tree]{tree()}} to build a lazy constructor specification for
+\code{\link[=make_]{make_()}} or \code{\link[=sample_]{sample_()}}.
+
 Other deterministic constructors:
 \code{\link[=graph_from_atlas]{graph_from_atlas()}},
 \code{\link[=graph_from_edgelist]{graph_from_edgelist()}},

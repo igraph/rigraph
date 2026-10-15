@@ -7,10 +7,10 @@
 vertex.disjoint.paths(graph, source = NULL, target = NULL)
 }
 \arguments{
-\item{source}{The id of the source vertex, for \code{vertex_connectivity()} it
+\item{source}{The ID of the source vertex, for \code{vertex_connectivity()} it
 can be \code{NULL}, see details below.}
 
-\item{target}{The id of the target vertex, for \code{vertex_connectivity()} it
+\item{target}{The ID of the target vertex, for \code{vertex_connectivity()} it
 can be \code{NULL}, see details below.}
 }
 \description{

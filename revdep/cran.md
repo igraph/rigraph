@@ -1,36 +1,107 @@
 ## revdepcheck results
 
-We checked 2210 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 3470 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 6 new problems
- * We failed to check 3 packages
+ * We saw 26 new problems
+ * We failed to check 8 packages
 
 Issues with CRAN packages are summarised below.
 
 ### New problems
 (This reports the first line of each new failure)
 
-* Cascade
-  checking whether package ‘Cascade’ can be installed ... WARNING
+* Boptbd
+  checking examples ... ERROR
 
-* DiagrammeR
+* c3net
+  checking examples ... ERROR
+
+* cfid
+  checking tests ... ERROR
+
+* comato
+  checking examples ... ERROR
+
+* cranly
+  checking re-building of vignette outputs ... ERROR
+
+* dci
+  checking examples ... ERROR
+  checking tests ... ERROR
+  checking re-building of vignette outputs ... ERROR
+
+* degreenet
+  checking examples ... ERROR
+
+* ECoL
   checking examples ... ERROR
   checking tests ... ERROR
 
-* jewel
+* ggm
+  checking examples ... ERROR
+
+* ggraph
+  checking examples ... ERROR
+  checking re-building of vignette outputs ... ERROR
+
+* glyrepr
+  checking tests ... ERROR
+
+* GoodFitSBM
   checking examples ... ERROR
 
 * manynet
   checking tests ... ERROR
 
-* rSpectral
+* MetaNet
+  checking examples ... ERROR
+
+* migraph
   checking tests ... ERROR
 
-* sfnetworks
+* nat
+  checking examples ... ERROR
   checking tests ... ERROR
+  checking re-building of vignette outputs ... ERROR
+
+* nethist
+  checking tests ... ERROR
+
+* optbdmaeAT
+  checking examples ... ERROR
+
+* optrcdmaeAT
+  checking examples ... ERROR
+
+* R6causal
+  checking whether package ‘R6causal’ can be installed ... WARNING
+
+* scistreer
+  checking examples ... ERROR
+
+* SEMgraph
+  checking examples ... ERROR
+
+* sfclust
+  checking tests ... ERROR
+
+* SpaDES.core
+  checking tests ... ERROR
+
+* tidygraph
+  checking examples ... ERROR
+  checking tests ... ERROR
+
+* vkR
+  checking dependencies in R code ... WARNING
 
 ### Failed to check
 
-* caugi       (NA)
-* ClustAssess (NA)
-* streamDAG   (NA)
+* ctmm            (NA)
+* E2E             (NA)
+* gllvm           (NA)
+* hespdiv         (NA)
+* orchaRd         (NA)
+* PortfolioTesteR (NA)
+* sphet           (NA)
+* xpect           (NA)

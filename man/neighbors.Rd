@@ -4,12 +4,14 @@
 \alias{neighbors}
 \title{Neighboring (adjacent) vertices in a graph}
 \usage{
-neighbors(graph, v, mode = c("out", "in", "all", "total"))
+neighbors(graph, v, ..., mode = c("out", "in", "all", "total"))
 }
 \arguments{
 \item{graph}{The input graph.}
 
 \item{v}{The vertex of which the adjacent vertices are queried.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Whether to query outgoing (\sQuote{out}), incoming
 (\sQuote{in}) edges, or both types (\sQuote{all}). This is

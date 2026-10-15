@@ -1,5 +1,1387 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.3.9042
+
+## Chore
+
+- Auto-update from GitHub Actions (#2930).
+
+
+# igraph 2.3.3.9041
+
+## Bug fixes
+
+### ci
+
+- Scope the touchstone comment concurrency group to the PR branch (#2924).
+
+
+# igraph 2.3.3.9040
+
+## Continuous integration
+
+### touchstone
+
+- Benchmark `incident_edges()`, `neighbors()`, `union()` and indexed edge attribute assignment (#2914).
+
+
+# igraph 2.3.3.9039
+
+## Bug fixes
+
+### ci
+
+- Append the GLPK flags to `~/.R/Makevars` instead of overwriting it (#2911).
+
+### ci
+
+- Restore the custom actions and the workflows the template sync deleted (#2910).
+
+## Continuous integration
+
+- Run coverage checks after pkgdown push.
+
+## Uncategorized
+
+- Feat(ci): Render `README.md` and `index.md` in CI (cynkra/cynkratemplate#118).
+
+
+# igraph 2.3.3.9038
+
+## Chore
+
+- Remove Copilot setup steps.
+
+- Auto-update from GitHub Actions (#2901).
+
+## Documentation
+
+- Drop the branch from the coverage badge (#2902).
+
+## Refactoring
+
+- Snake_case attr-comb options & arguments, soft-deprecate dotted names (#2742).
+
+## Uncategorized
+
+- Refactor(ci): Serve the revdep scripts with the actions instead of copying them (cynkra/cynkratemplate#149).
+
+- Feat: Build a binary package in every check job and share it as an artifact (cynkra/cynkratemplate#141).
+
+- Fix(ci): Collect the fleet's workflow fixes after the move to central actions (cynkra/cynkratemplate#139).
+
+- Refactor(ci): Serve the actions from this repository instead of copying them (cynkra/cynkratemplate#121).
+
+- Fix(ci): Keep the raw name expression out of the running job's step list (cynkra/cynkratemplate#119).
+
+- Fix(fledge): Push the bump to the default branch wherever that is allowed (cynkra/cynkratemplate#117).
+
+- Fix(ci): Make a failing `rcc` run say what failed, and link to it (cynkra/cynkratemplate#115).
+
+- Fix(ci): Exempt deprecation warnings from the roxygenize warning gate (cynkra/cynkratemplate#114).
+
+- Perf(revdepx): Compile the revdeps' checks through ccache.
+
+- Fix(ci): Survive an archived CRAN package, and install it from where it still lives.
+
+- Ci: Fail the roxygenize step on roxygen2 warnings (#111).
+
+
+# igraph 2.3.3.9037
+
+## Chore
+
+- Improve errors in iterators.R (#1891, #2006).
+
+- Increase R minimal version to R4.0.0 (#2876).
+
+## Documentation
+
+- Fix dots docs thanks to roxygen2's warning about useless inheritParams (#2868).
+
+
+# igraph 2.3.3.9036
+
+## Chore
+
+- Update standalone files (#2881).
+
+
+# igraph 2.3.3.9035
+
+## Bug fixes
+
+### ci
+
+- Align the workflow kit with `cynkratemplate` (#2892).
+
+### ci
+
+- Filter OS-restricted packages out of the revdep plan (#2889).
+
+### ci
+
+- Backport kit fixes from `rigraph`, `duckdb-r` and `dm`.
+
+## Features
+
+### ci
+
+- Make the revdep driver log's timing record durable and visible (#2891).
+
+## Chore
+
+### ci
+
+- Retire the pair engine from the revdepx core (#2885).
+
+- Re-run the reverse-dependency check (most, depth 2) (#2883).
+
+- Breaking change: rm unused argument in `layout_with_mds()` (#2730, #2869).
+
+- Some Jarl fixes (#2874).
+
+## Documentation
+
+- Rm deprecations vignette as it is not useful (#2848, #2873).
+
+## Breaking changes
+
+- Breaking change: rm unused argument in `layout_with_mds()` (#2730, #2869).
+
+
+# igraph 2.3.3.9034
+
+## Bug fixes
+
+### ci
+
+- Cap check-container cores and raise the timeout floor (#2875).
+
+## Features
+
+### ci
+
+- Add revdep4, sequential halves driven by a two-ended bash work queue (#2857).
+
+## Documentation
+
+- Other roxygen2 warning (#2870).
+
+## Performance
+
+### touchstone
+
+- Measure warm, repeated calls instead of one cold call (#2882).
+
+
+# igraph 2.3.3.9033
+
+## Bug fixes
+
+### ci
+
+- Upload a shard's results three times, not once (#2854).
+
+### ci
+
+- Stop reporting a check that never ran as `ok` (#2849).
+
+### ci
+
+- Install the system requirements of the packages being checked (#2853).
+
+## Performance
+
+### ci
+
+- Bigger install chunks, a shard resource sampler, and lower-priority checks (#2852).
+
+
+# igraph 2.3.3.9032
+
+## Bug fixes
+
+- `simplify()` honours `edge.attr.comb` on an already-simple graph again (#2843).
+
+- `as_adjacency_matrix(attr = NULL)` is unweighted again (#2842).
+
+## Features
+
+### ci
+
+- Make `revdep2` runs comparable, resilient, and honest about what they checked (#2834).
+
+
+# igraph 2.3.3.9031
+
+## Continuous integration
+
+### revdep2
+
+- Put a clock on every call that can hang (#2832).
+
+### revdep2
+
+- Install in chunks, and diagnose a preflight that is killed rather than failed (#2830).
+
+
+# igraph 2.3.3.9030
+
+## Bug fixes
+
+### ci
+
+- Check `windows-11-arm` with `error_on = "error"` (#2821).
+
+## Features
+
+### ci
+
+- Commit the `revdep2` report, and re-check what it lists (#2827).
+
+## Continuous integration
+
+- Wrap the commit status update into an action.
+
+- Route ccache through one-word compiler wrappers on Unix.
+
+- Name every step and restore the log entry `setup-pandoc` swallows.
+
+
+# igraph 2.3.3.9029
+
+## Bug fixes
+
+### ci
+
+- Let a `revdep2` run survive its preflight, and finish the shard-count follow-ups (#2820).
+
+### migrations
+
+- Recover legacy arguments against the old signature (#2812).
+
+## Features
+
+### ci
+
+- Size `revdep2` shards by the parallel capacity, calibrated from measured timings (#2819).
+
+
+# igraph 2.3.3.9028
+
+## Bug fixes
+
+### ci
+
+- Carry `revdep2` run ids as strings, and make its summary self-contained (#2816).
+
+## Continuous integration
+
+- Move the `revdep2` library artifact steps to their Node 24 releases (#2817).
+
+
+# igraph 2.3.3.9027
+
+## Bug fixes
+
+### ci
+
+- Quote `gh` arguments in the `revdep2` plan job (#2811).
+
+## Features
+
+### ci
+
+- Reuse prebuilt packages in `revdep2` instead of rebuilding them (#2814).
+
+## Continuous integration
+
+- Move remaining Node 20 actions to their Node 24 releases (#2813).
+
+- Add sharded `revdep2` workflow.
+
+## Uncategorized
+
+- Ci: Harden `workflow_run` workflows against untrusted pull requests (#106).
+
+- Ci: Pin third-party actions to commits and let Renovate keep them pinned (#105).
+
+
+# igraph 2.3.3.9026
+
+## Features
+
+### migrations
+
+- Require constant defaults, resolve complex ones in the body (#2784).
+
+## Chore
+
+- Auto-update from GitHub Actions (#2807).
+
+- Auto-update from GitHub Actions (#2806).
+
+## Continuous integration
+
+- Remove unused pr-commands workflow.
+
+## Documentation
+
+- Zoning rules for arguments around the ellipsis (#2757).
+
+- Revdep results before PR.
+
+- Revdep problems for PR.
+
+## Uncategorized
+
+- Ci: Give every workflow and job an explicit `permissions` block (#103).
+
+- Ci: Pass workflow context through the environment, not into script text (#102).
+
+- Ci: Add a Windows arm64 (`windows-11-arm`) check on R-release (#99).
+
+
+# igraph 2.3.3.9025
+
+## Continuous integration
+
+- Use the daily-rebuilt `r-debug` sanitizer image, and fix the leak it uncovered (#2802).
+
+
+# igraph 2.3.3.9024
+
+## Bug fixes
+
+- Name `norm_coords()` arguments at the `rglplot.igraph()` call site (#2801).
+
+
+# igraph 2.3.3.9023
+
+## Bug fixes
+
+- Heal `main` — unleak `warnPartialMatchArgs` on R 4.2 and name args at `norm_coords()`/`make_star()` call sites for the lifecycle-errors leg (#2799).
+
+- Initialize `c_options` in the Stimulus type definition (#2792).
+
+## Features
+
+### migrations
+
+- Allow head/recoverable prefix overlaps, guarded at run time (#2787).
+
+## Continuous integration
+
+- Sync R-CMD-check workflow; drop matrix-env plumbing from custom action (#2798).
+
+## Refactoring
+
+- Move optional arguments of games functions behind the ellipsis (#2760).
+
+- Move optional arguments of layout functions behind the ellipsis (#2762).
+
+- Move optional arguments of make functions behind the ellipsis (#2761).
+
+- Move optional arguments of topology functions behind the ellipsis (#2768).
+
+- Move optional arguments of conversion functions behind the ellipsis (#2766).
+
+- Move optional arguments of hrg-embedding functions behind the ellipsis (#2771).
+
+- Move optional arguments of flow functions behind the ellipsis (#2767).
+
+- Move optional arguments of plotting functions behind the ellipsis (#2777).
+
+- Move optional arguments of interface functions behind the ellipsis (#2770).
+
+- Move optional arguments of similarity-efficiency functions behind the ellipsis (#2776).
+
+- Move optional arguments of cliques functions behind the ellipsis (#2769).
+
+- Move optional arguments of motifs-graphlets functions behind the ellipsis (#2772).
+
+- Move optional arguments of misc functions behind the ellipsis (#2778).
+
+- Move optional arguments of bipartite-degseq functions behind the ellipsis (#2774).
+
+- Move optional arguments of walks-cycles functions behind the ellipsis (#2775).
+
+- Move optional arguments of trees functions behind the ellipsis (#2758).
+
+- Move optional arguments of operators functions behind the ellipsis (#2773).
+
+## Testing
+
+- Cover migrated centrality, community, and centralization signatures (#2786).
+
+- Make unasserted lifecycle deprecations fail the test suite (opt-in) (#2782).
+
+- Cover migrated structural-properties signatures (#2785).
+
+## Uncategorized
+
+- Ci: Run all smoke-test checks even when one fails (#97).
+
+- Ci: Link the responsible workflow run in snapshot update PRs (#96).
+
+
+# igraph 2.3.3.9022
+
+## Bug fixes
+
+- Use canonical `structure()` attribute names (#2755).
+
+## Chore
+
+- Restore one-value-per-line layout of long enum defaults (#2781).
+
+## Continuous integration
+
+- Let `pak` ignore Bioconductor `graph` on R \< 4.4 (#2753).
+
+## Refactoring
+
+- Move optional arguments of structural-properties functions behind the ellipsis (#2759).
+
+- Move optional arguments of centrality functions behind the ellipsis (#2763).
+
+- Move optional arguments of community functions behind the ellipsis (#2765).
+
+- Move optional arguments of centralization functions behind the ellipsis (#2764).
+
+### migrations
+
+- Split the registry into per-topic files (#2779).
+
+
+# igraph 2.3.3.9021
+
+## Continuous integration
+
+- Lock down `format-suggest` egress (audit → block).
+
+
+# igraph 2.3.3.9020
+
+## Bug fixes
+
+### ci
+
+- Emit empty package matrix when there are no (rev)deps.
+
+## Uncategorized
+
+- Ci: Harden `format-suggest` against `pull_request_target` pwn requests (#93).
+
+
+# igraph 2.3.3.9019
+
+## Continuous integration
+
+- Run on Ubuntu 26.04.
+
+- Align workflows with template.
+
+
+# igraph 2.3.3.9018
+
+## Bug fixes
+
+- Remove generated `src/Makevars` in cleanup scripts (#2746).
+
+- Fix test issues with new withr version (#2701, #2705).
+
+### migrations
+
+- Guard against head/recoverable prefix clashes (#2743).
+
+- Fix test issues with new withr version (#2701, #2705).
+
+- BFS reports all requested root vertices instead of only the first (#1639, #2693).
+
+- Resolve roxygen2 warnings (#2641, #2692).
+
+- Touchstone empty results table for branches with a slash (#2689).
+
+- Harden air support and broaden migration fixture to the full arg-matching matrix (#2686).
+
+- Repair touchstone benchmark CI (#2688).
+
+- `cut_at()` handles partial dendrograms from `cluster_leading_eigen()` (#58, #2599).
+
+- Stricter bipartite type checking (#710, #2598).
+
+- Vector logic (#2653).
+
+- `seq_len()` rather than `seq()` (#2655).
+
+- Unreachable code (#2656).
+
+- `rowMeans()` and `rowSums()` (#2657).
+
+- Add `check.attributes=FALSE` to `is_symmetric()` to ignore dimnames mismatch (#2671, #2672).
+
+- Resolve CRAN Fortran obsolescent character length warning in ARPACK (#2644).
+
+- Avoid memory overflow in `ensure_no_na()` for large sparse matrices with `mode="lower"` or `mode="upper"` (#2626, #2627).
+
+## Features
+
+- Add attribute combination support to graph operators (#57, #2676).
+
+- Retire `attr` in favor of `weights` for adjacency matrix functions (#906, #1137, #2677).
+
+- Modern cli-styled print output (#1959, #2682).
+
+- Added simple check to `graph_from_literal()` (#824, #1981).
+
+- Add touchstone benchmarks (#1338, #2685).
+
+- Add tooling for parameter migration (#2684).
+
+## Chore
+
+- Rm unused lines (#2728).
+
+- Rm empty arguments (#2740).
+
+- Rm a few outer negations with Jarl (#2739).
+
+- Rm two more unused vars (#2735).
+
+- Unused object + rename in hrg.R (#2734).
+
+- Rm unused variable from idx.R (#2733).
+
+- Stop naming mode in indexing.R (#2732).
+
+- Rm modifs of variable not used in logic branch (#2726).
+
+- Rm unused code from iterators.R (#2731).
+
+- Rm two unused lines (#2729).
+
+- Rm unused variable (#2725).
+
+- Rm unused code (#2724).
+
+- Rm unused object (#2723).
+
+- Rm unused objects in plot scripts (#2727).
+
+- Auto-update from GitHub Actions (#2718).
+
+- Separate and annotate top-level vs helper functions in `rinterface_extra.c` (#2105, #2708).
+
+- Auto-update from GitHub Actions (#2702).
+
+- Implicit assignments (#2664).
+
+- Use `max.print` consistently in adjacency-list graph printing (#1462, #2680).
+
+- Refactor internal `tmp` locals to descriptive names (#1328, #2678).
+
+- Unused functions (#2669).
+
+- Ignore true_false_symbol for now (#2668).
+
+- Numeric_leading_zero (#2667).
+
+- Exception comments for jarl's duplicated arguments check (#2658).
+
+- `startsWith()` (#2659).
+
+- Outer negation (#2666).
+
+- `seq_along()`, `seq_len()` (#2665).
+
+- Do not namespace internal functions (#2662).
+
+- `inherits()` (#2661).
+
+- `anyDuplicated()` (jarl), `anyNA()` (jarl), `nzchar()`(me) (#2660).
+
+- `lengths()` (#2663).
+
+- Add jarl config (#2654).
+
+- Split generated `R/aaa-auto.R` into per-category `R/aaa-<cat>.R` files (#2621).
+
+- Remove `console()` and `tkplot()` (#2615).
+
+- Advance lifecycle stage for many functions (#2634).
+
+- Add ccache to `.gitignore` and `.Rbuildignore`.
+
+- Auto-update from GitHub Actions (#2624).
+
+## Continuous integration
+
+- Update ccache-action reference.
+
+- Bump action version.
+
+- Create snapshot update PR against correct branch.
+
+- Add reference to `/apply-patch` workflow in commit message.
+
+- Clarify rationale for not deploying on schedule.
+
+- Really deploy pkgdown only on push.
+
+- Disable vendoring workflow to avoid noise.
+
+- Only run fledge on pushes to main.
+
+- Tweak fledge workflow and ccache action.
+
+- Cosmetics.
+
+- Bump action versions.
+
+- Install clang-format-21.
+
+- Align fledge workflow.
+
+- Harmonize.
+
+## Documentation
+
+- More common location for default value in community.R (#2716, #2737).
+
+- Clarify make\_ vs sample\_ (#801, #2738).
+
+- Describe logical params more consistently (#2487, #2707).
+
+- Use "ID"/"IDs" consistently in documentation prose (#1683, #2694).
+
+- Updated revdep issues (#2647).
+
+### revdep
+
+- Analyze and document reverse dependency problems for igraph 2.3.0 (#2499, #2500).
+
+- `document()` with latest roxygen2 -- for clean diffs (#2642).
+
+## Performance
+
+- Speed up `.apply_modifiers()` in `make.R` (#1468, #2600).
+
+## Testing
+
+- Replace `expect_snapshot_error(` with `expect_snapshot(error = … (`\#2721`{=html}, `\#2736\`{=html}).
+
+- Withr-free local seed and RNG-state leak fixes (#2713, #2714).
+
+- Jarl fixes (#2670).
+
+## Uncategorized
+
+- Fix: do not wrap roxygenize in try() (#2679) (#2690) (#2679).
+
+- Merge tag 'v2.3.2'.
+
+  Place the 2.3.2 release section directly above 2.3.1 in NEWS, below the
+  development entries, and bump the development version to 2.3.2.9008.
+
+  https://claude.ai/code/session_01QRKAaBDSAQTfysLRc1C3W2
+
+- Ci: Unify fledge.yaml across cynkratemplate and fledge (#86).
+
+- Merge branch 'krlmlr-main'.
+
+
+# igraph 2.3.2.9017
+
+## Bug fixes
+
+### migrations
+
+- Guard against head/recoverable prefix clashes (#2743).
+
+## Features
+
+- Add attribute combination support to graph operators (#57, #2676).
+
+## Chore
+
+- Rm unused lines (#2728).
+
+- Rm empty arguments (#2740).
+
+- Rm a few outer negations with Jarl (#2739).
+
+- Rm two more unused vars (#2735).
+
+- Unused object + rename in hrg.R (#2734).
+
+- Rm unused variable from idx.R (#2733).
+
+- Stop naming mode in indexing.R (#2732).
+
+- Rm modifs of variable not used in logic branch (#2726).
+
+- Rm unused code from iterators.R (#2731).
+
+- Rm two unused lines (#2729).
+
+- Rm unused variable (#2725).
+
+- Rm unused code (#2724).
+
+- Rm unused object (#2723).
+
+- Rm unused objects in plot scripts (#2727).
+
+## Documentation
+
+- More common location for default value in community.R (#2716, #2737).
+
+- Clarify make\_ vs sample\_ (#801, #2738).
+
+- Describe logical params more consistently (#2487, #2707).
+
+## Testing
+
+- Replace `expect_snapshot_error(` with `expect_snapshot(error = … (`\#2721`{=html}, `\#2736\`{=html}).
+
+- Withr-free local seed and RNG-state leak fixes (#2713, #2714).
+
+
+# igraph 2.3.2.9016
+
+## Chore
+
+- Auto-update from GitHub Actions (#2718).
+
+
+# igraph 2.3.2.9015
+
+## Bug fixes
+
+- Fix test issues with new withr version (#2701, #2705).
+
+## Chore
+
+- Separate and annotate top-level vs helper functions in `rinterface_extra.c` (#2105, #2708).
+
+- Auto-update from GitHub Actions (#2702).
+
+
+# igraph 2.3.2.9014
+
+## Features
+
+- Retire `attr` in favor of `weights` for adjacency matrix functions (#906, #1137, #2677).
+
+
+# igraph 2.3.2.9013
+
+## Features
+
+- Modern cli-styled print output (#1959, #2682).
+
+- Added simple check to `graph_from_literal()` (#824, #1981).
+
+
+# igraph 2.3.2.9012
+
+## Bug fixes
+
+- BFS reports all requested root vertices instead of only the first (#1639, #2693).
+
+- Resolve roxygen2 warnings (#2641, #2692).
+
+## Documentation
+
+- Use "ID"/"IDs" consistently in documentation prose (#1683, #2694).
+
+## Uncategorized
+
+- Fix: do not wrap roxygenize in try() (#2679) (#2690) (#2679).
+
+
+# igraph 2.3.2.9011
+
+## Bug fixes
+
+- Touchstone empty results table for branches with a slash (#2689).
+
+- Harden air support and broaden migration fixture to the full arg-matching matrix (#2686).
+
+- Repair touchstone benchmark CI (#2688).
+
+## Features
+
+- Add touchstone benchmarks (#1338, #2685).
+
+## Chore
+
+- Implicit assignments (#2664).
+
+
+# igraph 2.3.2.9010
+
+## Features
+
+- Add tooling for parameter migration (#2684).
+
+
+# igraph 2.3.2.9009
+
+## Bug fixes
+
+- `cut_at()` handles partial dendrograms from `cluster_leading_eigen()` (#58, #2599).
+
+- Stricter bipartite type checking (#710, #2598).
+
+- Vector logic (#2653).
+
+- `seq_len()` rather than `seq()` (#2655).
+
+- Unreachable code (#2656).
+
+- `rowMeans()` and `rowSums()` (#2657).
+
+- Add `check.attributes=FALSE` to `is_symmetric()` to ignore dimnames mismatch (#2671, #2672).
+
+- Resolve CRAN Fortran obsolescent character length warning in ARPACK (#2644).
+
+- Avoid memory overflow in `ensure_no_na()` for large sparse matrices with `mode="lower"` or `mode="upper"` (#2626, #2627).
+
+## Chore
+
+- Use `max.print` consistently in adjacency-list graph printing (#1462, #2680).
+
+- Refactor internal `tmp` locals to descriptive names (#1328, #2678).
+
+- Unused functions (#2669).
+
+- Ignore true_false_symbol for now (#2668).
+
+- Numeric_leading_zero (#2667).
+
+- Exception comments for jarl's duplicated arguments check (#2658).
+
+- `startsWith()` (#2659).
+
+- Outer negation (#2666).
+
+- `seq_along()`, `seq_len()` (#2665).
+
+- Do not namespace internal functions (#2662).
+
+- `inherits()` (#2661).
+
+- `anyDuplicated()` (jarl), `anyNA()` (jarl), `nzchar()`(me) (#2660).
+
+- `lengths()` (#2663).
+
+- Add jarl config (#2654).
+
+- Split generated `R/aaa-auto.R` into per-category `R/aaa-<cat>.R` files (#2621).
+
+- Remove `console()` and `tkplot()` (#2615).
+
+- Advance lifecycle stage for many functions (#2634).
+
+- Add ccache to `.gitignore` and `.Rbuildignore`.
+
+- Auto-update from GitHub Actions (#2624).
+
+## Continuous integration
+
+- Update ccache-action reference.
+
+- Bump action version.
+
+- Create snapshot update PR against correct branch.
+
+- Add reference to `/apply-patch` workflow in commit message.
+
+- Clarify rationale for not deploying on schedule.
+
+- Really deploy pkgdown only on push.
+
+- Disable vendoring workflow to avoid noise.
+
+- Only run fledge on pushes to main.
+
+- Tweak fledge workflow and ccache action.
+
+- Cosmetics.
+
+- Bump action versions.
+
+- Install clang-format-21.
+
+- Align fledge workflow.
+
+- Harmonize.
+
+## Documentation
+
+- Updated revdep issues (#2647).
+
+### revdep
+
+- Analyze and document reverse dependency problems for igraph 2.3.0 (#2499, #2500).
+
+- `document()` with latest roxygen2 -- for clean diffs (#2642).
+
+## Performance
+
+- Speed up `.apply_modifiers()` in `make.R` (#1468, #2600).
+
+## Testing
+
+- Jarl fixes (#2670).
+
+## Uncategorized
+
+- Merge tag 'v2.3.2'.
+
+  Place the 2.3.2 release section directly above 2.3.1 in NEWS, below the
+  development entries, and bump the development version to 2.3.2.9008.
+
+  https://claude.ai/code/session_01QRKAaBDSAQTfysLRc1C3W2
+
+- Ci: Unify fledge.yaml across cynkratemplate and fledge (#86).
+
+- Merge branch 'krlmlr-main'.
+
+
+# igraph 2.3.1.9008
+
+## Chore
+
+- Add jarl config (#2654).
+
+## Documentation
+
+- Updated revdep issues (#2647).
+
+
+# igraph 2.3.1.9007
+
+## Chore
+
+- Split generated `R/aaa-auto.R` into per-category `R/aaa-<cat>.R` files (#2621).
+
+
+# igraph 2.3.1.9006
+
+## Chore
+
+- Remove `console()` and `tkplot()` (#2615).
+
+## Continuous integration
+
+- Update ccache-action reference.
+
+- Bump action version.
+
+
+# igraph 2.3.1.9005
+
+## Bug fixes
+
+- Resolve CRAN Fortran obsolescent character length warning in ARPACK (#2644).
+
+- Avoid memory overflow in `ensure_no_na()` for large sparse matrices with `mode="lower"` or `mode="upper"` (#2626, #2627).
+
+## Chore
+
+- Advance lifecycle stage for many functions (#2634).
+
+## Documentation
+
+### revdep
+
+- Analyze and document reverse dependency problems for igraph 2.3.0 (#2499, #2500).
+
+
+# igraph 2.3.1.9004
+
+## Deprecated and defunct
+
+- `autocurve.edges()` is now deprecated with a warning instead of a message.
+- `igraph.version()` is now deprecated with a warning instead of a message.
+- `permute.vertices()` is now deprecated with a warning instead of a message.
+- `automorphisms()` is now deprecated with a warning instead of a message.
+- `tkplot.setcoords()` is now deprecated with a warning instead of a message.
+- `tkplot.rotate()` is now deprecated with a warning instead of a message.
+- `tkplot.reshape()` is now deprecated with a warning instead of a message.
+- `tkplot.off()` is now deprecated with a warning instead of a message.
+- `tkplot.getcoords()` is now deprecated with a warning instead of a message.
+- `tkplot.fit.to.screen()` is now deprecated with a warning instead of a message.
+- `tkplot.close()` is now deprecated with a warning instead of a message.
+- `tkplot.center()` is now deprecated with a warning instead of a message.
+- `tkplot.canvas()` is now deprecated with a warning instead of a message.
+- `are.connected()` is now deprecated with a warning instead of a message.
+- `get.shortest.paths()` is now deprecated with a warning instead of a message.
+- `get.diameter()` is now deprecated with a warning instead of a message.
+- `unfold.tree()` is now deprecated with a warning instead of a message.
+- `topological.sort()` is now deprecated with a warning instead of a message.
+- `shortest.paths()` is now deprecated with a warning instead of a message.
+- `neighborhood.size()` is now deprecated with a warning instead of a message.
+- `is.mutual()` is now deprecated with a warning instead of a message.
+- `is.multiple()` is now deprecated with a warning instead of a message.
+- `is.matching()` is now deprecated with a warning instead of a message.
+- `is.loop()` is now deprecated with a warning instead of a message.
+- `is.connected()` is now deprecated with a warning instead of a message.
+- `induced.subgraph()` is now deprecated with a warning instead of a message.
+- `has.multiple()` is now deprecated with a warning instead of a message.
+- `graph.neighborhood()` is now deprecated with a warning instead of a message.
+- `graph.laplacian()` is now deprecated with a warning instead of a message.
+- `graph.knn()` is now deprecated with a warning instead of a message.
+- `graph.dfs()` is now deprecated with a warning instead of a message.
+- `graph.density()` is now deprecated with a warning instead of a message.
+- `graph.coreness()` is now deprecated with a warning instead of a message.
+- `graph.bfs()` is now deprecated with a warning instead of a message.
+- `farthest.nodes()` is now deprecated with a warning instead of a message.
+- `count.multiple()` is now deprecated with a warning instead of a message.
+- `clusters()` is now deprecated with a warning instead of a message.
+- `average.path.length()` is now deprecated with a warning instead of a message.
+- `bfs()` is now defunct (errors instead of warning).
+- `dfs()` is now defunct (errors instead of warning).
+- `get.stochastic()` is now deprecated with a warning instead of a message.
+- `is.simple()` is now deprecated with a warning instead of a message.
+- `igraph.shape.noplot()` is now deprecated with a warning instead of a message.
+- `igraph.shape.noclip()` is now deprecated with a warning instead of a message.
+- `vertex.shapes()` is now deprecated with a warning instead of a message.
+- `add.vertex.shape()` is now deprecated with a warning instead of a message.
+- `path.length.hist()` is now deprecated with a warning instead of a message.
+- `is.dag()` is now deprecated with a warning instead of a message.
+- `igraph.options()` is now deprecated with a warning instead of a message.
+- `getIgraphOpt()` is now deprecated with a warning instead of a message.
+- `running.mean()` is now deprecated with a warning instead of a message.
+- `igraph.sample()` is now deprecated with a warning instead of a message.
+- `convex.hull()` is now deprecated with a warning instead of a message.
+- `graph.intersection()` is now deprecated with a warning instead of a message.
+- `graph.union()` is now deprecated with a warning instead of a message.
+- `graph.difference()` is now deprecated with a warning instead of a message.
+- `graph.compose()` is now deprecated with a warning instead of a message.
+- `graph.complementer()` is now deprecated with a warning instead of a message.
+- `triad.census()` is now deprecated with a warning instead of a message.
+- `graph.motifs.no()` is now deprecated with a warning instead of a message.
+- `graph.motifs.est()` is now deprecated with a warning instead of a message.
+- `graph.motifs()` is now deprecated with a warning instead of a message.
+- `dyad.census()` is now deprecated with a warning instead of a message.
+- `minimum.spanning.tree()` is now deprecated with a warning instead of a message.
+- `graph()` is now deprecated with a warning instead of a message.
+- `graph.famous()` is now deprecated with a warning instead of a message.
+- `line.graph()` is now deprecated with a warning instead of a message.
+- `graph.ring()` is now deprecated with a warning instead of a message.
+- `graph.tree()` is now deprecated with a warning instead of a message.
+- `graph.star()` is now deprecated with a warning instead of a message.
+- `graph.lcf()` is now deprecated with a warning instead of a message.
+- `graph.lattice()` is now deprecated with a warning instead of a message.
+- `graph.lattice()` is now deprecated with a warning instead of a message.
+- `graph.kautz()` is now deprecated with a warning instead of a message.
+- `graph.full.citation()` is now deprecated with a warning instead of a message.
+- `graph.full.bipartite()` is now deprecated with a warning instead of a message.
+- `graph.full()` is now deprecated with a warning instead of a message.
+- `graph.formula()` is now deprecated with a warning instead of a message.
+- `graph.extended.chordal.ring()` is now deprecated with a warning instead of a message.
+- `graph.empty()` is now deprecated with a warning instead of a message.
+- `graph.de.bruijn()` is now deprecated with a warning instead of a message.
+- `graph.bipartite()` is now deprecated with a warning instead of a message.
+- `graph.atlas()` is now deprecated with a warning instead of a message.
+- `graph_()` is now deprecated with a warning instead of a message.
+- `make_lattice()` is now deprecated with a warning instead of a message.
+- `layout.grid.3d()` has been removed.
+- `piecewise.layout()` is now deprecated with a warning instead of a message.
+- `layout.sugiyama()` is now deprecated with a warning instead of a message.
+- `layout.star()` is now deprecated with a warning instead of a message.
+- `layout.norm()` is now deprecated with a warning instead of a message.
+- `layout.merge()` is now deprecated with a warning instead of a message.
+- `layout.mds()` is now deprecated with a warning instead of a message.
+- `layout.grid()` is now deprecated with a warning instead of a message.
+- `layout.graphopt()` is now deprecated with a warning instead of a message.
+- `layout.gem()` is now deprecated with a warning instead of a message.
+- `layout.davidson.harel()` is now deprecated with a warning instead of a message.
+- `layout.bipartite()` is now deprecated with a warning instead of a message.
+- `layout.auto()` is now deprecated with a warning instead of a message.
+- `layout.reingold.tilford()` is now deprecated with a warning instead of a message.
+- `layout.circle()` is now deprecated with a warning instead of a message.
+- `layout.sphere()` is now deprecated with a warning instead of a message.
+- `layout.random()` is now deprecated with a warning instead of a message.
+- `layout.fruchterman.reingold()` is now deprecated with a warning instead of a message.
+- `layout.kamada.kawai()` is now deprecated with a warning instead of a message.
+- `layout.lgl()` is now deprecated with a warning instead of a message.
+- `layout_with_mds()` is now deprecated with a warning instead of a message.
+- `layout.spring()` is now defunct (errors instead of warning).
+- `layout.svd()` is now defunct (errors instead of warning).
+- `layout.fruchterman.reingold.grid()` is now defunct (errors instead of warning).
+- `layout.drl()` is now deprecated with a warning instead of a message.
+- `nei()` has been removed.
+- `innei()` has been removed.
+- `outnei()` has been removed.
+- `inc()` has been removed.
+- `adj()` has been removed.
+- `from()` has been removed.
+- `to()` has been removed.
+- `adj()` has been removed.
+- `inc()` has been removed.
+- `from()` has been removed.
+- `to()` has been removed.
+- `is.directed()` is now deprecated with a warning instead of a message.
+- `delete.vertices()` is now deprecated with a warning instead of a message.
+- `delete.edges()` is now deprecated with a warning instead of a message.
+- `add.vertices()` is now deprecated with a warning instead of a message.
+- `add.edges()` is now deprecated with a warning instead of a message.
+- `get_edge_ids()` is now defunct (errors instead of warning).
+- `get.edge.ids()` is now deprecated with a warning instead of a message.
+- `get.edge.ids()` is now deprecated with a warning instead of a message.
+- `graph.incidence()` is now deprecated with a warning instead of a message.
+- `graph_from_incidence_matrix()` is now deprecated with a warning instead of a message.
+- `graph_from_incidence_matrix()` is now deprecated with a warning instead of a message.
+- `hrg.predict()` is now deprecated with a warning instead of a message.
+- `hrg.fit()` is now deprecated with a warning instead of a message.
+- `hrg.game()` is now deprecated with a warning instead of a message.
+- `hrg.dendrogram()` is now deprecated with a warning instead of a message.
+- `hrg.create()` is now deprecated with a warning instead of a message.
+- `hrg.consensus()` is now deprecated with a warning instead of a message.
+- `graphlets.project()` is now deprecated with a warning instead of a message.
+- `graphlets.candidate.basis()` is now deprecated with a warning instead of a message.
+- `watts.strogatz.game()` is now deprecated with a warning instead of a message.
+- `static.power.law.game()` is now deprecated with a warning instead of a message.
+- `static.fitness.game()` is now deprecated with a warning instead of a message.
+- `sbm.game()` is now deprecated with a warning instead of a message.
+- `preference.game()` is now deprecated with a warning instead of a message.
+- `lastcit.game()` is now deprecated with a warning instead of a message.
+- `k.regular.game()` is now deprecated with a warning instead of a message.
+- `interconnected.islands.game()` is now deprecated with a warning instead of a message.
+- `grg.game()` is now deprecated with a warning instead of a message.
+- `growing.random.game()` is now deprecated with a warning instead of a message.
+- `forest.fire.game()` is now deprecated with a warning instead of a message.
+- `establishment.game()` is now deprecated with a warning instead of a message.
+- `degree.sequence.game()` is now deprecated with a warning instead of a message.
+- `connect.neighborhood()` is now deprecated with a warning instead of a message.
+- `citing.cited.type.game()` is now deprecated with a warning instead of a message.
+- `cited.type.game()` is now deprecated with a warning instead of a message.
+- `callaway.traits.game()` is now deprecated with a warning instead of a message.
+- `bipartite.random.game()` is now defunct (errors instead of warning).
+- `barabasi.game()` is now deprecated with a warning instead of a message.
+- `ba.game()` is now deprecated with a warning instead of a message.
+- `asymmetric.preference.game()` is now deprecated with a warning instead of a message.
+- `aging.barabasi.game()` is now deprecated with a warning instead of a message.
+- `aging.ba.game()` is now deprecated with a warning instead of a message.
+- `aging.prefatt.game()` is now deprecated with a warning instead of a message.
+- `erdos.renyi.game()` is now deprecated with a warning instead of a message.
+- `erdos.renyi.game()` is now deprecated with a warning instead of a message.
+- `random.graph.game()` is now deprecated with a warning instead of a message.
+- `random.graph.game()` is now deprecated with a warning instead of a message.
+- `sample_degseq()` is now defunct (errors instead of warning).
+- `sample_degseq()` is now defunct (errors instead of warning).
+- `sample_degseq()` is now defunct (errors instead of warning).
+- `sample_bipartite()` is now deprecated with a warning instead of a message.
+- `sample_bipartite()` is now deprecated with a warning instead of a message.
+- `bipartite()` is now deprecated with a warning instead of a message.
+- `bipartite()` is now deprecated with a warning instead of a message.
+- `write.graph()` is now deprecated with a warning instead of a message.
+- `read.graph()` is now deprecated with a warning instead of a message.
+- `graph.graphdb()` is now deprecated with a warning instead of a message.
+- `vertex.disjoint.paths()` is now deprecated with a warning instead of a message.
+- `vertex.connectivity()` is now deprecated with a warning instead of a message.
+- `stMincuts()` is now deprecated with a warning instead of a message.
+- `stCuts()` is now deprecated with a warning instead of a message.
+- `minimum.size.separators()` is now deprecated with a warning instead of a message.
+- `minimal.st.separators()` is now deprecated with a warning instead of a message.
+- `is.separator()` is now deprecated with a warning instead of a message.
+- `is.minimal.separator()` is now deprecated with a warning instead of a message.
+- `graph.mincut()` is now deprecated with a warning instead of a message.
+- `graph.maxflow()` is now deprecated with a warning instead of a message.
+- `graph.adhesion()` is now deprecated with a warning instead of a message.
+- `edge.disjoint.paths()` is now deprecated with a warning instead of a message.
+- `edge.connectivity()` is now deprecated with a warning instead of a message.
+- `dominator.tree()` is now deprecated with a warning instead of a message.
+- `power.law.fit()` is now deprecated with a warning instead of a message.
+- `is.graphical.degree.sequence()` is now deprecated with a warning instead of a message.
+- `is.degree.sequence()` is now deprecated with a warning instead of a message.
+- `is.chordal()` is now deprecated with a warning instead of a message.
+- `igraph.to.graphNEL()` is now deprecated with a warning instead of a message.
+- `igraph.from.graphNEL()` is now deprecated with a warning instead of a message.
+- `graph.adjlist()` is now deprecated with a warning instead of a message.
+- `get.incidence()` is now deprecated with a warning instead of a message.
+- `get.edgelist()` is now deprecated with a warning instead of a message.
+- `get.data.frame()` is now deprecated with a warning instead of a message.
+- `get.adjacency()` is now deprecated with a warning instead of a message.
+- `get.adjlist()` is now deprecated with a warning instead of a message.
+- `get.adjedgelist()` is now deprecated with a warning instead of a message.
+- `get.adjacency.dense()` is now deprecated with a warning instead of a message.
+- `as_adj()` is now deprecated with a warning instead of a message.
+- `as_incidence_matrix()` is now deprecated with a warning instead of a message.
+- `as.directed()` is now deprecated with a warning instead of a message.
+- `as.undirected()` is now deprecated with a warning instead of a message.
+- `graph.edgelist()` is now deprecated with a warning instead of a message.
+- `graph.data.frame()` is now deprecated with a warning instead of a message.
+- `igraph.console()` is now deprecated with a warning instead of a message.
+- `no.clusters()` is now deprecated with a warning instead of a message.
+- `decompose.graph()` is now deprecated with a warning instead of a message.
+- `cluster.distribution()` is now deprecated with a warning instead of a message.
+- `biconnected.components()` is now deprecated with a warning instead of a message.
+- `articulation.points()` is now deprecated with a warning instead of a message.
+- `create.communities()` is now deprecated with a warning instead of a message.
+- `walktrap.community()` is now deprecated with a warning instead of a message.
+- `spinglass.community()` is now deprecated with a warning instead of a message.
+- `showtrace()` is now deprecated with a warning instead of a message.
+- `optimal.community()` is now deprecated with a warning instead of a message.
+- `multilevel.community()` is now deprecated with a warning instead of a message.
+- `mod.matrix()` is now deprecated with a warning instead of a message.
+- `leading.eigenvector.community()` is now deprecated with a warning instead of a message.
+- `label.propagation.community()` is now deprecated with a warning instead of a message.
+- `is.hierarchical()` is now deprecated with a warning instead of a message.
+- `infomap.community()` is now deprecated with a warning instead of a message.
+- `fastgreedy.community()` is now deprecated with a warning instead of a message.
+- `edge.betweenness.community()` is now deprecated with a warning instead of a message.
+- `dendPlot()` is now deprecated with a warning instead of a message.
+- `cutat()` is now deprecated with a warning instead of a message.
+- `contract.vertices()` is now deprecated with a warning instead of a message.
+- `code.length()` is now deprecated with a warning instead of a message.
+- `modularity_matrix()` is now defunct (errors instead of warning).
+- `cluster_leiden()` is now deprecated with a warning instead of a message.
+- `cluster_leading_eigen()` is now deprecated with a warning instead of a message.
+- `cluster_label_prop()` is now deprecated with a warning instead of a message.
+- `exportPajek()` is now deprecated with a warning instead of a message.
+- `plotHierarchy()` is now deprecated with a warning instead of a message.
+- `maxcohesion()` is now deprecated with a warning instead of a message.
+- `graph.cohesion()` is now deprecated with a warning instead of a message.
+- `cohesive.blocks()` is now deprecated with a warning instead of a message.
+- `blockGraphs()` is now deprecated with a warning instead of a message.
+- `maximal.independent.vertex.sets()` is now deprecated with a warning instead of a message.
+- `maximal.cliques.count()` is now deprecated with a warning instead of a message.
+- `maximal.cliques()` is now deprecated with a warning instead of a message.
+- `largest.independent.vertex.sets()` is now deprecated with a warning instead of a message.
+- `largest.cliques()` is now deprecated with a warning instead of a message.
+- `independent.vertex.sets()` is now deprecated with a warning instead of a message.
+- `independence.number()` is now deprecated with a warning instead of a message.
+- `clique.number()` is now deprecated with a warning instead of a message.
+- `maximal_ivs()` is now deprecated with a warning instead of a message.
+- `centralize.scores()` is now deprecated with a warning instead of a message.
+- `centralization.evcent.tmax()` is now deprecated with a warning instead of a message.
+- `centralization.evcent()` is now deprecated with a warning instead of a message.
+- `centralization.degree.tmax()` is now deprecated with a warning instead of a message.
+- `centralization.degree()` is now deprecated with a warning instead of a message.
+- `centralization.closeness.tmax()` is now deprecated with a warning instead of a message.
+- `centralization.closeness()` is now deprecated with a warning instead of a message.
+- `centralization.betweenness.tmax()` is now deprecated with a warning instead of a message.
+- `centralization.betweenness()` is now deprecated with a warning instead of a message.
+- `centr_degree_tmax()` is now defunct (errors instead of warning).
+- `centr_eigen()` is now deprecated with a warning instead of a message.
+- `centr_eigen_tmax()` is now deprecated with a warning instead of a message.
+- `subgraph.centrality()` is now deprecated with a warning instead of a message.
+- `page.rank()` is now deprecated with a warning instead of a message.
+- `hub.score()` is now defunct (errors instead of warning).
+- `authority.score()` is now defunct (errors instead of warning).
+- `graph.strength()` is now deprecated with a warning instead of a message.
+- `graph.eigen()` is now deprecated with a warning instead of a message.
+- `graph.diversity()` is now deprecated with a warning instead of a message.
+- `evcent()` is now deprecated with a warning instead of a message.
+- `edge.betweenness()` is now deprecated with a warning instead of a message.
+- `bonpow()` is now deprecated with a warning instead of a message.
+- `alpha.centrality()` is now deprecated with a warning instead of a message.
+- `estimate_betweenness()` is now deprecated with a warning instead of a message.
+- `estimate_edge_betweenness()` is now deprecated with a warning instead of a message.
+- `estimate_closeness()` is now deprecated with a warning instead of a message.
+- `arpack()` is now deprecated with a warning instead of a message.
+- `spectrum()` is now deprecated with a warning instead of a message.
+- `eigen_centrality()` is now deprecated with a warning instead of a message.
+- `eigen_centrality()` is now deprecated with a warning instead of a message.
+- `eigen_centrality()` is now defunct (errors instead of warning).
+- `authority_score()` is now deprecated with a warning instead of a message.
+- `arpack_defaults()` is now deprecated with a warning instead of a message.
+- `hub_score()` is now deprecated with a warning instead of a message.
+- `arpack_defaults()` is now deprecated with a warning instead of a message.
+- `bipartite.projection.size()` is now deprecated with a warning instead of a message.
+- `bipartite.projection()` is now deprecated with a warning instead of a message.
+- `bipartite.mapping()` is now deprecated with a warning instead of a message.
+- `get.edge()` has been removed.
+- `is.igraph()` is now deprecated with a warning instead of a message.
+- `set.vertex.attribute()` is now deprecated with a warning instead of a message.
+- `set.graph.attribute()` is now deprecated with a warning instead of a message.
+- `set.edge.attribute()` is now deprecated with a warning instead of a message.
+- `remove.vertex.attribute()` is now deprecated with a warning instead of a message.
+- `remove.graph.attribute()` is now deprecated with a warning instead of a message.
+- `remove.edge.attribute()` is now deprecated with a warning instead of a message.
+- `list.vertex.attributes()` is now deprecated with a warning instead of a message.
+- `list.graph.attributes()` is now deprecated with a warning instead of a message.
+- `list.edge.attributes()` is now deprecated with a warning instead of a message.
+- `is.weighted()` is now deprecated with a warning instead of a message.
+- `is.named()` is now deprecated with a warning instead of a message.
+- `is.bipartite()` is now deprecated with a warning instead of a message.
+- `get.vertex.attribute()` is now deprecated with a warning instead of a message.
+- `get.graph.attribute()` is now deprecated with a warning instead of a message.
+- `get.edge.attribute()` is now deprecated with a warning instead of a message.
+- `assortativity.nominal()` is now deprecated with a warning instead of a message.
+- `assortativity.degree()` is now deprecated with a warning instead of a message.
+- `assortativity()` is now deprecated with a warning instead of a message.
+- `assortativity()` is now deprecated with a warning instead of a message.
+- `assortativity()` is now deprecated with a warning instead of a message.
+- `ape::as.phylo()` is now deprecated with a warning instead of a message.
+- `graph.adjacency()` is now deprecated with a warning instead of a message.
+- `graph_from_adjacency_matrix()` is now deprecated with a warning instead of a message.
+- `graph_from_adjacency_matrix()` is now deprecated with a warning instead of a message.
+
+## Documentation
+
+- `document()` with latest roxygen2 -- for clean diffs (#2642).
+
+# igraph 2.3.1.9003
+
+- Ci: Unify fledge.yaml across cynkratemplate and fledge (#86).
+
+
+# igraph 2.3.1.9002
+
+## Chore
+
+- Add ccache to `.gitignore` and `.Rbuildignore`.
+
+## Continuous integration
+
+- Create snapshot update PR against correct branch.
+
+- Add reference to `/apply-patch` workflow in commit message.
+
+- Clarify rationale for not deploying on schedule.
+
+- Really deploy pkgdown only on push.
+
+- Disable vendoring workflow to avoid noise.
+
+- Only run fledge on pushes to main.
+
+- Tweak fledge workflow and ccache action.
+
+- Cosmetics.
+
+- Bump action versions.
+
+- Install clang-format-21.
+
+- Align fledge workflow.
+
+- Harmonize.
+
+## Uncategorized
+
+- Merge branch 'krlmlr-main'.
+
+# igraph 2.3.1.9001
+
+## Chore
+
+- Auto-update from GitHub Actions (#2624).
+
+
+# igraph 2.3.1.9000
+
+- Switching to development version.
+
+
 # igraph 2.3.4
 
 ## Bug fixes

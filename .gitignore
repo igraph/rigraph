@@ -31,3 +31,4 @@ cran
 /tests/testthat/_problems/
 /.build/
 .ccache/
+lifecycle

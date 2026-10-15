@@ -11,12 +11,13 @@
 \alias{make_neighborhood_graph}
 \title{Neighborhood of graph vertices}
 \usage{
-connect(graph, order, mode = c("all", "out", "in", "total"))
+connect(graph, order, ..., mode = c("all", "out", "in", "total"))
 
 ego_size(
   graph,
   order = 1,
-  nodes = V(graph),
+  nodes = NULL,
+  ...,
   mode = c("all", "out", "in"),
   mindist = 0
 )
@@ -24,7 +25,8 @@ ego_size(
 neighborhood_size(
   graph,
   order = 1,
-  nodes = V(graph),
+  nodes = NULL,
+  ...,
   mode = c("all", "out", "in"),
   mindist = 0
 )
@@ -32,7 +34,8 @@ neighborhood_size(
 ego(
   graph,
   order = 1,
-  nodes = V(graph),
+  nodes = NULL,
+  ...,
   mode = c("all", "out", "in"),
   mindist = 0
 )
@@ -40,7 +43,8 @@ ego(
 neighborhood(
   graph,
   order = 1,
-  nodes = V(graph),
+  nodes = NULL,
+  ...,
   mode = c("all", "out", "in"),
   mindist = 0
 )
@@ -48,7 +52,8 @@ neighborhood(
 make_ego_graph(
   graph,
   order = 1,
-  nodes = V(graph),
+  nodes = NULL,
+  ...,
   mode = c("all", "out", "in"),
   mindist = 0
 )
@@ -56,7 +61,8 @@ make_ego_graph(
 make_neighborhood_graph(
   graph,
   order = 1,
-  nodes = V(graph),
+  nodes = NULL,
+  ...,
   mode = c("all", "out", "in"),
   mindist = 0
 )
@@ -67,6 +73,8 @@ make_neighborhood_graph(
 \item{order}{Integer giving the order of the neighborhood. Negative values
 indicate an infinite order.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{mode}{Character constant, it specifies how to use the direction of
 the edges if a directed graph is analyzed. For \sQuote{out} only the
 outgoing edges are followed, so all vertices reachable from the source
@@ -75,7 +83,8 @@ vertices from which the source vertex is reachable in at most \code{order}
 steps are counted. \sQuote{"all"} ignores the direction of the edges. This
 argument is ignored for undirected graphs.}
 
-\item{nodes}{The vertices for which the calculation is performed.}
+\item{nodes}{The vertices for which the calculation is performed.
+The default \code{NULL} selects all vertices.}
 
 \item{mindist}{The minimum distance to include the vertex in the result.}
 }

@@ -4,10 +4,12 @@
 \alias{identical_graphs}
 \title{Decide if two graphs are identical}
 \usage{
-identical_graphs(g1, g2, attrs = TRUE)
+identical_graphs(g1, g2, ..., attrs = TRUE)
 }
 \arguments{
 \item{g1, g2}{The two graphs}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{attrs}{Whether to compare the attributes of the graphs}
 }

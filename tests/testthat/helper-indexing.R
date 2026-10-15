@@ -24,9 +24,8 @@ make_test_weighted_tree <- function() {
 }
 
 make_scan_graphs <- function(version = 1) {
-  local_rng_version("3.5.0")
   if (version == 1) {
-    withr::local_seed(12345)
+    igraph_local_seed(12345, rng_version = "3.5.0")
     n <- 10^3
     p <- 0.1
     g <- sample_gnp(n, p)
@@ -36,7 +35,7 @@ make_scan_graphs <- function(version = 1) {
 
     list(g = g, gp = gp)
   } else if (version == 2) {
-    withr::local_seed(42)
+    igraph_local_seed(42, rng_version = "3.5.0")
     n <- 10^3
     p <- 0.1
     g <- sample_gnp(n, p, directed = TRUE)

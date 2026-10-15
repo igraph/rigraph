@@ -228,7 +228,7 @@ Add tests in two locations:
 
 ```r
 test_that("cliques_callback_closure_impl basic", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   local_igraph_options(print.id = FALSE)
 
   g <- make_full_graph(4)
@@ -262,7 +262,7 @@ test_that("cliques_callback_closure_impl basic", {
 })
 
 test_that("cliques_callback_closure_impl errors", {
-  withr::local_seed(20250909)
+  igraph_local_seed(20250909)
   local_igraph_options(print.id = FALSE)
 
   g <- make_full_graph(4)
@@ -282,7 +282,7 @@ test_that("cliques_callback_closure_impl errors", {
 
 ```r
 test_that("cliques_callback works", {
-  withr::local_seed(123)
+  igraph_local_seed(123)
   g <- sample_gnp(20, 0.3)
 
   count <- 0
@@ -318,7 +318,7 @@ test_that("cliques_callback handles errors in callback", {
 
 ### Testing Pattern
 
-- Use `withr::local_seed(20250909)` for reproducibility
+- Use `igraph_local_seed(20250909)` for reproducibility
 - Use `local_igraph_options(print.id = FALSE)` for stable snapshots
 - Both snapshot tests (`expect_snapshot`) and structured tests (`expect_*`)
 - Test basic functionality, early stopping, error handling, and argument types

@@ -27,7 +27,8 @@ for all but small graphs.  \code{"arpack"} uses the ARPACK library, the
 default implementation from igraph version 0.5 until version 0.7. It computes
 PageRank scores by solving an eingevalue problem.}
 
-\item{vids}{The vertices of interest.}
+\item{vids}{The vertices of interest.
+The default \code{NULL} selects all vertices.}
 
 \item{directed}{Logical, if true directed paths will be considered for
 directed graphs. It is ignored for undirected graphs.}

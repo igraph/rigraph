@@ -2,32 +2,32 @@
 % Please edit documentation in R/layout.R
 \name{layout_as_tree}
 \alias{layout_as_tree}
-\alias{as_tree}
 \title{The Reingold-Tilford graph layout algorithm}
 \usage{
 layout_as_tree(
   graph,
+  ...,
   root = numeric(),
   circular = FALSE,
   rootlevel = numeric(),
   mode = c("out", "in", "all"),
   flip.y = TRUE
 )
-
-as_tree(...)
 }
 \arguments{
 \item{graph}{The input graph.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{root}{The index of the root vertex or root vertices.  If this is a
-non-empty vector then the supplied vertex ids are used as the roots of the
+non-empty vector then the supplied vertex IDs are used as the roots of the
 trees (or a single tree if the graph is connected).  If it is an empty
 vector, then the root vertices are automatically calculated based on
 topological sorting, performed with the opposite mode than the \code{mode}
 argument. After the vertices have been sorted, one is selected from each
 component.}
 
-\item{circular}{Logical scalar, whether to plot the tree in a circular
+\item{circular}{Logical, whether to plot the tree in a circular
 fashion. Defaults to \code{FALSE}, so the tree branches are going bottom-up
 (or top-down, see the \code{flip.y} argument.}
 
@@ -43,10 +43,8 @@ edges are used (this was the behavior in igraph 0.5 and before). This
 parameter also influences how the root vertices are calculated, if they are
 not given. See the \code{roots} parameter.}
 
-\item{flip.y}{Logical scalar, whether to flip the \sQuote{y} coordinates.
+\item{flip.y}{Logical, whether to flip the \sQuote{y} coordinates.
 The default is flipping because that puts the root vertex on the top.}
-
-\item{...}{Passed to \code{layout_as_tree()}.}
 }
 \value{
 A numeric matrix with two columns, and one row for each vertex.
@@ -86,6 +84,9 @@ Reingold, E and Tilford, J (1981). Tidier drawing of trees.
 \emph{IEEE Trans. on Softw. Eng.}, SE-7(2):223--228.
 }
 \seealso{
+\code{\link[=as_tree]{as_tree()}} to build a lazy layout specification for
+\code{\link[=add_layout_]{add_layout_()}}.
+
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},
 \code{\link[=component_wise]{component_wise()}},

@@ -5,12 +5,14 @@
 \alias{full_citation_graph}
 \title{Create a complete (full) citation graph}
 \usage{
-make_full_citation_graph(n, directed = TRUE)
+make_full_citation_graph(n, ..., directed = TRUE)
 
-full_citation_graph(n, directed = TRUE)
+full_citation_graph(n, ..., directed = TRUE)
 }
 \arguments{
 \item{n}{The number of vertices.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{directed}{Whether to create a directed graph.}
 }

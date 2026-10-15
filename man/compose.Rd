@@ -5,18 +5,35 @@
 \alias{\%c\%}
 \title{Compose two graphs as binary relations}
 \usage{
-compose(g1, g2, byname = "auto")
+compose(
+  g1,
+  g2,
+  ...,
+  byname = "auto",
+  graph_attr_combine = NULL,
+  vertex_attr_combine = "rename",
+  edge_attr_combine = "rename"
+)
 }
 \arguments{
 \item{g1}{The first input graph.}
 
 \item{g2}{The second input graph.}
 
-\item{byname}{A logical scalar, or the character scalar \code{auto}. Whether
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{byname}{A Logical, or the character scalar \code{auto}. Whether
 to perform the operation based on symbolic vertex names. If it is
 \code{auto}, that means \code{TRUE} if both graphs are named and
 \code{FALSE} otherwise. A warning is generated if \code{auto} and one graph,
 but not both graphs are named.}
+
+\item{graph_attr_combine, vertex_attr_combine, edge_attr_combine}{Specification for
+combining clashing graph, vertex and edge attributes. \code{vertex_attr_combine}
+and \code{edge_attr_combine} default to \code{"rename"}; \code{graph_attr_combine} defaults to
+the \code{graph_attr_combine} igraph option (\code{"rename"} unless changed via
+\code{\link[=igraph_options]{igraph_options()}}). See \link{igraph-attribute-combination} for the available
+combiners.}
 }
 \value{
 A new graph object.
@@ -35,12 +52,14 @@ other is undirected.
 
 If the \code{byname} argument is \code{TRUE} (or \code{auto} and the graphs
 are all named), then the operation is performed based on symbolic vertex
-names. Otherwise numeric vertex ids are used.
+names. Otherwise numeric vertex IDs are used.
 
 \code{compose()} keeps the attributes of both graphs. All graph, vertex
-and edge attributes are copied to the result. If an attribute is present in
-multiple graphs and would result a name clash, then this attribute is
-renamed by adding suffixes: _1, _2, etc.
+and edge attributes are copied to the result. By default, if an attribute
+is present in both graphs and would result in a name clash, that attribute
+is renamed by adding suffixes: \verb{_1}, \verb{_2}. Pass \code{graph_attr_combine},
+\code{vertex_attr_combine} or \code{edge_attr_combine} to combine clashing attributes
+instead; see \link{igraph-attribute-combination} for the available combiners.
 
 The \code{name} vertex attribute is treated specially if the operation is
 performed based on symbolic vertex names. In this case \code{name} must be
@@ -62,7 +81,7 @@ g1 and g2, respectively, then (a,a) is included in the result. See
 \code{\link[=simplify]{simplify()}} if you want to get rid of the self-loops.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_permute_vertices}{\code{permute_vertices()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_permute_vertices}{\code{permute_vertices()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
 }
 
 \examples{

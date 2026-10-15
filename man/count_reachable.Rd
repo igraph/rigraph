@@ -4,10 +4,12 @@
 \alias{count_reachable}
 \title{Count reachable vertices}
 \usage{
-count_reachable(graph, mode = c("out", "in", "all", "total"))
+count_reachable(graph, ..., mode = c("out", "in", "all", "total"))
 }
 \arguments{
 \item{graph}{The input graph.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character constant, defines how edge directions are considered
 in directed graphs.

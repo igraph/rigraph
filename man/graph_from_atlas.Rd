@@ -10,7 +10,7 @@ graph_from_atlas(n)
 atlas(n)
 }
 \arguments{
-\item{n}{The id of the graph to create.}
+\item{n}{The ID of the graph to create.}
 }
 \value{
 An igraph graph.

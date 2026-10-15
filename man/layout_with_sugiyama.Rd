@@ -2,11 +2,11 @@
 % Please edit documentation in R/layout.R
 \name{layout_with_sugiyama}
 \alias{layout_with_sugiyama}
-\alias{with_sugiyama}
 \title{The Sugiyama graph layout generator}
 \usage{
 layout_with_sugiyama(
   graph,
+  ...,
   layers = NULL,
   hgap = 1,
   vgap = 1,
@@ -14,15 +14,15 @@ layout_with_sugiyama(
   weights = NULL,
   attributes = c("default", "all", "none")
 )
-
-with_sugiyama(...)
 }
 \arguments{
 \item{graph}{The input graph.}
 
-\item{layers}{A numeric vector or \code{NULL}. If not \code{NULL}, then it
-should specify the layer index of the vertices. Layers are numbered from
-one. If \code{NULL}, then igraph calculates the layers automatically.}
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{layers}{A numeric vector of the layer indices of the vertices.
+Layers are numbered from one.
+Default: \code{NULL}, igraph calculates the layers automatically.}
 
 \item{hgap}{Real scalar, the minimum horizontal gap between vertices in the
 same layer.}
@@ -45,8 +45,6 @@ graph. \sQuote{default} keeps the \sQuote{size}, \sQuote{size2},
 \sQuote{arrow.mode} and \sQuote{arrow.size} edge attributes. \sQuote{all}
 keep all graph, vertex and edge attributes, \sQuote{none} keeps none of
 them.}
-
-\item{...}{Passed to \code{layout_with_sugiyama()}.}
 }
 \value{
 A list with the components:
@@ -160,7 +158,7 @@ lay1 <- layout_with_sugiyama(DC, layers = apply(sapply(
 ), 1, which))
 
 ## Simple plot, not very nice
-par(mar = rep(.1, 4))
+par(mar = rep(0.1, 4))
 plot(DC, layout = lay1$layout, vertex.label.cex = 0.5)
 
 ## Sugiyama plot
@@ -228,7 +226,7 @@ origvert <- c(rep(TRUE, vcount(ex)), rep(FALSE, nrow(layex$layout.dummy)))
 realedge <- as_edgelist(layex$extd_graph)[, 2] <= vcount(ex)
 plot(layex$extd_graph,
   vertex.label.cex = 0.5,
-  edge.arrow.size = .5,
+  edge.arrow.size = 0.5,
   vertex.size = ifelse(origvert, 5, 0),
   vertex.shape = ifelse(origvert, "square", "none"),
   vertex.label = ifelse(origvert, V(ex)$name, ""),
@@ -242,6 +240,9 @@ Understanding of Hierarchical Systems". IEEE Transactions on Systems, Man
 and Cybernetics 11(2):109-125, 1981.
 }
 \seealso{
+\code{\link[=with_sugiyama]{with_sugiyama()}} to build a lazy layout specification for
+\code{\link[=add_layout_]{add_layout_()}}.
+
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},
 \code{\link[=component_wise]{component_wise()}},

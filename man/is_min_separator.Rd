@@ -10,11 +10,11 @@ is_min_separator(graph, candidate)
 \item{graph}{The input graph. It may be directed, but edge directions are
 ignored.}
 
-\item{candidate}{A numeric vector giving the vertex ids of the candidate
+\item{candidate}{A numeric vector giving the vertex IDs of the candidate
 separator.}
 }
 \value{
-A logical scalar, whether the supplied vertex set is a (minimal)
+A Logical, whether the supplied vertex set is a (minimal)
 vertex separator or not.
 }
 \description{

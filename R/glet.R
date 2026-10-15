@@ -16,7 +16,7 @@ graphlets.project <- function(
   Mu = rep(1, length(cliques))
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graphlets.project()", "graphlet_proj()")
+  lifecycle::deprecate_warn("2.0.0", "graphlets.project()", "graphlet_proj()")
   graphlet_proj(
     graph = graph,
     weights = weights,
@@ -38,7 +38,7 @@ graphlets.project <- function(
 #' @export
 graphlets.candidate.basis <- function(graph, weights = NULL) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "graphlets.candidate.basis()",
     "graphlet_basis()"
@@ -64,18 +64,20 @@ graphlets.candidate.basis <- function(graph, weights = NULL) {
 #'
 #' @param graph The input graph, edge directions are ignored. Only simple graph
 #'   (i.e. graphs without self-loops and multiple edges) are supported.
+#' @inheritParams rlang::args_dots_empty
 #' @param weights Edge weights. If the graph has a `weight` edge attribute
 #'   and this argument is `NULL` (the default), then the `weight` edge
 #'   attribute is used.
 #' @param niter Integer scalar, the number of iterations to perform.
-#' @param cliques A list of vertex ids, the graphlet basis to use for the
+#' @param cliques A list of vertex IDs, the graphlet basis to use for the
 #'   projection.
-#' @param Mu Starting weights for the projection.
+#' @param Mu Starting weights for the projection. The default `NULL` uses a
+#'   weight of one for each clique.
 #' @return `graphlets()` returns a list with two members:
 #'   \describe{
 #'     \item{cliques}{
 #'       A list of subgraphs, the candidate graphlet basis.
-#'       Each subgraph is give by a vector of vertex ids.
+#'       Each subgraph is give by a vector of vertex IDs.
 #'     }
 #'     \item{Mu}{
 #'       The weights of the subgraphs in graphlet basis.
@@ -86,7 +88,7 @@ graphlets.candidate.basis <- function(graph, weights = NULL) {
 #'   \describe{
 #'     \item{cliques}{
 #'       A list of subgraphs, the candidate graphlet basis.
-#'       Each subgraph is give by a vector of vertex ids.
+#'       Each subgraph is give by a vector of vertex IDs.
 #'     }
 #'     \item{thresholds}{
 #'       The weight thresholds used for finding the subgraphs.
@@ -121,7 +123,7 @@ graphlets.candidate.basis <- function(graph, weights = NULL) {
 #' gl <- graphlets(g, niter = 1000)
 #'
 #' ## Plot graphlets
-#' for (i in 1:length(gl$cliques)) {
+#' for (i in seq_along(gl$cliques)) {
 #'   sel <- gl$cliques[[i]]
 #'   V(g)$color <- "white"
 #'   V(g)[sel]$color <- "#E495A5"
@@ -135,7 +137,46 @@ graphlets.candidate.basis <- function(graph, weights = NULL) {
 #' }
 #' @family glet
 #' @export
-graphlet_basis <- function(graph, weights = NULL) {
+graphlet_basis <- function(
+  graph,
+  ...,
+  weights = NULL
+) {
+  # BEGIN GENERATED ARG_HANDLE: graphlet_basis, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: graphlet_basis(graph, weights)
+    .old_signature <- function(weights, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn graphlet_basis}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn graphlet_basis}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(weights)) base::list(weights = weights)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(weights)) "weights"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn graphlet_basis} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `graphlet_basis()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  graphlet_basis(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    graphlet_basis(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   graphlets_candidate_basis_impl(
     graph = graph,
     weights = weights
@@ -143,20 +184,67 @@ graphlet_basis <- function(graph, weights = NULL) {
 }
 
 #' @rdname graphlet_basis
+#' @inheritParams rlang::args_dots_empty
 #' @export
 graphlet_proj <- function(
   graph,
+  ...,
   weights = NULL,
   cliques,
   niter = 1000,
-  Mu = rep(1, length(cliques))
+  Mu = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: graphlet_proj, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: graphlet_proj(graph, weights, cliques, niter, Mu)
+    .old_signature <- function(weights, cliques, niter, Mu, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn graphlet_proj}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn graphlet_proj}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(cliques)) base::list(cliques = cliques),
+        if (!base::missing(niter)) base::list(niter = niter),
+        if (!base::missing(Mu)) base::list(Mu = Mu)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(cliques)) "cliques",
+        if (!base::missing(niter)) "niter",
+        if (!base::missing(Mu)) "Mu"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn graphlet_proj} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `graphlet_proj()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  graphlet_proj(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    graphlet_proj(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   ensure_igraph(graph)
+  if (is.null(Mu)) {
+    Mu <- rep(1, length(cliques))
+  }
+
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -190,7 +278,7 @@ function() {
     co <- layout_with_kk(g)
     par(mar = c(1, 1, 1, 1))
     plot(g, layout = co)
-    for (i in 1:length(gl$Bc)) {
+    for (i in seq_along(gl$Bc)) {
       sel <- gl$Bc[[i]]
       V(g)$color <- "white"
       V(g)[sel]$color <- "#E495A5"
@@ -228,8 +316,51 @@ function() {
 }
 
 #' @rdname graphlet_basis
+#' @inheritParams rlang::args_dots_empty
 #' @export
-graphlets <- function(graph, weights = NULL, niter = 1000) {
+graphlets <- function(
+  graph,
+  ...,
+  weights = NULL,
+  niter = 1000
+) {
+  # BEGIN GENERATED ARG_HANDLE: graphlets, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: graphlets(graph, weights, niter)
+    .old_signature <- function(weights, niter, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn graphlets}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn graphlets}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(niter)) base::list(niter = niter)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(niter)) "niter"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn graphlets} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `graphlets()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  graphlets(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    graphlets(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   graphlets_impl(
     graph = graph,
     weights = weights,

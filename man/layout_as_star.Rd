@@ -2,23 +2,20 @@
 % Please edit documentation in R/layout.R
 \name{layout_as_star}
 \alias{layout_as_star}
-\alias{as_star}
 \title{Generate coordinates to place the vertices of a graph in a star-shape}
 \usage{
-layout_as_star(graph, center = V(graph)[1], order = NULL)
-
-as_star(...)
+layout_as_star(graph, ..., center = NULL, order = NULL)
 }
 \arguments{
 \item{graph}{The graph to layout.}
 
-\item{center}{The id of the vertex to put in the center. By default it is
-the first vertex.}
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{center}{The ID of the vertex to put in the center. The default
+\code{NULL} uses the first vertex.}
 
 \item{order}{Numeric vector, the order of the vertices along the perimeter.
-The default ordering is given by the vertex ids.}
-
-\item{...}{Arguments to pass to \code{layout_as_star()}.}
+The default ordering is given by the vertex IDs.}
 }
 \value{
 A matrix with two columns and as many rows as the number of vertices
@@ -47,7 +44,8 @@ layout_(g, as_star())
 \seealso{
 \code{\link[=layout]{layout()}} and \code{\link[=layout_with_drl]{layout_with_drl()}} for other layout
 algorithms, \code{\link[=plot.igraph]{plot.igraph()}} and \code{\link[=tkplot]{tkplot()}} on how to
-plot graphs and \code{\link[=star]{star()}} on how to create ring graphs.
+plot graphs and \code{\link[=star]{star()}} on how to create ring graphs. See \code{\link[=as_star]{as_star()}} to
+build a lazy layout specification for \code{\link[=add_layout_]{add_layout_()}}.
 
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},

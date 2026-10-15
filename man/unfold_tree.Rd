@@ -4,10 +4,12 @@
 \alias{unfold_tree}
 \title{Convert a general graph into a forest}
 \usage{
-unfold_tree(graph, mode = c("all", "out", "in", "total"), roots)
+unfold_tree(graph, ..., mode = c("all", "out", "in", "total"), roots)
 }
 \arguments{
 \item{graph}{The input graph, it can be either directed or undirected.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character string, defined the types of the paths used for the
 breadth-first search. \dQuote{out} follows the outgoing, \dQuote{in} the

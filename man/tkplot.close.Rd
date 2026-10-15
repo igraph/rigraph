@@ -7,7 +7,7 @@
 tkplot.close(tkp.id, window.close = TRUE)
 }
 \arguments{
-\item{tkp.id}{The id of the tkplot window to close/reshape/etc.}
+\item{tkp.id}{The ID of the tkplot window to close/reshape/etc.}
 
 \item{window.close}{Leave this on the default value.}
 }

@@ -4,11 +4,13 @@
 \alias{sample_spanning_tree}
 \title{Samples from the spanning trees of a graph randomly and uniformly}
 \usage{
-sample_spanning_tree(graph, vid = 0)
+sample_spanning_tree(graph, ..., vid = 0)
 }
 \arguments{
 \item{graph}{The input graph to sample from. Edge directions are ignored if
 the graph is directed.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{vid}{When the graph is disconnected, this argument specifies how to
 handle the situation. When the argument is zero (the default), the sampling

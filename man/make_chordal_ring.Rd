@@ -5,9 +5,9 @@
 \alias{chordal_ring}
 \title{Create an extended chordal ring graph}
 \usage{
-make_chordal_ring(n, w, directed = FALSE)
+make_chordal_ring(n, w, ..., directed = FALSE)
 
-chordal_ring(n, w, directed = FALSE)
+chordal_ring(n, w, ..., directed = FALSE)
 }
 \arguments{
 \item{n}{The number of vertices.}
@@ -15,7 +15,9 @@ chordal_ring(n, w, directed = FALSE)
 \item{w}{A matrix which specifies the extended chordal ring. See
 details below.}
 
-\item{directed}{Logical scalar, whether or not to create a directed graph.}
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{directed}{Logical, whether or not to create a directed graph.}
 }
 \value{
 An igraph graph.

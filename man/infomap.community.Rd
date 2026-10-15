@@ -15,15 +15,15 @@ infomap.community(
 \arguments{
 \item{graph}{The input graph. Edge directions will be taken into account.}
 
-\item{e.weights}{If not \code{NULL}, then a numeric vector of edge weights.
-The length must match the number of edges in the graph.  By default the
+\item{e.weights}{Numeric vector of edge weights.
+The length must match the number of edges in the graph.  By default (\code{NULL}) the
 \sQuote{\code{weight}} edge attribute is used as weights. If it is not
 present, then all edges are considered to have the same weight.
 Larger edge weights correspond to stronger connections.}
 
-\item{v.weights}{If not \code{NULL}, then a numeric vector of vertex
+\item{v.weights}{Numeric vector of vertex
 weights. The length must match the number of vertices in the graph.  By
-default the \sQuote{\code{weight}} vertex attribute is used as weights. If
+default (\code{NULL}) the \sQuote{\code{weight}} vertex attribute is used as weights. If
 it is not present, then all vertices are considered to have the same weight.
 A larger vertex weight means a larger probability that the random surfer
 jumps to that vertex.}
@@ -31,7 +31,7 @@ jumps to that vertex.}
 \item{nb.trials}{The number of attempts to partition the network (can be any
 integer value equal or larger than 1).}
 
-\item{modularity}{Logical scalar, whether to calculate the modularity score
+\item{modularity}{Logical, whether to calculate the modularity score
 of the detected community structure.}
 }
 \description{

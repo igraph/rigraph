@@ -5,9 +5,9 @@
 \alias{smallworld}
 \title{The Watts-Strogatz small-world model}
 \usage{
-sample_smallworld(dim, size, nei, p, loops = FALSE, multiple = FALSE)
+sample_smallworld(dim, size, nei, p, ..., loops = FALSE, multiple = FALSE)
 
-smallworld(dim, size, nei, p, loops = FALSE, multiple = FALSE)
+smallworld(dim, size, nei, p, ..., loops = FALSE, multiple = FALSE)
 }
 \arguments{
 \item{dim}{Integer constant, the dimension of the starting lattice.}
@@ -19,10 +19,12 @@ the lattice will be connected.}
 
 \item{p}{Real constant between zero and one, the rewiring probability.}
 
-\item{loops}{Logical scalar, whether loops edges are allowed in the
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{loops}{Logical, whether loops edges are allowed in the
 generated graph.}
 
-\item{multiple}{Logical scalar, whether multiple edges are allowed int the
+\item{multiple}{Logical, whether multiple edges are allowed int the
 generated graph.}
 }
 \value{

@@ -19,7 +19,7 @@ test_that("greedy_vertex_coloring works on named graphs", {
   V(g)$name <- LETTERS[1:vcount(g)]
   vc <- greedy_vertex_coloring(g)
   expect_equal(as.vector(vc), c(1, rep(2, vcount(g) - 1)))
-  expect_equal(names(vc), V(g)$name)
+  expect_named(vc, V(g)$name)
 })
 
 test_that("simplify_and_colorize works", {
@@ -31,4 +31,16 @@ test_that("simplify_and_colorize works", {
   expect_equal(as_edgelist(result), matrix(c(1:4, 2:5), ncol = 2))
   expect_equal(V(result)$color, c(0, 0, 0, 0, 1))
   expect_equal(E(result)$color, c(1, 4, 1, 2))
+})
+
+# ---- ellipsis migration: argument coverage ----------------------------------
+# The `heuristic` tail argument is already exercised by name in the tests above,
+# so here we only cover the legacy positional recovery path.
+
+test_that("greedy_vertex_coloring() recovers a legacy positional `heuristic`", {
+  g <- make_star(10, mode = "undirected")
+  lifecycle::expect_deprecated(
+    col <- greedy_vertex_coloring(g, "dsatur")
+  )
+  expect_identical(col, greedy_vertex_coloring(g, heuristic = "dsatur"))
 })

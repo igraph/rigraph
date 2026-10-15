@@ -79,7 +79,7 @@ test_that("graph.get.subisomorphisms.vf2() works even if the graph has a vertex 
   g <- make_full_graph(4)
   V(g)$x <- 1:4
   subs <- graph.get.subisomorphisms.vf2(g, make_ring(4))
-  expect_equal(length(subs), 24)
+  expect_length(subs, 24)
 })
 
 test_that("VF2 isomorphism considers colors", {
@@ -92,6 +92,7 @@ test_that("VF2 isomorphism considers colors", {
 })
 
 test_that("canonical_permutation works", {
+  igraph_local_seed(42)
   g1 <- sample_gnm(10, 20)
   cp1 <- canonical_permutation(g1)
   cf1 <- permute(g1, cp1$labeling)
@@ -160,31 +161,30 @@ test_that("graph.subisomorphic, method = 'lad' works", {
 })
 
 test_that("LAD stress test", {
-  local_rng_version("3.5.0")
-  withr::local_seed(42)
+  igraph_local_seed(42, rng_version = "3.5.0")
   N <- 100
 
   for (i in 1:N) {
-    target <- sample_gnp(20, .5)
+    target <- sample_gnp(20, 0.5)
     pn <- sample(4:18, 1)
     pattern <- induced_subgraph(target, sample(vcount(target), pn))
     iso <- subgraph_isomorphic(pattern, target, induced = TRUE, method = "lad")
     expect_true(iso)
   }
 
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   for (i in 1:N) {
     target <- sample_gnp(20, 1 / 20)
     pn <- sample(5:18, 1)
-    pattern <- sample_gnp(pn, .6)
+    pattern <- sample_gnp(pn, 0.6)
     iso <- subgraph_isomorphic(pattern, target, induced = TRUE, method = "lad")
     expect_false(iso)
   }
 })
 
 test_that("graph.subisomorphic.vf2 works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   gnp1 <- sample_gnp(20, 6 / 20)
   gnp2 <- sample_gnp(20, 6 / 20)
@@ -431,7 +431,7 @@ test_that("transitive_closure preserves isolated vertices", {
 
 # Tests for isomorphism callback functions
 test_that("isomorphisms works with callback", {
-  withr::local_seed(123)
+  igraph_local_seed(123)
 
   # Create two isomorphic graphs
   g1 <- make_ring(8)
@@ -453,6 +453,7 @@ test_that("isomorphisms works with callback", {
 })
 
 test_that("isomorphisms can stop early", {
+  igraph_local_seed(42)
   # Create two isomorphic graphs
   g1 <- make_ring(6)
   g2 <- permute(g1, sample(vcount(g1)))
@@ -473,6 +474,7 @@ test_that("isomorphisms can stop early", {
 })
 
 test_that("isomorphisms receives correct arguments", {
+  igraph_local_seed(42)
   g1 <- make_ring(5)
   g2 <- permute(g1, sample(vcount(g1)))
 
@@ -482,10 +484,10 @@ test_that("isomorphisms receives correct arguments", {
 
   # Check argument types
   isomorphisms(g1, g2, method = "vf2", callback = function(map12, map21) {
-    expect_true(is.integer(map12))
-    expect_true(is.integer(map21))
-    expect_equal(length(map12), n1)
-    expect_equal(length(map21), n2)
+    expect_type(map12, "integer")
+    expect_type(map21, "integer")
+    expect_length(map12, n1)
+    expect_length(map21, n2)
     FALSE # stop after first isomorphism
   })
 })
@@ -504,7 +506,7 @@ test_that("isomorphisms handles errors in callback", {
 })
 
 test_that("subisomorphisms works with callback works", {
-  withr::local_seed(123)
+  igraph_local_seed(123)
 
   # Find triangles in a larger graph
   g1 <- make_ring(3) # triangle
@@ -570,10 +572,10 @@ test_that("subisomorphisms works with callback receives correct arguments", {
     g2,
     method = "vf2",
     callback = function(map12, map21) {
-      expect_true(is.integer(map12))
-      expect_true(is.integer(map21))
-      expect_equal(length(map12), n1)
-      expect_equal(length(map21), n2)
+      expect_type(map12, "integer")
+      expect_type(map21, "integer")
+      expect_length(map12, n1)
+      expect_length(map21, n2)
       FALSE # stop after first subisomorphism
     }
   )
@@ -598,4 +600,266 @@ test_that("subisomorphisms works with callback handles errors in callback", {
     ),
     "Error in R callback function"
   )
+})
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+test_that("graph.subisomorphic.lad() tail arguments and legacy positional recovery", {
+  path <- make_ring(3, circular = FALSE)
+  ring <- make_ring(4)
+  # Restrict the middle path vertex to ring vertex 2.
+  domains <- list(c(1, 3), 2, c(1, 3))
+
+  res <- graph.subisomorphic.lad(
+    path,
+    ring,
+    domains = domains,
+    induced = TRUE,
+    map = FALSE,
+    all.maps = TRUE,
+    time.limit = 60
+  )
+  expect_true(res$iso)
+  # Both maps must route the middle path vertex through ring vertex 2.
+  expect_length(res$maps, 2)
+  expect_true(
+    all(vapply(res$maps, function(m) as.vector(m)[[2]], numeric(1)) == 2)
+  )
+
+  lifecycle::expect_deprecated(
+    res2 <- graph.subisomorphic.lad(path, ring, domains)
+  )
+  expect_identical(res2, graph.subisomorphic.lad(path, ring, domains = domains))
+})
+
+test_that("graph.isomorphic.bliss() tail arguments and legacy positional recovery", {
+  ring <- make_ring(4)
+
+  # The block coloring and the alternating coloring of a 4-ring are not
+  # isomorphic as colored graphs.
+  res <- graph.isomorphic.bliss(
+    ring,
+    ring,
+    colors1 = c(1, 1, 2, 2),
+    colors2 = c(1, 2, 1, 2),
+    sh = "fl"
+  )
+  expect_false(res$iso)
+
+  # With identical colorings the graphs remain isomorphic.
+  res_same <- graph.isomorphic.bliss(
+    ring,
+    ring,
+    colors1 = c(1, 2, 1, 2),
+    colors2 = c(1, 2, 1, 2),
+    sh = "fl"
+  )
+  expect_true(res_same$iso)
+
+  lifecycle::expect_deprecated(
+    res2 <- graph.isomorphic.bliss(ring, ring, c(1, 1, 2, 2), c(1, 2, 1, 2))
+  )
+  expect_identical(
+    res2,
+    graph.isomorphic.bliss(
+      ring,
+      ring,
+      colors1 = c(1, 1, 2, 2),
+      colors2 = c(1, 2, 1, 2)
+    )
+  )
+})
+
+test_that("graph.isomorphic.vf2() tail arguments and legacy positional recovery", {
+  tri <- make_ring(3)
+
+  res <- graph.isomorphic.vf2(
+    tri,
+    tri,
+    vertex.color1 = c(1, 2, 3),
+    vertex.color2 = c(1, 2, 3),
+    edge.color1 = c(1, 1, 2),
+    edge.color2 = c(1, 1, 2)
+  )
+  expect_true(res$iso)
+  expect_equal(res$map12, 1:3)
+
+  # Different vertex color multiplicities break the colored isomorphism.
+  res_no <- graph.isomorphic.vf2(
+    tri,
+    tri,
+    vertex.color1 = c(1, 1, 2),
+    vertex.color2 = c(1, 2, 2)
+  )
+  expect_false(res_no$iso)
+
+  lifecycle::expect_deprecated(
+    res2 <- graph.isomorphic.vf2(tri, tri, c(1, 2, 3), c(1, 2, 3))
+  )
+  expect_identical(
+    res2,
+    graph.isomorphic.vf2(
+      tri,
+      tri,
+      vertex.color1 = c(1, 2, 3),
+      vertex.color2 = c(1, 2, 3)
+    )
+  )
+})
+
+test_that("graph.subisomorphic.vf2() tail arguments and legacy positional recovery", {
+  full <- make_full_graph(4)
+  tri <- make_ring(3)
+
+  res <- graph.subisomorphic.vf2(
+    full,
+    tri,
+    vertex.color1 = c(1, 1, 1, 2),
+    vertex.color2 = c(1, 1, 1),
+    edge.color1 = rep(1, 6),
+    edge.color2 = rep(1, 3)
+  )
+  expect_true(res$iso)
+  # The triangle can only map onto the three like-colored vertices.
+  expect_true(all(res$map21 <= 3))
+
+  lifecycle::expect_deprecated(
+    res2 <- graph.subisomorphic.vf2(full, tri, c(1, 1, 1, 2), c(1, 1, 1))
+  )
+  expect_identical(
+    res2,
+    graph.subisomorphic.vf2(
+      full,
+      tri,
+      vertex.color1 = c(1, 1, 1, 2),
+      vertex.color2 = c(1, 1, 1)
+    )
+  )
+})
+
+test_that("graph.count.isomorphisms.vf2() tail arguments and legacy positional recovery", {
+  tri <- make_ring(3)
+
+  # Mutually distinct vertex colors leave only the identity mapping.
+  res <- graph.count.isomorphisms.vf2(
+    tri,
+    tri,
+    vertex.color1 = c(1, 2, 3),
+    vertex.color2 = c(1, 2, 3),
+    edge.color1 = c(2, 2, 2),
+    edge.color2 = c(2, 2, 2)
+  )
+  expect_equal(res, 1)
+
+  lifecycle::expect_deprecated(
+    res2 <- graph.count.isomorphisms.vf2(tri, tri, c(1, 2, 3), c(1, 2, 3))
+  )
+  expect_identical(
+    res2,
+    graph.count.isomorphisms.vf2(
+      tri,
+      tri,
+      vertex.color1 = c(1, 2, 3),
+      vertex.color2 = c(1, 2, 3)
+    )
+  )
+})
+
+test_that("graph.count.subisomorphisms.vf2() tail arguments and legacy positional recovery", {
+  full <- make_full_graph(4)
+  tri <- make_ring(3)
+
+  # Uncolored, the triangle maps into the full graph in 24 ways.
+  # Coloring one vertex differently leaves the 6 mappings within the
+  # like-colored triangle.
+  res <- graph.count.subisomorphisms.vf2(
+    full,
+    tri,
+    vertex.color1 = c(1, 1, 1, 2),
+    vertex.color2 = c(1, 1, 1),
+    edge.color1 = rep(1, 6),
+    edge.color2 = rep(1, 3)
+  )
+  expect_equal(res, 6)
+  expect_equal(graph.count.subisomorphisms.vf2(full, tri), 24)
+
+  lifecycle::expect_deprecated(
+    res2 <- graph.count.subisomorphisms.vf2(
+      full,
+      tri,
+      c(1, 1, 1, 2),
+      c(1, 1, 1)
+    )
+  )
+  expect_identical(
+    res2,
+    graph.count.subisomorphisms.vf2(
+      full,
+      tri,
+      vertex.color1 = c(1, 1, 1, 2),
+      vertex.color2 = c(1, 1, 1)
+    )
+  )
+})
+
+test_that("graph_from_isomorphism_class() tail arguments and legacy positional recovery", {
+  # Undirected isomorphism class 3 on 3 vertices is the triangle.
+  g <- graph_from_isomorphism_class(3, 3, directed = FALSE)
+  expect_false(is_directed(g))
+  expect_equal(vcount(g), 3)
+  expect_equal(ecount(g), 3)
+  expect_equal(isomorphism_class(g), 3)
+
+  lifecycle::expect_deprecated(
+    res <- graph_from_isomorphism_class(3, 3, FALSE)
+  )
+  expect_identical_graphs(
+    res,
+    graph_from_isomorphism_class(3, 3, directed = FALSE)
+  )
+})
+
+test_that("canonical_permutation() tail arguments and legacy positional recovery", {
+  ring <- make_ring(4)
+
+  # Alternating colors cut the automorphism group of the 4-ring from 8 to 4.
+  res <- canonical_permutation(ring, colors = c(1, 2, 1, 2), sh = "fs")
+  expect_setequal(res$labeling, 1:4)
+  expect_equal(res$info$group_size, "4")
+
+  lifecycle::expect_deprecated(
+    res2 <- canonical_permutation(ring, NULL, "fs")
+  )
+  expect_identical(res2, canonical_permutation(ring, NULL, sh = "fs"))
+})
+
+test_that("count_automorphisms() tail arguments and legacy positional recovery", {
+  ring <- make_ring(10)
+
+  # The 10-ring has 20 automorphisms whatever the splitting heuristics.
+  res <- count_automorphisms(ring, colors = NULL, sh = "fl")
+  expect_equal(res$group_size, "20")
+
+  lifecycle::expect_deprecated(
+    res2 <- count_automorphisms(ring, NULL, "fl")
+  )
+  expect_identical(res2, count_automorphisms(ring, NULL, sh = "fl"))
+})
+
+test_that("automorphism_group() tail arguments and legacy positional recovery", {
+  ring <- make_ring(10)
+
+  res <- automorphism_group(ring, colors = NULL, sh = "fl", details = TRUE)
+  expect_named(res, c("generators", "info"))
+  expect_equal(res$info$group_size, "20")
+  # Each generator is a permutation of the vertices.
+  for (gen in res$generators) {
+    expect_setequal(as.vector(gen), 1:10)
+  }
+
+  lifecycle::expect_deprecated(
+    res2 <- automorphism_group(ring, NULL, "fl")
+  )
+  ref <- automorphism_group(ring, NULL, sh = "fl")
+  expect_identical(lapply(res2, as.vector), lapply(ref, as.vector))
 })

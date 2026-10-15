@@ -4,10 +4,12 @@
 \alias{sample_tree}
 \title{Sample trees randomly and uniformly}
 \usage{
-sample_tree(n, directed = FALSE, method = c("lerw", "prufer"))
+sample_tree(n, ..., directed = FALSE, method = c("lerw", "prufer"))
 }
 \arguments{
 \item{n}{The number of nodes in the tree}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{directed}{Whether to create a directed tree. The edges of the tree are
 oriented away from the root.}

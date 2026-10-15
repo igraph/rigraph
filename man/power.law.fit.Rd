@@ -29,7 +29,7 @@ argument makes it possible to fit only the tail of the distribution.}
 minimizing function, for the \sQuote{\code{R.mle}} implementation. Usually
 it is safe to leave this untouched.}
 
-\item{force.continuous}{Logical scalar. Whether to force a continuous
+\item{force.continuous}{Logical. Whether to force a continuous
 distribution for the \sQuote{\code{plfit}} implementation, even if the
 sample vector contains integer values only (by chance). If this argument is
 false, igraph will assume a continuous distribution if at least one sample

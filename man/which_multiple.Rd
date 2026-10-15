@@ -9,13 +9,13 @@
 \alias{count_loops}
 \title{Find the multiple or loop edges in a graph}
 \usage{
-which_multiple(graph, eids = E(graph))
+which_multiple(graph, eids = NULL)
 
 any_multiple(graph)
 
-count_multiple(graph, eids = E(graph))
+count_multiple(graph, eids = NULL)
 
-which_loop(graph, eids = E(graph))
+which_loop(graph, eids = NULL)
 
 any_loop(graph)
 
@@ -24,11 +24,11 @@ count_loops(graph)
 \arguments{
 \item{graph}{The input graph.}
 
-\item{eids}{The edges to which the query is restricted. By default this is
-all edges in the graph.}
+\item{eids}{The edges to which the query is restricted. The default
+\code{NULL} selects all edges.}
 }
 \value{
-\code{any_loop()} and \code{any_multiple()} return a logical scalar.
+\code{any_loop()} and \code{any_multiple()} return a Logical.
 \code{which_loop()} and \code{which_multiple()} return a logical vector.
 \code{count_loops()} returns a numeric scalar with the total number of loop edges.
 \code{count_multiple()} returns a numeric vector.
@@ -88,7 +88,7 @@ which_multiple(make_graph(c(1, 2, 2, 1), dir = FALSE))
 # Remove multiple edges but keep multiplicity
 g <- sample_pa(10, m = 3, algorithm = "bag")
 E(g)$weight <- count_multiple(g)
-g <- simplify(g, edge.attr.comb = list(weight = "min"))
+g <- simplify(g, edge_attr_combine = list(weight = "min"))
 any(which_multiple(g))
 E(g)$weight
 

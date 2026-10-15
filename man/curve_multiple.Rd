@@ -4,10 +4,12 @@
 \alias{curve_multiple}
 \title{Optimal edge curvature when plotting graphs}
 \usage{
-curve_multiple(graph, start = 0.5)
+curve_multiple(graph, ..., start = 0.5)
 }
 \arguments{
 \item{graph}{The input graph.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{start}{The curvature at the two extreme edges. All edges will have a
 curvature between \code{-start} and \code{start}, spaced equally.}

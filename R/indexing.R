@@ -72,7 +72,7 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
   }
 
   adj <- adjacent_vertices(x, i_seq, mode = "out")
-  i_degree <- map_int(adj, length)
+  i_degree <- lengths(adj)
 
   from_id <- rep(i_seq, i_degree)
   to_id <- unlist(adj)
@@ -128,7 +128,7 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
 #'   \item The `from` and `to` arguments can be used to check
 #'     the existence of many edges. In this case, both `from` and
 #'     `to` must be present and they must have the same length. They
-#'     must contain vertex ids or names. A numeric vector is returned, of
+#'     must contain vertex IDs or names. A numeric vector is returned, of
 #'     the same length as `from` and `to`, it contains ones
 #'     for existing edges edges and zeros for non-existing ones.
 #'     Example: \preformatted{  graph[from=1:3, to=c(2,3,5)]}.
@@ -136,9 +136,9 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
 #'     weights. For non-esistent edges zero weights are returned. Other
 #'     edge attributes can be queried as well, by giving the `attr`
 #'     argument.
-#'   \item Querying edge ids instead of the existance of edges or edge
+#'   \item Querying edge IDs instead of the existance of edges or edge
 #'     attributes. E.g. \preformatted{  graph[1, 2, edges=TRUE]}
-#'     returns the id of the edge between vertices 1 and 2, or zero if
+#'     returns the ID of the edge between vertices 1 and 2, or zero if
 #'     there is no such edge.
 #'   \item Adding one or more edges to a graph. For this the element(s) of
 #'     the imaginary adjacency matrix must be set to a non-zero numeric
@@ -162,7 +162,7 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
 #'     As this can be used to delete edges between two sets of vertices,
 #'     either pairwise: \preformatted{  graph[from=v, to=w] <- FALSE}
 #'     or not: \preformatted{  graph[v, w] <- FALSE }
-#'     if \eqn{v} and \eqn{w} are vectors of edge ids or names.
+#'     if \eqn{v} and \eqn{w} are vectors of edge IDs or names.
 #' }
 #'
 #' \sQuote{`[`} allows logical indices and negative indices as well,
@@ -173,32 +173,32 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
 #'  creates a star graph.
 #'
 #' Of course, the indexing operators support vertex names,
-#' so instead of a numeric vertex id a vertex can also be given to
+#' so instead of a numeric vertex ID a vertex can also be given to
 #' \sQuote{`[`} and \sQuote{`[[`}.
 #'
 #' @param x The graph.
-#' @param i Index. Vertex ids or names or logical vectors. See details
+#' @param i Index. Vertex IDs or names or logical vectors. See details
 #'   below.
-#' @param j Index. Vertex ids or names or logical vectors. See details
+#' @param j Index. Vertex IDs or names or logical vectors. See details
 #'   below.
 #' @param ... Currently ignored.
-#' @param from A numeric or character vector giving vertex ids or
+#' @param from A numeric or character vector giving vertex IDs or
 #'   names. Together with the `to` argument, it can be used to
 #'   query/set a sequence of edges. See details below. This argument cannot
 #'   be present together with any of the `i` and `j` arguments
 #'   and if it is present, then the `to` argument must be present as
 #'   well.
-#' @param to A numeric or character vector giving vertex ids or
+#' @param to A numeric or character vector giving vertex IDs or
 #'   names. Together with the `from` argument, it can be used to
 #'   query/set a sequence of edges. See details below. This argument cannot
 #'   be present together with any of the `i` and `j` arguments
 #'   and if it is present, then the `from` argument must be present as
 #'   well.
-#' @param sparse Logical scalar, whether to return sparse matrices.
-#' @param edges Logical scalar, whether to return edge ids.
+#' @param sparse Logical, whether to return sparse matrices.
+#' @param edges Logical, whether to return edge IDs.
 #' @param drop Ignored.
-#' @param attr If not `NULL`, then it should be the name of an edge
-#'   attribute. This attribute is queried and returned.
+#' @param attr Name of an edge attribute. This attribute is queried and returned.
+#'   Default: `NULL`.
 #' @return A scalar or matrix. See details below.
 #'
 #' @family structural queries
@@ -234,12 +234,12 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
     cli::cli_abort("Cannot use {.arg from}/{.arg to} without the other")
   }
   if (!missing(from)) {
-    if ((!is.numeric(from) && !is.character(from)) || any(is.na(from))) {
+    if ((!is.numeric(from) && !is.character(from)) || anyNA(from)) {
       cli::cli_abort(
         "{.arg from} must be a numeric or character vector without NAs"
       )
     }
-    if ((!is.numeric(to) && !is.character(to)) || any(is.na(to))) {
+    if ((!is.numeric(to) && !is.character(to)) || anyNA(to)) {
       cli::cli_abort(
         "{.arg to} must be a numeric or character vector without NAs"
       )
@@ -266,7 +266,11 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
   }
 
   if (missing(i) && missing(j)) {
-    return(as_adjacency_matrix(x, sparse = sparse, attr = attr))
+    return(as_adjacency_matrix(
+      x,
+      sparse = sparse,
+      weights = if (is.null(attr)) NA else attr
+    ))
   }
 
   # convert logical, character or negative i/j to proper vertex ids
@@ -323,9 +327,9 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
 #'     if the `edges` argument is set to
 #'     `TRUE`: \preformatted{  graph[[1:3, , edges=TRUE]]
 #' graph[[, 1:3, edges=TRUE]]}
-#'   \item Querying the edge ids between two sets or vertices,
+#'   \item Querying the edge IDs between two sets or vertices,
 #'     if both indices are used. E.g. \preformatted{  graph[[v, w, edges=TRUE]]}
-#'     gives the edge ids of all the edges that exist from vertices
+#'     gives the edge IDs of all the edges that exist from vertices
 #'     \eqn{v} to vertices \eqn{w}.
 #'  }
 #'
@@ -337,28 +341,28 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
 #' \sQuote{`[[`} operators allows logical indices and negative indices
 #' as well, with the usual R semantics.
 #'
-#' Vertex names are also supported, so instead of a numeric vertex id a
+#' Vertex names are also supported, so instead of a numeric vertex ID a
 #' vertex can also be given to \sQuote{`[`} and \sQuote{`[[`}.
 #'
 #' @param x The graph.
 #' @param i Index, integer, character or logical, see details below.
 #' @param j Index, integer, character or logical, see details below.
-#' @param from A numeric or character vector giving vertex ids or
+#' @param from A numeric or character vector giving vertex IDs or
 #'   names. Together with the `to` argument, it can be used to
 #'   query/set a sequence of edges. See details below. This argument cannot
 #'   be present together with any of the `i` and `j` arguments
 #'   and if it is present, then the `to` argument must be present as
 #'   well.
-#' @param to A numeric or character vector giving vertex ids or
+#' @param to A numeric or character vector giving vertex IDs or
 #'   names. Together with the `from` argument, it can be used to
 #'   query/set a sequence of edges. See details below. This argument cannot
 #'   be present together with any of the `i` and `j` arguments
 #'   and if it is present, then the `from` argument must be present as
 #'   well.
 #' @param ... Additional arguments are not used currently.
-#' @param directed Logical scalar, whether to consider edge directions
+#' @param directed Logical, whether to consider edge directions
 #'   in directed graphs. It is ignored for undirected graphs.
-#' @param edges Logical scalar, whether to return edge ids.
+#' @param edges Logical, whether to return edge IDs.
 #' @param exact Ignored.
 #'
 #' @family structural queries
@@ -391,39 +395,40 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
     j <- to
   }
 
-  if (missing(i) && missing(j)) {
-    mode <- if (directed) "out" else "all"
-    getfun(x, mode = mode)
-  } else if (missing(j)) {
-    mode <- if (directed) "out" else "all"
-    if (!edges) {
-      adjacent_vertices(x, i, mode = if (directed) "out" else "all")
+  directed_mode_in <-
+    if (missing(i) && missing(j)) {
+      getfun(x, mode = if (directed) "out" else "all")
+    } else if (missing(j)) {
+      if (!edges) {
+        adjacent_vertices(x, i, mode = if (directed) "out" else "all")
+      } else {
+        incident_edges(x, i, mode = if (directed) "out" else "all")
+      }
+    } else if (missing(i)) {
+      if (!edges) {
+        adjacent_vertices(x, j, mode = if (directed) "in" else "all")
+      } else {
+        incident_edges(x, j, mode = if (directed) "in" else "all")
+      }
     } else {
-      incident_edges(x, i, mode = if (directed) "out" else "all")
+      if (!edges) {
+        lapply(
+          adjacent_vertices(x, i, mode = if (directed) "out" else "all"),
+          intersection,
+          V(x)[.env$j]
+        )
+      } else {
+        i <- as_igraph_vs(x, i)
+        j <- as_igraph_vs(x, j)
+        ee <- incident_edges(x, i, mode = if (directed) "out" else "all")
+        lapply(seq_along(i), function(yy) {
+          from <- i[yy]
+          el <- ends(x, ee[[yy]], names = FALSE)
+          other <- ifelse(el[, 1] == from, el[, 2], el[, 1])
+          ee[[yy]][other %in% j]
+        })
+      }
     }
-  } else if (missing(i)) {
-    if (!edges) {
-      adjacent_vertices(x, j, mode = if (directed) "in" else "all")
-    } else {
-      incident_edges(x, j, mode = if (directed) "in" else "all")
-    }
-  } else {
-    if (!edges) {
-      mode <- if (directed) "out" else "all"
-      lapply(adjacent_vertices(x, i, mode = mode), intersection, V(x)[.env$j])
-    } else {
-      i <- as_igraph_vs(x, i)
-      j <- as_igraph_vs(x, j)
-      mode <- if (directed) "out" else "all"
-      ee <- incident_edges(x, i, mode = mode)
-      lapply(seq_along(i), function(yy) {
-        from <- i[yy]
-        el <- ends(x, ee[[yy]], names = FALSE)
-        other <- ifelse(el[, 1] == from, el[, 2], el[, 1])
-        ee[[yy]][other %in% j]
-      })
-    }
-  }
 }
 
 #' @method length igraph
@@ -487,12 +492,12 @@ expand.grid.unordered <- function(i, j, loops = FALSE, directed = FALSE) {
     cli::cli_abort("Logical or numeric value must be of length 1")
   }
   if (!missing(from)) {
-    if ((!is.numeric(from) && !is.character(from)) || any(is.na(from))) {
+    if ((!is.numeric(from) && !is.character(from)) || anyNA(from)) {
       cli::cli_abort(
         "{.arg from} must be a numeric or character vector without NAs"
       )
     }
-    if ((!is.numeric(to) && !is.character(to)) || any(is.na(to))) {
+    if ((!is.numeric(to) && !is.character(to)) || anyNA(to)) {
       cli::cli_abort(
         "{.arg to} must be a numeric or character vector without NAs"
       )

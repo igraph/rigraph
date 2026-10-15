@@ -2,15 +2,14 @@
 % Please edit documentation in R/layout.R
 \name{layout_on_grid}
 \alias{layout_on_grid}
-\alias{on_grid}
 \title{Simple grid layout}
 \usage{
-layout_on_grid(graph, width = 0, height = 0, dim = 2)
-
-on_grid(...)
+layout_on_grid(graph, ..., width = 0, height = 0, dim = 2)
 }
 \arguments{
 \item{graph}{The input graph.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{width}{The number of vertices in a single row of the grid. If this is
 zero or negative, then for 2d layouts the width of the grid will be the
@@ -22,8 +21,6 @@ three dimensional layouts. If this is zero or negative, then it is
 determinted automatically.}
 
 \item{dim}{Two or three. Whether to make 2d or a 3d layout.}
-
-\item{...}{Passed to \code{layout_on_grid()}.}
 }
 \value{
 A two-column or three-column matrix.
@@ -38,7 +35,7 @@ other. If you want to change the order of the vertices, then see the
 \code{\link[=permute]{permute()}} function.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_grid}{\code{layout_grid()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_grid_3d}{\code{layout_grid_3d()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_grid_3d}{\code{layout_grid_3d()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_grid}{\code{layout_grid()}}
 }
 
 \examples{
@@ -55,7 +52,8 @@ if (interactive() && requireNamespace("rgl", quietly = TRUE)) {
 }
 }
 \seealso{
-\code{\link[=layout]{layout()}} for other layout generators
+\code{\link[=layout]{layout()}} for other layout generators. See \code{\link[=on_grid]{on_grid()}} to build
+a lazy layout specification for \code{\link[=add_layout_]{add_layout_()}}.
 
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},

@@ -17,10 +17,10 @@ centralization.degree(
 \item{mode}{This is the same as the \code{mode} argument of
 \code{degree()}.}
 
-\item{loops}{Logical scalar, whether to consider loops edges when
+\item{loops}{Logical, whether to consider loops edges when
 calculating the degree.}
 
-\item{normalized}{Logical scalar. Whether to normalize the graph level
+\item{normalized}{Logical. Whether to normalize the graph level
 centrality score by dividing by the theoretical maximum.}
 }
 \description{

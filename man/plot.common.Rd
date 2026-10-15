@@ -157,7 +157,7 @@ By default vertices are drawn as circles.
 }
 \item{label}{
 The vertex labels. They will be converted to character.
-Specify \code{NA} to omit vertex labels. The default vertex labels are the vertex ids.
+Specify \code{NA} to omit vertex labels. The default vertex labels are the vertex IDs.
 }
 \item{label.family}{
 The

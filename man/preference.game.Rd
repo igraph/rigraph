@@ -21,7 +21,8 @@ preference.game(
 
 \item{type.dist}{The distribution of the vertex types, a numeric vector of
 length \sQuote{types} containing non-negative numbers. The vector will be
-normed to obtain probabilities.}
+normed to obtain probabilities. The default \code{NULL} gives a uniform
+distribution.}
 
 \item{fixed.sizes}{Fix the number of vertices with a given vertex type
 label. The \code{type.dist} argument gives the group sizes (i.e. number of
@@ -29,11 +30,12 @@ vertices with the different labels) in this case.}
 
 \item{pref.matrix}{A square matrix giving the preferences of the vertex
 types. The matrix has \sQuote{types} rows and columns. When generating
-an undirected graph, it must be symmetric.}
+an undirected graph, it must be symmetric. The default \code{NULL} sets all
+preferences to one.}
 
-\item{directed}{Logical scalar, whether to create a directed graph.}
+\item{directed}{Logical, whether to create a directed graph.}
 
-\item{loops}{Logical scalar, whether self-loops are allowed in the graph.}
+\item{loops}{Logical, whether self-loops are allowed in the graph.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

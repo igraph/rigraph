@@ -148,7 +148,7 @@
 #' }
 #' \item{label}{
 #'   The vertex labels. They will be converted to character.
-#'   Specify `NA` to omit vertex labels. The default vertex labels are the vertex ids.
+#'   Specify `NA` to omit vertex labels. The default vertex labels are the vertex IDs.
 #' }
 #' \item{label.family}{
 #'   The
@@ -499,7 +499,7 @@ NULL
 #' @export
 autocurve.edges <- function(graph, start = 0.5) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "autocurve.edges()", "curve_multiple()")
+  lifecycle::deprecate_warn("2.0.0", "autocurve.edges()", "curve_multiple()")
   curve_multiple(graph = graph, start = start)
 } # nocov end
 #   IGraph R package
@@ -531,10 +531,10 @@ i.parse.plot.params <- function(graph, params) {
   ## store the arguments
   p <- list(vertex = list(), edge = list(), plot = list())
   for (n in names(params)) {
-    if (substr(n, 1, 7) == "vertex.") {
+    if (startsWith(n, "vertex.")) {
       nn <- substring(n, 8)
       p[["vertex"]][[nn]] <- params[[n]]
-    } else if (substr(n, 1, 5) == "edge.") {
+    } else if (startsWith(n, "edge.")) {
       nn <- substring(n, 6)
       p[["edge"]][[nn]] <- params[[n]]
     } else {
@@ -589,7 +589,7 @@ i.parse.plot.params <- function(graph, params) {
       }
     }
     if (!is.function(p[[type]][[name]])) {
-      if (any(is.na(p[[type]][[name]]))) {
+      if (anyNA(p[[type]][[name]])) {
         if (name != "label") {
           cli::cli_warn(
             "{type} attribute {name} contains NAs. Replacing with default value {i.default.values[[type]][[name]]
@@ -632,7 +632,7 @@ i.get.arrow.mode <- function(graph, arrow.mode = NULL) {
   if (
     is.character(arrow.mode) &&
       length(arrow.mode) == 1 &&
-      substr(arrow.mode, 1, 2) == "a:"
+      startsWith(arrow.mode, "a:")
   ) {
     arrow.mode <- vertex_attr(graph, substring(arrow.mode, 3))
   }
@@ -707,6 +707,7 @@ i.postprocess.layout <- function(maybe_layout) {
 #' plotting a graph with multiple edges, so that all edges are visible.
 #'
 #' @param graph The input graph.
+#' @inheritParams rlang::args_dots_empty
 #' @param start The curvature at the two extreme edges. All edges will have a
 #'   curvature between `-start` and `start`, spaced equally.
 #' @return A numeric vector, its length is the number of edges in the graph.
@@ -730,7 +731,46 @@ i.postprocess.layout <- function(maybe_layout) {
 #' set.seed(42)
 #' plot(g)
 #'
-curve_multiple <- function(graph, start = 0.5) {
+curve_multiple <- function(
+  graph,
+  ...,
+  start = 0.5
+) {
+  # BEGIN GENERATED ARG_HANDLE: curve_multiple, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: curve_multiple(graph, start)
+    .old_signature <- function(start, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn curve_multiple}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn curve_multiple}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(start)) base::list(start = start)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(start)) "start"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn curve_multiple} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `curve_multiple()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  curve_multiple(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    curve_multiple(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   el <- apply(as_edgelist(graph, names = FALSE), 1, paste, collapse = ":")
   ave(rep(NA, length(el)), el, FUN = function(x) {
     if (length(x) == 1) {

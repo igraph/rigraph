@@ -11,6 +11,7 @@
 modularity_matrix(
   graph,
   membership = lifecycle::deprecated(),
+  ...,
   weights = NULL,
   resolution = 1,
   directed = TRUE
@@ -22,7 +23,7 @@ modularity_matrix(
 \item{membership}{Numeric vector, one value for each vertex, the membership
 vector of the community structure.}
 
-\item{weights}{If not \code{NULL} then a numeric vector giving edge weights.}
+\item{weights}{Numeric vector giving edge weights. Default: \code{NULL}.}
 
 \item{resolution}{The resolution parameter. Must be greater than or equal to
 0. Set it to 1 to use the classical definition of modularity.}
@@ -30,7 +31,9 @@ vector of the community structure.}
 \item{directed}{Whether to use the directed or undirected version of
 modularity. Ignored for undirected graphs.}
 
-\item{\dots}{Additional arguments, none currently.}
+\item{\dots}{For \code{modularity_matrix()}, these dots must be empty. For
+\code{modularity()}, unused, present for S3 method consistency but may be
+used by other methods that implement it.}
 }
 \value{
 For \code{modularity()} a numeric scalar, the modularity score of the

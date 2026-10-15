@@ -5,7 +5,7 @@ test_that("iterators work", {
   expect_equal(sort(E(ring)[weight < 4]$weight), 1:3)
   expect_equal(V(ring)[c("A", "C")]$name, c("A", "C"))
 
-  withr::with_seed(42, {
+  igraph_with_seed(42, {
     g_pa <- sample_pa(100, power = 0.3)
   })
 
@@ -187,6 +187,7 @@ test_that("identical_graphs works", {
 })
 
 test_that("identical_graphs considers attributes", {
+  igraph_local_seed(42)
   g <- sample_pa(10)
   g2 <- g
 
@@ -289,15 +290,15 @@ test_that("vs/es keeps names after graph is deleted", {
   rm(g)
   gc()
 
-  expect_equal(names(vs), letters[1:10])
+  expect_named(vs, letters[1:10])
 
   vs2 <- vs[4:7]
-  expect_equal(names(vs2), letters[4:7])
+  expect_named(vs2, letters[4:7])
 
-  expect_equal(names(es), LETTERS[1:10])
+  expect_named(es, LETTERS[1:10])
 
   es2 <- es[4:7]
-  expect_equal(names(es2), LETTERS[4:7])
+  expect_named(es2, LETTERS[4:7])
 })
 
 test_that("both edge and vertex names", {
@@ -307,7 +308,7 @@ test_that("both edge and vertex names", {
 
   es <- E(g)
   expect_equal(as.vector(es), 1:10)
-  expect_equal(names(es), LETTERS[1:10])
+  expect_named(es, LETTERS[1:10])
   el <- as_edgelist(g)
   expect_equal(attr(es, "vnames"), paste(el[, 1], el[, 2], sep = "|"))
 
@@ -325,8 +326,6 @@ test_that("both edge and vertex names", {
 })
 
 test_that("printing connected vs/es works", {
-  local_igraph_options(print.id = FALSE)
-
   g <- make_ring(10)
   vs <- V(g)
   es <- E(g)
@@ -345,8 +344,6 @@ test_that("printing connected vs/es works", {
 })
 
 test_that("printing named connected vs/es works", {
-  local_igraph_options(print.id = FALSE)
-
   g <- make_ring(10)
   V(g)$name <- letters[1:10]
   vs <- V(g)
@@ -366,8 +363,6 @@ test_that("printing named connected vs/es works", {
 })
 
 test_that("printing unconnected vs/es works", {
-  local_igraph_options(print.id = FALSE)
-
   g <- make_ring(10)
   vs <- V(g)
   es <- E(g)
@@ -446,4 +441,162 @@ test_that("logical indices are not recycled", {
   g <- make_ring(5)
   expect_snapshot_igraph_error(V(g)[c(TRUE, FALSE)])
   expect_snapshot_igraph_error(E(g)[c(TRUE, FALSE)])
+})
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+test_that("E() tail arguments and legacy positional recovery", {
+  g <- make_ring(10, directed = TRUE)
+
+  # The reversed pair is only matched when direction is ignored.
+  expect_equal(as.numeric(E(g, P = c(1, 2))), 1)
+  expect_equal(as.numeric(E(g, P = c(2, 1), directed = FALSE)), 1)
+  # Path mode selects the consecutive edges along the given vertex path.
+  expect_equal(as.numeric(E(g, path = c(1, 2, 3))), c(1, 2))
+  expect_equal(as.numeric(E(g, path = c(3, 2, 1), directed = FALSE)), c(2, 1))
+
+  lifecycle::expect_deprecated(
+    res <- E(g, c(1, 2))
+  )
+  expect_equal(res, E(g, P = c(1, 2)))
+})
+
+test_that("identical_graphs() tail arguments and legacy positional recovery", {
+  g1 <- make_ring(5)
+  g2 <- make_ring(5)
+  g2$foo <- 1
+
+  # The graph attribute only breaks identity when attributes are compared.
+  expect_false(identical_graphs(g1, g2))
+  expect_true(identical_graphs(g1, g2, attrs = FALSE))
+
+  lifecycle::expect_deprecated(
+    res <- identical_graphs(g1, g2, FALSE)
+  )
+  expect_identical(res, identical_graphs(g1, g2, attrs = FALSE))
+})
+
+test_that("`V(g)[idx]$attr <-` and `E(g)[idx]$attr <-` set attributes as intended", {
+  g <- make_ring(5)
+  V(g)$color <- "red"
+  E(g)$weight <- 1:5
+
+  V(g)[1:3]$color <- "blue"
+  expect_equal(V(g)$color, c("blue", "blue", "blue", "red", "red"))
+
+  E(g)[1:3]$weight <- 0
+  expect_equal(E(g)$weight, c(0, 0, 0, 4, 5))
+
+  V(g)$color <- "green"
+  expect_equal(V(g)$color, rep("green", 5))
+
+  E(g)$weight <- 9
+  expect_equal(E(g)$weight, rep(9, 5))
+})
+
+test_that("assigning `NA` blanks attribute values without removing the attribute", {
+  g <- make_ring(5)
+  V(g)$color <- "red"
+
+  V(g)$color <- NA
+  expect_true(all(is.na(V(g)$color)))
+  expect_true("color" %in% vertex_attr_names(g))
+})
+
+test_that("assigning `NULL` to the full sequence removes the attribute", {
+  g <- make_ring(5)
+  V(g)$color <- "red"
+  E(g)$weight <- 1:5
+
+  V(g)$color <- NULL
+  expect_false("color" %in% vertex_attr_names(g))
+
+  E(g)$weight <- NULL
+  expect_false("weight" %in% edge_attr_names(g))
+})
+
+test_that("assigning `NULL` to a subset of vertices/edges errors instead of silently doing nothing", {
+  g <- make_ring(5)
+  V(g)$color <- "red"
+  E(g)$weight <- 1:5
+
+  expect_snapshot(error = TRUE, {
+    V(g)[1:3]$color <- NULL
+  })
+  expect_snapshot(error = TRUE, {
+    E(g)[1:3]$weight <- NULL
+  })
+})
+
+test_that("assigning `NULL` for a non-existent attribute errors like `delete_vertex_attr()`/`delete_edge_attr()`", {
+  g <- make_ring(5)
+
+  expect_snapshot(error = TRUE, {
+    V(g)$color <- NULL
+  })
+  expect_snapshot(error = TRUE, {
+    E(g)$weight <- NULL
+  })
+})
+
+test_that("direct misuse of `V<-`/`E<-`/`[<-`/`[[<-` errors well", {
+  g <- make_(
+    ring(10),
+    with_vertex_(
+      name = LETTERS[1:10],
+      color = sample(1:2, 10, replace = TRUE)
+    )
+  )
+  expect_snapshot(error = TRUE, {
+    V(g) <- "blue"
+  })
+  expect_snapshot(error = TRUE, {
+    E(g) <- "blue"
+  })
+  expect_snapshot(error = TRUE, {
+    V(g)[1] <- "blue"
+  })
+  expect_snapshot(error = TRUE, {
+    E(g)[1] <- "blue"
+  })
+  expect_snapshot(error = TRUE, {
+    V(g)[[1]] <- "blue"
+  })
+  expect_snapshot(error = TRUE, {
+    E(g)[[1]] <- "blue"
+  })
+})
+
+test_that("querying or setting attributes errors when the graph is unknown", {
+  g <- make_ring(5)
+  V(g)$color <- "red"
+  E(g)$weight <- 1:5
+
+  vs <- V(g)
+  attr(vs, "env") <- NULL
+  es <- E(g)
+  attr(es, "env") <- NULL
+
+  expect_snapshot(error = TRUE, vs$color)
+  expect_snapshot(error = TRUE, {
+    vs$color <- "blue"
+  })
+  expect_snapshot(error = TRUE, es$weight)
+  expect_snapshot(error = TRUE, {
+    es$weight <- 0
+  })
+})
+
+test_that("`[<-.igraph.vs` reports an internal error when the graph is unknown", {
+  # Defensive branch flagged in PR #2006 review as possibly disappearing
+  # once attribute handling is reworked -- kept here as cheap insurance,
+  # not exhaustive coverage.
+  g <- make_ring(5)
+  vs <- V(g)
+  attr(vs, "env") <- NULL
+  payload <- structure(1, attr_name = "color", attr_value = "blue")
+
+  expect_snapshot(error = TRUE, {
+    `[<-.igraph.vs`(vs, 1, value = payload)
+  })
 })

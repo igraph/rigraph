@@ -38,8 +38,8 @@
     Code
       invisible(eigen_centrality(g, scale = FALSE))
     Condition
-      Warning:
-      The `scale` argument of `eigen_centrality()` always as if TRUE as of igraph 2.1.1.
+      Error:
+      ! The `scale` argument of `eigen_centrality()` always as if TRUE as of igraph 2.1.1.
       i Normalization is always performed
 
 # arpack() errors well

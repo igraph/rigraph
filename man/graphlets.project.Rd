@@ -20,12 +20,13 @@ graphlets.project(
 and this argument is \code{NULL} (the default), then the \code{weight} edge
 attribute is used.}
 
-\item{cliques}{A list of vertex ids, the graphlet basis to use for the
+\item{cliques}{A list of vertex IDs, the graphlet basis to use for the
 projection.}
 
 \item{niter}{Integer scalar, the number of iterations to perform.}
 
-\item{Mu}{Starting weights for the projection.}
+\item{Mu}{Starting weights for the projection. The default \code{NULL} uses a
+weight of one for each clique.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

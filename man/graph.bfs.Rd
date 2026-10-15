@@ -26,44 +26,49 @@ graph.bfs(
 \item{graph}{The input graph.}
 
 \item{root}{Numeric vector, usually of length one. The root vertex, or root
-vertices to start the search from.}
+vertices to start the search from. When several roots are given, they are
+considered in the order they appear. If a root vertex was already reached
+while searching from an earlier root, no separate search is started from
+it, so it keeps the distance it was first found at rather than \code{0}.}
 
 \item{mode}{For directed graphs specifies the type of edges to follow.
 \sQuote{out} follows outgoing, \sQuote{in} incoming edges. \sQuote{all}
 ignores edge directions completely. \sQuote{total} is a synonym for
 \sQuote{all}. This argument is ignored for undirected graphs.}
 
-\item{unreachable}{Logical scalar, whether the search should visit the
+\item{unreachable}{Logical, whether the search should visit the
 vertices that are unreachable from the given root vertex (or vertices). If
 \code{TRUE}, then additional searches are performed until all vertices are
 visited.}
 
 \item{restricted}{\code{NULL} (=no restriction), or a vector of vertices
-(ids or symbolic names). In the latter case, the search is restricted to the
+(IDs or symbolic names). In the latter case, the search is restricted to the
 given vertices.}
 
-\item{order}{Logical scalar, whether to return the ordering of the vertices.}
+\item{order}{Logical, whether to return the ordering of the vertices.}
 
-\item{rank}{Logical scalar, whether to return the rank of the vertices.}
+\item{rank}{Logical, whether to return the rank of the vertices.}
 
-\item{father}{Logical scalar, whether to return the father of the vertices.}
+\item{father}{Logical, whether to return the father of the vertices.}
 
-\item{pred}{Logical scalar, whether to return the predecessors of the
+\item{pred}{Logical, whether to return the predecessors of the
 vertices.}
 
-\item{succ}{Logical scalar, whether to return the successors of the
+\item{succ}{Logical, whether to return the successors of the
 vertices.}
 
-\item{dist}{Logical scalar, whether to return the distance from the root of
+\item{dist}{Logical, whether to return the distance from the root of
 the search tree.}
 
-\item{callback}{If not \code{NULL}, then it must be callback function. This
-is called whenever a vertex is visited. The callback function should
-return \code{FALSE} to continue the search or \code{TRUE} to stop it. See details below.}
+\item{callback}{Callback function. This is called whenever a vertex is visited.
+The callback function should return \code{FALSE} to continue the search
+or \code{TRUE} to stop it. See details below.
+Default: \code{NULL}.}
 
 \item{extra}{Additional argument to supply to the callback function.}
 
-\item{rho}{The environment in which the callback function is evaluated.}
+\item{rho}{The environment in which the callback function is evaluated.
+The default \code{NULL} uses the caller's environment.}
 
 \item{neimode}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This argument is deprecated
 from igraph 1.3.0; use \code{mode} instead.}

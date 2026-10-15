@@ -4,7 +4,12 @@
 \alias{centr_clo_tmax}
 \title{Theoretical maximum for closeness centralization}
 \usage{
-centr_clo_tmax(graph = NULL, nodes = 0, mode = c("out", "in", "all", "total"))
+centr_clo_tmax(
+  graph = NULL,
+  nodes = 0,
+  ...,
+  mode = c("out", "in", "all", "total")
+)
 }
 \arguments{
 \item{graph}{The input graph. It can also be \code{NULL} if
@@ -12,6 +17,8 @@ centr_clo_tmax(graph = NULL, nodes = 0, mode = c("out", "in", "all", "total"))
 
 \item{nodes}{The number of vertices. This is ignored if the graph is
 given.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{This is the same as the \code{mode} argument of
 \code{closeness()}. Ignored if an undirected graph is given.}

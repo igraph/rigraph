@@ -7,7 +7,7 @@
 tkplot.fit.to.screen(tkp.id, width = NULL, height = NULL)
 }
 \arguments{
-\item{tkp.id}{The id of the tkplot window to close/reshape/etc.}
+\item{tkp.id}{The ID of the tkplot window to close/reshape/etc.}
 
 \item{width}{The width of the rectangle for generating new coordinates.}
 

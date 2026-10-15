@@ -5,14 +5,15 @@
 \alias{t.igraph}
 \title{Reverse edges in a graph}
 \usage{
-reverse_edges(graph, eids = E(graph))
+reverse_edges(graph, eids = NULL)
 
 \method{t}{igraph}(x)
 }
 \arguments{
 \item{graph}{The input graph.}
 
-\item{eids}{The edge IDs of the edges to reverse.}
+\item{eids}{The edge IDs of the edges to reverse. The default \code{NULL}
+reverses all edges.}
 
 \item{x}{The input graph.}
 }

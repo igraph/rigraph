@@ -5,7 +5,7 @@
 \alias{vertex.attributes}
 \title{Query vertex attributes of a graph}
 \usage{
-vertex_attr(graph, name, index = V(graph))
+vertex_attr(graph, name, index = NULL)
 }
 \arguments{
 \item{graph}{The graph.}
@@ -14,7 +14,7 @@ vertex_attr(graph, name, index = V(graph))
 all vertex attributes are returned in a list.}
 
 \item{index}{An optional vertex sequence to query the attribute only
-for these vertices.}
+for these vertices. The default \code{NULL} selects all vertices.}
 }
 \value{
 The value of the vertex attribute, or the list of

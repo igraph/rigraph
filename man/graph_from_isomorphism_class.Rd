@@ -4,12 +4,14 @@
 \alias{graph_from_isomorphism_class}
 \title{Create a graph from an isomorphism class}
 \usage{
-graph_from_isomorphism_class(size, number, directed = TRUE)
+graph_from_isomorphism_class(size, number, ..., directed = TRUE)
 }
 \arguments{
 \item{size}{The number of vertices in the graph.}
 
 \item{number}{The isomorphism class.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{directed}{Whether to create a directed graph (the default).}
 }

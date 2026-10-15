@@ -10,7 +10,7 @@ is_directed(graph)
 \item{graph}{The input graph}
 }
 \value{
-Logical scalar, whether the graph is directed.
+Logical, whether the graph is directed.
 }
 \description{
 Check whether a graph is directed

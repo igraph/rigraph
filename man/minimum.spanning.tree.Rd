@@ -10,7 +10,7 @@ minimum.spanning.tree(graph, weights = NULL, algorithm = NULL, ...)
 \item{graph}{The graph object to analyze.}
 
 \item{weights}{Numeric vector giving the weights of the edges in the
-graph. The order is determined by the edge ids. This is ignored if the
+graph. The order is determined by the edge IDs. This is ignored if the
 \code{unweighted} algorithm is chosen. Edge weights are interpreted as
 distances.}
 
@@ -30,7 +30,7 @@ algorithm is chosen, otherwise the unweighted algorithm is used.}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_minimum_spanning_tree_unweighted}{\code{minimum_spanning_tree_unweighted()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_minimum_spanning_tree_prim}{\code{minimum_spanning_tree_prim()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_minimum_spanning_tree_prim}{\code{minimum_spanning_tree_prim()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_minimum_spanning_tree_unweighted}{\code{minimum_spanning_tree_unweighted()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
 }
 
 \keyword{internal}

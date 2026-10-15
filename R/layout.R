@@ -10,7 +10,7 @@
 #' @export
 piecewise.layout <- function(graph, layout = layout_with_kk, ...) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "piecewise.layout()",
     "layout_components()"
@@ -38,7 +38,7 @@ layout.sugiyama <- function(
   attributes = c("default", "all", "none")
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "layout.sugiyama()",
     "layout_with_sugiyama()"
@@ -66,7 +66,7 @@ layout.sugiyama <- function(
 #' @export
 layout.star <- function(graph, center = V(graph)[1], order = NULL) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "layout.star()", "layout_as_star()")
+  lifecycle::deprecate_warn("2.0.0", "layout.star()", "layout_as_star()")
   layout_as_star(graph = graph, center = center, order = order)
 } # nocov end
 
@@ -90,7 +90,7 @@ layout.norm <- function(
   zmax = 1
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "layout.norm()", "norm_coords()")
+  lifecycle::deprecate_warn("2.0.0", "layout.norm()", "norm_coords()")
   norm_coords(
     layout = layout,
     xmin = xmin,
@@ -114,7 +114,7 @@ layout.norm <- function(
 #' @export
 layout.merge <- function(graphs, layouts, method = "dla") {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "layout.merge()", "merge_coords()")
+  lifecycle::deprecate_warn("2.0.0", "layout.merge()", "merge_coords()")
   merge_coords(graphs = graphs, layouts = layouts, method = method)
 } # nocov end
 
@@ -135,8 +135,8 @@ layout.mds <- function(
   options = arpack_defaults()
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "layout.mds()", "layout_with_mds()")
-  layout_with_mds(graph = graph, dist = dist, dim = dim, options = options)
+  lifecycle::deprecate_warn("2.0.0", "layout.mds()", "layout_with_mds()")
+  layout_with_mds(graph = graph, dist = dist, dim = dim)
 } # nocov end
 
 #' Simple grid layout
@@ -151,7 +151,7 @@ layout.mds <- function(
 #' @export
 layout.grid <- function(graph, width = 0, height = 0, dim = 2) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "layout.grid()", "layout_on_grid()")
+  lifecycle::deprecate_warn("2.0.0", "layout.grid()", "layout_on_grid()")
   layout_on_grid(graph = graph, width = width, height = height, dim = dim)
 } # nocov end
 
@@ -176,7 +176,7 @@ layout.graphopt <- function(
   max.sa.movement = 5
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "layout.graphopt()",
     "layout_with_graphopt()"
@@ -212,7 +212,7 @@ layout.gem <- function(
   temp.init = sqrt(max(vcount(graph), 1))
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "layout.gem()", "layout_with_gem()")
+  lifecycle::deprecate_warn("2.0.0", "layout.gem()", "layout_with_gem()")
   layout_with_gem(
     graph = graph,
     coords = coords,
@@ -246,7 +246,7 @@ layout.davidson.harel <- function(
   weight.node.edge.dist = 0.2 * (1 - edge_density(graph))
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "layout.davidson.harel()",
     "layout_with_dh()"
@@ -283,7 +283,7 @@ layout.bipartite <- function(
   maxiter = 100
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "layout.bipartite()",
     "layout_as_bipartite()"
@@ -309,7 +309,7 @@ layout.bipartite <- function(
 #' @export
 layout.auto <- function(graph, dim = 2, ...) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "layout.auto()", "layout_nicely()")
+  lifecycle::deprecate_warn("2.0.0", "layout.auto()", "layout_nicely()")
   layout_nicely(graph = graph, dim = dim, ...)
 } # nocov end
 
@@ -526,7 +526,7 @@ print.igraph_layout_spec <- function(x, ...) {
 #'
 #' @param ... Named arguments that define the modifier. Must include:
 #'   \describe{
-#'     \item{id}{A unique identifier string for the modifier}
+#'     \item{ID}{A unique identifier string for the modifier}
 #'     \item{type}{Either `"pre"` for pre-layout or `"post"` for post-layout}
 #'     \item{args}{A list of arguments to pass to the apply function}
 #'     \item{apply}{A function with signature
@@ -619,8 +619,12 @@ component_wise <- function(merge_method = "dla") {
 #' Scale coordinates of a layout.
 #'
 #' @param xmin,xmax Minimum and maximum for x coordinates.
-#' @param ymin,ymax Minimum and maximum for y coordinates.
-#' @param zmin,zmax Minimum and maximum for z coordinates.
+#' @param ymin,ymax Minimum and maximum for y coordinates. When omitted,
+#'   they follow `xmin` and `xmax`; `NULL` disables normalization along
+#'   this axis.
+#' @param zmin,zmax Minimum and maximum for z coordinates. When omitted,
+#'   they follow `xmin` and `xmax`; `NULL` disables normalization along
+#'   this axis.
 #'
 #' @family layout modifiers
 #' @family graph layouts
@@ -631,11 +635,27 @@ component_wise <- function(merge_method = "dla") {
 normalize <- function(
   xmin = -1,
   xmax = 1,
-  ymin = xmin,
-  ymax = xmax,
-  zmin = xmin,
-  zmax = xmax
+  ymin = NULL,
+  ymax = NULL,
+  zmin = NULL,
+  zmax = NULL
 ) {
+  # NULL is a legal value here (norm_coords() skips normalization along an
+  # axis with a NULL limit), so the fallback to the x limits applies only
+  # when an argument is not supplied at all.
+  if (missing(ymin)) {
+    ymin <- xmin
+  }
+  if (missing(ymax)) {
+    ymax <- xmax
+  }
+  if (missing(zmin)) {
+    zmin <- xmin
+  }
+  if (missing(zmax)) {
+    zmax <- xmax
+  }
+
   args <- grab_args()
 
   layout_modifier(
@@ -672,6 +692,7 @@ normalize <- function(
 #' @param types A logical vector, the vertex types. If this argument is
 #'   `NULL` (the default), then the \sQuote{`type`} vertex attribute is
 #'   used.
+#' @inheritParams rlang::args_dots_empty
 #' @param hgap Real scalar, the minimum horizontal gap between vertices in the
 #'   same layer.
 #' @param vgap Real scalar, the distance between the two layers.
@@ -681,7 +702,8 @@ normalize <- function(
 #' @return A matrix with two columns and as many rows as the number of vertices
 #'   in the input graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [layout_with_sugiyama()]
+#' @seealso [layout_with_sugiyama()]. See [as_bipartite()] to build a lazy
+#'   layout specification for [add_layout_()].
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -701,10 +723,50 @@ normalize <- function(
 layout_as_bipartite <- function(
   graph,
   types = NULL,
+  ...,
   hgap = 1,
   vgap = 1,
   maxiter = 100
 ) {
+  # BEGIN GENERATED ARG_HANDLE: layout_as_bipartite, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: layout_as_bipartite(graph, types, hgap, vgap, maxiter)
+    .old_signature <- function(hgap, vgap, maxiter, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn layout_as_bipartite}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn layout_as_bipartite}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(hgap)) base::list(hgap = hgap),
+        if (!base::missing(vgap)) base::list(vgap = vgap),
+        if (!base::missing(maxiter)) base::list(maxiter = maxiter)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(hgap)) "hgap",
+        if (!base::missing(vgap)) "vgap",
+        if (!base::missing(maxiter)) "maxiter"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_as_bipartite} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `layout_as_bipartite()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  layout_as_bipartite(", base::paste(base::c("graph", "types", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    layout_as_bipartite(", base::paste(base::c("graph", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   ## Argument checks
   ensure_igraph(graph)
   # Use the _impl function
@@ -718,8 +780,48 @@ layout_as_bipartite <- function(
 }
 
 
-#' @rdname layout_as_bipartite
-#' @param ... Arguments to pass to `layout_as_bipartite()`.
+#' Layout specifications for `layout_()` and `add_layout_()`
+#'
+#' @description
+#' Each of these functions builds a lazy layout specification for the given
+#' layout function, to be used with [layout_()] or [add_layout_()]. The
+#' specification is only evaluated when the layout is actually computed, so it
+#' can be combined with layout modifiers such as [component_wise()] or
+#' [normalize()].
+#'
+#' `as_bipartite()`, `as_star()` and `as_tree()` wrap [layout_as_bipartite()],
+#' [layout_as_star()] and [layout_as_tree()] respectively. `in_circle()`,
+#' `nicely()`, `on_grid()`, `on_sphere()` and `randomly()` wrap
+#' [layout_in_circle()], [layout_nicely()], [layout_on_grid()],
+#' [layout_on_sphere()] and [layout_randomly()]. `with_dh()`, `with_fr()`,
+#' `with_gem()`, `with_graphopt()`, `with_kk()`, `with_lgl()`, `with_mds()`,
+#' `with_sugiyama()` and `with_drl()` wrap [layout_with_dh()],
+#' [layout_with_fr()], [layout_with_gem()], [layout_with_graphopt()],
+#' [layout_with_kk()], [layout_with_lgl()], [layout_with_mds()],
+#' [layout_with_sugiyama()] and [layout_with_drl()].
+#'
+#' @param ... Forwarded to the corresponding `layout_*()` function.
+#' @return An object of class `igraph_layout_spec`.
+#' @seealso [layout_()] and [add_layout_()] to apply a layout specification
+#'   to a graph.
+#' @family layout specifications
+#' @keywords graphs
+#' @rdname layout_spec
+#' @examples
+#' g <- make_ring(10)
+#'
+#' # Pass a layout specification to layout_() ...
+#' layout_(g, in_circle())
+#'
+#' # ... or store the layout in the graph with add_layout_()
+#' g <- add_layout_(g, with_fr())
+#' g$layout
+#'
+#' # Specifications take the arguments of the layout function they wrap
+#' layout_(make_star(10), as_star(center = 5))
+#'
+#' # and can be combined with layout modifiers
+#' layout_(make_ring(10) + make_ring(5), with_fr(), component_wise())
 #' @export
 as_bipartite <- function(...) layout_spec(layout_as_bipartite, ...)
 
@@ -735,16 +837,18 @@ as_bipartite <- function(...) layout_spec(layout_as_bipartite, ...)
 #' order of the vertices can be also given.
 #'
 #' @param graph The graph to layout.
-#' @param center The id of the vertex to put in the center. By default it is
-#'   the first vertex.
+#' @inheritParams rlang::args_dots_empty
+#' @param center The ID of the vertex to put in the center. The default
+#'   `NULL` uses the first vertex.
 #' @param order Numeric vector, the order of the vertices along the perimeter.
-#'   The default ordering is given by the vertex ids.
+#'   The default ordering is given by the vertex IDs.
 #' @return A matrix with two columns and as many rows as the number of vertices
 #'   in the input graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [layout()] and [layout_with_drl()] for other layout
 #' algorithms, [plot.igraph()] and [tkplot()] on how to
-#' plot graphs and [star()] on how to create ring graphs.
+#' plot graphs and [star()] on how to create ring graphs. See [as_star()] to
+#' build a lazy layout specification for [add_layout_()].
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -755,13 +859,58 @@ as_bipartite <- function(...) layout_spec(layout_as_bipartite, ...)
 #'
 #' ## Alternative form
 #' layout_(g, as_star())
-layout_as_star <- function(graph, center = V(graph)[1], order = NULL) {
+layout_as_star <- function(
+  graph,
+  ...,
+  center = NULL,
+  order = NULL
+) {
+  # BEGIN GENERATED ARG_HANDLE: layout_as_star, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: layout_as_star(graph, center, order)
+    .old_signature <- function(center, order, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn layout_as_star}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn layout_as_star}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(center)) base::list(center = center),
+        if (!base::missing(order)) base::list(order = order)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(center)) "center",
+        if (!base::missing(order)) "order"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_as_star} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `layout_as_star()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  layout_as_star(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    layout_as_star(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   ensure_igraph(graph)
   if (vcount(graph) == 0) {
     # Any other layout will do so just pick one that supports graphs with no
     # vertices
     return(layout_in_circle(graph))
+  }
+  if (is.null(center)) {
+    center <- V(graph)[1]
   }
   # Use the _impl function
   layout_star_impl(
@@ -772,8 +921,7 @@ layout_as_star <- function(graph, center = V(graph)[1], order = NULL) {
 }
 
 
-#' @rdname layout_as_star
-#' @param ... Arguments to pass to `layout_as_star()`.
+#' @rdname layout_spec
 #' @export
 as_star <- function(...) layout_spec(layout_as_star, ...)
 
@@ -793,14 +941,15 @@ as_star <- function(...) layout_spec(layout_as_star, ...)
 #' to obtain a possible spanning tree.
 #'
 #' @param graph The input graph.
+#' @inheritParams rlang::args_dots_empty
 #' @param root The index of the root vertex or root vertices.  If this is a
-#'   non-empty vector then the supplied vertex ids are used as the roots of the
+#'   non-empty vector then the supplied vertex IDs are used as the roots of the
 #'   trees (or a single tree if the graph is connected).  If it is an empty
 #'   vector, then the root vertices are automatically calculated based on
 #'   topological sorting, performed with the opposite mode than the `mode`
 #'   argument. After the vertices have been sorted, one is selected from each
 #'   component.
-#' @param circular Logical scalar, whether to plot the tree in a circular
+#' @param circular Logical, whether to plot the tree in a circular
 #'   fashion. Defaults to `FALSE`, so the tree branches are going bottom-up
 #'   (or top-down, see the `flip.y` argument.
 #' @param rootlevel This argument can be useful when drawing forests which are
@@ -813,13 +962,15 @@ as_star <- function(...) layout_spec(layout_as_star, ...)
 #'   edges are used (this was the behavior in igraph 0.5 and before). This
 #'   parameter also influences how the root vertices are calculated, if they are
 #'   not given. See the `roots` parameter.
-#' @param flip.y Logical scalar, whether to flip the \sQuote{y} coordinates.
+#' @param flip.y Logical, whether to flip the \sQuote{y} coordinates.
 #'   The default is flipping because that puts the root vertex on the top.
 #' @return A numeric matrix with two columns, and one row for each vertex.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
 #' @references Reingold, E and Tilford, J (1981). Tidier drawing of trees.
 #' *IEEE Trans. on Softw. Eng.*, SE-7(2):223--228.
+#' @seealso [as_tree()] to build a lazy layout specification for
+#'   [add_layout_()].
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -838,12 +989,58 @@ as_star <- function(...) layout_spec(layout_as_star, ...)
 #' ))
 layout_as_tree <- function(
   graph,
+  ...,
   root = numeric(),
   circular = FALSE,
   rootlevel = numeric(),
   mode = c("out", "in", "all"),
   flip.y = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: layout_as_tree, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("r", "ro", "roo"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn layout_as_tree}.")
+    # Pre-3.0.0 signature: layout_as_tree(graph, root, circular, rootlevel, mode, flip.y)
+    .old_signature <- function(root, circular, rootlevel, mode, flip.y, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn layout_as_tree}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn layout_as_tree}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(root)) base::list(root = root),
+        if (!base::missing(circular)) base::list(circular = circular),
+        if (!base::missing(rootlevel)) base::list(rootlevel = rootlevel),
+        if (!base::missing(mode)) base::list(mode = mode),
+        if (!base::missing(flip.y)) base::list(flip.y = flip.y)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(root)) "root",
+        if (!base::missing(circular)) "circular",
+        if (!base::missing(rootlevel)) "rootlevel",
+        if (!base::missing(mode)) "mode",
+        if (!base::missing(flip.y)) "flip.y"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_as_tree} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `layout_as_tree()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  layout_as_tree(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    layout_as_tree(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
   root <- as_igraph_vs(graph, root) - 1
   circular <- as.logical(circular)
@@ -873,8 +1070,7 @@ layout_as_tree <- function(
 }
 
 
-#' @rdname layout_as_tree
-#' @param ... Passed to `layout_as_tree()`.
+#' @rdname layout_spec
 #' @export
 as_tree <- function(...) layout_spec(layout_as_tree, ...)
 
@@ -890,7 +1086,7 @@ as_tree <- function(...) layout_spec(layout_as_tree, ...)
 #' @keywords internal
 #' @export
 layout.reingold.tilford <- function(..., params = list()) {
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.1.0",
     "layout.reingold.tilford()",
     "layout_as_tree()"
@@ -902,7 +1098,7 @@ layout.reingold.tilford <- function(..., params = list()) {
 
 #' Graph layout with vertices on a circle.
 #'
-#' Place vertices on a circle, in the order of their vertex ids.
+#' Place vertices on a circle, in the order of their vertex IDs.
 #'
 #' If you want to order the vertices differently, then permute them using the
 #' [permute()] function.
@@ -910,9 +1106,12 @@ layout.reingold.tilford <- function(..., params = list()) {
 #' @param graph The input graph.
 #' @param order The vertices to place on the circle, in the order of their
 #'   desired placement. Vertices that are not included here will be placed at
-#'   (0,0).
+#'   (0,0). The default `NULL` selects all vertices, in the order of their
+#'   IDs.
 #' @return A numeric matrix with two columns, and one row for each vertex.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @seealso [in_circle()] to build a lazy layout specification for
+#'   [add_layout_()].
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -931,7 +1130,11 @@ layout.reingold.tilford <- function(..., params = list()) {
 #' V(karate)$label.color <- membership(karate_groups)
 #' V(karate)$shape <- "none"
 #' plot(karate, layout = coords)
-layout_in_circle <- function(graph, order = V(graph)) {
+layout_in_circle <- function(graph, order = NULL) {
+  if (is.null(order)) {
+    order <- V(graph)
+  }
+
   # Use the _impl function
   layout_circle_impl(
     graph = graph,
@@ -939,8 +1142,7 @@ layout_in_circle <- function(graph, order = V(graph)) {
   )
 }
 
-#' @rdname layout_in_circle
-#' @param ... Passed to `layout_in_circle()`.
+#' @rdname layout_spec
 #' @export
 in_circle <- function(...) layout_spec(layout_in_circle, ...)
 
@@ -955,7 +1157,7 @@ in_circle <- function(...) layout_spec(layout_in_circle, ...)
 #' @keywords internal
 #' @export
 layout.circle <- function(..., params = list()) {
-  lifecycle::deprecate_soft("2.1.0", "layout.circle()", "layout_in_circle()")
+  lifecycle::deprecate_warn("2.1.0", "layout.circle()", "layout_in_circle()")
   do_call(layout_in_circle, .args = c(list(...), params))
 }
 
@@ -1000,12 +1202,12 @@ layout.circle <- function(..., params = list()) {
 #'
 #' @param graph The input graph
 #' @param dim Dimensions, should be 2 or 3.
-#' @param \dots For `layout_nicely()` the extra arguments are passed to
-#'   the real layout function. For `nicely()` all argument are passed to
-#'   `layout_nicely()`.
+#' @param \dots Extra arguments are passed to the real layout function that
+#'   `layout_nicely()` ends up calling.
 #' @return A numeric matrix with two or three columns.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [plot.igraph()]
+#' @seealso [plot.igraph()]. See [nicely()] to build a lazy layout
+#'   specification for [add_layout_()].
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -1071,7 +1273,7 @@ layout_nicely <- function(graph, dim = 2, ...) {
 }
 
 
-#' @rdname layout_nicely
+#' @rdname layout_spec
 #' @export
 nicely <- function(...) layout_spec(layout_nicely, ...)
 
@@ -1088,6 +1290,7 @@ nicely <- function(...) layout_spec(layout_nicely, ...)
 #' [permute()] function.
 #'
 #' @param graph The input graph.
+#' @inheritParams rlang::args_dots_empty
 #' @param width The number of vertices in a single row of the grid. If this is
 #'   zero or negative, then for 2d layouts the width of the grid will be the
 #'   square root of the number of vertices in the graph, rounded up to the next
@@ -1098,7 +1301,8 @@ nicely <- function(...) layout_spec(layout_nicely, ...)
 #' @param dim Two or three. Whether to make 2d or a 3d layout.
 #' @return A two-column or three-column matrix.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
-#' @seealso [layout()] for other layout generators
+#' @seealso [layout()] for other layout generators. See [on_grid()] to build
+#'   a lazy layout specification for [add_layout_()].
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -1114,7 +1318,52 @@ nicely <- function(...) layout_spec(layout_nicely, ...)
 #' if (interactive() && requireNamespace("rgl", quietly = TRUE)) {
 #'   rglplot(g, layout = layout_on_grid(g, dim = 3))
 #' }
-layout_on_grid <- function(graph, width = 0, height = 0, dim = 2) {
+layout_on_grid <- function(
+  graph,
+  ...,
+  width = 0,
+  height = 0,
+  dim = 2
+) {
+  # BEGIN GENERATED ARG_HANDLE: layout_on_grid, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: layout_on_grid(graph, width, height, dim)
+    .old_signature <- function(width, height, dim, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn layout_on_grid}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn layout_on_grid}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(width)) base::list(width = width),
+        if (!base::missing(height)) base::list(height = height),
+        if (!base::missing(dim)) base::list(dim = dim)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(width)) "width",
+        if (!base::missing(height)) "height",
+        if (!base::missing(dim)) "dim"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_on_grid} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `layout_on_grid()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  layout_on_grid(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    layout_on_grid(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   ensure_igraph(graph)
   width <- as.numeric(width)
@@ -1140,31 +1389,15 @@ layout_on_grid <- function(graph, width = 0, height = 0, dim = 2) {
 }
 
 
-#' @rdname layout_on_grid
-#' @param ... Passed to `layout_on_grid()`.
+#' @rdname layout_spec
 #' @export
 on_grid <- function(...) layout_spec(layout_on_grid, ...)
-
-
-#' Simple grid layout
-#' @description
-#' `r lifecycle::badge("deprecated")`
-#'
-#' Use [layout_on_grid()].
-#' @inheritParams layout_on_grid
-#' @export
-#' @export
-#' @keywords internal
-layout.grid.3d <- function(graph, width = 0, height = 0) {
-  lifecycle::deprecate_stop("2.1.0", "layout.grid.3d()", "layout_on_grid()")
-}
-
 ## ----------------------------------------------------------------
 
 #' Graph layout with vertices on the surface of a sphere
 #'
 #' Place vertices on a sphere, approximately uniformly, in the order of their
-#' vertex ids.
+#' vertex IDs.
 #'
 #' `layout_on_sphere()` places the vertices (approximately) uniformly on the
 #' surface of a sphere, this is thus a 3d layout. It is not clear however what
@@ -1176,6 +1409,8 @@ layout.grid.3d <- function(graph, width = 0, height = 0) {
 #' @param graph The input graph.
 #' @return A numeric matrix with three columns, and one row for each vertex.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @seealso [on_sphere()] to build a lazy layout specification for
+#'   [add_layout_()].
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -1187,8 +1422,7 @@ layout_on_sphere <- function(graph) {
 }
 
 
-#' @rdname layout_on_sphere
-#' @param ... Passed to `layout_on_sphere()`.
+#' @rdname layout_spec
 #' @export
 on_sphere <- function(...) layout_spec(layout_on_sphere, ...)
 
@@ -1203,7 +1437,7 @@ on_sphere <- function(...) layout_spec(layout_on_sphere, ...)
 #' @keywords internal
 #' @export
 layout.sphere <- function(..., params = list()) {
-  lifecycle::deprecate_soft("2.1.0", "layout.sphere()", "layout_on_sphere()")
+  lifecycle::deprecate_warn("2.1.0", "layout.sphere()", "layout_on_sphere()")
   do_call(layout_on_sphere, .args = c(list(...), params))
 }
 
@@ -1219,14 +1453,56 @@ layout.sphere <- function(..., params = list()) {
 #' layout generators.
 #'
 #' @param graph The input graph.
+#' @inheritParams rlang::args_dots_empty
 #' @param dim Integer scalar, the dimension of the space to use. It must be 2
 #'   or 3.
 #' @return A numeric matrix with two or three columns.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @seealso [randomly()] to build a lazy layout specification for
+#'   [add_layout_()].
 #' @keywords graphs
 #' @export
 #' @family graph layouts
-layout_randomly <- function(graph, dim = c(2, 3)) {
+layout_randomly <- function(
+  graph,
+  ...,
+  dim = c(2, 3)
+) {
+  # BEGIN GENERATED ARG_HANDLE: layout_randomly, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: layout_randomly(graph, dim)
+    .old_signature <- function(dim, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn layout_randomly}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn layout_randomly}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(dim)) base::list(dim = dim)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(dim)) "dim"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_randomly} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `layout_randomly()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  layout_randomly(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    layout_randomly(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   dim <- igraph_match_arg(dim)
@@ -1242,8 +1518,7 @@ layout_randomly <- function(graph, dim = c(2, 3)) {
   }
 }
 
-#' @rdname layout_randomly
-#' @param ... Parameters to pass to `layout_randomly()`.
+#' @rdname layout_spec
 #' @export
 randomly <- function(...) layout_spec(layout_randomly, ...)
 
@@ -1258,7 +1533,7 @@ randomly <- function(...) layout_spec(layout_randomly, ...)
 #' @keywords internal
 #' @export
 layout.random <- function(..., params = list()) {
-  lifecycle::deprecate_soft("2.1.0", "layout.random()", "layout_randomly()")
+  lifecycle::deprecate_warn("2.1.0", "layout.random()", "layout_randomly()")
   do_call(layout_randomly, .args = c(list(...), params))
 }
 
@@ -1287,11 +1562,13 @@ layout.random <- function(..., params = list()) {
 #' within the bounds of the rectangle of the layout.
 #'
 #' @param graph The graph to lay out. Edge directions are ignored.
+#' @inheritParams rlang::args_dots_empty
 #' @param coords Optional starting positions for the vertices. If this argument
 #'   is not `NULL` then it should be an appropriate matrix of starting
 #'   coordinates.
 #' @param maxiter Number of iterations to perform in the first phase.
-#' @param fineiter Number of iterations in the fine tuning phase.
+#' @param fineiter Number of iterations in the fine tuning phase. The
+#'   default `NULL` uses `max(10, log2(vcount(graph)))`.
 #' @param cool.fact Cooling factor.
 #' @param weight.node.dist Weight for the node-node distances component of the
 #'   energy function.
@@ -1299,11 +1576,13 @@ layout.random <- function(..., params = list()) {
 #'   the energy function. It can be set to zero, if vertices are allowed to sit
 #'   on the border.
 #' @param weight.edge.lengths Weight for the edge length component of the
-#'   energy function.
+#'   energy function. The default `NULL` uses `edge_density(graph) / 10`.
 #' @param weight.edge.crossings Weight for the edge crossing component of the
-#'   energy function.
+#'   energy function. The default `NULL` uses
+#'   `1 - sqrt(edge_density(graph))`.
 #' @param weight.node.edge.dist Weight for the node-edge distance component of
-#'   the energy function.
+#'   the energy function. The default `NULL` uses
+#'   `0.2 * (1 - edge_density(graph))`.
 #' @return A matrix with two columns, containing the x and y coordinates
 #'   of the vertices:
 #'   \describe{
@@ -1316,7 +1595,8 @@ layout.random <- function(..., params = list()) {
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [layout_with_fr()],
-#' [layout_with_kk()] for other layout algorithms.
+#' [layout_with_kk()] for other layout algorithms. See [with_dh()] to build a
+#' lazy layout specification for [add_layout_()].
 #' @references Ron Davidson, David Harel: Drawing Graphs Nicely Using Simulated
 #' Annealing. *ACM Transactions on Graphics* 15(4), pp. 301-331, 1996.
 #' @export
@@ -1377,16 +1657,83 @@ layout.random <- function(..., params = list()) {
 #' plot(g_12, layout = layout_with_dh, vertex.size = 5, vertex.label = NA)
 layout_with_dh <- function(
   graph,
+  ...,
   coords = NULL,
   maxiter = 10,
-  fineiter = max(10, log2(vcount(graph))),
+  fineiter = NULL,
   cool.fact = 0.75,
   weight.node.dist = 1.0,
   weight.border = 0.0,
-  weight.edge.lengths = edge_density(graph) / 10,
-  weight.edge.crossings = 1.0 - sqrt(edge_density(graph)),
-  weight.node.edge.dist = 0.2 * (1 - edge_density(graph))
+  weight.edge.lengths = NULL,
+  weight.edge.crossings = NULL,
+  weight.node.edge.dist = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: layout_with_dh, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("c", "co", "coo", "w", "we", "wei", "weig", "weigh", "weight", "weight.", "weight.n", "weight.no", "weight.nod", "weight.node", "weight.node.", "weight.e", "weight.ed", "weight.edg", "weight.edge", "weight.edge."))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn layout_with_dh}.")
+    # Pre-3.0.0 signature: layout_with_dh(graph, coords, maxiter, fineiter, cool.fact, weight.node.dist, weight.border, weight.edge.lengths, weight.edge.crossings, weight.node.edge.dist)
+    .old_signature <- function(coords, maxiter, fineiter, cool.fact, weight.node.dist, weight.border, weight.edge.lengths, weight.edge.crossings, weight.node.edge.dist, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn layout_with_dh}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn layout_with_dh}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(coords)) base::list(coords = coords),
+        if (!base::missing(maxiter)) base::list(maxiter = maxiter),
+        if (!base::missing(fineiter)) base::list(fineiter = fineiter),
+        if (!base::missing(cool.fact)) base::list(cool.fact = cool.fact),
+        if (!base::missing(weight.node.dist)) base::list(weight.node.dist = weight.node.dist),
+        if (!base::missing(weight.border)) base::list(weight.border = weight.border),
+        if (!base::missing(weight.edge.lengths)) base::list(weight.edge.lengths = weight.edge.lengths),
+        if (!base::missing(weight.edge.crossings)) base::list(weight.edge.crossings = weight.edge.crossings),
+        if (!base::missing(weight.node.edge.dist)) base::list(weight.node.edge.dist = weight.node.edge.dist)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(coords)) "coords",
+        if (!base::missing(maxiter)) "maxiter",
+        if (!base::missing(fineiter)) "fineiter",
+        if (!base::missing(cool.fact)) "cool.fact",
+        if (!base::missing(weight.node.dist)) "weight.node.dist",
+        if (!base::missing(weight.border)) "weight.border",
+        if (!base::missing(weight.edge.lengths)) "weight.edge.lengths",
+        if (!base::missing(weight.edge.crossings)) "weight.edge.crossings",
+        if (!base::missing(weight.node.edge.dist)) "weight.node.edge.dist"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_with_dh} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `layout_with_dh()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  layout_with_dh(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    layout_with_dh(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
+  if (is.null(fineiter)) {
+    fineiter <- max(10, log2(vcount(graph)))
+  }
+  if (is.null(weight.edge.lengths)) {
+    weight.edge.lengths <- edge_density(graph) / 10
+  }
+  if (is.null(weight.edge.crossings)) {
+    weight.edge.crossings <- 1.0 - sqrt(edge_density(graph))
+  }
+  if (is.null(weight.node.edge.dist)) {
+    weight.node.edge.dist <- 0.2 * (1 - edge_density(graph))
+  }
+
   if (is.null(coords)) {
     coords <- matrix(NA_real_, ncol = 2, nrow = 0)
     use.seed <- FALSE
@@ -1410,8 +1757,7 @@ layout_with_dh <- function(
 }
 
 
-#' @rdname layout_with_dh
-#' @param ... Passed to `layout_with_dh()`.
+#' @rdname layout_spec
 #' @export
 with_dh <- function(...) layout_spec(layout_with_dh, ...)
 
@@ -1428,6 +1774,7 @@ with_dh <- function(...) layout_spec(layout_with_dh, ...)
 #' This function was rewritten from scratch in igraph version 0.8.0.
 #'
 #' @param graph The graph to lay out. Edge directions are ignored.
+#' @inheritParams rlang::args_dots_empty
 #' @param coords Optional starting positions for the vertices. If this argument
 #'   is not `NULL` then it should be an appropriate matrix of starting
 #'   coordinates.
@@ -1437,7 +1784,8 @@ with_dh <- function(...) layout_spec(layout_with_dh, ...)
 #' @param niter Integer scalar, the number of iterations to perform.
 #' @param start.temp Real scalar, the start temperature. This is the maximum
 #'   amount of movement alloved along one axis, within one step, for a vertex.
-#'   Currently it is decreased linearly to zero during the iteration.
+#'   Currently it is decreased linearly to zero during the iteration. The
+#'   default `NULL` uses `sqrt(vcount(graph))`.
 #' @param grid Character scalar, whether to use the faster, but less accurate
 #'   grid based implementation of the algorithm. By default (\dQuote{auto}), the
 #'   grid-based implementation is used if the graph has more than one thousand
@@ -1447,9 +1795,10 @@ with_dh <- function(...) layout_spec(layout_with_dh, ...)
 #'   attraction along the edges will be multiplied by the given edge weights.
 #'   This places vertices connected with a highly weighted edge closer to
 #'   each other. Weights must be positive.
-#' @param minx If not `NULL`, then it must be a numeric vector that gives
-#'   lower boundaries for the \sQuote{x} coordinates of the vertices. The length
-#'   of the vector must match the number of vertices in the graph.
+#' @param minx Numeric vector that gives lower boundaries
+#'   for the \sQuote{x} coordinates of the vertices.
+#'   The length of the vector must match the number of vertices in the graph.
+#'   Default: `NULL`.
 #' @param maxx Similar to `minx`, but gives the upper boundaries.
 #' @param miny Similar to `minx`, but gives the lower boundaries of the
 #'   \sQuote{y} coordinates.
@@ -1464,10 +1813,11 @@ with_dh <- function(...) layout_spec(layout_with_dh, ...)
 #'  (with a warning).
 #' @param maxiter A deprecated synonym of `niter`, for compatibility.
 #' @return A two- or three-column matrix, each row giving the coordinates of a
-#'   vertex, according to the ids of the vertex ids.
+#'   vertex, according to the IDs of the vertex IDs.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [layout_with_drl()], [layout_with_kk()] for
-#' other layout algorithms.
+#' other layout algorithms. See [with_fr()] to build a lazy layout
+#' specification for [add_layout_()].
 #' @references Fruchterman, T.M.J. and Reingold, E.M. (1991). Graph Drawing by
 #' Force-directed Placement. *Software - Practice and Experience*,
 #' 21(11):1129-1164.
@@ -1497,10 +1847,11 @@ with_dh <- function(...) layout_spec(layout_with_dh, ...)
 #'
 layout_with_fr <- function(
   graph,
+  ...,
   coords = NULL,
   dim = c(2, 3),
   niter = 500,
-  start.temp = sqrt(vcount(graph)),
+  start.temp = NULL,
   grid = c("auto", "grid", "nogrid"),
   weights = NULL,
   minx = NULL,
@@ -1515,8 +1866,83 @@ layout_with_fr <- function(
   repulserad = deprecated(),
   maxiter = deprecated()
 ) {
+  # BEGIN GENERATED ARG_HANDLE: layout_with_fr, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("g", "gr"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn layout_with_fr}.", i = "Spell out the full argument name."))
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("c", "co", "coo", "m", "mi", "min", "ma", "max"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn layout_with_fr}.")
+    # Pre-3.0.0 signature: layout_with_fr(graph, coords, dim, niter, start.temp, grid, weights, minx, maxx, miny, maxy, minz, maxz, coolexp, maxdelta, area, repulserad, maxiter)
+    .old_signature <- function(coords, dim, niter, start.temp, grid, weights, minx, maxx, miny, maxy, minz, maxz, coolexp, maxdelta, area, repulserad, maxiter, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn layout_with_fr}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn layout_with_fr}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(coords)) base::list(coords = coords),
+        if (!base::missing(dim)) base::list(dim = dim),
+        if (!base::missing(niter)) base::list(niter = niter),
+        if (!base::missing(start.temp)) base::list(start.temp = start.temp),
+        if (!base::missing(grid)) base::list(grid = grid),
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(minx)) base::list(minx = minx),
+        if (!base::missing(maxx)) base::list(maxx = maxx),
+        if (!base::missing(miny)) base::list(miny = miny),
+        if (!base::missing(maxy)) base::list(maxy = maxy),
+        if (!base::missing(minz)) base::list(minz = minz),
+        if (!base::missing(maxz)) base::list(maxz = maxz),
+        if (!base::missing(coolexp)) base::list(coolexp = coolexp),
+        if (!base::missing(maxdelta)) base::list(maxdelta = maxdelta),
+        if (!base::missing(area)) base::list(area = area),
+        if (!base::missing(repulserad)) base::list(repulserad = repulserad),
+        if (!base::missing(maxiter)) base::list(maxiter = maxiter)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(coords)) "coords",
+        if (!base::missing(dim)) "dim",
+        if (!base::missing(niter)) "niter",
+        if (!base::missing(start.temp)) "start.temp",
+        if (!base::missing(grid)) "grid",
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(minx)) "minx",
+        if (!base::missing(maxx)) "maxx",
+        if (!base::missing(miny)) "miny",
+        if (!base::missing(maxy)) "maxy",
+        if (!base::missing(minz)) "minz",
+        if (!base::missing(maxz)) "maxz",
+        if (!base::missing(coolexp)) "coolexp",
+        if (!base::missing(maxdelta)) "maxdelta",
+        if (!base::missing(area)) "area",
+        if (!base::missing(repulserad)) "repulserad",
+        if (!base::missing(maxiter)) "maxiter"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_with_fr} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `layout_with_fr()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  layout_with_fr(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    layout_with_fr(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   ensure_igraph(graph)
+  if (is.null(start.temp)) {
+    start.temp <- sqrt(vcount(graph))
+  }
+
   coords[] <- as.numeric(coords)
   dim <- igraph_match_arg(dim)
   if (!missing(niter) && !missing(maxiter)) {
@@ -1537,7 +1963,7 @@ layout_with_fr <- function(
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1608,8 +2034,7 @@ layout_with_fr <- function(
 }
 
 
-#' @rdname layout_with_fr
-#' @param ... Passed to `layout_with_fr()`.
+#' @rdname layout_spec
 #' @export
 with_fr <- function(...) layout_spec(layout_with_fr, ...)
 
@@ -1624,7 +2049,7 @@ with_fr <- function(...) layout_spec(layout_with_fr, ...)
 #' @keywords internal
 #' @export
 layout.fruchterman.reingold <- function(..., params = list()) {
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.1.0",
     "layout.fruchterman.reingold()",
     "layout_with_fr()"
@@ -1641,25 +2066,27 @@ layout.fruchterman.reingold <- function(..., params = list()) {
 #' See the referenced paper below for the details of the algorithm.
 #'
 #' @param graph The input graph. Edge directions are ignored.
-#' @param coords If not `NULL`, then the starting coordinates should be
-#'   given here, in a two or three column matrix, depending on the `dim`
-#'   argument.
+#' @inheritParams rlang::args_dots_empty
+#' @param coords Starting coordinates in a two or three column matrix,
+#'   depending on the `dim` argument.
+#'   Default: `NULL`.
 #' @param maxiter The maximum number of iterations to perform. Updating a
-#'   single vertex counts as an iteration.  A reasonable default is 40 * n * n,
+#'   single vertex counts as an iteration. The default `NULL` uses 40 * n * n,
 #'   where n is the number of vertices. The original paper suggests 4 * n * n,
 #'   but this usually only works if the other parameters are set up carefully.
-#' @param temp.max The maximum allowed local temperature. A reasonable default
-#'   is the number of vertices.
+#' @param temp.max The maximum allowed local temperature. The default `NULL`
+#'   uses the number of vertices.
 #' @param temp.min The global temperature at which the algorithm terminates
 #'   (even before reaching `maxiter` iterations). A reasonable default is
 #'   1/10.
-#' @param temp.init Initial local temperature of all vertices. A reasonable
-#'   default is the square root of the number of vertices.
+#' @param temp.init Initial local temperature of all vertices. The default
+#'   `NULL` uses the square root of the number of vertices.
 #' @return A numeric matrix with two columns, and as many rows as the number of
 #'   vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [layout_with_fr()],
-#' [plot.igraph()], [tkplot()]
+#' [plot.igraph()], [tkplot()]. See [with_gem()] to build a lazy layout
+#' specification for [add_layout_()].
 #' @references Arne Frick, Andreas Ludwig, Heiko Mehldau: A Fast Adaptive
 #' Layout Algorithm for Undirected Graphs, *Proc. Graph Drawing 1994*,
 #' LNCS 894, pp. 388-403, 1995.
@@ -1674,12 +2101,68 @@ layout.fruchterman.reingold <- function(..., params = list()) {
 #'
 layout_with_gem <- function(
   graph,
+  ...,
   coords = NULL,
-  maxiter = 40 * vcount(graph)^2,
-  temp.max = max(vcount(graph), 1),
-  temp.min = 1 / 10,
-  temp.init = sqrt(max(vcount(graph), 1))
+  maxiter = NULL,
+  temp.max = NULL,
+  temp.min = 0.1,
+  temp.init = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: layout_with_gem, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("t", "te", "tem", "temp", "temp.", "temp.m"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn layout_with_gem}.")
+    # Pre-3.0.0 signature: layout_with_gem(graph, coords, maxiter, temp.max, temp.min, temp.init)
+    .old_signature <- function(coords, maxiter, temp.max, temp.min, temp.init, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn layout_with_gem}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn layout_with_gem}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(coords)) base::list(coords = coords),
+        if (!base::missing(maxiter)) base::list(maxiter = maxiter),
+        if (!base::missing(temp.max)) base::list(temp.max = temp.max),
+        if (!base::missing(temp.min)) base::list(temp.min = temp.min),
+        if (!base::missing(temp.init)) base::list(temp.init = temp.init)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(coords)) "coords",
+        if (!base::missing(maxiter)) "maxiter",
+        if (!base::missing(temp.max)) "temp.max",
+        if (!base::missing(temp.min)) "temp.min",
+        if (!base::missing(temp.init)) "temp.init"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_with_gem} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `layout_with_gem()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  layout_with_gem(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    layout_with_gem(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
+  if (is.null(maxiter)) {
+    maxiter <- 40 * vcount(graph)^2
+  }
+  if (is.null(temp.max)) {
+    temp.max <- max(vcount(graph), 1)
+  }
+  if (is.null(temp.init)) {
+    temp.init <- sqrt(max(vcount(graph), 1))
+  }
+
   if (is.null(coords)) {
     coords <- matrix(NA_real_, ncol = 2, nrow = 0)
     use.seed <- FALSE
@@ -1699,8 +2182,7 @@ layout_with_gem <- function(
 }
 
 
-#' @rdname layout_with_gem
-#' @param ... Passed to `layout_with_gem()`.
+#' @rdname layout_spec
 #' @export
 with_gem <- function(...) layout_spec(layout_with_gem, ...)
 
@@ -1723,6 +2205,7 @@ with_gem <- function(...) layout_spec(layout_with_gem, ...)
 #' that, so a stable fixed point is not guaranteed.)
 #'
 #' @param graph The input graph.
+#' @inheritParams rlang::args_dots_empty
 #' @param start If given, then it should be a matrix with two columns and one
 #'   line for each vertex. This matrix will be used as starting positions for the
 #'   algorithm. If not given, then a random starting matrix is used.
@@ -1744,11 +2227,14 @@ with_gem <- function(...) layout_spec(layout_with_gem, ...)
 #' @return A numeric matrix with two columns, and a row for each vertex.
 #' @author Michael Schmuhl for the original graphopt code, rewritten and
 #' wrapped by Gabor Csardi \email{csardi.gabor@@gmail.com}.
+#' @seealso [with_graphopt()] to build a lazy layout specification for
+#'   [add_layout_()].
 #' @keywords graphs
 #' @export
 #' @family graph layouts
 layout_with_graphopt <- function(
   graph,
+  ...,
   start = NULL,
   niter = 500,
   charge = 0.001,
@@ -1757,6 +2243,55 @@ layout_with_graphopt <- function(
   spring.constant = 1,
   max.sa.movement = 5
 ) {
+  # BEGIN GENERATED ARG_HANDLE: layout_with_graphopt, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("s", "m", "ma", "sp", "spr", "spri", "sprin", "spring", "spring."))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn layout_with_graphopt}.")
+    # Pre-3.0.0 signature: layout_with_graphopt(graph, start, niter, charge, mass, spring.length, spring.constant, max.sa.movement)
+    .old_signature <- function(start, niter, charge, mass, spring.length, spring.constant, max.sa.movement, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn layout_with_graphopt}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn layout_with_graphopt}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(start)) base::list(start = start),
+        if (!base::missing(niter)) base::list(niter = niter),
+        if (!base::missing(charge)) base::list(charge = charge),
+        if (!base::missing(mass)) base::list(mass = mass),
+        if (!base::missing(spring.length)) base::list(spring.length = spring.length),
+        if (!base::missing(spring.constant)) base::list(spring.constant = spring.constant),
+        if (!base::missing(max.sa.movement)) base::list(max.sa.movement = max.sa.movement)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(start)) "start",
+        if (!base::missing(niter)) "niter",
+        if (!base::missing(charge)) "charge",
+        if (!base::missing(mass)) "mass",
+        if (!base::missing(spring.length)) "spring.length",
+        if (!base::missing(spring.constant)) "spring.constant",
+        if (!base::missing(max.sa.movement)) "max.sa.movement"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_with_graphopt} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `layout_with_graphopt()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  layout_with_graphopt(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    layout_with_graphopt(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
   start[] <- as.numeric(start)
   niter <- as.double(niter)
@@ -1781,8 +2316,7 @@ layout_with_graphopt <- function(
 }
 
 
-#' @rdname layout_with_graphopt
-#' @param ... Passed to `layout_with_graphopt()`.
+#' @rdname layout_spec
 #' @export
 with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 
@@ -1800,26 +2334,29 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 #' follows truthfully the original publication by Kamada and Kawai now.
 #'
 #' @param graph The input graph. Edge directions are ignored.
-#' @param coords If not `NULL`, then the starting coordinates should be
-#'   given here, in a two or three column matrix, depending on the `dim`
-#'   argument.
+#' @inheritParams rlang::args_dots_empty
+#' @param coords Starting coordinates in a two or three column matrix,
+#'   depending on the `dim` argument.
+#'   Default: `NULL`.
 #' @param dim Integer scalar, 2 or 3, the dimension of the layout.  Two
 #'   dimensional layouts are places on a plane, three dimensional ones in the 3d
 #'   space.
 #' @param maxiter The maximum number of iterations to perform. The algorithm
-#'   might terminate earlier, see the `epsilon` argument.
+#'   might terminate earlier, see the `epsilon` argument. The default `NULL`
+#'   uses `50 * vcount(graph)`.
 #' @param epsilon Numeric scalar, the algorithm terminates, if the maximal
 #'   delta is less than this. (See the reference below for what delta means.) If
 #'   you set this to zero, then the function always performs `maxiter`
 #'   iterations.
 #' @param kkconst Numeric scalar, the Kamada-Kawai vertex attraction constant.
-#'   Typical (and default) value is the number of vertices.
+#'   The default `NULL` uses the number of vertices.
 #' @param weights Edge weights, larger values will result in longer edges.
 #'   Note that this is the opposite of [layout_with_fr()], which produces
 #'   shorter edges for larger weights. Weights must be positive.
-#' @param minx If not `NULL`, then it must be a numeric vector that gives
-#'   lower boundaries for the \sQuote{x} coordinates of the vertices. The length
-#'   of the vector must match the number of vertices in the graph.
+#' @param minx Numeric vector that gives lower boundaries
+#'   for the \sQuote{x} coordinates of the vertices.
+#'   The length of the vector must match the number of vertices in the graph.
+#'   Default: `NULL`.
 #' @param maxx Similar to `minx`, but gives the upper boundaries.
 #' @param miny Similar to `minx`, but gives the lower boundaries of the
 #'   \sQuote{y} coordinates.
@@ -1837,7 +2374,8 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 #'   of the vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [layout_with_drl()], [plot.igraph()],
-#' [tkplot()]
+#' [tkplot()]. See [with_kk()] to build a lazy layout specification for
+#' [add_layout_()].
 #' @references Kamada, T. and Kawai, S.: An Algorithm for Drawing General
 #' Undirected Graphs. *Information Processing Letters*, 31/1, 7--15, 1989.
 #' @export
@@ -1851,11 +2389,12 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 #'
 layout_with_kk <- function(
   graph,
+  ...,
   coords = NULL,
   dim = c(2, 3),
-  maxiter = 50 * vcount(graph),
+  maxiter = NULL,
   epsilon = 0.0,
-  kkconst = max(vcount(graph), 1),
+  kkconst = NULL,
   weights = NULL,
   minx = NULL,
   maxx = NULL,
@@ -1869,6 +2408,82 @@ layout_with_kk <- function(
   coolexp = deprecated(),
   start = deprecated()
 ) {
+  # BEGIN GENERATED ARG_HANDLE: layout_with_kk, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("c", "co", "coo", "m", "ma", "max", "mi", "min", "s"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn layout_with_kk}.")
+    # Pre-3.0.0 signature: layout_with_kk(graph, coords, dim, maxiter, epsilon, kkconst, weights, minx, maxx, miny, maxy, minz, maxz, niter, sigma, initemp, coolexp, start)
+    .old_signature <- function(coords, dim, maxiter, epsilon, kkconst, weights, minx, maxx, miny, maxy, minz, maxz, niter, sigma, initemp, coolexp, start, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn layout_with_kk}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn layout_with_kk}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(coords)) base::list(coords = coords),
+        if (!base::missing(dim)) base::list(dim = dim),
+        if (!base::missing(maxiter)) base::list(maxiter = maxiter),
+        if (!base::missing(epsilon)) base::list(epsilon = epsilon),
+        if (!base::missing(kkconst)) base::list(kkconst = kkconst),
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(minx)) base::list(minx = minx),
+        if (!base::missing(maxx)) base::list(maxx = maxx),
+        if (!base::missing(miny)) base::list(miny = miny),
+        if (!base::missing(maxy)) base::list(maxy = maxy),
+        if (!base::missing(minz)) base::list(minz = minz),
+        if (!base::missing(maxz)) base::list(maxz = maxz),
+        if (!base::missing(niter)) base::list(niter = niter),
+        if (!base::missing(sigma)) base::list(sigma = sigma),
+        if (!base::missing(initemp)) base::list(initemp = initemp),
+        if (!base::missing(coolexp)) base::list(coolexp = coolexp),
+        if (!base::missing(start)) base::list(start = start)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(coords)) "coords",
+        if (!base::missing(dim)) "dim",
+        if (!base::missing(maxiter)) "maxiter",
+        if (!base::missing(epsilon)) "epsilon",
+        if (!base::missing(kkconst)) "kkconst",
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(minx)) "minx",
+        if (!base::missing(maxx)) "maxx",
+        if (!base::missing(miny)) "miny",
+        if (!base::missing(maxy)) "maxy",
+        if (!base::missing(minz)) "minz",
+        if (!base::missing(maxz)) "maxz",
+        if (!base::missing(niter)) "niter",
+        if (!base::missing(sigma)) "sigma",
+        if (!base::missing(initemp)) "initemp",
+        if (!base::missing(coolexp)) "coolexp",
+        if (!base::missing(start)) "start"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_with_kk} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `layout_with_kk()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  layout_with_kk(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    layout_with_kk(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
+  if (is.null(maxiter)) {
+    maxiter <- 50 * vcount(graph)
+  }
+  if (is.null(kkconst)) {
+    kkconst <- max(vcount(graph), 1)
+  }
+
   # Argument checks
   if (!missing(coords) && !missing(start)) {
     cli::cli_abort(c(
@@ -1890,7 +2505,7 @@ layout_with_kk <- function(
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1965,10 +2580,8 @@ layout_with_kk <- function(
 }
 
 
-#' @rdname layout_with_kk
-#' @param ... Passed to `layout_with_kk()`.
+#' @rdname layout_spec
 #' @export
-#'
 with_kk <- function(...) layout_spec(layout_with_kk, ...)
 
 #' The Kamada-Kawai layout algorithm
@@ -1982,7 +2595,7 @@ with_kk <- function(...) layout_spec(layout_with_kk, ...)
 #' @keywords internal
 #' @export
 layout.kamada.kawai <- function(..., params = list()) {
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.1.0",
     "layout.kamada.kawai()",
     "layout_with_kk()"
@@ -2001,36 +2614,102 @@ layout.kamada.kawai <- function(..., params = list()) {
 #' (<https://lgl.sourceforge.net/>).
 #'
 #' @param graph The input graph
+#' @inheritParams rlang::args_dots_empty
 #' @param maxiter The maximum number of iterations to perform (150).
-#' @param maxdelta The maximum change for a vertex during an iteration (the
-#'   number of vertices).
-#' @param area The area of the surface on which the vertices are placed (square
-#'   of the number of vertices).
+#' @param maxdelta The maximum change for a vertex during an iteration. The
+#'   default `NULL` uses the number of vertices.
+#' @param area The area of the surface on which the vertices are placed. The
+#'   default `NULL` uses the square of the number of vertices.
 #' @param coolexp The cooling exponent of the simulated annealing (1.5).
-#' @param repulserad Cancellation radius for the repulsion (the `area`
-#'   times the number of vertices).
+#' @param repulserad Cancellation radius for the repulsion. The default
+#'   `NULL` uses the `area` times the number of vertices.
 #' @param cellsize The size of the cells for the grid. When calculating the
 #'   repulsion forces between vertices only vertices in the same or neighboring
-#'   grid cells are taken into account (the fourth root of the number of
-#'   `area`.
-#' @param root The id of the vertex to place at the middle of the layout. The
+#'   grid cells are taken into account. The default `NULL` uses the square
+#'   root of the square root of the `area`.
+#' @param root The ID of the vertex to place at the middle of the layout. The
 #'   default value is -1 which means that a random vertex is selected.
 #' @return A numeric matrix with two columns and as many rows as vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @seealso [with_lgl()] to build a lazy layout specification for
+#'   [add_layout_()].
 #' @keywords graphs
 #' @export
 #' @family graph layouts
 layout_with_lgl <- function(
   graph,
+  ...,
   maxiter = 150,
-  maxdelta = vcount(graph),
-  area = vcount(graph)^2,
+  maxdelta = NULL,
+  area = NULL,
   coolexp = 1.5,
-  repulserad = area * vcount(graph),
-  cellsize = sqrt(sqrt(area)),
+  repulserad = NULL,
+  cellsize = NULL,
   root = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: layout_with_lgl, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m", "ma", "max", "c", "r"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn layout_with_lgl}.")
+    # Pre-3.0.0 signature: layout_with_lgl(graph, maxiter, maxdelta, area, coolexp, repulserad, cellsize, root)
+    .old_signature <- function(maxiter, maxdelta, area, coolexp, repulserad, cellsize, root, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn layout_with_lgl}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn layout_with_lgl}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(maxiter)) base::list(maxiter = maxiter),
+        if (!base::missing(maxdelta)) base::list(maxdelta = maxdelta),
+        if (!base::missing(area)) base::list(area = area),
+        if (!base::missing(coolexp)) base::list(coolexp = coolexp),
+        if (!base::missing(repulserad)) base::list(repulserad = repulserad),
+        if (!base::missing(cellsize)) base::list(cellsize = cellsize),
+        if (!base::missing(root)) base::list(root = root)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(maxiter)) "maxiter",
+        if (!base::missing(maxdelta)) "maxdelta",
+        if (!base::missing(area)) "area",
+        if (!base::missing(coolexp)) "coolexp",
+        if (!base::missing(repulserad)) "repulserad",
+        if (!base::missing(cellsize)) "cellsize",
+        if (!base::missing(root)) "root"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_with_lgl} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `layout_with_lgl()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  layout_with_lgl(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    layout_with_lgl(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
+  if (is.null(maxdelta)) {
+    maxdelta <- vcount(graph)
+  }
+  if (is.null(area)) {
+    area <- vcount(graph)^2
+  }
+  if (is.null(repulserad)) {
+    repulserad <- area * vcount(graph)
+  }
+  if (is.null(cellsize)) {
+    cellsize <- sqrt(sqrt(area))
+  }
+
   if (is.null(root)) {
     root <- -1
   } else {
@@ -2052,8 +2731,7 @@ layout_with_lgl <- function(
 }
 
 
-#' @rdname layout_with_lgl
-#' @param ... Passed to `layout_with_lgl()`.
+#' @rdname layout_spec
 #' @export
 with_lgl <- function(...) layout_spec(layout_with_lgl, ...)
 
@@ -2068,7 +2746,7 @@ with_lgl <- function(...) layout_spec(layout_with_lgl, ...)
 #' @keywords internal
 #' @export
 layout.lgl <- function(..., params = list()) {
-  lifecycle::deprecate_soft("2.1.0", "layout.lgl()", "layout_with_lgl()")
+  lifecycle::deprecate_warn("2.1.0", "layout.lgl()", "layout_with_lgl()")
   do_call(layout_with_lgl, .args = c(list(...), params))
 }
 
@@ -2101,12 +2779,14 @@ layout.lgl <- function(..., params = list()) {
 #'   minus one, but only if the graph is connected; for unconnected graphs, the
 #'   only possible value is 2. This is because `merge_coords()` only works in
 #'   2D.
-#' @param options This is currently ignored, as ARPACK is not used any more for
-#'   solving the eigenproblem
+#' @param options `r lifecycle::badge("deprecated")` This argument is not
+#'   supported from igraph version 1.6.0, as ARPACK is not used any more for
+#'   solving the eigenproblem. Supplying it raises an error.
 #' @return A numeric matrix with `dim` columns.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
-#' @seealso [layout()], [plot.igraph()]
+#' @seealso [layout()], [plot.igraph()]. See [with_mds()] to build a lazy
+#'   layout specification for [add_layout_()].
 #' @references Cox, T. F. and Cox, M. A. A. (2001) *Multidimensional
 #' Scaling*.  Second edition. Chapman and Hall.
 #' @export
@@ -2121,25 +2801,12 @@ layout_with_mds <- function(
   graph,
   dist = NULL,
   dim = 2,
-  options = arpack_defaults()
+  options = deprecated()
 ) {
-  if (is.function(options)) {
-    lifecycle::deprecate_soft(
-      "1.6.0",
-      "layout_with_mds(options = 'must be a list')",
-      details = c(
-        "`arpack_defaults()` is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`."
-      )
-    )
-    options <- options()
+  if (lifecycle::is_present(options)) {
+    lifecycle::deprecate_stop("1.6.0", "layout_with_mds(options = )")
   }
 
-  # Argument checks
-  ensure_igraph(graph)
-  dist[] <- as.numeric(dist)
-  dim <- as.numeric(dim)
-
-  # Function call
   layout_mds_impl(
     graph = graph,
     dist = dist,
@@ -2148,8 +2815,7 @@ layout_with_mds <- function(
 }
 
 
-#' @rdname layout_with_mds
-#' @param ... Passed to `layout_with_mds()`.
+#' @rdname layout_spec
 #' @export
 with_mds <- function(...) layout_spec(layout_with_mds, ...)
 
@@ -2182,9 +2848,10 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
 #' For more details, see the reference below.
 #'
 #' @param graph The input graph.
-#' @param layers A numeric vector or `NULL`. If not `NULL`, then it
-#'   should specify the layer index of the vertices. Layers are numbered from
-#'   one. If `NULL`, then igraph calculates the layers automatically.
+#' @inheritParams rlang::args_dots_empty
+#' @param layers A numeric vector of the layer indices of the vertices.
+#'   Layers are numbered from one.
+#'   Default: `NULL`, igraph calculates the layers automatically.
 #' @param hgap Real scalar, the minimum horizontal gap between vertices in the
 #'   same layer.
 #' @param vgap Real scalar, the distance between layers.
@@ -2219,6 +2886,8 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
 #'     }
 #'   }
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
+#' @seealso [with_sugiyama()] to build a lazy layout specification for
+#'   [add_layout_()].
 #' @references K. Sugiyama, S. Tagawa and M. Toda, "Methods for Visual
 #' Understanding of Hierarchical Systems". IEEE Transactions on Systems, Man
 #' and Cybernetics 11(2):109-125, 1981.
@@ -2291,7 +2960,7 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
 #' ), 1, which))
 #'
 #' ## Simple plot, not very nice
-#' par(mar = rep(.1, 4))
+#' par(mar = rep(0.1, 4))
 #' plot(DC, layout = lay1$layout, vertex.label.cex = 0.5)
 #'
 #' ## Sugiyama plot
@@ -2359,7 +3028,7 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
 #' realedge <- as_edgelist(layex$extd_graph)[, 2] <= vcount(ex)
 #' plot(layex$extd_graph,
 #'   vertex.label.cex = 0.5,
-#'   edge.arrow.size = .5,
+#'   edge.arrow.size = 0.5,
 #'   vertex.size = ifelse(origvert, 5, 0),
 #'   vertex.shape = ifelse(origvert, "square", "none"),
 #'   vertex.label = ifelse(origvert, V(ex)$name, ""),
@@ -2368,6 +3037,7 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
 #'
 layout_with_sugiyama <- function(
   graph,
+  ...,
   layers = NULL,
   hgap = 1,
   vgap = 1,
@@ -2375,6 +3045,51 @@ layout_with_sugiyama <- function(
   weights = NULL,
   attributes = c("default", "all", "none")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: layout_with_sugiyama, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: layout_with_sugiyama(graph, layers, hgap, vgap, maxiter, weights, attributes)
+    .old_signature <- function(layers, hgap, vgap, maxiter, weights, attributes, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn layout_with_sugiyama}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn layout_with_sugiyama}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(layers)) base::list(layers = layers),
+        if (!base::missing(hgap)) base::list(hgap = hgap),
+        if (!base::missing(vgap)) base::list(vgap = vgap),
+        if (!base::missing(maxiter)) base::list(maxiter = maxiter),
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(attributes)) base::list(attributes = attributes)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(layers)) "layers",
+        if (!base::missing(hgap)) "hgap",
+        if (!base::missing(vgap)) "vgap",
+        if (!base::missing(maxiter)) "maxiter",
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(attributes)) "attributes"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_with_sugiyama} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `layout_with_sugiyama()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  layout_with_sugiyama(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    layout_with_sugiyama(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   attributes <- igraph_match_arg(attributes)
 
   res <- layout_sugiyama_impl(
@@ -2487,8 +3202,7 @@ layout_with_sugiyama <- function(
 }
 
 
-#' @rdname layout_with_sugiyama
-#' @param ... Passed to `layout_with_sugiyama()`.
+#' @rdname layout_spec
 #' @export
 with_sugiyama <- function(...) layout_spec(layout_with_sugiyama, ...)
 
@@ -2521,9 +3235,11 @@ with_sugiyama <- function(...) layout_spec(layout_with_sugiyama, ...)
 #' @param layouts A list of two-column matrices.
 #' @param method Character constant giving the method to use. Right now only
 #'   `dla` is implemented.
-#' @param layout A function object, the layout function to use.
-#' @param \dots Additional arguments to pass to the `layout` layout
-#'   function.
+#' @param layout A function object, the layout function to use. The default
+#'   `NULL` uses `layout_with_kk`.
+#' @param \dots For `layout_components()`, additional arguments to pass to
+#'   the `layout` layout function. For `merge_coords()`, these dots must be
+#'   empty.
 #' @return A matrix with two columns and as many lines as the total number of
 #'   vertices in the graphs.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -2543,7 +3259,47 @@ with_sugiyama <- function(...) layout_spec(layout_with_sugiyama, ...)
 #' lay <- merge_coords(graphs, layouts)
 #' g <- disjoint_union(graphs)
 #' plot(g, layout = lay, vertex.size = 3, labels = NA, edge.color = "black")
-merge_coords <- function(graphs, layouts, method = "dla") {
+merge_coords <- function(
+  graphs,
+  layouts,
+  ...,
+  method = "dla"
+) {
+  # BEGIN GENERATED ARG_HANDLE: merge_coords, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: merge_coords(graphs, layouts, method)
+    .old_signature <- function(method, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn merge_coords}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn merge_coords}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(method)) base::list(method = method)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(method)) "method"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn merge_coords} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `merge_coords()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  merge_coords(", base::paste(base::c("graphs", "layouts", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    merge_coords(", base::paste(base::c("graphs", "layouts", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   lapply(graphs, ensure_igraph)
   if (method != "dla") {
     cli::cli_abort("{.arg method} must be {.str dla}, not {.str {method}}.")
@@ -2566,6 +3322,7 @@ merge_coords <- function(graphs, layouts, method = "dla") {
 #' coordinate separately to fit into the given limits.
 #'
 #' @param layout A matrix with two or three columns, the layout to normalize.
+#' @inheritParams rlang::args_dots_empty
 #' @param xmin,xmax The limits for the first coordinate, if one of them or both
 #'   are `NULL` then no normalization is performed along this direction.
 #' @param ymin,ymax The limits for the second coordinate, if one of them or
@@ -2580,6 +3337,7 @@ merge_coords <- function(graphs, layouts, method = "dla") {
 #' @keywords graphs
 norm_coords <- function(
   layout,
+  ...,
   xmin = -1,
   xmax = 1,
   ymin = -1,
@@ -2587,6 +3345,53 @@ norm_coords <- function(
   zmin = -1,
   zmax = 1
 ) {
+  # BEGIN GENERATED ARG_HANDLE: norm_coords, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("x", "xm", "y", "ym", "z", "zm"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn norm_coords}.")
+    # Pre-3.0.0 signature: norm_coords(layout, xmin, xmax, ymin, ymax, zmin, zmax)
+    .old_signature <- function(xmin, xmax, ymin, ymax, zmin, zmax, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn norm_coords}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn norm_coords}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(xmin)) base::list(xmin = xmin),
+        if (!base::missing(xmax)) base::list(xmax = xmax),
+        if (!base::missing(ymin)) base::list(ymin = ymin),
+        if (!base::missing(ymax)) base::list(ymax = ymax),
+        if (!base::missing(zmin)) base::list(zmin = zmin),
+        if (!base::missing(zmax)) base::list(zmax = zmax)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(xmin)) "xmin",
+        if (!base::missing(xmax)) "xmax",
+        if (!base::missing(ymin)) "ymin",
+        if (!base::missing(ymax)) "ymax",
+        if (!base::missing(zmin)) "zmin",
+        if (!base::missing(zmax)) "zmax"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn norm_coords} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `norm_coords()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  norm_coords(", base::paste(base::c("layout", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    norm_coords(", base::paste(base::c("layout", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   if (!is.matrix(layout)) {
     cli::cli_abort(
       "{.arg layout} must be a matrix, not {.obj_type_friendly {layout}}."
@@ -2633,8 +3438,12 @@ norm_coords <- function(
 #' @rdname merge_coords
 #' @param graph The input graph.
 #' @export
-layout_components <- function(graph, layout = layout_with_kk, ...) {
+layout_components <- function(graph, layout = NULL, ...) {
   ensure_igraph(graph)
+
+  if (is.null(layout)) {
+    layout <- layout_with_kk
+  }
 
   V(graph)$id <- seq(vcount(graph))
   gl <- decompose(graph)
@@ -2659,8 +3468,7 @@ layout_components <- function(graph, layout = layout_with_kk, ...) {
 #' @export
 #' @keywords internal
 layout.spring <- function(graph, ...) {
-  lifecycle::deprecate_warn("2.1.0", "layout.spring()", "layout_with_fr()")
-  layout_with_fr(graph)
+  lifecycle::deprecate_stop("2.1.0", "layout.spring()", "layout_with_fr()")
 }
 
 #' SVD layout, this was removed from igraph
@@ -2677,8 +3485,7 @@ layout.spring <- function(graph, ...) {
 #' @keywords internal
 #' @export
 layout.svd <- function(graph, ...) {
-  lifecycle::deprecate_warn("2.1.0", "layout.svd()", "layout_with_fr()")
-  layout_with_fr(graph)
+  lifecycle::deprecate_stop("2.1.0", "layout.svd()", "layout_with_fr()")
 }
 
 #' Grid Fruchterman-Reingold layout, this was removed from igraph
@@ -2696,12 +3503,11 @@ layout.svd <- function(graph, ...) {
 #' @keywords internal
 #' @export
 layout.fruchterman.reingold.grid <- function(graph, ...) {
-  lifecycle::deprecate_warn(
+  lifecycle::deprecate_stop(
     "2.1.0",
     "layout.fruchterman.reingold.grid()",
     "layout_with_fr()"
   )
-  layout_with_fr(graph)
 }
 
 #' The DrL graph layout generator
@@ -2723,7 +3529,7 @@ layout.drl <- function(
   dim = 2
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "layout.drl()", "layout_with_drl()")
+  lifecycle::deprecate_warn("2.0.0", "layout.drl()", "layout_with_drl()")
   layout_with_drl(
     graph = graph,
     use.seed = use.seed,
@@ -2827,15 +3633,16 @@ layout.drl <- function(
 #' `drl_defaults$final`.
 #'
 #' @aliases drl_defaults igraph.drl.coarsen
-#' @aliases  igraph.drl.coarsest igraph.drl.default igraph.drl.final
-#'  igraph.drl.refine
+#' @aliases igraph.drl.coarsest igraph.drl.default igraph.drl.final igraph.drl.refine
 #' @param graph The input graph, in can be directed or undirected.
-#' @param use.seed Logical scalar, whether to use the coordinates given in the
+#' @inheritParams rlang::args_dots_empty
+#' @param use.seed Logical, whether to use the coordinates given in the
 #'   `seed` argument as a starting point.
 #' @param seed A matrix with two columns, the starting coordinates for the
-#'   vertices is `use.seed` is `TRUE`. It is ignored otherwise.
+#'   vertices is `use.seed` is `TRUE`. It is ignored otherwise. The default
+#'   `NULL` draws uniformly random starting coordinates.
 #' @param options Options for the layout generator, a named list. See details
-#'   below.
+#'   below. The default `NULL` uses `drl_defaults$default`.
 #' @param weights The weights of the edges. It must be a positive numeric vector,
 #'   `NULL` or `NA`. If it is `NULL` and the input graph has a
 #'   \sQuote{weight} edge attribute, then that attribute will be used. If
@@ -2851,7 +3658,8 @@ layout.drl <- function(
 #' @author Shawn Martin (<https://www.cs.otago.ac.nz/homepages/smartin/>)
 #' and Gabor Csardi \email{csardi.gabor@@gmail.com} for the R/igraph interface
 #' and the three dimensional version.
-#' @seealso [layout()] for other layout generators.
+#' @seealso [layout()] for other layout generators. See [with_drl()] to
+#'   build a lazy layout specification for [add_layout_()].
 #' @references See the following technical report: Martin, S., Brown, W.M.,
 #' Klavans, R., Boyack, K.W., DrL: Distributed Recursive (Graph) Layout. SAND
 #' Reports, 2008. 2936: p. 1-10.
@@ -2867,13 +3675,64 @@ layout.drl <- function(
 #'
 layout_with_drl <- function(
   graph,
+  ...,
   use.seed = FALSE,
-  seed = matrix(runif(vcount(graph) * 2), ncol = 2),
-  options = drl_defaults$default,
+  seed = NULL,
+  options = NULL,
   weights = NULL,
   dim = c(2, 3)
 ) {
+  # BEGIN GENERATED ARG_HANDLE: layout_with_drl, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: layout_with_drl(graph, use.seed, seed, options, weights, dim)
+    .old_signature <- function(use.seed, seed, options, weights, dim, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn layout_with_drl}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn layout_with_drl}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(use.seed)) base::list(use.seed = use.seed),
+        if (!base::missing(seed)) base::list(seed = seed),
+        if (!base::missing(options)) base::list(options = options),
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(dim)) base::list(dim = dim)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(use.seed)) "use.seed",
+        if (!base::missing(seed)) "seed",
+        if (!base::missing(options)) "options",
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(dim)) "dim"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_with_drl} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `layout_with_drl()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  layout_with_drl(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    layout_with_drl(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
+
+  if (is.null(seed)) {
+    seed <- matrix(runif(vcount(graph) * 2), ncol = 2)
+  }
+  if (is.null(options)) {
+    options <- drl_defaults$default
+  }
 
   dim <- igraph_match_arg(dim)
 
@@ -2885,7 +3744,7 @@ layout_with_drl <- function(
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && !any(is.na(weights))) {
+  if (!is.null(weights) && !anyNA(weights)) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -2915,9 +3774,7 @@ layout_with_drl <- function(
 }
 
 
-#' @rdname layout_with_drl
-#' @param ... Passed to `layout_with_drl()`.
-#' @family layout_drl
+#' @rdname layout_spec
 #' @export
 with_drl <- function(...) layout_spec(layout_with_drl, ...)
 
@@ -2941,14 +3798,14 @@ igraph.drl.default <- list(
   cooldown.iterations = 200,
   cooldown.temperature = 2000,
   cooldown.attraction = 1,
-  cooldown.damping.mult = .1,
+  cooldown.damping.mult = 0.1,
   crunch.iterations = 50,
   crunch.temperature = 250,
   crunch.attraction = 1,
   crunch.damping.mult = 0.25,
   simmer.iterations = 100,
   simmer.temperature = 250,
-  simmer.attraction = .5,
+  simmer.attraction = 0.5,
   simmer.damping.mult = 0
 )
 
@@ -2971,14 +3828,14 @@ igraph.drl.coarsen <- list(
   cooldown.iterations = 200,
   cooldown.temperature = 2000,
   cooldown.attraction = 1,
-  cooldown.damping.mult = .1,
+  cooldown.damping.mult = 0.1,
   crunch.iterations = 50,
   crunch.temperature = 250,
   crunch.attraction = 1,
   crunch.damping.mult = 0.25,
   simmer.iterations = 100,
   simmer.temperature = 250,
-  simmer.attraction = .5,
+  simmer.attraction = 0.5,
   simmer.damping.mult = 0
 )
 
@@ -3001,14 +3858,14 @@ igraph.drl.coarsest <- list(
   cooldown.iterations = 200,
   cooldown.temperature = 2000,
   cooldown.attraction = 1,
-  cooldown.damping.mult = .1,
+  cooldown.damping.mult = 0.1,
   crunch.iterations = 200,
   crunch.temperature = 250,
   crunch.attraction = 1,
   crunch.damping.mult = 0.25,
   simmer.iterations = 100,
   simmer.temperature = 250,
-  simmer.attraction = .5,
+  simmer.attraction = 0.5,
   simmer.damping.mult = 0
 )
 
@@ -3018,7 +3875,7 @@ igraph.drl.refine <- list(
   edge.cut = 32 / 40,
   init.iterations = 0,
   init.temperature = 50,
-  init.attraction = .5,
+  init.attraction = 0.5,
   init.damping.mult = 1.0,
   liquid.iterations = 0,
   liquid.temperature = 2000,
@@ -3026,19 +3883,19 @@ igraph.drl.refine <- list(
   liquid.damping.mult = 1.0,
   expansion.iterations = 50,
   expansion.temperature = 500,
-  expansion.attraction = .1,
-  expansion.damping.mult = .25,
+  expansion.attraction = 0.1,
+  expansion.damping.mult = 0.25,
   cooldown.iterations = 50,
   cooldown.temperature = 250,
   cooldown.attraction = 1,
-  cooldown.damping.mult = .1,
+  cooldown.damping.mult = 0.1,
   crunch.iterations = 50,
   crunch.temperature = 250,
   crunch.attraction = 1,
   crunch.damping.mult = 0.25,
   simmer.iterations = 0,
   simmer.temperature = 250,
-  simmer.attraction = .5,
+  simmer.attraction = 0.5,
   simmer.damping.mult = 0
 )
 
@@ -3048,7 +3905,7 @@ igraph.drl.final <- list(
   edge.cut = 32 / 40,
   init.iterations = 0,
   init.temperature = 50,
-  init.attraction = .5,
+  init.attraction = 0.5,
   init.damping.mult = 0,
   liquid.iterations = 0,
   liquid.temperature = 2000,
@@ -3061,14 +3918,14 @@ igraph.drl.final <- list(
   cooldown.iterations = 50,
   cooldown.temperature = 200,
   cooldown.attraction = 1,
-  cooldown.damping.mult = .1,
+  cooldown.damping.mult = 0.1,
   crunch.iterations = 50,
   crunch.temperature = 250,
   crunch.attraction = 1,
   crunch.damping.mult = 0.25,
   simmer.iterations = 25,
   simmer.temperature = 250,
-  simmer.attraction = .5,
+  simmer.attraction = 0.5,
   simmer.damping.mult = 0
 )
 

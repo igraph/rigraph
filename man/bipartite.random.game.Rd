@@ -28,7 +28,7 @@ be given for \eqn{G(n,m)} graphs.}
 \item{m}{Integer scalar, the number of edges for \eqn{G(n,m)} graphs. Should not
 be given for \eqn{G(n,p)} graphs.}
 
-\item{directed}{Logical scalar, whether to create a directed graph. See also
+\item{directed}{Logical, whether to create a directed graph. See also
 the \code{mode} argument.}
 
 \item{mode}{Character scalar, specifies how to direct the edges in directed
@@ -45,8 +45,4 @@ is ignored for undirected graphs.}
 \code{bipartite.random.game()} was renamed to \code{\link[=sample_bipartite]{sample_bipartite()}} to create a more
 consistent API.
 }
-\section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_bipartite_game_gnm}{\code{bipartite_game_gnm()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_bipartite_game_gnp}{\code{bipartite_game_gnp()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
-}
-
 \keyword{internal}

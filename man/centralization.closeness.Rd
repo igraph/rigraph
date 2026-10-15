@@ -16,7 +16,7 @@ centralization.closeness(
 \item{mode}{This is the same as the \code{mode} argument of
 \code{closeness()}.}
 
-\item{normalized}{Logical scalar. Whether to normalize the graph level
+\item{normalized}{Logical. Whether to normalize the graph level
 centrality score by dividing by the theoretical maximum.}
 }
 \description{

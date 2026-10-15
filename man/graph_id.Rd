@@ -2,7 +2,7 @@
 % Please edit documentation in R/iterators.R
 \name{graph_id}
 \alias{graph_id}
-\title{Get the id of a graph}
+\title{Get the ID of a graph}
 \usage{
 graph_id(x, ...)
 }
@@ -12,14 +12,14 @@ graph_id(x, ...)
 \item{...}{Not used currently.}
 }
 \value{
-The id of the graph, a character scalar. For
-vertex and edge sequences the id of the graph they were created from.
+The ID of the graph, a character scalar. For
+vertex and edge sequences the ID of the graph they were created from.
 }
 \description{
-Graph ids are used to check that a vertex or edge sequence
+Graph IDs are used to check that a vertex or edge sequence
 belongs to a graph. If you create a new graph by changing the
-structure of a graph, the new graph will have a new id.
-Changing the attributes will not change the id.
+structure of a graph, the new graph will have a new ID.
+Changing the attributes will not change the ID.
 }
 \examples{
 g <- make_ring(10)

@@ -9,13 +9,13 @@
 \usage{
 \method{print}{igraph}(
   x,
-  full = igraph_opt("print.full"),
-  graph.attributes = igraph_opt("print.graph.attributes"),
-  vertex.attributes = igraph_opt("print.vertex.attributes"),
-  edge.attributes = igraph_opt("print.edge.attributes"),
+  full = NULL,
+  graph.attributes = NULL,
+  vertex.attributes = NULL,
+  edge.attributes = NULL,
   names = TRUE,
-  max.lines = igraph_opt("auto.print.lines"),
-  id = igraph_opt("print.id"),
+  max.lines = NULL,
+  id = NULL,
   ...
 )
 
@@ -24,23 +24,28 @@
 \arguments{
 \item{x}{The graph to print.}
 
-\item{full}{Logical scalar, whether to print the graph structure itself as
-well.}
+\item{full}{Logical, whether to print the graph structure itself as
+well. The default \code{NULL} uses the \code{print.full} igraph option.}
 
-\item{graph.attributes}{Logical constant, whether to print graph attributes.}
+\item{graph.attributes}{Logical, whether to print graph attributes. The
+default \code{NULL} uses the \code{print.graph.attributes} igraph option.}
 
-\item{vertex.attributes}{Logical constant, whether to print vertex
-attributes.}
+\item{vertex.attributes}{Logical, whether to print vertex
+attributes. The default \code{NULL} uses the \code{print.vertex.attributes} igraph
+option.}
 
-\item{edge.attributes}{Logical constant, whether to print edge attributes.}
+\item{edge.attributes}{Logical, whether to print edge attributes. The
+default \code{NULL} uses the \code{print.edge.attributes} igraph option.}
 
-\item{names}{Logical constant, whether to print symbolic vertex names (i.e.
-the \code{name} vertex attribute) or vertex ids.}
+\item{names}{Logical, whether to print symbolic vertex names (i.e.
+the \code{name} vertex attribute) or vertex IDs.}
 
 \item{max.lines}{The maximum number of lines to use. The rest of the
-output will be truncated.}
+output will be truncated. If not given, the \code{auto.print.lines} igraph
+option applies; \code{NULL} prints all lines.}
 
-\item{id}{Whether to print the graph ID.}
+\item{id}{Whether to print the graph ID. The default \code{NULL} uses the
+\code{print.id} igraph option.}
 
 \item{\dots}{Additional agruments.}
 
@@ -74,7 +79,7 @@ vertices: \preformatted{    IGRAPH badcafe DNW- 10 9 -- In-star
 The first line always
 starts with \code{IGRAPH}, showing you that the object is an igraph graph.
 Then a seven character code is printed, this the first seven characters
-of the unique id of the graph. See \code{\link[=graph_id]{graph_id()}} for more.
+of the unique ID of the graph. See \code{\link[=graph_id]{graph_id()}} for more.
 Then a four letter long code string is printed. The first letter
 distinguishes between directed (\sQuote{\code{D}}) and undirected
 (\sQuote{\code{U}}) graphs. The second letter is \sQuote{\code{N}} for named
@@ -100,6 +105,12 @@ As of igraph 0.4 \code{print_all()} and \code{print.igraph()} use the
 
 As of igraph 1.1.1, the \code{str.igraph} function is defunct, use
 \code{print_all()}.
+
+Output style is controlled by the \code{print.style} igraph option. The default
+\code{"cli"} produces cli-styled output with section rules, typed attribute
+listings and Unicode arrows for edges. Set
+\code{igraph_options(print.style = "classic")} for the historical
+\verb{IGRAPH ... DNW-} header relied on by parsers and tutorials.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_degree}{\code{degree()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}

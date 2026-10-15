@@ -10,7 +10,7 @@ hrg.create(graph, prob)
 \item{graph}{The igraph graph to create the HRG from.}
 
 \item{prob}{A vector of probabilities, one for each vertex, in the order of
-vertex ids.}
+vertex IDs.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

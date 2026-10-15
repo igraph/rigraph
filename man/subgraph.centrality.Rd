@@ -9,7 +9,7 @@ subgraph.centrality(graph, diag = FALSE)
 \arguments{
 \item{graph}{The input graph. It will be treated as undirected.}
 
-\item{diag}{Boolean scalar, whether to include the diagonal of the adjacency
+\item{diag}{Logical, whether to include the diagonal of the adjacency
 matrix in the analysis. Giving \code{FALSE} here effectively eliminates the
 loops edges from the graph before the calculation.}
 }

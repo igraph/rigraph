@@ -77,7 +77,7 @@ test_that("rglplot() works", {
 
   # https://stackoverflow.com/a/46320771/5489251
   withr::local_envvar(RGL_USE_NULL = TRUE)
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   el <- cbind(sample(1:5), sample(1:5))
   g <- graph_from_edgelist(el)

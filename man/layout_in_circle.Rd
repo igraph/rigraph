@@ -2,27 +2,23 @@
 % Please edit documentation in R/layout.R
 \name{layout_in_circle}
 \alias{layout_in_circle}
-\alias{in_circle}
 \title{Graph layout with vertices on a circle.}
 \usage{
-layout_in_circle(graph, order = V(graph))
-
-in_circle(...)
+layout_in_circle(graph, order = NULL)
 }
 \arguments{
 \item{graph}{The input graph.}
 
 \item{order}{The vertices to place on the circle, in the order of their
 desired placement. Vertices that are not included here will be placed at
-(0,0).}
-
-\item{...}{Passed to \code{layout_in_circle()}.}
+(0,0). The default \code{NULL} selects all vertices, in the order of their
+IDs.}
 }
 \value{
 A numeric matrix with two columns, and one row for each vertex.
 }
 \description{
-Place vertices on a circle, in the order of their vertex ids.
+Place vertices on a circle, in the order of their vertex IDs.
 }
 \details{
 If you want to order the vertices differently, then permute them using the
@@ -51,6 +47,9 @@ plot(karate, layout = coords)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
+\code{\link[=in_circle]{in_circle()}} to build a lazy layout specification for
+\code{\link[=add_layout_]{add_layout_()}}.
+
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},
 \code{\link[=component_wise]{component_wise()}},

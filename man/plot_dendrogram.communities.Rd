@@ -5,11 +5,11 @@
 \alias{plot_dendrogram.communities}
 \title{Community structure dendrogram plots}
 \usage{
-plot_dendrogram(x, mode = igraph_opt("dend.plot.type"), ...)
+plot_dendrogram(x, mode = NULL, ...)
 
 \method{plot_dendrogram}{communities}(
   x,
-  mode = igraph_opt("dend.plot.type"),
+  mode = NULL,
   ...,
   use.modularity = FALSE,
   palette = categorical_pal(8)
@@ -19,12 +19,13 @@ plot_dendrogram(x, mode = igraph_opt("dend.plot.type"), ...)
 \item{x}{An object containing the community structure of a graph. See
 \code{\link[=communities]{communities()}} for details.}
 
-\item{mode}{Which dendrogram plotting function to use. See details below.}
+\item{mode}{Which dendrogram plotting function to use. See details below.
+The default \code{NULL} uses the \code{dend.plot.type} igraph option.}
 
 \item{\dots}{Additional arguments to supply to the dendrogram plotting
 function.}
 
-\item{use.modularity}{Logical scalar, whether to use the modularity values
+\item{use.modularity}{Logical, whether to use the modularity values
 to define the height of the branches.}
 
 \item{palette}{The color palette to use for colored plots.}

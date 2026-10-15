@@ -6,6 +6,7 @@
 \usage{
 norm_coords(
   layout,
+  ...,
   xmin = -1,
   xmax = 1,
   ymin = -1,
@@ -16,6 +17,8 @@ norm_coords(
 }
 \arguments{
 \item{layout}{A matrix with two or three columns, the layout to normalize.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{xmin, xmax}{The limits for the first coordinate, if one of them or both
 are \code{NULL} then no normalization is performed along this direction.}

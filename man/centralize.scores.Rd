@@ -14,7 +14,7 @@ the most centralized graph with the same number of vertices as the graph
 under study. This is only used if the \code{normalized} argument is set
 to \code{TRUE}.}
 
-\item{normalized}{Logical scalar. Whether to normalize the graph level
+\item{normalized}{Logical. Whether to normalize the graph level
 centrality score by dividing by the supplied theoretical maximum.}
 }
 \description{

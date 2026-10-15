@@ -6,7 +6,8 @@
 \usage{
 alpha_centrality(
   graph,
-  nodes = V(graph),
+  nodes = NULL,
+  ...,
   alpha = 1,
   loops = FALSE,
   exo = 1,
@@ -20,8 +21,10 @@ alpha_centrality(
 graphs, edges are treated as if they were reciprocal directed ones.}
 
 \item{nodes}{Vertex sequence, the vertices for which the alpha centrality
-values are returned. (For technical reasons they will be calculated for all
-vertices, anyway.)}
+values are returned. The default \code{NULL} selects all vertices.
+(For technical reasons they will be calculated for all vertices, anyway.)}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{alpha}{Parameter specifying the relative importance of endogenous
 versus exogenous factors in the determination of centrality. See details
@@ -35,16 +38,23 @@ the same factor for every node, or a vector giving the factor for every
 vertex. Note that too long vectors will be truncated and too short vectors
 will be replicated to match the number of vertices.}
 
-\item{weights}{A character scalar that gives the name of the edge attribute
-to use in the adjacency matrix. If it is \code{NULL}, then the
-\sQuote{weight} edge attribute of the graph is used, if there is one.
-Otherwise, or if it is \code{NA}, then the calculation uses the standard
-adjacency matrix.}
+\item{weights}{One of the following:
+\itemize{
+\item \code{NULL} (default): use the \code{weight} edge attribute if the graph has
+one, otherwise return a traditional (unweighted) adjacency matrix.
+\item \code{NA}: explicitly unweighted, ignoring any \code{weight} edge attribute.
+\item A numeric or logical vector of length \code{\link[=ecount]{ecount()}}: use these values
+directly as edge weights.
+\item A character scalar: the name of an edge attribute whose values are
+used as weights. The attribute must be numeric or logical.
+}
+If multiple edges share endpoints, the value of an arbitrarily chosen edge
+is included in the matrix.}
 
 \item{tol}{Tolerance for near-singularities during matrix inversion, see
-\code{\link[=solve]{solve()}}.}
+\code{\link[Matrix:solve]{Matrix::solve()}}.}
 
-\item{sparse}{Logical scalar, whether to use sparse matrices for the
+\item{sparse}{Logical, whether to use sparse matrices for the
 calculation. The \sQuote{Matrix} package is required for sparse matrix
 support}
 }

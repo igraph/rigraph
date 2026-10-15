@@ -4,14 +4,15 @@
 \alias{indent_print}
 \title{Indent a printout}
 \usage{
-indent_print(..., .indent = " ", .printer = print)
+indent_print(..., .indent = " ", .printer = NULL)
 }
 \arguments{
 \item{...}{Passed to the printing function.}
 
 \item{.indent}{Character scalar, indent the printout with this.}
 
-\item{.printer}{The printing function, defaults to \link{print}.}
+\item{.printer}{The printing function. The default \code{NULL} uses
+\link{print}.}
 }
 \value{
 The first element in \code{...}, invisibly.

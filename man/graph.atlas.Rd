@@ -7,7 +7,7 @@
 graph.atlas(n)
 }
 \arguments{
-\item{n}{The id of the graph to create.}
+\item{n}{The ID of the graph to create.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

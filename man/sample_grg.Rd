@@ -5,9 +5,9 @@
 \alias{grg}
 \title{Geometric random graphs}
 \usage{
-sample_grg(nodes, radius, torus = FALSE, coords = FALSE)
+sample_grg(nodes, radius, ..., torus = FALSE, coords = FALSE)
 
-grg(nodes, radius, torus = FALSE, coords = FALSE)
+grg(nodes, radius, ..., torus = FALSE, coords = FALSE)
 }
 \arguments{
 \item{nodes}{The number of vertices in the graph.}
@@ -15,9 +15,11 @@ grg(nodes, radius, torus = FALSE, coords = FALSE)
 \item{radius}{The radius within which the vertices will be connected by an
 edge.}
 
-\item{torus}{Logical constant, whether to use a torus instead of a square.}
+\item{...}{These dots are for future extensions and must be empty.}
 
-\item{coords}{Logical scalar, whether to add the positions of the vertices
+\item{torus}{Logical, whether to use a torus instead of a square.}
+
+\item{coords}{Logical, whether to add the positions of the vertices
 as vertex attributes called \sQuote{\code{x}} and \sQuote{\code{y}}.}
 }
 \value{

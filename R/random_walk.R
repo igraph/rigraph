@@ -16,6 +16,7 @@
 #' @param graph The input graph, might be undirected or directed.
 #' @param start The start vertex.
 #' @param steps The number of steps to make.
+#' @inheritParams rlang::args_dots_empty
 #' @param weights The edge weights. Larger edge weights increase the
 #'   probability that an edge is selected by the random walker. In other
 #'   words, larger edge weights correspond to stronger connections. The
@@ -51,10 +52,50 @@ random_walk <- function(
   graph,
   start,
   steps,
+  ...,
   weights = NULL,
   mode = c("out", "in", "all", "total"),
   stuck = c("return", "error")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: random_walk, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: random_walk(graph, start, steps, weights, mode, stuck)
+    .old_signature <- function(weights, mode, stuck, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn random_walk}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn random_walk}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(mode)) base::list(mode = mode),
+        if (!base::missing(stuck)) base::list(stuck = stuck)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(mode)) "mode",
+        if (!base::missing(stuck)) "stuck"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn random_walk} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `random_walk()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  random_walk(", base::paste(base::c("graph", "start", "steps", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    random_walk(", base::paste(base::c("graph", "start", "steps", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   mode <- match.arg(mode)
   stuck <- match.arg(stuck)
   out <- random_walk_impl(
@@ -71,15 +112,56 @@ random_walk <- function(
 }
 
 #' @rdname random_walk
+#' @inheritParams rlang::args_dots_empty
 #' @export
 random_edge_walk <- function(
   graph,
   start,
   steps,
+  ...,
   weights = NULL,
   mode = c("out", "in", "all", "total"),
   stuck = c("return", "error")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: random_edge_walk, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: random_edge_walk(graph, start, steps, weights, mode, stuck)
+    .old_signature <- function(weights, mode, stuck, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn random_edge_walk}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn random_edge_walk}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(mode)) base::list(mode = mode),
+        if (!base::missing(stuck)) base::list(stuck = stuck)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(mode)) "mode",
+        if (!base::missing(stuck)) "stuck"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn random_edge_walk} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `random_edge_walk()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  random_edge_walk(", base::paste(base::c("graph", "start", "steps", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    random_edge_walk(", base::paste(base::c("graph", "start", "steps", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   mode <- match.arg(mode)
   stuck <- match.arg(stuck)
   out <- random_walk_impl(

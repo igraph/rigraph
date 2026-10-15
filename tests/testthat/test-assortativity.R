@@ -1,3 +1,5 @@
+# jarl-ignore-file implicit_assignment: just the way it works
+
 test_that("assortativity works", {
   g <- read_graph(f <- gzfile("celegansneural.gml.gz"), format = "gml")
 
@@ -40,7 +42,7 @@ test_that("nominal assortativity works", {
 
   el <- as_edgelist(o, names = FALSE)
   etm <- matrix(0, nrow = max(V(o)$value) + 1, ncol = max(V(o)$value) + 1)
-  for (e in 1:nrow(el)) {
+  for (e in seq_len(nrow(el))) {
     t1 <- V(o)$value[el[e, 1]] + 1
     t2 <- V(o)$value[el[e, 2]] + 1
     etm[t1, t2] <- etm[t1, t2] + 1
@@ -54,7 +56,7 @@ test_that("nominal assortativity works", {
 })
 
 test_that("nominal assortativity works with character types", {
-  set.seed(2)
+  igraph_local_seed(2)
   g <- sample_gnm(10, 20)
 
   # Test with numeric types
@@ -80,4 +82,48 @@ test_that("nominal assortativity works with character types", {
   numeric_from_char <- as.integer(as.factor(V(g)$random3))
   result_numeric <- assortativity_nominal(g, types = numeric_from_char)
   expect_equal(result3, result_numeric)
+})
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+test_that("assortativity_degree() covers directed", {
+  g <- make_star(6, mode = "out")
+
+  # A star is perfectly disassortative when treated as undirected,
+  # while the directed variant is undefined for an out-star.
+  expect_equal(assortativity_degree(g, directed = FALSE), -1)
+  expect_true(is.nan(assortativity_degree(g)))
+})
+
+test_that("assortativity_degree() recovers legacy positional arguments", {
+  g <- make_star(6, mode = "out")
+
+  lifecycle::expect_deprecated(
+    res <- assortativity_degree(g, FALSE)
+  )
+  expect_identical(res, assortativity_degree(g, directed = FALSE))
+})
+
+test_that("assortativity_nominal() covers directed and normalized", {
+  # Two directed triangles joined by a single bridge edge.
+  g <- make_graph(c(1, 2, 2, 3, 3, 1, 4, 5, 5, 6, 6, 4, 3, 4), directed = TRUE)
+  types <- c(1, 1, 1, 2, 2, 2)
+
+  # The non-normalized undirected value is the modularity of the two groups.
+  expect_equal(
+    assortativity_nominal(g, types, directed = FALSE, normalized = FALSE),
+    5 / 14
+  )
+  # Edge directions change the non-normalized value under the directed default.
+  expect_equal(assortativity_nominal(g, types, normalized = FALSE), 18 / 49)
+})
+
+test_that("assortativity_nominal() recovers legacy positional arguments", {
+  g <- make_graph(c(1, 2, 2, 3, 3, 1, 4, 5, 5, 6, 6, 4, 3, 4), directed = TRUE)
+  types <- c(1, 1, 1, 2, 2, 2)
+
+  lifecycle::expect_deprecated(
+    res <- assortativity_nominal(g, types, FALSE)
+  )
+  expect_identical(res, assortativity_nominal(g, types, directed = FALSE))
 })

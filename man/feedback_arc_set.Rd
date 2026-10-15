@@ -4,10 +4,17 @@
 \alias{feedback_arc_set}
 \title{Finding a feedback arc set in a graph}
 \usage{
-feedback_arc_set(graph, weights = NULL, algo = c("approx_eades", "exact_ip"))
+feedback_arc_set(
+  graph,
+  ...,
+  weights = NULL,
+  algo = c("approx_eades", "exact_ip")
+)
 }
 \arguments{
 \item{graph}{The input graph}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{Potential edge weights. If the graph has an edge
 attribute called \sQuote{\code{weight}}, and this argument is

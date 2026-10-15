@@ -8,31 +8,32 @@
 \alias{igraph.drl.default}
 \alias{igraph.drl.final}
 \alias{igraph.drl.refine}
-\alias{with_drl}
 \title{The DrL graph layout generator}
 \usage{
 layout_with_drl(
   graph,
+  ...,
   use.seed = FALSE,
-  seed = matrix(runif(vcount(graph) * 2), ncol = 2),
-  options = drl_defaults$default,
+  seed = NULL,
+  options = NULL,
   weights = NULL,
   dim = c(2, 3)
 )
-
-with_drl(...)
 }
 \arguments{
 \item{graph}{The input graph, in can be directed or undirected.}
 
-\item{use.seed}{Logical scalar, whether to use the coordinates given in the
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{use.seed}{Logical, whether to use the coordinates given in the
 \code{seed} argument as a starting point.}
 
 \item{seed}{A matrix with two columns, the starting coordinates for the
-vertices is \code{use.seed} is \code{TRUE}. It is ignored otherwise.}
+vertices is \code{use.seed} is \code{TRUE}. It is ignored otherwise. The default
+\code{NULL} draws uniformly random starting coordinates.}
 
 \item{options}{Options for the layout generator, a named list. See details
-below.}
+below. The default \code{NULL} uses \code{drl_defaults$default}.}
 
 \item{weights}{The weights of the edges. It must be a positive numeric vector,
 \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
@@ -46,8 +47,6 @@ correspond to stronger connections.}
 two dimensional or a three dimensional layout. Note that because of the
 nature of the DrL algorithm, the three dimensional layout takes
 significantly longer to compute.}
-
-\item{...}{Passed to \code{layout_with_drl()}.}
 }
 \value{
 A numeric matrix with two columns.
@@ -161,7 +160,8 @@ Klavans, R., Boyack, K.W., DrL: Distributed Recursive (Graph) Layout. SAND
 Reports, 2008. 2936: p. 1-10.
 }
 \seealso{
-\code{\link[=layout]{layout()}} for other layout generators.
+\code{\link[=layout]{layout()}} for other layout generators. See \code{\link[=with_drl]{with_drl()}} to
+build a lazy layout specification for \code{\link[=add_layout_]{add_layout_()}}.
 }
 \author{
 Shawn Martin (\url{https://www.cs.otago.ac.nz/homepages/smartin/})

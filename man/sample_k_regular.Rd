@@ -4,7 +4,7 @@
 \alias{sample_k_regular}
 \title{Create a random regular graph}
 \usage{
-sample_k_regular(no.of.nodes, k, directed = FALSE, multiple = FALSE)
+sample_k_regular(no.of.nodes, k, ..., directed = FALSE, multiple = FALSE)
 }
 \arguments{
 \item{no.of.nodes}{Integer scalar, the number of vertices in the generated
@@ -13,9 +13,11 @@ graph.}
 \item{k}{Integer scalar, the degree of each vertex in the graph, or the
 out-degree and in-degree in a directed graph.}
 
-\item{directed}{Logical scalar, whether to create a directed graph.}
+\item{...}{These dots are for future extensions and must be empty.}
 
-\item{multiple}{Logical scalar, whether multiple edges are allowed.}
+\item{directed}{Logical, whether to create a directed graph.}
+
+\item{multiple}{Logical, whether multiple edges are allowed.}
 }
 \value{
 An igraph graph.

@@ -12,7 +12,7 @@ set.edge.attribute(graph, name, index = E(graph), value)
 \item{name}{The name of the attribute to set.}
 
 \item{index}{An optional edge sequence to set the attributes of
-a subset of edges.}
+a subset of edges. The default \code{NULL} selects all edges.}
 
 \item{value}{The new value of the attribute for all (or \code{index})
 edges.

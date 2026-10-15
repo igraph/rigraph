@@ -4,19 +4,27 @@
 \alias{graph_from_graphnel}
 \title{Convert graphNEL objects from the graph package to igraph}
 \usage{
-graph_from_graphnel(graphNEL, name = TRUE, weight = TRUE, unlist.attrs = TRUE)
+graph_from_graphnel(
+  graphNEL,
+  ...,
+  name = TRUE,
+  weight = TRUE,
+  unlist.attrs = TRUE
+)
 }
 \arguments{
 \item{graphNEL}{The graphNEL graph.}
 
-\item{name}{Logical scalar, whether to add graphNEL vertex names as an
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{name}{Logical, whether to add graphNEL vertex names as an
 igraph vertex attribute called \sQuote{\code{name}}.}
 
-\item{weight}{Logical scalar, whether to add graphNEL edge weights as an
+\item{weight}{Logical, whether to add graphNEL edge weights as an
 igraph edge attribute called \sQuote{\code{weight}}. (graphNEL graphs are
 always weighted.)}
 
-\item{unlist.attrs}{Logical scalar. graphNEL attribute query functions
+\item{unlist.attrs}{Logical. graphNEL attribute query functions
 return the values of the attributes in R lists, if this argument is
 \code{TRUE} (the default) these will be converted to atomic vectors,
 whenever possible, before adding them to the igraph graph.}

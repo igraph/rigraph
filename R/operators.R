@@ -10,7 +10,7 @@
 #' @export
 graph.intersection <- function(...) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.intersection()", "intersection()")
+  lifecycle::deprecate_warn("2.0.0", "graph.intersection()", "intersection()")
   intersection(...)
 } # nocov end
 
@@ -26,7 +26,7 @@ graph.intersection <- function(...) {
 #' @export
 graph.union <- function(..., byname = "auto") {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.union()", "union.igraph()")
+  lifecycle::deprecate_warn("2.0.0", "graph.union()", "union.igraph()")
   union.igraph(byname = byname, ...)
 } # nocov end
 
@@ -42,7 +42,7 @@ graph.union <- function(..., byname = "auto") {
 #' @export
 graph.difference <- function(...) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.difference()", "difference()")
+  lifecycle::deprecate_warn("2.0.0", "graph.difference()", "difference()")
   difference(...)
 } # nocov end
 
@@ -58,7 +58,7 @@ graph.difference <- function(...) {
 #' @export
 graph.disjoint.union <- function(...) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "graph.disjoint.union()",
     "disjoint_union()"
@@ -78,7 +78,7 @@ graph.disjoint.union <- function(...) {
 #' @export
 graph.compose <- function(g1, g2, byname = "auto") {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.compose()", "compose()")
+  lifecycle::deprecate_warn("2.0.0", "graph.compose()", "compose()")
   compose(g1 = g1, g2 = g2, byname = byname)
 } # nocov end
 
@@ -94,7 +94,7 @@ graph.compose <- function(g1, g2, byname = "auto") {
 #' @export
 graph.complementer <- function(graph, loops = FALSE) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.complementer()", "complementer()")
+  lifecycle::deprecate_warn("2.0.0", "graph.complementer()", "complementer()")
   complementer(graph = graph, loops = loops)
 } # nocov end
 #   IGraph R package
@@ -118,13 +118,14 @@ graph.complementer <- function(graph, loops = FALSE) {
 #
 ###################################################################
 
-rename.attr.if.needed <- function(
+combine.attrs <- function(
   type = c("g", "v", "e"),
   graphs,
   newsize = NULL,
   maps = NULL,
   maps2 = NULL,
-  ignore = character()
+  ignore = character(),
+  comb = list("rename")
 ) {
   type <- igraph_match_arg(type)
 
@@ -146,6 +147,9 @@ rename.attr.if.needed <- function(
 
   getval <- function(which, name) {
     newval <- getfun(graphs[[which]], name)
+    if (type == "g") {
+      return(newval)
+    }
     if (!is.null(maps)) {
       tmpval <- newval[maps[[which]] >= 0]
       mm <- maps[[which]][maps[[which]] >= 0] + 1
@@ -161,20 +165,98 @@ rename.attr.if.needed <- function(
     newval
   }
 
+  default_idx <- which(names(comb) == "" | is.na(names(comb)))
+  default_comb <- if (length(default_idx) > 0) {
+    comb[[default_idx[1]]]
+  } else {
+    # Backward-compatible standard
+    "rename"
+  }
+  resolve_comb <- function(name) {
+    if (nzchar(name) && name %in% names(comb)) {
+      comb[[name]]
+    } else {
+      default_comb
+    }
+  }
+
   attr <- list()
   for (name in an) {
     w <- which(sapply(alist, function(x) name %in% x))
-    if (length(w) == 1) {
-      attr[[name]] <- getval(w, name)
-    } else {
-      for (w2 in w) {
-        nname <- paste(name, sep = "_", w2)
-        newval <- getval(w2, name)
-        attr[[nname]] <- newval
+    this_comb <- resolve_comb(name)
+
+    if (identical(this_comb, "rename")) {
+      renamed <- rename_attr_if_needed(name, w, getval)
+      # Assign element-wise (not `c()`) so a later clash that resolves to an
+      # already-used `name_<i>` overwrites rather than duplicating it -- the
+      # historical behaviour, e.g. under a chain of `%du%`.
+      for (nm in names(renamed)) {
+        attr[[nm]] <- renamed[[nm]]
       }
+    } else if (identical(this_comb, 0) || identical(this_comb, 0L)) {
+      # ignore: drop the attribute
+    } else {
+      vals <- lapply(w, function(w2) getval(w2, name))
+      attr[[name]] <- apply_attr_combiner(this_comb, vals, type)
     }
   }
   attr
+}
+
+# Historical behaviour for clashing attributes: a value present in a single
+# input graph is copied as-is, otherwise each copy is kept side-by-side under a
+# disambiguated `name_1`, `name_2`, ... name. Returns a named list to splice
+# into the result; `getval` is the per-graph accessor closure from
+# `combine.attrs()`.
+rename_attr_if_needed <- function(name, w, getval) {
+  if (length(w) == 1) {
+    stats::setNames(list(getval(w, name)), name)
+  } else {
+    out <- lapply(w, function(w2) getval(w2, name))
+    names(out) <- paste(name, w, sep = "_")
+    out
+  }
+}
+
+apply_attr_combiner <- function(comb, vals, type) {
+  if (type == "g") {
+    x <- unlist(vals, recursive = FALSE)
+    return(apply_one_combiner(comb, x))
+  }
+  m <- do.call(cbind, vals)
+  out <- lapply(seq_len(nrow(m)), function(i) {
+    x <- m[i, ]
+    x <- x[!is.na(x)]
+    apply_one_combiner(comb, x)
+  })
+  if (all(lengths(out) == 1L)) {
+    unlist(out)
+  } else {
+    out
+  }
+}
+
+apply_one_combiner <- function(comb, x) {
+  if (is.function(comb)) {
+    return(comb(x))
+  }
+  if (length(x) == 0) {
+    return(NA)
+  }
+  switch(
+    as.character(comb),
+    "3" = sum(x),
+    "4" = prod(x),
+    "5" = min(x),
+    "6" = max(x),
+    "7" = sample(x, 1),
+    "8" = x[[1]],
+    "9" = x[[length(x)]],
+    "10" = mean(x),
+    "11" = stats::median(x),
+    "12" = if (length(x) == 1) x[[1]] else x,
+    cli::cli_abort("Unknown attribute combiner code: {.val {comb}}")
+  )
 }
 
 
@@ -192,9 +274,10 @@ rename.attr.if.needed <- function(
 #' particular, it merges vertex and edge attributes using the [vctrs::vec_c()]
 #' function. For graphs that lack some vertex/edge attribute, the corresponding
 #' values in the new graph are set to a missing value (`NA` for scalar attributes,
-#' `NULL` for list attributes). Graph attributes are simply
-#' copied to the result. If this would result a name clash, then they are
-#' renamed by adding suffixes: _1, _2, etc.
+#' `NULL` for list attributes). Graph attributes are combined according to
+#' `graph_attr_combine`; by default any name clash is resolved by adding
+#' suffixes (`_1`, `_2`, ...). See [igraph-attribute-combination] for the
+#' available combiners.
 #'
 #' Note that if both graphs have vertex names (i.e. a `name` vertex
 #' attribute), then the concatenated vertex names might be non-unique in the
@@ -206,6 +289,11 @@ rename.attr.if.needed <- function(
 #' @aliases %du%
 #' @param \dots Graph objects or lists of graph objects.
 #' @param x,y Graph objects.
+#' @param graph_attr_combine Specification for combining shared graph attributes.
+#'   The default `NULL` uses the `graph_attr_combine` igraph option (`"rename"`
+#'   unless changed via [igraph_options()]), which preserves the historical
+#'   behaviour of appending `_1`, `_2`, ... suffixes to clashing attribute
+#'   names. See [igraph-attribute-combination] for the available combiners.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
@@ -219,7 +307,14 @@ rename.attr.if.needed <- function(
 #' V(g2)$name <- letters[11:20]
 #' print_all(g1 %du% g2)
 #' @export
-disjoint_union <- function(...) {
+disjoint_union <- function(
+  ...,
+  graph_attr_combine = NULL
+) {
+  if (is.null(graph_attr_combine)) {
+    graph_attr_combine <- igraph_opt("graph_attr_combine")
+  }
+
   graphs <- unlist(
     recursive = FALSE,
     lapply(list(...), function(l) {
@@ -232,7 +327,11 @@ disjoint_union <- function(...) {
   res <- .Call(Rx_igraph_disjoint_union, graphs)
 
   ## Graph attributes
-  graph.attributes(res) <- rename.attr.if.needed("g", graphs)
+  graph_attr_combine <- igraph.i.attribute.combination(
+    graph_attr_combine,
+    allow_rename = TRUE
+  )
+  graph.attributes(res) <- combine.attrs("g", graphs, comb = graph_attr_combine)
 
   ## Vertex attributes
   attr <- list()
@@ -261,7 +360,7 @@ disjoint_union <- function(...) {
   }
   vertex.attributes(res) <- attr
 
-  if ("name" %in% names(attr) && any(duplicated(attr$name))) {
+  if ("name" %in% names(attr) && anyDuplicated(attr$name) > 0) {
     cli::cli_warn("Duplicate vertex names in disjoint union.")
   }
 
@@ -306,7 +405,10 @@ disjoint_union <- function(...) {
   call,
   ...,
   byname,
-  keep.all.vertices
+  keep.all.vertices,
+  graph_attr_combine = "rename",
+  vertex_attr_combine = "rename",
+  edge_attr_combine = "rename"
 ) {
   graphs <- unlist(
     recursive = FALSE,
@@ -329,6 +431,19 @@ disjoint_union <- function(...) {
   } else if (byname && nonamed != length(graphs)) {
     cli::cli_abort("Some graphs are not named.")
   }
+
+  graph_attr_combine <- igraph.i.attribute.combination(
+    graph_attr_combine,
+    allow_rename = TRUE
+  )
+  vertex_attr_combine <- igraph.i.attribute.combination(
+    vertex_attr_combine,
+    allow_rename = TRUE
+  )
+  edge_attr_combine <- igraph.i.attribute.combination(
+    edge_attr_combine,
+    allow_rename = TRUE
+  )
 
   edgemaps <- length(unlist(lapply(graphs, edge_attr_names))) != 0
 
@@ -357,23 +472,28 @@ disjoint_union <- function(...) {
     maps <- res$edgemaps
     res <- res$graph
 
-    ## We might need to rename all attributes
-    graph.attributes(res) <- rename.attr.if.needed("g", newgraphs)
-    vertex.attributes(res) <- rename.attr.if.needed(
+    graph.attributes(res) <- combine.attrs(
+      "g",
+      newgraphs,
+      comb = graph_attr_combine
+    )
+    vertex.attributes(res) <- combine.attrs(
       "v",
       newgraphs,
       vcount(res),
-      ignore = "name"
+      ignore = "name",
+      comb = vertex_attr_combine
     )
     V(res)$name <- uninames
 
     ## Edges are a bit more difficult, we need a mapping
     if (edgemaps) {
-      edge.attributes(res) <- rename.attr.if.needed(
+      edge.attributes(res) <- combine.attrs(
         "e",
         newgraphs,
         ecount(res),
-        maps = maps
+        maps = maps,
+        comb = edge_attr_combine
       )
     }
   } else {
@@ -397,21 +517,26 @@ disjoint_union <- function(...) {
     maps <- res$edgemaps
     res <- res$graph
 
-    ## We might need to rename all attributes
-    graph.attributes(res) <- rename.attr.if.needed("g", graphs)
-    vertex.attributes(res) <- rename.attr.if.needed(
+    graph.attributes(res) <- combine.attrs(
+      "g",
+      graphs,
+      comb = graph_attr_combine
+    )
+    vertex.attributes(res) <- combine.attrs(
       "v",
       graphs,
-      vcount(res)
+      vcount(res),
+      comb = vertex_attr_combine
     )
 
     ## Edges are a bit more difficult, we need a mapping
     if (edgemaps) {
-      edge.attributes(res) <- rename.attr.if.needed(
+      edge.attributes(res) <- combine.attrs(
         "e",
         graphs,
         ecount(res),
-        maps = maps
+        maps = maps,
+        comb = edge_attr_combine
       )
     }
   }
@@ -456,12 +581,15 @@ union.default <- function(...) {
 #'
 #' If the `byname` argument is `TRUE` (or `auto` and all graphs
 #' are named), then the operation is performed on symbolic vertex names instead
-#' of the internal numeric vertex ids.
+#' of the internal numeric vertex IDs.
 #'
 #' `union()` keeps the attributes of all graphs. All graph, vertex and
-#' edge attributes are copied to the result. If an attribute is present in
-#' multiple graphs and would result a name clash, then this attribute is
-#' renamed by adding suffixes: _1, _2, etc.
+#' edge attributes are copied to the result. By default, if an attribute is
+#' present in multiple graphs and would result in a name clash, that attribute
+#' is renamed by adding suffixes: `_1`, `_2`, etc. Pass `graph_attr_combine`,
+#' `vertex_attr_combine` or `edge_attr_combine` to combine clashing attributes
+#' instead, e.g. by summing or by taking the first non-`NA` value. See
+#' [igraph-attribute-combination] for the available combiners.
 #'
 #' The `name` vertex attribute is treated specially if the operation is
 #' performed based on symbolic vertex names. In this case `name` must be
@@ -472,11 +600,18 @@ union.default <- function(...) {
 #'
 #' @aliases %u%
 #' @param \dots Graph objects or lists of graph objects.
-#' @param byname A logical scalar, or the character scalar `auto`. Whether
+#' @param byname A Logical, or the character scalar `auto`. Whether
 #'   to perform the operation based on symbolic vertex names. If it is
 #'   `auto`, that means `TRUE` if all graphs are named and `FALSE`
 #'   otherwise. A warning is generated if `auto` and some (but not all)
 #'   graphs are named.
+#' @param graph_attr_combine,vertex_attr_combine,edge_attr_combine Specification for
+#'   combining clashing graph, vertex and edge attributes. `vertex_attr_combine`
+#'   and `edge_attr_combine` default to `"rename"`; `graph_attr_combine` defaults to
+#'   the `graph_attr_combine` igraph option (`"rename"` unless changed via
+#'   [igraph_options()]). `"rename"` preserves the historical behaviour of
+#'   appending `_1`, `_2`, ... suffixes. See [igraph-attribute-combination] for
+#'   the available combiners.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @method union igraph
@@ -492,12 +627,21 @@ union.default <- function(...) {
 #' )
 #' net2 <- graph_from_literal(D - A:F:Y, B - A - X - F - H - Z, F - Y)
 #' print_all(net1 %u% net2)
-union.igraph <- function(..., byname = "auto") {
+union.igraph <- function(
+  ...,
+  byname = "auto",
+  graph_attr_combine = igraph_opt("graph_attr_combine"),
+  vertex_attr_combine = "rename",
+  edge_attr_combine = "rename"
+) {
   .igraph.graph.union.or.intersection(
     "union",
     ...,
     byname = byname,
-    keep.all.vertices = TRUE
+    keep.all.vertices = TRUE,
+    graph_attr_combine = graph_attr_combine,
+    vertex_attr_combine = vertex_attr_combine,
+    edge_attr_combine = edge_attr_combine
   )
 }
 
@@ -537,12 +681,15 @@ intersection <- function(...) {
 #'
 #' If the `byname` argument is `TRUE` (or `auto` and all graphs
 #' are named), then the operation is performed on symbolic vertex names instead
-#' of the internal numeric vertex ids.
+#' of the internal numeric vertex IDs.
 #'
 #' `intersection()` keeps the attributes of all graphs. All graph,
-#' vertex and edge attributes are copied to the result. If an attribute is
-#' present in multiple graphs and would result a name clash, then this
-#' attribute is renamed by adding suffixes: _1, _2, etc.
+#' vertex and edge attributes are copied to the result. By default, if an
+#' attribute is present in multiple graphs and would result in a name clash,
+#' that attribute is renamed by adding suffixes: `_1`, `_2`, etc. Pass
+#' `graph_attr_combine`, `vertex_attr_combine` or `edge_attr_combine` to combine
+#' clashing attributes instead; see [igraph-attribute-combination] for the
+#' available combiners.
 #'
 #' The `name` vertex attribute is treated specially if the operation is
 #' performed based on symbolic vertex names. In this case `name` must be
@@ -553,13 +700,19 @@ intersection <- function(...) {
 #'
 #' @aliases %s%
 #' @param \dots Graph objects or lists of graph objects.
-#' @param byname A logical scalar, or the character scalar `auto`. Whether
+#' @param byname A Logical, or the character scalar `auto`. Whether
 #'   to perform the operation based on symbolic vertex names. If it is
 #'   `auto`, that means `TRUE` if all graphs are named and `FALSE`
 #'   otherwise. A warning is generated if `auto` and some (but not all)
 #'   graphs are named.
-#' @param keep.all.vertices Logical scalar, whether to keep vertices that only
+#' @param keep.all.vertices Logical, whether to keep vertices that only
 #'   appear in a subset of the input graphs.
+#' @param graph_attr_combine,vertex_attr_combine,edge_attr_combine Specification for
+#'   combining clashing graph, vertex and edge attributes. `vertex_attr_combine`
+#'   and `edge_attr_combine` default to `"rename"`; `graph_attr_combine` defaults to
+#'   the `graph_attr_combine` igraph option (`"rename"` unless changed via
+#'   [igraph_options()]). See [igraph-attribute-combination] for the available
+#'   combiners.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @method intersection igraph
@@ -578,13 +731,19 @@ intersection <- function(...) {
 intersection.igraph <- function(
   ...,
   byname = "auto",
-  keep.all.vertices = TRUE
+  keep.all.vertices = TRUE,
+  graph_attr_combine = igraph_opt("graph_attr_combine"),
+  vertex_attr_combine = "rename",
+  edge_attr_combine = "rename"
 ) {
   .igraph.graph.union.or.intersection(
     "intersection",
     ...,
     byname = byname,
-    keep.all.vertices = keep.all.vertices
+    keep.all.vertices = keep.all.vertices,
+    graph_attr_combine = graph_attr_combine,
+    vertex_attr_combine = vertex_attr_combine,
+    edge_attr_combine = edge_attr_combine
   )
 }
 
@@ -624,7 +783,7 @@ difference <- function(...) {
 #'
 #' If the `byname` argument is `TRUE` (or `auto` and the graphs
 #' are all named), then the operation is performed based on symbolic vertex
-#' names. Otherwise numeric vertex ids are used.
+#' names. Otherwise numeric vertex IDs are used.
 #'
 #' `difference()` keeps all attributes (graph, vertex and edge) of the
 #' first graph.
@@ -637,7 +796,7 @@ difference <- function(...) {
 #'   undirected graph.
 #' @param small The right hand side argument of the minus operator. A directed
 #'   ot undirected graph.
-#' @param byname A logical scalar, or the character scalar `auto`. Whether
+#' @param byname A Logical, or the character scalar `auto`. Whether
 #'   to perform the operation based on symbolic vertex names. If it is
 #'   `auto`, that means `TRUE` if both graphs are named and
 #'   `FALSE` otherwise. A warning is generated if `auto` and one graph,
@@ -685,12 +844,12 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
   if (byname) {
     bnames <- V(big)$name
     snames <- V(small)$name
-    if (any(!snames %in% bnames)) {
+    if (!all(snames %in% bnames)) {
       small <- small - setdiff(snames, bnames)
       snames <- V(small)$name
     }
     perm <- match(bnames, snames)
-    if (any(is.na(perm))) {
+    if (anyNA(perm)) {
       perm[is.na(perm)] <- seq(from = vcount(small) + 1, to = vcount(big))
     }
     big <- permute(big, perm)
@@ -722,7 +881,8 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
 #' attributes are lost.
 #'
 #' @param graph The input graph, can be directed or undirected.
-#' @param loops Logical constant, whether to generate loop edges.
+#' @inheritParams rlang::args_dots_empty
+#' @param loops Logical, whether to generate loop edges.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @family functions for manipulating graph structure
@@ -741,7 +901,46 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
 #' gu
 #' isomorphic(gu, make_full_graph(vcount(g)))
 #'
-complementer <- function(graph, loops = FALSE) {
+complementer <- function(
+  graph,
+  ...,
+  loops = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: complementer, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    # Pre-3.0.0 signature: complementer(graph, loops)
+    .old_signature <- function(loops, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn complementer}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn complementer}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(loops)) base::list(loops = loops)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(loops)) "loops"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn complementer} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `complementer()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  complementer(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    complementer(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   complementer_impl(graph = graph, loops = as.logical(loops))
@@ -762,12 +961,14 @@ complementer <- function(graph, loops = FALSE) {
 #'
 #' If the `byname` argument is `TRUE` (or `auto` and the graphs
 #' are all named), then the operation is performed based on symbolic vertex
-#' names. Otherwise numeric vertex ids are used.
+#' names. Otherwise numeric vertex IDs are used.
 #'
 #' `compose()` keeps the attributes of both graphs. All graph, vertex
-#' and edge attributes are copied to the result. If an attribute is present in
-#' multiple graphs and would result a name clash, then this attribute is
-#' renamed by adding suffixes: _1, _2, etc.
+#' and edge attributes are copied to the result. By default, if an attribute
+#' is present in both graphs and would result in a name clash, that attribute
+#' is renamed by adding suffixes: `_1`, `_2`. Pass `graph_attr_combine`,
+#' `vertex_attr_combine` or `edge_attr_combine` to combine clashing attributes
+#' instead; see [igraph-attribute-combination] for the available combiners.
 #'
 #' The `name` vertex attribute is treated specially if the operation is
 #' performed based on symbolic vertex names. In this case `name` must be
@@ -791,11 +992,18 @@ complementer <- function(graph, loops = FALSE) {
 #' @aliases %c%
 #' @param g1 The first input graph.
 #' @param g2 The second input graph.
-#' @param byname A logical scalar, or the character scalar `auto`. Whether
+#' @inheritParams rlang::args_dots_empty
+#' @param byname A Logical, or the character scalar `auto`. Whether
 #'   to perform the operation based on symbolic vertex names. If it is
 #'   `auto`, that means `TRUE` if both graphs are named and
 #'   `FALSE` otherwise. A warning is generated if `auto` and one graph,
 #'   but not both graphs are named.
+#' @param graph_attr_combine,vertex_attr_combine,edge_attr_combine Specification for
+#'   combining clashing graph, vertex and edge attributes. `vertex_attr_combine`
+#'   and `edge_attr_combine` default to `"rename"`; `graph_attr_combine` defaults to
+#'   the `graph_attr_combine` igraph option (`"rename"` unless changed via
+#'   [igraph_options()]). See [igraph-attribute-combination] for the available
+#'   combiners.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @family functions for manipulating graph structure
@@ -809,9 +1017,64 @@ complementer <- function(graph, loops = FALSE) {
 #' print_all(gc)
 #' print_all(simplify(gc))
 #'
-compose <- function(g1, g2, byname = "auto") {
+compose <- function(
+  g1,
+  g2,
+  ...,
+  byname = "auto",
+  graph_attr_combine = NULL,
+  vertex_attr_combine = "rename",
+  edge_attr_combine = "rename"
+) {
+  # BEGIN GENERATED ARG_HANDLE: compose, do not edit, see tools/generate-migrations.R
+  # fmt: skip
+  if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("g", "gr", "gra", "grap", "graph", "v", "ve", "ver", "vert", "verte", "vertex", "e", "ed", "edg", "edge"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn compose}.")
+    # Pre-3.0.0 signature: compose(g1, g2, byname, graph.attr.comb, vertex.attr.comb, edge.attr.comb)
+    .old_signature <- function(byname, graph.attr.comb, vertex.attr.comb, edge.attr.comb, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn compose}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn compose}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(byname)) base::list(byname = byname),
+        if (!base::missing(graph.attr.comb)) base::list(graph_attr_combine = graph.attr.comb),
+        if (!base::missing(vertex.attr.comb)) base::list(vertex_attr_combine = vertex.attr.comb),
+        if (!base::missing(edge.attr.comb)) base::list(edge_attr_combine = edge.attr.comb)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(byname)) "byname",
+        if (!base::missing(graph_attr_combine)) "graph_attr_combine",
+        if (!base::missing(vertex_attr_combine)) "vertex_attr_combine",
+        if (!base::missing(edge_attr_combine)) "edge_attr_combine"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn compose} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `compose()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  compose(", base::paste(base::c("g1", "g2", base::c(byname = "byname", graph_attr_combine = "graph.attr.comb", vertex_attr_combine = "vertex.attr.comb", edge_attr_combine = "edge.attr.comb")[.arg_names]), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    compose(", base::paste(base::c("g1", "g2", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(g1)
   ensure_igraph(g2)
+
+  if (is.null(graph_attr_combine)) {
+    graph_attr_combine <- igraph_opt("graph_attr_combine")
+  }
 
   if (byname != "auto" && !is.logical(byname)) {
     cli::cli_abort("{.arg bynam} must be \"auto\", or \"logical\".")
@@ -827,6 +1090,19 @@ compose <- function(g1, g2, byname = "auto") {
   } else if (byname && nonamed != 2) {
     cli::cli_abort("Some graphs are not named.")
   }
+
+  graph_attr_combine <- igraph.i.attribute.combination(
+    graph_attr_combine,
+    allow_rename = TRUE
+  )
+  vertex_attr_combine <- igraph.i.attribute.combination(
+    vertex_attr_combine,
+    allow_rename = TRUE
+  )
+  edge_attr_combine <- igraph.i.attribute.combination(
+    edge_attr_combine,
+    allow_rename = TRUE
+  )
 
   if (byname) {
     uninames <- unique(c(V(g1)$name, V(g2)$name))
@@ -852,28 +1128,34 @@ compose <- function(g1, g2, byname = "auto") {
   maps <- list(res$edge_map1, res$edge_map2)
   res <- res$graph
 
-  ## We might need to rename all attributes
   graphs <- list(g1, g2)
-  graph.attributes(res) <- rename.attr.if.needed("g", graphs)
+  graph.attributes(res) <- combine.attrs("g", graphs, comb = graph_attr_combine)
 
   if (byname) {
-    vertex.attributes(res) <-
-      rename.attr.if.needed("v", graphs, vcount(res), ignore = "name")
-    V(res)$name <- uninames
-  } else {
-    vertex.attributes(res) <- rename.attr.if.needed(
+    vertex.attributes(res) <- combine.attrs(
       "v",
       graphs,
-      vcount(res)
+      vcount(res),
+      ignore = "name",
+      comb = vertex_attr_combine
+    )
+    V(res)$name <- uninames
+  } else {
+    vertex.attributes(res) <- combine.attrs(
+      "v",
+      graphs,
+      vcount(res),
+      comb = vertex_attr_combine
     )
   }
 
   if (edgemaps) {
-    edge.attributes(res) <- rename.attr.if.needed(
+    edge.attributes(res) <- combine.attrs(
       "e",
       graphs,
       ecount(res),
-      maps2 = maps
+      maps2 = maps,
+      comb = edge_attr_combine
     )
   }
 
@@ -896,7 +1178,7 @@ compose <- function(g1, g2, byname = "auto") {
 #' @details
 #' When adding edges via `+`, all unnamed arguments of
 #' `edge()` (or `edges()`) are concatenated, and then passed to
-#' [add_edges()]. They are interpreted as pairs of vertex ids,
+#' [add_edges()]. They are interpreted as pairs of vertex IDs,
 #' and an edge will added between each pair. Named arguments will be
 #' used as edge attributes for the new edges.
 #'
@@ -969,7 +1251,7 @@ vertex <- function(...) {
 
   # Check for duplicate named arguments
   if (!is.null(arg_names)) {
-    named_args <- arg_names[arg_names != ""]
+    named_args <- arg_names[nzchar(arg_names)]
     if (anyDuplicated(named_args)) {
       duplicates <- unique(named_args[duplicated(named_args)])
       cli::cli_abort(
@@ -1070,7 +1352,7 @@ path <- function(...) {
 #'     the arguments of the `edges()` function.
 #'
 #'     The unnamed arguments of `edges()` are concatenated and used
-#'     as vertex ids of the end points of the new edges. The named
+#'     as vertex IDs of the end points of the new edges. The named
 #'     arguments will be added as edge attributes.
 #'
 #'     Examples: \preformatted{  g <- make_empty_graph() +
@@ -1089,7 +1371,7 @@ path <- function(...) {
 #'     new edges that form a path are added. The edges and possibly their
 #'     attributes are specified as the arguments to the `path()`
 #'     function. The non-named arguments are concatenated and interpreted
-#'     as the vertex ids along the path. The remaining arguments are added
+#'     as the vertex IDs along the path. The remaining arguments are added
 #'     as edge attributes.
 #'
 #'     Examples: \preformatted{  g <- make_empty_graph() + vertices(letters[1:10])
@@ -1125,9 +1407,9 @@ path <- function(...) {
 #' plot(g)
 `+.igraph` <- function(e1, e2) {
   if (!is_igraph(e1) && is_igraph(e2)) {
-    tmp <- e1
+    left_operand <- e1
     e1 <- e2
-    e2 <- tmp
+    e2 <- left_operand
   }
   if (is_igraph(e2) && is_named(e1) && is_named(e2)) {
     ## Union of graphs
@@ -1135,18 +1417,18 @@ path <- function(...) {
   } else if (is_igraph(e2)) {
     ## Disjoint union of graphs
     res <- disjoint_union(e1, e2)
-  } else if ("igraph.edge" %in% class(e2)) {
+  } else if (inherits(e2, "igraph.edge")) {
     ## Adding edges, possibly with attributes
     ## Non-named arguments define the edges
     if (is.null(names(e2))) {
       toadd <- unlist(e2, recursive = FALSE)
       attr <- list()
     } else {
-      toadd <- unlist(e2[names(e2) == ""])
-      attr <- e2[names(e2) != ""]
+      toadd <- unlist(e2[!nzchar(names(e2))])
+      attr <- e2[nzchar(names(e2))]
     }
     res <- add_edges(e1, as_igraph_vs(e1, toadd), attr = attr)
-  } else if ("igraph.vertex" %in% class(e2)) {
+  } else if (inherits(e2, "igraph.vertex")) {
     ## Adding vertices, possibly with attributes
     ## If there is a single unnamed argument, that contains the vertex names
     named <- rlang::have_name(e2)
@@ -1160,15 +1442,15 @@ path <- function(...) {
 
     # When adding vertices via +, all unnamed arguments are interpreted as vertex names of the new vertices.
     res <- add_vertices(e1, nv = vctrs::vec_size_common(!!!e2), attr = e2)
-  } else if ("igraph.path" %in% class(e2)) {
+  } else if (inherits(e2, "igraph.path")) {
     ## Adding edges along a path, possibly with attributes
     ## Non-named arguments define the edges
     if (is.null(names(e2))) {
       to_add <- unlist(e2, recursive = FALSE)
       attr <- list()
     } else {
-      to_add <- unlist(e2[names(e2) == ""])
-      attr <- e2[names(e2) != ""]
+      to_add <- unlist(e2[!nzchar(names(e2))])
+      attr <- e2[nzchar(names(e2))]
     }
     to_add <- as_igraph_vs(e1, to_add)
     lt <- length(to_add)
@@ -1202,7 +1484,7 @@ path <- function(...) {
 #' \item If it is an igraph graph object, then the difference of the
 #'   two graphs is calculated, see [difference()].
 #' \item If it is a numeric or character vector, then it is interpreted
-#'   as a vector of vertex ids and the specified vertices will be
+#'   as a vector of vertex IDs and the specified vertices will be
 #'   deleted from the graph. Example: \preformatted{  g <- make_ring(10)
 #' V(g)$name <- letters[1:10]
 #' g <- g - c("a", "b")}
@@ -1214,7 +1496,7 @@ path <- function(...) {
 #' \item If it is an object created with the [vertex()] (or the
 #'   [vertices()]) function, then all arguments of [vertices()] are
 #'   concatenated and the result is interpreted as a vector of vertex
-#'   ids. These vertices will be removed from the graph.
+#'   IDs. These vertices will be removed from the graph.
 #' \item If it is an object created with the [edge()] (or the
 #'   [edges()]) function, then all arguments of [edges()] are
 #'   concatenated and then interpreted as edges to be removed from the
@@ -1247,11 +1529,11 @@ path <- function(...) {
   }
   if (is_igraph(e2)) {
     res <- difference(e1, e2)
-  } else if ("igraph.vertex" %in% class(e2)) {
+  } else if (inherits(e2, "igraph.vertex")) {
     res <- delete_vertices(e1, unlist(e2, recursive = FALSE))
-  } else if ("igraph.edge" %in% class(e2)) {
+  } else if (inherits(e2, "igraph.edge")) {
     res <- delete_edges(e1, unlist(e2, recursive = FALSE))
-  } else if ("igraph.path" %in% class(e2)) {
+  } else if (inherits(e2, "igraph.path")) {
     todel <- unlist(e2, recursive = FALSE)
     lt <- length(todel)
     if (lt >= 2) {
@@ -1260,9 +1542,9 @@ path <- function(...) {
     } else {
       res <- e1
     }
-  } else if ("igraph.vs" %in% class(e2)) {
+  } else if (inherits(e2, "igraph.vs")) {
     res <- delete_vertices(e1, e2)
-  } else if ("igraph.es" %in% class(e2)) {
+  } else if (inherits(e2, "igraph.es")) {
     res <- delete_edges(e1, e2)
   } else if (is.numeric(e2) || is.character(e2)) {
     res <- delete_vertices(e1, e2)
@@ -1312,9 +1594,9 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
 #' @export
 `*.igraph` <- function(x, n) {
   if (!is_igraph(x) && is_igraph(n)) {
-    tmp <- x
+    graph_candidate <- x
     x <- n
-    n <- tmp
+    n <- graph_candidate
   }
 
   if (is.numeric(n) && length(n) == 1) {
@@ -1334,7 +1616,8 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
 #' all edges, this operation is also known as graph transpose.
 #'
 #' @param graph The input graph.
-#' @param eids The edge IDs of the edges to reverse.
+#' @param eids The edge IDs of the edges to reverse. The default `NULL`
+#'   reverses all edges.
 #' @return The result graph where the direction of the edges with the given
 #'   IDs are reversed
 #'
@@ -1344,7 +1627,11 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
 #' reverse_edges(g, 2)
 #' @family functions for manipulating graph structure
 #' @export
-reverse_edges <- function(graph, eids = E(graph)) {
+reverse_edges <- function(graph, eids = NULL) {
+  if (is.null(eids)) {
+    eids <- E(graph)
+  }
+
   reverse_edges_impl(
     graph = graph,
     eids = eids

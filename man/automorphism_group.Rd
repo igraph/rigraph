@@ -7,6 +7,7 @@
 automorphism_group(
   graph,
   colors = NULL,
+  ...,
   sh = c("fm", "f", "fs", "fl", "flm", "fsm"),
   details = FALSE
 )
@@ -20,6 +21,8 @@ automorphism. When omitted, igraph uses the \code{color} attribute of the
 vertices, or, if there is no such vertex attribute, it simply assumes that
 all vertices have the same color. Pass NULL explicitly if the graph has a
 \code{color} vertex attribute but you do not want to use it.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{sh}{The splitting heuristics for the BLISS algorithm. Possible values
 are:

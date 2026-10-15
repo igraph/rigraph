@@ -1,5 +1,5 @@
 test_that("Starting from state works (#225)", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   g <- sample_gnp(10, p = 1 / 2) + sample_gnp(10, p = 1 / 2)
   hrg <- fit_hrg(g)
@@ -8,7 +8,7 @@ test_that("Starting from state works (#225)", {
 })
 
 test_that("as.hclust.igraphHRG() works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   g <- make_graph("zachary")
   hrg <- fit_hrg(g)
@@ -31,7 +31,7 @@ test_that("hrg_tree() checks its argument", {
 })
 
 test_that("print.igrapHRG() works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   small_g <- sample_gnp(10, p = 1 / 2) + sample_gnp(10, p = 1 / 2)
   small_g <- fit_hrg(small_g)
@@ -137,4 +137,84 @@ test_that("print.igrapHRG() works", {
   expect_output(print(big_hrg), "->")
 
   expect_output(print(big_hrg, type = "tree"), "- ")
+})
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+# A compact shared fixture: a tiny two-clique graph and one HRG fitted to it,
+# reused by the consensus_tree() and predict_edges() blocks below.
+# Fitting a real HRG is the awkward part of constructing valid inputs there.
+hrg_fixture <- function() {
+  g <- make_full_graph(4) + make_full_graph(4)
+  igraph_with_seed(1, list(graph = g, hrg = fit_hrg(g)))
+}
+
+test_that("fit_hrg() recovers a legacy positional argument", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  fx <- hrg_fixture()
+
+  igraph_local_seed(2)
+  lifecycle::expect_deprecated(
+    res <- fit_hrg(fx$graph, fx$hrg, TRUE)
+  )
+  igraph_local_seed(2)
+  expect_identical(res, fit_hrg(fx$graph, fx$hrg, start = TRUE))
+})
+
+test_that("consensus_tree() covers keyword-only tail arguments", {
+  fx <- hrg_fixture()
+  igraph_local_seed(3)
+
+  res <- consensus_tree(fx$graph, hrg = fx$hrg, start = TRUE, num.samples = 100)
+  expect_named(res, c("parents", "weights", "hrg"))
+  expect_true(is.numeric(res$weights))
+  expect_gt(length(res$parents), 0)
+})
+
+test_that("consensus_tree() recovers a legacy positional argument", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  fx <- hrg_fixture()
+
+  # `num.samples` is pinned small (by name) to keep the two runs fast; `start`
+  # is the recovered positional argument.
+  igraph_local_seed(4)
+  lifecycle::expect_deprecated(
+    res <- consensus_tree(fx$graph, fx$hrg, TRUE, num.samples = 100)
+  )
+  igraph_local_seed(4)
+  expect_identical(
+    res,
+    consensus_tree(fx$graph, fx$hrg, start = TRUE, num.samples = 100)
+  )
+})
+
+test_that("predict_edges() covers keyword-only tail arguments", {
+  fx <- hrg_fixture()
+  igraph_local_seed(5)
+
+  res <- predict_edges(
+    fx$graph,
+    hrg = fx$hrg,
+    start = TRUE,
+    num.samples = 100,
+    num.bins = 5
+  )
+  expect_equal(ncol(res$edges), 2)
+  expect_length(res$prob, nrow(res$edges))
+  expect_s3_class(res$hrg, "igraphHRG")
+})
+
+test_that("predict_edges() recovers a legacy positional argument", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  fx <- hrg_fixture()
+
+  igraph_local_seed(6)
+  lifecycle::expect_deprecated(
+    res <- predict_edges(fx$graph, fx$hrg, TRUE, num.samples = 100)
+  )
+  igraph_local_seed(6)
+  expect_identical(
+    res,
+    predict_edges(fx$graph, fx$hrg, start = TRUE, num.samples = 100)
+  )
 })

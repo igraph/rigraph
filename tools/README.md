@@ -145,6 +145,100 @@ git subrepo status tools/py-stimulus
 This shows the remote URL, branch, and commit hashes.
 
 
+## Argument-migration blocks
+
+When a public function's signature is migrated by inserting `...` and renaming
+arguments, pre-existing calls would otherwise break: the old positional (or
+partially-named) values land in `...` and hit `check_dots_empty()`. To soften
+that, the migrated function carries a small **generated block** in its body that
+recovers the legacy call — by position **or by (partial) name** — and emits one
+soft-deprecation.
+
+Which arguments belong before and after the `...` is a design decision,
+documented in
+[CONTRIBUTING.md](../CONTRIBUTING.md#argument-order-and-the-ellipsis).
+
+The block is **generated in place**, not written by hand:
+
+- **`tools/migrations/<topic>.R`** are the source of truth: one registry file
+  per topic, mirroring the R source files, so parallel migration efforts do
+  not conflict on a single file. Each entry declares the function's `old` and
+  `new` signatures as literal R functions; renames and defaults are read
+  straight off their formals (a bare-symbol default in `old`, e.g.
+  `c = c_renamed`, means a rename). A function may be declared in only one
+  registry file; the generator stops with an error on duplicates. The schema
+  is documented in [`tools/migrations/README.md`](migrations/README.md).
+- **`tools/generate-migrations.R`** reads all registry files and rewrites the
+  code between the `# BEGIN GENERATED ARG_HANDLE: <fn>` / `# END GENERATED
+  ARG_HANDLE` markers inside each function. Output is idempotent (running
+  twice produces no diff) and laid out exactly as `air` formats it, so the
+  host files stay clean.
+
+Regenerate after editing the registry:
+
+```sh
+Rscript tools/generate-migrations.R
+```
+
+This usually happens for you: a testthat helper
+([`tests/testthat/helper-migrations.R`](../tests/testthat/helper-migrations.R))
+regenerates the blocks whenever the registry is newer, and CI re-runs the
+generator (in `custom/after-install`) and fails if the committed code has
+drifted. Do **not** edit between the markers by hand.
+
+### Call-site usage
+
+A migrated function gets the marker pair at the top of its body; the generator
+fills it in:
+
+```r
+as_biadjacency_matrix <- function(graph, types, ..., weights = NULL,
+                                  attr = lifecycle::deprecated(),
+                                  names = TRUE, sparse = FALSE) {
+  # BEGIN GENERATED ARG_HANDLE: as_biadjacency_matrix
+  # ... generated: recover dots, reassign weights/attr/..., deprecate_soft() ...
+  # END GENERATED ARG_HANDLE
+
+  # ... rest of the body, using the (possibly reassigned) locals
+}
+```
+
+The recovery runs inline, so there is no handler function, no runtime matcher
+and no `.user_env` plumbing. The generated `lifecycle::deprecate_soft()` sits
+directly in the function body, so its default `user_env` (`caller_env(2)`)
+already resolves to the *user's* frame: real user calls warn, while genuinely
+internal igraph callers stay correctly silent — the point of a *soft*
+deprecation.
+
+The matching is base R's own. The block declares the pre-migration tail
+signature as a local `.old_signature()` and matches `...` against it, so
+positional and partial matching — and an empty argument slot, which stays
+missing while still consuming its position — behave exactly as they did before
+the migration. Each recoverable argument then gets one unrolled
+`if (!base::missing(<old>))` line to pick its value up, and one
+`base::missing(<new>)` line to reject it being supplied both ways.
+
+Every call in a generated block is written namespace-qualified. The block is
+spliced into someone else's function body, where a formal may be named `names`
+or `c` — and a *missing* formal is worse than a shadowing one, since R forces
+the promise while looking for a function to call. Qualifying unconditionally
+keeps every block the same shape instead of making it depend on the signature.
+The block also opens with `# fmt: skip`, so its layout is the generator's rather
+than `air`'s.
+
+### Reordering or removing an argument
+
+Positional recovery only covers old slots whose order is preserved. To reorder
+an argument, or to drop a positional slot without breaking old calls, **place
+the affected argument after `...`** in the `new` signature. Arguments past the
+ellipsis are keyword-only and are recovered by (partial) name rather than by
+position, so they side-step the position math entirely.
+
+The one case the generator cannot rescue is a positional slot that is removed
+*and* whose old position is reused by a different surviving argument — a legacy
+positional call would then rebind to the wrong slot. No migration planned for
+3.0.0 does this (they are pure renames).
+
 ## Additional Documentation
 
 For detailed information on implementing R wrappers for callback functions, see [`AGENTS.md`](AGENTS.md) in this directory.

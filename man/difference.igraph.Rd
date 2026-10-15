@@ -14,7 +14,7 @@ undirected graph.}
 \item{small}{The right hand side argument of the minus operator. A directed
 ot undirected graph.}
 
-\item{byname}{A logical scalar, or the character scalar \code{auto}. Whether
+\item{byname}{A Logical, or the character scalar \code{auto}. Whether
 to perform the operation based on symbolic vertex names. If it is
 \code{auto}, that means \code{TRUE} if both graphs are named and
 \code{FALSE} otherwise. A warning is generated if \code{auto} and one graph,
@@ -35,7 +35,7 @@ new graph. The corresponding operator is \verb{\%m\%}.
 
 If the \code{byname} argument is \code{TRUE} (or \code{auto} and the graphs
 are all named), then the operation is performed based on symbolic vertex
-names. Otherwise numeric vertex ids are used.
+names. Otherwise numeric vertex IDs are used.
 
 \code{difference()} keeps all attributes (graph, vertex and edge) of the
 first graph.

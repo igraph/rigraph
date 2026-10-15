@@ -26,7 +26,7 @@ the type of the right hand side argument:
 \item If it is an igraph graph object, then the difference of the
 two graphs is calculated, see \code{\link[=difference]{difference()}}.
 \item If it is a numeric or character vector, then it is interpreted
-as a vector of vertex ids and the specified vertices will be
+as a vector of vertex IDs and the specified vertices will be
 deleted from the graph. Example: \preformatted{  g <- make_ring(10)
 V(g)$name <- letters[1:10]
 g <- g - c("a", "b")}
@@ -38,7 +38,7 @@ function), then these edges will be deleted from the graph.
 \item If it is an object created with the \code{\link[=vertex]{vertex()}} (or the
 \code{\link[=vertices]{vertices()}}) function, then all arguments of \code{\link[=vertices]{vertices()}} are
 concatenated and the result is interpreted as a vector of vertex
-ids. These vertices will be removed from the graph.
+IDs. These vertices will be removed from the graph.
 \item If it is an object created with the \code{\link[=edge]{edge()}} (or the
 \code{\link[=edges]{edges()}}) function, then all arguments of \code{\link[=edges]{edges()}} are
 concatenated and then interpreted as edges to be removed from the

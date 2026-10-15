@@ -12,7 +12,6 @@ igraph_t_idx_env <- 10L
 igraph_t_idx_max <- 11L
 
 # Indexes into unclass(g)[[igraph_t_idx_attr]]
-igraph_attr_idx_unknown <- 1L # integer of length 3, for what purpose?
 igraph_attr_idx_graph <- 2L
 igraph_attr_idx_vertex <- 3L
 igraph_attr_idx_edge <- 4L

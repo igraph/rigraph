@@ -5,9 +5,9 @@ init <- expression({
   set.seed(42)
 })
 reinit <- expression({
-  g <- random.graph.game(1000, p = .1)
+  g <- random.graph.game(1000, p = 0.1)
   E(g)$weight <- sample(ecount(g))
-  gp <- random.graph.game(1000, p = .1)
+  gp <- random.graph.game(1000, p = 0.1)
   E(gp)$weight <- sample(ecount(gp))
 })
 

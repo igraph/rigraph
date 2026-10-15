@@ -17,10 +17,10 @@ shortest.paths(
 \item{graph}{The graph to work on.}
 
 \item{v}{Numeric vector, the vertices from which the shortest paths will be
-calculated.}
+calculated. The default \code{NULL} selects all vertices.}
 
 \item{to}{Numeric vector, the vertices to which the shortest paths will be
-calculated. By default it includes all vertices. Note that for
+calculated. The default \code{NULL} includes all vertices. Note that for
 \code{distances()} every vertex must be included here at most once. (This
 is not required for \code{shortest_paths()}.}
 

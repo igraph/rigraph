@@ -5,18 +5,20 @@
 \alias{get.edges}
 \title{Incident vertices of some graph edges}
 \usage{
-ends(graph, es, names = TRUE)
+ends(graph, es, ..., names = TRUE)
 }
 \arguments{
 \item{graph}{The input graph}
 
 \item{es}{The sequence of edges to query}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{names}{Whether to return vertex names or
-numeric vertex ids. By default vertex names are used.}
+numeric vertex IDs. By default vertex names are used.}
 }
 \value{
-A two column matrix of vertex names or vertex ids.
+A two column matrix of vertex names or vertex IDs.
 }
 \description{
 Incident vertices of some graph edges

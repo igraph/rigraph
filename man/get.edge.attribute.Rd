@@ -13,7 +13,7 @@ get.edge.attribute(graph, name, index = E(graph))
 all edge attributes are returned in a list.}
 
 \item{index}{An optional edge sequence to query edge attributes
-for a subset of edges.}
+for a subset of edges. The default \code{NULL} selects all edges.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

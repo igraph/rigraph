@@ -1,0 +1,5 @@
+{
+    "os": "ubuntu-24.04",
+    "r": "release",
+    "rspm": "https://packagemanager.posit.co/cran/__linux__/noble/latest"
+}

@@ -21,7 +21,7 @@ the igraph and the graphNEL objects.
 \code{as_graphnel()} converts an igraph graph to a graphNEL graph. It
 converts all graph/vertex/edge attributes. If the igraph graph has a
 vertex attribute \sQuote{\code{name}}, then it will be used to assign
-vertex names in the graphNEL graph. Otherwise numeric igraph vertex ids
+vertex names in the graphNEL graph. Otherwise numeric igraph vertex IDs
 will be used for this purpose.
 }
 \section{Related documentation in the C library}{

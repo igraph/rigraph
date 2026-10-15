@@ -27,8 +27,8 @@ If \verb{rep(0, size))}, the default, no cuts are made.}
 finding motifs. Only used if the \code{sample} argument is \code{NULL}.
 The default is \code{ceiling(vcount(graph) / 10)} .}
 
-\item{sample}{If not \code{NULL} then it specifies the vertices to use as a
-starting point for finding motifs.}
+\item{sample}{Vertices to use as a starting point for finding motifs.
+Default: \code{NULL}.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

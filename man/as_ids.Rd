@@ -23,7 +23,7 @@ Convert a vertex or edge sequence to an ordinary vector
 }
 \details{
 For graphs without names, a numeric vector is returned, containing the
-internal numeric vertex or edge ids.
+internal numeric vertex or edge IDs.
 
 For graphs with names, and vertex sequences, the vertex names are
 returned in a character vector.
