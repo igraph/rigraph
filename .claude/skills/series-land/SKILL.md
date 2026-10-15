@@ -5,6 +5,8 @@ description: Land rigraph's series on `main`, so that `main` and CRAN's `igraph`
 
 # Landing the series on `main`
 
+*Handbook: [`operations/vendoring/series-loop/`](/handbook/operations/vendoring/series-loop/README.md), when a landing becomes possible.*
+
 `main` of `igraph/rigraph` takes a newer engine by **fast-forwarding onto the series' vendor commits**:
 every upstream commit the series vendored, with the R-side fix CI demanded folded into it,
 replayed without the flavor onto `main` itself and judged by CI one by one.

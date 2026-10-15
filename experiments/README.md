@@ -12,3 +12,6 @@ The change that adds a directory adds its line below: the name, what it measured
 <!-- One bullet per directory, newest last:
      * [`YYYY-MM-DD-topic/`](YYYY-MM-DD-topic/): what it measured, in one clause;
        supports [`area/leaf/`](/handbook/area/leaf/README.md). -->
+
+* [`2026-10-15-series-dry-run/`](2026-10-15-series-dry-run/): how far the vendor stage walks the replay before it first needs R-side work;
+  supports [`operations/vendoring/series-loop/`](/handbook/operations/vendoring/series-loop/README.md).

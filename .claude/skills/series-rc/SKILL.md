@@ -5,6 +5,8 @@ description: Cut and keep aligned the release-candidate strand of rigraph's seri
 
 # The release-candidate strand
 
+*Handbook: [`operations/vendoring/series-loop/`](/handbook/operations/vendoring/series-loop/README.md), the series this strand mirrors.*
+
 The series publishes a flavored package, `igraph.dev` for `main`,
 so that it installs beside the released `igraph` ([`series-loop`](/.claude/skills/series-loop/SKILL.md)).
 `main` releases plain `igraph`, and a flavored green says nothing about the name that ships.

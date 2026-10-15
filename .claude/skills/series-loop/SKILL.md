@@ -5,6 +5,8 @@ description: Drive rigraph's vendoring series loop for its one series, `main`, p
 
 # The series loop: vendor, promote, repair
 
+*Handbook: [`operations/vendoring/series-loop/`](/handbook/operations/vendoring/series-loop/README.md), what the loop is and when it runs.*
+
 The routine that walks the vendored igraph C library forward one upstream commit at a time,
 lets CI judge every commit, and publishes the verified prefix.
 It is a scheduled agent routine, not a workflow:

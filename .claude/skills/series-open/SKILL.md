@@ -5,6 +5,8 @@ description: Seed rigraph's one vendoring series, `main`, published as `igraph.d
 
 # Opening the series
 
+*Handbook: [`operations/vendoring/series-loop/`](/handbook/operations/vendoring/series-loop/README.md), the series this seeds.*
+
 rigraph serves one series, `main`, tracking upstream `main`
 and published as the package `igraph.dev` ([`series-loop`](/.claude/skills/series-loop/SKILL.md)).
 Opening it is a one-time, human-run move: the loop never creates refs, it serves the ones it finds.
