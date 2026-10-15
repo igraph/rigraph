@@ -20,7 +20,7 @@ sed -n 's/^#define IGRAPH_VERSION //p' src/vendor/igraph_version.h    # the vers
 
 [`scripts/vendor-one.sh`](/scripts/vendor-one.sh) exits with a status that names the failure and prints a banner saying what to do.
 What each status asks for, and the fold-in that lands a fix inside its vendor commit, are the playbook's
-([`1-vendor.md`](/.claude/skills/series-loop/references/1-vendor.md#the-gate-and-its-exit-status)).
+([`1-vendor.md`](/.claude/skills/series-loop/references/1-vendor.md#the-stops-and-their-exit-status)).
 Telling them apart:
 
 * **1, an error.**
@@ -35,8 +35,10 @@ Telling them apart:
   Past the seam the walk ends at that `HEAD`, so it has to be igraph/igraph's `main`.
 * **6, `SHALLOW UPSTREAM CLONE` or `NO VERSION IN THE UPSTREAM CLONE`**, refused before anything is vendored,
   because igraph's CMake stamps the version from `git describe --tags`.
-* **7, `GENERATION FAILED`**: CMake, Stimulus or `cpp11::cpp_register()` failed on the regenerated tree, which is left uncommitted.
-  Most often upstream renamed or merged a function in its interface definitions, and the fix is in `tools/stimulus/` or `patch/`.
+* **7, a generator failed**, with the regenerated tree left uncommitted. Where it stops says whose fix it is:
+  - on the strand (`vendor-one.sh --strand`), CMake, flex or bison failed, and the fix is a `patch/` entry or a missing tool, folded into the strand commit;
+  - on the pick (`series-vendor.sh`), Stimulus or `cpp11::cpp_register()` failed, most often because upstream renamed or merged a function
+    in its interface definitions, and the fix is in `tools/stimulus/`, folded into the buffer commit.
 * **8, `GLUE CHECK COULD NOT RUN`**: `./configure` failed and nothing was compiled, so it says nothing about the commit at `HEAD`.
 
 ## A red commit on `main-dev`
@@ -74,10 +76,12 @@ Once the buffer has vendored past it, neither strand can take the re-stamp, and 
 
 ## Patch drift
 
-A vendor run applies the buffer's `patch/` stack, not `main-dev`'s,
-so an entry that reached `main-dev` alone is absent the next time the buffer vendors,
+A vendor run applies the strand's `patch/` stack, not `main-dev`'s,
+so an entry that reached `main-dev` alone is absent the next time the strand vendors,
 and the commit that brings the code it patches arrives on `main-dev` with the fix reverted, looking like an ordinary vendor commit.
-The port stage carries entries onto the buffer by test-applying each against the buffer's tree.
+The port stage carries entries onto the buffer by test-applying each against the buffer's tree,
+and an entry it carries is committed onto `main-vendor` as well, so that the next pick keeps it
+([`series-loop`](/.claude/skills/series-loop/SKILL.md), stage 3).
 What the `PATCH DRIFT` line still names after a port is what the carry declined because it takes judgement
 ([`3-advance.md`](/.claude/skills/series-loop/references/3-advance.md#the-carry-of-patch-entries)):
 an entry that fits neither tree yet waits for the code it answers,
@@ -86,7 +90,7 @@ while one that would supersede an entry of the buffer's own, or one both stacks 
 ## Where a patch goes in the chain
 
 A `patch/` entry belongs in the first commit whose tree carries the code it answers,
-folded in with its effect on the vendored tree and an `R-side fix` section, on `main-build` and `main-dev` alike.
+folded in with its effect on the vendored tree and an `R-side fix` section, on `main-vendor`, `main-build` and `main-dev` alike.
 That is rarely the commit at which it was written, because an entry is written when someone reads the failure,
 and the upstream change that raised it can be far below.
 Where the entry first applies (`patch --dry-run`) is a lower bound rather than the answer:

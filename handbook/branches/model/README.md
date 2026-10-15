@@ -15,9 +15,13 @@ There is one: `main`, which tracks the replay of igraph 0.10.17 to 1.0.1 and the
 and publishes the flavor `igraph.dev` ([`flavors/`](/handbook/branches/flavors/README.md)).
 A series is discovered, not configured: the loop serves every `<S>-build` with a sibling `<S>-dev`.
 
-**The four refs** of a series `<S>`, all in the fork:
+**The five refs** of a series `<S>`, all in the fork:
 
-* `<S>-build`, the buffer: one commit per upstream commit that changes the vendored tree, with the glue compiling and no CI.
+* `<S>-vendor`, the strand: one commit per upstream commit that changes the vendored tree,
+  holding only what upstream and `patch/` determine (`series_vendor_paths` in [`scripts/series-config.sh`](/scripts/series-config.sh)),
+  with no version stamp, no generated R side and no CI.
+  Appended to; force-pushed only to repair a `patch/` entry; never mirrored.
+* `<S>-build`, the buffer: the strand picked commit by commit, with the R side regenerated, the version stamped and the glue compiling, and no CI.
   Appended to; force-pushed only to repair.
 * `<S>-dev`: what CI judges commit by commit.
   The buffer consumed in chunks of at most 100, with what CI demanded folded in, and `main`'s own changes ported in.
@@ -28,12 +32,12 @@ A series is discovered, not configured: the loop serves every `<S>-build` with a
 
 The seed is `main` with the flavor applied by `scripts/flavor.sh`
 and a commit stamping a fifth version component of `.0` ([`series-open`](/.claude/skills/series-open/SKILL.md)).
-`-build`, `-dev` and `-build-base` start at the seed's tip, and `-green` at its base, `main`,
+`-vendor`, `-build`, `-dev` and `-build-base` start at the seed's tip, and `-green` at its base, `main`,
 so that CI judges the flavor commits like any other before green moves over them.
 The buffer is deliberately untested, so that vendoring can run ahead while CI catches up;
 what keeps CI off it is that the workflows it carries match no branch named `*-build`, which the port stage keeps true by syncing its tooling too.
 
-**Around the four:**
+**Around the five:**
 
 * `retry-<S>-dev`, the rerun ledger: pushed at one commit of `<S>-dev` to have it judged again on its own SHA.
 * `<S>-rc-dev`, the rc strand: the series without its flavor, commit for commit, so that the package `main` would ship as `igraph` has verdicts of its own

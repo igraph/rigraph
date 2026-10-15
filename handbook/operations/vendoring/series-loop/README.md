@@ -15,7 +15,7 @@ It tracks upstream `main` and is published as `igraph.dev` from `main-green` ([`
 what each of its refs means and how far it may move is [`branches/model/`](/handbook/branches/model/README.md)'s.
 All of them live in the fork, `krlmlr/rigraph`, and the loop writes these:
 
-* `main-build`, `main-dev`, `main-green` and `main-build-base`, the series itself;
+* `main-vendor`, `main-build`, `main-dev`, `main-green` and `main-build-base`, the series itself;
 * `retry-main-dev`, at a commit whose run failed for reasons the commit had no part in;
 * `main-rc-dev`, realigned after every write to `main-dev`, once a planned landing has cut it.
 
@@ -41,10 +41,11 @@ So the first firings stop in the vendor stage for R-side work long before the se
 Setup always runs, so that every read below sees whole histories with every branch and tag;
 each stage after it is skipped when it has nothing to do, and they run in this order:
 
-* **Vendor onto `main-build`.**
+* **Vendor onto `main-vendor`, then pick onto `main-build`.**
+  Each upstream commit is vendored once, onto the strand, as what upstream and `patch/` alone determine;
+  the pick onto the buffer regenerates the R side, stamps the version and checks that the glue compiles,
+  and a fix that check or the generator asks for rides in the buffer commit that needs it ([`pipeline/`](/handbook/operations/vendoring/pipeline/README.md)).
   CI never builds the buffer, so vendoring runs ahead of verification and red never blocks it.
-  The vendor run checks only that the glue compiles after each commit,
-  and a fix that check asks for rides in the vendor commit that needs it ([`pipeline/`](/handbook/operations/vendoring/pipeline/README.md)).
 * **Repair the oldest red on `main-dev`.**
   Each commit's verdict and log come from the run that decided it, and a failure is classified by what its log contains.
   The tree's fault is folded into the offending commit and the tail replayed,
