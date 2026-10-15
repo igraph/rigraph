@@ -250,6 +250,7 @@ for c in $todo; do
   }
   if ! series_regenerate; then
     git reset -q --hard HEAD~1
+    git clean -fdq
     echo >&2
     echo "=== GENERATOR FAILED after picking $(git rev-parse --short "$c") $subj ===" >&2
     echo "The pick is undone, and the buffer stands where it did. Fix what the generator reads" >&2

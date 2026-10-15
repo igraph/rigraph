@@ -7,16 +7,16 @@
 # scripts/series-config.sh holds most of it.
 source: duckdb/duckdb-r
 url: https://github.com/duckdb/duckdb-r
-commit: ba1bce3f8e8772c3edf4bc67abb4629bbc313a41
+commit: ace6c1d17100bed940ac4d5d3e0d23f645ec2890
 source-date: 2026-10-15
 checked: 2026-10-15
 ported:
   - path: scripts/vendor-one.sh
-    blob: f1e3a93ce35e28babb7a0402e6cabfeb59d1d46a
+    blob: 8ed394e41ef00bd9e5ae276883dfb7fcc7f14f3c
   - path: scripts/vendor-lib.sh
-    blob: 0f12c680eabce322c8547a32ae229d26a38e642a
+    blob: 07f3fe272fcd4e49f5f6c8fa2d1e05c20e56f767
   - path: scripts/vendor.sh
-    blob: b31ca091322f720e4fa1dd4e675c606c8671912e
+    blob: e13010ee12a2b5093a21226b476c4c3965caa251
   - path: scripts/setup-git.sh
     blob: af4380b5dd51c9e9d77c84622774798c99af704f
   - path: scripts/merge-version.sh
@@ -26,7 +26,7 @@ ported:
   - path: scripts/series-lib.sh
     blob: 47266feaa6f2168a761ceeaf0a6089f1169a9c93
   - path: scripts/series-vendor.sh
-    blob: 8accfd825da15678681317424a0562972de0cf31
+    blob: 6c6997e6973375c24e9f1e6099ef35c3c08e8f43
   - path: scripts/series-check.sh
     blob: fff8924780a0c0a1c43139b94ebc328bc11398da
   - path: scripts/series-advance.sh
@@ -34,7 +34,7 @@ ported:
   - path: scripts/series-port.sh
     blob: 75ee2717916f3d75d351badc49a2ae29bfd079e2
   - path: scripts/series-patch-sync.sh
-    blob: 0682a5ab7ba419c26cc6fef1aed7df4ae213abee
+    blob: 8f7d7c137ded5e35374759e98b7488781afbc9cc
   - path: scripts/series-fold.sh
     blob: 6dc93ae9c499b4580ac7cc61c6f0c49f6d6b780f
   - path: scripts/series-tests.sh
@@ -102,7 +102,7 @@ ported:
   - path: .claude/skills/series-loop/references/2-repair.md
     blob: e2786cb54c55030521a8a1d2f9e9f71d60e73d4a
   - path: .claude/skills/series-loop/references/3-advance.md
-    blob: c723362776321dd1cef76afa6c9c71b880ee1560
+    blob: d0df180f2c2ac58c4a265b8ed172d0a5c7a09a63
   - path: .claude/skills/series-loop/references/4-port.md
     blob: 138ba6a5c0d1cff711a47388f883012b39a2941c
   - path: .claude/skills/series-loop/references/5-extend.md
