@@ -14,13 +14,13 @@ migrations <- list(
   ),
 
   export_pajek = list(
-    old = function(blocks, graph, file, project.file) {},
+    old = function(blocks, graph, file, project.file = project_file) {},
     new = function(
       blocks,
       graph,
       file,
       ...,
-      project.file = TRUE
+      project_file = TRUE
     ) {},
     when = "3.0.0"
   ),
@@ -71,14 +71,14 @@ migrations <- list(
   ),
 
   min_cut = list(
-    old = function(graph, source, target, capacity, value.only) {},
+    old = function(graph, source, target, capacity, value.only = value_only) {},
     new = function(
       graph,
       source = NULL,
       target = NULL,
       ...,
       capacity = NULL,
-      value.only = TRUE
+      value_only = TRUE
     ) {},
     when = "3.0.0"
   ),

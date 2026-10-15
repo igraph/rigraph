@@ -176,11 +176,11 @@ blockGraphs <- function(blocks, graph) {
 #' The `export_pajek()` function can be used to export the graph and its
 #' cohesive blocks in Pajek format. It can either export a single Pajek project
 #' file with all the information, or a set of files, depending on its
-#' `project.file` argument. If `project.file` is `TRUE`, then
+#' `project_file` argument. If `project_file` is `TRUE`, then
 #' the following information is written to the file (or connection) given in
 #' the `file` argument: (1) the input graph, together with its attributes,
 #' see [write_graph()] for details; (2) the hierarchy graph; and (3)
-#' one binary partition for each cohesive block. If `project.file` is
+#' one binary partition for each cohesive block. If `project_file` is
 #' `FALSE`, then the `file` argument must be a character scalar and
 #' it is used as the base name for the generated files. If `file` is
 #' \sQuote{basename}, then the following files are created: (1)
@@ -231,16 +231,16 @@ blockGraphs <- function(blocks, graph) {
 #'   `cohesive_blocks()` function.
 #' @param file Defines the file (or connection) the Pajek file is written to.
 #'
-#'   If the `project.file` argument is `TRUE`, then it can be a
+#'   If the `project_file` argument is `TRUE`, then it can be a
 #'   filename (with extension), a file object, or in general any king of
 #'   connection object. The file/connection will be opened if it wasn't already.
 #'
-#'   If the `project.file` argument is `FALSE`, then several files are
+#'   If the `project_file` argument is `FALSE`, then several files are
 #'   created and `file` must be a character scalar containing the base name
 #'   of the files, without extension. (But it can contain the path to the files.)
 #'
 #'   See also details below.
-#' @param project.file Logical, whether to create a single Pajek project
+#' @param project_file Logical, whether to create a single Pajek project
 #'   file containing all the data, or to create separated files for each item.
 #'   See details below.
 #' @param y The graph whose cohesive blocks are supplied in the `x`
@@ -634,7 +634,7 @@ export_pajek <- function(
   graph,
   file,
   ...,
-  project.file = TRUE
+  project_file = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: export_pajek, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -648,14 +648,14 @@ export_pajek <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn export_pajek}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(project.file)) base::list(project.file = project.file)
+        if (!base::missing(project.file)) base::list(project_file = project.file)
       )
     }
     .arg_handle <- .old_signature(...)
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(project.file)) "project.file"
+        if (!base::missing(project_file)) "project_file"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn export_pajek} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -663,7 +663,7 @@ export_pajek <- function(
         "3.0.0",
         what = base::I("Calling `export_pajek()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  export_pajek(", base::paste(base::c("blocks", "graph", "file", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  export_pajek(", base::paste(base::c("blocks", "graph", "file", base::c(project_file = "project.file")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    export_pajek(", base::paste(base::c("blocks", "graph", "file", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -671,14 +671,14 @@ export_pajek <- function(
   }
   # END GENERATED ARG_HANDLE
 
-  if (!project.file && (!is.character(file) || !nzchar(file))) {
+  if (!project_file && (!is.character(file) || !nzchar(file))) {
     cli::cli_abort(
       "{.arg file} must be a filename (without extension) when writing
       to separate files, not {.obj_type_friendly {file}}."
     )
   }
 
-  if (project.file) {
+  if (project_file) {
     return(exportPajek.cohesiveblocks.pf(blocks, graph, file))
   } else {
     return(exportPajek.cohesiveblocks.nopf(blocks, graph, file))

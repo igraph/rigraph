@@ -1057,7 +1057,7 @@ as_adj_edge_list <- function(
 #' @param weight Logical, whether to add graphNEL edge weights as an
 #'   igraph edge attribute called \sQuote{`weight`}. (graphNEL graphs are
 #'   always weighted.)
-#' @param unlist.attrs Logical. graphNEL attribute query functions
+#' @param unlist_attrs Logical. graphNEL attribute query functions
 #'   return the values of the attributes in R lists, if this argument is
 #'   `TRUE` (the default) these will be converted to atomic vectors,
 #'   whenever possible, before adding them to the igraph graph.
@@ -1087,7 +1087,7 @@ graph_from_graphnel <- function(
   ...,
   name = TRUE,
   weight = TRUE,
-  unlist.attrs = TRUE
+  unlist_attrs = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph_from_graphnel, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -1103,7 +1103,7 @@ graph_from_graphnel <- function(
       base::c(
         if (!base::missing(name)) base::list(name = name),
         if (!base::missing(weight)) base::list(weight = weight),
-        if (!base::missing(unlist.attrs)) base::list(unlist.attrs = unlist.attrs)
+        if (!base::missing(unlist.attrs)) base::list(unlist_attrs = unlist.attrs)
       )
     }
     .arg_handle <- .old_signature(...)
@@ -1112,7 +1112,7 @@ graph_from_graphnel <- function(
       .arg_conflict <- base::intersect(.arg_names, base::c(
         if (!base::missing(name)) "name",
         if (!base::missing(weight)) "weight",
-        if (!base::missing(unlist.attrs)) "unlist.attrs"
+        if (!base::missing(unlist_attrs)) "unlist_attrs"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn graph_from_graphnel} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -1120,7 +1120,7 @@ graph_from_graphnel <- function(
         "3.0.0",
         what = base::I("Calling `graph_from_graphnel()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  graph_from_graphnel(", base::paste(base::c("graphNEL", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  graph_from_graphnel(", base::paste(base::c("graphNEL", base::c(name = "name", weight = "weight", unlist_attrs = "unlist.attrs")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    graph_from_graphnel(", base::paste(base::c("graphNEL", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -1157,7 +1157,7 @@ graph_from_graphnel <- function(
   v.n <- names(graph::nodeDataDefaults(graphNEL))
   for (n in v.n) {
     val <- unname(graph::nodeData(graphNEL, attr = n))
-    if (unlist.attrs && all(lengths(val) == 1)) {
+    if (unlist_attrs && all(lengths(val) == 1)) {
       val <- unlist(val)
     }
     g <- set_vertex_attr(g, n, value = val)
@@ -1173,7 +1173,7 @@ graph_from_graphnel <- function(
     el <- paste(sep = "|", el[, 1], el[, 2])
     for (n in e.n) {
       val <- unname(graph::edgeData(graphNEL, attr = n)[el])
-      if (unlist.attrs && all(lengths(val) == 1)) {
+      if (unlist_attrs && all(lengths(val) == 1)) {
         val <- unlist(val)
       }
       g <- set_edge_attr(g, n, value = val)

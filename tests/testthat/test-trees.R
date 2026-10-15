@@ -201,19 +201,19 @@ test_that("sample_spanning_tree works for disconnected graphs", {
   g <- make_full_graph(8) %du% make_full_graph(5)
 
   edges <- sample_spanning_tree(g, vertex = 8)
-  sg <- subgraph_from_edges(g, edges, delete.vertices = TRUE)
+  sg <- subgraph_from_edges(g, edges, delete_vertices = TRUE)
   expect_vcount(sg, 8)
   expect_ecount(sg, 7)
   expect_true(is_tree(sg))
 
   edges <- sample_spanning_tree(g, vertex = 9)
-  sg <- subgraph_from_edges(g, edges, delete.vertices = TRUE)
+  sg <- subgraph_from_edges(g, edges, delete_vertices = TRUE)
   expect_vcount(sg, 5)
   expect_ecount(sg, 4)
   expect_true(is_tree(sg))
 
   edges <- sample_spanning_tree(g)
-  sg <- subgraph_from_edges(g, edges, delete.vertices = FALSE)
+  sg <- subgraph_from_edges(g, edges, delete_vertices = FALSE)
   expect_vcount(sg, 13)
   expect_ecount(sg, 11)
   expect_true(is_tree(induced_subgraph(sg, 1:8)))

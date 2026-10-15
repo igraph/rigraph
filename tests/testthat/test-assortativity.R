@@ -18,7 +18,7 @@ test_that("assortativity works", {
   assortativity_igraph <- assortativity(
     g,
     values = degree(g, mode = "out"),
-    values.in = degree(g, mode = "in")
+    values_in = degree(g, mode = "in")
   )
 
   expect_equal(assortativity_degree(g), assortativity_igraph)
@@ -126,4 +126,9 @@ test_that("assortativity_nominal() recovers legacy positional arguments", {
     res <- assortativity_nominal(g, types, FALSE)
   )
   expect_identical(res, assortativity_nominal(g, types, directed = FALSE))
+})
+
+test_that("assortativity(values.in = ) is renamed to `values_in`", {
+  g <- make_ring(5, directed = TRUE)
+  expect_legacy_arg(assortativity, list(g, 1:5), "values.in", "values_in", 5:1)
 })

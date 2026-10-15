@@ -11,7 +11,7 @@ test_that("dfs() does not pad order", {
   expect_equal(as.numeric(dfs(g, root = 2, unreachable = FALSE)$order), c(2, 1))
   expect_equal(
     as.numeric(
-      dfs(g, root = 2, unreachable = FALSE, order.out = TRUE)$order.out
+      dfs(g, root = 2, unreachable = FALSE, order_out = TRUE)$order.out
     ),
     c(1, 2)
   )
@@ -1067,7 +1067,7 @@ test_that("knn works", {
 test_that("reciprocity works", {
   g <- make_graph(c(1, 2, 2, 1, 2, 3, 3, 4, 4, 4), directed = TRUE)
   expect_equal(reciprocity(g), 0.5)
-  expect_equal(reciprocity(g, ignore.loops = FALSE), 0.6)
+  expect_equal(reciprocity(g, ignore_loops = FALSE), 0.6)
 })
 
 test_that("feedback_arc_set works", {
@@ -1210,7 +1210,7 @@ test_that("shortest_paths() tail arguments and legacy positional recovery", {
     weights = NA,
     output = "both",
     predecessors = TRUE,
-    inbound.edges = TRUE,
+    inbound_edges = TRUE,
     algorithm = "bellman-ford"
   )
   expect_equal(res$vpath, list(c(1, 2, 3)))
@@ -1263,14 +1263,14 @@ test_that("induced_subgraph() tail arguments and legacy positional recovery", {
 test_that("subgraph_from_edges() tail arguments and legacy positional recovery", {
   g <- make_ring(10)
 
-  sub <- subgraph_from_edges(g, 1:2, delete.vertices = FALSE)
+  sub <- subgraph_from_edges(g, 1:2, delete_vertices = FALSE)
   expect_equal(vcount(sub), 10)
   expect_equal(ecount(sub), 2)
 
   lifecycle::expect_deprecated(res <- subgraph_from_edges(g, 1:2, FALSE))
   expect_identical_graphs(
     res,
-    subgraph_from_edges(g, 1:2, delete.vertices = FALSE)
+    subgraph_from_edges(g, 1:2, delete_vertices = FALSE)
   )
 })
 
@@ -1314,10 +1314,10 @@ test_that("reciprocity() tail arguments and legacy positional recovery", {
   g <- make_graph(c(1, 2, 2, 1, 2, 3), directed = TRUE)
 
   # One of the two connected dyads is reciprocated.
-  expect_equal(reciprocity(g, ignore.loops = TRUE, mode = "ratio"), 0.5)
+  expect_equal(reciprocity(g, ignore_loops = TRUE, mode = "ratio"), 0.5)
 
   lifecycle::expect_deprecated(res <- reciprocity(g, FALSE))
-  expect_identical(res, reciprocity(g, ignore.loops = FALSE))
+  expect_identical(res, reciprocity(g, ignore_loops = FALSE))
 })
 
 test_that("edge_density() tail arguments and legacy positional recovery", {
@@ -1547,7 +1547,7 @@ test_that("knn() tail arguments and legacy positional recovery", {
     g,
     vertices = V(g),
     mode = "out",
-    neighbor.degree.mode = "in",
+    neighbor_degree_mode = "in",
     weights = NA
   )
   expect_equal(r$knn, c(1, NaN, NaN, NaN))
@@ -1642,4 +1642,34 @@ test_that("edge queries with `eids = ` are deprecated but still work", {
   expect_equal(res, which_mutual(g, edges = 1:2))
   lifecycle::expect_deprecated(res <- subgraph_from_edges(g, eids = 1:2))
   expect_identical_graphs(res, subgraph_from_edges(g, edges = 1:2))
+})
+
+test_that("snake_case renames in the structural properties recover the legacy dotted names", {
+  g <- make_ring(5, directed = TRUE)
+  expect_legacy_arg(
+    shortest_paths,
+    list(g, 1),
+    "inbound.edges",
+    "inbound_edges",
+    FALSE
+  )
+  expect_legacy_arg(
+    subgraph_from_edges,
+    list(g, 1:2),
+    "delete.vertices",
+    "delete_vertices",
+    FALSE
+  )
+  expect_legacy_arg(reciprocity, list(g), "ignore.loops", "ignore_loops", FALSE)
+  expect_legacy_arg(
+    knn,
+    list(g),
+    "neighbor.degree.mode",
+    "neighbor_degree_mode",
+    "in"
+  )
+  expect_legacy_arg(dfs, list(g, 1), "order.out", "order_out", TRUE)
+  cb <- function(graph, data, extra) FALSE
+  expect_legacy_arg(dfs, list(g, 1), "in.callback", "in_callback", cb)
+  expect_legacy_arg(dfs, list(g, 1), "out.callback", "out_callback", cb)
 })

@@ -88,11 +88,11 @@ migrations <- list(
   ),
 
   centralize = list(
-    old = function(scores, theoretical.max, normalized) {},
+    old = function(scores, theoretical.max = theoretical_max, normalized) {},
     new = function(
       scores,
       ...,
-      theoretical.max = 0,
+      theoretical_max = 0,
       normalized = TRUE
     ) {},
     when = "3.0.0"

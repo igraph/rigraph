@@ -346,7 +346,7 @@ dominator.tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
 #' @inheritParams rlang::args_dots_empty
 #' @param capacity Vector giving the capacity of the edges. If this is
 #'   `NULL` (the default) then the `capacity` edge attribute is used.
-#' @param value.only Logical, if `TRUE` only the minimum cut value
+#' @param value_only Logical, if `TRUE` only the minimum cut value
 #'   is returned, if `FALSE` the edges in the cut and a the two (or more)
 #'   partitions are also returned.
 #' @return For `min_cut()` a nuieric constant, the value of the minimum
@@ -377,11 +377,11 @@ dominator.tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
 #' @examples
 #' g <- make_ring(100)
 #' min_cut(g, capacity = rep(1, vcount(g)))
-#' min_cut(g, value.only = FALSE, capacity = rep(1, vcount(g)))
+#' min_cut(g, value_only = FALSE, capacity = rep(1, vcount(g)))
 #'
 #' g2 <- make_graph(c(1, 2, 2, 3, 3, 4, 1, 6, 6, 5, 5, 4, 4, 1))
 #' E(g2)$capacity <- c(3, 1, 2, 10, 1, 3, 2)
-#' min_cut(g2, value.only = FALSE)
+#' min_cut(g2, value_only = FALSE)
 #' @family flow
 #' @export
 min_cut <- function(
@@ -390,7 +390,7 @@ min_cut <- function(
   target = NULL,
   ...,
   capacity = NULL,
-  value.only = TRUE
+  value_only = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: min_cut, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -405,7 +405,7 @@ min_cut <- function(
       }
       base::c(
         if (!base::missing(capacity)) base::list(capacity = capacity),
-        if (!base::missing(value.only)) base::list(value.only = value.only)
+        if (!base::missing(value.only)) base::list(value_only = value.only)
       )
     }
     .arg_handle <- .old_signature(...)
@@ -413,7 +413,7 @@ min_cut <- function(
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
         if (!base::missing(capacity)) "capacity",
-        if (!base::missing(value.only)) "value.only"
+        if (!base::missing(value_only)) "value_only"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn min_cut} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -421,7 +421,7 @@ min_cut <- function(
         "3.0.0",
         what = base::I("Calling `min_cut()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  min_cut(", base::paste(base::c("graph", "source", "target", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  min_cut(", base::paste(base::c("graph", "source", "target", base::c(capacity = "capacity", value_only = "value.only")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    min_cut(", base::paste(base::c("graph", "source", "target", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -445,17 +445,17 @@ min_cut <- function(
     capacity <- as.numeric(capacity)
   }
 
-  value.only <- as.logical(value.only)
+  value_only <- as.logical(value_only)
   on.exit(.Call(Rx_igraph_finalizer))
 
   if (is.null(target) && is.null(source)) {
-    if (value.only) {
+    if (value_only) {
       res <- mincut_value_impl(graph = graph, capacity = capacity)
     } else {
       res <- mincut_impl(graph = graph, capacity = capacity)
     }
   } else {
-    if (value.only) {
+    if (value_only) {
       res <- st_mincut_value_impl(
         graph = graph,
         source = source,

@@ -49,7 +49,7 @@ is.simple <- function(graph) {
 #' `is_simple()` checks whether a graph is simple.
 #'
 #' `simplify()` removes the loop and/or multiple edges from a graph.  If
-#' both `remove.loops` and `remove.multiple` are `TRUE` the
+#' both `remove_loops` and `remove_multiple` are `TRUE` the
 #' function returns a simple graph. If the graph is already simple, it is
 #' returned unchanged.
 #'
@@ -65,9 +65,11 @@ is.simple <- function(graph) {
 #'
 #' @aliases simplify
 #' @param graph The graph to work on.
-#' @param remove.loops Logical, whether the loop edges are to be removed.
-#' @param remove.multiple Logical, whether the multiple edges are to be
+#' @param remove_loops Logical, whether the loop edges are to be removed.
+#' @param remove.loops `r lifecycle::badge("deprecated")` Use `remove_loops` instead.
+#' @param remove_multiple Logical, whether the multiple edges are to be
 #'   removed.
+#' @param remove.multiple `r lifecycle::badge("deprecated")` Use `remove_multiple` instead.
 #' @inheritParams rlang::args_dots_empty
 #' @param edge_attr_combine Specifies what to do with edge attributes, if
 #'   `remove.multiple=TRUE`. In this case many edges might be mapped to a
@@ -85,8 +87,8 @@ is.simple <- function(graph) {
 #'
 #' g <- make_graph(c(1, 2, 1, 2, 3, 3))
 #' is_simple(g)
-#' is_simple(simplify(g, remove.loops = FALSE))
-#' is_simple(simplify(g, remove.multiple = FALSE))
+#' is_simple(simplify(g, remove_loops = FALSE))
+#' is_simple(simplify(g, remove_multiple = FALSE))
 #' is_simple(simplify(g))
 #' @family simple
 #' @family functions for manipulating graph structure
@@ -94,14 +96,18 @@ is.simple <- function(graph) {
 #' @export
 simplify <- function(
   graph,
-  remove.multiple = TRUE,
-  remove.loops = TRUE,
+  remove_multiple = TRUE,
+  remove_loops = TRUE,
   ...,
-  edge_attr_combine = NULL
+  edge_attr_combine = NULL,
+  remove.multiple = deprecated(),
+  remove.loops = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: simplify, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("r", "re", "rem", "remo", "remov", "remove", "remove."))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn simplify}.")
     # Pre-3.0.0 signature: simplify(graph, remove.multiple, remove.loops, edge.attr.comb)
     .old_signature <- function(edge.attr.comb, ...) {
       if (...length() > 0L) {
@@ -126,13 +132,43 @@ simplify <- function(
         "3.0.0",
         what = base::I("Calling `simplify()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  simplify(", base::paste(base::c("graph", "remove.multiple", "remove.loops", base::c(edge_attr_combine = "edge.attr.comb")[.arg_names]), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    simplify(", base::paste(base::c("graph", "remove.multiple", "remove.loops", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  simplify(", base::paste(base::c("graph", "remove_multiple", "remove_loops", base::c(edge_attr_combine = "edge.attr.comb")[.arg_names]), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    simplify(", base::paste(base::c("graph", "remove_multiple", "remove_loops", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
+
+  if (lifecycle::is_present(remove.loops)) {
+    if (!missing(remove_loops)) {
+      cli::cli_abort(c(
+        "Argument {.arg remove_loops} of {.fn simplify} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg remove.loops}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "simplify(remove.loops = )",
+      "simplify(remove_loops = )"
+    )
+    remove_loops <- remove.loops
+  }
+
+  if (lifecycle::is_present(remove.multiple)) {
+    if (!missing(remove_multiple)) {
+      cli::cli_abort(c(
+        "Argument {.arg remove_multiple} of {.fn simplify} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg remove.multiple}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "simplify(remove.multiple = )",
+      "simplify(remove_multiple = )"
+    )
+    remove_multiple <- remove.multiple
+  }
 
   # There was a short-circuit here -- `if (is_simple(graph)) return(graph)` --
   # on the grounds that a graph with no loops and no multiple edges has
@@ -164,8 +200,8 @@ simplify <- function(
   }
   simplify_impl(
     graph = graph,
-    remove_multiple = remove.multiple,
-    remove_loops = remove.loops,
+    remove_multiple = remove_multiple,
+    remove_loops = remove_loops,
     edge_attr_comb = edge_attr_combine
   )
 }

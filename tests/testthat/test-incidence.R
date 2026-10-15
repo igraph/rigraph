@@ -235,11 +235,11 @@ test_that("graph_from_biadjacency_matrix() covers add.names by name and recovers
   rownames(inc) <- c("r1", "r2")
   colnames(inc) <- c("c1", "c2", "c3")
 
-  g_label <- graph_from_biadjacency_matrix(inc, add.names = "label")
+  g_label <- graph_from_biadjacency_matrix(inc, add_names = "label")
   expect_identical(V(g_label)$label, c("r1", "r2", "c1", "c2", "c3"))
   expect_false("name" %in% vertex_attr_names(g_label))
 
-  g_anon <- graph_from_biadjacency_matrix(inc, add.names = NA)
+  g_anon <- graph_from_biadjacency_matrix(inc, add_names = NA)
   expect_identical(vertex_attr_names(g_anon), "type")
 
   lifecycle::expect_deprecated(
@@ -250,4 +250,15 @@ test_that("graph_from_biadjacency_matrix() covers add.names by name and recovers
     graph_from_biadjacency_matrix(inc, directed = TRUE)
   )
   expect_true(is_directed(res))
+})
+
+test_that("graph_from_biadjacency_matrix(add.names = ) is renamed to `add_names`", {
+  m <- matrix(c(1, 0, 1, 1), 2, dimnames = list(c("a", "b"), c("x", "y")))
+  expect_legacy_arg(
+    graph_from_biadjacency_matrix,
+    list(m),
+    "add.names",
+    "add_names",
+    NA
+  )
 })

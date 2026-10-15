@@ -1,7 +1,7 @@
 test_that("min_cut() works -- value.only=FALSE", {
   g_twosquares <- make_graph(c(1, 2, 2, 3, 3, 4, 1, 6, 6, 5, 5, 4, 4, 1))
   E(g_twosquares)$capacity <- c(3, 1, 2, 10, 1, 3, 2)
-  mc <- min_cut(g_twosquares, value.only = FALSE)
+  mc <- min_cut(g_twosquares, value_only = FALSE)
 
   expect_equal(mc$value, 1)
   expect_equal(as.vector(mc$cut), 2)
@@ -12,7 +12,7 @@ test_that("min_cut() works -- value.only=FALSE", {
 test_that("min_cut() works -- value.only=TRUE", {
   g_twosquares <- make_graph(c(1, 2, 2, 3, 3, 4, 1, 6, 6, 5, 5, 4, 4, 1))
   E(g_twosquares)$capacity <- c(3, 1, 2, 10, 1, 3, 2)
-  mc <- min_cut(g_twosquares, value.only = TRUE)
+  mc <- min_cut(g_twosquares, value_only = TRUE)
 
   expect_equal(mc, 1)
 })
@@ -20,7 +20,7 @@ test_that("min_cut() works -- value.only=TRUE", {
 test_that("min_cut() works -- value.only=FALSE source/target", {
   g_twosquares <- make_graph(c(1, 2, 2, 3, 3, 4, 1, 6, 6, 5, 5, 4, 4, 1))
   E(g_twosquares)$capacity <- c(3, 1, 2, 10, 1, 3, 2)
-  mc <- min_cut(g_twosquares, source = 1, target = 4, value.only = FALSE)
+  mc <- min_cut(g_twosquares, source = 1, target = 4, value_only = FALSE)
 
   expect_equal(mc$value, 2)
   expect_equal(as.vector(mc$cut), c(2, 5))
@@ -31,7 +31,7 @@ test_that("min_cut() works -- value.only=FALSE source/target", {
 test_that("min_cut() works -- value.only=TRUE", {
   g_twosquares <- make_graph(c(1, 2, 2, 3, 3, 4, 1, 6, 6, 5, 5, 4, 4, 1))
   E(g_twosquares)$capacity <- c(3, 1, 2, 10, 1, 3, 2)
-  mc <- min_cut(g_twosquares, source = 1, target = 4, value.only = TRUE)
+  mc <- min_cut(g_twosquares, source = 1, target = 4, value_only = TRUE)
 
   expect_equal(mc, 2)
 })
@@ -368,14 +368,14 @@ test_that("min_cut() tail arguments and legacy positional recovery", {
   cap <- c(3, 1, 2, 10, 1, 3, 2)
 
   # The capacity argument is used directly, no capacity edge attribute needed.
-  res <- min_cut(g, source = 1, target = 4, capacity = cap, value.only = FALSE)
+  res <- min_cut(g, source = 1, target = 4, capacity = cap, value_only = FALSE)
   expect_equal(res$value, 2)
   expect_equal(as.vector(res$cut), c(2, 5))
 
   lifecycle::expect_deprecated(res2 <- min_cut(g, 1, 4, cap, FALSE))
   expect_equal(
     res2,
-    min_cut(g, source = 1, target = 4, capacity = cap, value.only = FALSE)
+    min_cut(g, source = 1, target = 4, capacity = cap, value_only = FALSE)
   )
 })
 
@@ -456,4 +456,9 @@ test_that("dominator_tree() tail arguments and legacy positional recovery", {
   ref <- dominator_tree(g, root = 4, mode = "in")
   expect_identical(res2$dom, ref$dom)
   expect_identical_graphs(res2$domtree, ref$domtree)
+})
+
+test_that("min_cut(value.only = ) is renamed to `value_only`", {
+  g <- make_ring(5)
+  expect_legacy_arg(min_cut, list(g), "value.only", "value_only", FALSE)
 })

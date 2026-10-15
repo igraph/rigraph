@@ -137,22 +137,39 @@ articulation.points <- function(graph) {
 #' @rdname components
 #' @param cumulative Logical, if TRUE the cumulative distirubution (relative
 #'   frequency) is calculated.
-#' @param mul.size Logical. If TRUE the relative frequencies will be multiplied
+#' @param mul_size Logical. If TRUE the relative frequencies will be multiplied
 #'   by the cluster sizes.
+#' @param mul.size `r lifecycle::badge("deprecated")` Use `mul_size` instead.
 #' @family components
 #' @export
 #' @importFrom graphics hist
 component_distribution <- function(
   graph,
   cumulative = FALSE,
-  mul.size = FALSE,
-  ...
+  mul_size = FALSE,
+  ...,
+  mul.size = deprecated()
 ) {
+  if (lifecycle::is_present(mul.size)) {
+    if (!missing(mul_size)) {
+      cli::cli_abort(c(
+        "Argument {.arg mul_size} of {.fn component_distribution} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg mul.size}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "component_distribution(mul.size = )",
+      "component_distribution(mul_size = )"
+    )
+    mul_size <- mul.size
+  }
+
   ensure_igraph(graph)
 
   cs <- components(graph, ...)$csize
   hi <- hist(cs, -1:max(cs), plot = FALSE)$density
-  if (mul.size) {
+  if (mul_size) {
     hi <- hi * 1:max(cs)
     hi <- hi / sum(hi)
   }
@@ -175,12 +192,12 @@ component_distribution <- function(
 #' @param mode Character constant giving the type of the components, wither
 #'   `weak` for weakly connected components or `strong` for strongly
 #'   connected components.
-#' @param max.comps The maximum number of components to return. The first
-#'   `max.comps` components will be returned (which hold at least
-#'   `min.vertices` vertices, see the next parameter), the others will be
+#' @param max_comps The maximum number of components to return. The first
+#'   `max_comps` components will be returned (which hold at least
+#'   `min_vertices` vertices, see the next parameter), the others will be
 #'   ignored. Supply `NA` here if you don't want to limit the number of
 #'   components.
-#' @param min.vertices The minimum number of vertices a component should
+#' @param min_vertices The minimum number of vertices a component should
 #'   contain in order to place it in the result list. E.g. supply 2 here to ignore
 #'   isolate vertices.
 #' @return A list of graph objects.
@@ -194,15 +211,15 @@ component_distribution <- function(
 #'
 #' # the diameter of each component in a random graph
 #' g <- sample_gnp(1000, 1 / 1000)
-#' components <- decompose(g, min.vertices = 2)
+#' components <- decompose(g, min_vertices = 2)
 #' sapply(components, diameter)
 #'
 decompose <- function(
   graph,
   ...,
   mode = c("weak", "strong"),
-  max.comps = NA,
-  min.vertices = 0
+  max_comps = NA,
+  min_vertices = 0
 ) {
   # BEGIN GENERATED ARG_HANDLE: decompose, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -219,8 +236,8 @@ decompose <- function(
       }
       base::c(
         if (!base::missing(mode)) base::list(mode = mode),
-        if (!base::missing(max.comps)) base::list(max.comps = max.comps),
-        if (!base::missing(min.vertices)) base::list(min.vertices = min.vertices)
+        if (!base::missing(max.comps)) base::list(max_comps = max.comps),
+        if (!base::missing(min.vertices)) base::list(min_vertices = min.vertices)
       )
     }
     .arg_handle <- .old_signature(...)
@@ -228,8 +245,8 @@ decompose <- function(
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
         if (!base::missing(mode)) "mode",
-        if (!base::missing(max.comps)) "max.comps",
-        if (!base::missing(min.vertices)) "min.vertices"
+        if (!base::missing(max_comps)) "max_comps",
+        if (!base::missing(min_vertices)) "min_vertices"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn decompose} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -237,7 +254,7 @@ decompose <- function(
         "3.0.0",
         what = base::I("Calling `decompose()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  decompose(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  decompose(", base::paste(base::c("graph", base::c(mode = "mode", max_comps = "max.comps", min_vertices = "min.vertices")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    decompose(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -248,14 +265,14 @@ decompose <- function(
   ensure_igraph(graph)
   mode <- igraph_match_arg(mode)
 
-  if (is.na(max.comps)) {
-    max.comps <- -1
+  if (is.na(max_comps)) {
+    max_comps <- -1
   }
   decompose_impl(
     graph,
     mode,
-    max.comps,
-    min.vertices
+    max_comps,
+    min_vertices
   )
 }
 

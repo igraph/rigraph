@@ -56,7 +56,7 @@
 #' @param \dots For `sir()` and `time_bins()`, these dots must be empty. For
 #'   `median.sir()` and `quantile.sir()`, unused, present for S3 method
 #'   consistency.
-#' @param no.sim Integer scalar, the number simulation runs to perform.
+#' @param n_sim Integer scalar, the number simulation runs to perform.
 #' @param x A `sir` object, returned by the `sir()` function.
 #' @param na.rm Logical, whether to ignore `NA` values.  `sir`
 #'   objects do not contain any `NA` values currently, so this argument is
@@ -113,7 +113,7 @@ sir <- function(
   beta,
   gamma,
   ...,
-  no.sim = 100
+  n_sim = 100
 ) {
   # BEGIN GENERATED ARG_HANDLE: sir, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -127,14 +127,14 @@ sir <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn sir}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(no.sim)) base::list(no.sim = no.sim)
+        if (!base::missing(no.sim)) base::list(n_sim = no.sim)
       )
     }
     .arg_handle <- .old_signature(...)
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(no.sim)) "no.sim"
+        if (!base::missing(n_sim)) "n_sim"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sir} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -142,7 +142,7 @@ sir <- function(
         "3.0.0",
         what = base::I("Calling `sir()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  sir(", base::paste(base::c("graph", "beta", "gamma", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  sir(", base::paste(base::c("graph", "beta", "gamma", base::c(n_sim = "no.sim")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    sir(", base::paste(base::c("graph", "beta", "gamma", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -154,7 +154,7 @@ sir <- function(
     graph = graph,
     beta = beta,
     gamma = gamma,
-    no_sim = no.sim
+    no_sim = n_sim
   )
 }
 

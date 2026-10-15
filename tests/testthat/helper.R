@@ -197,7 +197,11 @@ same_result <- function(x, y) {
     return(
       identical(names(x), names(y)) &&
         length(x) == length(y) &&
-        all(vapply(seq_along(x), function(i) same_result(x[[i]], y[[i]]), logical(1)))
+        all(vapply(
+          seq_along(x),
+          function(i) same_result(x[[i]], y[[i]]),
+          logical(1)
+        ))
     )
   }
   isTRUE(all.equal(x, y))
