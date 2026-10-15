@@ -165,7 +165,7 @@ test_that("consensus_tree() covers keyword-only tail arguments", {
   fx <- hrg_fixture()
   igraph_local_seed(3)
 
-  res <- consensus_tree(fx$graph, hrg = fx$hrg, start = TRUE, num.samples = 100)
+  res <- consensus_tree(fx$graph, hrg = fx$hrg, start = TRUE, n_samples = 100)
   expect_named(res, c("parents", "weights", "hrg"))
   expect_true(is.numeric(res$weights))
   expect_gt(length(res$parents), 0)
@@ -184,7 +184,7 @@ test_that("consensus_tree() recovers a legacy positional argument", {
   igraph_local_seed(4)
   expect_identical(
     res,
-    consensus_tree(fx$graph, fx$hrg, start = TRUE, num.samples = 100)
+    consensus_tree(fx$graph, fx$hrg, start = TRUE, n_samples = 100)
   )
 })
 
@@ -196,8 +196,8 @@ test_that("predict_edges() covers keyword-only tail arguments", {
     fx$graph,
     hrg = fx$hrg,
     start = TRUE,
-    num.samples = 100,
-    num.bins = 5
+    n_samples = 100,
+    n_bins = 5
   )
   expect_equal(ncol(res$edges), 2)
   expect_length(res$prob, nrow(res$edges))
@@ -215,6 +215,32 @@ test_that("predict_edges() recovers a legacy positional argument", {
   igraph_local_seed(6)
   expect_identical(
     res,
-    predict_edges(fx$graph, fx$hrg, start = TRUE, num.samples = 100)
+    predict_edges(fx$graph, fx$hrg, start = TRUE, n_samples = 100)
+  )
+})
+
+test_that("snake_case renames in the HRG functions recover the legacy dotted names", {
+  g <- make_graph("Zachary")
+  hrg <- igraph_with_seed(42, fit_hrg(g))
+  expect_legacy_arg(
+    consensus_tree,
+    list(g, hrg = hrg),
+    "num.samples",
+    "n_samples",
+    10
+  )
+  expect_legacy_arg(
+    predict_edges,
+    list(g, hrg = hrg),
+    "num.samples",
+    "n_samples",
+    10
+  )
+  expect_legacy_arg(
+    predict_edges,
+    list(g, hrg = hrg, n_samples = 10),
+    "num.bins",
+    "n_bins",
+    5
   )
 })

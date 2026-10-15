@@ -5,17 +5,17 @@ test_that("count_motifs works", {
 
   mno <- count_motifs(gnp)
 
-  mno0 <- count_motifs(gnp, cut.prob = c(1 / 3, 0, 0))
-  mno1 <- count_motifs(gnp, cut.prob = c(0, 0, 1 / 3))
-  mno2 <- count_motifs(gnp, cut.prob = c(0, 1 / 3, 0))
+  mno0 <- count_motifs(gnp, cut_prob = c(1 / 3, 0, 0))
+  mno1 <- count_motifs(gnp, cut_prob = c(0, 0, 1 / 3))
+  mno2 <- count_motifs(gnp, cut_prob = c(0, 1 / 3, 0))
   expect_equal(
     c(mno0 / mno, mno1 / mno, mno2 / mno),
     c(0.674541153079009, 0.666138135417257, 0.665968250372803)
   )
 
-  mno3 <- count_motifs(gnp, cut.prob = c(0, 1 / 3, 1 / 3))
-  mno4 <- count_motifs(gnp, cut.prob = c(1 / 3, 0, 1 / 3))
-  mno5 <- count_motifs(gnp, cut.prob = c(1 / 3, 1 / 3, 0))
+  mno3 <- count_motifs(gnp, cut_prob = c(0, 1 / 3, 1 / 3))
+  mno4 <- count_motifs(gnp, cut_prob = c(1 / 3, 0, 1 / 3))
+  mno5 <- count_motifs(gnp, cut_prob = c(1 / 3, 1 / 3, 0))
   expect_equal(
     c(mno3 / mno, mno4 / mno, mno5 / mno),
     c(0.441707407617142, 0.445633639755617, 0.440527650363994)
@@ -28,9 +28,9 @@ test_that("motifs works", {
 
   m <- motifs(gnp)
 
-  m0 <- motifs(gnp, cut.prob = c(1 / 3, 0, 0))
-  m1 <- motifs(gnp, cut.prob = c(0, 1 / 3, 0))
-  m2 <- motifs(gnp, cut.prob = c(0, 0, 1 / 3))
+  m0 <- motifs(gnp, cut_prob = c(1 / 3, 0, 0))
+  m1 <- motifs(gnp, cut_prob = c(0, 1 / 3, 0))
+  m2 <- motifs(gnp, cut_prob = c(0, 0, 1 / 3))
   expect_equal(
     m0 / m,
     c(
@@ -95,9 +95,9 @@ test_that("motifs works", {
     )
   )
 
-  m3 <- motifs(gnp, cut.prob = c(0, 1 / 3, 1 / 3))
-  m4 <- motifs(gnp, cut.prob = c(1 / 3, 1 / 3, 0))
-  m5 <- motifs(gnp, cut.prob = c(1 / 3, 1 / 3, 0))
+  m3 <- motifs(gnp, cut_prob = c(0, 1 / 3, 1 / 3))
+  m4 <- motifs(gnp, cut_prob = c(1 / 3, 1 / 3, 0))
+  m5 <- motifs(gnp, cut_prob = c(1 / 3, 1 / 3, 0))
   expect_equal(
     m3 / m,
     c(
@@ -280,7 +280,7 @@ test_that("motifs() recovers legacy positional arguments", {
   lifecycle::expect_deprecated(
     res <- motifs(g, 3, rep(0, 3))
   )
-  expect_identical(res, motifs(g, 3, cut.prob = rep(0, 3)))
+  expect_identical(res, motifs(g, 3, cut_prob = rep(0, 3)))
   expect_identical(res, motifs(g, 3))
 })
 
@@ -293,7 +293,7 @@ test_that("count_motifs() recovers legacy positional arguments", {
   lifecycle::expect_deprecated(
     res <- count_motifs(g, 3, c(1, 1, 1))
   )
-  expect_identical(res, count_motifs(g, 3, cut.prob = c(1, 1, 1)))
+  expect_identical(res, count_motifs(g, 3, cut_prob = c(1, 1, 1)))
   expect_equal(res, 0)
   expect_equal(count_motifs(g, size = 3), 12)
 })
@@ -307,8 +307,8 @@ test_that("sample_motifs() covers cut.prob and sample.size", {
     res <- sample_motifs(
       g,
       size = 3,
-      cut.prob = rep(0, 3),
-      sample.size = vcount(g)
+      cut_prob = rep(0, 3),
+      sample_size = vcount(g)
     )
   })
   expect_equal(res, count_motifs(g, size = 3))
@@ -321,4 +321,24 @@ test_that("sample_motifs() covers cut.prob and sample.size", {
     )
   })
   expect_identical(res_legacy, res)
+})
+
+test_that("snake_case renames in the motif functions recover the legacy dotted names", {
+  g <- make_graph("Zachary")
+  expect_legacy_arg(motifs, list(g, 3), "cut.prob", "cut_prob", c(0, 0, 0.5))
+  expect_legacy_arg(
+    count_motifs,
+    list(g, 3),
+    "cut.prob",
+    "cut_prob",
+    c(0, 0, 0.5)
+  )
+  expect_legacy_arg(
+    sample_motifs,
+    list(g, 3),
+    "cut.prob",
+    "cut_prob",
+    c(0, 0, 0.5)
+  )
+  expect_legacy_arg(sample_motifs, list(g, 3), "sample.size", "sample_size", 5)
 })

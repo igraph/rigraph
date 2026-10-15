@@ -127,7 +127,7 @@ test_that("graphlet_proj() covers all tail arguments", {
     weights = E(g)$weight,
     cliques = cl,
     n_iter = 100,
-    Mu = rep(2, length(cl))
+    mu = rep(2, length(cl))
   )
   expect_type(res, "double")
   expect_length(res, length(cl))
@@ -170,4 +170,16 @@ test_that("graphlets(niter = ) and graphlet_proj(niter = ) are deprecated but st
     res <- graphlet_proj(g, cliques = cl, niter = 50)
   )
   expect_equal(res, graphlet_proj(g, cliques = cl, n_iter = 50))
+})
+
+test_that("graphlet_proj(Mu = ) is renamed to `mu`", {
+  g <- make_graphlet_graph()
+  cl <- graphlet_basis(g)$cliques
+  expect_legacy_arg(
+    graphlet_proj,
+    list(g, cliques = cl, n_iter = 10),
+    "Mu",
+    "mu",
+    rep(2, length(cl))
+  )
 })

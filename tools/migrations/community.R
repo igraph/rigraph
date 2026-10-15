@@ -8,7 +8,7 @@ migrations <- list(
       graph,
       weights,
       directed,
-      edge.betweenness,
+      edge.betweenness = edge_betweenness,
       merges,
       bridges,
       modularity,
@@ -19,7 +19,7 @@ migrations <- list(
       ...,
       weights = NULL,
       directed = TRUE,
-      edge.betweenness = TRUE,
+      edge_betweenness = TRUE,
       merges = TRUE,
       bridges = TRUE,
       modularity = TRUE,
@@ -46,7 +46,7 @@ migrations <- list(
       graph,
       e.weights = weights,
       v.weights = vertex_weights,
-      nb.trials,
+      nb.trials = n_trials,
       modularity
     ) {},
     new = function(
@@ -54,7 +54,7 @@ migrations <- list(
       ...,
       weights = NULL,
       vertex_weights = NULL,
-      nb.trials = 10,
+      n_trials = 10,
       modularity = TRUE
     ) {},
     when = "3.0.0"
@@ -113,13 +113,13 @@ migrations <- list(
       vertex,
       spins,
       parupdate,
-      start.temp,
-      stop.temp,
-      cool.fact,
-      update.rule,
+      start.temp = start_temp,
+      stop.temp = stop_temp,
+      cool.fact = cool_fact,
+      update.rule = update_rule,
       gamma,
       implementation,
-      gamma.minus
+      gamma.minus = gamma_minus
     ) {},
     new = function(
       graph,
@@ -128,13 +128,13 @@ migrations <- list(
       vertex = NULL,
       spins = 25,
       parupdate = FALSE,
-      start.temp = 1,
-      stop.temp = 0.01,
-      cool.fact = 0.99,
-      update.rule = c("config", "random", "simple"),
+      start_temp = 1,
+      stop_temp = 0.01,
+      cool_fact = 0.99,
+      update_rule = c("config", "random", "simple"),
       gamma = 1.0,
       implementation = c("orig", "neg"),
-      gamma.minus = 1.0
+      gamma_minus = 1.0
     ) {},
     when = "3.0.0"
   ),
