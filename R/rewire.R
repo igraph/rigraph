@@ -37,7 +37,7 @@
 #' g %>%
 #'   rewire(each_edge(p = 0.1, loops = FALSE)) %>%
 #'   plot(layout = layout_in_circle)
-#' print_all(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
+#' print_all(rewire(g, with = keeping_degseq(n_iter = vcount(g) * 10)))
 rewire <- function(graph, with) {
   if (!is(with, "igraph_rewiring_method")) {
     cli::cli_abort(
@@ -60,7 +60,8 @@ rewire <- function(graph, with) {
 #' edges.
 #'
 #' @param loops Whether to allow destroying and creating loop edges.
-#' @param niter Number of rewiring trials to perform.
+#' @param n_iter Number of rewiring trials to perform.
+#' @param niter `r lifecycle::badge("deprecated")` Use `n_iter` instead.
 #'
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
@@ -71,13 +72,28 @@ rewire <- function(graph, with) {
 #' @examples
 #' g <- make_ring(10)
 #' g %>%
-#'   rewire(keeping_degseq(niter = 20)) %>%
+#'   rewire(keeping_degseq(n_iter = 20)) %>%
 #'   degree()
-#' print_all(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
-keeping_degseq <- function(loops = FALSE, niter = 100) {
+#' print_all(rewire(g, with = keeping_degseq(n_iter = vcount(g) * 10)))
+keeping_degseq <- function(loops = FALSE, n_iter = 100, niter = deprecated()) {
+  if (lifecycle::is_present(niter)) {
+    if (!missing(n_iter)) {
+      cli::cli_abort(c(
+        "Argument {.arg n_iter} of {.fn keeping_degseq} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg niter}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "keeping_degseq(niter = )",
+      "keeping_degseq(n_iter = )"
+    )
+    n_iter <- niter
+  }
+
   method <- list(
     fun = rewire_keeping_degseq,
-    args = list(loops = loops, niter = niter)
+    args = list(loops = loops, niter = n_iter)
   )
   add_class(method, "igraph_rewiring_method")
 }

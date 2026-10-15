@@ -3,13 +3,13 @@ test_that("layout_with_fr() works", {
 
   igraph_with_seed(42, {
     g <- make_ring(10)
-    l <- layout_with_fr(g, niter = 50, start.temp = sqrt(10) / 10)
+    l <- layout_with_fr(g, n_iter = 50, start.temp = sqrt(10) / 10)
   })
   expect_equal(sum(l), 4.57228, tolerance = 0.1)
 
   igraph_with_seed(42, {
     g <- make_star(30)
-    l <- layout_with_fr(g, niter = 500, dim = 3, start.temp = 20)
+    l <- layout_with_fr(g, n_iter = 500, dim = 3, start.temp = 20)
   })
   expect_equal(sum(l), -170.9312, tolerance = 0.1)
 })
@@ -20,7 +20,7 @@ test_that("layout_with_fr() deprecated argument", {
   expect_snapshot_igraph_error({
     l <- layout_with_fr(
       g,
-      niter = 50,
+      n_iter = 50,
       start.temp = sqrt(10) / 10,
       coolexp = 1,
       maxdelta = 1,
@@ -197,20 +197,20 @@ test_that("Kamada-Kawai layout generator works", {
   }
 
   g <- make_ring(10)
-  l <- layout_with_kk(g, maxiter = 50, coords = layout_in_circle(g))
+  l <- layout_with_kk(g, max_iter = 50, coords = layout_in_circle(g))
   expect_true(looks_circular(l))
 
   g <- make_star(12)
-  l <- layout_with_kk(g, maxiter = 500, coords = layout_in_circle(g))
+  l <- layout_with_kk(g, max_iter = 500, coords = layout_in_circle(g))
   expect_true(looks_circular(l[-1, ]))
 
   g <- make_ring(10)
   E(g)$weight <- rep(1:2, length.out = ecount(g))
-  l <- layout_with_kk(g, maxiter = 500, coords = layout_in_circle(g))
+  l <- layout_with_kk(g, max_iter = 500, coords = layout_in_circle(g))
   expect_true(looks_circular(l, check_dists = FALSE))
 
   g <- make_star(30)
-  l <- layout_with_kk(g, maxiter = 5000, dim = 3)
+  l <- layout_with_kk(g, max_iter = 5000, dim = 3)
   expect_true(looks_circular(l[-1, ], check_dists = FALSE, eps = 1e-2))
 })
 
@@ -219,7 +219,7 @@ test_that("layout_with_kk() deprecated arguments", {
   expect_snapshot_igraph_error({
     l <- layout_with_kk(
       g,
-      maxiter = 50,
+      max_iter = 50,
       coords = layout_in_circle(g),
       niter = 1,
       sigma = 1,
@@ -512,7 +512,7 @@ test_that("layout_as_bipartite() covers tail args and recovers positional calls"
   g <- make_full_bipartite_graph(3, 2)
 
   # All tail arguments by name.
-  l <- layout_as_bipartite(g, V(g)$type, hgap = 3, vgap = 2, maxiter = 50)
+  l <- layout_as_bipartite(g, V(g)$type, hgap = 3, vgap = 2, max_iter = 50)
   expect_equal(dim(l), c(5, 2))
   # The two vertex types end up on rows vgap apart.
   expect_equal(sort(unique(l[, 2])), c(0, 2))
@@ -635,8 +635,8 @@ test_that("layout_with_dh() covers tail args and recovers positional calls", {
     l <- layout_with_dh(
       g,
       coords = coords,
-      maxiter = 5,
-      fineiter = 5,
+      n_iter = 5,
+      n_fine_iter = 5,
       cool.fact = 0.5,
       weight.node.dist = 2,
       weight.border = 0.1,
@@ -653,7 +653,7 @@ test_that("layout_with_dh() covers tail args and recovers positional calls", {
     lifecycle::expect_deprecated(res <- layout_with_dh(g, coords, maxiter = 5))
   })
   igraph_with_seed(1, {
-    ref <- layout_with_dh(g, coords = coords, maxiter = 5)
+    ref <- layout_with_dh(g, coords = coords, n_iter = 5)
   })
   expect_identical(res, ref)
 })
@@ -714,7 +714,7 @@ test_that("layout_with_fr() covers the remaining tail args and recovery", {
     l <- layout_with_fr(
       g,
       coords = coords,
-      niter = 20,
+      n_iter = 20,
       grid = "nogrid",
       weights = rep(0.5, ecount(g)),
       minx = rep(-3, 10),
@@ -732,7 +732,7 @@ test_that("layout_with_fr() covers the remaining tail args and recovery", {
     l3 <- layout_with_fr(
       g,
       dim = 3,
-      niter = 20,
+      n_iter = 20,
       minz = rep(-2, 10),
       maxz = rep(2, 10)
     )
@@ -745,7 +745,7 @@ test_that("layout_with_fr() covers the remaining tail args and recovery", {
     lifecycle::expect_deprecated(res <- layout_with_fr(g, coords, niter = 20))
   })
   igraph_with_seed(1, {
-    ref <- layout_with_fr(g, coords = coords, niter = 20)
+    ref <- layout_with_fr(g, coords = coords, n_iter = 20)
   })
   expect_identical(res, ref)
 })
@@ -759,7 +759,7 @@ test_that("layout_with_gem() covers tail args and recovers positional calls", {
     l <- layout_with_gem(
       g,
       coords = coords,
-      maxiter = 100,
+      max_iter = 100,
       temp.max = 5,
       temp.min = 0.5,
       temp.init = 2
@@ -787,7 +787,7 @@ test_that("layout_with_graphopt() covers tail args and recovers positional calls
     l <- layout_with_graphopt(
       g,
       start = start,
-      niter = 50,
+      n_iter = 50,
       charge = 0.01,
       mass = 10,
       spring.length = 1,
@@ -817,7 +817,7 @@ test_that("layout_with_kk() covers the remaining tail args and recovery", {
   l <- layout_with_kk(
     g,
     coords = coords,
-    maxiter = 50,
+    max_iter = 50,
     epsilon = 1e-3,
     kkconst = 5,
     weights = rep(2, ecount(g)),
@@ -835,7 +835,7 @@ test_that("layout_with_kk() covers the remaining tail args and recovery", {
     l3 <- layout_with_kk(
       g,
       dim = 3,
-      maxiter = 50,
+      max_iter = 50,
       minz = rep(0, 10),
       maxz = rep(1, 10)
     )
@@ -845,7 +845,7 @@ test_that("layout_with_kk() covers the remaining tail args and recovery", {
 
   # The legacy positional call recovers coords and warns.
   lifecycle::expect_deprecated(res <- layout_with_kk(g, coords, maxiter = 50))
-  expect_identical(res, layout_with_kk(g, coords = coords, maxiter = 50))
+  expect_identical(res, layout_with_kk(g, coords = coords, max_iter = 50))
 })
 
 test_that("layout_with_lgl() covers tail args and recovers positional calls", {
@@ -855,7 +855,7 @@ test_that("layout_with_lgl() covers tail args and recovers positional calls", {
   igraph_with_seed(42, {
     l <- layout_with_lgl(
       g,
-      maxiter = 50,
+      max_iter = 50,
       maxdelta = 5,
       area = 64,
       coolexp = 1.2,
@@ -872,7 +872,7 @@ test_that("layout_with_lgl() covers tail args and recovers positional calls", {
     lifecycle::expect_deprecated(res <- layout_with_lgl(g, 50))
   })
   igraph_with_seed(1, {
-    ref <- layout_with_lgl(g, maxiter = 50)
+    ref <- layout_with_lgl(g, max_iter = 50)
   })
   expect_identical(res, ref)
 })
@@ -887,7 +887,7 @@ test_that("layout_with_sugiyama() covers tail args and recovers positional calls
       layers = c(1, 2, 3, 4),
       hgap = 2,
       vgap = 2,
-      maxiter = 50,
+      max_iter = 50,
       weights = rep(1, ecount(g)),
       attributes = "all"
     )
@@ -944,4 +944,42 @@ test_that("norm_coords() recovers positional calls", {
   expect_identical(res, norm_coords(lay, xmin = 0))
   # xmin = 0 rescales the first column into [0, 1].
   expect_equal(range(res[, 1]), c(0, 1))
+})
+
+test_that("legacy iteration argument names are deprecated but still work", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  g <- make_ring(10)
+  coords <- layout_in_circle(g)
+
+  igraph_local_seed(42)
+  expect_snapshot_igraph(res <- layout_with_fr(g, coords = coords, niter = 20))
+  igraph_local_seed(42)
+  expect_equal(res, layout_with_fr(g, coords = coords, n_iter = 20))
+  # `maxiter` was an alias of `niter`, it now also maps to `n_iter`
+  igraph_local_seed(42)
+  lifecycle::expect_deprecated(
+    res <- layout_with_fr(g, coords = coords, maxiter = 20)
+  )
+  igraph_local_seed(42)
+  expect_equal(res, layout_with_fr(g, coords = coords, n_iter = 20))
+
+  lifecycle::expect_deprecated(
+    res <- layout_with_kk(g, coords = coords, maxiter = 50)
+  )
+  expect_equal(res, layout_with_kk(g, coords = coords, max_iter = 50))
+
+  igraph_local_seed(42)
+  lifecycle::expect_deprecated(
+    res <- layout_with_dh(g, coords = coords, maxiter = 5, fineiter = 5)
+  )
+  igraph_local_seed(42)
+  expect_equal(
+    res,
+    layout_with_dh(g, coords = coords, n_iter = 5, n_fine_iter = 5)
+  )
+
+  igraph_local_seed(42)
+  lifecycle::expect_deprecated(res <- layout_with_graphopt(g, niter = 50))
+  igraph_local_seed(42)
+  expect_equal(res, layout_with_graphopt(g, n_iter = 50))
 })
