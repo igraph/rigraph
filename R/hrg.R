@@ -330,7 +330,7 @@ fit_hrg <- function(
 #' @inheritParams rlang::args_dots_empty
 #' @param start Logical, whether to start the fitting/sampling from the
 #'   supplied `igraphHRG` object, or from a random starting point.
-#' @param num.samples Number of samples to use for consensus generation or
+#' @param n_samples Number of samples to use for consensus generation or
 #'   missing edge prediction.
 #' @return `consensus_tree()` returns a list of two objects. The first
 #'   is an `igraphHRGConsensus` object, the second is an
@@ -356,7 +356,7 @@ consensus_tree <- function(
   hrg = NULL,
   ...,
   start = FALSE,
-  num.samples = 10000
+  n_samples = 10000
 ) {
   # BEGIN GENERATED ARG_HANDLE: consensus_tree, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -371,7 +371,7 @@ consensus_tree <- function(
       }
       base::c(
         if (!base::missing(start)) base::list(start = start),
-        if (!base::missing(num.samples)) base::list(num.samples = num.samples)
+        if (!base::missing(num.samples)) base::list(n_samples = num.samples)
       )
     }
     .arg_handle <- .old_signature(...)
@@ -379,7 +379,7 @@ consensus_tree <- function(
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
         if (!base::missing(start)) "start",
-        if (!base::missing(num.samples)) "num.samples"
+        if (!base::missing(n_samples)) "n_samples"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn consensus_tree} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -387,7 +387,7 @@ consensus_tree <- function(
         "3.0.0",
         what = base::I("Calling `consensus_tree()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  consensus_tree(", base::paste(base::c("graph", "hrg", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  consensus_tree(", base::paste(base::c("graph", "hrg", base::c(start = "start", n_samples = "num.samples")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    consensus_tree(", base::paste(base::c("graph", "hrg", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -399,7 +399,7 @@ consensus_tree <- function(
     graph = graph,
     hrg = hrg,
     start = start,
-    num_samples = num.samples
+    num_samples = n_samples
   )
 }
 
@@ -491,9 +491,9 @@ sample_hrg <- function(hrg) {
 #' @inheritParams rlang::args_dots_empty
 #' @param start Logical, whether to start the fitting/sampling from the
 #'   supplied `igraphHRG` object, or from a random starting point.
-#' @param num.samples Number of samples to use for consensus generation or
+#' @param n_samples Number of samples to use for consensus generation or
 #'   missing edge prediction.
-#' @param num.bins Number of bins for the edge probabilities. Give a higher
+#' @param n_bins Number of bins for the edge probabilities. Give a higher
 #'   number for a more accurate prediction.
 #' @return A list with entries:
 #'   \describe{
@@ -536,13 +536,13 @@ predict_edges <- function(
   hrg = NULL,
   ...,
   start = FALSE,
-  num.samples = 10000,
-  num.bins = 25
+  n_samples = 10000,
+  n_bins = 25
 ) {
   # BEGIN GENERATED ARG_HANDLE: predict_edges, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("n", "nu", "num", "num."))
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("n", "nu", "num", "num.", "n_"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn predict_edges}.")
     # Pre-3.0.0 signature: predict_edges(graph, hrg, start, num.samples, num.bins)
     .old_signature <- function(start, num.samples, num.bins, ...) {
@@ -554,8 +554,8 @@ predict_edges <- function(
       }
       base::c(
         if (!base::missing(start)) base::list(start = start),
-        if (!base::missing(num.samples)) base::list(num.samples = num.samples),
-        if (!base::missing(num.bins)) base::list(num.bins = num.bins)
+        if (!base::missing(num.samples)) base::list(n_samples = num.samples),
+        if (!base::missing(num.bins)) base::list(n_bins = num.bins)
       )
     }
     .arg_handle <- .old_signature(...)
@@ -563,8 +563,8 @@ predict_edges <- function(
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
         if (!base::missing(start)) "start",
-        if (!base::missing(num.samples)) "num.samples",
-        if (!base::missing(num.bins)) "num.bins"
+        if (!base::missing(n_samples)) "n_samples",
+        if (!base::missing(n_bins)) "n_bins"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn predict_edges} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -572,7 +572,7 @@ predict_edges <- function(
         "3.0.0",
         what = base::I("Calling `predict_edges()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  predict_edges(", base::paste(base::c("graph", "hrg", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  predict_edges(", base::paste(base::c("graph", "hrg", base::c(start = "start", n_samples = "num.samples", n_bins = "num.bins")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    predict_edges(", base::paste(base::c("graph", "hrg", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -584,8 +584,8 @@ predict_edges <- function(
     graph = graph,
     hrg = hrg,
     start = start,
-    num_samples = num.samples,
-    num_bins = num.bins
+    num_samples = n_samples,
+    num_bins = n_bins
   )
   res$edges <- matrix(res$edges, ncol = 2, byrow = TRUE)
   class(res$hrg) <- "igraphHRG"
