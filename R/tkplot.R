@@ -739,8 +739,6 @@ tk_coords <- function(
   # BEGIN GENERATED ARG_HANDLE: tk_coords, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("n", "no", "nor"))
-    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn tk_coords}.")
     # Pre-3.0.0 signature: tk_coords(tkp.id, norm)
     .old_signature <- function(norm, ...) {
       if (...length() > 0L) {
