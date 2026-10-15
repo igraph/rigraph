@@ -103,15 +103,17 @@ while [ $commits_vendored -lt $num_commits ]; do
 
     rm -rf ${vendor_dir}/.git ${vendor_dir}/.github ${vendor_dir}/doc ${vendor_dir}/examples ${vendor_dir}/fuzzing ${vendor_dir}/tests ${vendor_dir}/tools ${vendor_dir}/build
 
-    # Apply patches in patch/*.patch.  See scripts/vendor.sh for the
-    # rationale on why patches that no longer apply forward are removed
-    # rather than kept around.
+    # Apply patches in patch/*.patch: applied, retired, or a stop.
+    # scripts/vendor.sh says why.
     for f in patch/*.patch; do
-      if patch -i "$f" -p1 --forward --dry-run; then
+      if patch -s -i "$f" -p1 --forward --dry-run >/dev/null; then
         patch -i "$f" -p1 --forward --no-backup-if-mismatch
-      else
-        echo "Removing patch $f"
+      elif patch -s -i "$f" -p1 --reverse --forward --dry-run >/dev/null; then
+        echo "Retiring patch $f: upstream carries it now"
         rm "$f"
+      else
+        echo "Error: patch $f neither applies nor reverses; rebase it by hand" >&2
+        exit 4
       fi
     done
 
