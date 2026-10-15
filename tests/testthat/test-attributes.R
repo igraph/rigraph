@@ -156,7 +156,7 @@ test_that("we can set all attributes on some vertices/edges", {
 
   g2 <- make_graph(c(2, 1, 3, 1, 4, 1, 2, 5, 3, 6))
 
-  vertex_attr(g2, index = c(1, 2, 4, 5)) <- vertex_attr(g)
+  vertex_attr(g2, vertices = c(1, 2, 4, 5)) <- vertex_attr(g)
   expect_equal(
     vertex_attr(g2),
     list(
@@ -179,7 +179,7 @@ test_that("we can set all attributes on some vertices/edges", {
     )
   )
 
-  edge_attr(g2, index = c(1, 3, 5)) <- edge_attr(g)
+  edge_attr(g2, edges = c(1, 3, 5)) <- edge_attr(g)
   expect_equal(
     edge_attr(g2),
     list(
@@ -568,4 +568,57 @@ test_that("set_vertex_attrs() works", {
   g <- set_vertex_attrs(g, !!!attr_list)
   expect_equal(V(g)$age, rep(42, vcount(g)))
   expect_equal(V(g)$gender, rep("F", vcount(g)))
+})
+
+test_that("attribute accessors with `index = ` are deprecated but still work", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  g <- make_ring(5)
+  V(g)$name <- letters[1:5]
+  E(g)$weight <- 1:5
+
+  expect_snapshot_igraph(res <- vertex_attr(g, "name", index = 2:3))
+  expect_equal(res, vertex_attr(g, "name", vertices = 2:3))
+  lifecycle::expect_deprecated(res <- edge_attr(g, "weight", index = 2:3))
+  expect_equal(res, edge_attr(g, "weight", edges = 2:3))
+
+  lifecycle::expect_deprecated(
+    g2 <- set_vertex_attr(g, "x", index = 1:2, value = 1)
+  )
+  expect_identical_graphs(
+    g2,
+    set_vertex_attr(g, "x", vertices = 1:2, value = 1)
+  )
+  lifecycle::expect_deprecated(
+    g2 <- set_edge_attr(g, "x", index = 1:2, value = 1)
+  )
+  expect_identical_graphs(g2, set_edge_attr(g, "x", edges = 1:2, value = 1))
+  lifecycle::expect_deprecated(g2 <- set_vertex_attrs(g, x = 1, index = 1:2))
+  expect_identical_graphs(g2, set_vertex_attrs(g, x = 1, vertices = 1:2))
+
+  g2 <- g
+  lifecycle::expect_deprecated(vertex_attr(g2, "x", index = 1:2) <- 1)
+  g3 <- g
+  vertex_attr(g3, "x", vertices = 1:2) <- 1
+  expect_identical_graphs(g2, g3)
+
+  g2 <- g
+  lifecycle::expect_deprecated(edge_attr(g2, "x", index = 1:2) <- 1)
+  g3 <- g
+  edge_attr(g3, "x", edges = 1:2) <- 1
+  expect_identical_graphs(g2, g3)
+
+  expect_snapshot_igraph_error(vertex_attr(g, "name", vertices = 1, index = 2))
+})
+
+test_that("attribute accessors keep positional selectors", {
+  g <- make_ring(5)
+  V(g)$name <- letters[1:5]
+  expect_equal(vertex_attr(g, "name", 2:3), c("b", "c"))
+  g2 <- set_vertex_attr(g, "x", 1:2, value = 1)
+  expect_equal(V(g2)$x, c(1, 1, NA, NA, NA))
+  # `value` also stays positional
+  g2 <- set_vertex_attr(g, "x", 1:2, 1)
+  expect_equal(V(g2)$x, c(1, 1, NA, NA, NA))
+  g2 <- set_edge_attr(g, "x", 1:2, 1)
+  expect_equal(E(g2)$x, c(1, 1, NA, NA, NA))
 })

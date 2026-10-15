@@ -128,3 +128,21 @@
       Error in `set_vertex_attrs()`:
       ! All arguments in `...` must be named.
 
+# attribute accessors with `index = ` are deprecated but still work
+
+    Code
+      res <- vertex_attr(g, "name", index = 2:3)
+    Condition
+      Warning:
+      The `index` argument of `vertex_attr()` is deprecated as of igraph 3.0.0.
+      i Please use the `vertices` argument instead.
+
+---
+
+    Code
+      vertex_attr(g, "name", vertices = 1, index = 2)
+    Condition
+      Error in `vertex_attr()`:
+      ! Argument `vertices` of `vertex_attr()` was supplied more than once.
+      i It was also supplied via its legacy name `index`.
+
