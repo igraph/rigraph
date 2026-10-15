@@ -1,6 +1,7 @@
 # Stage 0: setup
 
-*Reference for stage 0 of [`series-loop`](../SKILL.md), read when the stage has work.*
+*Reference for stage 0 of [`series-loop`](../SKILL.md), read when the stage has work;
+the handbook leaf is [`operations/vendoring/series-loop/`](/handbook/operations/vendoring/series-loop/README.md).*
 
 **Every branch, whole history, with tags.**
 A firing reads across all of them, and a narrowed clone fails quietly rather than loudly.

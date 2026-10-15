@@ -63,7 +63,6 @@
 ^src/*\.gcda$
 ^src/*\.gcno$
 ^R/release\.R$
-^BRANCHES\.md$
 ^scripts$
 ^\.claude$
 ^\.series-source$
@@ -76,3 +75,8 @@
 ^man/dot-extract_constructor_and_modifiers\.Rd$
 ^man/dot-apply_modifiers\.Rd$
 ^man/handle_vertex_type_arg\.Rd$
+^handbook$
+^experiments$
+^\.handbook-ignore$
+^\.handbook-source$
+^CLAUDE\.md$

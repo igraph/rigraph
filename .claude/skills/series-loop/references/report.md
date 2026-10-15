@@ -1,6 +1,7 @@
 # What a firing reports
 
-*Reference for [`series-loop`](../SKILL.md)'s report, read before writing one.*
+*Reference for [`series-loop`](../SKILL.md)'s report, read before writing one;
+the handbook leaf is [`operations/vendoring/series-loop/`](/handbook/operations/vendoring/series-loop/README.md).*
 
 A report is the one thing a human reads of a firing, so it says what moved, what stopped, and what is owed,
 and a reading that failed is never written up as a clean result.

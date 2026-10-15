@@ -1,5 +1,7 @@
 # Contributing to igraph
 
+*Handbook: [`contributors/`](/handbook/contributors/README.md) owns how a change is made, from setup to merge.*
+
 This outlines how to propose a change to igraph.
 
 ## Fixing typos

@@ -1,6 +1,7 @@
 # Stage 1: vendor onto `main-vendor`, and pick onto `main-build`
 
-*Reference for stage 1 of [`series-loop`](../SKILL.md), read when the stage has work.*
+*Reference for stage 1 of [`series-loop`](../SKILL.md), read when the stage has work;
+the handbook leaf is [`operations/vendoring/series-loop/`](/handbook/operations/vendoring/series-loop/README.md).*
 
 **The strand is vendored once, and the buffer is derived from it.**
 [`scripts/vendor-one.sh`](/scripts/vendor-one.sh) `--strand` writes one commit per upstream commit onto `main-vendor`:

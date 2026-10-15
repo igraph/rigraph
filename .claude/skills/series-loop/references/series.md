@@ -1,6 +1,7 @@
 # The four refs of the series and its strand, and what is and is not one
 
-*Reference for [`series-loop`](../SKILL.md)'s branch model, read on a first firing and whenever a ref looks wrong.*
+*Reference for [`series-loop`](../SKILL.md)'s branch model, read on a first firing and whenever a ref looks wrong;
+the handbook leaf is [`operations/vendoring/series-loop/`](/handbook/operations/vendoring/series-loop/README.md).*
 
 ## The vendor subject is machine-readable state
 

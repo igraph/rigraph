@@ -1,6 +1,7 @@
 # Stage 4: port from `main`
 
-*Reference for stage 4 of [`series-loop`](../SKILL.md), read when the stage has work.*
+*Reference for stage 4 of [`series-loop`](../SKILL.md), read when the stage has work;
+the handbook leaf is [`operations/vendoring/series-loop/`](/handbook/operations/vendoring/series-loop/README.md).*
 
 The goal is identity, not curation:
 after this stage `.github/`, `scripts/` and `.claude/` on `main-dev` are byte-identical to `main`'s.

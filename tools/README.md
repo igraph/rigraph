@@ -1,5 +1,7 @@
 # igraph/tools
 
+*Handbook: [`operations/vendoring/pipeline/`](/handbook/operations/vendoring/pipeline/README.md) owns how the sources are updated, and [`architecture/stimulus/`](/handbook/architecture/stimulus/README.md) the generated interface.*
+
 ## Updating the sources
 
 In the shell:

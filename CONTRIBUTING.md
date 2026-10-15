@@ -1,5 +1,7 @@
 # How to Contribute to the igraph R package
 
+*Handbook: [`contributors/`](/handbook/contributors/README.md) is where this page's content is moving; until then, both apply.*
+
 ## TL;DR
 
 Send your PR! Thanks!

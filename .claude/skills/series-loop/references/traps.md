@@ -1,6 +1,7 @@
 # Traps, all paid for once already
 
-*Reference for [`series-loop`](../SKILL.md), read before a vendor run, a local build, a replay, or a port that conflicts.*
+*Reference for [`series-loop`](../SKILL.md), read before a vendor run, a local build, a replay, or a port that conflicts;
+the handbook leaf is [`operations/vendoring/series-loop/`](/handbook/operations/vendoring/series-loop/README.md).*
 
 Some were paid for in rigraph's own dry runs, most in duckdb-r, whose scripts these are.
 

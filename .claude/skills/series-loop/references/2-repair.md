@@ -1,6 +1,7 @@
 # Stage 2: repair the oldest `main-dev` failure
 
-*Reference for stage 2 of [`series-loop`](../SKILL.md), read when the stage has work.*
+*Reference for stage 2 of [`series-loop`](../SKILL.md), read when the stage has work;
+the handbook leaf is [`operations/vendoring/series-loop/`](/handbook/operations/vendoring/series-loop/README.md).*
 
 Every commit in `main-green..main-dev` is decided by an `each-rcc` leg,
 and **the leg's own run is where its result is read**.
