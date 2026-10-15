@@ -25,7 +25,7 @@ Constructor modifiers (and related functions):
 ``` r
 g1 <- make_ring(10)
 g1
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 34db048 ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── fe7801c ──
 #> ℹ undirected
 #> ℹ 10 vertices · 10 edges
 #> 
@@ -38,7 +38,7 @@ g1
 
 g2 <- make_(ring(10), without_attr())
 g2
-#> ── <igraph> ───────────────────────────────────────────────────────── 3eadca6 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── b7f5bbc ──
 #> ℹ undirected
 #> ℹ 10 vertices · 10 edges
 #> 

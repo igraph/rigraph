@@ -50,6 +50,6 @@ Other vertex and edge sequence operations:
 ``` r
 g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
 union(E(g)[1:6], E(g)[5:9], E(g)["A|J"])
-#> ── <edge sequence> 10/10 · vertex names · from d130802 ─────────────────────────
+#> ── <edge sequence> 10/10 · vertex names · from fc0d930 ─────────────────────────
 #>  [1] A ─ B  B ─ C  C ─ D  D ─ E  E ─ F  F ─ G  G ─ H  H ─ I  I ─ J  A ─ J 
 ```

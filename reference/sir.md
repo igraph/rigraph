@@ -6,8 +6,9 @@ graph
 ## Usage
 
 ``` r
-sir(graph, beta, gamma, ..., no.sim = 100)
+time_bins(x, ..., middle = TRUE)
 
+# S3 method for class 'sir'
 time_bins(x, ..., middle = TRUE)
 
 # S3 method for class 'sir'
@@ -15,40 +16,21 @@ median(x, na.rm = FALSE, ...)
 
 # S3 method for class 'sir'
 quantile(x, comp = c("NI", "NS", "NR"), prob, ...)
+
+sir(graph, beta, gamma, ..., no.sim = 100)
 ```
 
 ## Arguments
 
-- graph:
+- x:
 
-  The graph to run the model on. If directed, then edge directions are
-  ignored and a warning is given.
-
-- beta:
-
-  Non-negative scalar. The rate of infection of an individual that is
-  susceptible and has a single infected neighbor. The infection rate of
-  a susceptible individual with n infected neighbors is n times beta.
-  Formally this is the rate parameter of an exponential distribution.
-
-- gamma:
-
-  Positive scalar. The rate of recovery of an infected individual.
-  Formally, this is the rate parameter of an exponential distribution.
+  A `sir` object, returned by the `sir()` function.
 
 - ...:
 
   For `sir()` and `time_bins()`, these dots must be empty. For
   `median.sir()` and `quantile.sir()`, unused, present for S3 method
   consistency.
-
-- no.sim:
-
-  Integer scalar, the number simulation runs to perform.
-
-- x:
-
-  A `sir` object, returned by the `sir()` function.
 
 - middle:
 
@@ -69,6 +51,27 @@ quantile(x, comp = c("NI", "NS", "NR"), prob, ...)
 
   Numeric vector of probabilities, in \[0,1\], they specify the
   quantiles to calculate.
+
+- graph:
+
+  The graph to run the model on. If directed, then edge directions are
+  ignored and a warning is given.
+
+- beta:
+
+  Non-negative scalar. The rate of infection of an individual that is
+  susceptible and has a single infected neighbor. The infection rate of
+  a susceptible individual with n infected neighbors is n times beta.
+  Formally this is the rate parameter of an exponential distribution.
+
+- gamma:
+
+  Positive scalar. The rate of recovery of an infected individual.
+  Formally, this is the rate parameter of an exponential distribution.
+
+- no.sim:
+
+  Integer scalar, the number simulation runs to perform.
 
 ## Value
 
