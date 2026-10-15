@@ -12,7 +12,7 @@ test_that("NULL selector defaults stand for the full vertex/edge set", {
   expect_identical(degree(g, vertices = NULL), degree(g))
   expect_identical(distances(g, vertices = NULL, to = NULL), distances(g))
   expect_identical(diversity(g, vertices = NULL), diversity(g))
-  expect_identical(which_mutual(g, eids = NULL), which_mutual(g))
+  expect_identical(which_mutual(g, edges = NULL), which_mutual(g))
   expect_identical(closeness(g, vertices = NULL), closeness(g))
 })
 
@@ -34,13 +34,13 @@ test_that("NULL selector defaults of round-2 functions select the full set", {
   g <- make_ring(5)
 
   expect_identical(max_degree(g, vertices = NULL), max_degree(g))
-  expect_identical(which_loop(g, eids = NULL), which_loop(g))
-  expect_identical(which_multiple(g, eids = NULL), which_multiple(g))
-  expect_identical(count_multiple(g, eids = NULL), count_multiple(g))
+  expect_identical(which_loop(g, edges = NULL), which_loop(g))
+  expect_identical(which_multiple(g, edges = NULL), which_multiple(g))
+  expect_identical(count_multiple(g, edges = NULL), count_multiple(g))
   expect_identical(count_triangles(g, vertices = NULL), count_triangles(g))
   expect_identical(cocitation(g, vertices = NULL), cocitation(g))
   expect_identical(similarity(g, vertices = NULL), similarity(g))
-  expect_identical_graphs(reverse_edges(g, eids = NULL), reverse_edges(g))
+  expect_identical_graphs(reverse_edges(g, edges = NULL), reverse_edges(g))
 
   V(g)$name <- letters[1:5]
   expect_identical(vertex_attr(g, "name", index = NULL), vertex_attr(g, "name"))
@@ -83,7 +83,7 @@ test_that("empty-sequence defaults are spelled as typed empty vectors", {
   # while NULL now always means "use the default".
   g <- make_graph(c(1, 2, 2, 2, 2, 3), directed = TRUE)
   expect_equal(max_degree(g, vertices = integer()), 0)
-  expect_identical(which_loop(g, eids = integer()), logical(0))
+  expect_identical(which_loop(g, edges = integer()), logical(0))
   expect_gt(max_degree(g, vertices = NULL), 0)
 
   # layout_as_tree(): the typed empty stays the documented default

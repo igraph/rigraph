@@ -1529,7 +1529,7 @@ test_that("which_mutual() tail arguments and legacy positional recovery", {
 
   # loops = FALSE stops counting the self-loop as mutual.
   expect_equal(
-    which_mutual(g, eids = E(g), loops = FALSE),
+    which_mutual(g, edges = E(g), loops = FALSE),
     c(TRUE, TRUE, FALSE)
   )
 
@@ -1626,4 +1626,20 @@ test_that("subcomponent(v = ) is deprecated but still works", {
     res_legacy <- subcomponent(g, v = 2, mode = "out")
   )
   expect_equal(res_legacy, subcomponent(g, vertex = 2, mode = "out"))
+})
+
+test_that("edge queries with `eids = ` are deprecated but still work", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  g <- make_graph(c(1, 2, 2, 1, 1, 1, 2, 3, 2, 3), directed = TRUE)
+
+  expect_snapshot_igraph(res <- which_multiple(g, eids = 4:5))
+  expect_equal(res, which_multiple(g, edges = 4:5))
+  lifecycle::expect_deprecated(res <- count_multiple(g, eids = 4:5))
+  expect_equal(res, count_multiple(g, edges = 4:5))
+  lifecycle::expect_deprecated(res <- which_loop(g, eids = 3))
+  expect_equal(res, which_loop(g, edges = 3))
+  lifecycle::expect_deprecated(res <- which_mutual(g, eids = 1:2))
+  expect_equal(res, which_mutual(g, edges = 1:2))
+  lifecycle::expect_deprecated(res <- subgraph_from_edges(g, eids = 1:2))
+  expect_identical_graphs(res, subgraph_from_edges(g, edges = 1:2))
 })

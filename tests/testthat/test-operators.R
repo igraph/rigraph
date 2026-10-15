@@ -1561,3 +1561,10 @@ test_that("compose() recovers legacy positional arguments", {
     compose(g1, g2, byname = FALSE, edge_attr_combine = "concat")
   )
 })
+
+test_that("reverse_edges(eids = ) is deprecated but still works", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  g <- make_graph(c(1, 2, 2, 3), directed = TRUE)
+  lifecycle::expect_deprecated(res <- reverse_edges(g, eids = 1))
+  expect_identical_graphs(res, reverse_edges(g, edges = 1))
+})

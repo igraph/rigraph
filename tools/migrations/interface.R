@@ -19,9 +19,10 @@ migrations <- list(
     old = function(graph, es, names) {},
     new = function(
       graph,
-      es,
+      edges,
       ...,
-      names = TRUE
+      names = TRUE,
+      es = deprecated()
     ) {},
     when = "3.0.0"
   ),

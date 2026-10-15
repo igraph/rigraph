@@ -63,14 +63,26 @@ is_igraph <- function(graph) {
 #' `tail_of()` returns the other end(s) of the edge(s).
 #'
 #' @param graph The input graph.
-#' @param es The edges to query.
+#' @param edges The edges to query.
+#' @param es `r lifecycle::badge("deprecated")` Use `edges` instead.
 #' @return A vertex sequence with the head(s) of the edge(s).
 #'
 #' @family structural queries
 #'
 #' @export
-head_of <- function(graph, es) {
-  create_vs(graph, ends(graph, es, names = FALSE)[, 2])
+head_of <- function(graph, edges, es = deprecated()) {
+  if (lifecycle::is_present(es)) {
+    if (!missing(edges)) {
+      cli::cli_abort(c(
+        "Argument {.arg edges} of {.fn head_of} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg es}."
+      ))
+    }
+    lifecycle::deprecate_soft("3.0.0", "head_of(es = )", "head_of(edges = )")
+    edges <- es
+  }
+
+  create_vs(graph, ends(graph, edges, names = FALSE)[, 2])
 }
 
 #' Tails of the edge(s) in a graph
@@ -80,12 +92,24 @@ head_of <- function(graph, es) {
 #' `head_of()` returns the other end(s) of the edge(s).
 #'
 #' @param graph The input graph.
-#' @param es The edges to query.
+#' @param edges The edges to query.
+#' @param es `r lifecycle::badge("deprecated")` Use `edges` instead.
 #' @return A vertex sequence with the tail(s) of the edge(s).
 #'
 #' @family structural queries
 #'
 #' @export
-tail_of <- function(graph, es) {
-  create_vs(graph, ends(graph, es, names = FALSE)[, 1])
+tail_of <- function(graph, edges, es = deprecated()) {
+  if (lifecycle::is_present(es)) {
+    if (!missing(edges)) {
+      cli::cli_abort(c(
+        "Argument {.arg edges} of {.fn tail_of} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg es}."
+      ))
+    }
+    lifecycle::deprecate_soft("3.0.0", "tail_of(es = )", "tail_of(edges = )")
+    edges <- es
+  }
+
+  create_vs(graph, ends(graph, edges, names = FALSE)[, 1])
 }

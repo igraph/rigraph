@@ -65,11 +65,12 @@ migrations <- list(
     old = function(graph, e, directed, weights, cutoff) {},
     new = function(
       graph,
-      e = NULL,
+      edges = NULL,
       ...,
       directed = TRUE,
       weights = NULL,
-      cutoff = -1
+      cutoff = -1,
+      e = deprecated()
     ) {},
     when = "3.0.0"
   ),

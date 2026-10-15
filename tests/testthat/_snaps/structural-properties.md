@@ -95,3 +95,12 @@
       ! Argument `vertices` of `degree()` was supplied more than once.
       i It was also supplied via its legacy name `v`.
 
+# edge queries with `eids = ` are deprecated but still work
+
+    Code
+      res <- which_multiple(g, eids = 4:5)
+    Condition
+      Warning:
+      The `eids` argument of `which_multiple()` is deprecated as of igraph 3.0.0.
+      i Please use the `edges` argument instead.
+

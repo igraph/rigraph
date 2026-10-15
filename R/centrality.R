@@ -527,17 +527,19 @@ betweenness <- function(
 }
 
 #' @rdname betweenness
-#' @param e The edges for which the edge betweenness will be calculated.
+#' @param edges The edges for which the edge betweenness will be calculated.
 #'   The default `NULL` selects all edges.
+#' @param e `r lifecycle::badge("deprecated")` Use `edges` instead.
 #' @inheritParams rlang::args_dots_empty
 #' @export
 edge_betweenness <- function(
   graph,
-  e = NULL,
+  edges = NULL,
   ...,
   directed = TRUE,
   weights = NULL,
-  cutoff = -1
+  cutoff = -1,
+  e = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: edge_betweenness, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -570,26 +572,41 @@ edge_betweenness <- function(
         "3.0.0",
         what = base::I("Calling `edge_betweenness()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  edge_betweenness(", base::paste(base::c("graph", "e", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    edge_betweenness(", base::paste(base::c("graph", "e", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  edge_betweenness(", base::paste(base::c("graph", "edges", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    edge_betweenness(", base::paste(base::c("graph", "edges", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
-  if (is.null(e)) {
-    e <- E(graph)
+  if (lifecycle::is_present(e)) {
+    if (!missing(edges)) {
+      cli::cli_abort(c(
+        "Argument {.arg edges} of {.fn edge_betweenness} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg e}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "edge_betweenness(e = )",
+      "edge_betweenness(edges = )"
+    )
+    edges <- e
   }
 
-  e <- as_igraph_es(graph, e)
+  if (is.null(edges)) {
+    edges <- E(graph)
+  }
+
+  edges <- as_igraph_es(graph, edges)
   res <- edge_betweenness_cutoff_impl(
     graph = graph,
     directed = directed,
     weights = weights,
     cutoff = cutoff
   )
-  res[as.numeric(e)]
+  res[as.numeric(edges)]
 }
 
 #' Deprecated version of `edge_betweenness()`

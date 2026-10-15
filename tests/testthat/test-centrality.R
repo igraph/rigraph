@@ -1030,7 +1030,7 @@ test_that("edge_betweenness() covers migrated tail args and positional recovery"
 
   res <- edge_betweenness(
     ring,
-    e = E(ring)[1:3],
+    edges = E(ring)[1:3],
     directed = FALSE,
     weights = rep(1, 5),
     cutoff = -1
@@ -1039,7 +1039,7 @@ test_that("edge_betweenness() covers migrated tail args and positional recovery"
   expect_equal(res, rep(3, 3))
   # With a cutoff of 1 each edge only carries the path of its endpoints.
   expect_equal(
-    edge_betweenness(ring, e = E(ring)[1:3], weights = rep(1, 5), cutoff = 1),
+    edge_betweenness(ring, edges = E(ring)[1:3], weights = rep(1, 5), cutoff = 1),
     rep(1, 3)
   )
 
@@ -1354,4 +1354,11 @@ test_that("page_rank(vids = ) is recovered as `vertices`", {
     res_legacy <- page_rank(g, vids = 1:3)
   )
   expect_identical(res_legacy, page_rank(g, vertices = 1:3))
+})
+
+test_that("edge_betweenness(e = ) is deprecated but still works", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  g <- make_ring(5)
+  lifecycle::expect_deprecated(res <- edge_betweenness(g, e = E(g)[1:2]))
+  expect_equal(res, edge_betweenness(g, edges = E(g)[1:2]))
 })
