@@ -1,8 +1,33 @@
-# Helper workflow to trigger rcc for each commit on a branch
-# Triggers rcc for commits after the first commit in the first-parent history
-#   that already has an rcc build status.
-#   The user can always rebase and force-push to move commits past the boundary and
-#   re-trigger builds for specific commits.
+# Helper workflow to build every commit on a branch that has no rcc result yet.
+#
+# On a series branch (`<S>-dev` with a sibling `<S>-green`), only commits in
+#   `<S>-green..HEAD` are considered -- the series loop's world; nothing is built
+#   when green is not an ancestor of HEAD. On branches without a green sibling,
+#   the first-parent history since $SINCE is scanned. Either way, a commit is
+#   built only if it is undecided, oldest first, and gets a verdict of its own.
+#   Rebasing and force-pushing a commit past the boundary still re-triggers it.
+#
+# The run plans contiguous, cost-balanced *shards* and gives each shard one job,
+# which walks its commits in a single workspace. The batch is then one thing to
+# cancel, the R/dependency setup is paid per shard rather than per commit, and
+# consecutive commits hit the runner's local ccache -- a typical adjacent vendor
+# commit recompiles ~5 of 341 unity objects.
+#
+# Packing commits that tightly is the cheapest plan and the slowest one: a
+# 25-commit batch fits in two 5-hour legs. So the planner replans the same range
+# against shorter per-leg deadlines and keeps whichever plan finishes soonest
+# with EACH_MAX_PARALLEL legs running at a time, spending at most
+# EACH_SPLIT_FACTOR times the runner minutes of the cheapest plan.
+#
+# Shards are numbered along the history -- shard 1 is the oldest slice, shard N
+# the branch tip -- and queued in that same order, so under max-parallel
+# throttling the oldest undecided slice is decided first, which is the only end
+# `<S>-green` can advance from. A leg that fails a commit quotes the tail
+# of every stage that failed into its job summary, so the run summary says what
+# broke without opening the log.
+#
+# See handbook/operations/ci/per-commit/README.md for the design, the GitHub Actions limits it works within,
+# and why `workflow_call` is not the mechanism that gets us there.
 
 on:
   push:
@@ -10,29 +35,101 @@ on:
       - each-*
       - '*-dev'
   workflow_dispatch:
+    inputs:
+      since:
+        description: "Earliest commit date to consider (ISO 8601)"
+        type: string
+        default: ""
+      shard-budget-minutes:
+        description: "Build-time target per shard, excluding setup; the GitHub job limit is 360"
+        type: string
+        default: ""
+      max-parallel:
+        description: "Shards to build concurrently"
+        type: string
+        default: ""
+      split-factor:
+        description: "Runner minutes the plan may cost, relative to the fewest-shards plan, to shorten wall clock (1.0 = never rebalance)"
+        type: string
+        default: ""
+      max-commits:
+        description: "Cap on commits considered (0 = no cap), newest kept"
+        type: string
+        default: ""
+      force:
+        description: "Rebuild commits that already have a verdict"
+        type: boolean
+        default: false
   workflow_call:
     inputs:
       branch:
         description: "Branch ref to trigger rcc for (e.g. refs/heads/main-dev)"
         required: true
         type: string
+      since:
+        description: "Earliest commit date to consider (ISO 8601)"
+        required: false
+        type: string
+        default: ""
+      shard-budget-minutes:
+        description: "Build-time target per shard, excluding setup"
+        required: false
+        type: string
+        default: ""
+      max-parallel:
+        description: "Shards to build concurrently"
+        required: false
+        type: string
+        default: ""
+      split-factor:
+        description: "Runner minutes the plan may cost, relative to the fewest-shards plan, to shorten wall clock"
+        required: false
+        type: string
+        default: ""
+      max-commits:
+        description: "Cap on commits considered (0 = no cap), newest kept"
+        required: false
+        type: string
+        default: ""
 
 name: each-rcc
 
-jobs:
-  each-rcc:
-    if: github.repository == 'krlmlr/rigraph'
-    runs-on: ubuntu-24.04
-    outputs:
-      sha: ${{ steps.commit.outputs.sha }}
-      versions-matrix: ${{ steps.versions-matrix.outputs.matrix }}
-      dep-suggests-matrix: ${{ steps.dep-suggests-matrix.outputs.matrix }}
+# One planning/building pass per branch at a time. `cancel-in-progress: false`
+# on purpose: a queued run must wait for a long bulk build rather than kill it,
+# because a killed leg leaves its in-flight commit undecided.
+#
+# This group, plus work-selection being a pure function of durable verdicts, is
+# the whole of what keeps a commit from being built twice. There is no running
+# marker and there is not meant to be one -- see handbook/operations/ci/per-commit/selection/README.md, "No running
+# marker, by design".
+concurrency:
+  group: each-rcc-${{ inputs.branch || github.ref }}
+  cancel-in-progress: false
 
-    name: "Trigger rcc workflow for each commit"
+env:
+  EACH_SINCE: ${{ inputs.since || vars.EACH_RCC_SINCE || '2026-01-01' }}
+  EACH_SHARD_BUDGET_MINUTES: ${{ inputs.shard-budget-minutes || '300' }}
+  EACH_MAX_PARALLEL: ${{ inputs.max-parallel || vars.EACH_RCC_MAX_PARALLEL || '20' }}
+  EACH_MAX_COMMITS: ${{ inputs.max-commits || '0' }}
+  EACH_SPLIT_FACTOR: ${{ inputs.split-factor || vars.EACH_RCC_SPLIT_FACTOR || '1.5' }}
+
+jobs:
+  plan:
+    if: github.repository == 'krlmlr/duckdb-r'
+    runs-on: ubuntu-26.04
+
+    name: "Plan per-commit rcc builds"
+
+    outputs:
+      # The fallbacks cover a planning step that did not run at all: `build` is
+      # guarded by `shards != '0'`, but its `strategy` must still parse.
+      matrix: ${{ steps.plan.outputs.matrix || '{"shard":["none"]}' }}
+      shards: ${{ steps.plan.outputs.shards || '0' }}
+      commits: ${{ steps.plan.outputs.commits || '0' }}
+      max_parallel: ${{ steps.plan.outputs.max_parallel || '1' }}
 
     permissions:
       contents: read
-      statuses: read
       actions: write
 
     # Begin custom: services
@@ -44,8 +141,148 @@ jobs:
           ref: ${{ inputs.branch || github.ref }}
           fetch-depth: 0
 
-      - name: Enumerate commits and trigger rcc workflow
+      - id: plan
+        name: Plan shards
         env:
           GH_TOKEN: ${{ github.token }}
-        run: scripts/each-rcc.sh
+          SINCE: ${{ env.EACH_SINCE }}
+          SHARD_BUDGET_MINUTES: ${{ env.EACH_SHARD_BUDGET_MINUTES }}
+          MAX_PARALLEL: ${{ env.EACH_MAX_PARALLEL }}
+          MAX_COMMITS: ${{ env.EACH_MAX_COMMITS }}
+          SPLIT_FACTOR: ${{ env.EACH_SPLIT_FACTOR }}
+          FORCE: ${{ inputs.force && '1' || '' }}
+          OUT: ${{ runner.temp }}/plan.json
+        run: scripts/each-plan.sh
         shell: bash
+
+      # `overwrite` because an artifact name has to be unique within a *run*, not
+      # within an attempt: without it, "Re-run all jobs" fails right here, on the
+      # `each-plan` this run's first attempt already uploaded.
+      - uses: actions/upload-artifact@v7
+        if: steps.plan.outputs.shards != '0'
+        with:
+          name: each-plan
+          path: ${{ runner.temp }}/plan.json
+          retention-days: 7
+          overwrite: true
+
+  build:
+    needs:
+      - plan
+
+    if: needs.plan.outputs.shards != '0'
+
+    runs-on: ubuntu-26.04
+
+    # Below GitHub's 6 h ceiling, and above the leg's own deadline: the leg is
+    # meant to stop itself and report what it deferred, not to be killed
+    # mid-commit and leave a `pending` status behind.
+    timeout-minutes: 350
+
+    name: "shard ${{ matrix.shard }} (${{ matrix.label }})"
+
+    permissions:
+      # `write` for the snapshot-<sha>-rcc-smoke-null branches: the snapshots
+      # gate publishes accepted snapshots as a branch off the commit under test,
+      # the way peter-evans/create-pull-request does, and tooling looks those
+      # up by name.
+      contents: write
+      statuses: write
+      actions: read
+
+    strategy:
+      fail-fast: false
+      max-parallel: ${{ fromJSON(needs.plan.outputs.max_parallel) }}
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+
+    # Begin custom: services
+    # End custom: services
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.branch || github.ref }}
+          fetch-depth: 0
+
+      - uses: actions/download-artifact@v8
+        with:
+          name: each-plan
+          path: ${{ runner.temp }}/plan
+
+      - uses: cynkra/cynkratemplate/.github/actions/git-identity@main
+
+      - uses: ./.github/workflows/custom/before-install
+        if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''
+
+      - uses: cynkra/cynkratemplate/.github/actions/install@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          cache-version: each-rcc-1
+          needs: build, check, website, roxygen2
+          extra-packages: any::rcmdcheck r-lib/roxygen2 any::decor r-lib/pkgdown deps::.
+
+      # Deliberately not custom/after-install: its ccache-action caps the cache
+      # at 200 MB and its duckdb.tar archive is keyed on the whole vendored tree,
+      # so both are per-commit constructs a multi-commit job cannot use. This job
+      # keeps one large local cache instead.
+      - name: Point ccache outside the workspace and size it for a whole shard
+        run: |
+          ## -- Point ccache outside the workspace and size it for a whole shard --
+          # scripts/each-shard.sh wipes the workspace between commits, and
+          # hendrikmuhs/ccache-action has historically kept the cache inside it.
+          # This is the cache that carries reuse from one commit to the next, so
+          # losing it would turn every commit into a cold build.
+          export CCACHE_DIR="${RUNNER_TEMP}/ccache"
+          mkdir -p "${CCACHE_DIR}"
+          echo "CCACHE_DIR=${CCACHE_DIR}" | tee -a "${GITHUB_ENV}"
+          ccache --set-config=max_size=8G
+          ccache --zero-stats
+          ccache --show-config | grep -E 'cache_dir|max_size'
+        shell: bash
+
+      # Run for its tool installation only (air, clang-format). The formatting it
+      # performs on the tip checkout is discarded: scripts/each-shard.sh resets
+      # the workspace before every commit.
+      - uses: cynkra/cynkratemplate/.github/actions/style@main
+
+      - name: Build the shard
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SHARD: ${{ matrix.shard }}
+          PLAN: ${{ runner.temp }}/plan/plan.json
+          LOG_DIR: ${{ runner.temp }}/each-logs
+          DEADLINE_MINUTES: ${{ env.EACH_SHARD_BUDGET_MINUTES }}
+          # Empty falls through to the script's own default; 0 turns the
+          # per-failure log excerpts in the job summary off.
+          SUMMARY_TAIL: ${{ vars.EACH_RCC_SUMMARY_TAIL || '' }}
+          # Outside the workspace: scripts/each-shard.sh wipes that per commit,
+          # and these hold the cached blobless clones of the `rcc2` branch that
+          # the per-commit publish and the resume check go through.
+          RCC_DIR: ${{ runner.temp }}/rcc-publish
+          RCC_READ_DIR: ${{ runner.temp }}/rcc-read
+        run: scripts/each-shard.sh
+        shell: bash
+
+      # What a firing reads. The per-commit publish to `rcc2` is the copy, and
+      # this is the source: one record and one log per commit the leg decided,
+      # in the same bytes (.claude/skills/series-loop/SKILL.md stage 2). It used to
+      # feed a fan-in job as well, which reconciled onto the branch whatever a
+      # leg could not publish; that job is gone, because a reader that opens
+      # this artifact has already got what the fan-in would have copied.
+      #
+      # Named per *attempt*, and therefore not overwritten. A re-run of a leg
+      # resumes, so its index covers only the commits it rebuilt -- overwriting
+      # would delete the previous attempt's artifact, which is the one copy of
+      # anything that attempt decided but could not publish. Read every
+      # `each-logs-*` for a run, not just the newest.
+      #
+      # 14 days, against job logs GitHub keeps far longer: past that, the same
+      # content is inline in the leg's job log, one `::group::<sha>` section
+      # per commit.
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: each-logs-${{ matrix.shard }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/each-logs
+          if-no-files-found: ignore
+          retention-days: 14
