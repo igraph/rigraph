@@ -45,7 +45,7 @@ series_sha_sed='s|^.*[A-Za-z0-9_.-]+/igraph@([0-9a-f]+).*$|\1|p'
 # scripts/vendor-one.sh decides which stretch it is on from the ancestry of the
 # newest vendored SHA, so nothing here changes when the seam has been crossed.
 series_replay_repo=krlmlr/igraph
-series_replay_branch=replay-1.0.1
+series_replay_branch=v1.0-replay
 series_replay_tip=3c54c752e63b96c0f0e81564a8f9fda3b8890919
 series_seam=7b4ae766cbdee6b2017aa5b76752457db2a2972f
 

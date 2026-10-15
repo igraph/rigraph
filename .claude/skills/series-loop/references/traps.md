@@ -11,7 +11,7 @@ Some were paid for in rigraph's own dry runs, most in duckdb-r, whose scripts th
   Pass absolute paths for both.
 - **The replay must be a local branch, with its tags.**
   The vendor run clones the clone, and only branches travel:
-  a replay held as `refs/remotes/…/replay-1.0.1` alone is left behind, and the run stops on a base it cannot find.
+  a replay held as `refs/remotes/…/v1.0-replay` alone is left behind, and the run stops on a base it cannot find.
   A replay fetched with `--no-tags` vendors other version headers than one fetched with them ([`0-setup.md`](0-setup.md)).
 - **Clean every build product between local builds**: `git clean -fdx -- src/`.
   An object or dependency file built against another engine links or builds wrong.
