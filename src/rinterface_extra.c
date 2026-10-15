@@ -2509,21 +2509,36 @@ igraph_error_t Rx_igraph_interrupt_handler(void *data) {
   return IGRAPH_SUCCESS;
 }
 
+/* The namespace of this package,
+ * where the callbacks below find the R functions they call.
+ * The package is published under several names (`igraph`, `igraph.dev`),
+ * so it cannot be looked up by name here: `.onLoad()` hands it over instead.
+ * NULL until then, and the callbacks do nothing while it is. */
+static SEXP Rx_igraph_namespace = NULL;
+
+/* TOP-LEVEL: called from R via .Call; must use IGRAPH_R_CHECK */
+SEXP Rx_igraph_set_namespace(SEXP ns) {
+  if (!Rf_isEnvironment(ns)) {
+    Rf_error("The package namespace must be an environment.");
+  }
+  R_PreserveObject(ns);
+  if (Rx_igraph_namespace != NULL) {
+    R_ReleaseObject(Rx_igraph_namespace);
+  }
+  Rx_igraph_namespace = ns;
+  return R_NilValue;
+}
+
 /* HELPER: internal C; must use IGRAPH_CHECK */
 igraph_error_t Rx_igraph_progress_handler(const char *message, double percent,
                               void * data) {
   SEXP ec;
   int ecint;
   int px = 0;
-  SEXP rho;
-#if R_VERSION >= R_Version(4, 6, 0)
-  rho = R_getRegisteredNamespace("igraph");
-#else
-  SEXP l1 = PROTECT(Rf_install("getNamespace")); px++;
-  SEXP l2 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar("igraph")))); px += 2;
-  SEXP l3 = PROTECT(Rf_lang2(l1, l2)); px++;
-  rho = PROTECT(Rf_eval(l3, R_BaseEnv)); px++;
-#endif
+  SEXP rho = Rx_igraph_namespace;
+  if (rho == NULL) {
+    return IGRAPH_SUCCESS;
+  }
 
   SEXP l4 = PROTECT(Rf_install(".igraph.progress")); px++;
   SEXP l5 = PROTECT(Rf_ScalarReal(percent)); px++;
@@ -2539,15 +2554,10 @@ igraph_error_t Rx_igraph_progress_handler(const char *message, double percent,
 /* HELPER: internal C; must use IGRAPH_CHECK */
 igraph_error_t Rx_igraph_status_handler(const char *message, void *data) {
   int px = 0;
-  SEXP rho;
-#if R_VERSION >= R_Version(4, 6, 0)
-  rho = R_getRegisteredNamespace("igraph");
-#else
-  SEXP l1 = PROTECT(Rf_install("getNamespace")); px++;
-  SEXP l2 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar("igraph")))); px += 2;
-  SEXP l3 = PROTECT(Rf_lang2(l1, l2)); px++;
-  rho = PROTECT(Rf_eval(l3, R_BaseEnv)); px++;
-#endif
+  SEXP rho = Rx_igraph_namespace;
+  if (rho == NULL) {
+    return IGRAPH_SUCCESS;
+  }
 
   SEXP l4 = PROTECT(Rf_install(".igraph.status")); px++;
   SEXP l5 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar(message)))); px += 2;
@@ -2718,15 +2728,10 @@ SEXP Rx_igraph_set_verbose(SEXP verbose) {
 SEXP R_igraph_finalizer(void) {
   IGRAPH_FINALLY_FREE();
   int px = 0;
-  SEXP rho;
-#if R_VERSION >= R_Version(4, 6, 0)
-  rho = R_getRegisteredNamespace("igraph");
-#else
-  SEXP l1 = PROTECT(Rf_install("getNamespace")); px++;
-  SEXP l2 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar("igraph")))); px += 2;
-  SEXP l3 = PROTECT(Rf_lang2(l1, l2)); px++;
-  rho = PROTECT(Rf_eval(l3, R_BaseEnv)); px++;
-#endif
+  SEXP rho = Rx_igraph_namespace;
+  if (rho == NULL) {
+    return R_NilValue;
+  }
 
   SEXP l4 = PROTECT(Rf_install(".igraph.progress")); px++;
   SEXP l5 = PROTECT(Rf_ScalarReal(0.0)); px++;

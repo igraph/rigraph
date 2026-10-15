@@ -64,15 +64,18 @@ console <- function() {
   )
 }
 
-.igraph.pb <- NULL
+# The current progress bar or console, kept in an environment rather than in
+# a binding of its own: the namespace is locked once loaded, and an
+# environment's contents stay writable without unlocking anything.
+.igraph.pb <- new.env(parent = emptyenv())
 
 #' igraph progress
 #' @param percent,message,clean Used internally by `.igraph.progress()` and `.igraph.status()`
 #' @dev
 .igraph.progress <- function(percent, message, clean = FALSE) {
   if (clean) {
-    if (!is.null(.igraph.pb)) {
-      close(.igraph.pb)
+    if (!is.null(.igraph.pb$bar)) {
+      close(.igraph.pb$bar)
     }
     return(invisible())
   }
@@ -115,7 +118,7 @@ console <- function() {
 
 #' @importFrom utils txtProgressBar setTxtProgressBar
 .igraph.progress.txt <- function(percent, message) {
-  pb <- get(".igraph.pb", asNamespace("igraph"))
+  pb <- .igraph.pb$bar
   if (percent == 0) {
     if (!is.null(pb)) {
       close(pb)
@@ -128,12 +131,12 @@ console <- function() {
     close(pb)
     pb <- NULL
   }
-  assign(".igraph.pb", pb, envir = asNamespace("igraph"))
+  .igraph.pb$bar <- pb
   0L
 }
 
 .igraph.progress.tk <- function(percent, message) {
-  pb <- get(".igraph.pb", asNamespace("igraph"))
+  pb <- .igraph.pb$bar
   if (percent == 0) {
     if (!is.null(pb)) {
       close(pb)
@@ -150,12 +153,12 @@ console <- function() {
     close(pb)
     pb <- NULL
   }
-  assign(".igraph.pb", pb, envir = asNamespace("igraph"))
+  .igraph.pb$bar <- pb
   0L
 }
 
 .igraph.progress.tkconsole <- function(percent, message) {
-  pb <- get(".igraph.pb", asNamespace("igraph"))
+  pb <- .igraph.pb$bar
   startmess <- FALSE
 
   ## Open the console, if it is not open
@@ -170,7 +173,7 @@ console <- function() {
   tcltk::tcl("update", "idletasks")
 
   ## Done
-  assign(".igraph.pb", pb, envir = asNamespace("igraph"))
+  .igraph.pb$bar <- pb
   if (startmess) {
     .igraph.progress.tkconsole.message("Console started.\n")
   }
@@ -188,7 +191,7 @@ console <- function() {
     "photo",
     "img",
     format = "gif",
-    file = system.file("igraph2.gif", package = "igraph")
+    file = system.file("igraph2.gif", package = get_package_name())
   )
   logo <- tcltk::tklabel(
     lfr,
@@ -247,7 +250,7 @@ console <- function() {
     if (!is.na(oldverb) && igraph_opt("verbose") == "tkconsole") {
       igraph_options(verbose = oldverb)
     }
-    assign(".igraph.pb", NULL, envir = asNamespace("igraph"))
+    .igraph.pb$bar <- NULL
   })
 
   res <- list(top = console, txt = txt, pb = pbar$pb, oldverb = oldverb)
@@ -256,11 +259,11 @@ console <- function() {
 }
 
 .igraph.progress.tkconsole.message <- function(message, start = FALSE) {
-  txt <- get(".igraph.pb", asNamespace("igraph"))$txt
+  txt <- .igraph.pb$bar$txt
   if (is.null(txt)) {
     if (start) {
       pb <- .igraph.progress.tkconsole.create(NA)
-      assign(".igraph.pb", pb, envir = asNamespace("igraph"))
+      .igraph.pb$bar <- pb
       txt <- pb$txt
     } else {
       return()

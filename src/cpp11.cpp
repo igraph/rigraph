@@ -582,6 +582,7 @@ extern SEXP Rx_igraph_read_graph_dimacs(SEXP, SEXP);
 extern SEXP Rx_igraph_read_graph_edgelist(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_read_graph_lgl(SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_read_graph_ncol(SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP Rx_igraph_set_namespace(SEXP);
 extern SEXP Rx_igraph_set_verbose(SEXP);
 extern SEXP Rx_igraph_shortest_paths(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_spinglass_community(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -1163,6 +1164,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rx_igraph_read_graph_edgelist",                           (DL_FUNC) &Rx_igraph_read_graph_edgelist,                            3},
     {"Rx_igraph_read_graph_lgl",                                (DL_FUNC) &Rx_igraph_read_graph_lgl,                                 4},
     {"Rx_igraph_read_graph_ncol",                               (DL_FUNC) &Rx_igraph_read_graph_ncol,                                5},
+    {"Rx_igraph_set_namespace",                                 (DL_FUNC) &Rx_igraph_set_namespace,                                  1},
     {"Rx_igraph_set_verbose",                                   (DL_FUNC) &Rx_igraph_set_verbose,                                    1},
     {"Rx_igraph_shortest_paths",                                (DL_FUNC) &Rx_igraph_shortest_paths,                                 6},
     {"Rx_igraph_spinglass_community",                           (DL_FUNC) &Rx_igraph_spinglass_community,                           11},

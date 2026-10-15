@@ -1115,7 +1115,7 @@ layout.reingold.tilford <- function(..., params = list()) {
 #' @keywords graphs
 #' @export
 #' @family graph layouts
-#' @examplesIf igraph:::has_glpk() && rlang::is_installed("igraphdata")
+#' @examplesIf rlang::ns_env(cluster_optimal)$has_glpk() && rlang::is_installed("igraphdata")
 #'
 #' ## Place vertices on a circle, order them according to their
 #' ## community

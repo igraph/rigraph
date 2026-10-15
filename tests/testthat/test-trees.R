@@ -226,7 +226,7 @@ test_that("subgraph.edges deprecation", {
 
   g <- make_full_graph(8) %du% make_full_graph(5)
   edges <- sample_spanning_tree(g)
-  expect_snapshot(subgraph.edges(g, edges, delete.vertices = FALSE))
+  expect_snapshot_igraph(subgraph.edges(g, edges, delete.vertices = FALSE))
 })
 
 # ---- ellipsis migration: argument coverage ----------------------------
