@@ -129,11 +129,22 @@ class ParamSpec:
             # which may contain spaces ("maxiter=40 * vcount(graph)^2").
             parts = ["IN"] + parts
         else:
-            parts = [parts[0]] + parts[1].split(" ", 1)
-        if "=" in parts[2]:
+            parts = parts[:1] + " ".join(parts[1:]).split(" ", 1)
+        if len(parts) == 3 and "=" in parts[2]:
             parts = parts[:2] + parts[2].split("=", 1)
+        parts = [part.strip() for part in parts]
 
-        mode, type, name, *rest = [part.strip() for part in parts]
+        # Every part of the specification has to land somewhere. A missing
+        # type or name, or a name that is more than one word, means a part
+        # would be dropped or misread, so refuse it rather than generate code
+        # from a guess.
+        if len(parts) < 3 or not parts[1] or not parts[2].isidentifier():
+            raise ValueError(
+                f"Cannot parse parameter specification {value!r}: "
+                "expected [MODE] TYPE NAME[=DEFAULT]"
+            )
+
+        mode, type, name, *rest = parts
 
         return ParamSpec(
             name=str(name),
