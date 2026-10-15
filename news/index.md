@@ -1,5 +1,21 @@
 # Changelog
 
+## igraph 2.3.3.9042
+
+### Chore
+
+- Auto-update from GitHub Actions
+  ([\#2930](https://github.com/igraph/rigraph/issues/2930)).
+
+## igraph 2.3.3.9041
+
+### Bug fixes
+
+#### ci
+
+- Scope the touchstone comment concurrency group to the PR branch
+  ([\#2924](https://github.com/igraph/rigraph/issues/2924)).
+
 ## igraph 2.3.3.9040
 
 ### Continuous integration
@@ -1984,6 +2000,24 @@
 ## igraph 2.3.1.9000
 
 - Switching to development version.
+
+## igraph 2.3.4
+
+CRAN release: 2026-09-30
+
+### Bug fixes
+
+- Avoid deprecated special names in
+  [`structure()`](https://rdrr.io/r/base/structure.html) calls and add
+  `\usage` to the documentation of `%>%`, for compatibility with
+  R-devel.
+
+### Testing
+
+- Skip the
+  [`layout_with_mds()`](https://r.igraph.org/reference/layout_with_mds.md)
+  stress test with BLIS, where LAPACK’s `DSYEVR` fails to converge for
+  some random graphs.
 
 ## igraph 2.3.3
 
