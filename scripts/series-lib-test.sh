@@ -21,6 +21,9 @@
 # those files live, and the version pairs whose ordering section 3 asserts. A
 # repository whose configuration reads another engine rewrites that block and
 # nothing else.
+#
+# Ported from duckdb/duckdb-r (.series-source): the block is igraph's, and
+# sections 1 and 2 also check the second owner rigraph's history names.
 
 set -euo pipefail
 
@@ -45,19 +48,22 @@ not() { if "${@:2}"; then no "$1"; else ok "$1"; fi; }
 # <version> holds, in the current directory, as the configured readers read it;
 # a re-stamp for <tag> rewrites the engine file as well, because a vendor run
 # regenerates the tree and the scan directory must see it.
+#
+# Here the engine is read from the vendor subjects, and the stamp is what
+# igraph's CMake writes from `git describe --tags`: `X.Y.Z-N-g<sha>` follows
+# the release `X.Y.Z` and precedes the next one, and a release precedes a later
+# one.
 engine_tree() {
-  printf '#define DUCKDB_SOURCE_ID "%s"\n' "$1" > "$series_engine_file"
-  [ -z "${3:-}" ] || printf '#define DUCKDB_VERSION "%s"\n' "$3" >> "$series_engine_file"
-  printf 'duckdb_version <- "%s"\n' "$2" > "$series_stamp_file"
+  printf '#define IGRAPH_VERSION "%s"\n' "$2" > "$series_stamp_file"
 }
-engine_dirs=("$(dirname "$series_engine_file")" "$(dirname "$series_stamp_file")")
-snapshot=1.4.0-dev123       # a development stamp, which precedes the release it names
+engine_dirs=("$(dirname "$series_stamp_file")")
+snapshot=1.3.9-123-gabc1234 # a stamp past a release, which precedes the next one
 release=1.4.0
-later_snapshot=1.4.0-dev124
+later_snapshot=1.3.9-124-gdef5678
 # The ordering: pairs `series_version_before` answers yes to, and pairs it
 # answers no to, as `engine_before()` in the suite reads this engine's versions.
-before=("$snapshot $release" "$snapshot 1.5.0" "$snapshot $later_snapshot")
-not_before=("$snapshot 1.3.9" "$release 1.5.0" "main 1.5.0")
+before=("$snapshot $release" "$snapshot 1.5.0" "$snapshot $later_snapshot" "$release 1.5.0" "$release $release-1-gabc1234")
+not_before=("$snapshot 1.3.9" "main 1.5.0")
 
 repo=$series_upstream_repo
 sha=0123456789abcdef
@@ -69,10 +75,12 @@ yes "a vendor: subject vendors" series_is_vendor "$v"
 yes "a bare marker vendors" series_is_vendor "chore: bump to $repo@$sha"
 not "an ordinary subject does not" series_is_vendor "fix: the glue reads two"
 not "the repository name alone does not" series_is_vendor "docs: $repo is upstream"
+yes "a subject naming the replay's owner vendors" series_is_vendor "vendor: Update vendored sources to $series_replay_repo@$sha"
 
 echo "--- 2. the SHA and the twin key"
 is "the SHA a subject names" "$(series_sha_of "$v")" "$sha"
 is "none for an ordinary subject" "$(series_sha_of "fix: the glue")" ""
+is "the SHA a replay subject names" "$(series_sha_of "vendor: Update vendored sources to $series_replay_repo@$sha")" "$sha"
 is "the twin key" "$(series_twin_key "$v")" "$sha"
 is "the twin key of a re-stamp" "$(series_twin_key "$vt")" "$sha+tag"
 is "no key for an ordinary subject" "$(series_twin_key "fix: the glue")" ""

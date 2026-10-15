@@ -44,9 +44,9 @@
 # **A VERSION commit is not auto-picked either**, because `main`'s R-client
 # counter is not this series'. A series' version says which release line it was
 # seeded from and how far its own vendoring has run; what `main` is at today is
-# read from `main` (#2496). Porting fledge's bumps made the fourth component
+# read from `main` (duckdb-r#2496). Porting fledge's bumps made the fourth component
 # free-run behind `main` instead of staying at the seed, which is the opposite
-# of the model handbook/operations/releases/versioning/ describes. The class is
+# of the model handbook/operations/releases/ describes. The class is
 # read from the content -- the commit carries nothing but release paperwork --
 # not from the `fledge:` subject, so a bump under another name is caught and a
 # bump riding on real content is not. The class covers the notes as well as the
@@ -59,13 +59,13 @@
 #
 # **The subject is what decides a VENDOR commit, never the path.** The patch
 # stack is applied to the vendored tree in place, so CRAN and
-# compiler-warning fixes land under src/duckdb/ carrying no upstream SHA, and
+# compiler-warning fixes land under src/vendor/ carrying no upstream SHA, and
 # excluding them by path made exactly those fixes wait for a forward — the
 # one thing this script exists to end. The readers of the vendor strand look
 # past such commits by subject and say so when their bound is exhausted
 # (series_vendored_sha() in scripts/series-lib.sh,
 # the base scans in scripts/vendor-one.sh and scripts/vendor.sh), so a ported
-# commit under src/duckdb/ is invisible to them whether or not this class
+# commit under src/vendor/ is invisible to them whether or not this class
 # names it. After the picks, whatever tooling
 # delta remains (history that diverged inside vendor commits, picks dropped
 # as empty) is closed with one sync commit that takes `main`'s tooling tree
@@ -166,7 +166,7 @@ fi
 # `.github/README.md` is one of those, and it is the reason `.github` cannot be
 # taken whole: it is the README GitHub renders, it is generated from the
 # flavored `README.Rmd`, and taking main's copy would put the mainline name at
-# the top of every flavored series' front page — the defect #2517 and #2518
+# the top of every flavored series' front page — the defect duckdb-r#2517 and duckdb-r#2518
 # were about, in the file most likely to be read.
 tooling=("${series_tooling[@]}" ':(exclude).github/README.md')
 paths_re=$(series_tooling_re)
@@ -372,9 +372,9 @@ classify() { # <sha> -> TOOLING | MIXED | OTHER | VENDOR | VERSION
 # of `main` carrying no patch-id the series has -- and porting one applies a
 # tree from another era on top of this one.
 #
-# #2713 recorded the v1.1.3-2 tag that way, and the next firing was offered 13
+# duckdb-r#2713 recorded the v1.1.3-2 tag that way, and the next firing was offered 13
 # commits dated 2024-12 to 2025-01 for every non-frozen series, `feat: Limit
-# automatic materialization by number of rows or number of cells (#1017)` among
+# automatic materialization by number of rows or number of cells (duckdb-r#1017)` among
 # them. A default --apply would have cherry-picked all of them.
 #
 # The test is the merge's own tree and not its subject: `-s ours` is one way to

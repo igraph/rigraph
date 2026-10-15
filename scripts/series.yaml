@@ -1,89 +1,34 @@
 # The flavors this repository publishes, and the series behind them.
 #
-# Generated from, never by hand: the Flavors table in README.Rmd,
-# handbook/branches/flavors/'s table, and the mirror rules pull-config.sh
-# derives. Run scripts/series-table.R after editing.
-#
-# Fields: flavor is the package name; kind is CRAN, LTS or dev; upstream is the
-# duckdb/duckdb branch the line tracks; publishes_from is the branch r-universe
+# Fields: flavor is the package name; kind is CRAN or dev; upstream is the
+# igraph/igraph branch the line tracks; publishes_from is the branch r-universe
 # builds, with repo saying which repository holds it; badges lists the version
 # sources shown, in order. A dev flavor adds series, the prefix of its four
 # refs, and releases_from, the branch it is measured ahead of -- which is also
-# the branch it seeds and forward-ports from, so the fork mirrors it
-# (handbook/branches/mirrors/).
+# the branch it seeds and forward-ports from, so the fork mirrors it.
+#
+# scripts/series-port.sh reads releases_from, and scripts/series-check.sh reads
+# whether a flavor is declared; the series themselves are discovered from the
+# refs, never from here.
 
 flavors:
-  - flavor: duckdb
+  - flavor: igraph
     kind: CRAN
-    upstream: v1.5-variegata
+    upstream: main
     publishes_from: main
-    repo: duckdb/duckdb-r
+    repo: igraph/rigraph
     badges: [cran, r-universe]
 
-  - flavor: duckdb.1.4
-    kind: LTS
-    upstream: v1.4-andium
-    publishes_from: v1.4-andium-lts
-    repo: duckdb/duckdb-r
-    badges: [r-universe]
-
-  # `duckdb.dev` is a role rather than a version: it is whichever series tracks
-  # upstream `main`, so a branch cut re-points it instead of retiring it.
-  - flavor: duckdb.dev
+  # `igraph.dev` is whichever series tracks upstream `main`: the bleeding edge,
+  # installable beside `igraph`. Its line walks the replay of igraph 0.10.17 to
+  # 1.0.1 first and igraph/igraph's `main` after that (scripts/series-config.sh).
+  - flavor: igraph.dev
     kind: dev
     upstream: main
     series: main
     releases_from: main
     publishes_from: main-green
-    repo: duckdb/duckdb-r
+    repo: igraph/rigraph
     badges: [r-universe]
 
-  - flavor: duckdb.2.0.dev
-    kind: dev
-    upstream: v2.0-cyanoptera
-    series: v2.0-cyanoptera
-    releases_from: main
-    publishes_from: v2.0-cyanoptera-green
-    repo: duckdb/duckdb-r
-    badges: [r-universe]
-
-  # Parked: `main` is taking the v2.0 line (.claude/skills/series-land/SKILL.md),
-  # and v1.5 releases from its own baseline from here on.
-  - flavor: duckdb.1.5.dev
-    kind: dev
-    upstream: v1.5-variegata
-    series: v1.5-variegata
-    releases_from: v1.5-variegata
-    publishes_from: v1.5-variegata-green
-    repo: duckdb/duckdb-r
-    badges: [r-universe]
-
-  # Parked: releasing from its own baseline rather than from `main`.
-  - flavor: duckdb.1.4.dev
-    kind: dev
-    upstream: v1.4-andium
-    series: v1.4-andium
-    releases_from: v1.4-andium
-    publishes_from: v1.4-andium-green
-    repo: duckdb/duckdb-r
-    badges: [r-universe]
-
-# The release lines only the package archives still have: each was served on
-# CRAN as plain `duckdb` before flavors existed, and nothing installs them now.
-# A line lands here when it stops being served -- `v1.4-andium` will, once it is
-# demoted from LTS and `duckdb.1.4` goes away.
-#
-# Only the lines upstream cut a branch for are listed. Everything before
-# `v1.1-eatoni` predates that convention, so series-table.R closes the list with
-# one undeclared bullet for it.
-#
-# Documentation, not a filter: series-check.sh decides what is unserved from a
-# floor it computes, precisely so that no hand-kept list can be stale on the
-# firing where a line was just cut.
-archived:
-  - upstream: v1.3-ossivalis
-    cut: "2025-09-03"
-  - upstream: v1.2-histrionicus
-    cut: "2025-04-07"
-  - upstream: v1.1-eatoni
-    cut: "2024-11-02"
+archived: []

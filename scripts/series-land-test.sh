@@ -82,7 +82,7 @@ git config commit.gpgsign false
 git remote add origin "$FORK"
 git remote add upstream "$CANON"
 
-mkdir -p scripts R src/duckdb/src/function/table/version tests/testthat .github/workflows
+mkdir -p scripts R src/vendor/cigraph tests/testthat .github/workflows
 for s in series-land.sh series-forward-build.sh series-rc.sh series-tests.sh setup-git.sh merge-version.sh \
   series-config.sh series-lib.sh vendor-lib.sh; do
   cp "$HERE/$s" scripts/
@@ -92,31 +92,32 @@ echo 'DESCRIPTION merge=ours-version' > .gitattributes
 scripts/setup-git.sh >/dev/null
 
 desc() { printf 'Package: %s\nVersion: %s\n' "$1" "$2" > DESCRIPTION; }
-engine() { # <id> <R version>
-  echo "engine $1" > src/duckdb/engine.cpp
-  echo "#define DUCKDB_SOURCE_ID \"$1\"" > src/duckdb/src/function/table/version/pragma_version.cpp
-  echo "duckdb_version <- \"$2\"" > R/version.R
+# The engine as the tree records it, the version igraph's CMake writes from
+# `git describe --tags`: a release, or `X.Y.Z-N-g<sha>` N commits past one.
+engine() { # <id> <version>
+  echo "engine $1" > src/vendor/cigraph/engine.c
+  echo "#define IGRAPH_VERSION \"$2\"" > src/vendor/igraph_version.h
 }
 commit() { git add -A; git commit -qm "$1"; }
 
-desc duckdb 1.5.5.9000
-engine aaaa111 1.5.5
-echo 'rename duckdb.1.3 duckdb_1_3' > scripts/flavor.patch
+desc igraph 1.5.5.9000
+engine aaaa111 1.0.0
+echo 'rename igraph.1.3 igraph_1_3' > scripts/flavor.patch
 echo 'tool v1' > scripts/tool.sh
 echo 'on: pull_request' > .github/workflows/ci.yaml
-echo 'pkg <- "duckdb"' > R/package.R
+echo 'pkg <- "igraph"' > R/package.R
 echo 'foo <- function() 1' > R/foo.R
 echo 'glue 1' > src/glue.cpp
 echo 'test 1' > tests/testthat/test-foo.R
 printf 'a\nb\nc\n' > tests/testthat/test-bar.R
-echo '# duckdb 1.5.5.9000' > NEWS.md
+echo '# igraph 1.5.5.9000' > NEWS.md
 echo 'readme at the base' > README.md
-commit 'vendor: Update vendored sources to duckdb/duckdb@aaaa111 (#1)'
+commit 'vendor: Update vendored sources to igraph/igraph@aaaa111 (#1)'
 B=$(git rev-parse HEAD)
 
 # `main` moves on.
-engine aaaa112 1.5.6
-commit 'vendor: Update vendored sources to duckdb/duckdb@aaaa112 (#2)'
+engine aaaa112 1.0.1
+commit 'vendor: Update vendored sources to igraph/igraph@aaaa112 (#2)'
 echo 'foo <- function() 2' > R/foo.R
 commit 'fix: An R-side fix on main (#3)'
 P=$(git rev-parse HEAD)
@@ -127,8 +128,8 @@ echo 'tool v2' > scripts/tool.sh
 commit 'ci: A tooling change (#4)'
 echo 'tool v3' > scripts/tool.sh
 commit 'ci: Another tooling change (#5)'
-desc duckdb 1.5.6.9001.7
-echo '# duckdb 1.5.6.9001.7' > NEWS.md
+desc igraph 1.5.6.9001.7
+echo '# igraph 1.5.6.9001.7' > NEWS.md
 commit 'fledge: Bump version to 1.5.6.9001.7 (#6)'
 echo 'readme on main' > README.md
 commit 'docs: The README main renders today (#7)'
@@ -138,26 +139,26 @@ git push -q origin main
 
 # The series: three seed commits on B, as flavor.sh and series-forward write them.
 git checkout -q -b s "$B"
-echo 'rename duckdb.2.0.dev duckdb_2_0_dev' > scripts/flavor.patch
-commit 'chore: Update flavor patch to duckdb.2.0.dev'
-echo 'pkg <- "duckdb.2.0.dev"' > R/package.R
-desc duckdb.2.0.dev 1.5.5.9000
+echo 'rename igraph.2.0.dev igraph_2_0_dev' > scripts/flavor.patch
+commit 'chore: Update flavor patch to igraph.2.0.dev'
+echo 'pkg <- "igraph.2.0.dev"' > R/package.R
+desc igraph.2.0.dev 1.5.5.9000
 commit 'chore: Update version to 2.0.dev'
-desc duckdb.2.0.dev 1.99.99.9000.0
+desc igraph.2.0.dev 1.99.99.9000.0
 commit 'chore: Add fifth version component'
 
-engine bbbb222 1.99.99-dev1
+engine bbbb222 1.0.1-1-gbbbb222
 echo 'glue 2, adapted to bbbb222' > src/glue.cpp
 echo 'test 2, as bbbb222 answers' > tests/testthat/test-foo.R
-desc duckdb.2.0.dev 1.99.99.9000.1
-commit 'vendor: Update vendored sources to duckdb/duckdb@bbbb222'
+desc igraph.2.0.dev 1.99.99.9000.1
+commit 'vendor: Update vendored sources to igraph/igraph@bbbb222'
 git cherry-pick -x "$P" >/dev/null
 echo 'tool v2' > scripts/tool.sh
 commit 'chore(series): Sync tooling with main'
-engine cccc333 1.99.99-dev2
+engine cccc333 1.0.1-2-gcccc333
 printf 'a\nb v2\nc\n' > tests/testthat/test-bar.R
-desc duckdb.2.0.dev 1.99.99.9000.2
-commit 'vendor: Update vendored sources to duckdb/duckdb@cccc333'
+desc igraph.2.0.dev 1.99.99.9000.2
+commit 'vendor: Update vendored sources to igraph/igraph@cccc333'
 # The port of `main`'s test change meets the line cccc333 adapted, and is
 # resolved by hand, as stage 4 resolves one.
 git cherry-pick -x "$Q" >/dev/null 2>&1 || true
@@ -166,10 +167,10 @@ git add tests/testthat/test-bar.R
 GIT_EDITOR=true git cherry-pick --continue >/dev/null
 echo 'tool v3' > scripts/tool.sh
 commit 'chore(series): Sync tooling with main'
-engine dddd444 1.99.99-dev3
+engine dddd444 1.0.1-3-gdddd444
 echo 'test 3, as dddd444 answers' > tests/testthat/test-foo.R
-desc duckdb.2.0.dev 1.99.99.9000.3
-commit 'vendor: Update vendored sources to duckdb/duckdb@dddd444'
+desc igraph.2.0.dev 1.99.99.9000.3
+commit 'vendor: Update vendored sources to igraph/igraph@dddd444'
 git push -q origin s:refs/heads/v2.0-x-fwd-dev
 git checkout -q main
 
@@ -221,12 +222,13 @@ is "the versions count this chain" \
   "$(for c in $(git rev-list --reverse "$M..$TIP"); do
        git show "$c:DESCRIPTION" | sed -n 's/^Version: //p'; done | tr '\n' ' ')" \
   "1.99.99.9000.1 1.99.99.9000.2 1.99.99.9000.3 "
-is "the package is main's name" "$(git show "$TIP:DESCRIPTION" | sed -n 's/^Package: //p')" duckdb
-is "and so is the R code the flavor renames" "$(git show "$TIP:R/package.R")" 'pkg <- "duckdb"'
+is "the package is main's name" "$(git show "$TIP:DESCRIPTION" | sed -n 's/^Package: //p')" igraph
+is "and so is the R code the flavor renames" "$(git show "$TIP:R/package.R")" 'pkg <- "igraph"'
 
 FIRST=$(git rev-parse "$TIP~2")
-is "the rewind took the strand whole" "$(git show "$FIRST:src/duckdb/engine.cpp")" "engine bbbb222"
-is "R/version.R with it" "$(git show "$FIRST:R/version.R")" 'duckdb_version <- "1.99.99-dev1"'
+is "the rewind took the strand whole" "$(git show "$FIRST:src/vendor/cigraph/engine.c")" "engine bbbb222"
+is "src/vendor/igraph_version.h with it" "$(git show "$FIRST:src/vendor/igraph_version.h")" \
+  '#define IGRAPH_VERSION "1.0.1-1-gbbbb222"'
 is "and the glue it folded" "$(git show "$FIRST:src/glue.cpp")" "glue 2, adapted to bbbb222"
 is "and the test fix" "$(git show "$FIRST:tests/testthat/test-foo.R")" "test 2, as bbbb222 answers"
 is "main's R-side fix is there from the start" "$(git show "$FIRST:R/foo.R")" 'foo <- function() 2'
@@ -314,12 +316,12 @@ git fetch -q upstream v2.0-x-land-review
 REV=$(git rev-parse upstream/v2.0-x-land-review)
 is "it stands on main" "$(git rev-parse "$REV~4")" "$M"
 is "its first commit removes every workflow" "$(git ls-tree -r --name-only "$REV~3" -- .github/workflows | wc -l)" 0
-is "the engine is main's" "$(git show "$REV:src/duckdb/engine.cpp")" "engine aaaa112"
+is "the engine is main's" "$(git show "$REV:src/vendor/cigraph/engine.c")" "engine aaaa112"
 is "and so is the version" "$(git show "$REV:DESCRIPTION" | sed -n 's/^Version: //p')" "1.5.6.9001.7"
 is "everything else is the landing's" \
-  "$(git diff --name-only "$REV" "$TIP" -- . ':(exclude)src/duckdb' ':(exclude)R/version.R' \
+  "$(git diff --name-only "$REV" "$TIP" -- . ':(exclude)src/vendor/cigraph' ':(exclude)src/vendor/igraph_version.h' \
     ':(exclude)DESCRIPTION' ':(exclude).github/workflows')" ""
-is "no subject reads as a vendor commit" "$(git log --format=%s "$M..$REV" | grep -c 'duckdb/duckdb@' || true)" 0
+is "no subject reads as a vendor commit" "$(git log --format=%s "$M..$REV" | grep -c '/igraph@' || true)" 0
 is "each names the landing commit it halves" \
   "$(git log -1 --format=%B "$REV" | sed -n 's/^Landing-commit: //p')" "$TIP"
 sleep 1 # a date not pinned would differ by now
@@ -359,9 +361,9 @@ has "redone, the landing is the series' again" "$out" "v2.0-x-land-dev: already 
 
 # The series vendors one more commit while the build waits.
 git checkout -q s
-engine eeee555 1.99.99-dev4
-desc duckdb.2.0.dev 1.99.99.9000.4
-commit 'vendor: Update vendored sources to duckdb/duckdb@eeee555'
+engine eeee555 1.0.1-4-geeee555
+desc igraph.2.0.dev 1.99.99.9000.4
+commit 'vendor: Update vendored sources to igraph/igraph@eeee555'
 git push -q origin s:refs/heads/v2.0-x-fwd-dev
 git checkout -q main
 scripts/series-rc.sh v2.0-x-fwd --push >/dev/null 2>&1
@@ -424,7 +426,7 @@ out=$(scripts/series-land.sh v2.0-x-fwd --review --landing v2.0-x-land-v2 --suff
 has "an iteration gets a review branch of its own" "$out" "v2.0-x-land-review-v2 ->"
 has "and a title that names it" "$out" "the R side of the v2.0-x landing, v2"
 git fetch -q upstream v2.0-x-land-review-v2
-R1=$(git log --format=%H -F --grep='The R side of duckdb/duckdb bbbb222' upstream/v2.0-x-land-review-v2)
+R1=$(git log --format=%H -F --grep='The R side of igraph/igraph bbbb222' upstream/v2.0-x-land-review-v2)
 is "with the folded fix in the commit that introduced it" \
   "$(git show "$R1:src/glue.cpp")" 'glue 2, adapted to bbbb222, and fixed'
 
@@ -443,10 +445,10 @@ LAND_BEFORE=$LTIP
 echo
 echo "== a landing that stops a test its base runs is not pushed"
 git checkout -q s
-engine ffff666 1.99.99-dev5
+engine ffff666 1.0.1-5-gffff666
 git rm -q tests/testthat/test-bar.R
-desc duckdb.2.0.dev 1.99.99.9000.5
-commit 'vendor: Update vendored sources to duckdb/duckdb@ffff666'
+desc igraph.2.0.dev 1.99.99.9000.5
+commit 'vendor: Update vendored sources to igraph/igraph@ffff666'
 git push -q origin s:refs/heads/v2.0-x-fwd-dev
 git checkout -q main
 scripts/series-rc.sh v2.0-x-fwd --push >/dev/null 2>&1
@@ -454,7 +456,7 @@ out=$(scripts/series-land.sh v2.0-x-fwd --no-check-glue --push 2>&1) && st=0 || 
 [ -z "${KEEP:-}" ] || echo "$out"
 is "the build is refused" "$st" 1
 has "the report names the test" "$out" "deleted   tests/testthat/test-bar.R"
-has "and the commit that stopped it" "$out" "duckdb/duckdb@ffff666"
+has "and the commit that stopped it" "$out" "igraph/igraph@ffff666"
 hasnt "though the series lacks it too" "$out" "DIVERGED"
 has "and nothing is pushed" "$out" "Nothing was pushed"
 git fetch -q origin

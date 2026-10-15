@@ -13,14 +13,14 @@
 # says why.
 #
 # Usage:
-#   r-universe-check.sh [<package>...]    # default: every duckdb-r package
+#   r-universe-check.sh [<package>...]    # default: every rigraph package
 #   r-universe-check.sh --log <job-id>    # the full job log, to stdout
 #   RUNIVERSE="<name>..." r-universe-check.sh  # other universes
 #
 # Four access facts, each paid for once (2026-08-03, 2026-08-18):
 #
 #   * **The greens are published in more than one universe**, so reading one of
-#     them answers for half the series. `duckdb.r-universe.dev` builds the base
+#     them answers for half the series. `igraph.r-universe.dev` builds the base
 #     series' greens, `krlmlr.r-universe.dev` builds the forward (`-fwd`) ones,
 #     and a default covering only the first reports "all targets OK" while a
 #     `-fwd-green` is failing (`main-fwd-green` bf48f2a8f, two macOS x86_64
@@ -28,7 +28,7 @@
 #     takes a space-separated list to narrow or extend that. A universe holds
 #     packages from other repositories too -- `krlmlr` publishes a dozen -- so
 #     the default package list is filtered to those whose `_upstream` is a
-#     `duckdb-r`; naming packages explicitly overrides the filter.
+#     `rigraph`; naming packages explicitly overrides the filter.
 #   * The `/builds` dashboard answers 403 to some fetchers, and the apex
 #     `r-universe.dev` may be unreachable where the per-universe subdomain is
 #     not. Everything below is on `https://<universe>.r-universe.dev`, which
@@ -48,7 +48,7 @@
 
 set -euo pipefail
 
-read -r -a universes <<<"${RUNIVERSE:-duckdb krlmlr}"
+read -r -a universes <<<"${RUNIVERSE:-igraph krlmlr}"
 
 fetch() { curl -fsSL --retry 3 --max-time 120 "$1"; }
 
@@ -100,7 +100,7 @@ for universe in "${universes[@]}"; do
     pkgs=("${wanted[@]}")
   else
     mapfile -t pkgs < <(
-      jq -r '.[] | select(._upstream | test("/duckdb-r$")) | .Package' <<<"$packages"
+      jq -r '.[] | select(._upstream | test("/rigraph$")) | .Package' <<<"$packages"
     )
   fi
 

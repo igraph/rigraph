@@ -3,12 +3,11 @@
 #
 # The contract is in handbook/operations/vendoring/series-loop/README.md, and
 # it exists because the two arguments a cutover takes are a remote of this
-# repository and a path to a duckdb/duckdb checkout on disk. While both were
-# positional, passing one where the other belonged reported
-# `coverage would regress`
-# (handbook/operations/vendoring/pipeline/README.md) -- a wrong answer about the
-# refs for what was a typo in an argument. Names cannot be swapped, so they are
-# names now; this keeps them that way.
+# repository and a path to an upstream checkout on disk. While both were
+# positional in duckdb-r, passing one where the other belonged reported
+# `coverage would regress` -- a wrong answer about the refs for what was a typo
+# in an argument. Names cannot be swapped, so they are names now; this keeps
+# them that way.
 #
 # Every check runs before any script touches git, so the suite needs no
 # repository, no network and no fixtures. That is also what makes it worth
@@ -68,51 +67,33 @@ out() { # <script> <args...> -> first line of stdout; the usage goes there
 # series-forward-build.sh and series-tests.sh name two refs rather than a series,
 # which is why they take no --remote; the option spelling and the exit status
 # are still shared.
+# The list is the series scripts this repository has: the port from
+# duckdb/duckdb-r (.series-source) left out series-alpha.sh, series-converge.sh,
+# series-cut.sh, series-cutover.sh, series-glue.sh, series-learned.sh and
+# series-prune.sh, and the standalone preview-prefix.sh and reflavor.sh, so
+# their checks are gone with them.
 scripts=(
   series-advance.sh
-  series-alpha.sh
   series-check.sh
-  series-converge.sh
-  series-cut.sh
-  series-cutover.sh
   series-forward-build.sh
-  series-glue.sh
   series-land.sh
-  series-learned.sh
   series-patch-sync.sh
   series-port.sh
-  series-prune.sh
   series-rc.sh
   series-tests.sh
 )
-# preview-prefix.sh and reflavor.sh act on the worktree they are run in and name
-# no series, so they take neither --remote nor --upstream; the usage contract and
-# the exit statuses are still shared.
-standalone_scripts=(preview-prefix.sh reflavor.sh)
 remote_scripts=(
   series-advance.sh
-  series-alpha.sh
   series-check.sh
-  series-converge.sh
-  series-cut.sh
-  series-cutover.sh
-  series-glue.sh
   series-land.sh
-  series-learned.sh
   series-patch-sync.sh
   series-port.sh
-  series-prune.sh
   series-rc.sh
 )
-upstream_scripts=(series-check.sh series-cut.sh series-cutover.sh)
-canonical_scripts=(series-advance.sh series-check.sh series-cutover.sh series-land.sh series-port.sh series-prune.sh)
+upstream_scripts=(series-check.sh)
+canonical_scripts=(series-advance.sh series-check.sh series-land.sh series-port.sh)
 
 echo "== -h and --help print the usage and exit 0"
-for s in "${standalone_scripts[@]}"; do
-  is "$s -h"     "$(rc "$s" -h)" 0
-  is "$s --help" "$(rc "$s" --help)" 0
-  is "$s --bogus" "$(rc "$s" --bogus)" 2
-done
 for s in "${scripts[@]}"; do
   is "$s -h"       "$(rc "$s" -h)" 0
   is "$s --help"   "$(rc "$s" --help)" 0
@@ -141,23 +122,17 @@ is "series-forward-build.sh --graft-from (bare)" "$(rc series-forward-build.sh a
 is "series-forward-build.sh --prefix (bare)"     "$(rc series-forward-build.sh a b --prefix)" 2
 is "series-forward-build.sh --buffer (bare)"     "$(rc series-forward-build.sh a b --buffer)" 2
 is "series-land.sh --placed (bare)"              "$(rc series-land.sh s --placed)" 2
-is "series-learned.sh --since (bare)"            "$(rc series-learned.sh s --since)" 2
-is "series-cutover.sh --out (bare)"              "$(rc series-cutover.sh s --out)" 2
 is "series-land.sh --status --review"            "$(rc series-land.sh s --status --review)" 2
 is "series-land.sh --base (bare)"                "$(rc series-land.sh s --base)" 2
 is "series-land.sh --source (bare)"              "$(rc series-land.sh s --source)" 2
 is "series-land.sh --landing (bare)"             "$(rc series-land.sh s --landing)" 2
 is "series-land.sh --suffix (bare)"              "$(rc series-land.sh s --suffix)" 2
-is "series-alpha.sh --alpha (bare)"              "$(rc series-alpha.sh s --alpha)" 2
 
 echo
 echo "== the remote and the upstream clone are named, never positional"
 # The regression this suite is for: these are the old spellings, and taking them
 # quietly is how a remote name reached `git -C`.
-is "series-cutover.sh <S> <remote> <path>" "$(rc series-cutover.sh s origin /tmp)" 2
-is "series-converge.sh <S> <remote>"       "$(rc series-converge.sh s origin)" 2
 is "series-advance.sh <S> <chunk>"         "$(rc series-advance.sh s 25)" 2
-is "series-glue.sh <S> <extra>"            "$(rc series-glue.sh s x)" 2
 is "series-patch-sync.sh <S> <extra>"      "$(rc series-patch-sync.sh s x)" 2
 is "series-tests.sh <base>"                "$(rc series-tests.sh a)" 2
 is "series-tests.sh <base> <tip> <extra>"  "$(rc series-tests.sh a b c)" 2
@@ -187,7 +162,7 @@ is "series-port.sh --dev-note without --apply" \
 
 echo
 echo "== a missing series is a usage error too"
-for s in series-advance.sh series-alpha.sh series-converge.sh series-cutover.sh series-glue.sh series-land.sh series-patch-sync.sh series-port.sh series-prune.sh; do
+for s in series-advance.sh series-land.sh series-patch-sync.sh series-port.sh; do
   is "$s with no series" "$(rc "$s")" 2
 done
 # series-check.sh is the one whose series list is optional: it discovers them.

@@ -27,9 +27,10 @@
 # made later as a commit of its own travels with neither.
 #
 # A series whose buffer vendored a release before upstream tagged it gets a
-# LATE TAG line: the commit stamps a `-dev` version, and the release process
-# cannot cut from it. Whether vendor-one.sh re-stamps it by itself or the
-# release branch has to is scripts/VENDORING.md's, "A tag upstream pushed late".
+# LATE TAG line: the commit stamps the previous release's version, and a
+# landing must not carry it onto `main` as it is. Whether vendor-one.sh re-stamps it by itself or the
+# landing has to is .claude/skills/series-loop/references/1-vendor.md's,
+# "A tag upstream pushed late".
 #
 # Classification is by positive evidence only (.claude/skills/series-loop/SKILL.md);
 # "Job is waiting for a hosted runner" appears in every log and means nothing.
@@ -45,7 +46,7 @@
 # assume; that is a change to make when a firing needs it, not before.
 #
 # The `harvest:` line below is the store's tip, and it is no longer bounded by a
-# schedule: the sweep is `scripts/rcc-logs.sh` run by hand, so what keeps the
+# schedule: the sweep, duckdb-r's `rcc-logs.sh`, is not ported here, so what keeps the
 # tip moving is the legs publishing as they decide commits. An old timestamp
 # therefore means "no leg has decided anything since", which on a quiet series is
 # normal and not a fault. Only a record the sweep alone could supply -- a run
@@ -80,7 +81,7 @@
 #
 # Usage: series-check.sh [<series>...] [--remote <name>] [--upstream <path>]
 #   series-check.sh                                 # discover all from refs
-#   series-check.sh --upstream ../../../duckdb      # fork point too, not just names
+#   series-check.sh --upstream ../../../igraph      # fork point too, not just names
 #
 # --remote, --upstream and --canonical are spelled the same in every
 # scripts/series-*.sh; see the shared contract in
@@ -324,9 +325,9 @@ line_rank() { # v<major>.<minor>-<codename>[-fwd] -> integer
 }
 
 # The flavor a line would publish under, by the rule the declaration follows:
-# `v2.1-<codename>` is served as `duckdb.2.1.dev`. Derived rather than read, so
+# `v2.1-<codename>` is served as `igraph.2.1.dev`. Derived rather than read, so
 # that a line with no entry yet still has a name to report.
-flavor_of() { # v<major>.<minor>-<codename> -> duckdb.<major>.<minor>.dev
+flavor_of() { # v<major>.<minor>-<codename> -> igraph.<major>.<minor>.dev
   local v=${1#v}
   echo "$series_package.${v%%-*}.dev"
 }
@@ -374,7 +375,8 @@ upstream_tags() {
 }
 
 # A release the buffer vendored before upstream tagged it
-# (scripts/VENDORING.md, "A tag upstream pushed late"). The buffer's tip still
+# (.claude/skills/series-loop/references/1-vendor.md, "A tag upstream pushed
+# late"). The buffer's tip still
 # stamps `X.Y.Z-devN` although `vX.Y.Z` exists, and the tagged commit is one it
 # vendored with no `(tag vX.Y.Z)` marker. The version names the one tag worth
 # asking about: a tag the buffer has not reached yet is the walk's to stamp, and
@@ -629,20 +631,20 @@ for S in "${series[@]}"; do
   fi
 
   # Beside the verdict, like the cutover below: a buffer can be green and idle
-  # and still hold a release under a `-dev` stamp, which the release process
-  # (handbook/operations/releases/process/) cannot cut from.
+  # and still hold a release under a stamp that names the previous one, which a
+  # landing (.claude/skills/series-land/SKILL.md) must not carry onto `main`.
   late=$(late_tag "$build")
   if [ -n "$late" ]; then
     read -r lt_tag lt_sha lt_commit <<<"$late"
     echo "  LATE TAG  upstream tagged $lt_tag on $series_upstream_repo@${lt_sha:0:10} after $S-build"
-    echo "            vendored it as $(git rev-parse --short "$lt_commit"), which stamps a -dev version."
+    echo "            vendored it as $(git rev-parse --short "$lt_commit"), which stamps the previous release's version."
     if [ "$(series_vendored_sha "$build")" = "$lt_sha" ]; then
       echo "            It is the buffer's newest vendor commit, so stage 1 re-stamps it;"
       echo "            fetch the upstream clone's tags first (scripts/vendor-one.sh)."
     else
       above=$(git log --format=%s "$lt_commit..$build" -- "$series_scan_dir" | grep -cE "$series_marker_ere" || true)
       echo "            $above vendor commit(s) sit above it, so no run re-stamps it by itself:"
-      echo "            scripts/VENDORING.md, \"A tag upstream pushed late\"."
+      echo "            .claude/skills/series-loop/references/1-vendor.md, \"A tag upstream pushed late\"."
     fi
   fi
 

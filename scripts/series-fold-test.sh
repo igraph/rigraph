@@ -54,18 +54,18 @@ git config user.email test@example.invalid
 git config rerere.enabled true
 export GIT_COMMITTER_DATE='1700000000 +0000' GIT_AUTHOR_DATE='1700000000 +0000'
 
-mkdir -p src/duckdb R
+mkdir -p src/vendor/cigraph R
 printf 'one\ntwo\nthree\nfour\nfive\n' > src/glue.cpp
-echo 0 > src/duckdb/engine
+echo 0 > src/vendor/cigraph/engine
 echo 'f <- function() 1' > R/f.R
 git add -A
 git commit -q -m 'main'
 main=$(git rev-parse HEAD)
 
 for i in 1 2 3 4 5; do
-  echo "$i" > src/duckdb/engine
+  echo "$i" > src/vendor/cigraph/engine
   [ "$i" != 3 ] || sed -i 's/^four$/four (adapted)/' src/glue.cpp
-  GIT_AUTHOR_DATE="$((1700000000 + i * 100)) +0000" git commit -q -a -m "vendor: Update vendored sources to duckdb/duckdb@00$i
+  GIT_AUTHOR_DATE="$((1700000000 + i * 100)) +0000" git commit -q -a -m "vendor: Update vendored sources to igraph/igraph@00$i
 
 R-side fix
 ----------
@@ -123,7 +123,7 @@ is "vendor 3 carries the glue fix beside its own change" "$(git show "$new~2:src
   "two (fixed)|four (adapted)|"
 is "vendor 5 carries both" "$(git show "$new:src/glue.cpp" | sed -n 2p) $(git show "$new:R/f.R")" \
   "two (fixed) f <- function() 2"
-is "the engine is each commit's own" "$(for i in 4 3 2 1 0; do git show "$new~$i:src/duckdb/engine"; done | tr '\n' ' ')" "1 2 3 4 5 "
+is "the engine is each commit's own" "$(for i in 4 3 2 1 0; do git show "$new~$i:src/vendor/cigraph/engine"; done | tr '\n' ' ')" "1 2 3 4 5 "
 
 echo "=== 4. dates stay the landing's, so a rerun mints the same SHAs"
 is "every committer date is main's" "$(git log --format=%cd --date=raw "$main..$new" | sort -u)" "1700000000 +0000"

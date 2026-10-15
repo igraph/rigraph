@@ -57,14 +57,16 @@ cd "$WORK"
 git config user.name Test
 git config user.email test@example.invalid
 git config commit.gpgsign false
-mkdir -p R tests/testthat/_snaps
+mkdir -p src/vendor tests/testthat/_snaps
 
-engine() { echo "duckdb_version <- \"$1\"" > R/version.R; }
+# The engine as igraph's CMake writes it, `git describe --tags`: a release, or
+# `X.Y.Z-N-g<sha>` for N commits past one, which follows `X.Y.Z`.
+engine() { echo "#define IGRAPH_VERSION \"$1\"" > src/vendor/igraph_version.h; }
 block() { printf 'test_that("%s", {\n%b  expect_true(TRUE)\n})\n\n' "$1" "${2:-}"; }
 commit() { git add -A; git commit -qm "$1"; }
 T=tests/testthat
 
-engine 1.5.6
+engine 1.0.1
 { block "a one"; block "a two"; } > $T/test-a.R
 block "b one" > $T/test-b.R
 { block "c one"; block "c two"; } > $T/test-c.R
@@ -73,31 +75,31 @@ printf 'test_that("e one", {\n  x <- "kept"\n  y <- "rewound and restored"\n})\n
 block "f one" > $T/test-f.R
 block "g one" > $T/test-g.R
 printf '# a one\n\n    Code\n      1\n\n# a two\n\n    Code\n      2\n\n' > $T/_snaps/a.md
-commit 'vendor: Update vendored sources to duckdb/duckdb@0000000 (#1)'
+commit 'vendor: Update vendored sources to igraph/igraph@0000000 (#1)'
 
 git checkout -q -b s
 # A rewind: an engine older than `main`'s, which deletes, rewrites and gates.
-engine 1.5.0-dev100
+engine 1.0.0-100-g1111111
 git rm -q $T/test-b.R
 block "c one" > $T/test-c.R
 { block "d one" '  bad <- c("bit", NULL)\n'; } > $T/test-d.R
 printf 'test_that("e one", {\n  x <- "kept"\n})\n' > $T/test-e.R
-{ block "a one" '  skip_if_engine_before("1.6.0-dev10", "a behaviour")\n'; block "a two"; } > $T/test-a.R
+{ block "a one" '  skip_if_engine_before("1.0.1-10-gaaaaaaa", "a behaviour")\n'; block "a two"; } > $T/test-a.R
 printf '# a one\n\n    Code\n      1\n\n' > $T/_snaps/a.md
-commit 'vendor: Update vendored sources to duckdb/duckdb@1111111'
+commit 'vendor: Update vendored sources to igraph/igraph@1111111'
 V1=$(git rev-parse HEAD)
 
-engine 1.6.0-dev5
-{ block "a one" '  skip_if_engine_before("1.6.0-dev10", "a behaviour")\n'
+engine 1.0.1-5-g2222222
+{ block "a one" '  skip_if_engine_before("1.0.1-10-gaaaaaaa", "a behaviour")\n'
   block "a two" '  skip_on_cran()\n'
   block "a three" '  skip_on_os("windows")\n'; } > $T/test-a.R
 { echo 'skip_if_not(FALSE)'; block "f one"; } > $T/test-f.R
-commit 'vendor: Update vendored sources to duckdb/duckdb@2222222'
+commit 'vendor: Update vendored sources to igraph/igraph@2222222'
 V2=$(git rev-parse HEAD)
 
-engine 1.6.0-dev20
+engine 1.0.1-20-g3333333
 printf 'test_that("e one", {\n  x <- "changed later"\n  y <- "rewound and restored"\n})\n' > $T/test-e.R
-commit 'vendor: Update vendored sources to duckdb/duckdb@3333333'
+commit 'vendor: Update vendored sources to igraph/igraph@3333333'
 V3=$(git rev-parse HEAD)
 
 git rm -q $T/test-g.R
@@ -125,8 +127,8 @@ has "a deleted snapshot entry is lost" "$out" "# a two"
 has "a skip in main's block is lost" "$out" '"a two" skip_on_cran()'
 has "a skip at the top of main's file is lost" "$out" "(top of file) skip_if_not(FALSE)"
 hasnt "a skip in a block the series added is not" "$out" 'skip_on_os'
-has "the deletion names its commit, as a rewind" "$out" "by $(short "$V1") duckdb/duckdb@1111111, 1.5.0-dev100, a rewind"
-has "the skip names its commit, not as a rewind" "$out" "by $(short "$V2") duckdb/duckdb@2222222, 1.6.0-dev5"
+has "the deletion names its commit, as a rewind" "$out" "by $(short "$V1") igraph/igraph@1111111, 1.0.0-100-g1111111, a rewind"
+has "the skip names its commit, not as a rewind" "$out" "by $(short "$V2") igraph/igraph@2222222, 1.0.1-5-g2222222"
 has "a commit of another kind is named too" "$out" "by $(short "$N1") fix: A commit that vendors nothing"
 has "and it counts them" "$out" "TESTS LOST: 8 test(s)"
 

@@ -4,7 +4,7 @@
 # freshly flavored seed on current `main` (.claude/skills/series-forward/SKILL.md).
 #
 # The replay is a cherry-pick, not a tree reconstruction. A vendor commit's diff
-# is exactly what vendoring changed -- `src/duckdb/`, the version bookkeeping,
+# is exactly what vendoring changed -- `src/vendor/`, the version bookkeeping,
 # and the glue that commit had to adapt -- so replaying the diffs takes the whole
 # of the new base for everything else, by construction: files `main` deleted stay
 # deleted, tooling `main` gained comes along, and glue born on a `-dev` branch
@@ -174,15 +174,15 @@ fi
 
 upstream_sha() { series_sha_of "$(git log -1 --format=%s "$1")"; }
 
-# The engine a tree vendors, as the tree itself records it (scripts/series-config.sh).
-# Read from the tree rather than from a subject because the commits that matter
-# here -- a seed, a graft -- vendor nothing and name no SHA.
+# The engine a commit vendors, as scripts/series-config.sh reads it: from the
+# subjects, because igraph's version stamp names no commit at a tag.
 engine() { series_engine_of "$1"; }
 
 # The vendored strand a rewinding pick takes whole (see rewind_pick): the
 # engine's tree, the patch stack applied to it, and the files generated from
-# nothing but that tree. The Makevars are generated as well, but from
-# `src/Makevars.in`, which is `main`'s, so they travel as a diff.
+# nothing but that tree (scripts/series-config.sh). The R/C interface and the
+# cpp11 registration are generated as well, but from `main`'s tools/stimulus/
+# and glue, so they travel as a diff.
 STRAND=("${series_strand[@]}")
 
 # The glue gate: the check vendor-one.sh runs after every vendor commit
@@ -242,7 +242,8 @@ glue_gate() { # <why>
 
 # What a resumed replay dedupes on: the upstream SHA, and the `(tag ...)` marker
 # beside it, because a late tag is re-stamped by a second vendor commit for the
-# same SHA (scripts/VENDORING.md) and the SHA alone would skip that one.
+# same SHA (.claude/skills/series-loop/references/1-vendor.md) and the SHA
+# alone would skip that one.
 upstream_key() { series_twin_key "$(git log -1 --format=%s "$1")"; }
 
 # `git cherry-pick -n` leaves no CHERRY_PICK_HEAD, so the in-flight pick is
@@ -380,8 +381,8 @@ conflict_stop() {
 # and the base series never had them at this commit; the strand stays equal to
 # the base buffer's, which is what the tree check after the replay reads.
 rewind_pick() { # <commit>
-  echo "rewind: $(git rev-parse --short "$1") lands on $(engine "$1"), from $(engine "$1~1");" \
-    "HEAD vendors $(engine HEAD), so the strand is taken whole"
+  echo "rewind: $(git rev-parse --short "$1") lands on $(series_stamped_version "$1"), from $(series_stamped_version "$1~1");" \
+    "HEAD vendors $(series_stamped_version HEAD), so the strand is taken whole"
   strand_pick "$1" "$1~1" "$1"
 }
 

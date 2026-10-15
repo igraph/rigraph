@@ -28,10 +28,11 @@
 # glue the buffer already carries from being applied twice.
 #
 # Two kinds are excluded, and neither is a judgement about the fix: the buffer's
-# own strand (`src/duckdb/`, `patch/` -- a forward regenerates the tree from its
-# own patches) and what vendoring regenerates (`R/version.R`,
-# `src/include/sources.mk`, the Makevars, the logos), which differs between any
-# two vendor runs of the same SHA and is noise wearing the shape of a fix.
+# own strand (the vendored tree and `patch/` -- a forward regenerates the tree
+# from its own patches) and what vendoring regenerates from it (the R/C interface,
+# the cpp11 registration, the source lists; scripts/series-config.sh names both),
+# which differs between any two vendor runs of the same SHA and is noise wearing
+# the shape of a fix.
 # Carried glue is reported as it goes, because glue the base `-dev` has and the
 # base `-build` lacks is buffer drift and wants mirroring there.
 #
@@ -266,7 +267,8 @@ esac
 
 # Equivalence is by vendored upstream SHA, the key the rest of the loop reads
 # state by, and by the `(tag ...)` marker beside it: a late tag is re-stamped by
-# a second vendor commit for the same SHA (scripts/VENDORING.md), and the carry
+# a second vendor commit for the same SHA
+# (.claude/skills/series-loop/references/1-vendor.md), and the carry
 # takes the twin's message, so a re-stamp twinned with the plain commit would
 # lose its marker (series_twin_key() in scripts/series-lib.sh). One walk,
 # because the alternative is a walk per buffer commit.
@@ -319,13 +321,14 @@ twin_of() { # <buffer commit> -> the base -dev commit for the same upstream SHA
 # Two kinds are excluded, and neither is a judgement about the fix:
 #
 #   * the buffer's own strand -- the vendored tree and the patch stack. A
-#     forward regenerates `src/duckdb/` from its own `patch/`, so a difference
+#     forward regenerates `src/vendor/` from its own `patch/`, so a difference
 #     there is about which patches the two branches had, not about a fix
 #     travelling. Missing compile fixes belong on the buffer, mirrored there.
-#   * what vendoring regenerates -- `R/version.R`, `src/include/sources.mk`,
-#     the Makevars, the logos under `man/figures/`. Those differ between any
-#     two vendor runs of the same upstream SHA, which is noise wearing the
-#     shape of a fix.
+#   * what vendoring regenerates -- `R/aaa-*.R`, `src/rinterface.c`,
+#     `src/cpp11.cpp`, `R/cpp11.R`, the `src/sources-*.mk` lists, and the
+#     version in `DESCRIPTION`. Those differ between any two vendor runs of the
+#     same upstream SHA, which is noise wearing the shape of a fix; a fix to
+#     the interface lives in `tools/stimulus/`, which carries.
 #
 # Tooling is stage 4's, ported from `main` rather than carried sideways.
 #

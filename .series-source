@@ -1,0 +1,121 @@
+# The series tooling ported from duckdb/duckdb-r: the state of the source this
+# port was taken from (its commit, that commit's date, and the day of the
+# check), and every ported file with the blob it was copied from.
+# A resync diffs each blob against the source's current copy of the file,
+# which works even after the source commit is squashed away.
+# The rigraph layer is everything that differs from the blob;
+# scripts/series-config.sh holds most of it.
+source: duckdb/duckdb-r
+url: https://github.com/duckdb/duckdb-r
+commit: 1d04d31cb75df08768c7cc57bd07b83f85d99b4a
+source-date: 2026-10-15
+checked: 2026-10-15
+ported:
+  - path: scripts/vendor-one.sh
+    blob: f76dac959af28a9236937f1933fe982c821262a1
+  - path: scripts/vendor-lib.sh
+    blob: 0f12c680eabce322c8547a32ae229d26a38e642a
+  - path: scripts/vendor.sh
+    blob: b31ca091322f720e4fa1dd4e675c606c8671912e
+  - path: scripts/setup-git.sh
+    blob: af4380b5dd51c9e9d77c84622774798c99af704f
+  - path: scripts/merge-version.sh
+    blob: 7a526fd1e0c8a01af2ddd7dd783064272c18b7b9
+  - path: scripts/series-config.sh
+    blob: 775f4f284246b1be30cc25292d8f441776ac016d
+  - path: scripts/series-lib.sh
+    blob: 91c958cb78958dda9b2cb273ec629f65c7ec425b
+  - path: scripts/series-check.sh
+    blob: 96ffd4dbc65384443954fcd8223b813bbe6753f3
+  - path: scripts/series-advance.sh
+    blob: 3c1ce26236f8c7ecee44e03d1a75cff28d0b1ced
+  - path: scripts/series-port.sh
+    blob: 75ee2717916f3d75d351badc49a2ae29bfd079e2
+  - path: scripts/series-patch-sync.sh
+    blob: 66943c281f39010481c40789c28a3ba5b54d19b0
+  - path: scripts/series-fold.sh
+    blob: 6dc93ae9c499b4580ac7cc61c6f0c49f6d6b780f
+  - path: scripts/series-tests.sh
+    blob: 7b79c75b6bd749f2e83b81dc352109759ef41525
+  - path: scripts/series-forward-build.sh
+    blob: 860f39a97156c7b370071fdf051c18a2572afc1e
+  - path: scripts/series-land.sh
+    blob: b40108022b6c34883a23a68a76931ef8d5f867e4
+  - path: scripts/series-rc.sh
+    blob: 57fb22389f706d1180fac8358f01be7351cd0474
+  - path: scripts/flavor.sh
+    blob: 5cca467d9a32cb6aa95422e2c17cda50b6462cf9
+  - path: scripts/flavor-package-name.R
+    blob: 7631d9fabdc686f3977cfad50dcf27e03718eeac
+  - path: scripts/r-universe-check.sh
+    blob: 1ad1aa2f8366be546a8f7568af5b1eb05795c551
+  - path: scripts/each-plan.sh
+    blob: d14c1a545d6ae77b951b0b573cfe5e51e73f94fa
+  - path: scripts/each-partition.py
+    blob: 3dc7782e5f7ec1272b589935b0c8f1c0548c61f4
+  - path: scripts/each-shard.sh
+    blob: 3fcdf642d5db8b26225b7b5738e78d3cfc5e7de2
+  - path: scripts/each-cost.py
+    blob: e9e63ea114d3bdc67098c7f186ff367d8436867d
+  - path: scripts/rcc-one.sh
+    blob: 0456063ecd55fed9dc9bd9874ec6ccc3bec21461
+  - path: scripts/rcc-lib.sh
+    blob: c82028c9d90b52bd51d37ddf36bf690188574c74
+  - path: scripts/rcc-decided.sh
+    blob: 7ae91eb627bbfb18369c7745cb5dd9ad28afbf74
+  - path: scripts/rcc-publish.sh
+    blob: 77ba7a372f4fdfbe870a48d8cf47e095bc68e9b3
+  - path: scripts/rcc-run-fields.jq
+    blob: bfecb5c215c6948ad4d7c510c70eee26ad2dd02f
+  - path: scripts/series.yaml
+    blob: ee609cd9f0dbe2b95df6facbb8dcf6e4ab5487ed
+  - path: scripts/series-args-test.sh
+    blob: 129190a261e379c9fd984aeebdb49be83ed93005
+  - path: scripts/series-lib-test.sh
+    blob: 78cf6c522e1649e6d23f36be23af147a42c29371
+  - path: scripts/series-advance-test.sh
+    blob: 71e6bfbefef76f0e30449b417f017e8578606953
+  - path: scripts/series-port-test.sh
+    blob: 209f4d6b6ceeaa5fa17b836af7c0b5e69639742e
+  - path: scripts/series-fold-test.sh
+    blob: a8744d3482aac70ca599e910b05d0d0b4ecb35ac
+  - path: scripts/series-tests-test.sh
+    blob: 0cea60bf1950a0ef955de5d6311616093857042c
+  - path: scripts/series-forward-build-test.sh
+    blob: f4ea832f031d70698073cb9f0321329ae4652747
+  - path: scripts/series-land-test.sh
+    blob: 7b06fd5c4094e384639f4515c2531d57e0b8d121
+  - path: scripts/rcc-store-test.sh
+    blob: ce2c5787a182151d5010f8d1c348bac815870991
+  - path: .github/workflows/each.yaml
+    blob: e2daae0d2909e434d4ae337c60c97a8fec0d0551
+  - path: .claude/skills/series-loop/SKILL.md
+    blob: 3411853664732608cca17467caeb69b3fc759d4c
+  - path: .claude/skills/series-loop/references/0-setup.md
+    blob: 85caf79824f073688a332ee0bd1dcdf34e804f69
+  - path: .claude/skills/series-loop/references/1-vendor.md
+    blob: eb4e1b747515fc678e41176ee53b3e97f4e2a992
+  - path: .claude/skills/series-loop/references/2-repair.md
+    blob: e2786cb54c55030521a8a1d2f9e9f71d60e73d4a
+  - path: .claude/skills/series-loop/references/3-advance.md
+    blob: c723362776321dd1cef76afa6c9c71b880ee1560
+  - path: .claude/skills/series-loop/references/4-port.md
+    blob: 138ba6a5c0d1cff711a47388f883012b39a2941c
+  - path: .claude/skills/series-loop/references/5-extend.md
+    blob: 87e35faaa339c9c372fd0e13392aacb9d48e6c4a
+  - path: .claude/skills/series-loop/references/7-tooling-prs.md
+    blob: 6a2b799bfc24444688165f9c1b71e7a74d48b3de
+  - path: .claude/skills/series-loop/references/report.md
+    blob: 8e42ce6441688543fb95d9c557f8436316035217
+  - path: .claude/skills/series-loop/references/retry.md
+    blob: 4e60c79201d7c0cbe6063415036d2e668bc516c0
+  - path: .claude/skills/series-loop/references/series.md
+    blob: 4e72ed2dcdd051e135024903cc93f8372df7e82e
+  - path: .claude/skills/series-loop/references/traps.md
+    blob: dba6f4612eaad77b3921dbac082c2b9c0cf12e44
+  - path: .claude/skills/series-open/SKILL.md
+    blob: adcac2dca8ddeef37807366dcd22348da4c88be5
+  - path: .claude/skills/series-rc/SKILL.md
+    blob: a0de35e67b98631d9e5dfd0c15eaba710cb873a0
+  - path: .claude/skills/series-land/SKILL.md
+    blob: 47103f5491d076ad5b4f9dab2caa74f50e80c704

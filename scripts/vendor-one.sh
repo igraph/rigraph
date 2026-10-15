@@ -1,7 +1,19 @@
 #!/bin/bash
-# Vendors DuckDB sources commit-by-commit from the upstream repository.
+# Vendors igraph sources commit-by-commit from the upstream repository.
 # Used by the series loop (.claude/skills/series-loop/SKILL.md).
-# See scripts/VENDORING.md for complete documentation
+#
+# Usage: scripts/vendor-one.sh [--commits N] [--no-check-glue] [<upstream clone>]
+#
+# The upstream clone must reach both stretches of the line
+# (scripts/series-config.sh): the replay branch of krlmlr/igraph, and
+# igraph/igraph with its tags. Its HEAD names how far to walk igraph/igraph;
+# on the replay the walk ends at the replay tip whatever HEAD says.
+#
+# Exit status: 0 done or nothing to do, 1 an error, 3 the glue does not compile
+# against the vendored headers, 4 a patch neither applies nor reverses,
+# 5 the clone's HEAD is on another upstream line, 6 the clone cannot say what
+# version it is, 7 the R/C interface could not be generated, 8 the glue check
+# could not run.
 #
 # https://unix.stackexchange.com/a/654932/19205
 # Using bash for -o pipefail
@@ -12,7 +24,7 @@ set -o pipefail
 
 # The checkout to vendor into, so the series loop can run `main`'s copy of this
 # script against another worktree. Only *this* script comes from `main` that
-# way: everything it invokes by relative path -- `scripts/rconfigure.py`,
+# way: everything it invokes by relative path -- `Makefile-cigraph`,
 # `patch/*.patch`, `./configure` -- stays the target tree's.
 # The engine's names and the glue gate come from this script's own tree, as the
 # script does, before the change of directory below.
@@ -74,100 +86,43 @@ upstream_dir=${project}
 if [ ! -d "$upstream_dir" ]; then
   git clone "$upstream_basedir" "$upstream_dir"
 elif [ "$upstream_basedir" != "$upstream_dir" ]; then
-  # Update existing clone, and put its HEAD back where the source's is.
-  #
-  # `start` below is the clone's HEAD, and the walk checks out every commit it
-  # vendors -- so a clone this script left behind points at the last commit it
-  # touched, not at the tip it was cloned from. The glue gate exits with the
-  # clone deliberately kept ("rerun this script"), and that rerun read the
-  # stopped-on commit as `start`: an empty range, "No more commits to vendor",
-  # and a walk silently truncated at the commit the gate stopped on. Observed on
-  # the 2026-08-02 main-build rebuild, which reported done with 19 upstream
-  # commits still unvendored.
-  #
+  # Update the existing clone, and put its HEAD back where the source's is.
+  # The walk checks out every commit it vendors, so a clone this script left
+  # behind points at the last commit it touched; a rerun that read that as the
+  # tip to walk to would stop early and report done.
   # The source is the authority on what to vendor up to, so re-read it rather
-  # than trusting a HEAD this script itself moved. A detached source HEAD (the
-  # series loop hands us a worktree) has no branch to name, which is why this
-  # resolves a SHA rather than checking out a ref.
+  # than trusting a HEAD this script itself moved.
   git -C "$upstream_dir" fetch origin
   git -C "$upstream_dir" checkout -q --detach \
     "$(git -C "$upstream_basedir" rev-parse --verify HEAD)"
 fi
 
 # Make the vendored tree depend on the upstream commit and nothing else.
-# `DUCKDB_SOURCE_ID` in pragma_version.cpp comes from upstream's
-# `git describe --tags --long`, run inside this clone, and git auto-sizes that
-# abbreviation from the number of objects the repository holds -- so the same
-# commit vendored twice, from clones that have grown apart, writes two different
-# strings and two different trees, and re-vendoring a commit to reproduce a
-# failure does not reproduce the tree. Set on every run, not only on the clone,
-# because the clone may be one someone else made (CI checks upstream out here).
-# Ten is DuckDB's own length: its CMake truncates the id to ten characters in
-# the built library, which is what ./configure's commit-match guard compares
-# against.
-git -C "$upstream_dir" config core.abbrev 10
+# igraph's CMake writes `git describe --tags` into igraph_version.h, and git
+# sizes the abbreviated commit id in it from the number of objects the clone
+# holds, so the same commit vendored from two clones would differ.
+git -C "$upstream_dir" config core.abbrev 9
 
-# The version stamp comes from the same clone, and a clone without versioning
-# tags stamps a placeholder instead of failing. Upstream's
-# `package_build.get_git_describe()` -- which rconfigure.py reaches through
-# `build_package()` -- catches the `git describe` failure and answers
-# `v0.0.0-0-gdeadbeeff`, so `DUCKDB_VERSION` becomes `v0.0.0` and the tree
-# builds, installs and passes the glue gate. What it does not do is load an
-# extension: every download then asks
-# extensions.duckdb.org/v0.0.0/<platform>/<name>.duckdb_extension.gz and gets
-# an HTTP 404, which surfaces a whole CI cycle later as a test failure that
-# looks like the engine's.
-#
-# A shallow clone is the condition the placeholder below was only ever a proxy
-# for, and it is the half that still holds on every branch: refuse it directly.
-# The clone is the tree the version is read from, so ask it rather than the
-# source -- `git clone` of a shallow repository is shallow, and CI checks
-# upstream out in `$upstream_dir` itself.
+# The version comes from `git describe --tags` in the clone, which answers from
+# the history and the tags it can reach; a shallow clone answers wrongly.
 if [ "$(git -C "$upstream_dir" rev-parse --is-shallow-repository)" = true ]; then
   echo ""
   echo "=== SHALLOW UPSTREAM CLONE ==="
-  echo "$upstream_dir, cloned from $upstream_basedir, is shallow, so neither"
-  echo "'git describe --tags' nor 'git rev-list --count HEAD' answers what the"
-  echo "full history would, and every commit vendored from it would carry a"
-  echo "DUCKDB_VERSION no extension repository has a directory for."
+  echo "$upstream_dir, cloned from $upstream_basedir, is shallow, so"
+  echo "'git describe --tags' does not answer what the full history would, and"
+  echo "every commit vendored from it would carry a wrong IGRAPH_VERSION."
   echo "  git -C $upstream_basedir fetch --unshallow origin"
   echo "  git -C $upstream_basedir fetch --tags origin"
   echo "Then rerun this script."
   rm -rf "$upstream_dir"
   exit 6
 fi
-
-# Ask upstream's own resolver rather than reimplementing its tag match, which
-# depends on MAIN_BRANCH_VERSIONING and is upstream's to change.
-#
-# Upstream keeps the resolver under two names: `get_git_describe()` on the
-# release branches, and `git_dev_version()` on `main`, which stopped describing
-# tags at all and composes `scripts/ci/release_version.txt` with the commit
-# count instead. Importing one name by itself made the probe raise on `main`
-# and answer empty, so the guard below stopped guarding the busiest series --
-# silently, behind a warning that fired on every vendor run.
-#
-# The probe is still allowed to fail -- upstream owns that file and may move it
-# again -- and says so rather than refusing, because only the placeholder is
-# evidence.
-upstream_describe=$(cd "$upstream_dir" && python3 -c \
-  'import sys; sys.path.insert(0, "scripts"); import package_build
-for name in ("get_git_describe", "git_dev_version"):
-    fn = getattr(package_build, name, None)
-    if fn is not None:
-        print(fn())
-        break' \
-  2>/dev/null) || upstream_describe=
-if [ -z "$upstream_describe" ]; then
-  echo "Warning: could not read the version $upstream_dir would stamp" >&2
-fi
-if [ "$upstream_describe" = "v0.0.0-0-gdeadbeeff" ]; then
+if ! git -C "$upstream_dir" describe --tags HEAD >/dev/null 2>&1; then
   echo ""
   echo "=== NO VERSION IN THE UPSTREAM CLONE ==="
-  echo "$upstream_dir, cloned from $upstream_basedir, has no versioning tag that"
-  echo "'git describe' can reach, so every commit vendored from it would carry"
-  echo "DUCKDB_VERSION \"v0.0.0\" and fail to install any extension."
-  echo "A clone fetched without tags is the usual cause:"
+  echo "$upstream_dir, cloned from $upstream_basedir, has no tag that"
+  echo "'git describe --tags' can reach, so igraph's CMake cannot say what version"
+  echo "it vendors. A clone fetched without tags is the usual cause:"
   echo "  git -C $upstream_basedir fetch --tags origin"
   echo "Then rerun this script."
   rm -rf "$upstream_dir"
@@ -190,7 +145,7 @@ start=$(git -C "$upstream_dir" rev-parse --verify HEAD)
 # as compiling, and read only after that run reported 1 -- so the list a banner
 # prints is always the list this check produced, never one an earlier run in
 # the same container left behind.
-glue_failures=/tmp/vendor-one-glue-failures.txt
+glue_failures=${TMPDIR:-/tmp}/vendor-one-glue-failures.txt
 
 # The upstream SHA the branch has vendored, and the base of the next walk.
 # Answering empty is not an option: an empty base makes the range below read
@@ -235,15 +190,36 @@ while [ $commits_vendored -lt $num_commits ]; do
     rm -rf "$upstream_dir"
     exit 1
   fi
+  if ! git -C "$upstream_dir" cat-file -e "${base}^{commit}" 2>/dev/null; then
+    echo "Error: the clone does not have ${base}, the commit this branch last vendored." >&2
+    echo "  It must reach ${series_replay_repo}'s ${series_replay_branch} and ${series_upstream_repo} with its tags." >&2
+    rm -rf "$upstream_dir"
+    exit 1
+  fi
+
+  # Which stretch of the line the branch is on (scripts/series-config.sh):
+  # the replay while the base is behind its tip, the seam at the tip, and
+  # igraph/igraph after it.
+  stretch=upstream
+  owner=${series_upstream_repo}
+  walk_to=${start}
+  if git -C "$upstream_dir" cat-file -e "${series_replay_tip}^{commit}" 2>/dev/null &&
+    git -C "$upstream_dir" merge-base --is-ancestor "$base" "$series_replay_tip"; then
+    if [ "$(git -C "$upstream_dir" rev-parse "$base")" = "$series_replay_tip" ]; then
+      stretch=seam
+    else
+      stretch=replay
+      owner=${series_replay_repo}
+      walk_to=${series_replay_tip}
+    fi
+  fi
 
   # A tag upstream pushed after `base` was vendored. The walk starts *after*
-  # `base`, so it never sees that commit again, and the series keeps a `-devNNN`
-  # stamp for a release: DUCKDB_VERSION then carries `-dev`, and the engine
-  # installs extensions from the source-id directory instead of `/vX.Y.Z/`.
-  # Observed for v1.5.6 on 2026-09-28. Re-vendor `base` itself with the tag in
-  # view, which changes the version stamp and nothing else. It is appended as a
-  # commit of its own rather than amended, because the plain one may already be
-  # under `-green`, and nothing rewrites that (scripts/VENDORING.md).
+  # `base`, so it never sees that commit again, and the series keeps a
+  # `X.Y.Z-N-g<sha>` stamp for a release. Re-vendor `base` itself with the tag
+  # in view, which changes the version stamp and nothing else. It is appended as
+  # a commit of its own rather than amended, because the plain one may already
+  # be under `-green`, and nothing rewrites that.
   restamp=
   late_tag=$(exact_tag "$base")
   if [ -n "$late_tag" ]; then
@@ -257,8 +233,10 @@ while [ $commits_vendored -lt $num_commits ]; do
   if [ -n "$restamp" ]; then
     echo "Upstream tagged ${base} as ${restamp} after it was vendored; re-stamping it"
     original=$base
+  elif [ "$stretch" = seam ]; then
+    original=${series_seam}
   else
-    original=$(git -C "$upstream_dir" log --first-parent --reverse --format="%H" "${base}".."${start}" --)
+    original=$(git -C "$upstream_dir" log --first-parent --reverse --format="%H" "${base}".."${walk_to}" --)
   fi
 
   if [ -z "$original" ]; then
@@ -267,28 +245,27 @@ while [ $commits_vendored -lt $num_commits ]; do
     exit 0
   fi
 
-  # `start` is the clone's HEAD, so it is the caller who decides which upstream
-  # line this buffer continues -- and nothing so far has checked that it is the
-  # same line the buffer is already on. The range above excludes what `base`
-  # reaches but walks first parents from `start`, so a `start` on a sibling line
-  # yields commits that are not descendants of `base` at all. Ancestry is not
-  # the test: a fork branch that merged upstream has `base` behind it and passes
-  # it while its first-parent line is somewhere else entirely.
-  #
+  # `walk_to` is the clone's HEAD past the seam, so it is the caller who decides
+  # which upstream line this buffer continues -- and nothing so far has checked
+  # that it is the same line the buffer is already on. The range above excludes
+  # what `base` reaches but walks first parents from `walk_to`, so a HEAD on a
+  # sibling line yields commits that are not descendants of `base` at all.
   # A contiguous first-parent walk out of `base` starts at a child of `base`, so
   # compare that directly. Off the line, the oldest commit yielded belongs to the
   # other branch, and vendoring it rewrites the tree to whatever that branch
   # carries -- backwards, for a fork whose own line predates the buffer.
   # A re-stamp walks no line: it vendors `base` again, whichever line it is on.
+  # The seam is the other deliberate exception: the replay rejoins igraph/igraph
+  # there, at a tag whose tree its tip already equals.
   oldest=$(head -n 1 <<<"$original")
   oldest_parent=$(git -C "$upstream_dir" rev-parse --verify "${oldest}^" 2>/dev/null || true)
-  if [ -z "$restamp" ] &&
+  if [ -z "$restamp" ] && [ "$stretch" != seam ] &&
     [ "$oldest_parent" != "$(git -C "$upstream_dir" rev-parse --verify "${base}")" ]; then
     echo ""
     echo "=== WRONG UPSTREAM LINE ==="
     echo "The buffer last vendored ${base},"
-    echo "which is not on the first-parent line of the clone's HEAD ${start}"
-    echo "($(git -C "$upstream_dir" log -1 --format=%s "$start"))."
+    echo "which is not on the first-parent line of ${walk_to}"
+    echo "($(git -C "$upstream_dir" log -1 --format=%s "$walk_to"))."
     echo "The walk would vendor ${oldest} next, whose first parent is"
     echo "${oldest_parent:-none} -- a different branch, and its tree replaces the"
     echo "buffer's wholesale."
@@ -304,61 +281,36 @@ while [ $commits_vendored -lt $num_commits ]; do
   for commit in $original; do
     echo "Importing commit $commit"
 
-    git -C "$upstream_dir" checkout "$commit" || {
+    git -C "$upstream_dir" checkout -q "$commit" || {
       echo "Error: Failed to checkout commit $commit"
       rm -rf "$upstream_dir"
       exit 1
     }
 
-    # The tree is not deleted here: rconfigure.py moves it aside itself and puts
-    # back the inode of every regenerated file that did not change, so a file
-    # whose content is the same keeps its stat cache entry and every later git
-    # command over ~3550 files stays cheap -- which this loop pays twice per
-    # candidate, kept or skipped. Files upstream dropped still go: they are in
-    # the tree that was moved aside, and never come back from it.
-    echo "R: configure"
-    DUCKDB_PATH="$upstream_dir" python3 scripts/rconfigure.py || {
-      echo "Error: Failed to configure"
-      rm -rf "$upstream_dir"
-      exit 1
-    }
-
-    # `--reverse` needs `--forward` beside it: on its own it prompts
-    # ("Unreversed patch detected!  Ignore -R? [n]") and hangs a run whose
-    # stdin is a terminal.
-    # scripts/vendor.sh has the same three-way split and the same exit 4.
-    for f in patch/*.patch; do
-      if patch -i "$f" -p1 --forward --dry-run; then
-        patch -i "$f" -p1 --forward --no-backup-if-mismatch
-      elif patch -i "$f" -p1 --reverse --forward --dry-run; then
-        echo "Removing patch $f (its change is already in the regenerated tree)"
-        rm "$f"
-      else
-        echo ""
-        echo "=== PATCH BROKEN: $f (upstream ${commit}) ==="
-        echo "It neither applies forward nor reverses cleanly, so its change is"
-        echo "not in the regenerated tree and cannot be re-applied: the code it"
-        echo "patches moved."
-        echo "The regenerated sources for ${commit} are in the working tree,"
-        echo "uncommitted, and the upstream clone is kept."
-        echo "Rebase $f against them, keeping the rebased patch outside the tree,"
-        echo "then 'git checkout -- .', put it back, and rerun this script."
-        echo "Delete it only after confirming its change is genuinely upstream --"
-        echo "the effect it had, however upstream reached it, not this diff."
-        echo "A deletion has to ride in the vendor commit for ${commit}, and this"
-        echo "script refuses to start on a dirty tree, so land it in three steps:"
-        echo "  git checkout -- . && git rm $f && git commit -m 'tmp: retire patch'"
-        echo "  $0 --commits 1 <upstream>"
-        echo "  git reset --soft HEAD~2 && git commit   # keep the vendor message,"
-        echo "                                          # add an 'R-side fix' section"
-        exit 4
-      fi
-    done
+    regen_status=0
+    regenerate "$commit" || regen_status=$?
+    if [ "$regen_status" = 4 ]; then
+      exit 4
+    elif [ "$regen_status" != 0 ]; then
+      echo ""
+      echo "=== GENERATION FAILED for upstream ${commit} ==="
+      echo "CMake, Stimulus or cpp11::cpp_register() failed on the regenerated tree,"
+      echo "which is in the working tree, uncommitted; the upstream clone is kept."
+      echo "Most often an interface changed upstream: adapt tools/stimulus/*.yaml"
+      echo "or add a patch/ entry, keeping the fix outside the tree, then"
+      echo "'git checkout -- . && git clean -fd src R', put it back, and land it"
+      echo "with the vendor commit for ${commit} like this:"
+      echo "  git commit -m 'tmp: fix generation' -- <the fix>"
+      echo "  $0 --commits 1 <upstream>"
+      echo "  { git log -1 --format=%B; printf '\\nR-side fix:\\n\\n%s\\n' '<what was adapted>'; } >../vendor.msg"
+      echo "  git reset --soft HEAD~2 && git commit -q -F ../vendor.msg"
+      exit 7
+    fi
 
     # Always vendor tags
     tag=$(exact_tag "$commit")
     if [ -n "$tag" ]; then
-      message="vendor: Update vendored sources (tag ${tag}) to ${repo_org}/${repo_name}@$commit"
+      message="vendor: Update vendored sources (tag ${tag}) to ${owner}@$commit"
       is_tag=true
       break
     fi
@@ -366,7 +318,7 @@ while [ $commits_vendored -lt $num_commits ]; do
     # The engine file always differs, so "more than one" is the test for a
     # real change, over the directory holding the tree and the stamp.
     if [ "$(git status --porcelain -- "${series_scan_dir}" | wc -l)" -gt 1 ]; then
-      message="vendor: Update vendored sources to ${repo_org}/${repo_name}@$commit"
+      message="vendor: Update vendored sources to ${owner}@$commit"
       break
     fi
   done
@@ -374,9 +326,9 @@ while [ $commits_vendored -lt $num_commits ]; do
   if [ "$message" = "" ]; then
     echo "No changes found. Done."
     # Nothing was vendored, so leave the tree exactly as the run found it.
-    # rconfigure.py rewrites R/version.R, src/Makevars, src/Makevars.win and
-    # src/include/sources.mk for every candidate it tries, not just ${vendor_dir},
-    # and any leftover of those would make the next run refuse on a dirty tree.
+    # Regeneration rewrites R/aaa-*.R, src/rinterface.c, src/cpp11.cpp and the
+    # src/*.mk files for every candidate it tries, not just ${vendor_dir}, and
+    # any leftover would make the next run refuse on a dirty tree.
     # Restoring everything is safe because the run refused to start on one:
     # anything untracked here was created by this run. The clone is ignored,
     # so `git clean` leaves it for `rm -rf` below to remove deliberately.
@@ -385,17 +337,6 @@ while [ $commits_vendored -lt $num_commits ]; do
     rm -rf "$upstream_dir"
     exit 0
   fi
-
-  our_tag=$(git describe --tags --abbrev=0 | sed -r 's/-[0-9]$//')
-  upstream_tag=$(git -C "$upstream_dir" describe --tags --abbrev=0)
-
-  if [ "$our_tag" = "v1.3.3" ]; then
-    # Inofficial release v1.3.3
-    our_tag="v1.3.2"
-  fi
-
-  echo "Our tag: $our_tag"
-  echo "Upstream tag: $upstream_tag"
 
   version=$(sed -r -n '/^Version: (.*)$/ s//\1/p' DESCRIPTION)
   version_array=(${version//./ })
@@ -420,12 +361,18 @@ while [ $commits_vendored -lt $num_commits ]; do
     echo
     if [ -n "$restamp" ]; then
       echo "Upstream tagged ${restamp} after this commit was vendored,"
-      echo "so the earlier vendor commit for it stamps a -dev version;"
+      echo "so the earlier vendor commit for it stamps a version past the previous tag;"
       echo "this one differs from it only in the version stamp."
     fi
-    git -C "$upstream_dir" log --first-parent --format="%s" "${base}".."${commit}" |
-      tee /dev/stderr |
-      sed -r 's%#([0-9]+)%https://redirect.github.com/'${repo_org}/${repo_name}'/pull/\1%g'
+    if [ "$stretch" = seam ] && [ -z "$restamp" ]; then
+      echo "The replay of igraph 0.10.17 to 1.0.1, ${series_replay_repo}@${base},"
+      echo "ends here: its tree equals this tag's in src/, include/, vendor/ and tests/."
+      echo "From here on this line walks ${series_upstream_repo}'s first-parent history."
+    else
+      git -C "$upstream_dir" log --first-parent --format="%s" "${base}".."${commit}" |
+        tee /dev/stderr |
+        sed -r 's%#([0-9]+)%https://redirect.github.com/'"${owner}"'/pull/\1%g'
+    fi
   ) | git commit --file /dev/stdin || {
     echo "Error: Failed to commit changes"
     rm -rf "$upstream_dir"
@@ -461,8 +408,8 @@ while [ $commits_vendored -lt $num_commits ]; do
       echo "=== GLUE BROKEN by $(git rev-parse --short HEAD) (upstream ${commit}) ==="
       echo "Files: $(tr '\n' ' ' < "$glue_failures")"
       echo "The breaking vendor commit is at HEAD and the upstream clone is kept."
-      echo "Fix the glue, run clang-format, amend into HEAD appending an"
-      echo "'R-side fix' section to the message, then rerun this script."
+      echo "Fix the glue (or tools/stimulus, then regenerate), amend into HEAD"
+      echo "appending an 'R-side fix' section to the message, then rerun this script."
       exit 3
     fi
   fi

@@ -72,7 +72,7 @@ echo 'DESCRIPTION merge=ours-version' > .gitattributes
 # clone does.
 scripts/setup-git.sh >/dev/null
 
-printf 'Package: duckdb\nVersion: 1.0.0\n' > DESCRIPTION
+printf 'Package: igraph\nVersion: 1.0.0\n' > DESCRIPTION
 echo 'workflow' > .github/ci.yml
 echo 'foo <- function() 1' > R/foo.R
 git add -A
@@ -84,7 +84,7 @@ git branch fork-point
 git checkout -q -b s-dev
 echo 'flavored' > R/flavor.R
 git add -A
-git commit -qm 'chore: Update flavor patch to duckdb.test'
+git commit -qm 'chore: Update flavor patch to igraph.test'
 
 # --- what `main` gains ------------------------------------------------------
 
@@ -192,13 +192,13 @@ echo "series-port.sh: a line parked in \`main\`'s declaration"
 git checkout -q main
 cat > scripts/series.yaml <<'EOF'
 flavors:
-  - flavor: duckdb.test
+  - flavor: igraph.test
     kind: dev
     series: s
     releases_from: s-baseline
     publishes_from: s-green
 
-  - flavor: duckdb.other
+  - flavor: igraph.other
     kind: dev
     series: other
     releases_from: main

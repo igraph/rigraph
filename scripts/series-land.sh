@@ -208,7 +208,9 @@ rc="refs/remotes/$remote/$src_name"
 git fetch -q "$remote" "+refs/heads/$L-land-*:refs/remotes/$remote/$L-land-*"
 
 # The vendored strand, as series-forward-build.sh takes it whole, with the
-# Makevars generated from it.
+# Makevars generated from it: here the R/C interface and the cpp11
+# registration (scripts/series-config.sh). A change to the interface shows in
+# the review as the tools/stimulus/ change that caused it.
 strand=("${series_strand[@]}" "${series_makevars[@]}")
 strand_excludes=()
 for p in "${strand[@]}"; do strand_excludes+=(":(exclude)$p"); done
