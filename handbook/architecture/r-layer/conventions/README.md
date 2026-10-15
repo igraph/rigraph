@@ -6,7 +6,7 @@ How the R code in this package is written.
 with two-space indentation, and `air format .` formats every R file before a commit (`air.toml` holds its settings).
 Comments explain why and how; the what should be clear from the code, and each sentence takes its own line.
 
-**Names.** New functions and all arguments use `snake_case`.
+**Names.** New functions and all arguments use `snake_case`, and a variable's name says what it holds in its context.
 `max` means maximal, the graph-theory term (no other vertex dominates it), and `largest` means maximum, the biggest value in a set.
 `make_*()` creates a graph deterministically, and `sample_*()` samples one from an ensemble.
 
