@@ -12,9 +12,10 @@
 # whichever flavor recorded it.
 # So the tests change, and only for the flavor:
 # the snapshots whose output names the package normalize it at capture time,
-# with `transform = transform_package_name`,
-# which replaces the running package's name with the mainline one.
-# Every flavor then records the same text, which the mainline records as before.
+# by going through `expect_snapshot_igraph()` or `expect_snapshot_igraph_error()`
+# (helper.R), which apply `transform_package_name()`.
+# It replaces the running package's name with the mainline one,
+# so every flavor records the same text, which the mainline records as before.
 #
 # The mainline name is assembled from two pieces on purpose.
 # Spelled out, it would be an offender for scripts/flavor-package-name.R,

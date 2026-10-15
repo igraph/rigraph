@@ -596,7 +596,7 @@ test_that("`[<-.igraph.vs` reports an internal error when the graph is unknown",
   attr(vs, "env") <- NULL
   payload <- structure(1, attr_name = "color", attr_value = "blue")
 
-  expect_snapshot(error = TRUE, transform = transform_package_name, {
+  expect_snapshot_igraph_error({
     `[<-.igraph.vs`(vs, 1, value = payload)
   })
 })

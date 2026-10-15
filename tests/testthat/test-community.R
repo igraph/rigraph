@@ -476,7 +476,7 @@ test_that("modularity_matrix works", {
 
 test_that("modularity_matrix no longer accepts a membership argument for compatibility", {
   karate <- make_graph("zachary")
-  expect_snapshot(error = TRUE, transform = transform_package_name, {
+  expect_snapshot_igraph_error({
     modularity_matrix(karate, membership = rep(1, vcount(karate)))
   })
 })
@@ -977,7 +977,7 @@ test_that("modularity_matrix() covers migrated tail args and positional recovery
   # The head argument `membership` is hard-deprecated,
   # so the legacy positional call first warns about recovering `weights`
   # and then fails on the supplied membership.
-  expect_snapshot(error = TRUE, transform = transform_package_name, {
+  expect_snapshot_igraph_error({
     modularity_matrix(karate, rep(1, vcount(karate)), rep(1, ecount(karate)))
   })
 })
