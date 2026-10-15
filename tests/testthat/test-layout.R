@@ -3,13 +3,13 @@ test_that("layout_with_fr() works", {
 
   igraph_with_seed(42, {
     g <- make_ring(10)
-    l <- layout_with_fr(g, n_iter = 50, start.temp = sqrt(10) / 10)
+    l <- layout_with_fr(g, n_iter = 50, start_temp = sqrt(10) / 10)
   })
   expect_equal(sum(l), 4.57228, tolerance = 0.1)
 
   igraph_with_seed(42, {
     g <- make_star(30)
-    l <- layout_with_fr(g, n_iter = 500, dim = 3, start.temp = 20)
+    l <- layout_with_fr(g, n_iter = 500, dim = 3, start_temp = 20)
   })
   expect_equal(sum(l), -170.9312, tolerance = 0.1)
 })
@@ -21,7 +21,7 @@ test_that("layout_with_fr() deprecated argument", {
     l <- layout_with_fr(
       g,
       n_iter = 50,
-      start.temp = sqrt(10) / 10,
+      start_temp = sqrt(10) / 10,
       coolexp = 1,
       maxdelta = 1,
       area = 1,
@@ -561,12 +561,12 @@ test_that("layout_as_tree() covers tail args and recovers positional calls", {
     root = 1,
     circular = FALSE,
     mode = "all",
-    flip.y = FALSE
+    flip_y = FALSE
   )
   expect_equal(l[, 2], c(0, 1, 1, 2, 2, 2, 2))
 
   # circular = TRUE puts the levels on concentric circles around the root.
-  lc <- layout_as_tree(g, root = 1, circular = TRUE, flip.y = FALSE)
+  lc <- layout_as_tree(g, root = 1, circular = TRUE, flip_y = FALSE)
   expect_equal(sqrt(rowSums(lc^2)), c(0, 1, 1, 2, 2, 2, 2))
 
   # rootlevel offsets the roots of a forest against each other.
@@ -576,7 +576,7 @@ test_that("layout_as_tree() covers tail args and recovers positional calls", {
     root = c(1, 4),
     rootlevel = c(0, 1),
     mode = "all",
-    flip.y = FALSE
+    flip_y = FALSE
   )
   expect_equal(lf[4, 2] - lf[1, 2], 1)
 
@@ -637,12 +637,12 @@ test_that("layout_with_dh() covers tail args and recovers positional calls", {
       coords = coords,
       n_iter = 5,
       n_fine_iter = 5,
-      cool.fact = 0.5,
-      weight.node.dist = 2,
-      weight.border = 0.1,
-      weight.edge.lengths = 0.05,
-      weight.edge.crossings = 0.5,
-      weight.node.edge.dist = 0.1
+      cool_fact = 0.5,
+      weight_node_dist = 2,
+      weight_border = 0.1,
+      weight_edge_lengths = 0.05,
+      weight_edge_crossings = 0.5,
+      weight_node_edge_dist = 0.1
     )
   })
   expect_equal(dim(l), c(8, 2))
@@ -669,7 +669,7 @@ test_that("layout_with_drl() covers tail args and recovers positional calls", {
   igraph_with_seed(42, {
     l <- layout_with_drl(
       g,
-      use.seed = TRUE,
+      use_seed = TRUE,
       seed = seed_2d,
       options = drl_defaults$coarsen,
       weights = rep(2, ecount(g)),
@@ -681,7 +681,7 @@ test_that("layout_with_drl() covers tail args and recovers positional calls", {
 
   # dim = 3 needs a three-column seed matrix.
   igraph_with_seed(42, {
-    l3 <- layout_with_drl(g, use.seed = TRUE, seed = seed_3d, dim = 3)
+    l3 <- layout_with_drl(g, use_seed = TRUE, seed = seed_3d, dim = 3)
   })
   expect_equal(dim(l3), c(10, 3))
 
@@ -760,9 +760,9 @@ test_that("layout_with_gem() covers tail args and recovers positional calls", {
       g,
       coords = coords,
       max_iter = 100,
-      temp.max = 5,
-      temp.min = 0.5,
-      temp.init = 2
+      temp_max = 5,
+      temp_min = 0.5,
+      temp_init = 2
     )
   })
   expect_equal(dim(l), c(8, 2))
@@ -790,9 +790,9 @@ test_that("layout_with_graphopt() covers tail args and recovers positional calls
       n_iter = 50,
       charge = 0.01,
       mass = 10,
-      spring.length = 1,
-      spring.constant = 2,
-      max.sa.movement = 1
+      spring_length = 1,
+      spring_constant = 2,
+      max_sa_movement = 1
     )
   })
   expect_equal(dim(l), c(8, 2))
@@ -982,4 +982,82 @@ test_that("legacy iteration argument names are deprecated but still work", {
   lifecycle::expect_deprecated(res <- layout_with_graphopt(g, niter = 50))
   igraph_local_seed(42)
   expect_equal(res, layout_with_graphopt(g, n_iter = 50))
+})
+
+test_that("snake_case renames in the layouts recover the legacy dotted names", {
+  g <- make_ring(10)
+  cases <- list(
+    list(layout_as_tree, list(make_tree(7)), "flip.y", "flip_y", FALSE),
+    list(layout_with_dh, list(g, n_iter = 2), "cool.fact", "cool_fact", 0.5),
+    list(
+      layout_with_dh,
+      list(g, n_iter = 2),
+      "weight.node.dist",
+      "weight_node_dist",
+      2
+    ),
+    list(
+      layout_with_dh,
+      list(g, n_iter = 2),
+      "weight.border",
+      "weight_border",
+      1
+    ),
+    list(
+      layout_with_dh,
+      list(g, n_iter = 2),
+      "weight.edge.lengths",
+      "weight_edge_lengths",
+      0.1
+    ),
+    list(
+      layout_with_dh,
+      list(g, n_iter = 2),
+      "weight.edge.crossings",
+      "weight_edge_crossings",
+      0.1
+    ),
+    list(
+      layout_with_dh,
+      list(g, n_iter = 2),
+      "weight.node.edge.dist",
+      "weight_node_edge_dist",
+      0.1
+    ),
+    list(layout_with_fr, list(g, n_iter = 10), "start.temp", "start_temp", 1),
+    list(layout_with_gem, list(g, max_iter = 100), "temp.max", "temp_max", 5),
+    list(layout_with_gem, list(g, max_iter = 100), "temp.min", "temp_min", 0.5),
+    list(layout_with_gem, list(g, max_iter = 100), "temp.init", "temp_init", 2),
+    list(
+      layout_with_graphopt,
+      list(g, n_iter = 10),
+      "spring.length",
+      "spring_length",
+      1
+    ),
+    list(
+      layout_with_graphopt,
+      list(g, n_iter = 10),
+      "spring.constant",
+      "spring_constant",
+      2
+    ),
+    list(
+      layout_with_graphopt,
+      list(g, n_iter = 10),
+      "max.sa.movement",
+      "max_sa_movement",
+      2
+    ),
+    list(
+      layout_with_drl,
+      list(g, options = drl_defaults$coarsen),
+      "use.seed",
+      "use_seed",
+      TRUE
+    )
+  )
+  for (case in cases) {
+    expect_legacy_arg(case[[1]], case[[2]], case[[3]], case[[4]], case[[5]])
+  }
 })

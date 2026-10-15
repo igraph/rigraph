@@ -1,7 +1,7 @@
 # layout_with_fr() deprecated argument
 
     Code
-      l <- layout_with_fr(g, n_iter = 50, start.temp = sqrt(10) / 10, coolexp = 1,
+      l <- layout_with_fr(g, n_iter = 50, start_temp = sqrt(10) / 10, coolexp = 1,
       maxdelta = 1, area = 1, repulserad = 1)
     Condition
       Error:
