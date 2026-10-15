@@ -125,7 +125,9 @@ class ParamSpec:
 
         parts = value.split(" ", 1)
         if parts[0] not in ("OUT", "IN", "INOUT"):
-            parts = ["IN", parts[0]] + parts[1].split(" ", 1)
+            # The mode is implicit, so the rest is the name with its default,
+            # which may contain spaces ("maxiter=40 * vcount(graph)^2").
+            parts = ["IN"] + parts
         else:
             parts = [parts[0]] + parts[1].split(" ", 1)
         if "=" in parts[2]:
