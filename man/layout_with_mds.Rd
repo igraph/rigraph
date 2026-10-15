@@ -2,12 +2,9 @@
 % Please edit documentation in R/layout.R
 \name{layout_with_mds}
 \alias{layout_with_mds}
-\alias{with_mds}
 \title{Graph layout by multidimensional scaling}
 \usage{
-layout_with_mds(graph, dist = NULL, dim = 2, options = arpack_defaults())
-
-with_mds(...)
+layout_with_mds(graph, dist = NULL, dim = 2, options = deprecated())
 }
 \arguments{
 \item{graph}{The input graph.}
@@ -20,10 +17,9 @@ minus one, but only if the graph is connected; for unconnected graphs, the
 only possible value is 2. This is because \code{merge_coords()} only works in
 2D.}
 
-\item{options}{This is currently ignored, as ARPACK is not used any more for
-solving the eigenproblem}
-
-\item{...}{Passed to \code{layout_with_mds()}.}
+\item{options}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This argument is not
+supported from igraph version 1.6.0, as ARPACK is not used any more for
+solving the eigenproblem. Supplying it raises an error.}
 }
 \value{
 A numeric matrix with \code{dim} columns.
@@ -63,7 +59,8 @@ Cox, T. F. and Cox, M. A. A. (2001) \emph{Multidimensional
 Scaling}.  Second edition. Chapman and Hall.
 }
 \seealso{
-\code{\link[=layout]{layout()}}, \code{\link[=plot.igraph]{plot.igraph()}}
+\code{\link[=layout]{layout()}}, \code{\link[=plot.igraph]{plot.igraph()}}. See \code{\link[=with_mds]{with_mds()}} to build a lazy
+layout specification for \code{\link[=add_layout_]{add_layout_()}}.
 
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},

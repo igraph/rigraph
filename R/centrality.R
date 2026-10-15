@@ -1720,8 +1720,6 @@ diversity <- function(
   # BEGIN GENERATED ARG_HANDLE: diversity, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("v"))
-    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn diversity}.")
     # Pre-3.0.0 signature: diversity(graph, weights, vids)
     .old_signature <- function(weights, vids, ...) {
       if (...length() > 0L) {
@@ -2046,7 +2044,7 @@ page_rank <- function(
   # BEGIN GENERATED ARG_HANDLE: page_rank, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "al", "alg", "v", "d"))
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("d"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn page_rank}.")
     # Pre-3.0.0 signature: page_rank(graph, algo, vids, directed, damping, personalized, weights, options)
     .old_signature <- function(algo, vids, directed, damping, personalized, weights, options, ...) {

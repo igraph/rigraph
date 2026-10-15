@@ -461,7 +461,8 @@ graph.dfs <- function(
   in.callback = NULL,
   out.callback = NULL,
   extra = NULL,
-  rho = parent.frame()
+  rho = parent.frame(),
+  neimode
 ) {
   # nocov start
   lifecycle::deprecate_warn("2.0.0", "graph.dfs()", "dfs()")
@@ -477,7 +478,8 @@ graph.dfs <- function(
     in.callback = in.callback,
     out.callback = out.callback,
     extra = extra,
-    rho = rho
+    rho = rho,
+    neimode = neimode
   )
 } # nocov end
 
@@ -538,7 +540,8 @@ graph.bfs <- function(
   dist = FALSE,
   callback = NULL,
   extra = NULL,
-  rho = parent.frame()
+  rho = parent.frame(),
+  neimode
 ) {
   # nocov start
   lifecycle::deprecate_warn("2.0.0", "graph.bfs()", "bfs()")
@@ -556,7 +559,8 @@ graph.bfs <- function(
     dist = dist,
     callback = callback,
     extra = extra,
-    rho = rho
+    rho = rho,
+    neimode = neimode
   )
 } # nocov end
 
@@ -1751,12 +1755,7 @@ shortest_paths <- function(
 
   if (igraph_opt("return.vs.es")) {
     if (!is.null(res$vpath)) {
-      res$vpath <- lapply(
-        res$vpath,
-        unsafe_create_vs,
-        graph = graph,
-        verts = V(graph)
-      )
+      res$vpath <- create_vs_list(graph, res$vpath)
     }
     if (!is.null(res$epath)) {
       res$epath <- lapply(
@@ -1864,12 +1863,7 @@ all_shortest_paths <- function(
   }
 
   if (igraph_opt("return.vs.es")) {
-    res$vpaths <- lapply(
-      res$vpaths,
-      unsafe_create_vs,
-      graph = graph,
-      verts = V(graph)
-    )
+    res$vpaths <- create_vs_list(graph, res$vpaths)
   }
 
   # Transitional, eventually, remove $res
@@ -2364,8 +2358,6 @@ transitivity <- function(
   # BEGIN GENERATED ARG_HANDLE: transitivity, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("v"))
-    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn transitivity}.")
     # Pre-3.0.0 signature: transitivity(graph, type, vids, weights, isolates)
     .old_signature <- function(vids, weights, isolates, ...) {
       if (...length() > 0L) {
@@ -3058,7 +3050,7 @@ ego <- function(
   res <- lapply(res, function(x) x + 1)
 
   if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
+    res <- create_vs_list(graph, res)
   }
 
   res
@@ -3372,8 +3364,6 @@ feedback_arc_set <- function(
   # BEGIN GENERATED ARG_HANDLE: feedback_arc_set, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "al", "alg"))
-    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn feedback_arc_set}.")
     # Pre-3.0.0 signature: feedback_arc_set(graph, weights, algo)
     .old_signature <- function(weights, algo, ...) {
       if (...length() > 0L) {
@@ -3453,8 +3443,6 @@ feedback_vertex_set <- function(
   # BEGIN GENERATED ARG_HANDLE: feedback_vertex_set, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "al", "alg"))
-    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn feedback_vertex_set}.")
     # Pre-3.0.0 signature: feedback_vertex_set(graph, weights, algo)
     .old_signature <- function(weights, algo, ...) {
       if (...length() > 0L) {
@@ -3660,7 +3648,7 @@ girth <- function(
 #' # Remove multiple edges but keep multiplicity
 #' g <- sample_pa(10, m = 3, algorithm = "bag")
 #' E(g)$weight <- count_multiple(g)
-#' g <- simplify(g, edge.attr.comb = list(weight = "min"))
+#' g <- simplify(g, edge_attr_combine = list(weight = "min"))
 #' any(which_multiple(g))
 #' E(g)$weight
 #'
@@ -3768,6 +3756,7 @@ count_loops <- function(graph) {
 #'   given vertices.
 #' @param order Logical, whether to return the ordering of the vertices.
 #' @param rank Logical, whether to return the rank of the vertices.
+#' @param father `r lifecycle::badge("deprecated")` Use `parent` instead.
 #' @param parent Logical, whether to return the parent of the vertices.
 #' @param pred Logical, whether to return the predecessors of the
 #'   vertices.
@@ -3782,6 +3771,8 @@ count_loops <- function(graph) {
 #' @param extra Additional argument to supply to the callback function.
 #' @param rho The environment in which the callback function is evaluated.
 #'   The default `NULL` uses the caller's environment.
+#' @param neimode `r lifecycle::badge("deprecated")` This argument is deprecated
+#'  from igraph 1.3.0; use `mode` instead.
 #' @inheritParams rlang::args_dots_empty
 #' @return A named list with the following entries:
 #'   \describe{
@@ -3789,7 +3780,7 @@ count_loops <- function(graph) {
 #'       Numeric vector. The root vertex (or vertices) that was used as the
 #'       starting point of the search, as supplied in the `root` argument.
 #'     }
-#'     \item{mode}{
+#'     \item{neimode}{
 #'       Character scalar. The `mode` argument of the function call.
 #'       Note that for undirected graphs this is always \sQuote{all}, irrespectively of the supplied value.
 #'     }
@@ -3805,6 +3796,9 @@ count_loops <- function(graph) {
 #'       The parent of each vertex, i.e. the vertex it was discovered from.
 #'       A vertex sequence (`igraph.vs`), or a numeric vector if the
 #'       `return.vs.es` option is `FALSE`.
+#'     }
+#'     \item{father}{
+#'       Like parent, kept for compatibility for now.
 #'     }
 #'     \item{pred}{
 #'       The previously visited vertex for each vertex, or 0 if there was no such vertex.
@@ -3871,7 +3865,9 @@ bfs <- function(
   dist = FALSE,
   callback = NULL,
   extra = NULL,
-  rho = NULL
+  rho = NULL,
+  neimode = deprecated(),
+  father = deprecated()
 ) {
   rlang::check_dots_empty()
 
@@ -3879,6 +3875,18 @@ bfs <- function(
 
   if (is.null(rho)) {
     rho <- parent.frame()
+  }
+
+  if (lifecycle::is_present(neimode)) {
+    lifecycle::deprecate_stop(
+      "1.3.0",
+      "bfs(neimode = )",
+      "bfs(mode = )"
+    )
+  }
+
+  if (lifecycle::is_present(father)) {
+    lifecycle::deprecate_stop("2.2.0", "bfs(father = )", "bfs(parent = )")
   }
 
   if (length(root) == 1) {
@@ -3932,6 +3940,9 @@ bfs <- function(
   # requested root vertices instead. See
   # https://github.com/igraph/rigraph/issues/1639
   res$root <- requested_roots
+
+  # Remove in 1.4.0
+  res$neimode <- res$mode
 
   if (order) {
     res$order <- res$order + 1
@@ -3988,6 +3999,9 @@ bfs <- function(
     res$dist[is.nan(res$dist)] <- -3
   }
 
+  # Remove this later? https://github.com/igraph/rigraph/issues/1576
+  res$father <- res$parent
+
   res
 }
 
@@ -4027,6 +4041,7 @@ bfs <- function(
 #'   vertices.
 #' @param order.out Logical, whether to return the ordering based on
 #'   leaving the subtree of the vertex.
+#' @param father `r lifecycle::badge("deprecated")`, use `parent` instead.
 #' @param parent Logical, whether to return the parent of the vertices.
 #' @param dist Logical, whether to return the distance from the root of
 #'   the search tree.
@@ -4040,13 +4055,15 @@ bfs <- function(
 #' @param extra Additional argument to supply to the callback function.
 #' @param rho The environment in which the callback function is evaluated.
 #'   The default `NULL` uses the caller's environment.
+#' @param neimode `r lifecycle::badge("deprecated")` This argument is deprecated from igraph 1.3.0; use
+#'   `mode` instead.
 #' @inheritParams rlang::args_dots_empty
 #' @return A named list with the following entries:
 #'   \describe{
 #'     \item{root}{
 #'       Numeric scalar. The root vertex that was used as the starting point of the search.
 #'     }
-#'     \item{mode}{
+#'     \item{neimode}{
 #'       Character scalar. The `mode` argument of the function call.
 #'       Note that for undirected graphs this is always \sQuote{all}, irrespectively of the supplied value.
 #'     }
@@ -4058,6 +4075,9 @@ bfs <- function(
 #'     }
 #'     \item{parent}{
 #'       Numeric vector. The parent of each vertex, i.e. the vertex it was discovered from.
+#'     }
+#'     \item{father}{
+#'       Like parent, kept for compatibility for now.
 #'     }
 #'     \item{dist}{
 #'       Numeric vector, for each vertex its distance from the root of the search tree.
@@ -4122,13 +4142,27 @@ dfs <- function(
   in.callback = NULL,
   out.callback = NULL,
   extra = NULL,
-  rho = NULL
+  rho = NULL,
+  neimode = deprecated(),
+  father = deprecated()
 ) {
   rlang::check_dots_empty()
 
   ensure_igraph(graph)
   if (is.null(rho)) {
     rho <- parent.frame()
+  }
+
+  if (lifecycle::is_present(neimode)) {
+    lifecycle::deprecate_stop(
+      "1.3.0",
+      "dfs(neimode = )",
+      "dfs(mode = )"
+    )
+  }
+
+  if (lifecycle::is_present(father)) {
+    lifecycle::deprecate_stop("2.2.0", "dfs(father = )", "dfs(parent = )")
   }
 
   root <- as_igraph_vs(graph, root) - 1
@@ -4164,6 +4198,9 @@ dfs <- function(
     rho
   )
 
+  # Remove in 1.4.0
+  res$neimode <- res$mode
+
   if (order) {
     res$order <- res$order + 1
   }
@@ -4196,6 +4233,9 @@ dfs <- function(
     if (dist) names(res$dist) <- V(graph)$name
   }
 
+  # Remove this later? https://github.com/igraph/rigraph/issues/1576
+  res$father <- res$parent
+
   res
 }
 
@@ -4225,12 +4265,12 @@ dfs <- function(
 #' depth-first searches.
 #'
 #' @param graph The graph to analyze.
-#' @inheritParams rlang::args_dots_empty
 #' @param mode Character string, either \dQuote{weak} or \dQuote{strong}.  For
 #'   directed graphs \dQuote{weak} implies weakly, \dQuote{strong} strongly
 #'   connected components to search. It is ignored for undirected graphs.
-#' @param \dots Additional attributes to pass to `cluster`, right now only
-#'   `mode` makes sense.
+#' @param \dots For `component_distribution()`, forwarded to `components()`.
+#'   For `components()`, `is_connected()`, `count_components()` and
+#'   `largest_component()`, these dots must be empty.
 #' @return For `is_connected()` a Logical.
 #'
 #'   For `components()` a named list with three components:
@@ -4324,7 +4364,6 @@ components <- function(
 }
 
 #' @rdname components
-#' @inheritParams rlang::args_dots_empty
 #' @export
 is_connected <- function(
   graph,
@@ -4373,7 +4412,6 @@ is_connected <- function(
 }
 
 #' @rdname components
-#' @inheritParams rlang::args_dots_empty
 #' @export
 count_components <- function(
   graph,

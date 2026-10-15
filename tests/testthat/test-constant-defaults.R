@@ -54,11 +54,11 @@ test_that("NULL non-selector defaults of round-2 functions resolve in the body",
 
   # option-backed defaults fall back to the igraph option
   expect_identical_graphs(
-    simplify(g + edge(1, 2), edge.attr.comb = NULL),
+    simplify(g + edge(1, 2), edge_attr_combine = NULL),
     simplify(g + edge(1, 2))
   )
   expect_identical_graphs(
-    as_undirected(as_directed(g), edge.attr.comb = NULL),
+    as_undirected(as_directed(g), edge_attr_combine = NULL),
     as_undirected(as_directed(g))
   )
 

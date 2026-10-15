@@ -198,7 +198,7 @@ test_that("BFS callback does not blow up when an invalid value is returned", {
 })
 
 test_that("BFS callback does not blow up when an error is raised within the callback", {
-  # jarl-ignore unreachable_code: <reason>
+  # jarl-ignore unreachable_code: test design
   callback <- function(graph, data, extra) {
     cli::cli_abort("test")
     FALSE

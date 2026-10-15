@@ -358,7 +358,7 @@ max_cliques <- function(
     res <- lapply(res, function(x) x + 1)
 
     if (igraph_opt("return.vs.es")) {
-      res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
+      res <- create_vs_list(graph, res)
     }
 
     res
@@ -381,7 +381,6 @@ max_cliques <- function(
 }
 
 #' @rdname cliques
-#' @inheritParams rlang::args_dots_empty
 #' @export
 count_max_cliques <- function(
   graph,
@@ -518,7 +517,7 @@ weighted_cliques <- function(
   # BEGIN GENERATED ARG_HANDLE: weighted_cliques, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("v", "ve", "ver", "vert", "verte", "vertex", "m", "mi", "min", "ma", "max"))
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m", "ma", "max"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn weighted_cliques}.")
     # Pre-3.0.0 signature: weighted_cliques(graph, vertex.weights, min.weight, max.weight, maximal)
     .old_signature <- function(vertex.weights, min.weight, max.weight, maximal, ...) {
@@ -566,7 +565,6 @@ weighted_cliques <- function(
     maximal = maximal
   )
 }
-#' @inheritParams rlang::args_dots_empty
 #' @export
 #' @rdname cliques
 largest_weighted_cliques <- function(
@@ -577,8 +575,6 @@ largest_weighted_cliques <- function(
   # BEGIN GENERATED ARG_HANDLE: largest_weighted_cliques, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("v", "ve", "ver", "vert", "verte", "vertex"))
-    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn largest_weighted_cliques}.")
     # Pre-3.0.0 signature: largest_weighted_cliques(graph, vertex.weights)
     .old_signature <- function(vertex.weights, ...) {
       if (...length() > 0L) {
@@ -616,7 +612,6 @@ largest_weighted_cliques <- function(
     vertex_weights = vertex_weights
   )
 }
-#' @inheritParams rlang::args_dots_empty
 #' @export
 #' @rdname cliques
 weighted_clique_num <- function(
@@ -627,8 +622,6 @@ weighted_clique_num <- function(
   # BEGIN GENERATED ARG_HANDLE: weighted_clique_num, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("v", "ve", "ver", "vert", "verte", "vertex"))
-    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn weighted_clique_num}.")
     # Pre-3.0.0 signature: weighted_clique_num(graph, vertex.weights)
     .old_signature <- function(vertex.weights, ...) {
       if (...length() > 0L) {
@@ -753,7 +746,7 @@ ivs <- function(graph, min = NULL, max = NULL) {
   res <- lapply(res, `+`, 1)
 
   if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
+    res <- create_vs_list(graph, res)
   }
 
   res
@@ -803,7 +796,6 @@ ivs_size <- function(graph) {
 independence_number <- ivs_size
 
 #' @rdname cliques
-#' @inheritParams rlang::args_dots_empty
 #' @export
 clique_size_counts <- function(
   graph,
@@ -902,7 +894,6 @@ is_complete <- function(graph) {
 #'
 #' @param graph The input graph.
 #' @param candidate The vertex set to test for being a clique.
-#' @inheritParams rlang::args_dots_empty
 #' @param directed Whether to consider edge directions.
 #' @return `is_clique()` returns `TRUE` if the candidate vertex set forms
 #'   a clique.

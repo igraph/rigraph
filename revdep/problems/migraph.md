@@ -1,4 +1,4 @@
-# migraph (1.6.8)
+# migraph (1.7.0)
 
 * GitHub: <https://github.com/stocnet/migraph>
 * Email: <mailto:james.hollway@graduateinstitute.ch>
@@ -32,7 +32,7 @@ Run `revdepcheck::revdep_details(, "migraph")` for more info
         4. └─migraph:::check_tute_functions(tute, skip = "ergm\\(|play_diffusions\\(")
         5.   └─testthat::expect_null(...) at ./helper-functions.R:126:5
        
-       [ FAIL 1 | WARN 0 | SKIP 3 | PASS 260 ]
+       [ FAIL 1 | WARN 0 | SKIP 3 | PASS 276 ]
        Error:
        ! Test failures.
        Execution halted

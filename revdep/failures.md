@@ -9,7 +9,7 @@ Run `revdepcheck::revdep_details(, "ctmm")` for more info
 ### Devel
 
 ```
-new check timed out after 1201s, at: * checking re-building of vignette outputs ...
+new check timed out after 1800s, at: * checking re-building of vignette outputs ...
 
 
 
@@ -19,7 +19,7 @@ new check timed out after 1201s, at: * checking re-building of vignette outputs 
 ### CRAN
 
 ```
-new check timed out after 1201s, at: * checking re-building of vignette outputs ...
+new check timed out after 1800s, at: * checking re-building of vignette outputs ...
 
 
 
@@ -37,7 +37,7 @@ Run `revdepcheck::revdep_details(, "E2E")` for more info
 ### Devel
 
 ```
-new check timed out after 1201s, at: * checking re-building of vignette outputs ...
+new check timed out after 1802s, at: * checking re-building of vignette outputs ...
 
 
 
@@ -47,10 +47,80 @@ new check timed out after 1201s, at: * checking re-building of vignette outputs 
 ### CRAN
 
 ```
-new check timed out after 1201s, at: * checking re-building of vignette outputs ...
+new check timed out after 1802s, at: * checking re-building of vignette outputs ...
 
 
 
+
+
+```
+# gllvm (2.0.13)
+
+* GitHub mirror: <https://github.com/cran/gllvm>
+
+Run `revdepcheck::revdep_details(, "gllvm")` for more info
+
+## In both
+
+*   checking whether package ‘gllvm’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/gllvm.Rcheck/00install.out’ for details.
+     ```
+
+## Installation
+
+### Devel
+
+```
+[... 17181 earlier lines omitted; the full 00install.out is in the check artifact ...]
+/opt/revdepx/lib/RcppEigen/include/Eigen/src/Core/DenseBase.h:41:34:   required from ‘class Eigen::DenseBase<Eigen::Transpose<const Eigen::Block<const Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::Transpose<Eigen::Matrix<double, -1, -1> >, 0>, 1, -1, false> > >’
+/opt/revdepx/lib/RcppEigen/include/Eigen/src/Core/MatrixBase.h:48:34:   required from ‘class Eigen::MatrixBase<Eigen::Transpose<const Eigen::Block<const Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::Transpose<Eigen::Matrix<double, -1, -1> >, 0>, 1, -1, false> > >’
+/opt/revdepx/lib/RcppEigen/include/Eigen/src/Core/Transpose.h:118:37:   required from ‘class Eigen::TransposeImpl<const Eigen::Block<const Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::Transpose<Eigen::Matrix<double, -1, -1> >, 0>, 1, -1, false>, Eigen::Dense>’
+/opt/revdepx/lib/RcppEigen/include/Eigen/src/Core/Transpose.h:52:37:   required from ‘class Eigen::Transpose<const Eigen::Block<const Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::Transpose<Eigen::Matrix<double, -1, -1> >, 0>, 1, -1, false> >’
+/opt/revdepx/lib/RcppEigen/include/Eigen/src/Core/Dot.h:50:23:   required from ‘static Eigen::internal::dot_nocheck<T, U, true>::ResScalar Eigen::internal::dot_nocheck<T, U, true>::run(const Eigen::MatrixBase<Derived>&, const Eigen::MatrixBase<U>&) [with T = Eigen::Block<const Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::Transpose<Eigen::Matrix<double, -1, -1> >, 0>, 1, -1, false>; U = Eigen::Block<const Eigen::Block<const Eigen::Matrix<double, -1, -1>, -1, 1, true>, -1, 1, true>; ResScalar = double]’
+/opt/revdepx/lib/RcppEigen/include/Eigen/src/Core/Dot.h:84:58:   [ skipping 31 instantiation contexts, use -ftemplate-backtrace-limit=0 to disable ]
+/opt/revdepx/lib/TMB/include/tmbutils/newton.hpp:698:27:   required from ‘newton::matrix<double> newton::jacobian_sparse_plus_lowrank_t<Fac>::llt_solve(const sparse_plus_lowrank<double>&, const newton::matrix<double>&) [with Fac = Eigen::SimplicialLDLT<Eigen::SparseMatrix<double> >]’
+/opt/revdepx/lib/TMB/include/tmbutils/newton.hpp:1081:33:   required from ‘const char* newton::NewtonOperator<Functor, Hessian_Type>::newton_iterate(newton::vector<double>&) [with Functor = newton::slice<>; Hessian_Type = newton::jacobian_sparse_plus_lowrank_t<Eigen::SimplicialLDLT<Eigen::SparseMatrix<double> > >]’
+/opt/revdepx/lib/TMB/include/tmbutils/newton.hpp:1155:5:   required from ‘void newton::NewtonOperator<Functor, Hessian_Type>::forward(TMBad::ForwardArgs<double>&) [with Functor = newton::slice<>; Hessian_Type = newton::jacobian_sparse_plus_lowrank_t<Eigen::SimplicialLDLT<Eigen::SparseMatrix<double> > >]’
+...
+/opt/revdepx/lib/TMB/include/tiny_ad/atomic.hpp:30:1:   required from ‘void atomic::bessel_kOp<order, ninput, noutput, mask>::reverse(TMBad::ReverseArgs<Type>&) [with Type = double; int order = 3; int ninput = 2; int noutput = 8; long int mask = 9]’
+/opt/revdepx/lib/TMB/include/TMBad/global.hpp:1762:28:   required from ‘void TMBad::global::AddForwardMarkReverseMark<OperatorBase>::reverse(TMBad::ReverseArgs<Type>&) [with Type = double; OperatorBase = TMBad::global::AddIncrementDecrement<TMBad::global::AddDependencies<TMBad::global::AddInputSizeOutputSize<atomic::bessel_kOp<3, 2, 8, 9> > > >]’
+/opt/revdepx/lib/TMB/include/TMBad/global.hpp:2155:57:   required from ‘void TMBad::global::Complete<OperatorBase>::reverse(TMBad::ReverseArgs<double>&) [with OperatorBase = atomic::bessel_kOp<3, 2, 8, 9>]’
+/opt/revdepx/lib/TMB/include/TMBad/global.hpp:2155:10:   required from here
+/opt/revdepx/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:56:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
+g++: fatal error: Killed signal terminated program cc1plus
+compilation terminated.
+make: *** [/usr/local/lib/R/etc/Makeconf:199: gllvm.o] Error 1
+ERROR: compilation failed for package ‘gllvm’
+* removing ‘/revdepx/out/gllvm.Rcheck/gllvm’
+
+
+```
+### CRAN
+
+```
+[... 17181 earlier lines omitted; the full 00install.out is in the check artifact ...]
+/opt/revdepx/lib/RcppEigen/include/Eigen/src/Core/DenseBase.h:41:34:   required from ‘class Eigen::DenseBase<Eigen::Transpose<const Eigen::Block<const Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::Transpose<Eigen::Matrix<double, -1, -1> >, 0>, 1, -1, false> > >’
+/opt/revdepx/lib/RcppEigen/include/Eigen/src/Core/MatrixBase.h:48:34:   required from ‘class Eigen::MatrixBase<Eigen::Transpose<const Eigen::Block<const Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::Transpose<Eigen::Matrix<double, -1, -1> >, 0>, 1, -1, false> > >’
+/opt/revdepx/lib/RcppEigen/include/Eigen/src/Core/Transpose.h:118:37:   required from ‘class Eigen::TransposeImpl<const Eigen::Block<const Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::Transpose<Eigen::Matrix<double, -1, -1> >, 0>, 1, -1, false>, Eigen::Dense>’
+/opt/revdepx/lib/RcppEigen/include/Eigen/src/Core/Transpose.h:52:37:   required from ‘class Eigen::Transpose<const Eigen::Block<const Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::Transpose<Eigen::Matrix<double, -1, -1> >, 0>, 1, -1, false> >’
+/opt/revdepx/lib/RcppEigen/include/Eigen/src/Core/Dot.h:50:23:   required from ‘static Eigen::internal::dot_nocheck<T, U, true>::ResScalar Eigen::internal::dot_nocheck<T, U, true>::run(const Eigen::MatrixBase<Derived>&, const Eigen::MatrixBase<U>&) [with T = Eigen::Block<const Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::Transpose<Eigen::Matrix<double, -1, -1> >, 0>, 1, -1, false>; U = Eigen::Block<const Eigen::Block<const Eigen::Matrix<double, -1, -1>, -1, 1, true>, -1, 1, true>; ResScalar = double]’
+/opt/revdepx/lib/RcppEigen/include/Eigen/src/Core/Dot.h:84:58:   [ skipping 31 instantiation contexts, use -ftemplate-backtrace-limit=0 to disable ]
+/opt/revdepx/lib/TMB/include/tmbutils/newton.hpp:698:27:   required from ‘newton::matrix<double> newton::jacobian_sparse_plus_lowrank_t<Fac>::llt_solve(const sparse_plus_lowrank<double>&, const newton::matrix<double>&) [with Fac = Eigen::SimplicialLDLT<Eigen::SparseMatrix<double> >]’
+/opt/revdepx/lib/TMB/include/tmbutils/newton.hpp:1081:33:   required from ‘const char* newton::NewtonOperator<Functor, Hessian_Type>::newton_iterate(newton::vector<double>&) [with Functor = newton::slice<>; Hessian_Type = newton::jacobian_sparse_plus_lowrank_t<Eigen::SimplicialLDLT<Eigen::SparseMatrix<double> > >]’
+/opt/revdepx/lib/TMB/include/tmbutils/newton.hpp:1155:5:   required from ‘void newton::NewtonOperator<Functor, Hessian_Type>::forward(TMBad::ForwardArgs<double>&) [with Functor = newton::slice<>; Hessian_Type = newton::jacobian_sparse_plus_lowrank_t<Eigen::SimplicialLDLT<Eigen::SparseMatrix<double> > >]’
+...
+/opt/revdepx/lib/TMB/include/tiny_ad/atomic.hpp:30:1:   required from ‘void atomic::bessel_kOp<order, ninput, noutput, mask>::reverse(TMBad::ReverseArgs<Type>&) [with Type = double; int order = 3; int ninput = 2; int noutput = 8; long int mask = 9]’
+/opt/revdepx/lib/TMB/include/TMBad/global.hpp:1762:28:   required from ‘void TMBad::global::AddForwardMarkReverseMark<OperatorBase>::reverse(TMBad::ReverseArgs<Type>&) [with Type = double; OperatorBase = TMBad::global::AddIncrementDecrement<TMBad::global::AddDependencies<TMBad::global::AddInputSizeOutputSize<atomic::bessel_kOp<3, 2, 8, 9> > > >]’
+/opt/revdepx/lib/TMB/include/TMBad/global.hpp:2155:57:   required from ‘void TMBad::global::Complete<OperatorBase>::reverse(TMBad::ReverseArgs<double>&) [with OperatorBase = atomic::bessel_kOp<3, 2, 8, 9>]’
+/opt/revdepx/lib/TMB/include/TMBad/global.hpp:2155:10:   required from here
+/opt/revdepx/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:56:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
+g++: fatal error: Killed signal terminated program cc1plus
+compilation terminated.
+make: *** [/usr/local/lib/R/etc/Makeconf:199: gllvm.o] Error 1
+ERROR: compilation failed for package ‘gllvm’
+* removing ‘/revdepx/out/gllvm.Rcheck/gllvm’
 
 
 ```
@@ -82,70 +152,18 @@ Source tarball could not be downloaded
 
 
 ```
-# intSDM (2.1.2)
+# orchaRd (2.2.1)
 
-* GitHub mirror: <https://github.com/cran/intSDM>
+* GitHub mirror: <https://github.com/cran/orchaRd>
 
-Run `revdepcheck::revdep_details(, "intSDM")` for more info
-
-## In both
-
-*   checking whether package ‘intSDM’ can be installed ... ERROR
-     ```
-     Installation failed.
-     See ‘<lib>/intSDM.Rcheck/00install.out’ for details.
-     ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘intSDM’ ...
-** this is package ‘intSDM’ version ‘2.1.2’
-** package ‘intSDM’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-Error: package or namespace load failed for ‘PointedSDMs’:
- object ‘spatialBlock’ is not exported by 'namespace:blockCV'
-Execution halted
-ERROR: lazy loading failed for package ‘intSDM’
-* removing ‘/revdepx/out/intSDM.Rcheck/intSDM’
-
-
-```
-### CRAN
-
-```
-* installing *source* package ‘intSDM’ ...
-** this is package ‘intSDM’ version ‘2.1.2’
-** package ‘intSDM’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-Error: package or namespace load failed for ‘PointedSDMs’:
- object ‘spatialBlock’ is not exported by 'namespace:blockCV'
-Execution halted
-ERROR: lazy loading failed for package ‘intSDM’
-* removing ‘/revdepx/out/intSDM.Rcheck/intSDM’
-
-
-```
-# orbital (0.5.1)
-
-* GitHub mirror: <https://github.com/cran/orbital>
-
-Run `revdepcheck::revdep_details(, "orbital")` for more info
+Run `revdepcheck::revdep_details(, "orchaRd")` for more info
 
 ## Error before installation
 
 ### Devel
 
 ```
-new check timed out after 1200s, at: * checking tests ...
+old check timed out after 1800s, at: * checking tests ...
 
 
 
@@ -155,62 +173,10 @@ new check timed out after 1200s, at: * checking tests ...
 ### CRAN
 
 ```
-new check timed out after 1200s, at: * checking tests ...
+old check timed out after 1800s, at: * checking tests ...
 
 
 
-
-
-```
-# PointedSDMs (2.1.5)
-
-* GitHub mirror: <https://github.com/cran/PointedSDMs>
-
-Run `revdepcheck::revdep_details(, "PointedSDMs")` for more info
-
-## In both
-
-*   checking whether package ‘PointedSDMs’ can be installed ... ERROR
-     ```
-     Installation failed.
-     See ‘<lib>/PointedSDMs.Rcheck/00install.out’ for details.
-     ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘PointedSDMs’ ...
-** this is package ‘PointedSDMs’ version ‘2.1.5’
-** package ‘PointedSDMs’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** data
-** inst
-** byte-compile and prepare package for lazy loading
-Error: object ‘spatialBlock’ is not exported by 'namespace:blockCV'
-Execution halted
-ERROR: lazy loading failed for package ‘PointedSDMs’
-* removing ‘/revdepx/out/PointedSDMs.Rcheck/PointedSDMs’
-
-
-```
-### CRAN
-
-```
-* installing *source* package ‘PointedSDMs’ ...
-** this is package ‘PointedSDMs’ version ‘2.1.5’
-** package ‘PointedSDMs’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** data
-** inst
-** byte-compile and prepare package for lazy loading
-Error: object ‘spatialBlock’ is not exported by 'namespace:blockCV'
-Execution halted
-ERROR: lazy loading failed for package ‘PointedSDMs’
-* removing ‘/revdepx/out/PointedSDMs.Rcheck/PointedSDMs’
 
 
 ```
@@ -225,7 +191,7 @@ Run `revdepcheck::revdep_details(, "PortfolioTesteR")` for more info
 ### Devel
 
 ```
-new check timed out after 1201s, at: * checking re-building of vignette outputs ...
+new check timed out after 1801s, at: * checking re-building of vignette outputs ...
 
 
 
@@ -235,7 +201,7 @@ new check timed out after 1201s, at: * checking re-building of vignette outputs 
 ### CRAN
 
 ```
-new check timed out after 1201s, at: * checking re-building of vignette outputs ...
+new check timed out after 1801s, at: * checking re-building of vignette outputs ...
 
 
 
@@ -270,18 +236,18 @@ Source tarball could not be downloaded
 
 
 ```
-# SMMAL (0.0.5)
+# sphet (2.1-1)
 
-* GitHub mirror: <https://github.com/cran/SMMAL>
+* GitHub mirror: <https://github.com/cran/sphet>
 
-Run `revdepcheck::revdep_details(, "SMMAL")` for more info
+Run `revdepcheck::revdep_details(, "sphet")` for more info
 
 ## Error before installation
 
 ### Devel
 
 ```
-new check timed out after 1201s, at: * checking re-building of vignette outputs ...
+Not checked (deferred)
 
 
 
@@ -291,7 +257,7 @@ new check timed out after 1201s, at: * checking re-building of vignette outputs 
 ### CRAN
 
 ```
-new check timed out after 1201s, at: * checking re-building of vignette outputs ...
+Not checked (deferred)
 
 
 
@@ -328,34 +294,6 @@ Run `revdepcheck::revdep_details(, "tinyVAST")` for more info
 
 
 ```
-# VIM (7.0.0)
-
-* GitHub mirror: <https://github.com/cran/VIM>
-
-Run `revdepcheck::revdep_details(, "VIM")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-new check timed out after 1201s, at: * checking re-building of vignette outputs ...
-
-
-
-
-
-```
-### CRAN
-
-```
-new check timed out after 1201s, at: * checking re-building of vignette outputs ...
-
-
-
-
-
-```
 # xpect (1.2)
 
 * GitHub mirror: <https://github.com/cran/xpect>
@@ -367,7 +305,7 @@ Run `revdepcheck::revdep_details(, "xpect")` for more info
 ### Devel
 
 ```
-new check timed out after 1201s, at: * checking tests ...
+new check timed out after 1801s, at: * checking tests ...
 
 
 
@@ -377,7 +315,7 @@ new check timed out after 1201s, at: * checking tests ...
 ### CRAN
 
 ```
-new check timed out after 1201s, at: * checking tests ...
+new check timed out after 1801s, at: * checking tests ...
 
 
 

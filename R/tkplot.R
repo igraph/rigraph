@@ -278,8 +278,9 @@ assign(".next", 1, .tkplot.env)
 #'   vertices, in absolute coordinates.
 #' @param degree The degree to rotate the plot.
 #' @param rad The degree to rotate the plot, in radian.
-#' @param \dots Additional plotting parameters. See [igraph.plotting] for
-#'   the complete list.
+#' @param \dots For `tkplot()`, additional plotting parameters, see
+#'   [igraph.plotting] for the complete list. For `tk_close()`, `tk_fit()`,
+#'   `tk_coords()` and `tk_rotate()`, these dots must be empty.
 #' @return `tkplot()` returns an integer, the ID of the plot, this can be
 #'   used to manipulate it from the command line.
 #'
@@ -529,7 +530,6 @@ tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
 ###################################################################
 
 #' @rdname tkplot
-#' @inheritParams rlang::args_dots_empty
 #' @export
 tk_close <- function(
   tkp.id,
@@ -597,7 +597,6 @@ tk_off <- function() {
 }
 
 #' @rdname tkplot
-#' @inheritParams rlang::args_dots_empty
 #' @export
 tk_fit <- function(
   tkp.id,
@@ -731,7 +730,6 @@ tk_postscript <- function(tkp.id) {
 }
 
 #' @rdname tkplot
-#' @inheritParams rlang::args_dots_empty
 #' @export
 tk_coords <- function(
   tkp.id,
@@ -741,8 +739,6 @@ tk_coords <- function(
   # BEGIN GENERATED ARG_HANDLE: tk_coords, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("n", "no", "nor"))
-    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn tk_coords}.")
     # Pre-3.0.0 signature: tk_coords(tkp.id, norm)
     .old_signature <- function(norm, ...) {
       if (...length() > 0L) {
@@ -802,7 +798,6 @@ tk_set_coords <- function(tkp.id, coords) {
 }
 
 #' @rdname tkplot
-#' @inheritParams rlang::args_dots_empty
 #' @export
 tk_rotate <- function(
   tkp.id,

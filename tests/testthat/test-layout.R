@@ -269,11 +269,14 @@ test_that("`layout_with_mds()` works", {
 
   out1 <- layout_with_mds(g)
   expect_equal(out1, mymds(g))
+})
 
+test_that("layout_with_mds() deprecated argument", {
   rlang::local_options(lifecycle_verbosity = "warning")
-
-  expect_warning(out2 <- layout_with_mds(g, options = arpack_defaults))
-  expect_equal(out2, out1)
+  g <- make_tree(10, 2, mode = "undirected")
+  expect_snapshot_igraph_error({
+    l <- layout_with_mds(g, options = arpack_defaults())
+  })
 })
 
 test_that("`layout_with_mds()` stress test, graph with multiple components", {
@@ -282,6 +285,13 @@ test_that("`layout_with_mds()` stress test, graph with multiple components", {
   expect_equal(ncol(layout_with_mds(g)), 2)
 
   ## Small stress test
+
+  # DSYEVR fails to converge with BLIS for some of these graphs.
+  # Reproduced in the C core: https://github.com/igraph/igraph/pull/2933
+  skip_if(
+    grepl("blis", extSoftVersion()["BLAS"], ignore.case = TRUE),
+    "BLIS BLAS"
+  )
 
   for (i in 1:10) {
     g <- sample_gnp(100, 2 / 100)

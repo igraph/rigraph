@@ -1,9 +1,9 @@
 ## revdepcheck results
 
-We checked 3441 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 3470 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 25 new problems
- * We failed to check 11 packages
+ * We saw 26 new problems
+ * We failed to check 8 packages
 
 Issues with CRAN packages are summarised below.
 
@@ -64,7 +64,7 @@ Issues with CRAN packages are summarised below.
   checking tests ... ERROR
   checking re-building of vignette outputs ... ERROR
 
-* netrics
+* nethist
   checking tests ... ERROR
 
 * optbdmaeAT
@@ -85,6 +85,9 @@ Issues with CRAN packages are summarised below.
 * sfclust
   checking tests ... ERROR
 
+* SpaDES.core
+  checking tests ... ERROR
+
 * tidygraph
   checking examples ... ERROR
   checking tests ... ERROR
@@ -96,12 +99,9 @@ Issues with CRAN packages are summarised below.
 
 * ctmm            (NA)
 * E2E             (NA)
+* gllvm           (NA)
 * hespdiv         (NA)
-* intSDM          (NA)
-* orbital         (NA)
-* PointedSDMs     (NA)
+* orchaRd         (NA)
 * PortfolioTesteR (NA)
-* scITD           (NA)
-* SMMAL           (NA)
-* VIM             (NA)
+* sphet           (NA)
 * xpect           (NA)

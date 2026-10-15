@@ -2,21 +2,17 @@
 % Please edit documentation in R/layout.R
 \name{layout_nicely}
 \alias{layout_nicely}
-\alias{nicely}
 \title{Choose an appropriate graph layout algorithm automatically}
 \usage{
 layout_nicely(graph, dim = 2, ...)
-
-nicely(...)
 }
 \arguments{
 \item{graph}{The input graph}
 
 \item{dim}{Dimensions, should be 2 or 3.}
 
-\item{\dots}{For \code{layout_nicely()} the extra arguments are passed to
-the real layout function. For \code{nicely()} all argument are passed to
-\code{layout_nicely()}.}
+\item{\dots}{Extra arguments are passed to the real layout function that
+\code{layout_nicely()} ends up calling.}
 }
 \value{
 A numeric matrix with two or three columns.
@@ -63,7 +59,8 @@ can use \code{weights = NA} to silence the warning.
 }
 
 \seealso{
-\code{\link[=plot.igraph]{plot.igraph()}}
+\code{\link[=plot.igraph]{plot.igraph()}}. See \code{\link[=nicely]{nicely()}} to build a lazy layout
+specification for \code{\link[=add_layout_]{add_layout_()}}.
 
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},

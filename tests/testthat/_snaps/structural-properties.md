@@ -3,11 +3,9 @@
     Code
       d <- dfs(g, root = 2, unreachable = FALSE, neimode = "out", father = TRUE)
     Condition
-      Error in `dfs()`:
-      ! `...` must be empty.
-      x Problematic arguments:
-      * neimode = "out"
-      * father = TRUE
+      Error:
+      ! The `neimode` argument of `dfs()` was deprecated in igraph 1.3.0 and is now defunct.
+      i Please use the `mode` argument instead.
 
 # bfs() works
 
@@ -49,6 +47,14 @@
        a  b  c  z  d 
       -1  0  1 -1 -1 
       
+      $neimode
+      [1] "out"
+      
+      $father
+      + 5/5 vertices, named:
+         a    b    c    z    d 
+      <NA> <NA>    b <NA> <NA> 
+      
 
 # bfs() deprecated arguments
 
@@ -56,11 +62,9 @@
       b <- bfs(g, root = 2, neimode = "out", unreachable = FALSE, order = TRUE, rank = TRUE,
         father = TRUE, pred = TRUE, succ = TRUE, dist = TRUE)
     Condition
-      Error in `bfs()`:
-      ! `...` must be empty.
-      x Problematic arguments:
-      * neimode = "out"
-      * father = TRUE
+      Error:
+      ! The `neimode` argument of `bfs()` was deprecated in igraph 1.3.0 and is now defunct.
+      i Please use the `mode` argument instead.
 
 # laplacian_matrix() works
 

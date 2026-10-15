@@ -1,5 +1,6 @@
-# Test fixture for the in-place argument-migration generator (tools/migrations.R,
-# tools/generate-migrations.R). `migration_fixture()` carries a generated
+# Test fixture for the in-place argument-migration generator
+# (tools/migrations/fixture.R, tools/generate-migrations.R).
+# `migration_fixture()` carries a generated
 # ARG_HANDLE block that recovers a legacy call to its pre-3.0.0 signature
 # f(graph, n, weight, kind, directed) -- now
 # f(graph, n, ..., weights, type, directed), with `weight` renamed to `weights`
@@ -20,8 +21,6 @@ migration_fixture <- function(
   # BEGIN GENERATED ARG_HANDLE: migration_fixture, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("w", "we", "wei", "weig", "weigh"))
-    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn migration_fixture}.")
     # Pre-3.0.0 signature: migration_fixture(graph, n, weight, kind, directed)
     .old_signature <- function(weight, kind, directed, ...) {
       if (...length() > 0L) {

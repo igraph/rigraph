@@ -1,3 +1,4 @@
+# jarl-ignore-file missing_argument: this is the test's point
 # Tests for the in-place argument-migration generator (tools/generate-migrations.R)
 # via the fixture `migration_fixture()` (R/migration-fixture.R). Old signature
 # f(graph, n, weight, kind, directed); new f(graph, n, ..., weights, type,
@@ -83,7 +84,7 @@ test_that("head args go through base R partial matching, not our recovery", {
     warnPartialMatchArgs = TRUE
   )
   expect_snapshot(migration_fixture(gr = "G", n = 5))
-  expect_snapshot(migration_fixture(g = "G", 5, kind = "in"))
+  expect_snapshot_igraph(migration_fixture(g = "G", 5, kind = "in"))
 })
 
 test_that("recovery emits a single deprecation warning, not one per slot", {
@@ -165,9 +166,9 @@ test_that("empty argument slot messages", {
   # so these read as the old-signature calls they are equivalent to.
   rlang::local_options(lifecycle_verbosity = "warning")
   expect_snapshot(migration_fixture("g", 5, ))
-  expect_snapshot(migration_fixture("g", 5, , "in", TRUE))
-  expect_snapshot(migration_fixture("g", 5, , , TRUE))
-  expect_snapshot(migration_fixture("g", 5, kind = , 1:3))
+  expect_snapshot_igraph(migration_fixture("g", 5, , "in", TRUE))
+  expect_snapshot_igraph(migration_fixture("g", 5, , , TRUE))
+  expect_snapshot_igraph(migration_fixture("g", 5, kind = , 1:3))
 })
 
 test_that("a slot past the last recoverable one is surplus, empty or not", {
@@ -268,23 +269,22 @@ test_that("recovery deprecation messages", {
   # No assignment, so the snapshot also shows the recovered values the call
   # resolved to.
   rlang::local_options(lifecycle_verbosity = "warning")
-  expect_snapshot(migration_fixture("g", 5, 1:3, "in", TRUE))
-  expect_snapshot(migration_fixture("g", 5, 1:3))
-  expect_snapshot(migration_fixture("g", 5, weight = 1:3))
-  expect_snapshot(migration_fixture("g", 5, kind = "in"))
-  expect_snapshot(migration_fixture("g", 5, kin = "in"))
-  expect_snapshot(migration_fixture("g", 5, dir = TRUE))
+  expect_snapshot_igraph(migration_fixture("g", 5, 1:3, "in", TRUE))
+  expect_snapshot_igraph(migration_fixture("g", 5, 1:3))
+  expect_snapshot_igraph(migration_fixture("g", 5, weight = 1:3))
+  expect_snapshot_igraph(migration_fixture("g", 5, kind = "in"))
+  expect_snapshot_igraph(migration_fixture("g", 5, kin = "in"))
+  expect_snapshot_igraph(migration_fixture("g", 5, dir = TRUE))
+  # `weig` prefixes both the old `weight` and the new `weights`, but they are
+  # the same argument, so it recovers instead of being rejected.
+  expect_snapshot_igraph(migration_fixture("g", 5, weig = 1))
   # mixed: a positional value and a named abbreviation in the same call
-  expect_snapshot(migration_fixture("g", 5, 1:3, dir = TRUE))
+  expect_snapshot_igraph(migration_fixture("g", 5, 1:3, dir = TRUE))
 })
 
 test_that("error message snapshots", {
-  # `weig` prefixes both the old `weight` and the new `weights`, so it is
-  # rejected before `.old_signature()` -- which only knows the old names -- gets
-  # a chance to resolve it to `weight`. The rest overflow into
-  # `.old_signature()`'s own `...`, which reports them rather than letting base
-  # R's "unused argument" out.
-  expect_snapshot(migration_fixture("g", 5, weig = 1), error = TRUE)
+  # These overflow into `.old_signature()`'s own `...`, which reports them
+  # rather than letting base R's "unused argument" out.
   expect_snapshot(migration_fixture("g", 5, foo = 1), error = TRUE)
   expect_snapshot(migration_fixture("g", 5, 1:3, weights = 9), error = TRUE)
   expect_snapshot(migration_fixture("g", 5, 1, 2, 3, 4), error = TRUE)
@@ -314,6 +314,37 @@ test_that("the generated block is in sync with the registry", {
   lines <- readLines(fixture, warn = FALSE)
   spliced <- gen_env$splice_blocks(lines, by_fn)
   expect_identical(spliced$lines, lines)
+})
+
+test_that("ambiguous_tags() only flags prefixes with distinct targets", {
+  generator <- testthat::test_path("..", "..", "tools", "generate-migrations.R")
+  skip_if_not(file.exists(generator))
+  gen_env <- new.env()
+  sys.source(generator, envir = gen_env)
+
+  # The old name is a prefix of the new one, so `alg` matches both -- but both
+  # resolve to `algorithm`, and the call is recoverable.
+  norm <- gen_env$normalise_migration(
+    "prefix_rename",
+    list(
+      old = function(graph, algo = algorithm) {},
+      new = function(graph, ..., algorithm = "prpack") {},
+      when = "3.0.0"
+    )
+  )
+  expect_identical(gen_env$ambiguous_tags(norm), character(0))
+
+  # Two recoverable names with distinct targets: the shared prefix stays
+  # ambiguous.
+  norm <- gen_env$normalise_migration(
+    "distinct_targets",
+    list(
+      old = function(graph, damping, directed) {},
+      new = function(graph, ..., damping = 0.85, directed = TRUE) {},
+      when = "3.0.0"
+    )
+  )
+  expect_identical(gen_env$ambiguous_tags(norm), "d")
 })
 
 test_that("normalise_migration() handles head/recoverable prefix overlaps", {
@@ -498,9 +529,9 @@ test_that("abbreviations of a renamed-away name are rejected", {
 
 test_that("shadow fixture messages", {
   rlang::local_options(lifecycle_verbosity = "warning")
-  expect_snapshot(migration_fixture_shadow("g", 1:3))
-  expect_snapshot(migration_fixture_shadow("g", nam = FALSE))
-  expect_snapshot(migration_fixture_shadow("g", 1, 2, 3))
+  expect_snapshot_igraph(migration_fixture_shadow("g", 1:3))
+  expect_snapshot_igraph(migration_fixture_shadow("g", nam = FALSE))
+  expect_snapshot_igraph(migration_fixture_shadow("g", 1, 2, 3))
   expect_snapshot(migration_fixture_shadow("g", at = "w"), error = TRUE)
   expect_snapshot(migration_fixture_shadow("g", foo = 1), error = TRUE)
   expect_snapshot(migration_fixture_shadow("g", 1, 2, 3, 4), error = TRUE)

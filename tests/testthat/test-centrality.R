@@ -79,7 +79,7 @@ test_that("`authority_score()` works", {
   expect_equal(mscale(s1), mscale(s2), ignore_attr = TRUE)
 
   rlang::with_options(lifecycle_verbosity = "warning", {
-    expect_snapshot(
+    expect_snapshot_igraph(
       s3 <- authority_score(g2, options = arpack_defaults)$vector
     )
   })
@@ -136,7 +136,7 @@ test_that("`hub_score()` works", {
   expect_equal(mscale(s1), mscale(s2), ignore_attr = TRUE)
 
   rlang::with_options(lifecycle_verbosity = "warning", {
-    expect_snapshot(
+    expect_snapshot_igraph(
       s3 <- hub_score(g2, options = arpack_defaults)$vector
     )
   })
@@ -934,11 +934,11 @@ test_that("eigen_centrality() deprecated scale argument", {
   rlang::local_options(lifecycle_verbosity = "warning")
   igraph_local_seed(42)
   g <- make_ring(10, directed = FALSE)
-  expect_snapshot({
+  expect_snapshot_igraph({
     invisible(eigen_centrality(g, scale = TRUE))
   })
   # For some reason, this produces different outputs on Windows and macOS
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     invisible(eigen_centrality(g, scale = FALSE))
   })
 })
@@ -1131,10 +1131,19 @@ test_that("page_rank() covers migrated tail args and positional recovery", {
 test_that("page_rank(algo = ) is deprecated but still works", {
   rlang::local_options(lifecycle_verbosity = "warning")
   star <- make_star(10, mode = "undirected")
-  expect_snapshot(
+  expect_snapshot_igraph(
     res_legacy <- page_rank(star, algo = "prpack")
   )
   expect_identical(res_legacy, page_rank(star, algorithm = "prpack"))
+  # `alg` prefixes both `algo` and `algorithm`, but they are the same argument,
+  # so it is recovered rather than rejected as ambiguous.
+  lifecycle::expect_deprecated(res_abbrev <- page_rank(star, alg = "prpack"))
+  expect_identical(res_abbrev, page_rank(star, algorithm = "prpack"))
+  # `d` really is ambiguous (`damping` vs `directed`) and stays an error.
+  expect_error(
+    page_rank(star, d = 0.5),
+    "matches multiple arguments"
+  )
 })
 
 test_that("strength() covers migrated tail args and positional recovery", {

@@ -19,8 +19,17 @@
 #
 ###################################################################
 
-.onAttach <- function(library, pkg) {
-  ## we can't do this in .onLoad
-  unlockBinding(".igraph.pb", asNamespace("igraph"))
-  invisible()
+# The package is published under several names:
+# `igraph` on CRAN, and flavors such as `igraph.dev` alongside.
+# These accessors are the only supported way to refer to it from its own code.
+# The guard in `tests/testthat/test-flavor-package-name.R` fails on any other.
+get_package_name <- function() {
+  # R defines `.packageName` in every package namespace, and
+  # utils::packageName() looks it up the same way, only slower:
+  # the options read the name on every access.
+  .packageName
+}
+
+get_package_env <- function() {
+  asNamespace(get_package_name())
 }
