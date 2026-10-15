@@ -100,7 +100,7 @@ aristas:
 g
 ```
 
-    ## ── <igraph> ───────────────────────────────────────────────────────── 2fe9d3f ──
+    ## ── <igraph> ───────────────────────────────────────────────────────── 681ce02 ──
     ## ℹ undirected · named
     ## ℹ 10 vertices · 2 edges
     ## 
@@ -127,7 +127,7 @@ aristas:
 summary(g)
 ```
 
-    ## ── <igraph> ───────────────────────────────────────────────────────── 2fe9d3f ──
+    ## ── <igraph> ───────────────────────────────────────────────────────── 681ce02 ──
     ## ℹ undirected · named
     ## ℹ 10 vertices · 2 edges
     ## 
@@ -259,7 +259,7 @@ g <- g %>%
 g
 ```
 
-    ## ── <igraph> Zachary ───────────────────────────────────────────────── 6e415c2 ──
+    ## ── <igraph> Zachary ───────────────────────────────────────────────── 0d854eb ──
     ## ℹ undirected
     ## ℹ 40 vertices · 86 edges
     ## 
@@ -402,7 +402,7 @@ graph1 <- make_tree(127, 2, mode = "undirected")
 summary(g)
 ```
 
-    ## ── <igraph> Ring graph ────────────────────────────────────────────── bfe1838 ──
+    ## ── <igraph> Ring graph ────────────────────────────────────────────── 89aeb4e ──
     ## ℹ undirected
     ## ℹ 5 vertices · 3 edges
     ## 
@@ -436,7 +436,7 @@ graph1 <- sample_grg(100, 0.2)
 summary(graph1)
 ```
 
-    ## ── <igraph> Geometric random graph ────────────────────────────────── 3a36905 ──
+    ## ── <igraph> Geometric random graph ────────────────────────────────── 6414a3c ──
     ## ℹ undirected
     ## ℹ 100 vertices · 499 edges
     ## 
@@ -517,7 +517,7 @@ E(g)$is_formal <- c(FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE)
 summary(g)
 ```
 
-    ## ── <igraph> ───────────────────────────────────────────────────────── b872e9a ──
+    ## ── <igraph> ───────────────────────────────────────────────────────── a4ec3f2 ──
     ## ℹ undirected · named
     ## ℹ 7 vertices · 9 edges
     ## 
@@ -601,7 +601,7 @@ V(g)$name[1:3] <- c("Alejandra", "Bruno", "Carmina")
 V(g)
 ```
 
-    ## ── <vertex sequence> 7/7 · named · from b872e9a ────────────────────────────────
+    ## ── <vertex sequence> 7/7 · named · from a4ec3f2 ────────────────────────────────
     ## [1] Alejandra Bruno     Carmina   Moshe     Nang      Samira    Ibrahim
 
 Para eliminar atributos:
@@ -783,7 +783,7 @@ seq <- V(graph)[2, 3, 7]
 seq
 ```
 
-    ## ── <vertex sequence> 3/10 · from c789704 ───────────────────────────────────────
+    ## ── <vertex sequence> 3/10 · from 14a5d05 ───────────────────────────────────────
     ## [1] 2 3 7
 
 ``` r
@@ -792,7 +792,7 @@ seq <- seq[1, 3]    # filtrar un conjunto de vértices existente
 seq
 ```
 
-    ## ── <vertex sequence> 2/10 · from c789704 ───────────────────────────────────────
+    ## ── <vertex sequence> 2/10 · from 14a5d05 ───────────────────────────────────────
     ## [1] 2 7
 
 Al seleccionar un vértice que no existe se produce un error:
@@ -802,7 +802,7 @@ Al seleccionar un vértice que no existe se produce un error:
 seq <- V(graph)[2, 3, 7, "foo", 3.5]
 ```
 
-    ## Error in `simple_vs_index()` at rigraph/R/iterators.R:865:7:
+    ## Error in `simple_vs_index()` at rigraph/R/iterators.R:868:7:
     ## ! Unknown vertex selected.
 
 Los nombres de los atributos también pueden utilizarse tal cual dentro
@@ -882,7 +882,7 @@ Carmina (cuyo ID de vértice es el 3):
 E(g)[.from(3)]
 ```
 
-    ## ── <edge sequence> 4/9 · vertex names · from b872e9a ───────────────────────────
+    ## ── <edge sequence> 4/9 · vertex names · from a4ec3f2 ───────────────────────────
     ## [1] Alejandra ─ Carmina  Carmina ─ Moshe      Carmina ─ Nang      
     ## [4] Carmina ─ Samira
 
@@ -893,7 +893,7 @@ Por supuesto, también funciona con nombres de vértices:
 E(g)[.from("Carmina")]
 ```
 
-    ## ── <edge sequence> 4/9 · vertex names · from b872e9a ───────────────────────────
+    ## ── <edge sequence> 4/9 · vertex names · from a4ec3f2 ───────────────────────────
     ## [1] Alejandra ─ Carmina  Carmina ─ Moshe      Carmina ─ Nang      
     ## [4] Carmina ─ Samira
 
@@ -920,7 +920,7 @@ vértice es el 6):
 E(g) [ 3:5 %--% 5:6 ]
 ```
 
-    ## ── <edge sequence> 3/9 · vertex names · from b872e9a ───────────────────────────
+    ## ── <edge sequence> 3/9 · vertex names · from a4ec3f2 ───────────────────────────
     ## [1] Carmina ─ Nang    Carmina ─ Samira  Nang ─ Samira
 
 Para que el operador `%--%` funcione con nombres, puedes construir
@@ -956,7 +956,7 @@ women
 E(g)[men %--% women]
 ```
 
-    ## ── <edge sequence> 5/9 · vertex names · from b872e9a ───────────────────────────
+    ## ── <edge sequence> 5/9 · vertex names · from a4ec3f2 ───────────────────────────
     ## [1] Alejandra ─ Bruno  Alejandra ─ Moshe  Carmina ─ Moshe    Carmina ─ Nang    
     ## [5] Nang ─ Samira
 

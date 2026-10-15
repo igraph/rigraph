@@ -46,7 +46,7 @@ fw <- foodwebs[[1]] %>%
   set_vertex_attr("size", value = 10) %>%
   set_edge_attr("arrow.size", value = 0.3)
 #> This graph was created by an old(er) igraph version.
-#> ℹ Call `igraph::upgrade_graph()` on it to use with the current igraph version.
+#> ℹ Call `upgrade_graph()` on it to use with the current igraph version.
 #> For now we convert it on the fly...
 
 V(fw)$color <- scales::dscale(V(fw)$Biomass %>% cut(10), diverging_pal)
@@ -58,7 +58,7 @@ karate <- karate %>%
   add_layout_(with_kk()) %>%
   set_vertex_attr("size", value = 10)
 #> This graph was created by an old(er) igraph version.
-#> ℹ Call `igraph::upgrade_graph()` on it to use with the current igraph version.
+#> ℹ Call `upgrade_graph()` on it to use with the current igraph version.
 #> For now we convert it on the fly...
 
 V(karate)$color <- scales::dscale(degree(karate) %>% cut(5), diverging_pal)

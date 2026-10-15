@@ -78,7 +78,7 @@ library(igraphdata)
 data(karate)
 karate_groups <- cluster_optimal(karate)
 #> This graph was created by an old(er) igraph version.
-#> ℹ Call `igraph::upgrade_graph()` on it to use with the current igraph version.
+#> ℹ Call `upgrade_graph()` on it to use with the current igraph version.
 #> For now we convert it on the fly...
 coords <- layout_in_circle(karate,
   order =
