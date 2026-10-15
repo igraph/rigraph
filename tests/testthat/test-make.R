@@ -751,6 +751,25 @@ test_that("realize_degseq() recovers positional tail arguments", {
   lifecycle::expect_deprecated(res <- realize_degseq(c(4, 2), NULL, "all"))
   expect_identical_graphs(
     res,
-    realize_degseq(c(4, 2), allowed.edge.types = "all")
+    realize_degseq(c(4, 2), allowed_edge_types = "all")
+  )
+})
+
+test_that("snake_case renames in realize_*degseq() recover the legacy dotted names", {
+  expect_legacy_arg(realize_degseq, list(), "out.deg", "out_deg", c(2, 2, 2))
+  expect_legacy_arg(realize_degseq, list(c(1, 1)), "in.deg", "in_deg", c(1, 1))
+  expect_legacy_arg(
+    realize_degseq,
+    list(c(2, 2, 2)),
+    "allowed.edge.types",
+    "allowed_edge_types",
+    "all"
+  )
+  expect_legacy_arg(
+    realize_bipartite_degseq,
+    list(c(1, 1), c(2)),
+    "allowed.edge.types",
+    "allowed_edge_types",
+    "multiple"
   )
 })

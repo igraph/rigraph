@@ -11,7 +11,7 @@ test_that("realize_degseq works", {
   expect_equal(degree(nG), degree(g))
   expect_true(is_simple(nG))
 
-  nG <- realize_degseq(degree(g), method = "index", allowed.edge.types = "all")
+  nG <- realize_degseq(degree(g), method = "index", allowed_edge_types = "all")
   expect_equal(degree(nG), degree(g))
 
   #####
@@ -46,7 +46,7 @@ test_that("is_degseq works", {
 test_that("is_graphical() takes `allowed.edge.types` by name", {
   # Two vertices of degree 3 need multi-edges, so the verdict flips.
   expect_false(is_graphical(c(3, 3)))
-  expect_true(is_graphical(c(3, 3), allowed.edge.types = "multi"))
+  expect_true(is_graphical(c(3, 3), allowed_edge_types = "multi"))
   # Directed sequences pass the in-degrees as the second head argument.
   expect_true(is_graphical(c(2, 0, 1), c(1, 1, 1)))
 })
@@ -56,6 +56,20 @@ test_that("is_graphical() recovers legacy positional arguments", {
   lifecycle::expect_deprecated(
     res <- is_graphical(c(3, 3), NULL, "multi")
   )
-  expect_identical(res, is_graphical(c(3, 3), allowed.edge.types = "multi"))
+  expect_identical(res, is_graphical(c(3, 3), allowed_edge_types = "multi"))
   expect_true(res)
+})
+
+test_that("snake_case renames in the degree-sequence checks recover the legacy dotted names", {
+  expect_legacy_arg(is_degseq, list(), "out.deg", "out_deg", c(2, 2, 2))
+  expect_legacy_arg(is_degseq, list(c(1, 1)), "in.deg", "in_deg", c(1, 1))
+  expect_legacy_arg(is_graphical, list(), "out.deg", "out_deg", c(2, 2, 2))
+  expect_legacy_arg(is_graphical, list(c(1, 1)), "in.deg", "in_deg", c(1, 1))
+  expect_legacy_arg(
+    is_graphical,
+    list(c(2, 2, 2)),
+    "allowed.edge.types",
+    "allowed_edge_types",
+    "all"
+  )
 })

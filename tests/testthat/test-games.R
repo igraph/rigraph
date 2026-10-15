@@ -212,7 +212,7 @@ test_that("sample_forestfire() works -- sparse", {
   N <- 5000
   xv <- log(2:N)
 
-  forest_fire <- sample_forestfire(N, fw.prob = 0.35, bw.factor = 0.2 / 0.35)
+  forest_fire <- sample_forestfire(N, fw_prob = 0.35, bw_factor = 0.2 / 0.35)
   yv1 <- log(cumsum(degree(forest_fire, mode = "out"))[-1])
 
   expect_equal(coef(lm(yv1 ~ xv))[[2]], 1.04, tolerance = 0.05)
@@ -224,7 +224,7 @@ test_that("sample_forestfire() works -- densifying", {
   N <- 5000
   xv <- log(2:N)
 
-  forest_fire <- sample_forestfire(N, fw.prob = 0.37, bw.factor = 0.32 / 0.37)
+  forest_fire <- sample_forestfire(N, fw_prob = 0.37, bw_factor = 0.32 / 0.37)
   yv2 <- log(cumsum(degree(forest_fire, mode = "out"))[-1])
 
   expect_equal(coef(lm(yv2 ~ xv))[[2]], 1.21, tolerance = 0.05)
@@ -236,7 +236,7 @@ test_that("sample_forestfire() works -- dense", {
   N <- 5000
   xv <- log(2:N)
 
-  forest_fire <- sample_forestfire(N, fw.prob = 0.38, bw.factor = 0.38 / 0.37)
+  forest_fire <- sample_forestfire(N, fw_prob = 0.38, bw_factor = 0.38 / 0.37)
   yv3 <- log(cumsum(degree(forest_fire, mode = "out"))[-1])
 
   expect_equal(coef(lm(yv3 ~ xv))[[2]], 1.9, tolerance = 0.05)
@@ -248,8 +248,8 @@ test_that("Generating stochastic block models works", {
   bs <- c(4, 6)
   sbm_small <- sample_sbm(
     10,
-    pref.matrix = pm,
-    block.sizes = bs,
+    pref_matrix = pm,
+    block_sizes = bs,
     directed = FALSE,
     loops = FALSE
   )
@@ -260,8 +260,8 @@ test_that("Generating stochastic block models works", {
 
   sbm_small_loops <- sample_sbm(
     10,
-    pref.matrix = pm,
-    block.sizes = bs,
+    pref_matrix = pm,
+    block_sizes = bs,
     directed = FALSE,
     loops = TRUE
   )
@@ -273,8 +273,8 @@ test_that("Generating stochastic block models works", {
 
   sbm_small_directed <- sample_sbm(
     10,
-    pref.matrix = pm,
-    block.sizes = bs,
+    pref_matrix = pm,
+    block_sizes = bs,
     directed = TRUE,
     loops = FALSE
   )
@@ -286,8 +286,8 @@ test_that("Generating stochastic block models works", {
 
   sbm_small_all <- sample_sbm(
     10,
-    pref.matrix = pm,
-    block.sizes = bs,
+    pref_matrix = pm,
+    block_sizes = bs,
     directed = TRUE,
     loops = TRUE
   )
@@ -324,10 +324,10 @@ test_that("sample_pa() works", {
   expect_vcount(g_pa3, 100)
   expect_false(is_simple(g_pa3))
 
-  g_pa4 <- sample_pa(3, out.seq = 0:2, directed = FALSE)
+  g_pa4 <- sample_pa(3, out_seq = 0:2, directed = FALSE)
   expect_equal(degree(g_pa4), rep(2, 3))
 
-  g_pa5 <- sample_pa(3, out.dist = rep(2, 1000), directed = FALSE)
+  g_pa5 <- sample_pa(3, out_dist = rep(2, 1000), directed = FALSE)
   expect_equal(degree(g_pa5), rep(2, 3))
 })
 
@@ -338,7 +338,7 @@ test_that("sample_pa can start from a graph", {
     10,
     m = 1,
     algorithm = "bag",
-    start.graph = make_empty_graph(5)
+    start_graph = make_empty_graph(5)
   )
   expect_ecount(g_pa1, 5)
   expect_vcount(g_pa1, 10)
@@ -354,14 +354,14 @@ test_that("sample_pa can start from a graph", {
   is_degree_two_or_three <- (degree(g_pa1) %in% 2:3)
   expect_true(sum(is_degree_two_or_three) %in% 0:4)
 
-  g_pa2 <- sample_pa(10, m = 1, algorithm = "bag", start.graph = make_star(10))
+  g_pa2 <- sample_pa(10, m = 1, algorithm = "bag", start_graph = make_star(10))
   expect_isomorphic(g_pa2, make_star(10))
 
   g_pa3 <- sample_pa(
     10,
     m = 3,
     algorithm = "psumtree-multiple",
-    start.graph = make_empty_graph(5)
+    start_graph = make_empty_graph(5)
   )
   expect_equal(degree(g_pa3, mode = "out"), c(0, 0, 0, 0, 0, 3, 3, 3, 3, 3))
 
@@ -369,7 +369,7 @@ test_that("sample_pa can start from a graph", {
     10,
     m = 3,
     algorithm = "psumtree-multiple",
-    start.graph = make_star(5)
+    start_graph = make_star(5)
   )
   expect_equal(degree(g_pa4, mode = "out"), c(0, 1, 1, 1, 1, 3, 3, 3, 3, 3))
   expect_isomorphic(induced_subgraph(g_pa4, 1:5), make_star(5))
@@ -378,18 +378,18 @@ test_that("sample_pa can start from a graph", {
     10,
     m = 3,
     algorithm = "psumtree-multiple",
-    start.graph = make_star(10)
+    start_graph = make_star(10)
   )
   expect_isomorphic(g_pa5, make_star(10))
 
-  g_pa6 <- sample_pa(10, m = 3, start.graph = make_empty_graph(5))
+  g_pa6 <- sample_pa(10, m = 3, start_graph = make_empty_graph(5))
   expect_equal(degree(g_pa6, mode = "out"), c(0, 0, 0, 0, 0, 3, 3, 3, 3, 3))
 
-  g_pa7 <- sample_pa(10, m = 3, start.graph = make_star(5))
+  g_pa7 <- sample_pa(10, m = 3, start_graph = make_star(5))
   expect_equal(degree(g_pa7, mode = "out"), c(0, 1, 1, 1, 1, 3, 3, 3, 3, 3))
   expect_isomorphic(induced_subgraph(g_pa7, 1:5), make_star(5))
 
-  g_pa8 <- sample_pa(10, m = 3, start.graph = make_star(10))
+  g_pa8 <- sample_pa(10, m = 3, start_graph = make_star(10))
   expect_isomorphic(g_pa8, make_star(10))
 })
 
@@ -853,7 +853,7 @@ test_that("Dot product rng gives warnings", {
 
 test_that("sample_pa() covers tail args by name and recovers positional calls", {
   igraph_local_seed(42)
-  g_pa <- sample_pa(30, power = 1, m = 2, out.pref = TRUE, zero.appeal = 3)
+  g_pa <- sample_pa(30, power = 1, m = 2, out_pref = TRUE, zero_appeal = 3)
   expect_vcount(g_pa, 30)
   expect_ecount(g_pa, 57)
   expect_true(is_simple(g_pa))
@@ -862,7 +862,7 @@ test_that("sample_pa() covers tail args by name and recovers positional calls", 
   igraph_local_seed(1)
   lifecycle::expect_deprecated(g_legacy <- sample_pa(8, 1, NULL, rep(1, 3)))
   igraph_local_seed(1)
-  expect_identical_graphs(g_legacy, sample_pa(8, 1, NULL, out.dist = rep(1, 3)))
+  expect_identical_graphs(g_legacy, sample_pa(8, 1, NULL, out_dist = rep(1, 3)))
 })
 
 test_that("pa() spec twin matches sample_pa()", {
@@ -871,26 +871,26 @@ test_that("pa() spec twin matches sample_pa()", {
     20,
     power = 1.2,
     m = 2,
-    out.dist = NULL,
-    out.seq = NULL,
-    out.pref = TRUE,
-    zero.appeal = 2,
+    out_dist = NULL,
+    out_seq = NULL,
+    out_pref = TRUE,
+    zero_appeal = 2,
     directed = TRUE,
     algorithm = "psumtree-multiple",
-    start.graph = make_empty_graph(5)
+    start_graph = make_empty_graph(5)
   )
   igraph_local_seed(42)
   g_spec <- sample_(pa(
     20,
     power = 1.2,
     m = 2,
-    out.dist = NULL,
-    out.seq = NULL,
-    out.pref = TRUE,
-    zero.appeal = 2,
+    out_dist = NULL,
+    out_seq = NULL,
+    out_pref = TRUE,
+    zero_appeal = 2,
     directed = TRUE,
     algorithm = "psumtree-multiple",
-    start.graph = make_empty_graph(5)
+    start_graph = make_empty_graph(5)
   ))
   expect_identical_graphs(g_spec, g_direct)
 
@@ -898,7 +898,7 @@ test_that("pa() spec twin matches sample_pa()", {
   igraph_local_seed(1)
   g_legacy <- sample_(spec_legacy)
   igraph_local_seed(1)
-  g_named <- sample_(pa(8, 1, NULL, out.dist = rep(1, 3)))
+  g_named <- sample_(pa(8, 1, NULL, out_dist = rep(1, 3)))
   expect_identical_graphs(g_legacy, g_named)
 })
 
@@ -967,17 +967,17 @@ test_that("sample_pa_age() covers tail args by name and recovers positional call
   igraph_local_seed(42)
   g_page <- sample_pa_age(
     40,
-    pa.exp = 1,
-    aging.exp = -0.5,
+    pa_exp = 1,
+    aging_exp = -0.5,
     m = 2,
-    aging.bin = 50,
-    out.pref = TRUE,
+    aging_bin = 50,
+    out_pref = TRUE,
     directed = FALSE,
-    zero.deg.appeal = 2,
-    zero.age.appeal = 1,
-    deg.coef = 1.5,
-    age.coef = 1.5,
-    time.window = 10
+    zero_deg_appeal = 2,
+    zero_age_appeal = 1,
+    deg_coef = 1.5,
+    age_coef = 1.5,
+    time_window = 10
   )
   expect_vcount(g_page, 40)
   expect_ecount(g_page, 78)
@@ -987,10 +987,10 @@ test_that("sample_pa_age() covers tail args by name and recovers positional call
   # any non-NULL value ends with `m = NULL` reaching the C implementation,
   # which rejects it (same failure on main, so not a migration regression).
   expect_error(
-    suppressWarnings(sample_pa_age(10, 1, 0, out.seq = c(0, rep(2, 9))))
+    suppressWarnings(sample_pa_age(10, 1, 0, out_seq = c(0, rep(2, 9))))
   )
   expect_error(
-    suppressWarnings(sample_pa_age(10, 1, 0, m = 1, out.dist = c(0, 1)))
+    suppressWarnings(sample_pa_age(10, 1, 0, m = 1, out_dist = c(0, 1)))
   )
 
   igraph_local_seed(1)
@@ -998,7 +998,7 @@ test_that("sample_pa_age() covers tail args by name and recovers positional call
   igraph_local_seed(1)
   expect_identical_graphs(
     g_legacy,
-    sample_pa_age(20, 1, -1, 1, aging.bin = 200)
+    sample_pa_age(20, 1, -1, 1, aging_bin = 200)
   )
 })
 
@@ -1006,36 +1006,36 @@ test_that("pa_age() spec twin matches sample_pa_age()", {
   igraph_local_seed(42)
   g_direct <- sample_pa_age(
     30,
-    pa.exp = 1,
-    aging.exp = -0.5,
+    pa_exp = 1,
+    aging_exp = -0.5,
     m = 2,
-    aging.bin = 50,
-    out.dist = NULL,
-    out.seq = NULL,
-    out.pref = TRUE,
+    aging_bin = 50,
+    out_dist = NULL,
+    out_seq = NULL,
+    out_pref = TRUE,
     directed = FALSE,
-    zero.deg.appeal = 2,
-    zero.age.appeal = 1,
-    deg.coef = 1.5,
-    age.coef = 1.5,
-    time.window = 10
+    zero_deg_appeal = 2,
+    zero_age_appeal = 1,
+    deg_coef = 1.5,
+    age_coef = 1.5,
+    time_window = 10
   )
   igraph_local_seed(42)
   g_spec <- sample_(pa_age(
     30,
-    pa.exp = 1,
-    aging.exp = -0.5,
+    pa_exp = 1,
+    aging_exp = -0.5,
     m = 2,
-    aging.bin = 50,
-    out.dist = NULL,
-    out.seq = NULL,
-    out.pref = TRUE,
+    aging_bin = 50,
+    out_dist = NULL,
+    out_seq = NULL,
+    out_pref = TRUE,
     directed = FALSE,
-    zero.deg.appeal = 2,
-    zero.age.appeal = 1,
-    deg.coef = 1.5,
-    age.coef = 1.5,
-    time.window = 10
+    zero_deg_appeal = 2,
+    zero_age_appeal = 1,
+    deg_coef = 1.5,
+    age_coef = 1.5,
+    time_window = 10
   ))
   expect_identical_graphs(g_spec, g_direct)
 
@@ -1043,7 +1043,7 @@ test_that("pa_age() spec twin matches sample_pa_age()", {
   igraph_local_seed(1)
   g_legacy <- sample_(spec_legacy)
   igraph_local_seed(1)
-  g_named <- sample_(pa_age(20, 1, -1, 1, aging.bin = 200))
+  g_named <- sample_(pa_age(20, 1, -1, 1, aging_bin = 200))
   expect_identical_graphs(g_legacy, g_named)
 })
 
@@ -1054,9 +1054,9 @@ test_that("sample_traits_callaway() covers tail args by name and recovers positi
   res <- sample_traits_callaway(
     30,
     2,
-    edge.per.step = 2,
-    type.dist = c(1, 0),
-    pref.matrix = matrix(1, 2, 2),
+    edge_per_step = 2,
+    type_dist = c(1, 0),
+    pref_matrix = matrix(1, 2, 2),
     directed = TRUE
   )
   expect_vcount(res$graph, 30)
@@ -1068,7 +1068,7 @@ test_that("sample_traits_callaway() covers tail args by name and recovers positi
   igraph_local_seed(1)
   lifecycle::expect_deprecated(res_legacy <- sample_traits_callaway(30, 2, 2))
   igraph_local_seed(1)
-  res_named <- sample_traits_callaway(30, 2, edge.per.step = 2)
+  res_named <- sample_traits_callaway(30, 2, edge_per_step = 2)
   expect_identical_graphs(res_legacy$graph, res_named$graph)
   expect_identical(res_legacy$node_type_vec, res_named$node_type_vec)
 })
@@ -1078,18 +1078,18 @@ test_that("traits_callaway() spec twin matches sample_traits_callaway()", {
   res_direct <- sample_traits_callaway(
     30,
     2,
-    edge.per.step = 2,
-    type.dist = c(1, 0),
-    pref.matrix = matrix(1, 2, 2),
+    edge_per_step = 2,
+    type_dist = c(1, 0),
+    pref_matrix = matrix(1, 2, 2),
     directed = TRUE
   )
   igraph_local_seed(42)
   res_spec <- sample_(traits_callaway(
     30,
     2,
-    edge.per.step = 2,
-    type.dist = c(1, 0),
-    pref.matrix = matrix(1, 2, 2),
+    edge_per_step = 2,
+    type_dist = c(1, 0),
+    pref_matrix = matrix(1, 2, 2),
     directed = TRUE
   ))
   expect_identical_graphs(res_spec$graph, res_direct$graph)
@@ -1099,7 +1099,7 @@ test_that("traits_callaway() spec twin matches sample_traits_callaway()", {
   igraph_local_seed(1)
   res_legacy <- sample_(spec_legacy)
   igraph_local_seed(1)
-  res_named <- sample_(traits_callaway(30, 2, edge.per.step = 2))
+  res_named <- sample_(traits_callaway(30, 2, edge_per_step = 2))
   expect_identical_graphs(res_legacy$graph, res_named$graph)
 })
 
@@ -1111,8 +1111,8 @@ test_that("sample_traits() covers tail args by name and recovers positional call
     30,
     2,
     k = 2,
-    type.dist = c(1, 0),
-    pref.matrix = matrix(1, 2, 2),
+    type_dist = c(1, 0),
+    pref_matrix = matrix(1, 2, 2),
     directed = TRUE
   )
   expect_vcount(res$graph, 30)
@@ -1124,7 +1124,7 @@ test_that("sample_traits() covers tail args by name and recovers positional call
   igraph_local_seed(1)
   lifecycle::expect_deprecated(res_legacy <- sample_traits(30, 2, 2, c(1, 0)))
   igraph_local_seed(1)
-  res_named <- sample_traits(30, 2, 2, type.dist = c(1, 0))
+  res_named <- sample_traits(30, 2, 2, type_dist = c(1, 0))
   expect_identical_graphs(res_legacy$graph, res_named$graph)
   expect_identical(res_legacy$node_type_vec, res_named$node_type_vec)
 })
@@ -1135,8 +1135,8 @@ test_that("traits() spec twin matches sample_traits()", {
     30,
     2,
     k = 2,
-    type.dist = c(1, 0),
-    pref.matrix = matrix(1, 2, 2),
+    type_dist = c(1, 0),
+    pref_matrix = matrix(1, 2, 2),
     directed = TRUE
   )
   igraph_local_seed(42)
@@ -1144,8 +1144,8 @@ test_that("traits() spec twin matches sample_traits()", {
     30,
     2,
     k = 2,
-    type.dist = c(1, 0),
-    pref.matrix = matrix(1, 2, 2),
+    type_dist = c(1, 0),
+    pref_matrix = matrix(1, 2, 2),
     directed = TRUE
   ))
   expect_identical_graphs(res_spec$graph, res_direct$graph)
@@ -1155,7 +1155,7 @@ test_that("traits() spec twin matches sample_traits()", {
   igraph_local_seed(1)
   res_legacy <- sample_(spec_legacy)
   igraph_local_seed(1)
-  res_named <- sample_(traits(30, 2, 2, type.dist = c(1, 0)))
+  res_named <- sample_(traits(30, 2, 2, type_dist = c(1, 0)))
   expect_identical_graphs(res_legacy$graph, res_named$graph)
 })
 
@@ -1195,9 +1195,9 @@ test_that("sample_pref() covers tail args by name and recovers positional calls"
   g_pref <- sample_pref(
     20,
     2,
-    type.dist = c(5, 15),
-    fixed.sizes = TRUE,
-    pref.matrix = diag(2),
+    type_dist = c(5, 15),
+    fixed_sizes = TRUE,
+    pref_matrix = diag(2),
     directed = TRUE,
     loops = FALSE
   )
@@ -1214,7 +1214,7 @@ test_that("sample_pref() covers tail args by name and recovers positional calls"
   igraph_local_seed(1)
   lifecycle::expect_deprecated(g_legacy <- sample_pref(20, 2, c(1, 3)))
   igraph_local_seed(1)
-  expect_identical_graphs(g_legacy, sample_pref(20, 2, type.dist = c(1, 3)))
+  expect_identical_graphs(g_legacy, sample_pref(20, 2, type_dist = c(1, 3)))
 })
 
 test_that("pref() spec twin matches sample_pref()", {
@@ -1222,9 +1222,9 @@ test_that("pref() spec twin matches sample_pref()", {
   g_direct <- sample_pref(
     20,
     2,
-    type.dist = c(5, 15),
-    fixed.sizes = TRUE,
-    pref.matrix = diag(2),
+    type_dist = c(5, 15),
+    fixed_sizes = TRUE,
+    pref_matrix = diag(2),
     directed = TRUE,
     loops = FALSE
   )
@@ -1232,9 +1232,9 @@ test_that("pref() spec twin matches sample_pref()", {
   g_spec <- sample_(pref(
     20,
     2,
-    type.dist = c(5, 15),
-    fixed.sizes = TRUE,
-    pref.matrix = diag(2),
+    type_dist = c(5, 15),
+    fixed_sizes = TRUE,
+    pref_matrix = diag(2),
     directed = TRUE,
     loops = FALSE
   ))
@@ -1244,7 +1244,7 @@ test_that("pref() spec twin matches sample_pref()", {
   igraph_local_seed(1)
   g_legacy <- sample_(spec_legacy)
   igraph_local_seed(1)
-  g_named <- sample_(pref(20, 2, type.dist = c(1, 3)))
+  g_named <- sample_(pref(20, 2, type_dist = c(1, 3)))
   expect_identical_graphs(g_legacy, g_named)
 })
 
@@ -1254,8 +1254,8 @@ test_that("sample_asym_pref() covers tail args by name and recovers positional c
   g_asym <- sample_asym_pref(
     20,
     2,
-    type.dist.matrix = type_dist_matrix,
-    pref.matrix = matrix(1, 2, 2),
+    type_dist_matrix = type_dist_matrix,
+    pref_matrix = matrix(1, 2, 2),
     loops = TRUE
   )
   expect_vcount(g_asym, 20)
@@ -1271,7 +1271,7 @@ test_that("sample_asym_pref() covers tail args by name and recovers positional c
   igraph_local_seed(1)
   expect_identical_graphs(
     g_legacy,
-    sample_asym_pref(20, 2, type.dist.matrix = type_dist_matrix)
+    sample_asym_pref(20, 2, type_dist_matrix = type_dist_matrix)
   )
 })
 
@@ -1281,16 +1281,16 @@ test_that("asym_pref() spec twin matches sample_asym_pref()", {
   g_direct <- sample_asym_pref(
     20,
     2,
-    type.dist.matrix = type_dist_matrix,
-    pref.matrix = matrix(1, 2, 2),
+    type_dist_matrix = type_dist_matrix,
+    pref_matrix = matrix(1, 2, 2),
     loops = TRUE
   )
   igraph_local_seed(42)
   g_spec <- sample_(asym_pref(
     20,
     2,
-    type.dist.matrix = type_dist_matrix,
-    pref.matrix = matrix(1, 2, 2),
+    type_dist_matrix = type_dist_matrix,
+    pref_matrix = matrix(1, 2, 2),
     loops = TRUE
   ))
   expect_identical_graphs(g_spec, g_direct)
@@ -1301,7 +1301,7 @@ test_that("asym_pref() spec twin matches sample_asym_pref()", {
   igraph_local_seed(1)
   g_legacy <- sample_(spec_legacy)
   igraph_local_seed(1)
-  g_named <- sample_(asym_pref(20, 2, type.dist.matrix = type_dist_matrix))
+  g_named <- sample_(asym_pref(20, 2, type_dist_matrix = type_dist_matrix))
   expect_identical_graphs(g_legacy, g_named)
 })
 
@@ -1555,15 +1555,15 @@ test_that("sbm() spec twin matches sample_sbm()", {
   pref_matrix <- matrix(1, 2, 2)
   g_direct <- sample_sbm(
     10,
-    pref.matrix = pref_matrix,
-    block.sizes = c(4, 6),
+    pref_matrix = pref_matrix,
+    block_sizes = c(4, 6),
     directed = TRUE,
     loops = TRUE
   )
   g_spec <- sample_(sbm(
     10,
-    pref.matrix = pref_matrix,
-    block.sizes = c(4, 6),
+    pref_matrix = pref_matrix,
+    block_sizes = c(4, 6),
     directed = TRUE,
     loops = TRUE
   ))
@@ -1621,8 +1621,8 @@ test_that("sample_fitness() covers tail args by name and recovers positional cal
   igraph_local_seed(42)
   g_fit <- sample_fitness(
     30,
-    fitness.out = (10:1)^-2,
-    fitness.in = (1:10)^-2,
+    fitness_out = (10:1)^-2,
+    fitness_in = (1:10)^-2,
     loops = TRUE,
     multiple = TRUE
   )
@@ -1646,11 +1646,11 @@ test_that("sample_fitness_pl() covers tail args by name and recovers positional 
   g_fpl <- sample_fitness_pl(
     50,
     100,
-    exponent.out = 2.5,
-    exponent.in = 2.2,
+    exponent_out = 2.5,
+    exponent_in = 2.2,
     loops = TRUE,
     multiple = TRUE,
-    finite.size.correction = FALSE
+    finite_size_correction = FALSE
   )
   expect_vcount(g_fpl, 50)
   expect_ecount(g_fpl, 100)
@@ -1671,8 +1671,8 @@ test_that("sample_forestfire() covers tail args by name and recovers positional 
   igraph_local_seed(42)
   fire <- sample_forestfire(
     30,
-    fw.prob = 0.2,
-    bw.factor = 0.5,
+    fw_prob = 0.2,
+    bw_factor = 0.5,
     ambs = 2,
     directed = FALSE
   )
@@ -1685,7 +1685,7 @@ test_that("sample_forestfire() covers tail args by name and recovers positional 
   igraph_local_seed(1)
   expect_identical_graphs(
     fire_legacy,
-    sample_forestfire(30, 0.2, bw.factor = 0.5)
+    sample_forestfire(30, 0.2, bw_factor = 0.5)
   )
 })
 
@@ -1734,11 +1734,201 @@ test_that("sample_pref(nodes = ) and sample_forestfire(nodes = ) are deprecated 
 
   igraph_local_seed(1)
   lifecycle::expect_deprecated(
-    g_fire_legacy <- sample_forestfire(nodes = 30, fw.prob = 0.2)
+    g_fire_legacy <- sample_forestfire(nodes = 30, fw_prob = 0.2)
   )
   igraph_local_seed(1)
   expect_identical_graphs(
     g_fire_legacy,
-    sample_forestfire(n = 30, fw.prob = 0.2)
+    sample_forestfire(n = 30, fw_prob = 0.2)
   )
+})
+
+test_that("snake_case renames in the games recover the legacy dotted names", {
+  pm <- matrix(c(0.5, 0.1, 0.1, 0.5), 2)
+  sample_spec <- function(spec) function(...) sample_(spec(...))
+  cases <- list(
+    list(
+      sample_asym_pref,
+      list(10, 2),
+      "type.dist.matrix",
+      "type_dist_matrix",
+      matrix(1, 2, 2)
+    ),
+    list(sample_asym_pref, list(10, 2), "pref.matrix", "pref_matrix", pm),
+    list(sample_spec(asym_pref), list(10, 2), "pref.matrix", "pref_matrix", pm),
+    list(
+      sample_chung_lu,
+      list(c(2, 2, 2, 2)),
+      "in.weights",
+      "in_weights",
+      c(2, 2, 2, 2)
+    ),
+    list(sample_chung_lu, list(), "out.weights", "out_weights", c(2, 2, 2, 2)),
+    list(
+      sample_spec(chung_lu),
+      list(),
+      "out.weights",
+      "out_weights",
+      c(2, 2, 2, 2)
+    ),
+    list(sample_pa, list(10), "out.seq", "out_seq", rep(1, 10)),
+    list(sample_pa, list(10), "out.pref", "out_pref", TRUE),
+    list(sample_pa, list(10), "zero.appeal", "zero_appeal", 2),
+    list(
+      sample_pa,
+      list(10),
+      "start.graph",
+      "start_graph",
+      make_ring(3, directed = TRUE)
+    ),
+    list(sample_pa, list(10), "out.dist", "out_dist", c(0, 1)),
+    list(sample_spec(pa), list(10), "zero.appeal", "zero_appeal", 2),
+    list(sample_pa_age, list(20, 1, 0), "aging.bin", "aging_bin", 10),
+    list(sample_pa_age, list(20, 1, 0), "out.pref", "out_pref", TRUE),
+    list(
+      sample_pa_age,
+      list(20, 1, 0),
+      "zero.deg.appeal",
+      "zero_deg_appeal",
+      2
+    ),
+    list(
+      sample_pa_age,
+      list(20, 1, 0),
+      "zero.age.appeal",
+      "zero_age_appeal",
+      1
+    ),
+    list(sample_pa_age, list(20, 1, 0), "deg.coef", "deg_coef", 2),
+    list(sample_pa_age, list(20, 1, 0), "age.coef", "age_coef", 2),
+    list(sample_pa_age, list(20, 1, 0), "time.window", "time_window", 5),
+    list(sample_pa_age, list(20, aging_exp = 0), "pa.exp", "pa_exp", 1),
+    list(sample_pa_age, list(20, pa_exp = 1), "aging.exp", "aging_exp", 0),
+    list(sample_spec(pa_age), list(20, 1, 0), "aging.bin", "aging_bin", 10),
+    list(sample_pref, list(20, 2), "pref.matrix", "pref_matrix", pm),
+    list(sample_pref, list(20, 2), "type.dist", "type_dist", c(1, 3)),
+    list(
+      sample_pref,
+      list(20, 2, type_dist = c(10, 10)),
+      "fixed.sizes",
+      "fixed_sizes",
+      TRUE
+    ),
+    list(sample_spec(pref), list(20, 2), "pref.matrix", "pref_matrix", pm),
+    list(
+      sample_sbm,
+      list(20, block_sizes = c(10, 10)),
+      "pref.matrix",
+      "pref_matrix",
+      pm
+    ),
+    list(sample_sbm, list(20, pm), "block.sizes", "block_sizes", c(10, 10)),
+    list(
+      sample_spec(sbm),
+      list(20, pm),
+      "block.sizes",
+      "block_sizes",
+      c(10, 10)
+    ),
+    list(sample_traits, list(20, 2, 2), "type.dist", "type_dist", c(1, 3)),
+    list(sample_traits, list(20, 2, 2), "pref.matrix", "pref_matrix", pm),
+    list(sample_spec(traits), list(20, 2, 2), "pref.matrix", "pref_matrix", pm),
+    list(
+      sample_traits_callaway,
+      list(20, 2),
+      "edge.per.step",
+      "edge_per_step",
+      2
+    ),
+    list(
+      sample_traits_callaway,
+      list(20, 2),
+      "type.dist",
+      "type_dist",
+      c(1, 3)
+    ),
+    list(sample_traits_callaway, list(20, 2), "pref.matrix", "pref_matrix", pm),
+    list(
+      sample_spec(traits_callaway),
+      list(20, 2),
+      "pref.matrix",
+      "pref_matrix",
+      pm
+    ),
+    list(
+      sample_correlated_gnp,
+      list(corr = 0.5),
+      "old.graph",
+      "old_graph",
+      make_ring(10)
+    ),
+    list(sample_degseq, list(), "out.deg", "out_deg", c(2, 2, 2, 2)),
+    list(sample_degseq, list(c(1, 1, 1, 1)), "in.deg", "in_deg", c(1, 1, 1, 1)),
+    list(sample_fitness, list(fitness_out = 4:1), "no.of.edges", "n_edges", 3),
+    list(sample_fitness, list(3), "fitness.out", "fitness_out", 4:1),
+    list(sample_fitness, list(3, 4:1), "fitness.in", "fitness_in", 1:4),
+    list(
+      sample_fitness_pl,
+      list(n_edges = 15, exponent_out = 2.5),
+      "no.of.nodes",
+      "n",
+      20
+    ),
+    list(
+      sample_fitness_pl,
+      list(20, exponent_out = 2.5),
+      "no.of.edges",
+      "n_edges",
+      15
+    ),
+    list(sample_fitness_pl, list(20, 15), "exponent.out", "exponent_out", 2.5),
+    list(
+      sample_fitness_pl,
+      list(20, 15, 2.5),
+      "exponent.in",
+      "exponent_in",
+      2.5
+    ),
+    list(
+      sample_fitness_pl,
+      list(20, 15, 2.5),
+      "finite.size.correction",
+      "finite_size_correction",
+      FALSE
+    ),
+    list(
+      sample_forestfire,
+      list(20, bw_factor = 0.3),
+      "fw.prob",
+      "fw_prob",
+      0.3
+    ),
+    list(sample_forestfire, list(20, 0.3), "bw.factor", "bw_factor", 0.3),
+    list(
+      sample_islands,
+      list(islands_size = 5, islands_pin = 0.5, n_inter = 1),
+      "islands.n",
+      "n_islands",
+      3
+    ),
+    list(
+      sample_islands,
+      list(3, islands_pin = 0.5, n_inter = 1),
+      "islands.size",
+      "islands_size",
+      5
+    ),
+    list(
+      sample_islands,
+      list(3, 5, n_inter = 1),
+      "islands.pin",
+      "islands_pin",
+      0.5
+    ),
+    list(sample_islands, list(3, 5, 0.5), "n.inter", "n_inter", 1),
+    list(sample_k_regular, list(k = 2), "no.of.nodes", "n", 10)
+  )
+  for (case in cases) {
+    expect_legacy_arg(case[[1]], case[[2]], case[[3]], case[[4]], case[[5]])
+  }
 })

@@ -18,12 +18,14 @@ migrations <- list(
   ),
 
   is_graphical = list(
-    old = function(out.deg, in.deg, allowed.edge.types) {},
+    old = function(out.deg, in.deg, allowed.edge.types = allowed_edge_types) {},
     new = function(
-      out.deg,
-      in.deg = NULL,
+      out_deg,
+      in_deg = NULL,
       ...,
-      allowed.edge.types = c("simple", "loops", "multi", "all")
+      allowed_edge_types = c("simple", "loops", "multi", "all"),
+      out.deg = deprecated(),
+      in.deg = deprecated()
     ) {},
     when = "3.0.0"
   )
