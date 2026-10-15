@@ -1,0 +1,32 @@
+# Configuration for the Pull app (https://github.com/wei/pull),
+# which keeps the fork's mirrors of this repository's branches current.
+#
+# Pull reads this file from the *fork's* default branch, never from here.
+# It is authored in the canonical repository because `main` is the source of
+# truth for CI/CD infrastructure and the fork's `main` is a mirror of it;
+# in this repository the file does nothing, because Pull acts on forks.
+#
+# Every rule hard-resets, which is what makes the branch a mirror rather than a
+# branch of the fork's own: a commit pushed onto one is discarded on the next
+# run, not merged. The fork's series refs carry a suffix (`main-build`,
+# `main-dev`, `main-green`, ...) and match no rule here, so the app can never
+# reach one.
+#
+# `mergeUnstable` lets a mirror advance while the pull request Pull opens for it
+# still has checks pending or red. What a mirror carries was already checked on
+# the branch it mirrors, and a mirror that waits is a mirror that has drifted.
+#
+# Pull runs every six hours per repository, at a fixed random offset it picks
+# itself, so a mirror is at most that far behind between manual triggers.
+#
+# Validate this file:  https://pull.git.ci/check/krlmlr/rigraph
+# Trigger a sync now:  https://pull.git.ci/process/krlmlr/rigraph
+
+version: "1"
+
+rules:
+  # `main` is what the series seeds from and forward-ports from.
+  - base: main
+    upstream: igraph:main
+    mergeMethod: hardreset
+    mergeUnstable: true

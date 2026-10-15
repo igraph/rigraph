@@ -66,6 +66,7 @@
 ^BRANCHES\.md$
 ^scripts$
 ^\.claude$
+^\.series-source$
 ^\.build$
 ^lifecycle$
 ^jarl\.toml$
