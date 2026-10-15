@@ -1212,10 +1212,11 @@
 
 - [`plot(`*`<sir>`*`)`](https://r.igraph.org/reference/plot.sir.md) :
   Plotting the results on multiple SIR model runs
-- [`time_bins()`](https://r.igraph.org/reference/sir.md)
+- [`sir()`](https://r.igraph.org/reference/sir.md)
+  [`time_bins()`](https://r.igraph.org/reference/sir.md)
   [`median(`*`<sir>`*`)`](https://r.igraph.org/reference/sir.md)
-  [`quantile(`*`<sir>`*`)`](https://r.igraph.org/reference/sir.md)
-  [`sir()`](https://r.igraph.org/reference/sir.md) : SIR model on graphs
+  [`quantile(`*`<sir>`*`)`](https://r.igraph.org/reference/sir.md) : SIR
+  model on graphs
 - [`random_walk()`](https://r.igraph.org/reference/random_walk.md)
   [`random_edge_walk()`](https://r.igraph.org/reference/random_walk.md)
   : Random walk on a graph

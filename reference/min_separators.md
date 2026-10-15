@@ -80,72 +80,72 @@ mw5 <- induced_subgraph(mw, as.character(1:7))
 
 min_separators(mw)
 #> [[1]]
-#> ── <vertex sequence> 1/23 · named · from 0d647e5 ───────────────────────────────
+#> ── <vertex sequence> 1/23 · named · from 451e712 ───────────────────────────────
 #> [1] 7
 #> 
 min_separators(mw1)
 #> [[1]]
-#> ── <vertex sequence> 2/14 · named · from c96994d ───────────────────────────────
+#> ── <vertex sequence> 2/14 · named · from dedf515 ───────────────────────────────
 #> [1] 5  19
 #> 
 #> [[2]]
-#> ── <vertex sequence> 2/14 · named · from c96994d ───────────────────────────────
+#> ── <vertex sequence> 2/14 · named · from dedf515 ───────────────────────────────
 #> [1] 5 7
 #> 
 #> [[3]]
-#> ── <vertex sequence> 2/14 · named · from c96994d ───────────────────────────────
+#> ── <vertex sequence> 2/14 · named · from dedf515 ───────────────────────────────
 #> [1] 7  21
 #> 
 #> [[4]]
-#> ── <vertex sequence> 2/14 · named · from c96994d ───────────────────────────────
+#> ── <vertex sequence> 2/14 · named · from dedf515 ───────────────────────────────
 #> [1] 21 19
 #> 
 min_separators(mw2)
 #> [[1]]
-#> ── <vertex sequence> 2/10 · named · from 1d4a828 ───────────────────────────────
+#> ── <vertex sequence> 2/10 · named · from ccb1355 ───────────────────────────────
 #> [1] 10 16
 #> 
 #> [[2]]
-#> ── <vertex sequence> 2/10 · named · from 1d4a828 ───────────────────────────────
+#> ── <vertex sequence> 2/10 · named · from ccb1355 ───────────────────────────────
 #> [1] 14 16
 #> 
 #> [[3]]
-#> ── <vertex sequence> 2/10 · named · from 1d4a828 ───────────────────────────────
+#> ── <vertex sequence> 2/10 · named · from ccb1355 ───────────────────────────────
 #> [1] 8  10
 #> 
 min_separators(mw3)
 #> [[1]]
-#> ── <vertex sequence> 2/7 · named · from 2bc870f ────────────────────────────────
+#> ── <vertex sequence> 2/7 · named · from 277e8fb ────────────────────────────────
 #> [1] 21 19
 #> 
 min_separators(mw4)
 #> [[1]]
-#> ── <vertex sequence> 3/4 · named · from 401ad55 ────────────────────────────────
+#> ── <vertex sequence> 3/4 · named · from da83135 ────────────────────────────────
 #> [1] 8  11 14
 #> 
 #> [[2]]
-#> ── <vertex sequence> 3/4 · named · from 401ad55 ────────────────────────────────
+#> ── <vertex sequence> 3/4 · named · from da83135 ────────────────────────────────
 #> [1] 7  11 14
 #> 
 #> [[3]]
-#> ── <vertex sequence> 3/4 · named · from 401ad55 ────────────────────────────────
+#> ── <vertex sequence> 3/4 · named · from da83135 ────────────────────────────────
 #> [1] 7  8  14
 #> 
 #> [[4]]
-#> ── <vertex sequence> 3/4 · named · from 401ad55 ────────────────────────────────
+#> ── <vertex sequence> 3/4 · named · from da83135 ────────────────────────────────
 #> [1] 7  8  11
 #> 
 min_separators(mw5)
 #> [[1]]
-#> ── <vertex sequence> 5/7 · named · from 8fc1f80 ────────────────────────────────
+#> ── <vertex sequence> 5/7 · named · from 8d32b99 ────────────────────────────────
 #> [1] 2 3 4 5 6
 #> 
 #> [[2]]
-#> ── <vertex sequence> 5/7 · named · from 8fc1f80 ────────────────────────────────
+#> ── <vertex sequence> 5/7 · named · from 8d32b99 ────────────────────────────────
 #> [1] 1 3 4 5 7
 #> 
 #> [[3]]
-#> ── <vertex sequence> 5/7 · named · from 8fc1f80 ────────────────────────────────
+#> ── <vertex sequence> 5/7 · named · from 8d32b99 ────────────────────────────────
 #> [1] 1 2 4 6 7
 #> 
 
@@ -166,47 +166,47 @@ camp <- graph_from_literal(
 )
 min_separators(camp)
 #> [[1]]
-#> ── <vertex sequence> 2/18 · named · from 34096a6 ───────────────────────────────
+#> ── <vertex sequence> 2/18 · named · from b64cee8 ───────────────────────────────
 #> [1] Pat   Holly
 #> 
 #> [[2]]
-#> ── <vertex sequence> 2/18 · named · from 34096a6 ───────────────────────────────
+#> ── <vertex sequence> 2/18 · named · from b64cee8 ───────────────────────────────
 #> [1] Pat     Michael
 #> 
 #> [[3]]
-#> ── <vertex sequence> 2/18 · named · from 34096a6 ───────────────────────────────
+#> ── <vertex sequence> 2/18 · named · from b64cee8 ───────────────────────────────
 #> [1] Pat  John
 #> 
 #> [[4]]
-#> ── <vertex sequence> 2/18 · named · from 34096a6 ───────────────────────────────
+#> ── <vertex sequence> 2/18 · named · from b64cee8 ───────────────────────────────
 #> [1] Holly Gery 
 #> 
 #> [[5]]
-#> ── <vertex sequence> 2/18 · named · from 34096a6 ───────────────────────────────
+#> ── <vertex sequence> 2/18 · named · from b64cee8 ───────────────────────────────
 #> [1] Michael Gery   
 #> 
 #> [[6]]
-#> ── <vertex sequence> 2/18 · named · from 34096a6 ───────────────────────────────
+#> ── <vertex sequence> 2/18 · named · from b64cee8 ───────────────────────────────
 #> [1] John Gery
 #> 
 #> [[7]]
-#> ── <vertex sequence> 2/18 · named · from 34096a6 ───────────────────────────────
+#> ── <vertex sequence> 2/18 · named · from b64cee8 ───────────────────────────────
 #> [1] Gery Russ
 #> 
 #> [[8]]
-#> ── <vertex sequence> 2/18 · named · from 34096a6 ───────────────────────────────
+#> ── <vertex sequence> 2/18 · named · from b64cee8 ───────────────────────────────
 #> [1] Holly   Michael
 #> 
 #> [[9]]
-#> ── <vertex sequence> 2/18 · named · from 34096a6 ───────────────────────────────
+#> ── <vertex sequence> 2/18 · named · from b64cee8 ───────────────────────────────
 #> [1] Holly John 
 #> 
 #> [[10]]
-#> ── <vertex sequence> 2/18 · named · from 34096a6 ───────────────────────────────
+#> ── <vertex sequence> 2/18 · named · from b64cee8 ───────────────────────────────
 #> [1] Steve Bert 
 #> 
 #> [[11]]
-#> ── <vertex sequence> 2/18 · named · from 34096a6 ───────────────────────────────
+#> ── <vertex sequence> 2/18 · named · from b64cee8 ───────────────────────────────
 #> [1] Steve Russ 
 #> 
 ```
