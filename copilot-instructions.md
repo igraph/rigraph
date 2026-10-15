@@ -1,5 +1,9 @@
 # GitHub Copilot Instructions for igraph/rigraph
 
+*Handbook: everything this repository documents lives in
+[`handbook/`](https://r.igraph.org/handbook/README.md);
+[`AGENTS.md`](https://r.igraph.org/AGENTS.md) routes there.*
+
 > **Note**: For general development guidelines, code style conventions,
 > and AI agent instructions, see
 > [`AGENTS.md`](https://r.igraph.org/../AGENTS.md) in the repository
