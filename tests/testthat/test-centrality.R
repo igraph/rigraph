@@ -1112,7 +1112,7 @@ test_that("page_rank() covers migrated tail args and positional recovery", {
 test_that("page_rank(algo = ) is deprecated but still works", {
   rlang::local_options(lifecycle_verbosity = "warning")
   star <- make_star(10, mode = "undirected")
-  expect_snapshot(
+  expect_snapshot_igraph(
     res_legacy <- page_rank(star, algo = "prpack")
   )
   expect_identical(res_legacy, page_rank(star, algorithm = "prpack"))
