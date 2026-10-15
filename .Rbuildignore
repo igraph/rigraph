@@ -65,6 +65,7 @@
 ^R/release\.R$
 ^BRANCHES\.md$
 ^scripts$
+^experiments$
 ^\.claude$
 ^\.build$
 ^lifecycle$
