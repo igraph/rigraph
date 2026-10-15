@@ -308,7 +308,9 @@ max_cardinality <- function(graph) {
 #' Isolate vertices have eccentricity zero.
 #'
 #' @param graph The input graph, it can be directed or undirected.
-#' @param vids The vertices for which the eccentricity is calculated.
+#' @param vertices The vertices for which the eccentricity is calculated.
+#'   The default `NULL` selects all vertices.
+#' @param vids `r lifecycle::badge("deprecated")` Use `vertices` instead.
 #' @inheritParams distances
 #' @inheritParams rlang::args_dots_empty
 #' @return `eccentricity()` returns a numeric vector, containing the
@@ -324,11 +326,27 @@ max_cardinality <- function(graph) {
 #' @export
 eccentricity <- function(
   graph,
-  vids = V(graph),
+  vertices = NULL,
   ...,
   weights = NULL,
-  mode = c("all", "out", "in", "total")
+  mode = c("all", "out", "in", "total"),
+  vids = deprecated()
 ) {
+  if (lifecycle::is_present(vids)) {
+    if (!missing(vertices)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertices} of {.fn eccentricity} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg vids}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "eccentricity(vids = )",
+      "eccentricity(vertices = )"
+    )
+    vertices <- vids
+  }
+
   if (...length() > 0) {
     lifecycle::deprecate_warn(
       "2.1.0",
@@ -345,9 +363,13 @@ eccentricity <- function(
     }
   }
 
+  if (is.null(vertices)) {
+    vertices <- V(graph)
+  }
+
   eccentricity_dijkstra_impl(
     graph = graph,
-    vids = vids,
+    vids = vertices,
     weights = weights,
     mode = mode
   )

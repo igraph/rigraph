@@ -1625,7 +1625,7 @@ distances <- function(
 #'   predecessor is zero, it means that the given vertex was not reached from the
 #'   source during the search. Note that the search terminates if all the
 #'   vertices in `to` are reached.
-#' @param inbound.edges Logical, whether to return the inbound edge for
+#' @param inbound_edges Logical, whether to return the inbound edge for
 #'   each vertex. The inbound edge of vertex `i` in the tree is the edge via
 #'   which vertex `i` was reached. The start vertex and vertices that were
 #'   not reached during the search will have zero in the corresponding entry of
@@ -1642,7 +1642,7 @@ shortest_paths <- function(
   weights = NULL,
   output = c("vpath", "epath", "both"),
   predecessors = FALSE,
-  inbound.edges = FALSE,
+  inbound_edges = FALSE,
   algorithm = c("automatic", "unweighted", "dijkstra", "bellman-ford")
 ) {
   # BEGIN GENERATED ARG_HANDLE: shortest_paths, do not edit, see tools/generate-migrations.R
@@ -1661,7 +1661,7 @@ shortest_paths <- function(
         if (!base::missing(weights)) base::list(weights = weights),
         if (!base::missing(output)) base::list(output = output),
         if (!base::missing(predecessors)) base::list(predecessors = predecessors),
-        if (!base::missing(inbound.edges)) base::list(inbound.edges = inbound.edges),
+        if (!base::missing(inbound.edges)) base::list(inbound_edges = inbound.edges),
         if (!base::missing(algorithm)) base::list(algorithm = algorithm)
       )
     }
@@ -1673,7 +1673,7 @@ shortest_paths <- function(
         if (!base::missing(weights)) "weights",
         if (!base::missing(output)) "output",
         if (!base::missing(predecessors)) "predecessors",
-        if (!base::missing(inbound.edges)) "inbound.edges",
+        if (!base::missing(inbound_edges)) "inbound_edges",
         if (!base::missing(algorithm)) "algorithm"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn shortest_paths} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
@@ -1682,7 +1682,7 @@ shortest_paths <- function(
         "3.0.0",
         what = base::I("Calling `shortest_paths()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  shortest_paths(", base::paste(base::c("graph", "from", "to", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  shortest_paths(", base::paste(base::c("graph", "from", "to", base::c(mode = "mode", weights = "weights", output = "output", predecessors = "predecessors", inbound_edges = "inbound.edges", algorithm = "algorithm")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    shortest_paths(", base::paste(base::c("graph", "from", "to", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -1736,7 +1736,7 @@ shortest_paths <- function(
     weights,
     as.numeric(output),
     as.logical(predecessors),
-    as.logical(inbound.edges),
+    as.logical(inbound_edges),
     as.numeric(algorithm)
   )
 
@@ -2155,14 +2155,14 @@ induced_subgraph <- function(
 #' @param edges The edge IDs of the edges that will be kept in the result graph.
 #' @param eids `r lifecycle::badge("deprecated")` Use `edges` instead.
 #' @inheritParams rlang::args_dots_empty
-#' @param delete.vertices Logical, whether to remove vertices that do
+#' @param delete_vertices Logical, whether to remove vertices that do
 #'   not have any adjacent edges in `edges`.
 #' @export
 subgraph_from_edges <- function(
   graph,
   edges,
   ...,
-  delete.vertices = TRUE,
+  delete_vertices = TRUE,
   eids = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: subgraph_from_edges, do not edit, see tools/generate-migrations.R
@@ -2179,14 +2179,14 @@ subgraph_from_edges <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn subgraph_from_edges}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(delete.vertices)) base::list(delete.vertices = delete.vertices)
+        if (!base::missing(delete.vertices)) base::list(delete_vertices = delete.vertices)
       )
     }
     .arg_handle <- .old_signature(...)
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(delete.vertices)) "delete.vertices"
+        if (!base::missing(delete_vertices)) "delete_vertices"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn subgraph_from_edges} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -2194,7 +2194,7 @@ subgraph_from_edges <- function(
         "3.0.0",
         what = base::I("Calling `subgraph_from_edges()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  subgraph_from_edges(", base::paste(base::c("graph", "edges", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  subgraph_from_edges(", base::paste(base::c("graph", "edges", base::c(delete_vertices = "delete.vertices")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    subgraph_from_edges(", base::paste(base::c("graph", "edges", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -2221,13 +2221,13 @@ subgraph_from_edges <- function(
   # Argument checks
   ensure_igraph(graph)
   edges <- as_igraph_es(graph, edges)
-  delete.vertices <- as.logical(delete.vertices)
+  delete_vertices <- as.logical(delete_vertices)
 
   # Function call
   res <- subgraph_from_edges_impl(
     graph = graph,
     eids = edges,
-    delete_vertices = delete.vertices
+    delete_vertices = delete_vertices
   )
 
   res
@@ -2680,7 +2680,7 @@ constraint <- function(
 #'
 #' @param graph The graph object.
 #' @inheritParams rlang::args_dots_empty
-#' @param ignore.loops Logical, whether to ignore loop edges.
+#' @param ignore_loops Logical, whether to ignore loop edges.
 #' @param mode See below.
 #' @return A numeric scalar between zero and one.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
@@ -2696,7 +2696,7 @@ constraint <- function(
 reciprocity <- function(
   graph,
   ...,
-  ignore.loops = TRUE,
+  ignore_loops = TRUE,
   mode = c("default", "ratio")
 ) {
   # BEGIN GENERATED ARG_HANDLE: reciprocity, do not edit, see tools/generate-migrations.R
@@ -2711,7 +2711,7 @@ reciprocity <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn reciprocity}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(ignore.loops)) base::list(ignore.loops = ignore.loops),
+        if (!base::missing(ignore.loops)) base::list(ignore_loops = ignore.loops),
         if (!base::missing(mode)) base::list(mode = mode)
       )
     }
@@ -2719,7 +2719,7 @@ reciprocity <- function(
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(ignore.loops)) "ignore.loops",
+        if (!base::missing(ignore_loops)) "ignore_loops",
         if (!base::missing(mode)) "mode"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn reciprocity} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
@@ -2728,7 +2728,7 @@ reciprocity <- function(
         "3.0.0",
         what = base::I("Calling `reciprocity()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  reciprocity(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  reciprocity(", base::paste(base::c("graph", base::c(ignore_loops = "ignore.loops", mode = "mode")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    reciprocity(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -2738,7 +2738,7 @@ reciprocity <- function(
 
   reciprocity_impl(
     graph = graph,
-    ignore_loops = ignore.loops,
+    ignore_loops = ignore_loops,
     mode = mode
   )
 }
@@ -4121,19 +4121,22 @@ bfs <- function(
 #'   visited.
 #' @param order Logical, whether to return the DFS ordering of the
 #'   vertices.
-#' @param order.out Logical, whether to return the ordering based on
+#' @param order_out Logical, whether to return the ordering based on
 #'   leaving the subtree of the vertex.
+#' @param order.out `r lifecycle::badge("deprecated")` Use `order_out` instead.
 #' @param father `r lifecycle::badge("deprecated")`, use `parent` instead.
 #' @param parent Logical, whether to return the parent of the vertices.
 #' @param dist Logical, whether to return the distance from the root of
 #'   the search tree.
-#' @param in.callback Callback function.
+#' @param in_callback Callback function.
 #'   This is called whenever a vertex is visited. See details below.
 #'   Default: `NULL`.
-#' @param out.callback Callback function.
+#' @param in.callback `r lifecycle::badge("deprecated")` Use `in_callback` instead.
+#' @param out_callback Callback function.
 #'   This is called whenever the subtree of a vertex is completed by the
 #'   algorithm. See details below.
 #'   Default: `NULL`.
+#' @param out.callback `r lifecycle::badge("deprecated")` Use `out_callback` instead.
 #' @param extra Additional argument to supply to the callback function.
 #' @param rho The environment in which the callback function is evaluated.
 #'   The default `NULL` uses the caller's environment.
@@ -4166,7 +4169,7 @@ bfs <- function(
 #'     }
 #'   }
 #'
-#'   Note that `order`, `order.out`, `parent`, and `dist`
+#'   Note that `order`, `order_out`, `parent`, and `dist`
 #'   might be `NULL` if their corresponding argument is `FALSE`, i.e.
 #'   if their calculation is not requested.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -4182,7 +4185,7 @@ bfs <- function(
 #'   root = 1, mode = "out",
 #'   unreachable = TRUE,
 #'   order = TRUE,
-#'   order.out = TRUE,
+#'   order_out = TRUE,
 #'   parent = TRUE
 #' )
 #'
@@ -4198,7 +4201,7 @@ bfs <- function(
 #' tmp <- dfs(
 #'   graph = make_tree(10),
 #'   root = 1, mode = "out",
-#'   in.callback = f.in, out.callback = f.out
+#'   in_callback = f.in, out_callback = f.out
 #' )
 #'
 #' ## Terminate after the first component, using a callback
@@ -4208,7 +4211,7 @@ bfs <- function(
 #' tmp <- dfs(
 #'   graph = make_tree(10) %du% make_tree(10),
 #'   root = 1,
-#'   out.callback = f.out
+#'   out_callback = f.out
 #' )
 #'
 dfs <- function(
@@ -4218,17 +4221,60 @@ dfs <- function(
   ...,
   unreachable = TRUE,
   order = TRUE,
-  order.out = FALSE,
+  order_out = FALSE,
   parent = FALSE,
   dist = FALSE,
-  in.callback = NULL,
-  out.callback = NULL,
+  in_callback = NULL,
+  out_callback = NULL,
   extra = NULL,
   rho = NULL,
   neimode = deprecated(),
-  father = deprecated()
+  father = deprecated(),
+  order.out = deprecated(),
+  in.callback = deprecated(),
+  out.callback = deprecated()
 ) {
   rlang::check_dots_empty()
+  if (lifecycle::is_present(out.callback)) {
+    if (!missing(out_callback)) {
+      cli::cli_abort(c(
+        "Argument {.arg out_callback} of {.fn dfs} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg out.callback}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "dfs(out.callback = )",
+      "dfs(out_callback = )"
+    )
+    out_callback <- out.callback
+  }
+
+  if (lifecycle::is_present(in.callback)) {
+    if (!missing(in_callback)) {
+      cli::cli_abort(c(
+        "Argument {.arg in_callback} of {.fn dfs} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg in.callback}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "dfs(in.callback = )",
+      "dfs(in_callback = )"
+    )
+    in_callback <- in.callback
+  }
+
+  if (lifecycle::is_present(order.out)) {
+    if (!missing(order_out)) {
+      cli::cli_abort(c(
+        "Argument {.arg order_out} of {.fn dfs} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg order.out}."
+      ))
+    }
+    lifecycle::deprecate_soft("3.0.0", "dfs(order.out = )", "dfs(order_out = )")
+    order_out <- order.out
+  }
 
   ensure_igraph(graph)
   if (is.null(rho)) {
@@ -4256,11 +4302,11 @@ dfs <- function(
     "total" = 3
   )
   unreachable <- as.logical(unreachable)
-  if (!is.null(in.callback)) {
-    in.callback <- as.function(in.callback)
+  if (!is.null(in_callback)) {
+    in_callback <- as.function(in_callback)
   }
-  if (!is.null(out.callback)) {
-    out.callback <- as.function(out.callback)
+  if (!is.null(out_callback)) {
+    out_callback <- as.function(out_callback)
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
@@ -4271,11 +4317,11 @@ dfs <- function(
     mode,
     unreachable,
     as.logical(order),
-    as.logical(order.out),
+    as.logical(order_out),
     as.logical(parent),
     as.logical(dist),
-    in.callback,
-    out.callback,
+    in_callback,
+    out_callback,
     extra,
     rho
   )
@@ -4286,7 +4332,7 @@ dfs <- function(
   if (order) {
     res$order <- res$order + 1
   }
-  if (order.out) {
+  if (order_out) {
     res$order.out <- res$order.out + 1
   }
   if (parent) {
@@ -4297,7 +4343,7 @@ dfs <- function(
     if (order) {
       res$order <- V(graph)[.env$res$order, na_ok = TRUE]
     }
-    if (order.out) {
+    if (order_out) {
       res$order.out <- V(graph)[.env$res$order.out, na_ok = TRUE]
     }
     if (parent) res$parent <- create_vs(graph, res$parent, na_ok = TRUE)
@@ -4305,7 +4351,7 @@ dfs <- function(
     if (order) {
       res$order <- res$order[res$order != 0]
     }
-    if (order.out) res$order.out <- res$order.out[res$order.out != 0]
+    if (order_out) res$order.out <- res$order.out[res$order.out != 0]
   }
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
@@ -5176,7 +5222,7 @@ which_mutual <- function(
 #' @param mode Character constant to indicate the type of neighbors to consider
 #'   in directed graphs. `out` considers out-neighbors, `in` considers
 #'   in-neighbors and `all` ignores edge directions.
-#' @param neighbor.degree.mode The type of degree to average in directed graphs.
+#' @param neighbor_degree_mode The type of degree to average in directed graphs.
 #'   `out` averages out-degrees, `in` averages in-degrees and `all`
 #'   ignores edge directions for the degree calculation.
 #' @param weights Weight vector. If the graph has a `weight` edge
@@ -5228,7 +5274,7 @@ knn <- function(
   vertices = NULL,
   ...,
   mode = c("all", "out", "in", "total"),
-  neighbor.degree.mode = c("all", "out", "in", "total"),
+  neighbor_degree_mode = c("all", "out", "in", "total"),
   weights = NULL,
   vids = deprecated()
 ) {
@@ -5247,7 +5293,7 @@ knn <- function(
       }
       base::c(
         if (!base::missing(mode)) base::list(mode = mode),
-        if (!base::missing(neighbor.degree.mode)) base::list(neighbor.degree.mode = neighbor.degree.mode),
+        if (!base::missing(neighbor.degree.mode)) base::list(neighbor_degree_mode = neighbor.degree.mode),
         if (!base::missing(weights)) base::list(weights = weights)
       )
     }
@@ -5256,7 +5302,7 @@ knn <- function(
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
         if (!base::missing(mode)) "mode",
-        if (!base::missing(neighbor.degree.mode)) "neighbor.degree.mode",
+        if (!base::missing(neighbor_degree_mode)) "neighbor_degree_mode",
         if (!base::missing(weights)) "weights"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn knn} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
@@ -5265,7 +5311,7 @@ knn <- function(
         "3.0.0",
         what = base::I("Calling `knn()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  knn(", base::paste(base::c("graph", "vertices", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  knn(", base::paste(base::c("graph", "vertices", base::c(mode = "mode", neighbor_degree_mode = "neighbor.degree.mode", weights = "weights")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    knn(", base::paste(base::c("graph", "vertices", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -5292,7 +5338,7 @@ knn <- function(
     graph = graph,
     vids = vertices,
     mode = mode,
-    neighbor_degree_mode = neighbor.degree.mode,
+    neighbor_degree_mode = neighbor_degree_mode,
     weights = weights
   )
 }

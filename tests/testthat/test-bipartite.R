@@ -62,9 +62,9 @@ test_that("bipartite_projection removes 'type' attribute if requested", {
   proj_false <- bipartite_projection(g, which = "true")
   proj_true <- bipartite_projection(g, which = "false")
 
-  proj_rmtype <- bipartite_projection(g, remove.type = FALSE)
-  proj_rm_false <- bipartite_projection(g, which = "true", remove.type = FALSE)
-  proj_rm_true <- bipartite_projection(g, which = "false", remove.type = FALSE)
+  proj_rmtype <- bipartite_projection(g, remove_type = FALSE)
+  proj_rm_false <- bipartite_projection(g, which = "true", remove_type = FALSE)
+  proj_rm_true <- bipartite_projection(g, which = "false", remove_type = FALSE)
 
   expect_false("type" %in% vertex_attr_names(proj[[1]]))
   expect_false("type" %in% vertex_attr_names(proj[[2]]))
@@ -109,7 +109,7 @@ test_that("bipartite_projection() takes all tail arguments by name", {
     g,
     multiplicity = FALSE,
     which = "false",
-    remove.type = FALSE
+    remove_type = FALSE
   )
   expect_true(is_igraph(proj))
   expect_vcount(proj, 3)
@@ -138,4 +138,15 @@ test_that("bipartite_projection() recovers legacy positional arguments", {
   expect_identical_graphs(res[[1]], ref[[1]])
   expect_identical_graphs(res[[2]], ref[[2]])
   expect_false("weight" %in% edge_attr_names(res[[1]]))
+})
+
+test_that("bipartite_projection(remove.type = ) is renamed to `remove_type`", {
+  g <- make_full_bipartite_graph(2, 3)
+  expect_legacy_arg(
+    bipartite_projection,
+    list(g),
+    "remove.type",
+    "remove_type",
+    FALSE
+  )
 })

@@ -835,38 +835,38 @@ test_that("graph_from_adjacency_matrix handles add.colnames and add.rownames = F
   expect_equal(V(g_default)$name, c("X", "Y"))
 
   # Test add.colnames = FALSE (should not add column names)
-  g_no_colnames <- graph_from_adjacency_matrix(M, add.colnames = FALSE)
+  g_no_colnames <- graph_from_adjacency_matrix(M, add_colnames = FALSE)
   expect_null(V(g_no_colnames)$name)
 
   # Test add.rownames = FALSE (should not add row names)
   g_no_rownames <- graph_from_adjacency_matrix(
     M,
-    add.colnames = NA,
-    add.rownames = FALSE
+    add_colnames = NA,
+    add_rownames = FALSE
   )
   expect_null(V(g_no_rownames)$name)
 
   # Test both FALSE
   g_no_names <- graph_from_adjacency_matrix(
     M,
-    add.colnames = FALSE,
-    add.rownames = FALSE
+    add_colnames = FALSE,
+    add_rownames = FALSE
   )
   expect_null(V(g_no_names)$name)
 
   # Test with custom attribute names and FALSE values
   g_col_false <- graph_from_adjacency_matrix(
     M,
-    add.colnames = FALSE,
-    add.rownames = "vertex_id"
+    add_colnames = FALSE,
+    add_rownames = "vertex_id"
   )
   expect_equal(V(g_col_false)$vertex_id, c("A", "B"))
   expect_null(V(g_col_false)$name)
 
   g_row_false <- graph_from_adjacency_matrix(
     M,
-    add.colnames = "vertex_name",
-    add.rownames = FALSE
+    add_colnames = "vertex_name",
+    add_rownames = FALSE
   )
   expect_equal(V(g_row_false)$vertex_name, c("X", "Y"))
   expect_null(V(g_row_false)$name)
@@ -875,18 +875,18 @@ test_that("graph_from_adjacency_matrix handles add.colnames and add.rownames = F
   M_no_names <- matrix(c(0, 1, 1, 0), nrow = 2, ncol = 2)
   g_no_names_matrix <- graph_from_adjacency_matrix(
     M_no_names,
-    add.colnames = FALSE,
-    add.rownames = FALSE
+    add_colnames = FALSE,
+    add_rownames = FALSE
   )
   expect_null(V(g_no_names_matrix)$name)
 
   # Test that FALSE is equivalent to NA behavior
-  g_na_col <- graph_from_adjacency_matrix(M, add.colnames = NA)
-  g_false_col <- graph_from_adjacency_matrix(M, add.colnames = FALSE)
+  g_na_col <- graph_from_adjacency_matrix(M, add_colnames = NA)
+  g_false_col <- graph_from_adjacency_matrix(M, add_colnames = FALSE)
   expect_equal(vertex_attr_names(g_na_col), vertex_attr_names(g_false_col))
 
-  g_na_row <- graph_from_adjacency_matrix(M, add.rownames = NA)
-  g_false_row <- graph_from_adjacency_matrix(M, add.rownames = FALSE)
+  g_na_row <- graph_from_adjacency_matrix(M, add_rownames = NA)
+  g_false_row <- graph_from_adjacency_matrix(M, add_rownames = FALSE)
   expect_equal(vertex_attr_names(g_na_row), vertex_attr_names(g_false_row))
 })
 
@@ -976,16 +976,16 @@ test_that("from_adjacency() covers tail args by name and recovers positional cal
     mode = "undirected",
     weighted = TRUE,
     diag = FALSE,
-    add.colnames = "col_code",
-    add.rownames = "row_code"
+    add_colnames = "col_code",
+    add_rownames = "row_code"
   ))
   g_direct <- graph_from_adjacency_matrix(
     M,
     mode = "undirected",
     weighted = TRUE,
     diag = FALSE,
-    add.colnames = "col_code",
-    add.rownames = "row_code"
+    add_colnames = "col_code",
+    add_rownames = "row_code"
   )
   expect_identical_graphs(g_spec, g_direct)
   # diag = FALSE drops the loop on vertex 2.
@@ -1000,5 +1000,30 @@ test_that("from_adjacency() covers tail args by name and recovers positional cal
   expect_identical_graphs(
     make_(spec_legacy),
     make_(from_adjacency(M, mode = "undirected"))
+  )
+})
+
+test_that("graph_from_adjacency_matrix() recovers the legacy dotted names", {
+  m <- matrix(c(0, 1, 1, 0), 2, dimnames = list(c("a", "b"), c("x", "y")))
+  expect_legacy_arg(
+    graph_from_adjacency_matrix,
+    list(m),
+    "add.colnames",
+    "add_colnames",
+    "cn"
+  )
+  expect_legacy_arg(
+    graph_from_adjacency_matrix,
+    list(m),
+    "add.rownames",
+    "add_rownames",
+    "rn"
+  )
+  expect_legacy_arg(
+    function(...) sample_(from_adjacency(...)),
+    list(m),
+    "add.rownames",
+    "add_rownames",
+    "rn"
   )
 })

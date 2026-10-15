@@ -123,13 +123,14 @@ assortativity.degree <- function(graph, directed = TRUE) {
 #' @param graph The input graph, it can be directed or undirected.
 #' @param values The vertex values, these can be arbitrary numeric values.
 #' @inheritParams rlang::args_dots_empty
-#' @param values.in A second value vector to use for the incoming edges when
+#' @param values_in A second value vector to use for the incoming edges when
 #'   calculating assortativity for a directed graph.
 #'   Supply `NULL` here if
 #'   you want to use the same values for outgoing and incoming edges.
 #'   This
 #'   argument is ignored (with a warning) if it is not `NULL` and undirected
 #'   assortativity coefficient is being calculated.
+#' @param values.in `r lifecycle::badge("deprecated")` Use `values_in` instead.
 #' @param directed Logical, whether to consider edge directions for
 #'   directed graphs.
 #'   This argument is ignored for undirected graphs.
@@ -143,7 +144,7 @@ assortativity.degree <- function(graph, directed = TRUE) {
 #' values at the two ends of edges.
 #' @param types1,types2
 #'   `r lifecycle::badge("deprecated")`
-#'   Deprecated aliases for `values` and `values.in`, respectively.
+#'   Deprecated aliases for `values` and `values_in`, respectively.
 #' @return A single real number.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references M. E. J. Newman: Mixing patterns in networks, *Phys. Rev.
@@ -164,12 +165,28 @@ assortativity <- function(
   graph,
   values,
   ...,
-  values.in = NULL,
+  values_in = NULL,
   directed = TRUE,
   normalized = TRUE,
   types1 = NULL,
-  types2 = NULL
+  types2 = NULL,
+  values.in = deprecated()
 ) {
+  if (lifecycle::is_present(values.in)) {
+    if (!missing(values_in)) {
+      cli::cli_abort(c(
+        "Argument {.arg values_in} of {.fn assortativity} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg values.in}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "assortativity(values.in = )",
+      "assortativity(values_in = )"
+    )
+    values_in <- values.in
+  }
+
   if (...length() > 0) {
     lifecycle::deprecate_warn(
       "1.6.0",
@@ -207,14 +224,14 @@ assortativity <- function(
       "assortativity(types2 =)",
       "assortativity(values.in =)"
     )
-    stopifnot(is.null(values.in))
-    values.in <- types2
+    stopifnot(is.null(values_in))
+    values_in <- types2
   }
 
   assortativity_impl(
     graph = graph,
     values = values,
-    values_in = values.in,
+    values_in = values_in,
     directed = directed,
     normalized = normalized
   )

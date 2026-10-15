@@ -52,7 +52,7 @@ get.stochastic <- function(
 #'
 #' @param graph The input graph. Must be of class `igraph`.
 #' @inheritParams rlang::args_dots_empty
-#' @param column.wise If `FALSE`, then the rows of the stochastic matrix
+#' @param column_wise If `FALSE`, then the rows of the stochastic matrix
 #'   sum up to one; otherwise it is the columns.
 #' @param sparse Logical, whether to return a sparse matrix. The
 #'   `Matrix` package is needed for sparse matrices. The default `NULL` uses
@@ -79,7 +79,7 @@ get.stochastic <- function(
 stochastic_matrix <- function(
   graph,
   ...,
-  column.wise = FALSE,
+  column_wise = FALSE,
   sparse = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: stochastic_matrix, do not edit, see tools/generate-migrations.R
@@ -94,7 +94,7 @@ stochastic_matrix <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn stochastic_matrix}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(column.wise)) base::list(column.wise = column.wise),
+        if (!base::missing(column.wise)) base::list(column_wise = column.wise),
         if (!base::missing(sparse)) base::list(sparse = sparse)
       )
     }
@@ -102,7 +102,7 @@ stochastic_matrix <- function(
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(column.wise)) "column.wise",
+        if (!base::missing(column_wise)) "column_wise",
         if (!base::missing(sparse)) "sparse"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn stochastic_matrix} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
@@ -111,7 +111,7 @@ stochastic_matrix <- function(
         "3.0.0",
         what = base::I("Calling `stochastic_matrix()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  stochastic_matrix(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  stochastic_matrix(", base::paste(base::c("graph", base::c(column_wise = "column.wise", sparse = "sparse")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    stochastic_matrix(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -125,10 +125,10 @@ stochastic_matrix <- function(
     sparse <- igraph_opt("sparsematrices")
   }
 
-  column.wise <- as.logical(column.wise)
-  if (length(column.wise) != 1) {
+  column_wise <- as.logical(column_wise)
+  if (length(column_wise) != 1) {
     cli::cli_abort(
-      "{.arg column.wise} must be a Logical, not {.obj_type_friendly {column.wise}}."
+      "{.arg column_wise} must be a Logical, not {.obj_type_friendly {column.wise}}."
     )
   }
 
@@ -142,14 +142,14 @@ stochastic_matrix <- function(
   if (sparse) {
     res <- get_stochastic_sparse_impl(
       graph = graph,
-      column_wise = column.wise,
+      column_wise = column_wise,
       weights = NULL
     )
     res <- igraph.i.spMatrix(res)
   } else {
     res <- get_stochastic_impl(
       graph = graph,
-      column_wise = column.wise,
+      column_wise = column_wise,
       weights = NULL
     )
   }

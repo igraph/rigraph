@@ -29,7 +29,7 @@ test_that("export_pajek() tail arguments and legacy positional recovery", {
 
   # project.file = FALSE writes separate network, hierarchy and block files.
   base <- file.path(tmp, "cb")
-  expect_null(export_pajek(blks, g, file = base, project.file = FALSE))
+  expect_null(export_pajek(blks, g, file = base, project_file = FALSE))
   expect_true(file.exists(paste0(base, ".net")))
   expect_true(file.exists(paste0(base, "_hierarchy.net")))
   expect_true(all(file.exists(paste0(base, "_block_", 1:2, ".clu"))))
@@ -49,4 +49,15 @@ test_that("export_pajek() tail arguments and legacy positional recovery", {
     readLines(paste0(base2, ".net")),
     readLines(paste0(base, ".net"))
   )
+})
+
+test_that("export_pajek(project.file = ) is renamed to `project_file`", {
+  g <- make_graph("Zachary")
+  blocks <- cohesive_blocks(g)
+  f1 <- withr::local_tempfile(fileext = ".paj")
+  f2 <- withr::local_tempfile(fileext = ".paj")
+  rlang::local_options(lifecycle_verbosity = "warning")
+  lifecycle::expect_deprecated(export_pajek(blocks, g, f1, project.file = TRUE))
+  export_pajek(blocks, g, f2, project_file = TRUE)
+  expect_identical(readLines(f1), readLines(f2))
 })

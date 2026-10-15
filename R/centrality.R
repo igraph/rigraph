@@ -2294,7 +2294,7 @@ bonpow.sparse <- function(
 ) {
   ## remove loops if requested
   if (!loops) {
-    graph <- simplify(graph, remove.multiple = FALSE, remove.loops = TRUE)
+    graph <- simplify(graph, remove_multiple = FALSE, remove_loops = TRUE)
   }
 
   vg <- vcount(graph)
@@ -2582,7 +2582,7 @@ alpha.centrality.sparse <- function(
   vc <- vcount(graph)
 
   if (!loops) {
-    graph <- simplify(graph, remove.multiple = FALSE, remove.loops = TRUE)
+    graph <- simplify(graph, remove_multiple = FALSE, remove_loops = TRUE)
   }
 
   M <- Matrix::t(as_adjacency_matrix(graph, weights = weights, sparse = TRUE))

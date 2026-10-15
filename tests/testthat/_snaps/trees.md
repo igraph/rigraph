@@ -7,6 +7,10 @@
       `subgraph.edges()` was deprecated in igraph 2.1.0.
       i Please use `subgraph_from_edges()` instead.
       Warning:
+      Calling `subgraph_from_edges()` with positional or abbreviated arguments was deprecated in igraph 3.0.0.
+      i Detected call: subgraph_from_edges(graph, edges, delete.vertices)
+      i Use instead: subgraph_from_edges(graph, edges, delete_vertices = )
+      Warning:
       The `eids` argument of `subgraph_from_edges()` is deprecated as of igraph 3.0.0.
       i Please use the `edges` argument instead.
     Output

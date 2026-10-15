@@ -45,7 +45,7 @@ test_that("eccentricity() works -- lifecycle", {
   igraph_local_seed(42)
   g <- make_tree(10, 2)
 
-  expect_snapshot_igraph(eccentricity(g, vids = V(g), "out"))
+  expect_snapshot_igraph(eccentricity(g, vertices = V(g), "out"))
 })
 
 test_that("graph_center() works", {
@@ -97,4 +97,10 @@ test_that("distance_table() tail arguments and legacy positional recovery", {
 
   lifecycle::expect_deprecated(res2 <- distance_table(g, FALSE))
   expect_identical(res2, distance_table(g, directed = FALSE))
+})
+
+test_that("eccentricity(vids = ) is renamed to `vertices`", {
+  g <- make_tree(10, 2)
+  expect_legacy_arg(eccentricity, list(g), "vids", "vertices", 1:3)
+  expect_equal(eccentricity(g, vertices = NULL), eccentricity(g))
 })

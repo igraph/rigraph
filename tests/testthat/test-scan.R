@@ -151,12 +151,12 @@ test_that("Issue 18 is really resolved", {
   g <- make_graph(el)
 
   sc1 <- sapply(make_ego_graph(g, order = 1, mode = "all"), ecount)
-  sc2 <- local_scan(graph.us = g, mode = "all", k = 1)
+  sc2 <- local_scan(graph_us = g, mode = "all", k = 1)
   expect_equal(sc1, sc2)
 
   g2 <- induced_subgraph(g, 5:8)
   sc21 <- sapply(make_ego_graph(g2, order = 1, mode = "all"), ecount)
-  sc22 <- local_scan(graph.us = g2, mode = "all", k = 1)
+  sc22 <- local_scan(graph_us = g2, mode = "all", k = 1)
   expect_equal(sc21, sc22)
 })
 
@@ -184,4 +184,17 @@ test_that("weights argument works", {
   expect_equal(r1, r2)
   r3 <- local_scan(g, k = 1, weighted = FALSE, weights = 1:10)
   expect_equal(r3, rep(2, 10))
+})
+
+test_that("local_scan(graph.us = , graph.them = ) are renamed", {
+  g1 <- make_ring(5)
+  g2 <- make_star(5, mode = "undirected")
+  expect_legacy_arg(
+    local_scan,
+    list(graph_them = g2),
+    "graph.us",
+    "graph_us",
+    g1
+  )
+  expect_legacy_arg(local_scan, list(g1), "graph.them", "graph_them", g2)
 })

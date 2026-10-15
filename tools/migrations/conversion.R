@@ -43,8 +43,8 @@ migrations <- list(
       mode,
       weighted,
       diag,
-      add.colnames,
-      add.rownames
+      add.colnames = add_colnames,
+      add.rownames = add_rownames
     ) {},
     new = function(
       adjmatrix,
@@ -52,8 +52,8 @@ migrations <- list(
       mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"),
       weighted = NULL,
       diag = TRUE,
-      add.colnames = NULL,
-      add.rownames = NA
+      add_colnames = NULL,
+      add_rownames = NA
     ) {},
     when = "3.0.0"
   ),
@@ -64,8 +64,8 @@ migrations <- list(
       mode,
       weighted,
       diag,
-      add.colnames,
-      add.rownames
+      add.colnames = add_colnames,
+      add.rownames = add_rownames
     ) {},
     new = function(
       adjmatrix,
@@ -81,8 +81,8 @@ migrations <- list(
       ),
       weighted = NULL,
       diag = TRUE,
-      add.colnames = NULL,
-      add.rownames = NA
+      add_colnames = NULL,
+      add_rownames = NA
     ) {},
     when = "3.0.0"
   ),
@@ -163,19 +163,19 @@ migrations <- list(
   ),
 
   graph_from_graphnel = list(
-    old = function(graphNEL, name, weight, unlist.attrs) {},
+    old = function(graphNEL, name, weight, unlist.attrs = unlist_attrs) {},
     new = function(
       graphNEL,
       ...,
       name = TRUE,
       weight = TRUE,
-      unlist.attrs = TRUE
+      unlist_attrs = TRUE
     ) {},
     when = "3.0.0"
   ),
 
   graph_from_biadjacency_matrix = list(
-    old = function(incidence, directed, mode, multiple, weighted, add.names) {},
+    old = function(incidence, directed, mode, multiple, weighted, add.names = add_names) {},
     new = function(
       incidence,
       ...,
@@ -183,7 +183,7 @@ migrations <- list(
       mode = c("all", "out", "in", "total"),
       multiple = FALSE,
       weighted = NULL,
-      add.names = NULL
+      add_names = NULL
     ) {},
     when = "3.0.0"
   )

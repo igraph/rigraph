@@ -279,7 +279,7 @@ NULL
 #'
 #' @param scores The vertex level centrality scores.
 #' @inheritParams rlang::args_dots_empty
-#' @param theoretical.max Real scalar. The graph-level centralization measure of
+#' @param theoretical_max Real scalar. The graph-level centralization measure of
 #'   the most centralized graph with the same number of vertices as the graph
 #'   under study. This is only used if the `normalized` argument is set
 #'   to `TRUE`.
@@ -318,7 +318,7 @@ NULL
 centralize <- function(
   scores,
   ...,
-  theoretical.max = 0,
+  theoretical_max = 0,
   normalized = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: centralize, do not edit, see tools/generate-migrations.R
@@ -333,7 +333,7 @@ centralize <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn centralize}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(theoretical.max)) base::list(theoretical.max = theoretical.max),
+        if (!base::missing(theoretical.max)) base::list(theoretical_max = theoretical.max),
         if (!base::missing(normalized)) base::list(normalized = normalized)
       )
     }
@@ -341,7 +341,7 @@ centralize <- function(
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(theoretical.max)) "theoretical.max",
+        if (!base::missing(theoretical_max)) "theoretical_max",
         if (!base::missing(normalized)) "normalized"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn centralize} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
@@ -350,7 +350,7 @@ centralize <- function(
         "3.0.0",
         what = base::I("Calling `centralize()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  centralize(", base::paste(base::c("scores", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  centralize(", base::paste(base::c("scores", base::c(theoretical_max = "theoretical.max", normalized = "normalized")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    centralize(", base::paste(base::c("scores", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -360,7 +360,7 @@ centralize <- function(
 
   centralization_impl(
     scores = scores,
-    theoretical_max = theoretical.max,
+    theoretical_max = theoretical_max,
     normalized = normalized
   )
 }

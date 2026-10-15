@@ -2,7 +2,7 @@ test_that("SIR works", {
   igraph_local_seed(20231029)
 
   g <- sample_gnm(50, 50)
-  res <- sir(g, beta = 5, gamma = 1, no.sim = 10)
+  res <- sir(g, beta = 5, gamma = 1, n_sim = 10)
   expect_length(res, 10)
 
   expect_length(unique(lengths(res[[1]])), 1)
@@ -104,7 +104,7 @@ test_that("sir() covers `no.sim` and the `beta` infection rate", {
   # `no.sim` is the sole tail argument and fixes the number of runs.
   # `beta = 0` means no susceptible is ever infected, so every run ends with
   # just the single seed individual recovered and everyone else susceptible.
-  res <- sir(g, beta = 0, gamma = 1, no.sim = 15)
+  res <- sir(g, beta = 0, gamma = 1, n_sim = 15)
   expect_s3_class(res, "sir")
   expect_length(res, 15)
   final_nr <- vapply(res, function(s) s$NR[length(s$NR)], double(1))
@@ -120,7 +120,7 @@ test_that("sir() recovers a legacy positional `no.sim`", {
     res_positional <- sir(g, 5, 1, 20)
   )
   igraph_local_seed(20231029)
-  res_named <- sir(g, 5, 1, no.sim = 20)
+  res_named <- sir(g, 5, 1, n_sim = 20)
   expect_identical(res_positional, res_named)
 })
 
@@ -130,7 +130,7 @@ test_that("sir() recovers a legacy positional `no.sim`", {
 
 test_that("time_bins() covers the `middle` tail argument", {
   igraph_local_seed(42)
-  res <- sir(sample_gnm(50, 50), beta = 5, gamma = 1, no.sim = 20)
+  res <- sir(sample_gnm(50, 50), beta = 5, gamma = 1, n_sim = 20)
   middles <- time_bins(res, middle = TRUE)
   boundaries <- time_bins(res, middle = FALSE)
   # Middles are the midpoints between consecutive boundaries: one fewer value,
@@ -143,9 +143,14 @@ test_that("time_bins() covers the `middle` tail argument", {
 
 test_that("time_bins() recovers a legacy positional `middle`", {
   igraph_local_seed(42)
-  res <- sir(sample_gnm(50, 50), beta = 5, gamma = 1, no.sim = 20)
+  res <- sir(sample_gnm(50, 50), beta = 5, gamma = 1, n_sim = 20)
   lifecycle::expect_deprecated(
     boundaries <- time_bins(res, FALSE)
   )
   expect_identical(boundaries, time_bins(res, middle = FALSE))
+})
+
+test_that("sir(no.sim = ) is renamed to `n_sim`", {
+  g <- make_ring(10)
+  expect_legacy_arg(sir, list(g, beta = 1, gamma = 1), "no.sim", "n_sim", 2)
 })
