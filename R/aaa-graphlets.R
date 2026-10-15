@@ -26,7 +26,7 @@ graphlets_candidate_basis_impl <- function(
     weights
   )
   if (igraph_opt("return.vs.es")) {
-    res$cliques <- lapply(res$cliques, unsafe_create_vs, graph = graph, verts = V(graph))
+    res$cliques <- create_vs_list(graph, res$cliques)
   }
   res
 }
@@ -57,7 +57,7 @@ graphlets_impl <- function(
     niter
   )
   if (igraph_opt("return.vs.es")) {
-    res$cliques <- lapply(res$cliques, unsafe_create_vs, graph = graph, verts = V(graph))
+    res$cliques <- create_vs_list(graph, res$cliques)
   }
   res
 }
