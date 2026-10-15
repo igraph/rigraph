@@ -1817,8 +1817,6 @@ cluster_leiden <- function(
   # BEGIN GENERATED ARG_HANDLE: cluster_leiden, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("r", "re", "res", "reso", "resol", "resolu", "resolut", "resoluti", "resolutio"))
-    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn cluster_leiden}.")
     # Pre-3.0.0 signature: cluster_leiden(graph, objective_function, weights, resolution_parameter, beta, initial_membership, n_iterations, vertex_weights)
     .old_signature <- function(weights, resolution_parameter, beta, initial_membership, n_iterations, vertex_weights, ...) {
       if (...length() > 0L) {

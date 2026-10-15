@@ -460,7 +460,7 @@ test_that("cluster_leiden() recovers the renamed resolution_parameter argument",
 
   rlang::local_options(lifecycle_verbosity = "warning")
   igraph_with_seed(42, {
-    expect_snapshot(
+    expect_snapshot_igraph(
       res <- cluster_leiden(g, "modularity", resolution_parameter = 1.5)
     )
   })

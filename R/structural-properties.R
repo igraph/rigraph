@@ -461,7 +461,8 @@ graph.dfs <- function(
   in.callback = NULL,
   out.callback = NULL,
   extra = NULL,
-  rho = parent.frame()
+  rho = parent.frame(),
+  neimode
 ) {
   # nocov start
   lifecycle::deprecate_warn("2.0.0", "graph.dfs()", "dfs()")
@@ -477,7 +478,8 @@ graph.dfs <- function(
     in.callback = in.callback,
     out.callback = out.callback,
     extra = extra,
-    rho = rho
+    rho = rho,
+    neimode = neimode
   )
 } # nocov end
 
@@ -538,7 +540,8 @@ graph.bfs <- function(
   dist = FALSE,
   callback = NULL,
   extra = NULL,
-  rho = parent.frame()
+  rho = parent.frame(),
+  neimode
 ) {
   # nocov start
   lifecycle::deprecate_warn("2.0.0", "graph.bfs()", "bfs()")
@@ -556,7 +559,8 @@ graph.bfs <- function(
     dist = dist,
     callback = callback,
     extra = extra,
-    rho = rho
+    rho = rho,
+    neimode = neimode
   )
 } # nocov end
 
@@ -3624,6 +3628,7 @@ count_loops <- function(graph) {
 #'   given vertices.
 #' @param order Logical, whether to return the ordering of the vertices.
 #' @param rank Logical, whether to return the rank of the vertices.
+#' @param father `r lifecycle::badge("deprecated")` Use `parent` instead.
 #' @param parent Logical, whether to return the parent of the vertices.
 #' @param pred Logical, whether to return the predecessors of the
 #'   vertices.
@@ -3638,6 +3643,8 @@ count_loops <- function(graph) {
 #' @param extra Additional argument to supply to the callback function.
 #' @param rho The environment in which the callback function is evaluated.
 #'   The default `NULL` uses the caller's environment.
+#' @param neimode `r lifecycle::badge("deprecated")` This argument is deprecated
+#'  from igraph 1.3.0; use `mode` instead.
 #' @inheritParams rlang::args_dots_empty
 #' @return A named list with the following entries:
 #'   \describe{
@@ -3645,7 +3652,7 @@ count_loops <- function(graph) {
 #'       Numeric vector. The root vertex (or vertices) that was used as the
 #'       starting point of the search, as supplied in the `root` argument.
 #'     }
-#'     \item{mode}{
+#'     \item{neimode}{
 #'       Character scalar. The `mode` argument of the function call.
 #'       Note that for undirected graphs this is always \sQuote{all}, irrespectively of the supplied value.
 #'     }
@@ -3661,6 +3668,9 @@ count_loops <- function(graph) {
 #'       The parent of each vertex, i.e. the vertex it was discovered from.
 #'       A vertex sequence (`igraph.vs`), or a numeric vector if the
 #'       `return.vs.es` option is `FALSE`.
+#'     }
+#'     \item{father}{
+#'       Like parent, kept for compatibility for now.
 #'     }
 #'     \item{pred}{
 #'       The previously visited vertex for each vertex, or 0 if there was no such vertex.
@@ -3727,7 +3737,9 @@ bfs <- function(
   dist = FALSE,
   callback = NULL,
   extra = NULL,
-  rho = NULL
+  rho = NULL,
+  neimode = deprecated(),
+  father = deprecated()
 ) {
   rlang::check_dots_empty()
 
@@ -3735,6 +3747,18 @@ bfs <- function(
 
   if (is.null(rho)) {
     rho <- parent.frame()
+  }
+
+  if (lifecycle::is_present(neimode)) {
+    lifecycle::deprecate_stop(
+      "1.3.0",
+      "bfs(neimode = )",
+      "bfs(mode = )"
+    )
+  }
+
+  if (lifecycle::is_present(father)) {
+    lifecycle::deprecate_stop("2.2.0", "bfs(father = )", "bfs(parent = )")
   }
 
   if (length(root) == 1) {
@@ -3788,6 +3812,9 @@ bfs <- function(
   # requested root vertices instead. See
   # https://github.com/igraph/rigraph/issues/1639
   res$root <- requested_roots
+
+  # Remove in 1.4.0
+  res$neimode <- res$mode
 
   if (order) {
     res$order <- res$order + 1
@@ -3844,6 +3871,9 @@ bfs <- function(
     res$dist[is.nan(res$dist)] <- -3
   }
 
+  # Remove this later? https://github.com/igraph/rigraph/issues/1576
+  res$father <- res$parent
+
   res
 }
 
@@ -3883,6 +3913,7 @@ bfs <- function(
 #'   vertices.
 #' @param order.out Logical, whether to return the ordering based on
 #'   leaving the subtree of the vertex.
+#' @param father `r lifecycle::badge("deprecated")`, use `parent` instead.
 #' @param parent Logical, whether to return the parent of the vertices.
 #' @param dist Logical, whether to return the distance from the root of
 #'   the search tree.
@@ -3896,13 +3927,15 @@ bfs <- function(
 #' @param extra Additional argument to supply to the callback function.
 #' @param rho The environment in which the callback function is evaluated.
 #'   The default `NULL` uses the caller's environment.
+#' @param neimode `r lifecycle::badge("deprecated")` This argument is deprecated from igraph 1.3.0; use
+#'   `mode` instead.
 #' @inheritParams rlang::args_dots_empty
 #' @return A named list with the following entries:
 #'   \describe{
 #'     \item{root}{
 #'       Numeric scalar. The root vertex that was used as the starting point of the search.
 #'     }
-#'     \item{mode}{
+#'     \item{neimode}{
 #'       Character scalar. The `mode` argument of the function call.
 #'       Note that for undirected graphs this is always \sQuote{all}, irrespectively of the supplied value.
 #'     }
@@ -3914,6 +3947,9 @@ bfs <- function(
 #'     }
 #'     \item{parent}{
 #'       Numeric vector. The parent of each vertex, i.e. the vertex it was discovered from.
+#'     }
+#'     \item{father}{
+#'       Like parent, kept for compatibility for now.
 #'     }
 #'     \item{dist}{
 #'       Numeric vector, for each vertex its distance from the root of the search tree.
@@ -3978,13 +4014,27 @@ dfs <- function(
   in.callback = NULL,
   out.callback = NULL,
   extra = NULL,
-  rho = NULL
+  rho = NULL,
+  neimode = deprecated(),
+  father = deprecated()
 ) {
   rlang::check_dots_empty()
 
   ensure_igraph(graph)
   if (is.null(rho)) {
     rho <- parent.frame()
+  }
+
+  if (lifecycle::is_present(neimode)) {
+    lifecycle::deprecate_stop(
+      "1.3.0",
+      "dfs(neimode = )",
+      "dfs(mode = )"
+    )
+  }
+
+  if (lifecycle::is_present(father)) {
+    lifecycle::deprecate_stop("2.2.0", "dfs(father = )", "dfs(parent = )")
   }
 
   root <- as_igraph_vs(graph, root) - 1
@@ -4020,6 +4070,9 @@ dfs <- function(
     rho
   )
 
+  # Remove in 1.4.0
+  res$neimode <- res$mode
+
   if (order) {
     res$order <- res$order + 1
   }
@@ -4051,6 +4104,9 @@ dfs <- function(
     }
     if (dist) names(res$dist) <- V(graph)$name
   }
+
+  # Remove this later? https://github.com/igraph/rigraph/issues/1576
+  res$father <- res$parent
 
   res
 }
