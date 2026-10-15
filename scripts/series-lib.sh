@@ -120,7 +120,7 @@ series_is_regenerated() { # <path>
 # The marker a subject carries, `<owner>/<repo>@<sha>` as the subject spells it,
 # for a message that names the commit: a history may carry more than one owner.
 series_marker_of() { # <subject> -> marker, empty when none
-  grep -m 1 -oE "$series_marker_ere" <<<"$1" || true
+  { grep -oE "$series_marker_ere" <<<"$1" || true; } | head -n 1
 }
 
 # An ERE matching exactly one of those files, for `grep -vxE`.

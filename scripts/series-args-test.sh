@@ -81,6 +81,7 @@ scripts=(
   series-port.sh
   series-rc.sh
   series-tests.sh
+  series-vendor.sh
 )
 remote_scripts=(
   series-advance.sh
@@ -89,6 +90,7 @@ remote_scripts=(
   series-patch-sync.sh
   series-port.sh
   series-rc.sh
+  series-vendor.sh
 )
 upstream_scripts=(series-check.sh)
 canonical_scripts=(series-advance.sh series-check.sh series-land.sh series-port.sh)

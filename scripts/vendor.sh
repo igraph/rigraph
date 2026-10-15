@@ -84,7 +84,7 @@ fi
 echo "Importing commit $commit"
 
 regen_status=0
-regenerate "$commit" || regen_status=$?
+series_generate "$upstream_dir" full || regen_status=$?
 if [ "$regen_status" != 0 ]; then
   echo "Error: regeneration failed with status $regen_status; the tree is left as it got." >&2
   echo "  Before rerunning, remove ./${upstream_dir} or pass it as the argument:" >&2

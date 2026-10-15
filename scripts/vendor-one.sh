@@ -52,6 +52,7 @@ vendor_dir=${vendor_base_dir}
 upstream_basedir=""
 num_commits=1
 check_glue=true
+strand=false
 
 # Matches the bound in series_vendored_sha() (scripts/series-lib.sh).
 base_scan_depth="${BASE_SCAN_DEPTH:-20}"
@@ -63,6 +64,13 @@ while [ $# -gt 0 ]; do
       shift 2
       ;;
     --no-check-glue)
+      check_glue=false
+      shift
+      ;;
+    --strand)
+      # A commit for the vendor strand (scripts/series-vendor.sh): what vendoring
+      # writes and nothing of the buffer's -- no counter, no glue gate.
+      strand=true
       check_glue=false
       shift
       ;;
@@ -288,20 +296,27 @@ while [ $commits_vendored -lt $num_commits ]; do
     }
 
     regen_status=0
-    regenerate "$commit" || regen_status=$?
+    series_generate "$upstream_dir" "$([ "$strand" = true ] && echo strand || echo full)" || regen_status=$?
     if [ "$regen_status" = 4 ]; then
       exit 4
     elif [ "$regen_status" != 0 ]; then
       echo ""
       echo "=== GENERATION FAILED for upstream ${commit} ==="
-      echo "CMake, Stimulus or cpp11::cpp_register() failed on the regenerated tree,"
-      echo "which is in the working tree, uncommitted; the upstream clone is kept."
-      echo "Most often an interface changed upstream: adapt tools/stimulus/*.yaml"
-      echo "or add a patch/ entry, keeping the fix outside the tree, then"
-      echo "'git checkout -- . && git clean -fd src R', put it back, and land it"
+      if [ "$strand" = true ]; then
+        echo "CMake, flex or bison failed on the regenerated tree,"
+        echo "which is in the working tree, uncommitted; the upstream clone is kept."
+        echo "Check that the three are installed. A change upstream that they cannot"
+        echo "take needs a patch/ entry, which rides on the strand: keep it outside the tree,"
+      else
+        echo "CMake, Stimulus or cpp11::cpp_register() failed on the regenerated tree,"
+        echo "which is in the working tree, uncommitted; the upstream clone is kept."
+        echo "Most often an interface changed upstream: adapt tools/stimulus/*.yaml"
+        echo "or add a patch/ entry, keeping the fix outside the tree,"
+      fi
+      echo "then 'git checkout -- . && git clean -fd src R', put it back, and land it"
       echo "with the vendor commit for ${commit} like this:"
       echo "  git commit -m 'tmp: fix generation' -- <the fix>"
-      echo "  $0 --commits 1 <upstream>"
+      echo "  $0$([ "$strand" = true ] && echo ' --strand') --commits 1 <upstream>"
       echo "  { git log -1 --format=%B; printf '\\nR-side fix:\\n\\n%s\\n' '<what was adapted>'; } >../vendor.msg"
       echo "  git reset --soft HEAD~2 && git commit -q -F ../vendor.msg"
       exit 7
@@ -348,11 +363,21 @@ while [ $commits_vendored -lt $num_commits ]; do
   version_array[4]=$((version_array[4] + 1))
   new_version=$(IFS=.; echo "${version_array[*]}")
 
-  echo "Updating version from $version to $new_version"
-  sed -i.bak -r 's/^(Version: ).*$/\1'"$new_version"'/' DESCRIPTION
-  rm DESCRIPTION.bak
+  if [ "$strand" = true ]; then
+    echo "Strand commit: the counter stays at $version"
+  else
+    echo "Updating version from $version to $new_version"
+    sed -i.bak -r 's/^(Version: ).*$/\1'"$new_version"'/' DESCRIPTION
+    rm DESCRIPTION.bak
+  fi
 
-  git add .
+  if [ "$strand" = true ]; then
+    # The strand's paths and nothing else; what the generator wrote beyond them
+    # is restored after the commit (scripts/series-config.sh).
+    git add -A -- "${series_vendor_paths[@]}"
+  else
+    git add .
+  fi
 
   (
     echo "$message"
@@ -378,6 +403,10 @@ while [ $commits_vendored -lt $num_commits ]; do
     rm -rf "$upstream_dir"
     exit 1
   }
+  if [ "$strand" = true ]; then
+    git checkout -q -- .
+    git clean -fdq
+  fi
 
   commits_vendored=$((commits_vendored + 1))
 

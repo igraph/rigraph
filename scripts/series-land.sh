@@ -354,8 +354,7 @@ builds or tests it.")
     # Named as the subject names it, owner and all, the SHA cut to ten.
     if series_is_vendor "$subj"; then
       up=$(series_marker_of "$subj")
-      sha=${up##*@}
-      up="${up%@*} ${sha:0:10}"
+      [ -z "$up" ] || up="${up%@*} $(cut -c1-10 <<<"${up##*@}")"
     fi
     head=$(
       { if series_is_vendor "$subj"; then

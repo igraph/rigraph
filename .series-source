@@ -7,12 +7,12 @@
 # scripts/series-config.sh holds most of it.
 source: duckdb/duckdb-r
 url: https://github.com/duckdb/duckdb-r
-commit: 1d04d31cb75df08768c7cc57bd07b83f85d99b4a
+commit: 749459455674d2945ae1f4b9ec0197432773fd32
 source-date: 2026-10-15
 checked: 2026-10-15
 ported:
   - path: scripts/vendor-one.sh
-    blob: f76dac959af28a9236937f1933fe982c821262a1
+    blob: 3378a305e2ebfba3f424bdcfe5b3bb3bbb1436dc
   - path: scripts/vendor-lib.sh
     blob: 0f12c680eabce322c8547a32ae229d26a38e642a
   - path: scripts/vendor.sh
@@ -22,11 +22,13 @@ ported:
   - path: scripts/merge-version.sh
     blob: 7a526fd1e0c8a01af2ddd7dd783064272c18b7b9
   - path: scripts/series-config.sh
-    blob: 775f4f284246b1be30cc25292d8f441776ac016d
+    blob: 3db5bfa916870a2ca8762bca4831af4890eda1a9
   - path: scripts/series-lib.sh
-    blob: 91c958cb78958dda9b2cb273ec629f65c7ec425b
+    blob: 37e7c73610b4e5f9cc1979e4c763ea07bb069965
+  - path: scripts/series-vendor.sh
+    blob: ce6ad97d6239954bbe838fdf087fba80b8db2232
   - path: scripts/series-check.sh
-    blob: 96ffd4dbc65384443954fcd8223b813bbe6753f3
+    blob: 41a4dea0714bf562f488eab4650a8daf6e996dce
   - path: scripts/series-advance.sh
     blob: 3c1ce26236f8c7ecee44e03d1a75cff28d0b1ced
   - path: scripts/series-port.sh
@@ -40,7 +42,7 @@ ported:
   - path: scripts/series-forward-build.sh
     blob: 860f39a97156c7b370071fdf051c18a2572afc1e
   - path: scripts/series-land.sh
-    blob: b40108022b6c34883a23a68a76931ef8d5f867e4
+    blob: 1402518d57eaf412b3acc1c1bc0d1383695e16e7
   - path: scripts/series-rc.sh
     blob: 57fb22389f706d1180fac8358f01be7351cd0474
   - path: scripts/flavor.sh
@@ -70,9 +72,11 @@ ported:
   - path: scripts/series.yaml
     blob: ee609cd9f0dbe2b95df6facbb8dcf6e4ab5487ed
   - path: scripts/series-args-test.sh
-    blob: 129190a261e379c9fd984aeebdb49be83ed93005
+    blob: 8e4e5cc4be488910169c1631f7807881ae520eef
   - path: scripts/series-lib-test.sh
-    blob: 78cf6c522e1649e6d23f36be23af147a42c29371
+    blob: 13ede276830b0444f5c93d4cfd1acba7af0ad511
+  - path: scripts/series-vendor-test.sh
+    blob: cf2f42224175796dfa679360fc1d0db1cdd165e1
   - path: scripts/series-advance-test.sh
     blob: 71e6bfbefef76f0e30449b417f017e8578606953
   - path: scripts/series-port-test.sh
@@ -82,7 +86,7 @@ ported:
   - path: scripts/series-tests-test.sh
     blob: 0cea60bf1950a0ef955de5d6311616093857042c
   - path: scripts/series-forward-build-test.sh
-    blob: f4ea832f031d70698073cb9f0321329ae4652747
+    blob: 7c8940d8db32049a966479eaad80f9698c3ab5b9
   - path: scripts/series-land-test.sh
     blob: 7b06fd5c4094e384639f4515c2531d57e0b8d121
   - path: scripts/rcc-store-test.sh

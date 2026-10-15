@@ -401,19 +401,20 @@ late_tag() { # <build> -> "<tag> <upstream sha> <buffer commit>", empty if none
     echo "$tag $sha $(head -n 1 <<<"$lines" | cut -d' ' -f1)"
     return 0
   fi
+  # The tags sorted, so an abbreviated SHA that is a prefix of two tagged
+  # commits meets the same one on every run.
   awk -F'\t' -v ere="$series_marker_ere" '
-    FNR == NR { if (split($0, a, " ") >= 2) tagof[a[1]] = a[2]; next }
+    FNR == NR { if (split($0, a, " ") >= 2) { n++; sha[n] = a[1]; tag[n] = a[2] } next }
     {
       if (!match($2, ere)) next
       m = substr($2, RSTART, RLENGTH); sub(/^.*@/, "", m)
-      for (f in tagof) {
-        if (index(f, m) != 1) continue
-        t = tagof[f]
-        if (index($2, "(tag " t ")")) seen[m] = 1
-        else if (!(m in seen)) { print t, m, $1; exit }
+      for (i = 1; i <= n; i++) {
+        if (index(sha[i], m) != 1) continue
+        if (index($2, "(tag " tag[i] ")")) seen[m] = 1
+        else if (!(m in seen)) { print tag[i], m, $1; exit }
         break
       }
-    }' <(printf '%s\n' "$tags") <(git log --format='%H%x09%s' "$1" -- "$series_scan_dir")
+    }' <(printf '%s\n' "$tags" | sort) <(git log --format='%H%x09%s' "$1" -- "$series_scan_dir")
 }
 
 # How the clone names an upstream branch: a clone made by `git clone` carries it
@@ -608,6 +609,28 @@ for S in "${series[@]}"; do
     fi
     echo "               scripts/series-patch-sync.sh $S --remote $remote says which of these it can carry;"
     echo "               after a port, what is left is what it declined — stage 3 work"
+  fi
+
+  # The vendor strand the buffer is derived from (handbook/branches/model/README.md):
+  # absent on a series opened before it existed, ahead of the buffer while
+  # stage 1's picks are due, or behind it where something vendored onto the
+  # buffer directly. Read by newest vendored SHA, like every twin here.
+  vendor="$remote/$S-vendor"
+  if ! git rev-parse -q --verify "$vendor" >/dev/null; then
+    echo "  VENDOR  $S has no vendor strand; derive it once from the buffer:"
+    echo "          scripts/series-vendor.sh $S --init --remote $remote --push"
+  else
+    v_up=$(series_vendored_sha "$vendor" 2>/dev/null)
+    b_up=$(series_vendored_sha "$build" 2>/dev/null)
+    if [ "$v_up" != "$b_up" ]; then
+      if [ -n "$b_up" ] && at=$(git log -1 --format=%H --fixed-strings --grep="@$b_up" "$vendor") && [ -n "$at" ]; then
+        echo "  VENDOR  $S-vendor is $(git rev-list --count "$at..$vendor") commit(s) ahead of $S-build; stage 1 picks them:"
+        echo "          scripts/series-vendor.sh $S --remote $remote --push   # from a worktree at $S-build"
+      else
+        echo "  VENDOR  $S-build vendors ${b_up:0:10}, which $S-vendor does not: something vendored onto the buffer directly."
+        echo "          Vendor onto the strand (vendor-one.sh --strand) and pick; the buffer never leads it."
+      fi
+    fi
   fi
 
   # A test `main` runs that a vendor commit of this series stopped, deleted or

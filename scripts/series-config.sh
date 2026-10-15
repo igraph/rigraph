@@ -60,7 +60,7 @@ series_scan_dir=src/vendor
 # and the contributor credits, including the all-contributors table and the
 # configuration it is generated from, which patch/ corrects.
 # Everything else upstream carries (documentation, CI, changelogs, the replay's
-# own tooling) never reaches the package (regenerate() in scripts/vendor-lib.sh).
+# own tooling) never reaches the package (series_generate(), below).
 series_keep=(src include vendor interfaces AUTHORS COPYING ACKNOWLEDGEMENTS.md CONTRIBUTORS.txt
   CONTRIBUTORS.md .all-contributorsrc)
 
@@ -75,6 +75,131 @@ series_strand=(src/vendor/cigraph src/vendor/igraph_version.h src/vendor/igraph_
   src/vendor/io patch src/sources-igraph.mk src/sources-glpk.mk src/sources-mini-gmp.mk)
 series_makevars=(src/rinterface.c 'R/aaa-*.R' src/cpp11.cpp R/cpp11.R
   src/sources-glue-c.mk src/sources-glue-cpp.mk)
+
+# How vendoring regenerates the tree from an upstream checkout (scripts/vendor-one.sh,
+# scripts/vendor.sh): the generator, told whether it writes a strand commit, the
+# vendor paths alone, or a whole buffer commit. Either way it writes the kept
+# part of the upstream tree, the version header igraph's CMake writes from
+# `git describe`, and the patch stack, applied, or retired where upstream now
+# carries its change. The patches are applied here rather than by vendor-one.sh,
+# because what is generated next reads the patched tree: Stimulus reads the
+# interface files `patch/` corrects. A `strand` run then writes what is generated
+# from the tree alone, the parsers flex and bison write (tools/fix-lexers.sh
+# included) and the threading header, forced (`-W`), because `git archive`
+# dates the extracted tree to the upstream commit and make would read the
+# header as newer than what it is generated from; a `full` run writes
+# everything Makefile-cigraph does, the cpp11 registration and the dependency
+# lists.
+# DOCKER= runs flex and bison from the PATH rather than from a container.
+# Returns 4 for a patch that neither applies nor reverses and 7 for a generator
+# that failed, leaving the tree as far as it got.
+series_generate() { # <upstream checkout> <strand|full>
+  local up=$1 mode=$2 commit keep=() p f build=${TMPDIR:-/tmp}/vendor-cmake-$$
+  commit=$(git -C "$up" rev-parse HEAD)
+
+  rm -rf "$series_vendor_dir"
+  mkdir -p "$series_vendor_dir"
+  for p in "${series_keep[@]}"; do
+    if git -C "$up" cat-file -e "HEAD:$p" 2>/dev/null; then
+      keep+=("$p")
+    fi
+  done
+  git -C "$up" archive HEAD -- "${keep[@]}" | tar -x -C "$series_vendor_dir"
+
+  rm -rf "$build"
+  cmake -S "$up" -B "$build" >/dev/null || return 7
+  cp "$build/include/igraph_version.h" "$series_stamp_file"
+  rm -rf "$build"
+
+  # `--reverse` needs `--forward` beside it: on its own it prompts
+  # ("Unreversed patch detected!  Ignore -R? [n]") and hangs a run whose
+  # stdin is a terminal.
+  # scripts/vendor.sh has the same three-way split and the same exit 4.
+  for f in patch/*.patch; do
+    [ -e "$f" ] || continue
+    if patch -s -i "$f" -p1 --forward --dry-run >/dev/null; then
+      patch -i "$f" -p1 --forward --no-backup-if-mismatch
+    elif patch -s -i "$f" -p1 --reverse --forward --dry-run >/dev/null; then
+      echo "Removing patch $f (its change is already in the regenerated tree)"
+      rm "$f"
+    else
+      echo ""
+      echo "=== PATCH BROKEN: $f (upstream ${commit}) ==="
+      echo "It neither applies forward nor reverses cleanly, so its change is"
+      echo "not in the regenerated tree and cannot be re-applied: the code it"
+      echo "patches moved."
+      echo "The regenerated sources for ${commit} are in the working tree,"
+      echo "uncommitted, and the upstream clone is kept."
+      echo "Rebase $f against them, keeping the rebased patch outside the tree,"
+      echo "then 'git checkout -- . && git clean -fd src R', put it back, and rerun this script."
+      echo "Delete it only after confirming its change is genuinely upstream --"
+      echo "the effect it had, however upstream reached it, not this diff."
+      echo "A deletion has to ride in the vendor commit for ${commit}, and this"
+      echo "script refuses to start on a dirty tree, so land it like this:"
+      echo "  git checkout -- . && git rm $f && git commit -m 'tmp: retire patch'"
+      echo "  $0$([ "$mode" = strand ] && echo ' --strand') --commits 1 <upstream>"
+      echo "  { git log -1 --format=%B; printf '\\nR-side fix:\\n\\n%s\\n' '<what was adapted>'; } >../vendor.msg"
+      echo "  git reset --soft HEAD~2 && git commit -q -F ../vendor.msg"
+      return 4
+    fi
+  done
+
+  if [ "$mode" = strand ]; then
+    make -f Makefile-cigraph DOCKER= -W "$series_vendor_dir/include/igraph_threading.h.in" \
+      patches src/vendor/igraph_threading.h || return 7
+    return 0
+  fi
+  make -f Makefile-cigraph DOCKER= || return 7
+  Rscript -e 'cpp11::cpp_register()' || return 7
+  rigraph_refresh_dependencies
+}
+
+# What a vendor-strand commit carries (scripts/series-vendor.sh): the vendored
+# tree, the patch stack applied to it, and what is generated from the tree
+# alone. Not the rest of src/vendor/, which also holds main's own files (the
+# copies of vendor/, igraph_export.h, config.h, igraph_config.h); never the
+# counter, never the glue.
+series_vendor_paths=(src/vendor/cigraph src/vendor/igraph_version.h src/vendor/igraph_threading.h
+  src/vendor/io patch)
+
+# What the buffer regenerates after a strand commit is picked onto it: what reads
+# tools/stimulus/ and the glue, which are the buffer's. The R/C interface
+# Stimulus generates, forced (`-W`), because a pick need not leave the interface
+# files newer than what was generated from them; the source lists rconfigure.py
+# writes; the cpp11 registration; and the dependency lists. Every one of them is
+# in `series_regenerated`. Returns 7 for a generator that failed, which stops
+# scripts/series-vendor.sh with the pick at HEAD, after saying how to fold the
+# fix into it.
+series_regenerate() {
+  if ! make -f Makefile-cigraph DOCKER= -W "$series_vendor_dir/interfaces/functions.yaml" \
+    src/rinterface.c r_wrappers src/sources.mk || ! Rscript -e 'cpp11::cpp_register()'; then
+    echo ""
+    echo "=== GENERATION FAILED on the pick at HEAD $(git rev-parse --short HEAD) ==="
+    echo "Stimulus or cpp11::cpp_register() failed on the picked tree; what they wrote"
+    echo "is uncommitted, and the counter is not stamped. Most often an interface"
+    echo "changed upstream: adapt tools/stimulus/*.yaml, which is the buffer's fix."
+    echo "A patch/ fix is the strand's instead: amend the strand commit and pick again."
+    echo "Fold the buffer's fix into the pick by picking it again above the fix:"
+    echo "  git reset -q --hard HEAD~1 && git clean -fdq src R"
+    echo "  git commit -m 'tmp: fix generation' -- <the fix>"
+    echo "  $0 <S> --count 1"
+    echo "  { git log -1 --format=%B; printf '\\nR-side fix:\\n\\n%s\\n' '<what was adapted>'; } >../vendor.msg"
+    echo "  git reset --soft HEAD~2 && git commit -q -F ../vendor.msg"
+    return 7
+  fi
+  rigraph_refresh_dependencies
+}
+
+# The committed `src/*.dd` files list each glue file's local dependencies
+# (src/deps.mk). Regeneration rewrites `src/rinterface.c` and `src/cpp11.cpp`,
+# so the next make rebuilds their lists; doing it here puts a list that moved
+# into the commit, rather than leaving the tree dirty for whoever builds next.
+# A failure is left for the glue gate to report. rigraph's own, for the two
+# hooks above.
+rigraph_refresh_dependencies() {
+  [ -f "$series_configured_file" ] || ./configure >/dev/null 2>&1 || return 0
+  (cd src && CLINK_CPPFLAGS="$(cd .. && series_glue_extra_flags)" R CMD SHLIB -n init.cpp >/dev/null 2>&1) || true
+}
 
 # What vendoring regenerates, which differs between any two vendor runs of the
 # same upstream commit and is never carried as a fix (scripts/series-advance.sh):
@@ -95,8 +220,9 @@ series_tooling=(.github scripts .claude)
 # line comes from the `src/Makevars` that `./configure` writes from
 # `src/Makevars.in`. `R CMD SHLIB` omits the include path of a `LinkingTo`
 # package (cpp11 here), which `R CMD INSTALL` passes as CLINK_CPPFLAGS, so the
-# function prints it from DESCRIPTION, once per gate; regenerate() passes the
-# same as CLINK_CPPFLAGS when it refreshes the dependency lists.
+# function prints it from DESCRIPTION, once per gate, and
+# rigraph_refresh_dependencies() passes the same when it rewrites the
+# dependency lists.
 series_glue_probes=(init.cpp rinterface_extra.c)
 series_configured_file=src/Makevars
 series_glue_extra_flags() {
@@ -155,14 +281,14 @@ series_canonical_repo=igraph/rigraph
 # is not a version predates nothing.
 series_version_before() { # <engine> <version>
   local re='^([0-9]+)\.([0-9]+)\.([0-9]+)(-([0-9]+)-g[0-9a-f]+)?$' i
-  local -a engine version
+  local -a lhs rhs
   [[ $1 =~ $re ]] || return 1
-  engine=("${BASH_REMATCH[1]}" "${BASH_REMATCH[2]}" "${BASH_REMATCH[3]}" "${BASH_REMATCH[5]:-0}")
+  lhs=("${BASH_REMATCH[1]}" "${BASH_REMATCH[2]}" "${BASH_REMATCH[3]}" "${BASH_REMATCH[5]:-0}")
   [[ $2 =~ $re ]] || return 1
-  version=("${BASH_REMATCH[1]}" "${BASH_REMATCH[2]}" "${BASH_REMATCH[3]}" "${BASH_REMATCH[5]:-0}")
+  rhs=("${BASH_REMATCH[1]}" "${BASH_REMATCH[2]}" "${BASH_REMATCH[3]}" "${BASH_REMATCH[5]:-0}")
   for i in 0 1 2 3; do
-    ((10#${engine[i]} < 10#${version[i]})) && return 0
-    ((10#${engine[i]} > 10#${version[i]})) && return 1
+    ((10#${lhs[i]} < 10#${rhs[i]})) && return 0
+    ((10#${lhs[i]} > 10#${rhs[i]})) && return 1
   done
   return 1
 }

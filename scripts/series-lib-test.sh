@@ -84,6 +84,8 @@ is "the SHA a replay subject names" "$(series_sha_of "vendor: Update vendored so
 is "the twin key" "$(series_twin_key "$v")" "$sha"
 is "the twin key of a re-stamp" "$(series_twin_key "$vt")" "$sha+tag"
 is "no key for an ordinary subject" "$(series_twin_key "fix: the glue")" ""
+is "the marker, as the subject spells it" "$(series_marker_of "$vt")" "$repo@$sha"
+is "one marker for a subject naming two" "$(series_marker_of "$v, after $repo@abc")" "$repo@$sha"
 
 echo "--- 3. versions"
 if declare -F series_release_of_stamp >/dev/null; then

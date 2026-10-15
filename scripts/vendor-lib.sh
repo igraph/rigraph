@@ -1,14 +1,8 @@
 # shellcheck shell=bash
-# The regeneration both vendoring scripts share, and the glue gate: whether the
-# glue compiles against the headers the tree vendors. regenerate() is
-# scripts/vendor-one.sh's walk and scripts/vendor.sh's single commit; the gate
-# is shared by scripts/vendor-one.sh, scripts/series-forward-build.sh and
-# scripts/series-advance.sh. Run from the repository root of the tree to check,
-# and for regenerate() with `upstream_dir` and `vendor_dir` set.
-#
-# Ported from duckdb/duckdb-r (.series-source), whose copy holds the gate alone:
-# DuckDB's regeneration is one Python script, igraph's is the keep-list, CMake,
-# the patch stack, Stimulus and cpp11.
+# The glue gate: whether the glue compiles against the headers the tree vendors.
+# Shared by scripts/vendor-one.sh, scripts/series-forward-build.sh and
+# scripts/series-advance.sh, and run from the repository root of the tree to
+# check.
 # shellcheck source=series-config.sh
 . "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/series-config.sh"
 
@@ -61,78 +55,4 @@ glue_compiles() { # [failures]
   grep -q . "$out" && st=1
   rm -f "$own"
   return "$st"
-}
-
-# Regenerate everything vendoring owns from the commit checked out in the clone:
-# the kept part of the upstream tree, the version header CMake writes, the patch
-# stack, the R/C interface Stimulus generates, and the cpp11 registration.
-# Returns 4 for a broken patch and 7 for a generator that failed, leaving the
-# tree as far as it got.
-build_dir=${TMPDIR:-/tmp}/vendor-cmake-$$
-# shellcheck disable=SC2154  # upstream_dir and vendor_dir are the caller's
-regenerate() { # <upstream commit>
-  local commit=$1 keep=() p f
-
-  rm -rf "$vendor_dir"
-  mkdir -p "$vendor_dir"
-  for p in "${series_keep[@]}"; do
-    if git -C "$upstream_dir" cat-file -e "HEAD:$p" 2>/dev/null; then
-      keep+=("$p")
-    fi
-  done
-  git -C "$upstream_dir" archive HEAD -- "${keep[@]}" | tar -x -C "$vendor_dir"
-
-  rm -rf "$build_dir"
-  cmake -S "$upstream_dir" -B "$build_dir" >/dev/null || return 7
-  cp "$build_dir/include/igraph_version.h" "$series_stamp_file"
-  rm -rf "$build_dir"
-
-  # Apply patches in patch/*.patch: applied, retired, or a stop.
-  # `--reverse` needs `--forward` beside it: on its own it prompts
-  # ("Unreversed patch detected!  Ignore -R? [n]") and hangs a run whose
-  # stdin is a terminal.
-  # scripts/vendor.sh has the same three-way split and the same exit 4.
-  for f in patch/*.patch; do
-    [ -e "$f" ] || continue
-    if patch -s -i "$f" -p1 --forward --dry-run >/dev/null; then
-      patch -i "$f" -p1 --forward --no-backup-if-mismatch
-    elif patch -s -i "$f" -p1 --reverse --forward --dry-run >/dev/null; then
-      echo "Removing patch $f (its change is already in the regenerated tree)"
-      rm "$f"
-    else
-      echo ""
-      echo "=== PATCH BROKEN: $f (upstream ${commit}) ==="
-      echo "It neither applies forward nor reverses cleanly, so its change is"
-      echo "not in the regenerated tree and cannot be re-applied: the code it"
-      echo "patches moved."
-      echo "The regenerated sources for ${commit} are in the working tree,"
-      echo "uncommitted, and the upstream clone is kept."
-      echo "Rebase $f against them, keeping the rebased patch outside the tree,"
-      echo "then 'git checkout -- . && git clean -fd src R', put it back, and rerun this script."
-      echo "Delete it only after confirming its change is genuinely upstream --"
-      echo "the effect it had, however upstream reached it, not this diff."
-      echo "A deletion has to ride in the vendor commit for ${commit}, and this"
-      echo "script refuses to start on a dirty tree, so land it like this:"
-      echo "  git checkout -- . && git rm $f && git commit -m 'tmp: retire patch'"
-      echo "  $0 --commits 1 <upstream>"
-      echo "  { git log -1 --format=%B; printf '\\nR-side fix:\\n\\n%s\\n' '<what was adapted>'; } >../vendor.msg"
-      echo "  git reset --soft HEAD~2 && git commit -q -F ../vendor.msg"
-      return 4
-    fi
-  done
-
-  # DOCKER= runs flex and bison from the PATH rather than from a container.
-  make -f Makefile-cigraph DOCKER= || return 7
-  Rscript -e 'cpp11::cpp_register()' || return 7
-  refresh_dependencies
-}
-
-# The committed `src/*.dd` files list each glue file's local dependencies
-# (src/deps.mk). Regeneration rewrites `src/rinterface.c` and `src/cpp11.cpp`,
-# so the next make rebuilds their lists; doing it here puts a list that moved
-# into the vendor commit, rather than leaving the tree dirty for whoever builds
-# next. A failure is left for the glue gate to report.
-refresh_dependencies() {
-  [ -f "$series_configured_file" ] || ./configure >/dev/null 2>&1 || return 0
-  (cd src && CLINK_CPPFLAGS="$(cd .. && series_glue_extra_flags)" R CMD SHLIB -n init.cpp >/dev/null 2>&1) || true
 }

@@ -31,11 +31,11 @@
 #   9. (not ported) series-learned.sh names, per vendor commit of `-dev`, what
 #      it carries beyond its `-build` twin, leaves the glue both have
 #      unreported, and ranks the files; --diff prints the change itself.
-#  10. (not ported) The forward's vendor strand: `-build` replayed onto the
-#      same seed vendors the same engine as `-fwd-build` at every twin and
-#      carries none of the fixes, and `series-learned.sh <S>-fwd --vendor`
-#      reports those fixes, on the new base, exactly as 9 reported them on the
-#      old one.
+#  10. (not ported) The forward's vendor strand: the series' strand, derived
+#      once from its buffer and carried onto the new seed by series-vendor.sh,
+#      vendors the same engine as `-fwd-build` at every twin and carries none
+#      of the fixes, and `series-learned.sh <S>-fwd --vendor` reports those
+#      fixes, on the new base, exactly as 9 reported them on the old one.
 #
 # Usage:
 #   scripts/series-forward-build-test.sh
@@ -76,7 +76,7 @@ git config user.email test@example.invalid
 git config commit.gpgsign false
 
 mkdir -p scripts R src/vendor/cigraph tests/testthat patch
-for s in series-forward-build.sh series-tests.sh setup-git.sh merge-version.sh \
+for s in series-forward-build.sh series-vendor.sh series-tests.sh setup-git.sh merge-version.sh \
   series-config.sh series-lib.sh vendor-lib.sh; do
   cp "$HERE/$s" scripts/
 done
