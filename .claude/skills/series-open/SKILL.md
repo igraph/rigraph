@@ -1,6 +1,6 @@
 ---
 name: series-open
-description: Seed rigraph's one vendoring series, `main`, published as `igraph.dev`. Flavor igraph/rigraph's `main` with `scripts/flavor.sh dev`, stamp the fifth version component, push `main-build`, `main-dev` and `main-build-base` at the seed tip and `main-green` at its base to the fork in one atomic push, mirror `main-green` into igraph/rigraph, and have `igraph.dev` registered with igraph's r-universe. Use when the `main` series does not exist yet and has to be created, or when asked to open, seed or bootstrap a series.
+description: Seed rigraph's one vendoring series, `main`, published as `igraph.dev`. Flavor igraph/rigraph's `main` with `scripts/flavor.sh dev`, stamp the fifth version component, push `main-vendor`, `main-build`, `main-dev` and `main-build-base` at the seed tip and `main-green` at its base to the fork in one atomic push, mirror `main-green` into igraph/rigraph, and have `igraph.dev` registered with igraph's r-universe. Use when the `main` series does not exist yet and has to be created, or when asked to open, seed or bootstrap a series.
 ---
 
 # Opening the series
@@ -70,18 +70,25 @@ igraph cuts no release branches the package serves.
    Install the package and run [`scripts/rcc-one.sh`](/scripts/rcc-one.sh): every commit the series ever mints stands on this one.
    CI judges it too (step 5), but a rename that does not build is cheaper to see here.
 
-5. **Push the four refs, in one atomic push.**
+5. **Push the four refs and the strand, in one atomic push.**
    Three at the seed tip, and `main-green` at the seed's base, `main` itself,
    so that CI judges the two flavor commits and the stamp before anything publishes them:
    `igraph.dev` is a rename that has never been built (duckdb-r#2868's rule).
+   The vendor strand `main-vendor` starts at the seed tip too, empty:
+   stage 1 vendors onto it and picks what it vendors onto `main-build`.
+   It is never mirrored into `igraph/rigraph`.
 
    ```sh
    tip=$(git rev-parse HEAD)
    base=$(git rev-parse upstream/main)
    git push --atomic origin \
-     "$tip:refs/heads/main-build" "$tip:refs/heads/main-build-base" \
+     "$tip:refs/heads/main-vendor" "$tip:refs/heads/main-build" "$tip:refs/heads/main-build-base" \
      "$tip:refs/heads/main-dev" "$base:refs/heads/main-green"
    ```
+
+   A series opened before the strand existed has no `main-vendor`;
+   `scripts/series-vendor.sh main --init --push` derives it once from `main-build`, re-vendoring nothing,
+   and `series-check.sh` asks for that with a `VENDOR` line.
 
    Atomic, because the loop discovers series from refs and serves them in one firing,
    so a ref landing alone invites a firing into half a series.
@@ -110,7 +117,8 @@ igraph cuts no release branches the package serves.
    Where the universe does not answer, [`r-universe-org/help`](https://github.com/r-universe-org/help) is its issue tracker.
 
 **This hands the walk over.**
-The loop's stage 1 runs `vendor-one.sh --commits 100` against the buffer it now discovers,
+The loop's stage 1 runs `vendor-one.sh --strand --commits 100` against `main-vendor`
+and `series-vendor.sh main` against the buffer it now discovers,
 and the first firings walk the replay from 0.10.17 on.
 The rc strand is not cut here:
 it doubles CI, and is cut only when a landing is planned ([`series-rc`](/.claude/skills/series-rc/SKILL.md)).

@@ -1,6 +1,6 @@
 ---
 name: series-loop
-description: Drive rigraph's vendoring series loop for its one series, `main`, published as `igraph.dev`. Vendor the next igraph C commits onto `main-build`, repair the oldest red on `main-dev` by folding the R-side fix into its vendor commit, promote what is green to `main-green` and mirror it into igraph/rigraph, port `main`, and extend `main-dev`. Use when asked to run, advance, continue or repair the series loop or the `main` series, when a scheduled routine fires for it, or when `main-green` has fallen behind its buffer.
+description: Drive rigraph's vendoring series loop for its one series, `main`, published as `igraph.dev`. Vendor the next igraph C commits onto `main-vendor` and pick them onto `main-build`, repair the oldest red on `main-dev` by folding the R-side fix into its vendor commit, promote what is green to `main-green` and mirror it into igraph/rigraph, port `main`, and extend `main-dev`. Use when asked to run, advance, continue or repair the series loop or the `main` series, when a scheduled routine fires for it, or when `main-green` has fallen behind its buffer.
 ---
 
 # The series loop: vendor, promote, repair
@@ -39,7 +39,8 @@ and published by r-universe from `main-green`, which `scripts/series-advance.sh`
 
 | ref | who writes it | what it is |
 |---|---|---|
-| `main-build` | the routine, unconditionally | Every upstream first-parent commit vendored one to one, the glue compiling at every commit. **No CI runs here** (`each.yaml` never matches `*-build`). The buffer. |
+| `main-vendor` | the routine; force-pushed only by it, to fold a fix into a strand commit nothing has picked yet | Every upstream first-parent commit vendored once, by `vendor-one.sh --strand`: the vendor paths alone (`series_vendor_paths` in [`scripts/series-config.sh`](/scripts/series-config.sh)), no counter, no glue gate. Not mirrored, and no CI runs here. The strand the buffer is derived from. |
+| `main-build` | the routine, unconditionally | `main-vendor`'s commits picked one to one by `series-vendor.sh`, with what the buffer regenerates, the counter stamped, and the glue compiling at every commit. **No CI runs here** (`each.yaml` never matches `*-build`). The buffer. |
 | `main-dev` | the routine, force-push | `main-build` commits, consumed up to 100 at a time, with R-side fixes folded in as CI demands. What CI builds, commit by commit. |
 | `main-green` | the routine, fast-forward only | The newest commit such that every commit in `main-green..it` has a `success` verdict. What r-universe builds `igraph.dev` from. |
 | `main-build-base` | the routine, force-push | The `main-build` commit vendoring the same upstream SHA as `main-green`. A marker with no consumer, recomputed every stage 3. |
@@ -52,11 +53,12 @@ and [`scripts/vendor-one.sh`](/scripts/vendor-one.sh) crosses the seam by itself
 
 **A series is discovered, not configured**: every `<X>-build` with a sibling `<X>-dev` is a series the firing serves.
 Not a series, and given no stage of its own:
+`main-vendor` (the vendor strand the buffer is derived from, which stage 1 serves),
 `retry-main-dev` (the retry ledger), `main-rc-dev` (the unflavored mirror, cut only when a landing is planned)
 and `main-land-*` (a landing).
 
-**All four refs exist from day one, and green starts below the flavor commits.**
-`main-build`, `main-dev` and `main-build-base` start at the seed tip,
+**All four refs and the strand exist from day one, and green starts below the flavor commits.**
+`main-vendor`, `main-build`, `main-dev` and `main-build-base` start at the seed tip,
 `igraph/rigraph`'s `main` plus `flavor.sh`'s two commits plus `chore: Add fifth version component`,
 while `main-green` starts at the seed's base, `main` itself,
 so that CI judges the flavor commits first and green crosses them once they pass:
@@ -90,9 +92,9 @@ The ones a firing runs or reads on every pass:
 * [`scripts/series-check.sh`](/scripts/series-check.sh), read-only:
   classifies from the `rcc2` store, which is stage 2's fallback source, not its first one,
   and prints one verdict per series, ADVANCE / WAIT / RETRY `<sha>` / REPAIR `<sha>` / IDLE,
-  with a `PATCH DRIFT`, a `TESTS` and a `LATE TAG` line where they apply,
-  the last for a release the buffer vendored before upstream tagged it;
-* [`scripts/vendor-one.sh`](/scripts/vendor-one.sh), stage 1;
+  with a `PATCH DRIFT`, a `TESTS`, a `LATE TAG` and a `VENDOR` line where they apply,
+  the third for a release the buffer vendored before upstream tagged it, the last for a strand missing, ahead of the buffer or behind it;
+* [`scripts/vendor-one.sh`](/scripts/vendor-one.sh) `--strand` and [`scripts/series-vendor.sh`](/scripts/series-vendor.sh), stage 1;
 * [`scripts/series-fold.sh`](/scripts/series-fold.sh) and [`scripts/rcc-one.sh`](/scripts/rcc-one.sh), stage 2;
 * [`scripts/series-advance.sh`](/scripts/series-advance.sh), stages 3 and 5:
   fast-forwards `-green` and mirrors it, sets `-build-base` to the vendored-SHA match, extends `-dev` by ≤ 100;
@@ -148,47 +150,63 @@ git -C "$U" checkout -q --detach origin/main
 
 Reference: [`references/0-setup.md`](references/0-setup.md).
 
-### 1. Vendor onto `main-build`
+### 1. Vendor onto `main-vendor`, and pick onto `main-build`
 
-Run **`main`'s copy of the script** against a worktree of the buffer:
+Run **`main`'s copy of the scripts** against a worktree of the strand, then of the buffer:
 
 ```sh
+M=$(pwd)
+V=$(cd .. && pwd)/main-vendor
 B=$(cd .. && pwd)/main-build
+git worktree add --detach "$V" origin/main-vendor
 git worktree add --detach "$B" origin/main-build
 git -C "$U" fetch -q --prune --tags origin
 git -C "$U" checkout -q --detach origin/main
-VENDOR_REPO=$B scripts/vendor-one.sh --commits 100 "$U"
-git -C "$B" push origin HEAD:refs/heads/main-build
+VENDOR_REPO=$V scripts/vendor-one.sh --strand --commits 100 "$U"
+git -C "$V" push origin HEAD:refs/heads/main-vendor
+(cd "$B" && "$M"/scripts/series-vendor.sh main --push)
 ```
 
+* The strand takes the vendoring and nothing else: one commit per upstream commit, the vendor paths alone, no counter, no glue gate.
+  The buffer is derived from it: each strand commit picked, what the buffer generates from `tools/stimulus/` and the glue regenerated
+  (`series_regenerate()` in [`scripts/series-config.sh`](/scripts/series-config.sh)), the counter stamped, the glue gate run.
 * The replay is walked to its tip whatever the clone's HEAD says; past the seam, the clone's HEAD is the walk's right-hand end.
 * **A tag ends the run early** with exit 0: rerun for the rest of the budget.
   A commit upstream tagged after it was vendored is re-stamped first,
-  as a second vendor commit for the same SHA, and that ends the run as any tag does.
-* The script gates itself, syntax-checking the glue (every C and C++ file directly in `src/`) after each commit,
-  and its exit status is the stop rule:
+  as a second strand commit for the same SHA, and that ends the run as any tag does.
+* `vendor-one.sh --strand`'s exit status is the stop rule for the strand:
   * **0** done, nothing to do, or a tag vendored;
   * **1** an error, most often a clone without the replay, or a dirty worktree;
-  * **3** glue broken, the breaking vendor commit at HEAD:
-    fix the hand-written glue in `src/`, or `tools/stimulus/` and regenerate, never `src/vendor/` or a generated file by hand;
-    amend into HEAD with an `R-side fix` section, rerun to finish the budget;
-  * **4** a `patch/` entry neither applies nor reverses: rebase it against the uncommitted tree, then the fold-in;
-  * **5** the buffer is off the clone HEAD's line: check out igraph/igraph's `main`, rerun;
+  * **4** a `patch/` entry neither applies nor reverses: rebase it against the uncommitted tree, then the strand fold-in;
+  * **5** the strand is off the clone HEAD's line: check out igraph/igraph's `main`, rerun;
   * **6** a shallow or untagged clone (fix it as above);
-  * **7** the R/C interface could not be generated: adapt `tools/stimulus/*.yaml` or add a `patch/` entry, then the fold-in;
-  * **8** `./configure` failed and the glue check could not run (do not amend).
-* The fold-in puts the fix into the vendor commit that needs it, and writes the message with `-F`, never an editor:
+  * **7** CMake, flex or bison failed: install what is missing, or add a `patch/` entry, then the strand fold-in.
+* The strand fold-in puts the fix into the strand commit that needs it, before anything picks it,
+  and writes the message with `-F`, never an editor:
 
   ```sh
-  git -C "$B" checkout -- . && git -C "$B" clean -fd src R     # then put the fix back
-  git -C "$B" commit -m 'tmp: fix generation' -- <the fix>
-  VENDOR_REPO=$B scripts/vendor-one.sh --commits 1 "$U"
-  { git -C "$B" log -1 --format=%B; printf '\nR-side fix:\n\n%s\n' '<what was adapted, and why>'; } > "$B.msg"
-  git -C "$B" reset --soft HEAD~2 && git -C "$B" commit -q -F "$B.msg"
+  git -C "$V" checkout -- . && git -C "$V" clean -fd src     # then put the fix back
+  git -C "$V" commit -m 'tmp: fix generation' -- <the fix>
+  VENDOR_REPO=$V scripts/vendor-one.sh --strand --commits 1 "$U"
+  { git -C "$V" log -1 --format=%B; printf '\nR-side fix:\n\n%s\n' '<what was adapted, and why>'; } > "$V.msg"
+  git -C "$V" reset --soft HEAD~2 && git -C "$V" commit -q -F "$V.msg"
   ```
 
+* `series-vendor.sh`'s exit status is the stop rule for the buffer, the pick at HEAD of `$B`:
+  * **0** every strand commit picked, or nothing to pick;
+  * **1** refused, or a pick that conflicts: patch drift between the strand and the buffer;
+  * **3** glue broken: fix the hand-written glue in `src/`, or `tools/stimulus/` and regenerate,
+    never `src/vendor/` or a generated file by hand;
+    amend into HEAD with an `R-side fix` section, rerun to finish the picks;
+  * **7** Stimulus or `cpp11::cpp_register()` failed on the pick: the fix is the buffer's, folded into the pick as the banner says;
+  * **8** `./configure` failed and the glue check could not run (do not amend).
+  The strand commit stays as it is: what the buffer fixes is the buffer's.
+* A `patch/` entry is the strand's: a fix to one amends the strand commit that needs it, before it is picked,
+  and an entry the buffer needs later is a commit of its own on `main-vendor`, picked like any other.
 * A vendored tree broken by upstream itself is vendored on and folded into the next commit that repairs it (stage 2's fold rule).
-* Push `main-build` unconditionally; red never blocks the buffer.
+* A series with no strand yet derives one from its buffer, once: `scripts/series-vendor.sh main --init --push`,
+  which `series-check.sh` asks for as `VENDOR`.
+* Push `main-vendor` and `main-build` unconditionally; red never blocks the buffer.
 
 Reference: [`references/1-vendor.md`](references/1-vendor.md).
 
@@ -238,7 +256,8 @@ Every commit in `main-green..main-dev` is decided by an `each-rcc` leg, and that
 
   Build and check locally first with `scripts/rcc-one.sh` after `git clean -fdx -- src/`;
   only a reviewed snapshot fold whose diff matches the upstream change goes straight to CI.
-  A fix the buffer needs to compile is mirrored onto `main-build` too, in the commit for the same upstream SHA.
+  A fix the buffer needs to compile is mirrored onto `main-build` too, in the commit for the same upstream SHA,
+  and a `patch/` entry onto `main-vendor` as a commit of its own, which stage 1 picks.
 * **Adapt the R side by the maintainer's rules:**
   * Wrap new C behaviour without changing the R interface.
   * Put new arguments behind `...`, checked with `check_dots_empty()`.
@@ -292,8 +311,9 @@ scripts/r-universe-check.sh --log <id>    # the log behind one of them
 
 * A `patch/` entry is a prototype of an upstream change, sent to `igraph/igraph`;
   a fix must cost Linux nothing and say which flags reproduced it;
-  it belongs where its code lives, which is not always `main`; and it has to reach the buffer too.
-  `series-port.sh --apply` carries entries onto the buffer by test-applying; `series-check.sh`'s `PATCH DRIFT` line is the backstop.
+  it belongs where its code lives, which is not always `main`; and it has to reach the strand too, which the buffer picks it from.
+  `series-port.sh --apply` carries entries onto the buffer by test-applying, not onto the strand,
+  so an entry it carries is committed onto `main-vendor` as well; `series-check.sh`'s `PATCH DRIFT` line is the backstop.
 
 Reference: [`references/3-advance.md`](references/3-advance.md).
 
@@ -394,8 +414,10 @@ Reference: [`references/retry.md`](references/retry.md).
 
 ## Commit-message contract
 
-- `-build`: the vendor message as `vendor-one.sh` writes it,
-  plus an `R-side fix` section when the glue, `tools/stimulus/` or `patch/` was adapted in that commit.
+- `-vendor`: the vendor message as `vendor-one.sh --strand` writes it,
+  plus an `R-side fix` section when `patch/` was adapted in that commit.
+- `-build`: the strand commit's message as `series-vendor.sh` picks it,
+  plus an `R-side fix` section when the glue or `tools/stimulus/` was adapted in that commit.
 - `-dev`: the same message, extended with every R-side fix folded in during repair,
   each naming the upstream change and what was adapted, and with any r-universe finding stage 3 recorded.
 - A folded transient pair keeps the newer subject and names the folded SHA and subject in the body.

@@ -1,4 +1,4 @@
-# The four refs of the series, and what is and is not one
+# The four refs of the series and its strand, and what is and is not one
 
 *Reference for [`series-loop`](../SKILL.md)'s branch model, read on a first firing and whenever a ref looks wrong.*
 
@@ -42,20 +42,31 @@ so nothing changes by hand when the seam is crossed.
 
 `igraph/rigraph`'s `main` vendors 0.10.17 (`igraph/igraph@529e7be1`), which is where the replay starts.
 
-## What a vendor commit regenerates
+## What a vendor commit regenerates, on the strand and on the buffer
 
-All of it is written from the upstream tree and `patch/` alone
-(`regenerate()` in [`scripts/vendor-lib.sh`](/scripts/vendor-lib.sh)), and none of it is edited by hand:
+None of it is edited by hand.
+The strand commit, `vendor-one.sh --strand` on `main-vendor`, is written from the upstream tree and `patch/` alone
+(`series_generate()` in [`scripts/series-config.sh`](/scripts/series-config.sh)),
+and carries the vendor paths and nothing else (`series_vendor_paths`):
 
 - `src/vendor/cigraph/`, a keep-list of the upstream tree (`series_keep`), with `patch/*.patch` applied;
 - `src/vendor/igraph_version.h`, which igraph's CMake writes from `git describe --tags` in the upstream clone;
-- `src/vendor/igraph_threading.h`, `src/vendor/io/` and `src/sources-*.mk`, by `make -f Makefile-cigraph`;
-- `src/rinterface.c` and `R/aaa-*.R`, by Stimulus in the same make run, from `tools/stimulus/`;
+- `src/vendor/igraph_threading.h` and the parsers in `src/vendor/io/`, by `make -f Makefile-cigraph`;
+- `patch/`, with a retired entry removed.
+
+The rest of `src/vendor/` is `main`'s, copied from `vendor/` and `tools/stimulus/`, and never on the strand.
+The buffer commit, the strand commit picked by `series-vendor.sh` onto `main-build`, adds what reads `tools/stimulus/` and the glue
+(`series_regenerate()`):
+
+- `src/rinterface.c` and `R/aaa-*.R`, by Stimulus, from `tools/stimulus/`;
+- `src/sources-*.mk`, by `rconfigure.py`;
 - `src/cpp11.cpp` and `R/cpp11.R`, by `cpp11::cpp_register()`;
+- the `src/*.dd` dependency lists;
 - the fifth `Version:` component in `DESCRIPTION`, one above the parent's.
 
 Two runs of the same upstream commit can differ in the generated files, so none of them is a fix that travels:
 a fix to the interface lives in `tools/stimulus/` or `patch/`, which do.
+`vendor-one.sh` without `--strand` still writes both halves at once, as `scripts/vendor.sh` does.
 
 ## A series is discovered, not configured
 
@@ -63,24 +74,26 @@ Each firing lists `refs/heads/*-build`, and every `<X>-build` with a sibling `<X
 today that is `main` alone.
 None of these has a `-build` beside it, so none is mistaken for a series:
 
+- `main-vendor`, the vendor strand stage 1 vendors onto and derives the buffer from;
+  not mirrored into `igraph/rigraph`, and force-pushed by the routine alone;
 - `retry-main-dev`, the retry ledger ([`retry.md`](retry.md));
 - `main-rc-dev`, the unflavored mirror of `main-dev` ([`series-rc`](/.claude/skills/series-rc/SKILL.md)),
   derived commit for commit and cut only when a landing is planned;
 - `main-land-dev` with its `main-land-green`, a landing on its way onto `main` ([`series-land`](/.claude/skills/series-land/SKILL.md)).
 
-## All four refs exist from day one, and green starts below the flavor commits
+## All four refs and the strand exist from day one, and green starts below the flavor commits
 
 The seed is `igraph/rigraph`'s `main`, the two commits `flavor.sh dev` writes,
 and a separate `chore: Add fifth version component` commit stamping `.0` ([`series-open`](/.claude/skills/series-open/SKILL.md)),
 the vendor counter's zero, so every commit on the series is orderable by version:
 
-    main-build = main-build-base = main-dev = the seed tip
+    main-vendor = main-build = main-build-base = main-dev = the seed tip
     main-green = the seed's base, igraph/rigraph's main
 
 `main-green` starts below the flavor commits so that CI judges them like any commit in `main-green..main-dev`:
 `igraph.dev` is a rename that has never been built, and a green that started above it would publish it unjudged
 (duckdb-r#2868's rule).
-Stage 1 then populates `-build`, and the other three advance as the loop consumes and verifies;
+Stage 1 then populates `-vendor` and picks it onto `-build`, and the other three advance as the loop consumes and verifies;
 the first commits green crosses are the flavor commits, once CI has judged them.
 What `-green` serves is the flavored package from then on, and r-universe is registered for `igraph.dev` only then.
 The fifth component belongs to the series only: `flavor.sh` never stamps it, and `main` keeps its four-component version.

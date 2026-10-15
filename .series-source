@@ -94,11 +94,11 @@ ported:
   - path: .github/workflows/each.yaml
     blob: e2daae0d2909e434d4ae337c60c97a8fec0d0551
   - path: .claude/skills/series-loop/SKILL.md
-    blob: 3411853664732608cca17467caeb69b3fc759d4c
+    blob: 5c3691d82516593a210d788ca7a6a673d1653c78
   - path: .claude/skills/series-loop/references/0-setup.md
     blob: 85caf79824f073688a332ee0bd1dcdf34e804f69
   - path: .claude/skills/series-loop/references/1-vendor.md
-    blob: eb4e1b747515fc678e41176ee53b3e97f4e2a992
+    blob: 37595fbef860c58c99b32e043b80a32375467ce9
   - path: .claude/skills/series-loop/references/2-repair.md
     blob: e2786cb54c55030521a8a1d2f9e9f71d60e73d4a
   - path: .claude/skills/series-loop/references/3-advance.md
@@ -114,11 +114,11 @@ ported:
   - path: .claude/skills/series-loop/references/retry.md
     blob: 4e60c79201d7c0cbe6063415036d2e668bc516c0
   - path: .claude/skills/series-loop/references/series.md
-    blob: 4e72ed2dcdd051e135024903cc93f8372df7e82e
+    blob: b8106beb533b3c6252ac5a5f0ebac01f41406ebf
   - path: .claude/skills/series-loop/references/traps.md
     blob: dba6f4612eaad77b3921dbac082c2b9c0cf12e44
   - path: .claude/skills/series-open/SKILL.md
-    blob: adcac2dca8ddeef37807366dcd22348da4c88be5
+    blob: 27ef781094f17414f4149a0dedf8291697248de3
   - path: .claude/skills/series-rc/SKILL.md
     blob: a0de35e67b98631d9e5dfd0c15eaba710cb873a0
   - path: .claude/skills/series-land/SKILL.md
