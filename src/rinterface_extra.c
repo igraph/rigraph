@@ -2509,21 +2509,36 @@ igraph_error_t Rx_igraph_interrupt_handler(void *data) {
   return IGRAPH_SUCCESS;
 }
 
+/* The namespace of this package,
+ * where the callbacks below find the R functions they call.
+ * The package is published under several names (`igraph`, `igraph.dev`),
+ * so it cannot be looked up by name here: `.onLoad()` hands it over instead.
+ * NULL until then, and the callbacks do nothing while it is. */
+static SEXP Rx_igraph_namespace = NULL;
+
+/* TOP-LEVEL: called from R via .Call; must use IGRAPH_R_CHECK */
+SEXP Rx_igraph_set_namespace(SEXP ns) {
+  if (!Rf_isEnvironment(ns)) {
+    Rf_error("The package namespace must be an environment.");
+  }
+  R_PreserveObject(ns);
+  if (Rx_igraph_namespace != NULL) {
+    R_ReleaseObject(Rx_igraph_namespace);
+  }
+  Rx_igraph_namespace = ns;
+  return R_NilValue;
+}
+
 /* HELPER: internal C; must use IGRAPH_CHECK */
 igraph_error_t Rx_igraph_progress_handler(const char *message, double percent,
                               void * data) {
   SEXP ec;
   int ecint;
   int px = 0;
-  SEXP rho;
-#if R_VERSION >= R_Version(4, 6, 0)
-  rho = R_getRegisteredNamespace("igraph");
-#else
-  SEXP l1 = PROTECT(Rf_install("getNamespace")); px++;
-  SEXP l2 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar("igraph")))); px += 2;
-  SEXP l3 = PROTECT(Rf_lang2(l1, l2)); px++;
-  rho = PROTECT(Rf_eval(l3, R_BaseEnv)); px++;
-#endif
+  SEXP rho = Rx_igraph_namespace;
+  if (rho == NULL) {
+    return IGRAPH_SUCCESS;
+  }
 
   SEXP l4 = PROTECT(Rf_install(".igraph.progress")); px++;
   SEXP l5 = PROTECT(Rf_ScalarReal(percent)); px++;
@@ -2539,15 +2554,10 @@ igraph_error_t Rx_igraph_progress_handler(const char *message, double percent,
 /* HELPER: internal C; must use IGRAPH_CHECK */
 igraph_error_t Rx_igraph_status_handler(const char *message, void *data) {
   int px = 0;
-  SEXP rho;
-#if R_VERSION >= R_Version(4, 6, 0)
-  rho = R_getRegisteredNamespace("igraph");
-#else
-  SEXP l1 = PROTECT(Rf_install("getNamespace")); px++;
-  SEXP l2 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar("igraph")))); px += 2;
-  SEXP l3 = PROTECT(Rf_lang2(l1, l2)); px++;
-  rho = PROTECT(Rf_eval(l3, R_BaseEnv)); px++;
-#endif
+  SEXP rho = Rx_igraph_namespace;
+  if (rho == NULL) {
+    return IGRAPH_SUCCESS;
+  }
 
   SEXP l4 = PROTECT(Rf_install(".igraph.status")); px++;
   SEXP l5 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar(message)))); px += 2;
@@ -2611,6 +2621,74 @@ static void *Rx_igraph_altrep_to(SEXP vec, Rboolean writeable) {
 static R_altrep_class_t Rx_igraph_altrep_from_class;
 static R_altrep_class_t Rx_igraph_altrep_to_class;
 
+/* Batch constructor for a list of vertex sequences.
+ *
+ * Builds the whole `lapply(idx_list, unsafe_create_vs, ...)` result in one C
+ * pass: for each vertex-ID vector it produces a fresh integer payload, attaches
+ * the corresponding vertex names (when the graph is named), and sets the shared
+ * `env` weak reference, the `graph` id and the `igraph.vs` class. This keeps the
+ * per-object R overhead (closure call, `as.integer`, name subset,
+ * `attributes<-`) out of the loop entirely.
+ *
+ *   idx_list  : VECSXP of vertex-ID vectors (integer or double)
+ *   names_src : graph's full vertex-name STRSXP, or NULL for unnamed graphs
+ *   env       : the shared weak reference (or env) to set as the "env" attr
+ *   graph_id  : graph id (character scalar), or NULL to skip the "graph" attr
+ */
+SEXP Rx_igraph_vs_list(SEXP idx_list, SEXP names_src, SEXP env, SEXP graph_id) {
+  R_xlen_t n=XLENGTH(idx_list);
+  int named=(TYPEOF(names_src) == STRSXP);
+  R_xlen_t nsource=named ? XLENGTH(names_src) : 0;
+  SEXP env_sym=Rf_install("env");
+  SEXP graph_sym=Rf_install("graph");
+  SEXP out=PROTECT(Rf_allocVector(VECSXP, n));
+  SEXP cls=PROTECT(Rf_mkString("igraph.vs"));
+
+  for (R_xlen_t i=0; i < n; i++) {
+    SEXP elt=VECTOR_ELT(idx_list, i);
+    /* Fresh, unshared integer payload: coerceVector returns its argument
+     * unchanged when the type already matches, so duplicate in that case to
+     * avoid mutating a caller-owned vector. */
+    SEXP payload=PROTECT(Rf_coerceVector(elt, INTSXP));
+    if (payload == elt) {
+      UNPROTECT(1);
+      payload=PROTECT(Rf_duplicate(elt));
+    }
+
+    if (named) {
+      R_xlen_t len=XLENGTH(payload);
+      const int *pidx=INTEGER(payload);
+      SEXP nm=PROTECT(Rf_allocVector(STRSXP, len));
+      for (R_xlen_t k=0; k < len; k++) {
+        int j=pidx[k];
+        /* Bounds guard: STRING_ELT() does no range checking, so an invalid ID
+         * would read past the end of `names_src`. Callers pass IDs straight
+         * from the C core, which are always in range; NA mirrors what the R
+         * subset `vertex_names[res]` gave for NA or out-of-range IDs. */
+        if (j == NA_INTEGER || j < 1 || j > nsource) {
+          SET_STRING_ELT(nm, k, NA_STRING);
+        } else {
+          SET_STRING_ELT(nm, k, STRING_ELT(names_src, j - 1));
+        }
+      }
+      Rf_setAttrib(payload, R_NamesSymbol, nm);
+      UNPROTECT(1);
+    }
+
+    Rf_setAttrib(payload, env_sym, env);
+    if (graph_id != R_NilValue) {
+      Rf_setAttrib(payload, graph_sym, graph_id);
+    }
+    Rf_setAttrib(payload, R_ClassSymbol, cls);
+
+    SET_VECTOR_ELT(out, i, payload);
+    UNPROTECT(1);
+  }
+
+  UNPROTECT(2);
+  return out;
+}
+
 /* HELPER: internal C; must use IGRAPH_CHECK */
 void Rx_igraph_init_vector_class(DllInfo *dll) {
   Rx_igraph_altrep_from_class=R_make_altreal_class("igraph_from", "base", dll);
@@ -2650,15 +2728,10 @@ SEXP Rx_igraph_set_verbose(SEXP verbose) {
 SEXP R_igraph_finalizer(void) {
   IGRAPH_FINALLY_FREE();
   int px = 0;
-  SEXP rho;
-#if R_VERSION >= R_Version(4, 6, 0)
-  rho = R_getRegisteredNamespace("igraph");
-#else
-  SEXP l1 = PROTECT(Rf_install("getNamespace")); px++;
-  SEXP l2 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar("igraph")))); px += 2;
-  SEXP l3 = PROTECT(Rf_lang2(l1, l2)); px++;
-  rho = PROTECT(Rf_eval(l3, R_BaseEnv)); px++;
-#endif
+  SEXP rho = Rx_igraph_namespace;
+  if (rho == NULL) {
+    return R_NilValue;
+  }
 
   SEXP l4 = PROTECT(Rf_install(".igraph.progress")); px++;
   SEXP l5 = PROTECT(Rf_ScalarReal(0.0)); px++;

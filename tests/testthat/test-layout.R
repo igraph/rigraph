@@ -286,6 +286,13 @@ test_that("`layout_with_mds()` stress test, graph with multiple components", {
 
   ## Small stress test
 
+  # DSYEVR fails to converge with BLIS for some of these graphs.
+  # Reproduced in the C core: https://github.com/igraph/igraph/pull/2933
+  skip_if(
+    grepl("blis", extSoftVersion()["BLAS"], ignore.case = TRUE),
+    "BLIS BLAS"
+  )
+
   for (i in 1:10) {
     g <- sample_gnp(100, 2 / 100)
     l <- layout_with_mds(g)

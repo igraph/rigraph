@@ -53,7 +53,7 @@
       g
     Message
       This graph was created by an old(er) igraph version.
-      i Call `igraph::upgrade_graph()` on it to use with the current igraph version.
+      i Call `upgrade_graph()` on it to use with the current igraph version.
       For now we convert it on the fly...
     Output
       IGRAPH D--- 3 3 -- Ring graph
@@ -107,7 +107,7 @@
       s[["1.0.0"]]
     Message
       This graph was created by an old(er) igraph version.
-      i Call `igraph::upgrade_graph()` on it to use with the current igraph version.
+      i Call `upgrade_graph()` on it to use with the current igraph version.
       For now we convert it on the fly...
     Output
       IGRAPH D--- 3 3 -- Ring graph

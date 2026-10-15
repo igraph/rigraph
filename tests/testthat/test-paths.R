@@ -20,7 +20,7 @@ test_that("radius() works -- lifecycle", {
   igraph_local_seed(42)
   g <- make_tree(10, 2)
 
-  expect_snapshot(radius(g, "out"))
+  expect_snapshot_igraph(radius(g, "out"))
 })
 
 test_that("eccentricity() works", {
@@ -45,7 +45,7 @@ test_that("eccentricity() works -- lifecycle", {
   igraph_local_seed(42)
   g <- make_tree(10, 2)
 
-  expect_snapshot(eccentricity(g, vids = V(g), "out"))
+  expect_snapshot_igraph(eccentricity(g, vids = V(g), "out"))
 })
 
 test_that("graph_center() works", {
