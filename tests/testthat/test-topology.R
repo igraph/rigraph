@@ -52,7 +52,7 @@ test_that("isomorphisms() works", {
   motif_iso <- isomorphisms(
     motif,
     motif,
-    method = "vf2",
+    algorithm = "vf2",
     vertex.color1 = 2:1,
     vertex.color2 = 1:2
   )
@@ -67,7 +67,7 @@ test_that("subgraph_isomorphisms works", {
   out <- subgraph_isomorphisms(
     target = motif,
     pattern = motif,
-    method = "vf2",
+    algorithm = "vf2",
     vertex.color1 = 2:1,
     vertex.color2 = 1:2
   )
@@ -87,7 +87,7 @@ test_that("VF2 isomorphism considers colors", {
   path <- make_ring(3, circular = FALSE)
   V(full)$color <- c(1, 1, 2)
   V(path)$color <- c(1, 2, 1)
-  n <- count_subgraph_isomorphisms(path, full, method = "vf2")
+  n <- count_subgraph_isomorphisms(path, full, algorithm = "vf2")
   expect_equal(n, 2)
 })
 
@@ -141,18 +141,18 @@ test_that("graph.subisomorphic, method = 'lad' works", {
     `4` = c(1, 3, 9),
     `5` = c(2, 4, 8, 9)
   )
-  sub_iso1 <- subgraph_isomorphic(pattern, target, method = "lad")
+  sub_iso1 <- subgraph_isomorphic(pattern, target, algorithm = "lad")
   sub_iso2 <- subgraph_isomorphic(
     pattern,
     target,
     induced = TRUE,
-    method = "lad"
+    algorithm = "lad"
   )
   sub_iso3 <- subgraph_isomorphic(
     pattern,
     target,
     domains = domains,
-    method = "lad"
+    algorithm = "lad"
   )
 
   expect_true(sub_iso1)
@@ -168,7 +168,12 @@ test_that("LAD stress test", {
     target <- sample_gnp(20, 0.5)
     pn <- sample(4:18, 1)
     pattern <- induced_subgraph(target, sample(vcount(target), pn))
-    iso <- subgraph_isomorphic(pattern, target, induced = TRUE, method = "lad")
+    iso <- subgraph_isomorphic(
+      pattern,
+      target,
+      induced = TRUE,
+      algorithm = "lad"
+    )
     expect_true(iso)
   }
 
@@ -178,7 +183,12 @@ test_that("LAD stress test", {
     target <- sample_gnp(20, 1 / 20)
     pn <- sample(5:18, 1)
     pattern <- sample_gnp(pn, 0.6)
-    iso <- subgraph_isomorphic(pattern, target, induced = TRUE, method = "lad")
+    iso <- subgraph_isomorphic(
+      pattern,
+      target,
+      induced = TRUE,
+      algorithm = "lad"
+    )
     expect_false(iso)
   }
 })
@@ -205,15 +215,15 @@ test_that("graph.subisomorphic.vf2 works", {
 test_that("isomorphic", {
   g1 <- graph_from_literal(A - B - C - A)
   expect_isomorphic(g1, g1)
-  expect_isomorphic(g1, g1, method = "direct")
-  expect_isomorphic(g1, g1, method = "vf2")
-  expect_isomorphic(g1, g1, method = "bliss")
+  expect_isomorphic(g1, g1, algorithm = "direct")
+  expect_isomorphic(g1, g1, algorithm = "vf2")
+  expect_isomorphic(g1, g1, algorithm = "bliss")
 
   g2 <- graph_from_literal(A - B - C)
   expect_not_isomorphic(g1, g2)
-  expect_not_isomorphic(g1, g2, method = "direct")
-  expect_not_isomorphic(g1, g2, method = "vf2")
-  expect_not_isomorphic(g1, g2, method = "bliss")
+  expect_not_isomorphic(g1, g2, algorithm = "direct")
+  expect_not_isomorphic(g1, g2, algorithm = "vf2")
+  expect_not_isomorphic(g1, g2, algorithm = "bliss")
 })
 
 test_that("subgraph_isomorphic", {
@@ -221,13 +231,13 @@ test_that("subgraph_isomorphic", {
   g2 <- graph_from_literal(A - B - C - D)
 
   expect_true(subgraph_isomorphic(g2, g1))
-  expect_true(subgraph_isomorphic(g2, g1, method = "vf2"))
-  expect_true(subgraph_isomorphic(g2, g1, method = "lad"))
+  expect_true(subgraph_isomorphic(g2, g1, algorithm = "vf2"))
+  expect_true(subgraph_isomorphic(g2, g1, algorithm = "lad"))
 
   g3 <- graph_from_literal(A - B - C - A)
   expect_false(subgraph_isomorphic(g3, g1))
-  expect_false(subgraph_isomorphic(g3, g1, method = "vf2"))
-  expect_false(subgraph_isomorphic(g3, g1, method = "lad"))
+  expect_false(subgraph_isomorphic(g3, g1, algorithm = "vf2"))
+  expect_false(subgraph_isomorphic(g3, g1, algorithm = "lad"))
 })
 
 test_that("count_isomorphisms", {
@@ -247,7 +257,7 @@ test_that("count_isomorphisms_with_colors", {
       edge.color2 = c(2, 2, 2),
       vertex.color1 = c(3, 3, 3),
       vertex.color2 = c(3, 3, 3),
-      method = "vf2"
+      algorithm = "vf2"
     ),
     6
   )
@@ -260,7 +270,7 @@ test_that("count_isomorphisms_with_colors", {
       edge.color2 = c(2, 2, 2),
       vertex.color1 = c(1, 2, 3),
       vertex.color2 = c(1, 2, 3),
-      method = "vf2"
+      algorithm = "vf2"
     ),
     1
   )
@@ -273,7 +283,7 @@ test_that("count_isomorphisms_with_colors", {
       edge.color2 = c(3, 2, 2),
       vertex.color1 = c(3, 3, 3),
       vertex.color2 = c(3, 3, 3),
-      method = "vf2"
+      algorithm = "vf2"
     ),
     2
   )
@@ -283,12 +293,12 @@ test_that("count_subgraph_isomorphisms", {
   g1 <- graph_from_literal(A - B - C - D - A)
   g2 <- graph_from_literal(A - B - C - D)
 
-  expect_equal(count_subgraph_isomorphisms(g2, g1, method = "lad"), 8)
-  expect_equal(count_subgraph_isomorphisms(g2, g1, method = "vf2"), 8)
+  expect_equal(count_subgraph_isomorphisms(g2, g1, algorithm = "lad"), 8)
+  expect_equal(count_subgraph_isomorphisms(g2, g1, algorithm = "vf2"), 8)
 
   g3 <- graph_from_literal(A - B - C - A)
-  expect_equal(count_subgraph_isomorphisms(g3, g1, method = "lad"), 0)
-  expect_equal(count_subgraph_isomorphisms(g3, g1, method = "vf2"), 0)
+  expect_equal(count_subgraph_isomorphisms(g3, g1, algorithm = "lad"), 0)
+  expect_equal(count_subgraph_isomorphisms(g3, g1, algorithm = "vf2"), 0)
 })
 
 test_that("isomorphisms", {
@@ -329,12 +339,12 @@ test_that("subgraph_isomorphisms, lad", {
 
   expect_equal(
     ignore_attr = TRUE,
-    subgraph_isomorphisms(g2, g1, method = "lad"),
+    subgraph_isomorphisms(g2, g1, algorithm = "lad"),
     res
   )
 
   g3 <- graph_from_literal(X - Y - Z - X)
-  expect_equal(subgraph_isomorphisms(g3, g1, method = "lad"), list())
+  expect_equal(subgraph_isomorphisms(g3, g1, algorithm = "lad"), list())
 })
 
 test_that("subgraph_isomorphisms, vf2", {
@@ -354,12 +364,12 @@ test_that("subgraph_isomorphisms, vf2", {
 
   expect_equal(
     ignore_attr = TRUE,
-    subgraph_isomorphisms(g2, g1, method = "vf2"),
+    subgraph_isomorphisms(g2, g1, algorithm = "vf2"),
     res
   )
 
   g3 <- graph_from_literal(X - Y - Z - X)
-  expect_equal(subgraph_isomorphisms(g3, g1, method = "vf2"), list())
+  expect_equal(subgraph_isomorphisms(g3, g1, algorithm = "vf2"), list())
 })
 
 test_that("transitive_closure works for directed graphs", {
@@ -440,7 +450,7 @@ test_that("isomorphisms works with callback", {
   # Count isomorphisms using callback
   count <- 0
 
-  isomorphisms(g1, g2, method = "vf2", callback = function(map12, map21) {
+  isomorphisms(g1, g2, algorithm = "vf2", callback = function(map12, map21) {
     count <<- count + 1
     if (count >= 10) {
       return(FALSE)
@@ -461,7 +471,7 @@ test_that("isomorphisms can stop early", {
   # Stop after finding 3 isomorphisms
   count <- 0
 
-  isomorphisms(g1, g2, method = "vf2", callback = function(map12, map21) {
+  isomorphisms(g1, g2, algorithm = "vf2", callback = function(map12, map21) {
     count <<- count + 1
     if (count >= 3) {
       TRUE # stop after 3 isomorphisms
@@ -483,7 +493,7 @@ test_that("isomorphisms receives correct arguments", {
   n2 <- vcount(g2)
 
   # Check argument types
-  isomorphisms(g1, g2, method = "vf2", callback = function(map12, map21) {
+  isomorphisms(g1, g2, algorithm = "vf2", callback = function(map12, map21) {
     expect_type(map12, "integer")
     expect_type(map21, "integer")
     expect_length(map12, n1)
@@ -498,7 +508,7 @@ test_that("isomorphisms handles errors in callback", {
 
   # Callback that throws an error
   expect_error(
-    isomorphisms(g1, g2, method = "vf2", callback = function(map12, map21) {
+    isomorphisms(g1, g2, algorithm = "vf2", callback = function(map12, map21) {
       stop("Intentional error in callback")
     }),
     "Error in R callback function"
@@ -518,7 +528,7 @@ test_that("subisomorphisms works with callback works", {
   subgraph_isomorphisms(
     g1,
     g2,
-    method = "vf2",
+    algorithm = "vf2",
     callback = function(map12, map21) {
       count <<- count + 1
       if (count >= 5) {
@@ -544,7 +554,7 @@ test_that("subisomorphisms works with callback can stop early", {
   subgraph_isomorphisms(
     g1,
     g2,
-    method = "vf2",
+    algorithm = "vf2",
     callback = function(map12, map21) {
       count <<- count + 1
       if (count >= 3) {
@@ -570,7 +580,7 @@ test_that("subisomorphisms works with callback receives correct arguments", {
   subgraph_isomorphisms(
     g1,
     g2,
-    method = "vf2",
+    algorithm = "vf2",
     callback = function(map12, map21) {
       expect_type(map12, "integer")
       expect_type(map21, "integer")
@@ -593,7 +603,7 @@ test_that("subisomorphisms works with callback handles errors in callback", {
     subgraph_isomorphisms(
       g1,
       g2,
-      method = "vf2",
+      algorithm = "vf2",
       callback = function(map12, map21) {
         stop("Intentional error in callback")
       }
@@ -862,4 +872,63 @@ test_that("automorphism_group() tail arguments and legacy positional recovery", 
   )
   ref <- automorphism_group(ring, NULL, sh = "fl")
   expect_identical(lapply(res2, as.vector), lapply(ref, as.vector))
+})
+
+test_that("isomorphism functions rename `method` to `algorithm`", {
+  g1 <- make_ring(5)
+  g2 <- permute(g1, c(2, 3, 4, 5, 1))
+  p <- make_ring(3)
+  t <- make_full_graph(4)
+  expect_legacy_arg(isomorphic, list(g1, g2), "method", "algorithm", "vf2")
+  expect_legacy_arg(
+    is_isomorphic_to,
+    list(g1, g2),
+    "method",
+    "algorithm",
+    "bliss"
+  )
+  expect_legacy_arg(
+    subgraph_isomorphic,
+    list(p, t),
+    "method",
+    "algorithm",
+    "vf2"
+  )
+  expect_legacy_arg(
+    is_subgraph_isomorphic_to,
+    list(p, t),
+    "method",
+    "algorithm",
+    "lad"
+  )
+  expect_legacy_arg(
+    count_isomorphisms,
+    list(g1, g2),
+    "method",
+    "algorithm",
+    "vf2"
+  )
+  expect_legacy_arg(
+    count_subgraph_isomorphisms,
+    list(p, t),
+    "method",
+    "algorithm",
+    "lad"
+  )
+  expect_legacy_arg(isomorphisms, list(g1, g2), "method", "algorithm", "vf2")
+  expect_legacy_arg(
+    subgraph_isomorphisms,
+    list(p, t),
+    "method",
+    "algorithm",
+    "lad"
+  )
+  # positional calls keep working without a warning
+  expect_true(isomorphic(g1, g2, "vf2"))
+  expect_snapshot_igraph_error(isomorphic(
+    g1,
+    g2,
+    algorithm = "vf2",
+    method = "bliss"
+  ))
 })

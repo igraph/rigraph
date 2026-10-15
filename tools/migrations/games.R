@@ -265,12 +265,12 @@ migrations <- list(
   ),
 
   sample_degseq = list(
-    old = function(out.deg, in.deg, method) {},
+    old = function(out.deg, in.deg, method = algorithm) {},
     new = function(
       out_deg,
       in_deg = NULL,
       ...,
-      method = c(
+      algorithm = c(
         "configuration",
         "vl",
         "fast.heur.simple",

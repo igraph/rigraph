@@ -216,14 +216,14 @@ migrations <- list(
       out.deg,
       in.deg,
       allowed.edge.types = allowed_edge_types,
-      method
+      method = algorithm
     ) {},
     new = function(
       out_deg,
       in_deg = NULL,
       ...,
       allowed_edge_types = c("simple", "loops", "multi", "all"),
-      method = c("smallest", "largest", "index"),
+      algorithm = c("smallest", "largest", "index"),
       out.deg = deprecated(),
       in.deg = deprecated()
     ) {},
@@ -243,12 +243,12 @@ migrations <- list(
   ),
 
   sample_tree = list(
-    old = function(n, directed, method) {},
+    old = function(n, directed, method = algorithm) {},
     new = function(
       n,
       ...,
       directed = FALSE,
-      method = c("lerw", "prufer")
+      algorithm = c("lerw", "prufer")
     ) {},
     when = "3.0.0"
   ),

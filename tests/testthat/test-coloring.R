@@ -5,11 +5,11 @@ test_that("greedy_vertex_coloring works", {
     c(1, rep(2, vcount(g) - 1))
   )
   expect_equal(
-    greedy_vertex_coloring(g, heuristic = "colored_neighbors"),
+    greedy_vertex_coloring(g, algorithm = "colored_neighbors"),
     c(1, rep(2, vcount(g) - 1))
   )
   expect_equal(
-    greedy_vertex_coloring(g, heuristic = "dsatur"),
+    greedy_vertex_coloring(g, algorithm = "dsatur"),
     c(1, rep(2, vcount(g) - 1))
   )
 })
@@ -42,5 +42,16 @@ test_that("greedy_vertex_coloring() recovers a legacy positional `heuristic`", {
   lifecycle::expect_deprecated(
     col <- greedy_vertex_coloring(g, "dsatur")
   )
-  expect_identical(col, greedy_vertex_coloring(g, heuristic = "dsatur"))
+  expect_identical(col, greedy_vertex_coloring(g, algorithm = "dsatur"))
+})
+
+test_that("greedy_vertex_coloring(heuristic = ) is renamed to `algorithm`", {
+  g <- make_graph("Zachary")
+  expect_legacy_arg(
+    greedy_vertex_coloring,
+    list(g),
+    "heuristic",
+    "algorithm",
+    "dsatur"
+  )
 })

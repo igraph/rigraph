@@ -1,6 +1,6 @@
 test_that("similarity works", {
   g <- make_ring(5)
-  sim_dice <- similarity(g, method = "dice")
+  sim_dice <- similarity(g, measure = "dice")
 
   sim_dice_true <- matrix(
     c(
@@ -15,7 +15,7 @@ test_that("similarity works", {
   )
   expect_equal(sim_dice, sim_dice_true)
 
-  sim_jac <- similarity(g, method = "jaccard")
+  sim_jac <- similarity(g, measure = "jaccard")
   sim_jac_true <- matrix(
     c(
       1, 0, 0.3333333333333333, 0.3333333333333333, 0, 0, 1, 0, 0.3333333333333333,
@@ -41,7 +41,7 @@ test_that("similarity() covers vids, mode, loops and method", {
     vertices = V(g)[1:3],
     mode = "out",
     loops = TRUE,
-    method = "dice"
+    measure = "dice"
   )
   expect_equal(
     sim,
@@ -58,4 +58,9 @@ test_that("similarity() recovers legacy positional arguments", {
   )
   expect_identical(res, similarity(g, V(g)[1:3], mode = "out"))
   expect_equal(res, diag(3))
+})
+
+test_that("similarity(method = ) is renamed to `measure`", {
+  g <- make_ring(5)
+  expect_legacy_arg(similarity, list(g), "method", "measure", "dice")
 })

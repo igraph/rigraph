@@ -13,7 +13,7 @@
 #'
 #' @param graph The graph object to color.
 #' @inheritParams rlang::args_dots_empty
-#' @param heuristic The selection heuristic for the next vertex to consider.
+#' @param algorithm The selection heuristic for the next vertex to consider.
 #'   Possible values are: \dQuote{colored_neighbors} selects the vertex with the
 #'   largest number of already colored neighbors. \dQuote{dsatur} selects the
 #'   vertex with the largest number of unique colors in its neighborhood, i.e.
@@ -34,7 +34,7 @@
 greedy_vertex_coloring <- function(
   graph,
   ...,
-  heuristic = c("colored_neighbors", "dsatur")
+  algorithm = c("colored_neighbors", "dsatur")
 ) {
   # BEGIN GENERATED ARG_HANDLE: greedy_vertex_coloring, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -48,14 +48,14 @@ greedy_vertex_coloring <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn greedy_vertex_coloring}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(heuristic)) base::list(heuristic = heuristic)
+        if (!base::missing(heuristic)) base::list(algorithm = heuristic)
       )
     }
     .arg_handle <- .old_signature(...)
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(heuristic)) "heuristic"
+        if (!base::missing(algorithm)) "algorithm"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn greedy_vertex_coloring} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -63,7 +63,7 @@ greedy_vertex_coloring <- function(
         "3.0.0",
         what = base::I("Calling `greedy_vertex_coloring()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  greedy_vertex_coloring(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  greedy_vertex_coloring(", base::paste(base::c("graph", base::c(algorithm = "heuristic")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    greedy_vertex_coloring(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -73,6 +73,6 @@ greedy_vertex_coloring <- function(
 
   vertex_coloring_greedy_impl(
     graph = graph,
-    heuristic = heuristic
+    heuristic = algorithm
   )
 }

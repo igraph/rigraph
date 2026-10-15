@@ -773,3 +773,21 @@ test_that("snake_case renames in realize_*degseq() recover the legacy dotted nam
     "multiple"
   )
 })
+
+test_that("tree and degree-sequence constructors rename `method` to `algorithm`", {
+  expect_legacy_arg(sample_tree, list(10), "method", "algorithm", "prufer")
+  expect_legacy_arg(
+    realize_degseq,
+    list(c(2, 2, 2)),
+    "method",
+    "algorithm",
+    "largest"
+  )
+  expect_legacy_arg(
+    realize_bipartite_degseq,
+    list(c(1, 1), 2),
+    "method",
+    "algorithm",
+    "largest"
+  )
+})

@@ -938,7 +938,7 @@ graph.atlas <- function(n) {
 #' r2 <- make_(ring(10), with_vertex_(color = "red", name = LETTERS[1:10]))
 #' l2 <- make_(lattice(c(3, 3, 3)), with_edge_(weight = 2))
 #'
-#' ran <- sample_(degseq(c(3, 3, 3, 3, 3, 3), method = "configuration"), simplified())
+#' ran <- sample_(degseq(c(3, 3, 3, 3, 3, 3), algorithm = "configuration"), simplified())
 #' degree(ran)
 #' is_simple(ran)
 #' @family deterministic constructors
@@ -2595,7 +2595,7 @@ make_tree <- function(
 #' @inheritParams rlang::args_dots_empty
 #' @param directed Whether to create a directed tree. The edges of the tree are
 #'   oriented away from the root.
-#' @param method The algorithm to use to generate the tree. \sQuote{prufer}
+#' @param algorithm The algorithm to use to generate the tree. \sQuote{prufer}
 #'   samples Prüfer sequences uniformly and then converts the sampled sequence to
 #'   a tree. \sQuote{lerw} performs a loop-erased random walk on the complete
 #'   graph to uniformly sampleits spanning trees. (This is also known as Wilson's
@@ -2607,14 +2607,14 @@ make_tree <- function(
 #' @keywords graphs
 #' @examples
 #'
-#' g <- sample_tree(100, method = "lerw")
+#' g <- sample_tree(100, algorithm = "lerw")
 #'
 #' @export
 sample_tree <- function(
   n,
   ...,
   directed = FALSE,
-  method = c("lerw", "prufer")
+  algorithm = c("lerw", "prufer")
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_tree, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -2629,7 +2629,7 @@ sample_tree <- function(
       }
       base::c(
         if (!base::missing(directed)) base::list(directed = directed),
-        if (!base::missing(method)) base::list(method = method)
+        if (!base::missing(method)) base::list(algorithm = method)
       )
     }
     .arg_handle <- .old_signature(...)
@@ -2637,7 +2637,7 @@ sample_tree <- function(
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
         if (!base::missing(directed)) "directed",
-        if (!base::missing(method)) "method"
+        if (!base::missing(algorithm)) "algorithm"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_tree} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -2645,7 +2645,7 @@ sample_tree <- function(
         "3.0.0",
         what = base::I("Calling `sample_tree()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  sample_tree(", base::paste(base::c("n", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  sample_tree(", base::paste(base::c("n", base::c(directed = "directed", algorithm = "method")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    sample_tree(", base::paste(base::c("n", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -2656,7 +2656,7 @@ sample_tree <- function(
   tree_game_impl(
     n = n,
     directed = directed,
-    method = method
+    method = algorithm
   )
 }
 
@@ -3887,7 +3887,7 @@ graph_from_lcf <- function(
 #' @param in_deg For directed graph, the in-degree sequence. By default this is
 #'   `NULL` and an undirected graph is created.
 #' @param in.deg `r lifecycle::badge("deprecated")` Use `in_deg` instead.
-#' @param method Character, the method for generating the graph; see below.
+#' @param algorithm Character, the method for generating the graph; see below.
 #' @inheritParams rlang::args_dots_empty
 #' @param allowed_edge_types Character, specifies the types of allowed edges.
 #'   \dQuote{simple} allows simple graphs only (no loops, no multiple edges).
@@ -3931,7 +3931,7 @@ graph_from_lcf <- function(
 #' if (sum(degs) %% 2 != 0) {
 #'   degs[1] <- degs[1] + 1
 #' }
-#' g4 <- realize_degseq(degs, method = "largest", allowed_edge_types = "all")
+#' g4 <- realize_degseq(degs, algorithm = "largest", allowed_edge_types = "all")
 #' all(degree(g4) == degs)
 #'
 #' ## Power-law degree distribution, no loops allowed but multiple edges
@@ -3948,7 +3948,7 @@ realize_degseq <- function(
   in_deg = NULL,
   ...,
   allowed_edge_types = c("simple", "loops", "multi", "all"),
-  method = c("smallest", "largest", "index"),
+  algorithm = c("smallest", "largest", "index"),
   out.deg = deprecated(),
   in.deg = deprecated()
 ) {
@@ -3957,6 +3957,8 @@ realize_degseq <- function(
   if (...length() > 0L) {
     .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("i", "in", "o", "ou", "out"))
     if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn realize_degseq}.", i = "Spell out the full argument name."))
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "al"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn realize_degseq}.")
     # Pre-3.0.0 signature: realize_degseq(out.deg, in.deg, allowed.edge.types, method)
     .old_signature <- function(allowed.edge.types, method, ...) {
       if (...length() > 0L) {
@@ -3967,7 +3969,7 @@ realize_degseq <- function(
       }
       base::c(
         if (!base::missing(allowed.edge.types)) base::list(allowed_edge_types = allowed.edge.types),
-        if (!base::missing(method)) base::list(method = method)
+        if (!base::missing(method)) base::list(algorithm = method)
       )
     }
     .arg_handle <- .old_signature(...)
@@ -3975,7 +3977,7 @@ realize_degseq <- function(
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
         if (!base::missing(allowed_edge_types)) "allowed_edge_types",
-        if (!base::missing(method)) "method"
+        if (!base::missing(algorithm)) "algorithm"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn realize_degseq} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -3983,7 +3985,7 @@ realize_degseq <- function(
         "3.0.0",
         what = base::I("Calling `realize_degseq()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  realize_degseq(", base::paste(base::c("out_deg", "in_deg", base::c(allowed_edge_types = "allowed.edge.types", method = "method")[.arg_names]), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  realize_degseq(", base::paste(base::c("out_deg", "in_deg", base::c(allowed_edge_types = "allowed.edge.types", algorithm = "method")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    realize_degseq(", base::paste(base::c("out_deg", "in_deg", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -4025,7 +4027,7 @@ realize_degseq <- function(
     out_deg = out_deg,
     in_deg = in_deg,
     allowed_edge_types = allowed_edge_types,
-    method = method
+    method = algorithm
   )
 
   # Add backward-compatible dotted names
@@ -4072,7 +4074,8 @@ realize_degseq <- function(
 #'   \dQuote{simple} allows simple graphs only (no multiple edges).
 #'   \dQuote{multiple} allows multiple edges.
 #' @param allowed.edge.types `r lifecycle::badge("deprecated")` Use `allowed_edge_types` instead.
-#' @param method Character, the method for generating the graph; see below.
+#' @param algorithm Character, the method for generating the graph; see below.
+#' @param method `r lifecycle::badge("deprecated")` Use `algorithm` instead.
 #' @inheritParams rlang::args_dots_empty
 #' @seealso [realize_degseq()] to create a not necessarily bipartite graph.
 #' @export
@@ -4085,10 +4088,26 @@ realize_bipartite_degseq <- function(
   degrees2,
   ...,
   allowed_edge_types = c("simple", "multiple"),
-  method = c("smallest", "largest", "index"),
-  allowed.edge.types = deprecated()
+  algorithm = c("smallest", "largest", "index"),
+  allowed.edge.types = deprecated(),
+  method = deprecated()
 ) {
   check_dots_empty()
+  if (lifecycle::is_present(method)) {
+    if (!missing(algorithm)) {
+      cli::cli_abort(c(
+        "Argument {.arg algorithm} of {.fn realize_bipartite_degseq} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg method}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "realize_bipartite_degseq(method = )",
+      "realize_bipartite_degseq(algorithm = )"
+    )
+    algorithm <- method
+  }
+
   if (lifecycle::is_present(allowed.edge.types)) {
     if (!missing(allowed_edge_types)) {
       cli::cli_abort(c(
@@ -4105,12 +4124,12 @@ realize_bipartite_degseq <- function(
   }
 
   allowed_edge_types <- igraph_match_arg(allowed_edge_types)
-  method <- igraph_match_arg(method)
+  algorithm <- igraph_match_arg(algorithm)
   g <- realize_bipartite_degree_sequence_impl(
     degrees1 = degrees1,
     degrees2 = degrees2,
     allowed_edge_types = allowed_edge_types,
-    method = method
+    method = algorithm
   )
 
   # Add backward-compatible dotted names

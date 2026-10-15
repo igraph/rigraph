@@ -1,7 +1,7 @@
 test_that("sample_degseq() works -- 'configuration' generator", {
   igraph_local_seed(42)
   degrees <- rep(2, 100)
-  undirected_graph <- sample_degseq(degrees, method = "configuration")
+  undirected_graph <- sample_degseq(degrees, algorithm = "configuration")
   expect_equal(degree(undirected_graph), degrees)
 
   directed_graph <- sample_degseq(1:10, 10:1)
@@ -12,14 +12,14 @@ test_that("sample_degseq() works -- 'configuration' generator", {
 test_that("sample_degseq() works -- sample_gnp()", {
   igraph_local_seed(42)
   erdos_renyi <- sample_gnp(1000, 1 / 1000)
-  new_graph <- sample_degseq(degree(erdos_renyi), method = "configuration")
+  new_graph <- sample_degseq(degree(erdos_renyi), algorithm = "configuration")
   expect_equal(degree(new_graph), degree(erdos_renyi))
 
   directed_erdos_renyi <- sample_gnp(1000, 2 / 1000, directed = TRUE)
   new_directed_graph <- sample_degseq(
     degree(directed_erdos_renyi, mode = "out"),
     degree(directed_erdos_renyi, mode = "in"),
-    method = "configuration"
+    algorithm = "configuration"
   )
   expect_equal(
     degree(new_directed_graph, mode = "out"),
@@ -37,11 +37,11 @@ test_that("sample_degseq() works -- 'configuration' generator, connected", {
 
   simple_graph <- sample_degseq(
     degree(original_graph),
-    method = "configuration"
+    algorithm = "configuration"
   )
   expect_equal(degree(simple_graph), degree(original_graph))
 
-  vl_graph <- sample_degseq(degree(simple_graph), method = "vl")
+  vl_graph <- sample_degseq(degree(simple_graph), algorithm = "vl")
   expect_equal(degree(vl_graph), degree(original_graph))
   expect_true(is_connected(vl_graph))
   expect_true(is_simple(vl_graph))
@@ -50,7 +50,7 @@ test_that("sample_degseq() works -- 'configuration' generator, connected", {
 test_that("sample_degseq() works -- vl generator", {
   igraph_local_seed(42)
   degrees <- rep(2, 100)
-  vl_graph <- sample_degseq(degrees, method = "vl")
+  vl_graph <- sample_degseq(degrees, algorithm = "vl")
   expect_equal(degree(vl_graph), degrees)
   expect_true(is_simple(vl_graph))
 })
@@ -63,7 +63,7 @@ test_that("sample_degseq() works -- exponential degree ok", {
     replace = TRUE,
     prob = exp(-0.5 * (1:100))
   )
-  exp_vl_graph <- sample_degseq(exponential_degrees, method = "vl")
+  exp_vl_graph <- sample_degseq(exponential_degrees, algorithm = "vl")
   expect_equal(degree(exp_vl_graph), exponential_degrees)
 })
 
@@ -76,14 +76,14 @@ test_that("sample_degseq() works -- exponential degree error", {
     prob = exp(-0.5 * (1:100))
   )
   expect_snapshot_igraph_error({
-    sample_degseq(exponential_degrees, method = "vl")
+    sample_degseq(exponential_degrees, algorithm = "vl")
   })
 })
 
 test_that("sample_degseq() works -- Power-law degree ok", {
   igraph_local_seed(3)
   powerlaw_degrees <- sample(1:100, 100, replace = TRUE, prob = (1:100)^-2)
-  powerlaw_vl_graph <- sample_degseq(powerlaw_degrees, method = "vl")
+  powerlaw_vl_graph <- sample_degseq(powerlaw_degrees, algorithm = "vl")
   expect_equal(degree(powerlaw_vl_graph), powerlaw_degrees)
 })
 
@@ -92,7 +92,7 @@ test_that("sample_degseq() works -- Power-law degree error", {
   powerlaw_degrees <- sample(1:100, 100, replace = TRUE, prob = (1:100)^-2)
 
   expect_snapshot_igraph_error({
-    sample_degseq(powerlaw_degrees, method = "vl")
+    sample_degseq(powerlaw_degrees, algorithm = "vl")
   })
 })
 
@@ -103,7 +103,7 @@ test_that("sample_degseq() works -- fast.heur.simple", {
   simple_nm_graph <- sample_degseq(
     degree(g, mode = "out"),
     degree(g, mode = "in"),
-    method = "fast.heur.simple"
+    algorithm = "fast.heur.simple"
   )
   expect_equal(degree(simple_nm_graph, mode = "out"), degree(g, mode = "out"))
   expect_equal(degree(simple_nm_graph, mode = "in"), degree(g, mode = "in"))
@@ -115,7 +115,7 @@ test_that("sample_degseq() works -- configuration.simple", {
   simple_nmu_graph <- sample_degseq(
     degree(g, mode = "out"),
     degree(g, mode = "in"),
-    method = "configuration.simple"
+    algorithm = "configuration.simple"
   )
   expect_equal(degree(simple_nmu_graph, mode = "out"), degree(g, mode = "out"))
   expect_equal(degree(simple_nmu_graph, mode = "in"), degree(g, mode = "in"))
@@ -127,7 +127,7 @@ test_that("sample_degseq() works -- edge.switching.simple directed", {
   simple_switch_graph <- sample_degseq(
     degree(g, mode = "out"),
     degree(g, mode = "in"),
-    method = "edge.switching.simple"
+    algorithm = "edge.switching.simple"
   )
   expect_equal(
     degree(simple_switch_graph, mode = "out"),
@@ -141,7 +141,7 @@ test_that("sample_degseq() works -- edge.switching.simple undirected", {
   g <- sample_gnp(1000, 1 / 1000, directed = FALSE)
   simple_switch_graph <- sample_degseq(
     degree(g, mode = "all"),
-    method = "edge.switching.simple"
+    algorithm = "edge.switching.simple"
   )
   expect_equal(
     degree(simple_switch_graph, mode = "all"),
@@ -165,17 +165,17 @@ test_that("sample_degseq works() -- old method names", {
   withr::local_options("lifecycle_verbosity" = "warning")
 
   expect_error(
-    sample_degseq(c(1, 1, 2, 2, 2), method = "simple"),
+    sample_degseq(c(1, 1, 2, 2, 2), algorithm = "simple"),
     "must be"
   )
 
   expect_error(
-    sample_degseq(c(1, 1, 2, 2, 2), method = "simple.no.multiple"),
+    sample_degseq(c(1, 1, 2, 2, 2), algorithm = "simple.no.multiple"),
     "must be"
   )
 
   expect_error(
-    sample_degseq(c(1, 1, 2, 2, 2), method = "simple.no.multiple.uniform"),
+    sample_degseq(c(1, 1, 2, 2, 2), algorithm = "simple.no.multiple.uniform"),
     "must be"
   )
 })
@@ -960,7 +960,7 @@ test_that("sample_degseq() recovers positional method", {
     g_legacy <- sample_degseq(rep(2, 10), NULL, "vl")
   )
   igraph_local_seed(42)
-  expect_identical_graphs(g_legacy, sample_degseq(rep(2, 10), method = "vl"))
+  expect_identical_graphs(g_legacy, sample_degseq(rep(2, 10), algorithm = "vl"))
 })
 
 test_that("sample_pa_age() covers tail args by name and recovers positional calls", {
@@ -1931,4 +1931,21 @@ test_that("snake_case renames in the games recover the legacy dotted names", {
   for (case in cases) {
     expect_legacy_arg(case[[1]], case[[2]], case[[3]], case[[4]], case[[5]])
   }
+})
+
+test_that("sample_degseq(method = ) is renamed to `algorithm`", {
+  expect_legacy_arg(
+    sample_degseq,
+    list(rep(2, 10)),
+    "method",
+    "algorithm",
+    "vl"
+  )
+  expect_legacy_arg(
+    function(...) sample_(degseq(...)),
+    list(rep(2, 10)),
+    "method",
+    "algorithm",
+    "vl"
+  )
 })

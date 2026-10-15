@@ -4,11 +4,11 @@
 
 migrations <- list(
   greedy_vertex_coloring = list(
-    old = function(graph, heuristic) {},
+    old = function(graph, heuristic = algorithm) {},
     new = function(
       graph,
       ...,
-      heuristic = c("colored_neighbors", "dsatur")
+      algorithm = c("colored_neighbors", "dsatur")
     ) {},
     when = "3.0.0"
   ),

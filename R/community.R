@@ -1508,7 +1508,7 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #'   1.0 value makes existing and non-existing links equally important. Smaller
 #'   values make the existing links, greater values the missing links more
 #'   important.
-#' @param implementation Character scalar. Currently igraph contains two
+#' @param algorithm Character scalar. Currently igraph contains two
 #'   implementations for the Spin-glass community finding algorithm. The faster
 #'   original implementation is the default. The other implementation, that takes
 #'   into account negative weights, can be chosen by supplying \sQuote{neg} here.
@@ -1580,7 +1580,7 @@ cluster_spinglass <- function(
   cool_fact = 0.99,
   update_rule = c("config", "random", "simple"),
   gamma = 1.0,
-  implementation = c("orig", "neg"),
+  algorithm = c("orig", "neg"),
   gamma_minus = 1.0
 ) {
   # BEGIN GENERATED ARG_HANDLE: cluster_spinglass, do not edit, see tools/generate-migrations.R
@@ -1608,7 +1608,7 @@ cluster_spinglass <- function(
         if (!base::missing(cool.fact)) base::list(cool_fact = cool.fact),
         if (!base::missing(update.rule)) base::list(update_rule = update.rule),
         if (!base::missing(gamma)) base::list(gamma = gamma),
-        if (!base::missing(implementation)) base::list(implementation = implementation),
+        if (!base::missing(implementation)) base::list(algorithm = implementation),
         if (!base::missing(gamma.minus)) base::list(gamma_minus = gamma.minus)
       )
     }
@@ -1625,7 +1625,7 @@ cluster_spinglass <- function(
         if (!base::missing(cool_fact)) "cool_fact",
         if (!base::missing(update_rule)) "update_rule",
         if (!base::missing(gamma)) "gamma",
-        if (!base::missing(implementation)) "implementation",
+        if (!base::missing(algorithm)) "algorithm",
         if (!base::missing(gamma_minus)) "gamma_minus"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn cluster_spinglass} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
@@ -1634,7 +1634,7 @@ cluster_spinglass <- function(
         "3.0.0",
         what = base::I("Calling `cluster_spinglass()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  cluster_spinglass(", base::paste(base::c("graph", base::c(weights = "weights", vertex = "vertex", spins = "spins", parupdate = "parupdate", start_temp = "start.temp", stop_temp = "stop.temp", cool_fact = "cool.fact", update_rule = "update.rule", gamma = "gamma", implementation = "implementation", gamma_minus = "gamma.minus")[.arg_names]), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  cluster_spinglass(", base::paste(base::c("graph", base::c(weights = "weights", vertex = "vertex", spins = "spins", parupdate = "parupdate", start_temp = "start.temp", stop_temp = "stop.temp", cool_fact = "cool.fact", update_rule = "update.rule", gamma = "gamma", algorithm = "implementation", gamma_minus = "gamma.minus")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    cluster_spinglass(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -1655,8 +1655,8 @@ cluster_spinglass <- function(
 
   update_rule <- igraph_match_arg(update_rule)
   update_rule <- switch(update_rule, "simple" = 0, "random" = 0, "config" = 1)
-  implementation <- switch(
-    igraph_match_arg(implementation),
+  algorithm <- switch(
+    igraph_match_arg(algorithm),
     "orig" = 0,
     "neg" = 1
   )
@@ -1674,7 +1674,7 @@ cluster_spinglass <- function(
       as.numeric(cool_fact),
       as.numeric(update_rule),
       as.numeric(gamma),
-      as.numeric(implementation),
+      as.numeric(algorithm),
       as.numeric(gamma_minus)
     )
     res$algorithm <- "spinglass"
@@ -3428,13 +3428,14 @@ dendPlotPhylo <- function(
 #' @param comm2 A [communities()] object containing a community
 #'   structure; or a numeric vector, the membership vector of the second
 #'   community structure, in the same format as for the previous argument.
-#' @param method Character scalar, the comparison method to use. Possible
+#' @param measure Character scalar, the comparison method to use. Possible
 #'   values: \sQuote{vi} is the variation of information (VI) metric of Meila
 #'   (2003), \sQuote{nmi} is the normalized mutual information measure proposed
 #'   by Danon et al. (2005), \sQuote{split.join} is the split-join distance of
 #'   can Dongen (2000), \sQuote{rand} is the Rand index of Rand (1971),
 #'   \sQuote{adjusted.rand} is the adjusted Rand index by Hubert and Arabie
 #'   (1985).
+#' @param method `r lifecycle::badge("deprecated")` Use `measure` instead.
 #' @return A real number.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
 #' @references Meila M: Comparing clusterings by the variation of information.
@@ -3463,19 +3464,20 @@ dendPlotPhylo <- function(
 #' g <- make_graph("Zachary")
 #' sg <- cluster_spinglass(g)
 #' le <- cluster_leading_eigen(g)
-#' compare(sg, le, method = "rand")
+#' compare(sg, le, measure = "rand")
 #' compare(membership(sg), membership(le))
 #'
 compare <- function(
   comm1,
   comm2,
-  method = c(
+  measure = c(
     "vi",
     "nmi",
     "split.join",
     "rand",
     "adjusted.rand"
-  )
+  ),
+  method = deprecated()
 ) {
   UseMethod("compare")
 }
@@ -3486,15 +3488,31 @@ compare <- function(
 compare.communities <- function(
   comm1,
   comm2,
-  method = c(
+  measure = c(
     "vi",
     "nmi",
     "split.join",
     "rand",
     "adjusted.rand"
-  )
+  ),
+  method = deprecated()
 ) {
-  i_compare(comm1, comm2, method)
+  if (lifecycle::is_present(method)) {
+    if (!missing(measure)) {
+      cli::cli_abort(c(
+        "Argument {.arg measure} of {.fn compare} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg method}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "compare(method = )",
+      "compare(measure = )"
+    )
+    measure <- method
+  }
+
+  i_compare(comm1, comm2, measure)
 }
 
 #' @method compare membership
@@ -3503,15 +3521,31 @@ compare.communities <- function(
 compare.membership <- function(
   comm1,
   comm2,
-  method = c(
+  measure = c(
     "vi",
     "nmi",
     "split.join",
     "rand",
     "adjusted.rand"
-  )
+  ),
+  method = deprecated()
 ) {
-  i_compare(comm1, comm2, method)
+  if (lifecycle::is_present(method)) {
+    if (!missing(measure)) {
+      cli::cli_abort(c(
+        "Argument {.arg measure} of {.fn compare} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg method}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "compare(method = )",
+      "compare(measure = )"
+    )
+    measure <- method
+  }
+
+  i_compare(comm1, comm2, measure)
 }
 
 #' @method compare default

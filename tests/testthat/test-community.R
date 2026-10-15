@@ -894,7 +894,7 @@ test_that("cluster_spinglass() covers migrated tail args and positional recovery
     cool_fact = 0.95,
     update_rule = "random",
     gamma = 1.2,
-    implementation = "orig"
+    algorithm = "orig"
   )
   # The stochastic result is still a valid partition of all vertices.
   expect_s3_class(res, "communities")
@@ -905,7 +905,7 @@ test_that("cluster_spinglass() covers migrated tail args and positional recovery
   res_neg <- cluster_spinglass(
     karate,
     spins = 5,
-    implementation = "neg",
+    algorithm = "neg",
     gamma_minus = 0.5
   )
   expect_s3_class(res_neg, "communities")
@@ -1036,7 +1036,7 @@ test_that("snake_case renames in the community functions recover the legacy dott
     list(cluster_spinglass, list(g), "update.rule", "update_rule", "simple"),
     list(
       cluster_spinglass,
-      list(g, implementation = "neg"),
+      list(g, algorithm = "neg"),
       "gamma.minus",
       "gamma_minus",
       0.5
@@ -1060,4 +1060,19 @@ test_that("snake_case renames in the community functions recover the legacy dott
   for (case in cases) {
     expect_legacy_arg(case[[1]], case[[2]], case[[3]], case[[4]], case[[5]])
   }
+})
+
+test_that("cluster_spinglass(implementation = ) and compare(method = ) are renamed", {
+  g <- make_graph("Zachary")
+  expect_legacy_arg(
+    cluster_spinglass,
+    list(g),
+    "implementation",
+    "algorithm",
+    "neg"
+  )
+  c1 <- cluster_louvain(g)
+  c2 <- cluster_walktrap(g)
+  expect_legacy_arg(compare, list(c1, c2), "method", "measure", "rand")
+  expect_equal(compare(c1, c2, "nmi"), compare(c1, c2, measure = "nmi"))
 })

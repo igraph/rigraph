@@ -68,7 +68,7 @@ power.law.fit <- function(
 #' \eqn{x_\text{min}}{xmin} and the corresponding value of \eqn{\alpha}{alpha}.
 #'
 #' `fit_power_law()` provides two maximum likelihood implementations.  If
-#' the `implementation` argument is \sQuote{`R.mle`}, then the BFGS
+#' the `algorithm` argument is \sQuote{`R.mle`}, then the BFGS
 #' optimization (see [stats4::mle()]) algorithm is applied.  The additional
 #' arguments are passed to the mle function, so it is possible to change the
 #' optimization method and/or its parameters.  This implementation can
@@ -109,7 +109,7 @@ power.law.fit <- function(
 #' @param p_value `r lifecycle::badge("experimental")`
 #' @param p.value `r lifecycle::badge("deprecated")` Use `p_value` instead.
 #'
-#'   Set to `TRUE` to compute the p-value with `implementation = "plfit"`.
+#'   Set to `TRUE` to compute the p-value with `algorithm = "plfit"`.
 #' @param p_precision `r lifecycle::badge("experimental")`
 #' @param p.precision `r lifecycle::badge("deprecated")` Use `p_precision` instead.
 #'
@@ -118,18 +118,19 @@ power.law.fit <- function(
 #'   number of resampling trials is determined by 0.25 divided by the square
 #'   of the required precision. For instance, a required precision of 0.01
 #'   means that 2500 samples will be drawn.
-#' @param implementation Character scalar. Which implementation to use. See
+#' @param algorithm Character scalar. Which implementation to use. See
 #'   details below.
+#' @param implementation `r lifecycle::badge("deprecated")` Use `algorithm` instead.
 #' @param \dots Additional arguments, passed to the maximum likelihood
 #'   optimizing function, [stats4::mle()], if the \sQuote{`R.mle`}
 #'   implementation is chosen. It is ignored by the \sQuote{`plfit`}
 #'   implementation.
-#' @return Depends on the `implementation` argument. If it is
+#' @return Depends on the `algorithm` argument. If it is
 #'   \sQuote{`R.mle`}, then an object with class \sQuote{`mle`}. It can
 #'   be used to calculate confidence intervals and log-likelihood. See
 #'   [stats4::mle-class()] for details.
 #'
-#'   If `implementation` is \sQuote{`plfit`}, then the result is a
+#'   If `algorithm` is \sQuote{`plfit`}, then the result is a
 #'   named list with entries:
 #'   \describe{
 #'     \item{continuous}{
@@ -176,7 +177,7 @@ power.law.fit <- function(
 #' g <- sample_pa(1000) # increase this number to have a better estimate
 #' d <- degree(g, mode = "in")
 #' fit1 <- fit_power_law(d + 1, 10)
-#' fit2 <- fit_power_law(d + 1, 10, implementation = "R.mle")
+#' fit2 <- fit_power_law(d + 1, 10, algorithm = "R.mle")
 #'
 #' fit1$alpha
 #' stats4::coef(fit2)
@@ -188,14 +189,30 @@ fit_power_law <- function(
   xmin = NULL,
   start = 2,
   force_continuous = FALSE,
-  implementation = c("plfit", "R.mle"),
+  algorithm = c("plfit", "R.mle"),
   p_value = FALSE,
   p_precision = NULL,
   ...,
   force.continuous = deprecated(),
   p.value = deprecated(),
-  p.precision = deprecated()
+  p.precision = deprecated(),
+  implementation = deprecated()
 ) {
+  if (lifecycle::is_present(implementation)) {
+    if (!missing(algorithm)) {
+      cli::cli_abort(c(
+        "Argument {.arg algorithm} of {.fn fit_power_law} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg implementation}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "fit_power_law(implementation = )",
+      "fit_power_law(algorithm = )"
+    )
+    algorithm <- implementation
+  }
+
   if (lifecycle::is_present(p.precision)) {
     if (!missing(p_precision)) {
       cli::cli_abort(c(
@@ -241,22 +258,22 @@ fit_power_law <- function(
     force_continuous <- force.continuous
   }
 
-  implementation <- igraph_match_arg(implementation)
+  algorithm <- igraph_match_arg(algorithm)
 
-  if (implementation == "r.mle") {
+  if (algorithm == "r.mle") {
     if (isTRUE(p_value)) {
       cli::cli_abort(
-        "{.arg p_value} is not supported for {.arg implementation} = {.str R.mle}"
+        "{.arg p_value} is not supported for {.arg algorithm} = {.str R.mle}"
       )
     }
     power.law.fit.old(x, xmin, start, ...)
-  } else if (implementation == "plfit.p") {
+  } else if (algorithm == "plfit.p") {
     lifecycle::deprecate_stop(
       "2.1.0",
       'fit_power_law(implementation = "cannot be \\"plfit.p\\"")',
       I('`fit_power_law(implementation = "plfit", p.value = TRUE)`')
     )
-  } else if (implementation == "plfit") {
+  } else if (algorithm == "plfit") {
     xmin <- xmin %||% -1
     p_precision <- p_precision %||% 0.01
     power.law.fit.new(
