@@ -551,7 +551,7 @@ test_that("weighted_cliques(vertex.weights = ) is deprecated but still works", {
   g <- make_weighted_clique_graph()
   w <- c(3, 3, 3, 1, 1)
 
-  expect_snapshot(
+  expect_snapshot_igraph(
     res <- weighted_cliques(g, vertex.weights = w, min.weight = 6)
   )
   expect_identical(res, weighted_cliques(g, vertex_weights = w, min_weight = 6))

@@ -582,6 +582,7 @@ extern SEXP Rx_igraph_read_graph_dimacs(SEXP, SEXP);
 extern SEXP Rx_igraph_read_graph_edgelist(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_read_graph_lgl(SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_read_graph_ncol(SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP Rx_igraph_set_namespace(SEXP);
 extern SEXP Rx_igraph_set_verbose(SEXP);
 extern SEXP Rx_igraph_shortest_paths(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_spinglass_community(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -593,6 +594,7 @@ extern SEXP Rx_igraph_transitivity_local_undirected_all(SEXP, SEXP);
 extern SEXP Rx_igraph_union(SEXP, SEXP);
 extern SEXP Rx_igraph_vcount(SEXP);
 extern SEXP Rx_igraph_vs_adj(SEXP, SEXP, SEXP, SEXP);
+extern SEXP Rx_igraph_vs_list(SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_vs_nei(SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_walktrap_community(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_weak_ref_key(SEXP);
@@ -1162,6 +1164,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rx_igraph_read_graph_edgelist",                           (DL_FUNC) &Rx_igraph_read_graph_edgelist,                            3},
     {"Rx_igraph_read_graph_lgl",                                (DL_FUNC) &Rx_igraph_read_graph_lgl,                                 4},
     {"Rx_igraph_read_graph_ncol",                               (DL_FUNC) &Rx_igraph_read_graph_ncol,                                5},
+    {"Rx_igraph_set_namespace",                                 (DL_FUNC) &Rx_igraph_set_namespace,                                  1},
     {"Rx_igraph_set_verbose",                                   (DL_FUNC) &Rx_igraph_set_verbose,                                    1},
     {"Rx_igraph_shortest_paths",                                (DL_FUNC) &Rx_igraph_shortest_paths,                                 6},
     {"Rx_igraph_spinglass_community",                           (DL_FUNC) &Rx_igraph_spinglass_community,                           11},
@@ -1173,6 +1176,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rx_igraph_union",                                         (DL_FUNC) &Rx_igraph_union,                                          2},
     {"Rx_igraph_vcount",                                        (DL_FUNC) &Rx_igraph_vcount,                                         1},
     {"Rx_igraph_vs_adj",                                        (DL_FUNC) &Rx_igraph_vs_adj,                                         4},
+    {"Rx_igraph_vs_list",                                       (DL_FUNC) &Rx_igraph_vs_list,                                        4},
     {"Rx_igraph_vs_nei",                                        (DL_FUNC) &Rx_igraph_vs_nei,                                         4},
     {"Rx_igraph_walktrap_community",                            (DL_FUNC) &Rx_igraph_walktrap_community,                             6},
     {"Rx_igraph_weak_ref_key",                                  (DL_FUNC) &Rx_igraph_weak_ref_key,                                   1},

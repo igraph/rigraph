@@ -1704,12 +1704,7 @@ shortest_paths <- function(
 
   if (igraph_opt("return.vs.es")) {
     if (!is.null(res$vpath)) {
-      res$vpath <- lapply(
-        res$vpath,
-        unsafe_create_vs,
-        graph = graph,
-        verts = V(graph)
-      )
+      res$vpath <- create_vs_list(graph, res$vpath)
     }
     if (!is.null(res$epath)) {
       res$epath <- lapply(
@@ -1817,12 +1812,7 @@ all_shortest_paths <- function(
   }
 
   if (igraph_opt("return.vs.es")) {
-    res$vpaths <- lapply(
-      res$vpaths,
-      unsafe_create_vs,
-      graph = graph,
-      verts = V(graph)
-    )
+    res$vpaths <- create_vs_list(graph, res$vpaths)
   }
 
   # Transitional, eventually, remove $res
@@ -2944,7 +2934,7 @@ ego <- function(
   res <- lapply(res, function(x) x + 1)
 
   if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
+    res <- create_vs_list(graph, res)
   }
 
   res
@@ -3526,7 +3516,7 @@ girth <- function(
 #' # Remove multiple edges but keep multiplicity
 #' g <- sample_pa(10, m = 3, algorithm = "bag")
 #' E(g)$weight <- count_multiple(g)
-#' g <- simplify(g, edge.attr.comb = list(weight = "min"))
+#' g <- simplify(g, edge_attr_combine = list(weight = "min"))
 #' any(which_multiple(g))
 #' E(g)$weight
 #'

@@ -491,7 +491,7 @@ test_that("modularity_matrix works", {
 
 test_that("modularity_matrix no longer accepts a membership argument for compatibility", {
   karate <- make_graph("zachary")
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     modularity_matrix(karate, membership = rep(1, vcount(karate)))
   })
 })
@@ -661,7 +661,7 @@ test_that("contract works", {
   V(g)$name <- letters[1:vcount(g)]
   E(g)$weight <- sample(ecount(g))
 
-  g2 <- contract(g, rep(1:5, each = 2), vertex.attr.comb = toString)
+  g2 <- contract(g, rep(1:5, each = 2), vertex_attr_combine = toString)
 
   expect_equal(g2$name, g$name)
   expect_equal(V(g2)$name, c("a, b", "c, d", "e, f", "g, h", "i, j"))
@@ -1008,7 +1008,7 @@ test_that("modularity_matrix() covers migrated tail args and positional recovery
   # The head argument `membership` is hard-deprecated,
   # so the legacy positional call first warns about recovering `weights`
   # and then fails on the supplied membership.
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     modularity_matrix(karate, rep(1, vcount(karate)), rep(1, ecount(karate)))
   })
 })

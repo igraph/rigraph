@@ -2920,7 +2920,7 @@ sample_pref <- function(
   if (nrow(pref.matrix) != types || ncol(pref.matrix) != types) {
     cli::cli_abort(c(
       "{.arg pref.matrix} must have {.arg types} rows and columns.",
-      i = "See {.fun igraph::sample_pref}'s manual."
+      i = "See {.fun sample_pref}'s manual."
     ))
   }
 
@@ -3116,13 +3116,13 @@ sample_asym_pref <- function(
   if (nrow(pref.matrix) != types || ncol(pref.matrix) != types) {
     cli::cli_abort(c(
       "{.arg pref.matrix} must have {.arg types} rows and columns.",
-      i = "See {.fun igraph::sample_asym_pref}'s manual."
+      i = "See {.fun sample_asym_pref}'s manual."
     ))
   }
   if (nrow(type.dist.matrix) != types || ncol(type.dist.matrix) != types) {
     cli::cli_abort(c(
       "{.arg type.dist.matrix} must have {.arg types} rows and columns.",
-      i = "See {.fun igraph::sample_asym_pref}'s manual."
+      i = "See {.fun sample_asym_pref}'s manual."
     ))
   }
 

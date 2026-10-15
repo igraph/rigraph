@@ -126,11 +126,17 @@ scrub_igraph_file_paths <- function(y) {
   y
 }
 
+# What the two snapshot helpers below scrub: file paths and line numbers,
+# and the package name, which differs between flavors (helper-snapshot.R).
+scrub_igraph_snapshot <- function(y) {
+  transform_package_name(scrub_igraph_file_paths(y))
+}
+
 expect_snapshot_igraph_error <- function(x, ...) {
   inject(expect_snapshot(
     {{ x }},
     error = TRUE,
-    transform = scrub_igraph_file_paths,
+    transform = scrub_igraph_snapshot,
     ...
   ))
 }
@@ -138,7 +144,7 @@ expect_snapshot_igraph_error <- function(x, ...) {
 expect_snapshot_igraph <- function(x, ...) {
   inject(expect_snapshot(
     {{ x }},
-    transform = scrub_igraph_file_paths,
+    transform = scrub_igraph_snapshot,
     ...
   ))
 }
