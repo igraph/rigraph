@@ -951,7 +951,7 @@ as_star <- function(...) layout_spec(layout_as_star, ...)
 #'   component.
 #' @param circular Logical, whether to plot the tree in a circular
 #'   fashion. Defaults to `FALSE`, so the tree branches are going bottom-up
-#'   (or top-down, see the `flip.y` argument.
+#'   (or top-down, see the `flip_y` argument.
 #' @param rootlevel This argument can be useful when drawing forests which are
 #'   not trees (i.e. they are unconnected and have tree components). It specifies
 #'   the level of the root vertices for every tree in the forest. It is only
@@ -962,7 +962,7 @@ as_star <- function(...) layout_spec(layout_as_star, ...)
 #'   edges are used (this was the behavior in igraph 0.5 and before). This
 #'   parameter also influences how the root vertices are calculated, if they are
 #'   not given. See the `roots` parameter.
-#' @param flip.y Logical, whether to flip the \sQuote{y} coordinates.
+#' @param flip_y Logical, whether to flip the \sQuote{y} coordinates.
 #'   The default is flipping because that puts the root vertex on the top.
 #' @return A numeric matrix with two columns, and one row for each vertex.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
@@ -978,7 +978,7 @@ as_star <- function(...) layout_spec(layout_as_star, ...)
 #'
 #' tree <- make_tree(20, 3)
 #' plot(tree, layout = layout_as_tree)
-#' plot(tree, layout = layout_as_tree(tree, flip.y = FALSE))
+#' plot(tree, layout = layout_as_tree(tree, flip_y = FALSE))
 #' plot(tree, layout = layout_as_tree(tree, circular = TRUE))
 #'
 #' tree2 <- make_tree(10, 3) + make_tree(10, 2)
@@ -994,7 +994,7 @@ layout_as_tree <- function(
   circular = FALSE,
   rootlevel = numeric(),
   mode = c("out", "in", "all"),
-  flip.y = TRUE
+  flip_y = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_as_tree, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -1014,7 +1014,7 @@ layout_as_tree <- function(
         if (!base::missing(circular)) base::list(circular = circular),
         if (!base::missing(rootlevel)) base::list(rootlevel = rootlevel),
         if (!base::missing(mode)) base::list(mode = mode),
-        if (!base::missing(flip.y)) base::list(flip.y = flip.y)
+        if (!base::missing(flip.y)) base::list(flip_y = flip.y)
       )
     }
     .arg_handle <- .old_signature(...)
@@ -1025,7 +1025,7 @@ layout_as_tree <- function(
         if (!base::missing(circular)) "circular",
         if (!base::missing(rootlevel)) "rootlevel",
         if (!base::missing(mode)) "mode",
-        if (!base::missing(flip.y)) "flip.y"
+        if (!base::missing(flip_y)) "flip_y"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_as_tree} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -1033,7 +1033,7 @@ layout_as_tree <- function(
         "3.0.0",
         what = base::I("Calling `layout_as_tree()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  layout_as_tree(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  layout_as_tree(", base::paste(base::c("graph", base::c(root = "root", circular = "circular", rootlevel = "rootlevel", mode = "mode", flip_y = "flip.y")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    layout_as_tree(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -1052,7 +1052,7 @@ layout_as_tree <- function(
     "all" = 3,
     "total" = 3
   )
-  flip.y <- as.logical(flip.y)
+  flip_y <- as.logical(flip_y)
 
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
@@ -1063,7 +1063,7 @@ layout_as_tree <- function(
     rootlevel,
     circular
   )
-  if (flip.y && vcount(graph) > 0) {
+  if (flip_y && vcount(graph) > 0) {
     res[, 2] <- max(res[, 2]) - res[, 2]
   }
   res
@@ -1569,18 +1569,18 @@ layout.random <- function(..., params = list()) {
 #' @param n_iter Number of iterations to perform in the first phase.
 #' @param n_fine_iter Number of iterations in the fine tuning phase. The
 #'   default `NULL` uses `max(10, log2(vcount(graph)))`.
-#' @param cool.fact Cooling factor.
-#' @param weight.node.dist Weight for the node-node distances component of the
+#' @param cool_fact Cooling factor.
+#' @param weight_node_dist Weight for the node-node distances component of the
 #'   energy function.
-#' @param weight.border Weight for the distance from the border component of
+#' @param weight_border Weight for the distance from the border component of
 #'   the energy function. It can be set to zero, if vertices are allowed to sit
 #'   on the border.
-#' @param weight.edge.lengths Weight for the edge length component of the
+#' @param weight_edge_lengths Weight for the edge length component of the
 #'   energy function. The default `NULL` uses `edge_density(graph) / 10`.
-#' @param weight.edge.crossings Weight for the edge crossing component of the
+#' @param weight_edge_crossings Weight for the edge crossing component of the
 #'   energy function. The default `NULL` uses
 #'   `1 - sqrt(edge_density(graph))`.
-#' @param weight.node.edge.dist Weight for the node-edge distance component of
+#' @param weight_node_edge_dist Weight for the node-edge distance component of
 #'   the energy function. The default `NULL` uses
 #'   `0.2 * (1 - edge_density(graph))`.
 #' @return A matrix with two columns, containing the x and y coordinates
@@ -1661,17 +1661,17 @@ layout_with_dh <- function(
   coords = NULL,
   n_iter = 10,
   n_fine_iter = NULL,
-  cool.fact = 0.75,
-  weight.node.dist = 1.0,
-  weight.border = 0.0,
-  weight.edge.lengths = NULL,
-  weight.edge.crossings = NULL,
-  weight.node.edge.dist = NULL
+  cool_fact = 0.75,
+  weight_node_dist = 1.0,
+  weight_border = 0.0,
+  weight_edge_lengths = NULL,
+  weight_edge_crossings = NULL,
+  weight_node_edge_dist = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_with_dh, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("c", "co", "coo", "n", "n_", "w", "we", "wei", "weig", "weigh", "weight", "weight.", "weight.n", "weight.no", "weight.nod", "weight.node", "weight.node.", "weight.e", "weight.ed", "weight.edg", "weight.edge", "weight.edge."))
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("c", "co", "coo", "w", "we", "wei", "weig", "weigh", "weight", "weight.", "weight.n", "weight.no", "weight.nod", "weight.node", "weight.node.", "weight.e", "weight.ed", "weight.edg", "weight.edge", "weight.edge.", "n", "n_", "weight_", "weight_n", "weight_no", "weight_nod", "weight_node", "weight_node_", "weight_e", "weight_ed", "weight_edg", "weight_edge", "weight_edge_"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn layout_with_dh}.")
     # Pre-3.0.0 signature: layout_with_dh(graph, coords, maxiter, fineiter, cool.fact, weight.node.dist, weight.border, weight.edge.lengths, weight.edge.crossings, weight.node.edge.dist)
     .old_signature <- function(coords, maxiter, fineiter, cool.fact, weight.node.dist, weight.border, weight.edge.lengths, weight.edge.crossings, weight.node.edge.dist, ...) {
@@ -1685,12 +1685,12 @@ layout_with_dh <- function(
         if (!base::missing(coords)) base::list(coords = coords),
         if (!base::missing(maxiter)) base::list(n_iter = maxiter),
         if (!base::missing(fineiter)) base::list(n_fine_iter = fineiter),
-        if (!base::missing(cool.fact)) base::list(cool.fact = cool.fact),
-        if (!base::missing(weight.node.dist)) base::list(weight.node.dist = weight.node.dist),
-        if (!base::missing(weight.border)) base::list(weight.border = weight.border),
-        if (!base::missing(weight.edge.lengths)) base::list(weight.edge.lengths = weight.edge.lengths),
-        if (!base::missing(weight.edge.crossings)) base::list(weight.edge.crossings = weight.edge.crossings),
-        if (!base::missing(weight.node.edge.dist)) base::list(weight.node.edge.dist = weight.node.edge.dist)
+        if (!base::missing(cool.fact)) base::list(cool_fact = cool.fact),
+        if (!base::missing(weight.node.dist)) base::list(weight_node_dist = weight.node.dist),
+        if (!base::missing(weight.border)) base::list(weight_border = weight.border),
+        if (!base::missing(weight.edge.lengths)) base::list(weight_edge_lengths = weight.edge.lengths),
+        if (!base::missing(weight.edge.crossings)) base::list(weight_edge_crossings = weight.edge.crossings),
+        if (!base::missing(weight.node.edge.dist)) base::list(weight_node_edge_dist = weight.node.edge.dist)
       )
     }
     .arg_handle <- .old_signature(...)
@@ -1700,12 +1700,12 @@ layout_with_dh <- function(
         if (!base::missing(coords)) "coords",
         if (!base::missing(n_iter)) "n_iter",
         if (!base::missing(n_fine_iter)) "n_fine_iter",
-        if (!base::missing(cool.fact)) "cool.fact",
-        if (!base::missing(weight.node.dist)) "weight.node.dist",
-        if (!base::missing(weight.border)) "weight.border",
-        if (!base::missing(weight.edge.lengths)) "weight.edge.lengths",
-        if (!base::missing(weight.edge.crossings)) "weight.edge.crossings",
-        if (!base::missing(weight.node.edge.dist)) "weight.node.edge.dist"
+        if (!base::missing(cool_fact)) "cool_fact",
+        if (!base::missing(weight_node_dist)) "weight_node_dist",
+        if (!base::missing(weight_border)) "weight_border",
+        if (!base::missing(weight_edge_lengths)) "weight_edge_lengths",
+        if (!base::missing(weight_edge_crossings)) "weight_edge_crossings",
+        if (!base::missing(weight_node_edge_dist)) "weight_node_edge_dist"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_with_dh} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -1713,7 +1713,7 @@ layout_with_dh <- function(
         "3.0.0",
         what = base::I("Calling `layout_with_dh()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  layout_with_dh(", base::paste(base::c("graph", base::c(coords = "coords", n_iter = "maxiter", n_fine_iter = "fineiter", cool.fact = "cool.fact", weight.node.dist = "weight.node.dist", weight.border = "weight.border", weight.edge.lengths = "weight.edge.lengths", weight.edge.crossings = "weight.edge.crossings", weight.node.edge.dist = "weight.node.edge.dist")[.arg_names]), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  layout_with_dh(", base::paste(base::c("graph", base::c(coords = "coords", n_iter = "maxiter", n_fine_iter = "fineiter", cool_fact = "cool.fact", weight_node_dist = "weight.node.dist", weight_border = "weight.border", weight_edge_lengths = "weight.edge.lengths", weight_edge_crossings = "weight.edge.crossings", weight_node_edge_dist = "weight.node.edge.dist")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    layout_with_dh(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -1724,14 +1724,14 @@ layout_with_dh <- function(
   if (is.null(n_fine_iter)) {
     n_fine_iter <- max(10, log2(vcount(graph)))
   }
-  if (is.null(weight.edge.lengths)) {
-    weight.edge.lengths <- edge_density(graph) / 10
+  if (is.null(weight_edge_lengths)) {
+    weight_edge_lengths <- edge_density(graph) / 10
   }
-  if (is.null(weight.edge.crossings)) {
-    weight.edge.crossings <- 1.0 - sqrt(edge_density(graph))
+  if (is.null(weight_edge_crossings)) {
+    weight_edge_crossings <- 1.0 - sqrt(edge_density(graph))
   }
-  if (is.null(weight.node.edge.dist)) {
-    weight.node.edge.dist <- 0.2 * (1 - edge_density(graph))
+  if (is.null(weight_node_edge_dist)) {
+    weight_node_edge_dist <- 0.2 * (1 - edge_density(graph))
   }
 
   if (is.null(coords)) {
@@ -1747,12 +1747,12 @@ layout_with_dh <- function(
     use_seed = use.seed,
     maxiter = n_iter,
     fineiter = n_fine_iter,
-    cool_fact = cool.fact,
-    weight_node_dist = weight.node.dist,
-    weight_border = weight.border,
-    weight_edge_lengths = weight.edge.lengths,
-    weight_edge_crossings = weight.edge.crossings,
-    weight_node_edge_dist = weight.node.edge.dist
+    cool_fact = cool_fact,
+    weight_node_dist = weight_node_dist,
+    weight_border = weight_border,
+    weight_edge_lengths = weight_edge_lengths,
+    weight_edge_crossings = weight_edge_crossings,
+    weight_node_edge_dist = weight_node_edge_dist
   )
 }
 
@@ -1782,7 +1782,7 @@ with_dh <- function(...) layout_spec(layout_with_dh, ...)
 #'   dimensional layouts are places on a plane, three dimensional ones in the 3d
 #'   space.
 #' @param n_iter Integer scalar, the number of iterations to perform.
-#' @param start.temp Real scalar, the start temperature. This is the maximum
+#' @param start_temp Real scalar, the start temperature. This is the maximum
 #'   amount of movement alloved along one axis, within one step, for a vertex.
 #'   Currently it is decreased linearly to zero during the iteration. The
 #'   default `NULL` uses `sqrt(vcount(graph))`.
@@ -1850,7 +1850,7 @@ layout_with_fr <- function(
   coords = NULL,
   dim = c(2, 3),
   n_iter = 500,
-  start.temp = NULL,
+  start_temp = NULL,
   grid = c("auto", "grid", "nogrid"),
   weights = NULL,
   minx = NULL,
@@ -1883,7 +1883,7 @@ layout_with_fr <- function(
         if (!base::missing(coords)) base::list(coords = coords),
         if (!base::missing(dim)) base::list(dim = dim),
         if (!base::missing(niter)) base::list(n_iter = niter),
-        if (!base::missing(start.temp)) base::list(start.temp = start.temp),
+        if (!base::missing(start.temp)) base::list(start_temp = start.temp),
         if (!base::missing(grid)) base::list(grid = grid),
         if (!base::missing(weights)) base::list(weights = weights),
         if (!base::missing(minx)) base::list(minx = minx),
@@ -1906,7 +1906,7 @@ layout_with_fr <- function(
         if (!base::missing(coords)) "coords",
         if (!base::missing(dim)) "dim",
         if (!base::missing(n_iter)) "n_iter",
-        if (!base::missing(start.temp)) "start.temp",
+        if (!base::missing(start_temp)) "start_temp",
         if (!base::missing(grid)) "grid",
         if (!base::missing(weights)) "weights",
         if (!base::missing(minx)) "minx",
@@ -1927,7 +1927,7 @@ layout_with_fr <- function(
         "3.0.0",
         what = base::I("Calling `layout_with_fr()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  layout_with_fr(", base::paste(base::c("graph", base::c(coords = "coords", dim = "dim", n_iter = "niter", start.temp = "start.temp", grid = "grid", weights = "weights", minx = "minx", maxx = "maxx", miny = "miny", maxy = "maxy", minz = "minz", maxz = "maxz", coolexp = "coolexp", maxdelta = "maxdelta", area = "area", repulserad = "repulserad", n_iter = "maxiter")[.arg_names]), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  layout_with_fr(", base::paste(base::c("graph", base::c(coords = "coords", dim = "dim", n_iter = "niter", start_temp = "start.temp", grid = "grid", weights = "weights", minx = "minx", maxx = "maxx", miny = "miny", maxy = "maxy", minz = "minz", maxz = "maxz", coolexp = "coolexp", maxdelta = "maxdelta", area = "area", repulserad = "repulserad", n_iter = "maxiter")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    layout_with_fr(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -1937,14 +1937,14 @@ layout_with_fr <- function(
 
   # Argument checks
   ensure_igraph(graph)
-  if (is.null(start.temp)) {
-    start.temp <- sqrt(vcount(graph))
+  if (is.null(start_temp)) {
+    start_temp <- sqrt(vcount(graph))
   }
 
   coords[] <- as.numeric(coords)
   dim <- igraph_match_arg(dim)
   n_iter <- as.numeric(n_iter)
-  start.temp <- as.numeric(start.temp)
+  start_temp <- as.numeric(start_temp)
 
   grid <- igraph_match_arg(grid)
   grid <- switch(grid, "grid" = 0L, "nogrid" = 1L, "auto" = 2L)
@@ -1995,7 +1995,7 @@ layout_with_fr <- function(
       graph,
       coords,
       n_iter,
-      start.temp,
+      start_temp,
       weights,
       minx,
       maxx,
@@ -2009,7 +2009,7 @@ layout_with_fr <- function(
       graph,
       coords,
       n_iter,
-      start.temp,
+      start_temp,
       weights,
       minx,
       maxx,
@@ -2063,12 +2063,12 @@ layout.fruchterman.reingold <- function(..., params = list()) {
 #'   single vertex counts as an iteration. The default `NULL` uses 40 * n * n,
 #'   where n is the number of vertices. The original paper suggests 4 * n * n,
 #'   but this usually only works if the other parameters are set up carefully.
-#' @param temp.max The maximum allowed local temperature. The default `NULL`
+#' @param temp_max The maximum allowed local temperature. The default `NULL`
 #'   uses the number of vertices.
-#' @param temp.min The global temperature at which the algorithm terminates
+#' @param temp_min The global temperature at which the algorithm terminates
 #'   (even before reaching `max_iter` iterations). A reasonable default is
 #'   1/10.
-#' @param temp.init Initial local temperature of all vertices. The default
+#' @param temp_init Initial local temperature of all vertices. The default
 #'   `NULL` uses the square root of the number of vertices.
 #' @return A numeric matrix with two columns, and as many rows as the number of
 #'   vertices.
@@ -2093,14 +2093,14 @@ layout_with_gem <- function(
   ...,
   coords = NULL,
   max_iter = NULL,
-  temp.max = NULL,
-  temp.min = 0.1,
-  temp.init = NULL
+  temp_max = NULL,
+  temp_min = 0.1,
+  temp_init = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_with_gem, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("t", "te", "tem", "temp", "temp.", "temp.m"))
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("t", "te", "tem", "temp", "temp.", "temp.m", "temp_", "temp_m"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn layout_with_gem}.")
     # Pre-3.0.0 signature: layout_with_gem(graph, coords, maxiter, temp.max, temp.min, temp.init)
     .old_signature <- function(coords, maxiter, temp.max, temp.min, temp.init, ...) {
@@ -2113,9 +2113,9 @@ layout_with_gem <- function(
       base::c(
         if (!base::missing(coords)) base::list(coords = coords),
         if (!base::missing(maxiter)) base::list(max_iter = maxiter),
-        if (!base::missing(temp.max)) base::list(temp.max = temp.max),
-        if (!base::missing(temp.min)) base::list(temp.min = temp.min),
-        if (!base::missing(temp.init)) base::list(temp.init = temp.init)
+        if (!base::missing(temp.max)) base::list(temp_max = temp.max),
+        if (!base::missing(temp.min)) base::list(temp_min = temp.min),
+        if (!base::missing(temp.init)) base::list(temp_init = temp.init)
       )
     }
     .arg_handle <- .old_signature(...)
@@ -2124,9 +2124,9 @@ layout_with_gem <- function(
       .arg_conflict <- base::intersect(.arg_names, base::c(
         if (!base::missing(coords)) "coords",
         if (!base::missing(max_iter)) "max_iter",
-        if (!base::missing(temp.max)) "temp.max",
-        if (!base::missing(temp.min)) "temp.min",
-        if (!base::missing(temp.init)) "temp.init"
+        if (!base::missing(temp_max)) "temp_max",
+        if (!base::missing(temp_min)) "temp_min",
+        if (!base::missing(temp_init)) "temp_init"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_with_gem} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -2134,7 +2134,7 @@ layout_with_gem <- function(
         "3.0.0",
         what = base::I("Calling `layout_with_gem()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  layout_with_gem(", base::paste(base::c("graph", base::c(coords = "coords", max_iter = "maxiter", temp.max = "temp.max", temp.min = "temp.min", temp.init = "temp.init")[.arg_names]), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  layout_with_gem(", base::paste(base::c("graph", base::c(coords = "coords", max_iter = "maxiter", temp_max = "temp.max", temp_min = "temp.min", temp_init = "temp.init")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    layout_with_gem(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -2145,11 +2145,11 @@ layout_with_gem <- function(
   if (is.null(max_iter)) {
     max_iter <- 40 * vcount(graph)^2
   }
-  if (is.null(temp.max)) {
-    temp.max <- max(vcount(graph), 1)
+  if (is.null(temp_max)) {
+    temp_max <- max(vcount(graph), 1)
   }
-  if (is.null(temp.init)) {
-    temp.init <- sqrt(max(vcount(graph), 1))
+  if (is.null(temp_init)) {
+    temp_init <- sqrt(max(vcount(graph), 1))
   }
 
   if (is.null(coords)) {
@@ -2164,9 +2164,9 @@ layout_with_gem <- function(
     res = coords,
     use_seed = use.seed,
     maxiter = max_iter,
-    temp_max = temp.max,
-    temp_min = temp.min,
-    temp_init = temp.init
+    temp_max = temp_max,
+    temp_min = temp_min,
+    temp_init = temp_init
   )
 }
 
@@ -2207,10 +2207,10 @@ with_gem <- function(...) layout_spec(layout_with_gem, ...)
 #'   repulsion. The default is 0.001.
 #' @param mass The mass of the vertices, used for the spring forces. The
 #'   default is 30.
-#' @param spring.length The length of the springs, an integer number. The
+#' @param spring_length The length of the springs, an integer number. The
 #'   default value is zero.
-#' @param spring.constant The spring constant, the default value is one.
-#' @param max.sa.movement Real constant, it gives the maximum amount of
+#' @param spring_constant The spring constant, the default value is one.
+#' @param max_sa_movement Real constant, it gives the maximum amount of
 #'   movement allowed in a single step along a single axis. The default value is
 #'   5.
 #' @return A numeric matrix with two columns, and a row for each vertex.
@@ -2228,14 +2228,14 @@ layout_with_graphopt <- function(
   n_iter = 500,
   charge = 0.001,
   mass = 30,
-  spring.length = 0,
-  spring.constant = 1,
-  max.sa.movement = 5
+  spring_length = 0,
+  spring_constant = 1,
+  max_sa_movement = 5
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_with_graphopt, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("s", "m", "ma", "sp", "spr", "spri", "sprin", "spring", "spring."))
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("s", "sp", "spr", "spri", "sprin", "spring", "spring.", "m", "ma", "spring_"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn layout_with_graphopt}.")
     # Pre-3.0.0 signature: layout_with_graphopt(graph, start, niter, charge, mass, spring.length, spring.constant, max.sa.movement)
     .old_signature <- function(start, niter, charge, mass, spring.length, spring.constant, max.sa.movement, ...) {
@@ -2250,9 +2250,9 @@ layout_with_graphopt <- function(
         if (!base::missing(niter)) base::list(n_iter = niter),
         if (!base::missing(charge)) base::list(charge = charge),
         if (!base::missing(mass)) base::list(mass = mass),
-        if (!base::missing(spring.length)) base::list(spring.length = spring.length),
-        if (!base::missing(spring.constant)) base::list(spring.constant = spring.constant),
-        if (!base::missing(max.sa.movement)) base::list(max.sa.movement = max.sa.movement)
+        if (!base::missing(spring.length)) base::list(spring_length = spring.length),
+        if (!base::missing(spring.constant)) base::list(spring_constant = spring.constant),
+        if (!base::missing(max.sa.movement)) base::list(max_sa_movement = max.sa.movement)
       )
     }
     .arg_handle <- .old_signature(...)
@@ -2263,9 +2263,9 @@ layout_with_graphopt <- function(
         if (!base::missing(n_iter)) "n_iter",
         if (!base::missing(charge)) "charge",
         if (!base::missing(mass)) "mass",
-        if (!base::missing(spring.length)) "spring.length",
-        if (!base::missing(spring.constant)) "spring.constant",
-        if (!base::missing(max.sa.movement)) "max.sa.movement"
+        if (!base::missing(spring_length)) "spring_length",
+        if (!base::missing(spring_constant)) "spring_constant",
+        if (!base::missing(max_sa_movement)) "max_sa_movement"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_with_graphopt} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -2273,7 +2273,7 @@ layout_with_graphopt <- function(
         "3.0.0",
         what = base::I("Calling `layout_with_graphopt()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  layout_with_graphopt(", base::paste(base::c("graph", base::c(start = "start", n_iter = "niter", charge = "charge", mass = "mass", spring.length = "spring.length", spring.constant = "spring.constant", max.sa.movement = "max.sa.movement")[.arg_names]), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  layout_with_graphopt(", base::paste(base::c("graph", base::c(start = "start", n_iter = "niter", charge = "charge", mass = "mass", spring_length = "spring.length", spring_constant = "spring.constant", max_sa_movement = "max.sa.movement")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    layout_with_graphopt(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -2286,9 +2286,9 @@ layout_with_graphopt <- function(
   n_iter <- as.double(n_iter)
   charge <- as.double(charge)
   mass <- as.double(mass)
-  spring.length <- as.double(spring.length)
-  spring.constant <- as.double(spring.constant)
-  max.sa.movement <- as.double(max.sa.movement)
+  spring_length <- as.double(spring_length)
+  spring_constant <- as.double(spring_constant)
+  max_sa_movement <- as.double(max_sa_movement)
 
   on.exit(.Call(Rx_igraph_finalizer))
   .Call(
@@ -2297,9 +2297,9 @@ layout_with_graphopt <- function(
     n_iter,
     charge,
     mass,
-    spring.length,
-    spring.constant,
-    max.sa.movement,
+    spring_length,
+    spring_constant,
+    max_sa_movement,
     start
   )
 }
@@ -3630,10 +3630,10 @@ layout.drl <- function(
 #' @aliases igraph.drl.coarsest igraph.drl.default igraph.drl.final igraph.drl.refine
 #' @param graph The input graph, in can be directed or undirected.
 #' @inheritParams rlang::args_dots_empty
-#' @param use.seed Logical, whether to use the coordinates given in the
+#' @param use_seed Logical, whether to use the coordinates given in the
 #'   `seed` argument as a starting point.
 #' @param seed A matrix with two columns, the starting coordinates for the
-#'   vertices is `use.seed` is `TRUE`. It is ignored otherwise. The default
+#'   vertices is `use_seed` is `TRUE`. It is ignored otherwise. The default
 #'   `NULL` draws uniformly random starting coordinates.
 #' @param options Options for the layout generator, a named list. See details
 #'   below. The default `NULL` uses `drl_defaults$default`.
@@ -3670,7 +3670,7 @@ layout.drl <- function(
 layout_with_drl <- function(
   graph,
   ...,
-  use.seed = FALSE,
+  use_seed = FALSE,
   seed = NULL,
   options = NULL,
   weights = NULL,
@@ -3688,7 +3688,7 @@ layout_with_drl <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn layout_with_drl}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(use.seed)) base::list(use.seed = use.seed),
+        if (!base::missing(use.seed)) base::list(use_seed = use.seed),
         if (!base::missing(seed)) base::list(seed = seed),
         if (!base::missing(options)) base::list(options = options),
         if (!base::missing(weights)) base::list(weights = weights),
@@ -3699,7 +3699,7 @@ layout_with_drl <- function(
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(use.seed)) "use.seed",
+        if (!base::missing(use_seed)) "use_seed",
         if (!base::missing(seed)) "seed",
         if (!base::missing(options)) "options",
         if (!base::missing(weights)) "weights",
@@ -3711,7 +3711,7 @@ layout_with_drl <- function(
         "3.0.0",
         what = base::I("Calling `layout_with_drl()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  layout_with_drl(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  layout_with_drl(", base::paste(base::c("graph", base::c(use_seed = "use.seed", seed = "seed", options = "options", weights = "weights", dim = "dim")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    layout_with_drl(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -3730,7 +3730,7 @@ layout_with_drl <- function(
 
   dim <- igraph_match_arg(dim)
 
-  use.seed <- as.logical(use.seed)
+  use_seed <- as.logical(use_seed)
   seed <- as.matrix(seed)
 
   options <- modify_list(drl_defaults$default, options)
@@ -3750,7 +3750,7 @@ layout_with_drl <- function(
       Rx_igraph_layout_drl,
       graph,
       seed,
-      use.seed,
+      use_seed,
       options,
       weights
     )
@@ -3759,7 +3759,7 @@ layout_with_drl <- function(
       Rx_igraph_layout_drl_3d,
       graph,
       seed,
-      use.seed,
+      use_seed,
       options,
       weights
     )
