@@ -212,13 +212,20 @@ migrations <- list(
   ),
 
   realize_degseq = list(
-    old = function(out.deg, in.deg, allowed.edge.types, method) {},
-    new = function(
+    old = function(
       out.deg,
-      in.deg = NULL,
+      in.deg,
+      allowed.edge.types = allowed_edge_types,
+      method
+    ) {},
+    new = function(
+      out_deg,
+      in_deg = NULL,
       ...,
-      allowed.edge.types = c("simple", "loops", "multi", "all"),
-      method = c("smallest", "largest", "index")
+      allowed_edge_types = c("simple", "loops", "multi", "all"),
+      method = c("smallest", "largest", "index"),
+      out.deg = deprecated(),
+      in.deg = deprecated()
     ) {},
     when = "3.0.0"
   ),

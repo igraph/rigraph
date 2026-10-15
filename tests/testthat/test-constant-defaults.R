@@ -67,7 +67,7 @@ test_that("NULL non-selector defaults of round-2 functions resolve in the body",
 
   # cross-referencing defaults resolve after all arguments are available
   igraph_local_seed(42)
-  g1 <- sample_pref(20, types = 2, pref.matrix = NULL, type.dist = NULL)
+  g1 <- sample_pref(20, types = 2, pref_matrix = NULL, type_dist = NULL)
   igraph_local_seed(42)
   g2 <- sample_pref(20, types = 2)
   expect_identical_graphs(g1, g2)

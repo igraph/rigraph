@@ -160,3 +160,42 @@ make_named_pair <- function() {
   E(g2)$weight <- c(10, 20, 30)
   list(g1 = g1, g2 = g2)
 }
+
+# Checks an argument rename (#2788):
+# a call using the legacy name `old` soft-deprecates
+# and returns the same result as the call using the new name `new`.
+# `args` holds the other arguments; both calls run under the same seed.
+# The calls are evaluated in the caller's frame:
+# a call made from this helper would count as internal to the package,
+# which keeps the soft deprecation silent.
+expect_legacy_arg <- function(
+  fun,
+  args,
+  old,
+  new,
+  value,
+  env = parent.frame()
+) {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  legacy <- as.call(c(fun, args, stats::setNames(list(value), old)))
+  current <- as.call(c(fun, args, stats::setNames(list(value), new)))
+  lifecycle::expect_deprecated(
+    res_legacy <- igraph_with_seed(42, eval(legacy, env))
+  )
+  res <- igraph_with_seed(42, eval(current, env))
+  expect_true(same_result(res_legacy, res))
+}
+
+# Like identical(), but compares graphs with identical_graphs(), also inside lists.
+same_result <- function(x, y) {
+  if (is_igraph(x) && is_igraph(y)) {
+    return(identical_graphs(x, y))
+  }
+  if (is.list(x) && is.list(y) && !is_igraph(x) && !is_igraph(y)) {
+    return(
+      identical(names(x), names(y)) &&
+        all(mapply(same_result, x, y))
+    )
+  }
+  isTRUE(all.equal(x, y))
+}

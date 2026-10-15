@@ -4,13 +4,19 @@
 
 migrations <- list(
   asym_pref = list(
-    old = function(nodes, types, type.dist.matrix, pref.matrix, loops) {},
+    old = function(
+      nodes,
+      types,
+      type.dist.matrix = type_dist_matrix,
+      pref.matrix = pref_matrix,
+      loops
+    ) {},
     new = function(
       n,
       types,
       ...,
-      type.dist.matrix = NULL,
-      pref.matrix = NULL,
+      type_dist_matrix = NULL,
+      pref_matrix = NULL,
       loops = FALSE,
       nodes = deprecated()
     ) {},
@@ -110,26 +116,26 @@ migrations <- list(
       n,
       power,
       m,
-      out.dist,
-      out.seq,
-      out.pref,
-      zero.appeal,
+      out.dist = out_dist,
+      out.seq = out_seq,
+      out.pref = out_pref,
+      zero.appeal = zero_appeal,
       directed,
       algorithm,
-      start.graph
+      start.graph = start_graph
     ) {},
     new = function(
       n,
       power = 1,
       m = NULL,
       ...,
-      out.dist = NULL,
-      out.seq = NULL,
-      out.pref = FALSE,
-      zero.appeal = 1,
+      out_dist = NULL,
+      out_seq = NULL,
+      out_pref = FALSE,
+      zero_appeal = 1,
       directed = TRUE,
       algorithm = c("psumtree", "psumtree-multiple", "bag"),
-      start.graph = NULL
+      start_graph = NULL
     ) {},
     when = "3.0.0"
   ),
@@ -140,33 +146,35 @@ migrations <- list(
       pa.exp,
       aging.exp,
       m,
-      aging.bin,
-      out.dist,
-      out.seq,
-      out.pref,
+      aging.bin = aging_bin,
+      out.dist = out_dist,
+      out.seq = out_seq,
+      out.pref = out_pref,
       directed,
-      zero.deg.appeal,
-      zero.age.appeal,
-      deg.coef,
-      age.coef,
-      time.window
+      zero.deg.appeal = zero_deg_appeal,
+      zero.age.appeal = zero_age_appeal,
+      deg.coef = deg_coef,
+      age.coef = age_coef,
+      time.window = time_window
     ) {},
     new = function(
       n,
-      pa.exp,
-      aging.exp,
+      pa_exp,
+      aging_exp,
       m = NULL,
       ...,
-      aging.bin = 300,
-      out.dist = NULL,
-      out.seq = NULL,
-      out.pref = FALSE,
+      aging_bin = 300,
+      out_dist = NULL,
+      out_seq = NULL,
+      out_pref = FALSE,
       directed = TRUE,
-      zero.deg.appeal = 1,
-      zero.age.appeal = 0,
-      deg.coef = 1,
-      age.coef = 1,
-      time.window = NULL
+      zero_deg_appeal = 1,
+      zero_age_appeal = 0,
+      deg_coef = 1,
+      age_coef = 1,
+      time_window = NULL,
+      pa.exp = deprecated(),
+      aging.exp = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -175,9 +183,9 @@ migrations <- list(
     old = function(
       nodes,
       types,
-      type.dist,
-      fixed.sizes,
-      pref.matrix,
+      type.dist = type_dist,
+      fixed.sizes = fixed_sizes,
+      pref.matrix = pref_matrix,
       directed,
       loops
     ) {},
@@ -185,9 +193,9 @@ migrations <- list(
       n,
       types,
       ...,
-      type.dist = NULL,
-      fixed.sizes = FALSE,
-      pref.matrix = NULL,
+      type_dist = NULL,
+      fixed_sizes = FALSE,
+      pref_matrix = NULL,
       directed = FALSE,
       loops = FALSE,
       nodes = deprecated()
@@ -196,13 +204,19 @@ migrations <- list(
   ),
 
   sample_asym_pref = list(
-    old = function(nodes, types, type.dist.matrix, pref.matrix, loops) {},
+    old = function(
+      nodes,
+      types,
+      type.dist.matrix = type_dist_matrix,
+      pref.matrix = pref_matrix,
+      loops
+    ) {},
     new = function(
       n,
       types,
       ...,
-      type.dist.matrix = NULL,
-      pref.matrix = NULL,
+      type_dist_matrix = NULL,
+      pref_matrix = NULL,
       loops = FALSE,
       nodes = deprecated()
     ) {},
@@ -240,11 +254,12 @@ migrations <- list(
   sample_correlated_gnp = list(
     old = function(old.graph, corr, p, permutation) {},
     new = function(
-      old.graph,
+      old_graph,
       corr,
       ...,
       p = NULL,
-      permutation = NULL
+      permutation = NULL,
+      old.graph = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -252,8 +267,8 @@ migrations <- list(
   sample_degseq = list(
     old = function(out.deg, in.deg, method) {},
     new = function(
-      out.deg,
-      in.deg = NULL,
+      out_deg,
+      in_deg = NULL,
       ...,
       method = c(
         "configuration",
@@ -261,7 +276,9 @@ migrations <- list(
         "fast.heur.simple",
         "configuration.simple",
         "edge.switching.simple"
-      )
+      ),
+      out.deg = deprecated(),
+      in.deg = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -279,12 +296,15 @@ migrations <- list(
   sample_fitness = list(
     old = function(no.of.edges, fitness.out, fitness.in, loops, multiple) {},
     new = function(
-      no.of.edges,
-      fitness.out,
-      fitness.in = NULL,
+      n_edges,
+      fitness_out,
+      fitness_in = NULL,
       ...,
       loops = FALSE,
-      multiple = FALSE
+      multiple = FALSE,
+      no.of.edges = deprecated(),
+      fitness.out = deprecated(),
+      fitness.in = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -297,31 +317,36 @@ migrations <- list(
       exponent.in,
       loops,
       multiple,
-      finite.size.correction
+      finite.size.correction = finite_size_correction
     ) {},
     new = function(
-      no.of.nodes,
-      no.of.edges,
-      exponent.out,
-      exponent.in = -1,
+      n,
+      n_edges,
+      exponent_out,
+      exponent_in = -1,
       ...,
       loops = FALSE,
       multiple = FALSE,
-      finite.size.correction = TRUE
+      finite_size_correction = TRUE,
+      no.of.nodes = deprecated(),
+      no.of.edges = deprecated(),
+      exponent.out = deprecated(),
+      exponent.in = deprecated()
     ) {},
     when = "3.0.0"
   ),
 
   sample_forestfire = list(
-    old = function(nodes, fw.prob, bw.factor, ambs, directed) {},
+    old = function(nodes, fw.prob, bw.factor = bw_factor, ambs, directed) {},
     new = function(
       n,
-      fw.prob,
+      fw_prob,
       ...,
-      bw.factor = 1,
+      bw_factor = 1,
       ambs = 1,
       directed = TRUE,
-      nodes = deprecated()
+      nodes = deprecated(),
+      fw.prob = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -366,11 +391,12 @@ migrations <- list(
   sample_k_regular = list(
     old = function(no.of.nodes, k, directed, multiple) {},
     new = function(
-      no.of.nodes,
+      n,
       k,
       ...,
       directed = FALSE,
-      multiple = FALSE
+      multiple = FALSE,
+      no.of.nodes = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -393,30 +419,30 @@ migrations <- list(
       n,
       power,
       m,
-      out.dist,
-      out.seq,
-      out.pref,
-      zero.appeal,
+      out.dist = out_dist,
+      out.seq = out_seq,
+      out.pref = out_pref,
+      zero.appeal = zero_appeal,
       directed,
       algorithm,
-      start.graph
+      start.graph = start_graph
     ) {},
     new = function(
       n,
       power = 1,
       m = NULL,
       ...,
-      out.dist = NULL,
-      out.seq = NULL,
-      out.pref = FALSE,
-      zero.appeal = 1,
+      out_dist = NULL,
+      out_seq = NULL,
+      out_pref = FALSE,
+      zero_appeal = 1,
       directed = TRUE,
       algorithm = c(
         "psumtree",
         "psumtree-multiple",
         "bag"
       ),
-      start.graph = NULL
+      start_graph = NULL
     ) {},
     when = "3.0.0"
   ),
@@ -427,33 +453,35 @@ migrations <- list(
       pa.exp,
       aging.exp,
       m,
-      aging.bin,
-      out.dist,
-      out.seq,
-      out.pref,
+      aging.bin = aging_bin,
+      out.dist = out_dist,
+      out.seq = out_seq,
+      out.pref = out_pref,
       directed,
-      zero.deg.appeal,
-      zero.age.appeal,
-      deg.coef,
-      age.coef,
-      time.window
+      zero.deg.appeal = zero_deg_appeal,
+      zero.age.appeal = zero_age_appeal,
+      deg.coef = deg_coef,
+      age.coef = age_coef,
+      time.window = time_window
     ) {},
     new = function(
       n,
-      pa.exp,
-      aging.exp,
+      pa_exp,
+      aging_exp,
       m = NULL,
       ...,
-      aging.bin = 300,
-      out.dist = NULL,
-      out.seq = NULL,
-      out.pref = FALSE,
+      aging_bin = 300,
+      out_dist = NULL,
+      out_seq = NULL,
+      out_pref = FALSE,
       directed = TRUE,
-      zero.deg.appeal = 1,
-      zero.age.appeal = 0,
-      deg.coef = 1,
-      age.coef = 1,
-      time.window = NULL
+      zero_deg_appeal = 1,
+      zero_age_appeal = 0,
+      deg_coef = 1,
+      age_coef = 1,
+      time_window = NULL,
+      pa.exp = deprecated(),
+      aging.exp = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -462,9 +490,9 @@ migrations <- list(
     old = function(
       nodes,
       types,
-      type.dist,
-      fixed.sizes,
-      pref.matrix,
+      type.dist = type_dist,
+      fixed.sizes = fixed_sizes,
+      pref.matrix = pref_matrix,
       directed,
       loops
     ) {},
@@ -472,9 +500,9 @@ migrations <- list(
       n,
       types,
       ...,
-      type.dist = NULL,
-      fixed.sizes = FALSE,
-      pref.matrix = NULL,
+      type_dist = NULL,
+      fixed_sizes = FALSE,
+      pref_matrix = NULL,
       directed = FALSE,
       loops = FALSE,
       nodes = deprecated()
@@ -486,11 +514,13 @@ migrations <- list(
     old = function(n, pref.matrix, block.sizes, directed, loops) {},
     new = function(
       n,
-      pref.matrix,
-      block.sizes,
+      pref_matrix,
+      block_sizes,
       ...,
       directed = FALSE,
-      loops = FALSE
+      loops = FALSE,
+      pref.matrix = deprecated(),
+      block.sizes = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -510,14 +540,21 @@ migrations <- list(
   ),
 
   sample_traits = list(
-    old = function(nodes, types, k, type.dist, pref.matrix, directed) {},
+    old = function(
+      nodes,
+      types,
+      k,
+      type.dist = type_dist,
+      pref.matrix = pref_matrix,
+      directed
+    ) {},
     new = function(
       n,
       types,
       k = 1,
       ...,
-      type.dist = NULL,
-      pref.matrix = NULL,
+      type_dist = NULL,
+      pref_matrix = NULL,
       directed = FALSE,
       nodes = deprecated()
     ) {},
@@ -528,18 +565,18 @@ migrations <- list(
     old = function(
       nodes,
       types,
-      edge.per.step,
-      type.dist,
-      pref.matrix,
+      edge.per.step = edge_per_step,
+      type.dist = type_dist,
+      pref.matrix = pref_matrix,
       directed
     ) {},
     new = function(
       n,
       types,
       ...,
-      edge.per.step = 1,
-      type.dist = NULL,
-      pref.matrix = NULL,
+      edge_per_step = 1,
+      type_dist = NULL,
+      pref_matrix = NULL,
       directed = FALSE,
       nodes = deprecated()
     ) {},
@@ -550,11 +587,13 @@ migrations <- list(
     old = function(n, pref.matrix, block.sizes, directed, loops) {},
     new = function(
       n,
-      pref.matrix,
-      block.sizes,
+      pref_matrix,
+      block_sizes,
       ...,
       directed = FALSE,
-      loops = FALSE
+      loops = FALSE,
+      pref.matrix = deprecated(),
+      block.sizes = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -574,14 +613,21 @@ migrations <- list(
   ),
 
   traits = list(
-    old = function(nodes, types, k, type.dist, pref.matrix, directed) {},
+    old = function(
+      nodes,
+      types,
+      k,
+      type.dist = type_dist,
+      pref.matrix = pref_matrix,
+      directed
+    ) {},
     new = function(
       n,
       types,
       k = 1,
       ...,
-      type.dist = NULL,
-      pref.matrix = NULL,
+      type_dist = NULL,
+      pref_matrix = NULL,
       directed = FALSE,
       nodes = deprecated()
     ) {},
@@ -592,18 +638,18 @@ migrations <- list(
     old = function(
       nodes,
       types,
-      edge.per.step,
-      type.dist,
-      pref.matrix,
+      edge.per.step = edge_per_step,
+      type.dist = type_dist,
+      pref.matrix = pref_matrix,
       directed
     ) {},
     new = function(
       n,
       types,
       ...,
-      edge.per.step = 1,
-      type.dist = NULL,
-      pref.matrix = NULL,
+      edge_per_step = 1,
+      type_dist = NULL,
+      pref_matrix = NULL,
       directed = FALSE,
       nodes = deprecated()
     ) {},

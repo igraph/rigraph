@@ -991,12 +991,12 @@ make_ <- function(...) {
 #' @examples
 #' pref_matrix <- cbind(c(0.8, 0.1), c(0.1, 0.7))
 #' blocky <- sample_(sbm(
-#'   n = 20, pref.matrix = pref_matrix,
-#'   block.sizes = c(10, 10)
+#'   n = 20, pref_matrix = pref_matrix,
+#'   block_sizes = c(10, 10)
 #' ))
 #'
 #' blocky2 <- pref_matrix %>%
-#'   sample_sbm(n = 20, block.sizes = c(10, 10))
+#'   sample_sbm(n = 20, block_sizes = c(10, 10))
 #' @family games
 #' @family constructor modifiers
 sample_ <- function(...) {
@@ -3879,15 +3879,17 @@ graph_from_lcf <- function(
 #'
 #' The \dQuote{index} method selects the vertices in order of their index.
 #'
-#' @param out.deg Numeric vector, the sequence of degrees (for undirected
+#' @param out_deg Numeric vector, the sequence of degrees (for undirected
 #'   graphs) or out-degrees (for directed graphs). For undirected graphs its sum
 #'   should be even. For directed graphs its sum should be the same as the sum of
-#'   `in.deg`.
-#' @param in.deg For directed graph, the in-degree sequence. By default this is
+#'   `in_deg`.
+#' @param out.deg `r lifecycle::badge("deprecated")` Use `out_deg` instead.
+#' @param in_deg For directed graph, the in-degree sequence. By default this is
 #'   `NULL` and an undirected graph is created.
+#' @param in.deg `r lifecycle::badge("deprecated")` Use `in_deg` instead.
 #' @param method Character, the method for generating the graph; see below.
 #' @inheritParams rlang::args_dots_empty
-#' @param allowed.edge.types Character, specifies the types of allowed edges.
+#' @param allowed_edge_types Character, specifies the types of allowed edges.
 #'   \dQuote{simple} allows simple graphs only (no loops, no multiple edges).
 #'   \dQuote{multiple} allows multiple edges but disallows loop.
 #'   \dQuote{loops} allows loop edges but disallows multiple edges (currently
@@ -3929,7 +3931,7 @@ graph_from_lcf <- function(
 #' if (sum(degs) %% 2 != 0) {
 #'   degs[1] <- degs[1] + 1
 #' }
-#' g4 <- realize_degseq(degs, method = "largest", allowed.edge.types = "all")
+#' g4 <- realize_degseq(degs, method = "largest", allowed_edge_types = "all")
 #' all(degree(g4) == degs)
 #'
 #' ## Power-law degree distribution, no loops allowed but multiple edges
@@ -3939,18 +3941,22 @@ graph_from_lcf <- function(
 #' if (sum(degs) %% 2 != 0) {
 #'   degs[1] <- degs[1] + 1
 #' }
-#' g5 <- realize_degseq(degs, allowed.edge.types = "multi")
+#' g5 <- realize_degseq(degs, allowed_edge_types = "multi")
 #' all(degree(g5) == degs)
 realize_degseq <- function(
-  out.deg,
-  in.deg = NULL,
+  out_deg,
+  in_deg = NULL,
   ...,
-  allowed.edge.types = c("simple", "loops", "multi", "all"),
-  method = c("smallest", "largest", "index")
+  allowed_edge_types = c("simple", "loops", "multi", "all"),
+  method = c("smallest", "largest", "index"),
+  out.deg = deprecated(),
+  in.deg = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: realize_degseq, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("i", "in", "o", "ou", "out"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn realize_degseq}.", i = "Spell out the full argument name."))
     # Pre-3.0.0 signature: realize_degseq(out.deg, in.deg, allowed.edge.types, method)
     .old_signature <- function(allowed.edge.types, method, ...) {
       if (...length() > 0L) {
@@ -3960,7 +3966,7 @@ realize_degseq <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn realize_degseq}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(allowed.edge.types)) base::list(allowed.edge.types = allowed.edge.types),
+        if (!base::missing(allowed.edge.types)) base::list(allowed_edge_types = allowed.edge.types),
         if (!base::missing(method)) base::list(method = method)
       )
     }
@@ -3968,7 +3974,7 @@ realize_degseq <- function(
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(allowed.edge.types)) "allowed.edge.types",
+        if (!base::missing(allowed_edge_types)) "allowed_edge_types",
         if (!base::missing(method)) "method"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn realize_degseq} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
@@ -3977,18 +3983,48 @@ realize_degseq <- function(
         "3.0.0",
         what = base::I("Calling `realize_degseq()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  realize_degseq(", base::paste(base::c("out.deg", "in.deg", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    realize_degseq(", base::paste(base::c("out.deg", "in.deg", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  realize_degseq(", base::paste(base::c("out_deg", "in_deg", base::c(allowed_edge_types = "allowed.edge.types", method = "method")[.arg_names]), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    realize_degseq(", base::paste(base::c("out_deg", "in_deg", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
+  if (lifecycle::is_present(in.deg)) {
+    if (!missing(in_deg)) {
+      cli::cli_abort(c(
+        "Argument {.arg in_deg} of {.fn realize_degseq} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg in.deg}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "realize_degseq(in.deg = )",
+      "realize_degseq(in_deg = )"
+    )
+    in_deg <- in.deg
+  }
+
+  if (lifecycle::is_present(out.deg)) {
+    if (!missing(out_deg)) {
+      cli::cli_abort(c(
+        "Argument {.arg out_deg} of {.fn realize_degseq} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg out.deg}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "realize_degseq(out.deg = )",
+      "realize_degseq(out_deg = )"
+    )
+    out_deg <- out.deg
+  }
+
   res <- realize_degree_sequence_impl(
-    out_deg = out.deg,
-    in_deg = in.deg,
-    allowed_edge_types = allowed.edge.types,
+    out_deg = out_deg,
+    in_deg = in_deg,
+    allowed_edge_types = allowed_edge_types,
     method = method
   )
 
@@ -4032,9 +4068,10 @@ realize_degseq <- function(
 #' @return The new graph object.
 #' @param degrees1 The degrees of the first partition.
 #' @param degrees2 The degrees of the second partition.
-#' @param allowed.edge.types Character, specifies the types of allowed edges.
+#' @param allowed_edge_types Character, specifies the types of allowed edges.
 #'   \dQuote{simple} allows simple graphs only (no multiple edges).
 #'   \dQuote{multiple} allows multiple edges.
+#' @param allowed.edge.types `r lifecycle::badge("deprecated")` Use `allowed_edge_types` instead.
 #' @param method Character, the method for generating the graph; see below.
 #' @inheritParams rlang::args_dots_empty
 #' @seealso [realize_degseq()] to create a not necessarily bipartite graph.
@@ -4047,16 +4084,32 @@ realize_bipartite_degseq <- function(
   degrees1,
   degrees2,
   ...,
-  allowed.edge.types = c("simple", "multiple"),
-  method = c("smallest", "largest", "index")
+  allowed_edge_types = c("simple", "multiple"),
+  method = c("smallest", "largest", "index"),
+  allowed.edge.types = deprecated()
 ) {
   check_dots_empty()
-  allowed.edge.types <- igraph_match_arg(allowed.edge.types)
+  if (lifecycle::is_present(allowed.edge.types)) {
+    if (!missing(allowed_edge_types)) {
+      cli::cli_abort(c(
+        "Argument {.arg allowed_edge_types} of {.fn realize_bipartite_degseq} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg allowed.edge.types}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "realize_bipartite_degseq(allowed.edge.types = )",
+      "realize_bipartite_degseq(allowed_edge_types = )"
+    )
+    allowed_edge_types <- allowed.edge.types
+  }
+
+  allowed_edge_types <- igraph_match_arg(allowed_edge_types)
   method <- igraph_match_arg(method)
   g <- realize_bipartite_degree_sequence_impl(
     degrees1 = degrees1,
     degrees2 = degrees2,
-    allowed_edge_types = allowed.edge.types,
+    allowed_edge_types = allowed_edge_types,
     method = method
   )
 
