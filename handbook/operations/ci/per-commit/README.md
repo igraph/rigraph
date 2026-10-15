@@ -42,16 +42,18 @@ What every consumer, the series loop first, relies on:
 
 ## The gates
 
-[`scripts/rcc-one.sh`](/scripts/rcc-one.sh) applies them to one commit, in the order of its `ALL_GATES`,
+[`scripts/rcc-one.sh`](/scripts/rcc-one.sh) installs the package and then applies them to one commit, in the order of its `ALL_GATES`,
 and the order is part of the contract.
 They are the gates of the `rcc-smoke` job of [`R-CMD-check.yaml`](/.github/workflows/R-CMD-check.yaml) on its dispatch path,
 expressed as a script so that one job can run them for many commits,
 plus one that `rcc-smoke` does not make:
 
-* **`regen`** runs Stimulus through `Makefile-cigraph` and `cpp11::cpp_register()` again, and fails when the tree changed.
+* **`regen`** runs Stimulus through `Makefile-cigraph`, `cpp11::cpp_register()` and `tools/generate-migrations.R` again,
+  and fails when the tree changed, restoring it so that the later gates judge the commit as committed.
   It is what holds the generated R/C interface to its generator on every commit:
   `R/aaa-*.R`, `src/rinterface.c` and the cpp11 files are never edited by hand
   ([`architecture/stimulus/`](/handbook/architecture/stimulus/README.md)).
+  On `main` the migration half runs in `custom/after-install` instead, which judges the tip rather than each commit.
 
 Every gate runs even after an earlier one failed, so a red commit's log shows all its problems at once.
 The copy of the script that runs is the commit's own, not the branch tip's:
@@ -74,7 +76,8 @@ and stops at its own deadline, deferring the rest to the next run.
 **Every commit weighs the same.**
 duckdb-r weighs a commit by how many objects of its unity build the change invalidates;
 rigraph has no unity build, and the vendored C library dominates every build alike,
-so `each-cost.py` gives each commit one constant weight, named and calibrated in the script.
+so `each-cost.py` gives each commit one constant weight,
+and `each-plan.sh` records how that weight and the minutes it is converted with were measured.
 
 ## The store
 
