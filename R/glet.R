@@ -68,7 +68,7 @@ graphlets.candidate.basis <- function(graph, weights = NULL) {
 #' @param weights Edge weights. If the graph has a `weight` edge attribute
 #'   and this argument is `NULL` (the default), then the `weight` edge
 #'   attribute is used.
-#' @param niter Integer scalar, the number of iterations to perform.
+#' @param n_iter Integer scalar, the number of iterations to perform.
 #' @param cliques A list of vertex IDs, the graphlet basis to use for the
 #'   projection.
 #' @param Mu Starting weights for the projection. The default `NULL` uses a
@@ -120,7 +120,7 @@ graphlets.candidate.basis <- function(graph, weights = NULL) {
 #' plot(g, layout = co)
 #'
 #' ## Calculate graphlets
-#' gl <- graphlets(g, niter = 1000)
+#' gl <- graphlets(g, n_iter = 1000)
 #'
 #' ## Plot graphlets
 #' for (i in seq_along(gl$cliques)) {
@@ -191,7 +191,7 @@ graphlet_proj <- function(
   ...,
   weights = NULL,
   cliques,
-  niter = 1000,
+  n_iter = 1000,
   Mu = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: graphlet_proj, do not edit, see tools/generate-migrations.R
@@ -208,7 +208,7 @@ graphlet_proj <- function(
       base::c(
         if (!base::missing(weights)) base::list(weights = weights),
         if (!base::missing(cliques)) base::list(cliques = cliques),
-        if (!base::missing(niter)) base::list(niter = niter),
+        if (!base::missing(niter)) base::list(n_iter = niter),
         if (!base::missing(Mu)) base::list(Mu = Mu)
       )
     }
@@ -218,7 +218,7 @@ graphlet_proj <- function(
       .arg_conflict <- base::intersect(.arg_names, base::c(
         if (!base::missing(weights)) "weights",
         if (!base::missing(cliques)) "cliques",
-        if (!base::missing(niter)) "niter",
+        if (!base::missing(n_iter)) "n_iter",
         if (!base::missing(Mu)) "Mu"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn graphlet_proj} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
@@ -227,7 +227,7 @@ graphlet_proj <- function(
         "3.0.0",
         what = base::I("Calling `graphlet_proj()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  graphlet_proj(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  graphlet_proj(", base::paste(base::c("graph", base::c(weights = "weights", cliques = "cliques", n_iter = "niter", Mu = "Mu")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    graphlet_proj(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -250,14 +250,14 @@ graphlet_proj <- function(
     weights <- NULL
   }
   Mu <- as.numeric(Mu)
-  niter <- as.numeric(niter)
+  n_iter <- as.numeric(n_iter)
 
   graphlets_project_impl(
     graph = graph,
     weights = weights,
     cliques = cliques,
     Muc = Mu,
-    niter = niter
+    niter = n_iter
   )
 }
 
@@ -320,7 +320,7 @@ graphlets <- function(
   graph,
   ...,
   weights = NULL,
-  niter = 1000
+  n_iter = 1000
 ) {
   # BEGIN GENERATED ARG_HANDLE: graphlets, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -335,7 +335,7 @@ graphlets <- function(
       }
       base::c(
         if (!base::missing(weights)) base::list(weights = weights),
-        if (!base::missing(niter)) base::list(niter = niter)
+        if (!base::missing(niter)) base::list(n_iter = niter)
       )
     }
     .arg_handle <- .old_signature(...)
@@ -343,7 +343,7 @@ graphlets <- function(
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
         if (!base::missing(weights)) "weights",
-        if (!base::missing(niter)) "niter"
+        if (!base::missing(n_iter)) "n_iter"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn graphlets} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -351,7 +351,7 @@ graphlets <- function(
         "3.0.0",
         what = base::I("Calling `graphlets()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  graphlets(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  graphlets(", base::paste(base::c("graph", base::c(weights = "weights", n_iter = "niter")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    graphlets(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -362,6 +362,6 @@ graphlets <- function(
   graphlets_impl(
     graph = graph,
     weights = weights,
-    niter = niter
+    niter = n_iter
   )
 }

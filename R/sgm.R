@@ -65,7 +65,8 @@ solve_LSAP <- function(x, maximum = FALSE) {
 #'   matched.
 #' @param start a numeric matrix, the permutation matrix estimate is
 #'   initialized with `start`
-#' @param iteration The number of iterations for the Frank-Wolfe algorithm
+#' @param max_iter The number of iterations for the Frank-Wolfe algorithm
+#' @param iteration `r lifecycle::badge("deprecated")` Use `max_iter` instead.
 #' @return A numeric matrix which is the permutation matrix that determines the
 #'   bijection between the graphs of `A` and `B`
 #' @author Vince Lyzinski <https://www.ams.jhu.edu/~lyzinski/>
@@ -91,7 +92,22 @@ solve_LSAP <- function(x, maximum = FALSE) {
 #' P
 #' @family sgm
 #' @export
-match_vertices <- function(A, B, m, start, iteration) {
+match_vertices <- function(A, B, m, start, max_iter, iteration = deprecated()) {
+  if (lifecycle::is_present(iteration)) {
+    if (!missing(max_iter)) {
+      cli::cli_abort(c(
+        "Argument {.arg max_iter} of {.fn match_vertices} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg iteration}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "match_vertices(iteration = )",
+      "match_vertices(max_iter = )"
+    )
+    max_iter <- iteration
+  }
+
   ## Seeds are assumed to be vertices 1:m in both graphs
   totv <- ncol(A)
   n <- totv - m
@@ -109,7 +125,7 @@ match_vertices <- function(A, B, m, start, iteration) {
   }
   A22 <- A[(m + 1):(m + n), (m + 1):(m + n)]
   B22 <- B[(m + 1):(m + n), (m + 1):(m + n)]
-  patience <- iteration
+  patience <- max_iter
   tol <- 1
   P <- start
   toggle <- 1

@@ -4,14 +4,14 @@
 
 migrations <- list(
   layout_as_bipartite = list(
-    old = function(graph, types, hgap, vgap, maxiter) {},
+    old = function(graph, types, hgap, vgap, maxiter = max_iter) {},
     new = function(
       graph,
       types = NULL,
       ...,
       hgap = 1,
       vgap = 1,
-      maxiter = 100
+      max_iter = 100
     ) {},
     when = "3.0.0"
   ),
@@ -67,8 +67,8 @@ migrations <- list(
     old = function(
       graph,
       coords,
-      maxiter,
-      fineiter,
+      maxiter = n_iter,
+      fineiter = n_fine_iter,
       cool.fact,
       weight.node.dist,
       weight.border,
@@ -80,8 +80,8 @@ migrations <- list(
       graph,
       ...,
       coords = NULL,
-      maxiter = 10,
-      fineiter = NULL,
+      n_iter = 10,
+      n_fine_iter = NULL,
       cool.fact = 0.75,
       weight.node.dist = 1.0,
       weight.border = 0.0,
@@ -111,7 +111,7 @@ migrations <- list(
       graph,
       coords,
       dim,
-      niter,
+      niter = n_iter,
       start.temp,
       grid,
       weights,
@@ -125,14 +125,14 @@ migrations <- list(
       maxdelta,
       area,
       repulserad,
-      maxiter = niter
+      maxiter = n_iter
     ) {},
     new = function(
       graph,
       ...,
       coords = NULL,
       dim = c(2, 3),
-      niter = 500,
+      n_iter = 500,
       start.temp = NULL,
       grid = c("auto", "grid", "nogrid"),
       weights = NULL,
@@ -151,12 +151,19 @@ migrations <- list(
   ),
 
   layout_with_gem = list(
-    old = function(graph, coords, maxiter, temp.max, temp.min, temp.init) {},
+    old = function(
+      graph,
+      coords,
+      maxiter = max_iter,
+      temp.max,
+      temp.min,
+      temp.init
+    ) {},
     new = function(
       graph,
       ...,
       coords = NULL,
-      maxiter = NULL,
+      max_iter = NULL,
       temp.max = NULL,
       temp.min = 0.1,
       temp.init = NULL
@@ -168,7 +175,7 @@ migrations <- list(
     old = function(
       graph,
       start,
-      niter,
+      niter = n_iter,
       charge,
       mass,
       spring.length,
@@ -179,7 +186,7 @@ migrations <- list(
       graph,
       ...,
       start = NULL,
-      niter = 500,
+      n_iter = 500,
       charge = 0.001,
       mass = 30,
       spring.length = 0,
@@ -194,7 +201,7 @@ migrations <- list(
       graph,
       coords,
       dim,
-      maxiter,
+      maxiter = max_iter,
       epsilon,
       kkconst,
       weights,
@@ -215,7 +222,7 @@ migrations <- list(
       ...,
       coords = NULL,
       dim = c(2, 3),
-      maxiter = NULL,
+      max_iter = NULL,
       epsilon = 0.0,
       kkconst = NULL,
       weights = NULL,
@@ -237,7 +244,7 @@ migrations <- list(
   layout_with_lgl = list(
     old = function(
       graph,
-      maxiter,
+      maxiter = max_iter,
       maxdelta,
       area,
       coolexp,
@@ -248,7 +255,7 @@ migrations <- list(
     new = function(
       graph,
       ...,
-      maxiter = 150,
+      max_iter = 150,
       maxdelta = NULL,
       area = NULL,
       coolexp = 1.5,
@@ -260,14 +267,22 @@ migrations <- list(
   ),
 
   layout_with_sugiyama = list(
-    old = function(graph, layers, hgap, vgap, maxiter, weights, attributes) {},
+    old = function(
+      graph,
+      layers,
+      hgap,
+      vgap,
+      maxiter = max_iter,
+      weights,
+      attributes
+    ) {},
     new = function(
       graph,
       ...,
       layers = NULL,
       hgap = 1,
       vgap = 1,
-      maxiter = 100,
+      max_iter = 100,
       weights = NULL,
       attributes = c("default", "all", "none")
     ) {},

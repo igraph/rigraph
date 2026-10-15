@@ -52,3 +52,10 @@ test_that("each_edge() recovers legacy positional arguments", {
   )
   expect_identical(res, each_edge(0.3, loops = TRUE))
 })
+
+test_that("keeping_degseq(niter = ) is deprecated but still works", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  expect_snapshot_igraph(res <- keeping_degseq(niter = 20))
+  expect_equal(res, keeping_degseq(n_iter = 20))
+  expect_snapshot_igraph_error(keeping_degseq(n_iter = 20, niter = 10))
+})

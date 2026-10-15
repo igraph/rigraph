@@ -392,7 +392,7 @@ tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
     name = "Fruchterman-Reingold",
     f = layout_with_fr,
     params = list(
-      niter = list(
+      n_iter = list(
         name = "Number of iterations",
         type = "numeric",
         default = 500
@@ -411,7 +411,7 @@ tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
     name = "Kamada-Kawai",
     f = layout_with_kk,
     params = list(
-      maxiter = list(
+      max_iter = list(
         name = "Maximum number of iterations",
         type = "expression",
         default = expression(50 * vcount(.tkplot.g))
@@ -445,12 +445,12 @@ tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
     name = "Davidson-Harel",
     f = layout_with_dh,
     params = list(
-      maxiter = list(
+      n_iter = list(
         name = "Maximum iterations",
         type = "numeric",
         default = 10
       ),
-      fineiter = list(
+      n_fine_iter = list(
         name = "Fine-tuning iterations",
         type = "expression",
         default = expression(max(10, log2(vcount(.tkplot.g))))

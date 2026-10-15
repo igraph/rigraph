@@ -43,7 +43,10 @@ test_that("NULL selector defaults of round-2 functions select the full set", {
   expect_identical_graphs(reverse_edges(g, edges = NULL), reverse_edges(g))
 
   V(g)$name <- letters[1:5]
-  expect_identical(vertex_attr(g, "name", vertices = NULL), vertex_attr(g, "name"))
+  expect_identical(
+    vertex_attr(g, "name", vertices = NULL),
+    vertex_attr(g, "name")
+  )
   expect_identical(vertex.attributes(g, index = NULL), vertex.attributes(g))
   g2 <- set_vertex_attr(g, "x", vertices = NULL, value = 1)
   expect_identical(vertex_attr(g2, "x"), rep(1, 5))
@@ -70,7 +73,7 @@ test_that("NULL non-selector defaults of round-2 functions resolve in the body",
   expect_identical_graphs(g1, g2)
 
   igraph_local_seed(1)
-  l1 <- layout_with_kk(g, kkconst = NULL, maxiter = NULL)
+  l1 <- layout_with_kk(g, kkconst = NULL, max_iter = NULL)
   igraph_local_seed(1)
   l2 <- layout_with_kk(g)
   expect_identical(l1, l2)

@@ -1764,7 +1764,7 @@ cluster_spinglass <- function(
 #' @param initial_membership If provided, the Leiden algorithm
 #'   will try to improve this provided membership. If no argument is
 #'   provided, the aglorithm simply starts from the singleton partition.
-#' @param n_iterations the number of iterations to iterate the Leiden
+#' @param n_iter the number of iterations to iterate the Leiden
 #'   algorithm. Each iteration may improve the partition further.
 #' @param vertex_weights the vertex weights used in the Leiden algorithm.
 #'   If this is not provided, it will be automatically determined on the basis
@@ -1811,7 +1811,7 @@ cluster_leiden <- function(
   resolution = 1,
   beta = 0.01,
   initial_membership = NULL,
-  n_iterations = 2,
+  n_iter = 2,
   vertex_weights = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: cluster_leiden, do not edit, see tools/generate-migrations.R
@@ -1830,7 +1830,7 @@ cluster_leiden <- function(
         if (!base::missing(resolution_parameter)) base::list(resolution = resolution_parameter),
         if (!base::missing(beta)) base::list(beta = beta),
         if (!base::missing(initial_membership)) base::list(initial_membership = initial_membership),
-        if (!base::missing(n_iterations)) base::list(n_iterations = n_iterations),
+        if (!base::missing(n_iterations)) base::list(n_iter = n_iterations),
         if (!base::missing(vertex_weights)) base::list(vertex_weights = vertex_weights)
       )
     }
@@ -1842,7 +1842,7 @@ cluster_leiden <- function(
         if (!base::missing(resolution)) "resolution",
         if (!base::missing(beta)) "beta",
         if (!base::missing(initial_membership)) "initial_membership",
-        if (!base::missing(n_iterations)) "n_iterations",
+        if (!base::missing(n_iter)) "n_iter",
         if (!base::missing(vertex_weights)) "vertex_weights"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn cluster_leiden} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
@@ -1851,7 +1851,7 @@ cluster_leiden <- function(
         "3.0.0",
         what = base::I("Calling `cluster_leiden()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  cluster_leiden(", base::paste(base::c("graph", "objective_function", base::c(weights = "weights", resolution = "resolution_parameter", beta = "beta", initial_membership = "initial_membership", n_iterations = "n_iterations", vertex_weights = "vertex_weights")[.arg_names]), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  cluster_leiden(", base::paste(base::c("graph", "objective_function", base::c(weights = "weights", resolution = "resolution_parameter", beta = "beta", initial_membership = "initial_membership", n_iter = "n_iterations", vertex_weights = "vertex_weights")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    cluster_leiden(", base::paste(base::c("graph", "objective_function", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -1900,7 +1900,7 @@ cluster_leiden <- function(
   }
 
   membership <- initial_membership
-  if (n_iterations > 0) {
+  if (n_iter > 0) {
     res <- community_leiden_impl(
       graph = graph,
       weights = weights,
@@ -1908,7 +1908,7 @@ cluster_leiden <- function(
       resolution = resolution,
       beta = beta,
       start = !is.null(membership),
-      n_iterations = n_iterations,
+      n_iterations = n_iter,
       membership = membership
     )
 
