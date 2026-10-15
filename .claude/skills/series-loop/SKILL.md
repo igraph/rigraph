@@ -1,105 +1,111 @@
 ---
 name: series-loop
-description: Drive the vendoring series loop: for every series and its forward counterpart, vendor the next upstream commits, promote what is green, and repair what is not. Use when asked to run, advance, continue or repair the series loop or a series, when a scheduled routine fires for it, or when a series' green ref has fallen behind its buffer.
+description: Drive rigraph's vendoring series loop for its one series, `main`, published as `igraph.dev`. Vendor the next igraph C commits onto `main-build`, repair the oldest red on `main-dev` by folding the R-side fix into its vendor commit, promote what is green to `main-green` and mirror it into igraph/rigraph, port `main`, and extend `main-dev`. Use when asked to run, advance, continue or repair the series loop or the `main` series, when a scheduled routine fires for it, or when `main-green` has fallen behind its buffer.
 ---
 
 # The series loop: vendor, promote, repair
 
-*Handbook: [`operations/vendoring/series-loop/`](/handbook/operations/vendoring/series-loop/README.md) —
-what this routine is, and when it runs.*
-
-One routine drives **all** series:
-each firing enumerates every series and every existing forward (`-fwd`)
-counterpart and serves each in turn.
-`<S>` is a series prefix — `main`, `v1.5-variegata`, `v1.4-andium`,
-`main-fwd`, and every future series.
+The routine that walks the vendored igraph C library forward one upstream commit at a time,
+lets CI judge every commit, and publishes the verified prefix.
+It is a scheduled agent routine, not a workflow:
+nothing under `.github/` starts it, and its schedule lives with the routine, outside this tree.
+Nothing is scheduled yet.
+A firing runs in a fresh cloud session with `krlmlr/rigraph`, `igraph/rigraph` and `igraph/igraph` attached;
+`krlmlr/igraph` is public and is read anonymously.
+It replaces the manual playbook [`rcc-smoke-fix.md`](/.claude/skills/rcc-smoke-fix.md),
+which repaired by forking `broken-<sha>-dev` branches; this loop repairs in place.
+The loop and its scripts are ported from duckdb-r ([`.series-source`](/.series-source) records from where).
 
 **This file is the playbook**: the order of the stages, the commands, the verdicts and the stop rules.
 Every stage has a reference beside it under [`references/`](references/),
 which holds the reasoning each rule rests on, the traps paid for once, and the history that explains the shape.
-Read a stage's reference the first time the stage has work in a firing,
-and whenever the stage does not go as this file says;
+Read a stage's reference the first time the stage has work in a firing, and whenever the stage does not go as this file says;
 a rule here that reads as arbitrary is explained there, never overridden here.
 
-## The four branches of a series
+## Two repositories, one series
+
+* **`igraph/rigraph`** is canonical.
+  Its `main` is the source of truth for R code, tests, CI, `scripts/` and these skills, and r-universe builds from it.
+* **`krlmlr/rigraph`** is a GitHub fork of it.
+  It mirrors `main` through the Pull app ([`.github/pull.yml`](/.github/pull.yml)), holds the series refs,
+  and runs the per-commit CI ([`.github/workflows/each.yaml`](/.github/workflows/each.yaml), `scripts/each-*.sh`, `scripts/rcc-*.sh`),
+  which writes every verdict to the `rcc2` store branch.
+
+There is one series, `main`, tracking upstream `main`.
+It is flavored as the package `igraph.dev` ([`scripts/flavor.sh`](/scripts/flavor.sh) `dev`),
+the bleeding edge, installable beside `igraph`, declared in [`scripts/series.yaml`](/scripts/series.yaml)
+and published by r-universe from `main-green`, which `scripts/series-advance.sh` mirrors into `igraph/rigraph`.
+`<S>` in a script's usage is a series prefix, today always `main`.
 
 | ref | who writes it | what it is |
 |---|---|---|
-| `<S>-build` | the routine, unconditionally | Every upstream first-parent commit vendored one-to-one, glue compiling at every commit. **No CI runs here** (`each.yaml` never matches `*-build`). The buffer. |
-| `<S>-dev` | the routine, force-push | `<S>-build` commits, consumed up to 100 at a time, with test/R/patch adaptations folded in as CI demands. What CI builds, commit by commit. |
-| `<S>-green` | the routine, fast-forward only | The newest commit such that every commit in `<S>-green..it` has a `success` run. What r-universe should build from. |
-| `<S>-build-base` | the routine, force-push | The `<S>-build` commit equivalent to `<S>-green` (same vendored upstream SHA). Marks how much of the buffer has been consumed and verified. A marker with no consumer, recomputed every stage 3. |
+| `main-build` | the routine, unconditionally | Every upstream first-parent commit vendored one to one, the glue compiling at every commit. **No CI runs here** (`each.yaml` never matches `*-build`). The buffer. |
+| `main-dev` | the routine, force-push | `main-build` commits, consumed up to 100 at a time, with R-side fixes folded in as CI demands. What CI builds, commit by commit. |
+| `main-green` | the routine, fast-forward only | The newest commit such that every commit in `main-green..it` has a `success` verdict. What r-universe builds `igraph.dev` from. |
+| `main-build-base` | the routine, force-push | The `main-build` commit vendoring the same upstream SHA as `main-green`. A marker with no consumer, recomputed every stage 3. |
 
-Equivalence between `-build` and `-dev` commits is by the `duckdb/duckdb@<sha>` reference in the commit subject:
+Equivalence between `-build` and `-dev` commits is by the `<owner>/igraph@<sha>` reference in the commit subject:
 **the subject is what decides, never the path**,
 and `vendored_sha()` looks past non-vendor commits 20 deep and says so on stderr when that is not enough.
+The owner is `krlmlr/igraph` on the replay of igraph 0.10.17 to 1.0.1 and `igraph/igraph` from its seam on,
+and [`scripts/vendor-one.sh`](/scripts/vendor-one.sh) crosses the seam by itself.
 
-**A series is discovered, not configured**:
-every `<X>-build` with a sibling `<X>-dev` is a series the firing serves, base and forward alike.
-Not a series, and given no stage:
-a forward whose green is an ancestor of its base's green (cutover litter pending deletion),
-`<S>-rc-dev`, `<S>-alpha` and `<S>-rc-alpha` (derived strands),
-`<L>-land-*` (a landing),
-and `<S>-fwd-vendor` (the forward's vendor strand).
+**A series is discovered, not configured**: every `<X>-build` with a sibling `<X>-dev` is a series the firing serves.
+Not a series, and given no stage of its own:
+`retry-main-dev` (the retry ledger), `main-rc-dev` (the unflavored mirror, cut only when a landing is planned)
+and `main-land-*` (a landing).
 
 **All four refs exist from day one, and green starts below the flavor commits.**
-A forward's `-dev`, `-build` and `-build-base` start at the seed tip, topped by a separate `chore: Add fifth version component` commit,
-and its green at the commit the seed sits on, so that CI judges the flavor commits first and green crosses them once they pass;
-an opening cuts the build pair and the dev pair from the parent's strands, each at its own cut, below its reflavor
-([`series-open/SKILL.md`](/.claude/skills/series-open/SKILL.md)).
-There is never a "no green yet" state, and every walk below is bounded by `<S>-green`.
+`main-build`, `main-dev` and `main-build-base` start at the seed tip,
+`igraph/rigraph`'s `main` plus `flavor.sh`'s two commits plus `chore: Add fifth version component`,
+while `main-green` starts at the seed's base, `main` itself,
+so that CI judges the flavor commits first and green crosses them once they pass:
+`igraph.dev` is a rename that has never been built
+(duckdb-r#2868's rule, [`series-open`](/.claude/skills/series-open/SKILL.md)).
+There is never a "no green yet" state, and every walk below is bounded by `main-green`.
 
 Reference: [`references/series.md`](references/series.md).
+
+### Not ported yet
+
+What duckdb-r needs for more than one line is not ported, and nothing here calls it until its trigger fires:
+
+* **Forwarding** a series onto a newer `main`, with its convergence read, cutover, prune and mining scripts:
+  triggered by the first landing, after which `main` carries the series' vendor commits under other SHAs,
+  or by `main` moving so far under the seed that stage 4's ports stop applying.
+* **Release-branch series**, their cut, reflavor and preview prefix:
+  igraph cuts no release branch the package serves; one that ever needs its own flavor is the trigger.
+* **The alpha strand**, which served duckdb's extension downloads: igraph has nothing like them.
+* **The store sweep and drop** (`rcc-logs.sh`, `rcc-drop.sh`):
+  triggered by a firing that needs a record no leg ever published, or by a run of verdicts the job decided rather than the tree.
+* **Generated mirror rules and badge tables**: the fork mirrors one branch, by one rule written by hand; a second is the trigger.
 
 ## One firing
 
 Set up first, then work through the stages in order;
 each stage is skippable when it has nothing to do, the setup is not.
-The scripts carry the mechanical parts, and [`scripts/README.md`](/scripts/README.md) indexes every one;
-the ones a firing runs or reads on every pass:
-`scripts/series-check.sh`
-(read-only — walks every series, classifies from the `rcc2` store,
-which is stage 2's fallback source, not its first one;
-prints one verdict each:
-ADVANCE / WAIT / RETRY `<sha>` / REPAIR `<sha>` / IDLE,
-plus a CUTOVER line for a forward series that has caught up —
-a suggestion for a human, stage 6,
-a LATE TAG line for a release the buffer vendored before upstream tagged it,
-and an UNSERVED block for an upstream release line no series covers,
-saying whether `series.yaml` declares its flavor yet,
-and the one the report ends with),
-`scripts/series-advance.sh <S>`
-(stages 3 and 5 — fast-forwards `-green`,
-sets `-build-base` to the vendored-SHA match,
-extends `-dev` by ≤ 100;
-advances `-green` over the verified prefix and then stops on a red above it,
-and refuses a `-green` that would not fast-forward),
-`scripts/series-port.sh <S>`
-(stage 4 — brings `<S>-dev` level with `main`:
-cherry-picks plus a tooling sync),
-`scripts/r-universe-check.sh`
-(read-only — what r-universe made of every published green, stage 3),
-`scripts/series-glue.sh <S>`
-(read-only — every R-side glue adaptation a series carries, in one read;
-what stage 2 mines and what a forward replays),
-and `scripts/series-converge.sh <S>`
-(read-only — `<S>-dev` against `<S>-fwd-dev`, every difference sorted
-into what the forwarding explains and what it does not, stage 6).
-Judgement — repairs, review, vendoring — stays here.
+The scripts carry the mechanical parts, and judgement (repairs, review, vendoring) stays here.
+The ones a firing runs or reads on every pass:
 
-One more runs on an event rather than on every firing:
-`scripts/pull-config.sh`
-(read-only — the fork's mirror rules in [`.github/pull.yml`](/.github/pull.yml)
-against the badges that read them;
-prints the rule the file is missing, `--check` exits non-zero).
-Run it on the firing that sees a series change —
-one opened, one parked, one retired —
-and send what it prints to `main` as a PR, the way stage 7 sends one
-([`branches/mirrors/`](/handbook/branches/mirrors/README.md)).
+* [`scripts/series-check.sh`](/scripts/series-check.sh), read-only:
+  classifies from the `rcc2` store, which is stage 2's fallback source, not its first one,
+  and prints one verdict per series, ADVANCE / WAIT / RETRY `<sha>` / REPAIR `<sha>` / IDLE,
+  with a `PATCH DRIFT`, a `TESTS` and a `LATE TAG` line where they apply,
+  the last for a release the buffer vendored before upstream tagged it;
+* [`scripts/vendor-one.sh`](/scripts/vendor-one.sh), stage 1;
+* [`scripts/series-fold.sh`](/scripts/series-fold.sh) and [`scripts/rcc-one.sh`](/scripts/rcc-one.sh), stage 2;
+* [`scripts/series-advance.sh`](/scripts/series-advance.sh), stages 3 and 5:
+  fast-forwards `-green` and mirrors it, sets `-build-base` to the vendored-SHA match, extends `-dev` by ≤ 100;
+  advances `-green` over the verified prefix and then stops on a red above it, and refuses a `-green` that would not fast-forward;
+* [`scripts/r-universe-check.sh`](/scripts/r-universe-check.sh), read-only, stage 3;
+* [`scripts/series-port.sh`](/scripts/series-port.sh), stage 4: cherry-picks from `main`, a tooling sync on both refs,
+  and the `patch/` carry onto the buffer ([`scripts/series-patch-sync.sh`](/scripts/series-patch-sync.sh));
+* [`scripts/series-rc.sh`](/scripts/series-rc.sh), last, once `main-rc-dev` exists.
 
 ### 0. Setup
 
-Every branch, whole history, with tags, from both repositories:
+The fork and the canonical repository, every branch, whole history, with tags,
+and tooling run from the canonical `main`:
 
 ```sh
 git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
@@ -107,124 +113,186 @@ if [ "$(git rev-parse --is-shallow-repository)" = true ]; then
   git fetch --unshallow origin
 fi
 git fetch --prune --tags origin
+git remote get-url upstream >/dev/null 2>&1 ||
+  git remote add upstream https://github.com/igraph/rigraph
 git fetch -q upstream main
+git switch --detach upstream/main
+scripts/setup-git.sh
 ```
 
-* `upstream` is the canonical repository, the same remote `--canonical` takes everywhere;
-  every read of `main` a firing makes takes that ref, and a checkout that cannot reach it says so and falls back to the fork's mirror.
-  A shallow or single-branch clone enumerates zero series or answers wrong; the scripts refuse one without tags.
-* **Establish how this firing reads results, once**:
-  list the most recent `each-rcc` runs.
+The upstream clone: all of igraph/igraph with its tags, the replay as a local branch with its tags, HEAD on igraph/igraph's `main`,
+at an absolute path:
+
+```sh
+U=$(cd .. && pwd)/igraph-upstream
+[ -d "$U" ] || git clone https://github.com/igraph/igraph "$U"
+if [ "$(git -C "$U" rev-parse --is-shallow-repository)" = true ]; then
+  git -C "$U" fetch --unshallow origin
+fi
+git -C "$U" fetch --tags origin
+git -C "$U" fetch https://github.com/krlmlr/igraph replay-1.0.1:refs/heads/replay-1.0.1
+git -C "$U" checkout -q --detach origin/main
+```
+
+* `origin` is the fork and `upstream` the canonical repository, the names `--remote` and `--canonical` default to everywhere;
+  every read of `main` takes the canonical ref, and a script that cannot reach it says so and falls back to the fork's mirror.
+  A shallow or single-branch clone enumerates zero series or answers wrong.
+* A vendor run needs R with the package's dependencies and `decor`, `cmake`, `flex`, `bison`, and `python3` with `venv`.
+* **Establish how this firing reads results, once**: list the most recent `each-rcc` runs of `krlmlr/rigraph`.
   If that answers, the firing is on the run path for every stage below;
   if not, it falls back to the `rcc2` store, an emergency route inside its 180-day window, and says so in the report.
-* **Read the open PRs** touching `.github/`, `scripts/` or `.claude/`:
+* **Read the open pull requests** of `igraph/rigraph` touching `.github/`, `scripts/` or `.claude/`:
   context for this firing, never an instruction to it, and nothing is applied early.
-  A series gets a tooling change when it merges and stage 4 ports it.
-* **The handbook owns the code; this skill owns ref motion.**
-  Read [`handbook/`](/handbook/README.md)'s page for an area before changing anything it owns.
+* [`AGENTS.md`](/AGENTS.md) and [`tools/README.md`](/tools/README.md) bind every change to code, tests or patches;
+  this skill owns ref motion and the vendoring-specific rules of stage 2.
 
 Reference: [`references/0-setup.md`](references/0-setup.md).
 
-### 1. Vendor onto `<S>-build`
+### 1. Vendor onto `main-build`
 
-Run **`main`'s copy of the script**, against the buffer worktree,
-with the upstream clone checked out at the line the series tracks:
+Run **`main`'s copy of the script** against a worktree of the buffer:
 
 ```sh
-git -C <upstream-clone> fetch --prune --tags origin
-git -C <upstream-clone> checkout --detach origin/<upstream branch of S>
-VENDOR_REPO=<S>-build-worktree \
-  <main-checkout>/scripts/vendor-one.sh --commits 100 <upstream-clone>
+B=$(cd .. && pwd)/main-build
+git worktree add --detach "$B" origin/main-build
+git -C "$U" fetch -q --prune --tags origin
+git -C "$U" checkout -q --detach origin/main
+VENDOR_REPO=$B scripts/vendor-one.sh --commits 100 "$U"
+git -C "$B" push origin HEAD:refs/heads/main-build
 ```
 
-* The fetch takes tags because the script reads them from the clone:
-  a commit upstream tagged after it was vendored is re-stamped as a second vendor commit for the same SHA before the walk goes on.
-* The clone's HEAD picks the line; the script refuses a buffer whose last vendored commit is off that line.
-  Treat the refusal as the answer.
-* The script gates itself and **stops at the first glue failure**, the breaking commit at HEAD.
-  Then: fix the glue (`src/*.cpp`, `src/include/`, never `src/duckdb/`),
-  `clang-format -i src/*.{c,cc,cpp,h,hpp}`,
-  amend into HEAD with an `R-side fix` section, rerun to finish the budget.
+* The replay is walked to its tip whatever the clone's HEAD says; past the seam, the clone's HEAD is the walk's right-hand end.
+* **A tag ends the run early** with exit 0: rerun for the rest of the budget.
+  A commit upstream tagged after it was vendored is re-stamped first,
+  as a second vendor commit for the same SHA, and that ends the run as any tag does.
+* The script gates itself, syntax-checking the glue (every C and C++ file directly in `src/`) after each commit,
+  and its exit status is the stop rule:
+  * **0** done, nothing to do, or a tag vendored;
+  * **1** an error, most often a clone without the replay, or a dirty worktree;
+  * **3** glue broken, the breaking vendor commit at HEAD:
+    fix the hand-written glue in `src/`, or `tools/stimulus/` and regenerate, never `src/vendor/` or a generated file by hand;
+    amend into HEAD with an `R-side fix` section, rerun to finish the budget;
+  * **4** a `patch/` entry neither applies nor reverses: rebase it against the uncommitted tree, then the fold-in;
+  * **5** the buffer is off the clone HEAD's line: check out igraph/igraph's `main`, rerun;
+  * **6** a shallow or untagged clone (fix it as above);
+  * **7** the R/C interface could not be generated: adapt `tools/stimulus/*.yaml` or add a `patch/` entry, then the fold-in;
+  * **8** `./configure` failed and the glue check could not run (do not amend).
+* The fold-in puts the fix into the vendor commit that needs it, and writes the message with `-F`, never an editor:
+
+  ```sh
+  git -C "$B" checkout -- . && git -C "$B" clean -fd src R     # then put the fix back
+  git -C "$B" commit -m 'tmp: fix generation' -- <the fix>
+  VENDOR_REPO=$B scripts/vendor-one.sh --commits 1 "$U"
+  { git -C "$B" log -1 --format=%B; printf '\nR-side fix:\n\n%s\n' '<what was adapted, and why>'; } > "$B.msg"
+  git -C "$B" reset --soft HEAD~2 && git -C "$B" commit -q -F "$B.msg"
+  ```
+
 * A vendored tree broken by upstream itself is vendored on and folded into the next commit that repairs it (stage 2's fold rule).
-* Push `<S>-build` unconditionally; red never blocks the buffer.
+* Push `main-build` unconditionally; red never blocks the buffer.
 
 Reference: [`references/1-vendor.md`](references/1-vendor.md).
 
-### 2. Repair the oldest `<S>-dev` failure
+### 2. Repair the oldest `main-dev` failure
 
-Every commit in `<S>-green..<S>-dev` was decided by an `each-rcc` leg, and that range is the loop's whole world.
+Every commit in `main-green..main-dev` is decided by an `each-rcc` leg, and that range is the loop's whole world.
 
 * **Read the results from the runs that produced them**:
-  the `each-rcc` runs on `<S>-dev` and `retry-<S>-dev`, their `each-logs-<shard>-<attempt>` artifacts (14 days),
+  the `each-rcc` runs on `main-dev` and `retry-main-dev`, their `each-logs-<shard>-<attempt>` artifacts (14 days),
   or the leg's job log after that; the higher run id wins.
   A leg exits 0 with red commits in it, so read every shard job, not the failed ones.
   Where a run cannot be read, the `rcc2` store holds the same bytes;
   `series-check.sh` reads only the store, and where it and a run disagree, the run is right.
 * **A commit with no verdict has not been judged: wait, do not guess.**
   The run list says which kind of waiting it is.
-  After **12 hours** with the run that should have decided it finished and silent, push `retry-<S>-dev` at it (below).
+  After **12 hours** with the run that should have decided it finished and silent, push `retry-main-dev` at it (below).
   Never amend a commit that has a record.
 * **Classify each `failure` by what the commit's log contains:**
 
   | evidence | meaning | action |
   |---|---|---|
-  | `Updating snapshots: '…'` | engine output drifted, or a flavor-dependent snapshot | fold the corrected files from `snapshot-<sha>-rcc-smoke-null` |
-  | `Error ('test-….R:N:M')` | real test failure | fix test/R code at origin |
-  | the cause is in `src/duckdb/` itself and the next upstream commit fixes it | upstream was transiently broken | fold the pair into one; if the next one is red too, forward-port |
-  | `Changes detected in workflow_dispatch build` | style / roxygen drift | fix formatting at origin |
-  | `Error: R CMD check found WARNINGs` / `ERRORs`, with the `❯ checking …` headers above it naming which checks | `R CMD check --as-cran` is unhappy about the tree, or about the environment CI built it in | read the named checks; fix at origin, or on `main` when the cause is the job's own setup |
-  | a gate reached out and was refused — `cannot open URL`, `SSL connect error`, a refused or reset connection — while the tests themselves passed | infra, not the tree | rerun the commit: `retry-<S>-dev` |
-  | the leg's record names a failed stage (`"failed_stages":["install"]`) and no rule above matched | the stage failed on its merits — most often an `install` that a glue call site this series' engine no longer offers stopped | fix the glue at origin; never a rerun |
-  | none of the above, no test phase, and no failed stage in the record | cancelled or infra | rerun the commit: `retry-<S>-dev` |
+  | `Updating snapshots: '…'` | output drifted with the engine, or a flavor-dependent snapshot | review and fold the corrected files from `snapshot-<sha>-rcc-smoke-null` |
+  | `Error ('test-….R:N:M')` | a real test failure | fix at the offending commit, by the rules below |
+  | the cause is in `src/vendor/` and the next upstream commit fixes it | upstream was transiently broken | fold the pair into one; if the next is red too, a `patch/` entry |
+  | `Changes detected in workflow_dispatch build` | style or roxygen drift | `air format .`, `devtools::document()`, fold at the offending commit |
+  | the record's failed stage is `regen` | the generated R/C interface or cpp11 registration does not reproduce | regenerate, fixing `tools/stimulus/` where needed, and fold |
+  | `Error: R CMD check found WARNINGs` / `ERRORs`, with `❯ checking …` headers naming the checks | `R CMD check --as-cran` is unhappy with the tree, or with the environment CI built it in | read the named checks; fix at the offending commit, or on `main` when the cause is the job's own setup |
+  | killed at the shard budget, or a stage "exceeded its … budget" | the gate did not finish | repair; a rerun buys the same kill |
+  | a gate reached out and was refused (`cannot open URL`, `SSL connect error`, a refused or reset connection) while the tests passed | infrastructure, not the tree | rerun the commit: `retry-main-dev` |
+  | the record names another failed stage (`"failed_stages":["install"]`) and no rule above matched | the stage failed on its merits, most often an `install` the glue or a link stopped | fix at the offending commit; never a rerun |
+  | none of the above, no test phase, and no failed stage in the record | cancelled or infrastructure | rerun the commit: `retry-main-dev` |
 
-  Never classify by absence of a marker.
-* **Repair the oldest failure first.**
-  Write the fix as a commit on the offending commit and let
-  [`scripts/series-fold.sh`](/scripts/series-fold.sh) fold it and replay the tail, then force-push `<S>-dev`.
+  Never classify by the absence of a marker.
+* **Repair the oldest failure first, and fold the fix into the vendor commit that needs it**, never appended,
+  with an `R-side fix` section added to its message.
+  Write the fix as a commit on the offending commit and let `series-fold.sh` fold it and replay the tail:
+
+  ```sh
+  W=$(cd .. && pwd)/repair
+  git worktree add --detach "$W" <offending commit>
+  # write the fix in $W, then
+  git -C "$W" commit -q -m '<what was adapted>' -- <the fix>
+  (cd "$W" && scripts/series-fold.sh origin/main-dev --fold <offending commit>=HEAD:'R-side fix: <what was adapted, and why>')
+  # build and check the repaired commit locally before this push (below)
+  git -C "$W" push --force-with-lease=refs/heads/main-dev:$(git rev-parse origin/main-dev) origin HEAD:refs/heads/main-dev
+  ```
+
   Build and check locally first with `scripts/rcc-one.sh` after `git clean -fdx -- src/`;
   only a reviewed snapshot fold whose diff matches the upstream change goes straight to CI.
-* **A test the engine cannot pass yet is gated, never deleted or rewritten**:
-  `skip_if_engine_before("<version>", "<why>")` at the top of the `test_that()` body, folded like any repair,
-  and taken out in the same pass where the series already holds that version.
+  A fix the buffer needs to compile is mirrored onto `main-build` too, in the commit for the same upstream SHA.
+* **Adapt the R side by the maintainer's rules:**
+  * Wrap new C behaviour without changing the R interface.
+  * Put new arguments behind `...`, checked with `check_dots_empty()`.
+  * Guard fallbacks for old behaviour with `lifecycle::signal_stage("superseded")`.
+  * In any function you touch, replace `.Call()` outside `aaa-*.R` with `_impl()` calls, adapting the Stimulus definitions where needed.
+  * The `aaa-*.R` files are always autogenerated, never changed manually.
+    For genuine igraph problems, prefer `patch/` and Stimulus over handwritten workarounds.
+  * Change tests only as a last resort, with a comment saying why.
+* **Fix at the first level that resolves the failure, in this order:**
+  1. `patch/`, for C-level breakage;
+  2. the Stimulus definitions, `tools/stimulus/*.yaml`, then regenerate;
+  3. R code;
+  4. snapshots, only after confirming the new output is correct;
+  5. tests, as a last resort, with a comment `# upstream igraph@<short-sha>: <reason>`.
+* **A series never stops a test `main` runs.**
+  Where an older engine cannot pass a test, gate it with `skip_if_engine_before("<version>", "<why>")`
+  ([`tests/testthat/helper-skip.R`](/tests/testthat/helper-skip.R)) at the top of the `test_that()` body, folded like any repair,
+  and take the gate out in the same pass where the series already holds that version.
+  Never delete, rewrite or skip a test without a version to end the skip.
   A `TESTS` line from `series-check.sh` is this stage's work too.
 * **A transiently broken upstream commit is folded into the next one** when that one fixes it, the newer subject kept;
-  forward-port into `patch/00NN-*.patch` only when the next commit is red too
-  ([`vendoring/troubleshooting/`](/handbook/operations/vendoring/troubleshooting/README.md)).
-* **On a forward series, mine the base before deriving anything**:
-  a commit carrying a `Carried from` trailer already has the base's fix, so a red there is something else;
-  `scripts/series-learned.sh <S>` and `scripts/series-glue.sh <S>` are the reads, whole set before any one carry.
+  a `patch/` entry only when the next commit is red too.
 * **Snapshot drift**: fetch `snapshot-<sha>-rcc-smoke-null`, review the diff as a code review, fold;
   a deleted snapshot file is a test that stopped running.
+* **A red on a flavor commit is the rename's**: fix the flavor tooling on `main`, and fold the same change into the flavor commit.
 
 Reference: [`references/2-repair.md`](references/2-repair.md).
 
 ### 3. Advance the frontier, and read what r-universe made of the last one
 
 ```sh
-scripts/series-advance.sh <S>            # stages 3 and 5 together
-scripts/r-universe-check.sh              # every package, per target, reds only
-scripts/r-universe-check.sh --log <id>   # the log behind one of them
+scripts/series-advance.sh main            # stages 3 and 5 together
+scripts/r-universe-check.sh               # every package, per target, reds only
+scripts/r-universe-check.sh --log <id>    # the log behind one of them
 ```
 
-* Fast-forward `<S>-green` to the newest `<S>-dev` commit with every commit behind it `success`;
+* Fast-forward `main-green` over the commits whose `rcc2` record is `success`, and no further than the first that is not;
   **if it cannot fast-forward, something rewrote verified history: stop and say so.**
-* Mirror every series' green into the canonical repository, the forward's too, with a plain push;
+* Mirror `main-green` into `igraph/rigraph` with a plain push, on every run;
   **scream on a refusal, never force it**.
-* Set `<S>-build-base` to the `<S>-build` commit with the same vendored SHA, force-pushing where that is not a fast-forward;
+* Set `main-build-base` to the `main-build` commit with the same vendored SHA, force-pushing where that is not a fast-forward;
   it is a marker, recomputed every stage 3, and a ref found off the buffer's line is set and moved on from.
-* Read what r-universe made of the **previous** green on the platforms the gate never covers.
+* Read what r-universe made of the **previous** green, on the platforms the gate never covers.
   **Never undo a push to green.**
-  A platform DuckDB publishes no extensions for is not a finding ([`usage/extensions/`](/handbook/usage/extensions/README.md)).
-  State every other finding in the message of the `-dev` commit that carries the fix, or of the next one minted:
+  State every finding in the message of the `-dev` commit that carries the fix, or of the next one minted:
 
   ```sh
-  scripts/series-advance.sh <S> --dev-note <file>    # when stage 5 mints
-  scripts/series-port.sh <S> --apply --dev-note <file>   # when only stage 4 does
+  scripts/series-advance.sh main --dev-note <file>        # when stage 5 mints
+  scripts/series-port.sh main --apply --dev-note <file>   # when only stage 4 does
   ```
 
-* What a fix may be is the handbook's rule ([`architecture/glue/conventions/`](/handbook/architecture/glue/conventions/README.md)):
-  a `patch/` entry is a prototype of an upstream change, a fix must cost Linux nothing and say which flags reproduced it,
-  it belongs where its code lives (not always `main`), and it has to reach the buffer too.
+* A `patch/` entry is a prototype of an upstream change, sent to `igraph/igraph`;
+  a fix must cost Linux nothing and say which flags reproduced it;
+  it belongs where its code lives, which is not always `main`; and it has to reach the buffer too.
   `series-port.sh --apply` carries entries onto the buffer by test-applying; `series-check.sh`'s `PATCH DRIFT` line is the backstop.
 
 Reference: [`references/3-advance.md`](references/3-advance.md).
@@ -232,229 +300,146 @@ Reference: [`references/3-advance.md`](references/3-advance.md).
 ### 4. Port from `main`
 
 The goal is identity, not curation:
-after this stage, `.github/`, `scripts/` and `.claude/` on `<S>-dev` are byte-identical to `main`'s,
-and `<S>-build`'s tooling is synced in the same run.
+after this stage `.github/`, `scripts/` and `.claude/` on `main-dev` are byte-identical to `main`'s,
+and `main-build`'s tooling is synced in the same run.
 
 ```sh
-scripts/series-port.sh <S>                  # list candidates + identity check
-scripts/series-port.sh <S> --apply          # cherry-pick all, sync, push
-scripts/series-port.sh <S> --apply <sha>…   # a chosen subset instead
-scripts/series-port.sh <S> --list           # walk a frozen series anyway
+scripts/series-port.sh main                  # list candidates and the identity check
+scripts/series-port.sh main --apply          # cherry-pick all, sync, carry patches, push
+scripts/series-port.sh main --apply <sha>…   # a chosen subset instead
 ```
 
-* Commits are classified TOOLING / MIXED / OTHER / VENDOR / VERSION;
-  all but VENDOR and VERSION are picked by default, whole, never split.
-* A frozen series (seeded from a release branch, or parked) takes the tooling sync alone by default;
-  what its build needs is ported by SHA.
-* A conflict stops the sequence in the kept worktree: resolve toward `main`'s intent, keeping the series' flavor where the two meet,
+* Commits are classified TOOLING / MIXED / OTHER / VENDOR / VERSION; all but VENDOR and VERSION are picked by default, whole, never split.
+* A conflict stops the sequence in the kept worktree: resolve toward `main`'s intent, keeping the flavor where the two meet,
   `cherry-pick --continue`, push, rerun.
+  Generated files are regenerated, never merged ([`references/traps.md`](references/traps.md)).
   An OTHER commit that cannot work against this engine is fixed on `main` and ported fixed.
-* A live forward counterpart is ported the same way, every firing.
 * Read the diff of any sync commit that appears: what it reverts that the series needs is a finding for `main`.
 
 Reference: [`references/4-port.md`](references/4-port.md).
 
-### 5. Extend `<S>-dev`
+### 5. Extend `main-dev`
 
-`series-advance.sh <S>` (above) appends the next ≤ 100 commits from `<S>-build`, restamps the fifth component, and pushes.
+`series-advance.sh main` (above) appends the next ≤ 100 commits from `main-build`, restamps the fifth component, and pushes.
 
-* **Extend on pending, never on red**: a reported `failure` in `<S>-green..<S>-dev` stops the stage until stage 2 has folded its fix.
-* A live forward counterpart is not an exception: the base keeps consuming, so the two `-dev` branches stay comparable at the frontier.
-* On a forward, each consumed buffer commit takes the base twin's fix by vendored SHA, with a `Carried from` trailer, and nothing twice;
-  **a carry never stops a test the forward runs**, and names the kept path under `Not carried`.
-* A conflicting carry, or a carry that leaves the glue uncompilable, **stops the stage with the worktree kept**:
+* **Extend on pending, never on red**: a reported `failure` in `main-green..main-dev` stops the stage until stage 2 has folded its fix.
+* A conflicting replay **stops the stage with the worktree kept**:
 
   ```sh
-  cd <the worktree it names>          # resolve, then git add
-  scripts/series-advance.sh <S> --continue     # or --abort to discard
+  cd <the worktree it names>                     # resolve, then git add
+  scripts/series-advance.sh main --continue     # or --abort to discard
   ```
 
   A resolution that comes out empty is a resolution; `--continue` drops the pick.
-* Then realign the derived strands, rc first and alpha after, on every firing that wrote `<S>-dev`:
+* Then, once `main-rc-dev` exists, realign it on every firing that wrote `main-dev`;
+  its reds are repaired on `main-dev`, never on the strand:
 
   ```sh
-  scripts/series-rc.sh <S> --push
-  scripts/series-alpha.sh <S> --push
+  scripts/series-rc.sh main --push
   ```
-
-  Their reds are repaired on `<S>`, never on the strand.
 
 Reference: [`references/5-extend.md`](references/5-extend.md).
 
-### 6. Read the forwarding, and suggest a cutover — never perform one
+### 6. Read the forwarding: not ported
 
-```sh
-scripts/series-converge.sh <S>
-```
+rigraph has no forward series, so there is nothing to read and no cutover to suggest;
+`series-check.sh` prints a `CUTOVER` line only beside an `-fwd` series, and none exists.
 
-* Every series with a forward counterpart is read, caught up or not;
-  a finding goes to the stage that should have moved it (a carry to 5, a port to 4, a one-sided fold to 2) and into the report.
-* **A caught-up forward is reported, not swapped.**
-  When `series-check.sh` prints a `CUTOVER` line, the firing carries this block into its summary whole,
-  with `<S>` and the paths substituted, on every firing the condition holds:
+### 7. Open a pull request for whatever the tooling got wrong
 
-  ```sh
-  # Tooling from `main`, refs and tags from everywhere.
-  git fetch --prune --tags --all
-  git switch main && git merge --ff-only @{u}
-  git -C ../../../duckdb fetch --prune --tags origin
+A firing that had to work around a bug in the tooling owes `igraph/rigraph`'s `main` a pull request before it ends.
 
-  # Both halves of the question, before anything moves.
-  scripts/series-check.sh <S> <S>-fwd --upstream ../../../duckdb
-  scripts/series-converge.sh <S>
-
-  # The gates, the convergence report, the review diff and the plan, with
-  # nothing moved: read it, then decide.
-  scripts/series-cutover.sh <S> --remote origin --upstream ../../../duckdb --prepare --out <dir>
-
-  # The swap. It asks for the series name, archives each replaced lineage as
-  # the head of a closed pull request, swaps the four refs, and moves the copy
-  # of green that r-universe publishes from -- name that remote with
-  # --canonical where it is not `upstream`, or the copy keeps serving the
-  # pre-cutover lineage -- then deletes the forward's refs in both repositories.
-  scripts/series-cutover.sh <S> --remote origin --upstream ../../../duckdb
-
-  # A retired lineage moves the badge table, and the mirror rules with it.
-  scripts/pull-config.sh --check
-  ```
-
-* The routine does not run the script and does not swap the refs by another route;
-  the script refuses to swap without a terminal, and that refusal is the answer.
-
-Reference: [`references/6-forwarding.md`](references/6-forwarding.md).
-
-### 7. Open a PR for whatever the tooling got wrong
-
-A firing that had to work around a bug in the tooling owes `main` a PR before it ends.
-
-* If an open PR already covers the cause, add this firing's evidence to it; never merge one yourself.
-* Work around by hand first, finish the firing, then write the PR; a workaround that cannot be done by hand is a finding, and the firing stops.
-* One PR per cause, small, against `main`, with the run, the commit and the log line as evidence.
-* Not a tooling PR: anything the *same firing done again* would not hit, such as a red vendored tree, a settled flake, a drifted snapshot.
+* If an open pull request already covers the cause, add this firing's evidence to it; never merge one yourself.
+* Work around by hand first, finish the firing, then write the pull request;
+  a workaround that cannot be done by hand is a finding, and the firing stops.
+* One pull request per cause, small, against `main`, with the run, the commit and the log line as evidence.
+* Not a tooling pull request: anything the *same firing done again* would not hit,
+  such as a red vendored tree, a settled flake, a drifted snapshot.
 
 Reference: [`references/7-tooling-prs.md`](references/7-tooling-prs.md).
 
 ## What a firing reports
 
-* `series-check.sh`'s `UNSERVED` block, verbatim and last, from a run with `--upstream <upstream-clone>`,
-  whenever the script prints one; it outranks a quiet pass and repeats until the refs exist.
-* The same line at the top, with the backlog `scripts/series-cut.sh <S> --upstream <clone> --check` prints,
-  and `main`'s wrong version (`scripts/preview-prefix.sh --check`), which is owed whatever is decided about the line.
-* The flavor's declaration PR against `scripts/series.yaml`, opened once after searching open and closed PRs for it;
-  cutting the refs stays `series-open/SKILL.md`'s and a human's.
-* A reading that failed, reported as one.
-* A `LATE TAG` line stage 1 did not clear: the buffer has vendored past the tag, and the release branch takes the re-stamp at CUT
-  ([`scripts/VENDORING.md`](/scripts/VENDORING.md#a-tag-upstream-pushed-late)); name the series, the tag and the commit.
-* A due cutover, above the `UNSERVED` block, as stage 6's block filled in.
+* Per series, `series-check.sh`'s verdict and what each stage did,
+  including where the buffer stands upstream: on the replay, at the seam, or past it.
 * Which source served the verdicts, and any record missing from the store and what it was for.
+* Anything left stopped: a vendor run's exit status with its banner, a kept worktree, an unresolved conflict.
+* What r-universe made of the previous green, and the `-dev` commit that records it.
+* The tooling pull requests opened or given evidence.
+* Once `main-green` vendors the seam, tag 1.0.1:
+  the first landing has become possible ([`series-land`](/.claude/skills/series-land/SKILL.md)).
+* A `LATE TAG` line that stage 1 did not clear.
+* A reading that failed, reported as one.
 
 Reference: [`references/report.md`](references/report.md).
 
-## Rerun one commit: `retry-<S>-dev`
+## Rerun one commit: `retry-main-dev`
 
 A run that failed for reasons the commit had no part in is judged again, beside the series, without rewriting anything:
 
 ```sh
-git push --force-with-lease origin \
-  "<the failing commit>:refs/heads/retry-<S>-dev"
+git push --force-with-lease origin "<the failing commit>:refs/heads/retry-main-dev"
 ```
 
-* The tip is replanned in spite of its verdict; the rest of `<S>-green..tip` keeps the ordinary rule.
-  A retry branch naming a series with no green plans nothing.
-* **The branch is the ledger**: `retry-<S>-dev` already on this commit means it has had its one rerun and failed again,
-  which is REPAIR, never RETRY; pointing elsewhere, force-update it and rerun.
+* The tip is replanned in spite of its verdict; the rest of `main-green..tip` keeps the ordinary rule.
+* **The branch is the ledger**: `retry-main-dev` already on this commit, with the rerun reported,
+  means it has had its one rerun and failed again, which is REPAIR, never RETRY;
+  pointing elsewhere, force-update it and rerun.
 * The verdict reaches the loop from the rerun's own run, which carries the higher run id.
-* A verdict the job decided rather than the tree is dropped, `scripts/rcc-drop.sh <sha>...`, so the commit is planned again;
-  never run `rcc-logs.sh` behind a drop.
-* A series whose commits predate `each.yaml` retries by hand: dispatch `each-rcc` on `retry-<S>-dev` with `force=true` and `max-commits=1`.
+* A verdict the job decided rather than the tree is dropped from `rcc2`, so the next run plans the commit again;
+  the script for it is not ported, so a drop is a hand-made commit on `rcc2`, done only for that cause.
+* A commit whose tree predates `each.yaml` retries by hand: dispatch `each-rcc` on `retry-main-dev` with `force=true` and `max-commits=1`.
 
 Reference: [`references/retry.md`](references/retry.md).
 
 ## Commit-message contract
 
 - `-build`: the vendor message as `vendor-one.sh` writes it,
-  plus an `R-side fix` section when the glue was adapted in that commit,
-  or a transient `patch/` entry was folded in to repair the tree.
-- `-dev`: the same message,
-  extended with any test / R code / patch adaptations
-  folded in during repair.
+  plus an `R-side fix` section when the glue, `tools/stimulus/` or `patch/` was adapted in that commit.
+- `-dev`: the same message, extended with every R-side fix folded in during repair,
+  each naming the upstream change and what was adapted, and with any r-universe finding stage 3 recorded.
+- A folded transient pair keeps the newer subject and names the folded SHA and subject in the body.
+- A test changed as a last resort carries `# upstream igraph@<short-sha>: <reason>` in the test itself.
 
 ## Traps, all paid for once already
 
-Read [`references/traps.md`](references/traps.md) before a local build, a replay or a port that conflicts.
+Read [`references/traps.md`](references/traps.md) before a vendor run, a local build, a replay or a port that conflicts.
 Its entries:
+relative paths resolve against the buffer worktree;
+a remote-tracking or tagless replay is invisible to the vendor run;
 clean every build product between local builds;
-clang-format must be clean;
+the style gate must be clean;
 never `git reset --hard` while HEAD is on a branch you keep;
 restore whole directories, not touched files;
-every buffer still keeps cpp11 where it kept it before #2649, so `src/Makevars` conflicts on every replayed pick;
-a `.dd` file naming a header the flavor renamed stops the build before the first compile;
-`src/cpp11.cpp` conflicts on every port that adds an entry point, and is regenerated rather than merged.
+generated files conflict on ports and are regenerated rather than merged.
 
 ## Invariants
 
-- `<S>-green` moves forward only.
-  `<S>-build-base` does not: it is a marker with no consumer,
-  recomputed from the vendored-SHA match every stage 3,
-  and set — force-pushed where it has to be — rather than advanced.
-- Cutover is manual.
-  The loop reports that a forward series has caught up
-  and prints the command; it never runs it,
-  and never swaps the refs by another route.
-  The script archives what it replaces before it swaps, and deletes the forward's refs afterwards;
-  what a refused deletion leaves is cutover litter, which `scripts/series-prune.sh` lists for a human.
+- `main-green` moves forward only.
+  `main-build-base` does not: it is a marker with no consumer,
+  recomputed from the vendored-SHA match every stage 3, and set, force-pushed where it has to be, rather than advanced.
+- Opening a series and landing one are manual
+  ([`series-open`](/.claude/skills/series-open/SKILL.md), [`series-land`](/.claude/skills/series-land/SKILL.md)).
+  The loop reports when a landing becomes possible and never performs one.
   Every other ref move in this skill is the routine's to make.
-- Opening a series is manual too, and its trigger is upstream's branch cut.
-  The loop reports a release line no series covers,
-  at the end of every firing until the refs exist;
-  it creates none of them.
-- A base is advanced on completed, successful runs —
-  never on absence of a failure.
-- Fixes are folded into the commit that needs them,
-  never stacked on top:
-  every commit of `<S>-dev` must remain independently green
-  so the chain stays bisectable.
+- Green is advanced on completed, successful verdicts, never on the absence of a failure.
+- Fixes are folded into the commit that needs them, never stacked on top:
+  every commit of `main-dev` must remain independently green, so the chain stays bisectable.
 - **Every vendor commit raises the fifth version component.**
-  `DESCRIPTION:Version` must be strictly greater
-  than its parent's on every commit that vendors,
-  on `-build` and on `-dev` alike.
-  The counter is what orders the series —
-  r-universe installs by version,
-  and a run of commits sharing one version
-  is a run r-universe cannot tell apart.
+  `DESCRIPTION:Version` must be strictly greater than its parent's on every commit that vendors, on `-build` and on `-dev` alike.
+  The counter is what orders the series: r-universe installs by version, and cannot tell apart a run of commits sharing one.
   Gaps are fine; repeats are not.
-
-  A replay does not deliver it while `-dev` and `-build`
-  carry different `major.minor.patch` prefixes:
-  the merge driver's gate then keeps our side verbatim
-  and the counter freezes for the whole chain
-  ([`operations/releases/versioning/`](/handbook/operations/releases/versioning/README.md)).
-  `main` is in that state.
-  So after any replay, **restamp before pushing `-dev`**:
-  walk the new commits oldest first
-  and bump once per vendor commit from the parent's value.
-  [`scripts/series-advance.sh`](/scripts/series-advance.sh) does that
-  and then asserts it;
-  a replay done by hand is checked the same way,
-  because one that silently froze the counter
-  looks exactly like one that did not.
+  A replay does not deliver it while `-dev` and `-build` carry different `major.minor.patch` prefixes,
+  because the merge driver then keeps our side verbatim,
+  so after any replay **restamp before pushing `-dev`**: bump once per vendor commit, oldest first, from the parent's value.
+  `series-advance.sh` does that and then asserts it; a replay done by hand is checked the same way.
 - **Every ref move is git alone.**
-  Even a rerun is one pushed ref —
-  `retry-<S>-dev`, which asks for one commit to be judged again
-  without rewriting anything —
-  and `each.yaml` plans runs
-  for any commit in `<S>-green..tip` that has no verdict.
+  Even a rerun is one pushed ref, and `each.yaml` plans runs for any commit in `main-green..tip` that has no verdict.
   Nothing a firing *writes* needs an API.
 - **What a firing reads comes from the runs, and falls back to git.**
-  The `each-rcc` run that decided a commit is the source of its verdict
-  and its log; the `rcc2` store is a copy, reachable with git alone,
-  for a firing that cannot read the runs.
-  Neither source may be *required*: a firing that has only one of them
-  still finishes, and says in its report which one it had.
-  The fallback is an emergency route *for the firing*, and is not kept warm:
-  the sweep is `rcc-logs.sh` run by hand, never a workflow and never scheduled,
-  so a firing that needs the copy complete reports the gap
-  instead of waiting on one — it never blocks on one.
-  On the CI side the store is nobody's fallback:
-  selection reads it and only it,
-  which is why the leg's per-commit publish stays automatic.
+  The `each-rcc` run that decided a commit is the source of its verdict and its log;
+  the `rcc2` store is a copy reachable with git alone, for a firing that cannot read the runs.
+  Neither may be *required*: a firing that has only one of them still finishes, and says which it had.
+  The fallback is not kept warm, since the sweep is not ported,
+  so a firing that needs the copy complete reports the gap rather than waiting on one.
+  On the CI side the store is nobody's fallback: planning reads it and only it, which is why the leg's publish stays automatic.
