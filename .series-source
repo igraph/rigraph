@@ -98,7 +98,7 @@ ported:
   - path: .claude/skills/series-loop/references/0-setup.md
     blob: 85caf79824f073688a332ee0bd1dcdf34e804f69
   - path: .claude/skills/series-loop/references/1-vendor.md
-    blob: 37595fbef860c58c99b32e043b80a32375467ce9
+    blob: fa6cc2be6bd78669415818bdbbfc4251f4bcb848
   - path: .claude/skills/series-loop/references/2-repair.md
     blob: e2786cb54c55030521a8a1d2f9e9f71d60e73d4a
   - path: .claude/skills/series-loop/references/3-advance.md

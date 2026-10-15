@@ -136,8 +136,9 @@ It leaves the result detached in the current worktree, which must be clean, and 
 If other failures have a demonstrably different cause, they may be fixed in the same pass;
 otherwise let CI judge the tail again.
 
-A fix the buffer needs to compile, a `patch/` entry, glue, a `tools/stimulus/` change,
+A fix the buffer needs to compile, glue or a `tools/stimulus/` change,
 is mirrored onto `main-build` in the commit for the same upstream SHA,
+and a `patch/` entry onto `main-vendor` as a commit of its own, which stage 1 picks,
 because the next tree regenerated there wants it too ([`3-advance.md`](3-advance.md)).
 
 **The fix order** in the playbook is the earlier manual playbook's, unchanged in substance

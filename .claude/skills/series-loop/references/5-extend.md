@@ -27,7 +27,7 @@ and the anchor is about how much of the buffer has been consumed, which only ven
 
 The replay picks one commit at a time with `--empty=drop`,
 so a buffer commit whose content reached `-dev` by another route replays to nothing and is dropped:
-a `patch/` entry goes down both paths on purpose, the port carrying it onto `-dev` and the same fix committed onto `-build`.
+a `patch/` entry goes down both paths on purpose, the port carrying it onto `-dev` and the same fix picked onto `-build` from the strand.
 A buffer tooling sync is skipped, never picked (stage 4).
 
 **The counter is restamped.**

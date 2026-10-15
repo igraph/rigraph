@@ -101,7 +101,7 @@ The ones a firing runs or reads on every pass:
   advances `-green` over the verified prefix and then stops on a red above it, and refuses a `-green` that would not fast-forward;
 * [`scripts/r-universe-check.sh`](/scripts/r-universe-check.sh), read-only, stage 3;
 * [`scripts/series-port.sh`](/scripts/series-port.sh), stage 4: cherry-picks from `main`, a tooling sync on both refs,
-  and the `patch/` carry onto the buffer ([`scripts/series-patch-sync.sh`](/scripts/series-patch-sync.sh));
+  and the `patch/` carry onto the strand ([`scripts/series-patch-sync.sh`](/scripts/series-patch-sync.sh));
 * [`scripts/series-rc.sh`](/scripts/series-rc.sh), last, once `main-rc-dev` exists.
 
 ### 0. Setup
@@ -180,7 +180,7 @@ git -C "$V" push origin HEAD:refs/heads/main-vendor
   * **4** a `patch/` entry neither applies nor reverses: rebase it against the uncommitted tree, then the strand fold-in;
   * **5** the strand is off the clone HEAD's line: check out igraph/igraph's `main`, rerun;
   * **6** a shallow or untagged clone (fix it as above);
-  * **7** CMake, flex or bison failed: install what is missing, or add a `patch/` entry, then the strand fold-in.
+  * **7** `GENERATOR FAILED`, CMake, flex or bison: install what is missing, or for a grammar add a `patch/` entry, then the strand fold-in.
 * The strand fold-in puts the fix into the strand commit that needs it, before anything picks it,
   and writes the message with `-F`, never an editor:
 
@@ -192,13 +192,14 @@ git -C "$V" push origin HEAD:refs/heads/main-vendor
   git -C "$V" reset --soft HEAD~2 && git -C "$V" commit -q -F "$V.msg"
   ```
 
-* `series-vendor.sh`'s exit status is the stop rule for the buffer, the pick at HEAD of `$B`:
+* `series-vendor.sh`'s exit status is the stop rule for the buffer, the pick at HEAD of `$B` unless it says otherwise:
   * **0** every strand commit picked, or nothing to pick;
   * **1** refused, or a pick that conflicts: patch drift between the strand and the buffer;
   * **3** glue broken: fix the hand-written glue in `src/`, or `tools/stimulus/` and regenerate,
     never `src/vendor/` or a generated file by hand;
     amend into HEAD with an `R-side fix` section, rerun to finish the picks;
-  * **7** Stimulus or `cpp11::cpp_register()` failed on the pick: the fix is the buffer's, folded into the pick as the banner says;
+  * **7** `GENERATOR FAILED`, Stimulus or `cpp11::cpp_register()`: the pick is undone, and the fix is the buffer's,
+    committed and then folded into the pick that the rerun takes again above it (the reference's buffer fold-in);
   * **8** `./configure` failed and the glue check could not run (do not amend).
   The strand commit stays as it is: what the buffer fixes is the buffer's.
 * A `patch/` entry is the strand's: a fix to one amends the strand commit that needs it, before it is picked,
@@ -312,8 +313,8 @@ scripts/r-universe-check.sh --log <id>    # the log behind one of them
 * A `patch/` entry is a prototype of an upstream change, sent to `igraph/igraph`;
   a fix must cost Linux nothing and say which flags reproduced it;
   it belongs where its code lives, which is not always `main`; and it has to reach the strand too, which the buffer picks it from.
-  `series-port.sh --apply` carries entries onto the buffer by test-applying, not onto the strand,
-  so an entry it carries is committed onto `main-vendor` as well; `series-check.sh`'s `PATCH DRIFT` line is the backstop.
+  `series-port.sh --apply` carries entries onto the strand by test-applying, and stage 1's pick takes them to the buffer;
+  an entry the firing writes itself is committed onto `main-vendor` too; `series-check.sh`'s `PATCH DRIFT` line is the backstop.
 
 Reference: [`references/3-advance.md`](references/3-advance.md).
 

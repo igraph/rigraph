@@ -39,7 +39,7 @@ The other three carry their guarantees unchanged.
 
 **It lands on vendor commits only, so it lags.**
 The match is by vendored SHA, and a `-build` commit that vendors nothing carries none:
-a buffer tooling sync, a `patch/` entry committed onto the buffer.
+a buffer tooling sync, a `patch/` entry picked from the strand.
 So a buffer ending in such commits leaves `-build-base` below them even when green already has their content.
 Until the first vendor commit is verified, green vendors what `main` vendors,
 and the newest `main-build` commit naming that SHA is `main`'s own vendor commit, below the seed:
@@ -127,33 +127,34 @@ and lands there as `vendor-one.sh`'s `PATCH BROKEN` exit on `main`'s next vendor
 Check that the code exists on `main` before routing a fix through it;
 where it does not, the fix belongs on `main-dev` and `main-build`, and reaches `main` with a landing.
 
-**A `patch/` entry has to reach the buffer too.**
-`vendor-one.sh` applies the **buffer's** `patch/*.patch` to every tree it regenerates,
-so a patch that only ever landed on `-dev` is absent the next time the buffer vendors,
+**A `patch/` entry has to reach the strand too.**
+`vendor-one.sh --strand` applies the **strand's** `patch/*.patch` to every tree it regenerates, and the buffer picks from the strand,
+so a patch that only ever landed on `-dev` is absent the next time the series vendors,
 and the commit that reaches `-dev` from it arrives broken again.
-Commit an entry the firing writes onto `main-build` as well, in the same firing.
+Commit an entry the firing writes onto `main-vendor` as well, in the same firing; stage 1 picks it onto `main-build`.
 
 ## The carry of `patch/` entries
 
 An entry born as a pull request against `main` reaches `-dev` by stage 4's port, which brings whole commits, `patch/` files included,
-and reaches no buffer that way, because the buffer takes no ports.
+and reaches neither the strand nor the buffer that way, because neither takes ports.
 The drift is quiet while upstream leaves the patched file alone and bites the first time upstream touches it,
 when the fix is reverted on `-dev` by a commit that looks like an ordinary vendor.
 `scripts/series-port.sh --apply` closes that as part of porting,
 through [`scripts/series-patch-sync.sh`](/scripts/series-patch-sync.sh), which is a read-only report on its own.
+It carries onto `main-vendor`, or onto `main-build` on a series with no strand yet, and stage 1's next pick takes it to the buffer.
 
 **The carry decides by test-applying, never by the file list.**
-The buffer runs ahead of `main`, so an entry `main` needs may not fit the engine the buffer has vendored.
+The strand runs ahead of `main`, so an entry `main` needs may not fit the engine it has vendored.
 Three answers, three situations:
 *carry* applies cleanly and is taken with its effect on the tree;
 *satisfied* reverse-applies, so only the entry is taken, to keep the two stacks named alike;
-*stale* is neither, and it reaches the buffer if and when the code it answers does.
+*stale* is neither, and it reaches the strand if and when the code it answers does.
 Two shapes are reported and never carried, because both are judgement:
-a **supersession**, a candidate touching the files of an entry the buffer has and `-dev` lacks,
+a **supersession**, a candidate touching the files of an entry the strand has and `-dev` lacks,
 where applying both breaks the next vendor run;
 and an entry both stacks carry in different versions, **edited**, which test-applying cannot judge.
 
 `scripts/series-check.sh` prints a `PATCH DRIFT` line per series naming what the two stacks still differ by:
 an entry only `-dev` has, one only `-build` has (a renamed entry is one of each), and one both have in different versions.
-It is the backstop, not the mechanism:
+It is the backstop, not the mechanism, and shows a carry until stage 1 has picked it:
 what it reports after a port is what the carry deliberately declined, a repair for this stage like any patch it writes.

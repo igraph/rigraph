@@ -78,4 +78,4 @@ does not apply to `main`, which is seeded from `main` and declares `releases_fro
 
 Ported and sync commits are ordinary `-dev` commits:
 green per commit like everything else, vendoring nothing, so the consumption anchor of stage 5 does not see them.
-`series-port.sh --apply` ends by carrying `patch/` entries onto the buffer ([`3-advance.md`](3-advance.md)).
+`series-port.sh --apply` ends by carrying `patch/` entries onto the strand ([`3-advance.md`](3-advance.md)).

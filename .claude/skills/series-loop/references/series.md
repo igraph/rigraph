@@ -46,7 +46,7 @@ so nothing changes by hand when the seam is crossed.
 
 None of it is edited by hand.
 The strand commit, `vendor-one.sh --strand` on `main-vendor`, is written from the upstream tree and `patch/` alone
-(`series_generate()` in [`scripts/series-config.sh`](/scripts/series-config.sh)),
+(`series_generate_tree()`, the patch stack and `series_generate_derived()` in [`scripts/series-config.sh`](/scripts/series-config.sh)),
 and carries the vendor paths and nothing else (`series_vendor_paths`):
 
 - `src/vendor/cigraph/`, a keep-list of the upstream tree (`series_keep`), with `patch/*.patch` applied;

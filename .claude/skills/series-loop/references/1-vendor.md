@@ -12,7 +12,10 @@ twins being commits with the same vendor paths blob for blob,
 and on the buffer regenerates what reads `tools/stimulus/` and the glue (`series_regenerate()`):
 the R/C interface Stimulus generates, the source lists, the cpp11 registration and the dependency lists.
 It stamps the fifth component of a vendor commit and runs the glue gate.
-The generator is told which of the two it writes (`series_generate()`), because a failure in the R-side half is the buffer's to fix:
+The generator comes in two halves with the patch stack applied between them:
+`series_generate_tree()` writes the kept tree and the version header from the upstream clone,
+and `series_generate_derived()` what the patched tree generates.
+The second is told which of the two it writes, because a failure in the R-side half is the buffer's to fix:
 a strand run never starts Stimulus, so it needs neither R nor Python.
 
 **The clone's HEAD picks the line past the seam**, so check it out first.
@@ -80,12 +83,12 @@ so what it commits is the version header alone, and the landing's own checks jud
 ## The stops, and their exit status
 
 `vendor-one.sh --strand` vendors and stops; it runs no glue gate, because the strand carries no glue.
-Its stops are the strand's, with the upstream clone kept:
+Its stops are the strand's:
 
 - **4, a patch broken.**
   A `patch/*.patch` neither applies forward nor reverses on the regenerated tree:
   the code it patches moved.
-  The regenerated sources are in the working tree, uncommitted.
+  The regenerated tree is in the working tree, uncommitted, and the upstream clone is kept.
   Rebase the patch against them, keeping the rebased patch outside the tree, then the strand fold-in below.
   Delete it only after confirming its effect is genuinely upstream, however upstream reached it, not its diff;
   a deletion rides in the strand commit too, as `git rm` in the first step.
@@ -93,9 +96,10 @@ Its stops are the strand's, with the upstream clone kept:
   and the retirement rides on the strand commit, so the pick carries it to the buffer.
 - **5, the wrong upstream line**: above.
 - **6, a shallow or untagged clone**, refused before anything is vendored: fetch as stage 0 says.
-- **7, the strand could not be generated.**
-  CMake, flex or bison failed on the regenerated tree, which is left uncommitted.
-  Install what is missing; a change upstream they cannot take needs a `patch/` entry, then the strand fold-in.
+- **7, the strand could not be generated** (`GENERATOR FAILED`).
+  CMake failed on the upstream clone, before the patch stack, or flex or bison on the patched tree;
+  what was regenerated is left uncommitted.
+  Install what is missing; a grammar flex or bison cannot take needs a `patch/` entry, then the strand fold-in.
 - **1** is an error, most often a clone without the replay (stage 0) or a worktree that was not clean.
 
 `series-vendor.sh` picks, regenerates, stamps and gates, and stops with the pick at HEAD of the buffer worktree.
@@ -113,8 +117,8 @@ Its stops are the buffer's, and the strand commit stays as it is:
   Format what you touched (`air format .` for R), `git -C "$B" add -A && git -C "$B" commit --amend`,
   appending an `R-side fix` section naming the upstream change and what was adapted,
   and rerun the script to finish the picks.
-- **7, the R/C interface could not be generated.**
-  Stimulus or `cpp11::cpp_register()` failed on the pick, whose regenerated files are uncommitted and whose counter is not stamped.
+- **7, the R/C interface could not be generated** (`GENERATOR FAILED`).
+  Stimulus or `cpp11::cpp_register()` failed on the pick, and the script has undone it: the buffer stands where it did.
   Most often an interface changed upstream: adapt `tools/stimulus/*.yaml`, then the buffer fold-in below;
   a `patch/` entry is the strand's instead.
 - **8, the glue check could not run**, because `./configure` failed:
@@ -139,10 +143,10 @@ VENDOR_REPO=$V scripts/vendor-one.sh --strand --commits 1 "$U"
 git -C "$V" reset --soft HEAD~2 && git -C "$V" commit -q -F "$V.msg"
 ```
 
-The buffer's, for exit 7 of `series-vendor.sh`, drops the pick and picks it again above the fix:
+The buffer's, for exit 7 of `series-vendor.sh`, which has undone the pick, takes it again above the fix:
 
 ```sh
-git -C "$B" reset -q --hard HEAD~1 && git -C "$B" clean -fdq src R     # then put the fix back
+git -C "$B" clean -fdq src R     # what the failed run left untracked; then put the fix in
 git -C "$B" commit -m 'tmp: fix generation' -- <the fix>
 (cd "$B" && "$M"/scripts/series-vendor.sh main --count 1)
 { git -C "$B" log -1 --format=%B; printf '\nR-side fix:\n\n%s\n' '<what was adapted, and why>'; } > "$B.msg"
@@ -151,7 +155,8 @@ git -C "$B" reset --soft HEAD~2 && git -C "$B" commit -q -F "$B.msg"
 
 The temporary commit vendors nothing and leaves the vendor paths alone,
 so the vendored-SHA scan and the twin match both look past it.
-The banners print the same commands, run from the worktree.
+The banners print shorter forms of these, run from the worktree;
+the `git commit` that ends `PATCH BROKEN`'s opens an editor, which a routine cannot answer, so write the message with `-F` as above.
 
 ## What the buffer takes
 
