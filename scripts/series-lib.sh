@@ -132,6 +132,19 @@ series_vendor_key() { # <tree-ish> -> one hash
   series_vendor_entries "$1" | git hash-object --stdin
 }
 
+# Stage a strand commit: the vendor paths and nothing else, each only where
+# the index or the worktree has it, so `patch/` once its last entry retired is
+# skipped rather than refused as an unmatched pathspec (scripts/vendor-one.sh
+# --strand, scripts/series-patch-sync.sh). What the generator wrote beyond
+# them is the caller's to restore.
+series_stage_vendor_paths() {
+  local p
+  for p in "${series_vendor_paths[@]}"; do
+    git ls-files --error-unmatch -- "$p" >/dev/null 2>&1 || compgen -G "$p" >/dev/null || continue
+    git add -A -- "$p"
+  done
+}
+
 # The marker a subject carries, `<owner>/<repo>@<sha>` as the subject spells it,
 # for a message that names the commit: a history may carry more than one owner.
 series_marker_of() { # <subject> -> marker, empty when none

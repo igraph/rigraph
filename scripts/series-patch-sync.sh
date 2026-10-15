@@ -192,8 +192,11 @@ done
 
 # What is derived from the patched tree follows the carry on the strand, as it
 # follows a vendor run (scripts/series-config.sh).
-[ "$target" != vendor ] || (cd "$wt" && series_generate_derived strand)
-git -C "$wt" add -A
+if [ "$target" = vendor ]; then
+  (cd "$wt" && series_generate_derived strand && series_stage_vendor_paths && git checkout -q -- . && git clean -fdq)
+else
+  git -C "$wt" add -A
+fi
 git -C "$wt" commit -q -F - <<EOF
 fix(patch): Carry $((${#carried[@]} + ${#satisfied[@]})) entr$([ $((${#carried[@]} + ${#satisfied[@]})) -eq 1 ] && echo y || echo ies) from $S-dev onto $S-$target
 

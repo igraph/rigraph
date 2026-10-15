@@ -31,6 +31,8 @@ set -o pipefail
 here=$(cd "$(dirname "$0")" && pwd)
 # shellcheck source=vendor-lib.sh
 . "$here/vendor-lib.sh"
+# shellcheck source=series-lib.sh
+. "$here/series-lib.sh" # series_stage_vendor_paths
 
 cd "${VENDOR_REPO:-$here/..}"
 toplevel=$(git rev-parse --show-toplevel 2>/dev/null) || {
@@ -340,8 +342,8 @@ while [ $commits_vendored -lt $num_commits ]; do
         echo "script refuses to start on a dirty tree, so land it in three steps:"
         echo "  git checkout -- . && git clean -fd && git rm $f && git commit -m 'tmp: retire patch'"
         echo "  $0 ${strand_flag:+$strand_flag }--commits 1 <upstream>"
-        echo "  git reset --soft HEAD~2 && git commit -c HEAD@{1}   # keep the vendor message; add an"
-        echo "                                                     # 'R-side fix' section, or -F <file>"
+        echo "  git reset --soft HEAD~2 && git commit -C HEAD@{1}   # keep the vendor message, then"
+        echo "  git commit --amend -F <file>                         # the same plus an 'R-side fix' section"
         exit 4
       fi
     done
@@ -410,13 +412,8 @@ while [ $commits_vendored -lt $num_commits ]; do
 
   if [ "$strand" = true ]; then
     # The strand's paths and nothing else; what the generator wrote beyond them
-    # is restored after the commit (scripts/series-config.sh). A path in neither
-    # the tree nor the index, `patch/` once its last entry retired, is skipped
-    # rather than refused as an unmatched pathspec.
-    for p in "${series_vendor_paths[@]}"; do
-      git ls-files --error-unmatch -- "$p" >/dev/null 2>&1 || compgen -G "$p" >/dev/null || continue
-      git add -A -- "$p"
-    done
+    # is restored after the commit (scripts/series-config.sh).
+    series_stage_vendor_paths
   else
     git add .
   fi
