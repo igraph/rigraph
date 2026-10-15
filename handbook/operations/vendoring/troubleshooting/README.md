@@ -79,9 +79,8 @@ Once the buffer has vendored past it, neither strand can take the re-stamp, and 
 A vendor run applies the strand's `patch/` stack, not `main-dev`'s,
 so an entry that reached `main-dev` alone is absent the next time the strand vendors,
 and the commit that brings the code it patches arrives on `main-dev` with the fix reverted, looking like an ordinary vendor commit.
-The port stage carries entries onto the buffer by test-applying each against the buffer's tree,
-and an entry it carries is committed onto `main-vendor` as well, so that the next pick keeps it
-([`series-loop`](/.claude/skills/series-loop/SKILL.md), stage 3).
+The port stage carries entries onto `main-vendor`, test-applying each against the strand's tree and regenerating what the patched tree derives,
+and the next pick takes them to the buffer ([`series-loop`](/.claude/skills/series-loop/SKILL.md), stage 4).
 What the `PATCH DRIFT` line still names after a port is what the carry declined because it takes judgement
 ([`3-advance.md`](/.claude/skills/series-loop/references/3-advance.md#the-carry-of-patch-entries)):
 an entry that fits neither tree yet waits for the code it answers,
