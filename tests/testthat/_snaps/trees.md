@@ -6,6 +6,9 @@
       Warning:
       `subgraph.edges()` was deprecated in igraph 2.1.0.
       i Please use `subgraph_from_edges()` instead.
+      Warning:
+      The `eids` argument of `subgraph_from_edges()` is deprecated as of igraph 3.0.0.
+      i Please use the `edges` argument instead.
     Output
       IGRAPH U--- 13 11 -- 
       + attr: name_1 (g/c), name_2 (g/c), loops_1 (g/l), loops_2 (g/l)
