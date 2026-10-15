@@ -10,7 +10,8 @@ simplify(
   graph,
   remove.multiple = TRUE,
   remove.loops = TRUE,
-  edge.attr.comb = NULL
+  ...,
+  edge_attr_combine = NULL
 )
 
 is_simple(graph)
@@ -25,11 +26,13 @@ removed.}
 
 \item{remove.loops}{Logical, whether the loop edges are to be removed.}
 
-\item{edge.attr.comb}{Specifies what to do with edge attributes, if
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{edge_attr_combine}{Specifies what to do with edge attributes, if
 \code{remove.multiple=TRUE}. In this case many edges might be mapped to a
 single one in the new graph, and their attributes are combined. Please see
 \code{\link[=attribute.combination]{attribute.combination()}} for details on this. The default \code{NULL} uses
-the \code{edge.attr.comb} igraph option.}
+the \code{edge_attr_combine} igraph option.}
 }
 \value{
 a graph object with the loop and/or multiple edges removed; the
