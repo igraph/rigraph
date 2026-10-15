@@ -6,7 +6,7 @@ runs:
     - name: Use GLPK on macOS
       if: runner.os == 'macOS'
       run: |
-        echo -e 'CPPFLAGS = -I/opt/homebrew/include\nLDFLAGS = -L/opt/homebrew/lib' | tee ~/.R/Makevars
+        echo -e 'CPPFLAGS = -I/opt/homebrew/include\nLDFLAGS = -L/opt/homebrew/lib' | tee -a ~/.R/Makevars
       shell: bash
 
     # Regenerate the in-place ARG_HANDLE blocks from the registry files under
@@ -24,3 +24,64 @@ runs:
           exit 1
         fi
       shell: bash
+
+    # Guard for the flavor rename (scripts/flavor-package-name.R): fails when
+    # the package name is hard-coded where scripts/flavor.patch does not rewrite
+    # it, when a file the patch renames still carries the mainline name, when a
+    # README tells a reader to install the mainline package, when the patch no
+    # longer applies, or when the cpp11 binding lost the flavor's prefix.
+    # tests/testthat/test-flavor-package-name.R skips under R CMD check, which
+    # runs from a built tarball without the sources or scripts/, so the scan
+    # runs here, against the checkout.
+    # The answer is the same in every matrix entry, so it runs in the smoke
+    # test only.
+    - name: Check that the package name is hard-coded only where scripts/flavor.patch rewrites it
+      if: github.job == 'rcc-smoke'
+      run: |
+        source("scripts/flavor-package-name.R")
+        offenders <- flavor_package_name_offenders(".")
+        if (length(offenders) > 0) {
+          writeLines(offenders)
+          stop(
+            "The package name is hard-coded outside scripts/flavor.patch; ",
+            "see scripts/flavor-package-name.R for how to resolve this."
+          )
+        }
+        writeLines("No hard-coded package name outside scripts/flavor.patch.")
+        unflavored <- flavor_unflavored_paths(".")
+        if (length(unflavored) > 0) {
+          writeLines(unflavored)
+          stop(
+            "A file scripts/flavor.patch renames still carries the mainline ",
+            "name; see scripts/flavor-package-name.R for how to resolve this."
+          )
+        }
+        writeLines("No file left under the mainline name.")
+        readmes <- flavor_mainline_readme_offenders(".")
+        if (length(readmes) > 0) {
+          writeLines(readmes)
+          stop(
+            "A README still tells a reader to install the mainline ",
+            "package; see scripts/flavor-package-name.R for how to resolve this."
+          )
+        }
+        writeLines("No README pointing at the mainline package.")
+        failures <- flavor_patch_failures(".")
+        if (length(failures) > 0) {
+          writeLines(failures)
+          stop(
+            "scripts/flavor.patch no longer applies to the unflavored tree; ",
+            "regenerate the hunk named above against the current file."
+          )
+        }
+        writeLines("scripts/flavor.patch applies.")
+        binding <- flavor_binding_prefix_offenders(".")
+        if (length(binding) > 0) {
+          writeLines(binding)
+          stop(
+            "An entry point in R/cpp11.R does not carry this flavor's .Call() ",
+            "prefix; regenerate the binding with cpp11::cpp_register()."
+          )
+        }
+        writeLines("Both halves of the cpp11 binding carry this flavor's prefix.")
+      shell: Rscript {0}

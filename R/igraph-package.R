@@ -13,6 +13,7 @@ NULL
 #' we find it very useful. Please see the documentation in the
 #' `magrittr` package.
 #'
+#' @usage lhs \%>\% rhs
 #' @param lhs Left hand side of the pipe.
 #' @param rhs Right hand side of the pipe.
 #' @return Result of applying the right hand side to the

@@ -265,8 +265,6 @@ graphlet_proj <- function(
 ## Example code
 
 function() {
-  library(igraph)
-
   fitandplot <- function(g, gl) {
     g <- simplify(g)
     V(g)$color <- "white"
