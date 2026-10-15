@@ -411,7 +411,11 @@ while [ $commits_vendored -lt $num_commits ]; do
   if [ "$strand" = true ]; then
     # The strand's paths and nothing else; what the generator wrote beyond them
     # is restored after the commit (scripts/series-config.sh).
-    git add -A -- "${series_vendor_paths[@]}"
+    # rigraph: one at a time, skipping a path gone from the tree and the index
+    # alike, `patch` once its last entry has retired, which `git add` refuses.
+    for vp in "${series_vendor_paths[@]}"; do
+      if [ -e "$vp" ] || git ls-files --error-unmatch -- "$vp" >/dev/null 2>&1; then git add -A -- "$vp"; fi
+    done
   else
     git add .
   fi

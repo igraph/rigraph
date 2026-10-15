@@ -7,7 +7,8 @@
 # commit is written, along the two stretches of the line and across the seam
 # between them (scripts/series-config.sh), and about the vendor strand, where
 # `--strand` writes the vendoring alone and scripts/series-vendor.sh derives the
-# buffer from it. Twelve things are checked.
+# buffer from it, and about the generator failing on either. Thirteen things
+# are checked.
 #
 #   1. On the replay, the walk vendors the replay's next commit whatever the
 #      clone's HEAD says, names it krlmlr/igraph@, links krlmlr/igraph's pull
@@ -35,6 +36,10 @@
 #  12. series-vendor.sh picks the strand commits onto the buffer, regenerates
 #      what the buffer owns there (`series_regenerate()`), stamps the counter,
 #      and carries the retirement; a level buffer picks nothing.
+#  13. A generator that fails stops with exit 7 and commits nothing: on the
+#      strand in either phase, the tree (CMake) or what is derived from the
+#      patched tree, and on the buffer in the regeneration, whose pick is
+#      undone. A stack every entry of which has retired vendors on.
 #
 # Usage:
 #   scripts/vendor-one-test.sh
@@ -64,13 +69,15 @@ mkdir -p "$TMPDIR"
 # --- the stubs ---------------------------------------------------------------
 #
 # igraph's CMake, as far as vendoring reads it: the version header, from
-# `git describe --tags` in the source tree. R is only asked to register cpp11,
-# which has nothing to register here. Makefile-cigraph is the package's, below.
+# `git describe --tags` in the source tree, failing when FAIL_CMAKE is set.
+# R is only asked to register cpp11, which has nothing to register here.
+# Makefile-cigraph is the package's, below.
 
 STUBS=$SCRATCH/stubs
 mkdir -p "$STUBS"
 cat >"$STUBS/cmake" <<'EOF'
 #!/bin/bash
+[ -z "${FAIL_CMAKE:-}" ] || exit 1
 while [ $# -gt 0 ]; do
   case "$1" in -S) src=$2; shift 2 ;; -B) build=$2; shift 2 ;; *) shift ;; esac
 done
@@ -189,6 +196,7 @@ header() { git -C "$PKG" show "${1:-HEAD}:src/vendor/igraph_version.h" | sed -En
 changed() { git -C "$PKG" diff --name-only "$1" "$2" | tr '\n' ' ' | sed 's/ $//'; }
 clean() { [ -z "$(git -C "$PKG" status --porcelain)" ] && echo clean || echo dirty; }
 clean_in() { [ -z "$(git -C "$1" status --porcelain)" ] && echo clean || echo dirty; }
+subject_in() { git -C "$1" log -1 --format=%s; }
 
 # --- the replay (claims 1 and 2) ---------------------------------------------------
 
@@ -302,7 +310,8 @@ is "and nothing is vendored" "$(git -C "$PKG" rev-parse HEAD)" "$done_at"
 # A second package, as `main` is seeded: vendored at 0.10.17 with its one patch,
 # the seed's fifth component, and a Makefile-cigraph whose targets write from
 # the vendored tree what the real one writes. The strand's targets also leave a
-# file outside the vendor paths, which the run must restore.
+# file outside the vendor paths, which the run must restore; FAIL_DERIVED and
+# FAIL_REGENERATE fail the strand's and the buffer's.
 
 echo "the vendor strand"
 git -C "$UP" checkout -q --detach main
@@ -314,12 +323,14 @@ cd "$STRAND"
 git remote add origin "$REMOTE"
 echo '/igraph/' >.gitignore
 printf 'Package: igraph.dev\nVersion: 2.2.1.9003.0\n' >DESCRIPTION
+# shellcheck disable=SC2016  # make expands the recipes, not this shell
 printf '%s\n' '.PHONY: all patches src/vendor/igraph_threading.h src/rinterface.c r_wrappers src/sources.mk' \
   'all:' \
   'patches:' \
+  '	test -z "$(FAIL_DERIVED)"' \
   '	mkdir -p src/vendor/io && cat src/vendor/cigraph/src/*.c >src/vendor/io/parser.c && echo stray >src/stray.txt' \
   'src/vendor/igraph_threading.h:' '	cp src/vendor/cigraph/include/igraph.h $@' \
-  'src/rinterface.c:' '	cat src/vendor/cigraph/src/a.c >$@' \
+  'src/rinterface.c:' '	test -z "$(FAIL_REGENERATE)"' '	cat src/vendor/cigraph/src/a.c >$@' \
   'r_wrappers:' '	mkdir -p R && cat src/vendor/cigraph/src/a.c >R/aaa-auto.R' \
   'src/sources.mk:' '	ls src/vendor/cigraph/src >src/sources-igraph.mk' >Makefile-cigraph
 mkdir -p patch src/vendor/cigraph/src src/vendor/cigraph/include
@@ -378,6 +389,42 @@ is "each pick stamps the counter" \
 is "the retirement rides along" "$(git -C "$BUILD" ls-tree --name-only HEAD patch/)" ""
 pick
 has "a level buffer picks nothing" "$(cat "$SCRATCH/pick.log")" "nothing to pick"
+
+# --- the generator failing (claim 13) ---------------------------------------------------
+
+echo "the generator failing"
+strand_run() { # <name> [VAR=value...]: one strand commit
+  local name=$1
+  shift
+  set +e
+  env "$@" VENDOR_REPO="$STRAND" bash "$SCRIPTS/vendor-one.sh" --strand --commits 1 "$UP" 2>&1 | cat >"$SCRATCH/$name.log"
+  status=${PIPESTATUS[0]}
+  set -e
+}
+before=$(git -C "$STRAND" rev-parse HEAD)
+strand_run strand-cmake FAIL_CMAKE=1
+is "CMake failing on the tree stops the strand with exit 7" "$status" 7
+has "under the generator's banner" "$(cat "$SCRATCH/strand-cmake.log")" "GENERATOR FAILED regenerating the tree"
+is "and commits nothing" "$(git -C "$STRAND" rev-parse HEAD)" "$before"
+git -C "$STRAND" checkout -q -- .
+strand_run strand-derived FAIL_DERIVED=1
+is "the derived phase failing stops it with exit 7" "$status" 7
+has "under the generator's banner" "$(cat "$SCRATCH/strand-derived.log")" "GENERATOR FAILED deriving from the patched tree"
+is "and commits nothing" "$(git -C "$STRAND" rev-parse HEAD)" "$before"
+git -C "$STRAND" checkout -q -- . && git -C "$STRAND" clean -fdq
+strand_run strand-retired
+is "with every patch/ entry retired, the strand vendors on" \
+  "$status $(subject_in "$STRAND")" "0 vendor: Update vendored sources to krlmlr/igraph@$RT"
+git -C "$STRAND" push -q origin HEAD:refs/heads/main-vendor
+
+before=$(git -C "$BUILD" rev-parse HEAD)
+FAIL_REGENERATE=1 pick
+is "the buffer's regeneration failing stops the pick with exit 7" "$status" 7
+has "under the generator's banner" "$(cat "$SCRATCH/pick.log")" "GENERATOR FAILED after picking"
+is "the pick is undone, and the buffer stands where it did" \
+  "$(git -C "$BUILD" rev-parse HEAD) $(clean_in "$BUILD")" "$before clean"
+pick
+is "the rerun takes the pick" "$status $(git -C "$BUILD" rev-list --count "$before..HEAD")" "0 1"
 
 echo
 echo "$pass passed, $fail failed"

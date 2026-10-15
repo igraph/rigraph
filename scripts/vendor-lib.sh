@@ -22,6 +22,8 @@ glue_compile_line() { # <probe> [extra cppflags] -> command, empty when none
   if [ -x ./configure ] && { [ -z "$series_configured_file" ] || [ ! -f "$series_configured_file" ]; }; then
     ./configure >/dev/null 2>&1 || true
   fi
+  # rigraph: a ./configure that failed leaves R's default flags, whose compile line fails every file.
+  [ -z "$series_configured_file" ] || [ -f "$series_configured_file" ] || return 0
   probe=$(printf '%s' "$1" | sed 's/[.]/\\./g')
   (cd src && env ${2:+CLINK_CPPFLAGS="$2"} R CMD SHLIB -n "$1" 2>/dev/null) |
     grep -m 1 -E -- "-c $probe" |
