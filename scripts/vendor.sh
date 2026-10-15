@@ -59,21 +59,25 @@ for commit in $original; do
 
   rm -rf ${vendor_dir}/.git ${vendor_dir}/.github ${vendor_dir}/doc ${vendor_dir}/examples ${vendor_dir}/fuzzing ${vendor_dir}/tests ${vendor_dir}/tools ${vendor_dir}/build
 
-  # Apply patches in patch/*.patch.
-  #
-  # If a patch no longer applies forward, it is removed:
-  # vendoring fetches fresh upstream sources that do not yet carry our
-  # changes, so a clean forward apply is the expected case.  A patch that
-  # fails to apply forward is either (a) already integrated upstream and
-  # no longer needed, or (b) broken by an upstream change that we must
-  # address explicitly.  Removing the stale patch surfaces case (b) via
-  # CI/CD instead of letting it rot silently.
+  # Apply patches in patch/*.patch; each one either applies, retires, or stops the run.
+  # A patch that applies forward is applied.
+  # A patch that reverses cleanly is part of the fresh upstream sources by now,
+  # so it has done its job and is deleted, and the run says so.
+  # A patch that does neither patches code that moved upstream:
+  # the run stops with the regenerated sources uncommitted, for a rebase by hand.
+  # Every patch targets src/vendor/cigraph, the only tree vendoring regenerates;
+  # a change anywhere else is committed to its file directly.
+  # `--reverse` needs `--forward` beside it, or patch asks whether to ignore -R
+  # and a run on a terminal hangs.
   for f in patch/*.patch; do
-    if patch -i "$f" -p1 --forward --dry-run; then
+    if patch -s -i "$f" -p1 --forward --dry-run >/dev/null; then
       patch -i "$f" -p1 --forward --no-backup-if-mismatch
-    else
-      echo "Removing patch $f"
+    elif patch -s -i "$f" -p1 --reverse --forward --dry-run >/dev/null; then
+      echo "Retiring patch $f: upstream carries it now"
       rm "$f"
+    else
+      echo "Error: patch $f neither applies nor reverses; rebase it by hand" >&2
+      exit 4
     fi
   done
 
