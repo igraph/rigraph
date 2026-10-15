@@ -1,0 +1,28 @@
+# Paths the handbook checks skip, one per line: a glob, or `kind: glob`.
+# A bare glob skips the path in every check; `orphan:` exempts it from the
+# orphan check alone, and `em-dash:` from the em dash check alone. A trailing /
+# covers everything below, and * spans directory separators. Write the reason
+# beside each line, and delete what does not apply here.
+# Handbook: /handbook/meta/local/README.md says what this repository does not
+# author, and the shared rules say what needs no backreference; both belong
+# here, by kind.
+
+# Vendored skills and commands are nobody's to reformat.
+em-dash: .claude/
+
+# A tool that ships its own agent skills and commands regenerates them in
+# place, so they are exempt from every check rather than from one: an edit to
+# one would not survive the next run.
+# .claude/skills/<tool>-*/
+# .claude/commands/<tool>/
+
+# Generated documents cannot carry a backreference; the generator does.
+# orphan: NEWS.md
+# orphan: tests/testthat/_snaps/
+
+# A store another tool owns holds intent and requirements, which the rules
+# exempt from a backreference.
+# orphan: openspec/
+
+# A repository that permits em dashes says so here, and why.
+# em-dash: *
