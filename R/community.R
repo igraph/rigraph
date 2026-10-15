@@ -3076,8 +3076,6 @@ cluster_infomap <- function(
   # BEGIN GENERATED ARG_HANDLE: cluster_infomap, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("v"))
-    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn cluster_infomap}.")
     # Pre-3.0.0 signature: cluster_infomap(graph, e.weights, v.weights, nb.trials, modularity)
     .old_signature <- function(e.weights, v.weights, nb.trials, modularity, ...) {
       if (...length() > 0L) {
