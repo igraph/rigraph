@@ -62,20 +62,20 @@ Graph cycles:
 g <- make_lattice(c(3, 3))
 find_cycle(g)
 #> $vertices
-#> ── <vertex sequence> 4/9 · from 7dc9c8f ────────────────────────────────────────
+#> ── <vertex sequence> 4/9 · from c99efb9 ────────────────────────────────────────
 #> [1] 9 6 5 8
 #> 
 #> $edges
-#> ── <edge sequence> 4/12 · from 7dc9c8f ─────────────────────────────────────────
+#> ── <edge sequence> 4/12 · from c99efb9 ─────────────────────────────────────────
 #> [1] 8 ─ 9  6 ─ 9  5 ─ 6  5 ─ 8 
 #> 
 
 # Empty results are returned for acyclic graphs
 find_cycle(sample_tree(5))
 #> $vertices
-#> ── <vertex sequence> 0/5 · from f7effbe ────────────────────────────────────────
+#> ── <vertex sequence> 0/5 · from 348bbe0 ────────────────────────────────────────
 #> 
 #> $edges
-#> ── <edge sequence> 0/4 · from f7effbe ──────────────────────────────────────────
+#> ── <edge sequence> 0/4 · from 348bbe0 ──────────────────────────────────────────
 #> 
 ```

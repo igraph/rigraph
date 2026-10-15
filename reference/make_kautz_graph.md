@@ -55,7 +55,7 @@ written by Vincent Matossian.
 ``` r
 
 make_line_graph(make_kautz_graph(2, 1))
-#> ── <igraph> Line graph ────────────────────────────────────────────── ce34d57 ──
+#> ── <igraph> Line graph ────────────────────────────────────────────── bf7cf9f ──
 #> ℹ directed
 #> ℹ 12 vertices · 24 edges
 #> 
@@ -67,7 +67,7 @@ make_line_graph(make_kautz_graph(2, 1))
 #> [10] 11 → 5  1 → 6   11 → 6  2 → 7   12 → 7  2 → 8   12 → 8  3 → 9   7 → 9  
 #> [19] 3 → 10  7 → 10  4 → 11  8 → 11  4 → 12  8 → 12 
 make_kautz_graph(2, 2)
-#> ── <igraph> Kautz graph 2-2 ───────────────────────────────────────── cd747df ──
+#> ── <igraph> Kautz graph 2-2 ───────────────────────────────────────── d38ec65 ──
 #> ℹ directed
 #> ℹ 12 vertices · 24 edges
 #> 
