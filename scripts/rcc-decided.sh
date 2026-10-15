@@ -4,7 +4,7 @@
 # The verdict store is the orphan `rcc2` branch: one record per commit at
 # `runs2.d/<xx>/<sha>.ndjson`, published by the leg that decided it within
 # seconds of the verdict existing (scripts/rcc-publish.sh,
-# handbook/operations/ci/per-commit/store/README.md). Presence is the whole
+# handbook/operations/ci/per-commit/README.md, "The store"). Presence is the whole
 # question -- a commit with a record has been
 # decided, a commit without one has not -- so the answer is one `ls-tree` over a
 # tree-only fetch rather than a request per commit.

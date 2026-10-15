@@ -14,10 +14,11 @@
 # so the leg holding the oldest slice is the one queued first.
 #
 # Why shards instead of one dispatch per commit:
-#   * a leg pays the ~4 min R/dependency setup once for ~20 commits, not once
-#     per commit;
+#   * a leg pays the ~6 min R/dependency setup once for all its commits, not
+#     once per commit;
 #   * consecutive commits in a leg share the runner's local ccache, where a
-#     typical adjacent vendor commit is ~98% cached (plan/superseded/vendoring-loop.md, A.2);
+#     typical vendor commit recompiles a couple of ~420 translation units
+#     (scripts/each-cost.py);
 #   * the whole batch is one workflow run: one thing to cancel, one set of logs.
 #
 # "Undecided" is read from the **verdict store**, not from commit statuses: a
@@ -32,7 +33,7 @@
 #   GH_TOKEN=<token> scripts/each-plan.sh
 #
 # Local testing example (prints the plan, writes no outputs):
-#   git checkout v1.5-variegata-dev
+#   git checkout main-dev
 #   GH_TOKEN=$(gh auth token) OUT=/tmp/plan.json scripts/each-plan.sh
 #
 # Environment variables:
@@ -48,24 +49,34 @@
 #                         than being killed)
 #   MAX_SHARDS          - matrix legs to emit (default: 250; GitHub generates at
 #                         most 256 jobs per matrix)
-#   MAX_PARALLEL        - legs to run concurrently (default: 8)
+#   MAX_PARALLEL        - legs to run concurrently (default: 20, the same as
+#                         each.yaml and scripts/each-partition.py)
 #   MAX_COMMITS         - hard cap on commits considered (default: 0 = no cap)
 #   SPLIT_FACTOR        - runner-minutes the plan may cost, as a multiple of the
 #                         fewest-legs plan, to shorten wall clock
 #                         (default: 1.5; 1.0 disables rebalancing)
-#   SETUP_MINUTES       - per-leg checkout, R and dependency install (default: 5)
-#   FULL_BUILD_MINUTES  - a build on an empty ccache (default: 40)
-#   FLOOR_MINUTES       - per-commit floor: link, install, R CMD check, gates
-#                         (default: 6)
-#   OBJECT_SECONDS      - marginal cost of recompiling one unity object
-#                         (default: 9.7)
+#   SETUP_MINUTES       - per-leg checkout, R and dependency install (default: 6)
+#   FULL_BUILD_MINUTES  - a commit built on an empty ccache, all gates included
+#                         (default: 27)
+#   FLOOR_MINUTES       - per-commit floor: install, gates, R CMD check, pkgdown
+#                         (default: 25)
+#   OBJECT_SECONDS      - marginal cost of recompiling one translation unit
+#                         (default: 0.15)
 #
-# The four constants are fitted to the 29 commits of runs 30406932093
-# (main-fwd-dev, 24 commits over two legs) and 30422580063
-# (v1.5-variegata-fwd-dev, 5 commits, one leg), RMSE 1.3 min over the 26 warm
-# builds; see handbook/operations/ci/per-commit/planning/README.md. Every leg still records
-# duration_seconds per commit, in the record it publishes and in its
-# `each-logs-*` artifact, so the fit can be redone from a wider range at any
+# The constants come from three runs of scripts/rcc-one.sh on one commit
+# (99d8b1a1, October 2026) on a 4-core machine shared with other work,
+# with MAKEFLAGS=-j4, one cold ccache and two warm.
+# A warm commit took 1510 s, gate by gate:
+# install 42, regen 11, style 2, snapshots 341, roxygen 61, check 400 and pkgdown 653.
+# roxygen and pkgdown were timed on their own, with their downloads stubbed,
+# because the machine could not reach igraph.org, crandb or the CDNs.
+# A cold install took 91 to 104 s against the warm 42,
+# so the 417 translation units cost ~0.15 s each and a cold commit ~1 min more;
+# with ccache's hash_dir off (each.yaml) the later builds of a commit all hit.
+# SETUP_MINUTES is duckdb-r's measurement of the same install steps,
+# plus a minute for the flex, bison and venv packages the regen gate needs.
+# Every leg records duration_seconds per commit, in the record it publishes and
+# in its `each-logs-*` artifact, so the fit can be redone from real legs at any
 # time.
 
 set -euo pipefail
@@ -75,13 +86,13 @@ OUT="${OUT:-plan.json}"
 FORCE="${FORCE:-}"
 SHARD_BUDGET_MINUTES="${SHARD_BUDGET_MINUTES:-300}"
 MAX_SHARDS="${MAX_SHARDS:-250}"
-MAX_PARALLEL="${MAX_PARALLEL:-8}"
+MAX_PARALLEL="${MAX_PARALLEL:-20}"
 MAX_COMMITS="${MAX_COMMITS:-0}"
 SPLIT_FACTOR="${SPLIT_FACTOR:-1.5}"
-SETUP_MINUTES="${SETUP_MINUTES:-5}"
-FULL_BUILD_MINUTES="${FULL_BUILD_MINUTES:-40}"
-FLOOR_MINUTES="${FLOOR_MINUTES:-6}"
-OBJECT_SECONDS="${OBJECT_SECONDS:-9.7}"
+SETUP_MINUTES="${SETUP_MINUTES:-6}"
+FULL_BUILD_MINUTES="${FULL_BUILD_MINUTES:-27}"
+FLOOR_MINUTES="${FLOOR_MINUTES:-25}"
+OBJECT_SECONDS="${OBJECT_SECONDS:-0.15}"
 
 here="$(cd "$(dirname "$0")" && pwd)"
 # shellcheck source=series-lib.sh
@@ -269,12 +280,14 @@ echo "Already decided: ${skipped}"
 echo "To build: ${todo}"
 
 # ------------------------------------------------------------------ weigh ----
-# Cost per commit = fixed floor (link + install + R CMD check) plus the unity
-# objects the commit invalidates, which the estimator scripts/series-config.sh
-# names (scripts/each-cost.py here) derives from the include graph without
-# building anything.
+# Cost per commit = fixed floor (install, gates, R CMD check) plus the
+# translation units the commit recompiles, which the estimator
+# scripts/series-config.sh names (scripts/each-cost.py) puts at the same
+# constant for every commit.
+# The changed paths are still collected and passed on,
+# so a model that reads them needs no change here.
 if [ "${todo}" -gt 0 ]; then
-  echo "Building the unity-object reach map..."
+  echo "Recording the cost model..."
   "${series_cost_estimator[@]}" map . > "${workdir}/cost-map.json"
 
   while IFS= read -r sha; do
@@ -425,7 +438,7 @@ if [ -n "${GITHUB_STEP_SUMMARY:-}" ]; then
         "| Rebalanced, factor \(.factor) (+\(.splits) legs) | \(.after.shards) | ~\(.after.makespan_minutes) min | ~\(.after.runner_minutes) min |"' \
         "${OUT}"
       echo
-      echo "| Shard | Commits | Estimate | Invalidated objects (max) |"
+      echo "| Shard | Commits | Estimate | Objects per commit (model) |"
       echo "| --- | --- | --- | --- |"
       jq -r '.shards | sort_by(.index)[]
              | "| \(.index) | \(.commits | length) | ~\(.estimate_minutes) min | \([.commits[].objects] | max) |"' "${OUT}"

@@ -11,20 +11,24 @@
 # loop; this file is that seam.
 #
 # Deliberately a *subset* of what `rcc-smoke` does, matching what actually runs
-# under `workflow_dispatch`:
+# under `workflow_dispatch`, plus the one check `rcc-smoke` does not make:
 #
 #   | rcc-smoke step        | here                                            |
 #   |-----------------------|-------------------------------------------------|
+#   | custom/after-install  | gate `regen`, the migration-drift half of it    |
+#   | (none)                | gate `regen`, the Stimulus and cpp11 interface  |
 #   | versions-matrix       | skipped upstream too (workflow_dispatch, no opt-in) |
 #   | dep-suggests-matrix   | skipped upstream too                            |
 #   | flavor-package-name   | gate `flavor`, the two flavor-only scans of it   |
 #   | style                 | gate `style`                                    |
 #   | update-snapshots      | gate `snapshots`, incl. the snapshot-<sha> branch |
 #   | roxygenize            | gate `roxygen`                                  |
+#   | render-readme         | skipped upstream too (no Config/cynkra/render-readme) |
 #   | commit                | gate `clean` -- workflow_dispatch fails on any diff |
 #   | check                 | gate `check`                                    |
 #   | pkgdown-build         | gate `pkgdown`                                  |
 #   | pkgdown-deploy        | skipped upstream too (push only)                |
+#   | covr                  | skipped: an upload to Codecov, not a verdict     |
 #
 # Outcome semantics mirror `rcc-smoke` exactly: every gate runs even when an
 # earlier one failed, and the exit status is the AND over all of them. That is
@@ -39,7 +43,7 @@
 #
 # Environment variables:
 #   EACH_GATES            - space-separated subset of
-#                           "style snapshots roxygen clean check pkgdown"
+#                           "regen flavor style snapshots roxygen clean check pkgdown"
 #                           (default: all of them, parity with rcc-smoke)
 #   EACH_SNAPSHOT_BRANCH  - publish the snapshot-<sha>-rcc-smoke-null branch when
 #                           the snapshots gate changed anything
@@ -51,23 +55,26 @@
 #   CLANG_FORMAT          - the C++ formatter the style gate runs
 #                           (default: clang-format-21, what CI installs)
 #   RCMDCHECK_ERROR_ON    - passed through to rcmdcheck (default: note)
-#   DUCKDB_R_RUN_TESTS    - read by tests/testthat.R; the `check` gate defaults
-#                           it to true so the suite runs outside Actions too,
-#                           and never overrides a value the caller set
+#   EACH_VENV_DIR         - where the regen gate keeps the Stimulus virtualenvs,
+#                           one per content of tools/build-requirements.txt and
+#                           tools/py-stimulus; must be outside the workspace,
+#                           which scripts/each-shard.sh wipes between commits
+#                           (default: $RUNNER_TEMP/each-venv)
 #   EACH_TIMEOUT_<STAGE>  - seconds a stage may take before it is presumed stuck
 #                           and killed (see stage_budget below); 0 disables the
 #                           bound for that stage
 
 set -uo pipefail
 
-ALL_GATES="flavor style snapshots roxygen clean check pkgdown"
+ALL_GATES="regen flavor style snapshots roxygen clean check pkgdown"
 GATES="${EACH_GATES:-${ALL_GATES}}"
 SNAPSHOT_BRANCH="${EACH_SNAPSHOT_BRANCH:-${GITHUB_ACTIONS:-false}}"
 STAGE_DIR="${EACH_STAGE_DIR:-}"
+VENV_DIR="${EACH_VENV_DIR:-${RUNNER_TEMP:-${TMPDIR:-/tmp}}/each-venv}"
 
 # peter-evans/create-pull-request commits as this identity by default, not as
 # the repository's git config. Reproduced verbatim so the published branches stay
-# byte-comparable with the ~950 the retired dispatch path created.
+# byte-comparable with the ones the retired dispatch path created.
 CPR_NAME="github-actions[bot]"
 CPR_EMAIL="41898282+github-actions[bot]@users.noreply.github.com"
 CPR_MESSAGE="[create-pull-request] automated change"
@@ -158,11 +165,16 @@ has_gate() {
 #
 # A per-stage bound turns that into an ordinary failure: the stage is killed,
 # rcc-one.sh survives to print the partial log and mark the stage FAIL, and the
-# remaining commits in the shard still get built. The numbers are the observed
-# cost with plenty of headroom -- a full commit takes 313-2624 s all-in, and a
-# cold-ccache build about 21 min of that -- so an honest stage never sees them
-# and a stuck one is cut off in minutes rather than hours. Their sum stays under
-# the shard budget, which keeps the leg's timeout the backstop it is meant to be.
+# remaining commits in the shard still get built.
+# The numbers are the observed cost with plenty of headroom,
+# so an honest stage never sees them
+# and a stuck one is cut off in minutes rather than hours.
+# Measured on a 4-core machine (scripts/each-plan.sh has the details),
+# a warm commit takes ~1510 s all-in and a cold ccache adds about a minute;
+# each bound is three to ten times its stage's time,
+# and longer where the stage downloads.
+# Their sum stays under the shard budget,
+# which keeps the leg's timeout the backstop it is meant to be.
 # Override any of them with EACH_TIMEOUT_<STAGE> (seconds; 0 disables).
 stage_budget() {
   local override
@@ -172,14 +184,15 @@ stage_budget() {
     return
   fi
   case "$1" in
-    install) echo 3600 ;;    # cold ccache, no reuse at all
+    install) echo 1200 ;;    # cold ccache, no reuse at all: ~100 s
+    regen) echo 600 ;;       # ~15 s; a leg's first also builds the venv
     flavor) echo 300 ;;      # a base-R scan of the checkout
     style) echo 600 ;;
-    snapshots) echo 3600 ;;  # the full test suite
-    roxygen) echo 900 ;;
+    snapshots) echo 1800 ;;  # the snapshot tests: ~350 s
+    roxygen) echo 900 ;;     # ~60 s, after fetching the C docs index from igraph.org
     clean) echo 900 ;;
-    check) echo 5400 ;;      # rebuilds the package, then the suite again
-    pkgdown) echo 1800 ;;
+    check) echo 2700 ;;      # rebuilds the package, then the suite again: ~400 s
+    pkgdown) echo 2700 ;;    # every reference page and article: ~650 s
     *) echo 3600 ;;
   esac
 }
@@ -292,23 +305,109 @@ fi
 
 # -------------------------------------------------------------------- gates --
 
-# The half of `.github/workflows/custom/after-install/action.yml`'s flavor-rename
-# guard that only a flavored checkout can answer.
+# The working tree as a tree object, untracked files included and ignored ones
+# left out, written through a temporary index so the real one is not touched.
+# Hashing the whole checkout this way takes well under a second.
+worktree_tree() {
+  local index="${rscript_dir}/worktree-index"
+  rm -f "${index}"
+  GIT_INDEX_FILE="${index}" git read-tree HEAD || return 1
+  GIT_INDEX_FILE="${index}" git add -A || return 1
+  GIT_INDEX_FILE="${index}" git write-tree
+}
+
+# Put back every path that differs between two worktree_tree() snapshots,
+# as it was in the first: files the second added are removed,
+# and the rest are checked out from the first through a temporary index.
+restore_worktree() { # <tree-before> <tree-after>
+  local index="${rscript_dir}/restore-index"
+  git diff --name-only -z --no-renames --diff-filter=A "$1" "$2" \
+    | xargs -0 -r rm -f -- || return 1
+  rm -f "${index}"
+  GIT_INDEX_FILE="${index}" git read-tree "$1" || return 1
+  git diff --name-only -z --no-renames --diff-filter=DMT "$1" "$2" \
+    | GIT_INDEX_FILE="${index}" xargs -0 -r git checkout-index -f -- || return 1
+}
+
+# One Stimulus virtualenv per content of what it is built from,
+# outside the workspace: scripts/each-shard.sh wipes `.venv` with every commit,
+# and Makefile-cigraph's own stamp only compares mtimes,
+# so it would not notice a commit that changed tools/py-stimulus.
+# Keyed on the index rather than the files, so build products pip leaves behind
+# do not change the key.
+stimulus_venv() {
+  local key
+  key="$(git ls-files -s -- tools/build-requirements.txt tools/py-stimulus \
+    | git hash-object --stdin)" || return 1
+  printf '%s/%s' "${VENV_DIR}" "${key:0:16}"
+}
+
+# The generated half of the R/C interface, regenerated from its sources,
+# and the commit judged by whether that changes anything.
+# `src/rinterface.c` and `R/aaa-*.R` are Stimulus output (AGENTS.md),
+# `src/cpp11.cpp` and `R/cpp11.R` are cpp11's ("do not edit by hand"),
+# and the lexers and parsers under `src/vendor/io` are flex's and bison's.
+# None of them is edited by hand, and this is the gate that holds every commit to it.
+# It also takes over the drift check of the argument-migration blocks
+# from .github/workflows/custom/after-install,
+# which the per-commit workflow does not run because it would judge the tip.
 #
-# That step runs `if: github.job == 'rcc-smoke'`, and `rcc-smoke` runs on `main`
-# and on pull requests to it. Two of its three scans return early when
-# `DESCRIPTION` says `Package: duckdb` -- so on the only job that runs them they
-# are no-ops by construction, and on the branches where they could find
-# something, the per-commit gate is the only thing judging and it did not run
-# them. `flavor_unflavored_paths()` reported `src/duckdb-win.def` on
-# `v1.5-variegata-dev` for a fortnight while every commit on that branch was
-# judged green.
+# `make -B` regenerates every target rather than those whose inputs are newer,
+# because mtimes after a checkout say which files that checkout rewrote,
+# not which are stale: a hand edit to a generated file would otherwise pass
+# whenever its inputs happened to be written first.
+# `-o` exempts the virtualenv, which stimulus_venv() has already keyed on content.
+# `DOCKER=` runs the host's flex and bison, the versions CI installs.
 #
-# `flavor_package_name_offenders()` is deliberately not here: it does not return
-# early, so `rcc-smoke` already exercises it on every commit that reaches `main`.
-# Running it per commit would also red the frozen v1.4 series at once, over four
-# seed-era lines its R code is not ported away from -- a separate question from
-# a file that arrived under the wrong name and nothing rewrote.
+# A failure prints the diff and then puts the tree back the way it found it,
+# so the gates after this one judge the commit as committed:
+# the `clean` gate fails on its own drift only,
+# and series-check.sh reads a regen failure as one rather than as style drift.
+gate_regen() {
+  local rc=0 before after venv
+  before="$(worktree_tree)" || return 1
+  venv="$(stimulus_venv)" || return 1
+  if [ ! -f "${venv}/stamp" ]; then
+    rm -rf "${venv}"
+    mkdir -p "${VENV_DIR}"
+    make -f Makefile-cigraph PYVENV="${venv}" venv || return 1
+  fi
+  make -f Makefile-cigraph -B -o "${venv}/stamp" DOCKER= PYVENV="${venv}" || rc=1
+  Rscript -e 'cpp11::cpp_register()' || rc=1
+  if [ -f tools/generate-migrations.R ]; then
+    Rscript tools/generate-migrations.R || rc=1
+  fi
+  after="$(worktree_tree)" || return 1
+  if [ "${before}" != "${after}" ]; then
+    echo "Generated files differ from what Makefile-cigraph, cpp11::cpp_register()" \
+      "and tools/generate-migrations.R write from their sources."
+    echo "Regenerate them and commit the result. Diff:"
+    git --no-pager diff --stat "${before}" "${after}"
+    git --no-pager diff "${before}" "${after}"
+    restore_worktree "${before}" "${after}"
+    if [ "$(worktree_tree)" != "${before}" ]; then
+      echo "Could not restore the tree; the gates after this one see the regenerated files."
+    fi
+    rc=1
+  fi
+  return "${rc}"
+}
+
+# The flavor-rename scans of scripts/flavor-package-name.R
+# that only a flavored checkout can answer.
+#
+# They return early when `DESCRIPTION` names the mainline package,
+# so on `main`, where `rcc-smoke` runs, they are no-ops by construction.
+# On a flavored series branch the per-commit gate is the only thing judging,
+# so a file that arrived under the mainline name goes unnoticed
+# unless the scans run here.
+# In duckdb-r, where this gate comes from,
+# one did for a fortnight while every commit on its branch was judged green.
+#
+# `flavor_package_name_offenders()` is deliberately not here:
+# it does not return early, and a hard-coded package name in the R sources
+# is a question for the code that carries it,
+# not for a file that arrived under the wrong name and nothing rewrote.
 gate_flavor() {
   rscript <<'EOF'
 source("scripts/flavor-package-name.R")
@@ -345,8 +444,10 @@ writeLines("Both halves of the cpp11 binding carry this flavor's prefix.")
 EOF
 }
 
-# Mirrors .github/workflows/style/action.yml. Tool installation is the caller's
+# Mirrors cynkra/cynkratemplate's style action. Tool installation is the caller's
 # job; this only runs the formatters.
+# rigraph configures air and no `.clang-format`,
+# so only air runs today; the C++ half follows the action in case that changes.
 #
 # A formatter that is not installed is not a style violation, and it used to read
 # as one: `clang-format-21` absent leaves `git status --short` empty and still
@@ -367,7 +468,7 @@ gate_style() {
     if ! command -v "${clang_format}" >/dev/null 2>&1; then
       echo "Error: ${clang_format} is not on PATH, so the C++ sources were not" \
         "formatted -- this says nothing about the tree." >&2
-      echo "  Install it (see .github/workflows/style/action.yml), or set" \
+      echo "  Install it (see cynkra/cynkratemplate's style action), or set" \
         "CLANG_FORMAT to a build of the same major." >&2
       rc=1
     else
@@ -381,7 +482,7 @@ gate_style() {
 }
 
 # Mirrors the "Create pull request" step of
-# .github/workflows/update-snapshots/action.yml, which publishes the accepted
+# cynkra/cynkratemplate's update-snapshots action, which publishes the accepted
 # snapshots as a branch off the commit under test. The pull request itself never
 # materialises on this path -- its base is a SHA, not a branch -- but the branch
 # does, and tooling looks those up by name, so it has to keep being produced.
@@ -389,7 +490,7 @@ gate_style() {
 # The name is deliberately frozen rather than derived. Upstream builds it from
 # `github.job` (`rcc-smoke`) and an empty matrix (`null`); here the job is
 # `build` and there *is* a matrix, so deriving it the same way would silently
-# rename ~950 existing branches' successors.
+# rename the successors of every existing branch.
 #
 # Committed through a temporary index so the working tree keeps its diff -- the
 # `clean` gate still has to see it and fail the commit.
@@ -425,7 +526,7 @@ publish_snapshot_branch() {
 }
 
 # Mirrors the "Run tests on test files that use snapshots" step of
-# .github/workflows/update-snapshots/action.yml. Accepting the snapshots leaves
+# cynkra/cynkratemplate's update-snapshots action. Accepting the snapshots leaves
 # the diff in the tree; the `clean` gate below is what turns it into a failure,
 # exactly as the upstream `commit` step does on workflow_dispatch.
 gate_snapshots() {
@@ -465,7 +566,7 @@ EOF
   return "${rc}"
 }
 
-# Mirrors .github/workflows/roxygenize/action.yml.
+# Mirrors cynkra/cynkratemplate's roxygenize action.
 gate_roxygen() {
   rscript <<'EOF'
 roxygen2::roxygenize()
@@ -473,7 +574,7 @@ EOF
 }
 
 # Mirrors the "Write diff and fail for workflow_dispatch" step of
-# .github/workflows/commit/action.yml: on a per-commit build, any change the
+# cynkra/cynkratemplate's commit action: on a per-commit build, any change the
 # gates above produced means the commit is not canonical.
 gate_clean() {
   if [ -z "$(git status --porcelain)" ]; then
@@ -489,7 +590,7 @@ gate_clean() {
 }
 
 # Mirrors r-lib/actions/check-r-package@v2 as invoked by
-# .github/workflows/check/action.yml.
+# cynkra/cynkratemplate's check action.
 gate_check() {
   local rc=0
   RCMDCHECK_ERROR_ON="${RCMDCHECK_ERROR_ON:-note}" rscript <<'EOF' || rc=1
@@ -498,11 +599,9 @@ gate_check() {
 # package is not on CRAN, so every commit picks up a "New submission" NOTE.
 if (Sys.getenv("_R_CHECK_FORCE_SUGGESTS_", "") == "") Sys.setenv("_R_CHECK_FORCE_SUGGESTS_" = "false")
 if (Sys.getenv("_R_CHECK_CRAN_INCOMING_", "") == "") Sys.setenv("_R_CHECK_CRAN_INCOMING_" = "false")
-# `tests/testthat.R` falls back to GITHUB_ACTIONS / MY_UNIVERSE when this is
-# unset, so the suite runs in CI and silently does not run anywhere else. Opt in
-# here, without overriding a value the caller already set: the versions matrix
-# forces it to `false` under engine poisoning.
-if (Sys.getenv("DUCKDB_R_RUN_TESTS", "") == "") Sys.setenv("DUCKDB_R_RUN_TESTS" = "true")
+# .github/workflows/custom/before-install sets this for every job in CI;
+# set it here too, so a run outside Actions does not pick up the size NOTE.
+if (Sys.getenv("_R_CHECK_PKG_SIZES_", "") == "") Sys.setenv("_R_CHECK_PKG_SIZES_" = "FALSE")
 rcmdcheck::rcmdcheck(
   args = c("--no-manual", "--as-cran", "--no-multiarch"),
   build_args = "--no-manual",
@@ -517,7 +616,7 @@ EOF
   return "${rc}"
 }
 
-# Mirrors .github/workflows/pkgdown-build/action.yml.
+# Mirrors cynkra/cynkratemplate's pkgdown-build action.
 gate_pkgdown() {
   rscript <<'EOF'
 pkgdown::build_site()
@@ -537,7 +636,8 @@ if [ -n "${STAGE_ONLY}" ]; then
   exit $?
 fi
 
-for gate in flavor style snapshots roxygen clean check pkgdown; do
+# ALL_GATES is the order as well as the list.
+for gate in ${ALL_GATES}; do
   run_gate "${gate}"
 done
 

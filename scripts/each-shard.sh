@@ -3,17 +3,18 @@
 #
 # Walks its slice of `plan.json` oldest-first, and for every commit resets the
 # workspace to it, runs `scripts/rcc-one.sh`, and writes the `rcc` commit-status
-# -- which is a display surface: `scripts/rcc-logs.sh` and the repair skills read
-# the record on the `rcc2` branch, and nothing decides from the status.
+# -- which is a display surface: the repair skills read the record on the
+# `rcc2` branch, and nothing decides from the status.
 #
 # Why the reuse works even though every commit starts from a clean tree:
-# `R CMD build` copies the package and `R CMD check` compiles from the copy, so
-# object timestamps never survive a commit anyway. The mechanism that does
-# survive is **ccache**, which is content-addressed and lives on the runner's
-# local disk for the whole job. A typical adjacent vendor commit recompiles only
-# the handful of unity objects it invalidates -- ~98% hits, measured in
-# plan/superseded/vendoring-loop.md, Appendix A.2. That is the whole point of putting
-# consecutive commits in one job.
+# the reset below throws away the objects the in-tree install left in src/,
+# and `R CMD build` and `R CMD check` compile from copies of their own anyway.
+# The mechanism that does survive is **ccache**, which is content-addressed
+# and lives on the runner's local disk for the whole job.
+# A typical vendor commit changes a couple of igraph's ~420 translation units,
+# so every compile after the leg's first is almost all hits
+# (scripts/each-cost.py has the numbers).
+# That is the whole point of putting consecutive commits in one job.
 #
 # Stopping is graceful, not fatal. The leg stops at its own deadline and reports
 # what it did not reach, rather than being killed at GitHub's 6-hour job limit
@@ -154,7 +155,8 @@ fi
 # ------------------------------------------------------------- status sink --
 # Point the status at *this leg's* job rather than the whole run, so clicking
 # through from a commit lands on the log that decided it. The URL still contains
-# /actions/runs/<id>/, which is what scripts/rcc-logs.sh parses out.
+# /actions/runs/<id>/, which is what a sweep of the runs parses out
+# (duckdb-r's rcc-logs.sh, not ported here).
 job_url="${GITHUB_SERVER_URL:-https://github.com}/${GITHUB_REPOSITORY:-}/actions/runs/${GITHUB_RUN_ID:-0}"
 if [ -n "${GITHUB_RUN_ID:-}" ] && [ -n "${RUNNER_NAME:-}" ]; then
   # A runner executes one job at a time, so its name identifies this leg
@@ -257,7 +259,7 @@ write_record() { # <sha> <state> <duration> <exit-code> <failed-stages-json>
 #
 # Never fatal: the artifact remains, and it is what a firing reads, so the worst
 # a failed publish costs is that the store does not learn this verdict until
-# `scripts/rcc-logs.sh` is run by hand.
+# a sweep of the runs is ported (duckdb-r's `rcc-logs.sh`) and run by hand.
 publish_record() { # <sha> <state>
   local sha="$1" state="$2" stage="${workdir}/publish"
   [ -n "${NO_PUBLISH}" ] && return 0
@@ -382,9 +384,10 @@ for sha in "${commits[@]}"; do
   echo "::group::${sha}  $(git log -1 --format=%s "${sha}" | cut -c1-72)"
   commit_started="$(date -u +%s)"
 
-  # A full reset per commit. `R CMD build` runs ./cleanup, which tars up
-  # src/duckdb and deletes it; leaving that behind would poison the next
-  # commit's configure step. Cleaning is cheap and makes every commit's verdict
+  # A full reset per commit. `R CMD INSTALL .` compiles in src/, and its
+  # objects are only as fresh as their mtimes: the vendored C sources carry no
+  # header dependencies, so a commit that changes a header would link the
+  # previous commit's objects. Cleaning is cheap and makes every commit's verdict
   # identical to one from a fresh checkout -- ccache, which lives outside the
   # workspace, carries the reuse.
   if ! git checkout --force --detach "${sha}"; then
@@ -488,7 +491,7 @@ if [ -n "${GITHUB_STEP_SUMMARY:-}" ]; then
       cat "${excerpts}"
       if [ "${excerpts_omitted}" -gt 0 ]; then
         echo "${excerpts_omitted} further excerpt(s) omitted to keep this summary under" \
-             "${SUMMARY_MAX_BYTES} bytes; the full logs are on the \`rcc\` branch."
+             "${SUMMARY_MAX_BYTES} bytes; the full logs are on the \`rcc2\` branch."
         echo
       fi
     fi

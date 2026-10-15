@@ -29,10 +29,13 @@ because neither axis is monotone in `B`:
     At `P` slots, `P` legs finish in one wave and `P + 1` legs take two, so one
     extra leg can nearly *double* the wall clock. Plans are therefore ranked by
     `makespan()`, which models that throttling, and not by their longest leg.
-  * **Runner cost** usually rises with more legs, but not always: a commit that
-    invalidates the whole unity build already pays `FULL`, so a cut placed just
+  * **Runner cost** usually rises with more legs, but not always: a commit heavy
+    enough to be capped at `FULL` already pays it, so a cut placed just
     before one is free but for the job setup. More legs can genuinely be cheaper
     than fewer, and a plan rejected on cost says nothing about the next one.
+    (rigraph weighs every commit the same, scripts/each-cost.py, so it has no
+    such commit and cost does rise with every leg; the search does not rely on
+    either.)
 
 Two limits bound the search:
 
@@ -51,7 +54,7 @@ The cost model per leg:
     estimate_minutes = SETUP + build_minutes
 
 The first commit of a leg pays FULL rather than its own weight: it starts on an
-empty ccache, so it rebuilds all of `sources.mk` no matter how little it
+empty ccache, so it rebuilds every translation unit no matter how little it
 changed. `build_minutes` is what `scripts/each-shard.sh` measures itself
 against (its deadline starts after setup); `estimate_minutes` is the job's wall
 clock.
@@ -66,14 +69,14 @@ def parse_args(argv):
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--budget", type=float, default=300.0,
                    help="leg deadline in minutes, excluding job setup")
-    p.add_argument("--setup", type=float, default=5.0,
+    p.add_argument("--setup", type=float, default=6.0,
                    help="per-leg checkout, R and dependency install")
-    p.add_argument("--full", type=float, default=40.0,
-                   help="a build on an empty ccache -- all of sources.mk")
-    p.add_argument("--floor", type=float, default=6.0,
+    p.add_argument("--full", type=float, default=27.0,
+                   help="a commit built on an empty ccache -- every translation unit")
+    p.add_argument("--floor", type=float, default=25.0,
                    help="per-commit link, install, check and gates")
-    p.add_argument("--object-seconds", type=float, default=9.7,
-                   help="marginal cost of recompiling one unity object")
+    p.add_argument("--object-seconds", type=float, default=0.15,
+                   help="marginal cost of recompiling one translation unit")
     p.add_argument("--max-shards", type=int, default=250)
     p.add_argument("--max-parallel", type=int, default=20)
     p.add_argument("--split-factor", type=float, default=1.5,
@@ -89,7 +92,7 @@ WORTH_IT_MINUTES = 1.0
 # Deadlines pass 2 tries, spread over `(0, --budget]`. Neighbouring deadlines
 # usually cut in the same places and collapse to one plan, so this is a
 # resolution knob and not a work multiplier: on the 300-minute default it steps
-# by ~0.6 min, well under the ~6 min the cheapest single commit weighs.
+# by ~0.6 min, well under the ~25 min the cheapest single commit weighs.
 DEADLINE_SAMPLES = 512
 
 

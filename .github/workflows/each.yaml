@@ -10,11 +10,11 @@
 # The run plans contiguous, cost-balanced *shards* and gives each shard one job,
 # which walks its commits in a single workspace. The batch is then one thing to
 # cancel, the R/dependency setup is paid per shard rather than per commit, and
-# consecutive commits hit the runner's local ccache -- a typical adjacent vendor
-# commit recompiles ~5 of 341 unity objects.
+# consecutive commits hit the runner's local ccache -- a typical vendor commit
+# recompiles a couple of igraph's ~420 translation units.
 #
 # Packing commits that tightly is the cheapest plan and the slowest one: a
-# 25-commit batch fits in two 5-hour legs. So the planner replans the same range
+# 25-commit batch takes three 5-hour legs. So the planner replans the same range
 # against shorter per-leg deadlines and keeps whichever plan finishes soonest
 # with EACH_MAX_PARALLEL legs running at a time, spending at most
 # EACH_SPLIT_FACTOR times the runner minutes of the cheapest plan.
@@ -100,8 +100,8 @@ name: each-rcc
 #
 # This group, plus work-selection being a pure function of durable verdicts, is
 # the whole of what keeps a commit from being built twice. There is no running
-# marker and there is not meant to be one -- see handbook/operations/ci/per-commit/selection/README.md, "No running
-# marker, by design".
+# marker and there is not meant to be one -- see handbook/operations/ci/per-commit/README.md, "Nothing here
+# coordinates; everything recomputes".
 concurrency:
   group: each-rcc-${{ inputs.branch || github.ref }}
   cancel-in-progress: false
@@ -115,7 +115,7 @@ env:
 
 jobs:
   plan:
-    if: github.repository == 'krlmlr/duckdb-r'
+    if: github.repository == 'krlmlr/rigraph'
     runs-on: ubuntu-26.04
 
     name: "Plan per-commit rcc builds"
@@ -221,10 +221,12 @@ jobs:
           needs: build, check, website, roxygen2
           extra-packages: any::rcmdcheck r-lib/roxygen2 any::decor r-lib/pkgdown deps::.
 
-      # Deliberately not custom/after-install: its ccache-action caps the cache
-      # at 200 MB and its duckdb.tar archive is keyed on the whole vendored tree,
-      # so both are per-commit constructs a multi-commit job cannot use. This job
-      # keeps one large local cache instead.
+      # Deliberately not custom/after-install.
+      # Its argument-migration drift check is about the content of a commit,
+      # so on the tip checkout it would judge the wrong one,
+      # and a drift there would fail the leg before it judged any.
+      # The `regen` gate of scripts/rcc-one.sh runs it per commit instead;
+      # the action's other step is macOS-only.
       - name: Point ccache outside the workspace and size it for a whole shard
         run: |
           ## -- Point ccache outside the workspace and size it for a whole shard --
@@ -236,13 +238,33 @@ jobs:
           mkdir -p "${CCACHE_DIR}"
           echo "CCACHE_DIR=${CCACHE_DIR}" | tee -a "${GITHUB_ENV}"
           ccache --set-config=max_size=8G
+          # R compiles with -g, and with -g ccache hashes the working directory by default.
+          # `R CMD build` installs the package from a fresh temporary directory
+          # to build the vignettes, so without this that build misses on every commit.
+          ccache --set-config=hash_dir=false
           ccache --zero-stats
-          ccache --show-config | grep -E 'cache_dir|max_size'
+          ccache --show-config | grep -E 'cache_dir|max_size|hash_dir'
         shell: bash
 
-      # Run for its tool installation only (air, clang-format). The formatting it
-      # performs on the tip checkout is discarded: scripts/each-shard.sh resets
-      # the workspace before every commit.
+      # What the `regen` gate of scripts/rcc-one.sh runs.
+      # Makefile-cigraph builds a Python virtualenv for Stimulus,
+      # and regenerates the lexers and parsers with the host's flex and bison (`DOCKER=`).
+      # The virtualenv lives outside the workspace, keyed on its sources,
+      # so a shard builds it once.
+      - name: Install the tools that regenerate the R/C interface
+        run: |
+          ## -- Install the tools that regenerate the R/C interface --
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends flex bison python3-venv
+          flex --version
+          bison --version | head -n 1
+          python3 --version
+        shell: bash
+
+      # Run for its tool installation only:
+      # air, and clang-format should rigraph ever configure it.
+      # The formatting it performs on the tip checkout is discarded:
+      # scripts/each-shard.sh resets the workspace before every commit.
       - uses: cynkra/cynkratemplate/.github/actions/style@main
 
       - name: Build the shard
@@ -260,6 +282,9 @@ jobs:
           # the per-commit publish and the resume check go through.
           RCC_DIR: ${{ runner.temp }}/rcc-publish
           RCC_READ_DIR: ${{ runner.temp }}/rcc-read
+          # Outside the workspace for the same reason:
+          # the Stimulus virtualenvs the regen gate builds, one per content of its sources.
+          EACH_VENV_DIR: ${{ runner.temp }}/each-venv
         run: scripts/each-shard.sh
         shell: bash
 

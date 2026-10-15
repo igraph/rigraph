@@ -3,7 +3,7 @@
 #
 # This is the only writer every producer goes through -- the matrix leg
 # publishing one commit's verdict as it decides it (scripts/each-shard.sh), and
-# the hand-run backstop (scripts/rcc-logs.sh). They differ in what they stage,
+# duckdb-r's hand-run backstop (rcc-logs.sh, not ported here). They differ in what they stage,
 # not in how it lands.
 #
 # One writer is possible because the store is one file per commit and nothing
