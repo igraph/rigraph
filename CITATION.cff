@@ -8,7 +8,7 @@ message: 'To cite package "igraph" in publications use:'
 type: software
 license: GPL-2.0-or-later
 title: 'igraph: Network Analysis and Visualization'
-version: 2.3.4
+version: 2.3.3
 identifiers:
 - type: doi
   value: 10.32614/CRAN.package.igraph
@@ -135,7 +135,7 @@ references:
   - family-names: Salmon
     given-names: Maëlle
   year: '2026'
-  notes: R package version 2.3.4
+  notes: R package version 2.3.3
   doi: 10.5281/zenodo.7682609
   url: https://CRAN.R-project.org/package=igraph
 - type: software
@@ -164,7 +164,7 @@ references:
     address: Vienna, Austria
   year: '2026'
   doi: 10.32614/R.manuals
-  version: '>= 3.5.0'
+  version: '>= 4.0.0'
 - type: software
   title: cli
   abstract: 'cli: Helpers for Developing Command Line Interfaces'
@@ -612,6 +612,7 @@ references:
     email: hadley@posit.co
   year: '2026'
   doi: 10.32614/CRAN.package.testthat
+  version: '>= 3.3.0'
 - type: software
   title: vdiffr
   abstract: 'vdiffr: Visual Regression Testing and Graphical Diffing'
