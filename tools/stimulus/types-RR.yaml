@@ -431,8 +431,8 @@ CLOSURE:
                   rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
                 }
               },
-              error = function(e) e,
-              interrupt = function(e) e
+              error = identity,
+              interrupt = identity
             )
           }
         } else {
@@ -472,7 +472,7 @@ VERTEXSET_LIST:
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {
-              %I% <- lapply(%I%, unsafe_create_vs, graph = %I1%, verts = V(%I1%))
+              %I% <- create_vs_list(%I1%, %I%)
             }
 
 EDGESET_LIST:

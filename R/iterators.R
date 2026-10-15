@@ -301,8 +301,7 @@ create_vs <- function(graph, idx, na_ok = FALSE) {
   if (na_ok) {
     idx <- ifelse(idx < 1 | idx > gorder(graph), NA, idx)
   }
-  res <- simple_vs_index(V(graph), idx, na_ok = na_ok)
-  add_vses_graph_ref(res, graph)
+  simple_vs_index(V(graph), idx, na_ok = na_ok)
 }
 
 # Internal function to quickly convert integer vectors to igraph.vs
@@ -313,8 +312,44 @@ unsafe_create_vs <- function(graph, idx, verts = NULL) {
   if (is.null(verts)) {
     verts <- V(graph)
   }
-  res <- simple_vs_index(verts, idx, na_ok = TRUE)
-  add_vses_graph_ref(res, graph)
+  # `idx` are vertex IDs straight from C, and `verts` is the full `V(graph)`,
+  # so `verts[idx]` would just be `idx` again -- skip that copy and use the
+  # IDs directly as the payload. Names are subset from `verts`, and the graph
+  # reference is shared from `verts`. All attributes are set in one
+  # `attributes<-` call to avoid the per-object shallow copies that dominate
+  # when many sequences are built (e.g. `max_cliques()`).
+  vertex_names <- attr(verts, "names")
+  res <- as.integer(idx)
+  attributes(res) <- list(
+    names = if (is.null(vertex_names)) NULL else vertex_names[idx],
+    class = "igraph.vs",
+    env = attr(verts, "env"),
+    graph = attr(verts, "graph")
+  )
+  res
+}
+
+# Build a list of vertex sequences from a list of vertex-ID vectors.
+#
+# This is the batch form of `unsafe_create_vs()` and replaces the
+# `lapply(idx_list, unsafe_create_vs, graph = graph, verts = V(graph))`
+# pattern. The whole per-element loop runs in C, so building many sequences
+# costs no per-object R overhead (no closure call, no `as.integer()`, no
+# `attributes<-`). This is what brings construction of many sequences
+# (e.g. `max_cliques()`) down close to the cost of returning bare indices.
+create_vs_list <- function(graph, idx_list) {
+  # `verts <- V(graph)` is what mints the single shared weak reference and
+  # graph id; build it once and hand the pieces to C, which runs the
+  # per-element construction loop (payload coercion, name subsetting,
+  # attribute setting).
+  verts <- V(graph)
+  .Call(
+    Rx_igraph_vs_list,
+    idx_list,
+    if (is_named(graph)) vertex_attr(graph)$name else NULL,
+    attr(verts, "env"),
+    attr(verts, "graph")
+  )
 }
 
 # Internal function to quickly convert integer vectors to igraph.es
@@ -325,8 +360,9 @@ unsafe_create_es <- function(graph, idx, es = NULL) {
   if (is.null(es)) {
     es <- E(graph)
   }
-  res <- simple_es_index(es, idx, na_ok = TRUE)
-  add_vses_graph_ref(res, graph)
+  # `simple_es_index()` already carries the graph reference over from `es`,
+  # so the weak reference built once by `E(graph)` is shared across calls.
+  simple_es_index(es, idx, na_ok = TRUE)
 }
 
 
@@ -487,7 +523,19 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
   if (!na_ok && anyNA(res)) {
     cli::cli_abort("Unknown vertex selected.")
   }
-  class(res) <- "igraph.vs"
+  # Set every attribute in a single `attributes<-` call rather than one
+  # `attr<-`/`class<-` at a time: each incremental assignment shallow-copies
+  # the vector, and that copying dominates when many sequences are built
+  # (e.g. `max_cliques()`). `names` is carried over from the subset above;
+  # env/graph are carried from `x`, mirroring `simple_es_index()`, so
+  # sequences derived from one `V(graph)` share its weak reference instead of
+  # each minting a fresh one.
+  attributes(res) <- list(
+    names = attr(res, "names"),
+    class = "igraph.vs",
+    env = attr(x, "env"),
+    graph = attr(x, "graph")
+  )
   res
 }
 
@@ -647,8 +695,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
   ) ||
     inherits(rlang::quo_get_expr(args[[1]]), "integer")
   if (length(args) == 1 && first_arg_is_numericish) {
-    res <- simple_vs_index(x, rlang::quo_get_expr(args[[1]]), na_ok)
-    return(add_vses_graph_ref(res, get_vs_graph(x)))
+    return(simple_vs_index(x, rlang::quo_get_expr(args[[1]]), na_ok))
   }
 
   ## Special case: single symbol argument, no such attribute
@@ -658,8 +705,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
       !(as.character(rlang::quo_get_expr(args[[1]])) %in%
         vertex_attr_names(graph))
     ) {
-      res <- simple_vs_index(x, rlang::eval_tidy(args[[1]]), na_ok)
-      return(add_vses_graph_ref(res, graph))
+      return(simple_vs_index(x, rlang::eval_tidy(args[[1]]), na_ok))
     }
   }
 
@@ -816,11 +862,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
         )
       }
 
-      ii <- simple_vs_index(x, ii, na_ok)
-      attr(ii, "env") <- attr(x, "env")
-      attr(ii, "graph") <- attr(x, "graph")
-      class(ii) <- class(x)
-      ii
+      simple_vs_index(x, ii, na_ok)
     })
   }
 
