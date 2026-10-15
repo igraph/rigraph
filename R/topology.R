@@ -348,9 +348,10 @@ graph.subisomorphic.lad <- function(
 #'
 #' @param graph1 The first graph.
 #' @param graph2 The second graph.
-#' @param method The method to use. Possible values: \sQuote{auto},
+#' @param algorithm The method to use. Possible values: \sQuote{auto},
 #'   \sQuote{direct}, \sQuote{vf2}, \sQuote{bliss}. See their details
 #'   below.
+#' @param method `r lifecycle::badge("deprecated")` Use `algorithm` instead.
 #' @param ... Additional arguments, passed to the various methods.
 #' @return Logical scalar, `TRUE` if the graphs are isomorphic.
 #'
@@ -380,8 +381,8 @@ graph.subisomorphic.lad <- function(
 #' g2 <- permute(g1, sample(vcount(g1)))
 #' # should be TRUE
 #' isomorphic(g1, g2)
-#' isomorphic(g1, g2, method = "bliss")
-#' isomorphic(g1, g2, method = "vf2")
+#' isomorphic(g1, g2, algorithm = "bliss")
+#' isomorphic(g1, g2, algorithm = "vf2")
 #'
 #' # colored graph isomorphism
 #' g1 <- make_ring(10)
@@ -400,31 +401,47 @@ graph.subisomorphic.lad <- function(
 isomorphic <- function(
   graph1,
   graph2,
-  method = c(
+  algorithm = c(
     "auto",
     "direct",
     "vf2",
     "bliss"
   ),
-  ...
+  ...,
+  method = deprecated()
 ) {
+  if (lifecycle::is_present(method)) {
+    if (!missing(algorithm)) {
+      cli::cli_abort(c(
+        "Argument {.arg algorithm} of {.fn isomorphic} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg method}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "isomorphic(method = )",
+      "isomorphic(algorithm = )"
+    )
+    algorithm <- method
+  }
+
   ensure_igraph(graph1)
   ensure_igraph(graph2)
-  method <- igraph_match_arg(method)
+  algorithm <- igraph_match_arg(algorithm)
 
-  if (method == "auto") {
+  if (algorithm == "auto") {
     isomorphic_impl(
       graph1 = graph1,
       graph2 = graph2
     )
-  } else if (method == "direct") {
+  } else if (algorithm == "direct") {
     isomorphic_impl(
       graph1 = graph1,
       graph2 = graph2
     )
-  } else if (method == "vf2") {
+  } else if (algorithm == "vf2") {
     graph.isomorphic.vf2(graph1, graph2, ...)$iso
-  } else if (method == "bliss") {
+  } else if (algorithm == "bliss") {
     graph.isomorphic.bliss(graph1, graph2, ...)$iso
   }
 }
@@ -687,8 +704,9 @@ is_isomorphic_to <- isomorphic
 #' @param target The bigger graph, it might be directed or
 #'   undirected. Undirected graphs are treated as directed graphs with
 #'   mutual edges.
-#' @param method The method to use. Possible values: \sQuote{auto},
+#' @param algorithm The method to use. Possible values: \sQuote{auto},
 #'   \sQuote{lad}, \sQuote{vf2}. See their details below.
+#' @param method `r lifecycle::badge("deprecated")` Use `algorithm` instead.
 #' @param ... Additional arguments, passed to the various methods.
 #' @return Logical scalar, `TRUE` if the `pattern` is
 #'   isomorphic to a (possibly induced) subgraph of `target`.
@@ -732,16 +750,32 @@ is_isomorphic_to <- isomorphic
 subgraph_isomorphic <- function(
   pattern,
   target,
-  method = c("auto", "lad", "vf2"),
-  ...
+  algorithm = c("auto", "lad", "vf2"),
+  ...,
+  method = deprecated()
 ) {
-  method <- igraph_match_arg(method)
-
-  if (method == "auto") {
-    method <- "lad"
+  if (lifecycle::is_present(method)) {
+    if (!missing(algorithm)) {
+      cli::cli_abort(c(
+        "Argument {.arg algorithm} of {.fn subgraph_isomorphic} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg method}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "subgraph_isomorphic(method = )",
+      "subgraph_isomorphic(algorithm = )"
+    )
+    algorithm <- method
   }
 
-  if (method == "lad") {
+  algorithm <- igraph_match_arg(algorithm)
+
+  if (algorithm == "auto") {
+    algorithm <- "lad"
+  }
+
+  if (algorithm == "lad") {
     graph.subisomorphic.lad(
       pattern,
       target,
@@ -749,7 +783,7 @@ subgraph_isomorphic <- function(
       all.maps = FALSE,
       ...
     )$iso
-  } else if (method == "vf2") {
+  } else if (algorithm == "vf2") {
     graph.subisomorphic.vf2(target, pattern, ...)$iso
   }
 }
@@ -764,8 +798,9 @@ is_subgraph_isomorphic_to <- subgraph_isomorphic
 #'
 #' @param graph1 The first graph.
 #' @param graph2 The second graph.
-#' @param method Currently only \sQuote{vf2} is supported, see
+#' @param algorithm Currently only \sQuote{vf2} is supported, see
 #'   [isomorphic()] for details about it and extra arguments.
+#' @param method `r lifecycle::badge("deprecated")` Use `algorithm` instead.
 #' @param ... Passed to the individual methods.
 #' @return Number of isomorphic mappings between the two graphs.
 #'
@@ -793,10 +828,31 @@ is_subgraph_isomorphic_to <- subgraph_isomorphic
 #'   vertex.color1 = NULL,
 #'   vertex.color2 = NULL
 #' )
-count_isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
-  method <- igraph_match_arg(method)
+count_isomorphisms <- function(
+  graph1,
+  graph2,
+  algorithm = "vf2",
+  ...,
+  method = deprecated()
+) {
+  if (lifecycle::is_present(method)) {
+    if (!missing(algorithm)) {
+      cli::cli_abort(c(
+        "Argument {.arg algorithm} of {.fn count_isomorphisms} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg method}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "count_isomorphisms(method = )",
+      "count_isomorphisms(algorithm = )"
+    )
+    algorithm <- method
+  }
 
-  if (method == "vf2") {
+  algorithm <- igraph_match_arg(algorithm)
+
+  if (algorithm == "vf2") {
     graph.count.isomorphisms.vf2(graph1, graph2, ...)
   }
 }
@@ -919,8 +975,9 @@ graph.count.isomorphisms.vf2 <- function(
 #' @param target The bigger graph, it might be directed or
 #'   undirected. Undirected graphs are treated as directed graphs with
 #'   mutual edges.
-#' @param method The method to use. Possible values:
+#' @param algorithm The method to use. Possible values:
 #'   \sQuote{lad}, \sQuote{vf2}. See their details below.
+#' @param method `r lifecycle::badge("deprecated")` Use `algorithm` instead.
 #' @param ... Additional arguments, passed to the various methods.
 #' @return Logical scalar, `TRUE` if the `pattern` is
 #'   isomorphic to a (possibly induced) subgraph of `target`.
@@ -940,14 +997,30 @@ graph.count.isomorphisms.vf2 <- function(
 count_subgraph_isomorphisms <- function(
   pattern,
   target,
-  method = c("lad", "vf2"),
-  ...
+  algorithm = c("lad", "vf2"),
+  ...,
+  method = deprecated()
 ) {
-  method <- igraph_match_arg(method)
+  if (lifecycle::is_present(method)) {
+    if (!missing(algorithm)) {
+      cli::cli_abort(c(
+        "Argument {.arg algorithm} of {.fn count_subgraph_isomorphisms} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg method}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "count_subgraph_isomorphisms(method = )",
+      "count_subgraph_isomorphisms(algorithm = )"
+    )
+    algorithm <- method
+  }
 
-  if (method == "lad") {
+  algorithm <- igraph_match_arg(algorithm)
+
+  if (algorithm == "lad") {
     length(graph.subisomorphic.lad(pattern, target, all.maps = TRUE, ...)$maps)
-  } else if (method == "vf2") {
+  } else if (algorithm == "vf2") {
     graph.count.subisomorphisms.vf2(target, pattern, ...)
   }
 }
@@ -1028,8 +1101,9 @@ graph.count.subisomorphisms.vf2 <- function(
 #'
 #' @param graph1 The first graph.
 #' @param graph2 The second graph.
-#' @param method Currently only \sQuote{vf2} is supported, see
+#' @param algorithm Currently only \sQuote{vf2} is supported, see
 #'   [isomorphic()] for details about it and extra arguments.
+#' @param method `r lifecycle::badge("deprecated")` Use `algorithm` instead.
 #' @param ... Extra arguments, passed to the various methods.
 #' @param callback Optional callback function to call for each isomorphism found.
 #'   If provided, the function should accept two arguments: `map12` (integer vector
@@ -1037,7 +1111,7 @@ graph.count.subisomorphisms.vf2 <- function(
 #'   (integer vector mapping vertex IDs from graph2 to graph1, 1-based indexing).
 #'   The function should return `FALSE` to continue the search or `TRUE` to stop it.
 #'   If `NULL` (the default), all isomorphisms are collected and returned as a list.
-#'   Only supported for `method = "vf2"`.
+#'   Only supported for `algorithm = "vf2"`.
 #'
 #'   **Important limitation:** Callback functions must NOT call any igraph
 #'   functions (including simple queries like `vcount()` or `ecount()`). Doing
@@ -1052,12 +1126,34 @@ graph.count.subisomorphisms.vf2 <- function(
 #'
 #' @export
 #' @family graph isomorphism
-isomorphisms <- function(graph1, graph2, method = "vf2", ..., callback = NULL) {
-  method <- igraph_match_arg(method)
+isomorphisms <- function(
+  graph1,
+  graph2,
+  algorithm = "vf2",
+  ...,
+  callback = NULL,
+  method = deprecated()
+) {
+  if (lifecycle::is_present(method)) {
+    if (!missing(algorithm)) {
+      cli::cli_abort(c(
+        "Argument {.arg algorithm} of {.fn isomorphisms} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg method}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "isomorphisms(method = )",
+      "isomorphisms(algorithm = )"
+    )
+    algorithm <- method
+  }
 
-  if (method != "vf2") {
+  algorithm <- igraph_match_arg(algorithm)
+
+  if (algorithm != "vf2") {
     cli::cli_abort(
-      "Only {.arg method} = {.val vf2} is currently supported."
+      "Only {.arg algorithm} = {.val vf2} is currently supported."
     )
   }
 
@@ -1153,8 +1249,9 @@ isomorphisms <- function(graph1, graph2, method = "vf2", ..., callback = NULL) {
 #' @param target The bigger graph, it might be directed or
 #'   undirected. Undirected graphs are treated as directed graphs with
 #'   mutual edges.
-#' @param method The method to use. Possible values: \sQuote{auto},
+#' @param algorithm The method to use. Possible values: \sQuote{auto},
 #'   \sQuote{lad}, \sQuote{vf2}. See their details below.
+#' @param method `r lifecycle::badge("deprecated")` Use `algorithm` instead.
 #' @param ... Additional arguments, passed to the various methods.
 #' @param callback Optional callback function to call for each subisomorphism found.
 #'   If provided, the function should accept two arguments: `map12` (integer vector
@@ -1162,7 +1259,7 @@ isomorphisms <- function(graph1, graph2, method = "vf2", ..., callback = NULL) {
 #'   (integer vector mapping vertex IDs from target to pattern, 1-based indexing).
 #'   The function should return `FALSE` to continue the search or `TRUE` to stop it.
 #'   If `NULL` (the default), all subisomorphisms are collected and returned as a list.
-#'   Only supported for `method = "vf2"`.
+#'   Only supported for `algorithm = "vf2"`.
 #'
 #'   **Important limitation:** Callback functions must NOT call any igraph
 #'   functions (including simple queries like `vcount()` or `ecount()`). Doing
@@ -1180,21 +1277,37 @@ isomorphisms <- function(graph1, graph2, method = "vf2", ..., callback = NULL) {
 subgraph_isomorphisms <- function(
   pattern,
   target,
-  method = c("lad", "vf2"),
+  algorithm = c("lad", "vf2"),
   ...,
-  callback = NULL
+  callback = NULL,
+  method = deprecated()
 ) {
-  method <- igraph_match_arg(method)
+  if (lifecycle::is_present(method)) {
+    if (!missing(algorithm)) {
+      cli::cli_abort(c(
+        "Argument {.arg algorithm} of {.fn subgraph_isomorphisms} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg method}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "subgraph_isomorphisms(method = )",
+      "subgraph_isomorphisms(algorithm = )"
+    )
+    algorithm <- method
+  }
 
-  if (!is.null(callback) && method != "vf2") {
+  algorithm <- igraph_match_arg(algorithm)
+
+  if (!is.null(callback) && algorithm != "vf2") {
     cli::cli_abort(
-      "Callback parameter is only supported for {.arg method} = {.val vf2}."
+      "Callback parameter is only supported for {.arg algorithm} = {.val vf2}."
     )
   }
 
-  if (method == "lad") {
+  if (algorithm == "lad") {
     graph.subisomorphic.lad(pattern, target, all.maps = TRUE, ...)$maps
-  } else if (method == "vf2") {
+  } else if (algorithm == "vf2") {
     if (is.null(callback)) {
       graph.get.subisomorphisms.vf2(target, pattern, ...)
     } else {

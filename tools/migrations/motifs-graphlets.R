@@ -61,7 +61,13 @@ migrations <- list(
   ),
 
   sample_motifs = list(
-    old = function(graph, size, cut.prob = cut_prob, sample.size = sample_size, sample) {},
+    old = function(
+      graph,
+      size,
+      cut.prob = cut_prob,
+      sample.size = sample_size,
+      sample
+    ) {},
     new = function(
       graph,
       size = 3,

@@ -1512,7 +1512,7 @@ random.graph.game <- function(
 #'   `NULL` and an undirected graph is created.
 #' @param in.deg `r lifecycle::badge("deprecated")` Use `in_deg` instead.
 #' @inheritParams rlang::args_dots_empty
-#' @param method Character, the method for generating the graph. See Details.
+#' @param algorithm Character, the method for generating the graph. See Details.
 #' @return The new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso
@@ -1535,7 +1535,7 @@ random.graph.game <- function(
 #' degree(directed_graph, mode = "in")
 #'
 #' ## The vl generator
-#' vl_graph <- sample_degseq(rep(2, 100), method = "vl")
+#' vl_graph <- sample_degseq(rep(2, 100), algorithm = "vl")
 #' degree(vl_graph)
 #' is_simple(vl_graph) # always TRUE
 #'
@@ -1560,7 +1560,7 @@ random.graph.game <- function(
 #' if (is_exponential_degrees_sum_odd) {
 #'   exponential_degrees[1] <- exponential_degrees[1] + 1
 #' }
-#' exp_vl_graph <- sample_degseq(exponential_degrees, method = "vl")
+#' exp_vl_graph <- sample_degseq(exponential_degrees, algorithm = "vl")
 #' all(degree(exp_vl_graph) == exponential_degrees)
 #'
 #' ## An example that does not work
@@ -1582,7 +1582,7 @@ random.graph.game <- function(
 #' if (is_exponential_degrees_sum_odd) {
 #'   exponential_degrees[1] <- exponential_degrees[1] + 1
 #' }
-#' exp_vl_graph <- sample_degseq(exponential_degrees, method = "vl")
+#' exp_vl_graph <- sample_degseq(exponential_degrees, algorithm = "vl")
 #'
 #' @examples
 #' ## Power-law degree distribution
@@ -1606,7 +1606,7 @@ random.graph.game <- function(
 #' if (is_exponential_degrees_sum_odd) {
 #'   powerlaw_degrees[1] <- powerlaw_degrees[1] + 1
 #' }
-#' powerlaw_vl_graph <- sample_degseq(powerlaw_degrees, method = "vl")
+#' powerlaw_vl_graph <- sample_degseq(powerlaw_degrees, algorithm = "vl")
 #' all(degree(powerlaw_vl_graph) == powerlaw_degrees)
 #'
 #' ## An example that does not work
@@ -1628,14 +1628,14 @@ random.graph.game <- function(
 #' if (is_exponential_degrees_sum_odd) {
 #'   powerlaw_degrees[1] <- powerlaw_degrees[1] + 1
 #' }
-#' powerlaw_vl_graph <- sample_degseq(powerlaw_degrees, method = "vl")
+#' powerlaw_vl_graph <- sample_degseq(powerlaw_degrees, algorithm = "vl")
 #' all(degree(powerlaw_vl_graph) == powerlaw_degrees)
 #'
 sample_degseq <- function(
   out_deg,
   in_deg = NULL,
   ...,
-  method = c(
+  algorithm = c(
     "configuration",
     "vl",
     "fast.heur.simple",
@@ -1659,14 +1659,14 @@ sample_degseq <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_degseq}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(method)) base::list(method = method)
+        if (!base::missing(method)) base::list(algorithm = method)
       )
     }
     .arg_handle <- .old_signature(...)
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(method)) "method"
+        if (!base::missing(algorithm)) "algorithm"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_degseq} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -1674,7 +1674,7 @@ sample_degseq <- function(
         "3.0.0",
         what = base::I("Calling `sample_degseq()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  sample_degseq(", base::paste(base::c("out_deg", "in_deg", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  sample_degseq(", base::paste(base::c("out_deg", "in_deg", base::c(algorithm = "method")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    sample_degseq(", base::paste(base::c("out_deg", "in_deg", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -1712,11 +1712,11 @@ sample_degseq <- function(
     out_deg <- out.deg
   }
 
-  if (missing(method)) {
-    method <- method[1]
+  if (missing(algorithm)) {
+    algorithm <- algorithm[1]
   }
-  method <- igraph_match_arg(
-    method,
+  algorithm <- igraph_match_arg(
+    algorithm,
     values = c(
       "configuration",
       "vl",
@@ -1729,30 +1729,30 @@ sample_degseq <- function(
     )
   )
 
-  if (method == "simple") {
+  if (algorithm == "simple") {
     lifecycle::deprecate_stop(
       "2.1.0",
-      "sample_degseq(method = 'must be configuration instead of simple')"
+      "sample_degseq(algorithm = 'must be configuration instead of simple')"
     )
   }
 
-  if (method == "simple.no.multiple") {
+  if (algorithm == "simple.no.multiple") {
     lifecycle::deprecate_stop(
       "2.1.0",
-      "sample_degseq(method = 'must be fast.heur.simple instead of simple.no.multiple')"
+      "sample_degseq(algorithm = 'must be fast.heur.simple instead of simple.no.multiple')"
     )
   }
 
-  if (method == "simple.no.multiple.uniform") {
+  if (algorithm == "simple.no.multiple.uniform") {
     lifecycle::deprecate_stop(
       "2.1.0",
-      "sample_degseq(method = 'must be configuration.simple instead of simple.no.multiple.uniform')"
+      "sample_degseq(algorithm = 'must be configuration.simple instead of simple.no.multiple.uniform')"
     )
   }
 
   # numbers from https://github.com/igraph/igraph/blob/640083c88bf85fd322ff7b748b9b4e16ebe32aa2/include/igraph_constants.h#L94
   method_impl <- switch(
-    method,
+    algorithm,
     "configuration" = "configuration",
     "vl" = "vl",
     "fast.heur.simple" = "fast_heur_simple",
@@ -1770,7 +1770,7 @@ sample_degseq <- function(
   )
   if (igraph_opt("add.params")) {
     res$name <- "Degree sequence random graph"
-    res$method <- method
+    res$method <- algorithm
   }
   res
 }

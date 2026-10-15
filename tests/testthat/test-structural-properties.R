@@ -1246,17 +1246,20 @@ test_that("subcomponent() tail arguments and legacy positional recovery", {
 test_that("induced_subgraph() tail arguments and legacy positional recovery", {
   g <- make_ring(10)
 
-  sub <- induced_subgraph(g, 1:3, impl = "create_from_scratch")
+  sub <- induced_subgraph(g, 1:3, algorithm = "create_from_scratch")
   expect_equal(vcount(sub), 3)
   expect_equal(ecount(sub), 2)
-  expect_isomorphic(sub, induced_subgraph(g, 1:3, impl = "copy_and_delete"))
+  expect_isomorphic(
+    sub,
+    induced_subgraph(g, 1:3, algorithm = "copy_and_delete")
+  )
 
   lifecycle::expect_deprecated(
     res <- induced_subgraph(g, 1:3, "create_from_scratch")
   )
   expect_identical_graphs(
     res,
-    induced_subgraph(g, 1:3, impl = "create_from_scratch")
+    induced_subgraph(g, 1:3, algorithm = "create_from_scratch")
   )
 })
 
@@ -1672,4 +1675,15 @@ test_that("snake_case renames in the structural properties recover the legacy do
   cb <- function(graph, data, extra) FALSE
   expect_legacy_arg(dfs, list(g, 1), "in.callback", "in_callback", cb)
   expect_legacy_arg(dfs, list(g, 1), "out.callback", "out_callback", cb)
+})
+
+test_that("induced_subgraph(impl = ) is renamed to `algorithm`", {
+  g <- make_ring(10)
+  expect_legacy_arg(
+    induced_subgraph,
+    list(g, 1:5),
+    "impl",
+    "algorithm",
+    "copy_and_delete"
+  )
 })
