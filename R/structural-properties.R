@@ -1927,18 +1927,19 @@ k_shortest_paths <- function(
 #' Finds all vertices reachable from a given vertex, or the opposite: all
 #' vertices from which a given vertex is reachable via a directed path.
 #'
-#' A breadth-first search is conducted starting from vertex `v`.
+#' A breadth-first search is conducted starting from vertex `vertex`.
 #'
 #' @param graph The graph to analyze.
-#' @param v The vertex to start the search from.
+#' @param vertex The vertex to start the search from.
 #' @inheritParams rlang::args_dots_empty
 #' @param mode Character string, either \dQuote{in}, \dQuote{out} or
-#'   \dQuote{all}. If \dQuote{in} all vertices from which `v` is reachable
-#'   are listed. If \dQuote{out} all vertices reachable from `v` are
+#'   \dQuote{all}. If \dQuote{in} all vertices from which `vertex` is reachable
+#'   are listed. If \dQuote{out} all vertices reachable from `vertex` are
 #'   returned. If \dQuote{all} returns the union of these. It is ignored for
 #'   undirected graphs.
+#' @param v `r lifecycle::badge("deprecated")` Use `vertex` instead.
 #' @return Numeric vector, the IDs of the vertices in the same component as
-#'   `v`.
+#'   `vertex`.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [components()]
 #' @family structural.properties
@@ -1952,9 +1953,10 @@ k_shortest_paths <- function(
 #' subcomponent(g, 1, "all")
 subcomponent <- function(
   graph,
-  v,
+  vertex,
   ...,
-  mode = c("all", "out", "in")
+  mode = c("all", "out", "in"),
+  v = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: subcomponent, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -1983,13 +1985,28 @@ subcomponent <- function(
         "3.0.0",
         what = base::I("Calling `subcomponent()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  subcomponent(", base::paste(base::c("graph", "v", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    subcomponent(", base::paste(base::c("graph", "v", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  subcomponent(", base::paste(base::c("graph", "vertex", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    subcomponent(", base::paste(base::c("graph", "vertex", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
+
+  if (lifecycle::is_present(v)) {
+    if (!missing(vertex)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertex} of {.fn subcomponent} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg v}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "subcomponent(v = )",
+      "subcomponent(vertex = )"
+    )
+    vertex <- v
+  }
 
   ensure_igraph(graph)
   mode <- igraph_match_arg(mode)
@@ -1999,7 +2016,7 @@ subcomponent <- function(
   res <- .Call(
     Rx_igraph_subcomponent,
     graph,
-    as_igraph_vs(graph, v) - 1,
+    as_igraph_vs(graph, vertex) - 1,
     as.numeric(mode)
   ) +
     1L

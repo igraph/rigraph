@@ -227,7 +227,7 @@ to_prufer <- function(graph) {
 #' @param graph The input graph to sample from. Edge directions are ignored if
 #'   the graph is directed.
 #' @inheritParams rlang::args_dots_empty
-#' @param vid When the graph is disconnected, this argument specifies how to
+#' @param vertex When the graph is disconnected, this argument specifies how to
 #'   handle the situation. When the argument is zero (the default), the sampling
 #'   will be performed component-wise, and the result will be a spanning forest.
 #'   When the argument contains a vertex ID, only the component containing the
@@ -249,7 +249,7 @@ to_prufer <- function(graph) {
 sample_spanning_tree <- function(
   graph,
   ...,
-  vid = 0
+  vertex = 0
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_spanning_tree, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -263,14 +263,14 @@ sample_spanning_tree <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_spanning_tree}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(vid)) base::list(vid = vid)
+        if (!base::missing(vid)) base::list(vertex = vid)
       )
     }
     .arg_handle <- .old_signature(...)
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(vid)) "vid"
+        if (!base::missing(vertex)) "vertex"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_spanning_tree} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -278,7 +278,7 @@ sample_spanning_tree <- function(
         "3.0.0",
         what = base::I("Calling `sample_spanning_tree()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  sample_spanning_tree(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  sample_spanning_tree(", base::paste(base::c("graph", base::c(vertex = "vid")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    sample_spanning_tree(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -288,6 +288,6 @@ sample_spanning_tree <- function(
 
   random_spanning_tree_impl(
     graph = graph,
-    vid = vid
+    vid = vertex
   )
 }

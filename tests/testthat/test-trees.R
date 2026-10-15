@@ -200,13 +200,13 @@ test_that("sample_spanning_tree works for disconnected graphs", {
   igraph_local_seed(42)
   g <- make_full_graph(8) %du% make_full_graph(5)
 
-  edges <- sample_spanning_tree(g, vid = 8)
+  edges <- sample_spanning_tree(g, vertex = 8)
   sg <- subgraph_from_edges(g, edges, delete.vertices = TRUE)
   expect_vcount(sg, 8)
   expect_ecount(sg, 7)
   expect_true(is_tree(sg))
 
-  edges <- sample_spanning_tree(g, vid = 9)
+  edges <- sample_spanning_tree(g, vertex = 9)
   sg <- subgraph_from_edges(g, edges, delete.vertices = TRUE)
   expect_vcount(sg, 5)
   expect_ecount(sg, 4)
@@ -268,7 +268,16 @@ test_that("sample_spanning_tree recovers legacy positional arguments", {
   lifecycle::expect_deprecated(
     res <- igraph_with_seed(42, sample_spanning_tree(g, 9))
   )
-  # vid = 9 selects the 5-vertex component, so its spanning tree has 4 edges.
+  # vertex = 9 selects the 5-vertex component, so its spanning tree has 4 edges.
   expect_length(res, 4)
-  expect_equal(res, igraph_with_seed(42, sample_spanning_tree(g, vid = 9)))
+  expect_equal(res, igraph_with_seed(42, sample_spanning_tree(g, vertex = 9)))
+})
+
+test_that("sample_spanning_tree(vid = ) is deprecated but still works", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  g <- make_full_graph(8) %du% make_full_graph(5)
+  lifecycle::expect_deprecated(
+    res <- igraph_with_seed(42, sample_spanning_tree(g, vid = 9))
+  )
+  expect_equal(res, igraph_with_seed(42, sample_spanning_tree(g, vertex = 9)))
 })

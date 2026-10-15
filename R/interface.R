@@ -350,11 +350,12 @@ ecount <- gsize
 #' vertices are adjacent), if they are incident to the same edge.
 #'
 #' @param graph The input graph.
-#' @param v The vertex of which the adjacent vertices are queried.
+#' @param vertex The vertex of which the adjacent vertices are queried.
 #' @inheritParams rlang::args_dots_empty
 #' @param mode Whether to query outgoing (\sQuote{out}), incoming
 #'   (\sQuote{in}) edges, or both types (\sQuote{all}). This is
 #'   ignored for undirected graphs.
+#' @param v `r lifecycle::badge("deprecated")` Use `vertex` instead.
 #' @return A vertex sequence containing the neighbors of the input vertex.
 #'
 #' @family structural queries
@@ -367,9 +368,10 @@ ecount <- gsize
 #' intersection(n1, n34)
 neighbors <- function(
   graph,
-  v,
+  vertex,
   ...,
-  mode = c("out", "in", "all", "total")
+  mode = c("out", "in", "all", "total"),
+  v = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: neighbors, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -398,25 +400,40 @@ neighbors <- function(
         "3.0.0",
         what = base::I("Calling `neighbors()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  neighbors(", base::paste(base::c("graph", "v", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    neighbors(", base::paste(base::c("graph", "v", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  neighbors(", base::paste(base::c("graph", "vertex", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    neighbors(", base::paste(base::c("graph", "vertex", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
+  if (lifecycle::is_present(v)) {
+    if (!missing(vertex)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertex} of {.fn neighbors} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg v}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "neighbors(v = )",
+      "neighbors(vertex = )"
+    )
+    vertex <- v
+  }
+
   ensure_igraph(graph)
   mode <- igraph_match_arg(mode)
 
-  v <- as_igraph_vs(graph, v)
-  if (length(v) == 0) {
-    cli::cli_abort("{.arg v} must specify at least one vertex.")
+  vertex <- as_igraph_vs(graph, vertex)
+  if (length(vertex) == 0) {
+    cli::cli_abort("{.arg vertex} must specify at least one vertex.")
   }
 
   neighbors_impl(
     graph = graph,
-    vid = v,
+    vid = vertex,
     mode = mode
   )
 }
@@ -424,7 +441,7 @@ neighbors <- function(
 #' Incident edges of a vertex in a graph
 #'
 #' @param graph The input graph.
-#' @param v The vertex of which the incident edges are queried.
+#' @param vertex The vertex of which the incident edges are queried.
 #' @inheritParams neighbors
 #' @inheritParams rlang::args_dots_empty
 #' @return An edge sequence containing the incident edges of
@@ -439,9 +456,10 @@ neighbors <- function(
 #' incident(g, 34)
 incident <- function(
   graph,
-  v,
+  vertex,
   ...,
-  mode = c("all", "out", "in", "total")
+  mode = c("all", "out", "in", "total"),
+  v = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: incident, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -470,13 +488,24 @@ incident <- function(
         "3.0.0",
         what = base::I("Calling `incident()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  incident(", base::paste(base::c("graph", "v", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    incident(", base::paste(base::c("graph", "v", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  incident(", base::paste(base::c("graph", "vertex", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    incident(", base::paste(base::c("graph", "vertex", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
+
+  if (lifecycle::is_present(v)) {
+    if (!missing(vertex)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertex} of {.fn incident} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg v}."
+      ))
+    }
+    lifecycle::deprecate_soft("3.0.0", "incident(v = )", "incident(vertex = )")
+    vertex <- v
+  }
 
   # For undirected graphs, mode doesn't matter, use "all"
   if (!is_directed(graph)) {
@@ -487,7 +516,7 @@ incident <- function(
 
   incident_impl(
     graph = graph,
-    vid = v,
+    vid = vertex,
     mode = mode
   )
 }

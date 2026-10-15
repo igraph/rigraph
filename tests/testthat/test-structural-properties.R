@@ -1618,3 +1618,12 @@ test_that("transitivity(vids = ) is recovered as `vertices`", {
     transitivity(g, type = "local", vertices = c("a", "c"))
   )
 })
+
+test_that("subcomponent(v = ) is deprecated but still works", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  g <- make_graph(~ A - +B - +C)
+  lifecycle::expect_deprecated(
+    res_legacy <- subcomponent(g, v = 2, mode = "out")
+  )
+  expect_equal(res_legacy, subcomponent(g, vertex = 2, mode = "out"))
+})

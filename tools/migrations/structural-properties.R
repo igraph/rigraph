@@ -393,9 +393,10 @@ migrations <- list(
     old = function(graph, v, mode) {},
     new = function(
       graph,
-      v,
+      vertex,
       ...,
-      mode = c("all", "out", "in")
+      mode = c("all", "out", "in"),
+      v = deprecated()
     ) {},
     when = "3.0.0"
   ),
