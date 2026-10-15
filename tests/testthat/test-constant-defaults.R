@@ -43,9 +43,9 @@ test_that("NULL selector defaults of round-2 functions select the full set", {
   expect_identical_graphs(reverse_edges(g, edges = NULL), reverse_edges(g))
 
   V(g)$name <- letters[1:5]
-  expect_identical(vertex_attr(g, "name", index = NULL), vertex_attr(g, "name"))
+  expect_identical(vertex_attr(g, "name", vertices = NULL), vertex_attr(g, "name"))
   expect_identical(vertex.attributes(g, index = NULL), vertex.attributes(g))
-  g2 <- set_vertex_attr(g, "x", index = NULL, value = 1)
+  g2 <- set_vertex_attr(g, "x", vertices = NULL, value = 1)
   expect_identical(vertex_attr(g2, "x"), rep(1, 5))
 })
 
