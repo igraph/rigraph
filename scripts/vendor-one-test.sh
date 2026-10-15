@@ -40,6 +40,8 @@
 #      strand in either phase, the tree (CMake) or what is derived from the
 #      patched tree, and on the buffer in the regeneration, whose pick is
 #      undone. A stack every entry of which has retired vendors on.
+#  14. The strand skips an upstream commit that moves nothing under the vendor
+#      paths but the version stamp, and lists it in the next commit's body.
 #
 # Usage:
 #   scripts/vendor-one-test.sh
@@ -425,6 +427,17 @@ is "the pick is undone, and the buffer stands where it did" \
   "$(git -C "$BUILD" rev-parse HEAD) $(clean_in "$BUILD")" "$before clean"
 pick
 is "the rerun takes the pick" "$status $(git -C "$BUILD" rev-list --count "$before..HEAD")" "0 1"
+
+# Claim 14. Past the seam, `U1` moves nothing under the vendor paths but the version stamp,
+# which moves on every upstream commit (`series_stamp_file`), so the strand skips it.
+strand_run strand-seam
+is "the strand vendors the seam's tag" \
+  "$status $(subject_in "$STRAND")" "0 vendor: Update vendored sources (tag 1.0.1) to igraph/igraph@$SEAM"
+strand_run strand-skip
+is "and then skips a commit that moves only the version stamp" \
+  "$status $(subject_in "$STRAND")" "0 vendor: Update vendored sources to igraph/igraph@$U2"
+has "listing it in the body" "$(git -C "$STRAND" log -1 --format=%B)" \
+  "Update the documentation (https://redirect.github.com/igraph/igraph/pull/22)"
 
 echo
 echo "$pass passed, $fail failed"

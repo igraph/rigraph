@@ -7,12 +7,12 @@
 # scripts/series-config.sh holds most of it.
 source: duckdb/duckdb-r
 url: https://github.com/duckdb/duckdb-r
-commit: 1b150770438563c11ff4cab2aecb6737e2678421
+commit: db7d776416da112a32f25de1439778612876b126
 source-date: 2026-10-15
 checked: 2026-10-15
 ported:
   - path: scripts/vendor-one.sh
-    blob: 165f7e091da5ab348e7e3bc4fa0a94ce5a055112
+    blob: cd9c1cb9ba180e63d2297953c1f3ff90525c86ac
   - path: scripts/vendor-lib.sh
     blob: 07f3fe272fcd4e49f5f6c8fa2d1e05c20e56f767
   - path: scripts/vendor.sh

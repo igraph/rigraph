@@ -59,7 +59,7 @@ fi
 # changelog nobody chose. The same rule, and the same bound, as vendored_sha()
 # in scripts/series-advance.sh; scripts/vendor-one.sh has its own copy.
 base_scan_depth="${BASE_SCAN_DEPTH:-20}"
-subjects=$(git log -n "${base_scan_depth}" --format="%s" -- "${series_scan_dir}" | tee /dev/stderr)
+subjects=$(git log -n "${base_scan_depth}" --format="%s" -- "${series_scan_dir}" | tee >(cat >&2))
 base=$(sed -En "$series_sha_sed" <<<"$subjects" | head -n 1)
 if [ -z "$base" ]; then
   n=$(grep -c . <<<"$subjects" || true)
@@ -157,7 +157,7 @@ git add .
   echo
   if git -C "$upstream_dir" merge-base --is-ancestor "$base" "$commit"; then
     git -C "$upstream_dir" log --first-parent --format="%s" "${base}".."${commit}" |
-      tee /dev/stderr |
+      tee >(cat >&2) |
       sed -r 's%#([0-9]+)%https://redirect.github.com/'"${owner}"'/pull/\1%g'
   else
     echo "Vendored by hand, not a walk from ${base}, which this commit does not descend from."

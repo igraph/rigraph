@@ -16,7 +16,7 @@
 # whose copy of this file names DuckDB. This one is most of the rigraph layer
 # over the scripts, so a resync touches the scripts and leaves the facts below
 # alone. The names duckdb-r's copy has and this one lacks belong to scripts that
-# are not ported, `series_glue` (series-glue.sh) and `series_engine_file`
+# are not ported, `series_glue` (series-glue.sh) and `series_engine_of`
 # (series-alpha.sh), or are optional, `series_release_of_stamp` (below).
 
 # The upstream repository, as a vendor subject names it:
@@ -199,7 +199,11 @@ series_engine_of() { # <commit> -> the upstream SHA, empty when none
 
 # The version a tree stamps for the engine it vendors, as the package reads it:
 # what igraph's CMake writes from `git describe --tags` in the upstream clone.
+# It is also where the tree records the engine itself, the abbreviated upstream
+# SHA, so the file that moves on every upstream commit is the same for both, and
+# a vendor run counts any other moved file as a real change (scripts/vendor-one.sh).
 series_stamp_file=src/vendor/igraph_version.h
+series_engine_file=$series_stamp_file
 series_stamped_version() { # <tree-ish> -> the version, empty when none
   { git show "$1:$series_stamp_file" 2>/dev/null || true; } |
     sed -En 's/^#define IGRAPH_VERSION "(.*)"$/\1/p'

@@ -167,7 +167,7 @@ glue_failures=${TMPDIR:-/tmp}/vendor-one-glue-failures.txt
 # scripts/series-lib.sh; scripts/vendor.sh has its own copy.
 vendored_sha() {
   local subjects sha n
-  subjects=$(git log -n "${base_scan_depth}" --format="%s" -- "${series_scan_dir}" | tee /dev/stderr)
+  subjects=$(git log -n "${base_scan_depth}" --format="%s" -- "${series_scan_dir}" | tee >(cat >&2))
   sha=$(sed -rn "$series_sha_sed" <<<"$subjects" | head -n 1)
   if [ -z "$sha" ]; then
     n=$(grep -c . <<<"$subjects" || true)
@@ -367,11 +367,13 @@ while [ $commits_vendored -lt $num_commits ]; do
       break
     fi
 
-    # The engine file always differs, so "more than one" is the test for a
-    # real change, over the directory holding the tree and the stamp, or for a
-    # strand commit over the paths it stages.
+    # The engine file and the version stamp differ on every upstream commit, so
+    # a real change is anything else that moved: over the directory holding the
+    # tree and the stamp, or for a strand commit over the paths it stages.
     if [ "$strand" = true ]; then changed=("${series_vendor_paths[@]}"); else changed=("${series_scan_dir}"); fi
-    if [ "$(git status --porcelain -- "${changed[@]}" | wc -l)" -gt 1 ]; then
+    moved=$(git status --porcelain -- "${changed[@]}" | awk '{ print $NF }' |
+      { grep -vxF -e "$series_engine_file" -e "$series_stamp_file" || true; } | wc -l)
+    if [ "$moved" -gt 0 ]; then
       message="vendor: Update vendored sources to ${owner}@$commit"
       break
     fi
@@ -434,7 +436,7 @@ while [ $commits_vendored -lt $num_commits ]; do
       echo "From here on this line walks ${series_upstream_repo}'s first-parent history."
     else
       git -C "$upstream_dir" log --first-parent --format="%s" "${base}".."${commit}" |
-        tee /dev/stderr |
+        tee >(cat >&2) |
         sed -r 's%#([0-9]+)%https://redirect.github.com/'"${owner}"'/pull/\1%g'
     fi
   ) | git commit --file /dev/stdin || {
