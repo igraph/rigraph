@@ -867,7 +867,9 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
   }
 
   res <- drop_null(res)
-  if (length(res)) {
+  if (length(res) == 1) {
+    res[[1]]
+  } else if (length(res)) {
     do_call(c, res)
   } else {
     x[FALSE]
