@@ -29,9 +29,9 @@ getIgraphOpt <- function(x, default = NULL) {
   lifecycle::deprecate_warn("2.0.0", "getIgraphOpt()", "igraph_opt()")
 
   if (missing(default)) {
-    get_config(paste0("igraph::", x), .igraph.pars[[x]])
+    get_config(igraph_par_key(x), .igraph.pars[[x]])
   } else {
-    get_config(paste0("igraph::", x), default)
+    get_config(igraph_par_key(x), default)
   }
 } # nocov end
 
@@ -75,6 +75,14 @@ getIgraphOpt <- function(x, default = NULL) {
   "print.id" = TRUE,
   "print.style" = "cli"
 )
+
+# The pkgconfig key an option is stored under.
+# It carries the package name,
+# so that flavors loaded side by side keep their options apart,
+# as they already keep the C state behind `verbose`.
+igraph_par_key <- function(x) {
+  paste0(get_package_name(), "::", x)
+}
 
 # Option keys that were renamed to snake_case. Reading or setting an option by
 # its old dotted name still works, but maps to the canonical key and emits a
@@ -304,7 +312,7 @@ igraph_i_options <- function(
   names(old) <- names(temp)
 
   ## Set them
-  names(temp) <- paste0("igraph::", names(temp))
+  names(temp) <- igraph_par_key(names(temp))
   do.call(set_config_in, c(temp, list(.in = .in)))
   invisible(old)
 }
@@ -318,7 +326,7 @@ local_igraph_options <- function(..., .in = parent.frame()) {
 #' @importFrom pkgconfig set_config get_config
 get_all_options <- function() {
   res <- lapply(names(.igraph.pars), function(n) {
-    nn <- paste0("igraph::", n)
+    nn <- igraph_par_key(n)
     get_config(nn, fallback = .igraph.pars[[n]])
   })
 
@@ -390,9 +398,9 @@ igraph_opt <- function(
 
   x <- igraph_normalize_par_name(x, parent.frame())
   if (missing(default)) {
-    get_config(paste0("igraph::", x), .igraph.pars[[x]])
+    get_config(igraph_par_key(x), .igraph.pars[[x]])
   } else {
-    get_config(paste0("igraph::", x), default)
+    get_config(igraph_par_key(x), default)
   }
 }
 

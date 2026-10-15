@@ -191,10 +191,13 @@ set_complete_iterator <- function(x, value = TRUE) {
 }
 
 inside_square_error <- function(fn_name, call = rlang::caller_env()) {
+  # The help links need a qualified topic,
+  # and the qualifier is this package under whatever name it was installed.
+  pkg <- get_package_name()
   cli::cli_abort(
     c(
       "{.fun {fn_name}} must only be used inside index or vertex sequences like {.code E(g)[]} or {.code V(g)[]}.",
-      i = "See {.help [{.fun [.igraph.es}](igraph::`[.igraph.es`)} or {.help [{.fun [.igraph.vs}](igraph::`[.igraph.vs`)}."
+      i = "See {.help [{.fun [.igraph.es}]({pkg}::`[.igraph.es`)} or {.help [{.fun [.igraph.vs}]({pkg}::`[.igraph.vs`)}."
     ),
     call = call
   )

@@ -126,11 +126,12 @@ scrub_igraph_file_paths <- function(y) {
   y
 }
 
-expect_snapshot_igraph_error <- function(x, ...) {
+# A caller's `transform` runs after the path scrub, rather than replacing it.
+expect_snapshot_igraph_error <- function(x, ..., transform = identity) {
   inject(expect_snapshot(
     {{ x }},
     error = TRUE,
-    transform = scrub_igraph_file_paths,
+    transform = function(y) transform(scrub_igraph_file_paths(y)),
     ...
   ))
 }

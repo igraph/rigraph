@@ -17,7 +17,7 @@ test_that("layout_with_fr() works", {
 test_that("layout_with_fr() deprecated argument", {
   rlang::local_options(lifecycle_verbosity = "warning")
   g <- make_ring(10)
-  expect_snapshot_igraph_error({
+  expect_snapshot_igraph_error(transform = transform_package_name, {
     l <- layout_with_fr(
       g,
       niter = 50,
@@ -216,7 +216,7 @@ test_that("Kamada-Kawai layout generator works", {
 
 test_that("layout_with_kk() deprecated arguments", {
   g <- make_ring(10)
-  expect_snapshot_igraph_error({
+  expect_snapshot_igraph_error(transform = transform_package_name, {
     l <- layout_with_kk(
       g,
       maxiter = 50,
@@ -274,7 +274,7 @@ test_that("`layout_with_mds()` works", {
 test_that("layout_with_mds() deprecated argument", {
   rlang::local_options(lifecycle_verbosity = "warning")
   g <- make_tree(10, 2, mode = "undirected")
-  expect_snapshot_igraph_error({
+  expect_snapshot_igraph_error(transform = transform_package_name, {
     l <- layout_with_mds(g, options = arpack_defaults())
   })
 })

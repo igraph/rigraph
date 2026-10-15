@@ -80,7 +80,8 @@ test_that("`authority_score()` works", {
 
   rlang::with_options(lifecycle_verbosity = "warning", {
     expect_snapshot(
-      s3 <- authority_score(g2, options = arpack_defaults)$vector
+      s3 <- authority_score(g2, options = arpack_defaults)$vector,
+      transform = transform_package_name
     )
   })
   expect_equal(s2, s3)
@@ -137,7 +138,8 @@ test_that("`hub_score()` works", {
 
   rlang::with_options(lifecycle_verbosity = "warning", {
     expect_snapshot(
-      s3 <- hub_score(g2, options = arpack_defaults)$vector
+      s3 <- hub_score(g2, options = arpack_defaults)$vector,
+      transform = transform_package_name
     )
   })
   expect_equal(s2, s3)
@@ -915,11 +917,11 @@ test_that("eigen_centrality() deprecated scale argument", {
   rlang::local_options(lifecycle_verbosity = "warning")
   igraph_local_seed(42)
   g <- make_ring(10, directed = FALSE)
-  expect_snapshot({
+  expect_snapshot(transform = transform_package_name, {
     invisible(eigen_centrality(g, scale = TRUE))
   })
   # For some reason, this produces different outputs on Windows and macOS
-  expect_snapshot(error = TRUE, {
+  expect_snapshot(error = TRUE, transform = transform_package_name, {
     invisible(eigen_centrality(g, scale = FALSE))
   })
 })

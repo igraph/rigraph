@@ -648,7 +648,7 @@ test_that("graph_from_adjacency_matrix() snapshot", {
 
   expect_false(igraph_opt("print.id"))
 
-  expect_snapshot({
+  expect_snapshot(transform = transform_package_name, {
     igraph_opt("print.id")
 
     m <- matrix(c(0, 2.5, 0, 0), ncol = 2)
@@ -678,7 +678,7 @@ test_that("graph_from_adjacency_matrix() snapshot for sparse matrices", {
 
   expect_false(igraph_opt("print.id"))
 
-  expect_snapshot({
+  expect_snapshot(transform = transform_package_name, {
     igraph_opt("print.id")
 
     m <- Matrix::sparseMatrix(2, 1, x = 2.5, dims = c(2, 2))

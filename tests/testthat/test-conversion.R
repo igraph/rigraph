@@ -49,14 +49,20 @@ test_that("as.directed() deprecation", {
   rlang::local_options(lifecycle_verbosity = "warning")
   igraph_local_seed(42)
   g <- sample_gnp(100, 2 / 100)
-  expect_snapshot(is_directed(as.directed(g, mode = "mutual")))
+  expect_snapshot(
+    is_directed(as.directed(g, mode = "mutual")),
+    transform = transform_package_name
+  )
 })
 
 test_that("as.undirected() deprecation", {
   rlang::local_options(lifecycle_verbosity = "warning")
   igraph_local_seed(42)
   g <- sample_gnp(100, 2 / 100)
-  expect_snapshot(is_directed(as.undirected(g, mode = "collapse")))
+  expect_snapshot(
+    is_directed(as.undirected(g, mode = "collapse")),
+    transform = transform_package_name
+  )
 })
 
 test_that("as_undirected() keeps attributes", {
@@ -375,7 +381,8 @@ test_that("as_adjacency_matrix(attr =) is deprecated but still works", {
   E(g)$weight <- 1:6
   expected <- as_adjacency_matrix(g, weights = "weight", sparse = FALSE)
   expect_snapshot(
-    A <- as_adjacency_matrix(g, attr = "weight", sparse = FALSE)
+    A <- as_adjacency_matrix(g, attr = "weight", sparse = FALSE),
+    transform = transform_package_name
   )
   expect_equal(A, expected)
 })
@@ -426,8 +433,14 @@ test_that("the `attr` deprecation warning spells out the NULL translation", {
   g <- make_graph(c(1, 2, 2, 3), directed = FALSE)
   E(g)$weight <- c(0.5, 0.7)
 
-  expect_snapshot(A <- as_adjacency_matrix(g, attr = NULL, sparse = FALSE))
-  expect_snapshot(B <- as_adjacency_matrix(g, attr = "weight", sparse = FALSE))
+  expect_snapshot(
+    A <- as_adjacency_matrix(g, attr = NULL, sparse = FALSE),
+    transform = transform_package_name
+  )
+  expect_snapshot(
+    B <- as_adjacency_matrix(g, attr = "weight", sparse = FALSE),
+    transform = transform_package_name
+  )
 })
 
 test_that("as_adjacency_matrix() wires up legacy `attr` recovery", {
@@ -491,7 +504,8 @@ test_that("as_biadjacency_matrix(attr =) is deprecated but still works", {
   E(g)$weight <- c(2, 4, 6)
   expected <- as_biadjacency_matrix(g, weights = "weight", sparse = FALSE)
   expect_snapshot(
-    A <- as_biadjacency_matrix(g, attr = "weight", sparse = FALSE)
+    A <- as_biadjacency_matrix(g, attr = "weight", sparse = FALSE),
+    transform = transform_package_name
   )
   expect_equal(A, expected)
 })
