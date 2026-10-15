@@ -19,7 +19,9 @@ a shallow or tagless clone is refused, because igraph's CMake derives the versio
 Its `HEAD` says how far to walk upstream `main`; on the replay the walk ends at the replay's tip whatever `HEAD` says
 ([`model/`](/handbook/operations/vendoring/model/README.md)).
 
-**What one commit regenerates**, in two halves, the hooks `series_generate` and `series_regenerate` in [`scripts/series-config.sh`](/scripts/series-config.sh).
+**What one commit regenerates**, in two halves, through the hooks in [`scripts/series-config.sh`](/scripts/series-config.sh):
+`series_generate_tree` copies the upstream tree, the patch stack is applied, and `series_generate_derived` builds from the patched tree;
+`series_regenerate` produces the buffer's half after a pick.
 The strand's half is what upstream and the patch stack alone determine:
 
 * `src/vendor/cigraph/`: the upstream tree, keeping only what the build, Stimulus and the licence need (the keep-list);
