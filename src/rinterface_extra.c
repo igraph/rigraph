@@ -2914,7 +2914,7 @@ SEXP Ry_igraph_matrix_to_SEXP(const igraph_matrix_t *m) {
   }
 
   PROTECT(result=NEW_NUMERIC(igraph_matrix_size(m)));
-  igraph_matrix_copy_to(m, REAL(result));
+  igraph_matrix_copy_to(m, REAL(result), IGRAPH_COLUMN_MAJOR);
   PROTECT(dim=NEW_INTEGER(2));
   INTEGER(dim)[0] = (int) nrow;
   INTEGER(dim)[1] = (int) ncol;
@@ -2985,7 +2985,7 @@ SEXP Rx_igraph_matrix_complex_to_SEXP(const igraph_matrix_complex_t *m) {
   }
 
   PROTECT(result=NEW_COMPLEX(igraph_matrix_complex_size(m)));
-  igraph_matrix_complex_copy_to(m, (igraph_complex_t*) COMPLEX(result));
+  igraph_matrix_complex_copy_to(m, (igraph_complex_t*) COMPLEX(result), IGRAPH_COLUMN_MAJOR);
   PROTECT(dim=NEW_INTEGER(2));
   INTEGER(dim)[0] = (int) nrow;
   INTEGER(dim)[1] = (int) ncol;
