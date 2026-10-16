@@ -214,16 +214,18 @@ IGRAPH_EXPORT igraph_error_t igraph_average_path_length(
 IGRAPH_EXPORT igraph_error_t igraph_path_length_hist(const igraph_t *graph, igraph_vector_t *res,
                                           igraph_real_t *unconnected, igraph_bool_t directed);
 
-IGRAPH_EXPORT igraph_error_t igraph_global_efficiency(const igraph_t *graph, igraph_real_t *res,
-                                           const igraph_vector_t *weights,
-                                           igraph_bool_t directed);
-IGRAPH_EXPORT igraph_error_t igraph_local_efficiency(const igraph_t *graph, igraph_vector_t *res,
-                                          const igraph_vs_t vids,
-                                          const igraph_vector_t *weights,
-                                          igraph_bool_t directed, igraph_neimode_t mode);
-IGRAPH_EXPORT igraph_error_t igraph_average_local_efficiency(const igraph_t *graph, igraph_real_t *res,
-                                                  const igraph_vector_t *weights,
-                                                  igraph_bool_t directed, igraph_neimode_t mode);
+IGRAPH_EXPORT igraph_error_t igraph_global_efficiency(
+    const igraph_t *graph, const igraph_vector_t *weights, igraph_real_t *res,
+    igraph_bool_t directed
+);
+IGRAPH_EXPORT igraph_error_t igraph_local_efficiency(
+    const igraph_t *graph, const igraph_vector_t *weights, igraph_vector_t *res,
+    igraph_vs_t vids, igraph_bool_t directed, igraph_neimode_t mode
+);
+IGRAPH_EXPORT igraph_error_t igraph_average_local_efficiency(
+    const igraph_t *graph, const igraph_vector_t *weights, igraph_real_t *res,
+    igraph_bool_t directed, igraph_neimode_t mode
+);
 
 IGRAPH_EXPORT igraph_error_t igraph_eccentricity(
     const igraph_t *graph, const igraph_vector_t *weights, igraph_vector_t *res,

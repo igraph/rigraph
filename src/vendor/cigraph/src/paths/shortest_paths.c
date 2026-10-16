@@ -366,7 +366,6 @@ igraph_error_t igraph_average_path_length(
  * https://dx.doi.org/10.1103/PhysRevLett.87.198701
  *
  * \param graph The graph object.
- * \param res Pointer to a real number, this will contain the result.
  * \param weights The edge weights. All edge weights must be
  *       non-negative for Dijkstra's algorithm to work. Additionally, no
  *       edge weight may be NaN. If either case does not hold, an error
@@ -374,6 +373,7 @@ igraph_error_t igraph_average_path_length(
  *       version, \ref igraph_average_path_length() is used in calculating
  *       the global efficiency. Edges with positive infinite weights are
  *       ignored.
+ * \param res Pointer to a real number, this will contain the result.
  * \param directed Boolean, whether to consider directed paths.
  *    Ignored for undirected graphs.
  * \return Error code:
@@ -391,10 +391,10 @@ igraph_error_t igraph_average_path_length(
  * \sa \ref igraph_local_efficiency(), \ref igraph_average_local_efficiency()
  */
 
-igraph_error_t igraph_global_efficiency(const igraph_t *graph, igraph_real_t *res,
-                             const igraph_vector_t *weights,
-                             igraph_bool_t directed)
-{
+igraph_error_t igraph_global_efficiency(
+    const igraph_t *graph, const igraph_vector_t *weights,
+    igraph_real_t *res, igraph_bool_t directed
+) {
     if (weights) {
         return igraph_i_average_path_length_dijkstra(
             graph, weights, res, NULL, directed, /* invert= */ true, /* unconn= */ false
@@ -651,14 +651,14 @@ static igraph_error_t igraph_i_local_efficiency_dijkstra(
  * http://dx.doi.org/10.1103/PhysRevE.71.036122
  *
  * \param graph The graph object.
- * \param res Pointer to an initialized vector, this will contain the result.
- * \param vids The vertices around which the local efficiency will be calculated.
  * \param weights The edge weights. All edge weights must be
  *       non-negative. Additionally, no edge weight may be NaN. If either
  *       case does not hold, an error is returned. If this is a null
  *       pointer, then the unweighted version,
  *       \ref igraph_average_path_length() is called. Edges with positive
  *       infinite weights are ignored.
+ * \param res Pointer to an initialized vector, this will contain the result.
+ * \param vids The vertices around which the local efficiency will be calculated.
  * \param directed Boolean, whether to consider directed paths.
  *    Ignored for undirected graphs.
  * \param mode How to determine the local neighborhood of each vertex
@@ -687,11 +687,10 @@ static igraph_error_t igraph_i_local_efficiency_dijkstra(
  *
  */
 
-igraph_error_t igraph_local_efficiency(const igraph_t *graph, igraph_vector_t *res,
-                            const igraph_vs_t vids,
-                            const igraph_vector_t *weights,
-                            igraph_bool_t directed, igraph_neimode_t mode)
-{
+igraph_error_t igraph_local_efficiency(
+    const igraph_t *graph, const igraph_vector_t *weights, igraph_vector_t *res,
+    const igraph_vs_t vids, igraph_bool_t directed, igraph_neimode_t mode
+) {
     igraph_int_t no_of_nodes = igraph_vcount(graph);
     igraph_int_t no_of_edges = igraph_ecount(graph);
     igraph_int_t nodes_to_calc; /* no. of vertices includes in computation */
@@ -810,10 +809,10 @@ igraph_error_t igraph_local_efficiency(const igraph_t *graph, igraph_vector_t *r
  * For the null graph, zero is returned by convention.
  *
  * \param graph The graph object.
- * \param res Pointer to a real number, this will contain the result.
  * \param weights The edge weights. They must be all non-negative.
  *    If a null pointer is given, all weights are assumed to be 1. Edges
  *    with positive infinite weight are ignored.
+ * \param res Pointer to a real number, this will contain the result.
  * \param directed Boolean, whether to consider directed paths.
  *    Ignored for undirected graphs.
  * \param mode How to determine the local neighborhood of each vertex
@@ -842,10 +841,10 @@ igraph_error_t igraph_local_efficiency(const igraph_t *graph, igraph_vector_t *r
  *
  */
 
-igraph_error_t igraph_average_local_efficiency(const igraph_t *graph, igraph_real_t *res,
-                                    const igraph_vector_t *weights,
-                                    igraph_bool_t directed, igraph_neimode_t mode)
-{
+igraph_error_t igraph_average_local_efficiency(
+    const igraph_t *graph, const igraph_vector_t *weights, igraph_real_t *res,
+    igraph_bool_t directed, igraph_neimode_t mode
+) {
     igraph_int_t no_of_nodes = igraph_vcount(graph);
     igraph_vector_t local_eff;
 
@@ -858,7 +857,7 @@ igraph_error_t igraph_average_local_efficiency(const igraph_t *graph, igraph_rea
 
     IGRAPH_VECTOR_INIT_FINALLY(&local_eff, no_of_nodes);
 
-    IGRAPH_CHECK(igraph_local_efficiency(graph, &local_eff, igraph_vss_all(), weights, directed, mode));
+    IGRAPH_CHECK(igraph_local_efficiency(graph, weights, &local_eff, igraph_vss_all(), directed, mode));
 
     *res = igraph_vector_sum(&local_eff);
     *res /= no_of_nodes;

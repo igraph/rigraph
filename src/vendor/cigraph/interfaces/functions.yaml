@@ -1128,18 +1128,18 @@ igraph_random_edge_walk:
     DEPS: start ON graph, weights ON graph, edgewalk ON graph
 
 igraph_global_efficiency:
-    PARAMS: GRAPH graph, OUT REAL res, OPTIONAL EDGEWEIGHTS weights, BOOLEAN directed=True
+    PARAMS: GRAPH graph, OPTIONAL EDGEWEIGHTS weights, OUT REAL res, BOOLEAN directed=True
     DEPS: weights ON graph
 
 igraph_local_efficiency:
     PARAMS: |-
-        GRAPH graph, OUT VERTEX_QTY res, VERTEX_SELECTOR vids=ALL,
-        OPTIONAL EDGEWEIGHTS weights, BOOLEAN directed=True, NEIMODE mode=ALL
+        GRAPH graph, OPTIONAL EDGEWEIGHTS weights, OUT VERTEX_QTY res,
+        VERTEX_SELECTOR vids=ALL, BOOLEAN directed=True, NEIMODE mode=ALL
     DEPS: vids ON graph, weights ON graph, res ON graph vids
 
 igraph_average_local_efficiency:
     PARAMS: |-
-        GRAPH graph, OUT REAL res, OPTIONAL EDGEWEIGHTS weights,
+        GRAPH graph, OPTIONAL EDGEWEIGHTS weights, OUT REAL res,
         BOOLEAN directed=True, NEIMODE mode=ALL
     DEPS: weights ON graph
 
