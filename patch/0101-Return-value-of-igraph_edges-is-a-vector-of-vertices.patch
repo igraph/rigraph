@@ -1,4 +1,4 @@
-From 7f71298307ebead9bae867e8da88f97b72cdc3e4 Mon Sep 17 00:00:00 2001
+From cdd939beeaefbab1a3d10f10ef3a88e1c595c905 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Kirill=20M=C3=BCller?= <kirill@cynkra.com>
 Date: Sun, 2 Nov 2025 12:23:28 +0100
 Subject: [PATCH] Return value of igraph_edges() is a vector of vertices
@@ -8,20 +8,20 @@ Subject: [PATCH] Return value of igraph_edges() is a vector of vertices
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/src/vendor/cigraph/interfaces/functions.yaml b/src/vendor/cigraph/interfaces/functions.yaml
-index ed11d4fa96..6ef2506aff 100644
+index 8e91d53..efde442 100644
 --- a/src/vendor/cigraph/interfaces/functions.yaml
 +++ b/src/vendor/cigraph/interfaces/functions.yaml
-@@ -67,8 +67,8 @@ igraph_edge:
-     PARAMS: GRAPH graph, INTEGER eid, OUT INTEGER from, OUT INTEGER to
+@@ -83,8 +83,8 @@ igraph_edge:
+     FLAGS: no_rng
  
  igraph_edges:
 -    PARAMS: GRAPH graph, EDGE_SELECTOR eids, OUT VECTOR_INT edges, BOOLEAN bycol=False
 -    DEPS: eids ON graph
 +    PARAMS: GRAPH graph, EDGE_SELECTOR eids, OUT VERTEX_INDICES edges, BOOLEAN bycol=False
 +    DEPS: eids ON graph, edges ON graph
+     FLAGS: no_rng
  
  igraph_get_eid:
-     PARAMS: |-
 -- 
-2.50.1
+2.55.0
 
