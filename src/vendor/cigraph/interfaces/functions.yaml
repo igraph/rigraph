@@ -2652,7 +2652,7 @@ igraph_simple_cycles:
 igraph_simple_cycles_callback:
     PARAMS: |-
         GRAPH graph,
-        NEIMODE mode=OUT, INTEGER min_cycle_length=-1, INTEGER max_cycle_length=-1,
+        NEIMODE mode=OUT, INTEGER min_cycle_length=UNLIMITED, INTEGER max_cycle_length=UNLIMITED,
         CYCLE_FUNC cycle_handler, OPTIONAL EXTRA arg
 
 #######################################
@@ -2726,7 +2726,7 @@ igraph_tree_game:
     PARAMS: OUT GRAPH graph, INTEGER n, BOOLEAN directed=False, RANDOM_TREE_METHOD method=LERW
 
 #######################################
-# Spatial networks
+# Spatial
 #######################################
 
 igraph_nearest_neighbor_graph:
