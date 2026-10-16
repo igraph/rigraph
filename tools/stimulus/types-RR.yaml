@@ -667,6 +667,17 @@ RWSTUCK:
         RETURN: c("return", "error")
     INCONV: '%I% <- switch_igraph_arg(%I%, "error" = 0L, "return" = 1L)'
 
+EDGE_TYPE_SW_MULTIPLE:
+    # A logical multiple argument, kept where upstream replaced loops and
+    # multiple with one igraph_edge_type_sw_t allowed_edge_types: it depends on
+    # the EDGE_TYPE_SW_LOOPS loops argument, and TRUE adds multi-edges
+    # (IGRAPH_MULTI_SW) to what loops allows.
+    DEFAULT:
+        'False': 'FALSE'
+        'True': 'TRUE'
+    INCONV:
+        IN: '%I% <- as.logical(%I%)'
+
 EDGE_TYPE_SW:
     DEFAULT:
         SIMPLE: c("simple", "loops", "multi", "all")
