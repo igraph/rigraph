@@ -697,6 +697,15 @@ igraph_automorphism_group_bliss:
 igraph_get_subisomorphisms_vf2_callback:
     IGNORE: RR, RC, RInit  # Has callback parameter
 
+igraph_subisomorphic_lad:
+    # Upstream removed time_limit (krlmlr/igraph@bd25607): the R argument
+    # stays, deprecated and without effect.
+    PARAMS: |-
+        GRAPH pattern, GRAPH target, OPTIONAL VERTEXSET_LIST domains,
+        OPTIONAL OUT BOOLEAN iso, OUT INDEX_VECTOR map,
+        OPTIONAL OUT VECTOR_INT_LIST maps, BOOLEAN induced,
+        DEPRECATED time_limit
+
 igraph_get_subisomorphisms_vf2_callback_closure:
     PARAMS: |-
         GRAPH graph1, GRAPH graph2,
