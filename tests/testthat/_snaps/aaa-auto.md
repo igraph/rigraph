@@ -2755,6 +2755,10 @@
 
     Code
       hub_and_authority_scores_impl(graph = g)
+    Condition
+      Warning in `hub_and_authority_scores_impl()`:
+      Hub and authority scores requested for undirected graph. These are the same as eigenvector centralities.
+      Source: centrality/hub_authority.c:296
     Output
       $hub
       [1] 1 1 1 1 1
@@ -2835,6 +2839,9 @@
     Condition
       Warning in `hub_and_authority_scores_impl()`:
       Argument `scale' is deprecated and has no effect
+      Warning in `hub_and_authority_scores_impl()`:
+      Hub and authority scores requested for undirected graph. These are the same as eigenvector centralities.
+      Source: centrality/hub_authority.c:296
     Output
       $hub
       [1] 1 1 1 1 1

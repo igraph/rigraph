@@ -27,6 +27,7 @@
 
 #include "centrality/centrality_internal.h"
 
+#include <float.h>
 #include <limits.h>
 
 /* struct for the unweighted variant of the HITS algorithm */
@@ -44,6 +45,47 @@ typedef struct igraph_i_kleinberg_data2_t {
     igraph_vector_t *tmp;
     const igraph_vector_t *weights;
 } igraph_i_kleinberg_data2_t;
+
+/* Checks if at least a certain fraction of HITS centrality scores are zero.
+ * Any zero value indicates that the graphs corresponding to A A^T and A^T A are
+ * not connected, and therefore the solution is not unique. However, this situation
+ * is fairly common, and difficult to control. Thefore we only warn if the number
+ * of zero values exceeds a certain fraction.
+ *
+ * To account for numerical inaccuracies, a threshold of 'eps' is used when testing for zero.
+ * This function is intended to be used with centrality values scaled such that
+ * the maximum is 1. 'eps' is chosen accordinly.
+ *
+ * See the analogous function used in igraph_eigenvector_centrality() for details
+ * on the choice of 'eps'.
+ */
+static void warn_zero_entries(const igraph_vector_t *cent) {
+    const igraph_real_t tol = 10 * DBL_EPSILON;
+    const igraph_real_t frac = 0.3; /* warn if at least this fraction of centralities is zero */
+    const igraph_int_t n = igraph_vector_size(cent);
+
+    /* Skip check for small graphs */
+    if (n < 10) {
+        return;
+    }
+
+    const igraph_int_t max_zero_cnt = ((igraph_int_t) (frac*n));
+    igraph_int_t zero_cnt = 0;
+
+    for (igraph_int_t i=0; i < n; i++) {
+        igraph_real_t x = VECTOR(*cent)[i];
+        if (-tol < x && x < tol) {
+            if (++zero_cnt > max_zero_cnt) {
+                IGRAPH_WARNINGF(
+                    "More than %d%% of hub or authority scores are zeros. The presence of zero values "
+                    "indicates that the solution is not unique, thus the returned result may not be meaningful.",
+                    (int) (frac * 100)
+                );
+                return;
+            }
+        }
+    }
+}
 
 static igraph_error_t igraph_i_kleinberg_unweighted_hub_to_auth(
         igraph_int_t n, igraph_vector_t *to, const igraph_real_t *from,
@@ -163,6 +205,15 @@ static igraph_error_t igraph_i_kleinberg_weighted(igraph_real_t *to,
  * related by these formulas, even in this situation.
  *
  * </para><para>
+ * Note that hub and authority scores are not well behaved in extremely sparse
+ * graphs where no single connected component dominates the undirected graphs
+ * corresponding to <code>A A^T</code> and <code>A^T A</code>. In these cases,
+ * there are many different non-negative eigenvectors, all reasonable solutions
+ * to the HITS equations. The symptom of such a situation is that a large
+ * fraction of the scores are zeros. igraph issues a warning when this is
+ * detected.
+ *
+ * </para><para>
  * Results are scaled so that the largest hub and authority scores are both 1.
  *
  * </para><para>
@@ -170,6 +221,11 @@ static igraph_error_t igraph_i_kleinberg_weighted(igraph_real_t *to,
  * In undirected graphs, both the hub and authority scores are equal to the
  * eigenvector centrality, which can be computed using
  * \ref igraph_eigenvector_centrality().
+ *
+ * </para><para>
+ * HITS scores were developed for networks with non-negative edge weights.
+ * While igraph does not refuse to carry out the calculation with negative
+ * weights, it will issue a warning.
  *
  * </para><para>
  * See the following reference on the meaning of this score:
@@ -224,6 +280,39 @@ igraph_error_t igraph_hub_and_authority_scores(const igraph_t *graph,
     igraph_vector_t my_hub_vector;
     igraph_bool_t negative_weights = false;
 
+    if (! igraph_is_directed(graph)) {
+        /* In undirected graphs, hub and authority scores are the same as eigenvector
+         * centralities. We issue a warning to avoid user confusion.
+         * If Ax = lambda x then A^2 x = lambda^2 x. Therefore the principal
+         * eigenvector of A is also a principal eigenvector of A^2. However,
+         * if both lambda and -lambda are eigenvalues of A, then the lambda^2
+         * eigenvalue of A^2 will be degenerate. This happens for example in
+         * an even cycle graph where 2 and -2 are the largest eigenvalues in magnitude,
+         * therefore 4 is a degenerate eigenvalue of A^2, with eigenspace spanned by
+         * (0, 1, 0, 1, ...) and (1, 0, 1, ...). The vector (1, 1, ...), which
+         * would be expected by users based on symmetry considerations, may not be
+         * returned. We avoid such issues by falling back to igraph_eigenvector_centrality() */
+
+        IGRAPH_WARNING("Hub and authority scores requested for undirected graph. "
+                       "These are the same as eigenvector centralities.");
+        if (! hub_vector) {
+            IGRAPH_VECTOR_INIT_FINALLY(&my_hub_vector, no_of_nodes);
+            my_hub_vector_p = &my_hub_vector;
+        } else {
+            my_hub_vector_p = hub_vector;
+        }
+        IGRAPH_CHECK(igraph_eigenvector_centrality(graph, my_hub_vector_p, value, IGRAPH_ALL, weights, options));
+        *value = (*value) * (*value); /* adjust the eigenvalue, see comment at top */
+        if (authority_vector) {
+            IGRAPH_CHECK(igraph_vector_update(authority_vector, my_hub_vector_p));
+        }
+        if (! hub_vector) {
+            igraph_vector_destroy(&my_hub_vector);
+            IGRAPH_FINALLY_CLEAN(1);
+        }
+        return IGRAPH_SUCCESS;
+    }
+
     if (igraph_ecount(graph) == 0) {
         /* special case: empty graph */
         if (value) {
@@ -236,6 +325,9 @@ igraph_error_t igraph_hub_and_authority_scores(const igraph_t *graph,
         if (authority_vector) {
             IGRAPH_CHECK(igraph_vector_resize(authority_vector, no_of_nodes));
             igraph_vector_fill(authority_vector, 1.0);
+        }
+        if (no_of_nodes > 1) {
+            IGRAPH_WARNING("The graph has no edges. Hub and authority scores are not meaningful.");
         }
         return IGRAPH_SUCCESS;
     }
@@ -278,12 +370,13 @@ igraph_error_t igraph_hub_and_authority_scores(const igraph_t *graph,
                 IGRAPH_CHECK(igraph_vector_resize(authority_vector, no_of_nodes));
                 igraph_vector_fill(authority_vector, 1);
             }
+            IGRAPH_WARNING("All edge weights are zero. Hub and authority scores are not meaningful.");
             return IGRAPH_SUCCESS;
         }
     }
 
     if (no_of_nodes > INT_MAX) {
-        IGRAPH_ERROR("Graph has too many vertices for ARPACK", IGRAPH_EOVERFLOW);
+        IGRAPH_ERROR("Graph has too many vertices for ARPACK.", IGRAPH_EOVERFLOW);
     }
 
     if (!options) {
@@ -309,13 +402,23 @@ igraph_error_t igraph_hub_and_authority_scores(const igraph_t *graph,
         IGRAPH_FINALLY(igraph_inclist_destroy, &outinclist);
     }
 
+    /* We calculate hub scores, which correlate with out-degrees / out-strengths.
+     * Thus we use out-strengths as starting values. */
     IGRAPH_CHECK(igraph_strength(graph, &tmp, igraph_vss_all(), IGRAPH_OUT, IGRAPH_LOOPS, weights));
+
     for (igraph_int_t i = 0; i < options->n; i++) {
         if (VECTOR(tmp)[i] != 0) {
             /* Note: Keep random perturbation non-negative. */
             MATRIX(vectors, i, 0) = VECTOR(tmp)[i] + RNG_UNIF(0, 1e-4);
+        } else if (! negative_weights) {
+            /* The hub score of zero out-degree vertices is also zero. */
+            MATRIX(vectors, i, 0) = 0.0;
         } else {
-            MATRIX(vectors, i, 0) = 0.01;
+            /* When negative weights are present, a zero out-strength may occur even
+             * if the out-degree is not zero, and some out-edges have non-zero weight. */
+            igraph_int_t deg;
+            IGRAPH_CHECK(igraph_degree_1(graph, &deg, i, IGRAPH_OUT, /* loops */ true));
+            MATRIX(vectors, i, 0) = deg == 0 ? 0.0 : 1.0;
         }
     }
 
@@ -362,6 +465,8 @@ igraph_error_t igraph_hub_and_authority_scores(const igraph_t *graph,
                 }
             }
         }
+
+        warn_zero_entries(my_hub_vector_p);
     }
 
     if (options->info) {
