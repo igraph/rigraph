@@ -2529,7 +2529,7 @@ igraph_eigen_adjacency:
         GRAPH graph, EIGENALGO algorithm=ARPACK,
         EIGENWHICH which=Default,
         INOUT ARPACK_OPTIONS options=ARPACK_DEFAULTS,
-        INOUT ARPACKSTORAGE storage, OUT VECTOR values, OUT MATRIX vectors,
+        INOUT ARPACK_STORAGE storage, OUT VECTOR values, OUT MATRIX vectors,
         OUT VECTOR_COMPLEX cmplxvalues, OUT MATRIX_COMPLEX cmplxvectors
 
 #######################################
@@ -2578,13 +2578,13 @@ igraph_eigen_matrix:
     PARAMS: |-
         MATRIX A, SPARSEMAT sA, ARPACK_FUNC fun, INT n, OPTIONAL EXTRA extra,
         EIGENALGO algorithm, EIGENWHICH which, INOUT ARPACK_OPTIONS options=ARPACK_DEFAULTS,
-        INOUT ARPACKSTORAGE storage, OUT VECTOR_COMPLEX values, OUT MATRIX_COMPLEX vectors
+        INOUT ARPACK_STORAGE storage, OUT VECTOR_COMPLEX values, OUT MATRIX_COMPLEX vectors
 
 igraph_eigen_matrix_symmetric:
     PARAMS: |-
         MATRIX A, SPARSEMAT sA, ARPACK_FUNC fun, INT n, OPTIONAL EXTRA extra,
         EIGENALGO algorithm, EIGENWHICH which, INOUT ARPACK_OPTIONS options=ARPACK_DEFAULTS,
-        INOUT ARPACKSTORAGE storage, OUT VECTOR values, OUT MATRIX vectors
+        INOUT ARPACK_STORAGE storage, OUT VECTOR values, OUT MATRIX vectors
 
 igraph_solve_lsap:
     PARAMS: MATRIX c, INTEGER n, OUT VECTOR_INT p

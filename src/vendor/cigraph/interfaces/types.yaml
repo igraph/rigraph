@@ -590,7 +590,7 @@ ARPACK_OPTIONS:
     CTYPE: igraph_arpack_options_t
     FLAGS: BY_REF
 
-ARPACKSTORAGE:
+ARPACK_STORAGE:
     # Pointer to a general-purpose memory block that ARPACK-based algorithms
     # may use as a working area.
     CTYPE: igraph_arpack_storage_t
