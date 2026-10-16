@@ -6093,7 +6093,7 @@ SEXP Rx_igraph_get_adjlist(SEXP graph, SEXP pmode, SEXP ploops, SEXP pmultiple) 
   igraph_vector_int_init(&neis, 0);
   PROTECT(result=NEW_LIST(no_of_nodes));
   for (igraph_integer_t i=0; i<no_of_nodes; i++) {
-    igraph_i_neighbors(&g, &neis, i, mode, (igraph_loops_t) loops, (igraph_multiple_t) multiple);
+    igraph_i_neighbors(&g, &neis, i, mode, (igraph_loops_t) loops, (igraph_bool_t) multiple);
     SET_VECTOR_ELT(result, i, Ry_igraph_vector_int_to_SEXP(&neis));
   }
   igraph_vector_int_destroy(&neis);
