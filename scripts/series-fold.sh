@@ -59,7 +59,11 @@ PENDING="$gitdir/series-fold-pending"
 # --- the fold step, run by the rebase as an `exec` line -----------------------
 
 # The note goes above a closing block of trailers, `Key: value` lines, or at
-# the end when there is none.
+# the end when there is none. A trailer's key starts with a capital letter, as
+# git's (`Co-Authored-By`, `Signed-off-by`) and this repository's
+# (`Claude-Session`, `Unflavored-from`) do: a vendor commit's message ends with
+# the subjects of the upstream commits it carries, and those read `nfc: ...`
+# or `fix: ...`, which a note must follow rather than precede.
 add_note() { # <message file> <note>
   awk -v note="$2" '
     { line[NR] = $0 }
@@ -67,7 +71,7 @@ add_note() { # <message file> <note>
       n = NR
       while (n > 0 && line[n] == "") n--
       start = n + 1
-      for (i = n; i > 0 && line[i] ~ /^[A-Za-z][A-Za-z0-9-]*: /; i--) start = i
+      for (i = n; i > 0 && line[i] ~ /^[A-Z][A-Za-z0-9-]*: /; i--) start = i
       if (start > n || line[start - 1] != "") start = n + 1
       for (i = 1; i < start; i++) {
         if (i == start - 1 && line[i] == "") continue
