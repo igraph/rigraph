@@ -162,14 +162,12 @@ add_library(
   community/edge_betweenness.c
   community/fast_modularity.c
   community/fluid.c
-  community/infomap/infomap_FlowGraph.cc
-  community/infomap/infomap_Greedy.cc
-  community/infomap/infomap.cc
   community/label_propagation.c
   community/leading_eigenvector.c
   community/leiden.c
   community/louvain.c
   community/modularity.c
+  community/infomap.cpp
   community/optimal_modularity.c
   community/spinglass/clustertool.cpp
   community/spinglass/NetDataTypes.cpp
@@ -337,6 +335,7 @@ add_library(
   $<IF:$<BOOL:${ARPACK_IS_VENDORED}>,$<TARGET_OBJECTS:arpack_vendored>,>
   $<IF:$<BOOL:${BLAS_IS_VENDORED}>,$<TARGET_OBJECTS:blas_vendored>,>
   $<IF:$<BOOL:${GLPK_IS_VENDORED}>,$<TARGET_OBJECTS:glpk_vendored>,>
+  $<IF:$<BOOL:${INFOMAP_IS_VENDORED}>,$<TARGET_OBJECTS:infomap_vendored>,>
   $<IF:$<BOOL:${GMP_IS_VENDORED}>,$<TARGET_OBJECTS:gmp_vendored>,>
   $<IF:$<BOOL:${LAPACK_IS_VENDORED}>,$<TARGET_OBJECTS:lapack_vendored>,>
   $<IF:$<BOOL:${PLFIT_IS_VENDORED}>,$<TARGET_OBJECTS:plfit_vendored>,>
@@ -382,6 +381,7 @@ target_include_directories(
 
   # Vendored library include paths
   "$<$<BOOL:${GLPK_IS_VENDORED}>:$<TARGET_PROPERTY:glpk_vendored,INCLUDE_DIRECTORIES>>"
+  "$<$<BOOL:${INFOMAP_IS_VENDORED}>:$<TARGET_PROPERTY:infomap_vendored,INCLUDE_DIRECTORIES>>"
   "$<$<BOOL:${PLFIT_IS_VENDORED}>:$<TARGET_PROPERTY:plfit_vendored,INCLUDE_DIRECTORIES>>"
 
   # Include paths for dependencies

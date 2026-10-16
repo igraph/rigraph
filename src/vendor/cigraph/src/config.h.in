@@ -25,6 +25,7 @@
 #cmakedefine HAVE__BITSCANREVERSE 1
 
 #cmakedefine HAVE_GLPK 1
+#cmakedefine HAVE_INFOMAP 1
 #cmakedefine HAVE_LIBXML 1
 
 #cmakedefine INTERNAL_BLAS 1
