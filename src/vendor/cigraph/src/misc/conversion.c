@@ -898,14 +898,14 @@ igraph_error_t igraph_get_stochastic(
  * \function igraph_get_stochastic_sparse
  * \brief The stochastic adjacency matrix of a graph.
  *
- * Stochastic matrix of a graph. The stochastic matrix of a graph is
- * its adjacency matrix, normalized row-wise or column-wise, such that
- * the sum of each row (or column) is one.
+ * Stochastic matrix of a graph in sparse format. See \ref igraph_get_stochastic()
+ * for the information on stochastic matrices.
  *
  * \param graph The input graph.
  * \param res Pointer to an \em initialized sparse matrix, the
  *    result is stored here. The matrix will be resized as needed.
- * \param column_wise Whether to normalize column-wise.
+ * \param column_wise If \c false, row-wise normalization is used.
+ *                    If \c true, column-wise normalization is used.
  * \param weights An optional vector containing the weight of each edge
  *        in the graph. Supply a null pointer here to make all edges have
  *        the same weight of 1.
