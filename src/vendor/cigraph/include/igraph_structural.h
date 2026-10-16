@@ -95,8 +95,6 @@ IGRAPH_EXPORT igraph_error_t igraph_is_independent_vertex_set(const igraph_t *gr
 IGRAPH_EXPORT igraph_error_t igraph_minimum_spanning_tree(
     const igraph_t *graph, igraph_vector_int_t *res,
     const igraph_vector_t *weights, igraph_mst_algorithm_t method);
-IGRAPH_DEPRECATED IGRAPH_EXPORT igraph_error_t igraph_minimum_spanning_tree_unweighted(const igraph_t *graph,
-                                                          igraph_t *mst);
 IGRAPH_EXPORT igraph_error_t igraph_random_spanning_tree(const igraph_t *graph, igraph_vector_int_t *res,
                                               igraph_int_t vid);
 

@@ -103,22 +103,6 @@ minimum_spanning_tree_impl <- function(
   res
 }
 
-minimum_spanning_tree_unweighted_impl <- function(
-  graph
-) {
-  # Argument checks
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_minimum_spanning_tree_unweighted,
-    graph
-  )
-
-  res
-}
-
 random_spanning_tree_impl <- function(
   graph,
   vid = 0

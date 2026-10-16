@@ -2693,9 +2693,6 @@ igraph_minimum_spanning_tree:
     PARAMS: GRAPH graph, OUT EDGE_INDICES res, OPTIONAL EDGEWEIGHTS weights, MST_ALGORITHM method=AUTOMATIC
     DEPS: res ON graph, weights ON graph
 
-igraph_minimum_spanning_tree_unweighted:
-    PARAMS: GRAPH graph, OUT GRAPH mst
-
 igraph_random_spanning_tree:
     PARAMS: GRAPH graph, OUT EDGE_INDICES res, OPTIONAL VERTEX vid
     DEPS: res ON graph, vid ON graph

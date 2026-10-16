@@ -1,5 +1,5 @@
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2011-2023  The igraph development team <igraph@igraph.org>
 
    This program is free software; you can redistribute it and/or modify
@@ -21,7 +21,6 @@
 #include "igraph_components.h"
 #include "igraph_dqueue.h"
 #include "igraph_interface.h"
-#include "igraph_operators.h"
 #include "igraph_random.h"
 #include "igraph_structural.h"
 
@@ -123,58 +122,6 @@ igraph_error_t igraph_minimum_spanning_tree(
     default:
         IGRAPH_ERROR("Invalid method for minimum spanning tree.", IGRAPH_EINVAL);
     }
-}
-
-/**
- * \ingroup structural
- * \function igraph_minimum_spanning_tree_unweighted
- * \brief Calculates one minimum spanning tree of an unweighted graph.
- *
- * \deprecated-by igraph_minimum_spanning_tree 0.10.14
- *
- * If the graph has more minimum spanning trees (this is always the
- * case, except if it is a forest) this implementation returns only
- * the same one.
- *
- * </para><para>
- * Directed graphs are considered as undirected for this computation.
- *
- * </para><para>
- * If the graph is not connected then its minimum spanning forest is
- * returned. This is the set of the minimum spanning trees of each
- * component.
- *
- * \param graph The graph object. Edge directions will be ignored.
- * \param mst The minimum spanning tree, another graph object. Do
- *        \em not initialize this object before passing it to
- *        this function, but be sure to call \ref igraph_destroy() on it if
- *        you don't need it any more.
- * \return Error code:
- *         \c IGRAPH_ENOMEM, not enough memory for
- *         temporary data.
- *
- * Time complexity: O(|V|+|E|),
- * |V| is the
- * number of vertices, |E| the number
- * of edges in the graph.
- *
- * \sa \ref igraph_minimum_spanning_tree() if you need the IDs of the
- *     edges that constitute the spanning tree.
- */
-
-igraph_error_t igraph_minimum_spanning_tree_unweighted(const igraph_t *graph,
-        igraph_t *mst) {
-    igraph_vector_int_t edges;
-    igraph_int_t no_of_nodes = igraph_vcount(graph);
-
-    IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, no_of_nodes > 0 ? no_of_nodes - 1 : 0);
-    IGRAPH_CHECK(igraph_minimum_spanning_tree(graph, &edges, NULL, IGRAPH_MST_AUTOMATIC));
-    IGRAPH_CHECK(igraph_subgraph_from_edges(
-        graph, mst, igraph_ess_vector(&edges), /* delete_vertices = */ false));
-    igraph_vector_int_destroy(&edges);
-    IGRAPH_FINALLY_CLEAN(1);
-
-    return IGRAPH_SUCCESS;
 }
 
 static igraph_error_t igraph_i_minimum_spanning_tree_unweighted(const igraph_t* graph, igraph_vector_int_t* res) {
