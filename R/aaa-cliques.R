@@ -90,13 +90,15 @@ cliques_callback_closure_impl <- function(
 
 cliques_impl <- function(
   graph,
-  min = 0,
-  max = 0
+  min = -1,
+  max = -1,
+  max_results = -1
 ) {
   # Argument checks
   ensure_igraph(graph)
   min <- as.numeric(min)
   max <- as.numeric(max)
+  max_results <- as.numeric(max_results)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -104,7 +106,8 @@ cliques_impl <- function(
     R_igraph_cliques,
     graph,
     min,
-    max
+    max,
+    max_results
   )
   if (igraph_opt("return.vs.es")) {
     res <- create_vs_list(graph, res)
@@ -239,8 +242,9 @@ maximal_cliques_count_impl <- function(
 maximal_cliques_file_impl <- function(
   graph,
   res,
-  min_size = 0,
-  max_size = 0
+  min_size = -1,
+  max_size = -1,
+  max_results = -1
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -248,6 +252,7 @@ maximal_cliques_file_impl <- function(
 
   min_size <- as.numeric(min_size)
   max_size <- as.numeric(max_size)
+  max_results <- as.numeric(max_results)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -256,7 +261,8 @@ maximal_cliques_file_impl <- function(
     graph,
     res,
     min_size,
-    max_size
+    max_size,
+    max_results
   )
 
   res
@@ -286,13 +292,15 @@ maximal_cliques_hist_impl <- function(
 
 maximal_cliques_impl <- function(
   graph,
-  min_size = 0,
-  max_size = 0
+  min_size = -1,
+  max_size = -1,
+  max_results = -1
 ) {
   # Argument checks
   ensure_igraph(graph)
   min_size <- as.numeric(min_size)
   max_size <- as.numeric(max_size)
+  max_results <- as.numeric(max_results)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -300,7 +308,8 @@ maximal_cliques_impl <- function(
     R_igraph_maximal_cliques,
     graph,
     min_size,
-    max_size
+    max_size,
+    max_results
   )
   if (igraph_opt("return.vs.es")) {
     res <- create_vs_list(graph, res)
@@ -312,8 +321,9 @@ maximal_cliques_subset_impl <- function(
   graph,
   subset,
   outfile = NULL,
-  min_size = 0,
-  max_size = 0,
+  min_size = -1,
+  max_size = -1,
+  max_results = -1,
   details = FALSE
 ) {
   # Argument checks
@@ -326,6 +336,7 @@ maximal_cliques_subset_impl <- function(
   }
   min_size <- as.numeric(min_size)
   max_size <- as.numeric(max_size)
+  max_results <- as.numeric(max_results)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -335,7 +346,8 @@ maximal_cliques_subset_impl <- function(
     subset,
     outfile,
     min_size,
-    max_size
+    max_size,
+    max_results
   )
   if (igraph_opt("return.vs.es")) {
     res$res <- create_vs_list(graph, res$res)
@@ -366,13 +378,15 @@ independence_number_impl <- function(
 
 independent_vertex_sets_impl <- function(
   graph,
-  min_size = 0,
-  max_size = 0
+  min_size = -1,
+  max_size = -1,
+  max_results = -1
 ) {
   # Argument checks
   ensure_igraph(graph)
   min_size <- as.numeric(min_size)
   max_size <- as.numeric(max_size)
+  max_results <- as.numeric(max_results)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -380,7 +394,8 @@ independent_vertex_sets_impl <- function(
     R_igraph_independent_vertex_sets,
     graph,
     min_size,
-    max_size
+    max_size,
+    max_results
   )
   if (igraph_opt("return.vs.es")) {
     res <- create_vs_list(graph, res)
@@ -426,16 +441,25 @@ largest_independent_vertex_sets_impl <- function(
 }
 
 maximal_independent_vertex_sets_impl <- function(
-  graph
+  graph,
+  min_size = -1,
+  max_size = -1,
+  max_results = -1
 ) {
   # Argument checks
   ensure_igraph(graph)
+  min_size <- as.numeric(min_size)
+  max_size <- as.numeric(max_size)
+  max_results <- as.numeric(max_results)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_maximal_independent_vertex_sets,
-    graph
+    graph,
+    min_size,
+    max_size,
+    max_results
   )
   if (igraph_opt("return.vs.es")) {
     res <- create_vs_list(graph, res)
@@ -503,8 +527,9 @@ weighted_cliques_impl <- function(
   graph,
   vertex_weights = NULL,
   maximal = FALSE,
-  min_weight = 0,
-  max_weight = 0
+  min_weight = -1,
+  max_weight = -1,
+  max_results = -1
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -519,6 +544,7 @@ weighted_cliques_impl <- function(
   maximal <- as.logical(maximal)
   min_weight <- as.numeric(min_weight)
   max_weight <- as.numeric(max_weight)
+  max_results <- as.numeric(max_results)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -528,7 +554,8 @@ weighted_cliques_impl <- function(
     vertex_weights,
     maximal,
     min_weight,
-    max_weight
+    max_weight,
+    max_results
   )
   if (igraph_opt("return.vs.es")) {
     res <- create_vs_list(graph, res)

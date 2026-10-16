@@ -1356,8 +1356,9 @@ igraph_is_clique:
 
 igraph_cliques:
     PARAMS: |-
-        GRAPH graph, OUT VERTEXSET_LIST res, INTEGER min_size=0,
-        INTEGER max_size=0
+        GRAPH graph, OUT VERTEXSET_LIST res,
+        INTEGER min_size=UNLIMITED, INTEGER max_size=UNLIMITED,
+        INTEGER max_results=UNLIMITED
     DEPS: res ON graph
 
 igraph_cliques_callback:
@@ -1374,13 +1375,18 @@ igraph_largest_cliques:
     DEPS: res ON graph
 
 igraph_maximal_cliques:
-    PARAMS: GRAPH graph, OUT VERTEXSET_LIST res, INTEGER min_size=0, INTEGER max_size=0
+    PARAMS: |-
+        GRAPH graph, OUT VERTEXSET_LIST res,
+        INTEGER min_size=UNLIMITED, INTEGER max_size=UNLIMITED,
+        INTEGER max_results=UNLIMITED
     DEPS: res ON graph
 
 igraph_maximal_cliques_subset:
     PARAMS: |-
         GRAPH graph, VERTEX_INDICES subset, PRIMARY OUT VERTEXSET_LIST res,
-        OUT INTEGER no, OPTIONAL OUTFILE outfile, INTEGER min_size=0, INTEGER max_size=0
+        OUT INTEGER no, OPTIONAL OUTFILE outfile,
+        INTEGER min_size=UNLIMITED, INTEGER max_size=UNLIMITED,
+        INTEGER max_results=UNLIMITED
     DEPS: subset ON graph, res ON graph
 
 igraph_maximal_cliques_callback:
@@ -1395,7 +1401,9 @@ igraph_maximal_cliques_count:
 
 igraph_maximal_cliques_file:
     PARAMS: |-
-        GRAPH graph, OUTFILE res, INTEGER min_size=0, INTEGER max_size=0
+        GRAPH graph, OUTFILE res,
+        INTEGER min_size=UNLIMITED, INTEGER max_size=UNLIMITED,
+        INTEGER max_results=UNLIMITED
 
 igraph_maximal_cliques_hist:
     PARAMS: |-
@@ -1408,7 +1416,8 @@ igraph_weighted_cliques:
     PARAMS: |-
         GRAPH graph, OPTIONAL VERTEXWEIGHTS vertex_weights, OUT VERTEXSET_LIST res,
         BOOLEAN maximal=False,
-        REAL min_weight=0, REAL max_weight=0
+        REAL min_weight=UNLIMITED, REAL max_weight=UNLIMITED,
+        INTEGER max_results=UNLIMITED
     DEPS: vertex_weights ON graph, res ON graph
 
 igraph_largest_weighted_cliques:
@@ -1426,8 +1435,9 @@ igraph_is_independent_vertex_set:
 
 igraph_independent_vertex_sets:
     PARAMS: |-
-        GRAPH graph, OUT VERTEXSET_LIST res, INTEGER min_size=0,
-        INTEGER max_size=0
+        GRAPH graph, OUT VERTEXSET_LIST res,
+        INTEGER min_size=UNLIMITED, INTEGER max_size=UNLIMITED,
+        INTEGER max_results=UNLIMITED
     DEPS: res ON graph
 
 igraph_largest_independent_vertex_sets:
@@ -1435,7 +1445,10 @@ igraph_largest_independent_vertex_sets:
     DEPS: res ON graph
 
 igraph_maximal_independent_vertex_sets:
-    PARAMS: GRAPH graph, OUT VERTEXSET_LIST res
+    PARAMS: |-
+        GRAPH graph, OUT VERTEXSET_LIST res,
+        INTEGER min_size=UNLIMITED, INTEGER max_size=UNLIMITED,
+        INTEGER max_results=UNLIMITED
     DEPS: res ON graph
 
 igraph_independence_number:
@@ -2626,7 +2639,8 @@ igraph_simple_cycles:
     PARAMS: |-
         GRAPH graph,
         OPTIONAL OUT VERTEXSET_LIST vertices, OPTIONAL OUT EDGESET_LIST edges,
-        NEIMODE mode=OUT, INTEGER min_cycle_length=-1, INTEGER max_cycle_length=-1
+        NEIMODE mode=OUT, INTEGER min_cycle_length=UNLIMITED, INTEGER max_cycle_length=UNLIMITED,
+        INTEGER max_results=UNLIMITED
     DEPS: vertices ON graph, edges ON graph
 
 igraph_simple_cycles_callback:

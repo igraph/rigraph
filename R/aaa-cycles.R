@@ -357,7 +357,8 @@ simple_cycles_impl <- function(
   graph,
   mode = c("out", "in", "all", "total"),
   min_cycle_length = -1,
-  max_cycle_length = -1
+  max_cycle_length = -1,
+  max_results = -1
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -370,6 +371,7 @@ simple_cycles_impl <- function(
   )
   min_cycle_length <- as.numeric(min_cycle_length)
   max_cycle_length <- as.numeric(max_cycle_length)
+  max_results <- as.numeric(max_results)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -378,7 +380,8 @@ simple_cycles_impl <- function(
     graph,
     mode,
     min_cycle_length,
-    max_cycle_length
+    max_cycle_length,
+    max_results
   )
   if (igraph_opt("return.vs.es")) {
     res$vertices <- create_vs_list(graph, res$vertices)

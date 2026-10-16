@@ -41,6 +41,17 @@ typedef enum { IGRAPH_UNDIRECTED = 0, IGRAPH_DIRECTED = 1 } igraph_i_directed_t;
  * IGRAPH_LOOPS_TWICE */
 typedef enum { IGRAPH_NO_LOOPS = 0, IGRAPH_LOOPS = 1, IGRAPH_LOOPS_TWICE = 1, IGRAPH_LOOPS_ONCE = 2 } igraph_loops_t;
 
+/**
+ * \define IGRAPH_UNLIMITED
+ * \brief Constant for "do not limit results".
+ *
+ * A constant signifying that no limitation should be used with various cutoff,
+ * size limit or result set size parameters, such as minimum or maximum clique
+ * size, number of results returned, cutoff for path lengths, etc. Currently
+ * defined to <code>-1</code>.
+ */
+#define IGRAPH_UNLIMITED (-1)
+
 /* These constants are meant to be used for sake of readability */
 enum { IGRAPH_NO_MULTIPLE = 0, IGRAPH_MULTIPLE = 1 };
 enum { IGRAPH_EDGE_UNLABELED = 0, IGRAPH_EDGE_LABELED = 1 };

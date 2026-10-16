@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -37,50 +36,78 @@ __BEGIN_DECLS
 /* -------------------------------------------------- */
 
 IGRAPH_EXPORT igraph_error_t igraph_maximal_cliques(
-   const igraph_t *graph, igraph_vector_int_list_t *res,
-   igraph_int_t min_size, igraph_int_t max_size
-);
-IGRAPH_EXPORT igraph_error_t igraph_maximal_cliques_file(const igraph_t *graph,
-                                              FILE *outfile,
-                                              igraph_int_t min_size,
-                                              igraph_int_t max_size);
-IGRAPH_EXPORT igraph_error_t igraph_maximal_cliques_count(const igraph_t *graph,
-                                               igraph_int_t *res,
-                                               igraph_int_t min_size,
-                                               igraph_int_t max_size);
-IGRAPH_EXPORT igraph_error_t igraph_maximal_cliques_subset(
-   const igraph_t *graph, const igraph_vector_int_t *subset,
-   igraph_vector_int_list_t *res, igraph_int_t *no,
-   FILE *outfile, igraph_int_t min_size, igraph_int_t max_size
-);
-IGRAPH_EXPORT igraph_error_t igraph_maximal_cliques_hist(const igraph_t *graph,
-                                              igraph_vector_t *hist,
-                                              igraph_int_t min_size,
-                                              igraph_int_t max_size);
+        const igraph_t *graph, igraph_vector_int_list_t *res,
+        igraph_int_t min_size, igraph_int_t max_size,
+        igraph_int_t max_results);
 
-IGRAPH_EXPORT igraph_error_t igraph_cliques(const igraph_t *graph, igraph_vector_int_list_t *res,
-                                 igraph_int_t min_size, igraph_int_t max_size);
-IGRAPH_EXPORT igraph_error_t igraph_clique_size_hist(const igraph_t *graph, igraph_vector_t *hist,
-                                          igraph_int_t min_size, igraph_int_t max_size);
-IGRAPH_EXPORT igraph_error_t igraph_largest_cliques(const igraph_t *graph,
-                                         igraph_vector_int_list_t *cliques);
+IGRAPH_EXPORT igraph_error_t igraph_maximal_cliques_file(
+        const igraph_t *graph,
+        FILE *outfile,
+        igraph_int_t min_size, igraph_int_t max_size,
+        igraph_int_t max_results);
+
+IGRAPH_EXPORT igraph_error_t igraph_maximal_cliques_count(
+        const igraph_t *graph,
+        igraph_int_t *res,
+        igraph_int_t min_size, igraph_int_t max_size);
+
+IGRAPH_EXPORT igraph_error_t igraph_maximal_cliques_subset(
+        const igraph_t *graph, const igraph_vector_int_t *subset,
+        igraph_vector_int_list_t *res, igraph_int_t *no, FILE *outfile,
+        igraph_int_t min_size, igraph_int_t max_size,
+        igraph_int_t max_results);
+
+IGRAPH_EXPORT igraph_error_t igraph_maximal_cliques_hist(
+        const igraph_t *graph,
+        igraph_vector_t *hist,
+        igraph_int_t min_size, igraph_int_t max_size);
+
+IGRAPH_EXPORT igraph_error_t igraph_cliques(
+        const igraph_t *graph, igraph_vector_int_list_t *res,
+        igraph_int_t min_size, igraph_int_t max_size,
+        igraph_int_t max_results);
+
+IGRAPH_EXPORT igraph_error_t igraph_clique_size_hist(
+        const igraph_t *graph, igraph_vector_t *hist,
+        igraph_int_t min_size, igraph_int_t max_size);
+
+IGRAPH_EXPORT igraph_error_t igraph_largest_cliques(
+        const igraph_t *graph,
+        igraph_vector_int_list_t *cliques);
+
 IGRAPH_EXPORT igraph_error_t igraph_clique_number(const igraph_t *graph, igraph_int_t *no);
-IGRAPH_EXPORT igraph_error_t igraph_weighted_cliques(const igraph_t *graph,
-                                          const igraph_vector_t *vertex_weights, igraph_vector_int_list_t *res,
-                                          igraph_bool_t maximal,
-                                          igraph_real_t min_weight, igraph_real_t max_weight);
-IGRAPH_EXPORT igraph_error_t igraph_largest_weighted_cliques(const igraph_t *graph,
-                                                  const igraph_vector_t *vertex_weights, igraph_vector_int_list_t *res);
-IGRAPH_EXPORT igraph_error_t igraph_weighted_clique_number(const igraph_t *graph,
-                                                const igraph_vector_t *vertex_weights, igraph_real_t *res);
-IGRAPH_EXPORT igraph_error_t igraph_independent_vertex_sets(const igraph_t *graph,
-                                                 igraph_vector_int_list_t *res,
-                                                 igraph_int_t min_size,
-                                                 igraph_int_t max_size);
-IGRAPH_EXPORT igraph_error_t igraph_largest_independent_vertex_sets(const igraph_t *graph,
-                                                         igraph_vector_int_list_t *res);
-IGRAPH_EXPORT igraph_error_t igraph_maximal_independent_vertex_sets(const igraph_t *graph,
-                                                         igraph_vector_int_list_t *res);
+
+IGRAPH_EXPORT igraph_error_t igraph_weighted_cliques(
+        const igraph_t *graph, const igraph_vector_t *vertex_weights,
+        igraph_vector_int_list_t *res,
+        igraph_bool_t maximal,
+        igraph_real_t min_weight, igraph_real_t max_weight,
+        igraph_int_t max_results);
+
+IGRAPH_EXPORT igraph_error_t igraph_largest_weighted_cliques(
+        const igraph_t *graph, const igraph_vector_t *vertex_weights,
+        igraph_vector_int_list_t *res);
+
+IGRAPH_EXPORT igraph_error_t igraph_weighted_clique_number(
+        const igraph_t *graph, const igraph_vector_t *vertex_weights,
+        igraph_real_t *res);
+
+IGRAPH_EXPORT igraph_error_t igraph_independent_vertex_sets(
+        const igraph_t *graph,
+        igraph_vector_int_list_t *res,
+        igraph_int_t min_size, igraph_int_t max_size,
+        igraph_int_t max_results);
+
+IGRAPH_EXPORT igraph_error_t igraph_largest_independent_vertex_sets(
+        const igraph_t *graph,
+        igraph_vector_int_list_t *res);
+
+IGRAPH_EXPORT igraph_error_t igraph_maximal_independent_vertex_sets(
+        const igraph_t *graph,
+        igraph_vector_int_list_t *res,
+        igraph_int_t min_size, igraph_int_t max_size,
+        igraph_int_t max_results);
+
 IGRAPH_EXPORT igraph_error_t igraph_independence_number(const igraph_t *graph, igraph_int_t *no);
 
 /**

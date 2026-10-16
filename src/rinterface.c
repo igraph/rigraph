@@ -9552,12 +9552,13 @@ SEXP R_igraph_is_clique(SEXP graph, SEXP candidate, SEXP directed) {
 /*-------------------------------------------/
 / igraph_cliques                             /
 /-------------------------------------------*/
-SEXP R_igraph_cliques(SEXP graph, SEXP min_size, SEXP max_size) {
+SEXP R_igraph_cliques(SEXP graph, SEXP min_size, SEXP max_size, SEXP max_results) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_int_list_t c_res;
   igraph_integer_t c_min_size;
   igraph_integer_t c_max_size;
+  igraph_integer_t c_max_results;
   SEXP res;
 
   SEXP r_result;
@@ -9569,8 +9570,10 @@ SEXP R_igraph_cliques(SEXP graph, SEXP min_size, SEXP max_size) {
   c_min_size = (igraph_integer_t) REAL(min_size)[0];
   IGRAPH_R_CHECK_INT(max_size);
   c_max_size = (igraph_integer_t) REAL(max_size)[0];
+  IGRAPH_R_CHECK_INT(max_results);
+  c_max_results = (igraph_integer_t) REAL(max_results)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_cliques(&c_graph, &c_res, c_min_size, c_max_size));
+  IGRAPH_R_CHECK(igraph_cliques(&c_graph, &c_res, c_min_size, c_max_size, c_max_results));
 
                                         /* Convert output */
   PROTECT(res=Ry_igraph_vector_int_list_to_SEXPp1(&c_res));
@@ -9645,12 +9648,13 @@ SEXP R_igraph_largest_cliques(SEXP graph) {
 /*-------------------------------------------/
 / igraph_maximal_cliques                     /
 /-------------------------------------------*/
-SEXP R_igraph_maximal_cliques(SEXP graph, SEXP min_size, SEXP max_size) {
+SEXP R_igraph_maximal_cliques(SEXP graph, SEXP min_size, SEXP max_size, SEXP max_results) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_int_list_t c_res;
   igraph_integer_t c_min_size;
   igraph_integer_t c_max_size;
+  igraph_integer_t c_max_results;
   SEXP res;
 
   SEXP r_result;
@@ -9662,8 +9666,10 @@ SEXP R_igraph_maximal_cliques(SEXP graph, SEXP min_size, SEXP max_size) {
   c_min_size = (igraph_integer_t) REAL(min_size)[0];
   IGRAPH_R_CHECK_INT(max_size);
   c_max_size = (igraph_integer_t) REAL(max_size)[0];
+  IGRAPH_R_CHECK_INT(max_results);
+  c_max_results = (igraph_integer_t) REAL(max_results)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_maximal_cliques(&c_graph, &c_res, c_min_size, c_max_size));
+  IGRAPH_R_CHECK(igraph_maximal_cliques(&c_graph, &c_res, c_min_size, c_max_size, c_max_results));
 
                                         /* Convert output */
   PROTECT(res=Ry_igraph_vector_int_list_to_SEXPp1(&c_res));
@@ -9678,7 +9684,7 @@ SEXP R_igraph_maximal_cliques(SEXP graph, SEXP min_size, SEXP max_size) {
 /*-------------------------------------------/
 / igraph_maximal_cliques_subset              /
 /-------------------------------------------*/
-SEXP R_igraph_maximal_cliques_subset(SEXP graph, SEXP subset, SEXP outfile, SEXP min_size, SEXP max_size) {
+SEXP R_igraph_maximal_cliques_subset(SEXP graph, SEXP subset, SEXP outfile, SEXP min_size, SEXP max_size, SEXP max_results) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_int_t c_subset;
@@ -9687,6 +9693,7 @@ SEXP R_igraph_maximal_cliques_subset(SEXP graph, SEXP subset, SEXP outfile, SEXP
   FILE* c_outfile;
   igraph_integer_t c_min_size;
   igraph_integer_t c_max_size;
+  igraph_integer_t c_max_results;
   SEXP res;
   SEXP no;
 
@@ -9706,8 +9713,10 @@ SEXP R_igraph_maximal_cliques_subset(SEXP graph, SEXP subset, SEXP outfile, SEXP
   c_min_size = (igraph_integer_t) REAL(min_size)[0];
   IGRAPH_R_CHECK_INT(max_size);
   c_max_size = (igraph_integer_t) REAL(max_size)[0];
+  IGRAPH_R_CHECK_INT(max_results);
+  c_max_results = (igraph_integer_t) REAL(max_results)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_maximal_cliques_subset(&c_graph, &c_subset, &c_res, &c_no, (Rf_isNull(outfile) ? 0 : c_outfile), c_min_size, c_max_size));
+  IGRAPH_R_CHECK(igraph_maximal_cliques_subset(&c_graph, &c_subset, &c_res, &c_no, (Rf_isNull(outfile) ? 0 : c_outfile), c_min_size, c_max_size, c_max_results));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));
@@ -9764,12 +9773,13 @@ SEXP R_igraph_maximal_cliques_count(SEXP graph, SEXP min_size, SEXP max_size) {
 /*-------------------------------------------/
 / igraph_maximal_cliques_file                /
 /-------------------------------------------*/
-SEXP R_igraph_maximal_cliques_file(SEXP graph, SEXP res, SEXP min_size, SEXP max_size) {
+SEXP R_igraph_maximal_cliques_file(SEXP graph, SEXP res, SEXP min_size, SEXP max_size, SEXP max_results) {
                                         /* Declarations */
   igraph_t c_graph;
   FILE* c_res;
   igraph_integer_t c_min_size;
   igraph_integer_t c_max_size;
+  igraph_integer_t c_max_results;
 
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
@@ -9779,8 +9789,10 @@ SEXP R_igraph_maximal_cliques_file(SEXP graph, SEXP res, SEXP min_size, SEXP max
   c_min_size = (igraph_integer_t) REAL(min_size)[0];
   IGRAPH_R_CHECK_INT(max_size);
   c_max_size = (igraph_integer_t) REAL(max_size)[0];
+  IGRAPH_R_CHECK_INT(max_results);
+  c_max_results = (igraph_integer_t) REAL(max_results)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_maximal_cliques_file(&c_graph, c_res, c_min_size, c_max_size));
+  IGRAPH_R_CHECK(igraph_maximal_cliques_file(&c_graph, c_res, c_min_size, c_max_size, c_max_results));
 
                                         /* Convert output */
 
@@ -9850,7 +9862,7 @@ SEXP R_igraph_clique_number(SEXP graph) {
 /*-------------------------------------------/
 / igraph_weighted_cliques                    /
 /-------------------------------------------*/
-SEXP R_igraph_weighted_cliques(SEXP graph, SEXP vertex_weights, SEXP maximal, SEXP min_weight, SEXP max_weight) {
+SEXP R_igraph_weighted_cliques(SEXP graph, SEXP vertex_weights, SEXP maximal, SEXP min_weight, SEXP max_weight, SEXP max_results) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_t c_vertex_weights;
@@ -9858,6 +9870,7 @@ SEXP R_igraph_weighted_cliques(SEXP graph, SEXP vertex_weights, SEXP maximal, SE
   igraph_bool_t c_maximal;
   igraph_real_t c_min_weight;
   igraph_real_t c_max_weight;
+  igraph_integer_t c_max_results;
   SEXP res;
 
   SEXP r_result;
@@ -9874,8 +9887,10 @@ SEXP R_igraph_weighted_cliques(SEXP graph, SEXP vertex_weights, SEXP maximal, SE
   c_min_weight = REAL(min_weight)[0];
   IGRAPH_R_CHECK_REAL(max_weight);
   c_max_weight = REAL(max_weight)[0];
+  IGRAPH_R_CHECK_INT(max_results);
+  c_max_results = (igraph_integer_t) REAL(max_results)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_weighted_cliques(&c_graph, (Rf_isNull(vertex_weights) ? 0 : &c_vertex_weights), &c_res, c_maximal, c_min_weight, c_max_weight));
+  IGRAPH_R_CHECK(igraph_weighted_cliques(&c_graph, (Rf_isNull(vertex_weights) ? 0 : &c_vertex_weights), &c_res, c_maximal, c_min_weight, c_max_weight, c_max_results));
 
                                         /* Convert output */
   PROTECT(res=Ry_igraph_vector_int_list_to_SEXPp1(&c_res));
@@ -9978,12 +9993,13 @@ SEXP R_igraph_is_independent_vertex_set(SEXP graph, SEXP candidate) {
 /*-------------------------------------------/
 / igraph_independent_vertex_sets             /
 /-------------------------------------------*/
-SEXP R_igraph_independent_vertex_sets(SEXP graph, SEXP min_size, SEXP max_size) {
+SEXP R_igraph_independent_vertex_sets(SEXP graph, SEXP min_size, SEXP max_size, SEXP max_results) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_int_list_t c_res;
   igraph_integer_t c_min_size;
   igraph_integer_t c_max_size;
+  igraph_integer_t c_max_results;
   SEXP res;
 
   SEXP r_result;
@@ -9995,8 +10011,10 @@ SEXP R_igraph_independent_vertex_sets(SEXP graph, SEXP min_size, SEXP max_size) 
   c_min_size = (igraph_integer_t) REAL(min_size)[0];
   IGRAPH_R_CHECK_INT(max_size);
   c_max_size = (igraph_integer_t) REAL(max_size)[0];
+  IGRAPH_R_CHECK_INT(max_results);
+  c_max_results = (igraph_integer_t) REAL(max_results)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_independent_vertex_sets(&c_graph, &c_res, c_min_size, c_max_size));
+  IGRAPH_R_CHECK(igraph_independent_vertex_sets(&c_graph, &c_res, c_min_size, c_max_size, c_max_results));
 
                                         /* Convert output */
   PROTECT(res=Ry_igraph_vector_int_list_to_SEXPp1(&c_res));
@@ -10038,10 +10056,13 @@ SEXP R_igraph_largest_independent_vertex_sets(SEXP graph) {
 /*-------------------------------------------/
 / igraph_maximal_independent_vertex_sets     /
 /-------------------------------------------*/
-SEXP R_igraph_maximal_independent_vertex_sets(SEXP graph) {
+SEXP R_igraph_maximal_independent_vertex_sets(SEXP graph, SEXP min_size, SEXP max_size, SEXP max_results) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_int_list_t c_res;
+  igraph_integer_t c_min_size;
+  igraph_integer_t c_max_size;
+  igraph_integer_t c_max_results;
   SEXP res;
 
   SEXP r_result;
@@ -10049,8 +10070,14 @@ SEXP R_igraph_maximal_independent_vertex_sets(SEXP graph) {
   Rz_SEXP_to_igraph(graph, &c_graph);
   IGRAPH_R_CHECK(igraph_vector_int_list_init(&c_res, 0));
   IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_res);
+  IGRAPH_R_CHECK_INT(min_size);
+  c_min_size = (igraph_integer_t) REAL(min_size)[0];
+  IGRAPH_R_CHECK_INT(max_size);
+  c_max_size = (igraph_integer_t) REAL(max_size)[0];
+  IGRAPH_R_CHECK_INT(max_results);
+  c_max_results = (igraph_integer_t) REAL(max_results)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_maximal_independent_vertex_sets(&c_graph, &c_res));
+  IGRAPH_R_CHECK(igraph_maximal_independent_vertex_sets(&c_graph, &c_res, c_min_size, c_max_size, c_max_results));
 
                                         /* Convert output */
   PROTECT(res=Ry_igraph_vector_int_list_to_SEXPp1(&c_res));
@@ -17806,7 +17833,7 @@ SEXP R_igraph_find_cycle(SEXP graph, SEXP mode) {
 /*-------------------------------------------/
 / igraph_simple_cycles                       /
 /-------------------------------------------*/
-SEXP R_igraph_simple_cycles(SEXP graph, SEXP mode, SEXP min_cycle_length, SEXP max_cycle_length) {
+SEXP R_igraph_simple_cycles(SEXP graph, SEXP mode, SEXP min_cycle_length, SEXP max_cycle_length, SEXP max_results) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_int_list_t c_vertices;
@@ -17814,6 +17841,7 @@ SEXP R_igraph_simple_cycles(SEXP graph, SEXP mode, SEXP min_cycle_length, SEXP m
   igraph_neimode_t c_mode;
   igraph_integer_t c_min_cycle_length;
   igraph_integer_t c_max_cycle_length;
+  igraph_integer_t c_max_results;
   SEXP vertices;
   SEXP edges;
 
@@ -17829,8 +17857,10 @@ SEXP R_igraph_simple_cycles(SEXP graph, SEXP mode, SEXP min_cycle_length, SEXP m
   c_min_cycle_length = (igraph_integer_t) REAL(min_cycle_length)[0];
   IGRAPH_R_CHECK_INT(max_cycle_length);
   c_max_cycle_length = (igraph_integer_t) REAL(max_cycle_length)[0];
+  IGRAPH_R_CHECK_INT(max_results);
+  c_max_results = (igraph_integer_t) REAL(max_results)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_simple_cycles(&c_graph, &c_vertices, &c_edges, c_mode, c_min_cycle_length, c_max_cycle_length));
+  IGRAPH_R_CHECK(igraph_simple_cycles(&c_graph, &c_vertices, &c_edges, c_mode, c_min_cycle_length, c_max_cycle_length, c_max_results));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));

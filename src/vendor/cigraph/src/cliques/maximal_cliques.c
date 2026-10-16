@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2013  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -349,6 +348,8 @@ static igraph_error_t igraph_i_maximal_cliques_up(
  *   returned. If negative or zero, no lower bound will be used.
  * \param max_size Integer giving the maximum size of the cliques to be
  *   returned. If negative or zero, no upper bound will be used.
+ * \param max_results At most this many cliques will be recorded. If
+ *   negative, or \ref IGRAPH_UNLIMITED, no limit is applied.
  * \return Error code.
  *
  * \sa \ref igraph_maximal_independent_vertex_sets() to find maximal
@@ -362,14 +363,25 @@ static igraph_error_t igraph_i_maximal_cliques_up(
  * \example examples/simple/igraph_maximal_cliques.c
  */
 
-igraph_error_t igraph_maximal_cliques(
-    const igraph_t *graph, igraph_vector_int_list_t *res,
-    igraph_int_t min_size, igraph_int_t max_size
-);
+/* igraph_maximal_cliques */
+
+igraph_error_t igraph_i_maximal_cliques(
+        const igraph_t *graph,
+        igraph_vector_int_list_t *res,
+        igraph_int_t min_size, igraph_int_t max_size,
+        igraph_int_t max_results);
 
 #define IGRAPH_MC_ORIG
 #include "maximal_cliques_template.h"
 #undef IGRAPH_MC_ORIG
+
+igraph_error_t igraph_maximal_cliques(
+        const igraph_t *graph,
+        igraph_vector_int_list_t *res,
+        igraph_int_t min_size, igraph_int_t max_size,
+        igraph_int_t max_results) {
+    return igraph_i_maximal_cliques(graph, res, min_size, max_size, max_results);
+}
 
 /**
  * \function igraph_maximal_cliques_count
@@ -394,14 +406,24 @@ igraph_error_t igraph_maximal_cliques(
  * \example examples/simple/igraph_maximal_cliques.c
  */
 
-igraph_error_t igraph_maximal_cliques_count(const igraph_t *graph,
-                                 igraph_int_t *res,
-                                 igraph_int_t min_size,
-                                 igraph_int_t max_size);
+/* igraph_maximal_cliques_count */
+
+igraph_error_t igraph_i_maximal_cliques_count(
+        const igraph_t *graph,
+        igraph_int_t *res,
+        igraph_int_t min_size, igraph_int_t max_size,
+        igraph_int_t max_results);
 
 #define IGRAPH_MC_COUNT
 #include "maximal_cliques_template.h"
 #undef IGRAPH_MC_COUNT
+
+igraph_error_t igraph_maximal_cliques_count(
+        const igraph_t *graph,
+        igraph_int_t *res,
+        igraph_int_t min_size, igraph_int_t max_size) {
+    return igraph_i_maximal_cliques_count(graph, res, min_size, max_size, IGRAPH_UNLIMITED);
+}
 
 /**
  * \function igraph_maximal_cliques_file
@@ -417,6 +439,8 @@ igraph_error_t igraph_maximal_cliques_count(const igraph_t *graph,
  *   returned. If negative or zero, no lower bound will be used.
  * \param max_size Integer giving the maximum size of the cliques to be
  *   returned. If negative or zero, no upper bound will be used.
+ * \param max_results At most this many cliques will be output. If
+ *   negative, or \ref IGRAPH_UNLIMITED, no limit is applied.
  * \return Error code.
  *
  * \sa \ref igraph_maximal_cliques().
@@ -426,14 +450,25 @@ igraph_error_t igraph_maximal_cliques_count(const igraph_t *graph,
  *
  */
 
-igraph_error_t igraph_maximal_cliques_file(const igraph_t *graph,
-                                FILE *outfile,
-                                igraph_int_t min_size,
-                                igraph_int_t max_size);
+/* igraph_maximal_cliques_file */
+
+igraph_error_t igraph_i_maximal_cliques_file(
+        const igraph_t *graph,
+        FILE *outfile,
+        igraph_int_t min_size, igraph_int_t max_size,
+        igraph_int_t max_results);
 
 #define IGRAPH_MC_FILE
 #include "maximal_cliques_template.h"
 #undef IGRAPH_MC_FILE
+
+igraph_error_t igraph_maximal_cliques_file(
+        const igraph_t *graph,
+        FILE *outfile,
+        igraph_int_t min_size, igraph_int_t max_size,
+        igraph_int_t max_results) {
+    return igraph_i_maximal_cliques_file(graph, outfile, min_size, max_size, max_results);
+}
 
 /**
  * \function igraph_maximal_cliques_subset
@@ -456,6 +491,8 @@ igraph_error_t igraph_maximal_cliques_file(const igraph_t *graph,
  *   returned. If negative or zero, no lower bound will be used.
  * \param max_size Integer giving the maximum size of the cliques to be
  *   returned. If negative or zero, no upper bound will be used.
+ * \param max_results At most this many cliques will be recorded. If
+ *   negative, or \ref IGRAPH_UNLIMITED, no limit is applied.
  * \return Error code.
  *
  * \sa \ref igraph_maximal_cliques().
@@ -465,27 +502,38 @@ igraph_error_t igraph_maximal_cliques_file(const igraph_t *graph,
  *
  */
 
-igraph_error_t igraph_maximal_cliques_subset(
-    const igraph_t *graph, const igraph_vector_int_t *subset,
-    igraph_vector_int_list_t *res, igraph_int_t *no,
-    FILE *outfile, igraph_int_t min_size, igraph_int_t max_size
-);
+/* igraph_maximal_cliques_subset */
+
+igraph_error_t igraph_i_maximal_cliques_subset(
+        const igraph_t *graph, const igraph_vector_int_t *subset,
+        igraph_vector_int_list_t *res, igraph_int_t *no,
+        FILE *outfile, igraph_int_t min_size, igraph_int_t max_size,
+        igraph_int_t max_results);
 
 #define IGRAPH_MC_FULL
 #include "maximal_cliques_template.h"
 #undef IGRAPH_MC_FULL
 
+igraph_error_t igraph_maximal_cliques_subset(
+        const igraph_t *graph, const igraph_vector_int_t *subset,
+        igraph_vector_int_list_t *res, igraph_int_t *no, FILE *outfile,
+        igraph_int_t min_size, igraph_int_t max_size,
+        igraph_int_t max_results) {
+    return igraph_i_maximal_cliques_subset(graph, subset, res, no, outfile, min_size, max_size, max_results);
+}
 
-/* Generate internal function with original parameter order */
-#define igraph_maximal_cliques_callback igraph_i_maximal_cliques_callback
-igraph_error_t igraph_maximal_cliques_callback(const igraph_t *graph,
-                                    igraph_clique_handler_t *cliquehandler_fn, void *arg,
-                                    igraph_int_t min_size, igraph_int_t max_size);
+
+/* igraph_maximal_cliques_callback */
+
+igraph_error_t igraph_i_maximal_cliques_callback(
+        const igraph_t *graph,
+        igraph_clique_handler_t *cliquehandler_fn, void *arg,
+        igraph_int_t min_size, igraph_int_t max_size,
+        igraph_int_t max_results);
 
 #define IGRAPH_MC_CALLBACK
 #include "maximal_cliques_template.h"
 #undef IGRAPH_MC_CALLBACK
-#undef igraph_maximal_cliques_callback
 
 /**
  * \function igraph_maximal_cliques_callback
@@ -519,7 +567,7 @@ igraph_error_t igraph_maximal_cliques_callback(
         const igraph_t *graph,
         igraph_int_t min_size, igraph_int_t max_size,
         igraph_clique_handler_t *cliquehandler_fn, void *arg) {
-    return igraph_i_maximal_cliques_callback(graph, cliquehandler_fn, arg, min_size, max_size);
+    return igraph_i_maximal_cliques_callback(graph, cliquehandler_fn, arg, min_size, max_size, IGRAPH_UNLIMITED);
 }
 
 
@@ -548,11 +596,21 @@ igraph_error_t igraph_maximal_cliques_callback(
  *
  */
 
-igraph_error_t igraph_maximal_cliques_hist(const igraph_t *graph,
-                                igraph_vector_t *hist,
-                                igraph_int_t min_size,
-                                igraph_int_t max_size);
+/* igraph_maximal_cliques_hist */
+
+igraph_error_t igraph_i_maximal_cliques_hist(
+        const igraph_t *graph,
+        igraph_vector_t *hist,
+        igraph_int_t min_size, igraph_int_t max_size,
+        igraph_int_t max_results);
 
 #define IGRAPH_MC_HIST
 #include "maximal_cliques_template.h"
 #undef IGRAPH_MC_HIST
+
+igraph_error_t igraph_maximal_cliques_hist(
+        const igraph_t *graph,
+        igraph_vector_t *hist,
+        igraph_int_t min_size, igraph_int_t max_size) {
+    return igraph_i_maximal_cliques_hist(graph, hist, min_size, max_size, IGRAPH_UNLIMITED);
+}
