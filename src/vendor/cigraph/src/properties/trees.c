@@ -22,7 +22,7 @@
 */
 
 #include "igraph_structural.h"
-#include "igraph_topology.h"
+#include "igraph_isomorphism.h"
 
 #include "igraph_bitset.h"
 #include "igraph_constructors.h"

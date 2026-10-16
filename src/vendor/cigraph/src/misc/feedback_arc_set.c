@@ -26,7 +26,7 @@
 #include "igraph_interface.h"
 #include "igraph_memory.h"
 #include "igraph_stack.h"
-#include "igraph_topology.h"
+#include "igraph_isomorphism.h"
 #include "igraph_vector.h"
 #include "igraph_vector_list.h"
 #include "igraph_visitor.h"

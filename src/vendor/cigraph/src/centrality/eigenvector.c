@@ -24,7 +24,7 @@
 #include "igraph_interface.h"
 #include "igraph_random.h"
 #include "igraph_structural.h"
-#include "igraph_topology.h"
+#include "igraph_isomorphism.h"
 
 #include "centrality/centrality_internal.h"
 

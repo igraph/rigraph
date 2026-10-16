@@ -35,7 +35,7 @@
 #include "igraph_progress.h"
 #include "igraph_operators.h"
 #include "igraph_structural.h"
-#include "igraph_topology.h"
+#include "igraph_isomorphism.h"
 
 #include "core/buckets.h"
 #include "core/cutheap.h"

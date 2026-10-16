@@ -21,8 +21,8 @@
 
 */
 
-#ifndef IGRAPH_TOPOLOGY_H
-#define IGRAPH_TOPOLOGY_H
+#ifndef IGRAPH_ISOMORPHISM_H
+#define IGRAPH_ISOMORPHISM_H
 
 #include "igraph_decls.h"
 #include "igraph_constants.h"

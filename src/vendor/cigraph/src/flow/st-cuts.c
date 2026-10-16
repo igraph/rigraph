@@ -32,7 +32,7 @@
 #include "igraph_operators.h"
 #include "igraph_stack.h"
 #include "igraph_visitor.h"
-#include "igraph_topology.h"
+#include "igraph_isomorphism.h"
 
 #include "core/estack.h"
 #include "core/marked_queue.h"
