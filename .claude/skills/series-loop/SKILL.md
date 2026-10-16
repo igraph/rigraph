@@ -134,14 +134,15 @@ if [ "$(git -C "$U" rev-parse --is-shallow-repository)" = true ]; then
   git -C "$U" fetch --unshallow origin
 fi
 git -C "$U" fetch --tags origin
-git -C "$U" fetch https://github.com/krlmlr/igraph replay-1.0.1:refs/heads/replay-1.0.1
+git -C "$U" fetch https://github.com/krlmlr/igraph v1.0-replay:refs/heads/v1.0-replay
 git -C "$U" checkout -q --detach origin/main
 ```
 
 * `origin` is the fork and `upstream` the canonical repository, the names `--remote` and `--canonical` default to everywhere;
   every read of `main` takes the canonical ref, and a script that cannot reach it says so and falls back to the fork's mirror.
   A shallow or single-branch clone enumerates zero series or answers wrong.
-* A vendor run needs R with the package's dependencies and `decor`, `cmake`, `flex`, `bison`, and `python3` with `venv`.
+* A vendor run needs R with the package's dependencies and `decor`, `cmake`, `flex`, `bison`, and `python3` with `venv`;
+  the cloud image lacks `flex`, which `command -v flex >/dev/null || sudo apt-get install -y flex` installs ([`references/0-setup.md`](references/0-setup.md)).
 * **Establish how this firing reads results, once**: list the most recent `each-rcc` runs of `krlmlr/rigraph`.
   If that answers, the firing is on the run path for every stage below;
   if not, it falls back to the `rcc2` store, an emergency route inside its 180-day window, and says so in the report.

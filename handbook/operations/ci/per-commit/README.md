@@ -82,11 +82,22 @@ and `each-plan.sh` records how that weight and the minutes it is converted with 
 ## The store
 
 The `rcc2` branch holds one record and one failure log per decided commit, and nothing else.
-[`scripts/rcc-publish.sh`](/scripts/rcc-publish.sh) is its one writer, retrying on the race for the ref;
+[`scripts/rcc-publish.sh`](/scripts/rcc-publish.sh) is its routine writer, retrying on the race for the ref;
 [`scripts/rcc-lib.sh`](/scripts/rcc-lib.sh) holds its paths and helpers;
 [`scripts/rcc-store-test.sh`](/scripts/rcc-store-test.sh) checks it offline against a local remote.
-Sweeping records that have aged out, and dropping verdicts the job rather than the tree decided, are not ported;
-the series loop names what would trigger them ([`series-loop`](/.claude/skills/series-loop/SKILL.md), "Not ported yet").
+
+**The store stays, although the `rcc` status carries the same verdict.**
+A session behind the cloud proxy reaches neither a run's artifacts nor its whole job log,
+so the store is its one path to a failure log, and it answers which commits are decided for any range in one fetch, with git alone.
+Moving the verdict to a status of its own and the log to a check run, and retiring the branch, was weighed with duckdb-r and declined.
+The branch is the simpler of the two as it stands, and the gain would be modest.
+
+**Retention** is `RCC_RETENTION_DAYS` (180, set in `rcc-lib.sh`), records and logs alike.
+[`scripts/rcc-consolidate.sh`](/scripts/rcc-consolidate.sh) drops what is older and squashes the history to two commits.
+It only reports unless `APPLY=1` is set, and its `OUT_DIR` is a checkout of `rcc2`.
+It is the one writer that rewrites the branch, so it is run by hand and never on a schedule, and its force-push carries a lease.
+Filling a record no leg published, and dropping verdicts the job rather than the tree decided, are not ported.
+The series loop names what would trigger them ([`series-loop`](/.claude/skills/series-loop/SKILL.md), "Not ported yet").
 
 ## Operating it
 
