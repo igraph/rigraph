@@ -31,7 +31,7 @@
 
 #include "plfit_decls.h"
 
-__BEGIN_DECLS
+PLFIT_BEGIN_C_DECLS
 
 /*
  * The default precision of floating point values is 64bit (double).
@@ -524,7 +524,7 @@ const char* lbfgs_strerror(int err);
 
 /** @} */
 
-__END_DECLS
+PLFIT_END_C_DECLS
 
 
 
