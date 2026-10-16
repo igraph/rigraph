@@ -449,7 +449,7 @@ VERTEX_WEIGHTS:
             igraph_vector_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
-EDGE_CAPACITY:
+EDGE_CAPACITIES:
     CALL: '&%C%'
     CTYPE: igraph_vector_t
     INCONV:
