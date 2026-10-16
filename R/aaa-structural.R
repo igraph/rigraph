@@ -256,14 +256,13 @@ global_efficiency_impl <- function(
 
 local_efficiency_impl <- function(
   graph,
-  vids = V(graph),
   weights = NULL,
+  vids = V(graph),
   directed = TRUE,
   mode = c("all", "out", "in", "total")
 ) {
   # Argument checks
   ensure_igraph(graph)
-  vids <- as_igraph_vs(graph, vids)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -272,6 +271,7 @@ local_efficiency_impl <- function(
   } else {
     weights <- NULL
   }
+  vids <- as_igraph_vs(graph, vids)
   directed <- as.logical(directed)
   mode <- switch_igraph_arg(
     mode,
@@ -286,8 +286,8 @@ local_efficiency_impl <- function(
   res <- .Call(
     R_igraph_local_efficiency,
     graph,
-    vids - 1,
     weights,
+    vids - 1,
     directed,
     mode
   )

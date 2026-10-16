@@ -8154,8 +8154,8 @@ SEXP R_igraph_random_edge_walk(SEXP graph, SEXP weights, SEXP start, SEXP mode, 
 SEXP R_igraph_global_efficiency(SEXP graph, SEXP weights, SEXP directed) {
                                         /* Declarations */
   igraph_t c_graph;
-  igraph_real_t c_res;
   igraph_vector_t c_weights;
+  igraph_real_t c_res;
   igraph_bool_t c_directed;
   SEXP res;
 
@@ -8168,7 +8168,7 @@ SEXP R_igraph_global_efficiency(SEXP graph, SEXP weights, SEXP directed) {
   IGRAPH_R_CHECK_BOOL(directed);
   c_directed = LOGICAL(directed)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_global_efficiency(&c_graph, &c_res, (Rf_isNull(weights) ? 0 : &c_weights), c_directed));
+  IGRAPH_R_CHECK(igraph_global_efficiency(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_res, c_directed));
 
                                         /* Convert output */
   PROTECT(res=NEW_NUMERIC(1));
@@ -8182,12 +8182,12 @@ SEXP R_igraph_global_efficiency(SEXP graph, SEXP weights, SEXP directed) {
 /*-------------------------------------------/
 / igraph_local_efficiency                    /
 /-------------------------------------------*/
-SEXP R_igraph_local_efficiency(SEXP graph, SEXP vids, SEXP weights, SEXP directed, SEXP mode) {
+SEXP R_igraph_local_efficiency(SEXP graph, SEXP weights, SEXP vids, SEXP directed, SEXP mode) {
                                         /* Declarations */
   igraph_t c_graph;
+  igraph_vector_t c_weights;
   igraph_vector_t c_res;
   igraph_vs_t c_vids;
-  igraph_vector_t c_weights;
   igraph_bool_t c_directed;
   igraph_neimode_t c_mode;
   SEXP res;
@@ -8195,18 +8195,18 @@ SEXP R_igraph_local_efficiency(SEXP graph, SEXP vids, SEXP weights, SEXP directe
   SEXP r_result;
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    Rz_SEXP_to_vector(weights, &c_weights);
+  }
   IGRAPH_R_CHECK(igraph_vector_init(&c_res, 0));
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
   igraph_vector_int_t c_vids_data;
   Rz_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
-  if (!Rf_isNull(weights)) {
-    Rz_SEXP_to_vector(weights, &c_weights);
-  }
   IGRAPH_R_CHECK_BOOL(directed);
   c_directed = LOGICAL(directed)[0];
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_local_efficiency(&c_graph, &c_res, c_vids, (Rf_isNull(weights) ? 0 : &c_weights), c_directed, c_mode));
+  IGRAPH_R_CHECK(igraph_local_efficiency(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_res, c_vids, c_directed, c_mode));
 
                                         /* Convert output */
   PROTECT(res=Ry_igraph_vector_to_SEXP(&c_res));
@@ -8226,8 +8226,8 @@ SEXP R_igraph_local_efficiency(SEXP graph, SEXP vids, SEXP weights, SEXP directe
 SEXP R_igraph_average_local_efficiency(SEXP graph, SEXP weights, SEXP directed, SEXP mode) {
                                         /* Declarations */
   igraph_t c_graph;
-  igraph_real_t c_res;
   igraph_vector_t c_weights;
+  igraph_real_t c_res;
   igraph_bool_t c_directed;
   igraph_neimode_t c_mode;
   SEXP res;
@@ -8242,7 +8242,7 @@ SEXP R_igraph_average_local_efficiency(SEXP graph, SEXP weights, SEXP directed, 
   c_directed = LOGICAL(directed)[0];
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_average_local_efficiency(&c_graph, &c_res, (Rf_isNull(weights) ? 0 : &c_weights), c_directed, c_mode));
+  IGRAPH_R_CHECK(igraph_average_local_efficiency(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_res, c_directed, c_mode));
 
                                         /* Convert output */
   PROTECT(res=NEW_NUMERIC(1));
