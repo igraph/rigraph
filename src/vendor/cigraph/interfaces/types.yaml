@@ -432,6 +432,11 @@ GRAPH_PRODUCT_TYPE:
     CTYPE: igraph_product_t
     FLAGS: ENUM
 
+LPA_VARIANT:
+    # Enum that describes the label propagation algorithm variant
+    CTYPE: igraph_lpa_variant_t
+    FLAGS: ENUM
+
 RANDOM_TREE_METHOD:
     # Enum that describes the various implementation of the uniform random tree
     # sampling method
