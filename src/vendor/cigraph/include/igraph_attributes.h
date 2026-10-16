@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -131,6 +130,31 @@ typedef enum { IGRAPH_ATTRIBUTE_UNSPECIFIED = 0,
                IGRAPH_ATTRIBUTE_OBJECT = 127
              } igraph_attribute_type_t;
 
+/* -------------------------------------------------- */
+/* Attribute records                                  */
+/* -------------------------------------------------- */
+
+/**
+ * \typedef igraph_attribute_record_t
+ * \brief An attribute record holding the name, type and values of an attribute.
+ *
+ * This composite data type is used in the attribute interface to specify a
+ * name-type-value triplet where the name is the name of a graph, vertex or
+ * edge attribute, the type is the corresponding igraph type of the attribute
+ * and the value is a \em vector of attribute values. Note that for graph
+ * attributes we use a vector of length 1. The type of the vector depends on
+ * the attribute type: it is \ref igraph_vector_t for numeric attributes,
+ * \c igraph_strvector_t for string attributes and \c igraph_vector_bool_t
+ * for Boolean attributes.
+ *
+ * </para><para>
+ * The record also stores default values for the attribute. The default values
+ * are used when the value vector of the record is resized with
+ * \ref igraph_attribute_record_resize(). It is important that the record
+ * stores \em one default value only, corresponding to the type of the
+ * attribute record. The default value is \em cleared when the type of the
+ * record is changed.
+ */
 typedef struct igraph_attribute_record_t {
     char *name;
     igraph_attribute_type_t type;
