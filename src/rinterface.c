@@ -6828,13 +6828,13 @@ SEXP R_igraph_authority_score(SEXP graph, SEXP scale, SEXP weights, SEXP options
 /*-------------------------------------------/
 / igraph_hub_and_authority_scores            /
 /-------------------------------------------*/
-SEXP R_igraph_hub_and_authority_scores(SEXP graph, SEXP scale, SEXP weights, SEXP options) {
+SEXP R_igraph_hub_and_authority_scores(SEXP graph, SEXP weights, SEXP options) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_t c_hub;
   igraph_vector_t c_authority;
   igraph_real_t c_value;
-  igraph_bool_t c_scale;
+
   igraph_vector_t c_weights;
   igraph_arpack_options_t c_options;
   SEXP hub;
@@ -6848,14 +6848,12 @@ SEXP R_igraph_hub_and_authority_scores(SEXP graph, SEXP scale, SEXP weights, SEX
   IGRAPH_FINALLY(igraph_vector_destroy, &c_hub);
   IGRAPH_R_CHECK(igraph_vector_init(&c_authority, 0));
   IGRAPH_FINALLY(igraph_vector_destroy, &c_authority);
-  IGRAPH_R_CHECK_BOOL(scale);
-  c_scale = LOGICAL(scale)[0];
   if (!Rf_isNull(weights)) {
     Rz_SEXP_to_vector(weights, &c_weights);
   }
   Rz_SEXP_to_igraph_arpack_options(options, &c_options);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_hub_and_authority_scores(&c_graph, &c_hub, &c_authority, &c_value, c_scale, (Rf_isNull(weights) ? 0 : &c_weights), &c_options));
+  IGRAPH_R_CHECK(igraph_hub_and_authority_scores(&c_graph, &c_hub, &c_authority, &c_value, (Rf_isNull(weights) ? 0 : &c_weights), &c_options));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(4));
