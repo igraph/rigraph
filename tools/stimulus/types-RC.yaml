@@ -795,7 +795,7 @@ ARPACKSTORAGE:
     CTYPE: ~
     HEADER: {}
 
-ARPACKFUNC:
+ARPACK_FUNC:
     CALL: '0'
     CTYPE: ~
     HEADER: {}
