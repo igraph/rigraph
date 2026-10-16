@@ -94,7 +94,7 @@ delete_vertices_idx_impl <- function(
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_delete_vertices_idx,
+    R_igraph_delete_vertices_map,
     graph,
     vertices - 1
   )
