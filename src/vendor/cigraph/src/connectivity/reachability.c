@@ -30,8 +30,6 @@
  * \function igraph_reachability
  * \brief Calculates which vertices are reachable from each vertex in the graph.
  *
- * \experimental
- *
  * The resulting list will contain one bitset for each strongly connected component.
  * The bitset for component i will have its j-th bit set, if vertex j is reachable
  * from some vertex in component i in 0 or more steps.
@@ -156,8 +154,6 @@ igraph_error_t igraph_reachability(
  * \function igraph_count_reachable
  * \brief The number of vertices reachable from each vertex in the graph.
  *
- * \experimental
- *
  * \param graph The graph object to analyze.
  * \param counts Integer vector. <code>counts[v]</code> will store the number
  *    of vertices reachable from vertex \c v, including \c v itself.
@@ -210,8 +206,6 @@ igraph_error_t igraph_count_reachable(const igraph_t *graph,
  * \ingroup structural
  * \function igraph_transitive_closure
  * \brief Computes the transitive closure of a graph.
- *
- * \experimental
  *
  * The resulting graph will have an edge from vertex \c i to vertex \c j
  * if \c j is reachable from \c i.

@@ -117,8 +117,6 @@ igraph_error_t igraph_density(
  * \function igraph_mean_degree
  * \brief The mean degree of a graph.
  *
- * \experimental
- *
  * This is a convenience function that computes the average of all vertex
  * degrees. In directed graphs, the average of out-degrees and in-degrees is
  * the same; this is the number that is returned. For the null graph, which

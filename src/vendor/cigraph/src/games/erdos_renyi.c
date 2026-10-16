@@ -789,8 +789,6 @@ igraph_error_t igraph_erdos_renyi_game_gnm(
  * \function igraph_iea_game
  * \brief Generates a random multigraph through independent edge assignment.
  *
- * \experimental
- *
  * This model generates random multigraphs on \p n vertices with \p m edges
  * through independent edge assignment (IEA). Each of the \p m edges is assigned
  * uniformly at random to an \em ordered vertex pair, independently of each

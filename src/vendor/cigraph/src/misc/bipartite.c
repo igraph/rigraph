@@ -1745,8 +1745,6 @@ igraph_error_t igraph_bipartite_game_gnm(
  * \function igraph_bipartite_iea_game
  * \brief Generates a random bipartite multigraph through independent edge assignment.
  *
- * \experimental
- *
  * This model generates random multigraphs with \p n1 bottom vertices,
  * \p n2 top vertices and \p m edges through independent edge assignment (IEA).
  * Each of the \p m edges is assigned uniformly at random to a vertex pair,

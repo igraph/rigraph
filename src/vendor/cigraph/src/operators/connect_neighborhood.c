@@ -172,8 +172,6 @@ igraph_error_t igraph_connect_neighborhood(igraph_t *graph, igraph_int_t order,
  * \function igraph_graph_power
  * \brief The kth power of a graph.
  *
- * \experimental
- *
  * The kth power of a graph G is a simple graph where vertex \c u is connected to
  * \c v by a single edge if \c v is reachable from \c u in G within at most k steps.
  * By convention, the zeroth power of a graph has no edges. The first power is
