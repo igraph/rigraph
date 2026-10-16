@@ -139,7 +139,7 @@ extern SEXP R_igraph_delaunay_graph(SEXP);
 extern SEXP R_igraph_delete_edges(SEXP, SEXP);
 extern SEXP R_igraph_delete_vertices(SEXP, SEXP);
 extern SEXP R_igraph_delete_vertices_map(SEXP, SEXP);
-extern SEXP R_igraph_density(SEXP, SEXP);
+extern SEXP R_igraph_density(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_deterministic_optimal_imitation(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_dfs_closure(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_diameter(SEXP, SEXP, SEXP, SEXP);
@@ -725,7 +725,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_delete_edges",                                   (DL_FUNC) &R_igraph_delete_edges,                                    2},
     {"R_igraph_delete_vertices",                                (DL_FUNC) &R_igraph_delete_vertices,                                 2},
     {"R_igraph_delete_vertices_map",                            (DL_FUNC) &R_igraph_delete_vertices_map,                             2},
-    {"R_igraph_density",                                        (DL_FUNC) &R_igraph_density,                                         2},
+    {"R_igraph_density",                                        (DL_FUNC) &R_igraph_density,                                         3},
     {"R_igraph_deterministic_optimal_imitation",                (DL_FUNC) &R_igraph_deterministic_optimal_imitation,                 6},
     {"R_igraph_dfs_closure",                                    (DL_FUNC) &R_igraph_dfs_closure,                                     6},
     {"R_igraph_diameter",                                       (DL_FUNC) &R_igraph_diameter,                                        4},
