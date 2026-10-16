@@ -1,23 +1,23 @@
 ## revdepcheck results
 
-We checked 3470 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 808 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
  * We saw 26 new problems
- * We failed to check 8 packages
+ * We failed to check 1 packages
 
 Issues with CRAN packages are summarised below.
 
 ### New problems
 (This reports the first line of each new failure)
 
+* bitriad
+  checking examples ... ERROR
+
 * Boptbd
   checking examples ... ERROR
 
 * c3net
   checking examples ... ERROR
-
-* cfid
-  checking tests ... ERROR
 
 * comato
   checking examples ... ERROR
@@ -56,15 +56,15 @@ Issues with CRAN packages are summarised below.
 * MetaNet
   checking examples ... ERROR
 
-* migraph
-  checking tests ... ERROR
-
 * nat
   checking examples ... ERROR
   checking tests ... ERROR
   checking re-building of vignette outputs ... ERROR
 
 * nethist
+  checking tests ... ERROR
+
+* netrics
   checking tests ... ERROR
 
 * optbdmaeAT
@@ -88,20 +88,13 @@ Issues with CRAN packages are summarised below.
 * SpaDES.core
   checking tests ... ERROR
 
+* specr
+  checking tests ... ERROR
+
 * tidygraph
   checking examples ... ERROR
   checking tests ... ERROR
 
-* vkR
-  checking dependencies in R code ... WARNING
-
 ### Failed to check
 
-* ctmm            (NA)
-* E2E             (NA)
-* gllvm           (NA)
-* hespdiv         (NA)
-* orchaRd         (NA)
-* PortfolioTesteR (NA)
-* sphet           (NA)
-* xpect           (NA)
+* trafficCAR (NA)
