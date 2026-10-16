@@ -6,7 +6,8 @@
 
 community_optimal_modularity_impl <- function(
   graph,
-  weights = NULL
+  weights = NULL,
+  resolution = 1.0
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -18,13 +19,15 @@ community_optimal_modularity_impl <- function(
   } else {
     weights <- NULL
   }
+  resolution <- as.numeric(resolution)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_community_optimal_modularity,
     graph,
-    weights
+    weights,
+    resolution
   )
 
   res

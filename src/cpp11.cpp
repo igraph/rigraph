@@ -98,7 +98,7 @@ extern SEXP R_igraph_community_label_propagation(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_community_leading_eigenvector_callback_closure(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_community_leiden(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_community_multilevel(SEXP, SEXP, SEXP);
-extern SEXP R_igraph_community_optimal_modularity(SEXP, SEXP);
+extern SEXP R_igraph_community_optimal_modularity(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_community_spinglass(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_community_spinglass_single(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_community_to_membership(SEXP, SEXP, SEXP);
@@ -676,7 +676,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_community_leading_eigenvector_callback_closure", (DL_FUNC) &R_igraph_community_leading_eigenvector_callback_closure, 10},
     {"R_igraph_community_leiden",                               (DL_FUNC) &R_igraph_community_leiden,                                8},
     {"R_igraph_community_multilevel",                           (DL_FUNC) &R_igraph_community_multilevel,                            3},
-    {"R_igraph_community_optimal_modularity",                   (DL_FUNC) &R_igraph_community_optimal_modularity,                    2},
+    {"R_igraph_community_optimal_modularity",                   (DL_FUNC) &R_igraph_community_optimal_modularity,                    3},
     {"R_igraph_community_spinglass",                            (DL_FUNC) &R_igraph_community_spinglass,                            11},
     {"R_igraph_community_spinglass_single",                     (DL_FUNC) &R_igraph_community_spinglass_single,                      6},
     {"R_igraph_community_to_membership",                        (DL_FUNC) &R_igraph_community_to_membership,                         3},
