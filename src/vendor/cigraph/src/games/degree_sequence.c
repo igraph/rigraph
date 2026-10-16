@@ -84,7 +84,6 @@ static igraph_error_t configuration(
     IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, 0);
     IGRAPH_CHECK(igraph_vector_int_reserve(&edges, no_of_edges * 2));
 
-
     if (directed) {
         for (igraph_int_t i = 0; i < no_of_edges; i++) {
             igraph_int_t from = RNG_INTEGER(0, bagp1 - 1);
@@ -108,7 +107,6 @@ static igraph_error_t configuration(
             bagp1--;
         }
     }
-
 
     IGRAPH_FREE(bag1);
     IGRAPH_FINALLY_CLEAN(1);
@@ -158,8 +156,6 @@ static igraph_error_t fast_heur_undirected(
     IGRAPH_CHECK(igraph_set_init(&incomplete_vertices, 0));
     IGRAPH_FINALLY(igraph_set_destroy, &incomplete_vertices);
 
-    /* Start the RNG */
-
     /* Outer loop; this will try to construct a graph several times from scratch
      * until it finally succeeds. */
     finished = false;
@@ -181,7 +177,7 @@ static igraph_error_t fast_heur_undirected(
             igraph_vector_int_clear(&stubs);
             for (i = 0; i < no_of_nodes; i++) {
                 for (j = 0; j < VECTOR(residual_degrees)[i]; j++) {
-                    igraph_vector_int_push_back(&stubs, i);
+                    igraph_vector_int_push_back(&stubs, i); /* reserved */
                 }
             }
 
@@ -245,8 +241,6 @@ static igraph_error_t fast_heur_undirected(
         }
     }
 
-    /* Finish the RNG */
-
     /* Clean up */
     igraph_set_destroy(&incomplete_vertices);
     igraph_vector_int_destroy(&residual_degrees);
@@ -306,8 +300,6 @@ static igraph_error_t fast_heur_directed(
     IGRAPH_CHECK(igraph_set_init(&incomplete_in_vertices, 0));
     IGRAPH_FINALLY(igraph_set_destroy, &incomplete_in_vertices);
 
-    /* Start the RNG */
-
     /* Outer loop; this will try to construct a graph several times from scratch
      * until it finally succeeds. */
     finished = false;
@@ -331,10 +323,10 @@ static igraph_error_t fast_heur_directed(
             igraph_vector_int_clear(&in_stubs);
             for (i = 0; i < no_of_nodes; i++) {
                 for (j = 0; j < VECTOR(residual_out_degrees)[i]; j++) {
-                    igraph_vector_int_push_back(&out_stubs, i);
+                    igraph_vector_int_push_back(&out_stubs, i); /* reserved */
                 }
                 for (j = 0; j < VECTOR(residual_in_degrees)[i]; j++) {
-                    igraph_vector_int_push_back(&in_stubs, i);
+                    igraph_vector_int_push_back(&in_stubs, i); /* reserved */
                 }
             }
 
@@ -390,8 +382,6 @@ static igraph_error_t fast_heur_directed(
         }
     }
 
-    /* Finish the RNG */
-
     /* Clean up */
     igraph_set_destroy(&incomplete_in_vertices);
     igraph_set_destroy(&incomplete_out_vertices);
@@ -442,7 +432,6 @@ static igraph_error_t configuration_simple_undirected_set(
         IGRAPH_CHECK(igraph_set_reserve(set, VECTOR(*degseq)[i]));
     }
 
-
     for (;;) {
         igraph_bool_t success = true;
 
@@ -488,7 +477,6 @@ static igraph_error_t configuration_simple_undirected_set(
         IGRAPH_ALLOW_INTERRUPTION_LIMITED(iter, 1 << 8);
     }
 
-
     igraph_vector_ptr_destroy_all(&adjlist);
     IGRAPH_FINALLY_CLEAN(1);
 
@@ -509,7 +497,6 @@ static igraph_error_t configuration_simple_undirected_bitset(
     for (igraph_int_t i = 0; i < vcount; ++i) {
         IGRAPH_CHECK(igraph_bitset_resize(igraph_bitset_list_get_ptr(&adjlist, i), vcount));
     }
-
 
     for (;;) {
         igraph_bool_t success = true;
@@ -555,7 +542,6 @@ static igraph_error_t configuration_simple_undirected_bitset(
 
         IGRAPH_ALLOW_INTERRUPTION_LIMITED(iter, 1 << 8);
     }
-
 
     igraph_bitset_list_destroy(&adjlist);
     IGRAPH_FINALLY_CLEAN(1);
@@ -661,7 +647,6 @@ static igraph_error_t configuration_simple_directed(
 
     igraph_int_t vertex_done_mark = 1;
 
-
     for (;;) {
         igraph_bool_t success = true;
         igraph_int_t previous_to = -1;
@@ -703,7 +688,6 @@ static igraph_error_t configuration_simple_directed(
 
         IGRAPH_ALLOW_INTERRUPTION_LIMITED(iter, 1 << 8);
     }
-
 
     for (igraph_int_t i=0; i < ecount; i++) {
         VECTOR(edges)[2*i]   = VECTOR(out_stubs)[i];
