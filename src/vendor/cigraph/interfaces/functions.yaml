@@ -60,7 +60,7 @@ igraph_is_directed:
 igraph_degree:
     PARAMS: |-
         GRAPH graph, OUT VECTOR_INT res, VERTEX_SELECTOR vids=ALL, NEIMODE mode=ALL,
-        BOOLEAN loops=True
+        LOOPS loops=TWICE
     DEPS: vids ON graph
 
 igraph_edge:
@@ -817,7 +817,7 @@ igraph_constraint:
 igraph_maxdegree:
     PARAMS: |-
         GRAPH graph, OUT INTEGER res, VERTEX_SELECTOR vids=ALL, NEIMODE mode=ALL,
-        BOOLEAN loops=True
+        LOOPS loops=TWICE
     DEPS: vids ON graph
 
 igraph_density:
@@ -980,7 +980,7 @@ igraph_rich_club_sequence:
 igraph_strength:
     PARAMS: |-
         GRAPH graph, OUT VERTEX_QTY res, VERTEX_SELECTOR vids=ALL,
-        NEIMODE mode=ALL, BOOLEAN loops=True, OPTIONAL EDGEWEIGHTS weights
+        NEIMODE mode=ALL, LOOPS loops=TWICE, OPTIONAL EDGEWEIGHTS weights
     DEPS: vids ON graph, weights ON graph, res ON graph vids
 
 igraph_centralization:
@@ -990,7 +990,7 @@ igraph_centralization:
 igraph_centralization_degree:
     PARAMS: |-
         GRAPH graph, OUT VECTOR res,
-        NEIMODE mode=ALL, BOOLEAN loops=True,
+        NEIMODE mode=ALL, LOOPS loops=TWICE,
         OUT REAL centralization, OUT REAL theoretical_max,
         BOOLEAN normalized=True
 
@@ -1000,7 +1000,7 @@ igraph_centralization_degree_tmax:
     # https://github.com/igraph/rigraph/issues/369#issuecomment-939893681
     PARAMS: |-
         OPTIONAL GRAPH graph, INTEGER nodes=0, NEIMODE mode=ALL,
-        BOOLEAN loops, OUT REAL res
+        LOOPS loops, OUT REAL res
 
 igraph_centralization_betweenness:
     PARAMS: |-

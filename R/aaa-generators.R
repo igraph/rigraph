@@ -21,6 +21,9 @@ adjacency_impl <- function(
     "plus" = 5L,
     "max" = 6L
   )
+  if (is.logical(loops)) {
+    loops <- if (loops) "twice" else "none"
+  }
   loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -81,6 +84,9 @@ sparse_adjacency_impl <- function(
     "plus" = 5L,
     "max" = 6L
   )
+  if (is.logical(loops)) {
+    loops <- if (loops) "twice" else "none"
+  }
   loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -113,6 +119,9 @@ sparse_weighted_adjacency_impl <- function(
     "plus" = 5L,
     "max" = 6L
   )
+  if (is.logical(loops)) {
+    loops <- if (loops) "twice" else "none"
+  }
   loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -144,6 +153,9 @@ weighted_adjacency_impl <- function(
     "plus" = 5L,
     "max" = 6L
   )
+  if (is.logical(loops)) {
+    loops <- if (loops) "twice" else "none"
+  }
   loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
 
   on.exit(.Call(R_igraph_finalizer))

@@ -64,10 +64,10 @@ IGRAPH_EXPORT igraph_error_t igraph_neighbors(const igraph_t *graph, igraph_vect
                                    igraph_neimode_t mode);
 IGRAPH_EXPORT IGRAPH_FUNCATTR_PURE igraph_bool_t igraph_is_directed(const igraph_t *graph);
 IGRAPH_EXPORT igraph_error_t igraph_degree_1(const igraph_t *graph, igraph_int_t *deg,
-                                             igraph_int_t vid, igraph_neimode_t mode, igraph_bool_t loops);
+                                             igraph_int_t vid, igraph_neimode_t mode, igraph_loops_t loops);
 IGRAPH_EXPORT igraph_error_t igraph_degree(const igraph_t *graph, igraph_vector_int_t *res,
                                 const igraph_vs_t vids, igraph_neimode_t mode,
-                                igraph_bool_t loops);
+                                igraph_loops_t loops);
 IGRAPH_EXPORT igraph_error_t igraph_edge(const igraph_t *graph, igraph_int_t eid,
                               igraph_int_t *from, igraph_int_t *to);
 IGRAPH_EXPORT igraph_error_t igraph_edges(const igraph_t *graph, igraph_es_t eids,

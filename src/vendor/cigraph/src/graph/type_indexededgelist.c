@@ -1137,11 +1137,23 @@ igraph_bool_t igraph_is_directed(const igraph_t *graph) {
  * Time complexity: O(1) if \p loops is \c true, and
  * O(d) otherwise, where d is the degree.
  */
-igraph_error_t igraph_degree_1(const igraph_t *graph, igraph_int_t *deg,
-                               igraph_int_t vid, igraph_neimode_t mode, igraph_bool_t loops) {
+igraph_error_t igraph_degree_1(
+    const igraph_t *graph, igraph_int_t *deg, igraph_int_t vid,
+    igraph_neimode_t mode, igraph_loops_t loops
+) {
+    igraph_int_t loop_counter;
 
     if (!igraph_is_directed(graph)) {
         mode = IGRAPH_ALL;
+    }
+
+    if (loops != IGRAPH_NO_LOOPS && loops != IGRAPH_LOOPS_ONCE &&
+        loops != IGRAPH_LOOPS_TWICE) {
+        IGRAPH_ERROR("Invalid loops argument.", IGRAPH_EINVAL);
+    }
+
+    if (loops == IGRAPH_LOOPS_ONCE && (mode & IGRAPH_ALL) != IGRAPH_ALL) {
+        loops = IGRAPH_LOOPS_TWICE;
     }
 
     *deg = 0;
@@ -1151,22 +1163,31 @@ igraph_error_t igraph_degree_1(const igraph_t *graph, igraph_int_t *deg,
     if (mode & IGRAPH_IN) {
         *deg += (VECTOR(graph->is)[vid + 1] - VECTOR(graph->is)[vid]);
     }
-    if (! loops) {
+
+    if (loops != IGRAPH_LOOPS_TWICE) {
         /* When loops should not be counted, we remove their contribution from the
          * previously computed degree. */
+        loop_counter = 0;
         if (mode & IGRAPH_OUT) {
             for (igraph_int_t i = VECTOR(graph->os)[vid]; i < VECTOR(graph->os)[vid + 1]; i++) {
                 if (VECTOR(graph->to)[ VECTOR(graph->oi)[i] ] == vid) {
-                    *deg -= 1;
+                    loop_counter++;
                 }
             }
         }
         if (mode & IGRAPH_IN) {
             for (igraph_int_t i = VECTOR(graph->is)[vid]; i < VECTOR(graph->is)[vid + 1]; i++) {
                 if (VECTOR(graph->from)[ VECTOR(graph->ii)[i] ] == vid) {
-                    *deg -= 1;
+                    loop_counter++;
                 }
             }
+        }
+
+        if (loops == IGRAPH_NO_LOOPS || mode != IGRAPH_ALL) {
+            *deg -= loop_counter;
+        } else {
+            /* loops == IGRAPH_LOOPS_ONCE && mode == IGRAPH_ALL */
+            *deg -= loop_counter / 2;
         }
     }
 
@@ -1216,9 +1237,10 @@ igraph_error_t igraph_degree_1(const igraph_t *graph, igraph_int_t *deg,
  *
  * \example examples/simple/igraph_degree.c
  */
-igraph_error_t igraph_degree(const igraph_t *graph, igraph_vector_int_t *res,
-                  const igraph_vs_t vids,
-                  igraph_neimode_t mode, igraph_bool_t loops) {
+igraph_error_t igraph_degree(
+    const igraph_t *graph, igraph_vector_int_t *res, const igraph_vs_t vids,
+    igraph_neimode_t mode, igraph_loops_t loops
+) {
 
     igraph_int_t nodes_to_calc;
     igraph_int_t i, j;
@@ -1231,13 +1253,19 @@ igraph_error_t igraph_degree(const igraph_t *graph, igraph_vector_int_t *res,
         IGRAPH_ERROR("Invalid mode for degree calculation.", IGRAPH_EINVMODE);
     }
 
-    if (! loops) {
+    if (loops == IGRAPH_NO_LOOPS || loops == IGRAPH_LOOPS_ONCE) {
         /* If the graph is known not to have loops, we can use the faster
-         * loops == true code path, which has O(1) complexity instead of of O(d). */
+         * loops == IGRAPH_LOOPS_TWICE code path, which has O(1) complexity
+         * instead of of O(d). */
         if (igraph_i_property_cache_has(graph, IGRAPH_PROP_HAS_LOOP) &&
             !igraph_i_property_cache_get_bool(graph, IGRAPH_PROP_HAS_LOOP)) {
-            loops = true;
+            loops = IGRAPH_LOOPS_TWICE;
         }
+    }
+
+    if (loops == IGRAPH_LOOPS_ONCE && mode != IGRAPH_ALL) {
+        /* We can use the faster loops == IGRAPH_LOOPS_TWICE path again */
+        loops = IGRAPH_LOOPS_TWICE;
     }
 
     nodes_to_calc = IGRAPH_VIT_SIZE(vit);
@@ -1248,7 +1276,7 @@ igraph_error_t igraph_degree(const igraph_t *graph, igraph_vector_int_t *res,
     IGRAPH_CHECK(igraph_vector_int_resize(res, nodes_to_calc));
     igraph_vector_int_null(res);
 
-    if (loops) {
+    if (loops == IGRAPH_LOOPS_TWICE) {
         if (mode & IGRAPH_OUT) {
             for (IGRAPH_VIT_RESET(vit), i = 0;
                  !IGRAPH_VIT_END(vit);
@@ -1265,56 +1293,105 @@ igraph_error_t igraph_degree(const igraph_t *graph, igraph_vector_int_t *res,
                 VECTOR(*res)[i] += (VECTOR(graph->is)[vid + 1] - VECTOR(graph->is)[vid]);
             }
         }
-    } else if (igraph_vs_is_all(&vids)) { /* no loops, calculating degree for all vertices */
-        // When calculating degree for all vertices, iterating over edges is faster
-        igraph_int_t no_of_edges = igraph_ecount(graph);
+    } else if (loops == IGRAPH_LOOPS_ONCE) {
+        IGRAPH_ASSERT((mode & IGRAPH_ALL) == IGRAPH_ALL);
 
-        if (mode & IGRAPH_OUT) {
+        /* We arbitrarily count loop edges in the (mode & IGRAPH_OUT) branch but
+         * not in the (mode & IGRAPH_IN) branch */
+
+        if (igraph_vs_is_all(&vids)) {
+            // When calculating degree for all vertices, iterating over edges is faster
+            igraph_int_t no_of_edges = igraph_ecount(graph);
+
+            /* mode & IGRAPH_OUT branch */
             for (igraph_int_t edge = 0; edge < no_of_edges; ++edge) {
                 igraph_int_t from = IGRAPH_FROM(graph, edge);
-                if (from != IGRAPH_TO(graph, edge)) {
-                    VECTOR(*res)[from]++;
-                }
+                VECTOR(*res)[from]++;
             }
-        }
-        if (mode & IGRAPH_IN) {
+
+            /* mode & IGRAPH_IN branch */
             for (igraph_int_t edge = 0; edge < no_of_edges; ++edge) {
                 igraph_int_t to = IGRAPH_TO(graph, edge);
                 if (IGRAPH_FROM(graph, edge) != to) {
                     VECTOR(*res)[to]++;
                 }
             }
-        }
-    } else { /* no loops */
-        if (mode & IGRAPH_OUT) {
+        } else {
+            /* mode & IGRAPH_OUT branch */
             for (IGRAPH_VIT_RESET(vit), i = 0;
-                 !IGRAPH_VIT_END(vit);
-                 IGRAPH_VIT_NEXT(vit), i++) {
+                !IGRAPH_VIT_END(vit);
+                IGRAPH_VIT_NEXT(vit), i++) {
                 igraph_int_t vid = IGRAPH_VIT_GET(vit);
                 VECTOR(*res)[i] += (VECTOR(graph->os)[vid + 1] - VECTOR(graph->os)[vid]);
-                for (j = VECTOR(graph->os)[vid];
-                     j < VECTOR(graph->os)[vid + 1]; j++) {
-                    if (VECTOR(graph->to)[ VECTOR(graph->oi)[j] ] == vid) {
-                        VECTOR(*res)[i] -= 1;
-                    }
-                }
             }
-        }
-        if (mode & IGRAPH_IN) {
+
+            /* mode & IGRAPH_IN branch */
             for (IGRAPH_VIT_RESET(vit), i = 0;
-                 !IGRAPH_VIT_END(vit);
-                 IGRAPH_VIT_NEXT(vit), i++) {
+                !IGRAPH_VIT_END(vit);
+                IGRAPH_VIT_NEXT(vit), i++) {
                 igraph_int_t vid = IGRAPH_VIT_GET(vit);
                 VECTOR(*res)[i] += (VECTOR(graph->is)[vid + 1] - VECTOR(graph->is)[vid]);
                 for (j = VECTOR(graph->is)[vid];
-                     j < VECTOR(graph->is)[vid + 1]; j++) {
+                    j < VECTOR(graph->is)[vid + 1]; j++) {
                     if (VECTOR(graph->from)[ VECTOR(graph->ii)[j] ] == vid) {
                         VECTOR(*res)[i] -= 1;
                     }
                 }
             }
         }
-    }  /* loops */
+    } else {
+        /* no loops should be counted */
+        if (igraph_vs_is_all(&vids)) {
+            // When calculating degree for all vertices, iterating over edges is faster
+            igraph_int_t no_of_edges = igraph_ecount(graph);
+
+            if (mode & IGRAPH_OUT) {
+                for (igraph_int_t edge = 0; edge < no_of_edges; ++edge) {
+                    igraph_int_t from = IGRAPH_FROM(graph, edge);
+                    if (from != IGRAPH_TO(graph, edge)) {
+                        VECTOR(*res)[from]++;
+                    }
+                }
+            }
+            if (mode & IGRAPH_IN) {
+                for (igraph_int_t edge = 0; edge < no_of_edges; ++edge) {
+                    igraph_int_t to = IGRAPH_TO(graph, edge);
+                    if (IGRAPH_FROM(graph, edge) != to) {
+                        VECTOR(*res)[to]++;
+                    }
+                }
+            }
+        } else {
+            if (mode & IGRAPH_OUT) {
+                for (IGRAPH_VIT_RESET(vit), i = 0;
+                    !IGRAPH_VIT_END(vit);
+                    IGRAPH_VIT_NEXT(vit), i++) {
+                    igraph_int_t vid = IGRAPH_VIT_GET(vit);
+                    VECTOR(*res)[i] += (VECTOR(graph->os)[vid + 1] - VECTOR(graph->os)[vid]);
+                    for (j = VECTOR(graph->os)[vid];
+                        j < VECTOR(graph->os)[vid + 1]; j++) {
+                        if (VECTOR(graph->to)[ VECTOR(graph->oi)[j] ] == vid) {
+                            VECTOR(*res)[i] -= 1;
+                        }
+                    }
+                }
+            }
+            if (mode & IGRAPH_IN) {
+                for (IGRAPH_VIT_RESET(vit), i = 0;
+                    !IGRAPH_VIT_END(vit);
+                    IGRAPH_VIT_NEXT(vit), i++) {
+                    igraph_int_t vid = IGRAPH_VIT_GET(vit);
+                    VECTOR(*res)[i] += (VECTOR(graph->is)[vid + 1] - VECTOR(graph->is)[vid]);
+                    for (j = VECTOR(graph->is)[vid];
+                        j < VECTOR(graph->is)[vid + 1]; j++) {
+                        if (VECTOR(graph->from)[ VECTOR(graph->ii)[j] ] == vid) {
+                            VECTOR(*res)[i] -= 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     igraph_vit_destroy(&vit);
     IGRAPH_FINALLY_CLEAN(1);

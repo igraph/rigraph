@@ -581,7 +581,7 @@ igraph_error_t igraph_roots_for_tree_layout(
         /* Sort vertices by decreasing degree (out- or in-degree in directed case). */
 
         IGRAPH_CHECK(igraph_sort_vertex_ids_by_degree(graph, &order,
-                     igraph_vss_all(), mode, 0, IGRAPH_DESCENDING, 0));
+                     igraph_vss_all(), mode, IGRAPH_NO_LOOPS, IGRAPH_DESCENDING, 0));
     }
 
     IGRAPH_VECTOR_INT_INIT_FINALLY(&membership, no_of_nodes);

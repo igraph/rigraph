@@ -55,7 +55,7 @@
  */
 igraph_error_t igraph_maxdegree(const igraph_t *graph, igraph_int_t *res,
                      igraph_vs_t vids, igraph_neimode_t mode,
-                     igraph_bool_t loops) {
+                     igraph_loops_t loops) {
 
     igraph_vector_int_t tmp;
 
@@ -610,9 +610,10 @@ static igraph_error_t strength_all(
  *
  * \sa \ref igraph_degree() for the traditional, non-weighted version.
  */
-igraph_error_t igraph_strength(const igraph_t *graph, igraph_vector_t *res,
-                    const igraph_vs_t vids, igraph_neimode_t mode,
-                    igraph_bool_t loops, const igraph_vector_t *weights) {
+igraph_error_t igraph_strength(
+    const igraph_t *graph, igraph_vector_t *res, const igraph_vs_t vids,
+    igraph_neimode_t mode, igraph_loops_t loops, const igraph_vector_t *weights
+) {
 
     igraph_int_t no_of_nodes = igraph_vcount(graph);
     igraph_vit_t vit;
@@ -718,13 +719,11 @@ igraph_error_t igraph_strength(const igraph_t *graph, igraph_vector_t *res,
  *         \c IGRAPH_EINVMODE: invalid mode argument.
  *
  */
-igraph_error_t igraph_sort_vertex_ids_by_degree(const igraph_t *graph,
-                                     igraph_vector_int_t *outvids,
-                                     igraph_vs_t vids,
-                                     igraph_neimode_t mode,
-                                     igraph_bool_t loops,
-                                     igraph_order_t order,
-                                     igraph_bool_t only_indices) {
+igraph_error_t igraph_sort_vertex_ids_by_degree(
+    const igraph_t *graph, igraph_vector_int_t *outvids,
+    igraph_vs_t vids, igraph_neimode_t mode, igraph_loops_t loops,
+    igraph_order_t order, igraph_bool_t only_indices
+) {
     igraph_int_t i, n;
     igraph_vector_int_t degrees;
     igraph_vector_int_t vs_vec;

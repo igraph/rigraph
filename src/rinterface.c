@@ -389,7 +389,7 @@ SEXP R_igraph_degree(SEXP graph, SEXP vids, SEXP mode, SEXP loops) {
   igraph_vector_int_t c_res;
   igraph_vs_t c_vids;
   igraph_neimode_t c_mode;
-  igraph_bool_t c_loops;
+  igraph_loops_t c_loops;
   SEXP res;
 
   SEXP r_result;
@@ -400,8 +400,7 @@ SEXP R_igraph_degree(SEXP graph, SEXP vids, SEXP mode, SEXP loops) {
   igraph_vector_int_t c_vids_data;
   Rz_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-  IGRAPH_R_CHECK_BOOL(loops);
-  c_loops = LOGICAL(loops)[0];
+  c_loops = (igraph_loops_t) Rf_asInteger(loops);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_degree(&c_graph, &c_res, c_vids, c_mode, c_loops));
 
@@ -6054,7 +6053,7 @@ SEXP R_igraph_maxdegree(SEXP graph, SEXP vids, SEXP mode, SEXP loops) {
   igraph_integer_t c_res;
   igraph_vs_t c_vids;
   igraph_neimode_t c_mode;
-  igraph_bool_t c_loops;
+  igraph_loops_t c_loops;
   SEXP res;
 
   SEXP r_result;
@@ -6064,8 +6063,7 @@ SEXP R_igraph_maxdegree(SEXP graph, SEXP vids, SEXP mode, SEXP loops) {
   igraph_vector_int_t c_vids_data;
   Rz_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-  IGRAPH_R_CHECK_BOOL(loops);
-  c_loops = LOGICAL(loops)[0];
+  c_loops = (igraph_loops_t) Rf_asInteger(loops);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_maxdegree(&c_graph, &c_res, c_vids, c_mode, c_loops));
 
@@ -7256,7 +7254,7 @@ SEXP R_igraph_strength(SEXP graph, SEXP vids, SEXP mode, SEXP loops, SEXP weight
   igraph_vector_t c_res;
   igraph_vs_t c_vids;
   igraph_neimode_t c_mode;
-  igraph_bool_t c_loops;
+  igraph_loops_t c_loops;
   igraph_vector_t c_weights;
   SEXP res;
 
@@ -7268,8 +7266,7 @@ SEXP R_igraph_strength(SEXP graph, SEXP vids, SEXP mode, SEXP loops, SEXP weight
   igraph_vector_int_t c_vids_data;
   Rz_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-  IGRAPH_R_CHECK_BOOL(loops);
-  c_loops = LOGICAL(loops)[0];
+  c_loops = (igraph_loops_t) Rf_asInteger(loops);
   if (!Rf_isNull(weights)) {
     Rz_SEXP_to_vector(weights, &c_weights);
   }
@@ -7324,7 +7321,7 @@ SEXP R_igraph_centralization_degree(SEXP graph, SEXP mode, SEXP loops, SEXP norm
   igraph_t c_graph;
   igraph_vector_t c_res;
   igraph_neimode_t c_mode;
-  igraph_bool_t c_loops;
+  igraph_loops_t c_loops;
   igraph_real_t c_centralization;
   igraph_real_t c_theoretical_max;
   igraph_bool_t c_normalized;
@@ -7338,8 +7335,7 @@ SEXP R_igraph_centralization_degree(SEXP graph, SEXP mode, SEXP loops, SEXP norm
   IGRAPH_R_CHECK(igraph_vector_init(&c_res, 0));
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-  IGRAPH_R_CHECK_BOOL(loops);
-  c_loops = LOGICAL(loops)[0];
+  c_loops = (igraph_loops_t) Rf_asInteger(loops);
   IGRAPH_R_CHECK_BOOL(normalized);
   c_normalized = LOGICAL(normalized)[0];
                                         /* Call igraph */
@@ -7376,7 +7372,7 @@ SEXP R_igraph_centralization_degree_tmax(SEXP graph, SEXP nodes, SEXP mode, SEXP
   igraph_t c_graph;
   igraph_integer_t c_nodes;
   igraph_neimode_t c_mode;
-  igraph_bool_t c_loops;
+  igraph_loops_t c_loops;
   igraph_real_t c_res;
   SEXP res;
 
@@ -7388,8 +7384,7 @@ SEXP R_igraph_centralization_degree_tmax(SEXP graph, SEXP nodes, SEXP mode, SEXP
   IGRAPH_R_CHECK_INT(nodes);
   c_nodes = (igraph_integer_t) REAL(nodes)[0];
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-  IGRAPH_R_CHECK_BOOL(loops);
-  c_loops = LOGICAL(loops)[0];
+  c_loops = (igraph_loops_t) Rf_asInteger(loops);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_centralization_degree_tmax((Rf_isNull(graph) ? 0 : &c_graph), c_nodes, c_mode, c_loops, &c_res));
 
