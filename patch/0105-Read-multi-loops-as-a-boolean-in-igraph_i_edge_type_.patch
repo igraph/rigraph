@@ -1,0 +1,32 @@
+From 7b0cee552fc8824ff838dba6121786f635bfc35a Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Fri, 16 Oct 2026 09:35:02 +0000
+Subject: [PATCH] Read multi-loops as a boolean in
+ igraph_i_edge_type_to_loops_multiple()
+
+`allowed_edge_types & IGRAPH_I_MULTI_LOOPS_SW` is 4, not 1, when multi-loops
+are allowed. Stored in an igraph_bool_t that is not C's bool, as when
+IGRAPH_BOOL_TYPE is int, it never equals the true in *multiple, so
+IGRAPH_LOOPS_SW | IGRAPH_MULTI_SW was rejected with "Either both multi-edges
+and multi-loops should be allowed or neither." Normalise it to true or false,
+as the two lines above it do.
+---
+ src/vendor/cigraph/src/misc/graphicality.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/vendor/cigraph/src/misc/graphicality.c b/src/vendor/cigraph/src/misc/graphicality.c
+index e598d25ed8..c5a2c50f58 100644
+--- a/src/vendor/cigraph/src/misc/graphicality.c
++++ b/src/vendor/cigraph/src/misc/graphicality.c
+@@ -30,7 +30,7 @@ igraph_error_t igraph_i_edge_type_to_loops_multiple(
+     *multiple = (allowed_edge_types & IGRAPH_I_MULTI_EDGES_SW) ? true : false;
+ 
+     if (*loops) {
+-        igraph_bool_t multi_loops = (allowed_edge_types & IGRAPH_I_MULTI_LOOPS_SW);
++        igraph_bool_t multi_loops = (allowed_edge_types & IGRAPH_I_MULTI_LOOPS_SW) ? true : false;
+         if (*multiple != multi_loops) {
+             IGRAPH_ERROR("Either both multi-edges and multi-loops should be allowed or neither.",
+                          IGRAPH_EINVAL);
+-- 
+2.55.0
+

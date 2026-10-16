@@ -1,5 +1,5 @@
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2023  The igraph development team <igraph@igraph.org>
 
    This program is free software; you can redistribute it and/or modify
@@ -17,6 +17,7 @@
 */
 
 #include "igraph_interface.h"
+#include "igraph_random.h"
 
 #include "internal/utils.h"
 
@@ -90,6 +91,33 @@ igraph_error_t igraph_i_matrix_subset_vertices(
     igraph_vit_destroy(&tovit);
     igraph_vit_destroy(&fromvit);
     IGRAPH_FINALLY_CLEAN(3);
+
+    return IGRAPH_SUCCESS;
+}
+
+igraph_error_t igraph_i_vector_int_shuffle_pairs(igraph_vector_int_t *pairs) {
+    igraph_int_t pair_count = igraph_vector_int_size(pairs);
+
+    if (pair_count % 2 == 1) {
+        IGRAPH_ERROR("A vector of pairs must have an even length.", IGRAPH_EINVAL);
+    }
+
+    pair_count /= 2;
+    while (pair_count > 1) {
+        igraph_int_t dummy, k;
+
+        pair_count--;
+        k = RNG_INTEGER(0, pair_count);
+
+        dummy = VECTOR(*pairs)[pair_count * 2];
+        VECTOR(*pairs)[pair_count * 2] = VECTOR(*pairs)[k * 2];
+
+        VECTOR(*pairs)[k * 2] = dummy;
+        dummy = VECTOR(*pairs)[pair_count * 2 + 1];
+
+        VECTOR(*pairs)[pair_count * 2] = VECTOR(*pairs)[k * 2 + 1];
+        VECTOR(*pairs)[k * 2 + 1] = dummy;
+    }
 
     return IGRAPH_SUCCESS;
 }

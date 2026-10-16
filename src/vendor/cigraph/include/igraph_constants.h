@@ -43,6 +43,7 @@ typedef enum { IGRAPH_NO_LOOPS = 0, IGRAPH_LOOPS = 1, IGRAPH_LOOPS_TWICE = 1, IG
 
 /* These constants are meant to be used for sake of readability */
 enum { IGRAPH_NO_MULTIPLE = 0, IGRAPH_MULTIPLE = 1 };
+enum { IGRAPH_EDGE_UNLABELED = 0, IGRAPH_EDGE_LABELED = 1 };
 
 typedef enum { IGRAPH_ASCENDING = 0, IGRAPH_DESCENDING = 1 } igraph_order_t;
 

@@ -387,7 +387,8 @@ igraph_bipartite_game_gnm:
     PARAMS: |-
         OUT GRAPH graph, OPTIONAL OUT BIPARTITE_TYPES_UNNAMED types,
         INTEGER n1, INTEGER n2, INTEGER m, BOOLEAN directed=False,
-        NEIMODE mode=ALL
+        NEIMODE mode=ALL, EDGE_TYPE_SW allowed_edge_types=SIMPLE,
+        BOOLEAN edge_labeled=False
 
 igraph_bipartite_game:
     DEPS: types ON res$graph V(res$graph)

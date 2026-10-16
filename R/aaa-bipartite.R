@@ -63,7 +63,9 @@ bipartite_game_gnm_impl <- function(
   n2,
   m,
   directed = FALSE,
-  mode = c("all", "out", "in", "total")
+  mode = c("all", "out", "in", "total"),
+  allowed_edge_types = c("simple", "loops", "multi", "all"),
+  edge_labeled = FALSE
 ) {
   # Argument checks
   n1 <- as.numeric(n1)
@@ -77,6 +79,16 @@ bipartite_game_gnm_impl <- function(
     "all" = 3L,
     "total" = 3L
   )
+  allowed_edge_types <- switch_igraph_arg(
+    allowed_edge_types,
+    "simple" = 0L,
+    "loop" = 1L,
+    "loops" = 1L,
+    "multi" = 6L,
+    "multiple" = 6L,
+    "all" = 7L
+  )
+  edge_labeled <- as.logical(edge_labeled)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -86,7 +98,9 @@ bipartite_game_gnm_impl <- function(
     n2,
     m,
     directed,
-    mode
+    mode,
+    allowed_edge_types,
+    edge_labeled
   )
 
   res
