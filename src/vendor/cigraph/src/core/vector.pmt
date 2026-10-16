@@ -1587,19 +1587,6 @@ igraph_error_t FUNCTION(igraph_vector, init_copy)(
 
 /**
  * \ingroup vector
- * \function igraph_vector_copy
- * \brief Initializes a vector from another vector object (deprecated alias).
- *
- * \deprecated-by igraph_vector_init_copy 0.10
- */
-
-igraph_error_t FUNCTION(igraph_vector, copy)(TYPE(igraph_vector) *to,
-                                  const TYPE(igraph_vector) *from) {
-    return FUNCTION(igraph_vector, init_copy)(to, from);
-}
-
-/**
- * \ingroup vector
  * \function igraph_vector_sum
  * \brief Calculates the sum of the elements in the vector.
  *

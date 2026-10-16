@@ -39,9 +39,6 @@ IGRAPH_EXPORT igraph_error_t FUNCTION(igraph_matrix, init_copy)(
 IGRAPH_EXPORT void FUNCTION(igraph_matrix, destroy)(TYPE(igraph_matrix) *m);
 IGRAPH_EXPORT IGRAPH_FUNCATTR_PURE igraph_int_t FUNCTION(igraph_matrix, capacity)(const TYPE(igraph_matrix) *m);
 
-IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t FUNCTION(igraph_matrix, copy)(
-    TYPE(igraph_matrix) *to, const TYPE(igraph_matrix) *from);
-
 /*--------------------*/
 /* Accessing elements */
 /*--------------------*/
