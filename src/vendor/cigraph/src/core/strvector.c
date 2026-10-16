@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2003-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -720,6 +719,26 @@ igraph_error_t igraph_strvector_index(const igraph_strvector_t *sv,
         IGRAPH_CHECK(igraph_strvector_set(newv, i, str));
     }
 
+    return IGRAPH_SUCCESS;
+}
+
+/**
+ * \function igraph_strvector_update
+ * \brief Updates a string vector from another one.
+ *
+ * After this operation the contents of \p to will be exactly the same
+ * as that of \p from. The vector \p to will be resized if it was originally
+ * shorter or longer than \p from.
+ *
+ * \param to The string vector to update.
+ * \param from The string vector to update from.
+ * \return Error code.
+ */
+igraph_error_t igraph_strvector_update(
+    igraph_strvector_t *to, const igraph_strvector_t *from
+) {
+    igraph_strvector_clear(to);
+    IGRAPH_CHECK(igraph_strvector_append(to, from));
     return IGRAPH_SUCCESS;
 }
 

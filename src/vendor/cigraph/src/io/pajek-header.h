@@ -1,5 +1,5 @@
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2011-2012  Gabor Csardi <csardi@rmki.kfki.hu>
    334 Harvard street, Cambridge MA, 02139 USA
 
@@ -20,10 +20,10 @@
 
 */
 
+#include "igraph_attributes.h"
 #include "igraph_bitset.h"
 #include "igraph_error.h"
 #include "igraph_vector.h"
-#include "igraph_vector_ptr.h"
 
 #include "core/trie.h"
 
@@ -55,9 +55,9 @@ typedef struct {
     igraph_int_t actfrom;
     igraph_int_t actto;
     igraph_trie_t *vertex_attribute_names;
-    igraph_vector_ptr_t *vertex_attributes;
+    igraph_attribute_record_list_t *vertex_attributes;
     igraph_trie_t *edge_attribute_names;
-    igraph_vector_ptr_t *edge_attributes;
+    igraph_attribute_record_list_t *edge_attributes;
     igraph_int_t vertexid;
     igraph_int_t actvertex;
     igraph_int_t actedge;

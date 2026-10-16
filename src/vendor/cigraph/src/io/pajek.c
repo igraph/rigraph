@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2005-2020  The igraph development team
 
    This program is free software; you can redistribute it and/or modify
@@ -46,32 +45,6 @@ void igraph_pajek_yyset_in(FILE *in_str, void *yyscanner);
 /* for IGRAPH_FINALLY, which assumes that destructor functions return void */
 void igraph_pajek_yylex_destroy_wrapper (void *scanner ) {
     (void) igraph_pajek_yylex_destroy(scanner);
-}
-
-static void pajek_destroy_attr_vector(igraph_vector_ptr_t *attrs) {
-    const igraph_int_t attr_count = igraph_vector_ptr_size(attrs);
-    for (igraph_int_t i = 0; i < attr_count; i++) {
-        igraph_attribute_record_t *rec = VECTOR(*attrs)[i];
-        if (rec->type == IGRAPH_ATTRIBUTE_NUMERIC) {
-            igraph_vector_t *vec = (igraph_vector_t*) rec->value;
-            igraph_vector_destroy(vec);
-            IGRAPH_FREE(vec);
-        } else if (rec->type == IGRAPH_ATTRIBUTE_BOOLEAN) {
-            igraph_vector_bool_t *vec = (igraph_vector_bool_t*) rec->value;
-            igraph_vector_bool_destroy(vec);
-            IGRAPH_FREE(vec);
-        } else if (rec->type == IGRAPH_ATTRIBUTE_STRING) {
-            igraph_strvector_t *strvec = (igraph_strvector_t *)rec->value;
-            igraph_strvector_destroy(strvec);
-            IGRAPH_FREE(strvec);
-        } else {
-            /* Must never reach here */
-            IGRAPH_FATAL("Unknown attribute type encountered.");
-        }
-        IGRAPH_FREE(rec->name);
-        IGRAPH_FREE(rec);
-    }
-    igraph_vector_ptr_destroy(attrs);
 }
 
 /**
@@ -135,11 +108,10 @@ static void pajek_destroy_attr_vector(igraph_vector_ptr_t *attrs) {
  * character is appended to it to avoid conflict.
  *
  * </para><para>
- * In addition the following vertex attributes might be added: \c id
- * and \c name are added (with the same value) if there are vertex IDs in the
- * file. \c id is deprecated in favour of \c name and will no longer be used
- * by future versions of igraph. \c x and \c y, and potentially \c z are also
- * added if there are vertex coordinates in the file.
+ * In addition the following vertex attributes might be added: \c name is added
+ * (with the same value) if there are vertex IDs in the file.
+ * \c x and \c y, and potentially \c z are also added if there are vertex
+ * coordinates in the file.
  *
  * </para><para>
  * The \c weight edge attribute will be added if there are edge weights present.
@@ -172,22 +144,22 @@ igraph_error_t igraph_read_graph_pajek(igraph_t *graph, FILE *instream) {
 
     igraph_vector_int_t edges;
     igraph_trie_t vattrnames;
-    igraph_vector_ptr_t vattrs;
+    igraph_attribute_record_list_t vattrs;
     igraph_trie_t eattrnames;
-    igraph_vector_ptr_t eattrs;
-    igraph_int_t i, j;
+    igraph_attribute_record_list_t eattrs;
+    igraph_int_t i;
     igraph_i_pajek_parsedata_t context;
     igraph_bitset_t seen; /* used to mark already seen vertex IDs */
 
     IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, 0);
 
     IGRAPH_TRIE_INIT_FINALLY(&vattrnames, 1);
-    IGRAPH_CHECK(igraph_vector_ptr_init(&vattrs, 0));
-    IGRAPH_FINALLY(pajek_destroy_attr_vector, &vattrs);
+    IGRAPH_CHECK(igraph_attribute_record_list_init(&vattrs, 0));
+    IGRAPH_FINALLY(igraph_attribute_record_list_destroy, &vattrs);
 
     IGRAPH_TRIE_INIT_FINALLY(&eattrnames, 1);
-    IGRAPH_CHECK(igraph_vector_ptr_init(&eattrs, 0));
-    IGRAPH_FINALLY(pajek_destroy_attr_vector, &eattrs);
+    IGRAPH_CHECK(igraph_attribute_record_list_init(&eattrs, 0));
+    IGRAPH_FINALLY(igraph_attribute_record_list_destroy, &eattrs);
 
     IGRAPH_BITSET_INIT_FINALLY(&seen, 0);
 
@@ -243,33 +215,10 @@ igraph_error_t igraph_read_graph_pajek(igraph_t *graph, FILE *instream) {
     IGRAPH_FINALLY_CLEAN(2);
 
     /* Prepare attributes */
-    const igraph_int_t eattr_count = igraph_vector_ptr_size(&eattrs);
+    const igraph_int_t eattr_count = igraph_attribute_record_list_size(&eattrs);
     for (i = 0; i < eattr_count; i++) {
-        igraph_attribute_record_t *rec = VECTOR(eattrs)[i];
-        if (rec->type == IGRAPH_ATTRIBUTE_NUMERIC) {
-            igraph_vector_t *vec = (igraph_vector_t*)rec->value;
-            igraph_int_t origsize = igraph_vector_size(vec);
-            IGRAPH_CHECK(igraph_vector_resize(vec, context.actedge));
-            for (j = origsize; j < context.actedge; j++) {
-                VECTOR(*vec)[j] = IGRAPH_NAN;
-            }
-        } else if (rec->type == IGRAPH_ATTRIBUTE_BOOLEAN) {
-            /* Boolean attributes are not currently added by the parser.
-             * This section is here for future-proofing. */
-            igraph_vector_bool_t *vec = (igraph_vector_bool_t*)rec->value;
-            igraph_int_t origsize = igraph_vector_bool_size(vec);
-            IGRAPH_CHECK(igraph_vector_bool_resize(vec, context.actedge));
-            for (j = origsize; j < context.actedge; j++) {
-                VECTOR(*vec)[j] = 0;
-            }
-        } else if (rec->type == IGRAPH_ATTRIBUTE_STRING) {
-            igraph_strvector_t *strvec = (igraph_strvector_t*)rec->value;
-            /* strvector_resize() adds empty strings */
-            IGRAPH_CHECK(igraph_strvector_resize(strvec, context.actedge));
-        } else {
-            /* Must never reach here */
-            IGRAPH_FATAL("Unknown attribute type encountered.");
-        }
+        igraph_attribute_record_t *rec = igraph_attribute_record_list_get_ptr(&eattrs, i);
+        IGRAPH_CHECK(igraph_attribute_record_resize(rec, context.actedge));
     }
 
     /* Create graph */
@@ -279,9 +228,9 @@ igraph_error_t igraph_read_graph_pajek(igraph_t *graph, FILE *instream) {
     IGRAPH_CHECK(igraph_add_edges(graph, &edges, &eattrs));
 
     igraph_vector_int_destroy(&edges);
-    pajek_destroy_attr_vector(&eattrs);
+    igraph_attribute_record_list_destroy(&eattrs);
     igraph_trie_destroy(&eattrnames);
-    pajek_destroy_attr_vector(&vattrs);
+    igraph_attribute_record_list_destroy(&vattrs);
     igraph_trie_destroy(&vattrnames);
     IGRAPH_FINALLY_CLEAN(6); /* +1 for 'graph' */
 
@@ -452,7 +401,7 @@ igraph_error_t igraph_write_graph_pajek(const igraph_t *graph, FILE *outstream) 
     igraph_bool_t write_vertex_attrs = false;
 
     /* Same order as the #define's */
-    const char *vnames[] = { "id", "x", "y", "z", "shape", "xfact", "yfact",
+    const char *vnames[] = { "name", "x", "y", "z", "shape", "xfact", "yfact",
         "labeldist", "labeldegree2", "framewidth",
         "fontsize", "rotation", "radius",
         "diamondratio", "labeldegree",

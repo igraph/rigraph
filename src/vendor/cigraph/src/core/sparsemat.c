@@ -1370,8 +1370,8 @@ igraph_error_t igraph_weighted_sparsemat(igraph_t *graph, const igraph_sparsemat
     igraph_vector_t weights;
     CS_INT pot_edges = igraph_i_sparsemat_count_elements(A);
     const char* default_attr = "weight";
-    igraph_vector_ptr_t attr_vec;
-    igraph_attribute_record_t attr_rec;
+    igraph_attribute_record_list_t attr_vec;
+    igraph_attribute_record_t *attr_rec;
     CS_INT no_of_nodes = A->cs->m;
 
     if (no_of_nodes != A->cs->n) {
@@ -1380,7 +1380,8 @@ igraph_error_t igraph_weighted_sparsemat(igraph_t *graph, const igraph_sparsemat
 
     IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, pot_edges * 2);
     IGRAPH_VECTOR_INIT_FINALLY(&weights, pot_edges);
-    IGRAPH_VECTOR_PTR_INIT_FINALLY(&attr_vec, 1);
+    IGRAPH_CHECK(igraph_attribute_record_list_init(&attr_vec, 1));
+    IGRAPH_FINALLY(igraph_attribute_record_list_destroy, &attr_vec);
 
     if (igraph_sparsemat_is_cc(A)) {
         IGRAPH_CHECK(igraph_i_weighted_sparsemat_cc(A, directed, attr, loops,
@@ -1392,10 +1393,10 @@ igraph_error_t igraph_weighted_sparsemat(igraph_t *graph, const igraph_sparsemat
     }
 
     /* Prepare attribute record */
-    attr_rec.name = attr ? attr : default_attr;
-    attr_rec.type = IGRAPH_ATTRIBUTE_NUMERIC;
-    attr_rec.value = &weights;
-    VECTOR(attr_vec)[0] = &attr_rec;
+    attr_rec = igraph_attribute_record_list_get_ptr(&attr_vec, 0);
+    IGRAPH_CHECK(igraph_attribute_record_set_name(attr_rec, attr ? attr : default_attr));
+    IGRAPH_CHECK(igraph_attribute_record_set_type(attr_rec, IGRAPH_ATTRIBUTE_NUMERIC));
+    igraph_vector_swap(attr_rec->value.as_vector, &weights);
 
     /* Create graph */
     IGRAPH_CHECK(igraph_empty(graph, no_of_nodes, directed));
@@ -1408,7 +1409,7 @@ igraph_error_t igraph_weighted_sparsemat(igraph_t *graph, const igraph_sparsemat
     /* Cleanup */
     igraph_vector_int_destroy(&edges);
     igraph_vector_destroy(&weights);
-    igraph_vector_ptr_destroy(&attr_vec);
+    igraph_attribute_record_list_destroy(&attr_vec);
     IGRAPH_FINALLY_CLEAN(3);
 
     return IGRAPH_SUCCESS;

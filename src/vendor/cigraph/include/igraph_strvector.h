@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -108,6 +107,9 @@ IGRAPH_EXPORT igraph_error_t igraph_strvector_reserve(igraph_strvector_t *sv,
 
 IGRAPH_EXPORT void igraph_strvector_swap_elements(igraph_strvector_t *sv,
                                                   igraph_int_t i, igraph_int_t j);
+
+IGRAPH_EXPORT igraph_error_t igraph_strvector_update(
+    igraph_strvector_t *to, const igraph_strvector_t *from);
 
 IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_strvector_add(igraph_strvector_t *v, const char *value);
 IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_strvector_copy(
