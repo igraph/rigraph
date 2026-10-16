@@ -4194,7 +4194,7 @@
       bipartite_game_gnp_impl(n1 = -1, n2 = 2, p = 0.5)
     Condition
       Error in `bipartite_game_gnp_impl()`:
-      ! Invalid number of vertices for bipartite graph. Invalid value
+      ! Invalid number of vertices for bipartite G(n,p) model. Invalid value
       Source: <file>:<line>
 
 # bipartite_game_gnm_impl basic
