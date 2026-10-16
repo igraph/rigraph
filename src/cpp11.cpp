@@ -96,7 +96,7 @@ extern SEXP R_igraph_community_edge_betweenness(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_community_fastgreedy(SEXP, SEXP);
 extern SEXP R_igraph_community_fluid_communities(SEXP, SEXP);
 extern SEXP R_igraph_community_infomap(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_community_label_propagation(SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_community_label_propagation(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_community_leading_eigenvector_callback_closure(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_community_leiden(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_community_multilevel(SEXP, SEXP, SEXP);
@@ -682,7 +682,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_community_fastgreedy",                           (DL_FUNC) &R_igraph_community_fastgreedy,                            2},
     {"R_igraph_community_fluid_communities",                    (DL_FUNC) &R_igraph_community_fluid_communities,                     2},
     {"R_igraph_community_infomap",                              (DL_FUNC) &R_igraph_community_infomap,                               6},
-    {"R_igraph_community_label_propagation",                    (DL_FUNC) &R_igraph_community_label_propagation,                     5},
+    {"R_igraph_community_label_propagation",                    (DL_FUNC) &R_igraph_community_label_propagation,                     6},
     {"R_igraph_community_leading_eigenvector_callback_closure", (DL_FUNC) &R_igraph_community_leading_eigenvector_callback_closure, 10},
     {"R_igraph_community_leiden",                               (DL_FUNC) &R_igraph_community_leiden,                                8},
     {"R_igraph_community_multilevel",                           (DL_FUNC) &R_igraph_community_multilevel,                            3},

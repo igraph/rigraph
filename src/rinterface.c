@@ -12314,7 +12314,7 @@ SEXP R_igraph_community_fluid_communities(SEXP graph, SEXP no_of_communities) {
 /*-------------------------------------------/
 / igraph_community_label_propagation         /
 /-------------------------------------------*/
-SEXP R_igraph_community_label_propagation(SEXP graph, SEXP mode, SEXP weights, SEXP initial, SEXP fixed) {
+SEXP R_igraph_community_label_propagation(SEXP graph, SEXP mode, SEXP weights, SEXP initial, SEXP fixed, SEXP lpa_variant) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_int_t c_membership;
@@ -12322,6 +12322,7 @@ SEXP R_igraph_community_label_propagation(SEXP graph, SEXP mode, SEXP weights, S
   igraph_vector_t c_weights;
   igraph_vector_int_t c_initial;
   igraph_vector_bool_t c_fixed;
+  igraph_lpa_variant_t c_lpa_variant;
   SEXP membership;
 
   SEXP r_result;
@@ -12343,8 +12344,9 @@ SEXP R_igraph_community_label_propagation(SEXP graph, SEXP mode, SEXP weights, S
   if (!Rf_isNull(fixed)) {
     Rz_SEXP_to_vector_bool(fixed, &c_fixed);
   }
+  c_lpa_variant = (igraph_lpa_variant_t) Rf_asInteger(lpa_variant);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_community_label_propagation(&c_graph, &c_membership, c_mode, (Rf_isNull(weights) ? 0 : &c_weights), (Rf_isNull(initial) ? 0 : &c_initial), (Rf_isNull(fixed) ? 0 : &c_fixed)));
+  IGRAPH_R_CHECK(igraph_community_label_propagation(&c_graph, &c_membership, c_mode, (Rf_isNull(weights) ? 0 : &c_weights), (Rf_isNull(initial) ? 0 : &c_initial), (Rf_isNull(fixed) ? 0 : &c_fixed), c_lpa_variant));
 
                                         /* Convert output */
   PROTECT(membership=Ry_igraph_vector_int_to_SEXP(&c_membership));

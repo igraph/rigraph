@@ -759,6 +759,14 @@ RANDOM_TREE_METHOD:
     INCONV: |-
         %I% <- switch_igraph_arg(%I%, "prufer" = 0L, "lerw" = 1L)
 
+LPA_VARIANT:
+    DEFAULT:
+        DOMINANCE: c("dominance", "retention", "fast")
+        RETENTION: c("retention", "dominance", "fast")
+        FAST: c("fast", "dominance", "retention")
+    INCONV: |-
+        %I% <- switch_igraph_arg(%I%, "dominance" = 0L, "retention" = 1L, "fast" = 2L)
+
 GREEDY_COLORING_HEURISTIC:
     DEFAULT:
         NEIGHBORS: c("colored_neighbors", "dsatur")

@@ -620,7 +620,8 @@ community_label_propagation_impl <- function(
   mode = c("all", "out", "in", "total"),
   weights = NULL,
   initial = NULL,
-  fixed = NULL
+  fixed = NULL,
+  lpa_variant = c("dominance", "retention", "fast")
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -645,6 +646,12 @@ community_label_propagation_impl <- function(
   if (!is.null(fixed)) {
     fixed <- as.logical(fixed)
   }
+  lpa_variant <- switch_igraph_arg(
+    lpa_variant,
+    "dominance" = 0L,
+    "retention" = 1L,
+    "fast" = 2L
+  )
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -654,7 +661,8 @@ community_label_propagation_impl <- function(
     mode,
     weights,
     initial,
-    fixed
+    fixed,
+    lpa_variant
   )
 
   res
