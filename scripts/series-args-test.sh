@@ -71,7 +71,7 @@ out() { # <script> <args...> -> first line of stdout; the usage goes there
 # duckdb/duckdb-r (.series-source) left out series-alpha.sh, series-converge.sh,
 # series-cut.sh, series-cutover.sh, series-glue.sh, series-learned.sh and
 # series-prune.sh, and the standalone preview-prefix.sh and reflavor.sh, so
-# their checks are gone with them.
+# their checks are gone with them. series-vendor-audit.sh is rigraph's own.
 scripts=(
   series-advance.sh
   series-check.sh
@@ -82,6 +82,7 @@ scripts=(
   series-rc.sh
   series-tests.sh
   series-vendor.sh
+  series-vendor-audit.sh
 )
 remote_scripts=(
   series-advance.sh
@@ -91,8 +92,9 @@ remote_scripts=(
   series-port.sh
   series-rc.sh
   series-vendor.sh
+  series-vendor-audit.sh
 )
-upstream_scripts=(series-check.sh)
+upstream_scripts=(series-check.sh series-vendor-audit.sh)
 canonical_scripts=(series-advance.sh series-check.sh series-land.sh series-port.sh)
 
 echo "== -h and --help print the usage and exit 0"
@@ -172,7 +174,7 @@ is "series-advance.sh offers it" \
 
 echo
 echo "== a missing series is a usage error too"
-for s in series-advance.sh series-land.sh series-patch-sync.sh series-port.sh; do
+for s in series-advance.sh series-land.sh series-patch-sync.sh series-port.sh series-vendor-audit.sh; do
   is "$s with no series" "$(rc "$s")" 2
 done
 # series-check.sh is the one whose series list is optional: it discovers them.

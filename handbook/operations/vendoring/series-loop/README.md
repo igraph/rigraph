@@ -42,7 +42,8 @@ Setup always runs, so that every read below sees whole histories with every bran
 each stage after it is skipped when it has nothing to do, and they run in this order:
 
 * **Vendor onto `main-vendor`, then pick onto `main-build`.**
-  Each upstream commit is vendored once, onto the strand, as what upstream and `patch/` alone determine;
+  Each upstream commit is vendored once, onto the strand, as what upstream and `patch/` alone determine,
+  and the strand is pushed only once each new commit's tree has been checked against upstream's;
   the pick onto the buffer regenerates the R side, stamps the version and checks that the glue compiles,
   and a fix that check or the generator asks for rides in the buffer commit that needs it ([`pipeline/`](/handbook/operations/vendoring/pipeline/README.md)).
   CI never builds the buffer, so vendoring runs ahead of verification and red never blocks it.
@@ -110,11 +111,12 @@ The skills and the scripts they drive are ported from duckdb-r ([`meta/local/`](
 
 Every `scripts/series-*.sh` takes the same options, so that one name is never passed where another belongs:
 
-* positional is only what the script names: a series, or the two refs `series-forward-build.sh` and `series-tests.sh` compare;
+* positional is only what the script names: a series, with the range `series-vendor-audit.sh` may take after it,
+  or the two refs `series-forward-build.sh` and `series-tests.sh` compare;
 * `--remote <name>`, the remote carrying the series refs: `$SERIES_REMOTE`, then `origin`;
 * `--canonical <name>`, the remote of igraph/rigraph, where `main` lives and `main-green`'s copy goes:
   `$SERIES_CANONICAL`, then `upstream`; an empty `SERIES_CANONICAL` turns the mirror off, and an unset one does not;
-* `--upstream <path>`, an igraph/igraph checkout on disk, read by `series-check.sh` alone: `$UPSTREAM_CLONE`;
+* `--upstream <path>`, an igraph/igraph checkout on disk, read by `series-check.sh` and `series-vendor-audit.sh` alone: `$UPSTREAM_CLONE`;
 * `-h` and `--help` print the usage on stdout and exit 0 before the script touches git;
 * any other option, an option missing its value, or a positional the script does not name prints the usage on stderr and exits 2,
   so a caller can tell a wrong invocation from a wrong answer.

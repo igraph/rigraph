@@ -96,6 +96,8 @@ The ones a firing runs or reads on every pass:
   with a `PATCH DRIFT`, a `TESTS`, a `LATE TAG` and a `VENDOR` line where they apply,
   the third for a release the buffer vendored before upstream tagged it, the last for a strand missing, ahead of the buffer or behind it;
 * [`scripts/vendor-one.sh`](/scripts/vendor-one.sh) `--strand` and [`scripts/series-vendor.sh`](/scripts/series-vendor.sh), stage 1;
+* [`scripts/series-vendor-audit.sh`](/scripts/series-vendor-audit.sh), read-only, stages 1 and 2:
+  whether each vendor commit carries upstream's tree at the commit its subject names, with its `patch/` stack applied;
 * [`scripts/series-fold.sh`](/scripts/series-fold.sh) and [`scripts/rcc-one.sh`](/scripts/rcc-one.sh), stage 2;
 * [`scripts/series-advance.sh`](/scripts/series-advance.sh), stages 3 and 5:
   fast-forwards `-green` and mirrors it, sets `-build-base` to the vendored-SHA match, extends `-dev` by one chunk;
@@ -165,6 +167,7 @@ git worktree add --detach "$B" origin/main-build
 git -C "$U" fetch -q --prune --tags origin
 git -C "$U" checkout -q --detach origin/main
 VENDOR_REPO=$V scripts/vendor-one.sh --strand --commits 100 "$U"
+scripts/series-vendor-audit.sh main "origin/main-vendor..$(git -C "$V" rev-parse HEAD)" --upstream "$U"
 git -C "$V" push origin HEAD:refs/heads/main-vendor
 (cd "$B" && "$M"/scripts/series-vendor.sh main --push)
 ```
@@ -183,6 +186,10 @@ git -C "$V" push origin HEAD:refs/heads/main-vendor
   * **5** the strand is off the clone HEAD's line: check out igraph/igraph's `main`, rerun;
   * **6** a shallow or untagged clone (fix it as above);
   * **7** `GENERATOR FAILED`, CMake, flex or bison: install what is missing, or for a grammar add a `patch/` entry, then the strand fold-in.
+* **The audit gates the push of the strand.**
+  `series-vendor-audit.sh` exits 1 with a `DIVERGED` line for each new strand commit whose tree is not upstream's:
+  the vendor run is at fault, not upstream, so push nothing, keep `$V`, and stop the stage;
+  the cause is a stage 7 pull request.
 * The strand fold-in puts the fix into the strand commit that needs it, before anything picks it,
   and writes the message with `-F`, never an editor:
 
@@ -227,6 +234,10 @@ Every commit in `main-green..main-dev` is decided by an `each-rcc` leg, and that
   The run list says which kind of waiting it is.
   After **12 hours** with the run that should have decided it finished and silent, push `retry-main-dev` at it (below).
   Never amend a commit that has a record.
+* **Audit the vendored trees before folding anything**: `scripts/series-vendor-audit.sh main --upstream "$U"` reads `main-green..main-dev`.
+  A `DIVERGED` commit carries a tree upstream never had, whatever its verdict, and may be why the reds above it are red:
+  repair the oldest first, folding in the files it names as upstream has them
+  ([`references/1-vendor.md`](references/1-vendor.md#the-audit)), and audit again.
 * **Classify each `failure` by what the commit's log contains:**
 
   | evidence | meaning | action |
@@ -444,6 +455,7 @@ Read [`references/traps.md`](references/traps.md) before a vendor run, a local b
 Its entries:
 relative paths resolve against the buffer worktree;
 a remote-tracking or tagless replay is invisible to the vendor run;
+`git status` can miss an upstream edit that kept a file's size;
 clean every build product between local builds;
 the style gate must be clean;
 never `git reset --hard` while HEAD is on a branch you keep;
