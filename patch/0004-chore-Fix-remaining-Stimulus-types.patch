@@ -9,10 +9,10 @@ Subject: [PATCH] chore: Fix remaining Stimulus types
  2 files changed, 10 insertions(+), 4 deletions(-)
 
 diff --git a/src/vendor/cigraph/interfaces/functions.yaml b/src/vendor/cigraph/interfaces/functions.yaml
-index b4a7120892..77aead1a6b 100644
+index 12a45a73b3..25a0aa80c8 100644
 --- a/src/vendor/cigraph/interfaces/functions.yaml
 +++ b/src/vendor/cigraph/interfaces/functions.yaml
-@@ -207,8 +207,9 @@ igraph_adjlist:
+@@ -209,8 +209,9 @@ igraph_adjlist:
  
  igraph_full_bipartite:
      PARAMS: |-
@@ -23,7 +23,7 @@ index b4a7120892..77aead1a6b 100644
  
  igraph_full_multipartite:
      PARAMS: |-
-@@ -529,14 +530,14 @@ igraph_get_shortest_paths:
+@@ -508,14 +509,14 @@ igraph_get_shortest_paths:
          VERTEX from, VERTEX_SELECTOR to=ALL, NEIMODE mode=OUT,
          OPTIONAL OUT VECTOR_INT parents,
          OPTIONAL OUT VECTOR_INT inbound_edges
@@ -32,7 +32,7 @@ index b4a7120892..77aead1a6b 100644
  
  igraph_get_all_shortest_paths:
      PARAMS: |-
-         GRAPH graph, OPTIONAL EDGEWEIGHTS weights,
+         GRAPH graph, OPTIONAL EDGE_WEIGHTS weights,
          OPTIONAL OUT VERTEXSET_LIST vertices, OPTIONAL OUT EDGESET_LIST edges,
          OPTIONAL OUT VECTOR_INT nrgeo, VERTEX from, VERTEX_SELECTOR to, NEIMODE mode=OUT
 -    DEPS: weights ON graph, edges ON graph, from ON graph, to ON graph
@@ -41,7 +41,7 @@ index b4a7120892..77aead1a6b 100644
  igraph_distances_dijkstra:
      PARAMS: |-
 diff --git a/src/vendor/cigraph/interfaces/types.yaml b/src/vendor/cigraph/interfaces/types.yaml
-index b14b5739ce..4ed1b2329b 100644
+index 8a70b3aabc..061790eca2 100644
 --- a/src/vendor/cigraph/interfaces/types.yaml
 +++ b/src/vendor/cigraph/interfaces/types.yaml
 @@ -178,7 +178,12 @@ VERTEX_SELECTOR:

@@ -202,7 +202,7 @@ EDGE_LENGTHS:
     CTYPE: igraph_vector_t
     FLAGS: BY_REF
 
-EDGEWEIGHTS:
+EDGE_WEIGHTS:
     # A vector containing edge weights
     CTYPE: igraph_vector_t
     FLAGS: BY_REF
