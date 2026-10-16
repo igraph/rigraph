@@ -592,9 +592,8 @@ get.edges <- function(graph, es) {
 # Flatten a pair of vertex vectors into the interleaved
 # `c(from1, to1, from2, to2, ...)` form that the C layer expects.
 #
-# Used by internal callers instead of passing an n x 2 matrix to `add_edges()`
-# etc., because `el_to_vec()` rejects 2 x 2 matrices as ambiguous, so a matrix
-# would fail for edge lists that happen to have exactly two edges.
+# Used by internal callers instead of passing a matrix to `add_edges()` etc.,
+# so that they do not depend on how matrices are interpreted there.
 to_vertex_pairs <- function(from, to) {
   c(rbind(from, to))
 }
