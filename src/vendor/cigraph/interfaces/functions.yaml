@@ -1034,7 +1034,7 @@ igraph_joint_degree_matrix:
     PARAMS: |-
         GRAPH graph, OPTIONAL EDGE_WEIGHTS weights,
         OUT MATRIX jdm,
-        INTEGER max_out_degree=-1, INTEGER max_in_degree=-1
+        INTEGER max_out_degree=UNLIMITED, INTEGER max_in_degree=UNLIMITED
     DEPS: weights ON graph
 
 igraph_joint_degree_distribution:
@@ -1044,7 +1044,7 @@ igraph_joint_degree_distribution:
         NEIMODE from_mode=OUT, NEIMODE to_mode=IN,
         BOOLEAN directed_neighbors=True,
         BOOLEAN normalized=True,
-        INTEGER max_from_degree=-1, INTEGER max_to_degree=-1
+        INTEGER max_from_degree=UNLIMITED, INTEGER max_to_degree=UNLIMITED
     DEPS: weights ON graph
 
 igraph_joint_type_distribution:
