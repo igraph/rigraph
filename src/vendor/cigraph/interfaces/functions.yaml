@@ -2451,6 +2451,11 @@ igraph_isomorphic_bliss:
 
 igraph_count_automorphisms:
     PARAMS: |-
+        GRAPH graph, OPTIONAL VERTEX_COLOR colors, OUT REAL result
+    DEPS: colors ON graph
+
+igraph_count_automorphisms_bliss:
+    PARAMS: |-
         GRAPH graph, OPTIONAL VERTEX_COLOR colors, BLISSSH sh="fm", OUT BLISSINFO info
     DEPS: colors ON graph
 

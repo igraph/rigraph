@@ -29,6 +29,7 @@
 #include "core/exceptions.h"
 
 #include <climits>
+#include <cmath>
 #include <stdexcept>
 
 using namespace bliss;
@@ -312,18 +313,53 @@ static igraph_error_t igraph_i_canonical_permutation(
 }
 
 /**
- * \function igraph_automorphisms
- * \brief Number of automorphisms using Bliss (deprecated alias).
+ * \function igraph_count_automorphisms
+ * \brief Number of automorphisms of a graph.
  *
- * \deprecated-by igraph_count_automorphisms 0.10.5
+ * This function computes the number of automorphisms of a graph. Since the
+ * number of automorphisms may be very large, the result is returned as an
+ * \c igraph_real_t instead of an integer. If the number of automorphisms
+ * is larger than what can be represented in an \c igraph_real_t and you need
+ * the exact number, use \ref igraph_count_automorphisms_bliss(), which can
+ * return the number as a string.
+ *
+ * \param graph The input graph. Multiple edges between the same nodes
+ *   are not supported and will cause an incorrect result to be returned.
+ * \param colors An optional vertex color vector for the graph. Supply a
+ *   null pointer is the graph is not colored.
+ * \param result Pointer to an \c igraph_real_t, the number of automorphisms
+ *   will be returned here.
+ * \return Error code. \c IGRAPH_EOVERFLOW if the number of automorphisms is
+ *   too large to be represented in an \c igraph_real_t .
+ *
+ * Time complexity: exponential, in practice it is fast for many graphs.
  */
-igraph_error_t igraph_automorphisms(const igraph_t *graph, const igraph_vector_int_t *colors,
-                                    igraph_bliss_sh_t sh, igraph_bliss_info_t *info) {
-    return igraph_count_automorphisms(graph, colors, sh, info);
+igraph_error_t igraph_count_automorphisms(
+    const igraph_t *graph, const igraph_vector_int_t *colors,
+    igraph_real_t *result
+) {
+    igraph_bliss_info_t info;
+    double x;
+
+    IGRAPH_CHECK(igraph_count_automorphisms_bliss(graph, colors, IGRAPH_BLISS_FL, &info));
+
+    x = strtod(info.group_size, NULL);
+    igraph_free(info.group_size);
+
+    if (x == 0) {
+        return IGRAPH_FAILURE;
+    } else if (x == HUGE_VAL) {
+        return IGRAPH_EOVERFLOW;
+    } else {
+        if (result) {
+            *result = x;
+        }
+        return IGRAPH_SUCCESS;
+    }
 }
 
 /**
- * \function igraph_count_automorphisms
+ * \function igraph_count_automorphisms_bliss
  * \brief Number of automorphisms using Bliss.
  *
  * The number of automorphisms of a graph is computed using Bliss. The
@@ -344,8 +380,10 @@ igraph_error_t igraph_automorphisms(const igraph_t *graph, const igraph_vector_i
  *
  * Time complexity: exponential, in practice it is fast for many graphs.
  */
-igraph_error_t igraph_count_automorphisms(const igraph_t *graph, const igraph_vector_int_t *colors,
-                         igraph_bliss_sh_t sh, igraph_bliss_info_t *info) {
+igraph_error_t igraph_count_automorphisms_bliss(
+    const igraph_t *graph, const igraph_vector_int_t *colors,
+    igraph_bliss_sh_t sh, igraph_bliss_info_t *info
+) {
     IGRAPH_HANDLE_EXCEPTIONS(
         AbstractGraph *g = bliss_from_igraph(graph);
         IGRAPH_FINALLY(bliss_free_graph, g);

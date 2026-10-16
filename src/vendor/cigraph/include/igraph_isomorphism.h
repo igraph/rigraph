@@ -285,9 +285,9 @@ IGRAPH_EXPORT igraph_error_t igraph_isomorphic_bliss(const igraph_t *graph1, con
 
 IGRAPH_EXPORT igraph_error_t igraph_count_automorphisms(
         const igraph_t *graph, const igraph_vector_int_t *colors,
-        igraph_bliss_sh_t sh, igraph_bliss_info_t *info);
+        igraph_real_t *result);
 
-IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_automorphisms(
+IGRAPH_EXPORT igraph_error_t igraph_count_automorphisms_bliss(
         const igraph_t *graph, const igraph_vector_int_t *colors,
         igraph_bliss_sh_t sh, igraph_bliss_info_t *info);
 

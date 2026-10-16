@@ -663,6 +663,15 @@ igraph_cohesive_blocks:
 # Graph isomorphism
 #######################################
 
+igraph_count_automorphisms:
+    # Upstream renamed this function to igraph_count_automorphisms_bliss() and
+    # took the name for one without the splitting heuristic and the info
+    # (krlmlr/igraph@705a8f0): count_automorphisms_impl() stays the bliss one.
+    IGNORE: RR, RC, RInit
+
+igraph_count_automorphisms_bliss:
+    NAME-R: count_automorphisms
+
 igraph_get_isomorphisms_vf2_callback:
     IGNORE: RR, RC, RInit  # Has callback parameter
 
