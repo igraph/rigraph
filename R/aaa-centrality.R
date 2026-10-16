@@ -954,9 +954,9 @@ harmonic_centrality_cutoff_impl <- function(
 betweenness_subset_impl <- function(
   graph,
   weights = NULL,
+  vids = V(graph),
   sources = V(graph),
   targets = V(graph),
-  vids = V(graph),
   directed = TRUE,
   normalized = FALSE
 ) {
@@ -970,9 +970,9 @@ betweenness_subset_impl <- function(
   } else {
     weights <- NULL
   }
+  vids <- as_igraph_vs(graph, vids)
   sources <- as_igraph_vs(graph, sources)
   targets <- as_igraph_vs(graph, targets)
-  vids <- as_igraph_vs(graph, vids)
   directed <- as.logical(directed)
   normalized <- as.logical(normalized)
 
@@ -982,9 +982,9 @@ betweenness_subset_impl <- function(
     R_igraph_betweenness_subset,
     graph,
     weights,
+    vids - 1,
     sources - 1,
     targets - 1,
-    vids - 1,
     directed,
     normalized
   )
