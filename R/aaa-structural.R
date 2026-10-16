@@ -38,40 +38,6 @@ are_adjacent_impl <- function(
   res
 }
 
-are_connected_impl <- function(
-  graph,
-  v1,
-  v2
-) {
-  # Argument checks
-  ensure_igraph(graph)
-  v1 <- as_igraph_vs(graph, v1)
-  if (length(v1) != 1) {
-    cli::cli_abort(
-      "{.arg v1} must specify exactly one vertex",
-      call = rlang::caller_env()
-    )
-  }
-  v2 <- as_igraph_vs(graph, v2)
-  if (length(v2) != 1) {
-    cli::cli_abort(
-      "{.arg v2} must specify exactly one vertex",
-      call = rlang::caller_env()
-    )
-  }
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_are_connected,
-    graph,
-    v1 - 1,
-    v2 - 1
-  )
-
-  res
-}
-
 # ==== degree-sequences ====
 
 is_bigraphical_impl <- function(

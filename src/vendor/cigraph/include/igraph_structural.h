@@ -41,7 +41,6 @@ __BEGIN_DECLS
 /* -------------------------------------------------- */
 
 IGRAPH_EXPORT igraph_error_t igraph_are_adjacent(const igraph_t *graph, igraph_int_t v1, igraph_int_t v2, igraph_bool_t *res);
-IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_are_connected(const igraph_t *graph, igraph_int_t v1, igraph_int_t v2, igraph_bool_t *res);
 IGRAPH_EXPORT igraph_error_t igraph_count_multiple(const igraph_t *graph, igraph_vector_int_t *res, igraph_es_t es);
 IGRAPH_EXPORT igraph_error_t igraph_count_multiple_1(const igraph_t *graph, igraph_int_t *res, igraph_int_t eid);
 IGRAPH_EXPORT igraph_error_t igraph_density(const igraph_t *graph, const igraph_vector_t *weights,
