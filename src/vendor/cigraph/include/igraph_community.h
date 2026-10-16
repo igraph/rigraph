@@ -80,8 +80,8 @@ IGRAPH_EXPORT igraph_error_t igraph_community_spinglass_single(const igraph_t *g
                                                     igraph_vector_int_t *community,
                                                     igraph_real_t *cohesion,
                                                     igraph_real_t *adhesion,
-                                                    igraph_int_t *inner_links,
-                                                    igraph_int_t *outer_links,
+                                                    igraph_real_t *inner_links,
+                                                    igraph_real_t *outer_links,
                                                     igraph_int_t spins,
                                                     igraph_spincomm_update_t update_rule,
                                                     igraph_real_t gamma);
