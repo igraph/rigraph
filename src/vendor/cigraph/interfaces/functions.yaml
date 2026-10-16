@@ -252,7 +252,10 @@ igraph_barabasi_game:
         OPTIONAL GRAPH start_from
 
 igraph_erdos_renyi_game_gnp:
-    PARAMS: OUT GRAPH graph, INTEGER n, REAL p, BOOLEAN directed=False, BOOLEAN loops=False
+    PARAMS: |-
+        OUT GRAPH graph, INTEGER n, REAL p, BOOLEAN directed=False,
+        EDGE_TYPE_SW allowed_edge_types=SIMPLE,
+        BOOLEAN edge_labeled=False
 
 igraph_erdos_renyi_game_gnm:
     PARAMS: |-

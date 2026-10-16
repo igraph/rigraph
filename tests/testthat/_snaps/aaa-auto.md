@@ -832,7 +832,7 @@
       erdos_renyi_game_gnp_impl(n = -1, p = 0.5)
     Condition
       Error in `erdos_renyi_game_gnp_impl()`:
-      ! Invalid number of vertices. Invalid value
+      ! Invalid number of vertices for G(n,p) model. Invalid value
       Source: <file>:<line>
 
 # erdos_renyi_game_gnm_impl basic
@@ -1297,7 +1297,7 @@
       correlated_pair_game_impl(n = -1, corr = 0.5, p = 0.5)
     Condition
       Error in `correlated_pair_game_impl()`:
-      ! Invalid number of vertices. Invalid value
+      ! Invalid number of vertices for G(n,p) model. Invalid value
       Source: <file>:<line>
 
 # dot_product_game_impl basic
