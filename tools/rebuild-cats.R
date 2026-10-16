@@ -77,7 +77,7 @@ placements <- rbind(
   # --- Previously-new additions (from initial reconciliation) ---------------
 
   # basic-igraph / adding-and-deleting-vertices-and-edges
-  c("basic-igraph", "adding-and-deleting-vertices-and-edges", "igraph_delete_vertices_idx"),
+  c("basic-igraph", "adding-and-deleting-vertices-and-edges", "igraph_delete_vertices_map"),
 
   # bipartite / create-two-mode-networks
   c("bipartite", "create-two-mode-networks", "igraph_bipartite_game"),

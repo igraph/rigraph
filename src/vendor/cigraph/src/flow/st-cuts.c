@@ -766,7 +766,7 @@ igraph_error_t igraph_i_all_st_cuts_pivot(
     IGRAPH_FINALLY_CLEAN(1);
     IGRAPH_FINALLY(igraph_destroy, &Sbar);
 
-    root = VECTOR(Sbar_map)[target] - 1;
+    root = VECTOR(Sbar_map)[target];
 
     /* -------------------------------------------------------------*/
     /* Construct the dominator tree of Sbar */
@@ -785,7 +785,7 @@ igraph_error_t igraph_i_all_st_cuts_pivot(
     /* TODO: use the adjacency list, instead of neighbors() */
     IGRAPH_BITSET_INIT_FINALLY(&GammaS, no_of_nodes);
     if (igraph_marked_queue_int_size(S) == 0) {
-        IGRAPH_BIT_SET(GammaS, VECTOR(Sbar_map)[source] - 1);
+        IGRAPH_BIT_SET(GammaS, VECTOR(Sbar_map)[source]);
     } else {
         for (i = 0; i < no_of_nodes; i++) {
             if (igraph_marked_queue_int_iselement(S, i)) {
@@ -840,7 +840,7 @@ igraph_error_t igraph_i_all_st_cuts_pivot(
            Nu(v) contains all vertices that are dominated by v, for every
            v, this is a subtree of the dominator tree, rooted at v. The
            different subtrees are disjoint. */
-        igraph_int_t min = VECTOR(Sbar_map)[ VECTOR(M)[i] ] - 1;
+        igraph_int_t min = VECTOR(Sbar_map)[ VECTOR(M)[i] ];
         igraph_int_t nuvsize, isvlen, j;
         IGRAPH_CHECK(igraph_dfs(&domtree, min, IGRAPH_IN,
                                 /*unreachable=*/ false, /*order=*/ &Nuv,

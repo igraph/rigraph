@@ -685,6 +685,7 @@ static igraph_error_t igraph_i_decompose_weak(const igraph_t *graph,
     IGRAPH_VECTOR_INT_INIT_FINALLY(&verts, 0);
     IGRAPH_VECTOR_INT_INIT_FINALLY(&neis, 0);
     IGRAPH_VECTOR_INT_INIT_FINALLY(&vids_old2new, no_of_nodes);
+    igraph_vector_int_fill(&vids_old2new, -1);
 
     /* vids_old2new would have been created internally in igraph_induced_subgraph(),
        but it is slow if the graph is large and consists of many small components,
@@ -745,7 +746,7 @@ static igraph_error_t igraph_i_decompose_weak(const igraph_t *graph,
         /* vids_old2new does not have to be cleaned up here; since we are doing
          * weak decomposition, each vertex will appear in only one of the
          * connected components so we won't ever touch an item in vids_old2new
-         * if it was already set to a non-zero value in a previous component */
+         * if it was already set to a non-negative value in a previous component */
 
     } /* for actstart++ */
 
@@ -792,6 +793,7 @@ static igraph_error_t igraph_i_decompose_strong(const igraph_t *graph,
     /* The result */
 
     IGRAPH_VECTOR_INT_INIT_FINALLY(&vids_old2new, no_of_nodes);
+    igraph_vector_int_fill(&vids_old2new, -1);
     IGRAPH_VECTOR_INT_INIT_FINALLY(&verts, 0);
     IGRAPH_VECTOR_INT_INIT_FINALLY(&next_nei, no_of_nodes);
     IGRAPH_VECTOR_INT_INIT_FINALLY(&out, 0);
@@ -950,12 +952,12 @@ static igraph_error_t igraph_i_decompose_strong(const igraph_t *graph,
 
         /* vids_old2new has to be cleaned up here because a vertex may appear
          * in multiple strongly connected components. Simply calling
-         * igraph_vector_int_fill() would be an O(n) operation where n is the number
-         * of vertices in the large graph so we cannot do that; we have to
+         * igraph_vector_int_fill() would be an O(n) operation where n is the
+         * number of vertices in the large graph so we cannot do that; we have to
          * iterate over 'verts' instead */
         n = igraph_vector_int_size(&verts);
         for (i = 0; i < n; i++) {
-            VECTOR(vids_old2new)[VECTOR(verts)[i]] = 0;
+            VECTOR(vids_old2new)[VECTOR(verts)[i]] = -1;
         }
 
         no_of_components++;
