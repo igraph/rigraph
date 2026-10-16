@@ -330,8 +330,11 @@ igraph_hub_and_authority_scores:
     # dependencies: the graph and the vertex set, but we only have the graph
     # in the argument list.
     DEPS: weights ON graph, hub ON graph V(graph), authority ON graph V(graph)
+    # Upstream removed scale and always scales the largest scores to one
+    # (krlmlr/igraph@fec442e): the R argument stays, deprecated and without
+    # effect.
     PARAMS: GRAPH graph, OUT VERTEX_QTY hub, OUT VERTEX_QTY authority,
-        OUT REAL value, BOOLEAN scale=True, OPTIONAL EDGEWEIGHTS weights,
+        OUT REAL value, DEPRECATED scale=NULL, OPTIONAL EDGEWEIGHTS weights,
         INOUT ARPACKOPT options=ARPACK_DEFAULTS
 
 igraph_is_mutual:
