@@ -84,18 +84,15 @@ igraph_error_t FUNCTION(igraph_matrix, init)(
  *
  * </para><para>
  * Since this function creates a view into an existing array, you must \em not
- * destroy the \c igraph_matrix_t object when you are done with it. Similarly,
+ * destroy the \type igraph_matrix_t object when you are done with it. Similarly,
  * you must \em not call any function on it that may attempt to modify the size
  * of the matrix. Modifying an element in the matrix will modify the underlying
  * array as the two share the same memory block.
  *
- * \param m Pointer to a not yet initialized matrix object where the view will
- *        be created.
- * \param data The array that the matrix provides a view into.
+ * \param data The raw array that the matrix provides a view into.
  * \param nrow The number of rows in the matrix.
  * \param ncol The number of columns in the matrix.
- * \return Pointer to the matrix object, the same as the \p m parameter, for
- *         convenience.
+ * \return The matrix object providing the view into the array.
  *
  * Time complexity: O(1).
  */
@@ -104,11 +101,13 @@ TYPE(igraph_matrix) FUNCTION(igraph_matrix, view)(
         const BASE *data,
         igraph_int_t nrow, igraph_int_t ncol) {
 
+    /* temporarily cast away the constness */
+    TYPE(igraph_matrix) m;
+
     /* No overflow checking, as this function does not return igraph_error_t.
      * It is the caller's resposibility to ensure that the size of 'data'
      * matches nrow*ncol, which also implies that nrow*ncol does not overflow. */
 
-    TYPE(igraph_matrix) m;
     m.data = FUNCTION(igraph_vector, view)(data, ncol * nrow);
     m.nrow = nrow;
     m.ncol = ncol;
@@ -140,14 +139,12 @@ TYPE(igraph_matrix) FUNCTION(igraph_matrix, view)(
  * block of the vector, and the matrix view will not be informed about the
  * re-allocation so it will point to an invalid memory area afterwards.
  *
- * \param m Pointer to a not yet initialized matrix object where the view will
- *        be created.
  * \param v The vector that the matrix will provide a view into.
  * \param nrow The number of rows in the matrix. The number of columns will be
  *        derived implicitly from the size of the vector. If the number of
  *        items in the vector is not divisible by the number of rows, the
  *        last few elements of the vector will not be covered by the view.
- * \return Error code.
+ * \return The matrix object providing the view into the vector.
  *
  * Time complexity: O(1).
  */
@@ -507,12 +504,12 @@ igraph_error_t FUNCTION(igraph_matrix, init_array)(
         TYPE(igraph_matrix) *m, const BASE *data,
         igraph_int_t nrow, igraph_int_t ncol,
         igraph_matrix_storage_t storage) {
-    igraph_int_t length;
-    TYPE(igraph_vector) v;
 
+    igraph_int_t length;
     IGRAPH_SAFE_MULT(nrow, ncol, &length);
     IGRAPH_CHECK(FUNCTION(igraph_matrix, init)(m, nrow, ncol));
-    v = FUNCTION(igraph_vector, view)(data, length);
+    const TYPE(igraph_vector) v = FUNCTION(igraph_vector, view)(data, length);
+
     if (storage == IGRAPH_COLUMN_MAJOR) {
         IGRAPH_CHECK(FUNCTION(igraph_vector, update)(&m->data, &v));
     } else if (storage == IGRAPH_ROW_MAJOR) {
@@ -679,7 +676,7 @@ igraph_error_t FUNCTION(igraph_matrix, get_col)(const TYPE(igraph_matrix) *m,
     igraph_int_t nrow = FUNCTION(igraph_matrix, nrow)(m);
 
     if (index >= m->ncol) {
-        IGRAPH_ERROR("Index out of range for selecting matrix column", IGRAPH_EINVAL);
+        IGRAPH_ERROR("Index out of range for selecting matrix column.", IGRAPH_EINVAL);
     }
     IGRAPH_CHECK(FUNCTION(igraph_vector, get_interval)(&m->data, res,
                  nrow * index, nrow * (index + 1)));
@@ -937,8 +934,6 @@ BASE* FUNCTION(igraph_matrix, get_ptr)(const TYPE(igraph_matrix) *m,
     return &MATRIX(*m, row, col);
 }
 
-
-
 /**
  * \function igraph_matrix_set
  * Set an element.
@@ -1015,7 +1010,7 @@ igraph_error_t FUNCTION(igraph_matrix, rbind)(TYPE(igraph_matrix) *to,
     igraph_int_t torows = to->nrow, fromrows = from->nrow;
     igraph_int_t offset, c, r, index, offset2;
     if (tocols != fromcols) {
-        IGRAPH_ERROR("Cannot do rbind, number of columns do not match", IGRAPH_EINVAL);
+        IGRAPH_ERROR("Cannot do rbind, number of columns do not match.", IGRAPH_EINVAL);
     }
 
     igraph_int_t new_size; /* new_size = tocols * (fromrows + torows) */
@@ -1062,7 +1057,7 @@ igraph_error_t FUNCTION(igraph_matrix, cbind)(TYPE(igraph_matrix) *to,
     igraph_int_t tocols = to->ncol, fromcols = from->ncol;
     igraph_int_t torows = to->nrow, fromrows = from->nrow;
     if (torows != fromrows) {
-        IGRAPH_ERROR("Cannot do rbind, number of rows do not match", IGRAPH_EINVAL);
+        IGRAPH_ERROR("Cannot do rbind, number of rows do not match.", IGRAPH_EINVAL);
     }
 
     igraph_int_t new_tocols;
@@ -1119,7 +1114,7 @@ igraph_error_t FUNCTION(igraph_matrix, get_row)(const TYPE(igraph_matrix) *m,
     igraph_int_t i, j;
 
     if (index >= rows) {
-        IGRAPH_ERROR("Index out of range for selecting matrix row", IGRAPH_EINVAL);
+        IGRAPH_ERROR("Index out of range for selecting matrix row.", IGRAPH_EINVAL);
     }
     IGRAPH_CHECK(FUNCTION(igraph_vector, resize)(res, cols));
 
@@ -1212,7 +1207,7 @@ igraph_error_t FUNCTION(igraph_matrix, swap_rows)(TYPE(igraph_matrix) *m,
     const igraph_int_t n = nrow * ncol;
 
     if (i >= nrow || j >= nrow) {
-        IGRAPH_ERROR("Cannot swap rows, index out of range", IGRAPH_EINVAL);
+        IGRAPH_ERROR("Cannot swap rows, index out of range.", IGRAPH_EINVAL);
     }
     if (i == j) {
         return IGRAPH_SUCCESS;
@@ -1287,7 +1282,7 @@ void FUNCTION(igraph_matrix, add_constant)(TYPE(igraph_matrix) *m, BASE plus) {
 igraph_error_t FUNCTION(igraph_matrix, add)(TYPE(igraph_matrix) *m1,
                                  const TYPE(igraph_matrix) *m2) {
     if (m1->nrow != m2->nrow || m1->ncol != m2->ncol) {
-        IGRAPH_ERROR("Cannot add non-conformant matrices", IGRAPH_EINVAL);
+        IGRAPH_ERROR("Cannot add non-conformant matrices.", IGRAPH_EINVAL);
     }
     return FUNCTION(igraph_vector, add)(&m1->data, &m2->data);
 }
@@ -1308,7 +1303,7 @@ igraph_error_t FUNCTION(igraph_matrix, add)(TYPE(igraph_matrix) *m1,
 igraph_error_t FUNCTION(igraph_matrix, sub)(TYPE(igraph_matrix) *m1,
                                  const TYPE(igraph_matrix) *m2) {
     if (m1->nrow != m2->nrow || m1->ncol != m2->ncol) {
-        IGRAPH_ERROR("Cannot subtract non-conformant matrices", IGRAPH_EINVAL);
+        IGRAPH_ERROR("Cannot subtract non-conformant matrices.", IGRAPH_EINVAL);
     }
     return FUNCTION(igraph_vector, sub)(&m1->data, &m2->data);
 }
@@ -1700,7 +1695,7 @@ igraph_error_t FUNCTION(igraph_matrix, remove_row)(TYPE(igraph_matrix) *m, igrap
 
     igraph_int_t c, r, index = row + 1, leap = 1, n = m->nrow * m->ncol;
     if (row >= m->nrow) {
-        IGRAPH_ERROR("Cannot remove row, index out of range", IGRAPH_EINVAL);
+        IGRAPH_ERROR("Cannot remove row, index out of range.", IGRAPH_EINVAL);
     }
 
     for (c = 0; c < m->ncol; c++) {
