@@ -912,7 +912,6 @@ centr_eigen <- function(
   centralization_eigenvector_centrality_impl(
     graph = graph,
     directed = directed,
-    scale = TRUE,
     options = options,
     normalized = normalized
   )
@@ -962,7 +961,6 @@ centr_eigen_tmax <- function(
   centralization_eigenvector_centrality_tmax_impl(
     graph = graph,
     nodes = nodes,
-    directed = directed,
-    scale = TRUE
+    directed = directed
   )
 }

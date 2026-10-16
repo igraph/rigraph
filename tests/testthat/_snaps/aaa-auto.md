@@ -2670,9 +2670,12 @@
 
     Code
       eigenvector_centrality_impl(graph = g, directed = TRUE, scale = FALSE)
+    Condition
+      Warning in `eigenvector_centrality_impl()`:
+      Argument `scale' is deprecated and has no effect
     Output
       $vector
-      [1] 0.5000000 0.7071068 0.5000000
+      [1] 0.7071068 1.0000000 0.7071068
       
       $value
       [1] 1.414214
