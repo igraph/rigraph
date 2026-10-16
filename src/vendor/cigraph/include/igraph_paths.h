@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2009-2021  The igraph development team
 
    This program is free software; you can redistribute it and/or modify
@@ -322,16 +321,6 @@ IGRAPH_EXPORT igraph_error_t igraph_vertex_path_from_edge_path(
         const igraph_t *graph, igraph_int_t start,
         const igraph_vector_int_t *edge_path, igraph_vector_int_t *vertex_path,
         igraph_neimode_t mode);
-
-/* Deprecated functions: */
-
-IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_random_edge_walk(const igraph_t *graph,
-                                                            const igraph_vector_t *weights,
-                                                            igraph_vector_int_t *edgewalk,
-                                                            igraph_int_t start,
-                                                            igraph_neimode_t mode,
-                                                            igraph_int_t steps,
-                                                            igraph_random_walk_stuck_t stuck);
 
 __END_DECLS
 
