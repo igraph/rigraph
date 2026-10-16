@@ -1,7 +1,6 @@
 /*
    igraph library.
-   Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
-   334 Harvard street, Cambridge, MA 02139 USA
+   Copyright (C) 2009-2025  The igraph development team <igraph@igraph.org>
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -14,10 +13,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
-   02110-1301 USA
-
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 #ifndef IGRAPH_GAMES_H
@@ -26,8 +22,8 @@
 #include "igraph_decls.h"
 #include "igraph_constants.h"
 #include "igraph_datatype.h"
-#include "igraph_graphicality.h"
 #include "igraph_error.h"
+#include "igraph_graphicality.h"
 #include "igraph_matrix.h"
 #include "igraph_matrix_list.h"
 #include "igraph_types.h"
@@ -49,6 +45,7 @@ IGRAPH_EXPORT igraph_error_t igraph_barabasi_game(igraph_t *graph, igraph_int_t 
                                        igraph_bool_t directed,
                                        igraph_barabasi_algorithm_t algo,
                                        const igraph_t *start_from);
+
 IGRAPH_EXPORT igraph_error_t igraph_erdos_renyi_game_gnp(
         igraph_t *graph,
         igraph_int_t n, igraph_real_t p,
@@ -67,6 +64,7 @@ IGRAPH_EXPERIMENTAL IGRAPH_EXPORT igraph_error_t igraph_iea_game(
         igraph_t *graph,
         igraph_int_t n, igraph_int_t m,
         igraph_bool_t directed, igraph_bool_t loops);
+
 IGRAPH_EXPORT igraph_error_t igraph_degree_sequence_game(igraph_t *graph, const igraph_vector_int_t *out_deg,
                                               const igraph_vector_int_t *in_deg,
                                               igraph_degseq_t method);
@@ -184,7 +182,7 @@ IGRAPH_EXPORT igraph_error_t igraph_static_power_law_game(igraph_t *graph,
                                                igraph_edge_type_sw_t allowed_edge_types,
                                                igraph_bool_t finite_size_correction);
 
-IGRAPH_EXPORT igraph_error_t igraph_chung_lu_game(igraph_t *graph,
+IGRAPH_EXPERIMENTAL IGRAPH_EXPORT igraph_error_t igraph_chung_lu_game(igraph_t *graph,
                                                   const igraph_vector_t *expected_out_deg,
                                                   const igraph_vector_t *expected_in_deg,
                                                   igraph_bool_t loops,

@@ -1,7 +1,6 @@
 /*
    igraph library.
-   Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
-   334 Harvard street, Cambridge, MA 02139 USA
+   Copyright (C) 2009-2025  The igraph development team <igraph@igraph.org>
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -14,10 +13,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
-   02110-1301 USA
-
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 #ifndef IGRAPH_MOTIFS_H
@@ -67,7 +63,7 @@ IGRAPH_BEGIN_C_DECLS
 typedef igraph_error_t igraph_motifs_handler_t(const igraph_t *graph,
         const igraph_vector_int_t *vids,
         igraph_int_t isoclass,
-        void* extra);
+        void *extra);
 
 IGRAPH_EXPORT igraph_error_t igraph_motifs_randesu(const igraph_t *graph, igraph_vector_t *hist,
                                         igraph_int_t size, const igraph_vector_t *cut_prob);
@@ -90,7 +86,7 @@ IGRAPH_EXPORT igraph_error_t igraph_triad_census(const igraph_t *igraph, igraph_
 
 IGRAPH_EXPORT igraph_error_t igraph_count_adjacent_triangles(const igraph_t *graph,
                                             igraph_vector_t *res,
-                                            const igraph_vs_t vids);
+                                            igraph_vs_t vids);
 
 IGRAPH_EXPORT igraph_error_t igraph_list_triangles(const igraph_t *graph,
                                         igraph_vector_int_t *res);
