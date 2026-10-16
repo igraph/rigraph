@@ -2727,6 +2727,36 @@ igraph_tree_game:
     PARAMS: OUT GRAPH graph, INTEGER n, BOOLEAN directed=False, RANDOM_TREE_METHOD method=LERW
 
 #######################################
+# Spatial networks
+#######################################
+
+igraph_nearest_neighbor_graph:
+    PARAMS: OUT GRAPH graph, MATRIX points, METRIC metric, INTEGER neighbors, REAL cutoff, BOOLEAN directed
+
+igraph_delaunay_graph:
+    PARAMS: OUT GRAPH graph, MATRIX points
+
+igraph_gabriel_graph:
+    PARAMS: OUT GRAPH graph, MATRIX points
+
+igraph_relative_neighborhood_graph:
+    PARAMS: OUT GRAPH graph, MATRIX points
+
+igraph_lune_beta_skeleton:
+    PARAMS: OUT GRAPH graph, MATRIX points, REAL beta=1
+
+igraph_circle_beta_skeleton:
+    PARAMS: OUT GRAPH graph, MATRIX points, REAL beta=1
+
+igraph_beta_weighted_gabriel_graph:
+    PARAMS: OUT GRAPH graph, OUT EDGEWEIGHTS weights, MATRIX points, REAL max_beta=UNLIMITED
+    DEPS: weights ON graph
+
+igraph_spatial_edge_lengths:
+    PARAMS: GRAPH graph, OUT EDGE_LENGTHS lengths, MATRIX points, METRIC METRIC
+    DEPS: lengths ON graph
+
+#######################################
 # Coloring
 #######################################
 

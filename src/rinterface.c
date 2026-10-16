@@ -18415,6 +18415,255 @@ SEXP R_igraph_tree_game(SEXP n, SEXP directed, SEXP method) {
 }
 
 /*-------------------------------------------/
+/ igraph_nearest_neighbor_graph              /
+/-------------------------------------------*/
+SEXP R_igraph_nearest_neighbor_graph(SEXP points, SEXP metric, SEXP neighbors, SEXP cutoff, SEXP directed) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_matrix_t c_points;
+  igraph_metric_t c_metric;
+  igraph_integer_t c_neighbors;
+  igraph_real_t c_cutoff;
+  igraph_bool_t c_directed;
+  SEXP graph;
+
+  SEXP r_result;
+                                        /* Convert input */
+  Rz_SEXP_to_matrix(points, &c_points);
+  c_metric = (igraph_metric_t) Rf_asInteger(metric);
+  IGRAPH_R_CHECK_INT(neighbors);
+  c_neighbors = (igraph_integer_t) REAL(neighbors)[0];
+  IGRAPH_R_CHECK_REAL(cutoff);
+  c_cutoff = REAL(cutoff)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_nearest_neighbor_graph(&c_graph, &c_points, c_metric, c_neighbors, c_cutoff, c_directed));
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=Ry_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = graph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_delaunay_graph                      /
+/-------------------------------------------*/
+SEXP R_igraph_delaunay_graph(SEXP points) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_matrix_t c_points;
+  SEXP graph;
+
+  SEXP r_result;
+                                        /* Convert input */
+  Rz_SEXP_to_matrix(points, &c_points);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_delaunay_graph(&c_graph, &c_points));
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=Ry_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = graph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_gabriel_graph                       /
+/-------------------------------------------*/
+SEXP R_igraph_gabriel_graph(SEXP points) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_matrix_t c_points;
+  SEXP graph;
+
+  SEXP r_result;
+                                        /* Convert input */
+  Rz_SEXP_to_matrix(points, &c_points);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_gabriel_graph(&c_graph, &c_points));
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=Ry_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = graph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_relative_neighborhood_graph         /
+/-------------------------------------------*/
+SEXP R_igraph_relative_neighborhood_graph(SEXP points) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_matrix_t c_points;
+  SEXP graph;
+
+  SEXP r_result;
+                                        /* Convert input */
+  Rz_SEXP_to_matrix(points, &c_points);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_relative_neighborhood_graph(&c_graph, &c_points));
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=Ry_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = graph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_lune_beta_skeleton                  /
+/-------------------------------------------*/
+SEXP R_igraph_lune_beta_skeleton(SEXP points, SEXP beta) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_matrix_t c_points;
+  igraph_real_t c_beta;
+  SEXP graph;
+
+  SEXP r_result;
+                                        /* Convert input */
+  Rz_SEXP_to_matrix(points, &c_points);
+  IGRAPH_R_CHECK_REAL(beta);
+  c_beta = REAL(beta)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_lune_beta_skeleton(&c_graph, &c_points, c_beta));
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=Ry_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = graph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_circle_beta_skeleton                /
+/-------------------------------------------*/
+SEXP R_igraph_circle_beta_skeleton(SEXP points, SEXP beta) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_matrix_t c_points;
+  igraph_real_t c_beta;
+  SEXP graph;
+
+  SEXP r_result;
+                                        /* Convert input */
+  Rz_SEXP_to_matrix(points, &c_points);
+  IGRAPH_R_CHECK_REAL(beta);
+  c_beta = REAL(beta)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_circle_beta_skeleton(&c_graph, &c_points, c_beta));
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=Ry_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = graph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_beta_weighted_gabriel_graph         /
+/-------------------------------------------*/
+SEXP R_igraph_beta_weighted_gabriel_graph(SEXP points, SEXP max_beta) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_t c_weights;
+  igraph_matrix_t c_points;
+  igraph_real_t c_max_beta;
+  SEXP graph;
+  SEXP weights;
+
+  SEXP r_result, r_names;
+                                        /* Convert input */
+  IGRAPH_R_CHECK(igraph_vector_init(&c_weights, 0));
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_weights);
+  weights=R_GlobalEnv; /* hack to have a non-NULL value */
+  Rz_SEXP_to_matrix(points, &c_points);
+  IGRAPH_R_CHECK_REAL(max_beta);
+  c_max_beta = REAL(max_beta)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_beta_weighted_gabriel_graph(&c_graph, &c_weights, &c_points, c_max_beta));
+
+                                        /* Convert output */
+  PROTECT(r_result=NEW_LIST(2));
+  PROTECT(r_names=NEW_CHARACTER(2));
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=Ry_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(weights=Ry_igraph_0orvector_to_SEXP(&c_weights));
+  igraph_vector_destroy(&c_weights);
+  IGRAPH_FINALLY_CLEAN(1);
+  SET_VECTOR_ELT(r_result, 0, graph);
+  SET_VECTOR_ELT(r_result, 1, weights);
+  SET_STRING_ELT(r_names, 0, Rf_mkChar("graph"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("weights"));
+  SET_NAMES(r_result, r_names);
+  UNPROTECT(3);
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_spatial_edge_lengths                /
+/-------------------------------------------*/
+SEXP R_igraph_spatial_edge_lengths(SEXP graph, SEXP points, SEXP METRIC) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_t c_lengths;
+  igraph_matrix_t c_points;
+  igraph_metric_t c_METRIC;
+  SEXP lengths;
+
+  SEXP r_result;
+                                        /* Convert input */
+  Rz_SEXP_to_igraph(graph, &c_graph);
+  IGRAPH_R_CHECK(igraph_vector_init(&c_lengths, 0));
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_lengths);
+  lengths=R_GlobalEnv; /* hack to have a non-NULL value */
+  Rz_SEXP_to_matrix(points, &c_points);
+  c_METRIC = (igraph_metric_t) Rf_asInteger(METRIC);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_spatial_edge_lengths(&c_graph, &c_lengths, &c_points, c_METRIC));
+
+                                        /* Convert output */
+  PROTECT(lengths=Ry_igraph_0orvector_to_SEXP(&c_lengths));
+  igraph_vector_destroy(&c_lengths);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = lengths;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_vertex_coloring_greedy              /
 /-------------------------------------------*/
 SEXP R_igraph_vertex_coloring_greedy(SEXP graph, SEXP heuristic) {

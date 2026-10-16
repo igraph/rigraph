@@ -401,6 +401,11 @@ LSETYPE:
     CTYPE: igraph_laplacian_spectral_embedding_type_t
     FLAGS: ENUM
 
+METRIC:
+    # Enum that describes the metric to be used for spatial algorithms
+    CTYPE: igraph_metric_t
+    FLAGS: ENUM
+
 NEIMODE:
     # Enum that describes how a particular function should take into account
     # the neighbors of vertices

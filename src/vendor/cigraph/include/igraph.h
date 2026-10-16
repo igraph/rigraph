@@ -95,5 +95,6 @@
 #include "igraph_graphicality.h"
 #include "igraph_cycles.h"
 #include "igraph_reachability.h"
+#include "igraph_spatial.h"
 
 #endif
