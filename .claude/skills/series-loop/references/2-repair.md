@@ -220,6 +220,20 @@ in [`scripts/flavor.sh`](/scripts/flavor.sh), its template or [`scripts/flavor-p
 and fold the same change into the flavor commit on `main-dev`.
 Keep the two flavor subjects as `flavor.sh` wrote them: [`scripts/series-rc.sh`](/scripts/series-rc.sh) finds the flavor diff by them.
 
+## A gate the harness breaks on every commit
+
+Every commit is judged by the harness it carries:
+[`scripts/each-shard.sh`](/scripts/each-shard.sh) resets the workspace to each commit and runs that commit's own `scripts/rcc-one.sh`,
+against that commit's own `DESCRIPTION`.
+So when the job's tooling or environment, not the tree, fails a gate on every commit,
+a fix on `main` reaches `main-dev` through stage 4 at the tip alone, and every commit below it stays red for good.
+Fix it on `main` first, then fold the same change into the oldest commit it turns red, as for a flavor commit;
+the replay carries it into every commit above, and stage 4's pick of it later comes out empty and is dropped.
+On 2026-10-16 the `roxygen` gate failed on every vendor commit:
+its external roclet downloaded the C manual's index for the exact engine version, and a replay commit's `0.10.17-1-g16081ce60` has no manual
+([igraph/rigraph#2955](https://github.com/igraph/rigraph/pull/2955) vendors the roclet with its link tables committed).
+A refusal every commit meets the same way is this case, not the network, and a rerun buys the same refusal.
+
 ## Read what the series already learned
 
 Every adaptation sits in an `R-side fix` section of the commit it was folded into, and
