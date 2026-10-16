@@ -10161,27 +10161,8 @@ test_that("pagerank_impl basic", {
   ))
 })
 
-test_that("hub_score_impl basic", {
-  igraph_local_seed(20250909)
-  g <- make_star(5, mode = "undirected")
-  out <- hub_score_impl(graph = g, scale = TRUE, weights = NULL)
-  # FIXME: out$vector unstable despite random seed
-  expect_length(out$vector, 5)
-  expect_type(out$vector, "double")
-  out$vector <- NULL
-  expect_snapshot(out)
-})
-
-test_that("authority_score_impl basic", {
-  igraph_local_seed(20250909)
-  g <- make_star(5, mode = "undirected")
-  out <- authority_score_impl(graph = g, scale = TRUE, weights = NULL)
-  # FIXME: out$vector unstable despite random seed
-  expect_length(out$vector, 5)
-  expect_type(out$vector, "double")
-  out$vector <- NULL
-  expect_snapshot(out)
-})
+# upstream igraph@03776a4: igraph_hub_score() and igraph_authority_score()
+# are removed; hub_and_authority_scores_impl() is tested above.
 
 # Community detection
 
