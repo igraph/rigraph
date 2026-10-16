@@ -202,7 +202,7 @@ EDGE_WEIGHTS:
     CTYPE: igraph_vector_t
     FLAGS: BY_REF
 
-EDGESET_LIST:
+EDGE_INDICES_LIST:
     # A list containing vectors of igraph integers where each such
     # vector represents a sequence of edge indices.
     CTYPE: igraph_vector_int_list_t

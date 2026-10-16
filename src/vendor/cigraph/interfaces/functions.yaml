@@ -505,7 +505,7 @@ igraph_get_shortest_path_astar:
 igraph_get_shortest_paths:
     PARAMS: |-
         GRAPH graph, OPTIONAL EDGE_WEIGHTS weights,
-        OPTIONAL OUT VERTEX_INDICES_LIST vertices, OPTIONAL OUT EDGESET_LIST edges,
+        OPTIONAL OUT VERTEX_INDICES_LIST vertices, OPTIONAL OUT EDGE_INDICES_LIST edges,
         VERTEX from, VERTEX_SELECTOR to=ALL, NEIMODE mode=OUT,
         OPTIONAL OUT VECTOR_INT parents,
         OPTIONAL OUT VECTOR_INT inbound_edges
@@ -514,7 +514,7 @@ igraph_get_shortest_paths:
 igraph_get_all_shortest_paths:
     PARAMS: |-
         GRAPH graph, OPTIONAL EDGE_WEIGHTS weights,
-        OPTIONAL OUT VERTEX_INDICES_LIST vertices, OPTIONAL OUT EDGESET_LIST edges,
+        OPTIONAL OUT VERTEX_INDICES_LIST vertices, OPTIONAL OUT EDGE_INDICES_LIST edges,
         OPTIONAL OUT VECTOR_INT nrgeo, VERTEX from, VERTEX_SELECTOR to, NEIMODE mode=OUT
     DEPS: weights ON graph, vertices ON graph, edges ON graph, from ON graph, to ON graph
 
@@ -533,7 +533,7 @@ igraph_distances_dijkstra_cutoff:
 igraph_get_shortest_paths_dijkstra:
     PARAMS: |-
         GRAPH graph, OPTIONAL OUT VERTEX_INDICES_LIST vertices,
-        OPTIONAL OUT EDGESET_LIST edges, VERTEX from, VERTEX_SELECTOR to=ALL,
+        OPTIONAL OUT EDGE_INDICES_LIST edges, VERTEX from, VERTEX_SELECTOR to=ALL,
         OPTIONAL EDGE_WEIGHTS weights, NEIMODE mode=OUT,
         OPTIONAL OUT VECTOR_INT parents,
         OPTIONAL OUT VECTOR_INT inbound_edges
@@ -544,7 +544,7 @@ igraph_get_shortest_paths_dijkstra:
 igraph_get_shortest_paths_bellman_ford:
     PARAMS: |-
         GRAPH graph, OPTIONAL OUT VERTEX_INDICES_LIST vertices,
-        OPTIONAL OUT EDGESET_LIST edges, VERTEX from, VERTEX_SELECTOR to=ALL,
+        OPTIONAL OUT EDGE_INDICES_LIST edges, VERTEX from, VERTEX_SELECTOR to=ALL,
         OPTIONAL EDGE_WEIGHTS weights, NEIMODE mode=OUT,
         OPTIONAL OUT VECTOR_INT parents,
         OPTIONAL OUT VECTOR_INT inbound_edges
@@ -555,7 +555,7 @@ igraph_get_shortest_paths_bellman_ford:
 igraph_get_all_shortest_paths_dijkstra:
     PARAMS: |-
         GRAPH graph, OPTIONAL OUT VERTEX_INDICES_LIST vertices,
-        OPTIONAL OUT EDGESET_LIST edges, OPTIONAL OUT VECTOR_INT nrgeo,
+        OPTIONAL OUT EDGE_INDICES_LIST edges, OPTIONAL OUT VECTOR_INT nrgeo,
         VERTEX from, VERTEX_SELECTOR to=ALL, OPTIONAL EDGE_WEIGHTS weights,
         NEIMODE mode=OUT
     DEPS: |-
@@ -598,7 +598,7 @@ igraph_get_k_shortest_paths:
     PARAMS: |-
         GRAPH graph, OPTIONAL EDGE_WEIGHTS weights,
         OPTIONAL OUT VERTEX_INDICES_LIST vertex_paths,
-        OPTIONAL OUT EDGESET_LIST edge_paths,
+        OPTIONAL OUT EDGE_INDICES_LIST edge_paths,
         INTEGER k, VERTEX from, VERTEX to, NEIMODE mode=OUT
     DEPS: |-
         from ON graph, to ON graph, weights ON graph, vertex_paths ON graph, edge_paths ON graph
@@ -614,7 +614,7 @@ igraph_get_widest_path:
 igraph_get_widest_paths:
     PARAMS: |-
         GRAPH graph,
-        OPTIONAL OUT VERTEX_INDICES_LIST vertices, OPTIONAL OUT EDGESET_LIST edges,
+        OPTIONAL OUT VERTEX_INDICES_LIST vertices, OPTIONAL OUT EDGE_INDICES_LIST edges,
         VERTEX from, VERTEX_SELECTOR to=ALL, EDGE_WEIGHTS weights,
         NEIMODE mode=OUT, OPTIONAL OUT VECTOR_INT parents,
         OPTIONAL OUT VECTOR_INT inbound_edges
@@ -1273,8 +1273,8 @@ igraph_articulation_points:
 igraph_biconnected_components:
     PARAMS: |-
         GRAPH graph, OUT INTEGER no,
-        OPTIONAL OUT EDGESET_LIST tree_edges,
-        OPTIONAL OUT EDGESET_LIST component_edges,
+        OPTIONAL OUT EDGE_INDICES_LIST tree_edges,
+        OPTIONAL OUT EDGE_INDICES_LIST component_edges,
         OPTIONAL OUT VERTEX_INDICES_LIST components,
         OUT VERTEX_INDICES articulation_points
     DEPS: |-
@@ -2230,7 +2230,7 @@ igraph_dominator_tree:
 
 igraph_all_st_cuts:
     PARAMS: |-
-        GRAPH graph, OPTIONAL OUT EDGESET_LIST cuts,
+        GRAPH graph, OPTIONAL OUT EDGE_INDICES_LIST cuts,
         OPTIONAL OUT VERTEX_INDICES_LIST partition1s,
         VERTEX source, VERTEX target
     DEPS: |-
@@ -2240,7 +2240,7 @@ igraph_all_st_cuts:
 igraph_all_st_mincuts:
     PARAMS: |-
         GRAPH graph, OUT REAL value,
-        OPTIONAL OUT EDGESET_LIST cuts,
+        OPTIONAL OUT EDGE_INDICES_LIST cuts,
         OPTIONAL OUT VERTEX_INDICES_LIST partition1s,
         VERTEX source, VERTEX target, OPTIONAL EDGE_CAPACITY capacity
     DEPS: |-
@@ -2602,7 +2602,7 @@ igraph_find_cycle:
 igraph_simple_cycles:
     PARAMS: |-
         GRAPH graph,
-        OPTIONAL OUT VERTEX_INDICES_LIST vertices, OPTIONAL OUT EDGESET_LIST edges,
+        OPTIONAL OUT VERTEX_INDICES_LIST vertices, OPTIONAL OUT EDGE_INDICES_LIST edges,
         NEIMODE mode=OUT, INTEGER min_cycle_length=UNLIMITED, INTEGER max_cycle_length=UNLIMITED,
         INTEGER max_results=UNLIMITED
     DEPS: vertices ON graph, edges ON graph
@@ -2635,7 +2635,7 @@ igraph_eulerian_cycle:
 igraph_fundamental_cycles:
     PARAMS: |-
         GRAPH graph, OPTIONAL EDGE_WEIGHTS weights,
-        OUT EDGESET_LIST basis,
+        OUT EDGE_INDICES_LIST basis,
         OPTIONAL VERTEX start,
         REAL bfs_cutoff=UNLIMITED
     DEPS: weights ON graph, basis ON graph, start ON graph
@@ -2643,7 +2643,7 @@ igraph_fundamental_cycles:
 igraph_minimum_cycle_basis:
     PARAMS: |-
         GRAPH graph, OPTIONAL EDGE_WEIGHTS weights,
-        OUT EDGESET_LIST basis,
+        OUT EDGE_INDICES_LIST basis,
         REAL bfs_cutoff=UNLIMITED,
         BOOLEAN complete=True, BOOLEAN use_cycle_order=True
     DEPS: weights ON graph, basis ON graph
