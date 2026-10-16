@@ -332,12 +332,6 @@ igraph_eigenvector_centrality:
         OPTIONAL EDGEWEIGHTS weights,
         INOUT ARPACKOPT options=ARPACK_DEFAULTS
 
-igraph_hub_score:
-    DEPS: weights ON graph, vector ON graph V(graph)
-
-igraph_authority_score:
-    DEPS: weights ON graph, vector ON graph V(graph)
-
 igraph_hub_and_authority_scores:
     # This is a temporary hack; we need to find a way to handle default values
     # for dependencies. The problem is that the VERTEXINDEX type needs two

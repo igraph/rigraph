@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -206,17 +205,6 @@ IGRAPH_EXPORT igraph_error_t igraph_centralization_eigenvector_centrality_tmax(c
                                                                                igraph_int_t nodes,
                                                                                igraph_neimode_t mode,
                                                                                igraph_real_t *res);
-
-/* Deprecated functions: */
-
-IGRAPH_DEPRECATED IGRAPH_EXPORT igraph_error_t igraph_hub_score(const igraph_t *graph, igraph_vector_t *vector,
-                                   igraph_real_t *value, igraph_bool_t scale,
-                                   const igraph_vector_t *weights,
-                                   igraph_arpack_options_t *options);
-IGRAPH_DEPRECATED IGRAPH_EXPORT igraph_error_t igraph_authority_score(const igraph_t *graph, igraph_vector_t *vector,
-                                         igraph_real_t *value, igraph_bool_t scale,
-                                         const igraph_vector_t *weights,
-                                         igraph_arpack_options_t *options);
 
 __END_DECLS
 
