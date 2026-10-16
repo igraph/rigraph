@@ -25,7 +25,7 @@ Why:
 
 **The line has two stretches, joined at one seam.**
 igraph 0.10.17 and 1.0.1 are not one first-parent walk apart upstream: 0.10.17 was released from a branch merged into `main` later.
-So the walk to 1.0.1 follows a replay instead, rebuilt commit by commit in the branch `replay-1.0.1` of `krlmlr/igraph`,
+So the walk to 1.0.1 follows a replay instead, rebuilt commit by commit in the branch `v1.0-replay` of `krlmlr/igraph`,
 starting at 0.10.17 and ending in a tree equal to 1.0.1's in `src/`, `include/`, `vendor/` and `tests/`.
 Its commits exist only there, so their vendor subjects name `krlmlr/igraph`.
 At the replay's tip the next vendor commit is igraph/igraph's tag 1.0.1 itself,

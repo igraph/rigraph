@@ -92,7 +92,7 @@ export PATH=$STUBS:$PATH
 
 # --- the upstream --------------------------------------------------------------
 #
-# Tag 0.10.17, then two lines out of it. The replay (`replay-1.0.1`) ports three
+# Tag 0.10.17, then two lines out of it. The replay (`v1.0-replay`) ports three
 # changes, the second of which carries what the package's one patch adds. `main`
 # reaches the replay tip's tree in one commit, tagged 1.0.1, the seam, and goes
 # on with a commit that touches nothing kept, then two that do. A side line
@@ -117,7 +117,7 @@ put src/a.c a0; put include/igraph.h h0; put doc/readme d0
 T0=$(commit 'Release 0.10.17')
 git tag 0.10.17
 
-git checkout -q -b replay-1.0.1
+git checkout -q -b v1.0-replay
 put src/a.c a1
 R1=$(commit 'Port the first change (#11)')
 put src/a.c a2; put src/b.c fix

@@ -63,6 +63,8 @@ ported:
     blob: 0456063ecd55fed9dc9bd9874ec6ccc3bec21461
   - path: scripts/rcc-lib.sh
     blob: c82028c9d90b52bd51d37ddf36bf690188574c74
+  - path: scripts/rcc-consolidate.sh
+    blob: 532664b6bc072dce68567c42184bc65a467dc911
   - path: scripts/rcc-decided.sh
     blob: 7ae91eb627bbfb18369c7745cb5dd9ad28afbf74
   - path: scripts/rcc-publish.sh
