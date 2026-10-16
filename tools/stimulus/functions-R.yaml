@@ -350,7 +350,7 @@ igraph_eigenvector_centrality:
         GRAPH graph, OUT ALL_VERTEX_QTY vector, OUT REAL value,
         NEIMODE_DIRECTED directed=False, DEPRECATED scale=NULL,
         OPTIONAL EDGE_WEIGHTS weights,
-        INOUT ARPACKOPT options=ARPACK_DEFAULTS
+        INOUT ARPACK_OPTIONS options=ARPACK_DEFAULTS
 
 igraph_hub_and_authority_scores:
     # This is a temporary hack; we need to find a way to handle default values
@@ -363,7 +363,7 @@ igraph_hub_and_authority_scores:
     # effect.
     PARAMS: GRAPH graph, OUT VERTEX_QTY hub, OUT VERTEX_QTY authority,
         OUT REAL value, DEPRECATED scale=NULL, OPTIONAL EDGE_WEIGHTS weights,
-        INOUT ARPACKOPT options=ARPACK_DEFAULTS
+        INOUT ARPACK_OPTIONS options=ARPACK_DEFAULTS
 
 igraph_is_mutual:
     PARAM_NAMES:
@@ -376,7 +376,7 @@ igraph_centralization_eigenvector_centrality:
     PARAMS: |-
         GRAPH graph, OUT VECTOR vector, OUT REAL value,
         NEIMODE_DIRECTED directed=False, DEPRECATED scale=NULL,
-        INOUT ARPACKOPT options=ARPACK_DEFAULTS,
+        INOUT ARPACK_OPTIONS options=ARPACK_DEFAULTS,
         OUT REAL centralization, OUT REAL theoretical_max,
         BOOLEAN normalized=True
 
@@ -628,7 +628,7 @@ igraph_community_leading_eigenvector_callback_closure:
         GRAPH graph, OPTIONAL EDGE_WEIGHTS weights,
         OPTIONAL OUT MATRIX_INT merges, OPTIONAL INOUT VECTOR_INT membership,
         INTEGER steps=-1,
-        INOUT ARPACKOPT options=ARPACK_DEFAULTS,
+        INOUT ARPACK_OPTIONS options=ARPACK_DEFAULTS,
         OPTIONAL OUT REAL modularity, BOOLEAN start=False,
         OPTIONAL OUT VECTOR eigenvalues,
         OPTIONAL OUT VECTOR_LIST eigenvectors,
