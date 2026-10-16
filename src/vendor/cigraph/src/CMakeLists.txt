@@ -81,11 +81,11 @@ add_library(
 
   random/random.c
   random/random_device.cpp
-  random/sampling.c
   random/rng_glibc2.c
   random/rng_mt19937.c
   random/rng_pcg32.c
   random/rng_pcg64.c
+  random/sampling.c
 
   graph/adjlist.c
   graph/attributes.c
@@ -114,7 +114,6 @@ add_library(
   constructors/prufer.c
   constructors/regular.c
   constructors/trees.c
-
 
   games/barabasi.c
   games/callaway_traits.c
