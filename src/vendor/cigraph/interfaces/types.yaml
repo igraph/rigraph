@@ -187,7 +187,7 @@ EDGE_CAPACITY:
     CTYPE: igraph_vector_t
     FLAGS: BY_REF
 
-EDGE_COLOR:
+EDGE_COLORS:
     # A vector containing edge colors
     CTYPE: igraph_vector_int_t
     FLAGS: BY_REF
@@ -244,7 +244,7 @@ VERTEX_INDICES_LIST:
     CTYPE: igraph_vector_int_list_t
     FLAGS: BY_REF
 
-VERTEX_COLOR:
+VERTEX_COLORS:
     # A vector containing vertex colors
     CTYPE: igraph_vector_int_t
     FLAGS: BY_REF

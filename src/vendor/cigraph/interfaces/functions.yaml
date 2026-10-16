@@ -2302,10 +2302,10 @@ igraph_isoclass_create:
 igraph_isomorphic_vf2:
     PARAMS: |-
         GRAPH graph1, GRAPH graph2,
-        OPTIONAL VERTEX_COLOR vertex_color1,
-        OPTIONAL VERTEX_COLOR vertex_color2,
-        OPTIONAL EDGE_COLOR edge_color1,
-        OPTIONAL EDGE_COLOR edge_color2,
+        OPTIONAL VERTEX_COLORS vertex_color1,
+        OPTIONAL VERTEX_COLORS vertex_color2,
+        OPTIONAL EDGE_COLORS edge_color1,
+        OPTIONAL EDGE_COLORS edge_color2,
         OUT BOOLEAN iso,
         OPTIONAL OUT INDEX_VECTOR map12, OPTIONAL OUT INDEX_VECTOR map21,
         OPTIONAL ISOCOMPAT_FUNC node_compat_fn,
@@ -2318,8 +2318,8 @@ igraph_isomorphic_vf2:
 igraph_get_isomorphisms_vf2_callback:
     PARAMS: |-
         GRAPH graph1, GRAPH graph2,
-        OPTIONAL VERTEX_COLOR vertex_color1, OPTIONAL VERTEX_COLOR vertex_color2,
-        OPTIONAL EDGE_COLOR edge_color1, OPTIONAL EDGE_COLOR edge_color2,
+        OPTIONAL VERTEX_COLORS vertex_color1, OPTIONAL VERTEX_COLORS vertex_color2,
+        OPTIONAL EDGE_COLORS edge_color1, OPTIONAL EDGE_COLORS edge_color2,
         OPTIONAL OUT INDEX_VECTOR map12, OPTIONAL OUT INDEX_VECTOR map21,
         ISOMORPHISM_FUNC ishohandler_fn,
         OPTIONAL ISOCOMPAT_FUNC node_compat_fn,
@@ -2332,8 +2332,8 @@ igraph_get_isomorphisms_vf2_callback:
 igraph_count_isomorphisms_vf2:
     PARAMS: |-
         GRAPH graph1, GRAPH graph2,
-        OPTIONAL VERTEX_COLOR vertex_color1, OPTIONAL VERTEX_COLOR vertex_color2,
-        OPTIONAL EDGE_COLOR edge_color1, OPTIONAL EDGE_COLOR edge_color2,
+        OPTIONAL VERTEX_COLORS vertex_color1, OPTIONAL VERTEX_COLORS vertex_color2,
+        OPTIONAL EDGE_COLORS edge_color1, OPTIONAL EDGE_COLORS edge_color2,
         OUT INTEGER count,
         OPTIONAL ISOCOMPAT_FUNC node_compat_fn,
         OPTIONAL ISOCOMPAT_FUNC edge_compat_fn,
@@ -2345,8 +2345,8 @@ igraph_count_isomorphisms_vf2:
 igraph_get_isomorphisms_vf2:
     PARAMS: |-
         GRAPH graph1, GRAPH graph2,
-        OPTIONAL VERTEX_COLOR vertex_color1, OPTIONAL VERTEX_COLOR vertex_color2,
-        OPTIONAL EDGE_COLOR edge_color1, OPTIONAL EDGE_COLOR edge_color2,
+        OPTIONAL VERTEX_COLORS vertex_color1, OPTIONAL VERTEX_COLORS vertex_color2,
+        OPTIONAL EDGE_COLORS edge_color1, OPTIONAL EDGE_COLORS edge_color2,
         OUT VECTOR_INT_LIST maps,
         OPTIONAL ISOCOMPAT_FUNC node_compat_fn,
         OPTIONAL ISOCOMPAT_FUNC edge_compat_fn,
@@ -2361,8 +2361,8 @@ igraph_subisomorphic:
 igraph_subisomorphic_vf2:
     PARAMS: |-
         GRAPH graph1, GRAPH graph2,
-        OPTIONAL VERTEX_COLOR vertex_color1, OPTIONAL VERTEX_COLOR vertex_color2,
-        OPTIONAL EDGE_COLOR edge_color1, OPTIONAL EDGE_COLOR edge_color2,
+        OPTIONAL VERTEX_COLORS vertex_color1, OPTIONAL VERTEX_COLORS vertex_color2,
+        OPTIONAL EDGE_COLORS edge_color1, OPTIONAL EDGE_COLORS edge_color2,
         OUT BOOLEAN iso,
         OPTIONAL OUT INDEX_VECTOR map12, OPTIONAL OUT INDEX_VECTOR map21,
         OPTIONAL ISOCOMPAT_FUNC node_compat_fn,
@@ -2375,8 +2375,8 @@ igraph_subisomorphic_vf2:
 igraph_get_subisomorphisms_vf2_callback:
     PARAMS: |-
         GRAPH graph1, GRAPH graph2,
-        OPTIONAL VERTEX_COLOR vertex_color1, OPTIONAL VERTEX_COLOR vertex_color2,
-        OPTIONAL EDGE_COLOR edge_color1, OPTIONAL EDGE_COLOR edge_color2,
+        OPTIONAL VERTEX_COLORS vertex_color1, OPTIONAL VERTEX_COLORS vertex_color2,
+        OPTIONAL EDGE_COLORS edge_color1, OPTIONAL EDGE_COLORS edge_color2,
         OPTIONAL OUT INDEX_VECTOR map12, OPTIONAL OUT INDEX_VECTOR map21,
         ISOMORPHISM_FUNC ishohandler_fn,
         OPTIONAL ISOCOMPAT_FUNC node_compat_fn,
@@ -2389,8 +2389,8 @@ igraph_get_subisomorphisms_vf2_callback:
 igraph_count_subisomorphisms_vf2:
     PARAMS: |-
         GRAPH graph1, GRAPH graph2,
-        OPTIONAL VERTEX_COLOR vertex_color1, OPTIONAL VERTEX_COLOR vertex_color2,
-        OPTIONAL EDGE_COLOR edge_color1, OPTIONAL EDGE_COLOR edge_color2,
+        OPTIONAL VERTEX_COLORS vertex_color1, OPTIONAL VERTEX_COLORS vertex_color2,
+        OPTIONAL EDGE_COLORS edge_color1, OPTIONAL EDGE_COLORS edge_color2,
         OUT INTEGER count,
         OPTIONAL ISOCOMPAT_FUNC node_compat_fn,
         OPTIONAL ISOCOMPAT_FUNC edge_compat_fn,
@@ -2402,8 +2402,8 @@ igraph_count_subisomorphisms_vf2:
 igraph_get_subisomorphisms_vf2:
     PARAMS: |-
         GRAPH graph1, GRAPH graph2,
-        OPTIONAL VERTEX_COLOR vertex_color1, OPTIONAL VERTEX_COLOR vertex_color2,
-        OPTIONAL EDGE_COLOR edge_color1, OPTIONAL EDGE_COLOR edge_color2,
+        OPTIONAL VERTEX_COLORS vertex_color1, OPTIONAL VERTEX_COLORS vertex_color2,
+        OPTIONAL EDGE_COLORS edge_color1, OPTIONAL EDGE_COLORS edge_color2,
         OUT VECTOR_INT_LIST maps,
         OPTIONAL ISOCOMPAT_FUNC node_compat_fn,
         OPTIONAL ISOCOMPAT_FUNC edge_compat_fn,
@@ -2414,13 +2414,13 @@ igraph_get_subisomorphisms_vf2:
 
 igraph_canonical_permutation:
     PARAMS: |-
-        GRAPH graph, OPTIONAL VERTEX_COLOR colors,
+        GRAPH graph, OPTIONAL VERTEX_COLORS colors,
         OUT INDEX_VECTOR labeling
     DEPS: colors ON graph
 
 igraph_canonical_permutation_bliss:
     PARAMS: |-
-        GRAPH graph, OPTIONAL VERTEX_COLOR colors,
+        GRAPH graph, OPTIONAL VERTEX_COLORS colors,
         OUT INDEX_VECTOR labeling, BLISSSH sh="fm", OUT BLISSINFO info
     DEPS: colors ON graph
 
@@ -2430,7 +2430,7 @@ igraph_permute_vertices:
 igraph_isomorphic_bliss:
     PARAMS: |-
         GRAPH graph1, GRAPH graph2,
-        OPTIONAL VERTEX_COLOR colors1, OPTIONAL VERTEX_COLOR colors2,
+        OPTIONAL VERTEX_COLORS colors1, OPTIONAL VERTEX_COLORS colors2,
         OUT BOOLEAN iso, OPTIONAL OUT INDEX_VECTOR map12,
         OPTIONAL OUT INDEX_VECTOR map21, BLISSSH sh="fm",
         OPTIONAL OUT BLISSINFO info1, OPTIONAL OUT BLISSINFO info2
@@ -2438,22 +2438,22 @@ igraph_isomorphic_bliss:
 
 igraph_count_automorphisms:
     PARAMS: |-
-        GRAPH graph, OPTIONAL VERTEX_COLOR colors, OUT REAL result
+        GRAPH graph, OPTIONAL VERTEX_COLORS colors, OUT REAL result
     DEPS: colors ON graph
 
 igraph_count_automorphisms_bliss:
     PARAMS: |-
-        GRAPH graph, OPTIONAL VERTEX_COLOR colors, BLISSSH sh="fm", OUT BLISSINFO info
+        GRAPH graph, OPTIONAL VERTEX_COLORS colors, BLISSSH sh="fm", OUT BLISSINFO info
     DEPS: colors ON graph
 
 igraph_automorphism_group:
     PARAMS: |-
-        GRAPH graph, OPTIONAL VERTEX_COLOR colors, OUT VERTEX_INDICES_LIST generators
+        GRAPH graph, OPTIONAL VERTEX_COLORS colors, OUT VERTEX_INDICES_LIST generators
     DEPS: colors ON graph, generators ON graph
 
 igraph_automorphism_group_bliss:
     PARAMS: |-
-        GRAPH graph, OPTIONAL VERTEX_COLOR colors, PRIMARY OUT VERTEX_INDICES_LIST generators,
+        GRAPH graph, OPTIONAL VERTEX_COLORS colors, PRIMARY OUT VERTEX_INDICES_LIST generators,
         BLISSSH sh="fm", OUT BLISSINFO info
     DEPS: colors ON graph, generators ON graph
 
@@ -2718,11 +2718,11 @@ igraph_spatial_edge_lengths:
 #######################################
 
 igraph_vertex_coloring_greedy:
-    PARAMS: GRAPH graph, OUT VERTEX_COLOR colors, GREEDY_COLORING_HEURISTIC heuristic=NEIGHBORS
+    PARAMS: GRAPH graph, OUT VERTEX_COLORS colors, GREEDY_COLORING_HEURISTIC heuristic=NEIGHBORS
     DEPS: colors ON graph
 
 igraph_is_vertex_coloring:
-    PARAMS: GRAPH graph, VERTEX_COLOR types, OUT BOOLEAN res
+    PARAMS: GRAPH graph, VERTEX_COLORS types, OUT BOOLEAN res
     DEPS: types ON graph
 
 igraph_is_bipartite_coloring:
@@ -2730,7 +2730,7 @@ igraph_is_bipartite_coloring:
     DEPS: types ON graph
 
 igraph_is_edge_coloring:
-    PARAMS: GRAPH graph, EDGE_COLOR types, OUT BOOLEAN res
+    PARAMS: GRAPH graph, EDGE_COLORS types, OUT BOOLEAN res
     DEPS: types ON graph
 
 #######################################
