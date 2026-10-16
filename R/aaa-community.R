@@ -572,7 +572,9 @@ community_infomap_impl <- function(
   graph,
   e_weights = NULL,
   v_weights = NULL,
-  nb_trials = 10
+  nb_trials = 10,
+  is_regularized = FALSE,
+  regularization_strength = 0
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -593,6 +595,8 @@ community_infomap_impl <- function(
     v_weights <- NULL
   }
   nb_trials <- as.numeric(nb_trials)
+  is_regularized <- as.logical(is_regularized)
+  regularization_strength <- as.numeric(regularization_strength)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -601,7 +605,9 @@ community_infomap_impl <- function(
     graph,
     e_weights,
     v_weights,
-    nb_trials
+    nb_trials,
+    is_regularized,
+    regularization_strength
   )
 
   res
