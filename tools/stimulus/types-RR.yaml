@@ -518,7 +518,7 @@ VERTEX_INDICES_LIST:
               %I% <- create_vs_list(%I1%, %I%)
             }
 
-EDGESET_LIST:
+EDGE_INDICES_LIST:
     CALL: lapply(%I%, function(.x) .x - 1)
     OUTCONV:
         OUT: |-

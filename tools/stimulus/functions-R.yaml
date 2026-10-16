@@ -264,7 +264,7 @@ igraph_get_widest_path:
 igraph_get_widest_paths:
     PARAMS: |-
         GRAPH graph,
-        OPTIONAL OUT VERTEXSET_LIST vertices, OPTIONAL OUT EDGESET_LIST edges,
+        OPTIONAL OUT VERTEXSET_LIST vertices, OPTIONAL OUT EDGE_INDICES_LIST edges,
         VERTEX from, VERTEX_SELECTOR to=ALL, EDGE_WEIGHTS weights=NULL,
         NEIMODE mode=OUT, OPTIONAL OUT VECTOR_INT parents,
         OPTIONAL OUT VECTOR_INT inbound_edges
