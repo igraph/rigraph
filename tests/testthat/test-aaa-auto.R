@@ -4147,32 +4147,8 @@ test_that("average_local_efficiency_impl errors", {
   ))
 })
 
-# 160. transitive_closure_dag_impl
-
-test_that("transitive_closure_dag_impl basic", {
-  igraph_local_seed(20250909)
-  g <- path_graph_impl(
-    n = 3,
-    directed = TRUE
-  )
-
-  expect_snapshot(transitive_closure_dag_impl(
-    graph = g
-  ))
-
-  # Structured tests
-  result <- transitive_closure_dag_impl(
-    graph = g
-  )
-  expect_s3_class(result, "igraph")
-})
-
-test_that("transitive_closure_dag_impl errors", {
-  igraph_local_seed(20250909)
-  expect_snapshot_igraph_error(transitive_closure_dag_impl(
-    graph = NULL
-  ))
-})
+# upstream igraph@d4f6ebf: igraph_transitive_closure_dag() is removed,
+# and no R code calls it.
 
 # 161. transitive_closure_impl
 

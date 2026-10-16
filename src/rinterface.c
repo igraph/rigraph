@@ -8151,32 +8151,6 @@ SEXP R_igraph_average_local_efficiency(SEXP graph, SEXP weights, SEXP directed, 
 }
 
 /*-------------------------------------------/
-/ igraph_transitive_closure_dag              /
-/-------------------------------------------*/
-SEXP R_igraph_transitive_closure_dag(SEXP graph) {
-                                        /* Declarations */
-  igraph_t c_graph;
-  igraph_t c_closure;
-  SEXP closure;
-
-  SEXP r_result;
-                                        /* Convert input */
-  Rz_SEXP_to_igraph(graph, &c_graph);
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_transitive_closure_dag(&c_graph, &c_closure));
-
-                                        /* Convert output */
-  IGRAPH_FINALLY(igraph_destroy, &c_closure);
-  PROTECT(closure=Ry_igraph_to_SEXP(&c_closure));
-  IGRAPH_I_DESTROY(&c_closure);
-  IGRAPH_FINALLY_CLEAN(1);
-  r_result = closure;
-
-  UNPROTECT(1);
-  return(r_result);
-}
-
-/*-------------------------------------------/
 / igraph_transitive_closure                  /
 /-------------------------------------------*/
 SEXP R_igraph_transitive_closure(SEXP graph) {
