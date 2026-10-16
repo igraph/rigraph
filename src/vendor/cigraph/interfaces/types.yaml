@@ -385,6 +385,11 @@ METRIC:
     CTYPE: igraph_metric_t
     FLAGS: ENUM
 
+MSTALGORITHM:
+    # Enum that describes the algorithm for computing a minimum spanning tree
+    CTYPE: igraph_mst_algorithm_t
+    FLAGS: ENUM
+
 NEIMODE:
     # Enum that describes how a particular function should take into account
     # the neighbors of vertices
@@ -404,16 +409,6 @@ PAGERANKALGO:
 GRAPH_PRODUCT_TYPE:
     # Enum that describes the various implementations of the graph products
     CTYPE: igraph_product_t
-    FLAGS: ENUM
-
-LPA_VARIANT:
-    # Enum that describes the label propagation algorithm variant
-    CTYPE: igraph_lpa_variant_t
-    FLAGS: ENUM
-
-MST_ALGORITHM:
-    # Enum that describes the minimum spanning tree algorithm to use
-    CTYPE: igraph_mst_algorithm_t
     FLAGS: ENUM
 
 RANDOM_TREE_METHOD:
@@ -503,8 +498,13 @@ VORONOI_TIEBREAKER:
     FLAGS: ENUM
 
 WHEEL_MODE:
-    # Enum that describes how a star graph should be constructed
+    # Enum that describes how a wheel graph should be constructed
     CTYPE: igraph_wheel_mode_t
+    FLAGS: ENUM
+
+LPA_VARIANT:
+    # Enum that describes the label propagation algorithm variant
+    CTYPE: igraph_lpa_variant_t
     FLAGS: ENUM
 
 ###############################################################################

@@ -2673,7 +2673,7 @@ igraph_is_complete:
     PARAMS: GRAPH graph, OUT BOOLEAN res
 
 igraph_minimum_spanning_tree:
-    PARAMS: GRAPH graph, OUT EDGE_INDICES res, OPTIONAL EDGE_WEIGHTS weights, MST_ALGORITHM method=AUTOMATIC
+    PARAMS: GRAPH graph, OUT EDGE_INDICES res, OPTIONAL EDGE_WEIGHTS weights, MSTALGORITHM method=AUTOMATIC
     DEPS: res ON graph, weights ON graph
 
 igraph_random_spanning_tree:
