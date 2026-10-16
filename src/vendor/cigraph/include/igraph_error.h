@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2003-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -255,6 +254,7 @@ __BEGIN_DECLS
  * \enumval IGRAPH_EXISTS A graph/vertex/edge attribute is already
  *    installed with the given name.
  * \enumval IGRAPH_EINVVID Invalid vertex ID, negative or too big.
+ * \enumval IGRAPH_EINVEID Invalid edge ID, negative or too big.
  * \enumval IGRAPH_EINVMODE Invalid mode parameter.
  * \enumval IGRAPH_EFILE A file operation failed. E.g. a file doesn't exist,
  *   or the user has no rights to open it.
@@ -268,8 +268,6 @@ __BEGIN_DECLS
  * \enumval IGRAPH_EINTERNAL Internal error, likely a bug in igraph.
  * \enumval IGRAPH_EATTRCOMBINE Unimplemented attribute combination
  *   method for the given attribute type.
- * \enumval IGRAPH_EDRL Internal error in the DrL layout generator; not used
- *   any more (replaced by IGRAPH_EINTERNAL).
  * \enumval IGRAPH_EOVERFLOW Integer or double overflow.
  * \enumval IGRAPH_EUNDERFLOW Integer or double underflow.
  * \enumval IGRAPH_ERWSTUCK Random walk got stuck.
@@ -286,7 +284,7 @@ typedef enum {
     IGRAPH_EXISTS            = 5,
     /* IGRAPH_EINVEVECTOR       = 6, */   /* removed in 1.0 */
     IGRAPH_EINVVID           = 7,
-    /* IGRAPH_NONSQUARE         = 8, */   /* removed in 1.0 */
+    IGRAPH_EINVEID           = 8,         /* used to be IGRAPH_NONSQUARE before 1.0 */
     IGRAPH_EINVMODE          = 9,
     IGRAPH_EFILE             = 10,
     IGRAPH_UNIMPLEMENTED     = 12,
@@ -309,7 +307,7 @@ typedef enum {
     /* IGRAPH_EATTRIBUTES       = 51, */   /* removed in 1.0 */
     IGRAPH_EATTRCOMBINE      = 52,
     /* IGRAPH_ELAPACK           = 53, */   /* removed in 1.0 */
-    IGRAPH_EDRL IGRAPH_DEPRECATED_ENUMVAL = 54,
+    /* IGRAPH_EDRL              = 54, */   /* deprecated in 0.10.2, removed in 1.0 */
     IGRAPH_EOVERFLOW         = 55,
     /* IGRAPH_EGLP              = 56, */   /* removed in 1.0 */
     /* IGRAPH_CPUTIME           = 57, */   /* removed in 1.0 */
@@ -483,7 +481,7 @@ IGRAPH_EXPORT igraph_error_t igraph_errorvf(const char *reason, const char *file
                                             int line, igraph_error_t igraph_errno,
                                             va_list ap);
 
-IGRAPH_EXPORT IGRAPH_FUNCATTR_PURE const char *igraph_strerror(const igraph_error_t igraph_errno);
+IGRAPH_EXPORT IGRAPH_FUNCATTR_PURE const char *igraph_strerror(igraph_error_t igraph_errno);
 
 #define IGRAPH_ERROR_SELECT_2(a,b)       ((a) != IGRAPH_SUCCESS ? (a) : ((b) != IGRAPH_SUCCESS ? (b) : IGRAPH_SUCCESS))
 #define IGRAPH_ERROR_SELECT_3(a,b,c)     ((a) != IGRAPH_SUCCESS ? (a) : IGRAPH_ERROR_SELECT_2(b,c))
