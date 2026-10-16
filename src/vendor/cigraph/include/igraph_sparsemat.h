@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -264,9 +263,6 @@ IGRAPH_EXPORT igraph_error_t igraph_sparsemat_multiply_by_dense(const igraph_spa
 IGRAPH_EXPORT igraph_error_t igraph_sparsemat_dense_multiply(const igraph_matrix_t *A,
                                                   const igraph_sparsemat_t *B,
                                                   igraph_matrix_t *res);
-
-IGRAPH_EXPORT igraph_error_t igraph_sparsemat_view(igraph_sparsemat_t *A, igraph_int_t nzmax, igraph_int_t m, igraph_int_t n,
-                                        igraph_int_t *p, igraph_int_t *i, igraph_real_t *x, igraph_int_t nz);
 
 IGRAPH_EXPORT igraph_error_t igraph_sparsemat_sort(const igraph_sparsemat_t *A,
                                         igraph_sparsemat_t *sorted);
