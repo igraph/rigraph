@@ -2334,6 +2334,16 @@ igraph_isoclass:
 igraph_isomorphic:
     PARAMS: GRAPH graph1, GRAPH graph2, OUT BOOLEAN iso
 
+igraph_automorphism_group:
+    PARAMS: |-
+        GRAPH graph, OPTIONAL VERTEX_COLORS colors, OUT VERTEX_INDICES_LIST generators
+    DEPS: colors ON graph, generators ON graph
+
+igraph_count_automorphisms:
+    PARAMS: |-
+        GRAPH graph, OPTIONAL VERTEX_COLORS colors, OUT REAL result
+    DEPS: colors ON graph
+
 igraph_isoclass_subgraph:
     PARAMS: GRAPH graph, VERTEX_SELECTOR vids, OUT INTEGER isoclass
     DEPS: vids ON graph
@@ -2478,20 +2488,10 @@ igraph_isomorphic_bliss:
         OPTIONAL OUT BLISSINFO info1, OPTIONAL OUT BLISSINFO info2
     DEPS: colors1 ON graph1, colors2 ON graph2
 
-igraph_count_automorphisms:
-    PARAMS: |-
-        GRAPH graph, OPTIONAL VERTEX_COLORS colors, OUT REAL result
-    DEPS: colors ON graph
-
 igraph_count_automorphisms_bliss:
     PARAMS: |-
         GRAPH graph, OPTIONAL VERTEX_COLORS colors, BLISSSH sh="fm", OUT BLISSINFO info
     DEPS: colors ON graph
-
-igraph_automorphism_group:
-    PARAMS: |-
-        GRAPH graph, OPTIONAL VERTEX_COLORS colors, OUT VERTEX_INDICES_LIST generators
-    DEPS: colors ON graph, generators ON graph
 
 igraph_automorphism_group_bliss:
     PARAMS: |-
