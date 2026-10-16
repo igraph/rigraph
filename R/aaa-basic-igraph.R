@@ -194,18 +194,21 @@ edge_impl <- function(
 
 edges_impl <- function(
   graph,
-  eids
+  eids,
+  bycol = FALSE
 ) {
   # Argument checks
   ensure_igraph(graph)
   eids <- as_igraph_es(graph, eids)
+  bycol <- as.logical(bycol)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_edges,
     graph,
-    eids - 1
+    eids - 1,
+    bycol
   )
   if (igraph_opt("return.vs.es")) {
     res <- create_vs(graph, res)

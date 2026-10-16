@@ -459,11 +459,12 @@ SEXP R_igraph_edge(SEXP graph, SEXP eid) {
 /*-------------------------------------------/
 / igraph_edges                               /
 /-------------------------------------------*/
-SEXP R_igraph_edges(SEXP graph, SEXP eids) {
+SEXP R_igraph_edges(SEXP graph, SEXP eids, SEXP bycol) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_es_t c_eids;
   igraph_vector_int_t c_edges;
+  igraph_bool_t c_bycol;
   SEXP edges;
 
   SEXP r_result;
@@ -473,8 +474,10 @@ SEXP R_igraph_edges(SEXP graph, SEXP eids) {
   IGRAPH_R_CHECK(Rz_SEXP_to_igraph_es(eids, &c_graph, &c_eids, &c_eids_data));
   IGRAPH_R_CHECK(igraph_vector_int_init(&c_edges, 0));
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edges);
+  IGRAPH_R_CHECK_BOOL(bycol);
+  c_bycol = LOGICAL(bycol)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_edges(&c_graph, c_eids, &c_edges));
+  IGRAPH_R_CHECK(igraph_edges(&c_graph, c_eids, &c_edges, c_bycol));
 
                                         /* Convert output */
   igraph_vector_int_destroy(&c_eids_data);

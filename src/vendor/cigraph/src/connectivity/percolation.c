@@ -247,7 +247,7 @@ igraph_error_t igraph_bond_percolation(
 
     // Initialize edge list. igraph_edges() will validate edge IDs.
     IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, 2 * igraph_vector_int_size(p_edge_order));
-    IGRAPH_CHECK(igraph_edges(graph, igraph_ess_vector(p_edge_order), &edges));
+    IGRAPH_CHECK(igraph_edges(graph, igraph_ess_vector(p_edge_order), &edges, /* bycol = */ 0));
 
     // Defer to igraph_edgelist_percolation()
     IGRAPH_CHECK(igraph_edgelist_percolation(&edges, giant_size, vertex_count));
