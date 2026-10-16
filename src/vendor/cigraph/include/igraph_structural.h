@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -181,11 +180,6 @@ IGRAPH_EXPORT igraph_error_t igraph_get_laplacian_sparse(
    igraph_laplacian_normalization_t normalization,
    const igraph_vector_t *weights
 );
-IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_laplacian(
-   const igraph_t *graph, igraph_matrix_t *res, igraph_sparsemat_t *sparseres,
-   igraph_bool_t normalized, const igraph_vector_t *weights
-);
-
 __END_DECLS
 
 #endif
