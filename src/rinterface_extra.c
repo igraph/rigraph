@@ -4267,7 +4267,7 @@ SEXP Rx_igraph_diameter(SEXP graph, SEXP pdirected, SEXP punconnected,
   if (!Rf_isNull(pweights)) {
     Rz_SEXP_to_vector(pweights, &weights);
   }
-  IGRAPH_R_CHECK(igraph_diameter_dijkstra(&g, Rf_isNull(pweights) ? 0 : &weights, &res, 0, 0, 0, 0, directed, unconnected));
+  IGRAPH_R_CHECK(igraph_diameter(&g, Rf_isNull(pweights) ? 0 : &weights, &res, 0, 0, 0, 0, directed, unconnected));
 
   PROTECT(result=NEW_NUMERIC(1));
   REAL(result)[0]=res;
@@ -4293,7 +4293,7 @@ SEXP Rx_igraph_get_diameter(SEXP graph, SEXP pdirected, SEXP punconnected,
     Rz_SEXP_to_vector(pweights, &weights);
   }
   igraph_vector_int_init(&res, 0);
-  IGRAPH_R_CHECK(igraph_diameter_dijkstra(&g, Rf_isNull(pweights) ? 0 : &weights, &dialen, 0, 0, &res, 0, directed, unconnected));
+  IGRAPH_R_CHECK(igraph_diameter(&g, Rf_isNull(pweights) ? 0 : &weights, &dialen, 0, 0, &res, 0, directed, unconnected));
 
   PROTECT(result=Ry_igraph_vector_int_to_SEXP(&res));
   igraph_vector_int_destroy(&res);
@@ -4318,7 +4318,7 @@ SEXP Rx_igraph_farthest_points(SEXP graph, SEXP pdirected, SEXP punconnected,
   if (!Rf_isNull(pweights)) {
     Rz_SEXP_to_vector(pweights, &weights);
   }
-  IGRAPH_R_CHECK(igraph_diameter_dijkstra(&g, Rf_isNull(pweights) ? 0 : &weights, &len, &from, &to, 0, 0, directed, unconnected));
+  IGRAPH_R_CHECK(igraph_diameter(&g, Rf_isNull(pweights) ? 0 : &weights, &len, &from, &to, 0, 0, directed, unconnected));
 
   PROTECT(result=NEW_NUMERIC(3));
   if (from < 0) {

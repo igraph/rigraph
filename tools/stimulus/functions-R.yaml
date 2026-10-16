@@ -280,7 +280,7 @@ igraph_rewire:
         DEFAULTS:
             mode: 0L
 
-igraph_average_path_length_dijkstra:
+igraph_average_path_length:
     PARAM_NAMES:
         unconn_pairs: unconnected
         unconn: unconnected
@@ -338,19 +338,16 @@ igraph_is_mutual:
     PARAM_NAMES:
         es: eids
 
-igraph_eccentricity_dijkstra:
+igraph_eccentricity:
     PARAM_ORDER: graph, vids, *, weights, ...
 
-igraph_graph_center_dijkstra:
+igraph_graph_center:
     FIRST_KW_PARAM: weights
 
-igraph_radius_dijkstra:
+igraph_radius:
     FIRST_KW_PARAM: weights
 
 igraph_pseudo_diameter:
-    DEPS: start_vid ON graph
-
-igraph_pseudo_diameter_dijkstra:
     DEPS: start_vid ON graph, weights ON graph
 
 igraph_random_walk:
