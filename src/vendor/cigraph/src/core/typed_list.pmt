@@ -64,12 +64,11 @@
     * _item_ in the vector */
     #if defined(BASE_GRAPH)
         #define ITEM_FUNCTION(f) CONCAT2x(igraph,f)
+    #elif defined(BASE_ATTRIBUTE_RECORD)
+        #define ITEM_FUNCTION(f) CONCAT2x(igraph_attribute_record,f)
     #endif
     #if defined(BASE_BITSET)
         #define ITEM_FUNCTION(f) CONCAT2x(igraph_bitset,f)
-    #endif
-    #if defined(BASE_ATTRIBUTE_RECORD)
-        #define ITEM_FUNCTION(f) CONCAT2x(igraph_attribute_record,f)
     #endif
 #endif
 
