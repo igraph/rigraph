@@ -19153,7 +19153,7 @@ SEXP R_igraph_community_leading_eigenvector_callback_closure(SEXP graph, SEXP we
   igraph_bool_t c_start;
   igraph_vector_t c_eigenvalues;
   igraph_vector_list_t c_eigenvectors;
-  igraph_vector_t c_history;
+  igraph_vector_int_t c_history;
 
 
 
@@ -19188,8 +19188,8 @@ SEXP R_igraph_community_leading_eigenvector_callback_closure(SEXP graph, SEXP we
   IGRAPH_FINALLY(igraph_vector_destroy, &c_eigenvalues);
   IGRAPH_R_CHECK(igraph_vector_list_init(&c_eigenvectors, 0));
   IGRAPH_FINALLY(igraph_vector_list_destroy, &c_eigenvectors);
-  IGRAPH_R_CHECK(igraph_vector_init(&c_history, 0));
-  IGRAPH_FINALLY(igraph_vector_destroy, &c_history);
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_history, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_history);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_community_leading_eigenvector_callback_closure(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_merges, &c_membership, c_steps, &c_options, &c_modularity, c_start, &c_eigenvalues, &c_eigenvectors, &c_history, callback, extra, env, env_arp));
 
@@ -19211,8 +19211,8 @@ SEXP R_igraph_community_leading_eigenvector_callback_closure(SEXP graph, SEXP we
   PROTECT(eigenvectors=Rx_igraph_vector_list_to_SEXP(&c_eigenvectors));
   igraph_vector_list_destroy(&c_eigenvectors);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(history=Ry_igraph_vector_to_SEXP(&c_history));
-  igraph_vector_destroy(&c_history);
+  PROTECT(history=Ry_igraph_vector_int_to_SEXP(&c_history));
+  igraph_vector_int_destroy(&c_history);
   IGRAPH_FINALLY_CLEAN(1);
   SET_VECTOR_ELT(r_result, 0, merges);
   SET_VECTOR_ELT(r_result, 1, membership);

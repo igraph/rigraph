@@ -568,7 +568,7 @@ igraph_community_leading_eigenvector_callback_closure:
         OPTIONAL OUT REAL modularity, BOOLEAN start=False,
         OPTIONAL OUT VECTOR eigenvalues,
         OPTIONAL OUT VECTOR_LIST eigenvectors,
-        OPTIONAL OUT VECTOR history,
+        OPTIONAL OUT VECTOR_INT history,
         CLOSURE callback=NULL,
         CLOSURE_EXTRA extra=NULL,
         CLOSURE_ENV env=parent.frame(),

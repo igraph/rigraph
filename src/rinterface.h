@@ -310,7 +310,7 @@ igraph_error_t igraph_community_leading_eigenvector_callback_closure(
     igraph_bool_t start,
     igraph_vector_t *eigenvalues,
     igraph_vector_list_t *eigenvectors,
-    igraph_vector_t *history,
+    igraph_vector_int_t *history,
     SEXP callback,
     SEXP extra,
     SEXP env,
