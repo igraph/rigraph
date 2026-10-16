@@ -39,18 +39,28 @@ biadjacency_impl <- function(
 
 get_biadjacency_impl <- function(
   graph,
-  types
+  types,
+  weights = NULL
 ) {
   # Argument checks
   ensure_igraph(graph)
   types <- handle_vertex_type_arg(types, graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && !all(is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_get_biadjacency,
     graph,
-    types
+    types,
+    weights
   )
 
   res
