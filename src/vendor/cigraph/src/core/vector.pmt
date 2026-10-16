@@ -141,9 +141,7 @@ igraph_error_t FUNCTION(igraph_vector, init)(TYPE(igraph_vector) *v, igraph_int_
      * This simplifies freeing partially initialized data structures,
      * such as adjacency lists, when an error occurs mid-initialization. */
     v->stor_begin = IGRAPH_CALLOC(alloc_size, BASE);
-    if (v->stor_begin == NULL) {
-        IGRAPH_ERROR("Cannot initialize vector.", IGRAPH_ENOMEM); /* LCOV_EXCL_LINE */
-    }
+    IGRAPH_CHECK_OOM(v->stor_begin, "Insufficient memory to initialize vector.");
     v->stor_end = v->stor_begin + alloc_size;
     v->end = v->stor_begin + size;
 
@@ -155,17 +153,27 @@ igraph_error_t FUNCTION(igraph_vector, init)(TYPE(igraph_vector) *v, igraph_int_
  * \function igraph_vector_view
  * \brief Handle a regular C array as a \type igraph_vector_t.
  *
+ * This function lets you treat an existing C array as an \ref igraph_vector_t.
+ *
  * </para><para>
- * This is a special \type igraph_vector_t constructor. It allows to
- * handle a regular C array as a \type igraph_vector_t temporarily.
- * Be sure that you \em don't ever call the destructor (\ref
- * igraph_vector_destroy()) on objects created by this constructor.
- * \param v Pointer to an uninitialized \type igraph_vector_t object.
- * \param data Pointer, the C array. It may not be \c NULL, except
- *     when \p length is zero.
+ * Since this function creates a view into an existing array, you must \em not
+ * destroy the \c igraph_vector_t object when you are done with it. Similarly,
+ * you must \em not call any function on it that may attempt to modify the size
+ * of the vector. Modifying an element in the vector will modify the underlying
+ * array as the two share the same memory block.
+ *
+ * </para><para>
+ * Typical usage pattern:
+ *
+ * <programlisting>
+ * igraph_real_t array[] = { 1.0, 1.5, 2.0 };
+ * const igraph_vector_t v = igraph_vector_view(array, sizeof(array) / sizeof(array[0]));
+ * printf("The sum of vector elements is %g.\n", igraph_vector_sum(&amp;v));
+ * </programlisting>
+ *
+ * \param data The raw array that the vector provides a view into.
  * \param length The length of the C array.
- * \return Pointer to the vector object, the same as the
- *     \p v parameter, for convenience.
+ * \return The vector object providing the view into the array.
  *
  * Time complexity: O(1)
  */
@@ -1043,9 +1051,7 @@ igraph_error_t FUNCTION(igraph_vector, sort_ind)(
         return IGRAPH_SUCCESS;
     }
     vind = IGRAPH_CALLOC(n, BASE*);
-    if (vind == 0) {
-        IGRAPH_ERROR("igraph_vector_sort_ind failed", IGRAPH_ENOMEM); /* LCOV_EXCL_LINE */
-    }
+    IGRAPH_CHECK_OOM(vind, "Insufficient memory to sort vector.");
     for (i = 0; i < n; i++) {
         vind[i] = &VECTOR(*v)[i];
     }
@@ -2112,7 +2118,7 @@ static igraph_bool_t FUNCTION(igraph_i_vector, binsearch_slice)(const TYPE(igrap
  *   vector if it is present. If \p v does not
  *   contain \p what then
  *   \p pos is set to the position to which it
- *   should be inserted (to keep the the vector sorted of course).
+ *   should be inserted (to keep the vector sorted of course).
  * \return True if \p what is found in the vector, false otherwise.
  *
  * Time complexity: O(log(n)),
@@ -2146,7 +2152,7 @@ igraph_bool_t FUNCTION(igraph_vector, binsearch)(const TYPE(igraph_vector) *v,
  * \param pos Pointer to an \type igraph_int_t. This is set to the position of an
  *        instance of \p what in the slice of the vector if it is present. If \p
  *        v does not contain \p what then \p pos is set to the position to which
- *        it should be inserted (to keep the the vector sorted).
+ *        it should be inserted (to keep the vector sorted).
  * \param start The start position of the slice to search (inclusive).
  * \param end The end position of the slice to search (exclusive).
  * \return True if \p what is found in the vector, false otherwise.
@@ -2546,16 +2552,16 @@ void FUNCTION(igraph_vector, swap)(TYPE(igraph_vector) *v1, TYPE(igraph_vector) 
  * \brief Swap two elements in a vector.
  *
  * Note that currently no range checking is performed.
+ *
  * \param v The input vector.
  * \param i Index of the first element.
- * \param j Index of the second element (may be the same as the
- * first one).
+ * \param j Index of the second element (may be the same as the first one).
  *
  * Time complexity: O(1).
  */
 
 void FUNCTION(igraph_vector, swap_elements)(TYPE(igraph_vector) *v,
-        igraph_int_t i, igraph_int_t j) {
+                                    igraph_int_t i, igraph_int_t j) {
     BASE tmp = VECTOR(*v)[i];
     VECTOR(*v)[i] = VECTOR(*v)[j];
     VECTOR(*v)[j] = tmp;
@@ -3444,9 +3450,7 @@ igraph_error_t FUNCTION(igraph_vector, index_in_place)(TYPE(igraph_vector) *v,
     igraph_int_t i, n = igraph_vector_int_size(idx);
 
     tmp = IGRAPH_CALLOC(n, BASE);
-    if (!tmp) {
-        IGRAPH_ERROR("Cannot index vector.", IGRAPH_ENOMEM); /* LCOV_EXCL_LINE */
-    }
+    IGRAPH_CHECK_OOM(tmp, "Insufficient memory to index vector.");
 
     for (i = 0; i < n; i++) {
         tmp[i] = VECTOR(*v)[ VECTOR(*idx)[i] ];
