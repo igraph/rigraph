@@ -330,8 +330,8 @@ igraph_asymmetric_preference_game:
 
 igraph_rewire_edges:
     PARAMS: |-
-        INOUT GRAPH graph, REAL prob, BOOLEAN loops=False,
-        BOOLEAN multiple=False
+        INOUT GRAPH graph, REAL prob,
+        EDGE_TYPE_SW allowed_edge_types=SIMPLE
 
 igraph_rewire_directed_edges:
     PARAMS: |-

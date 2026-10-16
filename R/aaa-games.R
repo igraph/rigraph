@@ -236,14 +236,20 @@ rewire_directed_edges_impl <- function(
 rewire_edges_impl <- function(
   graph,
   prob,
-  loops = FALSE,
-  multiple = FALSE
+  allowed_edge_types = c("simple", "loops", "multi", "all")
 ) {
   # Argument checks
   ensure_igraph(graph)
   prob <- as.numeric(prob)
-  loops <- as.logical(loops)
-  multiple <- as.logical(multiple)
+  allowed_edge_types <- switch_igraph_arg(
+    allowed_edge_types,
+    "simple" = 0L,
+    "loop" = 1L,
+    "loops" = 1L,
+    "multi" = 6L,
+    "multiple" = 6L,
+    "all" = 7L
+  )
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -251,8 +257,7 @@ rewire_edges_impl <- function(
     R_igraph_rewire_edges,
     graph,
     prob,
-    loops,
-    multiple
+    allowed_edge_types
   )
 
   res

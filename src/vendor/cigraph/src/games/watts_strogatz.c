@@ -112,7 +112,7 @@ igraph_error_t igraph_watts_strogatz_game(igraph_t *graph, igraph_int_t dim,
 
     /* Rewire the edges then */
 
-    IGRAPH_CHECK(igraph_rewire_edges(graph, p, loops, multiple));
+    IGRAPH_CHECK(igraph_rewire_edges(graph, p, (loops ? IGRAPH_LOOPS_SW : IGRAPH_SIMPLE_SW) | (multiple ? IGRAPH_MULTI_SW : IGRAPH_SIMPLE_SW)));
 
     IGRAPH_FINALLY_CLEAN(1);
     return IGRAPH_SUCCESS;

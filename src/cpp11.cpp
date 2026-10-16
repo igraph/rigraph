@@ -425,7 +425,7 @@ extern SEXP R_igraph_reverse_edges(SEXP, SEXP);
 extern SEXP R_igraph_reverse_residual_graph(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_rewire(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_rewire_directed_edges(SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_rewire_edges(SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_rewire_edges(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_rich_club_sequence(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_ring(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_rooted_product(SEXP, SEXP, SEXP);
@@ -1009,7 +1009,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_reverse_residual_graph",                         (DL_FUNC) &R_igraph_reverse_residual_graph,                          3},
     {"R_igraph_rewire",                                         (DL_FUNC) &R_igraph_rewire,                                          3},
     {"R_igraph_rewire_directed_edges",                          (DL_FUNC) &R_igraph_rewire_directed_edges,                           4},
-    {"R_igraph_rewire_edges",                                   (DL_FUNC) &R_igraph_rewire_edges,                                    4},
+    {"R_igraph_rewire_edges",                                   (DL_FUNC) &R_igraph_rewire_edges,                                    3},
     {"R_igraph_rich_club_sequence",                             (DL_FUNC) &R_igraph_rich_club_sequence,                              6},
     {"R_igraph_ring",                                           (DL_FUNC) &R_igraph_ring,                                            4},
     {"R_igraph_rooted_product",                                 (DL_FUNC) &R_igraph_rooted_product,                                  3},

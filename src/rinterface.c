@@ -2646,12 +2646,11 @@ SEXP R_igraph_asymmetric_preference_game(SEXP nodes, SEXP out_types, SEXP in_typ
 /*-------------------------------------------/
 / igraph_rewire_edges                        /
 /-------------------------------------------*/
-SEXP R_igraph_rewire_edges(SEXP graph, SEXP prob, SEXP loops, SEXP multiple) {
+SEXP R_igraph_rewire_edges(SEXP graph, SEXP prob, SEXP allowed_edge_types) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_real_t c_prob;
-  igraph_bool_t c_loops;
-  igraph_bool_t c_multiple;
+  igraph_edge_type_sw_t c_allowed_edge_types;
 
   SEXP r_result;
                                         /* Convert input */
@@ -2659,12 +2658,9 @@ SEXP R_igraph_rewire_edges(SEXP graph, SEXP prob, SEXP loops, SEXP multiple) {
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   IGRAPH_R_CHECK_REAL(prob);
   c_prob = REAL(prob)[0];
-  IGRAPH_R_CHECK_BOOL(loops);
-  c_loops = LOGICAL(loops)[0];
-  IGRAPH_R_CHECK_BOOL(multiple);
-  c_multiple = LOGICAL(multiple)[0];
+  c_allowed_edge_types = (igraph_edge_type_sw_t) Rf_asInteger(allowed_edge_types);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_rewire_edges(&c_graph, c_prob, c_loops, c_multiple));
+  IGRAPH_R_CHECK(igraph_rewire_edges(&c_graph, c_prob, c_allowed_edge_types));
 
                                         /* Convert output */
   PROTECT(graph=Ry_igraph_to_SEXP(&c_graph));

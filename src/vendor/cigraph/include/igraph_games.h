@@ -137,7 +137,7 @@ IGRAPH_EXPORT igraph_error_t igraph_asymmetric_preference_game(igraph_t *graph, 
                                                     igraph_bool_t loops);
 
 IGRAPH_EXPORT igraph_error_t igraph_rewire_edges(igraph_t *graph, igraph_real_t prob,
-                                      igraph_bool_t loops, igraph_bool_t multiple);
+                                                 igraph_edge_type_sw_t allowed_edge_types);
 IGRAPH_EXPORT igraph_error_t igraph_rewire_directed_edges(igraph_t *graph, igraph_real_t prob,
                                                igraph_bool_t loops, igraph_neimode_t mode);
 
