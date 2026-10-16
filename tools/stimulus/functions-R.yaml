@@ -316,6 +316,11 @@ igraph_maxdegree:
     PARAM_NAMES:
         vids: v
 
+igraph_girth:
+    # Upstream renamed circle to cycle (krlmlr/igraph@a73d82c): the R name stays.
+    PARAM_NAMES:
+        cycle: circle
+
 igraph_is_loop:
     PARAM_NAMES:
         es: eids
