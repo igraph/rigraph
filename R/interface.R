@@ -113,8 +113,10 @@ add.edges <- function(graph, edges, ..., attr = list()) {
 #' their values for the original edges of the graph are set to `NA`.
 #'
 #' @param graph The input graph
-#' @param edges The edges to add, a vertex sequence with even number
-#'   of vertices.
+#' @param edges The edges to add. Either a two-column matrix or data frame, each
+#'   row giving the two endpoints of an edge, or a vertex sequence with an even
+#'   number of vertices, interpreted pairwise (the first and second vertices
+#'   form the first edge, the third and fourth the second edge, etc.).
 #' @param ... Additional arguments, they must be named,
 #'   and they will be added as edge attributes, for the newly added
 #'   edges. See also details below.
@@ -148,6 +150,8 @@ add_edges <- function(graph, edges, ..., attr = list()) {
   if (length(attrs) != 0 && (is.null(nam) || !all(nzchar(nam)))) {
     cli::cli_abort("All attributes must be named.")
   }
+
+  edges <- edge_pairs_arg(edges, arg = "edges", fn = "add_edges")
 
   edges.orig <- ecount(graph)
   on.exit(.Call(Rx_igraph_finalizer))
@@ -245,7 +249,8 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
 #' @param edges The edges to remove, specified as an edge sequence. Typically
 #'   this is either a numeric vector containing edge IDs, or a character vector
 #'   containing the IDs or names of the source and target vertices, separated by
-#'   `|`
+#'   `|`. A two-column matrix or data frame is also accepted, each row giving the
+#'   two endpoints of an edge to remove.
 #' @return The graph, with the edges removed.
 #'
 #' @family functions for manipulating graph structure
@@ -264,6 +269,14 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
 #' g <- delete_edges(g, get_edge_ids(g, c(1, 5, 4, 5)))
 #' g
 delete_edges <- function(graph, edges) {
+  ensure_igraph(graph)
+  if (is_legacy_edge_matrix(edges)) {
+    # Matrices used to be read as edge IDs here.
+    warn_legacy_edge_matrix(edges, "edges", "delete_edges")
+    edges <- c(edges)
+  } else if (is.data.frame(edges) || inherits(edges, "matrix")) {
+    edges <- get_edge_ids(graph, edges, error = TRUE)
+  }
   delete_edges_impl(
     graph = graph,
     edges = edges
@@ -590,6 +603,46 @@ to_vertex_pairs <- function(from, to) {
 # Flatten an n x 2 edge list matrix into the same interleaved form.
 edgelist_to_vertex_pairs <- function(el) {
   c(t(el))
+}
+
+# Normalize the vertex pairs passed to an edge function.
+# Data frames and n x 2 matrices are edge lists, one edge per row.
+# Other matrices kept their old column-major meaning during the transition
+# to edge lists (#1827), with a warning, so that callers can migrate first.
+edge_pairs_arg <- function(x, arg, fn) {
+  if (is_legacy_edge_matrix(x)) {
+    warn_legacy_edge_matrix(x, arg, fn)
+    c(x)
+  } else if (is.data.frame(x) || inherits(x, "matrix")) {
+    el_to_vec(x, arg = arg, fn = fn)
+  } else {
+    x
+  }
+}
+
+is_legacy_edge_matrix <- function(x) {
+  inherits(x, "matrix") && (nrow(x) == 2 || ncol(x) != 2)
+}
+
+warn_legacy_edge_matrix <- function(x, arg, fn) {
+  details <- if (nrow(x) == 2 && ncol(x) == 2) {
+    "A 2 times 2 matrix is ambiguous and is read column by column for now. Pass a data frame with two columns instead."
+  } else if (nrow(x) == 2) {
+    "It is read column by column for now. Transpose the matrix with t(), or pass a data frame with two columns."
+  } else {
+    "It is read column by column for now. Pass an n times 2 matrix or a data frame with two columns."
+  }
+  lifecycle::deprecate_warn(
+    "3.0.0",
+    paste0(
+      fn,
+      "(",
+      arg,
+      " = 'should be an n times 2 matrix with one edge per row')"
+    ),
+    details = details,
+    always = TRUE
+  )
 }
 
 el_to_vec <- function(

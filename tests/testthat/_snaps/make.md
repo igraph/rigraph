@@ -1,3 +1,12 @@
+# make_graph() warning for legacy matrices
+
+    Code
+      . <- make_graph(t(cbind(1, 2:4)))
+    Condition
+      Warning:
+      The `edges` argument of `make_graph()` should be an n times 2 matrix with one edge per row as of igraph 3.0.0.
+      i It is read column by column for now. Transpose the matrix with t(), or pass a data frame with two columns.
+
 # error messages are proper
 
     Code

@@ -1,3 +1,24 @@
+# add_edges warning for legacy matrices
+
+    Code
+      . <- add_edges(g, matrix(c(1, 2, 3, 4), nrow = 2))
+    Condition
+      Warning:
+      The `edges` argument of `add_edges()` should be an n times 2 matrix with one edge per row as of igraph 3.0.0.
+      i A 2 times 2 matrix is ambiguous and is read column by column for now. Pass a data frame with two columns instead.
+    Code
+      . <- add_edges(g, matrix(c(1, 2, 1, 3, 1, 4), nrow = 2))
+    Condition
+      Warning:
+      The `edges` argument of `add_edges()` should be an n times 2 matrix with one edge per row as of igraph 3.0.0.
+      i It is read column by column for now. Transpose the matrix with t(), or pass a data frame with two columns.
+    Code
+      . <- add_edges(g, matrix(1:4, nrow = 1))
+    Condition
+      Warning:
+      The `edges` argument of `add_edges()` should be an n times 2 matrix with one edge per row as of igraph 3.0.0.
+      i It is read column by column for now. Pass an n times 2 matrix or a data frame with two columns.
+
 # get.edge.ids() deprecation
 
     Code

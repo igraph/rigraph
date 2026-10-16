@@ -264,33 +264,31 @@ Not checked (deferred)
 
 
 ```
-# tinyVAST (1.6.2)
+# trafficCAR (0.1.1)
 
-* GitHub mirror: <https://github.com/cran/tinyVAST>
+* GitHub mirror: <https://github.com/cran/trafficCAR>
 
-Run `revdepcheck::revdep_details(, "tinyVAST")` for more info
+Run `revdepcheck::revdep_details(, "trafficCAR")` for more info
 
-## In both
-
-*   checking whether package ‘tinyVAST’ can be installed ... ERROR
-     ```
-     Installation failed.
-     See ‘<lib>/tinyVAST.Rcheck/00install.out’ for details.
-     ```
-
-## Installation
+## Error before installation
 
 ### Devel
 
 ```
-<00install.out file does not exist>
+Not checked (deferred)
+
+
+
 
 
 ```
 ### CRAN
 
 ```
-<00install.out file does not exist>
+Not checked (deferred)
+
+
+
 
 
 ```
