@@ -1,6 +1,6 @@
 /*
    igraph library.
-   Copyright (C) 2009-2023  The igraph development team <igraph@igraph.org>
+   Copyright (C) 2009-2025  The igraph development team <igraph@igraph.org>
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -72,6 +72,8 @@
  * https://doi.org/10.1093/acprof%3Aoso/9780199206650.001.0001.
  *
  * \param graph The input graph, it can be directed or undirected.
+ * \param weights Weighted nominal assortativity is not currently implemented.
+ *    Pass \c NULL to ignore.
  * \param types Integer vector giving the vertex categories. The types
  *    are represented by integers starting at zero.
  * \param res Pointer to a real variable, the result is stored here.
@@ -94,18 +96,23 @@
  * \example examples/simple/igraph_assortativity_nominal.c
  */
 
-igraph_error_t igraph_assortativity_nominal(const igraph_t *graph,
-                                            const igraph_vector_int_t *types,
-                                            igraph_real_t *res,
-                                            igraph_bool_t directed,
-                                            igraph_bool_t normalized) {
+igraph_error_t igraph_assortativity_nominal(
+        const igraph_t *graph, const igraph_vector_t *weights,
+        const igraph_vector_int_t *types,
+        igraph_real_t *res,
+        igraph_bool_t directed, igraph_bool_t normalized) {
 
     igraph_int_t no_of_nodes = igraph_vcount(graph);
     igraph_int_t no_of_edges = igraph_ecount(graph);
-    igraph_real_t no_of_edges_real = no_of_edges;   /* for divisions */
+    igraph_real_t no_of_edges_real = (igraph_real_t) no_of_edges;   /* for divisions */
     igraph_int_t no_of_types;
     igraph_vector_int_t ai, bi, eii;
     igraph_real_t sumaibi = 0.0, sumeii = 0.0;
+
+    if (weights) {
+        IGRAPH_ERROR("Weighted nominal assortativity is not yet implemented.",
+                     IGRAPH_UNIMPLEMENTED);
+    }
 
     if (igraph_vector_int_size(types) != no_of_nodes) {
         IGRAPH_ERROR("Invalid types vector length.", IGRAPH_EINVAL);
@@ -207,6 +214,12 @@ igraph_error_t igraph_assortativity_nominal(const igraph_t *graph,
  * undirected graphs.
  *
  * </para><para>
+ * When edge weights are given, they are effectively treated as edge multiplicities.
+ * The above formulas are valid for weighted graph as well when \c m is interpreted
+ * as the total edge weight (instead of the edge count) and \c k as vertex strengths
+ * (instead of degrees).
+ *
+ * </para><para>
  * References:
  *
  * </para><para>
@@ -230,6 +243,8 @@ igraph_error_t igraph_assortativity_nominal(const igraph_t *graph,
  * https://doi.org/10.1093/acprof%3Aoso/9780199206650.001.0001.
  *
  * \param graph The input graph, it can be directed or undirected.
+ * \param weights The edge weights. Pass \c NULL to compute unweighed
+ *     assortativity, which in effect assumes all weights to be 1.
  * \param values The vertex values, these can be arbitrary numeric
  *     values.
  * \param values_in A second value vector to be used for the incoming
@@ -255,17 +270,23 @@ igraph_error_t igraph_assortativity_nominal(const igraph_t *graph,
  * based on vertex degrees.
  */
 
-igraph_error_t igraph_assortativity(const igraph_t *graph,
-                         const igraph_vector_t *values,
-                         const igraph_vector_t *values_in,
-                         igraph_real_t *res,
-                         igraph_bool_t directed,
-                         igraph_bool_t normalized) {
+igraph_error_t igraph_assortativity(
+        const igraph_t *graph, const igraph_vector_t *weights,
+        const igraph_vector_t *values, const igraph_vector_t *values_in,
+        igraph_real_t *res,
+        igraph_bool_t directed, igraph_bool_t normalized) {
 
     const igraph_int_t no_of_nodes = igraph_vcount(graph);
     const igraph_int_t no_of_edges = igraph_ecount(graph);
+    igraph_real_t total_weight;
 
     directed = directed && igraph_is_directed(graph);
+
+    if (weights && igraph_vector_size(weights) != no_of_edges) {
+        IGRAPH_ERRORF("Weight vector length (%" IGRAPH_PRId ") does not match number of edges (%" IGRAPH_PRId ").",
+                      IGRAPH_EINVAL,
+                      igraph_vector_size(weights), no_of_edges);
+    }
 
     if (!directed && values_in) {
         IGRAPH_WARNING(
@@ -280,27 +301,45 @@ igraph_error_t igraph_assortativity(const igraph_t *graph,
         IGRAPH_ERROR("Invalid incoming vertex values vector length.", IGRAPH_EINVAL);
     }
 
+    total_weight = weights ? igraph_vector_sum(weights) : no_of_edges;
+
     if (!directed) {
         igraph_real_t num1 = 0.0, num2 = 0.0, den1 = 0.0;
 
-        for (igraph_int_t e = 0; e < no_of_edges; e++) {
-            igraph_int_t from = IGRAPH_FROM(graph, e);
-            igraph_int_t to = IGRAPH_TO(graph, e);
-            igraph_real_t from_value = VECTOR(*values)[from];
-            igraph_real_t to_value = VECTOR(*values)[to];
+        if (weights) {
+            for (igraph_int_t e = 0; e < no_of_edges; e++) {
+                igraph_int_t from = IGRAPH_FROM(graph, e);
+                igraph_int_t to = IGRAPH_TO(graph, e);
+                igraph_real_t from_value = VECTOR(*values)[from];
+                igraph_real_t to_value = VECTOR(*values)[to];
+                igraph_real_t w = VECTOR(*weights)[e];
 
-            num1 += from_value * to_value;
-            num2 += from_value + to_value;
-            if (normalized) {
-                den1 += from_value * from_value + to_value * to_value;
+                num1 += w * from_value * to_value;
+                num2 += w * (from_value + to_value);
+                if (normalized) {
+                    den1 += w * (from_value * from_value + to_value * to_value);
+                }
+            }
+        } else {
+            for (igraph_int_t e = 0; e < no_of_edges; e++) {
+                igraph_int_t from = IGRAPH_FROM(graph, e);
+                igraph_int_t to = IGRAPH_TO(graph, e);
+                igraph_real_t from_value = VECTOR(*values)[from];
+                igraph_real_t to_value = VECTOR(*values)[to];
+
+                num1 += from_value * to_value;
+                num2 += from_value + to_value;
+                if (normalized) {
+                    den1 += from_value * from_value + to_value * to_value;
+                }
             }
         }
 
-        num1 /= no_of_edges;
+        num1 /= total_weight;
         if (normalized) {
-            den1 /= no_of_edges * 2.0;
+            den1 /= total_weight * 2.0;
         }
-        num2 /= no_of_edges * 2.0;
+        num2 /= total_weight * 2.0;
         num2 = num2 * num2;
 
         if (normalized) {
@@ -318,29 +357,47 @@ igraph_error_t igraph_assortativity(const igraph_t *graph,
             values_in = values;
         }
 
-        for (igraph_int_t e = 0; e < no_of_edges; e++) {
-            igraph_int_t from = IGRAPH_FROM(graph, e);
-            igraph_int_t to = IGRAPH_TO(graph, e);
-            igraph_real_t from_value = VECTOR(*values)[from];
-            igraph_real_t to_value = VECTOR(*values_in)[to];
+        if (weights) {
+            for (igraph_int_t e = 0; e < no_of_edges; e++) {
+                igraph_int_t from = IGRAPH_FROM(graph, e);
+                igraph_int_t to = IGRAPH_TO(graph, e);
+                igraph_real_t from_value = VECTOR(*values)[from];
+                igraph_real_t to_value = VECTOR(*values_in)[to];
+                igraph_real_t w = VECTOR(*weights)[e];
 
-            num1 += from_value * to_value;
-            num2 += from_value;
-            num3 += to_value;
-            if (normalized) {
-                den1 += from_value * from_value;
-                den2 += to_value * to_value;
+                num1 += w * from_value * to_value;
+                num2 += w * from_value;
+                num3 += w * to_value;
+                if (normalized) {
+                    den1 += w * (from_value * from_value);
+                    den2 += w * (to_value * to_value);
+                }
+            }
+        } else {
+            for (igraph_int_t e = 0; e < no_of_edges; e++) {
+                igraph_int_t from = IGRAPH_FROM(graph, e);
+                igraph_int_t to = IGRAPH_TO(graph, e);
+                igraph_real_t from_value = VECTOR(*values)[from];
+                igraph_real_t to_value = VECTOR(*values_in)[to];
+
+                num1 += from_value * to_value;
+                num2 += from_value;
+                num3 += to_value;
+                if (normalized) {
+                    den1 += from_value * from_value;
+                    den2 += to_value * to_value;
+                }
             }
         }
 
-        num = num1 - num2 * num3 / no_of_edges;
+        num = num1 - num2 * num3 / total_weight;
         if (normalized) {
-            den = sqrt(den1 - num2 * num2 / no_of_edges) *
-                    sqrt(den2 - num3 * num3 / no_of_edges);
+            den = sqrt(den1 - num2 * num2 / total_weight) *
+                    sqrt(den2 - num3 * num3 / total_weight);
 
             *res = num / den;
         } else {
-            *res = num / no_of_edges;
+            *res = num / total_weight;
         }
     }
 
@@ -398,7 +455,7 @@ igraph_error_t igraph_assortativity_degree(const igraph_t *graph,
         IGRAPH_VECTOR_INIT_FINALLY(&outdegree, no_of_nodes);
         IGRAPH_CHECK(igraph_strength(graph, &indegree, igraph_vss_all(), IGRAPH_IN, IGRAPH_LOOPS, NULL));
         IGRAPH_CHECK(igraph_strength(graph, &outdegree, igraph_vss_all(), IGRAPH_OUT, IGRAPH_LOOPS, NULL));
-        IGRAPH_CHECK(igraph_assortativity(graph, &outdegree, &indegree, res, /* directed */ true, /* normalized */ true));
+        IGRAPH_CHECK(igraph_assortativity(graph, NULL, &outdegree, &indegree, res, /* directed */ true, /* normalized */ true));
         igraph_vector_destroy(&indegree);
         igraph_vector_destroy(&outdegree);
         IGRAPH_FINALLY_CLEAN(2);
@@ -406,7 +463,7 @@ igraph_error_t igraph_assortativity_degree(const igraph_t *graph,
         igraph_vector_t degree;
         IGRAPH_VECTOR_INIT_FINALLY(&degree, no_of_nodes);
         IGRAPH_CHECK(igraph_strength(graph, &degree, igraph_vss_all(), IGRAPH_ALL, IGRAPH_LOOPS, NULL));
-        IGRAPH_CHECK(igraph_assortativity(graph, &degree, 0, res, /* directed */ false, /* normalized */ true));
+        IGRAPH_CHECK(igraph_assortativity(graph, NULL, &degree, 0, res, /* directed */ false, /* normalized */ true));
         igraph_vector_destroy(&degree);
         IGRAPH_FINALLY_CLEAN(1);
     }
@@ -417,8 +474,6 @@ igraph_error_t igraph_assortativity_degree(const igraph_t *graph,
 /**
  * \function igraph_joint_degree_matrix
  * \brief The joint degree matrix of a graph.
- *
- * \experimental
  *
  * In graph theory, the joint degree matrix \c J_ij of a graph gives the number
  * of edges, or sum of edge weights, between vertices of degree \c i and degree
@@ -457,11 +512,11 @@ igraph_error_t igraph_assortativity_degree(const igraph_t *graph,
  * \param jdm A pointer to an initialized matrix that will be resized. The values
  *        will be written here.
  * \param max_out_degree Number of rows in the result, i.e. the largest (out-)degree
- *        to consider. If negative, the largest (out-)degree of the graph will
- *        be used.
+ *        to consider. If negative or \ref IGRAPH_UNLIMITED, the largest (out-)degree
+ *        of the graph will be used.
  * \param max_in_degree Number of columns in the result, i.e. the largest (in-)degree
- *        to consider. If negative, the largest (in-)degree of the graph will
- *        be used.
+ *        to consider. If negative or \ref IGRAPH_UNLIMITED, the largest (in-)degree
+ *        of the graph will be used.
  * \return Error code.
  *
  * \sa \ref igraph_joint_degree_distribution() to count ordered vertex pairs instead of
@@ -497,8 +552,8 @@ igraph_error_t igraph_joint_degree_matrix(
         // Compute max degrees
         IGRAPH_VECTOR_INT_INIT_FINALLY(&out_degrees, no_of_nodes);
         IGRAPH_VECTOR_INT_INIT_FINALLY(&in_degrees, no_of_nodes);
-        IGRAPH_CHECK(igraph_degree(graph, &out_degrees, igraph_vss_all(), IGRAPH_OUT, true));
-        IGRAPH_CHECK(igraph_degree(graph, &in_degrees, igraph_vss_all(), IGRAPH_IN, true));
+        IGRAPH_CHECK(igraph_degree(graph, &out_degrees, igraph_vss_all(), IGRAPH_OUT, IGRAPH_LOOPS));
+        IGRAPH_CHECK(igraph_degree(graph, &in_degrees, igraph_vss_all(), IGRAPH_IN, IGRAPH_LOOPS));
 
         if (max_out_degree < 0) {
             max_out_degree = no_of_nodes > 0 ? igraph_vector_int_max(&out_degrees) : 0;
@@ -534,7 +589,7 @@ igraph_error_t igraph_joint_degree_matrix(
         igraph_int_t maxdeg;
 
         IGRAPH_VECTOR_INT_INIT_FINALLY(&degrees, no_of_nodes);
-        IGRAPH_CHECK(igraph_degree(graph, &degrees, igraph_vss_all(), IGRAPH_ALL, true));
+        IGRAPH_CHECK(igraph_degree(graph, &degrees, igraph_vss_all(), IGRAPH_ALL, IGRAPH_LOOPS));
 
         // Compute max degree of the graph only if needed
         if (max_out_degree < 0 || max_in_degree < 0) {
@@ -708,8 +763,6 @@ static igraph_error_t mixing_matrix(
  * \function igraph_joint_degree_distribution
  * \brief The joint degree distribution of a graph.
  *
- * \experimental
- *
  * Computes the joint degree distribution \c P_ij of a graph, used in the
  * study of degree correlations. \c P_ij is the probability that a randomly
  * chosen ordered pair of \em connected vertices have degrees \c i and \c j.
@@ -781,12 +834,12 @@ static igraph_error_t mixing_matrix(
  * \param normalized Whether to normalize the matrix so that entries sum to 1.0.
  *    If false, matrix entries will be connection counts. Normalization is not
  *    meaningful if some edge weights are negative.
- * \param max_from_degree The largest source vertex degree to consider. If negative,
- *    the largest source degree will be used. The row count of the result matrix
- *    is one larger than this value.
- * \param max_to_degree The largest target vertex degree to consider. If negative,
- *    the largest target degree will be used. The column count of the result matrix
- *    is one larger than this value.
+ * \param max_from_degree The largest source vertex degree to consider. If
+ *    negative or \ref IGRAPH_UNLIMITED, the largest source degree will be used.
+ *    The row count of the result matrix is one larger than this value.
+ * \param max_to_degree The largest target vertex degree to consider. If
+ *    negative or \ref IGRAPH_UNLIMITED, the largest target degree will be used.
+ *    The column count of the result matrix is one larger than this value.
  * \return Error code.
  *
  * \sa \ref igraph_joint_degree_matrix() for computing the joint degree matrix;
@@ -819,17 +872,17 @@ igraph_error_t igraph_joint_degree_distribution(
 
     if (have_out) {
         IGRAPH_VECTOR_INT_INIT_FINALLY(&deg_out, no_of_nodes);
-        IGRAPH_CHECK(igraph_degree(graph, &deg_out, igraph_vss_all(), IGRAPH_OUT, /* loops */ true));
+        IGRAPH_CHECK(igraph_degree(graph, &deg_out, igraph_vss_all(), IGRAPH_OUT, IGRAPH_LOOPS));
     }
 
     if (have_in) {
         IGRAPH_VECTOR_INT_INIT_FINALLY(&deg_in, no_of_nodes);
-        IGRAPH_CHECK(igraph_degree(graph, &deg_in, igraph_vss_all(), IGRAPH_IN, /* loops */ true));
+        IGRAPH_CHECK(igraph_degree(graph, &deg_in, igraph_vss_all(), IGRAPH_IN, IGRAPH_LOOPS));
     }
 
     if (have_all) {
         IGRAPH_VECTOR_INT_INIT_FINALLY(&deg_all, no_of_nodes);
-        IGRAPH_CHECK(igraph_degree(graph, &deg_all, igraph_vss_all(), IGRAPH_ALL, /* loops */ true));
+        IGRAPH_CHECK(igraph_degree(graph, &deg_all, igraph_vss_all(), IGRAPH_ALL, IGRAPH_LOOPS));
     }
 
     switch (from_mode) {
@@ -877,8 +930,6 @@ igraph_error_t igraph_joint_degree_distribution(
 /**
  * \function igraph_joint_type_distribution
  * \brief Mixing matrix for vertex categories.
- *
- * \experimental
  *
  * Computes the mixing matrix M_ij, i.e. the joint distribution of vertex types
  * at the endpoints directed of edges. Categories are represented by non-negative integer

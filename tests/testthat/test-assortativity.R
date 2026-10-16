@@ -127,3 +127,14 @@ test_that("assortativity_nominal() recovers legacy positional arguments", {
   )
   expect_identical(res, assortativity_nominal(g, types, directed = FALSE))
 })
+
+test_that("assortativity() and assortativity_nominal() ignore edge weights", {
+  g <- make_graph(c(1, 2, 2, 3, 3, 4, 4, 1, 1, 3), directed = FALSE)
+  values <- c(1, 2, 3, 5)
+  types <- c(1, 1, 2, 2)
+  unweighted <- assortativity(g, values)
+  unweighted_nominal <- assortativity_nominal(g, types)
+  E(g)$weight <- c(1, 5, 1, 5, 10)
+  expect_equal(assortativity(g, values), unweighted)
+  expect_equal(assortativity_nominal(g, types), unweighted_nominal)
+})

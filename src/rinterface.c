@@ -7393,9 +7393,10 @@ SEXP R_igraph_centralization_eigenvector_centrality_tmax(SEXP graph, SEXP nodes,
 /*-------------------------------------------/
 / igraph_assortativity_nominal               /
 /-------------------------------------------*/
-SEXP R_igraph_assortativity_nominal(SEXP graph, SEXP types, SEXP directed, SEXP normalized) {
+SEXP R_igraph_assortativity_nominal(SEXP graph, SEXP weights, SEXP types, SEXP directed, SEXP normalized) {
                                         /* Declarations */
   igraph_t c_graph;
+  igraph_vector_t c_weights;
   igraph_vector_int_t c_types;
   igraph_real_t c_res;
   igraph_bool_t c_directed;
@@ -7405,6 +7406,9 @@ SEXP R_igraph_assortativity_nominal(SEXP graph, SEXP types, SEXP directed, SEXP 
   SEXP r_result;
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    Rz_SEXP_to_vector(weights, &c_weights);
+  }
   Rz_SEXP_to_vector_int_copy(types, &c_types);
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_types);
   IGRAPH_R_CHECK_BOOL(directed);
@@ -7412,7 +7416,7 @@ SEXP R_igraph_assortativity_nominal(SEXP graph, SEXP types, SEXP directed, SEXP 
   IGRAPH_R_CHECK_BOOL(normalized);
   c_normalized = LOGICAL(normalized)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_assortativity_nominal(&c_graph, &c_types, &c_res, c_directed, c_normalized));
+  IGRAPH_R_CHECK(igraph_assortativity_nominal(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_types, &c_res, c_directed, c_normalized));
 
                                         /* Convert output */
   igraph_vector_int_destroy(&c_types);
@@ -7428,9 +7432,10 @@ SEXP R_igraph_assortativity_nominal(SEXP graph, SEXP types, SEXP directed, SEXP 
 /*-------------------------------------------/
 / igraph_assortativity                       /
 /-------------------------------------------*/
-SEXP R_igraph_assortativity(SEXP graph, SEXP values, SEXP values_in, SEXP directed, SEXP normalized) {
+SEXP R_igraph_assortativity(SEXP graph, SEXP weights, SEXP values, SEXP values_in, SEXP directed, SEXP normalized) {
                                         /* Declarations */
   igraph_t c_graph;
+  igraph_vector_t c_weights;
   igraph_vector_t c_values;
   igraph_vector_t c_values_in;
   igraph_real_t c_res;
@@ -7441,6 +7446,9 @@ SEXP R_igraph_assortativity(SEXP graph, SEXP values, SEXP values_in, SEXP direct
   SEXP r_result;
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    Rz_SEXP_to_vector(weights, &c_weights);
+  }
   Rz_SEXP_to_vector(values, &c_values);
   if (!Rf_isNull(values_in)) {
     Rz_SEXP_to_vector(values_in, &c_values_in);
@@ -7450,7 +7458,7 @@ SEXP R_igraph_assortativity(SEXP graph, SEXP values, SEXP values_in, SEXP direct
   IGRAPH_R_CHECK_BOOL(normalized);
   c_normalized = LOGICAL(normalized)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_assortativity(&c_graph, &c_values, (Rf_isNull(values_in) ? 0 : &c_values_in), &c_res, c_directed, c_normalized));
+  IGRAPH_R_CHECK(igraph_assortativity(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_values, (Rf_isNull(values_in) ? 0 : &c_values_in), &c_res, c_directed, c_normalized));
 
                                         /* Convert output */
   PROTECT(res=NEW_NUMERIC(1));

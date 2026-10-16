@@ -35,9 +35,9 @@ extern SEXP R_igraph_all_st_mincuts(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_almost_equals(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_are_adjacent(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_articulation_points(SEXP);
-extern SEXP R_igraph_assortativity(SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_assortativity(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_assortativity_degree(SEXP, SEXP);
-extern SEXP R_igraph_assortativity_nominal(SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_assortativity_nominal(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_asymmetric_preference_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_atlas(SEXP);
 extern SEXP R_igraph_automorphism_group_bliss(SEXP, SEXP, SEXP);
@@ -610,9 +610,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_almost_equals",                                  (DL_FUNC) &R_igraph_almost_equals,                                   3},
     {"R_igraph_are_adjacent",                                   (DL_FUNC) &R_igraph_are_adjacent,                                    3},
     {"R_igraph_articulation_points",                            (DL_FUNC) &R_igraph_articulation_points,                             1},
-    {"R_igraph_assortativity",                                  (DL_FUNC) &R_igraph_assortativity,                                   5},
+    {"R_igraph_assortativity",                                  (DL_FUNC) &R_igraph_assortativity,                                   6},
     {"R_igraph_assortativity_degree",                           (DL_FUNC) &R_igraph_assortativity_degree,                            2},
-    {"R_igraph_assortativity_nominal",                          (DL_FUNC) &R_igraph_assortativity_nominal,                           4},
+    {"R_igraph_assortativity_nominal",                          (DL_FUNC) &R_igraph_assortativity_nominal,                           5},
     {"R_igraph_asymmetric_preference_game",                     (DL_FUNC) &R_igraph_asymmetric_preference_game,                      6},
     {"R_igraph_atlas",                                          (DL_FUNC) &R_igraph_atlas,                                           1},
     {"R_igraph_automorphism_group_bliss",                       (DL_FUNC) &R_igraph_automorphism_group_bliss,                        3},
