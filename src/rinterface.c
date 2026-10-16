@@ -11340,7 +11340,7 @@ SEXP R_igraph_similarity_dice(SEXP graph, SEXP vids, SEXP mode, SEXP loops) {
   IGRAPH_R_CHECK_BOOL(loops);
   c_loops = LOGICAL(loops)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_similarity_dice(&c_graph, &c_res, c_vids, c_mode, c_loops));
+  IGRAPH_R_CHECK(igraph_similarity_dice(&c_graph, &c_res, c_vids, c_vids, c_mode, c_loops));
 
                                         /* Convert output */
   PROTECT(res=Ry_igraph_matrix_to_SEXP(&c_res));
@@ -11485,7 +11485,7 @@ SEXP R_igraph_similarity_jaccard(SEXP graph, SEXP vids, SEXP mode, SEXP loops) {
   IGRAPH_R_CHECK_BOOL(loops);
   c_loops = LOGICAL(loops)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_similarity_jaccard(&c_graph, &c_res, c_vids, c_mode, c_loops));
+  IGRAPH_R_CHECK(igraph_similarity_jaccard(&c_graph, &c_res, c_vids, c_vids, c_mode, c_loops));
 
                                         /* Convert output */
   PROTECT(res=Ry_igraph_matrix_to_SEXP(&c_res));

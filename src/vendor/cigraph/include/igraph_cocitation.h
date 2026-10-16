@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -43,16 +42,16 @@ IGRAPH_EXPORT igraph_error_t igraph_bibcoupling(const igraph_t *graph, igraph_ma
                                      const igraph_vs_t vids);
 
 IGRAPH_EXPORT igraph_error_t igraph_similarity_jaccard(const igraph_t *graph, igraph_matrix_t *res,
-                                            const igraph_vs_t vids, igraph_neimode_t mode,
-                                            igraph_bool_t loops);
+                                            const igraph_vs_t from, const igraph_vs_t to,
+                                            igraph_neimode_t mode, igraph_bool_t loops);
 IGRAPH_EXPORT igraph_error_t igraph_similarity_jaccard_pairs(const igraph_t *graph, igraph_vector_t *res,
                                                   const igraph_vector_int_t *pairs, igraph_neimode_t mode, igraph_bool_t loops);
 IGRAPH_EXPORT igraph_error_t igraph_similarity_jaccard_es(const igraph_t *graph, igraph_vector_t *res,
                                                const igraph_es_t es, igraph_neimode_t mode, igraph_bool_t loops);
 
 IGRAPH_EXPORT igraph_error_t igraph_similarity_dice(const igraph_t *graph, igraph_matrix_t *res,
-                                         const igraph_vs_t vids, igraph_neimode_t mode,
-                                         igraph_bool_t loops);
+                                         const igraph_vs_t from, const igraph_vs_t to,
+                                         igraph_neimode_t mode, igraph_bool_t loops);
 IGRAPH_EXPORT igraph_error_t igraph_similarity_dice_pairs(const igraph_t *graph, igraph_vector_t *res,
                                                const igraph_vector_int_t *pairs, igraph_neimode_t mode, igraph_bool_t loops);
 IGRAPH_EXPORT igraph_error_t igraph_similarity_dice_es(const igraph_t *graph, igraph_vector_t *res,
