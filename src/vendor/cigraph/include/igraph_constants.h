@@ -41,7 +41,8 @@ typedef enum { IGRAPH_UNDIRECTED = 0, IGRAPH_DIRECTED = 1 } igraph_i_directed_t;
  * IGRAPH_LOOPS_TWICE */
 typedef enum { IGRAPH_NO_LOOPS = 0, IGRAPH_LOOPS = 1, IGRAPH_LOOPS_TWICE = 1, IGRAPH_LOOPS_ONCE = 2 } igraph_loops_t;
 
-typedef enum { IGRAPH_NO_MULTIPLE = 0, IGRAPH_MULTIPLE = 1 } igraph_multiple_t;
+/* These constants are meant to be used for sake of readability */
+enum { IGRAPH_NO_MULTIPLE = 0, IGRAPH_MULTIPLE = 1 };
 
 typedef enum { IGRAPH_ASCENDING = 0, IGRAPH_DESCENDING = 1 } igraph_order_t;
 
