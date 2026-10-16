@@ -17976,30 +17976,30 @@ SEXP R_igraph_eulerian_cycle(SEXP graph) {
 /*-------------------------------------------/
 / igraph_fundamental_cycles                  /
 /-------------------------------------------*/
-SEXP R_igraph_fundamental_cycles(SEXP graph, SEXP start, SEXP bfs_cutoff, SEXP weights) {
+SEXP R_igraph_fundamental_cycles(SEXP graph, SEXP weights, SEXP start, SEXP bfs_cutoff) {
                                         /* Declarations */
   igraph_t c_graph;
+  igraph_vector_t c_weights;
   igraph_vector_int_list_t c_basis;
   igraph_integer_t c_start;
-  igraph_integer_t c_bfs_cutoff;
-  igraph_vector_t c_weights;
+  igraph_real_t c_bfs_cutoff;
   SEXP basis;
 
   SEXP r_result;
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    Rz_SEXP_to_vector(weights, &c_weights);
+  }
   IGRAPH_R_CHECK(igraph_vector_int_list_init(&c_basis, 0));
   IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_basis);
   if (!Rf_isNull(start)) {
     c_start = (igraph_integer_t) REAL(start)[0];
   }
-  IGRAPH_R_CHECK_INT(bfs_cutoff);
-  c_bfs_cutoff = (igraph_integer_t) REAL(bfs_cutoff)[0];
-  if (!Rf_isNull(weights)) {
-    Rz_SEXP_to_vector(weights, &c_weights);
-  }
+  IGRAPH_R_CHECK_REAL(bfs_cutoff);
+  c_bfs_cutoff = REAL(bfs_cutoff)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_fundamental_cycles(&c_graph, &c_basis, (Rf_isNull(start) ? 0 : c_start), c_bfs_cutoff, (Rf_isNull(weights) ? 0 : &c_weights)));
+  IGRAPH_R_CHECK(igraph_fundamental_cycles(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_basis, (Rf_isNull(start) ? 0 : c_start), c_bfs_cutoff));
 
                                         /* Convert output */
   PROTECT(basis=Ry_igraph_vector_int_list_to_SEXPp1(&c_basis));
@@ -18014,32 +18014,32 @@ SEXP R_igraph_fundamental_cycles(SEXP graph, SEXP start, SEXP bfs_cutoff, SEXP w
 /*-------------------------------------------/
 / igraph_minimum_cycle_basis                 /
 /-------------------------------------------*/
-SEXP R_igraph_minimum_cycle_basis(SEXP graph, SEXP bfs_cutoff, SEXP complete, SEXP use_cycle_order, SEXP weights) {
+SEXP R_igraph_minimum_cycle_basis(SEXP graph, SEXP weights, SEXP bfs_cutoff, SEXP complete, SEXP use_cycle_order) {
                                         /* Declarations */
   igraph_t c_graph;
+  igraph_vector_t c_weights;
   igraph_vector_int_list_t c_basis;
-  igraph_integer_t c_bfs_cutoff;
+  igraph_real_t c_bfs_cutoff;
   igraph_bool_t c_complete;
   igraph_bool_t c_use_cycle_order;
-  igraph_vector_t c_weights;
   SEXP basis;
 
   SEXP r_result;
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    Rz_SEXP_to_vector(weights, &c_weights);
+  }
   IGRAPH_R_CHECK(igraph_vector_int_list_init(&c_basis, 0));
   IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_basis);
-  IGRAPH_R_CHECK_INT(bfs_cutoff);
-  c_bfs_cutoff = (igraph_integer_t) REAL(bfs_cutoff)[0];
+  IGRAPH_R_CHECK_REAL(bfs_cutoff);
+  c_bfs_cutoff = REAL(bfs_cutoff)[0];
   IGRAPH_R_CHECK_BOOL(complete);
   c_complete = LOGICAL(complete)[0];
   IGRAPH_R_CHECK_BOOL(use_cycle_order);
   c_use_cycle_order = LOGICAL(use_cycle_order)[0];
-  if (!Rf_isNull(weights)) {
-    Rz_SEXP_to_vector(weights, &c_weights);
-  }
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_minimum_cycle_basis(&c_graph, &c_basis, c_bfs_cutoff, c_complete, c_use_cycle_order, (Rf_isNull(weights) ? 0 : &c_weights)));
+  IGRAPH_R_CHECK(igraph_minimum_cycle_basis(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_basis, c_bfs_cutoff, c_complete, c_use_cycle_order));
 
                                         /* Convert output */
   PROTECT(basis=Ry_igraph_vector_int_list_to_SEXPp1(&c_basis));

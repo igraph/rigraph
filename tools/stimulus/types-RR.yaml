@@ -24,6 +24,8 @@ REAL:
         ELENW: edge_density(graph) / 10
         NEDISTW: 0.2 * (1 - edge_density(graph))
         VCOUNT: vcount
+        # IGRAPH_UNLIMITED: a negative bound means no bound.
+        UNLIMITED: -1
     INCONV:
         IN: '%I% <- as.numeric(%I%)'
 
