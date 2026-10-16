@@ -2024,7 +2024,46 @@ SEXP R_igraph_erdos_renyi_game_gnp(SEXP n, SEXP p, SEXP directed, SEXP loops) {
 /*-------------------------------------------/
 / igraph_erdos_renyi_game_gnm                /
 /-------------------------------------------*/
-SEXP R_igraph_erdos_renyi_game_gnm(SEXP n, SEXP m, SEXP directed, SEXP loops) {
+SEXP R_igraph_erdos_renyi_game_gnm(SEXP n, SEXP m, SEXP directed, SEXP loops, SEXP edge_labeled) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_integer_t c_n;
+  igraph_integer_t c_m;
+  igraph_bool_t c_directed;
+  igraph_edge_type_sw_t c_loops;
+  igraph_bool_t c_edge_labeled;
+  SEXP graph;
+
+  SEXP r_result;
+                                        /* Convert input */
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
+  IGRAPH_R_CHECK_INT(m);
+  c_m = (igraph_integer_t) REAL(m)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(loops);
+  c_loops = LOGICAL(loops)[0] ? IGRAPH_LOOPS_SW : IGRAPH_SIMPLE_SW;
+  IGRAPH_R_CHECK_BOOL(edge_labeled);
+  c_edge_labeled = LOGICAL(edge_labeled)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_erdos_renyi_game_gnm(&c_graph, c_n, c_m, c_directed, c_loops, c_edge_labeled));
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=Ry_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = graph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_iea_game                            /
+/-------------------------------------------*/
+SEXP R_igraph_iea_game(SEXP n, SEXP m, SEXP directed, SEXP loops) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_integer_t c_n;
@@ -2044,7 +2083,7 @@ SEXP R_igraph_erdos_renyi_game_gnm(SEXP n, SEXP m, SEXP directed, SEXP loops) {
   IGRAPH_R_CHECK_BOOL(loops);
   c_loops = LOGICAL(loops)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_erdos_renyi_game_gnm(&c_graph, c_n, c_m, c_directed, c_loops));
+  IGRAPH_R_CHECK(igraph_iea_game(&c_graph, c_n, c_m, c_directed, c_loops));
 
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_graph);

@@ -174,6 +174,15 @@ BOOLEAN:
             PROTECT(%I%=NEW_LOGICAL(1));
             LOGICAL(%I%)[0]=%C%;
 
+EDGE_TYPE_SW_LOOPS:
+    # A logical loops argument for an igraph_edge_type_sw_t parameter,
+    # see types-RR.yaml.
+    CTYPE: igraph_edge_type_sw_t
+    INCONV:
+        IN: |-
+            IGRAPH_R_CHECK_BOOL(%I%);
+            %C% = LOGICAL(%I%)[0] ? IGRAPH_LOOPS_SW : IGRAPH_SIMPLE_SW;
+
 INDEX_VECTOR:
     CALL: '&%C%'
     CTYPE: igraph_vector_int_t

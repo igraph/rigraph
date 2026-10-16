@@ -859,7 +859,7 @@
       erdos_renyi_game_gnm_impl(n = -1, m = 3)
     Condition
       Error in `erdos_renyi_game_gnm_impl()`:
-      ! Invalid number of vertices. Invalid value
+      ! Invalid number of vertices for G(n,m) model. Invalid value
       Source: <file>:<line>
 
 # growing_random_game_impl basic

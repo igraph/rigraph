@@ -27,6 +27,7 @@
 #include "igraph_decls.h"
 #include "igraph_constants.h"
 #include "igraph_datatype.h"
+#include "igraph_graphicality.h"
 #include "igraph_error.h"
 #include "igraph_matrix.h"
 #include "igraph_matrix_list.h"
@@ -51,8 +52,17 @@ IGRAPH_EXPORT igraph_error_t igraph_barabasi_game(igraph_t *graph, igraph_int_t 
                                        const igraph_t *start_from);
 IGRAPH_EXPORT igraph_error_t igraph_erdos_renyi_game_gnp(igraph_t *graph, igraph_int_t n, igraph_real_t p,
                                               igraph_bool_t directed, igraph_bool_t loops);
-IGRAPH_EXPORT igraph_error_t igraph_erdos_renyi_game_gnm(igraph_t *graph, igraph_int_t n, igraph_int_t m,
-                                              igraph_bool_t directed, igraph_bool_t loops);
+IGRAPH_EXPORT igraph_error_t igraph_erdos_renyi_game_gnm(
+        igraph_t *graph,
+        igraph_int_t n, igraph_int_t m,
+        igraph_bool_t directed,
+        igraph_edge_type_sw_t allowed_edge_types,
+        igraph_bool_t edge_labeled);
+
+IGRAPH_EXPERIMENTAL IGRAPH_EXPORT igraph_error_t igraph_iea_game(
+        igraph_t *graph,
+        igraph_int_t n, igraph_int_t m,
+        igraph_bool_t directed, igraph_bool_t loops);
 IGRAPH_EXPORT igraph_error_t igraph_degree_sequence_game(igraph_t *graph, const igraph_vector_int_t *out_deg,
                                               const igraph_vector_int_t *in_deg,
                                               igraph_degseq_t method);
