@@ -37,7 +37,7 @@ igraph_sparse_adjacency:
 
 igraph_sparse_weighted_adjacency:
   # Turning INOUT SPARSEMAT adjmatrix to IN SPARSEMAT adjmatrix
-  PARAMS: OUT GRAPH graph, IN SPARSEMAT adjmatrix, ADJACENCY_MODE mode=DIRECTED, OUT EDGEWEIGHTS weights, LOOPS loops=ONCE
+  PARAMS: OUT GRAPH graph, IN SPARSEMAT adjmatrix, ADJACENCY_MODE mode=DIRECTED, OUT EDGE_WEIGHTS weights, LOOPS loops=ONCE
 
 igraph_delete_vertices_map:
     # Upstream renamed igraph_delete_vertices_idx() and maps a deleted vertex
@@ -257,7 +257,7 @@ igraph_get_widest_path:
     PARAMS: |-
         GRAPH graph,
         OPTIONAL OUT VERTEX_INDICES vertices, OPTIONAL OUT EDGE_INDICES edges,
-        VERTEX from, VERTEX to, EDGEWEIGHTS weights=NULL, NEIMODE mode=OUT
+        VERTEX from, VERTEX to, EDGE_WEIGHTS weights=NULL, NEIMODE mode=OUT
     DEPS: |-
         from ON graph, to ON graph, weights ON graph, vertices ON graph, edges ON graph
 
@@ -265,7 +265,7 @@ igraph_get_widest_paths:
     PARAMS: |-
         GRAPH graph,
         OPTIONAL OUT VERTEXSET_LIST vertices, OPTIONAL OUT EDGESET_LIST edges,
-        VERTEX from, VERTEX_SELECTOR to=ALL, EDGEWEIGHTS weights=NULL,
+        VERTEX from, VERTEX_SELECTOR to=ALL, EDGE_WEIGHTS weights=NULL,
         NEIMODE mode=OUT, OPTIONAL OUT VECTOR_INT parents,
         OPTIONAL OUT VECTOR_INT inbound_edges
     DEPS: |-
@@ -275,13 +275,13 @@ igraph_get_widest_paths:
 igraph_widest_path_widths_dijkstra:
     PARAMS: |-
         GRAPH graph, OUT MATRIX res, VERTEX_SELECTOR from=ALL,
-        VERTEX_SELECTOR to=ALL, EDGEWEIGHTS weights=NULL, NEIMODE mode=OUT
+        VERTEX_SELECTOR to=ALL, EDGE_WEIGHTS weights=NULL, NEIMODE mode=OUT
     DEPS: from ON graph, to ON graph, weights ON graph
 
 igraph_widest_path_widths_floyd_warshall:
     PARAMS: |-
         GRAPH graph, OUT MATRIX res, VERTEX_SELECTOR from=ALL,
-        VERTEX_SELECTOR to=ALL, EDGEWEIGHTS weights=NULL, NEIMODE mode=OUT
+        VERTEX_SELECTOR to=ALL, EDGE_WEIGHTS weights=NULL, NEIMODE mode=OUT
     DEPS: from ON graph, to ON graph, weights ON graph
 
 igraph_spanner:
@@ -349,7 +349,7 @@ igraph_eigenvector_centrality:
     PARAMS: |-
         GRAPH graph, OUT ALL_VERTEX_QTY vector, OUT REAL value,
         NEIMODE_DIRECTED directed=False, DEPRECATED scale=NULL,
-        OPTIONAL EDGEWEIGHTS weights,
+        OPTIONAL EDGE_WEIGHTS weights,
         INOUT ARPACKOPT options=ARPACK_DEFAULTS
 
 igraph_hub_and_authority_scores:
@@ -362,7 +362,7 @@ igraph_hub_and_authority_scores:
     # (krlmlr/igraph@fec442e): the R argument stays, deprecated and without
     # effect.
     PARAMS: GRAPH graph, OUT VERTEX_QTY hub, OUT VERTEX_QTY authority,
-        OUT REAL value, DEPRECATED scale=NULL, OPTIONAL EDGEWEIGHTS weights,
+        OUT REAL value, DEPRECATED scale=NULL, OPTIONAL EDGE_WEIGHTS weights,
         INOUT ARPACKOPT options=ARPACK_DEFAULTS
 
 igraph_is_mutual:
@@ -554,7 +554,7 @@ igraph_layout_fruchterman_reingold:
         GRAPH graph, OPTIONAL INOUT MATRIX coords,
         BOOLEAN use_seed=FALSE, INTEGER niter=500,
         REAL start_temp=sqrt(vcount(graph)),
-        LAYOUT_GRID grid=AUTO, OPTIONAL EDGEWEIGHTS weights,
+        LAYOUT_GRID grid=AUTO, OPTIONAL EDGE_WEIGHTS weights,
         OPTIONAL VECTOR minx, OPTIONAL VECTOR maxx,
         OPTIONAL VECTOR miny, OPTIONAL VECTOR maxy,
         DEPRECATED coolexp=NULL, DEPRECATED maxdelta=NULL, DEPRECATED area=NULL,
@@ -572,7 +572,7 @@ igraph_layout_fruchterman_reingold_3d:
         GRAPH graph, OPTIONAL INOUT MATRIX coords,
         BOOLEAN use_seed=FALSE, INTEGER niter=500,
         REAL start_temp=sqrt(vcount(graph)),
-        OPTIONAL EDGEWEIGHTS weights,
+        OPTIONAL EDGE_WEIGHTS weights,
         OPTIONAL VECTOR minx, OPTIONAL VECTOR maxx,
         OPTIONAL VECTOR miny, OPTIONAL VECTOR maxy,
         OPTIONAL VECTOR minz, OPTIONAL VECTOR maxz,
@@ -625,7 +625,7 @@ igraph_community_leading_eigenvector:
 
 igraph_community_leading_eigenvector_callback_closure:
     PARAMS: |-
-        GRAPH graph, OPTIONAL EDGEWEIGHTS weights,
+        GRAPH graph, OPTIONAL EDGE_WEIGHTS weights,
         OPTIONAL OUT MATRIX_INT merges, OPTIONAL INOUT VECTOR_INT membership,
         INTEGER steps=-1,
         INOUT ARPACKOPT options=ARPACK_DEFAULTS,
@@ -646,7 +646,7 @@ igraph_community_leiden:
     # vertex_in_weights (krlmlr/igraph@971193e): the R name stays, and the
     # in-weights are always NULL, which igraph requires for undirected graphs.
     PARAMS: |-
-        GRAPH graph, OPTIONAL EDGEWEIGHTS weights,
+        GRAPH graph, OPTIONAL EDGE_WEIGHTS weights,
         OPTIONAL VERTEXWEIGHTS vertex_out_weights, NULL vertex_in_weights,
         REAL resolution, REAL beta=0.01, BOOLEAN start=False, INTEGER n_iterations=2,
         OPTIONAL INOUT VECTOR_INT membership,

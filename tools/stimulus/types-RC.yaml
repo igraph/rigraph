@@ -403,7 +403,7 @@ ADJLIST:
     OUTCONV:
         IN: igraph_adjlist_destroy(&%C%);
 
-EDGEWEIGHTS:
+EDGE_WEIGHTS:
     CALL: '&%C%'
     CTYPE: igraph_vector_t
     INCONV:
@@ -419,7 +419,7 @@ EDGEWEIGHTS:
             IGRAPH_FINALLY_CLEAN(1);
 
 EDGE_LENGTHS:
-    # Edge lengths vector - no automatic attribute lookup (unlike EDGEWEIGHTS which checks for "weight" attribute)
+    # Edge lengths vector - no automatic attribute lookup (unlike EDGE_WEIGHTS which checks for "weight" attribute)
     CALL: '&%C%'
     CTYPE: igraph_vector_t
     INCONV:
