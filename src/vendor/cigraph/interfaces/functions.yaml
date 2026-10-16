@@ -1751,7 +1751,7 @@ igraph_community_leading_eigenvector:
         OPTIONAL OUT REAL modularity, BOOLEAN start=False,
         OPTIONAL OUT VECTOR eigenvalues,
         OPTIONAL OUT VECTOR_LIST eigenvectors,
-        OPTIONAL OUT VECTOR history,
+        OPTIONAL OUT VECTOR_INT history,
         OPTIONAL LEVCFUNC callback,
         OPTIONAL EXTRA callback_extra
 

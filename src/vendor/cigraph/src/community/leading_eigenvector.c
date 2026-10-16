@@ -1,7 +1,6 @@
-/* -*- mode: C -*-  */
 /* vim:set ts=4 sw=4 sts=4 et: */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2007-2020 The igraph development team
 
    This program is free software; you can redistribute it and/or modify
@@ -341,7 +340,7 @@ igraph_error_t igraph_community_leading_eigenvector(
         igraph_bool_t start,
         igraph_vector_t *eigenvalues,
         igraph_vector_list_t *eigenvectors,
-        igraph_vector_t *history,
+        igraph_vector_int_t *history,
         igraph_community_leading_eigenvector_callback_t *callback,
         void *callback_extra) {
 
@@ -417,16 +416,16 @@ igraph_error_t igraph_community_leading_eigenvector(
         IGRAPH_CHECK(igraph_connected_components(graph, mymembership, &idx, 0, IGRAPH_WEAK));
         communities = igraph_vector_int_size(&idx);
         if (history) {
-            IGRAPH_CHECK(igraph_vector_push_back(history,
+            IGRAPH_CHECK(igraph_vector_int_push_back(history,
                                                  IGRAPH_LEVC_HIST_START_FULL));
         }
     } else {
         /* Just create the idx vector for the given membership vector */
         communities = igraph_vector_int_max(mymembership) + 1;
         if (history) {
-            IGRAPH_CHECK(igraph_vector_push_back(history,
+            IGRAPH_CHECK(igraph_vector_int_push_back(history,
                                                  IGRAPH_LEVC_HIST_START_GIVEN));
-            IGRAPH_CHECK(igraph_vector_push_back(history, communities));
+            IGRAPH_CHECK(igraph_vector_int_push_back(history, communities));
         }
         IGRAPH_CHECK(igraph_vector_int_resize(&idx, communities));
         igraph_vector_int_null(&idx);
@@ -456,8 +455,8 @@ igraph_error_t igraph_community_leading_eigenvector(
             IGRAPH_CHECK(igraph_vector_list_push_back_new(eigenvectors, NULL));
         }
         if (history) {
-            IGRAPH_CHECK(igraph_vector_push_back(history, IGRAPH_LEVC_HIST_SPLIT));
-            IGRAPH_CHECK(igraph_vector_push_back(history, i - 1));
+            IGRAPH_CHECK(igraph_vector_int_push_back(history, IGRAPH_LEVC_HIST_SPLIT));
+            IGRAPH_CHECK(igraph_vector_int_push_back(history, i - 1));
         }
     }
     staken = communities - 1;
@@ -629,9 +628,9 @@ igraph_error_t igraph_community_leading_eigenvector(
 
         if (storage.d[0] <= 0) {
             if (history) {
-                IGRAPH_CHECK(igraph_vector_push_back(history,
+                IGRAPH_CHECK(igraph_vector_int_push_back(history,
                                                      IGRAPH_LEVC_HIST_FAILED));
-                IGRAPH_CHECK(igraph_vector_push_back(history, comm));
+                IGRAPH_CHECK(igraph_vector_int_push_back(history, comm));
             }
             continue;
         }
@@ -648,9 +647,9 @@ igraph_error_t igraph_community_leading_eigenvector(
         }
         if (l == 0 || l == size) {
             if (history) {
-                IGRAPH_CHECK(igraph_vector_push_back(history,
+                IGRAPH_CHECK(igraph_vector_int_push_back(history,
                                                      IGRAPH_LEVC_HIST_FAILED));
-                IGRAPH_CHECK(igraph_vector_push_back(history, comm));
+                IGRAPH_CHECK(igraph_vector_int_push_back(history, comm));
             }
             continue;
         }
@@ -663,9 +662,9 @@ igraph_error_t igraph_community_leading_eigenvector(
         }
         if (mod <= 1e-8) {
             if (history) {
-                IGRAPH_CHECK(igraph_vector_push_back(history,
+                IGRAPH_CHECK(igraph_vector_int_push_back(history,
                                                      IGRAPH_LEVC_HIST_FAILED));
-                IGRAPH_CHECK(igraph_vector_push_back(history, comm));
+                IGRAPH_CHECK(igraph_vector_int_push_back(history, comm));
             }
             continue;
         }
@@ -684,8 +683,8 @@ igraph_error_t igraph_community_leading_eigenvector(
         IGRAPH_CHECK(igraph_vector_push_back(&mymerges, comm));
         IGRAPH_CHECK(igraph_vector_push_back(&mymerges, communities - 1));
         if (history) {
-            IGRAPH_CHECK(igraph_vector_push_back(history, IGRAPH_LEVC_HIST_SPLIT));
-            IGRAPH_CHECK(igraph_vector_push_back(history, comm));
+            IGRAPH_CHECK(igraph_vector_int_push_back(history, IGRAPH_LEVC_HIST_SPLIT));
+            IGRAPH_CHECK(igraph_vector_int_push_back(history, comm));
         }
 
         /* Store the resulting communities in the queue if needed */
