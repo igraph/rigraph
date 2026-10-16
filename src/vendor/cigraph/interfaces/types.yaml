@@ -576,7 +576,7 @@ ISOMORPHISM_FUNC:
     # isomorphism is found
     CTYPE: igraph_isohandler_t
 
-LEVCFUNC:
+LEVC_FUNC:
     # Callback function for igraph_leading_eigenvector_community(). Called
     # after each eigenvalue / eigenvector calculation.
     CTYPE: igraph_community_leading_eigenvector_callback_t

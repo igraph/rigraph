@@ -1732,7 +1732,7 @@ igraph_community_leading_eigenvector:
         OPTIONAL OUT VECTOR eigenvalues,
         OPTIONAL OUT VECTOR_LIST eigenvectors,
         OPTIONAL OUT VECTOR_INT history,
-        OPTIONAL LEVCFUNC callback,
+        OPTIONAL LEVC_FUNC callback,
         OPTIONAL EXTRA callback_extra
 
 igraph_community_fluid_communities:
