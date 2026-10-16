@@ -1,4 +1,3 @@
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    igraph library.
    Copyright (C) 2007-2020 The igraph development team
@@ -379,7 +378,7 @@ igraph_error_t igraph_community_leading_eigenvector(
 
     if (start && membership &&
         igraph_vector_int_size(membership) != no_of_nodes) {
-        IGRAPH_ERROR("Supplied memberhsip vector length does not match number of vertices.",
+        IGRAPH_ERROR("Supplied membership vector length does not match number of vertices.",
                      IGRAPH_EINVAL);
     }
 
@@ -413,7 +412,7 @@ igraph_error_t igraph_community_leading_eigenvector(
     if (!start) {
         /* Calculate the weakly connected components in the graph and use them as
          * an initial split */
-        IGRAPH_CHECK(igraph_connected_components(graph, mymembership, &idx, 0, IGRAPH_WEAK));
+        IGRAPH_CHECK(igraph_connected_components(graph, mymembership, &idx, NULL, IGRAPH_WEAK));
         communities = igraph_vector_int_size(&idx);
         if (history) {
             IGRAPH_CHECK(igraph_vector_int_push_back(history,
@@ -539,9 +538,11 @@ igraph_error_t igraph_community_leading_eigenvector(
          * convergence in most cases. */
         options->start = 1;
         options->mxiter = options->mxiter > 10000 ? options->mxiter : 10000;  /* use more iterations, we've had convergence problems with 3000 */
+
         for (i = 0; i < options->n; i++) {
             storage.resid[i] = (i % 2 ? 1 : -1) + RNG_UNIF(-0.1, 0.1);
         }
+
         start_vec = igraph_vector_view(storage.resid, options->n);
         igraph_vector_shuffle(&start_vec);
 
@@ -598,8 +599,9 @@ igraph_error_t igraph_community_leading_eigenvector(
         /* ---------------------------------------------------------------*/
 
         if (callback) {
-            const igraph_vector_t vv = igraph_vector_view(storage.v, size);
+            const igraph_vector_t vv = igraph_vector_view(storage.v, size);;
             igraph_error_t ret;
+
             IGRAPH_CHECK_CALLBACK(
                         callback(
                             mymembership, comm, storage.d[0], &vv, arpcb1,
@@ -840,7 +842,7 @@ igraph_error_t igraph_le_community_to_membership(const igraph_matrix_int_t *merg
         }
     }
 
-    IGRAPH_CHECK(igraph_community_to_membership(merges, components, steps, &fake_memb, 0));
+    IGRAPH_CHECK(igraph_community_to_membership(merges, components, steps, &fake_memb, NULL));
 
     /* Ok, now we have the membership of the initial components,
        rewrite the original membership vector. */
