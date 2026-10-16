@@ -1,7 +1,6 @@
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    igraph library.
-   Copyright (C) 2005-2021 The igraph development team
+   Copyright (C) 2005-2025  The igraph development team <igraph@igraph.org>
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -14,10 +13,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-   02110-1301 USA
-
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 #include "igraph_paths.h"
@@ -94,8 +90,8 @@ igraph_error_t igraph_i_validate_distance_weights(
  *    for undirected graphs.
  * \param cutoff The maximal length of paths that will be considered.
  *    When the distance of two vertices is greater than this value,
- *    it will be returned as \c IGRAPH_INFINITY. Negative cutoffs are
- *    treated as infinity.
+ *    it will be returned as \c IGRAPH_INFINITY. Negative cutoffs and
+ *    \ref IGRAPH_UNLIMITED are treated as infinity.
  * \return Error code.
  *
  * Time complexity: at most O(s |E| log|V| + |V|), where |V| is the number of
@@ -316,36 +312,24 @@ igraph_error_t igraph_i_distances_dijkstra_cutoff(const igraph_t *graph,
  * Time complexity: O(s*|E|log|V|+|V|), where |V| is the number of
  * vertices, |E| the number of edges and s the number of sources.
  *
- * \sa \ref igraph_distances() for a (slightly) faster unweighted
- * version or \ref igraph_distances_bellman_ford() for a weighted
+ * \sa \ref igraph_distances() for a non-algorithm-specific interface
+ * or \ref igraph_distances_bellman_ford() for a weighted
  * variant that works in the presence of negative edge weights (but no
  * negative loops)
  *
  * \example examples/simple/distances.c
  */
-igraph_error_t igraph_distances_dijkstra(const igraph_t *graph,
-                                         igraph_matrix_t *res,
-                                         const igraph_vs_t from,
-                                         const igraph_vs_t to,
-                                         const igraph_vector_t *weights,
-                                         igraph_neimode_t mode) {
+igraph_error_t igraph_distances_dijkstra(
+        const igraph_t *graph,
+        igraph_matrix_t *res,
+        const igraph_vs_t from,
+        const igraph_vs_t to,
+        const igraph_vector_t *weights,
+        igraph_neimode_t mode) {
+
     return igraph_distances_dijkstra_cutoff(graph, res, from, to, weights, mode, -1);
 }
 
-/**
- * \function igraph_shortest_paths_dijkstra
- * \brief Weighted shortest path lengths between vertices (deprecated).
- *
- * \deprecated-by igraph_distances_dijkstra 0.10.0
- */
-igraph_error_t igraph_shortest_paths_dijkstra(const igraph_t *graph,
-                                       igraph_matrix_t *res,
-                                       const igraph_vs_t from,
-                                       const igraph_vs_t to,
-                                       const igraph_vector_t *weights,
-                                       igraph_neimode_t mode) {
-    return igraph_distances_dijkstra(graph, res, from, to, weights, mode);
-}
 
 /**
  * \ingroup structural
@@ -419,11 +403,9 @@ igraph_error_t igraph_shortest_paths_dijkstra(const igraph_t *graph,
  * vertices and |E| is the number of edges
  *
  * \sa \ref igraph_distances_dijkstra() if you only need the path lengths but
- * not the paths themselves; \ref igraph_get_shortest_paths() if all edge
- * weights are equal; \ref igraph_get_all_shortest_paths() to find all
- * shortest paths between (source, target) pairs;
- * \ref igraph_get_shortest_paths_bellman_ford() if some edge weights are
- * negative.
+ * not the paths themselves; \ref igraph_get_all_shortest_paths_dijkstra() to
+ * find all shortest paths between (source, target) pairs;
+ * \ref igraph_get_shortest_paths() for a non-algorithm-specific interface.
  *
  * \example examples/simple/igraph_get_shortest_paths_dijkstra.c
  */
@@ -819,9 +801,9 @@ igraph_error_t igraph_get_all_shortest_paths_dijkstra(const igraph_t *graph,
         igraph_int_t from, igraph_vs_t to,
         const igraph_vector_t *weights,
         igraph_neimode_t mode) {
-    /* Implementation details: see igraph_get_shortest_paths_dijkstra,
-       it's basically the same.
-    */
+
+    /* Implementation details: see igraph_get_shortest_paths_dijkstra(),
+     * it's basically the same. */
 
     const igraph_int_t no_of_nodes = igraph_vcount(graph);
     igraph_vit_t vit;
