@@ -275,7 +275,6 @@ __BEGIN_DECLS
  * \enumval IGRAPH_EDRL Internal error in the DrL layout generator; not used
  *   any more (replaced by IGRAPH_EINTERNAL).
  * \enumval IGRAPH_EOVERFLOW Integer or double overflow.
- * \enumval IGRAPH_CPUTIME CPU time exceeded.
  * \enumval IGRAPH_EUNDERFLOW Integer or double underflow.
  * \enumval IGRAPH_ERWSTUCK Random walk got stuck.
  * \enumval IGRAPH_ERANGE Maximum vertex or edge count exceeded.
@@ -318,7 +317,7 @@ typedef enum {
     IGRAPH_EDRL IGRAPH_DEPRECATED_ENUMVAL = 54,
     IGRAPH_EOVERFLOW         = 55,
     /* IGRAPH_EGLP              = 56, */   /* removed in 1.0 */
-    IGRAPH_CPUTIME           = 57,
+    /* IGRAPH_CPUTIME           = 57, */   /* removed in 1.0 */
     IGRAPH_EUNDERFLOW        = 58,
     IGRAPH_ERWSTUCK          = 59,
     IGRAPH_STOP              = 60,

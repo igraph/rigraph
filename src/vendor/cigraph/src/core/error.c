@@ -151,7 +151,7 @@ static const char *igraph_i_error_strings[] = {
     "please report this error along with the steps to reproduce it.",
     /* 55 */ "Integer or double overflow",
     /* 56 */ NULL, // "Internal GPLK error",  /* removed in 1.0 */
-    /* 57 */ "CPU time exceeded",
+    /* 57 */ NULL, // "CPU time exceeded",  /* removed in 1.0 */
     /* 58 */ "Integer or double underflow",
     /* 59 */ "Random walk got stuck",
     /* 60 */ "Search stopped; this error should never be visible to the user, "

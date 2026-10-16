@@ -1353,11 +1353,6 @@ static igraph_error_t igraph_i_lad_solve(igraph_int_t timeLimit, bool firstSol, 
 
     (*nbNodes)++;
 
-    if ( (double)(end - *begin) / CLOCKS_PER_SEC >= timeLimit) {
-        /* CPU time limit exceeded */
-        IGRAPH_ERROR("LAD CPU time exceeded", IGRAPH_CPUTIME);
-    }
-
     /* Allocate memory */
     ALLOC_ARRAY_IN_HISTORY(nbVal, Gp->nbVertices, igraph_int_t, alloc_history);
     ALLOC_ARRAY_IN_HISTORY(globalMatching, Gp->nbVertices, igraph_int_t, alloc_history);
