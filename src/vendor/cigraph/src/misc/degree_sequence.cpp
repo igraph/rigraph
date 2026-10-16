@@ -21,6 +21,7 @@
 
 #include "core/exceptions.h"
 #include "math/safe_intop.h"
+#include "misc/graphicality.h"
 
 #include <vector>
 #include <list>
@@ -28,9 +29,6 @@
 #include <utility>
 #include <stack>
 #include <cassert>
-
-#define IGRAPH_I_MULTI_EDGES_SW 0x02 /* 010, more than one edge allowed between distinct vertices */
-#define IGRAPH_I_MULTI_LOOPS_SW 0x04 /* 100, more than one self-loop allowed on the same vertex   */
 
 /******************************/
 /***** Helper constructs ******/
@@ -944,8 +942,9 @@ static igraph_error_t igraph_i_realize_directed_degree_sequence(
  *    or the out-degree sequence of a directed graph (if \p indeg is given).
  * \param indeg The in-degree sequence of a directed graph. Pass \c NULL to
  *    generate an undirected graph.
- * \param allowed_edge_types The types of edges to allow in the graph. For
- *    directed graphs, only \c IGRAPH_SIMPLE_SW is implemented at this moment.
+ * \param allowed_edge_types The types of edges to allow in the graph. See \ref
+ *    igraph_edge_type_sw_t. For directed graphs, only \c IGRAPH_SIMPLE_SW is
+ *    implemented at this moment.
  *    For undirected graphs, the following values are valid:
  *        \clist
  *          \cli IGRAPH_SIMPLE_SW
@@ -979,7 +978,7 @@ static igraph_error_t igraph_i_realize_directed_degree_sequence(
  *          the \c INDEX method is not equivalent to the \c SMALLEST method above,
  *          as \c SMALLEST uses the smallest \em remaining degree for selecting
  *          vertices, not the smallest \em initial degree.
- *         \endclist
+ *        \endclist
  * \return Error code:
  *          \clist
  *          \cli IGRAPH_UNIMPLEMENTED
