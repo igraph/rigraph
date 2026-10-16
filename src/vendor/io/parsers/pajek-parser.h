@@ -111,7 +111,7 @@ union YYSTYPE
 {
 #line 116 "src/vendor/cigraph/src/io/pajek-parser.y"
 
-  igraph_integer_t intnum;
+  igraph_int_t intnum;
   igraph_real_t    realnum;
   struct {
     char *str;

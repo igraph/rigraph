@@ -52,17 +52,17 @@ static igraph_error_t infomap_partition(FlowGraph &fgraph, bool rcall) {
     // save the original graph
     FlowGraph cpy_fgraph(fgraph);
 
-    igraph_integer_t Nnode = cpy_fgraph.Nnode;
+    igraph_int_t Nnode = cpy_fgraph.Nnode;
     // "real" number of vertex, ie. number of vertex of the graph
 
-    igraph_integer_t iteration = 0;
+    igraph_int_t iteration = 0;
     double outer_oldCodeLength, newCodeLength;
 
-    std::vector<igraph_integer_t> initial_move;
+    std::vector<igraph_int_t> initial_move;
     bool initial_move_done = true;
 
     // re-use vector in loop for better performance
-    std::vector<igraph_integer_t> subMoveTo;
+    std::vector<igraph_int_t> subMoveTo;
 
     do { // Main loop
         outer_oldCodeLength = fgraph.codeLength;
@@ -87,13 +87,13 @@ static igraph_error_t infomap_partition(FlowGraph &fgraph, bool rcall) {
                 subMoveTo.resize(Nnode);
                 // vid_cpy_fgraph  --> new_cluster_id (new partition)
 
-                igraph_integer_t subModIndex = 0;
+                igraph_int_t subModIndex = 0;
 
-                for (igraph_integer_t i = 0 ; i < fgraph.Nnode ; i++) {
+                for (igraph_int_t i = 0 ; i < fgraph.Nnode ; i++) {
                     // partition each non trivial module
                     size_t sub_Nnode = fgraph.node[i].members.size();
                     if (sub_Nnode > 1) { // If the module is not trivial
-                        const std::vector<igraph_integer_t> &sub_members = fgraph.node[i].members;
+                        const std::vector<igraph_int_t> &sub_members = fgraph.node[i].members;
 
                         // extraction of the subgraph
                         FlowGraph sub_fgraph(cpy_fgraph, sub_members);
@@ -103,7 +103,7 @@ static igraph_error_t infomap_partition(FlowGraph &fgraph, bool rcall) {
                         infomap_partition(sub_fgraph, true);
 
                         // Record membership changes
-                        for (igraph_integer_t j = 0; j < sub_fgraph.Nnode; j++) {
+                        for (igraph_int_t j = 0; j < sub_fgraph.Nnode; j++) {
                             for (const auto &v : sub_fgraph.node[j].members) {
                                 subMoveTo[sub_members[v]] = subModIndex;
                             }
@@ -119,7 +119,7 @@ static igraph_error_t infomap_partition(FlowGraph &fgraph, bool rcall) {
             } else {
                 // 1/ Single-node movements : allows each node to move (again)
                 // save current modules
-                for (igraph_integer_t i = 0; i < fgraph.Nnode; i++) { // for each module
+                for (igraph_int_t i = 0; i < fgraph.Nnode; i++) { // for each module
                     for (const auto &v : fgraph.node[i].members) { // for each vertex (of the module)
                         initial_move[v] = i;
                     }
@@ -242,14 +242,14 @@ static igraph_error_t infomap_partition(FlowGraph &fgraph, bool rcall) {
 igraph_error_t igraph_community_infomap(const igraph_t * graph,
                              const igraph_vector_t *e_weights,
                              const igraph_vector_t *v_weights,
-                             igraph_integer_t nb_trials,
+                             igraph_int_t nb_trials,
                              igraph_vector_int_t *membership,
                              igraph_real_t *codelength) {
 
     IGRAPH_HANDLE_EXCEPTIONS_BEGIN;
 
     if (e_weights) {
-        const igraph_integer_t ecount = igraph_ecount(graph);
+        const igraph_int_t ecount = igraph_ecount(graph);
         if (igraph_vector_size(e_weights) != ecount) {
             IGRAPH_ERROR("Invalid edge weight vector length.", IGRAPH_EINVAL);
         }
@@ -266,7 +266,7 @@ igraph_error_t igraph_community_infomap(const igraph_t * graph,
     }
 
     if (v_weights) {
-        const igraph_integer_t vcount = igraph_vcount(graph);
+        const igraph_int_t vcount = igraph_vcount(graph);
         if (igraph_vector_size(v_weights) != vcount) {
             IGRAPH_ERROR("Invalid vertex weight vector length.", IGRAPH_EINVAL);
         }
@@ -290,10 +290,10 @@ igraph_error_t igraph_community_infomap(const igraph_t * graph,
     double shortestCodeLength = 1000.0;
 
     // create membership vector
-    igraph_integer_t Nnode = fgraph.Nnode;
+    igraph_int_t Nnode = fgraph.Nnode;
     IGRAPH_CHECK(igraph_vector_int_resize(membership, Nnode));
 
-    for (igraph_integer_t trial = 0; trial < nb_trials; trial++) {
+    for (igraph_int_t trial = 0; trial < nb_trials; trial++) {
         FlowGraph cpy_fgraph(fgraph);
 
         //partition the network
@@ -303,7 +303,7 @@ igraph_error_t igraph_community_infomap(const igraph_t * graph,
         if (cpy_fgraph.codeLength < shortestCodeLength) {
             shortestCodeLength = cpy_fgraph.codeLength;
             // ... store the partition
-            for (igraph_integer_t i = 0 ; i < cpy_fgraph.Nnode ; i++) {
+            for (igraph_int_t i = 0 ; i < cpy_fgraph.Nnode ; i++) {
                 size_t Nmembers = cpy_fgraph.node[i].members.size();
                 for (size_t k = 0; k < Nmembers; k++) {
                     //cluster[ cpy_fgraph->node[i].members[k] ] = i;

@@ -32,15 +32,15 @@
 struct Node {
 
     Node() = default;
-    Node(igraph_integer_t modulenr, double tpweight) :
+    Node(igraph_int_t modulenr, double tpweight) :
         teleportWeight(tpweight)
     {
         members.push_back(modulenr); // members = [nodenr]
     }
 
-    std::vector<igraph_integer_t> members;
-    std::vector< std::pair<igraph_integer_t, double> > inLinks;
-    std::vector< std::pair<igraph_integer_t, double> > outLinks;
+    std::vector<igraph_int_t> members;
+    std::vector< std::pair<igraph_int_t, double> > inLinks;
+    std::vector< std::pair<igraph_int_t, double> > outLinks;
     double selfLink = 0.0;
 
     double teleportWeight = 0.0;

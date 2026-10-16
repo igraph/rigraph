@@ -68,7 +68,7 @@
  * Time complexity: O(\p len).
  */
 
-igraph_error_t igraph_strvector_init(igraph_strvector_t *sv, igraph_integer_t size) {
+igraph_error_t igraph_strvector_init(igraph_strvector_t *sv, igraph_int_t size) {
 
     sv->stor_begin = IGRAPH_CALLOC(size, char*);
     IGRAPH_CHECK_OOM(sv->stor_begin, "Cannot initialize string vector.");
@@ -115,7 +115,7 @@ void igraph_strvector_destroy(igraph_strvector_t *sv) {
  * Time complexity: O(1).
  */
 
-const char *igraph_strvector_get(const igraph_strvector_t *sv, igraph_integer_t idx) {
+const char *igraph_strvector_get(const igraph_strvector_t *sv, igraph_int_t idx) {
     IGRAPH_ASSERT(sv != NULL);
     IGRAPH_ASSERT(sv->stor_begin != NULL);
     return sv->stor_begin[idx] ? sv->stor_begin[idx] : "";
@@ -138,7 +138,7 @@ const char *igraph_strvector_get(const igraph_strvector_t *sv, igraph_integer_t 
  * depending on the memory management, if reallocation is needed.
  */
 
-igraph_error_t igraph_strvector_set(igraph_strvector_t *sv, igraph_integer_t idx,
+igraph_error_t igraph_strvector_set(igraph_strvector_t *sv, igraph_int_t idx,
                          const char *value) {
     return igraph_strvector_set_len(sv, idx, value, strlen(value));
 }
@@ -160,7 +160,7 @@ igraph_error_t igraph_strvector_set(igraph_strvector_t *sv, igraph_integer_t idx
  * Time complexity: O(l), the length of the new string. Maybe more,
  * depending on the memory management, if reallocation is needed.
  */
-igraph_error_t igraph_strvector_set_len(igraph_strvector_t *sv, igraph_integer_t idx,
+igraph_error_t igraph_strvector_set_len(igraph_strvector_t *sv, igraph_int_t idx,
                           const char *value, size_t len) {
     IGRAPH_ASSERT(sv != NULL);
     IGRAPH_ASSERT(sv->stor_begin != NULL);
@@ -193,9 +193,9 @@ igraph_error_t igraph_strvector_set_len(igraph_strvector_t *sv, igraph_integer_t
  */
 
 void igraph_strvector_remove_section(
-        igraph_strvector_t *sv, igraph_integer_t from, igraph_integer_t to) {
-    igraph_integer_t size = igraph_strvector_size(sv);
-    igraph_integer_t i;
+        igraph_strvector_t *sv, igraph_int_t from, igraph_int_t to) {
+    igraph_int_t size = igraph_strvector_size(sv);
+    igraph_int_t i;
 
     if (from < 0) {
         from = 0;
@@ -228,7 +228,7 @@ void igraph_strvector_remove_section(
  * Time complexity: O(n), the length of the string.
  */
 
-void igraph_strvector_remove(igraph_strvector_t *sv, igraph_integer_t elem) {
+void igraph_strvector_remove(igraph_strvector_t *sv, igraph_int_t elem) {
     igraph_strvector_remove_section(sv, elem, elem + 1);
 }
 
@@ -248,12 +248,12 @@ void igraph_strvector_remove(igraph_strvector_t *sv, igraph_integer_t elem) {
 
 igraph_error_t igraph_strvector_init_copy(igraph_strvector_t *to,
                                           const igraph_strvector_t *from) {
-    igraph_integer_t from_size = igraph_strvector_size(from);
+    igraph_int_t from_size = igraph_strvector_size(from);
 
     to->stor_begin = IGRAPH_CALLOC(from_size, char*);
     IGRAPH_CHECK_OOM(to->stor_begin, "Cannot copy string vector.");
 
-    for (igraph_integer_t i = 0; i < from_size; i++) {
+    for (igraph_int_t i = 0; i < from_size; i++) {
         /* If the string in the 'from' vector is empty, we represent it as NULL.
          * The NULL value was already set by IGRAPH_CALLOC(). */
         if (from->stor_begin[i] == NULL || from->stor_begin[i][0] == '\0') {
@@ -262,7 +262,7 @@ igraph_error_t igraph_strvector_init_copy(igraph_strvector_t *to,
         to->stor_begin[i] = strdup(from->stor_begin[i]);
         if (to->stor_begin[i] == NULL) {
             /* LCOV_EXCL_START */
-            for (igraph_integer_t j = 0; j < i; j++) {
+            for (igraph_int_t j = 0; j < i; j++) {
                 IGRAPH_FREE(to->stor_begin[j]);
             }
             IGRAPH_FREE(to->stor_begin);
@@ -311,15 +311,15 @@ igraph_error_t igraph_strvector_copy(igraph_strvector_t *to,
 
 igraph_error_t igraph_strvector_append(igraph_strvector_t *to,
                             const igraph_strvector_t *from) {
-    igraph_integer_t len1 = igraph_strvector_size(to), len2 = igraph_strvector_size(from);
-    igraph_integer_t newlen;
+    igraph_int_t len1 = igraph_strvector_size(to), len2 = igraph_strvector_size(from);
+    igraph_int_t newlen;
     igraph_bool_t error = false;
     char *tmp;
 
     IGRAPH_SAFE_ADD(len1, len2, &newlen);
     IGRAPH_CHECK(igraph_strvector_reserve(to, newlen));
 
-    for (igraph_integer_t i = 0; i < len2; i++) {
+    for (igraph_int_t i = 0; i < len2; i++) {
         if (from->stor_begin[i] == NULL || from->stor_begin[i][0] == '\0') {
             /* Represent empty strings as NULL. */
             tmp = NULL;
@@ -363,7 +363,7 @@ igraph_error_t igraph_strvector_append(igraph_strvector_t *to,
  */
 igraph_error_t igraph_strvector_merge(igraph_strvector_t *to, igraph_strvector_t *from) {
     char **p1, **p2, **pe;
-    igraph_integer_t newlen;
+    igraph_int_t newlen;
 
     IGRAPH_SAFE_ADD(igraph_strvector_size(to), igraph_strvector_size(from), &newlen);
     IGRAPH_CHECK(igraph_strvector_reserve(to, newlen));
@@ -395,9 +395,9 @@ igraph_error_t igraph_strvector_merge(igraph_strvector_t *to, igraph_strvector_t
  */
 
 void igraph_strvector_clear(igraph_strvector_t *sv) {
-    igraph_integer_t n = igraph_strvector_size(sv);
+    igraph_int_t n = igraph_strvector_size(sv);
 
-    for (igraph_integer_t i = 0; i < n; i++) {
+    for (igraph_int_t i = 0; i < n; i++) {
         IGRAPH_FREE(sv->stor_begin[i]);
     }
     sv->end = sv->stor_begin;
@@ -420,12 +420,12 @@ void igraph_strvector_clear(igraph_strvector_t *sv) {
  * smaller, maybe less, depending on memory management.
  */
 
-igraph_error_t igraph_strvector_resize(igraph_strvector_t *sv, igraph_integer_t newsize) {
-    igraph_integer_t toadd = newsize - igraph_strvector_size(sv);
-    igraph_integer_t oldsize = igraph_strvector_size(sv);
+igraph_error_t igraph_strvector_resize(igraph_strvector_t *sv, igraph_int_t newsize) {
+    igraph_int_t toadd = newsize - igraph_strvector_size(sv);
+    igraph_int_t oldsize = igraph_strvector_size(sv);
 
     if (newsize < oldsize) {
-        for (igraph_integer_t i = newsize; i < oldsize; i++) {
+        for (igraph_int_t i = newsize; i < oldsize; i++) {
             IGRAPH_FREE(sv->stor_begin[i]);
         }
         sv->end = sv->stor_begin + newsize;
@@ -449,7 +449,7 @@ igraph_error_t igraph_strvector_resize(igraph_strvector_t *sv, igraph_integer_t 
  * Time complexity: O(1).
  */
 
-igraph_integer_t igraph_strvector_capacity(const igraph_strvector_t *sv) {
+igraph_int_t igraph_strvector_capacity(const igraph_strvector_t *sv) {
     IGRAPH_ASSERT(sv != NULL);
     IGRAPH_ASSERT(sv->stor_begin != NULL);
     return sv->stor_end - sv->stor_begin;
@@ -482,8 +482,8 @@ igraph_integer_t igraph_strvector_capacity(const igraph_strvector_t *sv) {
  * O(n), n is the new allocated size of the vector.
  */
 
-igraph_error_t igraph_strvector_reserve(igraph_strvector_t *sv, igraph_integer_t capacity) {
-    igraph_integer_t current_capacity = igraph_strvector_capacity(sv);
+igraph_error_t igraph_strvector_reserve(igraph_strvector_t *sv, igraph_int_t capacity) {
+    igraph_int_t current_capacity = igraph_strvector_capacity(sv);
     char **tmp;
 
     if (capacity <= current_capacity) {
@@ -516,7 +516,7 @@ igraph_error_t igraph_strvector_reserve(igraph_strvector_t *sv, igraph_integer_t
  */
 
 void igraph_strvector_resize_min(igraph_strvector_t *sv) {
-    igraph_integer_t size;
+    igraph_int_t size;
     char **tmp;
     if (sv->stor_end == sv->end) {
         return;
@@ -542,7 +542,7 @@ void igraph_strvector_resize_min(igraph_strvector_t *sv) {
  * Time complexity: O(1).
  */
 
-igraph_integer_t igraph_strvector_size(const igraph_strvector_t *sv) {
+igraph_int_t igraph_strvector_size(const igraph_strvector_t *sv) {
     IGRAPH_ASSERT(sv != NULL);
     IGRAPH_ASSERT(sv->stor_begin != NULL);
     return sv->end - sv->stor_begin;
@@ -557,8 +557,8 @@ static igraph_error_t igraph_i_strvector_expand_if_full(igraph_strvector_t *sv) 
     IGRAPH_ASSERT(sv->stor_begin != NULL);
 
     if (sv->stor_end == sv->end) {
-        igraph_integer_t old_size = igraph_strvector_size(sv);
-        igraph_integer_t new_size = old_size < IGRAPH_INTEGER_MAX/2 ? old_size * 2 : IGRAPH_INTEGER_MAX;
+        igraph_int_t old_size = igraph_strvector_size(sv);
+        igraph_int_t new_size = old_size < IGRAPH_INTEGER_MAX/2 ? old_size * 2 : IGRAPH_INTEGER_MAX;
         if (old_size == IGRAPH_INTEGER_MAX) {
             IGRAPH_ERROR("Cannot add new item to string vector, already at maximum size.", IGRAPH_EOVERFLOW);
         }
@@ -610,7 +610,7 @@ igraph_error_t igraph_strvector_push_back(igraph_strvector_t *sv, const char *va
 
 igraph_error_t igraph_strvector_push_back_len(
         igraph_strvector_t *sv,
-        const char *value, igraph_integer_t len) {
+        const char *value, igraph_int_t len) {
 
     IGRAPH_CHECK(igraph_i_strvector_expand_if_full(sv));
     char *tmp = strndup(value, len);
@@ -644,7 +644,7 @@ igraph_error_t igraph_strvector_add(igraph_strvector_t *sv, const char *value) {
  */
 
 igraph_error_t igraph_strvector_set2(
-    igraph_strvector_t *sv, igraph_integer_t idx, const char *value, size_t len
+    igraph_strvector_t *sv, igraph_int_t idx, const char *value, size_t len
 ) {
     return igraph_strvector_set_len(sv, idx, value, len);
 }
@@ -662,11 +662,11 @@ igraph_error_t igraph_strvector_set2(
 igraph_error_t igraph_strvector_print(const igraph_strvector_t *sv, FILE *file,
                            const char *sep) {
 
-    igraph_integer_t n = igraph_strvector_size(sv);
+    igraph_int_t n = igraph_strvector_size(sv);
     if (n != 0) {
         fprintf(file, "%s", igraph_strvector_get(sv, 0));
     }
-    for (igraph_integer_t i = 1; i < n; i++) {
+    for (igraph_int_t i = 1; i < n; i++) {
         fprintf(file, "%s%s", sep, igraph_strvector_get(sv, i));
     }
     return IGRAPH_SUCCESS;
@@ -686,11 +686,11 @@ igraph_error_t igraph_strvector_index(const igraph_strvector_t *sv,
                            igraph_strvector_t *newv,
                            const igraph_vector_int_t *idx) {
 
-    igraph_integer_t newlen = igraph_vector_int_size(idx);
+    igraph_int_t newlen = igraph_vector_int_size(idx);
     IGRAPH_CHECK(igraph_strvector_resize(newv, newlen));
 
-    for (igraph_integer_t i = 0; i < newlen; i++) {
-        igraph_integer_t j = VECTOR(*idx)[i];
+    for (igraph_int_t i = 0; i < newlen; i++) {
+        igraph_int_t j = VECTOR(*idx)[i];
         const char *str = igraph_strvector_get(sv, j);
         IGRAPH_CHECK(igraph_strvector_set(newv, i, str));
     }
@@ -710,7 +710,7 @@ igraph_error_t igraph_strvector_index(const igraph_strvector_t *sv,
  *
  * Time complexity: O(1).
  */
-void igraph_strvector_swap_elements(igraph_strvector_t *sv, igraph_integer_t i, igraph_integer_t j) {
+void igraph_strvector_swap_elements(igraph_strvector_t *sv, igraph_int_t i, igraph_int_t j) {
     char *tmp = sv->stor_begin[i];
     sv->stor_begin[i] = sv->stor_begin[j];
     sv->stor_begin[j] = tmp;

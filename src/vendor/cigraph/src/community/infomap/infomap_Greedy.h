@@ -37,7 +37,7 @@ public:
     explicit Greedy(FlowGraph *fgraph);
     // initialise les attributs par rapport au graph
 
-    void setMove(const std::vector<igraph_integer_t> &moveTo);
+    void setMove(const std::vector<igraph_int_t> &moveTo);
     bool optimize();
     void apply(bool sort);
 
@@ -48,7 +48,7 @@ public:
 
 private:
     FlowGraph * graph;
-    igraph_integer_t Nnode;
+    igraph_int_t Nnode;
 
     double exit;
     double exitFlow;
@@ -59,10 +59,10 @@ private:
     double alpha, beta;
     // local copy of fgraph alpha, beta (=alpha -  Nnode = graph->Nnode;1)
 
-    std::vector<igraph_integer_t> node_index;  // module number of each node
+    std::vector<igraph_int_t> node_index;  // module number of each node
 
-    igraph_integer_t Nempty = 0;
-    std::vector<igraph_integer_t> mod_empty;
+    igraph_int_t Nempty = 0;
+    std::vector<igraph_int_t> mod_empty;
 
     std::vector<double> mod_exit;  // version tmp de node
     std::vector<double> mod_size;

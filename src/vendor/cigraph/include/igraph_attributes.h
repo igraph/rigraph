@@ -314,7 +314,7 @@ typedef struct igraph_attribute_table_t {
     void           (*destroy)(igraph_t *graph);
     igraph_error_t (*copy)(igraph_t *to, const igraph_t *from, igraph_bool_t ga,
                            igraph_bool_t va, igraph_bool_t ea);
-    igraph_error_t (*add_vertices)(igraph_t *graph, igraph_integer_t nv, igraph_vector_ptr_t *attr);
+    igraph_error_t (*add_vertices)(igraph_t *graph, igraph_int_t nv, igraph_vector_ptr_t *attr);
     igraph_error_t (*permute_vertices)(const igraph_t *graph,
                                        igraph_t *newgraph,
                                        const igraph_vector_int_t *idx);
@@ -377,17 +377,17 @@ IGRAPH_EXPORT igraph_real_t igraph_cattribute_GAN(const igraph_t *graph, const c
 IGRAPH_EXPORT igraph_bool_t igraph_cattribute_GAB(const igraph_t *graph, const char *name);
 IGRAPH_EXPORT const char* igraph_cattribute_GAS(const igraph_t *graph, const char *name);
 IGRAPH_EXPORT igraph_real_t igraph_cattribute_VAN(const igraph_t *graph, const char *name,
-                                                  igraph_integer_t vid);
+                                                  igraph_int_t vid);
 IGRAPH_EXPORT igraph_bool_t igraph_cattribute_VAB(const igraph_t *graph, const char *name,
-                                                  igraph_integer_t vid);
+                                                  igraph_int_t vid);
 IGRAPH_EXPORT const char* igraph_cattribute_VAS(const igraph_t *graph, const char *name,
-                                                igraph_integer_t vid);
+                                                igraph_int_t vid);
 IGRAPH_EXPORT igraph_real_t igraph_cattribute_EAN(const igraph_t *graph, const char *name,
-                                                  igraph_integer_t eid);
+                                                  igraph_int_t eid);
 IGRAPH_EXPORT igraph_bool_t igraph_cattribute_EAB(const igraph_t *graph, const char *name,
-                                                  igraph_integer_t eid);
+                                                  igraph_int_t eid);
 IGRAPH_EXPORT const char* igraph_cattribute_EAS(const igraph_t *graph, const char *name,
-                                                igraph_integer_t eid);
+                                                igraph_int_t eid);
 
 IGRAPH_EXPORT igraph_error_t igraph_cattribute_VANV(const igraph_t *graph, const char *name,
                                          igraph_vs_t vids, igraph_vector_t *result);
@@ -417,17 +417,17 @@ IGRAPH_EXPORT igraph_error_t igraph_cattribute_GAB_set(igraph_t *graph, const ch
 IGRAPH_EXPORT igraph_error_t igraph_cattribute_GAS_set(igraph_t *graph, const char *name,
                                             const char *value);
 IGRAPH_EXPORT igraph_error_t igraph_cattribute_VAN_set(igraph_t *graph, const char *name,
-                                            igraph_integer_t vid, igraph_real_t value);
+                                            igraph_int_t vid, igraph_real_t value);
 IGRAPH_EXPORT igraph_error_t igraph_cattribute_VAB_set(igraph_t *graph, const char *name,
-                                            igraph_integer_t vid, igraph_bool_t value);
+                                            igraph_int_t vid, igraph_bool_t value);
 IGRAPH_EXPORT igraph_error_t igraph_cattribute_VAS_set(igraph_t *graph, const char *name,
-                                            igraph_integer_t vid, const char *value);
+                                            igraph_int_t vid, const char *value);
 IGRAPH_EXPORT igraph_error_t igraph_cattribute_EAN_set(igraph_t *graph, const char *name,
-                                            igraph_integer_t eid, igraph_real_t value);
+                                            igraph_int_t eid, igraph_real_t value);
 IGRAPH_EXPORT igraph_error_t igraph_cattribute_EAB_set(igraph_t *graph, const char *name,
-                                            igraph_integer_t eid, igraph_bool_t value);
+                                            igraph_int_t eid, igraph_bool_t value);
 IGRAPH_EXPORT igraph_error_t igraph_cattribute_EAS_set(igraph_t *graph, const char *name,
-                                            igraph_integer_t eid, const char *value);
+                                            igraph_int_t eid, const char *value);
 
 IGRAPH_EXPORT igraph_error_t igraph_cattribute_VAN_setv(igraph_t *graph, const char *name,
                                              const igraph_vector_t *v);

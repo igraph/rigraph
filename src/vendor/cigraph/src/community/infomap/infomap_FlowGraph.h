@@ -41,13 +41,13 @@ inline double plogp(double x) {
 
 class FlowGraph {
 private:
-    void init(igraph_integer_t n, const igraph_vector_t *nodeWeights);
+    void init(igraph_int_t n, const igraph_vector_t *nodeWeights);
 
 public:
-    explicit FlowGraph(igraph_integer_t n);
+    explicit FlowGraph(igraph_int_t n);
 
     FlowGraph(const FlowGraph &fgraph);
-    FlowGraph(const FlowGraph &fgraph, const std::vector<igraph_integer_t> &sub_members);
+    FlowGraph(const FlowGraph &fgraph, const std::vector<igraph_int_t> &sub_members);
 
     FlowGraph(const igraph_t *graph, const igraph_vector_t *e_weights,
               const igraph_vector_t *v_weights);
@@ -62,12 +62,12 @@ public:
 
     /*************************************************************************/
     std::vector<Node> node;
-    igraph_integer_t Nnode;
+    igraph_int_t Nnode;
 
     double alpha, beta;
 
-    igraph_integer_t Ndanglings;
-    std::vector<igraph_integer_t> danglings; // id of dangling nodes
+    igraph_int_t Ndanglings;
+    std::vector<igraph_int_t> danglings; // id of dangling nodes
 
     double exit;                  //
     double exitFlow;              //

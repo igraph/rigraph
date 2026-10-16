@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2013  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -33,7 +32,7 @@
 __BEGIN_DECLS
 
 IGRAPH_EXPORT igraph_error_t igraph_adjacency_spectral_embedding(const igraph_t *graph,
-                                                      igraph_integer_t no,
+                                                      igraph_int_t no,
                                                       const igraph_vector_t *weights,
                                                       igraph_eigen_which_position_t which,
                                                       igraph_bool_t scaled,
@@ -51,7 +50,7 @@ typedef enum {
 } igraph_laplacian_spectral_embedding_type_t;
 
 IGRAPH_EXPORT igraph_error_t igraph_laplacian_spectral_embedding(const igraph_t *graph,
-                                                      igraph_integer_t no,
+                                                      igraph_int_t no,
                                                       const igraph_vector_t *weights,
                                                       igraph_eigen_which_position_t which,
                                                       igraph_laplacian_spectral_embedding_type_t type,
@@ -61,7 +60,7 @@ IGRAPH_EXPORT igraph_error_t igraph_laplacian_spectral_embedding(const igraph_t 
                                                       igraph_vector_t *D,
                                                       igraph_arpack_options_t *options);
 
-IGRAPH_EXPORT igraph_error_t igraph_dim_select(const igraph_vector_t *sv, igraph_integer_t *dim);
+IGRAPH_EXPORT igraph_error_t igraph_dim_select(const igraph_vector_t *sv, igraph_int_t *dim);
 
 __END_DECLS
 

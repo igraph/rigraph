@@ -117,10 +117,10 @@ igraph_error_t igraph_community_label_propagation(const igraph_t *graph,
                                        const igraph_vector_t *weights,
                                        const igraph_vector_int_t *initial,
                                        const igraph_vector_bool_t *fixed) {
-    igraph_integer_t no_of_nodes = igraph_vcount(graph);
-    igraph_integer_t no_of_edges = igraph_ecount(graph);
-    igraph_integer_t no_of_not_fixed_nodes = no_of_nodes;
-    igraph_integer_t i, j, k;
+    igraph_int_t no_of_nodes = igraph_vcount(graph);
+    igraph_int_t no_of_edges = igraph_ecount(graph);
+    igraph_int_t no_of_not_fixed_nodes = no_of_nodes;
+    igraph_int_t i, j, k;
     igraph_adjlist_t al;
     igraph_inclist_t il;
     igraph_bool_t running, control_iteration;
@@ -257,7 +257,7 @@ igraph_error_t igraph_community_label_propagation(const igraph_t *graph,
     control_iteration = true;
     running = true;
     while (running) {
-        igraph_integer_t v1, num_neis;
+        igraph_int_t v1, num_neis;
         igraph_real_t max_count;
         igraph_vector_int_t *neis;
         igraph_vector_int_t *ineis;
@@ -377,7 +377,7 @@ igraph_error_t igraph_community_label_propagation(const igraph_t *graph,
                 k = j;
                 j++;
             } else {
-                k = (igraph_integer_t) VECTOR(label_counters)[k];
+                k = (igraph_int_t) VECTOR(label_counters)[k];
             }
         } else {
             /* This is an unlabeled vertex */
@@ -411,7 +411,7 @@ igraph_error_t igraph_community_label_propagation(const igraph_t *graph,
         IGRAPH_FINALLY(igraph_dqueue_int_destroy, &q);
 
         for (i=0; i < no_of_not_fixed_nodes; ++i) {
-            igraph_integer_t v = VECTOR(node_order)[i];
+            igraph_int_t v = VECTOR(node_order)[i];
 
             /* Is this node unlabelled? */
             if (IS_UNLABELLED(v)) {
@@ -420,14 +420,14 @@ igraph_error_t igraph_community_label_propagation(const igraph_t *graph,
                 igraph_dqueue_int_push(&q, v);
                 VECTOR(*membership)[v] = j;
                 while (!igraph_dqueue_int_empty(&q)) {
-                    igraph_integer_t ni, num_neis;
-                    igraph_integer_t actnode = igraph_dqueue_int_pop(&q);
+                    igraph_int_t ni, num_neis;
+                    igraph_int_t actnode = igraph_dqueue_int_pop(&q);
 
                     IGRAPH_CHECK(igraph_neighbors(graph, &neis, actnode, mode));
                     num_neis = igraph_vector_int_size(&neis);
 
                     for (ni = 0; ni < num_neis; ++ni) {
-                        igraph_integer_t neighbor = VECTOR(neis)[ni];
+                        igraph_int_t neighbor = VECTOR(neis)[ni];
                         if (IS_UNLABELLED(neighbor)) {
                             VECTOR(*membership)[neighbor] = j;
                             IGRAPH_CHECK(igraph_dqueue_int_push(&q, neighbor));

@@ -108,11 +108,11 @@
  *
  * Time complexity: O(|V| + |E| log |E|).
  */
-igraph_error_t igraph_static_fitness_game(igraph_t *graph, igraph_integer_t no_of_edges,
+igraph_error_t igraph_static_fitness_game(igraph_t *graph, igraph_int_t no_of_edges,
                                const igraph_vector_t *fitness_out, const igraph_vector_t *fitness_in,
                                igraph_bool_t loops, igraph_bool_t multiple) {
 
-    const igraph_integer_t no_of_nodes = igraph_vector_size(fitness_out);
+    const igraph_int_t no_of_nodes = igraph_vector_size(fitness_out);
     const igraph_bool_t directed = (fitness_in != NULL);
     igraph_vector_int_t edges;
     igraph_vector_t cum_fitness_in, cum_fitness_out;
@@ -120,7 +120,7 @@ igraph_error_t igraph_static_fitness_game(igraph_t *graph, igraph_integer_t no_o
     igraph_real_t x, max_in, max_out;
     igraph_real_t max_no_of_edges;
     igraph_real_t num_steps;
-    igraph_integer_t from, to, pos;
+    igraph_int_t from, to, pos;
     int iter = 0;
 
     IGRAPH_ASSERT(fitness_out != NULL);
@@ -148,11 +148,11 @@ igraph_error_t igraph_static_fitness_game(igraph_t *graph, igraph_integer_t no_o
 
     /* Avoid getting into an infinite loop when too many edges are requested. */
     {
-        igraph_integer_t nodes;
+        igraph_int_t nodes;
         if (directed) {
-            igraph_integer_t outnodes, innodes;
+            igraph_int_t outnodes, innodes;
             outnodes = innodes = nodes = 0;
-            for (igraph_integer_t i = 0; i < no_of_nodes; i++) {
+            for (igraph_int_t i = 0; i < no_of_nodes; i++) {
                 if (VECTOR(*fitness_out)[i] != 0) {
                     outnodes++;
                 }
@@ -166,7 +166,7 @@ igraph_error_t igraph_static_fitness_game(igraph_t *graph, igraph_integer_t no_o
             max_no_of_edges = ((igraph_real_t) outnodes) * innodes - (loops ? 0 : nodes);
         } else {
             nodes = 0;
-            for (igraph_integer_t i = 0; i < no_of_nodes; i++) {
+            for (igraph_int_t i = 0; i < no_of_nodes; i++) {
                 if (VECTOR(*fitness_out)[i] != 0) {
                     nodes++;
                 }
@@ -385,7 +385,7 @@ igraph_error_t igraph_static_fitness_game(igraph_t *graph, igraph_integer_t no_o
  * Time complexity: O(|V| + |E| log |E|).
  */
 igraph_error_t igraph_static_power_law_game(igraph_t *graph,
-                                 igraph_integer_t no_of_nodes, igraph_integer_t no_of_edges,
+                                 igraph_int_t no_of_nodes, igraph_int_t no_of_edges,
                                  igraph_real_t exponent_out, igraph_real_t exponent_in,
                                  igraph_bool_t loops, igraph_bool_t multiple,
                                  igraph_bool_t finite_size_correction) {
@@ -418,7 +418,7 @@ igraph_error_t igraph_static_power_law_game(igraph_t *graph,
     if (j < no_of_nodes) {
         j = no_of_nodes;
     }
-    for (igraph_integer_t i = 0; i < no_of_nodes; i++, j--) {
+    for (igraph_int_t i = 0; i < no_of_nodes; i++, j--) {
         VECTOR(fitness_out)[i] = pow(j, alpha_out);
     }
 
@@ -442,7 +442,7 @@ igraph_error_t igraph_static_power_law_game(igraph_t *graph,
         if (j < no_of_nodes) {
             j = no_of_nodes;
         }
-        for (igraph_integer_t i = 0; i < no_of_nodes; i++, j--) {
+        for (igraph_int_t i = 0; i < no_of_nodes; i++, j--) {
             VECTOR(fitness_in)[i] = pow(j, alpha_in);
         }
         IGRAPH_CHECK(igraph_vector_shuffle(&fitness_in));

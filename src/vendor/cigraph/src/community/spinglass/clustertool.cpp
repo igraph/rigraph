@@ -61,7 +61,7 @@ static igraph_error_t igraph_i_community_spinglass_orig(
         igraph_real_t *temperature,
         igraph_vector_int_t *membership,
         igraph_vector_int_t *csize,
-        igraph_integer_t spins,
+        igraph_int_t spins,
         igraph_bool_t parupdate,
         igraph_real_t starttemp,
         igraph_real_t stoptemp,
@@ -76,7 +76,7 @@ static igraph_error_t igraph_i_community_spinglass_negative(
         igraph_real_t *temperature,
         igraph_vector_int_t *membership,
         igraph_vector_int_t *csize,
-        igraph_integer_t spins,
+        igraph_int_t spins,
         igraph_bool_t parupdate,
         igraph_real_t starttemp,
         igraph_real_t stoptemp,
@@ -171,7 +171,7 @@ igraph_error_t igraph_community_spinglass(const igraph_t *graph,
                                igraph_real_t *temperature,
                                igraph_vector_int_t *membership,
                                igraph_vector_int_t *csize,
-                               igraph_integer_t spins,
+                               igraph_int_t spins,
                                igraph_bool_t parupdate,
                                igraph_real_t starttemp,
                                igraph_real_t stoptemp,
@@ -212,7 +212,7 @@ static igraph_error_t igraph_i_community_spinglass_orig(
         igraph_real_t *temperature,
         igraph_vector_int_t *membership,
         igraph_vector_int_t *csize,
-        igraph_integer_t spins,
+        igraph_int_t spins,
         igraph_bool_t parupdate,
         igraph_real_t starttemp,
         igraph_real_t stoptemp,
@@ -220,8 +220,8 @@ static igraph_error_t igraph_i_community_spinglass_orig(
         igraph_spincomm_update_t update_rule,
         igraph_real_t gamma) {
 
-    igraph_integer_t no_of_nodes = igraph_vcount(graph);
-    igraph_integer_t changes, runs;
+    igraph_int_t no_of_nodes = igraph_vcount(graph);
+    igraph_int_t changes, runs;
     igraph_bool_t use_weights = false;
     bool zeroT;
     double kT, acc, prob;
@@ -422,13 +422,13 @@ static igraph_error_t igraph_i_community_spinglass_orig(
 
 igraph_error_t igraph_community_spinglass_single(const igraph_t *graph,
                                       const igraph_vector_t *weights,
-                                      igraph_integer_t vertex,
+                                      igraph_int_t vertex,
                                       igraph_vector_int_t *community,
                                       igraph_real_t *cohesion,
                                       igraph_real_t *adhesion,
-                                      igraph_integer_t *inner_links,
-                                      igraph_integer_t *outer_links,
-                                      igraph_integer_t spins,
+                                      igraph_int_t *inner_links,
+                                      igraph_int_t *outer_links,
+                                      igraph_int_t spins,
                                       igraph_spincomm_update_t update_rule,
                                       igraph_real_t gamma) {
     IGRAPH_HANDLE_EXCEPTIONS(
@@ -496,7 +496,7 @@ static igraph_error_t igraph_i_community_spinglass_negative(
         igraph_real_t *temperature,
         igraph_vector_int_t *membership,
         igraph_vector_int_t *csize,
-        igraph_integer_t spins,
+        igraph_int_t spins,
         igraph_bool_t parupdate,
         igraph_real_t starttemp,
         igraph_real_t stoptemp,
@@ -505,8 +505,8 @@ static igraph_error_t igraph_i_community_spinglass_negative(
         igraph_real_t gamma,
         igraph_real_t gamma_minus) {
 
-    igraph_integer_t no_of_nodes = igraph_vcount(graph);
-    igraph_integer_t runs;
+    igraph_int_t no_of_nodes = igraph_vcount(graph);
+    igraph_int_t runs;
     igraph_bool_t use_weights = false;
     bool zeroT;
     double kT, acc;

@@ -40,7 +40,7 @@ __BEGIN_DECLS
 
 IGRAPH_EXPORT igraph_error_t igraph_full_bipartite(igraph_t *graph,
                                         igraph_vector_bool_t *types,
-                                        igraph_integer_t n1, igraph_integer_t n2,
+                                        igraph_int_t n1, igraph_int_t n2,
                                         igraph_bool_t directed,
                                         igraph_neimode_t mode);
 
@@ -50,10 +50,10 @@ IGRAPH_EXPORT igraph_error_t igraph_create_bipartite(igraph_t *g, const igraph_v
 
 IGRAPH_EXPORT igraph_error_t igraph_bipartite_projection_size(const igraph_t *graph,
                                                    const igraph_vector_bool_t *types,
-                                                   igraph_integer_t *vcount1,
-                                                   igraph_integer_t *ecount1,
-                                                   igraph_integer_t *vcount2,
-                                                   igraph_integer_t *ecount2);
+                                                   igraph_int_t *vcount1,
+                                                   igraph_int_t *ecount1,
+                                                   igraph_int_t *vcount2,
+                                                   igraph_int_t *ecount2);
 
 IGRAPH_EXPORT igraph_error_t igraph_bipartite_projection(const igraph_t *graph,
                                               const igraph_vector_bool_t *types,
@@ -61,7 +61,7 @@ IGRAPH_EXPORT igraph_error_t igraph_bipartite_projection(const igraph_t *graph,
                                               igraph_t *proj2,
                                               igraph_vector_int_t *multiplicity1,
                                               igraph_vector_int_t *multiplicity2,
-                                              igraph_integer_t probe1);
+                                              igraph_int_t probe1);
 
 IGRAPH_EXPORT igraph_error_t igraph_biadjacency(igraph_t *graph, igraph_vector_bool_t *types,
                                    const igraph_matrix_t *input, igraph_bool_t directed,
@@ -78,13 +78,13 @@ IGRAPH_EXPORT igraph_error_t igraph_is_bipartite(const igraph_t *graph,
                                       igraph_vector_bool_t *types);
 
 IGRAPH_EXPORT igraph_error_t igraph_bipartite_game_gnp(igraph_t *graph, igraph_vector_bool_t *types,
-                                            igraph_integer_t n1, igraph_integer_t n2,
+                                            igraph_int_t n1, igraph_int_t n2,
                                             igraph_real_t p, igraph_bool_t directed,
                                             igraph_neimode_t mode);
 
 IGRAPH_EXPORT igraph_error_t igraph_bipartite_game_gnm(igraph_t *graph, igraph_vector_bool_t *types,
-                                            igraph_integer_t n1, igraph_integer_t n2,
-                                            igraph_integer_t m, igraph_bool_t directed,
+                                            igraph_int_t n1, igraph_int_t n2,
+                                            igraph_int_t m, igraph_bool_t directed,
                                             igraph_neimode_t mode);
 
 /* Deprecated functions: */
@@ -102,8 +102,8 @@ IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_get_incidence(
 IGRAPH_EXPORT IGRAPH_DEPRECATED  igraph_error_t igraph_bipartite_game(
     igraph_t *graph, igraph_vector_bool_t *types,
     igraph_erdos_renyi_t type,
-    igraph_integer_t n1, igraph_integer_t n2,
-    igraph_real_t p, igraph_integer_t m,
+    igraph_int_t n1, igraph_int_t n2,
+    igraph_real_t p, igraph_int_t m,
     igraph_bool_t directed, igraph_neimode_t mode
 );
 

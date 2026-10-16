@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -150,15 +149,15 @@ IGRAPH_EXPORT IGRAPH_FUNCATTR_PURE igraph_bool_t igraph_vector_is_all_finite(con
 
 IGRAPH_PRIVATE_EXPORT igraph_error_t igraph_vector_order2(igraph_vector_t *v);
 IGRAPH_PRIVATE_EXPORT igraph_error_t igraph_vector_rank(const igraph_vector_t *v, igraph_vector_int_t *res,
-                                     igraph_integer_t nodes);
+                                     igraph_int_t nodes);
 
 IGRAPH_EXPORT igraph_error_t igraph_vector_int_pair_order(const igraph_vector_int_t* v, const igraph_vector_int_t *v2,
-                                      igraph_vector_int_t* res, igraph_integer_t maxval);
+                                      igraph_vector_int_t* res, igraph_int_t maxval);
 
 IGRAPH_PRIVATE_EXPORT igraph_error_t igraph_vector_int_order1(const igraph_vector_int_t* v,
-                                           igraph_vector_int_t* res, igraph_integer_t maxval);
+                                           igraph_vector_int_t* res, igraph_int_t maxval);
 IGRAPH_PRIVATE_EXPORT igraph_error_t igraph_vector_int_rank(const igraph_vector_int_t *v, igraph_vector_int_t *res,
-                                     igraph_integer_t nodes);
+                                     igraph_int_t nodes);
 
 __END_DECLS
 

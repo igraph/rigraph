@@ -34,7 +34,7 @@
 
 static igraph_error_t igraph_i_create_start_vectors(
         igraph_vector_int_t *res, igraph_vector_int_t *el,
-        igraph_vector_int_t *index, igraph_integer_t nodes);
+        igraph_vector_int_t *index, igraph_int_t nodes);
 
 /**
  * \section about_basic_interface
@@ -95,7 +95,7 @@ static igraph_error_t igraph_i_create_start_vectors(
  * Time complexity: O(|V|) for a graph with
  * |V| vertices (and no edges).
  */
-igraph_error_t igraph_empty_attrs(igraph_t *graph, igraph_integer_t n, igraph_bool_t directed, void *attr) {
+igraph_error_t igraph_empty_attrs(igraph_t *graph, igraph_int_t n, igraph_bool_t directed, void *attr) {
 
     if (n < 0) {
         IGRAPH_ERROR("Number of vertices must not be negative.", IGRAPH_EINVAL);
@@ -247,10 +247,10 @@ igraph_error_t igraph_copy(igraph_t *to, const igraph_t *from) {
  */
 igraph_error_t igraph_add_edges(igraph_t *graph, const igraph_vector_int_t *edges,
                      void *attr) {
-    igraph_integer_t no_of_edges = igraph_vector_int_size(&graph->from);
-    igraph_integer_t edges_to_add = igraph_vector_int_size(edges) / 2;
-    igraph_integer_t new_no_of_edges;
-    igraph_integer_t i = 0;
+    igraph_int_t no_of_edges = igraph_vector_int_size(&graph->from);
+    igraph_int_t edges_to_add = igraph_vector_int_size(edges) / 2;
+    igraph_int_t new_no_of_edges;
+    igraph_int_t i = 0;
     igraph_vector_int_t newoi, newii;
     igraph_bool_t directed = igraph_is_directed(graph);
 
@@ -378,11 +378,11 @@ igraph_error_t igraph_add_edges(igraph_t *graph, const igraph_vector_int_t *edge
  *
  * \example examples/simple/creation.c
  */
-igraph_error_t igraph_add_vertices(igraph_t *graph, igraph_integer_t nv, void *attr) {
-    igraph_integer_t ec = igraph_ecount(graph);
-    igraph_integer_t vc = igraph_vcount(graph);
-    igraph_integer_t new_vc;
-    igraph_integer_t i;
+igraph_error_t igraph_add_vertices(igraph_t *graph, igraph_int_t nv, void *attr) {
+    igraph_int_t ec = igraph_ecount(graph);
+    igraph_int_t vc = igraph_vcount(graph);
+    igraph_int_t new_vc;
+    igraph_int_t i;
 
     if (nv < 0) {
         IGRAPH_ERROR("Cannot add negative number of vertices.", IGRAPH_EINVAL);
@@ -488,17 +488,17 @@ igraph_error_t igraph_add_vertices(igraph_t *graph, igraph_integer_t nv, void *a
  * \example examples/simple/igraph_delete_edges.c
  */
 igraph_error_t igraph_delete_edges(igraph_t *graph, igraph_es_t edges) {
-    igraph_integer_t no_of_edges = igraph_ecount(graph);
-    igraph_integer_t no_of_nodes = igraph_vcount(graph);
-    igraph_integer_t edges_to_remove = 0;
-    igraph_integer_t remaining_edges;
+    igraph_int_t no_of_edges = igraph_ecount(graph);
+    igraph_int_t no_of_nodes = igraph_vcount(graph);
+    igraph_int_t edges_to_remove = 0;
+    igraph_int_t remaining_edges;
     igraph_eit_t eit;
 
     igraph_vector_int_t newfrom, newto;
     igraph_vector_int_t newoi, newii;
 
     igraph_bool_t *mark;
-    igraph_integer_t i, j;
+    igraph_int_t i, j;
 
     mark = IGRAPH_CALLOC(no_of_edges, igraph_bool_t);
     IGRAPH_CHECK_OOM(mark, "Cannot delete edges.");
@@ -508,7 +508,7 @@ igraph_error_t igraph_delete_edges(igraph_t *graph, igraph_es_t edges) {
     IGRAPH_FINALLY(igraph_eit_destroy, &eit);
 
     for (IGRAPH_EIT_RESET(eit); !IGRAPH_EIT_END(eit); IGRAPH_EIT_NEXT(eit)) {
-        igraph_integer_t e = IGRAPH_EIT_GET(eit);
+        igraph_int_t e = IGRAPH_EIT_GET(eit);
         if (! mark[e]) {
             edges_to_remove++;
             mark[e] = true;
@@ -640,14 +640,14 @@ igraph_error_t igraph_delete_vertices_idx(
     igraph_t *graph, const igraph_vs_t vertices, igraph_vector_int_t *idx,
     igraph_vector_int_t *invidx
 ) {
-    igraph_integer_t no_of_edges = igraph_ecount(graph);
-    igraph_integer_t no_of_nodes = igraph_vcount(graph);
+    igraph_int_t no_of_edges = igraph_ecount(graph);
+    igraph_int_t no_of_nodes = igraph_vcount(graph);
     igraph_vector_int_t edge_recoding, vertex_recoding;
     igraph_vector_int_t *my_vertex_recoding = &vertex_recoding;
     igraph_vit_t vit;
     igraph_t newgraph;
-    igraph_integer_t i, j;
-    igraph_integer_t remaining_vertices, remaining_edges;
+    igraph_int_t i, j;
+    igraph_int_t remaining_vertices, remaining_edges;
 
     if (idx) {
         my_vertex_recoding = idx;
@@ -664,7 +664,7 @@ igraph_error_t igraph_delete_vertices_idx(
 
     /* mark the vertices to delete */
     for (; !IGRAPH_VIT_END(vit); IGRAPH_VIT_NEXT(vit) ) {
-        igraph_integer_t vertex = IGRAPH_VIT_GET(vit);
+        igraph_int_t vertex = IGRAPH_VIT_GET(vit);
         if (vertex < 0 || vertex >= no_of_nodes) {
             IGRAPH_ERROR("Cannot delete vertices", IGRAPH_EINVVID);
         }
@@ -681,8 +681,8 @@ igraph_error_t igraph_delete_vertices_idx(
     }
     /* create edge recoding vector */
     for (remaining_edges = 0, i = 0; i < no_of_edges; i++) {
-        igraph_integer_t from = VECTOR(graph->from)[i];
-        igraph_integer_t to = VECTOR(graph->to)[i];
+        igraph_int_t from = VECTOR(graph->from)[i];
+        igraph_int_t to = VECTOR(graph->to)[i];
         if (VECTOR(*my_vertex_recoding)[from] != 0 &&
             VECTOR(*my_vertex_recoding)[to  ] != 0) {
             VECTOR(edge_recoding)[i] = remaining_edges + 1;
@@ -705,8 +705,8 @@ igraph_error_t igraph_delete_vertices_idx(
     /* Add the edges */
     for (i = 0, j = 0; j < remaining_edges; i++) {
         if (VECTOR(edge_recoding)[i] > 0) {
-            igraph_integer_t from = VECTOR(graph->from)[i];
-            igraph_integer_t to = VECTOR(graph->to  )[i];
+            igraph_int_t from = VECTOR(graph->from)[i];
+            igraph_int_t to = VECTOR(graph->to  )[i];
             VECTOR(newgraph.from)[j] = VECTOR(*my_vertex_recoding)[from] - 1;
             VECTOR(newgraph.to  )[j] = VECTOR(*my_vertex_recoding)[to] - 1;
             j++;
@@ -743,7 +743,7 @@ igraph_error_t igraph_delete_vertices_idx(
         igraph_vector_int_t iidx;
         IGRAPH_VECTOR_INT_INIT_FINALLY(&iidx, remaining_vertices);
         for (i = 0; i < no_of_nodes; i++) {
-            igraph_integer_t jj = VECTOR(*my_vertex_recoding)[i];
+            igraph_int_t jj = VECTOR(*my_vertex_recoding)[i];
             if (jj != 0) {
                 VECTOR(iidx)[ jj - 1 ] = i;
             }
@@ -753,7 +753,7 @@ igraph_error_t igraph_delete_vertices_idx(
                      &iidx));
         IGRAPH_CHECK(igraph_vector_int_resize(&iidx, remaining_edges));
         for (i = 0; i < no_of_edges; i++) {
-            igraph_integer_t jj = VECTOR(edge_recoding)[i];
+            igraph_int_t jj = VECTOR(edge_recoding)[i];
             if (jj != 0) {
                 VECTOR(iidx)[ jj - 1 ] = i;
             }
@@ -774,7 +774,7 @@ igraph_error_t igraph_delete_vertices_idx(
     if (invidx) {
         IGRAPH_CHECK(igraph_vector_int_resize(invidx, remaining_vertices));
         for (i = 0; i < no_of_nodes; i++) {
-            igraph_integer_t newid = VECTOR(*my_vertex_recoding)[i];
+            igraph_int_t newid = VECTOR(*my_vertex_recoding)[i];
             if (newid != 0) {
                 VECTOR(*invidx)[newid - 1] = i;
             }
@@ -821,7 +821,7 @@ igraph_error_t igraph_delete_vertices_idx(
  *
  * Time complexity: O(1)
  */
-igraph_integer_t igraph_vcount(const igraph_t *graph) {
+igraph_int_t igraph_vcount(const igraph_t *graph) {
     return graph->n;
 }
 
@@ -835,7 +835,7 @@ igraph_integer_t igraph_vcount(const igraph_t *graph) {
  *
  * Time complexity: O(1)
  */
-igraph_integer_t igraph_ecount(const igraph_t *graph) {
+igraph_int_t igraph_ecount(const igraph_t *graph) {
     return igraph_vector_int_size(&graph->from);
 }
 
@@ -872,7 +872,7 @@ igraph_integer_t igraph_ecount(const igraph_t *graph) {
  *
  * \example examples/simple/igraph_neighbors.c
  */
-igraph_error_t igraph_neighbors(const igraph_t *graph, igraph_vector_int_t *neis, igraph_integer_t pnode,
+igraph_error_t igraph_neighbors(const igraph_t *graph, igraph_vector_int_t *neis, igraph_int_t pnode,
         igraph_neimode_t mode) {
     if (!igraph_is_directed(graph) || mode == IGRAPH_ALL) {
         return igraph_i_neighbors(graph, neis, pnode, mode, IGRAPH_LOOPS_TWICE, IGRAPH_MULTIPLE);
@@ -881,7 +881,7 @@ igraph_error_t igraph_neighbors(const igraph_t *graph, igraph_vector_int_t *neis
     }
 }
 
-igraph_error_t igraph_i_neighbors(const igraph_t *graph, igraph_vector_int_t *neis, igraph_integer_t pnode,
+igraph_error_t igraph_i_neighbors(const igraph_t *graph, igraph_vector_int_t *neis, igraph_int_t pnode,
         igraph_neimode_t mode, igraph_loops_t loops, igraph_multiple_t multiple) {
 #define DEDUPLICATE_IF_NEEDED(vertex, n)                                          \
     if (should_filter_duplicates) {                                               \
@@ -918,11 +918,11 @@ igraph_error_t igraph_i_neighbors(const igraph_t *graph, igraph_vector_int_t *ne
     }
 
 
-    igraph_integer_t length = 0, idx = 0;
-    igraph_integer_t i, j;
+    igraph_int_t length = 0, idx = 0;
+    igraph_int_t i, j;
 
-    igraph_integer_t node = pnode;
-    igraph_integer_t last_added = -1;
+    igraph_int_t node = pnode;
+    igraph_int_t last_added = -1;
     igraph_bool_t should_filter_duplicates;
 
     /* seen_loop stores whether we have already seen at least one full loop
@@ -980,7 +980,7 @@ igraph_error_t igraph_i_neighbors(const igraph_t *graph, igraph_vector_int_t *ne
         if (mode & IGRAPH_OUT) {
             j = VECTOR(graph->os)[node + 1];
             for (i = VECTOR(graph->os)[node]; i < j; i++) {
-                igraph_integer_t to = VECTOR(graph->to)[ VECTOR(graph->oi)[i] ];
+                igraph_int_t to = VECTOR(graph->to)[ VECTOR(graph->oi)[i] ];
                 DEDUPLICATE_IF_NEEDED(to, 1);
                 VECTOR(*neis)[idx++] = to;
             }
@@ -989,7 +989,7 @@ igraph_error_t igraph_i_neighbors(const igraph_t *graph, igraph_vector_int_t *ne
         if (mode & IGRAPH_IN) {
             j = VECTOR(graph->is)[node + 1];
             for (i = VECTOR(graph->is)[node]; i < j; i++) {
-                igraph_integer_t from = VECTOR(graph->from)[ VECTOR(graph->ii)[i] ];
+                igraph_int_t from = VECTOR(graph->from)[ VECTOR(graph->ii)[i] ];
                 DEDUPLICATE_IF_NEEDED(from, 1);
                 VECTOR(*neis)[idx++] = from;
             }
@@ -998,12 +998,12 @@ igraph_error_t igraph_i_neighbors(const igraph_t *graph, igraph_vector_int_t *ne
         /* Both in- and out- neighbors in a directed graph,
            we need to merge the two 'vectors' so the result is
            correctly ordered. */
-        igraph_integer_t j1 = VECTOR(graph->os)[node + 1];
-        igraph_integer_t j2 = VECTOR(graph->is)[node + 1];
-        igraph_integer_t i1 = VECTOR(graph->os)[node];
-        igraph_integer_t i2 = VECTOR(graph->is)[node];
-        igraph_integer_t eid1, eid2;
-        igraph_integer_t n1, n2;
+        igraph_int_t j1 = VECTOR(graph->os)[node + 1];
+        igraph_int_t j2 = VECTOR(graph->is)[node + 1];
+        igraph_int_t i1 = VECTOR(graph->os)[node];
+        igraph_int_t i2 = VECTOR(graph->is)[node];
+        igraph_int_t eid1, eid2;
+        igraph_int_t n1, n2;
 
         should_filter_duplicates = !(multiple == IGRAPH_MULTIPLE &&
                 loops == IGRAPH_LOOPS_TWICE);
@@ -1033,14 +1033,14 @@ igraph_error_t igraph_i_neighbors(const igraph_t *graph, igraph_vector_int_t *ne
 
         while (i1 < j1) {
             eid1 = VECTOR(graph->oi)[i1++];
-            igraph_integer_t to = VECTOR(graph->to)[eid1];
+            igraph_int_t to = VECTOR(graph->to)[eid1];
             DEDUPLICATE_IF_NEEDED(to, 1);
             VECTOR(*neis)[idx++] = to;
         }
 
         while (i2 < j2) {
             eid2 = VECTOR(graph->ii)[i2++];
-            igraph_integer_t from = VECTOR(graph->from)[eid2];
+            igraph_int_t from = VECTOR(graph->from)[eid2];
             DEDUPLICATE_IF_NEEDED(from, 1);
             VECTOR(*neis)[idx++] = from;
         }
@@ -1058,13 +1058,13 @@ igraph_error_t igraph_i_neighbors(const igraph_t *graph, igraph_vector_int_t *ne
 
 static igraph_error_t igraph_i_create_start_vectors(
         igraph_vector_int_t *res, igraph_vector_int_t *el,
-        igraph_vector_int_t *iindex, igraph_integer_t nodes) {
+        igraph_vector_int_t *iindex, igraph_int_t nodes) {
 
 # define EDGE(i) (VECTOR(*el)[ VECTOR(*iindex)[(i)] ])
 
-    igraph_integer_t no_of_nodes;
-    igraph_integer_t no_of_edges;
-    igraph_integer_t i, j, idx;
+    igraph_int_t no_of_nodes;
+    igraph_int_t no_of_edges;
+    igraph_int_t i, j, idx;
 
     no_of_nodes = nodes;
     no_of_edges = igraph_vector_int_size(el);
@@ -1084,7 +1084,7 @@ static igraph_error_t igraph_i_create_start_vectors(
             idx++; VECTOR(*res)[idx] = 0;
         }
         for (i = 1; i < no_of_edges; i++) {
-            igraph_integer_t n = EDGE(i) - EDGE(VECTOR(*res)[idx]);
+            igraph_int_t n = EDGE(i) - EDGE(VECTOR(*res)[idx]);
             for (j = 0; j < n; j++) {
                 idx++; VECTOR(*res)[idx] = i;
             }
@@ -1144,8 +1144,8 @@ igraph_bool_t igraph_is_directed(const igraph_t *graph) {
  * Time complexity: O(1) if \p loops is \c true, and
  * O(d) otherwise, where d is the degree.
  */
-igraph_error_t igraph_degree_1(const igraph_t *graph, igraph_integer_t *deg,
-                               igraph_integer_t vid, igraph_neimode_t mode, igraph_bool_t loops) {
+igraph_error_t igraph_degree_1(const igraph_t *graph, igraph_int_t *deg,
+                               igraph_int_t vid, igraph_neimode_t mode, igraph_bool_t loops) {
 
     if (!igraph_is_directed(graph)) {
         mode = IGRAPH_ALL;
@@ -1162,14 +1162,14 @@ igraph_error_t igraph_degree_1(const igraph_t *graph, igraph_integer_t *deg,
         /* When loops should not be counted, we remove their contribution from the
          * previously computed degree. */
         if (mode & IGRAPH_OUT) {
-            for (igraph_integer_t i = VECTOR(graph->os)[vid]; i < VECTOR(graph->os)[vid + 1]; i++) {
+            for (igraph_int_t i = VECTOR(graph->os)[vid]; i < VECTOR(graph->os)[vid + 1]; i++) {
                 if (VECTOR(graph->to)[ VECTOR(graph->oi)[i] ] == vid) {
                     *deg -= 1;
                 }
             }
         }
         if (mode & IGRAPH_IN) {
-            for (igraph_integer_t i = VECTOR(graph->is)[vid]; i < VECTOR(graph->is)[vid + 1]; i++) {
+            for (igraph_int_t i = VECTOR(graph->is)[vid]; i < VECTOR(graph->is)[vid + 1]; i++) {
                 if (VECTOR(graph->from)[ VECTOR(graph->ii)[i] ] == vid) {
                     *deg -= 1;
                 }
@@ -1190,7 +1190,7 @@ igraph_error_t igraph_degree_1(const igraph_t *graph, igraph_integer_t *deg,
  * specified vertices.
  *
  * </para><para>
- * This function returns the result as a vector of \c igraph_integer_t
+ * This function returns the result as a vector of \c igraph_int_t
  * values. In applications where \c igraph_real_t is desired, use
  * \ref igraph_strength() with \c NULL weights.
  *
@@ -1227,8 +1227,8 @@ igraph_error_t igraph_degree(const igraph_t *graph, igraph_vector_int_t *res,
                   const igraph_vs_t vids,
                   igraph_neimode_t mode, igraph_bool_t loops) {
 
-    igraph_integer_t nodes_to_calc;
-    igraph_integer_t i, j;
+    igraph_int_t nodes_to_calc;
+    igraph_int_t i, j;
     igraph_vit_t vit;
 
     IGRAPH_CHECK(igraph_vit_create(graph, vids, &vit));
@@ -1260,7 +1260,7 @@ igraph_error_t igraph_degree(const igraph_t *graph, igraph_vector_int_t *res,
             for (IGRAPH_VIT_RESET(vit), i = 0;
                  !IGRAPH_VIT_END(vit);
                  IGRAPH_VIT_NEXT(vit), i++) {
-                igraph_integer_t vid = IGRAPH_VIT_GET(vit);
+                igraph_int_t vid = IGRAPH_VIT_GET(vit);
                 VECTOR(*res)[i] += (VECTOR(graph->os)[vid + 1] - VECTOR(graph->os)[vid]);
             }
         }
@@ -1268,25 +1268,25 @@ igraph_error_t igraph_degree(const igraph_t *graph, igraph_vector_int_t *res,
             for (IGRAPH_VIT_RESET(vit), i = 0;
                  !IGRAPH_VIT_END(vit);
                  IGRAPH_VIT_NEXT(vit), i++) {
-                igraph_integer_t vid = IGRAPH_VIT_GET(vit);
+                igraph_int_t vid = IGRAPH_VIT_GET(vit);
                 VECTOR(*res)[i] += (VECTOR(graph->is)[vid + 1] - VECTOR(graph->is)[vid]);
             }
         }
     } else if (igraph_vs_is_all(&vids)) { /* no loops, calculating degree for all vertices */
         // When calculating degree for all vertices, iterating over edges is faster
-        igraph_integer_t no_of_edges = igraph_ecount(graph);
+        igraph_int_t no_of_edges = igraph_ecount(graph);
 
         if (mode & IGRAPH_OUT) {
-            for (igraph_integer_t edge = 0; edge < no_of_edges; ++edge) {
-                igraph_integer_t from = IGRAPH_FROM(graph, edge);
+            for (igraph_int_t edge = 0; edge < no_of_edges; ++edge) {
+                igraph_int_t from = IGRAPH_FROM(graph, edge);
                 if (from != IGRAPH_TO(graph, edge)) {
                     VECTOR(*res)[from]++;
                 }
             }
         }
         if (mode & IGRAPH_IN) {
-            for (igraph_integer_t edge = 0; edge < no_of_edges; ++edge) {
-                igraph_integer_t to = IGRAPH_TO(graph, edge);
+            for (igraph_int_t edge = 0; edge < no_of_edges; ++edge) {
+                igraph_int_t to = IGRAPH_TO(graph, edge);
                 if (IGRAPH_FROM(graph, edge) != to) {
                     VECTOR(*res)[to]++;
                 }
@@ -1297,7 +1297,7 @@ igraph_error_t igraph_degree(const igraph_t *graph, igraph_vector_int_t *res,
             for (IGRAPH_VIT_RESET(vit), i = 0;
                  !IGRAPH_VIT_END(vit);
                  IGRAPH_VIT_NEXT(vit), i++) {
-                igraph_integer_t vid = IGRAPH_VIT_GET(vit);
+                igraph_int_t vid = IGRAPH_VIT_GET(vit);
                 VECTOR(*res)[i] += (VECTOR(graph->os)[vid + 1] - VECTOR(graph->os)[vid]);
                 for (j = VECTOR(graph->os)[vid];
                      j < VECTOR(graph->os)[vid + 1]; j++) {
@@ -1311,7 +1311,7 @@ igraph_error_t igraph_degree(const igraph_t *graph, igraph_vector_int_t *res,
             for (IGRAPH_VIT_RESET(vit), i = 0;
                  !IGRAPH_VIT_END(vit);
                  IGRAPH_VIT_NEXT(vit), i++) {
-                igraph_integer_t vid = IGRAPH_VIT_GET(vit);
+                igraph_int_t vid = IGRAPH_VIT_GET(vit);
                 VECTOR(*res)[i] += (VECTOR(graph->is)[vid + 1] - VECTOR(graph->is)[vid]);
                 for (j = VECTOR(graph->is)[vid];
                      j < VECTOR(graph->is)[vid + 1]; j++) {
@@ -1353,8 +1353,8 @@ igraph_error_t igraph_degree(const igraph_t *graph, igraph_vector_int_t *res,
 #define BINSEARCH(start, end, value, iindex, edgelist, N, result, result_pos) \
     do { \
         while ((start) < (end)) { \
-            igraph_integer_t mid =(start)+((end)-(start))/2; \
-            igraph_integer_t e = VECTOR((iindex))[mid]; \
+            igraph_int_t mid =(start)+((end)-(start))/2; \
+            igraph_int_t e = VECTOR((iindex))[mid]; \
             if (VECTOR((edgelist))[e] < (value)) { \
                 (start) = mid+1; \
             } else { \
@@ -1362,7 +1362,7 @@ igraph_error_t igraph_degree(const igraph_t *graph, igraph_vector_int_t *res,
             } \
         } \
         if ((start) < (N)) { \
-            igraph_integer_t e = VECTOR((iindex))[(start)]; \
+            igraph_int_t e = VECTOR((iindex))[(start)]; \
             if (VECTOR((edgelist))[e] == (value)) { \
                 *(result) = e; \
                 if (result_pos != 0) { *(result_pos) = start; } \
@@ -1372,13 +1372,13 @@ igraph_error_t igraph_degree(const igraph_t *graph, igraph_vector_int_t *res,
 
 #define FIND_DIRECTED_EDGE(graph,xfrom,xto,eid) \
     do { \
-        igraph_integer_t start = VECTOR(graph->os)[xfrom]; \
-        igraph_integer_t end = VECTOR(graph->os)[xfrom+1]; \
-        igraph_integer_t N = end; \
-        igraph_integer_t start2 = VECTOR(graph->is)[xto]; \
-        igraph_integer_t end2 = VECTOR(graph->is)[xto+1]; \
-        igraph_integer_t N2 = end2; \
-        igraph_integer_t *nullpointer = NULL; \
+        igraph_int_t start = VECTOR(graph->os)[xfrom]; \
+        igraph_int_t end = VECTOR(graph->os)[xfrom+1]; \
+        igraph_int_t N = end; \
+        igraph_int_t start2 = VECTOR(graph->is)[xto]; \
+        igraph_int_t end2 = VECTOR(graph->is)[xto+1]; \
+        igraph_int_t N2 = end2; \
+        igraph_int_t *nullpointer = NULL; \
         if (end-start < end2-start2) { \
             BINSEARCH(start, end, xto, graph->oi, graph->to, N, eid, nullpointer); \
         } else { \
@@ -1388,8 +1388,8 @@ igraph_error_t igraph_degree(const igraph_t *graph, igraph_vector_int_t *res,
 
 #define FIND_UNDIRECTED_EDGE(graph, from, to, eid) \
     do { \
-        igraph_integer_t xfrom1 = from > to ? from : to; \
-        igraph_integer_t xto1 = from > to ? to : from; \
+        igraph_int_t xfrom1 = from > to ? from : to; \
+        igraph_int_t xto1 = from > to ? to : from; \
         FIND_DIRECTED_EDGE(graph, xfrom1, xto1, eid); \
     } while (0)
 
@@ -1426,11 +1426,11 @@ igraph_error_t igraph_degree(const igraph_t *graph, igraph_vector_int_t *res,
  * Added in version 0.2.</para><para>
  */
 
-igraph_error_t igraph_get_eid(const igraph_t *graph, igraph_integer_t *eid,
-                   igraph_integer_t from, igraph_integer_t to,
+igraph_error_t igraph_get_eid(const igraph_t *graph, igraph_int_t *eid,
+                   igraph_int_t from, igraph_int_t to,
                    igraph_bool_t directed, igraph_bool_t error) {
 
-    igraph_integer_t no_of_nodes = igraph_vcount(graph);
+    igraph_int_t no_of_nodes = igraph_vcount(graph);
 
     if (from < 0 || to < 0 || from >= no_of_nodes || to >= no_of_nodes) {
         IGRAPH_ERROR("Cannot get edge ID.", IGRAPH_EINVVID);
@@ -1508,10 +1508,10 @@ igraph_error_t igraph_get_eids(const igraph_t *graph, igraph_vector_int_t *eids,
                     const igraph_vector_int_t *pairs,
                     igraph_bool_t directed, igraph_bool_t error) {
 
-    igraph_integer_t n = pairs ? igraph_vector_int_size(pairs) : 0;
-    igraph_integer_t no_of_nodes = igraph_vcount(graph);
-    igraph_integer_t i;
-    igraph_integer_t eid = -1;
+    igraph_int_t n = pairs ? igraph_vector_int_size(pairs) : 0;
+    igraph_int_t no_of_nodes = igraph_vcount(graph);
+    igraph_int_t i;
+    igraph_int_t eid = -1;
 
     if (n == 0) {
         igraph_vector_int_clear(eids);
@@ -1531,8 +1531,8 @@ igraph_error_t igraph_get_eids(const igraph_t *graph, igraph_vector_int_t *eids,
 
     if (igraph_is_directed(graph)) {
         for (i = 0; i < n / 2; i++) {
-            igraph_integer_t from = VECTOR(*pairs)[2 * i];
-            igraph_integer_t to = VECTOR(*pairs)[2 * i + 1];
+            igraph_int_t from = VECTOR(*pairs)[2 * i];
+            igraph_int_t to = VECTOR(*pairs)[2 * i + 1];
 
             eid = -1;
             FIND_DIRECTED_EDGE(graph, from, to, &eid);
@@ -1547,8 +1547,8 @@ igraph_error_t igraph_get_eids(const igraph_t *graph, igraph_vector_int_t *eids,
         }
     } else {
         for (i = 0; i < n / 2; i++) {
-            igraph_integer_t from = VECTOR(*pairs)[2 * i];
-            igraph_integer_t to = VECTOR(*pairs)[2 * i + 1];
+            igraph_int_t from = VECTOR(*pairs)[2 * i];
+            igraph_int_t to = VECTOR(*pairs)[2 * i + 1];
 
             eid = -1;
             FIND_UNDIRECTED_EDGE(graph, from, to, &eid);
@@ -1567,14 +1567,14 @@ igraph_error_t igraph_get_eids(const igraph_t *graph, igraph_vector_int_t *eids,
 
 #define FIND_ALL_DIRECTED_EDGES(graph, xfrom, xto, eidvec) \
     do { \
-        igraph_integer_t start = VECTOR(graph->os)[xfrom]; \
-        igraph_integer_t end = VECTOR(graph->os)[xfrom+1]; \
-        igraph_integer_t N = end; \
-        igraph_integer_t start2 = VECTOR(graph->is)[xto]; \
-        igraph_integer_t end2 = VECTOR(graph->is)[xto+1]; \
-        igraph_integer_t N2 = end2; \
-        igraph_integer_t eid = -1; \
-        igraph_integer_t pos = -1; \
+        igraph_int_t start = VECTOR(graph->os)[xfrom]; \
+        igraph_int_t end = VECTOR(graph->os)[xfrom+1]; \
+        igraph_int_t N = end; \
+        igraph_int_t start2 = VECTOR(graph->is)[xto]; \
+        igraph_int_t end2 = VECTOR(graph->is)[xto+1]; \
+        igraph_int_t N2 = end2; \
+        igraph_int_t eid = -1; \
+        igraph_int_t pos = -1; \
         if (end-start < end2-start2) { \
             BINSEARCH(start, end, xto, graph->oi, graph->to, N, &eid, &pos); \
             while (pos >= 0 && pos < N) { \
@@ -1594,8 +1594,8 @@ igraph_error_t igraph_get_eids(const igraph_t *graph, igraph_vector_int_t *eids,
 
 #define FIND_ALL_UNDIRECTED_EDGES(graph, from, to, eidvec) \
     do { \
-        igraph_integer_t xfrom1 = from > to ? from : to; \
-        igraph_integer_t xto1 = from > to ? to : from; \
+        igraph_int_t xfrom1 = from > to ? from : to; \
+        igraph_int_t xto1 = from > to ? to : from; \
         FIND_ALL_DIRECTED_EDGES(graph, xfrom1, xto1, eidvec); \
     } while (0)
 
@@ -1621,9 +1621,9 @@ igraph_error_t igraph_get_eids(const igraph_t *graph, igraph_vector_int_t *eids,
  */
 igraph_error_t igraph_get_all_eids_between(
     const igraph_t *graph, igraph_vector_int_t *eids,
-    igraph_integer_t source, igraph_integer_t target, igraph_bool_t directed
+    igraph_int_t source, igraph_int_t target, igraph_bool_t directed
 ) {
-    igraph_integer_t no_of_nodes = igraph_vcount(graph);
+    igraph_int_t no_of_nodes = igraph_vcount(graph);
 
     if (source < 0 || source >= no_of_nodes) {
         IGRAPH_ERROR("Cannot get edge IDs, invalid source vertex ID", IGRAPH_EINVVID);
@@ -1673,7 +1673,7 @@ igraph_error_t igraph_get_all_eids_between(
  * Time complexity: O(d), the number of incident edges to \p pnode.
  */
 
-igraph_error_t igraph_incident(const igraph_t *graph, igraph_vector_int_t *eids, igraph_integer_t pnode,
+igraph_error_t igraph_incident(const igraph_t *graph, igraph_vector_int_t *eids, igraph_int_t pnode,
         igraph_neimode_t mode) {
     if (!igraph_is_directed(graph) || mode == IGRAPH_ALL) {
         return igraph_i_incident(graph, eids, pnode, mode, IGRAPH_LOOPS_TWICE);
@@ -1682,11 +1682,11 @@ igraph_error_t igraph_incident(const igraph_t *graph, igraph_vector_int_t *eids,
     }
 }
 
-igraph_error_t igraph_i_incident(const igraph_t *graph, igraph_vector_int_t *eids, igraph_integer_t pnode,
+igraph_error_t igraph_i_incident(const igraph_t *graph, igraph_vector_int_t *eids, igraph_int_t pnode,
         igraph_neimode_t mode, igraph_loops_t loops) {
-    igraph_integer_t length = 0, idx = 0;
-    igraph_integer_t i, j;
-    igraph_integer_t node = pnode;
+    igraph_int_t length = 0, idx = 0;
+    igraph_int_t i, j;
+    igraph_int_t node = pnode;
     igraph_bool_t directed = igraph_is_directed(graph);
 
     if (node < 0 || node > igraph_vcount(graph) - 1) {
@@ -1731,8 +1731,8 @@ igraph_error_t igraph_i_incident(const igraph_t *graph, igraph_vector_int_t *eid
         if (mode & IGRAPH_OUT) {
             j = VECTOR(graph->os)[node + 1];
             for (i = VECTOR(graph->os)[node]; i < j; i++) {
-                igraph_integer_t edge = VECTOR(graph->oi)[i];
-                igraph_integer_t other = VECTOR(graph->to)[edge];
+                igraph_int_t edge = VECTOR(graph->oi)[i];
+                igraph_int_t other = VECTOR(graph->to)[edge];
                 if (loops == IGRAPH_NO_LOOPS && other == pnode) {
                     length--;
                 } else {
@@ -1744,8 +1744,8 @@ igraph_error_t igraph_i_incident(const igraph_t *graph, igraph_vector_int_t *eid
         if (mode & IGRAPH_IN) {
             j = VECTOR(graph->is)[node + 1];
             for (i = VECTOR(graph->is)[node]; i < j; i++) {
-                igraph_integer_t edge = VECTOR(graph->ii)[i];
-                igraph_integer_t other = VECTOR(graph->from)[edge];
+                igraph_int_t edge = VECTOR(graph->ii)[i];
+                igraph_int_t other = VECTOR(graph->from)[edge];
                 if ((loops == IGRAPH_NO_LOOPS || (loops == IGRAPH_LOOPS_ONCE && !directed)) && other == pnode) {
                     length--;
                 } else {
@@ -1756,12 +1756,12 @@ igraph_error_t igraph_i_incident(const igraph_t *graph, igraph_vector_int_t *eid
     } else {
         /* both in- and out- neighbors in a directed graph,
            we need to merge the two 'vectors' */
-        igraph_integer_t j1 = VECTOR(graph->os)[node + 1];
-        igraph_integer_t j2 = VECTOR(graph->is)[node + 1];
-        igraph_integer_t i1 = VECTOR(graph->os)[node];
-        igraph_integer_t i2 = VECTOR(graph->is)[node];
-        igraph_integer_t eid1, eid2;
-        igraph_integer_t n1, n2;
+        igraph_int_t j1 = VECTOR(graph->os)[node + 1];
+        igraph_int_t j2 = VECTOR(graph->is)[node + 1];
+        igraph_int_t i1 = VECTOR(graph->os)[node];
+        igraph_int_t i2 = VECTOR(graph->is)[node];
+        igraph_int_t eid1, eid2;
+        igraph_int_t n1, n2;
         igraph_bool_t seen_loop_edge = false;
 
         while (i1 < j1 && i2 < j2) {
@@ -1851,11 +1851,11 @@ igraph_error_t igraph_i_incident(const igraph_t *graph, igraph_vector_int_t *eid
  */
 
 igraph_error_t igraph_is_same_graph(const igraph_t *graph1, const igraph_t *graph2, igraph_bool_t *res) {
-    igraph_integer_t nv1 = igraph_vcount(graph1);
-    igraph_integer_t nv2 = igraph_vcount(graph2);
-    igraph_integer_t ne1 = igraph_ecount(graph1);
-    igraph_integer_t ne2 = igraph_ecount(graph2);
-    igraph_integer_t i, eid1, eid2;
+    igraph_int_t nv1 = igraph_vcount(graph1);
+    igraph_int_t nv2 = igraph_vcount(graph2);
+    igraph_int_t ne1 = igraph_ecount(graph1);
+    igraph_int_t ne2 = igraph_ecount(graph2);
+    igraph_int_t i, eid1, eid2;
 
     *res = false; /* Assume that the graphs differ */
 

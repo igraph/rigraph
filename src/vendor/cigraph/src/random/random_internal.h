@@ -31,7 +31,7 @@ __BEGIN_DECLS
 
 igraph_error_t igraph_random_sample_real(
         igraph_vector_t *res, igraph_real_t l, igraph_real_t h,
-        igraph_integer_t length);
+        igraph_int_t length);
 
 __END_DECLS
 

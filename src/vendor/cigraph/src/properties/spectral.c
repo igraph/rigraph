@@ -32,7 +32,7 @@
 static igraph_error_t igraph_i_laplacian_validate_weights(
     const igraph_t* graph,  const igraph_vector_t* weights
 ) {
-    igraph_integer_t no_of_edges;
+    igraph_int_t no_of_edges;
 
     if (weights == NULL) {
         return IGRAPH_SUCCESS;
@@ -104,11 +104,11 @@ igraph_error_t igraph_get_laplacian(
     igraph_laplacian_normalization_t normalization,
     const igraph_vector_t *weights
 ) {
-    igraph_integer_t no_of_nodes = igraph_vcount(graph);
-    igraph_integer_t no_of_edges = igraph_ecount(graph);
+    igraph_int_t no_of_nodes = igraph_vcount(graph);
+    igraph_int_t no_of_edges = igraph_ecount(graph);
     igraph_bool_t directed = igraph_is_directed(graph);
     igraph_vector_t degree;
-    igraph_integer_t i;
+    igraph_int_t i;
 
     IGRAPH_ASSERT(res != NULL);
 
@@ -154,8 +154,8 @@ igraph_error_t igraph_get_laplacian(
     }
 
     for (i = 0; i < no_of_edges; i++) {
-        igraph_integer_t from = IGRAPH_FROM(graph, i);
-        igraph_integer_t to   = IGRAPH_TO(graph, i);
+        igraph_int_t from = IGRAPH_FROM(graph, i);
+        igraph_int_t to   = IGRAPH_TO(graph, i);
         igraph_real_t weight  = weights ? VECTOR(*weights)[i] : 1.0;
         igraph_real_t norm;
 
@@ -256,12 +256,12 @@ igraph_error_t igraph_get_laplacian_sparse(
     igraph_laplacian_normalization_t normalization,
     const igraph_vector_t *weights
 ) {
-    igraph_integer_t no_of_nodes = igraph_vcount(graph);
-    igraph_integer_t no_of_edges = igraph_ecount(graph);
+    igraph_int_t no_of_nodes = igraph_vcount(graph);
+    igraph_int_t no_of_edges = igraph_ecount(graph);
     igraph_bool_t directed = igraph_is_directed(graph);
     igraph_vector_t degree;
-    igraph_integer_t i;
-    igraph_integer_t nz;
+    igraph_int_t i;
+    igraph_int_t nz;
 
     if (directed) {
         IGRAPH_SAFE_ADD(no_of_edges, no_of_nodes, &nz);
@@ -305,8 +305,8 @@ igraph_error_t igraph_get_laplacian_sparse(
     }
 
     for (i = 0; i < no_of_edges; i++) {
-        igraph_integer_t from = IGRAPH_FROM(graph, i);
-        igraph_integer_t to   = IGRAPH_TO(graph, i);
+        igraph_int_t from = IGRAPH_FROM(graph, i);
+        igraph_int_t to   = IGRAPH_TO(graph, i);
         igraph_real_t weight  = weights ? VECTOR(*weights)[i] : 1.0;
         igraph_real_t norm;
 

@@ -132,17 +132,17 @@ static igraph_error_t add_numeric_edge_attribute(const char *name,
                                               igraph_i_pajek_parsedata_t *context);
 static igraph_error_t add_numeric_attribute(igraph_trie_t *names,
                                          igraph_vector_ptr_t *attrs,
-                                         igraph_integer_t count,
+                                         igraph_int_t count,
                                          const char *attrname,
-                                         igraph_integer_t vid,
+                                         igraph_int_t vid,
                                          igraph_real_t number);
 static igraph_error_t add_string_attribute(igraph_trie_t *names,
                                         igraph_vector_ptr_t *attrs,
-                                        igraph_integer_t count,
+                                        igraph_int_t count,
                                         const char *attrname,
-                                        igraph_integer_t vid,
+                                        igraph_int_t vid,
                                         const char *str,
-                                        igraph_integer_t str_len);
+                                        igraph_int_t str_len);
 
 static igraph_error_t add_bipartite_type(igraph_i_pajek_parsedata_t *context);
 static igraph_error_t check_bipartite(igraph_i_pajek_parsedata_t *context);
@@ -1854,7 +1854,7 @@ yyreduce:
   case 14: /* vertexline: vertex $@1 vertexid vertexcoords shape vertparams "end of line"  */
 #line 238 "src/vendor/cigraph/src/io/pajek-parser.y"
                                                                                              {
-              igraph_integer_t v = (yyvsp[-6].intnum)-1; /* zero-based vertex ID */
+              igraph_int_t v = (yyvsp[-6].intnum)-1; /* zero-based vertex ID */
               if (IGRAPH_BIT_TEST(*context->seen, v)) {
                 IGRAPH_WARNINGF("Vertex ID %" IGRAPH_PRId " appears twice in Pajek file. Duplicate attributes will be overwritten.", v+1);
               } else {
@@ -1867,7 +1867,7 @@ yyreduce:
   case 15: /* vertex: integer  */
 #line 248 "src/vendor/cigraph/src/io/pajek-parser.y"
                 {
-  igraph_integer_t v = (yyvsp[0].intnum);
+  igraph_int_t v = (yyvsp[0].intnum);
   /* Per feedback from Pajek's authors, negative signs should be ignored for vertex IDs.
    * See https://nascol.discourse.group/t/pajek-arcslist-edgelist-format/44/2
    * This applies to all of *Edges, *Arcs, *Edgeslist, *Arcslist and *Vertices section.
@@ -2381,7 +2381,7 @@ yyreduce:
   case 109: /* integer: "number"  */
 #line 525 "src/vendor/cigraph/src/io/pajek-parser.y"
              {
-  igraph_integer_t val;
+  igraph_int_t val;
   IGRAPH_YY_CHECK(igraph_i_parse_integer(igraph_pajek_yyget_text(scanner),
                                          igraph_pajek_yyget_leng(scanner),
                                          &val));
@@ -2683,12 +2683,12 @@ int igraph_pajek_yyerror(YYLTYPE* locp,
 
 static igraph_error_t add_numeric_attribute(igraph_trie_t *names,
                                             igraph_vector_ptr_t *attrs,
-                                            igraph_integer_t count,
+                                            igraph_int_t count,
                                             const char *attrname,
-                                            igraph_integer_t elem_id,
+                                            igraph_int_t elem_id,
                                             igraph_real_t number) {
-  igraph_integer_t attrsize = igraph_trie_size(names);
-  igraph_integer_t id;
+  igraph_int_t attrsize = igraph_trie_size(names);
+  igraph_int_t id;
   igraph_vector_t *na;
   igraph_attribute_record_t *rec;
 
@@ -2720,7 +2720,7 @@ static igraph_error_t add_numeric_attribute(igraph_trie_t *names,
   if (igraph_vector_size(na) == elem_id) {
     IGRAPH_CHECK(igraph_vector_push_back(na, number));
   } else if (igraph_vector_size(na) < elem_id) {
-    igraph_integer_t origsize=igraph_vector_size(na);
+    igraph_int_t origsize=igraph_vector_size(na);
     IGRAPH_CHECK(igraph_vector_resize(na, elem_id+1));
     for (;origsize<count; origsize++) {
       VECTOR(*na)[origsize] = IGRAPH_NAN;
@@ -2743,13 +2743,13 @@ static igraph_error_t make_dynstr(const char *src, size_t len, char **res) {
 
 static igraph_error_t add_string_attribute(igraph_trie_t *names,
                                            igraph_vector_ptr_t *attrs,
-                                           igraph_integer_t count,
+                                           igraph_int_t count,
                                            const char *attrname,
-                                           igraph_integer_t elem_id,
+                                           igraph_int_t elem_id,
                                            const char *str,
-                                           igraph_integer_t str_len) {
-  igraph_integer_t attrsize=igraph_trie_size(names);
-  igraph_integer_t id;
+                                           igraph_int_t str_len) {
+  igraph_int_t attrsize=igraph_trie_size(names);
+  igraph_int_t id;
   igraph_strvector_t *na;
   igraph_attribute_record_t *rec;
 
@@ -2852,8 +2852,8 @@ static igraph_error_t add_bipartite_type(igraph_i_pajek_parsedata_t *context) {
   const char *attrname="type";
   igraph_trie_t *names=context->vertex_attribute_names;
   igraph_vector_ptr_t *attrs=context->vertex_attributes;
-  igraph_integer_t n=context->vcount, n1=context->vcount2;
-  igraph_integer_t attrid, attrsize = igraph_trie_size(names);
+  igraph_int_t n=context->vcount, n1=context->vcount2;
+  igraph_int_t attrid, attrsize = igraph_trie_size(names);
   igraph_attribute_record_t *rec;
   igraph_vector_bool_t *na;
 
@@ -2888,10 +2888,10 @@ static igraph_error_t add_bipartite_type(igraph_i_pajek_parsedata_t *context) {
   IGRAPH_CHECK(igraph_vector_ptr_push_back(attrs, rec));
   IGRAPH_FINALLY_CLEAN(4); /* ownership of 'rec' transferred to 'attrs' */
 
-  for (igraph_integer_t i=0; i<n1; i++) {
+  for (igraph_int_t i=0; i<n1; i++) {
     VECTOR(*na)[i] = false;
   }
-  for (igraph_integer_t i=n1; i<n; i++) {
+  for (igraph_int_t i=n1; i<n; i++) {
     VECTOR(*na)[i] = true;
   }
 
@@ -2900,12 +2900,12 @@ static igraph_error_t add_bipartite_type(igraph_i_pajek_parsedata_t *context) {
 
 static igraph_error_t check_bipartite(igraph_i_pajek_parsedata_t *context) {
   const igraph_vector_int_t *edges=context->vector;
-  igraph_integer_t n1=context->vcount2;
-  igraph_integer_t ne=igraph_vector_int_size(edges);
+  igraph_int_t n1=context->vcount2;
+  igraph_int_t ne=igraph_vector_int_size(edges);
 
-  for (igraph_integer_t i=0; i<ne; i+=2) {
-    igraph_integer_t v1 = VECTOR(*edges)[i];
-    igraph_integer_t v2 = VECTOR(*edges)[i+1];
+  for (igraph_int_t i=0; i<ne; i+=2) {
+    igraph_int_t v1 = VECTOR(*edges)[i];
+    igraph_int_t v2 = VECTOR(*edges)[i+1];
     if ( (v1 < n1 && v2 < n1) || (v1 > n1 && v2 > n1) ) {
       IGRAPH_WARNING("Invalid edge in bipartite graph.");
     }

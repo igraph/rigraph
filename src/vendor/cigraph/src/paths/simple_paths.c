@@ -60,12 +60,12 @@
 
 igraph_error_t igraph_get_all_simple_paths(const igraph_t *graph,
                                 igraph_vector_int_t *res,
-                                igraph_integer_t from,
+                                igraph_int_t from,
                                 const igraph_vs_t to,
-                                igraph_integer_t cutoff,
+                                igraph_int_t cutoff,
                                 igraph_neimode_t mode) {
 
-    igraph_integer_t no_nodes = igraph_vcount(graph);
+    igraph_int_t no_nodes = igraph_vcount(graph);
     igraph_vit_t vit;
     igraph_bool_t toall = igraph_vs_is_all(&to);
     igraph_lazy_adjlist_t adjlist;
@@ -107,14 +107,14 @@ igraph_error_t igraph_get_all_simple_paths(const igraph_t *graph,
     igraph_vector_int_push_back(&dist, 0);
     VECTOR(added)[from] = true;
     while (!igraph_vector_int_empty(&stack)) {
-        igraph_integer_t act = igraph_vector_int_tail(&stack);
-        igraph_integer_t curdist = igraph_vector_int_tail(&dist);
+        igraph_int_t act = igraph_vector_int_tail(&stack);
+        igraph_int_t curdist = igraph_vector_int_tail(&dist);
         igraph_vector_int_t *neis = igraph_lazy_adjlist_get(&adjlist, act);
-        igraph_integer_t n;
-        igraph_integer_t *ptr = igraph_vector_int_get_ptr(&nptr, act);
+        igraph_int_t n;
+        igraph_int_t *ptr = igraph_vector_int_get_ptr(&nptr, act);
         igraph_bool_t any;
         igraph_bool_t within_dist;
-        igraph_integer_t nei;
+        igraph_int_t nei;
 
         IGRAPH_CHECK_OOM(neis, "Failed to query neighbors.");
 
@@ -142,7 +142,7 @@ igraph_error_t igraph_get_all_simple_paths(const igraph_t *graph,
             }
         } else {
             /* There is no such neighbor, finished with the subtree */
-            igraph_integer_t up = igraph_vector_int_pop_back(&stack);
+            igraph_int_t up = igraph_vector_int_pop_back(&stack);
             igraph_vector_int_pop_back(&dist);
             VECTOR(added)[up] = false;
             VECTOR(nptr)[up] = 0;

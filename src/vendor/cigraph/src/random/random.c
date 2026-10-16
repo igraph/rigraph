@@ -208,7 +208,7 @@ static uint64_t igraph_i_rng_get_uint64_bounded(igraph_rng_t *rng, uint64_t rang
 
 static double igraph_i_norm_rand(igraph_rng_t *rng);
 static double igraph_i_exp_rand(igraph_rng_t *rng);
-static double igraph_i_rbinom(igraph_rng_t *rng, igraph_integer_t n, double pp);
+static double igraph_i_rbinom(igraph_rng_t *rng, igraph_int_t n, double pp);
 static double igraph_i_rexp(igraph_rng_t *rng, double rate);
 static double igraph_i_rgamma(igraph_rng_t *rng, double shape, double scale);
 static double igraph_i_rpois(igraph_rng_t *rng, double rate);
@@ -275,7 +275,7 @@ igraph_error_t igraph_rng_seed(igraph_rng_t *rng, igraph_uint_t seed) {
  *
  * Time complexity: O(1).
  */
-igraph_integer_t igraph_rng_bits(const igraph_rng_t* rng) {
+igraph_int_t igraph_rng_bits(const igraph_rng_t* rng) {
     return rng->type->bits;
 }
 
@@ -336,7 +336,7 @@ const char *igraph_rng_name(const igraph_rng_t *rng) {
  */
 static igraph_uint_t igraph_i_rng_get_random_bits(igraph_rng_t *rng, uint8_t bits) {
     const igraph_rng_type_t *type = rng->type;
-    igraph_integer_t rng_bitwidth = igraph_rng_bits(rng);
+    igraph_int_t rng_bitwidth = igraph_rng_bits(rng);
     igraph_uint_t result;
 
     if (rng_bitwidth >= bits) {
@@ -375,7 +375,7 @@ static igraph_uint_t igraph_i_rng_get_random_bits(igraph_rng_t *rng, uint8_t bit
  */
 static uint64_t igraph_i_rng_get_random_bits_uint64(igraph_rng_t *rng, uint8_t bits) {
     const igraph_rng_type_t *type = rng->type;
-    igraph_integer_t rng_bitwidth = igraph_rng_bits(rng);
+    igraph_int_t rng_bitwidth = igraph_rng_bits(rng);
     uint64_t result;
 
     if (rng_bitwidth >= bits) {
@@ -562,7 +562,7 @@ static igraph_uint_t igraph_i_rng_get_uint_bounded(igraph_rng_t *rng, igraph_uin
 
 igraph_bool_t igraph_rng_get_bool(igraph_rng_t *rng) {
     const igraph_rng_type_t *type = rng->type;
-    const igraph_integer_t rng_bitwidth = igraph_rng_bits(rng);
+    const igraph_int_t rng_bitwidth = igraph_rng_bits(rng);
     /* Keep the highest bit as RNGs sometimes tend to have lower entropy in
      * low bits than in high bits.
      *
@@ -589,8 +589,8 @@ igraph_bool_t igraph_rng_get_bool(igraph_rng_t *rng) {
  * \ref igraph_rng_bits(rng).
  */
 
-igraph_integer_t igraph_rng_get_integer(
-    igraph_rng_t *rng, igraph_integer_t l, igraph_integer_t h
+igraph_int_t igraph_rng_get_integer(
+    igraph_rng_t *rng, igraph_int_t l, igraph_int_t h
 ) {
     const igraph_rng_type_t *type = rng->type;
     igraph_uint_t range;
@@ -608,9 +608,9 @@ igraph_integer_t igraph_rng_get_integer(
     if (IGRAPH_UNLIKELY(l == IGRAPH_INTEGER_MIN && h == IGRAPH_INTEGER_MAX)) {
         /* Full uint range is needed, we can just grab a random number from
          * the uint range and cast it to a signed integer */
-        return (igraph_integer_t) igraph_i_rng_get_uint(rng);
+        return (igraph_int_t) igraph_i_rng_get_uint(rng);
     } else if (l >= 0 || h < 0) {
-        /* this is okay, (h - l) will not overflow an igraph_integer_t */
+        /* this is okay, (h - l) will not overflow an igraph_int_t */
         range = (igraph_uint_t)(h - l) + 1;
     } else {
         /* (h - l) could potentially overflow so we need to play it safe. If we
@@ -768,7 +768,7 @@ igraph_real_t igraph_rng_get_geom(igraph_rng_t *rng, igraph_real_t p) {
  * Time complexity: depends on the RNG.
  */
 
-igraph_real_t igraph_rng_get_binom(igraph_rng_t *rng, igraph_integer_t n, igraph_real_t p) {
+igraph_real_t igraph_rng_get_binom(igraph_rng_t *rng, igraph_int_t n, igraph_real_t p) {
     const igraph_rng_type_t *type = rng->type;
     if (type->get_binom) {
         return type->get_binom(rng->state, n, p);
@@ -873,16 +873,16 @@ igraph_real_t igraph_rng_get_pois(igraph_rng_t *rng, igraph_real_t rate) {
  */
 
 static void igraph_i_random_sample_alga(igraph_vector_int_t *res,
-                                        igraph_integer_t l, igraph_integer_t h,
-                                        igraph_integer_t length) {
+                                        igraph_int_t l, igraph_int_t h,
+                                        igraph_int_t length) {
     /* Vitter: Variables V, quot, Nreal, and top are of type real */
 
-    igraph_integer_t N = h - l + 1;
-    igraph_integer_t n = length;
+    igraph_int_t N = h - l + 1;
+    igraph_int_t n = length;
 
     igraph_real_t top = N - n;
     igraph_real_t Nreal = N;
-    igraph_integer_t S = 0;
+    igraph_int_t S = 0;
     igraph_real_t V, quot;
 
     l = l - 1;
@@ -947,23 +947,23 @@ static void igraph_i_random_sample_alga(igraph_vector_int_t *res,
  * \example examples/simple/igraph_random_sample.c
  */
 
-igraph_error_t igraph_random_sample(igraph_vector_int_t *res, igraph_integer_t l, igraph_integer_t h,
-                         igraph_integer_t length) {
-    igraph_integer_t N; /* := h - l + 1 */
+igraph_error_t igraph_random_sample(igraph_vector_int_t *res, igraph_int_t l, igraph_int_t h,
+                         igraph_int_t length) {
+    igraph_int_t N; /* := h - l + 1 */
     IGRAPH_SAFE_ADD(h, -l, &N);
     IGRAPH_SAFE_ADD(N, 1, &N);
 
-    igraph_integer_t n = length;
+    igraph_int_t n = length;
 
     igraph_real_t nreal = length;
     igraph_real_t ninv = (nreal != 0) ? 1.0 / nreal : 0.0;
     igraph_real_t Nreal = N;
     igraph_real_t Vprime;
-    igraph_integer_t qu1 = -n + 1 + N;
+    igraph_int_t qu1 = -n + 1 + N;
     igraph_real_t qu1real = -nreal + 1.0 + Nreal;
     igraph_real_t negalphainv = -13;
     igraph_real_t threshold = -negalphainv * n;
-    igraph_integer_t S;
+    igraph_int_t S;
 
     /* getting back some sense of sanity */
     if (l > h) {
@@ -986,7 +986,7 @@ igraph_error_t igraph_random_sample(igraph_vector_int_t *res, igraph_integer_t l
     }
     if (length == N) {
         IGRAPH_CHECK(igraph_vector_int_resize(res, length));
-        for (igraph_integer_t i = 0; i < length; i++) {
+        for (igraph_int_t i = 0; i < length; i++) {
             VECTOR(*res)[i] = l++;
         }
         return IGRAPH_SUCCESS;
@@ -1107,7 +1107,7 @@ static void igraph_i_random_sample_alga_real(igraph_vector_t *res,
  * This function is the 'real' version of \ref igraph_random_sample(), and was added
  * so \ref igraph_erdos_renyi_game_gnm() and related functions can use a random sample
  * of doubles instead of integers to prevent overflows on systems with 32-bit
- * \type igraph_integer_t.
+ * \type igraph_int_t.
  *
  * \param res Pointer to an initialized vector. This will hold the
  *        result. It will be resized to the proper size.
@@ -1127,10 +1127,10 @@ static void igraph_i_random_sample_alga_real(igraph_vector_t *res,
  */
 
 igraph_error_t igraph_random_sample_real(igraph_vector_t *res, igraph_real_t l,
-                    igraph_real_t h, igraph_integer_t length) {
+                    igraph_real_t h, igraph_int_t length) {
     /* This function is the 'real' version of igraph_random_sample, and was added
      * so erdos_renyi_game_gnm can use a random sample of doubles instead of integers
-     * to prevent overflows on systems with 32-bits igraph_integer_t.
+     * to prevent overflows on systems with 32-bits igraph_int_t.
      */
     igraph_real_t N = h - l + 1;
     igraph_real_t n = length;
@@ -1172,7 +1172,7 @@ igraph_error_t igraph_random_sample_real(igraph_vector_t *res, igraph_real_t l,
     }
     if (length == N) {
         IGRAPH_CHECK(igraph_vector_resize(res, length));
-        for (igraph_integer_t i = 0; i < length; i++) {
+        for (igraph_int_t i = 0; i < length; i++) {
             VECTOR(*res)[i] = l++;
         }
         return IGRAPH_SUCCESS;
@@ -1524,11 +1524,11 @@ static double igraph_i_qnorm5(double p, double mu, double sigma, igraph_bool_t l
     return mu + sigma * val;
 }
 
-static igraph_integer_t imax2(igraph_integer_t x, igraph_integer_t y) {
+static igraph_int_t imax2(igraph_int_t x, igraph_int_t y) {
     return (x < y) ? y : x;
 }
 
-static igraph_integer_t imin2(igraph_integer_t x, igraph_integer_t y) {
+static igraph_int_t imin2(igraph_int_t x, igraph_int_t y) {
     return (x < y) ? x : y;
 }
 
@@ -1627,7 +1627,7 @@ static double igraph_i_rpois(igraph_rng_t *rng, double mu) {
 
     /* These are static --- persistent between calls for same mu : */
     static IGRAPH_THREAD_LOCAL int l;
-    static IGRAPH_THREAD_LOCAL igraph_integer_t m;
+    static IGRAPH_THREAD_LOCAL igraph_int_t m;
 
     static IGRAPH_THREAD_LOCAL double b1, b2, c, c0, c1, c2, c3;
     static IGRAPH_THREAD_LOCAL double pp[36], p0, p, q, s, d, omega;
@@ -1672,7 +1672,7 @@ static double igraph_i_rpois(igraph_rng_t *rng, double mu) {
             /*muprev = 0.;-* such that next time, mu != muprev ..*/
             if (mu != muprev) {
                 muprev = mu;
-                m = imax2(1, (igraph_integer_t) mu);
+                m = imax2(1, (igraph_int_t) mu);
                 l = 0; /* pp[] is already ok up to pp[l] */
                 q = p0 = p = exp(-mu);
             }
@@ -1830,18 +1830,18 @@ Step_F: /* 'subroutine' F : calculation of px,py,fx,fy. */
 
 #define repeat for(;;)
 
-static double igraph_i_rbinom(igraph_rng_t *rng, igraph_integer_t n, double pp) {
+static double igraph_i_rbinom(igraph_rng_t *rng, igraph_int_t n, double pp) {
 
     static IGRAPH_THREAD_LOCAL double c, fm, npq, p1, p2, p3, p4, qn;
     static IGRAPH_THREAD_LOCAL double xl, xll, xlr, xm, xr;
 
     static IGRAPH_THREAD_LOCAL double psave = -1.0;
-    static IGRAPH_THREAD_LOCAL igraph_integer_t nsave = -1;
-    static IGRAPH_THREAD_LOCAL igraph_integer_t m;
+    static IGRAPH_THREAD_LOCAL igraph_int_t nsave = -1;
+    static IGRAPH_THREAD_LOCAL igraph_int_t m;
 
     double f, f1, f2, u, v, w, w2, x, x1, x2, z, z2;
     double p, q, np, g, r, al, alv, amaxp, ffm, ynorm;
-    igraph_integer_t i, ix, k;
+    igraph_int_t i, ix, k;
 
     if (!isfinite(pp) ||
         /* n=0, p=0, p=1 are not errors <TSL>*/
@@ -2241,7 +2241,7 @@ igraph_error_t igraph_rng_get_dirichlet(igraph_rng_t *rng,
                              const igraph_vector_t *alpha,
                              igraph_vector_t *result) {
 
-    igraph_integer_t len = igraph_vector_size(alpha);
+    igraph_int_t len = igraph_vector_size(alpha);
     igraph_real_t sum = 0.0;
 
     if (len < 2) {
@@ -2255,11 +2255,11 @@ igraph_error_t igraph_rng_get_dirichlet(igraph_rng_t *rng,
 
     IGRAPH_CHECK(igraph_vector_resize(result, len));
 
-    for (igraph_integer_t i = 0; i < len; i++) {
+    for (igraph_int_t i = 0; i < len; i++) {
         VECTOR(*result)[i] = igraph_rng_get_gamma(rng, VECTOR(*alpha)[i], 1.0);
         sum += VECTOR(*result)[i];
     }
-    for (igraph_integer_t i = 0; i < len; i++) {
+    for (igraph_int_t i = 0; i < len; i++) {
         VECTOR(*result)[i] /= sum;
     }
 

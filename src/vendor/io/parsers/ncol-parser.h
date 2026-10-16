@@ -67,7 +67,7 @@ union YYSTYPE
 {
 #line 77 "src/vendor/cigraph/src/io/ncol-parser.y"
 
-  igraph_integer_t edgenum;
+  igraph_int_t edgenum;
   igraph_real_t weightnum;
 
 #line 74 "src/vendor/io/ncol-parser.h"

@@ -68,7 +68,7 @@ union YYSTYPE
 {
 #line 76 "src/vendor/cigraph/src/io/lgl-parser.y"
 
-  igraph_integer_t edgenum;
+  igraph_int_t edgenum;
   igraph_real_t weightnum;
 
 #line 75 "src/vendor/io/lgl-parser.h"

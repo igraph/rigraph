@@ -60,9 +60,9 @@
 igraph_error_t igraph_dot_product_game(igraph_t *graph, const igraph_matrix_t *vecs,
                             igraph_bool_t directed) {
 
-    igraph_integer_t nrow = igraph_matrix_nrow(vecs);
-    igraph_integer_t ncol = igraph_matrix_ncol(vecs);
-    igraph_integer_t i, j;
+    igraph_int_t nrow = igraph_matrix_nrow(vecs);
+    igraph_int_t ncol = igraph_matrix_ncol(vecs);
+    igraph_int_t i, j;
     igraph_vector_int_t edges;
     igraph_bool_t warned_neg = false, warned_big = false;
 
@@ -71,7 +71,7 @@ igraph_error_t igraph_dot_product_game(igraph_t *graph, const igraph_matrix_t *v
     RNG_BEGIN();
 
     for (i = 0; i < ncol; i++) {
-        igraph_integer_t from = directed ? 0 : i + 1;
+        igraph_int_t from = directed ? 0 : i + 1;
         igraph_vector_t v1;
         igraph_vector_view(&v1, &MATRIX(*vecs, 0, i), nrow);
         for (j = from; j < ncol; j++) {
@@ -130,11 +130,11 @@ igraph_error_t igraph_dot_product_game(igraph_t *graph, const igraph_matrix_t *v
  * igraph_sample_dirichlet() for other similar samplers.
  */
 
-igraph_error_t igraph_sample_sphere_surface(igraph_integer_t dim, igraph_integer_t n,
+igraph_error_t igraph_sample_sphere_surface(igraph_int_t dim, igraph_int_t n,
                                  igraph_real_t radius,
                                  igraph_bool_t positive,
                                  igraph_matrix_t *res) {
-    igraph_integer_t i, j;
+    igraph_int_t i, j;
 
     if (dim < 2) {
         IGRAPH_ERROR("Sphere must be at least two dimensional to sample from "
@@ -198,12 +198,12 @@ igraph_error_t igraph_sample_sphere_surface(igraph_integer_t dim, igraph_integer
  */
 
 
-igraph_error_t igraph_sample_sphere_volume(igraph_integer_t dim, igraph_integer_t n,
+igraph_error_t igraph_sample_sphere_volume(igraph_int_t dim, igraph_int_t n,
                                 igraph_real_t radius,
                                 igraph_bool_t positive,
                                 igraph_matrix_t *res) {
 
-    igraph_integer_t i, j;
+    igraph_int_t i, j;
 
     /* Arguments are checked by the following call */
 
@@ -245,11 +245,11 @@ igraph_error_t igraph_sample_sphere_volume(igraph_integer_t dim, igraph_integer_
  * latent vectors.
  */
 
-igraph_error_t igraph_sample_dirichlet(igraph_integer_t n, const igraph_vector_t *alpha,
+igraph_error_t igraph_sample_dirichlet(igraph_int_t n, const igraph_vector_t *alpha,
                             igraph_matrix_t *res) {
 
-    igraph_integer_t len = igraph_vector_size(alpha);
-    igraph_integer_t i, j;
+    igraph_int_t len = igraph_vector_size(alpha);
+    igraph_int_t i, j;
     igraph_real_t sum, num;
     igraph_rng_t* rng = igraph_rng_default();
 

@@ -65,12 +65,12 @@ igraph_error_t igraph_topological_sorting(
     /* Note: This function ignores self-loops, there it cannot
      * use the IGRAPH_PROP_IS_DAG property cache entry. */
 
-    igraph_integer_t no_of_nodes = igraph_vcount(graph);
+    igraph_int_t no_of_nodes = igraph_vcount(graph);
     igraph_vector_int_t degrees;
     igraph_vector_int_t neis;
     igraph_dqueue_int_t sources;
     igraph_neimode_t deg_mode;
-    igraph_integer_t node, i, j;
+    igraph_int_t node, i, j;
 
     if (mode == IGRAPH_ALL || !igraph_is_directed(graph)) {
         IGRAPH_ERROR("Topological sorting does not make sense for undirected graphs.",
@@ -157,7 +157,7 @@ igraph_error_t igraph_topological_sorting(
  *     sorting of a DAG.
  */
 igraph_error_t igraph_is_dag(const igraph_t* graph, igraph_bool_t *res) {
-    igraph_integer_t no_of_nodes = igraph_vcount(graph);
+    igraph_int_t no_of_nodes = igraph_vcount(graph);
     igraph_vector_int_t degrees;
     igraph_vector_int_t neis;
     igraph_dqueue_int_t sources;
@@ -175,10 +175,10 @@ igraph_error_t igraph_is_dag(const igraph_t* graph, igraph_bool_t *res) {
 
     IGRAPH_CHECK(igraph_degree(graph, &degrees, igraph_vss_all(), IGRAPH_IN, /* loops */ true));
 
-    igraph_integer_t vertices_left = no_of_nodes;
+    igraph_int_t vertices_left = no_of_nodes;
 
     /* Do we have nodes with no incoming edges? */
-    for (igraph_integer_t i = 0; i < no_of_nodes; i++) {
+    for (igraph_int_t i = 0; i < no_of_nodes; i++) {
         if (VECTOR(degrees)[i] == 0) {
             IGRAPH_CHECK(igraph_dqueue_int_push(&sources, i));
         }
@@ -186,15 +186,15 @@ igraph_error_t igraph_is_dag(const igraph_t* graph, igraph_bool_t *res) {
 
     /* Take all nodes with no incoming edges and remove them */
     while (!igraph_dqueue_int_empty(&sources)) {
-        igraph_integer_t node = igraph_dqueue_int_pop(&sources);
+        igraph_int_t node = igraph_dqueue_int_pop(&sources);
         /* Exclude the node from further source searches */
         VECTOR(degrees)[node] = -1;
         vertices_left--;
         /* Get the neighbors and decrease their degrees by one */
         IGRAPH_CHECK(igraph_neighbors(graph, &neis, node, IGRAPH_OUT));
-        igraph_integer_t n = igraph_vector_int_size(&neis);
-        for (igraph_integer_t i = 0; i < n; i++) {
-            igraph_integer_t nei = VECTOR(neis)[i];
+        igraph_int_t n = igraph_vector_int_size(&neis);
+        for (igraph_int_t i = 0; i < n; i++) {
+            igraph_int_t nei = VECTOR(neis)[i];
             if (nei == node) {
                 /* Found a self-loop, graph is not a DAG */
                 *res = false;
@@ -227,11 +227,11 @@ finalize:
  */
 igraph_error_t igraph_transitive_closure_dag(const igraph_t *graph, igraph_t *closure) {
 
-    igraph_integer_t no_of_nodes = igraph_vcount(graph);
+    igraph_int_t no_of_nodes = igraph_vcount(graph);
     igraph_vector_int_t deg;
     igraph_vector_int_t new_edges;
     igraph_vector_int_t ancestors;
-    igraph_integer_t root;
+    igraph_int_t root;
     igraph_vector_int_t neighbors;
     igraph_stack_int_t path;
     igraph_vector_bool_t done;
@@ -262,10 +262,10 @@ igraph_error_t igraph_transitive_closure_dag(const igraph_t *graph, igraph_t *cl
         IGRAPH_CHECK(igraph_stack_int_push(&path, root));
 
         while (!igraph_stack_int_empty(&path)) {
-            igraph_integer_t node = igraph_stack_int_top(&path);
+            igraph_int_t node = igraph_stack_int_top(&path);
             if (node == STAR) {
                 /* Leaving a node */
-                igraph_integer_t j, n;
+                igraph_int_t j, n;
                 igraph_stack_int_pop(&path);
                 node = igraph_stack_int_pop(&path);
                 if (!VECTOR(done)[node]) {
@@ -280,7 +280,7 @@ igraph_error_t igraph_transitive_closure_dag(const igraph_t *graph, igraph_t *cl
                 }
             } else {
                 /* Getting into a node */
-                igraph_integer_t n, j;
+                igraph_int_t n, j;
                 if (!VECTOR(done)[node]) {
                     IGRAPH_CHECK(igraph_vector_int_push_back(&ancestors, node));
                 }
@@ -289,7 +289,7 @@ igraph_error_t igraph_transitive_closure_dag(const igraph_t *graph, igraph_t *cl
                 n = igraph_vector_int_size(&neighbors);
                 IGRAPH_CHECK(igraph_stack_int_push(&path, STAR));
                 for (j = 0; j < n; j++) {
-                    igraph_integer_t nei = VECTOR(neighbors)[j];
+                    igraph_int_t nei = VECTOR(neighbors)[j];
                     IGRAPH_CHECK(igraph_stack_int_push(&path, nei));
                 }
             }

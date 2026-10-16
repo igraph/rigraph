@@ -1,7 +1,6 @@
-/* -*- mode: C -*-  */
 /* vim:set ts=4 sw=4 sts=4 et: */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2005-2021 The igraph development team
 
    This program is free software; you can redistribute it and/or modify
@@ -104,7 +103,7 @@
 igraph_error_t igraph_get_widest_paths(const igraph_t *graph,
                                        igraph_vector_int_list_t *vertices,
                                        igraph_vector_int_list_t *edges,
-                                       igraph_integer_t from,
+                                       igraph_int_t from,
                                        igraph_vs_t to,
                                        const igraph_vector_t *weights,
                                        igraph_neimode_t mode,
@@ -126,15 +125,15 @@ igraph_error_t igraph_get_widest_paths(const igraph_t *graph,
     path from a vertex to a vertex it cannot reach as negative infinity.
     */
 
-    const igraph_integer_t vcount = igraph_vcount(graph);
-    const igraph_integer_t ecount = igraph_ecount(graph);
+    const igraph_int_t vcount = igraph_vcount(graph);
+    const igraph_int_t ecount = igraph_ecount(graph);
     igraph_vit_t vit;
     igraph_2wheap_t Q;
     igraph_lazy_inclist_t inclist;
     igraph_vector_t widths;
-    igraph_integer_t *parent_eids;
+    igraph_int_t *parent_eids;
     bool *is_target;
-    igraph_integer_t i, to_reach;
+    igraph_int_t i, to_reach;
 
     if (!weights) {
         IGRAPH_ERROR("Weight vector is required.", IGRAPH_EINVAL);
@@ -168,7 +167,7 @@ igraph_error_t igraph_get_widest_paths(const igraph_t *graph,
     IGRAPH_VECTOR_INIT_FINALLY(&widths, vcount);
     igraph_vector_fill(&widths, -IGRAPH_INFINITY);
 
-    parent_eids = IGRAPH_CALLOC(vcount, igraph_integer_t);
+    parent_eids = IGRAPH_CALLOC(vcount, igraph_int_t);
     IGRAPH_CHECK_OOM(parent_eids, "Insufficient memory for widest paths.");
     IGRAPH_FINALLY(igraph_free, parent_eids);
 
@@ -191,7 +190,7 @@ igraph_error_t igraph_get_widest_paths(const igraph_t *graph,
     igraph_2wheap_push_with_index(&Q, from, IGRAPH_INFINITY);
 
     while (!igraph_2wheap_empty(&Q) && to_reach > 0) {
-        igraph_integer_t nlen, maxnei = igraph_2wheap_max_index(&Q);
+        igraph_int_t nlen, maxnei = igraph_2wheap_max_index(&Q);
         igraph_real_t maxwidth = igraph_2wheap_delete_max(&Q);
         igraph_vector_int_t *neis;
 
@@ -207,8 +206,8 @@ igraph_error_t igraph_get_widest_paths(const igraph_t *graph,
         IGRAPH_CHECK_OOM(neis, "Failed to query incident edges.");
         nlen = igraph_vector_int_size(neis);
         for (i = 0; i < nlen; i++) {
-            igraph_integer_t edge = VECTOR(*neis)[i];
-            igraph_integer_t tto = IGRAPH_OTHER(graph, edge, maxnei);
+            igraph_int_t edge = VECTOR(*neis)[i];
+            igraph_int_t tto = IGRAPH_OTHER(graph, edge, maxnei);
             igraph_real_t edgewidth = VECTOR(*weights)[edge];
             igraph_real_t altwidth = maxwidth < edgewidth ? maxwidth : edgewidth;
             igraph_real_t curwidth = VECTOR(widths)[tto];
@@ -268,8 +267,8 @@ igraph_error_t igraph_get_widest_paths(const igraph_t *graph,
     /* Reconstruct the widest paths based on vertex and/or edge IDs */
     if (vertices || edges) {
         for (IGRAPH_VIT_RESET(vit), i = 0; !IGRAPH_VIT_END(vit); IGRAPH_VIT_NEXT(vit), i++) {
-            igraph_integer_t v = IGRAPH_VIT_GET(vit);
-            igraph_integer_t size, act, edge;
+            igraph_int_t v = IGRAPH_VIT_GET(vit);
+            igraph_int_t size, act, edge;
             igraph_vector_int_t *vvec = 0, *evec = 0;
 
             if (vertices) {
@@ -367,8 +366,8 @@ igraph_error_t igraph_get_widest_paths(const igraph_t *graph,
 igraph_error_t igraph_get_widest_path(const igraph_t *graph,
                                       igraph_vector_int_t *vertices,
                                       igraph_vector_int_t *edges,
-                                      igraph_integer_t from,
-                                      igraph_integer_t to,
+                                      igraph_int_t from,
+                                      igraph_int_t to,
                                       const igraph_vector_t *weights,
                                       igraph_neimode_t mode) {
 
@@ -468,8 +467,8 @@ igraph_error_t igraph_widest_path_widths_floyd_warshall(const igraph_t *graph,
     path from a vertex to a vertex it cannot reach as negative infinity.
     */
 
-    const igraph_integer_t vcount = igraph_vcount(graph);
-    const igraph_integer_t ecount = igraph_ecount(graph);
+    const igraph_int_t vcount = igraph_vcount(graph);
+    const igraph_int_t ecount = igraph_ecount(graph);
     igraph_bool_t in = false, out = false;
 
     if (! weights) {
@@ -507,13 +506,13 @@ igraph_error_t igraph_widest_path_widths_floyd_warshall(const igraph_t *graph,
     /* Fill out adjacency matrix */
     IGRAPH_CHECK(igraph_matrix_resize(res, vcount, vcount));
     igraph_matrix_fill(res, -IGRAPH_INFINITY);
-    for (igraph_integer_t i=0; i < vcount; i++) {
+    for (igraph_int_t i=0; i < vcount; i++) {
         MATRIX(*res, i, i) = IGRAPH_INFINITY;
     }
 
-    for (igraph_integer_t edge=0; edge < ecount; edge++) {
-        igraph_integer_t from = IGRAPH_FROM(graph, edge);
-        igraph_integer_t to = IGRAPH_TO(graph, edge);
+    for (igraph_int_t edge=0; edge < ecount; edge++) {
+        igraph_int_t from = IGRAPH_FROM(graph, edge);
+        igraph_int_t to = IGRAPH_TO(graph, edge);
         igraph_real_t w = VECTOR(*weights)[edge];
 
         if (w == -IGRAPH_INFINITY) {
@@ -526,15 +525,15 @@ igraph_error_t igraph_widest_path_widths_floyd_warshall(const igraph_t *graph,
     }
 
     /* Run modified Floyd Warshall */
-    for (igraph_integer_t k = 0; k < vcount; k++) {
+    for (igraph_int_t k = 0; k < vcount; k++) {
         /* Iterate in column-major order for better performance */
-        for (igraph_integer_t j = 0; j < vcount; j++) {
+        for (igraph_int_t j = 0; j < vcount; j++) {
             igraph_real_t width_kj = MATRIX(*res, k, j);
             if (j == k || width_kj == -IGRAPH_INFINITY) continue;
 
             IGRAPH_ALLOW_INTERRUPTION();
 
-            for (igraph_integer_t i = 0; i < vcount; i++) {
+            for (igraph_int_t i = 0; i < vcount; i++) {
                 if (i == j || i == k) continue;
 
                 /* alternative_width := min(A(i,k), A(k,j))
@@ -617,13 +616,13 @@ igraph_error_t igraph_widest_path_widths_dijkstra(const igraph_t *graph,
     path from a vertex to a vertex it cannot reach as negative infinity.
     */
 
-    const igraph_integer_t vcount = igraph_vcount(graph);
-    const igraph_integer_t ecount = igraph_ecount(graph);
+    const igraph_int_t vcount = igraph_vcount(graph);
+    const igraph_int_t ecount = igraph_ecount(graph);
     igraph_2wheap_t Q;
     igraph_vit_t fromvit, tovit;
-    igraph_integer_t no_of_from, no_of_to;
+    igraph_int_t no_of_from, no_of_to;
     igraph_lazy_inclist_t inclist;
-    igraph_integer_t i, j;
+    igraph_int_t i, j;
     igraph_bool_t all_to;
     igraph_vector_int_t indexv;
 
@@ -659,7 +658,7 @@ igraph_error_t igraph_widest_path_widths_dijkstra(const igraph_t *graph,
         IGRAPH_FINALLY(igraph_vit_destroy, &tovit);
         no_of_to = IGRAPH_VIT_SIZE(tovit);
         for (i = 0; !IGRAPH_VIT_END(tovit); IGRAPH_VIT_NEXT(tovit)) {
-            igraph_integer_t v = IGRAPH_VIT_GET(tovit);
+            igraph_int_t v = IGRAPH_VIT_GET(tovit);
             if (VECTOR(indexv)[v]) {
                 IGRAPH_ERROR("Duplicate vertices in target vertex set, this is not allowed.",
                              IGRAPH_EINVAL);
@@ -675,16 +674,16 @@ igraph_error_t igraph_widest_path_widths_dijkstra(const igraph_t *graph,
          !IGRAPH_VIT_END(fromvit);
          IGRAPH_VIT_NEXT(fromvit), i++) {
 
-        igraph_integer_t reached = 0;
-        igraph_integer_t source = IGRAPH_VIT_GET(fromvit);
+        igraph_int_t reached = 0;
+        igraph_int_t source = IGRAPH_VIT_GET(fromvit);
         igraph_2wheap_clear(&Q);
         igraph_2wheap_push_with_index(&Q, source, IGRAPH_INFINITY);
 
         while (!igraph_2wheap_empty(&Q)) {
-            igraph_integer_t maxnei = igraph_2wheap_max_index(&Q);
+            igraph_int_t maxnei = igraph_2wheap_max_index(&Q);
             igraph_real_t maxwidth = igraph_2wheap_deactivate_max(&Q);
             igraph_vector_int_t *neis;
-            igraph_integer_t nlen;
+            igraph_int_t nlen;
 
             IGRAPH_ALLOW_INTERRUPTION();
 
@@ -706,8 +705,8 @@ igraph_error_t igraph_widest_path_widths_dijkstra(const igraph_t *graph,
             IGRAPH_CHECK_OOM(neis, "Failed to query incident edges.");
             nlen = igraph_vector_int_size(neis);
             for (j = 0; j < nlen; j++) {
-                igraph_integer_t edge = VECTOR(*neis)[j];
-                igraph_integer_t tto = IGRAPH_OTHER(graph, edge, maxnei);
+                igraph_int_t edge = VECTOR(*neis)[j];
+                igraph_int_t tto = IGRAPH_OTHER(graph, edge, maxnei);
                 igraph_real_t edgewidth = VECTOR(*weights)[edge];
                 igraph_real_t altwidth = maxwidth < edgewidth ? maxwidth : edgewidth;
                 igraph_bool_t active = igraph_2wheap_has_active(&Q, tto);

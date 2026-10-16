@@ -62,7 +62,7 @@
  *
  * \example examples/simple/creation.c
  */
-igraph_error_t igraph_empty(igraph_t *graph, igraph_integer_t n, igraph_bool_t directed) {
+igraph_error_t igraph_empty(igraph_t *graph, igraph_int_t n, igraph_bool_t directed) {
     return igraph_empty_attrs(graph, n, directed, 0);
 }
 
@@ -99,9 +99,9 @@ igraph_error_t igraph_delete_vertices(igraph_t *graph, const igraph_vs_t vertice
  *
  * \param graph The graph object.
  * \param eid The edge ID.
- * \param from Pointer to an \type igraph_integer_t. The tail (source) of
+ * \param from Pointer to an \type igraph_int_t. The tail (source) of
  * the edge will be placed here.
- * \param to Pointer to an \type igraph_integer_t. The head (target) of the
+ * \param to Pointer to an \type igraph_int_t. The head (target) of the
  * edge will be placed here.
  * \return Error code.
  *
@@ -115,8 +115,8 @@ igraph_error_t igraph_delete_vertices(igraph_t *graph, const igraph_vs_t vertice
  * Time complexity: O(1).
  */
 igraph_error_t igraph_edge(
-    const igraph_t *graph, igraph_integer_t eid,
-    igraph_integer_t *from, igraph_integer_t *to
+    const igraph_t *graph, igraph_int_t eid,
+    igraph_int_t *from, igraph_int_t *to
 ) {
 
     if (eid < 0 || eid >= igraph_ecount(graph)) {
@@ -153,7 +153,7 @@ igraph_error_t igraph_edge(
  */
 igraph_error_t igraph_edges(const igraph_t *graph, igraph_es_t eids, igraph_vector_int_t *edges) {
     igraph_eit_t eit;
-    igraph_integer_t n, ptr = 0;
+    igraph_int_t n, ptr = 0;
 
     IGRAPH_CHECK(igraph_eit_create(graph, eids, &eit));
     IGRAPH_FINALLY(igraph_eit_destroy, &eit);
@@ -162,13 +162,13 @@ igraph_error_t igraph_edges(const igraph_t *graph, igraph_es_t eids, igraph_vect
 
     if (igraph_is_directed(graph)) {
         for (; !IGRAPH_EIT_END(eit); IGRAPH_EIT_NEXT(eit)) {
-            igraph_integer_t e = IGRAPH_EIT_GET(eit);
+            igraph_int_t e = IGRAPH_EIT_GET(eit);
             VECTOR(*edges)[ptr++] = IGRAPH_FROM(graph, e);
             VECTOR(*edges)[ptr++] = IGRAPH_TO(graph, e);
         }
     } else {
         for (; !IGRAPH_EIT_END(eit); IGRAPH_EIT_NEXT(eit)) {
-            igraph_integer_t e = IGRAPH_EIT_GET(eit);
+            igraph_int_t e = IGRAPH_EIT_GET(eit);
             VECTOR(*edges)[ptr++] = IGRAPH_TO(graph, e);
             VECTOR(*edges)[ptr++] = IGRAPH_FROM(graph, e);
         }

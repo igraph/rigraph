@@ -1,7 +1,6 @@
-/* -*- mode: C -*-  */
 /* vim:set ts=4 sw=4 sts=4 et: */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2003-2020  The igraph development team
 
    This program is free software; you can redistribute it and/or modify
@@ -41,8 +40,8 @@
  *
  * Time complexity: O(|V|), the number of vertices.
  */
-igraph_error_t igraph_layout_grid(const igraph_t *graph, igraph_matrix_t *res, igraph_integer_t width) {
-    igraph_integer_t i, no_of_nodes = igraph_vcount(graph);
+igraph_error_t igraph_layout_grid(const igraph_t *graph, igraph_matrix_t *res, igraph_int_t width) {
+    igraph_int_t i, no_of_nodes = igraph_vcount(graph);
     igraph_real_t x, y;
 
     IGRAPH_CHECK(igraph_matrix_resize(res, no_of_nodes, 2));
@@ -82,8 +81,8 @@ igraph_error_t igraph_layout_grid(const igraph_t *graph, igraph_matrix_t *res, i
  * Time complexity: O(|V|), the number of vertices.
  */
 igraph_error_t igraph_layout_grid_3d(const igraph_t *graph, igraph_matrix_t *res,
-                          igraph_integer_t width, igraph_integer_t height) {
-    igraph_integer_t i, no_of_nodes = igraph_vcount(graph);
+                          igraph_int_t width, igraph_int_t height) {
+    igraph_int_t i, no_of_nodes = igraph_vcount(graph);
     igraph_real_t x, y, z;
 
     IGRAPH_CHECK(igraph_matrix_resize(res, no_of_nodes, 3));

@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -50,7 +49,7 @@ IGRAPH_EXPORT igraph_error_t igraph_transitivity_barrat(const igraph_t *graph,
 IGRAPH_EXPORT igraph_error_t igraph_ecc(const igraph_t *graph,
                                         igraph_vector_t *res,
                                         igraph_es_t eids,
-                                        igraph_integer_t k,
+                                        igraph_int_t k,
                                         igraph_bool_t offset,
                                         igraph_bool_t normalize);
 

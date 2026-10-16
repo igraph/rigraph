@@ -114,8 +114,8 @@ igraph_error_t igraph_density(const igraph_t *graph, igraph_real_t *res,
 igraph_error_t igraph_mean_degree(const igraph_t *graph, igraph_real_t *res,
                                   igraph_bool_t loops) {
 
-    igraph_integer_t no_of_nodes = igraph_vcount(graph);
-    igraph_integer_t no_of_edges = igraph_ecount(graph);
+    igraph_int_t no_of_nodes = igraph_vcount(graph);
+    igraph_int_t no_of_edges = igraph_ecount(graph);
     igraph_bool_t directed = igraph_is_directed(graph);
 
     if (no_of_nodes == 0) {
@@ -124,7 +124,7 @@ igraph_error_t igraph_mean_degree(const igraph_t *graph, igraph_real_t *res,
     }
 
     if (! loops) {
-        igraph_integer_t loop_count;
+        igraph_int_t loop_count;
         IGRAPH_CHECK(igraph_count_loops(graph, &loop_count));
         no_of_edges -= loop_count;
     }
@@ -175,8 +175,8 @@ igraph_error_t igraph_mean_degree(const igraph_t *graph, igraph_real_t *res,
 igraph_error_t igraph_diversity(const igraph_t *graph, const igraph_vector_t *weights,
                      igraph_vector_t *res, const igraph_vs_t vids) {
 
-    igraph_integer_t no_of_edges = igraph_ecount(graph);
-    igraph_integer_t k, i;
+    igraph_int_t no_of_edges = igraph_ecount(graph);
+    igraph_int_t k, i;
     igraph_vector_int_t incident;
     igraph_bool_t has_multiple;
     igraph_vit_t vit;
@@ -217,7 +217,7 @@ igraph_error_t igraph_diversity(const igraph_t *graph, const igraph_vector_t *we
 
     for (IGRAPH_VIT_RESET(vit); !IGRAPH_VIT_END(vit); IGRAPH_VIT_NEXT(vit)) {
         igraph_real_t d;
-        igraph_integer_t v = IGRAPH_VIT_GET(vit);
+        igraph_int_t v = IGRAPH_VIT_GET(vit);
 
         IGRAPH_CHECK(igraph_incident(graph, &incident, v, /*mode=*/ IGRAPH_ALL));
         k = igraph_vector_int_size(&incident); /* degree */
@@ -308,9 +308,9 @@ igraph_error_t igraph_reciprocity(const igraph_t *graph, igraph_real_t *res,
                        igraph_bool_t ignore_loops,
                        igraph_reciprocity_t mode) {
 
-    igraph_integer_t nonrec = 0, rec = 0, loops = 0;
+    igraph_int_t nonrec = 0, rec = 0, loops = 0;
     igraph_vector_int_t inneis, outneis;
-    igraph_integer_t no_of_nodes = igraph_vcount(graph);
+    igraph_int_t no_of_nodes = igraph_vcount(graph);
 
     if (mode != IGRAPH_RECIPROCITY_DEFAULT &&
         mode != IGRAPH_RECIPROCITY_RATIO) {
@@ -326,8 +326,8 @@ igraph_error_t igraph_reciprocity(const igraph_t *graph, igraph_real_t *res,
     IGRAPH_VECTOR_INT_INIT_FINALLY(&inneis, 0);
     IGRAPH_VECTOR_INT_INIT_FINALLY(&outneis, 0);
 
-    for (igraph_integer_t i = 0; i < no_of_nodes; i++) {
-        igraph_integer_t ip, op, indeg, outdeg;
+    for (igraph_int_t i = 0; i < no_of_nodes; i++) {
+        igraph_int_t ip, op, indeg, outdeg;
         IGRAPH_CHECK(igraph_neighbors(graph, &inneis, i, IGRAPH_IN));
         IGRAPH_CHECK(igraph_neighbors(graph, &outneis, i, IGRAPH_OUT));
 

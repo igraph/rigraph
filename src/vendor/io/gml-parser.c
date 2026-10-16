@@ -76,7 +76,7 @@
 
 
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard st, Cambridge, MA, 02138 USA
 
@@ -1893,7 +1893,7 @@ static igraph_error_t igraph_i_gml_make_numeric(const char *name,
   IGRAPH_FINALLY(igraph_free, t);
 
   /* The GML spec only requires support for 32-bit signed integers,
-   * but igraph tries to support the same range as igraph_integer_t,
+   * but igraph tries to support the same range as igraph_int_t,
    * so that it can read/write all graphs it can represent.
    * We treat anything out of that range as real. These values end
    * up as igraph_real_t anyway, as igraph does not currently support

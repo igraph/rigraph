@@ -47,17 +47,17 @@ typedef struct igraph_i_kleinberg_data2_t {
 } igraph_i_kleinberg_data2_t;
 
 static igraph_error_t igraph_i_kleinberg_unweighted_hub_to_auth(
-        igraph_integer_t n, igraph_vector_t *to, const igraph_real_t *from,
+        igraph_int_t n, igraph_vector_t *to, const igraph_real_t *from,
         igraph_adjlist_t *in) {
     igraph_vector_int_t *neis;
-    igraph_integer_t i, j, nlen;
+    igraph_int_t i, j, nlen;
 
     for (i = 0; i < n; i++) {
         neis = igraph_adjlist_get(in, i);
         nlen = igraph_vector_int_size(neis);
         VECTOR(*to)[i] = 0.0;
         for (j = 0; j < nlen; j++) {
-            igraph_integer_t nei = VECTOR(*neis)[j];
+            igraph_int_t nei = VECTOR(*neis)[j];
             VECTOR(*to)[i] += from[nei];
         }
     }
@@ -72,7 +72,7 @@ static igraph_error_t igraph_i_kleinberg_unweighted(igraph_real_t *to,
     igraph_adjlist_t *out = data->out;
     igraph_vector_t *tmp = data->tmp;
     igraph_vector_int_t *neis;
-    igraph_integer_t i, j, nlen;
+    igraph_int_t i, j, nlen;
 
     igraph_i_kleinberg_unweighted_hub_to_auth(n, tmp, from, data->in);
 
@@ -81,7 +81,7 @@ static igraph_error_t igraph_i_kleinberg_unweighted(igraph_real_t *to,
         nlen = igraph_vector_int_size(neis);
         to[i] = 0.0;
         for (j = 0; j < nlen; j++) {
-            igraph_integer_t nei = VECTOR(*neis)[j];
+            igraph_int_t nei = VECTOR(*neis)[j];
             to[i] += VECTOR(*tmp)[nei];
         }
     }
@@ -89,18 +89,18 @@ static igraph_error_t igraph_i_kleinberg_unweighted(igraph_real_t *to,
     return IGRAPH_SUCCESS;
 }
 
-static igraph_error_t igraph_i_kleinberg_weighted_hub_to_auth(igraph_integer_t n,
+static igraph_error_t igraph_i_kleinberg_weighted_hub_to_auth(igraph_int_t n,
         igraph_vector_t *to, const igraph_real_t *from, igraph_inclist_t *in,
         const igraph_t *g, const igraph_vector_t *weights) {
     igraph_vector_int_t *neis;
-    igraph_integer_t nlen, i, j;
+    igraph_int_t nlen, i, j;
     for (i = 0; i < n; i++) {
         neis = igraph_inclist_get(in, i);
         nlen = igraph_vector_int_size(neis);
         VECTOR(*to)[i] = 0.0;
         for (j = 0; j < nlen; j++) {
-            igraph_integer_t nei_edge = VECTOR(*neis)[j];
-            igraph_integer_t nei = IGRAPH_OTHER(g, nei_edge, i);
+            igraph_int_t nei_edge = VECTOR(*neis)[j];
+            igraph_int_t nei = IGRAPH_OTHER(g, nei_edge, i);
             VECTOR(*to)[i] += from[nei] * VECTOR(*weights)[nei_edge];
         }
     }
@@ -118,7 +118,7 @@ static igraph_error_t igraph_i_kleinberg_weighted(igraph_real_t *to,
     const igraph_vector_t *weights = data->weights;
     const igraph_t *g = data->graph;
     igraph_vector_int_t *neis;
-    igraph_integer_t i, j, nlen;
+    igraph_int_t i, j, nlen;
 
     igraph_i_kleinberg_weighted_hub_to_auth(n, tmp, from, data->in, g, weights);
 
@@ -127,8 +127,8 @@ static igraph_error_t igraph_i_kleinberg_weighted(igraph_real_t *to,
         nlen = igraph_vector_int_size(neis);
         to[i] = 0.0;
         for (j = 0; j < nlen; j++) {
-            igraph_integer_t nei_edge = VECTOR(*neis)[j];
-            igraph_integer_t nei = IGRAPH_OTHER(g, nei_edge, i);
+            igraph_int_t nei_edge = VECTOR(*neis)[j];
+            igraph_int_t nei = IGRAPH_OTHER(g, nei_edge, i);
             to[i] += VECTOR(*tmp)[nei] * VECTOR(*weights)[nei_edge];
         }
     }
@@ -213,7 +213,7 @@ igraph_error_t igraph_hub_and_authority_scores(const igraph_t *graph,
 
     igraph_adjlist_t inadjlist, outadjlist;
     igraph_inclist_t ininclist, outinclist;
-    igraph_integer_t no_of_nodes = igraph_vcount(graph);
+    igraph_int_t no_of_nodes = igraph_vcount(graph);
     igraph_vector_t tmp;
     igraph_vector_t values;
     igraph_matrix_t vectors;
@@ -310,7 +310,7 @@ igraph_error_t igraph_hub_and_authority_scores(const igraph_t *graph,
 
     IGRAPH_CHECK(igraph_strength(graph, &tmp, igraph_vss_all(), IGRAPH_OUT, IGRAPH_LOOPS, weights));
     RNG_BEGIN();
-    for (igraph_integer_t i = 0; i < options->n; i++) {
+    for (igraph_int_t i = 0; i < options->n; i++) {
         if (VECTOR(tmp)[i] != 0) {
             /* Note: Keep random perturbation non-negative. */
             MATRIX(vectors, i, 0) = VECTOR(tmp)[i] + RNG_UNIF(0, 1e-4);
@@ -349,10 +349,10 @@ igraph_error_t igraph_hub_and_authority_scores(const igraph_t *graph,
             my_hub_vector_p = hub_vector;
         }
         igraph_real_t amax = 0;
-        igraph_integer_t which = 0;
+        igraph_int_t which = 0;
 
         IGRAPH_CHECK(igraph_vector_resize(my_hub_vector_p, options->n));
-        for (igraph_integer_t i = 0; i < options->n; i++) {
+        for (igraph_int_t i = 0; i < options->n; i++) {
             igraph_real_t tmp;
             VECTOR(*my_hub_vector_p)[i] = MATRIX(vectors, i, 0);
             tmp = fabs(VECTOR(*my_hub_vector_p)[i]);
@@ -369,7 +369,7 @@ igraph_error_t igraph_hub_and_authority_scores(const igraph_t *graph,
 
         /* Correction for numeric inaccuracies (eliminating -0.0) */
         if (! negative_weights) {
-            for (igraph_integer_t i = 0; i < options->n; i++) {
+            for (igraph_int_t i = 0; i < options->n; i++) {
                 if (VECTOR(*my_hub_vector_p)[i] < 0) {
                     VECTOR(*my_hub_vector_p)[i] = 0;
                 }

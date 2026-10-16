@@ -74,8 +74,8 @@
  * vertices and edges, d is the average degree, o is the \p nei
  * argument.
  */
-igraph_error_t igraph_watts_strogatz_game(igraph_t *graph, igraph_integer_t dim,
-                               igraph_integer_t size, igraph_integer_t nei,
+igraph_error_t igraph_watts_strogatz_game(igraph_t *graph, igraph_int_t dim,
+                               igraph_int_t size, igraph_int_t nei,
                                igraph_real_t p, igraph_bool_t loops,
                                igraph_bool_t multiple) {
 

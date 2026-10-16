@@ -51,9 +51,9 @@ igraph_error_t igraph_i_matrix_subset_vertices(
 
     /* Assertion: the size of 'm' agrees with 'graph': */
 
-    igraph_integer_t no_of_nodes = igraph_vcount(graph);
-    igraph_integer_t ncol = igraph_matrix_ncol(m);
-    igraph_integer_t nrow = igraph_matrix_nrow(m);
+    igraph_int_t no_of_nodes = igraph_vcount(graph);
+    igraph_int_t ncol = igraph_matrix_ncol(m);
+    igraph_int_t nrow = igraph_matrix_nrow(m);
 
     IGRAPH_ASSERT(nrow == no_of_nodes && nrow == ncol);
 
@@ -76,8 +76,8 @@ igraph_error_t igraph_i_matrix_subset_vertices(
 
     IGRAPH_MATRIX_INIT_FINALLY(&tmp, IGRAPH_VIT_SIZE(fromvit), IGRAPH_VIT_SIZE(tovit));
 
-    for (igraph_integer_t j=0; ! IGRAPH_VIT_END(tovit); IGRAPH_VIT_NEXT(tovit), j++) {
-        igraph_integer_t i;
+    for (igraph_int_t j=0; ! IGRAPH_VIT_END(tovit); IGRAPH_VIT_NEXT(tovit), j++) {
+        igraph_int_t i;
         for (IGRAPH_VIT_RESET(fromvit), i=0; ! IGRAPH_VIT_END(fromvit); IGRAPH_VIT_NEXT(fromvit), i++) {
             MATRIX(tmp, i, j) = MATRIX(*m, IGRAPH_VIT_GET(fromvit), IGRAPH_VIT_GET(tovit));
         }
