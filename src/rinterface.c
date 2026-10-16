@@ -16879,7 +16879,7 @@ SEXP R_igraph_automorphism_group_bliss(SEXP graph, SEXP colors, SEXP sh) {
 /*-------------------------------------------/
 / igraph_subisomorphic_lad                   /
 /-------------------------------------------*/
-SEXP R_igraph_subisomorphic_lad(SEXP pattern, SEXP target, SEXP domains, SEXP induced, SEXP time_limit) {
+SEXP R_igraph_subisomorphic_lad(SEXP pattern, SEXP target, SEXP domains, SEXP induced) {
                                         /* Declarations */
   igraph_t c_pattern;
   igraph_t c_target;
@@ -16888,7 +16888,7 @@ SEXP R_igraph_subisomorphic_lad(SEXP pattern, SEXP target, SEXP domains, SEXP in
   igraph_vector_int_t c_map;
   igraph_vector_int_list_t c_maps;
   igraph_bool_t c_induced;
-  igraph_integer_t c_time_limit;
+
   SEXP iso;
   SEXP map;
   SEXP maps;
@@ -16907,10 +16907,8 @@ SEXP R_igraph_subisomorphic_lad(SEXP pattern, SEXP target, SEXP domains, SEXP in
   IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_maps);
   IGRAPH_R_CHECK_BOOL(induced);
   c_induced = LOGICAL(induced)[0];
-  IGRAPH_R_CHECK_INT(time_limit);
-  c_time_limit = (igraph_integer_t) REAL(time_limit)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_subisomorphic_lad(&c_pattern, &c_target, (Rf_isNull(domains) ? 0 : &c_domains), &c_iso, &c_map, &c_maps, c_induced, c_time_limit));
+  IGRAPH_R_CHECK(igraph_subisomorphic_lad(&c_pattern, &c_target, (Rf_isNull(domains) ? 0 : &c_domains), &c_iso, &c_map, &c_maps, c_induced));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(3));

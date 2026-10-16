@@ -464,7 +464,7 @@ extern SEXP R_igraph_strerror(SEXP);
 extern SEXP R_igraph_subcomponent(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_subgraph_from_edges(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_subisomorphic(SEXP, SEXP);
-extern SEXP R_igraph_subisomorphic_lad(SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_subisomorphic_lad(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_subisomorphic_vf2(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_symmetric_tree(SEXP, SEXP);
 extern SEXP R_igraph_to_directed(SEXP, SEXP);
@@ -1042,7 +1042,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_subcomponent",                                   (DL_FUNC) &R_igraph_subcomponent,                                    3},
     {"R_igraph_subgraph_from_edges",                            (DL_FUNC) &R_igraph_subgraph_from_edges,                             3},
     {"R_igraph_subisomorphic",                                  (DL_FUNC) &R_igraph_subisomorphic,                                   2},
-    {"R_igraph_subisomorphic_lad",                              (DL_FUNC) &R_igraph_subisomorphic_lad,                               5},
+    {"R_igraph_subisomorphic_lad",                              (DL_FUNC) &R_igraph_subisomorphic_lad,                               4},
     {"R_igraph_subisomorphic_vf2",                              (DL_FUNC) &R_igraph_subisomorphic_vf2,                               6},
     {"R_igraph_symmetric_tree",                                 (DL_FUNC) &R_igraph_symmetric_tree,                                  2},
     {"R_igraph_to_directed",                                    (DL_FUNC) &R_igraph_to_directed,                                     2},
