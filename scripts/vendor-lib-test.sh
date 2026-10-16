@@ -12,8 +12,11 @@
 #      alone, the clean files beside it still passing.
 #   3. A C file with a declaration of no type fails, which is how such a macro
 #      reads at file scope.
-#   4. A C++ file calling a function nothing declares fails as well.
-#   5. A tree the compile line cannot be read for exits 2.
+#   4. A C file assigning an incompatible pointer type fails, which is how a
+#      type upstream changed reads, here a `char **` stored as `const char **`.
+#   5. A C file converting an integer to a pointer fails.
+#   6. A C++ file calling a function nothing declares fails as well.
+#   7. A tree the compile line cannot be read for exits 2.
 #
 # Usage:
 #   scripts/vendor-lib-test.sh
@@ -71,12 +74,22 @@ printf '#include <Rinternals.h>\nIGRAPH_I_REMOVED(x);\n' > src/untyped.c
 is "fails" "$(gate)" "1: untyped.c "
 rm src/untyped.c
 
-echo "4. a call to an undeclared function in C++"
+echo "4. an incompatible pointer type in C"
+printf '#include <Rinternals.h>\ntypedef struct { const char **data; } strvector;\nvoid fill(strvector *v, char **s) { v->data = s; }\n' > src/incompatible.c
+is "fails" "$(gate)" "1: incompatible.c "
+rm src/incompatible.c
+
+echo "5. an integer converted to a pointer in C"
+printf '#include <Rinternals.h>\nSEXP as_sexp(R_xlen_t n) { SEXP x = n; return x; }\n' > src/intconv.c
+is "fails" "$(gate)" "1: intconv.c "
+rm src/intconv.c
+
+echo "6. a call to an undeclared function in C++"
 printf '#include <Rinternals.h>\nextern "C" SEXP removed() { igraph_removed(0); return R_NilValue; }\n' > src/undeclared.cpp
 is "fails" "$(gate)" "1: undeclared.cpp "
 rm src/undeclared.cpp
 
-echo "5. a tree the compile line cannot be read for"
+echo "7. a tree the compile line cannot be read for"
 rm "$series_configured_file"
 st=0
 glue_compiles "$SCRATCH/failures" || st=$?

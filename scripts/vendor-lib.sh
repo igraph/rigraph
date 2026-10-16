@@ -31,12 +31,14 @@ glue_compile_line() { # <probe> [extra cppflags] -> command, empty when none
     sed -E "s/^ *//; s/ -c $probe -o [^ ]+\.o *$//"
 }
 
-# What C only warns about and the gate makes an error: an implicit function
-# declaration and an implicit `int`, which is how a macro upstream removed
-# reads in the glue (handbook/operations/vendoring/pipeline/). Appended to the
-# C probe's line, so that no flag before it turns them off. C++ has neither,
-# and g++ warns that these flags are C's, so the C++ line goes without them.
+# What GCC 13 only warns about in C and GCC 14 rejects by default, which the
+# gate makes errors: an implicit function declaration, an implicit `int`, an
+# incompatible pointer type, and a conversion between an integer and a pointer
+# (handbook/operations/vendoring/pipeline/). Appended to the C probe's line,
+# so that no flag before it turns them off. C++ rejects all four itself, and
+# g++ warns that these flags are C's, so the C++ line goes without them.
 glue_c_errors='-Werror=implicit-function-declaration -Werror=implicit-int'
+glue_c_errors+=' -Werror=incompatible-pointer-types -Werror=int-conversion'
 
 # 0 the glue compiles, 1 some file does not, 2 the check could not run. The
 # three are distinct because the caller acts differently on each: only 1 says
