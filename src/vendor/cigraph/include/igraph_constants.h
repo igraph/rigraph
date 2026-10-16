@@ -251,6 +251,22 @@ typedef enum {
     IGRAPH_LPA_FAST           /* Sample from dominant labels, only check neighbors. */
 } igraph_lpa_variant_t;
 
+/**
+ * \typedef igraph_mst_algorithm_t
+ * \brief Minimum spanning tree algorithms.
+ *
+ * \enumval IGRAPH_MST_AUTOMATIC Select an appropriate algorithm automatically.
+ * \enumval IGRAPH_MST_UNWEIGHTED Ignore edge weights; produce an arbitrary spanning tree.
+ * \enumval IGRAPH_MST_PRIM Prim's algorithm.
+ * \enumval IGRAPH_MST_KRUSKAL Kruskal's algorithm.
+ */
+typedef enum {
+    IGRAPH_MST_AUTOMATIC = 0,
+    IGRAPH_MST_UNWEIGHTED,
+    IGRAPH_MST_PRIM,
+    IGRAPH_MST_KRUSKAL
+} igraph_mst_algorithm_t;
+
 __END_DECLS
 
 #endif

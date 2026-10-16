@@ -437,6 +437,11 @@ LPA_VARIANT:
     CTYPE: igraph_lpa_variant_t
     FLAGS: ENUM
 
+MST_ALGORITHM:
+    # Enum that describes the minimum spanning tree algorithm to use
+    CTYPE: igraph_mst_algorithm_t
+    FLAGS: ENUM
+
 RANDOM_TREE_METHOD:
     # Enum that describes the various implementation of the uniform random tree
     # sampling method

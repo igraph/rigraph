@@ -371,7 +371,7 @@ extern SEXP R_igraph_mincut(SEXP, SEXP);
 extern SEXP R_igraph_mincut_value(SEXP, SEXP);
 extern SEXP R_igraph_minimum_cycle_basis(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_minimum_size_separators(SEXP);
-extern SEXP R_igraph_minimum_spanning_tree(SEXP, SEXP);
+extern SEXP R_igraph_minimum_spanning_tree(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_minimum_spanning_tree_prim(SEXP, SEXP);
 extern SEXP R_igraph_minimum_spanning_tree_unweighted(SEXP);
 extern SEXP R_igraph_modularity(SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -957,7 +957,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_mincut_value",                                   (DL_FUNC) &R_igraph_mincut_value,                                    2},
     {"R_igraph_minimum_cycle_basis",                            (DL_FUNC) &R_igraph_minimum_cycle_basis,                             5},
     {"R_igraph_minimum_size_separators",                        (DL_FUNC) &R_igraph_minimum_size_separators,                         1},
-    {"R_igraph_minimum_spanning_tree",                          (DL_FUNC) &R_igraph_minimum_spanning_tree,                           2},
+    {"R_igraph_minimum_spanning_tree",                          (DL_FUNC) &R_igraph_minimum_spanning_tree,                           3},
     {"R_igraph_minimum_spanning_tree_prim",                     (DL_FUNC) &R_igraph_minimum_spanning_tree_prim,                      2},
     {"R_igraph_minimum_spanning_tree_unweighted",               (DL_FUNC) &R_igraph_minimum_spanning_tree_unweighted,                1},
     {"R_igraph_modularity",                                     (DL_FUNC) &R_igraph_modularity,                                      5},

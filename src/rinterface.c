@@ -18291,11 +18291,12 @@ SEXP R_igraph_is_complete(SEXP graph) {
 /*-------------------------------------------/
 / igraph_minimum_spanning_tree               /
 /-------------------------------------------*/
-SEXP R_igraph_minimum_spanning_tree(SEXP graph, SEXP weights) {
+SEXP R_igraph_minimum_spanning_tree(SEXP graph, SEXP weights, SEXP method) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_int_t c_res;
   igraph_vector_t c_weights;
+  igraph_mst_algorithm_t c_method;
   SEXP res;
 
   SEXP r_result;
@@ -18306,8 +18307,9 @@ SEXP R_igraph_minimum_spanning_tree(SEXP graph, SEXP weights) {
   if (!Rf_isNull(weights)) {
     Rz_SEXP_to_vector(weights, &c_weights);
   }
+  c_method = (igraph_mst_algorithm_t) Rf_asInteger(method);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_minimum_spanning_tree(&c_graph, &c_res, (Rf_isNull(weights) ? 0 : &c_weights)));
+  IGRAPH_R_CHECK(igraph_minimum_spanning_tree(&c_graph, &c_res, (Rf_isNull(weights) ? 0 : &c_weights), c_method));
 
                                         /* Convert output */
   PROTECT(res=Ry_igraph_vector_int_to_SEXPp1(&c_res));

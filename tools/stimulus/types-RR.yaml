@@ -794,6 +794,15 @@ FVS_ALGORITHM:
     INCONV: |-
         %I% <- switch_igraph_arg(%I%, "exact_ip" = 0L)
 
+MST_ALGORITHM:
+    DEFAULT:
+        AUTOMATIC: c("automatic", "unweighted", "prim", "kruskal")
+        UNWEIGHTED: c("unweighted", "automatic", "prim", "kruskal")
+        PRIM: c("prim", "automatic", "unweighted", "kruskal")
+        KRUSKAL: c("kruskal", "automatic", "unweighted", "prim")
+    INCONV: |-
+        %I% <- switch_igraph_arg(%I%, "automatic" = 0L, "unweighted" = 1L, "prim" = 2L, "kruskal" = 3L)
+
 WHEEL_MODE:
     DEFAULT:
         OUT: c("out", "in", "undirected", "mutual")
