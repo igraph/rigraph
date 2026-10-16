@@ -94,7 +94,7 @@ static const char *igraph_i_error_strings[] = {
     /*  5 */ "Already exists",
     /*  6 */ NULL, // "Invalid edge vector",  /* removed in 1.0 */
     /*  7 */ "Invalid vertex ID",
-    /*  8 */ "Non-square matrix",
+    /*  8 */ NULL, // "Non-square matrix",  /* removed in 1.0 */
     /*  9 */ "Invalid mode",
     /* 10 */ "File operation error",
     /* 11 */ "Unfold infinite iterator",

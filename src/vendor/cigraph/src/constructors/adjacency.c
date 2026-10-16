@@ -303,7 +303,7 @@ static igraph_error_t igraph_i_adjacency_min(
  *          will return an error code.
  *        \endclist
  * \return Error code,
- *         \c IGRAPH_NONSQUARE: non-square matrix.
+ *         \c IGRAPH_EINVAL: non-square matrix.
  *         \c IGRAPH_EINVAL: Negative entry was found in adjacency matrix, or an
  *         odd number was found in the diagonal with \c IGRAPH_LOOPS_TWICE
  *
@@ -322,7 +322,7 @@ igraph_error_t igraph_adjacency(
 
     /* Some checks */
     if (igraph_matrix_nrow(adjmatrix) != igraph_matrix_ncol(adjmatrix)) {
-        IGRAPH_ERROR("Adjacency matrices must be square.", IGRAPH_NONSQUARE);
+        IGRAPH_ERROR("Adjacency matrices must be square.", IGRAPH_EINVAL);
     }
 
     if (no_of_nodes != 0 && igraph_matrix_min(adjmatrix) < 0) {
@@ -730,7 +730,7 @@ static igraph_error_t igraph_i_weighted_adjacency_min(
  *          incident on the corresponding vertex.
  *        \endclist
  * \return Error code,
- *         \c IGRAPH_NONSQUARE: non-square matrix.
+ *         \c IGRAPH_EINVAL: non-square matrix.
  *
  * Time complexity: O(|V||V|),
  * |V| is the number of vertices in the graph.
@@ -747,7 +747,7 @@ igraph_error_t igraph_weighted_adjacency(
 
     /* Some checks */
     if (igraph_matrix_nrow(adjmatrix) != igraph_matrix_ncol(adjmatrix)) {
-        IGRAPH_ERROR("Adjacency matrices must be square.", IGRAPH_NONSQUARE);
+        IGRAPH_ERROR("Adjacency matrices must be square.", IGRAPH_EINVAL);
     }
 
     IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, 0);
@@ -1081,7 +1081,7 @@ igraph_error_t igraph_sparse_adjacency(igraph_t *graph, igraph_sparsemat_t *adjm
                "form.", IGRAPH_EINVAL);
     }
     if (no_of_nodes != igraph_sparsemat_ncol(adjmatrix)) {
-        IGRAPH_ERROR("Adjacency matrix is non-square.", IGRAPH_NONSQUARE);
+        IGRAPH_ERROR("Adjacency matrix is non-square.", IGRAPH_EINVAL);
     }
 
     if (no_of_nodes != 0 && igraph_sparsemat_min(adjmatrix) < 0) {
@@ -1378,7 +1378,7 @@ igraph_error_t igraph_sparse_weighted_adjacency(
         IGRAPH_ERROR("Sparse adjacency matrix should be in column-compressed form.", IGRAPH_EINVAL);
     }
     if (no_of_nodes != igraph_sparsemat_ncol(adjmatrix)) {
-        IGRAPH_ERROR("Adjacency matrix is non-square.", IGRAPH_NONSQUARE);
+        IGRAPH_ERROR("Adjacency matrix is non-square.", IGRAPH_EINVAL);
     }
 
     IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, no_of_edges * 2);

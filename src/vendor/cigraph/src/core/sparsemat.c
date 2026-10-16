@@ -1010,7 +1010,7 @@ igraph_error_t igraph_sparsemat_lsolve(const igraph_sparsemat_t *L,
                             igraph_vector_t *res) {
 
     if (L->cs->m != L->cs->n) {
-        IGRAPH_ERROR("Cannot perform lower triangular solve", IGRAPH_NONSQUARE);
+        IGRAPH_ERROR("Cannot perform lower triangular solve", IGRAPH_EINVAL);
     }
 
     if (res != b) {
@@ -1045,7 +1045,7 @@ igraph_error_t igraph_sparsemat_ltsolve(const igraph_sparsemat_t *L,
 
     if (L->cs->m != L->cs->n) {
         IGRAPH_ERROR("Cannot perform transposed lower triangular solve",
-                     IGRAPH_NONSQUARE);
+                     IGRAPH_EINVAL);
     }
 
     if (res != b) {
@@ -1078,7 +1078,7 @@ igraph_error_t igraph_sparsemat_usolve(const igraph_sparsemat_t *U,
                             igraph_vector_t *res) {
 
     if (U->cs->m != U->cs->n) {
-        IGRAPH_ERROR("Cannot perform upper triangular solve", IGRAPH_NONSQUARE);
+        IGRAPH_ERROR("Cannot perform upper triangular solve", IGRAPH_EINVAL);
     }
 
     if (res != b) {
@@ -1113,7 +1113,7 @@ igraph_error_t igraph_sparsemat_utsolve(const igraph_sparsemat_t *U,
 
     if (U->cs->m != U->cs->n) {
         IGRAPH_ERROR("Cannot perform transposed upper triangular solve",
-                     IGRAPH_NONSQUARE);
+                     IGRAPH_EINVAL);
     }
 
     if (res != b) {
@@ -1152,7 +1152,7 @@ igraph_error_t igraph_sparsemat_cholsol(const igraph_sparsemat_t *A,
 
     if (A->cs->m != A->cs->n) {
         IGRAPH_ERROR("Cannot perform sparse symmetric solve",
-                     IGRAPH_NONSQUARE);
+                     IGRAPH_EINVAL);
     }
 
     if (res != b) {
@@ -1194,7 +1194,7 @@ igraph_error_t igraph_sparsemat_lusol(const igraph_sparsemat_t *A,
 
     if (A->cs->m != A->cs->n) {
         IGRAPH_ERROR("Cannot perform LU solve",
-                     IGRAPH_NONSQUARE);
+                     IGRAPH_EINVAL);
     }
 
     if (res != b) {
@@ -1221,7 +1221,7 @@ static igraph_error_t igraph_i_sparsemat_cc(igraph_t *graph, const igraph_sparse
     igraph_int_t e = 0;
 
     if (no_of_nodes != A->cs->n) {
-        IGRAPH_ERROR("Cannot create graph object", IGRAPH_NONSQUARE);
+        IGRAPH_ERROR("Cannot create graph object", IGRAPH_EINVAL);
     }
 
     IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, no_of_edges * 2);
@@ -1258,7 +1258,7 @@ static igraph_error_t igraph_i_sparsemat_triplet(igraph_t *graph, const igraph_s
     igraph_int_t e;
 
     if (no_of_nodes != A->cs->n) {
-        IGRAPH_ERROR("Cannot create graph object", IGRAPH_NONSQUARE);
+        IGRAPH_ERROR("Cannot create graph object", IGRAPH_EINVAL);
     }
 
     IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, no_of_edges * 2);
@@ -1375,7 +1375,7 @@ igraph_error_t igraph_weighted_sparsemat(igraph_t *graph, const igraph_sparsemat
     CS_INT no_of_nodes = A->cs->m;
 
     if (no_of_nodes != A->cs->n) {
-        IGRAPH_ERROR("Cannot create graph object", IGRAPH_NONSQUARE);
+        IGRAPH_ERROR("Cannot create graph object", IGRAPH_EINVAL);
     }
 
     IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, pot_edges * 2);
@@ -1702,7 +1702,7 @@ igraph_error_t igraph_sparsemat_arpack_rssolve(const igraph_sparsemat_t *A,
     igraph_int_t n = igraph_sparsemat_nrow(A);
 
     if (n != igraph_sparsemat_ncol(A)) {
-        IGRAPH_ERROR("Non-square matrix for ARPACK", IGRAPH_NONSQUARE);
+        IGRAPH_ERROR("Non-square matrix for ARPACK", IGRAPH_EINVAL);
     }
 
     if (n > INT_MAX) {
@@ -1810,7 +1810,7 @@ igraph_error_t igraph_sparsemat_arpack_rnsolve(const igraph_sparsemat_t *A,
     }
 
     if (n != igraph_sparsemat_ncol(A)) {
-        IGRAPH_ERROR("Non-square matrix for ARPACK", IGRAPH_NONSQUARE);
+        IGRAPH_ERROR("Non-square matrix for ARPACK", IGRAPH_EINVAL);
     }
 
     if (options == 0) {

@@ -87,7 +87,7 @@ igraph_error_t igraph_sbm_game(igraph_t *graph, igraph_int_t n,
 
     if (igraph_matrix_ncol(pref_matrix) != no_blocks) {
         IGRAPH_ERROR("Preference matrix is not square.",
-                     IGRAPH_NONSQUARE);
+                     IGRAPH_EINVAL);
     }
 
     if (no_blocks > 0) {
