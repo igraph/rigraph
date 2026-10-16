@@ -2127,7 +2127,7 @@ igraph_rooted_product:
 #######################################
 
 igraph_gomory_hu_tree:
-    PARAMS: GRAPH graph, OUT GRAPH tree, OPTIONAL OUT VECTOR flows, OPTIONAL EDGE_CAPACITY capacity
+    PARAMS: GRAPH graph, OUT GRAPH tree, OPTIONAL OUT VECTOR flows, OPTIONAL EDGE_CAPACITIES capacity
     DEPS: capacity ON graph
 
 igraph_maxflow:
@@ -2135,7 +2135,7 @@ igraph_maxflow:
         GRAPH graph, OUT REAL value, OPTIONAL OUT VECTOR flow,
         OUT EDGE_INDICES cut, OPTIONAL OUT VERTEX_INDICES partition1,
         OPTIONAL OUT VERTEX_INDICES partition2, VERTEX source, VERTEX target,
-        OPTIONAL EDGE_CAPACITY capacity, OPTIONAL OUT MAXFLOW_STATS stats
+        OPTIONAL EDGE_CAPACITIES capacity, OPTIONAL OUT MAXFLOW_STATS stats
     DEPS: |-
         capacity ON graph, source ON graph, target ON graph,
         partition1 ON graph, partition2 ON graph, flow ON graph,
@@ -2144,30 +2144,30 @@ igraph_maxflow:
 igraph_maxflow_value:
     PARAMS: |-
         GRAPH graph, OUT REAL value, VERTEX source, VERTEX target,
-        OPTIONAL EDGE_CAPACITY capacity, OPTIONAL OUT MAXFLOW_STATS stats
+        OPTIONAL EDGE_CAPACITIES capacity, OPTIONAL OUT MAXFLOW_STATS stats
     DEPS: source ON graph, target ON graph, capacity ON graph
 
 igraph_mincut:
     PARAMS: |-
         GRAPH graph, OUT REAL value, OUT VERTEX_INDICES partition1,
         OUT VERTEX_INDICES partition2, OUT EDGE_INDICES cut,
-        OPTIONAL EDGE_CAPACITY capacity
+        OPTIONAL EDGE_CAPACITIES capacity
     DEPS: capacity ON graph, partition1 ON graph, partition2 ON graph, cut ON graph
 
 igraph_mincut_value:
-    PARAMS: GRAPH graph, OUT REAL res, OPTIONAL EDGE_CAPACITY capacity
+    PARAMS: GRAPH graph, OUT REAL res, OPTIONAL EDGE_CAPACITIES capacity
     DEPS:
         capacity ON graph
 
 igraph_residual_graph:
     PARAMS: |-
-        GRAPH graph, EDGE_CAPACITY capacity, OUT GRAPH residual,
-        OUT EDGE_CAPACITY residual_capacity, VECTOR flow
+        GRAPH graph, EDGE_CAPACITIES capacity, OUT GRAPH residual,
+        OUT EDGE_CAPACITIES residual_capacity, VECTOR flow
     DEPS: capacity ON graph, flow ON graph, residual_capacity ON residual
 
 igraph_reverse_residual_graph:
     PARAMS: |-
-        GRAPH graph, EDGE_CAPACITY capacity, OUT GRAPH residual,
+        GRAPH graph, EDGE_CAPACITIES capacity, OUT GRAPH residual,
         VECTOR flow
     DEPS: capacity ON graph, flow ON graph
 
@@ -2176,7 +2176,7 @@ igraph_st_mincut:
         GRAPH graph, OUT REAL value, OUT EDGE_INDICES cut,
         OPTIONAL OUT VERTEX_INDICES partition1,
         OPTIONAL OUT VERTEX_INDICES partition2,
-        VERTEX source, VERTEX target, OPTIONAL EDGE_CAPACITY capacity
+        VERTEX source, VERTEX target, OPTIONAL EDGE_CAPACITIES capacity
     DEPS: |-
         capacity ON graph, source ON graph, target ON graph,
         partition1 ON graph, partition2 ON graph, cut ON graph
@@ -2184,7 +2184,7 @@ igraph_st_mincut:
 igraph_st_mincut_value:
     PARAMS: |-
         GRAPH graph, OUT REAL res, VERTEX source, VERTEX target,
-        OPTIONAL EDGE_CAPACITY capacity
+        OPTIONAL EDGE_CAPACITIES capacity
     DEPS: source ON graph, target ON graph, capacity ON graph
 
 igraph_st_vertex_connectivity:
@@ -2242,13 +2242,13 @@ igraph_all_st_mincuts:
         GRAPH graph, OUT REAL value,
         OPTIONAL OUT EDGE_INDICES_LIST cuts,
         OPTIONAL OUT VERTEX_INDICES_LIST partition1s,
-        VERTEX source, VERTEX target, OPTIONAL EDGE_CAPACITY capacity
+        VERTEX source, VERTEX target, OPTIONAL EDGE_CAPACITIES capacity
     DEPS: |-
         capacity ON graph, source ON graph, target ON graph,
         cuts ON graph, partition1s ON graph
 
 igraph_even_tarjan_reduction:
-    PARAMS: GRAPH graph, OUT GRAPH graphbar, OPTIONAL OUT EDGE_CAPACITY capacity
+    PARAMS: GRAPH graph, OUT GRAPH graphbar, OPTIONAL OUT EDGE_CAPACITIES capacity
     DEPS: |-
         capacity ON graphbar
 

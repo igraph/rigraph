@@ -182,7 +182,7 @@ ALL_BIPARTITE_TYPES:
     CTYPE: igraph_vector_bool_t
     FLAGS: BY_REF
 
-EDGE_CAPACITY:
+EDGE_CAPACITIES:
     # A vector containing edge capacities (typically for max-flow algorithms)
     CTYPE: igraph_vector_t
     FLAGS: BY_REF
