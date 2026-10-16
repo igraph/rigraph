@@ -503,6 +503,7 @@ extern SEXP R_igraph_vertex_path_from_edge_path(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_voronoi(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_watts_strogatz_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_weighted_adjacency(SEXP, SEXP, SEXP);
+extern SEXP R_igraph_weighted_biadjacency(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_weighted_clique_number(SEXP, SEXP);
 extern SEXP R_igraph_weighted_cliques(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_weighted_sparsemat(SEXP, SEXP, SEXP, SEXP);
@@ -1089,6 +1090,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_voronoi",                                        (DL_FUNC) &R_igraph_voronoi,                                         5},
     {"R_igraph_watts_strogatz_game",                            (DL_FUNC) &R_igraph_watts_strogatz_game,                             6},
     {"R_igraph_weighted_adjacency",                             (DL_FUNC) &R_igraph_weighted_adjacency,                              3},
+    {"R_igraph_weighted_biadjacency",                           (DL_FUNC) &R_igraph_weighted_biadjacency,                            3},
     {"R_igraph_weighted_clique_number",                         (DL_FUNC) &R_igraph_weighted_clique_number,                          2},
     {"R_igraph_weighted_cliques",                               (DL_FUNC) &R_igraph_weighted_cliques,                                6},
     {"R_igraph_weighted_sparsemat",                             (DL_FUNC) &R_igraph_weighted_sparsemat,                              4},

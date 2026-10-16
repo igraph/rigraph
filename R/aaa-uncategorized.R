@@ -215,3 +215,33 @@ spatial_edge_lengths_impl <- function(
 
   res
 }
+
+weighted_biadjacency_impl <- function(
+  biadjmatrix,
+  directed = FALSE,
+  mode = c("all", "out", "in", "total")
+) {
+  # Argument checks
+  biadjmatrix[] <- as.numeric(biadjmatrix)
+  directed <- as.logical(directed)
+  mode <- switch_igraph_arg(
+    mode,
+    "out" = 1L,
+    "in" = 2L,
+    "all" = 3L,
+    "total" = 3L
+  )
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_weighted_biadjacency,
+    biadjmatrix,
+    directed,
+    mode
+  )
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res$types) <- vertex_attr(graph, "name", )
+  }
+  res
+}
