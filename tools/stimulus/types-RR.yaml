@@ -799,7 +799,7 @@ FVS_ALGORITHM:
     INCONV: |-
         %I% <- switch_igraph_arg(%I%, "exact_ip" = 0L)
 
-MST_ALGORITHM:
+MSTALGORITHM:
     DEFAULT:
         AUTOMATIC: c("automatic", "unweighted", "prim", "kruskal")
         UNWEIGHTED: c("unweighted", "automatic", "prim", "kruskal")
