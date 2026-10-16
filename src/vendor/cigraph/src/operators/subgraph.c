@@ -1,5 +1,5 @@
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2006-2024  The igraph development team <igraph@igraph.org>
 
    This program is free software; you can redistribute it and/or modify
@@ -500,20 +500,6 @@ igraph_error_t igraph_induced_subgraph_edges(const igraph_t *graph, igraph_vs_t 
     igraph_vit_destroy(&vit);
 
     return IGRAPH_SUCCESS;
-}
-
-/**
- * \ingroup structural
- * \function igraph_subgraph_edges
- * \brief Creates a subgraph with the specified edges and their endpoints (deprecated alias).
- *
- * \deprecated-by igraph_subgraph_from_edges 0.10.3
- */
-igraph_error_t igraph_subgraph_edges(
-    const igraph_t *graph, igraph_t *res, const igraph_es_t eids,
-    igraph_bool_t delete_vertices
-) {
-    return igraph_subgraph_from_edges(graph, res, eids, delete_vertices);
 }
 
 /**
