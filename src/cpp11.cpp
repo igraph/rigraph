@@ -34,7 +34,6 @@ extern SEXP R_igraph_all_st_cuts(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_all_st_mincuts(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_almost_equals(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_are_adjacent(SEXP, SEXP, SEXP);
-extern SEXP R_igraph_are_connected(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_articulation_points(SEXP);
 extern SEXP R_igraph_assortativity(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_assortativity_degree(SEXP, SEXP);
@@ -617,7 +616,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_all_st_mincuts",                                 (DL_FUNC) &R_igraph_all_st_mincuts,                                  4},
     {"R_igraph_almost_equals",                                  (DL_FUNC) &R_igraph_almost_equals,                                   3},
     {"R_igraph_are_adjacent",                                   (DL_FUNC) &R_igraph_are_adjacent,                                    3},
-    {"R_igraph_are_connected",                                  (DL_FUNC) &R_igraph_are_connected,                                   3},
     {"R_igraph_articulation_points",                            (DL_FUNC) &R_igraph_articulation_points,                             1},
     {"R_igraph_assortativity",                                  (DL_FUNC) &R_igraph_assortativity,                                   5},
     {"R_igraph_assortativity_degree",                           (DL_FUNC) &R_igraph_assortativity_degree,                            2},

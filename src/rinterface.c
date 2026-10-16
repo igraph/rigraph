@@ -3487,34 +3487,6 @@ SEXP R_igraph_are_adjacent(SEXP graph, SEXP v1, SEXP v2) {
 }
 
 /*-------------------------------------------/
-/ igraph_are_connected                       /
-/-------------------------------------------*/
-SEXP R_igraph_are_connected(SEXP graph, SEXP v1, SEXP v2) {
-                                        /* Declarations */
-  igraph_t c_graph;
-  igraph_integer_t c_v1;
-  igraph_integer_t c_v2;
-  igraph_bool_t c_res;
-  SEXP res;
-
-  SEXP r_result;
-                                        /* Convert input */
-  Rz_SEXP_to_igraph(graph, &c_graph);
-  c_v1 = (igraph_integer_t) REAL(v1)[0];
-  c_v2 = (igraph_integer_t) REAL(v2)[0];
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_are_connected(&c_graph, c_v1, c_v2, &c_res));
-
-                                        /* Convert output */
-  PROTECT(res=NEW_LOGICAL(1));
-  LOGICAL(res)[0]=c_res;
-  r_result = res;
-
-  UNPROTECT(1);
-  return(r_result);
-}
-
-/*-------------------------------------------/
 / igraph_diameter                            /
 /-------------------------------------------*/
 SEXP R_igraph_diameter(SEXP graph, SEXP weights, SEXP directed, SEXP unconnected) {
