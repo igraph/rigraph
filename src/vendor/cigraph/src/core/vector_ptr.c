@@ -206,10 +206,10 @@ void igraph_vector_ptr_destroy_all(igraph_vector_ptr_t* v) {
 
 /**
  * \ingroup vectorptr
+ * \function igraph_vector_ptr_reserve
  * \brief Reserves memory for a pointer vector for later use.
  *
- * @return Error code:
- *         - <b>IGRAPH_ENOMEM</b>: out of memory
+ * \return Error code.
  */
 
 igraph_error_t igraph_vector_ptr_reserve(igraph_vector_ptr_t* v, igraph_int_t capacity) {
@@ -231,51 +231,6 @@ igraph_error_t igraph_vector_ptr_reserve(igraph_vector_ptr_t* v, igraph_int_t ca
     v->end = v->stor_begin + actual_size;
 
     return IGRAPH_SUCCESS;
-}
-
-/**
- * \ingroup vectorptr
- * \brief Decides whether the pointer vector is empty.
- */
-
-igraph_bool_t igraph_vector_ptr_empty(const igraph_vector_ptr_t* v) {
-    IGRAPH_ASSERT(v != NULL);
-    IGRAPH_ASSERT(v->stor_begin != NULL);
-    return v->stor_begin == v->end;
-}
-
-/**
- * \ingroup vectorptr
- * \function igraph_vector_ptr_size
- * \brief Gives the number of elements in the pointer vector.
- *
- * \param v The pointer vector object.
- * \return The size of the object, i.e. the number of pointers stored.
- *
- * Time complexity: O(1).
- */
-
-igraph_int_t igraph_vector_ptr_size(const igraph_vector_ptr_t* v) {
-    IGRAPH_ASSERT(v != NULL);
-    /*  IGRAPH_ASSERT(v->stor_begin != NULL);       */ /* TODO */
-    return v->end - v->stor_begin;
-}
-
-/**
- * \ingroup vectorptr
- * \function igraph_vector_ptr_capacity
- * \brief Returns the allocated capacity of the pointer vector.
- *
- * \param v The pointer vector object.
- * \return The allocated capacity.
- *
- * Time complexity: O(1).
- */
-
-igraph_int_t igraph_vector_ptr_capacity(const igraph_vector_ptr_t* v) {
-    IGRAPH_ASSERT(v != NULL);
-    IGRAPH_ASSERT(v->stor_begin != NULL);
-    return v->stor_end - v->stor_begin;
 }
 
 /**
@@ -309,6 +264,51 @@ void igraph_vector_ptr_resize_min(igraph_vector_ptr_t* v) {
         v->stor_begin = tmp;
         v->stor_end = v->end = v->stor_begin + size;
     }
+}
+
+/**
+ * \ingroup vectorptr
+ * \brief Decides whether the pointer vector is empty.
+ */
+
+igraph_bool_t igraph_vector_ptr_empty(const igraph_vector_ptr_t* v) {
+    IGRAPH_ASSERT(v != NULL);
+    IGRAPH_ASSERT(v->stor_begin != NULL);
+    return v->stor_begin == v->end;
+}
+
+/**
+ * \ingroup vectorptr
+ * \function igraph_vector_ptr_size
+ * \brief Gives the number of elements in the pointer vector.
+ *
+ * \param v The pointer vector object.
+ * \return The size of the object, i.e. the number of pointers stored.
+ *
+ * Time complexity: O(1).
+ */
+
+igraph_int_t igraph_vector_ptr_size(const igraph_vector_ptr_t* v) {
+    IGRAPH_ASSERT(v != NULL);
+    IGRAPH_ASSERT(v->stor_begin != NULL);
+    return v->end - v->stor_begin;
+}
+
+/**
+ * \ingroup vectorptr
+ * \function igraph_vector_ptr_capacity
+ * \brief Returns the allocated capacity of the pointer vector.
+ *
+ * \param v The pointer vector object.
+ * \return The allocated capacity.
+ *
+ * Time complexity: O(1).
+ */
+
+igraph_int_t igraph_vector_ptr_capacity(const igraph_vector_ptr_t* v) {
+    IGRAPH_ASSERT(v != NULL);
+    IGRAPH_ASSERT(v->stor_begin != NULL);
+    return v->stor_end - v->stor_begin;
 }
 
 /**
@@ -440,18 +440,6 @@ void *igraph_vector_ptr_get(const igraph_vector_ptr_t* v, igraph_int_t pos) {
     IGRAPH_ASSERT(v != NULL);
     IGRAPH_ASSERT(v->stor_begin != NULL);
     return *(v->stor_begin + pos);
-}
-
-/**
- * \ingroup vectorptr
- * \function igraph_vector_ptr_e
- * \brief Access an element of a pointer vector (deprecated alias).
- *
- * \deprecated-by igraph_vector_ptr_get 0.10.0
- */
-
-void *igraph_vector_ptr_e(const igraph_vector_ptr_t* v, igraph_int_t pos) {
-    return igraph_vector_ptr_get(v, pos);
 }
 
 /**
@@ -596,18 +584,6 @@ igraph_error_t igraph_vector_ptr_init_copy(igraph_vector_ptr_t *to, const igraph
            (size_t) igraph_vector_ptr_size(from)*sizeof(void*));
 
     return IGRAPH_SUCCESS;
-}
-
-/**
- * \ingroup vectorptr
- * \function igraph_vector_ptr_copy
- * \brief Initializes a pointer vector from another one (deprecated alias).
- *
- * \deprecated-by igraph_vector_ptr_init_copy 0.10
- */
-
-igraph_error_t igraph_vector_ptr_copy(igraph_vector_ptr_t *to, const igraph_vector_ptr_t *from) {
-    return igraph_vector_ptr_init_copy(to, from);
 }
 
 /**
