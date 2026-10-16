@@ -2758,7 +2758,7 @@
     Condition
       Warning in `hub_and_authority_scores_impl()`:
       Hub and authority scores requested for undirected graph. These are the same as eigenvector centralities.
-      Source: centrality/hub_authority.c:296
+      Source: centrality/hub_authority.c:295
     Output
       $hub
       [1] 1 1 1 1 1
@@ -2841,7 +2841,7 @@
       Argument `scale' is deprecated and has no effect
       Warning in `hub_and_authority_scores_impl()`:
       Hub and authority scores requested for undirected graph. These are the same as eigenvector centralities.
-      Source: centrality/hub_authority.c:296
+      Source: centrality/hub_authority.c:295
     Output
       $hub
       [1] 1 1 1 1 1
@@ -10806,148 +10806,6 @@
       
       $options
       NULL
-      
-
-# hub_score_impl basic
-
-    Code
-      out
-    Output
-      $value
-      [1] 4
-      
-      $options
-      $options$bmat
-      [1] "I"
-      
-      $options$n
-      [1] 5
-      
-      $options$which
-      [1] "LA"
-      
-      $options$nev
-      [1] 1
-      
-      $options$tol
-      [1] 0
-      
-      $options$ncv
-      [1] 0
-      
-      $options$ldv
-      [1] 0
-      
-      $options$ishift
-      [1] 1
-      
-      $options$maxiter
-      [1] 3000
-      
-      $options$nb
-      [1] 1
-      
-      $options$mode
-      [1] 1
-      
-      $options$start
-      [1] 1
-      
-      $options$sigma
-      [1] 0
-      
-      $options$sigmai
-      [1] 0
-      
-      $options$info
-      [1] 0
-      
-      $options$iter
-      [1] 1
-      
-      $options$nconv
-      [1] 1
-      
-      $options$numop
-      [1] 4
-      
-      $options$numopb
-      [1] 0
-      
-      $options$numreo
-      [1] 4
-      
-      
-
-# authority_score_impl basic
-
-    Code
-      out
-    Output
-      $value
-      [1] 4
-      
-      $options
-      $options$bmat
-      [1] "I"
-      
-      $options$n
-      [1] 5
-      
-      $options$which
-      [1] "LA"
-      
-      $options$nev
-      [1] 1
-      
-      $options$tol
-      [1] 0
-      
-      $options$ncv
-      [1] 0
-      
-      $options$ldv
-      [1] 0
-      
-      $options$ishift
-      [1] 1
-      
-      $options$maxiter
-      [1] 3000
-      
-      $options$nb
-      [1] 1
-      
-      $options$mode
-      [1] 1
-      
-      $options$start
-      [1] 1
-      
-      $options$sigma
-      [1] 0
-      
-      $options$sigmai
-      [1] 0
-      
-      $options$info
-      [1] 0
-      
-      $options$iter
-      [1] 1
-      
-      $options$nconv
-      [1] 1
-      
-      $options$numop
-      [1] 4
-      
-      $options$numopb
-      [1] 0
-      
-      $options$numreo
-      [1] 4
-      
       
 
 # community_walktrap_impl basic

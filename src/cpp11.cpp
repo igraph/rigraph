@@ -41,7 +41,6 @@ extern SEXP R_igraph_assortativity_degree(SEXP, SEXP);
 extern SEXP R_igraph_assortativity_nominal(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_asymmetric_preference_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_atlas(SEXP);
-extern SEXP R_igraph_authority_score(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_automorphism_group_bliss(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_average_local_efficiency(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_average_path_length(SEXP, SEXP, SEXP, SEXP);
@@ -254,7 +253,6 @@ extern SEXP R_igraph_hrg_size(SEXP);
 extern SEXP R_igraph_hsbm_game(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_hsbm_list_game(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_hub_and_authority_scores(SEXP, SEXP, SEXP);
-extern SEXP R_igraph_hub_score(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_hypercube(SEXP, SEXP);
 extern SEXP R_igraph_iea_game(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_incident(SEXP, SEXP, SEXP, SEXP);
@@ -626,7 +624,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_assortativity_nominal",                          (DL_FUNC) &R_igraph_assortativity_nominal,                           4},
     {"R_igraph_asymmetric_preference_game",                     (DL_FUNC) &R_igraph_asymmetric_preference_game,                      6},
     {"R_igraph_atlas",                                          (DL_FUNC) &R_igraph_atlas,                                           1},
-    {"R_igraph_authority_score",                                (DL_FUNC) &R_igraph_authority_score,                                 4},
     {"R_igraph_automorphism_group_bliss",                       (DL_FUNC) &R_igraph_automorphism_group_bliss,                        3},
     {"R_igraph_average_local_efficiency",                       (DL_FUNC) &R_igraph_average_local_efficiency,                        4},
     {"R_igraph_average_path_length",                            (DL_FUNC) &R_igraph_average_path_length,                             4},
@@ -839,7 +836,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_hsbm_game",                                      (DL_FUNC) &R_igraph_hsbm_game,                                       5},
     {"R_igraph_hsbm_list_game",                                 (DL_FUNC) &R_igraph_hsbm_list_game,                                  5},
     {"R_igraph_hub_and_authority_scores",                       (DL_FUNC) &R_igraph_hub_and_authority_scores,                        3},
-    {"R_igraph_hub_score",                                      (DL_FUNC) &R_igraph_hub_score,                                       4},
     {"R_igraph_hypercube",                                      (DL_FUNC) &R_igraph_hypercube,                                       2},
     {"R_igraph_iea_game",                                       (DL_FUNC) &R_igraph_iea_game,                                        4},
     {"R_igraph_incident",                                       (DL_FUNC) &R_igraph_incident,                                        4},
