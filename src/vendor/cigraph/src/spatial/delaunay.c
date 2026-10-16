@@ -31,56 +31,6 @@
 
 #include "qhull/libqhull_r/libqhull_r.h"
 
-#include "igraph_qsort.h"
-
-static int igraph_i_edge_comparator(const void *a, const void *b) {
-    igraph_int_t *A = (igraph_int_t *) a;
-    igraph_int_t *B = (igraph_int_t *) b;
-    if (A[0] < B[0]) return -1;
-    if (A[0] > B[0]) return 1;
-    if (A[1] < B[1]) return -1;
-    if (A[1] > B[1]) return 1;
-    return 0;
-}
-
-static void igraph_i_simplify_edge_list(
-        igraph_vector_int_t *edges,
-        igraph_bool_t remove_loops, igraph_bool_t remove_multiple,
-        igraph_bool_t directed) {
-    igraph_int_t size = igraph_vector_int_size(edges);
-    if (size == 0 || (!remove_loops && !remove_multiple)) {
-        return;
-    }
-    if (!directed) {
-        for (igraph_int_t i = 0; i < size; i += 2) {
-            if (VECTOR(*edges)[i] > VECTOR(*edges)[i + 1]) {
-                igraph_int_t temp = VECTOR(*edges)[i];
-                VECTOR(*edges)[i] = VECTOR(*edges)[i + 1];
-                VECTOR(*edges)[i + 1] = temp;
-            }
-        }
-    }
-    if (remove_multiple) {
-        igraph_qsort(VECTOR(*edges), size / 2, 2 * sizeof(igraph_int_t),
-                     &igraph_i_edge_comparator);
-    }
-    igraph_int_t j = -2;
-    for (igraph_int_t i = 0; i < size; i += 2) {
-        if (remove_multiple && j != -2 &&
-            VECTOR(*edges)[i] == VECTOR(*edges)[j] &&
-            VECTOR(*edges)[i + 1] == VECTOR(*edges)[j + 1]) {
-            continue;
-        }
-        if (remove_loops && VECTOR(*edges)[i] == VECTOR(*edges)[i + 1]) {
-            continue;
-        }
-        j += 2;
-        VECTOR(*edges)[j]     = VECTOR(*edges)[i];
-        VECTOR(*edges)[j + 1] = VECTOR(*edges)[i + 1];
-    }
-    igraph_vector_int_resize(edges, j + 2);
-}
-
 /**
  * Raises an error if a spatial point set is invalid.
  * The coordinate matrix must have at least one column and must not
@@ -199,11 +149,7 @@ igraph_error_t igraph_i_delaunay_edges(igraph_vector_int_t *edges, const igraph_
     coordT *qhull_points = IGRAPH_CALLOC(dim*numpoints, igraph_real_t);
     IGRAPH_CHECK_OOM(qhull_points, "Insufficient memory for constructing Delaunay graph.");
     IGRAPH_FINALLY(igraph_free, qhull_points);
-    for (igraph_int_t i = 0; i < numpoints; i++) {
-        for (igraph_int_t j = 0; j < dim; j++) {
-            qhull_points[i * dim + j] = MATRIX(*points, i, j);
-        }
-    }
+    igraph_matrix_copy_to(points, qhull_points, IGRAPH_ROW_MAJOR);
 
     /* Call Qhull.
      *
