@@ -151,9 +151,7 @@ add_edges <- function(graph, edges, ..., attr = list()) {
     cli::cli_abort("All attributes must be named.")
   }
 
-  if (is.data.frame(edges) || inherits(edges, "matrix")) {
-    edges <- el_to_vec(edges, arg = "edges", fn = "add_edges")
-  }
+  edges <- edge_pairs_arg(edges, arg = "edges", fn = "add_edges")
 
   edges.orig <- ecount(graph)
   on.exit(.Call(Rx_igraph_finalizer))
@@ -272,7 +270,11 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
 #' g
 delete_edges <- function(graph, edges) {
   ensure_igraph(graph)
-  if (is.data.frame(edges) || inherits(edges, "matrix")) {
+  if (is_legacy_edge_matrix(edges)) {
+    # Matrices used to be read as edge IDs here.
+    warn_legacy_edge_matrix(edges, "edges", "delete_edges")
+    edges <- c(edges)
+  } else if (is.data.frame(edges) || inherits(edges, "matrix")) {
     edges <- get_edge_ids(graph, edges, error = TRUE)
   }
   delete_edges_impl(
@@ -601,6 +603,46 @@ to_vertex_pairs <- function(from, to) {
 # Flatten an n x 2 edge list matrix into the same interleaved form.
 edgelist_to_vertex_pairs <- function(el) {
   c(t(el))
+}
+
+# Normalize the vertex pairs passed to an edge function.
+# Data frames and n x 2 matrices are edge lists, one edge per row.
+# Other matrices kept their old column-major meaning during the transition
+# to edge lists (#1827), with a warning, so that callers can migrate first.
+edge_pairs_arg <- function(x, arg, fn) {
+  if (is_legacy_edge_matrix(x)) {
+    warn_legacy_edge_matrix(x, arg, fn)
+    c(x)
+  } else if (is.data.frame(x) || inherits(x, "matrix")) {
+    el_to_vec(x, arg = arg, fn = fn)
+  } else {
+    x
+  }
+}
+
+is_legacy_edge_matrix <- function(x) {
+  inherits(x, "matrix") && (nrow(x) == 2 || ncol(x) != 2)
+}
+
+warn_legacy_edge_matrix <- function(x, arg, fn) {
+  details <- if (nrow(x) == 2 && ncol(x) == 2) {
+    "A 2 times 2 matrix is ambiguous and is read column by column for now. Pass a data frame with two columns instead."
+  } else if (nrow(x) == 2) {
+    "It is read column by column for now. Transpose the matrix with t(), or pass a data frame with two columns."
+  } else {
+    "It is read column by column for now. Pass an n times 2 matrix or a data frame with two columns."
+  }
+  lifecycle::deprecate_warn(
+    "3.0.0",
+    paste0(
+      fn,
+      "(",
+      arg,
+      " = 'should be an n times 2 matrix with one edge per row')"
+    ),
+    details = details,
+    always = TRUE
+  )
 }
 
 el_to_vec <- function(

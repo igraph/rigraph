@@ -61,10 +61,27 @@ test_that("add_edges still accepts vectors and vertex sequences", {
   expect_ecount(add_edges(g, V(g)[c(1, 2, 3, 4)]), 2)
 })
 
-test_that("add_edges rejects 2xn and 2x2 matrices (#1827)", {
+test_that("add_edges warns for 2xn and 2x2 matrices and reads them by column (#1827)", {
   g <- make_empty_graph(5)
-  lifecycle::expect_defunct(add_edges(g, matrix(c(1, 2, 3, 4), nrow = 2)))
-  lifecycle::expect_defunct(add_edges(g, matrix(c(1, 2, 1, 3, 1, 4), nrow = 2)))
+  lifecycle::expect_deprecated(
+    g2 <- add_edges(g, matrix(c(1, 2, 1, 3, 1, 4), nrow = 2))
+  )
+  expect_equal(as_edgelist(g2), cbind(1, 2:4))
+
+  # e.g. rbind(from, to) with two edges, as in tidygraph::bind_edges()
+  lifecycle::expect_deprecated(
+    g2 <- add_edges(g, rbind(c(1, 1), c(4, 5)))
+  )
+  expect_equal(as_edgelist(g2), cbind(1, 4:5))
+})
+
+test_that("add_edges warning for legacy matrices", {
+  g <- make_empty_graph(5)
+  expect_snapshot({
+    . <- add_edges(g, matrix(c(1, 2, 3, 4), nrow = 2))
+    . <- add_edges(g, matrix(c(1, 2, 1, 3, 1, 4), nrow = 2))
+    . <- add_edges(g, matrix(1:4, nrow = 1))
+  })
 })
 
 test_that("add_vertices works", {
@@ -215,6 +232,12 @@ test_that("delete_edges preserves vector semantics (edge ids and a|b)", {
 test_that("delete_edges round-trips with as_edgelist (#550)", {
   g <- make_ring(5)
   expect_ecount(delete_edges(g, as_edgelist(g)), 0)
+})
+
+test_that("delete_edges warns for 2xn matrices and reads them as edge IDs (#1827)", {
+  g <- make_ring(5)
+  lifecycle::expect_deprecated(g2 <- delete_edges(g, matrix(1:4, nrow = 2)))
+  expect_ecount(g2, 1)
 })
 
 test_that("delete_edges errors on a vertex pair with no edge (#1827)", {

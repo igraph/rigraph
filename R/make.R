@@ -1462,9 +1462,7 @@ make_graph <- function(
       directed <- dir
     }
 
-    if (is.data.frame(edges) || inherits(edges, "matrix")) {
-      edges <- el_to_vec(edges, arg = "edges", fn = "make_graph")
-    }
+    edges <- edge_pairs_arg(edges, arg = "edges", fn = "make_graph")
 
     if (is.character(edges) && length(edges) == 1) {
       if (!is.null(n)) {

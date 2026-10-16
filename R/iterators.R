@@ -485,9 +485,7 @@ E <- function(
     res <- seq_len(ec)
     res <- set_complete_iterator(res)
   } else if (!is.null(P)) {
-    if (is.data.frame(P) || inherits(P, "matrix")) {
-      P <- el_to_vec(P, arg = "P", fn = "E")
-    }
+    P <- edge_pairs_arg(P, arg = "P", fn = "E")
     on.exit(.Call(Rx_igraph_finalizer))
     res <- .Call(
       Rx_igraph_es_pairs,

@@ -118,6 +118,11 @@ test_that("E(g, P=) accepts a two-column matrix or data frame (#1827)", {
   df <- E(g, P = data.frame(from = c(1, 4, 6), to = c(2, 5, 7)))
   expect_equal(as.vector(mat), as.vector(vec))
   expect_equal(as.vector(df), as.vector(vec))
+
+  lifecycle::expect_deprecated(
+    legacy <- E(g, P = matrix(c(1, 2, 4, 5, 6, 7), nrow = 2))
+  )
+  expect_equal(as.vector(legacy), as.vector(vec))
 })
 
 test_that("ids change when updating the graph", {

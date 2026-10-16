@@ -24,9 +24,18 @@ test_that("make_graph() accepts a two-column matrix or data frame (#1827)", {
   expect_isomorphic(make_graph(as_edgelist(g), directed = FALSE), g)
 })
 
-test_that("make_graph() rejects 2xn and 2x2 matrices (#1827)", {
-  lifecycle::expect_defunct(make_graph(matrix(c(1, 2, 3, 4), nrow = 2)))
-  lifecycle::expect_defunct(make_graph(matrix(c(1, 2, 1, 3, 1, 4), nrow = 2)))
+test_that("make_graph() warns for 2xn and 2x2 matrices and reads them by column (#1827)", {
+  el <- cbind(1, 2:4)
+  lifecycle::expect_deprecated(g <- make_graph(t(el), directed = FALSE))
+  expect_equal(as_edgelist(g), el)
+  lifecycle::expect_deprecated(
+    g <- make_graph(matrix(c(1, 2, 3, 4), nrow = 2), directed = FALSE)
+  )
+  expect_equal(as_edgelist(g), rbind(1:2, 3:4))
+})
+
+test_that("make_graph() warning for legacy matrices", {
+  expect_snapshot(. <- make_graph(t(cbind(1, 2:4))))
 })
 
 test_that("make_ works with n parameter", {
