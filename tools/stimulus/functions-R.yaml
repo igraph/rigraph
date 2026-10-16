@@ -471,6 +471,10 @@ igraph_create_bipartite:
 
 igraph_biadjacency:
     DEPS: types ON res$graph V(res$graph)
+    # Upstream renamed incidence to biadjmatrix (krlmlr/igraph@82e0439): the R
+    # name stays.
+    PARAM_NAMES:
+        biadjmatrix: incidence
 
 # Use the name 'type' instead of 'types' (provided by the C core)
 igraph_is_bipartite:
