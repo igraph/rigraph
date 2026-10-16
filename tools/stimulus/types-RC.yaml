@@ -621,6 +621,22 @@ VERTEX_SELECTOR:
             igraph_vector_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
+VERTEX_SELECTOR_FROM_TO:
+    # One vertex selector passed as both the from and the to set of a
+    # function that compares two; see types-RR.yaml.
+    CALL:
+        IN: '%C%, %C%'
+    CTYPE:
+        IN: igraph_vs_t
+    INCONV:
+        IN: |-
+            igraph_vector_int_t %C%_data;
+            Rz_SEXP_to_igraph_vs(%I%, &%C1%, &%C%, &%C%_data);
+    OUTCONV:
+        IN: |-
+            igraph_vector_int_destroy(&%C%_data);
+            igraph_vs_destroy(&%C%);
+
 VERTEX_INDICES:
     CALL: '&%C%'
     CTYPE: igraph_vector_int_t

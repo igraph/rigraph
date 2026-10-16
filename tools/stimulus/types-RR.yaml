@@ -266,6 +266,14 @@ VERTEX_SELECTOR:
               %I% <- create_vs(%I1%, %I%)
             }
 
+VERTEX_SELECTOR_FROM_TO:
+    # A vids argument, kept where upstream replaced it with a from and a to
+    # vertex set: the one set is passed as both.
+    CALL: '%I% - 1'
+    DEFAULT:
+        ALL: V(%I1%)
+    INCONV: '%I% <- as_igraph_vs(%I1%, %I%)'
+
 VERTEX_INDICES:
     CALL: '%I%'
     DEFAULT:
