@@ -647,7 +647,7 @@ igraph_community_leiden:
     # in-weights are always NULL, which igraph requires for undirected graphs.
     PARAMS: |-
         GRAPH graph, OPTIONAL EDGE_WEIGHTS weights,
-        OPTIONAL VERTEXWEIGHTS vertex_out_weights, NULL vertex_in_weights,
+        OPTIONAL VERTEX_WEIGHTS vertex_out_weights, NULL vertex_in_weights,
         REAL resolution, REAL beta=0.01, BOOLEAN start=False, INTEGER n_iterations=2,
         OPTIONAL INOUT VECTOR_INT membership,
         OUT INTEGER nb_clusters, OUT REAL quality
