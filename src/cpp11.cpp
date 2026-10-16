@@ -471,7 +471,6 @@ extern SEXP R_igraph_to_prufer(SEXP);
 extern SEXP R_igraph_to_undirected(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_topological_sorting(SEXP, SEXP);
 extern SEXP R_igraph_transitive_closure(SEXP);
-extern SEXP R_igraph_transitive_closure_dag(SEXP);
 extern SEXP R_igraph_transitivity_avglocal_undirected(SEXP, SEXP);
 extern SEXP R_igraph_transitivity_barrat(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_transitivity_local_undirected(SEXP, SEXP, SEXP);
@@ -1049,7 +1048,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_to_undirected",                                  (DL_FUNC) &R_igraph_to_undirected,                                   3},
     {"R_igraph_topological_sorting",                            (DL_FUNC) &R_igraph_topological_sorting,                             2},
     {"R_igraph_transitive_closure",                             (DL_FUNC) &R_igraph_transitive_closure,                              1},
-    {"R_igraph_transitive_closure_dag",                         (DL_FUNC) &R_igraph_transitive_closure_dag,                          1},
     {"R_igraph_transitivity_avglocal_undirected",               (DL_FUNC) &R_igraph_transitivity_avglocal_undirected,                2},
     {"R_igraph_transitivity_barrat",                            (DL_FUNC) &R_igraph_transitivity_barrat,                             4},
     {"R_igraph_transitivity_local_undirected",                  (DL_FUNC) &R_igraph_transitivity_local_undirected,                   3},

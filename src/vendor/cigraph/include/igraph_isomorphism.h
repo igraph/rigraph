@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -41,8 +40,6 @@ __BEGIN_DECLS
 IGRAPH_EXPORT igraph_error_t igraph_topological_sorting(
     const igraph_t *graph, igraph_vector_int_t *res, igraph_neimode_t mode);
 IGRAPH_EXPORT igraph_error_t igraph_is_dag(const igraph_t *graph, igraph_bool_t *res);
-IGRAPH_DEPRECATED IGRAPH_EXPORT igraph_error_t igraph_transitive_closure_dag(const igraph_t *graph,
-                                                igraph_t *closure);
 
 /* -------------------------------------------------- */
 /* Graph isomorphisms                                 */

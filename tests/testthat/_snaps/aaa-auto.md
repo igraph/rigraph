@@ -3951,23 +3951,6 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
-# transitive_closure_dag_impl basic
-
-    Code
-      transitive_closure_dag_impl(graph = g)
-    Output
-      IGRAPH D--- 3 3 -- 
-      + edges:
-      [1] 1->3 1->2 2->3
-
-# transitive_closure_dag_impl errors
-
-    Code
-      transitive_closure_dag_impl(graph = NULL)
-    Condition
-      Error in `ensure_igraph()`:
-      ! Must provide a graph object (provided `NULL`).
-
 # transitive_closure_impl basic
 
     Code
