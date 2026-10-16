@@ -1261,8 +1261,9 @@ igraph_is_bipartite:
 igraph_bipartite_game_gnp:
     PARAMS: |-
         OUT GRAPH graph, OPTIONAL OUT BIPARTITE_TYPES types,
-        INTEGER n1, INTEGER n2, REAL p, BOOLEAN directed=False,
-        NEIMODE mode=ALL
+        INTEGER n1, INTEGER n2, REAL p,
+        BOOLEAN directed=False, NEIMODE mode=ALL,
+        EDGE_TYPE_SW allowed_edge_types=SIMPLE, BOOLEAN edge_labeled=False
 
 igraph_bipartite_game_gnm:
     PARAMS: |-
