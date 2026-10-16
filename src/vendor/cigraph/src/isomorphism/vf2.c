@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2006-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -1523,26 +1522,6 @@ static igraph_error_t igraph_i_subisomorphic_vf2_cb(
     IGRAPH_UNUSED(map12); IGRAPH_UNUSED(map21);
     *iso = true;
     return IGRAPH_STOP;
-}
-
-/**
- * \function igraph_subisomorphic_function_vf2
- * \brief Generic VF2 function for subgraph isomorphism problems (deprecated alias).
- *
- * \deprecated-by igraph_get_subisomorphisms_vf2_callback 0.10.0
- */
-igraph_error_t igraph_subisomorphic_function_vf2(
-    const igraph_t *graph1, const igraph_t *graph2,
-    const igraph_vector_int_t *vertex_color1, const igraph_vector_int_t *vertex_color2,
-    const igraph_vector_int_t *edge_color1, const igraph_vector_int_t *edge_color2,
-    igraph_vector_int_t *map12, igraph_vector_int_t *map21,
-    igraph_isohandler_t *isohandler_fn, igraph_isocompat_t *node_compat_fn,
-    igraph_isocompat_t *edge_compat_fn, void *arg
-) {
-    return igraph_get_subisomorphisms_vf2_callback(
-        graph1, graph2, vertex_color1, vertex_color2, edge_color1, edge_color2,
-        map12, map21, isohandler_fn, node_compat_fn, edge_compat_fn, arg
-    );
 }
 
 /**
