@@ -86,6 +86,9 @@ IGRAPH_EXPORT igraph_error_t igraph_strvector_append(
     igraph_strvector_t *to, const igraph_strvector_t *from);
 IGRAPH_EXPORT igraph_error_t igraph_strvector_merge(
     igraph_strvector_t *to, igraph_strvector_t *from);
+IGRAPH_EXPORT void igraph_strvector_swap(igraph_strvector_t *v1, igraph_strvector_t *v2);
+IGRAPH_EXPORT igraph_error_t igraph_strvector_update(
+    igraph_strvector_t *to, const igraph_strvector_t *from);
 IGRAPH_EXPORT igraph_error_t igraph_strvector_resize(
     igraph_strvector_t* v, igraph_int_t newsize);
 IGRAPH_EXPORT void igraph_strvector_resize_min(igraph_strvector_t *sv);
@@ -105,13 +108,8 @@ IGRAPH_EXPORT igraph_error_t igraph_strvector_index(const igraph_strvector_t *v,
 IGRAPH_EXPORT igraph_error_t igraph_strvector_reserve(igraph_strvector_t *sv,
                                                       igraph_int_t capacity);
 
-IGRAPH_EXPORT void igraph_strvector_swap(igraph_strvector_t *v1, igraph_strvector_t *v2);
-
 IGRAPH_EXPORT void igraph_strvector_swap_elements(igraph_strvector_t *sv,
                                                   igraph_int_t i, igraph_int_t j);
-
-IGRAPH_EXPORT igraph_error_t igraph_strvector_update(
-    igraph_strvector_t *to, const igraph_strvector_t *from);
 
 IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_strvector_add(igraph_strvector_t *v, const char *value);
 IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_strvector_copy(
