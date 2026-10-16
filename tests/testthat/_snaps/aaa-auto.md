@@ -5701,7 +5701,7 @@
       [1] 0 0 0
       
       $codelength
-      [1] 1.512987
+      [1] 1.5
       
 
 ---
@@ -5714,7 +5714,7 @@
       [1] 0 0 0
       
       $codelength
-      [1] 1.462254
+      [1] 1.459148
       
 
 # community_infomap_impl errors
