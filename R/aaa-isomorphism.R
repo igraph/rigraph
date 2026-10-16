@@ -169,7 +169,7 @@ automorphism_group_impl <- function(
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_automorphism_group,
+    R_igraph_automorphism_group_bliss,
     graph,
     colors,
     sh
