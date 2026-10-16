@@ -18163,34 +18163,6 @@ SEXP R_igraph_minimum_spanning_tree_unweighted(SEXP graph) {
 }
 
 /*-------------------------------------------/
-/ igraph_minimum_spanning_tree_prim          /
-/-------------------------------------------*/
-SEXP R_igraph_minimum_spanning_tree_prim(SEXP graph, SEXP weights) {
-                                        /* Declarations */
-  igraph_t c_graph;
-  igraph_t c_mst;
-  igraph_vector_t c_weights;
-  SEXP mst;
-
-  SEXP r_result;
-                                        /* Convert input */
-  Rz_SEXP_to_igraph(graph, &c_graph);
-  Rz_SEXP_to_vector(weights, &c_weights);
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_minimum_spanning_tree_prim(&c_graph, &c_mst, &c_weights));
-
-                                        /* Convert output */
-  IGRAPH_FINALLY(igraph_destroy, &c_mst);
-  PROTECT(mst=Ry_igraph_to_SEXP(&c_mst));
-  IGRAPH_I_DESTROY(&c_mst);
-  IGRAPH_FINALLY_CLEAN(1);
-  r_result = mst;
-
-  UNPROTECT(1);
-  return(r_result);
-}
-
-/*-------------------------------------------/
 / igraph_random_spanning_tree                /
 /-------------------------------------------*/
 SEXP R_igraph_random_spanning_tree(SEXP graph, SEXP vid) {
