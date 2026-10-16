@@ -5740,7 +5740,7 @@ SEXP Rx_igraph_maximal_cliques(SEXP graph, SEXP psubset,
   igraph_vector_int_list_init(&list, 0);
   igraph_maximal_cliques_subset(&g, Rf_isNull(psubset) ? 0 : &subset,
                                 &list, /*no=*/ 0, /*file=*/ 0,
-                                minsize, maxsize);
+                                minsize, maxsize, /*max_results=*/ IGRAPH_UNLIMITED);
   igraph_vector_int_destroy(&subset);
   IGRAPH_FINALLY_CLEAN(1);
 
@@ -5781,7 +5781,7 @@ SEXP Rx_igraph_maximal_cliques_file(SEXP graph, SEXP psubset, SEXP file,
                                 __LINE__, IGRAPH_EFILE); }
   igraph_maximal_cliques_subset(&g, Rf_isNull(psubset) ? 0 : &subset,
                                 /*ptr=*/ 0, /*no=*/ 0, /*file=*/ stream,
-                                minsize, maxsize);
+                                minsize, maxsize, /*max_results=*/ IGRAPH_UNLIMITED);
   fclose(stream);
   igraph_vector_int_destroy(&subset);
   IGRAPH_FINALLY_CLEAN(1);
@@ -5822,7 +5822,7 @@ SEXP Rx_igraph_maximal_cliques_count(SEXP graph, SEXP psubset,
                                         /* Call igraph */
   igraph_maximal_cliques_subset(&c_graph, Rf_isNull(psubset) ? 0 : &subset,
                                 /*ptr=*/ 0, &c_no, /*file=*/ 0,
-                                c_min_size, c_max_size);
+                                c_min_size, c_max_size, /*max_results=*/ IGRAPH_UNLIMITED);
 
   igraph_vector_int_destroy(&subset);
   IGRAPH_FINALLY_CLEAN(1);
@@ -5846,7 +5846,7 @@ SEXP Rx_igraph_independent_vertex_sets(SEXP graph,
 
   Rz_SEXP_to_igraph(graph, &g);
   igraph_vector_int_list_init(&list, 0);
-  IGRAPH_R_CHECK(igraph_independent_vertex_sets(&g, &list, minsize, maxsize));
+  IGRAPH_R_CHECK(igraph_independent_vertex_sets(&g, &list, minsize, maxsize, /*max_results=*/ IGRAPH_UNLIMITED));
   PROTECT(result=Ry_igraph_vector_int_list_to_SEXP(&list));
   igraph_vector_int_list_destroy(&list);
 
