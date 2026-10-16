@@ -8715,6 +8715,61 @@ SEXP R_igraph_biadjacency(SEXP incidence, SEXP directed, SEXP mode, SEXP multipl
 }
 
 /*-------------------------------------------/
+/ igraph_weighted_biadjacency                /
+/-------------------------------------------*/
+SEXP R_igraph_weighted_biadjacency(SEXP biadjmatrix, SEXP directed, SEXP mode) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_bool_t c_types;
+  igraph_vector_t c_weights;
+  igraph_matrix_t c_biadjmatrix;
+  igraph_bool_t c_directed;
+  igraph_neimode_t c_mode;
+  SEXP graph;
+  SEXP types;
+  SEXP weights;
+
+  SEXP r_result, r_names;
+                                        /* Convert input */
+  IGRAPH_R_CHECK(igraph_vector_bool_init(&c_types, 0));
+  IGRAPH_FINALLY(igraph_vector_bool_destroy, &c_types);
+  IGRAPH_R_CHECK(igraph_vector_init(&c_weights, 0));
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_weights);
+  weights=R_GlobalEnv; /* hack to have a non-NULL value */
+  Rz_SEXP_to_matrix(biadjmatrix, &c_biadjmatrix);
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  c_mode = (igraph_neimode_t) Rf_asInteger(mode);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_weighted_biadjacency(&c_graph, &c_types, &c_weights, &c_biadjmatrix, c_directed, c_mode));
+
+                                        /* Convert output */
+  PROTECT(r_result=NEW_LIST(3));
+  PROTECT(r_names=NEW_CHARACTER(3));
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=Ry_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(types=Ry_igraph_vector_bool_to_SEXP(&c_types));
+  igraph_vector_bool_destroy(&c_types);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(weights=Ry_igraph_0orvector_to_SEXP(&c_weights));
+  igraph_vector_destroy(&c_weights);
+  IGRAPH_FINALLY_CLEAN(1);
+  SET_VECTOR_ELT(r_result, 0, graph);
+  SET_VECTOR_ELT(r_result, 1, types);
+  SET_VECTOR_ELT(r_result, 2, weights);
+  SET_STRING_ELT(r_names, 0, Rf_mkChar("graph"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("types"));
+  SET_STRING_ELT(r_names, 2, Rf_mkChar("weights"));
+  SET_NAMES(r_result, r_names);
+  UNPROTECT(4);
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_get_biadjacency                     /
 /-------------------------------------------*/
 SEXP R_igraph_get_biadjacency(SEXP graph, SEXP types, SEXP weights) {
