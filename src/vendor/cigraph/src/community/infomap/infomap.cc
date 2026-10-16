@@ -239,12 +239,17 @@ static igraph_error_t infomap_partition(FlowGraph &fgraph, bool rcall) {
  *
  * Time complexity: TODO.
  */
-igraph_error_t igraph_community_infomap(const igraph_t * graph,
+igraph_error_t igraph_community_infomap(const igraph_t *graph,
                              const igraph_vector_t *edge_weights,
                              const igraph_vector_t *vertex_weights,
                              igraph_int_t nb_trials,
+                             igraph_bool_t is_regularized,
+                             igraph_real_t regularization_strength,
                              igraph_vector_int_t *membership,
                              igraph_real_t *codelength) {
+
+    IGRAPH_UNUSED(is_regularized);
+    IGRAPH_UNUSED(regularization_strength);
 
     IGRAPH_HANDLE_EXCEPTIONS_BEGIN;
 
