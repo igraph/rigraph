@@ -1088,6 +1088,7 @@ static igraph_error_t community_leiden(
  * optimized when you supply the degrees (out- and in-degrees with directed graphs)
  * as the vertex weights and by supplying as a resolution parameter
  * <code>1/(2m)</code> (<code>1/m</code> with directed graphs).
+ * Use the \ref igraph_community_leiden_simple() convenience function to
  * compute vertex weights automatically for modularity maximization.
  *
  * </para><para>
@@ -1141,6 +1142,9 @@ static igraph_error_t community_leiden(
  *
  * Time complexity: near linear on sparse graphs.
  *
+ * \sa \ref igraph_community_leiden_simple() for a simplified interface
+ * that allows specifying an objective function directly and does not require
+ * vertex weights.
  *
  * \example examples/simple/igraph_community_leiden.c
  */
@@ -1267,6 +1271,171 @@ igraph_error_t igraph_community_leiden(
         IGRAPH_FREE(i_vertex_out_weights);
         IGRAPH_FINALLY_CLEAN(2);
     }
+
+    return IGRAPH_SUCCESS;
+}
+
+/**
+ * \function igraph_community_leiden_simple
+ * \brief Finding community structure using the Leiden algorithm, simple interface.
+ *
+ * This is a simplified interface to \ref igraph_community_leiden() for
+ * convenience purposes. Instead of requiring vertex weights, it allows
+ * choosing from a set of objective functions to maximize.
+ *
+ * \param graph The input graph. May be directed or undirected.
+ * \param weights The edge weights. If \c NULL, all weights are assumed to be 1.
+ * \param objective The objective function to maximize.
+ * \param resolution The resolution parameter.
+ * \param beta The randomness used in the refinement step.
+ * \param start Start from membership vector.
+ * \param n_iterations Number of iterations. Negative means until convergence.
+ * \param membership The membership vector.
+ * \param nb_clusters The number of clusters.
+ * \param quality The quality of the partition.
+ * \return Error code.
+ *
+ * Time complexity: near linear on sparse graphs.
+ *
+ * \sa \ref igraph_community_leiden() for a more flexible interface.
+ */
+igraph_error_t igraph_community_leiden_simple(
+        const igraph_t *graph,
+        const igraph_vector_t *weights,
+        igraph_leiden_objective_t objective,
+        igraph_real_t resolution,
+        igraph_real_t beta,
+        igraph_bool_t start,
+        igraph_int_t n_iterations,
+        igraph_vector_int_t *membership,
+        igraph_int_t *nb_clusters,
+        igraph_real_t *quality) {
+
+    const igraph_int_t vcount = igraph_vcount(graph);
+    const igraph_int_t ecount = igraph_ecount(graph);
+    const igraph_bool_t directed = igraph_is_directed(graph);
+    igraph_vector_t vertex_out_weights, vertex_in_weights;
+    igraph_vector_int_t i_membership, *p_membership;
+    igraph_real_t min_weight = IGRAPH_INFINITY;
+
+    if (weights) {
+        if (igraph_vector_size(weights) != ecount) {
+            IGRAPH_ERROR("Edge weight vector length does not match number of edges.", IGRAPH_EINVAL);
+        }
+        for (igraph_int_t i=0; i < ecount; i++) {
+            igraph_real_t w = VECTOR(*weights)[i];
+            if (w < min_weight) {
+                min_weight = w;
+            }
+            if (! isfinite(w)) {
+                IGRAPH_ERRORF("Edge weights must not be infinite or NaN, got %g.",
+                              IGRAPH_EINVAL, w);
+            }
+        }
+    }
+
+    IGRAPH_VECTOR_INIT_FINALLY(&vertex_out_weights, vcount);
+    if (directed) {
+        IGRAPH_VECTOR_INIT_FINALLY(&vertex_in_weights, vcount);
+    }
+
+    if (start) {
+        if (!membership) {
+            IGRAPH_ERROR("Requesting to start the computation from a specific "
+                         "community assignment, but no membership vector given.",
+                         IGRAPH_EINVAL);
+        }
+        if (igraph_vector_int_size(membership) != vcount) {
+            IGRAPH_ERRORF("Requesting to start the computation from a specific "
+                          "community assignment, but the given membership vector "
+                          "has a different size (%" IGRAPH_PRId " than the vertex "
+                          "count (%" IGRAPH_PRId ").",
+                          IGRAPH_EINVAL,
+                          igraph_vector_int_size(membership), vcount);
+        }
+        p_membership = membership;
+    } else {
+        if (!membership) {
+            IGRAPH_VECTOR_INT_INIT_FINALLY(&i_membership, vcount);
+            p_membership = &i_membership;
+        } else {
+            IGRAPH_CHECK(igraph_vector_int_resize(membership, vcount));
+            p_membership = membership;
+        }
+    }
+
+    switch (objective) {
+    case IGRAPH_LEIDEN_OBJECTIVE_MODULARITY:
+        if (min_weight < 0) {
+            IGRAPH_ERRORF("Edge weights must not be negative for Leiden community "
+                          "detection with modularity objective function, got %g.",
+                          IGRAPH_EINVAL,
+                          min_weight);
+        }
+
+        IGRAPH_CHECK(igraph_strength(
+            graph, &vertex_out_weights,
+            igraph_vss_all(), IGRAPH_OUT, IGRAPH_LOOPS, weights));
+        if (directed) {
+            IGRAPH_CHECK(igraph_strength(
+                graph, &vertex_in_weights,
+                igraph_vss_all(), IGRAPH_IN, IGRAPH_LOOPS, weights));
+        }
+
+        resolution /= igraph_vector_sum(&vertex_out_weights);
+
+        break;
+
+    case IGRAPH_LEIDEN_OBJECTIVE_CPM:
+        igraph_vector_fill(&vertex_out_weights, 1);
+        if (directed) {
+            igraph_vector_fill(&vertex_in_weights, 1);
+        }
+
+        break;
+
+    case IGRAPH_LEIDEN_OBJECTIVE_ER:
+        if (min_weight < 0) {
+            IGRAPH_ERRORF("Edge weights must not be negative for Leiden community "
+                          "detection with ER objective function, got %g.",
+                          IGRAPH_EINVAL,
+                          min_weight);
+        }
+
+        igraph_vector_fill(&vertex_out_weights, 1);
+        if (directed) {
+            igraph_vector_fill(&vertex_in_weights, 1);
+        }
+
+        {
+            igraph_real_t p;
+            IGRAPH_CHECK(igraph_density(graph, weights, &p, /* loops */ true));
+            resolution *= p;
+        }
+
+        break;
+
+    default:
+        IGRAPH_ERROR("Invalid objective function for Leiden community detection.",
+                     IGRAPH_EINVAL);
+    }
+
+    IGRAPH_CHECK(igraph_community_leiden(
+        graph, weights,
+        &vertex_out_weights, directed ? &vertex_in_weights : NULL,
+        resolution, beta, start, n_iterations, p_membership, nb_clusters, quality));
+
+    if (!membership) {
+        igraph_vector_int_destroy(&i_membership);
+        IGRAPH_FINALLY_CLEAN(1);
+    }
+
+    if (directed) {
+        igraph_vector_destroy(&vertex_in_weights);
+        IGRAPH_FINALLY_CLEAN(1);
+    }
+    igraph_vector_destroy(&vertex_out_weights);
+    IGRAPH_FINALLY_CLEAN(1);
 
     return IGRAPH_SUCCESS;
 }

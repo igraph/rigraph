@@ -234,6 +234,12 @@ IGRAPH_EXPORT igraph_error_t igraph_community_multilevel(const igraph_t *graph,
                                               igraph_matrix_int_t *memberships,
                                               igraph_vector_t *modularity);
 
+typedef enum {
+    IGRAPH_LEIDEN_OBJECTIVE_MODULARITY = 0,
+    IGRAPH_LEIDEN_OBJECTIVE_CPM,
+    IGRAPH_LEIDEN_OBJECTIVE_ER
+} igraph_leiden_objective_t;
+
 IGRAPH_EXPORT igraph_error_t igraph_community_leiden(
         const igraph_t *graph,
         const igraph_vector_t *edge_weights,
@@ -245,6 +251,19 @@ IGRAPH_EXPORT igraph_error_t igraph_community_leiden(
         igraph_int_t n_iterations,
         igraph_vector_int_t *membership,
         igraph_int_t *nb_clusters, igraph_real_t *quality);
+
+IGRAPH_EXPORT igraph_error_t igraph_community_leiden_simple(
+        const igraph_t *graph,
+        const igraph_vector_t *weights,
+        igraph_leiden_objective_t objective,
+        igraph_real_t resolution,
+        igraph_real_t beta,
+        igraph_bool_t start,
+        igraph_int_t n_iterations,
+        igraph_vector_int_t *membership,
+        igraph_int_t *nb_clusters,
+        igraph_real_t *quality);
+
 /* -------------------------------------------------- */
 /* Community Structure Comparison                     */
 /* -------------------------------------------------- */
