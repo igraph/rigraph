@@ -28,6 +28,7 @@
 
 #include "centrality/centrality_internal.h"
 
+#include <float.h>
 #include <limits.h>
 
 /* Multiplies vector 'from' by the unweighted adjacency matrix and stores the result in 'to'. */
@@ -82,8 +83,22 @@ static igraph_error_t adjmat_mul_weighted(igraph_real_t *to, const igraph_real_t
     return IGRAPH_SUCCESS;
 }
 
+static void warn_zero_entries(const igraph_vector_t *evcent) {
+    const igraph_real_t tol = 10 * DBL_EPSILON;
+    const igraph_int_t n = igraph_vector_size(evcent);
+
+    for (igraph_int_t i=0; i < n; i++) {
+        igraph_real_t x = VECTOR(*evcent)[i];
+        if (-tol < x && x < tol) {
+            IGRAPH_WARNING("Some eigenvector centralities are nearly zero, indicating that the graph may not be (strongly) connected. "
+                           "Eigenvector centrality is not meaningful for disconnected graphs.");
+            return;
+        }
+    }
+}
+
 static igraph_error_t igraph_i_eigenvector_centrality_undirected(const igraph_t *graph, igraph_vector_t *vector,
-                                                      igraph_real_t *value, igraph_bool_t scale,
+                                                      igraph_real_t *value,
                                                       const igraph_vector_t *weights,
                                                       igraph_arpack_options_t *options) {
 
@@ -92,13 +107,14 @@ static igraph_error_t igraph_i_eigenvector_centrality_undirected(const igraph_t 
     igraph_vector_t degree;
     igraph_int_t i;
     igraph_int_t no_of_nodes = igraph_vcount(graph);
+    igraph_int_t no_of_edges = igraph_ecount(graph);
     igraph_bool_t negative_weights = false;
 
     if (no_of_nodes > INT_MAX) {
         IGRAPH_ERROR("Graph has too many vertices for ARPACK.", IGRAPH_EOVERFLOW);
     }
 
-    if (igraph_ecount(graph) == 0) {
+    if (no_of_edges == 0) {
         /* special case: empty graph */
         if (value) {
             *value = 0;
@@ -107,16 +123,20 @@ static igraph_error_t igraph_i_eigenvector_centrality_undirected(const igraph_t 
             IGRAPH_CHECK(igraph_vector_resize(vector, igraph_vcount(graph)));
             igraph_vector_fill(vector, 1);
         }
+        if (no_of_nodes > 1) {
+            IGRAPH_WARNING("The graph has no edges and is disconnected. "
+                           "Eigenvector centrality is not meaningful for disconnected graphs.");
+        }
         return IGRAPH_SUCCESS;
     }
 
     if (weights) {
         igraph_real_t min, max;
 
-        if (igraph_vector_size(weights) != igraph_ecount(graph)) {
+        if (igraph_vector_size(weights) != no_of_edges) {
             IGRAPH_ERRORF("Weights vector length (%" IGRAPH_PRId ") not equal to "
                     "number of edges (%" IGRAPH_PRId ").", IGRAPH_EINVAL,
-                    igraph_vector_size(weights), igraph_ecount(graph));
+                    igraph_vector_size(weights), no_of_edges);
         }
         /* Safe to call minmax, ecount == 0 case was caught earlier */
         igraph_vector_minmax(weights, &min, &max);
@@ -128,6 +148,10 @@ static igraph_error_t igraph_i_eigenvector_centrality_undirected(const igraph_t 
             if (vector) {
                 IGRAPH_CHECK(igraph_vector_resize(vector, igraph_vcount(graph)));
                 igraph_vector_fill(vector, 1);
+            }
+            if (no_of_nodes > 1) {
+                IGRAPH_WARNING("All edge weights are zero, making the graph effectively disconnected. "
+                               "Eigenvector centrality is not meaningful for disconnected graphs.");
             }
             return IGRAPH_SUCCESS;
         }
@@ -148,14 +172,21 @@ static igraph_error_t igraph_i_eigenvector_centrality_undirected(const igraph_t 
     IGRAPH_VECTOR_INIT_FINALLY(&degree, no_of_nodes);
     IGRAPH_CHECK(igraph_strength(graph, &degree, igraph_vss_all(),
                                  IGRAPH_ALL, IGRAPH_LOOPS, weights));
+
     for (i = 0; i < no_of_nodes; i++) {
         if (VECTOR(degree)[i]) {
             /* Note: Keep random perturbation non-negative. */
             MATRIX(vectors, i, 0) = VECTOR(degree)[i] + RNG_UNIF(0, 1e-4);
+        } else if (! negative_weights) {
+            MATRIX(vectors, i, 0) = 0.0;
         } else {
-            MATRIX(vectors, i, 0) = 0.01;
+            igraph_int_t deg;
+            IGRAPH_CHECK(igraph_degree_1(graph, &deg, i, IGRAPH_ALL, IGRAPH_LOOPS));
+            MATRIX(vectors, i, 0) = deg == 0 ? 0.0 : 1.0;
         }
+
     }
+
     igraph_vector_destroy(&degree);
     IGRAPH_FINALLY_CLEAN(1);
 
@@ -198,41 +229,24 @@ static igraph_error_t igraph_i_eigenvector_centrality_undirected(const igraph_t 
     }
 
     if (vector) {
-        igraph_real_t amax = 0;
-        igraph_int_t which = 0;
         IGRAPH_CHECK(igraph_vector_resize(vector, no_of_nodes));
 
-        if (!negative_weights && VECTOR(values)[0] <= 0) {
-            /* Pathological case: largest eigenvalue is zero, therefore all the
-             * scores can also be zeros, this will be a valid eigenvector.
-             * This usually happens with graphs that have lots of sinks and
-             * sources only. */
-            igraph_vector_fill(vector, 0);
-            VECTOR(values)[0] = 0;
-        } else {
+        for (i = 0; i < no_of_nodes; i++) {
+            VECTOR(*vector)[i] = MATRIX(vectors, i, 0);
+        }
+
+        /* Scale result so that the largest value is 1.0. */
+        igraph_i_vector_scale_by_max_abs(vector);
+
+        /* Correction for numeric inaccuracies (eliminating -0.0) */
+        if (! negative_weights) {
             for (i = 0; i < no_of_nodes; i++) {
-                igraph_real_t tmp;
-                VECTOR(*vector)[i] = MATRIX(vectors, i, 0);
-                tmp = fabs(VECTOR(*vector)[i]);
-                if (tmp > amax) {
-                    amax = tmp;
-                    which = i;
+                if (VECTOR(*vector)[i] < 0) {
+                    VECTOR(*vector)[i] = 0;
                 }
-            }
-            if (scale && amax != 0) {
-                igraph_vector_scale(vector, 1 / VECTOR(*vector)[which]);
-            } else if (igraph_i_vector_mostly_negative(vector)) {
-                igraph_vector_scale(vector, -1.0);
             }
 
-            /* Correction for numeric inaccuracies (eliminating -0.0) */
-            if (! negative_weights) {
-                for (i = 0; i < no_of_nodes; i++) {
-                    if (VECTOR(*vector)[i] < 0) {
-                        VECTOR(*vector)[i] = 0;
-                    }
-                }
-            }
+            warn_zero_entries(vector);
         }
     }
 
@@ -254,7 +268,6 @@ static igraph_error_t igraph_i_eigenvector_centrality_undirected(const igraph_t 
 static igraph_error_t igraph_i_eigenvector_centrality_directed(const igraph_t *graph, igraph_vector_t *vector,
                                                     igraph_real_t *value,
                                                     igraph_neimode_t mode,
-                                                    igraph_bool_t scale,
                                                     const igraph_vector_t *weights,
                                                     igraph_arpack_options_t *options) {
 
@@ -264,7 +277,6 @@ static igraph_error_t igraph_i_eigenvector_centrality_directed(const igraph_t *g
     igraph_bool_t dag;
     igraph_int_t no_of_nodes = igraph_vcount(graph);
     igraph_int_t no_of_edges = igraph_ecount(graph);
-    igraph_int_t i;
     igraph_bool_t negative_weights = false;
 
     mode = IGRAPH_REVERSE_MODE(mode);
@@ -277,6 +289,10 @@ static igraph_error_t igraph_i_eigenvector_centrality_directed(const igraph_t *g
         if (vector) {
             IGRAPH_CHECK(igraph_vector_resize(vector, igraph_vcount(graph)));
             igraph_vector_fill(vector, 1);
+        }
+        if (no_of_nodes > 1) {
+            IGRAPH_WARNING("The graph has no edges and is disconnected. "
+                           "Eigenvector centrality is not meaningful for disconnected graphs.");
         }
         return IGRAPH_SUCCESS;
     }
@@ -307,6 +323,10 @@ static igraph_error_t igraph_i_eigenvector_centrality_directed(const igraph_t *g
             if (vector) {
                 IGRAPH_CHECK(igraph_vector_resize(vector, igraph_vcount(graph)));
                 igraph_vector_fill(vector, 1);
+            }
+            if (no_of_nodes > 1) {
+                IGRAPH_WARNING("All edge weights are zero, making the graph effectively disconnected. "
+                               "Eigenvector centrality is not meaningful for disconnected graphs.");
             }
             return IGRAPH_SUCCESS;
         }
@@ -342,8 +362,11 @@ static igraph_error_t igraph_i_eigenvector_centrality_directed(const igraph_t *g
                 *value = 0;
             }
             if (vector) {
-                IGRAPH_CHECK(igraph_strength(graph, vector, igraph_vss_all(), IGRAPH_REVERSE_MODE(mode), IGRAPH_LOOPS, weights));
-                for (i=0; i < no_of_nodes; i++) {
+                IGRAPH_CHECK(igraph_strength(
+                    graph, vector, igraph_vss_all(), IGRAPH_REVERSE_MODE(mode),
+                    IGRAPH_LOOPS, weights
+                ));
+                for (igraph_int_t i=0; i < no_of_nodes; i++) {
                     if (VECTOR(*vector)[i] == 0) {
                         VECTOR(*vector)[i] = 1;
                     } else {
@@ -376,14 +399,20 @@ static igraph_error_t igraph_i_eigenvector_centrality_directed(const igraph_t *g
     IGRAPH_VECTOR_INIT_FINALLY(&indegree, no_of_nodes);
     IGRAPH_CHECK(igraph_strength(graph, &indegree, igraph_vss_all(),
                                  mode, IGRAPH_LOOPS, weights));
-    for (i = 0; i < no_of_nodes; i++) {
+
+    for (igraph_int_t i = 0; i < no_of_nodes; i++) {
         if (VECTOR(indegree)[i]) {
             /* Note: Keep random perturbation non-negative. */
             MATRIX(vectors, i, 0) = VECTOR(indegree)[i] + RNG_UNIF(0, 1e-4);
+        } else if (! negative_weights) {
+            MATRIX(vectors, i, 0) = 0.0;
         } else {
-            MATRIX(vectors, i, 0) = 0.01;
+            igraph_int_t deg;
+            IGRAPH_CHECK(igraph_degree_1(graph, &deg, i, mode, IGRAPH_LOOPS));
+            MATRIX(vectors, i, 0) = deg == 0 ? 0.0 : 1.0;
         }
     }
+
     igraph_vector_destroy(&indegree);
     IGRAPH_FINALLY_CLEAN(1);
 
@@ -418,9 +447,6 @@ static igraph_error_t igraph_i_eigenvector_centrality_directed(const igraph_t *g
     }
 
     if (vector) {
-        igraph_real_t amax = 0;
-        igraph_int_t which = 0;
-
         IGRAPH_CHECK(igraph_vector_resize(vector, options->n));
 
         if (!negative_weights && MATRIX(values, 0, 0) <= 0) {
@@ -431,29 +457,23 @@ static igraph_error_t igraph_i_eigenvector_centrality_directed(const igraph_t *g
             igraph_vector_fill(vector, 0);
             MATRIX(values, 0, 0) = 0;
         } else {
-            for (i = 0; i < no_of_nodes; i++) {
-                igraph_real_t tmp;
+            for (igraph_int_t i = 0; i < no_of_nodes; i++) {
                 VECTOR(*vector)[i] = MATRIX(vectors, i, 0);
-                tmp = fabs(VECTOR(*vector)[i]);
-                if (tmp > amax) {
-                    amax = tmp;
-                    which = i;
-                }
             }
-            if (scale && amax != 0) {
-                igraph_vector_scale(vector, 1 / VECTOR(*vector)[which]);
-            } else if (igraph_i_vector_mostly_negative(vector)) {
-                igraph_vector_scale(vector, -1.0);
-            }
+
+            /* Scale result so that the largest value is 1.0. */
+            igraph_i_vector_scale_by_max_abs(vector);
         }
 
         /* Correction for numeric inaccuracies (eliminating -0.0) */
         if (! negative_weights) {
-            for (i = 0; i < no_of_nodes; i++) {
+            for (igraph_int_t i = 0; i < no_of_nodes; i++) {
                 if (VECTOR(*vector)[i] < 0) {
                     VECTOR(*vector)[i] = 0;
                 }
             }
+
+            warn_zero_entries(vector);
         }
     }
 
@@ -484,7 +504,13 @@ static igraph_error_t igraph_i_eigenvector_centrality_directed(const igraph_t *g
  * vertex is proportional to the sum of eigenvector centralities of its
  * neighbors. In practice, the centralities are determined by calculating the
  * eigenvector corresponding to the largest positive eigenvalue of the
- * adjacency matrix. In the undirected case, this function considers
+ * adjacency matrix. This is motivated by the fact that the principal
+ * eigenvector is guaranteed to be non-negative, assuming that edge weights
+ * are also non-negative. In fact, in connected undirected graphs, this is
+ * the \em only non-negative eigenvector.
+ *
+ * </para><para>
+ * In the undirected case, this function considers
  * the diagonal entries of the adjacency matrix to be \em twice the number of
  * self-loops on the corresponding vertex.
  *
@@ -496,33 +522,33 @@ static igraph_error_t igraph_i_eigenvector_centrality_directed(const igraph_t *g
  * are added up.
  *
  * </para><para>
- * The centrality scores returned by igraph can be normalized
- * (using the \p scale parameter) such that the largest eigenvector centrality
- * score is 1 (with one exception, see below).
- *
- * </para><para>
- * In the directed case, the left eigenvector of the adjacency matrix is
- * calculated. In other words, the centrality of a vertex is proportional
- * to the sum of centralities of vertices pointing to it.
+ * The centrality scores returned by igraph are normalized such that the largest
+ * eigenvector centrality score is 1, unless all scores are zeros.
  *
  * </para><para>
  * Eigenvector centrality is meaningful only for (strongly) connected graphs.
  * Undirected graphs that are not connected should be decomposed into connected
  * components, and the eigenvector centrality calculated for each separately.
- * The scores between components will not be comparable.
- * This function does not verify that the graph is connected. If it is not,
- * in the undirected case the scores of all but one component will be zeros.
+ * This function does not directly verify that the graph is connected. If it is
+ * not, in the undirected case the scores of all but one component will typically
+ * be zeros. When zeros are detected, a warning is issued.
  *
  * </para><para>
  * Also note that the adjacency matrix of a directed acyclic graph or the
  * adjacency matrix of an empty graph does not possess positive eigenvalues,
  * therefore the eigenvector centrality is not meaningful for these graphs.
  * igraph will return an eigenvalue of zero in such cases. The returned
- * eigenvector centralities will all be equal for vertices with zero out-degree,
+ * eigenvector centralities will all be equal for vertices with zero out-degree
+ * or zero in-degrees (depending on whether \p mode is \c IGRAPH_OUT or \c IGRAPH_IN)
  * and zeros for other vertices. Such pathological cases can be detected
  * by asking igraph to calculate the eigenvalue as well (using the \p value
  * parameter, see below) and checking whether the eigenvalue is very close
  * to zero.
+ *
+ * </para><para>
+ * Eigenvector centrality was developed for networks with non-negative edge
+ * weights. While igraph does not refuse to carry out the calculation with
+ * negative weights, it will issue a warning.
  *
  * </para><para>
  * When working with directed graphs, consider using hub and authority
@@ -534,14 +560,22 @@ static igraph_error_t igraph_i_eigenvector_centrality_directed(const igraph_t *g
  *     be a null pointer, then it is ignored.
  * \param value If not a null pointer, then the eigenvalue
  *     corresponding to the found eigenvector is stored here.
- * \param mode How to consider edge directions in directed graphs. Possible
- *     values: \c IGRAPH_OUT means vertices with many outgoing edges pointing
- *     to high-scoring vertices will score high. \c IGRAPH_IN means vertices
- *     with many incoming edges from high-scoring vertices will score high.
- *     \c IGRAPH_ALL ignores edge directions. For undirected graphs, this
- *     parameter is ignored and is always treated as \c IGRAPH_ALL.
- * \param scale If not zero then the result will be scaled such that
- *     the absolute value of the maximum centrality is one.
+ * \param mode How to consider edge directions in directed graphs.
+ *     It is ignored for undirected graphs. Possible values:
+ *        \clist
+ *        \cli IGRAPH_OUT
+ *          the left eigenvector of the adjacency matrix is calculated,
+ *          i.e. the centrality of a vertex is proportional to the sum
+ *          of centralities of vertices pointing to it. This is the standard
+ *          eigenvector centrality.
+ *        \cli IGRAPH_IN
+ *          the right eigenvector of the adjacency matrix is calculated,
+ *          i.e. the centrality of a vertex is proportional to the sum
+ *          of centralities of vertices it points to.
+ *        \cli IGRAPH_ALL
+ *          edge directions are ignored, and the unweighted eigenvector
+ *          centrality is calculated.
+ *        \endclist
  * \param weights A null pointer (indicating no edge weights), or a vector
  *     giving the weights of the edges. Weights should be positive to guarantee
  *     a meaningful result. The algorithm might produce complex numbers when some
@@ -567,7 +601,7 @@ static igraph_error_t igraph_i_eigenvector_centrality_directed(const igraph_t *g
 igraph_error_t igraph_eigenvector_centrality(const igraph_t *graph,
                                   igraph_vector_t *vector,
                                   igraph_real_t *value,
-                                  igraph_neimode_t mode, igraph_bool_t scale,
+                                  igraph_neimode_t mode,
                                   const igraph_vector_t *weights,
                                   igraph_arpack_options_t *options) {
 
@@ -585,9 +619,9 @@ igraph_error_t igraph_eigenvector_centrality(const igraph_t *graph,
 
     if (mode == IGRAPH_ALL) {
         return igraph_i_eigenvector_centrality_undirected(graph, vector, value,
-                scale, weights, options);
+                                                          weights, options);
     } else {
         return igraph_i_eigenvector_centrality_directed(graph, vector, value,
-                mode, scale, weights, options);
+                                                        mode, weights, options);
     }
 }

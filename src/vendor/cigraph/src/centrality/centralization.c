@@ -1,7 +1,6 @@
-/* -*- mode: C -*-  */
 /* vim:set ts=4 sw=4 sts=4 et: */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2007-2020  The igraph development team <igraph@igraph.org>
 
    This program is free software; you can redistribute it and/or modify
@@ -550,7 +549,7 @@ igraph_error_t igraph_centralization_closeness_tmax(const igraph_t *graph,
  * \brief Calculate eigenvector centrality scores and graph centralization.
  *
  * This function calculates the eigenvector centrality of the vertices
- * by passing its arguments to \ref igraph_eigenvector_centrality);
+ * by passing its arguments to \ref igraph_eigenvector_centrality();
  * and it calculates the graph level centralization index based on the
  * results by calling \ref igraph_centralization().
  *
@@ -573,9 +572,7 @@ igraph_error_t igraph_centralization_closeness_tmax(const igraph_t *graph,
  *      stored here.
  * \param mode How to consider edge directions in directed graphs.
  *     See \ref igraph_eigenvector_centrality() for details. Ignored
- *     for undirected graphs.
- * \param scale This parameter is deprecated and ignored since igraph 0.10.14.
- *     Vertex-level centrality scores are always scaled to have a maximum of one.
+ *     for directed graphs.
  * \param options Options to ARPACK. See \ref igraph_arpack_options_t
  *    for details. Note that the function overwrites the
  *    <code>n</code> (number of vertices) parameter and
@@ -604,7 +601,6 @@ igraph_error_t igraph_centralization_eigenvector_centrality(
     igraph_vector_t *vector,
     igraph_real_t *value,
     igraph_neimode_t mode,
-    igraph_bool_t scale,
     igraph_arpack_options_t *options,
     igraph_real_t *centralization,
     igraph_real_t *theoretical_max,
@@ -614,14 +610,6 @@ igraph_error_t igraph_centralization_eigenvector_centrality(
     igraph_vector_t *scores = vector;
     igraph_real_t realvalue, *myvalue = value;
     igraph_real_t *tmax = theoretical_max, mytmax;
-
-    if (! scale) {
-        scale = true;
-        IGRAPH_WARNING("Computing eigenvector centralization requires normalized "
-                       "eigenvector centrality scores. Normalizing eigenvector centralities "
-                       "by their maximum even though 'scale=false' was requested. The 'scale' "
-                       "parameter will be removed in the future.");
-    }
 
     if (!tmax) {
         tmax = &mytmax;
@@ -636,13 +624,11 @@ igraph_error_t igraph_centralization_eigenvector_centrality(
     }
 
     IGRAPH_CHECK(igraph_eigenvector_centrality(graph, scores, myvalue, mode,
-                 scale, /*weights=*/ 0,
+                 /*weights=*/ NULL,
                  options));
 
     IGRAPH_CHECK(igraph_centralization_eigenvector_centrality_tmax(
-                     graph, 0, mode,
-                     scale,
-                     tmax));
+                     graph, 0, mode, tmax));
 
     *centralization = igraph_centralization(scores, *tmax, normalized);
 
@@ -670,9 +656,8 @@ igraph_error_t igraph_centralization_eigenvector_centrality(
  * supplied graph is undirected.
  *
  * </para><para>
- * The other way is to supply a null pointer as the \p graph
- * argument. In this case the \p nodes and \p mode
- * arguments are considered.
+ * The other way is to supply a null pointer as the \p graph. argument.
+ * In this case the \p nodes and \p mode arguments are considered.
  *
  * </para><para>
  * The most centralized directed structure is the in-star with \p mode
@@ -687,9 +672,6 @@ igraph_error_t igraph_centralization_eigenvector_centrality(
  *     See \ref igraph_eigenvector_centrality() for details. This argument
  *     is ignored if \p graph is not a null pointer and it is
  *     undirected.
- * \param scale This parameter is deprecated and ignored since igraph 0.10.14.
- *     Vertex-level centrality scores are always assumed to be scaled to
- *     have a maximum of one.
  * \param res Pointer to a real variable, the result is stored here.
  * \return Error code.
  *
@@ -703,17 +685,7 @@ igraph_error_t igraph_centralization_eigenvector_centrality_tmax(
     const igraph_t *graph,
     igraph_int_t nodes,
     igraph_neimode_t mode,
-    igraph_bool_t scale,
     igraph_real_t *res) {
-
-    if (! scale) {
-        scale = true;
-        IGRAPH_WARNING("Theoretical maximum for eigenvector centralization can "
-                       "only be computed with normalized eigenvector centrality "
-                       "scores. Assuming that eigenvector centralities are normalized "
-                       "by their maximum even though 'scale=false' was passed. The 'scale' "
-                       "parameter will be removed in the future.");
-    }
 
     if (graph) {
         nodes = igraph_vcount(graph);
@@ -739,11 +711,7 @@ igraph_error_t igraph_centralization_eigenvector_centrality_tmax(
     if (mode != IGRAPH_ALL) {
         *res = nodes - 1;
     } else {
-        if (scale) {
-            *res = nodes - 2;
-        } else {
-            *res = (nodes - 2.0) / M_SQRT2;
-        }
+        *res = nodes - 2;
     }
 
     return IGRAPH_SUCCESS;

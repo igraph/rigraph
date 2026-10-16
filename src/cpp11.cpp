@@ -73,8 +73,8 @@ extern SEXP R_igraph_centralization_closeness(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_centralization_closeness_tmax(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_centralization_degree(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_centralization_degree_tmax(SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_centralization_eigenvector_centrality(SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_centralization_eigenvector_centrality_tmax(SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_centralization_eigenvector_centrality(SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_centralization_eigenvector_centrality_tmax(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_chung_lu_game(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_circulant(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_cited_type_game(SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -169,7 +169,7 @@ extern SEXP R_igraph_edges(SEXP, SEXP);
 extern SEXP R_igraph_eigen_adjacency(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_eigen_matrix(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_eigen_matrix_symmetric(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_eigenvector_centrality(SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_eigenvector_centrality(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_empty(SEXP, SEXP);
 extern SEXP R_igraph_empty_attrs(SEXP, SEXP);
 extern SEXP R_igraph_erdos_renyi_game_gnm(SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -651,8 +651,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_centralization_closeness_tmax",                  (DL_FUNC) &R_igraph_centralization_closeness_tmax,                   3},
     {"R_igraph_centralization_degree",                          (DL_FUNC) &R_igraph_centralization_degree,                           4},
     {"R_igraph_centralization_degree_tmax",                     (DL_FUNC) &R_igraph_centralization_degree_tmax,                      4},
-    {"R_igraph_centralization_eigenvector_centrality",          (DL_FUNC) &R_igraph_centralization_eigenvector_centrality,           5},
-    {"R_igraph_centralization_eigenvector_centrality_tmax",     (DL_FUNC) &R_igraph_centralization_eigenvector_centrality_tmax,      4},
+    {"R_igraph_centralization_eigenvector_centrality",          (DL_FUNC) &R_igraph_centralization_eigenvector_centrality,           4},
+    {"R_igraph_centralization_eigenvector_centrality_tmax",     (DL_FUNC) &R_igraph_centralization_eigenvector_centrality_tmax,      3},
     {"R_igraph_chung_lu_game",                                  (DL_FUNC) &R_igraph_chung_lu_game,                                   4},
     {"R_igraph_circulant",                                      (DL_FUNC) &R_igraph_circulant,                                       3},
     {"R_igraph_cited_type_game",                                (DL_FUNC) &R_igraph_cited_type_game,                                 5},
@@ -747,7 +747,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_eigen_adjacency",                                (DL_FUNC) &R_igraph_eigen_adjacency,                                 4},
     {"R_igraph_eigen_matrix",                                   (DL_FUNC) &R_igraph_eigen_matrix,                                    6},
     {"R_igraph_eigen_matrix_symmetric",                         (DL_FUNC) &R_igraph_eigen_matrix_symmetric,                          6},
-    {"R_igraph_eigenvector_centrality",                         (DL_FUNC) &R_igraph_eigenvector_centrality,                          5},
+    {"R_igraph_eigenvector_centrality",                         (DL_FUNC) &R_igraph_eigenvector_centrality,                          4},
     {"R_igraph_empty",                                          (DL_FUNC) &R_igraph_empty,                                           2},
     {"R_igraph_empty_attrs",                                    (DL_FUNC) &R_igraph_empty_attrs,                                     2},
     {"R_igraph_erdos_renyi_game_gnm",                           (DL_FUNC) &R_igraph_erdos_renyi_game_gnm,                            5},
