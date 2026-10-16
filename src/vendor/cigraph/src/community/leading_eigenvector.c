@@ -544,7 +544,7 @@ igraph_error_t igraph_community_leading_eigenvector(
             storage.resid[i] = (i % 2 ? 1 : -1) + RNG_UNIF(-0.1, 0.1);
         }
         start_vec = igraph_vector_view(storage.resid, options->n);
-        IGRAPH_CHECK(igraph_vector_shuffle(&start_vec));
+        igraph_vector_shuffle(&start_vec);
 
         {
             igraph_error_t retval;

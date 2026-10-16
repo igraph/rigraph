@@ -225,7 +225,7 @@ igraph_error_t igraph_bond_percolation(
     if (edge_order == NULL) {
         IGRAPH_CHECK(igraph_vector_int_init_range(&i_edge_order, 0, igraph_ecount(graph)));
         IGRAPH_FINALLY(igraph_vector_int_destroy, &i_edge_order);
-        IGRAPH_CHECK(igraph_vector_int_shuffle(&i_edge_order));
+        igraph_vector_int_shuffle(&i_edge_order);
         p_edge_order = &i_edge_order;
     } else {
         // Verify that there are no duplicates.
@@ -340,7 +340,7 @@ igraph_error_t igraph_site_percolation(
     if (vertex_order == NULL) {
         IGRAPH_CHECK(igraph_vector_int_init_range(&i_vertex_order, 0, vcount));
         IGRAPH_FINALLY(igraph_vector_int_destroy, &i_vertex_order);
-        IGRAPH_CHECK(igraph_vector_int_shuffle(&i_vertex_order));
+        igraph_vector_int_shuffle(&i_vertex_order);
         p_vertex_order = &i_vertex_order;
     } else {
         p_vertex_order = vertex_order;
