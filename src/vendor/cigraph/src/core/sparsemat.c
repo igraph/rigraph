@@ -173,19 +173,6 @@ igraph_error_t igraph_sparsemat_init_copy(
 }
 
 /**
- * \function igraph_sparsemat_copy
- * \brief Copies a sparse matrix (deprecated alias).
- *
- * \deprecated-by igraph_sparsemat_init_copy 0.10
- */
-
-igraph_error_t igraph_sparsemat_copy(
-    igraph_sparsemat_t *to, const igraph_sparsemat_t *from
-) {
-    return igraph_sparsemat_init_copy(to, from);
-}
-
-/**
  * \function igraph_sparsemat_destroy
  * \brief Deallocates memory used by a sparse matrix.
  *

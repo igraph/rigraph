@@ -298,8 +298,6 @@ IGRAPH_EXPORT igraph_int_t igraph_sparsemat_iterator_idx(const igraph_sparsemat_
 IGRAPH_EXPORT igraph_real_t igraph_sparsemat_iterator_get(const igraph_sparsemat_iterator_t *it);
 IGRAPH_EXPORT igraph_int_t igraph_sparsemat_iterator_next(igraph_sparsemat_iterator_t *it);
 
-IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_sparsemat_copy(
-    igraph_sparsemat_t *to, const igraph_sparsemat_t *from);
 IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_sparsemat_diag(
     igraph_sparsemat_t *A, igraph_int_t nzmax, const igraph_vector_t *values,
     igraph_bool_t compress);
