@@ -472,9 +472,6 @@ igraph_bipartite_game_gnm:
         NEIMODE mode=ALL, EDGE_TYPE_SW allowed_edge_types=SIMPLE,
         BOOLEAN edge_labeled=False
 
-igraph_bipartite_game:
-    DEPS: types ON res$graph V(res$graph)
-
 igraph_full_bipartite:
     DEPS: types ON res$graph
 
