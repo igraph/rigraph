@@ -707,6 +707,15 @@ igraph_get_subisomorphisms_vf2_callback_closure:
         vertex_color1 ON graph1, vertex_color2 ON graph2,
         edge_color1 ON graph1, edge_color2 ON graph2
 
+igraph_canonical_permutation:
+    # Upstream renamed this function to igraph_canonical_permutation_bliss() and
+    # took the name for one without the splitting heuristic and the info
+    # (krlmlr/igraph@61edef8): canonical_permutation_impl() stays the bliss one.
+    IGNORE: RR, RC, RInit
+
+igraph_canonical_permutation_bliss:
+    NAME-R: canonical_permutation
+
 #######################################
 # Matching
 #######################################

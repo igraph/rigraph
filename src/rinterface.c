@@ -16632,9 +16632,9 @@ SEXP R_igraph_get_subisomorphisms_vf2(SEXP graph1, SEXP graph2, SEXP vertex_colo
 }
 
 /*-------------------------------------------/
-/ igraph_canonical_permutation               /
+/ igraph_canonical_permutation_bliss         /
 /-------------------------------------------*/
-SEXP R_igraph_canonical_permutation(SEXP graph, SEXP colors, SEXP sh) {
+SEXP R_igraph_canonical_permutation_bliss(SEXP graph, SEXP colors, SEXP sh) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_int_t c_colors;
@@ -16657,7 +16657,7 @@ SEXP R_igraph_canonical_permutation(SEXP graph, SEXP colors, SEXP sh) {
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_labeling);
   c_sh = (igraph_bliss_sh_t) Rf_asInteger(sh);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_canonical_permutation(&c_graph, (Rf_isNull(colors) ? 0 : &c_colors), &c_labeling, c_sh, &c_info));
+  IGRAPH_R_CHECK(igraph_canonical_permutation_bliss(&c_graph, (Rf_isNull(colors) ? 0 : &c_colors), &c_labeling, c_sh, &c_info));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));
