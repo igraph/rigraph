@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2003-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -141,9 +140,6 @@ IGRAPH_EXPORT igraph_real_t igraph_rng_get_gamma(
     igraph_rng_t *rng, igraph_real_t shape, igraph_real_t scale
 );
 IGRAPH_EXPORT igraph_real_t igraph_rng_get_pois(igraph_rng_t *rng, igraph_real_t rate);
-IGRAPH_DEPRECATED IGRAPH_EXPORT igraph_error_t igraph_rng_get_dirichlet(
-    igraph_rng_t *rng, const igraph_vector_t *alpha, igraph_vector_t *result);
-
 /* --------------------------------- */
 
 IGRAPH_EXPORT extern const igraph_rng_type_t igraph_rngtype_glibc2;

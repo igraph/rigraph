@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -2231,33 +2230,4 @@ static double igraph_i_rgamma(igraph_rng_t *rng, double a, double scale) {
     } /* repeat .. until  `t' is accepted */
     x = s + 0.5 * t;
     return scale * x * x;
-}
-
-igraph_error_t igraph_rng_get_dirichlet(igraph_rng_t *rng,
-                             const igraph_vector_t *alpha,
-                             igraph_vector_t *result) {
-
-    igraph_int_t len = igraph_vector_size(alpha);
-    igraph_real_t sum = 0.0;
-
-    if (len < 2) {
-        IGRAPH_ERROR("Dirichlet parameter vector too short, must have at least two entries.",
-                     IGRAPH_EINVAL);
-    }
-    if (igraph_vector_min(alpha) <= 0) {
-        IGRAPH_ERROR("Dirichlet concentration parameters must be positive.",
-                     IGRAPH_EINVAL);
-    }
-
-    IGRAPH_CHECK(igraph_vector_resize(result, len));
-
-    for (igraph_int_t i = 0; i < len; i++) {
-        VECTOR(*result)[i] = igraph_rng_get_gamma(rng, VECTOR(*alpha)[i], 1.0);
-        sum += VECTOR(*result)[i];
-    }
-    for (igraph_int_t i = 0; i < len; i++) {
-        VECTOR(*result)[i] /= sum;
-    }
-
-    return IGRAPH_SUCCESS;
 }
