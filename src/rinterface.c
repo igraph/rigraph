@@ -4979,29 +4979,32 @@ SEXP R_igraph_subcomponent(SEXP graph, SEXP vid, SEXP mode) {
 /*-------------------------------------------/
 / igraph_betweenness                         /
 /-------------------------------------------*/
-SEXP R_igraph_betweenness(SEXP graph, SEXP vids, SEXP directed, SEXP weights) {
+SEXP R_igraph_betweenness(SEXP graph, SEXP weights, SEXP vids, SEXP directed, SEXP normalized) {
                                         /* Declarations */
   igraph_t c_graph;
+  igraph_vector_t c_weights;
   igraph_vector_t c_res;
   igraph_vs_t c_vids;
   igraph_bool_t c_directed;
-  igraph_vector_t c_weights;
+  igraph_bool_t c_normalized;
   SEXP res;
 
   SEXP r_result;
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    Rz_SEXP_to_vector(weights, &c_weights);
+  }
   IGRAPH_R_CHECK(igraph_vector_init(&c_res, 0));
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
   igraph_vector_int_t c_vids_data;
   Rz_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
   IGRAPH_R_CHECK_BOOL(directed);
   c_directed = LOGICAL(directed)[0];
-  if (!Rf_isNull(weights)) {
-    Rz_SEXP_to_vector(weights, &c_weights);
-  }
+  IGRAPH_R_CHECK_BOOL(normalized);
+  c_normalized = LOGICAL(normalized)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_betweenness(&c_graph, &c_res, c_vids, c_directed, (Rf_isNull(weights) ? 0 : &c_weights)));
+  IGRAPH_R_CHECK(igraph_betweenness(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_res, c_vids, c_directed, c_normalized));
 
                                         /* Convert output */
   PROTECT(res=Ry_igraph_vector_to_SEXP(&c_res));
@@ -5018,32 +5021,35 @@ SEXP R_igraph_betweenness(SEXP graph, SEXP vids, SEXP directed, SEXP weights) {
 /*-------------------------------------------/
 / igraph_betweenness_cutoff                  /
 /-------------------------------------------*/
-SEXP R_igraph_betweenness_cutoff(SEXP graph, SEXP vids, SEXP directed, SEXP weights, SEXP cutoff) {
+SEXP R_igraph_betweenness_cutoff(SEXP graph, SEXP weights, SEXP vids, SEXP directed, SEXP normalized, SEXP cutoff) {
                                         /* Declarations */
   igraph_t c_graph;
+  igraph_vector_t c_weights;
   igraph_vector_t c_res;
   igraph_vs_t c_vids;
   igraph_bool_t c_directed;
-  igraph_vector_t c_weights;
+  igraph_bool_t c_normalized;
   igraph_real_t c_cutoff;
   SEXP res;
 
   SEXP r_result;
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    Rz_SEXP_to_vector(weights, &c_weights);
+  }
   IGRAPH_R_CHECK(igraph_vector_init(&c_res, 0));
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
   igraph_vector_int_t c_vids_data;
   Rz_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
   IGRAPH_R_CHECK_BOOL(directed);
   c_directed = LOGICAL(directed)[0];
-  if (!Rf_isNull(weights)) {
-    Rz_SEXP_to_vector(weights, &c_weights);
-  }
+  IGRAPH_R_CHECK_BOOL(normalized);
+  c_normalized = LOGICAL(normalized)[0];
   IGRAPH_R_CHECK_REAL(cutoff);
   c_cutoff = REAL(cutoff)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_betweenness_cutoff(&c_graph, &c_res, c_vids, c_directed, (Rf_isNull(weights) ? 0 : &c_weights), c_cutoff));
+  IGRAPH_R_CHECK(igraph_betweenness_cutoff(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_res, c_vids, c_directed, c_normalized, c_cutoff));
 
                                         /* Convert output */
   PROTECT(res=Ry_igraph_vector_to_SEXP(&c_res));
@@ -5060,46 +5066,49 @@ SEXP R_igraph_betweenness_cutoff(SEXP graph, SEXP vids, SEXP directed, SEXP weig
 /*-------------------------------------------/
 / igraph_betweenness_subset                  /
 /-------------------------------------------*/
-SEXP R_igraph_betweenness_subset(SEXP graph, SEXP vids, SEXP directed, SEXP sources, SEXP targets, SEXP weights) {
+SEXP R_igraph_betweenness_subset(SEXP graph, SEXP weights, SEXP sources, SEXP targets, SEXP vids, SEXP directed, SEXP normalized) {
                                         /* Declarations */
   igraph_t c_graph;
+  igraph_vector_t c_weights;
   igraph_vector_t c_res;
-  igraph_vs_t c_vids;
-  igraph_bool_t c_directed;
   igraph_vs_t c_sources;
   igraph_vs_t c_targets;
-  igraph_vector_t c_weights;
+  igraph_vs_t c_vids;
+  igraph_bool_t c_directed;
+  igraph_bool_t c_normalized;
   SEXP res;
 
   SEXP r_result;
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    Rz_SEXP_to_vector(weights, &c_weights);
+  }
   IGRAPH_R_CHECK(igraph_vector_init(&c_res, 0));
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
-  igraph_vector_int_t c_vids_data;
-  Rz_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
-  IGRAPH_R_CHECK_BOOL(directed);
-  c_directed = LOGICAL(directed)[0];
   igraph_vector_int_t c_sources_data;
   Rz_SEXP_to_igraph_vs(sources, &c_graph, &c_sources, &c_sources_data);
   igraph_vector_int_t c_targets_data;
   Rz_SEXP_to_igraph_vs(targets, &c_graph, &c_targets, &c_targets_data);
-  if (!Rf_isNull(weights)) {
-    Rz_SEXP_to_vector(weights, &c_weights);
-  }
+  igraph_vector_int_t c_vids_data;
+  Rz_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(normalized);
+  c_normalized = LOGICAL(normalized)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_betweenness_subset(&c_graph, &c_res, c_vids, c_directed, c_sources, c_targets, (Rf_isNull(weights) ? 0 : &c_weights)));
+  IGRAPH_R_CHECK(igraph_betweenness_subset(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_res, c_sources, c_targets, c_vids, c_directed, c_normalized));
 
                                         /* Convert output */
   PROTECT(res=Ry_igraph_vector_to_SEXP(&c_res));
   igraph_vector_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
-  igraph_vector_int_destroy(&c_vids_data);
-  igraph_vs_destroy(&c_vids);
   igraph_vector_int_destroy(&c_sources_data);
   igraph_vs_destroy(&c_sources);
   igraph_vector_int_destroy(&c_targets_data);
   igraph_vs_destroy(&c_targets);
+  igraph_vector_int_destroy(&c_vids_data);
+  igraph_vs_destroy(&c_vids);
   r_result = res;
 
   UNPROTECT(1);
@@ -5109,31 +5118,39 @@ SEXP R_igraph_betweenness_subset(SEXP graph, SEXP vids, SEXP directed, SEXP sour
 /*-------------------------------------------/
 / igraph_edge_betweenness                    /
 /-------------------------------------------*/
-SEXP R_igraph_edge_betweenness(SEXP graph, SEXP directed, SEXP weights) {
+SEXP R_igraph_edge_betweenness(SEXP graph, SEXP weights, SEXP eids, SEXP directed, SEXP normalized) {
                                         /* Declarations */
   igraph_t c_graph;
-  igraph_vector_t c_res;
-  igraph_bool_t c_directed;
   igraph_vector_t c_weights;
+  igraph_vector_t c_res;
+  igraph_es_t c_eids;
+  igraph_bool_t c_directed;
+  igraph_bool_t c_normalized;
   SEXP res;
 
   SEXP r_result;
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
-  IGRAPH_R_CHECK(igraph_vector_init(&c_res, 0));
-  IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
-  IGRAPH_R_CHECK_BOOL(directed);
-  c_directed = LOGICAL(directed)[0];
   if (!Rf_isNull(weights)) {
     Rz_SEXP_to_vector(weights, &c_weights);
   }
+  IGRAPH_R_CHECK(igraph_vector_init(&c_res, 0));
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
+  igraph_vector_int_t c_eids_data;
+  IGRAPH_R_CHECK(Rz_SEXP_to_igraph_es(eids, &c_graph, &c_eids, &c_eids_data));
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(normalized);
+  c_normalized = LOGICAL(normalized)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_edge_betweenness(&c_graph, &c_res, c_directed, (Rf_isNull(weights) ? 0 : &c_weights)));
+  IGRAPH_R_CHECK(igraph_edge_betweenness(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_res, c_eids, c_directed, c_normalized));
 
                                         /* Convert output */
   PROTECT(res=Ry_igraph_vector_to_SEXP(&c_res));
   igraph_vector_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_destroy(&c_eids_data);
+  igraph_es_destroy(&c_eids);
   r_result = res;
 
   UNPROTECT(1);
@@ -5143,34 +5160,42 @@ SEXP R_igraph_edge_betweenness(SEXP graph, SEXP directed, SEXP weights) {
 /*-------------------------------------------/
 / igraph_edge_betweenness_cutoff             /
 /-------------------------------------------*/
-SEXP R_igraph_edge_betweenness_cutoff(SEXP graph, SEXP directed, SEXP weights, SEXP cutoff) {
+SEXP R_igraph_edge_betweenness_cutoff(SEXP graph, SEXP weights, SEXP eids, SEXP directed, SEXP normalized, SEXP cutoff) {
                                         /* Declarations */
   igraph_t c_graph;
-  igraph_vector_t c_res;
-  igraph_bool_t c_directed;
   igraph_vector_t c_weights;
+  igraph_vector_t c_res;
+  igraph_es_t c_eids;
+  igraph_bool_t c_directed;
+  igraph_bool_t c_normalized;
   igraph_real_t c_cutoff;
   SEXP res;
 
   SEXP r_result;
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
-  IGRAPH_R_CHECK(igraph_vector_init(&c_res, 0));
-  IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
-  IGRAPH_R_CHECK_BOOL(directed);
-  c_directed = LOGICAL(directed)[0];
   if (!Rf_isNull(weights)) {
     Rz_SEXP_to_vector(weights, &c_weights);
   }
+  IGRAPH_R_CHECK(igraph_vector_init(&c_res, 0));
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
+  igraph_vector_int_t c_eids_data;
+  IGRAPH_R_CHECK(Rz_SEXP_to_igraph_es(eids, &c_graph, &c_eids, &c_eids_data));
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(normalized);
+  c_normalized = LOGICAL(normalized)[0];
   IGRAPH_R_CHECK_REAL(cutoff);
   c_cutoff = REAL(cutoff)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_edge_betweenness_cutoff(&c_graph, &c_res, c_directed, (Rf_isNull(weights) ? 0 : &c_weights), c_cutoff));
+  IGRAPH_R_CHECK(igraph_edge_betweenness_cutoff(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_res, c_eids, c_directed, c_normalized, c_cutoff));
 
                                         /* Convert output */
   PROTECT(res=Ry_igraph_vector_to_SEXP(&c_res));
   igraph_vector_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_destroy(&c_eids_data);
+  igraph_es_destroy(&c_eids);
   r_result = res;
 
   UNPROTECT(1);
@@ -5180,46 +5205,49 @@ SEXP R_igraph_edge_betweenness_cutoff(SEXP graph, SEXP directed, SEXP weights, S
 /*-------------------------------------------/
 / igraph_edge_betweenness_subset             /
 /-------------------------------------------*/
-SEXP R_igraph_edge_betweenness_subset(SEXP graph, SEXP eids, SEXP directed, SEXP sources, SEXP targets, SEXP weights) {
+SEXP R_igraph_edge_betweenness_subset(SEXP graph, SEXP weights, SEXP sources, SEXP targets, SEXP eids, SEXP directed, SEXP normalized) {
                                         /* Declarations */
   igraph_t c_graph;
+  igraph_vector_t c_weights;
   igraph_vector_t c_res;
-  igraph_es_t c_eids;
-  igraph_bool_t c_directed;
   igraph_vs_t c_sources;
   igraph_vs_t c_targets;
-  igraph_vector_t c_weights;
+  igraph_es_t c_eids;
+  igraph_bool_t c_directed;
+  igraph_bool_t c_normalized;
   SEXP res;
 
   SEXP r_result;
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    Rz_SEXP_to_vector(weights, &c_weights);
+  }
   IGRAPH_R_CHECK(igraph_vector_init(&c_res, 0));
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
-  igraph_vector_int_t c_eids_data;
-  IGRAPH_R_CHECK(Rz_SEXP_to_igraph_es(eids, &c_graph, &c_eids, &c_eids_data));
-  IGRAPH_R_CHECK_BOOL(directed);
-  c_directed = LOGICAL(directed)[0];
   igraph_vector_int_t c_sources_data;
   Rz_SEXP_to_igraph_vs(sources, &c_graph, &c_sources, &c_sources_data);
   igraph_vector_int_t c_targets_data;
   Rz_SEXP_to_igraph_vs(targets, &c_graph, &c_targets, &c_targets_data);
-  if (!Rf_isNull(weights)) {
-    Rz_SEXP_to_vector(weights, &c_weights);
-  }
+  igraph_vector_int_t c_eids_data;
+  IGRAPH_R_CHECK(Rz_SEXP_to_igraph_es(eids, &c_graph, &c_eids, &c_eids_data));
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(normalized);
+  c_normalized = LOGICAL(normalized)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_edge_betweenness_subset(&c_graph, &c_res, c_eids, c_directed, c_sources, c_targets, (Rf_isNull(weights) ? 0 : &c_weights)));
+  IGRAPH_R_CHECK(igraph_edge_betweenness_subset(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_res, c_sources, c_targets, c_eids, c_directed, c_normalized));
 
                                         /* Convert output */
   PROTECT(res=Ry_igraph_vector_to_SEXP(&c_res));
   igraph_vector_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
-  igraph_vector_int_destroy(&c_eids_data);
-  igraph_es_destroy(&c_eids);
   igraph_vector_int_destroy(&c_sources_data);
   igraph_vs_destroy(&c_sources);
   igraph_vector_int_destroy(&c_targets_data);
   igraph_vs_destroy(&c_targets);
+  igraph_vector_int_destroy(&c_eids_data);
+  igraph_es_destroy(&c_eids);
   r_result = res;
 
   UNPROTECT(1);
