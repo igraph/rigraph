@@ -4592,33 +4592,39 @@ SEXP R_igraph_voronoi(SEXP graph, SEXP generators, SEXP weights, SEXP mode, SEXP
 /*-------------------------------------------/
 / igraph_get_all_simple_paths                /
 /-------------------------------------------*/
-SEXP R_igraph_get_all_simple_paths(SEXP graph, SEXP from, SEXP to, SEXP cutoff, SEXP mode) {
+SEXP R_igraph_get_all_simple_paths(SEXP graph, SEXP from, SEXP to, SEXP mode, SEXP minlen, SEXP maxlen, SEXP max_results) {
                                         /* Declarations */
   igraph_t c_graph;
-  igraph_vector_int_t c_res;
+  igraph_vector_int_list_t c_res;
   igraph_integer_t c_from;
   igraph_vs_t c_to;
-  igraph_integer_t c_cutoff;
   igraph_neimode_t c_mode;
+  igraph_integer_t c_minlen;
+  igraph_integer_t c_maxlen;
+  igraph_integer_t c_max_results;
   SEXP res;
 
   SEXP r_result;
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
-  IGRAPH_R_CHECK(igraph_vector_int_init(&c_res, 0));
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_res);
+  IGRAPH_R_CHECK(igraph_vector_int_list_init(&c_res, 0));
+  IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_res);
   c_from = (igraph_integer_t) REAL(from)[0];
   igraph_vector_int_t c_to_data;
   Rz_SEXP_to_igraph_vs(to, &c_graph, &c_to, &c_to_data);
-  IGRAPH_R_CHECK_INT(cutoff);
-  c_cutoff = (igraph_integer_t) REAL(cutoff)[0];
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
+  IGRAPH_R_CHECK_INT(minlen);
+  c_minlen = (igraph_integer_t) REAL(minlen)[0];
+  IGRAPH_R_CHECK_INT(maxlen);
+  c_maxlen = (igraph_integer_t) REAL(maxlen)[0];
+  IGRAPH_R_CHECK_INT(max_results);
+  c_max_results = (igraph_integer_t) REAL(max_results)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_get_all_simple_paths(&c_graph, &c_res, c_from, c_to, c_cutoff, c_mode));
+  IGRAPH_R_CHECK(igraph_get_all_simple_paths(&c_graph, &c_res, c_from, c_to, c_mode, c_minlen, c_maxlen, c_max_results));
 
                                         /* Convert output */
-  PROTECT(res=Ry_igraph_vector_int_to_SEXPp1(&c_res));
-  igraph_vector_int_destroy(&c_res);
+  PROTECT(res=Ry_igraph_vector_int_list_to_SEXPp1(&c_res));
+  igraph_vector_int_list_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
   igraph_vector_int_destroy(&c_to_data);
   igraph_vs_destroy(&c_to);

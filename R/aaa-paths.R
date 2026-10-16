@@ -678,8 +678,10 @@ get_all_simple_paths_impl <- function(
   graph,
   from,
   to = V(graph),
-  cutoff = -1,
-  mode = c("out", "in", "all", "total")
+  mode = c("out", "in", "all", "total"),
+  minlen = -1,
+  maxlen = -1,
+  max_results = -1
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -691,7 +693,6 @@ get_all_simple_paths_impl <- function(
     )
   }
   to <- as_igraph_vs(graph, to)
-  cutoff <- as.numeric(cutoff)
   mode <- switch_igraph_arg(
     mode,
     "out" = 1L,
@@ -699,6 +700,9 @@ get_all_simple_paths_impl <- function(
     "all" = 3L,
     "total" = 3L
   )
+  minlen <- as.numeric(minlen)
+  maxlen <- as.numeric(maxlen)
+  max_results <- as.numeric(max_results)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -707,11 +711,13 @@ get_all_simple_paths_impl <- function(
     graph,
     from - 1,
     to - 1,
-    cutoff,
-    mode
+    mode,
+    minlen,
+    maxlen,
+    max_results
   )
   if (igraph_opt("return.vs.es")) {
-    res <- create_vs(graph, res)
+    res <- create_vs_list(graph, res)
   }
   res
 }

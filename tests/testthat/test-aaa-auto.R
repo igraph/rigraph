@@ -1891,7 +1891,9 @@ test_that("get_all_simple_paths_impl basic", {
     from = 1,
     to = 3
   )
-  expect_s3_class(result, "igraph.vs")
+  # upstream igraph@f5ccd96: igraph_get_all_simple_paths() returns a list of paths
+  expect_type(result, "list")
+  expect_s3_class(result[[1]], "igraph.vs")
 })
 
 test_that("get_all_simple_paths_impl errors", {
