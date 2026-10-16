@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -126,13 +125,6 @@ typedef enum { IGRAPH_REALIZE_DEGSEQ_SMALLEST = 0,
 typedef enum { IGRAPH_RANDOM_TREE_PRUFER = 0,
                IGRAPH_RANDOM_TREE_LERW
              } igraph_random_tree_t;
-
-typedef enum { IGRAPH_FILEFORMAT_EDGELIST = 0,
-               IGRAPH_FILEFORMAT_NCOL,
-               IGRAPH_FILEFORMAT_PAJEK,
-               IGRAPH_FILEFORMAT_LGL,
-               IGRAPH_FILEFORMAT_GRAPHML
-             } igraph_fileformat_type_t;
 
 typedef enum { IGRAPH_EDGEORDER_ID = 0,
                IGRAPH_EDGEORDER_FROM,
