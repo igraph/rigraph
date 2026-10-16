@@ -127,6 +127,28 @@ Its stops are the buffer's, and the strand commit stays as it is:
 - **1** is a refusal, or a pick that conflicts: the buffer's vendor paths have drifted from the strand's,
   which happens only when something vendored or patched the buffer directly.
 
+## The audit
+
+A vendor run commits what git sees as changed, and git compares a file's stat data before its content,
+so an edit git misses leaves the file as the commit below had it, and nothing in the run notices ([`traps.md`](traps.md)).
+[`scripts/series-vendor-audit.sh`](/scripts/series-vendor-audit.sh) compares each vendor commit of a range with upstream
+at the commit its subject names, blob for blob, with the paths its own `patch/` entries touch patched first,
+and prints a `DIVERGED` line for each commit that differs, naming the files by their upstream path.
+It reads objects and checks nothing out, so a hundred commits take seconds.
+
+- **On the strand, before the push**, the range is the run's own commits.
+  A divergence there is the tooling's: push nothing, and write the stage 7 pull request.
+- **On `main-dev`, before a fold**, the range is `main-green..main-dev`, the default.
+  A divergence there is repaired like a red, at the oldest commit that names the file,
+  and the commits above it that kept the same stale copy take the fix with the replay.
+  In the repair worktree, write each named file as the upstream commit the subject names has it, then fold as stage 2 does:
+
+  ```sh
+  git -C "$U" show <upstream sha>:<path> > "$W/src/vendor/cigraph/<path>"
+  ```
+
+  A file a `patch/` entry touches takes that entry's hunks for it again before the fold.
+
 ## The fold-ins
 
 The scripts refuse to start on a dirty tree, and a fix a vendor commit needs has to ride in it,
