@@ -1,3 +1,46 @@
+# bitriad (0.4)
+
+* Email: <mailto:cornelioid@gmail.com>
+* GitHub mirror: <https://github.com/cran/bitriad>
+
+Run `revdepcheck::revdep_details(, "bitriad")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     Running examples in ‘bitriad-Ex.R’ failed
+     The error most likely occurred in:
+     
+     > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+     > ### Name: modes
+     > ### Title: Actor and event node iteration and attribute querying and
+     > ###   assignment
+     > ### Aliases: modes V1 V2 actor_attr event_attr set_actor_attr
+     > ###   set_event_attr V1<- V2<-
+     > 
+     > ### ** Examples
+     > 
+     > data(women_clique)
+     > print(V1(women_clique))
+     ── <vertex sequence> 5/10 · named · from bb1857e ───────────────────────────────
+     [1] Miss A Miss B Miss C Miss D Miss E
+     > print(V2(women_clique))
+     ── <vertex sequence> 5/10 · named · from bb1857e ───────────────────────────────
+     [1] Bridge   Dinner   Movies   Dance    Visiting
+     > V1(women_clique)$label <- LETTERS[1:5]
+     Error in `V1<-`(`*tmp*`, value = 1:5) : invalid indexing
+     Execution halted
+     ```
+
+## In both
+
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
+     ```
+
 # Boptbd (1.0.7)
 
 * Email: <mailto:diboobayu@gmail.com>
@@ -431,6 +474,45 @@ Run `revdepcheck::revdep_details(, "ECoL")` for more info
        Execution halted
      ```
 
+# FrF2 (2.3-5)
+
+* Email: <mailto:ulrike.groemping@bht-berlin.de>
+* GitHub mirror: <https://github.com/cran/FrF2>
+
+Run `revdepcheck::revdep_details(, "FrF2")` for more info
+
+## Newly broken
+
+*   checking tests ... NOTE
+     ```
+     ...
+     < Warning messages:
+     < 1: The `edges` argument of `add_edges()` should be an n times 2 matrix with one
+     < edge per row as of igraph 3.0.0.
+     < ℹ A 2 times 2 matrix is ambiguous and is read column by column for now. Pass a
+     <   data frame with two columns instead.
+     < ℹ The deprecated feature was likely used in the igraph package.
+     <   Please report the issue at <https://github.com/igraph/rigraph/issues>. 
+     < 2: The `edges` argument of `add_edges()` should be an n times 2 matrix with one
+     < edge per row as of igraph 3.0.0.
+     < ℹ It is read column by column for now. Transpose the matrix with t(), or pass a
+     <   data frame with two columns.
+     < ℹ The deprecated feature was likely used in the igraph package.
+     <   Please report the issue at <https://github.com/igraph/rigraph/issues>. 
+       Running ‘godolphintest.R’
+       Comparing ‘godolphintest.Rout’ to ‘godolphintest.Rout.save’ ...
+     49,55d48
+     < Warning message:
+     < The `edges` argument of `add_edges()` should be an n times 2 matrix with one
+     < edge per row as of igraph 3.0.0.
+     < ℹ It is read column by column for now. Transpose the matrix with t(), or pass a
+     <   data frame with two columns.
+     < ℹ The deprecated feature was likely used in the igraph package.
+     <   Please report the issue at <https://github.com/igraph/rigraph/issues>. 
+       Running ‘pbtest.R’
+       Comparing ‘pbtest.Rout’ to ‘pbtest.Rout.save’ ... OK
+     ```
+
 # ggm (2.5.4)
 
 * Email: <mailto:giovanni.marchetti@unifi.it>
@@ -548,7 +630,7 @@ Run `revdepcheck::revdep_details(, "ggraph")` for more info
        ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
      ```
 
-# glyrepr (1.0.0)
+# glyrepr (1.1.0)
 
 * GitHub: <https://github.com/glycoverse/glyrepr>
 * Email: <mailto:23110220018@m.fudan.edu.cn>
@@ -561,31 +643,39 @@ Run `revdepcheck::revdep_details(, "glyrepr")` for more info
 *   checking tests ... ERROR
      ```
      ...
-         'test-floating-parts.R:480:1', 'test-floating-substituents.R:94:1',
-         'test-floating-substituents.R:133:1', 'test-floating-substituents.R:173:1',
-         'test-floating-validation.R:37:1', 'test-floating-validation.R:51:1',
-         'test-floating-validation.R:65:1', 'test-floating-validation.R:79:1',
-         'test-floating-validation.R:109:1', 'test-floating-validation.R:139:1',
-         'test-floating-validation.R:159:1', 'test-floating-validation.R:203:1',
-         'test-low-level-structure.R:46:1', 'test-low-level-structure.R:82:1',
-         'test-low-level-structure.R:159:1', 'test-low-level-structure.R:222:1',
-         'test-low-level-structure.R:236:1', 'test-smap.R:1041:1',
-         'test-structure-tables.R:497:1', 'test-structure.R:520:1',
-         'test-structure.R:539:1', 'test-structure.R:588:1', 'test-structure.R:608:1',
-         'test-structure.R:668:1', 'test-structure.R:675:1', 'test-structure.R:683:1',
-         'test-structure.R:724:1', 'test-structure.R:779:1'
+         'test-floating-substituents.R:94:1', 'test-floating-substituents.R:133:1',
+         'test-floating-substituents.R:173:1', 'test-floating-validation.R:37:1',
+         'test-floating-validation.R:51:1', 'test-floating-validation.R:65:1',
+         'test-floating-validation.R:79:1', 'test-floating-validation.R:109:1',
+         'test-floating-validation.R:139:1', 'test-floating-validation.R:159:1',
+         'test-floating-validation.R:203:1', 'test-low-level-structure.R:46:1',
+         'test-low-level-structure.R:82:1', 'test-low-level-structure.R:159:1',
+         'test-low-level-structure.R:222:1', 'test-low-level-structure.R:236:1',
+         'test-smap.R:1041:1', 'test-structure-arrays.R:53:1',
+         'test-structure-arrays.R:137:1', 'test-structure-tables.R:497:1',
+         'test-structure.R:574:1', 'test-structure.R:593:1', 'test-structure.R:642:1',
+         'test-structure.R:662:1', 'test-structure.R:722:1', 'test-structure.R:729:1',
+         'test-structure.R:737:1', 'test-structure.R:778:1', 'test-structure.R:833:1'
        
        ══ Failed tests ════════════════════════════════════════════════════════════════
        ── Error ('test-structure-to-iupac.R:124:3'): structure_to_iupac handles complex branched structures ──
        <purrr_error_indexed/rlang_error/error/condition>
-       Error in `purrr::map(valid_graphs, function(graph) {     checkmate::assert_class(graph, "igraph")     graph %>% validate_glycan_graph() %>% canonicalize_glycan_graph() })`: i In index: 1.
+       Error in `purrr::map(graphs, process_glycan_structure_element)`: i In index: 1.
        Caused by error in `validate_glycan_graph()`:
        ! Duplicated linkage positions.
        
-       [ FAIL 1 | WARN 0 | SKIP 46 | PASS 1885 ]
+       [ FAIL 1 | WARN 0 | SKIP 51 | PASS 2073 ]
        Error:
        ! Test failures.
        Execution halted
+     ```
+
+## In both
+
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
      ```
 
 # GoodFitSBM (0.0.1)
@@ -628,7 +718,7 @@ Run `revdepcheck::revdep_details(, "GoodFitSBM")` for more info
      Execution halted
      ```
 
-# manynet (2.3.1)
+# manynet (2.4.0)
 
 * GitHub: <https://github.com/stocnet/manynet>
 * Email: <mailto:james.hollway@graduateinstitute.ch>
@@ -641,30 +731,30 @@ Run `revdepcheck::revdep_details(, "manynet")` for more info
 *   checking tests ... ERROR
      ```
      ...
-           ▆
-        1. ├─testthat::expect_null(...) at test-tutorials_manynet.R:4:5
-        2. │ └─testthat::quasi_label(enquo(object), label)
-        3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
-        4. └─manynet:::check_tute_functions(tute)
-        5.   └─testthat::expect_null(...) at ./helper-manynet.R:225:5
-       ── Failure ('test-tutorials_manynet.R:4:5'): manynet tutorial code runs without warnings or errors ──
-       Expected `w` to be NULL.
-       Differences:
        `actual` is an S3 object of class <lifecycle_warning_deprecated/rlang_warning/warning/condition>, a list
        `expected` is NULL
        
-       Warning in expression 54 : mean(as_matrix(s_women))
+       Warning in expression 83 : to_giant(to_undirected(irps_blogs))
        Backtrace:
            ▆
         1. ├─testthat::expect_null(...) at test-tutorials_manynet.R:4:5
         2. │ └─testthat::quasi_label(enquo(object), label)
         3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
         4. └─manynet:::check_tute_functions(tute)
-        5.   └─testthat::expect_null(...) at ./helper-manynet.R:225:5
+        5.   └─testthat::expect_null(...) at ./helper-manynet.R:233:5
        
-       [ FAIL 6 | WARN 1317 | SKIP 96 | PASS 4747 ]
+       [ FAIL 8 | WARN 1337 | SKIP 107 | PASS 7574 ]
        Error:
        ! Test failures.
+       Warning messages:
+       1: Calling `make_ring()` with positional or abbreviated arguments was deprecated
+       in igraph 3.0.0.
+       ℹ Detected call: make_ring(n, directed)
+       ℹ Use instead: make_ring(n, directed = ) 
+       2: The `attr` argument of `as_adjacency_matrix()` is deprecated as of igraph
+       3.0.0.
+       ℹ Please use the `weights` argument instead.
+       ℹ `attr = NULL` becomes `weights = NA`, not `weights = NULL`. 
        Execution halted
      ```
 
@@ -802,7 +892,7 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
         8.       └─lifecycle:::deprecate_stop0(msg)
         9.         └─rlang::cnd_signal(...)
        
-       [ FAIL 38 | WARN 2 | SKIP 6 | PASS 585 ]
+       [ FAIL 38 | WARN 3 | SKIP 6 | PASS 585 ]
        Error:
        ! Test failures.
        Execution halted
@@ -843,7 +933,7 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
 *   checking for detritus in the temp directory ... NOTE
      ```
      Found the following files/directories:
-       ‘org.chromium.Chromium.lbepW8’
+       ‘org.chromium.Chromium.7TENun’
      ```
 
 # nethist (1.0.0)
@@ -892,6 +982,46 @@ Run `revdepcheck::revdep_details(, "nethist")` for more info
      ```
      Compilation used the following non-portable flag(s):
        ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
+     ```
+
+# netrics (1.1.0)
+
+* GitHub: <https://github.com/stocnet/netrics>
+* Email: <mailto:james.hollway@graduateinstitute.ch>
+* GitHub mirror: <https://github.com/cran/netrics>
+
+Run `revdepcheck::revdep_details(, "netrics")` for more info
+
+## Newly broken
+
+*   checking tests ... ERROR
+     ```
+     ...
+         'test-member_nodes.R:8:7'
+       • grepl("tie_is_imbalanced", fn) && ob == "twomode" is TRUE (1):
+         'test-mark_ties.R:5:7'
+       • grepl("triad", fn) && is_twomode(data_objs[[ob]]) is TRUE (1):
+         'test-motif_net.R:6:7'
+       • grepl("triad|dyad", fn) && is_twomode(data_objs[[ob]]) is TRUE (2):
+         'test-motif_nodes.R:5:7', 'test-motif_nodes.R:5:7'
+       
+       ══ Failed tests ════════════════════════════════════════════════════════════════
+       ── Failure ('test-member_community.R:65:3'): every k-capable algorithm returns exactly k communities ──
+       Expected the warnings raised to match regexp "communities".
+       Actual text:
+       x | 
+       Backtrace:
+           ▆
+        1. ├─testthat::expect_s3_class(...) at test-member_community.R:65:3
+        2. │ └─testthat::quasi_label(enquo(object))
+        3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
+        4. └─netrics:::expect_snet_warn(...)
+        5.   └─testthat::expect_match(...) at ./helper-netrics.R:28:3
+       
+       [ FAIL 1 | WARN 51 | SKIP 39 | PASS 4913 ]
+       Error:
+       ! Test failures.
+       Execution halted
      ```
 
 # optbdmaeAT (1.0.2)
@@ -1088,8 +1218,6 @@ Run `revdepcheck::revdep_details(, "SEMgraph")` for more info
 *   checking examples ... ERROR
      ```
      ...
-       Please report the issue at <https://github.com/igraph/rigraph/issues>.
-     > plot(dag0$dag, layout=layout.circle, main = "Output DAG")
      Warning: vertex attribute color contains NAs. Replacing with default value 1
      > plot(dag0$dag.old, layout=layout.circle, main = "Inferred old edges")
      Warning: vertex attribute color contains NAs. Replacing with default value 1
@@ -1104,6 +1232,8 @@ Run `revdepcheck::revdep_details(, "SEMgraph")` for more info
      DAG conversion : TRUE
      Node Linear Ordering with TO setting
      
+     Warning in check.penalty.factor(penalty.factor, nvars) :
+       values for penalty.factor must be between 0 and Inf; negative values set to zero
      > dag2 <- SEMdag(ig, X, LO="TL")
      WARNING: input graph is not acyclic !
       Applying graph -> DAG conversion...
@@ -1115,7 +1245,7 @@ Run `revdepcheck::revdep_details(, "SEMgraph")` for more info
      Execution halted
      ```
 
-# sfclust (1.1.0)
+# sfclust (1.1.1)
 
 * GitHub: <https://github.com/ErickChacon/sfclust>
 * Email: <mailto:erick.chaconmontalvan@wur.nl>
@@ -1259,7 +1389,7 @@ Run `revdepcheck::revdep_details(, "tidygraph")` for more info
        ! The `father` argument of `bfs()` was deprecated in igraph 2.2.0 and is now defunct.
        i Please use the `parent` argument instead.
        
-       [ FAIL 6 | WARN 55 | SKIP 1 | PASS 423 ]
+       [ FAIL 6 | WARN 60 | SKIP 1 | PASS 423 ]
        Error:
        ! Test failures.
        Execution halted

@@ -9,31 +9,27 @@ Run `revdepcheck::revdep_details(, "bitriad")` for more info
 
 *   checking examples ... ERROR
      ```
-     ...
+     Running examples in ‘bitriad-Ex.R’ failed
      The error most likely occurred in:
      
      > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-     > ### Name: triad
-     > ### Title: Affiliation network triads
-     > ### Aliases: triad make_triad is_triad triad_class layout_triad plot_triad
-     > ###   an_triad is.triad triad.class an.triad layout.triad plotTriad
+     > ### Name: modes
+     > ### Title: Actor and event node iteration and attribute querying and
+     > ###   assignment
+     > ### Aliases: modes V1 V2 actor_attr event_attr set_actor_attr
+     > ###   set_event_attr V1<- V2<-
      > 
      > ### ** Examples
      > 
-     > tr <- make_triad(lambda = c(3,1,1), w = 2)
-     Error:
-     ! The `edges` argument of `add_edges()` supplied as a matrix should be a
-       n times 2 matrix, not 2 times n as of igraph 2.1.5.
-     ℹ either transpose the matrix with t() or convert it to a data.frame with two
-       columns.
-     Backtrace:
-         ▆
-      1. └─bitriad::make_triad(lambda = c(3, 1, 1), w = 2)
-      2.   └─igraph::add_edges(tr, t(el))
-      3.     └─igraph:::el_to_vec(edges, arg = "edges", fn = "add_edges")
-      4.       └─lifecycle::deprecate_stop(...)
-      5.         └─lifecycle:::deprecate_stop0(msg)
-      6.           └─rlang::cnd_signal(...)
+     > data(women_clique)
+     > print(V1(women_clique))
+     ── <vertex sequence> 5/10 · named · from bb1857e ───────────────────────────────
+     [1] Miss A Miss B Miss C Miss D Miss E
+     > print(V2(women_clique))
+     ── <vertex sequence> 5/10 · named · from bb1857e ───────────────────────────────
+     [1] Bridge   Dinner   Movies   Dance    Visiting
+     > V1(women_clique)$label <- LETTERS[1:5]
+     Error in `V1<-`(`*tmp*`, value = 1:5) : invalid indexing
      Execution halted
      ```
 
