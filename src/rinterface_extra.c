@@ -3737,11 +3737,11 @@ void Ry_igraph_SEXP_to_matrixlist(SEXP matrixlist, igraph_matrix_list_t *list) {
 /* HELPER: internal C; must use IGRAPH_CHECK */
 igraph_error_t Rx_igraph_SEXP_to_strvector(SEXP rval, igraph_strvector_t *sv) {
   const igraph_integer_t length = Rf_xlength(rval);
-  sv->stor_begin=(char**) R_alloc((size_t) length, sizeof(char*));
+  sv->stor_begin=(const char**) R_alloc((size_t) length, sizeof(char*));
   sv->stor_end=sv->stor_begin+length;
   sv->end=sv->stor_end;
   for (igraph_integer_t i=0; i<length; i++) {
-    sv->stor_begin[i]=(char*) CHAR(STRING_ELT(rval, i));
+    sv->stor_begin[i]=CHAR(STRING_ELT(rval, i));
   }
 
   return IGRAPH_SUCCESS;
