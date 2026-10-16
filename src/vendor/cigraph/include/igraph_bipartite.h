@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -118,14 +117,6 @@ IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_incidence(
 IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_get_incidence(
    const igraph_t *graph, const igraph_vector_bool_t *types, igraph_matrix_t *res,
    igraph_vector_int_t *row_ids, igraph_vector_int_t *col_ids
-);
-
-IGRAPH_EXPORT IGRAPH_DEPRECATED  igraph_error_t igraph_bipartite_game(
-    igraph_t *graph, igraph_vector_bool_t *types,
-    igraph_erdos_renyi_t type,
-    igraph_int_t n1, igraph_int_t n2,
-    igraph_real_t p, igraph_int_t m,
-    igraph_bool_t directed, igraph_neimode_t mode
 );
 
 __END_DECLS

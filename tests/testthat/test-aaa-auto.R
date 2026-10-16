@@ -10305,23 +10305,8 @@ test_that("create_bipartite_impl basic", {
   ))
 })
 
-test_that("bipartite_game_impl basic", {
-  igraph_local_seed(20250909)
-  expect_snapshot(bipartite_game_impl(
-    type = "gnp",
-    n1 = 5,
-    n2 = 5,
-    p = 0.3,
-    directed = FALSE
-  ))
-  expect_snapshot(bipartite_game_impl(
-    type = "gnm",
-    n1 = 5,
-    n2 = 5,
-    m = 10,
-    directed = FALSE
-  ))
-})
+# upstream igraph@4841501: igraph_bipartite_game() is removed; R only calls
+# its gnp and gnm variants, whose impls are tested above.
 
 # Other structural functions
 

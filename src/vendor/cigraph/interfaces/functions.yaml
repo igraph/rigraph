@@ -1269,11 +1269,6 @@ igraph_bipartite_iea_game:
     DEPS: |-
         types ON graph
 
-igraph_bipartite_game:
-    PARAMS: |-
-        OUT GRAPH graph, OPTIONAL OUT BIPARTITE_TYPES types,
-        ERDOS_RENYI_TYPE type, INTEGER n1, INTEGER n2, REAL p=0.0,
-        INTEGER m=0, BOOLEAN directed=False, NEIMODE mode=ALL
 
 
 #######################################

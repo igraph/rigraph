@@ -240,13 +240,6 @@ IGRAPH_EXPORT igraph_error_t igraph_sample_sphere_volume(igraph_int_t dim, igrap
 IGRAPH_EXPORT igraph_error_t igraph_sample_dirichlet(igraph_int_t n, const igraph_vector_t *alpha,
                                           igraph_matrix_t *res);
 
-/* Deprecated functions: */
-
-IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_erdos_renyi_game(
-    igraph_t *graph, igraph_erdos_renyi_t type, igraph_int_t n,
-    igraph_real_t p_or_m, igraph_bool_t directed, igraph_bool_t loops
-);
-
 __END_DECLS
 
 #endif
