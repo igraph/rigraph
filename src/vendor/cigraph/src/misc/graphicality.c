@@ -1,4 +1,3 @@
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    igraph library.
    Copyright (C) 2020  The igraph development team <igraph@igraph.org>
@@ -108,7 +107,8 @@ static igraph_error_t igraph_i_is_bigraphical_simple(const igraph_vector_int_t *
  *     undirected graphs or the out-degree sequence for directed graphs.
  * \param in_degrees A vector of integers specifying the in-degree sequence for
  *     directed graphs. For undirected graphs, it must be \c NULL.
- * \param allowed_edge_types The types of edges to allow in the graph:
+ * \param allowed_edge_types The types of edges to allow in the graph. See
+ *     \ref igraph_edge_type_sw_t for details.
  *     \clist
  *     \cli IGRAPH_SIMPLE_SW
  *       simple graphs (i.e. no self-loops or multi-edges allowed).
