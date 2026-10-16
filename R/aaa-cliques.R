@@ -502,9 +502,9 @@ weighted_clique_number_impl <- function(
 weighted_cliques_impl <- function(
   graph,
   vertex_weights = NULL,
+  maximal = FALSE,
   min_weight = 0,
-  max_weight = 0,
-  maximal = FALSE
+  max_weight = 0
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -516,9 +516,9 @@ weighted_cliques_impl <- function(
   } else {
     vertex_weights <- NULL
   }
+  maximal <- as.logical(maximal)
   min_weight <- as.numeric(min_weight)
   max_weight <- as.numeric(max_weight)
-  maximal <- as.logical(maximal)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -526,9 +526,9 @@ weighted_cliques_impl <- function(
     R_igraph_weighted_cliques,
     graph,
     vertex_weights,
+    maximal,
     min_weight,
-    max_weight,
-    maximal
+    max_weight
   )
   if (igraph_opt("return.vs.es")) {
     res <- create_vs_list(graph, res)
