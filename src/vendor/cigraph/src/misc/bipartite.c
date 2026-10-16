@@ -673,7 +673,7 @@ igraph_error_t igraph_biadjacency(
 
         for (i = 0; i < n1; i++) {
             for (j = 0; j < n2; j++) {
-                igraph_int_t elem = ceil(MATRIX(*input, i, j));
+                igraph_int_t elem = MATRIX(*input, i, j);
                 igraph_int_t from, to;
 
                 if (elem == 0) {
