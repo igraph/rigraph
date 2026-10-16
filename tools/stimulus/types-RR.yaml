@@ -772,6 +772,14 @@ LPA_VARIANT:
     INCONV: |-
         %I% <- switch_igraph_arg(%I%, "dominance" = 0L, "retention" = 1L, "fast" = 2L)
 
+LEIDEN_OBJECTIVE:
+    DEFAULT:
+        MODULARITY: c("modularity", "cpm", "er")
+        CPM: c("cpm", "modularity", "er")
+        ER: c("er", "modularity", "cpm")
+    INCONV: |-
+        %I% <- switch_igraph_arg(%I%, "modularity" = 0L, "cpm" = 1L, "er" = 2L)
+
 GREEDY_COLORING_HEURISTIC:
     DEFAULT:
         NEIGHBORS: c("colored_neighbors", "dsatur")

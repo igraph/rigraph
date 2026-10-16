@@ -76,6 +76,52 @@ circle_beta_skeleton_impl <- function(
   res
 }
 
+community_leiden_simple_impl <- function(
+  graph,
+  weights = NULL,
+  objective,
+  resolution,
+  beta = 0.01,
+  start = FALSE,
+  n_iterations = 2,
+  membership = NULL
+) {
+  # Argument checks
+  ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && !all(is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+  objective <- switch_igraph_arg(objective, "modularity" = 0L, "cpm" = 1L, "er" = 2L)
+  resolution <- as.numeric(resolution)
+  beta <- as.numeric(beta)
+  start <- as.logical(start)
+  n_iterations <- as.numeric(n_iterations)
+  if (!is.null(membership)) {
+    membership <- as.numeric(membership)
+  }
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_community_leiden_simple,
+    graph,
+    weights,
+    objective,
+    resolution,
+    beta,
+    start,
+    n_iterations,
+    membership
+  )
+
+  res
+}
+
 delaunay_graph_impl <- function(
   points
 ) {

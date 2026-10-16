@@ -12210,6 +12210,73 @@ SEXP R_igraph_community_leiden(SEXP graph, SEXP weights, SEXP vertex_out_weights
 }
 
 /*-------------------------------------------/
+/ igraph_community_leiden_simple             /
+/-------------------------------------------*/
+SEXP R_igraph_community_leiden_simple(SEXP graph, SEXP weights, SEXP objective, SEXP resolution, SEXP beta, SEXP start, SEXP n_iterations, SEXP membership) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_t c_weights;
+  igraph_leiden_objective_t c_objective;
+  igraph_real_t c_resolution;
+  igraph_real_t c_beta;
+  igraph_bool_t c_start;
+  igraph_integer_t c_n_iterations;
+  igraph_vector_int_t c_membership;
+  igraph_integer_t c_nb_clusters;
+  igraph_real_t c_quality;
+  SEXP nb_clusters;
+  SEXP quality;
+
+  SEXP r_result, r_names;
+                                        /* Convert input */
+  Rz_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    Rz_SEXP_to_vector(weights, &c_weights);
+  }
+  c_objective = (igraph_leiden_objective_t) Rf_asInteger(objective);
+  IGRAPH_R_CHECK_REAL(resolution);
+  c_resolution = REAL(resolution)[0];
+  IGRAPH_R_CHECK_REAL(beta);
+  c_beta = REAL(beta)[0];
+  IGRAPH_R_CHECK_BOOL(start);
+  c_start = LOGICAL(start)[0];
+  IGRAPH_R_CHECK_INT(n_iterations);
+  c_n_iterations = (igraph_integer_t) REAL(n_iterations)[0];
+  if (!Rf_isNull(membership)) {
+    IGRAPH_R_CHECK(Rz_SEXP_to_vector_int_copy(membership, &c_membership));
+    IGRAPH_FINALLY(igraph_vector_int_destroy, &c_membership);
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_membership, 0));
+    IGRAPH_FINALLY(igraph_vector_int_destroy, &c_membership);
+  }
+  c_nb_clusters=0;
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_community_leiden_simple(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), c_objective, c_resolution, c_beta, c_start, c_n_iterations, &c_membership, &c_nb_clusters, &c_quality));
+
+                                        /* Convert output */
+  PROTECT(r_result=NEW_LIST(3));
+  PROTECT(r_names=NEW_CHARACTER(3));
+  PROTECT(membership=Ry_igraph_vector_int_to_SEXP(&c_membership));
+  igraph_vector_int_destroy(&c_membership);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(nb_clusters=NEW_NUMERIC(1));
+  REAL(nb_clusters)[0]=(double) c_nb_clusters;
+  PROTECT(quality=NEW_NUMERIC(1));
+  REAL(quality)[0]=c_quality;
+  SET_VECTOR_ELT(r_result, 0, membership);
+  SET_VECTOR_ELT(r_result, 1, nb_clusters);
+  SET_VECTOR_ELT(r_result, 2, quality);
+  SET_STRING_ELT(r_names, 0, Rf_mkChar("membership"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("nb_clusters"));
+  SET_STRING_ELT(r_names, 2, Rf_mkChar("quality"));
+  SET_NAMES(r_result, r_names);
+  UNPROTECT(4);
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_split_join_distance                 /
 /-------------------------------------------*/
 SEXP R_igraph_split_join_distance(SEXP comm1, SEXP comm2) {
