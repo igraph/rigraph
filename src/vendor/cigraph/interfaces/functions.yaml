@@ -1294,7 +1294,7 @@ igraph_is_connected:
 igraph_decompose:
     PARAMS: |-
         GRAPH graph, OUT GRAPH_LIST components, CONNECTEDNESS mode=WEAK,
-        INTEGER maxcompno=-1, INTEGER minelements=1
+        INTEGER maxcompno=UNLIMITED, INTEGER minelements=1
 
 igraph_articulation_points:
     PARAMS: GRAPH graph, OUT VERTEX_INDICES res
