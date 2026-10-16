@@ -125,7 +125,6 @@ __BEGIN_DECLS
  *   objects. Usually ignored by igraph functions.
  */
 typedef enum { IGRAPH_ATTRIBUTE_UNSPECIFIED = 0,
-               IGRAPH_ATTRIBUTE_DEFAULT IGRAPH_DEPRECATED_ENUMVAL = IGRAPH_ATTRIBUTE_UNSPECIFIED,
                IGRAPH_ATTRIBUTE_NUMERIC = 1,
                IGRAPH_ATTRIBUTE_BOOLEAN = 2,
                IGRAPH_ATTRIBUTE_STRING = 3,
