@@ -1,5 +1,50 @@
 # Changelog
 
+## igraph 2.3.3.9043
+
+### Bug fixes
+
+#### vendor
+
+- Rebuild `src/vendor/cigraph` exactly from upstream and `patch/`
+  ([\#2934](https://github.com/igraph/rigraph/issues/2934)).
+
+### Features
+
+#### series
+
+- Vendor igraph one upstream commit at a time, as duckdb-r’s series loop
+  does ([\#2935](https://github.com/igraph/rigraph/issues/2935)).
+
+- Ask for the package name at run time, and flavor it as `igraph.dev`
+  ([\#2938](https://github.com/igraph/rigraph/issues/2938)).
+
+### Chore
+
+- Make [`time_bins()`](https://r.igraph.org/reference/sir.md) a regular
+  function; move `R/epi.R` into `R/sir.R`
+  ([\#2794](https://github.com/igraph/rigraph/issues/2794),
+  [\#2920](https://github.com/igraph/rigraph/issues/2920)).
+
+- Use [`identity()`](https://rdrr.io/r/base/identity.html) as needed
+  ([\#2918](https://github.com/igraph/rigraph/issues/2918)).
+
+### Documentation
+
+- Install the handbook, and document the vendoring series loop
+  ([\#2936](https://github.com/igraph/rigraph/issues/2936)).
+
+### Performance
+
+- Build the whole vertex-sequence list in one C pass
+  ([\#2888](https://github.com/igraph/rigraph/issues/2888)).
+
+- Batch-construct vertex sequence lists via create_vs_list()
+  ([\#2887](https://github.com/igraph/rigraph/issues/2887)).
+
+- Share the graph weak-reference across constructed sequences
+  ([\#2886](https://github.com/igraph/rigraph/issues/2886)).
+
 ## igraph 2.3.3.9042
 
 ### Chore

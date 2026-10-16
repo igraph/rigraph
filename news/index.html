@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9042</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9043</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,6 +48,39 @@
       <small>Source: <a href="https://github.com/igraph/rigraph/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.3.3.9043" id="igraph-2339043">igraph 2.3.3.9043<a class="anchor" aria-label="anchor" href="#igraph-2339043"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-2-3-3-9043">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-3-3-9043"></a></h3>
+<div class="section level4">
+<h4 id="vendor-2-3-3-9043">vendor<a class="anchor" aria-label="anchor" href="#vendor-2-3-3-9043"></a></h4>
+<ul><li>Rebuild <code>src/vendor/cigraph</code> exactly from upstream and <code>patch/</code> (<a href="https://github.com/igraph/rigraph/issues/2934" class="external-link">#2934</a>).</li>
+</ul></div>
+</div>
+<div class="section level3">
+<h3 id="features-2-3-3-9043">Features<a class="anchor" aria-label="anchor" href="#features-2-3-3-9043"></a></h3>
+<div class="section level4">
+<h4 id="series-2-3-3-9043">series<a class="anchor" aria-label="anchor" href="#series-2-3-3-9043"></a></h4>
+<ul><li><p>Vendor igraph one upstream commit at a time, as duckdb-r’s series loop does (<a href="https://github.com/igraph/rigraph/issues/2935" class="external-link">#2935</a>).</p></li>
+<li><p>Ask for the package name at run time, and flavor it as <code>igraph.dev</code> (<a href="https://github.com/igraph/rigraph/issues/2938" class="external-link">#2938</a>).</p></li>
+</ul></div>
+</div>
+<div class="section level3">
+<h3 id="chore-2-3-3-9043">Chore<a class="anchor" aria-label="anchor" href="#chore-2-3-3-9043"></a></h3>
+<ul><li><p>Make <code><a href="../reference/sir.html">time_bins()</a></code> a regular function; move <code>R/epi.R</code> into <code>R/sir.R</code> (<a href="https://github.com/igraph/rigraph/issues/2794" class="external-link">#2794</a>, <a href="https://github.com/igraph/rigraph/issues/2920" class="external-link">#2920</a>).</p></li>
+<li><p>Use <code><a href="https://rdrr.io/r/base/identity.html" class="external-link">identity()</a></code> as needed (<a href="https://github.com/igraph/rigraph/issues/2918" class="external-link">#2918</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-2-3-3-9043">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-3-3-9043"></a></h3>
+<ul><li>Install the handbook, and document the vendoring series loop (<a href="https://github.com/igraph/rigraph/issues/2936" class="external-link">#2936</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="performance-2-3-3-9043">Performance<a class="anchor" aria-label="anchor" href="#performance-2-3-3-9043"></a></h3>
+<ul><li><p>Build the whole vertex-sequence list in one C pass (<a href="https://github.com/igraph/rigraph/issues/2888" class="external-link">#2888</a>).</p></li>
+<li><p>Batch-construct vertex sequence lists via create_vs_list() (<a href="https://github.com/igraph/rigraph/issues/2887" class="external-link">#2887</a>).</p></li>
+<li><p>Share the graph weak-reference across constructed sequences (<a href="https://github.com/igraph/rigraph/issues/2886" class="external-link">#2886</a>).</p></li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.3.3.9042" id="igraph-2339042">igraph 2.3.3.9042<a class="anchor" aria-label="anchor" href="#igraph-2339042"></a></h2>
 <div class="section level3">
