@@ -135,7 +135,7 @@ static const char *igraph_i_error_strings[] = {
                    // "is to increase the size of NCV relative to NEV",
     /* 41 */ NULL, // "The Schur form computed by LAPACK routine dlahqr "
                    // "could not be reordered by LAPACK routine dtrsen.",
-    /* 42 */ "Big integer division by zero",
+    /* 42 */ NULL, // "Big integer division by zero",  /* removed in 1.0 */
     /* 43 */ NULL, // "GLPK Error, GLP_EBOUND",  /* removed in 1.0 */
     /* 44 */ NULL, // "GLPK Error, GLP_EROOT",   /* removed in 1.0 */
     /* 45 */ NULL, // "GLPK Error, GLP_ENOPFS",  /* removed in 1.0 */
@@ -144,7 +144,7 @@ static const char *igraph_i_error_strings[] = {
     /* 48 */ NULL, // "GLPK Error, GLP_EMIPGAP", /* removed in 1.0 */
     /* 49 */ NULL, // "GLPK Error, GLP_ETMLIM",  /* removed in 1.0 */
     /* 50 */ NULL, // "GLPK Error, GLP_STOP",    /* removed in 1.0 */
-    /* 51 */ "Internal attribute handler error",
+    /* 51 */ NULL, // "Internal attribute handler error",  /* removed in 1.0 */
     /* 52 */ "Unimplemented attribute combination for this type",
     /* 53 */ NULL, // "LAPACK call resulted in an error",  /* removed in 1.0 */
     /* 54 */ "Internal DrL error; this error should never be visible to the user, "

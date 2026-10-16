@@ -266,10 +266,6 @@ __BEGIN_DECLS
  *   calculation.
  * \enumval IGRAPH_ENEGCYCLE Negative cycle detected while calculating shortest paths.
  * \enumval IGRAPH_EINTERNAL Internal error, likely a bug in igraph.
- * \enumval IGRAPH_EDIVZERO Big integer division by zero.
- * \enumval IGRAPH_EATTRIBUTES Attribute handler error. The user is not
- *   expected to find this; it is signalled if some igraph function is
- *   not using the attribute handler interface properly.
  * \enumval IGRAPH_EATTRCOMBINE Unimplemented attribute combination
  *   method for the given attribute type.
  * \enumval IGRAPH_EDRL Internal error in the DrL layout generator; not used
@@ -302,7 +298,7 @@ typedef enum {
     IGRAPH_ENEGLOOP IGRAPH_DEPRECATED_ENUMVAL = IGRAPH_ENEGCYCLE,
     IGRAPH_EINTERNAL         = 38,
     /* ARPACK error codes from 39 to 41 were moved to igraph_arpack_error_t in 1.0 */
-    IGRAPH_EDIVZERO          = 42,
+    /* IGRAPH_EDIVZERO          = 42, */   /* removed in 1.0 */
     /* IGRAPH_GLP_EBOUND        = 43, */   /* removed in 1.0 */
     /* IGRAPH_GLP_EROOT         = 44, */   /* removed in 1.0 */
     /* IGRAPH_GLP_ENOPFS        = 45, */   /* removed in 1.0 */
@@ -311,7 +307,7 @@ typedef enum {
     /* IGRAPH_GLP_EMIPGAP       = 48, */   /* removed in 1.0 */
     /* IGRAPH_GLP_ETMLIM        = 49, */   /* removed in 1.0 */
     /* IGRAPH_GLP_ESTOP         = 50, */   /* removed in 1.0 */
-    IGRAPH_EATTRIBUTES       = 51,
+    /* IGRAPH_EATTRIBUTES       = 51, */   /* removed in 1.0 */
     IGRAPH_EATTRCOMBINE      = 52,
     /* IGRAPH_ELAPACK           = 53, */   /* removed in 1.0 */
     IGRAPH_EDRL IGRAPH_DEPRECATED_ENUMVAL = 54,
