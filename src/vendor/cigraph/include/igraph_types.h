@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2003-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -140,8 +139,6 @@ IGRAPH_EXPORT int igraph_real_fprintf_precise(FILE *file, igraph_real_t val);
 IGRAPH_EXPORT int igraph_real_snprintf_precise(char *str, size_t size, igraph_real_t val);
 
 #define IGRAPH_INFINITY ((double)INFINITY)
-#define IGRAPH_POSINFINITY IGRAPH_INFINITY
-#define IGRAPH_NEGINFINITY (-IGRAPH_INFINITY)
 
 IGRAPH_DEPRECATED IGRAPH_EXPORT int igraph_finite(double x);
 #define IGRAPH_FINITE(x) igraph_finite(x)
