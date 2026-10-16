@@ -144,6 +144,17 @@ igraph_vs_t igraph_vss_all(void) {
  *          from/to \c vid. That is, all the neighbors of \c vid considered
  *          as if the graph is undirected.
  *        \endclist
+ * \param loops Whether to include the vertex itself in the neighborhood if the
+ *        vertex has a loop edge. If \c IGRAPH_NO_LOOPS, loop edges are
+ *        excluded. If \c IGRAPH_LOOPS_ONCE, the vertex is included in its own
+ *        neighborhood once for every loop edge that it has. If
+ *        \c IGRAPH_LOOPS_TWICE, the vertex is included twice in its own
+ *        neighborhood for every loop edge that it has, but only if the graph is
+ *        undirected or \p mode is set to \c IGRAPH_ALL.
+ * \param multiple Whether to include multiple edges. If \c IGRAPH_NO_MULTIPLE,
+ *        multiple edges are not included in the neighborhood. If
+ *        \c IGRAPH_MULTIPLE, multiple edges are included in the neighborhood.
+ *
  * \return Error code.
  * \sa \ref igraph_vs_destroy()
  *
