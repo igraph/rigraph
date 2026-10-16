@@ -17,7 +17,7 @@
 */
 
 #include "igraph_structural.h"
-#include "misc/feedback_arc_set.h"
+#include "cycles/feedback_sets.h"
 
 #include "igraph_bitset.h"
 #include "igraph_components.h"

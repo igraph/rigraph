@@ -16,7 +16,7 @@
    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include "misc/order_cycle.h"
+#include "cycles/order_cycle.h"
 
 #include "igraph_interface.h"
 

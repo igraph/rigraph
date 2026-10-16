@@ -25,7 +25,7 @@
 #include "igraph_interface.h"
 
 #include "core/interruption.h"
-#include "misc/order_cycle.h"
+#include "cycles/order_cycle.h"
 
 /**** Fundamental cycles *****/
 
