@@ -94,11 +94,16 @@ static igraph_error_t igraph_i_create_start_vectors(
  * Time complexity: O(|V|) for a graph with
  * |V| vertices (and no edges).
  */
-igraph_error_t igraph_empty_attrs(igraph_t *graph, igraph_int_t n, igraph_bool_t directed, const igraph_attribute_record_list_t *attr) {
+igraph_error_t igraph_empty_attrs(
+    igraph_t *graph, igraph_int_t n, igraph_bool_t directed,
+    const igraph_attribute_record_list_t *attr
+) {
 
     if (n < 0) {
         IGRAPH_ERROR("Number of vertices must not be negative.", IGRAPH_EINVAL);
     }
+
+    memset(graph, 0, sizeof(igraph_t));
 
     graph->n = 0;
     graph->directed = directed;
@@ -120,7 +125,6 @@ igraph_error_t igraph_empty_attrs(igraph_t *graph, igraph_int_t n, igraph_bool_t
     VECTOR(graph->is)[0] = 0;
 
     /* init attributes */
-    graph->attr = 0;
     IGRAPH_CHECK(igraph_i_attribute_init(graph, attr));
 
     /* add the vertices */
@@ -147,8 +151,7 @@ igraph_error_t igraph_empty_attrs(igraph_t *graph, igraph_int_t n, igraph_bool_t
  * Time complexity: operating system specific.
  */
 void igraph_destroy(igraph_t *graph) {
-
-    IGRAPH_I_ATTRIBUTE_DESTROY(graph);
+    igraph_i_attribute_destroy(graph);
 
     igraph_i_property_cache_destroy(graph->cache);
     IGRAPH_FREE(graph->cache);
@@ -188,6 +191,8 @@ void igraph_destroy(igraph_t *graph) {
  */
 
 igraph_error_t igraph_copy(igraph_t *to, const igraph_t *from) {
+    memset(to, 0, sizeof(igraph_t));
+
     to->n = from->n;
     to->directed = from->directed;
     IGRAPH_CHECK(igraph_vector_int_init_copy(&to->from, &from->from));
@@ -209,7 +214,7 @@ igraph_error_t igraph_copy(igraph_t *to, const igraph_t *from) {
     IGRAPH_CHECK(igraph_i_property_cache_copy(to->cache, from->cache));
     IGRAPH_FINALLY(igraph_i_property_cache_destroy, to->cache);
 
-    IGRAPH_I_ATTRIBUTE_COPY(to, from, true, true, true); /* does IGRAPH_CHECK */
+    IGRAPH_CHECK(igraph_i_attribute_copy(to, from, true, true, true));
 
     IGRAPH_FINALLY_CLEAN(8);
     return IGRAPH_SUCCESS;
@@ -244,8 +249,10 @@ igraph_error_t igraph_copy(igraph_t *to, const igraph_t *from) {
  *
  * \example examples/simple/creation.c
  */
-igraph_error_t igraph_add_edges(igraph_t *graph, const igraph_vector_int_t *edges,
-                     const igraph_attribute_record_list_t *attr) {
+igraph_error_t igraph_add_edges(
+    igraph_t *graph, const igraph_vector_int_t *edges,
+    const igraph_attribute_record_list_t *attr
+) {
     igraph_int_t no_of_edges = igraph_vector_int_size(&graph->from);
     igraph_int_t edges_to_add = igraph_vector_int_size(edges) / 2;
     igraph_int_t new_no_of_edges;
@@ -377,7 +384,9 @@ igraph_error_t igraph_add_edges(igraph_t *graph, const igraph_vector_int_t *edge
  *
  * \example examples/simple/creation.c
  */
-igraph_error_t igraph_add_vertices(igraph_t *graph, igraph_int_t nv, const igraph_attribute_record_list_t *attr) {
+igraph_error_t igraph_add_vertices(
+    igraph_t *graph, igraph_int_t nv, const igraph_attribute_record_list_t *attr
+) {
     igraph_int_t ec = igraph_ecount(graph);
     igraph_int_t vc = igraph_vcount(graph);
     igraph_int_t new_vc;
@@ -406,7 +415,7 @@ igraph_error_t igraph_add_vertices(igraph_t *graph, igraph_int_t nv, const igrap
 
     /* Add attributes if necessary. This section is protected with
      * FINALLY_ENTER/EXIT so that the graph would not be accidentally
-     * free upon error until it could be restored to a consistant state. */
+     * free upon error until it could be restored to a consistent state. */
 
     if (graph->attr) {
         igraph_error_t err;
@@ -686,6 +695,7 @@ igraph_error_t igraph_delete_vertices_map(
     }
 
     /* start creating the graph */
+    memset(&newgraph, 0, sizeof(igraph_t));
     newgraph.n = remaining_vertices;
     newgraph.directed = graph->directed;
 
@@ -726,8 +736,9 @@ igraph_error_t igraph_delete_vertices_map(
     IGRAPH_FINALLY(igraph_i_property_cache_destroy, newgraph.cache);
 
     /* attributes */
-    IGRAPH_I_ATTRIBUTE_COPY(&newgraph, graph,
-                            /*graph=*/ 1, /*vertex=*/0, /*edge=*/0);
+    IGRAPH_CHECK(igraph_i_attribute_copy(
+        &newgraph, graph, /* graph= */ true, /* vertex= */ false, /* edge= */ false
+    ));
 
     /* at this point igraph_destroy can take over the responsibility of
      * deallocating the graph */
@@ -1225,8 +1236,11 @@ igraph_error_t igraph_degree_1(
  *        \c IGRAPH_ALL, total degree (sum of the
  *        in- and out-degree).
  *        This parameter is ignored for undirected graphs.
- * \param loops Boolean, gives whether the self-loops should be
- *        counted.
+ * \param loops Constant of type \ref igraph_loops_t, specifies how to treat
+ *        loop edges when calculating the degree. \c IGRAPH_NO_LOOPS ignores
+ *        loop edges; \c IGRAPH_LOOPS_ONCE counts each loop edge only once;
+ *        \c IGRAPH_LOOPS_TWICE counts each loop edge twice in undirected
+ *        graphs and once in directed graphs.
  * \return Error code:
  *         \c IGRAPH_EINVVID: invalid vertex ID.
  *         \c IGRAPH_EINVMODE: invalid mode argument.
@@ -1498,8 +1512,6 @@ igraph_error_t igraph_degree(
  * d2 is the minimum of the out-degree of \c to and the in-degree of \c from.
  *
  * \example examples/simple/igraph_get_eid.c
- *
- * Added in version 0.2.</para><para>
  */
 
 igraph_error_t igraph_get_eid(const igraph_t *graph, igraph_int_t *eid,
@@ -1530,7 +1542,7 @@ igraph_error_t igraph_get_eid(const igraph_t *graph, igraph_int_t *eid,
 
     if (*eid < 0) {
         if (error) {
-            IGRAPH_ERROR("Cannot get edge ID, no such edge", IGRAPH_EINVAL);
+            IGRAPH_ERROR("Cannot get edge ID, no such edge.", IGRAPH_EINVAL);
         }
     }
 
@@ -1595,12 +1607,12 @@ igraph_error_t igraph_get_eids(const igraph_t *graph, igraph_vector_int_t *eids,
     }
 
     if (n % 2 != 0) {
-        IGRAPH_ERROR("Cannot get edge IDs, invalid length of edge IDs",
+        IGRAPH_ERROR("Cannot get edge IDs, invalid length of vertex pair vector.",
                      IGRAPH_EINVAL);
     }
 
     if (!igraph_vector_int_isininterval(pairs, 0, no_of_nodes - 1)) {
-        IGRAPH_ERROR("Cannot get edge IDs, invalid vertex ID", IGRAPH_EINVVID);
+        IGRAPH_ERROR("Cannot get edge IDs, invalid vertex ID.", IGRAPH_EINVVID);
     }
 
     IGRAPH_CHECK(igraph_vector_int_resize(eids, n / 2));
@@ -1618,7 +1630,7 @@ igraph_error_t igraph_get_eids(const igraph_t *graph, igraph_vector_int_t *eids,
 
             VECTOR(*eids)[i] = eid;
             if (eid < 0 && error) {
-                IGRAPH_ERROR("Cannot get edge ID, no such edge", IGRAPH_EINVAL);
+                IGRAPH_ERROR("Cannot get edge ID, no such edge.", IGRAPH_EINVAL);
             }
         }
     } else {
@@ -1630,7 +1642,7 @@ igraph_error_t igraph_get_eids(const igraph_t *graph, igraph_vector_int_t *eids,
             FIND_UNDIRECTED_EDGE(graph, from, to, &eid);
             VECTOR(*eids)[i] = eid;
             if (eid < 0 && error) {
-                IGRAPH_ERROR("Cannot get edge ID, no such edge", IGRAPH_EINVAL);
+                IGRAPH_ERROR("Cannot get edge ID, no such edge.", IGRAPH_EINVAL);
             }
         }
     }
@@ -1702,11 +1714,11 @@ igraph_error_t igraph_get_all_eids_between(
     igraph_int_t no_of_nodes = igraph_vcount(graph);
 
     if (source < 0 || source >= no_of_nodes) {
-        IGRAPH_ERROR("Cannot get edge IDs, invalid source vertex ID", IGRAPH_EINVVID);
+        IGRAPH_ERROR("Cannot get edge IDs, invalid source vertex ID.", IGRAPH_EINVVID);
     }
 
     if (target < 0 || target >= no_of_nodes) {
-        IGRAPH_ERROR("Cannot get edge IDs, invalid target vertex ID", IGRAPH_EINVVID);
+        IGRAPH_ERROR("Cannot get edge IDs, invalid target vertex ID.", IGRAPH_EINVVID);
     }
 
     igraph_vector_int_clear(eids);
@@ -1734,8 +1746,7 @@ igraph_error_t igraph_get_all_eids_between(
  * \brief Gives the incident edges of a vertex.
  *
  * \param graph The graph object.
- * \param eids An initialized vector. It will be resized
- * to hold the result.
+ * \param eids An initialized vector. It will be resized to hold the result.
  * \param pnode A vertex ID.
  * \param mode Specifies what kind of edges to include for directed
  *        graphs. \c IGRAPH_OUT means only outgoing edges, \c IGRAPH_IN means

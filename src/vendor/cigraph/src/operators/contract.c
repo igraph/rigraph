@@ -94,8 +94,8 @@ igraph_error_t igraph_contract_vertices(igraph_t *graph,
         igraph_int_t nfrom = VECTOR(*mapping)[from];
         igraph_int_t nto = VECTOR(*mapping)[to];
 
-        igraph_vector_int_push_back(&edges, nfrom);
-        igraph_vector_int_push_back(&edges, nto);
+        igraph_vector_int_push_back(&edges, nfrom); /* reserved */
+        igraph_vector_int_push_back(&edges, nto); /* reserved */
 
         if (nfrom > last) {
             last = nfrom;
@@ -115,8 +115,7 @@ igraph_error_t igraph_contract_vertices(igraph_t *graph,
 
     IGRAPH_FINALLY(igraph_destroy, &res);
 
-    IGRAPH_I_ATTRIBUTE_DESTROY(&res);
-    IGRAPH_I_ATTRIBUTE_COPY(&res, graph, /*graph=*/ true, /*vertex=*/ false, /*edge=*/ true);
+    IGRAPH_CHECK(igraph_i_attribute_copy(&res, graph, true, /* vertex= */ false, true));
 
     if (vattr) {
         igraph_vector_int_list_t merges;

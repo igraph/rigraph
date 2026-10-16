@@ -194,7 +194,7 @@ static igraph_error_t igraph_i_induced_subgraph_create_from_scratch(
             /* undirected graph. We need to be careful with loop edges as each
              * loop edge will appear twice. We use a boolean flag to skip every
              * second loop edge */
-            skip_loop_edge = 0;
+            skip_loop_edge = false;
             for (igraph_int_t j = 0; j < n; j++) {
                 eid = VECTOR(nei_edges)[j];
 
@@ -233,7 +233,6 @@ static igraph_error_t igraph_i_induced_subgraph_create_from_scratch(
 
     /* Create the new graph */
     IGRAPH_CHECK(igraph_create(res, &new_edges, no_of_new_nodes, directed));
-    IGRAPH_I_ATTRIBUTE_DESTROY(res);
 
     /* Now we can also get rid of the new_edges vector */
     igraph_vector_int_destroy(&new_edges);
@@ -244,8 +243,7 @@ static igraph_error_t igraph_i_induced_subgraph_create_from_scratch(
     IGRAPH_FINALLY(igraph_destroy, res);
 
     /* Copy the graph attributes */
-    IGRAPH_CHECK(igraph_i_attribute_copy(res, graph,
-                                         /* ga = */ true, /* va = */ false, /* ea = */ false));
+    IGRAPH_CHECK(igraph_i_attribute_copy(res, graph, true, /* vertex= */ false, /* edge= */ false));
 
     /* Copy the vertex attributes */
     IGRAPH_CHECK(igraph_i_attribute_permute_vertices(graph, res, my_vids_new2old));
@@ -437,7 +435,7 @@ igraph_error_t igraph_induced_subgraph_map(const igraph_t *graph, igraph_t *res,
 
 /**
  * \function igraph_induced_subgraph_edges
- * \brief The edges contained within an induced subgraph.
+ * \brief The edges contained within an induced sugraph.
  *
  * This function finds the IDs of those edges which connect vertices from
  * a given list, passed in the \p vids parameter.
@@ -507,6 +505,7 @@ igraph_error_t igraph_induced_subgraph_edges(const igraph_t *graph, igraph_vs_t 
  * \function igraph_subgraph_from_edges
  * \brief Creates a subgraph with the specified edges and their endpoints.
  *
+ * </para><para>
  * This function collects the specified edges and their endpoints to a new
  * graph. As the edge IDs in a graph are always contiguous integers starting at
  * zero, the edge IDs in the extracted subgraph will be different from those

@@ -1,4 +1,3 @@
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    igraph library.
    Copyright (C) 2003-2021 The igraph development team
@@ -239,7 +238,6 @@ igraph_error_t igraph_rewire_edges(igraph_t *graph, igraph_real_t prob,
 
     IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, endpoints);
 
-
     if (prob != 0 && no_of_edges > 0) {
         if (multiple) {
             /* If multiple edges are allowed, then there is an easy and fast
@@ -266,15 +264,13 @@ igraph_error_t igraph_rewire_edges(igraph_t *graph, igraph_real_t prob,
         }
     }
 
-
     IGRAPH_CHECK(igraph_create(&newgraph, &edges, no_of_nodes,
                                igraph_is_directed(graph)));
     igraph_vector_int_destroy(&edges);
     IGRAPH_FINALLY_CLEAN(1);
 
     IGRAPH_FINALLY(igraph_destroy, &newgraph);
-    IGRAPH_I_ATTRIBUTE_DESTROY(&newgraph);
-    IGRAPH_I_ATTRIBUTE_COPY(&newgraph, graph, 1, 1, 1);
+    IGRAPH_CHECK(igraph_i_attribute_copy(&newgraph, graph, true, true, true));
     IGRAPH_FINALLY_CLEAN(1);
     igraph_destroy(graph);
     *graph = newgraph;
@@ -358,7 +354,6 @@ igraph_error_t igraph_rewire_directed_edges(igraph_t *graph, igraph_real_t prob,
 
         IGRAPH_CHECK(igraph_get_edgelist(graph, &edges, 0));
 
-
         to_rewire = RNG_GEOM(prob);
         while (to_rewire < no_of_edges) {
             if (loops) {
@@ -371,15 +366,13 @@ igraph_error_t igraph_rewire_directed_edges(igraph_t *graph, igraph_real_t prob,
             to_rewire += RNG_GEOM(prob) + 1;
         }
 
-
         IGRAPH_CHECK(igraph_create(&newgraph, &edges, no_of_nodes,
                                    igraph_is_directed(graph)));
         igraph_vector_int_destroy(&edges);
         IGRAPH_FINALLY_CLEAN(1);
 
         IGRAPH_FINALLY(igraph_destroy, &newgraph);
-        IGRAPH_I_ATTRIBUTE_DESTROY(&newgraph);
-        IGRAPH_I_ATTRIBUTE_COPY(&newgraph, graph, 1, 1, 1);
+        IGRAPH_CHECK(igraph_i_attribute_copy(&newgraph, graph, true, true, true));
         IGRAPH_FINALLY_CLEAN(1);
         igraph_destroy(graph);
         *graph = newgraph;

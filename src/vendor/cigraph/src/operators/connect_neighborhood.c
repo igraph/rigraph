@@ -170,9 +170,9 @@ igraph_error_t igraph_connect_neighborhood(igraph_t *graph, igraph_int_t order,
 
 /**
  * \function igraph_graph_power
- * \brief The kth power of a graph.
+ * \brief The k-th power of a graph.
  *
- * The kth power of a graph G is a simple graph where vertex \c u is connected to
+ * The k-th power of a graph G is a simple graph where vertex \c u is connected to
  * \c v by a single edge if \c v is reachable from \c u in G within at most k steps.
  * By convention, the zeroth power of a graph has no edges. The first power is
  * identical to the original graph, except that multiple edges and self-loops
@@ -215,8 +215,7 @@ igraph_error_t igraph_graph_power(const igraph_t *graph, igraph_t *res,
     }
 
     IGRAPH_CHECK(igraph_empty(res, no_of_nodes, dir));
-    IGRAPH_I_ATTRIBUTE_DESTROY(res);
-    IGRAPH_I_ATTRIBUTE_COPY(res, graph, /* graph */ true, /* vertex */ true, /* edge */ false);
+    IGRAPH_CHECK(igraph_i_attribute_copy(res, graph, true, true, /* edges= */ false));
     if (order == 0) {
         return IGRAPH_SUCCESS;
     }
@@ -234,8 +233,8 @@ igraph_error_t igraph_graph_power(const igraph_t *graph, igraph_t *res,
         igraph_vector_int_t *tmp = igraph_adjlist_get(&al, i);
         for (igraph_int_t j = 0; j < igraph_vector_int_size(tmp); j++) {
             if (dir || i < VECTOR(*tmp)[j]) {
-                igraph_vector_int_push_back(&edges, i);
-                igraph_vector_int_push_back(&edges, VECTOR(*tmp)[j]);
+                igraph_vector_int_push_back(&edges, i); /* initial space reserved */
+                igraph_vector_int_push_back(&edges, VECTOR(*tmp)[j]); /* initial space reserved */
             }
         }
     }
