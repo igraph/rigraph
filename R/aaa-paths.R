@@ -4,7 +4,7 @@
 
 # ==== distances-and-metrics ====
 
-average_path_length_dijkstra_impl <- function(
+average_path_length_impl <- function(
   graph,
   weights = NULL,
   directed = TRUE,
@@ -27,7 +27,7 @@ average_path_length_dijkstra_impl <- function(
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_average_path_length_dijkstra,
+    R_igraph_average_path_length,
     graph,
     weights,
     directed,
@@ -39,32 +39,7 @@ average_path_length_dijkstra_impl <- function(
   res
 }
 
-average_path_length_impl <- function(
-  graph,
-  directed = TRUE,
-  unconn = TRUE,
-  details = FALSE
-) {
-  # Argument checks
-  ensure_igraph(graph)
-  directed <- as.logical(directed)
-  unconn <- as.logical(unconn)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_average_path_length,
-    graph,
-    directed,
-    unconn
-  )
-  if (!details) {
-    res <- res$res
-  }
-  res
-}
-
-diameter_dijkstra_impl <- function(
+diameter_impl <- function(
   graph,
   weights = NULL,
   directed = TRUE,
@@ -86,31 +61,9 @@ diameter_dijkstra_impl <- function(
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_diameter_dijkstra,
-    graph,
-    weights,
-    directed,
-    unconnected
-  )
-
-  res
-}
-
-diameter_impl <- function(
-  graph,
-  directed = TRUE,
-  unconnected = TRUE
-) {
-  # Argument checks
-  ensure_igraph(graph)
-  directed <- as.logical(directed)
-  unconnected <- as.logical(unconnected)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
     R_igraph_diameter,
     graph,
+    weights,
     directed,
     unconnected
   )
@@ -385,7 +338,7 @@ distances_johnson_impl <- function(
   res
 }
 
-eccentricity_dijkstra_impl <- function(
+eccentricity_impl <- function(
   graph,
   vids = V(graph),
   ...,
@@ -415,39 +368,9 @@ eccentricity_dijkstra_impl <- function(
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_eccentricity_dijkstra,
-    graph,
-    weights,
-    vids - 1,
-    mode
-  )
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res) <- vertex_attr(graph, "name", vids)
-  }
-  res
-}
-
-eccentricity_impl <- function(
-  graph,
-  vids = V(graph),
-  mode = c("all", "out", "in", "total")
-) {
-  # Argument checks
-  ensure_igraph(graph)
-  vids <- as_igraph_vs(graph, vids)
-  mode <- switch_igraph_arg(
-    mode,
-    "out" = 1L,
-    "in" = 2L,
-    "all" = 3L,
-    "total" = 3L
-  )
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
     R_igraph_eccentricity,
     graph,
+    weights,
     vids - 1,
     mode
   )
@@ -475,7 +398,7 @@ girth_impl <- function(
   res
 }
 
-graph_center_dijkstra_impl <- function(
+graph_center_impl <- function(
   graph,
   ...,
   weights = NULL,
@@ -503,36 +426,9 @@ graph_center_dijkstra_impl <- function(
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_graph_center_dijkstra,
-    graph,
-    weights,
-    mode
-  )
-  if (igraph_opt("return.vs.es")) {
-    res <- create_vs(graph, res)
-  }
-  res
-}
-
-graph_center_impl <- function(
-  graph,
-  mode = c("all", "out", "in", "total")
-) {
-  # Argument checks
-  ensure_igraph(graph)
-  mode <- switch_igraph_arg(
-    mode,
-    "out" = 1L,
-    "in" = 2L,
-    "all" = 3L,
-    "total" = 3L
-  )
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
     R_igraph_graph_center,
     graph,
+    weights,
     mode
   )
   if (igraph_opt("return.vs.es")) {
@@ -560,7 +456,7 @@ path_length_hist_impl <- function(
   res
 }
 
-pseudo_diameter_dijkstra_impl <- function(
+pseudo_diameter_impl <- function(
   graph,
   weights = NULL,
   start_vid,
@@ -590,7 +486,7 @@ pseudo_diameter_dijkstra_impl <- function(
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_pseudo_diameter_dijkstra,
+    R_igraph_pseudo_diameter,
     graph,
     weights,
     start_vid - 1,
@@ -601,38 +497,7 @@ pseudo_diameter_dijkstra_impl <- function(
   res
 }
 
-pseudo_diameter_impl <- function(
-  graph,
-  start_vid,
-  directed = TRUE,
-  unconnected = TRUE
-) {
-  # Argument checks
-  ensure_igraph(graph)
-  start_vid <- as_igraph_vs(graph, start_vid)
-  if (length(start_vid) != 1) {
-    cli::cli_abort(
-      "{.arg start_vid} must specify exactly one vertex",
-      call = rlang::caller_env()
-    )
-  }
-  directed <- as.logical(directed)
-  unconnected <- as.logical(unconnected)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_pseudo_diameter,
-    graph,
-    start_vid - 1,
-    directed,
-    unconnected
-  )
-
-  res
-}
-
-radius_dijkstra_impl <- function(
+radius_impl <- function(
   graph,
   ...,
   weights = NULL,
@@ -660,34 +525,9 @@ radius_dijkstra_impl <- function(
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_radius_dijkstra,
-    graph,
-    weights,
-    mode
-  )
-
-  res
-}
-
-radius_impl <- function(
-  graph,
-  mode = c("all", "out", "in", "total")
-) {
-  # Argument checks
-  ensure_igraph(graph)
-  mode <- switch_igraph_arg(
-    mode,
-    "out" = 1L,
-    "in" = 2L,
-    "all" = 3L,
-    "total" = 3L
-  )
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
     R_igraph_radius,
     graph,
+    weights,
     mode
   )
 
