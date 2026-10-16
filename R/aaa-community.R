@@ -519,7 +519,8 @@ community_eb_get_merges_impl <- function(
 community_edge_betweenness_impl <- function(
   graph,
   directed = TRUE,
-  weights = NULL
+  weights = NULL,
+  lengths = NULL
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -532,6 +533,11 @@ community_edge_betweenness_impl <- function(
   } else {
     weights <- NULL
   }
+  if (!is.null(lengths) && !all(is.na(lengths))) {
+    lengths <- as.numeric(lengths)
+  } else {
+    lengths <- NULL
+  }
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -539,7 +545,8 @@ community_edge_betweenness_impl <- function(
     R_igraph_community_edge_betweenness,
     graph,
     directed,
-    weights
+    weights,
+    lengths
   )
 
   res

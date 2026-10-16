@@ -11923,7 +11923,7 @@ SEXP R_igraph_community_walktrap(SEXP graph, SEXP weights, SEXP steps) {
 /*-------------------------------------------/
 / igraph_community_edge_betweenness          /
 /-------------------------------------------*/
-SEXP R_igraph_community_edge_betweenness(SEXP graph, SEXP directed, SEXP weights) {
+SEXP R_igraph_community_edge_betweenness(SEXP graph, SEXP directed, SEXP weights, SEXP lengths) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_int_t c_removed_edges;
@@ -11934,6 +11934,7 @@ SEXP R_igraph_community_edge_betweenness(SEXP graph, SEXP directed, SEXP weights
   igraph_vector_int_t c_membership;
   igraph_bool_t c_directed;
   igraph_vector_t c_weights;
+  igraph_vector_t c_lengths;
   SEXP removed_edges;
   SEXP edge_betweenness;
   SEXP merges;
@@ -11961,8 +11962,11 @@ SEXP R_igraph_community_edge_betweenness(SEXP graph, SEXP directed, SEXP weights
   if (!Rf_isNull(weights)) {
     Rz_SEXP_to_vector(weights, &c_weights);
   }
+  if (!Rf_isNull(lengths)) {
+    Rz_SEXP_to_vector(lengths, &c_lengths);
+  }
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_community_edge_betweenness(&c_graph, &c_removed_edges, &c_edge_betweenness, &c_merges, &c_bridges, &c_modularity, &c_membership, c_directed, (Rf_isNull(weights) ? 0 : &c_weights)));
+  IGRAPH_R_CHECK(igraph_community_edge_betweenness(&c_graph, &c_removed_edges, &c_edge_betweenness, &c_merges, &c_bridges, &c_modularity, &c_membership, c_directed, (Rf_isNull(weights) ? 0 : &c_weights), (Rf_isNull(lengths) ? 0 : &c_lengths)));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(6));
