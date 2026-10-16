@@ -11700,8 +11700,8 @@ SEXP R_igraph_community_spinglass_single(SEXP graph, SEXP weights, SEXP vertex, 
   igraph_vector_int_t c_community;
   igraph_real_t c_cohesion;
   igraph_real_t c_adhesion;
-  igraph_integer_t c_inner_links;
-  igraph_integer_t c_outer_links;
+  igraph_real_t c_inner_links;
+  igraph_real_t c_outer_links;
   igraph_integer_t c_spins;
   igraph_spincomm_update_t c_update_rule;
   igraph_real_t c_gamma;
@@ -11721,8 +11721,6 @@ SEXP R_igraph_community_spinglass_single(SEXP graph, SEXP weights, SEXP vertex, 
   c_vertex = (igraph_integer_t) REAL(vertex)[0];
   IGRAPH_R_CHECK(igraph_vector_int_init(&c_community, 0));
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_community);
-  c_inner_links=0;
-  c_outer_links=0;
   IGRAPH_R_CHECK_INT(spins);
   c_spins = (igraph_integer_t) REAL(spins)[0];
   c_update_rule = (igraph_spincomm_update_t) Rf_asInteger(update_rule);
@@ -11742,9 +11740,9 @@ SEXP R_igraph_community_spinglass_single(SEXP graph, SEXP weights, SEXP vertex, 
   PROTECT(adhesion=NEW_NUMERIC(1));
   REAL(adhesion)[0]=c_adhesion;
   PROTECT(inner_links=NEW_NUMERIC(1));
-  REAL(inner_links)[0]=(double) c_inner_links;
+  REAL(inner_links)[0]=c_inner_links;
   PROTECT(outer_links=NEW_NUMERIC(1));
-  REAL(outer_links)[0]=(double) c_outer_links;
+  REAL(outer_links)[0]=c_outer_links;
   SET_VECTOR_ELT(r_result, 0, community);
   SET_VECTOR_ELT(r_result, 1, cohesion);
   SET_VECTOR_ELT(r_result, 2, adhesion);
