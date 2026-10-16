@@ -16,7 +16,12 @@ roclet_process.roclet_docs_rd <- function(x, blocks, env, base_path) {
 #' @export
 
 roclet_output.roclet_docs_rd <- function(x, results, base_path, ...) {
-  results <- lapply_with_names(results, add_cdocs_section, base_path)
+  # Built once per run rather than memoised across runs,
+  # where a second run in the same session would get the call graph
+  # of sources that have changed since.
+  call_graph <- r_call_graph(base_path)
+  clinks <- c_links(base_path)
+  results <- lapply_with_names(results, add_cdocs_section, call_graph, clinks)
   NextMethod()
 }
 
@@ -28,9 +33,9 @@ lapply_with_names <- function(X, FUN, ...) {
   )
 }
 
-add_cdocs_section <- function(topic, base_path) {
+add_cdocs_section <- function(topic, call_graph, clinks) {
   alias <- topic$get_value("alias")
-  impl <- purrr::map(alias, find_impl, base_path = base_path) |> unlist()
+  impl <- map(alias, find_impl, call_graph = call_graph) |> unlist()
 
   if (length(impl) == 0) {
     return(topic)
@@ -39,7 +44,7 @@ add_cdocs_section <- function(topic, base_path) {
   impl <- sub("_impl", "", impl)
   impl <- sprintf("igraph_%s", impl)
 
-  content <- present_cdocs_link(impl, base_path)
+  content <- present_cdocs_link(impl, clinks)
 
   # Only add section if there are actual links
   if (content == "") {
@@ -57,11 +62,11 @@ add_cdocs_section <- function(topic, base_path) {
   topic
 }
 
-present_cdocs_link <- function(value, base_path) {
+present_cdocs_link <- function(value, clinks) {
   strings <- map_chr(
     unique(value),
     format_cdocs_single_link,
-    base_path
+    clinks
   )
 
   # Filter out empty strings
@@ -113,12 +118,10 @@ undocumented_c_functions <- c(
   "igraph_weighted_sparsemat"
 )
 
-format_cdocs_single_link <- function(x, base_path) {
+format_cdocs_single_link <- function(x, clinks) {
   if (x %in% names(closure_map)) {
     x <- closure_map[[x]]
   }
-
-  clinks <- c_links(base_path)
 
   # we can use igraph_ or not
   df <- clinks[clinks$method %in% c(x, sprintf("igraph_%s", x)), ]
@@ -133,30 +136,21 @@ format_cdocs_single_link <- function(x, base_path) {
   sprintf("\\href{%s}{\\code{%s()}}", df$url, sub("igraph_", "", df$method))
 }
 
-find_impl <- function(topic, base_path) {
-  treesitter_graph <- treesitter_graph(base_path)
-
-  # Get vertex names properly
-  vertex_names <- igraph::V(treesitter_graph)$name
-  vertex <- which(vertex_names == topic)
-
-  # If topic not found, return empty character vector
-  if (length(vertex) == 0) {
-    return(character(0))
-  }
-
-  subcomponent <- names(igraph::subcomponent(
-    treesitter_graph,
-    vertex,
-    mode = "out"
-  ))
-  subcomponent[endsWith(subcomponent, "_impl")]
+find_impl <- function(topic, call_graph) {
+  reachable <- reachable_functions(call_graph, topic)
+  reachable[endsWith(reachable, "_impl")]
 }
 
-
-.treesitter_graph <- function(base_path) {
-  all_r_scripts <- fs::dir_ls(fs::path(base_path, "R"), glob = "*R")
-  all_r_code <- purrr::map_chr(
+# The functions defined under `R/` of the package at `base_path`
+# and the functions each one calls, as `call_graph()` represents them.
+r_call_graph <- function(base_path) {
+  # Sorted bytewise, as fs::dir_ls() returned them:
+  # the order of the definitions decides the order of the links.
+  all_r_scripts <- sort(
+    dir(file.path(base_path, "R"), pattern = "R$", full.names = TRUE),
+    method = "radix"
+  )
+  all_r_code <- map_chr(
     all_r_scripts,
     \(x) readLines(x) |> paste(collapse = "\n")
   ) |>
@@ -181,10 +175,10 @@ find_impl <- function(topic, base_path) {
 
   # Extract function names and definition nodes from matches
   # Each match contains paired func_name and func_def captures
-  func_names <- purrr::map_chr(all_matches, \(m) {
+  func_names <- map_chr(all_matches, \(m) {
     treesitter::node_text(m$node[[which(m$name == "func_name")]])
   })
-  func_def_nodes <- purrr::map(all_matches, \(m) {
+  func_def_nodes <- map(all_matches, \(m) {
     m$node[[which(m$name == "func_def")]]
   })
 
@@ -196,31 +190,61 @@ find_impl <- function(topic, base_path) {
     )'
   )
 
-  # Build the call graph table
-  call_graph_df <- purrr::map2_dfr(
-    func_def_nodes,
-    func_names,
-    \(func_def_node, func_name) {
-      # Query for function calls within this function definition
-      calls <- treesitter::query_captures(func_call_query, func_def_node)
+  # The functions called within each function definition
+  calls <- map(func_def_nodes, \(func_def_node) {
+    captures <- treesitter::query_captures(func_call_query, func_def_node)
+    map_chr(captures$node, treesitter::node_text)
+  })
 
-      if (length(calls$node) > 0) {
-        call_names <- purrr::map_chr(calls$node, treesitter::node_text)
-        data.frame(
-          from = func_name,
-          to = call_names,
-          stringsAsFactors = FALSE
-        )
-      } else {
-        data.frame(from = character(), to = character())
-      }
-    }
+  call_graph(
+    from = rep(func_names, lengths(calls)),
+    to = unlist(calls, use.names = FALSE) %||% character()
   )
-
-  igraph::graph_from_data_frame(call_graph_df)
 }
 
-.igraph_c_version <- function(base_path) {
+# A call graph from its edges, one per call from `from` to `to`,
+# as the function names (`vertices`) and the callees of each one
+# (`callees`, sorted vertex indices).
+# Vertices are numbered in order of first appearance, callers first,
+# as igraph::graph_from_data_frame() numbers them.
+call_graph <- function(from, to) {
+  vertices <- unique(c(from, to))
+  callees <- split(
+    match(to, vertices),
+    factor(match(from, vertices), levels = seq_along(vertices))
+  )
+  list(
+    vertices = vertices,
+    callees = lapply(unname(callees), \(x) sort(unique(x)))
+  )
+}
+
+# The functions reachable from `start` through calls, `start` included,
+# in the order igraph::subcomponent(mode = "out") returns them:
+# breadth first, and the callees of each function by ascending index.
+# Empty when `start` is not a vertex.
+reachable_functions <- function(call_graph, start) {
+  first <- match(start, call_graph$vertices)
+  if (is.na(first)) {
+    return(character())
+  }
+
+  seen <- logical(length(call_graph$vertices))
+  seen[[first]] <- TRUE
+  queue <- first
+  head <- 0L
+  while (head < length(queue)) {
+    head <- head + 1L
+    callees <- call_graph$callees[[queue[[head]]]]
+    callees <- callees[!seen[callees]]
+    seen[callees] <- TRUE
+    queue <- c(queue, callees)
+  }
+
+  call_graph$vertices[queue]
+}
+
+igraph_c_version <- function(base_path) {
   c_lines <- readLines(file.path(
     base_path,
     "src",
@@ -232,37 +256,70 @@ find_impl <- function(topic, base_path) {
   regmatches(version_line, regexec('"([^"]+)"', version_line))[[1]][2]
 }
 
-.c_links <- function(base_path) {
-  igraph_version <- igraph_c_version(base_path)
-
-  local_cache_dir <- file.path(
-    tools::R_user_dir("igraph", "data"),
-    "links",
-    igraph_version
-  )
-  local_cache <- file.path(local_cache_dir, "clinks.csv")
-  if (file.exists(local_cache)) {
-    return(read.csv(local_cache))
-  }
-
-  dir.create(local_cache_dir, recursive = TRUE)
-
-  index_url <- sprintf("https://igraph.org/c/html/%s/ix01.html", igraph_version)
-  index <- xml2::read_html(index_url)
-
-  entries <- xml2::xml_find_all(index, ".//dt")
-
-  clinks <- purrr::map_df(entries, handle_dt, igraph_version = igraph_version)
-  write.csv(clinks, local_cache, row.names = FALSE)
-  clinks
+# The release whose manual documents a version of the C library.
+# A development snapshot carries the version `git describe` gives its commit,
+# `<tag>-<commits since the tag>-g<hash>`, and has no manual of its own:
+# until the next release, the manual of its tag documents it.
+c_docs_version <- function(version) {
+  sub("-[0-9]+-g[0-9a-f]+(-dirty)?$", "", version)
 }
 
-handle_dt <- function(dt, igraph_version) {
-  href <- xml2::xml_attr(xml2::xml_child(dt), "href")
-  url <- sprintf("https://igraph.org/c/html/%s/%s", igraph_version, href)
-  method <- sub(".*#", "", href)
-  tibble::tibble(
-    method = method,
-    url = url
+# The link tables this package carries, one per release of the C manual,
+# as data-raw/clinks.R writes them, named by the release.
+c_links_tables <- function() {
+  files <- dir(
+    system.file("clinks", package = "igraph.r2cdocs"),
+    pattern = "[.]csv$",
+    full.names = TRUE
   )
+  set_names(files, sub("[.]csv$", "", basename(files)))
+}
+
+# The release whose link table serves `version`:
+# its own, else the newest release before it, else `NA`.
+# Versions compare by their numeric part, so a pre-release comes after the
+# releases before it and before its own release.
+c_links_release <- function(version, releases) {
+  if (version %in% releases) {
+    return(version)
+  }
+
+  core <- function(x) numeric_version(sub("^([0-9.]*[0-9]).*$", "\\1", x))
+  older <- releases[core(releases) < core(version)]
+  if (length(older) == 0) {
+    return(NA_character_)
+  }
+
+  is_release <- !grepl("-", older, fixed = TRUE)
+  older[[order(core(older), is_release, decreasing = TRUE)[[1]]]]
+}
+
+# The link table for the version of the C library vendored at `base_path`,
+# from the tables this package carries rather than from igraph.org,
+# so that the links depend on the sources alone.
+c_links <- function(base_path) {
+  engine <- igraph_c_version(base_path)
+  version <- c_docs_version(engine)
+  tables <- c_links_tables()
+  release <- c_links_release(version, names(tables))
+
+  if (is.na(release)) {
+    cli::cli_abort(c(
+      "No link table for the C manual of igraph {version} or an earlier release.",
+      i = "Add one with {.file data-raw/clinks.R} in {.pkg igraph.r2cdocs}."
+    ))
+  }
+
+  if (release != version) {
+    # The links stay those of the newest release that has a table.
+    # A development snapshot past that release is the normal state of a
+    # vendoring series; a release without a table is a table to add.
+    notify <- if (engine != version) cli::cli_inform else cli::cli_warn
+    notify(c(
+      "No link table for the C manual of igraph {version}, linking the manual of {release}.",
+      i = "Add one with {.file data-raw/clinks.R} in {.pkg igraph.r2cdocs} once that manual is published."
+    ))
+  }
+
+  utils::read.csv(tables[[release]])
 }
