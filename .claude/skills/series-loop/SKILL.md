@@ -288,8 +288,9 @@ Every commit in `main-green..main-dev` is decided by an `each-rcc` leg, and that
   a deleted snapshot file is a test that stopped running.
 * **A red on a flavor commit is the rename's**: fix the flavor tooling on `main`, and fold the same change into the flavor commit.
 * **A gate the job's tooling or environment breaks on every commit is the harness's**, which each commit carries:
-  fix it on `main` first, and fold the same change into the oldest commit it turns red;
-  a refusal every commit meets the same way is this, not the network.
+  fix it on `main` first, then cherry-pick that commit, with what else from `main` it needs, onto `main-green`
+  as a standalone commit in front of every vendor commit, and replay the rest of the window on top; never fold it into a vendor commit.
+  A refusal every commit meets the same way is this, not the network.
 
 Reference: [`references/2-repair.md`](references/2-repair.md).
 
