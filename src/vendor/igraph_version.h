@@ -28,11 +28,11 @@
 
 __BEGIN_DECLS
 
-#define IGRAPH_VERSION "0.11.0-72-g2bd080256"
+#define IGRAPH_VERSION "0.11.0-73-g3ced2ff5a"
 #define IGRAPH_VERSION_MAJOR 0
 #define IGRAPH_VERSION_MINOR 11
 #define IGRAPH_VERSION_PATCH 0
-#define IGRAPH_VERSION_PRERELEASE "72-g2bd080256"
+#define IGRAPH_VERSION_PRERELEASE "73-g3ced2ff5a"
 
 IGRAPH_EXPORT void igraph_version(const char **version_string,
                                   int *major,

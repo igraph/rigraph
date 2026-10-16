@@ -5145,6 +5145,16 @@ sample_correlated_gnp <- function(
     p <- edge_density(old.graph)
   }
 
+  # Upstream (igraph@3ced2ff) reads the permutation as the old ID of each new
+  # vertex; `permutation` stays the new ID of each old vertex, as in permute().
+  # Inverted by assignment, as there, so that an invalid permutation still
+  # fails upstream's check.
+  if (!is.null(permutation)) {
+    inverse <- numeric(length(permutation))
+    inverse[permutation] <- seq_along(permutation)
+    permutation <- inverse
+  }
+
   correlated_game_impl(
     old_graph = old.graph,
     corr = corr,
@@ -5195,6 +5205,16 @@ sample_correlated_gnp_pair <- function(
   directed = FALSE,
   permutation = NULL
 ) {
+  # Upstream (igraph@3ced2ff) reads the permutation as the old ID of each new
+  # vertex; `permutation` stays the new ID of each old vertex, as in permute().
+  # Inverted by assignment, as there, so that an invalid permutation still
+  # fails upstream's check.
+  if (!is.null(permutation)) {
+    inverse <- numeric(length(permutation))
+    inverse[permutation] <- seq_along(permutation)
+    permutation <- inverse
+  }
+
   correlated_pair_game_impl(
     n = n,
     corr = corr,

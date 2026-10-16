@@ -3213,8 +3213,8 @@ SEXP R_igraph_hsbm_list_game(SEXP n, SEXP mlist, SEXP rholist, SEXP Clist, SEXP 
 /-------------------------------------------*/
 SEXP R_igraph_correlated_game(SEXP old_graph, SEXP corr, SEXP p, SEXP permutation) {
                                         /* Declarations */
-  igraph_t c_old_graph;
   igraph_t c_new_graph;
+  igraph_t c_old_graph;
   igraph_real_t c_corr;
   igraph_real_t c_p;
   igraph_vector_int_t c_permutation;
@@ -3235,7 +3235,7 @@ SEXP R_igraph_correlated_game(SEXP old_graph, SEXP corr, SEXP p, SEXP permutatio
     IGRAPH_FINALLY(igraph_vector_int_destroy, &c_permutation);
   }
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_correlated_game(&c_old_graph, &c_new_graph, c_corr, c_p, (Rf_isNull(permutation) ? 0 : &c_permutation)));
+  IGRAPH_R_CHECK(igraph_correlated_game(&c_new_graph, &c_old_graph, c_corr, c_p, (Rf_isNull(permutation) ? 0 : &c_permutation)));
 
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_new_graph);
