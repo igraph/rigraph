@@ -868,13 +868,6 @@ igraph_is_bipartite_coloring:
     DEPS: types ON graph
 
 #######################################
-# Microscopic update
-#######################################
-
-igraph_moran_process:
-    DEPS: weights ON graph, quantities ON graph V(graph), strategies ON graph
-
-#######################################
 # Other, (yet) undocumented functions
 #######################################
 
