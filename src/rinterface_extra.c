@@ -4368,7 +4368,7 @@ static igraph_error_t distances_johnson(const igraph_t *graph,
   }
   if (mode == IGRAPH_ALL && negw) {
     /* Reject undirected grahs with negative weights, just like igraph_shortest_paths_johnson() would. */
-    IGRAPH_ERROR("Undirected graph with negative weight.", IGRAPH_ENEGLOOP);
+    IGRAPH_ERROR("Undirected graph with negative weight.", IGRAPH_ENEGCYCLE);
   }
   if (! negw) {
     /* Fall back to Dijstra when there are no negative weights, just like igraph_shortest_paths_johnson() would. */
