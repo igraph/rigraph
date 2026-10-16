@@ -146,7 +146,7 @@ static const char *igraph_i_error_strings[] = {
     /* 50 */ NULL, // "GLPK Error, GLP_STOP",    /* removed in 1.0 */
     /* 51 */ "Internal attribute handler error",
     /* 52 */ "Unimplemented attribute combination for this type",
-    /* 53 */ "LAPACK call resulted in an error",
+    /* 53 */ NULL, // "LAPACK call resulted in an error",  /* removed in 1.0 */
     /* 54 */ "Internal DrL error; this error should never be visible to the user, "
     "please report this error along with the steps to reproduce it.",
     /* 55 */ "Integer or double overflow",
