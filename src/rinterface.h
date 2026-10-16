@@ -38,7 +38,10 @@
 #include "uuid/uuid.h"
 #include "rrandom.h"
 
-#define IGRAPH_I_DESTROY IGRAPH_I_ATTRIBUTE_DESTROY
+/* Upstream dropped IGRAPH_I_ATTRIBUTE_DESTROY() (krlmlr/igraph@d69d60d), which
+ * the generated interface uses to release a graph's attributes. */
+#define IGRAPH_I_DESTROY(graph) \
+    do { if ((graph)->attr) igraph_i_attribute_destroy(graph); } while (0)
 
 SEXP Rx_igraph_add_env(SEXP graph);
 
