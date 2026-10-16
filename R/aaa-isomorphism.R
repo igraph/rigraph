@@ -355,7 +355,7 @@ subisomorphic_lad_impl <- function(
     )
   }
   induced <- as.logical(induced)
-  time_limit <- as.numeric(time_limit)
+  if (!missing(time_limit)) { warning("Argument `time_limit' is deprecated and has no effect") }
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -364,8 +364,7 @@ subisomorphic_lad_impl <- function(
     pattern,
     target,
     if (!is.null(domains)) lapply(domains, function(.x) .x - 1),
-    induced,
-    time_limit
+    induced
   )
 
   res
