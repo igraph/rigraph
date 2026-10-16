@@ -185,7 +185,6 @@ In the appropriate R file (e.g., `R/cliques.R`), create a user-facing wrapper. E
 #'
 #' @export
 #' @family cliques
-#' @cdocs igraph_cliques_callback
 #'
 #' @examples
 #' g <- sample_gnp(20, 0.3)
