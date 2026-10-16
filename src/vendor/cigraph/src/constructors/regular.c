@@ -727,17 +727,6 @@ igraph_error_t igraph_kary_tree(igraph_t *graph, igraph_int_t n, igraph_int_t ch
     return IGRAPH_SUCCESS;
 }
 
-/**
- * \ingroup generators
- * \function igraph_tree
- * \brief Creates a k-ary tree in which almost all vertices have k children (deprecated alias).
- *
- * \deprecated-by igraph_kary_tree 0.10.0
- */
-igraph_error_t igraph_tree(igraph_t *graph, igraph_int_t n, igraph_int_t children,
-                igraph_tree_mode_t type) {
-    return igraph_kary_tree(graph, n, children, type);
-}
 
 /**
  * \ingroup generators

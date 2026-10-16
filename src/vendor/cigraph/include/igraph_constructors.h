@@ -69,8 +69,6 @@ IGRAPH_EXPORT igraph_error_t igraph_path_graph(
 IGRAPH_EXPORT igraph_error_t igraph_cycle_graph(
         igraph_t *graph, igraph_int_t n,
         igraph_bool_t directed, igraph_bool_t mutual);
-IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_tree(igraph_t *graph, igraph_int_t n, igraph_int_t children,
-                              igraph_tree_mode_t type);
 IGRAPH_EXPORT igraph_error_t igraph_kary_tree(igraph_t *graph, igraph_int_t n, igraph_int_t children,
                                               igraph_tree_mode_t type);
 IGRAPH_EXPORT igraph_error_t igraph_symmetric_tree(igraph_t *graph, const igraph_vector_int_t *branches,
