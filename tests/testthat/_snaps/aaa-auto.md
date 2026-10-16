@@ -1689,8 +1689,10 @@
     Code
       get_all_simple_paths_impl(graph = g, from = 1, to = 3)
     Output
+      [[1]]
       + 3/3 vertices:
       [1] 1 2 3
+      
 
 # get_all_simple_paths_impl errors
 

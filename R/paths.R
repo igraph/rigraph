@@ -160,17 +160,18 @@ all_simple_paths <- function(
   }
 
   ## Function call
+  # Upstream returns the paths as a list and takes the cutoff as their maximum
+  # length (krlmlr/igraph@f5ccd96).
   res <- with_igraph_opt(
     list(return.vs.es = FALSE),
     get_all_simple_paths_impl(
       graph = graph,
       from = from,
       to = to,
-      cutoff = cutoff,
-      mode = mode
+      mode = mode,
+      maxlen = cutoff
     )
   )
-  res <- get.all.simple.paths.pp(res)
 
   if (igraph_opt("return.vs.es")) {
     res <- create_vs_list(graph, res)
