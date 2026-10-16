@@ -13,6 +13,12 @@ Some were paid for in rigraph's own dry runs, most in duckdb-r, whose scripts th
   The vendor run clones the clone, and only branches travel:
   a replay held as `refs/remotes/…/v1.0-replay` alone is left behind, and the run stops on a base it cannot find.
   A replay fetched with `--no-tags` vendors other version headers than one fetched with them ([`0-setup.md`](0-setup.md)).
+- **`git status` can miss an upstream edit that kept a file's size.**
+  The replay's commits share one committer date, `git archive` stamped every file with it,
+  and the cloud image's `core.checkStat=minimal` and `core.trustctime=false` left git nothing else to compare,
+  so vendor commits kept stale files, one of them for 20 upstream commits.
+  Extraction now dates every file anew ([#2956](https://github.com/igraph/rigraph/pull/2956)).
+  The guard against the next one is [`scripts/series-vendor-audit.sh`](/scripts/series-vendor-audit.sh) ([`1-vendor.md`](1-vendor.md#the-audit)).
 - **Clean every build product between local builds**: `git clean -fdx -- src/`.
   An object or dependency file built against another engine links or builds wrong.
   `git clean` never touches tracked files, so uncommitted *edits* survive,
