@@ -1774,12 +1774,24 @@ hits_scores <- function(
     options <- arpack_defaults()
   }
 
-  hub_and_authority_scores_impl(
+  res <- hub_and_authority_scores_impl(
     graph = graph,
-    scale = scale,
     weights = weights,
     options = options
   )
+
+  # Upstream always scales the largest scores to one (krlmlr/igraph@fec442e):
+  # without scaling, the scores are rescaled to unit length, as before,
+  # except without (nonzero) edges, where all scores stay one.
+  if (!isTRUE(scale)) {
+    lifecycle::signal_stage("superseded", "hits_scores(scale)")
+    if (is.finite(res$value) && res$value != 0) {
+      res$hub <- res$hub / sqrt(sum(res$hub^2))
+      res$authority <- res$authority / sqrt(sum(res$authority^2))
+    }
+  }
+
+  res
 }
 
 #' @title Kleinberg's authority centrality scores.

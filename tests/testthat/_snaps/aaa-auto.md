@@ -2829,12 +2829,15 @@
 
     Code
       hub_and_authority_scores_impl(graph = g, scale = FALSE)
+    Condition
+      Warning in `hub_and_authority_scores_impl()`:
+      Argument `scale' is deprecated and has no effect
     Output
       $hub
-      [1] 0.4472136 0.4472136 0.4472136 0.4472136 0.4472136
+      [1] 1 1 1 1 1
       
       $authority
-      [1] 0.4472136 0.4472136 0.4472136 0.4472136 0.4472136
+      [1] 1 1 1 1 1
       
       $value
       [1] 16

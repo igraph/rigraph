@@ -927,8 +927,9 @@ igraph_authority_score:
 igraph_hub_and_authority_scores:
     PARAMS: |-
         GRAPH graph, OUT ALL_VERTEX_QTY hub_vector, OUT ALL_VERTEX_QTY authority_vector,
-        OUT REAL value, BOOLEAN scale=True, OPTIONAL EDGEWEIGHTS weights,
+        OUT REAL value, OPTIONAL EDGEWEIGHTS weights,
         INOUT ARPACKOPT options=ARPACK_DEFAULTS
+    DEPS: weights ON graph, hub_vector ON graph, authority_vector ON graph
 
 igraph_unfold_tree:
     PARAMS: |-
