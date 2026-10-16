@@ -317,6 +317,13 @@ igraph_eigenvector_centrality:
     # dependencies: the graph and the vertex set, but we only have the graph
     # in the argument list.
     DEPS: weights ON graph, vector ON graph V(graph)
+    # Upstream replaced directed with mode (krlmlr/igraph@1d923ac): the R
+    # argument stays directed, a logical.
+    PARAMS: |-
+        GRAPH graph, OUT ALL_VERTEX_QTY vector, OUT REAL value,
+        NEIMODE_DIRECTED directed=False, BOOLEAN scale=True,
+        OPTIONAL EDGEWEIGHTS weights,
+        INOUT ARPACKOPT options=ARPACK_DEFAULTS
 
 igraph_hub_score:
     DEPS: weights ON graph, vector ON graph V(graph)
@@ -340,6 +347,24 @@ igraph_hub_and_authority_scores:
 igraph_is_mutual:
     PARAM_NAMES:
         es: eids
+
+igraph_centralization_eigenvector_centrality:
+    # Upstream replaced directed with mode (krlmlr/igraph@1d923ac): the R
+    # argument stays directed, a logical.
+    PARAMS: |-
+        GRAPH graph, OUT VECTOR vector, OUT REAL value,
+        NEIMODE_DIRECTED directed=False, BOOLEAN scale=True,
+        INOUT ARPACKOPT options=ARPACK_DEFAULTS,
+        OUT REAL centralization, OUT REAL theoretical_max,
+        BOOLEAN normalized=True
+
+igraph_centralization_eigenvector_centrality_tmax:
+    # Upstream replaced directed with mode (krlmlr/igraph@1d923ac): the R
+    # argument stays directed, a logical.
+    PARAMS: |-
+        OPTIONAL GRAPH graph, INTEGER nodes=0,
+        NEIMODE_DIRECTED directed=False, BOOLEAN scale=True,
+        OUT REAL res
 
 igraph_eccentricity:
     PARAM_ORDER: graph, vids, *, weights, ...

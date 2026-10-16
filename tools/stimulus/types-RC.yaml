@@ -589,6 +589,15 @@ NEIMODE:
         INOUT: '&%C%'
         OUT: 'NULL'
 
+NEIMODE_DIRECTED:
+    # A logical directed argument for an igraph_neimode_t parameter,
+    # see types-RR.yaml.
+    CTYPE: igraph_neimode_t
+    INCONV:
+        IN: |-
+            IGRAPH_R_CHECK_BOOL(%I%);
+            %C% = LOGICAL(%I%)[0] ? IGRAPH_OUT : IGRAPH_ALL;
+
 VERTEX_SELECTOR:
     CALL:
         IN: '%C%'
