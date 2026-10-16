@@ -1434,9 +1434,15 @@ path <- function(...) {
       length(unnamed) == 1 &&
         (is.data.frame(unnamed[[1]]) || inherits(unnamed[[1]], "matrix"))
     ) {
-      ## A single two-column matrix or data frame of edge endpoints;
-      ## let add_edges() normalize it via el_to_vec().
-      res <- add_edges(e1, unnamed[[1]], attr = attr)
+      ## A single two-column matrix or data frame of edge endpoints,
+      ## normalized here so that a deprecation warning names the caller.
+      toadd <- edge_pairs_arg(
+        unnamed[[1]],
+        arg = "edges",
+        fn = "add_edges",
+        user_env = parent.frame()
+      )
+      res <- add_edges(e1, toadd, attr = attr)
     } else {
       if (is.null(names(e2))) {
         toadd <- unlist(unnamed, recursive = FALSE)
@@ -1553,6 +1559,15 @@ path <- function(...) {
       length(e2) == 1 && (is.data.frame(e2[[1]]) || inherits(e2[[1]], "matrix"))
     ) {
       todel <- e2[[1]]
+      if (is_legacy_edge_matrix(todel)) {
+        warn_legacy_edge_matrix(
+          todel,
+          arg = "edges",
+          fn = "delete_edges",
+          user_env = parent.frame()
+        )
+        todel <- c(todel)
+      }
     } else {
       todel <- unlist(e2, recursive = FALSE)
     }

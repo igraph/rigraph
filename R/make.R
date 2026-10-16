@@ -1557,6 +1557,7 @@ make_famous_graph <- function(name) {
 #' @rdname make_graph
 #' @export
 make_directed_graph <- function(edges, n = NULL) {
+  edges <- edge_pairs_arg(edges, arg = "edges", fn = "make_directed_graph")
   if (is.null(n)) {
     make_graph(edges, directed = TRUE)
   } else {
@@ -1567,6 +1568,7 @@ make_directed_graph <- function(edges, n = NULL) {
 #' @rdname make_graph
 #' @export
 make_undirected_graph <- function(edges, n = NULL) {
+  edges <- edge_pairs_arg(edges, arg = "edges", fn = "make_undirected_graph")
   if (is.null(n)) {
     make_graph(edges, directed = FALSE)
   } else {

@@ -609,9 +609,11 @@ edgelist_to_vertex_pairs <- function(el) {
 # Data frames and n x 2 matrices are edge lists, one edge per row.
 # Other matrices kept their old column-major meaning during the transition
 # to edge lists (#1827), with a warning, so that callers can migrate first.
-edge_pairs_arg <- function(x, arg, fn) {
+# `user_env` must be the environment of whoever passed the matrix,
+# so that the warning names that package and not igraph.
+edge_pairs_arg <- function(x, arg, fn, user_env = rlang::caller_env(2)) {
   if (is_legacy_edge_matrix(x)) {
-    warn_legacy_edge_matrix(x, arg, fn)
+    warn_legacy_edge_matrix(x, arg, fn, user_env = user_env)
     c(x)
   } else if (is.data.frame(x) || inherits(x, "matrix")) {
     el_to_vec(x, arg = arg, fn = fn)
@@ -624,7 +626,12 @@ is_legacy_edge_matrix <- function(x) {
   inherits(x, "matrix") && (nrow(x) == 2 || ncol(x) != 2)
 }
 
-warn_legacy_edge_matrix <- function(x, arg, fn) {
+warn_legacy_edge_matrix <- function(
+  x,
+  arg,
+  fn,
+  user_env = rlang::caller_env(2)
+) {
   details <- if (nrow(x) == 2 && ncol(x) == 2) {
     "A 2 times 2 matrix is ambiguous and is read column by column for now. Pass a data frame with two columns instead."
   } else if (nrow(x) == 2) {
@@ -641,6 +648,7 @@ warn_legacy_edge_matrix <- function(x, arg, fn) {
       " = 'should be an n times 2 matrix with one edge per row')"
     ),
     details = details,
+    user_env = user_env,
     always = TRUE
   )
 }

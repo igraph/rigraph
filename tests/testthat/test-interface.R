@@ -75,6 +75,47 @@ test_that("add_edges warns for 2xn and 2x2 matrices and reads them by column (#1
   expect_equal(as_edgelist(g2), cbind(1, 4:5))
 })
 
+test_that("legacy matrix warnings name the calling package (#1827)", {
+  # lifecycle warns indirect callers only once per session,
+  # so record the `user_env` each entry point passes instead.
+  seen <- character()
+  local_mocked_bindings(
+    warn_legacy_edge_matrix = function(
+      x,
+      arg,
+      fn,
+      user_env = rlang::caller_env(2)
+    ) {
+      seen <<- c(seen, environmentName(topenv(user_env)))
+    }
+  )
+
+  # Closures whose environment sits in another package's namespace,
+  # standing in for a reverse dependency that calls igraph.
+  pkg_env <- new.env(parent = asNamespace("stats"))
+  pkg_env$m <- matrix(c(1, 2, 1, 3, 1, 4), nrow = 2)
+  pkg_env$g <- make_empty_graph(5)
+  pkg_env$ring <- make_ring(5)
+  in_other_pkg <- function(f) {
+    environment(f) <- pkg_env
+    f
+  }
+  calls <- list(
+    in_other_pkg(function() add_edges(g, m)),
+    in_other_pkg(function() g + edges(m)),
+    in_other_pkg(function() make_graph(m)),
+    in_other_pkg(function() make_directed_graph(m)),
+    in_other_pkg(function() make_undirected_graph(m)),
+    in_other_pkg(function() delete_edges(ring, matrix(1:4, nrow = 2))),
+    in_other_pkg(function() ring - edges(matrix(1:4, nrow = 2))),
+    in_other_pkg(function() E(ring, P = matrix(c(1, 2, 2, 3), nrow = 2)))
+  )
+  for (f in calls) {
+    f()
+  }
+  expect_equal(seen, rep("stats", length(calls)))
+})
+
 test_that("add_edges warning for legacy matrices", {
   g <- make_empty_graph(5)
   expect_snapshot({
