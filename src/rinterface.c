@@ -16104,22 +16104,22 @@ SEXP R_igraph_isomorphic(SEXP graph1, SEXP graph2) {
 SEXP R_igraph_isoclass_subgraph(SEXP graph, SEXP vids) {
                                         /* Declarations */
   igraph_t c_graph;
-  igraph_vector_int_t c_vids;
+  igraph_vs_t c_vids;
   igraph_integer_t c_isoclass;
   SEXP isoclass;
 
   SEXP r_result;
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
-  IGRAPH_R_CHECK(Rz_SEXP_to_vector_int_copy(vids, &c_vids));
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vids);
+  igraph_vector_int_t c_vids_data;
+  Rz_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
   c_isoclass=0;
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_isoclass_subgraph(&c_graph, &c_vids, &c_isoclass));
+  IGRAPH_R_CHECK(igraph_isoclass_subgraph(&c_graph, c_vids, &c_isoclass));
 
                                         /* Convert output */
-  igraph_vector_int_destroy(&c_vids);
-  IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_destroy(&c_vids_data);
+  igraph_vs_destroy(&c_vids);
   PROTECT(isoclass=NEW_NUMERIC(1));
   REAL(isoclass)[0]=(double) c_isoclass;
   r_result = isoclass;
