@@ -12370,25 +12370,28 @@ SEXP R_igraph_community_multilevel(SEXP graph, SEXP weights, SEXP resolution) {
 /*-------------------------------------------/
 / igraph_community_optimal_modularity        /
 /-------------------------------------------*/
-SEXP R_igraph_community_optimal_modularity(SEXP graph, SEXP weights) {
+SEXP R_igraph_community_optimal_modularity(SEXP graph, SEXP weights, SEXP resolution) {
                                         /* Declarations */
   igraph_t c_graph;
+  igraph_vector_t c_weights;
+  igraph_real_t c_resolution;
   igraph_real_t c_modularity;
   igraph_vector_int_t c_membership;
-  igraph_vector_t c_weights;
   SEXP modularity;
   SEXP membership;
 
   SEXP r_result, r_names;
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
-  IGRAPH_R_CHECK(igraph_vector_int_init(&c_membership, 0));
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_membership);
   if (!Rf_isNull(weights)) {
     Rz_SEXP_to_vector(weights, &c_weights);
   }
+  IGRAPH_R_CHECK_REAL(resolution);
+  c_resolution = REAL(resolution)[0];
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_membership, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_membership);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_community_optimal_modularity(&c_graph, &c_modularity, &c_membership, (Rf_isNull(weights) ? 0 : &c_weights)));
+  IGRAPH_R_CHECK(igraph_community_optimal_modularity(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), c_resolution, &c_modularity, &c_membership));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));
