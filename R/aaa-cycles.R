@@ -129,12 +129,20 @@ topological_sorting_impl <- function(
 
 fundamental_cycles_impl <- function(
   graph,
+  weights = NULL,
   start = NULL,
-  bfs_cutoff = -1,
-  weights = NULL
+  bfs_cutoff = -1
 ) {
   # Argument checks
   ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && !all(is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
   if (!is.null(start)) {
     start <- as_igraph_vs(graph, start)
     if (length(start) != 1) {
@@ -145,23 +153,15 @@ fundamental_cycles_impl <- function(
     }
   }
   bfs_cutoff <- as.numeric(bfs_cutoff)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && !all(is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_fundamental_cycles,
     graph,
+    weights,
     start - 1,
-    bfs_cutoff,
-    weights
+    bfs_cutoff
   )
   if (igraph_opt("return.vs.es")) {
     res <- lapply(res, unsafe_create_es, graph = graph, es = E(graph))
@@ -171,16 +171,13 @@ fundamental_cycles_impl <- function(
 
 minimum_cycle_basis_impl <- function(
   graph,
+  weights = NULL,
   bfs_cutoff = -1,
   complete = TRUE,
-  use_cycle_order = TRUE,
-  weights = NULL
+  use_cycle_order = TRUE
 ) {
   # Argument checks
   ensure_igraph(graph)
-  bfs_cutoff <- as.numeric(bfs_cutoff)
-  complete <- as.logical(complete)
-  use_cycle_order <- as.logical(use_cycle_order)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -189,16 +186,19 @@ minimum_cycle_basis_impl <- function(
   } else {
     weights <- NULL
   }
+  bfs_cutoff <- as.numeric(bfs_cutoff)
+  complete <- as.logical(complete)
+  use_cycle_order <- as.logical(use_cycle_order)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_minimum_cycle_basis,
     graph,
+    weights,
     bfs_cutoff,
     complete,
-    use_cycle_order,
-    weights
+    use_cycle_order
   )
   if (igraph_opt("return.vs.es")) {
     res <- lapply(res, unsafe_create_es, graph = graph, es = E(graph))
