@@ -232,9 +232,9 @@ SEXP R_igraph_delete_vertices(SEXP graph, SEXP vertices) {
 }
 
 /*-------------------------------------------/
-/ igraph_delete_vertices_idx                 /
+/ igraph_delete_vertices_map                 /
 /-------------------------------------------*/
-SEXP R_igraph_delete_vertices_idx(SEXP graph, SEXP vertices) {
+SEXP R_igraph_delete_vertices_map(SEXP graph, SEXP vertices) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vs_t c_vertices;
@@ -254,7 +254,7 @@ SEXP R_igraph_delete_vertices_idx(SEXP graph, SEXP vertices) {
   IGRAPH_R_CHECK(igraph_vector_int_init(&c_invidx, 0));
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_invidx);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_delete_vertices_idx(&c_graph, c_vertices, &c_idx, &c_invidx));
+  IGRAPH_R_CHECK(igraph_delete_vertices_map(&c_graph, c_vertices, &c_idx, &c_invidx));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(3));
@@ -264,7 +264,7 @@ SEXP R_igraph_delete_vertices_idx(SEXP graph, SEXP vertices) {
   IGRAPH_FINALLY_CLEAN(1);
   igraph_vector_int_destroy(&c_vertices_data);
   igraph_vs_destroy(&c_vertices);
-  PROTECT(idx=Ry_igraph_vector_int_to_SEXP(&c_idx));
+  PROTECT(idx=Ry_igraph_vector_int_to_SEXPp1(&c_idx));
   igraph_vector_int_destroy(&c_idx);
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(invidx=Ry_igraph_vector_int_to_SEXP(&c_invidx));

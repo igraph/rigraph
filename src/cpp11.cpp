@@ -135,7 +135,7 @@ extern SEXP R_igraph_degree_correlation_vector(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_degree_sequence_game(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_delete_edges(SEXP, SEXP);
 extern SEXP R_igraph_delete_vertices(SEXP, SEXP);
-extern SEXP R_igraph_delete_vertices_idx(SEXP, SEXP);
+extern SEXP R_igraph_delete_vertices_map(SEXP, SEXP);
 extern SEXP R_igraph_density(SEXP, SEXP);
 extern SEXP R_igraph_deterministic_optimal_imitation(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_dfs_closure(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -717,7 +717,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_degree_sequence_game",                           (DL_FUNC) &R_igraph_degree_sequence_game,                            3},
     {"R_igraph_delete_edges",                                   (DL_FUNC) &R_igraph_delete_edges,                                    2},
     {"R_igraph_delete_vertices",                                (DL_FUNC) &R_igraph_delete_vertices,                                 2},
-    {"R_igraph_delete_vertices_idx",                            (DL_FUNC) &R_igraph_delete_vertices_idx,                             2},
+    {"R_igraph_delete_vertices_map",                            (DL_FUNC) &R_igraph_delete_vertices_map,                             2},
     {"R_igraph_density",                                        (DL_FUNC) &R_igraph_density,                                         2},
     {"R_igraph_deterministic_optimal_imitation",                (DL_FUNC) &R_igraph_deterministic_optimal_imitation,                 6},
     {"R_igraph_dfs_closure",                                    (DL_FUNC) &R_igraph_dfs_closure,                                     6},

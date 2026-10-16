@@ -39,6 +39,17 @@ igraph_sparse_weighted_adjacency:
   # Turning INOUT SPARSEMAT adjmatrix to IN SPARSEMAT adjmatrix
   PARAMS: OUT GRAPH graph, IN SPARSEMAT adjmatrix, ADJACENCY_MODE mode=DIRECTED, OUT EDGEWEIGHTS weights, LOOPS loops=ONCE
 
+igraph_delete_vertices_map:
+    # Upstream renamed igraph_delete_vertices_idx() and maps a deleted vertex
+    # to -1 rather than 0: the R name stays, and idx stays 1-based with 0 for
+    # a deleted vertex.
+    NAME-R: delete_vertices_idx
+    PARAMS: |-
+        INOUT GRAPH graph, VERTEX_SELECTOR vertices,
+        OPTIONAL OUT INDEX_VECTOR idx,
+        OPTIONAL OUT VECTOR_INT invidx
+    DEPS: vertices ON graph
+
 igraph_circulant:
     R:
       GATTR:

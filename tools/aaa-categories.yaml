@@ -6,7 +6,7 @@ basic-igraph:
     - igraph_add_vertices
     - igraph_delete_edges
     - igraph_delete_vertices
-    - igraph_delete_vertices_idx
+    - igraph_delete_vertices_map
   basic-query-operations:
     - igraph_degree
     - igraph_ecount
