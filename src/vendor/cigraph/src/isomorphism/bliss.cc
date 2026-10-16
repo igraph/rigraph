@@ -229,6 +229,12 @@ public:
 } // end unnamed namespace
 
 
+static igraph_error_t igraph_i_canonical_permutation(
+    const igraph_t *graph, const igraph_vector_int_t *colors,
+    igraph_vector_int_t *labeling, igraph_bliss_sh_t sh,
+    igraph_bliss_info_t *info
+);
+
 /**
  * \function igraph_canonical_permutation
  * \brief Canonical permutation using Bliss.
@@ -260,6 +266,22 @@ public:
  */
 igraph_error_t igraph_canonical_permutation(const igraph_t *graph, const igraph_vector_int_t *colors,
                                  igraph_vector_int_t *labeling, igraph_bliss_sh_t sh, igraph_bliss_info_t *info) {
+    igraph_vector_int_t inv_permutation;
+
+    IGRAPH_VECTOR_INT_INIT_FINALLY(&inv_permutation, igraph_vcount(graph));
+    IGRAPH_CHECK(igraph_i_canonical_permutation(graph, colors, &inv_permutation, sh, info));
+    IGRAPH_CHECK(igraph_invert_permutation(&inv_permutation, labeling));
+    igraph_vector_int_destroy(&inv_permutation);
+    IGRAPH_FINALLY_CLEAN(1);
+
+    return IGRAPH_SUCCESS;
+}
+
+static igraph_error_t igraph_i_canonical_permutation(
+    const igraph_t *graph, const igraph_vector_int_t *colors,
+    igraph_vector_int_t *labeling, igraph_bliss_sh_t sh,
+    igraph_bliss_info_t *info
+) {
     IGRAPH_HANDLE_EXCEPTIONS(
         AbstractGraph *g = bliss_from_igraph(graph);
         IGRAPH_FINALLY(bliss_free_graph, g);
@@ -519,8 +541,8 @@ igraph_error_t igraph_isomorphic_bliss(const igraph_t *graph1, const igraph_t *g
     IGRAPH_VECTOR_INT_INIT_FINALLY(&perm1, no_of_nodes);
     IGRAPH_VECTOR_INT_INIT_FINALLY(&perm2, no_of_nodes);
 
-    IGRAPH_CHECK(igraph_canonical_permutation(graph1, colors1, &perm1, sh, info1));
-    IGRAPH_CHECK(igraph_canonical_permutation(graph2, colors2, &perm2, sh, info2));
+    IGRAPH_CHECK(igraph_i_canonical_permutation(graph1, colors1, &perm1, sh, info1));
+    IGRAPH_CHECK(igraph_i_canonical_permutation(graph2, colors2, &perm2, sh, info2));
 
     IGRAPH_CHECK(igraph_vector_int_resize(mymap12, no_of_nodes));
 

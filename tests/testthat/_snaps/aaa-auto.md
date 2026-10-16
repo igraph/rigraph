@@ -7340,7 +7340,7 @@
       canonical_permutation_impl(graph = g)
     Output
       $labeling
-      [1] 2 3 1
+      [1] 3 1 2
       
       $info
       $info$nof_nodes
