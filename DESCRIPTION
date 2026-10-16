@@ -1,6 +1,6 @@
 Package: igraph.dev
 Title: Network Analysis and Visualization
-Version: 2.3.3.9042.77
+Version: 2.3.3.9042.78
 Authors@R: c(
     person("Gábor", "Csárdi", , "csardi.gabor@gmail.com", role = "aut",
            comment = c(ORCID = "0000-0001-7098-9676")),
