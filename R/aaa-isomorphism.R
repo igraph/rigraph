@@ -252,7 +252,7 @@ count_automorphisms_impl <- function(
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_count_automorphisms,
+    R_igraph_count_automorphisms_bliss,
     graph,
     colors,
     sh
