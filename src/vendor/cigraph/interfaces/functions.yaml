@@ -341,7 +341,7 @@ igraph_rewire_directed_edges:
 igraph_watts_strogatz_game:
     PARAMS: |-
         OUT GRAPH graph, INTEGER dim, INTEGER size, INTEGER nei,
-        REAL p, BOOLEAN loops=False, BOOLEAN multiple=False
+        REAL p, EDGE_TYPE_SW allowed_edge_types=SIMPLE
 
 igraph_lastcit_game:
     PARAMS: |-

@@ -125,6 +125,14 @@ igraph_forest_fire_game:
         name: Forest fire model
       GATTR-PARAM: fw_prob, bw_factor, ambs
 
+igraph_watts_strogatz_game:
+    # Upstream replaced loops and multiple with allowed_edge_types
+    # (krlmlr/igraph@6319e3d): the R arguments stay, both logicals.
+    PARAMS: |-
+        OUT GRAPH graph, INTEGER dim, INTEGER size, INTEGER nei, REAL p,
+        EDGE_TYPE_SW_LOOPS loops=False, EDGE_TYPE_SW_MULTIPLE multiple=False
+    DEPS: multiple ON loops
+
 igraph_simple_interconnected_islands_game:
     R:
       GATTR:

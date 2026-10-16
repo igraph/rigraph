@@ -143,8 +143,8 @@ IGRAPH_EXPORT igraph_error_t igraph_rewire_directed_edges(igraph_t *graph, igrap
 
 IGRAPH_EXPORT igraph_error_t igraph_watts_strogatz_game(igraph_t *graph, igraph_int_t dim,
                                              igraph_int_t size, igraph_int_t nei,
-                                             igraph_real_t p, igraph_bool_t loops,
-                                             igraph_bool_t multiple);
+                                             igraph_real_t p,
+                                             igraph_edge_type_sw_t allowed_edge_types);
 
 IGRAPH_EXPORT igraph_error_t igraph_lastcit_game(igraph_t *graph,
                                       igraph_int_t nodes, igraph_int_t edges_per_node,
