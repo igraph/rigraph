@@ -291,7 +291,7 @@ extern SEXP R_igraph_is_mutual(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_is_perfect(SEXP);
 extern SEXP R_igraph_is_same_graph(SEXP, SEXP);
 extern SEXP R_igraph_is_separator(SEXP, SEXP);
-extern SEXP R_igraph_is_simple(SEXP);
+extern SEXP R_igraph_is_simple(SEXP, SEXP);
 extern SEXP R_igraph_is_tree(SEXP, SEXP);
 extern SEXP R_igraph_is_vertex_coloring(SEXP, SEXP);
 extern SEXP R_igraph_isoclass(SEXP);
@@ -877,7 +877,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_is_perfect",                                     (DL_FUNC) &R_igraph_is_perfect,                                      1},
     {"R_igraph_is_same_graph",                                  (DL_FUNC) &R_igraph_is_same_graph,                                   2},
     {"R_igraph_is_separator",                                   (DL_FUNC) &R_igraph_is_separator,                                    2},
-    {"R_igraph_is_simple",                                      (DL_FUNC) &R_igraph_is_simple,                                       1},
+    {"R_igraph_is_simple",                                      (DL_FUNC) &R_igraph_is_simple,                                       2},
     {"R_igraph_is_tree",                                        (DL_FUNC) &R_igraph_is_tree,                                         2},
     {"R_igraph_is_vertex_coloring",                             (DL_FUNC) &R_igraph_is_vertex_coloring,                              2},
     {"R_igraph_isoclass",                                       (DL_FUNC) &R_igraph_isoclass,                                        1},

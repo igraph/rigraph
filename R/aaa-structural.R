@@ -1443,16 +1443,19 @@ is_multiple_impl <- function(
 }
 
 is_simple_impl <- function(
-  graph
+  graph,
+  directed = TRUE
 ) {
   # Argument checks
   ensure_igraph(graph)
+  directed <- as.logical(directed)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_is_simple,
-    graph
+    graph,
+    directed
   )
 
   res

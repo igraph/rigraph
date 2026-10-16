@@ -6426,17 +6426,20 @@ SEXP R_igraph_is_acyclic(SEXP graph) {
 /*-------------------------------------------/
 / igraph_is_simple                           /
 /-------------------------------------------*/
-SEXP R_igraph_is_simple(SEXP graph) {
+SEXP R_igraph_is_simple(SEXP graph, SEXP directed) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_bool_t c_res;
+  igraph_bool_t c_directed;
   SEXP res;
 
   SEXP r_result;
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_is_simple(&c_graph, &c_res));
+  IGRAPH_R_CHECK(igraph_is_simple(&c_graph, &c_res, c_directed));
 
                                         /* Convert output */
   PROTECT(res=NEW_LOGICAL(1));
