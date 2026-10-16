@@ -550,15 +550,21 @@ igraph_error_t igraph_community_leading_eigenvector(
             igraph_error_t retval;
             igraph_error_handler_t *errh =
                     igraph_set_error_handler(igraph_i_error_handler_none);
-            retval = igraph_arpack_rssolve(arpcb1, &extra, options, &storage, /*values=*/ 0, /*vectors=*/ 0);
+            retval = igraph_arpack_rssolve(arpcb1, &extra, options, &storage, /*values=*/ NULL, /*vectors=*/ NULL);
             igraph_set_error_handler(errh);
-            if (retval != IGRAPH_SUCCESS && retval != IGRAPH_ARPACK_MAXIT && retval != IGRAPH_ARPACK_NOSHIFT) {
-                IGRAPH_ERROR("ARPACK call failed", retval);
+            if (retval == IGRAPH_EARPACK) {
+                /* TODO(ntamas): get last ARPACK error code. Some errors are OK. */
+                igraph_arpack_error_t arpack_error = igraph_arpack_get_last_error();
+                if (arpack_error != IGRAPH_ARPACK_MAXIT && arpack_error != IGRAPH_ARPACK_NOSHIFT) {
+                    IGRAPH_ERROR(igraph_arpack_error_to_string(arpack_error), IGRAPH_EARPACK);
+                }
+            } else if (retval != IGRAPH_SUCCESS) {
+                IGRAPH_ERROR("Leading eigenvector calculation failed.", retval);
             }
         }
 
         if (options->nconv < 1) {
-            IGRAPH_ERROR("ARPACK did not converge", IGRAPH_ARPACK_FAILED);
+            IGRAPH_ERROR(igraph_arpack_error_to_string(IGRAPH_ARPACK_FAILED), IGRAPH_EARPACK);
         }
 
         /* Ok, we have the leading eigenvector of the modularity matrix */
