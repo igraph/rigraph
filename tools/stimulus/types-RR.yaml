@@ -432,6 +432,11 @@ EDGE_COLOR:
     CALL: {}
     HEADER: ~
 
+RNG_DEFAULT:
+    # The default RNG, R's own: no R argument; see types-RC.yaml.
+    CALL: {}
+    HEADER: ~
+
 EXTRA:
     CALL: {}
     HEADER: ~

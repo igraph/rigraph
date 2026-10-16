@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -226,19 +225,6 @@ IGRAPH_EXPORT igraph_error_t igraph_tree_game(igraph_t *graph, igraph_int_t n, i
 
 IGRAPH_EXPORT igraph_error_t igraph_dot_product_game(igraph_t *graph, const igraph_matrix_t *vecs,
                                           igraph_bool_t directed);
-
-IGRAPH_EXPORT igraph_error_t igraph_sample_sphere_surface(igraph_int_t dim, igraph_int_t n,
-                                               igraph_real_t radius,
-                                               igraph_bool_t positive,
-                                               igraph_matrix_t *res);
-
-IGRAPH_EXPORT igraph_error_t igraph_sample_sphere_volume(igraph_int_t dim, igraph_int_t n,
-                                              igraph_real_t radius,
-                                              igraph_bool_t positive,
-                                              igraph_matrix_t *res);
-
-IGRAPH_EXPORT igraph_error_t igraph_sample_dirichlet(igraph_int_t n, const igraph_vector_t *alpha,
-                                          igraph_matrix_t *res);
 
 __END_DECLS
 

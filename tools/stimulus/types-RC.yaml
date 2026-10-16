@@ -732,6 +732,12 @@ EDGE_INDICES:
     CTYPE: ~
     HEADER: {}
 
+RNG_DEFAULT:
+    # The default RNG, which the R package sets to R's own; no R argument.
+    CALL: igraph_rng_default()
+    CTYPE: ~
+    HEADER: {}
+
 EXTRA:
     CALL: '0'
     CTYPE: ~
