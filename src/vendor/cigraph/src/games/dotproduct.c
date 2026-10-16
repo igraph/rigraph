@@ -67,16 +67,16 @@ igraph_error_t igraph_dot_product_game(igraph_t *graph, const igraph_matrix_t *v
 
     IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, 0);
 
-
     for (i = 0; i < ncol; i++) {
         igraph_int_t from = directed ? 0 : i + 1;
         const igraph_vector_t v1 = igraph_vector_view(&MATRIX(*vecs, 0, i), nrow);
         for (j = from; j < ncol; j++) {
             igraph_real_t prob;
+            const igraph_vector_t v2 = igraph_vector_view(&MATRIX(*vecs, 0, j), nrow);
+
             if (i == j) {
                 continue;
             }
-            const igraph_vector_t v2 = igraph_vector_view(&MATRIX(*vecs, 0, j), nrow);
             IGRAPH_CHECK(igraph_blas_ddot(&v1, &v2, &prob));
             if (prob < 0 && ! warned_neg) {
                 warned_neg = true;
@@ -92,7 +92,6 @@ igraph_error_t igraph_dot_product_game(igraph_t *graph, const igraph_matrix_t *v
             }
         }
     }
-
 
     IGRAPH_CHECK(igraph_create(graph, &edges, ncol, directed));
 
