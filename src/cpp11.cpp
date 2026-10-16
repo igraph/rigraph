@@ -494,7 +494,6 @@ extern SEXP R_igraph_weighted_adjacency(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_weighted_biadjacency(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_weighted_clique_number(SEXP, SEXP);
 extern SEXP R_igraph_weighted_cliques(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_weighted_sparsemat(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_wheel(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_widest_path_widths_dijkstra(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_widest_path_widths_floyd_warshall(SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -1069,7 +1068,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_weighted_biadjacency",                           (DL_FUNC) &R_igraph_weighted_biadjacency,                            3},
     {"R_igraph_weighted_clique_number",                         (DL_FUNC) &R_igraph_weighted_clique_number,                          2},
     {"R_igraph_weighted_cliques",                               (DL_FUNC) &R_igraph_weighted_cliques,                                6},
-    {"R_igraph_weighted_sparsemat",                             (DL_FUNC) &R_igraph_weighted_sparsemat,                              4},
     {"R_igraph_wheel",                                          (DL_FUNC) &R_igraph_wheel,                                           3},
     {"R_igraph_widest_path_widths_dijkstra",                    (DL_FUNC) &R_igraph_widest_path_widths_dijkstra,                     5},
     {"R_igraph_widest_path_widths_floyd_warshall",              (DL_FUNC) &R_igraph_widest_path_widths_floyd_warshall,               5},

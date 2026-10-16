@@ -170,31 +170,6 @@ weighted_adjacency_impl <- function(
   res
 }
 
-weighted_sparsemat_impl <- function(
-  A,
-  directed,
-  attr,
-  loops = FALSE
-) {
-  # Argument checks
-  requireNamespace("Matrix", quietly = TRUE)
-  A <- as(as(as(A, "dMatrix"), "generalMatrix"), "CsparseMatrix")
-  directed <- as.logical(directed)
-  loops <- as.logical(loops)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_weighted_sparsemat,
-    A,
-    directed,
-    attr,
-    loops
-  )
-
-  res
-}
-
 # ==== basic-generators ====
 
 create_impl <- function(
