@@ -1837,14 +1837,6 @@ igraph_error_t FUNCTION(igraph_vector, move_interval)(TYPE(igraph_vector) *v,
     return IGRAPH_SUCCESS;
 }
 
-/**
- * \deprecated-by igraph_vector_move_interval 0.10.0
- */
-igraph_error_t FUNCTION(igraph_vector, move_interval2)(TYPE(igraph_vector) *v,
-        igraph_int_t begin, igraph_int_t end, igraph_int_t to) {
-    return FUNCTION(igraph_vector, move_interval)(v, begin, end, to);
-}
-
 #ifndef NOTORDERED
 
 /**
