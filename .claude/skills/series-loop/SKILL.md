@@ -355,6 +355,8 @@ Reference: [`references/4-port.md`](references/4-port.md).
   because a fold low in the window rewrites everything above it;
   once a round comes back mostly green, pass a larger `--chunk`, and go back to the declared size at the next red low in the window.
 * **Extend on pending, never on red**: a reported `failure` in `main-green..main-dev` stops the stage until stage 2 has folded its fix.
+* **Mint without pushing when a fold has to come before CI**, as when R-side fixes or a doc sweep wait for the commits the chunk adds.
+  `--no-push-dev` keeps the extension in `refs/series/main-dev-next` and prints the leased push to run once the folds are in.
 * A conflicting replay **stops the stage with the worktree kept**:
 
   ```sh
