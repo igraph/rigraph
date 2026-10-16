@@ -1501,7 +1501,6 @@ eigen_centrality <- function(
   eigenvector_centrality_impl(
     graph = graph,
     directed = directed,
-    scale = TRUE,
     weights = weights,
     options = options
   )

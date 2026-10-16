@@ -317,11 +317,12 @@ igraph_eigenvector_centrality:
     # dependencies: the graph and the vertex set, but we only have the graph
     # in the argument list.
     DEPS: weights ON graph, vector ON graph V(graph)
-    # Upstream replaced directed with mode (krlmlr/igraph@1d923ac): the R
-    # argument stays directed, a logical.
+    # Upstream replaced directed with mode (krlmlr/igraph@1d923ac) and removed
+    # scale (krlmlr/igraph@ab42b6f): the R arguments stay, directed a logical
+    # and scale deprecated and without effect.
     PARAMS: |-
         GRAPH graph, OUT ALL_VERTEX_QTY vector, OUT REAL value,
-        NEIMODE_DIRECTED directed=False, BOOLEAN scale=True,
+        NEIMODE_DIRECTED directed=False, DEPRECATED scale=NULL,
         OPTIONAL EDGEWEIGHTS weights,
         INOUT ARPACKOPT options=ARPACK_DEFAULTS
 
@@ -349,21 +350,23 @@ igraph_is_mutual:
         es: eids
 
 igraph_centralization_eigenvector_centrality:
-    # Upstream replaced directed with mode (krlmlr/igraph@1d923ac): the R
-    # argument stays directed, a logical.
+    # Upstream replaced directed with mode (krlmlr/igraph@1d923ac) and removed
+    # scale (krlmlr/igraph@ab42b6f): the R arguments stay, directed a logical
+    # and scale deprecated and without effect.
     PARAMS: |-
         GRAPH graph, OUT VECTOR vector, OUT REAL value,
-        NEIMODE_DIRECTED directed=False, BOOLEAN scale=True,
+        NEIMODE_DIRECTED directed=False, DEPRECATED scale=NULL,
         INOUT ARPACKOPT options=ARPACK_DEFAULTS,
         OUT REAL centralization, OUT REAL theoretical_max,
         BOOLEAN normalized=True
 
 igraph_centralization_eigenvector_centrality_tmax:
-    # Upstream replaced directed with mode (krlmlr/igraph@1d923ac): the R
-    # argument stays directed, a logical.
+    # Upstream replaced directed with mode (krlmlr/igraph@1d923ac) and removed
+    # scale (krlmlr/igraph@ab42b6f): the R arguments stay, directed a logical
+    # and scale deprecated and without effect.
     PARAMS: |-
         OPTIONAL GRAPH graph, INTEGER nodes=0,
-        NEIMODE_DIRECTED directed=False, BOOLEAN scale=True,
+        NEIMODE_DIRECTED directed=False, DEPRECATED scale=NULL,
         OUT REAL res
 
 igraph_eccentricity:
