@@ -1,4 +1,3 @@
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    igraph library.
    Copyright (C) 2021  The igraph development team <igraph@igraph.org>
@@ -35,12 +34,11 @@
  * vid_ecc will then return the id of the vertex farthest from the one in
  * vids. If unconn == false and not all other vertices were reachable from
  * the single given vertex, -1 is returned in vid_ecc. */
-static igraph_error_t igraph_i_eccentricity_unweighted(const igraph_t *graph,
-                                 igraph_vector_t *res,
-                                 igraph_vs_t vids,
-                                 igraph_lazy_adjlist_t *adjlist,
-                                 igraph_int_t *vid_ecc,
-                                 igraph_bool_t unconn) {
+static igraph_error_t igraph_i_eccentricity_unweighted(
+    const igraph_t *graph, igraph_vector_t *res, igraph_vs_t vids,
+    igraph_lazy_adjlist_t *adjlist, igraph_int_t *vid_ecc,
+    igraph_bool_t unconn
+) {
 
     igraph_int_t no_of_nodes = igraph_vcount(graph);
     igraph_dqueue_int_t q;
@@ -129,13 +127,10 @@ static igraph_error_t igraph_i_eccentricity_unweighted(const igraph_t *graph,
  * wil be set to infinity, and \p vid_ecc to -1;
  */
 static igraph_error_t igraph_i_eccentricity_dijkstra(
-        const igraph_t *graph,
-        const igraph_vector_t *weights,
-        igraph_real_t *ecc,
-        igraph_int_t vid_start,
-        igraph_int_t *vid_ecc,
-        igraph_bool_t unconn,
-        igraph_lazy_inclist_t *inclist) {
+    const igraph_t *graph, const igraph_vector_t *weights, igraph_real_t *ecc,
+    igraph_int_t vid_start, igraph_int_t *vid_ecc, igraph_bool_t unconn,
+    igraph_lazy_inclist_t *inclist
+) {
 
     igraph_int_t no_of_nodes = igraph_vcount(graph);
     igraph_2wheap_t Q;
@@ -305,10 +300,11 @@ igraph_error_t igraph_eccentricity(
     IGRAPH_CHECK(igraph_vector_resize(res, 0));
     IGRAPH_CHECK(igraph_vit_create(graph, vids, &vit));
 
-    for (IGRAPH_VIT_RESET(vit);
-            !IGRAPH_VIT_END(vit);
-            IGRAPH_VIT_NEXT(vit)) {
-        IGRAPH_CHECK(igraph_i_eccentricity_dijkstra(graph, weights, &ecc, IGRAPH_VIT_GET(vit), /*vid_ecc*/ &dump, /*unconn*/ true, &inclist));
+    for (IGRAPH_VIT_RESET(vit); !IGRAPH_VIT_END(vit); IGRAPH_VIT_NEXT(vit)) {
+        IGRAPH_CHECK(igraph_i_eccentricity_dijkstra(
+            graph, weights, &ecc, IGRAPH_VIT_GET(vit),
+            /*vid_ecc*/ &dump, /*unconn*/ true, &inclist
+        ));
         IGRAPH_CHECK(igraph_vector_push_back(res, ecc));
     }
     igraph_lazy_inclist_destroy(&inclist);
@@ -327,8 +323,9 @@ igraph_error_t igraph_eccentricity(
  * \param weights The edge weights. All edge weights must be
  *    non-negative for Dijkstra's algorithm to work. Additionally, no
  *    edge weight may be NaN. If either case does not hold, an error
- *    is returned. Pass a null pointer here if all edges have equal weight.
- *    Edges with positive infinite weights are ignored.
+ *    is returned. If this is a null pointer, then the unweighted
+ *    version, \ref igraph_radius() is called. Edges with positive
+ *    infinite weights are ignored.
  * \param radius Pointer to a real variable, the result is stored
  *   here.
  * \param mode What kind of paths to consider for the calculation:
@@ -410,8 +407,9 @@ static igraph_error_t igraph_i_pseudo_diameter_unweighted(
         ifrom = vid_start;
         IGRAPH_VECTOR_INIT_FINALLY(&ecc_vec, no_of_nodes);
 
-        IGRAPH_CHECK(igraph_i_eccentricity_unweighted(graph, &ecc_vec, igraph_vss_1(vid_start),
-                                           &adjlist, &vid_ecc, unconn));
+        IGRAPH_CHECK(igraph_i_eccentricity_unweighted(
+            graph, &ecc_vec, igraph_vss_1(vid_start), &adjlist, &vid_ecc, unconn
+        ));
         ecc_u = VECTOR(ecc_vec)[0];
 
         if (!unconn && vid_ecc == -1) {
@@ -422,8 +420,9 @@ static igraph_error_t igraph_i_pseudo_diameter_unweighted(
 
                 ito = vid_ecc;
 
-                IGRAPH_CHECK(igraph_i_eccentricity_unweighted(graph, &ecc_vec, igraph_vss_1(vid_ecc),
-                                                   &adjlist, &vid_ecc, true));
+                IGRAPH_CHECK(igraph_i_eccentricity_unweighted(
+                    graph, &ecc_vec, igraph_vss_1(vid_ecc),  &adjlist, &vid_ecc, true
+                ));
 
                 ecc_v = VECTOR(ecc_vec)[0];
 
@@ -458,10 +457,14 @@ static igraph_error_t igraph_i_pseudo_diameter_unweighted(
         IGRAPH_VECTOR_INIT_FINALLY(&ecc_in, igraph_vcount(graph));
         IGRAPH_VECTOR_INIT_FINALLY(&ecc_out, igraph_vcount(graph));
 
-        IGRAPH_CHECK(igraph_i_eccentricity_unweighted(graph, &ecc_out, igraph_vss_1(vid_start),
-                                           &adjlist_out, &vid_ecc_out, unconn));
-        IGRAPH_CHECK(igraph_i_eccentricity_unweighted(graph, &ecc_in, igraph_vss_1(vid_start),
-                                           &adjlist_in, &vid_ecc_in, unconn));
+        IGRAPH_CHECK(igraph_i_eccentricity_unweighted(
+            graph, &ecc_out, igraph_vss_1(vid_start),  &adjlist_out,
+            &vid_ecc_out, unconn
+        ));
+        IGRAPH_CHECK(igraph_i_eccentricity_unweighted(
+            graph, &ecc_in, igraph_vss_1(vid_start), &adjlist_in,
+            &vid_ecc_in, unconn
+        ));
 
         /* A directed graph is strongly connected iff all vertices are reachable
          * from vid_start both when moving along or moving opposite the edge directions. */
@@ -484,10 +487,14 @@ static igraph_error_t igraph_i_pseudo_diameter_unweighted(
                 /* TODO: In the undirected case, we break ties between vertices at the
                  * same distance based on their degree. In te directed case, should we
                  * use in-, out- or total degree? */
-                IGRAPH_CHECK(igraph_i_eccentricity_unweighted(graph, &ecc_out, igraph_vss_1(vid_ecc),
-                                                   &adjlist_out, &vid_ecc_out, true));
-                IGRAPH_CHECK(igraph_i_eccentricity_unweighted(graph, &ecc_in, igraph_vss_1(vid_ecc),
-                                                   &adjlist_in, &vid_ecc_in, true));
+                IGRAPH_CHECK(igraph_i_eccentricity_unweighted(
+                    graph, &ecc_out, igraph_vss_1(vid_ecc), &adjlist_out,
+                    &vid_ecc_out, true
+                ));
+                IGRAPH_CHECK(igraph_i_eccentricity_unweighted(
+                    graph, &ecc_in, igraph_vss_1(vid_ecc), &adjlist_in,
+                    &vid_ecc_in, true
+                ));
 
                 if (VECTOR(ecc_out)[0] > VECTOR(ecc_in)[0]) {
                     vid_ecc = vid_ecc_out;
