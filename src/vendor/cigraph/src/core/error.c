@@ -92,7 +92,7 @@ static const char *igraph_i_error_strings[] = {
     /*  3 */ "Parse error",
     /*  4 */ "Invalid value",
     /*  5 */ "Already exists",
-    /*  6 */ "Invalid edge vector",
+    /*  6 */ NULL, // "Invalid edge vector",  /* removed in 1.0 */
     /*  7 */ "Invalid vertex ID",
     /*  8 */ "Non-square matrix",
     /*  9 */ "Invalid mode",
