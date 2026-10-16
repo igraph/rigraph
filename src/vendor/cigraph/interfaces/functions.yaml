@@ -458,7 +458,7 @@ igraph_closeness_cutoff:
         OPTIONAL OUT BOOLEAN all_reachable,
         VERTEX_SELECTOR vids=ALL,
         NEIMODE mode=OUT, OPTIONAL EDGE_WEIGHTS weights,
-        BOOLEAN normalized=False, REAL cutoff=-1
+        BOOLEAN normalized=False, REAL cutoff=UNLIMITED
     DEPS: vids ON graph, weights ON graph, res ON graph vids
 
 igraph_distances:
@@ -470,7 +470,7 @@ igraph_distances:
 igraph_distances_cutoff:
     PARAMS: |-
         GRAPH graph, OPTIONAL EDGE_WEIGHTS weights, OUT MATRIX res,
-        VERTEX_SELECTOR from=ALL, VERTEX_SELECTOR to=ALL, NEIMODE mode=OUT, REAL cutoff=-1
+        VERTEX_SELECTOR from=ALL, VERTEX_SELECTOR to=ALL, NEIMODE mode=OUT, REAL cutoff=UNLIMITED
     DEPS: weights ON graph, from ON graph, to ON graph
 
 igraph_get_shortest_path:
@@ -527,7 +527,7 @@ igraph_distances_dijkstra:
 igraph_distances_dijkstra_cutoff:
     PARAMS: |-
         GRAPH graph, OUT MATRIX res, VERTEX_SELECTOR from=ALL,
-        VERTEX_SELECTOR to=ALL, OPTIONAL EDGE_WEIGHTS weights, NEIMODE mode=OUT, REAL cutoff=-1
+        VERTEX_SELECTOR to=ALL, OPTIONAL EDGE_WEIGHTS weights, NEIMODE mode=OUT, REAL cutoff=UNLIMITED
     DEPS: from ON graph, to ON graph, weights ON graph
 
 igraph_get_shortest_paths_dijkstra:
@@ -653,7 +653,7 @@ igraph_betweenness_cutoff:
     PARAMS: |-
         GRAPH graph, OPTIONAL EDGE_WEIGHTS weights, OUT VERTEX_QTY res,
         VERTEX_SELECTOR vids=ALL, BOOLEAN directed=True, BOOLEAN normalized=False,
-        REAL cutoff=-1
+        REAL cutoff=UNLIMITED
     DEPS: vids ON graph, weights ON graph, res ON graph vids
 
 igraph_betweenness_subset:
@@ -673,7 +673,7 @@ igraph_edge_betweenness:
 igraph_edge_betweenness_cutoff:
     PARAMS: |-
         GRAPH graph, OPTIONAL EDGE_WEIGHTS weights, OUT VECTOR res, EDGE_SELECTOR eids=ALL,
-        BOOLEAN directed=True, BOOLEAN normalized=False, REAL cutoff=-1
+        BOOLEAN directed=True, BOOLEAN normalized=False, REAL cutoff=UNLIMITED
     DEPS: eids ON graph, weights ON graph, res ON graph eids
 
 igraph_edge_betweenness_subset:
@@ -694,7 +694,7 @@ igraph_harmonic_centrality_cutoff:
     PARAMS: |-
         GRAPH graph, OUT VERTEX_QTY res, VERTEX_SELECTOR vids=ALL,
         NEIMODE mode=OUT, OPTIONAL EDGE_WEIGHTS weights, BOOLEAN normalized=False,
-        REAL cutoff=-1
+        REAL cutoff=UNLIMITED
     DEPS: vids ON graph, weights ON graph, res ON graph vids
 
 igraph_pagerank:
