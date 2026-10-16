@@ -5566,21 +5566,23 @@ SEXP R_igraph_personalized_pagerank_vs(SEXP graph, SEXP algo, SEXP vids, SEXP di
 /*-------------------------------------------/
 / igraph_rewire                              /
 /-------------------------------------------*/
-SEXP R_igraph_rewire(SEXP rewire, SEXP n, SEXP mode) {
+SEXP R_igraph_rewire(SEXP rewire, SEXP n, SEXP allowed_edge_types) {
                                         /* Declarations */
   igraph_t c_rewire;
   igraph_integer_t c_n;
-  igraph_rewiring_t c_mode;
+  igraph_edge_type_sw_t c_allowed_edge_types;
 
-  SEXP r_result;
+  SEXP stats;
+
+  SEXP r_result, r_names;
                                         /* Convert input */
   Rz_SEXP_to_igraph_copy(rewire, &c_rewire);
   IGRAPH_FINALLY(igraph_destroy, &c_rewire);
   IGRAPH_R_CHECK_INT(n);
   c_n = (igraph_integer_t) REAL(n)[0];
-  c_mode = (igraph_rewiring_t) Rf_asInteger(mode);
+  c_allowed_edge_types = (igraph_edge_type_sw_t) Rf_asInteger(allowed_edge_types);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_rewire(&c_rewire, c_n, c_mode));
+  IGRAPH_R_CHECK(igraph_rewire(&c_rewire, c_n, c_allowed_edge_types, 0));
 
                                         /* Convert output */
   PROTECT(rewire=Ry_igraph_to_SEXP(&c_rewire));

@@ -30,6 +30,7 @@
 #include "igraph_constants.h"
 #include "igraph_datatype.h"
 #include "igraph_error.h"
+#include "igraph_graphicality.h"
 #include "igraph_types.h"
 #include "igraph_vector_list.h"
 #include "igraph_vector_ptr.h"
@@ -39,6 +40,24 @@ __BEGIN_DECLS
 /* -------------------------------------------------- */
 /* Graph operators                                    */
 /* -------------------------------------------------- */
+
+/**
+ * \typedef igraph_rewiring_stats_t
+ * \brief Data structure holding statistics from graph rewiring.
+ *
+ * \param successful_swaps Number of successful rewiring trials (successful swaps).
+ */
+
+typedef struct {
+    igraph_int_t successful_swaps;
+
+    /* unused members added at the end to allow us to extend the stats in the future
+     * without breaking ABI compatibility. Do not use these fields in your own code */
+
+    igraph_int_t unused1_;
+    igraph_int_t unused2_;
+    igraph_int_t unused3_;
+} igraph_rewiring_stats_t;
 
 IGRAPH_EXPORT igraph_error_t igraph_add_edge(igraph_t *graph, igraph_int_t from, igraph_int_t to);
 IGRAPH_EXPORT igraph_error_t igraph_disjoint_union(igraph_t *res,
@@ -73,7 +92,8 @@ IGRAPH_EXPORT igraph_error_t igraph_connect_neighborhood(igraph_t *graph, igraph
                                               igraph_neimode_t mode);
 IGRAPH_EXPORT igraph_error_t igraph_graph_power(const igraph_t *graph, igraph_t *res,
                                                 igraph_int_t order, igraph_bool_t directed);
-IGRAPH_EXPORT igraph_error_t igraph_rewire(igraph_t *graph, igraph_int_t n, igraph_rewiring_t mode);
+IGRAPH_EXPORT igraph_error_t igraph_rewire(igraph_t *graph, igraph_int_t n, igraph_edge_type_sw_t allowed_edge_types,
+                                        igraph_rewiring_stats_t *stats);
 IGRAPH_EXPORT igraph_error_t igraph_simplify(igraph_t *graph,
                                              igraph_bool_t remove_multiple, igraph_bool_t remove_loops,
                                              const igraph_attribute_combination_t *edge_comb);

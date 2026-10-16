@@ -1,5 +1,5 @@
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2003-2024  The igraph development team <igraph@igraph.org>
 
    This program is free software; you can redistribute it and/or modify
@@ -732,7 +732,7 @@ igraph_error_t edge_switching(
 
     IGRAPH_CHECK(igraph_realize_degree_sequence(graph, out_seq, in_seq, IGRAPH_SIMPLE_SW, IGRAPH_REALIZE_DEGSEQ_INDEX));
     IGRAPH_FINALLY(igraph_destroy, graph);
-    IGRAPH_CHECK(igraph_rewire(graph, 10 * igraph_ecount(graph), IGRAPH_REWIRING_SIMPLE));
+    IGRAPH_CHECK(igraph_rewire(graph, 10 * igraph_ecount(graph), IGRAPH_SIMPLE_SW, NULL));
     IGRAPH_FINALLY_CLEAN(1);
     return IGRAPH_SUCCESS;
 }
