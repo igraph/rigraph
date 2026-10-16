@@ -12526,11 +12526,11 @@ SEXP R_igraph_split_join_distance(SEXP comm1, SEXP comm2) {
 /*-------------------------------------------/
 / igraph_community_infomap                   /
 /-------------------------------------------*/
-SEXP R_igraph_community_infomap(SEXP graph, SEXP e_weights, SEXP v_weights, SEXP nb_trials) {
+SEXP R_igraph_community_infomap(SEXP graph, SEXP edge_weights, SEXP vertex_weights, SEXP nb_trials) {
                                         /* Declarations */
   igraph_t c_graph;
-  igraph_vector_t c_e_weights;
-  igraph_vector_t c_v_weights;
+  igraph_vector_t c_edge_weights;
+  igraph_vector_t c_vertex_weights;
   igraph_integer_t c_nb_trials;
   igraph_vector_int_t c_membership;
   igraph_real_t c_codelength;
@@ -12540,18 +12540,18 @@ SEXP R_igraph_community_infomap(SEXP graph, SEXP e_weights, SEXP v_weights, SEXP
   SEXP r_result, r_names;
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
-  if (!Rf_isNull(e_weights)) {
-    Rz_SEXP_to_vector(e_weights, &c_e_weights);
+  if (!Rf_isNull(edge_weights)) {
+    Rz_SEXP_to_vector(edge_weights, &c_edge_weights);
   }
-  if (!Rf_isNull(v_weights)) {
-    Rz_SEXP_to_vector(v_weights, &c_v_weights);
+  if (!Rf_isNull(vertex_weights)) {
+    Rz_SEXP_to_vector(vertex_weights, &c_vertex_weights);
   }
   IGRAPH_R_CHECK_INT(nb_trials);
   c_nb_trials = (igraph_integer_t) REAL(nb_trials)[0];
   IGRAPH_R_CHECK(igraph_vector_int_init(&c_membership, 0));
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_membership);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_community_infomap(&c_graph, (Rf_isNull(e_weights) ? 0 : &c_e_weights), (Rf_isNull(v_weights) ? 0 : &c_v_weights), c_nb_trials, &c_membership, &c_codelength));
+  IGRAPH_R_CHECK(igraph_community_infomap(&c_graph, (Rf_isNull(edge_weights) ? 0 : &c_edge_weights), (Rf_isNull(vertex_weights) ? 0 : &c_vertex_weights), c_nb_trials, &c_membership, &c_codelength));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));

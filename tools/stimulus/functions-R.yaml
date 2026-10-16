@@ -549,6 +549,13 @@ igraph_layout_drl_3d:
 igraph_community_eb_get_merges:
     DEPS: edges ON graph, weights ON graph
 
+igraph_community_infomap:
+    # Upstream renamed e_weights and v_weights (krlmlr/igraph@00e3d00):
+    # the R names stay.
+    PARAM_NAMES:
+        edge_weights: e_weights
+        vertex_weights: v_weights
+
 igraph_community_leading_eigenvector:
     IGNORE: RR, RC, RInit  # Has callback parameter
 
