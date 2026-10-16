@@ -108,7 +108,7 @@ IGRAPH_EXPORT void FUNCTION(igraph_vector, swap)(TYPE(igraph_vector) *v1, TYPE(i
 /* Exchanging elements   */
 /*-----------------------*/
 
-IGRAPH_EXPORT igraph_error_t FUNCTION(igraph_vector, swap_elements)(
+IGRAPH_EXPORT void FUNCTION(igraph_vector, swap_elements)(
         TYPE(igraph_vector) *v, igraph_int_t i, igraph_int_t j);
 IGRAPH_EXPORT void FUNCTION(igraph_vector, reverse)(TYPE(igraph_vector) *v);
 IGRAPH_EXPORT void FUNCTION(igraph_vector, reverse_section)(

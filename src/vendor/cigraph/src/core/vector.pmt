@@ -2657,18 +2657,15 @@ void FUNCTION(igraph_vector, swap)(TYPE(igraph_vector) *v1, TYPE(igraph_vector) 
  * \param i Index of the first element.
  * \param j Index of the second element (may be the same as the
  * first one).
- * \return Error code, currently always \c IGRAPH_SUCCESS.
  *
  * Time complexity: O(1).
  */
 
-igraph_error_t FUNCTION(igraph_vector, swap_elements)(TYPE(igraph_vector) *v,
+void FUNCTION(igraph_vector, swap_elements)(TYPE(igraph_vector) *v,
         igraph_int_t i, igraph_int_t j) {
     BASE tmp = VECTOR(*v)[i];
     VECTOR(*v)[i] = VECTOR(*v)[j];
     VECTOR(*v)[j] = tmp;
-
-    return IGRAPH_SUCCESS;
 }
 
 /**
