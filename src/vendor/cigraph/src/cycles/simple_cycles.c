@@ -555,7 +555,7 @@ igraph_error_t igraph_simple_cycles_callback(
         //  - we need to the undirected degree in all cases, and
         //  - our algorithm modifies the adjlist state.AK
         igraph_int_t degree;
-        IGRAPH_CHECK(igraph_degree_1(graph, &degree, i, IGRAPH_ALL, IGRAPH_LOOPS));
+        IGRAPH_CHECK(igraph_degree_1(graph, &degree, i, IGRAPH_ALL, true));
         if (degree < 3 && IGRAPH_BIT_TEST(state.v_visited, i)) {
             continue;
         }
