@@ -39,7 +39,7 @@ typedef struct {
 
 /* Handler function for motifs callback - converts C types to R types */
 igraph_error_t R_igraph_motifs_handler(const igraph_t *graph,
-                                       igraph_vector_int_t *vids,
+                                       const igraph_vector_int_t *vids,
                                        igraph_integer_t isoclass,
                                        void *extra) {
 
