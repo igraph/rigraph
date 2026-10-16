@@ -94,7 +94,7 @@ static igraph_error_t igraph_i_handle_plfit_error(int code) {
         break;
 
     default:
-        IGRAPH_ERRORF("Unknown error code returned from plfit (%d)", IGRAPH_FAILURE, code);
+        IGRAPH_ERRORF("Unknown error code returned from plfit (%d).", IGRAPH_FAILURE, code);
         break;
     }
 
@@ -197,7 +197,6 @@ igraph_error_t igraph_power_law_fit(
         }
     }
 
-
     plfit_stored_error_handler = plfit_set_error_handler(igraph_i_plfit_error_handler_store);
     if (discrete) {
         igraph_i_plfit_prepare_discrete_options(&disc_options, finite_size_correction);
@@ -217,7 +216,6 @@ igraph_error_t igraph_power_law_fit(
         }
     }
     plfit_set_error_handler(plfit_stored_error_handler);
-
 
     IGRAPH_CHECK(igraph_i_handle_plfit_error(retval));
 
@@ -291,7 +289,6 @@ igraph_error_t igraph_plfit_result_calculate_p_value(
 
     finite_size_correction = igraph_i_plfit_should_use_finite_size_correction(model->data);
 
-
     plfit_stored_error_handler = plfit_set_error_handler(igraph_i_plfit_error_handler_store);
     if (model->continuous) {
         igraph_i_plfit_prepare_continuous_options(&cont_options, finite_size_correction);
@@ -311,7 +308,6 @@ igraph_error_t igraph_plfit_result_calculate_p_value(
         );
     }
     plfit_set_error_handler(plfit_stored_error_handler);
-
 
     IGRAPH_CHECK(igraph_i_handle_plfit_error(retval));
 
