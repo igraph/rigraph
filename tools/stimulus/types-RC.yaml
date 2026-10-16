@@ -159,6 +159,18 @@ ERROR:
             IGRAPH_R_CHECK_INT(%I%);
             %C% = (igraph_error_t) REAL(%I%)[0];
 
+EDGE_TYPE_SW_MULTIPLE:
+    # A logical multiple argument, folded into the EDGE_TYPE_SW_LOOPS argument
+    # it depends on, which passes both to C; see types-RR.yaml.
+    CALL: {}
+    CTYPE: ~
+    INCONV:
+        IN: |-
+            IGRAPH_R_CHECK_BOOL(%I%);
+            if (LOGICAL(%I%)[0]) {
+              %C1% = (igraph_edge_type_sw_t) (%C1% | IGRAPH_MULTI_SW);
+            }
+
 BOOLEAN:
     CTYPE: igraph_bool_t
     CALL:

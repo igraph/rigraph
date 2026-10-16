@@ -132,12 +132,27 @@ igraph_simple_interconnected_islands_game:
       GATTR-PARAM: islands_n, islands_size, islands_pin, n_inter
 
 igraph_static_fitness_game:
+    # Upstream replaced loops and multiple with allowed_edge_types
+    # (krlmlr/igraph@0a4030a): the R arguments stay, both logicals.
+    PARAMS: |-
+        OUT GRAPH graph, INTEGER no_of_edges, VECTOR fitness_out,
+        OPTIONAL VECTOR fitness_in, EDGE_TYPE_SW_LOOPS loops=False,
+        EDGE_TYPE_SW_MULTIPLE multiple=False
+    DEPS: multiple ON loops
     R:
       GATTR:
         name: Static fitness model
       GATTR-PARAM: loops, multiple
 
 igraph_static_power_law_game:
+    # Upstream replaced loops and multiple with allowed_edge_types
+    # (krlmlr/igraph@0a4030a): the R arguments stay, both logicals.
+    PARAMS: |-
+        OUT GRAPH graph, INTEGER no_of_nodes, INTEGER no_of_edges,
+        REAL exponent_out, REAL exponent_in=-1,
+        EDGE_TYPE_SW_LOOPS loops=False, EDGE_TYPE_SW_MULTIPLE multiple=False,
+        BOOLEAN finite_size_correction=True
+    DEPS: multiple ON loops
     R:
       GATTR:
         name: Static power law model
