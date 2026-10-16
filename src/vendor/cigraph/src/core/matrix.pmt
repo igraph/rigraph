@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2003-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -938,29 +937,7 @@ BASE* FUNCTION(igraph_matrix, get_ptr)(const TYPE(igraph_matrix) *m,
     return &MATRIX(*m, row, col);
 }
 
-/**
- * \function igraph_matrix_e
- * Extract an element from a matrix (deprecated alias).
- *
- * \deprecated-by igraph_matrix_get 0.10.0
- */
 
-BASE FUNCTION(igraph_matrix, e)(const TYPE(igraph_matrix) *m,
-                                igraph_int_t row, igraph_int_t col) {
-    return FUNCTION(igraph_matrix, get)(m, row, col);
-}
-
-/**
- * \function igraph_matrix_e_ptr
- * Pointer to an element of a matrix.
- *
- * \deprecated-by igraph_matrix_get_ptr 0.10.0
- */
-
-BASE* FUNCTION(igraph_matrix, e_ptr)(const TYPE(igraph_matrix) *m,
-                                     igraph_int_t row, igraph_int_t col) {
-    return FUNCTION(igraph_matrix, get_ptr)(m, row, col);
-}
 
 /**
  * \function igraph_matrix_set

@@ -680,36 +680,6 @@ BASE* FUNCTION(igraph_vector, get_ptr)(const TYPE(igraph_vector) *v, igraph_int_
 
 /**
  * \ingroup vector
- * \function igraph_vector_e
- * \brief Access an element of a vector (deprecated alias).
- *
- * \deprecated-by igraph_vector_get 0.10.0
- */
-
-BASE FUNCTION(igraph_vector, e)(const TYPE(igraph_vector) *v, igraph_int_t pos) {
-    return FUNCTION(igraph_vector, get)(v, pos);
-}
-
-/**
- * \ingroup vector
- * \function igraph_vector_e_ptr
- * \brief Get the address of an element of a vector.
- *
- * \param v The \type igraph_vector_t object.
- * \param pos The position of the element, the position of the first
- *   element is zero.
- * \return Pointer to the desired element.
- * \sa \ref igraph_vector_get() and the \ref VECTOR macro.
- *
- * Time complexity: O(1).
- */
-
-BASE* FUNCTION(igraph_vector, e_ptr)(const TYPE(igraph_vector) *v, igraph_int_t pos) {
-    return FUNCTION(igraph_vector, get_ptr)(v, pos);
-}
-
-/**
- * \ingroup vector
  * \function igraph_vector_set
  * \brief Assignment to an element of a vector.
  *
