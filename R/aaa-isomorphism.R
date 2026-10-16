@@ -123,14 +123,14 @@ isoclass_subgraph_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
-  vids <- as.numeric(vids)
+  vids <- as_igraph_vs(graph, vids)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_isoclass_subgraph,
     graph,
-    vids
+    vids - 1
   )
 
   res
