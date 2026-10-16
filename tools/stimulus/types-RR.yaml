@@ -665,6 +665,17 @@ EDGE_TYPE_SW:
         %I% <- switch_igraph_arg(%I%,
           "simple" = 0L, "loop" = 1L, "loops" = 1L, "multi" = 6L, "multiple" = 6L, "all" = 7L)
 
+EDGE_TYPE_SW_LOOPS:
+    # A logical loops argument, kept where upstream replaced it with an
+    # igraph_edge_type_sw_t allowed_edge_types: TRUE allows self-loops
+    # (IGRAPH_LOOPS_SW), FALSE allows neither self-loops nor multi-edges
+    # (IGRAPH_SIMPLE_SW).
+    DEFAULT:
+        'False': 'FALSE'
+        'True': 'TRUE'
+    INCONV:
+        IN: '%I% <- as.logical(%I%)'
+
 WRITE_GML_SW:
     DEFAULT:
         DEFAULT: c("default", "encode_only_quot")

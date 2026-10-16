@@ -175,7 +175,7 @@ extern SEXP R_igraph_eigen_matrix_symmetric(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_eigenvector_centrality(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_empty(SEXP, SEXP);
 extern SEXP R_igraph_empty_attrs(SEXP, SEXP);
-extern SEXP R_igraph_erdos_renyi_game_gnm(SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_erdos_renyi_game_gnm(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_erdos_renyi_game_gnp(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_establishment_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_eulerian_cycle(SEXP);
@@ -257,6 +257,7 @@ extern SEXP R_igraph_hsbm_list_game(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_hub_and_authority_scores(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_hub_score(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_hypercube(SEXP, SEXP);
+extern SEXP R_igraph_iea_game(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_incident(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_independence_number(SEXP);
 extern SEXP R_igraph_independent_vertex_sets(SEXP, SEXP, SEXP);
@@ -758,7 +759,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_eigenvector_centrality",                         (DL_FUNC) &R_igraph_eigenvector_centrality,                          5},
     {"R_igraph_empty",                                          (DL_FUNC) &R_igraph_empty,                                           2},
     {"R_igraph_empty_attrs",                                    (DL_FUNC) &R_igraph_empty_attrs,                                     2},
-    {"R_igraph_erdos_renyi_game_gnm",                           (DL_FUNC) &R_igraph_erdos_renyi_game_gnm,                            4},
+    {"R_igraph_erdos_renyi_game_gnm",                           (DL_FUNC) &R_igraph_erdos_renyi_game_gnm,                            5},
     {"R_igraph_erdos_renyi_game_gnp",                           (DL_FUNC) &R_igraph_erdos_renyi_game_gnp,                            4},
     {"R_igraph_establishment_game",                             (DL_FUNC) &R_igraph_establishment_game,                              6},
     {"R_igraph_eulerian_cycle",                                 (DL_FUNC) &R_igraph_eulerian_cycle,                                  1},
@@ -840,6 +841,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_hub_and_authority_scores",                       (DL_FUNC) &R_igraph_hub_and_authority_scores,                        4},
     {"R_igraph_hub_score",                                      (DL_FUNC) &R_igraph_hub_score,                                       4},
     {"R_igraph_hypercube",                                      (DL_FUNC) &R_igraph_hypercube,                                       2},
+    {"R_igraph_iea_game",                                       (DL_FUNC) &R_igraph_iea_game,                                        4},
     {"R_igraph_incident",                                       (DL_FUNC) &R_igraph_incident,                                        3},
     {"R_igraph_independence_number",                            (DL_FUNC) &R_igraph_independence_number,                             1},
     {"R_igraph_independent_vertex_sets",                        (DL_FUNC) &R_igraph_independent_vertex_sets,                         3},
