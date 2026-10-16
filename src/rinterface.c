@@ -9850,14 +9850,14 @@ SEXP R_igraph_clique_number(SEXP graph) {
 /*-------------------------------------------/
 / igraph_weighted_cliques                    /
 /-------------------------------------------*/
-SEXP R_igraph_weighted_cliques(SEXP graph, SEXP vertex_weights, SEXP min_weight, SEXP max_weight, SEXP maximal) {
+SEXP R_igraph_weighted_cliques(SEXP graph, SEXP vertex_weights, SEXP maximal, SEXP min_weight, SEXP max_weight) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_t c_vertex_weights;
   igraph_vector_int_list_t c_res;
+  igraph_bool_t c_maximal;
   igraph_real_t c_min_weight;
   igraph_real_t c_max_weight;
-  igraph_bool_t c_maximal;
   SEXP res;
 
   SEXP r_result;
@@ -9868,14 +9868,14 @@ SEXP R_igraph_weighted_cliques(SEXP graph, SEXP vertex_weights, SEXP min_weight,
   }
   IGRAPH_R_CHECK(igraph_vector_int_list_init(&c_res, 0));
   IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_res);
+  IGRAPH_R_CHECK_BOOL(maximal);
+  c_maximal = LOGICAL(maximal)[0];
   IGRAPH_R_CHECK_REAL(min_weight);
   c_min_weight = REAL(min_weight)[0];
   IGRAPH_R_CHECK_REAL(max_weight);
   c_max_weight = REAL(max_weight)[0];
-  IGRAPH_R_CHECK_BOOL(maximal);
-  c_maximal = LOGICAL(maximal)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_weighted_cliques(&c_graph, (Rf_isNull(vertex_weights) ? 0 : &c_vertex_weights), &c_res, c_min_weight, c_max_weight, c_maximal));
+  IGRAPH_R_CHECK(igraph_weighted_cliques(&c_graph, (Rf_isNull(vertex_weights) ? 0 : &c_vertex_weights), &c_res, c_maximal, c_min_weight, c_max_weight));
 
                                         /* Convert output */
   PROTECT(res=Ry_igraph_vector_int_list_to_SEXPp1(&c_res));
