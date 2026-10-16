@@ -51,6 +51,10 @@ typedef enum { IGRAPH_NO_LOOPS = 0, IGRAPH_LOOPS = 1, IGRAPH_LOOPS_TWICE = 1, IG
  * defined to <code>-1</code>.
  */
 #define IGRAPH_UNLIMITED (-1)
+/* Note to maintainers: IGRAPH_UNLIMITED is intended to support readability
+ * when *negative* parameter values indicate "no limit". Do not test
+ * directly against IGRAPH_UNLIMITED in implementations, test for negative
+ * values instead. */
 
 /* These constants are meant to be used for sake of readability */
 enum { IGRAPH_NO_MULTIPLE = 0, IGRAPH_MULTIPLE = 1 };
