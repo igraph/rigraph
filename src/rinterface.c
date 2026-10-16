@@ -1901,43 +1901,6 @@ SEXP R_igraph_turan(SEXP n, SEXP r) {
 }
 
 /*-------------------------------------------/
-/ igraph_weighted_sparsemat                  /
-/-------------------------------------------*/
-SEXP R_igraph_weighted_sparsemat(SEXP A, SEXP directed, SEXP attr, SEXP loops) {
-                                        /* Declarations */
-  igraph_t c_graph;
-  igraph_sparsemat_t c_A;
-  igraph_bool_t c_directed;
-  const char* c_attr;
-  igraph_bool_t c_loops;
-  SEXP graph;
-
-  SEXP r_result;
-                                        /* Convert input */
-  Rz_SEXP_to_sparsemat(A, &c_A);
-  IGRAPH_FINALLY(igraph_sparsemat_destroy, &c_A);
-  IGRAPH_R_CHECK_BOOL(directed);
-  c_directed = LOGICAL(directed)[0];
-  c_attr = Rf_translateCharUTF8(STRING_ELT(attr, 0));
-  IGRAPH_R_CHECK_BOOL(loops);
-  c_loops = LOGICAL(loops)[0];
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_weighted_sparsemat(&c_graph, &c_A, c_directed, c_attr, c_loops));
-
-                                        /* Convert output */
-  IGRAPH_FINALLY(igraph_destroy, &c_graph);
-  PROTECT(graph=Ry_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
-  IGRAPH_FINALLY_CLEAN(1);
-  igraph_sparsemat_destroy(&c_A);
-  IGRAPH_FINALLY_CLEAN(1);
-  r_result = graph;
-
-  UNPROTECT(1);
-  return(r_result);
-}
-
-/*-------------------------------------------/
 / igraph_barabasi_game                       /
 /-------------------------------------------*/
 SEXP R_igraph_barabasi_game(SEXP n, SEXP power, SEXP m, SEXP outseq, SEXP outpref, SEXP A, SEXP directed, SEXP algo, SEXP start_from) {
