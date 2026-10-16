@@ -826,6 +826,8 @@ igraph_error_t igraph_get_stochastic(
     IGRAPH_VECTOR_INIT_FINALLY(&sums, no_of_nodes);
 
     if (directed) {
+        /* Directed */
+
         IGRAPH_CHECK(igraph_strength(
             graph, &sums, igraph_vss_all(),
             column_wise ? IGRAPH_IN : IGRAPH_OUT,
@@ -839,6 +841,8 @@ igraph_error_t igraph_get_stochastic(
             MATRIX(*res, from, to) += WEIGHT_OF(i) / sum;
         }
     } else {
+        /* Undirected */
+
         IGRAPH_CHECK(igraph_strength(
             graph, &sums, igraph_vss_all(), IGRAPH_ALL,
             /* loops = */ true, weights

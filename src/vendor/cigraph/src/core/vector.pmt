@@ -3401,6 +3401,17 @@ igraph_error_t FUNCTION(igraph_vector, fprint)(const TYPE(igraph_vector) *v, FIL
 
 #endif /* defined(OUT_FORMAT) || defined(FPRINTFUNC) */
 
+/**
+ * \function igraph_vector_index
+ * \brief Extract elements from a vector at specific indices.
+ *
+ * \param v the vector to extract elements from
+ * \param newv the result vector
+ * \param idx vector containing the indices of the elements to extract
+ *
+ * \sa \ref igraph_vector_index_in_place for the in-place variant
+ */
+
 igraph_error_t FUNCTION(igraph_vector, index)(const TYPE(igraph_vector) *v,
                                    TYPE(igraph_vector) *newv,
                                    const igraph_vector_int_t *idx) {
@@ -3415,6 +3426,17 @@ igraph_error_t FUNCTION(igraph_vector, index)(const TYPE(igraph_vector) *v,
 
     return IGRAPH_SUCCESS;
 }
+
+/**
+ * \function igraph_vector_index_in_place
+ * \brief Extract elements from a vector at specific indices in-place.
+ *
+ * \param v the vector to extract elements from. This will be modified in-place.
+ * \param idx vector containing the indices of the elements to extract
+ *
+ * \sa \ref igraph_vector_index for a function that does not modify the original
+ *     vector
+ */
 
 igraph_error_t FUNCTION(igraph_vector, index_in_place)(TYPE(igraph_vector) *v,
                                        const igraph_vector_int_t *idx) {

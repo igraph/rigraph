@@ -702,7 +702,7 @@ static igraph_error_t igraph_i_decompose_weak(const igraph_t *graph,
         /* vids_old2new does not have to be cleaned up here; since we are doing
          * weak decomposition, each vertex will appear in only one of the
          * connected components so we won't ever touch an item in vids_old2new
-         * if it was already set to a non-negative value in a previous component */
+         * if it was already set to a non-zero value in a previous component */
 
     } /* for actstart++ */
 

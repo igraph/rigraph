@@ -90,8 +90,10 @@ igraph_error_t igraph_distances_cutoff(
         igraph_real_t cutoff) {
 
     if (weights == NULL) {
+        /* Unweighted distances */
         return igraph_i_distances_unweighted_cutoff(graph, res, from, to, mode, cutoff);
     } else {
+        /* Dijkstra's algorithm; will return an error if there are negative weights */
         return igraph_distances_dijkstra_cutoff(graph, res, from, to, weights, mode, cutoff);
     }
 }
@@ -424,8 +426,10 @@ igraph_error_t igraph_get_shortest_paths(
     if (weights == NULL) {
         return igraph_i_get_shortest_paths_unweighted(graph, vertices, edges, from, to, mode, parents, inbound_edges);
     } else if (!negative_weights) {
+        /* Dijkstra's algorithm */
         return igraph_i_get_shortest_paths_dijkstra(graph, vertices, edges, from, to, weights, mode, parents, inbound_edges);
     } else {
+        /* Negative weights; will use Bellman-Ford algorithm */
         return igraph_i_get_shortest_paths_bellman_ford(graph, vertices, edges, from, to, weights, mode, parents, inbound_edges);
     }
 }

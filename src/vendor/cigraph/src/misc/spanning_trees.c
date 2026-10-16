@@ -296,6 +296,50 @@ static void merge_comp(igraph_vector_int_t *comp, igraph_int_t i, igraph_int_t j
     VECTOR(*comp)[ci] = cj;
 }
 
+/**
+ * \ingroup structural
+ * \function igraph_i_minimum_spanning_tree_kruskal
+ * \brief A minimum spanning tree of a weighted graph using Kruskal's method.
+ *
+ * Finds a spanning tree or spanning forest for which the sum of edge
+ * weights is the smallest. This function uses Kruskal's method for carrying
+ * out the computation.
+ *
+ * </para><para>
+ * Directed graphs are treated as undirected for this computation.
+ *
+ * </para><para>
+ * Reference:
+ *
+ * </para><para>
+ * Kruskal, J. B.:
+ * On the shortest spanning subtree of a graph and the traveling salesman problem,
+ * Proc. Amer. Math. Soc. 7 (1956), 48-50
+ * https://doi.org/10.1090%2FS0002-9939-1956-0078686-7
+ *
+ * \param graph The graph object. Edge directions will be ignored.
+ * \param res An initialized vector, the IDs of the edges that constitute
+ *        a spanning tree will be returned here. Use
+ *        \ref igraph_subgraph_from_edges() to extract the spanning tree as
+ *        a separate graph object.
+ * \param weights A vector containing the weights of the edges in the order
+ *        of edge IDs. Weights must not be NaN.
+ * \return Error code:
+ *         \c IGRAPH_ENOMEM, not enough memory.
+ *         \c IGRAPH_EINVAL, length of weight vector does not
+ *           match number of edges, or NaN in weights.
+ *
+ * Time complexity: O(|E| log |E|),
+ * |V| is the number of vertices,
+ * |E| the number of edges in the
+ * graph.
+ *
+ * \sa \ref igraph_minimum_spanning_tree() for a common interface to all
+ * minimum spanning tree algorithms.
+ *
+ * \example examples/simple/igraph_minimum_spanning_tree.c
+ */
+
 static igraph_error_t igraph_i_minimum_spanning_tree_kruskal(
         const igraph_t *graph,
         igraph_vector_int_t *res,
@@ -344,6 +388,7 @@ static igraph_error_t igraph_i_minimum_spanning_tree_kruskal(
         }
 
         if (tree_edge_count == no_of_nodes - 1) {
+            /* We have enough edges for a tree. */
             break;
         }
 

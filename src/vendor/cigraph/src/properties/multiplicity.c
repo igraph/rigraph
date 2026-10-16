@@ -136,6 +136,7 @@ early_exit:
      * asked us to ignore edge directions, we need to look for mutual edge pairs
      * and return false if we find one. */
     if (*res && need_to_check_mutual) {
+        /* If the graph is undirected, we also check for mutual edges. */
         igraph_bool_t has_mutual;
         IGRAPH_CHECK(igraph_has_mutual(graph, &has_mutual, false));
         if (has_mutual) {

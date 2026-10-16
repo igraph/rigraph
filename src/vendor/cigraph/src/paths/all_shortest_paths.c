@@ -105,10 +105,12 @@ igraph_error_t igraph_get_all_shortest_paths(
         igraph_neimode_t mode) {
 
     if (weights == NULL) {
+        /* Unweighted version */
         return igraph_i_get_all_shortest_paths_unweighted(
             graph, vertices, edges, nrgeo, from, to, mode
         );
     } else {
+        /* Weighted version */
         return igraph_get_all_shortest_paths_dijkstra(
             graph, vertices, edges, nrgeo, from, to, weights, mode
         );

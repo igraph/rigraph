@@ -283,6 +283,10 @@ IGRAPH_EXPORT igraph_error_t igraph_attribute_combination_query(const igraph_att
 #undef BASE_ATTRIBUTE_RECORD
 #undef ATTRIBUTE_RECORD_LIST
 
+/* -------------------------------------------------- */
+/* Attribute handler interface                        */
+/* -------------------------------------------------- */
+
 /**
  * \struct igraph_attribute_table_t
  * \brief Table of functions to perform operations on attributes.
