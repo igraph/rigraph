@@ -581,7 +581,7 @@ community_infomap_impl <- function(
   v_weights = NULL,
   nb_trials = 10,
   is_regularized = FALSE,
-  regularization_strength = 0
+  regularization_strength = 1
 ) {
   # Argument checks
   ensure_igraph(graph)
