@@ -1,4 +1,3 @@
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    igraph library.
    Copyright (C) 2007-2020 The igraph development team
@@ -125,8 +124,8 @@ static igraph_error_t igraph_i_multilevel_simplify_multiple(igraph_t *graph, igr
         last_from = links[i].from;
         last_to = links[i].to;
 
-        igraph_vector_int_push_back(&edges, last_from);
-        igraph_vector_int_push_back(&edges, last_to);
+        IGRAPH_CHECK(igraph_vector_int_push_back(&edges, last_from));
+        IGRAPH_CHECK(igraph_vector_int_push_back(&edges, last_to));
 
         l++;
 
