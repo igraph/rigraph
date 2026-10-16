@@ -6257,7 +6257,7 @@
     Condition
       Warning in `triad_census_impl()`:
       Triad census called on an undirected graph. All connections will be treated as mutual.
-      Source: misc/motifs.c:1151
+      Source: misc/motifs.c:1156
     Output
        [1] 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0
 
