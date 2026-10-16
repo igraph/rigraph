@@ -1,4 +1,3 @@
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    igraph library.
    Copyright (C) 2003-2020  The igraph development team
@@ -48,13 +47,11 @@ igraph_error_t igraph_layout_random(const igraph_t *graph, igraph_matrix_t *res)
 
     IGRAPH_CHECK(igraph_matrix_resize(res, vcount, 2));
 
-
     for (igraph_int_t j = 0; j < 2; j++) {
         for (igraph_int_t i = 0; i < vcount; i++) {
             MATRIX(*res, i, j) = RNG_UNIF(-1, 1);
         }
     }
-
 
     return IGRAPH_SUCCESS;
 }
@@ -81,13 +78,11 @@ igraph_error_t igraph_layout_random_3d(const igraph_t *graph, igraph_matrix_t *r
 
     IGRAPH_CHECK(igraph_matrix_resize(res, vcount, 3));
 
-
     for (igraph_int_t j = 0; j < 3; j++) {
         for (igraph_int_t i = 0; i < vcount; i++) {
             MATRIX(*res, i, j) = RNG_UNIF(-1, 1);
         }
     }
-
 
     return IGRAPH_SUCCESS;
 }

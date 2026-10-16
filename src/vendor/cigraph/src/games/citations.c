@@ -1,4 +1,3 @@
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    igraph library.
    Copyright (C) 2003-2021 The igraph development team
@@ -159,7 +158,6 @@ igraph_error_t igraph_lastcit_game(igraph_t *graph,
     index[0] = 0;
     index[1] = 0;
 
-
     for (igraph_int_t i = 1; i < no_of_nodes; i++) {
 
         /* Add new edges */
@@ -197,7 +195,6 @@ igraph_error_t igraph_lastcit_game(igraph_t *graph,
         }
 
     }
-
 
     igraph_psumtree_destroy(&sumtree);
     IGRAPH_FREE(index);
@@ -297,7 +294,6 @@ igraph_error_t igraph_cited_type_game(igraph_t *graph, igraph_int_t nodes,
     }
     sum = VECTOR(cumsum)[1] = nnval;
 
-
     for (i = 1; i < nodes; i++) {
         for (j = 0; j < edges_per_step; j++) {
             igraph_int_t to;
@@ -320,7 +316,6 @@ igraph_error_t igraph_cited_type_game(igraph_t *graph, igraph_int_t nodes,
         sum += nnval;
         igraph_vector_push_back(&cumsum, sum); /* reserved */
     }
-
 
     igraph_vector_destroy(&cumsum);
     IGRAPH_FINALLY_CLEAN(1);
@@ -464,7 +459,6 @@ igraph_error_t igraph_citing_cited_type_game(igraph_t *graph, igraph_int_t nodes
         VECTOR(sums)[i] = MATRIX(*pref, i, type);
     }
 
-
     for (i = 1; i < nodes; i++) {
         igraph_int_t type = VECTOR(*types)[i];
         igraph_real_t sum = VECTOR(sums)[type];
@@ -490,7 +484,6 @@ igraph_error_t igraph_citing_cited_type_game(igraph_t *graph, igraph_int_t nodes
             VECTOR(sums)[j] += MATRIX(*pref, j, type);
         }
     }
-
 
     igraph_i_citing_cited_type_game_free(&str);
     IGRAPH_FINALLY_CLEAN(1);

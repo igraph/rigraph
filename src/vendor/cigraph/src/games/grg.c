@@ -1,4 +1,3 @@
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    igraph library.
    Copyright (C) 2003-2021 The igraph development team
@@ -90,12 +89,10 @@ igraph_error_t igraph_grg_game(igraph_t *graph, igraph_int_t nodes,
         IGRAPH_VECTOR_INIT_FINALLY(yy, nodes);
     }
 
-
     for (i = 0; i < nodes; i++) {
         VECTOR(*xx)[i] = RNG_UNIF01();
         VECTOR(*yy)[i] = RNG_UNIF01();
     }
-
 
     igraph_vector_sort(xx);
 

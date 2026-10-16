@@ -1,4 +1,3 @@
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    igraph library.
    Copyright (C) 2003-2021 The igraph development team
@@ -173,7 +172,6 @@ igraph_error_t igraph_recent_degree_game(igraph_t *graph, igraph_int_t nodes,
             IGRAPH_CHECK(igraph_psumtree_update(&sumtree, i, zero_appeal));
         }
     }
-
 
     igraph_dqueue_int_destroy(&history);
     igraph_psumtree_destroy(&sumtree);
@@ -369,7 +367,6 @@ igraph_error_t igraph_recent_degree_aging_game(igraph_t *graph,
             ));
         }
     }
-
 
     igraph_dqueue_int_destroy(&history);
     igraph_vector_destroy(&degree);
