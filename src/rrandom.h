@@ -24,5 +24,8 @@
 #define IGRAPH_RRANDOM_H
 
 void igraph_rng_R_install(void);
+void igraph_rng_R_end(void);
+int igraph_rng_R_loaded(void);
+void igraph_rng_R_drop(void);
 
 #endif

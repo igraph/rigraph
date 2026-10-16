@@ -1026,11 +1026,11 @@
       simple_interconnected_islands_game_impl(islands_n = 2, islands_size = 3,
         islands_pin = 0.5, n_inter = 1)
     Output
-      IGRAPH U--- 6 5 -- Interconnected islands model
+      IGRAPH U--- 6 6 -- Interconnected islands model
       + attr: name (g/c), islands_n (g/n), islands_size (g/n), islands_pin
       | (g/n), n_inter (g/n)
       + edges:
-      [1] 1--2 1--3 2--3 3--6 5--6
+      [1] 1--2 1--3 2--3 2--6 4--5 4--6
 
 # simple_interconnected_islands_game_impl errors
 
@@ -1307,7 +1307,7 @@
     Condition
       Warning in `dot_product_game_impl()`:
       Greater than 1 connection probability in dot-product graph.
-      Source: games/dotproduct.c:90
+      Source: games/dotproduct.c:89
     Output
       IGRAPH U--- 2 1 -- 
       + edge:
@@ -1320,7 +1320,7 @@
     Condition
       Warning in `dot_product_game_impl()`:
       Greater than 1 connection probability in dot-product graph.
-      Source: games/dotproduct.c:90
+      Source: games/dotproduct.c:89
     Output
       IGRAPH D--- 2 2 -- 
       + edges:
@@ -5121,9 +5121,9 @@
       layout_gem_impl(graph = g, res = matrix(0, nrow = 3, ncol = 2))
     Output
                 [,1]      [,2]
-      [1,] 200.18284 -69.23950
-      [2,]  86.00346  64.12806
-      [3,]  66.22930 -92.94294
+      [1,] 198.00782 -89.56102
+      [2,]  97.48628  69.81047
+      [3,]  62.46741 -81.07358
 
 ---
 
@@ -5131,10 +5131,10 @@
       layout_gem_impl(graph = g, res = matrix(0, nrow = 3, ncol = 2), use_seed = TRUE,
       maxiter = 10, temp_max = 2, temp_min = 0.1, temp_init = 1)
     Output
-                 [,1]       [,2]
-      [1,]  1.0114521 -0.1206363
-      [2,] -0.2178589  2.9621162
-      [3,] -0.7089555 -3.8896500
+                   [,1]         [,2]
+      [1,]  2.957479289 -2.693158072
+      [2,] -2.952570979  2.698577710
+      [3,] -0.008515571 -0.009237893
 
 # layout_gem_impl errors
 
@@ -5149,10 +5149,10 @@
     Code
       layout_davidson_harel_impl(graph = g, res = matrix(0, nrow = 3, ncol = 2))
     Output
-               [,1]      [,2]
-      [1,] 1.152116 0.9424808
-      [2,] 2.474361 2.5195497
-      [3,] 3.849187 4.0402661
+               [,1]       [,2]
+      [1,] 4.585389  0.5320103
+      [2,] 3.619767 -1.3038597
+      [3,] 2.715926 -3.1387678
 
 ---
 
@@ -5163,9 +5163,9 @@
       weight_node_edge_dist = 0.3)
     Output
                 [,1]      [,2]
-      [1,] -6.609493 -2.155221
-      [2,] -8.660255 -3.797365
-      [3,] -6.485087 -5.224752
+      [1,] 0.7466363 -2.423994
+      [2,] 2.9971183 -2.558975
+      [3,] 5.1781802 -3.072543
 
 # layout_davidson_harel_impl errors
 
@@ -6250,7 +6250,7 @@
     Condition
       Warning in `triad_census_impl()`:
       Triad census called on an undirected graph. All connections will be treated as mutual.
-      Source: misc/motifs.c:1157
+      Source: misc/motifs.c:1151
     Output
        [1] 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0
 

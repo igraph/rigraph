@@ -36,6 +36,7 @@
 #include "cigraph/src/graph/internal.h"
 
 #include "uuid/uuid.h"
+#include "rrandom.h"
 
 #define IGRAPH_I_DESTROY IGRAPH_I_ATTRIBUTE_DESTROY
 
@@ -119,6 +120,7 @@ igraph_error_t Rz_SEXP_to_attr_comb(SEXP input, igraph_attribute_combination_t *
         Rx_igraph_set_in_r_check(true); \
         igraph_error_type_t __c = func; \
         Rx_igraph_set_in_r_check(false); \
+        igraph_rng_R_end(); \
         Rx_igraph_warning(); \
         if (__c == IGRAPH_INTERRUPTED) { Rx_igraph_interrupt(); } \
         else if (__c != IGRAPH_SUCCESS) { Rx_igraph_error(); } \
