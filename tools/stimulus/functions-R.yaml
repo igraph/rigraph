@@ -56,7 +56,9 @@ igraph_circulant:
         name: Circulant graph
       GATTR-PARAM: shifts
 
-igraph_lcf_vector:
+igraph_lcf:
+    # Upstream renamed igraph_lcf_vector() to igraph_lcf(); the R name stays.
+    NAME-R: lcf_vector
     R:
       GATTR:
         name: LCF graph
