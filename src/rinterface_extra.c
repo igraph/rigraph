@@ -2010,7 +2010,7 @@ igraph_error_t Rx_igraph_attribute_combine_vertices(const igraph_t *graph,
 
   /* Create the TODO list first */
   PROTECT(names=GET_NAMES(val)); px++;
-  TODO=igraph_Calloc(valno, igraph_integer_t);
+  TODO=IGRAPH_CALLOC(valno, igraph_integer_t);
   if (!TODO) {
     UNPROTECT(px);
     IGRAPH_ERROR("Cannot combine edge attributes",
@@ -2185,7 +2185,7 @@ igraph_error_t Rx_igraph_attribute_combine_edges(const igraph_t *graph,
                  IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_free, TODO);
-  funcs=igraph_Calloc(ealno, igraph_function_pointer_t);
+  funcs=IGRAPH_CALLOC(ealno, igraph_function_pointer_t);
   if (!funcs) {
     UNPROTECT(px);
     IGRAPH_ERROR("Cannot combine edge attributes",
