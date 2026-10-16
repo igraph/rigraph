@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2003-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -43,20 +42,6 @@ static igraph_error_t igraph_i_connected_components_strong(
     const igraph_t *graph, igraph_vector_int_t *membership,
     igraph_vector_int_t *csize, igraph_int_t *no
 );
-
-/**
- * \ingroup structural
- * \function igraph_clusters
- * \brief Calculates the (weakly or strongly) connected components in a graph (deprecated alias).
- *
- * \deprecated-by igraph_connected_components 0.10
- */
-
-igraph_error_t igraph_clusters(const igraph_t *graph, igraph_vector_int_t *membership,
-                    igraph_vector_int_t *csize, igraph_int_t *no,
-                    igraph_connectedness_t mode) {
-    return igraph_connected_components(graph, membership, csize, no, mode);
-}
 
 /**
  * \ingroup structural

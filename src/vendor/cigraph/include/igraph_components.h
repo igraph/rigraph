@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -39,10 +38,6 @@ __BEGIN_DECLS
 /* Components                                         */
 /* -------------------------------------------------- */
 
-/* Deprecated alias to igraph_connected_components; will be removed in 0.11 */
-IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_clusters(const igraph_t *graph, igraph_vector_int_t *membership,
-                                  igraph_vector_int_t *csize, igraph_int_t *no,
-                                  igraph_connectedness_t mode);
 IGRAPH_EXPORT igraph_error_t igraph_connected_components(const igraph_t *graph, igraph_vector_int_t *membership,
                                   igraph_vector_int_t *csize, igraph_int_t *no,
                                   igraph_connectedness_t mode);
