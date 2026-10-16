@@ -2486,7 +2486,7 @@ void checkInterruptFn(void *dummy) {
 }
 
 /* HELPER: internal C; must use IGRAPH_CHECK */
-igraph_error_t Rx_igraph_interrupt_handler(void *data) {
+igraph_bool_t Rx_igraph_interrupt_handler(void) {
   /* We need to call R_CheckUserInterrupt() regularly to enable interruptions.
    * However, if an interruption is pending, R_CheckUserInterrupt() will
    * longjmp back to the top level so we cannot clean up ourselves by calling
@@ -2502,9 +2502,9 @@ igraph_error_t Rx_igraph_interrupt_handler(void *data) {
    */
   if (R_ToplevelExec(checkInterruptFn, NULL) == FALSE) {
     IGRAPH_FINALLY_FREE();
-    return IGRAPH_INTERRUPTED;
+    return true;
   }
-  return IGRAPH_SUCCESS;
+  return false;
 }
 
 /* The namespace of this package,
