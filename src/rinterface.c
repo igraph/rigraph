@@ -12412,11 +12412,12 @@ SEXP R_igraph_community_optimal_modularity(SEXP graph, SEXP weights) {
 /*-------------------------------------------/
 / igraph_community_leiden                    /
 /-------------------------------------------*/
-SEXP R_igraph_community_leiden(SEXP graph, SEXP weights, SEXP vertex_weights, SEXP resolution, SEXP beta, SEXP start, SEXP n_iterations, SEXP membership) {
+SEXP R_igraph_community_leiden(SEXP graph, SEXP weights, SEXP vertex_out_weights, SEXP resolution, SEXP beta, SEXP start, SEXP n_iterations, SEXP membership) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_t c_weights;
-  igraph_vector_t c_vertex_weights;
+  igraph_vector_t c_vertex_out_weights;
+
   igraph_real_t c_resolution;
   igraph_real_t c_beta;
   igraph_bool_t c_start;
@@ -12433,8 +12434,8 @@ SEXP R_igraph_community_leiden(SEXP graph, SEXP weights, SEXP vertex_weights, SE
   if (!Rf_isNull(weights)) {
     Rz_SEXP_to_vector(weights, &c_weights);
   }
-  if (!Rf_isNull(vertex_weights)) {
-    Rz_SEXP_to_vector(vertex_weights, &c_vertex_weights);
+  if (!Rf_isNull(vertex_out_weights)) {
+    Rz_SEXP_to_vector(vertex_out_weights, &c_vertex_out_weights);
   }
   IGRAPH_R_CHECK_REAL(resolution);
   c_resolution = REAL(resolution)[0];
@@ -12453,7 +12454,7 @@ SEXP R_igraph_community_leiden(SEXP graph, SEXP weights, SEXP vertex_weights, SE
   }
   c_nb_clusters=0;
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_community_leiden(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), (Rf_isNull(vertex_weights) ? 0 : &c_vertex_weights), c_resolution, c_beta, c_start, c_n_iterations, &c_membership, &c_nb_clusters, &c_quality));
+  IGRAPH_R_CHECK(igraph_community_leiden(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), (Rf_isNull(vertex_out_weights) ? 0 : &c_vertex_out_weights), 0, c_resolution, c_beta, c_start, c_n_iterations, &c_membership, &c_nb_clusters, &c_quality));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(3));

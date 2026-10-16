@@ -403,7 +403,7 @@ community_leiden_impl <- function(
   vertex_weights = NULL,
   resolution,
   beta = 0.01,
-  start,
+  start = FALSE,
   n_iterations = 2,
   membership = NULL
 ) {
