@@ -321,6 +321,7 @@ isomorphism:
     - igraph_isoclass_subgraph
   isomorphism-simple-interface:
     - igraph_automorphism_group
+    - igraph_automorphism_group_bliss
     - igraph_canonical_permutation
     - igraph_count_automorphisms
     - igraph_count_automorphisms_bliss

@@ -409,6 +409,39 @@ igraph_error_t igraph_count_automorphisms_bliss(
 
 /**
  * \function igraph_automorphism_group
+ * \brief Automorphism group generators of a graph.
+ *
+ * This function computes the generators of the automorphism group of a graph.
+ * The generator set may not be minimal and may depend on the specific parameters
+ * of the algorithm under the hood. The generators are permutations represented
+ * using zero-based indexing.
+ *
+ * </para><para>
+ * The current implementation uses BLISS behind the scenes and the result may
+ * be dependent on the splitting heuristics. Use \ref igraph_automorphism_group_bliss()
+ * if you want to fine-tune the splitting heuristics.
+ *
+ * \param graph The input graph. Multiple edges between the same nodes
+ *   are not supported and will cause an incorrect result to be returned.
+ * \param colors An optional vertex color vector for the graph. Supply a
+ *   null pointer is the graph is not colored.
+ * \param generators Must be an initialized interger vector list.
+ *   The generators of the automorphism group will be stored here.
+ * \return Error code.
+ *
+ * Time complexity: exponential, in practice it is fast for many graphs.
+ */
+igraph_error_t igraph_automorphism_group(
+    const igraph_t *graph, const igraph_vector_int_t *colors,
+    igraph_vector_int_list_t *generators
+) {
+    return igraph_automorphism_group_bliss(
+        graph, colors, generators, IGRAPH_BLISS_FL, NULL
+    );
+}
+
+/**
+ * \function igraph_automorphism_group_bliss
  * \brief Automorphism group generators using Bliss.
  *
  * The generators of the automorphism group of a graph are computed
@@ -431,9 +464,11 @@ igraph_error_t igraph_count_automorphisms_bliss(
  *
  * Time complexity: exponential, in practice it is fast for many graphs.
  */
-igraph_error_t igraph_automorphism_group(
-    const igraph_t *graph, const igraph_vector_int_t *colors, igraph_vector_int_list_t *generators,
-    igraph_bliss_sh_t sh, igraph_bliss_info_t *info) {
+igraph_error_t igraph_automorphism_group_bliss(
+    const igraph_t *graph, const igraph_vector_int_t *colors,
+    igraph_vector_int_list_t *generators, igraph_bliss_sh_t sh,
+    igraph_bliss_info_t *info
+) {
     IGRAPH_HANDLE_EXCEPTIONS(
         AbstractGraph *g = bliss_from_igraph(graph);
         IGRAPH_FINALLY(bliss_free_graph, g);

@@ -16828,9 +16828,9 @@ SEXP R_igraph_count_automorphisms_bliss(SEXP graph, SEXP colors, SEXP sh) {
 }
 
 /*-------------------------------------------/
-/ igraph_automorphism_group                  /
+/ igraph_automorphism_group_bliss            /
 /-------------------------------------------*/
-SEXP R_igraph_automorphism_group(SEXP graph, SEXP colors, SEXP sh) {
+SEXP R_igraph_automorphism_group_bliss(SEXP graph, SEXP colors, SEXP sh) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_int_t c_colors;
@@ -16853,7 +16853,7 @@ SEXP R_igraph_automorphism_group(SEXP graph, SEXP colors, SEXP sh) {
   IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_generators);
   c_sh = (igraph_bliss_sh_t) Rf_asInteger(sh);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_automorphism_group(&c_graph, (Rf_isNull(colors) ? 0 : &c_colors), &c_generators, c_sh, &c_info));
+  IGRAPH_R_CHECK(igraph_automorphism_group_bliss(&c_graph, (Rf_isNull(colors) ? 0 : &c_colors), &c_generators, c_sh, &c_info));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));

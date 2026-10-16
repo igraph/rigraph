@@ -2461,6 +2461,11 @@ igraph_count_automorphisms_bliss:
 
 igraph_automorphism_group:
     PARAMS: |-
+        GRAPH graph, OPTIONAL VERTEX_COLOR colors, OUT VERTEXSET_LIST generators
+    DEPS: colors ON graph, generators ON graph
+
+igraph_automorphism_group_bliss:
+    PARAMS: |-
         GRAPH graph, OPTIONAL VERTEX_COLOR colors, PRIMARY OUT VERTEXSET_LIST generators,
         BLISSSH sh="fm", OUT BLISSINFO info
     DEPS: colors ON graph, generators ON graph

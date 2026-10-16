@@ -293,6 +293,10 @@ IGRAPH_EXPORT igraph_error_t igraph_count_automorphisms_bliss(
 
 IGRAPH_EXPORT igraph_error_t igraph_automorphism_group(
     const igraph_t *graph, const igraph_vector_int_t *colors,
+    igraph_vector_int_list_t *generators
+);
+IGRAPH_EXPORT igraph_error_t igraph_automorphism_group_bliss(
+    const igraph_t *graph, const igraph_vector_int_t *colors,
     igraph_vector_int_list_t *generators, igraph_bliss_sh_t sh,
     igraph_bliss_info_t *info
 );
