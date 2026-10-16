@@ -2,6 +2,25 @@
 # styler: off
 # jarl-ignore-file unused_function: irrelevant for _impl functions
 
+beta_weighted_gabriel_graph_impl <- function(
+  points,
+  max_beta = -1
+) {
+  # Argument checks
+  points[] <- as.numeric(points)
+  max_beta <- as.numeric(max_beta)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_beta_weighted_gabriel_graph,
+    points,
+    max_beta
+  )
+
+  res
+}
+
 bipartite_iea_game_impl <- function(
   n1,
   n2,
@@ -38,6 +57,57 @@ bipartite_iea_game_impl <- function(
   res
 }
 
+circle_beta_skeleton_impl <- function(
+  points,
+  beta = 1
+) {
+  # Argument checks
+  points[] <- as.numeric(points)
+  beta <- as.numeric(beta)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_circle_beta_skeleton,
+    points,
+    beta
+  )
+
+  res
+}
+
+delaunay_graph_impl <- function(
+  points
+) {
+  # Argument checks
+  points[] <- as.numeric(points)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_delaunay_graph,
+    points
+  )
+
+  res
+}
+
+gabriel_graph_impl <- function(
+  points
+) {
+  # Argument checks
+  points[] <- as.numeric(points)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_gabriel_graph,
+    points
+  )
+
+  res
+}
+
 iea_game_impl <- function(
   n,
   m,
@@ -58,6 +128,89 @@ iea_game_impl <- function(
     m,
     directed,
     loops
+  )
+
+  res
+}
+
+lune_beta_skeleton_impl <- function(
+  points,
+  beta = 1
+) {
+  # Argument checks
+  points[] <- as.numeric(points)
+  beta <- as.numeric(beta)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_lune_beta_skeleton,
+    points,
+    beta
+  )
+
+  res
+}
+
+nearest_neighbor_graph_impl <- function(
+  points,
+  metric,
+  neighbors,
+  cutoff,
+  directed
+) {
+  # Argument checks
+  points[] <- as.numeric(points)
+  neighbors <- as.numeric(neighbors)
+  cutoff <- as.numeric(cutoff)
+  directed <- as.logical(directed)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_nearest_neighbor_graph,
+    points,
+    metric,
+    neighbors,
+    cutoff,
+    directed
+  )
+
+  res
+}
+
+relative_neighborhood_graph_impl <- function(
+  points
+) {
+  # Argument checks
+  points[] <- as.numeric(points)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_relative_neighborhood_graph,
+    points
+  )
+
+  res
+}
+
+spatial_edge_lengths_impl <- function(
+  graph,
+  points,
+  METRIC
+) {
+  # Argument checks
+  ensure_igraph(graph)
+  points[] <- as.numeric(points)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_spatial_edge_lengths,
+    graph,
+    points,
+    METRIC
   )
 
   res
