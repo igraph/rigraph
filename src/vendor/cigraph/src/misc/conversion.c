@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -902,37 +901,6 @@ igraph_error_t igraph_get_stochastic_sparse(
     }
 
     return IGRAPH_SUCCESS;
-}
-
-
-/**
- * \function igraph_get_stochastic_sparsemat
- * \brief Stochastic adjacency matrix of a graph (deprecated).
- *
- * This function is deprecated in favour of \ref igraph_get_stochastic_sparse(),
- * but does not work in an identical way. This function takes an \em uninitialized
- * \c igraph_sparsemat_t while \ref igraph_get_stochastic_sparse() takes
- * an already initialized one.
- *
- * \param graph The input graph.
- * \param res Pointer to an \em uninitialized sparse matrix, the
- *    result is stored here. The matrix will be resized as needed.
- * \param column_wise Whether to normalize column-wise. For undirected
- *    graphs this argument does not have any effect.
- * \return Error code.
- *
- * \deprecated-by igraph_get_stochastic_sparse 0.10.0
- */
-
-igraph_error_t igraph_get_stochastic_sparsemat(const igraph_t *graph,
-                                               igraph_sparsemat_t *res,
-                                               igraph_bool_t column_wise) {
-
-    igraph_int_t no_of_nodes = igraph_vcount(graph);
-    igraph_int_t no_of_edges = igraph_ecount(graph);
-    igraph_int_t nzmax = igraph_is_directed(graph) ? no_of_edges : 2*no_of_edges;
-    IGRAPH_CHECK(igraph_sparsemat_init(res, no_of_nodes, no_of_nodes, nzmax));
-    return igraph_get_stochastic_sparse(graph, res, column_wise, NULL);
 }
 
 

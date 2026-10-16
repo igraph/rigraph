@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -57,11 +56,6 @@ IGRAPH_EXPORT igraph_error_t igraph_get_stochastic_sparse(
    const igraph_t *graph, igraph_sparsemat_t *res, igraph_bool_t column_wise,
    const igraph_vector_t *weights
 );
-
-/* Deprecated, will be removed in 0.11. Use igraph_get_stochastic_sparse() instead, paying attention to differences. */
-IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_get_stochastic_sparsemat(const igraph_t *graph,
-                                                  igraph_sparsemat_t *res,
-                                                  igraph_bool_t column_wise);
 
 IGRAPH_EXPORT igraph_error_t igraph_get_edgelist(const igraph_t *graph, igraph_vector_int_t *res, igraph_bool_t bycol);
 
