@@ -154,7 +154,7 @@ IGRAPH_PRIVATE_EXPORT igraph_error_t igraph_vector_rank(const igraph_vector_t *v
 IGRAPH_EXPORT igraph_error_t igraph_vector_int_pair_order(const igraph_vector_int_t* v, const igraph_vector_int_t *v2,
                                       igraph_vector_int_t* res, igraph_int_t maxval);
 
-IGRAPH_PRIVATE_EXPORT igraph_error_t igraph_vector_int_order1(const igraph_vector_int_t* v,
+IGRAPH_PRIVATE_EXPORT igraph_error_t igraph_i_vector_int_order(const igraph_vector_int_t* v,
                                            igraph_vector_int_t* res, igraph_int_t maxval);
 IGRAPH_PRIVATE_EXPORT igraph_error_t igraph_vector_int_rank(const igraph_vector_int_t *v, igraph_vector_int_t *res,
                                      igraph_int_t nodes);
