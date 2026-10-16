@@ -649,6 +649,9 @@ get_adjacency_impl <- function(
   } else {
     weights <- NULL
   }
+  if (is.logical(loops)) {
+    loops <- if (loops) "twice" else "none"
+  }
   loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -680,6 +683,9 @@ get_adjacency_sparse_impl <- function(
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
+  }
+  if (is.logical(loops)) {
+    loops <- if (loops) "twice" else "none"
   }
   loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
 
