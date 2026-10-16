@@ -151,7 +151,6 @@ igraph_error_t igraph_i_degree_sequence_game_vl(igraph_t *graph,
                          IGRAPH_EINVAL);
         }
 
-
         degree_sequence *dd = new degree_sequence(out_seq);
 
         graph_molloy_opt *g = new graph_molloy_opt(*dd);
@@ -177,7 +176,6 @@ igraph_error_t igraph_i_degree_sequence_game_vl(igraph_t *graph,
 
         IGRAPH_CHECK(gh->print(graph));
         delete gh;
-
     );
 
     return IGRAPH_SUCCESS;

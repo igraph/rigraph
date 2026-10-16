@@ -468,7 +468,6 @@ igraph_error_t igraph_layout_drl(const igraph_t *graph, igraph_matrix_t *res,
     }
 
     IGRAPH_HANDLE_EXCEPTIONS(
-
         drl::graph neighbors(graph, options, weights);
         neighbors.init_parms(options);
         if (use_seed) {
@@ -476,7 +475,6 @@ igraph_error_t igraph_layout_drl(const igraph_t *graph, igraph_matrix_t *res,
             neighbors.read_real(res);
         }
         IGRAPH_CHECK(neighbors.draw_graph(res));
-
     );
 
     return IGRAPH_SUCCESS;
