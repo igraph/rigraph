@@ -975,6 +975,11 @@ PLFIT:
     OUTCONV:
         OUT: PROTECT(%I%=Ry_igraph_plfit_result_to_SEXP(&%C%));
 
+REWIRING_STATS:
+    CALL: '0'
+    CTYPE: ~
+    HEADER: {}
+
 MAXFLOW_STATS:
     CALL: '&%C%'
     HEADER: {}

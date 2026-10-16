@@ -102,12 +102,20 @@ k_regular_game_impl <- function(
 rewire_impl <- function(
   rewire,
   n,
-  mode = c("simple", "simple_loops")
+  allowed_edge_types = c("simple", "loops", "multi", "all")
 ) {
   # Argument checks
   ensure_igraph(rewire)
   n <- as.numeric(n)
-  mode <- switch_igraph_arg(mode, "simple" = 0L, "simple_loops" = 1L)
+  allowed_edge_types <- switch_igraph_arg(
+    allowed_edge_types,
+    "simple" = 0L,
+    "loop" = 1L,
+    "loops" = 1L,
+    "multi" = 6L,
+    "multiple" = 6L,
+    "all" = 7L
+  )
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -115,7 +123,7 @@ rewire_impl <- function(
     R_igraph_rewire,
     rewire,
     n,
-    mode
+    allowed_edge_types
   )
 
   res
