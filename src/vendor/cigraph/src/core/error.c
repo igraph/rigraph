@@ -136,21 +136,21 @@ static const char *igraph_i_error_strings[] = {
     /* 41 */ NULL, // "The Schur form computed by LAPACK routine dlahqr "
                    // "could not be reordered by LAPACK routine dtrsen.",
     /* 42 */ "Big integer division by zero",
-    /* 43 */ "GLPK Error, GLP_EBOUND",
-    /* 44 */ "GLPK Error, GLP_EROOT",
-    /* 45 */ "GLPK Error, GLP_ENOPFS",
-    /* 46 */ "GLPK Error, GLP_ENODFS",
-    /* 47 */ "GLPK Error, GLP_EFAIL",
-    /* 48 */ "GLPK Error, GLP_EMIPGAP",
-    /* 49 */ "GLPK Error, GLP_ETMLIM",
-    /* 50 */ "GLPK Error, GLP_STOP",
+    /* 43 */ NULL, // "GLPK Error, GLP_EBOUND",  /* removed in 1.0 */
+    /* 44 */ NULL, // "GLPK Error, GLP_EROOT",   /* removed in 1.0 */
+    /* 45 */ NULL, // "GLPK Error, GLP_ENOPFS",  /* removed in 1.0 */
+    /* 46 */ NULL, // "GLPK Error, GLP_ENODFS",  /* removed in 1.0 */
+    /* 47 */ NULL, // "GLPK Error, GLP_EFAIL",   /* removed in 1.0 */
+    /* 48 */ NULL, // "GLPK Error, GLP_EMIPGAP", /* removed in 1.0 */
+    /* 49 */ NULL, // "GLPK Error, GLP_ETMLIM",  /* removed in 1.0 */
+    /* 50 */ NULL, // "GLPK Error, GLP_STOP",    /* removed in 1.0 */
     /* 51 */ "Internal attribute handler error",
     /* 52 */ "Unimplemented attribute combination for this type",
     /* 53 */ "LAPACK call resulted in an error",
     /* 54 */ "Internal DrL error; this error should never be visible to the user, "
     "please report this error along with the steps to reproduce it.",
     /* 55 */ "Integer or double overflow",
-    /* 56 */ "Internal GPLK error",
+    /* 56 */ NULL, // "Internal GPLK error",  /* removed in 1.0 */
     /* 57 */ "CPU time exceeded",
     /* 58 */ "Integer or double underflow",
     /* 59 */ "Random walk got stuck",

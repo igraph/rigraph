@@ -267,14 +267,6 @@ __BEGIN_DECLS
  * \enumval IGRAPH_ENEGCYCLE Negative cycle detected while calculating shortest paths.
  * \enumval IGRAPH_EINTERNAL Internal error, likely a bug in igraph.
  * \enumval IGRAPH_EDIVZERO Big integer division by zero.
- * \enumval IGRAPH_GLP_EBOUND GLPK error (GLP_EBOUND).
- * \enumval IGRAPH_GLP_EROOT GLPK error (GLP_EROOT).
- * \enumval IGRAPH_GLP_ENOPFS GLPK error (GLP_ENOPFS).
- * \enumval IGRAPH_GLP_ENODFS GLPK error (GLP_ENODFS).
- * \enumval IGRAPH_GLP_EFAIL GLPK error (GLP_EFAIL).
- * \enumval IGRAPH_GLP_EMIPGAP GLPK error (GLP_EMIPGAP).
- * \enumval IGRAPH_GLP_ETMLIM GLPK error (GLP_ETMLIM).
- * \enumval IGRAPH_GLP_ESTOP GLPK error (GLP_ESTOP).
  * \enumval IGRAPH_EATTRIBUTES Attribute handler error. The user is not
  *   expected to find this; it is signalled if some igraph function is
  *   not using the attribute handler interface properly.
@@ -284,7 +276,6 @@ __BEGIN_DECLS
  * \enumval IGRAPH_EDRL Internal error in the DrL layout generator; not used
  *   any more (replaced by IGRAPH_EINTERNAL).
  * \enumval IGRAPH_EOVERFLOW Integer or double overflow.
- * \enumval IGRAPH_EGLP Internal GLPK error.
  * \enumval IGRAPH_CPUTIME CPU time exceeded.
  * \enumval IGRAPH_EUNDERFLOW Integer or double underflow.
  * \enumval IGRAPH_ERWSTUCK Random walk got stuck.
@@ -314,20 +305,20 @@ typedef enum {
     IGRAPH_EINTERNAL         = 38,
     /* ARPACK error codes from 39 to 41 were moved to igraph_arpack_error_t in 1.0 */
     IGRAPH_EDIVZERO          = 42,
-    IGRAPH_GLP_EBOUND        = 43,
-    IGRAPH_GLP_EROOT         = 44,
-    IGRAPH_GLP_ENOPFS        = 45,
-    IGRAPH_GLP_ENODFS        = 46,
-    IGRAPH_GLP_EFAIL         = 47,
-    IGRAPH_GLP_EMIPGAP       = 48,
-    IGRAPH_GLP_ETMLIM        = 49,
-    IGRAPH_GLP_ESTOP         = 50,
+    /* IGRAPH_GLP_EBOUND        = 43, */   /* removed in 1.0 */
+    /* IGRAPH_GLP_EROOT         = 44, */   /* removed in 1.0 */
+    /* IGRAPH_GLP_ENOPFS        = 45, */   /* removed in 1.0 */
+    /* IGRAPH_GLP_ENODFS        = 46, */   /* removed in 1.0 */
+    /* IGRAPH_GLP_EFAIL         = 47, */   /* removed in 1.0 */
+    /* IGRAPH_GLP_EMIPGAP       = 48, */   /* removed in 1.0 */
+    /* IGRAPH_GLP_ETMLIM        = 49, */   /* removed in 1.0 */
+    /* IGRAPH_GLP_ESTOP         = 50, */   /* removed in 1.0 */
     IGRAPH_EATTRIBUTES       = 51,
     IGRAPH_EATTRCOMBINE      = 52,
     IGRAPH_ELAPACK           = 53,
     IGRAPH_EDRL IGRAPH_DEPRECATED_ENUMVAL = 54,
     IGRAPH_EOVERFLOW         = 55,
-    IGRAPH_EGLP              = 56,
+    /* IGRAPH_EGLP              = 56, */   /* removed in 1.0 */
     IGRAPH_CPUTIME           = 57,
     IGRAPH_EUNDERFLOW        = 58,
     IGRAPH_ERWSTUCK          = 59,

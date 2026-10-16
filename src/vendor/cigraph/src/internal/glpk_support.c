@@ -128,7 +128,7 @@ igraph_error_t igraph_i_glpk_check(int retval, const char* message) {
     }
 
     /* handle errors */
-#define HANDLE_CODE(c)  case c: code = #c; ret = IGRAPH_##c; break;
+#define HANDLE_CODE(c)  case c: code = #c; ret = IGRAPH_FAILURE; break;
 #define HANDLE_CODE2(c) case c: code = #c; ret = IGRAPH_FAILURE; break;
 #define HANDLE_CODE3(c) case c: code = #c; ret = IGRAPH_INTERRUPTED; break;
     switch (retval) {
