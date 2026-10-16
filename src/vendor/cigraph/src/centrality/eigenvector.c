@@ -1,7 +1,6 @@
-/* -*- mode: C -*-  */
 /* vim:set ts=4 sw=4 sts=4 et: */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2007-2021  The igraph development team <igraph@igraph.org>
 
    This program is free software; you can redistribute it and/or modify
@@ -83,7 +82,17 @@ static igraph_error_t adjmat_mul_weighted(igraph_real_t *to, const igraph_real_t
     return IGRAPH_SUCCESS;
 }
 
+/* Checks if any eigenvector centrality values are zero. If they are, it indicates that the
+ * graph is not (strongly) connected. Eigenvector centrality is not meaningful for such graphs.
+ * To account for numerical inaccuracies, a threshold of 'eps' is used when testing for zero.
+ * This function is intended to be used with eigenvector centrality values scaled such that
+ * the maximum is 1. 'eps' is chosen accordinly.
+ */
 static void warn_zero_entries(const igraph_vector_t *evcent) {
+    /* This is a conservative tolerance that will still catch most values
+     * which should be zero without being triggered by small yet truly
+     * nonzero values.
+     * See https://github.com/igraph/igraph/pull/2592 */
     const igraph_real_t tol = 10 * DBL_EPSILON;
     const igraph_int_t n = igraph_vector_size(evcent);
 
@@ -178,8 +187,11 @@ static igraph_error_t igraph_i_eigenvector_centrality_undirected(const igraph_t 
             /* Note: Keep random perturbation non-negative. */
             MATRIX(vectors, i, 0) = VECTOR(degree)[i] + RNG_UNIF(0, 1e-4);
         } else if (! negative_weights) {
+            /* The eigenvector centrality of zero degree vertices is also zero. */
             MATRIX(vectors, i, 0) = 0.0;
         } else {
+            /* When negative weights are present, a zero strength may occur even
+             * if the degree is not zero, and some edges have non-zero weight. */
             igraph_int_t deg;
             IGRAPH_CHECK(igraph_degree_1(graph, &deg, i, IGRAPH_ALL, IGRAPH_LOOPS));
             MATRIX(vectors, i, 0) = deg == 0 ? 0.0 : 1.0;
@@ -230,6 +242,10 @@ static igraph_error_t igraph_i_eigenvector_centrality_undirected(const igraph_t 
 
     if (vector) {
         IGRAPH_CHECK(igraph_vector_resize(vector, no_of_nodes));
+
+        /* Note: With non-negative weights, a zero eigenvalue should only occur
+         * when there are no edges, or all edge have zero weight. This case is
+         * caught earlier. Thus we do not handle the case of zero eigenvalues here .*/
 
         for (i = 0; i < no_of_nodes; i++) {
             VECTOR(*vector)[i] = MATRIX(vectors, i, 0);
@@ -405,8 +421,11 @@ static igraph_error_t igraph_i_eigenvector_centrality_directed(const igraph_t *g
             /* Note: Keep random perturbation non-negative. */
             MATRIX(vectors, i, 0) = VECTOR(indegree)[i] + RNG_UNIF(0, 1e-4);
         } else if (! negative_weights) {
+            /* The eigenvector centrality of zero in-degree vertices is also zero. */
             MATRIX(vectors, i, 0) = 0.0;
         } else {
+            /* When negative weights are present, a zero in-strength may occur even
+             * if the in-degree is not zero, and some in-edges have non-zero weight. */
             igraph_int_t deg;
             IGRAPH_CHECK(igraph_degree_1(graph, &deg, i, mode, IGRAPH_LOOPS));
             MATRIX(vectors, i, 0) = deg == 0 ? 0.0 : 1.0;
