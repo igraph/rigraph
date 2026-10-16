@@ -83,7 +83,7 @@ placements <- rbind(
   c("bipartite", "create-two-mode-networks", "igraph_bipartite_game"),
 
   # generators / regular-structure-generators  (typo fix; replaces removed igraph_lcf)
-  c("generators", "regular-structure-generators", "igraph_lcf_vector"),
+  c("generators", "regular-structure-generators", "igraph_lcf"),
 
   # generators / adjacency-generators
   c("generators", "adjacency-generators", "igraph_weighted_sparsemat"),

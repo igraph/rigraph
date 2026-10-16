@@ -1510,9 +1510,9 @@ SEXP R_igraph_famous(SEXP name) {
 }
 
 /*-------------------------------------------/
-/ igraph_lcf_vector                          /
+/ igraph_lcf                                 /
 /-------------------------------------------*/
-SEXP R_igraph_lcf_vector(SEXP n, SEXP shifts, SEXP repeats) {
+SEXP R_igraph_lcf(SEXP n, SEXP shifts, SEXP repeats) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_integer_t c_n;
@@ -1529,7 +1529,7 @@ SEXP R_igraph_lcf_vector(SEXP n, SEXP shifts, SEXP repeats) {
   IGRAPH_R_CHECK_INT(repeats);
   c_repeats = (igraph_integer_t) REAL(repeats)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_lcf_vector(&c_graph, c_n, &c_shifts, c_repeats));
+  IGRAPH_R_CHECK(igraph_lcf(&c_graph, c_n, &c_shifts, c_repeats));
 
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
