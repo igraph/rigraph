@@ -331,7 +331,7 @@ EDGE_SELECTOR:
               %I% <- create_es(%I1%, %I%)
             }
 
-EDGEWEIGHTS:
+EDGE_WEIGHTS:
     INCONV: |-
         if (is.null(%I%) && "weight" %in% edge_attr_names(%I1%)) {
           %I% <- E(%I1%)$weight
@@ -343,7 +343,7 @@ EDGEWEIGHTS:
         }
 
 EDGE_LENGTHS:
-    # Edge lengths vector - no automatic attribute lookup (unlike EDGEWEIGHTS which checks for "weight" attribute)
+    # Edge lengths vector - no automatic attribute lookup (unlike EDGE_WEIGHTS which checks for "weight" attribute)
     INCONV: |-
         if (!is.null(%I%) && !all(is.na(%I%))) {
           %I% <- as.numeric(%I%)
