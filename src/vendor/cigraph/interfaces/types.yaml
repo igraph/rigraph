@@ -157,6 +157,11 @@ VERTEX_INDICES:
     CTYPE: igraph_vector_int_t
     FLAGS: BY_REF
 
+VERTEX_INDICES_LIST:
+    # A list containing vectors of igraph integers where each such
+    # vector represents a sequence of vertex indices.
+    CTYPE: igraph_vector_int_list_t
+
 VERTEX_INDEX_PAIRS:
     # An integer vector containing pairs of vertex indices, in a flattened
     # representation

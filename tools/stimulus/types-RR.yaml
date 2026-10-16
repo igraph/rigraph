@@ -13,6 +13,8 @@ OUTFILE:
 INTEGER:
     DEFAULT:
         FINEITER: max(10, log2(vcount(graph)))
+        # IGRAPH_UNLIMITED: a negative bound means no bound.
+        UNLIMITED: -1
     INCONV:
         IN: '%I% <- as.numeric(%I%)'
 
@@ -460,6 +462,22 @@ ISOMORPHISM_FUNC:
     HEADER: ~
 
 VERTEXSET_LIST:
+    CALL: if (!is.null(%I%)) lapply(%I%, function(.x) .x - 1)
+    INCONV:
+        IN: |-
+            if (!is.null(%I%) && !is.list(%I%)) {
+              cli::cli_abort(
+                "{.arg %I%} must be a list or NULL",
+                call = rlang::caller_env()
+              )
+            }
+    OUTCONV:
+        OUT: |-
+            if (igraph_opt("return.vs.es")) {
+              %I% <- create_vs_list(%I1%, %I%)
+            }
+
+VERTEX_INDICES_LIST:
     CALL: if (!is.null(%I%)) lapply(%I%, function(.x) .x - 1)
     INCONV:
         IN: |-
