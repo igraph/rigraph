@@ -1031,3 +1031,9 @@ DEPRECATED:
     CALL: {}
     CTYPE: ~
     HEADER: {}
+
+BLOCK_SIZES_SUM:
+    # Checked in R only, see types-RR.yaml.
+    CALL: {}
+    CTYPE: ~
+    HEADER: {}

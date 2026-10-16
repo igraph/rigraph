@@ -1190,8 +1190,7 @@
       sbm_game_impl(n = -1, pref_matrix = matrix(0.5, 2, 2), block_sizes = c(2, 3))
     Condition
       Error in `sbm_game_impl()`:
-      ! Sum of the block sizes (5) must equal the number of vertices (-1). Invalid value
-      Source: <file>:<line>
+      ! Sum of the block sizes (5) must equal the number of vertices (-1).
 
 # hsbm_game_impl basic
 
