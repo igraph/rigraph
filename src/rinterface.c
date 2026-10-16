@@ -6073,9 +6073,10 @@ SEXP R_igraph_maxdegree(SEXP graph, SEXP vids, SEXP mode, SEXP loops) {
 /*-------------------------------------------/
 / igraph_density                             /
 /-------------------------------------------*/
-SEXP R_igraph_density(SEXP graph, SEXP loops) {
+SEXP R_igraph_density(SEXP graph, SEXP weights, SEXP loops) {
                                         /* Declarations */
   igraph_t c_graph;
+  igraph_vector_t c_weights;
   igraph_real_t c_res;
   igraph_bool_t c_loops;
   SEXP res;
@@ -6083,10 +6084,13 @@ SEXP R_igraph_density(SEXP graph, SEXP loops) {
   SEXP r_result;
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    Rz_SEXP_to_vector(weights, &c_weights);
+  }
   IGRAPH_R_CHECK_BOOL(loops);
   c_loops = LOGICAL(loops)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_density(&c_graph, &c_res, c_loops));
+  IGRAPH_R_CHECK(igraph_density(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_res, c_loops));
 
                                         /* Convert output */
   PROTECT(res=NEW_NUMERIC(1));
