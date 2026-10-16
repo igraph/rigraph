@@ -413,7 +413,6 @@ igraph_error_t igraph_hrg_fit(const igraph_t *graph,
 
     const igraph_int_t no_of_nodes = igraph_vcount(graph);
 
-
     dendro d;
 
     // If we want to start from HRG
@@ -437,7 +436,6 @@ igraph_error_t igraph_hrg_fit(const igraph_t *graph,
     } else {
         MCMCEquilibrium_Find(d, hrg);
     }
-
 
     return IGRAPH_SUCCESS;
 
@@ -463,12 +461,10 @@ igraph_error_t igraph_hrg_sample(const igraph_hrg_t *hrg, igraph_t *sample) {
 
     // TODO: error handling
 
-
     d.clearDendrograph();
     d.importDendrogramStructure(hrg);
     d.makeRandomGraph();
     IGRAPH_CHECK(d.recordGraphStructure(sample));
-
 
     return IGRAPH_SUCCESS;
     IGRAPH_HANDLE_EXCEPTIONS_END
@@ -508,7 +504,6 @@ igraph_error_t igraph_hrg_sample_many(
         return IGRAPH_SUCCESS;
     }
 
-
     d.clearDendrograph();
     d.importDendrogramStructure(hrg);
     while (num_samples-- > 0) {
@@ -518,7 +513,6 @@ igraph_error_t igraph_hrg_sample_many(
         IGRAPH_CHECK(igraph_graph_list_push_back(samples, &g));
         IGRAPH_FINALLY_CLEAN(1);
     }
-
 
     return IGRAPH_SUCCESS;
     IGRAPH_HANDLE_EXCEPTIONS_END
@@ -632,7 +626,7 @@ igraph_error_t igraph_hrg_dendrogram(igraph_t *graph, const igraph_hrg_t *hrg) {
     igraph_int_t i, idx = 0;
     igraph_attribute_record_list_t vattrs;
     igraph_vector_t prob;
-    igraph_attribute_record_t *rec;
+    igraph_attribute_record_t* rec;
 
     // Probability labels, for leaf nodes they are IGRAPH_NAN
     IGRAPH_VECTOR_INIT_FINALLY(&prob, no_of_nodes);
@@ -715,7 +709,6 @@ igraph_error_t igraph_hrg_consensus(const igraph_t *graph,
         IGRAPH_ERROR("`hrg' must be given if `start' is true.", IGRAPH_EINVAL);
     }
 
-
     dendro d;
 
     if (start) {
@@ -733,7 +726,6 @@ igraph_error_t igraph_hrg_consensus(const igraph_t *graph,
     markovChainMonteCarlo2(d, num_samples);
 
     d.recordConsensusTree(parents, weights);
-
 
     return IGRAPH_SUCCESS;
 
@@ -868,7 +860,6 @@ igraph_error_t igraph_hrg_predict(const igraph_t *graph,
         IGRAPH_ERROR("`hrg' must be given when `start' is true", IGRAPH_EINVAL);
     }
 
-
     dendro d;
 
     std::unique_ptr<simpleGraph> sg = igraph_i_hrg_getsimplegraph(graph, d, num_bins);
@@ -894,7 +885,6 @@ igraph_error_t igraph_hrg_predict(const igraph_t *graph,
     MCMCEquilibrium_Sample(d, num_samples);
     rankCandidatesByProbability(*sg, d, br_list.get(), mk);
     IGRAPH_CHECK(recordPredictions(br_list.get(), edges, prob, mk));
-
 
     return IGRAPH_SUCCESS;
 
