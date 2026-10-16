@@ -176,7 +176,7 @@ extern SEXP R_igraph_eigenvector_centrality(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_empty(SEXP, SEXP);
 extern SEXP R_igraph_empty_attrs(SEXP, SEXP);
 extern SEXP R_igraph_erdos_renyi_game_gnm(SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_erdos_renyi_game_gnp(SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_erdos_renyi_game_gnp(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_establishment_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_eulerian_cycle(SEXP);
 extern SEXP R_igraph_eulerian_path(SEXP);
@@ -760,7 +760,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_empty",                                          (DL_FUNC) &R_igraph_empty,                                           2},
     {"R_igraph_empty_attrs",                                    (DL_FUNC) &R_igraph_empty_attrs,                                     2},
     {"R_igraph_erdos_renyi_game_gnm",                           (DL_FUNC) &R_igraph_erdos_renyi_game_gnm,                            5},
-    {"R_igraph_erdos_renyi_game_gnp",                           (DL_FUNC) &R_igraph_erdos_renyi_game_gnp,                            4},
+    {"R_igraph_erdos_renyi_game_gnp",                           (DL_FUNC) &R_igraph_erdos_renyi_game_gnp,                            5},
     {"R_igraph_establishment_game",                             (DL_FUNC) &R_igraph_establishment_game,                              6},
     {"R_igraph_eulerian_cycle",                                 (DL_FUNC) &R_igraph_eulerian_cycle,                                  1},
     {"R_igraph_eulerian_path",                                  (DL_FUNC) &R_igraph_eulerian_path,                                   1},

@@ -94,6 +94,13 @@ igraph_turan:
 # Constructors, games
 #######################################
 
+igraph_erdos_renyi_game_gnp:
+    # Upstream replaced loops with allowed_edge_types (krlmlr/igraph@9373961):
+    # the R argument stays loops, a logical.
+    PARAMS: |-
+        OUT GRAPH graph, INTEGER n, REAL p, BOOLEAN directed=False,
+        EDGE_TYPE_SW_LOOPS loops=False, BOOLEAN edge_labeled=False
+
 igraph_growing_random_game:
     PARAMS: |-
         OUT GRAPH graph, INTEGER n, INTEGER m=1, *,
