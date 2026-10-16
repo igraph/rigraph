@@ -25,7 +25,7 @@
 
 #include "igraph_decls.h"
 
-__BEGIN_DECLS
+IGRAPH_BEGIN_C_DECLS
 
 /**
  * \define IGRAPH_INTEGER_SIZE
@@ -50,6 +50,6 @@ __BEGIN_DECLS
  */
 #define IGRAPH_BOOL_TYPE int
 
-__END_DECLS
+IGRAPH_END_C_DECLS
 
 #endif
