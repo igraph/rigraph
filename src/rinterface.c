@@ -330,12 +330,14 @@ SEXP R_igraph_ecount(SEXP graph) {
 /*-------------------------------------------/
 / igraph_neighbors                           /
 /-------------------------------------------*/
-SEXP R_igraph_neighbors(SEXP graph, SEXP vid, SEXP mode) {
+SEXP R_igraph_neighbors(SEXP graph, SEXP vid, SEXP mode, SEXP loops, SEXP multiple) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_int_t c_neis;
   igraph_integer_t c_vid;
   igraph_neimode_t c_mode;
+  igraph_loops_t c_loops;
+  igraph_bool_t c_multiple;
   SEXP neis;
 
   SEXP r_result;
@@ -345,8 +347,11 @@ SEXP R_igraph_neighbors(SEXP graph, SEXP vid, SEXP mode) {
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_neis);
   c_vid = (igraph_integer_t) REAL(vid)[0];
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
+  c_loops = (igraph_loops_t) Rf_asInteger(loops);
+  IGRAPH_R_CHECK_BOOL(multiple);
+  c_multiple = LOGICAL(multiple)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_neighbors(&c_graph, &c_neis, c_vid, c_mode));
+  IGRAPH_R_CHECK(igraph_neighbors(&c_graph, &c_neis, c_vid, c_mode, c_loops, c_multiple));
 
                                         /* Convert output */
   PROTECT(neis=Ry_igraph_vector_int_to_SEXPp1(&c_neis));
@@ -601,12 +606,13 @@ SEXP R_igraph_get_all_eids_between(SEXP graph, SEXP from, SEXP to, SEXP directed
 /*-------------------------------------------/
 / igraph_incident                            /
 /-------------------------------------------*/
-SEXP R_igraph_incident(SEXP graph, SEXP vid, SEXP mode) {
+SEXP R_igraph_incident(SEXP graph, SEXP vid, SEXP mode, SEXP loops) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_int_t c_eids;
   igraph_integer_t c_vid;
   igraph_neimode_t c_mode;
+  igraph_loops_t c_loops;
   SEXP eids;
 
   SEXP r_result;
@@ -616,8 +622,9 @@ SEXP R_igraph_incident(SEXP graph, SEXP vid, SEXP mode) {
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_eids);
   c_vid = (igraph_integer_t) REAL(vid)[0];
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
+  c_loops = (igraph_loops_t) Rf_asInteger(loops);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_incident(&c_graph, &c_eids, c_vid, c_mode));
+  IGRAPH_R_CHECK(igraph_incident(&c_graph, &c_eids, c_vid, c_mode, c_loops));
 
                                         /* Convert output */
   PROTECT(eids=Ry_igraph_vector_int_to_SEXPp1(&c_eids));

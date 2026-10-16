@@ -5293,7 +5293,7 @@ SEXP Rx_igraph_vs_nei(SEXP graph, SEXP px, SEXP pv, SEXP pmode) {
   while (!IGRAPH_VIT_END(vv)) {
     igraph_integer_t neis_size;
 
-    IGRAPH_R_CHECK(igraph_neighbors(&g, &neis, IGRAPH_VIT_GET(vv), mode));
+    IGRAPH_R_CHECK(igraph_neighbors(&g, &neis, IGRAPH_VIT_GET(vv), mode, IGRAPH_LOOPS_TWICE, IGRAPH_MULTIPLE));
 
     neis_size = igraph_vector_int_size(&neis);
     for (igraph_integer_t i=0; i < neis_size; i++) {
@@ -5376,7 +5376,7 @@ SEXP Rx_igraph_es_adj(SEXP graph, SEXP x, SEXP pv, SEXP pmode) {
   while (!IGRAPH_VIT_END(vv)) {
     igraph_integer_t adje_size;
 
-    IGRAPH_R_CHECK(igraph_incident(&g, &adje, IGRAPH_VIT_GET(vv), mode));
+    IGRAPH_R_CHECK(igraph_incident(&g, &adje, IGRAPH_VIT_GET(vv), mode, IGRAPH_LOOPS_TWICE));
     adje_size = igraph_vector_int_size(&adje);
 
     for (igraph_integer_t i=0; i < adje_size; i++) {
@@ -6093,7 +6093,7 @@ SEXP Rx_igraph_get_adjlist(SEXP graph, SEXP pmode, SEXP ploops, SEXP pmultiple) 
   igraph_vector_int_init(&neis, 0);
   PROTECT(result=NEW_LIST(no_of_nodes));
   for (igraph_integer_t i=0; i<no_of_nodes; i++) {
-    igraph_i_neighbors(&g, &neis, i, mode, (igraph_loops_t) loops, (igraph_bool_t) multiple);
+    igraph_neighbors(&g, &neis, i, mode, (igraph_loops_t) loops, (igraph_bool_t) multiple);
     SET_VECTOR_ELT(result, i, Ry_igraph_vector_int_to_SEXP(&neis));
   }
   igraph_vector_int_destroy(&neis);
@@ -6117,7 +6117,7 @@ SEXP Rx_igraph_get_adjedgelist(SEXP graph, SEXP pmode, SEXP ploops) {
   igraph_vector_int_init(&neis, 0);
   PROTECT(result=NEW_LIST(no_of_nodes));
   for (igraph_integer_t i=0; i<no_of_nodes; i++) {
-    igraph_i_incident(&g, &neis, (igraph_integer_t) i, mode, (igraph_loops_t) loops);
+    igraph_incident(&g, &neis, (igraph_integer_t) i, mode, (igraph_loops_t) loops);
     SET_VECTOR_ELT(result, i, Ry_igraph_vector_int_to_SEXP(&neis));
   }
   igraph_vector_int_destroy(&neis);
