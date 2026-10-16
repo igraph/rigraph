@@ -24,7 +24,7 @@
  * seeding the RNG upon startup. It makes an effort to avoid producing the
  * same number when called within different processes, even if called
  * approximately at the same time. However, it cannot guarantee this on
- * all systems under all circumstances.
+ * all systems under all circumstancs.
  *
  * This function cannot fail.
  */
