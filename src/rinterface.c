@@ -3507,74 +3507,7 @@ SEXP R_igraph_are_connected(SEXP graph, SEXP v1, SEXP v2) {
 /*-------------------------------------------/
 / igraph_diameter                            /
 /-------------------------------------------*/
-SEXP R_igraph_diameter(SEXP graph, SEXP directed, SEXP unconnected) {
-                                        /* Declarations */
-  igraph_t c_graph;
-  igraph_real_t c_res;
-  igraph_integer_t c_from;
-  igraph_integer_t c_to;
-  igraph_vector_int_t c_vertex_path;
-  igraph_vector_int_t c_edge_path;
-  igraph_bool_t c_directed;
-  igraph_bool_t c_unconnected;
-  SEXP res;
-  SEXP from;
-  SEXP to;
-  SEXP vertex_path;
-  SEXP edge_path;
-
-  SEXP r_result, r_names;
-                                        /* Convert input */
-  Rz_SEXP_to_igraph(graph, &c_graph);
-  c_from=0;
-  c_to=0;
-  IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_path, 0));
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vertex_path);
-  IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_path, 0));
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edge_path);
-  IGRAPH_R_CHECK_BOOL(directed);
-  c_directed = LOGICAL(directed)[0];
-  IGRAPH_R_CHECK_BOOL(unconnected);
-  c_unconnected = LOGICAL(unconnected)[0];
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_diameter(&c_graph, &c_res, &c_from, &c_to, &c_vertex_path, &c_edge_path, c_directed, c_unconnected));
-
-                                        /* Convert output */
-  PROTECT(r_result=NEW_LIST(5));
-  PROTECT(r_names=NEW_CHARACTER(5));
-  PROTECT(res=NEW_NUMERIC(1));
-  REAL(res)[0]=c_res;
-  PROTECT(from=NEW_NUMERIC(1));
-  REAL(from)[0]=(double) c_from;
-  PROTECT(to=NEW_NUMERIC(1));
-  REAL(to)[0]=(double) c_to;
-  PROTECT(vertex_path=Ry_igraph_vector_int_to_SEXP(&c_vertex_path));
-  igraph_vector_int_destroy(&c_vertex_path);
-  IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(edge_path=Ry_igraph_vector_int_to_SEXP(&c_edge_path));
-  igraph_vector_int_destroy(&c_edge_path);
-  IGRAPH_FINALLY_CLEAN(1);
-  SET_VECTOR_ELT(r_result, 0, res);
-  SET_VECTOR_ELT(r_result, 1, from);
-  SET_VECTOR_ELT(r_result, 2, to);
-  SET_VECTOR_ELT(r_result, 3, vertex_path);
-  SET_VECTOR_ELT(r_result, 4, edge_path);
-  SET_STRING_ELT(r_names, 0, Rf_mkChar("res"));
-  SET_STRING_ELT(r_names, 1, Rf_mkChar("from"));
-  SET_STRING_ELT(r_names, 2, Rf_mkChar("to"));
-  SET_STRING_ELT(r_names, 3, Rf_mkChar("vertex_path"));
-  SET_STRING_ELT(r_names, 4, Rf_mkChar("edge_path"));
-  SET_NAMES(r_result, r_names);
-  UNPROTECT(6);
-
-  UNPROTECT(1);
-  return(r_result);
-}
-
-/*-------------------------------------------/
-/ igraph_diameter_dijkstra                   /
-/-------------------------------------------*/
-SEXP R_igraph_diameter_dijkstra(SEXP graph, SEXP weights, SEXP directed, SEXP unconnected) {
+SEXP R_igraph_diameter(SEXP graph, SEXP weights, SEXP directed, SEXP unconnected) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_t c_weights;
@@ -3608,7 +3541,7 @@ SEXP R_igraph_diameter_dijkstra(SEXP graph, SEXP weights, SEXP directed, SEXP un
   IGRAPH_R_CHECK_BOOL(unconnected);
   c_unconnected = LOGICAL(unconnected)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_diameter_dijkstra(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_res, &c_from, &c_to, &c_vertex_path, &c_edge_path, c_directed, c_unconnected));
+  IGRAPH_R_CHECK(igraph_diameter(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_res, &c_from, &c_to, &c_vertex_path, &c_edge_path, c_directed, c_unconnected));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(5));
@@ -5699,53 +5632,12 @@ SEXP R_igraph_reverse_edges(SEXP graph, SEXP eids) {
 /*-------------------------------------------/
 / igraph_average_path_length                 /
 /-------------------------------------------*/
-SEXP R_igraph_average_path_length(SEXP graph, SEXP directed, SEXP unconn) {
+SEXP R_igraph_average_path_length(SEXP graph, SEXP weights, SEXP directed, SEXP unconn) {
                                         /* Declarations */
   igraph_t c_graph;
-  igraph_real_t c_res;
-  igraph_real_t c_unconn_pairs;
-  igraph_bool_t c_directed;
-  igraph_bool_t c_unconn;
-  SEXP res;
-  SEXP unconn_pairs;
-
-  SEXP r_result, r_names;
-                                        /* Convert input */
-  Rz_SEXP_to_igraph(graph, &c_graph);
-  IGRAPH_R_CHECK_BOOL(directed);
-  c_directed = LOGICAL(directed)[0];
-  IGRAPH_R_CHECK_BOOL(unconn);
-  c_unconn = LOGICAL(unconn)[0];
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_average_path_length(&c_graph, &c_res, &c_unconn_pairs, c_directed, c_unconn));
-
-                                        /* Convert output */
-  PROTECT(r_result=NEW_LIST(2));
-  PROTECT(r_names=NEW_CHARACTER(2));
-  PROTECT(res=NEW_NUMERIC(1));
-  REAL(res)[0]=c_res;
-  PROTECT(unconn_pairs=NEW_NUMERIC(1));
-  REAL(unconn_pairs)[0]=c_unconn_pairs;
-  SET_VECTOR_ELT(r_result, 0, res);
-  SET_VECTOR_ELT(r_result, 1, unconn_pairs);
-  SET_STRING_ELT(r_names, 0, Rf_mkChar("res"));
-  SET_STRING_ELT(r_names, 1, Rf_mkChar("unconn_pairs"));
-  SET_NAMES(r_result, r_names);
-  UNPROTECT(3);
-
-  UNPROTECT(1);
-  return(r_result);
-}
-
-/*-------------------------------------------/
-/ igraph_average_path_length_dijkstra        /
-/-------------------------------------------*/
-SEXP R_igraph_average_path_length_dijkstra(SEXP graph, SEXP weights, SEXP directed, SEXP unconn) {
-                                        /* Declarations */
-  igraph_t c_graph;
-  igraph_real_t c_res;
-  igraph_real_t c_unconn_pairs;
   igraph_vector_t c_weights;
+  igraph_real_t c_res;
+  igraph_real_t c_unconn_pairs;
   igraph_bool_t c_directed;
   igraph_bool_t c_unconn;
   SEXP res;
@@ -5762,7 +5654,7 @@ SEXP R_igraph_average_path_length_dijkstra(SEXP graph, SEXP weights, SEXP direct
   IGRAPH_R_CHECK_BOOL(unconn);
   c_unconn = LOGICAL(unconn)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_average_path_length_dijkstra(&c_graph, &c_res, &c_unconn_pairs, (Rf_isNull(weights) ? 0 : &c_weights), c_directed, c_unconn));
+  IGRAPH_R_CHECK(igraph_average_path_length(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_res, &c_unconn_pairs, c_directed, c_unconn));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));
@@ -7973,41 +7865,7 @@ SEXP R_igraph_contract_vertices(SEXP graph, SEXP mapping, SEXP vertex_attr_comb)
 /*-------------------------------------------/
 / igraph_eccentricity                        /
 /-------------------------------------------*/
-SEXP R_igraph_eccentricity(SEXP graph, SEXP vids, SEXP mode) {
-                                        /* Declarations */
-  igraph_t c_graph;
-  igraph_vector_t c_res;
-  igraph_vs_t c_vids;
-  igraph_neimode_t c_mode;
-  SEXP res;
-
-  SEXP r_result;
-                                        /* Convert input */
-  Rz_SEXP_to_igraph(graph, &c_graph);
-  IGRAPH_R_CHECK(igraph_vector_init(&c_res, 0));
-  IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
-  igraph_vector_int_t c_vids_data;
-  Rz_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
-  c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_eccentricity(&c_graph, &c_res, c_vids, c_mode));
-
-                                        /* Convert output */
-  PROTECT(res=Ry_igraph_vector_to_SEXP(&c_res));
-  igraph_vector_destroy(&c_res);
-  IGRAPH_FINALLY_CLEAN(1);
-  igraph_vector_int_destroy(&c_vids_data);
-  igraph_vs_destroy(&c_vids);
-  r_result = res;
-
-  UNPROTECT(1);
-  return(r_result);
-}
-
-/*-------------------------------------------/
-/ igraph_eccentricity_dijkstra               /
-/-------------------------------------------*/
-SEXP R_igraph_eccentricity_dijkstra(SEXP graph, SEXP weights, SEXP vids, SEXP mode) {
+SEXP R_igraph_eccentricity(SEXP graph, SEXP weights, SEXP vids, SEXP mode) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_t c_weights;
@@ -8028,7 +7886,7 @@ SEXP R_igraph_eccentricity_dijkstra(SEXP graph, SEXP weights, SEXP vids, SEXP mo
   Rz_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_eccentricity_dijkstra(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_res, c_vids, c_mode));
+  IGRAPH_R_CHECK(igraph_eccentricity(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_res, c_vids, c_mode));
 
                                         /* Convert output */
   PROTECT(res=Ry_igraph_vector_to_SEXP(&c_res));
@@ -8045,36 +7903,7 @@ SEXP R_igraph_eccentricity_dijkstra(SEXP graph, SEXP weights, SEXP vids, SEXP mo
 /*-------------------------------------------/
 / igraph_graph_center                        /
 /-------------------------------------------*/
-SEXP R_igraph_graph_center(SEXP graph, SEXP mode) {
-                                        /* Declarations */
-  igraph_t c_graph;
-  igraph_vector_int_t c_res;
-  igraph_neimode_t c_mode;
-  SEXP res;
-
-  SEXP r_result;
-                                        /* Convert input */
-  Rz_SEXP_to_igraph(graph, &c_graph);
-  IGRAPH_R_CHECK(igraph_vector_int_init(&c_res, 0));
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_res);
-  c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_graph_center(&c_graph, &c_res, c_mode));
-
-                                        /* Convert output */
-  PROTECT(res=Ry_igraph_vector_int_to_SEXPp1(&c_res));
-  igraph_vector_int_destroy(&c_res);
-  IGRAPH_FINALLY_CLEAN(1);
-  r_result = res;
-
-  UNPROTECT(1);
-  return(r_result);
-}
-
-/*-------------------------------------------/
-/ igraph_graph_center_dijkstra               /
-/-------------------------------------------*/
-SEXP R_igraph_graph_center_dijkstra(SEXP graph, SEXP weights, SEXP mode) {
+SEXP R_igraph_graph_center(SEXP graph, SEXP weights, SEXP mode) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_t c_weights;
@@ -8092,7 +7921,7 @@ SEXP R_igraph_graph_center_dijkstra(SEXP graph, SEXP weights, SEXP mode) {
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_res);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_graph_center_dijkstra(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_res, c_mode));
+  IGRAPH_R_CHECK(igraph_graph_center(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_res, c_mode));
 
                                         /* Convert output */
   PROTECT(res=Ry_igraph_vector_int_to_SEXPp1(&c_res));
@@ -8107,33 +7936,7 @@ SEXP R_igraph_graph_center_dijkstra(SEXP graph, SEXP weights, SEXP mode) {
 /*-------------------------------------------/
 / igraph_radius                              /
 /-------------------------------------------*/
-SEXP R_igraph_radius(SEXP graph, SEXP mode) {
-                                        /* Declarations */
-  igraph_t c_graph;
-  igraph_real_t c_radius;
-  igraph_neimode_t c_mode;
-  SEXP radius;
-
-  SEXP r_result;
-                                        /* Convert input */
-  Rz_SEXP_to_igraph(graph, &c_graph);
-  c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_radius(&c_graph, &c_radius, c_mode));
-
-                                        /* Convert output */
-  PROTECT(radius=NEW_NUMERIC(1));
-  REAL(radius)[0]=c_radius;
-  r_result = radius;
-
-  UNPROTECT(1);
-  return(r_result);
-}
-
-/*-------------------------------------------/
-/ igraph_radius_dijkstra                     /
-/-------------------------------------------*/
-SEXP R_igraph_radius_dijkstra(SEXP graph, SEXP weights, SEXP mode) {
+SEXP R_igraph_radius(SEXP graph, SEXP weights, SEXP mode) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_t c_weights;
@@ -8149,7 +7952,7 @@ SEXP R_igraph_radius_dijkstra(SEXP graph, SEXP weights, SEXP mode) {
   }
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_radius_dijkstra(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_radius, c_mode));
+  IGRAPH_R_CHECK(igraph_radius(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_radius, c_mode));
 
                                         /* Convert output */
   PROTECT(radius=NEW_NUMERIC(1));
@@ -8163,58 +7966,7 @@ SEXP R_igraph_radius_dijkstra(SEXP graph, SEXP weights, SEXP mode) {
 /*-------------------------------------------/
 / igraph_pseudo_diameter                     /
 /-------------------------------------------*/
-SEXP R_igraph_pseudo_diameter(SEXP graph, SEXP start_vid, SEXP directed, SEXP unconnected) {
-                                        /* Declarations */
-  igraph_t c_graph;
-  igraph_real_t c_diameter;
-  igraph_integer_t c_start_vid;
-  igraph_integer_t c_from;
-  igraph_integer_t c_to;
-  igraph_bool_t c_directed;
-  igraph_bool_t c_unconnected;
-  SEXP diameter;
-  SEXP from;
-  SEXP to;
-
-  SEXP r_result, r_names;
-                                        /* Convert input */
-  Rz_SEXP_to_igraph(graph, &c_graph);
-  c_start_vid = (igraph_integer_t) REAL(start_vid)[0];
-  c_from=0;
-  c_to=0;
-  IGRAPH_R_CHECK_BOOL(directed);
-  c_directed = LOGICAL(directed)[0];
-  IGRAPH_R_CHECK_BOOL(unconnected);
-  c_unconnected = LOGICAL(unconnected)[0];
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_pseudo_diameter(&c_graph, &c_diameter, c_start_vid, &c_from, &c_to, c_directed, c_unconnected));
-
-                                        /* Convert output */
-  PROTECT(r_result=NEW_LIST(3));
-  PROTECT(r_names=NEW_CHARACTER(3));
-  PROTECT(diameter=NEW_NUMERIC(1));
-  REAL(diameter)[0]=c_diameter;
-  PROTECT(from=NEW_NUMERIC(1));
-  REAL(from)[0]=(double) c_from;
-  PROTECT(to=NEW_NUMERIC(1));
-  REAL(to)[0]=(double) c_to;
-  SET_VECTOR_ELT(r_result, 0, diameter);
-  SET_VECTOR_ELT(r_result, 1, from);
-  SET_VECTOR_ELT(r_result, 2, to);
-  SET_STRING_ELT(r_names, 0, Rf_mkChar("diameter"));
-  SET_STRING_ELT(r_names, 1, Rf_mkChar("from"));
-  SET_STRING_ELT(r_names, 2, Rf_mkChar("to"));
-  SET_NAMES(r_result, r_names);
-  UNPROTECT(4);
-
-  UNPROTECT(1);
-  return(r_result);
-}
-
-/*-------------------------------------------/
-/ igraph_pseudo_diameter_dijkstra            /
-/-------------------------------------------*/
-SEXP R_igraph_pseudo_diameter_dijkstra(SEXP graph, SEXP weights, SEXP start_vid, SEXP directed, SEXP unconnected) {
+SEXP R_igraph_pseudo_diameter(SEXP graph, SEXP weights, SEXP start_vid, SEXP directed, SEXP unconnected) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_t c_weights;
@@ -8242,7 +7994,7 @@ SEXP R_igraph_pseudo_diameter_dijkstra(SEXP graph, SEXP weights, SEXP start_vid,
   IGRAPH_R_CHECK_BOOL(unconnected);
   c_unconnected = LOGICAL(unconnected)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_pseudo_diameter_dijkstra(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_diameter, c_start_vid, &c_from, &c_to, c_directed, c_unconnected));
+  IGRAPH_R_CHECK(igraph_pseudo_diameter(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_diameter, c_start_vid, &c_from, &c_to, c_directed, c_unconnected));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(3));

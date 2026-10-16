@@ -1026,7 +1026,7 @@ mean_distance <- function(
   }
   # END GENERATED ARG_HANDLE
 
-  average_path_length_dijkstra_impl(
+  average_path_length_impl(
     graph = graph,
     weights = weights,
     directed = directed,
