@@ -10832,7 +10832,7 @@
       community_leading_eigenvector_callback_closure_impl(graph = g, start = TRUE)
     Condition
       Error in `community_leading_eigenvector_callback_closure_impl()`:
-      ! Supplied memberhsip vector length does not match number of vertices. Invalid value
+      ! Supplied membership vector length does not match number of vertices. Invalid value
       Source: <file>:<line>
 
 # edge_connectivity_impl basic
