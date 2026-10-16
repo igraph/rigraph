@@ -1578,20 +1578,6 @@ igraph_error_t igraph_sparsemat_init_diag(
     }
 }
 
-/**
- * \function igraph_sparsemat_diag
- * \brief Creates a sparse diagonal matrix (deprecated alias).
- *
- * \deprecated-by igraph_sparsemat_init_diag 0.10
- */
-
-igraph_error_t igraph_sparsemat_diag(
-    igraph_sparsemat_t *A, igraph_int_t nzmax, const igraph_vector_t *values,
-    igraph_bool_t compress
-) {
-    return igraph_sparsemat_init_diag(A, nzmax, values, compress);
-}
-
 static igraph_error_t igraph_i_sparsemat_arpack_multiply(igraph_real_t *to,
                                               const igraph_real_t *from,
                                               int n,
