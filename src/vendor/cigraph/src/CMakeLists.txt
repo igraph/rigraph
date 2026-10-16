@@ -324,7 +324,6 @@ add_library(
   internal/qsort_r.c
   internal/qsort.c
   internal/utils.c
-  internal/zeroin.c
 
   version.c
 
