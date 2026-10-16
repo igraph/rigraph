@@ -400,7 +400,6 @@ extern SEXP R_igraph_product(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_progress(SEXP, SEXP);
 extern SEXP R_igraph_pseudo_diameter(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_radius(SEXP, SEXP, SEXP);
-extern SEXP R_igraph_random_edge_walk(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_random_sample(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_random_spanning_tree(SEXP, SEXP);
 extern SEXP R_igraph_random_walk(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -987,7 +986,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_progress",                                       (DL_FUNC) &R_igraph_progress,                                        2},
     {"R_igraph_pseudo_diameter",                                (DL_FUNC) &R_igraph_pseudo_diameter,                                 5},
     {"R_igraph_radius",                                         (DL_FUNC) &R_igraph_radius,                                          3},
-    {"R_igraph_random_edge_walk",                               (DL_FUNC) &R_igraph_random_edge_walk,                                6},
     {"R_igraph_random_sample",                                  (DL_FUNC) &R_igraph_random_sample,                                   3},
     {"R_igraph_random_spanning_tree",                           (DL_FUNC) &R_igraph_random_spanning_tree,                            2},
     {"R_igraph_random_walk",                                    (DL_FUNC) &R_igraph_random_walk,                                     6},
