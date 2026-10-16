@@ -8349,11 +8349,11 @@ SEXP R_igraph_create_bipartite(SEXP types, SEXP edges, SEXP directed) {
 /*-------------------------------------------/
 / igraph_biadjacency                         /
 /-------------------------------------------*/
-SEXP R_igraph_biadjacency(SEXP incidence, SEXP directed, SEXP mode, SEXP multiple) {
+SEXP R_igraph_biadjacency(SEXP biadjmatrix, SEXP directed, SEXP mode, SEXP multiple) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_bool_t c_types;
-  igraph_matrix_t c_incidence;
+  igraph_matrix_t c_biadjmatrix;
   igraph_bool_t c_directed;
   igraph_neimode_t c_mode;
   igraph_bool_t c_multiple;
@@ -8364,14 +8364,14 @@ SEXP R_igraph_biadjacency(SEXP incidence, SEXP directed, SEXP mode, SEXP multipl
                                         /* Convert input */
   IGRAPH_R_CHECK(igraph_vector_bool_init(&c_types, 0));
   IGRAPH_FINALLY(igraph_vector_bool_destroy, &c_types);
-  Rz_SEXP_to_matrix(incidence, &c_incidence);
+  Rz_SEXP_to_matrix(biadjmatrix, &c_biadjmatrix);
   IGRAPH_R_CHECK_BOOL(directed);
   c_directed = LOGICAL(directed)[0];
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
   IGRAPH_R_CHECK_BOOL(multiple);
   c_multiple = LOGICAL(multiple)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_biadjacency(&c_graph, &c_types, &c_incidence, c_directed, c_mode, c_multiple));
+  IGRAPH_R_CHECK(igraph_biadjacency(&c_graph, &c_types, &c_biadjmatrix, c_directed, c_mode, c_multiple));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));
