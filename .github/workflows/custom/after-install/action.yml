@@ -25,6 +25,18 @@ runs:
         fi
       shell: bash
 
+    # The roclet that links the C manual from the reference pages, named in
+    # DESCRIPTION's Roxygen field, is vendored in tools/igraph.r2cdocs
+    # (handbook/architecture/r-layer/documentation/). Only the smoke test
+    # roxygenizes, and only it installs the roclet's dependencies
+    # (Config/Needs/roxygen2). scripts/rcc-one.sh installs it the same way.
+    - name: Install the vendored C-docs roclet and run its tests
+      if: github.job == 'rcc-smoke'
+      run: |
+        R CMD INSTALL tools/igraph.r2cdocs
+        Rscript -e 'testthat::test_local("tools/igraph.r2cdocs", reporter = "summary")'
+      shell: bash
+
     # Guard for the flavor rename (scripts/flavor-package-name.R): fails when
     # the package name is hard-coded where scripts/flavor.patch does not rewrite
     # it, when a file the patch renames still carries the mainline name, when a

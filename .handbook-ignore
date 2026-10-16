@@ -16,6 +16,10 @@ em-dash: .claude/
 src/vendor/cigraph/
 tools/py-stimulus/
 
+# The C-docs roclet subrepo is igraph/igraph.r2cdocs, with its own README;
+# handbook/architecture/r-layer/documentation/ says how this repository uses it.
+tools/igraph.r2cdocs/
+
 # Generated documents cannot carry a backreference; the generator does.
 # NEWS.md is fledge's, the snapshots testthat's, and revdep/ holds reports
 # revdepcheck writes and the notes kept beside them for one release.

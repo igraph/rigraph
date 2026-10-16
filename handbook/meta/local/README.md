@@ -16,6 +16,7 @@ The status of the vendoring series lives in its refs and the per-commit verdicts
 **What this repository does not author.**
 The vendored C library under `src/vendor/cigraph/` ([`architecture/engine/`](/handbook/architecture/engine/README.md)),
 the Stimulus subrepo under `tools/py-stimulus/`,
+the C-docs roclet subrepo under `tools/igraph.r2cdocs/` ([`architecture/r-layer/documentation/`](/handbook/architecture/r-layer/documentation/README.md)),
 the generated R/C interface `R/aaa-*.R` and `src/rinterface.c` ([`architecture/stimulus/`](/handbook/architecture/stimulus/README.md)),
 `src/cpp11.cpp` and `R/cpp11.R`, `NEWS.md` (fledge), the `man/` pages (roxygen2), the snapshots under `tests/testthat/_snaps/`,
 and the reports under `revdep/`.

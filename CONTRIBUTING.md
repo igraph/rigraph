@@ -232,18 +232,19 @@ under `tools/migrations/`.
 
 ### Documentation
 
-- Install roxygen2 but also [igraph.r2cdocs](https://github.com/igraph/igraph.r2cdocs).
+- Install roxygen2 and the roclet that links the C docs, which is vendored in `tools/igraph.r2cdocs`
+  ([documentation](/handbook/architecture/r-layer/documentation/README.md) in the handbook):
 
 ```r
-install.packages("roxygen2")
-pak::pak("igraph/igraph.r2cdocs")
+pak::pak(dependencies = "Config/Needs/roxygen2")
+pak::local_install("tools/igraph.r2cdocs", upgrade = FALSE)
 ```
 
 - Please document your new functions using
 [roxygen2](https://roxygen2.r-lib.org/), and run `devtools::document()` or `make
 igraph` to update the `.Rd` files.
 
-- Links to C docs are added automatically thanks to the igraph.r2cdocs's roclet.
+- Links to C docs are added automatically by that roclet.
 
 - Write "ID"/"IDs" (not "id"/"ids") when referring to vertex or edge IDs in
 documentation prose. Lowercase stays only where the token is code: argument
@@ -256,7 +257,9 @@ Rscript tools/check-id-casing.R
 
 ### Maintaining igraph.r2cdocs
 
-To update the data (when the C docs index has changed after a release) in https://github.com/igraph/igraph.r2cdocs/, run the script that is `data-raw`, commit the csv file and push.
+The roclet is a git subrepo in `tools/igraph.r2cdocs`, and a fix to it belongs upstream as well.
+The link table for a new release of the C library is added
+as the handbook's [documentation](/handbook/architecture/r-layer/documentation/README.md) page says.
 
 ### Test Cases
 
