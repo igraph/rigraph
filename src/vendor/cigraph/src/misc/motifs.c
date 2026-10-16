@@ -40,7 +40,8 @@
  */
 static igraph_error_t igraph_i_motifs_randesu_update_hist(
         const igraph_t *graph,
-        igraph_vector_int_t *vids, igraph_int_t isoclass, void* extra) {
+        const igraph_vector_int_t *vids,
+        igraph_int_t isoclass, void* extra) {
     igraph_vector_t *hist = (igraph_vector_t*)extra;
     IGRAPH_UNUSED(graph); IGRAPH_UNUSED(vids);
     VECTOR(*hist)[isoclass]++;

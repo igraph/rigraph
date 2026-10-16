@@ -66,7 +66,7 @@ __BEGIN_DECLS
  */
 
 typedef igraph_error_t igraph_motifs_handler_t(const igraph_t *graph,
-        igraph_vector_int_t *vids,
+        const igraph_vector_int_t *vids,
         igraph_int_t isoclass,
         void* extra);
 
