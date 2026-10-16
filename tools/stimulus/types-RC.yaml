@@ -790,7 +790,7 @@ ARPACK_OPTIONS:
     OUTCONV:
         INOUT: PROTECT(%I%=Ry_igraph_arpack_options_to_SEXP(&%C%));
 
-ARPACKSTORAGE:
+ARPACK_STORAGE:
     CALL: '0'
     CTYPE: ~
     HEADER: {}
