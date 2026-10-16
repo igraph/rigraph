@@ -571,8 +571,9 @@ igraph_error_t igraph_centralization_closeness_tmax(const igraph_t *graph,
  *      centrality scores, or a null pointer otherwise.
  * \param value If not a null pointer, then the leading eigenvalue is
  *      stored here.
- * \param directed Boolean scalar, whether to consider edge directions
- *     in a directed graph. It is ignored for undirected graphs.
+ * \param mode How to consider edge directions in directed graphs.
+ *     See \ref igraph_eigenvector_centrality() for details. Ignored
+ *     for undirected graphs.
  * \param scale This parameter is deprecated and ignored since igraph 0.10.14.
  *     Vertex-level centrality scores are always scaled to have a maximum of one.
  * \param options Options to ARPACK. See \ref igraph_arpack_options_t
@@ -602,7 +603,7 @@ igraph_error_t igraph_centralization_eigenvector_centrality(
     const igraph_t *graph,
     igraph_vector_t *vector,
     igraph_real_t *value,
-    igraph_bool_t directed,
+    igraph_neimode_t mode,
     igraph_bool_t scale,
     igraph_arpack_options_t *options,
     igraph_real_t *centralization,
@@ -634,12 +635,12 @@ igraph_error_t igraph_centralization_eigenvector_centrality(
         myvalue = &realvalue;
     }
 
-    IGRAPH_CHECK(igraph_eigenvector_centrality(graph, scores, myvalue, directed,
+    IGRAPH_CHECK(igraph_eigenvector_centrality(graph, scores, myvalue, mode,
                  scale, /*weights=*/ 0,
                  options));
 
     IGRAPH_CHECK(igraph_centralization_eigenvector_centrality_tmax(
-                     graph, 0, directed,
+                     graph, 0, mode,
                      scale,
                      tmax));
 
@@ -665,42 +666,27 @@ igraph_error_t igraph_centralization_eigenvector_centrality(
  * graph as the \p graph argument, and then the number of
  * vertices is taken from this object, and its directedness is
  * considered as well. The \p nodes argument is ignored in
- * this case. The \p directed argument is also ignored if the
+ * this case. The \p mode argument is also ignored if the
  * supplied graph is undirected.
  *
  * </para><para>
  * The other way is to supply a null pointer as the \p graph
- * argument. In this case the \p nodes and \p directed
+ * argument. In this case the \p nodes and \p mode
  * arguments are considered.
  *
  * </para><para>
- * The most centralized directed structure is assumed to bethe in-star.
- * The most centralized undirected structure is assumed to be the graph
- * with a single edge. igraph continues to implement these choices for
- * historical reason. Keep in mind that neither of these two structures
- * is connected, which makes their use debatable in the context of
- * eigenvector centrality calculations. Eigenvector centrality is not
- * uniquely defined for disconnected structures.
- *
- * </para><para>
- * Note that vertex-level eigenvector centrality scores do not have
- * a natural scale. As with any eigenvector, their interpretation is
- * invariant to scaling by a constant factor. However, due to how
- * graph-level \em centralization is defined, its value depends on the
- * specific scale/normalization used for vertex-level scores. Moreover,
- * which of two graphs will have a higher eigenvector \em centralization
- * also depends on the choice of normalization for centralities. This
- * function makes the specific choice of scaling vertex-level centrality
- * scores by their maximum (i.e. it uses the ∞-norm). Other normalization
- * choices, such as the 1-norm or 2-norm are not currently implemented.
+ * The most centralized directed structure is the in-star with \p mode
+ * set to \c IGRAPH_OUT, and the out-star with \p mode set to \c IGRAPH_IN.
+ * The most centralized undirected structure is the graph with a single edge.
  *
  * \param graph A graph object or a null pointer, see the description
  *     above.
  * \param nodes The number of nodes. This is ignored if the
  *     \p graph argument is not a null pointer.
- * \param directed Boolean, whether to consider edge
- *     directions. This argument is ignored if
- *     \p graph is not a null pointer and it is undirected.
+ * \param mode How to consider edge directions in directed graphs.
+ *     See \ref igraph_eigenvector_centrality() for details. This argument
+ *     is ignored if \p graph is not a null pointer and it is
+ *     undirected.
  * \param scale This parameter is deprecated and ignored since igraph 0.10.14.
  *     Vertex-level centrality scores are always assumed to be scaled to
  *     have a maximum of one.
@@ -716,7 +702,7 @@ igraph_error_t igraph_centralization_eigenvector_centrality(
 igraph_error_t igraph_centralization_eigenvector_centrality_tmax(
     const igraph_t *graph,
     igraph_int_t nodes,
-    igraph_bool_t directed,
+    igraph_neimode_t mode,
     igraph_bool_t scale,
     igraph_real_t *res) {
 
@@ -731,7 +717,9 @@ igraph_error_t igraph_centralization_eigenvector_centrality_tmax(
 
     if (graph) {
         nodes = igraph_vcount(graph);
-        directed = directed && igraph_is_directed(graph);
+        if (! igraph_is_directed(graph)) {
+            mode = IGRAPH_ALL;
+        }
     } else {
         if (nodes < 0) {
             IGRAPH_ERROR("Number of vertices must not be negative.", IGRAPH_EINVAL);
@@ -748,7 +736,7 @@ igraph_error_t igraph_centralization_eigenvector_centrality_tmax(
         return IGRAPH_SUCCESS;
     }
 
-    if (directed) {
+    if (mode != IGRAPH_ALL) {
         *res = nodes - 1;
     } else {
         if (scale) {
