@@ -620,7 +620,7 @@ lcf_vector_impl <- function(
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_lcf_vector,
+    R_igraph_lcf,
     n,
     shifts,
     repeats

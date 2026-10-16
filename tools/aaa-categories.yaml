@@ -274,7 +274,7 @@ generators:
     - igraph_cycle_graph
     - igraph_extended_chordal_ring
     - igraph_hypercube
-    - igraph_lcf_vector
+    - igraph_lcf
     - igraph_path_graph
     - igraph_ring
     - igraph_square_lattice

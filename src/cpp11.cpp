@@ -339,7 +339,7 @@ extern SEXP R_igraph_layout_sugiyama(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_layout_umap(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_layout_umap_3d(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_layout_umap_compute_weights(SEXP, SEXP, SEXP);
-extern SEXP R_igraph_lcf_vector(SEXP, SEXP, SEXP);
+extern SEXP R_igraph_lcf(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_le_community_to_membership(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_levc_arpack_multiplier(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_linegraph(SEXP);
@@ -923,7 +923,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_layout_umap",                                    (DL_FUNC) &R_igraph_layout_umap,                                     7},
     {"R_igraph_layout_umap_3d",                                 (DL_FUNC) &R_igraph_layout_umap_3d,                                  7},
     {"R_igraph_layout_umap_compute_weights",                    (DL_FUNC) &R_igraph_layout_umap_compute_weights,                     3},
-    {"R_igraph_lcf_vector",                                     (DL_FUNC) &R_igraph_lcf_vector,                                      3},
+    {"R_igraph_lcf",                                            (DL_FUNC) &R_igraph_lcf,                                             3},
     {"R_igraph_le_community_to_membership",                     (DL_FUNC) &R_igraph_le_community_to_membership,                      3},
     {"R_igraph_levc_arpack_multiplier",                         (DL_FUNC) &R_igraph_levc_arpack_multiplier,                          3},
     {"R_igraph_linegraph",                                      (DL_FUNC) &R_igraph_linegraph,                                       1},
