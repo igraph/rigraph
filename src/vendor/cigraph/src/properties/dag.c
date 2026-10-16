@@ -106,7 +106,7 @@ igraph_error_t igraph_topological_sorting(
         /* Exclude the node from further source searches */
         VECTOR(degrees)[node] = -1;
         /* Get the neighbors and decrease their degrees by one */
-        IGRAPH_CHECK(igraph_neighbors(graph, &neis, node, mode));
+        IGRAPH_CHECK(igraph_neighbors(graph, &neis, node, mode, IGRAPH_NO_LOOPS, IGRAPH_MULTIPLE));
         j = igraph_vector_int_size(&neis);
         for (i = 0; i < j; i++) {
             VECTOR(degrees)[ VECTOR(neis)[i] ]--;
@@ -191,7 +191,7 @@ igraph_error_t igraph_is_dag(const igraph_t* graph, igraph_bool_t *res) {
         VECTOR(degrees)[node] = -1;
         vertices_left--;
         /* Get the neighbors and decrease their degrees by one */
-        IGRAPH_CHECK(igraph_neighbors(graph, &neis, node, IGRAPH_OUT));
+        IGRAPH_CHECK(igraph_neighbors(graph, &neis, node, IGRAPH_OUT, IGRAPH_LOOPS_ONCE, IGRAPH_MULTIPLE));
         igraph_int_t n = igraph_vector_int_size(&neis);
         for (igraph_int_t i = 0; i < n; i++) {
             igraph_int_t nei = VECTOR(neis)[i];
@@ -285,7 +285,7 @@ igraph_error_t igraph_transitive_closure_dag(const igraph_t *graph, igraph_t *cl
                     IGRAPH_CHECK(igraph_vector_int_push_back(&ancestors, node));
                 }
                 IGRAPH_CHECK(igraph_neighbors(graph, &neighbors,
-                                              node, IGRAPH_IN));
+                                              node, IGRAPH_IN, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
                 n = igraph_vector_int_size(&neighbors);
                 IGRAPH_CHECK(igraph_stack_int_push(&path, STAR));
                 for (j = 0; j < n; j++) {

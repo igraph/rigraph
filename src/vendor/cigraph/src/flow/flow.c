@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2006-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -1825,12 +1824,12 @@ static igraph_error_t igraph_i_st_vertex_connectivity_directed(
     /* "Disable" the edges incident on the input half of the source vertex
      * and the output half of the target vertex */
     IGRAPH_VECTOR_INT_INIT_FINALLY(&incs, 0);
-    IGRAPH_CHECK(igraph_incident(&newgraph, &incs, source + no_of_nodes, IGRAPH_ALL));
+    IGRAPH_CHECK(igraph_incident(&newgraph, &incs, source + no_of_nodes, IGRAPH_ALL, IGRAPH_LOOPS));
     len = igraph_vector_int_size(&incs);
     for (i = 0; i < len; i++) {
         VECTOR(capacity)[VECTOR(incs)[i]] = 0;
     }
-    IGRAPH_CHECK(igraph_incident(&newgraph, &incs, target, IGRAPH_ALL));
+    IGRAPH_CHECK(igraph_incident(&newgraph, &incs, target, IGRAPH_ALL, IGRAPH_LOOPS));
     len = igraph_vector_int_size(&incs);
     for (i = 0; i < len; i++) {
         VECTOR(capacity)[VECTOR(incs)[i]] = 0;
@@ -1996,12 +1995,12 @@ static igraph_error_t igraph_i_vertex_connectivity_directed(
             if (!done) {
                 /* "Disable" the edges incident on the input half of the source vertex
                 * and the output half of the target vertex */
-                IGRAPH_CHECK(igraph_incident(&split_graph, &incs, i + no_of_nodes, IGRAPH_ALL));
+                IGRAPH_CHECK(igraph_incident(&split_graph, &incs, i + no_of_nodes, IGRAPH_ALL, IGRAPH_LOOPS));
                 len = igraph_vector_int_size(&incs);
                 for (k = 0; k < len; k++) {
                     VECTOR(capacity)[VECTOR(incs)[k]] = 0;
                 }
-                IGRAPH_CHECK(igraph_incident(&split_graph, &incs, j, IGRAPH_ALL));
+                IGRAPH_CHECK(igraph_incident(&split_graph, &incs, j, IGRAPH_ALL, IGRAPH_LOOPS));
                 len = igraph_vector_int_size(&incs);
                 for (k = 0; k < len; k++) {
                     VECTOR(capacity)[VECTOR(incs)[k]] = 0;
@@ -2013,12 +2012,12 @@ static igraph_error_t igraph_i_vertex_connectivity_directed(
                              ));
 
                 /* Restore the capacities */
-                IGRAPH_CHECK(igraph_incident(&split_graph, &incs, i + no_of_nodes, IGRAPH_ALL));
+                IGRAPH_CHECK(igraph_incident(&split_graph, &incs, i + no_of_nodes, IGRAPH_ALL, IGRAPH_LOOPS));
                 len = igraph_vector_int_size(&incs);
                 for (k = 0; k < len; k++) {
                     VECTOR(capacity)[VECTOR(incs)[k]] = 1;
                 }
-                IGRAPH_CHECK(igraph_incident(&split_graph, &incs, j, IGRAPH_ALL));
+                IGRAPH_CHECK(igraph_incident(&split_graph, &incs, j, IGRAPH_ALL, IGRAPH_LOOPS));
                 len = igraph_vector_int_size(&incs);
                 for (k = 0; k < len; k++) {
                     VECTOR(capacity)[VECTOR(incs)[k]] = 1;

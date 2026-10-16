@@ -1,7 +1,6 @@
-/* -*- mode: C -*-  */
 /* vim:set ts=4 sw=4 sts=4 et: */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2012  Tamas Nepusz <ntamas@gmail.com>
 
    This program is free software; you can redistribute it and/or modify
@@ -189,7 +188,7 @@ igraph_error_t igraph_is_maximal_matching(const igraph_t *graph,
         }
 
         IGRAPH_CHECK(igraph_neighbors(graph, &neis, i,
-                                      IGRAPH_ALL));
+                                      IGRAPH_ALL, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
         n = igraph_vector_int_size(&neis);
         for (j = 0; j < n; j++) {
             if (VECTOR(*matching)[VECTOR(neis)[j]] == -1) {
@@ -370,7 +369,7 @@ static igraph_error_t igraph_i_maximum_bipartite_matching_unweighted(
             continue;
         }
         IGRAPH_CHECK(igraph_neighbors(graph, &neis, i,
-                                      IGRAPH_ALL));
+                                      IGRAPH_ALL, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
         n = igraph_vector_int_size(&neis);
         for (j = 0; j < n; j++) {
             k = VECTOR(neis)[j];
@@ -417,7 +416,7 @@ static igraph_error_t igraph_i_maximum_bipartite_matching_unweighted(
 
         /* Line 5: find row u among the neighbors of v s.t. label(u) is minimal */
         IGRAPH_CHECK(igraph_neighbors(graph, &neis, v,
-                                      IGRAPH_ALL));
+                                      IGRAPH_ALL, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
         n = igraph_vector_int_size(&neis);
         for (i = 0; i < n; i++) {
             if (VECTOR(labels)[VECTOR(neis)[i]] < label_u) {
@@ -499,7 +498,7 @@ static igraph_error_t igraph_i_maximum_bipartite_matching_unweighted_relabel(
         igraph_int_t w;
 
         IGRAPH_CHECK(igraph_neighbors(graph, &neis, v,
-                                      IGRAPH_ALL));
+                                      IGRAPH_ALL, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
 
         n = igraph_vector_int_size(&neis);
         for (j = 0; j < n; j++) {

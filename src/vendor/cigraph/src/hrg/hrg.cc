@@ -1,6 +1,6 @@
 /* -*- mode: C++ -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2010-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -1041,7 +1041,7 @@ igraph_error_t igraph_hrg_create(igraph_hrg_t *hrg,
         if (ri >= 0) {
             continue;
         }
-        IGRAPH_CHECK(igraph_neighbors(graph, &neis, i, IGRAPH_OUT));
+        IGRAPH_CHECK(igraph_neighbors(graph, &neis, i, IGRAPH_OUT, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
         VECTOR(hrg->left )[-ri - 1] = VECTOR(idx)[ VECTOR(neis)[0] ];
         VECTOR(hrg->right)[-ri - 1] = VECTOR(idx)[ VECTOR(neis)[1] ];
         VECTOR(hrg->prob )[-ri - 1] = VECTOR(*prob)[i];

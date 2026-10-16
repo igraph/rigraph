@@ -114,7 +114,7 @@ static igraph_error_t igraph_i_ecumulative_proportionate_values(const igraph_t *
     /* global perspective, we will ignore the given vertex and the given */
     /* neighbourhood type, but instead consider all edges in the given graph. */
     if (islocal) {
-        IGRAPH_CHECK(igraph_es_incident(&es, vid, mode));
+        IGRAPH_CHECK(igraph_es_incident(&es, vid, mode, IGRAPH_LOOPS));
     } else {
         IGRAPH_CHECK(igraph_es_all(&es, IGRAPH_EDGEORDER_ID));
     }
@@ -265,7 +265,7 @@ static igraph_error_t igraph_i_vcumulative_proportionate_values(const igraph_t *
     /* neighbourhood type, but instead consider all vertices in the given */
     /* graph. */
     if (islocal) {
-        IGRAPH_CHECK(igraph_vs_adj(&vs, vid, mode));
+        IGRAPH_CHECK(igraph_vs_adj(&vs, vid, mode, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
     } else {
         IGRAPH_CHECK(igraph_vs_all(&vs));
     }
@@ -600,7 +600,7 @@ igraph_error_t igraph_deterministic_optimal_imitation(const igraph_t *graph,
     /* candidates with an optimal strategy, then we choose one such candidate */
     /* at random. */
     IGRAPH_VECTOR_INT_INIT_FINALLY(&adj, 0);
-    IGRAPH_CHECK(igraph_neighbors(graph, &adj, vid, mode));
+    IGRAPH_CHECK(igraph_neighbors(graph, &adj, vid, mode, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
     igraph_vector_int_shuffle(&adj);
     /* maximum deterministic imitation */
     i = vid;
@@ -821,7 +821,7 @@ igraph_error_t igraph_moran_process(const igraph_t *graph,
     /* assume that each edge in E has the form (a, v_i). Then the vertex v_j */
     /* chosen for death is chosen proportionate to the weight of the edge */
     /* (a, v_j). */
-    IGRAPH_CHECK(igraph_es_incident(&es, a, mode));
+    IGRAPH_CHECK(igraph_es_incident(&es, a, mode, IGRAPH_LOOPS));
     IGRAPH_FINALLY(igraph_es_destroy, &es);
     IGRAPH_CHECK(igraph_eit_create(graph, es, &eA));
     IGRAPH_FINALLY(igraph_eit_destroy, &eA);
@@ -984,7 +984,7 @@ igraph_error_t igraph_roulette_wheel_imitation(const igraph_t *graph,
 
     /* set the perspective */
     if (islocal) {
-        IGRAPH_CHECK(igraph_vs_adj(&vs, vid, mode));
+        IGRAPH_CHECK(igraph_vs_adj(&vs, vid, mode, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
     } else {
         IGRAPH_CHECK(igraph_vs_all(&vs));
     }
@@ -1150,7 +1150,7 @@ igraph_error_t igraph_stochastic_imitation(const igraph_t *graph,
 
     /* immediate neighbours of v */
     IGRAPH_VECTOR_INT_INIT_FINALLY(&adj, 0);
-    IGRAPH_CHECK(igraph_neighbors(graph, &adj, vid, mode));
+    IGRAPH_CHECK(igraph_neighbors(graph, &adj, vid, mode, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
 
     /* Blind imitation. Let v be the vertex whose strategy we want to revise. */
     /* Choose a vertex u uniformly at random from the immediate neighbours of */

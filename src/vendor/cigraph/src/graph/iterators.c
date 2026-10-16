@@ -151,11 +151,15 @@ igraph_vs_t igraph_vss_all(void) {
  * Time complexity: O(1).
  */
 
-igraph_error_t igraph_vs_adj(igraph_vs_t *vs,
-                  igraph_int_t vid, igraph_neimode_t mode) {
+igraph_error_t igraph_vs_adj(
+    igraph_vs_t *vs, igraph_int_t vid, igraph_neimode_t mode,
+    igraph_loops_t loops, igraph_bool_t multiple
+) {
     vs->type = IGRAPH_VS_ADJ;
     vs->data.adj.vid = vid;
     vs->data.adj.mode = mode;
+    vs->data.adj.loops = loops;
+    vs->data.adj.multiple = multiple;
     return IGRAPH_SUCCESS;
 }
 
@@ -201,6 +205,8 @@ igraph_error_t igraph_vs_nonadj(igraph_vs_t *vs, igraph_int_t vid,
     vs->type = IGRAPH_VS_NONADJ;
     vs->data.adj.vid = vid;
     vs->data.adj.mode = mode;
+    vs->data.adj.loops = IGRAPH_LOOPS;
+    vs->data.adj.multiple = IGRAPH_MULTIPLE;
     return IGRAPH_SUCCESS;
 }
 
@@ -664,7 +670,10 @@ igraph_error_t igraph_vs_size(const igraph_t *graph, const igraph_vs_t *vs,
 
     case IGRAPH_VS_ADJ:
         IGRAPH_VECTOR_INT_INIT_FINALLY(&vec, 0);
-        IGRAPH_CHECK(igraph_neighbors(graph, &vec, vs->data.adj.vid, vs->data.adj.mode));
+        IGRAPH_CHECK(igraph_neighbors(
+            graph, &vec, vs->data.adj.vid, vs->data.adj.mode,
+            vs->data.adj.loops, vs->data.adj.multiple
+        ));
         *result = igraph_vector_int_size(&vec);
         igraph_vector_int_destroy(&vec);
         IGRAPH_FINALLY_CLEAN(1);
@@ -672,7 +681,10 @@ igraph_error_t igraph_vs_size(const igraph_t *graph, const igraph_vs_t *vs,
 
     case IGRAPH_VS_NONADJ:
         IGRAPH_VECTOR_INT_INIT_FINALLY(&vec, 0);
-        IGRAPH_CHECK(igraph_neighbors(graph, &vec, vs->data.adj.vid, vs->data.adj.mode));
+        IGRAPH_CHECK(igraph_neighbors(
+            graph, &vec, vs->data.adj.vid, vs->data.adj.mode,
+            vs->data.adj.loops, vs->data.adj.multiple
+        ));
         vec_len = igraph_vector_int_size(&vec);
         *result = igraph_vcount(graph);
         seen = IGRAPH_CALLOC(*result, igraph_bool_t);
@@ -753,7 +765,10 @@ igraph_error_t igraph_vit_create(const igraph_t *graph, igraph_vs_t vs, igraph_v
         IGRAPH_FINALLY(igraph_free, vec_int);
         IGRAPH_VECTOR_INT_INIT_FINALLY(vec_int, 0);
         IGRAPH_VECTOR_INT_INIT_FINALLY(&vec, 0);
-        IGRAPH_CHECK(igraph_neighbors(graph, &vec, vs.data.adj.vid, vs.data.adj.mode));
+        IGRAPH_CHECK(igraph_neighbors(
+            graph, &vec, vs.data.adj.vid, vs.data.adj.mode,
+            vs.data.adj.loops, vs.data.adj.multiple
+        ));
         n = igraph_vector_int_size(&vec);
         IGRAPH_CHECK(igraph_vector_int_resize(vec_int, n));
         for (i = 0; i < n; i++) {
@@ -776,7 +791,10 @@ igraph_error_t igraph_vit_create(const igraph_t *graph, igraph_vs_t vs, igraph_v
         IGRAPH_FINALLY(igraph_free, vec_int);
         IGRAPH_VECTOR_INT_INIT_FINALLY(vec_int, 0);
         IGRAPH_VECTOR_INT_INIT_FINALLY(&vec, 0);
-        IGRAPH_CHECK(igraph_neighbors(graph, &vec, vs.data.adj.vid, vs.data.adj.mode));
+        IGRAPH_CHECK(igraph_neighbors(
+            graph, &vec, vs.data.adj.vid, vs.data.adj.mode,
+            vs.data.adj.loops, vs.data.adj.multiple
+        ));
         vec_len = igraph_vector_int_size(&vec);
         n = igraph_vcount(graph);
         seen = IGRAPH_CALLOC(n, igraph_bool_t);
@@ -992,11 +1010,14 @@ igraph_es_t igraph_ess_all(igraph_edgeorder_type_t order) {
  * Time complexity: O(1).
  */
 
-igraph_error_t igraph_es_incident(igraph_es_t *es,
-                       igraph_int_t vid, igraph_neimode_t mode) {
+igraph_error_t igraph_es_incident(
+    igraph_es_t *es, igraph_int_t vid, igraph_neimode_t mode,
+    igraph_loops_t loops
+) {
     es->type = IGRAPH_ES_INCIDENT;
     es->data.incident.vid = vid;
     es->data.incident.mode = mode;
+    es->data.incident.loops = loops;
     return IGRAPH_SUCCESS;
 }
 
@@ -1610,8 +1631,10 @@ igraph_error_t igraph_es_size(const igraph_t *graph, const igraph_es_t *es,
 
     case IGRAPH_ES_INCIDENT:
         IGRAPH_VECTOR_INT_INIT_FINALLY(&v, 0);
-        IGRAPH_CHECK(igraph_incident(graph, &v,
-                                     es->data.incident.vid, es->data.incident.mode));
+        IGRAPH_CHECK(igraph_incident(
+            graph, &v, es->data.incident.vid, es->data.incident.mode,
+            es->data.incident.loops
+        ));
         *result = igraph_vector_int_size(&v);
         igraph_vector_int_destroy(&v);
         IGRAPH_FINALLY_CLEAN(1);
@@ -1758,7 +1781,7 @@ static igraph_error_t igraph_i_eit_create_allfromto(const igraph_t *graph,
         igraph_vector_int_t adj;
         IGRAPH_VECTOR_INT_INIT_FINALLY(&adj, 0);
         for (igraph_int_t i = 0; i < no_of_nodes; i++) {
-            IGRAPH_CHECK(igraph_incident(graph, &adj, i, mode));
+            IGRAPH_CHECK(igraph_incident(graph, &adj, i, mode, IGRAPH_LOOPS));
             igraph_vector_int_append(vec, &adj);  /* reserved */
         }
         igraph_vector_int_destroy(&adj);
@@ -1771,7 +1794,7 @@ static igraph_error_t igraph_i_eit_create_allfromto(const igraph_t *graph,
         IGRAPH_CHECK_OOM(added, "Cannot create edge iterator.");
         IGRAPH_FINALLY(igraph_free, added);
         for (igraph_int_t i = 0; i < no_of_nodes; i++) {
-            IGRAPH_CHECK(igraph_incident(graph, &adj, i, IGRAPH_ALL));
+            IGRAPH_CHECK(igraph_incident(graph, &adj, i, IGRAPH_ALL, IGRAPH_LOOPS));
             const igraph_int_t length = igraph_vector_int_size(&adj);
             for (igraph_int_t j = 0; j < length; j++) {
                 if (!added[ VECTOR(adj)[j] ]) {
@@ -1802,7 +1825,10 @@ static igraph_error_t igraph_i_eit_create_incident(const igraph_t* graph,
     igraph_int_t i, n;
 
     IGRAPH_VECTOR_INT_INIT_FINALLY(&vec, 0);
-    IGRAPH_CHECK(igraph_incident(graph, &vec, es.data.incident.vid, es.data.incident.mode));
+    IGRAPH_CHECK(igraph_incident(
+        graph, &vec, es.data.incident.vid, es.data.incident.mode,
+        es.data.incident.loops
+    ));
 
     vec_int = IGRAPH_CALLOC(1, igraph_vector_int_t);
     IGRAPH_CHECK_OOM(vec_int, "Cannot create edge iterator.");

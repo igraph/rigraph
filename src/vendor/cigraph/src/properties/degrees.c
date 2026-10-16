@@ -1,7 +1,6 @@
-/* -*- mode: C -*-  */
 /* vim:set ts=4 sw=4 sts=4 et: */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2005-2023  The igraph development team <igraph@igraph.org>
 
    This program is free software; you can redistribute it and/or modify
@@ -137,8 +136,8 @@ static igraph_error_t avg_nearest_neighbor_degree_weighted(const igraph_t *graph
         igraph_int_t nv;
         igraph_real_t str = VECTOR(strength)[v];
         /* Get neighbours and incident edges */
-        IGRAPH_CHECK(igraph_neighbors(graph, &neis, v, mode));
-        IGRAPH_CHECK(igraph_incident(graph, &edge_neis, v, mode));
+        IGRAPH_CHECK(igraph_neighbors(graph, &neis, v, mode, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
+        IGRAPH_CHECK(igraph_incident(graph, &edge_neis, v, mode, IGRAPH_LOOPS));
         nv = igraph_vector_int_size(&neis);
         for (igraph_int_t j = 0; j < nv; j++) {
             igraph_int_t nei = VECTOR(neis)[j];
@@ -309,7 +308,7 @@ igraph_error_t igraph_avg_nearest_neighbor_degree(const igraph_t *graph,
         igraph_real_t sum = 0.0;
         igraph_int_t v = IGRAPH_VIT_GET(vit);
         igraph_int_t nv;
-        IGRAPH_CHECK(igraph_neighbors(graph, &neis, v, mode));
+        IGRAPH_CHECK(igraph_neighbors(graph, &neis, v, mode, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
         nv = igraph_vector_int_size(&neis);
         for (igraph_int_t j = 0; j < nv; j++) {
             igraph_int_t nei = VECTOR(neis)[j];
@@ -656,7 +655,7 @@ igraph_error_t igraph_strength(
 
     if (loops) {
         for (igraph_int_t i = 0; !IGRAPH_VIT_END(vit); IGRAPH_VIT_NEXT(vit), i++) {
-            IGRAPH_CHECK(igraph_incident(graph, &neis, IGRAPH_VIT_GET(vit), mode));
+            IGRAPH_CHECK(igraph_incident(graph, &neis, IGRAPH_VIT_GET(vit), mode, IGRAPH_LOOPS));
             const igraph_int_t n = igraph_vector_int_size(&neis);
             for (igraph_int_t j = 0; j < n; j++) {
                 igraph_int_t edge = VECTOR(neis)[j];
@@ -665,7 +664,7 @@ igraph_error_t igraph_strength(
         }
     } else {
         for (igraph_int_t i = 0; !IGRAPH_VIT_END(vit); IGRAPH_VIT_NEXT(vit), i++) {
-            IGRAPH_CHECK(igraph_incident(graph, &neis, IGRAPH_VIT_GET(vit), mode));
+            IGRAPH_CHECK(igraph_incident(graph, &neis, IGRAPH_VIT_GET(vit), mode, IGRAPH_LOOPS));
             const igraph_int_t n = igraph_vector_int_size(&neis);
             for (igraph_int_t j = 0; j < n; j++) {
                 igraph_int_t edge = VECTOR(neis)[j];

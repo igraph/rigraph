@@ -50,7 +50,9 @@ igraph_ecount:
     RETURN: INTEGER
 
 igraph_neighbors:
-    PARAMS: GRAPH graph, OUT VERTEX_INDICES neis, VERTEX vid, NEIMODE mode=ALL
+    PARAMS: |-
+        GRAPH graph, OUT VERTEX_INDICES neis, VERTEX vid, NEIMODE mode=ALL,
+        LOOPS loops=TWICE, BOOLEAN multiple=True
     DEPS: vid ON graph, neis ON graph
 
 igraph_is_directed:
@@ -89,8 +91,8 @@ igraph_get_all_eids_between:
     DEPS: from ON graph, to ON graph
 
 igraph_incident:
-    PARAMS: GRAPH graph, OUT EDGE_INDICES eids, VERTEX vid, NEIMODE mode=ALL
-    DEPS: vid ON graph, eids ON graph
+    PARAMS: GRAPH graph, OUT EDGE_INDICES eids, VERTEX vid, NEIMODE mode=ALL, LOOPS loops=TWICE
+    DEPS: eids ON graph, vid ON graph
 
 igraph_is_same_graph:
     PARAMS: GRAPH graph1, GRAPH graph2, OUT BOOLEAN res

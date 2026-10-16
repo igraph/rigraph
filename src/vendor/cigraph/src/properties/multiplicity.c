@@ -1,7 +1,6 @@
-/* -*- mode: C -*-  */
 /* vim:set ts=4 sw=4 sts=4 et: */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -101,7 +100,7 @@ igraph_error_t igraph_is_simple(const igraph_t *graph, igraph_bool_t *res, igrap
         igraph_vector_int_t neis;
         IGRAPH_VECTOR_INT_INIT_FINALLY(&neis, 0);
         for (igraph_int_t i = 0; i < vc; i++) {
-            IGRAPH_CHECK(igraph_neighbors(graph, &neis, i, IGRAPH_OUT));
+            IGRAPH_CHECK(igraph_neighbors(graph, &neis, i, IGRAPH_OUT, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
             const igraph_int_t n = igraph_vector_int_size(&neis);
             for (igraph_int_t j = 0; j < n; j++) {
                 if (VECTOR(neis)[j] == i) {
@@ -188,7 +187,7 @@ igraph_error_t igraph_has_multiple(const igraph_t *graph, igraph_bool_t *res) {
         IGRAPH_VECTOR_INT_INIT_FINALLY(&neis, 0);
         for (i = 0; i < vc && !found; i++) {
             IGRAPH_CHECK(igraph_neighbors(graph, &neis, i,
-                                          IGRAPH_OUT));
+                                          IGRAPH_OUT, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
             n = igraph_vector_int_size(&neis);
             for (j = 1; j < n; j++) {
                 if (VECTOR(neis)[j - 1] == VECTOR(neis)[j]) {
@@ -371,7 +370,7 @@ igraph_error_t igraph_count_multiple_1(const igraph_t *graph, igraph_int_t *res,
     igraph_vector_int_t vids;
 
     IGRAPH_VECTOR_INT_INIT_FINALLY(&vids, 0);
-    IGRAPH_CHECK(igraph_neighbors(graph, &vids, from, IGRAPH_OUT));
+    IGRAPH_CHECK(igraph_neighbors(graph, &vids, from, IGRAPH_OUT, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
 
     count = 0;
     n = igraph_vector_int_size(&vids);

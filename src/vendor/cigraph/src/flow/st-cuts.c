@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2010-2021  The igraph development team
 
    This program is free software; you can redistribute it and/or modify
@@ -793,7 +792,7 @@ igraph_error_t igraph_i_all_st_cuts_pivot(
                 igraph_int_t j;
                 IGRAPH_VECTOR_INT_INIT_FINALLY(&neis, 0);
                 IGRAPH_CHECK(igraph_neighbors(graph, &neis, i,
-                                              IGRAPH_OUT));
+                                              IGRAPH_OUT, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
                 n = igraph_vector_int_size(&neis);
                 for (j = 0; j < n; j++) {
                     igraph_int_t nei = VECTOR(neis)[j];
@@ -1171,7 +1170,7 @@ static igraph_error_t igraph_i_all_st_mincuts_minimal(const igraph_t *residual,
      */
     for (i = 0; i < no_of_nodes; i++) {
         igraph_int_t j, n;
-        IGRAPH_CHECK(igraph_neighbors(residual, &neis, i, IGRAPH_IN));
+        IGRAPH_CHECK(igraph_neighbors(residual, &neis, i, IGRAPH_IN, IGRAPH_NO_LOOPS, IGRAPH_MULTIPLE));
         n = igraph_vector_int_size(&neis);
 
         // Only consider nodes that are not in S.

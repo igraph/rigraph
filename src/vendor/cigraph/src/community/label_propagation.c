@@ -731,7 +731,7 @@ igraph_error_t igraph_community_label_propagation(const igraph_t *graph,
                     igraph_int_t ni, num_neis;
                     igraph_int_t actnode = igraph_dqueue_int_pop(&q);
 
-                    IGRAPH_CHECK(igraph_neighbors(graph, &neis, actnode, mode));
+                    IGRAPH_CHECK(igraph_neighbors(graph, &neis, actnode, mode, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
                     num_neis = igraph_vector_int_size(&neis);
 
                     for (ni = 0; ni < num_neis; ++ni) {

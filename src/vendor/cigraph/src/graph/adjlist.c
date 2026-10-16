@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2003-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -198,7 +197,7 @@ igraph_error_t igraph_adjlist_init(const igraph_t *graph, igraph_adjlist_t *al,
         IGRAPH_ALLOW_INTERRUPTION();
 
         IGRAPH_CHECK(igraph_vector_int_init(&al->adjs[i], VECTOR(degrees)[i]));
-        IGRAPH_CHECK(igraph_neighbors(graph, &al->adjs[i], i, mode));
+        IGRAPH_CHECK(igraph_neighbors(graph, &al->adjs[i], i, mode, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
 
         /* Attention: This function will only set values for has_loops and has_multiple
          * if it finds loops/multi-edges. Otherwise they are left at their original value. */
@@ -328,7 +327,7 @@ igraph_error_t igraph_adjlist_init_complementer(const igraph_t *graph,
         igraph_bitset_null(&seen);
         igraph_int_t n = al->length;
 
-        IGRAPH_CHECK(igraph_neighbors(graph, &neis, i, mode));
+        IGRAPH_CHECK(igraph_neighbors(graph, &neis, i, mode, loops, IGRAPH_NO_MULTIPLE));
 
         if (loops == IGRAPH_NO_LOOPS) {
             /* If we want no loops, we pretend that we have always seen one */
@@ -810,13 +809,7 @@ igraph_error_t igraph_inclist_init(const igraph_t *graph,
         IGRAPH_ALLOW_INTERRUPTION();
 
         IGRAPH_CHECK(igraph_vector_int_init(&il->incs[i], VECTOR(degrees)[i]));
-        IGRAPH_CHECK(igraph_incident(graph, &il->incs[i], i, mode));
-
-        if (loops != IGRAPH_LOOPS_TWICE) {
-            IGRAPH_CHECK(
-                igraph_i_remove_loops_from_incidence_vector_in_place(&il->incs[i], graph, loops)
-            );
-        }
+        IGRAPH_CHECK(igraph_incident(graph, &il->incs[i], i, mode, loops));
     }
 
     igraph_vector_int_destroy(&degrees);
@@ -1206,17 +1199,7 @@ igraph_vector_int_t *igraph_i_lazy_adjlist_get_real(igraph_lazy_adjlist_t *al, i
             return NULL;
         }
 
-        ret = igraph_neighbors(al->graph, al->adjs[no], no, al->mode);
-        if (ret != IGRAPH_SUCCESS) {
-            igraph_vector_int_destroy(al->adjs[no]);
-            IGRAPH_FREE(al->adjs[no]);
-            return NULL;
-        }
-
-        ret = igraph_i_simplify_sorted_int_adjacency_vector_in_place(
-            al->adjs[no], no, al->mode, al->loops, al->multiple, NULL,
-            NULL
-        );
+        ret = igraph_neighbors(al->graph, al->adjs[no], no, al->mode, al->loops, al->multiple);
         if (ret != IGRAPH_SUCCESS) {
             igraph_vector_int_destroy(al->adjs[no]);
             IGRAPH_FREE(al->adjs[no]);
@@ -1357,20 +1340,11 @@ igraph_vector_int_t *igraph_i_lazy_inclist_get_real(igraph_lazy_inclist_t *il, i
             return NULL;
         }
 
-        ret = igraph_incident(il->graph, il->incs[no], no, il->mode);
+        ret = igraph_incident(il->graph, il->incs[no], no, il->mode, il->loops);
         if (ret != IGRAPH_SUCCESS) {
             igraph_vector_int_destroy(il->incs[no]);
             IGRAPH_FREE(il->incs[no]);
             return NULL;
-        }
-
-        if (il->loops != IGRAPH_LOOPS_TWICE) {
-            ret = igraph_i_remove_loops_from_incidence_vector_in_place(il->incs[no], il->graph, il->loops);
-            if (ret != IGRAPH_SUCCESS) {
-                igraph_vector_int_destroy(il->incs[no]);
-                IGRAPH_FREE(il->incs[no]);
-                return NULL;
-            }
         }
     }
 

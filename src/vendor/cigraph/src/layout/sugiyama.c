@@ -1,7 +1,6 @@
-/* -*- mode: C -*-  */
 /* vim:set ts=4 sw=4 sts=4 et: */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2007-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -392,7 +391,7 @@ igraph_error_t igraph_layout_sugiyama(
 
             /* Okay, this vertex is in the component we are considering.
              * Add the neighbors of this vertex, excluding loops */
-            IGRAPH_CHECK(igraph_incident(graph, &neis, i, IGRAPH_OUT));
+            IGRAPH_CHECK(igraph_incident(graph, &neis, i, IGRAPH_OUT, IGRAPH_LOOPS));
             j = igraph_vector_int_size(&neis);
             for (k = 0; k < j; k++) {
                 igraph_int_t eid = VECTOR(neis)[k];
@@ -696,7 +695,7 @@ static igraph_error_t igraph_i_layout_sugiyama_calculate_barycenters(const igrap
     igraph_vector_null(barycenters);
 
     for (i = 0; i < n; i++) {
-        IGRAPH_CHECK(igraph_neighbors(graph, &neis, VECTOR(*layer_members)[i], direction));
+        IGRAPH_CHECK(igraph_neighbors(graph, &neis, VECTOR(*layer_members)[i], direction, IGRAPH_NO_LOOPS, IGRAPH_MULTIPLE));
         m = igraph_vector_int_size(&neis);
         if (m == 0) {
             /* No neighbors in this direction. Just use the current X coordinate */
@@ -906,7 +905,7 @@ static igraph_error_t igraph_i_layout_sugiyama_place_nodes_horizontally(const ig
         /* Find all the edges from this layer to the next */
         igraph_vector_int_clear(&neis1);
         for (j = 0; j < n; j++) {
-            IGRAPH_CHECK(igraph_neighbors(graph, &neis2, VECTOR(*vertices)[j], IGRAPH_OUT));
+            IGRAPH_CHECK(igraph_neighbors(graph, &neis2, VECTOR(*vertices)[j], IGRAPH_OUT, IGRAPH_NO_LOOPS, IGRAPH_MULTIPLE));
             IGRAPH_CHECK(igraph_vector_int_append(&neis1, &neis2));
         }
 
@@ -1102,7 +1101,7 @@ static igraph_error_t igraph_i_layout_sugiyama_vertical_alignment(const igraph_t
             }
 
             /* Find the neighbors of vertex j in layer i */
-            IGRAPH_CHECK(igraph_neighbors(graph, &neis, vertex, neimode));
+            IGRAPH_CHECK(igraph_neighbors(graph, &neis, vertex, neimode, IGRAPH_NO_LOOPS, IGRAPH_MULTIPLE));
 
             n = igraph_vector_int_size(&neis);
             if (n == 0)

@@ -258,7 +258,7 @@ extern SEXP R_igraph_hub_and_authority_scores(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_hub_score(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_hypercube(SEXP, SEXP);
 extern SEXP R_igraph_iea_game(SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_incident(SEXP, SEXP, SEXP);
+extern SEXP R_igraph_incident(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_independence_number(SEXP);
 extern SEXP R_igraph_independent_vertex_sets(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_induced_subgraph(SEXP, SEXP, SEXP);
@@ -387,7 +387,7 @@ extern SEXP R_igraph_nearest_neighbor_graph(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_neighborhood(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_neighborhood_graphs(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_neighborhood_size(SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_neighbors(SEXP, SEXP, SEXP);
+extern SEXP R_igraph_neighbors(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_pagerank(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_path_graph(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_path_length_hist(SEXP, SEXP);
@@ -845,7 +845,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_hub_score",                                      (DL_FUNC) &R_igraph_hub_score,                                       4},
     {"R_igraph_hypercube",                                      (DL_FUNC) &R_igraph_hypercube,                                       2},
     {"R_igraph_iea_game",                                       (DL_FUNC) &R_igraph_iea_game,                                        4},
-    {"R_igraph_incident",                                       (DL_FUNC) &R_igraph_incident,                                        3},
+    {"R_igraph_incident",                                       (DL_FUNC) &R_igraph_incident,                                        4},
     {"R_igraph_independence_number",                            (DL_FUNC) &R_igraph_independence_number,                             1},
     {"R_igraph_independent_vertex_sets",                        (DL_FUNC) &R_igraph_independent_vertex_sets,                         4},
     {"R_igraph_induced_subgraph",                               (DL_FUNC) &R_igraph_induced_subgraph,                                3},
@@ -974,7 +974,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_neighborhood",                                   (DL_FUNC) &R_igraph_neighborhood,                                    5},
     {"R_igraph_neighborhood_graphs",                            (DL_FUNC) &R_igraph_neighborhood_graphs,                             5},
     {"R_igraph_neighborhood_size",                              (DL_FUNC) &R_igraph_neighborhood_size,                               5},
-    {"R_igraph_neighbors",                                      (DL_FUNC) &R_igraph_neighbors,                                       3},
+    {"R_igraph_neighbors",                                      (DL_FUNC) &R_igraph_neighbors,                                       5},
     {"R_igraph_pagerank",                                       (DL_FUNC) &R_igraph_pagerank,                                        7},
     {"R_igraph_path_graph",                                     (DL_FUNC) &R_igraph_path_graph,                                      3},
     {"R_igraph_path_length_hist",                               (DL_FUNC) &R_igraph_path_length_hist,                                2},

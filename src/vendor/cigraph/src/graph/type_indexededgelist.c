@@ -854,28 +854,32 @@ igraph_int_t igraph_ecount(const igraph_t *graph) {
  *        \c IGRAPH_ALL, both kinds of vertices are
  *        searched.
  *        This parameter is ignored for undirected graphs.
+ * \param loops Specifies how to treat loop edges. \c IGRAPH_NO_LOOPS
+ *        removes loop edges from the result. \c IGRAPH_LOOPS_ONCE
+ *        makes each loop edge appear only once in the result.
+ *        \c IGRAPH_LOOPS_TWICE makes loop edges appear \em twice in the
+ *        result if the graph is undirected or \p mode is set to \c IGRAPH_ALL
+ *        (and once otherwise as returning them twice does not make sense for
+ *        directed graphs).
+ * \param multiple Specifies how to treat multiple (parallel) edges.
+ *        \c IGRAPH_NO_MULTIPLE collapses parallel edges into a single one;
+ *        \c IGRAPH_MULTIPLE keeps the multiplicities of parallel edges
+ *        so the same neighbor will appear as many times in the result as the
+ *        number of parallel edges going between the two vertices.
  * \return Error code:
  *         \c IGRAPH_EINVVID: invalid vertex ID.
  *         \c IGRAPH_EINVMODE: invalid mode argument.
  *         \c IGRAPH_ENOMEM: not enough memory.
  *
- * Time complexity: O(d),
- * d is the number
- * of adjacent vertices to the queried vertex.
+ * Time complexity: O(d), d is the number of adjacent vertices to the queried
+ * vertex.
  *
  * \example examples/simple/igraph_neighbors.c
  */
-igraph_error_t igraph_neighbors(const igraph_t *graph, igraph_vector_int_t *neis, igraph_int_t pnode,
-        igraph_neimode_t mode) {
-    if (!igraph_is_directed(graph) || mode == IGRAPH_ALL) {
-        return igraph_i_neighbors(graph, neis, pnode, mode, IGRAPH_LOOPS_TWICE, IGRAPH_MULTIPLE);
-    } else {
-        return igraph_i_neighbors(graph, neis, pnode, mode, IGRAPH_LOOPS_ONCE, IGRAPH_MULTIPLE);
-    }
-}
-
-igraph_error_t igraph_i_neighbors(const igraph_t *graph, igraph_vector_int_t *neis, igraph_int_t pnode,
-        igraph_neimode_t mode, igraph_loops_t loops, igraph_bool_t multiple) {
+igraph_error_t igraph_neighbors(
+    const igraph_t *graph, igraph_vector_int_t *neis, igraph_int_t pnode,
+    igraph_neimode_t mode, igraph_loops_t loops, igraph_bool_t multiple
+) {
 #define DEDUPLICATE_IF_NEEDED(vertex, n)                                          \
     if (should_filter_duplicates) {                                               \
         if (vertex == pnode) {                                                    \
@@ -937,8 +941,11 @@ igraph_error_t igraph_i_neighbors(const igraph_t *graph, igraph_vector_int_t *ne
     }
 
     if (mode != IGRAPH_ALL && loops == IGRAPH_LOOPS_TWICE) {
+        /*
         IGRAPH_ERROR("For a directed graph (with directions not ignored), "
                      "IGRAPH_LOOPS_TWICE does not make sense.", IGRAPH_EINVAL);
+        */
+        loops = IGRAPH_LOOPS_ONCE;
     }
 
     /* Calculate needed space first & allocate it */
@@ -1732,28 +1739,28 @@ igraph_error_t igraph_get_all_eids_between(
  * to hold the result.
  * \param pnode A vertex ID.
  * \param mode Specifies what kind of edges to include for directed
- * graphs. \c IGRAPH_OUT means only outgoing edges, \c IGRAPH_IN only
- * incoming edges, \c IGRAPH_ALL both. This parameter is ignored for
- * undirected graphs.
- * \return Error code. \c IGRAPH_EINVVID: invalid \p pnode argument,
- *   \c IGRAPH_EINVMODE: invalid \p mode argument.
- *
- * Added in version 0.2.</para><para>
+ *        graphs. \c IGRAPH_OUT means only outgoing edges, \c IGRAPH_IN means
+ *        only incoming edges, \c IGRAPH_ALL means both. This parameter is
+ *        ignored for undirected graphs.
+ * \param loops Specifies how to treat loop edges. \c IGRAPH_NO_LOOPS
+ *        removes loop edges from the result. \c IGRAPH_LOOPS_ONCE
+ *        makes each loop edge appear only once in the result.
+ *        \c IGRAPH_LOOPS_TWICE makes loop edges appear \em twice in the
+ *        result if the graph is undirected or \p mode is set to \c IGRAPH_ALL
+ *        (and once otherwise as returning them twice does not make sense for
+ *        directed graphs).
+ * \return Error code:
+ *         \c IGRAPH_EINVVID: invalid vertex ID.
+ *         \c IGRAPH_EINVMODE: invalid mode argument.
+ *         \c IGRAPH_ENOMEM: not enough memory.
  *
  * Time complexity: O(d), the number of incident edges to \p pnode.
  */
 
-igraph_error_t igraph_incident(const igraph_t *graph, igraph_vector_int_t *eids, igraph_int_t pnode,
-        igraph_neimode_t mode) {
-    if (!igraph_is_directed(graph) || mode == IGRAPH_ALL) {
-        return igraph_i_incident(graph, eids, pnode, mode, IGRAPH_LOOPS_TWICE);
-    } else {
-        return igraph_i_incident(graph, eids, pnode, mode, IGRAPH_LOOPS_ONCE);
-    }
-}
-
-igraph_error_t igraph_i_incident(const igraph_t *graph, igraph_vector_int_t *eids, igraph_int_t pnode,
-        igraph_neimode_t mode, igraph_loops_t loops) {
+igraph_error_t igraph_incident(
+    const igraph_t *graph, igraph_vector_int_t *eids, igraph_int_t pnode,
+    igraph_neimode_t mode, igraph_loops_t loops
+) {
     igraph_int_t length = 0, idx = 0;
     igraph_int_t i, j;
     igraph_int_t node = pnode;
@@ -1772,8 +1779,11 @@ igraph_error_t igraph_i_incident(const igraph_t *graph, igraph_vector_int_t *eid
     }
 
     if (mode != IGRAPH_ALL && loops == IGRAPH_LOOPS_TWICE) {
+        /*
         IGRAPH_ERROR("For a directed graph (with directions not ignored), "
-                     "IGRAPH_LOOPS_TWICE does not make sense.\n", IGRAPH_EINVAL);
+                     "IGRAPH_LOOPS_TWICE does not make sense.", IGRAPH_EINVAL);
+        */
+        loops = IGRAPH_LOOPS_ONCE;
     }
 
     /* Calculate needed space first & allocate it */

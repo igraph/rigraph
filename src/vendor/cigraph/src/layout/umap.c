@@ -1,5 +1,5 @@
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2022-2024  The igraph development team <igraph@igraph.org>
 
    This program is free software; you can redistribute it and/or modify
@@ -255,7 +255,7 @@ igraph_error_t igraph_layout_umap_compute_weights(
     /* Iterate over vertices x, like in the paper */
     for (igraph_int_t i = 0; i < no_of_vertices; i++) {
         /* Edges out of this vertex, e.g. to its k-nearest neighbors */
-        IGRAPH_CHECK(igraph_incident(graph, &eids, i, IGRAPH_OUT));
+        IGRAPH_CHECK(igraph_incident(graph, &eids, i, IGRAPH_OUT, IGRAPH_LOOPS));
         no_of_neis = igraph_vector_int_size(&eids);
 
         /* Vertex has no neighbors */
@@ -854,7 +854,7 @@ static igraph_error_t igraph_i_umap_apply_forces(
                     /* NOTE: the efficiency of this step could be improved but it
                      * should be only used for small graphs anyway, so it's fine */
                     igraph_bool_t skip = false;
-                    IGRAPH_CHECK(igraph_incident(graph, &neis, from, IGRAPH_ALL));
+                    IGRAPH_CHECK(igraph_incident(graph, &neis, from, IGRAPH_ALL, IGRAPH_LOOPS));
                     const igraph_int_t nneis = igraph_vector_int_size(&neis);
                     for (igraph_int_t k = 0; k < nneis; k++) {
                         igraph_int_t eid2 = VECTOR(neis)[k];

@@ -150,7 +150,7 @@ static igraph_error_t igraph_i_is_separator(
             }
 
             SET_VISITED(v);
-            IGRAPH_CHECK(igraph_neighbors(graph, &neis, v, IGRAPH_ALL));
+            IGRAPH_CHECK(igraph_neighbors(graph, &neis, v, IGRAPH_ALL, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
 
             const igraph_int_t dv = igraph_vector_int_size(&neis);
 
@@ -231,7 +231,7 @@ done:
 
             for (IGRAPH_VIT_RESET(vit); !IGRAPH_VIT_END(vit); IGRAPH_VIT_NEXT(vit)) {
                 const igraph_int_t u = IGRAPH_VIT_GET(vit);
-                IGRAPH_CHECK(igraph_neighbors(graph, &Sneis, u, IGRAPH_ALL));
+                IGRAPH_CHECK(igraph_neighbors(graph, &Sneis, u, IGRAPH_ALL, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
                 const igraph_int_t du = igraph_vector_int_size(&Sneis);
                 for (igraph_int_t i=0; i < du; i++) {
 
@@ -250,7 +250,7 @@ done:
                         }
 
                         SET_VISITED(v);
-                        IGRAPH_CHECK(igraph_neighbors(graph, &neis, v, IGRAPH_ALL));
+                        IGRAPH_CHECK(igraph_neighbors(graph, &neis, v, IGRAPH_ALL, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
 
                         const igraph_int_t dv = igraph_vector_int_size(&neis);
 

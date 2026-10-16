@@ -1,5 +1,5 @@
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2021  The igraph development team <igraph@igraph.org>
 
    This program is free software; you can redistribute it and/or modify
@@ -21,19 +21,9 @@
 
 #include "igraph_datatype.h"
 #include "igraph_decls.h"
-#include "igraph_constants.h"
 #include "igraph_error.h"
-#include "igraph_vector.h"
 
 __BEGIN_DECLS
-
-IGRAPH_PRIVATE_EXPORT igraph_error_t igraph_i_neighbors(
-   const igraph_t *graph, igraph_vector_int_t *neis, igraph_int_t pnode,
-   igraph_neimode_t mode, igraph_loops_t loops, igraph_bool_t multiple);
-
-IGRAPH_PRIVATE_EXPORT igraph_error_t igraph_i_incident(
-   const igraph_t *graph, igraph_vector_int_t *eids, igraph_int_t pnode,
-   igraph_neimode_t mode, igraph_loops_t loops);
 
 igraph_error_t igraph_i_reverse(igraph_t *graph);
 

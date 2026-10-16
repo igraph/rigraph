@@ -1,7 +1,6 @@
-/* -*- mode: C -*-  */
 /* vim:set ts=4 sw=4 sts=4 et: */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2005-2021 The igraph development team
 
    This program is free software; you can redistribute it and/or modify
@@ -122,7 +121,7 @@ igraph_error_t igraph_neighborhood_size(const igraph_t *graph, igraph_vector_int
             const igraph_int_t actnode = igraph_dqueue_int_pop(&q);
             const igraph_int_t actdist = igraph_dqueue_int_pop(&q);
 
-            IGRAPH_CHECK(igraph_neighbors(graph, &neis, actnode, mode));
+            IGRAPH_CHECK(igraph_neighbors(graph, &neis, actnode, mode, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
             const igraph_int_t n = igraph_vector_int_size(&neis);
 
             if (actdist < order - 1) {
@@ -260,7 +259,7 @@ igraph_error_t igraph_neighborhood(const igraph_t *graph, igraph_vector_int_list
             const igraph_int_t actnode = igraph_dqueue_int_pop(&q);
             const igraph_int_t actdist = igraph_dqueue_int_pop(&q);
 
-            IGRAPH_CHECK(igraph_neighbors(graph, &neis, actnode, mode));
+            IGRAPH_CHECK(igraph_neighbors(graph, &neis, actnode, mode, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
             const igraph_int_t n = igraph_vector_int_size(&neis);
 
             if (actdist < order - 1) {
@@ -405,7 +404,7 @@ igraph_error_t igraph_neighborhood_graphs(const igraph_t *graph, igraph_graph_li
             igraph_int_t actnode = igraph_dqueue_int_pop(&q);
             igraph_int_t actdist = igraph_dqueue_int_pop(&q);
             igraph_int_t n;
-            IGRAPH_CHECK(igraph_neighbors(graph, &neis, actnode, mode));
+            IGRAPH_CHECK(igraph_neighbors(graph, &neis, actnode, mode, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
             n = igraph_vector_int_size(&neis);
 
             if (actdist < order - 1) {

@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2006-2020 The igraph development team
 
    This program is free software; you can redistribute it and/or modify
@@ -96,12 +95,12 @@ igraph_error_t igraph_compose(igraph_t *res,
 
     for (igraph_int_t i = 0; i < no_of_nodes_left; i++) {
         IGRAPH_ALLOW_INTERRUPTION();
-        IGRAPH_CHECK(igraph_incident(g1, &neis1, i, IGRAPH_OUT));
+        IGRAPH_CHECK(igraph_incident(g1, &neis1, i, IGRAPH_OUT, IGRAPH_LOOPS));
         while (!igraph_vector_int_empty(&neis1)) {
             const igraph_int_t con = igraph_vector_int_pop_back(&neis1);
             const igraph_int_t v1 = IGRAPH_OTHER(g1, con, i);
             if (v1 < no_of_nodes_right) {
-                IGRAPH_CHECK(igraph_incident(g2, &neis2, v1, IGRAPH_OUT));
+                IGRAPH_CHECK(igraph_incident(g2, &neis2, v1, IGRAPH_OUT, IGRAPH_LOOPS));
             } else {
                 continue;
             }

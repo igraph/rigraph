@@ -1,7 +1,6 @@
-/* -*- mode: C -*-  */
 /* vim:set ts=4 sw=4 sts=4 et: */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2003-2020  The igraph development team
 
    This program is free software; you can redistribute it and/or modify
@@ -277,7 +276,7 @@ igraph_error_t igraph_layout_lgl(const igraph_t *graph, igraph_matrix_t *res,
             igraph_int_t vid = VECTOR(vids)[j];
             igraph_int_t k;
             IGRAPH_ALLOW_INTERRUPTION();
-            IGRAPH_CHECK(igraph_incident(graph, &eids, vid, IGRAPH_ALL));
+            IGRAPH_CHECK(igraph_incident(graph, &eids, vid, IGRAPH_ALL, IGRAPH_LOOPS));
             for (k = 0; k < igraph_vector_int_size(&eids); k++) {
                 igraph_int_t eid = VECTOR(eids)[k];
                 igraph_int_t from = IGRAPH_FROM(graph, eid), to = IGRAPH_TO(graph, eid);

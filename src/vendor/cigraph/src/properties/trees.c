@@ -1,7 +1,6 @@
-/* -*- mode: C -*-  */
 /* vim:set ts=4 sw=4 sts=4 et: */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2005-2021 The igraph development team
 
    This program is free software; you can redistribute it and/or modify
@@ -98,7 +97,7 @@ igraph_error_t igraph_unfold_tree(const igraph_t *graph, igraph_t *tree,
         while (!igraph_dqueue_int_empty(&Q)) {
             igraph_int_t actnode = igraph_dqueue_int_pop(&Q);
 
-            IGRAPH_CHECK(igraph_incident(graph, &neis, actnode, mode));
+            IGRAPH_CHECK(igraph_incident(graph, &neis, actnode, mode, IGRAPH_LOOPS));
 
             igraph_int_t n = igraph_vector_int_size(&neis);
             for (igraph_int_t i = 0; i < n; i++) {
@@ -189,7 +188,7 @@ static igraph_error_t igraph_i_is_tree_visitor(const igraph_t *graph, igraph_int
         }
 
         /* register all its yet-unvisited neighbours for future processing */
-        IGRAPH_CHECK(igraph_neighbors(graph, &neighbors, u, mode));
+        IGRAPH_CHECK(igraph_neighbors(graph, &neighbors, u, mode, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
         ncount = igraph_vector_int_size(&neighbors);
         for (i = 0; i < ncount; ++i) {
             igraph_int_t v = VECTOR(neighbors)[i];
@@ -432,7 +431,7 @@ static igraph_error_t igraph_i_is_forest_visitor(
         }
 
         /* Vertex discovery: Register all its neighbours for future processing */
-        IGRAPH_CHECK(igraph_neighbors(graph, neis, u, mode));
+        IGRAPH_CHECK(igraph_neighbors(graph, neis, u, mode, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
         ncount = igraph_vector_int_size(neis);
 
         for (i = 0; i < ncount; ++i) {

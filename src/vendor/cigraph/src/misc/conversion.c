@@ -626,8 +626,8 @@ igraph_error_t igraph_to_undirected(igraph_t *graph,
             igraph_int_t n_out, n_in;
             igraph_int_t p1 = -1, p2 = -1;
             igraph_int_t e1 = 0, e2 = 0, n1 = 0, n2 = 0, last;
-            IGRAPH_CHECK(igraph_incident(graph, &outadj, i, IGRAPH_OUT));
-            IGRAPH_CHECK(igraph_incident(graph, &inadj, i, IGRAPH_IN));
+            IGRAPH_CHECK(igraph_incident(graph, &outadj, i, IGRAPH_OUT, IGRAPH_LOOPS));
+            IGRAPH_CHECK(igraph_incident(graph, &inadj, i, IGRAPH_IN, IGRAPH_LOOPS));
             n_out = igraph_vector_int_size(&outadj);
             n_in = igraph_vector_int_size(&inadj);
 
@@ -742,9 +742,9 @@ igraph_error_t igraph_to_undirected(igraph_t *graph,
             igraph_int_t p1 = -1, p2 = -1;
             igraph_int_t e1 = 0, e2 = 0, n1 = 0, n2 = 0;
             IGRAPH_CHECK(igraph_incident(graph, &outadj, i,
-                                         IGRAPH_OUT));
+                                         IGRAPH_OUT, IGRAPH_LOOPS));
             IGRAPH_CHECK(igraph_incident(graph, &inadj,  i,
-                                         IGRAPH_IN));
+                                         IGRAPH_IN, IGRAPH_LOOPS));
             n_out = igraph_vector_int_size(&outadj);
             n_in = igraph_vector_int_size(&inadj);
 
@@ -1029,7 +1029,7 @@ igraph_error_t igraph_to_prufer(const igraph_t *graph, igraph_vector_int_t* pruf
 
             VECTOR(degrees)[leaf] = 0; /* mark leaf v as deleted */
 
-            IGRAPH_CHECK(igraph_neighbors(graph, &neighbors, leaf, IGRAPH_ALL));
+            IGRAPH_CHECK(igraph_neighbors(graph, &neighbors, leaf, IGRAPH_ALL, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
 
             /* Find the unique remaining neighbor of the leaf */
             neighbor_count = igraph_vector_int_size(&neighbors);

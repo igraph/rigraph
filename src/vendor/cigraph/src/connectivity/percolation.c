@@ -1,5 +1,5 @@
 /*
-    IGraph library.
+    igraph library.
     Copyright (C) 2025  The igraph development team <igraph@igraph.org>
 
     This program is free software; you can redistribute it and/or modify
@@ -278,7 +278,7 @@ static igraph_error_t percolate_site(const igraph_t *graph,
 
     VECTOR(*sizes)[vertex] = 1;
 
-    IGRAPH_CHECK(igraph_neighbors(graph, neighbors, vertex, IGRAPH_ALL));
+    IGRAPH_CHECK(igraph_neighbors(graph, neighbors, vertex, IGRAPH_ALL, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
 
     igraph_int_t neighbor_count = igraph_vector_int_size(neighbors);
     for (igraph_int_t i = 0; i < neighbor_count; i++) {

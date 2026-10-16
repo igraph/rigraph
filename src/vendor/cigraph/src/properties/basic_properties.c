@@ -1,7 +1,6 @@
-/* -*- mode: C -*-  */
 /* vim:set ts=4 sw=4 sts=4 et: */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -241,7 +240,7 @@ igraph_error_t igraph_diversity(const igraph_t *graph, const igraph_vector_t *we
         igraph_real_t d;
         igraph_int_t v = IGRAPH_VIT_GET(vit);
 
-        IGRAPH_CHECK(igraph_incident(graph, &incident, v, /*mode=*/ IGRAPH_ALL));
+        IGRAPH_CHECK(igraph_incident(graph, &incident, v, /*mode=*/ IGRAPH_ALL, IGRAPH_LOOPS));
         k = igraph_vector_int_size(&incident); /* degree */
 
         /*
@@ -350,8 +349,8 @@ igraph_error_t igraph_reciprocity(const igraph_t *graph, igraph_real_t *res,
 
     for (igraph_int_t i = 0; i < no_of_nodes; i++) {
         igraph_int_t ip, op, indeg, outdeg;
-        IGRAPH_CHECK(igraph_neighbors(graph, &inneis, i, IGRAPH_IN));
-        IGRAPH_CHECK(igraph_neighbors(graph, &outneis, i, IGRAPH_OUT));
+        IGRAPH_CHECK(igraph_neighbors(graph, &inneis, i, IGRAPH_IN, IGRAPH_LOOPS_ONCE, IGRAPH_MULTIPLE));
+        IGRAPH_CHECK(igraph_neighbors(graph, &outneis, i, IGRAPH_OUT, IGRAPH_LOOPS_ONCE, IGRAPH_MULTIPLE));
 
         indeg = igraph_vector_int_size(&inneis);
         outdeg = igraph_vector_int_size(&outneis);

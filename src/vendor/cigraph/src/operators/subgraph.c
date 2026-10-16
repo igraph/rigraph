@@ -25,7 +25,6 @@
 #include "core/interruption.h"
 #include "core/set.h"
 #include "graph/attributes.h"
-#include "graph/internal.h"
 #include "operators/subgraph.h"
 
 /**
@@ -174,7 +173,7 @@ static igraph_error_t igraph_i_induced_subgraph_create_from_scratch(
         igraph_int_t new_vid = i;
         igraph_bool_t skip_loop_edge;
 
-        IGRAPH_CHECK(igraph_incident(graph, &nei_edges, old_vid, IGRAPH_OUT));
+        IGRAPH_CHECK(igraph_incident(graph, &nei_edges, old_vid, IGRAPH_OUT, IGRAPH_LOOPS));
         n = igraph_vector_int_size(&nei_edges);
 
         if (directed) {
@@ -480,7 +479,7 @@ igraph_error_t igraph_induced_subgraph_edges(const igraph_t *graph, igraph_vs_t 
 
     for (IGRAPH_VIT_RESET(vit); !IGRAPH_VIT_END(vit); IGRAPH_VIT_NEXT(vit)) {
         igraph_int_t v = IGRAPH_VIT_GET(vit);
-        IGRAPH_CHECK(igraph_i_incident(graph, &incedges, v, IGRAPH_ALL, IGRAPH_LOOPS_ONCE));
+        IGRAPH_CHECK(igraph_incident(graph, &incedges, v, IGRAPH_ALL, IGRAPH_LOOPS_ONCE));
 
         igraph_int_t d = igraph_vector_int_size(&incedges);
         for (igraph_int_t i=0; i < d; i++) {
@@ -488,7 +487,7 @@ igraph_error_t igraph_induced_subgraph_edges(const igraph_t *graph, igraph_vs_t 
             igraph_int_t u = IGRAPH_OTHER(graph, e, v);
             /* The v <= u check avoids adding non-loop edges twice.
              * Loop edges only appear once due to the use of
-             * IGRAPH_LOOPS_ONCE in igraph_i_incident() */
+             * IGRAPH_LOOPS_ONCE in igraph_incident() */
             if (v <= u && igraph_set_contains(&vids_set, u)) {
                 IGRAPH_CHECK(igraph_vector_int_push_back(edges, e));
             }

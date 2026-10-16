@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2005-2021 The igraph development team
 
    This program is free software; you can redistribute it and/or modify
@@ -99,7 +98,7 @@ igraph_error_t igraph_connect_neighborhood(igraph_t *graph, igraph_int_t order,
 
     for (i = 0; i < no_of_nodes; i++) {
         added[i] = i + 1;
-        IGRAPH_CHECK(igraph_neighbors(graph, &neis, i, mode));
+        IGRAPH_CHECK(igraph_neighbors(graph, &neis, i, mode, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
         in = igraph_vector_int_size(&neis);
         if (order > 1) {
             for (j = 0; j < in; j++) {
@@ -114,7 +113,7 @@ igraph_error_t igraph_connect_neighborhood(igraph_t *graph, igraph_int_t order,
             igraph_int_t actnode = igraph_dqueue_int_pop(&q);
             igraph_int_t actdist = igraph_dqueue_int_pop(&q);
             igraph_int_t n;
-            IGRAPH_CHECK(igraph_neighbors(graph, &neis, actnode, mode));
+            IGRAPH_CHECK(igraph_neighbors(graph, &neis, actnode, mode, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
             n = igraph_vector_int_size(&neis);
 
             if (actdist < order - 1) {

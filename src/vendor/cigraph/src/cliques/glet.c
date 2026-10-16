@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2013  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -201,7 +200,7 @@ static igraph_error_t igraph_i_subclique_next(const igraph_t *graph,
 
         for (v = 0; v < clsize; v++) {
             igraph_int_t i, neilen, node = VECTOR(*clique)[v];
-            IGRAPH_CHECK(igraph_incident(graph, &neis, node, IGRAPH_ALL));
+            IGRAPH_CHECK(igraph_incident(graph, &neis, node, IGRAPH_ALL, IGRAPH_LOOPS));
             neilen = igraph_vector_int_size(&neis);
             VECTOR(mark)[node] = c + 1;
             for (i = 0; i < neilen; i++) {
