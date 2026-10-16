@@ -11115,34 +11115,6 @@
       + edges:
       [1] 1--3 1--4 2--3 2--4
 
-# bipartite_game_impl basic
-
-    Code
-      bipartite_game_impl(type = "gnp", n1 = 5, n2 = 5, p = 0.3, directed = FALSE)
-    Output
-      $graph
-      IGRAPH U--- 10 10 -- 
-      + edges:
-       [1] 1-- 6 2-- 6 4-- 6 5-- 6 1-- 7 4-- 7 4-- 8 3-- 9 3--10 4--10
-      
-      $types
-       [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
-      
-
----
-
-    Code
-      bipartite_game_impl(type = "gnm", n1 = 5, n2 = 5, m = 10, directed = FALSE)
-    Output
-      $graph
-      IGRAPH U--- 10 10 -- 
-      + edges:
-       [1] 1-- 6 3-- 7 5-- 7 1-- 8 3-- 8 4-- 8 2-- 9 5-- 9 2--10 3--10
-      
-      $types
-       [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
-      
-
 # decompose_impl basic
 
     Code
