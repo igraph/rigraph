@@ -476,6 +476,17 @@ igraph_error_t igraph_maximal_cliques_subset(
 #undef IGRAPH_MC_FULL
 
 
+/* Generate internal function with original parameter order */
+#define igraph_maximal_cliques_callback igraph_i_maximal_cliques_callback
+igraph_error_t igraph_maximal_cliques_callback(const igraph_t *graph,
+                                    igraph_clique_handler_t *cliquehandler_fn, void *arg,
+                                    igraph_int_t min_size, igraph_int_t max_size);
+
+#define IGRAPH_MC_CALLBACK
+#include "maximal_cliques_template.h"
+#undef IGRAPH_MC_CALLBACK
+#undef igraph_maximal_cliques_callback
+
 /**
  * \function igraph_maximal_cliques_callback
  * \brief Finds maximal cliques in a graph and calls a function for each one.
@@ -504,13 +515,12 @@ igraph_error_t igraph_maximal_cliques_subset(
  *
  */
 
-igraph_error_t igraph_maximal_cliques_callback(const igraph_t *graph,
-                                    igraph_clique_handler_t *cliquehandler_fn, void *arg,
-                                    igraph_int_t min_size, igraph_int_t max_size);
-
-#define IGRAPH_MC_CALLBACK
-#include "maximal_cliques_template.h"
-#undef IGRAPH_MC_CALLBACK
+igraph_error_t igraph_maximal_cliques_callback(
+        const igraph_t *graph,
+        igraph_int_t min_size, igraph_int_t max_size,
+        igraph_clique_handler_t *cliquehandler_fn, void *arg) {
+    return igraph_i_maximal_cliques_callback(graph, cliquehandler_fn, arg, min_size, max_size);
+}
 
 
 /**

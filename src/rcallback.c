@@ -153,8 +153,8 @@ igraph_error_t igraph_maximal_cliques_callback_closure(
   R_igraph_callback_data_t data = { .callback = callback };
 
   return igraph_maximal_cliques_callback(
-      graph, R_igraph_clique_handler, &data,
-      min_size, max_size);
+      graph, min_size, max_size,
+      R_igraph_clique_handler, &data);
 }
 
 /* Handler function for cycle callbacks - converts C types to R types */
