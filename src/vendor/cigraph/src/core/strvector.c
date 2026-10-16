@@ -619,7 +619,7 @@ igraph_error_t igraph_strvector_push_back(igraph_strvector_t *sv, const char *va
 
 igraph_error_t igraph_strvector_push_back_len(
         igraph_strvector_t *sv,
-        const char *value, igraph_int_t len) {
+        const char *value, size_t len) {
 
     IGRAPH_CHECK(igraph_i_strvector_expand_if_full(sv));
     char *tmp = strndup(value, len);
