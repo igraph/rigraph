@@ -103,6 +103,13 @@ igraph_growing_random_game:
         name: Growing random graph
       GATTR-PARAM: m, citation
 
+igraph_erdos_renyi_game_gnm:
+    # Upstream replaced loops with allowed_edge_types (krlmlr/igraph@6bc87ad):
+    # the R argument stays loops, a logical.
+    PARAMS: |-
+        OUT GRAPH graph, INTEGER n, INTEGER m, BOOLEAN directed=False,
+        EDGE_TYPE_SW_LOOPS loops=False, BOOLEAN edge_labeled=False
+
 igraph_forest_fire_game:
     R:
       GATTR:
