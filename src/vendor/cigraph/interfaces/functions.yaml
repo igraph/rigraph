@@ -666,44 +666,44 @@ igraph_subcomponent:
 
 igraph_betweenness:
     PARAMS: |-
-        GRAPH graph, OUT VERTEX_QTY res, VERTEX_SELECTOR vids=ALL,
-        BOOLEAN directed=True, OPTIONAL EDGEWEIGHTS weights
+        GRAPH graph, OPTIONAL EDGEWEIGHTS weights, OUT VERTEX_QTY res,
+        VERTEX_SELECTOR vids=ALL, BOOLEAN directed=True, BOOLEAN normalized=False
     DEPS: weights ON graph, vids ON graph, res ON graph vids
 
 igraph_betweenness_cutoff:
     PARAMS: |-
-        GRAPH graph, OUT VERTEX_QTY res, VERTEX_SELECTOR vids=ALL,
-        BOOLEAN directed=True, OPTIONAL EDGEWEIGHTS weights,
+        GRAPH graph, OPTIONAL EDGEWEIGHTS weights, OUT VERTEX_QTY res,
+        VERTEX_SELECTOR vids=ALL, BOOLEAN directed=True, BOOLEAN normalized=False,
         REAL cutoff=-1
     DEPS: vids ON graph, weights ON graph, res ON graph vids
 
 igraph_betweenness_subset:
     PARAMS: |-
-        GRAPH graph, OUT VERTEX_QTY res, VERTEX_SELECTOR vids=ALL,
-        BOOLEAN directed=True, VERTEX_SELECTOR sources=ALL, VERTEX_SELECTOR targets=ALL,
-        OPTIONAL EDGEWEIGHTS weights
+        GRAPH graph, OPTIONAL EDGEWEIGHTS weights, OUT VERTEX_QTY res,
+        VERTEX_SELECTOR sources=ALL, VERTEX_SELECTOR targets=ALL, VERTEX_SELECTOR vids=ALL,
+        BOOLEAN directed=True, BOOLEAN normalized=False
     DEPS: |-
         vids ON graph, weights ON graph, res ON graph vids, sources ON graph, targets ON graph
 
 igraph_edge_betweenness:
     PARAMS: |-
-        GRAPH graph, OUT VECTOR res, BOOLEAN directed=True,
-        OPTIONAL EDGEWEIGHTS weights
-    DEPS: weights ON graph
+        GRAPH graph, OPTIONAL EDGEWEIGHTS weights, OUT VECTOR res, EDGE_SELECTOR eids=ALL,
+        BOOLEAN directed=True, BOOLEAN normalized=False
+    DEPS: eids ON graph, weights ON graph, res ON graph eids
 
 igraph_edge_betweenness_cutoff:
     PARAMS: |-
-        GRAPH graph, OUT VECTOR res, BOOLEAN directed=True,
-        OPTIONAL EDGEWEIGHTS weights, REAL cutoff=-1
-    DEPS: weights ON graph
+        GRAPH graph, OPTIONAL EDGEWEIGHTS weights, OUT VECTOR res, EDGE_SELECTOR eids=ALL,
+        BOOLEAN directed=True, BOOLEAN normalized=False, REAL cutoff=-1
+    DEPS: eids ON graph, weights ON graph, res ON graph eids
 
 igraph_edge_betweenness_subset:
     PARAMS: |-
-        GRAPH graph, OUT VECTOR res, EDGE_SELECTOR eids=ALL,
-        BOOLEAN directed=True, VERTEX_SELECTOR sources=ALL, VERTEX_SELECTOR targets=ALL,
-        OPTIONAL EDGEWEIGHTS weights
+        GRAPH graph, OPTIONAL EDGEWEIGHTS weights, OUT VECTOR res,
+        VERTEX_SELECTOR sources=ALL, VERTEX_SELECTOR targets=ALL, EDGE_SELECTOR eids=ALL,
+        BOOLEAN directed=True, BOOLEAN normalized=False
     DEPS: |-
-        eids ON graph, weights ON graph, res ON graph, sources ON graph, targets ON graph
+        eids ON graph, weights ON graph, res ON graph eids, sources ON graph, targets ON graph
 
 igraph_harmonic_centrality:
     PARAMS: |-

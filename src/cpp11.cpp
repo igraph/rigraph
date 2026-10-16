@@ -48,9 +48,9 @@ extern SEXP R_igraph_average_path_length(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_avg_nearest_neighbor_degree(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_barabasi_aging_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_barabasi_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_betweenness(SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_betweenness_cutoff(SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_betweenness_subset(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_betweenness(SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_betweenness_cutoff(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_betweenness_subset(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_bfs_closure(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_bfs_simple(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_biadjacency(SEXP, SEXP, SEXP, SEXP);
@@ -159,9 +159,9 @@ extern SEXP R_igraph_ecc(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_eccentricity(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_ecount(SEXP);
 extern SEXP R_igraph_edge(SEXP, SEXP);
-extern SEXP R_igraph_edge_betweenness(SEXP, SEXP, SEXP);
-extern SEXP R_igraph_edge_betweenness_cutoff(SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_edge_betweenness_subset(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_edge_betweenness(SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_edge_betweenness_cutoff(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_edge_betweenness_subset(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_edge_connectivity(SEXP, SEXP);
 extern SEXP R_igraph_edge_disjoint_paths(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_edgelist_percolation(SEXP);
@@ -626,9 +626,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_avg_nearest_neighbor_degree",                    (DL_FUNC) &R_igraph_avg_nearest_neighbor_degree,                     5},
     {"R_igraph_barabasi_aging_game",                            (DL_FUNC) &R_igraph_barabasi_aging_game,                            12},
     {"R_igraph_barabasi_game",                                  (DL_FUNC) &R_igraph_barabasi_game,                                   9},
-    {"R_igraph_betweenness",                                    (DL_FUNC) &R_igraph_betweenness,                                     4},
-    {"R_igraph_betweenness_cutoff",                             (DL_FUNC) &R_igraph_betweenness_cutoff,                              5},
-    {"R_igraph_betweenness_subset",                             (DL_FUNC) &R_igraph_betweenness_subset,                              6},
+    {"R_igraph_betweenness",                                    (DL_FUNC) &R_igraph_betweenness,                                     5},
+    {"R_igraph_betweenness_cutoff",                             (DL_FUNC) &R_igraph_betweenness_cutoff,                              6},
+    {"R_igraph_betweenness_subset",                             (DL_FUNC) &R_igraph_betweenness_subset,                              7},
     {"R_igraph_bfs_closure",                                    (DL_FUNC) &R_igraph_bfs_closure,                                     7},
     {"R_igraph_bfs_simple",                                     (DL_FUNC) &R_igraph_bfs_simple,                                      3},
     {"R_igraph_biadjacency",                                    (DL_FUNC) &R_igraph_biadjacency,                                     4},
@@ -737,9 +737,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_eccentricity",                                   (DL_FUNC) &R_igraph_eccentricity,                                    4},
     {"R_igraph_ecount",                                         (DL_FUNC) &R_igraph_ecount,                                          1},
     {"R_igraph_edge",                                           (DL_FUNC) &R_igraph_edge,                                            2},
-    {"R_igraph_edge_betweenness",                               (DL_FUNC) &R_igraph_edge_betweenness,                                3},
-    {"R_igraph_edge_betweenness_cutoff",                        (DL_FUNC) &R_igraph_edge_betweenness_cutoff,                         4},
-    {"R_igraph_edge_betweenness_subset",                        (DL_FUNC) &R_igraph_edge_betweenness_subset,                         6},
+    {"R_igraph_edge_betweenness",                               (DL_FUNC) &R_igraph_edge_betweenness,                                5},
+    {"R_igraph_edge_betweenness_cutoff",                        (DL_FUNC) &R_igraph_edge_betweenness_cutoff,                         6},
+    {"R_igraph_edge_betweenness_subset",                        (DL_FUNC) &R_igraph_edge_betweenness_subset,                         7},
     {"R_igraph_edge_connectivity",                              (DL_FUNC) &R_igraph_edge_connectivity,                               2},
     {"R_igraph_edge_disjoint_paths",                            (DL_FUNC) &R_igraph_edge_disjoint_paths,                             3},
     {"R_igraph_edgelist_percolation",                           (DL_FUNC) &R_igraph_edgelist_percolation,                            1},
