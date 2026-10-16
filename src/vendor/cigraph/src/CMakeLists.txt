@@ -342,8 +342,8 @@ add_library(
 add_dependencies(igraph parsersources)
 
 # Set soname for the library
-set_target_properties(igraph PROPERTIES VERSION "3.1.11")
-set_target_properties(igraph PROPERTIES SOVERSION 3)
+set_target_properties(igraph PROPERTIES VERSION "4.0.1")
+set_target_properties(igraph PROPERTIES SOVERSION 4)
 
 # Add extra compiler definitions if needed
 target_compile_definitions(
@@ -383,6 +383,7 @@ target_include_directories(
 
   # Include paths for dependencies
   "$<$<BOOL:${GLPK_INCLUDE_DIR}>:${GLPK_INCLUDE_DIR}>"
+  "$<$<BOOL:${INFOMAP_INCLUDE_DIR}>:${INFOMAP_INCLUDE_DIR}>"
   "$<$<BOOL:${GMP_INCLUDE_DIR}>:${GMP_INCLUDE_DIR}>"
   "$<$<BOOL:${LIBXML2_INCLUDE_DIRS}>:${LIBXML2_INCLUDE_DIRS}>"
   "$<$<BOOL:${PLFIT_INCLUDE_DIRS}>:${PLFIT_INCLUDE_DIRS}>"
@@ -402,6 +403,10 @@ endif()
 
 if(GLPK_LIBRARIES)
   target_link_libraries(igraph PRIVATE ${GLPK_LIBRARIES})
+endif()
+
+if(INFOMAP_LIBRARIES)
+  target_link_libraries(igraph PRIVATE ${INFOMAP_LIBRARIES})
 endif()
 
 if(GMP_LIBRARIES)
