@@ -439,6 +439,38 @@ is "and then skips a commit that moves only the version stamp" \
 has "listing it in the body" "$(git -C "$STRAND" log -1 --format=%B)" \
   "Update the documentation (https://redirect.github.com/igraph/igraph/pull/22)"
 
+# Claim 15. krlmlr/igraph's replay gives all its commits one committer date, which
+# `git archive` stamps on every file, and an edit can keep a file's size. Where
+# `core.checkStat=minimal` and `core.trustctime=false`, as in the cloud
+# environment the routine runs in, git then has nothing left to tell the two
+# trees apart by, so the regenerated tree has to be dated anew.
+echo "a same-size edit under one committer date"
+SAME=$SCRATCH/same
+git init -q -b main "$SAME/up"
+(
+  cd "$SAME/up"
+  mkdir -p src
+  at="1700000000 +0000"
+  echo 'view(&x, p, n);' >src/a.c
+  git add -A && GIT_AUTHOR_DATE=$at GIT_COMMITTER_DATE=$at git commit -q -m 'Pass the target' && git tag 0.10.17
+  echo 'x = view(p, n);' >src/a.c
+  git add -A && GIT_AUTHOR_DATE=$at GIT_COMMITTER_DATE=$at git commit -q -m 'Return by value'
+)
+git init -q -b main "$SAME/pkg"
+git -C "$SAME/pkg" config core.checkStat minimal
+git -C "$SAME/pkg" config core.trustctime false
+(
+  cd "$SAME/pkg"
+  . "$SCRIPTS/series-config.sh"
+  git -C "$SAME/up" checkout -q HEAD~1
+  series_generate_tree "$SAME/up"
+  git add -A && git commit -q -m 'vendor: the first'
+  git -C "$SAME/up" checkout -q main
+  series_generate_tree "$SAME/up"
+)
+is "an edit that keeps the size is seen" \
+  "$(git -C "$SAME/pkg" status --porcelain -- src/vendor/cigraph/src/a.c)" " M src/vendor/cigraph/src/a.c"
+
 echo
 echo "$pass passed, $fail failed"
 [ "$fail" = 0 ]
