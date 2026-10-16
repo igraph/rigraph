@@ -2272,7 +2272,7 @@
     Condition
       Warning in `transitivity_barrat_impl()`:
       No weights given for Barrat's transitivity, unweighted version is used.
-      Source: properties/triangles.c:913
+      Source: properties/triangles.c:890
     Output
       [1] NaN   0 NaN
 
@@ -2283,7 +2283,7 @@
     Condition
       Warning in `transitivity_barrat_impl()`:
       No weights given for Barrat's transitivity, unweighted version is used.
-      Source: properties/triangles.c:913
+      Source: properties/triangles.c:890
     Output
       [1] 0 0 0
 
