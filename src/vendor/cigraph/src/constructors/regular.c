@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2005-2021 The igraph development team
 
    This program is free software; you can redistribute it and/or modify
@@ -281,29 +280,6 @@ igraph_error_t igraph_wheel(igraph_t *graph, igraph_int_t n, igraph_wheel_mode_t
 
     /* 2 instead of 1 because the star graph is registered before. */
     IGRAPH_FINALLY_CLEAN(2);
-
-    return IGRAPH_SUCCESS;
-}
-
-/**
- * \ingroup generators
- * \function igraph_lattice
- * \brief Arbitrary dimensional square lattices (deprecated).
- *
- * \deprecated-by igraph_square_lattice 0.10.0
- */
-igraph_error_t igraph_lattice(igraph_t *graph, const igraph_vector_int_t *dimvector,
-                   igraph_int_t nei, igraph_bool_t directed, igraph_bool_t mutual,
-                   igraph_bool_t circular) {
-    igraph_vector_bool_t periodic;
-
-    IGRAPH_VECTOR_BOOL_INIT_FINALLY(&periodic, igraph_vector_int_size(dimvector));
-    igraph_vector_bool_fill(&periodic, circular);
-
-    IGRAPH_CHECK(igraph_square_lattice(graph, dimvector, nei, directed, mutual, &periodic));
-
-    igraph_vector_bool_destroy(&periodic);
-    IGRAPH_FINALLY_CLEAN(1);
 
     return IGRAPH_SUCCESS;
 }

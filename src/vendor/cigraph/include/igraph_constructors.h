@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -57,8 +56,6 @@ IGRAPH_EXPORT igraph_error_t igraph_wheel(igraph_t *graph, igraph_int_t n, igrap
                               igraph_int_t center);
 IGRAPH_EXPORT igraph_error_t igraph_hypercube(igraph_t *graph,
                                               igraph_int_t n, igraph_bool_t directed);
-IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_lattice(igraph_t *graph, const igraph_vector_int_t *dimvector, igraph_int_t nei,
-                                 igraph_bool_t directed, igraph_bool_t mutual, igraph_bool_t circular);
 IGRAPH_EXPORT igraph_error_t igraph_square_lattice(igraph_t *graph, const igraph_vector_int_t *dimvector, igraph_int_t nei,
                                  igraph_bool_t directed, igraph_bool_t mutual, const igraph_vector_bool_t *circular);
 IGRAPH_EXPORT igraph_error_t igraph_ring(igraph_t *graph, igraph_int_t n, igraph_bool_t directed,
