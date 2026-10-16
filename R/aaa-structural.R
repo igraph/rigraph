@@ -815,6 +815,7 @@ assortativity_degree_impl <- function(
 
 assortativity_impl <- function(
   graph,
+  weights = NULL,
   values,
   values_in = NULL,
   directed = TRUE,
@@ -822,6 +823,14 @@ assortativity_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && !all(is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
   values <- as.numeric(values)
   if (!is.null(values_in)) {
     values_in <- as.numeric(values_in)
@@ -834,6 +843,7 @@ assortativity_impl <- function(
   res <- .Call(
     R_igraph_assortativity,
     graph,
+    weights,
     values,
     values_in,
     directed,
@@ -845,12 +855,21 @@ assortativity_impl <- function(
 
 assortativity_nominal_impl <- function(
   graph,
+  weights = NULL,
   types,
   directed = TRUE,
   normalized = TRUE
 ) {
   # Argument checks
   ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && !all(is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
   types <- as.numeric(types) - 1
   directed <- as.logical(directed)
   normalized <- as.logical(normalized)
@@ -860,6 +879,7 @@ assortativity_nominal_impl <- function(
   res <- .Call(
     R_igraph_assortativity_nominal,
     graph,
+    weights,
     types,
     directed,
     normalized
