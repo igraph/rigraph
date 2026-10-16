@@ -200,11 +200,23 @@ each_edge <- function(
 }
 
 rewire_each_edge <- function(graph, prob, loops, multiple) {
+  # Upstream (igraph@eb3a92b) takes the edge types to allow as one switch
+  # instead of `loops` and `multiple`.
+  loops <- as.logical(loops)
+  multiple <- as.logical(multiple)
+  allowed_edge_types <- if (loops && multiple) {
+    "all"
+  } else if (loops) {
+    "loops"
+  } else if (multiple) {
+    "multi"
+  } else {
+    "simple"
+  }
   rewire_edges_impl(
     graph = graph,
     prob = prob,
-    loops = loops,
-    multiple = multiple
+    allowed_edge_types = allowed_edge_types
   )
 }
 
