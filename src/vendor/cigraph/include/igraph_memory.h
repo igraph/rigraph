@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2003-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -39,12 +38,6 @@ __BEGIN_DECLS
 #define IGRAPH_MALLOC(n)      malloc( (size_t) ((n) > 0 ? (n) : 1) )
 #define IGRAPH_REALLOC(p,n,t) IGRAPH_I_ALLOC_CHECK_OVERFLOW(n, t, realloc((void*)(p), sizeof(t) * ((n) > 0 ? (n) : 1)))
 #define IGRAPH_FREE(p)        (free( (void *)(p) ), (p) = NULL)
-
-/* These are deprecated and scheduled for removal in 0.11 */
-#define igraph_Calloc IGRAPH_CALLOC
-#define igraph_Realloc IGRAPH_REALLOC
-#define igraph_Free IGRAPH_FREE
-/* Deprecated section ends here */
 
 IGRAPH_EXPORT void *igraph_calloc(size_t count, size_t size);
 IGRAPH_EXPORT void *igraph_malloc(size_t size);
