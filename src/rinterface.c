@@ -3097,29 +3097,27 @@ SEXP R_igraph_k_regular_game(SEXP no_of_nodes, SEXP k, SEXP directed, SEXP multi
 /*-------------------------------------------/
 / igraph_sbm_game                            /
 /-------------------------------------------*/
-SEXP R_igraph_sbm_game(SEXP n, SEXP pref_matrix, SEXP block_sizes, SEXP directed, SEXP loops) {
+SEXP R_igraph_sbm_game(SEXP pref_matrix, SEXP block_sizes, SEXP directed, SEXP loops) {
                                         /* Declarations */
   igraph_t c_graph;
-  igraph_integer_t c_n;
+
   igraph_matrix_t c_pref_matrix;
   igraph_vector_int_t c_block_sizes;
   igraph_bool_t c_directed;
-  igraph_bool_t c_loops;
+  igraph_edge_type_sw_t c_loops;
   SEXP graph;
 
   SEXP r_result;
                                         /* Convert input */
-  IGRAPH_R_CHECK_INT(n);
-  c_n = (igraph_integer_t) REAL(n)[0];
   Rz_SEXP_to_matrix(pref_matrix, &c_pref_matrix);
   IGRAPH_R_CHECK(Rz_SEXP_to_vector_int_copy(block_sizes, &c_block_sizes));
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_block_sizes);
   IGRAPH_R_CHECK_BOOL(directed);
   c_directed = LOGICAL(directed)[0];
   IGRAPH_R_CHECK_BOOL(loops);
-  c_loops = LOGICAL(loops)[0];
+  c_loops = LOGICAL(loops)[0] ? IGRAPH_LOOPS_SW : IGRAPH_SIMPLE_SW;
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_sbm_game(&c_graph, c_n, &c_pref_matrix, &c_block_sizes, c_directed, c_loops));
+  IGRAPH_R_CHECK(igraph_sbm_game(&c_graph, &c_pref_matrix, &c_block_sizes, c_directed, c_loops));
 
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_graph);

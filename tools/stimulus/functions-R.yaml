@@ -148,6 +148,14 @@ igraph_k_regular_game:
       GATTR-PARAM: k
 
 igraph_sbm_game:
+    # Upstream drops n and replaces loops with allowed_edge_types
+    # (krlmlr/igraph@17177c7): the R arguments stay, n checked against the
+    # block sizes and loops a logical.
+    PARAMS: |-
+        OUT GRAPH graph, BLOCK_SIZES_SUM n, MATRIX pref_matrix,
+        VECTOR_INT block_sizes, BOOLEAN directed=False,
+        EDGE_TYPE_SW_LOOPS loops=False
+    DEPS: n ON block_sizes
     R:
       GATTR:
         name: Stochastic block model
