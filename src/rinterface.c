@@ -10892,24 +10892,22 @@ SEXP R_igraph_layout_sugiyama(SEXP graph, SEXP layers, SEXP hgap, SEXP vgap, SEX
                                         /* Declarations */
   igraph_t c_graph;
   igraph_matrix_t c_res;
-  igraph_t c_extd_graph;
-  igraph_vector_int_t c_extd_to_orig_eids;
+  igraph_matrix_list_t c_routing;
   igraph_vector_int_t c_layers;
   igraph_real_t c_hgap;
   igraph_real_t c_vgap;
   igraph_integer_t c_maxiter;
   igraph_vector_t c_weights;
   SEXP res;
-  SEXP extd_graph;
-  SEXP extd_to_orig_eids;
+  SEXP routing;
 
   SEXP r_result, r_names;
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
   IGRAPH_R_CHECK(igraph_matrix_init(&c_res, 0, 0));
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
-  IGRAPH_R_CHECK(igraph_vector_int_init(&c_extd_to_orig_eids, 0));
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_extd_to_orig_eids);
+  IGRAPH_R_CHECK(igraph_matrix_list_init(&c_routing, 0));
+  IGRAPH_FINALLY(igraph_matrix_list_destroy, &c_routing);
   if (!Rf_isNull(layers)) {
     Rz_SEXP_to_vector_int_copy(layers, &c_layers);
     IGRAPH_FINALLY(igraph_vector_int_destroy, &c_layers);
@@ -10927,31 +10925,25 @@ SEXP R_igraph_layout_sugiyama(SEXP graph, SEXP layers, SEXP hgap, SEXP vgap, SEX
     Rz_SEXP_to_vector(weights, &c_weights);
   }
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_layout_sugiyama(&c_graph, &c_res, &c_extd_graph, &c_extd_to_orig_eids, (Rf_isNull(layers) ? 0 : &c_layers), c_hgap, c_vgap, c_maxiter, (Rf_isNull(weights) ? 0 : &c_weights)));
+  IGRAPH_R_CHECK(igraph_layout_sugiyama(&c_graph, &c_res, &c_routing, (Rf_isNull(layers) ? 0 : &c_layers), c_hgap, c_vgap, c_maxiter, (Rf_isNull(weights) ? 0 : &c_weights)));
 
                                         /* Convert output */
-  PROTECT(r_result=NEW_LIST(3));
-  PROTECT(r_names=NEW_CHARACTER(3));
+  PROTECT(r_result=NEW_LIST(2));
+  PROTECT(r_names=NEW_CHARACTER(2));
   PROTECT(res=Ry_igraph_matrix_to_SEXP(&c_res));
   igraph_matrix_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
-  IGRAPH_FINALLY(igraph_destroy, &c_extd_graph);
-  PROTECT(extd_graph=Ry_igraph_to_SEXP(&c_extd_graph));
-  IGRAPH_I_DESTROY(&c_extd_graph);
-  IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(extd_to_orig_eids=Ry_igraph_vector_int_to_SEXPp1(&c_extd_to_orig_eids));
-  igraph_vector_int_destroy(&c_extd_to_orig_eids);
+  PROTECT(routing=Rx_igraph_matrixlist_to_SEXP(&c_routing));
+  igraph_matrix_list_destroy(&c_routing);
   IGRAPH_FINALLY_CLEAN(1);
   igraph_vector_int_destroy(&c_layers);
   IGRAPH_FINALLY_CLEAN(1);
   SET_VECTOR_ELT(r_result, 0, res);
-  SET_VECTOR_ELT(r_result, 1, extd_graph);
-  SET_VECTOR_ELT(r_result, 2, extd_to_orig_eids);
+  SET_VECTOR_ELT(r_result, 1, routing);
   SET_STRING_ELT(r_names, 0, Rf_mkChar("res"));
-  SET_STRING_ELT(r_names, 1, Rf_mkChar("extd_graph"));
-  SET_STRING_ELT(r_names, 2, Rf_mkChar("extd_to_orig_eids"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("routing"));
   SET_NAMES(r_result, r_names);
-  UNPROTECT(4);
+  UNPROTECT(3);
 
   UNPROTECT(1);
   return(r_result);

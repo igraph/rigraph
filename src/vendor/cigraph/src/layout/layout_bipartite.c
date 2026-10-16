@@ -1,7 +1,6 @@
-/* -*- mode: C -*-  */
 /* vim:set ts=4 sw=4 sts=4 et: */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2003-2020  The igraph development team
 
    This program is free software; you can redistribute it and/or modify
@@ -70,9 +69,8 @@ igraph_error_t igraph_layout_bipartite(const igraph_t *graph,
         VECTOR(layers)[i] = VECTOR(*types)[i] ? 0 : 1;
     }
 
-    IGRAPH_CHECK(igraph_layout_sugiyama(graph, res, /*extd_graph=*/ 0,
-                                        /*extd_to_orig_eids=*/ 0, &layers, hgap,
-                                        vgap, maxiter, /*weights=*/ 0));
+    IGRAPH_CHECK(igraph_layout_sugiyama(graph, res, /* routing= */ 0,
+                                        &layers, hgap, vgap, maxiter, /* weights= */ 0));
 
     igraph_vector_int_destroy(&layers);
     IGRAPH_FINALLY_CLEAN(1);

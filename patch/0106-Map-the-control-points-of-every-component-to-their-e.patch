@@ -1,0 +1,36 @@
+From 7614e66c99bfa5677c73d361a17019feec1691f3 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Fri, 16 Oct 2026 11:54:59 +0000
+Subject: [PATCH] Map the control points of every component to their edges in
+ igraph_layout_sugiyama()
+
+new_vertex_id_to_edge_id starts with one entry, -1, per vertex of the graph,
+and the entries of a component's dummy vertices are appended after them, while
+those dummy vertices are numbered from the size of the component. In a graph
+with more than one component, the routing loop therefore met the -1 entries
+first, read them as the flipped edge 0, and gave edge 0 the points of dummy
+vertices that belong to other edges. Truncate the vector to the size of the
+component before appending.
+---
+ src/vendor/cigraph/src/layout/sugiyama.c | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/src/vendor/cigraph/src/layout/sugiyama.c b/src/vendor/cigraph/src/layout/sugiyama.c
+index 631e732643..3a850887ba 100644
+--- a/src/vendor/cigraph/src/layout/sugiyama.c
++++ b/src/vendor/cigraph/src/layout/sugiyama.c
+@@ -378,6 +378,11 @@ igraph_error_t igraph_layout_sugiyama(
+         }
+         component_size = next_new_vertex_id;
+ 
++        /* Entries for the dummy vertices of this component follow those of its
++         * own vertices, which are numbered from zero, so that the entry of the
++         * dummy vertex with new ID i is at index i. */
++        IGRAPH_CHECK(igraph_vector_int_resize(&new_vertex_id_to_edge_id, component_size));
++
+         /* Construct a proper layering of the component in new_graph where each edge
+          * points downwards and spans exactly one layer. */
+         for (i = 0; i < no_of_nodes; i++) {
+-- 
+2.55.0
+

@@ -1559,8 +1559,7 @@ igraph_layout_merge_dla:
 
 igraph_layout_sugiyama:
     PARAMS: |-
-        GRAPH graph, OUT MATRIX res, OPTIONAL OUT GRAPH extd_graph,
-        OPTIONAL OUT INDEX_VECTOR extd_to_orig_eids,
+        GRAPH graph, OUT MATRIX res, OPTIONAL OUT MATRIX_LIST routing,
         OPTIONAL INDEX_VECTOR layers,
         REAL hgap=1, REAL vgap=1, INTEGER maxiter=100,
         OPTIONAL EDGEWEIGHTS weights
