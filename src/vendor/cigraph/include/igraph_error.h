@@ -295,7 +295,6 @@ typedef enum {
     IGRAPH_EARPACK           = 15,
     /* ARPACK error codes from 15 to 36 were moved to igraph_arpack_error_t in 1.0 */
     IGRAPH_ENEGCYCLE         = 37,
-    IGRAPH_ENEGLOOP IGRAPH_DEPRECATED_ENUMVAL = IGRAPH_ENEGCYCLE,
     IGRAPH_EINTERNAL         = 38,
     /* ARPACK error codes from 39 to 41 were moved to igraph_arpack_error_t in 1.0 */
     /* IGRAPH_EDIVZERO          = 42, */   /* removed in 1.0 */
