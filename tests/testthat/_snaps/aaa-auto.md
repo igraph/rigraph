@@ -5027,13 +5027,13 @@
       [2,]  0.5    0
       [3,]  1.0    1
       
-      $extd_graph
-      IGRAPH U--- 3 2 -- 
-      + edges:
-      [1] 1--2 2--3
+      $routing
+      $routing[[1]]
+           [,1] [,2]
       
-      $extd_to_orig_eids
-      [1] 1 2
+      $routing[[2]]
+           [,1] [,2]
+      
       
 
 ---
@@ -5048,13 +5048,13 @@
       [2,]    0    2
       [3,]    0    4
       
-      $extd_graph
-      IGRAPH U--- 3 2 -- 
-      + edges:
-      [1] 1--2 2--3
+      $routing
+      $routing[[1]]
+           [,1] [,2]
       
-      $extd_to_orig_eids
-      [1] 1 2
+      $routing[[2]]
+           [,1] [,2]
+      
       
 
 # layout_sugiyama_impl errors
