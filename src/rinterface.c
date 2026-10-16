@@ -5342,16 +5342,16 @@ SEXP R_igraph_harmonic_centrality_cutoff(SEXP graph, SEXP vids, SEXP mode, SEXP 
 /*-------------------------------------------/
 / igraph_pagerank                            /
 /-------------------------------------------*/
-SEXP R_igraph_pagerank(SEXP graph, SEXP algo, SEXP vids, SEXP directed, SEXP damping, SEXP weights, SEXP options) {
+SEXP R_igraph_pagerank(SEXP graph, SEXP weights, SEXP damping, SEXP directed, SEXP vids, SEXP algo, SEXP options) {
                                         /* Declarations */
   igraph_t c_graph;
-  igraph_pagerank_algo_t c_algo;
+  igraph_vector_t c_weights;
   igraph_vector_t c_vector;
   igraph_real_t c_value;
-  igraph_vs_t c_vids;
-  igraph_bool_t c_directed;
   igraph_real_t c_damping;
-  igraph_vector_t c_weights;
+  igraph_bool_t c_directed;
+  igraph_vs_t c_vids;
+  igraph_pagerank_algo_t c_algo;
   igraph_arpack_options_t c_options1;
   void* c_options = NULL;
   SEXP vector;
@@ -5360,18 +5360,18 @@ SEXP R_igraph_pagerank(SEXP graph, SEXP algo, SEXP vids, SEXP directed, SEXP dam
   SEXP r_result, r_names;
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
-  c_algo = (igraph_pagerank_algo_t) Rf_asInteger(algo);
-  IGRAPH_R_CHECK(igraph_vector_init(&c_vector, 0));
-  IGRAPH_FINALLY(igraph_vector_destroy, &c_vector);
-  igraph_vector_int_t c_vids_data;
-  Rz_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
-  IGRAPH_R_CHECK_BOOL(directed);
-  c_directed = LOGICAL(directed)[0];
-  IGRAPH_R_CHECK_REAL(damping);
-  c_damping = REAL(damping)[0];
   if (!Rf_isNull(weights)) {
     Rz_SEXP_to_vector(weights, &c_weights);
   }
+  IGRAPH_R_CHECK(igraph_vector_init(&c_vector, 0));
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_vector);
+  IGRAPH_R_CHECK_REAL(damping);
+  c_damping = REAL(damping)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  igraph_vector_int_t c_vids_data;
+  Rz_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
+  c_algo = (igraph_pagerank_algo_t) Rf_asInteger(algo);
   if (!Rf_isNull(options)) {
     if (c_algo == IGRAPH_PAGERANK_ALGO_ARPACK) {
       Rz_SEXP_to_igraph_arpack_options(options, &c_options1);
@@ -5379,7 +5379,7 @@ SEXP R_igraph_pagerank(SEXP graph, SEXP algo, SEXP vids, SEXP directed, SEXP dam
     }
   }
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_pagerank(&c_graph, c_algo, &c_vector, &c_value, c_vids, c_directed, c_damping, (Rf_isNull(weights) ? 0 : &c_weights), c_options));
+  IGRAPH_R_CHECK(igraph_pagerank(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_vector, &c_value, c_damping, c_directed, c_vids, c_algo, c_options));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(3));
@@ -5412,17 +5412,17 @@ SEXP R_igraph_pagerank(SEXP graph, SEXP algo, SEXP vids, SEXP directed, SEXP dam
 /*-------------------------------------------/
 / igraph_personalized_pagerank               /
 /-------------------------------------------*/
-SEXP R_igraph_personalized_pagerank(SEXP graph, SEXP algo, SEXP vids, SEXP directed, SEXP damping, SEXP personalized, SEXP weights, SEXP options) {
+SEXP R_igraph_personalized_pagerank(SEXP graph, SEXP weights, SEXP reset, SEXP damping, SEXP directed, SEXP vids, SEXP algo, SEXP options) {
                                         /* Declarations */
   igraph_t c_graph;
-  igraph_pagerank_algo_t c_algo;
+  igraph_vector_t c_weights;
   igraph_vector_t c_vector;
   igraph_real_t c_value;
-  igraph_vs_t c_vids;
-  igraph_bool_t c_directed;
+  igraph_vector_t c_reset;
   igraph_real_t c_damping;
-  igraph_vector_t c_personalized;
-  igraph_vector_t c_weights;
+  igraph_bool_t c_directed;
+  igraph_vs_t c_vids;
+  igraph_pagerank_algo_t c_algo;
   igraph_arpack_options_t c_options1;
   void* c_options = NULL;
   SEXP vector;
@@ -5431,21 +5431,21 @@ SEXP R_igraph_personalized_pagerank(SEXP graph, SEXP algo, SEXP vids, SEXP direc
   SEXP r_result, r_names;
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
-  c_algo = (igraph_pagerank_algo_t) Rf_asInteger(algo);
-  IGRAPH_R_CHECK(igraph_vector_init(&c_vector, 0));
-  IGRAPH_FINALLY(igraph_vector_destroy, &c_vector);
-  igraph_vector_int_t c_vids_data;
-  Rz_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
-  IGRAPH_R_CHECK_BOOL(directed);
-  c_directed = LOGICAL(directed)[0];
-  IGRAPH_R_CHECK_REAL(damping);
-  c_damping = REAL(damping)[0];
-  if (!Rf_isNull(personalized)) {
-    Rz_SEXP_to_vector(personalized, &c_personalized);
-  }
   if (!Rf_isNull(weights)) {
     Rz_SEXP_to_vector(weights, &c_weights);
   }
+  IGRAPH_R_CHECK(igraph_vector_init(&c_vector, 0));
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_vector);
+  if (!Rf_isNull(reset)) {
+    Rz_SEXP_to_vector(reset, &c_reset);
+  }
+  IGRAPH_R_CHECK_REAL(damping);
+  c_damping = REAL(damping)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  igraph_vector_int_t c_vids_data;
+  Rz_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
+  c_algo = (igraph_pagerank_algo_t) Rf_asInteger(algo);
   if (!Rf_isNull(options)) {
     if (c_algo == IGRAPH_PAGERANK_ALGO_ARPACK) {
       Rz_SEXP_to_igraph_arpack_options(options, &c_options1);
@@ -5453,7 +5453,7 @@ SEXP R_igraph_personalized_pagerank(SEXP graph, SEXP algo, SEXP vids, SEXP direc
     }
   }
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_personalized_pagerank(&c_graph, c_algo, &c_vector, &c_value, c_vids, c_directed, c_damping, (Rf_isNull(personalized) ? 0 : &c_personalized), (Rf_isNull(weights) ? 0 : &c_weights), c_options));
+  IGRAPH_R_CHECK(igraph_personalized_pagerank(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_vector, &c_value, (Rf_isNull(reset) ? 0 : &c_reset), c_damping, c_directed, c_vids, c_algo, c_options));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(3));
@@ -5486,17 +5486,17 @@ SEXP R_igraph_personalized_pagerank(SEXP graph, SEXP algo, SEXP vids, SEXP direc
 /*-------------------------------------------/
 / igraph_personalized_pagerank_vs            /
 /-------------------------------------------*/
-SEXP R_igraph_personalized_pagerank_vs(SEXP graph, SEXP algo, SEXP vids, SEXP directed, SEXP damping, SEXP reset_vids, SEXP weights, SEXP options) {
+SEXP R_igraph_personalized_pagerank_vs(SEXP graph, SEXP weights, SEXP reset_vids, SEXP damping, SEXP directed, SEXP vids, SEXP algo, SEXP options) {
                                         /* Declarations */
   igraph_t c_graph;
-  igraph_pagerank_algo_t c_algo;
+  igraph_vector_t c_weights;
   igraph_vector_t c_vector;
   igraph_real_t c_value;
-  igraph_vs_t c_vids;
-  igraph_bool_t c_directed;
-  igraph_real_t c_damping;
   igraph_vs_t c_reset_vids;
-  igraph_vector_t c_weights;
+  igraph_real_t c_damping;
+  igraph_bool_t c_directed;
+  igraph_vs_t c_vids;
+  igraph_pagerank_algo_t c_algo;
   igraph_arpack_options_t c_options1;
   void* c_options = NULL;
   SEXP vector;
@@ -5505,20 +5505,20 @@ SEXP R_igraph_personalized_pagerank_vs(SEXP graph, SEXP algo, SEXP vids, SEXP di
   SEXP r_result, r_names;
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
-  c_algo = (igraph_pagerank_algo_t) Rf_asInteger(algo);
-  IGRAPH_R_CHECK(igraph_vector_init(&c_vector, 0));
-  IGRAPH_FINALLY(igraph_vector_destroy, &c_vector);
-  igraph_vector_int_t c_vids_data;
-  Rz_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
-  IGRAPH_R_CHECK_BOOL(directed);
-  c_directed = LOGICAL(directed)[0];
-  IGRAPH_R_CHECK_REAL(damping);
-  c_damping = REAL(damping)[0];
-  igraph_vector_int_t c_reset_vids_data;
-  Rz_SEXP_to_igraph_vs(reset_vids, &c_graph, &c_reset_vids, &c_reset_vids_data);
   if (!Rf_isNull(weights)) {
     Rz_SEXP_to_vector(weights, &c_weights);
   }
+  IGRAPH_R_CHECK(igraph_vector_init(&c_vector, 0));
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_vector);
+  igraph_vector_int_t c_reset_vids_data;
+  Rz_SEXP_to_igraph_vs(reset_vids, &c_graph, &c_reset_vids, &c_reset_vids_data);
+  IGRAPH_R_CHECK_REAL(damping);
+  c_damping = REAL(damping)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  igraph_vector_int_t c_vids_data;
+  Rz_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
+  c_algo = (igraph_pagerank_algo_t) Rf_asInteger(algo);
   if (!Rf_isNull(options)) {
     if (c_algo == IGRAPH_PAGERANK_ALGO_ARPACK) {
       Rz_SEXP_to_igraph_arpack_options(options, &c_options1);
@@ -5526,7 +5526,7 @@ SEXP R_igraph_personalized_pagerank_vs(SEXP graph, SEXP algo, SEXP vids, SEXP di
     }
   }
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_personalized_pagerank_vs(&c_graph, c_algo, &c_vector, &c_value, c_vids, c_directed, c_damping, c_reset_vids, (Rf_isNull(weights) ? 0 : &c_weights), c_options));
+  IGRAPH_R_CHECK(igraph_personalized_pagerank_vs(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_vector, &c_value, c_reset_vids, c_damping, c_directed, c_vids, c_algo, c_options));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(3));
@@ -5536,10 +5536,10 @@ SEXP R_igraph_personalized_pagerank_vs(SEXP graph, SEXP algo, SEXP vids, SEXP di
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(value=NEW_NUMERIC(1));
   REAL(value)[0]=c_value;
-  igraph_vector_int_destroy(&c_vids_data);
-  igraph_vs_destroy(&c_vids);
   igraph_vector_int_destroy(&c_reset_vids_data);
   igraph_vs_destroy(&c_reset_vids);
+  igraph_vector_int_destroy(&c_vids_data);
+  igraph_vs_destroy(&c_vids);
   if (c_algo == IGRAPH_PAGERANK_ALGO_ARPACK) {
     PROTECT(options = Ry_igraph_arpack_options_to_SEXP(&c_options1));
   } else {
