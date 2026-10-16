@@ -127,7 +127,7 @@ degree_impl <- function(
   graph,
   vids = V(graph),
   mode = c("all", "out", "in", "total"),
-  loops = TRUE
+  loops = c("twice", "none", "once")
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -139,7 +139,10 @@ degree_impl <- function(
     "all" = 3L,
     "total" = 3L
   )
-  loops <- as.logical(loops)
+  if (is.logical(loops)) {
+    loops <- if (loops) "twice" else "none"
+  }
+  loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call

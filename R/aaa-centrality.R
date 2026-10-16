@@ -345,7 +345,7 @@ maxdegree_impl <- function(
   ...,
   v = V(graph),
   mode = c("all", "out", "in", "total"),
-  loops = TRUE
+  loops = c("twice", "none", "once")
 ) {
   # Argument checks
   check_dots_empty()
@@ -358,7 +358,10 @@ maxdegree_impl <- function(
     "all" = 3L,
     "total" = 3L
   )
-  loops <- as.logical(loops)
+  if (is.logical(loops)) {
+    loops <- if (loops) "twice" else "none"
+  }
+  loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -542,7 +545,7 @@ strength_impl <- function(
   graph,
   vids = V(graph),
   mode = c("all", "out", "in", "total"),
-  loops = TRUE,
+  loops = c("twice", "none", "once"),
   weights = NULL
 ) {
   # Argument checks
@@ -555,7 +558,10 @@ strength_impl <- function(
     "all" = 3L,
     "total" = 3L
   )
-  loops <- as.logical(loops)
+  if (is.logical(loops)) {
+    loops <- if (loops) "twice" else "none"
+  }
+  loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -690,7 +696,7 @@ centralization_closeness_tmax_impl <- function(
 centralization_degree_impl <- function(
   graph,
   mode = c("all", "out", "in", "total"),
-  loops = TRUE,
+  loops = c("twice", "none", "once"),
   normalized = TRUE
 ) {
   # Argument checks
@@ -702,7 +708,10 @@ centralization_degree_impl <- function(
     "all" = 3L,
     "total" = 3L
   )
-  loops <- as.logical(loops)
+  if (is.logical(loops)) {
+    loops <- if (loops) "twice" else "none"
+  }
+  loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
   normalized <- as.logical(normalized)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -736,7 +745,10 @@ centralization_degree_tmax_impl <- function(
     "all" = 3L,
     "total" = 3L
   )
-  loops <- as.logical(loops)
+  if (is.logical(loops)) {
+    loops <- if (loops) "twice" else "none"
+  }
+  loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call

@@ -607,7 +607,15 @@ LAPLACIAN_NORMALIZATION:
 LOOPS:
     DEFAULT:
         ONCE: c("once", "none", "twice")
-    INCONV: '%I% <- switch_igraph_arg(%I%, "none" = 0L, "twice" = 1L, "once" = 2L)'
+        TWICE: c("twice", "none", "once")
+    # A logical is what callers passed while upstream took a boolean here
+    # (igraph_degree() and four more until krlmlr/igraph@e6da4d7):
+    # TRUE counts loops, as "twice" does, and FALSE ignores them.
+    INCONV: |-
+        if (is.logical(%I%)) {
+          %I% <- if (%I%) "twice" else "none"
+        }
+        %I% <- switch_igraph_arg(%I%, "none" = 0L, "twice" = 1L, "once" = 2L)
 
 SIRLIST: {}
 
