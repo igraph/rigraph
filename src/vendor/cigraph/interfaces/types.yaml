@@ -537,7 +537,7 @@ WRITE_GML_SW:
 # Callbacks
 ###############################################################################
 
-ARPACKFUNC:
+ARPACK_FUNC:
     # ARPACK matrix multiplication function.
     CTYPE: igraph_arpack_function_t
 
