@@ -2761,34 +2761,6 @@ igraph_is_edge_coloring:
     DEPS: types ON graph
 
 #######################################
-# Microscopic update
-#######################################
-
-igraph_deterministic_optimal_imitation:
-    PARAMS: |-
-        GRAPH graph, VERTEX vid, OPTIMALITY optimality=MAXIMUM, ALL_VERTEX_QTY quantities,
-        INOUT VECTOR_INT strategies, NEIMODE mode=OUT
-    DEPS: vid ON graph, quantities ON graph, strategies ON graph
-
-igraph_moran_process:
-    PARAMS: |-
-        GRAPH graph, OPTIONAL EDGEWEIGHTS weights, INOUT ALL_VERTEX_QTY quantities,
-        INOUT VECTOR_INT strategies, NEIMODE mode=OUT
-    DEPS: weights ON graph, quantities ON graph, strategies ON graph
-
-igraph_roulette_wheel_imitation:
-    PARAMS: |-
-        GRAPH graph, VERTEX vid, BOOLEAN is_local, ALL_VERTEX_QTY quantities,
-        INOUT VECTOR_INT strategies, NEIMODE mode=OUT
-    DEPS: vid ON graph, quantities ON graph, strategies ON graph
-
-igraph_stochastic_imitation:
-    PARAMS: |-
-        GRAPH graph, VERTEX vid, IMITATE_ALGORITHM algo, ALL_VERTEX_QTY quantities,
-        INOUT VECTOR_INT strategies, NEIMODE mode=OUT
-    DEPS: vid ON graph, quantities ON graph, strategies ON graph
-
-#######################################
 # Other, (yet) undocumented functions
 #######################################
 

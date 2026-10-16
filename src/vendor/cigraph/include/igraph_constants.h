@@ -62,8 +62,6 @@ enum { IGRAPH_EDGE_UNLABELED = 0, IGRAPH_EDGE_LABELED = 1 };
 
 typedef enum { IGRAPH_ASCENDING = 0, IGRAPH_DESCENDING = 1 } igraph_order_t;
 
-typedef enum { IGRAPH_MINIMUM = 0, IGRAPH_MAXIMUM = 1 } igraph_optimal_t;
-
 /* Do not renumber the following values! Some internal code treats them as bitmasks
  * and assumes that IGRAPH_ALL == IGRAPH_IN | IGRAPH_OUT and IGRAPH_IN & IGRAPH_OUT == 0. */
 typedef enum { IGRAPH_OUT = 1, IGRAPH_IN = 2, IGRAPH_ALL = 3 } igraph_neimode_t;
@@ -204,11 +202,6 @@ typedef enum { IGRAPH_SUBGRAPH_AUTO = 0,
                IGRAPH_SUBGRAPH_COPY_AND_DELETE,
                IGRAPH_SUBGRAPH_CREATE_FROM_SCRATCH
              } igraph_subgraph_implementation_t;
-
-typedef enum { IGRAPH_IMITATE_AUGMENTED = 0,
-               IGRAPH_IMITATE_BLIND,
-               IGRAPH_IMITATE_CONTRACTED
-             } igraph_imitate_algorithm_t;
 
 typedef enum { IGRAPH_LAYOUT_GRID = 0,
                IGRAPH_LAYOUT_NOGRID,

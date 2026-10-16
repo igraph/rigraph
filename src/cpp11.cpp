@@ -137,7 +137,6 @@ extern SEXP R_igraph_delete_edges(SEXP, SEXP);
 extern SEXP R_igraph_delete_vertices(SEXP, SEXP);
 extern SEXP R_igraph_delete_vertices_map(SEXP, SEXP);
 extern SEXP R_igraph_density(SEXP, SEXP, SEXP);
-extern SEXP R_igraph_deterministic_optimal_imitation(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_dfs_closure(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_diameter(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_difference(SEXP, SEXP);
@@ -372,7 +371,6 @@ extern SEXP R_igraph_minimum_spanning_tree_prim(SEXP, SEXP);
 extern SEXP R_igraph_minimum_spanning_tree_unweighted(SEXP);
 extern SEXP R_igraph_modularity(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_modularity_matrix(SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_moran_process(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_motifs_randesu(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_motifs_randesu_callback_closure(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_motifs_randesu_estimate(SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -426,7 +424,6 @@ extern SEXP R_igraph_rich_club_sequence(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_ring(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_rooted_product(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_roots_for_tree_layout(SEXP, SEXP, SEXP);
-extern SEXP R_igraph_roulette_wheel_imitation(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_running_mean(SEXP, SEXP);
 extern SEXP R_igraph_sample_dirichlet(SEXP, SEXP);
 extern SEXP R_igraph_sample_sphere_surface(SEXP, SEXP, SEXP, SEXP);
@@ -461,7 +458,6 @@ extern SEXP R_igraph_star(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_static_fitness_game(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_static_power_law_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_status(SEXP);
-extern SEXP R_igraph_stochastic_imitation(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_strength(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_strerror(SEXP);
 extern SEXP R_igraph_subcomponent(SEXP, SEXP, SEXP);
@@ -719,7 +715,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_delete_vertices",                                (DL_FUNC) &R_igraph_delete_vertices,                                 2},
     {"R_igraph_delete_vertices_map",                            (DL_FUNC) &R_igraph_delete_vertices_map,                             2},
     {"R_igraph_density",                                        (DL_FUNC) &R_igraph_density,                                         3},
-    {"R_igraph_deterministic_optimal_imitation",                (DL_FUNC) &R_igraph_deterministic_optimal_imitation,                 6},
     {"R_igraph_dfs_closure",                                    (DL_FUNC) &R_igraph_dfs_closure,                                     6},
     {"R_igraph_diameter",                                       (DL_FUNC) &R_igraph_diameter,                                        4},
     {"R_igraph_difference",                                     (DL_FUNC) &R_igraph_difference,                                      2},
@@ -954,7 +949,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_minimum_spanning_tree_unweighted",               (DL_FUNC) &R_igraph_minimum_spanning_tree_unweighted,                1},
     {"R_igraph_modularity",                                     (DL_FUNC) &R_igraph_modularity,                                      5},
     {"R_igraph_modularity_matrix",                              (DL_FUNC) &R_igraph_modularity_matrix,                               4},
-    {"R_igraph_moran_process",                                  (DL_FUNC) &R_igraph_moran_process,                                   5},
     {"R_igraph_motifs_randesu",                                 (DL_FUNC) &R_igraph_motifs_randesu,                                  3},
     {"R_igraph_motifs_randesu_callback_closure",                (DL_FUNC) &R_igraph_motifs_randesu_callback_closure,                 4},
     {"R_igraph_motifs_randesu_estimate",                        (DL_FUNC) &R_igraph_motifs_randesu_estimate,                         5},
@@ -1008,7 +1002,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_ring",                                           (DL_FUNC) &R_igraph_ring,                                            4},
     {"R_igraph_rooted_product",                                 (DL_FUNC) &R_igraph_rooted_product,                                  3},
     {"R_igraph_roots_for_tree_layout",                          (DL_FUNC) &R_igraph_roots_for_tree_layout,                           3},
-    {"R_igraph_roulette_wheel_imitation",                       (DL_FUNC) &R_igraph_roulette_wheel_imitation,                        6},
     {"R_igraph_running_mean",                                   (DL_FUNC) &R_igraph_running_mean,                                    2},
     {"R_igraph_sample_dirichlet",                               (DL_FUNC) &R_igraph_sample_dirichlet,                                2},
     {"R_igraph_sample_sphere_surface",                          (DL_FUNC) &R_igraph_sample_sphere_surface,                           4},
@@ -1043,7 +1036,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_static_fitness_game",                            (DL_FUNC) &R_igraph_static_fitness_game,                             5},
     {"R_igraph_static_power_law_game",                          (DL_FUNC) &R_igraph_static_power_law_game,                           7},
     {"R_igraph_status",                                         (DL_FUNC) &R_igraph_status,                                          1},
-    {"R_igraph_stochastic_imitation",                           (DL_FUNC) &R_igraph_stochastic_imitation,                            6},
     {"R_igraph_strength",                                       (DL_FUNC) &R_igraph_strength,                                        5},
     {"R_igraph_strerror",                                       (DL_FUNC) &R_igraph_strerror,                                        1},
     {"R_igraph_subcomponent",                                   (DL_FUNC) &R_igraph_subcomponent,                                    3},
