@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -478,52 +477,6 @@ igraph_vs_t igraph_vss_range(igraph_int_t start, igraph_int_t end) {
     vs.data.range.start = start;
     vs.data.range.end = end;
     return vs;
-}
-
-/**
- * \function igraph_vs_seq
- * \brief Vertex set, an interval of vertices with inclusive endpoints (deprecated).
- *
- * Creates a vertex selector containing all vertices with vertex ID
- * equal to or bigger than \p from and equal to or smaller than \p to.
- * Note that both endpoints are inclusive, contrary to C conventions.
- *
- * \deprecated-by igraph_vs_range 0.10.0
- *
- * \param vs Pointer to an uninitialized vertex selector object.
- * \param from The first vertex ID to be included in the vertex selector.
- * \param to The last vertex ID to be included in the vertex selector.
- * \return Error code.
- * \sa \ref igraph_vs_range(), \ref igraph_vss_seq(), \ref igraph_vs_destroy()
- *
- * Time complexity: O(1).
- *
- * \example examples/simple/igraph_vs_range.c
- */
-
-igraph_error_t igraph_vs_seq(igraph_vs_t *vs, igraph_int_t from, igraph_int_t to) {
-    *vs = igraph_vss_range(from, to + 1);
-    return IGRAPH_SUCCESS;
-}
-
-/**
- * \function igraph_vss_seq
- * \brief An interval of vertices with inclusive endpoints (immediate version, deprecated).
- *
- * The immediate version of \ref igraph_vs_seq().
- *
- * \deprecated-by igraph_vss_range 0.10.0
- *
- * \param from The first vertex ID to be included in the vertex selector.
- * \param to The last vertex ID to be included in the vertex selector.
- * \return Error code.
- * \sa \ref igraph_vss_range(), \ref igraph_vs_seq()
- *
- * Time complexity: O(1).
- */
-
-igraph_vs_t igraph_vss_seq(igraph_int_t from, igraph_int_t to) {
-    return igraph_vss_range(from, to + 1);
 }
 
 /**
@@ -1220,47 +1173,6 @@ igraph_es_t igraph_ess_range(igraph_int_t start, igraph_int_t end) {
     es.data.range.start = start;
     es.data.range.end = end;
     return es;
-}
-
-/**
- * \function igraph_es_seq
- * \brief Edge selector, a sequence of edge IDs, with inclusive endpoints (deprecated).
- *
- * All edge IDs between \p from and \p to (inclusive) will be
- * included in the edge selection.
- *
- * \deprecated-by igraph_es_range 0.10.0
- *
- * \param es Pointer to an uninitialized edge selector object.
- * \param from The first edge ID to be included.
- * \param to The last edge ID to be included.
- * \return Error code.
- * \sa \ref igraph_ess_seq(), \ref igraph_es_destroy()
- *
- * Time complexity: O(1).
- */
-
-igraph_error_t igraph_es_seq(igraph_es_t *es, igraph_int_t from, igraph_int_t to) {
-    *es = igraph_ess_range(from, to + 1);
-    return IGRAPH_SUCCESS;
-}
-
-/**
- * \function igraph_ess_seq
- * \brief Immediate version of the sequence edge selector, with inclusive endpoints.
- *
- * \deprecated-by igraph_ess_range 0.10.0
- *
- * \param from The first edge ID to include.
- * \param to The last edge ID to include.
- * \return The initialized edge selector.
- * \sa \ref igraph_es_seq()
- *
- * Time complexity: O(1).
- */
-
-igraph_es_t igraph_ess_seq(igraph_int_t from, igraph_int_t to) {
-    return igraph_ess_range(from, to + 1);
 }
 
 /**

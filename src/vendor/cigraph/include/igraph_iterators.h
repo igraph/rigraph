@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -91,9 +90,6 @@ IGRAPH_EXPORT igraph_error_t igraph_vs_vector_small(igraph_vs_t *vs, ...);
 
 IGRAPH_EXPORT igraph_error_t igraph_vs_vector_copy(igraph_vs_t *vs,
                                         const igraph_vector_int_t *v);
-
-IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_vs_seq(igraph_vs_t *vs, igraph_int_t from, igraph_int_t to);
-IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_vs_t igraph_vss_seq(igraph_int_t from, igraph_int_t to);
 
 IGRAPH_EXPORT igraph_error_t igraph_vs_range(igraph_vs_t *vs, igraph_int_t start, igraph_int_t end);
 IGRAPH_EXPORT IGRAPH_FUNCATTR_CONST igraph_vs_t igraph_vss_range(igraph_int_t start, igraph_int_t end);
@@ -296,9 +292,6 @@ IGRAPH_EXPORT IGRAPH_FUNCATTR_PURE igraph_es_t igraph_ess_vector(const igraph_ve
 
 IGRAPH_EXPORT igraph_error_t igraph_es_range(igraph_es_t *es, igraph_int_t from, igraph_int_t to);
 IGRAPH_EXPORT IGRAPH_FUNCATTR_CONST igraph_es_t igraph_ess_range(igraph_int_t from, igraph_int_t to);
-
-IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_es_seq(igraph_es_t *es, igraph_int_t from, igraph_int_t to);
-IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_es_t igraph_ess_seq(igraph_int_t from, igraph_int_t to);
 
 IGRAPH_EXPORT igraph_error_t igraph_es_vector_copy(igraph_es_t *es, const igraph_vector_int_t *v);
 
