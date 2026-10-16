@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -92,10 +91,6 @@ IGRAPH_EXPORT igraph_error_t igraph_triad_census(const igraph_t *igraph, igraph_
 IGRAPH_EXPORT igraph_error_t igraph_count_adjacent_triangles(const igraph_t *graph,
                                             igraph_vector_t *res,
                                             const igraph_vs_t vids);
-
-IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_adjacent_triangles(const igraph_t *graph,
-                                         igraph_vector_t *res,
-                                         const igraph_vs_t vids);
 
 IGRAPH_EXPORT igraph_error_t igraph_list_triangles(const igraph_t *graph,
                                         igraph_vector_int_t *res);
