@@ -118,7 +118,7 @@ extern SEXP R_igraph_coreness(SEXP, SEXP);
 extern SEXP R_igraph_correlated_game(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_correlated_pair_game(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_count_adjacent_triangles(SEXP, SEXP);
-extern SEXP R_igraph_count_automorphisms(SEXP, SEXP, SEXP);
+extern SEXP R_igraph_count_automorphisms_bliss(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_count_isomorphisms_vf2(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_count_loops(SEXP);
 extern SEXP R_igraph_count_multiple(SEXP, SEXP);
@@ -696,7 +696,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_correlated_game",                                (DL_FUNC) &R_igraph_correlated_game,                                 4},
     {"R_igraph_correlated_pair_game",                           (DL_FUNC) &R_igraph_correlated_pair_game,                            5},
     {"R_igraph_count_adjacent_triangles",                       (DL_FUNC) &R_igraph_count_adjacent_triangles,                        2},
-    {"R_igraph_count_automorphisms",                            (DL_FUNC) &R_igraph_count_automorphisms,                             3},
+    {"R_igraph_count_automorphisms_bliss",                      (DL_FUNC) &R_igraph_count_automorphisms_bliss,                       3},
     {"R_igraph_count_isomorphisms_vf2",                         (DL_FUNC) &R_igraph_count_isomorphisms_vf2,                          6},
     {"R_igraph_count_loops",                                    (DL_FUNC) &R_igraph_count_loops,                                     1},
     {"R_igraph_count_multiple",                                 (DL_FUNC) &R_igraph_count_multiple,                                  2},
