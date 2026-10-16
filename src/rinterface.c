@@ -3703,9 +3703,10 @@ SEXP R_igraph_closeness_cutoff(SEXP graph, SEXP vids, SEXP mode, SEXP weights, S
 /*-------------------------------------------/
 / igraph_distances                           /
 /-------------------------------------------*/
-SEXP R_igraph_distances(SEXP graph, SEXP from, SEXP to, SEXP mode) {
+SEXP R_igraph_distances(SEXP graph, SEXP weights, SEXP from, SEXP to, SEXP mode) {
                                         /* Declarations */
   igraph_t c_graph;
+  igraph_vector_t c_weights;
   igraph_matrix_t c_res;
   igraph_vs_t c_from;
   igraph_vs_t c_to;
@@ -3715,6 +3716,9 @@ SEXP R_igraph_distances(SEXP graph, SEXP from, SEXP to, SEXP mode) {
   SEXP r_result;
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    Rz_SEXP_to_vector(weights, &c_weights);
+  }
   IGRAPH_R_CHECK(igraph_matrix_init(&c_res, 0, 0));
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
   igraph_vector_int_t c_from_data;
@@ -3723,7 +3727,7 @@ SEXP R_igraph_distances(SEXP graph, SEXP from, SEXP to, SEXP mode) {
   Rz_SEXP_to_igraph_vs(to, &c_graph, &c_to, &c_to_data);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_distances(&c_graph, &c_res, c_from, c_to, c_mode));
+  IGRAPH_R_CHECK(igraph_distances(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_res, c_from, c_to, c_mode));
 
                                         /* Convert output */
   PROTECT(res=Ry_igraph_matrix_to_SEXP(&c_res));
@@ -3742,9 +3746,10 @@ SEXP R_igraph_distances(SEXP graph, SEXP from, SEXP to, SEXP mode) {
 /*-------------------------------------------/
 / igraph_distances_cutoff                    /
 /-------------------------------------------*/
-SEXP R_igraph_distances_cutoff(SEXP graph, SEXP from, SEXP to, SEXP mode, SEXP cutoff) {
+SEXP R_igraph_distances_cutoff(SEXP graph, SEXP weights, SEXP from, SEXP to, SEXP mode, SEXP cutoff) {
                                         /* Declarations */
   igraph_t c_graph;
+  igraph_vector_t c_weights;
   igraph_matrix_t c_res;
   igraph_vs_t c_from;
   igraph_vs_t c_to;
@@ -3755,6 +3760,9 @@ SEXP R_igraph_distances_cutoff(SEXP graph, SEXP from, SEXP to, SEXP mode, SEXP c
   SEXP r_result;
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    Rz_SEXP_to_vector(weights, &c_weights);
+  }
   IGRAPH_R_CHECK(igraph_matrix_init(&c_res, 0, 0));
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
   igraph_vector_int_t c_from_data;
@@ -3765,7 +3773,7 @@ SEXP R_igraph_distances_cutoff(SEXP graph, SEXP from, SEXP to, SEXP mode, SEXP c
   IGRAPH_R_CHECK_REAL(cutoff);
   c_cutoff = REAL(cutoff)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_distances_cutoff(&c_graph, &c_res, c_from, c_to, c_mode, c_cutoff));
+  IGRAPH_R_CHECK(igraph_distances_cutoff(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_res, c_from, c_to, c_mode, c_cutoff));
 
                                         /* Convert output */
   PROTECT(res=Ry_igraph_matrix_to_SEXP(&c_res));
@@ -3784,9 +3792,10 @@ SEXP R_igraph_distances_cutoff(SEXP graph, SEXP from, SEXP to, SEXP mode, SEXP c
 /*-------------------------------------------/
 / igraph_get_shortest_path                   /
 /-------------------------------------------*/
-SEXP R_igraph_get_shortest_path(SEXP graph, SEXP from, SEXP to, SEXP mode) {
+SEXP R_igraph_get_shortest_path(SEXP graph, SEXP weights, SEXP from, SEXP to, SEXP mode) {
                                         /* Declarations */
   igraph_t c_graph;
+  igraph_vector_t c_weights;
   igraph_vector_int_t c_vertices;
   igraph_vector_int_t c_edges;
   igraph_integer_t c_from;
@@ -3798,6 +3807,9 @@ SEXP R_igraph_get_shortest_path(SEXP graph, SEXP from, SEXP to, SEXP mode) {
   SEXP r_result, r_names;
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    Rz_SEXP_to_vector(weights, &c_weights);
+  }
   IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertices, 0));
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vertices);
   IGRAPH_R_CHECK(igraph_vector_int_init(&c_edges, 0));
@@ -3806,7 +3818,7 @@ SEXP R_igraph_get_shortest_path(SEXP graph, SEXP from, SEXP to, SEXP mode) {
   c_to = (igraph_integer_t) REAL(to)[0];
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_get_shortest_path(&c_graph, &c_vertices, &c_edges, c_from, c_to, c_mode));
+  IGRAPH_R_CHECK(igraph_get_shortest_path(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_vertices, &c_edges, c_from, c_to, c_mode));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));
@@ -3986,9 +3998,10 @@ SEXP R_igraph_get_shortest_path_astar(SEXP graph, SEXP from, SEXP to, SEXP weigh
 /*-------------------------------------------/
 / igraph_get_shortest_paths                  /
 /-------------------------------------------*/
-SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP from, SEXP to, SEXP mode) {
+SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP weights, SEXP from, SEXP to, SEXP mode) {
                                         /* Declarations */
   igraph_t c_graph;
+  igraph_vector_t c_weights;
   igraph_vector_int_list_t c_vertices;
   igraph_vector_int_list_t c_edges;
   igraph_integer_t c_from;
@@ -4004,6 +4017,9 @@ SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP from, SEXP to, SEXP mode) {
   SEXP r_result, r_names;
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    Rz_SEXP_to_vector(weights, &c_weights);
+  }
   IGRAPH_R_CHECK(igraph_vector_int_list_init(&c_vertices, 0));
   IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_vertices);
   IGRAPH_R_CHECK(igraph_vector_int_list_init(&c_edges, 0));
@@ -4017,7 +4033,7 @@ SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP from, SEXP to, SEXP mode) {
   IGRAPH_R_CHECK(igraph_vector_int_init(&c_inbound_edges, 0));
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_inbound_edges);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_get_shortest_paths(&c_graph, &c_vertices, &c_edges, c_from, c_to, c_mode, &c_parents, &c_inbound_edges));
+  IGRAPH_R_CHECK(igraph_get_shortest_paths(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_vertices, &c_edges, c_from, c_to, c_mode, &c_parents, &c_inbound_edges));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(4));
@@ -4054,9 +4070,10 @@ SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP from, SEXP to, SEXP mode) {
 /*-------------------------------------------/
 / igraph_get_all_shortest_paths              /
 /-------------------------------------------*/
-SEXP R_igraph_get_all_shortest_paths(SEXP graph, SEXP from, SEXP to, SEXP mode) {
+SEXP R_igraph_get_all_shortest_paths(SEXP graph, SEXP weights, SEXP from, SEXP to, SEXP mode) {
                                         /* Declarations */
   igraph_t c_graph;
+  igraph_vector_t c_weights;
   igraph_vector_int_list_t c_vertices;
   igraph_vector_int_list_t c_edges;
   igraph_vector_int_t c_nrgeo;
@@ -4070,6 +4087,9 @@ SEXP R_igraph_get_all_shortest_paths(SEXP graph, SEXP from, SEXP to, SEXP mode) 
   SEXP r_result, r_names;
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    Rz_SEXP_to_vector(weights, &c_weights);
+  }
   IGRAPH_R_CHECK(igraph_vector_int_list_init(&c_vertices, 0));
   IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_vertices);
   IGRAPH_R_CHECK(igraph_vector_int_list_init(&c_edges, 0));
@@ -4081,7 +4101,7 @@ SEXP R_igraph_get_all_shortest_paths(SEXP graph, SEXP from, SEXP to, SEXP mode) 
   Rz_SEXP_to_igraph_vs(to, &c_graph, &c_to, &c_to_data);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_get_all_shortest_paths(&c_graph, &c_vertices, &c_edges, &c_nrgeo, c_from, c_to, c_mode));
+  IGRAPH_R_CHECK(igraph_get_all_shortest_paths(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_vertices, &c_edges, &c_nrgeo, c_from, c_to, c_mode));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(3));
@@ -4452,13 +4472,14 @@ SEXP R_igraph_distances_bellman_ford(SEXP graph, SEXP from, SEXP to, SEXP weight
 /*-------------------------------------------/
 / igraph_distances_johnson                   /
 /-------------------------------------------*/
-SEXP R_igraph_distances_johnson(SEXP graph, SEXP from, SEXP to, SEXP weights) {
+SEXP R_igraph_distances_johnson(SEXP graph, SEXP from, SEXP to, SEXP weights, SEXP mode) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_matrix_t c_res;
   igraph_vs_t c_from;
   igraph_vs_t c_to;
   igraph_vector_t c_weights;
+  igraph_neimode_t c_mode;
   SEXP res;
 
   SEXP r_result;
@@ -4473,8 +4494,9 @@ SEXP R_igraph_distances_johnson(SEXP graph, SEXP from, SEXP to, SEXP weights) {
   if (!Rf_isNull(weights)) {
     Rz_SEXP_to_vector(weights, &c_weights);
   }
+  c_mode = (igraph_neimode_t) Rf_asInteger(mode);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_distances_johnson(&c_graph, &c_res, c_from, c_to, (Rf_isNull(weights) ? 0 : &c_weights)));
+  IGRAPH_R_CHECK(igraph_distances_johnson(&c_graph, &c_res, c_from, c_to, (Rf_isNull(weights) ? 0 : &c_weights), c_mode));
 
                                         /* Convert output */
   PROTECT(res=Ry_igraph_matrix_to_SEXP(&c_res));

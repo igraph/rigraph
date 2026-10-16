@@ -4376,10 +4376,10 @@ static igraph_error_t distances_johnson(const igraph_t *graph,
   }
   /* We simulate mode=IN by swapping to/from and transposing the result matrix. */
   if (mode == IGRAPH_IN) {
-    IGRAPH_CHECK(igraph_distances_johnson(graph, res, to, from, weights));
+    IGRAPH_CHECK(igraph_distances_johnson(graph, res, to, from, weights, IGRAPH_OUT));
     IGRAPH_CHECK(igraph_matrix_transpose(res));
   } else {
-    IGRAPH_CHECK(igraph_distances_johnson(graph, res, from, to, weights));
+    IGRAPH_CHECK(igraph_distances_johnson(graph, res, from, to, weights, IGRAPH_OUT));
   }
   return IGRAPH_SUCCESS;
 }
@@ -4421,7 +4421,7 @@ SEXP Rx_igraph_shortest_paths(SEXP graph, SEXP pvids, SEXP pto,
     }
     break;
   case 1:                       /* unweighted */
-    IGRAPH_R_CHECK(igraph_distances(&g, &res, vs, to, mode));
+    IGRAPH_R_CHECK(igraph_distances(&g, /* weights = */ 0, &res, vs, to, mode));
     break;
   case 2:                       /* dijkstra */
     IGRAPH_R_CHECK(igraph_distances_dijkstra(&g, &res, vs, to, pw, mode));
@@ -4764,7 +4764,7 @@ SEXP Rx_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
     }
     break;
   case 1:                       /* unweighted */
-    IGRAPH_R_CHECK(igraph_get_shortest_paths(&g, verts ? &list : 0, edges ? &elist : 0, from, to, mode, pred ? &predvec : 0, inbound ? &inboundvec : 0));
+    IGRAPH_R_CHECK(igraph_get_shortest_paths(&g, /* weights = */ 0, verts ? &list : 0, edges ? &elist : 0, from, to, mode, pred ? &predvec : 0, inbound ? &inboundvec : 0));
     break;
   case 2:                       /* dijkstra */
     IGRAPH_R_CHECK(igraph_get_shortest_paths_dijkstra(&g, verts ? &list : 0, edges ? &elist : 0, from, to, pw, mode, pred ? &predvec : 0, inbound ? &inboundvec : 0));
