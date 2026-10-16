@@ -230,7 +230,7 @@ public:
 } // end unnamed namespace
 
 
-static igraph_error_t igraph_i_canonical_permutation(
+static igraph_error_t igraph_i_canonical_permutation_bliss(
     const igraph_t *graph, const igraph_vector_int_t *colors,
     igraph_vector_int_t *labeling, igraph_bliss_sh_t sh,
     igraph_bliss_info_t *info
@@ -238,6 +238,43 @@ static igraph_error_t igraph_i_canonical_permutation(
 
 /**
  * \function igraph_canonical_permutation
+ * \brief Canonical permutation of a graph.
+ *
+ * This function computes the vertex permutation which transforms
+ * the graph into a canonical form. Two graphs have the same canonical form if
+ * and only if they are isomorphic. Use \ref igraph_is_same_graph() to compare
+ * two canonical forms.
+ *
+ * </para><para>
+ * The current implementation uses the BLISS isomorphism algorithms with
+ * sensible defaults. Use \ref igraph_canonical_permutation_bliss() to fine-tune
+ * the parameters.
+ *
+ * \param graph The input graph. Multiple edges between the same nodes
+ *   are not supported and will cause an incorrect result to be returned.
+ * \param colors An optional vertex color vector for the graph. Supply a
+ *   null pointer is the graph is not colored.
+ * \param labeling Pointer to a vector, the result is stored here. The
+ *    permutation takes vertex 0 to the first element of the vector,
+ *    vertex 1 to the second, etc. The vector will be resized as
+ *    needed.
+ * \return Error code.
+ *
+ * \sa \ref igraph_is_same_graph()
+ *
+ * Time complexity: exponential, in practice it is fast for many graphs.
+ */
+igraph_error_t igraph_canonical_permutation(
+    const igraph_t *graph, const igraph_vector_int_t *colors,
+    igraph_vector_int_t *labeling
+) {
+    return igraph_canonical_permutation_bliss(
+        graph, colors, labeling, IGRAPH_BLISS_FL, NULL
+    );
+}
+
+/**
+ * \function igraph_canonical_permutation_bliss
  * \brief Canonical permutation using Bliss.
  *
  * This function computes the vertex permutation which transforms
@@ -265,12 +302,15 @@ static igraph_error_t igraph_i_canonical_permutation(
  *
  * Time complexity: exponential, in practice it is fast for many graphs.
  */
-igraph_error_t igraph_canonical_permutation(const igraph_t *graph, const igraph_vector_int_t *colors,
-                                 igraph_vector_int_t *labeling, igraph_bliss_sh_t sh, igraph_bliss_info_t *info) {
+igraph_error_t igraph_canonical_permutation_bliss(
+    const igraph_t *graph, const igraph_vector_int_t *colors,
+    igraph_vector_int_t *labeling, igraph_bliss_sh_t sh,
+    igraph_bliss_info_t *info
+) {
     igraph_vector_int_t inv_permutation;
 
     IGRAPH_VECTOR_INT_INIT_FINALLY(&inv_permutation, igraph_vcount(graph));
-    IGRAPH_CHECK(igraph_i_canonical_permutation(graph, colors, &inv_permutation, sh, info));
+    IGRAPH_CHECK(igraph_i_canonical_permutation_bliss(graph, colors, &inv_permutation, sh, info));
     IGRAPH_CHECK(igraph_invert_permutation(&inv_permutation, labeling));
     igraph_vector_int_destroy(&inv_permutation);
     IGRAPH_FINALLY_CLEAN(1);
@@ -278,7 +318,7 @@ igraph_error_t igraph_canonical_permutation(const igraph_t *graph, const igraph_
     return IGRAPH_SUCCESS;
 }
 
-static igraph_error_t igraph_i_canonical_permutation(
+static igraph_error_t igraph_i_canonical_permutation_bliss(
     const igraph_t *graph, const igraph_vector_int_t *colors,
     igraph_vector_int_t *labeling, igraph_bliss_sh_t sh,
     igraph_bliss_info_t *info
@@ -497,7 +537,7 @@ igraph_error_t igraph_automorphism_group_bliss(
 /* The following license notice applies to the rest of this file */
 
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2006-2021  The igraph development team <igraph@igraph.org>
 
    This program is free software; you can redistribute it and/or modify
@@ -526,7 +566,7 @@ igraph_error_t igraph_automorphism_group_bliss(
  *
  * </para><para>
  * Isomorphism testing is implemented by producing the canonical form
- * of both graphs using \ref igraph_canonical_permutation() and
+ * of both graphs using \ref igraph_canonical_permutation_bliss() and
  * comparing them.
  *
  * \param graph1 The first input graph. Multiple edges between the same nodes
@@ -614,8 +654,8 @@ igraph_error_t igraph_isomorphic_bliss(const igraph_t *graph1, const igraph_t *g
     IGRAPH_VECTOR_INT_INIT_FINALLY(&perm1, no_of_nodes);
     IGRAPH_VECTOR_INT_INIT_FINALLY(&perm2, no_of_nodes);
 
-    IGRAPH_CHECK(igraph_i_canonical_permutation(graph1, colors1, &perm1, sh, info1));
-    IGRAPH_CHECK(igraph_i_canonical_permutation(graph2, colors2, &perm2, sh, info2));
+    IGRAPH_CHECK(igraph_i_canonical_permutation_bliss(graph1, colors1, &perm1, sh, info1));
+    IGRAPH_CHECK(igraph_i_canonical_permutation_bliss(graph2, colors2, &perm2, sh, info2));
 
     IGRAPH_CHECK(igraph_vector_int_resize(mymap12, no_of_nodes));
 

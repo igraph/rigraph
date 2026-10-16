@@ -213,7 +213,7 @@ canonical_permutation_impl <- function(
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_canonical_permutation,
+    R_igraph_canonical_permutation_bliss,
     graph,
     colors,
     sh

@@ -65,7 +65,7 @@ extern SEXP R_igraph_bipartite_projection_size(SEXP, SEXP);
 extern SEXP R_igraph_bond_percolation(SEXP, SEXP);
 extern SEXP R_igraph_bridges(SEXP);
 extern SEXP R_igraph_callaway_traits_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_canonical_permutation(SEXP, SEXP, SEXP);
+extern SEXP R_igraph_canonical_permutation_bliss(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_centralization(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_centralization_betweenness(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_centralization_betweenness_tmax(SEXP, SEXP, SEXP);
@@ -643,7 +643,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_bond_percolation",                               (DL_FUNC) &R_igraph_bond_percolation,                                2},
     {"R_igraph_bridges",                                        (DL_FUNC) &R_igraph_bridges,                                         1},
     {"R_igraph_callaway_traits_game",                           (DL_FUNC) &R_igraph_callaway_traits_game,                            6},
-    {"R_igraph_canonical_permutation",                          (DL_FUNC) &R_igraph_canonical_permutation,                           3},
+    {"R_igraph_canonical_permutation_bliss",                    (DL_FUNC) &R_igraph_canonical_permutation_bliss,                     3},
     {"R_igraph_centralization",                                 (DL_FUNC) &R_igraph_centralization,                                  3},
     {"R_igraph_centralization_betweenness",                     (DL_FUNC) &R_igraph_centralization_betweenness,                      3},
     {"R_igraph_centralization_betweenness_tmax",                (DL_FUNC) &R_igraph_centralization_betweenness_tmax,                 3},

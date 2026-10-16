@@ -2434,6 +2434,12 @@ igraph_get_subisomorphisms_vf2:
 igraph_canonical_permutation:
     PARAMS: |-
         GRAPH graph, OPTIONAL VERTEX_COLOR colors,
+        OUT INDEX_VECTOR labeling
+    DEPS: colors ON graph
+
+igraph_canonical_permutation_bliss:
+    PARAMS: |-
+        GRAPH graph, OPTIONAL VERTEX_COLOR colors,
         OUT INDEX_VECTOR labeling, BLISSSH sh="fm", OUT BLISSINFO info
     DEPS: colors ON graph
 
