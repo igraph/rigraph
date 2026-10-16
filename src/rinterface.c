@@ -8714,10 +8714,11 @@ SEXP R_igraph_biadjacency(SEXP incidence, SEXP directed, SEXP mode, SEXP multipl
 /*-------------------------------------------/
 / igraph_get_biadjacency                     /
 /-------------------------------------------*/
-SEXP R_igraph_get_biadjacency(SEXP graph, SEXP types) {
+SEXP R_igraph_get_biadjacency(SEXP graph, SEXP types, SEXP weights) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_bool_t c_types;
+  igraph_vector_t c_weights;
   igraph_matrix_t c_res;
   igraph_vector_int_t c_row_ids;
   igraph_vector_int_t c_col_ids;
@@ -8729,6 +8730,9 @@ SEXP R_igraph_get_biadjacency(SEXP graph, SEXP types) {
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
   Rz_SEXP_to_vector_bool(types, &c_types);
+  if (!Rf_isNull(weights)) {
+    Rz_SEXP_to_vector(weights, &c_weights);
+  }
   IGRAPH_R_CHECK(igraph_matrix_init(&c_res, 0, 0));
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
   IGRAPH_R_CHECK(igraph_vector_int_init(&c_row_ids, 0));
@@ -8736,7 +8740,7 @@ SEXP R_igraph_get_biadjacency(SEXP graph, SEXP types) {
   IGRAPH_R_CHECK(igraph_vector_int_init(&c_col_ids, 0));
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_col_ids);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_get_biadjacency(&c_graph, &c_types, &c_res, &c_row_ids, &c_col_ids));
+  IGRAPH_R_CHECK(igraph_get_biadjacency(&c_graph, &c_types, (Rf_isNull(weights) ? 0 : &c_weights), &c_res, &c_row_ids, &c_col_ids));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(3));

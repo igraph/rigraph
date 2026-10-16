@@ -762,7 +762,7 @@ igraph_error_t igraph_get_incidence(const igraph_t *graph,
                          igraph_matrix_t *res,
                          igraph_vector_int_t *row_ids,
                          igraph_vector_int_t *col_ids) {
-    return igraph_get_biadjacency(graph, types, res, row_ids, col_ids);
+    return igraph_get_biadjacency(graph, types, NULL, res, row_ids, col_ids);
 }
 
 /**
@@ -781,6 +781,8 @@ igraph_error_t igraph_get_incidence(const igraph_t *graph,
  * \param types Boolean vector containing the vertex types. Vertices belonging
  *   to the first partition have type \c false, the one in the second
  *   partition type \c true.
+ * \param weights An optional weight vector. If not \c NULL, the biadjacency
+ *   matrix will contain edge weights instead of edge counts.
  * \param res Pointer to an initialized matrix, the result is stored
  *   here. An element of the matrix gives the number of edges
  *   (irrespectively of their direction) between the two corresponding
@@ -803,6 +805,7 @@ igraph_error_t igraph_get_incidence(const igraph_t *graph,
 
 igraph_error_t igraph_get_biadjacency(
     const igraph_t *graph, const igraph_vector_bool_t *types,
+    const igraph_vector_t *weights,
     igraph_matrix_t *res, igraph_vector_int_t *row_ids,
     igraph_vector_int_t *col_ids
 ) {
@@ -817,6 +820,11 @@ igraph_error_t igraph_get_biadjacency(
     if (igraph_vector_bool_size(types) != no_of_nodes) {
         IGRAPH_ERRORF("Vertex type vector size (%" IGRAPH_PRId ") not equal to number of vertices (%" IGRAPH_PRId ").",
                       IGRAPH_EINVAL, igraph_vector_bool_size(types), no_of_nodes);
+    }
+
+    if (weights && igraph_vector_size(weights) != no_of_edges) {
+        IGRAPH_ERRORF("Weight vector size (%" IGRAPH_PRId ") not equal to number of edges (%" IGRAPH_PRId ").",
+                      IGRAPH_EINVAL, igraph_vector_size(weights), no_of_edges);
     }
 
     for (i = 0; i < no_of_nodes; i++) {
@@ -840,9 +848,9 @@ igraph_error_t igraph_get_biadjacency(
         if (VECTOR(*types)[from] == VECTOR(*types)[to]) {
             ignored_edges++;
         } else if (! VECTOR(*types)[from]) {
-            MATRIX(*res, from2, to2 - n1) += 1;
+            MATRIX(*res, from2, to2 - n1) += weights ? VECTOR(*weights)[i] : 1;
         } else {
-            MATRIX(*res, to2, from2 - n1) += 1;
+            MATRIX(*res, to2, from2 - n1) += weights ? VECTOR(*weights)[i] : 1;
         }
     }
     if (ignored_edges) {

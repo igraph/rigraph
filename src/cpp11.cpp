@@ -204,7 +204,7 @@ extern SEXP R_igraph_get_all_eids_between(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_all_shortest_paths(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_all_shortest_paths_dijkstra(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_all_simple_paths(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_get_biadjacency(SEXP, SEXP);
+extern SEXP R_igraph_get_biadjacency(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_edgelist(SEXP, SEXP);
 extern SEXP R_igraph_get_eid(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_eids(SEXP, SEXP, SEXP, SEXP);
@@ -790,7 +790,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_get_all_shortest_paths",                         (DL_FUNC) &R_igraph_get_all_shortest_paths,                          5},
     {"R_igraph_get_all_shortest_paths_dijkstra",                (DL_FUNC) &R_igraph_get_all_shortest_paths_dijkstra,                 5},
     {"R_igraph_get_all_simple_paths",                           (DL_FUNC) &R_igraph_get_all_simple_paths,                            7},
-    {"R_igraph_get_biadjacency",                                (DL_FUNC) &R_igraph_get_biadjacency,                                 2},
+    {"R_igraph_get_biadjacency",                                (DL_FUNC) &R_igraph_get_biadjacency,                                 3},
     {"R_igraph_get_edgelist",                                   (DL_FUNC) &R_igraph_get_edgelist,                                    2},
     {"R_igraph_get_eid",                                        (DL_FUNC) &R_igraph_get_eid,                                         5},
     {"R_igraph_get_eids",                                       (DL_FUNC) &R_igraph_get_eids,                                        4},
