@@ -1,7 +1,6 @@
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    igraph library.
-   Copyright (C) 2005-2021 The igraph development team
+   Copyright (C) 2005-2025  The igraph development team <igraph@igraph.org>
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -14,10 +13,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-   02110-1301 USA
-
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 #include "igraph_paths.h"
@@ -94,7 +90,6 @@
  * Time complexity: O(|V|+|E|) for most graphs, O(|V|^2) in the worst
  * case.
  */
-
 igraph_error_t igraph_get_all_shortest_paths(
         const igraph_t *graph,
         const igraph_vector_t *weights,
