@@ -12567,12 +12567,14 @@ SEXP R_igraph_split_join_distance(SEXP comm1, SEXP comm2) {
 /*-------------------------------------------/
 / igraph_community_infomap                   /
 /-------------------------------------------*/
-SEXP R_igraph_community_infomap(SEXP graph, SEXP edge_weights, SEXP vertex_weights, SEXP nb_trials) {
+SEXP R_igraph_community_infomap(SEXP graph, SEXP edge_weights, SEXP vertex_weights, SEXP nb_trials, SEXP is_regularized, SEXP regularization_strength) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_t c_edge_weights;
   igraph_vector_t c_vertex_weights;
   igraph_integer_t c_nb_trials;
+  igraph_bool_t c_is_regularized;
+  igraph_real_t c_regularization_strength;
   igraph_vector_int_t c_membership;
   igraph_real_t c_codelength;
   SEXP membership;
@@ -12589,10 +12591,14 @@ SEXP R_igraph_community_infomap(SEXP graph, SEXP edge_weights, SEXP vertex_weigh
   }
   IGRAPH_R_CHECK_INT(nb_trials);
   c_nb_trials = (igraph_integer_t) REAL(nb_trials)[0];
+  IGRAPH_R_CHECK_BOOL(is_regularized);
+  c_is_regularized = LOGICAL(is_regularized)[0];
+  IGRAPH_R_CHECK_REAL(regularization_strength);
+  c_regularization_strength = REAL(regularization_strength)[0];
   IGRAPH_R_CHECK(igraph_vector_int_init(&c_membership, 0));
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_membership);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_community_infomap(&c_graph, (Rf_isNull(edge_weights) ? 0 : &c_edge_weights), (Rf_isNull(vertex_weights) ? 0 : &c_vertex_weights), c_nb_trials, &c_membership, &c_codelength));
+  IGRAPH_R_CHECK(igraph_community_infomap(&c_graph, (Rf_isNull(edge_weights) ? 0 : &c_edge_weights), (Rf_isNull(vertex_weights) ? 0 : &c_vertex_weights), c_nb_trials, c_is_regularized, c_regularization_strength, &c_membership, &c_codelength));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));
