@@ -1,4 +1,3 @@
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    igraph library.
    Copyright (C) 2003-2020  The igraph development team
@@ -29,7 +28,7 @@
 
 #include "core/grid.h"
 #include "core/interruption.h"
-#include "core/math.h"
+#include "core/math.h" /* M_PI */
 
 static void igraph_i_norm2d(igraph_real_t *x, igraph_real_t *y) {
     igraph_real_t len = sqrt(*x * *x + *y * *y);
@@ -153,7 +152,6 @@ igraph_error_t igraph_layout_lgl(const igraph_t *graph, igraph_matrix_t *res,
      *
      * TODO: If this function is updated to handle weights, it should
      * construct the MST and traverse that instead. */
-
 
     /* Determine the root vertex, random pick right now */
     if (proot < 0) {
@@ -282,7 +280,7 @@ igraph_error_t igraph_layout_lgl(const igraph_t *graph, igraph_matrix_t *res,
                 igraph_int_t from = IGRAPH_FROM(graph, eid), to = IGRAPH_TO(graph, eid);
                 if ((from != vid && igraph_2dgrid_in(&grid, from)) ||
                     (to   != vid && igraph_2dgrid_in(&grid, to))) {
-                    igraph_vector_int_push_back(&edges, eid);
+                    igraph_vector_int_push_back(&edges, eid); /* reserved */
                 }
             }
         }
@@ -375,7 +373,6 @@ igraph_error_t igraph_layout_lgl(const igraph_t *graph, igraph_matrix_t *res,
             /*       printf("%li iterations, maxchange: %f\n", it, (double)maxchange); */
         }
     }
-
 
     IGRAPH_PROGRESS("Large graph layout", 100.0, 0);
     igraph_vector_int_destroy(&vids);

@@ -1,4 +1,3 @@
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    igraph library.
    Copyright (C) 2003-2021 The igraph development team
@@ -229,8 +228,8 @@ igraph_error_t igraph_static_fitness_game(igraph_t *graph, igraph_int_t no_of_ed
                 continue;
             }
 
-            igraph_vector_int_push_back(&edges, from);
-            igraph_vector_int_push_back(&edges, to);
+            igraph_vector_int_push_back(&edges, from); /* reserved */
+            igraph_vector_int_push_back(&edges, to); /* reserved */
 
             no_of_edges--;
         }

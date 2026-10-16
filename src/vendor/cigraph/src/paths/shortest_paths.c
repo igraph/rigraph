@@ -1,4 +1,3 @@
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    igraph library.
    Copyright (C) 2005-2020  The igraph development team <igraph@igraph.org>
@@ -302,7 +301,7 @@ static igraph_error_t igraph_i_average_path_length_dijkstra(
  * \param weights The edge weights. All edge weights must be
  *       non-negative for Dijkstra's algorithm to work. Additionally, no
  *       edge weight may be NaN. If either case does not hold, an error
- *       is returned. Pass a null pointer here if the graph is unweighted.
+ *       is returned. Passa a null pointer here if the graph is unweighted.
  *       Edges with positive infinite weight are ignored.
  * \param res Pointer to a real number, this will contain the result.
  * \param unconn_pairs Pointer to a real number. If not a null pointer, the number of
@@ -856,7 +855,7 @@ igraph_error_t igraph_average_local_efficiency(
 
     IGRAPH_VECTOR_INIT_FINALLY(&local_eff, no_of_nodes);
 
-    IGRAPH_CHECK(igraph_local_efficiency(graph, weights, &local_eff, igraph_vss_all(), directed, mode));
+    IGRAPH_CHECK(igraph_local_efficiency(graph, weights, &local_eff, igraph_vss_all(),directed, mode));
 
     *res = igraph_vector_sum(&local_eff);
     *res /= no_of_nodes;
@@ -1053,7 +1052,6 @@ static igraph_error_t igraph_i_diameter_dijkstra(
     igraph_int_t *from, igraph_int_t *to, igraph_vector_int_t *vertex_path,
     igraph_vector_int_t *edge_path, igraph_bool_t directed, igraph_bool_t unconn
 ) {
-
     /* Implementation details. This is the basic Dijkstra algorithm,
        with a binary heap. The heap is indexed, i.e. it stores not only
        the distances, but also which vertex they belong to.
@@ -1210,6 +1208,7 @@ static igraph_error_t igraph_i_diameter_dijkstra(
                             weights, dirmode));
         }
     }
+
     return IGRAPH_SUCCESS;
 }
 
