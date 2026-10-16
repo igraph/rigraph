@@ -38,10 +38,6 @@ INT:
     # A C integer
     CTYPE: int
 
-LONGINT:
-    # A C long integer
-    CTYPE: long int
-
 CSTRING:
     # A null-terminated immutable C string
     CTYPE: const char*
