@@ -2714,8 +2714,8 @@ SEXP R_igraph_watts_strogatz_game(SEXP dim, SEXP size, SEXP nei, SEXP p, SEXP lo
   igraph_integer_t c_size;
   igraph_integer_t c_nei;
   igraph_real_t c_p;
-  igraph_bool_t c_loops;
-  igraph_bool_t c_multiple;
+  igraph_edge_type_sw_t c_loops;
+
   SEXP graph;
 
   SEXP r_result;
@@ -2729,11 +2729,13 @@ SEXP R_igraph_watts_strogatz_game(SEXP dim, SEXP size, SEXP nei, SEXP p, SEXP lo
   IGRAPH_R_CHECK_REAL(p);
   c_p = REAL(p)[0];
   IGRAPH_R_CHECK_BOOL(loops);
-  c_loops = LOGICAL(loops)[0];
+  c_loops = LOGICAL(loops)[0] ? IGRAPH_LOOPS_SW : IGRAPH_SIMPLE_SW;
   IGRAPH_R_CHECK_BOOL(multiple);
-  c_multiple = LOGICAL(multiple)[0];
+  if (LOGICAL(multiple)[0]) {
+    c_loops = (igraph_edge_type_sw_t) (c_loops | IGRAPH_MULTI_SW);
+  }
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_watts_strogatz_game(&c_graph, c_dim, c_size, c_nei, c_p, c_loops, c_multiple));
+  IGRAPH_R_CHECK(igraph_watts_strogatz_game(&c_graph, c_dim, c_size, c_nei, c_p, c_loops));
 
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
