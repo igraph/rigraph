@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2005-2021  The igraph development team
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -1767,7 +1766,7 @@ igraph_error_t igraph_incident(
     igraph_bool_t directed = igraph_is_directed(graph);
 
     if (node < 0 || node > igraph_vcount(graph) - 1) {
-        IGRAPH_ERROR("Given vertex is not in the graph.", IGRAPH_EINVVID);
+        IGRAPH_ERRORF("Vertex %" IGRAPH_PRId " is not in the graph.", IGRAPH_EINVVID, node);
     }
     if (mode != IGRAPH_OUT && mode != IGRAPH_IN &&
         mode != IGRAPH_ALL) {
@@ -1894,7 +1893,6 @@ igraph_error_t igraph_incident(
     }
     IGRAPH_CHECK(igraph_vector_int_resize(eids, length));
     return IGRAPH_SUCCESS;
-#undef DEDUPLICATE_IF_NEEDED
 }
 
 

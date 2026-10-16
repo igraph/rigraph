@@ -1004,6 +1004,11 @@ igraph_es_t igraph_ess_all(igraph_edgeorder_type_t order) {
  *        \c IGRAPH_OUT, outgoing edges;
  *        \c IGRAPH_IN, incoming edges;
  *        \c IGRAPH_ALL, all edges.
+ * \param loops Whether to include loop edges in the result. If
+ *        \c IGRAPH_NO_LOOPS, loop edges are excluded. If \c IGRAPH_LOOPS_ONCE,
+ *        loop edges are included once. If \c IGRAPH_LOOPS_TWICE, loop edges
+ *        are included twice, but only if the graph is undirected or \p mode is
+ *        set to \c IGRAPH_ALL.
  * \return Error code.
  * \sa \ref igraph_es_destroy()
  *
