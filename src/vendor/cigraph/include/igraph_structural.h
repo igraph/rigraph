@@ -47,7 +47,7 @@ IGRAPH_EXPORT igraph_error_t igraph_density(const igraph_t *graph, const igraph_
 IGRAPH_EXPORT igraph_error_t igraph_diversity(const igraph_t *graph, const igraph_vector_t *weights,
                                    igraph_vector_t *res, const igraph_vs_t vs);
 IGRAPH_EXPORT igraph_error_t igraph_girth(const igraph_t *graph, igraph_real_t *girth,
-                               igraph_vector_int_t *circle);
+                               igraph_vector_int_t *cycle);
 IGRAPH_EXPORT igraph_error_t igraph_has_loop(const igraph_t *graph, igraph_bool_t *res);
 IGRAPH_EXPORT igraph_error_t igraph_has_multiple(const igraph_t *graph, igraph_bool_t *res);
 IGRAPH_EXPORT igraph_error_t igraph_count_loops(const igraph_t *graph, igraph_int_t *loop_count);

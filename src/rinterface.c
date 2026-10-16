@@ -6435,28 +6435,28 @@ SEXP R_igraph_girth(SEXP graph) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_real_t c_girth;
-  igraph_vector_int_t c_circle;
+  igraph_vector_int_t c_cycle;
   SEXP girth;
-  SEXP circle;
+  SEXP cycle;
 
   SEXP r_result, r_names;
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
-  IGRAPH_R_CHECK(igraph_vector_int_init(&c_circle, 0));
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_circle);
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_cycle, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_cycle);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_girth(&c_graph, &c_girth, &c_circle));
+  IGRAPH_R_CHECK(igraph_girth(&c_graph, &c_girth, &c_cycle));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));
   PROTECT(r_names=NEW_CHARACTER(2));
   PROTECT(girth=NEW_NUMERIC(1));
   REAL(girth)[0]=c_girth;
-  PROTECT(circle=Ry_igraph_vector_int_to_SEXPp1(&c_circle));
-  igraph_vector_int_destroy(&c_circle);
+  PROTECT(cycle=Ry_igraph_vector_int_to_SEXPp1(&c_cycle));
+  igraph_vector_int_destroy(&c_cycle);
   IGRAPH_FINALLY_CLEAN(1);
   SET_VECTOR_ELT(r_result, 0, girth);
-  SET_VECTOR_ELT(r_result, 1, circle);
+  SET_VECTOR_ELT(r_result, 1, cycle);
   SET_STRING_ELT(r_names, 0, Rf_mkChar("girth"));
   SET_STRING_ELT(r_names, 1, Rf_mkChar("circle"));
   SET_NAMES(r_result, r_names);
