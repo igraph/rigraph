@@ -26,6 +26,7 @@
 #include "igraph_memory.h"
 
 #include "core/interruption.h"
+#include "paths/paths_internal.h"
 
 /**
  * \ingroup structural
@@ -83,9 +84,27 @@
  *
  * \example examples/simple/distances.c
  */
-igraph_error_t igraph_distances_cutoff(const igraph_t *graph, igraph_matrix_t *res,
-                          const igraph_vs_t from, const igraph_vs_t to,
-                          igraph_neimode_t mode, igraph_real_t cutoff) {
+igraph_error_t igraph_distances_cutoff(
+        const igraph_t *graph,
+        const igraph_vector_t *weights,
+        igraph_matrix_t *res,
+        const igraph_vs_t from, const igraph_vs_t to,
+        igraph_neimode_t mode,
+        igraph_real_t cutoff) {
+
+    if (weights == NULL) {
+        return igraph_i_distances_unweighted_cutoff(graph, res, from, to, mode, cutoff);
+    } else {
+        return igraph_distances_dijkstra_cutoff(graph, res, from, to, weights, mode, cutoff);
+    }
+}
+
+igraph_error_t igraph_i_distances_unweighted_cutoff(
+        const igraph_t *graph,
+        igraph_matrix_t *res,
+        const igraph_vs_t from, const igraph_vs_t to,
+        igraph_neimode_t mode,
+        igraph_real_t cutoff) {
 
     igraph_int_t no_of_nodes = igraph_vcount(graph);
     igraph_int_t no_of_from, no_of_to;
@@ -249,10 +268,58 @@ igraph_error_t igraph_distances_cutoff(const igraph_t *graph, igraph_matrix_t *r
  *
  * \example examples/simple/distances.c
  */
-igraph_error_t igraph_distances(const igraph_t *graph, igraph_matrix_t *res,
-                                const igraph_vs_t from, const igraph_vs_t to,
-                                igraph_neimode_t mode) {
-    return igraph_distances_cutoff(graph, res, from, to, mode, -1);
+igraph_error_t igraph_distances(
+        const igraph_t *graph,
+        const igraph_vector_t *weights,
+        igraph_matrix_t *res,
+        const igraph_vs_t from, const igraph_vs_t to,
+        igraph_neimode_t mode) {
+
+    igraph_real_t vcount_real = igraph_vcount(graph);
+    igraph_real_t ecount_real = igraph_ecount(graph);
+    igraph_real_t ecount_threshold;
+    igraph_int_t from_size;
+    igraph_bool_t negative_weights = false;
+
+    IGRAPH_CHECK(igraph_i_validate_distance_weights(graph, weights, &negative_weights));
+
+    if (!igraph_is_directed(graph)) {
+        mode = IGRAPH_ALL;
+    }
+
+    /* Edge count threshold for using Floyd-Warshall for all-to-all case.
+     * Based on experiments, this is faster than Dijkstra for densities
+     * above 0.1, provided that the graph has more than about 50 vertices.
+     * See also https://github.com/igraph/igraph/issues/2822 */
+    ecount_threshold = vcount_real * vcount_real * 0.1;
+    if (ecount_threshold < 250) ecount_threshold = 250;
+
+    if (!weights) {
+        /* Unweighted case */
+        return igraph_i_distances_unweighted_cutoff(graph, res, from, to, mode, -1);
+    } else if (igraph_vs_is_all(&from) && ecount_real > ecount_threshold) {
+        /* All-to-all distances with dense graph */
+        return igraph_distances_floyd_warshall(graph, res, from, to, weights, mode, IGRAPH_FLOYD_WARSHALL_AUTOMATIC);
+    } else if (!negative_weights) {
+        /* Non-negative weights: use Dijkstra's algorithm. */
+        return igraph_i_distances_dijkstra_cutoff(graph, res, from, to, weights, mode, -1);
+    } else {
+        /* Negative weights: use Bellman-Ford or Johnson's algorithm.
+         *
+         * In the undirected case we always use Bellman-Ford. Normally, a negative weight
+         * undirected edge triggers an error as it is effectively a negative cycle.
+         * However, with Bellman-Ford the negative edge might be avoided if it is
+         * not reachable from the 'from' vertices. In contrast, Johnson will always raise
+         * an error.
+         */
+        if (mode != IGRAPH_ALL) {
+            IGRAPH_CHECK(igraph_vs_size(graph, &from, &from_size));
+            if (from_size > 100) {
+                return igraph_i_distances_johnson(graph, res, from, to, weights, mode);
+            }
+        }
+        return igraph_i_distances_bellman_ford(graph, res, from, to, weights, mode);
+    }
 }
 
 /**
@@ -266,7 +333,7 @@ igraph_error_t igraph_shortest_paths(const igraph_t *graph,
                                      const igraph_vs_t from,
                                      const igraph_vs_t to,
                                      igraph_neimode_t mode) {
-    return igraph_distances(graph, res, from, to, mode);
+    return igraph_distances(graph, NULL, res, from, to, mode);
 }
 
 /**
@@ -344,13 +411,36 @@ igraph_error_t igraph_shortest_paths(const igraph_t *graph,
  *
  * \example examples/simple/igraph_get_shortest_paths.c
  */
-igraph_error_t igraph_get_shortest_paths(const igraph_t *graph,
-                              igraph_vector_int_list_t *vertices,
-                              igraph_vector_int_list_t *edges,
-                              igraph_int_t from, const igraph_vs_t to,
-                              igraph_neimode_t mode,
-                              igraph_vector_int_t *parents,
-                              igraph_vector_int_t *inbound_edges) {
+igraph_error_t igraph_get_shortest_paths(
+        const igraph_t *graph,
+        const igraph_vector_t *weights,
+        igraph_vector_int_list_t *vertices,
+        igraph_vector_int_list_t *edges,
+        igraph_int_t from, const igraph_vs_t to,
+        igraph_neimode_t mode,
+        igraph_vector_int_t *parents,
+        igraph_vector_int_t *inbound_edges) {
+
+    igraph_bool_t negative_weights;
+    IGRAPH_CHECK(igraph_i_validate_distance_weights(graph, weights, &negative_weights));
+
+    if (weights == NULL) {
+        return igraph_i_get_shortest_paths_unweighted(graph, vertices, edges, from, to, mode, parents, inbound_edges);
+    } else if (!negative_weights) {
+        return igraph_i_get_shortest_paths_dijkstra(graph, vertices, edges, from, to, weights, mode, parents, inbound_edges);
+    } else {
+        return igraph_i_get_shortest_paths_bellman_ford(graph, vertices, edges, from, to, weights, mode, parents, inbound_edges);
+    }
+}
+
+igraph_error_t igraph_i_get_shortest_paths_unweighted(
+        const igraph_t *graph,
+        igraph_vector_int_list_t *vertices,
+        igraph_vector_int_list_t *edges,
+        igraph_int_t from, igraph_vs_t to,
+        igraph_neimode_t mode,
+        igraph_vector_int_t *parents,
+        igraph_vector_int_t *inbound_edges) {
 
     /* TODO: use inclist_t if to is long (longer than 1?) */
 
@@ -576,12 +666,13 @@ igraph_error_t igraph_get_shortest_paths(const igraph_t *graph,
  * vertices.
  */
 
-igraph_error_t igraph_get_shortest_path(const igraph_t *graph,
-                             igraph_vector_int_t *vertices,
-                             igraph_vector_int_t *edges,
-                             igraph_int_t from,
-                             igraph_int_t to,
-                             igraph_neimode_t mode) {
+igraph_error_t igraph_get_shortest_path(
+        const igraph_t *graph,
+        const igraph_vector_t *weights,
+        igraph_vector_int_t *vertices,
+        igraph_vector_int_t *edges,
+        igraph_int_t from, igraph_int_t to,
+        igraph_neimode_t mode) {
 
     igraph_vector_int_list_t vertices2, *vp = &vertices2;
     igraph_vector_int_list_t edges2, *ep = &edges2;
@@ -599,7 +690,7 @@ igraph_error_t igraph_get_shortest_path(const igraph_t *graph,
         ep = NULL;
     }
 
-    IGRAPH_CHECK(igraph_get_shortest_paths(graph, vp, ep, from,
+    IGRAPH_CHECK(igraph_get_shortest_paths(graph, weights, vp, ep, from,
                                            igraph_vss_1(to), mode, NULL, NULL));
 
     /* We use the constant time vector_swap() instead of the linear-time vector_update() to move the

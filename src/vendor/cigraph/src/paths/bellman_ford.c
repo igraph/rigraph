@@ -1,7 +1,6 @@
-/* -*- mode: C -*-  */
 /* vim:set ts=4 sw=4 sts=4 et: */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2005-2021 The igraph development team
 
    This program is free software; you can redistribute it and/or modify
@@ -27,6 +26,7 @@
 #include "igraph_memory.h"
 
 #include "core/interruption.h"
+#include "paths/paths_internal.h"
 
 /**
  * \function igraph_distances_bellman_ford
@@ -67,13 +67,27 @@
  *
  * \example examples/simple/bellman_ford.c
  */
-igraph_error_t igraph_distances_bellman_ford(const igraph_t *graph,
-                                       igraph_matrix_t *res,
-                                       const igraph_vs_t from,
-                                       const igraph_vs_t to,
-                                       const igraph_vector_t *weights,
-                                       igraph_neimode_t mode) {
-    igraph_int_t no_of_nodes = igraph_vcount(graph);
+igraph_error_t igraph_distances_bellman_ford(
+        const igraph_t *graph,
+        igraph_matrix_t *res,
+        const igraph_vs_t from,
+        const igraph_vs_t to,
+        const igraph_vector_t *weights,
+        igraph_neimode_t mode) {
+
+    igraph_bool_t negative_weights;
+    IGRAPH_CHECK(igraph_i_validate_distance_weights(graph, weights, &negative_weights));
+    return igraph_i_distances_bellman_ford(graph, res, from, to, weights, mode);
+}
+
+igraph_error_t igraph_i_distances_bellman_ford(
+        const igraph_t *graph,
+        igraph_matrix_t *res,
+        const igraph_vs_t from, const igraph_vs_t to,
+        const igraph_vector_t *weights,
+        igraph_neimode_t mode) {
+
+    const igraph_int_t no_of_nodes = igraph_vcount(graph);
     igraph_int_t no_of_edges = igraph_ecount(graph);
     igraph_lazy_inclist_t inclist;
     igraph_int_t i;
@@ -84,7 +98,7 @@ igraph_error_t igraph_distances_bellman_ford(const igraph_t *graph,
     igraph_vit_t fromvit, tovit;
     igraph_bool_t all_to;
     igraph_vector_t dist;
-    int counter = 0;
+    int iter = 0;
 
     /*
        - speedup: a vertex is marked clean if its distance from the source
@@ -94,17 +108,9 @@ igraph_error_t igraph_distances_bellman_ford(const igraph_t *graph,
          be detected by checking whether a vertex has been queued at least
          n times.
     */
-    if (!weights) {
-        return igraph_distances(graph, res, from, to, mode);
-    }
 
-    if (igraph_vector_size(weights) != no_of_edges) {
-        IGRAPH_ERRORF("Weight vector length (%" IGRAPH_PRId ") does not match number of edges (%" IGRAPH_PRId ").",
-                      IGRAPH_EINVAL,
-                      igraph_vector_size(weights), no_of_edges);
-    }
-    if (igraph_vector_is_any_nan(weights)) {
-        IGRAPH_ERROR("Weight vector must not contain NaN values.", IGRAPH_EINVAL);
+    if (!weights || no_of_edges == 0) {
+        return igraph_i_distances_unweighted_cutoff(graph, res, from, to, mode, -1);
     }
 
     IGRAPH_CHECK(igraph_vit_create(graph, from, &fromvit));
@@ -150,10 +156,7 @@ igraph_error_t igraph_distances_bellman_ford(const igraph_t *graph,
         }
 
         while (!igraph_dqueue_int_empty(&Q)) {
-            if (++counter >= 10000) {
-                counter = 0;
-                IGRAPH_ALLOW_INTERRUPTION();
-            }
+            IGRAPH_ALLOW_INTERRUPTION_LIMITED(iter, 1 << 13);
 
             igraph_int_t j = igraph_dqueue_int_pop(&Q);
             IGRAPH_BIT_SET(clean_vertices, j);
@@ -190,7 +193,7 @@ igraph_error_t igraph_distances_bellman_ford(const igraph_t *graph,
 
         /* Copy it to the result */
         if (all_to) {
-            igraph_matrix_set_row(res, &dist, i);
+            IGRAPH_CHECK(igraph_matrix_set_row(res, &dist, i));
         } else {
             igraph_int_t j;
             for (IGRAPH_VIT_RESET(tovit), j = 0; !IGRAPH_VIT_END(tovit);
@@ -307,17 +310,34 @@ igraph_error_t igraph_shortest_paths_bellman_ford(const igraph_t *graph,
  * if you do not have negative edge weights.
  */
 
-igraph_error_t igraph_get_shortest_paths_bellman_ford(const igraph_t *graph,
-                                        igraph_vector_int_list_t *vertices,
-                                        igraph_vector_int_list_t *edges,
-                                        igraph_int_t from,
-                                        igraph_vs_t to,
-                                        const igraph_vector_t *weights,
-                                        igraph_neimode_t mode,
-                                        igraph_vector_int_t *parents,
-                                        igraph_vector_int_t *inbound_edges) {
-    igraph_int_t no_of_nodes = igraph_vcount(graph);
-    igraph_int_t no_of_edges = igraph_ecount(graph);
+igraph_error_t igraph_get_shortest_paths_bellman_ford(
+        const igraph_t *graph,
+        igraph_vector_int_list_t *vertices,
+        igraph_vector_int_list_t *edges,
+        igraph_int_t from,
+        igraph_vs_t to,
+        const igraph_vector_t *weights,
+        igraph_neimode_t mode,
+        igraph_vector_int_t *parents,
+        igraph_vector_int_t *inbound_edges) {
+
+    igraph_bool_t negative_weights;
+    IGRAPH_CHECK(igraph_i_validate_distance_weights(graph, weights, &negative_weights));
+    return igraph_i_get_shortest_paths_bellman_ford(graph, vertices, edges, from, to, weights, mode, parents, inbound_edges);
+}
+
+igraph_error_t igraph_i_get_shortest_paths_bellman_ford(
+        const igraph_t *graph,
+        igraph_vector_int_list_t *vertices,
+        igraph_vector_int_list_t *edges,
+        igraph_int_t from,
+        igraph_vs_t to,
+        const igraph_vector_t *weights,
+        igraph_neimode_t mode,
+        igraph_vector_int_t *parents,
+        igraph_vector_int_t *inbound_edges) {
+
+    const igraph_int_t no_of_nodes = igraph_vcount(graph);
     igraph_int_t *parent_eids;
     igraph_lazy_inclist_t inclist;
     igraph_int_t i, j, k;
@@ -326,19 +346,14 @@ igraph_error_t igraph_get_shortest_paths_bellman_ford(const igraph_t *graph,
     igraph_vector_int_t num_queued;
     igraph_vit_t tovit;
     igraph_vector_t dist;
-    int counter = 0;
+    int iter = 0;
 
     if (!weights) {
-        return igraph_get_shortest_paths(graph, vertices, edges, from, to, mode,
-                                         parents, inbound_edges);
+        return igraph_i_get_shortest_paths_unweighted(graph, vertices, edges, from, to, mode, parents, inbound_edges);
     }
 
     if (from < 0 || from >= no_of_nodes) {
         IGRAPH_ERROR("Index of source vertex is out of range.", IGRAPH_EINVVID);
-    }
-
-    if (igraph_vector_size(weights) != no_of_edges) {
-        IGRAPH_ERROR("Weight vector length must match number of edges.", IGRAPH_EINVAL);
     }
 
     IGRAPH_DQUEUE_INT_INIT_FINALLY(&Q, no_of_nodes);
@@ -372,10 +387,7 @@ igraph_error_t igraph_get_shortest_paths_bellman_ford(const igraph_t *graph,
     }
 
     while (!igraph_dqueue_int_empty(&Q)) {
-        if (++counter >= 10000) {
-            counter = 0;
-            IGRAPH_ALLOW_INTERRUPTION();
-        }
+        IGRAPH_ALLOW_INTERRUPTION_LIMITED(iter, 1 << 13);
 
         j = igraph_dqueue_int_pop(&Q);
         IGRAPH_BIT_SET(clean_vertices, j);
@@ -399,10 +411,6 @@ igraph_error_t igraph_get_shortest_paths_bellman_ford(const igraph_t *graph,
             igraph_int_t target = IGRAPH_OTHER(graph, nei, j);
             igraph_real_t weight = VECTOR(*weights)[nei];
             igraph_real_t altdist = VECTOR(dist)[j] + weight;
-
-            if (isnan(weight)) {
-                IGRAPH_ERROR("Weight vector must not contain NaN values.", IGRAPH_EINVAL);
-            }
 
             /* infinite weights are handled correctly here; if an edge has
              * infinite weight, altdist will also be infinite so the condition

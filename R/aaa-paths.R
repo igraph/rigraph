@@ -114,6 +114,7 @@ distances_bellman_ford_impl <- function(
 
 distances_cutoff_impl <- function(
   graph,
+  weights = NULL,
   from = V(graph),
   to = V(graph),
   mode = c("out", "in", "all", "total"),
@@ -121,6 +122,14 @@ distances_cutoff_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && !all(is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
   from <- as_igraph_vs(graph, from)
   to <- as_igraph_vs(graph, to)
   mode <- switch_igraph_arg(
@@ -137,6 +146,7 @@ distances_cutoff_impl <- function(
   res <- .Call(
     R_igraph_distances_cutoff,
     graph,
+    weights,
     from - 1,
     to - 1,
     mode,
@@ -277,12 +287,21 @@ distances_floyd_warshall_impl <- function(
 
 distances_impl <- function(
   graph,
+  weights = NULL,
   from = V(graph),
   to = V(graph),
   mode = c("out", "in", "all", "total")
 ) {
   # Argument checks
   ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && !all(is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
   from <- as_igraph_vs(graph, from)
   to <- as_igraph_vs(graph, to)
   mode <- switch_igraph_arg(
@@ -298,6 +317,7 @@ distances_impl <- function(
   res <- .Call(
     R_igraph_distances,
     graph,
+    weights,
     from - 1,
     to - 1,
     mode
@@ -310,7 +330,8 @@ distances_johnson_impl <- function(
   graph,
   from = V(graph),
   to = V(graph),
-  weights = NULL
+  weights = NULL,
+  mode = c("out", "in", "all", "total")
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -324,6 +345,13 @@ distances_johnson_impl <- function(
   } else {
     weights <- NULL
   }
+  mode <- switch_igraph_arg(
+    mode,
+    "out" = 1L,
+    "in" = 2L,
+    "all" = 3L,
+    "total" = 3L
+  )
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -332,7 +360,8 @@ distances_johnson_impl <- function(
     graph,
     from - 1,
     to - 1,
-    weights
+    weights,
+    mode
   )
 
   res
@@ -634,12 +663,21 @@ get_all_shortest_paths_dijkstra_impl <- function(
 
 get_all_shortest_paths_impl <- function(
   graph,
+  weights = NULL,
   from,
   to,
   mode = c("out", "in", "all", "total")
 ) {
   # Argument checks
   ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && !all(is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
   from <- as_igraph_vs(graph, from)
   if (length(from) != 1) {
     cli::cli_abort(
@@ -661,6 +699,7 @@ get_all_shortest_paths_impl <- function(
   res <- .Call(
     R_igraph_get_all_shortest_paths,
     graph,
+    weights,
     from - 1,
     to - 1,
     mode
@@ -962,12 +1001,21 @@ get_shortest_path_dijkstra_impl <- function(
 
 get_shortest_path_impl <- function(
   graph,
+  weights = NULL,
   from,
   to,
   mode = c("out", "in", "all", "total")
 ) {
   # Argument checks
   ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && !all(is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
   from <- as_igraph_vs(graph, from)
   if (length(from) != 1) {
     cli::cli_abort(
@@ -995,6 +1043,7 @@ get_shortest_path_impl <- function(
   res <- .Call(
     R_igraph_get_shortest_path,
     graph,
+    weights,
     from - 1,
     to - 1,
     mode
@@ -1114,12 +1163,21 @@ get_shortest_paths_dijkstra_impl <- function(
 
 get_shortest_paths_impl <- function(
   graph,
+  weights = NULL,
   from,
   to = V(graph),
   mode = c("out", "in", "all", "total")
 ) {
   # Argument checks
   ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && !all(is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
   from <- as_igraph_vs(graph, from)
   if (length(from) != 1) {
     cli::cli_abort(
@@ -1141,6 +1199,7 @@ get_shortest_paths_impl <- function(
   res <- .Call(
     R_igraph_get_shortest_paths,
     graph,
+    weights,
     from - 1,
     to - 1,
     mode
