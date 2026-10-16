@@ -301,10 +301,6 @@ IGRAPH_EXPORT igraph_int_t igraph_sparsemat_iterator_next(igraph_sparsemat_itera
 IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_sparsemat_diag(
     igraph_sparsemat_t *A, igraph_int_t nzmax, const igraph_vector_t *values,
     igraph_bool_t compress);
-IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_sparsemat_eye(
-    igraph_sparsemat_t *A, igraph_int_t n, igraph_int_t nzmax,
-    igraph_real_t value, igraph_bool_t compress);
-
 __END_DECLS
 
 #endif

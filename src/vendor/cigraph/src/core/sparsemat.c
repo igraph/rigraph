@@ -1512,20 +1512,6 @@ igraph_error_t igraph_sparsemat_init_eye(
     }
 }
 
-/**
- * \function igraph_sparsemat_eye
- * \brief Creates a sparse identity matrix (deprecated alias).
- *
- * \deprecated-by igraph_sparsemat_init_eye 0.10
- */
-
-igraph_error_t igraph_sparsemat_eye(
-    igraph_sparsemat_t *A, igraph_int_t n, igraph_int_t nzmax,
-    igraph_real_t value, igraph_bool_t compress
-) {
-    return igraph_sparsemat_init_eye(A, n, nzmax, value, compress);
-}
-
 static igraph_error_t igraph_i_sparsemat_init_diag_triplet(
     igraph_sparsemat_t *A, igraph_int_t nzmax, const igraph_vector_t *values
 ) {
