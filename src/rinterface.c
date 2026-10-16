@@ -4907,14 +4907,14 @@ SEXP R_igraph_betweenness_cutoff(SEXP graph, SEXP weights, SEXP vids, SEXP direc
 /*-------------------------------------------/
 / igraph_betweenness_subset                  /
 /-------------------------------------------*/
-SEXP R_igraph_betweenness_subset(SEXP graph, SEXP weights, SEXP sources, SEXP targets, SEXP vids, SEXP directed, SEXP normalized) {
+SEXP R_igraph_betweenness_subset(SEXP graph, SEXP weights, SEXP vids, SEXP sources, SEXP targets, SEXP directed, SEXP normalized) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_t c_weights;
   igraph_vector_t c_res;
+  igraph_vs_t c_vids;
   igraph_vs_t c_sources;
   igraph_vs_t c_targets;
-  igraph_vs_t c_vids;
   igraph_bool_t c_directed;
   igraph_bool_t c_normalized;
   SEXP res;
@@ -4927,29 +4927,29 @@ SEXP R_igraph_betweenness_subset(SEXP graph, SEXP weights, SEXP sources, SEXP ta
   }
   IGRAPH_R_CHECK(igraph_vector_init(&c_res, 0));
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
+  igraph_vector_int_t c_vids_data;
+  Rz_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
   igraph_vector_int_t c_sources_data;
   Rz_SEXP_to_igraph_vs(sources, &c_graph, &c_sources, &c_sources_data);
   igraph_vector_int_t c_targets_data;
   Rz_SEXP_to_igraph_vs(targets, &c_graph, &c_targets, &c_targets_data);
-  igraph_vector_int_t c_vids_data;
-  Rz_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
   IGRAPH_R_CHECK_BOOL(directed);
   c_directed = LOGICAL(directed)[0];
   IGRAPH_R_CHECK_BOOL(normalized);
   c_normalized = LOGICAL(normalized)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_betweenness_subset(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_res, c_sources, c_targets, c_vids, c_directed, c_normalized));
+  IGRAPH_R_CHECK(igraph_betweenness_subset(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_res, c_vids, c_sources, c_targets, c_directed, c_normalized));
 
                                         /* Convert output */
   PROTECT(res=Ry_igraph_vector_to_SEXP(&c_res));
   igraph_vector_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_destroy(&c_vids_data);
+  igraph_vs_destroy(&c_vids);
   igraph_vector_int_destroy(&c_sources_data);
   igraph_vs_destroy(&c_sources);
   igraph_vector_int_destroy(&c_targets_data);
   igraph_vs_destroy(&c_targets);
-  igraph_vector_int_destroy(&c_vids_data);
-  igraph_vs_destroy(&c_vids);
   r_result = res;
 
   UNPROTECT(1);
