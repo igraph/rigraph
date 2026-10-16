@@ -565,7 +565,11 @@ sbm_game_impl <- function(
   loops = FALSE
 ) {
   # Argument checks
-  n <- as.numeric(n)
+  if (as.numeric(n) != sum(block_sizes)) {
+    cli::cli_abort(
+      "Sum of the block sizes ({sum(block_sizes)}) must equal the number of vertices ({n})."
+    )
+  }
   pref_matrix[] <- as.numeric(pref_matrix)
   block_sizes <- as.numeric(block_sizes)
   directed <- as.logical(directed)
@@ -575,7 +579,6 @@ sbm_game_impl <- function(
   # Function call
   res <- .Call(
     R_igraph_sbm_game,
-    n,
     pref_matrix,
     block_sizes,
     directed,

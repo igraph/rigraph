@@ -641,6 +641,18 @@ DEPRECATED:
     CALL: {}
     INCONV: if (!missing(%I%)) { warning("Argument `%I%' is deprecated and has no effect") }
 
+BLOCK_SIZES_SUM:
+    # A vertex count that igraph no longer takes because it is the sum of the
+    # block sizes (igraph_sbm_game() since krlmlr/igraph@17177c7): kept in R
+    # and checked against that sum, with the error igraph raised.
+    CALL: {}
+    INCONV: |-
+        if (as.numeric(%I%) != sum(%I1%)) {
+          cli::cli_abort(
+            "Sum of the block sizes ({sum(%I1%)}) must equal the number of vertices ({%I%})."
+          )
+        }
+
 LSETYPE:
     DEFAULT:
         Default: c("default", "D-A", "DAD", "I-DAD", "OAP")
