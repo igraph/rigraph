@@ -2312,7 +2312,7 @@ igraph_isomorphic:
     PARAMS: GRAPH graph1, GRAPH graph2, OUT BOOLEAN iso
 
 igraph_isoclass_subgraph:
-    PARAMS: GRAPH graph, VECTOR_INT vids, OUT INTEGER isoclass
+    PARAMS: GRAPH graph, VERTEX_SELECTOR vids, OUT INTEGER isoclass
     DEPS: vids ON graph
 
 igraph_isoclass_create:

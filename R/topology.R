@@ -173,9 +173,9 @@ graph.get.subisomorphisms.vf2 <- function(
 graph.isoclass.subgraph <- function(graph, vids) {
   # Argument checks
   ensure_igraph(graph)
-  vids <- as_igraph_vs(graph, vids) - 1
 
-  # Function call
+  # Function call: isoclass_subgraph_impl() converts vids itself, as upstream
+  # takes a vertex selector (krlmlr/igraph@2302f64).
   res <- isoclass_subgraph_impl(
     graph = graph,
     vids = vids
