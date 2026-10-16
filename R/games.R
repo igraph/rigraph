@@ -978,8 +978,10 @@ sample_pa <- function(
     ))
   }
 
-  if (is.null(out.seq)) {
-    out.seq <- numeric()
+  # Upstream (igraph@a396457) reads an empty out-degree sequence as one of
+  # length zero, no longer as a missing one: pass NULL for it instead.
+  if (length(out.seq) == 0) {
+    out.seq <- NULL
   }
 
   algorithm <- igraph_match_arg(algorithm)
@@ -2035,8 +2037,10 @@ sample_pa_age <- function(
     ))
   }
 
-  if (is.null(out.seq)) {
-    out.seq <- numeric()
+  # Upstream (igraph@a396457) reads an empty out-degree sequence as one of
+  # length zero, no longer as a missing one: pass NULL for it instead.
+  if (length(out.seq) == 0) {
+    out.seq <- NULL
   }
 
   res <- if (is.null(time.window)) {
