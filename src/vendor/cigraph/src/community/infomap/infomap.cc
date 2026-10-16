@@ -212,13 +212,13 @@ static igraph_error_t infomap_partition(FlowGraph &fgraph, bool rcall) {
  * implementation) you can use \ref igraph_rng_seed().
  *
  * \param graph The input graph. Edge directions are taken into account.
- * \param e_weights Numeric vector giving the weights of the edges.
+ * \param edge_weights Numeric vector giving the weights of the edges.
  *     The random walker will favour edges with high weights over
  *     edges with low weights; the probability of picking a particular
  *     outbound edge from a node is directly proportional to its weight.
  *     If it is \c NULL then all edges will have equal
  *     weights. The weights are expected to be non-negative.
- * \param v_weights Numeric vector giving the weights of the vertices.
+ * \param vertex_weights Numeric vector giving the weights of the vertices.
  *     Vertices with higher weights are favoured by the random walker
  *     when it needs to "teleport" to a new node after getting stuck in
  *     a sink node (i.e. a node with no outbound edges). The probability
@@ -240,23 +240,23 @@ static igraph_error_t infomap_partition(FlowGraph &fgraph, bool rcall) {
  * Time complexity: TODO.
  */
 igraph_error_t igraph_community_infomap(const igraph_t * graph,
-                             const igraph_vector_t *e_weights,
-                             const igraph_vector_t *v_weights,
+                             const igraph_vector_t *edge_weights,
+                             const igraph_vector_t *vertex_weights,
                              igraph_int_t nb_trials,
                              igraph_vector_int_t *membership,
                              igraph_real_t *codelength) {
 
     IGRAPH_HANDLE_EXCEPTIONS_BEGIN;
 
-    if (e_weights) {
+    if (edge_weights) {
         const igraph_int_t ecount = igraph_ecount(graph);
-        if (igraph_vector_size(e_weights) != ecount) {
+        if (igraph_vector_size(edge_weights) != ecount) {
             IGRAPH_ERROR("Invalid edge weight vector length.", IGRAPH_EINVAL);
         }
         if (ecount > 0) {
             /* Allow both positive and zero weights.
              * The conversion to Infomap format will simply skip zero-weight edges/ */
-            igraph_real_t minweight = igraph_vector_min(e_weights);
+            igraph_real_t minweight = igraph_vector_min(edge_weights);
             if (minweight < 0) {
                 IGRAPH_ERROR("Edge weights must not be negative.", IGRAPH_EINVAL);
             } else if (isnan(minweight)) {
@@ -265,15 +265,15 @@ igraph_error_t igraph_community_infomap(const igraph_t * graph,
         }
     }
 
-    if (v_weights) {
+    if (vertex_weights) {
         const igraph_int_t vcount = igraph_vcount(graph);
-        if (igraph_vector_size(v_weights) != vcount) {
+        if (igraph_vector_size(vertex_weights) != vcount) {
             IGRAPH_ERROR("Invalid vertex weight vector length.", IGRAPH_EINVAL);
         }
         if (vcount > 0) {
             /* TODO: Currently we require strictly positive. Can this be
              * relaxed to non-negative values? */
-            igraph_real_t minweight = igraph_vector_min(v_weights);
+            igraph_real_t minweight = igraph_vector_min(vertex_weights);
             if (minweight <= 0) {
                 IGRAPH_ERROR("Vertex weights must be positive.", IGRAPH_EINVAL);
             } else if (isnan(minweight)) {
@@ -282,7 +282,7 @@ igraph_error_t igraph_community_infomap(const igraph_t * graph,
         }
     }
 
-    FlowGraph fgraph(graph, e_weights, v_weights);
+    FlowGraph fgraph(graph, edge_weights, vertex_weights);
 
     // compute stationary distribution
     fgraph.initiate();
