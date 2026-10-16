@@ -242,6 +242,9 @@ games:
     - igraph_sample_dirichlet
     - igraph_sample_sphere_surface
     - igraph_sample_sphere_volume
+    - igraph_rng_sample_dirichlet
+    - igraph_rng_sample_sphere_surface
+    - igraph_rng_sample_sphere_volume
 
 generators:
   adjacency-generators:
