@@ -1,3 +1,4 @@
+# jarl-ignore-file missing_argument: this is the test's point
 # Tests for the in-place argument-migration generator (tools/generate-migrations.R)
 # via the fixture `migration_fixture()` (R/migration-fixture.R). Old signature
 # f(graph, n, weight, kind, directed); new f(graph, n, ..., weights, type,
@@ -83,7 +84,7 @@ test_that("head args go through base R partial matching, not our recovery", {
     warnPartialMatchArgs = TRUE
   )
   expect_snapshot(migration_fixture(gr = "G", n = 5))
-  expect_snapshot(migration_fixture(g = "G", 5, kind = "in"))
+  expect_snapshot_igraph(migration_fixture(g = "G", 5, kind = "in"))
 })
 
 test_that("recovery emits a single deprecation warning, not one per slot", {
@@ -165,9 +166,9 @@ test_that("empty argument slot messages", {
   # so these read as the old-signature calls they are equivalent to.
   rlang::local_options(lifecycle_verbosity = "warning")
   expect_snapshot(migration_fixture("g", 5, ))
-  expect_snapshot(migration_fixture("g", 5, , "in", TRUE))
-  expect_snapshot(migration_fixture("g", 5, , , TRUE))
-  expect_snapshot(migration_fixture("g", 5, kind = , 1:3))
+  expect_snapshot_igraph(migration_fixture("g", 5, , "in", TRUE))
+  expect_snapshot_igraph(migration_fixture("g", 5, , , TRUE))
+  expect_snapshot_igraph(migration_fixture("g", 5, kind = , 1:3))
 })
 
 test_that("a slot past the last recoverable one is surplus, empty or not", {
@@ -268,14 +269,14 @@ test_that("recovery deprecation messages", {
   # No assignment, so the snapshot also shows the recovered values the call
   # resolved to.
   rlang::local_options(lifecycle_verbosity = "warning")
-  expect_snapshot(migration_fixture("g", 5, 1:3, "in", TRUE))
-  expect_snapshot(migration_fixture("g", 5, 1:3))
-  expect_snapshot(migration_fixture("g", 5, weight = 1:3))
-  expect_snapshot(migration_fixture("g", 5, kind = "in"))
-  expect_snapshot(migration_fixture("g", 5, kin = "in"))
-  expect_snapshot(migration_fixture("g", 5, dir = TRUE))
+  expect_snapshot_igraph(migration_fixture("g", 5, 1:3, "in", TRUE))
+  expect_snapshot_igraph(migration_fixture("g", 5, 1:3))
+  expect_snapshot_igraph(migration_fixture("g", 5, weight = 1:3))
+  expect_snapshot_igraph(migration_fixture("g", 5, kind = "in"))
+  expect_snapshot_igraph(migration_fixture("g", 5, kin = "in"))
+  expect_snapshot_igraph(migration_fixture("g", 5, dir = TRUE))
   # mixed: a positional value and a named abbreviation in the same call
-  expect_snapshot(migration_fixture("g", 5, 1:3, dir = TRUE))
+  expect_snapshot_igraph(migration_fixture("g", 5, 1:3, dir = TRUE))
 })
 
 test_that("error message snapshots", {
@@ -498,9 +499,9 @@ test_that("abbreviations of a renamed-away name are rejected", {
 
 test_that("shadow fixture messages", {
   rlang::local_options(lifecycle_verbosity = "warning")
-  expect_snapshot(migration_fixture_shadow("g", 1:3))
-  expect_snapshot(migration_fixture_shadow("g", nam = FALSE))
-  expect_snapshot(migration_fixture_shadow("g", 1, 2, 3))
+  expect_snapshot_igraph(migration_fixture_shadow("g", 1:3))
+  expect_snapshot_igraph(migration_fixture_shadow("g", nam = FALSE))
+  expect_snapshot_igraph(migration_fixture_shadow("g", 1, 2, 3))
   expect_snapshot(migration_fixture_shadow("g", at = "w"), error = TRUE)
   expect_snapshot(migration_fixture_shadow("g", foo = 1), error = TRUE)
   expect_snapshot(migration_fixture_shadow("g", 1, 2, 3, 4), error = TRUE)

@@ -2,7 +2,6 @@
 % Please edit documentation in R/layout.R
 \name{layout_with_dh}
 \alias{layout_with_dh}
-\alias{with_dh}
 \title{The Davidson-Harel layout algorithm}
 \usage{
 layout_with_dh(
@@ -18,13 +17,11 @@ layout_with_dh(
   weight.edge.crossings = NULL,
   weight.node.edge.dist = NULL
 )
-
-with_dh(...)
 }
 \arguments{
 \item{graph}{The graph to lay out. Edge directions are ignored.}
 
-\item{...}{Passed to \code{layout_with_dh()}.}
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{coords}{Optional starting positions for the vertices. If this argument
 is not \code{NULL} then it should be an appropriate matrix of starting
@@ -153,7 +150,8 @@ Annealing. \emph{ACM Transactions on Graphics} 15(4), pp. 301-331, 1996.
 }
 \seealso{
 \code{\link[=layout_with_fr]{layout_with_fr()}},
-\code{\link[=layout_with_kk]{layout_with_kk()}} for other layout algorithms.
+\code{\link[=layout_with_kk]{layout_with_kk()}} for other layout algorithms. See \code{\link[=with_dh]{with_dh()}} to build a
+lazy layout specification for \code{\link[=add_layout_]{add_layout_()}}.
 
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},

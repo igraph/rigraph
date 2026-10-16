@@ -1515,7 +1515,8 @@ random.graph.game <- function(
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso
 #' [simplify()] to get rid of the multiple and/or loops edges,
-#' [realize_degseq()] for a deterministic variant.
+#' [realize_degseq()] for a deterministic variant. See [degseq()] to build a
+#' lazy constructor specification for [make_()] or [sample_()].
 #' @family games
 #' @export
 #' @keywords graphs
@@ -1738,10 +1739,10 @@ sample_degseq <- function(
   res
 }
 
-#' @rdname sample_degseq
-#' @param deterministic  Whether the construction should be deterministic
-#' @param ... Passed to `realize_degseq()` if \sQuote{deterministic} is true,
-#'   or to `sample_degseq()` otherwise.
+#' @rdname constructor_spec
+#' @param deterministic For `degseq()`, whether the construction should be
+#'   deterministic; if `TRUE`, wraps [realize_degseq()] instead of
+#'   [sample_degseq()].
 #' @export
 degseq <- function(..., deterministic = FALSE) {
   constructor_spec(
@@ -2804,7 +2805,7 @@ sample_pref <- function(
   if (nrow(pref.matrix) != types || ncol(pref.matrix) != types) {
     cli::cli_abort(c(
       "{.arg pref.matrix} must have {.arg types} rows and columns.",
-      i = "See {.fun igraph::sample_pref}'s manual."
+      i = "See {.fun sample_pref}'s manual."
     ))
   }
 
@@ -2968,13 +2969,13 @@ sample_asym_pref <- function(
   if (nrow(pref.matrix) != types || ncol(pref.matrix) != types) {
     cli::cli_abort(c(
       "{.arg pref.matrix} must have {.arg types} rows and columns.",
-      i = "See {.fun igraph::sample_asym_pref}'s manual."
+      i = "See {.fun sample_asym_pref}'s manual."
     ))
   }
   if (nrow(type.dist.matrix) != types || ncol(type.dist.matrix) != types) {
     cli::cli_abort(c(
       "{.arg type.dist.matrix} must have {.arg types} rows and columns.",
-      i = "See {.fun igraph::sample_asym_pref}'s manual."
+      i = "See {.fun sample_asym_pref}'s manual."
     ))
   }
 

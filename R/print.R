@@ -296,14 +296,13 @@ print_edge_detail <- function(graph, edges) {
     etail <- tail_of(graph, edges)
     ehead <- head_of(graph, edges)
     df <- data.frame(
-      stringsAsFactors = FALSE,
       tail = as_ids(etail),
       head = as_ids(ehead),
       tid = as.vector(etail),
       hid = as.vector(ehead)
     )
     if (length(ea)) {
-      ea <- do_call(data.frame, .args = ea, stringsAsFactors = FALSE)
+      ea <- do_call(data.frame, .args = ea)
       df <- cbind(df, ea[as.vector(edges), , drop = FALSE])
     }
     print(df)
@@ -373,7 +372,6 @@ print_edge_detail <- function(graph, edges) {
   if (!is.null(x)) {
     arrow <- c("--", "->")[is_directed(x) + 1]
 
-    # jarl-ignore unused_object: then assigned to with <<-
     can_max <- NA
     el <- NA
 

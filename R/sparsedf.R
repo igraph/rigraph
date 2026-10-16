@@ -62,7 +62,7 @@ sdf <- function(..., row.names = NULL, NROW = NULL) {
 #' @method as.data.frame igraphSDF
 #' @export
 as.data.frame.igraphSDF <- function(x, row.names, optional, ...) {
-  as.data.frame(lapply(x, rep, length.out = attr(x, "NROW")))
+  list2DF(lapply(x, rep, length.out = attr(x, "NROW")))
 }
 
 #' @method "[" igraphSDF

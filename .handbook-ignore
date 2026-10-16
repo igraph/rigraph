@@ -1,0 +1,49 @@
+# Paths the handbook checks skip, one per line: a glob, or `kind: glob`.
+# A bare glob skips the path in every check; `orphan:` exempts it from the
+# orphan check alone, and `em-dash:` from the em dash check alone. A trailing /
+# covers everything below, and * spans directory separators. Write the reason
+# beside each line, and delete what does not apply here.
+# Handbook: /handbook/meta/local/README.md says what this repository does not
+# author, and the shared rules say what needs no backreference; both belong
+# here, by kind.
+
+# Vendored skills and commands are nobody's to reformat.
+em-dash: .claude/
+
+# The vendored C library is upstream's, and the Stimulus subrepo is its own
+# project; what this repository changes about either is patch/ and
+# tools/stimulus/ (handbook/architecture/engine/, architecture/stimulus/).
+src/vendor/cigraph/
+tools/py-stimulus/
+
+# Generated documents cannot carry a backreference; the generator does.
+# NEWS.md is fledge's, the snapshots testthat's, and revdep/ holds reports
+# revdepcheck writes and the notes kept beside them for one release.
+NEWS.md
+orphan: tests/testthat/_snaps/
+revdep/
+
+# Generated sources carry the generator's header line, punctuation included
+# (handbook/architecture/stimulus/).
+em-dash: R/aaa-*.R
+
+# The rendered README comes from README.Rmd and is read from a tarball that
+# does not carry handbook/, so its pointer is the site rather than a link the
+# checks can resolve (handbook/meta/local/).
+orphan: README.md
+
+# The submission comments reach a CRAN maintainer verbatim, so they link to
+# nothing internal; handbook/operations/releases/ links to them.
+orphan: cran-comments.md
+orphan: cran-comments.template.md
+
+# The series tooling keeps duckdb-r's punctuation so that a resync stays a
+# clean diff (.series-source); the rest of these paths predate the rule, and
+# handbook/meta/local/ exempts them rather than rewriting them.
+em-dash: scripts/
+em-dash: tools/
+em-dash: CONTRIBUTING.md
+
+# The list of the C library's authors, kept beside the package for reference:
+# data, not prose, and it needs no route into the tree.
+orphan: AUTHORS-list.md

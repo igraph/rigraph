@@ -2,31 +2,18 @@
 % Please edit documentation in R/par.R
 \name{igraph_options}
 \alias{igraph_options}
-\alias{igraph_opt}
 \title{Parameters for the igraph package}
 \usage{
 igraph_options(...)
-
-igraph_opt(x, ..., default = NULL)
 }
 \arguments{
 \item{\dots}{A list may be given as the only argument, or any number of
 arguments may be in the \code{name=value} form, or no argument at all may be
 given. See the Value and Details sections for explanation.}
-
-\item{x}{A character string holding an option name.}
-
-\item{default}{If the specified option is not set in the options list, this
-value is returned. This facilitates retrieving an option and checking
-whether it is set and setting it separately if not.}
 }
 \value{
-\code{igraph_options()} returns a list with the old values of the
-updated parameters, invisibly. Without any arguments, it returns the
-values of all options.
-
-For \code{igraph_opt()}, the current value set for option \code{x}, or
-\code{NULL} if the option is unset.
+A list with the old values of the updated parameters, invisibly.
+Without any arguments, it returns the values of all options.
 }
 \description{
 igraph has some parameters which (usually) affect the behavior of many
@@ -65,12 +52,13 @@ The plotting function to use when plotting community structure dendrograms via \
 Possible values are \sQuote{auto} (the default), \sQuote{phylo}, \sQuote{hclust} and \sQuote{dendrogram}.
 See \code{\link[=plot_dendrogram]{plot_dendrogram()}} for details.
 }
-\item{edge.attr.comb}{
+\item{edge_attr_combine}{
 Specifies what to do with the edge attributes if the graph is modified.
 The default value is \code{list(weight="sum", name="concat", "ignore")}.
-See \code{\link[=attribute.combination]{attribute.combination()}} for details on this.
+See \code{\link[=attribute.combination]{attribute.combination()}} for details on this. The former dotted
+name \code{edge.attr.comb} still works but is soft-deprecated.
 }
-\item{graph.attr.comb}{
+\item{graph_attr_combine}{
 Specifies what to do with the graph attributes when graphs are
 combined, e.g. via \code{\link[=union]{union()}}, \code{\link[=intersection]{intersection()}}, \code{\link[=disjoint_union]{disjoint_union()}}
 or \code{\link[=compose]{compose()}}. The default value is \code{"rename"}, which resolves any
@@ -114,10 +102,11 @@ It is recommended, if the user works with larger graphs.
 Logical constant, whether igraph functions should talk more than minimal.
 E.g. if \code{TRUE} then some functions will use progress bars while computing. Defaults to \code{FALSE}.
 }
-\item{vertex.attr.comb}{
+\item{vertex_attr_combine}{
 Specifies what to do with the vertex attributes if the graph is modified.
 The default value is \code{list(name="concat", "ignore")}.
-See \code{\link[=attribute.combination]{attribute.combination()}} for details on this.
+See \code{\link[=attribute.combination]{attribute.combination()}} for details on this. The former dotted
+name \code{vertex.attr.comb} still works but is soft-deprecated.
 }
 }
 }
@@ -135,10 +124,11 @@ igraph_opt("verbose")
 
 }
 \seealso{
-\code{igraph_options()} is similar to \code{\link[=options]{options()}} and
-\code{igraph_opt()} is similar to \code{\link[=getOption]{getOption()}}.
+Similar to \code{\link[=options]{options()}}. See \code{\link[=igraph_opt]{igraph_opt()}} to retrieve the
+value of a single option.
 
 Other igraph options:
+\code{\link[=igraph_opt]{igraph_opt()}},
 \code{\link[=with_igraph_opt]{with_igraph_opt()}}
 }
 \author{

@@ -2,7 +2,6 @@
 % Please edit documentation in R/games.R
 \name{sample_degseq}
 \alias{sample_degseq}
-\alias{degseq}
 \title{Generate random graphs with a given degree sequence}
 \usage{
 sample_degseq(
@@ -12,8 +11,6 @@ sample_degseq(
   method = c("configuration", "vl", "fast.heur.simple", "configuration.simple",
     "edge.switching.simple")
 )
-
-degseq(..., deterministic = FALSE)
 }
 \arguments{
 \item{out.deg}{Numeric vector, the sequence of degrees (for undirected
@@ -24,12 +21,9 @@ should be even. For directed graphs its sum should be the same as the sum of
 \item{in.deg}{For directed graph, the in-degree sequence. By default this is
 \code{NULL} and an undirected graph is created.}
 
-\item{...}{Passed to \code{realize_degseq()} if \sQuote{deterministic} is true,
-or to \code{sample_degseq()} otherwise.}
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{method}{Character, the method for generating the graph. See Details.}
-
-\item{deterministic}{Whether the construction should be deterministic}
 }
 \value{
 The new graph object.
@@ -197,7 +191,8 @@ all(degree(powerlaw_vl_graph) == powerlaw_degrees)
 }
 \seealso{
 \code{\link[=simplify]{simplify()}} to get rid of the multiple and/or loops edges,
-\code{\link[=realize_degseq]{realize_degseq()}} for a deterministic variant.
+\code{\link[=realize_degseq]{realize_degseq()}} for a deterministic variant. See \code{\link[=degseq]{degseq()}} to build a
+lazy constructor specification for \code{\link[=make_]{make_()}} or \code{\link[=sample_]{sample_()}}.
 
 Random graph models (games):
 \code{\link[=bipartite_gnm]{bipartite_gnm()}},

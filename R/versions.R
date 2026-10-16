@@ -139,7 +139,7 @@ warn_version <- function(graph) {
   if (pkg_graph_version > their_version) {
     cli::cli_inform(c(
       "This graph was created by an old(er) igraph version.",
-      i = "Call {.fun igraph::upgrade_graph} on it to use with the current igraph version.",
+      i = "Call {.fun upgrade_graph} on it to use with the current igraph version.",
       "For now we convert it on the fly..."
     ))
 
@@ -213,7 +213,7 @@ igraph.version <- function() {
 #' igraph_version()
 #'
 igraph_version <- function() {
-  r_version <- getNamespaceInfo("igraph", "spec")[["version"]]
+  r_version <- getNamespaceInfo(get_package_name(), "spec")[["version"]]
 
   version <- structure(
     r_version,

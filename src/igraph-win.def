@@ -1,3 +1,10 @@
+; The export list of the Windows DLL. R's share/make/winshlib.mk finds it by
+; name, as <package>-win.def, and links the DLL exporting only what it lists:
+; R needs the init routine and nothing else, because every other entry point
+; is registered from there.
+;
+; The name of this file and the two names below all carry the package name, so
+; scripts/flavor.patch renames and rewrites them for a flavor.
 LIBRARY igraph.dll
 EXPORTS
   R_init_igraph

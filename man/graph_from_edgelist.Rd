@@ -2,17 +2,14 @@
 % Please edit documentation in R/conversion.R
 \name{graph_from_edgelist}
 \alias{graph_from_edgelist}
-\alias{from_edgelist}
 \title{Create a graph from an edge list matrix}
 \usage{
 graph_from_edgelist(el, ..., directed = TRUE)
-
-from_edgelist(...)
 }
 \arguments{
 \item{el}{The edge list, a two column matrix, character or numeric.}
 
-\item{...}{Passed to \code{graph_from_edgelist()}.}
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{directed}{Whether to create a directed graph.}
 }
@@ -39,6 +36,9 @@ graph_from_edgelist(el)
 graph_from_edgelist(cbind(1:10, c(2:10, 1)))
 }
 \seealso{
+\code{\link[=from_edgelist]{from_edgelist()}} to build a lazy constructor specification for
+\code{\link[=make_]{make_()}} or \code{\link[=sample_]{sample_()}}.
+
 Other deterministic constructors:
 \code{\link[=graph_from_atlas]{graph_from_atlas()}},
 \code{\link[=graph_from_literal]{graph_from_literal()}},

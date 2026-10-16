@@ -9,7 +9,7 @@ Run `revdepcheck::revdep_details(, "xpect")` for more info
 ### Devel
 
 ```
-new check timed out after 1201s, at: * checking tests ...
+new check timed out after 1801s, at: * checking tests ...
 
 
 
@@ -19,7 +19,7 @@ new check timed out after 1201s, at: * checking tests ...
 ### CRAN
 
 ```
-new check timed out after 1201s, at: * checking tests ...
+new check timed out after 1801s, at: * checking tests ...
 
 
 

@@ -1,20 +1,14 @@
 ## revdepcheck results
 
-We checked 785 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 3470 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 45 new problems
- * We failed to check 1 packages
+ * We saw 26 new problems
+ * We failed to check 8 packages
 
 Issues with CRAN packages are summarised below.
 
 ### New problems
 (This reports the first line of each new failure)
-
-* bitriad
-  checking examples ... ERROR
-
-* bnmonitor
-  checking examples ... ERROR
 
 * Boptbd
   checking examples ... ERROR
@@ -22,8 +16,7 @@ Issues with CRAN packages are summarised below.
 * c3net
   checking examples ... ERROR
 
-* cia
-  checking examples ... ERROR
+* cfid
   checking tests ... ERROR
 
 * comato
@@ -40,18 +33,8 @@ Issues with CRAN packages are summarised below.
 * degreenet
   checking examples ... ERROR
 
-* ecodist
-  checking examples ... ERROR
-
 * ECoL
   checking examples ... ERROR
-  checking tests ... ERROR
-
-* FrF2
-  checking examples ... ERROR
-  checking tests ... ERROR
-
-* gemtc
   checking tests ... ERROR
 
 * ggm
@@ -67,54 +50,14 @@ Issues with CRAN packages are summarised below.
 * GoodFitSBM
   checking examples ... ERROR
 
-* gor
-  checking examples ... ERROR
-
-* GRAB
-  checking examples ... ERROR
-
-* gRain
-  checking examples ... ERROR
-  checking tests ... ERROR
-  checking re-building of vignette outputs ... ERROR
-
-* gRbase
-  checking examples ... ERROR
-  checking re-building of vignette outputs ... ERROR
-
-* gRc
-  checking examples ... ERROR
-
-* gRim
-  checking examples ... ERROR
-  checking tests ... ERROR
-  checking re-building of vignette outputs ... ERROR
-
-* joinery
-  checking examples ... ERROR
-  checking tests ... ERROR
-
-* lpanda
-  checking examples ... ERROR
-  checking tests ... ERROR
-
 * manynet
-  checking tests ... ERROR
-
-* metainsight
   checking tests ... ERROR
 
 * MetaNet
   checking examples ... ERROR
 
-* movecost
-  checking examples ... ERROR
+* migraph
   checking tests ... ERROR
-  checking re-building of vignette outputs ... ERROR
-
-* MSCquartets
-  checking examples ... ERROR
-  checking re-building of vignette outputs ... ERROR
 
 * nat
   checking examples ... ERROR
@@ -124,31 +67,14 @@ Issues with CRAN packages are summarised below.
 * nethist
   checking tests ... ERROR
 
-* netseer
-  checking examples ... ERROR
-  checking re-building of vignette outputs ... ERROR
-
 * optbdmaeAT
   checking examples ... ERROR
 
 * optrcdmaeAT
   checking examples ... ERROR
 
-* PCBN
-  checking examples ... ERROR
-  checking tests ... ERROR
-  checking re-building of vignette outputs ... ERROR
-
-* phangorn
-  checking examples ... ERROR
-  checking tests ... ERROR
-  checking re-building of vignette outputs ... ERROR
-
 * R6causal
   checking whether package ‘R6causal’ can be installed ... WARNING
-
-* rnmamod
-  checking tests ... ERROR
 
 * scistreer
   checking examples ... ERROR
@@ -159,11 +85,6 @@ Issues with CRAN packages are summarised below.
 * sfclust
   checking tests ... ERROR
 
-* simcausal
-  checking examples ... ERROR
-  checking tests ... ERROR
-  checking re-building of vignette outputs ... ERROR
-
 * SpaDES.core
   checking tests ... ERROR
 
@@ -171,6 +92,16 @@ Issues with CRAN packages are summarised below.
   checking examples ... ERROR
   checking tests ... ERROR
 
+* vkR
+  checking dependencies in R code ... WARNING
+
 ### Failed to check
 
-* hespdiv (NA)
+* ctmm            (NA)
+* E2E             (NA)
+* gllvm           (NA)
+* hespdiv         (NA)
+* orchaRd         (NA)
+* PortfolioTesteR (NA)
+* sphet           (NA)
+* xpect           (NA)

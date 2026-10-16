@@ -22,8 +22,9 @@ can be \code{NULL}, see details below.}
 \item{target}{The ID of the target vertex, for \code{vertex_connectivity()} it
 can be \code{NULL}, see details below.}
 
-\item{...}{Additional arguments passed to methods. Not used by \code{vertex_connectivity()}
-directly but may be used by other methods that implement \code{cohesion()}.}
+\item{\dots}{For \code{vertex_connectivity()}, these dots must be empty. For
+\code{cohesion()}, unused, present for S3 method consistency but may be used
+by other methods that implement it.}
 
 \item{checks}{Logical. Whether to check that the graph is connected
 and also the degree of the vertices. If the graph is not (strongly)

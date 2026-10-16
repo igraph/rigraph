@@ -2,12 +2,9 @@
 % Please edit documentation in R/layout.R
 \name{layout_in_circle}
 \alias{layout_in_circle}
-\alias{in_circle}
 \title{Graph layout with vertices on a circle.}
 \usage{
 layout_in_circle(graph, order = NULL)
-
-in_circle(...)
 }
 \arguments{
 \item{graph}{The input graph.}
@@ -16,8 +13,6 @@ in_circle(...)
 desired placement. Vertices that are not included here will be placed at
 (0,0). The default \code{NULL} selects all vertices, in the order of their
 IDs.}
-
-\item{...}{Passed to \code{layout_in_circle()}.}
 }
 \value{
 A numeric matrix with two columns, and one row for each vertex.
@@ -34,7 +29,7 @@ If you want to order the vertices differently, then permute them using the
 }
 
 \examples{
-\dontshow{if (igraph:::has_glpk() && rlang::is_installed("igraphdata")) withAutoprint(\{ # examplesIf}
+\dontshow{if (rlang::ns_env(cluster_optimal)$has_glpk() && rlang::is_installed("igraphdata")) withAutoprint(\{ # examplesIf}
 
 ## Place vertices on a circle, order them according to their
 ## community
@@ -52,6 +47,9 @@ plot(karate, layout = coords)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
+\code{\link[=in_circle]{in_circle()}} to build a lazy layout specification for
+\code{\link[=add_layout_]{add_layout_()}}.
+
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},
 \code{\link[=component_wise]{component_wise()}},
