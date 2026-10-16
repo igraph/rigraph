@@ -1,7 +1,6 @@
-/* -*- mode: C -*-  */
 /* vim:set ts=4 sw=4 sts=4 et: */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2011-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -49,7 +48,7 @@ int igraph_i_glpk_terminal_hook(void *info, const char *s) {
 
     if (igraph_i_interruption_handler &&
         !igraph_i_glpk_error_info.is_interrupted &&
-        igraph_allow_interruption(NULL) != IGRAPH_SUCCESS) {
+        igraph_allow_interruption()) {
         /* If an interruption has already occurred, do not set another error,
            to avoid an infinite loop between the term_hook (this function)
            and the error_hook. */
@@ -90,7 +89,7 @@ void igraph_i_glpk_interruption_hook(glp_tree *tree, void *info) {
        with the code GLP_ESTOP.
     */
     if (igraph_i_interruption_handler) {
-        if (igraph_allow_interruption(NULL) != IGRAPH_SUCCESS) {
+        if (igraph_allow_interruption()) {
             glp_ios_terminate(tree);
         }
     }
@@ -128,9 +127,8 @@ igraph_error_t igraph_i_glpk_check(int retval, const char* message) {
     }
 
     /* handle errors */
-#define HANDLE_CODE(c)  case c: code = #c; ret = IGRAPH_FAILURE; break;
-#define HANDLE_CODE2(c) case c: code = #c; ret = IGRAPH_FAILURE; break;
-#define HANDLE_CODE3(c) case c: code = #c; ret = IGRAPH_INTERRUPTED; break;
+#define HANDLE_CODE(c) case c: code = #c; ret = IGRAPH_FAILURE; break;
+#define HANDLE_CODE2(c) case c: code = #c; ret = IGRAPH_INTERRUPTED; break;
     switch (retval) {
         HANDLE_CODE(GLP_EBOUND);
         HANDLE_CODE(GLP_EROOT);
@@ -140,21 +138,20 @@ igraph_error_t igraph_i_glpk_check(int retval, const char* message) {
         HANDLE_CODE(GLP_EMIPGAP);
         HANDLE_CODE(GLP_ETMLIM);
 
-        HANDLE_CODE3(GLP_ESTOP);
+        HANDLE_CODE2(GLP_ESTOP);
 
-        HANDLE_CODE2(GLP_EBADB);
-        HANDLE_CODE2(GLP_ESING);
-        HANDLE_CODE2(GLP_ECOND);
-        HANDLE_CODE2(GLP_EOBJLL);
-        HANDLE_CODE2(GLP_EOBJUL);
-        HANDLE_CODE2(GLP_EITLIM);
+        HANDLE_CODE(GLP_EBADB);
+        HANDLE_CODE(GLP_ESING);
+        HANDLE_CODE(GLP_ECOND);
+        HANDLE_CODE(GLP_EOBJLL);
+        HANDLE_CODE(GLP_EOBJUL);
+        HANDLE_CODE(GLP_EITLIM);
 
     default:
         IGRAPH_ERROR("Unknown GLPK error.", IGRAPH_FAILURE);
     }
 #undef HANDLE_CODE
 #undef HANDLE_CODE2
-#undef HANDLE_CODE3
 
     snprintf(message_and_code, sizeof(message_and_code) / sizeof(message_and_code[0]),
             "%s (%s)", message, code);

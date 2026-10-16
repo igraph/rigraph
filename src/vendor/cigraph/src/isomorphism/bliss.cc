@@ -191,7 +191,7 @@ struct AbortChecker {
 
     AbortChecker() : aborted(false) { }
     bool operator()() {
-        if (igraph_allow_interruption(NULL) != IGRAPH_SUCCESS) {
+        if (igraph_allow_interruption()) {
             aborted = true;
             return true;
         }

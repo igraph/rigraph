@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2003-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -25,7 +24,7 @@
 #define IGRAPH_INTERRUPT_H
 
 #include "igraph_decls.h"
-#include "igraph_error.h"
+#include "igraph_types.h"
 
 __BEGIN_DECLS
 
@@ -102,11 +101,11 @@ __BEGIN_DECLS
  *
  * This is the type of the interruption handler functions.
  *
- * \param data reserved for possible future use
- * \return \c IGRAPH_SUCCESS if the calculation should go on, anything else otherwise.
+ * \return false if the calculation should go on, true if the calculation
+ *         should be interrupted.
  */
 
-typedef igraph_error_t igraph_interruption_handler_t (void* data);
+typedef igraph_bool_t igraph_interruption_handler_t(void);
 
 /**
  * \function igraph_allow_interruption
@@ -115,11 +114,11 @@ typedef igraph_error_t igraph_interruption_handler_t (void* data);
  * \ref IGRAPH_ALLOW_INTERRUPTION macro) if \a igraph is checking for interruption
  * requests.
  *
- * \param data reserved for possible future use, now it is always \c NULL
- * \return \c IGRAPH_SUCCESS if the calculation should go on, anything else otherwise.
+ * \return false if the calculation should go on, true if the calculation
+ *         should be interrupted.
  */
 
-IGRAPH_EXPORT igraph_error_t igraph_allow_interruption(void* data);
+IGRAPH_EXPORT igraph_bool_t igraph_allow_interruption(void);
 
 IGRAPH_EXPORT igraph_interruption_handler_t * igraph_set_interruption_handler (igraph_interruption_handler_t * new_handler);
 

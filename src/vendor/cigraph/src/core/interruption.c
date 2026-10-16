@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -25,13 +24,13 @@
 
 #include "config.h" /* IGRAPH_THREAD_LOCAL */
 
-IGRAPH_THREAD_LOCAL igraph_interruption_handler_t *igraph_i_interruption_handler = 0;
+IGRAPH_THREAD_LOCAL igraph_interruption_handler_t *igraph_i_interruption_handler = NULL;
 
-igraph_error_t igraph_allow_interruption(void *data) {
+igraph_bool_t igraph_allow_interruption(void) {
     if (igraph_i_interruption_handler) {
-        return igraph_i_interruption_handler(data);
+        return igraph_i_interruption_handler();
     }
-    return IGRAPH_SUCCESS;
+    return false;
 }
 
 igraph_interruption_handler_t *igraph_set_interruption_handler (igraph_interruption_handler_t *new_handler) {
