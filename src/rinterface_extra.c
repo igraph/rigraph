@@ -3571,7 +3571,7 @@ SEXP Ry_igraph_sparsemat_to_SEXP_cc(const igraph_sparsemat_t *sp) {
     igraph_vector_t x;
     Rz_SEXP_to_vector_int_copy(VECTOR_ELT(res, 2), &p);
     Rz_SEXP_to_vector_int_copy(VECTOR_ELT(res, 3), &i);
-    igraph_vector_view(&x, REAL(VECTOR_ELT(res, 4)), nz);
+    x = igraph_vector_view(REAL(VECTOR_ELT(res, 4)), nz);
     igraph_sparsemat_getelements_sorted(sp, &i, &p, &x);
   }
 
@@ -3689,7 +3689,7 @@ void Ry_igraph_SEXP_to_vector_list(SEXP vectorlist, igraph_vector_list_t *list) 
   for (igraph_integer_t i=0; i<length; i++) {
     igraph_vector_t *v=&vecs[i];
     SEXP el=VECTOR_ELT(vectorlist, i);
-    igraph_vector_view(v, REAL(el), Rf_xlength(el));
+    *v = igraph_vector_view(REAL(el), Rf_xlength(el));
   }
 }
 
@@ -3730,7 +3730,7 @@ void Ry_igraph_SEXP_to_matrixlist(SEXP matrixlist, igraph_matrix_list_t *list) {
     igraph_matrix_t *v=&vecs[i];
     SEXP el=VECTOR_ELT(matrixlist, i);
     SEXP dim=GET_DIM(el);
-    igraph_matrix_view(v, REAL(el), INTEGER(dim)[0], INTEGER(dim)[1]);
+    *v = igraph_matrix_view(REAL(el), INTEGER(dim)[0], INTEGER(dim)[1]);
   }
 }
 
