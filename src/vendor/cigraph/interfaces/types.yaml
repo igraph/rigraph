@@ -585,7 +585,7 @@ LEVC_FUNC:
 # Miscellaneous
 ###############################################################################
 
-ARPACKOPT:
+ARPACK_OPTIONS:
     # Structure that contains the options of the ARPACK eigensolver.
     CTYPE: igraph_arpack_options_t
     FLAGS: BY_REF

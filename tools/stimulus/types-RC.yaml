@@ -783,7 +783,7 @@ ATTRIBUTES:
     CTYPE: ~
     HEADER: {}
 
-ARPACKOPT:
+ARPACK_OPTIONS:
     CALL: '&%C%'
     INCONV:
         INOUT: Rz_SEXP_to_igraph_arpack_options(%I%, &%C%);
