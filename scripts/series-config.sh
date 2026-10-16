@@ -45,7 +45,7 @@ series_sha_sed='s|^.*[A-Za-z0-9_.-]+/igraph@([0-9a-f]+).*$|\1|p'
 # scripts/vendor-one.sh decides which stretch it is on from the ancestry of the
 # newest vendored SHA, so nothing here changes when the seam has been crossed.
 series_replay_repo=krlmlr/igraph
-series_replay_branch=replay-1.0.1
+series_replay_branch=v1.0-replay
 series_replay_tip=3c54c752e63b96c0f0e81564a8f9fda3b8890919
 series_seam=7b4ae766cbdee6b2017aa5b76752457db2a2972f
 
@@ -95,7 +95,13 @@ series_generate_tree() { # <upstream checkout>
       keep+=("$p")
     fi
   done
-  git -C "$1" archive HEAD -- "${keep[@]}" | tar -x -C "$series_vendor_dir"
+  # Dated now (`-m`), not to the upstream commit as `git archive` stamps them:
+  # the replay's commits share one committer date, so an edit that kept a
+  # file's size would leave its size and its date as git last saw them, and
+  # where `core.checkStat=minimal` and `core.trustctime=false` leave git nothing
+  # else to compare, `git status` would call it unchanged and the vendor commit
+  # would drop it.
+  git -C "$1" archive HEAD -- "${keep[@]}" | tar -x -m -C "$series_vendor_dir"
   rm -rf "$build"
   cmake -S "$1" -B "$build" >/dev/null || return
   cp "$build/include/igraph_version.h" "$series_stamp_file"
@@ -107,9 +113,9 @@ series_generate_tree() { # <upstream checkout>
 # A whole buffer commit derives everything Makefile-cigraph writes, Stimulus's
 # R/C interface and the source lists among it, then the cpp11 registration and
 # the dependency lists. DOCKER= runs flex and bison from the PATH rather than
-# from a container. The inputs are forced (`-W`), because `git archive` dates
-# the extracted tree to the upstream commit and a patch dates only what it
-# touches, so make would read what is generated from them as up to date.
+# from a container. The inputs are forced (`-W`), because make compares dates
+# and a patch dates only what it touches, so make could read what is generated
+# from the tree as up to date.
 series_generate_derived() { # <strand|full>
   local force=(-W "$series_vendor_dir/include/igraph_threading.h.in")
   if [ "$1" = strand ]; then

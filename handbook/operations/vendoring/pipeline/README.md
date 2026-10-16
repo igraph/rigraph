@@ -14,7 +14,7 @@ refusing rather than guessing when the scan, bounded by `BASE_SCAN_DEPTH` (20), 
 A candidate is worth a commit when it is an exact tag or changes more than one file under `src/vendor/`,
 because `src/vendor/igraph_version.h` changes for every commit off a tag.
 
-**The upstream clone** is a full clone of igraph/igraph with its tags, plus the branch `replay-1.0.1` from `krlmlr/igraph`;
+**The upstream clone** is a full clone of igraph/igraph with its tags, plus the branch `v1.0-replay` from `krlmlr/igraph`;
 a shallow or tagless clone is refused, because igraph's CMake derives the version from `git describe --tags`.
 Its `HEAD` says how far to walk upstream `main`; on the replay the walk ends at the replay's tip whatever `HEAD` says
 ([`model/`](/handbook/operations/vendoring/model/README.md)).

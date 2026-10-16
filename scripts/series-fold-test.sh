@@ -4,7 +4,7 @@
 #
 # The claim the script makes is that a fix written on the landing commit that
 # introduced a defect ends up in that commit and in every commit above it,
-# and nowhere else, with the landing's shape and dates kept. Seven things are
+# and nowhere else, with the landing's shape and dates kept. Eight things are
 # checked.
 #
 #   1. The commits below the lowest target keep their SHAs, and the landing
@@ -19,6 +19,8 @@
 #      and --continue finishes it with the resolution.
 #   7. A fix that is not a commit on its target is refused before anything is
 #      replayed.
+#   8. A note follows the upstream subjects a vendor commit's message ends with,
+#      which look like trailers but are not.
 #
 # Usage:
 #   scripts/series-fold-test.sh
@@ -163,6 +165,30 @@ set -e
 is "with status 2" "$st" 2
 has "naming the fix" "$(cat "$SCRATCH/out")" "is not a commit on its target"
 is "and nothing is replayed" "$(git rev-parse HEAD)" "$landing"
+
+echo "=== 8. a note follows the upstream subjects a message ends with"
+git checkout -q --detach "$main"
+echo 6 > src/vendor/cigraph/engine
+GIT_COMMITTER_DATE='1700000000 +0000' git commit -q -a -m "vendor: Update vendored sources to krlmlr/igraph@006
+
+Date: 2026-04-18 13:02:06 +0000
+
+nfc: remove RNG_BEGIN()/RNG_END() macros
+chore: update CHANGELOG"
+subjects=$(git rev-parse HEAD)
+echo 'f <- function() 6' > R/f.R
+GIT_COMMITTER_DATE='1700000000 +0000' git commit -q -a -m 'fix: f() returns six'
+fix6=$(git rev-parse HEAD)
+git checkout -q --detach "$subjects"
+"$HERE/series-fold.sh" "$subjects" --fold "$subjects=$fix6:R-side fix: f() returns six." > "$SCRATCH/out" 2>&1 ||
+  { no "the fold finishes"; cat "$SCRATCH/out"; }
+is "the note is the last paragraph" "$(git log -1 --format=%B HEAD | sed -n '/^Date/,$p')" \
+  "Date: 2026-04-18 13:02:06 +0000
+
+nfc: remove RNG_BEGIN()/RNG_END() macros
+chore: update CHANGELOG
+
+R-side fix: f() returns six."
 
 echo
 echo "$pass passed, $fail failed"

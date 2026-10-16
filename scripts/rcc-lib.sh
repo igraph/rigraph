@@ -28,9 +28,8 @@
 # ## Retention
 #
 # The store keeps `RCC_RETENTION_DAYS` (default 180) of history, records and logs
-# alike, and duckdb-r's `rcc-consolidate.sh` enforces it with the pruning and
-# squashing helpers below; rigraph has not ported that script, so until it does
-# nothing prunes. That is one window rather than
+# alike, and `scripts/rcc-consolidate.sh`, run by hand, enforces it with the
+# pruning and squashing helpers below. That is one window rather than
 # two, and it is load-bearing in both directions: a producer must not look
 # further back than the window, or it re-derives every tick what consolidation
 # drops, and a consumer must not ask about a commit older than it. Selection is

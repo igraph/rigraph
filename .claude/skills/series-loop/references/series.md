@@ -33,7 +33,7 @@ Should 20 ever not be enough, the helper says so on stderr rather than answering
 [`scripts/vendor-one.sh`](/scripts/vendor-one.sh) decides which stretch a branch is on from the ancestry of its newest vendored SHA,
 so nothing changes by hand when the seam is crossed.
 
-1. **The replay** of igraph 0.10.17 to 1.0.1, branch `replay-1.0.1` of `krlmlr/igraph`, tip `3c54c752`.
+1. **The replay** of igraph 0.10.17 to 1.0.1, branch `v1.0-replay` of `krlmlr/igraph`, tip `3c54c752`.
    Its commits exist only there, and their vendor subjects say `krlmlr/igraph@<sha>`.
    While a branch is behind the replay tip, the walk ends at the tip whatever the clone's HEAD says.
 2. **The seam**: at the replay tip, one vendor commit vendors `igraph/igraph@7b4ae766`, tag 1.0.1,

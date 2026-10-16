@@ -54,6 +54,11 @@ R with the package's dependencies and `decor`, which `cpp11::cpp_register()` nee
 `cmake`, for the version header;
 `flex` and `bison` on the PATH, which the scripts run with `DOCKER=` instead of the container `Makefile-cigraph` defaults to;
 and `python3` with `venv`, for the Stimulus virtualenv `Makefile-cigraph` builds from `tools/build-requirements.txt`.
+The cloud image ships all of them but `flex`, so a firing installs it before the vendor stage:
+
+```sh
+command -v flex >/dev/null || sudo apt-get install -y flex
+```
 
 ## How this firing reads results
 
