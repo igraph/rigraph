@@ -420,12 +420,12 @@ extern SEXP R_igraph_rewire_directed_edges(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_rewire_edges(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_rich_club_sequence(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_ring(SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_rng_sample_dirichlet(SEXP, SEXP);
+extern SEXP R_igraph_rng_sample_sphere_surface(SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_rng_sample_sphere_volume(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_rooted_product(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_roots_for_tree_layout(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_running_mean(SEXP, SEXP);
-extern SEXP R_igraph_sample_dirichlet(SEXP, SEXP);
-extern SEXP R_igraph_sample_sphere_surface(SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_sample_sphere_volume(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_sbm_game(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_similarity_dice(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_similarity_dice_es(SEXP, SEXP, SEXP, SEXP);
@@ -994,12 +994,12 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_rewire_edges",                                   (DL_FUNC) &R_igraph_rewire_edges,                                    3},
     {"R_igraph_rich_club_sequence",                             (DL_FUNC) &R_igraph_rich_club_sequence,                              6},
     {"R_igraph_ring",                                           (DL_FUNC) &R_igraph_ring,                                            4},
+    {"R_igraph_rng_sample_dirichlet",                           (DL_FUNC) &R_igraph_rng_sample_dirichlet,                            2},
+    {"R_igraph_rng_sample_sphere_surface",                      (DL_FUNC) &R_igraph_rng_sample_sphere_surface,                       4},
+    {"R_igraph_rng_sample_sphere_volume",                       (DL_FUNC) &R_igraph_rng_sample_sphere_volume,                        4},
     {"R_igraph_rooted_product",                                 (DL_FUNC) &R_igraph_rooted_product,                                  3},
     {"R_igraph_roots_for_tree_layout",                          (DL_FUNC) &R_igraph_roots_for_tree_layout,                           3},
     {"R_igraph_running_mean",                                   (DL_FUNC) &R_igraph_running_mean,                                    2},
-    {"R_igraph_sample_dirichlet",                               (DL_FUNC) &R_igraph_sample_dirichlet,                                2},
-    {"R_igraph_sample_sphere_surface",                          (DL_FUNC) &R_igraph_sample_sphere_surface,                           4},
-    {"R_igraph_sample_sphere_volume",                           (DL_FUNC) &R_igraph_sample_sphere_volume,                            4},
     {"R_igraph_sbm_game",                                       (DL_FUNC) &R_igraph_sbm_game,                                        4},
     {"R_igraph_similarity_dice",                                (DL_FUNC) &R_igraph_similarity_dice,                                 4},
     {"R_igraph_similarity_dice_es",                             (DL_FUNC) &R_igraph_similarity_dice_es,                              4},

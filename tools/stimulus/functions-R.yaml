@@ -206,6 +206,26 @@ igraph_correlated_game:
         name: Correlated random graph
       GATTR-PARAM: corr, p
 
+# Upstream removes igraph_sample_sphere_surface(), igraph_sample_sphere_volume()
+# and igraph_sample_dirichlet() (krlmlr/igraph@66ba309) in favour of these,
+# which take the RNG to sample from: the R names stay, and the RNG is the
+# default one, R's, as for the removed functions.
+igraph_rng_sample_sphere_surface:
+    NAME-R: sample_sphere_surface
+    PARAMS: |-
+        RNG_DEFAULT rng, INTEGER dim, INTEGER n=1, REAL radius=1,
+        BOOLEAN positive=True, OUT MATRIX res
+
+igraph_rng_sample_sphere_volume:
+    NAME-R: sample_sphere_volume
+    PARAMS: |-
+        RNG_DEFAULT rng, INTEGER dim, INTEGER n=1, REAL radius=1,
+        BOOLEAN positive=True, OUT MATRIX res
+
+igraph_rng_sample_dirichlet:
+    NAME-R: sample_dirichlet
+    PARAMS: RNG_DEFAULT rng, INTEGER n, VECTOR alpha, OUT MATRIX res
+
 #######################################
 # Basic query functions
 #######################################

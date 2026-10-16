@@ -1306,7 +1306,7 @@
     Condition
       Warning in `dot_product_game_impl()`:
       Greater than 1 connection probability in dot-product graph.
-      Source: games/dotproduct.c:87
+      Source: games/dotproduct.c:86
     Output
       IGRAPH U--- 2 1 -- 
       + edge:
@@ -1319,7 +1319,7 @@
     Condition
       Warning in `dot_product_game_impl()`:
       Greater than 1 connection probability in dot-product graph.
-      Source: games/dotproduct.c:87
+      Source: games/dotproduct.c:86
     Output
       IGRAPH D--- 2 2 -- 
       + edges:

@@ -1109,7 +1109,7 @@ sample_dirichlet_impl <- function(
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_sample_dirichlet,
+    R_igraph_rng_sample_dirichlet,
     n,
     alpha
   )
@@ -1132,7 +1132,7 @@ sample_sphere_surface_impl <- function(
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_sample_sphere_surface,
+    R_igraph_rng_sample_sphere_surface,
     dim,
     n,
     radius,
@@ -1157,7 +1157,7 @@ sample_sphere_volume_impl <- function(
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_sample_sphere_volume,
+    R_igraph_rng_sample_sphere_volume,
     dim,
     n,
     radius,
