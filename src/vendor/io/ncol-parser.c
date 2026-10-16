@@ -76,7 +76,7 @@
 
 
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2006-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard st, Cambridge, MA, 02138 USA
 
@@ -1502,7 +1502,7 @@ yyreduce:
   case 5: /* edge: endpoints "end of line"  */
 #line 97 "src/vendor/cigraph/src/io/ncol-parser.y"
                            {
-           IGRAPH_YY_CHECK(igraph_vector_push_back(context->weights, 0.0));
+           IGRAPH_YY_CHECK(igraph_vector_push_back(context->weights, 1.0));
        }
 #line 1508 "src/vendor/io/ncol-parser.c"
     break;

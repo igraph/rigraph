@@ -1,5 +1,5 @@
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2006-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard st, Cambridge, MA, 02138 USA
 
@@ -23,7 +23,7 @@
 %{
 
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2006-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard st, Cambridge, MA, 02138 USA
 
@@ -95,7 +95,7 @@ input :    /* empty */
 ;
 
 edge :   endpoints NEWLINE {
-           IGRAPH_YY_CHECK(igraph_vector_push_back(context->weights, 0.0));
+           IGRAPH_YY_CHECK(igraph_vector_push_back(context->weights, 1.0));
        }
        | endpoints weight NEWLINE {
            IGRAPH_YY_CHECK(igraph_vector_push_back(context->weights, $2));
