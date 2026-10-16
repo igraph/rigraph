@@ -20,8 +20,9 @@
 
 */
 
-#include "igraph_types.h"
 #include "igraph_strvector.h"
+
+#include "igraph_types.h"
 #include "igraph_memory.h"
 #include "igraph_error.h"
 
@@ -69,7 +70,7 @@
 
 igraph_error_t igraph_strvector_init(igraph_strvector_t *sv, igraph_int_t size) {
 
-    sv->stor_begin = IGRAPH_CALLOC(size, char*);
+    sv->stor_begin = IGRAPH_CALLOC(size, const char *);
     IGRAPH_CHECK_OOM(sv->stor_begin, "Cannot initialize string vector.");
 
     sv->stor_end = sv->stor_begin + size;
@@ -92,10 +93,9 @@ igraph_error_t igraph_strvector_init(igraph_strvector_t *sv, igraph_int_t size) 
  */
 
 void igraph_strvector_destroy(igraph_strvector_t *sv) {
-    char **ptr;
     IGRAPH_ASSERT(sv != NULL);
     IGRAPH_ASSERT(sv->stor_begin != NULL);
-    for (ptr = sv->stor_begin; ptr < sv->end; ptr++) {
+    for (const char **ptr = sv->stor_begin; ptr < sv->end; ptr++) {
         IGRAPH_FREE(*ptr);
     }
     IGRAPH_FREE(sv->stor_begin);
@@ -171,9 +171,9 @@ igraph_error_t igraph_strvector_set_len(igraph_strvector_t *sv, igraph_int_t idx
         char *tmp = IGRAPH_REALLOC(sv->stor_begin[idx], len + 1, char);
         IGRAPH_CHECK_OOM(tmp, "Cannot reserve space for new item in string vector.");
 
+        memcpy(tmp, value, len * sizeof(char));
+        tmp[len] = '\0';
         sv->stor_begin[idx] = tmp;
-        memcpy(sv->stor_begin[idx], value, len * sizeof(char));
-        sv->stor_begin[idx][len] = '\0';
     }
 
     return IGRAPH_SUCCESS;
@@ -249,7 +249,7 @@ igraph_error_t igraph_strvector_init_copy(igraph_strvector_t *to,
                                           const igraph_strvector_t *from) {
     igraph_int_t from_size = igraph_strvector_size(from);
 
-    to->stor_begin = IGRAPH_CALLOC(from_size, char*);
+    to->stor_begin = IGRAPH_CALLOC(from_size, const char *);
     IGRAPH_CHECK_OOM(to->stor_begin, "Cannot copy string vector.");
 
     for (igraph_int_t i = 0; i < from_size; i++) {
@@ -275,6 +275,7 @@ igraph_error_t igraph_strvector_init_copy(igraph_strvector_t *to,
 
     return IGRAPH_SUCCESS;
 }
+
 
 /**
  * \function igraph_strvector_append
@@ -302,7 +303,7 @@ igraph_error_t igraph_strvector_append(igraph_strvector_t *to,
     const igraph_int_t to_capacity = igraph_strvector_capacity(to);
     igraph_int_t new_to_size;
     igraph_bool_t error = false;
-    char *tmp;
+    const char *tmp;
 
     IGRAPH_SAFE_ADD(to_size, from_size, &new_to_size);
 
@@ -357,7 +358,7 @@ igraph_error_t igraph_strvector_append(igraph_strvector_t *to,
  *   where l1 and l2 are the lengths of \p to and \from respectively.
  */
 igraph_error_t igraph_strvector_merge(igraph_strvector_t *to, igraph_strvector_t *from) {
-    char **p1, **p2, **pe;
+    const char **p1, **p2, **pe;
     igraph_int_t newlen;
 
     IGRAPH_SAFE_ADD(igraph_strvector_size(to), igraph_strvector_size(from), &newlen);
@@ -426,7 +427,7 @@ igraph_error_t igraph_strvector_resize(igraph_strvector_t *sv, igraph_int_t news
         sv->end = sv->stor_begin + newsize;
     } else if (newsize > oldsize) {
         IGRAPH_CHECK(igraph_strvector_reserve(sv, newsize));
-        memset(sv->stor_begin + oldsize, 0, toadd * sizeof(char *));
+        memset(sv->stor_begin + oldsize, 0, toadd * sizeof(const char *));
         sv->end = sv->stor_begin + newsize;
     }
 
@@ -479,13 +480,12 @@ igraph_int_t igraph_strvector_capacity(const igraph_strvector_t *sv) {
 
 igraph_error_t igraph_strvector_reserve(igraph_strvector_t *sv, igraph_int_t capacity) {
     igraph_int_t current_capacity = igraph_strvector_capacity(sv);
-    char **tmp;
 
     if (capacity <= current_capacity) {
         return IGRAPH_SUCCESS;
     }
 
-    tmp = IGRAPH_REALLOC(sv->stor_begin, capacity, char *);
+    const char **tmp = IGRAPH_REALLOC(sv->stor_begin, capacity, const char *);
     IGRAPH_CHECK_OOM(tmp, "Cannot reserve space for new items in string vector.");
 
     sv->end = tmp + (sv->end - sv->stor_begin);
@@ -511,14 +511,12 @@ igraph_error_t igraph_strvector_reserve(igraph_strvector_t *sv, igraph_int_t cap
  */
 
 void igraph_strvector_resize_min(igraph_strvector_t *sv) {
-    igraph_int_t size;
-    char **tmp;
     if (sv->stor_end == sv->end) {
         return;
     }
 
-    size = (sv->end - sv->stor_begin);
-    tmp = IGRAPH_REALLOC(sv->stor_begin, size, char *);
+    const igraph_int_t size = (sv->end - sv->stor_begin);
+    const char **tmp = IGRAPH_REALLOC(sv->stor_begin, size, const char *);
 
     if (tmp != NULL) {
         sv->stor_begin = tmp;
@@ -547,7 +545,7 @@ igraph_int_t igraph_strvector_size(const igraph_strvector_t *sv) {
  * Ensures that the vector has at least one extra slot at the end of its
  * allocated storage area.
  */
-static igraph_error_t igraph_i_strvector_expand_if_full(igraph_strvector_t *sv) {
+static igraph_error_t strvector_expand_if_full(igraph_strvector_t *sv) {
     IGRAPH_ASSERT(sv != NULL);
     IGRAPH_ASSERT(sv->stor_begin != NULL);
 
@@ -580,8 +578,8 @@ static igraph_error_t igraph_i_strvector_expand_if_full(igraph_strvector_t *sv) 
  */
 
 igraph_error_t igraph_strvector_push_back(igraph_strvector_t *sv, const char *value) {
-    IGRAPH_CHECK(igraph_i_strvector_expand_if_full(sv));
-    char *tmp = strdup(value);
+    IGRAPH_CHECK(strvector_expand_if_full(sv));
+    const char *tmp = strdup(value);
     IGRAPH_CHECK_OOM(tmp, "Cannot push new string to string vector.");
     *sv->end = tmp;
     sv->end++;
@@ -607,20 +605,19 @@ igraph_error_t igraph_strvector_push_back_len(
         igraph_strvector_t *sv,
         const char *value, size_t len) {
 
-    IGRAPH_CHECK(igraph_i_strvector_expand_if_full(sv));
-    char *tmp = strndup(value, len);
-    if (! tmp) {
-        IGRAPH_ERROR("Cannot add string to string vector.", IGRAPH_ENOMEM); /* LCOV_EXCL_LINE */
-    }
+    IGRAPH_CHECK(strvector_expand_if_full(sv));
+    const char *tmp = strndup(value, len);
+    IGRAPH_CHECK_OOM(tmp, "Insufficient memory to push to string vector.");
     *sv->end = tmp;
     sv->end++;
 
     return IGRAPH_SUCCESS;
 }
 
+
 /**
  * \ingroup strvector
- * \function igraph_strvector_fprint
+ * \function igraph_strvector_print
  * \brief Prints a string vector to a file.
  *
  * \param sv The string vector.
@@ -631,7 +628,7 @@ igraph_error_t igraph_strvector_push_back_len(
 igraph_error_t igraph_strvector_fprint(const igraph_strvector_t *sv, FILE *file,
                                        const char *sep) {
 
-    igraph_int_t n = igraph_strvector_size(sv);
+    const igraph_int_t n = igraph_strvector_size(sv);
     if (n != 0) {
         fprintf(file, "%s", igraph_strvector_get(sv, 0));
     }
@@ -684,6 +681,7 @@ igraph_error_t igraph_strvector_index(const igraph_strvector_t *sv,
 }
 
 /**
+ * \ingroup strvector
  * \function igraph_strvector_update
  * \brief Updates a string vector from another one.
  *
@@ -734,7 +732,7 @@ void igraph_strvector_swap(igraph_strvector_t *v1, igraph_strvector_t *v2) {
  * Time complexity: O(1).
  */
 void igraph_strvector_swap_elements(igraph_strvector_t *sv, igraph_int_t i, igraph_int_t j) {
-    char *tmp = sv->stor_begin[i];
+    const char *tmp = sv->stor_begin[i];
     sv->stor_begin[i] = sv->stor_begin[j];
     sv->stor_begin[j] = tmp;
 }
