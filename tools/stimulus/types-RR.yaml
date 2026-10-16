@@ -351,7 +351,7 @@ EDGE_LENGTHS:
           %I% <- NULL
         }
 
-VERTEXWEIGHTS:
+VERTEX_WEIGHTS:
     INCONV: |-
         if (is.null(%I%) && "weight" %in% vertex_attr_names(%I1%)) {
           %I% <- V(%I1%)$weight

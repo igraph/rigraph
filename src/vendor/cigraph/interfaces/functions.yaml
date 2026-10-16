@@ -841,7 +841,7 @@ igraph_feedback_arc_set:
     DEPS: result ON graph, weights ON graph
 
 igraph_feedback_vertex_set:
-    PARAMS: GRAPH graph, OUT VERTEX_INDICES result, OPTIONAL VERTEXWEIGHTS weights, FVS_ALGORITHM algo=EXACT_IP
+    PARAMS: GRAPH graph, OUT VERTEX_INDICES result, OPTIONAL VERTEX_WEIGHTS weights, FVS_ALGORITHM algo=EXACT_IP
     DEPS: result ON graph, weights ON graph
 
 igraph_is_loop:
@@ -1376,7 +1376,7 @@ igraph_clique_number:
 
 igraph_weighted_cliques:
     PARAMS: |-
-        GRAPH graph, OPTIONAL VERTEXWEIGHTS vertex_weights, OUT VERTEXSET_LIST res,
+        GRAPH graph, OPTIONAL VERTEX_WEIGHTS vertex_weights, OUT VERTEXSET_LIST res,
         BOOLEAN maximal=False,
         REAL min_weight=UNLIMITED, REAL max_weight=UNLIMITED,
         INTEGER max_results=UNLIMITED
@@ -1384,11 +1384,11 @@ igraph_weighted_cliques:
 
 igraph_largest_weighted_cliques:
     PARAMS: |-
-        GRAPH graph, OPTIONAL VERTEXWEIGHTS vertex_weights, OUT VERTEXSET_LIST res
+        GRAPH graph, OPTIONAL VERTEX_WEIGHTS vertex_weights, OUT VERTEXSET_LIST res
     DEPS: vertex_weights ON graph, res ON graph
 
 igraph_weighted_clique_number:
-    PARAMS: GRAPH graph, OPTIONAL VERTEXWEIGHTS vertex_weights, OUT REAL res
+    PARAMS: GRAPH graph, OPTIONAL VERTEX_WEIGHTS vertex_weights, OUT REAL res
     DEPS: vertex_weights ON graph
 
 igraph_is_independent_vertex_set:
@@ -1762,8 +1762,8 @@ igraph_community_optimal_modularity:
 igraph_community_leiden:
     PARAMS: |-
         GRAPH graph, OPTIONAL EDGE_WEIGHTS weights,
-        OPTIONAL VERTEXWEIGHTS vertex_out_weights,
-        OPTIONAL VERTEXWEIGHTS vertex_in_weights,
+        OPTIONAL VERTEX_WEIGHTS vertex_out_weights,
+        OPTIONAL VERTEX_WEIGHTS vertex_in_weights,
         REAL resolution, REAL beta=0.01, BOOLEAN start=False, INTEGER n_iterations=2,
         OPTIONAL INOUT VECTOR_INT membership,
         OUT INTEGER nb_clusters, OUT REAL quality
@@ -1777,7 +1777,7 @@ igraph_split_join_distance:
 igraph_community_infomap:
     PARAMS: |-
         GRAPH graph, OPTIONAL EDGE_WEIGHTS edge_weights,
-        OPTIONAL VERTEXWEIGHTS vertex_weights, INTEGER nb_trials=10,
+        OPTIONAL VERTEX_WEIGHTS vertex_weights, INTEGER nb_trials=10,
         BOOLEAN is_regularized=False, REAL regularization_strength=0,
         OUT VECTOR_INT membership, OUT REAL codelength
     DEPS: edge_weights ON graph, vertex_weights ON graph
