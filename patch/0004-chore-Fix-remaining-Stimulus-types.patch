@@ -9,7 +9,7 @@ Subject: [PATCH] chore: Fix remaining Stimulus types
  2 files changed, 10 insertions(+), 4 deletions(-)
 
 diff --git a/src/vendor/cigraph/interfaces/functions.yaml b/src/vendor/cigraph/interfaces/functions.yaml
-index 12a45a73b3..25a0aa80c8 100644
+index 0ec0130d8e..db3105a06b 100644
 --- a/src/vendor/cigraph/interfaces/functions.yaml
 +++ b/src/vendor/cigraph/interfaces/functions.yaml
 @@ -209,8 +209,9 @@ igraph_adjlist:
@@ -33,7 +33,7 @@ index 12a45a73b3..25a0aa80c8 100644
  igraph_get_all_shortest_paths:
      PARAMS: |-
          GRAPH graph, OPTIONAL EDGE_WEIGHTS weights,
-         OPTIONAL OUT VERTEXSET_LIST vertices, OPTIONAL OUT EDGESET_LIST edges,
+         OPTIONAL OUT VERTEX_INDICES_LIST vertices, OPTIONAL OUT EDGESET_LIST edges,
          OPTIONAL OUT VECTOR_INT nrgeo, VERTEX from, VERTEX_SELECTOR to, NEIMODE mode=OUT
 -    DEPS: weights ON graph, edges ON graph, from ON graph, to ON graph
 +    DEPS: weights ON graph, vertices ON graph, edges ON graph, from ON graph, to ON graph
@@ -41,10 +41,10 @@ index 12a45a73b3..25a0aa80c8 100644
  igraph_distances_dijkstra:
      PARAMS: |-
 diff --git a/src/vendor/cigraph/interfaces/types.yaml b/src/vendor/cigraph/interfaces/types.yaml
-index 8a70b3aabc..061790eca2 100644
+index 9ad54f6dfb..14fb3de9d2 100644
 --- a/src/vendor/cigraph/interfaces/types.yaml
 +++ b/src/vendor/cigraph/interfaces/types.yaml
-@@ -178,7 +178,12 @@ VERTEX_SELECTOR:
+@@ -173,7 +173,12 @@ VERTEX_SELECTOR:
  
  BIPARTITE_TYPES:
      # A vector containing Booleans that define the two partitions of a

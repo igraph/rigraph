@@ -505,7 +505,7 @@ igraph_get_shortest_path_astar:
 igraph_get_shortest_paths:
     PARAMS: |-
         GRAPH graph, OPTIONAL EDGE_WEIGHTS weights,
-        OPTIONAL OUT VERTEXSET_LIST vertices, OPTIONAL OUT EDGESET_LIST edges,
+        OPTIONAL OUT VERTEX_INDICES_LIST vertices, OPTIONAL OUT EDGESET_LIST edges,
         VERTEX from, VERTEX_SELECTOR to=ALL, NEIMODE mode=OUT,
         OPTIONAL OUT VECTOR_INT parents,
         OPTIONAL OUT VECTOR_INT inbound_edges
@@ -514,7 +514,7 @@ igraph_get_shortest_paths:
 igraph_get_all_shortest_paths:
     PARAMS: |-
         GRAPH graph, OPTIONAL EDGE_WEIGHTS weights,
-        OPTIONAL OUT VERTEXSET_LIST vertices, OPTIONAL OUT EDGESET_LIST edges,
+        OPTIONAL OUT VERTEX_INDICES_LIST vertices, OPTIONAL OUT EDGESET_LIST edges,
         OPTIONAL OUT VECTOR_INT nrgeo, VERTEX from, VERTEX_SELECTOR to, NEIMODE mode=OUT
     DEPS: weights ON graph, vertices ON graph, edges ON graph, from ON graph, to ON graph
 
@@ -532,7 +532,7 @@ igraph_distances_dijkstra_cutoff:
 
 igraph_get_shortest_paths_dijkstra:
     PARAMS: |-
-        GRAPH graph, OPTIONAL OUT VERTEXSET_LIST vertices,
+        GRAPH graph, OPTIONAL OUT VERTEX_INDICES_LIST vertices,
         OPTIONAL OUT EDGESET_LIST edges, VERTEX from, VERTEX_SELECTOR to=ALL,
         OPTIONAL EDGE_WEIGHTS weights, NEIMODE mode=OUT,
         OPTIONAL OUT VECTOR_INT parents,
@@ -543,7 +543,7 @@ igraph_get_shortest_paths_dijkstra:
 
 igraph_get_shortest_paths_bellman_ford:
     PARAMS: |-
-        GRAPH graph, OPTIONAL OUT VERTEXSET_LIST vertices,
+        GRAPH graph, OPTIONAL OUT VERTEX_INDICES_LIST vertices,
         OPTIONAL OUT EDGESET_LIST edges, VERTEX from, VERTEX_SELECTOR to=ALL,
         OPTIONAL EDGE_WEIGHTS weights, NEIMODE mode=OUT,
         OPTIONAL OUT VECTOR_INT parents,
@@ -554,7 +554,7 @@ igraph_get_shortest_paths_bellman_ford:
 
 igraph_get_all_shortest_paths_dijkstra:
     PARAMS: |-
-        GRAPH graph, OPTIONAL OUT VERTEXSET_LIST vertices,
+        GRAPH graph, OPTIONAL OUT VERTEX_INDICES_LIST vertices,
         OPTIONAL OUT EDGESET_LIST edges, OPTIONAL OUT VECTOR_INT nrgeo,
         VERTEX from, VERTEX_SELECTOR to=ALL, OPTIONAL EDGE_WEIGHTS weights,
         NEIMODE mode=OUT
@@ -597,7 +597,7 @@ igraph_get_all_simple_paths:
 igraph_get_k_shortest_paths:
     PARAMS: |-
         GRAPH graph, OPTIONAL EDGE_WEIGHTS weights,
-        OPTIONAL OUT VERTEXSET_LIST vertex_paths,
+        OPTIONAL OUT VERTEX_INDICES_LIST vertex_paths,
         OPTIONAL OUT EDGESET_LIST edge_paths,
         INTEGER k, VERTEX from, VERTEX to, NEIMODE mode=OUT
     DEPS: |-
@@ -614,7 +614,7 @@ igraph_get_widest_path:
 igraph_get_widest_paths:
     PARAMS: |-
         GRAPH graph,
-        OPTIONAL OUT VERTEXSET_LIST vertices, OPTIONAL OUT EDGESET_LIST edges,
+        OPTIONAL OUT VERTEX_INDICES_LIST vertices, OPTIONAL OUT EDGESET_LIST edges,
         VERTEX from, VERTEX_SELECTOR to=ALL, EDGE_WEIGHTS weights,
         NEIMODE mode=OUT, OPTIONAL OUT VECTOR_INT parents,
         OPTIONAL OUT VECTOR_INT inbound_edges
@@ -818,7 +818,7 @@ igraph_neighborhood_size:
 
 igraph_neighborhood:
     PARAMS: |-
-        GRAPH graph, OUT VERTEXSET_LIST res,
+        GRAPH graph, OUT VERTEX_INDICES_LIST res,
         VERTEX_SELECTOR vids, INTEGER order,
         NEIMODE mode=ALL, INTEGER mindist=0
     DEPS: res ON graph, vids ON graph
@@ -1275,7 +1275,7 @@ igraph_biconnected_components:
         GRAPH graph, OUT INTEGER no,
         OPTIONAL OUT EDGESET_LIST tree_edges,
         OPTIONAL OUT EDGESET_LIST component_edges,
-        OPTIONAL OUT VERTEXSET_LIST components,
+        OPTIONAL OUT VERTEX_INDICES_LIST components,
         OUT VERTEX_INDICES articulation_points
     DEPS: |-
         tree_edges ON graph, component_edges ON graph,
@@ -1318,7 +1318,7 @@ igraph_is_clique:
 
 igraph_cliques:
     PARAMS: |-
-        GRAPH graph, OUT VERTEXSET_LIST res,
+        GRAPH graph, OUT VERTEX_INDICES_LIST res,
         INTEGER min_size=UNLIMITED, INTEGER max_size=UNLIMITED,
         INTEGER max_results=UNLIMITED
     DEPS: res ON graph
@@ -1333,19 +1333,19 @@ igraph_clique_size_hist:
         GRAPH graph, OUT VECTOR hist, INTEGER min_size=0, INTEGER max_size=0
 
 igraph_largest_cliques:
-    PARAMS: GRAPH graph, OUT VERTEXSET_LIST res
+    PARAMS: GRAPH graph, OUT VERTEX_INDICES_LIST res
     DEPS: res ON graph
 
 igraph_maximal_cliques:
     PARAMS: |-
-        GRAPH graph, OUT VERTEXSET_LIST res,
+        GRAPH graph, OUT VERTEX_INDICES_LIST res,
         INTEGER min_size=UNLIMITED, INTEGER max_size=UNLIMITED,
         INTEGER max_results=UNLIMITED
     DEPS: res ON graph
 
 igraph_maximal_cliques_subset:
     PARAMS: |-
-        GRAPH graph, VERTEX_INDICES subset, PRIMARY OUT VERTEXSET_LIST res,
+        GRAPH graph, VERTEX_INDICES subset, PRIMARY OUT VERTEX_INDICES_LIST res,
         OUT INTEGER no, OPTIONAL OUTFILE outfile,
         INTEGER min_size=UNLIMITED, INTEGER max_size=UNLIMITED,
         INTEGER max_results=UNLIMITED
@@ -1376,7 +1376,7 @@ igraph_clique_number:
 
 igraph_weighted_cliques:
     PARAMS: |-
-        GRAPH graph, OPTIONAL VERTEX_WEIGHTS vertex_weights, OUT VERTEXSET_LIST res,
+        GRAPH graph, OPTIONAL VERTEX_WEIGHTS vertex_weights, OUT VERTEX_INDICES_LIST res,
         BOOLEAN maximal=False,
         REAL min_weight=UNLIMITED, REAL max_weight=UNLIMITED,
         INTEGER max_results=UNLIMITED
@@ -1384,7 +1384,7 @@ igraph_weighted_cliques:
 
 igraph_largest_weighted_cliques:
     PARAMS: |-
-        GRAPH graph, OPTIONAL VERTEX_WEIGHTS vertex_weights, OUT VERTEXSET_LIST res
+        GRAPH graph, OPTIONAL VERTEX_WEIGHTS vertex_weights, OUT VERTEX_INDICES_LIST res
     DEPS: vertex_weights ON graph, res ON graph
 
 igraph_weighted_clique_number:
@@ -1397,18 +1397,18 @@ igraph_is_independent_vertex_set:
 
 igraph_independent_vertex_sets:
     PARAMS: |-
-        GRAPH graph, OUT VERTEXSET_LIST res,
+        GRAPH graph, OUT VERTEX_INDICES_LIST res,
         INTEGER min_size=UNLIMITED, INTEGER max_size=UNLIMITED,
         INTEGER max_results=UNLIMITED
     DEPS: res ON graph
 
 igraph_largest_independent_vertex_sets:
-    PARAMS: GRAPH graph, OUT VERTEXSET_LIST res
+    PARAMS: GRAPH graph, OUT VERTEX_INDICES_LIST res
     DEPS: res ON graph
 
 igraph_maximal_independent_vertex_sets:
     PARAMS: |-
-        GRAPH graph, OUT VERTEXSET_LIST res,
+        GRAPH graph, OUT VERTEX_INDICES_LIST res,
         INTEGER min_size=UNLIMITED, INTEGER max_size=UNLIMITED,
         INTEGER max_results=UNLIMITED
     DEPS: res ON graph
@@ -1799,19 +1799,19 @@ igraph_community_voronoi:
 igraph_graphlets:
     PARAMS: |-
         GRAPH graph, OPTIONAL EDGE_WEIGHTS weights,
-        OUT VERTEXSET_LIST cliques, OUT VECTOR Mu, INTEGER niter=1000
+        OUT VERTEX_INDICES_LIST cliques, OUT VECTOR Mu, INTEGER niter=1000
     DEPS: weights ON graph, cliques ON graph
 
 igraph_graphlets_candidate_basis:
     PARAMS: |-
         GRAPH graph, OPTIONAL EDGE_WEIGHTS weights,
-        OUT VERTEXSET_LIST cliques, OUT VECTOR thresholds
+        OUT VERTEX_INDICES_LIST cliques, OUT VECTOR thresholds
     DEPS: weights ON graph, cliques ON graph
 
 igraph_graphlets_project:
     PARAMS: |-
         GRAPH graph, OPTIONAL EDGE_WEIGHTS weights,
-        VERTEXSET_LIST cliques, INOUT VECTOR Muc,
+        VERTEX_INDICES_LIST cliques, INOUT VECTOR Muc,
         BOOLEAN startMu=False, INTEGER niter=1000
     DEPS: weights ON graph
 
@@ -2047,13 +2047,13 @@ igraph_local_scan_k_ecount_them:
 igraph_local_scan_neighborhood_ecount:
     PARAMS: |-
         GRAPH graph, OUT VECTOR res, OPTIONAL EDGE_WEIGHTS weights,
-        VERTEXSET_LIST neighborhoods
+        VERTEX_INDICES_LIST neighborhoods
     DEPS: weights ON graph
 
 igraph_local_scan_subset_ecount:
     PARAMS: |-
         GRAPH graph, OUT VECTOR res, OPTIONAL EDGE_WEIGHTS weights,
-        VERTEXSET_LIST subsets
+        VERTEX_INDICES_LIST subsets
     DEPS: weights ON graph
 
 igraph_list_triangles:
@@ -2231,7 +2231,7 @@ igraph_dominator_tree:
 igraph_all_st_cuts:
     PARAMS: |-
         GRAPH graph, OPTIONAL OUT EDGESET_LIST cuts,
-        OPTIONAL OUT VERTEXSET_LIST partition1s,
+        OPTIONAL OUT VERTEX_INDICES_LIST partition1s,
         VERTEX source, VERTEX target
     DEPS: |-
         source ON graph, target ON graph, cuts ON graph,
@@ -2241,7 +2241,7 @@ igraph_all_st_mincuts:
     PARAMS: |-
         GRAPH graph, OUT REAL value,
         OPTIONAL OUT EDGESET_LIST cuts,
-        OPTIONAL OUT VERTEXSET_LIST partition1s,
+        OPTIONAL OUT VERTEX_INDICES_LIST partition1s,
         VERTEX source, VERTEX target, OPTIONAL EDGE_CAPACITY capacity
     DEPS: |-
         capacity ON graph, source ON graph, target ON graph,
@@ -2261,16 +2261,16 @@ igraph_is_minimal_separator:
     DEPS: candidate ON graph
 
 igraph_all_minimal_st_separators:
-    PARAMS: GRAPH graph, OUT VERTEXSET_LIST separators
+    PARAMS: GRAPH graph, OUT VERTEX_INDICES_LIST separators
     DEPS: separators ON graph
 
 igraph_minimum_size_separators:
-    PARAMS: GRAPH graph, OUT VERTEXSET_LIST separators
+    PARAMS: GRAPH graph, OUT VERTEX_INDICES_LIST separators
     DEPS: separators ON graph
 
 igraph_cohesive_blocks:
     PARAMS: |-
-        GRAPH graph, OUT VERTEXSET_LIST blocks,
+        GRAPH graph, OUT VERTEX_INDICES_LIST blocks,
         OUT VECTOR_INT cohesion, OUT INDEX_VECTOR parent,
         OUT GRAPH blockTree
     DEPS: blocks ON graph
@@ -2448,18 +2448,18 @@ igraph_count_automorphisms_bliss:
 
 igraph_automorphism_group:
     PARAMS: |-
-        GRAPH graph, OPTIONAL VERTEX_COLOR colors, OUT VERTEXSET_LIST generators
+        GRAPH graph, OPTIONAL VERTEX_COLOR colors, OUT VERTEX_INDICES_LIST generators
     DEPS: colors ON graph, generators ON graph
 
 igraph_automorphism_group_bliss:
     PARAMS: |-
-        GRAPH graph, OPTIONAL VERTEX_COLOR colors, PRIMARY OUT VERTEXSET_LIST generators,
+        GRAPH graph, OPTIONAL VERTEX_COLOR colors, PRIMARY OUT VERTEX_INDICES_LIST generators,
         BLISSSH sh="fm", OUT BLISSINFO info
     DEPS: colors ON graph, generators ON graph
 
 igraph_subisomorphic_lad:
     PARAMS: |-
-        GRAPH pattern, GRAPH target, OPTIONAL VERTEXSET_LIST domains,
+        GRAPH pattern, GRAPH target, OPTIONAL VERTEX_INDICES_LIST domains,
         OPTIONAL OUT BOOLEAN iso, OUT INDEX_VECTOR map,
         OPTIONAL OUT VECTOR_INT_LIST maps, BOOLEAN induced
 
@@ -2602,7 +2602,7 @@ igraph_find_cycle:
 igraph_simple_cycles:
     PARAMS: |-
         GRAPH graph,
-        OPTIONAL OUT VERTEXSET_LIST vertices, OPTIONAL OUT EDGESET_LIST edges,
+        OPTIONAL OUT VERTEX_INDICES_LIST vertices, OPTIONAL OUT EDGESET_LIST edges,
         NEIMODE mode=OUT, INTEGER min_cycle_length=UNLIMITED, INTEGER max_cycle_length=UNLIMITED,
         INTEGER max_results=UNLIMITED
     DEPS: vertices ON graph, edges ON graph
