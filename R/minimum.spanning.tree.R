@@ -90,9 +90,16 @@ mst <- function(graph, weights = NULL, algorithm = NULL, ...) {
     }
   }
 
+  # Upstream removes igraph_minimum_spanning_tree_prim() and
+  # igraph_minimum_spanning_tree_unweighted() (krlmlr/igraph@116f0e2,
+  # krlmlr/igraph@8bb67ce), which returned the forest as a graph:
+  # igraph_minimum_spanning_tree() returns its edges, and the forest is the
+  # subgraph of these edges, with all vertices, as those functions built it.
   if (algorithm == "unweighted") {
-    minimum_spanning_tree_unweighted_impl(
-      graph = graph
+    edges <- minimum_spanning_tree_impl(
+      graph = graph,
+      weights = NA,
+      method = "unweighted"
     )
   } else if (algorithm == "prim") {
     if (is.null(weights) && !"weight" %in% edge_attr_names(graph)) {
@@ -100,11 +107,13 @@ mst <- function(graph, weights = NULL, algorithm = NULL, ...) {
     } else if (is.null(weights)) {
       weights <- E(graph)$weight
     }
-    minimum_spanning_tree_prim_impl(
+    edges <- minimum_spanning_tree_impl(
       graph = graph,
-      weights = weights
+      weights = weights,
+      method = "prim"
     )
   } else {
     cli::cli_abort("Invalid {.arg algorithm}.")
   }
+  subgraph_from_edges(graph, edges, delete.vertices = FALSE)
 }

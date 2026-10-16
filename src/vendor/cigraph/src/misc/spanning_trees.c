@@ -158,8 +158,7 @@ igraph_error_t igraph_minimum_spanning_tree(
  * number of vertices, |E| the number
  * of edges in the graph.
  *
- * \sa \ref igraph_minimum_spanning_tree_prim() for weighted graphs,
- *     \ref igraph_minimum_spanning_tree() if you need the IDs of the
+ * \sa \ref igraph_minimum_spanning_tree() if you need the IDs of the
  *     edges that constitute the spanning tree.
  */
 
@@ -177,71 +176,6 @@ igraph_error_t igraph_minimum_spanning_tree_unweighted(const igraph_t *graph,
 
     return IGRAPH_SUCCESS;
 }
-
-/**
- * \ingroup structural
- * \function igraph_minimum_spanning_tree_prim
- * \brief Calculates one minimum spanning tree of a weighted graph.
- *
- * \deprecated-by igraph_minimum_spanning_tree 0.10.14
- *
- * Finds a spanning tree or spanning forest for which the sum of edge
- * weights is the smallest. This function uses Prim's method for carrying
- * out the computation.
- *
- * </para><para>
- * Directed graphs are considered as undirected for this computation.
- *
- * </para><para>
- * Reference:
- *
- * </para><para>
- * Prim, R.C.: Shortest connection networks and some
- * generalizations, Bell System Technical
- * Journal, Vol. 36,
- * 1957, 1389--1401.
- * https://doi.org/10.1002/j.1538-7305.1957.tb01515.x
- *
- * \param graph The graph object. Edge directions will be ignored.
- * \param mst The result of the computation, a graph object containing
- *        the minimum spanning tree of the graph.
- *        Do \em not initialize this object before passing it to
- *        this function, but be sure to call \ref igraph_destroy() on it if
- *        you don't need it any more.
- * \param weights A vector containing the weights of the edges
- *        in the same order as the simple edge iterator visits them
- *        (i.e. in increasing order of edge IDs).
- * \return Error code:
- *         \c IGRAPH_ENOMEM, not enough memory.
- *         \c IGRAPH_EINVAL, length of weight vector does not
- *           match number of edges.
- *
- * Time complexity: O(|E| log |V|),
- * |V| is the number of vertices,
- * |E| the number of edges in the
- * graph.
- *
- * \sa \ref igraph_minimum_spanning_tree_unweighted() for unweighted graphs,
- *     \ref igraph_minimum_spanning_tree() if you need the IDs of the
- *     edges that constitute the spanning tree.
- *
- * \example examples/simple/igraph_minimum_spanning_tree.c
- */
-
-igraph_error_t igraph_minimum_spanning_tree_prim(const igraph_t *graph, igraph_t *mst,
-                                      const igraph_vector_t *weights) {
-    igraph_vector_int_t edges;
-
-    IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, igraph_vcount(graph) - 1);
-    IGRAPH_CHECK(igraph_minimum_spanning_tree(graph, &edges, weights, IGRAPH_MST_AUTOMATIC));
-    IGRAPH_CHECK(igraph_subgraph_from_edges(
-        graph, mst, igraph_ess_vector(&edges), /* delete_vertices = */ false));
-    igraph_vector_int_destroy(&edges);
-    IGRAPH_FINALLY_CLEAN(1);
-
-    return IGRAPH_SUCCESS;
-}
-
 
 static igraph_error_t igraph_i_minimum_spanning_tree_unweighted(const igraph_t* graph, igraph_vector_int_t* res) {
 

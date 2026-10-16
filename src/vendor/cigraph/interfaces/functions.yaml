@@ -2696,10 +2696,6 @@ igraph_minimum_spanning_tree:
 igraph_minimum_spanning_tree_unweighted:
     PARAMS: GRAPH graph, OUT GRAPH mst
 
-igraph_minimum_spanning_tree_prim:
-    PARAMS: GRAPH graph, OUT GRAPH mst, EDGEWEIGHTS weights
-    DEPS: weights ON graph
-
 igraph_random_spanning_tree:
     PARAMS: GRAPH graph, OUT EDGE_INDICES res, OPTIONAL VERTEX vid
     DEPS: res ON graph, vid ON graph
