@@ -509,7 +509,7 @@ igraph_error_t igraph_independent_vertex_sets(const igraph_t *graph,
         /* Add the cliques just found to the result if requested */
         if (i >= min_size && i <= max_size) {
             for (igraph_int_t j = 0, k = 0; j < indset_count; j++, k += i) {
-                igraph_vector_int_view(&new_member_storage_view, new_member_storage + k, i);
+                new_member_storage_view = igraph_vector_int_view(new_member_storage + k, i);
                 IGRAPH_CHECK(igraph_vector_int_list_push_back_copy(res, &new_member_storage_view));
             }
         }

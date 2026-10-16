@@ -1,5 +1,5 @@
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2006-2025  The igraph development team <igraph@igraph.org>
 
    This program is free software; you can redistribute it and/or modify
@@ -78,10 +78,8 @@ igraph_error_t igraph_atlas(igraph_t *graph, igraph_int_t number) {
     igraph_int_t n = igraph_i_atlas_edges[pos];
     igraph_int_t e = igraph_i_atlas_edges[pos + 1];
 
-    IGRAPH_CHECK(igraph_create(graph,
-                               igraph_vector_int_view(&v, igraph_i_atlas_edges + pos + 2, e * 2),
-                               n,
-                               IGRAPH_UNDIRECTED));
+    v = igraph_vector_int_view(igraph_i_atlas_edges + pos + 2, e * 2);
+    IGRAPH_CHECK(igraph_create(graph, &v, n, IGRAPH_UNDIRECTED));
 
     return IGRAPH_SUCCESS;
 }

@@ -101,19 +101,18 @@ igraph_error_t FUNCTION(igraph_matrix, init)(
  * Time complexity: O(1).
  */
 
-const TYPE(igraph_matrix)* FUNCTION(igraph_matrix, view)(
-        const TYPE(igraph_matrix) *m, const BASE *data,
+TYPE(igraph_matrix) FUNCTION(igraph_matrix, view)(
+        const BASE *data,
         igraph_int_t nrow, igraph_int_t ncol) {
-    /* temporarily cast away the constness */
-    TYPE(igraph_matrix) *m2 = (TYPE(igraph_matrix)*)m;
 
     /* No overflow checking, as this function does not return igraph_error_t.
      * It is the caller's resposibility to ensure that the size of 'data'
      * matches nrow*ncol, which also implies that nrow*ncol does not overflow. */
 
-    FUNCTION(igraph_vector, view)(&m2->data, data, ncol * nrow);
-    m2->nrow = nrow;
-    m2->ncol = ncol;
+    TYPE(igraph_matrix) m;
+    m.data = FUNCTION(igraph_vector, view)(data, ncol * nrow);
+    m.nrow = nrow;
+    m.ncol = ncol;
 
     return m;
 }
@@ -154,21 +153,14 @@ const TYPE(igraph_matrix)* FUNCTION(igraph_matrix, view)(
  * Time complexity: O(1).
  */
 
-const TYPE(igraph_matrix) *FUNCTION(igraph_matrix, view_from_vector)(
-    const TYPE(igraph_matrix) *m, const TYPE(igraph_vector) *v,
+TYPE(igraph_matrix) FUNCTION(igraph_matrix, view_from_vector)(
+    const TYPE(igraph_vector) *v,
     igraph_int_t nrow
 ) {
-    /* temporarily cast away the constness */
-    TYPE(igraph_matrix) *m2 = (TYPE(igraph_matrix)*)m;
-
     igraph_int_t size = FUNCTION(igraph_vector, size)(v);
     igraph_int_t ncol = nrow > 0 ? size / nrow : 0;
 
-    FUNCTION(igraph_vector, view)(&m2->data, VECTOR(*v), ncol * nrow);
-    m2->nrow = nrow;
-    m2->ncol = ncol;
-
-    return m;
+    return FUNCTION(igraph_matrix, view)(VECTOR(*v), nrow, ncol);
 }
 
 /**
@@ -512,7 +504,7 @@ igraph_error_t FUNCTION(igraph_matrix, init_array)(
 
     IGRAPH_SAFE_MULT(nrow, ncol, &length);
     IGRAPH_CHECK(FUNCTION(igraph_matrix, init)(m, nrow, ncol));
-    FUNCTION(igraph_vector, view)(&v, data, length);
+    v = FUNCTION(igraph_vector, view)(data, length);
     if (storage == IGRAPH_COLUMN_MAJOR) {
         IGRAPH_CHECK(FUNCTION(igraph_vector, update)(&m->data, &v));
     } else if (storage == IGRAPH_ROW_MAJOR) {
