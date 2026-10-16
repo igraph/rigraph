@@ -682,7 +682,7 @@ static const flex_int32_t yy_rule_can_match_eol[7] =
 #define YY_RESTORE_YY_MORE_OFFSET
 #line 1 "src/vendor/cigraph/src/io/lgl-lexer.l"
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2007-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard st, Cambridge, MA, 02138 USA
 
@@ -705,7 +705,7 @@ static const flex_int32_t yy_rule_can_match_eol[7] =
 #line 24 "src/vendor/cigraph/src/io/lgl-lexer.l"
 
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2007-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard st, Cambridge, MA, 02138 USA
 

@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2022  The igraph development team
    334 Harvard street, Cambridge, MA 02139 USA
 

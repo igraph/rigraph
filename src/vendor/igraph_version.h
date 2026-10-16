@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2010-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -28,11 +27,11 @@
 
 __BEGIN_DECLS
 
-#define IGRAPH_VERSION "0.11.0-251-g8946f2710"
+#define IGRAPH_VERSION "0.11.0-253-g76cdb2c5f"
 #define IGRAPH_VERSION_MAJOR 0
 #define IGRAPH_VERSION_MINOR 11
 #define IGRAPH_VERSION_PATCH 0
-#define IGRAPH_VERSION_PRERELEASE "251-g8946f2710"
+#define IGRAPH_VERSION_PRERELEASE "253-g76cdb2c5f"
 
 IGRAPH_EXPORT void igraph_version(const char **version_string,
                                   int *major,

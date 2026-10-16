@@ -1,7 +1,6 @@
-/* -*- mode: C -*-  */
 /* vim:set ts=4 sw=4 sts=4 et: */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2009-2020  Gabor Csardi <csardi.gabor@gmail.com>
 
    This program is free software; you can redistribute it and/or modify
