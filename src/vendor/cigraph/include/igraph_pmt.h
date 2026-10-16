@@ -1,7 +1,6 @@
 /*
    igraph library.
-   Copyright (C) 2007-2012  Gabor Csardi <csardi.gabor@gmail.com>
-   334 Harvard street, Cambridge, MA 02139 USA
+   Copyright (C) 2007-2025  The igraph development team <igraph@igraph.org>
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -14,10 +13,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
-   02110-1301 USA
-
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 #define CONCAT2x(a,b) a ## _ ## b
@@ -115,11 +111,11 @@
 #elif defined(BASE_GRAPH)
     #define BASE igraph_t
 
-#elif defined(BASE_BITSET)
-    #define BASE igraph_bitset_t
-
 #elif defined(BASE_ATTRIBUTE_RECORD)
     #define BASE igraph_attribute_record_t
+
+#elif defined(BASE_BITSET)
+    #define BASE igraph_bitset_t
 
 #else
     #error unknown BASE_ directive
@@ -161,15 +157,14 @@
     #define FUNCTION(c) CONCAT2x(igraph_graph_list,c)
     #define INTERNAL_FUNCTION(c) CONCAT2x(igraph_i_graph_list,c)
     #define TYPE igraph_graph_list_t
-#elif defined(BITSET_LIST)
-    #define FUNCTION(c) CONCAT2x(igraph_bitset_list,c)
-    #define INTERNAL_FUNCTION(c) CONCAT2x(igraph_i_bitset_list,c)
-    #define TYPE igraph_bitset_list_t
 #elif defined(ATTRIBUTE_RECORD_LIST)
     #define FUNCTION(c) CONCAT2x(igraph_attribute_record_list,c)
     #define INTERNAL_FUNCTION(c) CONCAT2x(igraph_i_attribute_record_list,c)
     #define TYPE igraph_attribute_record_list_t
-
+#elif defined(BITSET_LIST)
+    #define FUNCTION(c) CONCAT2x(igraph_bitset_list,c)
+    #define INTERNAL_FUNCTION(c) CONCAT2x(igraph_i_bitset_list,c)
+    #define TYPE igraph_bitset_list_t
 #else
     #if defined(BASE_IGRAPH_REAL)
         #define FUNCTION(a,c) CONCAT2(a,c)

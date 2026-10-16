@@ -203,16 +203,12 @@ igraph_error_t igraph_community_to_membership(const igraph_matrix_int_t *merges,
         for (igraph_int_t i = 0; i < no_of_nodes; i++) {
             const igraph_int_t c = VECTOR(*membership)[i];
             if (c != 0) {
-                if (membership) {
-                    VECTOR(*membership)[i] = c - 1;
-                }
+                VECTOR(*membership)[i] = c - 1;
             } else {
                 if (csize) {
                     VECTOR(*csize)[found] += 1;
                 }
-                if (membership) {
-                    VECTOR(*membership)[i] = found;
-                }
+                VECTOR(*membership)[i] = found;
                 found++;
             }
         }

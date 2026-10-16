@@ -1,4 +1,3 @@
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    igraph library.
    Copyright (C) 2007-2020  The igraph development team <igraph@igraph.org>
@@ -13,8 +12,8 @@
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
 
-  You should have received a copy of the GNU General Public License
-  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 #include "igraph_centrality.h"
@@ -191,7 +190,7 @@ static igraph_error_t igraph_i_closeness_cutoff_weighted(const igraph_t *graph,
 
         igraph_int_t source = IGRAPH_VIT_GET(vit);
         igraph_2wheap_clear(&Q);
-        igraph_2wheap_push_with_index(&Q, source, -1.0);
+        igraph_2wheap_push_with_index(&Q, source, -1.0); /* reserved */
         VECTOR(which)[source] = i + 1;
         VECTOR(dist)[source] = 1.0;     /* actual distance is zero but we need to store distance + 1 */
         nodes_reached = 0;
@@ -301,8 +300,8 @@ static igraph_error_t igraph_i_closeness_cutoff_weighted(const igraph_t *graph,
  *        reachable within the cutoff is returned. If false, the inverse
  *        of the sum of distances is returned.
  * \param cutoff The maximal length of paths that will be considered.
- *        If negative, the exact closeness will be calculated (no upper
- *        limit on path lengths).
+ *        If negative or \ref IGRAPH_UNLIMITED, the exact closeness will be
+ *        calculated (no upper limit on path lengths).
  * \return Error code:
  *        \clist
  *        \cli IGRAPH_ENOMEM
@@ -601,7 +600,7 @@ static igraph_error_t igraph_i_harmonic_centrality_weighted(const igraph_t *grap
 
         igraph_int_t source = IGRAPH_VIT_GET(vit);
         igraph_2wheap_clear(&Q);
-        igraph_2wheap_push_with_index(&Q, source, -1.0);
+        igraph_2wheap_push_with_index(&Q, source, -1.0); /* reserved */
         VECTOR(which)[source] = i + 1;
         VECTOR(dist)[source] = 1.0;     /* actual distance is zero but we need to store distance + 1 */
 

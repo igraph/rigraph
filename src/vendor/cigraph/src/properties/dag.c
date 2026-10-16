@@ -1,26 +1,21 @@
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
-   igraph library.
-   Copyright (C) 2005-2021 The igraph development team
+  igraph library.
+  Copyright (C) 2005-2024 The igraph development team <igraph@igraph.org>
 
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2 of the License, or
-   (at your option) any later version.
+  This program is free software; you can redistribute it and/or modify it under
+  the terms of the GNU General Public License as published by the Free Software
+  Foundation; either version 2 of the License, or (at your option) any later
+  version.
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+  This program is distributed in the hope that it will be useful, but WITHOUT
+  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-   02110-1301 USA
-
+  You should have received a copy of the GNU General Public License along with
+  this program. If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include "igraph_isomorphism.h"
+#include "igraph_cycles.h"
 
 #include "igraph_dqueue.h"
 #include "igraph_interface.h"
@@ -84,7 +79,7 @@ igraph_error_t igraph_topological_sorting(
     IGRAPH_VECTOR_INT_INIT_FINALLY(&neis, 0);
     IGRAPH_CHECK(igraph_dqueue_int_init(&sources, 0));
     IGRAPH_FINALLY(igraph_dqueue_int_destroy, &sources);
-    IGRAPH_CHECK(igraph_degree(graph, &degrees, igraph_vss_all(), deg_mode, 0));
+    IGRAPH_CHECK(igraph_degree(graph, &degrees, igraph_vss_all(), deg_mode, IGRAPH_NO_LOOPS));
 
     igraph_vector_int_clear(res);
 
@@ -135,7 +130,7 @@ igraph_error_t igraph_topological_sorting(
  * A directed acyclic graph (DAG) is a directed graph with no cycles.
  *
  * </para><para>
- * This function returns false for undirected graphs.
+ * This function returns \c false for undirected graphs.
  *
  * </para><para>
  * The return value of this function is cached in the graph itself; calling
@@ -170,7 +165,7 @@ igraph_error_t igraph_is_dag(const igraph_t* graph, igraph_bool_t *res) {
     IGRAPH_VECTOR_INT_INIT_FINALLY(&neis, 0);
     IGRAPH_DQUEUE_INT_INIT_FINALLY(&sources, 0);
 
-    IGRAPH_CHECK(igraph_degree(graph, &degrees, igraph_vss_all(), IGRAPH_IN, /* loops */ true));
+    IGRAPH_CHECK(igraph_degree(graph, &degrees, igraph_vss_all(), IGRAPH_IN, IGRAPH_LOOPS));
 
     igraph_int_t vertices_left = no_of_nodes;
 

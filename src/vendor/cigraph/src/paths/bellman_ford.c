@@ -1,7 +1,6 @@
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    igraph library.
-   Copyright (C) 2005-2021 The igraph development team
+   Copyright (C) 2005-2025 The igraph development team
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -61,8 +60,8 @@
  * Time complexity: O(s*|E|*|V|), where |V| is the number of
  * vertices, |E| the number of edges and s the number of sources.
  *
- * \sa \ref igraph_distances() for a faster unweighted version
- * or \ref igraph_distances_dijkstra() if you do not have negative
+ * \sa \ref igraph_distances() for a non-algorithm-specific interface;
+ * \ref igraph_distances_dijkstra() if you do not have negative
  * edge weights.
  *
  * \example examples/simple/bellman_ford.c
@@ -222,20 +221,6 @@ igraph_error_t igraph_i_distances_bellman_ford(
     return IGRAPH_SUCCESS;
 }
 
-/**
- * \function igraph_shortest_paths_bellman_ford
- * \brief Weighted shortest path lengths between vertices, allowing negative weights (deprecated).
- *
- * \deprecated-by igraph_distances_bellman_ford 0.10.0
- */
-igraph_error_t igraph_shortest_paths_bellman_ford(const igraph_t *graph,
-                                       igraph_matrix_t *res,
-                                       const igraph_vs_t from,
-                                       const igraph_vs_t to,
-                                       const igraph_vector_t *weights,
-                                       igraph_neimode_t mode) {
-    return igraph_distances_bellman_ford(graph, res, from, to, weights, mode);
-}
 
 /**
  * \ingroup structural
@@ -306,10 +291,8 @@ igraph_error_t igraph_shortest_paths_bellman_ford(const igraph_t *graph,
  *
  * \sa \ref igraph_distances_bellman_ford() to compute only shortest path
  * lengths, but not the paths themselves; \ref igraph_get_shortest_paths() for
- * a faster unweighted version or \ref igraph_get_shortest_paths_dijkstra()
- * if you do not have negative edge weights.
+ * a non-algorithm-specific interface.
  */
-
 igraph_error_t igraph_get_shortest_paths_bellman_ford(
         const igraph_t *graph,
         igraph_vector_int_list_t *vertices,

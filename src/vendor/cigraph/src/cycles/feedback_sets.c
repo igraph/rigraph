@@ -16,17 +16,16 @@
    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include "igraph_structural.h"
+#include "igraph_cycles.h"
 #include "cycles/feedback_sets.h"
 
 #include "igraph_bitset.h"
 #include "igraph_components.h"
-#include "igraph_cycles.h"
 #include "igraph_dqueue.h"
 #include "igraph_interface.h"
 #include "igraph_memory.h"
 #include "igraph_stack.h"
-#include "igraph_isomorphism.h"
+#include "igraph_structural.h"
 #include "igraph_vector.h"
 #include "igraph_vector_list.h"
 #include "igraph_visitor.h"
@@ -185,8 +184,6 @@ finish:
 /**
  * \function igraph_find_cycle
  * \brief Finds a single cycle in the graph.
- *
- * \experimental
  *
  * This function returns a cycle of the graph, if there is one. If the graph
  * is acyclic, it returns empty vectors.
@@ -386,8 +383,6 @@ igraph_error_t igraph_feedback_arc_set(
  * \function igraph_feedback_vertex_set
  * \brief Feedback vertex set of a graph.
  *
- * \experimental
- *
  * A feedback vertex set is a set of vertices whose removal makes the graph
  * acyclic. Finding a \em minimum feedback vertex set is an NP-complete
  * problem, both on directed and undirected graphs.
@@ -454,7 +449,7 @@ igraph_error_t igraph_i_feedback_arc_set_undirected(const igraph_t *graph, igrap
         IGRAPH_FINALLY_CLEAN(1);
     } else {
         /* Any spanning tree will do */
-        IGRAPH_CHECK(igraph_minimum_spanning_tree(graph, &edges, 0, IGRAPH_MST_AUTOMATIC));
+        IGRAPH_CHECK(igraph_minimum_spanning_tree(graph, &edges, NULL, IGRAPH_MST_AUTOMATIC));
     }
 
     /* Now we have a bunch of edges that constitute a spanning forest. We have
@@ -481,7 +476,7 @@ igraph_error_t igraph_i_feedback_arc_set_undirected(const igraph_t *graph, igrap
         IGRAPH_VECTOR_INIT_FINALLY(&degrees, no_of_nodes);
         IGRAPH_VECTOR_INT_INIT_FINALLY(&roots, no_of_nodes);
         IGRAPH_CHECK(igraph_strength(graph, &degrees, igraph_vss_all(),
-                                     IGRAPH_ALL, /* loops */ false, weights));
+                                     IGRAPH_ALL, IGRAPH_NO_LOOPS, weights));
         IGRAPH_CHECK(igraph_vector_sort_ind(&degrees, &roots, IGRAPH_DESCENDING));
 
         IGRAPH_CHECK(igraph_bfs(graph,
@@ -537,12 +532,12 @@ igraph_error_t igraph_i_feedback_arc_set_eades(const igraph_t *graph, igraph_vec
     IGRAPH_VECTOR_INIT_FINALLY(&instrengths, no_of_nodes);
     IGRAPH_VECTOR_INIT_FINALLY(&outstrengths, no_of_nodes);
 
-    IGRAPH_CHECK(igraph_degree(graph, &indegrees, igraph_vss_all(), IGRAPH_IN, false));
-    IGRAPH_CHECK(igraph_degree(graph, &outdegrees, igraph_vss_all(), IGRAPH_OUT, false));
+    IGRAPH_CHECK(igraph_degree(graph, &indegrees, igraph_vss_all(), IGRAPH_IN, IGRAPH_NO_LOOPS));
+    IGRAPH_CHECK(igraph_degree(graph, &outdegrees, igraph_vss_all(), IGRAPH_OUT, IGRAPH_NO_LOOPS));
 
     if (weights) {
-        IGRAPH_CHECK(igraph_strength(graph, &instrengths, igraph_vss_all(), IGRAPH_IN, false, weights));
-        IGRAPH_CHECK(igraph_strength(graph, &outstrengths, igraph_vss_all(), IGRAPH_OUT, false, weights));
+        IGRAPH_CHECK(igraph_strength(graph, &instrengths, igraph_vss_all(), IGRAPH_IN, IGRAPH_NO_LOOPS, weights));
+        IGRAPH_CHECK(igraph_strength(graph, &outstrengths, igraph_vss_all(), IGRAPH_OUT, IGRAPH_NO_LOOPS, weights));
     } else {
         for (igraph_int_t u = 0; u < no_of_nodes; u++) {
             VECTOR(instrengths)[u] = VECTOR(indegrees)[u];
@@ -725,7 +720,9 @@ igraph_error_t igraph_i_feedback_arc_set_eades(const igraph_t *graph, igraph_vec
 
         for (igraph_int_t i = 0; i < no_of_nodes; i++) {
             igraph_int_t from = VECTOR(ranks)[i];
-            IGRAPH_CHECK(igraph_neighbors(graph, &neis, from, IGRAPH_OUT, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
+            IGRAPH_CHECK(igraph_neighbors(
+                graph, &neis, from, IGRAPH_OUT, IGRAPH_LOOPS, IGRAPH_MULTIPLE
+            ));
             neis_size = igraph_vector_int_size(&neis);
             for (igraph_int_t j = 0; j < neis_size; j++) {
                 igraph_int_t to = VECTOR(neis)[j];

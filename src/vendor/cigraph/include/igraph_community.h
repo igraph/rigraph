@@ -1,7 +1,6 @@
 /*
    igraph library.
-   Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
-   334 Harvard street, Cambridge, MA 02139 USA
+   Copyright (C) 2009-2025  The igraph development team <igraph@igraph.org>
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -14,10 +13,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
-   02110-1301 USA
-
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 #ifndef IGRAPH_COMMUNITY_H
@@ -112,7 +108,7 @@ IGRAPH_EXPORT igraph_error_t igraph_community_edge_betweenness(const igraph_t *g
                                                     const igraph_vector_t *weights,
                                                     const igraph_vector_t *lengths);
 IGRAPH_EXPORT igraph_error_t igraph_community_eb_get_merges(const igraph_t *graph,
-                                                 const igraph_bool_t directed,
+                                                 igraph_bool_t directed,
                                                  const igraph_vector_int_t *edges,
                                                  const igraph_vector_t *weights,
                                                  igraph_matrix_int_t *merges,
@@ -136,7 +132,7 @@ IGRAPH_EXPORT igraph_error_t igraph_le_community_to_membership(const igraph_matr
                                                     igraph_vector_int_t *membership,
                                                     igraph_vector_int_t *csize);
 
-IGRAPH_EXPORT igraph_error_t igraph_community_voronoi(
+IGRAPH_EXPERIMENTAL IGRAPH_EXPORT igraph_error_t igraph_community_voronoi(
     const igraph_t *graph,
     igraph_vector_int_t *membership, igraph_vector_int_t *generators, igraph_real_t *modularity,
     const igraph_vector_t *lengths, const igraph_vector_t *weights,
@@ -145,13 +141,13 @@ IGRAPH_EXPORT igraph_error_t igraph_community_voronoi(
 IGRAPH_EXPORT igraph_error_t igraph_modularity(const igraph_t *graph,
                                     const igraph_vector_int_t *membership,
                                     const igraph_vector_t *weights,
-                                    const igraph_real_t resolution,
-                                    const igraph_bool_t directed,
+                                    igraph_real_t resolution,
+                                    igraph_bool_t directed,
                                     igraph_real_t *modularity);
 
 IGRAPH_EXPORT igraph_error_t igraph_modularity_matrix(const igraph_t *graph,
                                            const igraph_vector_t *weights,
-                                           const igraph_real_t resolution,
+                                           igraph_real_t resolution,
                                            igraph_matrix_t *modmat,
                                            igraph_bool_t directed);
 
@@ -220,6 +216,7 @@ IGRAPH_EXPORT igraph_error_t igraph_community_fluid_communities(const igraph_t *
                                                      igraph_int_t no_of_communities,
                                                      igraph_vector_int_t *membership);
 
+
 IGRAPH_EXPORT igraph_error_t igraph_community_label_propagation(const igraph_t *graph,
                                                      igraph_vector_int_t *membership,
                                                      igraph_neimode_t mode,
@@ -230,7 +227,7 @@ IGRAPH_EXPORT igraph_error_t igraph_community_label_propagation(const igraph_t *
 
 IGRAPH_EXPORT igraph_error_t igraph_community_multilevel(const igraph_t *graph,
                                               const igraph_vector_t *weights,
-                                              const igraph_real_t resolution,
+                                              igraph_real_t resolution,
                                               igraph_vector_int_t *membership,
                                               igraph_matrix_int_t *memberships,
                                               igraph_vector_t *modularity);

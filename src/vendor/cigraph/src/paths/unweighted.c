@@ -1,7 +1,6 @@
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    igraph library.
-   Copyright (C) 2005-2021 The igraph development team <igraph@igraph.org>
+   Copyright (C) 2005-2025 The igraph development team <igraph@igraph.org>
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -36,6 +35,8 @@
  * paths longer than \p cutoff will not be considered.
  *
  * \param graph The graph object.
+ * \param weights Optional edge weights. If \c NULL, the graph is considered
+ *        unweighted, i.e. all edge weights are equal to 1.
  * \param res The result of the calculation, a matrix. A pointer to an
  *        initialized matrix, to be more precise. The matrix will be
  *        resized if needed. It will have the same
@@ -60,8 +61,8 @@
  *        \endclist
  * \param cutoff The maximal length of paths that will be considered.
  *    When the distance of two vertices is greater than this value,
- *    it will be returned as \c IGRAPH_INFINITY. Negative cutoffs are
- *    treated as infinity.
+ *    it will be returned as \c IGRAPH_INFINITY. Negative cutoffs and
+ *    \ref IGRAPH_UNLIMITED are treated as infinity.
  * \return Error code:
  *        \clist
  *        \cli IGRAPH_ENOMEM
@@ -223,6 +224,8 @@ igraph_error_t igraph_i_distances_unweighted_cutoff(
  * \brief Length of the shortest paths between vertices.
  *
  * \param graph The graph object.
+ * \param weights Optional edge weights. If \c NULL, the graph is considered
+ *        unweighted, i.e. all edge weights are 1.
  * \param res The result of the calculation, a matrix. A pointer to an
  *        initialized matrix, to be more precise. The matrix will be
  *        resized if needed. It will have the same
@@ -308,7 +311,7 @@ igraph_error_t igraph_distances(
          * In the undirected case we always use Bellman-Ford. Normally, a negative weight
          * undirected edge triggers an error as it is effectively a negative cycle.
          * However, with Bellman-Ford the negative edge might be avoided if it is
-         * not reachable from the 'from' vertices. In contrast, Johnson will always raise
+         * not reachable from the 'from' vertices. In cotrast, Johnson will always raise
          * an error.
          */
         if (mode != IGRAPH_ALL) {
@@ -322,20 +325,6 @@ igraph_error_t igraph_distances(
 }
 
 /**
- * \function igraph_shortest_paths
- * \brief Length of the shortest paths between vertices.
- *
- * \deprecated-by igraph_distances 0.10.0
- */
-igraph_error_t igraph_shortest_paths(const igraph_t *graph,
-                                     igraph_matrix_t *res,
-                                     const igraph_vs_t from,
-                                     const igraph_vs_t to,
-                                     igraph_neimode_t mode) {
-    return igraph_distances(graph, NULL, res, from, to, mode);
-}
-
-/**
  * \ingroup structural
  * \function igraph_get_shortest_paths
  * \brief Shortest paths from a vertex.
@@ -346,6 +335,8 @@ igraph_error_t igraph_shortest_paths(const igraph_t *graph,
  * to find \em all shortest paths.
  *
  * \param graph The graph object.
+ * \param weights Optional edge weights. If \c NULL, the graph is considered
+ *        unweighted, i.e. all edge weights are equal to 1.
  * \param vertices The result, the IDs of the vertices along the paths.
  *        This is a list of integer vectors where each element is an
  *        \ref igraph_vector_int_t object. The list will be resized as needed.
@@ -643,6 +634,8 @@ igraph_error_t igraph_i_get_shortest_paths_unweighted(
  * \param graph The input graph, it can be directed or
  *        undirected. Directed paths are considered in directed
  *        graphs.
+ * \param weights Optional edge weights. If \c NULL, the graph is considered
+ *        unweighted, i.e. all edge weights are equal to 1.
  * \param vertices Pointer to an initialized vector or a null
  *        pointer. If not a null pointer, then the vertex IDs along
  *        the path are stored here, including the source and target
@@ -666,7 +659,6 @@ igraph_error_t igraph_i_get_shortest_paths_unweighted(
  * \sa \ref igraph_get_shortest_paths() for the version with more target
  * vertices.
  */
-
 igraph_error_t igraph_get_shortest_path(
         const igraph_t *graph,
         const igraph_vector_t *weights,

@@ -158,7 +158,9 @@ static igraph_error_t igraph_i_connected_components_weak(
 
         while ( !igraph_dqueue_int_empty(&q) ) {
             igraph_int_t act_node = igraph_dqueue_int_pop(&q);
-            IGRAPH_CHECK(igraph_neighbors(graph, &neis, act_node, IGRAPH_ALL, IGRAPH_NO_LOOPS, IGRAPH_MULTIPLE));
+            IGRAPH_CHECK(igraph_neighbors(
+                graph, &neis, act_node, IGRAPH_ALL, IGRAPH_NO_LOOPS, IGRAPH_MULTIPLE
+            ));
             igraph_int_t nei_count = igraph_vector_int_size(&neis);
             for (igraph_int_t i = 0; i < nei_count; i++) {
                 igraph_int_t neighbor = VECTOR(neis)[i];
@@ -514,7 +516,9 @@ static igraph_error_t igraph_i_is_connected_weak(const igraph_t *graph, igraph_b
 
         const igraph_int_t actnode = igraph_dqueue_int_pop(&q);
 
-        IGRAPH_CHECK(igraph_neighbors(graph, &neis, actnode, IGRAPH_ALL, IGRAPH_NO_LOOPS, IGRAPH_MULTIPLE));
+        IGRAPH_CHECK(igraph_neighbors(
+            graph, &neis, actnode, IGRAPH_ALL, IGRAPH_NO_LOOPS, IGRAPH_MULTIPLE
+        ));
         const igraph_int_t nei_count = igraph_vector_int_size(&neis);
 
         for (igraph_int_t i = 0; i < nei_count; i++) {
@@ -667,7 +671,9 @@ static igraph_error_t igraph_i_decompose_weak(const igraph_t *graph,
         while (!igraph_dqueue_int_empty(&q) ) {
             /* pop from the queue of this component */
             igraph_int_t actvert = igraph_dqueue_int_pop(&q);
-            IGRAPH_CHECK(igraph_neighbors(graph, &neis, actvert, IGRAPH_ALL, IGRAPH_NO_LOOPS, IGRAPH_MULTIPLE));
+            IGRAPH_CHECK(igraph_neighbors(
+                graph, &neis, actvert, IGRAPH_ALL, IGRAPH_NO_LOOPS, IGRAPH_MULTIPLE
+            ));
             igraph_int_t nei_count = igraph_vector_int_size(&neis);
             /* iterate over the neighbors */
             for (i = 0; i < nei_count; i++) {
@@ -692,7 +698,7 @@ static igraph_error_t igraph_i_decompose_weak(const igraph_t *graph,
         IGRAPH_CHECK(igraph_i_induced_subgraph_map(
             graph, &newg, igraph_vss_vector(&verts),
             IGRAPH_SUBGRAPH_AUTO, &vids_old2new,
-            /* invmap = */ 0, /* map_is_prepared = */ 1
+            /* invmap = */ NULL, /* map_is_prepared = */ true
         ));
         IGRAPH_FINALLY(igraph_destroy, &newg);
         IGRAPH_CHECK(igraph_graph_list_push_back(components, &newg));
@@ -750,6 +756,7 @@ static igraph_error_t igraph_i_decompose_strong(const igraph_t *graph,
 
     IGRAPH_VECTOR_INT_INIT_FINALLY(&vids_old2new, no_of_nodes);
     igraph_vector_int_fill(&vids_old2new, -1);
+
     IGRAPH_VECTOR_INT_INIT_FINALLY(&verts, 0);
     IGRAPH_VECTOR_INT_INIT_FINALLY(&next_nei, no_of_nodes);
     IGRAPH_VECTOR_INT_INIT_FINALLY(&out, 0);
@@ -908,12 +915,12 @@ static igraph_error_t igraph_i_decompose_strong(const igraph_t *graph,
 
         /* vids_old2new has to be cleaned up here because a vertex may appear
          * in multiple strongly connected components. Simply calling
-         * igraph_vector_int_fill() would be an O(n) operation where n is the
-         * number of vertices in the large graph so we cannot do that; we have to
+         * igraph_vector_int_fill() would be an O(n) operation where n is the number
+         * of vertices in the large graph so we cannot do that; we have to
          * iterate over 'verts' instead */
         n = igraph_vector_int_size(&verts);
         for (i = 0; i < n; i++) {
-            VECTOR(vids_old2new)[VECTOR(verts)[i]] = -1;
+            VECTOR(vids_old2new)[VECTOR(verts)[i]] = 0;
         }
 
         no_of_components++;

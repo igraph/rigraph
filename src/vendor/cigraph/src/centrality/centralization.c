@@ -1,4 +1,3 @@
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    igraph library.
    Copyright (C) 2007-2020  The igraph development team <igraph@igraph.org>
@@ -13,8 +12,8 @@
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
 
-  You should have received a copy of the GNU General Public License
-  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 #include "igraph_centrality.h"
@@ -113,8 +112,11 @@ igraph_real_t igraph_centralization(const igraph_vector_t *scores,
  * \param mode Constant the specifies the type of degree for directed
  *     graphs. Possible values: \c IGRAPH_IN, \c IGRAPH_OUT and \c
  *     IGRAPH_ALL. This argument is ignored for undirected graphs.
- * \param loops Boolean, whether to consider loop edges when
- *     calculating the degree (and the centralization).
+ * \param loops Specifies how to treat loop edges when calculating the
+ *     degree (and the centralization). \c IGRAPH_NO_LOOPS ignores loop
+ *     edges; \c IGRAPH_LOOPS_ONCE counts each loop edge only once;
+ *     \c IGRAPH_LOOPS_TWICE counts each loop edge twice in undirected
+ *     graphs and once in directed graphs.
  * \param centralization Pointer to a real number, the centralization
  *     score is placed here.
  * \param theoretical_max Pointer to real number or a null pointer. If
@@ -199,8 +201,11 @@ igraph_error_t igraph_centralization_degree(
  *     or total degree (\c IGRAPH_ALL). This is ignored if
  *     the \p graph argument is not a null pointer and the
  *     given graph is undirected.
- * \param loops Boolean, whether to consider loop edges in the
- *     calculation.
+ * \param loops Specifies how to treat loop edges when calculating the
+ *     degree (and the centralization). \c IGRAPH_NO_LOOPS ignores loop
+ *     edges; \c IGRAPH_LOOPS_ONCE counts each loop edge only once;
+ *     \c IGRAPH_LOOPS_TWICE counts each loop edge twice in undirected
+ *     graphs and once in directed graphs.
  * \param res Pointer to a real variable, the result is stored here.
  * \return Error code.
  *

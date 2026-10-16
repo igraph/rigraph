@@ -1,4 +1,3 @@
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    igraph library.
    Copyright (C) 2003-2020  The igraph development team
@@ -26,7 +25,7 @@
 #include "igraph_random.h"
 
 #include "core/interruption.h"
-#include "core/math.h"
+#include "core/math.h" /* M_PI */
 #include "layout/layout_internal.h"
 
 #include <math.h>
@@ -196,7 +195,6 @@ igraph_error_t igraph_layout_davidson_harel(const igraph_t *graph, igraph_matrix
     IGRAPH_FINALLY(igraph_vector_int_destroy, &try_idx);
     IGRAPH_VECTOR_INT_INIT_FINALLY(&neis, 100);
 
-
     if (!use_seed) {
         for (igraph_int_t i = 0; i < no_nodes; i++) {
             igraph_real_t x, y;
@@ -327,7 +325,9 @@ igraph_error_t igraph_layout_davidson_harel(const igraph_t *graph, igraph_matrix
                 }
 
                 if (w_edge_lengths != 0) {
-                    IGRAPH_CHECK(igraph_neighbors(graph, &neis, v, IGRAPH_ALL, IGRAPH_NO_LOOPS, IGRAPH_MULTIPLE));
+                    IGRAPH_CHECK(igraph_neighbors(
+                        graph, &neis, v, IGRAPH_ALL, IGRAPH_NO_LOOPS, IGRAPH_MULTIPLE
+                    ));
                     igraph_int_t len = igraph_vector_int_size(&neis);
                     for (igraph_int_t j = 0; j < len; j++) {
                         igraph_int_t u = VECTOR(neis)[j];
@@ -344,7 +344,9 @@ igraph_error_t igraph_layout_davidson_harel(const igraph_t *graph, igraph_matrix
                 if (w_edge_crossings != 0) {
                     igraph_int_t no = 0;
 
-                    IGRAPH_CHECK(igraph_neighbors(graph, &neis, v, IGRAPH_ALL, IGRAPH_NO_LOOPS, IGRAPH_MULTIPLE));
+                    IGRAPH_CHECK(igraph_neighbors(
+                        graph, &neis, v, IGRAPH_ALL, IGRAPH_NO_LOOPS, IGRAPH_MULTIPLE
+                    ));
                     igraph_int_t len = igraph_vector_int_size(&neis);
                     for (igraph_int_t j = 0; j < len; j++) {
                         igraph_int_t u = VECTOR(neis)[j];
@@ -440,7 +442,6 @@ igraph_error_t igraph_layout_davidson_harel(const igraph_t *graph, igraph_matrix
         move_radius *= cool_fact;
 
     } /* round < maxiter */
-
 
     igraph_vector_int_destroy(&neis);
     igraph_vector_int_destroy(&try_idx);

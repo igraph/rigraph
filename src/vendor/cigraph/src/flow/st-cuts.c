@@ -26,12 +26,12 @@
 #include "igraph_constants.h"
 #include "igraph_constructors.h"
 #include "igraph_components.h"
+#include "igraph_cycles.h"
 #include "igraph_error.h"
 #include "igraph_interface.h"
 #include "igraph_operators.h"
 #include "igraph_stack.h"
 #include "igraph_visitor.h"
-#include "igraph_isomorphism.h"
 
 #include "core/estack.h"
 #include "core/marked_queue.h"
@@ -789,8 +789,9 @@ igraph_error_t igraph_i_all_st_cuts_pivot(
                 igraph_vector_int_t neis;
                 igraph_int_t j;
                 IGRAPH_VECTOR_INT_INIT_FINALLY(&neis, 0);
-                IGRAPH_CHECK(igraph_neighbors(graph, &neis, i,
-                                              IGRAPH_OUT, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
+                IGRAPH_CHECK(igraph_neighbors(
+                    graph, &neis, i, IGRAPH_OUT, IGRAPH_NO_LOOPS, IGRAPH_MULTIPLE
+                ));
                 n = igraph_vector_int_size(&neis);
                 for (j = 0; j < n; j++) {
                     igraph_int_t nei = VECTOR(neis)[j];
@@ -1168,7 +1169,9 @@ static igraph_error_t igraph_i_all_st_mincuts_minimal(const igraph_t *residual,
      */
     for (i = 0; i < no_of_nodes; i++) {
         igraph_int_t j, n;
-        IGRAPH_CHECK(igraph_neighbors(residual, &neis, i, IGRAPH_IN, IGRAPH_NO_LOOPS, IGRAPH_MULTIPLE));
+        IGRAPH_CHECK(igraph_neighbors(
+            residual, &neis, i, IGRAPH_IN, IGRAPH_NO_LOOPS, IGRAPH_MULTIPLE
+        ));
         n = igraph_vector_int_size(&neis);
 
         // Only consider nodes that are not in S.
@@ -1189,7 +1192,7 @@ static igraph_error_t igraph_i_all_st_mincuts_minimal(const igraph_t *residual,
              */
             if (!IGRAPH_BIT_TEST(connected_to_minimal, i) && IGRAPH_BIT_TEST(*active, i)) {
 
-                igraph_vector_int_push_back(minimal, i);
+                IGRAPH_CHECK(igraph_vector_int_push_back(minimal, i));
                 /* Also mark this node as connected to minimal, to make sure that
                  * any descendants will be marked as being connected to a minimal
                  * node.

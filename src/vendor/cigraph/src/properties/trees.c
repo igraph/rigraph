@@ -1,4 +1,3 @@
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    igraph library.
    Copyright (C) 2005-2021 The igraph development team
@@ -21,10 +20,10 @@
 */
 
 #include "igraph_structural.h"
-#include "igraph_isomorphism.h"
 
 #include "igraph_bitset.h"
 #include "igraph_constructors.h"
+#include "igraph_cycles.h"
 #include "igraph_dqueue.h"
 #include "igraph_interface.h"
 #include "igraph_stack.h"
@@ -331,7 +330,7 @@ igraph_error_t igraph_is_tree(const igraph_t *graph, igraph_bool_t *res, igraph_
         IGRAPH_CHECK(igraph_vector_int_init(&degree, 0));
         IGRAPH_FINALLY(igraph_vector_int_destroy, &degree);
 
-        IGRAPH_CHECK(igraph_degree(graph, &degree, igraph_vss_all(), mode == IGRAPH_IN ? IGRAPH_OUT : IGRAPH_IN, IGRAPH_LOOPS));
+        IGRAPH_CHECK(igraph_degree(graph, &degree, igraph_vss_all(), IGRAPH_REVERSE_MODE(mode), IGRAPH_LOOPS));
 
         for (i = 0; i < vcount; ++i) {
             if (VECTOR(degree)[i] == 0) {
@@ -515,7 +514,8 @@ static igraph_error_t igraph_i_is_forest(
  * number of vertices plus the number of edges in the graph.
  *
  * \sa \ref igraph_is_tree() to check if a graph is a tree, i.e. a forest with
- * a single component.
+ * a single component; \ref igraph_is_acyclic() to check if a graph lacks
+ * (undirected or directed) cycles.
  */
 igraph_error_t igraph_is_forest(const igraph_t *graph, igraph_bool_t *res,
                                 igraph_vector_int_t *roots, igraph_neimode_t mode) {
@@ -673,7 +673,7 @@ static igraph_error_t igraph_i_is_forest(
 
             IGRAPH_VECTOR_INT_INIT_FINALLY(&degree, 0);
             IGRAPH_CHECK(igraph_degree(graph, &degree, igraph_vss_all(),
-                            IGRAPH_REVERSE_MODE(mode), /* loops = */ 1));
+                            IGRAPH_REVERSE_MODE(mode), IGRAPH_LOOPS));
 
             for (v = 0; v < vcount; ++v) {
                 /* In an out-tree, roots have in-degree 0,
@@ -732,6 +732,11 @@ static igraph_error_t igraph_i_is_forest(
  * This function checks whether a graph has any cycles. Edge directions are
  * considered, i.e. in directed graphs, only directed cycles are searched for.
  *
+ * </para><para>
+ * The result of this function is cached in the graph itself; calling
+ * the function multiple times with no modifications to the graph in between
+ * will return a cached value in O(1) time.
+ *
  * \param graph The input graph.
  * \param res Pointer to a boolean constant, the result
         is stored here.
@@ -739,7 +744,8 @@ static igraph_error_t igraph_i_is_forest(
  *
  * \sa \ref igraph_find_cycle() to find a cycle that demonstrates
  * that the graph is not acyclic; \ref igraph_is_forest() to look
- * for undirected cycles even in directed graphs.
+ * for undirected cycles even in directed graphs; \ref igraph_is_dag()
+ * to test specifically for directed acyclic graphs.
  *
  * Time complexity: O(|V|+|E|), where |V| and |E| are the number of
  * vertices and edges in the original input graph.

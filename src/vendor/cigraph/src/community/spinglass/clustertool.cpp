@@ -302,8 +302,6 @@ static igraph_error_t igraph_i_community_spinglass_orig(
 
     PottsModel pm(&net, spins, update_rule);
 
-    /* initialize the random number generator */
-
     if ((stoptemp == 0.0) && (starttemp == 0.0)) {
         zeroT = true;
     } else {
@@ -353,7 +351,6 @@ static igraph_error_t igraph_i_community_spinglass_orig(
 
     pm.WriteClusters(modularity, temperature, csize, membership, kT, gamma);
 
-
     return IGRAPH_SUCCESS;
 }
 
@@ -375,7 +372,7 @@ static igraph_error_t igraph_i_community_spinglass_orig(
  * \param weights Pointer to a vector with the weights of the edges.
  *    Alternatively \c NULL can be supplied to have the same weight
  *    for every edge.
- * \param vertex The vertex ID of the vertex of which ths community is
+ * \param vertex The vertex ID of the vertex of which this community is
  *    calculated.
  * \param community Pointer to an initialized vector, the result, the
  *    IDs of the vertices in the community of the input vertex will be
@@ -436,7 +433,7 @@ igraph_error_t igraph_community_spinglass_single(const igraph_t *graph,
         /* Check arguments */
 
         if (spins < 2) {
-            IGRAPH_ERROR("Number of spins must be at least 2", IGRAPH_EINVAL);
+            IGRAPH_ERROR("Number of spins must be at least 2.", IGRAPH_EINVAL);
         }
         if (update_rule != IGRAPH_SPINCOMM_UPDATE_SIMPLE &&
             update_rule != IGRAPH_SPINCOMM_UPDATE_CONFIG) {
@@ -444,22 +441,22 @@ igraph_error_t igraph_community_spinglass_single(const igraph_t *graph,
         }
         if (weights) {
             if (igraph_vector_size(weights) != igraph_ecount(graph)) {
-                IGRAPH_ERROR("Invalid weight vector length", IGRAPH_EINVAL);
+                IGRAPH_ERROR("Invalid edge weight vector length.", IGRAPH_EINVAL);
             }
             use_weights = 1;
         }
         if (gamma < 0.0) {
-            IGRAPH_ERROR("Invalid gamme value", IGRAPH_EINVAL);
+            IGRAPH_ERROR("Invalid gamma value.", IGRAPH_EINVAL);
         }
         if (vertex < 0 || vertex > igraph_vcount(graph)) {
-            IGRAPH_ERROR("Invalid vertex ID", IGRAPH_EINVAL);
+            IGRAPH_ERROR("Invalid vertex ID.", IGRAPH_EINVAL);
         }
 
         /* Check whether we have a single component */
         igraph_bool_t conn;
         IGRAPH_CHECK(igraph_is_connected(graph, &conn, IGRAPH_WEAK));
         if (!conn) {
-            IGRAPH_ERROR("Cannot work with unconnected graph", IGRAPH_EINVAL);
+            IGRAPH_ERROR("Cannot work with disconnected graph.", IGRAPH_EINVAL);
         }
 
         network net;
@@ -470,8 +467,6 @@ igraph_error_t igraph_community_spinglass_single(const igraph_t *graph,
 
         PottsModel pm(&net, spins, update_rule);
 
-        /* initialize the random number generator */
-
         /* to be expected, if we want to find the community around a particular node*/
         /* the initial conf is needed, because otherwise,
            the degree of the nodes is not in the weight property, stupid!!! */
@@ -479,7 +474,6 @@ igraph_error_t igraph_community_spinglass_single(const igraph_t *graph,
         snprintf(startnode, sizeof(startnode) / sizeof(startnode[0]), "%" IGRAPH_PRId "", vertex + 1);
         pm.FindCommunityFromStart(gamma, startnode, community,
                                    cohesion, adhesion, inner_links, outer_links);
-
     );
 
     return IGRAPH_SUCCESS;
@@ -598,8 +592,6 @@ static igraph_error_t igraph_i_community_spinglass_negative(
 
     PottsModelN pm(&net, spins, directed);
 
-    /* initialize the random number generator */
-
     if ((stoptemp == 0.0) && (starttemp == 0.0)) {
         zeroT = true;
     } else {
@@ -635,7 +627,6 @@ static igraph_error_t igraph_i_community_spinglass_negative(
     igraph_matrix_destroy(&normalized_adhesion);
     igraph_matrix_destroy(&adhesion);
     IGRAPH_FINALLY_CLEAN(2);
-
 
     return IGRAPH_SUCCESS;
 }

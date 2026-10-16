@@ -29,7 +29,7 @@
 #include "igraph_pmt.h"
 #include "igraph_vector_type.h"
 #include "igraph_vector_pmt.h"
-#include "../core/vector.pmt"
+#include "core/vector.pmt"
 #include "igraph_pmt_off.h"
 #undef BASE_FORTRAN_INT
 
@@ -207,7 +207,7 @@ igraph_error_t igraph_lapack_dgetrs(igraph_bool_t transpose, const igraph_matrix
     ldb = n > 0 ? n : 1;
 
     if (n != igraph_matrix_ncol(a)) {
-        IGRAPH_ERROR("Cannot LU solve matrix.", IGRAPH_EINVAL);
+        IGRAPH_ERROR("Cannot LU solve non-square matrix.", IGRAPH_EINVAL);
     }
     if (n != igraph_matrix_nrow(b)) {
         IGRAPH_ERROR("Cannot LU solve matrix, RHS of wrong size.", IGRAPH_EINVAL);
@@ -319,7 +319,7 @@ igraph_error_t igraph_lapack_dgesv(igraph_matrix_t *a, igraph_vector_int_t *ipiv
     igraph_vector_fortran_int_t vipiv;
 
     if (n != igraph_matrix_ncol(a)) {
-        IGRAPH_ERROR("Cannot LU solve matrix.", IGRAPH_EINVAL);
+        IGRAPH_ERROR("Cannot LU solve non-square matrix.", IGRAPH_EINVAL);
     }
     if (n != igraph_matrix_nrow(b)) {
         IGRAPH_ERROR("Cannot LU solve matrix, RHS of wrong size.", IGRAPH_EINVAL);
@@ -458,7 +458,7 @@ igraph_error_t igraph_lapack_dsyevr(const igraph_matrix_t *A,
     int lwork = -1, liwork = -1;
 
     if (n != igraph_matrix_ncol(A)) {
-        IGRAPH_ERROR("Cannot find eigenvalues/vectors.", IGRAPH_EINVAL);
+        IGRAPH_ERROR("Cannot find eigenvalues/vectors of non-square matrix.", IGRAPH_EINVAL);
     }
     if (which == IGRAPH_LAPACK_DSYEV_INTERVAL &&
         (vestimate < 1 || vestimate > n)) {
@@ -640,7 +640,7 @@ igraph_error_t igraph_lapack_dgeev(const igraph_matrix_t *A,
     int error = *info;
 
     if (igraph_matrix_ncol(A) != n) {
-        IGRAPH_ERROR("Cannot calculate eigenvalues (dgeev).", IGRAPH_EINVAL);
+        IGRAPH_ERROR("Cannot calculate eigenvalues of non-square matrix.", IGRAPH_EINVAL);
     }
 
     IGRAPH_CHECK(igraph_matrix_init_copy(&Acopy, A));
@@ -867,7 +867,7 @@ igraph_error_t igraph_lapack_dgeevx(igraph_lapack_dgeevx_balance_t balance,
         ihi = &ihi_dummy;
     }
     if (igraph_matrix_ncol(A) != n) {
-        IGRAPH_ERROR("Cannot calculate eigenvalues (dgeevx).", IGRAPH_EINVAL);
+        IGRAPH_ERROR("Cannot calculate eigenvalues of non-square matrix.", IGRAPH_EINVAL);
     }
 
     switch (balance) {
@@ -1002,7 +1002,7 @@ igraph_error_t igraph_lapack_dgehrd(const igraph_matrix_t *A,
     int i;
 
     if (igraph_matrix_ncol(A) != n) {
-        IGRAPH_ERROR("Hessenberg reduction failed.", IGRAPH_EINVAL);
+        IGRAPH_ERROR("Hessenberg reduction failed on non-square matrix.", IGRAPH_EINVAL);
     }
 
     if (ilo < 1 || ihi > n || ilo > ihi) {

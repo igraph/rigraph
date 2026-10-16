@@ -1,7 +1,6 @@
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    igraph library.
-   Copyright (C) 2005-2021 The igraph development team
+   Copyright (C) 2005-2025  The igraph development team <igraph@igraph.org>
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -14,10 +13,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-   02110-1301 USA
-
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 #include "igraph_paths.h"
@@ -27,6 +23,8 @@
 
 #include "math/safe_intop.h"
 #include "paths/paths_internal.h"
+
+
 /**
  * \function igraph_distances_johnson
  * \brief Weighted shortest path lengths between vertices, using Johnson's algorithm.
@@ -66,7 +64,12 @@
  *   vertex twice or more.
  * \param weights Optional edge weights. If it is a null-pointer, then
  *   the unweighted breadth-first search based \ref igraph_distances() will
- *   be called. Edges with positive infinite weights are ignored.
+ *   be called.  Edges with positive infinite weights are ignored.
+ * \param mode For directed graphs; whether to follow paths along edge
+ *    directions (\c IGRAPH_OUT), or the opposite (\c IGRAPH_IN), or
+ *    ignore edge directions completely (\c IGRAPH_ALL). It is ignored
+ *    for undirected graphs. \c IGRAPH_ALL should not be used with
+ *    negative weights.
  * \return Error code.
  *
  * Time complexity: O(s|V|log|V|+|V||E|), |V| and |E| are the number
@@ -248,18 +251,4 @@ igraph_error_t igraph_i_distances_johnson(
     IGRAPH_FINALLY_CLEAN(2);
 
     return IGRAPH_SUCCESS;
-}
-
-/**
- * \function igraph_shortest_paths_johnson
- * \brief Weighted shortest path lengths between vertices, using Johnson's algorithm (deprecated).
- *
- * \deprecated-by igraph_distances_johnson 0.10.0
- */
-igraph_error_t igraph_shortest_paths_johnson(const igraph_t *graph,
-                                  igraph_matrix_t *res,
-                                  const igraph_vs_t from,
-                                  const igraph_vs_t to,
-                                  const igraph_vector_t *weights) {
-    return igraph_distances_johnson(graph, res, from, to, weights, IGRAPH_OUT);
 }
