@@ -49,4 +49,4 @@ igraph_error_t igraph_i_feedback_vertex_set_ip_cg(
 
 IGRAPH_END_C_DECLS
 
-#endif
+#endif /* IGRAPH_CYCLES_FEEDBACK_SETS_H */
