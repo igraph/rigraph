@@ -25,7 +25,7 @@
 #include "igraph_datatype.h"
 #include "igraph_error.h"
 
-__BEGIN_DECLS
+IGRAPH_BEGIN_C_DECLS
 
 /**
  * \typedef igraph_coloring_greedy_t
@@ -54,6 +54,6 @@ IGRAPH_EXPORT igraph_error_t igraph_is_vertex_coloring(const igraph_t *graph, co
 IGRAPH_EXPORT igraph_error_t igraph_is_bipartite_coloring(const igraph_t *graph, const igraph_vector_bool_t *types, igraph_bool_t *res, igraph_neimode_t *mode);
 IGRAPH_EXPORT igraph_error_t igraph_is_edge_coloring(const igraph_t *graph, const igraph_vector_int_t *types, igraph_bool_t *res);
 
-__END_DECLS
+IGRAPH_END_C_DECLS
 
 #endif /* IGRAPH_COLORING_H */

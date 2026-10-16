@@ -34,7 +34,7 @@
 #include "igraph_vector_list.h"
 #include "igraph_vector_ptr.h"
 
-__BEGIN_DECLS
+IGRAPH_BEGIN_C_DECLS
 
 /* -------------------------------------------------- */
 /* Graph operators                                    */
@@ -119,6 +119,6 @@ IGRAPH_EXPORT igraph_error_t igraph_rooted_product(igraph_t *res,
                                                    const igraph_int_t root);
 IGRAPH_EXPORT igraph_error_t igraph_mycielskian(const igraph_t *graph, igraph_t *res, igraph_int_t k);
 
-__END_DECLS
+IGRAPH_END_C_DECLS
 
 #endif

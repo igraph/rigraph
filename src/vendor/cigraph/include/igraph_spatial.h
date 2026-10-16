@@ -25,7 +25,7 @@
 #include "igraph_error.h"
 #include "igraph_matrix.h"
 
-__BEGIN_DECLS
+IGRAPH_BEGIN_C_DECLS
 
 IGRAPH_EXPERIMENTAL IGRAPH_EXPORT igraph_error_t igraph_delaunay_graph(
         igraph_t *graph,
@@ -86,6 +86,6 @@ IGRAPH_EXPORT igraph_error_t igraph_convex_hull_2d(
     igraph_vector_int_t *resverts,
     igraph_matrix_t *rescoords);
 
-__END_DECLS
+IGRAPH_END_C_DECLS
 
 #endif

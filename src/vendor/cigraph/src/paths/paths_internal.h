@@ -24,7 +24,7 @@
 #include "igraph_decls.h"
 #include "igraph_paths.h"
 
-__BEGIN_DECLS
+IGRAPH_BEGIN_C_DECLS
 
 /* Helper functions for validating input to shortest path functions. */
 
@@ -116,6 +116,6 @@ igraph_error_t igraph_i_get_all_shortest_paths_unweighted(
         igraph_int_t from, igraph_vs_t to,
         igraph_neimode_t mode);
 
-__END_DECLS
+IGRAPH_END_C_DECLS
 
 #endif /* IGRAPH_PATHS_INTERNAL_H */

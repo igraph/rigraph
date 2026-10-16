@@ -32,7 +32,7 @@
 #include "igraph_types.h"
 #include "igraph_vector.h"
 #include "igraph_vector_list.h"
-__BEGIN_DECLS
+IGRAPH_BEGIN_C_DECLS
 
 /* -------------------------------------------------- */
 /* Components                                         */
@@ -72,6 +72,6 @@ IGRAPH_EXPORT igraph_error_t igraph_edgelist_percolation(
         igraph_vector_int_t *giant_size,
         igraph_vector_int_t *vertex_count);
 
-__END_DECLS
+IGRAPH_END_C_DECLS
 
 #endif

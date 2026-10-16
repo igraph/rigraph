@@ -27,7 +27,7 @@
 #include "igraph_error.h"
 #include "igraph_vector.h"
 
-__BEGIN_DECLS
+IGRAPH_BEGIN_C_DECLS
 
 /**
  * Vector of strings
@@ -118,6 +118,6 @@ IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_strvector_set2(
     igraph_strvector_t *sv, igraph_int_t idx, const char *value, size_t len
 );
 
-__END_DECLS
+IGRAPH_END_C_DECLS
 
 #endif

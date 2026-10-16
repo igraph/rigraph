@@ -26,7 +26,7 @@
 #include "igraph_decls.h"
 #include "igraph_error.h"
 
-__BEGIN_DECLS
+IGRAPH_BEGIN_C_DECLS
 
 /**
  * \section about_status_handlers Status reporting
@@ -123,6 +123,6 @@ IGRAPH_EXPORT igraph_error_t igraph_statusf(const char *message, void *data, ...
         } \
     } while (0)
 
-__END_DECLS
+IGRAPH_END_C_DECLS
 
 #endif

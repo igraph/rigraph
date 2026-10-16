@@ -25,12 +25,12 @@
 #define IGRAPH_I_MULTI_EDGES_SW 0x02 /* 010, more than one edge allowed between distinct vertices */
 #define IGRAPH_I_MULTI_LOOPS_SW 0x04 /* 100, more than one self-loop allowed on the same vertex   */
 
-__BEGIN_DECLS
+IGRAPH_BEGIN_C_DECLS
 
 igraph_error_t igraph_i_edge_type_to_loops_multiple(
     igraph_edge_type_sw_t allowed_edge_type,
     igraph_bool_t *loops, igraph_bool_t *multiple);
 
-__END_DECLS
+IGRAPH_END_C_DECLS
 
 #endif /* IGRAPH_MISC_GRAPHICALITY_H */

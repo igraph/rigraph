@@ -31,7 +31,7 @@
 #include "igraph_iterators.h"
 #include "igraph_arpack.h"
 
-__BEGIN_DECLS
+IGRAPH_BEGIN_C_DECLS
 
 /* -------------------------------------------------- */
 /* Centrality                                         */
@@ -206,6 +206,6 @@ IGRAPH_EXPORT igraph_error_t igraph_centralization_eigenvector_centrality_tmax(c
                                                                                igraph_neimode_t mode,
                                                                                igraph_real_t *res);
 
-__END_DECLS
+IGRAPH_END_C_DECLS
 
 #endif

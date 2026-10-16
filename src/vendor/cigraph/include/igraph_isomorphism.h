@@ -31,7 +31,7 @@
 #include "igraph_types.h"
 #include "igraph_vector_list.h"
 
-__BEGIN_DECLS
+IGRAPH_BEGIN_C_DECLS
 
 /* -------------------------------------------------- */
 /* Directed acyclic graphs                            */
@@ -292,6 +292,6 @@ IGRAPH_EXPORT igraph_error_t igraph_isoclass_create(igraph_t *graph, igraph_int_
 
 IGRAPH_EXPORT igraph_error_t igraph_graph_count(igraph_int_t n, igraph_bool_t directed, igraph_int_t *count);
 
-__END_DECLS
+IGRAPH_END_C_DECLS
 
 #endif

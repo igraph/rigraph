@@ -27,7 +27,7 @@
 #include "igraph_error.h"
 #include "igraph_vector.h"
 
-__BEGIN_DECLS
+IGRAPH_BEGIN_C_DECLS
 
 /* -------------------------------------------------- */
 /* Flexible vector, storing pointers                  */
@@ -100,6 +100,6 @@ IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_vector_ptr_copy(igraph_vec
 #define IGRAPH_VECTOR_PTR_SET_ITEM_DESTRUCTOR(v, func) \
     igraph_vector_ptr_set_item_destructor((v), (igraph_finally_func_t*)(func))
 
-__END_DECLS
+IGRAPH_END_C_DECLS
 
 #endif

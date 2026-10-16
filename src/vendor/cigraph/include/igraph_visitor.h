@@ -29,7 +29,7 @@
 #include "igraph_types.h"
 #include "igraph_datatype.h"
 
-__BEGIN_DECLS
+IGRAPH_BEGIN_C_DECLS
 
 /* -------------------------------------------------- */
 /* Visitor-like functions                             */
@@ -133,6 +133,6 @@ IGRAPH_EXPORT igraph_error_t igraph_dfs(const igraph_t *graph, igraph_int_t root
                              igraph_dfshandler_t *out_callback,
                              void *extra);
 
-__END_DECLS
+IGRAPH_END_C_DECLS
 
 #endif

@@ -34,7 +34,7 @@
 #include "igraph_vector.h"
 #include "igraph_vector_list.h"
 
-__BEGIN_DECLS
+IGRAPH_BEGIN_C_DECLS
 
 /* -------------------------------------------------- */
 /* Constructors, games (=stochastic)                  */
@@ -226,6 +226,6 @@ IGRAPH_EXPORT igraph_error_t igraph_tree_game(igraph_t *graph, igraph_int_t n, i
 IGRAPH_EXPORT igraph_error_t igraph_dot_product_game(igraph_t *graph, const igraph_matrix_t *vecs,
                                           igraph_bool_t directed);
 
-__END_DECLS
+IGRAPH_END_C_DECLS
 
 #endif

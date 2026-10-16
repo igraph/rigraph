@@ -27,7 +27,7 @@
 #include "igraph_error.h"
 #include "igraph_types.h"
 
-__BEGIN_DECLS
+IGRAPH_BEGIN_C_DECLS
 
 /**
  * \section about_progress_handlers About progress handlers
@@ -178,6 +178,6 @@ IGRAPH_EXPORT igraph_error_t igraph_progressf(const char *message, igraph_real_t
         } \
     } while (0)
 
-__END_DECLS
+IGRAPH_END_C_DECLS
 
 #endif

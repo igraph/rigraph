@@ -30,7 +30,7 @@
 #include "igraph_iterators.h"
 #include "igraph_types.h"
 
-__BEGIN_DECLS
+IGRAPH_BEGIN_C_DECLS
 
 /* -------------------------------------------------- */
 /* Interface                                          */
@@ -151,6 +151,6 @@ IGRAPH_DEPRECATED IGRAPH_EXPORT igraph_error_t igraph_delete_vertices_idx(
     igraph_vector_int_t *invidx
 );
 
-__END_DECLS
+IGRAPH_END_C_DECLS
 
 #endif

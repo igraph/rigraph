@@ -29,7 +29,7 @@
 #include "igraph_types.h"
 #include "igraph_datatype.h"
 
-__BEGIN_DECLS
+IGRAPH_BEGIN_C_DECLS
 
 typedef struct igraph_adjlist_t {
     igraph_int_t length;
@@ -219,6 +219,6 @@ IGRAPH_EXPORT IGRAPH_FUNCATTR_PURE igraph_int_t igraph_lazy_inclist_size(const i
                                     : (igraph_i_lazy_inclist_get_real(il,no)))
 IGRAPH_EXPORT igraph_vector_int_t *igraph_i_lazy_inclist_get_real(igraph_lazy_inclist_t *il, igraph_int_t no);
 
-__END_DECLS
+IGRAPH_END_C_DECLS
 
 #endif

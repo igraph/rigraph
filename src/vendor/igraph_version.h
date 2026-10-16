@@ -25,19 +25,19 @@
 
 #include "igraph_decls.h"
 
-__BEGIN_DECLS
+IGRAPH_BEGIN_C_DECLS
 
-#define IGRAPH_VERSION "0.11.0-269-g061e1c386"
+#define IGRAPH_VERSION "0.11.0-270-g01f20494a"
 #define IGRAPH_VERSION_MAJOR 0
 #define IGRAPH_VERSION_MINOR 11
 #define IGRAPH_VERSION_PATCH 0
-#define IGRAPH_VERSION_PRERELEASE "269-g061e1c386"
+#define IGRAPH_VERSION_PRERELEASE "270-g01f20494a"
 
 IGRAPH_EXPORT void igraph_version(const char **version_string,
                                   int *major,
                                   int *minor,
                                   int *subminor);
 
-__END_DECLS
+IGRAPH_END_C_DECLS
 
 #endif

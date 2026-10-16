@@ -26,7 +26,7 @@
 #include "igraph_config.h"
 #include "igraph_decls.h"
 
-__BEGIN_DECLS
+IGRAPH_BEGIN_C_DECLS
 
 /* -------------------------------------------------- */
 /* Constants                                          */
@@ -256,6 +256,6 @@ typedef enum {
     IGRAPH_MST_KRUSKAL
 } igraph_mst_algorithm_t;
 
-__END_DECLS
+IGRAPH_END_C_DECLS
 
 #endif

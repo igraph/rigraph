@@ -24,7 +24,7 @@
 #include "igraph_matrix.h"
 #include "igraph_random.h"
 
-__BEGIN_DECLS
+IGRAPH_BEGIN_C_DECLS
 
 IGRAPH_EXPORT igraph_error_t igraph_rng_sample_sphere_surface(
     igraph_rng_t* rng, igraph_int_t dim, igraph_int_t n, igraph_real_t radius,
@@ -40,6 +40,6 @@ IGRAPH_EXPORT igraph_error_t igraph_rng_sample_dirichlet(
     igraph_rng_t* rng, igraph_int_t n, const igraph_vector_t *alpha, igraph_matrix_t *res
 );
 
-__END_DECLS
+IGRAPH_END_C_DECLS
 
 #endif

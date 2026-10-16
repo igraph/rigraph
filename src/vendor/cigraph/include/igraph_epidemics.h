@@ -29,7 +29,7 @@
 #include "igraph_vector.h"
 #include "igraph_vector_ptr.h"
 
-__BEGIN_DECLS
+IGRAPH_BEGIN_C_DECLS
 
 /**
  * \struct igraph_sir_t
@@ -62,6 +62,6 @@ IGRAPH_EXPORT igraph_error_t igraph_sir(const igraph_t *graph, igraph_real_t bet
                              igraph_real_t gamma, igraph_int_t no_sim,
                              igraph_vector_ptr_t *result);
 
-__END_DECLS
+IGRAPH_END_C_DECLS
 
 #endif

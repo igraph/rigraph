@@ -29,7 +29,7 @@
 #include "igraph_arpack.h"
 #include "igraph_eigen.h"
 
-__BEGIN_DECLS
+IGRAPH_BEGIN_C_DECLS
 
 IGRAPH_EXPORT igraph_error_t igraph_adjacency_spectral_embedding(const igraph_t *graph,
                                                       igraph_int_t no,
@@ -62,6 +62,6 @@ IGRAPH_EXPORT igraph_error_t igraph_laplacian_spectral_embedding(const igraph_t 
 
 IGRAPH_EXPORT igraph_error_t igraph_dim_select(const igraph_vector_t *sv, igraph_int_t *dim);
 
-__END_DECLS
+IGRAPH_END_C_DECLS
 
 #endif

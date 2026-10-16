@@ -29,7 +29,7 @@
 #include "igraph_lapack.h"
 #include "igraph_sparsemat.h"
 
-__BEGIN_DECLS
+IGRAPH_BEGIN_C_DECLS
 
 typedef enum { IGRAPH_EIGEN_AUTO = 0,
                IGRAPH_EIGEN_LAPACK,
@@ -95,6 +95,6 @@ IGRAPH_EXPORT igraph_error_t igraph_eigen_adjacency(const igraph_t *graph,
                                          igraph_vector_complex_t *cmplxvalues,
                                          igraph_matrix_complex_t *cmplxvectors);
 
-__END_DECLS
+IGRAPH_END_C_DECLS
 
 #endif

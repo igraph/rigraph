@@ -22,10 +22,10 @@
 #include "igraph_decls.h"
 #include "igraph_error.h"
 
-__BEGIN_DECLS
+IGRAPH_BEGIN_C_DECLS
 
 IGRAPH_EXPORT igraph_error_t igraph_setup(void);
 
-__END_DECLS
+IGRAPH_END_C_DECLS
 
 #endif

@@ -32,7 +32,7 @@
 
 #include <stdio.h>
 
-__BEGIN_DECLS
+IGRAPH_BEGIN_C_DECLS
 
 /* -------------------------------------------------- */
 /* Read and write foreign formats                     */
@@ -97,6 +97,6 @@ typedef struct igraph_safelocale_s *igraph_safelocale_t;
 IGRAPH_EXPORT igraph_error_t igraph_enter_safelocale(igraph_safelocale_t *loc);
 IGRAPH_EXPORT void  igraph_exit_safelocale(igraph_safelocale_t *loc);
 
-__END_DECLS
+IGRAPH_END_C_DECLS
 
 #endif

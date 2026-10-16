@@ -32,7 +32,7 @@
 #include "igraph_vector.h"
 #include "igraph_matrix.h"
 
-__BEGIN_DECLS
+IGRAPH_BEGIN_C_DECLS
 
 /* -------------------------------------------------- */
 /* Bipartite networks                                 */
@@ -119,6 +119,6 @@ IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_get_incidence(
    igraph_vector_int_t *row_ids, igraph_vector_int_t *col_ids
 );
 
-__END_DECLS
+IGRAPH_END_C_DECLS
 
 #endif

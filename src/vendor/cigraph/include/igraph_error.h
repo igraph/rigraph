@@ -28,7 +28,7 @@
 
 #include <stdarg.h>
 
-__BEGIN_DECLS
+IGRAPH_BEGIN_C_DECLS
 
 /* This file contains the igraph error handling.
  * Most bits are taken literally from the GSL library (with the GSL_
@@ -931,6 +931,6 @@ IGRAPH_EXPORT IGRAPH_FUNCATTR_NORETURN void igraph_fatalf(const char *reason,
         } \
     } while (0)
 
-__END_DECLS
+IGRAPH_END_C_DECLS
 
 #endif

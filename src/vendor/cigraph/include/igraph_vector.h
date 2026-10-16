@@ -29,7 +29,7 @@
 #include "igraph_error.h"
 #include "igraph_types.h"
 
-__BEGIN_DECLS
+IGRAPH_BEGIN_C_DECLS
 
 /* -------------------------------------------------- */
 /* Flexible vector                                    */
@@ -159,6 +159,6 @@ IGRAPH_PRIVATE_EXPORT igraph_error_t igraph_vector_int_order1(const igraph_vecto
 IGRAPH_PRIVATE_EXPORT igraph_error_t igraph_vector_int_rank(const igraph_vector_int_t *v, igraph_vector_int_t *res,
                                      igraph_int_t nodes);
 
-__END_DECLS
+IGRAPH_END_C_DECLS
 
 #endif
