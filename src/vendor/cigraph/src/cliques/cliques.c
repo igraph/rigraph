@@ -283,11 +283,11 @@ igraph_error_t igraph_cliques_callback(const igraph_t *graph,
  *   here to make each vertex have a weight of 1.
  * \param res Pointer to an initialized list of integer vectors. The cliques
  *   will be stored here as vectors of vertex IDs.
+ * \param maximal If true, only maximal cliques will be returned
  * \param min_weight Integer specifying the minimum weight of the cliques to be
  *   returned. If negative or zero, no lower bound will be used.
  * \param max_weight Integer specifying the maximum weight of the cliques to be
  *   returned. If negative or zero, no upper bound will be used.
- * \param maximal If true, only maximal cliques will be returned
  * \return Error code.
  *
  * \sa \ref igraph_cliques(), \ref igraph_maximal_cliques()
@@ -297,7 +297,8 @@ igraph_error_t igraph_cliques_callback(const igraph_t *graph,
  */
 igraph_error_t igraph_weighted_cliques(const igraph_t *graph,
                             const igraph_vector_t *vertex_weights, igraph_vector_int_list_t *res,
-                            igraph_real_t min_weight, igraph_real_t max_weight, igraph_bool_t maximal) {
+                            igraph_bool_t maximal,
+                            igraph_real_t min_weight, igraph_real_t max_weight) {
     if (vertex_weights) {
         return igraph_i_weighted_cliques(graph, vertex_weights, res, min_weight, max_weight, maximal);
     } else if (maximal) {
