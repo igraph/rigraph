@@ -1757,8 +1757,6 @@ SEXP Rx_igraph_ac_random_numeric(SEXP attr,
   PROTECT(attr2=AS_NUMERIC(attr));
   PROTECT(res=NEW_NUMERIC(len));
 
-  RNG_BEGIN();
-
   for (igraph_integer_t i=0; i<len; i++) {
     igraph_vector_int_t *v=igraph_vector_int_list_get_ptr(merges, i);
     igraph_integer_t n=igraph_vector_int_size(v);
@@ -1772,7 +1770,7 @@ SEXP Rx_igraph_ac_random_numeric(SEXP attr,
     }
   }
 
-  RNG_END();
+  igraph_rng_R_end();
 
   UNPROTECT(2);
   return res;
@@ -2727,6 +2725,8 @@ SEXP Rx_igraph_set_verbose(SEXP verbose) {
 /* TOP-LEVEL: called from R via .Call; must use IGRAPH_R_CHECK */
 SEXP R_igraph_finalizer(void) {
   IGRAPH_FINALLY_FREE();
+  /* Saves R's RNG state if a draw outside IGRAPH_R_CHECK() left it loaded. */
+  igraph_rng_R_end();
   int px = 0;
   SEXP rho = Rx_igraph_namespace;
   if (rho == NULL) {
@@ -7127,7 +7127,14 @@ SEXP Rx_igraph_add_myid_to_env(SEXP graph) {
   uuid_t my_id;
   char my_id_chr[40];
 
+  /* A graph's id draws from R's RNG without saving its state, as it did when
+   * igraph bracketed its own random functions: creating a graph leaves
+   * .Random.seed alone, unless it happens during a call into igraph. */
+  int rng_loaded = igraph_rng_R_loaded();
   uuid_generate(my_id);
+  if (!rng_loaded) {
+    igraph_rng_R_drop();
+  }
   uuid_unparse_lower(my_id, my_id_chr);
   SEXP l1 = PROTECT(Rf_install("myid"));
   SEXP l2 = PROTECT(Rf_mkString(my_id_chr));
@@ -7164,7 +7171,14 @@ SEXP Rx_igraph_add_env(SEXP graph) {
 
   SET_VECTOR_ELT(result, igraph_t_idx_env, env);
 
+  /* A graph's id draws from R's RNG without saving its state, as it did when
+   * igraph bracketed its own random functions: creating a graph leaves
+   * .Random.seed alone, unless it happens during a call into igraph. */
+  int rng_loaded = igraph_rng_R_loaded();
   uuid_generate(my_id);
+  if (!rng_loaded) {
+    igraph_rng_R_drop();
+  }
   uuid_unparse_lower(my_id, my_id_chr);
 
   SEXP l1 = PROTECT(Rf_install("myid")); px++;
