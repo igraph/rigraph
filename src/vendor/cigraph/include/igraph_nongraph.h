@@ -108,10 +108,6 @@ IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_zeroin(
     void *info, igraph_real_t *Tol, int *Maxit, igraph_real_t *res
 );
 
-IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_convex_hull(
-    const igraph_matrix_t *data, igraph_vector_int_t *resverts,
-    igraph_matrix_t *rescoords);
-
 __END_DECLS
 
 #endif
