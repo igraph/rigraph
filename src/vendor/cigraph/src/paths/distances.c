@@ -536,9 +536,7 @@ igraph_error_t igraph_pseudo_diameter(const igraph_t *graph,
     }
 
     if (vid_start < 0) {
-        RNG_BEGIN();
         vid_start = RNG_INTEGER(0, no_of_nodes - 1);
-        RNG_END();
     }
 
     if (!igraph_is_directed(graph) || !directed) {
@@ -791,9 +789,7 @@ igraph_error_t igraph_pseudo_diameter_dijkstra(const igraph_t *graph,
     }
 
     if (vid_start < 0) {
-        RNG_BEGIN();
         vid_start = RNG_INTEGER(0, no_of_nodes - 1);
-        RNG_END();
     }
 
     if (!igraph_is_directed(graph) || !directed) {

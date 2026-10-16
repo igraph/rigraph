@@ -119,7 +119,6 @@ igraph_error_t igraph_layout_drl_3d(const igraph_t *graph, igraph_matrix_t *res,
     }
 
     IGRAPH_HANDLE_EXCEPTIONS(
-        RNG_BEGIN();
 
         drl3d::graph neighbors(graph, options, weights);
         neighbors.init_parms(options);
@@ -129,7 +128,6 @@ igraph_error_t igraph_layout_drl_3d(const igraph_t *graph, igraph_matrix_t *res,
         }
         IGRAPH_CHECK(neighbors.draw_graph(res));
 
-        RNG_END();
     );
 
     return IGRAPH_SUCCESS;

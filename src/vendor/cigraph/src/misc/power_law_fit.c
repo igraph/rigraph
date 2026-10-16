@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
@@ -198,7 +197,6 @@ igraph_error_t igraph_power_law_fit(
         }
     }
 
-    RNG_BEGIN();
 
     plfit_stored_error_handler = plfit_set_error_handler(igraph_i_plfit_error_handler_store);
     if (discrete) {
@@ -220,7 +218,6 @@ igraph_error_t igraph_power_law_fit(
     }
     plfit_set_error_handler(plfit_stored_error_handler);
 
-    RNG_END();
 
     IGRAPH_CHECK(igraph_i_handle_plfit_error(retval));
 
@@ -294,7 +291,6 @@ igraph_error_t igraph_plfit_result_calculate_p_value(
 
     finite_size_correction = igraph_i_plfit_should_use_finite_size_correction(model->data);
 
-    RNG_BEGIN();
 
     plfit_stored_error_handler = plfit_set_error_handler(igraph_i_plfit_error_handler_store);
     if (model->continuous) {
@@ -316,7 +312,6 @@ igraph_error_t igraph_plfit_result_calculate_p_value(
     }
     plfit_set_error_handler(plfit_stored_error_handler);
 
-    RNG_END();
 
     IGRAPH_CHECK(igraph_i_handle_plfit_error(retval));
 

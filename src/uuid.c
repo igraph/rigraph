@@ -1,4 +1,5 @@
 #include "vendor/uuid/uuid.h"
+#include "rrandom.h"
 
 #include <Rinternals.h>
 
@@ -10,6 +11,7 @@ void PutRNGstate(void);
 SEXP UUID_gen(SEXP sTime) {
 
     RNG_BEGIN();
+    int rng_loaded = igraph_rng_R_loaded();
 
     uuid_t u;
     char c[40];
@@ -23,6 +25,10 @@ SEXP UUID_gen(SEXP sTime) {
     uuid_unparse_lower(u, c);
 
     RNG_END();
+    /* The state is saved above, so the R RNG need not save it again. */
+    if (!rng_loaded) {
+        igraph_rng_R_drop();
+    }
 
     return mkString(c);
 }

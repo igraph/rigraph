@@ -597,7 +597,6 @@ static igraph_error_t igraph_i_personalized_pagerank_arpack(const igraph_t *grap
     IGRAPH_VECTOR_INIT_FINALLY(&outdegree, options->n);
     IGRAPH_VECTOR_INIT_FINALLY(&tmp, options->n);
 
-    RNG_BEGIN();
 
     if (reset) {
         /* Normalize reset vector so the sum is 1 */
@@ -667,7 +666,6 @@ static igraph_error_t igraph_i_personalized_pagerank_arpack(const igraph_t *grap
         IGRAPH_FINALLY_CLEAN(1);
     }
 
-    RNG_END();
 
     if (reset) {
         igraph_vector_destroy(&normalized_reset);

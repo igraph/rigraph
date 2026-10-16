@@ -126,7 +126,6 @@ igraph_error_t igraph_recent_degree_game(igraph_t *graph, igraph_int_t nodes,
                                     1.5 * time_window * no_of_edges / no_of_nodes + 10));
     IGRAPH_FINALLY(igraph_dqueue_int_destroy, &history);
 
-    RNG_BEGIN();
 
     /* first node */
     IGRAPH_CHECK(igraph_psumtree_update(&sumtree, 0, zero_appeal));
@@ -176,7 +175,6 @@ igraph_error_t igraph_recent_degree_game(igraph_t *graph, igraph_int_t nodes,
         }
     }
 
-    RNG_END();
 
     igraph_dqueue_int_destroy(&history);
     igraph_psumtree_destroy(&sumtree);
@@ -301,7 +299,6 @@ igraph_error_t igraph_recent_degree_aging_game(igraph_t *graph,
                                         1.5 * time_window * no_of_edges / no_of_nodes + 10));
     IGRAPH_FINALLY(igraph_dqueue_int_destroy, &history);
 
-    RNG_BEGIN();
 
     /* first node */
     IGRAPH_CHECK(igraph_psumtree_update(&sumtree, 0, zero_appeal));
@@ -374,7 +371,6 @@ igraph_error_t igraph_recent_degree_aging_game(igraph_t *graph,
         }
     }
 
-    RNG_END();
 
     igraph_dqueue_int_destroy(&history);
     igraph_vector_destroy(&degree);

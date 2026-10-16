@@ -1,7 +1,6 @@
-/* -*- mode: C -*-  */
 /* vim:set ts=4 sw=4 sts=4 et: */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2003-2021 The igraph development team
 
    This program is free software; you can redistribute it and/or modify
@@ -114,7 +113,6 @@ igraph_error_t igraph_simple_interconnected_islands_game(
     IGRAPH_VECTOR_INIT_FINALLY(&s, 0);
     IGRAPH_CHECK(igraph_vector_reserve(&s, 1.1 * avg_edges_per_island));
 
-    RNG_BEGIN();
 
     /* first create all the islands */
     for (is = 0; is < islands_n; is++) { /* for each island */
@@ -145,7 +143,7 @@ igraph_error_t igraph_simple_interconnected_islands_game(
         island_ecount = islands_size * islands_size;
         number_of_inter_island_edges = n_inter;
         for (i = is + 1; i < islands_n; i++) { /* for each other island (not the previous ones) */
-            IGRAPH_CHECK(igraph_random_sample_real(&s, 0, island_ecount - 1, n_inter));
+            IGRAPH_CHECK(igraph_i_random_sample_real(&s, 0, island_ecount - 1, n_inter));
 
             start_index_of_other_island = i * islands_size;
             for (j = 0; j < n_inter; j++) { /* for each link between islands */
@@ -163,7 +161,6 @@ igraph_error_t igraph_simple_interconnected_islands_game(
     igraph_vector_destroy(&s);
     IGRAPH_FINALLY_CLEAN(1);
 
-    RNG_END();
 
     /* actually fill the graph object */
     IGRAPH_CHECK(igraph_create(graph, &edges, number_of_nodes, 0));

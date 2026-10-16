@@ -1,7 +1,6 @@
-/* -*- mode: C -*-  */
 /* vim:set ts=4 sw=4 sts=4 et: */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2003-2021 The igraph development team
 
    This program is free software; you can redistribute it and/or modify
@@ -161,7 +160,6 @@ igraph_error_t igraph_preference_game(igraph_t *graph, igraph_int_t nodes,
 
     IGRAPH_VECTOR_INT_LIST_INIT_FINALLY(&vids_by_type, types);
 
-    RNG_BEGIN();
 
     if (!fixed_sizes) {
 
@@ -327,7 +325,6 @@ igraph_error_t igraph_preference_game(igraph_t *graph, igraph_int_t nodes,
         }
     }
 
-    RNG_END();
 
     igraph_vector_destroy(&s);
     igraph_vector_int_list_destroy(&vids_by_type);
@@ -490,7 +487,6 @@ igraph_error_t igraph_asymmetric_preference_game(igraph_t *graph, igraph_int_t n
     }
     maxcum = igraph_vector_tail(&cumdist);
 
-    RNG_BEGIN();
 
     for (i = 0; i < nodes; i++) {
         igraph_int_t in_type, out_type;
@@ -593,7 +589,6 @@ igraph_error_t igraph_asymmetric_preference_game(igraph_t *graph, igraph_int_t n
         }
     }
 
-    RNG_END();
 
     igraph_vector_destroy(&s);
     igraph_vector_int_destroy(&intersect);

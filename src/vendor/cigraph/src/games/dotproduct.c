@@ -68,7 +68,6 @@ igraph_error_t igraph_dot_product_game(igraph_t *graph, const igraph_matrix_t *v
 
     IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, 0);
 
-    RNG_BEGIN();
 
     for (i = 0; i < ncol; i++) {
         igraph_int_t from = directed ? 0 : i + 1;
@@ -97,7 +96,6 @@ igraph_error_t igraph_dot_product_game(igraph_t *graph, const igraph_matrix_t *v
         }
     }
 
-    RNG_END();
 
     IGRAPH_CHECK(igraph_create(graph, &edges, ncol, directed));
 
@@ -149,7 +147,6 @@ igraph_error_t igraph_sample_sphere_surface(igraph_int_t dim, igraph_int_t n,
 
     IGRAPH_CHECK(igraph_matrix_resize(res, dim, n));
 
-    RNG_BEGIN();
 
     for (i = 0; i < n; i++) {
         igraph_real_t *col = &MATRIX(*res, 0, i);
@@ -169,7 +166,6 @@ igraph_error_t igraph_sample_sphere_surface(igraph_int_t dim, igraph_int_t n,
         }
     }
 
-    RNG_END();
 
     return IGRAPH_SUCCESS;
 }
@@ -209,7 +205,6 @@ igraph_error_t igraph_sample_sphere_volume(igraph_int_t dim, igraph_int_t n,
 
     IGRAPH_CHECK(igraph_sample_sphere_surface(dim, n, radius, positive, res));
 
-    RNG_BEGIN();
 
     for (i = 0; i < n; i++) {
         igraph_real_t *col = &MATRIX(*res, 0, i);
@@ -219,7 +214,6 @@ igraph_error_t igraph_sample_sphere_volume(igraph_int_t dim, igraph_int_t n,
         }
     }
 
-    RNG_END();
 
     return IGRAPH_SUCCESS;
 }
@@ -271,7 +265,6 @@ igraph_error_t igraph_sample_dirichlet(igraph_int_t n, const igraph_vector_t *al
 
     IGRAPH_CHECK(igraph_matrix_resize(res, len, n));
 
-    RNG_BEGIN();
 
     for (i = 0; i < n; i++) {
         for (j = 0, sum = 0.0; j < len; j++) {
@@ -284,7 +277,6 @@ igraph_error_t igraph_sample_dirichlet(igraph_int_t n, const igraph_vector_t *al
         }
     }
 
-    RNG_END();
 
     return IGRAPH_SUCCESS;
 }

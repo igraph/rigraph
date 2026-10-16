@@ -66,7 +66,6 @@ static igraph_error_t gnp_large(
     IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, 0);
     IGRAPH_CHECK(igraph_vector_int_reserve(&edges, 2*ecount_estimate));
 
-    RNG_BEGIN();
     for (igraph_int_t i=0; i < n; i++) {
         igraph_int_t j = directed ? 0 : i;
 
@@ -93,7 +92,6 @@ static igraph_error_t gnp_large(
             IGRAPH_ALLOW_INTERRUPTION_LIMITED(iter, 1 << 14);
         }
     }
-    RNG_END();
 
     IGRAPH_CHECK(igraph_create(graph, &edges, n, directed));
     igraph_vector_int_destroy(&edges);
@@ -193,7 +191,6 @@ igraph_error_t igraph_erdos_renyi_game_gnp(
         IGRAPH_VECTOR_INIT_FINALLY(&s, 0);
         IGRAPH_CHECK(igraph_vector_reserve(&s, ecount_estimate));
 
-        RNG_BEGIN();
 
         last = RNG_GEOM(p);
         while (last < maxedges) {
@@ -203,7 +200,6 @@ igraph_error_t igraph_erdos_renyi_game_gnp(
             IGRAPH_ALLOW_INTERRUPTION_LIMITED(iter, 1 << 14);
         }
 
-        RNG_END();
 
         ecount = igraph_vector_size(&s);
         if (ecount > IGRAPH_ECOUNT_MAX) {
@@ -341,7 +337,7 @@ igraph_error_t igraph_erdos_renyi_game_gnm(
             igraph_int_t slen;
 
             IGRAPH_VECTOR_INIT_FINALLY(&s, 0);
-            IGRAPH_CHECK(igraph_random_sample_real(&s, 0, maxedges - 1, no_of_edges));
+            IGRAPH_CHECK(igraph_i_random_sample_real(&s, 0, maxedges - 1, no_of_edges));
 
             IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, 0);
             IGRAPH_CHECK(igraph_vector_int_reserve(&edges, igraph_vector_size(&s) * 2));

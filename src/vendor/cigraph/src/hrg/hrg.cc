@@ -413,7 +413,6 @@ igraph_error_t igraph_hrg_fit(const igraph_t *graph,
 
     const igraph_int_t no_of_nodes = igraph_vcount(graph);
 
-    RNG_BEGIN();
 
     dendro d;
 
@@ -439,7 +438,6 @@ igraph_error_t igraph_hrg_fit(const igraph_t *graph,
         MCMCEquilibrium_Find(d, hrg);
     }
 
-    RNG_END();
 
     return IGRAPH_SUCCESS;
 
@@ -465,14 +463,12 @@ igraph_error_t igraph_hrg_sample(const igraph_hrg_t *hrg, igraph_t *sample) {
 
     // TODO: error handling
 
-    RNG_BEGIN();
 
     d.clearDendrograph();
     d.importDendrogramStructure(hrg);
     d.makeRandomGraph();
     IGRAPH_CHECK(d.recordGraphStructure(sample));
 
-    RNG_END();
 
     return IGRAPH_SUCCESS;
     IGRAPH_HANDLE_EXCEPTIONS_END
@@ -512,7 +508,6 @@ igraph_error_t igraph_hrg_sample_many(
         return IGRAPH_SUCCESS;
     }
 
-    RNG_BEGIN();
 
     d.clearDendrograph();
     d.importDendrogramStructure(hrg);
@@ -524,7 +519,6 @@ igraph_error_t igraph_hrg_sample_many(
         IGRAPH_FINALLY_CLEAN(1);
     }
 
-    RNG_END();
 
     return IGRAPH_SUCCESS;
     IGRAPH_HANDLE_EXCEPTIONS_END
@@ -720,7 +714,6 @@ igraph_error_t igraph_hrg_consensus(const igraph_t *graph,
         IGRAPH_ERROR("`hrg' must be given if `start' is true.", IGRAPH_EINVAL);
     }
 
-    RNG_BEGIN();
 
     dendro d;
 
@@ -740,7 +733,6 @@ igraph_error_t igraph_hrg_consensus(const igraph_t *graph,
 
     d.recordConsensusTree(parents, weights);
 
-    RNG_END();
 
     return IGRAPH_SUCCESS;
 
@@ -875,7 +867,6 @@ igraph_error_t igraph_hrg_predict(const igraph_t *graph,
         IGRAPH_ERROR("`hrg' must be given when `start' is true", IGRAPH_EINVAL);
     }
 
-    RNG_BEGIN();
 
     dendro d;
 
@@ -903,7 +894,6 @@ igraph_error_t igraph_hrg_predict(const igraph_t *graph,
     rankCandidatesByProbability(*sg, d, br_list.get(), mk);
     IGRAPH_CHECK(recordPredictions(br_list.get(), edges, prob, mk));
 
-    RNG_END();
 
     return IGRAPH_SUCCESS;
 

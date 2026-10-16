@@ -1,7 +1,6 @@
-/* -*- mode: C -*-  */
 /* vim:set ts=4 sw=4 sts=4 et: */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2003-2021 The igraph development team
 
    This program is free software; you can redistribute it and/or modify
@@ -45,11 +44,9 @@ static igraph_error_t igraph_i_tree_game_prufer(igraph_t *graph, igraph_int_t n,
 
     IGRAPH_VECTOR_INT_INIT_FINALLY(&prufer, n - 2);
 
-    RNG_BEGIN();
     for (igraph_int_t i = 0; i < n - 2; ++i) {
         VECTOR(prufer)[i] = RNG_INTEGER(0, n - 1);
     }
-    RNG_END();
 
     IGRAPH_CHECK(igraph_from_prufer(graph, &prufer));
 
@@ -91,7 +88,6 @@ static igraph_error_t igraph_i_tree_game_loop_erased_random_walk(igraph_t *graph
     IGRAPH_CHECK(igraph_vector_int_init_range(&vertices, 0, n));
     IGRAPH_FINALLY(igraph_vector_int_destroy, &vertices);
 
-    RNG_BEGIN();
 
     /* A simple implementation could be as below. This is for illustration only.
      * The actually implemented algorithm avoids unnecessary walking on the already visited
@@ -134,7 +130,6 @@ static igraph_error_t igraph_i_tree_game_loop_erased_random_walk(igraph_t *graph
         VECTOR(edges)[2 * k - 1] = i;
     }
 
-    RNG_END();
 
     IGRAPH_CHECK(igraph_create(graph, &edges, n, directed));
 

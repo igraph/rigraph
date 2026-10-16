@@ -780,9 +780,7 @@ igraph_error_t igraph_moran_process(const igraph_t *graph,
     IGRAPH_FINALLY(igraph_vs_destroy, &vs);
     IGRAPH_CHECK(igraph_vit_create(graph, vs, &vA));
     IGRAPH_FINALLY(igraph_vit_destroy, &vA);
-    RNG_BEGIN();
     r = RNG_UNIF01();
-    RNG_END();
     i = 0;
     IGRAPH_VECTOR_INT_INIT_FINALLY(&deg, 1);
     while (!IGRAPH_VIT_END(vA)) {
@@ -827,9 +825,7 @@ igraph_error_t igraph_moran_process(const igraph_t *graph,
     IGRAPH_FINALLY(igraph_es_destroy, &es);
     IGRAPH_CHECK(igraph_eit_create(graph, es, &eA));
     IGRAPH_FINALLY(igraph_eit_destroy, &eA);
-    RNG_BEGIN();
     r = RNG_UNIF01();
-    RNG_END();
     i = 0;
     while (!IGRAPH_EIT_END(eA)) {
         e = IGRAPH_EIT_GET(eA);
@@ -1015,9 +1011,7 @@ igraph_error_t igraph_roulette_wheel_imitation(const igraph_t *graph,
     /* vertices in A is the same as the order in which we do so in the */
     /* invoked function igraph_vcumulative_proportionate_values(). */
     /* Otherwise we would incorrectly associate each V[i] with a vertex in A. */
-    RNG_BEGIN();
     r = RNG_UNIF01();
-    RNG_END();
     i = 0;
     while (!IGRAPH_VIT_END(A)) {
         if (r <= VECTOR(V)[i]) {
@@ -1166,9 +1160,7 @@ igraph_error_t igraph_stochastic_imitation(const igraph_t *graph,
     /* the chosen vertex u is indeed v itself. */
     if (algo == IGRAPH_IMITATE_BLIND) {
         IGRAPH_CHECK(igraph_vector_int_push_back(&adj, vid));
-        RNG_BEGIN();
         i = RNG_INTEGER(0, igraph_vector_int_size(&adj) - 1);
-        RNG_END();
         u = VECTOR(adj)[i];
         VECTOR(*strategies)[vid] = VECTOR(*strategies)[u];
     }
@@ -1178,9 +1170,7 @@ igraph_error_t igraph_stochastic_imitation(const igraph_t *graph,
     /* v. Then v imitates the strategy of u if f(u) > f(v). Otherwise v */
     /* retains its current strategy. */
     else if (algo == IGRAPH_IMITATE_AUGMENTED) {
-        RNG_BEGIN();
         i = RNG_INTEGER(0, igraph_vector_int_size(&adj) - 1);
-        RNG_END();
         u = VECTOR(adj)[i];
         if (VECTOR(*quantities)[u] > VECTOR(*quantities)[vid]) {
             VECTOR(*strategies)[vid] = VECTOR(*strategies)[u];
@@ -1192,9 +1182,7 @@ igraph_error_t igraph_stochastic_imitation(const igraph_t *graph,
     /* itself. Then v imitates the strategy of u provided that f(u) < f(v). */
     /* Otherwise v retains its current strategy. */
     else if (algo == IGRAPH_IMITATE_CONTRACTED) {
-        RNG_BEGIN();
         i = RNG_INTEGER(0, igraph_vector_int_size(&adj) - 1);
-        RNG_END();
         u = VECTOR(adj)[i];
         if (VECTOR(*quantities)[u] < VECTOR(*quantities)[vid]) {
             VECTOR(*strategies)[vid] = VECTOR(*strategies)[u];

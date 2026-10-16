@@ -59,7 +59,6 @@ static igraph_error_t igraph_i_random_walk_adjlist(const igraph_t *graph,
 
     IGRAPH_CHECK(igraph_vector_int_resize(vertices, steps + 1));
 
-    RNG_BEGIN();
 
     VECTOR(*vertices)[0] = start;
     for (i = 1; i <= steps; i++) {
@@ -83,7 +82,6 @@ static igraph_error_t igraph_i_random_walk_adjlist(const igraph_t *graph,
         IGRAPH_ALLOW_INTERRUPTION();
     }
 
-    RNG_END();
 
     igraph_lazy_adjlist_destroy(&adj);
     IGRAPH_FINALLY_CLEAN(1);
@@ -155,7 +153,6 @@ static igraph_error_t igraph_i_random_walk_inclist(
         VECTOR(cdfs)[i] = NULL;
     }
 
-    RNG_BEGIN();
 
     if (vertices) {
         VECTOR(*vertices)[0] = start;
@@ -237,7 +234,6 @@ static igraph_error_t igraph_i_random_walk_inclist(
         IGRAPH_ALLOW_INTERRUPTION();
     }
 
-    RNG_END();
 
     igraph_vector_ptr_destroy_all(&cdfs);
     igraph_vector_destroy(&weight_temp);

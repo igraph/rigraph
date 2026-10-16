@@ -238,7 +238,6 @@ igraph_error_t igraph_rewire_edges(igraph_t *graph, igraph_real_t prob,
 
     IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, endpoints);
 
-    RNG_BEGIN();
 
     if (prob != 0 && no_of_edges > 0) {
         if (multiple) {
@@ -266,7 +265,6 @@ igraph_error_t igraph_rewire_edges(igraph_t *graph, igraph_real_t prob,
         }
     }
 
-    RNG_END();
 
     IGRAPH_CHECK(igraph_create(&newgraph, &edges, no_of_nodes,
                                igraph_is_directed(graph)));
@@ -359,7 +357,6 @@ igraph_error_t igraph_rewire_directed_edges(igraph_t *graph, igraph_real_t prob,
 
         IGRAPH_CHECK(igraph_get_edgelist(graph, &edges, 0));
 
-        RNG_BEGIN();
 
         to_rewire = RNG_GEOM(prob);
         while (to_rewire < no_of_edges) {
@@ -373,7 +370,6 @@ igraph_error_t igraph_rewire_directed_edges(igraph_t *graph, igraph_real_t prob,
             to_rewire += RNG_GEOM(prob) + 1;
         }
 
-        RNG_END();
 
         IGRAPH_CHECK(igraph_create(&newgraph, &edges, no_of_nodes,
                                    igraph_is_directed(graph)));

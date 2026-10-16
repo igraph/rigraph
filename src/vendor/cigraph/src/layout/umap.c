@@ -1138,7 +1138,6 @@ static igraph_error_t igraph_i_layout_umap(
         }
     }
 
-    RNG_BEGIN();
 
     /* Fit a and b parameter to find smooth approximation to
      * probability distribution in embedding space */
@@ -1154,7 +1153,6 @@ static igraph_error_t igraph_i_layout_umap(
                 epochs,
                 negative_sampling_rate));
 
-    RNG_END();
 
     if (!distances_are_weights) {
         igraph_vector_destroy(&weights);

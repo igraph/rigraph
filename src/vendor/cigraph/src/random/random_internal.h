@@ -1,6 +1,5 @@
-/* -*- mode: C -*-  */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2021 The igraph development team
 
    This program is free software; you can redistribute it and/or modify
@@ -29,9 +28,11 @@
 
 __BEGIN_DECLS
 
-igraph_error_t igraph_random_sample_real(
+igraph_error_t igraph_i_random_sample_real(
         igraph_vector_t *res, igraph_real_t l, igraph_real_t h,
         igraph_int_t length);
+
+igraph_uint_t igraph_i_get_random_seed(void);
 
 __END_DECLS
 

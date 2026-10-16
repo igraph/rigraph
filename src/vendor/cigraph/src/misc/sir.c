@@ -172,7 +172,6 @@ igraph_error_t igraph_sir(const igraph_t *graph, igraph_real_t beta,
         VECTOR(*result)[i] = sir;
     }
 
-    RNG_BEGIN();
 
     for (j = 0; j < no_sim; j++) {
 
@@ -265,7 +264,6 @@ igraph_error_t igraph_sir(const igraph_t *graph, igraph_real_t beta,
 
     } /* j < no_sim */
 
-    RNG_END();
 
     igraph_psumtree_destroy(&tree);
     igraph_adjlist_destroy(&adjlist);

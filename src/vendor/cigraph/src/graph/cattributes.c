@@ -995,7 +995,6 @@ static igraph_error_t igraph_i_cattributes_cn_random(const igraph_attribute_reco
     IGRAPH_FINALLY(igraph_free, newv);
     IGRAPH_VECTOR_INIT_FINALLY(newv, newlen);
 
-    RNG_BEGIN();
 
     for (i = 0; i < newlen; i++) {
         igraph_vector_int_t *idx = igraph_vector_int_list_get_ptr(merges, i);;
@@ -1010,7 +1009,6 @@ static igraph_error_t igraph_i_cattributes_cn_random(const igraph_attribute_reco
         }
     }
 
-    RNG_END();
 
     IGRAPH_FINALLY_CLEAN(2);
     newrec->value = newv;
@@ -1167,7 +1165,6 @@ static igraph_error_t igraph_i_cattributes_cb_random(const igraph_attribute_reco
     IGRAPH_FINALLY(igraph_free, newv);
     IGRAPH_VECTOR_BOOL_INIT_FINALLY(newv, newlen);
 
-    RNG_BEGIN();
 
     for (i = 0; i < newlen; i++) {
         igraph_vector_int_t *idx = igraph_vector_int_list_get_ptr(merges, i);;
@@ -1182,7 +1179,6 @@ static igraph_error_t igraph_i_cattributes_cb_random(const igraph_attribute_reco
         }
     }
 
-    RNG_END();
 
     IGRAPH_FINALLY_CLEAN(2);
     newrec->value = newv;
@@ -1335,7 +1331,6 @@ static igraph_error_t igraph_i_cattributes_cb_majority(const igraph_attribute_re
     IGRAPH_FINALLY(igraph_free, newv);
     IGRAPH_VECTOR_BOOL_INIT_FINALLY(newv, newlen);
 
-    RNG_BEGIN();
 
     for (i = 0; i < newlen; i++) {
         igraph_vector_int_t *idx = igraph_vector_int_list_get_ptr(merges, i);;
@@ -1361,7 +1356,6 @@ static igraph_error_t igraph_i_cattributes_cb_majority(const igraph_attribute_re
         }
     }
 
-    RNG_END();
 
     IGRAPH_FINALLY_CLEAN(2);
     newrec->value = newv;
@@ -1422,7 +1416,6 @@ static igraph_error_t igraph_i_cattributes_sn_random(const igraph_attribute_reco
     IGRAPH_FINALLY(igraph_free, newv);
     IGRAPH_STRVECTOR_INIT_FINALLY(newv, newlen);
 
-    RNG_BEGIN();
 
     for (i = 0; i < newlen; i++) {
         igraph_vector_int_t *idx = igraph_vector_int_list_get_ptr(merges, i);;
@@ -1440,7 +1433,6 @@ static igraph_error_t igraph_i_cattributes_sn_random(const igraph_attribute_reco
         }
     }
 
-    RNG_END();
 
     IGRAPH_FINALLY_CLEAN(2);
     newrec->value = newv;

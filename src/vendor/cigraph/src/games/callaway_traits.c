@@ -1,7 +1,6 @@
-/* -*- mode: C -*-  */
 /* vim:set ts=4 sw=4 sts=4 et: */
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2003-2021 The igraph development team
 
    This program is free software; you can redistribute it and/or modify
@@ -163,7 +162,6 @@ igraph_error_t igraph_callaway_traits_game(igraph_t *graph, igraph_int_t nodes,
         IGRAPH_VECTOR_INT_INIT_FINALLY(nodetypes, nodes);
     }
 
-    RNG_BEGIN();
 
     for (i = 0; i < nodes; i++) {
         igraph_real_t uni = RNG_UNIF(0, maxcum);
@@ -186,7 +184,6 @@ igraph_error_t igraph_callaway_traits_game(igraph_t *graph, igraph_int_t nodes,
         }
     }
 
-    RNG_END();
 
     if (! node_type_vec) {
         igraph_vector_int_destroy(nodetypes);

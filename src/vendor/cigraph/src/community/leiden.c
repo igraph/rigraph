@@ -351,7 +351,6 @@ static igraph_error_t igraph_i_community_leiden_mergenodes(
     /* Initialize cumulative transformed difference */
     IGRAPH_VECTOR_INIT_FINALLY(&cum_trans_diff, n);
 
-    RNG_BEGIN();
 
     for (igraph_int_t i = 0; i < n; i++) {
         igraph_int_t v = VECTOR(node_order)[i];
@@ -449,7 +448,6 @@ static igraph_error_t igraph_i_community_leiden_mergenodes(
         } /* end if singleton and may be merged */
     }
 
-    RNG_END();
 
     IGRAPH_CHECK(igraph_i_community_leiden_clean_refined_membership(node_subset, refined_membership, nb_refined_clusters));
 

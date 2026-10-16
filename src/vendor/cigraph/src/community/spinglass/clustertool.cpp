@@ -304,7 +304,6 @@ static igraph_error_t igraph_i_community_spinglass_orig(
     PottsModel pm(&net, spins, update_rule);
 
     /* initialize the random number generator */
-    RNG_BEGIN();
 
     if ((stoptemp == 0.0) && (starttemp == 0.0)) {
         zeroT = true;
@@ -355,7 +354,6 @@ static igraph_error_t igraph_i_community_spinglass_orig(
 
     pm.WriteClusters(modularity, temperature, csize, membership, kT, gamma);
 
-    RNG_END();
 
     return IGRAPH_SUCCESS;
 }
@@ -473,7 +471,6 @@ igraph_error_t igraph_community_spinglass_single(const igraph_t *graph,
         PottsModel pm(&net, spins, update_rule);
 
         /* initialize the random number generator */
-        RNG_BEGIN();
 
         /* to be expected, if we want to find the community around a particular node*/
         /* the initial conf is needed, because otherwise,
@@ -483,7 +480,6 @@ igraph_error_t igraph_community_spinglass_single(const igraph_t *graph,
         pm.FindCommunityFromStart(gamma, startnode, community,
                                    cohesion, adhesion, inner_links, outer_links);
 
-        RNG_END();
     );
 
     return IGRAPH_SUCCESS;
@@ -603,7 +599,6 @@ static igraph_error_t igraph_i_community_spinglass_negative(
     PottsModelN pm(&net, spins, directed);
 
     /* initialize the random number generator */
-    RNG_BEGIN();
 
     if ((stoptemp == 0.0) && (starttemp == 0.0)) {
         zeroT = true;
@@ -641,7 +636,6 @@ static igraph_error_t igraph_i_community_spinglass_negative(
     igraph_matrix_destroy(&adhesion);
     IGRAPH_FINALLY_CLEAN(2);
 
-    RNG_END();
 
     return IGRAPH_SUCCESS;
 }

@@ -56,7 +56,6 @@ igraph_error_t igraph_i_rewire(igraph_t *graph, igraph_int_t n, igraph_rewiring_
         return IGRAPH_SUCCESS;
     }
 
-    RNG_BEGIN();
 
     IGRAPH_VECTOR_INT_INIT_FINALLY(&eids, 2);
 
@@ -188,7 +187,6 @@ igraph_error_t igraph_i_rewire(igraph_t *graph, igraph_int_t n, igraph_rewiring_
             }
             break;
         default:
-            RNG_END();
             IGRAPH_ERROR("Invalid rewiring mode.", IGRAPH_EINVAL);
         }
         num_swaps++;
@@ -212,7 +210,6 @@ igraph_error_t igraph_i_rewire(igraph_t *graph, igraph_int_t n, igraph_rewiring_
     igraph_vector_int_destroy(&eids);
     IGRAPH_FINALLY_CLEAN(use_adjlist ? 3 : 2);
 
-    RNG_END();
 
     return IGRAPH_SUCCESS;
 }

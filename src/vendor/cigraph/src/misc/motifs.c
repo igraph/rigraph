@@ -328,7 +328,6 @@ igraph_error_t igraph_motifs_randesu_callback(const igraph_t *graph, igraph_int_
     IGRAPH_CHECK(igraph_stack_int_init(&stack, 0));
     IGRAPH_FINALLY(igraph_stack_int_destroy, &stack);
 
-    RNG_BEGIN();
 
     for (father = 0; father < no_of_nodes; father++) {
         igraph_int_t level;
@@ -486,7 +485,6 @@ igraph_error_t igraph_motifs_randesu_callback(const igraph_t *graph, igraph_int_
 
     } /* for father */
 
-    RNG_END();
 
     IGRAPH_FREE(added);
     IGRAPH_FREE(subg);
@@ -608,7 +606,6 @@ igraph_error_t igraph_motifs_randesu_estimate(const igraph_t *graph, igraph_int_
 
     *est = 0;
 
-    RNG_BEGIN();
 
     for (sam = 0; sam < sample_size; sam++) {
         igraph_int_t father = VECTOR(*sample)[sam];
@@ -720,7 +717,6 @@ igraph_error_t igraph_motifs_randesu_estimate(const igraph_t *graph, igraph_int_
 
     } /* for father */
 
-    RNG_END();
 
     (*est) *= ((igraph_real_t) no_of_nodes / sample_size);
 
@@ -796,7 +792,6 @@ igraph_error_t igraph_motifs_randesu_no(const igraph_t *graph, igraph_int_t *no,
 
     *no = 0;
 
-    RNG_BEGIN();
 
     for (father = 0; father < no_of_nodes; father++) {
         igraph_int_t level, s;
@@ -907,7 +902,6 @@ igraph_error_t igraph_motifs_randesu_no(const igraph_t *graph, igraph_int_t *no,
 
     } /* for father */
 
-    RNG_END();
 
     IGRAPH_FREE(added);
     igraph_vector_int_destroy(&vids);

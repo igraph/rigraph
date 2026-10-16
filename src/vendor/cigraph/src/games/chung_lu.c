@@ -1,5 +1,5 @@
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2024  The igraph development team <igraph@igraph.org>
 
    This program is free software; you can redistribute it and/or modify
@@ -234,7 +234,6 @@ igraph_error_t igraph_chung_lu_game(igraph_t *graph,
 
     IGRAPH_CHECK(igraph_vector_sort_ind(in_weights, &idx, IGRAPH_DESCENDING));
 
-    RNG_BEGIN();
     for (igraph_int_t i=0; i < no_of_nodes; i++) {
         igraph_int_t vi, vj;
         igraph_real_t wi, wj;
@@ -309,7 +308,6 @@ igraph_error_t igraph_chung_lu_game(igraph_t *graph,
             IGRAPH_ALLOW_INTERRUPTION_LIMITED(iter, 1 << 16);
         }
     }
-    RNG_END();
 
     igraph_vector_int_destroy(&idx);
     IGRAPH_FINALLY_CLEAN(1);

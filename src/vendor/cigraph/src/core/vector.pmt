@@ -2768,7 +2768,6 @@ igraph_error_t FUNCTION(igraph_vector, shuffle)(TYPE(igraph_vector) *v) {
     igraph_int_t k;
     BASE dummy;
 
-    RNG_BEGIN();
     while (n > 1) {
         k = RNG_INTEGER(0, n - 1);
         n--;
@@ -2776,7 +2775,6 @@ igraph_error_t FUNCTION(igraph_vector, shuffle)(TYPE(igraph_vector) *v) {
         VECTOR(*v)[n] = VECTOR(*v)[k];
         VECTOR(*v)[k] = dummy;
     }
-    RNG_END();
 
     return IGRAPH_SUCCESS;
 }

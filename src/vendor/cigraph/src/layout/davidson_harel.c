@@ -197,7 +197,6 @@ igraph_error_t igraph_layout_davidson_harel(const igraph_t *graph, igraph_matrix
     IGRAPH_FINALLY(igraph_vector_int_destroy, &try_idx);
     IGRAPH_VECTOR_INT_INIT_FINALLY(&neis, 100);
 
-    RNG_BEGIN();
 
     if (!use_seed) {
         for (igraph_int_t i = 0; i < no_nodes; i++) {
@@ -443,7 +442,6 @@ igraph_error_t igraph_layout_davidson_harel(const igraph_t *graph, igraph_matrix
 
     } /* round < maxiter */
 
-    RNG_END();
 
     igraph_vector_int_destroy(&neis);
     igraph_vector_int_destroy(&try_idx);

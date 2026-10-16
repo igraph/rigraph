@@ -275,7 +275,6 @@ igraph_error_t igraph_community_label_propagation(const igraph_t *graph,
             IGRAPH_CHECK(igraph_vector_int_shuffle(&node_order));
         }
 
-        RNG_BEGIN();
         /* In the prescribed order, loop over the vertices and reassign labels */
         for (i = 0; i < no_of_not_fixed_nodes; i++) {
             v1 = VECTOR(node_order)[i];
@@ -350,7 +349,6 @@ igraph_error_t igraph_community_label_propagation(const igraph_t *graph,
                 VECTOR(label_counters)[VECTOR(nonzero_labels)[j]] = 0;
             }
         }
-        RNG_END();
 
         /* Alternating between control iterations and label updating iterations */
         control_iteration = !control_iteration;

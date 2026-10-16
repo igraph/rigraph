@@ -84,7 +84,6 @@ static igraph_error_t configuration(
     IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, 0);
     IGRAPH_CHECK(igraph_vector_int_reserve(&edges, no_of_edges * 2));
 
-    RNG_BEGIN();
 
     if (directed) {
         for (igraph_int_t i = 0; i < no_of_edges; i++) {
@@ -110,7 +109,6 @@ static igraph_error_t configuration(
         }
     }
 
-    RNG_END();
 
     IGRAPH_FREE(bag1);
     IGRAPH_FINALLY_CLEAN(1);
@@ -161,7 +159,6 @@ static igraph_error_t fast_heur_undirected(
     IGRAPH_FINALLY(igraph_set_destroy, &incomplete_vertices);
 
     /* Start the RNG */
-    RNG_BEGIN();
 
     /* Outer loop; this will try to construct a graph several times from scratch
      * until it finally succeeds. */
@@ -249,7 +246,6 @@ static igraph_error_t fast_heur_undirected(
     }
 
     /* Finish the RNG */
-    RNG_END();
 
     /* Clean up */
     igraph_set_destroy(&incomplete_vertices);
@@ -311,7 +307,6 @@ static igraph_error_t fast_heur_directed(
     IGRAPH_FINALLY(igraph_set_destroy, &incomplete_in_vertices);
 
     /* Start the RNG */
-    RNG_BEGIN();
 
     /* Outer loop; this will try to construct a graph several times from scratch
      * until it finally succeeds. */
@@ -396,7 +391,6 @@ static igraph_error_t fast_heur_directed(
     }
 
     /* Finish the RNG */
-    RNG_END();
 
     /* Clean up */
     igraph_set_destroy(&incomplete_in_vertices);
@@ -448,7 +442,6 @@ static igraph_error_t configuration_simple_undirected_set(
         IGRAPH_CHECK(igraph_set_reserve(set, VECTOR(*degseq)[i]));
     }
 
-    RNG_BEGIN();
 
     for (;;) {
         igraph_bool_t success = true;
@@ -495,7 +488,6 @@ static igraph_error_t configuration_simple_undirected_set(
         IGRAPH_ALLOW_INTERRUPTION_LIMITED(iter, 1 << 8);
     }
 
-    RNG_END();
 
     igraph_vector_ptr_destroy_all(&adjlist);
     IGRAPH_FINALLY_CLEAN(1);
@@ -518,7 +510,6 @@ static igraph_error_t configuration_simple_undirected_bitset(
         IGRAPH_CHECK(igraph_bitset_resize(igraph_bitset_list_get_ptr(&adjlist, i), vcount));
     }
 
-    RNG_BEGIN();
 
     for (;;) {
         igraph_bool_t success = true;
@@ -565,7 +556,6 @@ static igraph_error_t configuration_simple_undirected_bitset(
         IGRAPH_ALLOW_INTERRUPTION_LIMITED(iter, 1 << 8);
     }
 
-    RNG_END();
 
     igraph_bitset_list_destroy(&adjlist);
     IGRAPH_FINALLY_CLEAN(1);
@@ -671,7 +661,6 @@ static igraph_error_t configuration_simple_directed(
 
     igraph_int_t vertex_done_mark = 1;
 
-    RNG_BEGIN();
 
     for (;;) {
         igraph_bool_t success = true;
@@ -715,7 +704,6 @@ static igraph_error_t configuration_simple_directed(
         IGRAPH_ALLOW_INTERRUPTION_LIMITED(iter, 1 << 8);
     }
 
-    RNG_END();
 
     for (igraph_int_t i=0; i < ecount; i++) {
         VECTOR(edges)[2*i]   = VECTOR(out_stubs)[i];

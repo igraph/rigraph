@@ -1,5 +1,5 @@
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2022  The igraph development team <igraph@igraph.org>
 
    This program is free software; you can redistribute it and/or modify
@@ -55,7 +55,6 @@ static igraph_error_t igraph_i_voronoi(
 
     if (tiebreaker == IGRAPH_VORONOI_RANDOM) {
         IGRAPH_VECTOR_INT_INIT_FINALLY(&tie_count, no_of_nodes);
-        RNG_BEGIN();
     }
 
     IGRAPH_CHECK(igraph_vector_int_resize(membership, no_of_nodes));
@@ -143,7 +142,6 @@ static igraph_error_t igraph_i_voronoi(
     }
 
     if (tiebreaker == IGRAPH_VORONOI_RANDOM) {
-        RNG_END();
         igraph_vector_int_destroy(&tie_count);
         IGRAPH_FINALLY_CLEAN(1);
     }
@@ -199,7 +197,6 @@ static igraph_error_t igraph_i_voronoi_dijkstra(
 
     if (tiebreaker == IGRAPH_VORONOI_RANDOM) {
         IGRAPH_VECTOR_INT_INIT_FINALLY(&tie_count, no_of_nodes);
-        RNG_BEGIN();
     }
 
     IGRAPH_CHECK(igraph_vector_int_resize(membership, no_of_nodes));
@@ -300,7 +297,6 @@ static igraph_error_t igraph_i_voronoi_dijkstra(
     }
 
     if (tiebreaker == IGRAPH_VORONOI_RANDOM) {
-        RNG_END();
         igraph_vector_int_destroy(&tie_count);
         IGRAPH_FINALLY_CLEAN(1);
     }

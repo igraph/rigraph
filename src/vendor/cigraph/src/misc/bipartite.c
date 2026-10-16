@@ -1035,7 +1035,6 @@ static igraph_error_t gnp_bipartite_large(
     IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, 0);
     IGRAPH_CHECK(igraph_vector_int_reserve(&edges, 2*ecount_estimate));
 
-    RNG_BEGIN();
     for (igraph_int_t i = 0; i < n1; i++) {
         igraph_int_t j = 0;
 
@@ -1073,7 +1072,6 @@ static igraph_error_t gnp_bipartite_large(
             IGRAPH_ALLOW_INTERRUPTION_LIMITED(iter, 1 << 14);
         }
     }
-    RNG_END();
 
     /* n1 + n2 has already been checked for overflow in the caller function. */
     IGRAPH_CHECK(igraph_create(graph, &edges, n1 + n2, directed));
@@ -1176,7 +1174,6 @@ igraph_error_t igraph_bipartite_game_gnp(igraph_t *graph, igraph_vector_bool_t *
         IGRAPH_VECTOR_INIT_FINALLY(&s, 0);
         IGRAPH_CHECK(igraph_vector_reserve(&s, ecount_estimate));
 
-        RNG_BEGIN();
 
         last = RNG_GEOM(p);
         while (last < maxedges) {
@@ -1186,7 +1183,6 @@ igraph_error_t igraph_bipartite_game_gnp(igraph_t *graph, igraph_vector_bool_t *
             IGRAPH_ALLOW_INTERRUPTION_LIMITED(iter, 1 << 14);
         }
 
-        RNG_END();
 
         slen = igraph_vector_size(&s);
         IGRAPH_CHECK(igraph_vector_int_reserve(&edges, slen * 2));
@@ -1322,7 +1318,7 @@ igraph_error_t igraph_bipartite_game_gnm(igraph_t *graph, igraph_vector_bool_t *
 
             IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, 0);
             IGRAPH_VECTOR_INIT_FINALLY(&s, 0);
-            IGRAPH_CHECK(igraph_random_sample_real(&s, 0, maxedges - 1, m));
+            IGRAPH_CHECK(igraph_i_random_sample_real(&s, 0, maxedges - 1, m));
             IGRAPH_CHECK(igraph_vector_int_reserve(&edges, m * 2));
 
             for (i = 0; i < m; i++) {

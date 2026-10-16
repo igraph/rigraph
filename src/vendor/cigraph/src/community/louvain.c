@@ -385,7 +385,6 @@ static igraph_error_t igraph_i_community_multilevel_step(
     q = igraph_i_multilevel_community_modularity(&communities, resolution);
     /* pass = 1; */
 
-    RNG_BEGIN();
     do { /* Pass begin */
         igraph_int_t temp_communities_no = communities.communities_no;
 
@@ -489,7 +488,6 @@ static igraph_error_t igraph_i_community_multilevel_step(
 
         IGRAPH_ALLOW_INTERRUPTION();
     } while (changed && (q > pass_q)); /* Pass end */
-    RNG_END();
 
     if (modularity) {
         *modularity = q;
