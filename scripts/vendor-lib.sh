@@ -31,12 +31,20 @@ glue_compile_line() { # <probe> [extra cppflags] -> command, empty when none
     sed -E "s/^ *//; s/ -c $probe -o [^ ]+\.o *$//"
 }
 
+# What C only warns about and the gate makes an error: an implicit function
+# declaration and an implicit `int`, which is how a macro upstream removed
+# reads in the glue (handbook/operations/vendoring/pipeline/). Appended to the
+# C probe's line, so that no flag before it turns them off. C++ has neither,
+# and g++ warns that these flags are C's, so the C++ line goes without them.
+glue_c_errors='-Werror=implicit-function-declaration -Werror=implicit-int'
+
 # 0 the glue compiles, 1 some file does not, 2 the check could not run. The
 # three are distinct because the caller acts differently on each: only 1 says
 # anything about the commit at HEAD. The files that failed go to <failures>,
 # one per line, written only by a run that got as far as compiling. One pass
 # per probe in `series_glue_probes`, over the `src/` files of its extension,
-# with what `series_glue_extra_flags` prints on the compile line.
+# with what `series_glue_extra_flags` prints on the compile line, and for C
+# with `glue_c_errors` after it.
 #
 # `eval`, because R quotes its include path (`-I"/usr/share/R/include"`); plain
 # expansion word-splits without removing the quotes, so the compiler never
@@ -49,6 +57,7 @@ glue_compiles() { # [failures]
   for probe in "${series_glue_probes[@]}"; do
     line=$(glue_compile_line "$probe" "$extra")
     [ -n "$line" ] || { rm -f "$own"; return 2; }
+    [ "${probe##*.}" != c ] || line="$line $glue_c_errors"
     # shellcheck disable=SC2016  # the sh child expands $CMD and $1, not this shell
     (cd src && shopt -s nullglob && files=(*."${probe##*.}") && [ ${#files[@]} -gt 0 ] &&
       printf '%s\n' "${files[@]}" |
