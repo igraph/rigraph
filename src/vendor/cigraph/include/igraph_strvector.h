@@ -105,6 +105,8 @@ IGRAPH_EXPORT igraph_error_t igraph_strvector_index(const igraph_strvector_t *v,
 IGRAPH_EXPORT igraph_error_t igraph_strvector_reserve(igraph_strvector_t *sv,
                                                       igraph_int_t capacity);
 
+IGRAPH_EXPORT void igraph_strvector_swap(igraph_strvector_t *v1, igraph_strvector_t *v2);
+
 IGRAPH_EXPORT void igraph_strvector_swap_elements(igraph_strvector_t *sv,
                                                   igraph_int_t i, igraph_int_t j);
 

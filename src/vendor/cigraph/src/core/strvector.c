@@ -743,6 +743,24 @@ igraph_error_t igraph_strvector_update(
 }
 
 /**
+ * \ingroup strvector
+ * \function igraph_strvector_swap
+ * \brief Swaps all elements of two string vectors.
+ *
+ * \param v1 The first string vector.
+ * \param v2 The second string vector.
+ *
+ * Time complexity: O(1).
+ */
+void igraph_strvector_swap(igraph_strvector_t *v1, igraph_strvector_t *v2) {
+    igraph_strvector_t tmp;
+
+    tmp = *v1;
+    *v1 = *v2;
+    *v2 = tmp;
+}
+
+/**
  * \function igraph_strvector_swap_elements
  * \brief Swap two elements in a string vector.
  *
