@@ -1,7 +1,6 @@
 /*
    igraph library.
-   Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
-   334 Harvard street, Cambridge, MA 02139 USA
+   Copyright (C) 2009-2025  The igraph development team <igraph@igraph.org>
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -14,16 +13,12 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
-   02110-1301 USA
-
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 #ifndef IGRAPH_CONSTANTS_H
 #define IGRAPH_CONSTANTS_H
 
-#include "igraph_config.h"
 #include "igraph_decls.h"
 
 IGRAPH_BEGIN_C_DECLS
@@ -31,14 +26,6 @@ IGRAPH_BEGIN_C_DECLS
 /* -------------------------------------------------- */
 /* Constants                                          */
 /* -------------------------------------------------- */
-
-typedef enum { IGRAPH_UNDIRECTED = 0, IGRAPH_DIRECTED = 1 } igraph_i_directed_t;
-
-/* Note for the enum below: yes, IGRAPH_LOOPS_TWICE is 1, and IGRAPH_LOOPS_ONCE
- * is 2. This is intentional, for the sake of backwards compatibility with
- * earlier versions where we only had IGRAPH_LOOPS and it meant
- * IGRAPH_LOOPS_TWICE */
-typedef enum { IGRAPH_NO_LOOPS = 0, IGRAPH_LOOPS = 1, IGRAPH_LOOPS_TWICE = 1, IGRAPH_LOOPS_ONCE = 2 } igraph_loops_t;
 
 /**
  * \define IGRAPH_UNLIMITED
@@ -56,14 +43,67 @@ typedef enum { IGRAPH_NO_LOOPS = 0, IGRAPH_LOOPS = 1, IGRAPH_LOOPS_TWICE = 1, IG
  * values instead. */
 
 /* These constants are meant to be used for sake of readability */
+enum { IGRAPH_UNDIRECTED = 0, IGRAPH_DIRECTED = 1 };
 enum { IGRAPH_NO_MULTIPLE = 0, IGRAPH_MULTIPLE = 1 };
 enum { IGRAPH_EDGE_UNLABELED = 0, IGRAPH_EDGE_LABELED = 1 };
 
+/**
+ * \typedef igraph_loops_t
+ * \brief How to interpret self-loops in undirected graphs?
+ *
+ * Controls the interpretation of self-loops in undirected graphs, typically
+ * in the context of adjacency matrices or degrees.
+ *
+ * </para><para>These constants are also used to improve readability in
+ * boolean contexts, with \c IGRAPH_NO_LOOPS, equivalent to \c false,
+ * signifying that loops should be ignored and \c IGRAPH_LOOPS, equivalent
+ * to \c true, that loops should be considered.
+ *
+ * \enumval IGRAPH_NO_LOOPS Self-loops are ignored.
+ * \enumval IGRAPH_LOOPS_TWICE Self-loops are considered, and counted twice
+ *    in undirected graphs. For example, a self-loop contributes two to the
+ *    degree of a vertex and to diagonal entries of adjacency matrices. This
+ *    is the standard interpretation in graph theory, thus \c IGRAPH_LOOPS
+ *    serves as an alias for this option.
+ * \enumval IGRAPH_LOOPS_ONCE Self-loops are considered, and counted only
+ *    once in undirected graphs.
+ */
+typedef enum {
+    IGRAPH_NO_LOOPS = 0,
+    IGRAPH_LOOPS_TWICE = 1,
+    IGRAPH_LOOPS_ONCE = 2,
+    IGRAPH_LOOPS = IGRAPH_LOOPS_TWICE
+} igraph_loops_t;
+/* Note for the enum above: yes, IGRAPH_LOOPS_TWICE is 1, and IGRAPH_LOOPS_ONCE
+ * is 2. This is intentional, for the sake of backwards compatibility with
+ * earlier versions where we only had IGRAPH_LOOPS and it meant
+ * IGRAPH_LOOPS_TWICE */
+
 typedef enum { IGRAPH_ASCENDING = 0, IGRAPH_DESCENDING = 1 } igraph_order_t;
 
-/* Do not renumber the following values! Some internal code treats them as bitmasks
+/**
+ * \typedef igraph_neimode_t
+ * \brief How to interpret edge directions in directed graphs?
+ *
+ * These "neighbor mode" constants are typically used to specify the treatment
+ * of edge directions in directed graphs, or which vertices to consider as
+ * adjacent to (i.e. neighbor of) a vertex. It is typically ignored in undirected
+ * graphs.
+ *
+ * \enumval IGRAPH_OUT Follow edge directions in directed graphs, or consider
+ *    out-neighbors of vertices.
+ * \enumval IGRAPH_IN Follow edges in the reverse direction in directed graphs,
+ *    or consider in-neighbors of vertices.
+ * \enumval IGRAPH_ALL Ignore edge directions in directed graphs, or consider
+ *    all neighbours (both out and in-neighbors) of vertices.
+ */
+typedef enum {
+    IGRAPH_OUT = 1,
+    IGRAPH_IN = 2,
+    IGRAPH_ALL = 3
+} igraph_neimode_t;
+/* Do not renumber the vaues above! Some internal code treats them as bitmasks
  * and assumes that IGRAPH_ALL == IGRAPH_IN | IGRAPH_OUT and IGRAPH_IN & IGRAPH_OUT == 0. */
-typedef enum { IGRAPH_OUT = 1, IGRAPH_IN = 2, IGRAPH_ALL = 3 } igraph_neimode_t;
 
 /* Reverse IGRAPH_OUT to IGRAPH_IN and vice versa. Leave other values alone. */
 #define IGRAPH_REVERSE_MODE(mode) \
@@ -96,10 +136,6 @@ typedef enum { IGRAPH_TREE_OUT = 0, IGRAPH_TREE_IN,
                IGRAPH_TREE_UNDIRECTED
              } igraph_tree_mode_t;
 
-typedef enum { IGRAPH_ERDOS_RENYI_GNP = 0,
-               IGRAPH_ERDOS_RENYI_GNM
-             } igraph_erdos_renyi_t;
-
 typedef enum { IGRAPH_GET_ADJACENCY_UPPER = 0,
                IGRAPH_GET_ADJACENCY_LOWER,
                IGRAPH_GET_ADJACENCY_BOTH
@@ -110,11 +146,6 @@ typedef enum { IGRAPH_DEGSEQ_CONFIGURATION = 0,     /* Configuration model, allo
                IGRAPH_DEGSEQ_FAST_HEUR_SIMPLE,      /* Fast heuristic, generates simple graphs */
                IGRAPH_DEGSEQ_CONFIGURATION_SIMPLE,  /* Configuration model, generates simple graphs */
                IGRAPH_DEGSEQ_EDGE_SWITCHING_SIMPLE, /* Edge-switching MCMC, generates simple graphs */
-
-               /* Deprecated, kept for backwards compatibility: */
-               IGRAPH_DEGSEQ_SIMPLE IGRAPH_DEPRECATED_ENUMVAL = IGRAPH_DEGSEQ_CONFIGURATION,
-               IGRAPH_DEGSEQ_SIMPLE_NO_MULTIPLE IGRAPH_DEPRECATED_ENUMVAL = IGRAPH_DEGSEQ_FAST_HEUR_SIMPLE,
-               IGRAPH_DEGSEQ_SIMPLE_NO_MULTIPLE_UNIFORM IGRAPH_DEPRECATED_ENUMVAL = IGRAPH_DEGSEQ_CONFIGURATION_SIMPLE
              } igraph_degseq_t;
 
 typedef enum { IGRAPH_REALIZE_DEGSEQ_SMALLEST = 0,
@@ -151,10 +182,6 @@ typedef enum { IGRAPH_VCONN_NEI_ERROR = 0,
 typedef enum { IGRAPH_SPINCOMM_UPDATE_SIMPLE = 0,
                IGRAPH_SPINCOMM_UPDATE_CONFIG
              } igraph_spincomm_update_t;
-
-typedef enum { IGRAPH_DONT_SIMPLIFY = 0,
-               IGRAPH_SIMPLIFY
-             } igraph_lazy_adlist_simplify_t;
 
 typedef enum { IGRAPH_TRANSITIVITY_NAN = 0,
                IGRAPH_TRANSITIVITY_ZERO
@@ -218,6 +245,12 @@ typedef enum { IGRAPH_ROW_MAJOR = 0,
                IGRAPH_COLUMN_MAJOR = 1
              } igraph_matrix_storage_t;
 
+typedef enum { IGRAPH_MST_AUTOMATIC = 0,
+               IGRAPH_MST_UNWEIGHTED,
+               IGRAPH_MST_PRIM,
+               IGRAPH_MST_KRUSKAL
+             } igraph_mst_algorithm_t;
+
 typedef enum { IGRAPH_PRODUCT_CARTESIAN = 0,
                IGRAPH_PRODUCT_LEXICOGRAPHIC,
                IGRAPH_PRODUCT_STRONG,
@@ -239,22 +272,6 @@ typedef enum {
     IGRAPH_LPA_RETENTION,     /* Keep current label if among dominant labels, only check if labels changed. */
     IGRAPH_LPA_FAST           /* Sample from dominant labels, only check neighbors. */
 } igraph_lpa_variant_t;
-
-/**
- * \typedef igraph_mst_algorithm_t
- * \brief Minimum spanning tree algorithms.
- *
- * \enumval IGRAPH_MST_AUTOMATIC Select an appropriate algorithm automatically.
- * \enumval IGRAPH_MST_UNWEIGHTED Ignore edge weights; produce an arbitrary spanning tree.
- * \enumval IGRAPH_MST_PRIM Prim's algorithm.
- * \enumval IGRAPH_MST_KRUSKAL Kruskal's algorithm.
- */
-typedef enum {
-    IGRAPH_MST_AUTOMATIC = 0,
-    IGRAPH_MST_UNWEIGHTED,
-    IGRAPH_MST_PRIM,
-    IGRAPH_MST_KRUSKAL
-} igraph_mst_algorithm_t;
 
 IGRAPH_END_C_DECLS
 
