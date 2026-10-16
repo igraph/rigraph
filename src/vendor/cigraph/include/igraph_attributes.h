@@ -332,7 +332,7 @@ IGRAPH_EXPORT igraph_error_t igraph_attribute_combination_query(const igraph_att
  *    types should be returned.
  * \member has_attr Check whether a graph has the named
  *    graph/vertex/edge attribute.
- * \member gettype Query the type of a graph/vertex/edge attribute.
+ * \member get_type Query the type of a graph/vertex/edge attribute.
  * \member get_numeric_graph_attr Query a numeric graph attribute. The
  *    value should be placed as the first element of the \p value
  *    vector.
@@ -395,7 +395,7 @@ typedef struct igraph_attribute_table_t {
                                igraph_strvector_t *enames, igraph_vector_int_t *etypes);
     igraph_bool_t (*has_attr)(const igraph_t *graph, igraph_attribute_elemtype_t type,
                               const char *name);
-    igraph_error_t (*gettype)(const igraph_t *graph, igraph_attribute_type_t *type,
+    igraph_error_t (*get_type)(const igraph_t *graph, igraph_attribute_type_t *type,
                               igraph_attribute_elemtype_t elemtype, const char *name);
     igraph_error_t (*get_numeric_graph_attr)(const igraph_t *graph, const char *name,
                                              igraph_vector_t *value);

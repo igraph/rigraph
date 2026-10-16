@@ -1,5 +1,5 @@
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2021  The igraph development team <igraph@igraph.org>
 
    This program is free software; you can redistribute it and/or modify
@@ -80,7 +80,7 @@ igraph_error_t igraph_i_attribute_get_info(const igraph_t *graph,
 igraph_bool_t igraph_i_attribute_has_attr(const igraph_t *graph,
                                           igraph_attribute_elemtype_t type,
                                           const char *name);
-igraph_error_t igraph_i_attribute_gettype(const igraph_t *graph,
+igraph_error_t igraph_i_attribute_get_type(const igraph_t *graph,
                                igraph_attribute_type_t *type,
                                igraph_attribute_elemtype_t elemtype,
                                const char *name);
