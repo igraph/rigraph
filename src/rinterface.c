@@ -6680,7 +6680,7 @@ SEXP R_igraph_eigenvector_centrality(SEXP graph, SEXP directed, SEXP scale, SEXP
   igraph_t c_graph;
   igraph_vector_t c_vector;
   igraph_real_t c_value;
-  igraph_bool_t c_directed;
+  igraph_neimode_t c_directed;
   igraph_bool_t c_scale;
   igraph_vector_t c_weights;
   igraph_arpack_options_t c_options;
@@ -6693,7 +6693,7 @@ SEXP R_igraph_eigenvector_centrality(SEXP graph, SEXP directed, SEXP scale, SEXP
   IGRAPH_R_CHECK(igraph_vector_init(&c_vector, 0));
   IGRAPH_FINALLY(igraph_vector_destroy, &c_vector);
   IGRAPH_R_CHECK_BOOL(directed);
-  c_directed = LOGICAL(directed)[0];
+  c_directed = LOGICAL(directed)[0] ? IGRAPH_OUT : IGRAPH_ALL;
   IGRAPH_R_CHECK_BOOL(scale);
   c_scale = LOGICAL(scale)[0];
   if (!Rf_isNull(weights)) {
@@ -7557,7 +7557,7 @@ SEXP R_igraph_centralization_eigenvector_centrality(SEXP graph, SEXP directed, S
   igraph_t c_graph;
   igraph_vector_t c_vector;
   igraph_real_t c_value;
-  igraph_bool_t c_directed;
+  igraph_neimode_t c_directed;
   igraph_bool_t c_scale;
   igraph_arpack_options_t c_options;
   igraph_real_t c_centralization;
@@ -7574,7 +7574,7 @@ SEXP R_igraph_centralization_eigenvector_centrality(SEXP graph, SEXP directed, S
   IGRAPH_R_CHECK(igraph_vector_init(&c_vector, 0));
   IGRAPH_FINALLY(igraph_vector_destroy, &c_vector);
   IGRAPH_R_CHECK_BOOL(directed);
-  c_directed = LOGICAL(directed)[0];
+  c_directed = LOGICAL(directed)[0] ? IGRAPH_OUT : IGRAPH_ALL;
   IGRAPH_R_CHECK_BOOL(scale);
   c_scale = LOGICAL(scale)[0];
   Rz_SEXP_to_igraph_arpack_options(options, &c_options);
@@ -7620,7 +7620,7 @@ SEXP R_igraph_centralization_eigenvector_centrality_tmax(SEXP graph, SEXP nodes,
                                         /* Declarations */
   igraph_t c_graph;
   igraph_integer_t c_nodes;
-  igraph_bool_t c_directed;
+  igraph_neimode_t c_directed;
   igraph_bool_t c_scale;
   igraph_real_t c_res;
   SEXP res;
@@ -7633,7 +7633,7 @@ SEXP R_igraph_centralization_eigenvector_centrality_tmax(SEXP graph, SEXP nodes,
   IGRAPH_R_CHECK_INT(nodes);
   c_nodes = (igraph_integer_t) REAL(nodes)[0];
   IGRAPH_R_CHECK_BOOL(directed);
-  c_directed = LOGICAL(directed)[0];
+  c_directed = LOGICAL(directed)[0] ? IGRAPH_OUT : IGRAPH_ALL;
   IGRAPH_R_CHECK_BOOL(scale);
   c_scale = LOGICAL(scale)[0];
                                         /* Call igraph */

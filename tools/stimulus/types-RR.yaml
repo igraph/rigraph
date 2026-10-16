@@ -96,6 +96,16 @@ NEIMODE:
         TOTAL: c("total", "out", "in", "all")
     INCONV: '%I% <- switch_igraph_arg(%I%, "out" = 1L, "in" = 2L, "all" = 3L, "total" = 3L)'
 
+NEIMODE_DIRECTED:
+    # A logical directed argument, kept where upstream replaced it with an
+    # igraph_neimode_t mode: TRUE follows edge directions as directed = TRUE
+    # did (IGRAPH_OUT), FALSE ignores them (IGRAPH_ALL).
+    DEFAULT:
+        'False': 'FALSE'
+        'True': 'TRUE'
+    INCONV:
+        IN: '%I% <- as.logical(%I%)'
+
 TODIRECTED:
     DEFAULT:
         ARBITRARY: c("arbitrary", "mutual", "random", "acyclic")
