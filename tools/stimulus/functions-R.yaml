@@ -579,6 +579,22 @@ igraph_layout_drl_3d:
 # Cocitation and other similarity measures
 #######################################
 
+igraph_similarity_dice:
+    # Upstream compares two vertex sets, from and to (krlmlr/igraph@d2d767e):
+    # the R argument stays vids, passed as both.
+    PARAMS: |-
+        GRAPH graph, OUT MATRIX res, VERTEX_SELECTOR_FROM_TO vids=ALL,
+        NEIMODE mode=ALL, BOOLEAN loops=False
+    DEPS: vids ON graph
+
+igraph_similarity_jaccard:
+    # Upstream compares two vertex sets, from and to (krlmlr/igraph@d2d767e):
+    # the R argument stays vids, passed as both.
+    PARAMS: |-
+        GRAPH graph, OUT MATRIX res, VERTEX_SELECTOR_FROM_TO vids=ALL,
+        NEIMODE mode=ALL, BOOLEAN loops=False
+    DEPS: vids ON graph
+
 #######################################
 # Community structure
 #######################################
