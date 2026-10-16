@@ -1,7 +1,6 @@
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    igraph library.
-   Copyright (C) 2009-2020  Gabor Csardi <csardi.gabor@gmail.com>
+   Copyright (C) 2020-2025  The igraph development team <igraph@igraph.org>
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -59,12 +58,12 @@ enum {
 
 IGRAPH_EXPORT igraph_error_t igraph_is_graphical(const igraph_vector_int_t *out_degrees,
                                       const igraph_vector_int_t *in_degrees,
-                                      const igraph_edge_type_sw_t allowed_edge_types,
+                                      igraph_edge_type_sw_t allowed_edge_types,
                                       igraph_bool_t *res);
 
 IGRAPH_EXPORT igraph_error_t igraph_is_bigraphical(const igraph_vector_int_t *degrees1,
                                         const igraph_vector_int_t *degrees2,
-                                        const igraph_edge_type_sw_t allowed_edge_types,
+                                        igraph_edge_type_sw_t allowed_edge_types,
                                         igraph_bool_t *res);
 
 IGRAPH_END_C_DECLS
