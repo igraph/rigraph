@@ -1,4 +1,3 @@
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    igraph library.
    Copyright (C) 2007-2012  Gabor Csardi <csardi.gabor@gmail.com>
@@ -41,7 +40,7 @@
 
 IGRAPH_BEGIN_C_DECLS
 
-typedef struct igraph_i_glpk_error_info_s {
+typedef struct {
     jmp_buf jmp;            /* used for bailing when there is a GLPK error */
     bool    is_interrupted; /* Boolean; true if there was an interruption */
     bool    is_error;       /* Boolean; true if the error hook was called */

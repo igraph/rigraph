@@ -1499,6 +1499,9 @@ cleanup:
  *    vector list, in \ref igraph_vector_int_t objects.
  * \param induced Boolean, whether to search for induced matching
  *    subgraphs.
+ * \param time_limit Processor time limit in seconds. Supply zero
+ *    here for no limit. If the time limit is over, then the function
+ *    signals an error.
  * \return Error code
  *
  * \sa \ref igraph_subisomorphic_vf2() for the VF2 algorithm.
@@ -1543,6 +1546,7 @@ igraph_error_t igraph_subisomorphic_lad(const igraph_t *pattern, const igraph_t 
         IGRAPH_ERROR("Cannot search for a directed pattern in an undirected target "
                      "or vice versa", IGRAPH_EINVAL);
     }
+
     if (iso)  {
         *iso = (igraph_vcount(pattern) == 0);
     }
