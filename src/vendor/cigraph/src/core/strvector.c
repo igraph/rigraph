@@ -310,16 +310,25 @@ igraph_error_t igraph_strvector_copy(igraph_strvector_t *to,
  */
 
 igraph_error_t igraph_strvector_append(igraph_strvector_t *to,
-                            const igraph_strvector_t *from) {
-    igraph_int_t len1 = igraph_strvector_size(to), len2 = igraph_strvector_size(from);
-    igraph_int_t newlen;
+                                       const igraph_strvector_t *from) {
+    const igraph_int_t to_size = igraph_strvector_size(to);
+    const igraph_int_t from_size = igraph_strvector_size(from);
+    const igraph_int_t to_capacity = igraph_strvector_capacity(to);
+    igraph_int_t new_to_size;
     igraph_bool_t error = false;
     char *tmp;
 
-    IGRAPH_SAFE_ADD(len1, len2, &newlen);
-    IGRAPH_CHECK(igraph_strvector_reserve(to, newlen));
+    IGRAPH_SAFE_ADD(to_size, from_size, &new_to_size);
 
-    for (igraph_int_t i = 0; i < len2; i++) {
+    if (to_capacity < new_to_size) {
+        igraph_int_t new_to_capacity = to_capacity < IGRAPH_INTEGER_MAX/2 ? to_capacity * 2 : IGRAPH_INTEGER_MAX;
+        if (new_to_capacity < new_to_size) {
+            new_to_capacity = new_to_size;
+        }
+        IGRAPH_CHECK(igraph_strvector_reserve(to, new_to_capacity));
+    }
+
+    for (igraph_int_t i = 0; i < from_size; i++) {
         if (from->stor_begin[i] == NULL || from->stor_begin[i][0] == '\0') {
             /* Represent empty strings as NULL. */
             tmp = NULL;
@@ -335,7 +344,7 @@ igraph_error_t igraph_strvector_append(igraph_strvector_t *to,
     }
 
     if (error) {
-        igraph_strvector_resize(to, len1); /* always shrinks */
+        igraph_strvector_resize(to, to_size); /* always shrinks */
         IGRAPH_ERROR("Cannot append string vector.", IGRAPH_ENOMEM); /* LCOV_EXCL_LINE */
     }
 
