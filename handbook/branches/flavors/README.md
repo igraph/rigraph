@@ -4,7 +4,9 @@ One source tree, published under two package names.
 
 **`igraph`** is the package on CRAN, released from `igraph/rigraph`'s `main`.
 **`igraph.dev`** is the bleeding edge: the series `main`, with the newest igraph C library CI has verified, published by r-universe from `main-green`.
-Because the names differ, both install into one library and load side by side.
+Because the names differ, both install into one library.
+For now they must not be loaded in one R session ([#2975](https://github.com/igraph/rigraph/issues/2975)).
+They share their S3 classes, so whichever loads second replaces the other's methods for the whole session.
 [`scripts/series.yaml`](/scripts/series.yaml) declares both.
 
 **A flavor is a mechanical rename applied on top of a series' seed.**

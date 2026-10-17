@@ -1115,12 +1115,11 @@ layout.reingold.tilford <- function(..., params = list()) {
 #' @keywords graphs
 #' @export
 #' @family graph layouts
-#' @examplesIf rlang::ns_env(cluster_optimal)$has_glpk() && rlang::is_installed("igraphdata")
+#' @examplesIf rlang::ns_env(cluster_optimal)$has_glpk() && nzchar(system.file(package = "igraphdata"))
 #'
 #' ## Place vertices on a circle, order them according to their
 #' ## community
-#' library(igraphdata)
-#' data(karate)
+#' data(karate, package = "igraphdata")
 #' karate_groups <- cluster_optimal(karate)
 #' coords <- layout_in_circle(karate,
 #'   order =
