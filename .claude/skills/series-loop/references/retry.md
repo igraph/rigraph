@@ -47,11 +47,17 @@ and repairing on it amends a commit that is about to go green.
 The store applies the same newest-run-wins rule to its copy, so the leg *replaces* a record rather than appending,
 the one case where a decided commit legitimately changes state.
 
-**Dropping a result is a store-side operation**, and duckdb-r's script for it, `rcc-drop.sh`, is not ported.
-Removing `runs2.d/<xx>/<sha>.ndjson` and `logs2.d/<xx>/<sha>.log` from `rcc2` is what makes the commit undecided,
+**Dropping a result is a store-side operation**:
+
+```sh
+scripts/rcc-drop.sh --dry-run <sha>...   # what would go, and which commits have no record
+scripts/rcc-drop.sh <sha>...             # or --stdin, one per line
+```
+
+It removes `runs2.d/<xx>/<sha>.ndjson` and `logs2.d/<xx>/<sha>.log` from `rcc2`, which is what makes the commit undecided,
 because work selection reads presence and nothing else ([`scripts/rcc-decided.sh`](/scripts/rcc-decided.sh)),
 so the next `each-rcc` run on the branch plans it like a commit that had never been built.
-Until the script is ported, a drop is a commit on `rcc2` removing both files, pushed by hand.
+The commit's `rcc` status still shows the old verdict until that run writes a fresh one, and nothing decides from it.
 A run's own results are immutable; there a newer run is the only thing that supersedes an older one.
 
 **Reach for it when the job decided the commit, not the tree.**

@@ -65,6 +65,9 @@ ported:
     blob: c82028c9d90b52bd51d37ddf36bf690188574c74
   - path: scripts/rcc-consolidate.sh
     blob: 532664b6bc072dce68567c42184bc65a467dc911
+  # From duckdb/duckdb-r#2916, which the commit above does not carry.
+  # rigraph's copy carries a fix: this blob checks a SHA's first character only,
+  # so a malformed SHA drops nothing and exits 0, where the copy checks all 40.
   - path: scripts/rcc-drop.sh
     blob: 0aa525f852048d88e9bd91ea4c24422707eddfda
   - path: scripts/rcc-decided.sh
