@@ -111,6 +111,27 @@ test_that("canonical_permutation works", {
   expect_equal(el1, el2)
 })
 
+test_that("permute() accepts integer and integer-valued double permutations", {
+  ring <- make_ring(4)
+  expected <- matrix(c(1, 1, 3, 2, 2, 3, 4, 4), ncol = 2)
+
+  expect_equal(as_edgelist(permute(ring, c(2, 1, 3, 4))), expected)
+  expect_equal(as_edgelist(permute(ring, c(2L, 1L, 3L, 4L))), expected)
+  expect_vcount(permute(make_empty_graph(0), numeric()), 0)
+})
+
+test_that("permute() validates the permutation", {
+  ring <- make_ring(4)
+
+  expect_snapshot_igraph_error(permute(ring, letters[1:4]))
+  expect_snapshot_igraph_error(permute(ring, c(1, 2, 3)))
+  expect_snapshot_igraph_error(permute(ring, c(NA, 2, NA, 4)))
+  expect_snapshot_igraph_error(permute(ring, c(1.5, 2, 3, 4)))
+  expect_snapshot_igraph_error(permute(ring, c(-1, 2, 3, 4)))
+  expect_snapshot_igraph_error(permute(ring, c(0, 1, 2, 5)))
+  expect_snapshot_igraph_error(permute(ring, c(1, 1, 2, 2)))
+})
+
 test_that("isomorphism_class works", {
   g_iso10 <- graph_from_isomorphism_class(3, 10)
   g_iso11 <- graph_from_isomorphism_class(3, 11)
