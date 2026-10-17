@@ -55,7 +55,9 @@
 # The record decides before the log does, for the one thing the log cannot say:
 # a commit the shard's `timeout` killed at its budget (exit 124) stops mid-run
 # with its stage output still buffered, which reads exactly like a cancelled
-# leg. That is a REPAIR — the commit did not finish — and calling it transient
+# leg. The shard records that only for the first commit of its leg, which had
+# the whole budget; one cut short after others is deferred and leaves no record.
+# That is a REPAIR, since the commit did not finish, and calling it transient
 # spends another whole budget to learn the same thing.
 #
 # RETRY and REPAIR split on the retry ledger: `retry-<S>-dev` pointing at the
@@ -201,9 +203,10 @@ run_branch_of() { # <sha> -> head_branch of the harvested run, empty if none
 
 # The shard's own verdict on how the commit ended. `timeout` in
 # scripts/each-shard.sh reports 124 when it kills rcc-one.sh at the budget, and
-# that is the one thing the log cannot say: the killed stage buffers its output
-# through run_stage and loses it, so the log simply stops mid-run and reads like
-# a cancelled leg. Without this the log rules below call a commit that ran out
+# the shard records it for the first commit of its leg, which had the whole
+# budget (a later one is deferred). That is the one thing the log cannot say:
+# the killed stage buffers its output through run_stage and loses it, so the
+# log simply stops mid-run and reads like a cancelled leg. Without this the log rules below call a commit that ran out
 # of budget `transient` and the loop reruns it, which costs another full budget
 # to learn the same thing.
 exit_code_of() { # <sha> -> exit code the shard recorded, empty if none

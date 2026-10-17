@@ -84,7 +84,7 @@ It has not been judged: wait, do not guess.
 The run list says which kind of waiting it is:
 
 - a run on the branch is queued or in progress: it is coming, and a long tail behind a large push is normal;
-- a completed run planned it, but its leg deferred it at the leg deadline or could not check it out:
+- a completed run planned it, but its leg could not check it out or deferred it at the deadline, unstarted or cut short after others:
   the ordinary rule replans it on the next push;
 - no run covers it at all: nothing was ever triggered; push, or dispatch `each-rcc` on the branch.
 
@@ -115,6 +115,8 @@ The table in the playbook is ordered the way [`scripts/series-check.sh`](/script
   which reads exactly like a cancelled leg;
   [`scripts/rcc-one.sh`](/scripts/rcc-one.sh) also bounds each stage, printing "exceeded its … budget -- presumed stuck".
   Either is a REPAIR: the commit did not finish, and a rerun buys the same kill.
+  The shard records the kill only for its leg's first commit, which had the whole budget;
+  one cut short after others had only what they left, so it gets no record and is retried like a commit the leg never started.
 - **Snapshots, tests, style, check**, in that order, because each names what to fix more precisely than the next.
 - **The network**, only after those, so a real test failure that happens to mention a URL is not mistaken for a flake.
 - **A failed stage in the record** is definite: the stage ran and failed on its merits, so it is a REPAIR however little the log shows.
