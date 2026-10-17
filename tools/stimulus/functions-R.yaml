@@ -842,9 +842,6 @@ igraph_simple_cycles_callback_closure:
 # Motifs
 #######################################
 
-igraph_motifs_randesu_callback:
-    IGNORE: RR, RC, RInit  # Has callback parameter
-
 igraph_motifs_randesu_callback_closure:
     PARAMS: |-
         GRAPH graph, INTEGER size, OPTIONAL VECTOR cut_prob,
