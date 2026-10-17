@@ -77,3 +77,12 @@
       [2,] -210  590 -380
       [3,] -200 -380  580
 
+# laplacian_matrix(normalized =) is deprecated but still works
+
+    Code
+      L <- laplacian_matrix(g, normalized = TRUE, sparse = FALSE)
+    Condition
+      Warning:
+      The `normalized` argument of `laplacian_matrix()` is deprecated as of igraph 2.0.3.
+      i Please use the `normalization` argument instead.
+
