@@ -4,7 +4,7 @@
 #
 # The claims in handbook/operations/ci/per-commit/README.md are
 # measurements, so they should be reproducible: this is what produced them.
-# Five things are checked.
+# Six things are checked.
 #
 #   1. N concurrent writers publishing at once lose nothing. Records land at
 #      disjoint paths, so the only contention is on the ref, and the loser
@@ -22,6 +22,10 @@
 #      commits, inherits its empty root on a second pass, and refuses to push over
 #      a writer that landed in between.
 #   5. It survives every shape the branch can legitimately have.
+#   6. scripts/rcc-drop.sh refuses anything but a full lowercase SHA before it
+#      reads the store, names a commit the store has no record for, changes
+#      nothing as a dry run, and removes the records and logs of the commits it
+#      is named and nothing else, once.
 #
 # Checks 4 and 5 need scripts/rcc-consolidate.sh, and are reported as skipped
 # without it.
@@ -348,6 +352,81 @@ else
     fi
   done
 fi
+
+echo
+echo "== 6. dropping verdicts the job decided =="
+drop_sha="$(sha_for 888001)"
+kept_sha="$(sha_for 888002)"
+absent_sha="$(sha_for 888003)"
+printf 'a failure the workflow caused\n' > "${work}/drop-log"
+publish "${work}/wdrop" "${drop_sha}" failure "${work}/drop-log" > /dev/null
+publish "${work}/wdrop" "${kept_sha}" failure "${work}/drop-log" > /dev/null
+
+drop() { # <arg>... -> rcc-drop.sh's exit status, its output in drop.log
+  RCC_DIR="${work}/drop-publish" RCC_READ_DIR="${work}/drop-read" \
+    "${here}/rcc-drop.sh" "$@" > "${work}/drop.log" 2>&1
+}
+
+# An abbreviation, a SHA in capitals, and forty characters that start as hex
+# but do not stay it: each names no path in the store.
+before_tip="$(git -C "${work}/remote.git" rev-parse rcc2)"
+for bad in "${drop_sha:0:12}" "$(printf '%s' "${drop_sha}" | tr a-f A-F)" \
+           "${drop_sha:0:39}z"; do
+  if drop "${bad}"; then
+    fail "rcc-drop.sh accepted ${bad}"
+  else
+    grep -q 'not a full 40-character lowercase hex SHA' "${work}/drop.log" \
+      && pass "rcc-drop.sh refuses ${bad}" \
+      || fail "rcc-drop.sh failed on ${bad} for another reason (see ${work}/drop.log)"
+  fi
+done
+[ ! -d "${work}/drop-read" ] \
+  && pass "and refuses it before reading the store" \
+  || fail "a malformed SHA got as far as reading the store"
+
+drop --dry-run "${drop_sha}" "${absent_sha}" \
+  && [ "${before_tip}" = "$(git -C "${work}/remote.git" rev-parse rcc2)" ] \
+  && pass "a dry run exits 0 and changes nothing" \
+  || fail "the dry run failed or moved the branch (see ${work}/drop.log)"
+grep -q 'Would drop 1 verdict(s)' "${work}/drop.log" \
+  && grep -qxF "runs2.d/${drop_sha:0:2}/${drop_sha}.ndjson" "${work}/drop.log" \
+  && grep -qxF "logs2.d/${drop_sha:0:2}/${drop_sha}.log" "${work}/drop.log" \
+  && pass "the dry run lists the record and the log it would remove" \
+  || fail "the dry run did not list what it would remove (see ${work}/drop.log)"
+grep -q "${absent_sha}: no record" "${work}/drop.log" \
+  && pass "the dry run names the commit with no record" \
+  || fail "the dry run did not name the commit with no record"
+
+printf '# the job decided these\n\n%s  # by hand\n' "${kept_sha}" \
+  | drop --stdin --dry-run \
+  && grep -qxF "runs2.d/${kept_sha:0:2}/${kept_sha}.ndjson" "${work}/drop.log" \
+  && pass "--stdin reads one SHA per line, past comments and blank lines" \
+  || fail "--stdin did not read the SHA (see ${work}/drop.log)"
+
+drop "${drop_sha}" "${absent_sha}" "${drop_sha}" \
+  && pass "the drop exits 0 with a commit it has no record for among the rest" \
+  || fail "the drop failed (see ${work}/drop.log)"
+on_branch "runs2.d/${drop_sha:0:2}/${drop_sha}.ndjson" \
+  && fail "the dropped record is still on the branch" \
+  || pass "the record is gone"
+on_branch "logs2.d/${drop_sha:0:2}/${drop_sha}.log" \
+  && fail "the dropped log is still on the branch" \
+  || pass "and its log with it"
+on_branch "runs2.d/${kept_sha:0:2}/${kept_sha}.ndjson" \
+  && on_branch "logs2.d/${kept_sha:0:2}/${kept_sha}.log" \
+  && pass "a commit not named keeps its record and log" \
+  || fail "the drop removed a commit it was not named"
+git -C "${work}/remote.git" log -1 --format=%s rcc2 \
+  | grep -qxF "chore(rcc2): Drop 1 verdict(s) the commits did not decide" \
+  && pass "one commit, counting the verdict once and the absent commit not at all" \
+  || fail "the commit message miscounts: $(git -C "${work}/remote.git" log -1 --format=%s rcc2)"
+
+before_tip="$(git -C "${work}/remote.git" rev-parse rcc2)"
+drop "${drop_sha}" \
+  && grep -q 'Nothing to drop' "${work}/drop.log" \
+  && [ "${before_tip}" = "$(git -C "${work}/remote.git" rev-parse rcc2)" ] \
+  && pass "dropping it again does nothing, and says so" \
+  || fail "a second drop failed or moved the branch (see ${work}/drop.log)"
 
 echo
 if [ "${failures}" -eq 0 ]; then
