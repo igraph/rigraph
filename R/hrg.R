@@ -243,7 +243,7 @@ fit_hrg <- function(
   # BEGIN GENERATED ARG_HANDLE: fit_hrg, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("s", "st"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("s", "st"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn fit_hrg}.")
     # Pre-3.0.0 signature: fit_hrg(graph, hrg, start, steps)
     .old_signature <- function(start, steps, ...) {
@@ -542,7 +542,7 @@ predict_edges <- function(
   # BEGIN GENERATED ARG_HANDLE: predict_edges, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("n", "nu", "num", "num."))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("n", "nu", "num", "num."))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn predict_edges}.")
     # Pre-3.0.0 signature: predict_edges(graph, hrg, start, num.samples, num.bins)
     .old_signature <- function(start, num.samples, num.bins, ...) {

@@ -139,7 +139,7 @@ each_edge <- function(
   # BEGIN GENERATED ARG_HANDLE: each_edge, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("m"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn each_edge}.")
     # Pre-3.0.0 signature: each_edge(prob, loops, multiple, mode)
     .old_signature <- function(loops, multiple, mode, ...) {
