@@ -185,12 +185,12 @@ to `--review-remote`, `--canonical` by default.
 `--review-remote origin` puts it in the fork instead, and the run prints the head as `krlmlr:main-land-review`.
 
 `main-land-review` is the frozen `main`, one commit that removes every workflow,
-and one commit for each landing commit that changes anything outside the vendored strand,
+and one commit for each landing commit that changes anything the review shows,
 carrying that change alone under the upstream commit that asked for it.
-The generated R/C interface is shown with the glue,
-because Stimulus reads the vendored `functions.yaml` as well as `tools/stimulus/`,
-so an `_impl()` function the engine adds or removes has no other change to show for it
+It hides the vendored strand and what is generated for the compiler and the help pages
 (`series_review_hidden` in [`scripts/series-config.sh`](/scripts/series-config.sh)).
+It keeps `R/aaa-*.R`, the one place an `_impl()` function the engine adds or removes appears in R terms,
+because Stimulus reads the vendored `functions.yaml` as well as `tools/stimulus/`.
 Its checks could only fail, because the R side compiles against no engine there,
 and without workflow files the pull request starts nothing that builds or tests it,
 but for `format-suggest.yaml`, a `pull_request_target` workflow, which runs from `main`'s copy and formats the files.
@@ -209,7 +209,7 @@ It reviews the vendor commits above the series' base, its seed and the commits i
 and leaves out a tooling sync or a port of a commit `main` has, as the landing's replay does.
 Each review commit names its series commit in a `Series-commit:` trailer, where a landing's names its `Landing-commit:`.
 The run refuses, with nothing written, while `main` has a change the series has not ported:
-outside the vendored strand, the review has to equal `main-green` without its flavor,
+outside what it hides, the review has to equal `main-green` without its flavor,
 but for `NEWS.md`, the READMEs and `DESCRIPTION`'s version.
 A later review of the series takes `--suffix -v<n>` and a pull request of its own.
 

@@ -234,10 +234,10 @@ git fetch -q "$remote" "+refs/heads/$L-land-*:refs/remotes/$remote/$L-land-*"
 
 # The vendored strand, as series-forward-build.sh takes it whole, with the
 # Makevars generated from it: here the R/C interface and the cpp11
-# registration (scripts/series-config.sh). A review hides the strand alone
-# where `series_review_hidden` says so, because a generator that reads the
-# vendored tree changes the Makevars with no change under tools/stimulus/ to
-# show for it.
+# registration (scripts/series-config.sh). A review hides what
+# `series_review_hidden` names instead where it is defined,
+# because a generator that reads the vendored tree changes part of the Makevars
+# with no change under tools/stimulus/ to show for it.
 strand=("${series_strand[@]}" "${series_makevars[@]}")
 strand_excludes=()
 for p in "${strand[@]}"; do strand_excludes+=(":(exclude)$p"); done

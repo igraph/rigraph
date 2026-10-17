@@ -40,12 +40,13 @@
 #      pushed, `DESCRIPTION` included.
 #  14. --review --series writes the R side of a series' green without a
 #      landing: from the rc twins of its vendor commits above the series' base,
-#      onto `main`, leaving out the tooling syncs and ports `main` has, with the
-#      generated interface shown where `series_review_hidden` says so, and each
-#      commit naming its series commit. It writes a local branch, pushes only
-#      with --push and to --review-remote, and refuses a series that lacks a
-#      change of `main`'s and a commit among its vendor commits that is not
-#      `main`'s.
+#      onto `main`, leaving out the tooling syncs and ports `main` has, and each
+#      commit naming its series commit. It shows what `series_review_hidden`
+#      leaves: the interface's R half and the hand-written build files, but not
+#      its C half, the registration, the source and dependency lists or `man/`.
+#      It writes a local branch, pushes only with --push and to --review-remote,
+#      and refuses a series that lacks a change of `main`'s and a commit among
+#      its vendor commits that is not `main`'s.
 #
 # Usage:
 #   scripts/series-land-test.sh
@@ -530,6 +531,14 @@ engine a1a1777 1.0.1-1-ga1a1777
 echo 'glue 3, adapted to a1a1777' > src/glue.cpp
 echo 'a1a1_impl <- function() NULL' > R/aaa-auto.R
 echo 'test 3, as a1a1777 answers' > tests/testthat/test-foo.R
+# What is generated with it, and the build files written by hand.
+mkdir -p man
+echo 'SEXP R_igraph_a1a1(void);' > src/rinterface.c
+echo 'glue.o: glue.cpp vendor/cigraph/a1a1.h' > src/glue.dd
+echo 'GLUE_CPP_SOURCES=glue.o' > src/sources-glue-cpp.mk
+echo 'the help page roxygen writes for a1a1' > man/a1a1.Rd
+echo 'PKG_CPPFLAGS = -DA1A1' > src/Makevars.in
+echo '#define HAVE_A1A1 1' > src/vendor/config.h
 ydesc 1
 commit 'vendor: Update vendored sources to igraph/igraph@a1a1777'
 echo 'tool v4' > scripts/tool.sh
@@ -538,11 +547,17 @@ SYNC=$(git rev-parse --short HEAD)
 # An interface change the engine makes, with nothing under tools/stimulus/.
 engine b2b2888 1.0.1-2-gb2b2888
 echo 'b2b2_impl <- function() NULL' > R/aaa-auto.R
+echo 'SEXP R_igraph_b2b2(void);' > src/rinterface.c
+echo 'b2b2 registered' > src/cpp11.cpp
+echo 'b2b2 registered' > R/cpp11.R
 ydesc 2
 commit 'vendor: Update vendored sources to igraph/igraph@b2b2888'
 git cherry-pick -x "$FIX" >/dev/null
 PORT=$(git rev-parse --short HEAD)
+# Generated C alone, which the review does not show.
 engine c3c3999 1.0.1-3-gc3c3999
+echo 'SEXP R_igraph_c3c3(void);' > src/rinterface.c
+echo 'GLUE_C_SOURCES=rinterface.o' > src/sources-glue-c.mk
 ydesc 3
 commit 'vendor: Update vendored sources to igraph/igraph@c3c3999'
 engine d4d4000 1.0.1-4-gd4d4000
@@ -583,7 +598,12 @@ is "and so is the version" "$(git show "$REV:DESCRIPTION" | sed -n 's/^Version: 
 has "but not the rest of DESCRIPTION" "$(git show "$REV:DESCRIPTION")" "LinkingTo: cpp11"
 is "the package is main's name" "$(git show "$REV:DESCRIPTION" | sed -n 's/^Package: //p')" igraph
 is "and so is the R code the flavor renames" "$(git show "$REV:R/package.R")" 'pkg <- "igraph"'
-is "the generated interface is shown" "$(git show "$REV:R/aaa-auto.R")" 'b2b2_impl <- function() NULL'
+is "the generated interface's R half is shown" "$(git show "$REV:R/aaa-auto.R")" 'b2b2_impl <- function() NULL'
+is "and so are the build files written by hand" \
+  "$(git show "$REV:src/Makevars.in" "$REV:src/vendor/config.h")" "$(printf 'PKG_CPPFLAGS = -DA1A1\n#define HAVE_A1A1 1')"
+is "but not its C half, the registration, the source and dependency lists or man/" \
+  "$(git ls-tree -r --name-only "$REV" -- src/rinterface.c src/cpp11.cpp R/cpp11.R src/sources-glue-c.mk \
+    src/sources-glue-cpp.mk src/glue.dd man)" ""
 is "nothing above green is" "$(git show "$REV:R/foo.R")" 'foo <- function() 3'
 is "what main has is main's" "$(git show "$REV:R/bar.R")" 'bar <- function() 1'
 is "each commit is titled by its upstream commit" \
@@ -612,13 +632,15 @@ sleep 1 # a date not pinned would differ by now
 out=$(scripts/series-land.sh v3.0-y --review --series --review-remote review --push 2>&1) || true
 [ -z "${KEEP:-}" ] || echo "$out"
 has "a rerun from the aligned rc strand mints the same branch" "$out" "v3.0-y-land-review: already on review"
-is "everything else is the series' green without its flavor" \
+is "everything else is the series' green without its flavor, but for what is generated" \
   "$(git diff --name-only "$REV" origin/v3.0-y-rc-dev~1 -- . ':(exclude)src/vendor/cigraph' \
-    ':(exclude)src/vendor/igraph_version.h' ':(exclude)DESCRIPTION' ':(exclude)NEWS.md' ':(exclude).github/workflows')" ""
+    ':(exclude)src/vendor/igraph_version.h' ':(exclude)DESCRIPTION' ':(exclude)NEWS.md' ':(exclude).github/workflows' |
+    tr '\n' ' ')" \
+  "R/cpp11.R man/a1a1.Rd src/cpp11.cpp src/glue.dd src/rinterface.c src/sources-glue-c.mk src/sources-glue-cpp.mk "
 
 # Where the configuration does not name what a review hides, the Makevars are
 # hidden with the strand.
-sed -i '/^series_review_hidden=/d' scripts/series-config.sh
+echo 'unset series_review_hidden' >> scripts/series-config.sh
 out=$(scripts/series-land.sh v3.0-y --review --series --suffix -default 2>&1) || true
 git checkout -q -- scripts/series-config.sh
 [ -z "${KEEP:-}" ] || echo "$out"

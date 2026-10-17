@@ -77,13 +77,19 @@ series_makevars=(src/rinterface.c 'R/aaa-*.R' src/cpp11.cpp R/cpp11.R
   src/sources-glue-c.mk src/sources-glue-cpp.mk)
 
 # What a review of the R side hides besides the workflows and `DESCRIPTION`'s
-# version (scripts/series-land.sh --review): the strand alone. Left undefined,
-# a review hides `series_makevars` too, which suits duckdb-r, whose generated
-# files change only where tools/stimulus/ does. Stimulus here also reads the
-# vendored `interfaces/functions.yaml`, so an `_impl()` function the engine adds
-# or removes changes `R/aaa-*.R` and `src/rinterface.c` with no edit under
-# tools/stimulus/ to show for it, and the review shows them.
-series_review_hidden=("${series_strand[@]}")
+# version (scripts/series-land.sh --review).
+# Left undefined, it is the strand and `series_makevars`,
+# which suits duckdb-r, whose generated files change only with tools/stimulus/.
+# Here it is the strand and what is generated for the compiler and the help
+# pages, but not `R/aaa-*.R`.
+# Stimulus also reads the vendored `interfaces/functions.yaml`,
+# so an `_impl()` function the engine adds or removes changes `R/aaa-*.R`
+# with no edit under tools/stimulus/,
+# and that is the one place the change shows in R terms.
+# `src/rinterface.c` says it again in C, and the registration, the source and
+# dependency lists and `man/` are generated from what the review shows.
+series_review_hidden=("${series_strand[@]}" src/rinterface.c src/cpp11.cpp R/cpp11.R
+  src/sources-glue-c.mk src/sources-glue-cpp.mk 'src/*.dd' man)
 
 # How vendoring regenerates the tree from an upstream checkout, in two phases
 # around the patch stack (scripts/vendor-one.sh, scripts/vendor.sh): the tree
