@@ -197,7 +197,7 @@ adding a note to the folded commit's message.
 It is checked by the glue gate at every commit it changed and by building its tip and running the suite.
 Each gets a review pull request of its own,
 `--review --landing main-land-v<n> --suffix -v<n>`,
-read by a reviewer with a clean context;
+read by a reviewer with a clean context, briefed by [`references/review.md`](references/review.md);
 the next iteration answers what that review found, until a review finds nothing.
 The fixes then go onto the series, and the landing is built from it as above.
 
