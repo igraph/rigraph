@@ -211,6 +211,11 @@ Each review commit names its series commit in a `Series-commit:` trailer, where 
 The run refuses, with nothing written, while `main` has a change the series has not ported:
 outside what it hides, the review has to equal `main-green` without its flavor,
 but for `NEWS.md`, the READMEs and `DESCRIPTION`'s version.
+Its findings are not folded into the running series one by one.
+Each is verified first, and those that hold are collected on `main-fwd-build`,
+together with what the [revdep checks](/handbook/testing/revdep/README.md) find.
+A fresh rebuild from that branch makes a new generation of the series, as duckdb-r's `series-forward` skill builds one.
+Starting it is a person's decision, and the review does not start it.
 A later review of the series takes `--suffix -v<n>` and a pull request of its own.
 
 **Findings converge in iterations before the series takes them.**
