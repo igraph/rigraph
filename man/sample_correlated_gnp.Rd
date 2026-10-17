@@ -40,7 +40,7 @@ and shuffling its vertices.
 Please see the reference given below.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_correlated_game}{\code{correlated_game()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_density}{\code{density()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_correlated_game}{\code{correlated_game()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_density}{\code{density()}}
 }
 
 \examples{
