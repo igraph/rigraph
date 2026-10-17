@@ -9,7 +9,7 @@ graph_from_graphdb(
   ...,
   prefix = "iso",
   type = "r001",
-  nodes = NULL,
+  n = NULL,
   pair = "A",
   which = 0,
   base = "https://github.com/igraph/graphsdb/raw/refs/heads/main",
@@ -33,7 +33,7 @@ values: \code{r001}, \code{r005}, \code{r01}, \code{r02}, \code{m2D},
 \code{m4Dr6}, \code{b03}, \code{b03m}, \code{b06}, \code{b06m}, \code{b09},
 \code{b09m}.}
 
-\item{nodes}{The number of vertices in the graph.}
+\item{n}{The number of vertices in the graph.}
 
 \item{pair}{Specifies which graph of the pair to read. Possible values:
 \code{A} and \code{B}.}
@@ -66,7 +66,7 @@ a local or remote graph database file. In this case we simply call
 \code{\link[=read_graph]{read_graph()}} with the proper arguments to read the file.
 
 If \code{url} is \code{NULL}, and this is the default, then the filename is
-assembled from the \code{base}, \code{prefix}, \code{type}, \code{nodes},
+assembled from the \code{base}, \code{prefix}, \code{type}, \code{n},
 \code{pair} and \code{which} arguments.
 
 Unfortunately the original graph database homepage is now defunct, but see
