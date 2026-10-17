@@ -18,6 +18,7 @@ tkplot.fit.to.screen(tkp.id, width = NULL, height = NULL)
 
 \code{tkplot.fit.to.screen()} was renamed to \code{\link[=tk_fit]{tk_fit()}} to create a more
 consistent API.
+As \code{\link[=tkplot]{tkplot()}} is defunct, neither function has a plot to act on.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

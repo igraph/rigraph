@@ -6,6 +6,7 @@
 #'
 #' `tkplot.setcoords()` was renamed to [tk_set_coords()] to create a more
 #' consistent API.
+#' As [tkplot()] is defunct, neither function has a plot to act on.
 #' @inheritParams tk_set_coords
 #' @keywords internal
 #' @export
@@ -22,6 +23,7 @@ tkplot.setcoords <- function(tkp.id, coords) {
 #'
 #' `tkplot.rotate()` was renamed to [tk_rotate()] to create a more
 #' consistent API.
+#' As [tkplot()] is defunct, neither function has a plot to act on.
 #' @inheritParams tk_rotate
 #' @keywords internal
 #' @export
@@ -38,6 +40,7 @@ tkplot.rotate <- function(tkp.id, degree = NULL, rad = NULL) {
 #'
 #' `tkplot.reshape()` was renamed to [tk_reshape()] to create a more
 #' consistent API.
+#' As [tkplot()] is defunct, neither function has a plot to act on.
 #' @inheritParams tk_reshape
 #' @keywords internal
 #' @export
@@ -54,6 +57,7 @@ tkplot.reshape <- function(tkp.id, newlayout, ..., params) {
 #'
 #' `tkplot.off()` was renamed to [tk_off()] to create a more
 #' consistent API.
+#' As [tkplot()] is defunct, neither function has a plot to act on.
 #'
 #' @keywords internal
 #' @export
@@ -70,6 +74,7 @@ tkplot.off <- function() {
 #'
 #' `tkplot.getcoords()` was renamed to [tk_coords()] to create a more
 #' consistent API.
+#' As [tkplot()] is defunct, neither function has a plot to act on.
 #' @inheritParams tk_coords
 #' @keywords internal
 #' @export
@@ -86,6 +91,7 @@ tkplot.getcoords <- function(tkp.id, norm = FALSE) {
 #'
 #' `tkplot.fit.to.screen()` was renamed to [tk_fit()] to create a more
 #' consistent API.
+#' As [tkplot()] is defunct, neither function has a plot to act on.
 #' @inheritParams tk_fit
 #' @keywords internal
 #' @export
@@ -102,6 +108,7 @@ tkplot.fit.to.screen <- function(tkp.id, width = NULL, height = NULL) {
 #'
 #' `tkplot.export.postscript()` was renamed to [tk_postscript()] to create a more
 #' consistent API.
+#' As [tkplot()] is defunct, neither function has a plot to act on.
 #' @inheritParams tk_postscript
 #' @keywords internal
 #' @export
@@ -122,6 +129,7 @@ tkplot.export.postscript <- function(tkp.id) {
 #'
 #' `tkplot.close()` was renamed to [tk_close()] to create a more
 #' consistent API.
+#' As [tkplot()] is defunct, neither function has a plot to act on.
 #' @inheritParams tk_close
 #' @keywords internal
 #' @export
@@ -138,6 +146,7 @@ tkplot.close <- function(tkp.id, window.close = TRUE) {
 #'
 #' `tkplot.center()` was renamed to [tk_center()] to create a more
 #' consistent API.
+#' As [tkplot()] is defunct, neither function has a plot to act on.
 #' @inheritParams tk_center
 #' @keywords internal
 #' @export
@@ -154,6 +163,7 @@ tkplot.center <- function(tkp.id) {
 #'
 #' `tkplot.canvas()` was renamed to [tk_canvas()] to create a more
 #' consistent API.
+#' As [tkplot()] is defunct, neither function has a plot to act on.
 #' @inheritParams tk_canvas
 #' @keywords internal
 #' @export
@@ -197,75 +207,22 @@ assign(".next", 1, .tkplot.env)
 
 #' Interactive plotting of graphs
 #'
-#' `tkplot()` and its companion functions serve as an interactive graph
-#' drawing facility. Not all parameters of the plot can be changed
-#' interactively right now though, e.g. the colors of vertices, edges, and also
-#' others have to be pre-defined.
+#' @description
+#' `r lifecycle::badge("defunct")`
 #'
-#' `tkplot()` is an interactive graph drawing facility. It is not very well
-#' developed at this stage, but it should be still useful.
+#' `tkplot()` used to open an interactive Tcl/Tk window for drawing a graph.
+#' It is defunct since igraph 3.0.0 and throws an error when called.
+#' igraph has no interactive replacement:
+#' [plot.igraph()] draws a graph on any R graphics device,
+#' and [rglplot()] draws it in 3D.
 #'
-#' It's handling should be quite straightforward most of the time, here are
-#' some remarks and hints.
+#' `tk_close()`, `tk_off()`, `tk_fit()`, `tk_center()`, `tk_reshape()`,
+#' `tk_postscript()`, `tk_coords()`, `tk_set_coords()`, `tk_rotate()`
+#' and `tk_canvas()` acted on a window opened by `tkplot()`.
+#' As no such window can be opened any more, they have nothing to act on:
+#' `tk_off()` does nothing, and the others throw an error.
 #'
-#' There are different popup menus, activated by the right mouse button, for
-#' vertices and edges. Both operate on the current selection if the vertex/edge
-#' under the cursor is part of the selection and operate on the vertex/edge
-#' under the cursor if it is not.
-#'
-#' One selection can be active at a time, either a vertex or an edge selection.
-#' A vertex/edge can be added to a selection by holding the `control` key
-#' while clicking on it with the left mouse button. Doing this again deselect
-#' the vertex/edge.
-#'
-#' Selections can be made also from the "Select" menu. The "Select some
-#' vertices" dialog allows to give an expression for the vertices to be
-#' selected: this can be a list of numeric R expessions separated by commas,
-#' like `1,2:10,12,14,15` for example. Similarly in the "Select some
-#' edges" dialog two such lists can be given and all edges connecting a vertex
-#' in the first list to one in the second list will be selected.
-#'
-#' In the color dialog a color name like 'orange' or RGB notation can also be
-#' used.
-#'
-#' The `tkplot()` command creates a new Tk window with the graphical
-#' representation of `graph`. The command returns an integer number, the
-#' tkplot ID. The other commands utilize this ID to be able to query or
-#' manipulate the plot.
-#'
-#' `tk_close()` closes the Tk plot with ID `tkp.id`.
-#'
-#' `tk_off()` closes all Tk plots.
-#'
-#' `tk_fit()` fits the plot to the given rectangle
-#' (`width` and `height`), if some of these are `NULL` the
-#' actual physical width od height of the plot window is used.
-#'
-#' `tk_reshape()` applies a new layout to the plot, its optional
-#' parameters will be collected to a list analogous to `layout.par`.
-#'
-#' `tk_postscript()` creates a dialog window for saving the plot
-#' in postscript format.
-#'
-#' `tk_canvas()` returns the Tk canvas object that belongs to a graph
-#' plot. The canvas can be directly manipulated then, e.g. labels can be added,
-#' it could be saved to a file programmatically, etc. See an example below.
-#'
-#' `tk_coords()` returns the coordinates of the vertices in a matrix.
-#' Each row corresponds to one vertex.
-#'
-#' `tk_set_coords()` sets the coordinates of the vertices. A two-column
-#' matrix specifies the new positions, with each row corresponding to a single
-#' vertex.
-#'
-#' `tk_center()` shifts the figure to the center of its plot window.
-#'
-#' `tk_rotate()` rotates the figure, its parameter can be given either
-#' in degrees or in radians.
-#'
-#' tkplot.center tkplot.rotate
-#' @param graph The `graph` to plot.
-#' @param canvas.width,canvas.height The size of the tkplot drawing area.
+#' @param graph,canvas.width,canvas.height Ignored, `tkplot()` is defunct.
 #' @param tkp.id The ID of the tkplot window to close/reshape/etc.
 #' @param window.close Leave this on the default value.
 #' @param width The width of the rectangle for generating new coordinates.
@@ -276,56 +233,18 @@ assign(".next", 1, .tkplot.env)
 #'   vertices, in absolute coordinates.
 #' @param degree The degree to rotate the plot.
 #' @param rad The degree to rotate the plot, in radian.
-#' @param \dots For `tkplot()`, additional plotting parameters, see
-#'   [igraph.plotting] for the complete list. For `tk_close()`, `tk_fit()`,
-#'   `tk_coords()` and `tk_rotate()`, these dots must be empty.
-#' @return `tkplot()` returns an integer, the ID of the plot, this can be
-#'   used to manipulate it from the command line.
+#' @param \dots Ignored by `tkplot()`.
+#'   For `tk_close()`, `tk_fit()`, `tk_coords()` and `tk_rotate()`,
+#'   these dots must be empty.
+#' @return `tkplot()` throws an error.
 #'
-#'   `tk_canvas()` returns `tkwin` object, the Tk canvas.
-#'
-#'   `tk_coords()` returns a matrix with the coordinates.
-#'
-#'   `tk_close()`, `tk_off()`, `tk_fit()`,
-#'   `tk_reshape()`, `tk_postscript()`, `tk_center()`
-#'   and `tk_rotate()` return `NULL` invisibly.
+#'   `tk_off()` returns `NULL` invisibly.
+#'   The other functions throw an error, as no plot with ID `tkp.id` exists.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [plot.igraph()], [layout()]
 #' @family tkplot
 #' @export
 #' @keywords graphs
-#' @section Examples:
-#' \preformatted{
-#' g <- make_ring(10)
-#' tkplot(g)
-#'
-#' ## Saving a tkplot() to a file programmatically
-#' g <- make_star(10, center=10) %u% make_ring(9, directed=TRUE)
-#' E(g)$width <- sample(1:10, ecount(g), replace=TRUE)
-#' lay <- layout_nicely(g)
-#'
-#' id <- tkplot(g, layout=lay)
-#' canvas <- tk_canvas(id)
-#' tcltk::tkpostscript(canvas, file="/tmp/output.eps")
-#' tk_close(id)
-#'
-#' ## Setting the coordinates and adding a title label
-#' g <- make_ring(10)
-#' id <- tkplot(make_ring(10), canvas.width=450, canvas.height=500)
-#'
-#' canvas <- tk_canvas(id)
-#' padding <- 20
-#' coords <- norm_coords(layout_in_circle(g), 0+padding, 450-padding,
-#'                       50+padding, 500-padding)
-#' tk_set_coords(id, coords)
-#'
-#' width <- as.numeric(tkcget(canvas, "-width"))
-#' height <- as.numeric(tkcget(canvas, "-height"))
-#' tkcreate(canvas, "text", width/2, 25, text="My title",
-#'          justify="center", font=tcltk::tkfont.create(family="helvetica",
-#'          size=20,weight="bold"))
-#' }
-#'
 tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
   lifecycle::deprecate_stop("3.0.0", "tkplot()")
 }

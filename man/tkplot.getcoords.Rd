@@ -16,5 +16,6 @@ tkplot.getcoords(tkp.id, norm = FALSE)
 
 \code{tkplot.getcoords()} was renamed to \code{\link[=tk_coords]{tk_coords()}} to create a more
 consistent API.
+As \code{\link[=tkplot]{tkplot()}} is defunct, neither function has a plot to act on.
 }
 \keyword{internal}
