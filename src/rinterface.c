@@ -13995,6 +13995,30 @@ SEXP R_igraph_count_triangles(SEXP graph) {
 }
 
 /*-------------------------------------------/
+/ igraph_is_triangle_free                    /
+/-------------------------------------------*/
+SEXP R_igraph_is_triangle_free(SEXP graph) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_bool_t c_res;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  Rz_SEXP_to_igraph(graph, &c_graph);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_is_triangle_free(&c_graph, &c_res));
+
+                                        /* Convert output */
+  PROTECT(res=NEW_LOGICAL(1));
+  LOGICAL(res)[0]=c_res;
+  r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_local_scan_0                        /
 /-------------------------------------------*/
 SEXP R_igraph_local_scan_0(SEXP graph, SEXP weights, SEXP mode) {
