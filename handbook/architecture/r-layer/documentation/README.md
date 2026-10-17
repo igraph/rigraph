@@ -4,6 +4,8 @@ How the reference pages are written: roxygen2 with Markdown syntax, regenerated 
 
 * A function documents every argument and its return value, with an explicit `@description`, and `@details` only for what does not fit there.
 * Formulas use `\eqn{...}` inline and `\deqn{...}` on their own line.
+* Examples read igraphdata's data sets with `data(karate, package = "igraphdata")` under `@examplesIf nzchar(system.file(package = "igraphdata"))`.
+  `library(igraphdata)` and `rlang::is_installed()` would load its namespace, and with it `igraph` beside a flavor ([#2975](https://github.com/igraph/rigraph/issues/2975)).
 * Each sentence of a roxygen comment takes its own line.
 * Prose writes "ID" and "IDs" for vertex and edge IDs; lowercase stays only where the token is code.
   `Rscript tools/check-id-casing.R` finds violations.

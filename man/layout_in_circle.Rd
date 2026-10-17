@@ -29,12 +29,11 @@ If you want to order the vertices differently, then permute them using the
 }
 
 \examples{
-\dontshow{if (rlang::ns_env(cluster_optimal)$has_glpk() && rlang::is_installed("igraphdata")) withAutoprint(\{ # examplesIf}
+\dontshow{if (rlang::ns_env(cluster_optimal)$has_glpk() && nzchar(system.file(package = "igraphdata"))) withAutoprint(\{ # examplesIf}
 
 ## Place vertices on a circle, order them according to their
 ## community
-library(igraphdata)
-data(karate)
+data(karate, package = "igraphdata")
 karate_groups <- cluster_optimal(karate)
 coords <- layout_in_circle(karate,
   order =
