@@ -201,6 +201,22 @@ iea_game_impl <- function(
   res
 }
 
+is_triangle_free_impl <- function(
+  graph
+) {
+  # Argument checks
+  ensure_igraph(graph)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_is_triangle_free,
+    graph
+  )
+
+  res
+}
+
 lune_beta_skeleton_impl <- function(
   points,
   beta = 1
