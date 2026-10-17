@@ -43,6 +43,8 @@ SEXP Rx_igraph_add_env(SEXP graph);
 
 void Rx_igraph_attribute_clean_preserve_list(void);
 void Rx_igraph_set_in_r_check(bool set);
+bool Rx_igraph_callback_running(void);
+SEXP Rx_igraph_eval_callback(SEXP call, SEXP rho);
 void Rx_igraph_error(void);
 void Rx_igraph_warning(void);
 void Rx_igraph_interrupt(void);
