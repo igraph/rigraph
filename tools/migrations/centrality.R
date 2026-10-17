@@ -116,7 +116,7 @@ migrations <- list(
       nodes,
       loops,
       exponent,
-      rescale,
+      rescale = normalized,
       tol,
       sparse,
       weights
@@ -127,7 +127,7 @@ migrations <- list(
       ...,
       loops = FALSE,
       exponent = 1,
-      rescale = FALSE,
+      normalized = FALSE,
       tol = 1e-7,
       sparse = TRUE,
       weights = NULL

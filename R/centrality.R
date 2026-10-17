@@ -233,6 +233,8 @@ edge.betweenness <- function(
 #' `bonpow()` was renamed to [power_centrality()] to create a more
 #' consistent API.
 #' @inheritParams power_centrality
+#' @param rescale `r lifecycle::badge("deprecated")` Use `normalized` in
+#'   [power_centrality()] instead.
 #' @keywords internal
 #' @export
 bonpow <- function(
@@ -251,7 +253,7 @@ bonpow <- function(
     nodes = nodes,
     loops = loops,
     exponent = exponent,
-    rescale = rescale,
+    normalized = rescale,
     tol = tol,
     sparse = sparse
   )
@@ -1719,7 +1721,7 @@ diversity <- function(
 #' scores are the same as authority scores.
 #'
 #' @param graph The input graph.
-#' @param scale Logical, whether to scale the result to have a maximum
+#' @param normalized Logical, whether to scale the result to have a maximum
 #'   score of one. If no scaling is used then the result vector has unit length
 #'   in the Euclidean norm.
 #' @param weights Optional positive weight vector for calculating weighted
@@ -1729,6 +1731,7 @@ diversity <- function(
 #'   edges are effectively added up.
 #' @param options A named list, to override some ARPACK options. See
 #'   [arpack()] for details. The default `NULL` uses [arpack_defaults()].
+#' @param scale `r lifecycle::badge("deprecated")` Use `normalized` instead.
 #' @inheritParams rlang::args_dots_empty
 #' @return A named list with members:
 #'   \describe{
@@ -1766,11 +1769,27 @@ diversity <- function(
 hits_scores <- function(
   graph,
   ...,
-  scale = TRUE,
+  normalized = TRUE,
   weights = NULL,
-  options = NULL
+  options = NULL,
+  scale = deprecated()
 ) {
   rlang::check_dots_empty()
+
+  if (lifecycle::is_present(scale)) {
+    if (!missing(normalized)) {
+      cli::cli_abort(c(
+        "Argument {.arg normalized} of {.fn hits_scores} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg scale}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "hits_scores(scale = )",
+      "hits_scores(normalized = )"
+    )
+    normalized <- scale
+  }
 
   if (is.null(options)) {
     options <- arpack_defaults()
@@ -1778,7 +1797,7 @@ hits_scores <- function(
 
   hub_and_authority_scores_impl(
     graph = graph,
-    scale = scale,
+    scale = normalized,
     weights = weights,
     options = options
   )
@@ -1810,7 +1829,7 @@ authority_score <- function(
 
   scores <- hits_scores(
     graph = graph,
-    scale = scale,
+    normalized = scale,
     weights = weights,
     options = options
   )
@@ -1855,7 +1874,7 @@ hub_score <- function(
 
   scores <- hits_scores(
     graph = graph,
-    scale = scale,
+    normalized = scale,
     weights = weights,
     options = options
   )
@@ -2266,7 +2285,7 @@ bonpow.sparse <- function(
 #'   loops.  `loops` is `FALSE` by default.
 #' @param exponent exponent (decay rate) for the Bonacich power centrality
 #'   score; can be negative
-#' @param rescale if true, centrality scores are rescaled such that they sum to
+#' @param normalized if true, centrality scores are rescaled such that they sum to
 #'   1.
 #' @param tol tolerance for near-singularities during matrix inversion (see
 #'   [Matrix::solve()])
@@ -2325,7 +2344,7 @@ power_centrality <- function(
   ...,
   loops = FALSE,
   exponent = 1,
-  rescale = FALSE,
+  normalized = FALSE,
   tol = 1e-7,
   sparse = TRUE,
   weights = NULL
@@ -2333,6 +2352,8 @@ power_centrality <- function(
   # BEGIN GENERATED ARG_HANDLE: power_centrality, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("n", "no"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn power_centrality}.", i = "Spell out the full argument name."))
     # Pre-3.0.0 signature: power_centrality(graph, nodes, loops, exponent, rescale, tol, sparse, weights)
     .old_signature <- function(loops, exponent, rescale, tol, sparse, weights, ...) {
       if (...length() > 0L) {
@@ -2344,7 +2365,7 @@ power_centrality <- function(
       base::c(
         if (!base::missing(loops)) base::list(loops = loops),
         if (!base::missing(exponent)) base::list(exponent = exponent),
-        if (!base::missing(rescale)) base::list(rescale = rescale),
+        if (!base::missing(rescale)) base::list(normalized = rescale),
         if (!base::missing(tol)) base::list(tol = tol),
         if (!base::missing(sparse)) base::list(sparse = sparse),
         if (!base::missing(weights)) base::list(weights = weights)
@@ -2356,7 +2377,7 @@ power_centrality <- function(
       .arg_conflict <- base::intersect(.arg_names, base::c(
         if (!base::missing(loops)) "loops",
         if (!base::missing(exponent)) "exponent",
-        if (!base::missing(rescale)) "rescale",
+        if (!base::missing(normalized)) "normalized",
         if (!base::missing(tol)) "tol",
         if (!base::missing(sparse)) "sparse",
         if (!base::missing(weights)) "weights"
@@ -2367,7 +2388,7 @@ power_centrality <- function(
         "3.0.0",
         what = base::I("Calling `power_centrality()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  power_centrality(", base::paste(base::c("graph", "nodes", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  power_centrality(", base::paste(base::c("graph", "nodes", base::c(loops = "loops", exponent = "exponent", normalized = "rescale", tol = "tol", sparse = "sparse", weights = "weights")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    power_centrality(", base::paste(base::c("graph", "nodes", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -2386,7 +2407,7 @@ power_centrality <- function(
       nodes,
       loops,
       exponent,
-      rescale,
+      normalized,
       tol,
       weights = weights
     )
@@ -2396,7 +2417,7 @@ power_centrality <- function(
       nodes,
       loops,
       exponent,
-      rescale,
+      normalized,
       tol,
       weights = weights
     )
