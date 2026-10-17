@@ -17,8 +17,9 @@
 #   3. A block a vendor commit took away, leaving a note where it stood that
 #      names the upstream commit it vendors, is removed, and so is its snapshot
 #      entry; neither is lost. A block the same commit took from elsewhere in
-#      the file, a note naming another upstream commit, and a rewind's note are
-#      no removal, and a snapshot entry whose block stays is lost still.
+#      the file, a note naming another upstream commit, a rewind's note and one
+#      by a commit that vendors nothing are no removal, and a snapshot entry
+#      whose block stays is lost still.
 #   4. For a tree, the note has to name the tree's own engine and be new to it.
 #   5. A changed path is marked as rewound when a rewind took out a line the tip
 #      still lacks, and not when a later commit put it back.
@@ -127,6 +128,10 @@ commit 'vendor: Update vendored sources to igraph/igraph@3333333'
 V3=$(git rev-parse HEAD)
 
 git rm -q $T/test-g.R
+# A note by a commit that vendors nothing, which therefore names no upstream
+# commit of its own.
+{ echo '# upstream igraph@2222222: p_one() is removed.'
+  echo '# upstream igraph@2222222: p_gone() is removed.'; } > $T/test-p.R
 commit 'fix: A commit that vendors nothing'
 N1=$(git rev-parse HEAD)
 
@@ -167,7 +172,7 @@ has "and so is one a helper gained" "$out" '(outside a test) skip_if(TRUE, "not 
 has "the deletion names its commit, as a rewind" "$out" "by $(short "$V1") igraph/igraph@1111111, 1.0.0-100-g1111111, a rewind"
 has "the skip names its commit, not as a rewind" "$out" "by $(short "$V2") igraph/igraph@2222222, 1.0.1-5-g2222222"
 has "a commit of another kind is named too" "$out" "by $(short "$N1") fix: A commit that vendors nothing"
-has "and it counts them" "$out" "TESTS LOST: 12 test(s)"
+has "and it counts them" "$out" "TESTS LOST: 13 test(s)"
 hasnt "nothing names a gate" "$out" "gate"
 
 # --- 3: removals -----------------------------------------------------------------
@@ -182,6 +187,7 @@ has "and so is its snapshot entry" "$pout" "$(tab removed $T/_snaps/r.md '# r go
 has "a block the same commit took elsewhere is lost" "$pout" "$(tab block $T/test-r.R 'test_that("r far"' "$V2")"
 has "a note naming another upstream commit makes no removal" "$pout" "$(tab block $T/test-q.R 'test_that("q two"' "$V3")"
 has "nor does a rewind's" "$pout" "$(tab block $T/test-c.R 'test_that("c two"' "$V1")"
+has "nor one by a commit that vendors nothing" "$pout" "$(tab block $T/test-p.R 'test_that("p one"' "$N1")"
 has "a snapshot entry whose block stays is lost" "$pout" "$(tab snapshot $T/_snaps/a.md '# a two')"
 is "the kinds in the file and its snapshots" \
   "$(run "$M" "$V2" --porcelain -- $T/test-r.R $T/_snaps/r.md | cut -f1 | sort | uniq -c | awk '{ printf "%s:%s ", $2, $1 }')" \
@@ -231,7 +237,7 @@ echo
 echo "== a tree is read the same, with no culprit"
 TREE=$(git rev-parse "s^{tree}")
 out=$(run "$M" "$TREE")
-has "it is lost the same, and the removals by an earlier engine with it" "$out" "TESTS LOST: 15 test(s)"
+has "it is lost the same, and the removals by an earlier engine with it" "$out" "TESTS LOST: 16 test(s)"
 hasnt "with nobody named" "$out" "by $(short "$V1")"
 out=$(run "$M" "$TREE" --vendored)
 has "--vendored refuses one" "$out" "EXIT=2"
