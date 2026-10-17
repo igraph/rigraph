@@ -576,6 +576,37 @@ extended_chordal_ring_impl <- function(
   res
 }
 
+hexagonal_lattice_impl <- function(
+  dimvector,
+  ...,
+  directed = FALSE,
+  mutual = FALSE
+) {
+  # Argument checks
+  check_dots_empty()
+  dimvector <- as.numeric(dimvector)
+  directed <- as.logical(directed)
+  mutual <- as.logical(mutual)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_hexagonal_lattice,
+    dimvector,
+    directed,
+    mutual
+  )
+
+  if (igraph_opt("add.params")) {
+    res$name <- 'Hexagonal lattice'
+    res$dimvector <- dimvector
+    res$directed <- directed
+    res$mutual <- mutual
+  }
+
+  res
+}
+
 hypercube_impl <- function(
   n,
   directed = FALSE
