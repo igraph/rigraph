@@ -4,7 +4,7 @@
 #
 # The claim the script makes is that a fix written on the landing commit that
 # introduced a defect ends up in that commit and in every commit above it,
-# and nowhere else, with the landing's shape and dates kept. Eight things are
+# and nowhere else, with the landing's shape and dates kept. Twelve things are
 # checked.
 #
 #   1. The commits below the lowest target keep their SHAs, and the landing
@@ -21,6 +21,14 @@
 #      replayed.
 #   8. A note follows the upstream subjects a vendor commit's message ends with,
 #      which look like trailers but are not.
+#   9. Run from the worktree it rewrites, as the skills run it, the fold folds
+#      into a target that does not carry the script and into one that carries
+#      an older copy alike: the replay runs the copy it started with.
+#  10. A fold step that fails stops the replay, and --continue runs it again
+#      rather than past it, so the fold is in the result and only then done.
+#  11. A replay that ends without a fold is not done: status 3, the fix named.
+#  12. A fix that conflicts at its target is folded once, by --continue, and the
+#      check says it was resolved by hand.
 #
 # Usage:
 #   scripts/series-fold-test.sh
@@ -41,6 +49,7 @@ ok() { pass=$((pass + 1)); echo "  ok   $1"; }
 no() { fail=$((fail + 1)); echo "  FAIL $1"; }
 is() { if [ "$2" = "$3" ]; then ok "$1"; else no "$1"; echo "         actual: $2"; echo "       expected: $3"; fi; }
 has() { case "$2" in *"$3"*) ok "$1" ;; *) no "$1"; echo "       missing: $3" ;; esac; }
+hasnt() { case "$2" in *"$3"*) no "$1"; echo "    unexpected: $3" ;; *) ok "$1" ;; esac; }
 
 # --- the fixture -----------------------------------------------------------
 #
@@ -189,6 +198,110 @@ nfc: remove RNG_BEGIN()/RNG_END() macros
 chore: update CHANGELOG
 
 R-side fix: f() returns six."
+
+echo "=== 9. a target without the script, or with an older copy, folds alike"
+# A line of its own on main: the first target carries no scripts/, the second an
+# older copy that would fold nothing, and a tooling sync above them brings this
+# one, which the fold is run as, from the worktree at the tip.
+git checkout -q --detach "$main"
+echo 7 > src/vendor/cigraph/engine
+GIT_COMMITTER_DATE='1700000000 +0000' git commit -q -a -m 'vendor: Update vendored sources to igraph/igraph@007'
+bare=$(git rev-parse HEAD)
+mkdir -p scripts
+printf '#!/bin/bash\necho ran >> %q\nexit 0\n' "$SCRATCH/stale.log" > scripts/series-fold.sh
+chmod +x scripts/series-fold.sh
+echo 8 > src/vendor/cigraph/engine
+git add -A
+GIT_COMMITTER_DATE='1700000000 +0000' git commit -q -m 'vendor: Update vendored sources to igraph/igraph@008'
+stale=$(git rev-parse HEAD)
+cp "$HERE/series-fold.sh" scripts/series-fold.sh
+GIT_COMMITTER_DATE='1700000000 +0000' git commit -q -a -m 'chore(series): Sync tooling with main'
+echo 9 > src/vendor/cigraph/engine
+GIT_COMMITTER_DATE='1700000000 +0000' git commit -q -a -m 'vendor: Update vendored sources to igraph/igraph@009'
+synced=$(git rev-parse HEAD)
+git checkout -q --detach "$bare"
+echo 'f <- function() 7' > R/f.R
+GIT_COMMITTER_DATE='1700000000 +0000' git commit -q -a -m 'fix: f() returns seven'
+fix7=$(git rev-parse HEAD)
+git checkout -q --detach "$stale"
+sed -i 's/^one$/one (fixed)/' src/glue.cpp
+GIT_COMMITTER_DATE='1700000000 +0000' git commit -q -a -m 'fix: The glue reads one correctly'
+fix8=$(git rev-parse HEAD)
+git checkout -q --detach "$synced"
+set +e
+scripts/series-fold.sh "$synced" --fold "$bare=$fix7" --fold "$stale=$fix8" > "$SCRATCH/out" 2>&1
+st=$?
+set -e
+is "the fold finishes" "$st" 0
+has "and says so" "$(cat "$SCRATCH/out")" "series-fold: done at"
+is "the target without the script carries its fix" "$(git show HEAD~3:R/f.R)" 'f <- function() 7'
+is "and so does the one with an older copy" "$(git show HEAD~2:src/glue.cpp | sed -n 1p)" "one (fixed)"
+is "which never ran" "$(cat "$SCRATCH/stale.log" 2>/dev/null)" ""
+is "the tip carries both" "$(git show HEAD:R/f.R) $(git show HEAD:src/glue.cpp | sed -n 1p)" 'f <- function() 7 one (fixed)'
+is "and the git dir keeps nothing of the fold" "$(cd "$(git rev-parse --absolute-git-dir)" && ls -d series-fold* 2>/dev/null)" ""
+
+echo "=== 10. a fold step that fails is run again by --continue"
+# The --exec takes the copy's execute bit away after every commit, so the second
+# fold step fails to start, as one would where the script was missing.
+# shellcheck disable=SC2016  # the rebase's shell expands it, at every exec
+sabotage='chmod -x "$(git rev-parse --absolute-git-dir)/series-fold.sh"'
+copy=$(git rev-parse --absolute-git-dir)/series-fold.sh
+git checkout -q --detach "$landing"
+set +e
+"$HERE/series-fold.sh" "$landing" --fold "$(v 2)=$fix2" --fold "$(v 4)=$fix4" --exec "$sabotage" > "$SCRATCH/out" 2>&1
+st=$?
+set -e
+is "the replay stops at the failed step" "$st" 1
+hasnt "and is not done" "$(cat "$SCRATCH/out")" "done at"
+set +e
+"$HERE/series-fold.sh" --continue > "$SCRATCH/out" 2>&1
+st=$?
+set -e
+is "--continue runs the step again, which fails again" "$st" 1
+hasnt "and is still not done" "$(cat "$SCRATCH/out")" "done at"
+chmod +x "$copy"
+"$HERE/series-fold.sh" --continue > "$SCRATCH/out" 2>&1 || { no "--continue finishes once the step can run"; cat "$SCRATCH/out"; }
+has "and is done then" "$(cat "$SCRATCH/out")" "done at"
+is "with both fixes folded" "$(git show HEAD~3:src/glue.cpp | sed -n 2p) $(git show HEAD~1:R/f.R)" "two (fixed) f <- function() 2"
+
+echo "=== 11. a replay that ends without a fold is not done"
+git checkout -q --detach "$landing"
+set +e
+"$HERE/series-fold.sh" "$landing" --fold "$(v 2)=$fix2" --fold "$(v 4)=$fix4" --exec "$sabotage" > /dev/null 2>&1
+GIT_SEQUENCE_EDITOR="sed -i '/--apply/d'" git rebase --edit-todo
+chmod +x "$copy"
+"$HERE/series-fold.sh" --continue > "$SCRATCH/out" 2>&1
+st=$?
+set -e
+is "--continue past a lost fold step ends with status 3" "$st" 3
+hasnt "and is not done" "$(cat "$SCRATCH/out")" "done at"
+has "naming the fix" "$(cat "$SCRATCH/out")" "the fix $(git rev-parse --short "$fix4") is not in"
+is "the fold before it is in the result" "$(git show HEAD~3:src/glue.cpp | sed -n 2p)" "two (fixed)"
+is "the landing is not moved" "$(git rev-parse "$landing")" "$landing"
+git checkout -q --detach "$landing"
+"$HERE/series-fold.sh" "$landing" --fold "$(v 4)=$fix4" > /dev/null 2>&1 || no "a fold starts again afterwards"
+
+echo "=== 12. a fix that conflicts at its target is folded once, by --continue"
+git checkout -q --detach "$(v 4)"
+sed -i 's/^two$/two (v4)/' src/glue.cpp
+GIT_COMMITTER_DATE='1700000000 +0000' git commit -q -a -m 'fix: The glue reads two as engine 4 does'
+fix4b=$(git rev-parse HEAD)
+git checkout -q --detach "$landing"
+set +e
+"$HERE/series-fold.sh" "$landing" --fold "$(v 2)=$fix2" --fold "$(v 4)=$fix4b:Folded: the glue reads two as engine 4 does." \
+  > "$SCRATCH/out" 2>&1
+st=$?
+set -e
+is "the fix stops at its target, where the fold below changed the same line" "$st" 1
+has "and says so" "$(cat "$SCRATCH/out")" "does not apply at"
+git show HEAD:src/glue.cpp | sed 's/^two (fixed)$/two (fixed, v4)/' > src/glue.cpp
+git add src/glue.cpp
+"$HERE/series-fold.sh" --continue > "$SCRATCH/out" 2>&1 || { no "--continue finishes"; cat "$SCRATCH/out"; }
+has "and is done" "$(cat "$SCRATCH/out")" "done at"
+has "naming the fold resolved by hand" "$(cat "$SCRATCH/out")" "$(git rev-parse --short "$fix4b") was resolved by hand"
+is "the resolution is carried to the tip" "$(git show HEAD:src/glue.cpp | sed -n 2p)" "two (fixed, v4)"
+is "the note is added once" "$(git log -1 --format=%B HEAD~1 | grep -c '^Folded: ')" 1
+is "the landing keeps its length" "$(git rev-list --count "$main..HEAD")" 5
 
 echo
 echo "$pass passed, $fail failed"
