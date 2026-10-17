@@ -59,8 +59,9 @@
 #      the base series folded.
 #  18. A carry never stops a test the forward runs: a twin that deleted a test
 #      file or skipped a test for good leaves the forward's copy where it is,
-#      and the commit message says so, while an engine gate and a snapshot
-#      fold in the same twin carry as usual.
+#      and the commit message says so, while a test removed with its function
+#      upstream, noted where it stood, and a snapshot fold in the same twin
+#      carry as usual.
 #  19. A buffer replayed from the base `-dev` carries nothing twice: the twin's
 #      fix is in the buffer commit under a blob `main`'s drift moved on, the
 #      twin's own change reverse-applies there, and the chunk is a plain ref
@@ -341,25 +342,28 @@ git branch tsync-green tsync-dev
 git branch tsync-build-base "$TSYNC_V1"
 
 # --- a base whose rewind took tests away, and its forward (claim 18) --------
-# The seed runs three tests; the base twin of the one buffer commit deletes the
-# first, skips the second for good, gates the third and folds a snapshot, as a
-# rewind did on `v2.0-cyanoptera-fwd`.
+# The seed runs four tests; the base twin of the one buffer commit deletes the
+# first, skips the second for good, as a rewind did on `v2.0-cyanoptera-fwd`,
+# removes the third with the function upstream removed, and folds a snapshot.
 git checkout -q -b loss-seed base-seed
-for t in gone skip gate; do
+for t in gone skip; do
   printf 'test_that("%s", {\n  expect_true(TRUE)\n})\n' "$t" > "tests/testthat/test-$t.R"
 done
+for t in stays removed; do
+  printf 'test_that("%s", {\n  expect_true(TRUE)\n})\n\n' "$t"
+done > tests/testthat/test-removed.R
 git add -A
-git commit -qm 'test: Three tests main runs'
+git commit -qm 'test: Four tests main runs'
 git checkout -q -b loss-build loss-seed
 bvendor ace1111 1.0.0.9000.1 o.c
 git checkout -q -b loss-dev loss-seed
 bvendor ace1111 1.0.0.9000.1 o.c
 git rm -q tests/testthat/test-gone.R
 printf 'test_that("skip", {\n  skip_on_cran()\n  expect_true(TRUE)\n})\n' > tests/testthat/test-skip.R
-printf 'test_that("gate", {\n  skip_if_engine_before("9.9.9", "not yet")\n  expect_true(TRUE)\n})\n' \
-  > tests/testthat/test-gate.R
+printf 'test_that("stays", {\n  expect_true(TRUE)\n})\n\n# upstream igraph@ace1111: removed() is removed.\n' \
+  > tests/testthat/test-removed.R
 echo 'snapshot one, as ace1111 renders it' > tests/testthat/_snaps/sql.md
-amend 'Rewound: test-gone.R removed, test-skip.R skipped, test-gate.R gated.'
+amend 'Rewound: test-gone.R removed, test-skip.R skipped, and removed() went upstream with its test.'
 git branch loss-green loss-dev
 git branch loss-build-base loss-build
 git branch loss-fwd-build loss-build
@@ -845,11 +849,14 @@ has "the chunk completes" "$out" 'EXIT=0'
 has "it names what it kept" "$out" 'kept tests/testthat/test-gone.R'
 is "a deleted test is still there" "$(git show "$L:tests/testthat/test-gone.R" | head -n 1)" 'test_that("gone", {'
 hasnt "a test skipped for good is not skipped" "$(git show "$L:tests/testthat/test-skip.R")" 'skip_on_cran'
-has "a gated test carries its gate" "$(git show "$L:tests/testthat/test-gate.R")" 'skip_if_engine_before("9.9.9"'
+has "a test removed with its function carries its note" "$(git show "$L:tests/testthat/test-removed.R")" \
+  '# upstream igraph@ace1111: removed() is removed.'
+hasnt "and goes" "$(git show "$L:tests/testthat/test-removed.R")" 'test_that("removed"'
 is "and the snapshot fold carries" "$(git show "$L:tests/testthat/_snaps/sql.md")" 'snapshot one, as ace1111 renders it'
 has "the message says what was not carried" "$(git log -1 --format=%B "$L")" \
   'Not carried, because it would stop a test this series runs:'
 has "naming the path" "$(git log -1 --format=%B "$L")" "\`tests/testthat/test-skip.R\`"
+hasnt "but not the removal" "$(git log -1 --format=%B "$L")" "\`tests/testthat/test-removed.R\`"
 
 echo
 echo "== a buffer replayed from the base -dev carries nothing twice"

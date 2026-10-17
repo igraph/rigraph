@@ -21,10 +21,11 @@
 # PATCH DRIFT line: the buffer regenerates its tree from its own patch stack, so
 # an entry that never reached it is one the next vendor run will not apply.
 #
-# A series one of whose vendor commits stopped a test `main` runs, or left an
-# expired engine gate in one, gets a TESTS line (scripts/series-tests.sh): the
-# change travels with that commit into every forward and landing, and a restore
-# made later as a commit of its own travels with neither.
+# A series one of whose vendor commits stopped a test `main` runs, other than by
+# removing it with the function upstream removed, gets a TESTS line
+# (scripts/series-tests.sh): the change travels with that commit into every
+# forward and landing, and a restore made later as a commit of its own travels
+# with neither.
 #
 # A series whose buffer vendored a release before upstream tagged it gets a
 # LATE TAG line: the commit stamps the previous release's version, and a
@@ -637,21 +638,21 @@ for S in "${series[@]}"; do
   fi
 
   # A test `main` runs that a vendor commit of this series stopped, deleted or
-  # skipped without an engine gate, and a gate that has expired and is due to
-  # go (handbook/operations/vendoring/series-loop/README.md). A landing refuses
+  # skipped, but not one it removed with the function upstream removed
+  # (handbook/operations/vendoring/adaptation/README.md). A landing refuses
   # each, so it is named on every firing, while the commit that took it may
   # still be above green. Only a vendor commit's, because a test `main` added
   # since the last port is stage 4's, and only what the tip still lacks.
   if [ -n "$main_ref" ]; then
     lost=$("$(dirname "$0")/series-tests.sh" "$main_ref" "$dev" --vendored --porcelain 2>/dev/null || true)
-    lost=$(awk -F'\t' '$1 ~ /^(deleted|block|snapshot|skip|expired)$/' <<<"$lost")
+    lost=$(awk -F'\t' '$1 ~ /^(deleted|block|snapshot|skip)$/' <<<"$lost")
     if [ -n "$lost" ]; then
-      echo "  TESTS  $(grep -c . <<<"$lost") of main's test(s) stopped or still gated by a vendor commit of $S-dev:"
+      echo "  TESTS  $(grep -c . <<<"$lost") of main's test(s) stopped by a vendor commit of $S-dev:"
       while IFS=$'\t' read -r k p w c; do
         printf '         %-8s %s, by %s\n' "$k" "$p" "$(git log -1 --format='%h %s' "$c" | cut -c1-72)"
         [ "$k" = deleted ] || printf '                  %s\n' "${w:0:110}"
       done <<<"$lost"
-      echo "         Restore each in the commit that took it, or gate it (.claude/skills/series-loop/SKILL.md stage 2):"
+      echo "         Restore each in the commit that took it, or note a removal (.claude/skills/series-loop/SKILL.md stage 2):"
       echo "         scripts/series-tests.sh ${main_ref#refs/remotes/} $dev"
     fi
   fi

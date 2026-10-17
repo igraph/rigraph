@@ -8,7 +8,7 @@ What a series guarantees, and what would actually catch a violation.
 * **Version**: each strand advances its own version component and freezes the other; the fifth rises with every vendor commit.
 * **Source of truth**: R-side work is born on `main` and reaches a series by porting, never the reverse.
 * **Flavor**: the names inside a branch agree with each other everywhere in the branch.
-* **Tests**: a series never stops a test `main` runs ([`operations/vendoring/adaptation/`](/handbook/operations/vendoring/adaptation/README.md)).
+* **Tests**: a series stops no test `main` runs but one whose function upstream removed ([`operations/vendoring/adaptation/`](/handbook/operations/vendoring/adaptation/README.md)).
 
 **Most of these are enforced by nothing but the routine and review.**
 [`scripts/series-advance.sh`](/scripts/series-advance.sh) checks two on every firing:

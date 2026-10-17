@@ -63,10 +63,10 @@ each stage after it is skipped when it has nothing to do, and they run in this o
 * **Open a pull request** against igraph/rigraph's `main` for whatever the tooling got wrong and the firing had to work around.
 
 **A test a vendor commit stops would reach `main`.**
-The adaptation rules say a series never stops a test `main` runs, and the loop is where that binds:
+The adaptation rules say a series stops no test `main` runs but one whose function upstream removed, and the loop is where that binds:
 a landing replays vendor commits only, so a deletion or a skip folded into one travels to `main`,
 while a restore made later as a commit of its own travels with nothing.
-That is why a test an older engine cannot pass is gated inside the vendor commit, naming the version that ends the gate.
+That is why a test changes only inside the vendor commit whose engine asks for the change, never behind a check of the engine's version.
 
 When a stage stops, the cause is told apart in [`troubleshooting/`](/handbook/operations/vendoring/troubleshooting/README.md).
 

@@ -28,7 +28,7 @@ where a session named them otherwise, pass those options rather than renaming.
 ## The upstream clone
 
 **History and tags**, because igraph's CMake writes `git describe --tags` into `IGRAPH_VERSION`,
-which every vendor commit carries and the engine gates of stage 2 compare against.
+which every vendor commit carries.
 A shallow clone answers `describe` from what it can reach, and a tagless one cannot answer at all,
 so `vendor-one.sh` refuses either with exit 6 before it vendors anything; fetch, do not work around it.
 `vendor-one.sh` pins `core.abbrev` to 9 in its own clone, so the version header depends on the upstream commit alone.
