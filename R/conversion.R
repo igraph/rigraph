@@ -1920,6 +1920,17 @@ graph.data.frame <- function(d, directed = TRUE, vertices = NULL) {
 #' symbolic edge list given in `d` is checked to contain only vertex names
 #' listed in `vertices`.
 #'
+#' If `vertex_ids` is `TRUE`, the first two columns of `d` are interpreted as
+#' numeric vertex IDs instead of symbolic vertex names.
+#' In this case, the rows of `vertices` correspond to the vertices in the order
+#' of their IDs, all columns of `vertices` are added as vertex attributes, and
+#' no \sQuote{`name`} attribute is created unless `vertices` has a `name`
+#' column.
+#' If `vertices` is `NULL`, the number of vertices is the largest vertex ID in
+#' `d`.
+#' This is the inverse of `as_data_frame(what = "both")` for graphs without
+#' vertex names.
+#'
 #' Typically, the data frames are exported from some spreadsheet software like
 #' Excel and are imported into R via [read.table()],
 #' [read.delim()] or [read.csv()].
@@ -1955,6 +1966,9 @@ graph.data.frame <- function(d, directed = TRUE, vertices = NULL) {
 #' @param vertices A data frame with vertex metadata, or `NULL`. See
 #'   details below. Since version 0.7 this argument is coerced to a data frame
 #'   with `as.data.frame`, if not `NULL`.
+#' @param vertex_ids Logical, whether the first two columns of `d` contain
+#'   numeric vertex IDs rather than symbolic vertex names.
+#'   See details below.
 #' @return An igraph graph object for `graph_from_data_frame()`, and either a
 #'   data frame or a list of two data frames named `edges` and
 #'   `vertices` for `as.data.frame`.
@@ -2001,16 +2015,32 @@ graph.data.frame <- function(d, directed = TRUE, vertices = NULL) {
 #' as_data_frame(g, what = "vertices")
 #' as_data_frame(g, what = "edges")
 #'
+#' ## Round trip for a graph without vertex names,
+#' ## including the isolated vertex 5
+#' g2 <- make_graph(c(1, 2, 2, 3, 3, 4, 4, 1), n = 5, directed = FALSE)
+#' V(g2)$color <- c("red", "green", "blue", "red", "green")
+#' df <- as_data_frame(g2, what = "both")
+#' g3 <- graph_from_data_frame(
+#'   df$edges,
+#'   directed = FALSE,
+#'   vertices = df$vertices,
+#'   vertex_ids = TRUE
+#' )
+#' identical_graphs(g2, g3)
+#'
 #' @export
 graph_from_data_frame <- function(
   d,
   directed = TRUE,
   ...,
-  vertices = NULL
+  vertices = NULL,
+  vertex_ids = FALSE
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph_from_data_frame, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("v", "ve", "ver", "vert"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn graph_from_data_frame}.")
     # Pre-3.0.0 signature: graph_from_data_frame(d, directed, vertices)
     .old_signature <- function(vertices, ...) {
       if (...length() > 0L) {
@@ -2043,6 +2073,8 @@ graph_from_data_frame <- function(
   }
   # END GENERATED ARG_HANDLE
 
+  check_bool(vertex_ids)
+
   d <- as.data.frame(d)
   if (!is.null(vertices)) {
     vertices <- as.data.frame(vertices)
@@ -2055,28 +2087,36 @@ graph_from_data_frame <- function(
   ## Handle if some elements are 'NA' (first two columns are interpreted as from/to)
   ensure_no_na(d[, 1:2], "edge data frame")
 
-  if (!is.null(vertices) && anyNA(vertices[, 1])) {
-    cli::cli_warn(
-      "In {.code vertices[,1]}, {.code NA} elements were replaced with string {.str NA}."
-    )
-    vertices[, 1][is.na(vertices[, 1])] <- "NA"
+  if (vertex_ids) {
+    return(graph_from_data_frame_ids(d, directed, vertices))
   }
 
   names <- unique(c(as.character(d[, 1]), as.character(d[, 2])))
   if (!is.null(vertices)) {
     names2 <- names
-    vertices <- as.data.frame(vertices)
     if (ncol(vertices) < 1) {
-      cli::cli_abort("{.arg vertices} contains no rows")
+      cli::cli_abort(c(
+        "{.arg vertices} contains no columns.",
+        i = "Use {.code vertex_ids = TRUE} if {.arg d} contains numeric vertex IDs."
+      ))
+    }
+    if (anyNA(vertices[, 1])) {
+      cli::cli_warn(
+        "In {.code vertices[,1]}, {.code NA} elements were replaced with string {.str NA}."
+      )
+      vertices[, 1][is.na(vertices[, 1])] <- "NA"
     }
     names <- as.character(vertices[, 1])
     if (anyDuplicated(names) > 0) {
       cli::cli_abort("{.arg vertices} contains duplicated vertex names")
     }
     if (!all(names2 %in% names)) {
-      cli::cli_abort(
-        "Some vertex names in {.arg d} are not listed in {.arg vertices}"
-      )
+      cli::cli_abort(c(
+        "Some vertex names in {.arg d} are not listed in {.arg vertices}",
+        i = if (looks_like_vertex_ids(d, nrow(vertices))) {
+          "Use {.code vertex_ids = TRUE} if {.arg d} contains numeric vertex IDs."
+        }
+      ))
     }
   }
 
@@ -2103,17 +2143,58 @@ graph_from_data_frame <- function(
   edges <- rbind(match(from, names), match(to, names))
 
   # edge attributes
-  attrs <- list()
-  if (ncol(d) > 2) {
-    for (i in 3:ncol(d)) {
-      newval <- d[, i]
-      attrs[[names(d)[i]]] <- newval
-    }
-  }
+  attrs <- edge_attrs_from_data_frame(d)
 
   # add the edges
   g <- add_edges(g, edges, attr = attrs)
   g
+}
+
+# `vertex_ids = TRUE`: the first two columns of `d` are vertex IDs,
+# and every column of `vertices` is a vertex attribute, so no `name` is created.
+# This is the inverse of `as_data_frame(what = "both")` for unnamed graphs.
+graph_from_data_frame_ids <- function(
+  d,
+  directed,
+  vertices,
+  call = caller_env()
+) {
+  ids <- c(d[, 1], d[, 2])
+  if (!is.numeric(ids) || any(ids < 1) || any(ids != round(ids))) {
+    cli::cli_abort(
+      "The first two columns of {.arg d} must contain positive whole numbers if {.code vertex_ids = TRUE}.",
+      call = call
+    )
+  }
+
+  n <- if (is.null(vertices)) max(ids, 0) else nrow(vertices)
+  if (any(ids > n)) {
+    cli::cli_abort(
+      "Some vertex IDs in {.arg d} are larger than the number of rows in {.arg vertices} ({n}).",
+      call = call
+    )
+  }
+
+  g <- make_empty_graph(n = 0, directed = directed)
+  g <- add_vertices(g, n, attr = as.list(vertices))
+
+  edges <- rbind(d[, 1], d[, 2])
+  add_edges(g, edges, attr = edge_attrs_from_data_frame(d))
+}
+
+edge_attrs_from_data_frame <- function(d) {
+  attrs <- list()
+  if (ncol(d) > 2) {
+    for (i in 3:ncol(d)) {
+      attrs[[names(d)[i]]] <- d[, i]
+    }
+  }
+  attrs
+}
+
+looks_like_vertex_ids <- function(d, n) {
+  ids <- c(d[, 1], d[, 2])
+  is.numeric(ids) && all(ids >= 1 & ids <= n & ids == round(ids))
 }
 
 #' Constructor specifications for `graph_()`, `make_()` and `sample_()`

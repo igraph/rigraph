@@ -152,6 +152,53 @@
       2    2  3    2         b          B       c        C
       3    1  3    1         a          A       c        C
 
+# graph_from_data_frame(vertex_ids = TRUE) errors
+
+    Code
+      graph_from_data_frame(data.frame(from = "a", to = "b"), vertex_ids = TRUE)
+    Condition
+      Error in `graph_from_data_frame()`:
+      ! The first two columns of `d` must contain positive whole numbers if `vertex_ids = TRUE`.
+    Code
+      graph_from_data_frame(data.frame(from = 1.5, to = 2), vertex_ids = TRUE)
+    Condition
+      Error in `graph_from_data_frame()`:
+      ! The first two columns of `d` must contain positive whole numbers if `vertex_ids = TRUE`.
+    Code
+      graph_from_data_frame(data.frame(from = 1, to = 4), vertices = data.frame(a = 1:
+        3), vertex_ids = TRUE)
+    Condition
+      Error in `graph_from_data_frame()`:
+      ! Some vertex IDs in `d` are larger than the number of rows in `vertices` (3).
+    Code
+      graph_from_data_frame(data.frame(from = 1, to = 2), vertex_ids = NA)
+    Condition
+      Error in `graph_from_data_frame()`:
+      ! `vertex_ids` must be `TRUE` or `FALSE`, not `NA`.
+
+# graph_from_data_frame() hints at `vertex_ids` for numeric edges
+
+    Code
+      graph_from_data_frame(data.frame(from = 2, to = 3), vertices = data.frame(a = letters[
+        1:4]))
+    Condition
+      Error in `graph_from_data_frame()`:
+      ! Some vertex names in `d` are not listed in `vertices`
+      i Use `vertex_ids = TRUE` if `d` contains numeric vertex IDs.
+    Code
+      graph_from_data_frame(data.frame(from = 1, to = 2), vertices = data.frame(
+        row.names = 1:2))
+    Condition
+      Error in `graph_from_data_frame()`:
+      ! `vertices` contains no columns.
+      i Use `vertex_ids = TRUE` if `d` contains numeric vertex IDs.
+    Code
+      graph_from_data_frame(data.frame(from = "x", to = "y"), vertices = data.frame(
+        name = c("a", "b")))
+    Condition
+      Error in `graph_from_data_frame()`:
+      ! Some vertex names in `d` are not listed in `vertices`
+
 # graph_from_edgelist errors for NAs
 
     Code
