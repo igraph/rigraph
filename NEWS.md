@@ -1,5 +1,26 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.3.9044
+
+## Bug fixes
+
+### series
+
+- Put a fold's note after the upstream subjects, not above them (#2957).
+
+### series
+
+- Date the regenerated tree anew, so a same-size upstream edit is vendored (#2956).
+
+## Features
+
+- Vendor the C-docs roclet from igraph.r2cdocs (#2899, #2955).
+
+### series
+
+- Keep the `rcc2` store with its pruning, and fix the firing's setup (#2949).
+
+
 # igraph 2.3.3.9043
 
 ## Bug fixes
