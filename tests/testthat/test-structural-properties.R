@@ -855,6 +855,17 @@ test_that("laplacian_matrix() works", {
   expect_snapshot(laplacian_matrix(Ai, normalization = "unnormalized"))
 })
 
+test_that("laplacian_matrix(normalized =) is deprecated but still works", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  g <- make_ring(5)
+  expected <- laplacian_matrix(g, normalization = "symmetric", sparse = FALSE)
+  expect_snapshot_igraph(
+    L <- laplacian_matrix(g, normalized = TRUE, sparse = FALSE)
+  )
+  expect_equal(L, expected)
+  expect_no_warning(laplacian_matrix(g, sparse = FALSE))
+})
+
 test_that("mean_distance works", {
   igraph_local_seed(42)
   avg_path_length <- function(graph) {
