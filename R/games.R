@@ -5137,6 +5137,10 @@ sample_correlated_gnp <- function(
   }
   # END GENERATED ARG_HANDLE
 
+  if (!is.null(permutation)) {
+    check_permutation(permutation, vcount(old.graph))
+  }
+
   if (is.null(p)) {
     p <- edge_density(old.graph)
   }
@@ -5191,6 +5195,11 @@ sample_correlated_gnp_pair <- function(
   directed = FALSE,
   permutation = NULL
 ) {
+  if (!is.null(permutation)) {
+    # The same coercion as `correlated_pair_game_impl()` applies.
+    check_permutation(permutation, as.numeric(n))
+  }
+
   correlated_pair_game_impl(
     n = n,
     corr = corr,
