@@ -154,6 +154,28 @@ gabriel_graph_impl <- function(
   res
 }
 
+hamming_impl <- function(
+  n,
+  q,
+  directed = FALSE
+) {
+  # Argument checks
+  n <- as.numeric(n)
+  q <- as.numeric(q)
+  directed <- as.logical(directed)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_hamming,
+    n,
+    q,
+    directed
+  )
+
+  res
+}
+
 iea_game_impl <- function(
   n,
   m,

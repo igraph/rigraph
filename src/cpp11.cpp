@@ -234,6 +234,7 @@ extern SEXP R_igraph_graphlets_candidate_basis(SEXP, SEXP);
 extern SEXP R_igraph_graphlets_project(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_grg_game(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_growing_random_game(SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_hamming(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_harmonic_centrality(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_harmonic_centrality_cutoff(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_has_attribute_table(void);
@@ -809,6 +810,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_graphlets_project",                              (DL_FUNC) &R_igraph_graphlets_project,                               6},
     {"R_igraph_grg_game",                                       (DL_FUNC) &R_igraph_grg_game,                                        3},
     {"R_igraph_growing_random_game",                            (DL_FUNC) &R_igraph_growing_random_game,                             4},
+    {"R_igraph_hamming",                                        (DL_FUNC) &R_igraph_hamming,                                         3},
     {"R_igraph_harmonic_centrality",                            (DL_FUNC) &R_igraph_harmonic_centrality,                             5},
     {"R_igraph_harmonic_centrality_cutoff",                     (DL_FUNC) &R_igraph_harmonic_centrality_cutoff,                      6},
     {"R_igraph_has_attribute_table",                            (DL_FUNC) &R_igraph_has_attribute_table,                             0},
