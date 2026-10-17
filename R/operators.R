@@ -1029,8 +1029,6 @@ compose <- function(
   # BEGIN GENERATED ARG_HANDLE: compose, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("g", "gr", "gra", "grap", "graph", "v", "ve", "ver", "vert", "verte", "vertex", "e", "ed", "edg", "edge"))
-    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn compose}.")
     # Pre-3.0.0 signature: compose(g1, g2, byname, graph.attr.comb, vertex.attr.comb, edge.attr.comb)
     .old_signature <- function(byname, graph.attr.comb, vertex.attr.comb, edge.attr.comb, ...) {
       if (...length() > 0L) {
