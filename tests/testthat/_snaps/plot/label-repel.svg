@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' data-engine-version='2.0' width='720.00pt' height='576.00pt' viewBox='0 0 720.00 576.00'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<defs>
+  <clipPath id='cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA='>
+    <rect x='0.00' y='0.00' width='720.00' height='576.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+</g>
+<defs>
+  <clipPath id='cpNTkuMDR8Njg5Ljc2fDU5LjA0fDUwMi41Ng=='>
+    <rect x='59.04' y='59.04' width='630.72' height='443.52' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpNTkuMDR8Njg5Ljc2fDU5LjA0fDUwMi41Ng==)'>
+<circle cx='197.53' cy='456.90' r='11.62' style='stroke-width: 0.75; fill: #E69F00;' />
+<circle cx='214.38' cy='439.29' r='11.62' style='stroke-width: 0.75; fill: #E69F00;' />
+<circle cx='231.22' cy='474.51' r='11.62' style='stroke-width: 0.75; fill: #E69F00;' />
+<circle cx='180.69' cy='449.86' r='11.62' style='stroke-width: 0.75; fill: #E69F00;' />
+<circle cx='534.42' cy='104.70' r='11.62' style='stroke-width: 0.75; fill: #E69F00;' />
+<circle cx='551.27' cy='122.31' r='11.62' style='stroke-width: 0.75; fill: #E69F00;' />
+<circle cx='517.58' cy='87.09' r='11.62' style='stroke-width: 0.75; fill: #E69F00;' />
+<circle cx='568.11' cy='97.66' r='11.62' style='stroke-width: 0.75; fill: #E69F00;' />
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+<text x='197.53' y='464.15' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='26.01px' lengthAdjust='spacingAndGlyphs'>Alice</text>
+<text x='214.38' y='443.58' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='21.36px' lengthAdjust='spacingAndGlyphs'>Bob</text>
+<text x='231.22' y='478.80' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='28.68px' lengthAdjust='spacingAndGlyphs'>Carol</text>
+<text x='180.69' y='450.97' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='28.02px' lengthAdjust='spacingAndGlyphs'>Dave</text>
+<text x='534.42' y='108.77' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='20.69px' lengthAdjust='spacingAndGlyphs'>Eve</text>
+<text x='551.27' y='126.60' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='30.68px' lengthAdjust='spacingAndGlyphs'>Frank</text>
+<text x='517.58' y='91.22' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='32.69px' lengthAdjust='spacingAndGlyphs'>Grace</text>
+<text x='568.11' y='101.95' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='27.35px' lengthAdjust='spacingAndGlyphs'>Heidi</text>
+</g>
+</svg>
