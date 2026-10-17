@@ -49,6 +49,12 @@ glue_compiles() { # [failures]
   for probe in "${series_glue_probes[@]}"; do
     line=$(glue_compile_line "$probe" "$extra")
     [ -n "$line" ] || { rm -f "$own"; return 2; }
+    # What GCC 14 and the link make errors, a C compiler before them only
+    # warns about: a call to a function the engine dropped, or a callback of
+    # the wrong type. C only, because C++ rejects both already.
+    if [ "${probe##*.}" = c ]; then
+      line="$line -Werror=implicit-function-declaration -Werror=incompatible-pointer-types"
+    fi
     # shellcheck disable=SC2016  # the sh child expands $CMD and $1, not this shell
     (cd src && shopt -s nullglob && files=(*."${probe##*.}") && [ ${#files[@]} -gt 0 ] &&
       printf '%s\n' "${files[@]}" |
