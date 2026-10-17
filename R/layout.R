@@ -3100,6 +3100,7 @@ layout_with_sugiyama <- function(
     maxiter = maxiter,
     weights = weights
   )
+  res <- sugiyama_extended_graph(graph, res)
 
   # Flip the y coordinates, more natural this way
   vc <- vcount(graph)
@@ -3198,6 +3199,67 @@ layout_with_sugiyama <- function(
   }
 
   res$res <- NULL
+  res
+}
+
+# Upstream returns the points each edge passes through instead of the extended
+# graph with one dummy vertex per point (krlmlr/igraph@aaf5ec4).
+# This rebuilds that graph, its map to the original edges, and the layout of
+# the real and then the dummy vertices, numbered as igraph numbered them:
+# edge by edge in the order it walked them, in increasing layer within an edge.
+sugiyama_extended_graph <- function(graph, res) {
+  vc <- vcount(graph)
+  directed <- is_directed(graph)
+  el <- as_edgelist(graph, names = FALSE)
+
+  # igraph walked the edges by component, by the vertex they leave (the
+  # smaller endpoint if undirected), by the other endpoint and by decreasing
+  # ID, and saw the loops of an undirected graph twice, all of them each time.
+  from <- if (directed) el[, 1] else pmin(el[, 1], el[, 2])
+  to <- if (directed) el[, 2] else pmax(el[, 1], el[, 2])
+  eids <- seq_len(nrow(el))
+  pass <- rep(1, length(eids))
+  if (!directed) {
+    loops <- eids[from == to]
+    eids <- c(eids, loops)
+    pass <- c(pass, rep(2, length(loops)))
+  }
+  comp <- components(graph, mode = "weak")$membership
+  eids <- eids[order(comp[from[eids]], from[eids], to[eids], pass, -eids)]
+
+  extd_edges <- vector("list", length(eids))
+  extd_orig <- vector("list", length(eids))
+  dummy <- vector("list", length(eids))
+  next_id <- vc
+  for (i in seq_along(eids)) {
+    e <- eids[[i]]
+    points <- res$routing[[e]]
+    k <- NROW(points)
+    if (k == 0) {
+      chain <- c(from[[e]], to[[e]])
+    } else {
+      # Dummy vertices are numbered in increasing layer, the chain runs from
+      # the vertex the edge leaves.
+      points <- points[order(points[, 2]), , drop = FALSE]
+      ids <- next_id + seq_len(k)
+      next_id <- next_id + k
+      dummy[[i]] <- points
+      if (res$res[from[[e]], 2] > res$res[to[[e]], 2]) {
+        ids <- rev(ids)
+      }
+      chain <- c(from[[e]], ids, to[[e]])
+    }
+    extd_edges[[i]] <- rbind(chain[-length(chain)], chain[-1])
+    extd_orig[[i]] <- rep(e, length(chain) - 1)
+  }
+
+  res$res <- rbind(res$res, do.call(rbind, dummy))
+  res$extd_graph <- make_empty_graph(next_id, directed = directed)
+  if (length(eids) > 0) {
+    res$extd_graph <- add_edges(res$extd_graph, unlist(extd_edges))
+  }
+  res$extd_to_orig_eids <- as.numeric(unlist(extd_orig))
+  res$routing <- NULL
   res
 }
 

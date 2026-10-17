@@ -56,7 +56,7 @@ the energy function. The default \code{NULL} uses
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_davidson_harel}{\code{layout_davidson_harel()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_density}{\code{density()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_davidson_harel}{\code{layout_davidson_harel()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_density}{\code{density()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
 }
 
 \keyword{internal}

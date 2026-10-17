@@ -123,14 +123,14 @@ isoclass_subgraph_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
-  vids <- as.numeric(vids)
+  vids <- as_igraph_vs(graph, vids)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_isoclass_subgraph,
     graph,
-    vids
+    vids - 1
   )
 
   res
@@ -169,7 +169,7 @@ automorphism_group_impl <- function(
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_automorphism_group,
+    R_igraph_automorphism_group_bliss,
     graph,
     colors,
     sh
@@ -213,7 +213,7 @@ canonical_permutation_impl <- function(
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_canonical_permutation,
+    R_igraph_canonical_permutation_bliss,
     graph,
     colors,
     sh
@@ -252,7 +252,7 @@ count_automorphisms_impl <- function(
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_count_automorphisms,
+    R_igraph_count_automorphisms_bliss,
     graph,
     colors,
     sh
@@ -355,7 +355,7 @@ subisomorphic_lad_impl <- function(
     )
   }
   induced <- as.logical(induced)
-  time_limit <- as.numeric(time_limit)
+  if (!missing(time_limit)) { warning("Argument `time_limit' is deprecated and has no effect") }
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -364,8 +364,7 @@ subisomorphic_lad_impl <- function(
     pattern,
     target,
     if (!is.null(domains)) lapply(domains, function(.x) .x - 1),
-    induced,
-    time_limit
+    induced
   )
 
   res

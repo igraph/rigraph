@@ -36,8 +36,12 @@
 #include "cigraph/src/graph/internal.h"
 
 #include "uuid/uuid.h"
+#include "rrandom.h"
 
-#define IGRAPH_I_DESTROY IGRAPH_I_ATTRIBUTE_DESTROY
+/* Upstream dropped IGRAPH_I_ATTRIBUTE_DESTROY() (krlmlr/igraph@d69d60d), which
+ * the generated interface uses to release a graph's attributes. */
+#define IGRAPH_I_DESTROY(graph) \
+    do { if ((graph)->attr) igraph_i_attribute_destroy(graph); } while (0)
 
 SEXP Rx_igraph_add_env(SEXP graph);
 
@@ -119,6 +123,7 @@ igraph_error_t Rz_SEXP_to_attr_comb(SEXP input, igraph_attribute_combination_t *
         Rx_igraph_set_in_r_check(true); \
         igraph_error_type_t __c = func; \
         Rx_igraph_set_in_r_check(false); \
+        igraph_rng_R_end(); \
         Rx_igraph_warning(); \
         if (__c == IGRAPH_INTERRUPTED) { Rx_igraph_interrupt(); } \
         else if (__c != IGRAPH_SUCCESS) { Rx_igraph_error(); } \
@@ -173,7 +178,7 @@ SEXP R_igraph_layout_drl_3d(SEXP graph, SEXP res, SEXP use_seed, SEXP options, S
 
 /* Motifs */
 igraph_error_t R_igraph_motifs_handler(const igraph_t *graph,
-                                       igraph_vector_int_t *vids,
+                                       const igraph_vector_int_t *vids,
                                        igraph_integer_t isoclass,
                                        void *extra);
 
@@ -308,7 +313,7 @@ igraph_error_t igraph_community_leading_eigenvector_callback_closure(
     igraph_bool_t start,
     igraph_vector_t *eigenvalues,
     igraph_vector_list_t *eigenvectors,
-    igraph_vector_t *history,
+    igraph_vector_int_t *history,
     SEXP callback,
     SEXP extra,
     SEXP env,

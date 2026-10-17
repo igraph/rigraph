@@ -1308,10 +1308,13 @@ get.incidence.dense <- function(
   weights = numeric()
 ) {
   if (length(weights) == 0) {
-    ## Function call
+    # Upstream can weigh the matrix by edge weights (krlmlr/igraph@829b348),
+    # which get_biadjacency_impl() takes from the weight attribute:
+    # NA ignores them here, and the weighted matrix is built below.
     res <- get_biadjacency_impl(
       graph = graph,
-      types = types
+      types = types,
+      weights = NA
     )
 
     if (names && "name" %in% vertex_attr_names(graph)) {

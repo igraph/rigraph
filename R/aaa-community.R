@@ -6,7 +6,8 @@
 
 community_optimal_modularity_impl <- function(
   graph,
-  weights = NULL
+  weights = NULL,
+  resolution = 1.0
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -18,13 +19,15 @@ community_optimal_modularity_impl <- function(
   } else {
     weights <- NULL
   }
+  resolution <- as.numeric(resolution)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_community_optimal_modularity,
     graph,
-    weights
+    weights,
+    resolution
   )
 
   res
@@ -403,7 +406,7 @@ community_leiden_impl <- function(
   vertex_weights = NULL,
   resolution,
   beta = 0.01,
-  start,
+  start = FALSE,
   n_iterations = 2,
   membership = NULL
 ) {
@@ -516,7 +519,8 @@ community_eb_get_merges_impl <- function(
 community_edge_betweenness_impl <- function(
   graph,
   directed = TRUE,
-  weights = NULL
+  weights = NULL,
+  lengths = NULL
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -529,6 +533,11 @@ community_edge_betweenness_impl <- function(
   } else {
     weights <- NULL
   }
+  if (!is.null(lengths) && !all(is.na(lengths))) {
+    lengths <- as.numeric(lengths)
+  } else {
+    lengths <- NULL
+  }
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -536,7 +545,8 @@ community_edge_betweenness_impl <- function(
     R_igraph_community_edge_betweenness,
     graph,
     directed,
-    weights
+    weights,
+    lengths
   )
 
   res
@@ -569,7 +579,9 @@ community_infomap_impl <- function(
   graph,
   e_weights = NULL,
   v_weights = NULL,
-  nb_trials = 10
+  nb_trials = 10,
+  is_regularized = FALSE,
+  regularization_strength = 1
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -590,6 +602,8 @@ community_infomap_impl <- function(
     v_weights <- NULL
   }
   nb_trials <- as.numeric(nb_trials)
+  is_regularized <- as.logical(is_regularized)
+  regularization_strength <- as.numeric(regularization_strength)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -598,7 +612,9 @@ community_infomap_impl <- function(
     graph,
     e_weights,
     v_weights,
-    nb_trials
+    nb_trials,
+    is_regularized,
+    regularization_strength
   )
 
   res
@@ -611,7 +627,8 @@ community_label_propagation_impl <- function(
   mode = c("all", "out", "in", "total"),
   weights = NULL,
   initial = NULL,
-  fixed = NULL
+  fixed = NULL,
+  lpa_variant = c("dominance", "retention", "fast")
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -636,6 +653,12 @@ community_label_propagation_impl <- function(
   if (!is.null(fixed)) {
     fixed <- as.logical(fixed)
   }
+  lpa_variant <- switch_igraph_arg(
+    lpa_variant,
+    "dominance" = 0L,
+    "retention" = 1L,
+    "fast" = 2L
+  )
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -645,7 +668,8 @@ community_label_propagation_impl <- function(
     mode,
     weights,
     initial,
-    fixed
+    fixed,
+    lpa_variant
   )
 
   res

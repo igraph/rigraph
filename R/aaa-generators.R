@@ -21,6 +21,9 @@ adjacency_impl <- function(
     "plus" = 5L,
     "max" = 6L
   )
+  if (is.logical(loops)) {
+    loops <- if (loops) "twice" else "none"
+  }
   loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -81,6 +84,9 @@ sparse_adjacency_impl <- function(
     "plus" = 5L,
     "max" = 6L
   )
+  if (is.logical(loops)) {
+    loops <- if (loops) "twice" else "none"
+  }
   loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -113,6 +119,9 @@ sparse_weighted_adjacency_impl <- function(
     "plus" = 5L,
     "max" = 6L
   )
+  if (is.logical(loops)) {
+    loops <- if (loops) "twice" else "none"
+  }
   loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -144,6 +153,9 @@ weighted_adjacency_impl <- function(
     "plus" = 5L,
     "max" = 6L
   )
+  if (is.logical(loops)) {
+    loops <- if (loops) "twice" else "none"
+  }
   loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -152,31 +164,6 @@ weighted_adjacency_impl <- function(
     R_igraph_weighted_adjacency,
     adjmatrix,
     mode,
-    loops
-  )
-
-  res
-}
-
-weighted_sparsemat_impl <- function(
-  A,
-  directed,
-  attr,
-  loops = FALSE
-) {
-  # Argument checks
-  requireNamespace("Matrix", quietly = TRUE)
-  A <- as(as(as(A, "dMatrix"), "generalMatrix"), "CsparseMatrix")
-  directed <- as.logical(directed)
-  loops <- as.logical(loops)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_weighted_sparsemat,
-    A,
-    directed,
-    attr,
     loops
   )
 
@@ -608,7 +595,7 @@ lcf_vector_impl <- function(
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_lcf_vector,
+    R_igraph_lcf,
     n,
     shifts,
     repeats

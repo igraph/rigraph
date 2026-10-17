@@ -209,58 +209,6 @@ dfs_closure_impl <- function(
 
 # ==== random-walks ====
 
-random_edge_walk_impl <- function(
-  graph,
-  weights = NULL,
-  start,
-  mode = c("out", "in", "all", "total"),
-  steps,
-  stuck = c("return", "error")
-) {
-  # Argument checks
-  ensure_igraph(graph)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && !all(is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  start <- as_igraph_vs(graph, start)
-  if (length(start) != 1) {
-    cli::cli_abort(
-      "{.arg start} must specify exactly one vertex",
-      call = rlang::caller_env()
-    )
-  }
-  mode <- switch_igraph_arg(
-    mode,
-    "out" = 1L,
-    "in" = 2L,
-    "all" = 3L,
-    "total" = 3L
-  )
-  steps <- as.numeric(steps)
-  stuck <- switch_igraph_arg(stuck, "error" = 0L, "return" = 1L)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_random_edge_walk,
-    graph,
-    weights,
-    start - 1,
-    mode,
-    steps,
-    stuck
-  )
-  if (igraph_opt("return.vs.es")) {
-    res <- create_es(graph, res)
-  }
-  res
-}
-
 random_walk_impl <- function(
   graph,
   start,

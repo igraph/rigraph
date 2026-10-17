@@ -1891,7 +1891,9 @@ test_that("get_all_simple_paths_impl basic", {
     from = 1,
     to = 3
   )
-  expect_s3_class(result, "igraph.vs")
+  # upstream igraph@f5ccd96: igraph_get_all_simple_paths() returns a list of paths
+  expect_type(result, "list")
+  expect_s3_class(result[[1]], "igraph.vs")
 })
 
 test_that("get_all_simple_paths_impl errors", {
@@ -4145,32 +4147,8 @@ test_that("average_local_efficiency_impl errors", {
   ))
 })
 
-# 160. transitive_closure_dag_impl
-
-test_that("transitive_closure_dag_impl basic", {
-  igraph_local_seed(20250909)
-  g <- path_graph_impl(
-    n = 3,
-    directed = TRUE
-  )
-
-  expect_snapshot(transitive_closure_dag_impl(
-    graph = g
-  ))
-
-  # Structured tests
-  result <- transitive_closure_dag_impl(
-    graph = g
-  )
-  expect_s3_class(result, "igraph")
-})
-
-test_that("transitive_closure_dag_impl errors", {
-  igraph_local_seed(20250909)
-  expect_snapshot_igraph_error(transitive_closure_dag_impl(
-    graph = NULL
-  ))
-})
+# upstream igraph@d4f6ebf: igraph_transitive_closure_dag() is removed,
+# and no R code calls it.
 
 # 161. transitive_closure_impl
 
@@ -9405,184 +9383,8 @@ test_that("is_edge_coloring_impl errors", {
   ))
 })
 
-# 327. deterministic_optimal_imitation_impl
-
-test_that("deterministic_optimal_imitation_impl basic", {
-  igraph_local_seed(12345)
-  g <- path_graph_impl(
-    n = 3
-  )
-
-  expect_snapshot(deterministic_optimal_imitation_impl(
-    graph = g,
-    vid = 1,
-    quantities = c(1, 2, 3),
-    strategies = c(1, 2, 3)
-  ))
-  expect_snapshot(deterministic_optimal_imitation_impl(
-    graph = g,
-    vid = 1,
-    optimality = "minimum",
-    quantities = c(1, 2, 3),
-    strategies = c(1, 2, 3),
-    mode = "in"
-  ))
-
-  # Structured tests
-  result <- deterministic_optimal_imitation_impl(
-    graph = g,
-    vid = 1,
-    quantities = c(1, 2, 3),
-    strategies = c(1, 2, 3)
-  )
-  expect_true(is.numeric(result) || is.logical(result))
-})
-
-test_that("deterministic_optimal_imitation_impl errors", {
-  igraph_local_seed(12345)
-  expect_snapshot_igraph_error(
-    deterministic_optimal_imitation_impl(
-      graph = NULL,
-      vid = 1,
-      quantities = c(1, 2, 3),
-      strategies = c(1, 2, 3)
-    )
-  )
-})
-
-# 328. moran_process_impl
-
-test_that("moran_process_impl basic", {
-  igraph_local_seed(12345)
-  g <- path_graph_impl(
-    n = 3
-  )
-
-  expect_snapshot(moran_process_impl(
-    graph = g,
-    weights = c(1, 1),
-    quantities = c(1, 2, 3),
-    strategies = c(1, 2, 3),
-    mode = "in"
-  ))
-
-  # Structured tests
-  result <- moran_process_impl(
-    graph = g,
-    weights = c(1, 1),
-    quantities = c(1, 2, 3),
-    strategies = c(1, 2, 3),
-    mode = "in"
-  )
-  expect_type(result, "list")
-})
-
-test_that("moran_process_impl errors", {
-  igraph_local_seed(12345)
-  expect_snapshot_igraph_error(
-    moran_process_impl(
-      graph = NULL,
-      quantities = c(1, 2, 3),
-      strategies = c(1, 2, 3)
-    )
-  )
-})
-
-# 329. roulette_wheel_imitation_impl
-
-test_that("roulette_wheel_imitation_impl basic", {
-  igraph_local_seed(12345)
-  g <- path_graph_impl(
-    n = 3
-  )
-
-  expect_snapshot(roulette_wheel_imitation_impl(
-    graph = g,
-    vid = 1,
-    is_local = TRUE,
-    quantities = c(1, 2, 3),
-    strategies = c(1, 2, 3)
-  ))
-  expect_snapshot(roulette_wheel_imitation_impl(
-    graph = g,
-    vid = 1,
-    is_local = FALSE,
-    quantities = c(1, 2, 3),
-    strategies = c(1, 2, 3),
-    mode = "in"
-  ))
-
-  # Structured tests
-  result <- roulette_wheel_imitation_impl(
-    graph = g,
-    vid = 1,
-    is_local = TRUE,
-    quantities = c(1, 2, 3),
-    strategies = c(1, 2, 3)
-  )
-  expect_true(is.numeric(result) || is.logical(result))
-})
-
-test_that("roulette_wheel_imitation_impl errors", {
-  igraph_local_seed(12345)
-  expect_snapshot_igraph_error(
-    roulette_wheel_imitation_impl(
-      graph = NULL,
-      vid = 1,
-      is_local = TRUE,
-      quantities = c(1, 2, 3),
-      strategies = c(1, 2, 3)
-    )
-  )
-})
-
-# 330. stochastic_imitation_impl
-
-test_that("stochastic_imitation_impl basic", {
-  igraph_local_seed(12345)
-  g <- path_graph_impl(
-    n = 3
-  )
-
-  expect_snapshot(stochastic_imitation_impl(
-    graph = g,
-    vid = 1,
-    algo = 1,
-    quantities = c(1, 2, 3),
-    strategies = c(1, 2, 3)
-  ))
-  expect_snapshot(stochastic_imitation_impl(
-    graph = g,
-    vid = 1,
-    algo = 2,
-    quantities = c(1, 2, 3),
-    strategies = c(1, 2, 3),
-    mode = "in"
-  ))
-
-  # Structured tests
-  result <- stochastic_imitation_impl(
-    graph = g,
-    vid = 1,
-    algo = 1,
-    quantities = c(1, 2, 3),
-    strategies = c(1, 2, 3)
-  )
-  expect_true(is.numeric(result) || is.logical(result))
-})
-
-test_that("stochastic_imitation_impl errors", {
-  igraph_local_seed(12345)
-  expect_snapshot_igraph_error(
-    stochastic_imitation_impl(
-      graph = NULL,
-      vid = 1,
-      algo = 1,
-      quantities = c(1, 2, 3),
-      strategies = c(1, 2, 3)
-    )
-  )
-})
+# upstream igraph@65bdaea: the microscopic update functions are removed,
+# and no R code calls them.
 
 # 331. invalidate_cache_impl
 
@@ -10159,27 +9961,8 @@ test_that("pagerank_impl basic", {
   ))
 })
 
-test_that("hub_score_impl basic", {
-  igraph_local_seed(20250909)
-  g <- make_star(5, mode = "undirected")
-  out <- hub_score_impl(graph = g, scale = TRUE, weights = NULL)
-  # FIXME: out$vector unstable despite random seed
-  expect_length(out$vector, 5)
-  expect_type(out$vector, "double")
-  out$vector <- NULL
-  expect_snapshot(out)
-})
-
-test_that("authority_score_impl basic", {
-  igraph_local_seed(20250909)
-  g <- make_star(5, mode = "undirected")
-  out <- authority_score_impl(graph = g, scale = TRUE, weights = NULL)
-  # FIXME: out$vector unstable despite random seed
-  expect_length(out$vector, 5)
-  expect_type(out$vector, "double")
-  out$vector <- NULL
-  expect_snapshot(out)
-})
+# upstream igraph@03776a4: igraph_hub_score() and igraph_authority_score()
+# are removed; hub_and_authority_scores_impl() is tested above.
 
 # Community detection
 
@@ -10303,23 +10086,8 @@ test_that("create_bipartite_impl basic", {
   ))
 })
 
-test_that("bipartite_game_impl basic", {
-  igraph_local_seed(20250909)
-  expect_snapshot(bipartite_game_impl(
-    type = "gnp",
-    n1 = 5,
-    n2 = 5,
-    p = 0.3,
-    directed = FALSE
-  ))
-  expect_snapshot(bipartite_game_impl(
-    type = "gnm",
-    n1 = 5,
-    n2 = 5,
-    m = 10,
-    directed = FALSE
-  ))
-})
+# upstream igraph@4841501: igraph_bipartite_game() is removed; R only calls
+# its gnp and gnm variants, whose impls are tested above.
 
 # Other structural functions
 
@@ -11091,54 +10859,8 @@ test_that("sparse_weighted_adjacency_impl errors", {
 
 # weighted_sparsemat_impl
 
-test_that("weighted_sparsemat_impl basic", {
-  skip_if_not_installed("Matrix")
-  igraph_local_seed(20250909)
-
-  # Create a weighted sparse matrix
-  M <- Matrix::sparseMatrix(
-    i = c(1, 2, 3, 4),
-    j = c(2, 3, 4, 1),
-    x = c(2.5, 1.0, 3.0, 0.5),
-    dims = c(4, 4)
-  )
-
-  expect_snapshot(weighted_sparsemat_impl(
-    A = M,
-    directed = TRUE,
-    attr = "weight",
-    loops = FALSE
-  ))
-
-  # Structured tests
-  g1 <- weighted_sparsemat_impl(
-    A = M,
-    directed = TRUE,
-    attr = "weight",
-    loops = FALSE
-  )
-
-  expect_s3_class(g1, "igraph")
-  expect_equal(vcount(g1), 4)
-  expect_true(is_directed(g1))
-  expect_true("weight" %in% edge_attr_names(g1))
-})
-
-test_that("weighted_sparsemat_impl errors", {
-  skip_if_not_installed("Matrix")
-  skip_if_not(getRversion() >= "4.2")
-  igraph_local_seed(20250909)
-
-  # Regular matrices are converted to sparse matrices automatically
-  # This should work, not error
-  g <- weighted_sparsemat_impl(
-    A = matrix(c(0,1,2,0), 2, 2),
-    directed = TRUE,
-    attr = "weight",
-    loops = FALSE
-  )
-  expect_s3_class(g, "igraph")
-})
+# upstream igraph@fe684fe: igraph_weighted_sparsemat() is removed, and no R
+# code calls it.
 
 # Tests for newly autogenerated *_many functions
 

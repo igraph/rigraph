@@ -48,7 +48,7 @@
       arpack(f, options = list(nev = 2, ncv = 4), sym = TRUE)
     Condition
       Error in `arpack()`:
-      ! ARPACK error. N must be positive
+      ! N must be positive. ARPACK error
       Source: <file>:<line>
 
 ---

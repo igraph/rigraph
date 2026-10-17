@@ -22,6 +22,7 @@
 #endif
 
 #define HAVE_GLPK 1
+#define HAVE_INFOMAP 1
 
 /* #undef INTERNAL_BLAS */
 /* #undef INTERNAL_LAPACK */

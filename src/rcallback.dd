@@ -2,3 +2,4 @@
 rcallback.o: \
   rcallback.c \
   rinterface.h \
+  rrandom.h \

@@ -84,12 +84,14 @@ keeping_degseq <- function(loops = FALSE, niter = 100) {
 
 rewire_keeping_degseq <- function(graph, loops, niter) {
   loops <- as.logical(loops)
-  mode <- if (loops) "simple_loops" else "simple"
+  # Upstream (igraph@2bd0802) takes the edge types to allow instead of a
+  # rewiring mode: "loops" for what was "simple_loops".
+  allowed_edge_types <- if (loops) "loops" else "simple"
 
   rewire_impl(
     rewire = graph,
     n = niter,
-    mode = mode
+    allowed_edge_types = allowed_edge_types
   )
 }
 
@@ -200,11 +202,23 @@ each_edge <- function(
 }
 
 rewire_each_edge <- function(graph, prob, loops, multiple) {
+  # Upstream (igraph@eb3a92b) takes the edge types to allow as one switch
+  # instead of `loops` and `multiple`.
+  loops <- as.logical(loops)
+  multiple <- as.logical(multiple)
+  allowed_edge_types <- if (loops && multiple) {
+    "all"
+  } else if (loops) {
+    "loops"
+  } else if (multiple) {
+    "multi"
+  } else {
+    "simple"
+  }
   rewire_edges_impl(
     graph = graph,
     prob = prob,
-    loops = loops,
-    multiple = multiple
+    allowed_edge_types = allowed_edge_types
   )
 }
 

@@ -37,12 +37,45 @@
 #include <math.h>
 #include <string.h>
 
+void    GetRNGstate(void);
+void    PutRNGstate(void);
 double  unif_rand(void);
 double  norm_rand(void);
 double  exp_rand(void);
 double  Rf_rgeom(double);
 double  Rf_rbinom(double, double);
 double  Rf_rgamma(double, double);
+
+/* igraph no longer brackets its random functions with GetRNGstate() and
+ * PutRNGstate(), so the R RNG does it itself: R's RNG state is loaded on the
+ * first draw of a call into igraph, and saved by igraph_rng_R_end(), which
+ * IGRAPH_R_CHECK() runs after every call. A call that draws nothing leaves
+ * .Random.seed alone, as before. */
+static int igraph_rng_R_state_loaded = 0;
+
+static void igraph_rng_R_begin(void) {
+    if (!igraph_rng_R_state_loaded) {
+        GetRNGstate();
+        igraph_rng_R_state_loaded = 1;
+    }
+}
+
+void igraph_rng_R_end(void) {
+    if (igraph_rng_R_state_loaded) {
+        igraph_rng_R_state_loaded = 0;
+        PutRNGstate();
+    }
+}
+
+/* Whether R's RNG state is loaded and not yet saved, and forgetting that it
+ * is: what draws outside a call into igraph use to leave .Random.seed alone. */
+int igraph_rng_R_loaded(void) {
+    return igraph_rng_R_state_loaded;
+}
+
+void igraph_rng_R_drop(void) {
+    igraph_rng_R_state_loaded = 0;
+}
 
 static igraph_error_t igraph_rng_R_init(void **state) {
     return IGRAPH_SUCCESS;
@@ -58,28 +91,34 @@ static igraph_error_t igraph_rng_R_seed(void *state, igraph_uint_t seed) {
 }
 
 static igraph_uint_t igraph_rng_R_get(void *state) {
+    igraph_rng_R_begin();
     // unif_rand() returns a double in [0, 1)
     return (unif_rand() * 0x40000000UL);
 }
 
 static igraph_real_t igraph_rng_R_get_real(void *state) {
+    igraph_rng_R_begin();
     return unif_rand();
 }
 
 static igraph_real_t igraph_rng_R_get_norm(void *state) {
+    igraph_rng_R_begin();
     return norm_rand();
 }
 
 static igraph_real_t igraph_rng_R_get_geom(void *state, igraph_real_t p) {
+    igraph_rng_R_begin();
     return Rf_rgeom(p);
 }
 
 static igraph_real_t igraph_rng_R_get_binom(void *state, igraph_integer_t n,
                                      igraph_real_t p) {
+    igraph_rng_R_begin();
     return Rf_rbinom(n, p);
 }
 
 static igraph_real_t igraph_rng_R_get_exp(void *state, igraph_real_t rate) {
+    igraph_rng_R_begin();
     igraph_real_t scale = 1.0 / rate;
     if (!isfinite(scale) || scale <= 0.0) {
         if (scale == 0.0) {
@@ -91,10 +130,12 @@ static igraph_real_t igraph_rng_R_get_exp(void *state, igraph_real_t rate) {
 }
 
 static igraph_real_t igraph_rng_R_get_gamma(void *state, igraph_real_t shape, igraph_real_t scale) {
+    igraph_rng_R_begin();
     return Rf_rgamma(shape, scale);
 }
 
 static igraph_real_t igraph_rng_R_get_pois(void *state, igraph_real_t rate) {
+    igraph_rng_R_begin();
     return Rf_rpois(rate);
 }
 

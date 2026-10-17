@@ -159,6 +159,18 @@ ERROR:
             IGRAPH_R_CHECK_INT(%I%);
             %C% = (igraph_error_t) REAL(%I%)[0];
 
+EDGE_TYPE_SW_MULTIPLE:
+    # A logical multiple argument, folded into the EDGE_TYPE_SW_LOOPS argument
+    # it depends on, which passes both to C; see types-RR.yaml.
+    CALL: {}
+    CTYPE: ~
+    INCONV:
+        IN: |-
+            IGRAPH_R_CHECK_BOOL(%I%);
+            if (LOGICAL(%I%)[0]) {
+              %C1% = (igraph_edge_type_sw_t) (%C1% | IGRAPH_MULTI_SW);
+            }
+
 BOOLEAN:
     CTYPE: igraph_bool_t
     CALL:
@@ -173,6 +185,15 @@ BOOLEAN:
         OUT: |-
             PROTECT(%I%=NEW_LOGICAL(1));
             LOGICAL(%I%)[0]=%C%;
+
+EDGE_TYPE_SW_LOOPS:
+    # A logical loops argument for an igraph_edge_type_sw_t parameter,
+    # see types-RR.yaml.
+    CTYPE: igraph_edge_type_sw_t
+    INCONV:
+        IN: |-
+            IGRAPH_R_CHECK_BOOL(%I%);
+            %C% = LOGICAL(%I%)[0] ? IGRAPH_LOOPS_SW : IGRAPH_SIMPLE_SW;
 
 INDEX_VECTOR:
     CALL: '&%C%'
@@ -312,7 +333,30 @@ VERTEXSET_LIST:
             igraph_vector_int_list_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
-EDGESET_LIST:
+VERTEX_INDICES_LIST:
+    CALL: '&%C%'
+    CTYPE: igraph_vector_int_list_t
+    INCONV:
+        IN: |-
+            if (!Rf_isNull(%I%)) {
+              IGRAPH_R_CHECK(Ry_igraph_SEXP_to_vector_int_list(%I%, &%C%));
+              IGRAPH_FINALLY(igraph_vector_int_list_destroy, &%C%);
+            }
+        OUT: |-
+            IGRAPH_R_CHECK(igraph_vector_int_list_init(&%C%, 0));
+            IGRAPH_FINALLY(igraph_vector_int_list_destroy, &%C%);
+    OUTCONV:
+        IN: |-
+            if (!Rf_isNull(%I%)) {
+              igraph_vector_int_list_destroy(&%C%);
+              IGRAPH_FINALLY_CLEAN(1);
+            }
+        OUT: |-
+            PROTECT(%I%=Ry_igraph_vector_int_list_to_SEXPp1(&%C%));
+            igraph_vector_int_list_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
+
+EDGE_INDICES_LIST:
     CALL: '&%C%'
     CTYPE: igraph_vector_int_list_t
     INCONV:
@@ -359,7 +403,7 @@ ADJLIST:
     OUTCONV:
         IN: igraph_adjlist_destroy(&%C%);
 
-EDGEWEIGHTS:
+EDGE_WEIGHTS:
     CALL: '&%C%'
     CTYPE: igraph_vector_t
     INCONV:
@@ -375,7 +419,7 @@ EDGEWEIGHTS:
             IGRAPH_FINALLY_CLEAN(1);
 
 EDGE_LENGTHS:
-    # Edge lengths vector - no automatic attribute lookup (unlike EDGEWEIGHTS which checks for "weight" attribute)
+    # Edge lengths vector - no automatic attribute lookup (unlike EDGE_WEIGHTS which checks for "weight" attribute)
     CALL: '&%C%'
     CTYPE: igraph_vector_t
     INCONV:
@@ -390,7 +434,7 @@ EDGE_LENGTHS:
             igraph_vector_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
-VERTEXWEIGHTS:
+VERTEX_WEIGHTS:
     CALL: '&%C%'
     CTYPE: igraph_vector_t
     INCONV:
@@ -405,7 +449,7 @@ VERTEXWEIGHTS:
             igraph_vector_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
-EDGE_CAPACITY:
+EDGE_CAPACITIES:
     CALL: '&%C%'
     CTYPE: igraph_vector_t
     INCONV:
@@ -545,6 +589,15 @@ NEIMODE:
         INOUT: '&%C%'
         OUT: 'NULL'
 
+NEIMODE_DIRECTED:
+    # A logical directed argument for an igraph_neimode_t parameter,
+    # see types-RR.yaml.
+    CTYPE: igraph_neimode_t
+    INCONV:
+        IN: |-
+            IGRAPH_R_CHECK_BOOL(%I%);
+            %C% = LOGICAL(%I%)[0] ? IGRAPH_OUT : IGRAPH_ALL;
+
 VERTEX_SELECTOR:
     CALL:
         IN: '%C%'
@@ -567,6 +620,22 @@ VERTEX_SELECTOR:
             PROTECT(%I%=Ry_igraph_vector_to_SEXPp1(&%C%));
             igraph_vector_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
+
+VERTEX_SELECTOR_FROM_TO:
+    # One vertex selector passed as both the from and the to set of a
+    # function that compares two; see types-RR.yaml.
+    CALL:
+        IN: '%C%, %C%'
+    CTYPE:
+        IN: igraph_vs_t
+    INCONV:
+        IN: |-
+            igraph_vector_int_t %C%_data;
+            Rz_SEXP_to_igraph_vs(%I%, &%C1%, &%C%, &%C%_data);
+    OUTCONV:
+        IN: |-
+            igraph_vector_int_destroy(&%C%_data);
+            igraph_vs_destroy(&%C%);
 
 VERTEX_INDICES:
     CALL: '&%C%'
@@ -663,6 +732,12 @@ EDGE_INDICES:
     CTYPE: ~
     HEADER: {}
 
+RNG_DEFAULT:
+    # The default RNG, which the R package sets to R's own; no R argument.
+    CALL: igraph_rng_default()
+    CTYPE: ~
+    HEADER: {}
+
 EXTRA:
     CALL: '0'
     CTYPE: ~
@@ -708,19 +783,19 @@ ATTRIBUTES:
     CTYPE: ~
     HEADER: {}
 
-ARPACKOPT:
+ARPACK_OPTIONS:
     CALL: '&%C%'
     INCONV:
         INOUT: Rz_SEXP_to_igraph_arpack_options(%I%, &%C%);
     OUTCONV:
         INOUT: PROTECT(%I%=Ry_igraph_arpack_options_to_SEXP(&%C%));
 
-ARPACKSTORAGE:
+ARPACK_STORAGE:
     CALL: '0'
     CTYPE: ~
     HEADER: {}
 
-ARPACKFUNC:
+ARPACK_FUNC:
     CALL: '0'
     CTYPE: ~
     HEADER: {}
@@ -797,7 +872,7 @@ BIPARTITE_TYPES_UNNAMED:
             igraph_vector_bool_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
-VERTEX_COLOR:
+VERTEX_COLORS:
     CALL:
         IN: '&%C%'
         OUT: '&%C%'
@@ -822,7 +897,7 @@ VERTEX_COLOR:
             igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
-EDGE_COLOR:
+EDGE_COLORS:
     CALL:
         IN: '&%C%'
         OUT: '&%C%'
@@ -966,6 +1041,11 @@ PLFIT:
     OUTCONV:
         OUT: PROTECT(%I%=Ry_igraph_plfit_result_to_SEXP(&%C%));
 
+REWIRING_STATS:
+    CALL: '0'
+    CTYPE: ~
+    HEADER: {}
+
 MAXFLOW_STATS:
     CALL: '&%C%'
     HEADER: {}
@@ -1019,6 +1099,12 @@ PAGERANKOPT:
           }
 
 DEPRECATED:
+    CALL: {}
+    CTYPE: ~
+    HEADER: {}
+
+BLOCK_SIZES_SUM:
+    # Checked in R only, see types-RR.yaml.
     CALL: {}
     CTYPE: ~
     HEADER: {}

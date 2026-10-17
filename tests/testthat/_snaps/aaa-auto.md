@@ -832,7 +832,7 @@
       erdos_renyi_game_gnp_impl(n = -1, p = 0.5)
     Condition
       Error in `erdos_renyi_game_gnp_impl()`:
-      ! Invalid number of vertices. Invalid value
+      ! Invalid number of vertices for G(n,p) model. Invalid value
       Source: <file>:<line>
 
 # erdos_renyi_game_gnm_impl basic
@@ -859,7 +859,7 @@
       erdos_renyi_game_gnm_impl(n = -1, m = 3)
     Condition
       Error in `erdos_renyi_game_gnm_impl()`:
-      ! Invalid number of vertices. Invalid value
+      ! Invalid number of vertices for G(n,m) model. Invalid value
       Source: <file>:<line>
 
 # growing_random_game_impl basic
@@ -1026,11 +1026,11 @@
       simple_interconnected_islands_game_impl(islands_n = 2, islands_size = 3,
         islands_pin = 0.5, n_inter = 1)
     Output
-      IGRAPH U--- 6 5 -- Interconnected islands model
+      IGRAPH U--- 6 6 -- Interconnected islands model
       + attr: name (g/c), islands_n (g/n), islands_size (g/n), islands_pin
       | (g/n), n_inter (g/n)
       + edges:
-      [1] 1--2 1--3 2--3 3--6 5--6
+      [1] 1--2 1--3 2--3 2--6 4--5 4--6
 
 # simple_interconnected_islands_game_impl errors
 
@@ -1190,8 +1190,7 @@
       sbm_game_impl(n = -1, pref_matrix = matrix(0.5, 2, 2), block_sizes = c(2, 3))
     Condition
       Error in `sbm_game_impl()`:
-      ! Sum of the block sizes (5) must equal the number of vertices (-1). Invalid value
-      Source: <file>:<line>
+      ! Sum of the block sizes (5) must equal the number of vertices (-1).
 
 # hsbm_game_impl basic
 
@@ -1297,7 +1296,7 @@
       correlated_pair_game_impl(n = -1, corr = 0.5, p = 0.5)
     Condition
       Error in `correlated_pair_game_impl()`:
-      ! Invalid number of vertices. Invalid value
+      ! Invalid number of vertices for G(n,p) model. Invalid value
       Source: <file>:<line>
 
 # dot_product_game_impl basic
@@ -1307,7 +1306,7 @@
     Condition
       Warning in `dot_product_game_impl()`:
       Greater than 1 connection probability in dot-product graph.
-      Source: games/dotproduct.c:90
+      Source: games/dotproduct.c:86
     Output
       IGRAPH U--- 2 1 -- 
       + edge:
@@ -1320,7 +1319,7 @@
     Condition
       Warning in `dot_product_game_impl()`:
       Greater than 1 connection probability in dot-product graph.
-      Source: games/dotproduct.c:90
+      Source: games/dotproduct.c:86
     Output
       IGRAPH D--- 2 2 -- 
       + edges:
@@ -1690,8 +1689,10 @@
     Code
       get_all_simple_paths_impl(graph = g, from = 1, to = 3)
     Output
+      [[1]]
       + 3/3 vertices:
       [1] 1 2 3
+      
 
 # get_all_simple_paths_impl errors
 
@@ -2271,7 +2272,7 @@
     Condition
       Warning in `transitivity_barrat_impl()`:
       No weights given for Barrat's transitivity, unweighted version is used.
-      Source: properties/triangles.c:913
+      Source: properties/triangles.c:889
     Output
       [1] NaN   0 NaN
 
@@ -2282,7 +2283,7 @@
     Condition
       Warning in `transitivity_barrat_impl()`:
       No weights given for Barrat's transitivity, unweighted version is used.
-      Source: properties/triangles.c:913
+      Source: properties/triangles.c:889
     Output
       [1] 0 0 0
 
@@ -2669,9 +2670,12 @@
 
     Code
       eigenvector_centrality_impl(graph = g, directed = TRUE, scale = FALSE)
+    Condition
+      Warning in `eigenvector_centrality_impl()`:
+      Argument `scale' is deprecated and has no effect
     Output
       $vector
-      [1] 0.5000000 0.7071068 0.5000000
+      [1] 0.7071068 1.0000000 0.7071068
       
       $value
       [1] 1.414214
@@ -2751,6 +2755,10 @@
 
     Code
       hub_and_authority_scores_impl(graph = g)
+    Condition
+      Warning in `hub_and_authority_scores_impl()`:
+      Hub and authority scores requested for undirected graph. These are the same as eigenvector centralities.
+      Source: centrality/hub_authority.c:294
     Output
       $hub
       [1] 1 1 1 1 1
@@ -2828,12 +2836,18 @@
 
     Code
       hub_and_authority_scores_impl(graph = g, scale = FALSE)
+    Condition
+      Warning in `hub_and_authority_scores_impl()`:
+      Argument `scale' is deprecated and has no effect
+      Warning in `hub_and_authority_scores_impl()`:
+      Hub and authority scores requested for undirected graph. These are the same as eigenvector centralities.
+      Source: centrality/hub_authority.c:294
     Output
       $hub
-      [1] 0.4472136 0.4472136 0.4472136 0.4472136 0.4472136
+      [1] 1 1 1 1 1
       
       $authority
-      [1] 0.4472136 0.4472136 0.4472136 0.4472136 0.4472136
+      [1] 1 1 1 1 1
       
       $value
       [1] 16
@@ -3937,23 +3951,6 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
-# transitive_closure_dag_impl basic
-
-    Code
-      transitive_closure_dag_impl(graph = g)
-    Output
-      IGRAPH D--- 3 3 -- 
-      + edges:
-      [1] 1->3 1->2 2->3
-
-# transitive_closure_dag_impl errors
-
-    Code
-      transitive_closure_dag_impl(graph = NULL)
-    Condition
-      Error in `ensure_igraph()`:
-      ! Must provide a graph object (provided `NULL`).
-
 # transitive_closure_impl basic
 
     Code
@@ -4194,7 +4191,7 @@
       bipartite_game_gnp_impl(n1 = -1, n2 = 2, p = 0.5)
     Condition
       Error in `bipartite_game_gnp_impl()`:
-      ! Invalid number of vertices for bipartite graph. Invalid value
+      ! Invalid number of vertices for bipartite G(n,p) model. Invalid value
       Source: <file>:<line>
 
 # bipartite_game_gnm_impl basic
@@ -4231,7 +4228,7 @@
       bipartite_game_gnm_impl(n1 = -1, n2 = 2, m = 1)
     Condition
       Error in `bipartite_game_gnm_impl()`:
-      ! Invalid number of vertices for bipartite graph. Invalid value
+      ! Invalid number of vertices for bipartite G(n,m) model. Invalid value
       Source: <file>:<line>
 
 # get_laplacian_impl basic
@@ -5020,13 +5017,13 @@
       [2,]  0.5    0
       [3,]  1.0    1
       
-      $extd_graph
-      IGRAPH U--- 3 2 -- 
-      + edges:
-      [1] 1--2 2--3
+      $routing
+      $routing[[1]]
+           [,1] [,2]
       
-      $extd_to_orig_eids
-      [1] 1 2
+      $routing[[2]]
+           [,1] [,2]
+      
       
 
 ---
@@ -5041,13 +5038,13 @@
       [2,]    0    2
       [3,]    0    4
       
-      $extd_graph
-      IGRAPH U--- 3 2 -- 
-      + edges:
-      [1] 1--2 2--3
+      $routing
+      $routing[[1]]
+           [,1] [,2]
       
-      $extd_to_orig_eids
-      [1] 1 2
+      $routing[[2]]
+           [,1] [,2]
+      
       
 
 # layout_sugiyama_impl errors
@@ -5121,9 +5118,9 @@
       layout_gem_impl(graph = g, res = matrix(0, nrow = 3, ncol = 2))
     Output
                 [,1]      [,2]
-      [1,] 200.18284 -69.23950
-      [2,]  86.00346  64.12806
-      [3,]  66.22930 -92.94294
+      [1,] 198.00782 -89.56102
+      [2,]  97.48628  69.81047
+      [3,]  62.46741 -81.07358
 
 ---
 
@@ -5131,10 +5128,10 @@
       layout_gem_impl(graph = g, res = matrix(0, nrow = 3, ncol = 2), use_seed = TRUE,
       maxiter = 10, temp_max = 2, temp_min = 0.1, temp_init = 1)
     Output
-                 [,1]       [,2]
-      [1,]  1.0114521 -0.1206363
-      [2,] -0.2178589  2.9621162
-      [3,] -0.7089555 -3.8896500
+                   [,1]         [,2]
+      [1,]  2.957479289 -2.693158072
+      [2,] -2.952570979  2.698577710
+      [3,] -0.008515571 -0.009237893
 
 # layout_gem_impl errors
 
@@ -5149,10 +5146,10 @@
     Code
       layout_davidson_harel_impl(graph = g, res = matrix(0, nrow = 3, ncol = 2))
     Output
-               [,1]      [,2]
-      [1,] 1.152116 0.9424808
-      [2,] 2.474361 2.5195497
-      [3,] 3.849187 4.0402661
+               [,1]       [,2]
+      [1,] 4.585389  0.5320103
+      [2,] 3.619767 -1.3038597
+      [3,] 2.715926 -3.1387678
 
 ---
 
@@ -5163,9 +5160,9 @@
       weight_node_edge_dist = 0.3)
     Output
                 [,1]      [,2]
-      [1,] -6.609493 -2.155221
-      [2,] -8.660255 -3.797365
-      [3,] -6.485087 -5.224752
+      [1,] 0.7466363 -2.423994
+      [2,] 2.9971183 -2.558975
+      [3,] 5.1781802 -3.072543
 
 # layout_davidson_harel_impl errors
 
@@ -5687,7 +5684,7 @@
       [1] 0 0 0
       
       $codelength
-      [1] 1.512987
+      [1] 1.5
       
 
 ---
@@ -5700,7 +5697,7 @@
       [1] 0 0 0
       
       $codelength
-      [1] 1.462254
+      [1] 1.459148
       
 
 # community_infomap_impl errors
@@ -6250,7 +6247,7 @@
     Condition
       Warning in `triad_census_impl()`:
       Triad census called on an undirected graph. All connections will be treated as mutual.
-      Source: misc/motifs.c:1157
+      Source: misc/motifs.c:1170
     Output
        [1] 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0
 
@@ -6522,7 +6519,7 @@
       [1] 1--2
       
       $map
-      [1] 2 3 1
+      [1] 1 2 0
       
       $invmap
       [1] 1 2
@@ -6539,7 +6536,7 @@
       [1] 1--2
       
       $map
-      [1] 2 3 1
+      [1] 1 2 0
       
       $invmap
       [1] 1 2
@@ -7340,7 +7337,7 @@
       canonical_permutation_impl(graph = g)
     Output
       $labeling
-      [1] 2 3 1
+      [1] 3 1 2
       
       $info
       $info$nof_nodes
@@ -10140,103 +10137,6 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
-# deterministic_optimal_imitation_impl basic
-
-    Code
-      deterministic_optimal_imitation_impl(graph = g, vid = 1, quantities = c(1, 2, 3),
-      strategies = c(1, 2, 3))
-    Output
-      [1] 2 2 3
-
----
-
-    Code
-      deterministic_optimal_imitation_impl(graph = g, vid = 1, optimality = "minimum",
-        quantities = c(1, 2, 3), strategies = c(1, 2, 3), mode = "in")
-    Output
-      [1] 1 2 3
-
-# deterministic_optimal_imitation_impl errors
-
-    Code
-      deterministic_optimal_imitation_impl(graph = NULL, vid = 1, quantities = c(1, 2,
-        3), strategies = c(1, 2, 3))
-    Condition
-      Error in `ensure_igraph()`:
-      ! Must provide a graph object (provided `NULL`).
-
-# moran_process_impl basic
-
-    Code
-      moran_process_impl(graph = g, weights = c(1, 1), quantities = c(1, 2, 3),
-      strategies = c(1, 2, 3), mode = "in")
-    Output
-      $quantities
-      [1] 1 3 3
-      
-      $strategies
-      [1] 1 3 3
-      
-
-# moran_process_impl errors
-
-    Code
-      moran_process_impl(graph = NULL, quantities = c(1, 2, 3), strategies = c(1, 2,
-        3))
-    Condition
-      Error in `ensure_igraph()`:
-      ! Must provide a graph object (provided `NULL`).
-
-# roulette_wheel_imitation_impl basic
-
-    Code
-      roulette_wheel_imitation_impl(graph = g, vid = 1, is_local = TRUE, quantities = c(
-        1, 2, 3), strategies = c(1, 2, 3))
-    Output
-      [1] 1 2 3
-
----
-
-    Code
-      roulette_wheel_imitation_impl(graph = g, vid = 1, is_local = FALSE, quantities = c(
-        1, 2, 3), strategies = c(1, 2, 3), mode = "in")
-    Output
-      [1] 3 2 3
-
-# roulette_wheel_imitation_impl errors
-
-    Code
-      roulette_wheel_imitation_impl(graph = NULL, vid = 1, is_local = TRUE,
-        quantities = c(1, 2, 3), strategies = c(1, 2, 3))
-    Condition
-      Error in `ensure_igraph()`:
-      ! Must provide a graph object (provided `NULL`).
-
-# stochastic_imitation_impl basic
-
-    Code
-      stochastic_imitation_impl(graph = g, vid = 1, algo = 1, quantities = c(1, 2, 3),
-      strategies = c(1, 2, 3))
-    Output
-      [1] 1 2 3
-
----
-
-    Code
-      stochastic_imitation_impl(graph = g, vid = 1, algo = 2, quantities = c(1, 2, 3),
-      strategies = c(1, 2, 3), mode = "in")
-    Output
-      [1] 1 2 3
-
-# stochastic_imitation_impl errors
-
-    Code
-      stochastic_imitation_impl(graph = NULL, vid = 1, algo = 1, quantities = c(1, 2,
-        3), strategies = c(1, 2, 3))
-    Condition
-      Error in `ensure_igraph()`:
-      ! Must provide a graph object (provided `NULL`).
-
 # invalidate_cache_impl basic
 
     Code
@@ -10283,7 +10183,7 @@
     Code
       version_impl_clean()
     Output
-      [1] "0.10.17"
+      [1] "0.11.0"
 
 # version_impl errors
 
@@ -10794,148 +10694,6 @@
       NULL
       
 
-# hub_score_impl basic
-
-    Code
-      out
-    Output
-      $value
-      [1] 4
-      
-      $options
-      $options$bmat
-      [1] "I"
-      
-      $options$n
-      [1] 5
-      
-      $options$which
-      [1] "LA"
-      
-      $options$nev
-      [1] 1
-      
-      $options$tol
-      [1] 0
-      
-      $options$ncv
-      [1] 0
-      
-      $options$ldv
-      [1] 0
-      
-      $options$ishift
-      [1] 1
-      
-      $options$maxiter
-      [1] 3000
-      
-      $options$nb
-      [1] 1
-      
-      $options$mode
-      [1] 1
-      
-      $options$start
-      [1] 1
-      
-      $options$sigma
-      [1] 0
-      
-      $options$sigmai
-      [1] 0
-      
-      $options$info
-      [1] 0
-      
-      $options$iter
-      [1] 1
-      
-      $options$nconv
-      [1] 1
-      
-      $options$numop
-      [1] 4
-      
-      $options$numopb
-      [1] 0
-      
-      $options$numreo
-      [1] 4
-      
-      
-
-# authority_score_impl basic
-
-    Code
-      out
-    Output
-      $value
-      [1] 4
-      
-      $options
-      $options$bmat
-      [1] "I"
-      
-      $options$n
-      [1] 5
-      
-      $options$which
-      [1] "LA"
-      
-      $options$nev
-      [1] 1
-      
-      $options$tol
-      [1] 0
-      
-      $options$ncv
-      [1] 0
-      
-      $options$ldv
-      [1] 0
-      
-      $options$ishift
-      [1] 1
-      
-      $options$maxiter
-      [1] 3000
-      
-      $options$nb
-      [1] 1
-      
-      $options$mode
-      [1] 1
-      
-      $options$start
-      [1] 1
-      
-      $options$sigma
-      [1] 0
-      
-      $options$sigmai
-      [1] 0
-      
-      $options$info
-      [1] 0
-      
-      $options$iter
-      [1] 1
-      
-      $options$nconv
-      [1] 1
-      
-      $options$numop
-      [1] 4
-      
-      $options$numopb
-      [1] 0
-      
-      $options$numreo
-      [1] 4
-      
-      
-
 # community_walktrap_impl basic
 
     Code
@@ -11074,7 +10832,7 @@
       community_leading_eigenvector_callback_closure_impl(graph = g, start = TRUE)
     Condition
       Error in `community_leading_eigenvector_callback_closure_impl()`:
-      ! Supplied memberhsip vector length does not match number of vertices. Invalid value
+      ! Supplied membership vector length does not match number of vertices. Invalid value
       Source: <file>:<line>
 
 # edge_connectivity_impl basic
@@ -11100,34 +10858,6 @@
       IGRAPH U--- 4 4 -- 
       + edges:
       [1] 1--3 1--4 2--3 2--4
-
-# bipartite_game_impl basic
-
-    Code
-      bipartite_game_impl(type = "gnp", n1 = 5, n2 = 5, p = 0.3, directed = FALSE)
-    Output
-      $graph
-      IGRAPH U--- 10 10 -- 
-      + edges:
-       [1] 1-- 6 2-- 6 4-- 6 5-- 6 1-- 7 4-- 7 4-- 8 3-- 9 3--10 4--10
-      
-      $types
-       [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
-      
-
----
-
-    Code
-      bipartite_game_impl(type = "gnm", n1 = 5, n2 = 5, m = 10, directed = FALSE)
-    Output
-      $graph
-      IGRAPH U--- 10 10 -- 
-      + edges:
-       [1] 1-- 6 3-- 7 5-- 7 1-- 8 3-- 8 4-- 8 2-- 9 5-- 9 2--10 3--10
-      
-      $types
-       [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
-      
 
 # decompose_impl basic
 
@@ -11727,16 +11457,6 @@
       $weights
       [1] 2.5 1.0 0.5 3.0
       
-
-# weighted_sparsemat_impl basic
-
-    Code
-      weighted_sparsemat_impl(A = M, directed = TRUE, attr = "weight", loops = FALSE)
-    Output
-      IGRAPH D-W- 4 4 -- 
-      + attr: weight (e/n)
-      + edges:
-      [1] 4->1 1->2 2->3 3->4
 
 # disjoint_union_many_impl basic
 
