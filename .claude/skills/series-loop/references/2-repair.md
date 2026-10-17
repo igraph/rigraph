@@ -132,8 +132,11 @@ Fold the fix into the offending commit, extending its message with what was adap
 [`scripts/series-fold.sh`](/scripts/series-fold.sh) does the folding and the replay:
 it keeps the commit's author and message, adds the fix's note above the trailers,
 and stops on a conflict where a later commit leaned on what the fix changed;
-resolve, `git add`, and `scripts/series-fold.sh --continue`.
+resolve, `git add`, and `"$M"/scripts/series-fold.sh --continue`.
+`$M` is the `main` checkout: run the fold and `--continue` as `main`'s copy from the worktree they rewrite,
+because the worktree's own copy is the offending commit's, older or missing.
 It leaves the result detached in the current worktree, which must be clean, and moves no ref; the push is yours.
+It ends by checking that every fix is in its target, and exits 3 when one is not: push nothing, and fold again.
 If other failures have a demonstrably different cause, they may be fixed in the same pass;
 otherwise let CI judge the tail again.
 
