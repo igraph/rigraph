@@ -853,7 +853,7 @@ adjacent_vertices <- function(
   }
 
   if (is_named(graph)) {
-    names(res) <- V(graph)$name[vv + 1]
+    names(res) <- vertex_attr(graph, "name")[vv + 1]
   }
 
   res
@@ -931,7 +931,7 @@ incident_edges <- function(
   }
 
   if (is_named(graph)) {
-    names(res) <- V(graph)$name[vv + 1]
+    names(res) <- vertex_attr(graph, "name")[vv + 1]
   }
 
   res

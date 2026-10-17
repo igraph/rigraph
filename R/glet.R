@@ -242,7 +242,7 @@ graphlet_proj <- function(
   }
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)

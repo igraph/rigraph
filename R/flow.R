@@ -431,7 +431,7 @@ min_cut <- function(
 
   ensure_igraph(graph)
   if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
-    capacity <- E(graph)$capacity
+    capacity <- edge_attr(graph, "capacity")
   }
 
   if (xor(is.null(source), is.null(target))) {

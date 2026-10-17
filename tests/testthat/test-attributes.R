@@ -569,3 +569,24 @@ test_that("set_vertex_attrs() works", {
   expect_equal(V(g)$age, rep(42, vcount(g)))
   expect_equal(V(g)$gender, rep("F", vcount(g)))
 })
+
+test_that("querying one attribute without an index returns it for all vertices/edges", {
+  g <- make_ring(5)
+  V(g)$name <- letters[1:5]
+  V(g)$x <- 1:5
+  E(g)$w <- 5:1
+
+  expect_identical(vertex_attr(g, "x"), 1:5)
+  expect_identical(vertex_attr(g, "x"), vertex_attr(g, "x", V(g)))
+  expect_identical(vertex_attr(g, "x", V(g)[2:3]), 2:3)
+  expect_null(vertex_attr(g, "nonexistent"))
+
+  expect_identical(edge_attr(g, "w"), 5:1)
+  expect_identical(edge_attr(g, "w"), edge_attr(g, "w", E(g)))
+  expect_identical(edge_attr(g, "w", E(g)[2:3]), 4:3)
+  expect_null(edge_attr(g, "nonexistent"))
+
+  empty <- make_empty_graph()
+  expect_null(vertex_attr(empty, "x"))
+  expect_null(edge_attr(empty, "w"))
+})

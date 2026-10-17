@@ -1044,7 +1044,7 @@ modularity_matrix <- function(
   }
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -1641,7 +1641,7 @@ cluster_spinglass <- function(
   ensure_igraph(graph)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -1831,7 +1831,7 @@ cluster_leiden <- function(
 
   # Parse edge weights argument
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !anyNA(weights)) {
     weights <- as.numeric(weights)
@@ -1953,7 +1953,7 @@ cluster_fluid_communities <- function(graph, no.of.communities) {
   res <- list()
   res$membership <- membership + 1
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    res$names <- V(graph)$name
+    res$names <- vertex_attr(graph, "name")
   }
   res$vcount <- vcount(graph)
   res$algorithm <- "fluid communities"
@@ -2075,7 +2075,7 @@ cluster_walktrap <- function(
   }
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !anyNA(weights)) {
     weights <- as.numeric(weights)
@@ -2094,7 +2094,7 @@ cluster_walktrap <- function(
     as.logical(membership)
   )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    res$names <- V(graph)$name
+    res$names <- vertex_attr(graph, "name")
   }
 
   res$vcount <- vcount(graph)
@@ -2254,7 +2254,7 @@ cluster_edge_betweenness <- function(
   ensure_igraph(graph)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -2275,7 +2275,7 @@ cluster_edge_betweenness <- function(
     as.logical(membership)
   )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    res$names <- V(graph)$name
+    res$names <- vertex_attr(graph, "name")
   }
   res$vcount <- vcount(graph)
   res$algorithm <- "edge betweenness"
@@ -2391,7 +2391,7 @@ cluster_fast_greedy <- function(
   ensure_igraph(graph)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -2409,7 +2409,7 @@ cluster_fast_greedy <- function(
     weights
   )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    res$names <- V(graph)$name
+    res$names <- vertex_attr(graph, "name")
   }
   res$algorithm <- "fast greedy"
   res$vcount <- vcount(graph)
@@ -2566,7 +2566,7 @@ cluster_leading_eigen <- function(
 
   steps <- as.numeric(steps)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -2595,7 +2595,7 @@ cluster_leading_eigen <- function(
   )
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    res$names <- V(graph)$name
+    res$names <- vertex_attr(graph, "name")
   }
   res$algorithm <- "leading eigenvector"
   res$vcount <- vcount(graph)
@@ -2726,7 +2726,7 @@ cluster_label_prop0 <- function(
 
   res <- list()
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    res$names <- V(graph)$name
+    res$names <- vertex_attr(graph, "name")
   }
   res$vcount <- vcount(graph)
   res$algorithm <- "label propagation"
@@ -2854,7 +2854,7 @@ cluster_louvain <- function(
   ensure_igraph(graph)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -2870,7 +2870,7 @@ cluster_louvain <- function(
     resolution = resolution
   )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    res$names <- V(graph)$name
+    res$names <- vertex_attr(graph, "name")
   }
   res$vcount <- vcount(graph)
   res$algorithm <- "multi level"
@@ -2986,7 +2986,7 @@ cluster_optimal <- function(
   ensure_igraph(graph)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -3001,7 +3001,7 @@ cluster_optimal <- function(
   )
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    res$names <- V(graph)$name
+    res$names <- vertex_attr(graph, "name")
   }
   res$vcount <- vcount(graph)
   res$algorithm <- "optimal"
@@ -3118,7 +3118,7 @@ cluster_infomap <- function(
   )
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    res$names <- V(graph)$name
+    res$names <- vertex_attr(graph, "name")
   }
   res$vcount <- vcount(graph)
   res$algorithm <- "infomap"

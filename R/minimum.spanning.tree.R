@@ -98,7 +98,7 @@ mst <- function(graph, weights = NULL, algorithm = NULL, ...) {
     if (is.null(weights) && !"weight" %in% edge_attr_names(graph)) {
       cli::cli_abort("edges weights must be supplied for Prim's algorithm.")
     } else if (is.null(weights)) {
-      weights <- E(graph)$weight
+      weights <- edge_attr(graph, "weight")
     }
     minimum_spanning_tree_prim_impl(
       graph = graph,

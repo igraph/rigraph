@@ -458,9 +458,6 @@ vertex_attr <- function(graph, name, index = NULL) {
   }
 
   check_string(name)
-  if (is.null(index)) {
-    index <- V(graph)
-  }
   myattr <-
     .Call(
       Rx_igraph_mybracket2,
@@ -468,7 +465,9 @@ vertex_attr <- function(graph, name, index = NULL) {
       igraph_t_idx_attr,
       igraph_attr_idx_vertex
     )[[name]]
-  if (is_complete_iterator(index)) {
+  # No index means all vertices,
+  # so skip building `V(graph)` just to find out that it is complete.
+  if (is.null(index) || is_complete_iterator(index)) {
     return(myattr)
   }
   index <- as_igraph_vs(graph, index)
@@ -782,16 +781,16 @@ edge_attr <- function(graph, name, index = NULL) {
     }
   } else {
     check_string(name)
-    if (is.null(index)) {
-      index <- E(graph)
-    }
     myattr <- .Call(
       Rx_igraph_mybracket2,
       graph,
       igraph_t_idx_attr,
       igraph_attr_idx_edge
     )[[name]]
-    if (is_complete_iterator(index)) {
+    # No index means all edges,
+    # so skip building `E(graph)` (and its edge names) just to find out
+    # that it is complete.
+    if (is.null(index) || is_complete_iterator(index)) {
       myattr
     } else {
       index <- as_igraph_es(graph, index)

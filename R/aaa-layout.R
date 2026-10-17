@@ -17,7 +17,7 @@ layout_drl_3d_impl <- function(
   use_seed <- as.logical(use_seed)
   options <- modify_list(drl_defaults$default, options)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -52,7 +52,7 @@ layout_drl_impl <- function(
   use_seed <- as.logical(use_seed)
   options <- modify_list(drl_defaults$default, options)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -165,7 +165,7 @@ layout_sugiyama_impl <- function(
   vgap <- as.numeric(vgap)
   maxiter <- as.numeric(maxiter)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -361,7 +361,7 @@ layout_fruchterman_reingold_3d_impl <- function(
   niter <- as.numeric(niter)
   start_temp <- as.numeric(start_temp)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -457,7 +457,7 @@ layout_kamada_kawai_3d_impl <- function(
   epsilon <- as.numeric(epsilon)
   kkconst <- as.numeric(kkconst)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -695,7 +695,7 @@ layout_fruchterman_reingold_impl <- function(
   start_temp <- as.numeric(start_temp)
   grid <- switch_igraph_arg(grid, "grid" = 0L, "nogrid" = 1L, "auto" = 2L)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -853,7 +853,7 @@ layout_kamada_kawai_impl <- function(
   epsilon <- as.numeric(epsilon)
   kkconst <- as.numeric(kkconst)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
