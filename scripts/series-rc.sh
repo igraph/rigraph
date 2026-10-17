@@ -17,7 +17,7 @@
 # `cpp11::cpp_register()` would have written them; anything else stops the run
 # and names the commit. `DESCRIPTION` and `scripts/flavor.patch` are spelled
 # back outright: the flavor changes one line of the first, beside a `Version:`
-# every commit moves, and the tooling sync overwrites the second with `main`'s
+# every commit moves, and the tooling sync rewrites the second from `main`'s
 # template.
 #
 # Usage: series-rc.sh <S> [--remote <name>] [--push]

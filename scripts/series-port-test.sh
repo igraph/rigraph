@@ -26,6 +26,11 @@
 # one, so a commit merged since the last sync is offered rather than silently
 # reverted by the tooling sync; with no canonical remote to read, the mirror is
 # the fallback and answers with the subset it has.
+#
+# And one thing about what --apply writes. A flavored series carries
+# scripts/flavor.patch spelled for its own package, and the tooling sync holds
+# it to `main`'s copy spelled the same way, on -dev and on the buffer, rather
+# than putting `main`'s template back.
 
 set -euo pipefail
 
@@ -41,6 +46,9 @@ ok() { pass=$((pass + 1)); echo "  ok   $1"; }
 no() { fail=$((fail + 1)); echo "  FAIL $1"; }
 has() { case "$2" in *"$3"*) ok "$1" ;; *) no "$1"; echo "       missing: $3" ;; esac; }
 hasnt() { case "$2" in *"$3"*) no "$1"; echo "     unexpected: $3" ;; *) ok "$1" ;; esac; }
+same() { # <name> <got> <want>
+  if [ "$2" = "$3" ]; then ok "$1"; else no "$1"; { diff <(echo "$3") <(echo "$2") || true; } | sed 's/^/       /'; fi
+}
 
 # --- the fixture -----------------------------------------------------------
 #
@@ -230,6 +238,113 @@ out_live=$(scripts/series-port.sh s 2>&1)
 [ -z "${KEEP:-}" ] || echo "$out_live"
 hasnt "a line releasing from main is not frozen" "$out_live" "frozen"
 has "and is offered main's R side" "$out_live" 'An ordinary commit the series lacks'
+
+echo
+echo "series-port.sh --apply: the tooling sync keeps the series' flavor"
+# A seed rewrites one tooling file: scripts/flavor.sh spells the template's
+# `igraph.1.3` in scripts/flavor.patch as the series' own package. The sync
+# holds the series to main's copy spelled the same way, so a port neither
+# puts the template back nor mints a sync where the spelling is all that
+# differs. A fixture of its own, with a buffer, so --apply runs to the end.
+
+AREMOTE=$SCRATCH/apply-remote.git
+ACANON=$SCRATCH/apply-canonical.git
+AWORK=$SCRATCH/apply-work
+git init -q --bare -b main "$AREMOTE"
+git init -q --bare -b main "$ACANON"
+git init -q -b main "$AWORK"
+cd "$AWORK"
+git config user.name Test
+git config user.email test@example.invalid
+git config commit.gpgsign false
+git remote add origin "$AREMOTE"
+git remote add upstream "$ACANON"
+
+# The sync names every tooling path, so the fixture has all three.
+mkdir -p scripts .github .claude
+echo '{}' > .claude/settings.json
+for s in series-port.sh series-patch-sync.sh setup-git.sh merge-version.sh series-config.sh series-lib.sh vendor-lib.sh; do
+  cp "$HERE/$s" scripts/
+done
+chmod +x scripts/*.sh
+echo 'DESCRIPTION merge=ours-version' > .gitattributes
+scripts/setup-git.sh >/dev/null
+
+printf 'Package: igraph\nVersion: 1.0.0\n' > DESCRIPTION
+echo 'workflow' > .github/ci.yml
+# The template's flavored lines come first, so a hunk `main` appends merges
+# onto the flavored copy without touching them.
+cat > scripts/flavor.patch <<'EOF'
+diff --git a/DESCRIPTION b/DESCRIPTION
+--- a/DESCRIPTION
++++ b/DESCRIPTION
+@@ -1 +1 @@
+-Package: igraph
++Package: igraph.1.3
+diff --git a/src/igraph_types.hpp b/src/igraph_1_3_types.hpp
+similarity index 100%
+rename from src/igraph_types.hpp
+rename to src/igraph_1_3_types.hpp
+diff --git a/tests/testthat.R b/tests/testthat.R
+--- a/tests/testthat.R
++++ b/tests/testthat.R
+@@ -1 +1 @@
+-test_check("igraph")
++test_check(pkg)
+EOF
+git add -A
+git commit -qm 'chore: The base the series is seeded on'
+
+# The seed's two flavor commits, spelled as scripts/flavor.sh spells them.
+spell() { sed -e 's/igraph\.1\.3/igraph.test/g' -e 's/igraph_1_3/igraph_test/g'; }
+git checkout -q -b s-dev
+spell < scripts/flavor.patch > scripts/flavor.patch.new
+mv scripts/flavor.patch.new scripts/flavor.patch
+git commit -qam 'chore: Update flavor patch to test'
+sed -i 's/^Package: igraph$/Package: igraph.test/' DESCRIPTION
+git commit -qam 'chore: Update version to test'
+seeded=$(git rev-parse HEAD)
+git push -q origin main s-dev s-dev:refs/heads/s-build
+git push -q upstream main
+
+out_seed=$(scripts/series-port.sh s --apply 2>&1) && st=0 || st=$?
+[ -z "${KEEP:-}" ] || echo "$out_seed"
+same "--apply on a fresh seed succeeds" "$st" 0
+has "a fresh seed's tooling is main's" "$out_seed" 'tooling: identical to main'
+has "so is its buffer's" "$out_seed" 'buffer tooling: identical to main'
+same "and a port mints nothing on -dev" "$(git rev-parse origin/s-dev)" "$seeded"
+same "nor on the buffer" "$(git rev-parse origin/s-build)" "$seeded"
+
+# `main` moves its tooling twice: a workflow edit, and a hunk appended to the
+# flavor template, which arrives spelled `igraph.1.3` whether it is picked or
+# synced.
+git checkout -q main
+echo 'workflow 2' > .github/ci.yml
+git commit -qam 'ci: A workflow change the series lacks'
+cat >> scripts/flavor.patch <<'EOF'
+diff --git a/NAMESPACE b/NAMESPACE
+--- a/NAMESPACE
++++ b/NAMESPACE
+@@ -1 +1 @@
+-useDynLib(igraph, .registration = TRUE)
++useDynLib(igraph.1.3, .registration = TRUE)
+EOF
+git commit -qam 'fix(flavor): Rename the package in NAMESPACE too'
+git push -q origin main
+git push -q upstream main
+git checkout -q s-dev
+
+out_port=$(scripts/series-port.sh s --apply 2>&1) && st=0 || st=$?
+[ -z "${KEEP:-}" ] || echo "$out_port"
+same "--apply onto a moved main succeeds" "$st" 0
+want=$(git show upstream/main:scripts/flavor.patch | spell)
+same "-dev's flavor patch is main's, spelled for the series" \
+  "$(git show origin/s-dev:scripts/flavor.patch)" "$want"
+same "and the buffer's" "$(git show origin/s-build:scripts/flavor.patch)" "$want"
+same "the rest of -dev's tooling is main's" \
+  "$(git diff --name-only origin/s-dev upstream/main -- .github scripts)" scripts/flavor.patch
+same "and of the buffer's" \
+  "$(git diff --name-only origin/s-build upstream/main -- .github scripts)" scripts/flavor.patch
 
 echo
 echo "$pass passed, $fail failed"
