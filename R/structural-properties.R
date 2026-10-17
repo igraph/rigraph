@@ -4583,10 +4583,8 @@ laplacian_matrix <- function(
   if (lifecycle::is_present(normalized)) {
     lifecycle::deprecate_warn(
       "2.0.3",
-      "make_lattice(normalized = 'provide normalization instead')",
-      details = c(
-        "`normalized` is now deprecated, use `normalization` instead."
-      )
+      "laplacian_matrix(normalized = )",
+      "laplacian_matrix(normalization = )"
     )
     normalized <- as.logical(normalized)
 
