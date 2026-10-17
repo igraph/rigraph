@@ -149,6 +149,45 @@
       + edges (vertex names):
       [1] 1--1 1--2 1--2
 
+# make_tri_lattice prints as expected
+
+    Code
+      make_tri_lattice(c(2, 2))
+    Output
+      IGRAPH U--- 4 5 -- Triangular lattice
+      + attr: name (g/c), dimvector (g/n), mutual (g/l)
+      + edges:
+      [1] 1--2 1--4 1--3 2--4 3--4
+
+# make_tri_lattice rejects invalid arguments
+
+    Code
+      make_tri_lattice(-1)
+    Condition
+      Error in `triangular_lattice_impl()`:
+      ! Invalid dimension vector. Invalid value
+      Source: <file>:<line>
+
+---
+
+    Code
+      make_tri_lattice(c(2, 2, 2, 2))
+    Condition
+      Error in `triangular_lattice_impl()`:
+      ! The size of the dimension vector must be 1, 2 or 3, got 4. Invalid value
+      Source: <file>:<line>
+
+---
+
+    Code
+      make_tri_lattice(c(2, 2), TRUE)
+    Condition
+      Error in `make_tri_lattice()`:
+      ! `...` must be empty.
+      x Problematic argument:
+      * ..1 = TRUE
+      i Did you forget to name an argument?
+
 # make_empty_graph gives an error for invalid arguments
 
     Code
