@@ -117,7 +117,7 @@ Its stops are the buffer's, and the strand commit stays as it is:
   never `src/vendor/` and never `src/rinterface.c`, `R/aaa-*.R` or the cpp11 files by hand.
   Format what you touched (`air format .` for R), `git -C "$B" add -A && git -C "$B" commit --amend`,
   appending an `R-side fix` section naming the upstream change and what was adapted,
-  and rerun the script to finish the picks.
+  and rerun the script, which gates the amended pick again before it finishes the picks.
 - **7, the R/C interface could not be generated** (`GENERATOR FAILED`).
   Stimulus or `cpp11::cpp_register()` failed on the pick, and the script has undone it: the buffer stands where it did.
   Most often an interface changed upstream: adapt `tools/stimulus/*.yaml`, then the buffer fold-in below;
@@ -126,6 +126,8 @@ Its stops are the buffer's, and the strand commit stays as it is:
   nothing was compiled, so this says nothing about the commit at HEAD; do not amend it, read `./configure`'s output, rerun.
 - **1** is a refusal, or a pick that conflicts: the buffer's vendor paths have drifted from the strand's,
   which happens only when something vendored or patched the buffer directly.
+  Resolve it to the strand's vendor paths, which keeps the buffer its twin, `git add`, and rerun:
+  the rerun commits the pick, then regenerates, stamps and gates it before it picks on.
 
 ## The audit
 

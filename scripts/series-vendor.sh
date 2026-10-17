@@ -13,8 +13,12 @@
 #   buffer's newest twin is cherry-picked onto HEAD, what the buffer alone
 #   carries is regenerated (`series_regenerate()` in scripts/series-config.sh),
 #   a vendor commit's counter is stamped, and the glue gate runs. Broken glue
-#   stops with the pick at HEAD for the fix to be amended in; a rerun continues
-#   from there. --count bounds the picks; --push pushes HEAD to `<S>-build`.
+#   stops with the pick at HEAD for the fix to be amended in, and a pick that
+#   conflicts stops for the resolution to be added; the pick in flight is
+#   recorded in the git dir, and a rerun finishes it first, with whatever of
+#   the regeneration, the stamp and the gate it has not had, then continues.
+#   --count bounds the picks; --push pushes HEAD to `<S>-build`, also when
+#   there is nothing left to pick.
 #
 #   --init derives `<S>-vendor` from an existing `<S>-build`, once: for every
 #   buffer commit above the seed that touches the vendor paths, a strand commit
@@ -213,6 +217,93 @@ git rev-parse -q --verify "$vendor_ref" >/dev/null ||
 git rev-parse -q --verify "$build_ref" >/dev/null || { echo "Error: no $S-build on $remote" >&2; exit 1; }
 git merge-base --is-ancestor "$build_ref" HEAD ||
   { echo "Error: HEAD is not at or above $S-build $(git rev-parse --short "$build_ref"); check it out first" >&2; exit 1; }
+
+# The pick in flight, as scripts/series-forward-build.sh keeps its own: the
+# strand commit, the buffer commit it was picked onto, and what is left of it,
+# `pick` (regenerate, stamp and gate) or `gate`. Written before the pick and
+# removed once its gate passes, so a rerun after a stop finishes the pick,
+# which the twin match below would otherwise take as done.
+STATE="$(git rev-parse --absolute-git-dir)/series-vendor-pick"
+
+# The glue gate on HEAD; a stop leaves the pick at HEAD and the state at `gate`.
+gate() {
+  [ "$check_glue" = true ] || return 0
+  local glue_status=0
+  glue_compiles "$glue_failures" || glue_status=$?
+  if [ "$glue_status" = 2 ]; then
+    echo
+    echo "=== GLUE CHECK COULD NOT RUN at $(git rev-parse --short HEAD) ==="
+    echo "Deriving the compile flags needs the Makevars ./configure completes${series_configured_file:+ ($series_configured_file)};"
+    echo "run ./configure and read its output, then rerun, or pass --no-check-glue."
+    echo "Nothing was compiled, so this says nothing about the commit at HEAD."
+    exit 8
+  elif [ "$glue_status" != 0 ]; then
+    echo
+    echo "=== GLUE BROKEN by $(git rev-parse --short HEAD) ==="
+    echo "Files: $(tr '\n' ' ' < "$glue_failures")"
+    echo "The breaking pick is at HEAD. Fix the glue, 'git commit --amend --no-edit', and rerun;"
+    echo "the rerun gates it again first. The fix is the buffer's, so the strand commit stays as it is."
+    exit 3
+  fi
+}
+
+# The pick of <strand commit> committed at HEAD, onto <base>: what the buffer
+# alone carries regenerated, a vendor commit's counter stamped, and the glue
+# gate run. A generator that fails undoes the pick.
+finish_pick() { # <strand commit> <base> [resumed]
+  local subj
+  subj=$(git log -1 --format=%s "$1")
+  if ! series_regenerate; then
+    local undone
+    undone=$(git rev-parse --short HEAD)
+    git reset -q --hard HEAD~1
+    git clean -fdq
+    rm -f "$STATE"
+    echo >&2
+    echo "=== GENERATOR FAILED after picking $(git rev-parse --short "$1") $subj ===" >&2
+    echo "The pick is undone, and the buffer stands where it did. Fix what the generator reads" >&2
+    echo "on the buffer, commit it here, and rerun: the pick is taken again above the fix." >&2
+    [ -z "${3:-}" ] || echo "The undone pick, $undone, held a resolution, which rerere replays on the pick again." >&2
+    exit 7
+  fi
+  if series_is_vendor "$subj"; then stamp; fi
+  git add -A
+  git commit -q --amend --no-edit
+  echo "$1 $2 gate" > "$STATE"
+  gate
+  rm -f "$STATE"
+}
+
+# A pick a run left in flight is finished before anything else is picked: one
+# that conflicted, committed here once resolved and added unless
+# `git cherry-pick --continue` committed it already, and one the gate stopped.
+if [ -f "$STATE" ]; then
+  read -r c base stage < "$STATE"
+  if [ "$stage" = pick ]; then
+    [ -z "$(git diff --name-only --diff-filter=U)" ] ||
+      { echo "Error: the pick of $(git rev-parse --short "$c") still conflicts; resolve, 'git add', and rerun" >&2; exit 1; }
+    if git rev-parse -q --verify CHERRY_PICK_HEAD >/dev/null; then git commit -q -C "$c"; fi
+  fi
+  if [ "$(git rev-parse HEAD)" = "$base" ]; then
+    echo "The pick of $(git rev-parse --short "$c") was abandoned; picking from the buffer as it stands"
+    rm -f "$STATE"
+  elif [ "$(git rev-parse -q --verify HEAD~1 || true)" = "$base" ]; then
+    [ -z "$(git status --porcelain)" ] ||
+      { echo "Error: working directory not clean; amend the fix into HEAD, and rerun" >&2; exit 1; }
+    echo "Resuming $(git rev-parse --short "$c") $(git log -1 --format=%s "$c"), picked onto $(git rev-parse --short "$base")"
+    if [ "$stage" = pick ]; then
+      finish_pick "$c" "$base" resumed
+    else
+      gate
+      rm -f "$STATE"
+    fi
+  else
+    echo "Error: HEAD is not the pick of $(git rev-parse --short "$c") onto $(git rev-parse --short "$base")," \
+      "which $STATE records; go back to it, or remove the file to start afresh" >&2
+    exit 1
+  fi
+fi
+
 [ -z "$(git status --porcelain)" ] || { echo "Error: working directory not clean" >&2; exit 1; }
 [ -z "$(git rev-parse -q --verify CHERRY_PICK_HEAD 2>/dev/null)" ] ||
   { echo "Error: a cherry-pick is in progress; finish or abort it first" >&2; exit 1; }
@@ -234,7 +325,6 @@ done < <(git rev-list "$vendor_ref")
 todo=$(git rev-list --reverse "$anchor..$vendor_ref")
 if [ -z "$todo" ]; then
   echo "$S-build is level with $S-vendor at $(git rev-parse --short "$anchor"); nothing to pick"
-  exit 0
 fi
 
 picked=0
@@ -242,49 +332,23 @@ for c in $todo; do
   [ -z "$count" ] || [ "$picked" -lt "$count" ] || break
   subj=$(git log -1 --format=%s "$c")
   echo "Picking $(git rev-parse --short "$c") $subj"
+  echo "$c $(git rev-parse HEAD) pick" > "$STATE"
   git cherry-pick "$c" >/dev/null || {
     echo >&2
     echo "The pick conflicts: patch drift between $S-vendor and $S-build." >&2
-    echo "Resolve it, 'git cherry-pick --continue', and rerun." >&2
+    echo "Resolve it, 'git add', and rerun: the rerun commits the pick, regenerates, stamps and gates it." >&2
     exit 1
   }
-  if ! series_regenerate; then
-    git reset -q --hard HEAD~1
-    git clean -fdq
-    echo >&2
-    echo "=== GENERATOR FAILED after picking $(git rev-parse --short "$c") $subj ===" >&2
-    echo "The pick is undone, and the buffer stands where it did. Fix what the generator reads" >&2
-    echo "on the buffer, commit it here, and rerun: the pick is taken again above the fix." >&2
-    exit 7
-  fi
-  if series_is_vendor "$subj"; then stamp; fi
-  git add -A
-  git commit -q --amend --no-edit
+  finish_pick "$c" "$(git rev-parse HEAD~1)"
   picked=$((picked + 1))
-  if [ "$check_glue" = true ]; then
-    glue_status=0
-    glue_compiles "$glue_failures" || glue_status=$?
-    if [ "$glue_status" = 2 ]; then
-      echo
-      echo "=== GLUE CHECK COULD NOT RUN at $(git rev-parse --short HEAD) ==="
-      echo "Deriving the compile flags needs the Makevars ./configure completes${series_configured_file:+ ($series_configured_file)};"
-      echo "run ./configure and read its output, then rerun, or pass --no-check-glue."
-      echo "Nothing was compiled, so this says nothing about the commit at HEAD."
-      exit 8
-    elif [ "$glue_status" != 0 ]; then
-      echo
-      echo "=== GLUE BROKEN by $(git rev-parse --short HEAD) ==="
-      echo "Files: $(tr '\n' ' ' < "$glue_failures")"
-      echo "The breaking pick is at HEAD. Fix the glue, 'git commit --amend --no-edit', and rerun;"
-      echo "the fix is the buffer's, so the strand commit stays as it is."
-      exit 3
-    fi
-  fi
 done
 rm -f "$glue_failures"
-echo "$S-build: $picked commit(s) picked from $S-vendor, HEAD $(git rev-parse --short HEAD)"
-if [ -n "$push" ]; then
-  git push "$remote" "HEAD:refs/heads/$S-build"
-else
-  echo "Not pushed; rerun with --push, or: git push $remote HEAD:$S-build"
+[ -z "$todo" ] || echo "$S-build: $picked commit(s) picked from $S-vendor, HEAD $(git rev-parse --short HEAD)"
+# A level buffer is pushed too where a rerun finished a pick the remote lacks.
+if [ "$(git rev-parse HEAD)" != "$(git rev-parse "$build_ref")" ]; then
+  if [ -n "$push" ]; then
+    git push "$remote" "HEAD:refs/heads/$S-build"
+  else
+    echo "Not pushed; rerun with --push, or: git push $remote HEAD:$S-build"
+  fi
 fi

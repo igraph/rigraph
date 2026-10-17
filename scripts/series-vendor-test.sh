@@ -17,6 +17,11 @@
 #   4. --forward onto a seed off the strand, a rewind: the foot is written whole
 #      and the rest picked, with the same equalities.
 #   5. --forward onto a seed at the strand's tip: an empty strand at the seed.
+#   6. A pick that stopped is finished by the rerun before it moves on: one that
+#      conflicted is committed once resolved and added, or after
+#      `git cherry-pick --continue`, then regenerated, stamped and gated, and
+#      one the glue gate stopped is gated again after the amend. A rerun that
+#      only finished the last pick pushes it.
 #
 # Ported from duckdb/duckdb-r (.series-source), against rigraph's configuration:
 # the vendor paths under src/vendor/ and patch/, igraph's version header, and
@@ -262,6 +267,106 @@ has "the strand's commit for the engine is the newest vendor commit" "$out" "whi
 has "one commit, the carry above it, is rebased" "$out" "rebasing 1 commit(s) above it onto the seed"
 is "the local ref is written" "$(git rev-list --count "$TIPSEED..refs/heads/v2.0-x-fwd-vendor")" 1
 has "and not pushed" "$out" "Not pushed"
+
+echo
+echo "=== 6. a pick that stopped is finished by the rerun"
+# The glue gate, stubbed: R prints a compile line for each probe, and the
+# compiler it names takes glue.cpp against a 2.x header only once the glue says
+# it is for 2, logging each commit it checks.
+export GATE_LOG=$SCRATCH/gate.log
+cat > "$STUBS/R" <<'STUB'
+#!/bin/sh
+[ "$1 $2 $3" = "CMD SHLIB -n" ] && echo "cc-stub -c $4 -o x.o"
+exit 0
+STUB
+cat > "$STUBS/cc-stub" <<'STUB'
+#!/bin/sh
+for f; do :; done
+[ "$f" = glue.cpp ] || exit 0
+git rev-parse HEAD >> "$GATE_LOG"
+! grep -q '"2\.' vendor/igraph_version.h || grep -q 'for 2' glue.cpp
+STUB
+chmod +x "$STUBS/R" "$STUBS/cc-stub"
+: > src/Makevars
+echo /src/Makevars >> .git/info/exclude
+gated() { grep -qx "$(git rev-parse "$1")" "$GATE_LOG"; }
+counter() { git show "$1:DESCRIPTION" | sed -n 's/^Version: //p'; }
+state=$(git rev-parse --absolute-git-dir)/series-vendor-pick
+
+# The buffer's parser was patched on the buffer itself, so the next strand
+# commit conflicts with it; the resolution takes the strand's parser, which
+# keeps the buffer the strand's twin.
+git checkout -q --detach "$BUILD"
+echo 'parser for bbbb004, drifted' > src/vendor/io/parser.c
+DRIFT=$(commit 'chore: Patch the parser on the buffer')
+git push -q origin "HEAD:refs/heads/v2.0-x-build"
+git checkout -q --detach origin/v2.0-x-vendor
+engine bbbb005 1.0.1-5-gbbbb005
+V5=$(commit 'vendor: Update vendored sources to igraph/igraph@bbbb005 (#9)')
+git push -q origin "HEAD:refs/heads/v2.0-x-vendor"
+git fetch -q origin
+git checkout -q --detach origin/v2.0-x-build
+out=$(run v2.0-x --push)
+[ -z "${KEEP:-}" ] || echo "$out"
+has "a pick that conflicts stops" "$out" "EXIT=1"
+has "and says to resolve, add and rerun" "$out" "Resolve it, 'git add', and rerun"
+yes "the pick is recorded in flight" test -f "$state"
+git show "$V5:src/vendor/io/parser.c" > src/vendor/io/parser.c
+git add src/vendor/io/parser.c
+out=$(run v2.0-x --push)
+[ -z "${KEEP:-}" ] || echo "$out"
+has "the rerun exits 0" "$out" "EXIT=0"
+has "and resumes the pick" "$out" "Resuming $(git rev-parse --short "$V5")"
+is "the buffer grew by the one pick" "$(git rev-list --count "$DRIFT..HEAD")" 1
+is "with the resolution" "$(git show HEAD:src/vendor/io/parser.c)" "parser for bbbb005"
+is "and the strand's subject" "$(git log -1 --format=%s HEAD)" "$(git log -1 --format=%s "$V5")"
+is "regenerated" "$(git show HEAD:src/rinterface.c)" "engine bbbb005"
+is "stamped" "$(counter HEAD)" 1.99.99.9000.5
+yes "and gated" gated HEAD
+has "the buffer is level then" "$out" "nothing to pick"
+git fetch -q origin
+is "and pushed although level" "$(git rev-parse origin/v2.0-x-build)" "$(git rev-parse HEAD)"
+yes "the state is gone" test ! -f "$state"
+
+# The next strand commit vendors a 2.x header the glue cannot take yet, and
+# conflicts with a second patch to the buffer's parser; this time git finishes
+# the pick.
+R5=$(git rev-parse HEAD)
+git checkout -q --detach origin/v2.0-x-vendor
+engine bbbb006 2.0.0
+V6=$(commit 'vendor: Update vendored sources to igraph/igraph@bbbb006 (#10)')
+git push -q origin "HEAD:refs/heads/v2.0-x-vendor"
+git fetch -q origin
+git checkout -q --detach "$R5"
+echo 'parser for bbbb005, drifted' > src/vendor/io/parser.c
+DRIFT2=$(commit 'chore: Patch the parser on the buffer again')
+out=$(run v2.0-x --push)
+has "the next pick conflicts" "$out" "EXIT=1"
+git show "$V6:src/vendor/io/parser.c" > src/vendor/io/parser.c
+git add src/vendor/io/parser.c
+GIT_EDITOR=true git cherry-pick --continue > /dev/null 2>&1
+out=$(run v2.0-x --push)
+[ -z "${KEEP:-}" ] || echo "$out"
+has "a pick git finished is resumed too" "$out" "Resuming $(git rev-parse --short "$V6")"
+has "and gated, which stops it" "$out" "EXIT=3"
+is "regenerated" "$(git show HEAD:src/rinterface.c)" "engine bbbb006"
+is "stamped" "$(counter HEAD)" 1.99.99.9000.6
+out=$(run v2.0-x --push)
+has "a rerun without the fix gates it again, and stops again" "$out" "EXIT=3"
+git fetch -q origin
+is "and pushes nothing" "$(git rev-parse origin/v2.0-x-build)" "$R5"
+echo 'glue 3, for 2.0' > src/glue.cpp
+git commit -q -a --amend --no-edit
+out=$(run v2.0-x --push)
+[ -z "${KEEP:-}" ] || echo "$out"
+has "with the glue amended, the rerun exits 0" "$out" "EXIT=0"
+yes "having gated the amend" gated HEAD
+is "stamped once" "$(counter HEAD)" 1.99.99.9000.6
+is "the buffer grew by the one pick" "$(git rev-list --count "$DRIFT2..HEAD")" 1
+has "and is level" "$out" "nothing to pick"
+git fetch -q origin
+is "and pushed" "$(git rev-parse origin/v2.0-x-build)" "$(git rev-parse HEAD)"
+yes "the state is gone" test ! -f "$state"
 
 echo
 echo "$pass passed, $fail failed"
