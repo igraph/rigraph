@@ -153,9 +153,10 @@ The tree check compares the landing with the series, so a test the series stoppe
 [`scripts/series-tests.sh`](/scripts/series-tests.sh) compares the landing's tests with its base's,
 the frozen `main` and any tests pinned above it,
 and the build refuses to push while one is lost:
-a deleted file, block or snapshot entry, a skip the base does not make, or an engine gate, live or expired.
-Restore each on the series in the vendor commit that took it, or take a gate out at the commit whose engine it names,
-then realign the rc strand and rerun.
+a deleted file, block or snapshot entry, or a skip the base does not make.
+A test whose function upstream removed, removed in the vendor commit that removed the function with a comment where it stood,
+is listed apart, and its removal lands with the series ([`adaptation/`](/handbook/operations/vendoring/adaptation/README.md)).
+Restore each lost test on the series in the vendor commit that took it, then realign the rc strand and rerun.
 What a test expects may differ, and the report lists every such path with the commits that moved it,
 marking one that a rewind changed and nothing put back.
 A test that `main`'s engine passes and the new one cannot is not the landing's to decide:

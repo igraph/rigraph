@@ -8,8 +8,8 @@
 # What is checked:
 #   1. The vendor predicate: a `vendor:` subject, a bare marker, an ordinary one.
 #   2. The SHA a subject names, and the twin key with its `+tag` suffix.
-#   3. The release a stamp precedes, and the version ordering the suite's
-#      `engine_before()` makes.
+#   3. The release a stamp precedes, and the version ordering
+#      scripts/series-tests.sh tells a rewind by.
 #   4. The strand, the regenerated files, the carry filter and the tooling
 #      expression, read from the configured paths rather than from literals.
 #   5. On a repository: the seed, the base scan past a non-vendor commit in the
@@ -61,7 +61,7 @@ snapshot=1.3.9-123-gabc1234 # a stamp past a release, which precedes the next on
 release=1.4.0
 later_snapshot=1.3.9-124-gdef5678
 # The ordering: pairs `series_version_before` answers yes to, and pairs it
-# answers no to, as `engine_before()` in the suite reads this engine's versions.
+# answers no to, as igraph's `git describe` versions order.
 before=("$snapshot $release" "$snapshot 1.5.0" "$snapshot $later_snapshot" "$release 1.5.0" "$release $release-1-gabc1234")
 not_before=("$snapshot 1.3.9" "main 1.5.0")
 

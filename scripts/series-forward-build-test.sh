@@ -18,8 +18,8 @@
 #      them, test-side and glue alike, on the whole of the new base: `main`'s
 #      R-side fix and tooling are there from the first commit.
 #   3. A pick that would stop a test the seed runs keeps the seed's copy, says
-#      so on stdout and in the commit, and takes the rest of the pick; an
-#      engine gate stays.
+#      so on stdout and in the commit, and takes the rest of the pick; a test
+#      removed with its function upstream, noted where it stood, goes.
 #   4. The buffer's vendor commits above the newest commit `-dev` vendors are
 #      replayed after `-dev`'s, from `-build`.
 #   5. The counter counts the chain, one step per replayed commit.
@@ -64,9 +64,10 @@ hasnt() { case "$2" in *"$3"*) no "$1"; echo "     unexpected: $3" ;; *) ok "$1"
 # `main` moving on from B: it vendors a newer engine, takes an R-side fix, a test
 # change and two tooling changes. The series' `-build` vendors four commits with
 # the glue each needed; its `-dev` consumes three of them, folds a test fix into
-# the first and deletes a test there, as a rewind did, gates another, ports
-# `main`'s fix and syncs the tooling, and its buffer carries a `patch/` entry of
-# its own. The forward seeds on `main`'s tip and replays `-dev`, then the buffer.
+# the first, deletes a test there, as a rewind did, and removes another whose
+# function upstream removed; it ports `main`'s fix and syncs the tooling, and
+# its buffer carries a `patch/` entry of its own. The forward seeds on `main`'s
+# tip and replays `-dev`, then the buffer.
 
 WORK=$SCRATCH/work
 git init -q -b main "$WORK"
@@ -104,7 +105,7 @@ echo 'glue 1' > src/glue.cpp
 echo 'test 1' > tests/testthat/test-foo.R
 printf 'a\nb\nc\nd\ne\nf\n' > tests/testthat/test-bar.R
 test_block gone > tests/testthat/test-gone.R
-test_block gate > tests/testthat/test-gate.R
+{ test_block stays; test_block removed; } > tests/testthat/test-removed.R
 commit 'vendor: Update vendored sources to igraph/igraph@aaaa111 (#1)'
 B=$(git rev-parse HEAD)
 
@@ -160,8 +161,7 @@ git checkout -q -b s-dev "$OLDSEED"
 echo 'glue 2, adapted to bbbb222' > src/glue.cpp
 echo 'test 2, as bbbb222 answers' > tests/testthat/test-foo.R
 git rm -q tests/testthat/test-gone.R
-printf 'test_that("gate", {\n  skip_if_engine_before("9.9.9", "not yet")\n  expect_true(TRUE)\n})\n' \
-  > tests/testthat/test-gate.R
+{ test_block stays; echo '# upstream igraph@bbbb222: removed() is removed.'; } > tests/testthat/test-removed.R
 vendor bbbb222 1.0.1-1-gbbbb222 1
 git cherry-pick -x "$P" >/dev/null
 echo 'tool v2' > scripts/tool.sh
@@ -245,7 +245,10 @@ has "the commit says what was not replayed" "$(git log -1 --format=%B "$FIRST")"
   "Not replayed, because it would stop a test the base runs:"
 has "naming the path" "$(git log -1 --format=%B "$FIRST")" '`tests/testthat/test-gone.R`'
 has "and keeps the vendor subject" "$(git log -1 --format=%s "$FIRST")" "igraph/igraph@bbbb222"
-has "an engine gate stays" "$(git show "$FIRST:tests/testthat/test-gate.R")" 'skip_if_engine_before("9.9.9"'
+is "a test removed with its function goes, its note in its place" \
+  "$(git show "$FIRST:tests/testthat/test-removed.R" | grep -v '^[ })]')" \
+  "$(printf '%s\n' 'test_that("stays", {' '# upstream igraph@bbbb222: removed() is removed.')"
+hasnt "and is not named as kept" "$(git log -1 --format=%B "$FIRST")" "\`tests/testthat/test-removed.R\`"
 is "the test is still there at the tip" "$(git ls-tree --name-only HEAD tests/testthat/test-gone.R)" tests/testthat/test-gone.R
 is "a commit above the kept one carries no note" "$(git log -1 --format=%B "$SECOND" | grep -c 'Not replayed' || true)" 0
 

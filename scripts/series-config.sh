@@ -234,12 +234,18 @@ series_tag_of_release() { # <X.Y.Z> -> the tag
 series_package=igraph
 series_canonical_repo=igraph/rigraph
 
-# Does the engine version $1 predate the version $2? The reading
-# `engine_before()` in tests/testthat/helper-skip.R makes, so an engine gate
-# expires in the scripts where it expires in the suite. igraph's CMake writes
-# `git describe --tags`: a release is `X.Y.Z`, and `X.Y.Z-N-g<sha>` is N commits
-# past it, so it follows `X.Y.Z` and precedes the next release. A string that
-# is not a version predates nothing.
+# The note a vendor commit leaves where it removed a test whose function
+# upstream removed, at the top level of the test file:
+#   # upstream igraph@<sha>: <what upstream removed>
+# scripts/series-tests.sh reads the SHA after this prefix, seven digits or more
+# (handbook/operations/vendoring/adaptation/README.md).
+series_test_note_prefix='# upstream igraph@'
+
+# Does the engine version $1 predate the version $2? scripts/series-tests.sh
+# asks it to tell a rewind, a commit vendoring an engine older than `main`'s.
+# igraph's CMake writes `git describe --tags`: a release is `X.Y.Z`, and
+# `X.Y.Z-N-g<sha>` is N commits past it, so it follows `X.Y.Z` and precedes the
+# next release. A string that is not a version predates nothing.
 series_version_before() { # <engine> <version>
   local re='^([0-9]+)\.([0-9]+)\.([0-9]+)(-([0-9]+)-g[0-9a-f]+)?$' i
   local -a lhs rhs

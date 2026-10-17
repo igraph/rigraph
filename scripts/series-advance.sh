@@ -42,8 +42,8 @@
 # `v2.0-cyanoptera-fwd` took `tests/testthat/test-variant.R`'s deletion this way
 # and never its restore (duckdb/duckdb-r#2899). So a path under `tests/` whose
 # carry would take a test away keeps what the forward has, read by
-# scripts/series-tests.sh, and is named in the commit message; an engine gate,
-# which re-arms its test by itself, carries like any fix.
+# scripts/series-tests.sh, and is named in the commit message. The removal of a
+# test whose function upstream removed, noted where it stood, carries as a fix.
 #
 # **This stage is attended.** A carry the series has moved out from under stops
 # the run with the conflict in a worktree that is kept, because resolving it is
@@ -807,13 +807,14 @@ else
       stop "$wt" "$c" "$d" carry
     fi
     rm -f "$patch"
-    # A carry never takes a test away (handbook/operations/vendoring/series-loop/).
+    # A carry never takes a test away (handbook/operations/vendoring/adaptation/).
     # The twin may have deleted a test file or a `test_that()` block, or skipped
     # one for good, because its engine at a rewind asked for that; the loss
     # travels with its vendor commit, and the base's later restore, a commit of
     # its own, does not. So a path under `tests/` whose carry would stop a test
-    # this commit runs keeps what this commit has, an engine gate being the one
-    # skip that carries, and CI judges the commit: a red there is gated in stage 2.
+    # this commit runs keeps what this commit has, a removal series-tests.sh
+    # reads off its note being the one that carries, and CI judges the commit:
+    # a red there is repaired in stage 2.
     mapfile -t tpaths < <(printf '%s\n' "${paths[@]}" | grep '^tests/' || true)
     if [ ${#tpaths[@]} -gt 0 ]; then
       out=$("$(dirname "$0")/series-tests.sh" "$(git -C "$wt" rev-parse HEAD)" \

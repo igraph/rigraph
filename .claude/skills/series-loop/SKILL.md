@@ -276,16 +276,18 @@ Every commit in `main-green..main-dev` is decided by an `each-rcc` leg, and that
   3. R code;
   4. snapshots, only after confirming the new output is correct;
   5. tests, as a last resort, with a comment `# upstream igraph@<short-sha>: <reason>`.
-* **A series never stops a test `main` runs.**
-  Where an older engine cannot pass a test, gate it with `skip_if_engine_before("<version>", "<why>")`
-  ([`tests/testthat/helper-skip.R`](/tests/testthat/helper-skip.R)) at the top of the `test_that()` body, folded like any repair,
-  and take the gate out in the same pass where the series already holds that version.
-  Never delete, rewrite or skip a test without a version to end the skip.
+* **A test follows its engine, commit by commit, and a series stops no other test `main` runs.**
+  A test a vendor commit breaks is adapted in that commit.
+  One whose function upstream removed goes in the vendor commit that removes the function, with its snapshot entries,
+  leaving `# upstream igraph@<short-sha>: <what upstream removed>` at the top level of the file where it stood,
+  the SHA being the one the commit's subject names.
+  One that only a later engine supports is added in the vendor commit that brings that engine.
+  Never check the engine's version inside a test, and never delete or skip a test for another reason.
   A `TESTS` line from `series-check.sh` is this stage's work too.
 * **A transiently broken upstream commit is folded into the next one** when that one fixes it, the newer subject kept;
   a `patch/` entry only when the next commit is red too.
 * **Snapshot drift**: fetch `snapshot-<sha>-rcc-smoke-null`, review the diff as a code review, fold;
-  a deleted snapshot file is a test that stopped running.
+  a deleted snapshot file is a test that stopped running, unless upstream removed the function of every test that wrote it.
 * **A red on a flavor commit is the rename's**: fix the flavor tooling on `main`, and fold the same change into the flavor commit.
 * **A gate the job's tooling or environment breaks on every commit is the harness's**, which each commit carries:
   fix it on `main` first, then cherry-pick that commit, with what else from `main` it needs, onto `main-green`

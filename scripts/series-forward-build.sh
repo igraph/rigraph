@@ -27,12 +27,13 @@
 # **A pick never stops a test the seed runs.** The seed carries `main`'s tests,
 # and a `-dev` commit folded at a rewind may delete one or skip it for good,
 # where its engine could not pass it; a series never does that
-# (handbook/operations/vendoring/series-loop/README.md). So a path under
+# (handbook/operations/vendoring/adaptation/README.md). So a path under
 # `tests/` whose pick would take a test away keeps what HEAD has, read by
 # scripts/series-tests.sh as stage 5 reads a carry, and the commit message names
-# it; an engine gate carries like any fix. CI then judges the commit, and a red
-# there is gated in the loop's repair stage. `--no-keep-tests` turns this off,
-# for a landing, whose own gate refuses a lost test with the series named.
+# it; a removal of a test whose function upstream removed, noted where it
+# stood, replays like any fix. CI then judges the commit, and a red there is
+# repaired in the loop's repair stage. `--no-keep-tests` turns this off, for a
+# landing, whose own gate refuses a lost test with the series named.
 #
 # Only `vendor:` subjects are replayed. Most of the others are `main`'s, which
 # the regenerated seed already carries -- on a `-dev` branch as ports, and on a
@@ -298,10 +299,10 @@ in_base() {
 # takes, which is how `tests/testthat/test-variant.R` left `v2.0-cyanoptera-fwd`
 # (duckdb/duckdb-r#2899). So the staged pick is read against HEAD the way stage 5
 # reads a carry (scripts/series-advance.sh), and a path whose pick would take a
-# test away keeps HEAD's copy; an engine gate re-arms its test by itself and
-# stays. The kept paths are named on stdout and in the commit's message, so CI's
-# red there, if the engine really cannot pass the test, is gated in the loop's
-# repair stage rather than puzzled over.
+# test away keeps HEAD's copy; a removal series-tests.sh reads off its note is
+# no loss and replays. The kept paths are named on stdout and in the commit's
+# message, so CI's red there, if the engine really cannot pass the test, is
+# repaired in the loop's repair stage rather than puzzled over.
 KEPT=()
 keep_tests() { # <source commit>
   KEPT=()
