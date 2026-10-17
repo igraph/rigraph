@@ -69,12 +69,21 @@ series_keep=(src include vendor interfaces AUTHORS COPYING ACKNOWLEDGEMENTS.md C
 # (scripts/series-forward-build.sh).
 # The R/C interface, the cpp11 registration and the glue's source lists are
 # generated as well, but from tools/stimulus/ and the glue, which are `main`'s,
-# so they travel as a diff; a landing reviews them with the strand
-# (scripts/series-land.sh). duckdb-r's are its Makevars, hence the name.
+# as much as from the tree, so they travel as a diff. duckdb-r's are its
+# Makevars, hence the name.
 series_strand=(src/vendor/cigraph src/vendor/igraph_version.h src/vendor/igraph_threading.h
   src/vendor/io patch src/sources-igraph.mk src/sources-glpk.mk src/sources-mini-gmp.mk)
 series_makevars=(src/rinterface.c 'R/aaa-*.R' src/cpp11.cpp R/cpp11.R
   src/sources-glue-c.mk src/sources-glue-cpp.mk)
+
+# What a review of the R side hides besides the workflows and `DESCRIPTION`'s
+# version (scripts/series-land.sh --review): the strand alone. Left undefined,
+# a review hides `series_makevars` too, which suits duckdb-r, whose generated
+# files change only where tools/stimulus/ does. Stimulus here also reads the
+# vendored `interfaces/functions.yaml`, so an `_impl()` function the engine adds
+# or removes changes `R/aaa-*.R` and `src/rinterface.c` with no edit under
+# tools/stimulus/ to show for it, and the review shows them.
+series_review_hidden=("${series_strand[@]}")
 
 # How vendoring regenerates the tree from an upstream checkout, in two phases
 # around the patch stack (scripts/vendor-one.sh, scripts/vendor.sh): the tree

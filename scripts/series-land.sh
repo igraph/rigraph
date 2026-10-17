@@ -99,25 +99,43 @@
 # `<L>-land-dev`, never from a kept build that may be stopped or unchecked.
 # Without its engine the R side compiles against nothing, so a check there could
 # only fail, and without workflow files a pull request starts nothing that
-# builds or tests it. It goes to the canonical repository, where it is opened as
-# a draft pull request against `main` and never merged: `main` takes the
-# landing itself. It prints the test report the build gated on, for the pull
+# builds or tests it, but for a `pull_request_target` workflow, which runs from
+# `main`. It is written to a local branch of its name, and with --push to the
+# canonical repository or to the fork --review-remote names, where it is opened
+# as a draft pull request against `main` and never merged: `main` takes the
+# landing itself. What a review hides beside the workflows and `DESCRIPTION`'s
+# version is `series_review_hidden` (scripts/series-config.sh), the strand
+# below by default. It prints the test report the build gated on, for the pull
 # request's description.
+#
+# **`--review --series` reads a series before any landing.** It writes the same
+# branch from `<S>-green`, what CI has proved, unflavored by series-rc.sh
+# without a push: the rc twins of the vendor commits above the series' base,
+# its seed and the commits in front of its first vendor commit, onto `main`. A
+# tooling sync or a port of a commit `main` has is left out among them, as the
+# replay places one; any other commit there is refused. The review is then held
+# to the series' green: outside what it hides, it may differ only where a series
+# differs from `main` by construction, in `NEWS.md`, the READMEs and the
+# version, and a change of `main`'s the series has not ported stops it with
+# nothing written. Each commit names the series commit it halves,
+# `Series-commit:`, where a landing's names its `Landing-commit:`.
 #
 # Usage: series-land.sh <S> [--remote <name>] [--canonical <name>] [--push]
 #                       [--base <ref>] [--placed <sha>]... [--no-check-glue] [--attended]
 #        series-land.sh <S> --status [--remote <name>] [--canonical <name>] [--push]
-#        series-land.sh <S> --review [--landing <ref>] [--suffix <s>] [--remote <name>]
-#                       [--canonical <name>] [--push]
+#        series-land.sh <S> --review [--landing <ref> | --series] [--suffix <s>] [--remote <name>]
+#                       [--canonical <name>] [--review-remote <name>] [--push]
 #        series-land.sh <S> --abort
 #   <S> is the series whose rc strand lands, `v2.0-cyanoptera-fwd` for
 #   `v2.0-cyanoptera-fwd-rc-dev`; the refs are named for its line,
 #   `v2.0-cyanoptera-land-*`, on --remote. `main` is read from --canonical.
 #   Nothing is written to a remote without --push. A stopped build resumes when
 #   rerun, from the worktree it kept; --abort discards that worktree.
-#   --review pushes `<L>-land-review<s>` to --canonical, from `<L>-land-dev` on
-#   --remote or the landing --landing names: an iteration reviewed before the
-#   series carries it, for example `--landing <L>-land-v2 --suffix -v2`.
+#   --review writes `<L>-land-review<s>` from `<L>-land-dev` on --remote, from
+#   the landing --landing names, an iteration reviewed before the series carries
+#   it (`--landing <L>-land-v2 --suffix -v2`), or with --series from
+#   `<S>-green` on --remote. --push writes it to --review-remote, by default
+#   --canonical.
 #   --base defaults to `main`; a ref the clone lacks is fetched from --canonical.
 #   --source names the ref the landing is built up to, on --remote, in place of
 #   `<S>-rc-dev`: it is taken as it stands, with no realignment, for a series
@@ -133,12 +151,13 @@ shopt -s inherit_errexit
 # shellcheck source=series-lib.sh
 . "$(dirname "$0")/series-lib.sh"
 
-usage='usage: series-land.sh <S> [--remote <name>] [--canonical <name>] [--status | --review | --abort] [--push] [--base <ref>] [--source <ref>] [--landing <ref>] [--suffix <s>] [--placed <sha>]... [--no-check-glue] [--attended]'
+usage='usage: series-land.sh <S> [--remote <name>] [--canonical <name>] [--status | --review | --abort] [--push] [--base <ref>] [--source <ref>] [--landing <ref> | --series] [--suffix <s>] [--review-remote <name>] [--placed <sha>]... [--no-check-glue] [--attended]'
 argerr() { echo "$usage" >&2; exit 2; }
 
 remote=${SERIES_REMOTE:-origin}
 canonical=${SERIES_CANONICAL-upstream}
 push='' status='' review='' abort='' attended='' base_arg='' source_arg='' landing_arg='' suffix=''
+series='' review_remote=''
 fwd_args=()
 args=()
 while [ $# -gt 0 ]; do
@@ -149,6 +168,8 @@ while [ $# -gt 0 ]; do
     --source) [ $# -ge 2 ] || argerr; source_arg=$2; shift 2 ;;
     --landing) [ $# -ge 2 ] || argerr; landing_arg=$2; shift 2 ;;
     --suffix) [ $# -ge 2 ] || argerr; suffix=$2; shift 2 ;;
+    --review-remote) [ $# -ge 2 ] || argerr; review_remote=$2; shift 2 ;;
+    --series) series=1; shift ;;
     --placed) [ $# -ge 2 ] || argerr; fwd_args+=(--placed "$2"); shift 2 ;;
     --no-check-glue) fwd_args+=(--no-check-glue); shift ;;
     --attended) attended=1; shift ;;
@@ -163,6 +184,8 @@ while [ $# -gt 0 ]; do
 done
 [ ${#args[@]} -eq 1 ] || argerr
 [ $((${status:-0} + ${review:-0} + ${abort:-0})) -le 1 ] || argerr
+# --series is a kind of review, of a series rather than of a landing.
+[ -z "$series" ] || { [ -n "$review" ] && [ -z "$landing_arg" ]; } || argerr
 S=${args[0]}
 case "$S" in
   *-rc | *-land) echo "Error: $S is a derived strand; name the series it comes from" >&2; exit 2 ;;
@@ -211,8 +234,10 @@ git fetch -q "$remote" "+refs/heads/$L-land-*:refs/remotes/$remote/$L-land-*"
 
 # The vendored strand, as series-forward-build.sh takes it whole, with the
 # Makevars generated from it: here the R/C interface and the cpp11
-# registration (scripts/series-config.sh). A change to the interface shows in
-# the review as the tools/stimulus/ change that caused it.
+# registration (scripts/series-config.sh). A review hides the strand alone
+# where `series_review_hidden` says so, because a generator that reads the
+# vendored tree changes the Makevars with no change under tools/stimulus/ to
+# show for it.
 strand=("${series_strand[@]}" "${series_makevars[@]}")
 strand_excludes=()
 for p in "${strand[@]}"; do strand_excludes+=(":(exclude)$p"); done
@@ -297,31 +322,117 @@ fi
 
 if [ -n "$review" ]; then
   rb="$L-land-review$suffix"
-  if [ -n "$landing_arg" ]; then
-    tip=$(git rev-parse -q --verify "$landing_arg^{commit}" ||
-      { git fetch -q "$remote" "$landing_arg" && git rev-parse FETCH_HEAD; })
-  else
-    git rev-parse -q --verify "$dev_ref" >/dev/null ||
-      { echo "Error: no $L-land-dev on $remote to review; build and --push it first" >&2; exit 1; }
-    tip=$(git rev-parse "$dev_ref")
-  fi
   base=$main
-  if ! git merge-base --is-ancestor "$base" "$tip" || [ -n "$(out_of_place "$tip")" ]; then
-    echo "Error: the landing $(git rev-parse --short "$tip") is not main $(git rev-parse --short "$base")," \
-      "the base's own commits, and vendor commits" >&2
-    exit 1
-  fi
-  if [ -f "$STATE" ]; then
-    read -r kwt _ < "$STATE"
-    if [ -d "$kwt" ] && [ "$(git -C "$kwt" rev-parse HEAD)" != "$tip" ]; then
-      echo "Note: the kept build is not the landing reviewed here, $(git rev-parse --short "$tip")"
+  review_remote=${review_remote:-$canonical}
+  git remote get-url "$review_remote" >/dev/null 2>&1 ||
+    { echo "Error: no remote \"$review_remote\" to push the review to" >&2; exit 1; }
+  unversioned() { git show "$1:DESCRIPTION" | grep -v '^Version:'; }
+  unflavored_from() { git log -1 --format='%(trailers:key=Unflavored-from,valueonly,separator=%x2C)' "$1"; }
+  # The series commits a review leaves out, because `main` has them already.
+  declare -A mains_own=()
+
+  if [ -n "$series" ]; then
+    # The series unflavored, as series-rc.sh would realign its rc strand: the
+    # strand on --remote where that is aligned, otherwise the one this run
+    # mints, objects and no ref, whose tip series-rc.sh names. Its commits are
+    # twins of `<S>-dev`'s, and `<S>-green`'s are among them. The `-dev` it
+    # unflavored is read off its tip, which a fetch elsewhere cannot move.
+    rc_out=$("$here/series-rc.sh" "$S" --remote "$remote") && rc_st=0 || rc_st=$?
+    case "$rc_st" in
+      0) rc_dev=$(git rev-parse "refs/remotes/$remote/$S-rc-dev") ;;
+      1) rc_dev=$(sed -nE '1s/^.* ([0-9a-f]{7,}) \([0-9]+ above the unflavored seed\)$/\1/p' <<<"$rc_out") ;;
+      *) exit "$rc_st" ;;
+    esac
+    if [ -z "$rc_dev" ] || ! rc_dev=$(git rev-parse -q --verify "$rc_dev^{commit}") ||
+      ! sdev=$(git rev-parse -q --verify "$(unflavored_from "$rc_dev")^{commit}"); then
+      echo "Error: series-rc.sh did not unflavor $S-dev; nothing to review" >&2
+      [ -z "$rc_out" ] || echo "  ${rc_out//$'\n'/$'\n'  }" >&2
+      exit 1
     fi
+    green=$(git rev-parse -q --verify "refs/remotes/$remote/$S-green") ||
+      { echo "Error: no $S-green on $remote to review" >&2; exit 1; }
+    git merge-base --is-ancestor "$green" "$sdev" ||
+      { echo "Error: $S-green is not on $S-dev on $remote" >&2; exit 1; }
+    # The series' base: its seed, and above it whatever stands in front of the
+    # first vendor commit, `main`'s changes since the seed brought there.
+    seed=$(series_seed_of "$green")
+    [ -n "$seed" ] || { echo "Error: $S-green has no seed" >&2; exit 1; }
+    sbase=$seed
+    while IFS=$'\t' read -r c subj; do
+      if series_is_vendor "$subj"; then break; fi
+      sbase=$c
+    done < <(git log --reverse --first-parent --format='%H%x09%s' "$seed..$green")
+    if [ "$sbase" = "$green" ]; then
+      echo "Error: $S-green vendors nothing above its base; there is nothing to review" >&2
+      exit 1
+    fi
+    # Above the base, the vendor commits are reviewed. A commit `main` has
+    # already, a tooling sync or a port of one of its commits, is left out, as
+    # the landing's replay places one (series-forward-build.sh, placed_by_rule);
+    # any other commit has no place there.
+    while IFS=$'\t' read -r c subj; do
+      if series_is_vendor "$subj"; then continue; fi
+      case "$subj" in
+        "chore(series): Sync tooling with main" | "chore(series): Sync buffer tooling with main")
+          mains_own[$c]=1
+          continue
+          ;;
+      esac
+      x=$(git log -1 --format=%B "$c" | sed -n 's/^(cherry picked from commit \([0-9a-f]\{40\}\))$/\1/p' | tail -n 1)
+      if [ -n "$x" ] && git merge-base --is-ancestor "$x" "$main" 2>/dev/null; then
+        mains_own[$c]=1
+        continue
+      fi
+      echo "Error: $(git rev-parse --short "$c") $subj stands among the vendor commits of $S-green" \
+        "and is not main's; a fix belongs in the vendor commit it fixes" >&2
+      exit 1
+    done < <(git log --reverse --first-parent --format='%H%x09%s' "$sbase..$green")
+    twin_of() { # <series commit> -> its twin on the rc strand
+      git log --first-parent --format='%H%x09%(trailers:key=Unflavored-from,valueonly,separator=%x2C)' \
+        "$seed~3..$rc_dev" | awk -F'\t' -v c="$1" '$2 == c { print $1 }'
+    }
+    from=$(twin_of "$sbase")
+    tip=$(twin_of "$green")
+    if [ -z "$from" ] || [ -z "$tip" ]; then
+      echo "Error: the rc strand series-rc.sh minted lacks a twin of $S-green" >&2
+      exit 1
+    fi
+    what="$S series" kind=series trailer=Series-commit
+  else
+    if [ -n "$landing_arg" ]; then
+      tip=$(git rev-parse -q --verify "$landing_arg^{commit}" ||
+        { git fetch -q "$remote" "$landing_arg" && git rev-parse FETCH_HEAD; })
+    else
+      git rev-parse -q --verify "$dev_ref" >/dev/null ||
+        { echo "Error: no $L-land-dev on $remote to review; build and --push it first" >&2; exit 1; }
+      tip=$(git rev-parse "$dev_ref")
+    fi
+    if ! git merge-base --is-ancestor "$base" "$tip" || [ -n "$(out_of_place "$tip")" ]; then
+      echo "Error: the landing $(git rev-parse --short "$tip") is not main $(git rev-parse --short "$base")," \
+        "the base's own commits, and vendor commits" >&2
+      exit 1
+    fi
+    if [ -f "$STATE" ]; then
+      read -r kwt _ < "$STATE"
+      if [ -d "$kwt" ] && [ "$(git -C "$kwt" rev-parse HEAD)" != "$tip" ]; then
+        echo "Note: the kept build is not the landing reviewed here, $(git rev-parse --short "$tip")"
+      fi
+    fi
+    from=$base what="$L landing" kind=landing trailer=Landing-commit
   fi
 
   # `DESCRIPTION` is left out of the diffs because every landing commit moves its
   # `Version:`; a change to any other line of it is carried below.
-  excludes=(':(exclude).github/workflows' ':(exclude)DESCRIPTION' "${strand_excludes[@]}")
-  unversioned() { git show "$1:DESCRIPTION" | grep -v '^Version:'; }
+  # What else is hidden is `series_review_hidden`, or the strand with its
+  # Makevars where the configuration leaves it undefined.
+  if declare -p series_review_hidden >/dev/null 2>&1; then
+    hidden=(${series_review_hidden[@]+"${series_review_hidden[@]}"})
+  else
+    hidden=("${strand[@]}")
+  fi
+  hidden_excludes=()
+  for p in ${hidden[@]+"${hidden[@]}"}; do hidden_excludes+=(":(exclude)$p"); done
+  excludes=(':(exclude).github/workflows' ':(exclude)DESCRIPTION' ${hidden_excludes[@]+"${hidden_excludes[@]}"})
   main_version=$(git show "$base:DESCRIPTION" | sed -n 's/^Version: //p')
 
   work=$(mktemp -d)
@@ -334,24 +445,37 @@ if [ -n "$review" ]; then
   git ls-files -z -- .github/workflows | xargs -0 -r git update-index --force-remove --
   head=$(GIT_AUTHOR_DATE=$GIT_COMMITTER_DATE git commit-tree "$(git write-tree)" -p "$base" -m "ci: Remove every workflow from this review branch
 
-The branch carries the R side of the $L landing without its engine,
+The branch carries the R side of the $what without its engine,
 so it compiles against nothing, and it is never merged.
 Without workflow files a pull request from it starts nothing that
-builds or tests it.")
+builds or tests it. A \`pull_request_target\` workflow runs all the same,
+because it is read from \`main\`, not from this branch.")
 
-  picked=0
-  for c in $(git rev-list --reverse --first-parent "$base..$tip"); do
+  picked=0 left=()
+  for c in $(git rev-list --reverse --first-parent "$from..$tip"); do
+    # The commit a review commit names: the landing's own, or the series commit
+    # its rc twin was unflavored from, the one CI judged.
+    named=$c
+    [ -z "$series" ] || named=$(unflavored_from "$c")
+    if [ -n "${mains_own[$named]:-}" ]; then
+      left+=("$(git log -1 --format='%h %s' "$named")")
+      continue
+    fi
     git diff --binary "$c~1" "$c" -- . "${excludes[@]}" > "$work/diff"
     desc=''
     [ "$(unversioned "$c")" = "$(unversioned "$c~1")" ] || desc=1
     [ -s "$work/diff" ] || [ -n "$desc" ] || continue
-    [ -s "$work/diff" ] && git apply --cached --binary --whitespace=nowarn "$work/diff"
+    if [ -s "$work/diff" ] && ! git apply --cached --binary --whitespace=nowarn "$work/diff"; then
+      echo "Error: $(git log -1 --format='%h %s' "$named") does not apply onto main" \
+        "$(git rev-parse --short "$base"), which changed what it changes" >&2
+      exit 1
+    fi
     if [ -n "$desc" ]; then
       blob=$(git show "$c:DESCRIPTION" | sed "s/^Version: .*/Version: $main_version/" |
         git hash-object -w --stdin)
       git update-index --cacheinfo "100644,$blob,DESCRIPTION"
     fi
-    subj=$(git log -1 --format=%s "$c")
+    subj=$(git log -1 --format=%s "$named")
     up=''
     # Named as the subject names it, owner and all, the SHA cut to ten.
     if series_is_vendor "$subj"; then
@@ -360,46 +484,79 @@ builds or tests it.")
     fi
     head=$(
       { if series_is_vendor "$subj"; then
-          echo "review: The R side of ${up:-$(git rev-parse --short "$c")}"
+          echo "review: The R side of ${up:-$(git rev-parse --short "$named")}"
           echo
-          git log -1 --format=%B "$c"
+          git log -1 --format=%B "$named"
         else
           # The base's own commit, as it lands.
-          git log -1 --format=%B "$c"
+          git log -1 --format=%B "$named"
         fi
-        echo "Landing-commit: $c"; } |
-        GIT_AUTHOR_NAME=$(git log -1 --format=%an "$c") GIT_AUTHOR_EMAIL=$(git log -1 --format=%ae "$c") \
-        GIT_AUTHOR_DATE=$(git log -1 --format=%ad --date=raw "$c") \
+        echo "$trailer: $named"; } |
+        GIT_AUTHOR_NAME=$(git log -1 --format=%an "$named") GIT_AUTHOR_EMAIL=$(git log -1 --format=%ae "$named") \
+        GIT_AUTHOR_DATE=$(git log -1 --format=%ad --date=raw "$named") \
         git commit-tree "$(git write-tree)" -p "$head"
     )
     picked=$((picked + 1))
   done
   unset GIT_INDEX_FILE
 
+  # A series' review is held to the series: outside what it hides, it differs
+  # from the series' green unflavored only where a series differs from `main`
+  # by construction, in `NEWS.md`, the READMEs and the version. Anything else
+  # is a change of `main`'s the series has not ported, or one of the base's
+  # own, where the review would show `main`'s side and not the series'.
+  if [ -n "$series" ]; then
+    off=()
+    while IFS= read -r p; do
+      case "$p" in
+        NEWS.md | README.Rmd | README.md | .github/README.md) ;;
+        DESCRIPTION) [ "$(unversioned "$head")" = "$(unversioned "$tip")" ] || off+=("$p") ;;
+        *) off+=("$p") ;;
+      esac
+    done < <(git diff --name-only "$head" "$tip" -- . ':(exclude).github/workflows' \
+      ${hidden_excludes[@]+"${hidden_excludes[@]}"})
+    if [ ${#off[@]} -gt 0 ]; then
+      echo "Error: main $(git rev-parse --short "$base") and $S-green $(git rev-parse --short "$green")" \
+        "differ outside what the review hides, NEWS.md, the READMEs and the version:" >&2
+      printf '  %s\n' "${off[@]}" >&2
+      echo "  Port what main has, and review once $S-green carries it. Nothing was written." >&2
+      exit 1
+    fi
+  fi
+
   echo "=== $rb"
-  echo "  $picked of $(git rev-list --count "$base..$tip") landing commits change the R side;" \
-    "on main $(git rev-parse --short "$base") -> $(git rev-parse --short "$head")"
+  echo "  $picked of $(git rev-list --count "$from..$tip") $kind commits change the R side;" \
+    "on main $(git rev-parse --short "$base") -> $head"
+  if [ -n "$series" ]; then
+    echo "  up to $S-green $(git rev-parse --short "$green"), without its flavor"
+    [ ${#left[@]} -eq 0 ] || printf "  left out, main's own: %s\n" "${left[@]}"
+  fi
   echo "  $(git diff --shortstat "$base" "$head" -- . ':(exclude).github/workflows')"
   # What the tests take from the landing, by the commits that made it, which is
-  # the part of the review a reader of `main` most needs named.
+  # the part of the review a reader of `main` most needs named. A series' are
+  # read off its rc twins, which carry its engine and its vendor subjects.
   echo
   "$here/series-tests.sh" "$base" "$tip" | sed 's/^/  /' || true
   echo
 
+  # A local branch too, so that a review not pushed can be read and compared.
+  git branch -f "$rb" "$head"
   slug=$(git remote get-url "$canonical" | sed -E 's#^.*github\.com[:/]##; s#\.git$##')
-  old=$(git ls-remote "$canonical" "refs/heads/$rb" | cut -f1)
+  # The pull request's head as `<owner>:<branch>`, which holds wherever it went.
+  owner=$(git remote get-url "$review_remote" | sed -E 's#\.git$##; s#/[^/]*$##; s#^.*[:/]##')
+  old=$(git ls-remote "$review_remote" "refs/heads/$rb" | cut -f1)
   if [ "$old" = "$head" ]; then
-    echo "$rb: already on $canonical"
+    echo "$rb: already on $review_remote"
   elif [ -z "$push" ]; then
-    echo "Not pushed; --push writes $rb to $canonical."
+    echo "Not pushed; the local branch $rb holds it, and --push writes it to $review_remote."
     exit 0
   else
-    git push -q "$canonical" "--force-with-lease=refs/heads/$rb:$old" "+$head:refs/heads/$rb"
-    echo "$rb -> $(git rev-parse --short "$head") on $canonical"
+    git push -q "$review_remote" "--force-with-lease=refs/heads/$rb:$old" "+$head:refs/heads/$rb"
+    echo "$rb -> $head on $review_remote"
   fi
   echo "Open it as a draft, never to be merged:"
-  echo "  gh pr create --repo $slug --draft --base main --head $rb \\"
-  echo "    --title \"Review: the R side of the $L landing${suffix:+, ${suffix#-}}\""
+  echo "  gh pr create --repo $slug --draft --base main --head ${owner:+$owner:}$rb \\"
+  echo "    --title \"Review: the R side of the $what${suffix:+, ${suffix#-}}\""
   exit 0
 fi
 

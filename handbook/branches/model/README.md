@@ -46,6 +46,10 @@ what keeps CI off it is that the workflows it carries match no branch named `*-b
   It is cut when a landing is planned, not before, since CI then judges every commit twice.
 * `<L>-land-dev` and `<L>-land-green`, while a landing is in flight: the frozen `main` plus the series' vendor commits, unflavored,
   which `main` fast-forwards onto once CI has passed every one ([`series-land`](/.claude/skills/series-land/SKILL.md)).
+* `<L>-land-review`, in `igraph/rigraph` or the fork: `main` plus the R side of a landing without its engine,
+  the head of a draft pull request against `main` that is read and never merged.
+  A series is reviewed the same way before any landing, from `<S>-green` with `scripts/series-land.sh <S> --review --series`,
+  so that `main`'s maintainers can read what the series changes outside the engine long before `main` takes it.
 * `snapshot-<sha>-rcc-smoke-null`: snapshots the per-commit gate accepted ([`operations/ci/per-commit/`](/handbook/operations/ci/per-commit/README.md)).
 
 **`main` is the source of truth for everything but the vendored strand.**

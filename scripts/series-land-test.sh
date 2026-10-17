@@ -4,7 +4,7 @@
 #
 # The claim scripts/series-land.sh makes is that `<L>-land-dev` is `main` plus
 # the series' vendor commits and nothing else, and that its tip is the package
-# the series' rc strand holds. Thirteen things are checked.
+# the series' rc strand holds. Fourteen things are checked.
 #
 #   1. Without --push the build writes no ref, and says what it would write.
 #   2. Only vendor commits land, on `main` itself, unflavored.
@@ -38,6 +38,14 @@
 #  13. A `main` that moved stops a kept build and is not READY, and a rebuild
 #      on it that the series has not ported is refused before anything is
 #      pushed, `DESCRIPTION` included.
+#  14. --review --series writes the R side of a series' green without a
+#      landing: from the rc twins of its vendor commits above the series' base,
+#      onto `main`, leaving out the tooling syncs and ports `main` has, with the
+#      generated interface shown where `series_review_hidden` says so, and each
+#      commit naming its series commit. It writes a local branch, pushes only
+#      with --push and to --review-remote, and refuses a series that lacks a
+#      change of `main`'s and a commit among its vendor commits that is not
+#      `main`'s.
 #
 # Usage:
 #   scripts/series-land-test.sh
@@ -490,6 +498,172 @@ git fetch -q origin
 is "land-dev is where it was" "$(git rev-parse origin/v2.0-x-land-dev)" "$LAND_BEFORE"
 
 scripts/series-land.sh v2.0-x-fwd --abort >/dev/null
+
+# --- 14: a series reviewed before any landing --------------------------------
+#
+# A series seeded on the older `main` M, with `main`'s fix since brought in front
+# of its vendor commits as one commit. `main` then changes its tooling and its R
+# code, which the series syncs and ports among its vendor commits, and bumps
+# its version, which the series leaves out by construction.
+
+echo
+echo "== --review --series reads the R side of a series without a landing"
+echo 'tool v4' > scripts/tool.sh
+commit 'ci: A tooling change after the seed (#13)'
+echo 'bar <- function() 1' > R/bar.R
+commit 'fix: Another R-side fix on main (#14)'
+FIX=$(git rev-parse HEAD)
+git checkout -q -b y "$M"
+echo 'rename igraph.3.0.dev igraph_3_0_dev' > scripts/flavor.patch
+commit 'chore: Update flavor patch to igraph.3.0.dev'
+echo 'pkg <- "igraph.3.0.dev"' > R/package.R
+desc igraph.3.0.dev 1.5.6.9001.7
+commit 'chore: Update version to 3.0.dev'
+ydesc() { desc igraph.3.0.dev "1.5.6.9002.$1"; printf 'Imports: DBI\n' >> DESCRIPTION; }
+ydesc 0
+sed -i '/^Imports/d' DESCRIPTION
+commit 'chore: Add fifth version component'
+echo 'foo <- function() 3' > R/foo.R
+ydesc 0
+commit "chore(series): Bring main's changes since the seed in front of the vendor commits"
+engine a1a1777 1.0.1-1-ga1a1777
+echo 'glue 3, adapted to a1a1777' > src/glue.cpp
+echo 'a1a1_impl <- function() NULL' > R/aaa-auto.R
+echo 'test 3, as a1a1777 answers' > tests/testthat/test-foo.R
+ydesc 1
+commit 'vendor: Update vendored sources to igraph/igraph@a1a1777'
+echo 'tool v4' > scripts/tool.sh
+commit 'chore(series): Sync tooling with main'
+SYNC=$(git rev-parse --short HEAD)
+# An interface change the engine makes, with nothing under tools/stimulus/.
+engine b2b2888 1.0.1-2-gb2b2888
+echo 'b2b2_impl <- function() NULL' > R/aaa-auto.R
+ydesc 2
+commit 'vendor: Update vendored sources to igraph/igraph@b2b2888'
+git cherry-pick -x "$FIX" >/dev/null
+PORT=$(git rev-parse --short HEAD)
+engine c3c3999 1.0.1-3-gc3c3999
+ydesc 3
+commit 'vendor: Update vendored sources to igraph/igraph@c3c3999'
+engine d4d4000 1.0.1-4-gd4d4000
+ydesc 4
+echo 'LinkingTo: cpp11' >> DESCRIPTION
+commit 'vendor: Update vendored sources to igraph/igraph@d4d4000'
+YG=$(git rev-parse HEAD)
+engine e5e5111 1.0.1-5-ge5e5111
+echo 'foo <- function() 5' > R/foo.R
+ydesc 5
+echo 'LinkingTo: cpp11' >> DESCRIPTION
+commit 'vendor: Update vendored sources to igraph/igraph@e5e5111'
+git push -q origin "$YG:refs/heads/v3.0-y-green" y:refs/heads/v3.0-y-dev
+git checkout -q main
+desc igraph 1.5.6.9001.8
+printf 'Imports: DBI\n' >> DESCRIPTION
+echo '# igraph 1.5.6.9001.8' > NEWS.md
+commit 'fledge: Bump version to 1.5.6.9001.8 (#11)'
+M9=$(git rev-parse HEAD)
+git push -q upstream main
+
+out=$(scripts/series-land.sh v3.0-y --review --series 2>&1) && st=0 || st=$?
+[ -z "${KEEP:-}" ] || echo "$out"
+is "a series is reviewed without a landing" "$st" 0
+has "it counts the series commits that change the R side" "$out" "3 of 6 series commits change the R side"
+has "and leaves out main's tooling sync" "$out" "left out, main's own: $SYNC chore(series): Sync tooling with main"
+has "and main's commit the series ported" "$out" "left out, main's own: $PORT fix: Another R-side fix on main (#14)"
+REV=$(git rev-parse -q --verify v3.0-y-land-review || echo none)
+has "it writes a local branch, named in full" "$out" "-> $REV"
+has "and says it was not pushed" "$out" "Not pushed; the local branch v3.0-y-land-review holds it"
+is "nothing reaches the canonical repository" "$(git ls-remote upstream refs/heads/v3.0-y-land-review | wc -l)" 0
+is "it stands on main" "$(git rev-parse "$REV~4")" "$M9"
+is "its first commit removes every workflow" "$(git ls-tree -r --name-only "$REV~3" -- .github/workflows | wc -l)" 0
+has "and says what still runs" "$(git log -1 --format=%B "$REV~3")" "A \`pull_request_target\` workflow runs all the same"
+has "for the series" "$(git log -1 --format=%B "$REV~3")" "the R side of the v3.0-y series"
+is "the engine is main's" "$(git show "$REV:src/vendor/cigraph/engine.c")" "engine aaaa112"
+is "and so is the version" "$(git show "$REV:DESCRIPTION" | sed -n 's/^Version: //p')" "1.5.6.9001.8"
+has "but not the rest of DESCRIPTION" "$(git show "$REV:DESCRIPTION")" "LinkingTo: cpp11"
+is "the package is main's name" "$(git show "$REV:DESCRIPTION" | sed -n 's/^Package: //p')" igraph
+is "and so is the R code the flavor renames" "$(git show "$REV:R/package.R")" 'pkg <- "igraph"'
+is "the generated interface is shown" "$(git show "$REV:R/aaa-auto.R")" 'b2b2_impl <- function() NULL'
+is "nothing above green is" "$(git show "$REV:R/foo.R")" 'foo <- function() 3'
+is "what main has is main's" "$(git show "$REV:R/bar.R")" 'bar <- function() 1'
+is "each commit is titled by its upstream commit" \
+  "$(git log --reverse --format=%s "$REV~3..$REV" | sed 's|^review: The R side of igraph/igraph ||' | tr '\n' ' ')" \
+  "a1a1777 b2b2888 d4d4000 "
+is "and names the series commit it halves" "$(git log -1 --format=%B "$REV" | sed -n 's/^Series-commit: //p')" "$YG"
+has "whose message it carries" "$(git log -1 --format=%B "$REV")" "vendor: Update vendored sources to igraph/igraph@d4d4000"
+hasnt "no commit names a landing" "$(git log --format=%B "$M9..$REV")" "Landing-commit:"
+has "it reports what the series does to the tests" "$out" "changed   tests/testthat/test-foo.R"
+
+mkdir -p "$SCRATCH/krlmlr"
+git init -q --bare "$SCRATCH/krlmlr/rigraph.git"
+git remote add review "$SCRATCH/krlmlr/rigraph.git"
+out=$(scripts/series-land.sh v3.0-y --review --series --review-remote review --push 2>&1) || true
+[ -z "${KEEP:-}" ] || echo "$out"
+has "--push writes it to --review-remote" "$out" "v3.0-y-land-review -> $REV on review"
+is "which holds it" "$(git ls-remote review refs/heads/v3.0-y-land-review | cut -f1)" "$REV"
+is "and the canonical repository still does not" "$(git ls-remote upstream refs/heads/v3.0-y-land-review | wc -l)" 0
+has "the pull request names the head by its owner" "$out" "--head krlmlr:v3.0-y-land-review"
+has "and the series in its title" "$out" "Review: the R side of the v3.0-y series"
+
+# An aligned rc strand on the remote is taken as it is, and is the same.
+scripts/series-rc.sh v3.0-y --push >/dev/null 2>&1
+git fetch -q origin
+sleep 1 # a date not pinned would differ by now
+out=$(scripts/series-land.sh v3.0-y --review --series --review-remote review --push 2>&1) || true
+[ -z "${KEEP:-}" ] || echo "$out"
+has "a rerun from the aligned rc strand mints the same branch" "$out" "v3.0-y-land-review: already on review"
+is "everything else is the series' green without its flavor" \
+  "$(git diff --name-only "$REV" origin/v3.0-y-rc-dev~1 -- . ':(exclude)src/vendor/cigraph' \
+    ':(exclude)src/vendor/igraph_version.h' ':(exclude)DESCRIPTION' ':(exclude)NEWS.md' ':(exclude).github/workflows')" ""
+
+# Where the configuration does not name what a review hides, the Makevars are
+# hidden with the strand.
+sed -i '/^series_review_hidden=/d' scripts/series-config.sh
+out=$(scripts/series-land.sh v3.0-y --review --series --suffix -default 2>&1) || true
+git checkout -q -- scripts/series-config.sh
+[ -z "${KEEP:-}" ] || echo "$out"
+has "by default the interface change alone is not shown" "$out" "2 of 6 series commits change the R side"
+is "nor is the generated interface" "$(git ls-tree --name-only v3.0-y-land-review-default -- R/aaa-auto.R)" ""
+
+echo
+echo "== --review --series refuses what it cannot read onto main"
+echo 'foo <- function() 4' > R/foo.R
+commit 'fix: A fix the series lacks (#12)'
+git push -q upstream main
+out=$(scripts/series-land.sh v3.0-y --review --series 2>&1) && st=0 || st=$?
+[ -z "${KEEP:-}" ] || echo "$out"
+is "a series that lacks a change of main's is refused" "$st" 1
+has "naming the path" "$out" "  R/foo.R"
+hasnt "but not the version" "$out" "  DESCRIPTION"
+hasnt "nor NEWS.md" "$out" "  NEWS.md"
+git reset -q --hard "$M9"
+echo 'glue 1, on main' > src/glue.cpp
+commit 'fix: Glue main changed since the series took it (#15)'
+git push -q -f upstream main
+out=$(scripts/series-land.sh v3.0-y --review --series 2>&1) && st=0 || st=$?
+[ -z "${KEEP:-}" ] || echo "$out"
+is "a vendor commit that does not apply to main is refused" "$st" 1
+has "and named" "$out" "vendor: Update vendored sources to igraph/igraph@a1a1777 does not apply onto main"
+git reset -q --hard "$M9"
+git push -q -f upstream main
+
+git checkout -q y
+echo 'one more' > src/more.cpp
+commit 'fix: A commit among the vendor commits'
+engine f6f6222 1.0.1-6-gf6f6222
+ydesc 6
+commit 'vendor: Update vendored sources to igraph/igraph@f6f6222'
+git push -q -f origin y:refs/heads/v3.0-y-dev y:refs/heads/v3.0-y-green
+git checkout -q main
+out=$(scripts/series-land.sh v3.0-y --review --series 2>&1) && st=0 || st=$?
+[ -z "${KEEP:-}" ] || echo "$out"
+is "a commit among the vendor commits is refused" "$st" 1
+has "and named" "$out" "fix: A commit among the vendor commits"
+
+scripts/series-land.sh v3.0-y --series >/dev/null 2>&1 && st=0 || st=$?
+is "--series without --review is a usage error" "$st" 2
+scripts/series-land.sh v3.0-y --review --series --landing v2.0-x-land-v2 >/dev/null 2>&1 && st=0 || st=$?
+is "and so is --series with --landing" "$st" 2
 
 echo
 echo "$pass passed, $fail failed"
