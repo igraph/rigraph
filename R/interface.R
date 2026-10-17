@@ -578,7 +578,26 @@ get.edges <- function(graph, es) {
   ends(graph, es, names = FALSE)
 }
 
-el_to_vec <- function(x, call = rlang::caller_env()) {
+# Flatten a pair of vertex vectors into the interleaved
+# `c(from1, to1, from2, to2, ...)` form that the C layer expects.
+#
+# Used by internal callers instead of passing a matrix to `add_edges()` etc.,
+# so that they do not depend on how matrices are interpreted there.
+to_vertex_pairs <- function(from, to) {
+  c(rbind(from, to))
+}
+
+# Flatten an n x 2 edge list matrix into the same interleaved form.
+edgelist_to_vertex_pairs <- function(el) {
+  c(t(el))
+}
+
+el_to_vec <- function(
+  x,
+  arg = "vp",
+  fn = "get_edge_ids",
+  call = rlang::caller_env()
+) {
   if (is.data.frame(x)) {
     if (typeof(x[[1]]) == typeof(x[[2]])) {
       c(rbind(x[[1]], x[[2]]))
@@ -594,26 +613,31 @@ el_to_vec <- function(x, call = rlang::caller_env()) {
     if (nrow == 2 && ncol == 2) {
       lifecycle::deprecate_stop(
         "2.1.5",
-        "get_edge_ids(vp = 'is not allowed to be a 2 times 2 matrix')"
+        paste0(fn, "(", arg, " = 'is not allowed to be a 2 times 2 matrix')")
       )
     } else if (nrow == 2) {
       lifecycle::deprecate_stop(
         "2.1.5",
-        "get_edge_ids(vp = 'supplied as a matrix should be a n times 2 matrix, not 2 times n')",
+        paste0(
+          fn,
+          "(",
+          arg,
+          " = 'supplied as a matrix should be a n times 2 matrix, not 2 times n')"
+        ),
         details = "either transpose the matrix with t() or convert it to a data.frame with two columns."
       )
     } else if (ncol == 2) {
       c(t(x))
     } else {
       cli::cli_abort(
-        "{.args vp} was supplied as a {dimx[1]} times {dimx[2]} matrix. Only n times 2 matrices are allowed"
+        "{.args {arg}} was supplied as a {dimx[1]} times {dimx[2]} matrix. Only n times 2 matrices are allowed"
       )
     }
   } else if (is.vector(x)) {
     x
   } else {
     cli::cli_abort(
-      "Only two-column data.frames and matrices, and vectors are allowed for {.args vp}",
+      "Only two-column data.frames and matrices, and vectors are allowed for {.args {arg}}",
       call = call
     )
   }
