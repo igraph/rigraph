@@ -14,5 +14,6 @@ tkplot.canvas(tkp.id)
 
 \code{tkplot.canvas()} was renamed to \code{\link[=tk_canvas]{tk_canvas()}} to create a more
 consistent API.
+As \code{\link[=tkplot]{tkplot()}} is defunct, neither function has a plot to act on.
 }
 \keyword{internal}

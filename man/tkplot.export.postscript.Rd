@@ -14,5 +14,6 @@ tkplot.export.postscript(tkp.id)
 
 \code{tkplot.export.postscript()} was renamed to \code{\link[=tk_postscript]{tk_postscript()}} to create a more
 consistent API.
+As \code{\link[=tkplot]{tkplot()}} is defunct, neither function has a plot to act on.
 }
 \keyword{internal}
