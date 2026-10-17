@@ -70,6 +70,7 @@ Quarterly of Applied Mathematics. 27 (4): 526–530. (1970)
 \code{\link[=shortest_paths]{shortest_paths()}}, \code{\link[=all_shortest_paths]{all_shortest_paths()}}
 
 Other structural.properties:
+\code{\link[=any_mutual]{any_mutual()}},
 \code{\link[=bfs]{bfs()}},
 \code{\link[=component_distribution]{component_distribution()}},
 \code{\link[=connect]{connect()}},
