@@ -16,5 +16,6 @@ tkplot.close(tkp.id, window.close = TRUE)
 
 \code{tkplot.close()} was renamed to \code{\link[=tk_close]{tk_close()}} to create a more
 consistent API.
+As \code{\link[=tkplot]{tkplot()}} is defunct, neither function has a plot to act on.
 }
 \keyword{internal}

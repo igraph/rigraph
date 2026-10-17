@@ -11,9 +11,9 @@ tkplot.reshape(tkp.id, newlayout, ..., params)
 
 \item{newlayout}{The new layout, see the \code{layout} parameter of tkplot.}
 
-\item{...}{For \code{tkplot()}, additional plotting parameters, see
-\link{igraph.plotting} for the complete list. For \code{tk_close()}, \code{tk_fit()},
-\code{tk_coords()} and \code{tk_rotate()}, these dots must be empty.}
+\item{...}{Ignored by \code{tkplot()}.
+For \code{tk_close()}, \code{tk_fit()}, \code{tk_coords()} and \code{tk_rotate()},
+these dots must be empty.}
 
 \item{params}{Extra parameters in a list, to pass to the layout function.}
 }
@@ -22,6 +22,7 @@ tkplot.reshape(tkp.id, newlayout, ..., params)
 
 \code{tkplot.reshape()} was renamed to \code{\link[=tk_reshape]{tk_reshape()}} to create a more
 consistent API.
+As \code{\link[=tkplot]{tkplot()}} is defunct, neither function has a plot to act on.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

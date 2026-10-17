@@ -17,6 +17,7 @@ vertices, in absolute coordinates.}
 
 \code{tkplot.setcoords()} was renamed to \code{\link[=tk_set_coords]{tk_set_coords()}} to create a more
 consistent API.
+As \code{\link[=tkplot]{tkplot()}} is defunct, neither function has a plot to act on.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
