@@ -9,7 +9,7 @@ A contributor fixing a bug and an agent running the vendoring routine who ask th
 An audience split would need the same fact in two places, and the tree holds every fact once.
 What stays outside the tree, intent and evidence, and where each lives, is [`meta/local/`](/handbook/meta/local/README.md)'s.
 
-* [`usage/`](usage/): installing the package and its flavors
+* [`usage/`](usage/): installing the package and its flavors, and the deprecated dotted function names
 * [`architecture/`](architecture/): the R layer, the C glue, the vendored igraph C library, and the Stimulus code generator
 * [`build/`](build/): the source build and its configuration
 * [`testing/`](testing/): the suite, snapshots, guards, and reverse dependencies
