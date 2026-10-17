@@ -3,7 +3,7 @@
 *Reference for stage 5 of [`series-loop`](../SKILL.md), read when the stage has work;
 the handbook leaf is [`operations/vendoring/series-loop/`](/handbook/operations/vendoring/series-loop/README.md).*
 
-[`scripts/series-advance.sh`](/scripts/series-advance.sh) appends the next ≤ 100 commits from `main-build` and pushes,
+[`scripts/series-advance.sh`](/scripts/series-advance.sh) appends the next chunk of `main-build` and pushes,
 **whether or not the commits already in flight have reported**.
 A commit that has not been judged yet is not a reason to hold the buffer:
 waiting for a full CI cycle before topping it up costs a cycle per firing and buys nothing,
@@ -16,6 +16,22 @@ stage 2 is going to fold a fix into it and replay everything above,
 so anything appended now is work minted only to be re-minted.
 Extend on pending, never on red.
 The stage-3 walk stops at the first commit without a verdict, so the script scans the whole range for a red here.
+
+## The chunk starts small, and grows as rounds come back green
+
+The chunk is the most buffer commits one run appends:
+`--chunk` for that run, else the `chunk:` on the series' entry in [`scripts/series.yaml`](/scripts/series.yaml), read from `main`, else 100.
+
+It bounds what a fold throws away.
+A repair folds into the commit that needs it and replays everything above, so every commit above a red is minted and judged again,
+and while a series adapts to a new engine most of them are red for a cause already being repaired below them.
+On 2026-10-16 the first 100 commits of a fresh replay went to CI at once and 96 came back red for a handful of causes,
+so each round, about two hours for 100 commits, mostly re-judged commits that inherited a cause the last fold had fixed.
+
+So the declared chunk is the size for a series that is adapting, and it is where the window starts after a seed or a rewind of `main-dev`.
+Once a round comes back mostly green, a firing passes a larger `--chunk`,
+and the next red low in the window sends it back to the declared size.
+Raising the declared chunk itself is a pull request against `main`, for a series that has stopped adapting.
 
 ## The anchor, and the replay
 

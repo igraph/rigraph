@@ -85,6 +85,12 @@
 # unset does not, because a mirror that silently stops is the failure this
 # exists to prevent.
 #
+# **The chunk is the series' own.** Stage 5 appends at most that many buffer
+# commits: `--chunk` for one run, else the `chunk` that `main`'s
+# scripts/series.yaml declares for the series, else 100. It starts small while
+# a series adapts to a new engine, because a fold low in `-dev` rewrites
+# everything above it (.claude/skills/series-loop/references/5-extend.md).
+#
 # Usage: series-advance.sh <series> [--chunk <n>] [--dev-note <file>]
 #        series-advance.sh <series> --continue [--dev-note <file>]
 #        series-advance.sh <series> --abort          # discard a stopped replay
@@ -107,7 +113,8 @@ argerr() { echo "$usage" >&2; exit 2; }
 CONTINUE=
 ABORT=
 DEV_NOTE=
-chunk=100
+# Empty until --chunk gives one; the series' declared chunk is read below.
+chunk=
 remote=${SERIES_REMOTE:-origin}
 # No colon: an explicitly empty SERIES_CANONICAL means "do not mirror", while
 # an unset one takes the default.
@@ -117,7 +124,7 @@ while [ $# -gt 0 ]; do
   case "$1" in
     --continue) CONTINUE=1; shift ;;
     --abort) ABORT=1; shift ;;
-    --chunk) [ $# -ge 2 ] || argerr; chunk=$2; shift 2 ;;
+    --chunk) [ -n "${2:-}" ] || argerr; chunk=$2; shift 2 ;;
     --remote) [ $# -ge 2 ] || argerr; remote=$2; shift 2 ;;
     --canonical) [ $# -ge 2 ] || argerr; canonical=$2; shift 2 ;;
     --dev-note) [ $# -ge 2 ] || argerr; DEV_NOTE=$2; shift 2 ;;
@@ -128,7 +135,7 @@ while [ $# -gt 0 ]; do
 done
 [ ${#args[@]} -eq 1 ] || argerr
 S=${args[0]}
-case "$chunk" in '' | *[!0-9]*) echo "Error: --chunk takes a number: $chunk" >&2; exit 2 ;; esac
+case "$chunk" in *[!0-9]*) echo "Error: --chunk takes a number: $chunk" >&2; exit 2 ;; esac
 if [ -n "$DEV_NOTE" ] && [ ! -s "$DEV_NOTE" ]; then
   echo "Error: --dev-note file is missing or empty: $DEV_NOTE" >&2
   exit 1
@@ -595,6 +602,34 @@ ahead=$(git rev-list --count "$anchor..$build")
 if [ "$ahead" -eq 0 ]; then
   echo "buffer empty — vendor"
   exit 0
+fi
+
+# The chunk `main`'s scripts/series.yaml declares for a series, empty when it
+# declares none, read the way series-port.sh reads `releases_from`: from `main`,
+# because a series' tree lags it, and from the canonical copy first, because
+# the fork's mirror only ever lags that. A file no ref carries is said, because
+# 100 is then the chunk whatever the series declared.
+declared_chunk() { # <series> -> its `chunk`, empty when undeclared
+  local r yaml=
+  for r in ${canonical:+"refs/remotes/$canonical/main"} "refs/remotes/$remote/main"; do
+    yaml=$(git show "$r:scripts/series.yaml" 2>/dev/null) && break
+  done
+  [ -n "$yaml" ] || echo "Warning: no main ref carries scripts/series.yaml, so the chunk is 100" >&2
+  awk -v s="$1" '
+    /^  - / { if (ser == s) print ch; ser = ""; ch = "" }
+    /^    series:/ { ser = $2 }
+    /^    chunk:/ { ch = $2 }
+    END { if (ser == s) print ch }' <<<"$yaml"
+}
+if [ -z "$chunk" ]; then
+  chunk=$(declared_chunk "$S")
+  case "$chunk" in
+    '') chunk=100 ;;
+    *[!0-9]*)
+      echo "Error: scripts/series.yaml declares a chunk for $S that is not one number: $chunk" >&2
+      exit 1
+      ;;
+  esac
 fi
 n=$((ahead < chunk ? ahead : chunk))
 

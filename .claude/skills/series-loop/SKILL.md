@@ -43,7 +43,7 @@ and published by r-universe from `main-green`, which `scripts/series-advance.sh`
 |---|---|---|
 | `main-vendor` | the routine; force-pushed only by it, to fold a fix into a strand commit nothing has picked yet | Every upstream first-parent commit vendored once, by `vendor-one.sh --strand`: the vendor paths alone (`series_vendor_paths` in [`scripts/series-config.sh`](/scripts/series-config.sh)), no counter, no glue gate. Not mirrored, and no CI runs here. The strand the buffer is derived from. |
 | `main-build` | the routine, unconditionally | `main-vendor`'s commits picked one to one by `series-vendor.sh`, with what the buffer regenerates, the counter stamped, and the glue compiling at every commit. **No CI runs here** (`each.yaml` never matches `*-build`). The buffer. |
-| `main-dev` | the routine, force-push | `main-build` commits, consumed up to 100 at a time, with R-side fixes folded in as CI demands. What CI builds, commit by commit. |
+| `main-dev` | the routine, force-push | `main-build` commits, consumed a chunk at a time (stage 5), with R-side fixes folded in as CI demands. What CI builds, commit by commit. |
 | `main-green` | the routine, fast-forward only | The newest commit such that every commit in `main-green..it` has a `success` verdict. What r-universe builds `igraph.dev` from. |
 | `main-build-base` | the routine, force-push | The `main-build` commit vendoring the same upstream SHA as `main-green`. A marker with no consumer, recomputed every stage 3. |
 
@@ -99,7 +99,7 @@ The ones a firing runs or reads on every pass:
 * [`scripts/vendor-one.sh`](/scripts/vendor-one.sh) `--strand` and [`scripts/series-vendor.sh`](/scripts/series-vendor.sh), stage 1;
 * [`scripts/series-fold.sh`](/scripts/series-fold.sh) and [`scripts/rcc-one.sh`](/scripts/rcc-one.sh), stage 2;
 * [`scripts/series-advance.sh`](/scripts/series-advance.sh), stages 3 and 5:
-  fast-forwards `-green` and mirrors it, sets `-build-base` to the vendored-SHA match, extends `-dev` by ≤ 100;
+  fast-forwards `-green` and mirrors it, sets `-build-base` to the vendored-SHA match, extends `-dev` by one chunk;
   advances `-green` over the verified prefix and then stops on a red above it, and refuses a `-green` that would not fast-forward;
 * [`scripts/r-universe-check.sh`](/scripts/r-universe-check.sh), read-only, stage 3;
 * [`scripts/series-port.sh`](/scripts/series-port.sh), stage 4: cherry-picks from `main`, a tooling sync on both refs,
@@ -287,6 +287,10 @@ Every commit in `main-green..main-dev` is decided by an `each-rcc` leg, and that
 * **Snapshot drift**: fetch `snapshot-<sha>-rcc-smoke-null`, review the diff as a code review, fold;
   a deleted snapshot file is a test that stopped running.
 * **A red on a flavor commit is the rename's**: fix the flavor tooling on `main`, and fold the same change into the flavor commit.
+* **A gate the job's tooling or environment breaks on every commit is the harness's**, which each commit carries:
+  fix it on `main` first, then cherry-pick that commit, with what else from `main` it needs, onto `main-green`
+  as a standalone commit in front of every vendor commit, and replay the rest of the window on top; never fold it into a vendor commit.
+  A refusal every commit meets the same way is this, not the network.
 
 Reference: [`references/2-repair.md`](references/2-repair.md).
 
@@ -344,8 +348,12 @@ Reference: [`references/4-port.md`](references/4-port.md).
 
 ### 5. Extend `main-dev`
 
-`series-advance.sh main` (above) appends the next ≤ 100 commits from `main-build`, restamps the fifth component, and pushes.
+`series-advance.sh main` (above) appends the next chunk of `main-build`, restamps the fifth component, and pushes.
 
+* **Start small, and grow the chunk as rounds come back green.**
+  The series' `chunk:` in [`scripts/series.yaml`](/scripts/series.yaml) is the size while it adapts, after a seed or a rewind of `main-dev`,
+  because a fold low in the window rewrites everything above it;
+  once a round comes back mostly green, pass a larger `--chunk`, and go back to the declared size at the next red low in the window.
 * **Extend on pending, never on red**: a reported `failure` in `main-green..main-dev` stops the stage until stage 2 has folded its fix.
 * A conflicting replay **stops the stage with the worktree kept**:
 
