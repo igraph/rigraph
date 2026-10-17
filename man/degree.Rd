@@ -9,19 +9,21 @@
 \usage{
 degree(
   graph,
-  v = NULL,
+  vertices = NULL,
   ...,
   mode = c("all", "out", "in", "total"),
   loops = TRUE,
-  normalized = FALSE
+  normalized = FALSE,
+  v = deprecated()
 )
 
 max_degree(
   graph,
   ...,
-  v = NULL,
+  vertices = NULL,
   mode = c("all", "out", "in", "total"),
-  loops = TRUE
+  loops = TRUE,
+  v = deprecated()
 )
 
 mean_degree(graph, ..., loops = TRUE)
@@ -31,7 +33,7 @@ degree_distribution(graph, cumulative = FALSE, ...)
 \arguments{
 \item{graph}{The graph to analyze.}
 
-\item{v}{The IDs of vertices of which the degree will be calculated.
+\item{vertices}{The IDs of vertices of which the degree will be calculated.
 The default \code{NULL} selects all vertices.}
 
 \item{...}{These dots are for future extensions and must be empty.}
@@ -46,12 +48,14 @@ this argument is ignored. \dQuote{all} is a synonym of \dQuote{total}.}
 \code{TRUE} then the result is divided by \eqn{n-1}, where \eqn{n} is the
 number of vertices in the graph.}
 
+\item{v}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
+
 \item{cumulative}{Logical; whether the cumulative degree distribution is to
 be calculated.}
 }
 \value{
 For \code{degree()} a numeric vector of the same length as argument
-\code{v}.
+\code{vertices}.
 
 For \code{degree_distribution()} a numeric vector of the same length as the
 maximum degree plus one. The first element is the relative frequency zero

@@ -38,7 +38,7 @@ test_that("similarity() covers vids, mode, loops and method", {
   # so consecutive vertices share exactly one of their two out-neighbors.
   sim <- similarity(
     g,
-    vids = V(g)[1:3],
+    vertices = V(g)[1:3],
     mode = "out",
     loops = TRUE,
     method = "dice"

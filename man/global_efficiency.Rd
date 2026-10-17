@@ -10,11 +10,12 @@ global_efficiency(graph, ..., weights = NULL, directed = TRUE)
 
 local_efficiency(
   graph,
-  vids = NULL,
+  vertices = NULL,
   ...,
   weights = NULL,
   directed = TRUE,
-  mode = c("all", "out", "in", "total")
+  mode = c("all", "out", "in", "total"),
+  vids = deprecated()
 )
 
 average_local_efficiency(
@@ -37,13 +38,15 @@ and the graph has a \code{weight} edge attribute, then it is used automatically.
 \item{directed}{Logical, whether to consider directed paths. Ignored
 for undirected graphs.}
 
-\item{vids}{The vertex IDs of the vertices for which the calculation will be done.
+\item{vertices}{The vertex IDs of the vertices for which the calculation will be done.
 Applies to the local efficiency calculation only. The default \code{NULL}
 selects all vertices.}
 
 \item{mode}{Specifies how to define the local neighborhood of a vertex in
 directed graphs. \dQuote{out} considers out-neighbors only, \dQuote{in}
 considers in-neighbors only, \dQuote{all} considers both.}
+
+\item{vids}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 }
 \value{
 For \code{global_efficiency()}, the global efficiency of the graph as a

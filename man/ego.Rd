@@ -16,55 +16,61 @@ connect(graph, order, ..., mode = c("all", "out", "in", "total"))
 ego_size(
   graph,
   order = 1,
-  nodes = NULL,
+  vertices = NULL,
   ...,
   mode = c("all", "out", "in"),
-  mindist = 0
+  mindist = 0,
+  nodes = deprecated()
 )
 
 neighborhood_size(
   graph,
   order = 1,
-  nodes = NULL,
+  vertices = NULL,
   ...,
   mode = c("all", "out", "in"),
-  mindist = 0
+  mindist = 0,
+  nodes = deprecated()
 )
 
 ego(
   graph,
   order = 1,
-  nodes = NULL,
+  vertices = NULL,
   ...,
   mode = c("all", "out", "in"),
-  mindist = 0
+  mindist = 0,
+  nodes = deprecated()
 )
 
 neighborhood(
   graph,
   order = 1,
-  nodes = NULL,
+  vertices = NULL,
   ...,
   mode = c("all", "out", "in"),
-  mindist = 0
+  mindist = 0,
+  nodes = deprecated()
 )
 
 make_ego_graph(
   graph,
   order = 1,
-  nodes = NULL,
+  vertices = NULL,
   ...,
   mode = c("all", "out", "in"),
-  mindist = 0
+  mindist = 0,
+  nodes = deprecated()
 )
 
 make_neighborhood_graph(
   graph,
   order = 1,
-  nodes = NULL,
+  vertices = NULL,
   ...,
   mode = c("all", "out", "in"),
-  mindist = 0
+  mindist = 0,
+  nodes = deprecated()
 )
 }
 \arguments{
@@ -83,10 +89,12 @@ vertices from which the source vertex is reachable in at most \code{order}
 steps are counted. \sQuote{"all"} ignores the direction of the edges. This
 argument is ignored for undirected graphs.}
 
-\item{nodes}{The vertices for which the calculation is performed.
+\item{vertices}{The vertices for which the calculation is performed.
 The default \code{NULL} selects all vertices.}
 
 \item{mindist}{The minimum distance to include the vertex in the result.}
+
+\item{nodes}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 }
 \value{
 \itemize{

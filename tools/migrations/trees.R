@@ -39,11 +39,11 @@ migrations <- list(
   ),
 
   sample_spanning_tree = list(
-    old = function(graph, vid) {},
+    old = function(graph, vid = vertex) {},
     new = function(
       graph,
       ...,
-      vid = 0
+      vertex = 0
     ) {},
     when = "3.0.0"
   )

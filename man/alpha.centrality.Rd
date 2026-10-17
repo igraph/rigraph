@@ -19,9 +19,7 @@ alpha.centrality(
 \item{graph}{The input graph, can be directed or undirected. In undirected
 graphs, edges are treated as if they were reciprocal directed ones.}
 
-\item{nodes}{Vertex sequence, the vertices for which the alpha centrality
-values are returned. The default \code{NULL} selects all vertices.
-(For technical reasons they will be calculated for all vertices, anyway.)}
+\item{nodes}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 
 \item{alpha}{Parameter specifying the relative importance of endogenous
 versus exogenous factors in the determination of centrality. See details

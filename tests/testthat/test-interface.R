@@ -79,9 +79,9 @@ test_that("neighbors works", {
   igraph_local_seed(42)
   g <- sample_gnp(100, 20 / 100)
   al <- as_adj_list(g, mode = "all")
-  expect_s3_class(neighbors(g, v = 1, mode = "out"), "igraph.vs")
+  expect_s3_class(neighbors(g, vertex = 1, mode = "out"), "igraph.vs")
   for (i in seq_along(al)) {
-    n <- neighbors(g, v = i, mode = "out")
+    n <- neighbors(g, vertex = i, mode = "out")
     expect_setequal(sort(n), al[[i]])
   }
 
@@ -90,9 +90,9 @@ test_that("neighbors works", {
   old <- igraph_options(return.vs.es = FALSE)
 
   al <- as_adj_list(g, mode = "all")
-  expect_s3_class(neighbors(g, v = 1, mode = "out"), NA)
+  expect_s3_class(neighbors(g, vertex = 1, mode = "out"), NA)
   for (i in seq_along(al)) {
-    n <- neighbors(g, v = i, mode = "out")
+    n <- neighbors(g, vertex = i, mode = "out")
     expect_setequal(sort(n), al[[i]])
   }
 })
@@ -109,7 +109,7 @@ test_that("adjacent_vertices works", {
   g <- sample_gnp(100, 20 / 100)
   al <- as_adj_list(g, mode = "all")
   test_vertices <- c(1, 7, 38, 75, 99)
-  adj_vertices <- adjacent_vertices(g, v = test_vertices)
+  adj_vertices <- adjacent_vertices(g, vertices = test_vertices)
   expect_s3_class(adj_vertices[[1]], "igraph.vs")
   for (i in seq_along(test_vertices)) {
     expect_setequal(adj_vertices[[i]], al[[test_vertices[i]]])
@@ -121,7 +121,7 @@ test_that("adjacent_vertices works", {
 
   al <- as_adj_list(g, mode = "all")
   test_vertices <- c(1, 7, 38, 75, 99)
-  adj_vertices <- adjacent_vertices(g, v = test_vertices)
+  adj_vertices <- adjacent_vertices(g, vertices = test_vertices)
   expect_s3_class(adj_vertices[[1]], NA)
   for (i in seq_along(test_vertices)) {
     expect_setequal(adj_vertices[[i]], al[[test_vertices[i]]])
@@ -134,7 +134,7 @@ test_that("incident_edges works", {
   g <- sample_gnp(100, 20 / 100)
   el <- as_adj_edge_list(g, mode = "all")
   test_vertices <- c(1, 7, 38, 75, 99)
-  inc_edges <- incident_edges(g, v = test_vertices)
+  inc_edges <- incident_edges(g, vertices = test_vertices)
   expect_s3_class(inc_edges[[1]], "igraph.es")
   for (i in seq_along(test_vertices)) {
     expect_setequal(inc_edges[[i]], el[[test_vertices[i]]])
@@ -146,7 +146,7 @@ test_that("incident_edges works", {
 
   el <- as_adj_edge_list(g, mode = "all")
   test_vertices <- c(1, 7, 38, 75, 99)
-  inc_edges <- incident_edges(g, v = test_vertices)
+  inc_edges <- incident_edges(g, vertices = test_vertices)
   expect_s3_class(inc_edges[[1]], NA)
   for (i in seq_along(test_vertices)) {
     expect_setequal(inc_edges[[i]], el[[test_vertices[i]]])
@@ -363,4 +363,34 @@ test_that("get_edge_ids() tail arguments and legacy positional recovery", {
     res <- get_edge_ids(g, c(2, 1), FALSE)
   )
   expect_identical(res, get_edge_ids(g, c(2, 1), directed = FALSE))
+})
+
+# ---- vertex selector rename: v -> vertices ----------------------------
+
+test_that("adjacent_vertices(v = ) and delete_vertices(v = ) are deprecated but still work", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  g <- make_ring(10)
+
+  lifecycle::expect_deprecated(
+    res_legacy <- adjacent_vertices(g, v = 1:2)
+  )
+  expect_equal(res_legacy, adjacent_vertices(g, vertices = 1:2))
+
+  lifecycle::expect_deprecated(
+    g_legacy <- delete_vertices(g, v = 1:2)
+  )
+  expect_identical_graphs(g_legacy, delete_vertices(g, vertices = 1:2))
+})
+
+test_that("neighbors(v = ) and incident(v = ) are deprecated but still work", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  g <- make_ring(10)
+
+  expect_snapshot_igraph(res_legacy <- neighbors(g, v = 1))
+  expect_equal(res_legacy, neighbors(g, vertex = 1))
+
+  lifecycle::expect_deprecated(res_legacy <- incident(g, v = 1))
+  expect_equal(res_legacy, incident(g, vertex = 1))
+
+  expect_snapshot_igraph_error(neighbors(g, vertex = 1, v = 2))
 })

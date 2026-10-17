@@ -6,21 +6,22 @@
 \usage{
 power_centrality(
   graph,
-  nodes = NULL,
+  vertices = NULL,
   ...,
   loops = FALSE,
   exponent = 1,
   normalized = FALSE,
   tol = 1e-07,
   sparse = TRUE,
-  weights = NULL
+  weights = NULL,
+  nodes = deprecated()
 )
 }
 \arguments{
 \item{graph}{the input graph.}
 
-\item{nodes}{vertex sequence indicating which vertices are to be included in
-the calculation. The default \code{NULL} selects all vertices.}
+\item{vertices}{vertex sequence indicating which vertices are to be included
+in the calculation. The default \code{NULL} selects all vertices.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
@@ -53,13 +54,15 @@ used as weights. The attribute must be numeric or logical.
 }
 If multiple edges share endpoints, the value of an arbitrarily chosen edge
 is included in the matrix.}
+
+\item{nodes}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 }
 \value{
 A vector, containing the centrality scores.
 }
 \description{
 \code{power_centrality()} takes a graph (\code{dat}) and returns the Boncich power
-centralities of positions (selected by \code{nodes}).  The decay rate for
+centralities of positions (selected by \code{vertices}).  The decay rate for
 power contributions is specified by \code{exponent} (1 by default).
 }
 \details{

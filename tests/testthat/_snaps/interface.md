@@ -33,3 +33,21 @@
       Error in `el_to_vec()`:
       ! The columns of the data.frame are of different type (character and double)
 
+# neighbors(v = ) and incident(v = ) are deprecated but still work
+
+    Code
+      res_legacy <- neighbors(g, v = 1)
+    Condition
+      Warning:
+      The `v` argument of `neighbors()` is deprecated as of igraph 3.0.0.
+      i Please use the `vertex` argument instead.
+
+---
+
+    Code
+      neighbors(g, vertex = 1, v = 2)
+    Condition
+      Error in `neighbors()`:
+      ! Argument `vertex` of `neighbors()` was supplied more than once.
+      i It was also supplied via its legacy name `v`.
+

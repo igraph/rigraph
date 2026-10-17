@@ -328,13 +328,13 @@ degree(g, 7)
 ```
 
 ```{r echo = TRUE}
-degree(g, v = c(3, 4, 5))
+degree(g, vertices = c(3, 4, 5))
 ```
 
 Most functions that accept vertex IDs also accept vertex _names_ (the values of the `name` vertex attribute) as long as the names are unique:
 
 ```{r echo = TRUE}
-degree(g, v = c("Carmina", "Moshe", "Nang"))
+degree(g, vertices = c("Carmina", "Moshe", "Nang"))
 ```
 
 It also works for single vertices:

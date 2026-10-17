@@ -27,22 +27,23 @@
 #' both cite, `bibcoupling()` calculates this.
 #'
 #' `cocitation()` calculates the cocitation counts for the vertices in the
-#' `v` argument and all vertices in the graph.
+#' `vertices` argument and all vertices in the graph.
 #'
 #' `bibcoupling()` calculates the bibliographic coupling for vertices in
-#' `v` and all vertices in the graph.
+#' `vertices` and all vertices in the graph.
 #'
 #' Calculating the cocitation or bibliographic coupling for only one vertex
 #' costs the same amount of computation as for all vertices. This might change
 #' in the future.
 #'
 #' @param graph The graph object to analyze
-#' @param v Vertex sequence or numeric vector, the vertex IDs for which the
-#'   cocitation or bibliographic coupling values we want to calculate. The
+#' @param vertices Vertex sequence or numeric vector, the vertex IDs for which
+#'   the cocitation or bibliographic coupling values we want to calculate. The
 #'   default `NULL` selects all vertices.
-#' @return A numeric matrix with `length(v)` lines and
+#' @param v `r lifecycle::badge("deprecated")` Use `vertices` instead.
+#' @return A numeric matrix with `length(vertices)` lines and
 #'   `vcount(graph)` columns. Element `(i,j)` contains the cocitation
-#'   or bibliographic coupling for vertices `v[i]` and `j`.
+#'   or bibliographic coupling for vertices `vertices[i]` and `j`.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @family cocitation
 #' @export
@@ -53,18 +54,33 @@
 #' cocitation(g)
 #' bibcoupling(g)
 #'
-cocitation <- function(graph, v = NULL) {
-  if (is.null(v)) {
-    v <- V(graph)
+cocitation <- function(graph, vertices = NULL, v = deprecated()) {
+  if (lifecycle::is_present(v)) {
+    if (!missing(vertices)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertices} of {.fn cocitation} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg v}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "cocitation(v = )",
+      "cocitation(vertices = )"
+    )
+    vertices <- v
+  }
+
+  if (is.null(vertices)) {
+    vertices <- V(graph)
   }
 
   res <- cocitation_impl(
     graph = graph,
-    vids = v
+    vids = vertices
   )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    v <- as_igraph_vs(graph, v)
-    rownames(res) <- vertex_attr(graph, "name", v)
+    vertices <- as_igraph_vs(graph, vertices)
+    rownames(res) <- vertex_attr(graph, "name", vertices)
     colnames(res) <- vertex_attr(graph, "name")
   }
   res
@@ -72,18 +88,33 @@ cocitation <- function(graph, v = NULL) {
 
 #' @rdname cocitation
 #' @export
-bibcoupling <- function(graph, v = NULL) {
-  if (is.null(v)) {
-    v <- V(graph)
+bibcoupling <- function(graph, vertices = NULL, v = deprecated()) {
+  if (lifecycle::is_present(v)) {
+    if (!missing(vertices)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertices} of {.fn bibcoupling} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg v}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "bibcoupling(v = )",
+      "bibcoupling(vertices = )"
+    )
+    vertices <- v
+  }
+
+  if (is.null(vertices)) {
+    vertices <- V(graph)
   }
 
   res <- bibcoupling_impl(
     graph = graph,
-    vids = v
+    vids = vertices
   )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    v <- as_igraph_vs(graph, v)
-    rownames(res) <- vertex_attr(graph, "name", v)
+    vertices <- as_igraph_vs(graph, vertices)
+    rownames(res) <- vertex_attr(graph, "name", vertices)
     colnames(res) <- vertex_attr(graph, "name")
   }
   res

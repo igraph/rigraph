@@ -9,12 +9,13 @@
 \usage{
 betweenness(
   graph,
-  v = NULL,
+  vertices = NULL,
   ...,
   directed = TRUE,
   weights = NULL,
   normalized = FALSE,
-  cutoff = -1
+  cutoff = -1,
+  v = deprecated()
 )
 
 edge_betweenness(
@@ -29,8 +30,8 @@ edge_betweenness(
 \arguments{
 \item{graph}{The graph to analyze.}
 
-\item{v}{The vertices for which the vertex betweenness will be calculated.
-The default \code{NULL} selects all vertices.}
+\item{vertices}{The vertices for which the vertex betweenness will be
+calculated. The default \code{NULL} selects all vertices.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
@@ -57,12 +58,14 @@ from each other may be less than \eqn{(n-1)(n-2)/2}.}
 \item{cutoff}{The maximum shortest path length to consider when calculating
 betweenness. If negative, then there is no such limit.}
 
+\item{v}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
+
 \item{e}{The edges for which the edge betweenness will be calculated.
 The default \code{NULL} selects all edges.}
 }
 \value{
 A numeric vector with the betweenness score for each vertex in
-\code{v} for \code{betweenness()}.
+\code{vertices} for \code{betweenness()}.
 
 A numeric vector with the edge betweenness score for each edge in \code{e}
 for \code{edge_betweenness()}.

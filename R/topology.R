@@ -1251,8 +1251,9 @@ subgraph_isomorphisms <- function(
 #' vertices and undirected graphs with 3 to 6 vertices.
 #'
 #' @param graph The input graph.
-#' @param v Optionally a vertex sequence. If not missing, then an induced
-#'   subgraph of the input graph, consisting of this vertices, is used.
+#' @param vertices Optionally a vertex sequence. If not missing, then an
+#'   induced subgraph of the input graph, consisting of this vertices, is used.
+#' @param v `r lifecycle::badge("deprecated")` Use `vertices` instead.
 #' @return An integer number.
 #'
 #' @aliases graph.isoclass graph.isoclass.subgraph
@@ -1266,11 +1267,26 @@ subgraph_isomorphisms <- function(
 #' isomorphism_class(g1)
 #' isomorphism_class(g2)
 #' isomorphic(g1, g2)
-isomorphism_class <- function(graph, v) {
-  if (missing(v)) {
+isomorphism_class <- function(graph, vertices, v = deprecated()) {
+  if (lifecycle::is_present(v)) {
+    if (!missing(vertices)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertices} of {.fn isomorphism_class} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg v}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "isomorphism_class(v = )",
+      "isomorphism_class(vertices = )"
+    )
+    vertices <- v
+  }
+
+  if (missing(vertices)) {
     graph.isoclass(graph)
   } else {
-    graph.isoclass.subgraph(graph, v)
+    graph.isoclass.subgraph(graph, vertices)
   }
 }
 
