@@ -462,6 +462,31 @@ test_that("shortest_paths() works", {
   expect_true(s1$vpath %in% all1)
 })
 
+test_that("any all-NA `weights` means unweighted", {
+  # "Unweighted" is spelled with an all-NA vector everywhere in igraph, which
+  # is what the generated wrappers in R/aaa-*.R test. `distances()` and
+  # `shortest_paths()` tested `length(weights) == 1 && is.na(weights)`, so a
+  # vector of NAs the right length for the graph -- or a zero-length one --
+  # was an error here and meant "unweighted" there.
+  g <- make_ring(4)
+  E(g)$weight <- c(0.5, 0.7, 0.2, 0.9)
+
+  # Weighted, the short way round is 0.9 + 0.2 via vertex 4; unweighted it is 2.
+  expect_equal(distances(g)[1, 3], 1.1)
+  for (w in list(NA, rep(NA, 4), rep(NA_real_, 4), NaN, numeric())) {
+    expect_equal(distances(g, weights = w)[1, 3], 2)
+    expect_equal(
+      as.integer(shortest_paths(g, 1, 3, weights = w)$vpath[[1]]),
+      c(1L, 2L, 3L)
+    )
+  }
+
+  # Only *some* of them NA is still an error, from the C core.
+  expect_error(distances(g, weights = c(1, NA, 1, 1)), "NaN")
+  # And a vector of the wrong length is still the wrong length.
+  expect_error(distances(g, weights = c(1, 2)), "length")
+})
+
 test_that("shortest_paths() can handle negative weights", {
   g <- make_tree(7)
   E(g)$weight <- -1
