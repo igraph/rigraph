@@ -594,9 +594,20 @@ test_that("eigen_centrality() works", {
     expect_ev(M, v, lambda, eps)
   }
 
+  # Most of these graphs are disconnected, and warn that some centralities
+  # are nearly zero; no other warning is expected.
   for (i in 1:1000) {
     G <- sample_gnm(10, sample(1:20, 1))
-    ev <- eigen_centrality(G)
+    ev <- withCallingHandlers(
+      eigen_centrality(G),
+      warning = function(w) {
+        expect_match(
+          conditionMessage(w),
+          "eigenvector centralities are nearly zero"
+        )
+        invokeRestart("muffleWarning")
+      }
+    )
     expect_good(
       as_adjacency_matrix(G, sparse = FALSE),
       ev$vector,
