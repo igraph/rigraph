@@ -1770,3 +1770,13 @@ test_that("sample_correlated_gnp() recovers positional p", {
     sample_correlated_gnp(base_graph, 0.8, p = 0.3)
   )
 })
+
+test_that("sample_islands() random stream for a fixed seed", {
+  # Pins the random numbers the C core draws for this generator.
+  igraph_local_seed(42)
+  g <- sample_islands(2, 3, 0.5, 1)
+  expect_equal(
+    as_edgelist(g),
+    rbind(c(1, 3), c(2, 3), c(3, 6), c(4, 5), c(4, 6))
+  )
+})

@@ -251,3 +251,10 @@ test_that("graph_from_biadjacency_matrix() covers add.names by name and recovers
   )
   expect_true(is_directed(res))
 })
+
+test_that("graph_from_biadjacency_matrix() creates edges row by row", {
+  # Pins the edge order of the C core for dense unweighted input.
+  m <- matrix(c(1, 1, 1, 0), 2)
+  g <- graph_from_biadjacency_matrix(m)
+  expect_equal(as_edgelist(g), rbind(c(1, 3), c(1, 4), c(2, 3)))
+})
