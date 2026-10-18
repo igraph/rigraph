@@ -21,10 +21,22 @@
 # learns what the iteration changed there. Committer dates stay those of the
 # landing, so a rerun from the same inputs mints the same SHAs.
 #
+# The fold runs a copy of this script, taken into the git dir at the start,
+# because the todo's `exec` lines run in the tree being rebased: its copy is
+# the one each replayed commit carries, older than this one, or none below the
+# commit that added it. A failed `exec` is rescheduled, so --continue runs it
+# again rather than past it. When the replay ends, every fold is checked in its
+# result: merging the fix into its target's replay again must change nothing.
+# A fix that conflicted at its target and was resolved by hand is the
+# resolution's, and is not checked.
+#
 # A conflict stops the replay where git stops it: resolve it, `git add`, and
 # rerun with --continue, which keeps the pinned date. rerere is on
 # (scripts/setup-git.sh), so a resolution made once is made again on a rerun.
 # A fix that no longer applies at its target stops the replay the same way.
+# --continue and --abort hand over to the copy the fold started with; invoke
+# them, like the fold, as `main`'s copy, because the tree a stop leaves
+# may carry an older copy, or none.
 #
 # Usage: series-fold.sh <tip> --fold <target>=<fix>[:<note>]... [--exec <cmd>]
 #        series-fold.sh --continue | --abort
@@ -34,14 +46,16 @@
 #   --fold     fold commit <fix> into commit <target> of the chain; <fix> must have
 #              <target> as its parent; the note defaults to the fix's subject
 #   --exec     run <cmd> after every replayed commit from the lowest target up,
-#              as `git rebase --exec` does: a failure stops the replay there
+#              as `git rebase --exec` does: a failure stops the replay there,
+#              and --continue runs it again
 #
 # Runs in the current worktree, which must be clean; like
 # scripts/series-forward-build.sh it names commits rather than a series, so it
 # takes no --remote.
 #
-# Exit status: 0 when the replay finished, 1 when it stopped, 2 on a usage or
-# lookup error.
+# Exit status: 0 when the replay finished with every fold in it, 1 when it
+# stopped, 2 on a usage or lookup error, 3 when it finished without a fold: the
+# result is left detached for a look, and the tip is where it was.
 
 set -euo pipefail
 # A failure inside `$(...)` stops the run too, rather than reading as empty.
@@ -55,6 +69,11 @@ gitdir=$(git rev-parse --absolute-git-dir)
 DATE_FILE="$gitdir/series-fold-date"
 # The note of a fold that stopped on a conflict, for --continue to amend in.
 PENDING="$gitdir/series-fold-pending"
+# The fixes --continue amended in by hand, which the rescheduled fold step skips.
+RESOLVED="$gitdir/series-fold-resolved"
+# The copy of this script the replay runs, and the folds it checks the result for.
+COPY="$gitdir/series-fold.sh"
+PLAN="$gitdir/series-fold-plan"
 
 # --- the fold step, run by the rebase as an `exec` line -----------------------
 
@@ -97,6 +116,9 @@ amend_note() { # <note>: amend what is staged into HEAD, with the note added
 
 if [ "${1:-}" = --apply ]; then
   fix=$2 note=$3
+  # A fix --continue amended in by hand is not applied again when the rebase
+  # reruns this step, which it rescheduled when the step failed.
+  if grep -qsx "$fix" "$RESOLVED"; then exit 0; fi
   printf '%s\n%s\n' "$fix" "$note" > "$PENDING"
   git cherry-pick --no-commit "$fix" || {
     echo "series-fold: the fix $(git rev-parse --short "$fix") does not apply at" \
@@ -109,12 +131,56 @@ if [ "${1:-}" = --apply ]; then
   exit 0
 fi
 
+# --- the check of the result, and the end of a replay --------------------------
+
+# Every fold in the replay: the chain keeps its length, and merging each fix
+# into its target's replay again changes nothing, unless --continue amended it
+# in by hand.
+check_folds() {
+  local base count tip pos t x new out bad=0 chain
+  [ -f "$PLAN" ] || { echo "Error: no record of the folds to check them by" >&2; return 1; }
+  {
+    read -r base count tip
+    git merge-base --is-ancestor "$base" HEAD ||
+      { echo "Error: HEAD is not above $(git rev-parse --short "$base"), where the replay started" >&2; return 1; }
+    chain=$(git rev-list --reverse --first-parent "$base..HEAD")
+    [ "$(grep -c . <<<"$chain")" -eq "$count" ] ||
+      { echo "Error: the replay holds $(grep -c . <<<"$chain") commits, the chain it replayed $count" >&2; return 1; }
+    while read -r pos t x; do
+      new=$(sed -n "${pos}p" <<<"$chain")
+      if out=$(git merge-tree --write-tree --merge-base="$t" "$new" "$x") &&
+        [ "${out%%$'\n'*}" = "$(git rev-parse "$new^{tree}")" ]; then
+        continue
+      fi
+      if grep -qsx "$x" "$RESOLVED"; then
+        echo "series-fold: $(git rev-parse --short "$x") was resolved by hand into $(git rev-parse --short "$new"); not checked"
+        continue
+      fi
+      echo "Error: the fix $(git rev-parse --short "$x") is not in $(git log -1 --format='%h %s' "$new")," \
+        "the replay of its target" >&2
+      bad=1
+    done
+  } < "$PLAN"
+  [ "$bad" -eq 0 ] || echo "  rerun the fold from $(git rev-parse --short "$tip"), which has not moved" >&2
+  return "$bad"
+}
+
+finish() {
+  local st=0
+  check_folds || st=3
+  rm -f "$DATE_FILE" "$PENDING" "$RESOLVED" "$PLAN" "$COPY"
+  [ "$st" -eq 0 ] || { echo "series-fold: finished at $(git rev-parse HEAD) without every fold" >&2; exit "$st"; }
+  echo "series-fold: done at $(git rev-parse HEAD)"
+  exit 0
+}
+
 if [ "${1:-}" = --continue ] || [ "${1:-}" = --abort ]; then
   [ $# -eq 1 ] || argerr
   [ -f "$DATE_FILE" ] || { echo "Error: no fold in progress here" >&2; exit 2; }
+  if [ -x "$COPY" ] && ! [ "$self" -ef "$COPY" ]; then exec "$COPY" "$1"; fi
   if [ "$1" = --abort ]; then
     git rebase --abort
-    rm -f "$DATE_FILE" "$PENDING"
+    rm -f "$DATE_FILE" "$PENDING" "$RESOLVED" "$PLAN" "$COPY"
     exit 0
   fi
   GIT_COMMITTER_DATE=$(cat "$DATE_FILE")
@@ -123,15 +189,12 @@ if [ "${1:-}" = --continue ] || [ "${1:-}" = --abort ]; then
     [ -z "$(git diff --name-only --diff-filter=U)" ] ||
       { echo "Error: the fix still has conflicts; resolve and git add them" >&2; exit 1; }
     amend_note "$(sed -n 2p "$PENDING")"
+    sed -n 1p "$PENDING" >> "$RESOLVED"
     echo "series-fold: folded $(git rev-parse --short "$(sed -n 1p "$PENDING")") into $(git log -1 --format='%h %s' HEAD)"
     rm -f "$PENDING"
   fi
-  if git rebase --continue; then
-    rm -f "$DATE_FILE"
-    echo "series-fold: done at $(git rev-parse HEAD)"
-    exit 0
-  fi
-  exit 1
+  git rebase --continue || exit 1
+  finish
 fi
 
 # --- the replay ----------------------------------------------------------------
@@ -175,25 +238,35 @@ for f in "${folds[@]}"; do
   if [ "$pos" -gt "$lowest_pos" ]; then lowest=$t lowest_pos=$pos; fi
 done
 
-# Every commit of the replay, oldest first, and the todo the rebase follows.
+# Every commit of the replay, oldest first, and the todo the rebase follows;
+# the plan names the chain and each target's place in it, for check_folds.
 todo=$(mktemp)
 q() { printf "'%s'" "${1//\'/\'\\\'\'}"; }
+replay=$(git rev-list --reverse --first-parent "$lowest^..$tip")
+echo "$(git rev-parse "$lowest^") $(grep -c . <<<"$replay") $tip" > "$PLAN"
+i=0
 while IFS= read -r c; do
+  i=$((i + 1))
   echo "pick $c"
   if [ -n "${FIX[$c]+x}" ]; then
-    echo "exec $(q "$self") --apply ${FIX[$c]} $(q "${NOTE[$c]}")"
+    echo "exec $(q "$COPY") --apply ${FIX[$c]} $(q "${NOTE[$c]}")"
+    echo "$i $c ${FIX[$c]}" >> "$PLAN"
   fi
   [ -z "$exec_cmd" ] || echo "exec $exec_cmd"
-done < <(git rev-list --reverse --first-parent "$lowest^..$tip") > "$todo"
+done <<<"$replay" > "$todo"
 
 GIT_COMMITTER_DATE=$(git log -1 --format=%cd --date=raw "$lowest")
 export GIT_COMMITTER_DATE
 echo "$GIT_COMMITTER_DATE" > "$DATE_FILE"
+rm -f "$PENDING" "$RESOLVED"
+cp "$self" "$COPY.new"
+chmod +x "$COPY.new"
+mv -f "$COPY.new" "$COPY"
 echo "series-fold: replaying $(grep -c '^pick' "$todo") commits from $(git rev-parse --short "$lowest")," \
   "folding ${#folds[@]} fix(es)"
 git checkout -q --detach "$tip"
 set +e
-GIT_SEQUENCE_EDITOR="cp $(q "$todo")" git rebase -q --interactive --no-autosquash \
+GIT_SEQUENCE_EDITOR="cp $(q "$todo")" git rebase -q --interactive --no-autosquash --reschedule-failed-exec \
   --rebase-merges=no-rebase-cousins --onto "$lowest^" "$lowest^" 2>&1 | grep -v '^Executing:'
 st=${PIPESTATUS[0]}
 set -e
@@ -202,5 +275,4 @@ if [ "$st" -ne 0 ]; then
   echo "series-fold: stopped; resolve, git add, and rerun with --continue (or --abort)" >&2
   exit 1
 fi
-rm -f "$DATE_FILE"
-echo "series-fold: done at $(git rev-parse HEAD)"
+finish

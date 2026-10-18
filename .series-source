@@ -35,6 +35,8 @@ ported:
     blob: 75ee2717916f3d75d351badc49a2ae29bfd079e2
   - path: scripts/series-patch-sync.sh
     blob: 14cdb66ef371818b94f4d7414add4cb7da845a1c
+  # rigraph diverges here, in the test and in how stage 2 calls it:
+  # the replay runs its own copy from the git dir, reruns a failed fold step, and checks that every fold landed.
   - path: scripts/series-fold.sh
     blob: 6dc93ae9c499b4580ac7cc61c6f0c49f6d6b780f
   - path: scripts/series-tests.sh

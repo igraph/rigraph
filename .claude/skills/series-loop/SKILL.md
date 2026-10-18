@@ -248,11 +248,12 @@ Every commit in `main-green..main-dev` is decided by an `each-rcc` leg, and that
   Write the fix as a commit on the offending commit and let `series-fold.sh` fold it and replay the tail:
 
   ```sh
+  M=$(pwd)
   W=$(cd .. && pwd)/repair
   git worktree add --detach "$W" <offending commit>
   # write the fix in $W, then
   git -C "$W" commit -q -m '<what was adapted>' -- <the fix>
-  (cd "$W" && scripts/series-fold.sh origin/main-dev --fold <offending commit>=HEAD:'R-side fix: <what was adapted, and why>')
+  (cd "$W" && "$M"/scripts/series-fold.sh origin/main-dev --fold <offending commit>=HEAD:'R-side fix: <what was adapted, and why>')
   # build and check the repaired commit locally before this push (below)
   git -C "$W" push --force-with-lease=refs/heads/main-dev:$(git rev-parse origin/main-dev) origin HEAD:refs/heads/main-dev
   ```
