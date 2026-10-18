@@ -325,6 +325,32 @@
 ---
 
     Code
+      migration_fixture("g", 5, weig = 1)
+    Condition
+      Warning:
+      Calling `migration_fixture()` with positional or abbreviated arguments was deprecated in igraph 3.0.0.
+      i Detected call: migration_fixture(graph, n, weight)
+      i Use instead: migration_fixture(graph, n, weights = )
+    Output
+      $graph
+      [1] "g"
+      
+      $n
+      [1] 5
+      
+      $weights
+      [1] 1
+      
+      $type
+      [1] "out"
+      
+      $directed
+      [1] FALSE
+      
+
+---
+
+    Code
       migration_fixture("g", 5, 1:3, dir = TRUE)
     Condition
       Warning:
@@ -349,14 +375,6 @@
       
 
 # error message snapshots
-
-    Code
-      migration_fixture("g", 5, weig = 1)
-    Condition
-      Error in `migration_fixture()`:
-      ! Argument `weig` matches multiple arguments of `migration_fixture()`.
-
----
 
     Code
       migration_fixture("g", 5, foo = 1)
