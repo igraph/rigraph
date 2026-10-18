@@ -69,11 +69,11 @@ g <- disjoint_union(make_full_graph(5), make_full_graph(5))
 clu <- components(g)$membership
 g <- add_edges(g, c(match(1, clu), match(2, clu)))
 articulation_points(g)
-#> ── <vertex sequence> 2/10 · from de78e79 ───────────────────────────────────────
+#> ── <vertex sequence> 2/10 · from 3ef09fc ───────────────────────────────────────
 #> [1] 6 1
 
 g <- make_graph("krackhardt_kite")
 bridges(g)
-#> ── <edge sequence> 2/18 · from 14d0303 ─────────────────────────────────────────
+#> ── <edge sequence> 2/18 · from 64d0e71 ─────────────────────────────────────────
 #> [1] 9 ─ 10  8 ─ 9  
 ```

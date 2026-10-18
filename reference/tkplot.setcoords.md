@@ -4,7 +4,9 @@
 
 `tkplot.setcoords()` was renamed to
 [`tk_set_coords()`](https://r.igraph.org/reference/tkplot.md) to create
-a more consistent API.
+a more consistent API. As
+[`tkplot()`](https://r.igraph.org/reference/tkplot.md) is defunct,
+neither function has a plot to act on.
 
 ## Usage
 

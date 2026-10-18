@@ -74,8 +74,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Place vertices on a circle, order them according to their
 ## community
-library(igraphdata)
-data(karate)
+data(karate, package = "igraphdata")
 karate_groups <- cluster_optimal(karate)
 #> This graph was created by an old(er) igraph version.
 #> ℹ Call `upgrade_graph()` on it to use with the current igraph version.

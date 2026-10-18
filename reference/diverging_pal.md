@@ -37,8 +37,7 @@ Other palettes:
 ## Examples
 
 ``` r
-library(igraphdata)
-data(foodwebs)
+data(foodwebs, package = "igraphdata")
 fw <- foodwebs[[1]] %>%
   induced_subgraph(V(.)[ECO == 1]) %>%
   add_layout_(with_fr()) %>%
@@ -53,7 +52,7 @@ V(fw)$color <- scales::dscale(V(fw)$Biomass %>% cut(10), diverging_pal)
 plot(fw)
 
 
-data(karate)
+data(karate, package = "igraphdata")
 karate <- karate %>%
   add_layout_(with_kk()) %>%
   set_vertex_attr("size", value = 10)

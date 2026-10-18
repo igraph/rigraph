@@ -5,13 +5,27 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Interactive plotting of graphs — tkplot"><meta name="description" content="tkplot() and its companion functions serve as an interactive graph
-drawing facility. Not all parameters of the plot can be changed
-interactively right now though, e.g. the colors of vertices, edges, and also
-others have to be pre-defined."><meta property="og:description" content="tkplot() and its companion functions serve as an interactive graph
-drawing facility. Not all parameters of the plot can be changed
-interactively right now though, e.g. the colors of vertices, edges, and also
-others have to be pre-defined."><meta property="og:image" content="https://r.igraph.org/logo.png"></head><body>
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Interactive plotting of graphs — tkplot"><meta name="description" content="
+tkplot() used to open an interactive Tcl/Tk window for drawing a graph.
+It is defunct since igraph 3.0.0 and throws an error when called.
+igraph has no interactive replacement:
+plot.igraph() draws a graph on any R graphics device,
+and rglplot() draws it in 3D.
+tk_close(), tk_off(), tk_fit(), tk_center(), tk_reshape(),
+tk_postscript(), tk_coords(), tk_set_coords(), tk_rotate()
+and tk_canvas() acted on a window opened by tkplot().
+As no such window can be opened any more, they have nothing to act on:
+tk_off() does nothing, and the others throw an error."><meta property="og:description" content="
+tkplot() used to open an interactive Tcl/Tk window for drawing a graph.
+It is defunct since igraph 3.0.0 and throws an error when called.
+igraph has no interactive replacement:
+plot.igraph() draws a graph on any R graphics device,
+and rglplot() draws it in 3D.
+tk_close(), tk_off(), tk_fit(), tk_center(), tk_reshape(),
+tk_postscript(), tk_coords(), tk_set_coords(), tk_rotate()
+and tk_canvas() acted on a window opened by tkplot().
+As no such window can be opened any more, they have nothing to act on:
+tk_off() does nothing, and the others throw an error."><meta property="og:image" content="https://r.igraph.org/logo.png"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -19,7 +33,7 @@ others have to be pre-defined."><meta property="og:image" content="https://r.igr
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9044</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.99.99.9045</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,10 +70,17 @@ others have to be pre-defined."><meta property="og:image" content="https://r.igr
     </div>
 
     <div class="ref-description section level2">
-    <p><code>tkplot()</code> and its companion functions serve as an interactive graph
-drawing facility. Not all parameters of the plot can be changed
-interactively right now though, e.g. the colors of vertices, edges, and also
-others have to be pre-defined.</p>
+    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#defunct" class="external-link"><img src="figures/lifecycle-defunct.svg" alt="[Defunct]"></a></p>
+<p><code>tkplot()</code> used to open an interactive Tcl/Tk window for drawing a graph.
+It is defunct since igraph 3.0.0 and throws an error when called.
+igraph has no interactive replacement:
+<code><a href="plot.igraph.html">plot.igraph()</a></code> draws a graph on any R graphics device,
+and <code><a href="rglplot.html">rglplot()</a></code> draws it in 3D.</p>
+<p><code>tk_close()</code>, <code>tk_off()</code>, <code>tk_fit()</code>, <code>tk_center()</code>, <code>tk_reshape()</code>,
+<code>tk_postscript()</code>, <code>tk_coords()</code>, <code>tk_set_coords()</code>, <code>tk_rotate()</code>
+and <code>tk_canvas()</code> acted on a window opened by <code>tkplot()</code>.
+As no such window can be opened any more, they have nothing to act on:
+<code>tk_off()</code> does nothing, and the others throw an error.</p>
     </div>
 
     <div class="section level2">
@@ -91,18 +112,14 @@ others have to be pre-defined.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg-graph">graph<a class="anchor" aria-label="anchor" href="#arg-graph"></a></dt>
-<dd><p>The <code>graph</code> to plot.</p></dd>
-
-
-<dt id="arg-canvas-width-canvas-height">canvas.width, canvas.height<a class="anchor" aria-label="anchor" href="#arg-canvas-width-canvas-height"></a></dt>
-<dd><p>The size of the tkplot drawing area.</p></dd>
+<dl><dt id="arg-graph-canvas-width-canvas-height">graph, canvas.width, canvas.height<a class="anchor" aria-label="anchor" href="#arg-graph-canvas-width-canvas-height"></a></dt>
+<dd><p>Ignored, <code>tkplot()</code> is defunct.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>For <code>tkplot()</code>, additional plotting parameters, see
-<a href="plot.common.html">igraph.plotting</a> for the complete list. For <code>tk_close()</code>, <code>tk_fit()</code>,
-<code>tk_coords()</code> and <code>tk_rotate()</code>, these dots must be empty.</p></dd>
+<dd><p>Ignored by <code>tkplot()</code>.
+For <code>tk_close()</code>, <code>tk_fit()</code>, <code>tk_coords()</code> and <code>tk_rotate()</code>,
+these dots must be empty.</p></dd>
 
 
 <dt id="arg-tkp-id">tkp.id<a class="anchor" aria-label="anchor" href="#arg-tkp-id"></a></dt>
@@ -148,96 +165,9 @@ vertices, in absolute coordinates.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p><code>tkplot()</code> returns an integer, the ID of the plot, this can be
-used to manipulate it from the command line.</p>
-<p><code>tk_canvas()</code> returns <code>tkwin</code> object, the Tk canvas.</p>
-<p><code>tk_coords()</code> returns a matrix with the coordinates.</p>
-<p><code>tk_close()</code>, <code>tk_off()</code>, <code>tk_fit()</code>,
-<code>tk_reshape()</code>, <code>tk_postscript()</code>, <code>tk_center()</code>
-and <code>tk_rotate()</code> return <code>NULL</code> invisibly.</p>
-    </div>
-    <div class="section level2">
-    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p><code>tkplot()</code> is an interactive graph drawing facility. It is not very well
-developed at this stage, but it should be still useful.</p>
-<p>It's handling should be quite straightforward most of the time, here are
-some remarks and hints.</p>
-<p>There are different popup menus, activated by the right mouse button, for
-vertices and edges. Both operate on the current selection if the vertex/edge
-under the cursor is part of the selection and operate on the vertex/edge
-under the cursor if it is not.</p>
-<p>One selection can be active at a time, either a vertex or an edge selection.
-A vertex/edge can be added to a selection by holding the <code>control</code> key
-while clicking on it with the left mouse button. Doing this again deselect
-the vertex/edge.</p>
-<p>Selections can be made also from the "Select" menu. The "Select some
-vertices" dialog allows to give an expression for the vertices to be
-selected: this can be a list of numeric R expessions separated by commas,
-like <code>1,2:10,12,14,15</code> for example. Similarly in the "Select some
-edges" dialog two such lists can be given and all edges connecting a vertex
-in the first list to one in the second list will be selected.</p>
-<p>In the color dialog a color name like 'orange' or RGB notation can also be
-used.</p>
-<p>The <code>tkplot()</code> command creates a new Tk window with the graphical
-representation of <code>graph</code>. The command returns an integer number, the
-tkplot ID. The other commands utilize this ID to be able to query or
-manipulate the plot.</p>
-<p><code>tk_close()</code> closes the Tk plot with ID <code>tkp.id</code>.</p>
-<p><code>tk_off()</code> closes all Tk plots.</p>
-<p><code>tk_fit()</code> fits the plot to the given rectangle
-(<code>width</code> and <code>height</code>), if some of these are <code>NULL</code> the
-actual physical width od height of the plot window is used.</p>
-<p><code>tk_reshape()</code> applies a new layout to the plot, its optional
-parameters will be collected to a list analogous to <code>layout.par</code>.</p>
-<p><code>tk_postscript()</code> creates a dialog window for saving the plot
-in postscript format.</p>
-<p><code>tk_canvas()</code> returns the Tk canvas object that belongs to a graph
-plot. The canvas can be directly manipulated then, e.g. labels can be added,
-it could be saved to a file programmatically, etc. See an example below.</p>
-<p><code>tk_coords()</code> returns the coordinates of the vertices in a matrix.
-Each row corresponds to one vertex.</p>
-<p><code>tk_set_coords()</code> sets the coordinates of the vertices. A two-column
-matrix specifies the new positions, with each row corresponding to a single
-vertex.</p>
-<p><code>tk_center()</code> shifts the figure to the center of its plot window.</p>
-<p><code>tk_rotate()</code> rotates the figure, its parameter can be given either
-in degrees or in radians.</p>
-<p>tkplot.center tkplot.rotate</p>
-    </div>
-    <div class="section level2">
-    <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
-
-
-<div class="sourceCode"><pre><code><span></span>
-<span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/tkplot.html">tkplot</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## Saving a tkplot() to a file programmatically</span></span>
-<span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_star.html">make_star</a></span><span class="op">(</span><span class="fl">10</span>, center<span class="op">=</span><span class="fl">10</span><span class="op">)</span> </span>
-<span><span class="fu"><a href="../reference/E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">width</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fu"><a href="../reference/gsize.html">ecount</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span>, replace<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="va">lay</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layout_nicely.html">layout_nicely</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">id</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tkplot.html">tkplot</a></span><span class="op">(</span><span class="va">g</span>, layout<span class="op">=</span><span class="va">lay</span><span class="op">)</span></span>
-<span><span class="va">canvas</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tkplot.html">tk_canvas</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span></span>
-<span><span class="fu">tcltk</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/tcltk/TkWidgetcmds.html" class="external-link">tkpostscript</a></span><span class="op">(</span><span class="va">canvas</span>, file<span class="op">=</span><span class="st">"/tmp/output.eps"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/tkplot.html">tk_close</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## Setting the coordinates and adding a title label</span></span>
-<span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
-<span><span class="va">id</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tkplot.html">tkplot</a></span><span class="op">(</span><span class="fu"><a href="../reference/make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, canvas.width<span class="op">=</span><span class="fl">450</span>, canvas.height<span class="op">=</span><span class="fl">500</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">canvas</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tkplot.html">tk_canvas</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span></span>
-<span><span class="va">padding</span> <span class="op">&lt;-</span> <span class="fl">20</span></span>
-<span><span class="va">coords</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/norm_coords.html">norm_coords</a></span><span class="op">(</span><span class="fu"><a href="../reference/layout_in_circle.html">layout_in_circle</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span>, <span class="fl">0</span><span class="op">+</span><span class="va">padding</span>, <span class="fl">450</span><span class="op">-</span><span class="va">padding</span>,</span>
-<span>                      <span class="fl">50</span><span class="op">+</span><span class="va">padding</span>, <span class="fl">500</span><span class="op">-</span><span class="va">padding</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/tkplot.html">tk_set_coords</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">coords</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">width</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu">tkcget</span><span class="op">(</span><span class="va">canvas</span>, <span class="st">"-width"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">height</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu">tkcget</span><span class="op">(</span><span class="va">canvas</span>, <span class="st">"-height"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu">tkcreate</span><span class="op">(</span><span class="va">canvas</span>, <span class="st">"text"</span>, <span class="va">width</span><span class="op">/</span><span class="fl">2</span>, <span class="fl">25</span>, text<span class="op">=</span><span class="st">"My title"</span>,</span>
-<span>         justify<span class="op">=</span><span class="st">"center"</span>, font<span class="op">=</span><span class="fu">tcltk</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/tcltk/TkCommands.html" class="external-link">tkfont.create</a></span><span class="op">(</span>family<span class="op">=</span><span class="st">"helvetica"</span>,</span>
-<span>         size<span class="op">=</span><span class="fl">20</span>,weight<span class="op">=</span><span class="st">"bold"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-
+    <p><code>tkplot()</code> throws an error.</p>
+<p><code>tk_off()</code> returns <code>NULL</code> invisibly.
+The other functions throw an error, as no plot with ID <code>tkp.id</code> exists.</p>
     </div>
     <div class="section level2">
     <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>

@@ -1242,10 +1242,10 @@
   [`tk_coords()`](https://r.igraph.org/reference/tkplot.md)
   [`tk_set_coords()`](https://r.igraph.org/reference/tkplot.md)
   [`tk_rotate()`](https://r.igraph.org/reference/tkplot.md)
-  [`tk_canvas()`](https://r.igraph.org/reference/tkplot.md) :
-  Interactive plotting of graphs
-- [`console()`](https://r.igraph.org/reference/console.md) : The igraph
-  console
+  [`tk_canvas()`](https://r.igraph.org/reference/tkplot.md)
+  **\[defunct\]** : Interactive plotting of graphs
+- [`console()`](https://r.igraph.org/reference/console.md)
+  **\[defunct\]** : The igraph console
 
 ## Versions
 

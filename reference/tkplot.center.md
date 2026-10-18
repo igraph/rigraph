@@ -4,7 +4,9 @@
 
 `tkplot.center()` was renamed to
 [`tk_center()`](https://r.igraph.org/reference/tkplot.md) to create a
-more consistent API.
+more consistent API. As
+[`tkplot()`](https://r.igraph.org/reference/tkplot.md) is defunct,
+neither function has a plot to act on.
 
 ## Usage
 

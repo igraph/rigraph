@@ -4,7 +4,9 @@
 
 `tkplot.reshape()` was renamed to
 [`tk_reshape()`](https://r.igraph.org/reference/tkplot.md) to create a
-more consistent API.
+more consistent API. As
+[`tkplot()`](https://r.igraph.org/reference/tkplot.md) is defunct,
+neither function has a plot to act on.
 
 ## Usage
 
@@ -24,10 +26,7 @@ tkplot.reshape(tkp.id, newlayout, ..., params)
 
 - ...:
 
-  For [`tkplot()`](https://r.igraph.org/reference/tkplot.md), additional
-  plotting parameters, see
-  [igraph.plotting](https://r.igraph.org/reference/plot.common.md) for
-  the complete list. For
+  Ignored by [`tkplot()`](https://r.igraph.org/reference/tkplot.md). For
   [`tk_close()`](https://r.igraph.org/reference/tkplot.md),
   [`tk_fit()`](https://r.igraph.org/reference/tkplot.md),
   [`tk_coords()`](https://r.igraph.org/reference/tkplot.md) and

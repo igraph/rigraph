@@ -15,7 +15,7 @@ It has at most eleven colors."><meta property="og:image" content="https://r.igra
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9044</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.99.99.9045</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -91,8 +91,7 @@ colors.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://igraph.org" class="external-link">igraphdata</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">foodwebs</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">foodwebs</span>, package <span class="op">=</span> <span class="st">"igraphdata"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">fw</span> <span class="op">&lt;-</span> <span class="va">foodwebs</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="subgraph.html">induced_subgraph</a></span><span class="op">(</span><span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">[</span><span class="va">ECO</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="add_layout_.html">add_layout_</a></span><span class="op">(</span><span class="fu"><a href="layout_spec.html">with_fr</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
@@ -107,7 +106,7 @@ colors.</p>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">fw</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="diverging_pal-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">karate</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">karate</span>, package <span class="op">=</span> <span class="st">"igraphdata"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">karate</span> <span class="op">&lt;-</span> <span class="va">karate</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="add_layout_.html">add_layout_</a></span><span class="op">(</span><span class="fu"><a href="layout_spec.html">with_kk</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="set_vertex_attr.html">set_vertex_attr</a></span><span class="op">(</span><span class="st">"size"</span>, value <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>

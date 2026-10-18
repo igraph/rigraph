@@ -35,8 +35,7 @@ Other palettes:
 ## Examples
 
 ``` r
-library(igraphdata)
-data(karate)
+data(karate, package = "igraphdata")
 karate <- karate %>%
   add_layout_(with_kk()) %>%
   set_vertex_attr("size", value = 10)

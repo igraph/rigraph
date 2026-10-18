@@ -28,8 +28,7 @@ mark categories, e.g. community membership.
 ## Examples
 
 
-    library(igraphdata)
-    data(karate)
+    data(karate, package = "igraphdata")
     karate <- karate 
       add_layout_(with_fr()) 
       set_vertex_attr("size", value = 10)
