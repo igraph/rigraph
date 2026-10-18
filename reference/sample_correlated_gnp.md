@@ -100,7 +100,7 @@ g2 <- sample_correlated_gnp(g, corr = 0.5)
 cor(as.vector(g[]), as.vector(g2[]))
 #> [1] 0.5028799
 g
-#> ── <igraph> Erdos-Renyi (gnp) graph ───────────────────────────────── e7af501 ──
+#> ── <igraph> Erdos-Renyi (gnp) graph ───────────────────────────────── 09cf529 ──
 #> ℹ undirected
 #> ℹ 1000 vertices · 49890 edges
 #> 
@@ -120,7 +120,7 @@ g
 #>    [55] 23 ─ 31     2 ─ 32      4 ─ 32      9 ─ 32      12 ─ 32     15 ─ 32    
 #> + ... omitted several edges
 g2
-#> ── <igraph> Correlated random graph ───────────────────────────────── efbd469 ──
+#> ── <igraph> Correlated random graph ───────────────────────────────── e052e78 ──
 #> ℹ undirected
 #> ℹ 1000 vertices · 50075 edges
 #> 
