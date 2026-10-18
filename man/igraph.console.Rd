@@ -11,5 +11,7 @@ igraph.console()
 
 \code{igraph.console()} was renamed to \code{\link[=console]{console()}} to create a more
 consistent API.
+As \code{\link[=console]{console()}} is defunct,
+\code{igraph.console()} throws an error after its deprecation warning.
 }
 \keyword{internal}

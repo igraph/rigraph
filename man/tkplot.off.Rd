@@ -11,5 +11,6 @@ tkplot.off()
 
 \code{tkplot.off()} was renamed to \code{\link[=tk_off]{tk_off()}} to create a more
 consistent API.
+As \code{\link[=tkplot]{tkplot()}} is defunct, neither function has a plot to act on.
 }
 \keyword{internal}
