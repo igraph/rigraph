@@ -64,10 +64,12 @@
 # rewind and skipped four more for good (duckdb/duckdb-r#2899).
 # scripts/series-tests.sh compares the landing's tests with its base's, the
 # frozen `main` and any tests pinned above it, and the push is refused while one
-# is lost: a deleted file, block or snapshot, a skip the base does not make, and
-# an engine gate too, live or expired, which `main` never takes. What a test expects may differ, and every such path is
-# listed with the commits that moved it, so a review reads the landing's test
-# changes off one report rather than out of its commits.
+# is lost: a deleted file, block or snapshot, or a skip the base does not make,
+# an engine gate included. A test whose function upstream removed, removed with
+# a note where it stood, is listed apart, and its removal lands. What a test expects may
+# differ, and every such path is listed with the commits that moved it, so a
+# review reads the landing's test changes off one report rather than out of its
+# commits.
 #
 # Committer dates are pinned to the base's, so a rebuild from the same inputs
 # mints the same SHAs and CI does not judge a commit twice.
@@ -381,7 +383,7 @@ builds or tests it.")
   # What the tests take from the landing, by the commits that made it, which is
   # the part of the review a reader of `main` most needs named.
   echo
-  "$here/series-tests.sh" "$base" "$tip" --strict | sed 's/^/  /' || true
+  "$here/series-tests.sh" "$base" "$tip" | sed 's/^/  /' || true
   echo
 
   slug=$(git remote get-url "$canonical" | sed -E 's#^.*github\.com[:/]##; s#\.git$##')
@@ -599,12 +601,12 @@ fi
 # The tree check holds the landing to the series, so it cannot see a test the
 # series lost as well. This holds it to the base, `main` and any tests pinned
 # above it: every test the base runs, the landing runs, with no skip the base
-# does not make, an engine gate included.
+# does not make; only a test whose function upstream removed may go.
 echo
-if ! "$here/series-tests.sh" "$base" "$tip" --strict | sed 's/^/  /'; then
+if ! "$here/series-tests.sh" "$base" "$tip" | sed 's/^/  /'; then
   echo
   echo "The landing would stop tests its base runs. Restore each on $S, in the vendor"
-  echo "  commit that took it, or drop the gate, realign the rc strand, and rerun."
+  echo "  commit that took it, realign the rc strand, and rerun."
   echo "  Nothing was pushed."
   exit 1
 fi

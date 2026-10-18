@@ -151,26 +151,33 @@ a snapshot accepted blind is a behaviour change nobody decided;
 and a test weakened is a check `main` loses.
 `patch/` takes the next free number and never renumbers, and is written as the diff you would send to `igraph/igraph`.
 
-## A test the engine cannot pass yet is gated, never deleted or rewritten
+## A test follows its engine, commit by commit
 
-On the replay the engine is older than the one `main`'s tests may have been written against,
-so a red there can be a test asking for behaviour that has not arrived yet.
-Put `skip_if_engine_before("<version>", "<why>")` ([`tests/testthat/helper-skip.R`](/tests/testthat/helper-skip.R))
-on a line of its own at the top of each such `test_that()` body, only where an older engine cannot pass the test.
-The version is the `IGRAPH_VERSION` (in `src/vendor/igraph_version.h`) of the upstream commit that brings the behaviour back,
-`X.Y.Z` or `X.Y.Z-N-g<sha>`, read the same way by the helper and by [`scripts/series-tests.sh`](/scripts/series-tests.sh).
-Fold it into the offending commit like any repair.
+Every commit's tests are written for the engine that commit vendors,
+so the suite needs no check of the engine's version and nothing waits for a later commit to lift it
+([`adaptation/`](/handbook/operations/vendoring/adaptation/README.md)).
 
-Do not delete the file or the block, rewrite what it expects, or skip it with no version to end the skip:
-each travels with its vendor commit into every landing, and a later restore made as a commit of its own does not,
+- **A test the vendor commit breaks** is adapted in that commit, folded like any repair, by the fix order above.
+- **A test whose function upstream removed** goes in the vendor commit that removes the function,
+  its `test_that()` blocks and their entries in `_snaps/` alike.
+  Where the blocks stood, at the top level of the file, leave one comment: `# upstream igraph@<short-sha>: <what upstream removed>`.
+  Its SHA is the one the commit's subject names, and the `R-side fix` section says what went.
+  A file the removal empties keeps the comment and nothing else.
+  [`scripts/series-tests.sh`](/scripts/series-tests.sh) reports such a test as `removed`.
+  It counts the test as lost when the comment is missing, stands elsewhere in the file, or names another upstream commit.
+- **A test that only a later engine supports**, a new function's or a behaviour upstream has not brought yet,
+  is added in the vendor commit that brings that engine, never earlier behind a version check.
+
+Never delete a test, or skip one, for any other reason:
+the change travels with its vendor commit into every landing, and a later restore made as a commit of its own does not,
 because a landing replays vendor commits only.
 That is how a test left one of duckdb-r's forwards at a rewind while its base restored it,
 and reached the landing review (duckdb/duckdb-r#2899).
-Where the series already holds the commit at that version, take the gate out there in the same pass.
-A gate whose removal never comes is inert, and a landing asks for it then.
 
-`series-check.sh` prints a `TESTS` line for a series whose vendor commit stopped a test `main` runs, or left an expired gate.
-That is this stage's work as much as a red is: restore each in the commit that took it, gating it where that engine cannot pass it.
+`series-check.sh` prints a `TESTS` line for a series whose vendor commit stopped a test `main` runs, other than by a removal.
+That is this stage's work as much as a red is.
+Restore each in the commit that took it, adapted to that commit's engine.
+Where upstream removed the test's function, leave the comment that makes the loss a removal instead.
 
 ## A transiently broken upstream commit
 
@@ -205,7 +212,8 @@ a commit on top of the failing one carrying the new `tests/testthat/_snaps/*.md`
 Fetch, **review the diff carefully**, and fold.
 The diff must read as the engine change the vendor commit describes;
 accepting it is accepting new behaviour as correct, so it deserves the same scrutiny as a code review.
-A **deleted** snapshot file is a bad sign: a snapshot only disappears when its test stopped running, which is its own failure.
+A **deleted** snapshot file is a bad sign: a snapshot only disappears when its test stopped running, which is its own failure,
+unless the commit removed every test that wrote it, with the function upstream removed.
 If the diff is surprising in any way, do not fold blind:
 build locally, run the tests, `testthat::snapshot_accept()`, and run them again.
 The branches are per run; read the one for the SHA being repaired.

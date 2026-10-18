@@ -27,7 +27,18 @@ How the R side follows a change in the C library, so that every vendor commit st
 and the vendor commit's message gains an `R-side fix` section saying what was adapted;
 the generated files need no mention.
 
-**A series never stops a test `main` runs.**
-Where an older C library cannot pass a test, the test gets `skip_if_engine_before("<version>", "<why>")` from `tests/testthat/helper-skip.R`,
-naming the version that brings the behaviour back, instead of being deleted, rewritten or skipped without end;
-[`scripts/series-tests.sh`](/scripts/series-tests.sh) reads what a tree takes from `main`'s tests.
+**Every commit's tests are written for its own engine**, with no check of the engine's version inside a test:
+
+* A test a vendor commit breaks is adapted in that commit.
+* A test whose function upstream removed goes in the vendor commit that removes the function, with its snapshot entries.
+  The comment the rules above ask for stands where the test stood, at the top level of the file.
+  It names the upstream commit that vendor commit vendors: `# upstream igraph@<short-sha>: <what upstream removed>`.
+  A file the removal empties keeps the comment.
+* A test that only a later engine supports is added in the vendor commit that brings that engine.
+
+**A series stops no other test `main` runs**, because a landing would carry the loss to `main`
+([`series-loop/`](/handbook/operations/vendoring/series-loop/README.md)).
+[`scripts/series-tests.sh`](/scripts/series-tests.sh) reads what a tree takes from `main`'s tests, and tells a removal by its comment.
+The comment marks a removal rather than the commit message, for two reasons.
+It is in the tree, where a pick or a carry is read before it is a commit.
+And it names its place and its upstream commit, so it excuses no other loss in its file and none by another commit.
