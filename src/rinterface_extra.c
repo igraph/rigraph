@@ -2377,13 +2377,73 @@ void Rx_igraph_error(void) {
   Rf_error("%s", Rx_igraph_error_reason);
 }
 
+/* Signalling a warning runs R code -- calling handlers, a testthat or knitr
+ * capture, `options(warn = 1)` printing -- while the C function that raised it
+ * is still on the stack: its vectors are registered on the finally stack,
+ * and the attributes of a graph it is about to return are kept alive only by
+ * the preserve list. That R code may call igraph again, and the nested call
+ * would free the outer vectors (`R_igraph_finalizer()` calls
+ * IGRAPH_FINALLY_FREE()), drop the preserve list and overwrite a pending
+ * error. The frame below saves that state, opens a new finally stack level so
+ * that nested calls only ever free their own entries, and restores everything
+ * once the warning has been signalled, also when a handler jumps out. */
+typedef struct {
+  char message[sizeof(Rx_igraph_warning_reason)];
+  char error_reason[sizeof(Rx_igraph_error_reason)];
+  int errors_count;
+  bool in_r_check;
+  SEXP preserved;
+} Rx_igraph_warning_frame_t;
+
+/* HELPER: internal C; must use IGRAPH_CHECK */
+static SEXP Rx_igraph_warning_signal(void *data) {
+  Rx_igraph_warning_frame_t *frame = (Rx_igraph_warning_frame_t *) data;
+  Rf_warning("%s", frame->message);
+  return R_NilValue;
+}
+
+/* HELPER: internal C; must use IGRAPH_CHECK */
+static void Rx_igraph_warning_restore(void *data, Rboolean jump) {
+  IGRAPH_UNUSED(jump);
+  Rx_igraph_warning_frame_t *frame = (Rx_igraph_warning_frame_t *) data;
+
+  /* A nested call that left without its finalizer leaves entries
+   * at this level; they belong to nobody else. */
+  IGRAPH_FINALLY_FREE();
+  IGRAPH_FINALLY_EXIT();
+
+  if (Rx_igraph_attribute_preserve_list) {
+    SETCDR(Rx_igraph_attribute_preserve_list, frame->preserved);
+  }
+  memcpy(Rx_igraph_error_reason, frame->error_reason, sizeof(Rx_igraph_error_reason));
+  Rx_igraph_errors_count = frame->errors_count;
+  Rx_igraph_in_r_check = frame->in_r_check;
+}
+
 /* HELPER: internal C; must use IGRAPH_CHECK */
 void Rx_igraph_warning(void) {
-  if (Rx_igraph_warnings_count > 0) {
-    Rx_igraph_warnings_count = 0;
-
-    Rf_warning("%s", Rx_igraph_warning_reason);
+  if (Rx_igraph_warnings_count == 0) {
+    return;
   }
+  Rx_igraph_warnings_count = 0;
+
+  Rx_igraph_warning_frame_t frame;
+  memcpy(frame.message, Rx_igraph_warning_reason, sizeof(frame.message));
+  memcpy(frame.error_reason, Rx_igraph_error_reason, sizeof(frame.error_reason));
+  frame.errors_count = Rx_igraph_errors_count;
+  frame.in_r_check = Rx_igraph_in_r_check;
+  frame.preserved = Rx_igraph_attribute_preserve_list ?
+    CDR(Rx_igraph_attribute_preserve_list) : R_NilValue;
+  PROTECT(frame.preserved);
+
+  SEXP cont = PROTECT(R_MakeUnwindCont());
+  IGRAPH_FINALLY_ENTER();
+  R_UnwindProtect(
+    Rx_igraph_warning_signal, &frame,
+    Rx_igraph_warning_restore, &frame,
+    cont
+  );
+  UNPROTECT(2);
 }
 
 /* HELPER: internal C; must use IGRAPH_CHECK */
