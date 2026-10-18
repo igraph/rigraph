@@ -30,9 +30,9 @@ count_max_cliques(graph, min = NULL, max = NULL, ..., subset = NULL)
 
 clique_num(graph)
 
-largest_weighted_cliques(graph, ..., vertex.weights = NULL)
+largest_weighted_cliques(graph, ..., vertex_weights = NULL)
 
-weighted_clique_num(graph, ..., vertex.weights = NULL)
+weighted_clique_num(graph, ..., vertex_weights = NULL)
 
 clique_size_counts(graph, ..., min = 0, max = 0, maximal = FALSE)
 
@@ -73,7 +73,7 @@ it exists, then it will be overwritten.) Each clique will be a separate line
 in the file, given with the numeric IDs of its vertices, separated by
 whitespace.}
 
-\item{vertex.weights}{Vertex weight vector. If the graph has a \code{weight}
+\item{vertex_weights}{Vertex weight vector. If the graph has a \code{weight}
 vertex attribute, then this is used by default. If the graph does not have a
 \code{weight} vertex attribute and this argument is \code{NULL}, then every
 vertex is assumed to have a weight of 1. Note that the current implementation
