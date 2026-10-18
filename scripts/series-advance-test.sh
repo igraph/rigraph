@@ -8,7 +8,7 @@
 # including glue, which is why the carry is a difference and not an allow-list.
 # A forward series inherits only the first when its buffer is replayed out of
 # `-build`, and both when it is replayed out of `-dev`
-# (scripts/series-forward-build.sh). Twenty-one things are checked.
+# (scripts/series-forward-build.sh). Twenty-two things are checked.
 #
 #   1. A buffered commit whose base `-dev` twin folded a test-side fix is minted
 #      with that fix in the same commit -- not stacked above it -- carrying the
@@ -71,6 +71,11 @@
 #      has a twin for the plain commit only.
 #  21. The chunk is the series' own: the `chunk` `main`'s scripts/series.yaml
 #      declares bounds what one run appends, and `--chunk` overrides it.
+#  22. `--no-push-dev` moves green, its canonical copy and `-build-base` as
+#      always, and mints the extension into `refs/series/<S>-dev-next` without
+#      writing `-dev`; the push it prints publishes it. A replay stopped under
+#      the option keeps it through a `--continue` that leaves it off, and
+#      `--abort` drops the unpushed ref.
 #
 # Usage:
 #   scripts/series-advance-test.sh
@@ -410,9 +415,34 @@ git branch late-fwd-dev base-seed
 git branch late-fwd-green base-seed
 git branch late-fwd-build-base base-seed
 
+# --- an extension minted for folding, not pushed (claim 22) -----------------
+# `hold` has one commit in flight with a successful verdict, so stage 3 has a
+# green to move, mirror and match on the buffer, and two buffer commits above it
+# on `-dev`'s line: the plain ref move. `stay` is the replay: `-dev` carries a
+# repair the buffer's first commit conflicts with, so the run stops there.
+git checkout -q -b hold-dev base-seed
+bvendor dad1111 1.0.0.9000.1 v.c
+HOLD_OK=$(git rev-parse HEAD)
+git branch hold-green base-seed
+git checkout -q -b hold-build hold-dev
+bvendor dad2222 1.0.0.9000.2 w.c
+bvendor dad3333 1.0.0.9000.3 x.c
+git branch hold-build-base base-seed
+
+git checkout -q -b stay-dev base-seed
+echo 'foo <- function() 3' > R/foo.R
+git add -A
+git commit -qm 'fix: foo() returns 3, a repair -dev carries'
+git branch stay-green base-seed
+git checkout -q -b stay-build base-seed
+echo 'foo <- function() 4' > R/foo.R
+bvendor bee1111 1.0.0.9000.1 y.c
+bvendor bee2222 1.0.0.9000.2 z.c
+git branch stay-build-base base-seed
+
 # The store stub: stage 5 refuses over a `failure` and reads `missing` for
 # anything absent, which is what a freshly pushed commit looks like. The `red`
-# series is the one case that needs real records, so it gets two.
+# and `hold` series are the cases that need real records.
 git checkout -q --orphan rcc2
 git rm -rqf .
 rec() { # <sha> <state>
@@ -422,6 +452,7 @@ rec() { # <sha> <state>
 }
 rec "$RED_OK" success
 rec "$RED_BAD" failure
+rec "$HOLD_OK" success
 git add -A
 git commit -q -m 'chore: store stub'
 
@@ -453,7 +484,9 @@ git push -q origin main base-seed base-build base-dev base-green base-build-base
   loss-fwd-build loss-fwd-dev loss-fwd-green loss-fwd-build-base \
   kept-dev kept-fwd-build kept-fwd-dev kept-fwd-green kept-fwd-build-base \
   late-build late-dev late-green late-build-base \
-  late-fwd-build late-fwd-dev late-fwd-green late-fwd-build-base rcc2
+  late-fwd-build late-fwd-dev late-fwd-green late-fwd-build-base \
+  hold-build hold-dev hold-green hold-build-base \
+  stay-build stay-dev stay-green stay-build-base rcc2
 git fetch -q origin
 
 # A canonical remote, because `red` is the one series here whose green moves,
@@ -831,6 +864,59 @@ K=$(at kept-fwd kkk1111)
 hasnt "so it carries no provenance trailer" "$(git log -1 --format=%B "$K")" 'Carried from'
 is "the snapshot holds the fix and main's line both" \
   "$(git show "$K:tests/testthat/_snaps/sql.md" | tr '\n' '|')" 'snapshot one, corrected|main added a snapshot|'
+
+# --- claim 22: --no-push-dev mints the extension and leaves the push ----------
+echo
+echo "== --no-push-dev on the plain ref move"
+before=$(git rev-parse origin/hold-dev)
+out=$(run hold --no-push-dev)
+[ -z "${KEEP:-}" ] || echo "$out"
+git fetch -q origin
+has "the run completes" "$out" 'EXIT=0'
+is "green takes the commit CI proved" "$(git rev-parse origin/hold-green)" "$HOLD_OK"
+is "and the canonical copy takes it too" "$(git --git-dir="$CANON" rev-parse hold-green)" "$HOLD_OK"
+is "and -build-base is set to its match" "$(git rev-parse origin/hold-build-base)" "$HOLD_OK"
+is "-dev is not written" "$(git rev-parse origin/hold-dev)" "$before"
+is "the extension is minted into the local ref" \
+  "$(git rev-parse refs/series/hold-dev-next)" "$(git rev-parse origin/hold-build)"
+has "the run says it did not push" "$out" 'dev not pushed: refs/series/hold-dev-next'
+hasnt "and does not claim -dev moved" "$out" 'dev ->'
+push=$(sed -n 's/^  \(git push --force-with-lease=.*\)$/\1/p' <<<"$out")
+is "the push it prints leases the -dev the run read" \
+  "$push" "git push --force-with-lease=refs/heads/hold-dev:$before origin refs/series/hold-dev-next:refs/heads/hold-dev"
+read -r -a argv <<<"$push"
+[ ${#argv[@]} -eq 0 ] || "${argv[@]}" -q
+git fetch -q origin
+is "and publishes the extension" "$(git rev-parse origin/hold-dev)" "$(git rev-parse origin/hold-build)"
+has "after which the buffer is consumed" "$(run hold)" 'buffer empty'
+
+echo
+echo "== --no-push-dev through a stopped replay"
+before=$(git rev-parse origin/stay-dev)
+out=$(run stay --no-push-dev)
+has "stops on the conflicting pick" "$out" 'conflicted'
+is "the stop records the option" "$(awk '{print $5}' .git/series-advance-stay)" no-push-dev
+WT=$(awk '{print $1}' .git/series-advance-stay)
+echo 'foo <- function() 4' > "$WT/R/foo.R"
+git -C "$WT" add R/foo.R
+out=$(run stay --continue)
+[ -z "${KEEP:-}" ] || echo "$out"
+has "a --continue without the option finishes the chunk" "$out" 'EXIT=0'
+has "and still does not push" "$out" 'dev not pushed: refs/series/stay-dev-next'
+git fetch -q origin
+is "-dev is not written" "$(git rev-parse origin/stay-dev)" "$before"
+is "both buffer commits are minted onto -dev's repair" \
+  "$(git rev-list --count origin/stay-dev..refs/series/stay-dev-next)" 2
+is "with the counter risen once per vendor commit" \
+  "$(git show refs/series/stay-dev-next:DESCRIPTION | sed -n 's/^Version: //p')" 1.0.0.9000.2
+is "no state file survives" "$([ -f .git/series-advance-stay ] && echo yes || echo no)" no
+is "the kept worktree is gone" "$([ -d "$WT" ] && echo yes || echo no)" no
+out=$(run stay --abort)
+has "--abort drops the unpushed extension" "$out" 'unpushed extension'
+is "the local ref is gone" \
+  "$(git rev-parse -q --verify refs/series/stay-dev-next || echo gone)" gone
+git fetch -q origin
+is "and -dev is still where it was" "$(git rev-parse origin/stay-dev)" "$before"
 
 echo
 echo "$pass passed, $fail failed"

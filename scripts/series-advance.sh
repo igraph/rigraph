@@ -65,6 +65,18 @@
 # stage 2's mining step anchor on: a note written without it lands in the commit
 # and is read by nothing, which is the one outcome the option exists to prevent.
 #
+# **`--no-push-dev` mints the extension and leaves its push to the operator.**
+# The push that publishes `-dev` starts an each-rcc run whenever the branch's
+# concurrency group is idle, so when R-side fixes or a doc sweep wait to be
+# folded into the commits this stage mints, CI judges commits known to be broken
+# and the run has to be cancelled. With the option, green, its mirror and
+# `-build-base` move as always, and the extension is minted exactly as it would
+# be, but it is written to the local ref `refs/series/<S>-dev-next` rather than
+# pushed. The stage prints the push that publishes it, under a lease on the
+# `-dev` this run read, for the operator to run once the folds are in. A stopped
+# replay keeps the option, so a `--continue` without it still pushes nothing,
+# and `--abort` drops the local ref as well as a stopped replay.
+#
 # **`--canonical` mirrors the green into the repository r-universe reads.**
 # The series refs live in the fork, but the base flavors are published from the
 # canonical repository, so `<S>-green` has to exist in both and nothing else
@@ -91,9 +103,9 @@
 # a series adapts to a new engine, because a fold low in `-dev` rewrites
 # everything above it (.claude/skills/series-loop/references/5-extend.md).
 #
-# Usage: series-advance.sh <series> [--chunk <n>] [--dev-note <file>]
-#        series-advance.sh <series> --continue [--dev-note <file>]
-#        series-advance.sh <series> --abort          # discard a stopped replay
+# Usage: series-advance.sh <series> [--chunk <n>] [--dev-note <file>] [--no-push-dev]
+#        series-advance.sh <series> --continue [--dev-note <file>] [--no-push-dev]
+#        series-advance.sh <series> --abort          # discard a stopped replay or -dev-next
 #
 # --remote is spelled the same in every scripts/series-*.sh, and the chunk size
 # is an option like vendor-one.sh's --commits rather than a bare number beside
@@ -106,13 +118,14 @@ set -euo pipefail
 # shellcheck source=vendor-lib.sh
 . "$(dirname "$0")/vendor-lib.sh"
 
-usage='usage: series-advance.sh <series> [--chunk <n>] [--remote <name>] [--canonical <name>] [--dev-note <file>]
-       series-advance.sh <series> --continue [--dev-note <file>]
+usage='usage: series-advance.sh <series> [--chunk <n>] [--remote <name>] [--canonical <name>] [--dev-note <file>] [--no-push-dev]
+       series-advance.sh <series> --continue [--dev-note <file>] [--no-push-dev]
        series-advance.sh <series> --abort'
 argerr() { echo "$usage" >&2; exit 2; }
 CONTINUE=
 ABORT=
 DEV_NOTE=
+NO_PUSH_DEV=
 # Empty until --chunk gives one; the series' declared chunk is read below.
 chunk=
 remote=${SERIES_REMOTE:-origin}
@@ -128,6 +141,7 @@ while [ $# -gt 0 ]; do
     --remote) [ $# -ge 2 ] || argerr; remote=$2; shift 2 ;;
     --canonical) [ $# -ge 2 ] || argerr; canonical=$2; shift 2 ;;
     --dev-note) [ $# -ge 2 ] || argerr; DEV_NOTE=$2; shift 2 ;;
+    --no-push-dev) NO_PUSH_DEV=1; shift ;;
     -h | --help) echo "$usage"; exit 0 ;;
     -*) argerr ;;
     *) args+=("$1"); shift ;;
@@ -143,20 +157,37 @@ fi
 rcc=${RCC_BRANCH:-rcc2}
 
 # A stopped stage 5 lives here: the worktree it kept, the buffer commit whose
-# replay stopped, its base twin, and which half stopped -- `pick` or `carry`.
+# replay stopped, its base twin, which half stopped (`pick` or `carry`), and a
+# fifth field, `no-push-dev`, when the run is not to push `-dev`.
 # Per series, so one stopped series never blocks the firing's other ones.
 STATE="$(git rev-parse --git-dir)/series-advance-${S//\//-}"
+# Where --no-push-dev leaves the extension: a local ref, which every worktree
+# of the clone sees, with a reflog, so a rerun that replaces it loses nothing.
+NEXT_REF="refs/series/$S-dev-next"
 
 if [ -n "$ABORT" ]; then
+  aborted=
   if [ -f "$STATE" ]; then
     read -r awt _ _ _ < "$STATE"
     [ -d "$awt" ] && git worktree remove --force "$awt"
     rm -f "$STATE"
     echo "$S: stopped replay discarded; no ref was written"
-  else
-    echo "$S: nothing to abort"
+    aborted=1
   fi
+  if git rev-parse -q --verify "$NEXT_REF" >/dev/null; then
+    echo "$S: unpushed extension $(git rev-parse --short "$NEXT_REF") discarded from $NEXT_REF"
+    git update-ref -d "$NEXT_REF"
+    aborted=1
+  fi
+  [ -n "$aborted" ] || echo "$S: nothing to abort"
   exit 0
+fi
+
+# A stopped replay keeps the --no-push-dev it started with, so a --continue
+# that leaves the option off still pushes nothing.
+if [ -n "$CONTINUE" ] && [ -f "$STATE" ]; then
+  read -r _ _ _ _ smode < "$STATE"
+  [ "$smode" != no-push-dev ] || NO_PUSH_DEV=1
 fi
 
 # Every buffer commit stage 5 replays moves `Version:`, so the `ours-version`
@@ -640,6 +671,16 @@ n=$((ahead < chunk ? ahead : chunk))
 # remote-tracking ref this resolves -- read it once, here.
 dev_before=$(git rev-parse "$dev")
 
+# The one write stage 5 makes: `-dev` itself, or under --no-push-dev the local
+# ref the operator pushes once the folds are in.
+publish_dev() { # <tip>
+  if [ -n "$NO_PUSH_DEV" ]; then
+    git update-ref --create-reflog -m "series-advance.sh $S --no-push-dev" "$NEXT_REF" "$1"
+  else
+    git push "$remote" "$1:refs/heads/$S-dev"
+  fi
+}
+
 # Which commits in this chunk have a test-side fix waiting on the base series.
 # Computed before anything is written, because it decides the route: a plain ref
 # move cannot carry content, so one carry in the chunk makes the whole chunk a
@@ -674,7 +715,7 @@ fi
 if [ "$anchor" = "$(git rev-parse "$dev")" ] && [ "$carries" -eq 0 ] &&
    [ -z "$CONTINUE" ] && [ -z "$DEV_NOTE" ]; then
   next=$(git rev-list --reverse "$anchor..$build" | sed -n "${n}p")
-  git push "$remote" "$next:refs/heads/$S-dev"
+  publish_dev "$next"
 else
   # Replay onto the repaired tip in a throwaway worktree; a conflict means the
   # repair and the buffer touch the same paths — judgement, not mechanics.
@@ -689,7 +730,7 @@ else
   # conflict, and whoever resolves it needs somewhere to do that. Nothing has
   # been pushed at this point, so a stop costs a rerun and no ref motion.
   stop() { # <worktree> <buffer commit> <twin or -> <pick|carry>
-    printf '%s %s %s %s\n' "$1" "$2" "$3" "$4" > "$STATE"
+    printf '%s %s %s %s%s\n' "$1" "$2" "$3" "$4" "${NO_PUSH_DEV:+ no-push-dev}" > "$STATE"
     echo >&2
     if [ "$4" = carry ]; then
       echo "Error: $S — carrying the test-side fix from $(git rev-parse --short "$3") into" >&2
@@ -807,7 +848,7 @@ else
   }
 
   if [ -n "$CONTINUE" ]; then
-    read -r wt rc rd rstage < "$STATE"
+    read -r wt rc rd rstage _ < "$STATE"
     [ -d "$wt" ] || { echo "Error: the kept worktree $wt is gone — rerun with --abort" >&2; exit 1; }
     [ -z "$(git -C "$wt" diff --name-only --diff-filter=U)" ] ||
       stop "$wt" "$rc" "$rd" "$rstage"
@@ -924,6 +965,15 @@ else
   fi
   git worktree remove --force "$wt"
   rm -f "$STATE"
-  git push "$remote" "$next:refs/heads/$S-dev"
+  publish_dev "$next"
 fi
-echo "dev -> $(git rev-parse --short "$next") (+$(git rev-list --count "$dev_before..$next"))"
+added=$(git rev-list --count "$dev_before..$next")
+if [ -n "$NO_PUSH_DEV" ]; then
+  # The lease is on the -dev this run read and minted on: a -dev that moved
+  # since was written by someone else, and the push refuses rather than drop it.
+  echo "dev not pushed: $NEXT_REF -> $(git rev-parse --short "$next") (+$added), $S-dev stays at $(git rev-parse --short "$dev_before")"
+  echo "  fold what the new commits need, move the ref to the folded tip (git update-ref $NEXT_REF <tip>), then:"
+  echo "  git push --force-with-lease=refs/heads/$S-dev:$dev_before $remote $NEXT_REF:refs/heads/$S-dev"
+else
+  echo "dev -> $(git rev-parse --short "$next") (+$added)"
+fi

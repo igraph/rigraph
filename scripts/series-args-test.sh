@@ -164,6 +164,13 @@ is "series-port.sh --dev-note without --apply" \
   "$(rc series-port.sh s --dev-note /dev/null)" 2
 
 echo
+echo "== --no-push-dev is a flag of series-advance.sh"
+isnt "series-advance.sh --no-push-dev is not a usage error" \
+  "$(rc series-advance.sh s --no-push-dev)" 2
+is "series-advance.sh offers it" \
+  "$(out series-advance.sh --help | grep -c -- '--no-push-dev')" 1
+
+echo
 echo "== a missing series is a usage error too"
 for s in series-advance.sh series-land.sh series-patch-sync.sh series-port.sh; do
   is "$s with no series" "$(rc "$s")" 2

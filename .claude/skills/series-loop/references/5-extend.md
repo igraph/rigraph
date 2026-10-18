@@ -83,6 +83,10 @@ The push triggers one `each-rcc` run for the commits it added,
 and every verdict that run reaches is readable from it as soon as the leg has written it.
 The leg's own publish fills the store behind it.
 
+**Mint without pushing when CI should judge the chunk folded, not as minted.**
+When R-side fixes or a doc sweep wait for the commits a chunk adds, `--no-push-dev` leaves it in the local ref `refs/series/main-dev-next`.
+The script prints the leased push to run once the folds are in, and its header says how `--continue` and `--abort` treat the option.
+
 **Realign the rc strand, last.**
 Once `main-rc-dev` exists, `scripts/series-rc.sh main --push` follows every write this firing made to `main-dev`,
 here or in stages 2 and 4,
