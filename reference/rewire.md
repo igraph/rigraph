@@ -37,7 +37,7 @@ g %>%
   plot(layout = layout_in_circle)
 
 print_all(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
-#> ── <igraph> Ring graph ────────────────────────────────────────────── e09a889 ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 41a04db ──
 #> ℹ undirected
 #> ℹ 10 vertices · 10 edges
 #> 
