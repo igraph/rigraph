@@ -7,6 +7,9 @@ The code generator that writes the R/C interface: `src/rinterface.c` and `R/aaa-
 the C library's own `src/vendor/cigraph/interfaces/functions.yaml` and `types.yaml`,
 together with this package's `tools/stimulus/functions-R.yaml`, `types-RC.yaml` and `types-RR.yaml`.
 Stimulus writes one `.build/aaa-auto.R`, which `tools/split-aaa-auto.R` splits into the per-category `R/aaa-*.R` files that `tools/aaa-categories.yaml` names.
+A generated function without an entry there stops the split, so a function a newer C core adds needs its category first.
+Entries for functions the vendored core does not generate yet are ignored, so they can go to `main` ahead of the core that adds them.
+`tools/rebuild-cats.R` holds the placements and rewrites the YAML.
 A change to the interface goes to those YAML files, or to a `patch/` entry when the C library's own definition is wrong
 ([`operations/vendoring/adaptation/`](/handbook/operations/vendoring/adaptation/README.md)).
 

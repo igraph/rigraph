@@ -163,9 +163,10 @@ message("parsed ", length(impls), " _impl wrappers from source")
 
 # ---- map each impl to (category, subcategory); validate no gaps ---------
 
-# Functions not listed in aaa-categories.yaml are emitted into
-# R/aaa-uncategorized.R with a warning, so a new wrapper landing upstream
-# never breaks the build. The warning lists exactly what needs a home.
+# Every impl needs a category in aaa-categories.yaml: a function without one
+# stops the build rather than landing in R/aaa-uncategorized.R unnoticed. The
+# error lists exactly what needs a home. Listing a function under a top-level
+# `uncategorized:` key is the explicit opt-out, and writes it to that file.
 unassigned <- character()
 for (i in seq_along(impls)) {
   lookup <- cat_lookup[[impls[[i]]$c_function]]
@@ -174,18 +175,16 @@ for (i in seq_along(impls)) {
       unassigned,
       paste0(impls[[i]]$impl_name, " -> ", impls[[i]]$c_function)
     )
-    impls[[i]]$category <- "uncategorized"
-    impls[[i]]$subcategory <- NA_character_
   } else {
     impls[[i]]$category <- lookup$category
     impls[[i]]$subcategory <- lookup$subcategory
   }
 }
 if (length(unassigned)) {
-  warning(
+  stop(
     "impls without a category in ",
     CATS,
-    " — written to R/aaa-uncategorized.R:\n  ",
+    ":\n  ",
     paste(unassigned, collapse = "\n  "),
     "\nAdd placements in tools/rebuild-cats.R and rerun it to clear this.",
     call. = FALSE

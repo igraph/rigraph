@@ -7,6 +7,7 @@ basic-igraph:
     - igraph_delete_edges
     - igraph_delete_vertices
     - igraph_delete_vertices_idx
+    - igraph_delete_vertices_map
   basic-query-operations:
     - igraph_degree
     - igraph_ecount
@@ -32,10 +33,12 @@ bipartite:
   bipartite-adjacency-matrices:
     - igraph_biadjacency
     - igraph_get_biadjacency
+    - igraph_weighted_biadjacency
   create-two-mode-networks:
     - igraph_bipartite_game
     - igraph_bipartite_game_gnm
     - igraph_bipartite_game_gnp
+    - igraph_bipartite_iea_game
     - igraph_create_bipartite
     - igraph_full_bipartite
   other-operations-on-bipartite-graphs:
@@ -97,6 +100,7 @@ community:
   community-structure-based-on-the-optimization-of-modularity:
     - igraph_community_fastgreedy
     - igraph_community_leiden
+    - igraph_community_leiden_simple
     - igraph_community_multilevel
   edge-betweenness-based-community-detection:
     - igraph_community_eb_get_merges
@@ -218,6 +222,7 @@ games:
     - igraph_erdos_renyi_game_gnp
     - igraph_hsbm_game
     - igraph_hsbm_list_game
+    - igraph_iea_game
     - igraph_preference_game
     - igraph_sbm_game
   growing-random-games:
@@ -239,6 +244,9 @@ games:
     - igraph_recent_degree_aging_game
     - igraph_recent_degree_game
   random-vectors:
+    - igraph_rng_sample_dirichlet
+    - igraph_rng_sample_sphere_surface
+    - igraph_rng_sample_sphere_volume
     - igraph_sample_dirichlet
     - igraph_sample_sphere_surface
     - igraph_sample_sphere_volume
@@ -273,7 +281,9 @@ generators:
     - igraph_circulant
     - igraph_cycle_graph
     - igraph_extended_chordal_ring
+    - igraph_hamming
     - igraph_hypercube
+    - igraph_lcf
     - igraph_lcf_vector
     - igraph_path_graph
     - igraph_ring
@@ -321,8 +331,11 @@ isomorphism:
     - igraph_isoclass_subgraph
   isomorphism-simple-interface:
     - igraph_automorphism_group
+    - igraph_automorphism_group_bliss
     - igraph_canonical_permutation
+    - igraph_canonical_permutation_bliss
     - igraph_count_automorphisms
+    - igraph_count_automorphisms_bliss
     - igraph_isomorphic
     - igraph_subisomorphic
   isomorphism-utility-functions:
@@ -379,6 +392,7 @@ motifs:
   finding-triangles:
     - igraph_count_adjacent_triangles
     - igraph_count_triangles
+    - igraph_is_triangle_free
     - igraph_list_triangles
   graph-motifs:
     - igraph_motifs_randesu
@@ -463,6 +477,16 @@ separators:
 spatial:
   nongraph-spatial:
     - igraph_convex_hull_2d
+  proximity-graphs:
+    - igraph_beta_weighted_gabriel_graph
+    - igraph_circle_beta_skeleton
+    - igraph_delaunay_graph
+    - igraph_gabriel_graph
+    - igraph_lune_beta_skeleton
+    - igraph_nearest_neighbor_graph
+    - igraph_relative_neighborhood_graph
+  edge-lengths:
+    - igraph_spatial_edge_lengths
 
 structural:
   basic-properties:
