@@ -3,13 +3,13 @@ c\BeginDoc
 c
 c\Name: igraphdsgets
 c
-c\Description: 
+c\Description:
 c  Given the eigenvalues of the symmetric tridiagonal matrix H,
-c  computes the NP shifts AMU that are zeros of the polynomial of 
-c  degree NP which filters out components of the unwanted eigenvectors 
+c  computes the NP shifts AMU that are zeros of the polynomial of
+c  degree NP which filters out components of the unwanted eigenvectors
 c  corresponding to the AMU's based on some given criteria.
 c
-c  NOTE: This is called even in the case of user specified shifts in 
+c  NOTE: This is called even in the case of user specified shifts in
 c  order to sort the eigenvalues, and error bounds of H for later use.
 c
 c\Usage:
@@ -39,8 +39,8 @@ c          Number of implicit shifts to be computed.
 c
 c  RITZ    Double precision array of length KEV+NP.  (INPUT/OUTPUT)
 c          On INPUT, RITZ contains the eigenvalues of H.
-c          On OUTPUT, RITZ are sorted so that the unwanted eigenvalues 
-c          are in the first NP locations and the wanted part is in 
+c          On OUTPUT, RITZ are sorted so that the unwanted eigenvalues
+c          are in the first NP locations and the wanted part is in
 c          the last KEV locations.  When exact shifts are selected, the
 c          unwanted part corresponds to the shifts to be applied.
 c
@@ -49,7 +49,7 @@ c          Error bounds corresponding to the ordering in RITZ.
 c
 c  SHIFTS  Double precision array of length NP.  (INPUT/OUTPUT)
 c          On INPUT:  contains the user specified shifts if ISHIFT = 0.
-c          On OUTPUT: contains the shifts sorted into decreasing order 
+c          On OUTPUT: contains the shifts sorted into decreasing order
 c          of magnitude with respect to the Ritz estimates contained in
 c          BOUNDS. If ISHIFT = 0, SHIFTS is not modified on exit.
 c
@@ -65,7 +65,7 @@ c
 c\Routines called:
 c     igraphdsortr  ARPACK utility sorting routine.
 c     igraphivout   ARPACK utility routine that prints integers.
-c     igraphsecond  ARPACK utility routine for timing.
+c     igrapharscnd  ARPACK utility routine for timing.
 c     igraphdvout   ARPACK utility routine that prints vectors.
 c     dcopy   Level 1 BLAS that copies one vector to another.
 c     dswap   Level 1 BLAS that swaps the contents of two vectors.
@@ -75,13 +75,13 @@ c     Danny Sorensen               Phuong Vu
 c     Richard Lehoucq              CRPC / Rice University
 c     Dept. of Computational &     Houston, Texas
 c     Applied Mathematics
-c     Rice University           
-c     Houston, Texas            
+c     Rice University
+c     Houston, Texas
 c
 c\Revision history:
 c     xx/xx/93: Version ' 2.1'
 c
-c\SCCS Information: @(#) 
+c\SCCS Information: @(#)
 c FILE: sgets.F   SID: 2.4   DATE OF SID: 4/19/96   RELEASE: 2
 c
 c\Remarks
@@ -91,7 +91,7 @@ c
 c-----------------------------------------------------------------------
 c
       subroutine igraphdsgets ( ishift, which, kev, np, ritz, bounds, 
-     &     shifts )
+     &                          shifts )
 c
 c     %----------------------------------------------------%
 c     | Include files for debugging and timing information |
@@ -104,7 +104,7 @@ c     %------------------%
 c     | Scalar Arguments |
 c     %------------------%
 c
-      character  which*2
+      character*2 which
       integer    ishift, kev, np
 c
 c     %-----------------%
@@ -132,7 +132,7 @@ c     %----------------------%
 c     | External Subroutines |
 c     %----------------------%
 c
-      external   dswap, dcopy, igraphdsortr, igraphsecond
+      external   dswap, dcopy, igraphdsortr, igrapharscnd
 c
 c     %---------------------%
 c     | Intrinsic Functions |
@@ -143,15 +143,15 @@ c
 c     %-----------------------%
 c     | Executable Statements |
 c     %-----------------------%
-c 
+c
 c     %-------------------------------%
 c     | Initialize timing statistics  |
 c     | & message level for debugging |
 c     %-------------------------------%
 c
-      call igraphsecond (t0)
+      call igrapharscnd (t0)
       msglvl = msgets
-c 
+c
       if (which .eq. 'BE') then
 c
 c        %-----------------------------------------------------%
@@ -164,11 +164,11 @@ c        | overlapping locations.                              |
 c        %-----------------------------------------------------%
 c
          call igraphdsortr ('LA', .true., kev+np, ritz, bounds)
-         kevd2 = kev / 2 
+         kevd2 = kev / 2
          if ( kev .gt. 1 ) then
-            call dswap ( min(kevd2,np), ritz, 1, 
+            call dswap ( min(kevd2,np), ritz, 1,
      &                   ritz( max(kevd2,np)+1 ), 1)
-            call dswap ( min(kevd2,np), bounds, 1, 
+            call dswap ( min(kevd2,np), bounds, 1,
      &                   bounds( max(kevd2,np)+1 ), 1)
          end if
 c
@@ -186,7 +186,7 @@ c
       end if
 c
       if (ishift .eq. 1 .and. np .gt. 0) then
-c     
+c
 c        %-------------------------------------------------------%
 c        | Sort the unwanted Ritz values used as shifts so that  |
 c        | the ones with largest Ritz estimates are first.       |
@@ -194,23 +194,23 @@ c        | This will tend to minimize the effects of the         |
 c        | forward instability of the iteration when the shifts  |
 c        | are applied in subroutine igraphdsapps.                     |
 c        %-------------------------------------------------------%
-c     
+c
          call igraphdsortr ('SM', .true., np, bounds, ritz)
          call dcopy (np, ritz, 1, shifts, 1)
       end if
-c 
-      call igraphsecond (t1)
+c
+      call igrapharscnd (t1)
       tsgets = tsgets + (t1 - t0)
 c
       if (msglvl .gt. 0) then
-         call igraphivout (logfil, 1, kev, ndigit, '_sgets: KEV is')
-         call igraphivout (logfil, 1, np, ndigit, '_sgets: NP is')
+         call igraphivout (logfil, 1, [kev], ndigit, '_sgets: KEV is')
+         call igraphivout (logfil, 1, [np], ndigit, '_sgets: NP is')
          call igraphdvout (logfil, kev+np, ritz, ndigit,
      &        '_sgets: Eigenvalues of current H matrix')
-         call igraphdvout (logfil, kev+np, bounds, ndigit, 
+         call igraphdvout (logfil, kev+np, bounds, ndigit,
      &        '_sgets: Associated Ritz estimates')
       end if
-c 
+c
       return
 c
 c     %---------------%
