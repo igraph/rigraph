@@ -7,9 +7,9 @@
 # scripts/series-config.sh holds most of it.
 source: duckdb/duckdb-r
 url: https://github.com/duckdb/duckdb-r
-commit: b38770308ea852b440a9a7a2cc4568d34a45249e
-source-date: 2026-10-15
-checked: 2026-10-15
+commit: ea7a655f8f7ff1bf5de2512167984be4d62ea486
+source-date: 2026-10-16
+checked: 2026-10-17
 ported:
   - path: scripts/vendor-one.sh
     blob: cd9c1cb9ba180e63d2297953c1f3ff90525c86ac
@@ -28,7 +28,7 @@ ported:
   - path: scripts/series-vendor.sh
     blob: 6c6997e6973375c24e9f1e6099ef35c3c08e8f43
   - path: scripts/series-check.sh
-    blob: fff8924780a0c0a1c43139b94ebc328bc11398da
+    blob: e03c9f9f9eaa55a4f58791a025d443abb142664c
   - path: scripts/series-advance.sh
     blob: 3c1ce26236f8c7ecee44e03d1a75cff28d0b1ced
   - path: scripts/series-port.sh
@@ -56,7 +56,7 @@ ported:
   - path: scripts/each-partition.py
     blob: 3dc7782e5f7ec1272b589935b0c8f1c0548c61f4
   - path: scripts/each-shard.sh
-    blob: 3fcdf642d5db8b26225b7b5738e78d3cfc5e7de2
+    blob: 10ebf8e173d61a23eb5860474a6384b8045afb20
   - path: scripts/each-cost.py
     blob: e9e63ea114d3bdc67098c7f186ff367d8436867d
   - path: scripts/rcc-one.sh

@@ -72,6 +72,8 @@ and packs contiguous runs of commits into shards under a build-time budget ([`sc
 `build` is one job per shard ([`scripts/each-shard.sh`](/scripts/each-shard.sh)):
 it installs R and the dependencies once, then resets the workspace and runs the gates for each commit, oldest first,
 and stops at its own deadline, deferring the rest to the next run.
+A commit cut short by the deadline is deferred too, but the leg's first had the whole budget, so its kill is recorded as a failure.
+[`scripts/each-shard-test.sh`](/scripts/each-shard-test.sh) checks both, offline and against stubbed gates.
 
 **Every commit weighs the same.**
 duckdb-r weighs a commit by how many objects of its unity build the change invalidates;

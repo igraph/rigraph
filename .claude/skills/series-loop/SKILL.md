@@ -238,7 +238,7 @@ Every commit in `main-green..main-dev` is decided by an `each-rcc` leg, and that
   | `Changes detected in workflow_dispatch build` | style or roxygen drift | `air format .`, `devtools::document()`, fold at the offending commit |
   | the record's failed stage is `regen` | the generated R/C interface or cpp11 registration does not reproduce | regenerate, fixing `tools/stimulus/` where needed, and fold |
   | `Error: R CMD check found WARNINGs` / `ERRORs`, with `❯ checking …` headers naming the checks | `R CMD check --as-cran` is unhappy with the tree, or with the environment CI built it in | read the named checks; fix at the offending commit, or on `main` when the cause is the job's own setup |
-  | killed at the shard budget, or a stage "exceeded its … budget" | the gate did not finish | repair; a rerun buys the same kill |
+  | killed at the shard budget as its leg's first commit (a later one is deferred, with no record), or a stage "exceeded its … budget" | the gate did not finish | repair; a rerun buys the same kill |
   | a gate reached out and was refused (`cannot open URL`, `SSL connect error`, a refused or reset connection) while the tests passed | infrastructure, not the tree | rerun the commit: `retry-main-dev` |
   | the record names another failed stage (`"failed_stages":["install"]`) and no rule above matched | the stage failed on its merits, most often an `install` the glue or a link stopped | fix at the offending commit; never a rerun |
   | none of the above, no test phase, and no failed stage in the record | cancelled or infrastructure | rerun the commit: `retry-main-dev` |
