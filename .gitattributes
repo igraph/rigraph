@@ -4,3 +4,7 @@
 
 # Force the following filetypes to have unix eols, so Windows does not break them
 configure.ac text eol=lf
+
+# The two version counters merge component by component (scripts/merge-version.sh,
+# registered by scripts/setup-git.sh).
+DESCRIPTION merge=ours-version
