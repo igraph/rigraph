@@ -96,7 +96,7 @@ g2 <- contract(g, rep(1:5, each = 2),
 ## graph and edge attributes are kept, vertex attributes are
 ## combined using the 'toString' function.
 print(g2, g = TRUE, v = TRUE, e = TRUE)
-#> ── <igraph> Ring ──────────────────────────────────────────────────── 14f9b40 ──
+#> ── <igraph> Ring ──────────────────────────────────────────────────── 35c34ab ──
 #> ℹ undirected · named · weighted
 #> ℹ 5 vertices · 10 edges
 #> 

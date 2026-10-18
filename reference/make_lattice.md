@@ -101,7 +101,7 @@ Other deterministic constructors:
 
 ``` r
 make_lattice(c(5, 5, 5))
-#> ── <igraph> Lattice graph ─────────────────────────────────────────── 30021bf ──
+#> ── <igraph> Lattice graph ─────────────────────────────────────────── 360ac2d ──
 #> ℹ undirected
 #> ℹ 125 vertices · 300 edges
 #> 
@@ -121,7 +121,7 @@ make_lattice(c(5, 5, 5))
 #>  [55] 20 ─ 25    20 ─ 45    21 ─ 22    21 ─ 46    22 ─ 23    22 ─ 47   
 #> + ... omitted several edges
 make_lattice(length = 5, dim = 3)
-#> ── <igraph> Lattice graph ─────────────────────────────────────────── 57dc1cd ──
+#> ── <igraph> Lattice graph ─────────────────────────────────────────── c5231df ──
 #> ℹ undirected
 #> ℹ 125 vertices · 300 edges
 #> 
