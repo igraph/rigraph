@@ -183,6 +183,76 @@ test_that("LAD stress test", {
   }
 })
 
+test_that("LAD time.limit stops a long search", {
+  skip_on_cran()
+  withr::local_seed(42)
+  pattern <- make_full_graph(11)
+  target <- sample_gnp(100, 0.5)
+
+  # Without a limit, this search takes about half a minute.
+  time <- system.time(
+    expect_error(
+      subgraph_isomorphic(pattern, target, method = "lad", time.limit = 1),
+      "LAD CPU time exceeded"
+    )
+  )
+  expect_gte(time[["user.self"]] + time[["sys.self"]], 0.9)
+  expect_lt(time[["elapsed"]], 10)
+
+  expect_error(
+    count_subgraph_isomorphisms(
+      pattern,
+      target,
+      method = "lad",
+      time.limit = 1
+    ),
+    "LAD CPU time exceeded"
+  )
+  expect_error(
+    subgraph_isomorphisms(pattern, target, method = "lad", time.limit = 1),
+    "LAD CPU time exceeded"
+  )
+
+  # The deadline does not outlive the call.
+  expect_true(
+    subgraph_isomorphic(make_ring(3), target, method = "lad")
+  )
+})
+
+test_that("LAD time.limit does not stop searches within the limit", {
+  skip_on_cran()
+  withr::local_seed(42)
+  target <- sample_gnp(70, 0.5)
+
+  expect_true(
+    subgraph_isomorphic(
+      make_full_graph(4),
+      target,
+      method = "lad",
+      time.limit = 1
+    )
+  )
+  expect_equal(
+    count_subgraph_isomorphisms(
+      make_ring(3),
+      make_full_graph(5),
+      method = "lad",
+      time.limit = 1
+    ),
+    60
+  )
+
+  # This search takes more than a second, Inf means no limit.
+  expect_false(
+    subgraph_isomorphic(
+      make_full_graph(10),
+      target,
+      method = "lad",
+      time.limit = Inf
+    )
+  )
+})
+
 test_that("graph.subisomorphic.vf2 works", {
   igraph_local_seed(42)
 
