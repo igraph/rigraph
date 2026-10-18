@@ -12,5 +12,5 @@ What a new exported function needs before it merges.
   [`tools/AGENTS.md`](/tools/AGENTS.md) is the implementation guide.
 
 A function exported from the C library is generated, never written by hand ([`stimulus/`](/handbook/architecture/stimulus/README.md)):
-its `*_impl()` gets a test in `tests/testthat/test-aaa-auto.R`,
+its `*_impl()` gets a test in `tests/testthat/test-aaa-<category>.R` ([the suite](/handbook/testing/suite/README.md)),
 and a graph constructor prefers `GATTR` and `GATTR-PARAM` in the Stimulus definitions over assigning attributes by hand.

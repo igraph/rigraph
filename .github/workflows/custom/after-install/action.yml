@@ -25,6 +25,13 @@ runs:
         fi
       shell: bash
 
+    # Every impl's tests sit in test-aaa-<category>.R, mirroring the
+    # R/aaa-<category>.R that defines the impl
+    # (handbook/testing/suite/). Fails when a rerun would move a test.
+    - name: Check that impl tests sit in their category's file
+      run: Rscript tools/split-aaa-tests.R --check
+      shell: bash
+
     # The roclet that links the C manual from the reference pages, named in
     # DESCRIPTION's Roxygen field, is vendored in tools/igraph.r2cdocs
     # (handbook/architecture/r-layer/documentation/). Only the smoke test

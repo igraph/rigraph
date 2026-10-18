@@ -225,7 +225,7 @@ cliques_callback <- function(graph, ..., min = NULL, max = NULL, callback = NULL
 
 Add tests in two locations:
 
-**A. Tests for `_impl` function in `tests/testthat/test-aaa-auto.R`:**
+**A. Tests for `_impl` function in `tests/testthat/test-aaa-<category>.R`, the file mirroring the `R/aaa-<category>.R` that defines it (here `test-aaa-cliques.R`):**
 
 ```r
 test_that("cliques_callback_closure_impl basic", {
@@ -315,7 +315,7 @@ test_that("cliques_callback handles errors in callback", {
 3. **UNPROTECT**: Match PROTECT calls with UNPROTECT (count carefully!)
 4. **Error Handling**: Check for errors from R callbacks via `Rf_inherits(result, "error")`
 5. **Return Values**: `TRUE` continues, `FALSE` stops early
-6. **Test Location**: `_impl` tests go in `test-aaa-auto.R`, wrapper tests in feature files
+6. **Test Location**: `_impl` tests go in `test-aaa-<category>.R`, wrapper tests in feature files
 
 ### Testing Pattern
 
