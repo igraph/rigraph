@@ -945,3 +945,25 @@ test_that("norm_coords() recovers positional calls", {
   # xmin = 0 rescales the first column into [0, 1].
   expect_equal(range(res[, 1]), c(0, 1))
 })
+
+test_that("layout_with_gem() random stream for a fixed seed", {
+  # Pins the random numbers the C core draws for this layout.
+  igraph_local_seed(42)
+  l <- layout_with_gem(make_ring(3))
+  expect_equal(
+    l,
+    cbind(c(130.218, -34.753, 88.118), c(238.780, 196.748, 71.715)),
+    tolerance = 1e-4
+  )
+})
+
+test_that("layout_with_dh() random stream for a fixed seed", {
+  # Pins the random numbers the C core draws for this layout.
+  igraph_local_seed(42)
+  l <- layout_with_dh(make_ring(3))
+  expect_equal(
+    l,
+    cbind(c(0.444, -1.310, -0.350), c(-7.937, -7.812, -6.384)),
+    tolerance = 1e-3
+  )
+})

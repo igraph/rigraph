@@ -594,9 +594,20 @@ test_that("eigen_centrality() works", {
     expect_ev(M, v, lambda, eps)
   }
 
+  # Most of these graphs are disconnected, and warn that some centralities
+  # are nearly zero; no other warning is expected.
   for (i in 1:1000) {
     G <- sample_gnm(10, sample(1:20, 1))
-    ev <- eigen_centrality(G)
+    ev <- withCallingHandlers(
+      eigen_centrality(G),
+      warning = function(w) {
+        expect_match(
+          conditionMessage(w),
+          "eigenvector centralities are nearly zero"
+        )
+        invokeRestart("muffleWarning")
+      }
+    )
     expect_good(
       as_adjacency_matrix(G, sparse = FALSE),
       ev$vector,
@@ -1257,4 +1268,29 @@ test_that("alpha_centrality() covers migrated tail args and positional recovery"
     res_legacy <- alpha_centrality(dag, V(dag), 0.75)
   )
   expect_identical(res_legacy, alpha_centrality(dag, V(dag), alpha = 0.75))
+})
+
+# ---- C core behaviour pins ----------------------------------------------
+# These pin the behaviour of the vendored C core,
+# so that the vendor commit that changes it also flips the expectation.
+
+test_that("hits_scores() on an edgeless graph gives NaN silently", {
+  g <- make_empty_graph(3)
+  expect_silent(res <- hits_scores(g))
+  expect_identical(res$value, NaN)
+})
+
+test_that("hits_scores() on an undirected graph does not warn", {
+  expect_silent(res <- hits_scores(make_ring(3)))
+  expect_equal(res$value, 4)
+})
+
+test_that("eigen_centrality() on a disconnected graph does not warn", {
+  g <- make_star(3, mode = "undirected") + make_ring(3)
+  expect_silent(res <- eigen_centrality(g))
+  expect_equal(res$vector, c(0, 0, 0, 1, 1, 1))
+
+  g <- make_ring(3) + make_ring(4)
+  expect_silent(res <- eigen_centrality(g))
+  expect_equal(res$vector, rep(1, 7), tolerance = 1e-5)
 })

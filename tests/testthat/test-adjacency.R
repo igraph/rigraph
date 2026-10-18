@@ -1002,3 +1002,10 @@ test_that("from_adjacency() covers tail args by name and recovers positional cal
     make_(from_adjacency(M, mode = "undirected"))
   )
 })
+
+test_that("graph_from_adjacency_matrix() creates edges row by row", {
+  # Pins the edge order of the C core for directed input.
+  m <- matrix(c(0, 1, 1, 1, 0, 1, 0, 0, 0), 3)
+  g <- graph_from_adjacency_matrix(m)
+  expect_equal(as_edgelist(g), rbind(c(1, 2), c(2, 1), c(3, 1), c(3, 2)))
+})

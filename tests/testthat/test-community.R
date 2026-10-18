@@ -1042,3 +1042,10 @@ test_that("modularity_matrix() covers migrated tail args and positional recovery
     modularity_matrix(karate, rep(1, vcount(karate)), rep(1, ecount(karate)))
   })
 })
+
+test_that("cluster_infomap() code length on the karate graph", {
+  # Pins the vendored Infomap implementation.
+  karate <- make_graph("Zachary")
+  res <- cluster_infomap(karate, nb.trials = 1)
+  expect_equal(code_len(res), 4.606059, tolerance = 1e-6)
+})
