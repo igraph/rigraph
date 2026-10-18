@@ -173,3 +173,111 @@
       Error in `make_empty_graph()`:
       ! `directed` must be a logical, not a string.
 
+# make_generalized_petersen prints as expected
+
+    Code
+      make_generalized_petersen(5, 2)
+    Output
+      IGRAPH U--- 10 15 -- Generalized Petersen graph
+      + attr: name (g/c), n (g/n), k (g/n)
+      + edges:
+       [1] 1-- 2 1-- 6 6-- 8 2-- 3 2-- 7 7-- 9 3-- 4 3-- 8 8--10 4-- 5 4-- 9 6-- 9
+      [13] 1-- 5 5--10 7--10
+
+# make_generalized_petersen rejects invalid arguments
+
+    Code
+      make_generalized_petersen(2, 1)
+    Condition
+      Error in `generalized_petersen_impl()`:
+      ! n = 2 must be at least 3. Invalid value
+      Source: <file>:<line>
+
+---
+
+    Code
+      make_generalized_petersen(5, 3)
+    Condition
+      Error in `generalized_petersen_impl()`:
+      ! k = 3 must be positive and less than n/2 with n = 5. Invalid value
+      Source: <file>:<line>
+
+---
+
+    Code
+      make_generalized_petersen(5, 2, directed = TRUE)
+    Condition
+      Error in `make_generalized_petersen()`:
+      ! `...` must be empty.
+      x Problematic argument:
+      * directed = TRUE
+
+# make_regular_tree prints as expected
+
+    Code
+      make_regular_tree(2)
+    Output
+      IGRAPH U--- 10 9 -- Regular tree
+      + attr: name (g/c), h (g/n), k (g/n)
+      + edges:
+      [1] 1-- 2 1-- 3 1-- 4 2-- 5 2-- 6 3-- 7 3-- 8 4-- 9 4--10
+
+# make_regular_tree rejects invalid arguments
+
+    Code
+      make_regular_tree(-1)
+    Condition
+      Error in `regular_tree_impl()`:
+      ! Height of regular tree must be positive, got -1. Invalid value
+      Source: <file>:<line>
+
+---
+
+    Code
+      make_regular_tree(2, k = 1)
+    Condition
+      Error in `regular_tree_impl()`:
+      ! Degree of regular tree must be at least 2, got 1. Invalid value
+      Source: <file>:<line>
+
+---
+
+    Code
+      make_regular_tree(2, 3, "out")
+    Condition
+      Error in `make_regular_tree()`:
+      ! `...` must be empty.
+      x Problematic argument:
+      * ..1 = "out"
+      i Did you forget to name an argument?
+
+# make_symmetric_tree prints as expected
+
+    Code
+      make_symmetric_tree(c(3, 2))
+    Output
+      IGRAPH D--- 10 9 -- Symmetric tree
+      + attr: name (g/c), branches (g/n)
+      + edges:
+      [1] 1-> 2 1-> 3 1-> 4 2-> 5 2-> 6 3-> 7 3-> 8 4-> 9 4->10
+
+# make_symmetric_tree rejects invalid arguments
+
+    Code
+      make_symmetric_tree(c(2, -2))
+    Condition
+      Error in `symmetric_tree_impl()`:
+      ! The number of branches must be positive at each level. Invalid value
+      Source: <file>:<line>
+
+---
+
+    Code
+      make_symmetric_tree(c(2, 2), "out")
+    Condition
+      Error in `make_symmetric_tree()`:
+      ! `...` must be empty.
+      x Problematic argument:
+      * ..1 = "out"
+      i Did you forget to name an argument?
+

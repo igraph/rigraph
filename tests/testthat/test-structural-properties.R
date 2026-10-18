@@ -1070,6 +1070,57 @@ test_that("reciprocity works", {
   expect_equal(reciprocity(g, ignore.loops = FALSE), 0.6)
 })
 
+test_that("any_mutual works", {
+  g <- make_ring(10, directed = TRUE)
+  expect_false(any_mutual(g))
+
+  g2 <- add_edges(g, c(2, 1))
+  expect_true(any_mutual(g2))
+
+  # Undirected graphs contain only mutual edges
+  expect_true(any_mutual(make_ring(10)))
+
+  # Graphs without edges have no mutual edges
+  expect_false(any_mutual(make_empty_graph(3, directed = TRUE)))
+
+  # Directed self-loops are considered mutual by default
+  g3 <- make_graph(c(1, 1), directed = TRUE)
+  expect_true(any_mutual(g3))
+  expect_false(any_mutual(g3, loops = FALSE))
+
+  # Consistency with which_mutual()
+  g4 <- make_graph(c(1, 2, 2, 1, 2, 3), directed = TRUE)
+  expect_identical(any_mutual(g4), any(which_mutual(g4)))
+})
+
+test_that("any_mutual rejects invalid arguments", {
+  g <- make_ring(10, directed = TRUE)
+  expect_snapshot_igraph_error(any_mutual(g, FALSE))
+  expect_error(any_mutual(42), "Must provide a graph object")
+})
+
+test_that("has_mutual_impl() works", {
+  # Call the impl directly with a full argument set
+  g <- make_graph(c(1, 2, 2, 1, 2, 3), directed = TRUE)
+  expect_true(has_mutual_impl(graph = g, loops = TRUE))
+  expect_true(has_mutual_impl(graph = g, loops = FALSE))
+
+  # A self-loop counts as mutual only when loops = TRUE
+  g2 <- make_graph(c(1, 1, 1, 2), directed = TRUE)
+  expect_true(has_mutual_impl(graph = g2, loops = TRUE))
+  expect_false(has_mutual_impl(graph = g2, loops = FALSE))
+
+  # The impl agrees with the exported wrapper
+  expect_identical(
+    has_mutual_impl(graph = g2, loops = FALSE),
+    any_mutual(g2, loops = FALSE)
+  )
+  expect_identical(
+    has_mutual_impl(graph = g2, loops = TRUE),
+    any_mutual(g2, loops = TRUE)
+  )
+})
+
 test_that("feedback_arc_set works", {
   skip_if_no_glpk()
 
