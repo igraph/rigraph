@@ -5,15 +5,17 @@
 \alias{t.igraph}
 \title{Reverse edges in a graph}
 \usage{
-reverse_edges(graph, eids = NULL)
+reverse_edges(graph, edges = NULL, eids = deprecated())
 
 \method{t}{igraph}(x)
 }
 \arguments{
 \item{graph}{The input graph.}
 
-\item{eids}{The edge IDs of the edges to reverse. The default \code{NULL}
+\item{edges}{The edge IDs of the edges to reverse. The default \code{NULL}
 reverses all edges.}
+
+\item{eids}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{edges} instead.}
 
 \item{x}{The input graph.}
 }
@@ -24,7 +26,7 @@ IDs are reversed
 \description{
 The new graph will contain the same vertices, edges and attributes as
 the original graph, except that the direction of the edges selected by
-their edge IDs in the \code{eids} argument will be reversed. When reversing
+their edge IDs in the \code{edges} argument will be reversed. When reversing
 all edges, this operation is also known as graph transpose.
 }
 \section{Related documentation in the C library}{

@@ -5,7 +5,7 @@
 \alias{vertex.attributes<-}
 \title{Set one or more vertex attributes}
 \usage{
-vertex_attr(graph, name, index = NULL) <- value
+vertex_attr(graph, name, vertices = NULL, index = deprecated()) <- value
 }
 \arguments{
 \item{graph}{The graph.}
@@ -14,11 +14,13 @@ vertex_attr(graph, name, index = NULL) <- value
 then \code{value} must be a named list, and its entries are
 set as vertex attributes.}
 
-\item{index}{An optional vertex sequence to set the attributes
+\item{vertices}{An optional vertex sequence to set the attributes
 of a subset of vertices. The default \code{NULL} selects all vertices.}
 
+\item{index}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
+
 \item{value}{The new value of the attribute(s) for all
-(or \code{index}) vertices.}
+(or \code{vertices}) vertices.}
 }
 \value{
 The graph, with the vertex attribute(s) added or set.

@@ -16,7 +16,13 @@ induced_subgraph(
   vids = deprecated()
 )
 
-subgraph_from_edges(graph, eids, ..., delete.vertices = TRUE)
+subgraph_from_edges(
+  graph,
+  edges,
+  ...,
+  delete.vertices = TRUE,
+  eids = deprecated()
+)
 }
 \arguments{
 \item{graph}{The original graph.}
@@ -37,10 +43,12 @@ scratch. \sQuote{\code{auto}} chooses between the two implementations
 automatically, using heuristics based on the size of the original and the
 result graph.}
 
-\item{eids}{The edge IDs of the edges that will be kept in the result graph.}
+\item{edges}{The edge IDs of the edges that will be kept in the result graph.}
 
 \item{delete.vertices}{Logical, whether to remove vertices that do
-not have any adjacent edges in \code{eids}.}
+not have any adjacent edges in \code{edges}.}
+
+\item{eids}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{edges} instead.}
 }
 \value{
 A new graph object.
