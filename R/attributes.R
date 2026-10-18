@@ -432,8 +432,9 @@ graph.attributes <- function(graph) {
 #' @param graph The graph.
 #' @param name Name of the attribute to query. If missing, then
 #'   all vertex attributes are returned in a list.
-#' @param index An optional vertex sequence to query the attribute only
+#' @param vertices An optional vertex sequence to query the attribute only
 #'   for these vertices. The default `NULL` selects all vertices.
+#' @param index `r lifecycle::badge("deprecated")` Use `vertices` instead.
 #' @return The value of the vertex attribute, or the list of
 #'   all vertex attributes, if `name` is missing.
 #'
@@ -448,18 +449,33 @@ graph.attributes <- function(graph) {
 #' vertex_attr(g, "label")
 #' vertex_attr(g)
 #' plot(g)
-vertex_attr <- function(graph, name, index = NULL) {
+vertex_attr <- function(graph, name, vertices = NULL, index = deprecated()) {
+  if (lifecycle::is_present(index)) {
+    if (!missing(vertices)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertices} of {.fn vertex_attr} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg index}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "vertex_attr(index = )",
+      "vertex_attr(vertices = )"
+    )
+    vertices <- index
+  }
+
   ensure_igraph(graph)
   if (missing(name)) {
-    if (is.null(index)) {
+    if (is.null(vertices)) {
       return(vertex.attributes(graph))
     }
-    return(vertex.attributes(graph, index = index))
+    return(vertex.attributes(graph, index = vertices))
   }
 
   check_string(name)
-  if (is.null(index)) {
-    index <- V(graph)
+  if (is.null(vertices)) {
+    vertices <- V(graph)
   }
   myattr <-
     .Call(
@@ -468,11 +484,11 @@ vertex_attr <- function(graph, name, index = NULL) {
       igraph_t_idx_attr,
       igraph_attr_idx_vertex
     )[[name]]
-  if (is_complete_iterator(index)) {
+  if (is_complete_iterator(vertices)) {
     return(myattr)
   }
-  index <- as_igraph_vs(graph, index)
-  myattr[index]
+  vertices <- as_igraph_vs(graph, vertices)
+  myattr[vertices]
 }
 
 #' Set one or more vertex attributes
@@ -481,10 +497,11 @@ vertex_attr <- function(graph, name, index = NULL) {
 #' @param name The name of the vertex attribute to set. If missing,
 #'   then `value` must be a named list, and its entries are
 #'   set as vertex attributes.
-#' @param index An optional vertex sequence to set the attributes
+#' @param vertices An optional vertex sequence to set the attributes
 #'   of a subset of vertices. The default `NULL` selects all vertices.
+#' @param index `r lifecycle::badge("deprecated")` Use `vertices` instead.
 #' @param value The new value of the attribute(s) for all
-#'   (or `index`) vertices.
+#'   (or `vertices`) vertices.
 #' @return The graph, with the vertex attribute(s) added or set.
 #'
 #' @aliases vertex.attributes<-
@@ -500,15 +517,36 @@ vertex_attr <- function(graph, name, index = NULL) {
 #' vertex_attr(g, "label") <- V(g)$name
 #' g
 #' plot(g)
-`vertex_attr<-` <- function(graph, name, index = NULL, value) {
-  if (is.null(index)) {
-    index <- V(graph)
+`vertex_attr<-` <- function(
+  graph,
+  name,
+  vertices = NULL,
+  index = deprecated(),
+  value
+) {
+  if (lifecycle::is_present(index)) {
+    if (!missing(vertices)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertices} of {.fn vertex_attr<-} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg index}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "`vertex_attr<-`(index = )",
+      "`vertex_attr<-`(vertices = )"
+    )
+    vertices <- index
+  }
+
+  if (is.null(vertices)) {
+    vertices <- V(graph)
   }
   if (missing(name)) {
-    `vertex.attributes<-`(graph, index = index, value = value)
+    `vertex.attributes<-`(graph, index = vertices, value = value)
   } else {
     check_string(name)
-    set_vertex_attr(graph, name = name, index = index, value = value)
+    set_vertex_attr(graph, name = name, vertices = vertices, value = value)
   }
 }
 
@@ -517,9 +555,10 @@ vertex_attr <- function(graph, name, index = NULL) {
 #'
 #' @param graph The graph.
 #' @param name  The name of the attribute to set.
-#' @param index An optional vertex sequence to set the attributes
+#' @param vertices An optional vertex sequence to set the attributes
 #'   of a subset of vertices. The default `NULL` selects all vertices.
-#' @param value The new value of the attribute for all (or `index`)
+#' @param index `r lifecycle::badge("deprecated")` Use `vertices` instead.
+#' @param value The new value of the attribute for all (or `vertices`)
 #'   vertices.
 #'   If `NULL`, the input is returned unchanged.
 #' @return The graph, with the vertex attribute added or set.
@@ -532,15 +571,36 @@ vertex_attr <- function(graph, name, index = NULL) {
 #'   set_vertex_attr("label", value = LETTERS[1:10])
 #' g
 #' plot(g)
-set_vertex_attr <- function(graph, name, index = NULL, value) {
+set_vertex_attr <- function(
+  graph,
+  name,
+  vertices = NULL,
+  value,
+  index = deprecated()
+) {
+  if (lifecycle::is_present(index)) {
+    if (!missing(vertices)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertices} of {.fn set_vertex_attr} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg index}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "set_vertex_attr(index = )",
+      "set_vertex_attr(vertices = )"
+    )
+    vertices <- index
+  }
+
   call <- rlang::current_env()
   check_string(name)
 
-  if (is.null(index)) {
-    index <- V(graph)
+  if (is.null(vertices)) {
+    vertices <- V(graph)
   }
 
-  if (is_complete_iterator(index)) {
+  if (is_complete_iterator(vertices)) {
     return(i_set_vertex_attr(
       graph = graph,
       name = name,
@@ -553,7 +613,7 @@ set_vertex_attr <- function(graph, name, index = NULL, value) {
   i_set_vertex_attr(
     graph = graph,
     name = name,
-    index = index,
+    index = vertices,
     value = value,
     call = call
   )
@@ -563,8 +623,9 @@ set_vertex_attr <- function(graph, name, index = NULL, value) {
 #'
 #' @param graph The graph.
 #' @param ... <[`dynamic-dots`][rlang::dyn-dots]> Named arguments, where the names are the attributes
-#' @param index An optional vertex sequence to set the attributes
+#' @param vertices An optional vertex sequence to set the attributes
 #'   of a subset of vertices. The default `NULL` selects all vertices.
+#' @param index `r lifecycle::badge("deprecated")` Use `vertices` instead.
 #' @return The graph, with the vertex attributes added or set.
 #'
 #' @family attributes
@@ -576,9 +637,29 @@ set_vertex_attr <- function(graph, name, index = NULL, value) {
 #' # use splicing if suplying a list
 #' x <- list(color = "red", name = LETTERS[1:10])
 #' set_vertex_attrs(g, !!!x)
-#' # to set an attribute named "index" use `:=`
-#' set_vertex_attrs(g, color = "blue", index := 10, name = LETTERS[1:10])
-set_vertex_attrs <- function(graph, ..., index = NULL) {
+#' # to set an attribute named "vertices" use `:=`
+#' set_vertex_attrs(g, color = "blue", vertices := 10, name = LETTERS[1:10])
+set_vertex_attrs <- function(
+  graph,
+  ...,
+  vertices = NULL,
+  index = deprecated()
+) {
+  if (lifecycle::is_present(index)) {
+    if (!missing(vertices)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertices} of {.fn set_vertex_attrs} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg index}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "set_vertex_attrs(index = )",
+      "set_vertex_attrs(vertices = )"
+    )
+    vertices <- index
+  }
+
   call <- rlang::current_env()
   dots <- rlang::list2(...)
 
@@ -586,8 +667,8 @@ set_vertex_attrs <- function(graph, ..., index = NULL) {
     cli::cli_abort("All arguments in `...` must be named.")
   }
 
-  if (is.null(index)) {
-    index <- V(graph)
+  if (is.null(vertices)) {
+    vertices <- V(graph)
   }
 
   for (attr_name in names(dots)) {
@@ -595,7 +676,7 @@ set_vertex_attrs <- function(graph, ..., index = NULL) {
     graph <- i_set_vertex_attr(
       graph,
       name = attr_name,
-      index = index,
+      index = vertices,
       value = attr_value,
       call = call
     )
@@ -756,8 +837,9 @@ set_value_at <- function(value, idx, length_out) {
 #' @param graph The graph
 #' @param name The name of the attribute to query. If missing, then
 #'   all edge attributes are returned in a list.
-#' @param index An optional edge sequence to query edge attributes
+#' @param edges An optional edge sequence to query edge attributes
 #'   for a subset of edges. The default `NULL` selects all edges.
+#' @param index `r lifecycle::badge("deprecated")` Use `edges` instead.
 #' @return The value of the edge attribute, or the list of all
 #'   edge attributes if `name` is missing.
 #'
@@ -771,19 +853,34 @@ set_value_at <- function(value, idx, length_out) {
 #'   set_edge_attr("color", value = "red")
 #' g
 #' plot(g, edge.width = E(g)$weight)
-edge_attr <- function(graph, name, index = NULL) {
+edge_attr <- function(graph, name, edges = NULL, index = deprecated()) {
+  if (lifecycle::is_present(index)) {
+    if (!missing(edges)) {
+      cli::cli_abort(c(
+        "Argument {.arg edges} of {.fn edge_attr} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg index}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "edge_attr(index = )",
+      "edge_attr(edges = )"
+    )
+    edges <- index
+  }
+
   ensure_igraph(graph)
 
   if (missing(name)) {
-    if (is.null(index)) {
+    if (is.null(edges)) {
       edge.attributes(graph)
     } else {
-      edge.attributes(graph, index = index)
+      edge.attributes(graph, index = edges)
     }
   } else {
     check_string(name)
-    if (is.null(index)) {
-      index <- E(graph)
+    if (is.null(edges)) {
+      edges <- E(graph)
     }
     myattr <- .Call(
       Rx_igraph_mybracket2,
@@ -791,11 +888,11 @@ edge_attr <- function(graph, name, index = NULL) {
       igraph_t_idx_attr,
       igraph_attr_idx_edge
     )[[name]]
-    if (is_complete_iterator(index)) {
+    if (is_complete_iterator(edges)) {
       myattr
     } else {
-      index <- as_igraph_es(graph, index)
-      myattr[index]
+      edges <- as_igraph_es(graph, edges)
+      myattr[edges]
     }
   }
 }
@@ -806,10 +903,11 @@ edge_attr <- function(graph, name, index = NULL) {
 #' @param name The name of the edge attribute to set. If missing,
 #'   then `value` must be a named list, and its entries are
 #'   set as edge attributes.
-#' @param index An optional edge sequence to set the attributes
+#' @param edges An optional edge sequence to set the attributes
 #'   of a subset of edges. The default `NULL` selects all edges.
+#' @param index `r lifecycle::badge("deprecated")` Use `edges` instead.
 #' @param value The new value of the attribute(s) for all
-#'   (or `index`) edges.
+#'   (or `edges`) edges.
 #' @return The graph, with the edge attribute(s) added or set.
 #'
 #' @aliases edge.attributes<-
@@ -825,15 +923,36 @@ edge_attr <- function(graph, name, index = NULL) {
 #' edge_attr(g, "label") <- E(g)$name
 #' g
 #' plot(g)
-`edge_attr<-` <- function(graph, name, index = NULL, value) {
-  if (is.null(index)) {
-    index <- E(graph)
+`edge_attr<-` <- function(
+  graph,
+  name,
+  edges = NULL,
+  index = deprecated(),
+  value
+) {
+  if (lifecycle::is_present(index)) {
+    if (!missing(edges)) {
+      cli::cli_abort(c(
+        "Argument {.arg edges} of {.fn edge_attr<-} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg index}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "`edge_attr<-`(index = )",
+      "`edge_attr<-`(edges = )"
+    )
+    edges <- index
+  }
+
+  if (is.null(edges)) {
+    edges <- E(graph)
   }
   if (missing(name)) {
-    `edge.attributes<-`(graph, index = index, value = value)
+    `edge.attributes<-`(graph, index = edges, value = value)
   } else {
     check_string(name)
-    set_edge_attr(graph, name = name, index = index, value = value)
+    set_edge_attr(graph, name = name, edges = edges, value = value)
   }
 }
 
@@ -841,9 +960,10 @@ edge_attr <- function(graph, name, index = NULL) {
 #'
 #' @param graph The graph
 #' @param name  The name of the attribute to set.
-#' @param index An optional edge sequence to set the attributes of
+#' @param edges An optional edge sequence to set the attributes of
 #'   a subset of edges. The default `NULL` selects all edges.
-#' @param value The new value of the attribute for all (or `index`)
+#' @param index `r lifecycle::badge("deprecated")` Use `edges` instead.
+#' @param value The new value of the attribute for all (or `edges`)
 #'   edges.
 #'   If `NULL`, the input is returned unchanged.
 #' @return The graph, with the edge attribute added or set.
@@ -856,13 +976,34 @@ edge_attr <- function(graph, name, index = NULL) {
 #'   set_edge_attr("label", value = LETTERS[1:10])
 #' g
 #' plot(g)
-set_edge_attr <- function(graph, name, index = NULL, value) {
+set_edge_attr <- function(
+  graph,
+  name,
+  edges = NULL,
+  value,
+  index = deprecated()
+) {
+  if (lifecycle::is_present(index)) {
+    if (!missing(edges)) {
+      cli::cli_abort(c(
+        "Argument {.arg edges} of {.fn set_edge_attr} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg index}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "set_edge_attr(index = )",
+      "set_edge_attr(edges = )"
+    )
+    edges <- index
+  }
+
   call <- rlang::current_env()
   check_string(name)
-  if (is.null(index)) {
-    index <- E(graph)
+  if (is.null(edges)) {
+    edges <- E(graph)
   }
-  if (is_complete_iterator(index)) {
+  if (is_complete_iterator(edges)) {
     i_set_edge_attr(
       graph = graph,
       name = name,
@@ -874,7 +1015,7 @@ set_edge_attr <- function(graph, name, index = NULL, value) {
     i_set_edge_attr(
       graph = graph,
       name = name,
-      index = index,
+      index = edges,
       value = value,
       call = call
     )
