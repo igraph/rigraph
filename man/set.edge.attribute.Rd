@@ -11,10 +11,9 @@ set.edge.attribute(graph, name, index = E(graph), value)
 
 \item{name}{The name of the attribute to set.}
 
-\item{index}{An optional edge sequence to set the attributes of
-a subset of edges. The default \code{NULL} selects all edges.}
+\item{index}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{edges} instead.}
 
-\item{value}{The new value of the attribute for all (or \code{index})
+\item{value}{The new value of the attribute for all (or \code{edges})
 edges.
 If \code{NULL}, the input is returned unchanged.}
 }

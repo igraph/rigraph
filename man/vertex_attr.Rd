@@ -5,7 +5,7 @@
 \alias{vertex.attributes}
 \title{Query vertex attributes of a graph}
 \usage{
-vertex_attr(graph, name, index = NULL)
+vertex_attr(graph, name, vertices = NULL, index = deprecated())
 }
 \arguments{
 \item{graph}{The graph.}
@@ -13,8 +13,10 @@ vertex_attr(graph, name, index = NULL)
 \item{name}{Name of the attribute to query. If missing, then
 all vertex attributes are returned in a list.}
 
-\item{index}{An optional vertex sequence to query the attribute only
+\item{vertices}{An optional vertex sequence to query the attribute only
 for these vertices. The default \code{NULL} selects all vertices.}
+
+\item{index}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 }
 \value{
 The value of the vertex attribute, or the list of

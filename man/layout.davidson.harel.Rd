@@ -24,11 +24,6 @@ layout.davidson.harel(
 is not \code{NULL} then it should be an appropriate matrix of starting
 coordinates.}
 
-\item{maxiter}{Number of iterations to perform in the first phase.}
-
-\item{fineiter}{Number of iterations in the fine tuning phase. The
-default \code{NULL} uses \code{max(10, log2(vcount(graph)))}.}
-
 \item{cool.fact}{Cooling factor.}
 
 \item{weight.node.dist}{Weight for the node-node distances component of the

@@ -9,7 +9,7 @@ layout_with_fr(
   ...,
   coords = NULL,
   dim = c(2, 3),
-  niter = 500,
+  n_iter = 500,
   start.temp = NULL,
   grid = c("auto", "grid", "nogrid"),
   weights = NULL,
@@ -38,7 +38,7 @@ coordinates.}
 dimensional layouts are places on a plane, three dimensional ones in the 3d
 space.}
 
-\item{niter}{Integer scalar, the number of iterations to perform.}
+\item{n_iter}{Integer scalar, the number of iterations to perform.}
 
 \item{start.temp}{Real scalar, the start temperature. This is the maximum
 amount of movement alloved along one axis, within one step, for a vertex.

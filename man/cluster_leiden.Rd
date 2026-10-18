@@ -13,7 +13,7 @@ cluster_leiden(
   resolution = 1,
   beta = 0.01,
   initial_membership = NULL,
-  n_iterations = 2,
+  n_iter = 2,
   vertex_weights = NULL
 )
 }
@@ -44,7 +44,7 @@ This affects only the refinement step of the algorithm.}
 will try to improve this provided membership. If no argument is
 provided, the aglorithm simply starts from the singleton partition.}
 
-\item{n_iterations}{the number of iterations to iterate the Leiden
+\item{n_iter}{the number of iterations to iterate the Leiden
 algorithm. Each iteration may improve the partition further.}
 
 \item{vertex_weights}{the vertex weights used in the Leiden algorithm.

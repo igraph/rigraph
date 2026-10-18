@@ -22,12 +22,6 @@ layout.graphopt(
 line for each vertex. This matrix will be used as starting positions for the
 algorithm. If not given, then a random starting matrix is used.}
 
-\item{niter}{Integer scalar, the number of iterations to perform.  Should be
-a couple of hundred in general. If you have a large graph then you might
-want to only do a few iterations and then check the result. If it is not
-good enough you can feed it in again in the \code{start} argument. The
-default value is 500.}
-
 \item{charge}{The charge of the vertices, used to calculate electric
 repulsion. The default is 0.001.}
 
