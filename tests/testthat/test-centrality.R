@@ -1281,11 +1281,13 @@ test_that("hits_scores() on an edgeless graph gives NaN silently", {
 })
 
 test_that("hits_scores() on an undirected graph does not warn", {
+  igraph_local_seed(42)
   expect_silent(res <- hits_scores(make_ring(3)))
   expect_equal(res$value, 4)
 })
 
 test_that("eigen_centrality() on a disconnected graph does not warn", {
+  igraph_local_seed(42)
   g <- make_star(3, mode = "undirected") + make_ring(3)
   expect_silent(res <- eigen_centrality(g))
   expect_equal(res$vector, c(0, 0, 0, 1, 1, 1))
@@ -1294,7 +1296,6 @@ test_that("eigen_centrality() on a disconnected graph does not warn", {
   # Which vector of that eigenspace ARPACK returns follows from the random
   # perturbation of its start vector, so the seed keeps the RNG state that
   # earlier test files leave behind from zeroing one ring.
-  igraph_local_seed(42)
   g <- make_ring(3) + make_ring(4)
   expect_silent(res <- eigen_centrality(g))
   expect_equal(res$vector, rep(1, 7), tolerance = 1e-5)
