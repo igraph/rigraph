@@ -32,3 +32,7 @@ different even if the two graphs are identical.
 Attribute comparison can be turned off with the \code{attrs} parameter if
 the attributes of the two graphs are allowed to be different.
 }
+\seealso{
+\code{\link[=is_same_graph]{is_same_graph()}} to ignore the order of vertices and edges,
+\code{\link[=isomorphic]{isomorphic()}} to ignore vertex labels altogether.
+}

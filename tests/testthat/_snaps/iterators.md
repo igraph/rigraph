@@ -1,3 +1,62 @@
+# is_same_graph() uses IDs unless both graphs are named
+
+    Code
+      res <- is_same_graph(g1, g2)
+    Condition
+      Warning:
+      Only one of the graphs has vertex names, matching vertices by their IDs.
+      i Use `use_names = FALSE` to silence this warning.
+
+# is_same_graph() errors
+
+    Code
+      is_same_graph(dup, dup)
+    Condition
+      Error in `is_same_graph()`:
+      ! Vertex names must be unique to match vertices by name.
+      i Use `use_names = FALSE` to match vertices by their IDs.
+    Code
+      is_same_graph(g, g, TRUE)
+    Condition
+      Error in `is_same_graph()`:
+      ! `...` must be empty.
+      x Problematic argument:
+      * ..1 = TRUE
+      i Did you forget to name an argument?
+    Code
+      is_same_graph(g, g, use_names = NA)
+    Condition
+      Error in `is_same_graph()`:
+      ! `use_names` must be `TRUE` or `FALSE`, not `NA`.
+    Code
+      is_same_graph(g, NULL)
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+    Code
+      is_same_graph(g, g, vertex_attrs = 1)
+    Condition
+      Error in `is_same_graph()`:
+      ! `vertex_attrs` must be a character vector or `NULL`, not the number 1.
+    Code
+      is_same_graph(g, g, vertex_attrs = NA_character_)
+    Condition
+      Error in `is_same_graph()`:
+      ! `vertex_attrs` can't contain NA values.
+    Code
+      is_same_graph(g, set_vertex_attr(g, "color", value = 1:3), vertex_attrs = "color")
+    Condition
+      Error in `is_same_graph()`:
+      ! All `vertex_attrs` must exist in both graphs.
+      x Missing in `g1`: "color".
+    Code
+      is_same_graph(g, g, vertex_attrs = c("color", "size"))
+    Condition
+      Error in `is_same_graph()`:
+      ! All `vertex_attrs` must exist in both graphs.
+      x Missing in `g1`: "color" and "size".
+      x Missing in `g2`: "color" and "size".
+
 # printing connected vs/es works
 
     Code

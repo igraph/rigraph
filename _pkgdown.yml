@@ -93,6 +93,7 @@ reference:
 - contents:
   - graph_id
   - identical_graphs
+  - is_same_graph
   - is_igraph
   - is_named
   - is_weighted
