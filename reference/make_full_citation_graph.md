@@ -58,7 +58,7 @@ Other deterministic constructors:
 
 ``` r
 print_all(make_full_citation_graph(10))
-#> ── <igraph> Full citation graph ───────────────────────────────────── dacff35 ──
+#> ── <igraph> Full citation graph ───────────────────────────────────── bb3b560 ──
 #> ℹ directed
 #> ℹ 10 vertices · 45 edges
 #> 

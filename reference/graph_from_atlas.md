@@ -62,7 +62,7 @@ Other deterministic constructors:
 ``` r
 ## Some randomly picked graphs from the atlas
 graph_from_atlas(sample(0:1252, 1))
-#> ── <igraph> Graph from the Atlas #464 ─────────────────────────────── a991cab ──
+#> ── <igraph> Graph from the Atlas #464 ─────────────────────────────── 3697a16 ──
 #> ℹ undirected
 #> ℹ 7 vertices · 9 edges
 #> 
@@ -72,7 +72,7 @@ graph_from_atlas(sample(0:1252, 1))
 #> ── Edges ───────────────────────────────────────────────────────────────────────
 #> [1] 2 ─ 4  2 ─ 3  1 ─ 3  1 ─ 6  5 ─ 6  4 ─ 5  3 ─ 4  1 ─ 4  1 ─ 5 
 graph_from_atlas(sample(0:1252, 1))
-#> ── <igraph> Graph from the Atlas #139 ─────────────────────────────── 7f55e99 ──
+#> ── <igraph> Graph from the Atlas #139 ─────────────────────────────── dd70ebe ──
 #> ℹ undirected
 #> ℹ 6 vertices · 8 edges
 #> 
