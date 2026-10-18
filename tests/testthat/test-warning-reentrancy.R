@@ -94,3 +94,9 @@ test_that("C warnings keep their text, source and count", {
     "^Triad census called on an undirected graph\\. All connections will be treated as mutual\\.\nSource: misc/motifs\\.c:[0-9]+$"
   )
 })
+
+test_that("C warnings name the R function that called into C", {
+  # Also when that function is not byte-compiled, as under load_all() or covr.
+  w <- tryCatch(triad_census(make_ring(4)), warning = identity)
+  expect_identical(conditionCall(w), quote(triad_census_impl(graph = graph)))
+})

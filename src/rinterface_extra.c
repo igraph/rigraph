@@ -2398,7 +2398,18 @@ typedef struct {
 /* HELPER: internal C; must use IGRAPH_CHECK */
 static SEXP Rx_igraph_warning_signal(void *data) {
   Rx_igraph_warning_frame_t *frame = (Rx_igraph_warning_frame_t *) data;
-  Rf_warning("%s", frame->message);
+  /* Rf_warning() would take its call from the innermost context, which is
+   * now the one R_UnwindProtect() opened, and so lose the call of the R
+   * function that called into C unless that function is byte-compiled.
+   * base::warning() names the closure below it, as Rf_warning() did
+   * before; domain = NA leaves the message untranslated, as Rf_warning()
+   * does. */
+  SEXP message = PROTECT(Rf_mkString(frame->message));
+  SEXP domain = PROTECT(Rf_ScalarLogical(NA_LOGICAL));
+  SEXP expr = PROTECT(Rf_lang3(Rf_install("warning"), message, domain));
+  SET_TAG(CDDR(expr), Rf_install("domain"));
+  Rf_eval(expr, R_BaseEnv);
+  UNPROTECT(3);
   return R_NilValue;
 }
 
