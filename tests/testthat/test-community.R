@@ -455,6 +455,67 @@ test_that("cluster_leiden works", {
   )
 })
 
+test_that("cluster_leiden() rejects directed graphs", {
+  ring <- make_ring(6, directed = TRUE)
+  expect_error(
+    cluster_leiden(ring, objective_function = "modularity"),
+    "only implemented for undirected graphs"
+  )
+  expect_error(
+    cluster_leiden(ring, objective_function = "CPM"),
+    "only implemented for undirected graphs"
+  )
+
+  E(ring)$weight <- seq_len(ecount(ring))
+  expect_error(
+    cluster_leiden(ring, objective_function = "modularity"),
+    "only implemented for undirected graphs"
+  )
+})
+
+test_that("cluster_leiden() reports modularity as its quality", {
+  karate <- make_graph("Zachary")
+  for (resolution in c(0.5, 1, 2)) {
+    igraph_local_seed(42)
+    karate_leiden <- cluster_leiden(
+      karate,
+      "modularity",
+      resolution = resolution
+    )
+    expect_equal(
+      karate_leiden$quality,
+      modularity(karate, membership(karate_leiden), resolution = resolution)
+    )
+  }
+
+  triangles <- make_graph(~ 1-2-3-1, 4-5-6-4, 3-4)
+  E(triangles)$weight <- c(2, 2, 2, 3, 3, 3, 1)
+  igraph_local_seed(42)
+  triangles_leiden <- cluster_leiden(triangles, "modularity")
+  expect_equal(unname(membership(triangles_leiden)), c(1, 1, 1, 2, 2, 2))
+  expect_equal(
+    triangles_leiden$quality,
+    modularity(triangles, membership(triangles_leiden))
+  )
+})
+
+test_that("cluster_leiden() resolution controls the number of communities", {
+  triangles <- make_graph(~ 1-2-3-1, 4-5-6-4, 3-4)
+  E(triangles)$weight <- c(2, 2, 2, 3, 3, 3, 1)
+
+  igraph_local_seed(42)
+  low <- cluster_leiden(triangles, "modularity", resolution = 0.01)
+  expect_length(low, 1)
+  expect_equal(
+    low$quality,
+    modularity(triangles, membership(low), resolution = 0.01)
+  )
+
+  igraph_local_seed(42)
+  high <- cluster_leiden(triangles, "modularity", resolution = 50)
+  expect_length(high, vcount(triangles))
+})
+
 test_that("modularity_matrix works", {
   karate <- make_graph("zachary")
 

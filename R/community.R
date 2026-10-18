@@ -1825,6 +1825,15 @@ cluster_leiden <- function(
 
   ensure_igraph(graph)
 
+  # The C core accepts directed graphs since igraph 1.0,
+  # but this wrapper passes no in-weights and scales the resolution
+  # for undirected modularity, so it would silently compute the wrong objective.
+  if (is_directed(graph)) {
+    cli::cli_abort(
+      "Leiden algorithm is only implemented for undirected graphs."
+    )
+  }
+
   # Parse objective function argument
   objective_function <- igraph_match_arg(objective_function)
   objective_function <- switch(objective_function, "cpm" = 0, "modularity" = 1)
