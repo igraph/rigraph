@@ -1,6 +1,6 @@
 ---
 name: series-land
-description: Land rigraph's series on `main`, so that `main` and CRAN's `igraph` take the engine the series has vendored and CI has proved. Freeze `main`, build `main-land-dev` from `main-rc-dev` as vendor commits only, let CI judge every commit, and fast-forward igraph/rigraph's `main` onto it. A rare, human-run move; the first is expected once the series reaches igraph 1.0.1. Use when asked to land, move or promote the series onto `main`, or when the loop reports that a landing has become possible.
+description: Land rigraph's series on `main`, so that `main` and CRAN's `igraph` take the engine the series has vendored and CI has proved. Freeze `main`, build `main-land-dev` from `main-rc-dev` as vendor commits only, let CI judge every commit, and fast-forward igraph/rigraph's `main` onto it. A rare, human-run move; the first is expected once the series reaches igraph 1.0.1. Use when asked to land, move or promote the series onto `main`, when the loop reports that a landing has become possible, or when asked to open the series' R side for review, which needs no landing.
 ---
 
 # Landing the series on `main`
@@ -31,6 +31,7 @@ flowchart LR
   LD -->|"CI judges each commit;<br>a fix is folded in with series-fold.sh"| LG["main-land-green"]
   LG -->|"READY: fast-forward"| M2["main, on the new engine"]
   LD -.->|"R side only,<br>--review"| R["main-land-review:<br>a draft pull request, never merged"]
+  MG["main-green"] -.->|"before any landing,<br>--review --series"| R
 ```
 
 * **`main-land-dev`**, in the fork: `main` plus the vendor commits, and nothing else.
@@ -38,8 +39,9 @@ flowchart LR
 * **`main-land-green`**, in the fork: where CI's judgement starts.
   It is pushed at the frozen `main` and advanced over the commits that passed;
   the landing is ready when it equals `main-land-dev`.
-* **`main-land-review`**, in `igraph/rigraph`: the same landing without its engine,
-  for a draft pull request that is read and never merged (step 4).
+* **`main-land-review`**, in `igraph/rigraph` or the fork: the same landing without its engine,
+  or `main-green` without its engine before any landing,
+  for a draft pull request against `igraph/rigraph`'s `main` that is read and never merged (step 4).
 
 There is no `main-land-build`, so the loop never mistakes the pair for a series.
 All three are deleted once `main` has taken the landing.
@@ -172,20 +174,49 @@ What changes for `main`'s maintainers is the rest: the glue, the Stimulus defini
 
 ```sh
 scripts/series-land.sh main --remote origin --canonical upstream --review --push
-gh pr create --repo igraph/rigraph --draft --base main --head main-land-review \
+gh pr create --repo igraph/rigraph --draft --base main --head igraph:main-land-review \
   --title "Review: the R side of the main landing"
 ```
 
 The run prints the build's test report as well; it belongs in the pull request's description,
 because it is the one place a reviewer reads every test change the landing makes at once.
+It writes a local branch of the same name, and pushes only with `--push`,
+to `--review-remote`, `--canonical` by default.
+`--review-remote origin` puts it in the fork instead, and the run prints the head as `krlmlr:main-land-review`.
 
 `main-land-review` is the frozen `main`, one commit that removes every workflow,
-and one commit for each landing commit that changes anything outside the vendored strand and what vendoring regenerates,
+and one commit for each landing commit that changes anything the review shows,
 carrying that change alone under the upstream commit that asked for it.
+It hides the vendored strand and what is generated for the compiler and the help pages
+(`series_review_hidden` in [`scripts/series-config.sh`](/scripts/series-config.sh)).
+It keeps `R/aaa-*.R`, the one place an `_impl()` function the engine adds or removes appears in R terms,
+because Stimulus reads the vendored `functions.yaml` as well as `tools/stimulus/`.
 Its checks could only fail, because the R side compiles against no engine there,
-and without workflow files the pull request starts nothing that builds or tests it.
+and without workflow files the pull request starts nothing that builds or tests it,
+but for `format-suggest.yaml`, a `pull_request_target` workflow, which runs from `main`'s copy and formats the files.
 It is never merged: a finding is fixed on the series, the landing is rebuilt,
 and `--review --push` rewrites the branch, which the pull request follows.
+
+**The series can be reviewed before any landing.**
+`--review --series` writes the same branch from `main-green`, unflavored by `scripts/series-rc.sh` without a push,
+so no rc strand has to be cut and no landing built first:
+
+```sh
+scripts/series-land.sh main --remote origin --canonical upstream --review --series --review-remote origin --push
+```
+
+It reviews the vendor commits above the series' base, its seed and the commits in front of its first vendor commit,
+and leaves out a tooling sync or a port of a commit `main` has, as the landing's replay does.
+Each review commit names its series commit in a `Series-commit:` trailer, where a landing's names its `Landing-commit:`.
+The run refuses, with nothing written, while `main` has a change the series has not ported:
+outside what it hides, the review has to equal `main-green` without its flavor,
+but for `NEWS.md`, the READMEs and `DESCRIPTION`'s version.
+Its findings are not folded into the running series one by one.
+Each is verified first, and those that hold are collected on `main-fwd-build`,
+together with what the [revdep checks](/handbook/testing/revdep/README.md) find.
+A fresh rebuild from that branch makes a new generation of the series, as duckdb-r's `series-forward` skill builds one.
+Starting it is a person's decision, and the review does not start it.
+A later review of the series takes `--suffix -v<n>` and a pull request of its own.
 
 **Findings converge in iterations before the series takes them.**
 An iteration is a landing branch of its own, `main-land-v<n>`, with no `-dev` suffix so nothing builds it,
