@@ -788,21 +788,21 @@ aging.prefatt.game <- function(
 #' is the in-degree of vertex \eqn{i} in the current time step (more precisely
 #' the number of adjacent edges of \eqn{i} which were not initiated by \eqn{i}
 #' itself) and \eqn{\alpha}{alpha} and \eqn{a} are parameters given by the
-#' `power` and `zero.appeal` arguments.
+#' `power` and `zero_appeal` arguments.
 #'
 #' The number of edges initiated in a time step is given by the `m`,
-#' `out.dist` and `out.seq` arguments. If `out.seq` is given and
+#' `out_dist` and `out_seq` arguments. If `out_seq` is given and
 #' not NULL then it gives the number of edges to add in a vector, the first
 #' element is ignored, the second is the number of edges to add in the second
-#' time step and so on. If `out.seq` is not given or null and
-#' `out.dist` is given and not NULL then it is used as a discrete
+#' time step and so on. If `out_seq` is not given or null and
+#' `out_dist` is given and not NULL then it is used as a discrete
 #' distribution to generate the number of edges in each time step. Its first
 #' element is the probability that no edges will be added, the second is the
-#' probability that one edge is added, etc. (`out.dist` does not need to
-#' sum up to one, it normalized automatically.) `out.dist` should contain
+#' probability that one edge is added, etc. (`out_dist` does not need to
+#' sum up to one, it normalized automatically.) `out_dist` should contain
 #' non-negative numbers and at east one element should be positive.
 #'
-#' If both `out.seq` and `out.dist` are omitted or NULL then `m`
+#' If both `out_seq` and `out_dist` are omitted or NULL then `m`
 #' will be used, it should be a positive integer constant and `m` edges
 #' will be added in each time step.
 #'
@@ -810,7 +810,7 @@ aging.prefatt.game <- function(
 #' `directed` to `FALSE` to generate an undirected graph. Note that
 #' even if an undirected graph is generated \eqn{k_i}{k[i]} denotes the number
 #' of adjacent edges not initiated by the vertex itself and not the total
-#' (in- + out-) degree of the vertex, unless the `out.pref` argument is set to
+#' (in- + out-) degree of the vertex, unless the `out_pref` argument is set to
 #' `TRUE`.
 #'
 #' @param n Number of vertices.
@@ -818,39 +818,39 @@ aging.prefatt.game <- function(
 #'   i.e. linear preferential attachment.
 #' @param m Numeric constant, the number of edges to add in each time step,
 #'   defaults to 1.
-#'   This argument is only used if both `out.dist` and `out.seq` are omitted
+#'   This argument is only used if both `out_dist` and `out_seq` are omitted
 #'   or NULL.
 #' @inheritParams rlang::args_dots_empty
-#' @param out.dist Numeric vector, the distribution of the number of edges to
-#'   add in each time step. This argument is only used if the `out.seq`
+#' @param out_dist Numeric vector, the distribution of the number of edges to
+#'   add in each time step. This argument is only used if the `out_seq`
 #'   argument is omitted or NULL.
-#' @param out.seq Numeric vector giving the number of edges to add in each time
+#' @param out_seq Numeric vector giving the number of edges to add in each time
 #'   step. Its first element is ignored as no edges are added in the first time
 #'   step.
-#' @param out.pref Logical, if true the total degree is used for calculating
+#' @param out_pref Logical, if true the total degree is used for calculating
 #'   the citation probability, otherwise the in-degree is used.
-#' @param zero.appeal The \sQuote{attractiveness} of the vertices with no
+#' @param zero_appeal The \sQuote{attractiveness} of the vertices with no
 #'   adjacent edges. See details below.
 #' @param directed Whether to create a directed graph.
 #' @param algorithm The algorithm to use for the graph generation.
 #'   `psumtree` uses a partial prefix-sum tree to generate the graph, this
-#'   algorithm can handle any `power` and `zero.appeal` values and
+#'   algorithm can handle any `power` and `zero_appeal` values and
 #'   never generates multiple edges.  `psumtree-multiple` also uses a
 #'   partial prefix-sum tree, but the generation of multiple edges is allowed.
 #'   Before the 0.6 version igraph used this algorithm if `power` was not
-#'   one, or `zero.appeal` was not one.  `bag` is the algorithm that
+#'   one, or `zero_appeal` was not one.  `bag` is the algorithm that
 #'   was previously (before version 0.6) used if `power` was one and
-#'   `zero.appeal` was one as well. It works by putting the IDs of the
+#'   `zero_appeal` was one as well. It works by putting the IDs of the
 #'   vertices into a bag (multiset, really), exactly as many times as their
 #'   (in-)degree, plus once more. Then the required number of cited vertices are
 #'   drawn from the bag, with replacement. This method might generate multiple
-#'   edges. It only works if `power` and `zero.appeal` are equal one.
-#' @param start.graph `NULL` or an igraph graph. If a graph, then the
+#'   edges. It only works if `power` and `zero_appeal` are equal one.
+#' @param start_graph `NULL` or an igraph graph. If a graph, then the
 #'   supplied graph is used as a starting graph for the preferential attachment
 #'   algorithm. The graph should have at least one vertex. If a graph is supplied
-#'   here and the `out.seq` argument is not `NULL`, then it should
+#'   here and the `out_seq` argument is not `NULL`, then it should
 #'   contain the out degrees of the new vertices only, not the ones in the
-#'   `start.graph`.
+#'   `start_graph`.
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Barabási, A.-L. and Albert R. 1999. Emergence of scaling in
@@ -871,22 +871,22 @@ sample_pa <- function(
   power = 1,
   m = NULL,
   ...,
-  out.dist = NULL,
-  out.seq = NULL,
-  out.pref = FALSE,
-  zero.appeal = 1,
+  out_dist = NULL,
+  out_seq = NULL,
+  out_pref = FALSE,
+  zero_appeal = 1,
   directed = TRUE,
   algorithm = c(
     "psumtree",
     "psumtree-multiple",
     "bag"
   ),
-  start.graph = NULL
+  start_graph = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_pa, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("o", "ou", "out", "out."))
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("o", "ou", "out", "out.", "out_"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn sample_pa}.")
     # Pre-3.0.0 signature: sample_pa(n, power, m, out.dist, out.seq, out.pref, zero.appeal, directed, algorithm, start.graph)
     .old_signature <- function(out.dist, out.seq, out.pref, zero.appeal, directed, algorithm, start.graph, ...) {
@@ -897,26 +897,26 @@ sample_pa <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_pa}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(out.dist)) base::list(out.dist = out.dist),
-        if (!base::missing(out.seq)) base::list(out.seq = out.seq),
-        if (!base::missing(out.pref)) base::list(out.pref = out.pref),
-        if (!base::missing(zero.appeal)) base::list(zero.appeal = zero.appeal),
+        if (!base::missing(out.dist)) base::list(out_dist = out.dist),
+        if (!base::missing(out.seq)) base::list(out_seq = out.seq),
+        if (!base::missing(out.pref)) base::list(out_pref = out.pref),
+        if (!base::missing(zero.appeal)) base::list(zero_appeal = zero.appeal),
         if (!base::missing(directed)) base::list(directed = directed),
         if (!base::missing(algorithm)) base::list(algorithm = algorithm),
-        if (!base::missing(start.graph)) base::list(start.graph = start.graph)
+        if (!base::missing(start.graph)) base::list(start_graph = start.graph)
       )
     }
     .arg_handle <- .old_signature(...)
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(out.dist)) "out.dist",
-        if (!base::missing(out.seq)) "out.seq",
-        if (!base::missing(out.pref)) "out.pref",
-        if (!base::missing(zero.appeal)) "zero.appeal",
+        if (!base::missing(out_dist)) "out_dist",
+        if (!base::missing(out_seq)) "out_seq",
+        if (!base::missing(out_pref)) "out_pref",
+        if (!base::missing(zero_appeal)) "zero_appeal",
         if (!base::missing(directed)) "directed",
         if (!base::missing(algorithm)) "algorithm",
-        if (!base::missing(start.graph)) "start.graph"
+        if (!base::missing(start_graph)) "start_graph"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_pa} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -924,7 +924,7 @@ sample_pa <- function(
         "3.0.0",
         what = base::I("Calling `sample_pa()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  sample_pa(", base::paste(base::c("n", "power", "m", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  sample_pa(", base::paste(base::c("n", "power", "m", base::c(out_dist = "out.dist", out_seq = "out.seq", out_pref = "out.pref", zero_appeal = "zero.appeal", directed = "directed", algorithm = "algorithm", start_graph = "start.graph")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    sample_pa(", base::paste(base::c("n", "power", "m", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -932,21 +932,21 @@ sample_pa <- function(
   }
   # END GENERATED ARG_HANDLE
 
-  if (!is.null(start.graph) && !is_igraph(start.graph)) {
+  if (!is.null(start_graph) && !is_igraph(start_graph)) {
     cli::cli_abort(
-      "{.arg start.graph} must be an {.cls igraph} object, not {.obj_type_friendly {start.graph}}."
+      "{.arg start_graph} must be an {.cls igraph} object, not {.obj_type_friendly {start.graph}}."
     )
   }
 
   # Checks
-  if (!is.null(out.seq) && (!is.null(m) || !is.null(out.dist))) {
+  if (!is.null(out_seq) && (!is.null(m) || !is.null(out_dist))) {
     cli::cli_warn(
-      "if {.arg out.seq} is given {.arg m} and {.arg out.dist} should be {.code NULL}."
+      "if {.arg out_seq} is given {.arg m} and {.arg out_dist} should be {.code NULL}."
     )
-    m <- out.dist <- NULL
+    m <- out_dist <- NULL
   }
-  if (is.null(out.seq) && !is.null(out.dist) && !is.null(m)) {
-    cli::cli_warn("if {.arg out.dist} is given {.arg m} will be ignored.")
+  if (is.null(out_seq) && !is.null(out_dist) && !is.null(m)) {
+    cli::cli_warn("if {.arg out_dist} is given {.arg m} will be ignored.")
     m <- NULL
   }
   if (!is.null(m) && m == 0) {
@@ -960,26 +960,26 @@ sample_pa <- function(
 
   n <- as.numeric(n)
   power <- as.numeric(power)
-  if (!is.null(out.dist)) {
-    out.dist <- as.numeric(out.dist)
+  if (!is.null(out_dist)) {
+    out_dist <- as.numeric(out_dist)
   }
-  if (!is.null(out.seq)) {
-    out.seq <- as.numeric(out.seq)
+  if (!is.null(out_seq)) {
+    out_seq <- as.numeric(out_seq)
   }
-  out.pref <- as.logical(out.pref)
+  out_pref <- as.logical(out_pref)
 
-  if (!is.null(out.dist)) {
-    nn <- if (is.null(start.graph)) n else n - vcount(start.graph)
-    out.seq <- as.numeric(sample(
-      0:(length(out.dist) - 1),
+  if (!is.null(out_dist)) {
+    nn <- if (is.null(start_graph)) n else n - vcount(start_graph)
+    out_seq <- as.numeric(sample(
+      0:(length(out_dist) - 1),
       nn,
       replace = TRUE,
-      prob = out.dist
+      prob = out_dist
     ))
   }
 
-  if (is.null(out.seq)) {
-    out.seq <- numeric()
+  if (is.null(out_seq)) {
+    out_seq <- numeric()
   }
 
   algorithm <- igraph_match_arg(algorithm)
@@ -994,19 +994,19 @@ sample_pa <- function(
     n = n,
     power = power,
     m = m,
-    outseq = out.seq,
-    outpref = out.pref,
-    A = zero.appeal,
+    outseq = out_seq,
+    outpref = out_pref,
+    A = zero_appeal,
     directed = directed,
     algo = algorithm_impl,
-    start_from = start.graph
+    start_from = start_graph
   )
 
   if (igraph_opt("add.params")) {
     res$name <- "Barabasi graph"
     res$power <- power
     res$m <- m
-    res$zero.appeal <- zero.appeal
+    res$zero.appeal <- zero_appeal
     res$algorithm <- algorithm
   }
 
@@ -1021,18 +1021,18 @@ pa <- function(
   power = 1,
   m = NULL,
   ...,
-  out.dist = NULL,
-  out.seq = NULL,
-  out.pref = FALSE,
-  zero.appeal = 1,
+  out_dist = NULL,
+  out_seq = NULL,
+  out_pref = FALSE,
+  zero_appeal = 1,
   directed = TRUE,
   algorithm = c("psumtree", "psumtree-multiple", "bag"),
-  start.graph = NULL
+  start_graph = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: pa, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("o", "ou", "out", "out."))
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("o", "ou", "out", "out.", "out_"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn pa}.")
     # Pre-3.0.0 signature: pa(n, power, m, out.dist, out.seq, out.pref, zero.appeal, directed, algorithm, start.graph)
     .old_signature <- function(out.dist, out.seq, out.pref, zero.appeal, directed, algorithm, start.graph, ...) {
@@ -1043,26 +1043,26 @@ pa <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn pa}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(out.dist)) base::list(out.dist = out.dist),
-        if (!base::missing(out.seq)) base::list(out.seq = out.seq),
-        if (!base::missing(out.pref)) base::list(out.pref = out.pref),
-        if (!base::missing(zero.appeal)) base::list(zero.appeal = zero.appeal),
+        if (!base::missing(out.dist)) base::list(out_dist = out.dist),
+        if (!base::missing(out.seq)) base::list(out_seq = out.seq),
+        if (!base::missing(out.pref)) base::list(out_pref = out.pref),
+        if (!base::missing(zero.appeal)) base::list(zero_appeal = zero.appeal),
         if (!base::missing(directed)) base::list(directed = directed),
         if (!base::missing(algorithm)) base::list(algorithm = algorithm),
-        if (!base::missing(start.graph)) base::list(start.graph = start.graph)
+        if (!base::missing(start.graph)) base::list(start_graph = start.graph)
       )
     }
     .arg_handle <- .old_signature(...)
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(out.dist)) "out.dist",
-        if (!base::missing(out.seq)) "out.seq",
-        if (!base::missing(out.pref)) "out.pref",
-        if (!base::missing(zero.appeal)) "zero.appeal",
+        if (!base::missing(out_dist)) "out_dist",
+        if (!base::missing(out_seq)) "out_seq",
+        if (!base::missing(out_pref)) "out_pref",
+        if (!base::missing(zero_appeal)) "zero_appeal",
         if (!base::missing(directed)) "directed",
         if (!base::missing(algorithm)) "algorithm",
-        if (!base::missing(start.graph)) "start.graph"
+        if (!base::missing(start_graph)) "start_graph"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn pa} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -1070,7 +1070,7 @@ pa <- function(
         "3.0.0",
         what = base::I("Calling `pa()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  pa(", base::paste(base::c("n", "power", "m", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  pa(", base::paste(base::c("n", "power", "m", base::c(out_dist = "out.dist", out_seq = "out.seq", out_pref = "out.pref", zero_appeal = "zero.appeal", directed = "directed", algorithm = "algorithm", start_graph = "start.graph")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    pa(", base::paste(base::c("n", "power", "m", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -1083,13 +1083,13 @@ pa <- function(
     n,
     power = power,
     m = m,
-    out.dist = out.dist,
-    out.seq = out.seq,
-    out.pref = out.pref,
-    zero.appeal = zero.appeal,
+    out_dist = out_dist,
+    out_seq = out_seq,
+    out_pref = out_pref,
+    zero_appeal = zero_appeal,
     directed = directed,
     algorithm = algorithm,
-    start.graph = start.graph
+    start_graph = start_graph
   )
 }
 
@@ -1503,12 +1503,14 @@ random.graph.game <- function(
 #' The \dQuote{edge.switching.simple} is an MCMC sampler based on
 #' degree-preserving edge switches. It generates simple undirected or directed graphs.
 #'
-#' @param out.deg Numeric vector, the sequence of degrees (for undirected
+#' @param out_deg Numeric vector, the sequence of degrees (for undirected
 #'   graphs) or out-degrees (for directed graphs). For undirected graphs its sum
 #'   should be even. For directed graphs its sum should be the same as the sum of
-#'   `in.deg`.
-#' @param in.deg For directed graph, the in-degree sequence. By default this is
+#'   `in_deg`.
+#' @param out.deg `r lifecycle::badge("deprecated")` Use `out_deg` instead.
+#' @param in_deg For directed graph, the in-degree sequence. By default this is
 #'   `NULL` and an undirected graph is created.
+#' @param in.deg `r lifecycle::badge("deprecated")` Use `in_deg` instead.
 #' @inheritParams rlang::args_dots_empty
 #' @param method Character, the method for generating the graph. See Details.
 #' @return The new graph object.
@@ -1630,8 +1632,8 @@ random.graph.game <- function(
 #' all(degree(powerlaw_vl_graph) == powerlaw_degrees)
 #'
 sample_degseq <- function(
-  out.deg,
-  in.deg = NULL,
+  out_deg,
+  in_deg = NULL,
   ...,
   method = c(
     "configuration",
@@ -1639,11 +1641,15 @@ sample_degseq <- function(
     "fast.heur.simple",
     "configuration.simple",
     "edge.switching.simple"
-  )
+  ),
+  out.deg = deprecated(),
+  in.deg = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_degseq, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("i", "in", "o", "ou", "out"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn sample_degseq}.", i = "Spell out the full argument name."))
     # Pre-3.0.0 signature: sample_degseq(out.deg, in.deg, method)
     .old_signature <- function(method, ...) {
       if (...length() > 0L) {
@@ -1668,13 +1674,43 @@ sample_degseq <- function(
         "3.0.0",
         what = base::I("Calling `sample_degseq()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  sample_degseq(", base::paste(base::c("out.deg", "in.deg", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    sample_degseq(", base::paste(base::c("out.deg", "in.deg", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  sample_degseq(", base::paste(base::c("out_deg", "in_deg", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_degseq(", base::paste(base::c("out_deg", "in_deg", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
+
+  if (lifecycle::is_present(in.deg)) {
+    if (!missing(in_deg)) {
+      cli::cli_abort(c(
+        "Argument {.arg in_deg} of {.fn sample_degseq} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg in.deg}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "sample_degseq(in.deg = )",
+      "sample_degseq(in_deg = )"
+    )
+    in_deg <- in.deg
+  }
+
+  if (lifecycle::is_present(out.deg)) {
+    if (!missing(out_deg)) {
+      cli::cli_abort(c(
+        "Argument {.arg out_deg} of {.fn sample_degseq} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg out.deg}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "sample_degseq(out.deg = )",
+      "sample_degseq(out_deg = )"
+    )
+    out_deg <- out.deg
+  }
 
   if (missing(method)) {
     method <- method[1]
@@ -1723,13 +1759,13 @@ sample_degseq <- function(
     "configuration.simple" = "configuration_simple",
     "edge.switching.simple" = "edge_switching_simple"
   )
-  if (!is.null(in.deg)) {
-    in.deg <- as.numeric(in.deg)
+  if (!is.null(in_deg)) {
+    in_deg <- as.numeric(in_deg)
   }
 
   res <- degree_sequence_game_impl(
-    out_deg = out.deg,
-    in_deg = in.deg,
+    out_deg = out_deg,
+    in_deg = in_deg,
     method = method_impl
   )
   if (igraph_opt("add.params")) {
@@ -1821,25 +1857,25 @@ growing <- function(n, m = 1, ..., directed = TRUE, citation = FALSE) {
 #' Here \eqn{k_i}{k[i]} is the in-degree of vertex \eqn{i} in the current time
 #' step and \eqn{l_i}{l[i]} is the age of vertex \eqn{i}. The age is simply
 #' defined as the number of time steps passed since the vertex is added, with
-#' the extension that vertex age is divided to be in `aging.bin` bins.
+#' the extension that vertex age is divided to be in `aging_bin` bins.
 #'
 #' \eqn{c}, \eqn{\alpha}{alpha}, \eqn{a}, \eqn{d}, \eqn{\beta}{beta} and
 #' \eqn{b} are parameters and they can be set via the following arguments:
-#' `pa.exp` (\eqn{\alpha}{alpha}, mandatory argument), `aging.exp`
-#' (\eqn{\beta}{beta}, mandatory argument), `zero.deg.appeal` (\eqn{a},
-#' optional, the default value is 1), `zero.age.appeal` (\eqn{b},
-#' optional, the default is 0), `deg.coef` (\eqn{c}, optional, the default
-#' is 1), and `age.coef` (\eqn{d}, optional, the default is 1).
+#' `pa_exp` (\eqn{\alpha}{alpha}, mandatory argument), `aging_exp`
+#' (\eqn{\beta}{beta}, mandatory argument), `zero_deg_appeal` (\eqn{a},
+#' optional, the default value is 1), `zero_age_appeal` (\eqn{b},
+#' optional, the default is 0), `deg_coef` (\eqn{c}, optional, the default
+#' is 1), and `age_coef` (\eqn{d}, optional, the default is 1).
 #'
 #' The number of edges initiated in each time step is governed by the `m`,
-#' `out.seq` and `out.pref` parameters. If `out.seq` is given
+#' `out_seq` and `out_pref` parameters. If `out_seq` is given
 #' then it is interpreted as a vector giving the number of edges to be added in
 #' each time step. It should be of length `n` (the number of vertices),
-#' and its first element will be ignored. If `out.seq` is not given (or
-#' NULL) and `out.dist` is given then it will be used as a discrete
+#' and its first element will be ignored. If `out_seq` is not given (or
+#' NULL) and `out_dist` is given then it will be used as a discrete
 #' probability distribution to generate the number of edges. Its first element
 #' gives the probability that zero edges are added at a time step, the second
-#' element is the probability that one edge is added, etc. (`out.seq`
+#' element is the probability that one edge is added, etc. (`out_seq`
 #' should contain non-negative numbers, but if they don't sum up to 1, they
 #' will be normalized to sum up to 1. This behavior is similar to the
 #' `prob` argument of the `sample` command.)
@@ -1847,42 +1883,44 @@ growing <- function(n, m = 1, ..., directed = TRUE, citation = FALSE) {
 #' By default a directed graph is generated, but it `directed` is set to
 #' `FALSE` then an undirected is created. Even if an undirected graph is
 #' generated \eqn{k_i}{k[i]} denotes only the adjacent edges not initiated by
-#' the vertex itself except if `out.pref` is set to `TRUE`.
+#' the vertex itself except if `out_pref` is set to `TRUE`.
 #'
-#' If the `time.window` argument is given (and not NULL) then
+#' If the `time_window` argument is given (and not NULL) then
 #' \eqn{k_i}{k[i]} means only the adjacent edges added in the previous
-#' `time.window` time steps.
+#' `time_window` time steps.
 #'
 #' This function might generate graphs with multiple edges.
 #'
 #' @param n The number of vertices in the graph.
-#' @param pa.exp The preferential attachment exponent, see the details below.
-#' @param aging.exp The exponent of the aging, usually a non-positive number,
+#' @param pa_exp The preferential attachment exponent, see the details below.
+#' @param pa.exp `r lifecycle::badge("deprecated")` Use `pa_exp` instead.
+#' @param aging_exp The exponent of the aging, usually a non-positive number,
 #'   see details below.
+#' @param aging.exp `r lifecycle::badge("deprecated")` Use `aging_exp` instead.
 #' @param m The number of edges each new vertex creates (except the very first
-#'   vertex). This argument is used only if both the `out.dist` and
-#'   `out.seq` arguments are NULL.
+#'   vertex). This argument is used only if both the `out_dist` and
+#'   `out_seq` arguments are NULL.
 #' @inheritParams rlang::args_dots_empty
-#' @param aging.bin The number of bins to use for measuring the age of
+#' @param aging_bin The number of bins to use for measuring the age of
 #'   vertices, see details below.
-#' @param out.dist The discrete distribution to generate the number of edges to
-#'   add in each time step if `out.seq` is NULL. See details below.
-#' @param out.seq The number of edges to add in each time step, a vector
+#' @param out_dist The discrete distribution to generate the number of edges to
+#'   add in each time step if `out_seq` is NULL. See details below.
+#' @param out_seq The number of edges to add in each time step, a vector
 #'   containing as many elements as the number of vertices. See details below.
-#' @param out.pref Logical, whether to include edges not initiated by
+#' @param out_pref Logical, whether to include edges not initiated by
 #'   the vertex as a basis of preferential attachment. See details below.
 #' @param directed Logical, whether to generate a directed graph. See
 #'   details below.
-#' @param zero.deg.appeal The degree-dependent part of the
+#' @param zero_deg_appeal The degree-dependent part of the
 #'   \sQuote{attractiveness} of the vertices with no adjacent edges. See also
 #'   details below.
-#' @param zero.age.appeal The age-dependent part of the \sQuote{attrativeness}
+#' @param zero_age_appeal The age-dependent part of the \sQuote{attrativeness}
 #'   of the vertices with age zero. It is usually zero, see details below.
-#' @param deg.coef The coefficient of the degree-dependent
+#' @param deg_coef The coefficient of the degree-dependent
 #'   \sQuote{attractiveness}. See details below.
-#' @param age.coef The coefficient of the age-dependent part of the
+#' @param age_coef The coefficient of the age-dependent part of the
 #'   \sQuote{attractiveness}. See details below.
-#' @param time.window Integer constant, if NULL only adjacent added in the last
+#' @param time_window Integer constant, if NULL only adjacent added in the last
 #'   `time.windows` time steps are counted as a basis of the preferential
 #'   attachment. See also details below.
 #' @return A new graph.
@@ -1893,35 +1931,37 @@ growing <- function(n, m = 1, ..., directed = TRUE, citation = FALSE) {
 #' @examples
 #'
 #' # The maximum degree for graph with different aging exponents
-#' g1 <- sample_pa_age(10000, pa.exp = 1, aging.exp = 0, aging.bin = 1000)
-#' g2 <- sample_pa_age(10000, pa.exp = 1, aging.exp = -1, aging.bin = 1000)
-#' g3 <- sample_pa_age(10000, pa.exp = 1, aging.exp = -3, aging.bin = 1000)
+#' g1 <- sample_pa_age(10000, pa_exp = 1, aging_exp = 0, aging_bin = 1000)
+#' g2 <- sample_pa_age(10000, pa_exp = 1, aging_exp = -1, aging_bin = 1000)
+#' g3 <- sample_pa_age(10000, pa_exp = 1, aging_exp = -3, aging_bin = 1000)
 #' max(degree(g1))
 #' max(degree(g2))
 #' max(degree(g3))
 sample_pa_age <- function(
   n,
-  pa.exp,
-  aging.exp,
+  pa_exp,
+  aging_exp,
   m = NULL,
   ...,
-  aging.bin = 300,
-  out.dist = NULL,
-  out.seq = NULL,
-  out.pref = FALSE,
+  aging_bin = 300,
+  out_dist = NULL,
+  out_seq = NULL,
+  out_pref = FALSE,
   directed = TRUE,
-  zero.deg.appeal = 1,
-  zero.age.appeal = 0,
-  deg.coef = 1,
-  age.coef = 1,
-  time.window = NULL
+  zero_deg_appeal = 1,
+  zero_age_appeal = 0,
+  deg_coef = 1,
+  age_coef = 1,
+  time_window = NULL,
+  pa.exp = deprecated(),
+  aging.exp = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_pa_age, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("a", "ag", "agi", "agin", "aging", "aging."))
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("a", "ag", "agi", "agin", "aging", "aging_", "p", "pa"))
     if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn sample_pa_age}.", i = "Spell out the full argument name."))
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "ag", "o", "ou", "out", "out.", "d", "z", "ze", "zer", "zero", "zero."))
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "ag", "agi", "agin", "aging", "aging.", "o", "ou", "out", "out.", "z", "ze", "zer", "zero", "zero.", "d", "out_", "zero_"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn sample_pa_age}.")
     # Pre-3.0.0 signature: sample_pa_age(n, pa.exp, aging.exp, m, aging.bin, out.dist, out.seq, out.pref, directed, zero.deg.appeal, zero.age.appeal, deg.coef, age.coef, time.window)
     .old_signature <- function(aging.bin, out.dist, out.seq, out.pref, directed, zero.deg.appeal, zero.age.appeal, deg.coef, age.coef, time.window, ...) {
@@ -1932,32 +1972,32 @@ sample_pa_age <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_pa_age}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(aging.bin)) base::list(aging.bin = aging.bin),
-        if (!base::missing(out.dist)) base::list(out.dist = out.dist),
-        if (!base::missing(out.seq)) base::list(out.seq = out.seq),
-        if (!base::missing(out.pref)) base::list(out.pref = out.pref),
+        if (!base::missing(aging.bin)) base::list(aging_bin = aging.bin),
+        if (!base::missing(out.dist)) base::list(out_dist = out.dist),
+        if (!base::missing(out.seq)) base::list(out_seq = out.seq),
+        if (!base::missing(out.pref)) base::list(out_pref = out.pref),
         if (!base::missing(directed)) base::list(directed = directed),
-        if (!base::missing(zero.deg.appeal)) base::list(zero.deg.appeal = zero.deg.appeal),
-        if (!base::missing(zero.age.appeal)) base::list(zero.age.appeal = zero.age.appeal),
-        if (!base::missing(deg.coef)) base::list(deg.coef = deg.coef),
-        if (!base::missing(age.coef)) base::list(age.coef = age.coef),
-        if (!base::missing(time.window)) base::list(time.window = time.window)
+        if (!base::missing(zero.deg.appeal)) base::list(zero_deg_appeal = zero.deg.appeal),
+        if (!base::missing(zero.age.appeal)) base::list(zero_age_appeal = zero.age.appeal),
+        if (!base::missing(deg.coef)) base::list(deg_coef = deg.coef),
+        if (!base::missing(age.coef)) base::list(age_coef = age.coef),
+        if (!base::missing(time.window)) base::list(time_window = time.window)
       )
     }
     .arg_handle <- .old_signature(...)
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(aging.bin)) "aging.bin",
-        if (!base::missing(out.dist)) "out.dist",
-        if (!base::missing(out.seq)) "out.seq",
-        if (!base::missing(out.pref)) "out.pref",
+        if (!base::missing(aging_bin)) "aging_bin",
+        if (!base::missing(out_dist)) "out_dist",
+        if (!base::missing(out_seq)) "out_seq",
+        if (!base::missing(out_pref)) "out_pref",
         if (!base::missing(directed)) "directed",
-        if (!base::missing(zero.deg.appeal)) "zero.deg.appeal",
-        if (!base::missing(zero.age.appeal)) "zero.age.appeal",
-        if (!base::missing(deg.coef)) "deg.coef",
-        if (!base::missing(age.coef)) "age.coef",
-        if (!base::missing(time.window)) "time.window"
+        if (!base::missing(zero_deg_appeal)) "zero_deg_appeal",
+        if (!base::missing(zero_age_appeal)) "zero_age_appeal",
+        if (!base::missing(deg_coef)) "deg_coef",
+        if (!base::missing(age_coef)) "age_coef",
+        if (!base::missing(time_window)) "time_window"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_pa_age} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -1965,52 +2005,82 @@ sample_pa_age <- function(
         "3.0.0",
         what = base::I("Calling `sample_pa_age()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  sample_pa_age(", base::paste(base::c("n", "pa.exp", "aging.exp", "m", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    sample_pa_age(", base::paste(base::c("n", "pa.exp", "aging.exp", "m", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  sample_pa_age(", base::paste(base::c("n", "pa_exp", "aging_exp", "m", base::c(aging_bin = "aging.bin", out_dist = "out.dist", out_seq = "out.seq", out_pref = "out.pref", directed = "directed", zero_deg_appeal = "zero.deg.appeal", zero_age_appeal = "zero.age.appeal", deg_coef = "deg.coef", age_coef = "age.coef", time_window = "time.window")[.arg_names]), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_pa_age(", base::paste(base::c("n", "pa_exp", "aging_exp", "m", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
-  # Checks
-  if (!is.null(out.seq) && (!is.null(m) || !is.null(out.dist))) {
-    cli::cli_warn(
-      "if {.arg out.seq} is given {.arg m} and {.arg out.dist} should be {.code NULL}."
+  if (lifecycle::is_present(aging.exp)) {
+    if (!missing(aging_exp)) {
+      cli::cli_abort(c(
+        "Argument {.arg aging_exp} of {.fn sample_pa_age} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg aging.exp}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "sample_pa_age(aging.exp = )",
+      "sample_pa_age(aging_exp = )"
     )
-    m <- out.dist <- NULL
+    aging_exp <- aging.exp
   }
-  if (is.null(out.seq) && !is.null(out.dist) && !is.null(m)) {
-    cli::cli_warn("if {.arg out.dist} is given {.arg m} will be ignored.")
+
+  if (lifecycle::is_present(pa.exp)) {
+    if (!missing(pa_exp)) {
+      cli::cli_abort(c(
+        "Argument {.arg pa_exp} of {.fn sample_pa_age} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg pa.exp}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "sample_pa_age(pa.exp = )",
+      "sample_pa_age(pa_exp = )"
+    )
+    pa_exp <- pa.exp
+  }
+
+  # Checks
+  if (!is.null(out_seq) && (!is.null(m) || !is.null(out_dist))) {
+    cli::cli_warn(
+      "if {.arg out_seq} is given {.arg m} and {.arg out_dist} should be {.code NULL}."
+    )
+    m <- out_dist <- NULL
+  }
+  if (is.null(out_seq) && !is.null(out_dist) && !is.null(m)) {
+    cli::cli_warn("if {.arg out_dist} is given {.arg m} will be ignored.")
     m <- NULL
   }
-  if (!is.null(out.seq) && length(out.seq) != n) {
+  if (!is.null(out_seq) && length(out_seq) != n) {
     cli::cli_abort(
-      "{.arg out.seq} must have length {.val n}, not {.val {length( out.seq)}}.'"
+      "{.arg out_seq} must have length {.val n}, not {.val {length( out.seq)}}.'"
     )
   }
-  if (!is.null(out.seq) && min(out.seq) < 0) {
-    cli::cli_abort("{.arg out.seq} must not contain negative elements.")
+  if (!is.null(out_seq) && min(out_seq) < 0) {
+    cli::cli_abort("{.arg out_seq} must not contain negative elements.")
   }
   if (!is.null(m) && m < 0) {
     cli::cli_abort("{.arg m} must be positive or 0.")
   }
-  if (!is.null(time.window) && time.window <= 0) {
-    cli::cli_abort("{.arg time.window} must be positive.")
+  if (!is.null(time_window) && time_window <= 0) {
+    cli::cli_abort("{.arg time_window} must be positive.")
   }
   if (!is.null(m) && m == 0) {
     cli::cli_warn("{.arg m} is zero, graph will be empty.")
   }
-  if (aging.exp > 0) {
-    cli::cli_warn("Aging exponent {.arg aging.exp} is positive.")
+  if (aging_exp > 0) {
+    cli::cli_warn("Aging exponent {.arg aging_exp} is positive.")
   }
-  if (zero.deg.appeal <= 0) {
+  if (zero_deg_appeal <= 0) {
     cli::cli_warn(
-      "Initial attractiveness {.arg zero.deg.appeal} is not positive."
+      "Initial attractiveness {.arg zero_deg_appeal} is not positive."
     )
   }
 
-  if (is.null(m) && is.null(out.dist) && is.null(out.seq)) {
+  if (is.null(m) && is.null(out_dist) && is.null(out_seq)) {
     m <- 1
   }
 
@@ -2018,68 +2088,68 @@ sample_pa_age <- function(
   if (!is.null(m)) {
     m <- as.numeric(m)
   }
-  if (!is.null(out.dist)) {
-    out.dist <- as.numeric(out.dist)
+  if (!is.null(out_dist)) {
+    out_dist <- as.numeric(out_dist)
   }
-  if (!is.null(out.seq)) {
-    out.seq <- as.numeric(out.seq)
+  if (!is.null(out_seq)) {
+    out_seq <- as.numeric(out_seq)
   }
-  out.pref <- as.logical(out.pref)
+  out_pref <- as.logical(out_pref)
 
-  if (!is.null(out.dist)) {
-    out.seq <- as.numeric(sample(
-      0:(length(out.dist) - 1),
+  if (!is.null(out_dist)) {
+    out_seq <- as.numeric(sample(
+      0:(length(out_dist) - 1),
       n,
       replace = TRUE,
-      prob = out.dist
+      prob = out_dist
     ))
   }
 
-  if (is.null(out.seq)) {
-    out.seq <- numeric()
+  if (is.null(out_seq)) {
+    out_seq <- numeric()
   }
 
-  res <- if (is.null(time.window)) {
+  res <- if (is.null(time_window)) {
     barabasi_aging_game_impl(
       nodes = n,
       m = m,
-      outseq = out.seq,
-      outpref = out.pref,
-      pa_exp = pa.exp,
-      aging_exp = aging.exp,
-      aging_bin = aging.bin,
-      zero_deg_appeal = zero.deg.appeal,
-      zero_age_appeal = zero.age.appeal,
-      deg_coef = deg.coef,
-      age_coef = age.coef,
+      outseq = out_seq,
+      outpref = out_pref,
+      pa_exp = pa_exp,
+      aging_exp = aging_exp,
+      aging_bin = aging_bin,
+      zero_deg_appeal = zero_deg_appeal,
+      zero_age_appeal = zero_age_appeal,
+      deg_coef = deg_coef,
+      age_coef = age_coef,
       directed = directed
     )
   } else {
     recent_degree_aging_game_impl(
       nodes = n,
       m = m,
-      outseq = out.seq,
-      outpref = out.pref,
-      pa_exp = pa.exp,
-      aging_exp = aging.exp,
-      aging_bin = aging.bin,
-      window = time.window,
-      zero_appeal = zero.deg.appeal,
+      outseq = out_seq,
+      outpref = out_pref,
+      pa_exp = pa_exp,
+      aging_exp = aging_exp,
+      aging_bin = aging_bin,
+      window = time_window,
+      zero_appeal = zero_deg_appeal,
       directed = directed
     )
   }
   if (igraph_opt("add.params")) {
     res$name <- "Aging Barabasi graph"
-    res$pa.exp <- pa.exp
-    res$aging.exp <- aging.exp
+    res$pa.exp <- pa_exp
+    res$aging.exp <- aging_exp
     res$m <- m
-    res$aging.bin <- aging.bin
-    res$out.pref <- out.pref
-    res$zero.deg.appeal <- zero.deg.appeal
-    res$zero.age.appeal <- zero.age.appeal
-    res$deg.coef <- deg.coef
-    res$age.coef <- age.coef
-    res$time.window <- if (is.null(time.window)) Inf else time.window
+    res$aging.bin <- aging_bin
+    res$out.pref <- out_pref
+    res$zero.deg.appeal <- zero_deg_appeal
+    res$zero.age.appeal <- zero_age_appeal
+    res$deg.coef <- deg_coef
+    res$age.coef <- age_coef
+    res$time.window <- if (is.null(time_window)) Inf else time_window
   }
   res
 }
@@ -2089,27 +2159,29 @@ sample_pa_age <- function(
 #' @export
 pa_age <- function(
   n,
-  pa.exp,
-  aging.exp,
+  pa_exp,
+  aging_exp,
   m = NULL,
   ...,
-  aging.bin = 300,
-  out.dist = NULL,
-  out.seq = NULL,
-  out.pref = FALSE,
+  aging_bin = 300,
+  out_dist = NULL,
+  out_seq = NULL,
+  out_pref = FALSE,
   directed = TRUE,
-  zero.deg.appeal = 1,
-  zero.age.appeal = 0,
-  deg.coef = 1,
-  age.coef = 1,
-  time.window = NULL
+  zero_deg_appeal = 1,
+  zero_age_appeal = 0,
+  deg_coef = 1,
+  age_coef = 1,
+  time_window = NULL,
+  pa.exp = deprecated(),
+  aging.exp = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: pa_age, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("a", "ag", "agi", "agin", "aging", "aging."))
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("a", "ag", "agi", "agin", "aging", "aging_", "p", "pa"))
     if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn pa_age}.", i = "Spell out the full argument name."))
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "ag", "o", "ou", "out", "out.", "d", "z", "ze", "zer", "zero", "zero."))
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "ag", "agi", "agin", "aging", "aging.", "o", "ou", "out", "out.", "z", "ze", "zer", "zero", "zero.", "d", "out_", "zero_"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn pa_age}.")
     # Pre-3.0.0 signature: pa_age(n, pa.exp, aging.exp, m, aging.bin, out.dist, out.seq, out.pref, directed, zero.deg.appeal, zero.age.appeal, deg.coef, age.coef, time.window)
     .old_signature <- function(aging.bin, out.dist, out.seq, out.pref, directed, zero.deg.appeal, zero.age.appeal, deg.coef, age.coef, time.window, ...) {
@@ -2120,32 +2192,32 @@ pa_age <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn pa_age}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(aging.bin)) base::list(aging.bin = aging.bin),
-        if (!base::missing(out.dist)) base::list(out.dist = out.dist),
-        if (!base::missing(out.seq)) base::list(out.seq = out.seq),
-        if (!base::missing(out.pref)) base::list(out.pref = out.pref),
+        if (!base::missing(aging.bin)) base::list(aging_bin = aging.bin),
+        if (!base::missing(out.dist)) base::list(out_dist = out.dist),
+        if (!base::missing(out.seq)) base::list(out_seq = out.seq),
+        if (!base::missing(out.pref)) base::list(out_pref = out.pref),
         if (!base::missing(directed)) base::list(directed = directed),
-        if (!base::missing(zero.deg.appeal)) base::list(zero.deg.appeal = zero.deg.appeal),
-        if (!base::missing(zero.age.appeal)) base::list(zero.age.appeal = zero.age.appeal),
-        if (!base::missing(deg.coef)) base::list(deg.coef = deg.coef),
-        if (!base::missing(age.coef)) base::list(age.coef = age.coef),
-        if (!base::missing(time.window)) base::list(time.window = time.window)
+        if (!base::missing(zero.deg.appeal)) base::list(zero_deg_appeal = zero.deg.appeal),
+        if (!base::missing(zero.age.appeal)) base::list(zero_age_appeal = zero.age.appeal),
+        if (!base::missing(deg.coef)) base::list(deg_coef = deg.coef),
+        if (!base::missing(age.coef)) base::list(age_coef = age.coef),
+        if (!base::missing(time.window)) base::list(time_window = time.window)
       )
     }
     .arg_handle <- .old_signature(...)
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(aging.bin)) "aging.bin",
-        if (!base::missing(out.dist)) "out.dist",
-        if (!base::missing(out.seq)) "out.seq",
-        if (!base::missing(out.pref)) "out.pref",
+        if (!base::missing(aging_bin)) "aging_bin",
+        if (!base::missing(out_dist)) "out_dist",
+        if (!base::missing(out_seq)) "out_seq",
+        if (!base::missing(out_pref)) "out_pref",
         if (!base::missing(directed)) "directed",
-        if (!base::missing(zero.deg.appeal)) "zero.deg.appeal",
-        if (!base::missing(zero.age.appeal)) "zero.age.appeal",
-        if (!base::missing(deg.coef)) "deg.coef",
-        if (!base::missing(age.coef)) "age.coef",
-        if (!base::missing(time.window)) "time.window"
+        if (!base::missing(zero_deg_appeal)) "zero_deg_appeal",
+        if (!base::missing(zero_age_appeal)) "zero_age_appeal",
+        if (!base::missing(deg_coef)) "deg_coef",
+        if (!base::missing(age_coef)) "age_coef",
+        if (!base::missing(time_window)) "time_window"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn pa_age} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -2153,30 +2225,56 @@ pa_age <- function(
         "3.0.0",
         what = base::I("Calling `pa_age()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  pa_age(", base::paste(base::c("n", "pa.exp", "aging.exp", "m", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    pa_age(", base::paste(base::c("n", "pa.exp", "aging.exp", "m", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  pa_age(", base::paste(base::c("n", "pa_exp", "aging_exp", "m", base::c(aging_bin = "aging.bin", out_dist = "out.dist", out_seq = "out.seq", out_pref = "out.pref", directed = "directed", zero_deg_appeal = "zero.deg.appeal", zero_age_appeal = "zero.age.appeal", deg_coef = "deg.coef", age_coef = "age.coef", time_window = "time.window")[.arg_names]), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    pa_age(", base::paste(base::c("n", "pa_exp", "aging_exp", "m", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
+  if (lifecycle::is_present(aging.exp)) {
+    if (!missing(aging_exp)) {
+      cli::cli_abort(c(
+        "Argument {.arg aging_exp} of {.fn pa_age} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg aging.exp}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "pa_age(aging.exp = )",
+      "pa_age(aging_exp = )"
+    )
+    aging_exp <- aging.exp
+  }
+
+  if (lifecycle::is_present(pa.exp)) {
+    if (!missing(pa_exp)) {
+      cli::cli_abort(c(
+        "Argument {.arg pa_exp} of {.fn pa_age} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg pa.exp}."
+      ))
+    }
+    lifecycle::deprecate_soft("3.0.0", "pa_age(pa.exp = )", "pa_age(pa_exp = )")
+    pa_exp <- pa.exp
+  }
+
   constructor_spec(
     sample_pa_age,
     n,
-    pa.exp,
-    aging.exp,
+    pa_exp,
+    aging_exp,
     m = m,
-    aging.bin = aging.bin,
-    out.dist = out.dist,
-    out.seq = out.seq,
-    out.pref = out.pref,
+    aging_bin = aging_bin,
+    out_dist = out_dist,
+    out_seq = out_seq,
+    out_pref = out_pref,
     directed = directed,
-    zero.deg.appeal = zero.deg.appeal,
-    zero.age.appeal = zero.age.appeal,
-    deg.coef = deg.coef,
-    age.coef = age.coef,
-    time.window = time.window
+    zero_deg_appeal = zero_deg_appeal,
+    zero_age_appeal = zero_age_appeal,
+    deg_coef = deg_coef,
+    age_coef = age_coef,
+    time_window = time_window
   )
 }
 
@@ -2189,26 +2287,26 @@ pa_age <- function(
 #'
 #' For `sample_traits_callaway()` the simulation goes like this: in each
 #' discrete time step a new vertex is added to the graph. The type of this
-#' vertex is generated based on `type.dist`. Then two vertices are
+#' vertex is generated based on `type_dist`. Then two vertices are
 #' selected uniformly randomly from the graph. The probability that they will
 #' be connected depends on the types of these vertices and is taken from
-#' `pref.matrix`. Then another two vertices are selected and this is
+#' `pref_matrix`. Then another two vertices are selected and this is
 #' repeated `edges.per.step` times in each time step.
 #'
 #' For `sample_traits()` the simulation goes like this: a single vertex is
 #' added at each time step. This new vertex tries to connect to `k`
 #' vertices in the graph. The probability that such a connection is realized
 #' depends on the types of the vertices involved and is taken from
-#' `pref.matrix`.
+#' `pref_matrix`.
 #'
 #' @param n The number of vertices in the graph.
 #' @param nodes `r lifecycle::badge("deprecated")` Use `n` instead.
 #' @param types The number of different vertex types.
 #' @inheritParams rlang::args_dots_empty
-#' @param edge.per.step The number of edges to add to the graph per time step.
-#' @param type.dist The distribution of the vertex types. This is assumed to be
+#' @param edge_per_step The number of edges to add to the graph per time step.
+#' @param type_dist The distribution of the vertex types. This is assumed to be
 #'   stationary in time. The default `NULL` gives a uniform distribution.
-#' @param pref.matrix A matrix giving the preferences of the given vertex
+#' @param pref_matrix A matrix giving the preferences of the given vertex
 #'   types. These should be probabilities, i.e. numbers between zero and one.
 #'   The default `NULL` sets all preferences to one.
 #' @param directed Logical, whether to generate directed graphs.
@@ -2221,15 +2319,15 @@ pa_age <- function(
 #' @examples
 #'
 #' # two types of vertices, they like only themselves
-#' g1 <- sample_traits_callaway(1000, 2, pref.matrix = matrix(c(1, 0, 0, 1), ncol = 2))
-#' g2 <- sample_traits(1000, 2, k = 2, pref.matrix = matrix(c(1, 0, 0, 1), ncol = 2))
+#' g1 <- sample_traits_callaway(1000, 2, pref_matrix = matrix(c(1, 0, 0, 1), ncol = 2))
+#' g2 <- sample_traits(1000, 2, k = 2, pref_matrix = matrix(c(1, 0, 0, 1), ncol = 2))
 sample_traits_callaway <- function(
   n,
   types,
   ...,
-  edge.per.step = 1,
-  type.dist = NULL,
-  pref.matrix = NULL,
+  edge_per_step = 1,
+  type_dist = NULL,
+  pref_matrix = NULL,
   directed = FALSE,
   nodes = deprecated()
 ) {
@@ -2247,9 +2345,9 @@ sample_traits_callaway <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_traits_callaway}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(edge.per.step)) base::list(edge.per.step = edge.per.step),
-        if (!base::missing(type.dist)) base::list(type.dist = type.dist),
-        if (!base::missing(pref.matrix)) base::list(pref.matrix = pref.matrix),
+        if (!base::missing(edge.per.step)) base::list(edge_per_step = edge.per.step),
+        if (!base::missing(type.dist)) base::list(type_dist = type.dist),
+        if (!base::missing(pref.matrix)) base::list(pref_matrix = pref.matrix),
         if (!base::missing(directed)) base::list(directed = directed)
       )
     }
@@ -2257,9 +2355,9 @@ sample_traits_callaway <- function(
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(edge.per.step)) "edge.per.step",
-        if (!base::missing(type.dist)) "type.dist",
-        if (!base::missing(pref.matrix)) "pref.matrix",
+        if (!base::missing(edge_per_step)) "edge_per_step",
+        if (!base::missing(type_dist)) "type_dist",
+        if (!base::missing(pref_matrix)) "pref_matrix",
         if (!base::missing(directed)) "directed"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_traits_callaway} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
@@ -2268,7 +2366,7 @@ sample_traits_callaway <- function(
         "3.0.0",
         what = base::I("Calling `sample_traits_callaway()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  sample_traits_callaway(", base::paste(base::c("n", "types", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  sample_traits_callaway(", base::paste(base::c("n", "types", base::c(edge_per_step = "edge.per.step", type_dist = "type.dist", pref_matrix = "pref.matrix", directed = "directed")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    sample_traits_callaway(", base::paste(base::c("n", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -2291,20 +2389,20 @@ sample_traits_callaway <- function(
     n <- nodes
   }
 
-  if (is.null(type.dist)) {
-    type.dist <- rep(1, types)
+  if (is.null(type_dist)) {
+    type_dist <- rep(1, types)
   }
-  if (is.null(pref.matrix)) {
-    pref.matrix <- matrix(1, types, types)
+  if (is.null(pref_matrix)) {
+    pref_matrix <- matrix(1, types, types)
   }
 
   res <- callaway_traits_game_impl(
     nodes = n,
     types = types,
-    edges_per_step = edge.per.step,
-    type_dist = type.dist,
+    edges_per_step = edge_per_step,
+    type_dist = type_dist,
     pref_matrix = matrix(
-      as.double(pref.matrix),
+      as.double(pref_matrix),
       types,
       types
     ),
@@ -2313,9 +2411,9 @@ sample_traits_callaway <- function(
   if (igraph_opt("add.params")) {
     res$name <- "Trait-based Callaway graph"
     res$types <- types
-    res$edge.per.step <- edge.per.step
-    res$type.dist <- type.dist
-    res$pref.matrix <- pref.matrix
+    res$edge.per.step <- edge_per_step
+    res$type.dist <- type_dist
+    res$pref.matrix <- pref_matrix
   }
   res
 }
@@ -2327,9 +2425,9 @@ traits_callaway <- function(
   n,
   types,
   ...,
-  edge.per.step = 1,
-  type.dist = NULL,
-  pref.matrix = NULL,
+  edge_per_step = 1,
+  type_dist = NULL,
+  pref_matrix = NULL,
   directed = FALSE,
   nodes = deprecated()
 ) {
@@ -2347,9 +2445,9 @@ traits_callaway <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn traits_callaway}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(edge.per.step)) base::list(edge.per.step = edge.per.step),
-        if (!base::missing(type.dist)) base::list(type.dist = type.dist),
-        if (!base::missing(pref.matrix)) base::list(pref.matrix = pref.matrix),
+        if (!base::missing(edge.per.step)) base::list(edge_per_step = edge.per.step),
+        if (!base::missing(type.dist)) base::list(type_dist = type.dist),
+        if (!base::missing(pref.matrix)) base::list(pref_matrix = pref.matrix),
         if (!base::missing(directed)) base::list(directed = directed)
       )
     }
@@ -2357,9 +2455,9 @@ traits_callaway <- function(
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(edge.per.step)) "edge.per.step",
-        if (!base::missing(type.dist)) "type.dist",
-        if (!base::missing(pref.matrix)) "pref.matrix",
+        if (!base::missing(edge_per_step)) "edge_per_step",
+        if (!base::missing(type_dist)) "type_dist",
+        if (!base::missing(pref_matrix)) "pref_matrix",
         if (!base::missing(directed)) "directed"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn traits_callaway} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
@@ -2368,7 +2466,7 @@ traits_callaway <- function(
         "3.0.0",
         what = base::I("Calling `traits_callaway()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  traits_callaway(", base::paste(base::c("n", "types", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  traits_callaway(", base::paste(base::c("n", "types", base::c(edge_per_step = "edge.per.step", type_dist = "type.dist", pref_matrix = "pref.matrix", directed = "directed")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    traits_callaway(", base::paste(base::c("n", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -2391,20 +2489,20 @@ traits_callaway <- function(
     n <- nodes
   }
 
-  if (is.null(type.dist)) {
-    type.dist <- rep(1, types)
+  if (is.null(type_dist)) {
+    type_dist <- rep(1, types)
   }
-  if (is.null(pref.matrix)) {
-    pref.matrix <- matrix(1, types, types)
+  if (is.null(pref_matrix)) {
+    pref_matrix <- matrix(1, types, types)
   }
 
   constructor_spec(
     sample_traits_callaway,
     n,
     types,
-    edge.per.step = edge.per.step,
-    type.dist = type.dist,
-    pref.matrix = pref.matrix,
+    edge_per_step = edge_per_step,
+    type_dist = type_dist,
+    pref_matrix = pref_matrix,
     directed = directed
   )
 }
@@ -2417,8 +2515,8 @@ sample_traits <- function(
   types,
   k = 1,
   ...,
-  type.dist = NULL,
-  pref.matrix = NULL,
+  type_dist = NULL,
+  pref_matrix = NULL,
   directed = FALSE,
   nodes = deprecated()
 ) {
@@ -2436,8 +2534,8 @@ sample_traits <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_traits}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(type.dist)) base::list(type.dist = type.dist),
-        if (!base::missing(pref.matrix)) base::list(pref.matrix = pref.matrix),
+        if (!base::missing(type.dist)) base::list(type_dist = type.dist),
+        if (!base::missing(pref.matrix)) base::list(pref_matrix = pref.matrix),
         if (!base::missing(directed)) base::list(directed = directed)
       )
     }
@@ -2445,8 +2543,8 @@ sample_traits <- function(
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(type.dist)) "type.dist",
-        if (!base::missing(pref.matrix)) "pref.matrix",
+        if (!base::missing(type_dist)) "type_dist",
+        if (!base::missing(pref_matrix)) "pref_matrix",
         if (!base::missing(directed)) "directed"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_traits} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
@@ -2455,7 +2553,7 @@ sample_traits <- function(
         "3.0.0",
         what = base::I("Calling `sample_traits()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  sample_traits(", base::paste(base::c("n", "types", "k", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  sample_traits(", base::paste(base::c("n", "types", "k", base::c(type_dist = "type.dist", pref_matrix = "pref.matrix", directed = "directed")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    sample_traits(", base::paste(base::c("n", "types", "k", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -2478,27 +2576,27 @@ sample_traits <- function(
     n <- nodes
   }
 
-  if (is.null(type.dist)) {
-    type.dist <- rep(1, types)
+  if (is.null(type_dist)) {
+    type_dist <- rep(1, types)
   }
-  if (is.null(pref.matrix)) {
-    pref.matrix <- matrix(1, types, types)
+  if (is.null(pref_matrix)) {
+    pref_matrix <- matrix(1, types, types)
   }
 
   res <- establishment_game_impl(
     nodes = n,
     types = types,
     k = k,
-    type_dist = type.dist,
-    pref_matrix = matrix(as.double(pref.matrix), types, types),
+    type_dist = type_dist,
+    pref_matrix = matrix(as.double(pref_matrix), types, types),
     directed = directed
   )
   if (igraph_opt("add.params")) {
     res$name <- "Trait-based growing graph"
     res$types <- types
     res$k <- k
-    res$type.dist <- type.dist
-    res$pref.matrix <- pref.matrix
+    res$type.dist <- type_dist
+    res$pref.matrix <- pref_matrix
   }
   res
 }
@@ -2511,8 +2609,8 @@ traits <- function(
   types,
   k = 1,
   ...,
-  type.dist = NULL,
-  pref.matrix = NULL,
+  type_dist = NULL,
+  pref_matrix = NULL,
   directed = FALSE,
   nodes = deprecated()
 ) {
@@ -2530,8 +2628,8 @@ traits <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn traits}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(type.dist)) base::list(type.dist = type.dist),
-        if (!base::missing(pref.matrix)) base::list(pref.matrix = pref.matrix),
+        if (!base::missing(type.dist)) base::list(type_dist = type.dist),
+        if (!base::missing(pref.matrix)) base::list(pref_matrix = pref.matrix),
         if (!base::missing(directed)) base::list(directed = directed)
       )
     }
@@ -2539,8 +2637,8 @@ traits <- function(
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(type.dist)) "type.dist",
-        if (!base::missing(pref.matrix)) "pref.matrix",
+        if (!base::missing(type_dist)) "type_dist",
+        if (!base::missing(pref_matrix)) "pref_matrix",
         if (!base::missing(directed)) "directed"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn traits} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
@@ -2549,7 +2647,7 @@ traits <- function(
         "3.0.0",
         what = base::I("Calling `traits()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  traits(", base::paste(base::c("n", "types", "k", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  traits(", base::paste(base::c("n", "types", "k", base::c(type_dist = "type.dist", pref_matrix = "pref.matrix", directed = "directed")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    traits(", base::paste(base::c("n", "types", "k", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -2572,11 +2670,11 @@ traits <- function(
     n <- nodes
   }
 
-  if (is.null(type.dist)) {
-    type.dist <- rep(1, types)
+  if (is.null(type_dist)) {
+    type_dist <- rep(1, types)
   }
-  if (is.null(pref.matrix)) {
-    pref.matrix <- matrix(1, types, types)
+  if (is.null(pref_matrix)) {
+    pref_matrix <- matrix(1, types, types)
   }
 
   constructor_spec(
@@ -2584,8 +2682,8 @@ traits <- function(
     n,
     types,
     k = k,
-    type.dist = type.dist,
-    pref.matrix = pref.matrix,
+    type_dist = type_dist,
+    pref_matrix = pref_matrix,
     directed = directed
   )
 }
@@ -2803,16 +2901,16 @@ grg <- function(
 #' @param nodes `r lifecycle::badge("deprecated")` Use `n` instead.
 #' @param types The number of different vertex types.
 #' @inheritParams rlang::args_dots_empty
-#' @param type.dist The distribution of the vertex types, a numeric vector of
+#' @param type_dist The distribution of the vertex types, a numeric vector of
 #'   length \sQuote{types} containing non-negative numbers. The vector will be
 #'   normed to obtain probabilities. The default `NULL` gives a uniform
 #'   distribution.
-#' @param fixed.sizes Fix the number of vertices with a given vertex type
-#'   label. The `type.dist` argument gives the group sizes (i.e. number of
+#' @param fixed_sizes Fix the number of vertices with a given vertex type
+#'   label. The `type_dist` argument gives the group sizes (i.e. number of
 #'   vertices with the different labels) in this case.
-#' @param type.dist.matrix The joint distribution of the in- and out-vertex
+#' @param type_dist_matrix The joint distribution of the in- and out-vertex
 #'   types. The default `NULL` gives a uniform distribution.
-#' @param pref.matrix A square matrix giving the preferences of the vertex
+#' @param pref_matrix A square matrix giving the preferences of the vertex
 #'   types. The matrix has \sQuote{types} rows and columns. When generating
 #'   an undirected graph, it must be symmetric. The default `NULL` sets all
 #'   preferences to one.
@@ -2827,7 +2925,7 @@ grg <- function(
 #' @examples
 #'
 #' pf <- matrix(c(1, 0, 0, 1), nrow = 2)
-#' g <- sample_pref(20, 2, pref.matrix = pf)
+#' g <- sample_pref(20, 2, pref_matrix = pf)
 #' @examplesIf rlang::is_installed("tcltk") && rlang::is_interactive()
 #' # example code
 #'
@@ -2835,7 +2933,7 @@ grg <- function(
 #' @examples
 #'
 #' pf <- matrix(c(0, 1, 0, 0), nrow = 2)
-#' g <- sample_asym_pref(20, 2, pref.matrix = pf)
+#' g <- sample_asym_pref(20, 2, pref_matrix = pf)
 #' @examplesIf rlang::is_installed("tcltk") && rlang::is_interactive()
 #' tkplot(g, layout = layout_in_circle)
 #'
@@ -2843,9 +2941,9 @@ sample_pref <- function(
   n,
   types,
   ...,
-  type.dist = NULL,
-  fixed.sizes = FALSE,
-  pref.matrix = NULL,
+  type_dist = NULL,
+  fixed_sizes = FALSE,
+  pref_matrix = NULL,
   directed = FALSE,
   loops = FALSE,
   nodes = deprecated()
@@ -2864,9 +2962,9 @@ sample_pref <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_pref}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(type.dist)) base::list(type.dist = type.dist),
-        if (!base::missing(fixed.sizes)) base::list(fixed.sizes = fixed.sizes),
-        if (!base::missing(pref.matrix)) base::list(pref.matrix = pref.matrix),
+        if (!base::missing(type.dist)) base::list(type_dist = type.dist),
+        if (!base::missing(fixed.sizes)) base::list(fixed_sizes = fixed.sizes),
+        if (!base::missing(pref.matrix)) base::list(pref_matrix = pref.matrix),
         if (!base::missing(directed)) base::list(directed = directed),
         if (!base::missing(loops)) base::list(loops = loops)
       )
@@ -2875,9 +2973,9 @@ sample_pref <- function(
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(type.dist)) "type.dist",
-        if (!base::missing(fixed.sizes)) "fixed.sizes",
-        if (!base::missing(pref.matrix)) "pref.matrix",
+        if (!base::missing(type_dist)) "type_dist",
+        if (!base::missing(fixed_sizes)) "fixed_sizes",
+        if (!base::missing(pref_matrix)) "pref_matrix",
         if (!base::missing(directed)) "directed",
         if (!base::missing(loops)) "loops"
       ))
@@ -2887,7 +2985,7 @@ sample_pref <- function(
         "3.0.0",
         what = base::I("Calling `sample_pref()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  sample_pref(", base::paste(base::c("n", "types", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  sample_pref(", base::paste(base::c("n", "types", base::c(type_dist = "type.dist", fixed_sizes = "fixed.sizes", pref_matrix = "pref.matrix", directed = "directed", loops = "loops")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    sample_pref(", base::paste(base::c("n", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -2910,16 +3008,16 @@ sample_pref <- function(
     n <- nodes
   }
 
-  if (is.null(type.dist)) {
-    type.dist <- rep(1, types)
+  if (is.null(type_dist)) {
+    type_dist <- rep(1, types)
   }
-  if (is.null(pref.matrix)) {
-    pref.matrix <- matrix(1, types, types)
+  if (is.null(pref_matrix)) {
+    pref_matrix <- matrix(1, types, types)
   }
 
-  if (nrow(pref.matrix) != types || ncol(pref.matrix) != types) {
+  if (nrow(pref_matrix) != types || ncol(pref_matrix) != types) {
     cli::cli_abort(c(
-      "{.arg pref.matrix} must have {.arg types} rows and columns.",
+      "{.arg pref_matrix} must have {.arg types} rows and columns.",
       i = "See {.fun sample_pref}'s manual."
     ))
   }
@@ -2927,9 +3025,9 @@ sample_pref <- function(
   res <- preference_game_impl(
     nodes = n,
     types = types,
-    type_dist = type.dist,
-    fixed_sizes = fixed.sizes,
-    pref_matrix = pref.matrix,
+    type_dist = type_dist,
+    fixed_sizes = fixed_sizes,
+    pref_matrix = pref_matrix,
     directed = directed,
     loops = loops
   )
@@ -2937,9 +3035,9 @@ sample_pref <- function(
   if (igraph_opt("add.params")) {
     res[[1]]$name <- "Preference random graph"
     res[[1]]$types <- types
-    res[[1]]$type.dist <- type.dist
-    res[[1]]$fixed.sizes <- fixed.sizes
-    res[[1]]$pref.matrix <- pref.matrix
+    res[[1]]$type.dist <- type_dist
+    res[[1]]$fixed.sizes <- fixed_sizes
+    res[[1]]$pref.matrix <- pref_matrix
     res[[1]]$loops <- loops
   }
   res[[1]]
@@ -2952,9 +3050,9 @@ pref <- function(
   n,
   types,
   ...,
-  type.dist = NULL,
-  fixed.sizes = FALSE,
-  pref.matrix = NULL,
+  type_dist = NULL,
+  fixed_sizes = FALSE,
+  pref_matrix = NULL,
   directed = FALSE,
   loops = FALSE,
   nodes = deprecated()
@@ -2973,9 +3071,9 @@ pref <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn pref}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(type.dist)) base::list(type.dist = type.dist),
-        if (!base::missing(fixed.sizes)) base::list(fixed.sizes = fixed.sizes),
-        if (!base::missing(pref.matrix)) base::list(pref.matrix = pref.matrix),
+        if (!base::missing(type.dist)) base::list(type_dist = type.dist),
+        if (!base::missing(fixed.sizes)) base::list(fixed_sizes = fixed.sizes),
+        if (!base::missing(pref.matrix)) base::list(pref_matrix = pref.matrix),
         if (!base::missing(directed)) base::list(directed = directed),
         if (!base::missing(loops)) base::list(loops = loops)
       )
@@ -2984,9 +3082,9 @@ pref <- function(
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(type.dist)) "type.dist",
-        if (!base::missing(fixed.sizes)) "fixed.sizes",
-        if (!base::missing(pref.matrix)) "pref.matrix",
+        if (!base::missing(type_dist)) "type_dist",
+        if (!base::missing(fixed_sizes)) "fixed_sizes",
+        if (!base::missing(pref_matrix)) "pref_matrix",
         if (!base::missing(directed)) "directed",
         if (!base::missing(loops)) "loops"
       ))
@@ -2996,7 +3094,7 @@ pref <- function(
         "3.0.0",
         what = base::I("Calling `pref()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  pref(", base::paste(base::c("n", "types", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  pref(", base::paste(base::c("n", "types", base::c(type_dist = "type.dist", fixed_sizes = "fixed.sizes", pref_matrix = "pref.matrix", directed = "directed", loops = "loops")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    pref(", base::paste(base::c("n", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -3019,20 +3117,20 @@ pref <- function(
     n <- nodes
   }
 
-  if (is.null(type.dist)) {
-    type.dist <- rep(1, types)
+  if (is.null(type_dist)) {
+    type_dist <- rep(1, types)
   }
-  if (is.null(pref.matrix)) {
-    pref.matrix <- matrix(1, types, types)
+  if (is.null(pref_matrix)) {
+    pref_matrix <- matrix(1, types, types)
   }
 
   constructor_spec(
     sample_pref,
     n,
     types,
-    type.dist = type.dist,
-    fixed.sizes = fixed.sizes,
-    pref.matrix = pref.matrix,
+    type_dist = type_dist,
+    fixed_sizes = fixed_sizes,
+    pref_matrix = pref_matrix,
     directed = directed,
     loops = loops
   )
@@ -3045,8 +3143,8 @@ sample_asym_pref <- function(
   n,
   types,
   ...,
-  type.dist.matrix = NULL,
-  pref.matrix = NULL,
+  type_dist_matrix = NULL,
+  pref_matrix = NULL,
   loops = FALSE,
   nodes = deprecated()
 ) {
@@ -3064,8 +3162,8 @@ sample_asym_pref <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_asym_pref}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(type.dist.matrix)) base::list(type.dist.matrix = type.dist.matrix),
-        if (!base::missing(pref.matrix)) base::list(pref.matrix = pref.matrix),
+        if (!base::missing(type.dist.matrix)) base::list(type_dist_matrix = type.dist.matrix),
+        if (!base::missing(pref.matrix)) base::list(pref_matrix = pref.matrix),
         if (!base::missing(loops)) base::list(loops = loops)
       )
     }
@@ -3073,8 +3171,8 @@ sample_asym_pref <- function(
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(type.dist.matrix)) "type.dist.matrix",
-        if (!base::missing(pref.matrix)) "pref.matrix",
+        if (!base::missing(type_dist_matrix)) "type_dist_matrix",
+        if (!base::missing(pref_matrix)) "pref_matrix",
         if (!base::missing(loops)) "loops"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_asym_pref} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
@@ -3083,7 +3181,7 @@ sample_asym_pref <- function(
         "3.0.0",
         what = base::I("Calling `sample_asym_pref()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  sample_asym_pref(", base::paste(base::c("n", "types", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  sample_asym_pref(", base::paste(base::c("n", "types", base::c(type_dist_matrix = "type.dist.matrix", pref_matrix = "pref.matrix", loops = "loops")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    sample_asym_pref(", base::paste(base::c("n", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -3106,22 +3204,22 @@ sample_asym_pref <- function(
     n <- nodes
   }
 
-  if (is.null(type.dist.matrix)) {
-    type.dist.matrix <- matrix(1, types, types)
+  if (is.null(type_dist_matrix)) {
+    type_dist_matrix <- matrix(1, types, types)
   }
-  if (is.null(pref.matrix)) {
-    pref.matrix <- matrix(1, types, types)
+  if (is.null(pref_matrix)) {
+    pref_matrix <- matrix(1, types, types)
   }
 
-  if (nrow(pref.matrix) != types || ncol(pref.matrix) != types) {
+  if (nrow(pref_matrix) != types || ncol(pref_matrix) != types) {
     cli::cli_abort(c(
-      "{.arg pref.matrix} must have {.arg types} rows and columns.",
+      "{.arg pref_matrix} must have {.arg types} rows and columns.",
       i = "See {.fun sample_asym_pref}'s manual."
     ))
   }
-  if (nrow(type.dist.matrix) != types || ncol(type.dist.matrix) != types) {
+  if (nrow(type_dist_matrix) != types || ncol(type_dist_matrix) != types) {
     cli::cli_abort(c(
-      "{.arg type.dist.matrix} must have {.arg types} rows and columns.",
+      "{.arg type_dist_matrix} must have {.arg types} rows and columns.",
       i = "See {.fun sample_asym_pref}'s manual."
     ))
   }
@@ -3130,8 +3228,8 @@ sample_asym_pref <- function(
     nodes = n,
     out_types = types,
     in_types = types,
-    type_dist_matrix = type.dist.matrix,
-    pref_matrix = pref.matrix,
+    type_dist_matrix = type_dist_matrix,
+    pref_matrix = pref_matrix,
     loops = loops
   )
   V(res[[1]])$outtype <- res[[2]] + 1
@@ -3139,8 +3237,8 @@ sample_asym_pref <- function(
   if (igraph_opt("add.params")) {
     res[[1]]$name <- "Asymmetric preference random graph"
     res[[1]]$types <- types
-    res[[1]]$type.dist.matrix <- type.dist.matrix
-    res[[1]]$pref.matrix <- pref.matrix
+    res[[1]]$type.dist.matrix <- type_dist_matrix
+    res[[1]]$pref.matrix <- pref_matrix
     res[[1]]$loops <- loops
   }
 
@@ -3154,8 +3252,8 @@ asym_pref <- function(
   n,
   types,
   ...,
-  type.dist.matrix = NULL,
-  pref.matrix = NULL,
+  type_dist_matrix = NULL,
+  pref_matrix = NULL,
   loops = FALSE,
   nodes = deprecated()
 ) {
@@ -3173,8 +3271,8 @@ asym_pref <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn asym_pref}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(type.dist.matrix)) base::list(type.dist.matrix = type.dist.matrix),
-        if (!base::missing(pref.matrix)) base::list(pref.matrix = pref.matrix),
+        if (!base::missing(type.dist.matrix)) base::list(type_dist_matrix = type.dist.matrix),
+        if (!base::missing(pref.matrix)) base::list(pref_matrix = pref.matrix),
         if (!base::missing(loops)) base::list(loops = loops)
       )
     }
@@ -3182,8 +3280,8 @@ asym_pref <- function(
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(type.dist.matrix)) "type.dist.matrix",
-        if (!base::missing(pref.matrix)) "pref.matrix",
+        if (!base::missing(type_dist_matrix)) "type_dist_matrix",
+        if (!base::missing(pref_matrix)) "pref_matrix",
         if (!base::missing(loops)) "loops"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn asym_pref} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
@@ -3192,7 +3290,7 @@ asym_pref <- function(
         "3.0.0",
         what = base::I("Calling `asym_pref()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  asym_pref(", base::paste(base::c("n", "types", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  asym_pref(", base::paste(base::c("n", "types", base::c(type_dist_matrix = "type.dist.matrix", pref_matrix = "pref.matrix", loops = "loops")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    asym_pref(", base::paste(base::c("n", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -3215,19 +3313,19 @@ asym_pref <- function(
     n <- nodes
   }
 
-  if (is.null(type.dist.matrix)) {
-    type.dist.matrix <- matrix(1, types, types)
+  if (is.null(type_dist_matrix)) {
+    type_dist_matrix <- matrix(1, types, types)
   }
-  if (is.null(pref.matrix)) {
-    pref.matrix <- matrix(1, types, types)
+  if (is.null(pref_matrix)) {
+    pref_matrix <- matrix(1, types, types)
   }
 
   constructor_spec(
     sample_asym_pref,
     n,
     types,
-    type.dist.matrix = type.dist.matrix,
-    pref.matrix = pref.matrix,
+    type_dist_matrix = type_dist_matrix,
+    pref_matrix = pref_matrix,
     loops = loops
   )
 }
@@ -4169,18 +4267,20 @@ sample_bipartite_gnp <- function(
 #'
 #' This function samples graphs from a stochastic block model by (doing the
 #' equivalent of) Bernoulli trials for each potential edge with the
-#' probabilities given by the Bernoulli rate matrix, `pref.matrix`.
+#' probabilities given by the Bernoulli rate matrix, `pref_matrix`.
 #' The order of the vertices in the generated graph corresponds to the
-#' `block.sizes` argument.
+#' `block_sizes` argument.
 #'
 #' @param n Number of vertices in the graph.
-#' @param pref.matrix The matrix giving the Bernoulli rates.  This is a
+#' @param pref_matrix The matrix giving the Bernoulli rates.  This is a
 #'   \eqn{K\times K}{KxK} matrix, where \eqn{K} is the number of groups. The
 #'   probability of creating an edge between vertices from groups \eqn{i} and
 #'   \eqn{j} is given by element \eqn{(i,j)}. For undirected graphs, this matrix
 #'   must be symmetric.
-#' @param block.sizes Numeric vector giving the number of vertices in each
+#' @param pref.matrix `r lifecycle::badge("deprecated")` Use `pref_matrix` instead.
+#' @param block_sizes Numeric vector giving the number of vertices in each
 #'   group. The sum of the vector must match the number of vertices.
+#' @param block.sizes `r lifecycle::badge("deprecated")` Use `block_sizes` instead.
 #' @inheritParams sample_pref
 #' @inheritParams rlang::args_dots_empty
 #' @return An igraph graph.
@@ -4192,21 +4292,25 @@ sample_bipartite_gnp <- function(
 #'
 #' ## Two groups with not only few connection between groups
 #' pm <- cbind(c(0.1, 0.001), c(0.001, 0.05))
-#' g <- sample_sbm(1000, pref.matrix = pm, block.sizes = c(300, 700))
+#' g <- sample_sbm(1000, pref_matrix = pm, block_sizes = c(300, 700))
 #' g
 #' @family games
 #' @export
 sample_sbm <- function(
   n,
-  pref.matrix,
-  block.sizes,
+  pref_matrix,
+  block_sizes,
   ...,
   directed = FALSE,
-  loops = FALSE
+  loops = FALSE,
+  pref.matrix = deprecated(),
+  block.sizes = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_sbm, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("b", "bl", "blo", "bloc", "block", "p", "pr", "pre", "pref"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn sample_sbm}.", i = "Spell out the full argument name."))
     # Pre-3.0.0 signature: sample_sbm(n, pref.matrix, block.sizes, directed, loops)
     .old_signature <- function(directed, loops, ...) {
       if (...length() > 0L) {
@@ -4233,18 +4337,48 @@ sample_sbm <- function(
         "3.0.0",
         what = base::I("Calling `sample_sbm()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  sample_sbm(", base::paste(base::c("n", "pref.matrix", "block.sizes", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    sample_sbm(", base::paste(base::c("n", "pref.matrix", "block.sizes", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  sample_sbm(", base::paste(base::c("n", "pref_matrix", "block_sizes", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_sbm(", base::paste(base::c("n", "pref_matrix", "block_sizes", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
+  if (lifecycle::is_present(block.sizes)) {
+    if (!missing(block_sizes)) {
+      cli::cli_abort(c(
+        "Argument {.arg block_sizes} of {.fn sample_sbm} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg block.sizes}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "sample_sbm(block.sizes = )",
+      "sample_sbm(block_sizes = )"
+    )
+    block_sizes <- block.sizes
+  }
+
+  if (lifecycle::is_present(pref.matrix)) {
+    if (!missing(pref_matrix)) {
+      cli::cli_abort(c(
+        "Argument {.arg pref_matrix} of {.fn sample_sbm} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg pref.matrix}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "sample_sbm(pref.matrix = )",
+      "sample_sbm(pref_matrix = )"
+    )
+    pref_matrix <- pref.matrix
+  }
+
   sbm_game_impl(
     n = n,
-    pref_matrix = pref.matrix,
-    block_sizes = block.sizes,
+    pref_matrix = pref_matrix,
+    block_sizes = block_sizes,
     directed = directed,
     loops = loops
   )
@@ -4255,15 +4389,19 @@ sample_sbm <- function(
 #' @export
 sbm <- function(
   n,
-  pref.matrix,
-  block.sizes,
+  pref_matrix,
+  block_sizes,
   ...,
   directed = FALSE,
-  loops = FALSE
+  loops = FALSE,
+  pref.matrix = deprecated(),
+  block.sizes = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: sbm, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("b", "bl", "blo", "bloc", "block", "p", "pr", "pre", "pref"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn sbm}.", i = "Spell out the full argument name."))
     # Pre-3.0.0 signature: sbm(n, pref.matrix, block.sizes, directed, loops)
     .old_signature <- function(directed, loops, ...) {
       if (...length() > 0L) {
@@ -4290,19 +4428,49 @@ sbm <- function(
         "3.0.0",
         what = base::I("Calling `sbm()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  sbm(", base::paste(base::c("n", "pref.matrix", "block.sizes", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    sbm(", base::paste(base::c("n", "pref.matrix", "block.sizes", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  sbm(", base::paste(base::c("n", "pref_matrix", "block_sizes", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sbm(", base::paste(base::c("n", "pref_matrix", "block_sizes", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
+  if (lifecycle::is_present(block.sizes)) {
+    if (!missing(block_sizes)) {
+      cli::cli_abort(c(
+        "Argument {.arg block_sizes} of {.fn sbm} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg block.sizes}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "sbm(block.sizes = )",
+      "sbm(block_sizes = )"
+    )
+    block_sizes <- block.sizes
+  }
+
+  if (lifecycle::is_present(pref.matrix)) {
+    if (!missing(pref_matrix)) {
+      cli::cli_abort(c(
+        "Argument {.arg pref_matrix} of {.fn sbm} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg pref.matrix}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "sbm(pref.matrix = )",
+      "sbm(pref_matrix = )"
+    )
+    pref_matrix <- pref.matrix
+  }
+
   constructor_spec(
     sample_sbm,
     n,
-    pref.matrix,
-    block.sizes,
+    pref_matrix,
+    block_sizes,
     directed = directed,
     loops = loops
   )
@@ -4551,23 +4719,96 @@ dot_product <- function(
 #' oc
 #' }
 #'
-#' @param islands.n The number of islands in the graph.
-#' @param islands.size The size of islands in the graph.
-#' @param islands.pin The probability to create each possible edge into each
+#' @param n_islands The number of islands in the graph.
+#' @param islands.n `r lifecycle::badge("deprecated")` Use `n_islands` instead.
+#' @param islands_size The size of islands in the graph.
+#' @param islands.size `r lifecycle::badge("deprecated")` Use `islands_size` instead.
+#' @param islands_pin The probability to create each possible edge into each
 #'   island.
-#' @param n.inter The number of edges to create between two islands.
+#' @param islands.pin `r lifecycle::badge("deprecated")` Use `islands_pin` instead.
+#' @param n_inter The number of edges to create between two islands.
+#' @param n.inter `r lifecycle::badge("deprecated")` Use `n_inter` instead.
 #' @return An igraph graph.
 #' @author Samuel Thiriot
 #' @seealso [sample_gnp()]
 #' @keywords graphs
 #' @family games
 #' @export
-sample_islands <- function(islands.n, islands.size, islands.pin, n.inter) {
+sample_islands <- function(
+  n_islands,
+  islands_size,
+  islands_pin,
+  n_inter,
+  islands.n = deprecated(),
+  islands.size = deprecated(),
+  islands.pin = deprecated(),
+  n.inter = deprecated()
+) {
+  if (lifecycle::is_present(n.inter)) {
+    if (!missing(n_inter)) {
+      cli::cli_abort(c(
+        "Argument {.arg n_inter} of {.fn sample_islands} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg n.inter}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "sample_islands(n.inter = )",
+      "sample_islands(n_inter = )"
+    )
+    n_inter <- n.inter
+  }
+
+  if (lifecycle::is_present(islands.pin)) {
+    if (!missing(islands_pin)) {
+      cli::cli_abort(c(
+        "Argument {.arg islands_pin} of {.fn sample_islands} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg islands.pin}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "sample_islands(islands.pin = )",
+      "sample_islands(islands_pin = )"
+    )
+    islands_pin <- islands.pin
+  }
+
+  if (lifecycle::is_present(islands.size)) {
+    if (!missing(islands_size)) {
+      cli::cli_abort(c(
+        "Argument {.arg islands_size} of {.fn sample_islands} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg islands.size}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "sample_islands(islands.size = )",
+      "sample_islands(islands_size = )"
+    )
+    islands_size <- islands.size
+  }
+
+  if (lifecycle::is_present(islands.n)) {
+    if (!missing(n_islands)) {
+      cli::cli_abort(c(
+        "Argument {.arg n_islands} of {.fn sample_islands} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg islands.n}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "sample_islands(islands.n = )",
+      "sample_islands(n_islands = )"
+    )
+    n_islands <- islands.n
+  }
+
   res <- simple_interconnected_islands_game_impl(
-    islands_n = islands.n,
-    islands_size = islands.size,
-    islands_pin = islands.pin,
-    n_inter = n.inter
+    islands_n = n_islands,
+    islands_size = islands_size,
+    islands_pin = islands_pin,
+    n_inter = n_inter
   )
 
   # Add backward-compatible dotted names
@@ -4593,8 +4834,9 @@ sample_islands <- function(islands.n, islands.size, islands.pin, n.inter) {
 #' The game simply uses [sample_degseq()] with appropriately
 #' constructed degree sequences.
 #'
-#' @param no.of.nodes Integer scalar, the number of vertices in the generated
+#' @param n Integer scalar, the number of vertices in the generated
 #'   graph.
+#' @param no.of.nodes `r lifecycle::badge("deprecated")` Use `n` instead.
 #' @param k Integer scalar, the degree of each vertex in the graph, or the
 #'   out-degree and in-degree in a directed graph.
 #' @inheritParams rlang::args_dots_empty
@@ -4612,18 +4854,19 @@ sample_islands <- function(islands.n, islands.size, islands.pin, n.inter) {
 #' plot(ring)
 #'
 #' ## k-regular graphs on 10 vertices, with k=1:9
-#' k10 <- lapply(1:9, sample_k_regular, no.of.nodes = 10)
+#' k10 <- lapply(1:9, sample_k_regular, n = 10)
 #'
 #' layout(matrix(1:9, nrow = 3, byrow = TRUE))
 #' sapply(k10, plot, vertex.label = NA)
 #' @family games
 #' @export
 sample_k_regular <- function(
-  no.of.nodes,
+  n,
   k,
   ...,
   directed = FALSE,
-  multiple = FALSE
+  multiple = FALSE,
+  no.of.nodes = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_k_regular, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -4654,16 +4897,31 @@ sample_k_regular <- function(
         "3.0.0",
         what = base::I("Calling `sample_k_regular()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  sample_k_regular(", base::paste(base::c("no.of.nodes", "k", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    sample_k_regular(", base::paste(base::c("no.of.nodes", "k", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  sample_k_regular(", base::paste(base::c("n", "k", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_k_regular(", base::paste(base::c("n", "k", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
+  if (lifecycle::is_present(no.of.nodes)) {
+    if (!missing(n)) {
+      cli::cli_abort(c(
+        "Argument {.arg n} of {.fn sample_k_regular} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg no.of.nodes}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "sample_k_regular(no.of.nodes = )",
+      "sample_k_regular(n = )"
+    )
+    n <- no.of.nodes
+  }
+
   k_regular_game_impl(
-    no_of_nodes = no.of.nodes,
+    no_of_nodes = n,
     k = k,
     directed = directed,
     multiple = multiple
@@ -4769,12 +5027,14 @@ sample_k_regular <- function(
 #'   \doi{10.1002/rsa.20450}
 #'
 #' @inheritParams rlang::args_dots_empty
-#' @param out.weights A vector of non-negative vertex weights (or out-weights).
+#' @param out_weights A vector of non-negative vertex weights (or out-weights).
 #'   In sparse graphs, these will be approximately equal to the expected
 #'   (out-)degrees.
-#' @param in.weights A vector of non-negative in-weights, approximately equal to
+#' @param out.weights `r lifecycle::badge("deprecated")` Use `out_weights` instead.
+#' @param in_weights A vector of non-negative in-weights, approximately equal to
 #'   the expected in-degrees in sparse graphs. May be set to \code{NULL}, in
 #'   which case undirected graphs are generated.
+#' @param in.weights `r lifecycle::badge("deprecated")` Use `in_weights` instead.
 #' @param loops Logical, whether to allow the creation of self-loops. Since
 #'   vertex pairs are connected independently, setting this to \code{FALSE} is
 #'   equivalent to simply discarding self-loops from an existing loopy Chung-Lu
@@ -4817,15 +5077,47 @@ sample_k_regular <- function(
 #' ))
 #' @export
 sample_chung_lu <- function(
-  out.weights,
-  in.weights = NULL,
+  out_weights,
+  in_weights = NULL,
   ...,
   loops = TRUE,
-  variant = c("original", "maxent", "nr")
+  variant = c("original", "maxent", "nr"),
+  out.weights = deprecated(),
+  in.weights = deprecated()
 ) {
+  if (lifecycle::is_present(in.weights)) {
+    if (!missing(in_weights)) {
+      cli::cli_abort(c(
+        "Argument {.arg in_weights} of {.fn sample_chung_lu} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg in.weights}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "sample_chung_lu(in.weights = )",
+      "sample_chung_lu(in_weights = )"
+    )
+    in_weights <- in.weights
+  }
+
+  if (lifecycle::is_present(out.weights)) {
+    if (!missing(out_weights)) {
+      cli::cli_abort(c(
+        "Argument {.arg out_weights} of {.fn sample_chung_lu} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg out.weights}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "sample_chung_lu(out.weights = )",
+      "sample_chung_lu(out_weights = )"
+    )
+    out_weights <- out.weights
+  }
+
   chung_lu_game_impl(
-    out_weights = out.weights,
-    in_weights = in.weights,
+    out_weights = out_weights,
+    in_weights = in_weights,
     loops = loops,
     variant = variant
   )
@@ -4834,17 +5126,49 @@ sample_chung_lu <- function(
 #' @rdname sample_chung_lu
 #' @export
 chung_lu <- function(
-  out.weights,
-  in.weights = NULL,
+  out_weights,
+  in_weights = NULL,
   ...,
   loops = TRUE,
-  variant = c("original", "maxent", "nr")
+  variant = c("original", "maxent", "nr"),
+  out.weights = deprecated(),
+  in.weights = deprecated()
 ) {
+  if (lifecycle::is_present(in.weights)) {
+    if (!missing(in_weights)) {
+      cli::cli_abort(c(
+        "Argument {.arg in_weights} of {.fn chung_lu} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg in.weights}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "chung_lu(in.weights = )",
+      "chung_lu(in_weights = )"
+    )
+    in_weights <- in.weights
+  }
+
+  if (lifecycle::is_present(out.weights)) {
+    if (!missing(out_weights)) {
+      cli::cli_abort(c(
+        "Argument {.arg out_weights} of {.fn chung_lu} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg out.weights}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "chung_lu(out.weights = )",
+      "chung_lu(out_weights = )"
+    )
+    out_weights <- out.weights
+  }
+
   variant <- rlang::arg_match(variant)
   constructor_spec(
     sample_chung_lu,
-    out.weights,
-    in.weights,
+    out_weights,
+    in_weights,
     ...,
     loops = loops,
     variant = variant
@@ -4884,12 +5208,15 @@ chung_lu <- function(
 #' distribution. Alternatively, you may use [sample_fitness_pl()]
 #' which generates the fitnesses for you with a given exponent.
 #'
-#' @param no.of.edges The number of edges in the generated graph.
-#' @param fitness.out A numeric vector containing the fitness of each vertex.
+#' @param n_edges The number of edges in the generated graph.
+#' @param no.of.edges `r lifecycle::badge("deprecated")` Use `n_edges` instead.
+#' @param fitness_out A numeric vector containing the fitness of each vertex.
 #'   For directed graphs, this specifies the out-fitness of each vertex.
-#' @param fitness.in Numeric vector that specifies the in-fitness of each vertex.
+#' @param fitness.out `r lifecycle::badge("deprecated")` Use `fitness_out` instead.
+#' @param fitness_in Numeric vector that specifies the in-fitness of each vertex.
 #'   The generated graph will be directed.
 #'   Default: `NULL`, the generated graph will be undirected.
+#' @param fitness.in `r lifecycle::badge("deprecated")` Use `fitness_in` instead.
 #' @inheritParams rlang::args_dots_empty
 #' @param loops Logical, whether to allow loop edges in the graph.
 #' @param multiple Logical, whether to allow multiple edges in the
@@ -4909,16 +5236,23 @@ chung_lu <- function(
 #' degree_distribution(g)
 #' plot(degree_distribution(g, cumulative = TRUE), log = "xy")
 sample_fitness <- function(
-  no.of.edges,
-  fitness.out,
-  fitness.in = NULL,
+  n_edges,
+  fitness_out,
+  fitness_in = NULL,
   ...,
   loops = FALSE,
-  multiple = FALSE
+  multiple = FALSE,
+  no.of.edges = deprecated(),
+  fitness.out = deprecated(),
+  fitness.in = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_fitness, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("n"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn sample_fitness}.", i = "Spell out the full argument name."))
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("f", "fi", "fit", "fitn", "fitne", "fitnes", "fitness", "fitness."))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn sample_fitness}.")
     # Pre-3.0.0 signature: sample_fitness(no.of.edges, fitness.out, fitness.in, loops, multiple)
     .old_signature <- function(loops, multiple, ...) {
       if (...length() > 0L) {
@@ -4945,18 +5279,63 @@ sample_fitness <- function(
         "3.0.0",
         what = base::I("Calling `sample_fitness()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  sample_fitness(", base::paste(base::c("no.of.edges", "fitness.out", "fitness.in", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    sample_fitness(", base::paste(base::c("no.of.edges", "fitness.out", "fitness.in", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  sample_fitness(", base::paste(base::c("n_edges", "fitness_out", "fitness_in", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_fitness(", base::paste(base::c("n_edges", "fitness_out", "fitness_in", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
+  if (lifecycle::is_present(fitness.in)) {
+    if (!missing(fitness_in)) {
+      cli::cli_abort(c(
+        "Argument {.arg fitness_in} of {.fn sample_fitness} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg fitness.in}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "sample_fitness(fitness.in = )",
+      "sample_fitness(fitness_in = )"
+    )
+    fitness_in <- fitness.in
+  }
+
+  if (lifecycle::is_present(fitness.out)) {
+    if (!missing(fitness_out)) {
+      cli::cli_abort(c(
+        "Argument {.arg fitness_out} of {.fn sample_fitness} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg fitness.out}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "sample_fitness(fitness.out = )",
+      "sample_fitness(fitness_out = )"
+    )
+    fitness_out <- fitness.out
+  }
+
+  if (lifecycle::is_present(no.of.edges)) {
+    if (!missing(n_edges)) {
+      cli::cli_abort(c(
+        "Argument {.arg n_edges} of {.fn sample_fitness} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg no.of.edges}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "sample_fitness(no.of.edges = )",
+      "sample_fitness(n_edges = )"
+    )
+    n_edges <- no.of.edges
+  }
+
   static_fitness_game_impl(
-    no_of_edges = no.of.edges,
-    fitness_out = fitness.out,
-    fitness_in = fitness.in,
+    no_of_edges = n_edges,
+    fitness_out = fitness_out,
+    fitness_in = fitness_in,
     loops = loops,
     multiple = multiple
   )
@@ -4991,18 +5370,22 @@ sample_fitness <- function(
 #' the square root of the number of edges times the average degree; see the
 #' paper of Chung and Lu, and Cho et al for more details.
 #'
-#' @param no.of.nodes The number of vertices in the generated graph.
-#' @param no.of.edges The number of edges in the generated graph.
-#' @param exponent.out Numeric scalar, the power law exponent of the degree
+#' @param n The number of vertices in the generated graph.
+#' @param no.of.nodes `r lifecycle::badge("deprecated")` Use `n` instead.
+#' @param n_edges The number of edges in the generated graph.
+#' @param no.of.edges `r lifecycle::badge("deprecated")` Use `n_edges` instead.
+#' @param exponent_out Numeric scalar, the power law exponent of the degree
 #'   distribution. For directed graphs, this specifies the exponent of the
 #'   out-degree distribution. It must be greater than or equal to 2. If you pass
 #'   `Inf` here, you will get back an Erdős-Rényi random network.
-#' @param exponent.in Numeric scalar. If negative, the generated graph will be
+#' @param exponent.out `r lifecycle::badge("deprecated")` Use `exponent_out` instead.
+#' @param exponent_in Numeric scalar. If negative, the generated graph will be
 #'   undirected. If greater than or equal to 2, this argument specifies the
 #'   exponent of the in-degree distribution. If non-negative but less than 2, an
 #'   error will be generated.
+#' @param exponent.in `r lifecycle::badge("deprecated")` Use `exponent_in` instead.
 #' @inheritParams sample_fitness
-#' @param finite.size.correction Logical, whether to use the proposed
+#' @param finite_size_correction Logical, whether to use the proposed
 #'   finite size correction of Cho et al., see references below.
 #' @inheritParams rlang::args_dots_empty
 #' @return An igraph graph, directed or undirected.
@@ -5025,18 +5408,24 @@ sample_fitness <- function(
 #' g <- sample_fitness_pl(10000, 30000, 2.2, 2.3)
 #' plot(degree_distribution(g, cumulative = TRUE, mode = "out"), log = "xy")
 sample_fitness_pl <- function(
-  no.of.nodes,
-  no.of.edges,
-  exponent.out,
-  exponent.in = -1,
+  n,
+  n_edges,
+  exponent_out,
+  exponent_in = -1,
   ...,
   loops = FALSE,
   multiple = FALSE,
-  finite.size.correction = TRUE
+  finite_size_correction = TRUE,
+  no.of.nodes = deprecated(),
+  no.of.edges = deprecated(),
+  exponent.out = deprecated(),
+  exponent.in = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_fitness_pl, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("n", "no", "no.", "no.o", "no.of", "no.of.", "e", "ex", "exp", "expo", "expon", "expone", "exponen", "exponent", "exponent."))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn sample_fitness_pl}.")
     # Pre-3.0.0 signature: sample_fitness_pl(no.of.nodes, no.of.edges, exponent.out, exponent.in, loops, multiple, finite.size.correction)
     .old_signature <- function(loops, multiple, finite.size.correction, ...) {
       if (...length() > 0L) {
@@ -5048,7 +5437,7 @@ sample_fitness_pl <- function(
       base::c(
         if (!base::missing(loops)) base::list(loops = loops),
         if (!base::missing(multiple)) base::list(multiple = multiple),
-        if (!base::missing(finite.size.correction)) base::list(finite.size.correction = finite.size.correction)
+        if (!base::missing(finite.size.correction)) base::list(finite_size_correction = finite.size.correction)
       )
     }
     .arg_handle <- .old_signature(...)
@@ -5057,7 +5446,7 @@ sample_fitness_pl <- function(
       .arg_conflict <- base::intersect(.arg_names, base::c(
         if (!base::missing(loops)) "loops",
         if (!base::missing(multiple)) "multiple",
-        if (!base::missing(finite.size.correction)) "finite.size.correction"
+        if (!base::missing(finite_size_correction)) "finite_size_correction"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_fitness_pl} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -5065,22 +5454,82 @@ sample_fitness_pl <- function(
         "3.0.0",
         what = base::I("Calling `sample_fitness_pl()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  sample_fitness_pl(", base::paste(base::c("no.of.nodes", "no.of.edges", "exponent.out", "exponent.in", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    sample_fitness_pl(", base::paste(base::c("no.of.nodes", "no.of.edges", "exponent.out", "exponent.in", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  sample_fitness_pl(", base::paste(base::c("n", "n_edges", "exponent_out", "exponent_in", base::c(loops = "loops", multiple = "multiple", finite_size_correction = "finite.size.correction")[.arg_names]), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_fitness_pl(", base::paste(base::c("n", "n_edges", "exponent_out", "exponent_in", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
+  if (lifecycle::is_present(exponent.in)) {
+    if (!missing(exponent_in)) {
+      cli::cli_abort(c(
+        "Argument {.arg exponent_in} of {.fn sample_fitness_pl} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg exponent.in}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "sample_fitness_pl(exponent.in = )",
+      "sample_fitness_pl(exponent_in = )"
+    )
+    exponent_in <- exponent.in
+  }
+
+  if (lifecycle::is_present(exponent.out)) {
+    if (!missing(exponent_out)) {
+      cli::cli_abort(c(
+        "Argument {.arg exponent_out} of {.fn sample_fitness_pl} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg exponent.out}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "sample_fitness_pl(exponent.out = )",
+      "sample_fitness_pl(exponent_out = )"
+    )
+    exponent_out <- exponent.out
+  }
+
+  if (lifecycle::is_present(no.of.edges)) {
+    if (!missing(n_edges)) {
+      cli::cli_abort(c(
+        "Argument {.arg n_edges} of {.fn sample_fitness_pl} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg no.of.edges}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "sample_fitness_pl(no.of.edges = )",
+      "sample_fitness_pl(n_edges = )"
+    )
+    n_edges <- no.of.edges
+  }
+
+  if (lifecycle::is_present(no.of.nodes)) {
+    if (!missing(n)) {
+      cli::cli_abort(c(
+        "Argument {.arg n} of {.fn sample_fitness_pl} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg no.of.nodes}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "sample_fitness_pl(no.of.nodes = )",
+      "sample_fitness_pl(n = )"
+    )
+    n <- no.of.nodes
+  }
+
   res <- static_power_law_game_impl(
-    no_of_nodes = no.of.nodes,
-    no_of_edges = no.of.edges,
-    exponent_out = exponent.out,
-    exponent_in = exponent.in,
+    no_of_nodes = n,
+    no_of_edges = n_edges,
+    exponent_out = exponent_out,
+    exponent_in = exponent_in,
     loops = loops,
     multiple = multiple,
-    finite_size_correction = finite.size.correction
+    finite_size_correction = finite_size_correction
   )
 
   # Add backward-compatible dotted names
@@ -5111,8 +5560,8 @@ sample_fitness_pl <- function(
 #' in the network, chosen uniformly random. Now, for each cited vertex \eqn{v}
 #' we do the following procedure: \enumerate{ \item We generate two random
 #' number, \eqn{x} and \eqn{y}, that are geometrically distributed with means
-#' \eqn{p/(1-p)} and \eqn{rp(1-rp)}. (\eqn{p} is `fw.prob`, \eqn{r} is
-#' `bw.factor`.) The new vertex cites \eqn{x} outgoing neighbors and
+#' \eqn{p/(1-p)} and \eqn{rp(1-rp)}. (\eqn{p} is `fw_prob`, \eqn{r} is
+#' `bw_factor`.) The new vertex cites \eqn{x} outgoing neighbors and
 #' \eqn{y} incoming neighbors of \eqn{v}, from those which are not yet cited by
 #' the new vertex. If there are less than \eqn{x} or \eqn{y} such vertices
 #' available then we cite all of them.  \item The same procedure is applied to
@@ -5120,9 +5569,10 @@ sample_fitness_pl <- function(
 #'
 #' @param n The number of vertices in the graph.
 #' @param nodes `r lifecycle::badge("deprecated")` Use `n` instead.
-#' @param fw.prob The forward burning probability, see details below.
+#' @param fw_prob The forward burning probability, see details below.
+#' @param fw.prob `r lifecycle::badge("deprecated")` Use `fw_prob` instead.
 #' @inheritParams rlang::args_dots_empty
-#' @param bw.factor The backward burning ratio. The backward burning
+#' @param bw_factor The backward burning ratio. The backward burning
 #'   probability is calculated as `bw.factor*fw.prob`.
 #' @param ambs The number of ambassador vertices.
 #' @inheritParams sample_k_regular
@@ -5145,10 +5595,10 @@ sample_fitness_pl <- function(
 #' @export
 #' @examples
 #'
-#' fire <- sample_forestfire(50, fw.prob = 0.37, bw.factor = 0.32 / 0.37)
+#' fire <- sample_forestfire(50, fw_prob = 0.37, bw_factor = 0.32 / 0.37)
 #' plot(fire)
 #'
-#' g <- sample_forestfire(10000, fw.prob = 0.37, bw.factor = 0.32 / 0.37)
+#' g <- sample_forestfire(10000, fw_prob = 0.37, bw_factor = 0.32 / 0.37)
 #' dd1 <- degree_distribution(g, mode = "in")
 #' dd2 <- degree_distribution(g, mode = "out")
 #' # The forest fire model produces graphs with a heavy tail degree distribution.
@@ -5157,16 +5607,19 @@ sample_fitness_pl <- function(
 #' points(seq(along.with = dd2) - 1, dd2, col = 2, pch = 2)
 sample_forestfire <- function(
   n,
-  fw.prob,
+  fw_prob,
   ...,
-  bw.factor = 1,
+  bw_factor = 1,
   ambs = 1,
   directed = TRUE,
-  nodes = deprecated()
+  nodes = deprecated(),
+  fw.prob = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_forestfire, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("f", "fw"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn sample_forestfire}.", i = "Spell out the full argument name."))
     # Pre-3.0.0 signature: sample_forestfire(nodes, fw.prob, bw.factor, ambs, directed)
     .old_signature <- function(bw.factor, ambs, directed, ...) {
       if (...length() > 0L) {
@@ -5176,7 +5629,7 @@ sample_forestfire <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_forestfire}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(bw.factor)) base::list(bw.factor = bw.factor),
+        if (!base::missing(bw.factor)) base::list(bw_factor = bw.factor),
         if (!base::missing(ambs)) base::list(ambs = ambs),
         if (!base::missing(directed)) base::list(directed = directed)
       )
@@ -5185,7 +5638,7 @@ sample_forestfire <- function(
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(bw.factor)) "bw.factor",
+        if (!base::missing(bw_factor)) "bw_factor",
         if (!base::missing(ambs)) "ambs",
         if (!base::missing(directed)) "directed"
       ))
@@ -5195,13 +5648,28 @@ sample_forestfire <- function(
         "3.0.0",
         what = base::I("Calling `sample_forestfire()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  sample_forestfire(", base::paste(base::c("n", "fw.prob", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    sample_forestfire(", base::paste(base::c("n", "fw.prob", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  sample_forestfire(", base::paste(base::c("n", "fw_prob", base::c(bw_factor = "bw.factor", ambs = "ambs", directed = "directed")[.arg_names]), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_forestfire(", base::paste(base::c("n", "fw_prob", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
+
+  if (lifecycle::is_present(fw.prob)) {
+    if (!missing(fw_prob)) {
+      cli::cli_abort(c(
+        "Argument {.arg fw_prob} of {.fn sample_forestfire} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg fw.prob}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "sample_forestfire(fw.prob = )",
+      "sample_forestfire(fw_prob = )"
+    )
+    fw_prob <- fw.prob
+  }
 
   if (lifecycle::is_present(nodes)) {
     if (!missing(n)) {
@@ -5220,8 +5688,8 @@ sample_forestfire <- function(
 
   res <- forest_fire_game_impl(
     nodes = n,
-    fw_prob = fw.prob,
-    bw_factor = bw.factor,
+    fw_prob = fw_prob,
+    bw_factor = bw_factor,
     ambs = ambs,
     directed = directed
   )
@@ -5244,7 +5712,8 @@ sample_forestfire <- function(
 #'
 #' Please see the reference given below.
 #'
-#' @param old.graph The original graph.
+#' @param old_graph The original graph.
+#' @param old.graph `r lifecycle::badge("deprecated")` Use `old_graph` instead.
 #' @param corr A scalar in the unit interval, the target Pearson
 #'   correlation between the adjacency matrices of the original and the generated
 #'   graph (the adjacency matrix being used as a vector).
@@ -5257,7 +5726,7 @@ sample_forestfire <- function(
 #' @param permutation A numeric vector, a permutation vector that is
 #'   applied on the vertices of the first graph, to get the second graph.  If
 #'   `NULL`, the vertices are not permuted.
-#' @return An unweighted graph of the same size as `old.graph` such
+#' @return An unweighted graph of the same size as `old_graph` such
 #'   that the correlation coefficient between the entries of the two
 #'   adjacency matrices is `corr`.  Note each pair of corresponding
 #'   matrix entries is a pair of correlated Bernoulli random variables.
@@ -5274,15 +5743,18 @@ sample_forestfire <- function(
 #' g
 #' g2
 sample_correlated_gnp <- function(
-  old.graph,
+  old_graph,
   corr,
   ...,
   p = NULL,
-  permutation = NULL
+  permutation = NULL,
+  old.graph = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_correlated_gnp, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("o", "ol", "old"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn sample_correlated_gnp}.", i = "Spell out the full argument name."))
     # Pre-3.0.0 signature: sample_correlated_gnp(old.graph, corr, p, permutation)
     .old_signature <- function(p, permutation, ...) {
       if (...length() > 0L) {
@@ -5309,20 +5781,35 @@ sample_correlated_gnp <- function(
         "3.0.0",
         what = base::I("Calling `sample_correlated_gnp()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  sample_correlated_gnp(", base::paste(base::c("old.graph", "corr", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    sample_correlated_gnp(", base::paste(base::c("old.graph", "corr", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  sample_correlated_gnp(", base::paste(base::c("old_graph", "corr", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_correlated_gnp(", base::paste(base::c("old_graph", "corr", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
+  if (lifecycle::is_present(old.graph)) {
+    if (!missing(old_graph)) {
+      cli::cli_abort(c(
+        "Argument {.arg old_graph} of {.fn sample_correlated_gnp} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg old.graph}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "sample_correlated_gnp(old.graph = )",
+      "sample_correlated_gnp(old_graph = )"
+    )
+    old_graph <- old.graph
+  }
+
   if (is.null(p)) {
-    p <- edge_density(old.graph)
+    p <- edge_density(old_graph)
   }
 
   correlated_game_impl(
-    old_graph = old.graph,
+    old_graph = old_graph,
     corr = corr,
     p = p,
     permutation = permutation
