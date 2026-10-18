@@ -1,0 +1,22 @@
+# The source of the shared documentation system, the state of it this
+# handbook was last checked against (its commit, that commit's date, and the
+# day of the check), and the files carried from it unchanged. The vendoring
+# script reads this, and handbook/meta/local/README.md says what stays local.
+source: cynkra/handbook-tools
+url: https://github.com/cynkra/handbook-tools
+commit: 48f452c7be0631aaa71eebbf1ef8bd02cc252459
+source-date: 2026-09-19
+checked: 2026-10-15
+carried:
+  - handbook/meta/handbook/README.md
+  - handbook/meta/authoring/README.md
+  - handbook/meta/experiments/README.md
+  - handbook/meta/forms/README.md
+  - handbook/meta/growth/README.md
+  - handbook/meta/style/README.md
+  - .claude/rules/prose-authoring.md
+  - .claude/skills/docs-consistency/SKILL.md
+  - .claude/skills/docs-consistency/scripts/check-handbook.sh
+  - .claude/skills/handbook-update/SKILL.md
+  - .claude/commands/docs/check.md
+  - .claude/commands/handbook/update.md

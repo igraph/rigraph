@@ -1,5 +1,14 @@
 #!/bin/bash
-# Vendors igraph sources from upstream repository (manual vendoring)
+# Vendors igraph sources from the upstream repository (manual vendoring):
+# the commit checked out in <upstream clone>, as one vendor commit.
+# The series loop uses scripts/vendor-one.sh instead, which walks upstream
+# one commit at a time.
+#
+# Usage: scripts/vendor.sh [<upstream clone>]
+#
+# Exit status as scripts/vendor-one.sh's: 4 a patch neither applies nor
+# reverses, 7 a generator failed.
+#
 # https://unix.stackexchange.com/a/654932/19205
 # Using bash for -o pipefail
 
@@ -7,15 +16,15 @@ set -e
 set -x
 set -o pipefail
 
-# Change to root of repository
-cd "$(dirname "$0")"/..
+script_dir=$(cd "$(dirname "$0")" && pwd)
+. "$script_dir/series-config.sh"
+. "$script_dir/vendor-lib.sh"
 
-project=igraph
+cd "$script_dir"/..
+
+project=${series_package}
 vendor_base_dir=src/vendor
-vendor_dir=${vendor_base_dir}/cigraph
-repo_org=${project}
-repo_name=${project}
-
+vendor_dir=${series_vendor_dir}
 
 if [ -z "$1" ]; then
   upstream_basedir=../../../${project}
@@ -29,6 +38,12 @@ if [ "$upstream_basedir" != "$upstream_dir" ]; then
   git clone "$upstream_basedir" "$upstream_dir"
 fi
 
+# Make the vendored tree depend on the upstream commit and nothing else:
+# igraph's CMake writes `git describe --tags` into igraph_version.h, and git
+# sizes the abbreviated commit id in it from the size of the clone.
+# scripts/vendor-one.sh pins the same width.
+git -C "$upstream_dir" config core.abbrev 9
+
 if [ -n "$(git status --porcelain)" ]; then
   echo "Error: working directory not clean"
   exit 1
@@ -38,67 +53,97 @@ if [ -n "$(git -C "$upstream_dir" status --porcelain)" ]; then
   echo "Warning: working directory $upstream_dir not clean"
 fi
 
-base=$(git log -n 3 --format="%s" -- ${vendor_dir} | tee /dev/stderr | sed -nr '/^.*'${repo_org}.${repo_name}'@([0-9a-f]+)( .*)?$/{s//\1/;p;}' | head -n 1)
-
-original=$(git -C "$upstream_dir" rev-parse --verify HEAD)
-
-message=
-is_tag=
-
-for commit in $original; do
-  echo "Importing commit $commit"
-
-  rm -rf ${vendor_dir}
-  mkdir -p ${vendor_dir}
-
-  git clone "$upstream_dir" ${vendor_dir}
-
-  cmake -S${vendor_dir} -B${vendor_dir}/build
-
-  mv ${vendor_dir}/build/include/igraph_version.h src/vendor/
-
-  rm -rf ${vendor_dir}/.git ${vendor_dir}/.github ${vendor_dir}/doc ${vendor_dir}/examples ${vendor_dir}/fuzzing ${vendor_dir}/tests ${vendor_dir}/tools ${vendor_dir}/build
-
-  # Apply patches in patch/*.patch.
-  #
-  # If a patch no longer applies forward, it is removed:
-  # vendoring fetches fresh upstream sources that do not yet carry our
-  # changes, so a clean forward apply is the expected case.  A patch that
-  # fails to apply forward is either (a) already integrated upstream and
-  # no longer needed, or (b) broken by an upstream change that we must
-  # address explicitly.  Removing the stale patch surfaces case (b) via
-  # CI/CD instead of letting it rot silently.
-  for f in patch/*.patch; do
-    if patch -i "$f" -p1 --forward --dry-run; then
-      patch -i "$f" -p1 --forward --no-backup-if-mismatch
-    else
-      echo "Removing patch $f"
-      rm "$f"
-    fi
-  done
-
-  make -f Makefile-cigraph
-
-  R -q -e 'cpp11::cpp_register()'
-
-  # Always vendor tags
-  if [ "$(git -C "$upstream_dir" describe --tags "$commit" | grep -c -- -)" -eq 0 ]; then
-    message="vendor: Update vendored sources (tag $(git -C "$upstream_dir" describe --tags "$commit")) to ${repo_org}/${repo_name}@$commit"
-    is_tag=true
-    break
+# The upstream SHA the branch has vendored. Answering empty is not an option:
+# an empty base makes the message body below read `${base}..${commit}` with a
+# missing left side, which git resolves to the clone's HEAD and which writes a
+# changelog nobody chose. The same rule, and the same bound, as vendored_sha()
+# in scripts/series-advance.sh; scripts/vendor-one.sh has its own copy.
+base_scan_depth="${BASE_SCAN_DEPTH:-20}"
+subjects=$(git log -n "${base_scan_depth}" --format="%s" -- "${series_scan_dir}" | tee >(cat >&2))
+base=$(sed -En "$series_sha_sed" <<<"$subjects" | head -n 1)
+if [ -z "$base" ]; then
+  n=$(grep -c . <<<"$subjects" || true)
+  echo "Error: no <owner>/igraph@ subject among the newest $n ${series_scan_dir} commit(s)" >&2
+  if [ "$n" -ge "${base_scan_depth}" ]; then
+    echo "  the scan is bounded at ${base_scan_depth}; if that is genuinely too shallow, raise BASE_SCAN_DEPTH" >&2
   fi
+  exit 1
+fi
 
-  # Expecting one change under ${vendor_base_dir} (and other changes) even if nothing else changed.
-  # Need at least three changed files to consider it a real update.
-  if [ "$(git status --porcelain -- ${vendor_base_dir} | wc -l)" -gt 1 ]; then
-    message="vendor: Update vendored sources to ${repo_org}/${repo_name}@$commit"
-    break
+commit=$(git -C "$upstream_dir" rev-parse --verify HEAD)
+
+# A commit of the replay lives in krlmlr/igraph only, and its subject says so
+# (scripts/series-config.sh).
+owner=${series_upstream_repo}
+if git -C "$upstream_dir" cat-file -e "${series_replay_tip}^{commit}" 2>/dev/null &&
+  git -C "$upstream_dir" merge-base --is-ancestor "$commit" "$series_replay_tip" &&
+  ! git -C "$upstream_dir" merge-base --is-ancestor "$commit" "$series_seam"; then
+  owner=${series_replay_repo}
+fi
+
+echo "Importing commit $commit"
+
+# In two phases around the patch stack (scripts/series-config.sh): the tree,
+# the patches, and what is derived from the patched tree. A failing phase
+# stops with exit 7, as vendor-one.sh's does.
+generator_failed() {
+  echo "Error: the generator failed ($1); the tree is left as it got." >&2
+  echo "  Before rerunning, remove ./${upstream_dir} or pass it as the argument:" >&2
+  echo "  this script always clones, so a leftover clone makes it fail." >&2
+  exit 7
+}
+series_generate_tree "$upstream_dir" || generator_failed "the tree"
+
+# `--reverse` needs `--forward` beside it: on its own it prompts
+# ("Unreversed patch detected!  Ignore -R? [n]") and hangs a run whose
+# stdin is a terminal.
+# scripts/vendor-one.sh has the same three-way split and the same exit 4.
+for f in patch/*.patch; do
+  [ -e "$f" ] || continue
+  if patch -i "$f" -p1 --forward --dry-run; then
+    patch -i "$f" -p1 --forward --no-backup-if-mismatch
+  elif patch -i "$f" -p1 --reverse --forward --dry-run; then
+    echo "Removing patch $f (its change is already in the regenerated tree)"
+    rm "$f"
+  else
+    echo ""
+    echo "=== PATCH BROKEN: $f (upstream ${commit}) ==="
+    echo "It neither applies forward nor reverses cleanly, so its change is"
+    echo "not in the regenerated tree and cannot be re-applied: the code it"
+    echo "patches moved."
+    echo "The regenerated sources for ${commit} are in the working tree,"
+    echo "uncommitted, and the upstream clone is kept."
+    echo "Rebase $f against them, keeping the rebased patch outside the tree,"
+    echo "then 'git checkout -- .' and put it back."
+    echo "Before rerunning, remove ./${upstream_dir} or pass it as the argument:"
+    echo "this script always clones, so a leftover clone makes it fail."
+    echo "Delete $f only after confirming its change is genuinely upstream."
+    exit 4
   fi
 done
 
+series_generate_derived full || generator_failed "deriving from the patched tree"
+
+message=
+# Always vendor tags
+if [ "$(git -C "$upstream_dir" describe --tags "$commit" | grep -c -- -)" -eq 0 ]; then
+  message="vendor: Update vendored sources (tag $(git -C "$upstream_dir" describe --tags "$commit")) to ${owner}@$commit"
+# igraph_version.h always differs off a tag, so "more than one" is the test for
+# a real change.
+elif [ "$(git status --porcelain -- ${vendor_base_dir} | wc -l)" -gt 1 ]; then
+  message="vendor: Update vendored sources to ${owner}@$commit"
+fi
+
 if [ "$message" = "" ]; then
   echo "No changes."
-  git checkout -- ${vendor_base_dir}
+  # Nothing was vendored, so leave the tree exactly as the run found it.
+  # Regeneration rewrites R/aaa-*.R, src/rinterface.c, src/cpp11.cpp and the
+  # src/*.mk files as well as ${vendor_dir}, and any leftover would make the next
+  # run refuse on a dirty tree. Restoring everything is safe because the run
+  # refused to start on a dirty tree: anything untracked here was created by
+  # this run. The clone is ignored, so `git clean` leaves it for the `rm -rf`.
+  git checkout -- .
+  git clean -fd
   rm -rf "$upstream_dir"
   exit 0
 fi
@@ -110,13 +155,13 @@ git add .
   echo
   git -C "$upstream_dir" log -1 --format="Date: %ai" "${commit}"
   echo
-  git -C "$upstream_dir" log --first-parent --format="%s" "${base}".."${commit}" |
-    tee /dev/stderr |
-    sed -r 's%#([0-9]+)%https://redirect.github.com/'${repo_org}/${repo_name}'/pull/\1%g'
+  if git -C "$upstream_dir" merge-base --is-ancestor "$base" "$commit"; then
+    git -C "$upstream_dir" log --first-parent --format="%s" "${base}".."${commit}" |
+      tee >(cat >&2) |
+      sed -r 's%#([0-9]+)%https://redirect.github.com/'"${owner}"'/pull/\1%g'
+  else
+    echo "Vendored by hand, not a walk from ${base}, which this commit does not descend from."
+  fi
 ) | git commit --file /dev/stdin
 
 rm -rf "$upstream_dir"
-
-# Remove "unused" warnings
-# Keep the variable for consistency between vendor.sh and vendor-one.sh
-true "${is_tag}"

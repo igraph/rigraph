@@ -1,5 +1,61 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.3.9044
+
+## Bug fixes
+
+### series
+
+- Put a fold's note after the upstream subjects, not above them (#2957).
+
+### series
+
+- Date the regenerated tree anew, so a same-size upstream edit is vendored (#2956).
+
+## Features
+
+- Vendor the C-docs roclet from igraph.r2cdocs (#2899, #2955).
+
+### series
+
+- Keep the `rcc2` store with its pruning, and fix the firing's setup (#2949).
+
+
+# igraph 2.3.3.9043
+
+## Bug fixes
+
+### vendor
+
+- Rebuild `src/vendor/cigraph` exactly from upstream and `patch/` (#2934).
+
+## Features
+
+### series
+
+- Vendor igraph one upstream commit at a time, as duckdb-r's series loop does (#2935).
+
+- Ask for the package name at run time, and flavor it as `igraph.dev` (#2938).
+
+## Chore
+
+- Make `time_bins()` a regular function; move `R/epi.R` into `R/sir.R` (#2794, #2920).
+
+- Use `identity()` as needed (#2918).
+
+## Documentation
+
+- Install the handbook, and document the vendoring series loop (#2936).
+
+## Performance
+
+- Build the whole vertex-sequence list in one C pass (#2888).
+
+- Batch-construct vertex sequence lists via create_vs_list() (#2887).
+
+- Share the graph weak-reference across constructed sequences (#2886).
+
+
 # igraph 2.3.3.9042
 
 ## Chore

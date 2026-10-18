@@ -1,5 +1,7 @@
 # Per-topic migration registries
 
+*Handbook: [`architecture/r-layer/conventions/`](/handbook/architecture/r-layer/conventions/README.md) is the node these registries serve.*
+
 Each `<topic>.R` file in this directory declares argument-signature
 migrations for one group of related functions,
 mirroring the R source files (e.g. `conversion.R`, `games.R`).
