@@ -405,9 +405,10 @@ migrations <- list(
     old = function(graph, eids, delete.vertices) {},
     new = function(
       graph,
-      eids,
+      edges,
       ...,
-      delete.vertices = TRUE
+      delete.vertices = TRUE,
+      eids = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -461,9 +462,10 @@ migrations <- list(
     old = function(graph, eids, loops) {},
     new = function(
       graph,
-      eids = NULL,
+      edges = NULL,
       ...,
-      loops = TRUE
+      loops = TRUE,
+      eids = deprecated()
     ) {},
     when = "3.0.0"
   )

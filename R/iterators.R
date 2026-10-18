@@ -506,7 +506,7 @@ E <- function(
     names(res) <- edge_attr(graph)$name[res]
   }
   if (is_named(graph)) {
-    el <- ends(graph, es = res)
+    el <- ends(graph, edges = res)
     attr(res, "vnames") <- paste(el[, 1], el[, 2], sep = "|")
   }
 

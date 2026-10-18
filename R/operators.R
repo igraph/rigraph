@@ -1610,12 +1610,13 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
 #'
 #' The new graph will contain the same vertices, edges and attributes as
 #' the original graph, except that the direction of the edges selected by
-#' their edge IDs in the `eids` argument will be reversed. When reversing
+#' their edge IDs in the `edges` argument will be reversed. When reversing
 #' all edges, this operation is also known as graph transpose.
 #'
 #' @param graph The input graph.
-#' @param eids The edge IDs of the edges to reverse. The default `NULL`
+#' @param edges The edge IDs of the edges to reverse. The default `NULL`
 #'   reverses all edges.
+#' @param eids `r lifecycle::badge("deprecated")` Use `edges` instead.
 #' @return The result graph where the direction of the edges with the given
 #'   IDs are reversed
 #'
@@ -1625,14 +1626,29 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
 #' reverse_edges(g, 2)
 #' @family functions for manipulating graph structure
 #' @export
-reverse_edges <- function(graph, eids = NULL) {
-  if (is.null(eids)) {
-    eids <- E(graph)
+reverse_edges <- function(graph, edges = NULL, eids = deprecated()) {
+  if (lifecycle::is_present(eids)) {
+    if (!missing(edges)) {
+      cli::cli_abort(c(
+        "Argument {.arg edges} of {.fn reverse_edges} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg eids}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "reverse_edges(eids = )",
+      "reverse_edges(edges = )"
+    )
+    edges <- eids
+  }
+
+  if (is.null(edges)) {
+    edges <- E(graph)
   }
 
   reverse_edges_impl(
     graph = graph,
-    eids = eids
+    eids = edges
   )
 }
 
