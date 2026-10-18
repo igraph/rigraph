@@ -153,6 +153,7 @@ echo "== --chunk takes a number"
 isnt "series-advance.sh --chunk 25 is not a usage error" \
   "$(rc series-advance.sh s --chunk 25)" 2
 is "series-advance.sh --chunk origin" "$(rc series-advance.sh s --chunk origin)" 2
+is "series-advance.sh --chunk ''" "$(rc series-advance.sh s --chunk '')" 2
 
 echo
 echo "== --dev-note takes a file, and only where a commit is minted"

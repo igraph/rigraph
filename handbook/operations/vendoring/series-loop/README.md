@@ -57,7 +57,8 @@ each stage after it is skipped when it has nothing to do, and they run in this o
 * **Port `main`**, so that `.github/`, `scripts/` and `.claude/` on `main-dev` are byte-identical to `main`'s,
   and sync the buffer's tooling too, because a workflow fires from the branch it sits on.
 * **Extend `main-dev`** from the buffer while verdicts are pending, but never above a red.
-  A firing takes at most 100 commits, the default of `--chunk` in [`scripts/series-advance.sh`](/scripts/series-advance.sh),
+  A firing takes at most one chunk, the `chunk:` [`scripts/series.yaml`](/scripts/series.yaml) declares for the series, 10 for `main`,
+  kept small while the series adapts to a new engine, because a fold low in the window rewrites everything above it,
   and then realigns `main-rc-dev` where it exists.
 * **Open a pull request** against igraph/rigraph's `main` for whatever the tooling got wrong and the firing had to work around.
 

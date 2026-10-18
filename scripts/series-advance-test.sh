@@ -8,7 +8,7 @@
 # including glue, which is why the carry is a difference and not an allow-list.
 # A forward series inherits only the first when its buffer is replayed out of
 # `-build`, and both when it is replayed out of `-dev`
-# (scripts/series-forward-build.sh). Twenty things are checked.
+# (scripts/series-forward-build.sh). Twenty-one things are checked.
 #
 #   1. A buffered commit whose base `-dev` twin folded a test-side fix is minted
 #      with that fix in the same commit -- not stacked above it -- carrying the
@@ -69,6 +69,8 @@
 #      `-dev` already vendored, carrying `(tag ...)` -- is consumed rather than
 #      taken for the anchor, and a forward series keeps its marker when the base
 #      has a twin for the plain commit only.
+#  21. The chunk is the series' own: the `chunk` `main`'s scripts/series.yaml
+#      declares bounds what one run appends, and `--chunk` overrides it.
 #
 # Usage:
 #   scripts/series-advance-test.sh
@@ -237,6 +239,15 @@ git checkout -q -b solo-build base-seed
 bvendor fff1111 1.0.0.9000.1 f.c
 bvendor fff2222 1.0.0.9000.2 g.c
 git branch solo-build-base base-seed
+
+# --- a series whose chunk `main` declares (claim 21) ------------------------
+git checkout -q -b chunked-dev base-seed
+git branch chunked-green chunked-dev
+git checkout -q -b chunked-build base-seed
+bvendor ccc1111 1.0.0.9000.1 s.c
+bvendor ccc2222 1.0.0.9000.2 t.c
+bvendor ccc3333 1.0.0.9000.3 u.c
+git branch chunked-build-base base-seed
 
 # --- a series for the stage-3 finding note (claim 13) -----------------------
 # Same shape as `solo`, so the note is checked on a chunk that would otherwise
@@ -414,10 +425,24 @@ rec "$RED_BAD" failure
 git add -A
 git commit -q -m 'chore: store stub'
 
+# `main` declares a chunk for one series, so every other series here takes the
+# default (claim 21).
 git checkout -q main
+cat > scripts/series.yaml <<'EOF'
+flavors:
+  - flavor: igraph.chunked
+    kind: dev
+    series: chunked
+    releases_from: main
+    chunk: 1
+    publishes_from: chunked-green
+EOF
+git add scripts/series.yaml
+git commit -qm 'chore: Declare the chunked series'
 git push -q origin main base-seed base-build base-dev base-green base-build-base \
   base-fwd-build base-fwd-dev base-fwd-green base-fwd-build-base \
   solo-build solo-dev solo-green solo-build-base \
+  chunked-build chunked-dev chunked-green chunked-build-base \
   note-build note-dev note-green note-build-base \
   bare-build bare-dev bare-green bare-build-base \
   dup-build dup-dev dup-green dup-build-base \
@@ -584,6 +609,20 @@ has   "and moves the ref"           "$out" 'dev ->'
 git fetch -q origin
 is "the dev tip is a buffer commit verbatim, not a replay" \
   "$(git rev-parse origin/solo-dev)" "$(git rev-parse origin/solo-build)"
+
+# --- claim 21: the chunk is the series' own ----------------------------------
+echo
+echo "== a series whose chunk main declares"
+out=$(run chunked)
+hasnt "reads the declaration from main" "$out" 'no main ref carries'
+has   "and moves the ref"               "$out" 'dev ->'
+git fetch -q origin
+is "one run appends the declared chunk, not the whole buffer" \
+  "$(git rev-list --count origin/chunked-green..origin/chunked-dev)" 1
+run chunked --chunk 2 >/dev/null
+git fetch -q origin
+is "and --chunk overrides it for one run" \
+  "$(git rev-parse origin/chunked-dev)" "$(git rev-parse origin/chunked-build)"
 
 # --- claim 11: a base series with a live forward counterpart still consumes ---
 echo

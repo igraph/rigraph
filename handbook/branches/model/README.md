@@ -24,7 +24,8 @@ A series is discovered, not configured: the loop serves every `<S>-build` with a
 * `<S>-build`, the buffer: the strand picked commit by commit, with the R side regenerated, the version stamped and the glue compiling, and no CI.
   Appended to; force-pushed only to repair.
 * `<S>-dev`: what CI judges commit by commit.
-  The buffer consumed in chunks of at most 100, with what CI demanded folded in, and `main`'s own changes ported in.
+  The buffer consumed a chunk at a time ([`series-loop/`](/handbook/operations/vendoring/series-loop/README.md)),
+  with what CI demanded folded in, and `main`'s own changes ported in.
   Force-pushed when a repair folds a fix into an earlier commit.
 * `<S>-green`: the trusted frontier, the newest commit such that every commit up to it has a successful run.
   Fast-forward only; r-universe builds it.
