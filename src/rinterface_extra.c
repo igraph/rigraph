@@ -29,6 +29,8 @@
 #include <R_ext/Altrep.h>
 
 #include <stdio.h>
+#include <time.h>
+#include <math.h>
 #include <inttypes.h>
 
 #if defined(__SANITIZE_ADDRESS__)
@@ -2485,8 +2487,52 @@ void checkInterruptFn(void *dummy) {
   R_CheckUserInterrupt();
 }
 
+/* CPU time limit for igraph_subisomorphic_lad().
+ * igraph 1.0 removed the time_limit argument of the C function,
+ * so the limit is enforced here instead:
+ * Rx_igraph_subisomorphic_lad() arms this deadline around the call,
+ * and the interruption handler, which LAD invokes at every branching step,
+ * fails the call once the deadline has passed,
+ * with the same message as igraph 0.10's own check.
+ * Only active while armed; the previous value is restored afterwards,
+ * so a nested call cannot leave a stale deadline behind. */
+typedef struct {
+  bool active;
+  clock_t begin;
+  double limit;
+} Rx_igraph_lad_deadline_t;
+
+static Rx_igraph_lad_deadline_t Rx_igraph_lad_deadline = { false, 0, 0 };
+
+/* HELPER: internal C; must use IGRAPH_CHECK */
+static bool Rx_igraph_lad_deadline_check(void) {
+  if (!Rx_igraph_lad_deadline.active || !Rx_igraph_in_r_check) {
+    return false;
+  }
+  if ((double) (clock() - Rx_igraph_lad_deadline.begin) / CLOCKS_PER_SEC < Rx_igraph_lad_deadline.limit) {
+    return false;
+  }
+  Rx_igraph_lad_deadline.active = false;
+  /* Record the reason as Rx_igraph_error_handler() would for the first error,
+   * so that the IGRAPH_ERROR("") calls propagating IGRAPH_INTERRUPTED
+   * do not overwrite it. */
+  if (Rx_igraph_errors_count == 0) {
+    snprintf(Rx_igraph_error_reason, sizeof(Rx_igraph_error_reason),
+      "LAD CPU time exceeded. CPU time exceeded\nSource: %s:%i",
+      simplify_file_path(__FILE__), __LINE__);
+    Rx_igraph_error_reason[sizeof(Rx_igraph_error_reason) - 1] = 0;
+  }
+  Rx_igraph_errors_count++;
+  return true;
+}
+
 /* HELPER: internal C; must use IGRAPH_CHECK */
 igraph_bool_t Rx_igraph_interrupt_handler(void) {
+  if (Rx_igraph_lad_deadline_check()) {
+    IGRAPH_FINALLY_FREE();
+    return true;
+  }
+
   /* We need to call R_CheckUserInterrupt() regularly to enable interruptions.
    * However, if an interruption is pending, R_CheckUserInterrupt() will
    * longjmp back to the top level so we cannot clean up ourselves by calling
@@ -6607,6 +6653,27 @@ SEXP Rx_igraph_dfs(SEXP graph, SEXP proot, SEXP pmode, SEXP punreachable,
   return result;
 }
 
+/* HELPER: internal C; must use IGRAPH_CHECK */
+static igraph_error_t Rx_igraph_subisomorphic_lad_limited(
+    const igraph_t *pattern, const igraph_t *target,
+    const igraph_vector_int_list_t *domains, igraph_bool_t *iso,
+    igraph_vector_int_t *map, igraph_vector_int_list_t *maps,
+    igraph_bool_t induced, double time_limit) {
+  Rx_igraph_lad_deadline_t saved = Rx_igraph_lad_deadline;
+  igraph_error_t ret;
+
+  if (time_limit > 0) {
+    Rx_igraph_lad_deadline.active = true;
+    Rx_igraph_lad_deadline.begin = clock();
+    Rx_igraph_lad_deadline.limit = time_limit;
+  } else {
+    Rx_igraph_lad_deadline.active = false;
+  }
+  ret = igraph_subisomorphic_lad(pattern, target, domains, iso, map, maps, induced);
+  Rx_igraph_lad_deadline = saved;
+  return ret;
+}
+
 /* TOP-LEVEL: called from R via .Call; must use IGRAPH_R_CHECK */
 SEXP Rx_igraph_subisomorphic_lad(SEXP pattern, SEXP target, SEXP domains,
                                 SEXP induced, SEXP time_limit,
@@ -6619,6 +6686,7 @@ SEXP Rx_igraph_subisomorphic_lad(SEXP pattern, SEXP target, SEXP domains,
   igraph_vector_int_t c_map;
   igraph_vector_int_list_t c_maps;
   igraph_bool_t c_induced;
+  double c_time_limit;
   igraph_bool_t c_qmap;
   igraph_bool_t c_qall_maps;
   SEXP iso;
@@ -6660,10 +6728,10 @@ SEXP Rx_igraph_subisomorphic_lad(SEXP pattern, SEXP target, SEXP domains,
   }
 
   c_induced=LOGICAL(induced)[0];
-  /* time_limit is accepted for compatibility; upstream igraph_subisomorphic_lad() no longer takes it. */
-  (void) time_limit;
+  /* Whole seconds, less than one for no limit, as in igraph 0.10. */
+  c_time_limit=REAL(time_limit)[0] >= 1 ? floor(REAL(time_limit)[0]) : 0;
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_subisomorphic_lad(&c_pattern, &c_target, (Rf_isNull(domains) ? 0 : &c_domains), &c_iso, (Rf_isNull(map) ? 0 : &c_map), (Rf_isNull(maps) ? 0 : &c_maps), c_induced));
+  IGRAPH_R_CHECK(Rx_igraph_subisomorphic_lad_limited(&c_pattern, &c_target, (Rf_isNull(domains) ? 0 : &c_domains), &c_iso, (Rf_isNull(map) ? 0 : &c_map), (Rf_isNull(maps) ? 0 : &c_maps), c_induced, c_time_limit));
 
                                         /* Convert output */
   igraph_vector_int_list_destroy(&c_domains);
