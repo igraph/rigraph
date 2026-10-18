@@ -23,9 +23,8 @@ centrality measure, or some ordinal vertex covariate, like the age of
 people, or their seniority level.
 }
 \examples{
-\dontshow{if (rlang::is_installed(c("igraphdata", "scales"))) withAutoprint(\{ # examplesIf}
-library(igraphdata)
-data(karate)
+\dontshow{if (nzchar(system.file(package = "igraphdata")) && rlang::is_installed("scales")) withAutoprint(\{ # examplesIf}
+data(karate, package = "igraphdata")
 karate <- karate \%>\%
   add_layout_(with_kk()) \%>\%
   set_vertex_attr("size", value = 10)

@@ -24,9 +24,8 @@ Use this palette, if you have such a quantity to mark with vertex
 colors.
 }
 \examples{
-\dontshow{if (rlang::is_installed(c("igraphdata", "scales"))) withAutoprint(\{ # examplesIf}
-library(igraphdata)
-data(foodwebs)
+\dontshow{if (nzchar(system.file(package = "igraphdata")) && rlang::is_installed("scales")) withAutoprint(\{ # examplesIf}
+data(foodwebs, package = "igraphdata")
 fw <- foodwebs[[1]] \%>\%
   induced_subgraph(V(.)[ECO == 1]) \%>\%
   add_layout_(with_fr()) \%>\%
@@ -37,7 +36,7 @@ fw <- foodwebs[[1]] \%>\%
 V(fw)$color <- scales::dscale(V(fw)$Biomass \%>\% cut(10), diverging_pal)
 plot(fw)
 
-data(karate)
+data(karate, package = "igraphdata")
 karate <- karate \%>\%
   add_layout_(with_kk()) \%>\%
   set_vertex_attr("size", value = 10)

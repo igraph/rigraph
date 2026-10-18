@@ -35,8 +35,7 @@
 #'
 #' @section Examples:
 #' \preformatted{
-#' library(igraphdata)
-#' data(karate)
+#' data(karate, package = "igraphdata")
 #' karate <- karate %>%
 #'   add_layout_(with_fr()) %>%
 #'   set_vertex_attr("size", value = 10)
@@ -89,9 +88,8 @@ categorical_pal <- function(n) {
 #'
 #' @family palettes
 #' @export
-#' @examplesIf rlang::is_installed(c("igraphdata", "scales"))
-#' library(igraphdata)
-#' data(karate)
+#' @examplesIf nzchar(system.file(package = "igraphdata")) && rlang::is_installed("scales")
+#' data(karate, package = "igraphdata")
 #' karate <- karate %>%
 #'   add_layout_(with_kk()) %>%
 #'   set_vertex_attr("size", value = 10)
@@ -166,9 +164,8 @@ sequential_pal <- function(n) {
 #'
 #' @family palettes
 #' @export
-#' @examplesIf rlang::is_installed(c("igraphdata", "scales"))
-#' library(igraphdata)
-#' data(foodwebs)
+#' @examplesIf nzchar(system.file(package = "igraphdata")) && rlang::is_installed("scales")
+#' data(foodwebs, package = "igraphdata")
 #' fw <- foodwebs[[1]] %>%
 #'   induced_subgraph(V(.)[ECO == 1]) %>%
 #'   add_layout_(with_fr()) %>%
@@ -179,7 +176,7 @@ sequential_pal <- function(n) {
 #' V(fw)$color <- scales::dscale(V(fw)$Biomass %>% cut(10), diverging_pal)
 #' plot(fw)
 #'
-#' data(karate)
+#' data(karate, package = "igraphdata")
 #' karate <- karate %>%
 #'   add_layout_(with_kk()) %>%
 #'   set_vertex_attr("size", value = 10)
