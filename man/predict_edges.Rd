@@ -9,8 +9,8 @@ predict_edges(
   hrg = NULL,
   ...,
   start = FALSE,
-  num.samples = 10000,
-  num.bins = 25
+  n_samples = 10000,
+  n_bins = 25
 )
 }
 \arguments{
@@ -27,10 +27,10 @@ random starting point.}
 \item{start}{Logical, whether to start the fitting/sampling from the
 supplied \code{igraphHRG} object, or from a random starting point.}
 
-\item{num.samples}{Number of samples to use for consensus generation or
+\item{n_samples}{Number of samples to use for consensus generation or
 missing edge prediction.}
 
-\item{num.bins}{Number of bins for the edge probabilities. Give a higher
+\item{n_bins}{Number of bins for the edge probabilities. Give a higher
 number for a more accurate prediction.}
 }
 \value{

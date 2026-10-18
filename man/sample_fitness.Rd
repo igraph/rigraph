@@ -5,21 +5,24 @@
 \title{Random graphs from vertex fitness scores}
 \usage{
 sample_fitness(
-  no.of.edges,
-  fitness.out,
-  fitness.in = NULL,
+  n_edges,
+  fitness_out,
+  fitness_in = NULL,
   ...,
   loops = FALSE,
-  multiple = FALSE
+  multiple = FALSE,
+  no.of.edges = deprecated(),
+  fitness.out = deprecated(),
+  fitness.in = deprecated()
 )
 }
 \arguments{
-\item{no.of.edges}{The number of edges in the generated graph.}
+\item{n_edges}{The number of edges in the generated graph.}
 
-\item{fitness.out}{A numeric vector containing the fitness of each vertex.
+\item{fitness_out}{A numeric vector containing the fitness of each vertex.
 For directed graphs, this specifies the out-fitness of each vertex.}
 
-\item{fitness.in}{Numeric vector that specifies the in-fitness of each vertex.
+\item{fitness_in}{Numeric vector that specifies the in-fitness of each vertex.
 The generated graph will be directed.
 Default: \code{NULL}, the generated graph will be undirected.}
 
@@ -29,6 +32,12 @@ Default: \code{NULL}, the generated graph will be undirected.}
 
 \item{multiple}{Logical, whether to allow multiple edges in the
 graph.}
+
+\item{no.of.edges}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{n_edges} instead.}
+
+\item{fitness.out}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{fitness_out} instead.}
+
+\item{fitness.in}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{fitness_in} instead.}
 }
 \value{
 An igraph graph, directed or undirected.

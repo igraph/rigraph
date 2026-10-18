@@ -11,7 +11,7 @@ layout_as_tree(
   circular = FALSE,
   rootlevel = numeric(),
   mode = c("out", "in", "all"),
-  flip.y = TRUE
+  flip_y = TRUE
 )
 }
 \arguments{
@@ -29,7 +29,7 @@ component.}
 
 \item{circular}{Logical, whether to plot the tree in a circular
 fashion. Defaults to \code{FALSE}, so the tree branches are going bottom-up
-(or top-down, see the \code{flip.y} argument.}
+(or top-down, see the \code{flip_y} argument.}
 
 \item{rootlevel}{This argument can be useful when drawing forests which are
 not trees (i.e. they are unconnected and have tree components). It specifies
@@ -43,7 +43,7 @@ edges are used (this was the behavior in igraph 0.5 and before). This
 parameter also influences how the root vertices are calculated, if they are
 not given. See the \code{roots} parameter.}
 
-\item{flip.y}{Logical, whether to flip the \sQuote{y} coordinates.
+\item{flip_y}{Logical, whether to flip the \sQuote{y} coordinates.
 The default is flipping because that puts the root vertex on the top.}
 }
 \value{
@@ -69,7 +69,7 @@ to obtain a possible spanning tree.
 
 tree <- make_tree(20, 3)
 plot(tree, layout = layout_as_tree)
-plot(tree, layout = layout_as_tree(tree, flip.y = FALSE))
+plot(tree, layout = layout_as_tree(tree, flip_y = FALSE))
 plot(tree, layout = layout_as_tree(tree, circular = TRUE))
 
 tree2 <- make_tree(10, 3) + make_tree(10, 2)

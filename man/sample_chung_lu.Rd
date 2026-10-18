@@ -6,27 +6,31 @@
 \title{Random graph with given expected degrees}
 \usage{
 sample_chung_lu(
-  out.weights,
-  in.weights = NULL,
+  out_weights,
+  in_weights = NULL,
   ...,
   loops = TRUE,
-  variant = c("original", "maxent", "nr")
+  variant = c("original", "maxent", "nr"),
+  out.weights = deprecated(),
+  in.weights = deprecated()
 )
 
 chung_lu(
-  out.weights,
-  in.weights = NULL,
+  out_weights,
+  in_weights = NULL,
   ...,
   loops = TRUE,
-  variant = c("original", "maxent", "nr")
+  variant = c("original", "maxent", "nr"),
+  out.weights = deprecated(),
+  in.weights = deprecated()
 )
 }
 \arguments{
-\item{out.weights}{A vector of non-negative vertex weights (or out-weights).
+\item{out_weights}{A vector of non-negative vertex weights (or out-weights).
 In sparse graphs, these will be approximately equal to the expected
 (out-)degrees.}
 
-\item{in.weights}{A vector of non-negative in-weights, approximately equal to
+\item{in_weights}{A vector of non-negative in-weights, approximately equal to
 the expected in-degrees in sparse graphs. May be set to \code{NULL}, in
 which case undirected graphs are generated.}
 
@@ -53,6 +57,10 @@ maximum entropy model with fixed expected degrees,
 Norros and Reittu's model, \eqn{p_{ij} = 1 - \exp(-q_{ij})}{p_ij = 1 - exp(-q_ij)}.
 }
 }}
+
+\item{out.weights}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{out_weights} instead.}
+
+\item{in.weights}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{in_weights} instead.}
 }
 \value{
 An igraph graph.

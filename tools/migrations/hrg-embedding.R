@@ -82,7 +82,13 @@ migrations <- list(
   ),
 
   predict_edges = list(
-    old = function(graph, hrg, start, num.samples = n_samples, num.bins = n_bins) {},
+    old = function(
+      graph,
+      hrg,
+      start,
+      num.samples = n_samples,
+      num.bins = n_bins
+    ) {},
     new = function(
       graph,
       hrg = NULL,

@@ -5,27 +5,31 @@
 \title{Scale-free random graphs, from vertex fitness scores}
 \usage{
 sample_fitness_pl(
-  no.of.nodes,
-  no.of.edges,
-  exponent.out,
-  exponent.in = -1,
+  n,
+  n_edges,
+  exponent_out,
+  exponent_in = -1,
   ...,
   loops = FALSE,
   multiple = FALSE,
-  finite.size.correction = TRUE
+  finite_size_correction = TRUE,
+  no.of.nodes = deprecated(),
+  no.of.edges = deprecated(),
+  exponent.out = deprecated(),
+  exponent.in = deprecated()
 )
 }
 \arguments{
-\item{no.of.nodes}{The number of vertices in the generated graph.}
+\item{n}{The number of vertices in the generated graph.}
 
-\item{no.of.edges}{The number of edges in the generated graph.}
+\item{n_edges}{The number of edges in the generated graph.}
 
-\item{exponent.out}{Numeric scalar, the power law exponent of the degree
+\item{exponent_out}{Numeric scalar, the power law exponent of the degree
 distribution. For directed graphs, this specifies the exponent of the
 out-degree distribution. It must be greater than or equal to 2. If you pass
 \code{Inf} here, you will get back an Erdős-Rényi random network.}
 
-\item{exponent.in}{Numeric scalar. If negative, the generated graph will be
+\item{exponent_in}{Numeric scalar. If negative, the generated graph will be
 undirected. If greater than or equal to 2, this argument specifies the
 exponent of the in-degree distribution. If non-negative but less than 2, an
 error will be generated.}
@@ -37,8 +41,16 @@ error will be generated.}
 \item{multiple}{Logical, whether to allow multiple edges in the
 graph.}
 
-\item{finite.size.correction}{Logical, whether to use the proposed
+\item{finite_size_correction}{Logical, whether to use the proposed
 finite size correction of Cho et al., see references below.}
+
+\item{no.of.nodes}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{n} instead.}
+
+\item{no.of.edges}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{n_edges} instead.}
+
+\item{exponent.out}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{exponent_out} instead.}
+
+\item{exponent.in}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{exponent_in} instead.}
 }
 \value{
 An igraph graph, directed or undirected.

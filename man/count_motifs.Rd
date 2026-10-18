@@ -4,7 +4,7 @@
 \alias{count_motifs}
 \title{Graph motifs}
 \usage{
-count_motifs(graph, size = 3, ..., cut.prob = NULL)
+count_motifs(graph, size = 3, ..., cut_prob = NULL)
 }
 \arguments{
 \item{graph}{Graph object, the input graph.}
@@ -13,7 +13,7 @@ count_motifs(graph, size = 3, ..., cut.prob = NULL)
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{cut.prob}{Numeric vector giving the probabilities that the search
+\item{cut_prob}{Numeric vector giving the probabilities that the search
 graph is cut at a certain level. Its length should be the same as the size
 of the motif (the \code{size} argument).
 If \code{NULL}, the default, no cuts are made.}

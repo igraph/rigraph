@@ -4,14 +4,23 @@
 \alias{is_degseq}
 \title{Check if a degree sequence is valid for a multi-graph}
 \usage{
-is_degseq(out.deg, in.deg = NULL)
+is_degseq(
+  out_deg,
+  in_deg = NULL,
+  out.deg = deprecated(),
+  in.deg = deprecated()
+)
 }
 \arguments{
-\item{out.deg}{Integer vector, the degree sequence for undirected graphs, or
+\item{out_deg}{Integer vector, the degree sequence for undirected graphs, or
 the out-degree sequence for directed graphs.}
 
-\item{in.deg}{\code{NULL} or an integer vector. For undirected graphs, it
+\item{in_deg}{\code{NULL} or an integer vector. For undirected graphs, it
 should be \code{NULL}. For directed graphs it specifies the in-degrees.}
+
+\item{out.deg}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{out_deg} instead.}
+
+\item{in.deg}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{in_deg} instead.}
 }
 \value{
 A logical scalar.

@@ -9,14 +9,9 @@ sbm.game(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE)
 \arguments{
 \item{n}{Number of vertices in the graph.}
 
-\item{pref.matrix}{The matrix giving the Bernoulli rates.  This is a
-\eqn{K\times K}{KxK} matrix, where \eqn{K} is the number of groups. The
-probability of creating an edge between vertices from groups \eqn{i} and
-\eqn{j} is given by element \eqn{(i,j)}. For undirected graphs, this matrix
-must be symmetric.}
+\item{pref.matrix}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{pref_matrix} instead.}
 
-\item{block.sizes}{Numeric vector giving the number of vertices in each
-group. The sum of the vector must match the number of vertices.}
+\item{block.sizes}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{block_sizes} instead.}
 
 \item{directed}{Logical, whether to create a directed graph.}
 

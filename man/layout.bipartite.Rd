@@ -19,10 +19,6 @@ used.}
 same layer.}
 
 \item{vgap}{Real scalar, the distance between the two layers.}
-
-\item{maxiter}{Integer scalar, the maximum number of iterations in the
-crossing minimization stage. 100 is a reasonable default; if you feel that
-you have too many edge crossings, increase this.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

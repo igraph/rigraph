@@ -20,11 +20,12 @@ betweenness(
 
 edge_betweenness(
   graph,
-  e = NULL,
+  edges = NULL,
   ...,
   directed = TRUE,
   weights = NULL,
-  cutoff = -1
+  cutoff = -1,
+  e = deprecated()
 )
 }
 \arguments{
@@ -60,8 +61,10 @@ betweenness. If negative, then there is no such limit.}
 
 \item{v}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 
-\item{e}{The edges for which the edge betweenness will be calculated.
+\item{edges}{The edges for which the edge betweenness will be calculated.
 The default \code{NULL} selects all edges.}
+
+\item{e}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{edges} instead.}
 }
 \value{
 A numeric vector with the betweenness score for each vertex in

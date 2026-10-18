@@ -5,7 +5,7 @@
 \alias{seeded.graph.match}
 \title{Match Graphs given a seeding of vertex correspondences}
 \usage{
-match_vertices(A, B, m, start, iteration)
+match_vertices(A, B, m, start, max_iter, iteration = deprecated())
 }
 \arguments{
 \item{A}{a numeric matrix, the adjacency matrix of the first graph}
@@ -18,7 +18,9 @@ matched.}
 \item{start}{a numeric matrix, the permutation matrix estimate is
 initialized with \code{start}}
 
-\item{iteration}{The number of iterations for the Frank-Wolfe algorithm}
+\item{max_iter}{The number of iterations for the Frank-Wolfe algorithm}
+
+\item{iteration}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{max_iter} instead.}
 }
 \value{
 A numeric matrix which is the permutation matrix that determines the
