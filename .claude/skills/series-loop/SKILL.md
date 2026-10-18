@@ -80,8 +80,7 @@ What duckdb-r needs for more than one line is not ported, and nothing here calls
 * **Release-branch series**, their cut, reflavor and preview prefix:
   igraph cuts no release branch the package serves; one that ever needs its own flavor is the trigger.
 * **The alpha strand**, which served duckdb's extension downloads: igraph has nothing like them.
-* **The store sweep and drop** (`rcc-logs.sh`, `rcc-drop.sh`):
-  triggered by a firing that needs a record no leg ever published, or by a run of verdicts the job decided rather than the tree.
+* **The store sweep** (`rcc-logs.sh`): triggered by a firing that needs a record no leg ever published.
 * **Generated mirror rules and badge tables**: the fork mirrors one branch, by one rule written by hand; a second is the trigger.
 
 ## One firing
@@ -422,8 +421,8 @@ git push --force-with-lease origin "<the failing commit>:refs/heads/retry-main-d
   means it has had its one rerun and failed again, which is REPAIR, never RETRY;
   pointing elsewhere, force-update it and rerun.
 * The verdict reaches the loop from the rerun's own run, which carries the higher run id.
-* A verdict the job decided rather than the tree is dropped from `rcc2`, so the next run plans the commit again;
-  the script for it is not ported, so a drop is a hand-made commit on `rcc2`, done only for that cause.
+* A verdict the job decided rather than the tree, and only that, is dropped with `scripts/rcc-drop.sh <sha>...`.
+  The next run plans the commit again.
 * A commit whose tree predates `each.yaml` retries by hand: dispatch `each-rcc` on `retry-main-dev` with `force=true` and `max-commits=1`.
 
 Reference: [`references/retry.md`](references/retry.md).
