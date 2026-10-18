@@ -289,6 +289,9 @@ while [ $commits_vendored -lt $num_commits ]; do
 
   message=
   is_tag=
+  # Candidates this pass regenerated and found unchanged but for the version
+  # stamp, oldest first: they fold into the next commit that moves.
+  skipped=
 
   for commit in $original; do
     echo "Importing commit $commit"
@@ -344,6 +347,18 @@ while [ $commits_vendored -lt $num_commits ]; do
         echo "  $0 ${strand_flag:+$strand_flag }--commits 1 <upstream>"
         echo "  git reset --soft HEAD~2 && git commit -C HEAD@{1}   # keep the vendor message, then"
         echo "  git commit --amend -F <file>                         # the same plus an 'R-side fix' section"
+        if [ -n "$skipped" ]; then
+          last_skipped=${skipped##* }
+          echo ""
+          echo "This pass skipped$skipped before ${commit}: each changed nothing but"
+          echo "the version stamp, and the stack applied to each. A patch rebased for"
+          echo "${commit} need not apply to them, and the rerun walks them again,"
+          echo "so make the temporary commit name the last one, which then counts as"
+          echo "vendored and starts the walk at ${commit}:"
+          echo "  restamp $series_stamp_file for ${last_skipped} (git describe --tags, core.abbrev=9), and"
+          echo "  git commit -m 'tmp: fix generation, ${owner}@${last_skipped}' -- patch $series_stamp_file"
+          echo "The squash folds that stamp away again."
+        fi
         exit 4
       fi
     done
@@ -377,6 +392,7 @@ while [ $commits_vendored -lt $num_commits ]; do
       message="vendor: Update vendored sources to ${owner}@$commit"
       break
     fi
+    skipped="$skipped $commit"
   done
 
   if [ "$message" = "" ]; then

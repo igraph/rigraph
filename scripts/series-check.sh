@@ -624,14 +624,16 @@ for S in "${series[@]}"; do
   elif [ "$(series_vendor_key "$vendor")" != "$(series_vendor_key "$build")" ]; then
     bkey=$(series_vendor_key "$build")
     at=''
-    for c in $(git rev-list -n "$base_scan_depth" "$vendor"); do
+    # The whole strand, as series-vendor.sh walks it: a firing vendors up to
+    # 100 commits onto it before the buffer picks any, far past the base scan.
+    for c in $(git rev-list "$vendor"); do
       if [ "$(series_vendor_key "$c")" = "$bkey" ]; then at=$c; break; fi
     done
     if [ -n "$at" ]; then
       echo "  VENDOR  $S-vendor is $(git rev-list --count "$at..$vendor") commit(s) ahead of $S-build; stage 1 picks them:"
       echo "          scripts/series-vendor.sh $S --remote $remote --push   # from a worktree at $S-build"
     else
-      echo "  VENDOR  $S-build's vendor paths match none of the newest $base_scan_depth commits of $S-vendor:"
+      echo "  VENDOR  $S-build's vendor paths match no commit of $S-vendor:"
       echo "          something vendored onto the buffer directly. Vendor onto the strand"
       echo "          (vendor-one.sh --strand) and pick; the buffer never leads it."
     fi
