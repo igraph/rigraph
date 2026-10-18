@@ -594,9 +594,63 @@ test_that("`[<-.igraph.vs` reports an internal error when the graph is unknown",
   g <- make_ring(5)
   vs <- V(g)
   attr(vs, "env") <- NULL
-  payload <- structure(1, attr_name = "color", attr_value = "blue")
+  payload <- structure(1, name = "color", value = "blue")
 
   expect_snapshot_igraph_error({
     `[<-.igraph.vs`(vs, 1, value = payload)
   })
+})
+
+test_that("`$<-` on vertex and edge sequences keeps the `name`/`value` protocol", {
+  # Packages such as bitriad define their own `V<-`-like replacement functions
+  # that read these attributes, so they are part of the interface.
+  g <- make_ring(5)
+
+  vs <- V(g)[1:2]
+  vs$color <- "red"
+  expect_identical(attr(vs, "name"), "color")
+  expect_identical(attr(vs, "value"), "red")
+
+  es <- E(g)[1:2]
+  es$weight <- 2
+  expect_identical(attr(es, "name"), "weight")
+  expect_identical(attr(es, "value"), 2)
+})
+
+test_that("custom replacement functions following the `V<-` protocol work", {
+  # Modeled on `bitriad::\`V1<-\``.
+  `V1<-` <- function(x, value) {
+    if (
+      !"name" %in% names(attributes(value)) ||
+        !"value" %in% names(attributes(value))
+    ) {
+      stop("invalid indexing")
+    }
+    set_vertex_attr(
+      x,
+      attr(value, "name"),
+      index = value,
+      value = attr(value, "value")
+    )
+  }
+  V1 <- function(graph) V(graph)
+
+  g <- make_ring(5)
+  V1(g)$label <- 1:5
+  expect_identical(V(g)$label, 1:5)
+  V1(g)[2]$label <- 10L
+  expect_identical(V(g)$label, c(1L, 10L, 3L, 4L, 5L))
+})
+
+test_that("attributes called `name` and `value` can be set through `V()` and `E()`", {
+  g <- make_ring(3)
+  V(g)$value <- 1:3
+  V(g)$name <- c("a", "b", "c")
+  V(g)[2]$value <- 9L
+  E(g)$name <- c("x", "y", "z")
+  E(g)$value <- 4:6
+  expect_identical(V(g)$name, c("a", "b", "c"))
+  expect_identical(V(g)$value, c(1L, 9L, 3L))
+  expect_identical(E(g)$name, c("x", "y", "z"))
+  expect_identical(E(g)$value, 4:6)
 })
