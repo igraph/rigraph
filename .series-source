@@ -25,6 +25,8 @@ ported:
     blob: ed43819d90d72ebca4a3b8cd30d645463f5c9958
   - path: scripts/series-lib.sh
     blob: 15db68692ce3f1e51bcdaa342b357263b6c045b9
+  # rigraph diverges here, in the test and in stage 1's reference:
+  # a rerun finishes the pick a stop left in flight, and --push also pushes a level buffer the remote lacks.
   - path: scripts/series-vendor.sh
     blob: 6c6997e6973375c24e9f1e6099ef35c3c08e8f43
   - path: scripts/series-check.sh
