@@ -1543,6 +1543,9 @@ canonical_permutation <- function(
 #' @export
 #' @family functions for manipulating graph structure
 permute <- function(graph, permutation) {
+  ensure_igraph(graph)
+  check_permutation(permutation, vcount(graph))
+
   permute_vertices_impl(
     graph = graph,
     permutation = permutation

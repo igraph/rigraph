@@ -101,3 +101,79 @@ ensure_no_na <- function(x, what, mode = "", call = caller_env()) {
     )
   }
 }
+
+# Checks a user-supplied permutation of `n` vertices before it reaches C,
+# which names no argument in its errors
+# and silently accepts duplicates and out-of-range values in the correlated games.
+check_permutation <- function(
+  permutation,
+  n,
+  arg = rlang::caller_arg(permutation),
+  call = rlang::caller_env()
+) {
+  if (!is.numeric(permutation)) {
+    cli::cli_abort(
+      "{.arg {arg}} must be a numeric vector, not {.obj_type_friendly {permutation}}.",
+      call = call
+    )
+  }
+
+  # `isTRUE()` because `n` is user input in `sample_correlated_gnp_pair()`.
+  if (!isTRUE(length(permutation) == n)) {
+    cli::cli_abort(
+      c(
+        "{.arg {arg}} must have length equal to the number of vertices.",
+        i = "Expected length {n}, got {length(permutation)}."
+      ),
+      call = call
+    )
+  }
+
+  values <- as.numeric(permutation)
+
+  pos <- which(is.na(values))
+  if (length(pos) > 0) {
+    cli::cli_abort(
+      c(
+        "{.arg {arg}} must not contain missing values.",
+        i = "Found {.val {NA}} at {cli::qty(length(pos))}position{?s} {pos}."
+      ),
+      call = call
+    )
+  }
+
+  pos <- which(values != trunc(values))
+  if (length(pos) > 0) {
+    cli::cli_abort(
+      c(
+        "{.arg {arg}} must contain whole numbers.",
+        i = "Found {.val {values[pos]}} at {cli::qty(length(pos))}position{?s} {pos}."
+      ),
+      call = call
+    )
+  }
+
+  pos <- which(values < 1 | values > n)
+  if (length(pos) > 0) {
+    cli::cli_abort(
+      c(
+        "{.arg {arg}} must contain values between 1 and {n}.",
+        i = "Found {.val {values[pos]}} at {cli::qty(length(pos))}position{?s} {pos}."
+      ),
+      call = call
+    )
+  }
+
+  if (anyDuplicated(values)) {
+    duplicates <- unique(values[duplicated(values)])
+    cli::cli_abort(
+      c(
+        "{.arg {arg}} must not contain duplicate values.",
+        i = "Found {.val {duplicates}} more than once."
+      ),
+      call = call
+    )
+  }
+
+  invisible(permutation)
+}
