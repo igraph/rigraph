@@ -450,16 +450,6 @@ graph_center <- function(
   )
 }
 
-# Upstream merged the weighted `_dijkstra` variants into the base functions,
-# which take their weights argument (krlmlr/igraph@d8febb1): the
-# `_dijkstra_impl()` names stay, as aliases with the same arguments.
-average_path_length_dijkstra_impl <- average_path_length_impl
-diameter_dijkstra_impl <- diameter_impl
-eccentricity_dijkstra_impl <- eccentricity_impl
-graph_center_dijkstra_impl <- graph_center_impl
-pseudo_diameter_dijkstra_impl <- pseudo_diameter_impl
-radius_dijkstra_impl <- radius_impl
-
 #' @rdname distances
 #' @inheritParams rlang::args_dots_empty
 #' @param directed Whether to consider directed paths in directed graphs,
