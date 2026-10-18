@@ -4,7 +4,9 @@
 #
 # The goal is identity, not curation: after a successful --apply, the tooling
 # paths — .github/, scripts/, .claude/ — of <S>-dev are byte-identical to
-# `main`'s, and a tooling change never waits for a forward.
+# `main`'s, and a tooling change never waits for a forward. The one file a
+# flavor rewrites, scripts/flavor.patch, is held to `main`'s copy spelled for
+# the series' package (flavored_main() below).
 #
 # **<S>-build owes the same identity, and is synced here too.** A workflow
 # fires from the branch it sits on, so a ref nobody ports runs the tooling of
@@ -243,6 +245,36 @@ fi
 # offers a subset of the truth -- worth saying and not worth refusing over.
 [ -n "$main" ] || main="$remote/main"
 
+# What a ref's tooling is held to: `main`'s tree, with scripts/flavor.patch
+# spelled for the package the ref's DESCRIPTION declares, as scripts/flavor.sh
+# spells it. The seed's first commit rewrites that one tooling file from the
+# template's `igraph.1.3` to the series' own package, so taking `main`'s copy
+# verbatim put the template back on every flavored series at its first port.
+# `main`'s copy is spelled rather than the seed's kept, so a hunk `main` adds to
+# the template still arrives. An unflavored ref is held to `main` as it is, and
+# series-rc.sh spells the file back to the template for the rc strand.
+flavor_patch=scripts/flavor.patch
+flavored_main() { # <ref> -> tree-ish
+  local pkg mode='' blob idx
+  pkg=$({ git show "$1:DESCRIPTION" 2>/dev/null || true; } | sed -n 's/^Package: *//p' | head -n 1)
+  case "$pkg" in
+    "$series_package".*) mode=$(git ls-tree --full-tree "$main" -- "$flavor_patch" | cut -d' ' -f1) ;;
+  esac
+  # No flavor to spell, or no template on `main` to spell it in.
+  if [ -z "$mode" ]; then
+    echo "$main"
+    return
+  fi
+  blob=$(git show "$main:$flavor_patch" |
+    sed -e "s/$series_package\\.1\\.3/$pkg/g" -e "s/${series_package}_1_3/${pkg//./_}/g" |
+    git hash-object -w --stdin)
+  idx=$(mktemp -d)
+  GIT_INDEX_FILE=$idx/index git read-tree "$main"
+  GIT_INDEX_FILE=$idx/index git update-index --cacheinfo "$mode,$blob,$flavor_patch"
+  GIT_INDEX_FILE=$idx/index git write-tree
+  rm -rf "$idx"
+}
+
 mb=$(git merge-base "$dev" "$main" 2>/dev/null || true)
 if [ -z "$mb" ]; then
   # A series seeded from an orphan mirror shares no history with `main`, so
@@ -436,22 +468,25 @@ else
   done
 fi
 
-if git diff --quiet "$dev" "$main" -- "${tooling[@]}"; then
+dev_main=$(flavored_main "$dev")
+if git diff --quiet "$dev" "$dev_main" -- "${tooling[@]}"; then
   echo "tooling: identical to main"
 else
-  echo "tooling: differs from main —$(git diff --shortstat "$dev" "$main" -- "${tooling[@]}")"
+  echo "tooling: differs from main —$(git diff --shortstat "$dev" "$dev_main" -- "${tooling[@]}")"
 fi
 
 # The buffer's own answer to the same question. Reported even when it is
 # identical, because "nothing to say about -build" and "-build has no tooling
 # delta" are different sentences and only one of them is reassuring.
 buildref="$remote/$S-build"
+build_main=''
 if ! git rev-parse -q --verify "$buildref" > /dev/null; then
   echo "buffer tooling: no $S-build on $remote"
-elif git diff --quiet "$buildref" "$main" -- "${tooling[@]}"; then
+elif build_main=$(flavored_main "$buildref") &&
+  git diff --quiet "$buildref" "$build_main" -- "${tooling[@]}"; then
   echo "buffer tooling: identical to main"
 else
-  echo "buffer tooling: differs from main —$(git diff --shortstat "$buildref" "$main" -- "${tooling[@]}")"
+  echo "buffer tooling: differs from main —$(git diff --shortstat "$buildref" "$build_main" -- "${tooling[@]}")"
 fi
 
 [ -n "$apply" ] || exit 0
@@ -502,14 +537,17 @@ if [ ${#picks[@]} -gt 0 ] && ! git -C "$wt" cherry-pick -x --empty=drop "${picks
   exit 1
 fi
 
-# Close the residue: make the tooling paths byte-identical to main's. `git rm`
-# first, so a file the series has and main does not is deleted rather than
-# kept — checkout alone only adds and overwrites.
-if ! git -C "$wt" diff --quiet "$main" -- "${tooling[@]}"; then
+# Close the residue: make the tooling paths byte-identical to main's, the flavor
+# patch spelled for the series (flavored_main(), above). `git rm` first, so a
+# file the series has and main does not is deleted rather than kept — checkout
+# alone only adds and overwrites.
+dev_main=$(flavored_main "$(git -C "$wt" rev-parse HEAD)")
+if ! git -C "$wt" diff --quiet "$dev_main" -- "${tooling[@]}"; then
   git -C "$wt" rm -qr --ignore-unmatch -- "${tooling[@]}"
-  git -C "$wt" checkout "$main" -- "${tooling[@]}"
+  git -C "$wt" checkout "$dev_main" -- "${tooling[@]}"
   git -C "$wt" commit -q -m "chore(series): Sync tooling with main" \
-    -m "Takes main's ${tooling[*]} verbatim on top of the ported commits;
+    -m "Takes main's ${tooling[*]} verbatim on top of the ported commits,
+but for $flavor_patch, spelled for this series' package;
 the diff is the residue the commit walk could not explain."
 
   # A file the sync deletes can still be named from outside the tooling paths:
@@ -531,7 +569,7 @@ the diff is the residue the commit walk could not explain."
 $(git -C "$wt" diff --diff-filter=D --name-only HEAD^ HEAD)
 EOF
 fi
-git -C "$wt" diff --quiet "$main" -- "${tooling[@]}" ||
+git -C "$wt" diff --quiet "$dev_main" -- "${tooling[@]}" ||
   { echo "Error: tooling still differs after sync"; exit 1; }
 
 if [ "$(git -C "$wt" rev-parse HEAD)" = "$(git rev-parse "$dev")" ] &&
@@ -575,13 +613,14 @@ fi
 # carry `patch/` entries onto, and that is an ordinary state rather than an
 # error.
 git rev-parse -q --verify "$buildref" > /dev/null || exit 0
-if ! git diff --quiet "$buildref" "$main" -- "${tooling[@]}"; then
+if ! git diff --quiet "$buildref" "$build_main" -- "${tooling[@]}"; then
   bwt=$(mktemp -d)
   git worktree add --detach -q "$bwt" "$buildref"
   git -C "$bwt" rm -qr --ignore-unmatch -- "${tooling[@]}"
-  git -C "$bwt" checkout "$main" -- "${tooling[@]}"
+  git -C "$bwt" checkout "$build_main" -- "${tooling[@]}"
   git -C "$bwt" commit -q -m "chore(series): Sync buffer tooling with main" \
-    -m "Takes main's ${tooling[*]} verbatim onto the buffer, so a workflow firing
+    -m "Takes main's ${tooling[*]} verbatim onto the buffer, but for $flavor_patch,
+spelled for this series' package, so a workflow firing
 from this ref is main's rather than the seed's. Vendors nothing, so stage 5
 skips it rather than replaying it onto -dev."
   # The same check as the -dev sync's, and it matters more here: vendor-one.sh
@@ -598,7 +637,7 @@ skips it rather than replaying it onto -dev."
   done <<EOF
 $(git -C "$bwt" diff --diff-filter=D --name-only HEAD^ HEAD)
 EOF
-  git -C "$bwt" diff --quiet "$main" -- "${tooling[@]}" ||
+  git -C "$bwt" diff --quiet "$build_main" -- "${tooling[@]}" ||
     { echo "Error: buffer tooling still differs after sync; worktree kept at $bwt"; exit 1; }
 
   bnext=$(git -C "$bwt" rev-parse HEAD)
