@@ -4,18 +4,26 @@
 \alias{incident}
 \title{Incident edges of a vertex in a graph}
 \usage{
-incident(graph, v, ..., mode = c("all", "out", "in", "total"))
+incident(
+  graph,
+  vertex,
+  ...,
+  mode = c("all", "out", "in", "total"),
+  v = deprecated()
+)
 }
 \arguments{
 \item{graph}{The input graph.}
 
-\item{v}{The vertex of which the incident edges are queried.}
+\item{vertex}{The vertex of which the incident edges are queried.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Whether to query outgoing (\sQuote{out}), incoming
 (\sQuote{in}) edges, or both types (\sQuote{all}). This is
 ignored for undirected graphs.}
+
+\item{v}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertex} instead.}
 }
 \value{
 An edge sequence containing the incident edges of

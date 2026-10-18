@@ -4,12 +4,12 @@
 \alias{constraint}
 \title{Burt's constraint}
 \usage{
-constraint(graph, nodes = NULL, ..., weights = NULL)
+constraint(graph, vertices = NULL, ..., weights = NULL, nodes = deprecated())
 }
 \arguments{
 \item{graph}{A graph object, the input graph.}
 
-\item{nodes}{The vertices for which the constraint will be calculated.
+\item{vertices}{The vertices for which the constraint will be calculated.
 The default \code{NULL} selects all vertices.}
 
 \item{...}{These dots are for future extensions and must be empty.}
@@ -17,6 +17,8 @@ The default \code{NULL} selects all vertices.}
 \item{weights}{The weights of the edges. If this is \code{NULL} and there is
 a \code{weight} edge attribute this is used. If there is no such edge
 attribute all edges will have the same weight.}
+
+\item{nodes}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 }
 \value{
 A numeric vector of constraint scores

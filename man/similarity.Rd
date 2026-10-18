@@ -6,17 +6,18 @@
 \usage{
 similarity(
   graph,
-  vids = NULL,
+  vertices = NULL,
   ...,
   mode = c("all", "out", "in", "total"),
   loops = FALSE,
-  method = c("jaccard", "dice", "invlogweighted")
+  method = c("jaccard", "dice", "invlogweighted"),
+  vids = deprecated()
 )
 }
 \arguments{
 \item{graph}{The input graph.}
 
-\item{vids}{The vertex IDs for which the similarity is calculated. The
+\item{vertices}{The vertex IDs for which the similarity is calculated. The
 default \code{NULL} selects all vertices.}
 
 \item{...}{These dots are for future extensions and must be empty.}
@@ -29,9 +30,11 @@ possible values: \sQuote{\code{out}}, \sQuote{\verb{in}},
 sets.}
 
 \item{method}{The method to use.}
+
+\item{vids}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 }
 \value{
-A \code{length(vids)} by \code{length(vids)} numeric matrix
+A \code{length(vertices)} by \code{length(vertices)} numeric matrix
 containing the similarity scores. This argument is ignored by the
 \code{invlogweighted} method.
 }

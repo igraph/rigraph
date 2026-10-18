@@ -7,18 +7,19 @@
 \usage{
 closeness(
   graph,
-  vids = NULL,
+  vertices = NULL,
   ...,
   mode = c("out", "in", "all", "total"),
   weights = NULL,
   normalized = FALSE,
-  cutoff = -1
+  cutoff = -1,
+  vids = deprecated()
 )
 }
 \arguments{
 \item{graph}{The graph to analyze.}
 
-\item{vids}{The vertices for which closeness will be calculated.
+\item{vertices}{The vertices for which closeness will be calculated.
 The default \code{NULL} selects all vertices.}
 
 \item{...}{These dots are for future extensions and must be empty.}
@@ -41,10 +42,12 @@ all reachable vertices.}
 
 \item{cutoff}{The maximum path length to consider when calculating the
 closeness. If zero or negative then there is no such limit.}
+
+\item{vids}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 }
 \value{
 Numeric vector with the closeness values of all the vertices in
-\code{v}.
+\code{vertices}.
 }
 \description{
 Closeness centrality measures how many steps are required to access every other

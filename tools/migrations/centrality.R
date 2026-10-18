@@ -7,14 +7,15 @@ migrations <- list(
     old = function(graph, nodes, alpha, loops, exo, weights, tol, sparse) {},
     new = function(
       graph,
-      nodes = NULL,
+      vertices = NULL,
       ...,
       alpha = 1,
       loops = FALSE,
       exo = 1,
       weights = NULL,
       tol = 1e-7,
-      sparse = TRUE
+      sparse = TRUE,
+      nodes = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -23,12 +24,13 @@ migrations <- list(
     old = function(graph, v, directed, weights, normalized, cutoff) {},
     new = function(
       graph,
-      v = NULL,
+      vertices = NULL,
       ...,
       directed = TRUE,
       weights = NULL,
       normalized = FALSE,
-      cutoff = -1
+      cutoff = -1,
+      v = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -37,23 +39,24 @@ migrations <- list(
     old = function(graph, vids, mode, weights, normalized, cutoff) {},
     new = function(
       graph,
-      vids = NULL,
+      vertices = NULL,
       ...,
       mode = c("out", "in", "all", "total"),
       weights = NULL,
       normalized = FALSE,
-      cutoff = -1
+      cutoff = -1,
+      vids = deprecated()
     ) {},
     when = "3.0.0"
   ),
 
   diversity = list(
-    old = function(graph, weights, vids) {},
+    old = function(graph, weights, vids = vertices) {},
     new = function(
       graph,
       ...,
       weights = NULL,
-      vids = NULL
+      vertices = NULL
     ) {},
     when = "3.0.0"
   ),
@@ -75,12 +78,13 @@ migrations <- list(
     old = function(graph, vids, mode, weights, normalized, cutoff) {},
     new = function(
       graph,
-      vids = NULL,
+      vertices = NULL,
       ...,
       mode = c("out", "in", "all", "total"),
       weights = NULL,
       normalized = FALSE,
-      cutoff = -1
+      cutoff = -1,
+      vids = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -89,7 +93,7 @@ migrations <- list(
     old = function(
       graph,
       algo = algorithm,
-      vids,
+      vids = vertices,
       directed,
       damping,
       personalized,
@@ -100,7 +104,7 @@ migrations <- list(
       graph,
       ...,
       algorithm = c("prpack", "arpack"),
-      vids = NULL,
+      vertices = NULL,
       directed = TRUE,
       damping = 0.85,
       personalized = NULL,
@@ -123,14 +127,15 @@ migrations <- list(
     ) {},
     new = function(
       graph,
-      nodes = NULL,
+      vertices = NULL,
       ...,
       loops = FALSE,
       exponent = 1,
       normalized = FALSE,
       tol = 1e-7,
       sparse = TRUE,
-      weights = NULL
+      weights = NULL,
+      nodes = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -139,11 +144,12 @@ migrations <- list(
     old = function(graph, vids, mode, loops, weights) {},
     new = function(
       graph,
-      vids = NULL,
+      vertices = NULL,
       ...,
       mode = c("all", "out", "in", "total"),
       loops = TRUE,
-      weights = NULL
+      weights = NULL,
+      vids = deprecated()
     ) {},
     when = "3.0.0"
   ),

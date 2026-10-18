@@ -7,9 +7,10 @@ migrations <- list(
     old = function(graph, v, mode) {},
     new = function(
       graph,
-      v,
+      vertices,
       ...,
-      mode = c("out", "in", "all", "total")
+      mode = c("out", "in", "all", "total"),
+      v = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -41,9 +42,10 @@ migrations <- list(
     old = function(graph, v, mode) {},
     new = function(
       graph,
-      v,
+      vertex,
       ...,
-      mode = c("all", "out", "in", "total")
+      mode = c("all", "out", "in", "total"),
+      v = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -52,9 +54,10 @@ migrations <- list(
     old = function(graph, v, mode) {},
     new = function(
       graph,
-      v,
+      vertices,
       ...,
-      mode = c("out", "in", "all", "total")
+      mode = c("out", "in", "all", "total"),
+      v = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -63,9 +66,10 @@ migrations <- list(
     old = function(graph, v, mode) {},
     new = function(
       graph,
-      v,
+      vertex,
       ...,
-      mode = c("out", "in", "all", "total")
+      mode = c("out", "in", "all", "total"),
+      v = deprecated()
     ) {},
     when = "3.0.0"
   ),

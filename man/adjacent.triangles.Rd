@@ -10,9 +10,7 @@ adjacent.triangles(graph, vids = V(graph))
 \item{graph}{The input graph. It might be directed, but edge directions are
 ignored.}
 
-\item{vids}{The vertices to query. This might be a vector of numeric IDs,
-or a character vector of symbolic vertex names for named graphs. The
-default \code{NULL} selects all vertices.}
+\item{vids}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

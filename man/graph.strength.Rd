@@ -15,8 +15,7 @@ graph.strength(
 \arguments{
 \item{graph}{The input graph.}
 
-\item{vids}{The vertices for which the strength will be calculated.
-The default \code{NULL} selects all vertices.}
+\item{vids}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 
 \item{mode}{Character string, \dQuote{out} for out-degree, \dQuote{in} for
 in-degree or \dQuote{all} for the sum of the two. For undirected graphs this

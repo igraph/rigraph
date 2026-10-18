@@ -4,18 +4,26 @@
 \alias{adjacent_vertices}
 \title{Adjacent vertices of multiple vertices in a graph}
 \usage{
-adjacent_vertices(graph, v, ..., mode = c("out", "in", "all", "total"))
+adjacent_vertices(
+  graph,
+  vertices,
+  ...,
+  mode = c("out", "in", "all", "total"),
+  v = deprecated()
+)
 }
 \arguments{
 \item{graph}{Input graph.}
 
-\item{v}{The vertices to query.}
+\item{vertices}{The vertices to query.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Whether to query outgoing (\sQuote{out}), incoming
 (\sQuote{in}) edges, or both types (\sQuote{all}). This is
 ignored for undirected graphs.}
+
+\item{v}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 }
 \value{
 A list of vertex sequences.

@@ -52,11 +52,12 @@ migrations <- list(
     old = function(graph, vids, weights, directed, mode) {},
     new = function(
       graph,
-      vids = NULL,
+      vertices = NULL,
       ...,
       weights = NULL,
       directed = TRUE,
-      mode = c("all", "out", "in", "total")
+      mode = c("all", "out", "in", "total"),
+      vids = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -65,7 +66,7 @@ migrations <- list(
     old = function(graph, vids, mode, loops, method) {},
     new = function(
       graph,
-      vids = NULL,
+      vertices = NULL,
       ...,
       mode = c(
         "all",
@@ -78,7 +79,8 @@ migrations <- list(
         "jaccard",
         "dice",
         "invlogweighted"
-      )
+      ),
+      vids = deprecated()
     ) {},
     when = "3.0.0"
   )

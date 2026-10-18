@@ -13,8 +13,7 @@ induced.subgraph(
 \arguments{
 \item{graph}{The original graph.}
 
-\item{vids}{Numeric vector, the vertices of the original graph which will
-form the subgraph.}
+\item{vids}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 
 \item{impl}{Character scalar, to choose between two implementation of the
 subgraph calculation. \sQuote{\code{copy_and_delete}} copies the graph

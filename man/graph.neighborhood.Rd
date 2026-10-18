@@ -18,8 +18,7 @@ graph.neighborhood(
 \item{order}{Integer giving the order of the neighborhood. Negative values
 indicate an infinite order.}
 
-\item{nodes}{The vertices for which the calculation is performed.
-The default \code{NULL} selects all vertices.}
+\item{nodes}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 
 \item{mode}{Character constant, it specifies how to use the direction of
 the edges if a directed graph is analyzed. For \sQuote{out} only the

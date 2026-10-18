@@ -16,8 +16,7 @@ shortest.paths(
 \arguments{
 \item{graph}{The graph to work on.}
 
-\item{v}{Numeric vector, the vertices from which the shortest paths will be
-calculated. The default \code{NULL} selects all vertices.}
+\item{v}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 
 \item{to}{Numeric vector, the vertices to which the shortest paths will be
 calculated. The default \code{NULL} includes all vertices. Note that for

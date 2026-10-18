@@ -17,8 +17,7 @@ bonpow(
 \arguments{
 \item{graph}{the input graph.}
 
-\item{nodes}{vertex sequence indicating which vertices are to be included in
-the calculation. The default \code{NULL} selects all vertices.}
+\item{nodes}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 
 \item{loops}{Logical indicating whether or not the diagonal should be
 treated as valid data.  Set this true if and only if the data can contain

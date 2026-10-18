@@ -4,12 +4,14 @@
 \alias{delete_vertices}
 \title{Delete vertices from a graph}
 \usage{
-delete_vertices(graph, v)
+delete_vertices(graph, vertices, v = deprecated())
 }
 \arguments{
 \item{graph}{The input graph.}
 
-\item{v}{The vertices to remove, a vertex sequence.}
+\item{vertices}{The vertices to remove, a vertex sequence.}
+
+\item{v}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 }
 \value{
 The graph, with the vertices removed.

@@ -9,11 +9,11 @@ test_that("NULL selector defaults stand for the full vertex/edge set", {
   # Passing NULL explicitly is now the same as not passing the argument.
   # (Before the constant-defaults cleanup an explicit NULL was coerced to an
   # empty selection -- an accident of as_igraph_vs(), never documented.)
-  expect_identical(degree(g, v = NULL), degree(g))
-  expect_identical(distances(g, v = NULL, to = NULL), distances(g))
-  expect_identical(diversity(g, vids = NULL), diversity(g))
+  expect_identical(degree(g, vertices = NULL), degree(g))
+  expect_identical(distances(g, vertices = NULL, to = NULL), distances(g))
+  expect_identical(diversity(g, vertices = NULL), diversity(g))
   expect_identical(which_mutual(g, eids = NULL), which_mutual(g))
-  expect_identical(closeness(g, vids = NULL), closeness(g))
+  expect_identical(closeness(g, vertices = NULL), closeness(g))
 })
 
 test_that("NULL non-selector defaults resolve in the body", {
@@ -33,13 +33,13 @@ test_that("NULL non-selector defaults resolve in the body", {
 test_that("NULL selector defaults of round-2 functions select the full set", {
   g <- make_ring(5)
 
-  expect_identical(max_degree(g, v = NULL), max_degree(g))
+  expect_identical(max_degree(g, vertices = NULL), max_degree(g))
   expect_identical(which_loop(g, eids = NULL), which_loop(g))
   expect_identical(which_multiple(g, eids = NULL), which_multiple(g))
   expect_identical(count_multiple(g, eids = NULL), count_multiple(g))
-  expect_identical(count_triangles(g, vids = NULL), count_triangles(g))
-  expect_identical(cocitation(g, v = NULL), cocitation(g))
-  expect_identical(similarity(g, vids = NULL), similarity(g))
+  expect_identical(count_triangles(g, vertices = NULL), count_triangles(g))
+  expect_identical(cocitation(g, vertices = NULL), cocitation(g))
+  expect_identical(similarity(g, vertices = NULL), similarity(g))
   expect_identical_graphs(reverse_edges(g, eids = NULL), reverse_edges(g))
 
   V(g)$name <- letters[1:5]
@@ -82,9 +82,9 @@ test_that("empty-sequence defaults are spelled as typed empty vectors", {
   # NULL: an explicit empty selection keeps meaning "nothing selected",
   # while NULL now always means "use the default".
   g <- make_graph(c(1, 2, 2, 2, 2, 3), directed = TRUE)
-  expect_equal(max_degree(g, v = integer()), 0)
+  expect_equal(max_degree(g, vertices = integer()), 0)
   expect_identical(which_loop(g, eids = integer()), logical(0))
-  expect_gt(max_degree(g, v = NULL), 0)
+  expect_gt(max_degree(g, vertices = NULL), 0)
 
   # layout_as_tree(): the typed empty stays the documented default
   tree <- make_tree(5)
@@ -106,5 +106,5 @@ test_that("positional recovery of a selector with a NULL default works", {
   lifecycle::expect_deprecated(
     res <- diversity(g, NULL, V(g)[1:3])
   )
-  expect_identical(res, diversity(g, weights = NULL, vids = V(g)[1:3]))
+  expect_identical(res, diversity(g, weights = NULL, vertices = V(g)[1:3]))
 })

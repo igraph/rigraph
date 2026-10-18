@@ -6,17 +6,18 @@
 \usage{
 strength(
   graph,
-  vids = NULL,
+  vertices = NULL,
   ...,
   mode = c("all", "out", "in", "total"),
   loops = TRUE,
-  weights = NULL
+  weights = NULL,
+  vids = deprecated()
 )
 }
 \arguments{
 \item{graph}{The input graph.}
 
-\item{vids}{The vertices for which the strength will be calculated.
+\item{vertices}{The vertices for which the strength will be calculated.
 The default \code{NULL} selects all vertices.}
 
 \item{...}{These dots are for future extensions and must be empty.}
@@ -32,6 +33,8 @@ attribute, then this is used by default. If the graph does not have a
 \code{weight} edge attribute and this argument is \code{NULL}, then a
 \code{\link[=degree]{degree()}} is called. If this is \code{NA}, then no edge weights are used
 (even if the graph has a \code{weight} edge attribute).}
+
+\item{vids}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 }
 \value{
 A numeric vector giving the strength of the vertices.
