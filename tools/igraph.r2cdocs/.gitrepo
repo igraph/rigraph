@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/igraph/igraph.r2cdocs
+	branch = main
+	commit = 4b208c6598df86123534923c0404942cb033e50d
+	parent = ed9d226cb279ab64aaa561b26af0021b1ece2932
+	method = merge
+	cmdver = 0.4.9

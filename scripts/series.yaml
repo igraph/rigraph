@@ -1,0 +1,39 @@
+# The flavors this repository publishes, and the series behind them.
+#
+# Fields: flavor is the package name; kind is CRAN or dev; upstream is the
+# igraph/igraph branch the line tracks; publishes_from is the branch r-universe
+# builds, with repo saying which repository holds it; badges lists the version
+# sources shown, in order. A dev flavor adds series, the prefix of its four
+# refs, and releases_from, the branch it is measured ahead of -- which is also
+# the branch it seeds and forward-ports from, so the fork mirrors it. It may add
+# chunk, the most buffer commits one firing appends to its -dev, 100 where it
+# says nothing.
+#
+# scripts/series-port.sh reads releases_from, scripts/series-advance.sh reads
+# chunk, and scripts/series-check.sh reads whether a flavor is declared; the
+# series themselves are discovered from the refs, never from here.
+
+flavors:
+  - flavor: igraph
+    kind: CRAN
+    upstream: main
+    publishes_from: main
+    repo: igraph/rigraph
+    badges: [cran, r-universe]
+
+  # `igraph.dev` is whichever series tracks upstream `main`: the bleeding edge,
+  # installable beside `igraph`. Its line walks the replay of igraph 0.10.17 to
+  # 1.0.1 first and igraph/igraph's `main` after that (scripts/series-config.sh).
+  - flavor: igraph.dev
+    kind: dev
+    upstream: main
+    series: main
+    releases_from: main
+    # Small while the series adapts to a new engine
+    # (.claude/skills/series-loop/references/5-extend.md).
+    chunk: 10
+    publishes_from: main-green
+    repo: igraph/rigraph
+    badges: [r-universe]
+
+archived: []

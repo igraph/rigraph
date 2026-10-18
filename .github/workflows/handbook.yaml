@@ -1,0 +1,45 @@
+# Handbook: /handbook/meta/local/README.md says what runs the checks here; the
+# checks are /handbook/meta/handbook/README.md's, run by the script the
+# docs-consistency skill carries, and the carried files are checked against
+# their source, cynkra/handbook-tools, which is public and needs no token.
+name: handbook
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  handbook:
+    runs-on: ubuntu-latest
+    steps:
+      # The full history, so that a derived document can be aged by its sources.
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Check the handbook
+        run: .claude/skills/docs-consistency/scripts/check-handbook.sh
+
+  # Its own job, so that the source's files are never read as this
+  # repository's. Refuses a carried file that no longer matches the source at
+  # the commit .handbook-source names; a change in the source since then, and
+  # a source newer than the one last checked against, are reported and do not
+  # fail.
+  handbook-source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      # The source's full history, so that the marker's commit resolves and a
+      # later change in the source reads as an update rather than as drift.
+      - uses: actions/checkout@v6
+        with:
+          repository: cynkra/handbook-tools
+          path: .handbook-tools
+          fetch-depth: 0
+
+      - name: Check the carried files against their source
+        run: .handbook-tools/scripts/vendor.sh --source .handbook-tools --target . check
