@@ -1,0 +1,26 @@
+From 264d1913bc9d66d50c70c5fd09d74aca2dc936ef Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Kirill=20M=C3=BCller?= <kirill@cynkra.com>
+Date: Thu, 15 Oct 2026 11:02:50 +0000
+Subject: [PATCH] Spell the default of igraph_correlated_game()'s p with
+ old_graph
+
+---
+ src/vendor/cigraph/interfaces/functions.yaml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/vendor/cigraph/interfaces/functions.yaml b/src/vendor/cigraph/interfaces/functions.yaml
+index 572f595..6a4590b 100644
+--- a/src/vendor/cigraph/interfaces/functions.yaml
++++ b/src/vendor/cigraph/interfaces/functions.yaml
+@@ -402,7 +402,7 @@ igraph_hsbm_list_game:
+ igraph_correlated_game:
+     PARAMS: |-
+         GRAPH old_graph, OUT GRAPH new_graph,
+-        REAL corr, REAL p=edge_density(old.graph), OPTIONAL INDEX_VECTOR permutation
++        REAL corr, REAL p=edge_density(old_graph), OPTIONAL INDEX_VECTOR permutation
+ 
+ igraph_correlated_pair_game:
+     PARAMS: |-
+-- 
+2.55.0
+
