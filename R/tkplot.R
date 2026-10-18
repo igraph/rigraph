@@ -397,7 +397,7 @@ tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
         type = "numeric",
         default = 500
       ),
-      start.temp = list(
+      start_temp = list(
         name = "Start temperature",
         type = "expression",
         default = expression(sqrt(vcount(.tkplot.g)))
@@ -455,32 +455,32 @@ tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
         type = "expression",
         default = expression(max(10, log2(vcount(.tkplot.g))))
       ),
-      cool.fact = list(
+      cool_fact = list(
         name = "Cooling factor",
         type = "numeric",
         default = 0.75
       ),
-      weight.node.dist = list(
+      weight_node_dist = list(
         name = "Node distance weight",
         type = "numeric",
         default = 1.0
       ),
-      weight.border = list(
+      weight_border = list(
         name = "Border weight",
         type = "numeric",
         default = 0.0
       ),
-      weight.edge.lengths = list(
+      weight_edge_lengths = list(
         name = "Edge length weight",
         type = "expression",
         default = expression(edge_density(.tkplot.g) / 10)
       ),
-      weight.edge.crossings = list(
+      weight_edge_crossings = list(
         name = "Edge crossing weight",
         type = "expression",
         default = expression(1.0 - sqrt(edge_density(.tkplot.g)))
       ),
-      weight.node.edge.dist = list(
+      weight_node_edge_dist = list(
         name = "Node-edge distance weight",
         type = "expression",
         default = expression(0.2 * (1 - edge_density(.tkplot.g)))

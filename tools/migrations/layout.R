@@ -28,7 +28,7 @@ migrations <- list(
   ),
 
   layout_as_tree = list(
-    old = function(graph, root, circular, rootlevel, mode, flip.y) {},
+    old = function(graph, root, circular, rootlevel, mode, flip.y = flip_y) {},
     new = function(
       graph,
       ...,
@@ -36,7 +36,7 @@ migrations <- list(
       circular = FALSE,
       rootlevel = numeric(),
       mode = c("out", "in", "all"),
-      flip.y = TRUE
+      flip_y = TRUE
     ) {},
     when = "3.0.0"
   ),
@@ -69,12 +69,12 @@ migrations <- list(
       coords,
       maxiter = n_iter,
       fineiter = n_fine_iter,
-      cool.fact,
-      weight.node.dist,
-      weight.border,
-      weight.edge.lengths,
-      weight.edge.crossings,
-      weight.node.edge.dist
+      cool.fact = cool_fact,
+      weight.node.dist = weight_node_dist,
+      weight.border = weight_border,
+      weight.edge.lengths = weight_edge_lengths,
+      weight.edge.crossings = weight_edge_crossings,
+      weight.node.edge.dist = weight_node_edge_dist
     ) {},
     new = function(
       graph,
@@ -82,22 +82,22 @@ migrations <- list(
       coords = NULL,
       n_iter = 10,
       n_fine_iter = NULL,
-      cool.fact = 0.75,
-      weight.node.dist = 1.0,
-      weight.border = 0.0,
-      weight.edge.lengths = NULL,
-      weight.edge.crossings = NULL,
-      weight.node.edge.dist = NULL
+      cool_fact = 0.75,
+      weight_node_dist = 1.0,
+      weight_border = 0.0,
+      weight_edge_lengths = NULL,
+      weight_edge_crossings = NULL,
+      weight_node_edge_dist = NULL
     ) {},
     when = "3.0.0"
   ),
 
   layout_with_drl = list(
-    old = function(graph, use.seed, seed, options, weights, dim) {},
+    old = function(graph, use.seed = use_seed, seed, options, weights, dim) {},
     new = function(
       graph,
       ...,
-      use.seed = FALSE,
+      use_seed = FALSE,
       seed = NULL,
       options = NULL,
       weights = NULL,
@@ -112,7 +112,7 @@ migrations <- list(
       coords,
       dim,
       niter = n_iter,
-      start.temp,
+      start.temp = start_temp,
       grid,
       weights,
       minx,
@@ -133,7 +133,7 @@ migrations <- list(
       coords = NULL,
       dim = c(2, 3),
       n_iter = 500,
-      start.temp = NULL,
+      start_temp = NULL,
       grid = c("auto", "grid", "nogrid"),
       weights = NULL,
       minx = NULL,
@@ -155,18 +155,18 @@ migrations <- list(
       graph,
       coords,
       maxiter = max_iter,
-      temp.max,
-      temp.min,
-      temp.init
+      temp.max = temp_max,
+      temp.min = temp_min,
+      temp.init = temp_init
     ) {},
     new = function(
       graph,
       ...,
       coords = NULL,
       max_iter = NULL,
-      temp.max = NULL,
-      temp.min = 0.1,
-      temp.init = NULL
+      temp_max = NULL,
+      temp_min = 0.1,
+      temp_init = NULL
     ) {},
     when = "3.0.0"
   ),
@@ -178,9 +178,9 @@ migrations <- list(
       niter = n_iter,
       charge,
       mass,
-      spring.length,
-      spring.constant,
-      max.sa.movement
+      spring.length = spring_length,
+      spring.constant = spring_constant,
+      max.sa.movement = max_sa_movement
     ) {},
     new = function(
       graph,
@@ -189,9 +189,9 @@ migrations <- list(
       n_iter = 500,
       charge = 0.001,
       mass = 30,
-      spring.length = 0,
-      spring.constant = 1,
-      max.sa.movement = 5
+      spring_length = 0,
+      spring_constant = 1,
+      max_sa_movement = 5
     ) {},
     when = "3.0.0"
   ),
