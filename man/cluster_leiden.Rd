@@ -11,7 +11,6 @@ cluster_leiden(
   ...,
   weights = NULL,
   resolution = 1,
-  resolution_parameter = deprecated(),
   beta = 0.01,
   initial_membership = NULL,
   n_iterations = 2,
@@ -37,8 +36,6 @@ edge weight means a stronger connection for this function.}
 \item{resolution}{The resolution parameter to use. Higher
 resolutions lead to more smaller communities, while lower resolutions lead
 to fewer larger communities.}
-
-\item{resolution_parameter}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}} Use \code{resolution} instead.}
 
 \item{beta}{Parameter affecting the randomness in the Leiden algorithm.
 This affects only the refinement step of the algorithm.}

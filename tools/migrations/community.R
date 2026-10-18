@@ -60,6 +60,31 @@ migrations <- list(
     when = "3.0.0"
   ),
 
+  cluster_leiden = list(
+    old = function(
+      graph,
+      objective_function,
+      weights,
+      resolution_parameter = resolution,
+      beta,
+      initial_membership,
+      n_iterations,
+      vertex_weights
+    ) {},
+    new = function(
+      graph,
+      objective_function = c("CPM", "modularity"),
+      ...,
+      weights = NULL,
+      resolution = 1,
+      beta = 0.01,
+      initial_membership = NULL,
+      n_iterations = 2,
+      vertex_weights = NULL
+    ) {},
+    when = "3.0.0"
+  ),
+
   cluster_louvain = list(
     old = function(graph, weights, resolution) {},
     new = function(
