@@ -1,5 +1,7 @@
 # Implementing R Wrappers for Callback Functions
 
+*Handbook: [`architecture/glue/`](/handbook/architecture/glue/README.md) and [`architecture/stimulus/`](/handbook/architecture/stimulus/README.md) are the nodes this guide serves.*
+
 > **Note**: This document provides detailed guidance for implementing R wrappers for C callback functions in igraph. For general development guidelines, see [`../AGENTS.md`](../AGENTS.md) and [`README.md`](README.md).
 
 This guide documents the pattern for implementing R wrappers for C callback functions using the closure-based approach. This pattern was established in PR #2465 and extended to all callback functions in PR #2534.
@@ -183,7 +185,6 @@ In the appropriate R file (e.g., `R/cliques.R`), create a user-facing wrapper. E
 #'
 #' @export
 #' @family cliques
-#' @cdocs igraph_cliques_callback
 #'
 #' @examples
 #' g <- sample_gnp(20, 0.3)

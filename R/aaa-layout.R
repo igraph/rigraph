@@ -743,9 +743,9 @@ layout_gem_impl <- function(
   graph,
   res = matrix(),
   use_seed = FALSE,
-  maxiter = 40,
+  maxiter = 40*vcount(graph)^2,
   temp_max = vcount(graph),
-  temp_min = 1,
+  temp_min = 1/10,
   temp_init = sqrt(vcount(graph))
 ) {
   # Argument checks
