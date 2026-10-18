@@ -6001,20 +6001,10 @@ SEXP Rx_igraph_community_edge_betweenness(SEXP graph, SEXP pweights,
    * weights as path lengths for the betweenness, and to weigh the modularity
    * that picks the membership. So the edges are removed by lengths, and the
    * merges, modularity and membership come from
-   * igraph_community_eb_get_merges() with the weights, as igraph 0.10 did,
-   * with the warnings it gave. */
+   * igraph_community_eb_get_merges() with the weights, as igraph 0.10 did.
+   * The warnings igraph 0.10 gave here are raised by cluster_edge_betweenness(). */
   if (ppweights) {
     IGRAPH_R_CHECK(igraph_community_edge_betweenness(&g, &res, ppeb, 0, 0, 0, 0, directed, /* weights = */ 0, /* lengths = */ ppweights));
-    if (ppmembership) {
-      IGRAPH_WARNING("Membership vector will be selected based on the highest "
-                     "modularity score.");
-    }
-    if (ppmodularity || ppmembership) {
-      IGRAPH_WARNING("Modularity calculation with weighted edge betweenness "
-                     "community detection might not make sense -- modularity treats edge "
-                     "weights as similarities while edge betwenness treats them as "
-                     "distances.");
-    }
     if (ppmerges || ppbridges || ppmodularity || ppmembership) {
       IGRAPH_R_CHECK(igraph_community_eb_get_merges(&g, directed, &res, ppweights, ppmerges, ppbridges, ppmodularity, ppmembership));
     }

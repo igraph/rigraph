@@ -2283,6 +2283,20 @@ cluster_edge_betweenness <- function(
     as.logical(modularity),
     as.logical(membership)
   )
+  # igraph 0.10 warned about weighted runs in the C core, which no longer does;
+  # only the first of its two warnings reached R.
+  if (!is.null(weights)) {
+    if (isTRUE(as.logical(membership))) {
+      cli::cli_warn(
+        "Membership vector will be selected based on the highest modularity score."
+      )
+    } else if (isTRUE(as.logical(modularity))) {
+      cli::cli_warn(paste(
+        "Modularity calculation with weighted edge betweenness community detection might not make sense --",
+        "modularity treats edge weights as similarities while edge betweenness treats them as distances."
+      ))
+    }
+  }
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }

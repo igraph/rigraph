@@ -297,15 +297,6 @@ igraph_personalized_pagerank:
     PARAM_NAMES:
         reset: personalized
 
-igraph_personalized_pagerank_vs:
-    DEPS: vids ON graph, weights ON graph, vector ON graph vids,
-        options ON algo, reset_vids ON graph
-
-igraph_rewire:
-    R:
-        DEFAULTS:
-            mode: 0L
-
 igraph_average_path_length:
     PARAM_NAMES:
         unconn_pairs: unconnected

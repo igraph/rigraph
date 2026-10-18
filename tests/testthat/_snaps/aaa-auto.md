@@ -3689,32 +3689,32 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
-# eccentricity_dijkstra_impl basic
+# eccentricity_impl modes
 
     Code
-      eccentricity_dijkstra_impl(graph = g)
+      eccentricity_impl(graph = g)
     Output
       [1] 2 1 2
 
 ---
 
     Code
-      eccentricity_dijkstra_impl(graph = g, mode = "in")
+      eccentricity_impl(graph = g, mode = "in")
     Output
       [1] 2 1 2
 
-# eccentricity_dijkstra_impl errors
+# eccentricity_impl errors
 
     Code
-      eccentricity_dijkstra_impl(graph = NULL)
+      eccentricity_impl(graph = NULL)
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
-# graph_center_dijkstra_impl basic
+# graph_center_impl modes
 
     Code
-      graph_center_dijkstra_impl(graph = g)
+      graph_center_impl(graph = g)
     Output
       + 1/3 vertex:
       [1] 2
@@ -3722,37 +3722,37 @@
 ---
 
     Code
-      graph_center_dijkstra_impl(graph = g, mode = "in")
+      graph_center_impl(graph = g, mode = "in")
     Output
       + 1/3 vertex:
       [1] 2
 
-# graph_center_dijkstra_impl errors
+# graph_center_impl errors
 
     Code
-      graph_center_dijkstra_impl(graph = NULL)
+      graph_center_impl(graph = NULL)
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
-# radius_dijkstra_impl basic
+# radius_impl modes
 
     Code
-      radius_dijkstra_impl(graph = g)
+      radius_impl(graph = g)
     Output
       [1] 1
 
 ---
 
     Code
-      radius_dijkstra_impl(graph = g, mode = "in")
+      radius_impl(graph = g, mode = "in")
     Output
       [1] 1
 
-# radius_dijkstra_impl errors
+# radius_impl errors
 
     Code
-      radius_dijkstra_impl(graph = NULL)
+      radius_impl(graph = NULL)
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
@@ -3791,45 +3791,6 @@
 
     Code
       pseudo_diameter_impl(graph = NULL, start_vid = 1)
-    Condition
-      Error in `ensure_igraph()`:
-      ! Must provide a graph object (provided `NULL`).
-
-# pseudo_diameter_dijkstra_impl basic
-
-    Code
-      pseudo_diameter_dijkstra_impl(graph = g, start_vid = 1)
-    Output
-      $diameter
-      [1] 2
-      
-      $from
-      [1] 0
-      
-      $to
-      [1] 2
-      
-
----
-
-    Code
-      pseudo_diameter_dijkstra_impl(graph = g, start_vid = 1, directed = FALSE,
-        unconnected = FALSE)
-    Output
-      $diameter
-      [1] 2
-      
-      $from
-      [1] 0
-      
-      $to
-      [1] 2
-      
-
-# pseudo_diameter_dijkstra_impl errors
-
-    Code
-      pseudo_diameter_dijkstra_impl(graph = NULL, start_vid = 1)
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).

@@ -3827,92 +3827,92 @@ test_that("contract_vertices_impl errors", {
   ))
 })
 
-# 150. eccentricity_dijkstra_impl
+# 150. eccentricity_impl
 
-test_that("eccentricity_dijkstra_impl basic", {
+test_that("eccentricity_impl modes", {
   igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
 
-  expect_snapshot(eccentricity_dijkstra_impl(
+  expect_snapshot(eccentricity_impl(
     graph = g
   ))
-  expect_snapshot(eccentricity_dijkstra_impl(
+  expect_snapshot(eccentricity_impl(
     graph = g,
     mode = "in"
   ))
 
   # Structured tests
-  result <- eccentricity_dijkstra_impl(
+  result <- eccentricity_impl(
     graph = g
   )
   expect_true(is.numeric(result))
 })
 
-test_that("eccentricity_dijkstra_impl errors", {
+test_that("eccentricity_impl errors", {
   igraph_local_seed(20250909)
-  expect_snapshot_igraph_error(eccentricity_dijkstra_impl(
+  expect_snapshot_igraph_error(eccentricity_impl(
     graph = NULL
   ))
 })
 
-# 151. graph_center_dijkstra_impl
+# 151. graph_center_impl
 
-test_that("graph_center_dijkstra_impl basic", {
+test_that("graph_center_impl modes", {
   igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
 
-  expect_snapshot(graph_center_dijkstra_impl(
+  expect_snapshot(graph_center_impl(
     graph = g
   ))
-  expect_snapshot(graph_center_dijkstra_impl(
+  expect_snapshot(graph_center_impl(
     graph = g,
     mode = "in"
   ))
 
   # Structured tests
-  result <- graph_center_dijkstra_impl(
+  result <- graph_center_impl(
     graph = g
   )
   expect_s3_class(result, "igraph.vs")
 })
 
-test_that("graph_center_dijkstra_impl errors", {
+test_that("graph_center_impl errors", {
   igraph_local_seed(20250909)
-  expect_snapshot_igraph_error(graph_center_dijkstra_impl(
+  expect_snapshot_igraph_error(graph_center_impl(
     graph = NULL
   ))
 })
 
-# 152. radius_dijkstra_impl
+# 152. radius_impl
 
-test_that("radius_dijkstra_impl basic", {
+test_that("radius_impl modes", {
   igraph_local_seed(20250909)
   g <- path_graph_impl(
     n = 3
   )
 
-  expect_snapshot(radius_dijkstra_impl(
+  expect_snapshot(radius_impl(
     graph = g
   ))
-  expect_snapshot(radius_dijkstra_impl(
+  expect_snapshot(radius_impl(
     graph = g,
     mode = "in"
   ))
 
   # Structured tests
-  result <- radius_dijkstra_impl(
+  result <- radius_impl(
     graph = g
   )
   expect_true(is.numeric(result))
 })
 
-test_that("radius_dijkstra_impl errors", {
+test_that("radius_impl errors", {
   igraph_local_seed(20250909)
-  expect_snapshot_igraph_error(radius_dijkstra_impl(
+  expect_snapshot_igraph_error(radius_impl(
     graph = NULL
   ))
 })
@@ -3950,43 +3950,6 @@ test_that("pseudo_diameter_impl errors", {
     graph = NULL,
     start_vid = 1
   ))
-})
-
-# 154. pseudo_diameter_dijkstra_impl
-
-test_that("pseudo_diameter_dijkstra_impl basic", {
-  igraph_local_seed(20250909)
-  g <- path_graph_impl(
-    n = 3
-  )
-
-  expect_snapshot(pseudo_diameter_dijkstra_impl(
-    graph = g,
-    start_vid = 1
-  ))
-  expect_snapshot(pseudo_diameter_dijkstra_impl(
-    graph = g,
-    start_vid = 1,
-    directed = FALSE,
-    unconnected = FALSE
-  ))
-
-  # Structured tests
-  result <- pseudo_diameter_dijkstra_impl(
-    graph = g,
-    start_vid = 1
-  )
-  expect_type(result, "list")
-})
-
-test_that("pseudo_diameter_dijkstra_impl errors", {
-  igraph_local_seed(20250909)
-  expect_snapshot_igraph_error(
-    pseudo_diameter_dijkstra_impl(
-      graph = NULL,
-      start_vid = 1
-    )
-  )
 })
 
 # 155. diversity_impl

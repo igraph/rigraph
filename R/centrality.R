@@ -1716,9 +1716,10 @@ diversity <- function(
 #' scores are the same as authority scores.
 #'
 #' @param graph The input graph.
-#' @param scale Logical, whether to scale the result to have a maximum
-#'   score of one. If no scaling is used then the result vector has unit length
-#'   in the Euclidean norm.
+#' @param scale `r lifecycle::badge("superseded")` Logical, whether to scale
+#'   the result to have a maximum score of one, which the C core now always does.
+#'   With `FALSE`, the result vector is rescaled to unit length in the Euclidean norm,
+#'   except for graphs without (nonzero) edges, where all scores stay one.
 #' @param weights Optional positive weight vector for calculating weighted
 #'   scores. If the graph has a `weight` edge attribute, then this is used
 #'   by default. Pass `NA` to ignore the weight attribute. This function

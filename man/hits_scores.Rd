@@ -11,9 +11,10 @@ hits_scores(graph, ..., scale = TRUE, weights = NULL, options = NULL)
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{scale}{Logical, whether to scale the result to have a maximum
-score of one. If no scaling is used then the result vector has unit length
-in the Euclidean norm.}
+\item{scale}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}} Logical, whether to scale
+the result to have a maximum score of one, which the C core now always does.
+With \code{FALSE}, the result vector is rescaled to unit length in the Euclidean norm,
+except for graphs without (nonzero) edges, where all scores stay one.}
 
 \item{weights}{Optional positive weight vector for calculating weighted
 scores. If the graph has a \code{weight} edge attribute, then this is used
