@@ -14,25 +14,25 @@ migrations <- list(
   ),
 
   graphlet_proj = list(
-    old = function(graph, weights, cliques, niter, Mu) {},
+    old = function(graph, weights, cliques, niter = n_iter, Mu) {},
     new = function(
       graph,
       ...,
       weights = NULL,
       cliques,
-      niter = 1000,
+      n_iter = 1000,
       Mu = NULL
     ) {},
     when = "3.0.0"
   ),
 
   graphlets = list(
-    old = function(graph, weights, niter) {},
+    old = function(graph, weights, niter = n_iter) {},
     new = function(
       graph,
       ...,
       weights = NULL,
-      niter = 1000
+      n_iter = 1000
     ) {},
     when = "3.0.0"
   ),

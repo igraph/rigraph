@@ -1012,3 +1012,17 @@ test_that("modularity_matrix() covers migrated tail args and positional recovery
     modularity_matrix(karate, rep(1, vcount(karate)), rep(1, ecount(karate)))
   })
 })
+
+test_that("cluster_leiden(n_iterations = ) is deprecated but still works", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  g <- make_graph("Zachary")
+  igraph_local_seed(42)
+  lifecycle::expect_deprecated(
+    res <- cluster_leiden(g, "modularity", n_iterations = 3)
+  )
+  igraph_local_seed(42)
+  expect_equal(
+    membership(res),
+    membership(cluster_leiden(g, "modularity", n_iter = 3))
+  )
+})

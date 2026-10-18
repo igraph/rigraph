@@ -68,7 +68,7 @@ migrations <- list(
       resolution_parameter = resolution,
       beta,
       initial_membership,
-      n_iterations,
+      n_iterations = n_iter,
       vertex_weights
     ) {},
     new = function(
@@ -79,7 +79,7 @@ migrations <- list(
       resolution = 1,
       beta = 0.01,
       initial_membership = NULL,
-      n_iterations = 2,
+      n_iter = 2,
       vertex_weights = NULL
     ) {},
     when = "3.0.0"

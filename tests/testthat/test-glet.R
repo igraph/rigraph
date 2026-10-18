@@ -126,7 +126,7 @@ test_that("graphlet_proj() covers all tail arguments", {
     g,
     weights = E(g)$weight,
     cliques = cl,
-    niter = 100,
+    n_iter = 100,
     Mu = rep(2, length(cl))
   )
   expect_type(res, "double")
@@ -148,7 +148,7 @@ test_that("graphlets() covers all tail arguments", {
   w <- rep(1, ecount(g))
 
   # Uniform weights collapse the basis to the two maximal cliques.
-  res <- graphlets(g, weights = w, niter = 50)
+  res <- graphlets(g, weights = w, n_iter = 50)
   expect_named(res, c("cliques", "Mu"))
   expect_length(res$cliques, 2)
   expect_length(res$Mu, length(res$cliques))
@@ -158,4 +158,16 @@ test_that("graphlets() covers all tail arguments", {
     res_legacy <- graphlets(g, w)
   )
   expect_identical(res_legacy, graphlets(g, weights = w))
+})
+
+test_that("graphlets(niter = ) and graphlet_proj(niter = ) are deprecated but still work", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  g <- make_graphlet_graph()
+  cl <- graphlet_basis(g)$cliques
+  lifecycle::expect_deprecated(res <- graphlets(g, niter = 50))
+  expect_equal(res, graphlets(g, n_iter = 50))
+  lifecycle::expect_deprecated(
+    res <- graphlet_proj(g, cliques = cl, niter = 50)
+  )
+  expect_equal(res, graphlet_proj(g, cliques = cl, n_iter = 50))
 })

@@ -1039,7 +1039,12 @@ test_that("edge_betweenness() covers migrated tail args and positional recovery"
   expect_equal(res, rep(3, 3))
   # With a cutoff of 1 each edge only carries the path of its endpoints.
   expect_equal(
-    edge_betweenness(ring, edges = E(ring)[1:3], weights = rep(1, 5), cutoff = 1),
+    edge_betweenness(
+      ring,
+      edges = E(ring)[1:3],
+      weights = rep(1, 5),
+      cutoff = 1
+    ),
     rep(1, 3)
   )
 

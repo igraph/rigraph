@@ -12,7 +12,7 @@ test_that("SGM works", {
     g2[],
     m = nos,
     start = matrix(1 / (vc - nos), vc - nos, vc - nos),
-    iteration = 20
+    max_iter = 20
   )
 
   expect_equal(c(1:nos, P$corr[, 2]), randperm)
@@ -37,7 +37,7 @@ test_that("SGM works", {
     g2[],
     m = nos,
     start = matrix(1 / (vc - nos), vc - nos, vc - nos),
-    iteration = 20
+    max_iter = 20
   )
 
   expect_equal(P$corr[, 2], perm[(nos + 1):vc])
@@ -53,4 +53,18 @@ test_that("LSAP does not change input matrix", {
   solve_LSAP(x)
 
   expect_equal(x, matrix(c(5, 1, 4, 3, 5, 2, 2, 4, 4), nrow = 3))
+})
+
+test_that("match_vertices(iteration = ) is deprecated but still works", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  igraph_local_seed(42)
+  g1 <- sample_gnp(10, 0.5)
+  start <- matrix(1 / 7, 7, 7)
+  lifecycle::expect_deprecated(
+    res <- match_vertices(g1[], g1[], m = 3, start = start, iteration = 5)
+  )
+  expect_equal(
+    res,
+    match_vertices(g1[], g1[], m = 3, start = start, max_iter = 5)
+  )
 })
