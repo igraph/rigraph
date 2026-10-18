@@ -63,7 +63,7 @@ migrations <- list(
   ),
 
   similarity = list(
-    old = function(graph, vids, mode, loops, method) {},
+    old = function(graph, vids, mode, loops, method = measure) {},
     new = function(
       graph,
       vertices = NULL,
@@ -75,7 +75,7 @@ migrations <- list(
         "total"
       ),
       loops = FALSE,
-      method = c(
+      measure = c(
         "jaccard",
         "dice",
         "invlogweighted"

@@ -30,7 +30,7 @@ test_that("fit_power_law() works", {
 
 test_that("fit_power_law() errors well", {
   expect_snapshot_igraph_error({
-    fit_power_law(1, implementation = "R.mle")
+    fit_power_law(1, algorithm = "R.mle")
   })
 })
 
@@ -50,5 +50,16 @@ test_that("fit_power_law() recovers the legacy dotted names", {
     "p.precision",
     "p_precision",
     0.1
+  )
+})
+
+test_that("fit_power_law(implementation = ) is renamed to `algorithm`", {
+  x <- c(1, 1, 2, 2, 3, 4, 5, 8, 13, 21)
+  expect_legacy_arg(
+    fit_power_law,
+    list(x),
+    "implementation",
+    "algorithm",
+    "R.mle"
   )
 })

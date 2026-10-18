@@ -118,7 +118,7 @@ migrations <- list(
       cool.fact = cool_fact,
       update.rule = update_rule,
       gamma,
-      implementation,
+      implementation = algorithm,
       gamma.minus = gamma_minus
     ) {},
     new = function(
@@ -133,7 +133,7 @@ migrations <- list(
       cool_fact = 0.99,
       update_rule = c("config", "random", "simple"),
       gamma = 1.0,
-      implementation = c("orig", "neg"),
+      algorithm = c("orig", "neg"),
       gamma_minus = 1.0
     ) {},
     when = "3.0.0"

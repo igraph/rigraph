@@ -544,7 +544,7 @@ test_that("as_adj_list works", {
   expect_isomorphic(
     g,
     g_same,
-    method = "vf2",
+    algorithm = "vf2",
     vertex.color1 = seq_len(vcount(g)),
     vertex.color2 = seq_len(vcount(g_same))
   )
@@ -610,7 +610,7 @@ test_that("as_adj_list works when return.vs.es is FALSE", {
   expect_isomorphic(
     g,
     g2,
-    method = "vf2",
+    algorithm = "vf2",
     vertex.color1 = 1:vcount(g),
     vertex.color2 = 1:vcount(g2)
   )
@@ -754,7 +754,7 @@ test_that("graphNEL conversion works", {
   g <- sample_gnp(100, 5 / 100)
   g_graphnel <- as_graphnel(g)
   g2 <- graph_from_graphnel(g_graphnel)
-  gi <- isomorphic(g, g2, method = "vf2")
+  gi <- isomorphic(g, g2, algorithm = "vf2")
   expect_true(gi)
 
   ## Attributes

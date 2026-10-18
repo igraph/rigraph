@@ -919,7 +919,7 @@ test_that("merge_coords() covers tail args and recovers positional calls", {
 
   # method is the single tail argument and only supports "dla".
   igraph_with_seed(42, {
-    l <- merge_coords(graphs, layouts, method = "dla")
+    l <- merge_coords(graphs, layouts, algorithm = "dla")
   })
   expect_true(is.matrix(l))
   expect_equal(dim(l), c(9, 2))
@@ -930,7 +930,7 @@ test_that("merge_coords() covers tail args and recovers positional calls", {
     lifecycle::expect_deprecated(res <- merge_coords(graphs, layouts, "dla"))
   })
   igraph_with_seed(1, {
-    ref <- merge_coords(graphs, layouts, method = "dla")
+    ref <- merge_coords(graphs, layouts, algorithm = "dla")
   })
   expect_identical(res, ref)
 })
@@ -1060,4 +1060,16 @@ test_that("snake_case renames in the layouts recover the legacy dotted names", {
   for (case in cases) {
     expect_legacy_arg(case[[1]], case[[2]], case[[3]], case[[4]], case[[5]])
   }
+})
+
+test_that("merge_coords(method = ) is renamed to `algorithm`", {
+  graphs <- list(make_ring(5), make_ring(4))
+  layouts <- lapply(graphs, layout_in_circle)
+  expect_legacy_arg(
+    merge_coords,
+    list(graphs, layouts),
+    "method",
+    "algorithm",
+    "dla"
+  )
 })

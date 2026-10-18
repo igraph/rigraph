@@ -2042,7 +2042,7 @@ subcomponent <- function(
 #' renamed to `subgraph()` in the next major version of igraph.
 #'
 #' The `subgraph()` function currently does the same as `induced_subgraph()`
-#' (assuming \sQuote{`auto`} as the `impl` argument), but this behaviour
+#' (assuming \sQuote{`auto`} as the `algorithm` argument), but this behaviour
 #' is deprecated. In the next major version, `subgraph()` will overtake the
 #' functionality of `subgraph_from_edges()`.
 #'
@@ -2068,7 +2068,7 @@ subgraph <- function(graph, vids) {
 #'   will form the subgraph.
 #' @param vids `r lifecycle::badge("deprecated")` Use `vertices` instead.
 #' @inheritParams rlang::args_dots_empty
-#' @param impl Character scalar, to choose between two implementation of the
+#' @param algorithm Character scalar, to choose between two implementation of the
 #'   subgraph calculation. \sQuote{`copy_and_delete`} copies the graph
 #'   first, and then deletes the vertices and edges that are not included in the
 #'   result graph. \sQuote{`create_from_scratch`} searches for all vertices
@@ -2081,7 +2081,7 @@ induced_subgraph <- function(
   graph,
   vertices,
   ...,
-  impl = c("auto", "copy_and_delete", "create_from_scratch"),
+  algorithm = c("auto", "copy_and_delete", "create_from_scratch"),
   vids = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: induced_subgraph, do not edit, see tools/generate-migrations.R
@@ -2098,14 +2098,14 @@ induced_subgraph <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn induced_subgraph}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(impl)) base::list(impl = impl)
+        if (!base::missing(impl)) base::list(algorithm = impl)
       )
     }
     .arg_handle <- .old_signature(...)
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(impl)) "impl"
+        if (!base::missing(algorithm)) "algorithm"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn induced_subgraph} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -2113,7 +2113,7 @@ induced_subgraph <- function(
         "3.0.0",
         what = base::I("Calling `induced_subgraph()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  induced_subgraph(", base::paste(base::c("graph", "vertices", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  induced_subgraph(", base::paste(base::c("graph", "vertices", base::c(algorithm = "impl")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    induced_subgraph(", base::paste(base::c("graph", "vertices", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -2139,13 +2139,13 @@ induced_subgraph <- function(
   # Argument checks
   ensure_igraph(graph)
   vertices <- as_igraph_vs(graph, vertices)
-  impl <- igraph_match_arg(impl)
+  algorithm <- igraph_match_arg(algorithm)
 
   # Function call
   res <- induced_subgraph_impl(
     graph = graph,
     vids = vertices,
-    impl = impl
+    impl = algorithm
   )
 
   res

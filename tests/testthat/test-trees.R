@@ -134,13 +134,13 @@ test_that("sample_tree works", {
   expect_vcount(g, 50)
   expect_true(is_tree(g))
 
-  g <- sample_tree(200, method = "prufer")
+  g <- sample_tree(200, algorithm = "prufer")
   expect_false(is_directed(g))
   expect_ecount(g, 199)
   expect_vcount(g, 200)
   expect_true(is_tree(g))
 
-  g <- sample_tree(200, method = "lerw")
+  g <- sample_tree(200, algorithm = "lerw")
   expect_false(is_directed(g))
   expect_ecount(g, 199)
   expect_vcount(g, 200)
@@ -149,13 +149,13 @@ test_that("sample_tree works", {
 
 test_that("sample_(tree(...)) works", {
   igraph_local_seed(42)
-  g <- sample_(tree(200, method = "prufer"))
+  g <- sample_(tree(200, algorithm = "prufer"))
   expect_false(is_directed(g))
   expect_ecount(g, 199)
   expect_vcount(g, 200)
   expect_true(is_tree(g))
 
-  g2 <- sample_(tree(200, method = "prufer"))
+  g2 <- sample_(tree(200, algorithm = "prufer"))
   expect_false(is_directed(g2))
   expect_ecount(g2, 199)
   expect_vcount(g2, 200)
@@ -180,7 +180,10 @@ test_that("sample_tree yields a null graph for n=0", {
 })
 
 test_that("sample_tree throws an error for the Prufer method with directed graphs", {
-  expect_error(sample_tree(10, method = "prufer", directed = T), "nvalid value")
+  expect_error(
+    sample_tree(10, algorithm = "prufer", directed = T),
+    "nvalid value"
+  )
 })
 
 test_that("sample_spanning_tree works for connected graphs", {

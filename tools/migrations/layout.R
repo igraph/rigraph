@@ -290,12 +290,12 @@ migrations <- list(
   ),
 
   merge_coords = list(
-    old = function(graphs, layouts, method) {},
+    old = function(graphs, layouts, method = algorithm) {},
     new = function(
       graphs,
       layouts,
       ...,
-      method = "dla"
+      algorithm = "dla"
     ) {},
     when = "3.0.0"
   ),

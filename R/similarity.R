@@ -35,7 +35,7 @@
 #'   \sQuote{`all`}.
 #' @param loops Whether to include vertices themselves in the neighbor
 #'   sets.
-#' @param method The method to use.
+#' @param measure The method to use.
 #' @return A `length(vertices)` by `length(vertices)` numeric matrix
 #'   containing the similarity scores. This argument is ignored by the
 #'   `invlogweighted` method.
@@ -50,8 +50,8 @@
 #' @examples
 #'
 #' g <- make_ring(5)
-#' similarity(g, method = "dice")
-#' similarity(g, method = "jaccard")
+#' similarity(g, measure = "dice")
+#' similarity(g, measure = "jaccard")
 similarity <- function(
   graph,
   vertices = NULL,
@@ -63,7 +63,7 @@ similarity <- function(
     "total"
   ),
   loops = FALSE,
-  method = c(
+  measure = c(
     "jaccard",
     "dice",
     "invlogweighted"
@@ -88,7 +88,7 @@ similarity <- function(
       base::c(
         if (!base::missing(mode)) base::list(mode = mode),
         if (!base::missing(loops)) base::list(loops = loops),
-        if (!base::missing(method)) base::list(method = method)
+        if (!base::missing(method)) base::list(measure = method)
       )
     }
     .arg_handle <- .old_signature(...)
@@ -97,7 +97,7 @@ similarity <- function(
       .arg_conflict <- base::intersect(.arg_names, base::c(
         if (!base::missing(mode)) "mode",
         if (!base::missing(loops)) "loops",
-        if (!base::missing(method)) "method"
+        if (!base::missing(measure)) "measure"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn similarity} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -105,7 +105,7 @@ similarity <- function(
         "3.0.0",
         what = base::I("Calling `similarity()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  similarity(", base::paste(base::c("graph", "vertices", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  similarity(", base::paste(base::c("graph", "vertices", base::c(mode = "mode", loops = "loops", measure = "method")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    similarity(", base::paste(base::c("graph", "vertices", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -132,22 +132,22 @@ similarity <- function(
     vertices <- V(graph)
   }
 
-  method <- igraph_match_arg(method)
-  if (method == "jaccard") {
+  measure <- igraph_match_arg(measure)
+  if (measure == "jaccard") {
     similarity_jaccard_impl(
       graph = graph,
       vids = vertices,
       mode = mode,
       loops = loops
     )
-  } else if (method == "dice") {
+  } else if (measure == "dice") {
     similarity_dice_impl(
       graph = graph,
       vids = vertices,
       mode = mode,
       loops = loops
     )
-  } else if (method == "invlogweighted") {
+  } else if (measure == "invlogweighted") {
     similarity_inverse_log_weighted_impl(
       graph = graph,
       vids = vertices,
@@ -161,7 +161,7 @@ similarity <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' Please use [similarity()] with `method = "jaccard"` instead.
+#' Please use [similarity()] with `measure = "jaccard"` instead.
 #' @inheritParams similarity
 #' @keywords internal
 #' @export
@@ -192,7 +192,7 @@ similarity.jaccard <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' Please use [similarity()] with `method = "dice"` instead.
+#' Please use [similarity()] with `measure = "dice"` instead.
 #' @inheritParams similarity
 #' @keywords internal
 #' @export
@@ -223,7 +223,7 @@ similarity.dice <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' Please use [similarity()] with `method = "invlogweighted"` instead.
+#' Please use [similarity()] with `measure = "invlogweighted"` instead.
 #' @inheritParams similarity
 #' @keywords internal
 #' @export

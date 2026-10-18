@@ -7,11 +7,15 @@ test_that("realize_degseq works", {
   expect_true(is_connected(nG))
   expect_true(is_simple(nG))
 
-  nG <- realize_degseq(degree(g), method = "smallest")
+  nG <- realize_degseq(degree(g), algorithm = "smallest")
   expect_equal(degree(nG), degree(g))
   expect_true(is_simple(nG))
 
-  nG <- realize_degseq(degree(g), method = "index", allowed_edge_types = "all")
+  nG <- realize_degseq(
+    degree(g),
+    algorithm = "index",
+    allowed_edge_types = "all"
+  )
   expect_equal(degree(nG), degree(g))
 
   #####

@@ -578,7 +578,7 @@ print.igraph_layout_modifier <- function(x, ...) {
 #' to calculate the layout separately for each component
 #' of the graph.
 #'
-#' @param merge_method Merging algorithm, the `method`
+#' @param merge_method Merging algorithm, the `algorithm`
 #'   argument of [merge_coords()].
 #'
 #' @family layout modifiers
@@ -606,7 +606,7 @@ component_wise <- function(merge_method = "dla") {
       all_coords <- merge_coords(
         comps,
         coords,
-        method = modifier_args$merge_method
+        algorithm = modifier_args$merge_method
       )
       all_coords[unlist(sapply(comps, vertex_attr, "id")), ] <- all_coords[]
       all_coords
@@ -3209,7 +3209,7 @@ with_sugiyama <- function(...) layout_spec(layout_with_sugiyama, ...)
 #'
 #' `merge_coords()` takes a list of graphs and a list of coordinates and
 #' places the graphs in a common layout. The method to use is chosen via the
-#' `method` parameter, although right now only the `dla` method is
+#' `algorithm` parameter, although right now only the `dla` method is
 #' implemented.
 #'
 #' The `dla` method covers the graph with circles.  Then it sorts the
@@ -3227,7 +3227,7 @@ with_sugiyama <- function(...) layout_spec(layout_with_sugiyama, ...)
 #'
 #' @param graphs A list of graph objects.
 #' @param layouts A list of two-column matrices.
-#' @param method Character constant giving the method to use. Right now only
+#' @param algorithm Character constant giving the method to use. Right now only
 #'   `dla` is implemented.
 #' @param layout A function object, the layout function to use. The default
 #'   `NULL` uses `layout_with_kk`.
@@ -3257,7 +3257,7 @@ merge_coords <- function(
   graphs,
   layouts,
   ...,
-  method = "dla"
+  algorithm = "dla"
 ) {
   # BEGIN GENERATED ARG_HANDLE: merge_coords, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -3271,14 +3271,14 @@ merge_coords <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn merge_coords}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(method)) base::list(method = method)
+        if (!base::missing(method)) base::list(algorithm = method)
       )
     }
     .arg_handle <- .old_signature(...)
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(method)) "method"
+        if (!base::missing(algorithm)) "algorithm"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn merge_coords} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -3286,7 +3286,7 @@ merge_coords <- function(
         "3.0.0",
         what = base::I("Calling `merge_coords()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  merge_coords(", base::paste(base::c("graphs", "layouts", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  merge_coords(", base::paste(base::c("graphs", "layouts", base::c(algorithm = "method")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    merge_coords(", base::paste(base::c("graphs", "layouts", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -3295,8 +3295,8 @@ merge_coords <- function(
   # END GENERATED ARG_HANDLE
 
   lapply(graphs, ensure_igraph)
-  if (method != "dla") {
-    cli::cli_abort("{.arg method} must be {.str dla}, not {.str {method}}.")
+  if (algorithm != "dla") {
+    cli::cli_abort("{.arg algorithm} must be {.str dla}, not {.str {method}}.")
   }
 
   on.exit(.Call(Rx_igraph_finalizer))

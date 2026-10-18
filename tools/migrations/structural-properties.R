@@ -4,7 +4,12 @@
 
 migrations <- list(
   decompose = list(
-    old = function(graph, mode, max.comps = max_comps, min.vertices = min_vertices) {},
+    old = function(
+      graph,
+      mode,
+      max.comps = max_comps,
+      min.vertices = min_vertices
+    ) {},
     new = function(
       graph,
       ...,
@@ -267,12 +272,12 @@ migrations <- list(
   ),
 
   induced_subgraph = list(
-    old = function(graph, vids, impl) {},
+    old = function(graph, vids, impl = algorithm) {},
     new = function(
       graph,
       vertices,
       ...,
-      impl = c("auto", "copy_and_delete", "create_from_scratch"),
+      algorithm = c("auto", "copy_and_delete", "create_from_scratch"),
       vids = deprecated()
     ) {},
     when = "3.0.0"
@@ -289,7 +294,13 @@ migrations <- list(
   ),
 
   knn = list(
-    old = function(graph, vids, mode, neighbor.degree.mode = neighbor_degree_mode, weights) {},
+    old = function(
+      graph,
+      vids,
+      mode,
+      neighbor.degree.mode = neighbor_degree_mode,
+      weights
+    ) {},
     new = function(
       graph,
       vertices = NULL,
