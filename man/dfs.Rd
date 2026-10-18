@@ -11,15 +11,18 @@ dfs(
   ...,
   unreachable = TRUE,
   order = TRUE,
-  order.out = FALSE,
+  order_out = FALSE,
   parent = FALSE,
   dist = FALSE,
-  in.callback = NULL,
-  out.callback = NULL,
+  in_callback = NULL,
+  out_callback = NULL,
   extra = NULL,
   rho = NULL,
   neimode = deprecated(),
-  father = deprecated()
+  father = deprecated(),
+  order.out = deprecated(),
+  in.callback = deprecated(),
+  out.callback = deprecated()
 )
 }
 \arguments{
@@ -42,7 +45,7 @@ visited.}
 \item{order}{Logical, whether to return the DFS ordering of the
 vertices.}
 
-\item{order.out}{Logical, whether to return the ordering based on
+\item{order_out}{Logical, whether to return the ordering based on
 leaving the subtree of the vertex.}
 
 \item{parent}{Logical, whether to return the parent of the vertices.}
@@ -50,11 +53,11 @@ leaving the subtree of the vertex.}
 \item{dist}{Logical, whether to return the distance from the root of
 the search tree.}
 
-\item{in.callback}{Callback function.
+\item{in_callback}{Callback function.
 This is called whenever a vertex is visited. See details below.
 Default: \code{NULL}.}
 
-\item{out.callback}{Callback function.
+\item{out_callback}{Callback function.
 This is called whenever the subtree of a vertex is completed by the
 algorithm. See details below.
 Default: \code{NULL}.}
@@ -68,6 +71,12 @@ The default \code{NULL} uses the caller's environment.}
 \code{mode} instead.}
 
 \item{father}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}, use \code{parent} instead.}
+
+\item{order.out}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{order_out} instead.}
+
+\item{in.callback}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{in_callback} instead.}
+
+\item{out.callback}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{out_callback} instead.}
 }
 \value{
 A named list with the following entries:
@@ -96,7 +105,7 @@ Numeric vector, for each vertex its distance from the root of the search tree.
 }
 }
 
-Note that \code{order}, \code{order.out}, \code{parent}, and \code{dist}
+Note that \code{order}, \code{order_out}, \code{parent}, and \code{dist}
 might be \code{NULL} if their corresponding argument is \code{FALSE}, i.e.
 if their calculation is not requested.
 }
@@ -133,7 +142,7 @@ dfs(
   root = 1, mode = "out",
   unreachable = TRUE,
   order = TRUE,
-  order.out = TRUE,
+  order_out = TRUE,
   parent = TRUE
 )
 
@@ -149,7 +158,7 @@ f.out <- function(graph, data, extra) {
 tmp <- dfs(
   graph = make_tree(10),
   root = 1, mode = "out",
-  in.callback = f.in, out.callback = f.out
+  in_callback = f.in, out_callback = f.out
 )
 
 ## Terminate after the first component, using a callback
@@ -159,7 +168,7 @@ f.out <- function(graph, data, extra) {
 tmp <- dfs(
   graph = make_tree(10) \%du\% make_tree(10),
   root = 1,
-  out.callback = f.out
+  out_callback = f.out
 )
 
 }

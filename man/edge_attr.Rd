@@ -5,7 +5,7 @@
 \alias{edge.attributes}
 \title{Query edge attributes of a graph}
 \usage{
-edge_attr(graph, name, index = NULL)
+edge_attr(graph, name, edges = NULL, index = deprecated())
 }
 \arguments{
 \item{graph}{The graph}
@@ -13,8 +13,10 @@ edge_attr(graph, name, index = NULL)
 \item{name}{The name of the attribute to query. If missing, then
 all edge attributes are returned in a list.}
 
-\item{index}{An optional edge sequence to query edge attributes
+\item{edges}{An optional edge sequence to query edge attributes
 for a subset of edges. The default \code{NULL} selects all edges.}
+
+\item{index}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{edges} instead.}
 }
 \value{
 The value of the edge attribute, or the list of all

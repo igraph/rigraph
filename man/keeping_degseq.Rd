@@ -4,12 +4,14 @@
 \alias{keeping_degseq}
 \title{Graph rewiring while preserving the degree distribution}
 \usage{
-keeping_degseq(loops = FALSE, niter = 100)
+keeping_degseq(loops = FALSE, n_iter = 100, niter = deprecated())
 }
 \arguments{
 \item{loops}{Whether to allow destroying and creating loop edges.}
 
-\item{niter}{Number of rewiring trials to perform.}
+\item{n_iter}{Number of rewiring trials to perform.}
+
+\item{niter}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{n_iter} instead.}
 }
 \description{
 This function can be used together with \code{\link[=rewire]{rewire()}} to
@@ -25,9 +27,9 @@ edges.
 \examples{
 g <- make_ring(10)
 g \%>\%
-  rewire(keeping_degseq(niter = 20)) \%>\%
+  rewire(keeping_degseq(n_iter = 20)) \%>\%
   degree()
-print_all(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
+print_all(rewire(g, with = keeping_degseq(n_iter = vcount(g) * 10)))
 }
 \seealso{
 \code{\link[=sample_degseq]{sample_degseq()}}

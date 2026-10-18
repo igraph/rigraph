@@ -55,13 +55,6 @@ predecessor is zero, it means that the given vertex was not reached from the
 source during the search. Note that the search terminates if all the
 vertices in \code{to} are reached.}
 
-\item{inbound.edges}{Logical, whether to return the inbound edge for
-each vertex. The inbound edge of vertex \code{i} in the tree is the edge via
-which vertex \code{i} was reached. The start vertex and vertices that were
-not reached during the search will have zero in the corresponding entry of
-the vector. Note that the search terminates if all the vertices in \code{to}
-are reached.}
-
 \item{algorithm}{Which algorithm to use for the calculation. By default
 igraph tries to select the fastest suitable algorithm. If there are no
 weights, then an unweighted breadth-first search is used, otherwise if all

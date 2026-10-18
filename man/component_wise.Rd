@@ -7,7 +7,7 @@
 component_wise(merge_method = "dla")
 }
 \arguments{
-\item{merge_method}{Merging algorithm, the \code{method}
+\item{merge_method}{Merging algorithm, the \code{algorithm}
 argument of \code{\link[=merge_coords]{merge_coords()}}.}
 }
 \description{

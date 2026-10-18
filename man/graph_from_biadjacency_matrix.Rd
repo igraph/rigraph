@@ -11,7 +11,7 @@ graph_from_biadjacency_matrix(
   mode = c("all", "out", "in", "total"),
   multiple = FALSE,
   weighted = NULL,
-  add.names = NULL
+  add_names = NULL
 )
 }
 \arguments{
@@ -41,7 +41,7 @@ attribute named by the \code{weighted} argument. If it is \code{TRUE} then a
 weighted graph is created and the name of the edge attribute will be
 \sQuote{\code{weight}}.}
 
-\item{add.names}{A character constant, \code{NA} or \code{NULL}.
+\item{add_names}{A character constant, \code{NA} or \code{NULL}.
 \code{graph_from_biadjacency_matrix()} can add the row and column names of the incidence
 matrix as vertex attributes. If this argument is \code{NULL} (the default)
 and the bipartite adjacency matrix has both row and column names, then these are added

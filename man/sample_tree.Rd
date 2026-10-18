@@ -4,7 +4,7 @@
 \alias{sample_tree}
 \title{Sample trees randomly and uniformly}
 \usage{
-sample_tree(n, ..., directed = FALSE, method = c("lerw", "prufer"))
+sample_tree(n, ..., directed = FALSE, algorithm = c("lerw", "prufer"))
 }
 \arguments{
 \item{n}{The number of nodes in the tree}
@@ -14,7 +14,7 @@ sample_tree(n, ..., directed = FALSE, method = c("lerw", "prufer"))
 \item{directed}{Whether to create a directed tree. The edges of the tree are
 oriented away from the root.}
 
-\item{method}{The algorithm to use to generate the tree. \sQuote{prufer}
+\item{algorithm}{The algorithm to use to generate the tree. \sQuote{prufer}
 samples Prüfer sequences uniformly and then converts the sampled sequence to
 a tree. \sQuote{lerw} performs a loop-erased random walk on the complete
 graph to uniformly sampleits spanning trees. (This is also known as Wilson's
@@ -38,7 +38,7 @@ given number of nodes with the same probability.
 
 \examples{
 
-g <- sample_tree(100, method = "lerw")
+g <- sample_tree(100, algorithm = "lerw")
 
 }
 \seealso{

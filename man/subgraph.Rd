@@ -12,11 +12,17 @@ induced_subgraph(
   graph,
   vertices,
   ...,
-  impl = c("auto", "copy_and_delete", "create_from_scratch"),
+  algorithm = c("auto", "copy_and_delete", "create_from_scratch"),
   vids = deprecated()
 )
 
-subgraph_from_edges(graph, eids, ..., delete.vertices = TRUE)
+subgraph_from_edges(
+  graph,
+  edges,
+  ...,
+  delete_vertices = TRUE,
+  eids = deprecated()
+)
 }
 \arguments{
 \item{graph}{The original graph.}
@@ -28,7 +34,7 @@ will form the subgraph.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{impl}{Character scalar, to choose between two implementation of the
+\item{algorithm}{Character scalar, to choose between two implementation of the
 subgraph calculation. \sQuote{\code{copy_and_delete}} copies the graph
 first, and then deletes the vertices and edges that are not included in the
 result graph. \sQuote{\code{create_from_scratch}} searches for all vertices
@@ -37,10 +43,12 @@ scratch. \sQuote{\code{auto}} chooses between the two implementations
 automatically, using heuristics based on the size of the original and the
 result graph.}
 
-\item{eids}{The edge IDs of the edges that will be kept in the result graph.}
+\item{edges}{The edge IDs of the edges that will be kept in the result graph.}
 
-\item{delete.vertices}{Logical, whether to remove vertices that do
-not have any adjacent edges in \code{eids}.}
+\item{delete_vertices}{Logical, whether to remove vertices that do
+not have any adjacent edges in \code{edges}.}
+
+\item{eids}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{edges} instead.}
 }
 \value{
 A new graph object.
@@ -59,7 +67,7 @@ one can specify the vertices and edges to keep. This function will be
 renamed to \code{subgraph()} in the next major version of igraph.
 
 The \code{subgraph()} function currently does the same as \code{induced_subgraph()}
-(assuming \sQuote{\code{auto}} as the \code{impl} argument), but this behaviour
+(assuming \sQuote{\code{auto}} as the \code{algorithm} argument), but this behaviour
 is deprecated. In the next major version, \code{subgraph()} will overtake the
 functionality of \code{subgraph_from_edges()}.
 }

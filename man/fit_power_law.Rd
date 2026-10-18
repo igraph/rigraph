@@ -8,11 +8,15 @@ fit_power_law(
   x,
   xmin = NULL,
   start = 2,
-  force.continuous = FALSE,
-  implementation = c("plfit", "R.mle"),
-  p.value = FALSE,
-  p.precision = NULL,
-  ...
+  force_continuous = FALSE,
+  algorithm = c("plfit", "R.mle"),
+  p_value = FALSE,
+  p_precision = NULL,
+  ...,
+  force.continuous = deprecated(),
+  p.value = deprecated(),
+  p.precision = deprecated(),
+  implementation = deprecated()
 )
 }
 \arguments{
@@ -31,20 +35,31 @@ argument makes it possible to fit only the tail of the distribution.}
 minimizing function, for the \sQuote{\code{R.mle}} implementation. Usually
 it is safe to leave this untouched.}
 
-\item{force.continuous}{Logical. Whether to force a continuous
+\item{force_continuous}{Logical. Whether to force a continuous
 distribution for the \sQuote{\code{plfit}} implementation, even if the
 sample vector contains integer values only (by chance). If this argument is
 false, igraph will assume a continuous distribution if at least one sample
 is non-integer and assume a discrete distribution otherwise.}
 
-\item{implementation}{Character scalar. Which implementation to use. See
+\item{algorithm}{Character scalar. Which implementation to use. See
 details below.}
 
-\item{p.value}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+\item{p_value}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
 
-Set to \code{TRUE} to compute the p-value with \code{implementation = "plfit"}.}
+\item{p_precision}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
 
-\item{p.precision}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+\item{\dots}{Additional arguments, passed to the maximum likelihood
+optimizing function, \code{\link[stats4:mle]{stats4::mle()}}, if the \sQuote{\code{R.mle}}
+implementation is chosen. It is ignored by the \sQuote{\code{plfit}}
+implementation.}
+
+\item{force.continuous}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{force_continuous} instead.}
+
+\item{p.value}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{p_value} instead.
+
+Set to \code{TRUE} to compute the p-value with \code{algorithm = "plfit"}.}
+
+\item{p.precision}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{p_precision} instead.
 
 The desired precision of the p-value calculation. The
 precision ultimately depends on the number of resampling attempts. The
@@ -52,18 +67,15 @@ number of resampling trials is determined by 0.25 divided by the square
 of the required precision. For instance, a required precision of 0.01
 means that 2500 samples will be drawn.}
 
-\item{\dots}{Additional arguments, passed to the maximum likelihood
-optimizing function, \code{\link[stats4:mle]{stats4::mle()}}, if the \sQuote{\code{R.mle}}
-implementation is chosen. It is ignored by the \sQuote{\code{plfit}}
-implementation.}
+\item{implementation}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{algorithm} instead.}
 }
 \value{
-Depends on the \code{implementation} argument. If it is
+Depends on the \code{algorithm} argument. If it is
 \sQuote{\code{R.mle}}, then an object with class \sQuote{\code{mle}}. It can
 be used to calculate confidence intervals and log-likelihood. See
 \code{\link[stats4:mle-class]{stats4::mle-class()}} for details.
 
-If \code{implementation} is \sQuote{\code{plfit}}, then the result is a
+If \code{algorithm} is \sQuote{\code{plfit}}, then the result is a
 named list with entries:
 \describe{
 \item{continuous}{
@@ -109,7 +121,7 @@ the power-law behaviour kicks in only above a threshold value
 \eqn{x_\text{min}}{xmin} and the corresponding value of \eqn{\alpha}{alpha}.
 
 \code{fit_power_law()} provides two maximum likelihood implementations.  If
-the \code{implementation} argument is \sQuote{\code{R.mle}}, then the BFGS
+the \code{algorithm} argument is \sQuote{\code{R.mle}}, then the BFGS
 optimization (see \code{\link[stats4:mle]{stats4::mle()}}) algorithm is applied.  The additional
 arguments are passed to the mle function, so it is possible to change the
 optimization method and/or its parameters.  This implementation can
@@ -135,7 +147,7 @@ This is not returned by default because the computation may be slow.
 g <- sample_pa(1000) # increase this number to have a better estimate
 d <- degree(g, mode = "in")
 fit1 <- fit_power_law(d + 1, 10)
-fit2 <- fit_power_law(d + 1, 10, implementation = "R.mle")
+fit2 <- fit_power_law(d + 1, 10, algorithm = "R.mle")
 
 fit1$alpha
 stats4::coef(fit2)

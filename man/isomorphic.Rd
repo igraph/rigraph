@@ -9,13 +9,20 @@
 \alias{is_isomorphic_to}
 \title{Decide if two graphs are isomorphic}
 \usage{
-isomorphic(graph1, graph2, method = c("auto", "direct", "vf2", "bliss"), ...)
+isomorphic(
+  graph1,
+  graph2,
+  algorithm = c("auto", "direct", "vf2", "bliss"),
+  ...,
+  method = deprecated()
+)
 
 is_isomorphic_to(
   graph1,
   graph2,
-  method = c("auto", "direct", "vf2", "bliss"),
-  ...
+  algorithm = c("auto", "direct", "vf2", "bliss"),
+  ...,
+  method = deprecated()
 )
 }
 \arguments{
@@ -23,11 +30,13 @@ is_isomorphic_to(
 
 \item{graph2}{The second graph.}
 
-\item{method}{The method to use. Possible values: \sQuote{auto},
+\item{algorithm}{The method to use. Possible values: \sQuote{auto},
 \sQuote{direct}, \sQuote{vf2}, \sQuote{bliss}. See their details
 below.}
 
 \item{...}{Additional arguments, passed to the various methods.}
+
+\item{method}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{algorithm} instead.}
 }
 \value{
 Logical scalar, \code{TRUE} if the graphs are isomorphic.
@@ -108,8 +117,8 @@ g1 <- sample_pa(30, m = 2, directed = FALSE)
 g2 <- permute(g1, sample(vcount(g1)))
 # should be TRUE
 isomorphic(g1, g2)
-isomorphic(g1, g2, method = "bliss")
-isomorphic(g1, g2, method = "vf2")
+isomorphic(g1, g2, algorithm = "bliss")
+isomorphic(g1, g2, algorithm = "vf2")
 
 # colored graph isomorphism
 g1 <- make_ring(10)

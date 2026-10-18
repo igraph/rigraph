@@ -38,22 +38,16 @@ visited.}
 \item{order}{Logical, whether to return the DFS ordering of the
 vertices.}
 
-\item{order.out}{Logical, whether to return the ordering based on
-leaving the subtree of the vertex.}
+\item{order.out}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{order_out} instead.}
 
 \item{father}{Logical, whether to return the father of the vertices.}
 
 \item{dist}{Logical, whether to return the distance from the root of
 the search tree.}
 
-\item{in.callback}{Callback function.
-This is called whenever a vertex is visited. See details below.
-Default: \code{NULL}.}
+\item{in.callback}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{in_callback} instead.}
 
-\item{out.callback}{Callback function.
-This is called whenever the subtree of a vertex is completed by the
-algorithm. See details below.
-Default: \code{NULL}.}
+\item{out.callback}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{out_callback} instead.}
 
 \item{extra}{Additional argument to supply to the callback function.}
 

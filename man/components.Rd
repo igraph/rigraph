@@ -8,7 +8,13 @@
 \alias{count_components}
 \title{Connected components of a graph}
 \usage{
-component_distribution(graph, cumulative = FALSE, mul.size = FALSE, ...)
+component_distribution(
+  graph,
+  cumulative = FALSE,
+  mul_size = FALSE,
+  ...,
+  mul.size = deprecated()
+)
 
 largest_component(graph, ..., mode = c("weak", "strong"))
 
@@ -24,12 +30,14 @@ count_components(graph, ..., mode = c("weak", "strong"))
 \item{cumulative}{Logical, if TRUE the cumulative distirubution (relative
 frequency) is calculated.}
 
-\item{mul.size}{Logical. If TRUE the relative frequencies will be multiplied
+\item{mul_size}{Logical. If TRUE the relative frequencies will be multiplied
 by the cluster sizes.}
 
 \item{\dots}{For \code{component_distribution()}, forwarded to \code{components()}.
 For \code{components()}, \code{is_connected()}, \code{count_components()} and
 \code{largest_component()}, these dots must be empty.}
+
+\item{mul.size}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{mul_size} instead.}
 
 \item{mode}{Character string, either \dQuote{weak} or \dQuote{strong}.  For
 directed graphs \dQuote{weak} implies weakly, \dQuote{strong} strongly

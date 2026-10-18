@@ -5,25 +5,31 @@
 \title{Generate random graphs with a given degree sequence}
 \usage{
 sample_degseq(
-  out.deg,
-  in.deg = NULL,
+  out_deg,
+  in_deg = NULL,
   ...,
-  method = c("configuration", "vl", "fast.heur.simple", "configuration.simple",
-    "edge.switching.simple")
+  algorithm = c("configuration", "vl", "fast.heur.simple", "configuration.simple",
+    "edge.switching.simple"),
+  out.deg = deprecated(),
+  in.deg = deprecated()
 )
 }
 \arguments{
-\item{out.deg}{Numeric vector, the sequence of degrees (for undirected
+\item{out_deg}{Numeric vector, the sequence of degrees (for undirected
 graphs) or out-degrees (for directed graphs). For undirected graphs its sum
 should be even. For directed graphs its sum should be the same as the sum of
-\code{in.deg}.}
+\code{in_deg}.}
 
-\item{in.deg}{For directed graph, the in-degree sequence. By default this is
+\item{in_deg}{For directed graph, the in-degree sequence. By default this is
 \code{NULL} and an undirected graph is created.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{method}{Character, the method for generating the graph. See Details.}
+\item{algorithm}{Character, the method for generating the graph. See Details.}
+
+\item{out.deg}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{out_deg} instead.}
+
+\item{in.deg}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{in_deg} instead.}
 }
 \value{
 The new graph object.
@@ -93,7 +99,7 @@ degree(directed_graph, mode = "out")
 degree(directed_graph, mode = "in")
 
 ## The vl generator
-vl_graph <- sample_degseq(rep(2, 100), method = "vl")
+vl_graph <- sample_degseq(rep(2, 100), algorithm = "vl")
 degree(vl_graph)
 is_simple(vl_graph) # always TRUE
 
@@ -118,7 +124,7 @@ is_exponential_degrees_sum_odd <- (sum(exponential_degrees) \%\% 2 != 0)
 if (is_exponential_degrees_sum_odd) {
   exponential_degrees[1] <- exponential_degrees[1] + 1
 }
-exp_vl_graph <- sample_degseq(exponential_degrees, method = "vl")
+exp_vl_graph <- sample_degseq(exponential_degrees, algorithm = "vl")
 all(degree(exp_vl_graph) == exponential_degrees)
 
 ## An example that does not work
@@ -140,7 +146,7 @@ is_exponential_degrees_sum_odd <- (sum(exponential_degrees) \%\% 2 != 0)
 if (is_exponential_degrees_sum_odd) {
   exponential_degrees[1] <- exponential_degrees[1] + 1
 }
-exp_vl_graph <- sample_degseq(exponential_degrees, method = "vl")
+exp_vl_graph <- sample_degseq(exponential_degrees, algorithm = "vl")
 \dontshow{\}) # examplesIf}
 ## Power-law degree distribution
 ## We fix the seed as there's no guarantee
@@ -163,7 +169,7 @@ is_exponential_degrees_sum_odd <- (sum(powerlaw_degrees) \%\% 2 != 0)
 if (is_exponential_degrees_sum_odd) {
   powerlaw_degrees[1] <- powerlaw_degrees[1] + 1
 }
-powerlaw_vl_graph <- sample_degseq(powerlaw_degrees, method = "vl")
+powerlaw_vl_graph <- sample_degseq(powerlaw_degrees, algorithm = "vl")
 all(degree(powerlaw_vl_graph) == powerlaw_degrees)
 
 ## An example that does not work
@@ -185,7 +191,7 @@ is_exponential_degrees_sum_odd <- (sum(powerlaw_degrees) \%\% 2 != 0)
 if (is_exponential_degrees_sum_odd) {
   powerlaw_degrees[1] <- powerlaw_degrees[1] + 1
 }
-powerlaw_vl_graph <- sample_degseq(powerlaw_degrees, method = "vl")
+powerlaw_vl_graph <- sample_degseq(powerlaw_degrees, algorithm = "vl")
 all(degree(powerlaw_vl_graph) == powerlaw_degrees)
 \dontshow{\}) # examplesIf}
 }

@@ -9,7 +9,7 @@ knn(
   vertices = NULL,
   ...,
   mode = c("all", "out", "in", "total"),
-  neighbor.degree.mode = c("all", "out", "in", "total"),
+  neighbor_degree_mode = c("all", "out", "in", "total"),
   weights = NULL,
   vids = deprecated()
 )
@@ -28,7 +28,7 @@ on the given vertices only.}
 in directed graphs. \code{out} considers out-neighbors, \verb{in} considers
 in-neighbors and \code{all} ignores edge directions.}
 
-\item{neighbor.degree.mode}{The type of degree to average in directed graphs.
+\item{neighbor_degree_mode}{The type of degree to average in directed graphs.
 \code{out} averages out-degrees, \verb{in} averages in-degrees and \code{all}
 ignores edge directions for the degree calculation.}
 

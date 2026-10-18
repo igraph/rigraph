@@ -5,7 +5,7 @@
 \alias{layout_components}
 \title{Merging graph layouts}
 \usage{
-merge_coords(graphs, layouts, ..., method = "dla")
+merge_coords(graphs, layouts, ..., algorithm = "dla")
 
 layout_components(graph, layout = NULL, ...)
 }
@@ -18,7 +18,7 @@ layout_components(graph, layout = NULL, ...)
 the \code{layout} layout function. For \code{merge_coords()}, these dots must be
 empty.}
 
-\item{method}{Character constant giving the method to use. Right now only
+\item{algorithm}{Character constant giving the method to use. Right now only
 \code{dla} is implemented.}
 
 \item{graph}{The input graph.}
@@ -36,7 +36,7 @@ Place several graphs on the same layout
 \details{
 \code{merge_coords()} takes a list of graphs and a list of coordinates and
 places the graphs in a common layout. The method to use is chosen via the
-\code{method} parameter, although right now only the \code{dla} method is
+\code{algorithm} parameter, although right now only the \code{dla} method is
 implemented.
 
 The \code{dla} method covers the graph with circles.  Then it sorts the

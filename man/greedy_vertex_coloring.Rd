@@ -7,7 +7,7 @@
 greedy_vertex_coloring(
   graph,
   ...,
-  heuristic = c("colored_neighbors", "dsatur")
+  algorithm = c("colored_neighbors", "dsatur")
 )
 }
 \arguments{
@@ -15,7 +15,7 @@ greedy_vertex_coloring(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{heuristic}{The selection heuristic for the next vertex to consider.
+\item{algorithm}{The selection heuristic for the next vertex to consider.
 Possible values are: \dQuote{colored_neighbors} selects the vertex with the
 largest number of already colored neighbors. \dQuote{dsatur} selects the
 vertex with the largest number of unique colors in its neighborhood, i.e.

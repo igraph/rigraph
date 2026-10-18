@@ -29,14 +29,9 @@ argument makes it possible to fit only the tail of the distribution.}
 minimizing function, for the \sQuote{\code{R.mle}} implementation. Usually
 it is safe to leave this untouched.}
 
-\item{force.continuous}{Logical. Whether to force a continuous
-distribution for the \sQuote{\code{plfit}} implementation, even if the
-sample vector contains integer values only (by chance). If this argument is
-false, igraph will assume a continuous distribution if at least one sample
-is non-integer and assume a discrete distribution otherwise.}
+\item{force.continuous}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{force_continuous} instead.}
 
-\item{implementation}{Character scalar. Which implementation to use. See
-details below.}
+\item{implementation}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{algorithm} instead.}
 
 \item{...}{Additional arguments, passed to the maximum likelihood
 optimizing function, \code{\link[stats4:mle]{stats4::mle()}}, if the \sQuote{\code{R.mle}}

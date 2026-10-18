@@ -6,16 +6,18 @@
 \usage{
 eccentricity(
   graph,
-  vids = V(graph),
+  vertices = NULL,
   ...,
   weights = NULL,
-  mode = c("all", "out", "in", "total")
+  mode = c("all", "out", "in", "total"),
+  vids = deprecated()
 )
 }
 \arguments{
 \item{graph}{The input graph, it can be directed or undirected.}
 
-\item{vids}{The vertices for which the eccentricity is calculated.}
+\item{vertices}{The vertices for which the eccentricity is calculated.
+The default \code{NULL} selects all vertices.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
@@ -31,6 +33,8 @@ then the shortest paths \emph{from} the vertex, if \verb{in} then \emph{to}
 it will be considered. If \code{all}, the default, then the graph is treated
 as undirected, i.e. edge directions are not taken into account. This
 argument is ignored for undirected graphs.}
+
+\item{vids}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 }
 \value{
 \code{eccentricity()} returns a numeric vector, containing the

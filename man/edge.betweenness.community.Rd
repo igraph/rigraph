@@ -30,9 +30,6 @@ interpreted as distances, not as connection strengths.}
 \item{directed}{Logical, whether to calculate directed edge
 betweenness for directed graphs. It is ignored for undirected graphs.}
 
-\item{edge.betweenness}{Logical, whether to return the edge
-betweenness of the edges at the time of their removal.}
-
 \item{merges}{Logical, whether to return the merge matrix
 representing the hierarchical community structure of the network.  This
 argument is called \code{merges}, even if the community structure algorithm

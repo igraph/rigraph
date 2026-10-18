@@ -5,14 +5,21 @@
 \alias{graph.get.isomorphisms.vf2}
 \title{Calculate all isomorphic mappings between the vertices of two graphs}
 \usage{
-isomorphisms(graph1, graph2, method = "vf2", ..., callback = NULL)
+isomorphisms(
+  graph1,
+  graph2,
+  algorithm = "vf2",
+  ...,
+  callback = NULL,
+  method = deprecated()
+)
 }
 \arguments{
 \item{graph1}{The first graph.}
 
 \item{graph2}{The second graph.}
 
-\item{method}{Currently only \sQuote{vf2} is supported, see
+\item{algorithm}{Currently only \sQuote{vf2} is supported, see
 \code{\link[=isomorphic]{isomorphic()}} for details about it and extra arguments.}
 
 \item{...}{Extra arguments, passed to the various methods.}
@@ -23,13 +30,15 @@ mapping vertex IDs from graph1 to graph2, 1-based indexing) and \code{map21}
 (integer vector mapping vertex IDs from graph2 to graph1, 1-based indexing).
 The function should return \code{FALSE} to continue the search or \code{TRUE} to stop it.
 If \code{NULL} (the default), all isomorphisms are collected and returned as a list.
-Only supported for \code{method = "vf2"}.
+Only supported for \code{algorithm = "vf2"}.
 
 \strong{Important limitation:} Callback functions must NOT call any igraph
 functions (including simple queries like \code{vcount()} or \code{ecount()}). Doing
 so will cause R to crash due to reentrancy issues. Extract
 any needed graph information before calling the function with a callback, or
 use collector mode (the default) and process results afterward.}
+
+\item{method}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{algorithm} instead.}
 }
 \value{
 If \code{callback} is \code{NULL}, returns a list of vertex sequences, corresponding

@@ -5,17 +5,25 @@
 \alias{graph.count.isomorphisms.vf2}
 \title{Count the number of isomorphic mappings between two graphs}
 \usage{
-count_isomorphisms(graph1, graph2, method = "vf2", ...)
+count_isomorphisms(
+  graph1,
+  graph2,
+  algorithm = "vf2",
+  ...,
+  method = deprecated()
+)
 }
 \arguments{
 \item{graph1}{The first graph.}
 
 \item{graph2}{The second graph.}
 
-\item{method}{Currently only \sQuote{vf2} is supported, see
+\item{algorithm}{Currently only \sQuote{vf2} is supported, see
 \code{\link[=isomorphic]{isomorphic()}} for details about it and extra arguments.}
 
 \item{...}{Passed to the individual methods.}
+
+\item{method}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{algorithm} instead.}
 }
 \value{
 Number of isomorphic mappings between the two graphs.

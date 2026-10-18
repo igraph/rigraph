@@ -8,9 +8,10 @@
 subgraph_isomorphisms(
   pattern,
   target,
-  method = c("lad", "vf2"),
+  algorithm = c("lad", "vf2"),
   ...,
-  callback = NULL
+  callback = NULL,
+  method = deprecated()
 )
 }
 \arguments{
@@ -22,7 +23,7 @@ mutual edges.}
 undirected. Undirected graphs are treated as directed graphs with
 mutual edges.}
 
-\item{method}{The method to use. Possible values: \sQuote{auto},
+\item{algorithm}{The method to use. Possible values: \sQuote{auto},
 \sQuote{lad}, \sQuote{vf2}. See their details below.}
 
 \item{...}{Additional arguments, passed to the various methods.}
@@ -33,13 +34,15 @@ mapping vertex IDs from pattern to target, 1-based indexing) and \code{map21}
 (integer vector mapping vertex IDs from target to pattern, 1-based indexing).
 The function should return \code{FALSE} to continue the search or \code{TRUE} to stop it.
 If \code{NULL} (the default), all subisomorphisms are collected and returned as a list.
-Only supported for \code{method = "vf2"}.
+Only supported for \code{algorithm = "vf2"}.
 
 \strong{Important limitation:} Callback functions must NOT call any igraph
 functions (including simple queries like \code{vcount()} or \code{ecount()}). Doing
 so will cause R to crash due to reentrancy issues. Extract
 any needed graph information before calling the function with a callback, or
 use collector mode (the default) and process results afterward.}
+
+\item{method}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{algorithm} instead.}
 }
 \value{
 If \code{callback} is \code{NULL}, returns a list of vertex sequences, corresponding

@@ -6,7 +6,13 @@
 \title{Count the isomorphic mappings between a graph and the subgraphs of
 another graph}
 \usage{
-count_subgraph_isomorphisms(pattern, target, method = c("lad", "vf2"), ...)
+count_subgraph_isomorphisms(
+  pattern,
+  target,
+  algorithm = c("lad", "vf2"),
+  ...,
+  method = deprecated()
+)
 }
 \arguments{
 \item{pattern}{The smaller graph, it might be directed or
@@ -17,10 +23,12 @@ mutual edges.}
 undirected. Undirected graphs are treated as directed graphs with
 mutual edges.}
 
-\item{method}{The method to use. Possible values:
+\item{algorithm}{The method to use. Possible values:
 \sQuote{lad}, \sQuote{vf2}. See their details below.}
 
 \item{...}{Additional arguments, passed to the various methods.}
+
+\item{method}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{algorithm} instead.}
 }
 \value{
 Logical scalar, \code{TRUE} if the \code{pattern} is

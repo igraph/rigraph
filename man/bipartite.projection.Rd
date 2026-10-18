@@ -35,12 +35,6 @@ one projection is requested in argument \code{which}.}
 
 \item{which}{A character scalar to specify which projection(s) to calculate.
 The default is to calculate both.}
-
-\item{remove.type}{Logical, whether to remove the \code{type} vertex
-attribute from the projections. This makes sense because these graphs are
-not bipartite any more. However if you want to combine them with each other
-(or other bipartite graphs), then it is worth keeping this attribute. By
-default it will be removed.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

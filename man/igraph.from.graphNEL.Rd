@@ -15,11 +15,6 @@ igraph vertex attribute called \sQuote{\code{name}}.}
 \item{weight}{Logical, whether to add graphNEL edge weights as an
 igraph edge attribute called \sQuote{\code{weight}}. (graphNEL graphs are
 always weighted.)}
-
-\item{unlist.attrs}{Logical. graphNEL attribute query functions
-return the values of the attributes in R lists, if this argument is
-\code{TRUE} (the default) these will be converted to atomic vectors,
-whenever possible, before adding them to the igraph graph.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

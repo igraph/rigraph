@@ -8,14 +8,14 @@ layout_with_dh(
   graph,
   ...,
   coords = NULL,
-  maxiter = 10,
-  fineiter = NULL,
-  cool.fact = 0.75,
-  weight.node.dist = 1,
-  weight.border = 0,
-  weight.edge.lengths = NULL,
-  weight.edge.crossings = NULL,
-  weight.node.edge.dist = NULL
+  n_iter = 10,
+  n_fine_iter = NULL,
+  cool_fact = 0.75,
+  weight_node_dist = 1,
+  weight_border = 0,
+  weight_edge_lengths = NULL,
+  weight_edge_crossings = NULL,
+  weight_node_edge_dist = NULL
 )
 }
 \arguments{
@@ -27,28 +27,28 @@ layout_with_dh(
 is not \code{NULL} then it should be an appropriate matrix of starting
 coordinates.}
 
-\item{maxiter}{Number of iterations to perform in the first phase.}
+\item{n_iter}{Number of iterations to perform in the first phase.}
 
-\item{fineiter}{Number of iterations in the fine tuning phase. The
+\item{n_fine_iter}{Number of iterations in the fine tuning phase. The
 default \code{NULL} uses \code{max(10, log2(vcount(graph)))}.}
 
-\item{cool.fact}{Cooling factor.}
+\item{cool_fact}{Cooling factor.}
 
-\item{weight.node.dist}{Weight for the node-node distances component of the
+\item{weight_node_dist}{Weight for the node-node distances component of the
 energy function.}
 
-\item{weight.border}{Weight for the distance from the border component of
+\item{weight_border}{Weight for the distance from the border component of
 the energy function. It can be set to zero, if vertices are allowed to sit
 on the border.}
 
-\item{weight.edge.lengths}{Weight for the edge length component of the
+\item{weight_edge_lengths}{Weight for the edge length component of the
 energy function. The default \code{NULL} uses \code{edge_density(graph) / 10}.}
 
-\item{weight.edge.crossings}{Weight for the edge crossing component of the
+\item{weight_edge_crossings}{Weight for the edge crossing component of the
 energy function. The default \code{NULL} uses
 \code{1 - sqrt(edge_density(graph))}.}
 
-\item{weight.node.edge.dist}{Weight for the node-edge distance component of
+\item{weight_node_edge_dist}{Weight for the node-edge distance component of
 the energy function. The default \code{NULL} uses
 \code{0.2 * (1 - edge_density(graph))}.}
 }

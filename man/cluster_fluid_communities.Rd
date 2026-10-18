@@ -4,15 +4,21 @@
 \alias{cluster_fluid_communities}
 \title{Community detection algorithm based on interacting fluids}
 \usage{
-cluster_fluid_communities(graph, no.of.communities)
+cluster_fluid_communities(
+  graph,
+  n_communities,
+  no.of.communities = deprecated()
+)
 }
 \arguments{
 \item{graph}{The input graph. The graph must be simple and connected.
 Empty graphs are not supported as well as single vertex graphs.
 Edge directions are ignored. Weights are not considered.}
 
-\item{no.of.communities}{The number of communities to be found. Must be
+\item{n_communities}{The number of communities to be found. Must be
 greater than 0 and fewer than number of vertices in the graph.}
+
+\item{no.of.communities}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{n_communities} instead.}
 }
 \value{
 \code{cluster_fluid_communities()} returns a \code{\link[=communities]{communities()}}

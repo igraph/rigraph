@@ -5,7 +5,7 @@
 \alias{edge.attributes<-}
 \title{Set one or more edge attributes}
 \usage{
-edge_attr(graph, name, index = NULL) <- value
+edge_attr(graph, name, edges = NULL, index = deprecated()) <- value
 }
 \arguments{
 \item{graph}{The graph.}
@@ -14,11 +14,13 @@ edge_attr(graph, name, index = NULL) <- value
 then \code{value} must be a named list, and its entries are
 set as edge attributes.}
 
-\item{index}{An optional edge sequence to set the attributes
+\item{edges}{An optional edge sequence to set the attributes
 of a subset of edges. The default \code{NULL} selects all edges.}
 
+\item{index}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{edges} instead.}
+
 \item{value}{The new value of the attribute(s) for all
-(or \code{index}) edges.}
+(or \code{edges}) edges.}
 }
 \value{
 The graph, with the edge attribute(s) added or set.

@@ -26,7 +26,7 @@ sets.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-Please use \code{\link[=similarity]{similarity()}} with \code{method = "jaccard"} instead.
+Please use \code{\link[=similarity]{similarity()}} with \code{measure = "jaccard"} instead.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_similarity_dice}{\code{similarity_dice()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_similarity_inverse_log_weighted}{\code{similarity_inverse_log_weighted()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_similarity_jaccard}{\code{similarity_jaccard()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

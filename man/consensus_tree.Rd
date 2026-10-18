@@ -4,7 +4,7 @@
 \alias{consensus_tree}
 \title{Create a consensus tree from several hierarchical random graph models}
 \usage{
-consensus_tree(graph, hrg = NULL, ..., start = FALSE, num.samples = 10000)
+consensus_tree(graph, hrg = NULL, ..., start = FALSE, n_samples = 10000)
 }
 \arguments{
 \item{graph}{The graph the models were fitted to.}
@@ -19,7 +19,7 @@ random starting point.}
 \item{start}{Logical, whether to start the fitting/sampling from the
 supplied \code{igraphHRG} object, or from a random starting point.}
 
-\item{num.samples}{Number of samples to use for consensus generation or
+\item{n_samples}{Number of samples to use for consensus generation or
 missing edge prediction.}
 }
 \value{

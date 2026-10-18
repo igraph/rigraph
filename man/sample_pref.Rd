@@ -11,9 +11,9 @@ sample_pref(
   n,
   types,
   ...,
-  type.dist = NULL,
-  fixed.sizes = FALSE,
-  pref.matrix = NULL,
+  type_dist = NULL,
+  fixed_sizes = FALSE,
+  pref_matrix = NULL,
   directed = FALSE,
   loops = FALSE,
   nodes = deprecated()
@@ -23,9 +23,9 @@ pref(
   n,
   types,
   ...,
-  type.dist = NULL,
-  fixed.sizes = FALSE,
-  pref.matrix = NULL,
+  type_dist = NULL,
+  fixed_sizes = FALSE,
+  pref_matrix = NULL,
   directed = FALSE,
   loops = FALSE,
   nodes = deprecated()
@@ -35,8 +35,8 @@ sample_asym_pref(
   n,
   types,
   ...,
-  type.dist.matrix = NULL,
-  pref.matrix = NULL,
+  type_dist_matrix = NULL,
+  pref_matrix = NULL,
   loops = FALSE,
   nodes = deprecated()
 )
@@ -45,8 +45,8 @@ asym_pref(
   n,
   types,
   ...,
-  type.dist.matrix = NULL,
-  pref.matrix = NULL,
+  type_dist_matrix = NULL,
+  pref_matrix = NULL,
   loops = FALSE,
   nodes = deprecated()
 )
@@ -58,16 +58,16 @@ asym_pref(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{type.dist}{The distribution of the vertex types, a numeric vector of
+\item{type_dist}{The distribution of the vertex types, a numeric vector of
 length \sQuote{types} containing non-negative numbers. The vector will be
 normed to obtain probabilities. The default \code{NULL} gives a uniform
 distribution.}
 
-\item{fixed.sizes}{Fix the number of vertices with a given vertex type
-label. The \code{type.dist} argument gives the group sizes (i.e. number of
+\item{fixed_sizes}{Fix the number of vertices with a given vertex type
+label. The \code{type_dist} argument gives the group sizes (i.e. number of
 vertices with the different labels) in this case.}
 
-\item{pref.matrix}{A square matrix giving the preferences of the vertex
+\item{pref_matrix}{A square matrix giving the preferences of the vertex
 types. The matrix has \sQuote{types} rows and columns. When generating
 an undirected graph, it must be symmetric. The default \code{NULL} sets all
 preferences to one.}
@@ -78,7 +78,7 @@ preferences to one.}
 
 \item{nodes}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{n} instead.}
 
-\item{type.dist.matrix}{The joint distribution of the in- and out-vertex
+\item{type_dist_matrix}{The joint distribution of the in- and out-vertex
 types. The default \code{NULL} gives a uniform distribution.}
 }
 \value{
@@ -113,7 +113,7 @@ The types of the generated vertices can be retrieved from the
 \examples{
 
 pf <- matrix(c(1, 0, 0, 1), nrow = 2)
-g <- sample_pref(20, 2, pref.matrix = pf)
+g <- sample_pref(20, 2, pref_matrix = pf)
 \dontshow{if (rlang::is_installed("tcltk") && rlang::is_interactive()) withAutoprint(\{ # examplesIf}
 # example code
 
@@ -121,7 +121,7 @@ tkplot(g, layout = layout_with_fr)
 \dontshow{\}) # examplesIf}
 
 pf <- matrix(c(0, 1, 0, 0), nrow = 2)
-g <- sample_asym_pref(20, 2, pref.matrix = pf)
+g <- sample_asym_pref(20, 2, pref_matrix = pf)
 \dontshow{if (rlang::is_installed("tcltk") && rlang::is_interactive()) withAutoprint(\{ # examplesIf}
 tkplot(g, layout = layout_in_circle)
 \dontshow{\}) # examplesIf}

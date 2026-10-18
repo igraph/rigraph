@@ -12,8 +12,7 @@ get.vertex.attribute(graph, name, index = V(graph))
 \item{name}{Name of the attribute to query. If missing, then
 all vertex attributes are returned in a list.}
 
-\item{index}{An optional vertex sequence to query the attribute only
-for these vertices. The default \code{NULL} selects all vertices.}
+\item{index}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

@@ -9,13 +9,13 @@
 \alias{count_loops}
 \title{Find the multiple or loop edges in a graph}
 \usage{
-which_multiple(graph, eids = NULL)
+which_multiple(graph, edges = NULL, eids = deprecated())
 
 any_multiple(graph)
 
-count_multiple(graph, eids = NULL)
+count_multiple(graph, edges = NULL, eids = deprecated())
 
-which_loop(graph, eids = NULL)
+which_loop(graph, edges = NULL, eids = deprecated())
 
 any_loop(graph)
 
@@ -24,8 +24,10 @@ count_loops(graph)
 \arguments{
 \item{graph}{The input graph.}
 
-\item{eids}{The edges to which the query is restricted. The default
+\item{edges}{The edges to which the query is restricted. The default
 \code{NULL} selects all edges.}
+
+\item{eids}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{edges} instead.}
 }
 \value{
 \code{any_loop()} and \code{any_multiple()} return a Logical.

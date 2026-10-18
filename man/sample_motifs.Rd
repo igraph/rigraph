@@ -8,8 +8,8 @@ sample_motifs(
   graph,
   size = 3,
   ...,
-  cut.prob = NULL,
-  sample.size = NULL,
+  cut_prob = NULL,
+  sample_size = NULL,
   sample = NULL
 )
 }
@@ -21,12 +21,12 @@ in directed graphs and sizes 3-6 in undirected graphs.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{cut.prob}{Numeric vector giving the probabilities that the search
+\item{cut_prob}{Numeric vector giving the probabilities that the search
 graph is cut at a certain level. Its length should be the same as the size
 of the motif (the \code{size} argument).
 If \code{NULL}, the default, no cuts are made.}
 
-\item{sample.size}{The number of vertices to use as a starting point for
+\item{sample_size}{The number of vertices to use as a starting point for
 finding motifs. Only used if the \code{sample} argument is \code{NULL}.
 The default is \code{ceiling(vcount(graph) / 10)} .}
 

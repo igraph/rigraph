@@ -9,11 +9,6 @@ centralize.scores(scores, theoretical.max = 0, normalized = TRUE)
 \arguments{
 \item{scores}{The vertex level centrality scores.}
 
-\item{theoretical.max}{Real scalar. The graph-level centralization measure of
-the most centralized graph with the same number of vertices as the graph
-under study. This is only used if the \code{normalized} argument is set
-to \code{TRUE}.}
-
 \item{normalized}{Logical. Whether to normalize the graph level
 centrality score by dividing by the supplied theoretical maximum.}
 }

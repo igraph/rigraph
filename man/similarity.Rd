@@ -10,7 +10,7 @@ similarity(
   ...,
   mode = c("all", "out", "in", "total"),
   loops = FALSE,
-  method = c("jaccard", "dice", "invlogweighted"),
+  measure = c("jaccard", "dice", "invlogweighted"),
   vids = deprecated()
 )
 }
@@ -29,7 +29,7 @@ possible values: \sQuote{\code{out}}, \sQuote{\verb{in}},
 \item{loops}{Whether to include vertices themselves in the neighbor
 sets.}
 
-\item{method}{The method to use.}
+\item{measure}{The method to use.}
 
 \item{vids}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 }
@@ -71,8 +71,8 @@ Eytan Adar: Friends and neighbors on the Web. Social Networks,
 \examples{
 
 g <- make_ring(5)
-similarity(g, method = "dice")
-similarity(g, method = "jaccard")
+similarity(g, measure = "dice")
+similarity(g, measure = "jaccard")
 }
 \references{
 Lada A. Adamic and Eytan Adar: Friends and neighbors on the Web.

@@ -21,10 +21,6 @@ graph.knn(
 in directed graphs. \code{out} considers out-neighbors, \verb{in} considers
 in-neighbors and \code{all} ignores edge directions.}
 
-\item{neighbor.degree.mode}{The type of degree to average in directed graphs.
-\code{out} averages out-degrees, \verb{in} averages in-degrees and \code{all}
-ignores edge directions for the degree calculation.}
-
 \item{weights}{Weight vector. If the graph has a \code{weight} edge
 attribute, then this is used by default. If this argument is given, then
 vertex strength (see \code{\link[=strength]{strength()}}) is used instead of vertex

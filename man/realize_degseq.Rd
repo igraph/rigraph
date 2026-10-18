@@ -5,32 +5,38 @@
 \title{Creating a graph from a given degree sequence, deterministically}
 \usage{
 realize_degseq(
-  out.deg,
-  in.deg = NULL,
+  out_deg,
+  in_deg = NULL,
   ...,
-  allowed.edge.types = c("simple", "loops", "multi", "all"),
-  method = c("smallest", "largest", "index")
+  allowed_edge_types = c("simple", "loops", "multi", "all"),
+  algorithm = c("smallest", "largest", "index"),
+  out.deg = deprecated(),
+  in.deg = deprecated()
 )
 }
 \arguments{
-\item{out.deg}{Numeric vector, the sequence of degrees (for undirected
+\item{out_deg}{Numeric vector, the sequence of degrees (for undirected
 graphs) or out-degrees (for directed graphs). For undirected graphs its sum
 should be even. For directed graphs its sum should be the same as the sum of
-\code{in.deg}.}
+\code{in_deg}.}
 
-\item{in.deg}{For directed graph, the in-degree sequence. By default this is
+\item{in_deg}{For directed graph, the in-degree sequence. By default this is
 \code{NULL} and an undirected graph is created.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{allowed.edge.types}{Character, specifies the types of allowed edges.
+\item{allowed_edge_types}{Character, specifies the types of allowed edges.
 \dQuote{simple} allows simple graphs only (no loops, no multiple edges).
 \dQuote{multiple} allows multiple edges but disallows loop.
 \dQuote{loops} allows loop edges but disallows multiple edges (currently
 unimplemented). \dQuote{all} allows all types of edges. The default is
 \dQuote{simple}.}
 
-\item{method}{Character, the method for generating the graph; see below.}
+\item{algorithm}{Character, the method for generating the graph; see below.}
+
+\item{out.deg}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{out_deg} instead.}
+
+\item{in.deg}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{in_deg} instead.}
 }
 \value{
 The new graph object.
@@ -80,7 +86,7 @@ degs <- sample(1:100, 100, replace = TRUE, prob = exp(-0.5 * (1:100)))
 if (sum(degs) \%\% 2 != 0) {
   degs[1] <- degs[1] + 1
 }
-g4 <- realize_degseq(degs, method = "largest", allowed.edge.types = "all")
+g4 <- realize_degseq(degs, algorithm = "largest", allowed_edge_types = "all")
 all(degree(g4) == degs)
 
 ## Power-law degree distribution, no loops allowed but multiple edges
@@ -90,7 +96,7 @@ degs <- sample(1:100, 100, replace = TRUE, prob = (1:100)^-2)
 if (sum(degs) \%\% 2 != 0) {
   degs[1] <- degs[1] + 1
 }
-g5 <- realize_degseq(degs, allowed.edge.types = "multi")
+g5 <- realize_degseq(degs, allowed_edge_types = "multi")
 all(degree(g5) == degs)
 }
 \references{

@@ -8,10 +8,12 @@
 \usage{
 simplify(
   graph,
-  remove.multiple = TRUE,
-  remove.loops = TRUE,
+  remove_multiple = TRUE,
+  remove_loops = TRUE,
   ...,
-  edge_attr_combine = NULL
+  edge_attr_combine = NULL,
+  remove.multiple = deprecated(),
+  remove.loops = deprecated()
 )
 
 is_simple(graph)
@@ -21,10 +23,10 @@ simplify_and_colorize(graph)
 \arguments{
 \item{graph}{The graph to work on.}
 
-\item{remove.multiple}{Logical, whether the multiple edges are to be
+\item{remove_multiple}{Logical, whether the multiple edges are to be
 removed.}
 
-\item{remove.loops}{Logical, whether the loop edges are to be removed.}
+\item{remove_loops}{Logical, whether the loop edges are to be removed.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
@@ -33,6 +35,10 @@ removed.}
 single one in the new graph, and their attributes are combined. Please see
 \code{\link[=attribute.combination]{attribute.combination()}} for details on this. The default \code{NULL} uses
 the \code{edge_attr_combine} igraph option.}
+
+\item{remove.multiple}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{remove_multiple} instead.}
+
+\item{remove.loops}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{remove_loops} instead.}
 }
 \value{
 a graph object with the loop and/or multiple edges removed; the
@@ -50,7 +56,7 @@ it does not contain loop edges and multiple edges.
 \code{is_simple()} checks whether a graph is simple.
 
 \code{simplify()} removes the loop and/or multiple edges from a graph.  If
-both \code{remove.loops} and \code{remove.multiple} are \code{TRUE} the
+both \code{remove_loops} and \code{remove_multiple} are \code{TRUE} the
 function returns a simple graph. If the graph is already simple, it is
 returned unchanged.
 
@@ -72,8 +78,8 @@ to facilitate the usage of multigraphs with the VF2 algorithm.
 
 g <- make_graph(c(1, 2, 1, 2, 3, 3))
 is_simple(g)
-is_simple(simplify(g, remove.loops = FALSE))
-is_simple(simplify(g, remove.multiple = FALSE))
+is_simple(simplify(g, remove_loops = FALSE))
+is_simple(simplify(g, remove_multiple = FALSE))
 is_simple(simplify(g))
 }
 \seealso{

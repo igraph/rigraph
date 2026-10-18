@@ -7,13 +7,20 @@
 \alias{is_subgraph_isomorphic_to}
 \title{Decide if a graph is subgraph isomorphic to another one}
 \usage{
-subgraph_isomorphic(pattern, target, method = c("auto", "lad", "vf2"), ...)
+subgraph_isomorphic(
+  pattern,
+  target,
+  algorithm = c("auto", "lad", "vf2"),
+  ...,
+  method = deprecated()
+)
 
 is_subgraph_isomorphic_to(
   pattern,
   target,
-  method = c("auto", "lad", "vf2"),
-  ...
+  algorithm = c("auto", "lad", "vf2"),
+  ...,
+  method = deprecated()
 )
 }
 \arguments{
@@ -25,10 +32,12 @@ mutual edges.}
 undirected. Undirected graphs are treated as directed graphs with
 mutual edges.}
 
-\item{method}{The method to use. Possible values: \sQuote{auto},
+\item{algorithm}{The method to use. Possible values: \sQuote{auto},
 \sQuote{lad}, \sQuote{vf2}. See their details below.}
 
 \item{...}{Additional arguments, passed to the various methods.}
+
+\item{method}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{algorithm} instead.}
 }
 \value{
 Logical scalar, \code{TRUE} if the \code{pattern} is

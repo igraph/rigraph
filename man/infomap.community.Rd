@@ -21,9 +21,6 @@ infomap.community(
 \item{v.weights}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertex_weights} in
 \code{\link[=cluster_infomap]{cluster_infomap()}} instead.}
 
-\item{nb.trials}{The number of attempts to partition the network (can be any
-integer value equal or larger than 1).}
-
 \item{modularity}{Logical, whether to calculate the modularity score
 of the detected community structure.}
 }

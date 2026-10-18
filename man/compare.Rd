@@ -9,7 +9,8 @@
 compare(
   comm1,
   comm2,
-  method = c("vi", "nmi", "split.join", "rand", "adjusted.rand")
+  measure = c("vi", "nmi", "split.join", "rand", "adjusted.rand"),
+  method = deprecated()
 )
 }
 \arguments{
@@ -22,13 +23,15 @@ vertex, the numbering of the communities starts with one.}
 structure; or a numeric vector, the membership vector of the second
 community structure, in the same format as for the previous argument.}
 
-\item{method}{Character scalar, the comparison method to use. Possible
+\item{measure}{Character scalar, the comparison method to use. Possible
 values: \sQuote{vi} is the variation of information (VI) metric of Meila
 (2003), \sQuote{nmi} is the normalized mutual information measure proposed
 by Danon et al. (2005), \sQuote{split.join} is the split-join distance of
 can Dongen (2000), \sQuote{rand} is the Rand index of Rand (1971),
 \sQuote{adjusted.rand} is the adjusted Rand index by Hubert and Arabie
 (1985).}
+
+\item{method}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{measure} instead.}
 }
 \value{
 A real number.
@@ -45,7 +48,7 @@ This function assesses the distance between two community structures.
 g <- make_graph("Zachary")
 sg <- cluster_spinglass(g)
 le <- cluster_leading_eigen(g)
-compare(sg, le, method = "rand")
+compare(sg, le, measure = "rand")
 compare(membership(sg), membership(le))
 
 }

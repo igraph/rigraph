@@ -8,8 +8,10 @@ realize_bipartite_degseq(
   degrees1,
   degrees2,
   ...,
-  allowed.edge.types = c("simple", "multiple"),
-  method = c("smallest", "largest", "index")
+  allowed_edge_types = c("simple", "multiple"),
+  algorithm = c("smallest", "largest", "index"),
+  allowed.edge.types = deprecated(),
+  method = deprecated()
 )
 }
 \arguments{
@@ -19,11 +21,15 @@ realize_bipartite_degseq(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{allowed.edge.types}{Character, specifies the types of allowed edges.
+\item{allowed_edge_types}{Character, specifies the types of allowed edges.
 \dQuote{simple} allows simple graphs only (no multiple edges).
 \dQuote{multiple} allows multiple edges.}
 
-\item{method}{Character, the method for generating the graph; see below.}
+\item{algorithm}{Character, the method for generating the graph; see below.}
+
+\item{allowed.edge.types}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{allowed_edge_types} instead.}
+
+\item{method}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{algorithm} instead.}
 }
 \value{
 The new graph object.
