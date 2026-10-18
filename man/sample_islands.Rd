@@ -4,17 +4,34 @@
 \alias{sample_islands}
 \title{A graph with subgraphs that are each a random graph.}
 \usage{
-sample_islands(islands.n, islands.size, islands.pin, n.inter)
+sample_islands(
+  n_islands,
+  islands_size,
+  islands_pin,
+  n_inter,
+  islands.n = deprecated(),
+  islands.size = deprecated(),
+  islands.pin = deprecated(),
+  n.inter = deprecated()
+)
 }
 \arguments{
-\item{islands.n}{The number of islands in the graph.}
+\item{n_islands}{The number of islands in the graph.}
 
-\item{islands.size}{The size of islands in the graph.}
+\item{islands_size}{The size of islands in the graph.}
 
-\item{islands.pin}{The probability to create each possible edge into each
+\item{islands_pin}{The probability to create each possible edge into each
 island.}
 
-\item{n.inter}{The number of edges to create between two islands.}
+\item{n_inter}{The number of edges to create between two islands.}
+
+\item{islands.n}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{n_islands} instead.}
+
+\item{islands.size}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{islands_size} instead.}
+
+\item{islands.pin}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{islands_pin} instead.}
+
+\item{n.inter}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{n_inter} instead.}
 }
 \value{
 An igraph graph.

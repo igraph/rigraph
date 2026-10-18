@@ -10,11 +10,12 @@ assortativity(
   graph,
   values,
   ...,
-  values.in = NULL,
+  values_in = NULL,
   directed = TRUE,
   normalized = TRUE,
   types1 = NULL,
-  types2 = NULL
+  types2 = NULL,
+  values.in = deprecated()
 )
 
 assortativity_nominal(graph, types, ..., directed = TRUE, normalized = TRUE)
@@ -28,7 +29,7 @@ assortativity_degree(graph, ..., directed = TRUE)
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{values.in}{A second value vector to use for the incoming edges when
+\item{values_in}{A second value vector to use for the incoming edges when
 calculating assortativity for a directed graph.
 Supply \code{NULL} here if
 you want to use the same values for outgoing and incoming edges.
@@ -50,7 +51,9 @@ The non-normalized value-based assortativity is simply the covariance of the
 values at the two ends of edges.}
 
 \item{types1, types2}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
-Deprecated aliases for \code{values} and \code{values.in}, respectively.}
+Deprecated aliases for \code{values} and \code{values_in}, respectively.}
+
+\item{values.in}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{values_in} instead.}
 
 \item{types}{Vector giving the vertex types. They as assumed to be integer
 numbers, starting with one. Non-integer values are converted to integers

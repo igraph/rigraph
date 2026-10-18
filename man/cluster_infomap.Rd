@@ -9,7 +9,7 @@ cluster_infomap(
   ...,
   weights = NULL,
   vertex_weights = NULL,
-  nb.trials = 10,
+  n_trials = 10,
   modularity = TRUE
 )
 }
@@ -31,7 +31,7 @@ it is not present, then all vertices are considered to have the same weight.
 A larger vertex weight means a larger probability that the random surfer
 jumps to that vertex.}
 
-\item{nb.trials}{The number of attempts to partition the network (can be any
+\item{n_trials}{The number of attempts to partition the network (can be any
 integer value equal or larger than 1).}
 
 \item{modularity}{Logical, whether to calculate the modularity score

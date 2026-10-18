@@ -17,19 +17,15 @@ argument.}
 
 \item{file}{Defines the file (or connection) the Pajek file is written to.
 
-If the \code{project.file} argument is \code{TRUE}, then it can be a
+If the \code{project_file} argument is \code{TRUE}, then it can be a
 filename (with extension), a file object, or in general any king of
 connection object. The file/connection will be opened if it wasn't already.
 
-If the \code{project.file} argument is \code{FALSE}, then several files are
+If the \code{project_file} argument is \code{FALSE}, then several files are
 created and \code{file} must be a character scalar containing the base name
 of the files, without extension. (But it can contain the path to the files.)
 
 See also details below.}
-
-\item{project.file}{Logical, whether to create a single Pajek project
-file containing all the data, or to create separated files for each item.
-See details below.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

@@ -9,8 +9,7 @@ is.multiple(graph, eids = E(graph))
 \arguments{
 \item{graph}{The input graph.}
 
-\item{eids}{The edges to which the query is restricted. The default
-\code{NULL} selects all edges.}
+\item{eids}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{edges} instead.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

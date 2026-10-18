@@ -4,18 +4,26 @@
 \alias{neighbors}
 \title{Neighboring (adjacent) vertices in a graph}
 \usage{
-neighbors(graph, v, ..., mode = c("out", "in", "all", "total"))
+neighbors(
+  graph,
+  vertex,
+  ...,
+  mode = c("out", "in", "all", "total"),
+  v = deprecated()
+)
 }
 \arguments{
 \item{graph}{The input graph.}
 
-\item{v}{The vertex of which the adjacent vertices are queried.}
+\item{vertex}{The vertex of which the adjacent vertices are queried.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Whether to query outgoing (\sQuote{out}), incoming
 (\sQuote{in}) edges, or both types (\sQuote{all}). This is
 ignored for undirected graphs.}
+
+\item{v}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertex} instead.}
 }
 \value{
 A vertex sequence containing the neighbors of the input vertex.

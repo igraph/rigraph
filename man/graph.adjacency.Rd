@@ -35,18 +35,6 @@ then a weighted graph is created and the name of the edge attribute will be
 \item{diag}{Logical, whether to include the diagonal of the matrix in
 the calculation. If this is \code{FALSE} then the diagonal is zerod out
 first.}
-
-\item{add.colnames}{Character scalar, whether to add the column names as
-vertex attributes. If it is \code{NULL} (the default) then, if
-present, column names are added as vertex attribute \sQuote{name}. If
-\code{NA} or \code{FALSE} then they will not be added.  If a character constant,
-then it gives the name of the vertex attribute to add.}
-
-\item{add.rownames}{Character scalar, whether to add the row names as vertex
-attributes. Possible values the same as the previous argument. By default
-row names are not added. If \sQuote{\code{add.rownames}} and
-\sQuote{\code{add.colnames}} specify the same vertex attribute, then the
-former is ignored.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

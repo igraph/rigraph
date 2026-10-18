@@ -16,9 +16,6 @@ random starting point.}
 
 \item{start}{Logical, whether to start the fitting/sampling from the
 supplied \code{igraphHRG} object, or from a random starting point.}
-
-\item{num.samples}{Number of samples to use for consensus generation or
-missing edge prediction.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

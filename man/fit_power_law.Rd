@@ -8,11 +8,14 @@ fit_power_law(
   x,
   xmin = NULL,
   start = 2,
-  force.continuous = FALSE,
+  force_continuous = FALSE,
   implementation = c("plfit", "R.mle"),
-  p.value = FALSE,
-  p.precision = NULL,
-  ...
+  p_value = FALSE,
+  p_precision = NULL,
+  ...,
+  force.continuous = deprecated(),
+  p.value = deprecated(),
+  p.precision = deprecated()
 )
 }
 \arguments{
@@ -31,7 +34,7 @@ argument makes it possible to fit only the tail of the distribution.}
 minimizing function, for the \sQuote{\code{R.mle}} implementation. Usually
 it is safe to leave this untouched.}
 
-\item{force.continuous}{Logical. Whether to force a continuous
+\item{force_continuous}{Logical. Whether to force a continuous
 distribution for the \sQuote{\code{plfit}} implementation, even if the
 sample vector contains integer values only (by chance). If this argument is
 false, igraph will assume a continuous distribution if at least one sample
@@ -40,22 +43,28 @@ is non-integer and assume a discrete distribution otherwise.}
 \item{implementation}{Character scalar. Which implementation to use. See
 details below.}
 
-\item{p.value}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+\item{p_value}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
+
+\item{p_precision}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
+
+\item{\dots}{Additional arguments, passed to the maximum likelihood
+optimizing function, \code{\link[stats4:mle]{stats4::mle()}}, if the \sQuote{\code{R.mle}}
+implementation is chosen. It is ignored by the \sQuote{\code{plfit}}
+implementation.}
+
+\item{force.continuous}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{force_continuous} instead.}
+
+\item{p.value}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{p_value} instead.
 
 Set to \code{TRUE} to compute the p-value with \code{implementation = "plfit"}.}
 
-\item{p.precision}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+\item{p.precision}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{p_precision} instead.
 
 The desired precision of the p-value calculation. The
 precision ultimately depends on the number of resampling attempts. The
 number of resampling trials is determined by 0.25 divided by the square
 of the required precision. For instance, a required precision of 0.01
 means that 2500 samples will be drawn.}
-
-\item{\dots}{Additional arguments, passed to the maximum likelihood
-optimizing function, \code{\link[stats4:mle]{stats4::mle()}}, if the \sQuote{\code{R.mle}}
-implementation is chosen. It is ignored by the \sQuote{\code{plfit}}
-implementation.}
 }
 \value{
 Depends on the \code{implementation} argument. If it is

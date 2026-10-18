@@ -37,15 +37,6 @@ entry an edge is created and the value of the entry is added as an edge
 attribute named by the \code{weighted} argument. If it is \code{TRUE} then a
 weighted graph is created and the name of the edge attribute will be
 \sQuote{\code{weight}}.}
-
-\item{add.names}{A character constant, \code{NA} or \code{NULL}.
-\code{graph_from_biadjacency_matrix()} can add the row and column names of the incidence
-matrix as vertex attributes. If this argument is \code{NULL} (the default)
-and the bipartite adjacency matrix has both row and column names, then these are added
-as the \sQuote{\code{name}} vertex attribute. If you want a different vertex
-attribute for this, then give the name of the attributes as a character
-string. If this argument is \code{NA}, then no vertex attributes (other than
-type) will be added.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

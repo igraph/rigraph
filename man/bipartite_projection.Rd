@@ -12,7 +12,7 @@ bipartite_projection(
   multiplicity = TRUE,
   probe1 = NULL,
   which = c("both", "true", "false"),
-  remove.type = TRUE
+  remove_type = TRUE
 )
 
 bipartite_projection_size(graph, types = NULL)
@@ -42,7 +42,7 @@ one projection is requested in argument \code{which}.}
 \item{which}{A character scalar to specify which projection(s) to calculate.
 The default is to calculate both.}
 
-\item{remove.type}{Logical, whether to remove the \code{type} vertex
+\item{remove_type}{Logical, whether to remove the \code{type} vertex
 attribute from the projections. This makes sense because these graphs are
 not bipartite any more. However if you want to combine them with each other
 (or other bipartite graphs), then it is worth keeping this attribute. By

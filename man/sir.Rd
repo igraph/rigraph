@@ -7,7 +7,7 @@
 \alias{time_bins}
 \title{SIR model on graphs}
 \usage{
-sir(graph, beta, gamma, ..., no.sim = 100)
+sir(graph, beta, gamma, ..., n_sim = 100)
 
 time_bins(x, ..., middle = TRUE)
 
@@ -32,7 +32,7 @@ distribution.}
 \code{median.sir()} and \code{quantile.sir()}, unused, present for S3 method
 consistency.}
 
-\item{no.sim}{Integer scalar, the number simulation runs to perform.}
+\item{n_sim}{Integer scalar, the number simulation runs to perform.}
 
 \item{x}{A \code{sir} object, returned by the \code{sir()} function.}
 

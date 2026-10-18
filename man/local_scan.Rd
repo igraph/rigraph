@@ -5,23 +5,25 @@
 \title{Compute local scan statistics on graphs}
 \usage{
 local_scan(
-  graph.us,
-  graph.them = NULL,
+  graph_us,
+  graph_them = NULL,
   k = 1,
   FUN = NULL,
   weighted = FALSE,
   mode = c("out", "in", "all"),
   neighborhoods = NULL,
   weights = NULL,
-  ...
+  ...,
+  graph.us = deprecated(),
+  graph.them = deprecated()
 )
 }
 \arguments{
-\item{graph.us, graph}{An igraph object, the graph for which the scan
+\item{graph_us, graph}{An igraph object, the graph for which the scan
 statistics will be computed}
 
-\item{graph.them}{An igraph object on which the \sQuote{them} statistics is computed,
-i.e. the neighborhoods calculated from \code{graph.us} are evaluated on \code{graph.them}.
+\item{graph_them}{An igraph object on which the \sQuote{them} statistics is computed,
+i.e. the neighborhoods calculated from \code{graph_us} are evaluated on \code{graph_them}.
 Default: \code{NULL}.}
 
 \item{k}{An integer scalar, the size of the local neighborhood for each
@@ -48,16 +50,20 @@ for undirected graphs.}
 \code{NULL}. If it is not \code{NULL}, then the function is evaluated on
 the induced subgraphs specified by these neighborhoods.
 
-In theory this could be useful if the same \code{graph.us} graph is used
-for multiple \code{graph.them} arguments. Then the neighborhoods can be
-calculated on \code{graph.us} and used with multiple graphs. In
-practice, this is currently slower than simply using \code{graph.them}
+In theory this could be useful if the same \code{graph_us} graph is used
+for multiple \code{graph_them} arguments. Then the neighborhoods can be
+calculated on \code{graph_us} and used with multiple graphs. In
+practice, this is currently slower than simply using \code{graph_them}
 multiple times.}
 
 \item{weights}{Numeric vector, edge weights to use for the scan instead of the edge attribute weight. If \code{NULL} (the default) the edge weight attribute is used.}
 
 \item{\dots}{Arguments passed to \code{FUN}, the function that computes
 the local statistics.}
+
+\item{graph.us}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{graph_us} instead.}
+
+\item{graph.them}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{graph_them} instead.}
 }
 \value{
 For \code{local_scan()} typically a numeric vector containing the
@@ -76,12 +82,12 @@ statistics.
 
 \code{local_scan()} calculates exact local scan statistics.
 
-If \code{graph.them} is \code{NULL}, then \code{local_scan()} computes the
+If \code{graph_them} is \code{NULL}, then \code{local_scan()} computes the
 \sQuote{us} variant of the scan statistics.  Otherwise,
-\code{graph.them} should be an igraph object and the \sQuote{them}
-variant is computed using \code{graph.us} to extract the neighborhood
+\code{graph_them} should be an igraph object and the \sQuote{them}
+variant is computed using \code{graph_us} to extract the neighborhood
 information, and applying \code{FUN} on these neighborhoods in
-\code{graph.them}.
+\code{graph_them}.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_neighborhood_ecount}{\code{local_scan_neighborhood_ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_0_them}{\code{local_scan_0_them()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_1_ecount_them}{\code{local_scan_1_ecount_them()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_k_ecount_them}{\code{local_scan_k_ecount_them()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_0}{\code{local_scan_0()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_1_ecount}{\code{local_scan_1_ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_k_ecount}{\code{local_scan_k_ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_induced_subgraph}{\code{induced_subgraph()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
@@ -89,22 +95,22 @@ information, and applying \code{FUN} on these neighborhoods in
 
 \examples{
 pair <- sample_correlated_gnp_pair(n = 10^3, corr = 0.8, p = 0.1)
-local_0_us <- local_scan(graph.us = pair$graph1, k = 0)
-local_1_us <- local_scan(graph.us = pair$graph1, k = 1)
+local_0_us <- local_scan(graph_us = pair$graph1, k = 0)
+local_1_us <- local_scan(graph_us = pair$graph1, k = 1)
 
 local_0_them <- local_scan(
-  graph.us = pair$graph1,
-  graph.them = pair$graph2, k = 0
+  graph_us = pair$graph1,
+  graph_them = pair$graph2, k = 0
 )
 local_1_them <- local_scan(
-  graph.us = pair$graph1,
-  graph.them = pair$graph2, k = 1
+  graph_us = pair$graph1,
+  graph_them = pair$graph2, k = 1
 )
 
 Neigh_1 <- neighborhood(pair$graph1, order = 1)
 local_1_them_nhood <- local_scan(
-  graph.us = pair$graph1,
-  graph.them = pair$graph2,
+  graph_us = pair$graph1,
+  graph_them = pair$graph2,
   neighborhoods = Neigh_1
 )
 }

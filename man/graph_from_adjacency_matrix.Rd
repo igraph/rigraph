@@ -11,8 +11,8 @@ graph_from_adjacency_matrix(
   mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"),
   weighted = NULL,
   diag = TRUE,
-  add.colnames = NULL,
-  add.rownames = NA
+  add_colnames = NULL,
+  add_rownames = NA
 )
 
 from_adjacency(
@@ -21,8 +21,8 @@ from_adjacency(
   mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"),
   weighted = NULL,
   diag = TRUE,
-  add.colnames = NULL,
-  add.rownames = NA
+  add_colnames = NULL,
+  add_rownames = NA
 )
 }
 \arguments{
@@ -50,16 +50,16 @@ then a weighted graph is created and the name of the edge attribute will be
 the calculation. If this is \code{FALSE} then the diagonal is zerod out
 first.}
 
-\item{add.colnames}{Character scalar, whether to add the column names as
+\item{add_colnames}{Character scalar, whether to add the column names as
 vertex attributes. If it is \code{NULL} (the default) then, if
 present, column names are added as vertex attribute \sQuote{name}. If
 \code{NA} or \code{FALSE} then they will not be added.  If a character constant,
 then it gives the name of the vertex attribute to add.}
 
-\item{add.rownames}{Character scalar, whether to add the row names as vertex
+\item{add_rownames}{Character scalar, whether to add the row names as vertex
 attributes. Possible values the same as the previous argument. By default
-row names are not added. If \sQuote{\code{add.rownames}} and
-\sQuote{\code{add.colnames}} specify the same vertex attribute, then the
+row names are not added. If \sQuote{\code{add_rownames}} and
+\sQuote{\code{add_colnames}} specify the same vertex attribute, then the
 former is ignored.}
 }
 \value{
@@ -249,7 +249,7 @@ colnames(adj_matrix) <- seq_len(ncol(adj_matrix))
 g10 <- graph_from_adjacency_matrix(
   adj_matrix,
   weighted = TRUE,
-  add.rownames = "code"
+  add_rownames = "code"
 )
 summary(g10)
 

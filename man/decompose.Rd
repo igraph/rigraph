@@ -8,8 +8,8 @@ decompose(
   graph,
   ...,
   mode = c("weak", "strong"),
-  max.comps = NA,
-  min.vertices = 0
+  max_comps = NA,
+  min_vertices = 0
 )
 }
 \arguments{
@@ -21,13 +21,13 @@ decompose(
 \code{weak} for weakly connected components or \code{strong} for strongly
 connected components.}
 
-\item{max.comps}{The maximum number of components to return. The first
-\code{max.comps} components will be returned (which hold at least
-\code{min.vertices} vertices, see the next parameter), the others will be
+\item{max_comps}{The maximum number of components to return. The first
+\code{max_comps} components will be returned (which hold at least
+\code{min_vertices} vertices, see the next parameter), the others will be
 ignored. Supply \code{NA} here if you don't want to limit the number of
 components.}
 
-\item{min.vertices}{The minimum number of vertices a component should
+\item{min_vertices}{The minimum number of vertices a component should
 contain in order to place it in the result list. E.g. supply 2 here to ignore
 isolate vertices.}
 }
@@ -45,7 +45,7 @@ Creates a separate graph for each connected component of a graph.
 
 # the diameter of each component in a random graph
 g <- sample_gnp(1000, 1 / 1000)
-components <- decompose(g, min.vertices = 2)
+components <- decompose(g, min_vertices = 2)
 sapply(components, diameter)
 
 }

@@ -46,7 +46,7 @@ parent(blocks)
 
 plot_hierarchy(blocks, layout = NULL, ...)
 
-export_pajek(blocks, graph, file, ..., project.file = TRUE)
+export_pajek(blocks, graph, file, ..., project_file = TRUE)
 
 max_cohesion(blocks)
 }
@@ -95,17 +95,17 @@ the Reingold-Tilford layout generator.}
 
 \item{file}{Defines the file (or connection) the Pajek file is written to.
 
-If the \code{project.file} argument is \code{TRUE}, then it can be a
+If the \code{project_file} argument is \code{TRUE}, then it can be a
 filename (with extension), a file object, or in general any king of
 connection object. The file/connection will be opened if it wasn't already.
 
-If the \code{project.file} argument is \code{FALSE}, then several files are
+If the \code{project_file} argument is \code{FALSE}, then several files are
 created and \code{file} must be a character scalar containing the base name
 of the files, without extension. (But it can contain the path to the files.)
 
 See also details below.}
 
-\item{project.file}{Logical, whether to create a single Pajek project
+\item{project_file}{Logical, whether to create a single Pajek project
 file containing all the data, or to create separated files for each item.
 See details below.}
 }
@@ -185,11 +185,11 @@ active graphics device, by calling \code{igraph.plot}.
 The \code{export_pajek()} function can be used to export the graph and its
 cohesive blocks in Pajek format. It can either export a single Pajek project
 file with all the information, or a set of files, depending on its
-\code{project.file} argument. If \code{project.file} is \code{TRUE}, then
+\code{project_file} argument. If \code{project_file} is \code{TRUE}, then
 the following information is written to the file (or connection) given in
 the \code{file} argument: (1) the input graph, together with its attributes,
 see \code{\link[=write_graph]{write_graph()}} for details; (2) the hierarchy graph; and (3)
-one binary partition for each cohesive block. If \code{project.file} is
+one binary partition for each cohesive block. If \code{project_file} is
 \code{FALSE}, then the \code{file} argument must be a character scalar and
 it is used as the base name for the generated files. If \code{file} is
 \sQuote{basename}, then the following files are created: (1)

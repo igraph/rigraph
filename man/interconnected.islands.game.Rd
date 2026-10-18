@@ -7,14 +7,13 @@
 interconnected.islands.game(islands.n, islands.size, islands.pin, n.inter)
 }
 \arguments{
-\item{islands.n}{The number of islands in the graph.}
+\item{islands.n}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{n_islands} instead.}
 
-\item{islands.size}{The size of islands in the graph.}
+\item{islands.size}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{islands_size} instead.}
 
-\item{islands.pin}{The probability to create each possible edge into each
-island.}
+\item{islands.pin}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{islands_pin} instead.}
 
-\item{n.inter}{The number of edges to create between two islands.}
+\item{n.inter}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{n_inter} instead.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

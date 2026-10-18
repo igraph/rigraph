@@ -175,7 +175,14 @@ migrations <- list(
   ),
 
   graph_from_biadjacency_matrix = list(
-    old = function(incidence, directed, mode, multiple, weighted, add.names = add_names) {},
+    old = function(
+      incidence,
+      directed,
+      mode,
+      multiple,
+      weighted,
+      add.names = add_names
+    ) {},
     new = function(
       incidence,
       ...,

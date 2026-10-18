@@ -13,9 +13,6 @@ get.stochastic(
 \arguments{
 \item{graph}{The input graph. Must be of class \code{igraph}.}
 
-\item{column.wise}{If \code{FALSE}, then the rows of the stochastic matrix
-sum up to one; otherwise it is the columns.}
-
 \item{sparse}{Logical, whether to return a sparse matrix. The
 \code{Matrix} package is needed for sparse matrices. The default \code{NULL} uses
 the \code{sparsematrices} igraph option.}

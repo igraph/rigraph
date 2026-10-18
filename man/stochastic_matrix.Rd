@@ -4,14 +4,14 @@
 \alias{stochastic_matrix}
 \title{Stochastic matrix of a graph}
 \usage{
-stochastic_matrix(graph, ..., column.wise = FALSE, sparse = NULL)
+stochastic_matrix(graph, ..., column_wise = FALSE, sparse = NULL)
 }
 \arguments{
 \item{graph}{The input graph. Must be of class \code{igraph}.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{column.wise}{If \code{FALSE}, then the rows of the stochastic matrix
+\item{column_wise}{If \code{FALSE}, then the rows of the stochastic matrix
 sum up to one; otherwise it is the columns.}
 
 \item{sparse}{Logical, whether to return a sparse matrix. The

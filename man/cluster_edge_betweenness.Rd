@@ -9,7 +9,7 @@ cluster_edge_betweenness(
   ...,
   weights = NULL,
   directed = TRUE,
-  edge.betweenness = TRUE,
+  edge_betweenness = TRUE,
   merges = TRUE,
   bridges = TRUE,
   modularity = TRUE,
@@ -33,7 +33,7 @@ interpreted as distances, not as connection strengths.}
 \item{directed}{Logical, whether to calculate directed edge
 betweenness for directed graphs. It is ignored for undirected graphs.}
 
-\item{edge.betweenness}{Logical, whether to return the edge
+\item{edge_betweenness}{Logical, whether to return the edge
 betweenness of the edges at the time of their removal.}
 
 \item{merges}{Logical, whether to return the merge matrix
@@ -81,7 +81,7 @@ vertices can be encoded as a dendrogram.
 
 \code{cluster_edge_betweenness()} returns various information collected
 through the run of the algorithm. Specifically, \code{removed.edges} contains
-the edge IDs in order of the edges' removal; \code{edge.betweenness} contains
+the edge IDs in order of the edges' removal; \code{edge_betweenness} contains
 the betweenness of each of these at the time of their removal; and
 \code{bridges} contains the IDs of edges whose removal caused a split.
 }

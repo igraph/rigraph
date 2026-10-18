@@ -9,8 +9,7 @@ is.mutual(graph, eids = E(graph), loops = TRUE)
 \arguments{
 \item{graph}{The input graph.}
 
-\item{eids}{Edge sequence, the edges that will be probed. The default
-\code{NULL} includes all edges in the order of their IDs.}
+\item{eids}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{edges} instead.}
 
 \item{loops}{Logical, whether to consider directed self-loops to be mutual.}
 }

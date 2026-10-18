@@ -4,12 +4,14 @@
 \alias{tail_of}
 \title{Tails of the edge(s) in a graph}
 \usage{
-tail_of(graph, es)
+tail_of(graph, edges, es = deprecated())
 }
 \arguments{
 \item{graph}{The input graph.}
 
-\item{es}{The edges to query.}
+\item{edges}{The edges to query.}
+
+\item{es}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{edges} instead.}
 }
 \value{
 A vertex sequence with the tail(s) of the edge(s).
