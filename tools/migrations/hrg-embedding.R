@@ -58,13 +58,13 @@ migrations <- list(
   ),
 
   consensus_tree = list(
-    old = function(graph, hrg, start, num.samples) {},
+    old = function(graph, hrg, start, num.samples = n_samples) {},
     new = function(
       graph,
       hrg = NULL,
       ...,
       start = FALSE,
-      num.samples = 10000
+      n_samples = 10000
     ) {},
     when = "3.0.0"
   ),
@@ -82,14 +82,14 @@ migrations <- list(
   ),
 
   predict_edges = list(
-    old = function(graph, hrg, start, num.samples, num.bins) {},
+    old = function(graph, hrg, start, num.samples = n_samples, num.bins = n_bins) {},
     new = function(
       graph,
       hrg = NULL,
       ...,
       start = FALSE,
-      num.samples = 10000,
-      num.bins = 25
+      n_samples = 10000,
+      n_bins = 25
     ) {},
     when = "3.0.0"
   )

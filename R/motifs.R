@@ -133,7 +133,7 @@ dyad.census <- function(graph) {
 #' @param size The size of the motif, currently sizes 3 and 4 are supported in
 #'   directed graphs and sizes 3 to 6 in undirected graphs.
 #' @inheritParams rlang::args_dots_empty
-#' @param cut.prob Numeric vector giving the probabilities that the search
+#' @param cut_prob Numeric vector giving the probabilities that the search
 #'   graph is cut at a certain level. Its length should be the same as the size
 #'   of the motif (the `size` argument).
 #'   If `NULL`, the default, no cuts are made.
@@ -176,7 +176,7 @@ motifs <- function(
   graph,
   size = 3,
   ...,
-  cut.prob = NULL,
+  cut_prob = NULL,
   callback = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: motifs, do not edit, see tools/generate-migrations.R
@@ -193,7 +193,7 @@ motifs <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn motifs}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(cut.prob)) base::list(cut.prob = cut.prob),
+        if (!base::missing(cut.prob)) base::list(cut_prob = cut.prob),
         if (!base::missing(callback)) base::list(callback = callback)
       )
     }
@@ -201,7 +201,7 @@ motifs <- function(
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(cut.prob)) "cut.prob",
+        if (!base::missing(cut_prob)) "cut_prob",
         if (!base::missing(callback)) "callback"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn motifs} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
@@ -210,7 +210,7 @@ motifs <- function(
         "3.0.0",
         what = base::I("Calling `motifs()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  motifs(", base::paste(base::c("graph", "size", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  motifs(", base::paste(base::c("graph", "size", base::c(cut_prob = "cut.prob", callback = "callback")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    motifs(", base::paste(base::c("graph", "size", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -218,8 +218,8 @@ motifs <- function(
   }
   # END GENERATED ARG_HANDLE
 
-  if (!is.null(cut.prob) && length(cut.prob) != size) {
-    cli::cli_abort("{.arg cut.prob} must be the same length as {.arg size}")
+  if (!is.null(cut_prob) && length(cut_prob) != size) {
+    cli::cli_abort("{.arg cut_prob} must be the same length as {.arg size}")
   }
 
   # If callback is provided, use the callback implementation
@@ -227,7 +227,7 @@ motifs <- function(
     motifs_randesu_callback_closure_impl(
       graph = graph,
       size = size,
-      cut_prob = cut.prob,
+      cut_prob = cut_prob,
       callback = callback
     )
     return(invisible(NULL))
@@ -237,7 +237,7 @@ motifs <- function(
   res <- motifs_randesu_impl(
     graph = graph,
     size = size,
-    cut_prob = cut.prob
+    cut_prob = cut_prob
   )
 
   res[is.nan(res)] <- NA
@@ -255,7 +255,7 @@ motifs <- function(
 #' @param graph Graph object, the input graph.
 #' @param size The size of the motif.
 #' @inheritParams rlang::args_dots_empty
-#' @param cut.prob Numeric vector giving the probabilities that the search
+#' @param cut_prob Numeric vector giving the probabilities that the search
 #'   graph is cut at a certain level. Its length should be the same as the size
 #'   of the motif (the `size` argument).
 #'   If `NULL`, the default, no cuts are made.
@@ -274,7 +274,7 @@ count_motifs <- function(
   graph,
   size = 3,
   ...,
-  cut.prob = NULL
+  cut_prob = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: count_motifs, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -288,14 +288,14 @@ count_motifs <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn count_motifs}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(cut.prob)) base::list(cut.prob = cut.prob)
+        if (!base::missing(cut.prob)) base::list(cut_prob = cut.prob)
       )
     }
     .arg_handle <- .old_signature(...)
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(cut.prob)) "cut.prob"
+        if (!base::missing(cut_prob)) "cut_prob"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn count_motifs} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -303,7 +303,7 @@ count_motifs <- function(
         "3.0.0",
         what = base::I("Calling `count_motifs()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  count_motifs(", base::paste(base::c("graph", "size", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  count_motifs(", base::paste(base::c("graph", "size", base::c(cut_prob = "cut.prob")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    count_motifs(", base::paste(base::c("graph", "size", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -313,14 +313,14 @@ count_motifs <- function(
 
   ensure_igraph(graph)
 
-  if (!is.null(cut.prob) && length(cut.prob) != size) {
+  if (!is.null(cut_prob) && length(cut_prob) != size) {
     cli::cli_abort("{arg cut.prob} must be the same length as {.arg size}")
   }
 
   motifs_randesu_no_impl(
     graph = graph,
     size = size,
-    cut_prob = cut.prob
+    cut_prob = cut_prob
   )
 }
 
@@ -336,11 +336,11 @@ count_motifs <- function(
 #' @param size The size of the motif, currently size 3 and 4 are supported
 #'   in directed graphs and sizes 3-6 in undirected graphs.
 #' @inheritParams rlang::args_dots_empty
-#' @param cut.prob Numeric vector giving the probabilities that the search
+#' @param cut_prob Numeric vector giving the probabilities that the search
 #'   graph is cut at a certain level. Its length should be the same as the size
 #'   of the motif (the `size` argument).
 #'   If `NULL`, the default, no cuts are made.
-#' @param sample.size The number of vertices to use as a starting point for
+#' @param sample_size The number of vertices to use as a starting point for
 #'   finding motifs. Only used if the `sample` argument is `NULL`.
 #'   The default is `ceiling(vcount(graph) / 10)` .
 #' @param sample Vertices to use as a starting point for finding motifs.
@@ -361,8 +361,8 @@ sample_motifs <- function(
   graph,
   size = 3,
   ...,
-  cut.prob = NULL,
-  sample.size = NULL,
+  cut_prob = NULL,
+  sample_size = NULL,
   sample = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_motifs, do not edit, see tools/generate-migrations.R
@@ -381,8 +381,8 @@ sample_motifs <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_motifs}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(cut.prob)) base::list(cut.prob = cut.prob),
-        if (!base::missing(sample.size)) base::list(sample.size = sample.size),
+        if (!base::missing(cut.prob)) base::list(cut_prob = cut.prob),
+        if (!base::missing(sample.size)) base::list(sample_size = sample.size),
         if (!base::missing(sample)) base::list(sample = sample)
       )
     }
@@ -390,8 +390,8 @@ sample_motifs <- function(
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(cut.prob)) "cut.prob",
-        if (!base::missing(sample.size)) "sample.size",
+        if (!base::missing(cut_prob)) "cut_prob",
+        if (!base::missing(sample_size)) "sample_size",
         if (!base::missing(sample)) "sample"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_motifs} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
@@ -400,7 +400,7 @@ sample_motifs <- function(
         "3.0.0",
         what = base::I("Calling `sample_motifs()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  sample_motifs(", base::paste(base::c("graph", "size", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  sample_motifs(", base::paste(base::c("graph", "size", base::c(cut_prob = "cut.prob", sample_size = "sample.size", sample = "sample")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    sample_motifs(", base::paste(base::c("graph", "size", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -410,24 +410,24 @@ sample_motifs <- function(
 
   ensure_igraph(graph)
 
-  if (!is.null(cut.prob) && length(cut.prob) != size) {
+  if (!is.null(cut_prob) && length(cut_prob) != size) {
     cli::cli_abort("{arg cut.prob} must be the same length as {.arg size}")
   }
 
   if (is.null(sample)) {
-    if (is.null(sample.size)) {
-      sample.size <- ceiling(vcount(graph) / 10)
+    if (is.null(sample_size)) {
+      sample_size <- ceiling(vcount(graph) / 10)
     }
   } else {
     sample <- as_igraph_vs(graph, sample) - 1
-    sample.size <- 0
+    sample_size <- 0
   }
 
   motifs_randesu_estimate_impl(
     graph = graph,
     size = size,
-    cut_prob = cut.prob,
-    sample_size = sample.size,
+    cut_prob = cut_prob,
+    sample_size = sample_size,
     sample = sample
   )
 }

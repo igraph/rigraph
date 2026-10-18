@@ -14,14 +14,14 @@ migrations <- list(
   ),
 
   graphlet_proj = list(
-    old = function(graph, weights, cliques, niter = n_iter, Mu) {},
+    old = function(graph, weights, cliques, niter = n_iter, Mu = mu) {},
     new = function(
       graph,
       ...,
       weights = NULL,
       cliques,
       n_iter = 1000,
-      Mu = NULL
+      mu = NULL
     ) {},
     when = "3.0.0"
   ),
@@ -38,36 +38,36 @@ migrations <- list(
   ),
 
   count_motifs = list(
-    old = function(graph, size, cut.prob) {},
+    old = function(graph, size, cut.prob = cut_prob) {},
     new = function(
       graph,
       size = 3,
       ...,
-      cut.prob = NULL
+      cut_prob = NULL
     ) {},
     when = "3.0.0"
   ),
 
   motifs = list(
-    old = function(graph, size, cut.prob, callback) {},
+    old = function(graph, size, cut.prob = cut_prob, callback) {},
     new = function(
       graph,
       size = 3,
       ...,
-      cut.prob = NULL,
+      cut_prob = NULL,
       callback = NULL
     ) {},
     when = "3.0.0"
   ),
 
   sample_motifs = list(
-    old = function(graph, size, cut.prob, sample.size, sample) {},
+    old = function(graph, size, cut.prob = cut_prob, sample.size = sample_size, sample) {},
     new = function(
       graph,
       size = 3,
       ...,
-      cut.prob = NULL,
-      sample.size = NULL,
+      cut_prob = NULL,
+      sample_size = NULL,
       sample = NULL
     ) {},
     when = "3.0.0"

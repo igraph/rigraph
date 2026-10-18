@@ -1486,17 +1486,17 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #'   vertices in parallel (synchronously) or not. This argument is ignored if the
 #'   second form of the function is used (i.e. the \sQuote{`vertex`} argument
 #'   is present). It is also not implemented in the \dQuote{neg} implementation.
-#' @param start.temp Real constant, the start temperature.  This argument is
+#' @param start_temp Real constant, the start temperature.  This argument is
 #'   ignored if the second form of the function is used (i.e. the
 #'   \sQuote{`vertex`} argument is present).
-#' @param stop.temp Real constant, the stop temperature. The simulation
+#' @param stop_temp Real constant, the stop temperature. The simulation
 #'   terminates if the temperature lowers below this level.  This argument is
 #'   ignored if the second form of the function is used (i.e. the
 #'   \sQuote{`vertex`} argument is present).
-#' @param cool.fact Cooling factor for the simulated annealing.  This argument
+#' @param cool_fact Cooling factor for the simulated annealing.  This argument
 #'   is ignored if the second form of the function is used (i.e. the
 #'   \sQuote{`vertex`} argument is present).
-#' @param update.rule Character constant giving the \sQuote{null-model} of the
+#' @param update_rule Character constant giving the \sQuote{null-model} of the
 #'   simulation. Possible values: \dQuote{simple} and \dQuote{config}.
 #'   \dQuote{simple} uses a random graph with the same number of edges as the
 #'   baseline probability and \dQuote{config} uses a random graph with the same
@@ -1512,7 +1512,7 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #'   implementations for the Spin-glass community finding algorithm. The faster
 #'   original implementation is the default. The other implementation, that takes
 #'   into account negative weights, can be chosen by supplying \sQuote{neg} here.
-#' @param gamma.minus Real constant, the gamma.minus parameter of the
+#' @param gamma_minus Real constant, the gamma.minus parameter of the
 #'   algorithm. This specifies the balance between the importance of present and
 #'   non-present negative weighted edges in a community. Smaller values of
 #'   gamma.minus, leads to communities with lesser negative intra-connectivity.
@@ -1575,13 +1575,13 @@ cluster_spinglass <- function(
   vertex = NULL,
   spins = 25,
   parupdate = FALSE,
-  start.temp = 1,
-  stop.temp = 0.01,
-  cool.fact = 0.99,
-  update.rule = c("config", "random", "simple"),
+  start_temp = 1,
+  stop_temp = 0.01,
+  cool_fact = 0.99,
+  update_rule = c("config", "random", "simple"),
   gamma = 1.0,
   implementation = c("orig", "neg"),
-  gamma.minus = 1.0
+  gamma_minus = 1.0
 ) {
   # BEGIN GENERATED ARG_HANDLE: cluster_spinglass, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -1603,13 +1603,13 @@ cluster_spinglass <- function(
         if (!base::missing(vertex)) base::list(vertex = vertex),
         if (!base::missing(spins)) base::list(spins = spins),
         if (!base::missing(parupdate)) base::list(parupdate = parupdate),
-        if (!base::missing(start.temp)) base::list(start.temp = start.temp),
-        if (!base::missing(stop.temp)) base::list(stop.temp = stop.temp),
-        if (!base::missing(cool.fact)) base::list(cool.fact = cool.fact),
-        if (!base::missing(update.rule)) base::list(update.rule = update.rule),
+        if (!base::missing(start.temp)) base::list(start_temp = start.temp),
+        if (!base::missing(stop.temp)) base::list(stop_temp = stop.temp),
+        if (!base::missing(cool.fact)) base::list(cool_fact = cool.fact),
+        if (!base::missing(update.rule)) base::list(update_rule = update.rule),
         if (!base::missing(gamma)) base::list(gamma = gamma),
         if (!base::missing(implementation)) base::list(implementation = implementation),
-        if (!base::missing(gamma.minus)) base::list(gamma.minus = gamma.minus)
+        if (!base::missing(gamma.minus)) base::list(gamma_minus = gamma.minus)
       )
     }
     .arg_handle <- .old_signature(...)
@@ -1620,13 +1620,13 @@ cluster_spinglass <- function(
         if (!base::missing(vertex)) "vertex",
         if (!base::missing(spins)) "spins",
         if (!base::missing(parupdate)) "parupdate",
-        if (!base::missing(start.temp)) "start.temp",
-        if (!base::missing(stop.temp)) "stop.temp",
-        if (!base::missing(cool.fact)) "cool.fact",
-        if (!base::missing(update.rule)) "update.rule",
+        if (!base::missing(start_temp)) "start_temp",
+        if (!base::missing(stop_temp)) "stop_temp",
+        if (!base::missing(cool_fact)) "cool_fact",
+        if (!base::missing(update_rule)) "update_rule",
         if (!base::missing(gamma)) "gamma",
         if (!base::missing(implementation)) "implementation",
-        if (!base::missing(gamma.minus)) "gamma.minus"
+        if (!base::missing(gamma_minus)) "gamma_minus"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn cluster_spinglass} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -1634,7 +1634,7 @@ cluster_spinglass <- function(
         "3.0.0",
         what = base::I("Calling `cluster_spinglass()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  cluster_spinglass(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  cluster_spinglass(", base::paste(base::c("graph", base::c(weights = "weights", vertex = "vertex", spins = "spins", parupdate = "parupdate", start_temp = "start.temp", stop_temp = "stop.temp", cool_fact = "cool.fact", update_rule = "update.rule", gamma = "gamma", implementation = "implementation", gamma_minus = "gamma.minus")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    cluster_spinglass(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -1653,8 +1653,8 @@ cluster_spinglass <- function(
     weights <- NULL
   }
 
-  update.rule <- igraph_match_arg(update.rule)
-  update.rule <- switch(update.rule, "simple" = 0, "random" = 0, "config" = 1)
+  update_rule <- igraph_match_arg(update_rule)
+  update_rule <- switch(update_rule, "simple" = 0, "random" = 0, "config" = 1)
   implementation <- switch(
     igraph_match_arg(implementation),
     "orig" = 0,
@@ -1669,13 +1669,13 @@ cluster_spinglass <- function(
       weights,
       as.numeric(spins),
       as.logical(parupdate),
-      as.numeric(start.temp),
-      as.numeric(stop.temp),
-      as.numeric(cool.fact),
-      as.numeric(update.rule),
+      as.numeric(start_temp),
+      as.numeric(stop_temp),
+      as.numeric(cool_fact),
+      as.numeric(update_rule),
       as.numeric(gamma),
       as.numeric(implementation),
-      as.numeric(gamma.minus)
+      as.numeric(gamma_minus)
     )
     res$algorithm <- "spinglass"
     res$vcount <- vcount(graph)
@@ -1691,7 +1691,7 @@ cluster_spinglass <- function(
       weights,
       as_igraph_vs(graph, vertex) - 1,
       as.numeric(spins),
-      as.numeric(update.rule),
+      as.numeric(update_rule),
       as.numeric(gamma)
     )
     res$community <- res$community + 1
@@ -1953,8 +1953,9 @@ cluster_leiden <- function(
 #' @param graph The input graph. The graph must be simple and connected.
 #'   Empty graphs are not supported as well as single vertex graphs.
 #'   Edge directions are ignored. Weights are not considered.
-#' @param no.of.communities The number of communities to be found. Must be
+#' @param n_communities The number of communities to be found. Must be
 #'   greater than 0 and fewer than number of vertices in the graph.
+#' @param no.of.communities `r lifecycle::badge("deprecated")` Use `n_communities` instead.
 #' @return `cluster_fluid_communities()` returns a [communities()]
 #'   object, please see the [communities()] manual page for details.
 #' @author Ferran Parés
@@ -1980,10 +1981,29 @@ cluster_leiden <- function(
 #' @examples
 #' g <- make_graph("Zachary")
 #' comms <- cluster_fluid_communities(g, 2)
-cluster_fluid_communities <- function(graph, no.of.communities) {
+cluster_fluid_communities <- function(
+  graph,
+  n_communities,
+  no.of.communities = deprecated()
+) {
+  if (lifecycle::is_present(no.of.communities)) {
+    if (!missing(n_communities)) {
+      cli::cli_abort(c(
+        "Argument {.arg n_communities} of {.fn cluster_fluid_communities} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg no.of.communities}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "cluster_fluid_communities(no.of.communities = )",
+      "cluster_fluid_communities(n_communities = )"
+    )
+    n_communities <- no.of.communities
+  }
+
   membership <- community_fluid_communities_impl(
     graph = graph,
-    no_of_communities = no.of.communities
+    no_of_communities = n_communities
   )
 
   res <- list()
@@ -2163,7 +2183,7 @@ cluster_walktrap <- function(
 #'
 #' `cluster_edge_betweenness()` returns various information collected
 #' through the run of the algorithm. Specifically, `removed.edges` contains
-#' the edge IDs in order of the edges' removal; `edge.betweenness` contains
+#' the edge IDs in order of the edges' removal; `edge_betweenness` contains
 #' the betweenness of each of these at the time of their removal; and
 #' `bridges` contains the IDs of edges whose removal caused a split.
 #'
@@ -2179,7 +2199,7 @@ cluster_walktrap <- function(
 #'   interpreted as distances, not as connection strengths.
 #' @param directed Logical, whether to calculate directed edge
 #'   betweenness for directed graphs. It is ignored for undirected graphs.
-#' @param edge.betweenness Logical, whether to return the edge
+#' @param edge_betweenness Logical, whether to return the edge
 #'   betweenness of the edges at the time of their removal.
 #' @param merges Logical, whether to return the merge matrix
 #'   representing the hierarchical community structure of the network.  This
@@ -2232,7 +2252,7 @@ cluster_edge_betweenness <- function(
   ...,
   weights = NULL,
   directed = TRUE,
-  edge.betweenness = TRUE,
+  edge_betweenness = TRUE,
   merges = TRUE,
   bridges = TRUE,
   modularity = TRUE,
@@ -2254,7 +2274,7 @@ cluster_edge_betweenness <- function(
       base::c(
         if (!base::missing(weights)) base::list(weights = weights),
         if (!base::missing(directed)) base::list(directed = directed),
-        if (!base::missing(edge.betweenness)) base::list(edge.betweenness = edge.betweenness),
+        if (!base::missing(edge.betweenness)) base::list(edge_betweenness = edge.betweenness),
         if (!base::missing(merges)) base::list(merges = merges),
         if (!base::missing(bridges)) base::list(bridges = bridges),
         if (!base::missing(modularity)) base::list(modularity = modularity),
@@ -2267,7 +2287,7 @@ cluster_edge_betweenness <- function(
       .arg_conflict <- base::intersect(.arg_names, base::c(
         if (!base::missing(weights)) "weights",
         if (!base::missing(directed)) "directed",
-        if (!base::missing(edge.betweenness)) "edge.betweenness",
+        if (!base::missing(edge_betweenness)) "edge_betweenness",
         if (!base::missing(merges)) "merges",
         if (!base::missing(bridges)) "bridges",
         if (!base::missing(modularity)) "modularity",
@@ -2279,7 +2299,7 @@ cluster_edge_betweenness <- function(
         "3.0.0",
         what = base::I("Calling `cluster_edge_betweenness()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  cluster_edge_betweenness(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  cluster_edge_betweenness(", base::paste(base::c("graph", base::c(weights = "weights", directed = "directed", edge_betweenness = "edge.betweenness", merges = "merges", bridges = "bridges", modularity = "modularity", membership = "membership")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    cluster_edge_betweenness(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -2304,7 +2324,7 @@ cluster_edge_betweenness <- function(
     graph,
     weights,
     as.logical(directed),
-    as.logical(edge.betweenness),
+    as.logical(edge_betweenness),
     as.logical(merges),
     as.logical(bridges),
     as.logical(modularity),
@@ -3068,7 +3088,7 @@ cluster_optimal <- function(
 #'   it is not present, then all vertices are considered to have the same weight.
 #'   A larger vertex weight means a larger probability that the random surfer
 #'   jumps to that vertex.
-#' @param nb.trials The number of attempts to partition the network (can be any
+#' @param n_trials The number of attempts to partition the network (can be any
 #'   integer value equal or larger than 1).
 #' @param modularity Logical, whether to calculate the modularity score
 #'   of the detected community structure.
@@ -3102,7 +3122,7 @@ cluster_infomap <- function(
   ...,
   weights = NULL,
   vertex_weights = NULL,
-  nb.trials = 10,
+  n_trials = 10,
   modularity = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: cluster_infomap, do not edit, see tools/generate-migrations.R
@@ -3119,7 +3139,7 @@ cluster_infomap <- function(
       base::c(
         if (!base::missing(e.weights)) base::list(weights = e.weights),
         if (!base::missing(v.weights)) base::list(vertex_weights = v.weights),
-        if (!base::missing(nb.trials)) base::list(nb.trials = nb.trials),
+        if (!base::missing(nb.trials)) base::list(n_trials = nb.trials),
         if (!base::missing(modularity)) base::list(modularity = modularity)
       )
     }
@@ -3129,7 +3149,7 @@ cluster_infomap <- function(
       .arg_conflict <- base::intersect(.arg_names, base::c(
         if (!base::missing(weights)) "weights",
         if (!base::missing(vertex_weights)) "vertex_weights",
-        if (!base::missing(nb.trials)) "nb.trials",
+        if (!base::missing(n_trials)) "n_trials",
         if (!base::missing(modularity)) "modularity"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn cluster_infomap} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
@@ -3138,7 +3158,7 @@ cluster_infomap <- function(
         "3.0.0",
         what = base::I("Calling `cluster_infomap()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  cluster_infomap(", base::paste(base::c("graph", base::c(weights = "e.weights", vertex_weights = "v.weights", nb.trials = "nb.trials", modularity = "modularity")[.arg_names]), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  cluster_infomap(", base::paste(base::c("graph", base::c(weights = "e.weights", vertex_weights = "v.weights", n_trials = "nb.trials", modularity = "modularity")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    cluster_infomap(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -3150,7 +3170,7 @@ cluster_infomap <- function(
     graph = graph,
     e_weights = weights,
     v_weights = vertex_weights,
-    nb_trials = nb.trials
+    nb_trials = n_trials
   )
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {

@@ -71,7 +71,7 @@ graphlets.candidate.basis <- function(graph, weights = NULL) {
 #' @param n_iter Integer scalar, the number of iterations to perform.
 #' @param cliques A list of vertex IDs, the graphlet basis to use for the
 #'   projection.
-#' @param Mu Starting weights for the projection. The default `NULL` uses a
+#' @param mu Starting weights for the projection. The default `NULL` uses a
 #'   weight of one for each clique.
 #' @return `graphlets()` returns a list with two members:
 #'   \describe{
@@ -192,7 +192,7 @@ graphlet_proj <- function(
   weights = NULL,
   cliques,
   n_iter = 1000,
-  Mu = NULL
+  mu = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: graphlet_proj, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -209,7 +209,7 @@ graphlet_proj <- function(
         if (!base::missing(weights)) base::list(weights = weights),
         if (!base::missing(cliques)) base::list(cliques = cliques),
         if (!base::missing(niter)) base::list(n_iter = niter),
-        if (!base::missing(Mu)) base::list(Mu = Mu)
+        if (!base::missing(Mu)) base::list(mu = Mu)
       )
     }
     .arg_handle <- .old_signature(...)
@@ -219,7 +219,7 @@ graphlet_proj <- function(
         if (!base::missing(weights)) "weights",
         if (!base::missing(cliques)) "cliques",
         if (!base::missing(n_iter)) "n_iter",
-        if (!base::missing(Mu)) "Mu"
+        if (!base::missing(mu)) "mu"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn graphlet_proj} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -227,7 +227,7 @@ graphlet_proj <- function(
         "3.0.0",
         what = base::I("Calling `graphlet_proj()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  graphlet_proj(", base::paste(base::c("graph", base::c(weights = "weights", cliques = "cliques", n_iter = "niter", Mu = "Mu")[.arg_names]), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  graphlet_proj(", base::paste(base::c("graph", base::c(weights = "weights", cliques = "cliques", n_iter = "niter", mu = "Mu")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    graphlet_proj(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -237,8 +237,8 @@ graphlet_proj <- function(
 
   # Argument checks
   ensure_igraph(graph)
-  if (is.null(Mu)) {
-    Mu <- rep(1, length(cliques))
+  if (is.null(mu)) {
+    mu <- rep(1, length(cliques))
   }
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -249,14 +249,14 @@ graphlet_proj <- function(
   } else {
     weights <- NULL
   }
-  Mu <- as.numeric(Mu)
+  mu <- as.numeric(mu)
   n_iter <- as.numeric(n_iter)
 
   graphlets_project_impl(
     graph = graph,
     weights = weights,
     cliques = cliques,
-    Muc = Mu,
+    Muc = mu,
     niter = n_iter
   )
 }

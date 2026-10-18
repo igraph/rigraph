@@ -192,9 +192,12 @@ same_result <- function(x, y) {
     return(identical_graphs(x, y))
   }
   if (is.list(x) && is.list(y) && !is_igraph(x) && !is_igraph(y)) {
+    x <- unclass(x)
+    y <- unclass(y)
     return(
       identical(names(x), names(y)) &&
-        all(mapply(same_result, x, y))
+        length(x) == length(y) &&
+        all(vapply(seq_along(x), function(i) same_result(x[[i]], y[[i]]), logical(1)))
     )
   }
   isTRUE(all.equal(x, y))

@@ -746,7 +746,7 @@ test_that("cluster_edge_betweenness() covers migrated tail args and positional r
   # All optional result components can be switched off.
   bare <- cluster_edge_betweenness(
     karate,
-    edge.betweenness = FALSE,
+    edge_betweenness = FALSE,
     merges = FALSE,
     bridges = FALSE,
     modularity = FALSE,
@@ -804,7 +804,7 @@ test_that("cluster_infomap() covers migrated tail args and positional recovery",
     karate,
     weights = rep(1, ecount(karate)),
     vertex_weights = rep(1, vcount(karate)),
-    nb.trials = 3,
+    n_trials = 3,
     modularity = FALSE
   )
   # The stochastic result is still a valid partition of all vertices.
@@ -889,10 +889,10 @@ test_that("cluster_spinglass() covers migrated tail args and positional recovery
     weights = rep(1, ecount(karate)),
     spins = 10,
     parupdate = TRUE,
-    start.temp = 0.8,
-    stop.temp = 0.05,
-    cool.fact = 0.95,
-    update.rule = "random",
+    start_temp = 0.8,
+    stop_temp = 0.05,
+    cool_fact = 0.95,
+    update_rule = "random",
     gamma = 1.2,
     implementation = "orig"
   )
@@ -906,7 +906,7 @@ test_that("cluster_spinglass() covers migrated tail args and positional recovery
     karate,
     spins = 5,
     implementation = "neg",
-    gamma.minus = 0.5
+    gamma_minus = 0.5
   )
   expect_s3_class(res_neg, "communities")
   expect_length(membership(res_neg), vcount(karate))
@@ -916,7 +916,7 @@ test_that("cluster_spinglass() covers migrated tail args and positional recovery
     karate,
     vertex = 1,
     spins = 10,
-    update.rule = "config",
+    update_rule = "config",
     gamma = 1
   )
   expect_true(1 %in% res_vertex$community)
@@ -1025,4 +1025,39 @@ test_that("cluster_leiden(n_iterations = ) is deprecated but still works", {
     membership(res),
     membership(cluster_leiden(g, "modularity", n_iter = 3))
   )
+})
+
+test_that("snake_case renames in the community functions recover the legacy dotted names", {
+  g <- make_graph("Zachary")
+  cases <- list(
+    list(cluster_spinglass, list(g), "start.temp", "start_temp", 2),
+    list(cluster_spinglass, list(g), "stop.temp", "stop_temp", 0.05),
+    list(cluster_spinglass, list(g), "cool.fact", "cool_fact", 0.9),
+    list(cluster_spinglass, list(g), "update.rule", "update_rule", "simple"),
+    list(
+      cluster_spinglass,
+      list(g, implementation = "neg"),
+      "gamma.minus",
+      "gamma_minus",
+      0.5
+    ),
+    list(
+      cluster_fluid_communities,
+      list(g),
+      "no.of.communities",
+      "n_communities",
+      2
+    ),
+    list(
+      cluster_edge_betweenness,
+      list(g),
+      "edge.betweenness",
+      "edge_betweenness",
+      FALSE
+    ),
+    list(cluster_infomap, list(g), "nb.trials", "n_trials", 2)
+  )
+  for (case in cases) {
+    expect_legacy_arg(case[[1]], case[[2]], case[[3]], case[[4]], case[[5]])
+  }
 })
