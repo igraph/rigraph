@@ -187,8 +187,9 @@ to `--review-remote`, `--canonical` by default.
 `main-land-review` is the frozen `main`, one commit that removes every workflow,
 and one commit for each landing commit that changes anything the review shows,
 carrying that change alone under the upstream commit that asked for it.
-It hides the vendored strand and what is generated for the compiler and the help pages
+It hides the vendored strand and what is generated for the compiler
 (`series_review_hidden` in [`scripts/series-config.sh`](/scripts/series-config.sh)).
+It shows `man/`, because a reviewer needs the rendered documentation changes.
 It keeps `R/aaa-*.R`, the one place an `_impl()` function the engine adds or removes appears in R terms,
 because Stimulus reads the vendored `functions.yaml` as well as `tools/stimulus/`.
 Its checks could only fail, because the R side compiles against no engine there,

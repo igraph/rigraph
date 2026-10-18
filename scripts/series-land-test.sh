@@ -42,8 +42,8 @@
 #      landing: from the rc twins of its vendor commits above the series' base,
 #      onto `main`, leaving out the tooling syncs and ports `main` has, and each
 #      commit naming its series commit. It shows what `series_review_hidden`
-#      leaves: the interface's R half and the hand-written build files, but not
-#      its C half, the registration, the source and dependency lists or `man/`.
+#      leaves: the interface's R half, `man/` and the hand-written build files,
+#      but not its C half, the registration or the source and dependency lists.
 #      It writes a local branch, pushes only with --push and to --review-remote,
 #      and refuses a series that lacks a change of `main`'s and a commit among
 #      its vendor commits that is not `main`'s.
@@ -601,9 +601,11 @@ is "and so is the R code the flavor renames" "$(git show "$REV:R/package.R")" 'p
 is "the generated interface's R half is shown" "$(git show "$REV:R/aaa-auto.R")" 'b2b2_impl <- function() NULL'
 is "and so are the build files written by hand" \
   "$(git show "$REV:src/Makevars.in" "$REV:src/vendor/config.h")" "$(printf 'PKG_CPPFLAGS = -DA1A1\n#define HAVE_A1A1 1')"
-is "but not its C half, the registration, the source and dependency lists or man/" \
+is "but not its C half, the registration or the source and dependency lists" \
   "$(git ls-tree -r --name-only "$REV" -- src/rinterface.c src/cpp11.cpp R/cpp11.R src/sources-glue-c.mk \
-    src/sources-glue-cpp.mk src/glue.dd man)" ""
+    src/sources-glue-cpp.mk src/glue.dd)" ""
+is "man/ is shown, the rendered documentation being what a reviewer needs" \
+  "$(git show "$REV:man/a1a1.Rd")" "the help page roxygen writes for a1a1"
 is "nothing above green is" "$(git show "$REV:R/foo.R")" 'foo <- function() 3'
 is "what main has is main's" "$(git show "$REV:R/bar.R")" 'bar <- function() 1'
 is "each commit is titled by its upstream commit" \
@@ -636,7 +638,7 @@ is "everything else is the series' green without its flavor, but for what is gen
   "$(git diff --name-only "$REV" origin/v3.0-y-rc-dev~1 -- . ':(exclude)src/vendor/cigraph' \
     ':(exclude)src/vendor/igraph_version.h' ':(exclude)DESCRIPTION' ':(exclude)NEWS.md' ':(exclude).github/workflows' |
     tr '\n' ' ')" \
-  "R/cpp11.R man/a1a1.Rd src/cpp11.cpp src/glue.dd src/rinterface.c src/sources-glue-c.mk src/sources-glue-cpp.mk "
+  "R/cpp11.R src/cpp11.cpp src/glue.dd src/rinterface.c src/sources-glue-c.mk src/sources-glue-cpp.mk "
 
 # Where the configuration does not name what a review hides, the Makevars are
 # hidden with the strand.
