@@ -118,13 +118,18 @@
 # differs from `main` by construction, in `NEWS.md`, the READMEs and the
 # version, and a change of `main`'s the series has not ported stops it with
 # nothing written. Each commit names the series commit it halves,
-# `Series-commit:`, where a landing's names its `Landing-commit:`.
+# `Series-commit:`, where a landing's names its `Landing-commit:`. Where `main`
+# has moved on since the series' last port, --base names the older `main`
+# commit the series has ported, an ancestor of `main`: the review stands on it,
+# leaves out only the ports of its commits, and is held to the series' green
+# all the same, so a base the series does not carry is refused like a `main` it
+# does not.
 #
 # Usage: series-land.sh <S> [--remote <name>] [--canonical <name>] [--push]
 #                       [--base <ref>] [--placed <sha>]... [--no-check-glue] [--attended]
 #        series-land.sh <S> --status [--remote <name>] [--canonical <name>] [--push]
-#        series-land.sh <S> --review [--landing <ref> | --series] [--suffix <s>] [--remote <name>]
-#                       [--canonical <name>] [--review-remote <name>] [--push]
+#        series-land.sh <S> --review [--landing <ref> | --series [--base <ref>]] [--suffix <s>]
+#                       [--remote <name>] [--canonical <name>] [--review-remote <name>] [--push]
 #        series-land.sh <S> --abort
 #   <S> is the series whose rc strand lands, `v2.0-cyanoptera-fwd` for
 #   `v2.0-cyanoptera-fwd-rc-dev`; the refs are named for its line,
@@ -137,6 +142,7 @@
 #   `<S>-green` on --remote. --push writes it to --review-remote, by default
 #   --canonical.
 #   --base defaults to `main`; a ref the clone lacks is fetched from --canonical.
+#   A build takes it at or above `main`, a series review at or below it.
 #   --source names the ref the landing is built up to, on --remote, in place of
 #   `<S>-rc-dev`: it is taken as it stands, with no realignment, for a series
 #   that carries no flavor and so has no rc strand.
@@ -323,6 +329,17 @@ fi
 if [ -n "$review" ]; then
   rb="$L-land-review$suffix"
   base=$main
+  # A series may be reviewed on the older `main` it has ported; the check at the
+  # end holds the review to the series' green whichever `main` it stands on.
+  if [ -n "$series" ] && [ -n "$base_arg" ]; then
+    base=$(git rev-parse -q --verify "$base_arg^{commit}" ||
+      { git fetch -q "$canonical" "$base_arg" && git rev-parse FETCH_HEAD; })
+    git merge-base --is-ancestor "$base" "$main" || {
+      echo "Error: --base $base_arg is not on main $(git rev-parse --short "$main")," \
+        "so a series review cannot stand on it" >&2
+      exit 1
+    }
+  fi
   review_remote=${review_remote:-$canonical}
   git remote get-url "$review_remote" >/dev/null 2>&1 ||
     { echo "Error: no remote \"$review_remote\" to push the review to" >&2; exit 1; }
@@ -379,12 +396,12 @@ if [ -n "$review" ]; then
           ;;
       esac
       x=$(git log -1 --format=%B "$c" | sed -n 's/^(cherry picked from commit \([0-9a-f]\{40\}\))$/\1/p' | tail -n 1)
-      if [ -n "$x" ] && git merge-base --is-ancestor "$x" "$main" 2>/dev/null; then
+      if [ -n "$x" ] && git merge-base --is-ancestor "$x" "$base" 2>/dev/null; then
         mains_own[$c]=1
         continue
       fi
       echo "Error: $(git rev-parse --short "$c") $subj stands among the vendor commits of $S-green" \
-        "and is not main's; a fix belongs in the vendor commit it fixes" >&2
+        "and is not in main $(git rev-parse --short "$base"); a fix belongs in the vendor commit it fixes" >&2
       exit 1
     done < <(git log --reverse --first-parent --format='%H%x09%s' "$sbase..$green")
     twin_of() { # <series commit> -> its twin on the rc strand
@@ -468,6 +485,8 @@ because it is read from \`main\`, not from this branch.")
     if [ -s "$work/diff" ] && ! git apply --cached --binary --whitespace=nowarn "$work/diff"; then
       echo "Error: $(git log -1 --format='%h %s' "$named") does not apply onto main" \
         "$(git rev-parse --short "$base"), which changed what it changes" >&2
+      [ -z "$series" ] || [ -n "$base_arg" ] ||
+        echo "  Name the main commit $S-green has ported with --base, where main has moved on since." >&2
       exit 1
     fi
     if [ -n "$desc" ]; then
@@ -519,7 +538,12 @@ because it is read from \`main\`, not from this branch.")
       echo "Error: main $(git rev-parse --short "$base") and $S-green $(git rev-parse --short "$green")" \
         "differ outside what the review hides, NEWS.md, the READMEs and the version:" >&2
       printf '  %s\n' "${off[@]}" >&2
-      echo "  Port what main has, and review once $S-green carries it. Nothing was written." >&2
+      if [ -n "$base_arg" ]; then
+        echo "  --base $base_arg is not the main $S-green has ported. Nothing was written." >&2
+      else
+        echo "  Port what main has, and review once $S-green carries it," \
+          "or name the main commit it has ported with --base. Nothing was written." >&2
+      fi
       exit 1
     fi
   fi
@@ -527,6 +551,9 @@ because it is read from \`main\`, not from this branch.")
   echo "=== $rb"
   echo "  $picked of $(git rev-list --count "$from..$tip") $kind commits change the R side;" \
     "on main $(git rev-parse --short "$base") -> $head"
+  [ "$base" = "$main" ] ||
+    echo "  the base is the main $S-green has ported; main $(git rev-parse --short "$main")" \
+      "has $(git rev-list --count --first-parent "$base..$main") commit(s) above it"
   if [ -n "$series" ]; then
     echo "  up to $S-green $(git rev-parse --short "$green"), without its flavor"
     [ ${#left[@]} -eq 0 ] || printf "  left out, main's own: %s\n" "${left[@]}"
