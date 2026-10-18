@@ -135,6 +135,7 @@ argument.
 
 [`community_leiden()`](https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_community_leiden),
 [`strength()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_strength),
+[`is_directed()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed),
 [`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
 [`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
 [`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
