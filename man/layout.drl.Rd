@@ -16,11 +16,8 @@ layout.drl(
 \arguments{
 \item{graph}{The input graph, in can be directed or undirected.}
 
-\item{use.seed}{Logical, whether to use the coordinates given in the
-\code{seed} argument as a starting point.}
-
 \item{seed}{A matrix with two columns, the starting coordinates for the
-vertices is \code{use.seed} is \code{TRUE}. It is ignored otherwise. The default
+vertices is \code{use_seed} is \code{TRUE}. It is ignored otherwise. The default
 \code{NULL} draws uniformly random starting coordinates.}
 
 \item{options}{Options for the layout generator, a named list. See details

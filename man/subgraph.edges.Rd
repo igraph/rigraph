@@ -9,10 +9,10 @@ subgraph.edges(graph, eids, delete.vertices = TRUE)
 \arguments{
 \item{graph}{The original graph.}
 
-\item{eids}{The edge IDs of the edges that will be kept in the result graph.}
+\item{eids}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{edges} instead.}
 
 \item{delete.vertices}{Logical, whether to remove vertices that do
-not have any adjacent edges in \code{eids}.}
+not have any adjacent edges in \code{edges}.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

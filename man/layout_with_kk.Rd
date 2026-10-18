@@ -9,7 +9,7 @@ layout_with_kk(
   ...,
   coords = NULL,
   dim = c(2, 3),
-  maxiter = NULL,
+  max_iter = NULL,
   epsilon = 0,
   kkconst = NULL,
   weights = NULL,
@@ -39,13 +39,13 @@ Default: \code{NULL}.}
 dimensional layouts are places on a plane, three dimensional ones in the 3d
 space.}
 
-\item{maxiter}{The maximum number of iterations to perform. The algorithm
+\item{max_iter}{The maximum number of iterations to perform. The algorithm
 might terminate earlier, see the \code{epsilon} argument. The default \code{NULL}
 uses \code{50 * vcount(graph)}.}
 
 \item{epsilon}{Numeric scalar, the algorithm terminates, if the maximal
 delta is less than this. (See the reference below for what delta means.) If
-you set this to zero, then the function always performs \code{maxiter}
+you set this to zero, then the function always performs \code{max_iter}
 iterations.}
 
 \item{kkconst}{Numeric scalar, the Kamada-Kawai vertex attraction constant.

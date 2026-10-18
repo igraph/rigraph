@@ -26,10 +26,6 @@ same layer.}
 
 \item{vgap}{Real scalar, the distance between layers.}
 
-\item{maxiter}{Integer scalar, the maximum number of iterations in the
-crossing minimization stage. 100 is a reasonable default; if you feel that
-you have too many edge crossings, increase this.}
-
 \item{weights}{Optional edge weight vector. If \code{NULL}, then the
 'weight' edge attribute is used, if there is one. Supply \code{NA} here and
 igraph ignores the edge weights. These are used only if the graph

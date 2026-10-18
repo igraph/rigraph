@@ -5,25 +5,31 @@
 \title{Generate random graphs with a given degree sequence}
 \usage{
 sample_degseq(
-  out.deg,
-  in.deg = NULL,
+  out_deg,
+  in_deg = NULL,
   ...,
   method = c("configuration", "vl", "fast.heur.simple", "configuration.simple",
-    "edge.switching.simple")
+    "edge.switching.simple"),
+  out.deg = deprecated(),
+  in.deg = deprecated()
 )
 }
 \arguments{
-\item{out.deg}{Numeric vector, the sequence of degrees (for undirected
+\item{out_deg}{Numeric vector, the sequence of degrees (for undirected
 graphs) or out-degrees (for directed graphs). For undirected graphs its sum
 should be even. For directed graphs its sum should be the same as the sum of
-\code{in.deg}.}
+\code{in_deg}.}
 
-\item{in.deg}{For directed graph, the in-degree sequence. By default this is
+\item{in_deg}{For directed graph, the in-degree sequence. By default this is
 \code{NULL} and an undirected graph is created.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{method}{Character, the method for generating the graph. See Details.}
+
+\item{out.deg}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{out_deg} instead.}
+
+\item{in.deg}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{in_deg} instead.}
 }
 \value{
 The new graph object.

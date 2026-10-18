@@ -11,13 +11,9 @@ degree.sequence.game(
 )
 }
 \arguments{
-\item{out.deg}{Numeric vector, the sequence of degrees (for undirected
-graphs) or out-degrees (for directed graphs). For undirected graphs its sum
-should be even. For directed graphs its sum should be the same as the sum of
-\code{in.deg}.}
+\item{out.deg}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{out_deg} instead.}
 
-\item{in.deg}{For directed graph, the in-degree sequence. By default this is
-\code{NULL} and an undirected graph is created.}
+\item{in.deg}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{in_deg} instead.}
 
 \item{method}{Character, the method for generating the graph. See Details.}
 }

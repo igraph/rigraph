@@ -11,10 +11,9 @@ set.vertex.attribute(graph, name, index = V(graph), value)
 
 \item{name}{The name of the attribute to set.}
 
-\item{index}{An optional vertex sequence to set the attributes
-of a subset of vertices. The default \code{NULL} selects all vertices.}
+\item{index}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 
-\item{value}{The new value of the attribute for all (or \code{index})
+\item{value}{The new value of the attribute for all (or \code{vertices})
 vertices.
 If \code{NULL}, the input is returned unchanged.}
 }

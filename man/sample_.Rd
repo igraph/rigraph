@@ -37,12 +37,12 @@ See the examples and the various constructor modifiers below.
 \examples{
 pref_matrix <- cbind(c(0.8, 0.1), c(0.1, 0.7))
 blocky <- sample_(sbm(
-  n = 20, pref.matrix = pref_matrix,
-  block.sizes = c(10, 10)
+  n = 20, pref_matrix = pref_matrix,
+  block_sizes = c(10, 10)
 ))
 
 blocky2 <- pref_matrix \%>\%
-  sample_sbm(n = 20, block.sizes = c(10, 10))
+  sample_sbm(n = 20, block_sizes = c(10, 10))
 }
 \seealso{
 Random graph models (games):

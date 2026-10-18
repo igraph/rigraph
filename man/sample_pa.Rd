@@ -10,13 +10,13 @@ sample_pa(
   power = 1,
   m = NULL,
   ...,
-  out.dist = NULL,
-  out.seq = NULL,
-  out.pref = FALSE,
-  zero.appeal = 1,
+  out_dist = NULL,
+  out_seq = NULL,
+  out_pref = FALSE,
+  zero_appeal = 1,
   directed = TRUE,
   algorithm = c("psumtree", "psumtree-multiple", "bag"),
-  start.graph = NULL
+  start_graph = NULL
 )
 
 pa(
@@ -24,13 +24,13 @@ pa(
   power = 1,
   m = NULL,
   ...,
-  out.dist = NULL,
-  out.seq = NULL,
-  out.pref = FALSE,
-  zero.appeal = 1,
+  out_dist = NULL,
+  out_seq = NULL,
+  out_pref = FALSE,
+  zero_appeal = 1,
   directed = TRUE,
   algorithm = c("psumtree", "psumtree-multiple", "bag"),
-  start.graph = NULL
+  start_graph = NULL
 )
 }
 \arguments{
@@ -41,47 +41,47 @@ i.e. linear preferential attachment.}
 
 \item{m}{Numeric constant, the number of edges to add in each time step,
 defaults to 1.
-This argument is only used if both \code{out.dist} and \code{out.seq} are omitted
+This argument is only used if both \code{out_dist} and \code{out_seq} are omitted
 or NULL.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{out.dist}{Numeric vector, the distribution of the number of edges to
-add in each time step. This argument is only used if the \code{out.seq}
+\item{out_dist}{Numeric vector, the distribution of the number of edges to
+add in each time step. This argument is only used if the \code{out_seq}
 argument is omitted or NULL.}
 
-\item{out.seq}{Numeric vector giving the number of edges to add in each time
+\item{out_seq}{Numeric vector giving the number of edges to add in each time
 step. Its first element is ignored as no edges are added in the first time
 step.}
 
-\item{out.pref}{Logical, if true the total degree is used for calculating
+\item{out_pref}{Logical, if true the total degree is used for calculating
 the citation probability, otherwise the in-degree is used.}
 
-\item{zero.appeal}{The \sQuote{attractiveness} of the vertices with no
+\item{zero_appeal}{The \sQuote{attractiveness} of the vertices with no
 adjacent edges. See details below.}
 
 \item{directed}{Whether to create a directed graph.}
 
 \item{algorithm}{The algorithm to use for the graph generation.
 \code{psumtree} uses a partial prefix-sum tree to generate the graph, this
-algorithm can handle any \code{power} and \code{zero.appeal} values and
+algorithm can handle any \code{power} and \code{zero_appeal} values and
 never generates multiple edges.  \code{psumtree-multiple} also uses a
 partial prefix-sum tree, but the generation of multiple edges is allowed.
 Before the 0.6 version igraph used this algorithm if \code{power} was not
-one, or \code{zero.appeal} was not one.  \code{bag} is the algorithm that
+one, or \code{zero_appeal} was not one.  \code{bag} is the algorithm that
 was previously (before version 0.6) used if \code{power} was one and
-\code{zero.appeal} was one as well. It works by putting the IDs of the
+\code{zero_appeal} was one as well. It works by putting the IDs of the
 vertices into a bag (multiset, really), exactly as many times as their
 (in-)degree, plus once more. Then the required number of cited vertices are
 drawn from the bag, with replacement. This method might generate multiple
-edges. It only works if \code{power} and \code{zero.appeal} are equal one.}
+edges. It only works if \code{power} and \code{zero_appeal} are equal one.}
 
-\item{start.graph}{\code{NULL} or an igraph graph. If a graph, then the
+\item{start_graph}{\code{NULL} or an igraph graph. If a graph, then the
 supplied graph is used as a starting graph for the preferential attachment
 algorithm. The graph should have at least one vertex. If a graph is supplied
-here and the \code{out.seq} argument is not \code{NULL}, then it should
+here and the \code{out_seq} argument is not \code{NULL}, then it should
 contain the out degrees of the new vertices only, not the ones in the
-\code{start.graph}.}
+\code{start_graph}.}
 }
 \value{
 A graph object.
@@ -101,21 +101,21 @@ old vertices. The probability that an old vertex is chosen is given by
 is the in-degree of vertex \eqn{i} in the current time step (more precisely
 the number of adjacent edges of \eqn{i} which were not initiated by \eqn{i}
 itself) and \eqn{\alpha}{alpha} and \eqn{a} are parameters given by the
-\code{power} and \code{zero.appeal} arguments.
+\code{power} and \code{zero_appeal} arguments.
 
 The number of edges initiated in a time step is given by the \code{m},
-\code{out.dist} and \code{out.seq} arguments. If \code{out.seq} is given and
+\code{out_dist} and \code{out_seq} arguments. If \code{out_seq} is given and
 not NULL then it gives the number of edges to add in a vector, the first
 element is ignored, the second is the number of edges to add in the second
-time step and so on. If \code{out.seq} is not given or null and
-\code{out.dist} is given and not NULL then it is used as a discrete
+time step and so on. If \code{out_seq} is not given or null and
+\code{out_dist} is given and not NULL then it is used as a discrete
 distribution to generate the number of edges in each time step. Its first
 element is the probability that no edges will be added, the second is the
-probability that one edge is added, etc. (\code{out.dist} does not need to
-sum up to one, it normalized automatically.) \code{out.dist} should contain
+probability that one edge is added, etc. (\code{out_dist} does not need to
+sum up to one, it normalized automatically.) \code{out_dist} should contain
 non-negative numbers and at east one element should be positive.
 
-If both \code{out.seq} and \code{out.dist} are omitted or NULL then \code{m}
+If both \code{out_seq} and \code{out_dist} are omitted or NULL then \code{m}
 will be used, it should be a positive integer constant and \code{m} edges
 will be added in each time step.
 
@@ -123,7 +123,7 @@ will be added in each time step.
 \code{directed} to \code{FALSE} to generate an undirected graph. Note that
 even if an undirected graph is generated \eqn{k_i}{k[i]} denotes the number
 of adjacent edges not initiated by the vertex itself and not the total
-(in- + out-) degree of the vertex, unless the \code{out.pref} argument is set to
+(in- + out-) degree of the vertex, unless the \code{out_pref} argument is set to
 \code{TRUE}.
 }
 \section{Related documentation in the C library}{

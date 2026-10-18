@@ -11,9 +11,9 @@ sample_traits_callaway(
   n,
   types,
   ...,
-  edge.per.step = 1,
-  type.dist = NULL,
-  pref.matrix = NULL,
+  edge_per_step = 1,
+  type_dist = NULL,
+  pref_matrix = NULL,
   directed = FALSE,
   nodes = deprecated()
 )
@@ -22,9 +22,9 @@ traits_callaway(
   n,
   types,
   ...,
-  edge.per.step = 1,
-  type.dist = NULL,
-  pref.matrix = NULL,
+  edge_per_step = 1,
+  type_dist = NULL,
+  pref_matrix = NULL,
   directed = FALSE,
   nodes = deprecated()
 )
@@ -34,8 +34,8 @@ sample_traits(
   types,
   k = 1,
   ...,
-  type.dist = NULL,
-  pref.matrix = NULL,
+  type_dist = NULL,
+  pref_matrix = NULL,
   directed = FALSE,
   nodes = deprecated()
 )
@@ -45,8 +45,8 @@ traits(
   types,
   k = 1,
   ...,
-  type.dist = NULL,
-  pref.matrix = NULL,
+  type_dist = NULL,
+  pref_matrix = NULL,
   directed = FALSE,
   nodes = deprecated()
 )
@@ -58,12 +58,12 @@ traits(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{edge.per.step}{The number of edges to add to the graph per time step.}
+\item{edge_per_step}{The number of edges to add to the graph per time step.}
 
-\item{type.dist}{The distribution of the vertex types. This is assumed to be
+\item{type_dist}{The distribution of the vertex types. This is assumed to be
 stationary in time. The default \code{NULL} gives a uniform distribution.}
 
-\item{pref.matrix}{A matrix giving the preferences of the given vertex
+\item{pref_matrix}{A matrix giving the preferences of the given vertex
 types. These should be probabilities, i.e. numbers between zero and one.
 The default \code{NULL} sets all preferences to one.}
 
@@ -83,17 +83,17 @@ types.
 \details{
 For \code{sample_traits_callaway()} the simulation goes like this: in each
 discrete time step a new vertex is added to the graph. The type of this
-vertex is generated based on \code{type.dist}. Then two vertices are
+vertex is generated based on \code{type_dist}. Then two vertices are
 selected uniformly randomly from the graph. The probability that they will
 be connected depends on the types of these vertices and is taken from
-\code{pref.matrix}. Then another two vertices are selected and this is
+\code{pref_matrix}. Then another two vertices are selected and this is
 repeated \code{edges.per.step} times in each time step.
 
 For \code{sample_traits()} the simulation goes like this: a single vertex is
 added at each time step. This new vertex tries to connect to \code{k}
 vertices in the graph. The probability that such a connection is realized
 depends on the types of the vertices involved and is taken from
-\code{pref.matrix}.
+\code{pref_matrix}.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_callaway_traits_game}{\code{callaway_traits_game()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_establishment_game}{\code{establishment_game()}}
@@ -102,8 +102,8 @@ depends on the types of the vertices involved and is taken from
 \examples{
 
 # two types of vertices, they like only themselves
-g1 <- sample_traits_callaway(1000, 2, pref.matrix = matrix(c(1, 0, 0, 1), ncol = 2))
-g2 <- sample_traits(1000, 2, k = 2, pref.matrix = matrix(c(1, 0, 0, 1), ncol = 2))
+g1 <- sample_traits_callaway(1000, 2, pref_matrix = matrix(c(1, 0, 0, 1), ncol = 2))
+g2 <- sample_traits(1000, 2, k = 2, pref_matrix = matrix(c(1, 0, 0, 1), ncol = 2))
 }
 \seealso{
 Random graph models (games):

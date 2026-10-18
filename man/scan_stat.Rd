@@ -62,7 +62,7 @@ num_v <- sum(block_sizes)
 
 tsg <- replicate(num_t - 1, P0, simplify = FALSE) \%>\%
   append(list(PA)) \%>\%
-  lapply(sample_sbm, n = num_v, block.sizes = block_sizes, directed = TRUE)
+  lapply(sample_sbm, n = num_v, block_sizes = block_sizes, directed = TRUE)
 
 scan_stat(graphs = tsg, k = 1, tau = 4, ell = 2)
 scan_stat(graphs = tsg, locality = "them", k = 1, tau = 4, ell = 2)
