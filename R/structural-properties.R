@@ -1026,7 +1026,7 @@ mean_distance <- function(
   }
   # END GENERATED ARG_HANDLE
 
-  average_path_length_dijkstra_impl(
+  average_path_length_impl(
     graph = graph,
     weights = weights,
     directed = directed,
@@ -2703,8 +2703,11 @@ edge_density <- function(
   }
   # END GENERATED ARG_HANDLE
 
+  # Upstream can weigh the density by edge weights (krlmlr/igraph@bfe30d2),
+  # which density_impl() takes from the weight attribute: NA ignores them.
   density_impl(
     graph = graph,
+    weights = NA,
     loops = loops
   )
 }

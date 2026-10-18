@@ -37,7 +37,18 @@ igraph_sparse_adjacency:
 
 igraph_sparse_weighted_adjacency:
   # Turning INOUT SPARSEMAT adjmatrix to IN SPARSEMAT adjmatrix
-  PARAMS: OUT GRAPH graph, IN SPARSEMAT adjmatrix, ADJACENCY_MODE mode=DIRECTED, OUT EDGEWEIGHTS weights, LOOPS loops=ONCE
+  PARAMS: OUT GRAPH graph, IN SPARSEMAT adjmatrix, ADJACENCY_MODE mode=DIRECTED, OUT EDGE_WEIGHTS weights, LOOPS loops=ONCE
+
+igraph_delete_vertices_map:
+    # Upstream renamed igraph_delete_vertices_idx() and maps a deleted vertex
+    # to -1 rather than 0: the R name stays, and idx stays 1-based with 0 for
+    # a deleted vertex.
+    NAME-R: delete_vertices_idx
+    PARAMS: |-
+        INOUT GRAPH graph, VERTEX_SELECTOR vertices,
+        OPTIONAL OUT INDEX_VECTOR idx,
+        OPTIONAL OUT VECTOR_INT invidx
+    DEPS: vertices ON graph
 
 igraph_circulant:
     R:
@@ -45,7 +56,9 @@ igraph_circulant:
         name: Circulant graph
       GATTR-PARAM: shifts
 
-igraph_lcf_vector:
+igraph_lcf:
+    # Upstream renamed igraph_lcf_vector() to igraph_lcf(); the R name stays.
+    NAME-R: lcf_vector
     R:
       GATTR:
         name: LCF graph
@@ -83,6 +96,13 @@ igraph_turan:
 # Constructors, games
 #######################################
 
+igraph_erdos_renyi_game_gnp:
+    # Upstream replaced loops with allowed_edge_types (krlmlr/igraph@9373961):
+    # the R argument stays loops, a logical.
+    PARAMS: |-
+        OUT GRAPH graph, INTEGER n, REAL p, BOOLEAN directed=False,
+        EDGE_TYPE_SW_LOOPS loops=False, BOOLEAN edge_labeled=False
+
 igraph_growing_random_game:
     PARAMS: |-
         OUT GRAPH graph, INTEGER n, INTEGER m=1, *,
@@ -92,11 +112,26 @@ igraph_growing_random_game:
         name: Growing random graph
       GATTR-PARAM: m, citation
 
+igraph_erdos_renyi_game_gnm:
+    # Upstream replaced loops with allowed_edge_types (krlmlr/igraph@6bc87ad):
+    # the R argument stays loops, a logical.
+    PARAMS: |-
+        OUT GRAPH graph, INTEGER n, INTEGER m, BOOLEAN directed=False,
+        EDGE_TYPE_SW_LOOPS loops=False, BOOLEAN edge_labeled=False
+
 igraph_forest_fire_game:
     R:
       GATTR:
         name: Forest fire model
       GATTR-PARAM: fw_prob, bw_factor, ambs
+
+igraph_watts_strogatz_game:
+    # Upstream replaced loops and multiple with allowed_edge_types
+    # (krlmlr/igraph@6319e3d): the R arguments stay, both logicals.
+    PARAMS: |-
+        OUT GRAPH graph, INTEGER dim, INTEGER size, INTEGER nei, REAL p,
+        EDGE_TYPE_SW_LOOPS loops=False, EDGE_TYPE_SW_MULTIPLE multiple=False
+    DEPS: multiple ON loops
 
 igraph_simple_interconnected_islands_game:
     R:
@@ -105,12 +140,27 @@ igraph_simple_interconnected_islands_game:
       GATTR-PARAM: islands_n, islands_size, islands_pin, n_inter
 
 igraph_static_fitness_game:
+    # Upstream replaced loops and multiple with allowed_edge_types
+    # (krlmlr/igraph@0a4030a): the R arguments stay, both logicals.
+    PARAMS: |-
+        OUT GRAPH graph, INTEGER no_of_edges, VECTOR fitness_out,
+        OPTIONAL VECTOR fitness_in, EDGE_TYPE_SW_LOOPS loops=False,
+        EDGE_TYPE_SW_MULTIPLE multiple=False
+    DEPS: multiple ON loops
     R:
       GATTR:
         name: Static fitness model
       GATTR-PARAM: loops, multiple
 
 igraph_static_power_law_game:
+    # Upstream replaced loops and multiple with allowed_edge_types
+    # (krlmlr/igraph@0a4030a): the R arguments stay, both logicals.
+    PARAMS: |-
+        OUT GRAPH graph, INTEGER no_of_nodes, INTEGER no_of_edges,
+        REAL exponent_out, REAL exponent_in=-1,
+        EDGE_TYPE_SW_LOOPS loops=False, EDGE_TYPE_SW_MULTIPLE multiple=False,
+        BOOLEAN finite_size_correction=True
+    DEPS: multiple ON loops
     R:
       GATTR:
         name: Static power law model
@@ -123,6 +173,14 @@ igraph_k_regular_game:
       GATTR-PARAM: k
 
 igraph_sbm_game:
+    # Upstream drops n and replaces loops with allowed_edge_types
+    # (krlmlr/igraph@17177c7): the R arguments stay, n checked against the
+    # block sizes and loops a logical.
+    PARAMS: |-
+        OUT GRAPH graph, BLOCK_SIZES_SUM n, MATRIX pref_matrix,
+        VECTOR_INT block_sizes, BOOLEAN directed=False,
+        EDGE_TYPE_SW_LOOPS loops=False
+    DEPS: n ON block_sizes
     R:
       GATTR:
         name: Stochastic block model
@@ -147,6 +205,26 @@ igraph_correlated_game:
       GATTR:
         name: Correlated random graph
       GATTR-PARAM: corr, p
+
+# Upstream removes igraph_sample_sphere_surface(), igraph_sample_sphere_volume()
+# and igraph_sample_dirichlet() (krlmlr/igraph@66ba309) in favour of these,
+# which take the RNG to sample from: the R names stay, and the RNG is the
+# default one, R's, as for the removed functions.
+igraph_rng_sample_sphere_surface:
+    NAME-R: sample_sphere_surface
+    PARAMS: |-
+        RNG_DEFAULT rng, INTEGER dim, INTEGER n=1, REAL radius=1,
+        BOOLEAN positive=True, OUT MATRIX res
+
+igraph_rng_sample_sphere_volume:
+    NAME-R: sample_sphere_volume
+    PARAMS: |-
+        RNG_DEFAULT rng, INTEGER dim, INTEGER n=1, REAL radius=1,
+        BOOLEAN positive=True, OUT MATRIX res
+
+igraph_rng_sample_dirichlet:
+    NAME-R: sample_dirichlet
+    PARAMS: RNG_DEFAULT rng, INTEGER n, VECTOR alpha, OUT MATRIX res
 
 #######################################
 # Basic query functions
@@ -179,15 +257,15 @@ igraph_get_widest_path:
     PARAMS: |-
         GRAPH graph,
         OPTIONAL OUT VERTEX_INDICES vertices, OPTIONAL OUT EDGE_INDICES edges,
-        VERTEX from, VERTEX to, EDGEWEIGHTS weights=NULL, NEIMODE mode=OUT
+        VERTEX from, VERTEX to, EDGE_WEIGHTS weights=NULL, NEIMODE mode=OUT
     DEPS: |-
         from ON graph, to ON graph, weights ON graph, vertices ON graph, edges ON graph
 
 igraph_get_widest_paths:
     PARAMS: |-
         GRAPH graph,
-        OPTIONAL OUT VERTEXSET_LIST vertices, OPTIONAL OUT EDGESET_LIST edges,
-        VERTEX from, VERTEX_SELECTOR to=ALL, EDGEWEIGHTS weights=NULL,
+        OPTIONAL OUT VERTEXSET_LIST vertices, OPTIONAL OUT EDGE_INDICES_LIST edges,
+        VERTEX from, VERTEX_SELECTOR to=ALL, EDGE_WEIGHTS weights=NULL,
         NEIMODE mode=OUT, OPTIONAL OUT VECTOR_INT parents,
         OPTIONAL OUT VECTOR_INT inbound_edges
     DEPS: |-
@@ -197,13 +275,13 @@ igraph_get_widest_paths:
 igraph_widest_path_widths_dijkstra:
     PARAMS: |-
         GRAPH graph, OUT MATRIX res, VERTEX_SELECTOR from=ALL,
-        VERTEX_SELECTOR to=ALL, EDGEWEIGHTS weights=NULL, NEIMODE mode=OUT
+        VERTEX_SELECTOR to=ALL, EDGE_WEIGHTS weights=NULL, NEIMODE mode=OUT
     DEPS: from ON graph, to ON graph, weights ON graph
 
 igraph_widest_path_widths_floyd_warshall:
     PARAMS: |-
         GRAPH graph, OUT MATRIX res, VERTEX_SELECTOR from=ALL,
-        VERTEX_SELECTOR to=ALL, EDGEWEIGHTS weights=NULL, NEIMODE mode=OUT
+        VERTEX_SELECTOR to=ALL, EDGE_WEIGHTS weights=NULL, NEIMODE mode=OUT
     DEPS: from ON graph, to ON graph, weights ON graph
 
 igraph_spanner:
@@ -212,6 +290,12 @@ igraph_spanner:
 igraph_betweenness_subset:
     DEPS: |-
         vids ON graph, weights ON graph, res ON graph vids, sources ON graph, targets ON graph
+
+igraph_personalized_pagerank:
+    # Upstream renamed personalized to reset (krlmlr/igraph@dffe1a5): the R
+    # name stays.
+    PARAM_NAMES:
+        reset: personalized
 
 igraph_personalized_pagerank_vs:
     DEPS: vids ON graph, weights ON graph, vector ON graph vids,
@@ -222,7 +306,7 @@ igraph_rewire:
         DEFAULTS:
             mode: 0L
 
-igraph_average_path_length_dijkstra:
+igraph_average_path_length:
     PARAM_NAMES:
         unconn_pairs: unconnected
         unconn: unconnected
@@ -231,6 +315,11 @@ igraph_maxdegree:
     PARAM_ORDER: graph, *, vids, ...
     PARAM_NAMES:
         vids: v
+
+igraph_girth:
+    # Upstream renamed circle to cycle (krlmlr/igraph@a73d82c): the R name stays.
+    PARAM_NAMES:
+        cycle: circle
 
 igraph_is_loop:
     PARAM_NAMES:
@@ -259,12 +348,14 @@ igraph_eigenvector_centrality:
     # dependencies: the graph and the vertex set, but we only have the graph
     # in the argument list.
     DEPS: weights ON graph, vector ON graph V(graph)
-
-igraph_hub_score:
-    DEPS: weights ON graph, vector ON graph V(graph)
-
-igraph_authority_score:
-    DEPS: weights ON graph, vector ON graph V(graph)
+    # Upstream replaced directed with mode (krlmlr/igraph@1d923ac) and removed
+    # scale (krlmlr/igraph@ab42b6f): the R arguments stay, directed a logical
+    # and scale deprecated and without effect.
+    PARAMS: |-
+        GRAPH graph, OUT ALL_VERTEX_QTY vector, OUT REAL value,
+        NEIMODE_DIRECTED directed=False, DEPRECATED scale=NULL,
+        OPTIONAL EDGE_WEIGHTS weights,
+        INOUT ARPACK_OPTIONS options=ARPACK_DEFAULTS
 
 igraph_hub_and_authority_scores:
     # This is a temporary hack; we need to find a way to handle default values
@@ -272,27 +363,47 @@ igraph_hub_and_authority_scores:
     # dependencies: the graph and the vertex set, but we only have the graph
     # in the argument list.
     DEPS: weights ON graph, hub ON graph V(graph), authority ON graph V(graph)
+    # Upstream removed scale and always scales the largest scores to one
+    # (krlmlr/igraph@fec442e): the R argument stays, deprecated and without
+    # effect.
     PARAMS: GRAPH graph, OUT VERTEX_QTY hub, OUT VERTEX_QTY authority,
-        OUT REAL value, BOOLEAN scale=True, OPTIONAL EDGEWEIGHTS weights,
-        INOUT ARPACKOPT options=ARPACK_DEFAULTS
+        OUT REAL value, DEPRECATED scale=NULL, OPTIONAL EDGE_WEIGHTS weights,
+        INOUT ARPACK_OPTIONS options=ARPACK_DEFAULTS
 
 igraph_is_mutual:
     PARAM_NAMES:
         es: eids
 
-igraph_eccentricity_dijkstra:
+igraph_centralization_eigenvector_centrality:
+    # Upstream replaced directed with mode (krlmlr/igraph@1d923ac) and removed
+    # scale (krlmlr/igraph@ab42b6f): the R arguments stay, directed a logical
+    # and scale deprecated and without effect.
+    PARAMS: |-
+        GRAPH graph, OUT VECTOR vector, OUT REAL value,
+        NEIMODE_DIRECTED directed=False, DEPRECATED scale=NULL,
+        INOUT ARPACK_OPTIONS options=ARPACK_DEFAULTS,
+        OUT REAL centralization, OUT REAL theoretical_max,
+        BOOLEAN normalized=True
+
+igraph_centralization_eigenvector_centrality_tmax:
+    # Upstream replaced directed with mode (krlmlr/igraph@1d923ac) and removed
+    # scale (krlmlr/igraph@ab42b6f): the R arguments stay, directed a logical
+    # and scale deprecated and without effect.
+    PARAMS: |-
+        OPTIONAL GRAPH graph, INTEGER nodes=0,
+        NEIMODE_DIRECTED directed=False, DEPRECATED scale=NULL,
+        OUT REAL res
+
+igraph_eccentricity:
     PARAM_ORDER: graph, vids, *, weights, ...
 
-igraph_graph_center_dijkstra:
+igraph_graph_center:
     FIRST_KW_PARAM: weights
 
-igraph_radius_dijkstra:
+igraph_radius:
     FIRST_KW_PARAM: weights
 
 igraph_pseudo_diameter:
-    DEPS: start_vid ON graph
-
-igraph_pseudo_diameter_dijkstra:
     DEPS: start_vid ON graph, weights ON graph
 
 igraph_random_walk:
@@ -360,6 +471,10 @@ igraph_create_bipartite:
 
 igraph_biadjacency:
     DEPS: types ON res$graph V(res$graph)
+    # Upstream renamed incidence to biadjmatrix (krlmlr/igraph@82e0439): the R
+    # name stays.
+    PARAM_NAMES:
+        biadjmatrix: incidence
 
 # Use the name 'type' instead of 'types' (provided by the C core)
 igraph_is_bipartite:
@@ -370,16 +485,15 @@ igraph_bipartite_game_gnp:
     PARAMS: |-
         OUT GRAPH graph, OPTIONAL OUT BIPARTITE_TYPES_UNNAMED types,
         INTEGER n1, INTEGER n2, REAL p, BOOLEAN directed=False,
-        NEIMODE mode=ALL
+        NEIMODE mode=ALL, EDGE_TYPE_SW allowed_edge_types=SIMPLE,
+        BOOLEAN edge_labeled=False
 
 igraph_bipartite_game_gnm:
     PARAMS: |-
         OUT GRAPH graph, OPTIONAL OUT BIPARTITE_TYPES_UNNAMED types,
         INTEGER n1, INTEGER n2, INTEGER m, BOOLEAN directed=False,
-        NEIMODE mode=ALL
-
-igraph_bipartite_game:
-    DEPS: types ON res$graph V(res$graph)
+        NEIMODE mode=ALL, EDGE_TYPE_SW allowed_edge_types=SIMPLE,
+        BOOLEAN edge_labeled=False
 
 igraph_full_bipartite:
     DEPS: types ON res$graph
@@ -449,7 +563,7 @@ igraph_layout_fruchterman_reingold:
         GRAPH graph, OPTIONAL INOUT MATRIX coords,
         BOOLEAN use_seed=FALSE, INTEGER niter=500,
         REAL start_temp=sqrt(vcount(graph)),
-        LAYOUT_GRID grid=AUTO, OPTIONAL EDGEWEIGHTS weights,
+        LAYOUT_GRID grid=AUTO, OPTIONAL EDGE_WEIGHTS weights,
         OPTIONAL VECTOR minx, OPTIONAL VECTOR maxx,
         OPTIONAL VECTOR miny, OPTIONAL VECTOR maxy,
         DEPRECATED coolexp=NULL, DEPRECATED maxdelta=NULL, DEPRECATED area=NULL,
@@ -467,7 +581,7 @@ igraph_layout_fruchterman_reingold_3d:
         GRAPH graph, OPTIONAL INOUT MATRIX coords,
         BOOLEAN use_seed=FALSE, INTEGER niter=500,
         REAL start_temp=sqrt(vcount(graph)),
-        OPTIONAL EDGEWEIGHTS weights,
+        OPTIONAL EDGE_WEIGHTS weights,
         OPTIONAL VECTOR minx, OPTIONAL VECTOR maxx,
         OPTIONAL VECTOR miny, OPTIONAL VECTOR maxy,
         OPTIONAL VECTOR minz, OPTIONAL VECTOR maxz,
@@ -485,6 +599,22 @@ igraph_layout_drl_3d:
 # Cocitation and other similarity measures
 #######################################
 
+igraph_similarity_dice:
+    # Upstream compares two vertex sets, from and to (krlmlr/igraph@d2d767e):
+    # the R argument stays vids, passed as both.
+    PARAMS: |-
+        GRAPH graph, OUT MATRIX res, VERTEX_SELECTOR_FROM_TO vids=ALL,
+        NEIMODE mode=ALL, BOOLEAN loops=False
+    DEPS: vids ON graph
+
+igraph_similarity_jaccard:
+    # Upstream compares two vertex sets, from and to (krlmlr/igraph@d2d767e):
+    # the R argument stays vids, passed as both.
+    PARAMS: |-
+        GRAPH graph, OUT MATRIX res, VERTEX_SELECTOR_FROM_TO vids=ALL,
+        NEIMODE mode=ALL, BOOLEAN loops=False
+    DEPS: vids ON graph
+
 #######################################
 # Community structure
 #######################################
@@ -492,19 +622,26 @@ igraph_layout_drl_3d:
 igraph_community_eb_get_merges:
     DEPS: edges ON graph, weights ON graph
 
+igraph_community_infomap:
+    # Upstream renamed e_weights and v_weights (krlmlr/igraph@00e3d00):
+    # the R names stay.
+    PARAM_NAMES:
+        edge_weights: e_weights
+        vertex_weights: v_weights
+
 igraph_community_leading_eigenvector:
     IGNORE: RR, RC, RInit  # Has callback parameter
 
 igraph_community_leading_eigenvector_callback_closure:
     PARAMS: |-
-        GRAPH graph, OPTIONAL EDGEWEIGHTS weights,
+        GRAPH graph, OPTIONAL EDGE_WEIGHTS weights,
         OPTIONAL OUT MATRIX_INT merges, OPTIONAL INOUT VECTOR_INT membership,
         INTEGER steps=-1,
-        INOUT ARPACKOPT options=ARPACK_DEFAULTS,
+        INOUT ARPACK_OPTIONS options=ARPACK_DEFAULTS,
         OPTIONAL OUT REAL modularity, BOOLEAN start=False,
         OPTIONAL OUT VECTOR eigenvalues,
         OPTIONAL OUT VECTOR_LIST eigenvectors,
-        OPTIONAL OUT VECTOR history,
+        OPTIONAL OUT VECTOR_INT history,
         CLOSURE callback=NULL,
         CLOSURE_EXTRA extra=NULL,
         CLOSURE_ENV env=parent.frame(),
@@ -512,6 +649,20 @@ igraph_community_leading_eigenvector_callback_closure:
     DEPS: weights ON graph, membership ON graph
     R:
       CLASS: igraph.eigenc
+
+igraph_community_leiden:
+    # Upstream renamed vertex_weights to vertex_out_weights and added
+    # vertex_in_weights (krlmlr/igraph@971193e): the R name stays, and the
+    # in-weights are always NULL, which igraph requires for undirected graphs.
+    PARAMS: |-
+        GRAPH graph, OPTIONAL EDGE_WEIGHTS weights,
+        OPTIONAL VERTEX_WEIGHTS vertex_out_weights, NULL vertex_in_weights,
+        REAL resolution, REAL beta=0.01, BOOLEAN start=False, INTEGER n_iterations=2,
+        OPTIONAL INOUT VECTOR_INT membership,
+        OUT INTEGER nb_clusters, OUT REAL quality
+    DEPS: weights ON graph, vertex_out_weights ON graph
+    PARAM_NAMES:
+        vertex_out_weights: vertex_weights
 
 #######################################
 # Graphlets
@@ -585,31 +736,67 @@ igraph_cohesive_blocks:
 # Graph isomorphism
 #######################################
 
+igraph_count_automorphisms:
+    # Upstream renamed this function to igraph_count_automorphisms_bliss() and
+    # took the name for one without the splitting heuristic and the info
+    # (krlmlr/igraph@705a8f0): count_automorphisms_impl() stays the bliss one.
+    IGNORE: RR, RC, RInit
+
+igraph_count_automorphisms_bliss:
+    NAME-R: count_automorphisms
+
 igraph_get_isomorphisms_vf2_callback:
     IGNORE: RR, RC, RInit  # Has callback parameter
 
 igraph_get_isomorphisms_vf2_callback_closure:
     PARAMS: |-
         GRAPH graph1, GRAPH graph2,
-        OPTIONAL VERTEX_COLOR vertex_color1, OPTIONAL VERTEX_COLOR vertex_color2,
-        OPTIONAL EDGE_COLOR edge_color1, OPTIONAL EDGE_COLOR edge_color2,
+        OPTIONAL VERTEX_COLORS vertex_color1, OPTIONAL VERTEX_COLORS vertex_color2,
+        OPTIONAL EDGE_COLORS edge_color1, OPTIONAL EDGE_COLORS edge_color2,
         CLOSURE callback
     DEPS: |-
         vertex_color1 ON graph1, vertex_color2 ON graph2,
         edge_color1 ON graph1, edge_color2 ON graph2
+
+igraph_automorphism_group:
+    # Upstream renamed this function to igraph_automorphism_group_bliss() and
+    # took the name for one without the splitting heuristic and the info
+    # (krlmlr/igraph@4f303e3): automorphism_group_impl() stays the bliss one.
+    IGNORE: RR, RC, RInit
+
+igraph_automorphism_group_bliss:
+    NAME-R: automorphism_group
 
 igraph_get_subisomorphisms_vf2_callback:
     IGNORE: RR, RC, RInit  # Has callback parameter
 
+igraph_subisomorphic_lad:
+    # Upstream removed time_limit (krlmlr/igraph@bd25607): the R argument
+    # stays, deprecated and without effect.
+    PARAMS: |-
+        GRAPH pattern, GRAPH target, OPTIONAL VERTEXSET_LIST domains,
+        OPTIONAL OUT BOOLEAN iso, OUT INDEX_VECTOR map,
+        OPTIONAL OUT VECTOR_INT_LIST maps, BOOLEAN induced,
+        DEPRECATED time_limit
+
 igraph_get_subisomorphisms_vf2_callback_closure:
     PARAMS: |-
         GRAPH graph1, GRAPH graph2,
-        OPTIONAL VERTEX_COLOR vertex_color1, OPTIONAL VERTEX_COLOR vertex_color2,
-        OPTIONAL EDGE_COLOR edge_color1, OPTIONAL EDGE_COLOR edge_color2,
+        OPTIONAL VERTEX_COLORS vertex_color1, OPTIONAL VERTEX_COLORS vertex_color2,
+        OPTIONAL EDGE_COLORS edge_color1, OPTIONAL EDGE_COLORS edge_color2,
         CLOSURE callback
     DEPS: |-
         vertex_color1 ON graph1, vertex_color2 ON graph2,
         edge_color1 ON graph1, edge_color2 ON graph2
+
+igraph_canonical_permutation:
+    # Upstream renamed this function to igraph_canonical_permutation_bliss() and
+    # took the name for one without the splitting heuristic and the info
+    # (krlmlr/igraph@61edef8): canonical_permutation_impl() stays the bliss one.
+    IGNORE: RR, RC, RInit
+
+igraph_canonical_permutation_bliss:
+    NAME-R: canonical_permutation
 
 #######################################
 # Matching
@@ -708,13 +895,6 @@ igraph_random_spanning_tree:
 igraph_is_bipartite_coloring:
     PARAMS: GRAPH graph, BIPARTITE_TYPES types, OUT BOOLEAN res, OPTIONAL OUT NULL mode
     DEPS: types ON graph
-
-#######################################
-# Microscopic update
-#######################################
-
-igraph_moran_process:
-    DEPS: weights ON graph, quantities ON graph V(graph), strategies ON graph
 
 #######################################
 # Other, (yet) undocumented functions

@@ -39,7 +39,7 @@ typedef struct {
 
 /* Handler function for motifs callback - converts C types to R types */
 igraph_error_t R_igraph_motifs_handler(const igraph_t *graph,
-                                       igraph_vector_int_t *vids,
+                                       const igraph_vector_int_t *vids,
                                        igraph_integer_t isoclass,
                                        void *extra) {
 
@@ -153,8 +153,8 @@ igraph_error_t igraph_maximal_cliques_callback_closure(
   R_igraph_callback_data_t data = { .callback = callback };
 
   return igraph_maximal_cliques_callback(
-      graph, R_igraph_clique_handler, &data,
-      min_size, max_size);
+      graph, min_size, max_size,
+      R_igraph_clique_handler, &data);
 }
 
 /* Handler function for cycle callbacks - converts C types to R types */
@@ -605,7 +605,7 @@ igraph_error_t igraph_community_leading_eigenvector_callback_closure(
     igraph_bool_t start,
     igraph_vector_t *eigenvalues,
     igraph_vector_list_t *eigenvectors,
-    igraph_vector_t *history,
+    igraph_vector_int_t *history,
     SEXP callback,
     SEXP extra,
     SEXP env,

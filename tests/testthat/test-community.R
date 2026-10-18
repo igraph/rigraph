@@ -455,6 +455,25 @@ test_that("cluster_leiden works", {
   )
 })
 
+test_that("community_leiden_simple_impl() takes the objective by name", {
+  igraph_local_seed(42)
+
+  karate <- make_graph("Zachary")
+  for (objective in c("modularity", "cpm", "er")) {
+    res <- community_leiden_simple_impl(
+      karate,
+      objective = objective,
+      resolution = 0.06
+    )
+    expect_length(res$membership, vcount(karate))
+  }
+  expect_error(community_leiden_simple_impl(
+    karate,
+    objective = "unknown",
+    resolution = 0.06
+  ))
+})
+
 test_that("modularity_matrix works", {
   karate <- make_graph("zachary")
 

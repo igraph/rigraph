@@ -2,3 +2,4 @@
 rinterface.o: \
   rinterface.c \
   rinterface.h \
+  rrandom.h \

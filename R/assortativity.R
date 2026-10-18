@@ -211,8 +211,11 @@ assortativity <- function(
     values.in <- types2
   }
 
+  # Upstream can weigh assortativity by edge weights (krlmlr/igraph@610a8ab),
+  # which the impl takes from the weight attribute: NA ignores them.
   assortativity_impl(
     graph = graph,
+    weights = NA,
     values = values,
     values_in = values.in,
     directed = directed,
@@ -228,6 +231,7 @@ assortativity_legacy <- function(
 ) {
   assortativity_impl(
     graph = graph,
+    weights = NA,
     values = types1,
     values_in = types2,
     directed = directed
@@ -290,8 +294,11 @@ assortativity_nominal <- function(
     types <- as.integer(as.factor(types))
   }
 
+  # Upstream can weigh assortativity by edge weights (krlmlr/igraph@610a8ab),
+  # which the impl takes from the weight attribute: NA ignores them.
   assortativity_nominal_impl(
     graph = graph,
+    weights = NA,
     types = types,
     directed = directed,
     normalized = normalized

@@ -38,40 +38,6 @@ are_adjacent_impl <- function(
   res
 }
 
-are_connected_impl <- function(
-  graph,
-  v1,
-  v2
-) {
-  # Argument checks
-  ensure_igraph(graph)
-  v1 <- as_igraph_vs(graph, v1)
-  if (length(v1) != 1) {
-    cli::cli_abort(
-      "{.arg v1} must specify exactly one vertex",
-      call = rlang::caller_env()
-    )
-  }
-  v2 <- as_igraph_vs(graph, v2)
-  if (length(v2) != 1) {
-    cli::cli_abort(
-      "{.arg v2} must specify exactly one vertex",
-      call = rlang::caller_env()
-    )
-  }
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_are_connected,
-    graph,
-    v1 - 1,
-    v2 - 1
-  )
-
-  res
-}
-
 # ==== degree-sequences ====
 
 is_bigraphical_impl <- function(
@@ -256,14 +222,13 @@ global_efficiency_impl <- function(
 
 local_efficiency_impl <- function(
   graph,
-  vids = V(graph),
   weights = NULL,
+  vids = V(graph),
   directed = TRUE,
   mode = c("all", "out", "in", "total")
 ) {
   # Argument checks
   ensure_igraph(graph)
-  vids <- as_igraph_vs(graph, vids)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -272,6 +237,7 @@ local_efficiency_impl <- function(
   } else {
     weights <- NULL
   }
+  vids <- as_igraph_vs(graph, vids)
   directed <- as.logical(directed)
   mode <- switch_igraph_arg(
     mode,
@@ -286,8 +252,8 @@ local_efficiency_impl <- function(
   res <- .Call(
     R_igraph_local_efficiency,
     graph,
-    vids - 1,
     weights,
+    vids - 1,
     directed,
     mode
   )
@@ -649,6 +615,9 @@ get_adjacency_impl <- function(
   } else {
     weights <- NULL
   }
+  if (is.logical(loops)) {
+    loops <- if (loops) "twice" else "none"
+  }
   loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -680,6 +649,9 @@ get_adjacency_sparse_impl <- function(
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
+  }
+  if (is.logical(loops)) {
+    loops <- if (loops) "twice" else "none"
   }
   loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
 
@@ -843,6 +815,7 @@ assortativity_degree_impl <- function(
 
 assortativity_impl <- function(
   graph,
+  weights = NULL,
   values,
   values_in = NULL,
   directed = TRUE,
@@ -850,6 +823,14 @@ assortativity_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && !all(is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
   values <- as.numeric(values)
   if (!is.null(values_in)) {
     values_in <- as.numeric(values_in)
@@ -862,6 +843,7 @@ assortativity_impl <- function(
   res <- .Call(
     R_igraph_assortativity,
     graph,
+    weights,
     values,
     values_in,
     directed,
@@ -873,12 +855,21 @@ assortativity_impl <- function(
 
 assortativity_nominal_impl <- function(
   graph,
+  weights = NULL,
   types,
   directed = TRUE,
   normalized = TRUE
 ) {
   # Argument checks
   ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && !all(is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
   types <- as.numeric(types) - 1
   directed <- as.logical(directed)
   normalized <- as.logical(normalized)
@@ -888,6 +879,7 @@ assortativity_nominal_impl <- function(
   res <- .Call(
     R_igraph_assortativity_nominal,
     graph,
+    weights,
     types,
     directed,
     normalized
@@ -1437,16 +1429,19 @@ is_multiple_impl <- function(
 }
 
 is_simple_impl <- function(
-  graph
+  graph,
+  directed = TRUE
 ) {
   # Argument checks
   ensure_igraph(graph)
+  directed <- as.logical(directed)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_is_simple,
-    graph
+    graph,
+    directed
   )
 
   res
@@ -1999,10 +1994,19 @@ get_laplacian_sparse_impl <- function(
 
 density_impl <- function(
   graph,
+  weights = NULL,
   loops = FALSE
 ) {
   # Argument checks
   ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && !all(is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
   loops <- as.logical(loops)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -2010,6 +2014,7 @@ density_impl <- function(
   res <- .Call(
     R_igraph_density,
     graph,
+    weights,
     loops
   )
 

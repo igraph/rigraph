@@ -39,18 +39,28 @@ biadjacency_impl <- function(
 
 get_biadjacency_impl <- function(
   graph,
-  types
+  types,
+  weights = NULL
 ) {
   # Argument checks
   ensure_igraph(graph)
   types <- handle_vertex_type_arg(types, graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && !all(is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_get_biadjacency,
     graph,
-    types
+    types,
+    weights
   )
 
   res
@@ -63,7 +73,9 @@ bipartite_game_gnm_impl <- function(
   n2,
   m,
   directed = FALSE,
-  mode = c("all", "out", "in", "total")
+  mode = c("all", "out", "in", "total"),
+  allowed_edge_types = c("simple", "loops", "multi", "all"),
+  edge_labeled = FALSE
 ) {
   # Argument checks
   n1 <- as.numeric(n1)
@@ -77,6 +89,16 @@ bipartite_game_gnm_impl <- function(
     "all" = 3L,
     "total" = 3L
   )
+  allowed_edge_types <- switch_igraph_arg(
+    allowed_edge_types,
+    "simple" = 0L,
+    "loop" = 1L,
+    "loops" = 1L,
+    "multi" = 6L,
+    "multiple" = 6L,
+    "all" = 7L
+  )
+  edge_labeled <- as.logical(edge_labeled)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -86,7 +108,9 @@ bipartite_game_gnm_impl <- function(
     n2,
     m,
     directed,
-    mode
+    mode,
+    allowed_edge_types,
+    edge_labeled
   )
 
   res
@@ -97,7 +121,9 @@ bipartite_game_gnp_impl <- function(
   n2,
   p,
   directed = FALSE,
-  mode = c("all", "out", "in", "total")
+  mode = c("all", "out", "in", "total"),
+  allowed_edge_types = c("simple", "loops", "multi", "all"),
+  edge_labeled = FALSE
 ) {
   # Argument checks
   n1 <- as.numeric(n1)
@@ -111,6 +137,16 @@ bipartite_game_gnp_impl <- function(
     "all" = 3L,
     "total" = 3L
   )
+  allowed_edge_types <- switch_igraph_arg(
+    allowed_edge_types,
+    "simple" = 0L,
+    "loop" = 1L,
+    "loops" = 1L,
+    "multi" = 6L,
+    "multiple" = 6L,
+    "all" = 7L
+  )
+  edge_labeled <- as.logical(edge_labeled)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -120,51 +156,11 @@ bipartite_game_gnp_impl <- function(
     n2,
     p,
     directed,
-    mode
-  )
-
-  res
-}
-
-bipartite_game_impl <- function(
-  type,
-  n1,
-  n2,
-  p = 0.0,
-  m = 0,
-  directed = FALSE,
-  mode = c("all", "out", "in", "total")
-) {
-  # Argument checks
-  type <- switch_igraph_arg(type, "gnp" = 0L, "gnm" = 1L)
-  n1 <- as.numeric(n1)
-  n2 <- as.numeric(n2)
-  p <- as.numeric(p)
-  m <- as.numeric(m)
-  directed <- as.logical(directed)
-  mode <- switch_igraph_arg(
     mode,
-    "out" = 1L,
-    "in" = 2L,
-    "all" = 3L,
-    "total" = 3L
+    allowed_edge_types,
+    edge_labeled
   )
 
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_bipartite_game,
-    type,
-    n1,
-    n2,
-    p,
-    m,
-    directed,
-    mode
-  )
-  if (igraph_opt("add.vertex.names") && is_named(res$graph)) {
-    names(res$types) <- vertex_attr(res$graph, "name", V(res$graph))
-  }
   res
 }
 

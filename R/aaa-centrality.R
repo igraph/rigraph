@@ -4,50 +4,15 @@
 
 # ==== centrality-measures ====
 
-authority_score_impl <- function(
-  graph,
-  scale = TRUE,
-  weights = NULL,
-  options = arpack_defaults()
-) {
-  # Argument checks
-  ensure_igraph(graph)
-  scale <- as.logical(scale)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && !all(is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  options <- modify_list(arpack_defaults(), options)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_authority_score,
-    graph,
-    scale,
-    weights,
-    options
-  )
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$vector) <- vertex_attr(graph, "name", V(graph))
-  }
-  res
-}
-
 betweenness_impl <- function(
   graph,
+  weights = NULL,
   vids = V(graph),
   directed = TRUE,
-  weights = NULL
+  normalized = FALSE
 ) {
   # Argument checks
   ensure_igraph(graph)
-  vids <- as_igraph_vs(graph, vids)
-  directed <- as.logical(directed)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -56,15 +21,19 @@ betweenness_impl <- function(
   } else {
     weights <- NULL
   }
+  vids <- as_igraph_vs(graph, vids)
+  directed <- as.logical(directed)
+  normalized <- as.logical(normalized)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_betweenness,
     graph,
+    weights,
     vids - 1,
     directed,
-    weights
+    normalized
   )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- vertex_attr(graph, "name", vids)
@@ -162,12 +131,13 @@ convergence_degree_impl <- function(
 
 edge_betweenness_impl <- function(
   graph,
+  weights = NULL,
+  eids = E(graph),
   directed = TRUE,
-  weights = NULL
+  normalized = FALSE
 ) {
   # Argument checks
   ensure_igraph(graph)
-  directed <- as.logical(directed)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -176,14 +146,19 @@ edge_betweenness_impl <- function(
   } else {
     weights <- NULL
   }
+  eids <- as_igraph_es(graph, eids)
+  directed <- as.logical(directed)
+  normalized <- as.logical(normalized)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_edge_betweenness,
     graph,
+    weights,
+    eids - 1,
     directed,
-    weights
+    normalized
   )
 
   res
@@ -192,14 +167,14 @@ edge_betweenness_impl <- function(
 eigenvector_centrality_impl <- function(
   graph,
   directed = FALSE,
-  scale = TRUE,
+  scale = NULL,
   weights = NULL,
   options = arpack_defaults()
 ) {
   # Argument checks
   ensure_igraph(graph)
   directed <- as.logical(directed)
-  scale <- as.logical(scale)
+  if (!missing(scale)) { warning("Argument `scale' is deprecated and has no effect") }
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -216,7 +191,6 @@ eigenvector_centrality_impl <- function(
     R_igraph_eigenvector_centrality,
     graph,
     directed,
-    scale,
     weights,
     options
   )
@@ -271,13 +245,13 @@ harmonic_centrality_impl <- function(
 
 hub_and_authority_scores_impl <- function(
   graph,
-  scale = TRUE,
+  scale = NULL,
   weights = NULL,
   options = arpack_defaults()
 ) {
   # Argument checks
   ensure_igraph(graph)
-  scale <- as.logical(scale)
+  if (!missing(scale)) { warning("Argument `scale' is deprecated and has no effect") }
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -293,7 +267,6 @@ hub_and_authority_scores_impl <- function(
   res <- .Call(
     R_igraph_hub_and_authority_scores,
     graph,
-    scale,
     weights,
     options
   )
@@ -306,46 +279,12 @@ hub_and_authority_scores_impl <- function(
   res
 }
 
-hub_score_impl <- function(
-  graph,
-  scale = TRUE,
-  weights = NULL,
-  options = arpack_defaults()
-) {
-  # Argument checks
-  ensure_igraph(graph)
-  scale <- as.logical(scale)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && !all(is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  options <- modify_list(arpack_defaults(), options)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_hub_score,
-    graph,
-    scale,
-    weights,
-    options
-  )
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$vector) <- vertex_attr(graph, "name", V(graph))
-  }
-  res
-}
-
 maxdegree_impl <- function(
   graph,
   ...,
   v = V(graph),
   mode = c("all", "out", "in", "total"),
-  loops = TRUE
+  loops = c("twice", "none", "once")
 ) {
   # Argument checks
   check_dots_empty()
@@ -358,7 +297,10 @@ maxdegree_impl <- function(
     "all" = 3L,
     "total" = 3L
   )
-  loops <- as.logical(loops)
+  if (is.logical(loops)) {
+    loops <- if (loops) "twice" else "none"
+  }
+  loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -375,19 +317,15 @@ maxdegree_impl <- function(
 
 pagerank_impl <- function(
   graph,
-  algo = c("prpack", "arpack"),
-  vids = V(graph),
-  directed = TRUE,
-  damping = 0.85,
   weights = NULL,
+  damping = 0.85,
+  directed = TRUE,
+  vids = V(graph),
+  algo = c("prpack", "arpack"),
   options = NULL
 ) {
   # Argument checks
   ensure_igraph(graph)
-  algo <- switch_igraph_arg(algo, "arpack" = 1L, "prpack" = 2L)
-  vids <- as_igraph_vs(graph, vids)
-  directed <- as.logical(directed)
-  damping <- as.numeric(damping)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -396,6 +334,10 @@ pagerank_impl <- function(
   } else {
     weights <- NULL
   }
+  damping <- as.numeric(damping)
+  directed <- as.logical(directed)
+  vids <- as_igraph_vs(graph, vids)
+  algo <- switch_igraph_arg(algo, "arpack" = 1L, "prpack" = 2L)
   if (is.null(options)) {
     if (algo == 0L) {
       options <- list(niter = 1000, eps = 0.001)
@@ -411,11 +353,11 @@ pagerank_impl <- function(
   res <- .Call(
     R_igraph_pagerank,
     graph,
-    algo,
-    vids - 1,
-    directed,
-    damping,
     weights,
+    damping,
+    directed,
+    vids - 1,
+    algo,
     options
   )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
@@ -426,23 +368,16 @@ pagerank_impl <- function(
 
 personalized_pagerank_impl <- function(
   graph,
-  algo = c("prpack", "arpack"),
-  vids = V(graph),
-  directed = TRUE,
-  damping = 0.85,
-  personalized = NULL,
   weights = NULL,
+  personalized = NULL,
+  damping = 0.85,
+  directed = TRUE,
+  vids = V(graph),
+  algo = c("prpack", "arpack"),
   options = NULL
 ) {
   # Argument checks
   ensure_igraph(graph)
-  algo <- switch_igraph_arg(algo, "arpack" = 1L, "prpack" = 2L)
-  vids <- as_igraph_vs(graph, vids)
-  directed <- as.logical(directed)
-  damping <- as.numeric(damping)
-  if (!is.null(personalized)) {
-    personalized <- as.numeric(personalized)
-  }
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -451,6 +386,13 @@ personalized_pagerank_impl <- function(
   } else {
     weights <- NULL
   }
+  if (!is.null(personalized)) {
+    personalized <- as.numeric(personalized)
+  }
+  damping <- as.numeric(damping)
+  directed <- as.logical(directed)
+  vids <- as_igraph_vs(graph, vids)
+  algo <- switch_igraph_arg(algo, "arpack" = 1L, "prpack" = 2L)
   if (is.null(options)) {
     if (algo == 0L) {
       options <- list(niter = 1000, eps = 0.001)
@@ -466,12 +408,12 @@ personalized_pagerank_impl <- function(
   res <- .Call(
     R_igraph_personalized_pagerank,
     graph,
-    algo,
-    vids - 1,
-    directed,
-    damping,
-    personalized,
     weights,
+    personalized,
+    damping,
+    directed,
+    vids - 1,
+    algo,
     options
   )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
@@ -482,22 +424,17 @@ personalized_pagerank_impl <- function(
 
 personalized_pagerank_vs_impl <- function(
   graph,
-  algo = c("prpack", "arpack"),
-  vids = V(graph),
-  directed = TRUE,
-  damping = 0.85,
-  reset_vids,
   weights = NULL,
+  reset_vids,
+  damping = 0.85,
+  directed = TRUE,
+  vids = V(graph),
+  algo = c("prpack", "arpack"),
   options = NULL,
   details = FALSE
 ) {
   # Argument checks
   ensure_igraph(graph)
-  algo <- switch_igraph_arg(algo, "arpack" = 1L, "prpack" = 2L)
-  vids <- as_igraph_vs(graph, vids)
-  directed <- as.logical(directed)
-  damping <- as.numeric(damping)
-  reset_vids <- as_igraph_vs(graph, reset_vids)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -506,6 +443,11 @@ personalized_pagerank_vs_impl <- function(
   } else {
     weights <- NULL
   }
+  reset_vids <- as_igraph_vs(graph, reset_vids)
+  damping <- as.numeric(damping)
+  directed <- as.logical(directed)
+  vids <- as_igraph_vs(graph, vids)
+  algo <- switch_igraph_arg(algo, "arpack" = 1L, "prpack" = 2L)
   if (is.null(options)) {
     if (algo == 0L) {
       options <- list(niter = 1000, eps = 0.001)
@@ -521,12 +463,12 @@ personalized_pagerank_vs_impl <- function(
   res <- .Call(
     R_igraph_personalized_pagerank_vs,
     graph,
-    algo,
-    vids - 1,
-    directed,
-    damping,
-    reset_vids - 1,
     weights,
+    reset_vids - 1,
+    damping,
+    directed,
+    vids - 1,
+    algo,
     options
   )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
@@ -542,7 +484,7 @@ strength_impl <- function(
   graph,
   vids = V(graph),
   mode = c("all", "out", "in", "total"),
-  loops = TRUE,
+  loops = c("twice", "none", "once"),
   weights = NULL
 ) {
   # Argument checks
@@ -555,7 +497,10 @@ strength_impl <- function(
     "all" = 3L,
     "total" = 3L
   )
-  loops <- as.logical(loops)
+  if (is.logical(loops)) {
+    loops <- if (loops) "twice" else "none"
+  }
+  loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -690,7 +635,7 @@ centralization_closeness_tmax_impl <- function(
 centralization_degree_impl <- function(
   graph,
   mode = c("all", "out", "in", "total"),
-  loops = TRUE,
+  loops = c("twice", "none", "once"),
   normalized = TRUE
 ) {
   # Argument checks
@@ -702,7 +647,10 @@ centralization_degree_impl <- function(
     "all" = 3L,
     "total" = 3L
   )
-  loops <- as.logical(loops)
+  if (is.logical(loops)) {
+    loops <- if (loops) "twice" else "none"
+  }
+  loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
   normalized <- as.logical(normalized)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -736,7 +684,10 @@ centralization_degree_tmax_impl <- function(
     "all" = 3L,
     "total" = 3L
   )
-  loops <- as.logical(loops)
+  if (is.logical(loops)) {
+    loops <- if (loops) "twice" else "none"
+  }
+  loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -754,14 +705,14 @@ centralization_degree_tmax_impl <- function(
 centralization_eigenvector_centrality_impl <- function(
   graph,
   directed = FALSE,
-  scale = TRUE,
+  scale = NULL,
   options = arpack_defaults(),
   normalized = TRUE
 ) {
   # Argument checks
   ensure_igraph(graph)
   directed <- as.logical(directed)
-  scale <- as.logical(scale)
+  if (!missing(scale)) { warning("Argument `scale' is deprecated and has no effect") }
   options <- modify_list(arpack_defaults(), options)
   normalized <- as.logical(normalized)
 
@@ -771,7 +722,6 @@ centralization_eigenvector_centrality_impl <- function(
     R_igraph_centralization_eigenvector_centrality,
     graph,
     directed,
-    scale,
     options,
     normalized
   )
@@ -783,7 +733,7 @@ centralization_eigenvector_centrality_tmax_impl <- function(
   graph = NULL,
   nodes = 0,
   directed = FALSE,
-  scale = TRUE
+  scale = NULL
 ) {
   # Argument checks
   if (!is.null(graph)) {
@@ -791,7 +741,7 @@ centralization_eigenvector_centrality_tmax_impl <- function(
   }
   nodes <- as.numeric(nodes)
   directed <- as.logical(directed)
-  scale <- as.logical(scale)
+  if (!missing(scale)) { warning("Argument `scale' is deprecated and has no effect") }
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -799,8 +749,7 @@ centralization_eigenvector_centrality_tmax_impl <- function(
     R_igraph_centralization_eigenvector_centrality_tmax,
     graph,
     nodes,
-    directed,
-    scale
+    directed
   )
 
   res
@@ -832,15 +781,14 @@ centralization_impl <- function(
 
 betweenness_cutoff_impl <- function(
   graph,
+  weights = NULL,
   vids = V(graph),
   directed = TRUE,
-  weights = NULL,
+  normalized = FALSE,
   cutoff = -1
 ) {
   # Argument checks
   ensure_igraph(graph)
-  vids <- as_igraph_vs(graph, vids)
-  directed <- as.logical(directed)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -849,6 +797,9 @@ betweenness_cutoff_impl <- function(
   } else {
     weights <- NULL
   }
+  vids <- as_igraph_vs(graph, vids)
+  directed <- as.logical(directed)
+  normalized <- as.logical(normalized)
   cutoff <- as.numeric(cutoff)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -856,9 +807,10 @@ betweenness_cutoff_impl <- function(
   res <- .Call(
     R_igraph_betweenness_cutoff,
     graph,
+    weights,
     vids - 1,
     directed,
-    weights,
+    normalized,
     cutoff
   )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
@@ -915,13 +867,14 @@ closeness_cutoff_impl <- function(
 
 edge_betweenness_cutoff_impl <- function(
   graph,
-  directed = TRUE,
   weights = NULL,
+  eids = E(graph),
+  directed = TRUE,
+  normalized = FALSE,
   cutoff = -1
 ) {
   # Argument checks
   ensure_igraph(graph)
-  directed <- as.logical(directed)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -930,6 +883,9 @@ edge_betweenness_cutoff_impl <- function(
   } else {
     weights <- NULL
   }
+  eids <- as_igraph_es(graph, eids)
+  directed <- as.logical(directed)
+  normalized <- as.logical(normalized)
   cutoff <- as.numeric(cutoff)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -937,8 +893,10 @@ edge_betweenness_cutoff_impl <- function(
   res <- .Call(
     R_igraph_edge_betweenness_cutoff,
     graph,
-    directed,
     weights,
+    eids - 1,
+    directed,
+    normalized,
     cutoff
   )
 
@@ -995,18 +953,15 @@ harmonic_centrality_cutoff_impl <- function(
 
 betweenness_subset_impl <- function(
   graph,
+  weights = NULL,
   vids = V(graph),
-  directed = TRUE,
   sources = V(graph),
   targets = V(graph),
-  weights = NULL
+  directed = TRUE,
+  normalized = FALSE
 ) {
   # Argument checks
   ensure_igraph(graph)
-  vids <- as_igraph_vs(graph, vids)
-  directed <- as.logical(directed)
-  sources <- as_igraph_vs(graph, sources)
-  targets <- as_igraph_vs(graph, targets)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -1015,17 +970,23 @@ betweenness_subset_impl <- function(
   } else {
     weights <- NULL
   }
+  vids <- as_igraph_vs(graph, vids)
+  sources <- as_igraph_vs(graph, sources)
+  targets <- as_igraph_vs(graph, targets)
+  directed <- as.logical(directed)
+  normalized <- as.logical(normalized)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_betweenness_subset,
     graph,
+    weights,
     vids - 1,
-    directed,
     sources - 1,
     targets - 1,
-    weights
+    directed,
+    normalized
   )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- vertex_attr(graph, "name", vids)
@@ -1035,18 +996,15 @@ betweenness_subset_impl <- function(
 
 edge_betweenness_subset_impl <- function(
   graph,
-  eids = E(graph),
-  directed = TRUE,
+  weights = NULL,
   sources = V(graph),
   targets = V(graph),
-  weights = NULL
+  eids = E(graph),
+  directed = TRUE,
+  normalized = FALSE
 ) {
   # Argument checks
   ensure_igraph(graph)
-  eids <- as_igraph_es(graph, eids)
-  directed <- as.logical(directed)
-  sources <- as_igraph_vs(graph, sources)
-  targets <- as_igraph_vs(graph, targets)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -1055,17 +1013,23 @@ edge_betweenness_subset_impl <- function(
   } else {
     weights <- NULL
   }
+  sources <- as_igraph_vs(graph, sources)
+  targets <- as_igraph_vs(graph, targets)
+  eids <- as_igraph_es(graph, eids)
+  directed <- as.logical(directed)
+  normalized <- as.logical(normalized)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_edge_betweenness_subset,
     graph,
-    eids - 1,
-    directed,
+    weights,
     sources - 1,
     targets - 1,
-    weights
+    eids - 1,
+    directed,
+    normalized
   )
 
   res

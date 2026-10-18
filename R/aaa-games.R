@@ -102,12 +102,20 @@ k_regular_game_impl <- function(
 rewire_impl <- function(
   rewire,
   n,
-  mode = c("simple", "simple_loops")
+  allowed_edge_types = c("simple", "loops", "multi", "all")
 ) {
   # Argument checks
   ensure_igraph(rewire)
   n <- as.numeric(n)
-  mode <- switch_igraph_arg(mode, "simple" = 0L, "simple_loops" = 1L)
+  allowed_edge_types <- switch_igraph_arg(
+    allowed_edge_types,
+    "simple" = 0L,
+    "loop" = 1L,
+    "loops" = 1L,
+    "multi" = 6L,
+    "multiple" = 6L,
+    "all" = 7L
+  )
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -115,7 +123,7 @@ rewire_impl <- function(
     R_igraph_rewire,
     rewire,
     n,
-    mode
+    allowed_edge_types
   )
 
   res
@@ -236,14 +244,20 @@ rewire_directed_edges_impl <- function(
 rewire_edges_impl <- function(
   graph,
   prob,
-  loops = FALSE,
-  multiple = FALSE
+  allowed_edge_types = c("simple", "loops", "multi", "all")
 ) {
   # Argument checks
   ensure_igraph(graph)
   prob <- as.numeric(prob)
-  loops <- as.logical(loops)
-  multiple <- as.logical(multiple)
+  allowed_edge_types <- switch_igraph_arg(
+    allowed_edge_types,
+    "simple" = 0L,
+    "loop" = 1L,
+    "loops" = 1L,
+    "multi" = 6L,
+    "multiple" = 6L,
+    "all" = 7L
+  )
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -251,8 +265,7 @@ rewire_edges_impl <- function(
     R_igraph_rewire_edges,
     graph,
     prob,
-    loops,
-    multiple
+    allowed_edge_types
   )
 
   res
@@ -389,13 +402,15 @@ erdos_renyi_game_gnm_impl <- function(
   n,
   m,
   directed = FALSE,
-  loops = FALSE
+  loops = FALSE,
+  edge_labeled = FALSE
 ) {
   # Argument checks
   n <- as.numeric(n)
   m <- as.numeric(m)
   directed <- as.logical(directed)
   loops <- as.logical(loops)
+  edge_labeled <- as.logical(edge_labeled)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -404,7 +419,8 @@ erdos_renyi_game_gnm_impl <- function(
     n,
     m,
     directed,
-    loops
+    loops,
+    edge_labeled
   )
 
   res
@@ -414,13 +430,15 @@ erdos_renyi_game_gnp_impl <- function(
   n,
   p,
   directed = FALSE,
-  loops = FALSE
+  loops = FALSE,
+  edge_labeled = FALSE
 ) {
   # Argument checks
   n <- as.numeric(n)
   p <- as.numeric(p)
   directed <- as.logical(directed)
   loops <- as.logical(loops)
+  edge_labeled <- as.logical(edge_labeled)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -429,7 +447,8 @@ erdos_renyi_game_gnp_impl <- function(
     n,
     p,
     directed,
-    loops
+    loops,
+    edge_labeled
   )
 
   res
@@ -554,7 +573,11 @@ sbm_game_impl <- function(
   loops = FALSE
 ) {
   # Argument checks
-  n <- as.numeric(n)
+  if (as.numeric(n) != sum(block_sizes)) {
+    cli::cli_abort(
+      "Sum of the block sizes ({sum(block_sizes)}) must equal the number of vertices ({n})."
+    )
+  }
   pref_matrix[] <- as.numeric(pref_matrix)
   block_sizes <- as.numeric(block_sizes)
   directed <- as.logical(directed)
@@ -564,7 +587,6 @@ sbm_game_impl <- function(
   # Function call
   res <- .Call(
     R_igraph_sbm_game,
-    n,
     pref_matrix,
     block_sizes,
     directed,
@@ -1087,7 +1109,7 @@ sample_dirichlet_impl <- function(
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_sample_dirichlet,
+    R_igraph_rng_sample_dirichlet,
     n,
     alpha
   )
@@ -1110,7 +1132,7 @@ sample_sphere_surface_impl <- function(
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_sample_sphere_surface,
+    R_igraph_rng_sample_sphere_surface,
     dim,
     n,
     radius,
@@ -1135,7 +1157,7 @@ sample_sphere_volume_impl <- function(
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_sample_sphere_volume,
+    R_igraph_rng_sample_sphere_volume,
     dim,
     n,
     radius,

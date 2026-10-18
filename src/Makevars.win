@@ -19,7 +19,7 @@ LIB_XML ?= $(MINGW_PREFIX)
 GLPK_HOME ?= $(MINGW_PREFIX)
 LIB_GMP ?= $(MINGW_PREFIX)
 
-PKG_CPPFLAGS=-DUSING_R -I. -Ivendor -Ivendor/cigraph/src -Ivendor/cigraph/include -Ivendor/cigraph/vendor -Ivendor/io/parsers -Ivendor/mini-gmp \
+PKG_CPPFLAGS=-DUSING_R -I. -Ivendor -Ivendor/cigraph/src -Ivendor/cigraph/include -Ivendor/cigraph/vendor -Ivendor/io/parsers -Ivendor/cigraph/vendor/infomap/src -Ivendor/mini-gmp \
     -DNDEBUG -DIGRAPH_THREAD_LOCAL= \
     -DPRPACK_IGRAPH_SUPPORT \
     -DHAVE_GFORTRAN=1 \

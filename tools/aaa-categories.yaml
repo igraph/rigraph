@@ -6,7 +6,7 @@ basic-igraph:
     - igraph_add_vertices
     - igraph_delete_edges
     - igraph_delete_vertices
-    - igraph_delete_vertices_idx
+    - igraph_delete_vertices_map
   basic-query-operations:
     - igraph_degree
     - igraph_ecount
@@ -242,6 +242,9 @@ games:
     - igraph_sample_dirichlet
     - igraph_sample_sphere_surface
     - igraph_sample_sphere_volume
+    - igraph_rng_sample_dirichlet
+    - igraph_rng_sample_sphere_surface
+    - igraph_rng_sample_sphere_volume
 
 generators:
   adjacency-generators:
@@ -274,7 +277,7 @@ generators:
     - igraph_cycle_graph
     - igraph_extended_chordal_ring
     - igraph_hypercube
-    - igraph_lcf_vector
+    - igraph_lcf
     - igraph_path_graph
     - igraph_ring
     - igraph_square_lattice
@@ -321,8 +324,11 @@ isomorphism:
     - igraph_isoclass_subgraph
   isomorphism-simple-interface:
     - igraph_automorphism_group
+    - igraph_automorphism_group_bliss
     - igraph_canonical_permutation
+    - igraph_canonical_permutation_bliss
     - igraph_count_automorphisms
+    - igraph_count_automorphisms_bliss
     - igraph_isomorphic
     - igraph_subisomorphic
   isomorphism-utility-functions:

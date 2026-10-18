@@ -48,6 +48,7 @@
 ^rconfigure\.py$
 ^\.ccache$
 ^src/vendor/cigraph/CITATION\.cff$
+^src/vendor/cigraph/vendor/infomap/CITATION\.cff$
 ^R/revdep\.R$
 ^compile_commands\.json$
 ^\.cache$

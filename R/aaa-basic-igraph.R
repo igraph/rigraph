@@ -94,7 +94,7 @@ delete_vertices_idx_impl <- function(
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_delete_vertices_idx,
+    R_igraph_delete_vertices_map,
     graph,
     vertices - 1
   )
@@ -127,7 +127,7 @@ degree_impl <- function(
   graph,
   vids = V(graph),
   mode = c("all", "out", "in", "total"),
-  loops = TRUE
+  loops = c("twice", "none", "once")
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -139,7 +139,10 @@ degree_impl <- function(
     "all" = 3L,
     "total" = 3L
   )
-  loops <- as.logical(loops)
+  if (is.logical(loops)) {
+    loops <- if (loops) "twice" else "none"
+  }
+  loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -191,18 +194,21 @@ edge_impl <- function(
 
 edges_impl <- function(
   graph,
-  eids
+  eids,
+  bycol = FALSE
 ) {
   # Argument checks
   ensure_igraph(graph)
   eids <- as_igraph_es(graph, eids)
+  bycol <- as.logical(bycol)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_edges,
     graph,
-    eids - 1
+    eids - 1,
+    bycol
   )
   if (igraph_opt("return.vs.es")) {
     res <- create_vs(graph, res)
@@ -321,7 +327,8 @@ get_eids_impl <- function(
 incident_impl <- function(
   graph,
   vid,
-  mode = c("all", "out", "in", "total")
+  mode = c("all", "out", "in", "total"),
+  loops = c("twice", "none", "once")
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -339,6 +346,10 @@ incident_impl <- function(
     "all" = 3L,
     "total" = 3L
   )
+  if (is.logical(loops)) {
+    loops <- if (loops) "twice" else "none"
+  }
+  loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -346,7 +357,8 @@ incident_impl <- function(
     R_igraph_incident,
     graph,
     vid - 1,
-    mode
+    mode,
+    loops
   )
   if (igraph_opt("return.vs.es")) {
     res <- create_es(graph, res)
@@ -373,7 +385,9 @@ is_directed_impl <- function(
 neighbors_impl <- function(
   graph,
   vid,
-  mode = c("all", "out", "in", "total")
+  mode = c("all", "out", "in", "total"),
+  loops = c("twice", "none", "once"),
+  multiple = TRUE
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -391,6 +405,11 @@ neighbors_impl <- function(
     "all" = 3L,
     "total" = 3L
   )
+  if (is.logical(loops)) {
+    loops <- if (loops) "twice" else "none"
+  }
+  loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
+  multiple <- as.logical(multiple)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -398,7 +417,9 @@ neighbors_impl <- function(
     R_igraph_neighbors,
     graph,
     vid - 1,
-    mode
+    mode,
+    loops,
+    multiple
   )
   if (igraph_opt("return.vs.es")) {
     res <- create_vs(graph, res)

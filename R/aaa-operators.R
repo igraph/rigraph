@@ -288,22 +288,6 @@ subgraph_from_edges_impl <- function(
   res
 }
 
-transitive_closure_dag_impl <- function(
-  graph
-) {
-  # Argument checks
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_transitive_closure_dag,
-    graph
-  )
-
-  res
-}
-
 transitive_closure_impl <- function(
   graph
 ) {

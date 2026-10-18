@@ -978,8 +978,10 @@ sample_pa <- function(
     ))
   }
 
-  if (is.null(out.seq)) {
-    out.seq <- numeric()
+  # Upstream (igraph@a396457) reads an empty out-degree sequence as one of
+  # length zero, no longer as a missing one: pass NULL for it instead.
+  if (length(out.seq) == 0) {
+    out.seq <- NULL
   }
 
   algorithm <- igraph_match_arg(algorithm)
@@ -2035,8 +2037,10 @@ sample_pa_age <- function(
     ))
   }
 
-  if (is.null(out.seq)) {
-    out.seq <- numeric()
+  # Upstream (igraph@a396457) reads an empty out-degree sequence as one of
+  # length zero, no longer as a missing one: pass NULL for it instead.
+  if (length(out.seq) == 0) {
+    out.seq <- NULL
   }
 
   res <- if (is.null(time.window)) {
@@ -5141,6 +5145,16 @@ sample_correlated_gnp <- function(
     p <- edge_density(old.graph)
   }
 
+  # Upstream (igraph@3ced2ff) reads the permutation as the old ID of each new
+  # vertex; `permutation` stays the new ID of each old vertex, as in permute().
+  # Inverted by assignment, as there, so that an invalid permutation still
+  # fails upstream's check.
+  if (!is.null(permutation)) {
+    inverse <- numeric(length(permutation))
+    inverse[permutation] <- seq_along(permutation)
+    permutation <- inverse
+  }
+
   correlated_game_impl(
     old_graph = old.graph,
     corr = corr,
@@ -5191,6 +5205,16 @@ sample_correlated_gnp_pair <- function(
   directed = FALSE,
   permutation = NULL
 ) {
+  # Upstream (igraph@3ced2ff) reads the permutation as the old ID of each new
+  # vertex; `permutation` stays the new ID of each old vertex, as in permute().
+  # Inverted by assignment, as there, so that an invalid permutation still
+  # fails upstream's check.
+  if (!is.null(permutation)) {
+    inverse <- numeric(length(permutation))
+    inverse[permutation] <- seq_along(permutation)
+    permutation <- inverse
+  }
+
   correlated_pair_game_impl(
     n = n,
     corr = corr,

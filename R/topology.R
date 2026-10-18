@@ -173,9 +173,9 @@ graph.get.subisomorphisms.vf2 <- function(
 graph.isoclass.subgraph <- function(graph, vids) {
   # Argument checks
   ensure_igraph(graph)
-  vids <- as_igraph_vs(graph, vids) - 1
 
-  # Function call
+  # Function call: isoclass_subgraph_impl() converts vids itself, as upstream
+  # takes a vertex selector (krlmlr/igraph@2302f64).
   res <- isoclass_subgraph_impl(
     graph = graph,
     vids = vids
@@ -1496,11 +1496,16 @@ canonical_permutation <- function(
   }
   # END GENERATED ARG_HANDLE
 
-  canonical_permutation_impl(
+  res <- canonical_permutation_impl(
     graph = graph,
     colors = if (missing(colors)) missing_arg() else colors,
     sh = sh
   )
+  # Upstream (igraph@7a768e6) returns the labeling the other way round, as the
+  # old ID of each new vertex; `labeling` stays the new ID of each old vertex,
+  # the permutation permute() takes.
+  res$labeling <- order(res$labeling)
+  res
 }
 
 
@@ -1543,9 +1548,15 @@ canonical_permutation <- function(
 #' @export
 #' @family functions for manipulating graph structure
 permute <- function(graph, permutation) {
+  # Upstream (igraph@7a768e6) reads the permutation as the old ID of each new
+  # vertex; `permutation` stays the new ID of each old vertex. Inverted by
+  # assignment rather than order(), so that an invalid permutation still
+  # reaches, and fails, upstream's check.
+  inverse <- numeric(length(permutation))
+  inverse[permutation] <- seq_along(permutation)
   permute_vertices_impl(
     graph = graph,
-    permutation = permutation
+    permutation = inverse
   )
 }
 
