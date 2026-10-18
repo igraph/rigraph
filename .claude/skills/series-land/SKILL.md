@@ -209,9 +209,11 @@ scripts/series-land.sh main --remote origin --canonical upstream --review --seri
 It reviews the vendor commits above the series' base, its seed and the commits in front of its first vendor commit,
 and leaves out a tooling sync or a port of a commit `main` has, as the landing's replay does.
 Each review commit names its series commit in a `Series-commit:` trailer, where a landing's names its `Landing-commit:`.
-The run refuses, with nothing written, while `main` has a change the series has not ported:
+The run refuses, with nothing written, while its base has a change the series has not ported:
 outside what it hides, the review has to equal `main-green` without its flavor,
 but for `NEWS.md`, the READMEs and `DESCRIPTION`'s version.
+The base is `main`, or with `--base` the older `main` commit the series has ported, where `main` has moved on since its last port.
+A pull request against `main` still shows only the review's commits, because GitHub diffs from the merge base.
 Its findings are not folded into the running series one by one.
 Each is verified first, and those that hold are collected on `main-fwd-build`,
 together with what the [revdep checks](/handbook/testing/revdep/README.md) find.

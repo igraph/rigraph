@@ -46,7 +46,9 @@
 #      but not its C half, the registration or the source and dependency lists.
 #      It writes a local branch, pushes only with --push and to --review-remote,
 #      and refuses a series that lacks a change of `main`'s and a commit among
-#      its vendor commits that is not `main`'s.
+#      its vendor commits that is not `main`'s. --base stands it on the older
+#      `main` the series has ported, and refuses one the series does not carry,
+#      one below a commit it ported, and one not on `main`.
 #
 # Usage:
 #   scripts/series-land-test.sh
@@ -660,6 +662,25 @@ is "a series that lacks a change of main's is refused" "$st" 1
 has "naming the path" "$out" "  R/foo.R"
 hasnt "but not the version" "$out" "  DESCRIPTION"
 hasnt "nor NEWS.md" "$out" "  NEWS.md"
+has "and names --base for the main it has ported" "$out" "or name the main commit it has ported with --base"
+out=$(scripts/series-land.sh v3.0-y --review --series --base "$M9" --suffix -older 2>&1) && st=0 || st=$?
+[ -z "${KEEP:-}" ] || echo "$out"
+is "it is reviewed on the older main it has ported, named with --base" "$st" 0
+has "which it says" "$out" "the base is the main v3.0-y-green has ported; main $(git rev-parse --short HEAD) has 1 commit(s) above it"
+is "the same review as on that main" "$(git rev-parse -q --verify v3.0-y-land-review-older)" "$REV"
+out=$(scripts/series-land.sh v3.0-y --review --series --base "$M" --suffix -older 2>&1) && st=0 || st=$?
+[ -z "${KEEP:-}" ] || echo "$out"
+is "a base below a commit the series ported is refused" "$st" 1
+has "naming the port" "$out" "fix: Another R-side fix on main (#14) stands among the vendor commits"
+MAIN=$(git rev-parse --short HEAD)
+out=$(scripts/series-land.sh v3.0-y --review --series --base "$MAIN" --suffix -older 2>&1) && st=0 || st=$?
+[ -z "${KEEP:-}" ] || echo "$out"
+is "so is a base with a change the series lacks" "$st" 1
+has "naming the path" "$out" "  R/foo.R"
+has "and the base" "$out" "--base $MAIN is not the main v3.0-y-green has ported"
+out=$(scripts/series-land.sh v3.0-y --review --series --base v3.0-y-land-review --suffix -older 2>&1) && st=0 || st=$?
+is "and a base not on main" "$st" 1
+has "which it says" "$out" "--base v3.0-y-land-review is not on main"
 git reset -q --hard "$M9"
 echo 'glue 1, on main' > src/glue.cpp
 commit 'fix: Glue main changed since the series took it (#15)'
