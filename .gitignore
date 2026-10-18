@@ -32,3 +32,4 @@ cran
 /.build/
 .ccache/
 lifecycle
+/src/Makevars
