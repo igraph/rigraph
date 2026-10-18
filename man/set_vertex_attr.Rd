@@ -4,19 +4,21 @@
 \alias{set_vertex_attr}
 \title{Set vertex attributes}
 \usage{
-set_vertex_attr(graph, name, index = NULL, value)
+set_vertex_attr(graph, name, vertices = NULL, value, index = deprecated())
 }
 \arguments{
 \item{graph}{The graph.}
 
 \item{name}{The name of the attribute to set.}
 
-\item{index}{An optional vertex sequence to set the attributes
+\item{vertices}{An optional vertex sequence to set the attributes
 of a subset of vertices. The default \code{NULL} selects all vertices.}
 
-\item{value}{The new value of the attribute for all (or \code{index})
+\item{value}{The new value of the attribute for all (or \code{vertices})
 vertices.
 If \code{NULL}, the input is returned unchanged.}
+
+\item{index}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 }
 \value{
 The graph, with the vertex attribute added or set.

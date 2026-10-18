@@ -9,10 +9,7 @@ forest.fire.game(nodes, fw.prob, bw.factor = 1, ambs = 1, directed = TRUE)
 \arguments{
 \item{nodes}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{n} instead.}
 
-\item{fw.prob}{The forward burning probability, see details below.}
-
-\item{bw.factor}{The backward burning ratio. The backward burning
-probability is calculated as \code{bw.factor*fw.prob}.}
+\item{fw.prob}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{fw_prob} instead.}
 
 \item{ambs}{The number of ambassador vertices.}
 

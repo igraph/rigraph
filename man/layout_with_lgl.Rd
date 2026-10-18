@@ -7,7 +7,7 @@
 layout_with_lgl(
   graph,
   ...,
-  maxiter = 150,
+  max_iter = 150,
   maxdelta = NULL,
   area = NULL,
   coolexp = 1.5,
@@ -21,7 +21,7 @@ layout_with_lgl(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{maxiter}{The maximum number of iterations to perform (150).}
+\item{max_iter}{The maximum number of iterations to perform (150).}
 
 \item{maxdelta}{The maximum change for a vertex during an iteration. The
 default \code{NULL} uses the number of vertices.}

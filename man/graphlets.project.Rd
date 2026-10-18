@@ -23,8 +23,6 @@ attribute is used.}
 \item{cliques}{A list of vertex IDs, the graphlet basis to use for the
 projection.}
 
-\item{niter}{Integer scalar, the number of iterations to perform.}
-
 \item{Mu}{Starting weights for the projection. The default \code{NULL} uses a
 weight of one for each clique.}
 }

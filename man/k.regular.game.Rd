@@ -7,8 +7,7 @@
 k.regular.game(no.of.nodes, k, directed = FALSE, multiple = FALSE)
 }
 \arguments{
-\item{no.of.nodes}{Integer scalar, the number of vertices in the generated
-graph.}
+\item{no.of.nodes}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{n} instead.}
 
 \item{k}{Integer scalar, the degree of each vertex in the graph, or the
 out-degree and in-degree in a directed graph.}

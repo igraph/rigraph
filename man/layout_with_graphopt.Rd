@@ -8,7 +8,7 @@ layout_with_graphopt(
   graph,
   ...,
   start = NULL,
-  niter = 500,
+  n_iter = 500,
   charge = 0.001,
   mass = 30,
   spring.length = 0,
@@ -25,7 +25,7 @@ layout_with_graphopt(
 line for each vertex. This matrix will be used as starting positions for the
 algorithm. If not given, then a random starting matrix is used.}
 
-\item{niter}{Integer scalar, the number of iterations to perform.  Should be
+\item{n_iter}{Integer scalar, the number of iterations to perform.  Should be
 a couple of hundred in general. If you have a large graph then you might
 want to only do a few iterations and then check the result. If it is not
 good enough you can feed it in again in the \code{start} argument. The

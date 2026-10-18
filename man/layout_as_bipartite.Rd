@@ -10,7 +10,7 @@ layout_as_bipartite(
   ...,
   hgap = 1,
   vgap = 1,
-  maxiter = 100
+  max_iter = 100
 )
 }
 \arguments{
@@ -29,7 +29,7 @@ same layer.}
 
 \item{vgap}{Real scalar, the distance between the two layers.}
 
-\item{maxiter}{Integer scalar, the maximum number of iterations in the
+\item{max_iter}{Integer scalar, the maximum number of iterations in the
 crossing minimization stage. 100 is a reasonable default; if you feel that
 you have too many edge crossings, increase this.}
 }

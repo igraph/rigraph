@@ -6,22 +6,23 @@
 \usage{
 sample_forestfire(
   n,
-  fw.prob,
+  fw_prob,
   ...,
-  bw.factor = 1,
+  bw_factor = 1,
   ambs = 1,
   directed = TRUE,
-  nodes = deprecated()
+  nodes = deprecated(),
+  fw.prob = deprecated()
 )
 }
 \arguments{
 \item{n}{The number of vertices in the graph.}
 
-\item{fw.prob}{The forward burning probability, see details below.}
+\item{fw_prob}{The forward burning probability, see details below.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{bw.factor}{The backward burning ratio. The backward burning
+\item{bw_factor}{The backward burning ratio. The backward burning
 probability is calculated as \code{bw.factor*fw.prob}.}
 
 \item{ambs}{The number of ambassador vertices.}
@@ -29,6 +30,8 @@ probability is calculated as \code{bw.factor*fw.prob}.}
 \item{directed}{Logical, whether to create a directed graph.}
 
 \item{nodes}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{n} instead.}
+
+\item{fw.prob}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{fw_prob} instead.}
 }
 \value{
 A simple graph, possibly directed if the \code{directed} argument is
@@ -51,8 +54,8 @@ time. This vertex connects to (cites) \code{ambs} vertices already present
 in the network, chosen uniformly random. Now, for each cited vertex \eqn{v}
 we do the following procedure: \enumerate{ \item We generate two random
 number, \eqn{x} and \eqn{y}, that are geometrically distributed with means
-\eqn{p/(1-p)} and \eqn{rp(1-rp)}. (\eqn{p} is \code{fw.prob}, \eqn{r} is
-\code{bw.factor}.) The new vertex cites \eqn{x} outgoing neighbors and
+\eqn{p/(1-p)} and \eqn{rp(1-rp)}. (\eqn{p} is \code{fw_prob}, \eqn{r} is
+\code{bw_factor}.) The new vertex cites \eqn{x} outgoing neighbors and
 \eqn{y} incoming neighbors of \eqn{v}, from those which are not yet cited by
 the new vertex. If there are less than \eqn{x} or \eqn{y} such vertices
 available then we cite all of them.  \item The same procedure is applied to
@@ -71,10 +74,10 @@ implementation is based on this.
 
 \examples{
 
-fire <- sample_forestfire(50, fw.prob = 0.37, bw.factor = 0.32 / 0.37)
+fire <- sample_forestfire(50, fw_prob = 0.37, bw_factor = 0.32 / 0.37)
 plot(fire)
 
-g <- sample_forestfire(10000, fw.prob = 0.37, bw.factor = 0.32 / 0.37)
+g <- sample_forestfire(10000, fw_prob = 0.37, bw_factor = 0.32 / 0.37)
 dd1 <- degree_distribution(g, mode = "in")
 dd2 <- degree_distribution(g, mode = "out")
 # The forest fire model produces graphs with a heavy tail degree distribution.

@@ -5,10 +5,17 @@
 \title{Generate a new random graph from a given graph by randomly
 adding/removing edges}
 \usage{
-sample_correlated_gnp(old.graph, corr, ..., p = NULL, permutation = NULL)
+sample_correlated_gnp(
+  old_graph,
+  corr,
+  ...,
+  p = NULL,
+  permutation = NULL,
+  old.graph = deprecated()
+)
 }
 \arguments{
-\item{old.graph}{The original graph.}
+\item{old_graph}{The original graph.}
 
 \item{corr}{A scalar in the unit interval, the target Pearson
 correlation between the adjacency matrices of the original and the generated
@@ -25,9 +32,11 @@ supply that explicitly.}
 \item{permutation}{A numeric vector, a permutation vector that is
 applied on the vertices of the first graph, to get the second graph.  If
 \code{NULL}, the vertices are not permuted.}
+
+\item{old.graph}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{old_graph} instead.}
 }
 \value{
-An unweighted graph of the same size as \code{old.graph} such
+An unweighted graph of the same size as \code{old_graph} such
 that the correlation coefficient between the entries of the two
 adjacency matrices is \code{corr}.  Note each pair of corresponding
 matrix entries is a pair of correlated Bernoulli random variables.

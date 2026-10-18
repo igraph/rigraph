@@ -4,15 +4,17 @@
 \alias{set_vertex_attrs}
 \title{Set multiple vertex attributes}
 \usage{
-set_vertex_attrs(graph, ..., index = NULL)
+set_vertex_attrs(graph, ..., vertices = NULL, index = deprecated())
 }
 \arguments{
 \item{graph}{The graph.}
 
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}> Named arguments, where the names are the attributes}
 
-\item{index}{An optional vertex sequence to set the attributes
+\item{vertices}{An optional vertex sequence to set the attributes
 of a subset of vertices. The default \code{NULL} selects all vertices.}
+
+\item{index}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 }
 \value{
 The graph, with the vertex attributes added or set.
@@ -30,8 +32,8 @@ set_vertex_attrs(g, color = "blue", size = 10, name = LETTERS[1:10])
 # use splicing if suplying a list
 x <- list(color = "red", name = LETTERS[1:10])
 set_vertex_attrs(g, !!!x)
-# to set an attribute named "index" use `:=`
-set_vertex_attrs(g, color = "blue", index := 10, name = LETTERS[1:10])
+# to set an attribute named "vertices" use `:=`
+set_vertex_attrs(g, color = "blue", vertices := 10, name = LETTERS[1:10])
 }
 \seealso{
 Vertex, edge and graph attributes:

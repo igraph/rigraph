@@ -4,31 +4,39 @@
 \alias{subcomponent}
 \title{In- or out- component of a vertex}
 \usage{
-subcomponent(graph, v, ..., mode = c("all", "out", "in"))
+subcomponent(
+  graph,
+  vertex,
+  ...,
+  mode = c("all", "out", "in"),
+  v = deprecated()
+)
 }
 \arguments{
 \item{graph}{The graph to analyze.}
 
-\item{v}{The vertex to start the search from.}
+\item{vertex}{The vertex to start the search from.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character string, either \dQuote{in}, \dQuote{out} or
-\dQuote{all}. If \dQuote{in} all vertices from which \code{v} is reachable
-are listed. If \dQuote{out} all vertices reachable from \code{v} are
+\dQuote{all}. If \dQuote{in} all vertices from which \code{vertex} is reachable
+are listed. If \dQuote{out} all vertices reachable from \code{vertex} are
 returned. If \dQuote{all} returns the union of these. It is ignored for
 undirected graphs.}
+
+\item{v}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertex} instead.}
 }
 \value{
 Numeric vector, the IDs of the vertices in the same component as
-\code{v}.
+\code{vertex}.
 }
 \description{
 Finds all vertices reachable from a given vertex, or the opposite: all
 vertices from which a given vertex is reachable via a directed path.
 }
 \details{
-A breadth-first search is conducted starting from vertex \code{v}.
+A breadth-first search is conducted starting from vertex \code{vertex}.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}

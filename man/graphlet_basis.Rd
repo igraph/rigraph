@@ -8,9 +8,9 @@
 \usage{
 graphlet_basis(graph, ..., weights = NULL)
 
-graphlet_proj(graph, ..., weights = NULL, cliques, niter = 1000, Mu = NULL)
+graphlet_proj(graph, ..., weights = NULL, cliques, n_iter = 1000, Mu = NULL)
 
-graphlets(graph, ..., weights = NULL, niter = 1000)
+graphlets(graph, ..., weights = NULL, n_iter = 1000)
 }
 \arguments{
 \item{graph}{The input graph, edge directions are ignored. Only simple graph
@@ -25,7 +25,7 @@ attribute is used.}
 \item{cliques}{A list of vertex IDs, the graphlet basis to use for the
 projection.}
 
-\item{niter}{Integer scalar, the number of iterations to perform.}
+\item{n_iter}{Integer scalar, the number of iterations to perform.}
 
 \item{Mu}{Starting weights for the projection. The default \code{NULL} uses a
 weight of one for each clique.}
@@ -99,7 +99,7 @@ par(mar = c(1, 1, 1, 1))
 plot(g, layout = co)
 
 ## Calculate graphlets
-gl <- graphlets(g, niter = 1000)
+gl <- graphlets(g, n_iter = 1000)
 
 ## Plot graphlets
 for (i in seq_along(gl$cliques)) {

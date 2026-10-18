@@ -4,17 +4,19 @@
 \alias{which_mutual}
 \title{Find mutual edges in a directed graph}
 \usage{
-which_mutual(graph, eids = NULL, ..., loops = TRUE)
+which_mutual(graph, edges = NULL, ..., loops = TRUE, eids = deprecated())
 }
 \arguments{
 \item{graph}{The input graph.}
 
-\item{eids}{Edge sequence, the edges that will be probed. The default
+\item{edges}{Edge sequence, the edges that will be probed. The default
 \code{NULL} includes all edges in the order of their IDs.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{loops}{Logical, whether to consider directed self-loops to be mutual.}
+
+\item{eids}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{edges} instead.}
 }
 \value{
 A logical vector of the same length as the number of edges supplied.

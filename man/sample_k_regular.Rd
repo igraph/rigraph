@@ -4,10 +4,17 @@
 \alias{sample_k_regular}
 \title{Create a random regular graph}
 \usage{
-sample_k_regular(no.of.nodes, k, ..., directed = FALSE, multiple = FALSE)
+sample_k_regular(
+  n,
+  k,
+  ...,
+  directed = FALSE,
+  multiple = FALSE,
+  no.of.nodes = deprecated()
+)
 }
 \arguments{
-\item{no.of.nodes}{Integer scalar, the number of vertices in the generated
+\item{n}{Integer scalar, the number of vertices in the generated
 graph.}
 
 \item{k}{Integer scalar, the degree of each vertex in the graph, or the
@@ -18,6 +25,8 @@ out-degree and in-degree in a directed graph.}
 \item{directed}{Logical, whether to create a directed graph.}
 
 \item{multiple}{Logical, whether multiple edges are allowed.}
+
+\item{no.of.nodes}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{n} instead.}
 }
 \value{
 An igraph graph.
@@ -44,7 +53,7 @@ ring <- sample_k_regular(10, 2)
 plot(ring)
 
 ## k-regular graphs on 10 vertices, with k=1:9
-k10 <- lapply(1:9, sample_k_regular, no.of.nodes = 10)
+k10 <- lapply(1:9, sample_k_regular, n = 10)
 
 layout(matrix(1:9, nrow = 3, byrow = TRUE))
 sapply(k10, plot, vertex.label = NA)

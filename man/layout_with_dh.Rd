@@ -8,8 +8,8 @@ layout_with_dh(
   graph,
   ...,
   coords = NULL,
-  maxiter = 10,
-  fineiter = NULL,
+  n_iter = 10,
+  n_fine_iter = NULL,
   cool.fact = 0.75,
   weight.node.dist = 1,
   weight.border = 0,
@@ -27,9 +27,9 @@ layout_with_dh(
 is not \code{NULL} then it should be an appropriate matrix of starting
 coordinates.}
 
-\item{maxiter}{Number of iterations to perform in the first phase.}
+\item{n_iter}{Number of iterations to perform in the first phase.}
 
-\item{fineiter}{Number of iterations in the fine tuning phase. The
+\item{n_fine_iter}{Number of iterations in the fine tuning phase. The
 default \code{NULL} uses \code{max(10, log2(vcount(graph)))}.}
 
 \item{cool.fact}{Cooling factor.}

@@ -4,19 +4,21 @@
 \alias{set_edge_attr}
 \title{Set edge attributes}
 \usage{
-set_edge_attr(graph, name, index = NULL, value)
+set_edge_attr(graph, name, edges = NULL, value, index = deprecated())
 }
 \arguments{
 \item{graph}{The graph}
 
 \item{name}{The name of the attribute to set.}
 
-\item{index}{An optional edge sequence to set the attributes of
+\item{edges}{An optional edge sequence to set the attributes of
 a subset of edges. The default \code{NULL} selects all edges.}
 
-\item{value}{The new value of the attribute for all (or \code{index})
+\item{value}{The new value of the attribute for all (or \code{edges})
 edges.
 If \code{NULL}, the input is returned unchanged.}
+
+\item{index}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{edges} instead.}
 }
 \value{
 The graph, with the edge attribute added or set.

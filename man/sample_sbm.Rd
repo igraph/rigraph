@@ -5,20 +5,38 @@
 \alias{sbm}
 \title{Sample stochastic block model}
 \usage{
-sample_sbm(n, pref.matrix, block.sizes, ..., directed = FALSE, loops = FALSE)
+sample_sbm(
+  n,
+  pref_matrix,
+  block_sizes,
+  ...,
+  directed = FALSE,
+  loops = FALSE,
+  pref.matrix = deprecated(),
+  block.sizes = deprecated()
+)
 
-sbm(n, pref.matrix, block.sizes, ..., directed = FALSE, loops = FALSE)
+sbm(
+  n,
+  pref_matrix,
+  block_sizes,
+  ...,
+  directed = FALSE,
+  loops = FALSE,
+  pref.matrix = deprecated(),
+  block.sizes = deprecated()
+)
 }
 \arguments{
 \item{n}{Number of vertices in the graph.}
 
-\item{pref.matrix}{The matrix giving the Bernoulli rates.  This is a
+\item{pref_matrix}{The matrix giving the Bernoulli rates.  This is a
 \eqn{K\times K}{KxK} matrix, where \eqn{K} is the number of groups. The
 probability of creating an edge between vertices from groups \eqn{i} and
 \eqn{j} is given by element \eqn{(i,j)}. For undirected graphs, this matrix
 must be symmetric.}
 
-\item{block.sizes}{Numeric vector giving the number of vertices in each
+\item{block_sizes}{Numeric vector giving the number of vertices in each
 group. The sum of the vector must match the number of vertices.}
 
 \item{...}{These dots are for future extensions and must be empty.}
@@ -26,6 +44,10 @@ group. The sum of the vector must match the number of vertices.}
 \item{directed}{Logical, whether to create a directed graph.}
 
 \item{loops}{Logical, whether self-loops are allowed in the graph.}
+
+\item{pref.matrix}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{pref_matrix} instead.}
+
+\item{block.sizes}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{block_sizes} instead.}
 }
 \value{
 An igraph graph.
@@ -36,9 +58,9 @@ Sampling from the stochastic block model of networks
 \details{
 This function samples graphs from a stochastic block model by (doing the
 equivalent of) Bernoulli trials for each potential edge with the
-probabilities given by the Bernoulli rate matrix, \code{pref.matrix}.
+probabilities given by the Bernoulli rate matrix, \code{pref_matrix}.
 The order of the vertices in the generated graph corresponds to the
-\code{block.sizes} argument.
+\code{block_sizes} argument.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_sbm_game}{\code{sbm_game()}}
@@ -48,7 +70,7 @@ The order of the vertices in the generated graph corresponds to the
 
 ## Two groups with not only few connection between groups
 pm <- cbind(c(0.1, 0.001), c(0.001, 0.05))
-g <- sample_sbm(1000, pref.matrix = pm, block.sizes = c(300, 700))
+g <- sample_sbm(1000, pref_matrix = pm, block_sizes = c(300, 700))
 g
 }
 \references{

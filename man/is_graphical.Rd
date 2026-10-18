@@ -5,27 +5,33 @@
 \title{Is a degree sequence graphical?}
 \usage{
 is_graphical(
-  out.deg,
-  in.deg = NULL,
+  out_deg,
+  in_deg = NULL,
   ...,
-  allowed.edge.types = c("simple", "loops", "multi", "all")
+  allowed_edge_types = c("simple", "loops", "multi", "all"),
+  out.deg = deprecated(),
+  in.deg = deprecated()
 )
 }
 \arguments{
-\item{out.deg}{Integer vector, the degree sequence for undirected graphs, or
+\item{out_deg}{Integer vector, the degree sequence for undirected graphs, or
 the out-degree sequence for directed graphs.}
 
-\item{in.deg}{\code{NULL} or an integer vector. For undirected graphs, it
+\item{in_deg}{\code{NULL} or an integer vector. For undirected graphs, it
 should be \code{NULL}. For directed graphs it specifies the in-degrees.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{allowed.edge.types}{The allowed edge types in the graph. \sQuote{simple}
+\item{allowed_edge_types}{The allowed edge types in the graph. \sQuote{simple}
 means that neither loop nor multiple edges are allowed (i.e. the graph must be
 simple). \sQuote{loops} means that loop edges are allowed but mutiple edges
 are not. \sQuote{multi} means that multiple edges are allowed but loop edges
 are not. \sQuote{all} means that both loop edges and multiple edges are
 allowed.}
+
+\item{out.deg}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{out_deg} instead.}
+
+\item{in.deg}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{in_deg} instead.}
 }
 \value{
 A logical scalar.
