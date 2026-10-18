@@ -196,7 +196,7 @@ average_local_efficiency_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -233,7 +233,7 @@ global_efficiency_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -265,7 +265,7 @@ local_efficiency_impl <- function(
   ensure_igraph(graph)
   vids <- as_igraph_vs(graph, vids)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -608,7 +608,7 @@ maximum_bipartite_matching_impl <- function(
   ensure_igraph(graph)
   types <- handle_vertex_type_arg(types, graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -642,7 +642,7 @@ get_adjacency_impl <- function(
   ensure_igraph(graph)
   type <- switch_igraph_arg(type, "upper" = 0L, "lower" = 1L, "both" = 2L)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -674,7 +674,7 @@ get_adjacency_sparse_impl <- function(
   ensure_igraph(graph)
   type <- switch_igraph_arg(type, "upper" = 0L, "lower" = 1L, "both" = 2L)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -724,7 +724,7 @@ get_stochastic_impl <- function(
   ensure_igraph(graph)
   column_wise <- as.logical(column_wise)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -753,7 +753,7 @@ get_stochastic_sparse_impl <- function(
   ensure_igraph(graph)
   column_wise <- as.logical(column_wise)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -921,7 +921,7 @@ avg_nearest_neighbor_degree_impl <- function(
     "total" = 3L
   )
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -955,7 +955,7 @@ degree_correlation_vector_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -1005,7 +1005,7 @@ joint_degree_distribution_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -1057,7 +1057,7 @@ joint_degree_matrix_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -1091,7 +1091,7 @@ joint_type_distribution_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -1131,7 +1131,7 @@ rich_club_sequence_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -1523,7 +1523,7 @@ local_scan_neighborhood_ecount_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -1557,7 +1557,7 @@ local_scan_subset_ecount_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -1848,7 +1848,7 @@ spanner_impl <- function(
   ensure_igraph(graph)
   stretch <- as.numeric(stretch)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -1930,7 +1930,7 @@ get_laplacian_impl <- function(
     "right" = 3L
   )
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -1974,7 +1974,7 @@ get_laplacian_sparse_impl <- function(
     "right" = 3L
   )
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -2024,7 +2024,7 @@ diversity_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -2244,7 +2244,7 @@ transitivity_barrat_impl <- function(
   ensure_igraph(graph)
   vids <- as_igraph_vs(graph, vids)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -2317,7 +2317,7 @@ local_scan_0_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -2352,7 +2352,7 @@ local_scan_1_ecount_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -2389,7 +2389,7 @@ local_scan_k_ecount_impl <- function(
   ensure_igraph(graph)
   k <- as.numeric(k)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)

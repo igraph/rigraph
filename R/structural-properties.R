@@ -800,7 +800,7 @@ diameter <- function(
   ensure_igraph(graph)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -870,7 +870,7 @@ get_diameter <- function(
   ensure_igraph(graph)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -947,7 +947,7 @@ farthest_vertices <- function(
   ensure_igraph(graph)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -1144,7 +1144,7 @@ degree <- function(
     res <- res / (vcount(graph) - 1)
   }
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res) <- V(graph)$name[v]
+    names(res) <- vertex_attr(graph, "name")[v]
   }
   res
 }
@@ -1529,7 +1529,7 @@ distances <- function(
 
   if (is.null(weights)) {
     if ("weight" %in% edge_attr_names(graph)) {
-      weights <- as.numeric(E(graph)$weight)
+      weights <- as.numeric(edge_attr(graph, "weight"))
     }
   } else {
     if (length(weights) == 1 && is.na(weights)) {
@@ -1556,8 +1556,8 @@ distances <- function(
   )
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    rownames(res) <- V(graph)$name[v]
-    colnames(res) <- V(graph)$name[to]
+    rownames(res) <- vertex_attr(graph, "name")[v]
+    colnames(res) <- vertex_attr(graph, "name")[to]
   }
   res
 }
@@ -1662,7 +1662,7 @@ shortest_paths <- function(
 
   if (is.null(weights)) {
     if ("weight" %in% edge_attr_names(graph)) {
-      weights <- as.numeric(E(graph)$weight)
+      weights <- as.numeric(edge_attr(graph, "weight"))
     }
   } else {
     if (length(weights) == 1 && is.na(weights)) {
@@ -1794,7 +1794,7 @@ all_shortest_paths <- function(
 
   if (is.null(weights)) {
     if ("weight" %in% edge_attr_names(graph)) {
-      weights <- as.numeric(E(graph)$weight)
+      weights <- as.numeric(edge_attr(graph, "weight"))
     }
   }
 
@@ -2345,7 +2345,7 @@ transitivity <- function(
   )
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -2369,7 +2369,7 @@ transitivity <- function(
         isolates_num
       )
       if (igraph_opt("add.vertex.names") && is_named(graph)) {
-        names(res) <- V(graph)$name
+        names(res) <- vertex_attr(graph, "name")
       }
       res
     } else {
@@ -2380,7 +2380,7 @@ transitivity <- function(
       )
       if (igraph_opt("add.vertex.names") && is_named(graph)) {
         vids_indices <- as_igraph_vs(graph, vids)
-        names(res) <- V(graph)$name[vids_indices]
+        names(res) <- vertex_attr(graph, "name")[vids_indices]
       }
       res
     }
@@ -2425,7 +2425,7 @@ transitivity <- function(
 
     if (igraph_opt("add.vertex.names") && is_named(graph)) {
       vids_indices <- as_igraph_vs(graph, vids_for_names)
-      names(res) <- V(graph)$name[vids_indices]
+      names(res) <- vertex_attr(graph, "name")[vids_indices]
     }
     res
   }
@@ -2524,7 +2524,7 @@ constraint <- function(
 
   if (is.null(weights)) {
     if ("weight" %in% edge_attr_names(graph)) {
-      weights <- E(graph)$weight
+      weights <- edge_attr(graph, "weight")
     }
   }
 
@@ -2534,7 +2534,7 @@ constraint <- function(
     weights = weights
   )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res) <- V(graph)$name[nodes]
+    names(res) <- vertex_attr(graph, "name")[nodes]
   }
   res
 }
@@ -3849,18 +3849,18 @@ bfs <- function(
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     if (rank) {
-      names(res$rank) <- V(graph)$name
+      names(res$rank) <- vertex_attr(graph, "name")
     }
     if (parent) {
-      names(res$parent) <- V(graph)$name
+      names(res$parent) <- vertex_attr(graph, "name")
     }
     if (pred) {
-      names(res$pred) <- V(graph)$name
+      names(res$pred) <- vertex_attr(graph, "name")
     }
     if (succ) {
-      names(res$succ) <- V(graph)$name
+      names(res$succ) <- vertex_attr(graph, "name")
     }
-    if (dist) names(res$dist) <- V(graph)$name
+    if (dist) names(res$dist) <- vertex_attr(graph, "name")
   }
 
   if (rank) {
@@ -4100,9 +4100,9 @@ dfs <- function(
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     if (parent) {
-      names(res$parent) <- V(graph)$name
+      names(res$parent) <- vertex_attr(graph, "name")
     }
-    if (dist) names(res$dist) <- V(graph)$name
+    if (dist) names(res$dist) <- vertex_attr(graph, "name")
   }
 
   # Remove this later? https://github.com/igraph/rigraph/issues/1576
@@ -4229,7 +4229,7 @@ components <- function(
   )
   res$membership <- res$membership + 1
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$membership) <- V(graph)$name
+    names(res$membership) <- vertex_attr(graph, "name")
   }
 
   res
@@ -4601,7 +4601,7 @@ laplacian_matrix <- function(
   }
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+    weights <- edge_attr(graph, "weight")
   }
   if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
@@ -4630,7 +4630,7 @@ laplacian_matrix <- function(
     res <- igraph.i.spMatrix(res)
   }
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    rownames(res) <- colnames(res) <- V(graph)$name
+    rownames(res) <- colnames(res) <- vertex_attr(graph, "name")
   }
   res
 }
@@ -4826,8 +4826,8 @@ max_bipartite_match <- function(
 
   res$matching[res$matching == 0] <- NA
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    res$matching <- V(graph)$name[res$matching]
-    names(res$matching) <- V(graph)$name
+    res$matching <- vertex_attr(graph, "name")[res$matching]
+    names(res$matching) <- vertex_attr(graph, "name")
   }
   res
 }
