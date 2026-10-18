@@ -1020,6 +1020,17 @@ test_that("edge_density works", {
   expect_equal(gd, gd2)
 })
 
+test_that("edge_density() ignores edge weights", {
+  g <- make_ring(4)
+  unweighted <- edge_density(g)
+  E(g)$weight <- 2
+  expect_equal(edge_density(g), unweighted)
+  expect_equal(
+    edge_density(g, loops = TRUE),
+    edge_density(make_ring(4), loops = TRUE)
+  )
+})
+
 test_that("knn works", {
   igraph_local_seed(42)
 
