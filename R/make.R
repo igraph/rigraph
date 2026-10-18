@@ -841,9 +841,9 @@ graph.atlas <- function(n) {
       vertex.attributes(graph) <- structure(list(), names = character(0))
       edge.attributes(graph) <- structure(list(), names = character(0))
     } else if (m$id == "without_loops") {
-      graph <- simplify(graph, remove.loops = TRUE, remove.multiple = FALSE)
+      graph <- simplify(graph, remove_loops = TRUE, remove_multiple = FALSE)
     } else if (m$id == "without_multiples") {
-      graph <- simplify(graph, remove.loops = FALSE, remove.multiple = TRUE)
+      graph <- simplify(graph, remove_loops = FALSE, remove_multiple = TRUE)
     } else if (m$id == "simplified") {
       graph <- simplify(graph)
     } else if (m$id == "with_vertex_") {

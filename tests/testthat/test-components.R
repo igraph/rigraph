@@ -246,12 +246,12 @@ test_that("decompose() tail arguments and legacy positional recovery", {
   g <- add_vertices(make_graph(c(1, 2, 2, 1, 3, 4), directed = TRUE), 1)
 
   # Only the mutual pair is a strong component with at least 2 vertices.
-  res <- decompose(g, mode = "strong", max.comps = 2, min.vertices = 2)
+  res <- decompose(g, mode = "strong", max_comps = 2, min_vertices = 2)
   expect_length(res, 1)
   expect_equal(vcount(res[[1]]), 2)
 
   # max.comps caps the 3 weak components at 2.
-  expect_length(decompose(g, max.comps = 2), 2)
+  expect_length(decompose(g, max_comps = 2), 2)
 
   lifecycle::expect_deprecated(res2 <- decompose(g, "strong"))
   ref <- decompose(g, mode = "strong")
@@ -266,4 +266,17 @@ test_that("largest_component() legacy positional recovery", {
 
   lifecycle::expect_deprecated(res <- largest_component(g, "strong"))
   expect_identical_graphs(res, largest_component(g, mode = "strong"))
+})
+
+test_that("component and decompose renames recover the legacy dotted names", {
+  g <- make_ring(5) %du% make_ring(3)
+  expect_legacy_arg(
+    component_distribution,
+    list(g),
+    "mul.size",
+    "mul_size",
+    FALSE
+  )
+  expect_legacy_arg(decompose, list(g), "max.comps", "max_comps", 1)
+  expect_legacy_arg(decompose, list(g), "min.vertices", "min_vertices", 4)
 })

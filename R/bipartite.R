@@ -130,7 +130,7 @@ bipartite.mapping <- function(graph) {
 #'   one projection is requested in argument `which`.
 #' @param which A character scalar to specify which projection(s) to calculate.
 #'   The default is to calculate both.
-#' @param remove.type Logical, whether to remove the `type` vertex
+#' @param remove_type Logical, whether to remove the `type` vertex
 #'   attribute from the projections. This makes sense because these graphs are
 #'   not bipartite any more. However if you want to combine them with each other
 #'   (or other bipartite graphs), then it is worth keeping this attribute. By
@@ -167,7 +167,7 @@ bipartite_projection <- function(
   multiplicity = TRUE,
   probe1 = NULL,
   which = c("both", "true", "false"),
-  remove.type = TRUE
+  remove_type = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: bipartite_projection, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -184,7 +184,7 @@ bipartite_projection <- function(
         if (!base::missing(multiplicity)) base::list(multiplicity = multiplicity),
         if (!base::missing(probe1)) base::list(probe1 = probe1),
         if (!base::missing(which)) base::list(which = which),
-        if (!base::missing(remove.type)) base::list(remove.type = remove.type)
+        if (!base::missing(remove.type)) base::list(remove_type = remove.type)
       )
     }
     .arg_handle <- .old_signature(...)
@@ -194,7 +194,7 @@ bipartite_projection <- function(
         if (!base::missing(multiplicity)) "multiplicity",
         if (!base::missing(probe1)) "probe1",
         if (!base::missing(which)) "which",
-        if (!base::missing(remove.type)) "remove.type"
+        if (!base::missing(remove_type)) "remove_type"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn bipartite_projection} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -202,7 +202,7 @@ bipartite_projection <- function(
         "3.0.0",
         what = base::I("Calling `bipartite_projection()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  bipartite_projection(", base::paste(base::c("graph", "types", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  bipartite_projection(", base::paste(base::c("graph", "types", base::c(multiplicity = "multiplicity", probe1 = "probe1", which = "which", remove_type = "remove.type")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    bipartite_projection(", base::paste(base::c("graph", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -240,7 +240,7 @@ bipartite_projection <- function(
     as.numeric(probe1),
     which
   )
-  if (remove.type) {
+  if (remove_type) {
     if (is_igraph(res[[1]]) && "type" %in% vertex_attr_names(res[[1]])) {
       res[[1]] <- delete_vertex_attr(res[[1]], "type")
     }

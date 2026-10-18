@@ -51,23 +51,23 @@ migrations <- list(
   ),
 
   sir = list(
-    old = function(graph, beta, gamma, no.sim) {},
+    old = function(graph, beta, gamma, no.sim = n_sim) {},
     new = function(
       graph,
       beta,
       gamma,
       ...,
-      no.sim = 100
+      n_sim = 100
     ) {},
     when = "3.0.0"
   ),
 
   stochastic_matrix = list(
-    old = function(graph, column.wise, sparse) {},
+    old = function(graph, column.wise = column_wise, sparse) {},
     new = function(
       graph,
       ...,
-      column.wise = FALSE,
+      column_wise = FALSE,
       sparse = NULL
     ) {},
     when = "3.0.0"

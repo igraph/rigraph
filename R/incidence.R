@@ -158,7 +158,7 @@ graph_incidence_build <- function(
 #'   attribute named by the `weighted` argument. If it is `TRUE` then a
 #'   weighted graph is created and the name of the edge attribute will be
 #'   \sQuote{`weight`}.
-#' @param add.names A character constant, `NA` or `NULL`.
+#' @param add_names A character constant, `NA` or `NULL`.
 #'   `graph_from_biadjacency_matrix()` can add the row and column names of the incidence
 #'   matrix as vertex attributes. If this argument is `NULL` (the default)
 #'   and the bipartite adjacency matrix has both row and column names, then these are added
@@ -192,7 +192,7 @@ graph_from_biadjacency_matrix <- function(
   mode = c("all", "out", "in", "total"),
   multiple = FALSE,
   weighted = NULL,
-  add.names = NULL
+  add_names = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph_from_biadjacency_matrix, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -212,7 +212,7 @@ graph_from_biadjacency_matrix <- function(
         if (!base::missing(mode)) base::list(mode = mode),
         if (!base::missing(multiple)) base::list(multiple = multiple),
         if (!base::missing(weighted)) base::list(weighted = weighted),
-        if (!base::missing(add.names)) base::list(add.names = add.names)
+        if (!base::missing(add.names)) base::list(add_names = add.names)
       )
     }
     .arg_handle <- .old_signature(...)
@@ -223,7 +223,7 @@ graph_from_biadjacency_matrix <- function(
         if (!base::missing(mode)) "mode",
         if (!base::missing(multiple)) "multiple",
         if (!base::missing(weighted)) "weighted",
-        if (!base::missing(add.names)) "add.names"
+        if (!base::missing(add_names)) "add_names"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn graph_from_biadjacency_matrix} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -231,7 +231,7 @@ graph_from_biadjacency_matrix <- function(
         "3.0.0",
         what = base::I("Calling `graph_from_biadjacency_matrix()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  graph_from_biadjacency_matrix(", base::paste(base::c("incidence", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  graph_from_biadjacency_matrix(", base::paste(base::c("incidence", base::c(directed = "directed", mode = "mode", multiple = "multiple", weighted = "weighted", add_names = "add.names")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    graph_from_biadjacency_matrix(", base::paste(base::c("incidence", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -279,24 +279,24 @@ graph_from_biadjacency_matrix <- function(
   )
 
   ## Add names
-  if (is.null(add.names)) {
+  if (is.null(add_names)) {
     if (!is.null(rownames(incidence)) && !is.null(colnames(incidence))) {
-      add.names <- "name"
+      add_names <- "name"
     } else {
-      add.names <- NA
+      add_names <- NA
     }
-  } else if (!is.na(add.names)) {
+  } else if (!is.na(add_names)) {
     if (is.null(rownames(incidence)) || is.null(colnames(incidence))) {
       cli::cli_warn(
         "Cannot add row- and column names, at least one of them is missing."
       )
-      add.names <- NA
+      add_names <- NA
     }
   }
-  if (!is.na(add.names)) {
+  if (!is.na(add_names)) {
     res <- set_vertex_attr(
       res,
-      add.names,
+      add_names,
       value = c(rownames(incidence), colnames(incidence))
     )
   }

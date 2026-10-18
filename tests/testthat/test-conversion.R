@@ -1232,7 +1232,7 @@ test_that("graph_from_graphnel() covers tail args by name and recovers positiona
     gnel,
     name = TRUE,
     weight = TRUE,
-    unlist.attrs = TRUE
+    unlist_attrs = TRUE
   )
   expect_isomorphic(g_full, g)
   expect_identical(V(g_full)$name, letters[1:4])
@@ -1244,7 +1244,7 @@ test_that("graph_from_graphnel() covers tail args by name and recovers positiona
     gnel,
     name = FALSE,
     weight = FALSE,
-    unlist.attrs = FALSE
+    unlist_attrs = FALSE
   )
   expect_false("name" %in% vertex_attr_names(g_min))
   expect_false(is_weighted(g_min))
@@ -1255,4 +1255,16 @@ test_that("graph_from_graphnel() covers tail args by name and recovers positiona
     res <- graph_from_graphnel(gnel, FALSE)
   )
   expect_identical_graphs(res, graph_from_graphnel(gnel, name = FALSE))
+})
+
+test_that("graph_from_graphnel(unlist.attrs = ) is renamed to `unlist_attrs`", {
+  skip_if_not_installed("graph")
+  gnel <- as_graphnel(make_ring(5))
+  expect_legacy_arg(
+    graph_from_graphnel,
+    list(gnel),
+    "unlist.attrs",
+    "unlist_attrs",
+    FALSE
+  )
 })

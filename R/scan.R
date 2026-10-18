@@ -33,18 +33,20 @@
 #'
 #' `local_scan()` calculates exact local scan statistics.
 #'
-#' If `graph.them` is `NULL`, then `local_scan()` computes the
+#' If `graph_them` is `NULL`, then `local_scan()` computes the
 #' \sQuote{us} variant of the scan statistics.  Otherwise,
-#' `graph.them` should be an igraph object and the \sQuote{them}
-#' variant is computed using `graph.us` to extract the neighborhood
+#' `graph_them` should be an igraph object and the \sQuote{them}
+#' variant is computed using `graph_us` to extract the neighborhood
 #' information, and applying `FUN` on these neighborhoods in
-#' `graph.them`.
+#' `graph_them`.
 #'
-#' @param graph.us,graph An igraph object, the graph for which the scan
+#' @param graph_us,graph An igraph object, the graph for which the scan
 #'   statistics will be computed
-#' @param graph.them An igraph object on which the \sQuote{them} statistics is computed,
-#'   i.e. the neighborhoods calculated from `graph.us` are evaluated on `graph.them`.
+#' @param graph.us `r lifecycle::badge("deprecated")` Use `graph_us` instead.
+#' @param graph_them An igraph object on which the \sQuote{them} statistics is computed,
+#'   i.e. the neighborhoods calculated from `graph_us` are evaluated on `graph_them`.
 #'   Default: `NULL`.
+#' @param graph.them `r lifecycle::badge("deprecated")` Use `graph_them` instead.
 #' @param k An integer scalar, the size of the local neighborhood for each
 #'   vertex. Should be non-negative.
 #' @param FUN Character, a function name, or a function object itself, for
@@ -65,10 +67,10 @@
 #'   `NULL`. If it is not `NULL`, then the function is evaluated on
 #'   the induced subgraphs specified by these neighborhoods.
 #'
-#'   In theory this could be useful if the same `graph.us` graph is used
-#'   for multiple `graph.them` arguments. Then the neighborhoods can be
-#'   calculated on `graph.us` and used with multiple graphs. In
-#'   practice, this is currently slower than simply using `graph.them`
+#'   In theory this could be useful if the same `graph_us` graph is used
+#'   for multiple `graph_them` arguments. Then the neighborhoods can be
+#'   calculated on `graph_us` and used with multiple graphs. In
+#'   practice, this is currently slower than simply using `graph_them`
 #'   multiple times.
 #' @param weights Numeric vector, edge weights to use for the scan instead of the edge attribute weight. If `NULL` (the default) the edge weight attribute is used.
 #' @param \dots Arguments passed to `FUN`, the function that computes
@@ -85,43 +87,75 @@
 #' @export
 #' @examples
 #' pair <- sample_correlated_gnp_pair(n = 10^3, corr = 0.8, p = 0.1)
-#' local_0_us <- local_scan(graph.us = pair$graph1, k = 0)
-#' local_1_us <- local_scan(graph.us = pair$graph1, k = 1)
+#' local_0_us <- local_scan(graph_us = pair$graph1, k = 0)
+#' local_1_us <- local_scan(graph_us = pair$graph1, k = 1)
 #'
 #' local_0_them <- local_scan(
-#'   graph.us = pair$graph1,
-#'   graph.them = pair$graph2, k = 0
+#'   graph_us = pair$graph1,
+#'   graph_them = pair$graph2, k = 0
 #' )
 #' local_1_them <- local_scan(
-#'   graph.us = pair$graph1,
-#'   graph.them = pair$graph2, k = 1
+#'   graph_us = pair$graph1,
+#'   graph_them = pair$graph2, k = 1
 #' )
 #'
 #' Neigh_1 <- neighborhood(pair$graph1, order = 1)
 #' local_1_them_nhood <- local_scan(
-#'   graph.us = pair$graph1,
-#'   graph.them = pair$graph2,
+#'   graph_us = pair$graph1,
+#'   graph_them = pair$graph2,
 #'   neighborhoods = Neigh_1
 #' )
 local_scan <- function(
-  graph.us,
-  graph.them = NULL,
+  graph_us,
+  graph_them = NULL,
   k = 1,
   FUN = NULL,
   weighted = FALSE,
   mode = c("out", "in", "all"),
   neighborhoods = NULL,
   weights = NULL,
-  ...
+  ...,
+  graph.us = deprecated(),
+  graph.them = deprecated()
 ) {
+  if (lifecycle::is_present(graph.them)) {
+    if (!missing(graph_them)) {
+      cli::cli_abort(c(
+        "Argument {.arg graph_them} of {.fn local_scan} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg graph.them}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "local_scan(graph.them = )",
+      "local_scan(graph_them = )"
+    )
+    graph_them <- graph.them
+  }
+
+  if (lifecycle::is_present(graph.us)) {
+    if (!missing(graph_us)) {
+      cli::cli_abort(c(
+        "Argument {.arg graph_us} of {.fn local_scan} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg graph.us}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "local_scan(graph.us = )",
+      "local_scan(graph_us = )"
+    )
+    graph_us <- graph.us
+  }
+
   ## Must be igraph object
-  stopifnot(is_igraph(graph.us))
+  stopifnot(is_igraph(graph_us))
 
   ## Must be NULL or igraph object
-  stopifnot(is.null(graph.them) || is_igraph(graph.them))
+  stopifnot(is.null(graph_them) || is_igraph(graph_them))
 
   ## If given, number of vertices must match
-  stopifnot(is.null(graph.them) || vcount(graph.them) == vcount(graph.us))
+  stopifnot(is.null(graph_them) || vcount(graph_them) == vcount(graph_us))
 
   ## k must be non-negative integer
   stopifnot(length(k) == 1, k >= 0, trunc(k) == k)
@@ -137,25 +171,25 @@ local_scan <- function(
   ## If weighted, then the graph(s) must be weighted
   stopifnot(
     !weighted ||
-      (is_weighted(graph.us) &&
-        (is.null(graph.them) ||
-          is_weighted(graph.them)))
+      (is_weighted(graph_us) &&
+        (is.null(graph_them) ||
+          is_weighted(graph_them)))
   )
 
   # Check weight parameter only if weighted=TRUE
   if (weighted && !is.null(weights)) {
     stopifnot(is.numeric(weights))
-    if (!is.null(graph.them)) {
-      stopifnot(length(weights) == ecount(graph.them))
+    if (!is.null(graph_them)) {
+      stopifnot(length(weights) == ecount(graph_them))
     } else {
-      stopifnot(length(weights) == ecount(graph.us))
+      stopifnot(length(weights) == ecount(graph_us))
     }
   }
 
   ## Check if 'neighborhoods' makes sense
   if (!is.null(neighborhoods)) {
     stopifnot(is.list(neighborhoods))
-    stopifnot(length(neighborhoods) == vcount(graph.us))
+    stopifnot(length(neighborhoods) == vcount(graph_us))
   }
   if (!is.null(neighborhoods) && k == 0) {
     cli::cli_warn("{.arg neighborhoods} ignored for {.code k=0}.")
@@ -175,27 +209,27 @@ local_scan <- function(
   edge_weights <- if (weighted) {
     if (!is.null(weights)) {
       as.numeric(weights)
-    } else if (!is.null(graph.them)) {
-      as.numeric(E(graph.them)$weight)
+    } else if (!is.null(graph_them)) {
+      as.numeric(E(graph_them)$weight)
     } else {
-      as.numeric(E(graph.us)$weight)
+      as.numeric(E(graph_us)$weight)
     }
   } else {
     # Use numeric(0) instead of NULL to prevent _impl from auto-fetching weights
     numeric(0)
   }
 
-  res <- if (is.null(graph.them)) {
+  res <- if (is.null(graph_them)) {
     if (!is.null(neighborhoods)) {
       if (is.character(FUN) && FUN %in% c("ecount", "sumweights")) {
         local_scan_neighborhood_ecount_impl(
-          graph = graph.us,
+          graph = graph_us,
           weights = edge_weights,
           neighborhoods = neighborhoods
         )
       } else {
         sapply(
-          lapply(neighborhoods, induced.subgraph, graph = graph.us),
+          lapply(neighborhoods, induced.subgraph, graph = graph_us),
           FUN,
           ...
         )
@@ -204,7 +238,7 @@ local_scan <- function(
       ## scan-0
       if (k == 0) {
         local_scan_0_impl(
-          graph = graph.us,
+          graph = graph_us,
           weights = edge_weights,
           mode = mode
         )
@@ -214,7 +248,7 @@ local_scan <- function(
         k == 1 && is.character(FUN) && FUN %in% c("ecount", "sumweights")
       ) {
         local_scan_1_ecount_impl(
-          graph = graph.us,
+          graph = graph_us,
           weights = edge_weights,
           mode = mode
         )
@@ -222,7 +256,7 @@ local_scan <- function(
         ## scan-k, ecount
       } else if (is.character(FUN) && FUN %in% c("ecount", "sumweights")) {
         local_scan_k_ecount_impl(
-          graph = graph.us,
+          graph = graph_us,
           k = k,
           weights = edge_weights,
           mode = mode
@@ -231,7 +265,7 @@ local_scan <- function(
         ## General
       } else {
         sapply(
-          make_ego_graph(graph.us, order = k, V(graph.us), mode = mode),
+          make_ego_graph(graph_us, order = k, V(graph_us), mode = mode),
           FUN,
           ...
         )
@@ -242,13 +276,13 @@ local_scan <- function(
       neighborhoods <- lapply(neighborhoods, as.vector)
       if (is.character(FUN) && FUN %in% c("ecount", "sumweights")) {
         local_scan_neighborhood_ecount_impl(
-          graph = graph.them,
+          graph = graph_them,
           weights = edge_weights,
           neighborhoods = neighborhoods
         )
       } else {
         sapply(
-          lapply(neighborhoods, induced.subgraph, graph = graph.them),
+          lapply(neighborhoods, induced.subgraph, graph = graph_them),
           FUN,
           ...
         )
@@ -257,8 +291,8 @@ local_scan <- function(
       ## scan-0
       if (k == 0) {
         local_scan_0_them_impl(
-          us = graph.us,
-          them = graph.them,
+          us = graph_us,
+          them = graph_them,
           weights_them = edge_weights,
           mode = mode
         )
@@ -268,8 +302,8 @@ local_scan <- function(
         k == 1 && is.character(FUN) && FUN %in% c("ecount", "sumweights")
       ) {
         local_scan_1_ecount_them_impl(
-          us = graph.us,
-          them = graph.them,
+          us = graph_us,
+          them = graph_them,
           weights_them = edge_weights,
           mode = mode
         )
@@ -277,8 +311,8 @@ local_scan <- function(
         ## scan-k, ecount
       } else if (is.character(FUN) && FUN %in% c("ecount", "sumweights")) {
         local_scan_k_ecount_them_impl(
-          us = graph.us,
-          them = graph.them,
+          us = graph_us,
+          them = graph_them,
           k = k,
           weights_them = edge_weights,
           mode = mode
@@ -286,9 +320,9 @@ local_scan <- function(
 
         ## General
       } else {
-        sapply(V(graph.us), function(x) {
+        sapply(V(graph_us), function(x) {
           vei <- neighborhood(
-            graph.us,
+            graph_us,
             order = k,
             vertices = x,
             mode = mode
@@ -296,7 +330,7 @@ local_scan <- function(
           if (!is.function(FUN)) {
             FUN <- getFunction(FUN, where = environment())
           }
-          FUN(induced_subgraph(graph.them, vei), ...)
+          FUN(induced_subgraph(graph_them, vei), ...)
         })
       }
     }
@@ -304,8 +338,8 @@ local_scan <- function(
 
   res <- as.numeric(res)
 
-  if (igraph_opt("add.vertex.names") && is_named(graph.us)) {
-    names(res) <- V(graph.us)$name
+  if (igraph_opt("add.vertex.names") && is_named(graph_us)) {
+    names(res) <- V(graph_us)$name
   }
 
   res
@@ -412,8 +446,8 @@ scan_stat <- function(
         for (j in 0:tau) {
           ## locality statistics \Phi over all vertices with t=i and t'=i-tau+j
           lstatPhi[, (j + 1), i] <- local_scan(
-            graph.us = graphs[[i]],
-            graph.them = graphs[[i - tau + j]],
+            graph_us = graphs[[i]],
+            graph_them = graphs[[i - tau + j]],
             ...
           )
         }

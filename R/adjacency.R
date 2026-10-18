@@ -153,15 +153,15 @@ graph.adjacency <- function(
 #' @param diag Logical, whether to include the diagonal of the matrix in
 #'   the calculation. If this is `FALSE` then the diagonal is zerod out
 #'   first.
-#' @param add.colnames Character scalar, whether to add the column names as
+#' @param add_colnames Character scalar, whether to add the column names as
 #'   vertex attributes. If it is `NULL` (the default) then, if
 #'   present, column names are added as vertex attribute \sQuote{name}. If
 #'   `NA` or `FALSE` then they will not be added.  If a character constant,
 #'   then it gives the name of the vertex attribute to add.
-#' @param add.rownames Character scalar, whether to add the row names as vertex
+#' @param add_rownames Character scalar, whether to add the row names as vertex
 #'   attributes. Possible values the same as the previous argument. By default
-#'   row names are not added. If \sQuote{`add.rownames`} and
-#'   \sQuote{`add.colnames`} specify the same vertex attribute, then the
+#'   row names are not added. If \sQuote{`add_rownames`} and
+#'   \sQuote{`add_colnames`} specify the same vertex attribute, then the
 #'   former is ignored.
 #' @return An igraph graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -269,7 +269,7 @@ graph.adjacency <- function(
 #' g10 <- graph_from_adjacency_matrix(
 #'   adj_matrix,
 #'   weighted = TRUE,
-#'   add.rownames = "code"
+#'   add_rownames = "code"
 #' )
 #' summary(g10)
 #'
@@ -288,15 +288,15 @@ graph_from_adjacency_matrix <- function(
   ),
   weighted = NULL,
   diag = TRUE,
-  add.colnames = NULL,
-  add.rownames = NA
+  add_colnames = NULL,
+  add_rownames = NA
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph_from_adjacency_matrix, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
     .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("a", "ad"))
     if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn graph_from_adjacency_matrix}.", i = "Spell out the full argument name."))
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "ad", "add", "add."))
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "ad", "add", "add.", "add_"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn graph_from_adjacency_matrix}.")
     # Pre-3.0.0 signature: graph_from_adjacency_matrix(adjmatrix, mode, weighted, diag, add.colnames, add.rownames)
     .old_signature <- function(mode, weighted, diag, add.colnames, add.rownames, ...) {
@@ -310,8 +310,8 @@ graph_from_adjacency_matrix <- function(
         if (!base::missing(mode)) base::list(mode = mode),
         if (!base::missing(weighted)) base::list(weighted = weighted),
         if (!base::missing(diag)) base::list(diag = diag),
-        if (!base::missing(add.colnames)) base::list(add.colnames = add.colnames),
-        if (!base::missing(add.rownames)) base::list(add.rownames = add.rownames)
+        if (!base::missing(add.colnames)) base::list(add_colnames = add.colnames),
+        if (!base::missing(add.rownames)) base::list(add_rownames = add.rownames)
       )
     }
     .arg_handle <- .old_signature(...)
@@ -321,8 +321,8 @@ graph_from_adjacency_matrix <- function(
         if (!base::missing(mode)) "mode",
         if (!base::missing(weighted)) "weighted",
         if (!base::missing(diag)) "diag",
-        if (!base::missing(add.colnames)) "add.colnames",
-        if (!base::missing(add.rownames)) "add.rownames"
+        if (!base::missing(add_colnames)) "add_colnames",
+        if (!base::missing(add_rownames)) "add_rownames"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn graph_from_adjacency_matrix} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -330,7 +330,7 @@ graph_from_adjacency_matrix <- function(
         "3.0.0",
         what = base::I("Calling `graph_from_adjacency_matrix()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  graph_from_adjacency_matrix(", base::paste(base::c("adjmatrix", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  graph_from_adjacency_matrix(", base::paste(base::c("adjmatrix", base::c(mode = "mode", weighted = "weighted", diag = "diag", add_colnames = "add.colnames", add_rownames = "add.rownames")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    graph_from_adjacency_matrix(", base::paste(base::c("adjmatrix", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -377,48 +377,48 @@ graph_from_adjacency_matrix <- function(
   }
 
   ## Add columns and row names as attributes
-  if (is.null(add.colnames)) {
+  if (is.null(add_colnames)) {
     if (!is.null(colnames(adjmatrix))) {
-      add.colnames <- "name"
+      add_colnames <- "name"
     } else {
-      add.colnames <- NA
+      add_colnames <- NA
     }
-  } else if (isFALSE(add.colnames)) {
-    add.colnames <- NA
-  } else if (!is.na(add.colnames)) {
+  } else if (isFALSE(add_colnames)) {
+    add_colnames <- NA
+  } else if (!is.na(add_colnames)) {
     if (is.null(colnames(adjmatrix))) {
       cli::cli_warn("No column names to add")
-      add.colnames <- NA
+      add_colnames <- NA
     }
   }
 
-  if (is.null(add.rownames)) {
+  if (is.null(add_rownames)) {
     if (!is.null(rownames(adjmatrix))) {
-      add.rownames <- "name"
+      add_rownames <- "name"
     } else {
-      add.colnames <- NA
+      add_colnames <- NA
     }
-  } else if (isFALSE(add.rownames)) {
-    add.rownames <- NA
-  } else if (!is.na(add.rownames)) {
+  } else if (isFALSE(add_rownames)) {
+    add_rownames <- NA
+  } else if (!is.na(add_rownames)) {
     if (is.null(rownames(adjmatrix))) {
       cli::cli_warn("No row names to add")
-      add.rownames <- NA
+      add_rownames <- NA
     }
   }
 
   if (
-    !is.na(add.rownames) && !is.na(add.colnames) && add.rownames == add.colnames
+    !is.na(add_rownames) && !is.na(add_colnames) && add_rownames == add_colnames
   ) {
     cli::cli_warn("Same attribute for columns and rows, row names are ignored")
-    add.rownames <- NA
+    add_rownames <- NA
   }
 
-  if (!is.na(add.colnames)) {
-    res <- set_vertex_attr(res, add.colnames, value = colnames(adjmatrix))
+  if (!is.na(add_colnames)) {
+    res <- set_vertex_attr(res, add_colnames, value = colnames(adjmatrix))
   }
-  if (!is.na(add.rownames)) {
-    res <- set_vertex_attr(res, add.rownames, value = rownames(adjmatrix))
+  if (!is.na(add_rownames)) {
+    res <- set_vertex_attr(res, add_rownames, value = rownames(adjmatrix))
   }
 
   res
@@ -446,15 +446,15 @@ from_adjacency <- function(
   mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"),
   weighted = NULL,
   diag = TRUE,
-  add.colnames = NULL,
-  add.rownames = NA
+  add_colnames = NULL,
+  add_rownames = NA
 ) {
   # BEGIN GENERATED ARG_HANDLE: from_adjacency, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
     .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("a", "ad"))
     if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn from_adjacency}.", i = "Spell out the full argument name."))
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "ad", "add", "add."))
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "ad", "add", "add.", "add_"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn from_adjacency}.")
     # Pre-3.0.0 signature: from_adjacency(adjmatrix, mode, weighted, diag, add.colnames, add.rownames)
     .old_signature <- function(mode, weighted, diag, add.colnames, add.rownames, ...) {
@@ -468,8 +468,8 @@ from_adjacency <- function(
         if (!base::missing(mode)) base::list(mode = mode),
         if (!base::missing(weighted)) base::list(weighted = weighted),
         if (!base::missing(diag)) base::list(diag = diag),
-        if (!base::missing(add.colnames)) base::list(add.colnames = add.colnames),
-        if (!base::missing(add.rownames)) base::list(add.rownames = add.rownames)
+        if (!base::missing(add.colnames)) base::list(add_colnames = add.colnames),
+        if (!base::missing(add.rownames)) base::list(add_rownames = add.rownames)
       )
     }
     .arg_handle <- .old_signature(...)
@@ -479,8 +479,8 @@ from_adjacency <- function(
         if (!base::missing(mode)) "mode",
         if (!base::missing(weighted)) "weighted",
         if (!base::missing(diag)) "diag",
-        if (!base::missing(add.colnames)) "add.colnames",
-        if (!base::missing(add.rownames)) "add.rownames"
+        if (!base::missing(add_colnames)) "add_colnames",
+        if (!base::missing(add_rownames)) "add_rownames"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn from_adjacency} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -488,7 +488,7 @@ from_adjacency <- function(
         "3.0.0",
         what = base::I("Calling `from_adjacency()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  from_adjacency(", base::paste(base::c("adjmatrix", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  from_adjacency(", base::paste(base::c("adjmatrix", base::c(mode = "mode", weighted = "weighted", diag = "diag", add_colnames = "add.colnames", add_rownames = "add.rownames")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    from_adjacency(", base::paste(base::c("adjmatrix", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -502,8 +502,8 @@ from_adjacency <- function(
     mode = mode,
     weighted = weighted,
     diag = diag,
-    add.colnames = add.colnames,
-    add.rownames = add.rownames
+    add_colnames = add_colnames,
+    add_rownames = add_rownames
   )
 }
 

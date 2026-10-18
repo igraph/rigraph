@@ -22,7 +22,7 @@ test_that("fit_power_law() works", {
 
   set.seed(20241017)
   expected_p <- 0.2168
-  fit <- fit_power_law(d, p.value = TRUE)
+  fit <- fit_power_law(d, p_value = TRUE)
 
   expect_equal(fit[names(fit) != "KS.p"], expected)
   expect_equal(fit$KS.p, expected_p, tolerance = 1e-2)
@@ -32,4 +32,23 @@ test_that("fit_power_law() errors well", {
   expect_snapshot_igraph_error({
     fit_power_law(1, implementation = "R.mle")
   })
+})
+
+test_that("fit_power_law() recovers the legacy dotted names", {
+  x <- c(1, 1, 2, 2, 3, 4, 5, 8, 13, 21)
+  expect_legacy_arg(
+    fit_power_law,
+    list(x),
+    "force.continuous",
+    "force_continuous",
+    TRUE
+  )
+  expect_legacy_arg(fit_power_law, list(x), "p.value", "p_value", FALSE)
+  expect_legacy_arg(
+    fit_power_law,
+    list(x, p_value = TRUE),
+    "p.precision",
+    "p_precision",
+    0.1
+  )
 })

@@ -12,7 +12,7 @@
 # eccentricity() works -- lifecycle
 
     Code
-      eccentricity(g, vids = V(g), "out")
+      eccentricity(g, vertices = V(g), "out")
     Condition
       Warning:
       The `...` argument of `eccentricity()` is deprecated as of igraph 2.1.0.

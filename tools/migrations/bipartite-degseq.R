@@ -4,7 +4,7 @@
 
 migrations <- list(
   bipartite_projection = list(
-    old = function(graph, types, multiplicity, probe1, which, remove.type) {},
+    old = function(graph, types, multiplicity, probe1, which, remove.type = remove_type) {},
     new = function(
       graph,
       types = NULL,
@@ -12,7 +12,7 @@ migrations <- list(
       multiplicity = TRUE,
       probe1 = NULL,
       which = c("both", "true", "false"),
-      remove.type = TRUE
+      remove_type = TRUE
     ) {},
     when = "3.0.0"
   ),

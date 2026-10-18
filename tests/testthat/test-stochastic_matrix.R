@@ -8,7 +8,7 @@ test_that("stochastic_matrix works", {
     as_unnamed_dense_matrix(stoch_mat_calc)
   )
 
-  stoch_mat_calc_col <- stochastic_matrix(g, column.wise = TRUE)
+  stoch_mat_calc_col <- stochastic_matrix(g, column_wise = TRUE)
   expect_equal(
     t(as_unnamed_dense_matrix(stoch_mat_manual)),
     as_unnamed_dense_matrix(stoch_mat_calc_col)
@@ -35,5 +35,16 @@ test_that("stochastic_matrix() recovers a legacy positional `column.wise`", {
   lifecycle::expect_deprecated(
     W <- stochastic_matrix(g, TRUE)
   )
-  expect_identical(W, stochastic_matrix(g, column.wise = TRUE))
+  expect_identical(W, stochastic_matrix(g, column_wise = TRUE))
+})
+
+test_that("stochastic_matrix(column.wise = ) is renamed to `column_wise`", {
+  g <- make_ring(5)
+  expect_legacy_arg(
+    stochastic_matrix,
+    list(g),
+    "column.wise",
+    "column_wise",
+    TRUE
+  )
 })

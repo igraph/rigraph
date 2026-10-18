@@ -100,15 +100,18 @@ power.law.fit <- function(
 #' @param start Numeric scalar. The initial value of the exponent for the
 #'   minimizing function, for the \sQuote{`R.mle`} implementation. Usually
 #'   it is safe to leave this untouched.
-#' @param force.continuous Logical. Whether to force a continuous
+#' @param force_continuous Logical. Whether to force a continuous
 #'   distribution for the \sQuote{`plfit`} implementation, even if the
 #'   sample vector contains integer values only (by chance). If this argument is
 #'   false, igraph will assume a continuous distribution if at least one sample
 #'   is non-integer and assume a discrete distribution otherwise.
-#' @param p.value `r lifecycle::badge("experimental")`
+#' @param force.continuous `r lifecycle::badge("deprecated")` Use `force_continuous` instead.
+#' @param p_value `r lifecycle::badge("experimental")`
+#' @param p.value `r lifecycle::badge("deprecated")` Use `p_value` instead.
 #'
 #'   Set to `TRUE` to compute the p-value with `implementation = "plfit"`.
-#' @param p.precision `r lifecycle::badge("experimental")`
+#' @param p_precision `r lifecycle::badge("experimental")`
+#' @param p.precision `r lifecycle::badge("deprecated")` Use `p_precision` instead.
 #'
 #'   The desired precision of the p-value calculation. The
 #'   precision ultimately depends on the number of resampling attempts. The
@@ -184,18 +187,66 @@ fit_power_law <- function(
   x,
   xmin = NULL,
   start = 2,
-  force.continuous = FALSE,
+  force_continuous = FALSE,
   implementation = c("plfit", "R.mle"),
-  p.value = FALSE,
-  p.precision = NULL,
-  ...
+  p_value = FALSE,
+  p_precision = NULL,
+  ...,
+  force.continuous = deprecated(),
+  p.value = deprecated(),
+  p.precision = deprecated()
 ) {
+  if (lifecycle::is_present(p.precision)) {
+    if (!missing(p_precision)) {
+      cli::cli_abort(c(
+        "Argument {.arg p_precision} of {.fn fit_power_law} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg p.precision}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "fit_power_law(p.precision = )",
+      "fit_power_law(p_precision = )"
+    )
+    p_precision <- p.precision
+  }
+
+  if (lifecycle::is_present(p.value)) {
+    if (!missing(p_value)) {
+      cli::cli_abort(c(
+        "Argument {.arg p_value} of {.fn fit_power_law} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg p.value}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "fit_power_law(p.value = )",
+      "fit_power_law(p_value = )"
+    )
+    p_value <- p.value
+  }
+
+  if (lifecycle::is_present(force.continuous)) {
+    if (!missing(force_continuous)) {
+      cli::cli_abort(c(
+        "Argument {.arg force_continuous} of {.fn fit_power_law} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg force.continuous}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "fit_power_law(force.continuous = )",
+      "fit_power_law(force_continuous = )"
+    )
+    force_continuous <- force.continuous
+  }
+
   implementation <- igraph_match_arg(implementation)
 
   if (implementation == "r.mle") {
-    if (isTRUE(p.value)) {
+    if (isTRUE(p_value)) {
       cli::cli_abort(
-        "{.arg p.value} is not supported for {.arg implementation} = {.str R.mle}"
+        "{.arg p_value} is not supported for {.arg implementation} = {.str R.mle}"
       )
     }
     power.law.fit.old(x, xmin, start, ...)
@@ -207,13 +258,13 @@ fit_power_law <- function(
     )
   } else if (implementation == "plfit") {
     xmin <- xmin %||% -1
-    p.precision <- p.precision %||% 0.01
+    p_precision <- p_precision %||% 0.01
     power.law.fit.new(
       x,
       xmin = xmin,
-      force.continuous = force.continuous,
-      p.value = p.value,
-      p.precision = p.precision
+      force.continuous = force_continuous,
+      p.value = p_value,
+      p.precision = p_precision
     )
   }
 }

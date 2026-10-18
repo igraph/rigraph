@@ -128,13 +128,13 @@ test_that("centralize() covers migrated tail args and positional recovery", {
   scores <- degree(make_star(5, mode = "undirected"))
 
   # The star's degree sequence gives sum(max - x) = 12.
-  expect_equal(centralize(scores, theoretical.max = 12, normalized = TRUE), 1)
+  expect_equal(centralize(scores, theoretical_max = 12, normalized = TRUE), 1)
   expect_equal(centralize(scores, normalized = FALSE), 12)
 
   lifecycle::expect_deprecated(
     res_legacy <- centralize(scores, 12)
   )
-  expect_identical(res_legacy, centralize(scores, theoretical.max = 12))
+  expect_identical(res_legacy, centralize(scores, theoretical_max = 12))
 })
 
 # ---- nodes -> n rename ------------------------------------------------
@@ -151,5 +151,15 @@ test_that("centr_*_tmax(nodes = ) is deprecated but still works", {
   expect_identical(
     res_degree,
     centr_degree_tmax(n = 5, mode = "all", loops = TRUE)
+  )
+})
+
+test_that("centralize(theoretical.max = ) is renamed to `theoretical_max`", {
+  expect_legacy_arg(
+    centralize,
+    list(c(1, 2, 3)),
+    "theoretical.max",
+    "theoretical_max",
+    10
   )
 })

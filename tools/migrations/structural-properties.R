@@ -4,13 +4,13 @@
 
 migrations <- list(
   decompose = list(
-    old = function(graph, mode, max.comps, min.vertices) {},
+    old = function(graph, mode, max.comps = max_comps, min.vertices = min_vertices) {},
     new = function(
       graph,
       ...,
       mode = c("weak", "strong"),
-      max.comps = NA,
-      min.vertices = 0
+      max_comps = NA,
+      min_vertices = 0
     ) {},
     when = "3.0.0"
   ),
@@ -289,13 +289,13 @@ migrations <- list(
   ),
 
   knn = list(
-    old = function(graph, vids, mode, neighbor.degree.mode, weights) {},
+    old = function(graph, vids, mode, neighbor.degree.mode = neighbor_degree_mode, weights) {},
     new = function(
       graph,
       vertices = NULL,
       ...,
       mode = c("all", "out", "in", "total"),
-      neighbor.degree.mode = c("all", "out", "in", "total"),
+      neighbor_degree_mode = c("all", "out", "in", "total"),
       weights = NULL,
       vids = deprecated()
     ) {},
@@ -352,11 +352,11 @@ migrations <- list(
   ),
 
   reciprocity = list(
-    old = function(graph, ignore.loops, mode) {},
+    old = function(graph, ignore.loops = ignore_loops, mode) {},
     new = function(
       graph,
       ...,
-      ignore.loops = TRUE,
+      ignore_loops = TRUE,
       mode = c("default", "ratio")
     ) {},
     when = "3.0.0"
@@ -371,7 +371,7 @@ migrations <- list(
       weights,
       output,
       predecessors,
-      inbound.edges,
+      inbound.edges = inbound_edges,
       algorithm
     ) {},
     new = function(
@@ -383,7 +383,7 @@ migrations <- list(
       weights = NULL,
       output = c("vpath", "epath", "both"),
       predecessors = FALSE,
-      inbound.edges = FALSE,
+      inbound_edges = FALSE,
       algorithm = c("automatic", "unweighted", "dijkstra", "bellman-ford")
     ) {},
     when = "3.0.0"
@@ -402,12 +402,12 @@ migrations <- list(
   ),
 
   subgraph_from_edges = list(
-    old = function(graph, eids, delete.vertices) {},
+    old = function(graph, eids, delete.vertices = delete_vertices) {},
     new = function(
       graph,
       edges,
       ...,
-      delete.vertices = TRUE,
+      delete_vertices = TRUE,
       eids = deprecated()
     ) {},
     when = "3.0.0"

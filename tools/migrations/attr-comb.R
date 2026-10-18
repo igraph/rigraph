@@ -14,10 +14,12 @@ migrations <- list(
     ) {},
     new = function(
       graph,
-      remove.multiple = TRUE,
-      remove.loops = TRUE,
+      remove_multiple = TRUE,
+      remove_loops = TRUE,
       ...,
-      edge_attr_combine = NULL
+      edge_attr_combine = NULL,
+      remove.multiple = deprecated(),
+      remove.loops = deprecated()
     ) {},
     when = "3.0.0"
   ),

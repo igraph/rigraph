@@ -371,7 +371,7 @@ test_that("without_attr", {
 
 test_that("without_loops", {
   g1 <- make_graph(~ A - A:B:C, B - A:B:C, simplify = FALSE) %>%
-    simplify(remove.multiple = FALSE)
+    simplify(remove_multiple = FALSE)
 
   g2 <- make_(
     from_literal(A - A:B:C, B - A:B:C, simplify = FALSE),
@@ -385,7 +385,7 @@ test_that("without_loops", {
 
 test_that("without_multiple", {
   g1 <- make_graph(~ A - A:B:C, B - A:B:C, simplify = FALSE) %>%
-    simplify(remove.loops = FALSE)
+    simplify(remove_loops = FALSE)
 
   g2 <- make_(
     from_literal(A - A:B:C, B - A:B:C, simplify = FALSE),
