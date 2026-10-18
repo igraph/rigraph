@@ -40,6 +40,9 @@ The rest of `src/vendor/` (`config.h`, `igraph_config.h`, `igraph_export.h` and 
 
 **The glue gate** syntax-checks every C and C++ file directly in `src/` against the freshly vendored headers, after every buffer commit,
 and stops the walk at the first break with the breaking commit at `HEAD` (exit 3).
+In C it also fails what GCC 13 only warns of and GCC 14 rejects by default ([`scripts/vendor-lib.sh`](/scripts/vendor-lib.sh)).
+An implicit function declaration or an implicit `int` is how a macro upstream removed reads in the glue, and otherwise fails only the link.
+An incompatible pointer type or a conversion between an integer and a pointer is how a type upstream changed reads, and otherwise fails only GCC 14.
 A generator that fails (exit 7) stops before the commit, with the regenerated tree in place.
 On the strand that is CMake, flex or bison, and the fix goes into the strand commit;
 on the buffer it is Stimulus or cpp11, and the fix is usually a Stimulus definition that goes into the buffer commit
