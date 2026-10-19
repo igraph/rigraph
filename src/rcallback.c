@@ -60,7 +60,7 @@ igraph_error_t R_igraph_motifs_handler(const igraph_t *graph,
 
   /* Call the R function: callback(vids, isoclass) */
   PROTECT(R_fcall = Rf_lang3(callback, vids_r, isoclass_r));
-  PROTECT(result = Rf_eval(R_fcall, R_GlobalEnv));
+  PROTECT(result = Rx_igraph_eval_callback(R_fcall, R_GlobalEnv));
 
   /* Check if result is an error condition (from tryCatch) */
   if (Rf_inherits(result, "error")) {
@@ -110,7 +110,7 @@ igraph_error_t R_igraph_clique_handler(const igraph_vector_int_t *clique, void *
 
   /* Call the R function: callback(clique) */
   PROTECT(R_fcall = Rf_lang2(callback, clique_r));
-  PROTECT(result = Rf_eval(R_fcall, R_GlobalEnv));
+  PROTECT(result = Rx_igraph_eval_callback(R_fcall, R_GlobalEnv));
 
   /* Check if result is an error condition (from tryCatch) */
   if (Rf_inherits(result, "error")) {
@@ -182,7 +182,7 @@ igraph_error_t R_igraph_cycle_handler(
 
   /* Call the R function: callback(vertices, edges) */
   PROTECT(R_fcall = Rf_lang3(callback, vertices_r, edges_r));
-  PROTECT(result = Rf_eval(R_fcall, R_GlobalEnv));
+  PROTECT(result = Rx_igraph_eval_callback(R_fcall, R_GlobalEnv));
 
   /* Check if result is an error condition (from tryCatch) */
   if (Rf_inherits(result, "error")) {
@@ -242,7 +242,7 @@ igraph_error_t R_igraph_isomorphism_handler(
 
   /* Call the R function: callback(map12, map21) */
   PROTECT(R_fcall = Rf_lang3(callback, map12_r, map21_r));
-  PROTECT(result = Rf_eval(R_fcall, R_GlobalEnv));
+  PROTECT(result = Rx_igraph_eval_callback(R_fcall, R_GlobalEnv));
 
   /* Check if result is an error condition (from tryCatch) */
   if (Rf_inherits(result, "error")) {
@@ -336,7 +336,7 @@ igraph_error_t R_igraph_bfs_handler(
 
   /* Call the R callback with the converted data */
   PROTECT(R_fcall = Rf_lang2(callback, args));
-  PROTECT(result = Rf_eval(R_fcall, R_GlobalEnv));
+  PROTECT(result = Rx_igraph_eval_callback(R_fcall, R_GlobalEnv));
 
   /* Check if result is an error or interrupt condition */
   if (Rf_inherits(result, "error")) {
@@ -415,7 +415,7 @@ igraph_error_t R_igraph_dfs_handler_in(
 
   /* Call the R callback */
   PROTECT(R_fcall = Rf_lang2(callback, args));
-  PROTECT(result = Rf_eval(R_fcall, R_GlobalEnv));
+  PROTECT(result = Rx_igraph_eval_callback(R_fcall, R_GlobalEnv));
 
   /* Check if result is an error or interrupt condition */
   if (Rf_inherits(result, "error")) {
@@ -464,7 +464,7 @@ igraph_error_t R_igraph_dfs_handler_out(
 
   /* Call the R callback */
   PROTECT(R_fcall = Rf_lang2(callback, args));
-  PROTECT(result = Rf_eval(R_fcall, R_GlobalEnv));
+  PROTECT(result = Rx_igraph_eval_callback(R_fcall, R_GlobalEnv));
 
   /* Check if result is an error or interrupt condition */
   if (Rf_inherits(result, "error")) {
@@ -574,11 +574,11 @@ igraph_error_t R_igraph_levc_handler(
   PROTECT(l2 = R_MakeExternalPtr((void*)&cont, R_NilValue, R_NilValue));
   PROTECT(l3 = R_MakeExternalPtr(arpack_extra, R_NilValue, R_NilValue));
   PROTECT(R_multip_call = Rf_lang3(l1, l2, l3));
-  PROTECT(s_multip = Rf_eval(R_multip_call, data->env_arp));
+  PROTECT(s_multip = Rx_igraph_eval_callback(R_multip_call, data->env_arp));
 
   /* Build the call: callback(membership, community, value, vector, multiplier, extra) */
   PROTECT(R_fcall = Rx_igraph_i_lang7(callback, s_memb, s_comm, s_evalue, s_evector, s_multip, data->extra));
-  PROTECT(res = Rf_eval(R_fcall, data->env));
+  PROTECT(res = Rx_igraph_eval_callback(R_fcall, data->env));
 
   /* Check if result is an error condition (from tryCatch) */
   if (Rf_inherits(res, "error")) {
