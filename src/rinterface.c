@@ -9783,7 +9783,7 @@ SEXP R_igraph_maximal_cliques_subset(SEXP graph, SEXP subset, SEXP outfile, SEXP
   igraph_vector_int_t c_subset;
   igraph_vector_int_list_t c_res;
   igraph_integer_t c_no;
-  FILE* c_outfile;
+  FILE* c_outfile = 0;
   igraph_integer_t c_min_size;
   igraph_integer_t c_max_size;
   SEXP res;
@@ -13992,7 +13992,7 @@ SEXP R_igraph_write_graph_gml(SEXP graph, SEXP outstream, SEXP options, SEXP id,
   FILE* c_outstream;
   igraph_write_gml_sw_t c_options;
   igraph_vector_t c_id;
-  const char* c_creator;
+  const char* c_creator = 0;
 
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
@@ -18085,7 +18085,7 @@ SEXP R_igraph_fundamental_cycles(SEXP graph, SEXP start, SEXP bfs_cutoff, SEXP w
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_int_list_t c_basis;
-  igraph_integer_t c_start;
+  igraph_integer_t c_start = 0;
   igraph_integer_t c_bfs_cutoff;
   igraph_vector_t c_weights;
   SEXP basis;
@@ -18437,7 +18437,7 @@ SEXP R_igraph_random_spanning_tree(SEXP graph, SEXP vid) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_int_t c_res;
-  igraph_integer_t c_vid;
+  igraph_integer_t c_vid = 0;
   SEXP res;
 
   SEXP r_result;
@@ -18565,9 +18565,8 @@ SEXP R_igraph_is_bipartite_coloring(SEXP graph, SEXP types) {
   igraph_bool_t c_res;
 
   SEXP res;
-  SEXP mode;
 
-  SEXP r_result, r_names;
+  SEXP r_result;
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
   Rz_SEXP_to_vector_bool(types, &c_types);
@@ -18954,7 +18953,7 @@ SEXP R_igraph_invalidate_cache(SEXP graph) {
 SEXP R_igraph_vertex_path_from_edge_path(SEXP graph, SEXP start, SEXP edge_path, SEXP mode) {
                                         /* Declarations */
   igraph_t c_graph;
-  igraph_integer_t c_start;
+  igraph_integer_t c_start = 0;
   igraph_vector_int_t c_edge_path;
   igraph_vector_int_t c_vertex_path;
   igraph_neimode_t c_mode;
