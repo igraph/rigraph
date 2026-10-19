@@ -62,7 +62,7 @@ Run `revdepcheck::revdep_details(, "tidygraph")` for more info
        ! The `father` argument of `bfs()` was deprecated in igraph 2.2.0 and is now defunct.
        i Please use the `parent` argument instead.
        
-       [ FAIL 6 | WARN 55 | SKIP 1 | PASS 423 ]
+       [ FAIL 6 | WARN 58 | SKIP 1 | PASS 423 ]
        Error:
        ! Test failures.
        Execution halted

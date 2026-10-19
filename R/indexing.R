@@ -516,16 +516,16 @@ expand.grid.unordered <- function(i, j, loops = FALSE, directed = FALSE) {
         (is.null(attr) && is.numeric(value) && value == 0)
     ) {
       ## Delete edges
-      todel <- get_edge_ids(x, c(rbind(from, to)))
+      todel <- get_edge_ids(x, to_vertex_pairs(from, to))
       x <- delete_edges(x, todel)
     } else {
       ## Addition or update of an attribute (or both)
-      ids <- get_edge_ids(x, c(rbind(from, to)))
+      ids <- get_edge_ids(x, to_vertex_pairs(from, to))
       if (any(ids == 0)) {
-        x <- add_edges(x, rbind(from[ids == 0], to[ids == 0]))
+        x <- add_edges(x, to_vertex_pairs(from[ids == 0], to[ids == 0]))
       }
       if (!is.null(attr)) {
-        ids <- get_edge_ids(x, c(rbind(from, to)))
+        ids <- get_edge_ids(x, to_vertex_pairs(from, to))
         x <- set_edge_attr(x, attr, ids, value = value)
       }
     }

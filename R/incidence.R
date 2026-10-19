@@ -107,11 +107,19 @@ graph_incidence_build <- function(
     res <- make_empty_graph(n = num_rows + num_cols, directed = directed)
     weight_attr <- list(el[, 3])
     names(weight_attr) <- weighted
-    res <- add_edges(res, edges = t(el[, 1:2]), attr = weight_attr)
+    res <- add_edges(
+      res,
+      edges = edgelist_to_vertex_pairs(el[, 1:2]),
+      attr = weight_attr
+    )
   } else {
     # Handle unweighted edges, replicating rows for multiple edges
     el <- el[rep(seq_len(nrow(el)), times = el[, 3]), 1:2]
-    res <- make_graph(n = num_rows + num_cols, c(t(el)), directed = directed)
+    res <- make_graph(
+      n = num_rows + num_cols,
+      edgelist_to_vertex_pairs(el),
+      directed = directed
+    )
   }
 
   set_vertex_attr(

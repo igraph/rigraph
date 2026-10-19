@@ -11,8 +11,6 @@ Run `revdepcheck::revdep_details(, "SEMgraph")` for more info
 *   checking examples ... ERROR
      ```
      ...
-       Please report the issue at <https://github.com/igraph/rigraph/issues>.
-     > plot(dag0$dag, layout=layout.circle, main = "Output DAG")
      Warning: vertex attribute color contains NAs. Replacing with default value 1
      > plot(dag0$dag.old, layout=layout.circle, main = "Inferred old edges")
      Warning: vertex attribute color contains NAs. Replacing with default value 1
@@ -27,6 +25,8 @@ Run `revdepcheck::revdep_details(, "SEMgraph")` for more info
      DAG conversion : TRUE
      Node Linear Ordering with TO setting
      
+     Warning in check.penalty.factor(penalty.factor, nvars) :
+       values for penalty.factor must be between 0 and Inf; negative values set to zero
      > dag2 <- SEMdag(ig, X, LO="TL")
      WARNING: input graph is not acyclic !
       Applying graph -> DAG conversion...
