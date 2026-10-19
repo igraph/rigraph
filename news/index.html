@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.99.99.9045</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.99.99.9046</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,6 +48,71 @@
       <small>Source: <a href="https://github.com/igraph/rigraph/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.99.99.9046" id="igraph-299999046">igraph 2.99.99.9046<a class="anchor" aria-label="anchor" href="#igraph-299999046"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-2-99-99-9046">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-99-99-9046"></a></h3>
+<ul><li><p>Calling igraph from a warning handler no longer corrupts the call that warned (<a href="https://github.com/igraph/rigraph/issues/2983" class="external-link">#2983</a>, <a href="https://github.com/igraph/rigraph/issues/2999" class="external-link">#2999</a>).</p></li>
+<li><p>Keep rejecting directed graphs in <code><a href="../reference/cluster_leiden.html">cluster_leiden()</a></code>, and pin its reported quality (<a href="https://github.com/igraph/rigraph/issues/2996" class="external-link">#2996</a>).</p></li>
+</ul><div class="section level4">
+<h4 id="series-2-99-99-9046">series<a class="anchor" aria-label="anchor" href="#series-2-99-99-9046"></a></h4>
+<ul><li>
+<p>Show man/ in a series review.</p>
+<p>A review pull request hid <code>man/</code> with the rest of what is generated, but the maintainer wants it shown. A reviewer needs the rendered documentation changes, and <code>man/</code> is where roxygen writes them.</p>
+<p>Drop <code>man</code> from <code>series_review_hidden</code>. The review still hides the strand, <code>src/rinterface.c</code>, <code>src/cpp11.cpp</code>, <code>R/cpp11.R</code>, the <code>src/sources-glue-*.mk</code> files and <code>src/*.dd</code>.</p>
+<p><code>series-land-test.sh</code> now asserts that a <code>man/</code> page is in the review, and its comparison with the series’ green no longer lists <code>man/</code>. The series-land skill and the comment in <code>series-config.sh</code> say so.</p>
+<p>Co-Authored-By: Claude Sonnet 5.5 <a href="mailto:noreply@anthropic.com" class="email">noreply@anthropic.com</a> Claude-Session: <a href="https://claude.ai/code/session_01JXnA76zWTu4ZD8BQCSYRpk" class="external-link uri">https://claude.ai/code/session_01JXnA76zWTu4ZD8BQCSYRpk</a></p>
+</li>
+</ul></div>
+<div class="section level4">
+<h4 id="series-2-99-99-9046-1">series<a class="anchor" aria-label="anchor" href="#series-2-99-99-9046-1"></a></h4>
+<ul><li><p>Finish an interrupted pick in series-vendor.sh (<a href="https://github.com/igraph/rigraph/issues/2969" class="external-link">#2969</a>).</p></li>
+<li><p>Keep <code>name</code> and <code>value</code> as the attributes of a vertex or edge sequence assignment (<a href="https://github.com/igraph/rigraph/issues/2984" class="external-link">#2984</a>).</p></li>
+<li><p>Validate permutations in <code><a href="../reference/permute.html">permute()</a></code> and <code><a href="../reference/sample_correlated_gnp.html">sample_correlated_gnp()</a></code> (<a href="https://github.com/igraph/rigraph/issues/2982" class="external-link">#2982</a>).</p></li>
+<li><p>Name <code><a href="../reference/laplacian_matrix.html">laplacian_matrix()</a></code> in its <code>normalized</code> deprecation message (<a href="https://github.com/igraph/rigraph/issues/2980" class="external-link">#2980</a>).</p></li>
+</ul></div>
+</div>
+<div class="section level3">
+<h3 id="features-2-99-99-9046">Features<a class="anchor" aria-label="anchor" href="#features-2-99-99-9046"></a></h3>
+<div class="section level4">
+<h4 id="series-2-99-99-9046-2">series<a class="anchor" aria-label="anchor" href="#series-2-99-99-9046-2"></a></h4>
+<ul><li>Let a series review stand on the <code>main</code> the series has ported (<a href="https://github.com/igraph/rigraph/issues/3002" class="external-link">#3002</a>).</li>
+</ul></div>
+<div class="section level4">
+<h4 id="tools-2-99-99-9046">tools<a class="anchor" aria-label="anchor" href="#tools-2-99-99-9046"></a></h4>
+<ul><li>Categorize the impls igraph 1.0 adds, and stop on any without a category (<a href="https://github.com/igraph/rigraph/issues/2998" class="external-link">#2998</a>).</li>
+</ul></div>
+<div class="section level4">
+<h4 id="series-2-99-99-9046-3">series<a class="anchor" aria-label="anchor" href="#series-2-99-99-9046-3"></a></h4>
+<ul><li>Audit vendored trees against upstream (<a href="https://github.com/igraph/rigraph/issues/2960" class="external-link">#2960</a>).</li>
+</ul></div>
+</div>
+<div class="section level3">
+<h3 id="documentation-2-99-99-9046">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-99-99-9046"></a></h3>
+<div class="section level4">
+<h4 id="series-2-99-99-9046-4">series<a class="anchor" aria-label="anchor" href="#series-2-99-99-9046-4"></a></h4>
+<ul><li><p>Brief the clean-context reviewer of a review pull request (<a href="https://github.com/igraph/rigraph/issues/2973" class="external-link">#2973</a>).</p></li>
+<li><p>Describe <code><a href="../reference/tkplot.html">tkplot()</a></code> and <code><a href="../reference/console.html">console()</a></code> as defunct (<a href="https://github.com/igraph/rigraph/issues/2981" class="external-link">#2981</a>).</p></li>
+<li><p>Draft release notes since igraph 2.3.4 (<a href="https://github.com/igraph/rigraph/issues/2978" class="external-link">#2978</a>).</p></li>
+<li><p>Keep examples from loading igraphdata’s namespace (<a href="https://github.com/igraph/rigraph/issues/2976" class="external-link">#2976</a>).</p></li>
+</ul></div>
+</div>
+<div class="section level3">
+<h3 id="testing-2-99-99-9046">Testing<a class="anchor" aria-label="anchor" href="#testing-2-99-99-9046"></a></h3>
+<ul><li><p>Split <code>test-aaa-auto.R</code> into one generated file per impl category, checked in CI (<a href="https://github.com/igraph/rigraph/issues/3000" class="external-link">#3000</a>).</p></li>
+<li><p>Pin the results that the igraph C core 1.0 changes (<a href="https://github.com/igraph/rigraph/issues/2997" class="external-link">#2997</a>).</p></li>
+<li>
+<p>Add the vendoring series’ tests that already pass on the current engine.</p>
+<p>The series’ tests that call only functions <code>main</code> has, and pass against a build of <code>main</code>, land here first, so that the series carries only the tests that need the new engine. Two of the series’ 19 new, changed or removed <code>test_that()</code> blocks qualify.</p>
+<ul><li>
+<code>test-assortativity.R</code>: 1 block, from the series’ fix for weighted <code>igraph_assortativity[_nominal]()</code>.</li>
+<li>
+<code>test-structural-properties.R</code>: 1 block, from the series’ fix for weighted <code>igraph_density()</code>.</li>
+</ul><p>Both check that the R functions ignore the <code>weight</code> edge attribute, as they do on the current engine. The new block in <code>test-community.R</code> calls <code>community_leiden_simple_impl()</code>, which <code>main</code> lacks. The changed and removed blocks in <code>test-aaa-auto.R</code> encode the new engine’s behaviour. Both stay in the series.</p>
+<p>Co-Authored-By: Claude Opus 5.5 <a href="mailto:noreply@anthropic.com" class="email">noreply@anthropic.com</a> Claude-Session: <a href="https://claude.ai/code/session_01JXnA76zWTu4ZD8BQCSYRpk" class="external-link uri">https://claude.ai/code/session_01JXnA76zWTu4ZD8BQCSYRpk</a></p>
+</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.99.99.9045" id="igraph-299999045">igraph 2.99.99.9045<a class="anchor" aria-label="anchor" href="#igraph-299999045"></a></h2>
 <div class="section level3">
