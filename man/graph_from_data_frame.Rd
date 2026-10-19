@@ -7,7 +7,13 @@
 \usage{
 as_data_frame(x, what = c("edges", "vertices", "both"))
 
-graph_from_data_frame(d, directed = TRUE, ..., vertices = NULL)
+graph_from_data_frame(
+  d,
+  directed = TRUE,
+  ...,
+  vertices = NULL,
+  vertex_ids = FALSE
+)
 }
 \arguments{
 \item{x}{An igraph object.}
@@ -27,6 +33,10 @@ version 0.7 this argument is coerced to a data frame with
 \item{vertices}{A data frame with vertex metadata, or \code{NULL}. See
 details below. Since version 0.7 this argument is coerced to a data frame
 with \code{as.data.frame}, if not \code{NULL}.}
+
+\item{vertex_ids}{Logical, whether the first two columns of \code{d} contain
+numeric vertex IDs rather than symbolic vertex names.
+See details below.}
 }
 \value{
 An igraph graph object for \code{graph_from_data_frame()}, and either a
@@ -53,6 +63,17 @@ symbolic vertex names, this will be added to the graphs as the
 additional vertex attributes. If \code{vertices} is not \code{NULL} then the
 symbolic edge list given in \code{d} is checked to contain only vertex names
 listed in \code{vertices}.
+
+If \code{vertex_ids} is \code{TRUE}, the first two columns of \code{d} are interpreted as
+numeric vertex IDs instead of symbolic vertex names.
+In this case, the rows of \code{vertices} correspond to the vertices in the order
+of their IDs, all columns of \code{vertices} are added as vertex attributes, and
+no \sQuote{\code{name}} attribute is created unless \code{vertices} has a \code{name}
+column.
+If \code{vertices} is \code{NULL}, the number of vertices is the largest vertex ID in
+\code{d}.
+This is the inverse of \code{as_data_frame(what = "both")} for graphs without
+vertex names.
 
 Typically, the data frames are exported from some spreadsheet software like
 Excel and are imported into R via \code{\link[=read.table]{read.table()}},
@@ -122,6 +143,19 @@ print(g, e = TRUE, v = TRUE)
 ## The opposite operation
 as_data_frame(g, what = "vertices")
 as_data_frame(g, what = "edges")
+
+## Round trip for a graph without vertex names,
+## including the isolated vertex 5
+g2 <- make_graph(c(1, 2, 2, 3, 3, 4, 4, 1), n = 5, directed = FALSE)
+V(g2)$color <- c("red", "green", "blue", "red", "green")
+df <- as_data_frame(g2, what = "both")
+g3 <- graph_from_data_frame(
+  df$edges,
+  directed = FALSE,
+  vertices = df$vertices,
+  vertex_ids = TRUE
+)
+identical_graphs(g2, g3)
 
 }
 \seealso{
