@@ -514,6 +514,26 @@ render_vector <- function(items) {
 # The block opens with `# fmt: skip` so `air` leaves it alone: the layout is this
 # generator's, which buys back the vertical space the unrolling costs and drops
 # the code that used to predict how `air` would wrap.
+# Both guards below read argument *names* and never look at the values, which
+# made them the one place an empty slot still diverged from the pre-migration
+# behaviour: `as_adjacency_matrix(make_ring(4), a = )` errors with "matches
+# multiple arguments" on the dev version and returns a 4x4 matrix on 2.3.3. An
+# empty slot supplies nothing, so it cannot be ambiguous between two arguments
+# and cannot conflict with a formal -- the old signature would have matched it
+# by position and left the formal missing. `.old_signature()` already gets this
+# right, via `base::missing()`; the guards run before it and did not.
+#
+# The empty slot is the empty symbol, which is a symbol whose name is the empty
+# string. `Filter()` keeps this to one expression, which matters because the
+# block is `# fmt: skip` and every line of it is already long.
+drop_empty_slots <- function(expr) {
+  paste0(
+    "base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), ",
+    expr,
+    ")"
+  )
+}
+
 render_arg_handle <- function(entry) {
   fn <- entry$fn
   old <- entry$recover_old
@@ -524,7 +544,9 @@ render_arg_handle <- function(entry) {
     guards <- c(
       guards,
       paste0(
-        "  .arg_forbidden <- base::intersect(base::names(base::sys.call()), ",
+        "  .arg_forbidden <- base::intersect(base::names(",
+        drop_empty_slots("base::as.list(base::sys.call())[-1L]"),
+        "), ",
         render_vector(quote_items(entry$forbidden_tags)),
         ")"
       ),
@@ -540,7 +562,9 @@ render_arg_handle <- function(entry) {
     guards <- c(
       guards,
       paste0(
-        "  .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), ",
+        "  .arg_ambiguous <- base::intersect(base::names(",
+        drop_empty_slots("base::as.list(base::substitute(...()))"),
+        "), ",
         render_vector(quote_items(ambiguous)),
         ")"
       ),

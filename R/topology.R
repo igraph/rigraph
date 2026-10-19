@@ -198,7 +198,7 @@ graph.subisomorphic.lad <- function(
   # BEGIN GENERATED ARG_HANDLE: graph.subisomorphic.lad, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("t"))
+    .arg_forbidden <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::sys.call())[-1L])), base::c("t"))
     if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn graph.subisomorphic.lad}.", i = "Spell out the full argument name."))
     # Pre-3.0.0 signature: graph.subisomorphic.lad(pattern, target, domains, induced, map, all.maps, time.limit)
     .old_signature <- function(domains, induced, map, all.maps, time.limit, ...) {
@@ -442,7 +442,7 @@ graph.isomorphic.bliss <- function(
   # BEGIN GENERATED ARG_HANDLE: graph.isomorphic.bliss, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("c", "co", "col", "colo", "color", "colors"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("c", "co", "col", "colo", "color", "colors"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn graph.isomorphic.bliss}.")
     # Pre-3.0.0 signature: graph.isomorphic.bliss(graph1, graph2, colors1, colors2, sh)
     .old_signature <- function(colors1, colors2, sh, ...) {
@@ -502,7 +502,7 @@ graph.isomorphic.vf2 <- function(
   # BEGIN GENERATED ARG_HANDLE: graph.isomorphic.vf2, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("v", "ve", "ver", "vert", "verte", "vertex", "vertex.", "vertex.c", "vertex.co", "vertex.col", "vertex.colo", "vertex.color", "e", "ed", "edg", "edge", "edge.", "edge.c", "edge.co", "edge.col", "edge.colo", "edge.color"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("v", "ve", "ver", "vert", "verte", "vertex", "vertex.", "vertex.c", "vertex.co", "vertex.col", "vertex.colo", "vertex.color", "e", "ed", "edg", "edge", "edge.", "edge.c", "edge.co", "edge.col", "edge.colo", "edge.color"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn graph.isomorphic.vf2}.")
     # Pre-3.0.0 signature: graph.isomorphic.vf2(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2)
     .old_signature <- function(vertex.color1, vertex.color2, edge.color1, edge.color2, ...) {
@@ -573,7 +573,7 @@ graph.subisomorphic.vf2 <- function(
   # BEGIN GENERATED ARG_HANDLE: graph.subisomorphic.vf2, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("v", "ve", "ver", "vert", "verte", "vertex", "vertex.", "vertex.c", "vertex.co", "vertex.col", "vertex.colo", "vertex.color", "e", "ed", "edg", "edge", "edge.", "edge.c", "edge.co", "edge.col", "edge.colo", "edge.color"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("v", "ve", "ver", "vert", "verte", "vertex", "vertex.", "vertex.c", "vertex.co", "vertex.col", "vertex.colo", "vertex.color", "e", "ed", "edg", "edge", "edge.", "edge.c", "edge.co", "edge.col", "edge.colo", "edge.color"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn graph.subisomorphic.vf2}.")
     # Pre-3.0.0 signature: graph.subisomorphic.vf2(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2)
     .old_signature <- function(vertex.color1, vertex.color2, edge.color1, edge.color2, ...) {
@@ -815,7 +815,7 @@ graph.count.isomorphisms.vf2 <- function(
   # BEGIN GENERATED ARG_HANDLE: graph.count.isomorphisms.vf2, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("v", "ve", "ver", "vert", "verte", "vertex", "vertex.", "vertex.c", "vertex.co", "vertex.col", "vertex.colo", "vertex.color", "e", "ed", "edg", "edge", "edge.", "edge.c", "edge.co", "edge.col", "edge.colo", "edge.color"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("v", "ve", "ver", "vert", "verte", "vertex", "vertex.", "vertex.c", "vertex.co", "vertex.col", "vertex.colo", "vertex.color", "e", "ed", "edg", "edge", "edge.", "edge.c", "edge.co", "edge.col", "edge.colo", "edge.color"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn graph.count.isomorphisms.vf2}.")
     # Pre-3.0.0 signature: graph.count.isomorphisms.vf2(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2)
     .old_signature <- function(vertex.color1, vertex.color2, edge.color1, edge.color2, ...) {
@@ -966,7 +966,7 @@ graph.count.subisomorphisms.vf2 <- function(
   # BEGIN GENERATED ARG_HANDLE: graph.count.subisomorphisms.vf2, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("v", "ve", "ver", "vert", "verte", "vertex", "vertex.", "vertex.c", "vertex.co", "vertex.col", "vertex.colo", "vertex.color", "e", "ed", "edg", "edge", "edge.", "edge.c", "edge.co", "edge.col", "edge.colo", "edge.color"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("v", "ve", "ver", "vert", "verte", "vertex", "vertex.", "vertex.c", "vertex.co", "vertex.col", "vertex.colo", "vertex.color", "e", "ed", "edg", "edge", "edge.", "edge.c", "edge.co", "edge.col", "edge.colo", "edge.color"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn graph.count.subisomorphisms.vf2}.")
     # Pre-3.0.0 signature: graph.count.subisomorphisms.vf2(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2)
     .old_signature <- function(vertex.color1, vertex.color2, edge.color1, edge.color2, ...) {
