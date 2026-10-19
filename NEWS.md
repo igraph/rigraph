@@ -1,5 +1,93 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.99.99.9046
+
+## Bug fixes
+
+- Calling igraph from a warning handler no longer corrupts the call that warned (#2983, #2999).
+
+- Keep rejecting directed graphs in `cluster_leiden()`, and pin its reported quality (#2996).
+
+### series
+
+- Show man/ in a series review.
+
+  A review pull request hid `man/` with the rest of what is generated,
+  but the maintainer wants it shown.
+  A reviewer needs the rendered documentation changes,
+  and `man/` is where roxygen writes them.
+
+  Drop `man` from `series_review_hidden`.
+  The review still hides the strand, `src/rinterface.c`, `src/cpp11.cpp`, `R/cpp11.R`,
+  the `src/sources-glue-*.mk` files and `src/*.dd`.
+
+  `series-land-test.sh` now asserts that a `man/` page is in the review,
+  and its comparison with the series' green no longer lists `man/`.
+  The series-land skill and the comment in `series-config.sh` say so.
+
+  Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+  Claude-Session: https://claude.ai/code/session_01JXnA76zWTu4ZD8BQCSYRpk
+
+### series
+
+- Finish an interrupted pick in series-vendor.sh (#2969).
+
+- Keep `name` and `value` as the attributes of a vertex or edge sequence assignment (#2984).
+
+- Validate permutations in `permute()` and `sample_correlated_gnp()` (#2982).
+
+- Name `laplacian_matrix()` in its `normalized` deprecation message (#2980).
+
+## Features
+
+### series
+
+- Let a series review stand on the `main` the series has ported (#3002).
+
+### tools
+
+- Categorize the impls igraph 1.0 adds, and stop on any without a category (#2998).
+
+### series
+
+- Audit vendored trees against upstream (#2960).
+
+## Documentation
+
+### series
+
+- Brief the clean-context reviewer of a review pull request (#2973).
+
+- Describe `tkplot()` and `console()` as defunct (#2981).
+
+- Draft release notes since igraph 2.3.4 (#2978).
+
+- Keep examples from loading igraphdata's namespace (#2976).
+
+## Testing
+
+- Split `test-aaa-auto.R` into one generated file per impl category, checked in CI (#3000).
+
+- Pin the results that the igraph C core 1.0 changes (#2997).
+
+- Add the vendoring series' tests that already pass on the current engine.
+
+  The series' tests that call only functions `main` has, and pass against a build of `main`, land here first,
+  so that the series carries only the tests that need the new engine.
+  Two of the series' 19 new, changed or removed `test_that()` blocks qualify.
+
+  - `test-assortativity.R`: 1 block, from the series' fix for weighted `igraph_assortativity[_nominal]()`.
+  - `test-structural-properties.R`: 1 block, from the series' fix for weighted `igraph_density()`.
+
+  Both check that the R functions ignore the `weight` edge attribute, as they do on the current engine.
+  The new block in `test-community.R` calls `community_leiden_simple_impl()`, which `main` lacks.
+  The changed and removed blocks in `test-aaa-auto.R` encode the new engine's behaviour.
+  Both stay in the series.
+
+  Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+  Claude-Session: https://claude.ai/code/session_01JXnA76zWTu4ZD8BQCSYRpk
+
+
 # igraph 2.99.99.9045
 
 ## Breaking changes
