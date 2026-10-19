@@ -17,6 +17,15 @@ test_that("writing Pajek files works", {
   )
 })
 
+test_that("writing GML files works without explicit vertex IDs", {
+  gml_path <- withr::local_tempfile(fileext = ".gml")
+  graph <- make_empty_graph(5, directed = FALSE) |>
+    add_edges(c(1, 2, 2, 3, 3, 4, 4, 5, 5, 1))
+
+  expect_no_error(write_graph(graph, gml_path, format = "gml"))
+  expect_isomorphic(read_graph(gml_path, format = "gml"), graph)
+})
+
 test_that("reading GraphML file works", {
   skip_if_no_graphml()
 
