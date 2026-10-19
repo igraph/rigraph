@@ -32,6 +32,16 @@ runs:
       run: Rscript tools/split-aaa-tests.R --check
       shell: bash
 
+    # The compiler-warning gate (handbook/build/warnings/): compiles the glue
+    # in src/ with the gate's warning flags, in a makefile of its own rather
+    # than ~/.R/Makevars, which R CMD check would read too. Fails on a warning
+    # in a glue file and only counts those in src/vendor/. Seconds, and the
+    # answer is the same in every matrix entry, so it runs in the smoke test only.
+    - name: Check that the glue compiles without warnings
+      if: github.job == 'rcc-smoke' && runner.os != 'Windows'
+      run: scripts/warnings.sh glue
+      shell: bash
+
     # The roclet that links the C manual from the reference pages, named in
     # DESCRIPTION's Roxygen field, is vendored in tools/igraph.r2cdocs
     # (handbook/architecture/r-layer/documentation/). Only the smoke test

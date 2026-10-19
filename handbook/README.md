@@ -11,7 +11,7 @@ What stays outside the tree, intent and evidence, and where each lives, is [`met
 
 * [`usage/`](usage/): installing the package and its flavors, and the deprecated dotted function names
 * [`architecture/`](architecture/): the R layer, the C glue, the vendored igraph C library, and the Stimulus code generator
-* [`build/`](build/): the source build and its configuration
+* [`build/`](build/): the source build and its configuration, and the compiler warnings it may raise
 * [`testing/`](testing/): the suite, snapshots, guards, and reverse dependencies
 * [`branches/`](branches/): the series and their refs, the mirrors, the flavors, the invariants
 * [`operations/`](operations/): vendoring, CI, releases, review, triage, and the site

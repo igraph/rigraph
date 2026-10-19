@@ -523,26 +523,50 @@ class RCCodeGenerator(SingleBlockCodeGenerator):
         def do_par(spec: ParamSpec) -> str:
             type_desc = self.get_type_descriptor(spec.type)
             try:
-                return type_desc.declare_c_variable(f"c_{spec.name}", mode=spec.mode)
+                decl = type_desc.declare_c_variable(f"c_{spec.name}", mode=spec.mode)
             except NoSuchTypeError:
                 return f"/* {spec.name} has no corresponding C type */"
 
+            # An optional input passed by value is only assigned when it is
+            # not NULL, and only read when it is not NULL either (see
+            # chunk_call()), but the compiler cannot tell that the two
+            # Rf_isNull() calls agree and warns with -Wmaybe-uninitialized.
+            call = type_desc.get("CALL", "%C%")
+            if isinstance(call, dict):
+                call = call.get(spec.mode_str, "")
+            if (
+                spec.is_optional
+                and spec.is_input
+                and not spec.is_output
+                and call == "%C%"
+                and decl.endswith(";")
+                and "=" not in decl
+            ):
+                decl = decl[:-1] + " = 0;"
+            return decl
+
+        def has_c_type(spec: ParamSpec) -> bool:
+            return self.get_type_descriptor(spec.type).get_c_type(spec.mode) is not None
+
         inout = [do_par(spec) for spec in desc.iter_parameters()]
+        # Only the outputs with a C counterpart are converted and returned
+        # (see chunk_outconv()); declaring the others leaves unused variables.
         out = [
             f"SEXP {spec.name};"
             for spec in desc.iter_parameters()
-            if spec.mode is ParamMode.OUT
+            if spec.mode is ParamMode.OUT and has_c_type(spec)
         ]
 
-        retpars = [spec.name for spec in desc.iter_output_parameters()]
+        all_retpars = list(desc.iter_output_parameters())
+        retpars = [spec for spec in all_retpars if has_c_type(spec)]
 
         return_type_desc = self.get_type_descriptor(desc.return_type)
-        if retpars or return_type_desc.name in ("VOID", "ERROR"):
+        if all_retpars or return_type_desc.name in ("VOID", "ERROR"):
             retdecl = ""
         else:
             retdecl = return_type_desc.declare_c_variable("c_result")
 
-        if len(retpars) == 0 and desc.return_type == "ERROR":
+        if len(all_retpars) == 0 and desc.return_type == "ERROR":
             res = "\n".join(inout + out + [retdecl])
         elif len(retpars) <= 1:
             res = "\n".join(inout + out + [retdecl] + ["SEXP r_result;"])

@@ -23,6 +23,7 @@
 #   | style                 | gate `style`                                    |
 #   | update-snapshots      | gate `snapshots`, incl. the snapshot-<sha> branch |
 #   | roxygenize            | gate `roxygen`                                  |
+#   | custom/after-install  | gate `warnings`, scripts/warnings.sh glue       |
 #   | render-readme         | skipped upstream too (no Config/cynkra/render-readme) |
 #   | commit                | gate `clean` -- workflow_dispatch fails on any diff |
 #   | check                 | gate `check`                                    |
@@ -43,7 +44,7 @@
 #
 # Environment variables:
 #   EACH_GATES            - space-separated subset of
-#                           "regen flavor style snapshots roxygen clean check pkgdown"
+#                           "regen flavor style snapshots roxygen clean warnings check pkgdown"
 #                           (default: all of them, parity with rcc-smoke)
 #   EACH_SNAPSHOT_BRANCH  - publish the snapshot-<sha>-rcc-smoke-null branch when
 #                           the snapshots gate changed anything
@@ -66,7 +67,7 @@
 
 set -uo pipefail
 
-ALL_GATES="regen flavor style snapshots roxygen clean check pkgdown"
+ALL_GATES="regen flavor style snapshots roxygen clean warnings check pkgdown"
 GATES="${EACH_GATES:-${ALL_GATES}}"
 SNAPSHOT_BRANCH="${EACH_SNAPSHOT_BRANCH:-${GITHUB_ACTIONS:-false}}"
 STAGE_DIR="${EACH_STAGE_DIR:-}"
@@ -191,6 +192,7 @@ stage_budget() {
     snapshots) echo 1800 ;;  # the snapshot tests: ~350 s
     roxygen) echo 900 ;;     # ~60 s, after installing the vendored roclet
     clean) echo 900 ;;
+    warnings) echo 600 ;;    # recompiles the ten glue files: ~10 s
     check) echo 2700 ;;      # rebuilds the package, then the suite again: ~400 s
     pkgdown) echo 2700 ;;    # every reference page and article: ~650 s
     *) echo 3600 ;;
@@ -594,6 +596,13 @@ gate_clean() {
   git --no-pager diff
   git status --porcelain
   return 1
+}
+
+# The compiler-warning gate (handbook/build/warnings/): the glue must compile
+# without warnings under the gate's flags; what src/vendor/ says is counted, so
+# a vendored commit that brings a new upstream warning does not turn red here.
+gate_warnings() {
+  scripts/warnings.sh glue
 }
 
 # Mirrors r-lib/actions/check-r-package@v2 as invoked by
