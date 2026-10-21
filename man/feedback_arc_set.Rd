@@ -8,7 +8,7 @@ feedback_arc_set(
   graph,
   ...,
   weights = NULL,
-  algo = c("approx_eades", "exact_ip")
+  algorithm = c("approx_eades", "exact_ip")
 )
 }
 \arguments{
@@ -22,7 +22,7 @@ attribute called \sQuote{\code{weight}}, and this argument is
 the feedback arc set problem is to find a feedback arc set with the smallest
 total weight.}
 
-\item{algo}{Specifies the algorithm to use. \dQuote{\code{exact_ip}} solves
+\item{algorithm}{Specifies the algorithm to use. \dQuote{\code{exact_ip}} solves
 the feedback arc set problem with an exact integer programming algorithm that
 guarantees that the total weight of the removed edges is as small as possible.
 \dQuote{\code{approx_eades}} uses a fast (linear-time) approximation
@@ -53,7 +53,7 @@ component is a tree).
 
 g <- sample_gnm(20, 40, directed = TRUE)
 feedback_arc_set(g)
-feedback_arc_set(g, algo = "approx_eades")
+feedback_arc_set(g, algorithm = "approx_eades")
 }
 \references{
 Peter Eades, Xuemin Lin and W.F.Smyth: A fast and effective

@@ -3669,8 +3669,6 @@ contract <- function(
   # BEGIN GENERATED ARG_HANDLE: contract, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("v", "ve", "ver", "vert", "verte", "vertex"))
-    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn contract}.")
     # Pre-3.0.0 signature: contract(graph, mapping, vertex.attr.comb)
     .old_signature <- function(vertex.attr.comb, ...) {
       if (...length() > 0L) {

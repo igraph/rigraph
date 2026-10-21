@@ -18,14 +18,8 @@ page.rank(
 \arguments{
 \item{graph}{The graph object.}
 
-\item{algo}{Character scalar, which implementation to use to carry out the
-calculation. The default is \code{"prpack"}, which uses the PRPACK library
-(\url{https://github.com/dgleich/prpack}) to calculate PageRank scores
-by solving a set of linear equations. This is a new implementation in igraph
-version 0.7, and the suggested one, as it is the most stable and the fastest
-for all but small graphs.  \code{"arpack"} uses the ARPACK library, the
-default implementation from igraph version 0.5 until version 0.7. It computes
-PageRank scores by solving an eingevalue problem.}
+\item{algo}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{algorithm} in
+\code{\link[=page_rank]{page_rank()}} instead.}
 
 \item{vids}{The vertices of interest.
 The default \code{NULL} selects all vertices.}
