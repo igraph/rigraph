@@ -1,0 +1,67 @@
+{{=<< >>=}}
+<<#rules>>
+<<^is_first_rule>>
+---
+<</is_first_rule>>
+id: igraph-<<when>>-<<fn>>-<<old_name>>
+language: r
+severity: warning
+rule:
+  kind: argument
+  has: { field: value, pattern: $V }
+  any:
+<<#regex_matching_old_name_spellings>>
+    - # passed by name
+      has: { field: name, kind: identifier, regex: '<<& regex_matching_old_name_spellings>>' }
+      inside:
+        kind: arguments
+        inside:
+          kind: call
+          has: { field: function, regex: '<<& regex_matching_function_name>>' }
+<</regex_matching_old_name_spellings>>
+    - # passed by position
+      not: { has: { field: name, kind: identifier } }
+      nthChild: { position: <<position>>, ofRule: { kind: argument, not: { has: { field: name, kind: identifier } } } }
+      inside:
+        kind: arguments
+        not:
+          any:
+            - has: { kind: comma, follows: { kind: comma } }
+            - has: { kind: comma, follows: { regex: '^\($' } }
+            - has: { kind: comma, precedes: { regex: '^\)$' } }
+            - has: { kind: argument, has: { kind: dots } }
+            - has: { kind: argument, has: { field: name, regex: '<<& regex_matching_names_blocking_position>>' } }
+        inside:
+          kind: call
+          has: { field: function, regex: '<<& regex_matching_function_name>>' }
+          not:
+            inside:
+              kind: binary_operator
+              field: rhs
+              has: { field: operator, regex: '^(\|>|%>%)$' }
+              not: { has: { field: rhs, kind: call, has: { kind: arguments, has: { kind: argument, has: { field: value, kind: identifier, regex: '^[.]$' } } } } }
+<<#position_after_pipe>>
+    - # passed by position after a pipe
+      not: { has: { field: name, kind: identifier } }
+      nthChild: { position: <<position_after_pipe>>, ofRule: { kind: argument, not: { has: { field: name, kind: identifier } } } }
+      inside:
+        kind: arguments
+        not:
+          any:
+            - has: { kind: comma, follows: { kind: comma } }
+            - has: { kind: comma, follows: { regex: '^\($' } }
+            - has: { kind: comma, precedes: { regex: '^\)$' } }
+            - has: { kind: argument, has: { kind: dots } }
+            - has: { kind: argument, has: { field: value, kind: identifier, regex: '^[._]$' } }
+            - has: { kind: argument, has: { field: name, regex: '<<& regex_matching_names_blocking_position>>' } }
+        inside:
+          kind: call
+          has: { field: function, regex: '<<& regex_matching_function_name>>' }
+          inside:
+            kind: binary_operator
+            field: rhs
+            has: { field: operator, regex: '^(\|>|%>%)$' }
+<</position_after_pipe>>
+fix: <<new_name>> = ~~V~~
+message: igraph <<when>> requires `<<new_name>>` of `<<fn>>()` to be passed by its full name.
+<</rules>>
