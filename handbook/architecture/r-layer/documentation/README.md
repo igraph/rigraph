@@ -11,37 +11,28 @@ How the reference pages are written: roxygen2 with Markdown syntax, regenerated 
   `Rscript tools/check-id-casing.R` finds violations.
 
 **Links to the C manual are generated, not written.**
-The roclet `igraph.r2cdocs::docs_rd` runs in place of roxygen2's `rd`, as the `Roxygen` field of `DESCRIPTION` says.
+The roclet `igraph:::docs_rd` runs in place of roxygen2's `rd`, as the `Roxygen` field of `DESCRIPTION` says.
 It follows each topic's aliases through the call graph of `R/` to the `*_impl()` functions they reach,
 and adds a section "Related documentation in the C library" that links the C function behind each.
 It reads the call graph from the sources, so documenting needs no installed igraph.
-Its name does not change under a flavor ([`branches/flavors/`](/handbook/branches/flavors/README.md)).
+Its name follows the flavor, which `scripts/flavor.patch` rewrites in `DESCRIPTION` ([`branches/flavors/`](/handbook/branches/flavors/README.md)).
 
-**The roclet is vendored.**
-`tools/igraph.r2cdocs/` is a git subrepo of [igraph/igraph.r2cdocs](https://github.com/igraph/igraph.r2cdocs),
-as `tools/py-stimulus/` is of Stimulus ([`architecture/stimulus/`](/handbook/architecture/stimulus/README.md)).
-Its `.gitrepo` records the upstream commit, and a fix made there belongs upstream as well.
-It is a package of its own, installed before documenting and again whenever it changes:
+**The roclet is part of the sources, not of the package.**
+It is defined in `R/roxygen-cdocs.R` and tested in `tests/testthat/test-roxygen-cdocs.R`,
+both left out of the built package by `.Rbuildignore`, and the first left out of coverage by `codecov.yml`.
+roxygen2 from GitHub finds a roclet defined in the package it documents, after loading its code,
+so documenting needs only the dependencies in `Config/Needs/roxygen2`:
 
 ```r
 pak::pak(dependencies = "Config/Needs/roxygen2")
-pak::local_install("tools/igraph.r2cdocs", upgrade = FALSE)
 ```
 
-CI installs it and runs its tests in `.github/workflows/custom/after-install`, in the `rcc-smoke` job that roxygenizes.
-The `roxygen` gate of `scripts/rcc-one.sh` installs it for every commit of a series.
-
-**The links follow the vendored C library, without a network.**
+**The links follow the vendored C library.**
 The roclet reads `IGRAPH_VERSION` from `src/vendor/igraph_version.h` and links the manual of the release that documents it.
 A development snapshot carries the version `git describe` gives its commit, such as `0.10.17-1-g16081ce60`, and links the manual of its tag.
-The roclet carries one link table per release, under its `inst/clinks/`.
-A version without one links the newest release before it that has one, with a message for a snapshot and a warning for a release.
-So the links in `man/` change only with the commit that adds a table.
-`data-raw/clinks.R` writes one from the index igraph.org publishes for the release, or from `doc/html/ix01.html` in its release tarball:
-
-```sh
-cd tools/igraph.r2cdocs
-Rscript data-raw/clinks.R 1.0.1
-```
+The release is the newest that the vendored `CHANGELOG.md` lists, up to that version.
+Its link table is read from the index igraph.org publishes for the release,
+once, into `tools::R_user_dir("igraph", "cache")/clinks/<release>.csv`.
+Where the download fails, the newest cached release before it serves, with a message for a snapshot and a warning for a release.
 
 *To deepen: document the devtag convention for internal functions once it settles.*

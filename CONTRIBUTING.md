@@ -232,12 +232,11 @@ under `tools/migrations/`.
 
 ### Documentation
 
-- Install roxygen2 and the roclet that links the C docs, which is vendored in `tools/igraph.r2cdocs`
+- Install roxygen2 and what the roclet that links the C docs needs, which is defined in `R/roxygen-cdocs.R`
   ([documentation](/handbook/architecture/r-layer/documentation/README.md) in the handbook):
 
 ```r
 pak::pak(dependencies = "Config/Needs/roxygen2")
-pak::local_install("tools/igraph.r2cdocs", upgrade = FALSE)
 ```
 
 - Please document your new functions using
@@ -255,10 +254,10 @@ can check roxygen prose for stray lowercase forms with:
 Rscript tools/check-id-casing.R
 ```
 
-### Maintaining igraph.r2cdocs
+### Maintaining the C-docs roclet
 
-The roclet is a git subrepo in `tools/igraph.r2cdocs`, and a fix to it belongs upstream as well.
-The link table for a new release of the C library is added
+The roclet is `R/roxygen-cdocs.R`, left out of the built package, with its tests in `tests/testthat/test-roxygen-cdocs.R`.
+The link table for a new release of the C library is downloaded and cached on first use,
 as the handbook's [documentation](/handbook/architecture/r-layer/documentation/README.md) page says.
 
 ### Test Cases

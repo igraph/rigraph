@@ -77,7 +77,10 @@ flavor_legitimate_spellings <- c(
   'Rf_install[(]"igraph"[)]',
   # An instruction to install the mainline package from CRAN, which is what
   # the vignettes give: it names that package, not this one.
-  "install[.]packages[(][\"']igraph[\"'][)]"
+  "install[.]packages[(][\"']igraph[\"'][)]",
+  # The cache of the C manual's link tables (R/roxygen-cdocs.R), which
+  # describe the C library and so serve every flavor.
+  'R_user_dir[(]"igraph", "cache"[)]'
 )
 
 # The files to scan, as paths relative to `root`, each named by the pattern that
