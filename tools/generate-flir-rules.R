@@ -106,7 +106,11 @@ generate_flir_rules <- function(registry_path, out_dir, fns = NULL) {
   if (length(fns)) {
     unknown <- setdiff(fns, names(migrations))
     if (length(unknown)) {
-      stop("Not in the registry: ", paste(unknown, collapse = ", "), call. = FALSE)
+      stop(
+        "Not in the registry: ",
+        paste(unknown, collapse = ", "),
+        call. = FALSE
+      )
     }
     migrations <- migrations[fns]
   }
