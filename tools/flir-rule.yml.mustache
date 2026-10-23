@@ -10,15 +10,15 @@ rule:
   kind: argument
   has: { field: value, pattern: $V }
   any:
-<<#names_to_rewrite_regex>>
+<<#regex_matching_old_name_spellings>>
     - # passed by name
-      has: { field: name, kind: identifier, regex: '<<& names_to_rewrite_regex>>' }
+      has: { field: name, kind: identifier, regex: '<<& regex_matching_old_name_spellings>>' }
       inside:
         kind: arguments
         inside:
           kind: call
-          has: { field: function, regex: '<<& function_regex>>' }
-<</names_to_rewrite_regex>>
+          has: { field: function, regex: '<<& regex_matching_function_name>>' }
+<</regex_matching_old_name_spellings>>
     - # passed by position
       not: { has: { field: name, kind: identifier } }
       nthChild: { position: <<position>>, ofRule: { kind: argument, not: { has: { field: name, kind: identifier } } } }
@@ -30,10 +30,10 @@ rule:
             - has: { kind: comma, follows: { regex: '^\($' } }
             - has: { kind: comma, precedes: { regex: '^\)$' } }
             - has: { kind: argument, has: { kind: dots } }
-            - has: { kind: argument, has: { field: name, regex: '<<& names_blocking_position_regex>>' } }
+            - has: { kind: argument, has: { field: name, regex: '<<& regex_matching_names_blocking_position>>' } }
         inside:
           kind: call
-          has: { field: function, regex: '<<& function_regex>>' }
+          has: { field: function, regex: '<<& regex_matching_function_name>>' }
           not:
             inside:
               kind: binary_operator
@@ -53,10 +53,10 @@ rule:
             - has: { kind: comma, precedes: { regex: '^\)$' } }
             - has: { kind: argument, has: { kind: dots } }
             - has: { kind: argument, has: { field: value, kind: identifier, regex: '^[._]$' } }
-            - has: { kind: argument, has: { field: name, regex: '<<& names_blocking_position_regex>>' } }
+            - has: { kind: argument, has: { field: name, regex: '<<& regex_matching_names_blocking_position>>' } }
         inside:
           kind: call
-          has: { field: function, regex: '<<& function_regex>>' }
+          has: { field: function, regex: '<<& regex_matching_function_name>>' }
           inside:
             kind: binary_operator
             field: rhs
