@@ -66,10 +66,15 @@ jobs:
           benchmarking_path: ${{ matrix.config.benchmarking_path }}
           force_upstream: true
           r-version: ${{ matrix.config.r }}
-          # Install the {touchstone} R package from the same commit as the
-          # action above. The default ('@v1') predates the fix that encodes
-          # filesystem-unsafe characters in branch names, so head branches with
-          # a "/" (e.g. feat/foo) get stored as a nested records/<bench>/feat/foo
-          # directory; benchmark_analyze() then can't match base+head and
-          # silently drops every benchmark, producing an empty results table.
-          touchstone_ref: "@7e6072a25d1f8d72649188bc711113039ef94b75"
+          # Install the {touchstone} R package from the `table` branch of
+          # maelle/touchstone (lorenzwalthert/touchstone#173), which formats
+          # the results as a Markdown table. It builds on the commit pinned for
+          # the action above, so it also includes the fix that encodes
+          # filesystem-unsafe characters in branch names. The default ('@v1')
+          # lacks that fix: head branches with a "/" (e.g. feat/foo) are stored
+          # as a nested records/<bench>/feat/foo directory, and
+          # benchmark_analyze() then can't match base and head, so it silently
+          # drops every benchmark and the results table comes out empty.
+          # Switch back to lorenzwalthert/touchstone once #173 is merged.
+          touchstone_package: "github::maelle/touchstone"
+          touchstone_ref: "@table"

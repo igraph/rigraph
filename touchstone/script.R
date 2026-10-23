@@ -158,6 +158,7 @@ benchmark_run(
     library(igraph)
     set.seed(42)
     g <- sample_gnm(1000L, 5000L)
+
     E(g)$weight <- runif(5000L)
     m <- as_adjacency_matrix(g, weights = "weight")
     for (i in 1:5) {
@@ -487,4 +488,4 @@ benchmark_run(
 )
 
 # Create the artifacts consumed by the GitHub Action.
-benchmark_analyze()
+benchmark_analyze(sorting = "current_running_time")
