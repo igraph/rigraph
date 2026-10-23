@@ -488,4 +488,4 @@ benchmark_run(
 )
 
 # Create the artifacts consumed by the GitHub Action.
-benchmark_analyze()
+benchmark_analyze(sorting = "current_running_time")
