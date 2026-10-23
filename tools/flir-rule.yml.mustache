@@ -1,26 +1,27 @@
-{{#rules}}
-{{^is_first_rule}}
+{{=<< >>=}}
+<<#rules>>
+<<^is_first_rule>>
 ---
-{{/is_first_rule}}
-id: igraph-{{when}}-{{fn}}-{{old_name}}
+<</is_first_rule>>
+id: igraph-<<when>>-<<fn>>-<<old_name>>
 language: r
 severity: warning
 rule:
   kind: argument
   has: { field: value, pattern: $V }
   any:
-{{#names_to_rewrite_regex}}
+<<#names_to_rewrite_regex>>
     - # passed by name
-      has: { field: name, kind: identifier, regex: '{{{names_to_rewrite_regex}}}' }
+      has: { field: name, kind: identifier, regex: '<<& names_to_rewrite_regex>>' }
       inside:
         kind: arguments
         inside:
           kind: call
-          has: { field: function, regex: '{{{function_regex}}}' }
-{{/names_to_rewrite_regex}}
+          has: { field: function, regex: '<<& function_regex>>' }
+<</names_to_rewrite_regex>>
     - # passed by position
       not: { has: { field: name, kind: identifier } }
-      nthChild: { position: {{position}}, ofRule: { kind: argument, not: { has: { field: name, kind: identifier } } } }
+      nthChild: { position: <<position>>, ofRule: { kind: argument, not: { has: { field: name, kind: identifier } } } }
       inside:
         kind: arguments
         not:
@@ -29,20 +30,20 @@ rule:
             - has: { kind: comma, follows: { regex: '^\($' } }
             - has: { kind: comma, precedes: { regex: '^\)$' } }
             - has: { kind: argument, has: { kind: dots } }
-            - has: { kind: argument, has: { field: name, regex: '{{{names_blocking_position_regex}}}' } }
+            - has: { kind: argument, has: { field: name, regex: '<<& names_blocking_position_regex>>' } }
         inside:
           kind: call
-          has: { field: function, regex: '{{{function_regex}}}' }
+          has: { field: function, regex: '<<& function_regex>>' }
           not:
             inside:
               kind: binary_operator
               field: rhs
               has: { field: operator, regex: '^(\|>|%>%)$' }
               not: { has: { field: rhs, kind: call, has: { kind: arguments, has: { kind: argument, has: { field: value, kind: identifier, regex: '^[.]$' } } } } }
-{{#position_after_pipe}}
+<<#position_after_pipe>>
     - # passed by position after a pipe
       not: { has: { field: name, kind: identifier } }
-      nthChild: { position: {{position_after_pipe}}, ofRule: { kind: argument, not: { has: { field: name, kind: identifier } } } }
+      nthChild: { position: <<position_after_pipe>>, ofRule: { kind: argument, not: { has: { field: name, kind: identifier } } } }
       inside:
         kind: arguments
         not:
@@ -52,15 +53,15 @@ rule:
             - has: { kind: comma, precedes: { regex: '^\)$' } }
             - has: { kind: argument, has: { kind: dots } }
             - has: { kind: argument, has: { field: value, kind: identifier, regex: '^[._]$' } }
-            - has: { kind: argument, has: { field: name, regex: '{{{names_blocking_position_regex}}}' } }
+            - has: { kind: argument, has: { field: name, regex: '<<& names_blocking_position_regex>>' } }
         inside:
           kind: call
-          has: { field: function, regex: '{{{function_regex}}}' }
+          has: { field: function, regex: '<<& function_regex>>' }
           inside:
             kind: binary_operator
             field: rhs
             has: { field: operator, regex: '^(\|>|%>%)$' }
-{{/position_after_pipe}}
-fix: {{new_name}} = ~~V~~
-message: igraph {{when}} requires `{{new_name}}` of `{{fn}}()` to be passed by its full name.
-{{/rules}}
+<</position_after_pipe>>
+fix: <<new_name>> = ~~V~~
+message: igraph <<when>> requires `<<new_name>>` of `<<fn>>()` to be passed by its full name.
+<</rules>>
