@@ -61,7 +61,10 @@ regex_matching_call_to <- function(fn) {
 template_values_for_rule <- function(entry, old_name, new_name) {
   position <- match(old_name, entry$old)
   # Writing the new name over itself would change nothing yet lint forever.
-  old_name_spellings <- setdiff(names_that_bind_to(old_name, entry$old), new_name)
+  old_name_spellings <- setdiff(
+    names_that_bind_to(old_name, entry$old),
+    new_name
+  )
   # A named argument that may bind to one of the old formals up to `position`
   # shifts the unnamed ones, so the positional branches must not fire.
   names_blocking_position <- all_abbreviations_of(entry$old[seq_len(position)])
