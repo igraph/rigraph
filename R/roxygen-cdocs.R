@@ -1,19 +1,22 @@
-#' @importFrom roxygen2 roclet
-#' @export
+# The roclet that links the C manual from the reference pages.
+# The `Roxygen` field of `DESCRIPTION` names it as `docs_rd` of this package,
+# in place of roxygen2's `rd`;
+# roxygen2 finds it after loading the package code, so it needs no install.
+# This file is `.Rbuildignore`d: the roclet serves documenting only,
+# and its dependencies are in `Config/Needs/roxygen2` rather than `Imports`.
+# See handbook/architecture/r-layer/documentation/.
 
 docs_rd <- function() {
-  roclet(c("docs_rd", "rd"))
+  # Registered here rather than in `NAMESPACE`,
+  # which the built package, without this file, could not honor.
+  registerS3method(
+    "roclet_output",
+    "roclet_docs_rd",
+    roclet_output.roclet_docs_rd,
+    envir = asNamespace("roxygen2")
+  )
+  roxygen2::roclet(c("docs_rd", "rd"))
 }
-
-#' @importFrom roxygen2 roclet_process
-#' @export
-
-roclet_process.roclet_docs_rd <- function(x, blocks, env, base_path) {
-  NextMethod()
-}
-
-#' @importFrom roxygen2 roclet_output
-#' @export
 
 roclet_output.roclet_docs_rd <- function(x, results, base_path, ...) {
   # Built once per run rather than memoised across runs,
@@ -206,7 +209,7 @@ r_call_graph <- function(base_path) {
 # as the function names (`vertices`) and the callees of each one
 # (`callees`, sorted vertex indices).
 # Vertices are numbered in order of first appearance, callers first,
-# as igraph::graph_from_data_frame() numbers them.
+# as graph_from_data_frame() numbers them.
 call_graph <- function(from, to) {
   vertices <- unique(c(from, to))
   callees <- split(
@@ -220,7 +223,7 @@ call_graph <- function(from, to) {
 }
 
 # The functions reachable from `start` through calls, `start` included,
-# in the order igraph::subcomponent(mode = "out") returns them:
+# in the order subcomponent(mode = "out") returns them:
 # breadth first, and the callees of each function by ascending index.
 # Empty when `start` is not a vertex.
 reachable_functions <- function(call_graph, start) {
@@ -264,15 +267,56 @@ c_docs_version <- function(version) {
   sub("-[0-9]+-g[0-9a-f]+(-dirty)?$", "", version)
 }
 
-# The link tables this package carries, one per release of the C manual,
-# as data-raw/clinks.R writes them, named by the release.
+# The releases of the C library vendored at `base_path`,
+# from the headings of its changelog, such as `## [0.10.17] - 2025-09-19`.
+c_releases <- function(base_path) {
+  lines <- readLines(file.path(
+    base_path,
+    "src",
+    "vendor",
+    "cigraph",
+    "CHANGELOG.md"
+  ))
+  headings <- regmatches(lines, regexec("^## \\[([0-9][^]]*)\\]", lines))
+  map_chr(compact(headings), \(x) x[[2]])
+}
+
+# The directory caching the link tables, one per release of the C manual.
+# The tables describe the C library, so every flavor of this package shares them.
+c_links_cache_dir <- function() {
+  file.path(tools::R_user_dir("igraph", "cache"), "clinks")
+}
+
+# The link tables in the cache, named by the release.
 c_links_tables <- function() {
-  files <- dir(
-    system.file("clinks", package = "igraph.r2cdocs"),
-    pattern = "[.]csv$",
-    full.names = TRUE
-  )
+  files <- dir(c_links_cache_dir(), pattern = "[.]csv$", full.names = TRUE)
   set_names(files, sub("[.]csv$", "", basename(files)))
+}
+
+# Downloads the link table for one release of the C manual into the cache,
+# from the index igraph.org publishes for that release.
+# The release tarball of the C library carries the same index
+# as `doc/html/ix01.html`, which `index_url` can name instead.
+c_links_download <- function(
+  version,
+  index_url = sprintf("https://igraph.org/c/html/%s/ix01.html", version)
+) {
+  index <- xml2::read_html(index_url)
+  entries <- xml2::xml_find_all(index, ".//dt")
+  href <- map_chr(entries, \(dt) xml2::xml_attr(xml2::xml_child(dt), "href"))
+
+  clinks <- data.frame(
+    method = sub(".*#", "", href),
+    url = sprintf("https://igraph.org/c/html/%s/%s", version, href)
+  )
+
+  dir <- c_links_cache_dir()
+  dir.create(dir, recursive = TRUE, showWarnings = FALSE)
+  utils::write.csv(
+    clinks,
+    file.path(dir, paste0(version, ".csv")),
+    row.names = FALSE
+  )
 }
 
 # The release whose link table serves `version`:
@@ -294,30 +338,42 @@ c_links_release <- function(version, releases) {
   older[[order(core(older), is_release, decreasing = TRUE)[[1]]]]
 }
 
-# The link table for the version of the C library vendored at `base_path`,
-# from the tables this package carries rather than from igraph.org,
-# so that the links depend on the sources alone.
+# The link table for the version of the C library vendored at `base_path`.
+# The table of its release is downloaded once and cached;
+# the links depend on the sources and that cache alone.
 c_links <- function(base_path) {
   engine <- igraph_c_version(base_path)
   version <- c_docs_version(engine)
+
+  # The newest release of the C library documenting `version`,
+  # as the changelog vendored with it lists the releases.
+  target <- c_links_release(version, c_releases(base_path))
+  if (!is.na(target) && !target %in% names(c_links_tables())) {
+    tryCatch(
+      c_links_download(target),
+      error = function(e) NULL
+    )
+  }
+
   tables <- c_links_tables()
   release <- c_links_release(version, names(tables))
 
   if (is.na(release)) {
     cli::cli_abort(c(
       "No link table for the C manual of igraph {version} or an earlier release.",
-      i = "Add one with {.file data-raw/clinks.R} in {.pkg igraph.r2cdocs}."
+      i = "Could not download it from igraph.org; check the network access."
     ))
   }
 
   if (release != version) {
-    # The links stay those of the newest release that has a table.
+    # The links stay those of the newest release in the cache.
     # A development snapshot past that release is the normal state of a
-    # vendoring series; a release without a table is a table to add.
+    # vendoring series, whose manual is not published yet;
+    # a release whose manual cannot be downloaded is worth a warning.
     notify <- if (engine != version) cli::cli_inform else cli::cli_warn
     notify(c(
       "No link table for the C manual of igraph {version}, linking the manual of {release}.",
-      i = "Add one with {.file data-raw/clinks.R} in {.pkg igraph.r2cdocs} once that manual is published."
+      i = "It is downloaded from igraph.org once that manual is published."
     ))
   }
 

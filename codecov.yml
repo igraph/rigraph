@@ -21,3 +21,5 @@ ignore:
   - "src/vendor/io"
   - "src/vendor/simpleraytracer"
   - "src/vendor/uuid"
+  # The C-docs roclet serves documenting only, and does not ship.
+  - "R/roxygen-cdocs.R"
