@@ -1,7 +1,10 @@
 # The C-docs roclet of R/roxygen-cdocs.R.
 # Both files are `.Rbuildignore`d, so only `testthat::test_local()` runs these,
 # where `Config/Needs/roxygen2` is installed.
+# covr ignores `.Rbuildignore` but attaches only the exports, without `docs_rd`;
+# codecov.yml leaves the roclet out of coverage anyway.
 
+skip_on_covr()
 skip_if_not_installed("roxygen2")
 skip_if_not_installed("treesitter")
 skip_if_not_installed("treesitter.r")
