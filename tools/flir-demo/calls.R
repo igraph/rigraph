@@ -9,19 +9,19 @@ g <- make_ring(10)
 # degree(): old formals graph, v, mode, loops, normalized
 
 # by position: mode, loops and normalized all get named
-degree(g, V(g), "out", FALSE, TRUE)
+degree(g, V(g), mode = "out", loops = FALSE, normalized = TRUE)
 # by position, only mode
-degree(g, 1:3, "in")
+degree(g, 1:3, mode = "in")
 # by an abbreviation of the old name
-degree(g, mo = "out", lo = FALSE)
+degree(g, mode = "out", loops = FALSE)
 # already new style: left alone
 degree(g, mode = "out")
 # piped: the graph comes from the left-hand side
-g |> degree(V(g), "out")
-g %>% degree(V(g), "out")
+g |> degree(V(g), mode = "out")
+g %>% degree(V(g), mode = "out")
 # magrittr with a `.` placeholder: the graph is not first, so positions are
 # as written
-g %>% degree(., V(.), "out")
+g %>% degree(., V(.), mode = "out")
 
 # Left to the runtime recovery, not rewritten by position:
 # a named argument shifts the unnamed ones
@@ -32,18 +32,18 @@ degree(g, , "out")
 my_degree <- function(...) degree(g, ..., "out")
 
 # sample_gnp(): old formals n, p, directed, loops
-sample_gnp(10, 0.2, TRUE, FALSE)
-sample_gnp(10, 0.2, dir = TRUE)
+sample_gnp(10, 0.2, directed = TRUE, loops = FALSE)
+sample_gnp(10, 0.2, directed = TRUE)
 
 # simplify(): old formals graph, remove.multiple, remove.loops, edge.attr.comb
 # edge.attr.comb is renamed edge_attr_combine
-simplify(g, TRUE, TRUE, "first")
-simplify(g, edge.attr.comb = "sum")
-igraph::simplify(g, edge.attr = "sum")
+simplify(g, TRUE, TRUE, edge_attr_combine = "first")
+simplify(g, edge_attr_combine = "sum")
+igraph::simplify(g, edge_attr_combine = "sum")
 
 # clique_size_counts(): old formals graph, min, max, maximal
-clique_size_counts(g, 2, 4, TRUE)
+clique_size_counts(g, min = 2, max = 4, maximal = TRUE)
 # `mi` binds to min, `max` to max, `maxi` to maximal
-clique_size_counts(g, mi = 2, max = 4, maxi = TRUE)
+clique_size_counts(g, min = 2, max = 4, maximal = TRUE)
 # `ma` is ambiguous between max and maximal: an error in R, left alone
 clique_size_counts(g, ma = 4)
