@@ -1,0 +1,173 @@
+id: igraph-3.0.0-degree-mode
+language: r
+severity: warning
+rule:
+  kind: argument
+  has: { field: value, pattern: $V }
+  any:
+    - # passed by name
+      has: { field: name, kind: identifier, regex: '^(m|mo|mod)$' }
+      inside:
+        kind: arguments
+        inside:
+          kind: call
+          has: { field: function, regex: '^(igraph:::?)?degree$' }
+    - # passed by position
+      not: { has: { field: name, kind: identifier } }
+      nthChild: { position: 3, ofRule: { kind: argument, not: { has: { field: name, kind: identifier } } } }
+      inside:
+        kind: arguments
+        not:
+          any:
+            - has: { kind: comma, follows: { kind: comma } }
+            - has: { kind: comma, follows: { regex: '^\($' } }
+            - has: { kind: comma, precedes: { regex: '^\)$' } }
+            - has: { kind: argument, has: { kind: dots } }
+            - has: { kind: argument, has: { field: name, regex: '^(g|gr|gra|grap|graph|v|m|mo|mod|mode)$' } }
+        inside:
+          kind: call
+          has: { field: function, regex: '^(igraph:::?)?degree$' }
+          not:
+            inside:
+              kind: binary_operator
+              field: rhs
+              has: { field: operator, regex: '^(\|>|%>%)$' }
+              not: { has: { field: rhs, kind: call, has: { kind: arguments, has: { kind: argument, has: { field: value, kind: identifier, regex: '^[.]$' } } } } }
+    - # passed by position after a pipe
+      not: { has: { field: name, kind: identifier } }
+      nthChild: { position: 2, ofRule: { kind: argument, not: { has: { field: name, kind: identifier } } } }
+      inside:
+        kind: arguments
+        not:
+          any:
+            - has: { kind: comma, follows: { kind: comma } }
+            - has: { kind: comma, follows: { regex: '^\($' } }
+            - has: { kind: comma, precedes: { regex: '^\)$' } }
+            - has: { kind: argument, has: { kind: dots } }
+            - has: { kind: argument, has: { field: value, kind: identifier, regex: '^[._]$' } }
+            - has: { kind: argument, has: { field: name, regex: '^(g|gr|gra|grap|graph|v|m|mo|mod|mode)$' } }
+        inside:
+          kind: call
+          has: { field: function, regex: '^(igraph:::?)?degree$' }
+          inside:
+            kind: binary_operator
+            field: rhs
+            has: { field: operator, regex: '^(\|>|%>%)$' }
+fix: mode = ~~V~~
+message: igraph 3.0.0 requires `mode` of `degree()` to be passed by its full name.
+---
+id: igraph-3.0.0-degree-loops
+language: r
+severity: warning
+rule:
+  kind: argument
+  has: { field: value, pattern: $V }
+  any:
+    - # passed by name
+      has: { field: name, kind: identifier, regex: '^(l|lo|loo|loop)$' }
+      inside:
+        kind: arguments
+        inside:
+          kind: call
+          has: { field: function, regex: '^(igraph:::?)?degree$' }
+    - # passed by position
+      not: { has: { field: name, kind: identifier } }
+      nthChild: { position: 4, ofRule: { kind: argument, not: { has: { field: name, kind: identifier } } } }
+      inside:
+        kind: arguments
+        not:
+          any:
+            - has: { kind: comma, follows: { kind: comma } }
+            - has: { kind: comma, follows: { regex: '^\($' } }
+            - has: { kind: comma, precedes: { regex: '^\)$' } }
+            - has: { kind: argument, has: { kind: dots } }
+            - has: { kind: argument, has: { field: name, regex: '^(g|gr|gra|grap|graph|v|m|mo|mod|mode|l|lo|loo|loop|loops)$' } }
+        inside:
+          kind: call
+          has: { field: function, regex: '^(igraph:::?)?degree$' }
+          not:
+            inside:
+              kind: binary_operator
+              field: rhs
+              has: { field: operator, regex: '^(\|>|%>%)$' }
+              not: { has: { field: rhs, kind: call, has: { kind: arguments, has: { kind: argument, has: { field: value, kind: identifier, regex: '^[.]$' } } } } }
+    - # passed by position after a pipe
+      not: { has: { field: name, kind: identifier } }
+      nthChild: { position: 3, ofRule: { kind: argument, not: { has: { field: name, kind: identifier } } } }
+      inside:
+        kind: arguments
+        not:
+          any:
+            - has: { kind: comma, follows: { kind: comma } }
+            - has: { kind: comma, follows: { regex: '^\($' } }
+            - has: { kind: comma, precedes: { regex: '^\)$' } }
+            - has: { kind: argument, has: { kind: dots } }
+            - has: { kind: argument, has: { field: value, kind: identifier, regex: '^[._]$' } }
+            - has: { kind: argument, has: { field: name, regex: '^(g|gr|gra|grap|graph|v|m|mo|mod|mode|l|lo|loo|loop|loops)$' } }
+        inside:
+          kind: call
+          has: { field: function, regex: '^(igraph:::?)?degree$' }
+          inside:
+            kind: binary_operator
+            field: rhs
+            has: { field: operator, regex: '^(\|>|%>%)$' }
+fix: loops = ~~V~~
+message: igraph 3.0.0 requires `loops` of `degree()` to be passed by its full name.
+---
+id: igraph-3.0.0-degree-normalized
+language: r
+severity: warning
+rule:
+  kind: argument
+  has: { field: value, pattern: $V }
+  any:
+    - # passed by name
+      has: { field: name, kind: identifier, regex: '^(n|no|nor|norm|norma|normal|normali|normaliz|normalize)$' }
+      inside:
+        kind: arguments
+        inside:
+          kind: call
+          has: { field: function, regex: '^(igraph:::?)?degree$' }
+    - # passed by position
+      not: { has: { field: name, kind: identifier } }
+      nthChild: { position: 5, ofRule: { kind: argument, not: { has: { field: name, kind: identifier } } } }
+      inside:
+        kind: arguments
+        not:
+          any:
+            - has: { kind: comma, follows: { kind: comma } }
+            - has: { kind: comma, follows: { regex: '^\($' } }
+            - has: { kind: comma, precedes: { regex: '^\)$' } }
+            - has: { kind: argument, has: { kind: dots } }
+            - has: { kind: argument, has: { field: name, regex: '^(g|gr|gra|grap|graph|v|m|mo|mod|mode|l|lo|loo|loop|loops|n|no|nor|norm|norma|normal|normali|normaliz|normalize|normalized)$' } }
+        inside:
+          kind: call
+          has: { field: function, regex: '^(igraph:::?)?degree$' }
+          not:
+            inside:
+              kind: binary_operator
+              field: rhs
+              has: { field: operator, regex: '^(\|>|%>%)$' }
+              not: { has: { field: rhs, kind: call, has: { kind: arguments, has: { kind: argument, has: { field: value, kind: identifier, regex: '^[.]$' } } } } }
+    - # passed by position after a pipe
+      not: { has: { field: name, kind: identifier } }
+      nthChild: { position: 4, ofRule: { kind: argument, not: { has: { field: name, kind: identifier } } } }
+      inside:
+        kind: arguments
+        not:
+          any:
+            - has: { kind: comma, follows: { kind: comma } }
+            - has: { kind: comma, follows: { regex: '^\($' } }
+            - has: { kind: comma, precedes: { regex: '^\)$' } }
+            - has: { kind: argument, has: { kind: dots } }
+            - has: { kind: argument, has: { field: value, kind: identifier, regex: '^[._]$' } }
+            - has: { kind: argument, has: { field: name, regex: '^(g|gr|gra|grap|graph|v|m|mo|mod|mode|l|lo|loo|loop|loops|n|no|nor|norm|norma|normal|normali|normaliz|normalize|normalized)$' } }
+        inside:
+          kind: call
+          has: { field: function, regex: '^(igraph:::?)?degree$' }
+          inside:
+            kind: binary_operator
+            field: rhs
+            has: { field: operator, regex: '^(\|>|%>%)$' }
+fix: normalized = ~~V~~
+message: igraph 3.0.0 requires `normalized` of `degree()` to be passed by its full name.

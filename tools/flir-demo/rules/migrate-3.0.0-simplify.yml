@@ -1,0 +1,57 @@
+id: igraph-3.0.0-simplify-edge.attr.comb
+language: r
+severity: warning
+rule:
+  kind: argument
+  has: { field: value, pattern: $V }
+  any:
+    - # passed by name
+      has: { field: name, kind: identifier, regex: '^(e|ed|edg|edge|edge[.]|edge[.]a|edge[.]at|edge[.]att|edge[.]attr|edge[.]attr[.]|edge[.]attr[.]c|edge[.]attr[.]co|edge[.]attr[.]com|edge[.]attr[.]comb)$' }
+      inside:
+        kind: arguments
+        inside:
+          kind: call
+          has: { field: function, regex: '^(igraph:::?)?simplify$' }
+    - # passed by position
+      not: { has: { field: name, kind: identifier } }
+      nthChild: { position: 4, ofRule: { kind: argument, not: { has: { field: name, kind: identifier } } } }
+      inside:
+        kind: arguments
+        not:
+          any:
+            - has: { kind: comma, follows: { kind: comma } }
+            - has: { kind: comma, follows: { regex: '^\($' } }
+            - has: { kind: comma, precedes: { regex: '^\)$' } }
+            - has: { kind: argument, has: { kind: dots } }
+            - has: { kind: argument, has: { field: name, regex: '^(g|gr|gra|grap|graph|r|re|rem|remo|remov|remove|remove[.]|remove[.]m|remove[.]mu|remove[.]mul|remove[.]mult|remove[.]multi|remove[.]multip|remove[.]multipl|remove[.]multiple|remove[.]l|remove[.]lo|remove[.]loo|remove[.]loop|remove[.]loops|e|ed|edg|edge|edge[.]|edge[.]a|edge[.]at|edge[.]att|edge[.]attr|edge[.]attr[.]|edge[.]attr[.]c|edge[.]attr[.]co|edge[.]attr[.]com|edge[.]attr[.]comb)$' } }
+        inside:
+          kind: call
+          has: { field: function, regex: '^(igraph:::?)?simplify$' }
+          not:
+            inside:
+              kind: binary_operator
+              field: rhs
+              has: { field: operator, regex: '^(\|>|%>%)$' }
+              not: { has: { field: rhs, kind: call, has: { kind: arguments, has: { kind: argument, has: { field: value, kind: identifier, regex: '^[.]$' } } } } }
+    - # passed by position after a pipe
+      not: { has: { field: name, kind: identifier } }
+      nthChild: { position: 3, ofRule: { kind: argument, not: { has: { field: name, kind: identifier } } } }
+      inside:
+        kind: arguments
+        not:
+          any:
+            - has: { kind: comma, follows: { kind: comma } }
+            - has: { kind: comma, follows: { regex: '^\($' } }
+            - has: { kind: comma, precedes: { regex: '^\)$' } }
+            - has: { kind: argument, has: { kind: dots } }
+            - has: { kind: argument, has: { field: value, kind: identifier, regex: '^[._]$' } }
+            - has: { kind: argument, has: { field: name, regex: '^(g|gr|gra|grap|graph|r|re|rem|remo|remov|remove|remove[.]|remove[.]m|remove[.]mu|remove[.]mul|remove[.]mult|remove[.]multi|remove[.]multip|remove[.]multipl|remove[.]multiple|remove[.]l|remove[.]lo|remove[.]loo|remove[.]loop|remove[.]loops|e|ed|edg|edge|edge[.]|edge[.]a|edge[.]at|edge[.]att|edge[.]attr|edge[.]attr[.]|edge[.]attr[.]c|edge[.]attr[.]co|edge[.]attr[.]com|edge[.]attr[.]comb)$' } }
+        inside:
+          kind: call
+          has: { field: function, regex: '^(igraph:::?)?simplify$' }
+          inside:
+            kind: binary_operator
+            field: rhs
+            has: { field: operator, regex: '^(\|>|%>%)$' }
+fix: edge_attr_combine = ~~V~~
+message: igraph 3.0.0 requires `edge_attr_combine` of `simplify()` to be passed by its full name.
