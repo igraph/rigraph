@@ -771,6 +771,7 @@ curve_multiple <- function(
   }
   # END GENERATED ARG_HANDLE
 
+  # jarl-ignore apply_paste: as_edgelist() returns a matrix, not a data frame
   el <- apply(as_edgelist(graph, names = FALSE), 1, paste, collapse = ":")
   ave(rep(NA, length(el)), el, FUN = function(x) {
     if (length(x) == 1) {
