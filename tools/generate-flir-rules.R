@@ -13,8 +13,23 @@
 #   of `%>%` without a `.` placeholder.
 #
 # The positional cases only fire when the binding is decidable from syntax: no
-# named argument that could take one of the old formals 1..k, no empty slot, no
-# `...`. Every other call is left to the runtime recovery. See
+# named argument that could take one of the old formals 1..k (k being the
+# position of the rule's formal in `old`), no empty slot, no `...`. Take the rule
+# for `mode` of `degree()`, whose old formals were `graph, v, mode, loops,
+# normalized`: `mode` comes third, so k = 3, and the rule looks for the argument
+# R binds to `mode` as the third unnamed one. None of these calls lets it say
+# which one that is:
+#
+# - `degree(g, v = 1:3, "out", TRUE)`: the third unnamed argument is `TRUE`,
+#   but `v =` takes the second formal, so `mode` gets `"out"` and `TRUE` goes
+#   to `loops`;
+# - `degree(g, , "out")`: `mode` gets `"out"`, though `"out"` is only the
+#   second unnamed argument written, because the empty slot stands for `v`;
+# - `degree(g, ..., "out")`, inside a wrapper: how many arguments `...` holds
+#   is only known at run time: with none, `"out"` goes to `v`; with one,
+#   `mode` gets `"out"`; with two or more, `mode` gets one of them.
+#
+# Every other call is left to the runtime recovery. See
 # https://github.com/igraph/rigraph/issues/2933.
 #
 # Usage:
