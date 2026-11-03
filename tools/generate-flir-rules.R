@@ -54,8 +54,16 @@ source(file.path("tools", "generate-migrations.R"))
 #   abbreviations <- c("m", "mo", "mod", "mode")
 #   pmatch(abbreviations, formals)  # NA NA NA 3
 #   pmatch(abbreviations, formals, duplicates.ok = TRUE)  # 3 3 3 3
+#
+# For `clique_size_counts()`, whose old formals share prefixes, `m` and `ma`
+# are ambiguous and are left out:
+#
+#   formals <- c("graph", "min", "max", "maximal")
+#   names_that_bind_to("min", formals)  # "mi" "min"
+#   names_that_bind_to("max", formals)  # "max"
+#   names_that_bind_to("maximal", formals)  # "maxi" "maxim" "maxima" "maximal"
 names_that_bind_to <- function(name, formals) {
-  abbreviations <- substring(name, 1, seq_len(nchar(name)))
+  abbreviations <- all_abbreviations_of(name)
   bound_to_formal <- pmatch(abbreviations, formals, duplicates.ok = TRUE)
   abbreviations[bound_to_formal %in% match(name, formals)]
 }
