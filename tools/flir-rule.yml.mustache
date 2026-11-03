@@ -1,4 +1,10 @@
 {{=<< >>=}}
+<<! The first line switches the Mustache tag delimiters from double braces
+  to double angle brackets. The YAML below uses brace flow mappings, e.g.
+  has: { field: value }, and nested ones produce double braces, which
+  Mustache would read as tags. Rendered with whisker by
+  tools/generate-flir-rules.R. Keep this comment a single tag, and never
+  write the closing delimiter inside it. >>
 <<#rules>>
 <<^is_first_rule>>
 ---
