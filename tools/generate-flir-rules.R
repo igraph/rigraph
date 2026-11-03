@@ -95,7 +95,14 @@ template_values_for_rule <- function(entry, old_name, new_name) {
     new_name
   )
   # A named argument that may bind to one of the old formals up to `position`
-  # shifts the unnamed ones, so the positional branches must not fire.
+  # shifts the unnamed ones, so the positional branches must not fire. For
+  # `mode` of `degree()`, in third position: in `degree(g, v = 1:3, "out")`,
+  # `"out"` binds to `mode` though it is only the second unnamed argument.
+  # Any spelling of `graph`, `v` or `mode` blocks:
+  #
+  #   old <- c("graph", "v", "mode", "loops", "normalized")
+  #   all_abbreviations_of(old[seq_len(3)])
+  #   # "g" "gr" "gra" "grap" "graph" "v" "m" "mo" "mod" "mode"
   names_blocking_position <- all_abbreviations_of(entry$old[seq_len(position)])
   list(
     when = entry$when,
