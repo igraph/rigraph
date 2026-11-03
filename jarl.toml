@@ -1,5 +1,5 @@
 [lint]
-ignore = ["true_false_symbol"]
+ignore = ["true_false_symbol", "undesirable_operator", "consecutive_signs"]
 exclude = ["tools/", "inst/"]
 
 [lint.implicit_assignment]
