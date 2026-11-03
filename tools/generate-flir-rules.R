@@ -14,11 +14,11 @@
 #
 # The positional cases only fire when the binding is decidable from syntax: no
 # named argument that could take one of the old formals 1..k (k being the
-# position of the rule's formal in `old`), no empty slot, no `...`. Take the rule
-# for `mode` of `degree()`, whose old formals were `graph, v, mode, loops,
-# normalized`: `mode` comes third, so k = 3, and the rule looks for the argument
-# R binds to `mode` as the third unnamed one. None of these calls lets it say
-# which one that is:
+# position of the rule's formal in `old`), no empty slot, no `...`. Take the
+# rule for `mode` of `degree()`, whose old formals were `graph, v, mode, loops,
+# normalized`: `mode` comes third, so k = 3, and the rule looks for the
+# argument R binds to `mode` as the third unnamed one. None of these calls lets
+# it say which one that is:
 #
 # - `degree(g, v = 1:3, "out", TRUE)`: the third unnamed argument is `TRUE`,
 #   but `v =` takes the second formal, so `mode` gets `"out"` and `TRUE` goes
@@ -45,13 +45,19 @@
 source(file.path("tools", "generate-migrations.R"))
 
 # The names R binds to the formal `name` among `formals`: the full name, plus
-# every abbreviation of it no other formal claims. `pmatch()` is called on each
-# abbreviation alone: on a vector it would match them jointly, as in a call, and
-# the exact match would take `name` away from the shorter ones.
+# every abbreviation of it no other formal claims. `duplicates.ok = TRUE` makes
+# `pmatch()` match each abbreviation on its own: by default it would match them
+# jointly, as in a call, and the exact match would take `name` away from the
+# shorter ones. For `mode` of `degree()`:
+#
+#   formals <- c("graph", "v", "mode", "loops", "normalized")
+#   abbreviations <- c("m", "mo", "mod", "mode")
+#   pmatch(abbreviations, formals)  # NA NA NA 3
+#   pmatch(abbreviations, formals, duplicates.ok = TRUE)  # 3 3 3 3
 names_that_bind_to <- function(name, formals) {
   abbreviations <- substring(name, 1, seq_len(nchar(name)))
-  matched <- vapply(abbreviations, pmatch, integer(1), formals)
-  abbreviations[matched %in% match(name, formals)]
+  bound_to_formal <- pmatch(abbreviations, formals, duplicates.ok = TRUE)
+  abbreviations[bound_to_formal %in% match(name, formals)]
 }
 
 # Every abbreviation of every name in `names`, the full names included.
