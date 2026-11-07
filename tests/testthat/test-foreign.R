@@ -26,6 +26,52 @@ test_that("reading GraphML file works", {
   expect_isomorphic(g2, g)
 })
 
+test_that("read.graph.toraw() returns every byte, in order", {
+  # Chunks are 20000 bytes. The pattern differs between chunks, so a lost,
+  # repeated or reordered chunk fails.
+  for (size in c(0, 1, 19999, 20000, 20001, 40000, 40001, 123457)) {
+    path <- withr::local_tempfile()
+    bytes <- as.raw(seq_len(size) %% 251)
+    writeBin(bytes, path)
+
+    expect_identical(read.graph.toraw(path), bytes)
+    expect_identical(read.graph.toraw(file(path)), bytes)
+    expect_identical(read.graph.toraw(file(path, open = "rb")), bytes)
+    expect_identical(read.graph.toraw(rawConnection(bytes)), bytes)
+  }
+})
+
+test_that("read_graph() and write_graph() through `~` match a plain path", {
+  # A `~` in the path, or a connection, routes the file through
+  # read.graph.toraw(). Only a leading `~` is expanded, so files stay in `dir`.
+  dir <- withr::local_tempdir()
+  plain <- file.path(dir, "plain.edges")
+  tilde <- file.path(dir, "tilde~.edges")
+  out_plain <- file.path(dir, "out.edges")
+  out_tilde <- file.path(dir, "out~.edges")
+
+  # Four bytes per edge: 0, 4, 20000, 40000 and 104004 bytes.
+  for (n_edges in c(0L, 1L, 5000L, 10000L, 26001L)) {
+    i <- seq_len(n_edges)
+    edge_lines <- sprintf("%d %d\n", i %% 10L, (3L * i + 1L) %% 10L)
+    writeBin(charToRaw(paste(edge_lines, collapse = "")), plain)
+    file.copy(plain, tilde, overwrite = TRUE)
+    expect_equal(file.size(tilde), 4 * n_edges)
+
+    g <- read_graph(plain, format = "edgelist")
+    expect_ecount(g, n_edges)
+    expect_identical_graphs(read_graph(tilde, format = "edgelist"), g)
+    expect_identical_graphs(read_graph(file(plain), format = "edgelist"), g)
+
+    write_graph(g, out_plain, format = "edgelist")
+    write_graph(g, out_tilde, format = "edgelist")
+    expect_identical(
+      readBin(out_tilde, raw(0), n = file.size(out_tilde)),
+      readBin(out_plain, raw(0), n = file.size(out_plain))
+    )
+  }
+})
+
 test_that("reading graph in NCOL format", {
   ncol_path <- withr::local_tempfile(pattern = "testfile", fileext = ".ncol")
   g <- make_graph(c(1, 2, 2, 3))
