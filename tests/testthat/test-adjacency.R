@@ -1009,3 +1009,18 @@ test_that("graph_from_adjacency_matrix() creates edges row by row", {
   g <- graph_from_adjacency_matrix(m)
   expect_equal(as_edgelist(g), rbind(c(1, 2), c(2, 1), c(3, 1), c(3, 2)))
 })
+
+test_that("unweighted sparse adjacency ignores explicitly stored zeros", {
+  A <- Matrix::sparseMatrix(
+    i = c(1, 2, 1, 3),
+    j = c(2, 1, 3, 1),
+    x = c(1, 1, 0, 0),
+    dims = c(3, 3)
+  )
+
+  g <- graph_from_adjacency_matrix(A, mode = "undirected", diag = FALSE)
+
+  expect_equal(vcount(g), 3)
+  expect_equal(ecount(g), 1)
+  expect_true(are_adjacent(g, 1, 2))
+})
