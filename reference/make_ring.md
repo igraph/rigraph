@@ -66,7 +66,7 @@ Other deterministic constructors:
 
 ``` r
 print_all(make_ring(10))
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 0fec1f5 ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 226f5cc ──
 #> ℹ undirected
 #> ℹ 10 vertices · 10 edges
 #> 
@@ -85,7 +85,7 @@ print_all(make_ring(10))
 #>  [1] 1 ─ 2   2 ─ 3   3 ─ 4   4 ─ 5   5 ─ 6   6 ─ 7   7 ─ 8   8 ─ 9   9 ─ 10 
 #> [10] 1 ─ 10 
 print_all(make_ring(10, directed = TRUE, mutual = TRUE))
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 7286c6a ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── d33c8b5 ──
 #> ℹ directed
 #> ℹ 10 vertices · 20 edges
 #> 

@@ -1,5 +1,12 @@
 # Changelog
 
+## igraph 2.99.99.9047
+
+### Continuous integration
+
+- Gate the compiler warnings the glue answers for, in `rcc` and in
+  `each` ([\#3004](https://github.com/igraph/rigraph/issues/3004)).
+
 ## igraph 2.99.99.9046
 
 ### Bug fixes

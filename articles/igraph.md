@@ -96,7 +96,7 @@ We can print the graph to get a summary of its nodes and edges:
 g
 ```
 
-    ## ── <igraph> ───────────────────────────────────────────────────────── bc74846 ──
+    ## ── <igraph> ───────────────────────────────────────────────────────── e86d7ea ──
     ## ℹ undirected · named
     ## ℹ 10 vertices · 2 edges
     ## 
@@ -123,7 +123,7 @@ edges:
 summary(g)
 ```
 
-    ## ── <igraph> ───────────────────────────────────────────────────────── bc74846 ──
+    ## ── <igraph> ───────────────────────────────────────────────────────── e86d7ea ──
     ## ℹ undirected · named
     ## ℹ 10 vertices · 2 edges
     ## 
@@ -252,7 +252,7 @@ g <- g %>%
 g
 ```
 
-    ## ── <igraph> Zachary ───────────────────────────────────────────────── 04085a0 ──
+    ## ── <igraph> Zachary ───────────────────────────────────────────────── 600b9f8 ──
     ## ℹ undirected
     ## ℹ 40 vertices · 86 edges
     ## 
@@ -393,7 +393,7 @@ graph1 <- make_tree(127, 2, mode = "undirected")
 summary(graph1)
 ```
 
-    ## ── <igraph> Tree ──────────────────────────────────────────────────── cdf00af ──
+    ## ── <igraph> Tree ──────────────────────────────────────────────────── bb1d381 ──
     ## ℹ undirected
     ## ℹ 127 vertices · 126 edges
     ## 
@@ -427,7 +427,7 @@ graph1 <- sample_grg(100, 0.2)
 summary(graph1)
 ```
 
-    ## ── <igraph> Geometric random graph ────────────────────────────────── 5eb0bf1 ──
+    ## ── <igraph> Geometric random graph ────────────────────────────────── ba95f0e ──
     ## ℹ undirected
     ## ℹ 100 vertices · 499 edges
     ## 
@@ -504,7 +504,7 @@ E(g)$is_formal <- c(FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE)
 summary(g)
 ```
 
-    ## ── <igraph> ───────────────────────────────────────────────────────── 11528a0 ──
+    ## ── <igraph> ───────────────────────────────────────────────────────── 71177fe ──
     ## ℹ undirected · named
     ## ℹ 7 vertices · 9 edges
     ## 
@@ -585,7 +585,7 @@ V(g)$name[1:3] <- c("Alejandra", "Bruno", "Carmina")
 V(g)
 ```
 
-    ## ── <vertex sequence> 7/7 · named · from 11528a0 ────────────────────────────────
+    ## ── <vertex sequence> 7/7 · named · from 71177fe ────────────────────────────────
     ## [1] Alejandra Bruno     Carmina   Moshe     Nang      Samira    Ibrahim
 
 To delete attributes:
@@ -760,7 +760,7 @@ seq <- V(graph)[2, 3, 7]
 seq
 ```
 
-    ## ── <vertex sequence> 3/10 · from 4f3f0b6 ───────────────────────────────────────
+    ## ── <vertex sequence> 3/10 · from 2d3e9be ───────────────────────────────────────
     ## [1] 2 3 7
 
 ``` r
@@ -769,7 +769,7 @@ seq <- seq[1, 3] # filtering an existing vertex set
 seq
 ```
 
-    ## ── <vertex sequence> 2/10 · from 4f3f0b6 ───────────────────────────────────────
+    ## ── <vertex sequence> 2/10 · from 2d3e9be ───────────────────────────────────────
     ## [1] 2 7
 
 Selecting a vertex that does not exist results in an error:
@@ -853,7 +853,7 @@ Carmina (who has vertex index 3):
 E(g)[.from(3)]
 ```
 
-    ## ── <edge sequence> 4/9 · vertex names · from 11528a0 ───────────────────────────
+    ## ── <edge sequence> 4/9 · vertex names · from 71177fe ───────────────────────────
     ## [1] Alejandra ─ Carmina  Carmina ─ Moshe      Carmina ─ Nang      
     ## [4] Carmina ─ Samira
 
@@ -864,7 +864,7 @@ Of course it also works with vertex names:
 E(g)[.from("Carmina")]
 ```
 
-    ## ── <edge sequence> 4/9 · vertex names · from 11528a0 ───────────────────────────
+    ## ── <edge sequence> 4/9 · vertex names · from 71177fe ───────────────────────────
     ## [1] Alejandra ─ Carmina  Carmina ─ Moshe      Carmina ─ Nang      
     ## [4] Carmina ─ Samira
 
@@ -887,7 +887,7 @@ index 3), Nang (vertex index 5) and Samira (vertex index 6):
 E(g)[3:5 %--% 5:6]
 ```
 
-    ## ── <edge sequence> 3/9 · vertex names · from 11528a0 ───────────────────────────
+    ## ── <edge sequence> 3/9 · vertex names · from 71177fe ───────────────────────────
     ## [1] Carmina ─ Nang    Carmina ─ Samira  Nang ─ Samira
 
 To make the `%--%` operator work with names, you can build string
@@ -922,7 +922,7 @@ women
 E(g)[men %--% women]
 ```
 
-    ## ── <edge sequence> 5/9 · vertex names · from 11528a0 ───────────────────────────
+    ## ── <edge sequence> 5/9 · vertex names · from 71177fe ───────────────────────────
     ## [1] Alejandra ─ Bruno  Alejandra ─ Moshe  Carmina ─ Moshe    Carmina ─ Nang    
     ## [5] Nang ─ Samira
 
@@ -1192,7 +1192,7 @@ above is the following:
 sessionInfo()
 ```
 
-    ## R version 4.6.1 (2026-06-24)
+    ## R version 4.6.2 (2026-10-29)
     ## Platform: x86_64-pc-linux-gnu
     ## Running under: Ubuntu 26.04.1 LTS
     ## 
@@ -1213,15 +1213,15 @@ sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ## [1] igraph_2.99.99.9046
+    ## [1] igraph_2.99.99.9047
     ## 
     ## loaded via a namespace (and not attached):
     ##  [1] vctrs_0.7.3        cli_3.6.6          knitr_1.52         rlang_1.3.0       
-    ##  [5] xfun_0.62          otel_0.2.0         textshaping_1.0.5  jsonlite_2.0.0    
+    ##  [5] xfun_0.62          otel_0.3.0         textshaping_1.0.5  jsonlite_2.0.0    
     ##  [9] glue_1.8.1         htmltools_0.5.9    ragg_1.5.2         sass_0.4.10       
-    ## [13] rmarkdown_2.32     grid_4.6.1         evaluate_1.0.5     jquerylib_0.1.4   
-    ## [17] fastmap_1.2.0      yaml_2.3.12        lifecycle_1.0.5    compiler_4.6.1    
-    ## [21] fs_2.1.0           htmlwidgets_1.6.4  pkgconfig_2.0.3    lattice_0.22-9    
-    ## [25] systemfonts_1.3.2  digest_0.6.39      R6_2.6.1           pillar_1.11.1     
-    ## [29] magrittr_2.0.5     Matrix_1.7-5       bslib_0.12.0       tools_4.6.1       
+    ## [13] rmarkdown_2.32     grid_4.6.2         evaluate_1.0.5     jquerylib_0.1.4   
+    ## [17] fastmap_1.2.0      yaml_2.3.12        lifecycle_1.0.5    compiler_4.6.2    
+    ## [21] fs_2.1.0           htmlwidgets_1.6.4  pkgconfig_2.0.3    lattice_0.23-1    
+    ## [25] systemfonts_1.3.3  digest_0.6.39      R6_2.6.1           pillar_1.11.1     
+    ## [29] magrittr_2.0.5     Matrix_1.7-6       bslib_0.12.0       tools_4.6.2       
     ## [33] pkgdown_2.2.1.9000 cachem_1.1.0       desc_1.4.3
