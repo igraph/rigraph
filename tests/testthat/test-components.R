@@ -64,6 +64,7 @@ test_that("decompose works for many components and attributes", {
 test_that("decompose keeps attributes", {
   g <- make_ring(10) + make_ring(5)
   V(g)$name <- letters[1:(10 + 5)]
+  # jarl-ignore apply_paste: as_edgelist() returns a matrix, not a data frame
   E(g)$name <- apply(as_edgelist(g), 1, paste, collapse = "-")
   g_decompose <- decompose(g)
   g_decompose <- g_decompose[order(sapply(g_decompose, vcount))]
@@ -72,7 +73,9 @@ test_that("decompose keeps attributes", {
   expect_equal(sapply(g_decompose, vcount), c(5, 10))
   expect_equal(V(g_decompose[[1]])$name, letters[1:5 + 10])
   expect_equal(V(g_decompose[[2]])$name, letters[1:10])
+  # jarl-ignore apply_paste: as_edgelist() returns a matrix, not a data frame
   e1 <- apply(as_edgelist(g_decompose[[1]]), 1, paste, collapse = "-")
+  # jarl-ignore apply_paste: as_edgelist() returns a matrix, not a data frame
   e2 <- apply(as_edgelist(g_decompose[[2]]), 1, paste, collapse = "-")
   expect_equal(E(g_decompose[[1]])$name, e1)
   expect_equal(E(g_decompose[[2]])$name, e2)
