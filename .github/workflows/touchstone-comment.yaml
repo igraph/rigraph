@@ -29,10 +29,13 @@ jobs:
       github.event.workflow_run.event == 'pull_request' &&
       github.event.workflow_run.conclusion == 'success'
     steps:
-      # Pinned to a default-branch SHA: the released tags (v1, v1.0.1) still
-      # use actions/{upload,download}-artifact@v2, which GitHub now auto-fails.
-      # This commit uses artifact@v4/v5 and github-script@v7. Bump to a tag once
-      # upstream cuts a release that includes the fix.
-      - uses: lorenzwalthert/touchstone/actions/comment@7e6072a25d1f8d72649188bc711113039ef94b75
+      # Temporarily pinned to maelle/touchstone (head of
+      # lorenzwalthert/touchstone#174) to test comment updating: this version
+      # edits its existing PR comment instead of posting a new one each run.
+      # Like the previous upstream pin, it uses artifact@v5 and github-script@v7
+      # (the released tags v1/v1.0.1 still use artifact@v2, which GitHub
+      # auto-fails). Switch back to lorenzwalthert/touchstone once #174 is
+      # merged there.
+      - uses: maelle/touchstone/actions/comment@cbc9c2ea30f2f10c5455a2d04bdec9da7c259e40
         with: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
