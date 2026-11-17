@@ -44,7 +44,7 @@ is_simple(g)
 #> [1] TRUE
 # Invalidate cache (for debugging purposes)
 invalidate_cache(g)
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 2d08a31 ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 0031add ──
 #> ℹ undirected
 #> ℹ 10 vertices · 10 edges
 #> 

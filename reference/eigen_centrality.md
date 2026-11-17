@@ -223,7 +223,7 @@ eigen_centrality(g)
 #> [1] 0
 #> 
 #> $options$numreo
-#> [1] 5
+#> [1] 6
 #> 
 #> 
 ```
