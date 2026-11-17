@@ -58,7 +58,7 @@ jobs:
       # use actions/{upload,download}-artifact@v2, which GitHub now auto-fails.
       # This commit uses artifact@v4/v5 and github-script@v7. Bump to a tag once
       # upstream cuts a release that includes the fix.
-      - uses: lorenzwalthert/touchstone/actions/receive@7e6072a25d1f8d72649188bc711113039ef94b75
+      - uses: lorenzwalthert/touchstone/actions/receive@1304e04eb1671a1cd38799a6a24b3ff5da314b24
         with:
           cache-version: 1
           benchmarking_repo: ${{ matrix.config.benchmarking_repo }}
@@ -72,4 +72,4 @@ jobs:
           # a "/" (e.g. feat/foo) get stored as a nested records/<bench>/feat/foo
           # directory; benchmark_analyze() then can't match base+head and
           # silently drops every benchmark, producing an empty results table.
-          touchstone_ref: "@1304e04eb1671a1cd38799a6a24b3ff5da314b24bench"
+          touchstone_ref: "@1304e04eb1671a1cd38799a6a24b3ff5da314b24"
