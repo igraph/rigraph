@@ -2010,6 +2010,7 @@ graph_from_data_frame <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph_from_data_frame, do not edit, see tools/generate-migrations.R
   # fmt: skip
+  Sys.sleep(1)
   if (...length() > 0L) {
     # Pre-3.0.0 signature: graph_from_data_frame(d, directed, vertices)
     .old_signature <- function(vertices, ...) {
