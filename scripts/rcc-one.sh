@@ -190,7 +190,7 @@ stage_budget() {
     flavor) echo 300 ;;      # a base-R scan of the checkout
     style) echo 600 ;;
     snapshots) echo 1800 ;;  # the snapshot tests: ~350 s
-    roxygen) echo 900 ;;     # ~60 s, after installing the vendored roclet
+    roxygen) echo 900 ;;     # ~60 s, the first run downloading the C docs index
     clean) echo 900 ;;
     warnings) echo 600 ;;    # recompiles the ten glue files: ~10 s
     check) echo 2700 ;;      # rebuilds the package, then the suite again: ~400 s
@@ -568,15 +568,9 @@ EOF
   return "${rc}"
 }
 
-# Mirrors cynkra/cynkratemplate's roxygenize action, after installing the
-# C-docs roclet vendored in tools/igraph.r2cdocs as
-# .github/workflows/custom/after-install does for `rcc-smoke`. Installed per
-# commit, so each commit is documented by its own copy of the roclet; its
-# dependencies come with Config/Needs/roxygen2.
+# Mirrors cynkra/cynkratemplate's roxygenize action. The C-docs roclet is
+# R/roxygen-cdocs.R, so each commit is documented by its own copy of it.
 gate_roxygen() {
-  if [ -d tools/igraph.r2cdocs ]; then
-    R CMD INSTALL tools/igraph.r2cdocs || return 1
-  fi
   rscript <<'EOF'
 roxygen2::roxygenize()
 EOF

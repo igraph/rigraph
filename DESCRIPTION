@@ -83,11 +83,13 @@ Config/comment/gha/extra-packages: graph is an optional Enhances
 Config/Needs/build: devtools, irlba, pkgconfig
 Config/Needs/coverage: covr
 Config/Needs/roxygen2: r-lib/roxygen2, moodymudskipper/devtag,
-    treesitter, treesitter.r
-Config/comment/Needs/roxygen2: The roclet igraph.r2cdocs::docs_rd that
-    the Roxygen field names is vendored in tools/igraph.r2cdocs and
-    installed from there; treesitter and treesitter.r are the dependencies
-    it adds. See handbook/architecture/r-layer/documentation/.
+    treesitter, treesitter.r, xml2
+Config/comment/Needs/roxygen2: The roclet igraph:::docs_rd that the
+    Roxygen field names is defined in R/roxygen-cdocs.R, which
+    .Rbuildignore leaves out of the package; treesitter, treesitter.r and
+    xml2 are what it needs, and roxygen2 from GitHub finds a roclet
+    defined in the package it documents. See
+    handbook/architecture/r-layer/documentation/.
 Config/Needs/website: here, readr, tibble, xmlparsedata, xml2
 Config/testthat/edition: 3
 Config/testthat/parallel: true
@@ -95,6 +97,6 @@ Config/testthat/start-first: aaa-*, vs-es, scan, vs-operators, weakref,
     watts.strogatz.game
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace",
-    "igraph.r2cdocs::docs_rd", "devtag::dev_roclet"))
+    "igraph:::docs_rd", "devtag::dev_roclet"))
 SystemRequirements: libxml2 (optional), glpk (>= 4.57, optional)
 Config/roxygen2/version: 8.1.1.9000
