@@ -364,3 +364,21 @@ test_that("get_edge_ids() tail arguments and legacy positional recovery", {
   )
   expect_identical(res, get_edge_ids(g, c(2, 1), directed = FALSE))
 })
+
+test_that("to_vertex_pairs() and edgelist_to_vertex_pairs() interleave endpoints", {
+  expect_equal(to_vertex_pairs(1:3, 4:6), c(1, 4, 2, 5, 3, 6))
+  el <- cbind(1:3, 4:6)
+  expect_equal(edgelist_to_vertex_pairs(el), c(1, 4, 2, 5, 3, 6))
+  expect_equal(
+    edgelist_to_vertex_pairs(el),
+    to_vertex_pairs(el[, 1], el[, 2])
+  )
+})
+
+test_that("graph_from_data_frame() and graph_from_edgelist() work with two edges", {
+  el <- matrix(c("a", "b", "b", "c"), ncol = 2, byrow = TRUE)
+  g1 <- graph_from_edgelist(el)
+  g2 <- graph_from_data_frame(as.data.frame(el))
+  expect_equal(as_edgelist(g1), el)
+  expect_equal(as_edgelist(g2), el)
+})
