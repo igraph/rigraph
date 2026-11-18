@@ -7,7 +7,7 @@
 page_rank(
   graph,
   ...,
-  algo = c("prpack", "arpack"),
+  algorithm = c("prpack", "arpack"),
   vids = NULL,
   directed = TRUE,
   damping = 0.85,
@@ -21,7 +21,7 @@ page_rank(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{algo}{Character scalar, which implementation to use to carry out the
+\item{algorithm}{Character scalar, which implementation to use to carry out the
 calculation. The default is \code{"prpack"}, which uses the PRPACK library
 (\url{https://github.com/dgleich/prpack}) to calculate PageRank scores
 by solving a set of linear equations. This is a new implementation in igraph
