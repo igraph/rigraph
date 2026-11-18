@@ -128,15 +128,18 @@ read.graph.toraw <- function(filename) {
   }
 
   tmpbufsize <- 20000
-  buffer <- tmpbuffer <- readBin(filename, what = raw(0), n = tmpbufsize)
-  while (length(tmpbuffer) == tmpbufsize) {
+  # Concatenate once at the end: growing a vector with `c()` is quadratic.
+  chunks <- list()
+  repeat {
     tmpbuffer <- readBin(filename, what = raw(0), n = tmpbufsize)
-    buffer <- c(buffer, tmpbuffer)
+    chunks[[length(chunks) + 1L]] <- tmpbuffer
+    if (length(tmpbuffer) < tmpbufsize) {
+      break
+    }
   }
   close(filename)
-  rm(tmpbuffer)
 
-  buffer
+  unlist(chunks, use.names = FALSE)
 }
 
 write.graph.fromraw <- function(buffer, file) {
