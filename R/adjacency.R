@@ -642,7 +642,7 @@ graph.adjacency.sparse <- function(
     names(weight) <- weighted
     res <- add_edges(res, edges = t(as.matrix(el[, 1:2])), attr = weight)
   } else {
-    if (max(el[, 3]) == 1) {
+    if (all(el[, 3] == 1)) {
       edges <- as.vector(t(el[, 1:2]))
     } else {
       row_repeats <- rep(seq_len(nrow(el)), times = el[, 3])
