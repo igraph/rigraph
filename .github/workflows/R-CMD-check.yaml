@@ -12,10 +12,12 @@ on:
       - release
       - next
       - cran-*
+      - claude/**
   pull_request:
     branches:
       - main
       - master
+      - claude/**
   workflow_dispatch:
     inputs:
       ref:
