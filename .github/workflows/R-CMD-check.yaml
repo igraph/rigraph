@@ -73,7 +73,54 @@ permissions:
 # The measurements are from September 2026,
 # over the last 30 to 100 completed runs of each workflow in nine repositories of the fleet.
 jobs:
+  # Pull requests that only touch documentation don't need the checks, but they
+  # still need the "rcc" status to turn green. The workflow therefore always
+  # runs -- skipping it via `paths-ignore` would leave the status pending
+  # forever -- and only the jobs that do the work are skipped.
+  rcc-changes:
+    runs-on: ubuntu-26.04
+    timeout-minutes: 10 # a checkout, the classifier's self-test and two API calls; no runs measured yet
+
+    name: "Detect documentation-only changes"
+
+    permissions:
+      contents: read
+      statuses: write
+
+    outputs:
+      # "false" when the classifier did not run, so all checks run
+      docs-only: ${{ steps.docs-only.outputs.docs-only || 'false' }}
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.ref }}
+
+      # A manual run with `ref` set to an older tag or release branch
+      # checks out a tree that predates the classifier;
+      # without this guard the job would fail and skip every check.
+      - id: docs-only
+        if: hashFiles('.github/workflows/docs-only/action.yml') != ''
+        uses: ./.github/workflows/docs-only
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # R-CMD-check-status.yaml also turns the status green once the run
+      # completes, this step only makes it green right away, and on the head
+      # commit of the pull request.
+      - name: Update status for rcc (documentation only)
+        if: steps.docs-only.outputs.docs-only == 'true' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
+        uses: cynkra/cynkratemplate/.github/actions/commit-status@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          state: success
+          sha: ${{ github.event.pull_request.head.sha }}
+          description: "${{ github.workflow }} / documentation only"
+
   rcc-smoke:
+    needs:
+      - rcc-changes
+
     # Deliberately amd64. The smoke test is the gate that also styles,
     # roxygenizes, updates snapshots, commits back and deploys pkgdown, so it
     # must run on the most stable and available runner. The ubuntu-26.04-arm
@@ -84,7 +131,8 @@ jobs:
     runs-on: ubuntu-26.04
     timeout-minutes: 120 # longest run seen: 28 min
     # Skip a fork's pull requests against its release branches, and so every job that needs this one: nobody needs them checked there
-    if: ${{ !(github.event_name == 'pull_request' && github.event.repository.fork && startsWith(github.base_ref, 'v')) }}
+    # Skip documentation-only pull requests too, see rcc-changes
+    if: ${{ !(github.event_name == 'pull_request' && github.event.repository.fork && startsWith(github.base_ref, 'v')) && needs.rcc-changes.outputs.docs-only != 'true' }}
 
     outputs:
       sha: ${{ steps.commit.outputs.sha }}

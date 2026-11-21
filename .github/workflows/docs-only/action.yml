@@ -1,0 +1,85 @@
+name: "Detect documentation-only changes"
+description: >
+  Decide whether the changes under test touch anything that can affect the
+  package, its website, or the CI setup.
+
+inputs:
+  token:
+    description: "Token used to query the list of changed files"
+    required: true
+
+outputs:
+  docs-only:
+    description: >
+      "true" if every changed path is documentation, "false" otherwise.
+      Always "false" for events other than pull_request and merge_group,
+      where the full checks are expected to run.
+    value: ${{ steps.detect.outputs.docs-only }}
+
+runs:
+  using: "composite"
+  steps:
+    # A classifier that wrongly reports "documentation only" would disable
+    # all checks without anyone noticing, so it tests itself before deciding.
+    - name: Test the classifier
+      run: ${{ github.action_path }}/test.sh
+      shell: bash
+
+    - name: Detect documentation-only changes
+      id: detect
+      env:
+        GH_TOKEN: ${{ inputs.token }}
+        ACTION_PATH: ${{ github.action_path }}
+        PR_NUMBER: ${{ github.event.pull_request.number }}
+        PR_CHANGED_FILES: ${{ github.event.pull_request.changed_files }}
+        MERGE_GROUP_BASE: ${{ github.event.merge_group.base_sha }}
+        MERGE_GROUP_HEAD: ${{ github.event.merge_group.head_sha }}
+      run: |
+        ## -- Detect documentation-only changes --
+        set -euo pipefail
+
+        classify() {
+          "${ACTION_PATH}/docs-only.sh" \
+            "${ACTION_PATH}/patterns.txt" \
+            "${GITHUB_WORKSPACE}/.github/docs-only-patterns.txt"
+        }
+
+        # Only skip work that is repeated for every push to a pull request.
+        # Pushes (including merges to main), schedules and manual runs always
+        # check everything: that is where the package is verified for real,
+        # and where the website is deployed.
+        docs_only=false
+
+        case "${GITHUB_EVENT_NAME}" in
+          pull_request)
+            # The API returns at most 3000 files, and a truncated list could
+            # hide the very change we are looking for.
+            if [ "${PR_CHANGED_FILES}" -gt 3000 ]; then
+              echo "::notice::More than 3000 files changed, running all checks."
+            elif files=$(gh api --paginate "repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}/files" --jq ".[] | $(<"${ACTION_PATH}/paths.jq")"); then
+              docs_only=$(printf '%s\n' "${files}" | classify)
+            else
+              echo "::warning::Could not determine the changed files, running all checks."
+            fi
+            ;;
+
+          merge_group)
+            if compare=$(gh api "repos/${GITHUB_REPOSITORY}/compare/${MERGE_GROUP_BASE}...${MERGE_GROUP_HEAD}"); then
+              # The compare API caps `files` at 300, without saying so
+              if [ "$(jq '.files | length' <<<"${compare}")" -ge 300 ]; then
+                echo "::notice::Truncated list of changed files, running all checks."
+              else
+                docs_only=$(jq -r ".files[] | $(<"${ACTION_PATH}/paths.jq")" <<<"${compare}" | classify)
+              fi
+            else
+              echo "::warning::Could not determine the changed files, running all checks."
+            fi
+            ;;
+
+          *)
+            echo "Event ${GITHUB_EVENT_NAME}, running all checks."
+            ;;
+        esac
+
+        echo "docs-only=${docs_only}" | tee -a "${GITHUB_OUTPUT}"
+      shell: bash
