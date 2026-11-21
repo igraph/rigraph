@@ -4,8 +4,6 @@ on:
   schedule:
     - cron: "0 5 * * *" # 05:00 UTC every day only run on main branch
   push:
-    branches:
-      - "cran-*"
     tags:
       - "v*"
   workflow_dispatch:
