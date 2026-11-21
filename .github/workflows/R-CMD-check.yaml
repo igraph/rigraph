@@ -312,7 +312,7 @@ jobs:
       - name: Build the source tarball
         id: tarball
         continue-on-error: true
-        uses: cynkra/cynkratemplate/.github/actions/build-tarball@claude/shared-tarball
+        uses: cynkra/cynkratemplate/.github/actions/build-tarball@main
         with:
           ref: ${{ steps.status-sha.outputs.sha }}
           # Recompressed with pigz only for a CRAN submission, see build-tarball.
@@ -321,7 +321,7 @@ jobs:
       - name: Run R CMD check
         id: check
         continue-on-error: true
-        uses: cynkra/cynkratemplate/.github/actions/check@claude/shared-tarball
+        uses: cynkra/cynkratemplate/.github/actions/check@main
         with:
           results: ${{ runner.os }}-smoke-test
           tarball: ${{ steps.tarball.outputs.path }}
@@ -641,7 +641,7 @@ jobs:
           path: ${{ runner.temp }}/tarball
 
       - name: Run R CMD check
-        uses: cynkra/cynkratemplate/.github/actions/check@claude/shared-tarball
+        uses: cynkra/cynkratemplate/.github/actions/check@main
         if: ${{ ! matrix.covr }}
         with:
           tarball: ${{ needs.rcc-smoke.outputs.tarball && format('{0}/tarball/{1}', runner.temp, needs.rcc-smoke.outputs.tarball) || '' }}
@@ -747,7 +747,7 @@ jobs:
           path: ${{ runner.temp }}/tarball
 
       - name: Run R CMD check
-        uses: cynkra/cynkratemplate/.github/actions/check@claude/shared-tarball
+        uses: cynkra/cynkratemplate/.github/actions/check@main
         with:
           results: ${{ matrix.package }}
           tarball: ${{ needs.rcc-smoke.outputs.tarball && format('{0}/tarball/{1}', runner.temp, needs.rcc-smoke.outputs.tarball) || '' }}
