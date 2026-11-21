@@ -1,0 +1,55 @@
+# Delete a closed pull request's head branch, merged or not, on dispatch.
+# A cloud session dispatches it because its git proxy refuses branch deletions;
+# "Automatically delete head branches" covers merged pull requests only.
+#
+# One call per branch:
+#   gh api -X POST repos/<owner>/<repo>/actions/workflows/delete-branch.yaml/dispatches \
+#     -f ref=main -f 'inputs[branch]=<branch>' -f 'inputs[pr]=<number>'
+
+name: delete-branch
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "The branch to delete, without refs/heads/"
+        type: string
+        required: true
+      pr:
+        description: "The number of the closed pull request whose head is the branch's tip"
+        type: string
+        required: true
+
+permissions:
+  contents: write
+  pull-requests: read
+
+# One run per branch; a group shared by all branches would cancel the pending runs of a cleanup that dispatches several.
+concurrency:
+  group: ${{ github.workflow }}-${{ inputs.branch }}
+  cancel-in-progress: false
+
+jobs:
+  delete:
+    # A dispatch on another ref runs that ref's copy of this file, so only the default branch's copy is trusted.
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+
+    runs-on: ubuntu-26.04
+
+    name: "Delete a closed pull request's head branch"
+
+    timeout-minutes: 10 # a checkout, the self-test, four API calls and a push; no runs measured yet
+
+    steps:
+      # For the remote and its credentials only: the tips are read with `git ls-remote`, and the deletion pushes no objects.
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          sparse-checkout: DESCRIPTION
+          sparse-checkout-cone-mode: false
+
+      - uses: cynkra/cynkratemplate/.github/actions/delete-branch@main
+        with:
+          branch: ${{ inputs.branch }}
+          pr: ${{ inputs.pr }}
+          token: ${{ github.token }}
