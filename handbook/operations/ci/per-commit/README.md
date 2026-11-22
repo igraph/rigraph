@@ -75,6 +75,7 @@ and packs contiguous runs of commits into shards under a build-time budget.
 `build` is one job per shard (`each-shard`):
 it installs R and the dependencies once, then resets the workspace and runs the gates for each commit, oldest first,
 and stops at its own deadline, deferring the rest.
+A commit cut short by the deadline is deferred too, but the leg's first had the whole budget, so its kill is recorded as a failure.
 `follow-up` (`each-follow-up`) dispatches the workflow once more when the run left commits undecided and decided at least one.
 
 **Every commit weighs the same.**
