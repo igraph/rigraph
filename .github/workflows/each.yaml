@@ -144,7 +144,7 @@ jobs:
           fetch-depth: 0
 
       - id: plan
-        uses: cynkra/cynkratemplate/.github/actions/each-plan@claude/each-actions
+        uses: cynkra/cynkratemplate/.github/actions/each-plan@main
         with:
           since: ${{ inputs.since || vars.EACH_RCC_SINCE }}
           shard-budget-minutes: ${{ env.EACH_SHARD_BUDGET_MINUTES }}
@@ -231,7 +231,7 @@ jobs:
       # each-shard resets the workspace before every commit.
       - uses: cynkra/cynkratemplate/.github/actions/style@main
 
-      - uses: cynkra/cynkratemplate/.github/actions/each-shard@claude/each-actions
+      - uses: cynkra/cynkratemplate/.github/actions/each-shard@main
         with:
           shard: ${{ matrix.shard }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -273,7 +273,7 @@ jobs:
           sparse-checkout: scripts
           filter: blob:none
 
-      - uses: cynkra/cynkratemplate/.github/actions/each-follow-up@claude/each-actions
+      - uses: cynkra/cynkratemplate/.github/actions/each-follow-up@main
         with:
           inputs: ${{ toJSON(inputs) }}
           # The file of this workflow: the dispatch target, also when it is reached through `workflow_call`.
