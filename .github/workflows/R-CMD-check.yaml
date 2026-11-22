@@ -108,7 +108,7 @@ jobs:
       docs-only: ${{ steps.docs-only.outputs.docs-only || 'false' }}
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           ref: ${{ inputs.ref }}
 
@@ -167,7 +167,7 @@ jobs:
       actions: write
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           ref: ${{ inputs.ref }}
 
@@ -426,7 +426,7 @@ jobs:
         shell: bash
 
       - name: Upload the commit SHA reached by the smoke test
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: rcc-smoke-sha
           path: rcc-smoke-sha.txt
@@ -533,7 +533,7 @@ jobs:
       contents: read
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           ref: ${{ needs.rcc-smoke.outputs.sha }}
 
@@ -573,7 +573,7 @@ jobs:
       # The commit the smoke test pushed, else the `ref` it was dispatched with,
       # else checkout's default, the branch rather than a detached commit, which
       # the snapshot pull request needs.
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           ref: ${{ needs.rcc-smoke.outputs.sha || inputs.ref }}
 
@@ -679,7 +679,7 @@ jobs:
 
     steps:
       # As in rcc-full above.
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           ref: ${{ needs.rcc-smoke.outputs.sha || inputs.ref }}
 

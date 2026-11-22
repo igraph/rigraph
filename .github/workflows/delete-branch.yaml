@@ -42,7 +42,7 @@ jobs:
 
     steps:
       # For the remote and its credentials only: the tips are read with `git ls-remote`, and the deletion pushes no objects.
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 1
           sparse-checkout: DESCRIPTION

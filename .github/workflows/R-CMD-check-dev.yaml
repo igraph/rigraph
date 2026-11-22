@@ -24,7 +24,7 @@ jobs:
     name: Collect deps
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Report the GitHub API rate limit
         uses: cynkra/cynkratemplate/.github/actions/rate-limit@main
@@ -45,7 +45,7 @@ jobs:
     name: Check deps
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Check matrix definition
         uses: cynkra/cynkratemplate/.github/actions/matrix-check@main
@@ -71,7 +71,7 @@ jobs:
       fail-fast: false
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Run the repository-specific before-install steps
         uses: ./.github/workflows/custom/before-install
@@ -127,7 +127,7 @@ jobs:
       matrix: ${{fromJson(needs.matrix.outputs.matrix)}}
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Run the repository-specific before-install steps
         uses: ./.github/workflows/custom/before-install

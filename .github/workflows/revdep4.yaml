@@ -257,7 +257,7 @@ jobs:
         uses: cynkra/cynkratemplate/.github/actions/revdep-scripts@main
 
       - name: Check out the ref under test
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: ${{ inputs.ref || github.ref }}
 
@@ -291,7 +291,7 @@ jobs:
         shell: bash
 
       - name: Upload the shard plan
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: steps.plan.outputs.shards != '0'
         with:
           name: revdepx-plan
@@ -325,7 +325,7 @@ jobs:
         uses: cynkra/cynkratemplate/.github/actions/revdep-scripts@main
 
       - name: Check out the ref under test
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: ${{ inputs.ref || github.ref }}
 
@@ -374,7 +374,7 @@ jobs:
 
     steps:
       - name: Check out the ref under test
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: ${{ inputs.ref || github.ref }}
 
@@ -389,7 +389,7 @@ jobs:
       # requirements) are small next to the universe's, but caching them is
       # one step.
       - name: Cache the pak package cache
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: ${{ runner.temp }}/pak-cache
           key: revdepx-pak-build-${{ hashFiles('DESCRIPTION') }}
@@ -404,7 +404,7 @@ jobs:
         with:
           base-image: ${{ needs.base.outputs.image }}
       - name: Upload the package binary
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: revdepx-pkg
           path: ${{ runner.temp }}/pkg
@@ -448,12 +448,12 @@ jobs:
         uses: cynkra/cynkratemplate/.github/actions/revdep-scripts@main
 
       - name: Check out the ref under test
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: ${{ inputs.ref || github.ref }}
 
       - name: Download the shard plan
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: revdepx-plan
           path: ${{ runner.temp }}/plan
@@ -479,7 +479,7 @@ jobs:
       # cache under the plan's hash hands the next build a warm start even
       # when the image itself cannot be reused.
       - name: Cache the pak package cache
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: ${{ runner.temp }}/pak-cache
           key: revdepx-pak-${{ needs.plan.outputs.plan_hash }}
@@ -512,7 +512,7 @@ jobs:
         id: precommit
         uses: cynkra/cynkratemplate/.github/actions/revdepx-record-precommit@main
       - name: Publish the pre-commit state (survives a dying runner)
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: revdepx-universe-precommit
           path: ${{ runner.temp }}/universe-out/pre-commit-state.txt
@@ -535,7 +535,7 @@ jobs:
         id: publish
         uses: cynkra/cynkratemplate/.github/actions/revdepx-publish-universe@main
       - name: Upload the universe image artifact (registry fallback only)
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: steps.publish.outputs.saved == 'true'
         with:
           name: revdepx-universe-image
@@ -550,7 +550,7 @@ jobs:
         shell: bash
 
       - name: Upload the universe build report
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: revdepx-universe-report
@@ -644,7 +644,7 @@ jobs:
         uses: cynkra/cynkratemplate/.github/actions/revdep-scripts@main
 
       - name: Check out the ref under test
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: ${{ inputs.ref || github.ref }}
 
@@ -664,13 +664,13 @@ jobs:
         shell: Rscript {0}
 
       - name: Download the shard plan
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: revdepx-plan
           path: ${{ runner.temp }}/plan
 
       - name: Download the package binary
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: revdepx-pkg
           path: ${{ runner.temp }}/pkg
@@ -678,7 +678,7 @@ jobs:
       # The baseline lives on an earlier run of either workflow; absence is
       # not an error, the shard just records drift for nothing.
       - name: Download the baseline results
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         if: needs.plan.outputs.baseline_run != '0'
         continue-on-error: true
         with:
@@ -690,7 +690,7 @@ jobs:
       # Only when the universe job could not push but could save: the image
       # travelled as an artifact instead, and shard-prep.sh docker-loads it.
       - name: Download the universe image artifact
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         if: needs.universe.outputs.saved == 'true'
         continue-on-error: true
         with:
@@ -776,7 +776,7 @@ jobs:
         shell: bash
 
       - name: Upload the shard results (1 of 3)
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: revdepx-results-${{ matrix.shard }}-${{ github.run_attempt }}
@@ -798,7 +798,7 @@ jobs:
         shell: bash
 
       - name: Upload the shard results (2 of 3)
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: revdepx-results-${{ matrix.shard }}-${{ github.run_attempt }}
@@ -833,7 +833,7 @@ jobs:
       # results the other shards uploaded in the first attempt; the collector
       # reads every attempt and lets the later one win per package.
       - name: Upload the shard results
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: revdepx-results-${{ matrix.shard }}-${{ github.run_attempt }}
@@ -878,7 +878,7 @@ jobs:
         uses: cynkra/cynkratemplate/.github/actions/revdep-scripts@main
 
       - name: Check out the ref under test
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: ${{ inputs.ref || github.ref }}
 
@@ -904,7 +904,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Download the shard plan
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: revdepx-plan
           path: ${{ runner.temp }}/plan
@@ -913,14 +913,14 @@ jobs:
       # worth a report: the collector reconciles against the plan and names
       # every package it never heard about, which is what `retry-run` needs.
       - name: Download the results of all shards
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         continue-on-error: true
         with:
           pattern: revdepx-results-*
           path: ${{ runner.temp }}/results
 
       - name: Download the report of the run being retried
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         if: env.REVDEPX_RETRY_RUN != ''
         continue-on-error: true
         with:
@@ -946,7 +946,7 @@ jobs:
         shell: bash
 
       - name: Upload the report
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: revdepx-report
@@ -975,7 +975,7 @@ jobs:
           workflow: revdep4
 
       - name: Upload the new baseline
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: revdepx-baseline
@@ -988,7 +988,7 @@ jobs:
       # downloads it to calibrate its cost model, and should not have to
       # fetch a report to do so.
       - name: Upload the measured timings
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: revdepx-timings

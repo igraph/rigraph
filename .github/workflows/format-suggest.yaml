@@ -13,7 +13,7 @@ on:
   #   1. The formatter tooling (the `style` action and the air / clang-format
   #      binaries) is never loaded from the PR checkout. This is the critical
   #      point. The naive pattern
-  #        - uses: actions/checkout@v6      # ref: fork head
+  #        - uses: actions/checkout@v7      # ref: fork head
   #        - uses: ./.github/workflows/style
   #      resolves `./...style` from the *checked-out fork*, so an attacker only
   #      has to edit their fork's `style/action.yml` to run arbitrary commands
@@ -69,7 +69,7 @@ jobs:
       # for the run) -- add it here and re-run. See the note in the PR for the
       # audit -> block workflow.
       - name: Harden runner
-        uses: step-security/harden-runner@bf7454d06d71f1098171f2acdf0cd4708d7b5920 # v2
+        uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
         with:
           egress-policy: block
           allowed-endpoints: >
@@ -83,11 +83,11 @@ jobs:
 
       # The untrusted PR code, checked out at the workspace root. It is DATA
       # only -- nothing below executes it. `allow-unsafe-pr-checkout` is required
-      # by actions/checkout@v6 for a fork ref under pull_request_target; it is
+      # by actions/checkout (v6.1.0 and later) for a fork ref under pull_request_target; it is
       # safe here specifically because the code that runs is fetched from
       # `cynkra/cynkratemplate`, never from this checkout. See the notes above.
       - name: Check out PR code (treated as data)
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
@@ -101,7 +101,7 @@ jobs:
         uses: cynkra/cynkratemplate/.github/actions/style@main
 
       - name: Suggest
-        uses: reviewdog/action-suggester@2558ba17e65a9039e73764a73009fc05fef28a46 # v1
+        uses: reviewdog/action-suggester@fd22a83b1ebc13fd8aee5d57b06793fce6f20fb9 # v1.27.1
         with:
           level: error
           fail_level: error
