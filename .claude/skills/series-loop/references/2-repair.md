@@ -20,7 +20,7 @@ parts/<sha>.ndjson   the record, published as runs2.d/<xx>/<sha>.ndjson
 <sha>.log            the log, published as logs2.d/<xx>/<sha>.log
 ```
 
-[`scripts/each-shard.sh`](/scripts/each-shard.sh) writes those files and then copies the last two onto the branch,
+[`each-shard.sh`](https://github.com/cynkra/cynkratemplate/blob/main/.github/actions/each-shard/each-shard.sh) writes those files and then copies the last two onto the branch,
 so the two sources cannot disagree about a verdict; they differ in reach and in latency, never in content.
 Where a commit appears in more than one run, a retry or a re-run of a leg that died,
 the **higher run id wins**, the same rule the store applies to its copy.

@@ -18,7 +18,7 @@ git push --force-with-lease origin "<the failing commit>:refs/heads/retry-main-d
 
 One ref, no rewrite: `main-dev` does not move, and the chain the loop walks never learns anything happened.
 `-dev` is what `each.yaml` triggers on, and the name is the series' own branch with a prefix, which is the whole trick:
-[`scripts/each-plan.sh`](/scripts/each-plan.sh) strips `retry-` and anchors the scan on `main-green`,
+[`each-plan.sh`](https://github.com/cynkra/cynkratemplate/blob/main/.github/actions/each-plan/each-plan.sh) strips `retry-` and anchors the scan on `main-green`,
 so the bound comes from the ref that already marks how far the series is trusted.
 The rerun writes a fresh `rcc` status on the **same SHA**.
 

@@ -64,20 +64,40 @@ both strings are read by other scripts and stay as they are.
 
 ## Planning and the legs
 
-One run is two jobs.
-`plan` enumerates the candidates ([`scripts/each-plan.sh`](/scripts/each-plan.sh)),
+One run is three jobs, and their scripts are served by the `each-plan`, `each-shard` and `each-follow-up` actions
+of [cynkra/cynkratemplate](https://github.com/cynkra/cynkratemplate/tree/main/.github/actions),
+whose [`each-shard` README](https://github.com/cynkra/cynkratemplate/blob/main/.github/actions/each-shard/README.md)
+states what the package provides.
+`plan` enumerates the candidates (`each-plan`),
 asks the store which are decided ([`scripts/rcc-decided.sh`](/scripts/rcc-decided.sh), one tree-only fetch),
 weighs each commit ([`scripts/each-cost.py`](/scripts/each-cost.py))
-and packs contiguous runs of commits into shards under a build-time budget ([`scripts/each-partition.py`](/scripts/each-partition.py)).
-`build` is one job per shard ([`scripts/each-shard.sh`](/scripts/each-shard.sh)):
+and packs contiguous runs of commits into shards under a build-time budget.
+`build` is one job per shard (`each-shard`):
 it installs R and the dependencies once, then resets the workspace and runs the gates for each commit, oldest first,
-and stops at its own deadline, deferring the rest to the next run.
+and stops at its own deadline, deferring the rest.
+`follow-up` (`each-follow-up`) dispatches the workflow once more when the run left commits undecided and decided at least one.
 
 **Every commit weighs the same.**
 duckdb-r weighs a commit by how many objects of its unity build the change invalidates;
 rigraph has no unity build, and the vendored C library dominates every build alike,
-so the estimator [`scripts/series-config.sh`](/scripts/series-config.sh) names, `each-cost.py`, gives each commit one constant weight,
-and `each-plan.sh` records how that weight and the minutes it is converted with were measured.
+so the estimator [`scripts/series-config.sh`](/scripts/series-config.sh) names, `each-cost.py`, gives each commit one constant weight.
+
+**The cost model is four repository variables**, which the `plan` job checks before anything else:
+`EACH_RCC_SETUP_MINUTES` (6), `EACH_RCC_FULL_BUILD_MINUTES` (27), `EACH_RCC_FLOOR_MINUTES` (25) and `EACH_RCC_OBJECT_SECONDS` (0.15),
+with the scan start `EACH_RCC_SINCE` (2026-01-01) beside them.
+The constants come from three runs of `scripts/rcc-one.sh` on one commit (99d8b1a1, October 2026)
+on a 4-core machine shared with other work, with `MAKEFLAGS=-j4`, one cold ccache and two warm.
+A warm commit took 1510 s, gate by gate:
+install 42, regen 11, style 2, snapshots 341, roxygen 61, check 400 and pkgdown 653.
+roxygen and pkgdown were timed on their own, with their downloads stubbed,
+because the machine could not reach igraph.org, crandb or the CDNs.
+A cold install took 91 to 104 s against the warm 42,
+so the 417 translation units cost about 0.15 s each and a cold commit about a minute more;
+with ccache's `hash_dir` off (`ccache-hash-dir: false` in `each.yaml`) the later builds of a commit all hit.
+The setup minutes are duckdb-r's measurement of the same install steps,
+plus a minute for the flex, bison and venv packages the regen gate needs.
+Every leg records `duration_seconds` per commit, in the record it publishes and in its `each-logs-*` artifact,
+so the fit can be redone from real legs at any time.
 
 ## The store
 
@@ -102,7 +122,8 @@ The series loop names what would trigger them ([`series-loop`](/.claude/skills/s
 ## Operating it
 
 Every knob is an input of the workflow's dispatch, and the ones worth setting for the whole fork are repository variables;
-[`each.yaml`](/.github/workflows/each.yaml) lists both with their defaults.
+[`each.yaml`](/.github/workflows/each.yaml) lists both.
+The scan start and the cost model have no defaults: a run with one of their variables unset fails in its first step, naming it.
 A red commit is read from its record's failed stages before its log,
 and classified and repaired by stage 2 of the series loop ([`series-loop`](/.claude/skills/series-loop/SKILL.md));
 what a failed vendoring stage means is [`operations/vendoring/troubleshooting/`](/handbook/operations/vendoring/troubleshooting/README.md)'s.

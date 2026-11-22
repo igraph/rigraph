@@ -76,7 +76,7 @@ record_for() { # <sha> <state> [<created-at>] [<run-id>]
 }
 
 # One commit's verdict, staged and published exactly the way a matrix leg does it
-# (see publish_record in scripts/each-shard.sh): the record, the log if it failed,
+# (see publish_record in each-shard.sh): the record, the log if it failed,
 # and otherwise a removal for the log an overturned verdict left behind.
 publish() { # <clone-dir> <sha> <state> [<log-file>] [<created-at>] [<run-id>]
   local dir="$1" sha="$2" state="$3" log="${4:-}" created="${5:-}" run="${6:-}"
