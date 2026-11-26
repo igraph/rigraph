@@ -63,6 +63,8 @@
 ^src/*\.gcda$
 ^src/*\.gcno$
 ^R/release\.R$
+^R/roxygen-cdocs\.R$
+^tests/testthat/test-roxygen-cdocs\.R$
 ^scripts$
 ^\.claude$
 ^\.series-source$

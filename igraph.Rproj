@@ -20,4 +20,4 @@ LineEndingConversion: Posix
 BuildType: Package
 PackageUseDevtools: Yes
 PackageInstallArgs: --no-multiarch --with-keep.source
-PackageRoxygenize: collate,namespace,igraph.r2cdocs::docs_rd,devtag::dev_roclet
+PackageRoxygenize: collate,namespace,igraph:::docs_rd,devtag::dev_roclet
