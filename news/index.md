@@ -1,5 +1,20 @@
 # Changelog
 
+## igraph 2.99.99.9048
+
+### Chore
+
+- New Jarl lints ✨
+  ([\#3009](https://github.com/igraph/rigraph/issues/3009)).
+
+### Continuous integration
+
+- Try touchstone comment updating
+  ([\#3016](https://github.com/igraph/rigraph/issues/3016)).
+
+- Use new touchstone functionality
+  ([\#3013](https://github.com/igraph/rigraph/issues/3013)).
+
 ## igraph 2.99.99.9047
 
 ### Continuous integration

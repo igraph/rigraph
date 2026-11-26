@@ -224,7 +224,7 @@ Other contributors:
 
 - Michael Antonov \[contributor\]
 
-- Chan Zuckerberg Initiative ([ROR](https://ror.org/02qenvm24))
-  \[funder\]
+- Chan Zuckerberg Initiative (ROR: 02qenvm24,
+  `https://ror.org/02qenvm24`) \[funder\]
 
-- R Consortium ([ROR](https://ror.org/01z833950)) \[funder\]
+- R Consortium (ROR: 01z833950, `https://ror.org/01z833950`) \[funder\]
