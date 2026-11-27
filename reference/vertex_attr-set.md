@@ -64,7 +64,7 @@ vertex_attr(g) <- list(
 )
 vertex_attr(g, "label") <- V(g)$name
 g
-#> ── <igraph> Ring graph ────────────────────────────────────────────── cc49507 ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── aa15d5f ──
 #> ℹ undirected · named
 #> ℹ 10 vertices · 10 edges
 #> 
