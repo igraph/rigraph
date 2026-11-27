@@ -704,7 +704,7 @@ jobs:
       - name: Remove ${{ matrix.package }} and all strong dependencies
         run: |
           pkg <- "${{ matrix.package }}"
-          pkgs <- tools::package_dependencies(pkg, reverse = TRUE)[[1]]
+          pkgs <- tools::package_dependencies(pkg, recursive = TRUE, reverse = TRUE)[[1]]
           installed <- rownames(utils::installed.packages())
           # `pkg` belongs inside the intersect() as much as its reverse
           # dependencies do. It may legitimately not be installed -- a package
@@ -716,7 +716,16 @@ jobs:
           # remove.packages() without `lib` looks only in .libPaths()[1] and
           # errors on anything it does not find there, so name the library
           # each package actually lives in.
-          for (p in to_remove) remove.packages(p, lib = dirname(find.package(p)))
+          # Recommended packages in a read-only system library cannot be
+          # removed, so skip them instead of failing the job.
+          for (p in to_remove) {
+            lib <- dirname(find.package(p))
+            if (file.access(lib, 2) != 0) {
+              message("Skipping ", p, ": library ", lib, " is not writable")
+            } else {
+              remove.packages(p, lib = lib)
+            }
+          }
         shell: Rscript {0}
 
       - name: Session info
