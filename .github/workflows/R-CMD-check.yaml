@@ -624,6 +624,8 @@ jobs:
       - name: Must allow NOTEs if packages are missing, even with _R_CHECK_FORCE_SUGGESTS_
         uses: cynkra/cynkratemplate/.github/actions/allow-notes-when-deps-missing@main
       - name: Update the testthat snapshots
+        id: snapshots
+        continue-on-error: true
         uses: cynkra/cynkratemplate/.github/actions/update-snapshots@main
         # Generic escape hatch: a custom action may set SKIP_UPDATE_SNAPSHOTS
         # to opt out of running the snapshot updater,
@@ -656,6 +658,16 @@ jobs:
         if: ${{ matrix.covr }}
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Fail if a snapshot pull request was opened
+        if: always() && steps.snapshots.outputs.pull-request-number != ''
+        env:
+          PR_NUMBER: ${{ steps.snapshots.outputs.pull-request-number }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          echo "::error::Snapshot pull request #${PR_NUMBER} was opened, see ${RUN_URL}"
+          exit 1
+        shell: bash
 
 # The status update is taken care of by R-CMD-check-status.yaml
 

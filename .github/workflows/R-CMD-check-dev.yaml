@@ -99,6 +99,8 @@ jobs:
           name: ubuntu-26.04-rrelease-base
 
       - name: Update the testthat snapshots
+        id: snapshots
+        continue-on-error: true
         uses: cynkra/cynkratemplate/.github/actions/update-snapshots@main
         if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
 
@@ -106,6 +108,16 @@ jobs:
         uses: cynkra/cynkratemplate/.github/actions/check@main
         with:
           results: base
+
+      - name: Fail if a snapshot pull request was opened
+        if: always() && steps.snapshots.outputs.pull-request-number != ''
+        env:
+          PR_NUMBER: ${{ steps.snapshots.outputs.pull-request-number }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          echo "::error::Snapshot pull request #${PR_NUMBER} was opened, see ${RUN_URL}"
+          exit 1
+        shell: bash
 
   R-CMD-check-dev:
     needs:
@@ -165,6 +177,8 @@ jobs:
         if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
 
       - name: Update the testthat snapshots
+        id: snapshots
+        continue-on-error: true
         uses: cynkra/cynkratemplate/.github/actions/update-snapshots@main
         if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
 
@@ -172,3 +186,13 @@ jobs:
         uses: cynkra/cynkratemplate/.github/actions/check@main
         with:
           results: ${{ matrix.package }}
+
+      - name: Fail if a snapshot pull request was opened
+        if: always() && steps.snapshots.outputs.pull-request-number != ''
+        env:
+          PR_NUMBER: ${{ steps.snapshots.outputs.pull-request-number }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          echo "::error::Snapshot pull request #${PR_NUMBER} was opened, see ${RUN_URL}"
+          exit 1
+        shell: bash
