@@ -1,5 +1,18 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.99.99.9050
+
+## Chore
+
+- Tidy DESCRIPTION with `usethis::use_tidy_description()` (#3024).
+
+## Continuous integration
+
+- Sync workflows with cynkra/cynkratemplate (#3023).
+
+- Run `each.yaml` on cynkratemplate's each-\* actions (#3022).
+
+
 # igraph 2.99.99.9049
 
 ## Chore
