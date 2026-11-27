@@ -176,6 +176,7 @@ Other functions for manipulating graph structure:
 \code{\link[=difference.igraph]{difference.igraph()}},
 \code{\link[=disjoint_union]{disjoint_union()}},
 \code{\link[=edge]{edge()}},
+\code{\link[=graph_join]{graph_join()}},
 \code{\link{igraph-minus}},
 \code{\link[=intersection]{intersection()}},
 \code{\link[=intersection.igraph]{intersection.igraph()}},
