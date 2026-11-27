@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Weigh a commit for the `each-rcc` planner: the same weight for every commit.
 
-`scripts/each-plan.sh` weighs every commit before partitioning the range into
-matrix shards, and `scripts/each-partition.py` turns a weight in *objects* into
+`each-plan.sh` weighs every commit before partitioning the range into
+matrix shards, and `each-partition.py` turns a weight in *objects* into
 minutes: a commit built on a warm ccache costs
 
     min(FLOOR + objects * OBJECT_SECONDS / 60, FULL)
@@ -48,7 +48,7 @@ COMMIT_OBJECTS = 10
 # The vendored GLPK's 177 come on top only where configure finds no system GLPK,
 # and pak installs one from DESCRIPTION's SystemRequirements.
 # Not used in the weight: it is what COMMIT_OBJECTS is a fraction of,
-# and what FULL_BUILD_MINUTES in scripts/each-plan.sh compiles.
+# and what FULL_BUILD_MINUTES in each-plan.sh compiles.
 TOTAL_OBJECTS = 417
 
 

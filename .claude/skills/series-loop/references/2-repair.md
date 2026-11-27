@@ -20,7 +20,7 @@ parts/<sha>.ndjson   the record, published as runs2.d/<xx>/<sha>.ndjson
 <sha>.log            the log, published as logs2.d/<xx>/<sha>.log
 ```
 
-[`scripts/each-shard.sh`](/scripts/each-shard.sh) writes those files and then copies the last two onto the branch,
+[`each-shard.sh`](https://github.com/cynkra/cynkratemplate/blob/main/.github/actions/each-shard/each-shard.sh) writes those files and then copies the last two onto the branch,
 so the two sources cannot disagree about a verdict; they differ in reach and in latency, never in content.
 Where a commit appears in more than one run, a retry or a re-run of a leg that died,
 the **higher run id wins**, the same rule the store applies to its copy.
@@ -236,7 +236,7 @@ Keep the two flavor subjects as `flavor.sh` wrote them: [`scripts/series-rc.sh`]
 ## A gate the harness breaks on every commit
 
 Every commit is judged by the harness it carries:
-[`scripts/each-shard.sh`](/scripts/each-shard.sh) resets the workspace to each commit and runs that commit's own `scripts/rcc-one.sh`,
+[`each-shard.sh`](https://github.com/cynkra/cynkratemplate/blob/main/.github/actions/each-shard/each-shard.sh) resets the workspace to each commit and runs that commit's own `scripts/rcc-one.sh`,
 against that commit's own `DESCRIPTION`.
 So when the job's tooling or environment, not the tree, fails a gate on every commit,
 a fix on `main` reaches `main-dev` through stage 4 at the tip alone, and every commit below it stays red for good.

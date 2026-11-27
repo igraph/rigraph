@@ -2,7 +2,7 @@
 # Publish a staging directory to the verdict store on the orphan `rcc2` branch.
 #
 # This is the only writer every producer goes through -- the matrix leg
-# publishing one commit's verdict as it decides it (scripts/each-shard.sh), and
+# publishing one commit's verdict as it decides it (each-shard.sh), and
 # duckdb-r's hand-run backstop (rcc-logs.sh, not ported here). They differ in what they stage,
 # not in how it lands.
 #
@@ -47,7 +47,7 @@
 #   RCC_REMOTE              - remote URL, overriding the two above
 #   RCC_DIR                 - where the branch clone is cached between calls
 #                             (default: $RUNNER_TEMP/rcc-publish); must be
-#                             outside the workspace, which scripts/each-shard.sh
+#                             outside the workspace, which each-shard.sh
 #                             wipes between commits
 #   BRANCH                  - default: rcc2
 #   ATTEMPTS                - pushes to try before giving up (default: 20; a

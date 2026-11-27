@@ -38,7 +38,7 @@
 #
 # The store is the *copy* of what an `each-rcc` leg wrote, not the source: the
 # leg writes the same record and log into its artifact and publishes them here
-# (scripts/each-shard.sh). A firing reads the run first and this branch only
+# (each-shard.sh). A firing reads the run first and this branch only
 # when it cannot (.claude/skills/series-loop/SKILL.md stage 2), so where a verdict
 # here and one read from a run disagree, the run is right. The ref geometry
 # below -- in flight, buffered, the retry ledger, a ready cutover -- does not
@@ -203,11 +203,12 @@ run_branch_of() { # <sha> -> head_branch of the harvested run, empty if none
 }
 
 # The shard's own verdict on how the commit ended. `timeout` in
-# scripts/each-shard.sh reports 124 when it kills rcc-one.sh at the budget, and
+# each-shard.sh reports 124 when it kills rcc-one.sh at the budget, and
 # the shard records it for the first commit of its leg, which had the whole
 # budget (a later one is deferred). That is the one thing the log cannot say:
 # the killed stage buffers its output through run_stage and loses it, so the
-# log simply stops mid-run and reads like a cancelled leg. Without this the log rules below call a commit that ran out
+# log simply stops mid-run and reads like a cancelled leg. Without this the log
+# rules below call a commit that ran out
 # of budget `transient` and the loop reruns it, which costs another full budget
 # to learn the same thing.
 exit_code_of() { # <sha> -> exit code the shard recorded, empty if none

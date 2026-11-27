@@ -18,7 +18,7 @@ No `-rc-build`: CI never builds a buffer, and the rc strand is derived from `mai
 No `-rc-green` or `-rc-build-base`: nothing publishes it, so there is no frontier to hold.
 With no `-rc-build` beside it, the loop's discovery of `<X>-build` and `<X>-dev` pairs never mistakes it for a series.
 CI builds `main-rc-dev` as it builds any `-dev`,
-from the rc seed up rather than from a green ([`scripts/each-plan.sh`](/scripts/each-plan.sh)),
+from the rc seed up rather than from a green ([`each-plan.sh`](https://github.com/cynkra/cynkratemplate/blob/main/.github/actions/each-plan/each-plan.sh)),
 and each rc commit gets a verdict of its own.
 That is a second CI run for every commit of the series, and it is the point:
 the verdict on the unflavored tree is the one a landing rests on.
