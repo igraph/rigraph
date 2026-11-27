@@ -459,6 +459,11 @@ add_shape <- function(
     ))
   }
 
+  # Wrapped here, where the user chose them, rather than at the plot call
+  # that eventually reaches them.
+  clip <- as_user_callback(clip)
+  plot <- as_user_callback(plot)
+
   assign(shape, value = list(clip = clip, plot = plot), envir = .igraph.shapes)
   do.call(igraph_options, parameters)
   invisible(TRUE)
