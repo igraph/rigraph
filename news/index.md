@@ -1,5 +1,17 @@
 # Changelog
 
+## igraph 2.99.99.9049
+
+### Chore
+
+- Auto-update from GitHub Actions
+  ([\#3020](https://github.com/igraph/rigraph/issues/3020)).
+
+### Documentation
+
+- Stop vendoring igraph.r2cdocs, put it within R/
+  ([\#3007](https://github.com/igraph/rigraph/issues/3007)).
+
 ## igraph 2.99.99.9048
 
 ### Chore

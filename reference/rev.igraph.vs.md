@@ -43,6 +43,6 @@ Other vertex and edge sequence operations:
 ``` r
 g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
 V(g) %>% rev()
-#> ── <vertex sequence> 10/10 · named · from a4ce5e5 ──────────────────────────────
+#> ── <vertex sequence> 10/10 · named · from 76e8ab0 ──────────────────────────────
 #>  [1] J I H G F E D C B A
 ```
