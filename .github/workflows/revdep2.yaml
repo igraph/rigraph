@@ -231,7 +231,7 @@ jobs:
         uses: cynkra/cynkratemplate/.github/actions/revdep-scripts@main
 
       - name: Check out the ref under test
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: ${{ inputs.ref || github.ref }}
 
@@ -264,7 +264,7 @@ jobs:
       # Before anything can fail: the shards are planned, and the plan is
       # published whatever the preflight goes on to do.
       - name: Upload the shard plan
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: steps.plan.outputs.shards != '0'
         with:
           name: revdep2-plan
@@ -289,7 +289,7 @@ jobs:
       # cache under the plan's hash hands the shards a warm start.
       - name: Cache the pak package cache
         if: steps.plan.outputs.shards != '0' && inputs.dry-run != true
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: ~/.cache/R/pkgcache
           key: revdep2-pak-${{ steps.plan.outputs.plan_hash }}
@@ -329,7 +329,7 @@ jobs:
         shell: bash
 
       - name: Upload the preflight report
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: always() && steps.plan.outputs.shards != '0' && inputs.dry-run != true
         with:
           name: revdep2-preflight
@@ -343,7 +343,7 @@ jobs:
       # as a plan would still reuse it, while the index that describes it is
       # cheap and outlives it.
       - name: Upload the preflight library
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: always() && steps.plan.outputs.shards != '0' && inputs.dry-run != true
         with:
           name: revdep2-lib
@@ -353,7 +353,7 @@ jobs:
           overwrite: true
 
       - name: Upload the library index
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: always() && steps.plan.outputs.shards != '0' && inputs.dry-run != true
         with:
           name: revdep2-lib-index
@@ -382,7 +382,7 @@ jobs:
         uses: cynkra/cynkratemplate/.github/actions/revdep-scripts@main
 
       - name: Check out the ref under test
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: ${{ inputs.ref || github.ref }}
 
@@ -401,7 +401,7 @@ jobs:
         shell: bash
 
       - name: Upload the package binary
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: revdep2-pkg
           path: ${{ runner.temp }}/pkg
@@ -517,7 +517,7 @@ jobs:
         uses: cynkra/cynkratemplate/.github/actions/revdep-scripts@main
 
       - name: Check out the ref under test
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: ${{ inputs.ref || github.ref }}
 
@@ -553,7 +553,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Restore the pak package cache
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: ~/.cache/R/pkgcache
           key: revdep2-pak-${{ needs.plan.outputs.plan_hash }}
@@ -561,13 +561,13 @@ jobs:
             revdep2-pak-
 
       - name: Download the shard plan
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: revdep2-plan
           path: ${{ runner.temp }}/plan
 
       - name: Download the package binary
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: revdep2-pkg
           path: ${{ runner.temp }}/pkg
@@ -577,7 +577,7 @@ jobs:
       # `needs`, so it is always there -- unless the preflight could not pack
       # one, which is a slower shard, not a broken one.
       - name: Download this run's preflight library
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         continue-on-error: true
         with:
           name: revdep2-lib
@@ -586,7 +586,7 @@ jobs:
       # The baseline lives on an earlier run; absence is not an error, the
       # shard just checks the CRAN version fresh.
       - name: Download the baseline results
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         if: needs.plan.outputs.baseline_run != '0'
         continue-on-error: true
         with:
@@ -690,7 +690,7 @@ jobs:
       # slices replace one another under the one name -- they share a results
       # directory, so the newest upload is a superset of the ones before it.
       - name: Upload the shard results (1 of 3)
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: revdep2-results-${{ matrix.shard }}-${{ github.run_attempt }}
@@ -709,7 +709,7 @@ jobs:
         shell: bash
 
       - name: Upload the shard results (2 of 3)
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: revdep2-results-${{ matrix.shard }}-${{ github.run_attempt }}
@@ -740,7 +740,7 @@ jobs:
         shell: bash
 
       - name: Upload the shard results
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: revdep2-results-${{ matrix.shard }}-${{ github.run_attempt }}
@@ -786,7 +786,7 @@ jobs:
         uses: cynkra/cynkratemplate/.github/actions/revdep-scripts@main
 
       - name: Check out the ref under test
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: ${{ inputs.ref || github.ref }}
 
@@ -812,7 +812,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Download the shard plan
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: revdep2-plan
           path: ${{ runner.temp }}/plan
@@ -821,14 +821,14 @@ jobs:
       # worth a report: the collector reconciles against the plan and names
       # every package it never heard about, which is what `retry-run` needs.
       - name: Download the results of all shards
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         continue-on-error: true
         with:
           pattern: revdep2-results-*
           path: ${{ runner.temp }}/results
 
       - name: Download the report of the run being retried
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         if: env.REVDEP2_RETRY_RUN != ''
         continue-on-error: true
         with:
@@ -854,7 +854,7 @@ jobs:
         shell: bash
 
       - name: Upload the report
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: revdep2-report
@@ -896,7 +896,7 @@ jobs:
           ref: ${{ inputs.ref }}
 
       - name: Upload the new baseline
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: revdep2-baseline
@@ -908,7 +908,7 @@ jobs:
       # separate from the report: the next plan downloads it to calibrate its
       # cost model, and should not have to fetch a report to do so.
       - name: Upload the measured timings
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: revdep2-timings

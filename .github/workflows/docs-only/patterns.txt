@@ -1,0 +1,111 @@
+# Paths that cannot affect the outcome of `R CMD check`,
+# the package website, or the CI setup itself.
+# If *all* paths changed by a pull request match one of these patterns,
+# the checks are skipped and the `rcc` status is set to success right away.
+#
+# Each line is an extended regular expression
+# matched against the entire path, as if anchored with `^` and `$`.
+# Blank lines and lines starting with `#` are ignored.
+#
+# This list is deliberately an allow list, not a deny list:
+# anything not mentioned here counts as relevant.
+# New file types (`src/`, `configure`, `tools/`, `inst/include/`, ...)
+# are therefore always checked, also for packages with native code.
+#
+# A deny list -- "run the checks only for paths that look like code" --
+# would be shorter to write, but it defaults to skipping,
+# and it would have to be complete for every repository
+# that uses this template, including the ones that don't exist yet.
+# A path nobody thought of (`.Rprofile`, `renv.lock`, `air.toml`,
+# `srcjs/`, a vendored `python/` directory)
+# would then merge with a green `rcc` status and nothing to show for it.
+# Here, a path nobody thought of costs one superfluous check run,
+# which is visible in the pull request and easy to fix.
+#
+# Two conditions, both required, for a pattern to be listed here:
+#
+# 1. It never reaches the package tarball,
+#    either through `.Rbuildignore` or through `R CMD build` itself.
+# 2. No step of the `rcc` workflow reads it.
+#
+# The list below was derived from the top-level entries
+# of 64 packages across cynkra, r-lib, r-dbi, tidyverse, igraph, duckdb,
+# poissonconsulting, r-prof, and krlmlr,
+# keeping only entries that are `.Rbuildignore`d in *every* repository
+# that has them.
+# The counts in the comments are "repositories that ignore it / that have it".
+
+# Prose. `README.md`, `index.md` and `NEWS.md` do reach the tarball,
+# but `R CMD check` does not read them,
+# and pkgdown renders them as plain markdown, like the website's other pages.
+# `README.Rmd` is not listed, although it never reaches the tarball:
+# the smoke test re-renders it into `README.md` and `index.md`
+# and commits the result back, so a change to it is a change for `rcc`.
+README\.md
+index\.md
+NEWS\.md
+LICENSE\.md
+CODE_OF_CONDUCT\.md
+CONTRIBUTING\.md
+SECURITY\.md
+SUPPORT\.md
+TODO\.md
+
+# CRAN paperwork, written by usethis, which adds it to `.Rbuildignore`
+# (48/48 and 7/7 in the survey).
+cran-comments\.md
+CRAN-SUBMISSION
+CRAN-RELEASE
+
+# GitHub metadata that no workflow reads.
+\.github/CODEOWNERS
+\.github/FUNDING\.yml
+\.github/DISCUSSION_TEMPLATE/.*
+\.github/ISSUE_TEMPLATE/.*
+\.github/PULL_REQUEST_TEMPLATE/.*
+\.github/pull_request_template\.md
+
+# Editor, agent and repository tooling.
+# `R CMD build` drops `.gitignore` on its own;
+# the rest is `.Rbuildignore`d wherever it occurs
+# (`.vscode` 17/17, `.claude` 8/8, `AGENTS.md` 8/8, `CLAUDE.md` 6/6,
+# `renovate.json` 4/4).
+(.*/)?\.gitignore
+.*\.Rproj
+\.Rproj\.user/.*
+\.vscode/.*
+\.claude/.*
+CLAUDE\.md
+AGENTS\.md
+renovate\.json
+
+# Sources for generated data (14/14).
+# `data/` itself is checked, `data-raw/` is only ever run by hand.
+data-raw/.*
+
+# Deliberately not here, all of them seen in the survey:
+#
+# - `air.toml` (31), `.clang-format` (7), `.lintr` (8):
+#   read by the style and format-suggest steps
+# - `codecov.yml` (42), `.covrignore` (10):
+#   read by covr and by codecov-action, which can fail the job
+# - `.aspell/` (0 of 8 ignored) and `inst/WORDLIST`:
+#   they ship, and `tests/spelling.R` reads them
+# - `.gitattributes` (2 of 11 ignored):
+#   `eol` and filter attributes change what is checked out
+# - `Makefile` (12), `scripts/` (10), `Dockerfile` (3),
+#   `docker-compose.yml` (3), `.devcontainer/` (3):
+#   a repository's custom before-install or after-install action may use them
+# - `_pkgdown.yml` (49/50), `pkgdown/`, `vignettes/articles/`:
+#   inputs to the website build
+# - `srcjs/`, `package.json`, `package-lock.json` (3 each):
+#   compiled into `inst/`, so they are code
+# - `revdep/` (23 of 25 ignored): not universal enough to be a default
+# - `man/`: owned by roxygen2, hand edits must be checked (and reverted)
+# - `vignettes/`: built and run by `R CMD check`
+# - `.github/`, apart from the template files above: can break CI itself
+# - `LICENSE`, `DESCRIPTION`, `NAMESPACE`: part of the checks
+#
+# Repositories can add patterns of their own
+# in `.github/docs-only-patterns.txt`,
+# which survives updates of this file from cynkratemplate.

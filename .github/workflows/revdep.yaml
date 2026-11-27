@@ -33,7 +33,7 @@ jobs:
           curl -s --header "authorization: Bearer ${GH_TOKEN}" https://api.github.com/rate_limit
         shell: bash
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       # FIXME: Avoid reissuing successful jobs
       # https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#list-jobs-for-a-workflow-run
@@ -47,7 +47,7 @@ jobs:
     timeout-minutes: 15 # longest run seen: 1 min
     needs: matrix
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Check matrix definition
         uses: cynkra/cynkratemplate/.github/actions/matrix-check@main
@@ -81,7 +81,7 @@ jobs:
           curl -s --header "authorization: Bearer ${GH_TOKEN}" https://api.github.com/rate_limit
         shell: bash
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Use RSPM
         run: |
@@ -150,7 +150,7 @@ jobs:
           package: ${{ matrix.package }}
       - name: Upload check results
         if: failure()
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ matrix.package }}-results
           path: revdep/${{ matrix.package }}

@@ -4,18 +4,15 @@
 # https://github.com/r-hub/actions/blob/v1/workflows/rhub.yaml,
 # and still what `rhub::rhub_check()` dispatches: it passes the platforms in the `config` input.
 #
-# A push to a `cran-*` branch checks the release candidate on the package's platforms:
+# Without a `config`, a run checks the package's platforms:
 # `Config/gha/rhub-platforms` in DESCRIPTION, or else a default that depends on
 # whether the package has compiled code.
 # The `rhub-setup` action chooses them, see `platforms.R` beside it.
 name: R-hub
 run-name: >-
-  ${{ github.event_name == 'push' && format('Release candidate {0}', github.ref_name) || github.event.inputs.id || format('Manual run by @{0}', github.triggering_actor) }}${{ github.event_name != 'push' && format(': {0}', github.event.inputs.name || github.event.inputs.config || 'the package''s platforms') || '' }}
+  ${{ github.event.inputs.id || format('Manual run by @{0}', github.triggering_actor) }}: ${{ github.event.inputs.name || github.event.inputs.config || 'the package''s platforms' }}
 
 on:
-  push:
-    branches:
-      - "cran-*"
   workflow_dispatch:
     inputs:
       config:
@@ -32,10 +29,9 @@ on:
         description: "Unique ID. You can leave this empty."
         type: string
 
-# A push supersedes the previous push to the same branch.
 # Dispatched runs, which is how `rhub::rhub_check()` starts one, never cancel each other.
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.event_name == 'push' && 'push' || github.run_id }}
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.run_id }}
   cancel-in-progress: true
 
 permissions:
@@ -51,7 +47,7 @@ jobs:
       platforms: ${{ steps.setup.outputs.platforms }}
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
 

@@ -4,8 +4,6 @@ on:
   schedule:
     - cron: "0 5 * * *" # 05:00 UTC every day only run on main branch
   push:
-    branches:
-      - "cran-*"
     tags:
       - "v*"
   workflow_dispatch:
@@ -26,7 +24,7 @@ jobs:
     name: Collect deps
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Report the GitHub API rate limit
         uses: cynkra/cynkratemplate/.github/actions/rate-limit@main
@@ -47,7 +45,7 @@ jobs:
     name: Check deps
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Check matrix definition
         uses: cynkra/cynkratemplate/.github/actions/matrix-check@main
@@ -73,7 +71,7 @@ jobs:
       fail-fast: false
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Run the repository-specific before-install steps
         uses: ./.github/workflows/custom/before-install
@@ -101,6 +99,8 @@ jobs:
           name: ubuntu-26.04-rrelease-base
 
       - name: Update the testthat snapshots
+        id: snapshots
+        continue-on-error: true
         uses: cynkra/cynkratemplate/.github/actions/update-snapshots@main
         if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
 
@@ -108,6 +108,16 @@ jobs:
         uses: cynkra/cynkratemplate/.github/actions/check@main
         with:
           results: base
+
+      - name: Fail if a snapshot pull request was opened
+        if: always() && steps.snapshots.outputs.pull-request-number != ''
+        env:
+          PR_NUMBER: ${{ steps.snapshots.outputs.pull-request-number }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          echo "::error::Snapshot pull request #${PR_NUMBER} was opened, see ${RUN_URL}"
+          exit 1
+        shell: bash
 
   R-CMD-check-dev:
     needs:
@@ -129,7 +139,7 @@ jobs:
       matrix: ${{fromJson(needs.matrix.outputs.matrix)}}
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Run the repository-specific before-install steps
         uses: ./.github/workflows/custom/before-install
@@ -167,6 +177,8 @@ jobs:
         if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
 
       - name: Update the testthat snapshots
+        id: snapshots
+        continue-on-error: true
         uses: cynkra/cynkratemplate/.github/actions/update-snapshots@main
         if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
 
@@ -174,3 +186,13 @@ jobs:
         uses: cynkra/cynkratemplate/.github/actions/check@main
         with:
           results: ${{ matrix.package }}
+
+      - name: Fail if a snapshot pull request was opened
+        if: always() && steps.snapshots.outputs.pull-request-number != ''
+        env:
+          PR_NUMBER: ${{ steps.snapshots.outputs.pull-request-number }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          echo "::error::Snapshot pull request #${PR_NUMBER} was opened, see ${RUN_URL}"
+          exit 1
+        shell: bash
