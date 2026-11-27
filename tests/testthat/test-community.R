@@ -197,7 +197,7 @@ test_that("label.propagation.community works", {
   expect_equal(karate_lpc$modularity, modularity(karate, karate_lpc$membership))
 
   expect_in(length(karate_lpc), 1:5)
-  expect_in(membership(karate_lpc), seq_len(length(karate_lpc)))
+  expect_in(membership(karate_lpc), seq_along(karate_lpc))
   expect_s3_class(sizes(karate_lpc), "table")
   expect_equal(sum(sizes(karate_lpc)), vcount(karate))
   expect_identical(
@@ -554,7 +554,7 @@ test_that("cluster_louvain works", {
     max(karate_mc$modularity)
   )
   expect_in(length(karate_mc), 3:4)
-  expect_in(membership(karate_mc), seq_len(length(karate_mc)))
+  expect_in(membership(karate_mc), seq_along(karate_mc))
   expect_s3_class(sizes(karate_mc), "table")
   expect_equal(sum(sizes(karate_mc)), vcount(karate))
   expect_identical(
