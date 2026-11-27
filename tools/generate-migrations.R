@@ -436,12 +436,18 @@ quote_items <- function(x) {
 }
 
 # Abbreviations that were ambiguous under the pre-migration matcher: proper
-# prefixes matching more than one of the old and new names at once. Base R only
-# ever sees the old names in `.old_signature()`, so it would resolve some of
-# these silently (e.g. `at` for `as_adjacency_matrix(attr =)`, which the
-# migration renamed to `weights` while a deprecated `attr` formal remains) and
-# reject the rest with a message that does not name the argument. The block
-# tests the dot tags against this list first, so both keep the message they had.
+# prefixes matching two or more of the old and new names that resolve to
+# *different* arguments of the new API. Base R only ever sees the old names in
+# `.old_signature()`, so it would resolve some of these silently (e.g. `at` for
+# `as_adjacency_matrix(attr =)`, which the migration renamed to `weights` while
+# a deprecated `attr` formal remains) and reject the rest with a message that
+# does not name the argument. The block tests the dot tags against this list
+# first, so both keep the message they had.
+#
+# A prefix matching several names with a single target is not ambiguous: when
+# the old name is a prefix of the new one (`algo` -> `algorithm`), `alg =`
+# resolved uniquely before the migration and must keep resolving, under the
+# soft deprecation, afterwards.
 ambiguous_tags <- function(entry) {
   names <- entry$match_names
   if (length(names) == 0L) {
@@ -458,8 +464,12 @@ ambiguous_tags <- function(entry) {
   prefixes[vapply(
     prefixes,
     function(p) {
-      j <- charmatch(p, names)
-      !is.na(j) && j == 0L
+      # Ambiguous only if the candidates resolve to *different* arguments of the
+      # new API. A rename whose old name is a prefix of the new one (`algo` ->
+      # `algorithm`) matches two names but one target, and `alg` must keep
+      # working under the soft deprecation.
+      hits <- startsWith(names, p)
+      length(unique(entry$match_to[hits])) > 1L
     },
     logical(1)
   )]
