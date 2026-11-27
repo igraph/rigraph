@@ -1,0 +1,115 @@
+id: igraph-3.0.0-sample_gnp-directed
+language: r
+severity: warning
+rule:
+  kind: argument
+  has: { field: value, pattern: $V }
+  any:
+    - # passed by name
+      has: { field: name, kind: identifier, regex: '^(d|di|dir|dire|direc|direct|directe)$' }
+      inside:
+        kind: arguments
+        inside:
+          kind: call
+          has: { field: function, regex: '^(igraph:::?)?sample_gnp$' }
+    - # passed by position
+      not: { has: { field: name, kind: identifier } }
+      nthChild: { position: 3, ofRule: { kind: argument, not: { has: { field: name, kind: identifier } } } }
+      inside:
+        kind: arguments
+        not:
+          any:
+            - has: { kind: comma, follows: { kind: comma } }
+            - has: { kind: comma, follows: { regex: '^\($' } }
+            - has: { kind: comma, precedes: { regex: '^\)$' } }
+            - has: { kind: argument, has: { kind: dots } }
+            - has: { kind: argument, has: { field: name, regex: '^(n|p|d|di|dir|dire|direc|direct|directe|directed)$' } }
+        inside:
+          kind: call
+          has: { field: function, regex: '^(igraph:::?)?sample_gnp$' }
+          not:
+            inside:
+              kind: binary_operator
+              field: rhs
+              has: { field: operator, regex: '^(\|>|%>%)$' }
+              not: { has: { field: rhs, kind: call, has: { kind: arguments, has: { kind: argument, has: { field: value, kind: identifier, regex: '^[.]$' } } } } }
+    - # passed by position after a pipe
+      not: { has: { field: name, kind: identifier } }
+      nthChild: { position: 2, ofRule: { kind: argument, not: { has: { field: name, kind: identifier } } } }
+      inside:
+        kind: arguments
+        not:
+          any:
+            - has: { kind: comma, follows: { kind: comma } }
+            - has: { kind: comma, follows: { regex: '^\($' } }
+            - has: { kind: comma, precedes: { regex: '^\)$' } }
+            - has: { kind: argument, has: { kind: dots } }
+            - has: { kind: argument, has: { field: value, kind: identifier, regex: '^[._]$' } }
+            - has: { kind: argument, has: { field: name, regex: '^(n|p|d|di|dir|dire|direc|direct|directe|directed)$' } }
+        inside:
+          kind: call
+          has: { field: function, regex: '^(igraph:::?)?sample_gnp$' }
+          inside:
+            kind: binary_operator
+            field: rhs
+            has: { field: operator, regex: '^(\|>|%>%)$' }
+fix: directed = ~~V~~
+message: igraph 3.0.0 requires `directed` of `sample_gnp()` to be passed by its full name.
+---
+id: igraph-3.0.0-sample_gnp-loops
+language: r
+severity: warning
+rule:
+  kind: argument
+  has: { field: value, pattern: $V }
+  any:
+    - # passed by name
+      has: { field: name, kind: identifier, regex: '^(l|lo|loo|loop)$' }
+      inside:
+        kind: arguments
+        inside:
+          kind: call
+          has: { field: function, regex: '^(igraph:::?)?sample_gnp$' }
+    - # passed by position
+      not: { has: { field: name, kind: identifier } }
+      nthChild: { position: 4, ofRule: { kind: argument, not: { has: { field: name, kind: identifier } } } }
+      inside:
+        kind: arguments
+        not:
+          any:
+            - has: { kind: comma, follows: { kind: comma } }
+            - has: { kind: comma, follows: { regex: '^\($' } }
+            - has: { kind: comma, precedes: { regex: '^\)$' } }
+            - has: { kind: argument, has: { kind: dots } }
+            - has: { kind: argument, has: { field: name, regex: '^(n|p|d|di|dir|dire|direc|direct|directe|directed|l|lo|loo|loop|loops)$' } }
+        inside:
+          kind: call
+          has: { field: function, regex: '^(igraph:::?)?sample_gnp$' }
+          not:
+            inside:
+              kind: binary_operator
+              field: rhs
+              has: { field: operator, regex: '^(\|>|%>%)$' }
+              not: { has: { field: rhs, kind: call, has: { kind: arguments, has: { kind: argument, has: { field: value, kind: identifier, regex: '^[.]$' } } } } }
+    - # passed by position after a pipe
+      not: { has: { field: name, kind: identifier } }
+      nthChild: { position: 3, ofRule: { kind: argument, not: { has: { field: name, kind: identifier } } } }
+      inside:
+        kind: arguments
+        not:
+          any:
+            - has: { kind: comma, follows: { kind: comma } }
+            - has: { kind: comma, follows: { regex: '^\($' } }
+            - has: { kind: comma, precedes: { regex: '^\)$' } }
+            - has: { kind: argument, has: { kind: dots } }
+            - has: { kind: argument, has: { field: value, kind: identifier, regex: '^[._]$' } }
+            - has: { kind: argument, has: { field: name, regex: '^(n|p|d|di|dir|dire|direc|direct|directe|directed|l|lo|loo|loop|loops)$' } }
+        inside:
+          kind: call
+          has: { field: function, regex: '^(igraph:::?)?sample_gnp$' }
+          inside:
+            kind: binary_operator
+            field: rhs
+            has: { field: operator, regex: '^(\|>|%>%)$' }
+fix: loops = ~~V~~
+message: igraph 3.0.0 requires `loops` of `sample_gnp()` to be passed by its full name.

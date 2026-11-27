@@ -1,0 +1,166 @@
+id: igraph-3.0.0-clique_size_counts-min
+language: r
+severity: warning
+rule:
+  kind: argument
+  has: { field: value, pattern: $V }
+  any:
+    - # passed by name
+      has: { field: name, kind: identifier, regex: '^(mi)$' }
+      inside:
+        kind: arguments
+        inside:
+          kind: call
+          has: { field: function, regex: '^(igraph:::?)?clique_size_counts$' }
+    - # passed by position
+      not: { has: { field: name, kind: identifier } }
+      nthChild: { position: 2, ofRule: { kind: argument, not: { has: { field: name, kind: identifier } } } }
+      inside:
+        kind: arguments
+        not:
+          any:
+            - has: { kind: comma, follows: { kind: comma } }
+            - has: { kind: comma, follows: { regex: '^\($' } }
+            - has: { kind: comma, precedes: { regex: '^\)$' } }
+            - has: { kind: argument, has: { kind: dots } }
+            - has: { kind: argument, has: { field: name, regex: '^(g|gr|gra|grap|graph|m|mi|min)$' } }
+        inside:
+          kind: call
+          has: { field: function, regex: '^(igraph:::?)?clique_size_counts$' }
+          not:
+            inside:
+              kind: binary_operator
+              field: rhs
+              has: { field: operator, regex: '^(\|>|%>%)$' }
+              not: { has: { field: rhs, kind: call, has: { kind: arguments, has: { kind: argument, has: { field: value, kind: identifier, regex: '^[.]$' } } } } }
+    - # passed by position after a pipe
+      not: { has: { field: name, kind: identifier } }
+      nthChild: { position: 1, ofRule: { kind: argument, not: { has: { field: name, kind: identifier } } } }
+      inside:
+        kind: arguments
+        not:
+          any:
+            - has: { kind: comma, follows: { kind: comma } }
+            - has: { kind: comma, follows: { regex: '^\($' } }
+            - has: { kind: comma, precedes: { regex: '^\)$' } }
+            - has: { kind: argument, has: { kind: dots } }
+            - has: { kind: argument, has: { field: value, kind: identifier, regex: '^[._]$' } }
+            - has: { kind: argument, has: { field: name, regex: '^(g|gr|gra|grap|graph|m|mi|min)$' } }
+        inside:
+          kind: call
+          has: { field: function, regex: '^(igraph:::?)?clique_size_counts$' }
+          inside:
+            kind: binary_operator
+            field: rhs
+            has: { field: operator, regex: '^(\|>|%>%)$' }
+fix: min = ~~V~~
+message: igraph 3.0.0 requires `min` of `clique_size_counts()` to be passed by its full name.
+---
+id: igraph-3.0.0-clique_size_counts-max
+language: r
+severity: warning
+rule:
+  kind: argument
+  has: { field: value, pattern: $V }
+  any:
+    - # passed by position
+      not: { has: { field: name, kind: identifier } }
+      nthChild: { position: 3, ofRule: { kind: argument, not: { has: { field: name, kind: identifier } } } }
+      inside:
+        kind: arguments
+        not:
+          any:
+            - has: { kind: comma, follows: { kind: comma } }
+            - has: { kind: comma, follows: { regex: '^\($' } }
+            - has: { kind: comma, precedes: { regex: '^\)$' } }
+            - has: { kind: argument, has: { kind: dots } }
+            - has: { kind: argument, has: { field: name, regex: '^(g|gr|gra|grap|graph|m|mi|min|ma|max)$' } }
+        inside:
+          kind: call
+          has: { field: function, regex: '^(igraph:::?)?clique_size_counts$' }
+          not:
+            inside:
+              kind: binary_operator
+              field: rhs
+              has: { field: operator, regex: '^(\|>|%>%)$' }
+              not: { has: { field: rhs, kind: call, has: { kind: arguments, has: { kind: argument, has: { field: value, kind: identifier, regex: '^[.]$' } } } } }
+    - # passed by position after a pipe
+      not: { has: { field: name, kind: identifier } }
+      nthChild: { position: 2, ofRule: { kind: argument, not: { has: { field: name, kind: identifier } } } }
+      inside:
+        kind: arguments
+        not:
+          any:
+            - has: { kind: comma, follows: { kind: comma } }
+            - has: { kind: comma, follows: { regex: '^\($' } }
+            - has: { kind: comma, precedes: { regex: '^\)$' } }
+            - has: { kind: argument, has: { kind: dots } }
+            - has: { kind: argument, has: { field: value, kind: identifier, regex: '^[._]$' } }
+            - has: { kind: argument, has: { field: name, regex: '^(g|gr|gra|grap|graph|m|mi|min|ma|max)$' } }
+        inside:
+          kind: call
+          has: { field: function, regex: '^(igraph:::?)?clique_size_counts$' }
+          inside:
+            kind: binary_operator
+            field: rhs
+            has: { field: operator, regex: '^(\|>|%>%)$' }
+fix: max = ~~V~~
+message: igraph 3.0.0 requires `max` of `clique_size_counts()` to be passed by its full name.
+---
+id: igraph-3.0.0-clique_size_counts-maximal
+language: r
+severity: warning
+rule:
+  kind: argument
+  has: { field: value, pattern: $V }
+  any:
+    - # passed by name
+      has: { field: name, kind: identifier, regex: '^(maxi|maxim|maxima)$' }
+      inside:
+        kind: arguments
+        inside:
+          kind: call
+          has: { field: function, regex: '^(igraph:::?)?clique_size_counts$' }
+    - # passed by position
+      not: { has: { field: name, kind: identifier } }
+      nthChild: { position: 4, ofRule: { kind: argument, not: { has: { field: name, kind: identifier } } } }
+      inside:
+        kind: arguments
+        not:
+          any:
+            - has: { kind: comma, follows: { kind: comma } }
+            - has: { kind: comma, follows: { regex: '^\($' } }
+            - has: { kind: comma, precedes: { regex: '^\)$' } }
+            - has: { kind: argument, has: { kind: dots } }
+            - has: { kind: argument, has: { field: name, regex: '^(g|gr|gra|grap|graph|m|mi|min|ma|max|maxi|maxim|maxima|maximal)$' } }
+        inside:
+          kind: call
+          has: { field: function, regex: '^(igraph:::?)?clique_size_counts$' }
+          not:
+            inside:
+              kind: binary_operator
+              field: rhs
+              has: { field: operator, regex: '^(\|>|%>%)$' }
+              not: { has: { field: rhs, kind: call, has: { kind: arguments, has: { kind: argument, has: { field: value, kind: identifier, regex: '^[.]$' } } } } }
+    - # passed by position after a pipe
+      not: { has: { field: name, kind: identifier } }
+      nthChild: { position: 3, ofRule: { kind: argument, not: { has: { field: name, kind: identifier } } } }
+      inside:
+        kind: arguments
+        not:
+          any:
+            - has: { kind: comma, follows: { kind: comma } }
+            - has: { kind: comma, follows: { regex: '^\($' } }
+            - has: { kind: comma, precedes: { regex: '^\)$' } }
+            - has: { kind: argument, has: { kind: dots } }
+            - has: { kind: argument, has: { field: value, kind: identifier, regex: '^[._]$' } }
+            - has: { kind: argument, has: { field: name, regex: '^(g|gr|gra|grap|graph|m|mi|min|ma|max|maxi|maxim|maxima|maximal)$' } }
+        inside:
+          kind: call
+          has: { field: function, regex: '^(igraph:::?)?clique_size_counts$' }
+          inside:
+            kind: binary_operator
+            field: rhs
+            has: { field: operator, regex: '^(\|>|%>%)$' }
+fix: maximal = ~~V~~
+message: igraph 3.0.0 requires `maximal` of `clique_size_counts()` to be passed by its full name.
