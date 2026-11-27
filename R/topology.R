@@ -145,7 +145,12 @@ graph.get.isomorphisms.vf2 <- function(
     edge_color2 = edge.color2
   )
 
-  lapply(res, function(.x) V(graph2)[.x + 1])
+  if (igraph_opt("return.vs.es")) {
+    res <- lapply(res, function(.x) V(graph2)[.x + 1])
+  } else {
+    res <- lapply(res, `+`, 1)
+  }
+  res
 }
 
 #' @export
@@ -166,7 +171,12 @@ graph.get.subisomorphisms.vf2 <- function(
     edge_color2 = edge.color2
   )
 
-  lapply(res, function(.x) V(graph1)[.x + 1])
+  if (igraph_opt("return.vs.es")) {
+    res <- lapply(res, function(.x) V(graph1)[.x + 1])
+  } else {
+    res <- lapply(res, `+`, 1)
+  }
+  res
 }
 
 #' @export
@@ -285,7 +295,11 @@ graph.subisomorphic.lad <- function(
     }
   }
   if (all.maps) {
-    res$maps <- lapply(res$maps, function(.x) V(target)[.x + 1])
+    if (igraph_opt("return.vs.es")) {
+      res$maps <- lapply(res$maps, function(.x) V(target)[.x + 1])
+    } else {
+      res$maps <- lapply(res$maps, `+`, 1)
+    }
   }
 
   res
@@ -1044,7 +1058,9 @@ graph.count.subisomorphisms.vf2 <- function(
 #'   so will cause R to crash due to reentrancy issues. Extract
 #'   any needed graph information before calling the function with a callback, or
 #'   use collector mode (the default) and process results afterward.
-#' @return If `callback` is `NULL`, returns a list of vertex sequences, corresponding
+#' @return If `callback` is `NULL`, returns a list of vertex sequences (if the `return.vs.es` igraph
+#'   option is true, the default) or a list of numeric vectors of vertex IDs
+#'   (if `return.vs.es` is false), corresponding
 #'   to all mappings from the first graph to the second. If `callback` is provided,
 #'   returns `NULL` invisibly.
 #'
@@ -1169,7 +1185,9 @@ isomorphisms <- function(graph1, graph2, method = "vf2", ..., callback = NULL) {
 #'   so will cause R to crash due to reentrancy issues. Extract
 #'   any needed graph information before calling the function with a callback, or
 #'   use collector mode (the default) and process results afterward.
-#' @return If `callback` is `NULL`, returns a list of vertex sequences, corresponding
+#' @return If `callback` is `NULL`, returns a list of vertex sequences (if the `return.vs.es` igraph
+#'   option is true, the default) or a list of numeric vectors of vertex IDs
+#'   (if `return.vs.es` is false), corresponding
 #'   to all mappings from the pattern graph to the target graph. If `callback` is
 #'   provided, returns `NULL` invisibly.
 #'
