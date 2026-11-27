@@ -2,7 +2,7 @@
 # carries, applied to `gh api repos/{owner}/{repo}/actions/runs/<id>`.
 #
 # Shared rather than inlined because two writers have to agree on it byte for
-# byte: scripts/each-shard.sh (which publishes a record while the run is still
+# byte: each-shard.sh (which publishes a record while the run is still
 # going) and scripts/rcc-logs.sh (the hand-run backstop). A record is written
 # once and never rewritten, so two writers disagreeing about the shape for the
 # same run would stay invisible until a reader tripped over it.

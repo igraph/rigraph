@@ -2,7 +2,7 @@
 # Drop named commits' verdicts from the store on the orphan `rcc2` branch.
 #
 # A verdict is normally overturned by a newer run judging the same commit
-# (scripts/each-shard.sh), and that is the route to prefer: it replaces one
+# (each-shard.sh), and that is the route to prefer: it replaces one
 # record with another and leaves the store self-consistent. This script is for
 # the case that route cannot reach -- a verdict the *harness* decided, which no
 # rerun of the commit as it stands would overturn, because the commit was never

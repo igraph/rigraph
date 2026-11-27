@@ -4,7 +4,7 @@
 # and nothing else.
 #
 # Every scripts/series-*.sh that reads the engine, scripts/vendor-one.sh and
-# scripts/each-plan.sh read its names from here, through scripts/series-lib.sh
+# each-plan.sh read its names from here, through scripts/series-lib.sh
 # or scripts/vendor-lib.sh, and from nowhere else; scripts/vendor.sh, the
 # manual vendoring, reads them too. Paths are relative to the repository root,
 # each one a directory, a file, or a shell glob over either (`R/aaa-*.R`), read
@@ -281,7 +281,7 @@ series_version_before() { # <engine> <version>
 # The subject is the anchor every seed-relative walk reads.
 series_seed_subject='chore: Add fifth version component'
 
-# The estimator scripts/each-plan.sh weighs commits with: a command whose `map`
+# The estimator each-plan.sh weighs commits with: a command whose `map`
 # and `batch` forms print the objects a commit invalidates. rigraph has no unity
 # build and no include graph worth reading, so scripts/each-cost.py answers the
 # same weight for every commit.

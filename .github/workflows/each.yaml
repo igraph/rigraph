@@ -1,39 +1,19 @@
-# Helper workflow to build every commit on a branch that has no rcc result yet.
+# Build every commit on a branch that has no rcc verdict yet, one shard of commits per job.
+# The scripts are served by cynkra/cynkratemplate's each-plan, each-shard and each-follow-up actions;
+# see .github/actions/each-shard/README.md there.
 #
-# On a series branch (`<S>-dev` with a sibling `<S>-green`), only commits in
-#   `<S>-green..HEAD` are considered -- the series loop's world; nothing is built
-#   when green is not an ancestor of HEAD. On branches without a green sibling,
-#   the first-parent history since $SINCE is scanned. Either way, a commit is
-#   built only if it is undecided, oldest first, and gets a verdict of its own.
-#   Rebasing and force-pushing a commit past the boundary still re-triggers it.
+# On a series branch (`<S>-dev` with a sibling `<S>-green`), only commits in `<S>-green..HEAD` are considered;
+# nothing is built when green is not an ancestor of HEAD.
+# On branches without a green sibling, the first-parent history since `since` is scanned.
+# Either way, a commit is built only if it is undecided, oldest first, and gets a verdict of its own.
 #
-# The run plans contiguous, cost-balanced *shards* and gives each shard one job,
-# which walks its commits in a single workspace. The batch is then one thing to
-# cancel, the R/dependency setup is paid per shard rather than per commit, and
-# consecutive commits hit the runner's local ccache -- a typical vendor commit
-# recompiles a couple of igraph's ~420 translation units.
-#
-# Packing commits that tightly is the cheapest plan and the slowest one: a
-# 25-commit batch takes three 5-hour legs. So the planner replans the same range
-# against shorter per-leg deadlines and keeps whichever plan finishes soonest
-# with EACH_MAX_PARALLEL legs running at a time, spending at most
-# EACH_SPLIT_FACTOR times the runner minutes of the cheapest plan.
-#
-# Shards are numbered along the history -- shard 1 is the oldest slice, shard N
-# the branch tip -- and queued in that same order, so under max-parallel
-# throttling the oldest undecided slice is decided first, which is the only end
-# `<S>-green` can advance from. A leg that fails a commit quotes the tail
-# of every stage that failed into its job summary, so the run summary says what
-# broke without opening the log.
-#
-# See handbook/operations/ci/per-commit/README.md for the design, the GitHub Actions limits it works within,
-# and why `workflow_call` is not the mechanism that gets us there.
+# See handbook/operations/ci/per-commit/README.md for the design.
 
 on:
   push:
     branches:
       - each-*
-      - '*-dev'
+      - "*-dev"
   workflow_dispatch:
     inputs:
       since:
@@ -60,10 +40,18 @@ on:
         description: "Rebuild commits that already have a verdict"
         type: boolean
         default: false
+      follow-up-of:
+        description: "The run this one follows up, set by that run"
+        type: string
+        default: ""
+      follow-up-head:
+        description: "The commit that run planned from; a retry tip equal to it is not replanned"
+        type: string
+        default: ""
   workflow_call:
     inputs:
       branch:
-        description: "Branch ref to trigger rcc for (e.g. refs/heads/main-dev)"
+        description: "Branch ref to build (e.g. refs/heads/main-dev)"
         required: true
         type: string
       since:
@@ -94,77 +82,83 @@ on:
 
 name: each-rcc
 
-# One planning/building pass per branch at a time. `cancel-in-progress: false`
-# on purpose: a queued run must wait for a long bulk build rather than kill it,
+# One planning and building pass per branch at a time.
+# `cancel-in-progress: false` on purpose: a queued run must wait for a long build rather than kill it,
 # because a killed leg leaves its in-flight commit undecided.
-#
-# This group, plus work-selection being a pure function of durable verdicts, is
-# the whole of what keeps a commit from being built twice. There is no running
-# marker and there is not meant to be one -- see handbook/operations/ci/per-commit/README.md, "Nothing here
-# coordinates; everything recomputes".
+# The follow-up waits in this group too, until the run that dispatched it completes.
 concurrency:
   group: each-rcc-${{ inputs.branch || github.ref }}
   cancel-in-progress: false
 
 env:
-  EACH_SINCE: ${{ inputs.since || vars.EACH_RCC_SINCE || '2026-01-01' }}
   EACH_SHARD_BUDGET_MINUTES: ${{ inputs.shard-budget-minutes || '300' }}
-  EACH_MAX_PARALLEL: ${{ inputs.max-parallel || vars.EACH_RCC_MAX_PARALLEL || '20' }}
-  EACH_MAX_COMMITS: ${{ inputs.max-commits || '0' }}
-  EACH_SPLIT_FACTOR: ${{ inputs.split-factor || vars.EACH_RCC_SPLIT_FACTOR || '1.5' }}
 
 jobs:
   plan:
+    # Per-commit checks run in the fork that lands the series, not upstream.
     if: github.repository == 'krlmlr/rigraph'
     runs-on: ubuntu-26.04
+
+    timeout-minutes: 15
 
     name: "Plan per-commit rcc builds"
 
     outputs:
-      # The fallbacks cover a planning step that did not run at all: `build` is
-      # guarded by `shards != '0'`, but its `strategy` must still parse.
+      # The fallbacks cover a planning step that did not run at all:
+      # `build` is guarded by `shards != '0'`, but its `strategy` must still parse.
       matrix: ${{ steps.plan.outputs.matrix || '{"shard":["none"]}' }}
       shards: ${{ steps.plan.outputs.shards || '0' }}
-      commits: ${{ steps.plan.outputs.commits || '0' }}
       max_parallel: ${{ steps.plan.outputs.max_parallel || '1' }}
 
     permissions:
       contents: read
-      actions: write
-
-    # Begin custom: services
-    # End custom: services
 
     steps:
+      # The plan has no defaults for the scan start and the cost model, so a missing variable fails here, by its name.
+      - name: Check the repository variables the plan needs
+        env:
+          INPUT_SINCE: ${{ inputs.since }}
+          EACH_RCC_SINCE: ${{ vars.EACH_RCC_SINCE }}
+          EACH_RCC_SETUP_MINUTES: ${{ vars.EACH_RCC_SETUP_MINUTES }}
+          EACH_RCC_FULL_BUILD_MINUTES: ${{ vars.EACH_RCC_FULL_BUILD_MINUTES }}
+          EACH_RCC_FLOOR_MINUTES: ${{ vars.EACH_RCC_FLOOR_MINUTES }}
+          EACH_RCC_OBJECT_SECONDS: ${{ vars.EACH_RCC_OBJECT_SECONDS }}
+        run: |
+          required="EACH_RCC_SETUP_MINUTES EACH_RCC_FULL_BUILD_MINUTES EACH_RCC_FLOOR_MINUTES EACH_RCC_OBJECT_SECONDS"
+          if [ -z "${INPUT_SINCE}" ]; then
+            required="EACH_RCC_SINCE ${required}"
+          fi
+          missing=""
+          for var in ${required}; do
+            [ -n "${!var}" ] || missing="${missing} ${var}"
+          done
+          if [ -n "${missing}" ]; then
+            echo "::error::Repository variables not set:${missing}. Set them under Settings, Secrets and variables, Actions, Variables."
+            exit 1
+          fi
+        shell: bash
+
       - uses: actions/checkout@v6
         with:
           ref: ${{ inputs.branch || github.ref }}
           fetch-depth: 0
 
       - id: plan
-        name: Plan shards
-        env:
-          GH_TOKEN: ${{ github.token }}
-          SINCE: ${{ env.EACH_SINCE }}
-          SHARD_BUDGET_MINUTES: ${{ env.EACH_SHARD_BUDGET_MINUTES }}
-          MAX_PARALLEL: ${{ env.EACH_MAX_PARALLEL }}
-          MAX_COMMITS: ${{ env.EACH_MAX_COMMITS }}
-          SPLIT_FACTOR: ${{ env.EACH_SPLIT_FACTOR }}
-          FORCE: ${{ inputs.force && '1' || '' }}
-          OUT: ${{ runner.temp }}/plan.json
-        run: scripts/each-plan.sh
-        shell: bash
-
-      # `overwrite` because an artifact name has to be unique within a *run*, not
-      # within an attempt: without it, "Re-run all jobs" fails right here, on the
-      # `each-plan` this run's first attempt already uploaded.
-      - uses: actions/upload-artifact@v7
-        if: steps.plan.outputs.shards != '0'
+        uses: cynkra/cynkratemplate/.github/actions/each-plan@main
         with:
-          name: each-plan
-          path: ${{ runner.temp }}/plan.json
-          retention-days: 7
-          overwrite: true
+          since: ${{ inputs.since || vars.EACH_RCC_SINCE }}
+          shard-budget-minutes: ${{ env.EACH_SHARD_BUDGET_MINUTES }}
+          max-parallel: ${{ inputs.max-parallel || vars.EACH_RCC_MAX_PARALLEL || '20' }}
+          max-commits: ${{ inputs.max-commits }}
+          split-factor: ${{ inputs.split-factor || vars.EACH_RCC_SPLIT_FACTOR }}
+          force: ${{ inputs.force || false }}
+          follow-up-of: ${{ inputs.follow-up-of }}
+          follow-up-head: ${{ inputs.follow-up-head }}
+          # rigraph's cost model, fitted to its own legs; every commit weighs the same (scripts/each-cost.py).
+          setup-minutes: ${{ vars.EACH_RCC_SETUP_MINUTES }}
+          full-build-minutes: ${{ vars.EACH_RCC_FULL_BUILD_MINUTES }}
+          floor-minutes: ${{ vars.EACH_RCC_FLOOR_MINUTES }}
+          object-seconds: ${{ vars.EACH_RCC_OBJECT_SECONDS }}
 
   build:
     needs:
@@ -174,18 +168,15 @@ jobs:
 
     runs-on: ubuntu-26.04
 
-    # Below GitHub's 6 h ceiling, and above the leg's own deadline: the leg is
-    # meant to stop itself and report what it deferred, not to be killed
-    # mid-commit and leave a `pending` status behind.
+    # Below GitHub's 6 h ceiling, and above the leg's own deadline:
+    # the leg stops itself and reports what it deferred, rather than being killed mid-commit.
     timeout-minutes: 350
 
     name: "shard ${{ matrix.shard }} (${{ matrix.label }})"
 
     permissions:
-      # `write` for the snapshot-<sha>-rcc-smoke-null branches: the snapshots
-      # gate publishes accepted snapshots as a branch off the commit under test,
-      # the way peter-evans/create-pull-request does, and tooling looks those
-      # up by name.
+      # `write` for the store on the `rcc2` branch, and for the snapshot-<sha>-rcc-smoke-null branches
+      # the snapshots gate publishes off the commit under test.
       contents: write
       statuses: write
       actions: read
@@ -195,19 +186,11 @@ jobs:
       max-parallel: ${{ fromJSON(needs.plan.outputs.max_parallel) }}
       matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
 
-    # Begin custom: services
-    # End custom: services
-
     steps:
       - uses: actions/checkout@v6
         with:
           ref: ${{ inputs.branch || github.ref }}
           fetch-depth: 0
-
-      - uses: actions/download-artifact@v8
-        with:
-          name: each-plan
-          path: ${{ runner.temp }}/plan
 
       - uses: cynkra/cynkratemplate/.github/actions/git-identity@main
 
@@ -227,33 +210,16 @@ jobs:
       # and a drift there would fail the leg before it judged any.
       # The `regen` gate of scripts/rcc-one.sh runs it per commit instead;
       # the action's other step is macOS-only.
-      - name: Point ccache outside the workspace and size it for a whole shard
-        run: |
-          ## -- Point ccache outside the workspace and size it for a whole shard --
-          # scripts/each-shard.sh wipes the workspace between commits, and
-          # hendrikmuhs/ccache-action has historically kept the cache inside it.
-          # This is the cache that carries reuse from one commit to the next, so
-          # losing it would turn every commit into a cold build.
-          export CCACHE_DIR="${RUNNER_TEMP}/ccache"
-          mkdir -p "${CCACHE_DIR}"
-          echo "CCACHE_DIR=${CCACHE_DIR}" | tee -a "${GITHUB_ENV}"
-          ccache --set-config=max_size=8G
-          # R compiles with -g, and with -g ccache hashes the working directory by default.
-          # `R CMD build` installs the package from a fresh temporary directory
-          # to build the vignettes, so without this that build misses on every commit.
-          ccache --set-config=hash_dir=false
-          ccache --zero-stats
-          ccache --show-config | grep -E 'cache_dir|max_size|hash_dir'
-        shell: bash
 
       # What the `regen` gate of scripts/rcc-one.sh runs.
       # Makefile-cigraph builds a Python virtualenv for Stimulus,
       # and regenerates the lexers and parsers with the host's flex and bison (`DOCKER=`).
-      # The virtualenv lives outside the workspace, keyed on its sources,
-      # so a shard builds it once.
+      # `EACH_VENV_DIR`, read by that gate, keeps the virtualenvs outside the workspace,
+      # which each-shard wipes per commit, keyed on their sources, so a shard builds each once.
       - name: Install the tools that regenerate the R/C interface
         run: |
           ## -- Install the tools that regenerate the R/C interface --
+          echo "EACH_VENV_DIR=${RUNNER_TEMP}/each-venv" | tee -a "${GITHUB_ENV}"
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends flex bison python3-venv
           flex --version
@@ -261,53 +227,54 @@ jobs:
           python3 --version
         shell: bash
 
-      # Run for its tool installation only:
-      # air, and clang-format should rigraph ever configure it.
-      # The formatting it performs on the tip checkout is discarded:
-      # scripts/each-shard.sh resets the workspace before every commit.
+      # Run for its tool installation only (air, and clang-format should rigraph ever configure it):
+      # each-shard resets the workspace before every commit.
       - uses: cynkra/cynkratemplate/.github/actions/style@main
 
-      - name: Build the shard
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SHARD: ${{ matrix.shard }}
-          PLAN: ${{ runner.temp }}/plan/plan.json
-          LOG_DIR: ${{ runner.temp }}/each-logs
-          DEADLINE_MINUTES: ${{ env.EACH_SHARD_BUDGET_MINUTES }}
-          # Empty falls through to the script's own default; 0 turns the
-          # per-failure log excerpts in the job summary off.
-          SUMMARY_TAIL: ${{ vars.EACH_RCC_SUMMARY_TAIL || '' }}
-          # Outside the workspace: scripts/each-shard.sh wipes that per commit,
-          # and these hold the cached blobless clones of the `rcc2` branch that
-          # the per-commit publish and the resume check go through.
-          RCC_DIR: ${{ runner.temp }}/rcc-publish
-          RCC_READ_DIR: ${{ runner.temp }}/rcc-read
-          # Outside the workspace for the same reason:
-          # the Stimulus virtualenvs the regen gate builds, one per content of its sources.
-          EACH_VENV_DIR: ${{ runner.temp }}/each-venv
-        run: scripts/each-shard.sh
-        shell: bash
-
-      # What a firing reads. The per-commit publish to `rcc2` is the copy, and
-      # this is the source: one record and one log per commit the leg decided,
-      # in the same bytes (.claude/skills/series-loop/SKILL.md stage 2). It used to
-      # feed a fan-in job as well, which reconciled onto the branch whatever a
-      # leg could not publish; that job is gone, because a reader that opens
-      # this artifact has already got what the fan-in would have copied.
-      #
-      # Named per *attempt*, and therefore not overwritten. A re-run of a leg
-      # resumes, so its index covers only the commits it rebuilt -- overwriting
-      # would delete the previous attempt's artifact, which is the one copy of
-      # anything that attempt decided but could not publish. Read every
-      # `each-logs-*` for a run, not just the newest.
-      #
-      # 14 days, against job logs GitHub keeps far longer: past that, the same
-      # content is inline in the leg's job log, one `::group::<sha>` section
-      # per commit.
-      - uses: actions/upload-artifact@v7
-        if: always()
+      - uses: cynkra/cynkratemplate/.github/actions/each-shard@main
         with:
-          name: each-logs-${{ matrix.shard }}-${{ github.run_attempt }}
-          path: ${{ runner.temp }}/each-logs
-          if-no-files-found: ignore
-          retention-days: 14
+          shard: ${{ matrix.shard }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          deadline-minutes: ${{ env.EACH_SHARD_BUDGET_MINUTES }}
+          summary-tail: ${{ vars.EACH_RCC_SUMMARY_TAIL }}
+          # R compiles with -g, and with -g ccache hashes the working directory by default.
+          # `R CMD build` installs the package from a fresh temporary directory to build the vignettes,
+          # so without this that build misses on every commit.
+          ccache-hash-dir: false
+
+  # A leg that reaches its deadline defers the commits it did not get to,
+  # and nothing else would plan them before the next push.
+  # `!cancelled()`, so that a leg that failed or timed out is followed up, while a cancelled run stays retired.
+  follow-up:
+    needs:
+      - plan
+      - build
+
+    if: ${{ !cancelled() && needs.plan.result == 'success' && needs.plan.outputs.shards != '0' }}
+
+    runs-on: ubuntu-26.04
+
+    timeout-minutes: 10
+
+    name: "Follow up on undecided commits"
+
+    permissions:
+      contents: read
+      # Dispatches the follow-up, and lists the runs already waiting on the branch.
+      actions: write
+
+    steps:
+      # The scripts of the commit this run's workflow was read from, not the branch:
+      # a branch that moved or was deleted since must reach the script's "moved" exit rather than fail the checkout.
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
+          # Holds `scripts-dir` of the each-follow-up action, `scripts` by default.
+          sparse-checkout: scripts
+          filter: blob:none
+
+      - uses: cynkra/cynkratemplate/.github/actions/each-follow-up@main
+        with:
+          inputs: ${{ toJSON(inputs) }}
+          # The file of this workflow: the dispatch target, also when it is reached through `workflow_call`.
+          workflow: each.yaml

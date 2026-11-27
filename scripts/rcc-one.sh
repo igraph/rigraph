@@ -6,7 +6,7 @@
 # This is the gate set that the `rcc-smoke` job of `.github/workflows/
 # R-CMD-check.yaml` applies on its per-commit `workflow_dispatch` path -- the
 # path the retired per-commit dispatcher drove -- expressed as a script so that
-# `scripts/each-shard.sh` can run it many times in one job. A workflow cannot
+# `each-shard.sh` can run it many times in one job. A workflow cannot
 # loop over composite actions, so the gates have to be callable from a shell
 # loop; this file is that seam.
 #
@@ -51,7 +51,7 @@
 #                           (default: true under GITHUB_ACTIONS, false locally)
 #   EACH_STAGE_DIR        - when set, each stage's combined output is also kept
 #                           in <dir>/<stage>.log and its verdict appended to
-#                           <dir>/outcomes.tsv, so scripts/each-shard.sh can
+#                           <dir>/outcomes.tsv, so each-shard.sh can
 #                           quote the failing stage into the run summary
 #   CLANG_FORMAT          - the C++ formatter the style gate runs
 #                           (default: clang-format-21, what CI installs)
@@ -59,7 +59,7 @@
 #   EACH_VENV_DIR         - where the regen gate keeps the Stimulus virtualenvs,
 #                           one per content of tools/build-requirements.txt and
 #                           tools/py-stimulus; must be outside the workspace,
-#                           which scripts/each-shard.sh wipes between commits
+#                           which each-shard.sh wipes between commits
 #                           (default: $RUNNER_TEMP/each-venv)
 #   EACH_TIMEOUT_<STAGE>  - seconds a stage may take before it is presumed stuck
 #                           and killed (see stage_budget below); 0 disables the
@@ -92,7 +92,7 @@ names=()
 outcomes=()
 status=0
 
-# The leg has a timeout of its own (scripts/each-shard.sh), and it kills the
+# The leg has a timeout of its own (each-shard.sh), and it kills the
 # process group this script runs in. A bounded stage is not in that group: the
 # nested `timeout` moved it into one of its own, which is what lets it take a
 # stuck `Rscript` down with it. So a leg that runs out of budget kills this
@@ -170,7 +170,7 @@ has_gate() {
 # The numbers are the observed cost with plenty of headroom,
 # so an honest stage never sees them
 # and a stuck one is cut off in minutes rather than hours.
-# Measured on a 4-core machine (scripts/each-plan.sh has the details),
+# Measured on a 4-core machine (handbook/operations/ci/per-commit/ has the details),
 # a warm commit takes ~1510 s all-in and a cold ccache adds about a minute;
 # each bound is three to ten times its stage's time,
 # and longer where the stage downloads.
@@ -216,7 +216,7 @@ record() {
 }
 
 # Run one stage, keeping a copy of its combined output when EACH_STAGE_DIR is
-# set. Nothing is lost by buffering it: the caller (scripts/each-shard.sh)
+# set. Nothing is lost by buffering it: the caller (each-shard.sh)
 # already redirects the whole commit to a file and prints it once the commit is
 # over, so there is no live stream here to interleave with. What is gained is a
 # log that begins and ends at the stage boundary, which is what makes a useful
@@ -332,7 +332,7 @@ restore_worktree() { # <tree-before> <tree-after>
 }
 
 # One Stimulus virtualenv per content of what it is built from,
-# outside the workspace: scripts/each-shard.sh wipes `.venv` with every commit,
+# outside the workspace: each-shard.sh wipes `.venv` with every commit,
 # and Makefile-cigraph's own stamp only compares mtimes,
 # so it would not notice a commit that changed tools/py-stimulus.
 # Keyed on the index rather than the files, so build products pip leaves behind

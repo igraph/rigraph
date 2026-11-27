@@ -1,7 +1,7 @@
 # shellcheck shell=bash
 # The helpers every series script shares, reading scripts/series-config.sh:
 # which commit vendors, what it vendors, where a walk starts. Sourced by the
-# scripts/series-*.sh and scripts/each-plan.sh; nothing here writes a ref.
+# scripts/series-*.sh and each-plan.sh; nothing here writes a ref.
 # shellcheck source=series-config.sh
 . "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/series-config.sh"
 

@@ -55,12 +55,6 @@ ported:
     blob: 7631d9fabdc686f3977cfad50dcf27e03718eeac
   - path: scripts/r-universe-check.sh
     blob: 1ad1aa2f8366be546a8f7568af5b1eb05795c551
-  - path: scripts/each-plan.sh
-    blob: d14c1a545d6ae77b951b0b573cfe5e51e73f94fa
-  - path: scripts/each-partition.py
-    blob: 3dc7782e5f7ec1272b589935b0c8f1c0548c61f4
-  - path: scripts/each-shard.sh
-    blob: 10ebf8e173d61a23eb5860474a6384b8045afb20
   - path: scripts/each-cost.py
     blob: e9e63ea114d3bdc67098c7f186ff367d8436867d
   - path: scripts/rcc-one.sh

@@ -35,7 +35,7 @@ flowchart LR
 ```
 
 * **`main-land-dev`**, in the fork: `main` plus the vendor commits, and nothing else.
-  CI judges it like any `-dev` ([`scripts/each-plan.sh`](/scripts/each-plan.sh)).
+  CI judges it like any `-dev` ([`each-plan.sh`](https://github.com/cynkra/cynkratemplate/blob/main/.github/actions/each-plan/each-plan.sh)).
 * **`main-land-green`**, in the fork: where CI's judgement starts.
   It is pushed at the frozen `main` and advanced over the commits that passed;
   the landing is ready when it equals `main-land-dev`.

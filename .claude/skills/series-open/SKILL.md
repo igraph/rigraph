@@ -64,7 +64,7 @@ igraph cuts no release branches the package serves.
    ```
 
    `.0` is the vendor counter's zero: every vendor commit raises it, so every commit on the series is orderable by version.
-   The subject is exact, because [`scripts/each-plan.sh`](/scripts/each-plan.sh), `series-rc.sh` and
+   The subject is exact, because [`each-plan.sh`](https://github.com/cynkra/cynkratemplate/blob/main/.github/actions/each-plan/each-plan.sh), `series-rc.sh` and
    [`scripts/series-land.sh`](/scripts/series-land.sh) find the seed tip by it.
    `flavor.sh` never stamps it, and `main` keeps its four-component version.
 

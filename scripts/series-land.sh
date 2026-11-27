@@ -82,7 +82,7 @@
 # the base's own change merged in.
 #
 # **`<L>-land-green` bounds the per-commit build.** It is pushed at `main`, so
-# scripts/each-plan.sh scans `<L>-land-green..<L>-land-dev` as it scans any
+# each-plan.sh scans `<L>-land-green..<L>-land-dev` as it scans any
 # series, the base's own commits included, and `--status` advances it over the
 # commits CI has passed, the way stage 3 advances a series' green
 # (scripts/series-advance.sh). The landing is ready when the two refs are equal.
@@ -817,7 +817,7 @@ if [ -z "$push" ]; then
   exit 0
 fi
 # Both refs or neither: a `-dev` pushed without its green would be planned from
-# the start of `main`'s history (scripts/each-plan.sh).
+# the start of `main`'s history (each-plan.sh).
 git push -q --atomic "$remote" \
   "--force-with-lease=refs/heads/$L-land-dev:$old_dev" \
   "--force-with-lease=refs/heads/$L-land-green:$old_green" \
