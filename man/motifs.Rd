@@ -64,7 +64,7 @@ sample_motifs(g, 3)
 count <- 0
 motifs(g, 3, callback = function(vids, isoclass) {
   count <<- count + 1
-  count < 5  # stop after 5 motifs
+  count >= 5 # returning TRUE stops the search
 })
 }
 \seealso{
