@@ -1,0 +1,167 @@
+rigraph's patch to the revdepx scripts of cynkra/cynkratemplate at e45daecc565a10e0624769f868a680e147d2920c,
+applied by .github/workflows/revdep4.yaml: checks Bioconductor reverse dependencies (REVDEPX_BIOC).
+See handbook/testing/revdep/README.md.
+
+diff --git a/.github/actions/revdepx/collect.R b/.github/actions/revdepx/collect.R
+index 0792c2a..c1e4e6f 100644
+--- a/.github/actions/revdepx/collect.R
++++ b/.github/actions/revdepx/collect.R
+@@ -42,6 +42,7 @@ source(file.path(
+ results_dir <- env_chr("RESULTS_DIR")
+ stopifnot(nzchar(results_dir))
+ plan <- read_json(env_chr("PLAN", "plan.json"))
++options(revdepx.bioc_packages = unlist(plan$bioc_packages))
+ retry_dir <- env_chr("RETRY_DIR")
+ out_dir <- env_chr("OUT_DIR", "revdep")
+ baseline_out <- env_chr("BASELINE_OUT", "baseline")
+@@ -828,6 +829,18 @@ readme <- gsub(
+   "[\\1](https://cran.r-project.org/package=\\1)",
+   readme
+ )
++for (bioc_package in getOption("revdepx.bioc_packages")) {
++  readme <- gsub(
++    sprintf(
++      "[%s](https://cran.r-project.org/package=%s)",
++      bioc_package,
++      bioc_package
++    ),
++    bioc_link(bioc_package),
++    readme,
++    fixed = TRUE
++  )
++}
+ readme <- gsub("^(#+)(\\s)", "##\\1\\2", readme)
+ 
+ run_id <- env_chr("GITHUB_RUN_ID")
+diff --git a/.github/actions/revdepx/plan.R b/.github/actions/revdepx/plan.R
+index bb519d8..705f53b 100644
+--- a/.github/actions/revdepx/plan.R
++++ b/.github/actions/revdepx/plan.R
+@@ -46,6 +46,9 @@
+ #                             `broken` to take them from the committed report
+ #   REVDEPX_WHICH           - "strong" (default) or "most" (adds Suggests/
+ #                             Enhances dependents)
++#   REVDEPX_BIOC            - which Bioconductor reverse dependencies to check
++#                             too: "none" (default), "direct" (level 1 only)
++#                             or "all" (every level walks CRAN and Bioconductor)
+ #   REVDEPX_WORKERS         - packages checked concurrently per shard
+ #                             (default: 4)
+ #   REVDEPX_R_VERSION       - the full R version the *containers* check under,
+@@ -113,6 +116,10 @@ which_input <- match.arg(
+   env_chr("REVDEPX_WHICH", "strong"),
+   c("strong", "most")
+ )
++bioc_input <- match.arg(
++  tolower(env_chr("REVDEPX_BIOC", "none")),
++  c("none", "direct", "all")
++)
+ depth_raw <- tolower(env_chr("REVDEPX_DEPTH", "1"))
+ depth <- if (depth_raw %in% c("all", "max", "inf", "infinity")) {
+   Inf
+@@ -347,6 +354,10 @@ if (!package %in% rownames(db)) {
+ cran_version <- unname(db[package, "Version"])
+ inform("CRAN version: ", cran_version)
+ 
++# What may be checked: CRAN alone, or CRAN and Bioconductor. dep_db() keeps
++# CRAN's row for a name both carry, so a CRAN package stays a CRAN check.
++check_db <- if (bioc_input == "none") db else dep_db()
++
+ # ------------------------------------------------------------- enumeration ---
+ 
+ # Breadth-first over reverse dependencies: level 1 depends on the package
+@@ -357,9 +368,12 @@ level_of <- integer()
+ frontier <- package
+ level <- 0L
+ while (level < depth && length(frontier) > 0) {
++  # "direct" adds Bioconductor at level 1 only; deeper levels find CRAN
++  # dependents alone, as without Bioconductor.
++  bioc_level <- bioc_input == "all" || (bioc_input == "direct" && level == 0)
+   found <- tools::package_dependencies(
+     frontier,
+-    db = db,
++    db = if (bioc_level) check_db else db,
+     which = if (which_input == "most") "most" else "strong",
+     reverse = TRUE
+   )
+@@ -466,15 +480,23 @@ if (length(packages_input) > 0) {
+   candidates <- revdeps
+ }
+ 
+-dropped <- setdiff(candidates, rownames(db))
++dropped <- setdiff(candidates, rownames(check_db))
+ if (length(dropped) > 0) {
+-  inform("Not on CRAN, dropped: ", paste(dropped, collapse = ", "))
++  inform(
++    if (bioc_input == "none") "Not on CRAN" else "Not on CRAN or Bioconductor",
++    ", dropped: ",
++    paste(dropped, collapse = ", ")
++  )
+ }
+-packages <- intersect(candidates, rownames(db))
++packages <- intersect(candidates, rownames(check_db))
+ if (length(packages) == 0) {
+   plan_nothing("no packages left to check")
+ }
+-their_version <- setNames(unname(db[packages, "Version"]), packages)
++their_version <- setNames(unname(check_db[packages, "Version"]), packages)
++bioc_packages <- sort(setdiff(packages, rownames(db)))
++if (length(bioc_packages) > 0) {
++  inform(length(bioc_packages), " of them from Bioconductor")
++}
+ 
+ # ------------------------------------------------------------------ weights --
+ 
+@@ -1192,6 +1214,8 @@ plan <- list(
+   ref = env_chr("GITHUB_REF_NAME"),
+   which = which_input,
+   depth = depth_raw,
++  bioc = bioc_input,
++  bioc_packages = as.list(bioc_packages),
+   levels = as.list(level_counts),
+   selection = selection,
+   part = part,
+diff --git a/.github/actions/revdepx/shard.R b/.github/actions/revdepx/shard.R
+index 1460e84..6ac1c95 100644
+--- a/.github/actions/revdepx/shard.R
++++ b/.github/actions/revdepx/shard.R
+@@ -606,12 +606,14 @@ src_dir <- file.path(work, "src")
+ dir.create(src_dir, showWarnings = FALSE)
+ sources <- list()
+ for (name in runnable) {
++  # The plan names the Bioconductor revdeps it admitted under REVDEPX_BIOC.
++  repos <- if (name %in% unlist(plan$bioc_packages)) bioc_repos() else cran_repo()
+   tarball <- tryCatch(
+     {
+       hit <- utils::download.packages(
+         name,
+         destdir = src_dir,
+-        repos = cran_repo(),
++        repos = repos,
+         type = "source",
+         quiet = TRUE
+       )
+diff --git a/.github/actions/revdepx/util.R b/.github/actions/revdepx/util.R
+index 69d954f..9379269 100644
+--- a/.github/actions/revdepx/util.R
++++ b/.github/actions/revdepx/util.R
+@@ -104,11 +104,19 @@ this_run_link <- function(text = env_chr("GITHUB_RUN_ID", "local")) {
+ }
+ 
+ # A revdep, linked to its CRAN page -- the one page about it that is reachable
+-# from a job summary, and the one that names its maintainer.
++# from a job summary, and the one that names its maintainer -- or to its
++# Bioconductor page for the names in option `revdepx.bioc_packages`.
+ cran_link <- function(package) {
++  if (package %in% getOption("revdepx.bioc_packages")) {
++    return(bioc_link(package))
++  }
+   sprintf("[%s](https://cran.r-project.org/package=%s)", package, package)
+ }
+ 
++bioc_link <- function(package) {
++  sprintf("[%s](https://bioconductor.org/packages/%s)", package, package)
++}
++
+ # ------------------------------------------------------------------- JSON ----
+ 
+ write_json <- function(x, path) {

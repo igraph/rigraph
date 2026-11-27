@@ -59,6 +59,14 @@
 # so history from the sibling's live runs still serves as baselines and
 # timings.
 #
+# Every kit action is pinned to one kit commit, and the jobs that run
+# plan.R, shard.R or collect.R apply .github/revdepx/bioconductor.patch to
+# the scripts first: it checks Bioconductor reverse dependencies too
+# (REVDEPX_BIOC, the `bioconductor` input). The patch is read from the
+# workflow's own commit, so a `ref` that lacks it still gets it. Moving the
+# pin means re-cutting the patch; handbook/testing/revdep/ says what a run
+# covers.
+#
 # Results land in artifacts:
 #   revdepx-report          the merged report -- fetch with
 #                           `gh run download <run-id> --name revdepx-report`
@@ -100,6 +108,14 @@ on:
           - strong
           - most
         default: strong
+      bioconductor:
+        description: "Bioconductor reverse dependencies to check beside CRAN's: all (at every level, like CRAN's), direct (level 1 only) or none"
+        type: choice
+        options:
+          - all
+          - direct
+          - none
+        default: all
       depth:
         description: "Levels of reverse dependencies: 1 = direct, 2 = also revdeps of revdeps, ..., 'all' = the full transitive closure"
         type: string
@@ -176,6 +192,7 @@ env:
   REVDEPX_PACKAGES: ${{ inputs.packages || '' }}
   REVDEPX_WHICH: ${{ inputs.which || 'strong' }}
   REVDEPX_DEPTH: ${{ inputs.depth || '1' }}
+  REVDEPX_BIOC: ${{ inputs.bioconductor || 'all' }}
   REVDEPX_RETRY_RUN: ${{ inputs.retry-run || '' }}
   REVDEPX_PART: ${{ inputs.part || '' }}
   REVDEPX_R_VERSION_INPUT: ${{ inputs.r-version || '4.6.1' }}
@@ -254,12 +271,19 @@ jobs:
     steps:
       # The scripts are served with the kit's actions, not copied into the repository.
       - name: Locate the revdep scripts
-        uses: cynkra/cynkratemplate/.github/actions/revdep-scripts@main
+        uses: cynkra/cynkratemplate/.github/actions/revdep-scripts@e45daecc565a10e0624769f868a680e147d2920c
 
       - name: Check out the ref under test
         uses: actions/checkout@v6
         with:
           ref: ${{ inputs.ref || github.ref }}
+
+      - name: Patch the revdep scripts for Bioconductor
+        run: |
+          git fetch --quiet --depth 1 origin "${GITHUB_SHA}"
+          git show FETCH_HEAD:.github/revdepx/bioconductor.patch |
+            patch --batch --forward -p4 -d "${REVDEPX_DIR}"
+        shell: bash
 
       # The same resolution runs in the base and build jobs: the three run in
       # parallel and each needs the answer before any of them could publish
@@ -267,7 +291,7 @@ jobs:
       # matters, and the alias moves at most once every few months.
       - name: Resolve the R version
         id: resolve
-        uses: cynkra/cynkratemplate/.github/actions/revdepx-resolve-r-version@main
+        uses: cynkra/cynkratemplate/.github/actions/revdepx-resolve-r-version@e45daecc565a10e0624769f868a680e147d2920c
         with:
           input: ${{ env.REVDEPX_R_VERSION_INPUT }}
 
@@ -322,7 +346,7 @@ jobs:
     steps:
       # The scripts are served with the kit's actions, not copied into the repository.
       - name: Locate the revdep scripts
-        uses: cynkra/cynkratemplate/.github/actions/revdep-scripts@main
+        uses: cynkra/cynkratemplate/.github/actions/revdep-scripts@e45daecc565a10e0624769f868a680e147d2920c
 
       - name: Check out the ref under test
         uses: actions/checkout@v6
@@ -331,7 +355,7 @@ jobs:
 
       # Same resolution as in the plan job; see the comment there.
       - name: Resolve the R version
-        uses: cynkra/cynkratemplate/.github/actions/revdepx-resolve-r-version@main
+        uses: cynkra/cynkratemplate/.github/actions/revdepx-resolve-r-version@e45daecc565a10e0624769f868a680e147d2920c
         with:
           input: ${{ env.REVDEPX_R_VERSION_INPUT }}
 
@@ -400,7 +424,7 @@ jobs:
       # container's R (the pinned oldrel), and a binary built by the runner's
       # newer R would not.
       - name: Build the binary in the base container
-        uses: cynkra/cynkratemplate/.github/actions/revdepx-build-binary@main
+        uses: cynkra/cynkratemplate/.github/actions/revdepx-build-binary@e45daecc565a10e0624769f868a680e147d2920c
         with:
           base-image: ${{ needs.base.outputs.image }}
       - name: Upload the package binary
@@ -445,7 +469,7 @@ jobs:
     steps:
       # The scripts are served with the kit's actions, not copied into the repository.
       - name: Locate the revdep scripts
-        uses: cynkra/cynkratemplate/.github/actions/revdep-scripts@main
+        uses: cynkra/cynkratemplate/.github/actions/revdep-scripts@e45daecc565a10e0624769f868a680e147d2920c
 
       - name: Check out the ref under test
         uses: actions/checkout@v6
@@ -474,7 +498,7 @@ jobs:
       # this job lands in one accounted place. The commit step below
       # measures against that one disk before copying anything large.
       - name: Make room for docker on the one disk
-        uses: cynkra/cynkratemplate/.github/actions/revdepx-docker-room@main
+        uses: cynkra/cynkratemplate/.github/actions/revdepx-docker-room@e45daecc565a10e0624769f868a680e147d2920c
       # The universe build downloads every dependency once; saving the pak
       # cache under the plan's hash hands the next build a warm start even
       # when the image itself cannot be reused.
@@ -499,7 +523,7 @@ jobs:
 
       - name: Build the universe image
         id: build-universe
-        uses: cynkra/cynkratemplate/.github/actions/revdepx-build-universe@main
+        uses: cynkra/cynkratemplate/.github/actions/revdepx-build-universe@e45daecc565a10e0624769f868a680e147d2920c
         with:
           base-image: ${{ needs.base.outputs.image }}
       # Everything here is written and UPLOADED before the commit below
@@ -510,7 +534,7 @@ jobs:
       # starts, or they do not exist.
       - name: Record the state before the commit
         id: precommit
-        uses: cynkra/cynkratemplate/.github/actions/revdepx-record-precommit@main
+        uses: cynkra/cynkratemplate/.github/actions/revdepx-record-precommit@e45daecc565a10e0624769f868a680e147d2920c
       - name: Publish the pre-commit state (survives a dying runner)
         uses: actions/upload-artifact@v6
         with:
@@ -533,7 +557,7 @@ jobs:
       # already takes.
       - name: Commit and push the universe image
         id: publish
-        uses: cynkra/cynkratemplate/.github/actions/revdepx-publish-universe@main
+        uses: cynkra/cynkratemplate/.github/actions/revdepx-publish-universe@e45daecc565a10e0624769f868a680e147d2920c
       - name: Upload the universe image artifact (registry fallback only)
         uses: actions/upload-artifact@v6
         if: steps.publish.outputs.saved == 'true'
@@ -641,12 +665,19 @@ jobs:
     steps:
       # The scripts are served with the kit's actions, not copied into the repository.
       - name: Locate the revdep scripts
-        uses: cynkra/cynkratemplate/.github/actions/revdep-scripts@main
+        uses: cynkra/cynkratemplate/.github/actions/revdep-scripts@e45daecc565a10e0624769f868a680e147d2920c
 
       - name: Check out the ref under test
         uses: actions/checkout@v6
         with:
           ref: ${{ inputs.ref || github.ref }}
+
+      - name: Patch the revdep scripts for Bioconductor
+        run: |
+          git fetch --quiet --depth 1 origin "${GITHUB_SHA}"
+          git show FETCH_HEAD:.github/revdepx/bioconductor.patch |
+            patch --batch --forward -p4 -d "${REVDEPX_DIR}"
+        shell: bash
 
       # The host runs only the driver: R with jsonlite and rcmdcheck to
       # parse, compare and account. Everything a check needs -- TeX, pandoc,
@@ -709,7 +740,7 @@ jobs:
       # and put that data-root under RUNNER_TEMP beside the checks' work
       # directories, so everything heavy is in one accounted place.
       - name: Make room for docker on the one disk
-        uses: cynkra/cynkratemplate/.github/actions/revdepx-docker-room@main
+        uses: cynkra/cynkratemplate/.github/actions/revdepx-docker-room@e45daecc565a10e0624769f868a680e147d2920c
 
       # Both driver phases need these and neither can name them itself: the
       # `runner` context does not reach the job's `env`, so they are set once
@@ -719,7 +750,7 @@ jobs:
       # `NOT_CRAN=true` into `$GITHUB_ENV`, and a later write is what
       # reliably overrides an earlier one.
       - name: Point the driver at this runner's directories
-        uses: cynkra/cynkratemplate/.github/actions/revdepx-driver-env@main
+        uses: cynkra/cynkratemplate/.github/actions/revdepx-driver-env@e45daecc565a10e0624769f868a680e147d2920c
         with:
           not-cran-input: ${{ env.REVDEPX_NOT_CRAN }}
       # Emit machine state while the work runs: a reclaimed runner never
@@ -739,7 +770,7 @@ jobs:
       # universe job died -- build a shard-local image from the base), and
       # extract its library index for the driver's dependency screen.
       - name: Prepare the check image
-        uses: cynkra/cynkratemplate/.github/actions/revdepx-check-image@main
+        uses: cynkra/cynkratemplate/.github/actions/revdepx-check-image@e45daecc565a10e0624769f868a680e147d2920c
         with:
           universe-image: ${{ needs.universe.outputs.image }}
           revdepx-base-image: ${{ needs.base.outputs.image }}
@@ -875,12 +906,19 @@ jobs:
     steps:
       # The scripts are served with the kit's actions, not copied into the repository.
       - name: Locate the revdep scripts
-        uses: cynkra/cynkratemplate/.github/actions/revdep-scripts@main
+        uses: cynkra/cynkratemplate/.github/actions/revdep-scripts@e45daecc565a10e0624769f868a680e147d2920c
 
       - name: Check out the ref under test
         uses: actions/checkout@v6
         with:
           ref: ${{ inputs.ref || github.ref }}
+
+      - name: Patch the revdep scripts for Bioconductor
+        run: |
+          git fetch --quiet --depth 1 origin "${GITHUB_SHA}"
+          git show FETCH_HEAD:.github/revdepx/bioconductor.patch |
+            patch --batch --forward -p4 -d "${REVDEPX_DIR}"
+        shell: bash
 
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
@@ -969,7 +1007,7 @@ jobs:
           && vars.REVDEPX_COMMIT_REPORT != 'false'
           && steps.collect.outputs.compared != '0'
         continue-on-error: true
-        uses: cynkra/cynkratemplate/.github/actions/revdep-commit-report@main
+        uses: cynkra/cynkratemplate/.github/actions/revdep-commit-report@e45daecc565a10e0624769f868a680e147d2920c
         with:
           ref: ${{ inputs.ref }}
           workflow: revdep4
