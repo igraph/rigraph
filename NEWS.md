@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.99.99.9049
+
+## Chore
+
+- Auto-update from GitHub Actions (#3020).
+
+## Documentation
+
+- Stop vendoring igraph.r2cdocs, put it within R/ (#3007).
+
+
 # igraph 2.99.99.9048
 
 ## Chore
