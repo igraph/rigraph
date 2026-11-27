@@ -76,7 +76,7 @@ and packs contiguous runs of commits into shards under a build-time budget.
 it installs R and the dependencies once, then resets the workspace and runs the gates for each commit, oldest first,
 and stops at its own deadline, deferring the rest.
 A commit cut short by the deadline is deferred too, but the leg's first had the whole budget, so its kill is recorded as a failure.
-The action's own test checks both, offline and against stubbed gates.
+The action's own [test](https://github.com/cynkra/cynkratemplate/blob/main/.github/actions/each-shard/test.sh) checks both, offline and against stubbed gates.
 `follow-up` (`each-follow-up`) dispatches the workflow once more when the run left commits undecided and decided at least one.
 
 **Every commit weighs the same.**

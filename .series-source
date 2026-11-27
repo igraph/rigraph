@@ -98,6 +98,8 @@ ported:
     blob: 7b06fd5c4094e384639f4515c2531d57e0b8d121
   - path: scripts/rcc-store-test.sh
     blob: ce2c5787a182151d5010f8d1c348bac815870991
+  # rigraph diverges here: the plan, shard and follow-up jobs call cynkra/cynkratemplate's each-* actions,
+  # where this blob runs the local scripts/each-*.sh, so a resync keeps the action calls.
   - path: .github/workflows/each.yaml
     blob: e2daae0d2909e434d4ae337c60c97a8fec0d0551
   - path: .claude/skills/series-loop/SKILL.md
