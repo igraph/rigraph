@@ -207,7 +207,7 @@ decompose <- function(
   # BEGIN GENERATED ARG_HANDLE: decompose, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("m"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn decompose}.")
     # Pre-3.0.0 signature: decompose(graph, mode, max.comps, min.vertices)
     .old_signature <- function(mode, max.comps, min.vertices, ...) {
