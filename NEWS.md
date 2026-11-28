@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.99.99.9051
+
+## Chore
+
+- Declare every vignette builder in DESCRIPTION (#3025).
+
+
 # igraph 2.99.99.9050
 
 ## Chore
